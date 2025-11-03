@@ -57,7 +57,7 @@ Feature: Editing taxon's slug
         And I add it
         Then this taxon slug should be "medieval-weapons/siege"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Not editing the slug while changing a taxon name
         Given the store has "Medieval weapons" taxonomy
         When I want to modify the "Medieval weapons" taxon
@@ -103,7 +103,7 @@ Feature: Editing taxon's slug
         And I save my changes
         Then the slug of the "Javelins" taxon should be "medieval-weapons/javelins"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Manually changing a root taxon's slug while editing a taxon's name
         Given the store has "Medieval weapons" taxonomy
         When I want to modify the "Medieval weapons" taxon
@@ -134,7 +134,7 @@ Feature: Editing taxon's slug
         And I save my changes
         Then the slug of the "Pikes" taxon should be "pikes"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Manually changing a child taxon's slug while editing a taxon's name
         Given the store has "Medieval weapons" taxonomy
         And the "Medieval weapons" taxon has child taxon "Pikes"
