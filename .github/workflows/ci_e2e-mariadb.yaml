@@ -50,22 +50,9 @@ jobs:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
-        services:
-            mariadb:
-                image: mariadb:${{ matrix.mariadb }}
-                env:
-                    MYSQL_ROOT_PASSWORD: root
-                options: >-
-                    --health-cmd="mysqladmin ping"
-                    --health-interval=10s
-                    --health-timeout=5s
-                    --health-retries=3
-                ports:
-                    - 3307:3306
-
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1:3307/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+            DATABASE_URL: "mysql://root:root@127.0.0.1:3306/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
             TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
 
         steps:
@@ -151,7 +138,7 @@ jobs:
                     set -o pipefail
 
                     # Create a base database dump for faster cloning
-                    mysqldump -h 127.0.0.1 -u root -proot -P 3307 sylius > /tmp/sylius_base.sql
+                    mysqldump -h 127.0.0.1 -u root -proot sylius > /tmp/sylius_base.sql
 
                     # Run all test suites in parallel with TEST_TOKEN isolation
 
@@ -159,23 +146,23 @@ jobs:
                     (
                         sleep 0.1  # Small delay to avoid simultaneous DB operations
                         export TEST_TOKEN="phpunit"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1:3307/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
 
                         # Create isolated database with retry
                         for i in 1 2 3; do
-                            mysql -h 127.0.0.1 -u root -proot -P 3307 -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                            mysql -h 127.0.0.1 -u root -proot -P 3307 -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
+                            mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                            mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
                             sleep 1
                         done
-                        mysql -h 127.0.0.1 -u root -proot -P 3307 sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
+                        mysql -h 127.0.0.1 -u root -proot sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
 
                         vendor/bin/phpunit --testsuite all --colors=always 2>&1 | sed 's/^/[UNIT] /'
                         EXIT_CODE=$?
 
                         # Cleanup
-                        mysql -h 127.0.0.1 -u root -proot -P 3307 -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                        mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
                         rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
 
                         echo $EXIT_CODE > /tmp/exit_phpunit
@@ -186,24 +173,24 @@ jobs:
                     (
                         sleep 0.3  # Small delay to avoid simultaneous DB operations
                         export TEST_TOKEN="cli"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1:3307/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Create isolated database with retry
                         for i in 1 2 3; do
-                            mysql -h 127.0.0.1 -u root -proot -P 3307 -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                            mysql -h 127.0.0.1 -u root -proot -P 3307 -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
+                            mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                            mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
                             sleep 1
                         done
-                        mysql -h 127.0.0.1 -u root -proot -P 3307 sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
+                        mysql -h 127.0.0.1 -u root -proot sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
 
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" 2>&1 | sed 's/^/[CLI  ] /'
                         EXIT_CODE=$?
 
                         # Cleanup
-                        mysql -h 127.0.0.1 -u root -proot -P 3307 -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                        mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
                         rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
 
                         echo $EXIT_CODE > /tmp/exit_cli
@@ -214,24 +201,24 @@ jobs:
                     (
                         sleep 0.5  # Small delay to avoid simultaneous DB operations
                         export TEST_TOKEN="api"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1:3307/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Create isolated database with retry
                         for i in 1 2 3; do
-                            mysql -h 127.0.0.1 -u root -proot -P 3307 -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                            mysql -h 127.0.0.1 -u root -proot -P 3307 -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
+                            mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                            mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
                             sleep 1
                         done
-                        mysql -h 127.0.0.1 -u root -proot -P 3307 sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
+                        mysql -h 127.0.0.1 -u root -proot sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
 
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" 2>&1 | sed 's/^/[API  ] /'
                         EXIT_CODE=$?
 
                         # Cleanup
-                        mysql -h 127.0.0.1 -u root -proot -P 3307 -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                        mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
                         rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
 
                         echo $EXIT_CODE > /tmp/exit_api
@@ -242,24 +229,24 @@ jobs:
                     (
                         sleep 0.7  # Small delay to avoid simultaneous DB operations
                         export TEST_TOKEN="ui"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1:3307/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         # Behat cache handled by default, no BEHAT_PARAMS needed
 
                         # Create isolated database with retry
                         for i in 1 2 3; do
-                            mysql -h 127.0.0.1 -u root -proot -P 3307 -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                            mysql -h 127.0.0.1 -u root -proot -P 3307 -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
+                            mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                            mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
                             sleep 1
                         done
-                        mysql -h 127.0.0.1 -u root -proot -P 3307 sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
+                        mysql -h 127.0.0.1 -u root -proot sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
 
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /'
                         EXIT_CODE=$?
 
                         # Cleanup
-                        mysql -h 127.0.0.1 -u root -proot -P 3307 -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
+                        mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
                         rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
 
                         echo $EXIT_CODE > /tmp/exit_ui
@@ -291,7 +278,7 @@ jobs:
                         echo ""
                         echo "::error::[CLI] Tests failed, retrying..."
                         export TEST_TOKEN="cli"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1:3307/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         # Behat cache handled by default, no BEHAT_PARAMS needed
@@ -304,7 +291,7 @@ jobs:
                         echo ""
                         echo "::error::[API] Tests failed, retrying..."
                         export TEST_TOKEN="api"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1:3307/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         # Behat cache handled by default, no BEHAT_PARAMS needed
@@ -317,7 +304,7 @@ jobs:
                         echo ""
                         echo "::error::[UI] Tests failed, retrying..."
                         export TEST_TOKEN="ui"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1:3307/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
                         export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
                         export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
                         # Behat cache handled by default, no BEHAT_PARAMS needed
