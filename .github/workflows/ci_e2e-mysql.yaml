@@ -115,137 +115,47 @@ jobs:
             -   name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
-            -   name: Run non-JS tests (partially parallel)
+            -   name: Run non-JS tests (reduced parallelism)
                 run: |
                     set -o pipefail
 
-                    # Create a base database dump for faster cloning
-                    mysqldump -h 127.0.0.1 -u root -proot sylius > /tmp/sylius_base.sql
-
-                    # Run all test suites in parallel with TEST_TOKEN isolation
+                    # Run tests with limited parallelism (2 at a time) to avoid resource issues
 
                     # PHPUnit all tests
+                    echo "::group::PHPUnit Tests"
+                    vendor/bin/phpunit --testsuite all --colors=always
+                    EXIT_PHPUNIT=$?
+                    echo "::endgroup::"
+
+                    # Run Behat tests in parallel (max 2 at a time)
+
+                    # CLI and API in parallel
                     (
-                        sleep 0.1  # Small delay to avoid simultaneous DB operations
-                        export TEST_TOKEN="phpunit"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-                        export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
-                        export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-
-                        # Create isolated database with retry
-                        for i in 1 2 3; do
-                            mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                            mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
-                            sleep 1
-                        done
-                        mysql -h 127.0.0.1 -u root -proot sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
-
-                        vendor/bin/phpunit --testsuite all --colors=always 2>&1 | sed 's/^/[UNIT] /'
-                        EXIT_CODE=$?
-
-                        # Cleanup
-                        mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
-
-                        echo $EXIT_CODE > /tmp/exit_phpunit
-                    ) &
-                    PID_PHPUNIT=$!
-
-                    # CLI Behat
-                    (
-                        sleep 0.3  # Small delay to avoid simultaneous DB operations
-                        export TEST_TOKEN="cli"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-                        export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
-                        export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        # Behat cache handled by default, no BEHAT_PARAMS needed
-
-                        # Create isolated database with retry
-                        for i in 1 2 3; do
-                            mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                            mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
-                            sleep 1
-                        done
-                        mysql -h 127.0.0.1 -u root -proot sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
-
+                        echo "[CLI] Starting CLI tests..."
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" 2>&1 | sed 's/^/[CLI  ] /'
-                        EXIT_CODE=$?
-
-                        # Cleanup
-                        mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
-
-                        echo $EXIT_CODE > /tmp/exit_cli
+                        echo $? > /tmp/exit_cli
                     ) &
                     PID_CLI=$!
 
-                    # API/Domain Behat
                     (
-                        sleep 0.5  # Small delay to avoid simultaneous DB operations
-                        export TEST_TOKEN="api"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-                        export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
-                        export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        # Behat cache handled by default, no BEHAT_PARAMS needed
-
-                        # Create isolated database with retry
-                        for i in 1 2 3; do
-                            mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                            mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
-                            sleep 1
-                        done
-                        mysql -h 127.0.0.1 -u root -proot sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
-
+                        echo "[API] Starting API tests..."
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" 2>&1 | sed 's/^/[API  ] /'
-                        EXIT_CODE=$?
-
-                        # Cleanup
-                        mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
-
-                        echo $EXIT_CODE > /tmp/exit_api
+                        echo $? > /tmp/exit_api
                     ) &
                     PID_API=$!
 
-                    # UI (non-JS) Behat
-                    (
-                        sleep 0.7  # Small delay to avoid simultaneous DB operations
-                        export TEST_TOKEN="ui"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-                        export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
-                        export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        # Behat cache handled by default, no BEHAT_PARAMS needed
-
-                        # Create isolated database with retry
-                        for i in 1 2 3; do
-                            mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                            mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE sylius_${TEST_TOKEN} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;" && break
-                            sleep 1
-                        done
-                        mysql -h 127.0.0.1 -u root -proot sylius_${TEST_TOKEN} < /tmp/sylius_base.sql
-
-                        vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /'
-                        EXIT_CODE=$?
-
-                        # Cleanup
-                        mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS sylius_${TEST_TOKEN};" 2>/dev/null || true
-                        rm -rf /tmp/cache_${TEST_TOKEN} /tmp/log_${TEST_TOKEN} 2>/dev/null || true
-
-                        echo $EXIT_CODE > /tmp/exit_ui
-                    ) &
-                    PID_UI=$!
-
-                    # Wait for all processes to complete
-                    wait $PID_PHPUNIT
+                    # Wait for first batch
                     wait $PID_CLI
                     wait $PID_API
-                    wait $PID_UI
 
-                    # Read exit codes from files
-                    EXIT_PHPUNIT=$(cat /tmp/exit_phpunit 2>/dev/null || echo 1)
+                    # UI tests separately
+                    echo "[UI] Starting UI tests..."
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" 2>&1 | sed 's/^/[UI   ] /'
+                    EXIT_UI=$?
+
+                    # Read exit codes
                     EXIT_CLI=$(cat /tmp/exit_cli 2>/dev/null || echo 1)
                     EXIT_API=$(cat /tmp/exit_api 2>/dev/null || echo 1)
-                    EXIT_UI=$(cat /tmp/exit_ui 2>/dev/null || echo 1)
 
                     # Handle failures and reruns
                     FINAL_EXIT=0
@@ -259,39 +169,18 @@ jobs:
                     if [ "${EXIT_CLI:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[CLI] Tests failed, retrying..."
-                        export TEST_TOKEN="cli"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-                        export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
-                        export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        # Behat cache handled by default, no BEHAT_PARAMS needed
-
-                        # Rerun uses same database
                         vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun 2>&1 | sed 's/^/[CLI-RETRY] /' || FINAL_EXIT=1
                     fi
 
                     if [ "${EXIT_API:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[API] Tests failed, retrying..."
-                        export TEST_TOKEN="api"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-                        export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
-                        export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        # Behat cache handled by default, no BEHAT_PARAMS needed
-
-                        # Rerun uses same database
                         vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" --rerun 2>&1 | sed 's/^/[API-RETRY] /' || FINAL_EXIT=1
                     fi
 
                     if [ "${EXIT_UI:-0}" -ne 0 ]; then
                         echo ""
                         echo "::error::[UI] Tests failed, retrying..."
-                        export TEST_TOKEN="ui"
-                        export DATABASE_URL="mysql://root:root@127.0.0.1/sylius_${TEST_TOKEN}?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-                        export SYMFONY_CACHE_DIR="/tmp/cache_${TEST_TOKEN}"
-                        export SYMFONY_LOG_DIR="/tmp/log_${TEST_TOKEN}"
-                        # Behat cache handled by default, no BEHAT_PARAMS needed
-
-                        # Rerun uses same database
                         vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun 2>&1 | sed 's/^/[UI-RETRY ] /' || FINAL_EXIT=1
                     fi
 
