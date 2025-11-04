@@ -130,6 +130,14 @@ final readonly class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I set its priority to :priority
+     */
+    public function iSetsItsPriorityTo(int $priority): void
+    {
+        $this->client->addRequestData('priority', $priority);
+    }
+
+    /**
      * @When I (try to) add it
      */
     public function iAddIt(): void
@@ -493,6 +501,37 @@ final readonly class ManagingZonesContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('Type "%s" is invalid. Allowed types are:', $type),
+        );
+    }
+
+    /**
+     * @Then /^the (first|last) zone on the list should have ([^"]+) "([^"]+)"$/
+     */
+    public function theFirstZoneOnTheListShouldHave(string $togglePosition, string $field, string $value): void
+    {
+        $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:member');
+        if ('first' === $togglePosition) {
+            $item = reset($items);
+        } else {
+            $item = end($items);
+        }
+
+        Assert::same($item[$field], $value);
+    }
+
+    /**
+     * @Then the :zone zone should have priority :priority
+     */
+    public function theZoneShouldHavePriority(ZoneInterface $zone, int $priority): void
+    {
+        Assert::true(
+            $this->responseChecker->hasItemWithValues(
+                $this->client->index(Resources::ZONES),
+                [
+                    'name' => $zone->getName(),
+                    'priority' => $priority,
+                ],
+            ),
         );
     }
 

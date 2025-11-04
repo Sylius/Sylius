@@ -37,6 +37,7 @@ sylius:
             scopes:
                 all: 'Alle'
             select: 'Velg'
+            priority: 'Prioritet'
         zone_member:
             select: 'Velg'
 
