@@ -20,7 +20,6 @@ use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Page\Shop\Page as ShopPage;
 use Sylius\Behat\Service\DriverHelper;
-use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -284,7 +283,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function waitForFormToStopLoading(): void
     {
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+        DriverHelper::waitForFormToStopLoading($this->getSession());
     }
 
     protected function getDefinedElements(): array
