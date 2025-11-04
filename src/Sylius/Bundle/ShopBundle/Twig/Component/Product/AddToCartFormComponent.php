@@ -15,12 +15,14 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductLivePropTrait;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductVariantLivePropTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderItem;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
@@ -32,6 +34,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
@@ -44,6 +47,7 @@ use Symfony\UX\LiveComponent\ComponentToolsTrait;
 use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PostMount;
+use Webmozart\Assert\Assert;
 
 #[AsLiveComponent]
 class AddToCartFormComponent
@@ -67,7 +71,7 @@ class AddToCartFormComponent
 
     /**
      * @param CartItemFactoryInterface<OrderItem> $cartItemFactory
-     * @param class-string $formClass
+     * @param class-string<FormTypeInterface<AddToCartCommandInterface>> $formClass
      * @param ProductRepositoryInterface<ProductInterface> $productRepository
      * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
      */
@@ -97,8 +101,13 @@ class AddToCartFormComponent
     #[PreReRender(priority: -100)]
     public function variantChanged(): void
     {
+        /** @var AddToCartCommandInterface $addToCartCommand */
         $addToCartCommand = $this->getForm()->getData();
-        $newVariant = $addToCartCommand->getCartItem()->getVariant();
+
+        /** @var OrderItemInterface $cartItem */
+        $cartItem = $addToCartCommand->getCartItem();
+
+        $newVariant = $cartItem->getVariant();
         if ($newVariant === $this->variant) {
             return;
         }
@@ -120,6 +129,8 @@ class AddToCartFormComponent
         bool $addFlashMessage = true,
     ): RedirectResponse {
         $this->submitForm();
+
+        /** @var AddToCartCommandInterface $addToCartCommand */
         $addToCartCommand = $this->getForm()->getData();
 
         $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_ADD);
@@ -142,6 +153,8 @@ class AddToCartFormComponent
 
     protected function instantiateForm(): FormInterface
     {
+        Assert::notNull($this->product, 'Product must be set.');
+
         $addToCartCommand = $this->addToCartCommandFactory->createWithCartAndCartItem(
             $this->cartContext->getCart(),
             $this->cartItemFactory->createForProduct($this->product),
