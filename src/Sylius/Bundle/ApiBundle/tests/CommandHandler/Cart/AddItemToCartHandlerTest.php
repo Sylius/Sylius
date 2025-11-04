@@ -17,6 +17,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler;
+use Sylius\Bundle\ApiBundle\Exception\ProductVariantUnprocessableException;
+use Sylius\Bundle\ApiBundle\Exception\UnprocessableCartException;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -25,8 +27,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Sylius\Bundle\ApiBundle\Exception\UnprocessableCartException;
-use Sylius\Bundle\ApiBundle\Exception\ProductVariantUnprocessableException;
 
 final class AddItemToCartHandlerTest extends TestCase
 {
