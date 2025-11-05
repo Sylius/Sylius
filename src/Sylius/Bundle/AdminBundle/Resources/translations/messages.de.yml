@@ -9,6 +9,15 @@ sylius:
             thank_you_for_transaction: 'Vielen Dank für Ihre erfolgreiche Transaktion.'
             you_can_check_its_location_with_the_tracking_code: 'Sie können den Standort mit dem Tracking-Code %tracking_code% nachverfolgen.'
             your_order_with_number: 'Ihre Bestellung mit der Nummer'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Soll der niedrigste Preis für rabattierte Produkte vor dem aktuellen Rabatt angezeigt werden?'
+                period_for_which_the_lowest_price_is_calculated: 'Zeitraum, für den der niedrigste Preis berechnet wird'
+            reset_password:
+                password:
+                    label: Neues Passwort
+                    confirmation: Neues Passwort bestätigen
     menu:
         admin:
             main:
