@@ -25,7 +25,7 @@ jobs:
                 include:
                     -
                         php: "8.3"
-                        symfony: "^7.3@beta"
+                        symfony: "^7.4@beta"
                         mysql: "8.4"
 
         env:
@@ -98,7 +98,7 @@ jobs:
                 include:
                     -
                         php: "8.3"
-                        symfony: "^7.3@beta"
+                        symfony: "^7.4@beta"
                         mysql: "8.4"
 
         env:
@@ -179,7 +179,7 @@ jobs:
                 include:
                     -
                         php: "8.3"
-                        symfony: "^7.3@beta"
+                        symfony: "^7.4@beta"
                         mysql: "8.4"
 
         env:

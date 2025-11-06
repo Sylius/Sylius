@@ -243,6 +243,7 @@
         "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
     "conflict": {
+        "doctrine/orm": "2.20.7 || 3.5.3",
         "symfony/ux-live-component": "2.28.0 || 2.28.1"
     },
     "config": {

@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 use Behat\Mink\Exception\DriverException;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\JQueryHelper;
+use Sylius\Behat\Service\DriverHelper;
 
 class UpdatePage extends SyliusPage implements UpdatePageInterface
 {
@@ -63,22 +63,22 @@ class UpdatePage extends SyliusPage implements UpdatePageInterface
 
     public function selectCountry(string $name): void
     {
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+        DriverHelper::waitForFormToStopLoading($this->getSession());
 
         $country = $this->getElement('country');
         $country->selectOption($name);
 
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+        DriverHelper::waitForFormToStopLoading($this->getSession());
     }
 
     public function waitForFormToStopLoading(): void
     {
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+        DriverHelper::waitForFormToStopLoading($this->getSession());
     }
 
     public function saveChanges(): void
     {
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+        DriverHelper::waitForFormToStopLoading($this->getSession());
 
         $this->getElement('save_button')->press();
     }

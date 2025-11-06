@@ -52,6 +52,8 @@ class DashboardPage extends SyliusPage implements DashboardPageInterface
     /** @throws ElementNotFoundException */
     public function getNumberOfNewOrdersInTheList(): int
     {
+        $this->waitForElement('order_list');
+
         return $this->tableAccessor->countTableBodyRows($this->getElement('order_list'));
     }
 
@@ -64,6 +66,8 @@ class DashboardPage extends SyliusPage implements DashboardPageInterface
     /** @throws ElementNotFoundException */
     public function getNumberOfNewCustomersInTheList(): int
     {
+        $this->waitForElement('customer_list');
+
         return $this->tableAccessor->countTableBodyRows($this->getElement('customer_list'));
     }
 

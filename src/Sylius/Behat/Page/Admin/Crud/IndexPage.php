@@ -18,6 +18,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
@@ -157,6 +158,8 @@ class IndexPage extends SyliusPage implements IndexPageInterface
 
     public function isEnabledFilterApplied(): bool
     {
+        DriverHelper::waitForElement($this->getSession(), '[data-test-criterion-enabled]');
+
         return $this->getElement('enabled_filter')->getValue() === 'true';
     }
 

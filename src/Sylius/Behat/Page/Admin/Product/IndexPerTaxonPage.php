@@ -15,6 +15,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as CrudIndexPage;
+use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
 class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterface
@@ -56,6 +57,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $saveConfigurationButton->press();
 
         $this->getDocument()->waitFor(5, fn () => null === $saveConfigurationButton->find('css', '.loading'));
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function filterByName(string $name): void
