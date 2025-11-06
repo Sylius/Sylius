@@ -39,6 +39,18 @@ final class OverridenGridsTest extends KernelTestCase
         }
         $yamlVersion = $arrayProvider->get($gridName);
 
+        foreach ($yamlVersion->getFields() as $field) {
+            // Prefilling the default values for datetime fields as they might not be set in YAML configuration
+            if ($field->getType() === 'datetime') {
+                $options = [
+                    'format' => 'Y-m-d H:i:s',
+                    'timezone' => null,
+                    ...$field->getOptions(),
+                ];
+                $field->setOptions($options);
+            }
+        }
+
         $this->assertEquals($yamlVersion, $serviceVersion);
     }
 
