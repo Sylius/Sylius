@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Sylius\Bundle\CoreBundle\Grid\Provider;
+namespace Sylius\Tests\Grid;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use Sylius\Component\Grid\Exception\UndefinedGridException;
