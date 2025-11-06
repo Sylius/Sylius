@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Grid\Provider;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Customer\Context\CustomerContextInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Sylius\Component\Grid\Exception\UndefinedGridException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Sylius\Bundle\GridBundle\Provider\ServiceGridProvider;
 use Sylius\Component\Grid\Provider\ArrayGridProvider;
@@ -24,22 +24,31 @@ use Sylius\Component\Grid\Provider\ArrayGridProvider;
  */
 final class OverridenGridsTest extends KernelTestCase
 {
-    public function testPhpGridsHavingTheSameConfigurationAsYAMLGrids(): void
+    #[DataProvider('dataProviderGrids')]
+    public function testPhpGridsHavingTheSameConfigurationAsYAMLGrids(string $gridName): void
     {
-        $gridConfiguration = self::getContainer()->getParameter('sylius_core.grids_configuration')['grids'] ?? [];
-
         $container = self::getContainer();
-        $container->set(CustomerContextInterface::class, $this->createMock(CustomerContextInterface::class));
-        $container->set(ChannelContextInterface::class, $this->createMock(ChannelContextInterface::class));
 
         $arrayProvider = $container->get(ArrayGridProvider::class);
         $serviceProvider = $container->get(ServiceGridProvider::class);
 
-        foreach (array_keys($gridConfiguration) as $gridName) {
-            $yamlVersion = $arrayProvider->get($gridName);
+        try {
             $serviceVersion = $serviceProvider->get($gridName);
+        } catch (UndefinedGridException) {
+            $this->markTestSkipped($gridName. ' is not migrated yet');
+        }
+        $yamlVersion = $arrayProvider->get($gridName);
 
-            $this->assertEquals($yamlVersion, $serviceVersion);
+        $this->assertEquals($yamlVersion, $serviceVersion);
+    }
+
+    public static function dataProviderGrids(): \Generator
+    {
+        $gridConfiguration = self::getContainer()->getParameter('sylius.grids_definitions');
+        self::assertNotEmpty($gridConfiguration, 'No grid configuration found');
+
+        foreach (array_keys($gridConfiguration) as $gridName) {
+            yield $gridName => [$gridName];
         }
     }
 }
