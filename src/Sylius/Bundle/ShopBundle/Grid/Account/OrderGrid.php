@@ -41,15 +41,15 @@ final class OrderGrid extends AbstractGrid
             ])
             ->setDriverOption('class', $this->resourceClass)
             ->orderBy('checkoutCompletedAt', 'desc')
+            ->setLimits([10, 25, 50])
             ->addField(
                 TwigField::create('number', '@SyliusShop/account/order/grid/field/number.html.twig')
                     ->setLabel('sylius.ui.number')
                     ->setSortable(true),
             )
             ->addField(
-                DateTimeField::create('checkoutCompletedAt', 'Y-m-d')
+                DateTimeField::create('checkoutCompletedAt', 'm/d/Y')
                     ->setLabel('sylius.ui.date')
-                    ->setSortable(true),
             )
             ->addField(
                 TwigField::create('shippingAddress', '@SyliusShop/account/order/grid/field/address.html.twig')
@@ -89,7 +89,7 @@ final class OrderGrid extends AbstractGrid
                             'link' => [
                                 'route' => 'sylius_shop_order_show',
                                 'parameters' => [
-                                    'tokenValue' => 'resource.tokenvalue',
+                                    'tokenValue' => 'resource.tokenValue',
                                 ],
                             ],
                         ]),
