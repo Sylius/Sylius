@@ -17,7 +17,6 @@ use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -48,8 +47,6 @@ class LoginPage extends SyliusPage implements LoginPageInterface
     public function logIn(): void
     {
         $this->getElement('login_button')->click();
-
-        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function specifyPassword(string $password): void

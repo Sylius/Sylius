@@ -27,5 +27,7 @@ default:
                 - Sylius\Behat\Context\Ui\Admin\ProductCreationContext
                 - Sylius\Behat\Context\Ui\Admin\RemovingProductContext
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@admin_panel&&@ui"

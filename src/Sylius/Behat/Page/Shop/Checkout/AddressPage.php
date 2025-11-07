@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Shop\Page as ShopPage;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -165,7 +164,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
         $this->waitForElementUpdate('form');
 
         try {
-            $this->getElement('login_button')->press();
+            $this->getElement('login_button')->click();
         } catch (ElementNotFoundException) {
             $this->getElement('login_button')->click();
         }
@@ -201,12 +200,8 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function nextStep(): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->blur();
-            DriverHelper::waitForPageToLoad($this->getSession());
-        }
-        $this->getElement('next_step')->press();
-        DriverHelper::waitForPageToLoad($this->getSession());
+        $this->blur();
+        $this->getElement('next_step')->click();
     }
 
     public function backToStore(): void
@@ -219,6 +214,26 @@ class AddressPage extends ShopPage implements AddressPageInterface
         $this->waitForElementUpdate('form');
 
         $this->getElement('billing_province')->setValue($provinceName);
+    }
+
+    public function getSpecifiedBillingProvince(): string
+    {
+        $this->waitForElementUpdate('form');
+
+        return $this->getElement('billing_province')->getValue();
+    }
+
+    public function isFormAccessible(): bool
+    {
+        try {
+            // Use parent::getElement to bypass automatic waiting and check if elements are accessible NOW
+            $emailElement = parent::getElement('customer_email');
+            $provinceElement = parent::getElement('billing_province');
+
+            return $emailElement->isVisible() && $provinceElement->isVisible();
+        } catch (\Exception) {
+            return false;
+        }
     }
 
     public function specifyShippingAddressProvince(string $provinceName): void
@@ -279,11 +294,6 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function getAvailableBillingCountries(): array
     {
         return $this->getOptionsFromSelect($this->getElement('billing_country'));
-    }
-
-    public function waitForFormToStopLoading(): void
-    {
-        DriverHelper::waitForFormToStopLoading($this->getSession());
     }
 
     protected function getDefinedElements(): array

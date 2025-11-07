@@ -26,5 +26,7 @@ default:
                 - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.product
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@managing_product_reviews&&@ui"

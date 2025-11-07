@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Country;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\Toggles;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Webmozart\Assert\Assert;
 
@@ -134,6 +134,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
     protected function getProvinceElement(string $provinceName): NodeElement|null
     {
-        return $this->getDocument()->find('xpath', sprintf('//*[@data-test-province and .//*[contains(@value, \'%s\')]]', $provinceName));
+        $element = $this->getDocument()->find('xpath', sprintf('//*[@data-test-province and .//*[contains(@value, \'%s\')]]', $provinceName));
+
+        if (null === $element) {
+            return null;
+        }
+
+        return new NodeElement($element->getXpath(), $this->getSession());
     }
 }

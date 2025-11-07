@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\SyliusPage;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -131,6 +131,6 @@ class ShowPage extends SyliusPage implements ShowPageInterface
             throw new \InvalidArgumentException(sprintf('Cannot find pricing row for variant "%s" in channel "%s"', $variantName, $channelName));
         }
 
-        return $pricingRow;
+        return new NodeElement($pricingRow->getXpath(), $this->getSession());
     }
 }

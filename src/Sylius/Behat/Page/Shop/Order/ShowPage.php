@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\DriverHelper;
 
 class ShowPage extends SyliusPage implements ShowPageInterface
 {
@@ -32,8 +31,6 @@ class ShowPage extends SyliusPage implements ShowPageInterface
     public function pay(): void
     {
         $this->getElement('pay_link')->click();
-
-        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function getNotifications(): array
@@ -51,8 +48,6 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function choosePaymentMethod(string $paymentMethodName): void
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
-
         $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethodName]);
         $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
     }
@@ -71,8 +66,6 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function getChosenPaymentMethod(): string
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
-
         $paymentMethodItems = $this->getDocument()->findAll('css', '[data-test-payment-item]');
 
         foreach ($paymentMethodItems as $method) {

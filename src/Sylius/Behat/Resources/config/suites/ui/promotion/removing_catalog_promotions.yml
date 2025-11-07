@@ -32,5 +32,7 @@ default:
                 - sylius.behat.context.ui.shop.product
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@removing_catalog_promotions&&@ui"

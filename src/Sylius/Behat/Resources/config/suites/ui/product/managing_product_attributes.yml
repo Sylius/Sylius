@@ -24,5 +24,7 @@ default:
                 - sylius.behat.context.ui.admin.search_filter
                 - sylius.behat.context.ui.save
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@managing_product_attributes&&@ui"

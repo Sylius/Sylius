@@ -15,7 +15,6 @@ namespace Sylius\Behat\Service\Accessor;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Service\DriverHelper;
 
 final readonly class NotificationAccessor implements NotificationAccessorInterface
 {
@@ -27,8 +26,6 @@ final readonly class NotificationAccessor implements NotificationAccessorInterfa
 
     public function getMessageElements(): array
     {
-        DriverHelper::waitForElement($this->session, $this->locator);
-
         $messageElements = $this->session->getPage()->findAll('css', $this->locator);
 
         if (empty($messageElements)) {

@@ -15,7 +15,6 @@ namespace Sylius\Behat\Element\Admin\Product;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 
 class AttributesFormElement extends BaseFormElement implements AttributesFormElementInterface
@@ -33,16 +32,12 @@ class AttributesFormElement extends BaseFormElement implements AttributesFormEle
         $this->changeTab();
         $this->selectAttributeToBeAdded($attributeName);
         $this->getElement('attribute_add_button')->click();
-
-        $this->waitForFormUpdate();
     }
 
     public function addSelectedAttributes(): void
     {
         $this->changeTab();
         $this->getElement('attribute_add_button')->click();
-
-        $this->waitForFormUpdate();
     }
 
     public function updateAttribute(string $attributeName, string $value, string $localeCode): void
@@ -59,16 +54,13 @@ class AttributesFormElement extends BaseFormElement implements AttributesFormEle
         };
 
         $attributeValue->blur();
-        $this->waitForFormUpdate();
     }
 
     public function removeAttribute(string $attributeName): void
     {
         $this->changeTab();
 
-        $this->getElement('attribute_delete_button', ['%attribute_name%' => $attributeName])->press();
-
-        $this->waitForFormUpdate();
+        $this->getElement('attribute_delete_button', ['%attribute_name%' => $attributeName])->click();
     }
 
     public function hasAttribute(string $attributeName): bool
@@ -162,19 +154,11 @@ class AttributesFormElement extends BaseFormElement implements AttributesFormEle
 
     protected function changeTab(): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $this->getElement('side_navigation_tab', ['%name%' => 'attributes'])->click();
     }
 
     protected function changeAttributeTab(string $attributeName): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $this->getElement('attribute_tab', ['%name%' => $attributeName])->click();
     }
 }

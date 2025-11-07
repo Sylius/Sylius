@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Accessor;
 
-use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\NodeElement;
 use Webmozart\Assert\Assert;
 
 final class TableAccessor implements TableAccessorInterface

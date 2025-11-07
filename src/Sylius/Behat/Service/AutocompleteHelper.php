@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use Sylius\Behat\Element\NodeElement;
 
 abstract class AutocompleteHelper
 {
@@ -39,8 +39,6 @@ abstract class AutocompleteHelper
 
         foreach ($values as $value) {
             $element->find('css', sprintf('div.item:contains("%s")', $value))->click();
-
-            DriverHelper::waitForAsynchronousActionsToFinish($session);
         }
 
         static::waitForElementToBeVisible($session, $element);
@@ -55,8 +53,6 @@ abstract class AutocompleteHelper
 
         $elementToRemove = $element->find('css', sprintf('a.ui.label:contains("%s")', $value));
         $elementToRemove->find('css', 'i.delete')->click();
-
-        DriverHelper::waitForAsynchronousActionsToFinish($session);
     }
 
     public static function isValueVisible(Session $session, NodeElement $element, $value): bool
@@ -68,12 +64,7 @@ abstract class AutocompleteHelper
 
     private static function activateAutocompleteDropdown(Session $session, NodeElement $element)
     {
-        DriverHelper::waitForAsynchronousActionsToFinish($session);
-
         $element->click();
-
-        DriverHelper::waitForAsynchronousActionsToFinish($session);
-        static::waitForElementToBeVisible($session, $element);
     }
 
     private static function waitForElementToBeVisible(Session $session, NodeElement $element)

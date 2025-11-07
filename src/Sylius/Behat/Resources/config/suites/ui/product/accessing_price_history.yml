@@ -25,5 +25,7 @@ default:
                 - sylius.behat.context.ui.admin.product_showpage
                 - Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@accessing_price_history&&@ui"

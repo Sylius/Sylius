@@ -41,5 +41,7 @@ default:
                 - sylius.behat.context.ui.save
                 - Sylius\Behat\Context\Ui\Admin\RemovingProductContext
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@managing_promotions&&@ui"

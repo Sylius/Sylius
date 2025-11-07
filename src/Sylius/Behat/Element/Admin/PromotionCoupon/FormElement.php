@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\PromotionCoupon;
 
-use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Element\NodeElement;
 
 class FormElement extends BaseFormElement implements FormElementInterface
 {

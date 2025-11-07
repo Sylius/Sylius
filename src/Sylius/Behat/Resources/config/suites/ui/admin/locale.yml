@@ -27,5 +27,7 @@ default:
                 - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.locale
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@admin_locale&&@ui"

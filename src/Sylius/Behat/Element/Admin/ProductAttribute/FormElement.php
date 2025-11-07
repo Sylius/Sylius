@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\ProductAttribute;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Element\NodeElement;
 
 class FormElement extends BaseFormElement implements FormElementInterface
 {
@@ -52,7 +52,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
     public function addAttributeValue(string $value, string $localeCode): void
     {
         $this->getElement('add_button')->click();
-        $this->waitForFormUpdate();
 
         $lastChoice = $this->getLastChoiceElement();
         $lastChoice->find('css', 'input[data-test-locale="' . $localeCode . '"]')->setValue($value);
@@ -62,7 +61,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
     {
         $input = $this->getElement('choice_direct_input', ['%value%' => $value, '%locale_code%' => $localeCode]);
         $this->getElement('delete_button', ['%key%' => $input->getAttribute('data-test-key')])->click();
-        $this->waitForFormUpdate();
     }
 
     public function nameIt(string $name, string $language): void

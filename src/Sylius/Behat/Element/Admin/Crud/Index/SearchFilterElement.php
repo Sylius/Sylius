@@ -20,7 +20,7 @@ class SearchFilterElement extends SyliusElement implements SearchFilterElementIn
     public function searchWith(string $phrase): void
     {
         $this->getElement('filter_search')->setValue($phrase);
-        $this->getElement('filter_button')->press();
+        $this->getElement('filter_button')->click();
     }
 
     protected function getDefinedElements(): array

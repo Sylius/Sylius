@@ -22,5 +22,7 @@ default:
                 - sylius.behat.context.ui.theme
 
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@theming&&@ui"

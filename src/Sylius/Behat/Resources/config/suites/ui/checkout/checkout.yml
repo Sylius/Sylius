@@ -76,6 +76,7 @@ default:
                 - sylius.behat.context.ui.shop.homepage
                 - sylius.behat.context.ui.shop.locale
                 - sylius.behat.context.ui.user
+                - sylius.behat.context.ui.wait_debug
 
             filters:
                 tags: "@checkout&&@ui"

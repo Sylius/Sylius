@@ -16,7 +16,6 @@ namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 use Behat\Mink\Exception\DriverException;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
 
 class CreatePage extends SyliusPage implements CreatePageInterface
@@ -34,20 +33,16 @@ class CreatePage extends SyliusPage implements CreatePageInterface
         $this->getElement('country')->selectOption($address->getCountryCode());
         $this->getElement('city')->setValue($address->getCity());
         $this->getElement('postcode')->setValue($address->getPostcode());
-
-        DriverHelper::waitForFormToStopLoading($this->getSession());
     }
 
     public function selectCountry(string $name): void
     {
         $this->getElement('country')->selectOption($name);
-
-        DriverHelper::waitForFormToStopLoading($this->getSession());
     }
 
     public function addAddress(): void
     {
-        $this->getElement('add_button')->press();
+        $this->getElement('add_button')->click();
     }
 
     public function hasProvinceValidationMessage(): bool

@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Customer;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Service\SharedStorageInterface;
 
 class FormElement extends BaseFormElement implements FormElementInterface

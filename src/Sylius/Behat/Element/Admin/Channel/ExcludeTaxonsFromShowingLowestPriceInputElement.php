@@ -38,7 +38,6 @@ class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement im
             $excludeTaxonElement->getXpath(),
             $taxon->getCode(),
         );
-        $this->waitForFormUpdate();
     }
 
     public function removeExcludedTaxon(TaxonInterface $taxon): void
@@ -50,7 +49,6 @@ class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement im
             $excludeTaxonElement->getXpath(),
             $taxon->getCode(),
         );
-        $this->waitForFormUpdate();
     }
 
     public function hasTaxonExcluded(TaxonInterface $taxon): bool

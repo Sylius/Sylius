@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\SyliusPageInterface;
 
 interface IndexPageInterface extends SyliusPageInterface

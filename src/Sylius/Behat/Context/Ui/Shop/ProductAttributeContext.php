@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Webmozart\Assert\Assert;
 

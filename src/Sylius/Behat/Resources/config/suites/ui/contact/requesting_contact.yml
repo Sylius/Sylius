@@ -19,5 +19,7 @@ default:
                 - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.shop.contact
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@requesting_contact&&@ui"

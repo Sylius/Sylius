@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
@@ -109,7 +108,7 @@ class IndexPage extends SyliusPage implements IndexPageInterface
         $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
         $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'actions');
 
-        $actionButtons->find('css', '[data-test-modal="delete"] [data-test-confirm-button]')->press();
+        $actionButtons->find('css', '[data-test-modal="delete"] [data-test-confirm-button]')->click();
     }
 
     public function getActionsForResource(array $parameters): NodeElement
@@ -137,7 +136,7 @@ class IndexPage extends SyliusPage implements IndexPageInterface
 
     public function filter(): void
     {
-        $this->getElement('filter')->press();
+        $this->getElement('filter')->click();
     }
 
     public function bulkDelete(): void
@@ -158,8 +157,6 @@ class IndexPage extends SyliusPage implements IndexPageInterface
 
     public function isEnabledFilterApplied(): bool
     {
-        DriverHelper::waitForElement($this->getSession(), '[data-test-criterion-enabled]');
-
         return $this->getElement('enabled_filter')->getValue() === 'true';
     }
 
@@ -197,15 +194,6 @@ class IndexPage extends SyliusPage implements IndexPageInterface
     protected function areFiltersVisible(): bool
     {
         return !$this->getElement('filters_toggle')->hasClass('collapsed');
-    }
-
-    protected function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('filters_form');
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
     }
 
     protected function getDefinedElements(): array

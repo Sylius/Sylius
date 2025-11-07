@@ -12,7 +12,7 @@ Feature: Completing a payment from its list
         And there is an "#00000001" order with "Apple" product
         And I am logged in as an administrator
 
-    @api @ui
+    @api @ui @mink:chromedriver # TODO: Remove @mink:chromedriver later
     Scenario: Completing a payment from payments index
         When I browse payments
         And I complete the payment of order "#00000001"

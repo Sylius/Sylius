@@ -27,5 +27,7 @@ default:
                 - sylius.behat.context.ui.admin.removing_taxons
                 - sylius.behat.context.ui.save
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@managing_taxons&&@ui"

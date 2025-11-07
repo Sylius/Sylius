@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Behat\Service;
 
-use Behat\Mink\Element\NodeElement;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Exception\NotificationExpectationMismatchException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;

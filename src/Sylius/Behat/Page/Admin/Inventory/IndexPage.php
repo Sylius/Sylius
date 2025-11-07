@@ -49,8 +49,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             $this->getElement('product_filter')->getXpath(),
             $productName,
         );
-
-        $this->waitForFormUpdate();
     }
 
     protected function getDefinedElements(): array

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\SyliusPage;
 
 class HomePage extends SyliusPage implements HomePageInterface

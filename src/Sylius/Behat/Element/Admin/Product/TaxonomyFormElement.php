@@ -17,7 +17,6 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -40,7 +39,6 @@ class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormElement
             $this->getElement('main_taxon')->getXpath(),
             $taxonName,
         );
-        $this->waitForFormUpdate();
     }
 
     public function getMainTaxon(): ?string
@@ -140,10 +138,6 @@ class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormElement
 
     protected function changeTab(): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $this->getElement('side_navigation_tab', ['%name%' => 'taxonomy'])->click();
     }
 }

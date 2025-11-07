@@ -20,5 +20,7 @@ default:
                 - sylius.behat.context.ui.channel
                 - sylius.behat.context.ui.shop.currency
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@currencies&&@ui"

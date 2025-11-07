@@ -39,13 +39,12 @@ class GeneratePage extends BaseCreatePage implements GeneratePageInterface
 
     public function generate(): void
     {
-        $this->getElement('generate_button')->press();
+        $this->getElement('generate_button')->click();
     }
 
     public function removeVariant(int $nth): void
     {
         $this->getElement('delete_button', ['%position%' => $nth])->click();
-        $this->waitForFormUpdate();
     }
 
     public function isGenerationPossible(): bool

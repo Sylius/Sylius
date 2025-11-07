@@ -51,5 +51,7 @@ default:
                 - sylius.behat.context.ui.shop.product
                 - sylius.behat.context.ui.shop.product_attribute
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@viewing_products&&@ui"

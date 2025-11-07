@@ -25,5 +25,7 @@ default:
 
                 - sylius.behat.context.ui.shop.payment_request
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@payment_request_notify&&@ui"

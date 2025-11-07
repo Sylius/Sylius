@@ -15,7 +15,6 @@ namespace Sylius\Behat\Element\Admin\Product;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
@@ -41,7 +40,6 @@ class AssociationsFormElement extends BaseFormElement implements AssociationsFor
                 $associationField->getXpath(),
                 $productName,
             );
-            $this->waitForFormUpdate();
         }
     }
 
@@ -78,10 +76,6 @@ class AssociationsFormElement extends BaseFormElement implements AssociationsFor
 
     protected function changeTab(): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $this->getElement('side_navigation_tab', ['%name%' => 'associations'])->click();
     }
 }

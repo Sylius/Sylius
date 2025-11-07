@@ -45,5 +45,7 @@ default:
                 - sylius.behat.context.ui.shop.browsing_product
                 - Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@managing_product_variants&&@ui"

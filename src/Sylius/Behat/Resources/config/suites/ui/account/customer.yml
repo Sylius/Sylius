@@ -54,5 +54,7 @@ default:
                 - sylius.behat.context.ui.shop.homepage
                 - sylius.behat.context.ui.user
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@customer_account&&@ui"

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Product;
 
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 class ChannelPricingsFormElement extends BaseFormElement implements ChannelPricingsFormElementInterface
@@ -62,10 +61,6 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
 
     protected function changeChannelAccordion(string $channelCode): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $accordion = $this->getElement('channel_accordion', ['%channel_code%' => $channelCode]);
 
         if ($accordion->hasClass('collapsed')) {
@@ -75,10 +70,6 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
 
     protected function changeTab(): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $this->getElement('side_navigation_tab', ['%name%' => 'channel-pricing'])->click();
     }
 }

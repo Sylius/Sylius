@@ -21,5 +21,7 @@ default:
                 - sylius.behat.context.ui.shop.product
 
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@products_accessibility_in_multiple_channels&&@ui"

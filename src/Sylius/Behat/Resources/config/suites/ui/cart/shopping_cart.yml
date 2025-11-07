@@ -45,5 +45,7 @@ default:
                 - sylius.behat.context.ui.shop.registration
                 - sylius.behat.context.ui.user
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@shopping_cart&&@ui"

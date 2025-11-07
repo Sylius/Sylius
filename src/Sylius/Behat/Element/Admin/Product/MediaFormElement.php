@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Product;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
@@ -36,8 +35,6 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
         $this->changeTab();
 
         $this->getElement('add_image')->click();
-
-        $this->waitForFormUpdate();
 
         $images = $this->getElement('images');
         $imagesSubform = $images->findAll('css', '[data-test-image-subform]');
@@ -73,7 +70,6 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
 
         $imageSubform = $this->getElement('image_subform_with_type', ['%type%' => $type]);
         $imageSubform->find('css', '[data-test-image-delete]')->click();
-        $this->waitForFormUpdate();
     }
 
     public function removeFirstImage(): void
@@ -82,7 +78,6 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
 
         $firstSubform = $this->getFirstImageSubform();
         $firstSubform->find('css', '[data-test-image-delete]')->click();
-        $this->waitForFormUpdate();
     }
 
     public function hasImageWithType(string $type): bool
@@ -226,10 +221,6 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
 
     protected function changeTab(): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $this->getElement('side_navigation_tab', ['%name%' => 'media'])->click();
     }
 }

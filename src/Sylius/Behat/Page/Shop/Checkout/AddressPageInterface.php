@@ -58,7 +58,11 @@ interface AddressPageInterface extends ShopPageInterface
 
     public function specifyBillingAddressProvince(string $provinceName): void;
 
+    public function getSpecifiedBillingProvince(): string;
+
     public function specifyShippingAddressProvince(string $provinceName): void;
+
+    public function isFormAccessible(): bool;
 
     public function hasShippingAddressInput(): bool;
 
@@ -83,6 +87,4 @@ interface AddressPageInterface extends ShopPageInterface
     public function isDifferentShippingAddressChecked(): bool;
 
     public function isShippingAddressVisible(): bool;
-
-    public function waitForFormToStopLoading(): void;
 }

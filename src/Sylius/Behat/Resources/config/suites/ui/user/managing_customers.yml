@@ -39,5 +39,7 @@ default:
                 - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.login
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@managing_customers&&@ui"

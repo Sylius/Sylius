@@ -15,7 +15,6 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\DriverHelper;
 
 class SelectPaymentPage extends SyliusPage implements SelectPaymentPageInterface
 {
@@ -26,13 +25,6 @@ class SelectPaymentPage extends SyliusPage implements SelectPaymentPageInterface
 
     public function selectPaymentMethod(string $paymentMethod): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            DriverHelper::waitForPageToLoad($this->getSession());
-            $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
-
-            return;
-        }
-
         $paymentMethodOptionElement = $this->getElement('payment_method_option', ['%payment_method%' => $paymentMethod]);
         $paymentMethodOptionElement->selectOption($paymentMethodOptionElement->getAttribute('value'));
     }
@@ -59,8 +51,7 @@ class SelectPaymentPage extends SyliusPage implements SelectPaymentPageInterface
 
     public function nextStep(): void
     {
-        $this->getElement('next_step')->press();
-        DriverHelper::waitForPageToLoad($this->getSession());
+        $this->getElement('next_step')->click();
     }
 
     public function changeShippingMethod(): void

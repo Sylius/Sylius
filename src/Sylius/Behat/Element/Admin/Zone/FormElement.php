@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Zone;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Element\NodeElement;
 
 class FormElement extends BaseFormElement implements FormElementInterface
 {

@@ -20,8 +20,7 @@ class ImageFormElement extends BaseFormElement implements ImageFormElementInterf
 {
     public function attachImage(string $path, ?string $type = null): void
     {
-        $this->getElement('add_image')->press();
-        $this->waitForFormUpdate();
+        $this->getElement('add_image')->click();
 
         $lastImage = $this->getElement('last_image');
 
@@ -48,14 +47,12 @@ class ImageFormElement extends BaseFormElement implements ImageFormElementInterf
 
     public function removeImageWithType(string $type): void
     {
-        $this->getElement('delete_image', ['%type%' => $type])->press();
-        $this->waitForFormUpdate();
+        $this->getElement('delete_image', ['%type%' => $type])->click();
     }
 
     public function removeFirstImage(): void
     {
-        $this->getElement('first_image')->find('css', '[data-test-delete-image]')->press();
-        $this->waitForFormUpdate();
+        $this->getElement('first_image')->find('css', '[data-test-delete-image]')->click();
     }
 
     public function isImageWithTypeDisplayed(string $type): bool

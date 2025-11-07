@@ -38,5 +38,7 @@ default:
                 - sylius.behat.context.ui.shop.checkout.payment
                 - sylius.behat.context.ui.shop.checkout.shipping
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@viewing_shipping_methods&&@ui"

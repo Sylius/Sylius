@@ -39,5 +39,7 @@ default:
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.checkout.thank_you
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@checkout_inventory&&@ui"

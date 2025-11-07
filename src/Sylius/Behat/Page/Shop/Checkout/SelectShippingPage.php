@@ -15,7 +15,6 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\DriverHelper;
 
 class SelectShippingPage extends SyliusPage implements SelectShippingPageInterface
 {
@@ -26,13 +25,6 @@ class SelectShippingPage extends SyliusPage implements SelectShippingPageInterfa
 
     public function selectShippingMethod(string $shippingMethod): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            DriverHelper::waitForPageToLoad($this->getSession());
-            $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
-
-            return;
-        }
-
         $shippingMethodOptionElement = $this->getElement('shipping_method_option', ['%shipping_method%' => $shippingMethod]);
         $shippingMethodOptionElement->selectOption($shippingMethodOptionElement->getAttribute('value'));
     }
@@ -75,8 +67,11 @@ class SelectShippingPage extends SyliusPage implements SelectShippingPageInterfa
 
     public function nextStep(): void
     {
-        $this->getElement('next_step')->press();
-        DriverHelper::waitForPageToLoad($this->getSession());
+        $this->getElement('next_step')->click();
+
+        $this->getDocument()->waitFor(5, function () {
+            return !$this->isOpen();
+        });
     }
 
     public function changeAddress(): void

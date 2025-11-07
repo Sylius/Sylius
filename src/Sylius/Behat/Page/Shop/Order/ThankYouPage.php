@@ -14,15 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Order;
 
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\DriverHelper;
 
 class ThankYouPage extends SyliusPage implements ThankYouPageInterface
 {
     public function goToTheChangePaymentMethodPage(): void
     {
         $this->getElement('payment_method_page')->click();
-
-        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function goToOrderDetailsInAccount(): void

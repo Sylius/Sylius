@@ -35,5 +35,7 @@ default:
                 - Sylius\Behat\Context\Ui\Admin\ProductCreationContext
                 - Sylius\Behat\Context\Ui\Admin\ProductVariantsCreationContext
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@applying_catalog_promotions&&@ui"

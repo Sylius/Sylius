@@ -14,24 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Service\DriverHelper;
 
 class SaveElement extends SyliusElement implements SaveElementInterface
 {
     public function saveChanges(): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->find('css', 'body')->click();
-            DriverHelper::waitForPageToLoad($this->getSession());
-        }
-
         try {
-            $this->getElement('update_changes_button')->press();
+            $this->getElement('update_changes_button')->click();
         } catch (ElementNotFoundException) {
             // Fallback for elements with different data-test attributes
-            $this->getElement('save_changes_button')->press();
+            $this->getElement('save_changes_button')->click();
         }
-        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     protected function getDefinedElements(): array

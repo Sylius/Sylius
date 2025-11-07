@@ -32,5 +32,7 @@ default:
                 - sylius.behat.context.ui.shop.checkout.complete
                 - sylius.behat.context.ui.shop.login
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@impersonating_customers&&@ui"

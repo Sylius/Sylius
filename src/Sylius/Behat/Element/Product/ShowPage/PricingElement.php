@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Element\SyliusElement;
 
 class PricingElement extends SyliusElement implements PricingElementInterface

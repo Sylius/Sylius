@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
 use Sylius\Behat\Page\Shop\Page;
-use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends Page implements CreatePageInterface
@@ -51,9 +50,7 @@ class CreatePage extends Page implements CreatePageInterface
     public function submitReview(): void
     {
         $this->waitForElementUpdate('add');
-        $this->getElement('add')->press();
-
-        DriverHelper::waitForPageToLoad($this->getSession());
+        $this->getElement('add')->click();
     }
 
     public function getRateValidationMessage(): string

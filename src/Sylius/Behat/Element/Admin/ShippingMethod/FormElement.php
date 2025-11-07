@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\ShippingMethod;
 
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\TabsHelper;
 
 class FormElement extends BaseFormElement implements FormElementInterface
@@ -104,13 +103,11 @@ class FormElement extends BaseFormElement implements FormElementInterface
     public function chooseCalculator(string $calculatorName): void
     {
         $this->getElement('calculator')->selectOption($calculatorName);
-        $this->waitForFormUpdate();
     }
 
     public function addRule(string $type): void
     {
-        $this->getElement('add_rule_button', ['%type%' => $type])->press();
-        $this->waitForFormUpdate();
+        $this->getElement('add_rule_button', ['%type%' => $type])->click();
     }
 
     public function fillLastRuleOption(string $fieldName, string $value): void
@@ -173,10 +170,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     protected function selectCalculatorConfigurationChannelTab(string $channelCode): void
     {
-        if (!DriverHelper::isJavascript($this->getDriver())) {
-            throw new \RuntimeException('This method can be used only with JavaScript enabled');
-        }
-
         $this->getElement('calculator_configuration_channel_tab', ['%channelCode%' => $channelCode])->click();
     }
 }

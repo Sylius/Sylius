@@ -34,7 +34,6 @@ use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewInd
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface as VariantCreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface as VariantUpdatePageInterface;
-use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -63,7 +62,6 @@ final readonly class ManagingProductsContext implements Context
         private CurrentPageResolverInterface $currentPageResolver,
         private NotificationCheckerInterface $notificationChecker,
         private VariantUpdatePageInterface $variantUpdatePage,
-        private JavaScriptTestHelperInterface $testHelper,
         private AssociationsFormElementInterface $associationsFormElement,
         private AttributesFormElementInterface $attributesFormElement,
         private ChannelPricingsFormElementInterface $channelPricingsFormElement,
@@ -78,7 +76,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iWantToCreateANewSimpleProduct(): void
     {
-        $this->testHelper->waitUntilPageOpens($this->createSimpleProductPage);
+        $this->createSimpleProductPage->open();
     }
 
     /**
@@ -86,7 +84,7 @@ final readonly class ManagingProductsContext implements Context
      */
     public function iWantToCreateANewConfigurableProduct(): void
     {
-        $this->testHelper->waitUntilPageOpens($this->createConfigurableProductPage);
+        $this->createConfigurableProductPage->open();
     }
 
     /**
@@ -524,7 +522,7 @@ final readonly class ManagingProductsContext implements Context
     {
         $this->sharedStorage->set('product', $product);
 
-        $this->testHelper->waitUntilPageOpens($this->updateSimpleProductPage, ['id' => $product->getId()]);
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
     }
 
     /**
@@ -1182,16 +1180,6 @@ final readonly class ManagingProductsContext implements Context
     public function iRemoveItsPriceForChannel(ChannelInterface $channel): void
     {
         $this->iSetItsPriceTo('', $channel);
-    }
-
-    /**
-     * @Then this product should( still) have slug :value in :localeCode (locale)
-     */
-    public function thisProductElementShouldHaveSlugIn(string $slug, string $localeCode): void
-    {
-        $this->testHelper->waitUntilAssertionPasses(function () use ($localeCode, $slug): void {
-            Assert::same($this->translationsFormElement->getSlug($localeCode), $slug);
-        });
     }
 
     /**

@@ -23,5 +23,7 @@ default:
                 - sylius.behat.context.ui.admin.resetting_password
                 - sylius.behat.context.ui.email
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@administrator_login&&@ui"

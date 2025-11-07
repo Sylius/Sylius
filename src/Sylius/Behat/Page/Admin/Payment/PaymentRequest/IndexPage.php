@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Payment\PaymentRequest;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -68,7 +68,5 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             $autocomplete->getXpath(),
             $value,
         );
-
-        $this->waitForFormUpdate();
     }
 }

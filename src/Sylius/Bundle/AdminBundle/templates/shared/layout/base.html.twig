@@ -15,7 +15,7 @@
             {% hook generic_hook ~ '#stylesheets' %}
         {% endblock %}
     </head>
-    <body class="{% block body_class %}{% endblock %}">
+    <body class="{% block body_class %}{% endblock %}" data-controller="livecomponent-reconnect">
         <div class="page">
             {% block body %}{% endblock %}
         </div>

@@ -60,8 +60,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             $this->getElement('product_filter')->getXpath(),
             $productName,
         );
-
-        $this->waitForFormUpdate();
     }
 
     protected function changeState(string $state, array $parameters): void

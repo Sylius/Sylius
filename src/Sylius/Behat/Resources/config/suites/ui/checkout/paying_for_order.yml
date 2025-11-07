@@ -58,5 +58,7 @@ default:
                 - sylius.behat.context.ui.shop.checkout.thank_you
                 - sylius.behat.context.ui.shop.payment_request
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@paying_for_order&&@ui"

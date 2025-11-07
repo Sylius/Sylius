@@ -29,7 +29,7 @@ class FilterElement extends SyliusElement implements FilterElementInterface
 
     public function filter(): void
     {
-        $this->getElement('filter_button')->press();
+        $this->getElement('filter_button')->click();
     }
 
     protected function getDefinedElements(): array

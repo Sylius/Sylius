@@ -32,5 +32,7 @@ default:
                 - sylius.behat.context.ui.admin.order_history
                 - sylius.behat.context.ui.save
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@order_history&&@ui"

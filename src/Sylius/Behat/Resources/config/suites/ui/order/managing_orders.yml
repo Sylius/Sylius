@@ -66,5 +66,7 @@ default:
                 - sylius.behat.context.ui.shop.checkout.thank_you
                 - sylius.behat.context.ui.shop.currency
 
+
+                - sylius.behat.context.ui.wait_debug
             filters:
                 tags: "@managing_orders&&@ui"

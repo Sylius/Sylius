@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Page as ShopPage;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
@@ -43,8 +42,6 @@ class ShowPage extends ShopPage implements ShowPageInterface
     public function addToCart(): void
     {
         $this->getElement('add_to_cart_button')->click();
-
-        $this->waitForElementToBeReady();
     }
 
     public function addToCartWithQuantity(string $quantity): void
@@ -58,7 +55,6 @@ class ShowPage extends ShopPage implements ShowPageInterface
         }
 
         $buttonElement->click();
-        $this->waitForElementToBeReady();
     }
 
     public function updateQuantity(int $quantity): void
@@ -72,8 +68,6 @@ class ShowPage extends ShopPage implements ShowPageInterface
         $this->selectVariant($variant);
 
         $this->getElement('add_to_cart_button')->click();
-
-        $this->waitForElementToBeReady();
     }
 
     public function addToCartWithOption(ProductOptionInterface $option, string $optionValue): void
@@ -82,8 +76,6 @@ class ShowPage extends ShopPage implements ShowPageInterface
 
         $this->getDocument()->selectFieldOption($select->getAttribute('name'), $optionValue);
         $this->getElement('add_to_cart_button')->click();
-
-        $this->waitForElementToBeReady();
     }
 
     public function getAttributeByName(string $name): ?string
@@ -171,8 +163,6 @@ class ShowPage extends ShopPage implements ShowPageInterface
 
     public function getPrice(): string
     {
-        $this->waitForElementToBeReady();
-
         return $this->getElement('product_price')->getText();
     }
 
@@ -296,7 +286,6 @@ class ShowPage extends ShopPage implements ShowPageInterface
     {
         $optionElement = $this->getElement('option_select', ['%optionCode%' => strtoupper($optionCode)]);
         $optionElement->selectOption($optionValue);
-        $this->waitForElementToBeReady();
     }
 
     public function selectVariant(string $variantName): void
@@ -307,13 +296,7 @@ class ShowPage extends ShopPage implements ShowPageInterface
             return;
         }
 
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $variantRadio->click();
-            $this->waitForElementToBeReady();
-
-            return;
-        }
-
+        $variantRadio->click();
         $this->getDocument()->fillField($variantRadio->getAttribute('name'), $variantRadio->getAttribute('value'));
     }
 
@@ -400,13 +383,6 @@ class ShowPage extends ShopPage implements ShowPageInterface
             'variant_radio' => '[data-test-product-variants] tbody tr:contains("%variantName%") input',
             'variants_rows' => '[data-test-product-variants-row]',
         ]);
-    }
-
-    protected function waitForElementToBeReady(): void
-    {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->waitFor(2, fn (): bool => $this->summaryPage->isOpen());
-        }
     }
 
     public function hasBreadcrumbLink(string $taxonName): bool

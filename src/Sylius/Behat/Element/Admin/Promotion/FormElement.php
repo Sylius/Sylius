@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Promotion;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\TabsHelper;
 
@@ -93,14 +93,12 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function addAction(string $type): void
     {
-        $this->getElement('add_action_button', ['%type%' => $type])->press();
-        $this->waitForFormUpdate();
+        $this->getElement('add_action_button', ['%type%' => $type])->click();
     }
 
     public function removeLastAction(): void
     {
-        $this->getLastAction()->find('css', 'button[data-test-delete]')->press();
-        $this->waitForFormUpdate();
+        $this->getLastAction()->find('css', 'button[data-test-delete]')->click();
     }
 
     public function fillActionOption(string $option, string $value): void
@@ -121,14 +119,12 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function addRule(string $type): void
     {
-        $this->getElement('add_rule_button', ['%type%' => $type])->press();
-        $this->waitForFormUpdate();
+        $this->getElement('add_rule_button', ['%type%' => $type])->click();
     }
 
     public function removeLastRule(): void
     {
-        $this->getLastRule()->find('css', 'button[data-test-delete]')->press();
-        $this->waitForFormUpdate();
+        $this->getLastRule()->find('css', 'button[data-test-delete]')->click();
     }
 
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void
@@ -161,8 +157,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
                 $value,
             );
         }
-
-        $this->waitForFormUpdate();
     }
 
     public function selectAutocompleteActionFilterOptions(array $values, string $channelCode, string $filterType): void
@@ -176,8 +170,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
                 $value,
             );
         }
-
-        $this->waitForFormUpdate();
     }
 
     public function checkIfRuleConfigurationFormIsVisible(): bool

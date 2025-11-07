@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Behaviour;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\NodeElement;
 
 trait CountsChannelBasedErrors
 {

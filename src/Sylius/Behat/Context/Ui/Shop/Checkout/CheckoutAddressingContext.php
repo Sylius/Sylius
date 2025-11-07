@@ -21,7 +21,6 @@ use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Service\Factory\AddressFactoryInterface;
-use Sylius\Behat\Service\Helper\JavaScriptTestHelperInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -36,7 +35,6 @@ final readonly class CheckoutAddressingContext implements Context
         private AddressFactoryInterface $addressFactory,
         private AddressComparatorInterface $addressComparator,
         private SelectShippingPageInterface $selectShippingPage,
-        private JavaScriptTestHelperInterface $testHelper,
     ) {
     }
 
@@ -467,9 +465,7 @@ final readonly class CheckoutAddressingContext implements Context
      */
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address)
     {
-        $this->testHelper->waitUntilAssertionPasses(function () use ($address): void {
-            Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledShippingAddress()));
-        });
+        Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledShippingAddress()));
     }
 
     /**
@@ -477,9 +473,7 @@ final readonly class CheckoutAddressingContext implements Context
      */
     public function addressShouldBeFilledAsBillingAddress(AddressInterface $address): void
     {
-        $this->testHelper->waitUntilAssertionPasses(function () use ($address): void {
-            Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
-        });
+        Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
     }
 
     /**
@@ -550,7 +544,26 @@ final readonly class CheckoutAddressingContext implements Context
      */
     public function iShouldBeAbleToUpdateTheAddressWithoutUnexpectedAlert(): void
     {
-        $this->addressPage->waitForFormToStopLoading();
+        // If an XSS alert appeared, the page would be blocked and we wouldn't be able to interact with it
+        // Try to verify we can still interact with the page by checking if the form is accessible
+        try {
+            // This will fail if an alert is blocking the page
+            Assert::true(
+                $this->addressPage->isFormAccessible(),
+                'Expected to be able to interact with the address form, but the page appears to be blocked (possibly by an alert)',
+            );
+
+            // Additionally verify the dangerous content is properly escaped in the field
+            // The XSS payload should be displayed as text, not executed
+            $provinceValue = $this->addressPage->getSpecifiedBillingProvince();
+            Assert::contains($provinceValue, '<img', 'The province value should contain the escaped HTML tag');
+        } catch (\Exception $e) {
+            throw new \RuntimeException(
+                'An XSS alert may have appeared and blocked the page interaction: ' . $e->getMessage(),
+                0,
+                $e,
+            );
+        }
     }
 
     /**
