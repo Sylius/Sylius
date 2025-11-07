@@ -52,6 +52,8 @@ sylius:
                 different_shipping_address: 'Eine abweichende Lieferadresse benutzen?'
             payment_method: 'Zahlungsmethode'
             shipping_method: 'Versandart'
+        currency:
+            select: Währung auswählen
         promotion:
             channels: 'Ausgabekanäle'
         promotion_action:

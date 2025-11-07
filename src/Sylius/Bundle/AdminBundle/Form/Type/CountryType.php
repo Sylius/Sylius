@@ -56,6 +56,7 @@ final class CountryType extends AbstractType
         $builder
             ->add('provinces', LiveCollectionType::class, [
                 'entry_type' => ProvinceType::class,
+                'label' => 'sylius.form.country.provinces',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
