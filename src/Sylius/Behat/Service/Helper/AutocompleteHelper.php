@@ -192,6 +192,8 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
     {
         $start = microtime(true);
 
+        error_log(sprintf('[AUTOCOMPLETE-WAIT] Waiting for tomselect on selector: %s', substr($selector, 0, 100)));
+
         // Wait for element and tomselect to be ready (max 5s for LiveComponent + init)
         $result = $driver->wait(5000, <<<SCRIPT
             (function () {
@@ -207,21 +209,34 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
         }
 
         if (!$result) {
-            error_log('[AUTOCOMPLETE-WAIT] Timeout: tomselect not ready after 5s');
+            error_log('[AUTOCOMPLETE-WAIT] TIMEOUT: tomselect not ready after 5s');
+            error_log(sprintf('[AUTOCOMPLETE-WAIT] Selector: %s', $selector));
 
-            // Debug: check if element exists but tomselect is missing
-            $elementExists = $driver->evaluateScript(<<<SCRIPT
+            // Debug: comprehensive diagnostics
+            $diagnostics = $driver->evaluateScript(<<<SCRIPT
                 (function () {
                     let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                    return !!element;
+
+                    if (!element) {
+                        return { elementExists: false };
+                    }
+
+                    let parent = element.closest('[data-controller]');
+
+                    return {
+                        elementExists: true,
+                        hasTomselect: !!element.tomselect,
+                        elementType: element.tagName,
+                        hasDataController: !!element.getAttribute('data-controller'),
+                        dataController: element.getAttribute('data-controller'),
+                        parentController: parent ? parent.getAttribute('data-controller') : null,
+                        hasAutocompleteController: element.getAttribute('data-controller')?.includes('autocomplete'),
+                        stimulusConnected: element.hasAttribute('data-symfony--ux-autocomplete--autocomplete-connected'),
+                    };
                 })();
             SCRIPT);
 
-            if ($elementExists) {
-                error_log('[AUTOCOMPLETE-WAIT] Element found but tomselect not initialized');
-            } else {
-                error_log('[AUTOCOMPLETE-WAIT] Element not found in DOM');
-            }
+            error_log(sprintf('[AUTOCOMPLETE-WAIT] Diagnostics: %s', json_encode($diagnostics)));
         }
     }
 
