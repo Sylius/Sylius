@@ -33,45 +33,61 @@ app.debug = process.env.NODE_ENV !== 'production';
  * Note: This code is in app.js instead of a separate controller because CI uses
  * cached assets and a new controller file wouldn't be included in the bundle.
  */
+
+// Debug logging to window object (avoid console.log for linter)
+window.__liveComponentDebug = window.__liveComponentDebug || { logs: [], events: 0 };
+
+function debugLog(message, ...args) {
+    const timestamp = new Date().toISOString();
+    const logEntry = { timestamp, message, args };
+    window.__liveComponentDebug.logs.push(logEntry);
+
+    // Also log to error_log for PHP to capture
+    if (window.logToPhp) {
+        window.logToPhp(message, ...args);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('[LIVECOMPONENT-DEBUG] DOMContentLoaded fired');
+    debugLog('[LIVECOMPONENT-DEBUG] DOMContentLoaded fired');
 
     // Find all LiveComponent elements
     const liveElements = document.querySelectorAll('[data-controller~="live"]');
-    console.log('[LIVECOMPONENT-DEBUG] Found', liveElements.length, 'LiveComponent elements');
+    debugLog('[LIVECOMPONENT-DEBUG] Found', liveElements.length, 'LiveComponent elements');
 
     if (liveElements.length === 0) {
-        console.warn('[LIVECOMPONENT-DEBUG] No LiveComponent elements found - checking all data-controller elements');
+        debugLog('[LIVECOMPONENT-DEBUG] WARNING: No LiveComponent elements found');
         const allControllers = document.querySelectorAll('[data-controller]');
-        console.log('[LIVECOMPONENT-DEBUG] Total elements with data-controller:', allControllers.length);
+        debugLog('[LIVECOMPONENT-DEBUG] Total elements with data-controller:', allControllers.length);
     }
 
     for (const element of liveElements) {
         const elementInfo = element.getAttribute('data-live-name-value') || element.id || element.className;
-        console.log('[LIVECOMPONENT-DEBUG] Processing element:', elementInfo);
+        debugLog('[LIVECOMPONENT-DEBUG] Processing element:', elementInfo);
 
         try {
             const component = await getComponent(element);
-            console.log('[LIVECOMPONENT-DEBUG] getComponent() succeeded for:', elementInfo);
+            debugLog('[LIVECOMPONENT-DEBUG] getComponent() succeeded for:', elementInfo);
 
             // Use proper LiveComponent API: component.on('render:finished', callback)
             component.on('render:finished', () => {
-                console.log('[LIVECOMPONENT-DEBUG] render:finished event fired for:', elementInfo);
+                window.__liveComponentDebug.events++;
+                debugLog('[LIVECOMPONENT-DEBUG] render:finished event fired for:', elementInfo);
 
                 // Use requestAnimationFrame to ensure DOM is fully settled
                 requestAnimationFrame(() => {
-                    console.log('[LIVECOMPONENT-DEBUG] Calling app.load() to re-scan Stimulus controllers');
+                    debugLog('[LIVECOMPONENT-DEBUG] Calling app.load() to re-scan Stimulus controllers');
 
                     // Re-scan DOM for new Stimulus controllers (e.g., autocomplete with tomselect)
                     app.load();
 
-                    console.log('[LIVECOMPONENT-DEBUG] app.load() completed');
+                    debugLog('[LIVECOMPONENT-DEBUG] app.load() completed');
                 });
             });
         } catch (error) {
-            console.error('[LIVECOMPONENT-DEBUG] Failed to getComponent() for:', elementInfo, error);
+            debugLog('[LIVECOMPONENT-DEBUG] ERROR: Failed to getComponent() for:', elementInfo, error.message);
         }
     }
 
-    console.log('[LIVECOMPONENT-DEBUG] Setup complete');
+    debugLog('[LIVECOMPONENT-DEBUG] Setup complete');
 });

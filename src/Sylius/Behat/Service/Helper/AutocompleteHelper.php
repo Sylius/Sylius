@@ -237,6 +237,24 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
             SCRIPT);
 
             error_log(sprintf('[AUTOCOMPLETE-WAIT] Diagnostics: %s', json_encode($diagnostics)));
+
+            // Check LiveComponent debug logs
+            $liveComponentDebug = $driver->evaluateScript(<<<SCRIPT
+                (function () {
+                    if (!window.__liveComponentDebug) {
+                        return { available: false };
+                    }
+
+                    return {
+                        available: true,
+                        totalLogs: window.__liveComponentDebug.logs.length,
+                        events: window.__liveComponentDebug.events,
+                        lastLogs: window.__liveComponentDebug.logs.slice(-5)
+                    };
+                })();
+            SCRIPT);
+
+            error_log(sprintf('[AUTOCOMPLETE-WAIT] LiveComponent Debug Info: %s', json_encode($liveComponentDebug)));
         }
     }
 

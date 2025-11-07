@@ -87,7 +87,9 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function addScope(string $type): void
     {
+        error_log(sprintf('[FORM-ELEMENT] addScope(%s) - clicking add scope button', $type));
         $this->getElement('add_scope_button', ['%type%' => $type])->click();
+        error_log('[FORM-ELEMENT] addScope() - click completed, LiveComponent should rerender');
     }
 
     public function addAction(string $type): void
@@ -97,16 +99,27 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function selectScopeOption(array $values): void
     {
+        error_log(sprintf('[FORM-ELEMENT] selectScopeOption() called with %d values: %s', count($values), implode(', ', $values)));
+
         // Note: app.js hooks into LiveComponent render:finished events to re-scan DOM
         // This ensures tomselect is initialized on dynamically added elements
+        error_log('[FORM-ELEMENT] Getting last_scope element');
         $lastScope = $this->getElement('last_scope');
-        foreach ($values as $value) {
+
+        error_log('[FORM-ELEMENT] Iterating through values to select');
+        foreach ($values as $index => $value) {
+            error_log(sprintf('[FORM-ELEMENT] Selecting value %d/%d: %s', $index + 1, count($values), $value));
+
             $this->autocompleteHelper->selectByValue(
                 $this->getDriver(),
                 $lastScope->find('css', 'select')->getXpath(),
                 $value,
             );
+
+            error_log(sprintf('[FORM-ELEMENT] Value %d/%d selected successfully', $index + 1, count($values)));
         }
+
+        error_log('[FORM-ELEMENT] selectScopeOption() completed');
     }
 
     public function fillActionOption(string $option, string $value): void

@@ -226,8 +226,15 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $variantCodes = array_map(fn (ProductVariantInterface $variant) => $variant->getCode(), $variants);
 
+        error_log(sprintf('[BEHAT-STEP] iAddScopeThatAppliesOnVariants called with variants: %s', implode(', ', $variantCodes)));
+
+        error_log('[BEHAT-STEP] Calling formElement->addScope()');
         $this->formElement->addScope(InForVariantsScopeVariantChecker::TYPE);
+
+        error_log('[BEHAT-STEP] Calling formElement->selectScopeOption()');
         $this->formElement->selectScopeOption($variantCodes);
+
+        error_log('[BEHAT-STEP] iAddScopeThatAppliesOnVariants completed');
     }
 
     /**
