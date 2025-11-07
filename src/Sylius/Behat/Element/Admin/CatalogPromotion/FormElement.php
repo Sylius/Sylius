@@ -97,7 +97,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function selectScopeOption(array $values): void
     {
-        // Note: LiveComponentReconnectController automatically re-scans DOM after LiveComponent renders
+        // Note: app.js hooks into LiveComponent render:finished events to re-scan DOM
         // This ensures tomselect is initialized on dynamically added elements
         $lastScope = $this->getElement('last_scope');
         foreach ($values as $value) {
@@ -111,7 +111,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function fillActionOption(string $option, string $value): void
     {
-        // Note: LiveComponentReconnectController automatically re-scans DOM after LiveComponent renders
+        // Note: app.js hooks into LiveComponent render:finished events to re-scan DOM
         $lastAction = $this->getElement('last_action');
 
         $lastAction->fillField($option, $value);
@@ -119,7 +119,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void
     {
-        // Note: LiveComponentReconnectController automatically re-scans DOM after LiveComponent renders
+        // Note: app.js hooks into LiveComponent render:finished events to re-scan DOM
         $lastAction = $this->getElement('last_action');
 
         TabsHelper::switchTab($this->getSession(), $lastAction, $channelCode);
