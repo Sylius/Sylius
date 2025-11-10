@@ -28,7 +28,7 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 final class ChannelGrid extends AbstractGrid
 {
     public function __construct(
-        private string $resourceClass,
+        private readonly string $resourceClass,
     ) {
     }
 
