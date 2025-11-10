@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Tests\Grid;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Exception\UndefinedGridException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Sylius\Bundle\GridBundle\Provider\ServiceGridProvider;
@@ -39,17 +40,8 @@ final class OverridenGridsTest extends KernelTestCase
         }
         $yamlVersion = $arrayProvider->get($gridName);
 
-        foreach ($yamlVersion->getFields() as $field) {
-            // Prefilling the default values for datetime fields as they might not be set in YAML configuration
-            if ($field->getType() === 'datetime') {
-                $options = [
-                    'format' => 'Y-m-d H:i:s',
-                    'timezone' => null,
-                    ...$field->getOptions(),
-                ];
-                $field->setOptions($options);
-            }
-        }
+        $this->prefillingGridFields($yamlVersion);
+        $this->prefillingGridActions($yamlVersion);
 
         $this->assertEquals($yamlVersion, $serviceVersion);
     }
@@ -61,6 +53,59 @@ final class OverridenGridsTest extends KernelTestCase
 
         foreach (array_keys($gridConfiguration) as $gridName) {
             yield $gridName => [$gridName];
+        }
+    }
+
+    /**
+     * Prefilling the default values for datetime fields as they might not be set in YAML configuration
+     */
+    private function prefillingGridFields(Grid $grid): void
+    {
+        foreach ($grid->getFields() as $field) {
+            // Prefilling the default values for datetime fields as they might not be set in YAML configuration
+            if ($field->getType() === 'datetime') {
+                $options = [
+                    'format' => 'Y-m-d H:i:s',
+                    'timezone' => null,
+                    ...$field->getOptions(),
+                ];
+                $field->setOptions($options);
+            }
+        }
+    }
+
+    /**
+     * Prefilling the default values on Grid definitions.
+     * PHP Configuration add a default label, not set in YAML configuration
+     */
+    private function prefillingGridActions(Grid $grid): void
+    {
+        if ($grid->hasActionGroup('main')) {
+            foreach ($grid->getActions('main') as $action) {
+                if ('create' === $action->getType()  && null === $action->getLabel()) {
+                    $action->setLabel('sylius.ui.create');
+                }
+            }
+        }
+
+        if ($grid->hasActionGroup('item')) {
+            foreach ($grid->getActions('item') as $action) {
+                if ('update' === $action->getType() && null === $action->getLabel()) {
+                    $action->setLabel('sylius.ui.edit');
+                }
+
+                if ('delete' === $action->getType() && null === $action->getLabel()) {
+                    $action->setLabel('sylius.ui.delete');
+                }
+            }
+        }
+
+        if ($grid->hasActionGroup('bulk')) {
+            foreach ($grid->getActions('bulk') as $action) {
+                if ('delete' === $action->getType() && null === $action->getLabel()) {
+                    $action->setLabel('sylius.ui.delete');
+                }
+            }
         }
     }
 }
