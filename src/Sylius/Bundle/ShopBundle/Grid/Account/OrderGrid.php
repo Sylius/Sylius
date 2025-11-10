@@ -37,7 +37,7 @@ final class OrderGrid extends AbstractGrid
         $gridBuilder
             ->setRepositoryMethod('createByCustomerAndChannelIdQueryBuilder', [
                 "expr:service('sylius.context.customer').getCustomer().getId()",
-                "expr:service('sylius.context.channel').getChannel().getId()"
+                "expr:service('sylius.context.channel').getChannel().getId()",
             ])
             ->setDriverOption('class', $this->resourceClass)
             ->orderBy('checkoutCompletedAt', 'desc')
@@ -49,7 +49,7 @@ final class OrderGrid extends AbstractGrid
             )
             ->addField(
                 DateTimeField::create('checkoutCompletedAt', 'm/d/Y')
-                    ->setLabel('sylius.ui.date')
+                    ->setLabel('sylius.ui.date'),
             )
             ->addField(
                 TwigField::create('shippingAddress', '@SyliusShop/account/order/grid/field/address.html.twig')

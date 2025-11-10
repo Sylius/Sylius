@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Tests\Grid;
 
 use PHPUnit\Framework\Attributes\DataProvider;
+use Sylius\Bundle\GridBundle\Provider\ServiceGridProvider;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Exception\UndefinedGridException;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Sylius\Bundle\GridBundle\Provider\ServiceGridProvider;
 use Sylius\Component\Grid\Provider\ArrayGridProvider;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * This class is there to ensure that the yaml configuration of the grid is the same as the php configuration
@@ -36,7 +36,7 @@ final class OverridenGridsTest extends KernelTestCase
         try {
             $serviceVersion = $serviceProvider->get($gridName);
         } catch (UndefinedGridException) {
-            $this->markTestSkipped($gridName. ' is not migrated yet');
+            $this->markTestSkipped($gridName . ' is not migrated yet');
         }
         $yamlVersion = $arrayProvider->get($gridName);
 
@@ -82,7 +82,7 @@ final class OverridenGridsTest extends KernelTestCase
     {
         if ($grid->hasActionGroup('main')) {
             foreach ($grid->getActions('main') as $action) {
-                if ('create' === $action->getType()  && null === $action->getLabel()) {
+                if ('create' === $action->getType() && null === $action->getLabel()) {
                     $action->setLabel('sylius.ui.create');
                 }
             }
@@ -113,4 +113,3 @@ final class OverridenGridsTest extends KernelTestCase
         }
     }
 }
-
