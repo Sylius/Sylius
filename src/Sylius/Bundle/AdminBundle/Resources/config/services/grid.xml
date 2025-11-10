@@ -26,5 +26,10 @@
             <argument>%sylius.model.channel.class%</argument>
             <tag name="sylius.grid" />
          </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\AdminUserGrid">
+            <argument>%sylius.model.admin_user.class%</argument>
+            <tag name="sylius.grid" />
+         </service>
     </services>
 </container>
