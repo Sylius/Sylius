@@ -21,6 +21,12 @@
             <tag name="sylius.grid_filter" type="ux_translatable_autocomplete" form-type="Sylius\Bundle\AdminBundle\Form\Type\Grid\Filter\UxTranslatableAutocompleteFilterType" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grids\CatalogPromotionGrid">
+            <argument>%sylius.model.catalog_promotion.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <tag name="sylius.grid" />
+         </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\AdminUserGrid">
             <argument>%sylius.model.admin_user.class%</argument>
             <tag name="sylius.grid" />
