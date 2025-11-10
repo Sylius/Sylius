@@ -45,6 +45,7 @@ final class CatalogPromotionGrid extends AbstractGrid
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setDriverOption('class', $this->resourceClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
 

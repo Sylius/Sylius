@@ -90,6 +90,10 @@ final class OverridenGridsTest extends KernelTestCase
 
         if ($grid->hasActionGroup('item')) {
             foreach ($grid->getActions('item') as $action) {
+                if ('show' === $action->getType() && null === $action->getLabel()) {
+                    $action->setLabel('sylius.ui.show');
+                }
+
                 if ('update' === $action->getType() && null === $action->getLabel()) {
                     $action->setLabel('sylius.ui.edit');
                 }
