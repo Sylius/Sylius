@@ -29,7 +29,7 @@ use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 final class AdminUserGrid extends AbstractGrid
 {
     public function __construct(
-        private string $resourceClass,
+        private readonly string $resourceClass,
     ) {
     }
 
