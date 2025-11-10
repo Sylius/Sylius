@@ -20,9 +20,8 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
-use Sylius\Bundle\GridBundle\Grid\ResourceAwareGridInterface;
 
-final class CurrencyGrid extends AbstractGrid implements ResourceAwareGridInterface
+final class CurrencyGrid extends AbstractGrid
 {
     public function __construct(
         private string $resourceClass,
@@ -64,10 +63,5 @@ final class CurrencyGrid extends AbstractGrid implements ResourceAwareGridInterf
                 ),
             )
         ;
-    }
-
-    public function getResourceClass(): string
-    {
-        return $this->resourceClass;
     }
 }
