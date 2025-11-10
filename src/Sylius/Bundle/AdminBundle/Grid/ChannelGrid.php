@@ -41,6 +41,7 @@ final class ChannelGrid extends AbstractGrid
     {
         $gridBuilder
             ->setDriverOption('class', $this->resourceClass)
+            ->setLimits([10, 25, 50])
             ->addOrderBy('nameAndDescription', 'asc')
             ->addField(
                 TwigField::create('nameAndDescription', '@SyliusAdmin/shared/grid/field/channel.html.twig')
@@ -63,7 +64,9 @@ final class ChannelGrid extends AbstractGrid
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
                     ->withOptions([
-                        'th_class' => 'w-1 text-center',
+                        'vars' => [
+                            'th_class' => 'w-1 text-center',
+                        ],
                     ]),
             )
             ->addFilter(
