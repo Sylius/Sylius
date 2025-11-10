@@ -24,7 +24,7 @@ use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 final class CurrencyGrid extends AbstractGrid
 {
     public function __construct(
-        private string $resourceClass,
+        private readonly string $resourceClass,
     ) {
     }
 
