@@ -41,6 +41,8 @@ final class SyliusAdminExtensionTest extends AbstractExtensionTestCase
 
     protected function getContainerExtensions(): array
     {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusAdminBundle' => ['path' => __DIR__ . '../..']]);
+
         return [new SyliusAdminExtension()];
     }
 }
