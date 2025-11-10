@@ -15,10 +15,11 @@ namespace Sylius\Bundle\AdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-final class SyliusAdminExtension extends Extension
+final class SyliusAdminExtension extends Extension implements PrependExtensionInterface
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -40,5 +41,20 @@ final class SyliusAdminExtension extends Extension
         }
 
         $loader->load('services.php');
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $this->prependResourceMapping($container);
+    }
+
+    private function prependResourceMapping(ContainerBuilder $container): void
+    {
+        /** @var array<string, array<string, string>> $metadata */
+        $metadata = $container->getParameter('kernel.bundles_metadata');
+
+        $path = $metadata['SyliusAdminBundle']['path'] . '/Resources/config/app/sylius/resources';
+
+        $container->prependExtensionConfig('sylius_resource', ['mapping' => ['imports' => [$path]]]);
     }
 }
