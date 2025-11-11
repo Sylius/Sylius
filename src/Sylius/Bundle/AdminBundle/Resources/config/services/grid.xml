@@ -41,5 +41,11 @@
             <argument>%sylius.model.currency.class%</argument>
             <tag name="sylius.grid" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\CustomerGrid">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.model.customer_group.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
     </services>
 </container>
