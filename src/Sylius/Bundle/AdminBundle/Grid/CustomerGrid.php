@@ -104,15 +104,15 @@ final class CustomerGrid extends AbstractGrid
                 Filter::create('group', 'ux_autocomplete')
                 ->setLabel('sylius.ui.customer_groups')
                 ->setFormOptions([
-                    'multiple' =>true,
+                    'multiple' => true,
                     'extra_options' => [
                         'class' => $this->customerGroupClass,
                         'choice_label' => 'name',
                     ],
                 ])
                 ->setOptions([
-                    'fields' => ['group.id']
-                ])
+                    'fields' => ['group.id'],
+                ]),
             )
             ->addActionGroup(
                 MainActionGroup::create(
@@ -128,10 +128,8 @@ final class CustomerGrid extends AbstractGrid
                         'link' => [
                             'route' => 'sylius_admin_customer_order_index',
                             'parameters' => ['id' => 'resource.id'],
-                        ]
-                    ])
-            ,
-
+                        ],
+                    ]),
                     ShowAction::create(),
                     UpdateAction::create(),
                 ),
