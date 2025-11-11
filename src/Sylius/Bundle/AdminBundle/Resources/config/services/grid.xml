@@ -47,5 +47,11 @@
             <argument>%sylius.model.customer_group.class%</argument>
             <tag name="sylius.grid" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\PaymentMethodGrid">
+            <argument>%sylius.model.payment_method.class%</argument>
+            <argument>%locale%</argument>
+            <tag name="sylius.grid" />
+        </service>
     </services>
 </container>
