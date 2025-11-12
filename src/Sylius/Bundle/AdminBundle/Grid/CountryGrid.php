@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Grid;
 
+use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
@@ -67,7 +67,7 @@ final class CountryGrid extends AbstractGrid
             )
             ->addActionGroup(
                 MainActionGroup::create(
-                    Action::create('create', 'create'),
+                    CreateAction::create(),
                 ),
             )
             ->addActionGroup(
