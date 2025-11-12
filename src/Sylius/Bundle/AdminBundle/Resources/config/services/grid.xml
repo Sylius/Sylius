@@ -70,5 +70,15 @@
             <argument>%sylius.model.country.class%</argument>
             <tag name="sylius.grid" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\PromotionCouponGrid">
+            <argument>%sylius.model.promotion_coupon.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\PromotionGrid">
+            <argument>%sylius.model.promotion.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
     </services>
 </container>
