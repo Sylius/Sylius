@@ -110,5 +110,11 @@
             <argument>%sylius.model.channel.class%</argument>
             <tag name="sylius.grid" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductOptionGrid">
+            <argument>%sylius.model.product_option.class%</argument>
+            <argument>%locale%</argument>
+            <tag name="sylius.grid" />
+        </service>
     </services>
 </container>
