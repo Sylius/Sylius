@@ -17,7 +17,7 @@ use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
-use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
+use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 
@@ -54,7 +54,7 @@ final class CurrencyGrid extends AbstractGrid
                     ->setLabel('sylius.ui.name'),
             )
             ->addFilter(
-                Filter::create('code', 'string')
+                StringFilter::create('code')
                     ->setLabel('sylius.ui.code'),
             )
             ->addActionGroup(
