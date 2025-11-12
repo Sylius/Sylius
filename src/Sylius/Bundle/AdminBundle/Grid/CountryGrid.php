@@ -22,12 +22,11 @@ use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
-use Sylius\Bundle\GridBundle\Grid\ResourceAwareGridInterface;
 
-final class CountryGrid extends AbstractGrid implements ResourceAwareGridInterface
+final class CountryGrid extends AbstractGrid
 {
     public function __construct(
-        private string $resourceClass,
+        private readonly string $resourceClass,
     ) {
     }
 
@@ -44,25 +43,19 @@ final class CountryGrid extends AbstractGrid implements ResourceAwareGridInterfa
             ->addOrderBy('code', 'asc')
             ->addField(
                 StringField::create('code')
-                    ->setLabel('Halloooo')
+                    ->setLabel('sylius.ui.code')
                     ->setSortable(true)
             )
             ->addField(
-                TwigField::create('name', '@SyliusAdmin/Country/Grid/Field/name.html.twig')
+                TwigField::create('name', '@SyliusAdmin/country/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.')
                     ->setSortable(true, 'code')
-                    ->setOptions([
-                        'template' => '@SyliusAdmin/Country/Grid/Field/name.html.twig',
-                    ])
             )
             ->addField(
-                TwigField::create('enabled', '@SyliusUi/Grid/Field/enabled.html.twig')
+                TwigField::create('enabled', '@SyliusUi/grid/feld/enabled.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
-                    ->setOptions([
-                        'template' => '@SyliusUi/Grid/Field/enabled.html.twig',
-                    ])
             )
             ->addFilter(
                 Filter::create('code', 'string')
@@ -82,10 +75,5 @@ final class CountryGrid extends AbstractGrid implements ResourceAwareGridInterfa
                     UpdateAction::create(),
                 ),
             );
-    }
-
-    public function getResourceClass(): string
-    {
-        return $this->resourceClass;
     }
 }
