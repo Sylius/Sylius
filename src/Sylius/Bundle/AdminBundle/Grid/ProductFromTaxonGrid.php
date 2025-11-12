@@ -38,7 +38,7 @@ final class ProductFromTaxonGrid extends AbstractGrid
             ->extends('sylius_admin_product')
             ->addOrderBy('position', 'asc')
             ->addField(
-                TwigField::create('position', '@SyliusAdmin/Product/Grid/Field/position.html.twig')
+                TwigField::create('position', '@SyliusAdmin/product/grid/field/position.html.twig')
                     ->setLabel('sylius.ui.position')
                     ->setPath('.')
                     ->setSortable(true, 'productTaxon.position'),

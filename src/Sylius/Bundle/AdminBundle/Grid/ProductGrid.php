@@ -34,7 +34,6 @@ final class ProductGrid extends AbstractGrid
         private readonly string $productClass,
         private readonly string $channelResourceClass,
         private readonly string $taxonClass,
-        private readonly string $locale,
     ) {
     }
 

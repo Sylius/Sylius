@@ -57,7 +57,6 @@
             <argument>%sylius.model.product.class%</argument>
             <argument>%sylius.model.channel.class%</argument>
             <argument>%sylius.model.taxon.class%</argument>
-            <argument>%locale%</argument>
 
             <tag name="sylius.grid" />
         </service>
