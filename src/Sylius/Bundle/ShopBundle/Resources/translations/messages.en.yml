@@ -60,3 +60,11 @@ sylius:
                 order_history: 'Order history'
                 personal_information: 'Personal information'
     top_bar: 'Sign up to our newsletter and grab -20% off'
+    ui:
+        estimated_delivery_time: Delivery
+    shop:
+        delivery_time:
+            range: '%min%-%max% days'
+            exact: '%count% days'
+            min_plus: '%min%+ days'
+            max_until: 'up to %max% days'

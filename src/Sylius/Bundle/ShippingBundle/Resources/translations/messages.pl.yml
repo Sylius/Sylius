@@ -29,6 +29,8 @@ sylius:
             description: Opis
             name: Nazwa
         shipping_method:
+            min_delivery_time_days: Minimalny czas dostawy (dni)
+            max_delivery_time_days: Maksymalny czas dostawy (dni)
             add_rule: Dodaj regułę
             calculator: Kalkulator
             category: Kategoria

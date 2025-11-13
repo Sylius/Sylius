@@ -35,3 +35,8 @@ sylius:
     shipment:
         shipping_method:
             not_blank: 'Please select shipping method.'
+    
+    form:
+        shipping_method:
+            validation:
+                max_delivery_time_days_greater_or_equal_min: 'Maximum delivery time must be greater than or equal to the minimum.'

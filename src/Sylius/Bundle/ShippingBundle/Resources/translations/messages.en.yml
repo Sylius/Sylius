@@ -29,6 +29,8 @@ sylius:
             description: Description
             name: Name
         shipping_method:
+            min_delivery_time_days: Minimum delivery time (days)
+            max_delivery_time_days: Maximum delivery time (days)
             add_rule: Add rule
             calculator: Calculator
             category: Category

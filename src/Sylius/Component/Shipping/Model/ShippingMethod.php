@@ -53,6 +53,12 @@ class ShippingMethod implements ShippingMethodInterface, \Stringable
     /** @var Collection<array-key, ShippingMethodRuleInterface> */
     protected $rules;
 
+    /** @var int|null */
+    protected $minDeliveryTimeDays;
+
+    /** @var int|null */
+    protected $maxDeliveryTimeDays;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -192,5 +198,25 @@ class ShippingMethod implements ShippingMethodInterface, \Stringable
     protected function createTranslation(): ShippingMethodTranslationInterface
     {
         return new ShippingMethodTranslation();
+    }
+
+    public function getMinDeliveryTimeDays(): ?int
+    {
+        return $this->minDeliveryTimeDays ?? null;
+    }
+
+    public function setMinDeliveryTimeDays(?int $days): void
+    {
+        $this->minDeliveryTimeDays = $days;
+    }
+
+    public function getMaxDeliveryTimeDays(): ?int
+    {
+        return $this->maxDeliveryTimeDays ?? null;
+    }
+
+    public function setMaxDeliveryTimeDays(?int $days): void
+    {
+        $this->maxDeliveryTimeDays = $days;
     }
 }
