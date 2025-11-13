@@ -53,5 +53,28 @@
             <argument>%locale%</argument>
             <tag name="sylius.grid" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductFromTaxonGrid">
+            <argument>%sylius.model.taxon.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductGrid">
+            <argument>%sylius.model.product.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <argument>%sylius.model.taxon.class%</argument>
+
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductAttributeGrid">
+            <argument>%sylius.model.product_attribute.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\CountryGrid">
+            <argument>%sylius.model.country.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
     </services>
 </container>

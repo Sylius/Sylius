@@ -14,14 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
+use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
+use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
-use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
-use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
+use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 
-final class CurrencyGrid extends AbstractGrid
+final class CountryGrid extends AbstractGrid
 {
     public function __construct(
         private readonly string $resourceClass,
@@ -30,7 +31,7 @@ final class CurrencyGrid extends AbstractGrid
 
     public static function getName(): string
     {
-        return 'sylius_admin_currency';
+        return 'sylius_admin_country';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
@@ -39,9 +40,22 @@ final class CurrencyGrid extends AbstractGrid
             ->setDriverOption('class', $this->resourceClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
+
+            // -- Field
+            ->addField(
+                TwigField::create('name', '@SyliusAdmin/country/grid/field/name.html.twig')
+                    ->setLabel('sylius.ui.name')
+                    ->setPath('.')
+                    ->setSortable(true, 'code'),
+            )
             ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
+                    ->setSortable(true),
+            )
+            ->addField(
+                TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
+                    ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
                     ->withOptions([
                         'vars' => [
@@ -49,19 +63,27 @@ final class CurrencyGrid extends AbstractGrid
                         ],
                     ]),
             )
-            ->addField(
-                StringField::create('name')
-                    ->setLabel('sylius.ui.name'),
-            )
+
+            // -- Filter
             ->addFilter(
-                StringFilter::create('code')
+                Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
             )
+            ->addFilter(
+                Filter::create('enabled', 'boolean')
+                    ->setLabel('sylius.ui.enabled'),
+            )
+
+            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     CreateAction::create(),
                 ),
             )
-        ;
+            ->addActionGroup(
+                ItemActionGroup::create(
+                    UpdateAction::create(),
+                ),
+            );
     }
 }

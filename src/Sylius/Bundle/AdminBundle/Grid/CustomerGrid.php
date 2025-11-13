@@ -22,6 +22,7 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
+use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 
@@ -90,29 +91,22 @@ final class CustomerGrid extends AbstractGrid
                     ]),
             )
             ->addFilter(
-                Filter::create('search', 'string')
-                    ->setLabel('sylius.ui.search')
-                    ->setOptions([
-                        'fields' => [
-                            'email',
-                            'firstName',
-                            'lastName',
-                        ],
-                    ]),
+                StringFilter::create('search', ['email', 'firstName', 'lastName'])
+                    ->setLabel('sylius.ui.search'),
             )
             ->addFilter(
                 Filter::create('group', 'ux_autocomplete')
                 ->setLabel('sylius.ui.customer_groups')
                 ->setFormOptions([
-                    'multiple' =>true,
+                    'multiple' => true,
                     'extra_options' => [
                         'class' => $this->customerGroupClass,
                         'choice_label' => 'name',
                     ],
                 ])
                 ->setOptions([
-                    'fields' => ['group.id']
-                ])
+                    'fields' => ['group.id'],
+                ]),
             )
             ->addActionGroup(
                 MainActionGroup::create(
@@ -128,10 +122,8 @@ final class CustomerGrid extends AbstractGrid
                         'link' => [
                             'route' => 'sylius_admin_customer_order_index',
                             'parameters' => ['id' => 'resource.id'],
-                        ]
-                    ])
-            ,
-
+                        ],
+                    ]),
                     ShowAction::create(),
                     UpdateAction::create(),
                 ),
