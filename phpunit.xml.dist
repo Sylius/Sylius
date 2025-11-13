@@ -26,6 +26,8 @@
         <!-- ###+ symfony/framework-bundle ### -->
         <env name="APP_DEBUG" value="0"/>
         <env name="APP_ENV" value="test"/>
+        <!-- See: https://github.com/symfony/framework-bundle/commit/0681ef3b829f9da165b6bcfe2bc0dd626a86c18d -->
+        <env name="APP_RUNTIME_MODE" value="web=1"/>
         <env name="SHELL_VERBOSITY" value="-1" />
         <!-- ###- symfony/framework-bundle ### -->
 
