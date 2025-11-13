@@ -28,8 +28,8 @@ use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 final class PaymentMethodGrid extends AbstractGrid
 {
     public function __construct(
-        private string $paymentMethodClass,
-        private string $locale,
+        private readonly string $paymentMethodClass,
+        private readonly string $locale,
     ) {
     }
 
