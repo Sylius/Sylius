@@ -85,7 +85,7 @@ final class PaymentMethodGrid extends AbstractGrid
                         ],
                     ]),
             )
-            // -- Filter
+            // -- Filters
             ->addFilter(
                 StringFilter::create('search', ['code', 'translation.name'])
                     ->setLabel('sylius.ui.search')
