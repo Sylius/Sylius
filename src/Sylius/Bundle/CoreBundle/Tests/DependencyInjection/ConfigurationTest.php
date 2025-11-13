@@ -22,8 +22,7 @@ final class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /** @test */
-    public function it_configures_batch_size_to_100_by_default(): void
+    public function test_it_configures_batch_size_to_100_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -32,8 +31,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_for_assigning_integer_as_batch_size(): void
+    public function test_it_allows_for_assigning_integer_as_batch_size(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['catalog_promotions' => ['batch_size' => 200]]],
@@ -42,8 +40,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_enables_order_by_identifier_by_default(): void
+    public function test_it_enables_order_by_identifier_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -52,8 +49,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_to_enable_order_by_identifier(): void
+    public function test_it_allows_to_enable_order_by_identifier(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['order_by_identifier' => true]],
@@ -62,8 +58,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_to_disable_order_by_identifier(): void
+    public function test_it_allows_to_disable_order_by_identifier(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['order_by_identifier' => false]],
@@ -72,7 +67,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    public function it_allows_to_configure_orders_statistics_intervals_map(): void
+    public function test_it_allows_to_configure_orders_statistics_intervals_map(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -109,8 +104,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_throws_an_exception_if_orders_statistics_intervals_map_interval_is_empty(): void
+    public function test_it_throws_an_exception_if_orders_statistics_intervals_map_interval_is_empty(): void
     {
         $this->assertConfigurationIsInvalid(
             [['orders_statistics' => ['intervals_map' => ['day' => ['interval' => '', 'period_format' => 'Y-m-d']]]]],
@@ -118,8 +112,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_throws_an_exception_if_orders_statistics_intervals_map_interval_is_invalid(): void
+    public function test_it_throws_an_exception_if_orders_statistics_intervals_map_interval_is_invalid(): void
     {
         $this->assertConfigurationIsInvalid(
             [['orders_statistics' => ['intervals_map' => ['day' => ['interval' => 'invalid', 'period_format' => 'Y-m-d']]]]],
@@ -127,8 +120,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_throws_an_exception_if_orders_statistics_intervals_map_period_format_is_empty(): void
+    public function test_it_throws_an_exception_if_orders_statistics_intervals_map_period_format_is_empty(): void
     {
         $this->assertConfigurationIsInvalid(
             [['orders_statistics' => ['intervals_map' => ['day' => ['interval' => 'P1D', 'period_format' => '']]]]],
@@ -136,8 +128,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_to_configure_a_default_state_machine_adapter(): void
+    public function test_it_allows_to_configure_a_default_state_machine_adapter(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -157,8 +148,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_to_configure_the_state_machines_adapters_mapping(): void
+    public function test_it_allows_to_configure_the_state_machines_adapters_mapping(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -184,8 +174,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_has_a_set_default_order_token_length(): void
+    public function test_it_has_a_set_default_order_token_length(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -194,8 +183,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_changing_the_order_token_length(): void
+    public function test_it_allows_changing_the_order_token_length(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['order_token_length' => 128]],
@@ -204,8 +192,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_throws_exception_when_order_token_length_is_invalid(): void
+    public function test_it_throws_exception_when_order_token_length_is_invalid(): void
     {
         $this->assertConfigurationIsInvalid([['order_token_length' => 'string']]);
         $this->assertConfigurationIsInvalid(
@@ -220,16 +207,14 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_throws_an_exception_if_value_other_then_integer_is_declared_as_batch_size(): void
+    public function test_it_throws_an_exception_if_value_other_then_integer_is_declared_as_batch_size(): void
     {
         $this->assertConfigurationIsInvalid([['catalog_promotions' => ['batch_size' => 'rep']]]);
 
         $this->assertConfigurationIsInvalid([['catalog_promotions' => ['batch_size' => 10.1]]]);
     }
 
-    /** @test */
-    public function it_throws_an_exception_if_value_of_batch_size_is_lower_then_1(): void
+    public function test_it_throws_an_exception_if_value_of_batch_size_is_lower_then_1(): void
     {
         $this->assertConfigurationIsInvalid(
             [['catalog_promotions' => ['batch_size' => -1]]],
@@ -242,8 +227,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_does_not_autoconfigure_with_attributes_by_default(): void
+    public function test_it_does_not_autoconfigure_with_attributes_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -252,13 +236,53 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_to_enable_autoconfiguring_with_attributes(): void
+    public function test_it_allows_to_enable_autoconfiguring_with_attributes(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['autoconfigure_with_attributes' => true]],
             ['autoconfigure_with_attributes' => true],
             'autoconfigure_with_attributes',
+        );
+    }
+
+    public function test_it_sets_default_telemetry_configuration(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            [
+                'telemetry' => [
+                    'enabled' => true,
+                    'salt' => null,
+                    'business' => true,
+                    'technical' => true,
+                    'plugins' => true,
+                    'url' => 'https://prism.sylius.com/telemetry',
+                ],
+            ],
+            'telemetry',
+        );
+    }
+
+    public function test_it_allows_overriding_telemetry_configuration(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[
+                'telemetry' => [
+                    'enabled' => false,
+                    'salt' => 'custom-salt',
+                ],
+            ]],
+            [
+                'telemetry' => [
+                    'enabled' => false,
+                    'salt' => 'custom-salt',
+                    'business' => true,
+                    'technical' => true,
+                    'plugins' => true,
+                    'url' => 'https://prism.sylius.com/telemetry',
+                ],
+            ],
+            'telemetry',
         );
     }
 
