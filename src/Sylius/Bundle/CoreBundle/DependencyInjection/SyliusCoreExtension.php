@@ -59,6 +59,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $loader->load('services.xml');
 
+        $this->configureTelemetry($config['telemetry'], $container, $loader);
+
         $container->setParameter('sylius_core.taxation.shipping_address_based_taxation', $config['shipping_address_based_taxation']);
         $container->setParameter('sylius_core.order_by_identifier', $config['order_by_identifier']);
         $container->setParameter('sylius_core.order_token_length', $config['order_token_length']);
@@ -185,5 +187,48 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             'sylius.order_processor',
             ['priority' => $firstServicePriority],
         );
+    }
+
+    /**
+     * @param array{enabled: bool, business: bool, technical: bool, plugins: bool, salt: string|null, url: string} $telemetryConfig
+     */
+    private function configureTelemetry(array $telemetryConfig, ContainerBuilder $container, XmlFileLoader $loader): void
+    {
+        $telemetrySalt = $telemetryConfig['salt'] ?? (string) $container->getParameter('kernel.secret');
+
+        $container->setParameter('sylius_core.telemetry.enabled', $telemetryConfig['enabled']);
+        $container->setParameter('sylius_core.telemetry.salt', $telemetrySalt);
+        $container->setParameter('sylius_core.telemetry.url', $telemetryConfig['url']);
+
+        $businessEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['business'], 'SYLIUS_TELEMETRY_BUSINESS');
+        $technicalEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['technical'], 'SYLIUS_TELEMETRY_TECHNICAL');
+        $pluginsEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['plugins'], 'SYLIUS_TELEMETRY_PLUGINS');
+
+        $container->setParameter('sylius_core.telemetry.business', $businessEnabled);
+        $container->setParameter('sylius_core.telemetry.technical', $technicalEnabled);
+        $container->setParameter('sylius_core.telemetry.plugins', $pluginsEnabled);
+
+        if (!$this->isTelemetryCategoryEnabled($telemetryConfig['enabled'], 'SYLIUS_TELEMETRY_ENABLED')) {
+            return;
+        }
+
+        /** @var string $env */
+        $env = $container->getParameter('kernel.environment');
+        if (str_starts_with($env, 'dev') || str_starts_with($env, 'test')) {
+            return;
+        }
+
+        $loader->load('services/telemetry/telemetry.xml');
+    }
+
+    private function isTelemetryCategoryEnabled(bool $configValue, string $envVarName): bool
+    {
+        $envValue = $_ENV[$envVarName] ?? $_SERVER[$envVarName] ?? getenv($envVarName);
+
+        if ($envValue === false) {
+            return $configValue;
+        }
+
+        return !in_array($envValue, ['0', 'false'], true);
     }
 }
