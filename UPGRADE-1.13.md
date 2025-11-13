@@ -1,3 +1,55 @@
+# UPGRADING FROM `v1.13.11` TO `v1.13.12`
+
+## Telemetry
+
+Sylius 1.13.12 introduces anonymous telemetry to help us understand how Sylius is used and improve the platform.
+
+**What data is collected:**
+- Anonymous installation ID (hashed, non-reversible)
+- Sylius and PHP versions, default locale
+- Aggregated statistics as segments (broad ranges, not exact values):
+    - Customers/products/variants count (e.g., "1K-10K", "100K-1M")
+    - GMV and AOV ranges per month (e.g., "100K-500K", "50-100")
+
+**No sensitive data is ever collected** - no customer information, no order details, no personal data.
+
+**Configuration:**
+
+Telemetry is enabled by default and uses a default salt for hashing the installation ID.
+
+To disable telemetry, set the following environment variable in your `.env` file:
+
+```dotenv
+SYLIUS_TELEMETRY_ENABLED=0
+```
+
+To change the salt, set the `SYLIUS_TELEMETRY_SALT` environment variable:
+
+```dotenv
+SYLIUS_TELEMETRY_SALT=your-custom-salt
+```
+
+**Database migration (optional):**
+
+This release includes an optional database migration that adds an index to improve telemetry query performance.
+The telemetry system works without this index, but adding it will make data collection faster, especially for stores with large order volumes.
+
+To run the migration:
+
+```bash
+php bin/console doctrine:migrations:migrate
+```
+
+If you want to skip this migration:
+
+```bash
+php bin/console doctrine:migrations:migrate --exclude-migrations="Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120000"
+# For PostgreSQL:
+php bin/console doctrine:migrations:migrate --exclude-migrations="Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120001"
+```
+
+For more details, see the [Telemetry documentation](https://docs.sylius.com/the-book/configuration/telemetry).
+
 # UPGRADING FROM `v1.13.6` TO `v1.13.7`
 
 1. The `sylius.product_review.average_rating_updater` has changed its `doctrine.event_listener` event 

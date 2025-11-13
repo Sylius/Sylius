@@ -32,6 +32,8 @@ imports:
 parameters:
     sylius_core.public_dir: "%kernel.project_dir%/web"
     sylius_core.images_dir: "%sylius_core.public_dir%/media/image"
+    sylius_core.default_telemetry_salt: 'd7bf76db51983848f9653988cde044ead342754ef803f65bd234aa0a89d30d34'
+    env(SYLIUS_TELEMETRY_SALT): '%sylius_core.default_telemetry_salt%'
     locale: en_US
 
 sylius_core:
@@ -46,6 +48,8 @@ sylius_core:
             year:
                 interval: P1Y
                 period_format: Y
+    telemetry:
+        salt: '%env(SYLIUS_TELEMETRY_SALT)%'
 
 doctrine:
     orm:
@@ -118,7 +122,7 @@ payum:
 
     gateways:
         offline:
-            factory: offline
+            factory: offline    
 
 stof_doctrine_extensions:
     default_locale: "%locale%"
