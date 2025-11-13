@@ -48,6 +48,12 @@
             <tag name="sylius.grid" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductAssociationTypeGrid">
+            <argument>%sylius.model.product_association_type.class%</argument>
+            <argument>%locale%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\ProductFromTaxonGrid">
             <argument>%sylius.model.taxon.class%</argument>
             <tag name="sylius.grid" />
