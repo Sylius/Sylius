@@ -13,17 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Grid;
 
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
-use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
-use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
-use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
-use Sylius\Bundle\GridBundle\Builder\Field\StringField;
+use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
+use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
+use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
+use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
+use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
+use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
+use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 
 final class ZoneGrid extends AbstractGrid
 {
@@ -46,25 +45,25 @@ final class ZoneGrid extends AbstractGrid
             // -- Fields
             ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
-                    ->setLabel('sylius.ui.code')
+                    ->setLabel('sylius.ui.code'),
             )
             ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
-                    ->setLabel('sylius.ui.name')
+                    ->setLabel('sylius.ui.name'),
             )
             ->addField(
                 TwigField::create('type', '@SyliusAdmin/zone/grid/field/type.html.twig')
-                    ->setLabel('sylius.ui.type')
+                    ->setLabel('sylius.ui.type'),
             )
 
             // --- Filters
             ->addFilter(
-                Filter::create('name', 'string')
-                    ->setLabel('sylius.ui.name')
+                StringFilter::create('name')
+                    ->setLabel('sylius.ui.name'),
             )
             ->addFilter(
-                Filter::create('code', 'string')
-                    ->setLabel('sylius.ui.code')
+                StringFilter::create('code')
+                ->setLabel('sylius.ui.code'),
             )
 
             // -- Actions
