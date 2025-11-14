@@ -94,5 +94,10 @@
             <argument>%sylius.model.country.class%</argument>
             <tag name="sylius.grid" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ZoneGrid">
+            <argument>%sylius.model.zone.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
     </services>
 </container>
