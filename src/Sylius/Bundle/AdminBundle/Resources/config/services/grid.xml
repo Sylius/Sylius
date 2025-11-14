@@ -48,6 +48,11 @@
             <tag name="sylius.grid" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grid\LocaleGrid">
+            <argument>%sylius.model.locale.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\InventoryGrid">
             <argument>%sylius.model.product_variant.class%</argument>
             <argument>%sylius.model.product.class%</argument>
