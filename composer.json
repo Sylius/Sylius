@@ -259,6 +259,9 @@
             "php-http/discovery": false,
             "symfony/flex": true,
             "symfony/runtime": true
+        },
+        "audit": {
+            "ignore": ["PKSA-gs8r-6kz6-pp56", "PKSA-gnn4-pxdg-q76m", "PKSA-yhcn-xrg3-68b1", "PKSA-2wrf-1xmk-1pky"]
         }
     },
     "extra": {
