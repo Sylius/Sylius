@@ -25,7 +25,7 @@ use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 final class LocaleGrid extends AbstractGrid
 {
     public function __construct(
-        private string $localeClass,
+        private readonly string $localeClass,
     ) {
     }
 
