@@ -29,8 +29,6 @@ sylius:
             description: Opis
             name: Nazwa
         shipping_method:
-            min_delivery_time_days: Minimalny czas dostawy (dni)
-            max_delivery_time_days: Maksymalny czas dostawy (dni)
             add_rule: Dodaj regułę
             calculator: Kalkulator
             category: Kategoria
@@ -39,9 +37,11 @@ sylius:
             configuration: Konfiguracja
             description: Opis
             enabled: Dostępny
+            max_delivery_time_days: Maksymalny czas dostawy (dni)
             match_all_category_requirement: Wszystkie przedmioty muszą pochodzić z tej samej kategorii wysyłki
             match_any_category_requirement: Przynajmniej 1 przedmiot musi pochodzić z kategorii wysyłki
             match_none_category_requirement: Żaden przedmiot nie musi pochodzić z kategorii wysyłki
+            min_delivery_time_days: Minimalny czas dostawy (dni)
             name: Nazwa
             position: Pozycja
             rules: Reguły

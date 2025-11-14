@@ -195,14 +195,9 @@ class ShippingMethod implements ShippingMethodInterface, \Stringable
         return $translation;
     }
 
-    protected function createTranslation(): ShippingMethodTranslationInterface
-    {
-        return new ShippingMethodTranslation();
-    }
-
     public function getMinDeliveryTimeDays(): ?int
     {
-        return $this->minDeliveryTimeDays ?? null;
+        return $this->minDeliveryTimeDays;
     }
 
     public function setMinDeliveryTimeDays(?int $days): void
@@ -212,11 +207,16 @@ class ShippingMethod implements ShippingMethodInterface, \Stringable
 
     public function getMaxDeliveryTimeDays(): ?int
     {
-        return $this->maxDeliveryTimeDays ?? null;
+        return $this->maxDeliveryTimeDays;
     }
 
     public function setMaxDeliveryTimeDays(?int $days): void
     {
         $this->maxDeliveryTimeDays = $days;
+    }
+
+    protected function createTranslation(): ShippingMethodTranslationInterface
+    {
+        return new ShippingMethodTranslation();
     }
 }

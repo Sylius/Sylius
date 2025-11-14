@@ -10,6 +10,12 @@ sylius:
         variant:
             tracked: 'Tracked'
     ui:
+        estimated_delivery_time: 'Delivery'
+        delivery_time:
+            range: '%min%-%max% days'
+            exact: '%count% days'
+            min_plus: '%min%+ days'
+            max_until: 'up to %max% days'
         abandoned: 'Abandoned'
         about: 'About'
         accept: 'Accept'

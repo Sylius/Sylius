@@ -13,6 +13,12 @@ sylius:
         variant:
             tracked: 'Śledzone'
     ui:
+        estimated_delivery_time: 'Dostawa'
+        delivery_time:
+            range: '%min%-%max% dni'
+            exact: '%count% dni'
+            min_plus: 'od %min% dni'
+            max_until: 'do %max% dni'
         abandoned: 'Porzucony'
         about: 'O stronie'
         accept: 'Akceptuję'

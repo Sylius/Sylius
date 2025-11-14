@@ -2,16 +2,16 @@
     {% if min is not null or max is not null %}
         {% if min is not null and max is not null %}
             {% if min == max %}
-                {{ 'sylius.shop.delivery_time.exact'|trans({'%count%': min}) }}
+                {{ 'sylius.ui.delivery_time.exact'|trans({'%count%': min}) }}
             {% else %}
                 {% set _min = min < max ? min : max %}
                 {% set _max = max > min ? max : min %}
-                {{ 'sylius.shop.delivery_time.range'|trans({'%min%': _min, '%max%': _max}) }}
+                {{ 'sylius.ui.delivery_time.range'|trans({'%min%': _min, '%max%': _max}) }}
             {% endif %}
         {% elseif min is not null %}
-            {{ 'sylius.shop.delivery_time.min_plus'|trans({'%min%': min}) }}
+            {{ 'sylius.ui.delivery_time.min_plus'|trans({'%min%': min}) }}
         {% else %}
-            {{ 'sylius.shop.delivery_time.max_until'|trans({'%max%': max}) }}
+            {{ 'sylius.ui.delivery_time.max_until'|trans({'%max%': max}) }}
         {% endif %}
     {% endif %}
 {% endmacro %}
