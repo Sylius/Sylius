@@ -15,7 +15,6 @@ use Robo\Exception\TaskException;
 use Robo\Result;
 use Robo\Symfony\ConsoleIO;
 use Robo\Tasks;
-use RuntimeException;
 
 class RoboFile extends Tasks
 {
@@ -47,7 +46,7 @@ class RoboFile extends Tasks
         }
 
         foreach ($result as $packageName => $value) {
-            printf('%s %s%s', $value === self::SUCCESS ? '✅' : '❌', $packageName, PHP_EOL);
+            printf('%s %s%s', $value === self::SUCCESS ? '✅' : '❌', $packageName, \PHP_EOL);
             $failed = $failed || $value === self::FAILED;
         }
 
@@ -65,11 +64,11 @@ class RoboFile extends Tasks
         $composerJsonPath = sprintf('%s/composer.json', $packagePath);
 
         if (false === $symfonyVersion) {
-            throw new RuntimeException('SYMFONY_VERSION environment variable is not set.');
+            throw new \RuntimeException('SYMFONY_VERSION environment variable is not set.');
         }
 
         if (!file_exists($composerJsonPath)) {
-            throw new RuntimeException('composer.json file does not exist.');
+            throw new \RuntimeException('composer.json file does not exist.');
         }
 
         $task = $this->taskExecStack()
