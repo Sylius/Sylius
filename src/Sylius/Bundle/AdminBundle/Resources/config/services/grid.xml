@@ -48,6 +48,11 @@
             <tag name="sylius.grid" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grid\CustomerGroupGrid">
+            <argument>%sylius.model.customer_group.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\LocaleGrid">
             <argument>%sylius.model.locale.class%</argument>
             <tag name="sylius.grid" />
