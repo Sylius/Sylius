@@ -39,17 +39,19 @@ class NodeElement extends BaseNodeElement
             // JS scenarios: trigger click and wait for LiveComponent
 
             // Wait for LiveComponent to start processing (busy/loading indicators appear)
-            // This is more reliable than fixed sleep - we poll until busy appears OR timeout
+            // Short timeout (100ms) - if no LiveComponent involved, don't waste time
             $start = microtime(true);
-            $this->getSession()->wait(1000, "document.querySelector('[busy], [data-live-is-loading]')");
+            $hasLiveComponent = $this->getSession()->wait(100, "document.querySelector('[busy], [data-live-is-loading]')");
             $waitForBusy = round((microtime(true) - $start) * 1000, 2);
 
-            if ($waitForBusy > 50) {
-                error_log(sprintf('[CLICK-WAIT] Waited %.2f ms for LiveComponent to start', $waitForBusy));
+            if ($waitForBusy > 10) {
+                error_log(sprintf('[CLICK-WAIT] Waited %.2f ms for LiveComponent to start (found: %s)', $waitForBusy, $hasLiveComponent ? 'yes' : 'no'));
             }
 
-            // Now wait for all busy/loading indicators to disappear
-            $this->waitForLiveComponentToFinish();
+            // Only wait for finish if LiveComponent was detected
+            if ($hasLiveComponent) {
+                $this->waitForLiveComponentToFinish();
+            }
         }
     }
 
@@ -75,17 +77,19 @@ class NodeElement extends BaseNodeElement
         parent::setValue($value);
 
         if ($this->isJavascript()) {
-            // Wait for LiveComponent to react to value change (max 200ms)
+            // Wait for LiveComponent to react to value change (max 50ms)
             $start = microtime(true);
-            $this->getSession()->wait(200, "document.querySelector('[busy], [data-live-is-loading]')");
+            $hasLiveComponent = $this->getSession()->wait(50, "document.querySelector('[busy], [data-live-is-loading]')");
             $waitForBusy = round((microtime(true) - $start) * 1000, 2);
 
-            if ($waitForBusy > 10) {
-                error_log(sprintf('[SETVALUE-WAIT] Waited %.2f ms for LiveComponent to react', $waitForBusy));
+            if ($waitForBusy > 5) {
+                error_log(sprintf('[SETVALUE-WAIT] Waited %.2f ms for LiveComponent to react (found: %s)', $waitForBusy, $hasLiveComponent ? 'yes' : 'no'));
             }
 
-            // Wait for LiveComponent to finish any loading triggered by value change
-            $this->waitForLiveComponentToFinish();
+            // Only wait for finish if LiveComponent was detected
+            if ($hasLiveComponent) {
+                $this->waitForLiveComponentToFinish();
+            }
         }
     }
 
@@ -94,17 +98,19 @@ class NodeElement extends BaseNodeElement
         parent::selectOption($option, $multiple);
 
         if ($this->isJavascript()) {
-            // Wait for LiveComponent to react to option selection (max 200ms)
+            // Wait for LiveComponent to react to option selection (max 50ms)
             $start = microtime(true);
-            $this->getSession()->wait(200, "document.querySelector('[busy], [data-live-is-loading]')");
+            $hasLiveComponent = $this->getSession()->wait(50, "document.querySelector('[busy], [data-live-is-loading]')");
             $waitForBusy = round((microtime(true) - $start) * 1000, 2);
 
-            if ($waitForBusy > 10) {
-                error_log(sprintf('[SELECTOPTION-WAIT] Waited %.2f ms for LiveComponent to react', $waitForBusy));
+            if ($waitForBusy > 5) {
+                error_log(sprintf('[SELECTOPTION-WAIT] Waited %.2f ms for LiveComponent to react (found: %s)', $waitForBusy, $hasLiveComponent ? 'yes' : 'no'));
             }
 
-            // Wait for LiveComponent to finish any loading triggered by option selection
-            $this->waitForLiveComponentToFinish();
+            // Only wait for finish if LiveComponent was detected
+            if ($hasLiveComponent) {
+                $this->waitForLiveComponentToFinish();
+            }
         }
     }
 
