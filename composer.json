@@ -223,7 +223,6 @@
         "phpunit/phpunit": "^11.5",
         "psr/event-dispatcher": "^1.0",
         "rector/rector": "^2.0",
-        "robertfausk/behat-panther-extension": "^1.1",
         "sylius-labs/coding-standard": "^4.4",
         "sylius-labs/suite-tags-extension": "~0.2",
         "symfony/browser-kit": "^6.4 || ^7.2",
