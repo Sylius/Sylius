@@ -194,11 +194,20 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
 
         error_log(sprintf('[AUTOCOMPLETE-WAIT] Waiting for tomselect on selector: %s', substr($selector, 0, 100)));
 
-        // Wait for element and tomselect to be ready (max 5s for LiveComponent + init)
-        $result = $driver->wait(5000, <<<SCRIPT
+        // First, force Stimulus to re-scan for controllers (handles LiveComponent re-renders)
+        $driver->executeScript('if (window.Stimulus?.app) { window.Stimulus.app.load(); }');
+
+        // Wait for element and tomselect to be ready (reduced to 2s - should be fast now)
+        $result = $driver->wait(2000, <<<SCRIPT
             (function () {
                 let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-                return element && element.tomselect;
+                if (!element) return false;
+
+                // Check if tomselect exists AND Stimulus controller is connected
+                let hasT​omselect = !!element.tomselect;
+                let isConnected = element.hasAttribute('data-symfony--ux-autocomplete--autocomplete-connected');
+
+                return hasT​omselect && isConnected;
             })();
         SCRIPT);
 
