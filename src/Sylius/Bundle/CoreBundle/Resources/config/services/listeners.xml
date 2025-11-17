@@ -25,7 +25,10 @@
 
         <service id="sylius.listener.channel_deletion" class="Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener">
             <argument type="service" id="sylius.checker.channel_deletion" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
+            <tag name="kernel.event_listener" event="sylius.channel.post_delete" method="removeChannelConfigurationFromShippingMethods" />
         </service>
 
         <service id="sylius.listener.images_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImagesUploadListener">
