@@ -168,7 +168,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/checkout/cart/add_item_with_missing_fields',
-            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -297,7 +297,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/checkout/cart/update_item_quantity_with_missing_fields',
-            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
