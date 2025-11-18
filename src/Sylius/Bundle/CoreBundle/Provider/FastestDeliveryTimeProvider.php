@@ -11,9 +11,8 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ShopBundle\Provider;
+namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Bundle\CoreBundle\Provider\DeliveryTimeProviderInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -34,6 +33,7 @@ final class FastestDeliveryTimeProvider implements DeliveryTimeProviderInterface
         if (!$channel instanceof ChannelInterface) {
             return null;
         }
+
         /** @var iterable<ShippingMethodInterface> $methods */
         $methods = $this->shippingMethodRepository->findEnabledForChannel($channel);
 
