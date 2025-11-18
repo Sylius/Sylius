@@ -46,7 +46,7 @@ final class ZoneGrid extends AbstractGrid
             // -- Fields
             ->addField(
                 TwigField::create('priority', '@SyliusAdmin/zone/grid/field/priority.html.twig')
-                    ->setLabel('sylius.ui.name')
+                    ->setLabel('sylius.ui.priority')
                     ->setSortable(true)
                     ->withOptions([
                         'vars' => [

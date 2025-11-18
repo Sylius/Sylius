@@ -40,6 +40,7 @@ final class OverridenGridsTest extends KernelTestCase
         }
         $yamlVersion = $arrayProvider->get($gridName);
 
+        $this->prefillingRepository($yamlVersion);
         $this->prefillingGridFields($yamlVersion);
         $this->prefillingGridActions($yamlVersion);
 
@@ -111,5 +112,19 @@ final class OverridenGridsTest extends KernelTestCase
                 }
             }
         }
+    }
+
+    private function prefillingRepository(Grid $grid): void
+    {
+        $config = $grid->getDriverConfiguration();
+        if (!array_key_exists('repository', $config)) {
+            return;
+        }
+
+        if (!array_key_exists('arguments', $config['repository'])) {
+            $config['repository']['arguments'] = [];
+        }
+
+        $grid->setDriverConfiguration($config);
     }
 }
