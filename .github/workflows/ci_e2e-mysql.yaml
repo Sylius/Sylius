@@ -241,6 +241,17 @@ jobs:
                 with:
                     name: "chromedriver-env-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
 
+            -   name: Debug - List directory structure
+                run: |
+                    echo "=== Current directory ==="
+                    pwd
+                    echo "=== Top level files ==="
+                    ls -la
+                    echo "=== Features directory ==="
+                    ls -la features/ || echo "features/ not found!"
+                    echo "=== Vendor directory ==="
+                    ls -d vendor/ || echo "vendor/ not found!"
+
             -   name: Restore file permissions
                 run: |
                     chmod +x vendor/bin/*
