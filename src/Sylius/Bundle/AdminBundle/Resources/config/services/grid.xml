@@ -108,6 +108,21 @@
         <service id="Sylius\Bundle\AdminBundle\Grid\PaymentGrid">
             <argument>%sylius.model.payment.class%</argument>
             <argument>%sylius.model.channel.class%</argument>
+            <tag name="sylius.grid"/>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\CustomerOrderGrid">
+            <argument>%sylius.model.order.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\OrderGrid">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.model.product.class%</argument>
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument>%sylius.model.shipping_method.class%</argument>
             <tag name="sylius.grid" />
         </service>
     </services>
