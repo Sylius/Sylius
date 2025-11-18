@@ -1,4 +1,7 @@
 ux_icons:
+    iconify:
+        enabled: false
+    icon_dir: '%kernel.project_dir%/src/Sylius/Bundle/UiBundle/Resources/assets/icons'
+    ignore_not_found: false
     default_icon_attributes:
         'class': 'icon'
-    ignore_not_found: true
