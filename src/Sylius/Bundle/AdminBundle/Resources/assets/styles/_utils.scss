@@ -12,3 +12,7 @@
     grid-template-columns: 1fr auto;
     gap: 0.5rem;
 }
+
+.breadcrumb-item {
+    @include text-truncate-ellipsis(min(300px, 30vw));
+}

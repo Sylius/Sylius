@@ -2,17 +2,37 @@
   .dropdown-menu {
     width: max-content;
     min-width: 13rem;
-    max-width: 20rem;
+    max-width: 40rem;
     position: absolute;
 
-    @media (max-width: 991px) {
+    @include media-breakpoint-down(lg) {
       position: static;
       border: none;
+      width: 100%;
+      max-width: 100%;
+      min-width: auto;
+    }
+
+    @include media-breakpoint-between(md, lg) {
+      max-width: 30rem;
     }
 
     .nav-link {
       --bs-nav-link-padding-y: 2px;
       --bs-nav-link-padding-x: 1.5rem;
+
+      @include media-breakpoint-down(lg) {
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        word-break: break-word;
+      }
+
+      @include media-breakpoint-up(lg) {
+        @include text-truncate-ellipsis;
+      }
     }
   }
 }

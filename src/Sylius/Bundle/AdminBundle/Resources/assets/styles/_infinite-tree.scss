@@ -17,6 +17,7 @@
     .infinite-tree-title {
         cursor: default;
         color: $body-color;
+        @include text-truncate-flex-child;
     }
 
     .infinite-tree-item {
@@ -24,6 +25,7 @@
         padding-bottom: 2px;
         border: none;
         border-radius: 5px;
+        @include text-truncate-flex;
 
         &:hover {
             background: #F7F8FB;
@@ -32,6 +34,9 @@
 
         .infinite-tree-node {
             display: flex;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
 
             .infinite-tree-toggler {
                 flex-shrink: 0;
