@@ -233,6 +233,11 @@ jobs:
                 with:
                     name: "chromedriver-env-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
 
+            -   name: Restore file permissions
+                run: |
+                    chmod +x vendor/bin/*
+                    chmod +x bin/console
+
             -   name: Run Behat (Chromedriver) - Admin Product & Promotion
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
@@ -293,6 +298,11 @@ jobs:
                 uses: actions/download-artifact@v4
                 with:
                     name: "chromedriver-env-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
+
+            -   name: Restore file permissions
+                run: |
+                    chmod +x vendor/bin/*
+                    chmod +x bin/console
 
             -   name: Run Behat (Chromedriver) - Admin Others
                 run: |
@@ -372,6 +382,11 @@ jobs:
                 uses: actions/download-artifact@v4
                 with:
                     name: "chromedriver-env-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
+
+            -   name: Restore file permissions
+                run: |
+                    chmod +x vendor/bin/*
+                    chmod +x bin/console
 
             -   name: Run Behat (Chromedriver) - Shop & Hybrid
                 run: |
