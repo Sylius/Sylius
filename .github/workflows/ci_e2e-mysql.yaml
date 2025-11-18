@@ -210,7 +210,15 @@ jobs:
                 with:
                     name: "chromedriver-env-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
                     path: |
-                        .
+                        .env
+                        .env.test
+                        .env.test.local
+                        vendor/
+                        var/
+                        public/build/
+                        public/media/
+                        bin/
+                        config/
                     retention-days: 1
                     overwrite: true
 
@@ -228,6 +236,9 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
+            -   name: "Checkout"
+                uses: actions/checkout@v4
+
             -   name: Download built application
                 uses: actions/download-artifact@v4
                 with:
@@ -294,6 +305,9 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
+            -   name: "Checkout"
+                uses: actions/checkout@v4
+
             -   name: Download built application
                 uses: actions/download-artifact@v4
                 with:
@@ -378,6 +392,9 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
+            -   name: "Checkout"
+                uses: actions/checkout@v4
+
             -   name: Download built application
                 uses: actions/download-artifact@v4
                 with:
