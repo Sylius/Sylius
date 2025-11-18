@@ -27,11 +27,11 @@ final class OrderGrid extends AbstractGrid
 {
     public function __construct(
         private readonly string $resourceClass,
-        private readonly string $channelResourceClass,
+        private readonly string $channelClass,
         private readonly string $customerClass,
         private readonly string $productClass,
         private readonly string $productVariantClass,
-        private readonly string $shippingMethodResourceClass,
+        private readonly string $shippingMethodClass,
     ) {
     }
 
@@ -183,7 +183,7 @@ final class OrderGrid extends AbstractGrid
                     ->setLabel('sylius.ui.channel')
                     ->setFormOptions([
                         'extra_options' => [
-                            'class' => $this->channelResourceClass,
+                            'class' => $this->channelClass,
                             'choice_label' => 'name',
                         ],
                     ]),
@@ -205,7 +205,7 @@ final class OrderGrid extends AbstractGrid
                     ])
                     ->setFormOptions([
                         'extra_options' => [
-                            'class' => $this->shippingMethodResourceClass,
+                            'class' => $this->shippingMethodClass,
                             'translation_fields' => ['name'],
                             'choice_label' => 'name',
                         ],
