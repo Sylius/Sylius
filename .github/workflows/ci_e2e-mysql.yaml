@@ -215,7 +215,7 @@ jobs:
                     overwrite: true
 
     behat-ui-js-chromedriver-admin-part1:
-        needs: build-chromedriver-env
+        needs: [get-matrix, build-chromedriver-env]
         runs-on: ubuntu-latest
         name: "Admin Part 1 (Product+Promotion), PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
         timeout-minutes: 30
@@ -276,7 +276,7 @@ jobs:
                     overwrite: true
 
     behat-ui-js-chromedriver-admin-part2:
-        needs: build-chromedriver-env
+        needs: [get-matrix, build-chromedriver-env]
         runs-on: ubuntu-latest
         name: "Admin Part 2 (Others), PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
         timeout-minutes: 25
@@ -355,7 +355,7 @@ jobs:
                     overwrite: true
 
     behat-ui-js-chromedriver-shop:
-        needs: build-chromedriver-env
+        needs: [get-matrix, build-chromedriver-env]
         runs-on: ubuntu-latest
         name: "Shop & Others, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
         timeout-minutes: 20
