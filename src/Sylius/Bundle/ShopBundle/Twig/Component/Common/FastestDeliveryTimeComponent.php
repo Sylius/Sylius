@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Common;
 
+use Sylius\Bundle\CoreBundle\Provider\DeliveryTimeProviderInterface;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
-use Sylius\Bundle\ShopBundle\Provider\FastestDeliveryTimeProvider;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -33,7 +34,8 @@ final class FastestDeliveryTimeComponent
     private const TRANS_RANGE = 'sylius.ui.delivery_time.range';
 
     public function __construct(
-        private readonly FastestDeliveryTimeProvider $fastestDeliveryTimeProvider,
+        private readonly DeliveryTimeProviderInterface $deliveryTimeProvider,
+        private readonly ChannelContextInterface $channelContext,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -41,7 +43,8 @@ final class FastestDeliveryTimeComponent
     #[ExposeInTemplate('delivery_time')]
     public function deliveryTime(): ?string
     {
-        $best = $this->fastestDeliveryTimeProvider->findBestRange();
+        $channel = $this->channelContext->getChannel();
+        $best = $this->deliveryTimeProvider->provide($channel);
 
         if ($best === null) {
             return null;

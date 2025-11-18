@@ -13,27 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Provider;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Bundle\CoreBundle\Provider\DeliveryTimeProviderInterface;
+use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
-final class FastestDeliveryTimeProvider
+final class FastestDeliveryTimeProvider implements DeliveryTimeProviderInterface
 {
     public function __construct(
         private readonly ShippingMethodRepositoryInterface $shippingMethodRepository,
-        private readonly ChannelContextInterface $channelContext,
     ) {
     }
 
     /**
      * @return array{minimumDays:int, maximumDays:int}|null
      */
-    public function findBestRange(): ?array
+    public function provide(BaseChannelInterface $channel, array $context = []): ?array
     {
-        /** @var ChannelInterface $channel */
-        $channel = $this->channelContext->getChannel();
-
+        if (!$channel instanceof ChannelInterface) {
+            return null;
+        }
         /** @var iterable<ShippingMethodInterface> $methods */
         $methods = $this->shippingMethodRepository->findEnabledForChannel($channel);
 

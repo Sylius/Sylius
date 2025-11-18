@@ -15,10 +15,10 @@ sylius:
     ui:
         estimated_delivery_time: 'Dostawa'
         delivery_time:
-            range: '%min%-%max% dni'
             exact: '%count% dni'
-            min_plus: 'od %min% dni'
             max_until: 'do %max% dni'
+            min_plus: 'od %min% dni'
+            range: '%min%-%max% dni'
         abandoned: 'Porzucony'
         about: 'O stronie'
         accept: 'Akceptuję'

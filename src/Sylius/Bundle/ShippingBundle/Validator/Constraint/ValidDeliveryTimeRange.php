@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ValidDeliveryTimeRange extends Constraint
 {
-    public string $message = 'sylius.form.shipping_method.validation.max_delivery_time_days_greater_or_equal_min';
+    public string $message = 'sylius.form.shipping_method.max_delivery_time_days.greater_or_equal_min';
 
     public function validatedBy(): string
     {
