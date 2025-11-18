@@ -204,10 +204,10 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
                 if (!element) return false;
 
                 // Check if tomselect exists AND Stimulus controller is connected
-                let hasT​omselect = !!element.tomselect;
+                let hasTomselect = !!element.tomselect;
                 let isConnected = element.hasAttribute('data-symfony--ux-autocomplete--autocomplete-connected');
 
-                return hasT​omselect && isConnected;
+                return hasTomselect && isConnected;
             })();
         SCRIPT);
 
