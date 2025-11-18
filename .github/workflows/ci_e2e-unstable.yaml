@@ -88,10 +88,10 @@ jobs:
                     if-no-files-found: ignore
                     overwrite: true
 
-    behat-ui-js-chromedriver-unstable:
+    build-chromedriver-env-unstable:
         runs-on: ubuntu-latest
-        name: "JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
-        timeout-minutes: 45
+        name: "Build Chromedriver environment (Unstable), PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix:
@@ -145,24 +145,225 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "24.x"
 
-            -   name: Run Behat (Chromedriver)
-                run: |
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun
+            -   name: Upload built application
+                uses: actions/upload-artifact@v4
+                with:
+                    name: "chromedriver-env-unstable-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
+                    path: |
+                        .
+                    retention-days: 1
+                    overwrite: true
 
-            -   name: Run Behat (Chromedriver) for randomly failing scenarios (@failing)
+    behat-ui-js-chromedriver-admin-part1-unstable:
+        needs: build-chromedriver-env-unstable
+        runs-on: ubuntu-latest
+        name: "Admin Part 1 (Product+Promotion) (Unstable), PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        timeout-minutes: 30
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -
+                        php: "8.3"
+                        symfony: "^7.4@beta"
+                        mysql: "8.4"
+
+        env:
+            APP_ENV: ${{ matrix.env || 'test_cached' }}
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -   name: Download built application
+                uses: actions/download-artifact@v4
+                with:
+                    name: "chromedriver-env-unstable-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
+
+            -   name: Run Behat (Chromedriver) - Admin Product & Promotion
                 run: |
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/product features/admin/promotion || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/product features/admin/promotion --rerun || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/product features/admin/promotion --rerun
+
+            -   name: Run Behat (Chromedriver) - Admin Product & Promotion (@failing)
+                run: |
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/product features/admin/promotion || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/product features/admin/promotion --rerun || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/product features/admin/promotion --rerun
                 continue-on-error: true
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (Chromedriver Admin Part 1 Unstable, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}"
+                    path: |
+                        etc/build/
+                        var/log
+                    if-no-files-found: ignore
+                    overwrite: true
+
+    behat-ui-js-chromedriver-admin-part2-unstable:
+        needs: build-chromedriver-env-unstable
+        runs-on: ubuntu-latest
+        name: "Admin Part 2 (Others) (Unstable), PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        timeout-minutes: 25
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -
+                        php: "8.3"
+                        symfony: "^7.4@beta"
+                        mysql: "8.4"
+
+        env:
+            APP_ENV: ${{ matrix.env || 'test_cached' }}
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -   name: Download built application
+                uses: actions/download-artifact@v4
+                with:
+                    name: "chromedriver-env-unstable-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
+
+            -   name: Run Behat (Chromedriver) - Admin Others
+                run: |
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/taxonomy features/admin/addressing features/admin/shipping \
+                        features/admin/order features/admin/channel features/admin/user \
+                        features/admin/currency features/admin/payment features/admin/locale \
+                        features/admin/taxation features/admin/inventory || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/taxonomy features/admin/addressing features/admin/shipping \
+                        features/admin/order features/admin/channel features/admin/user \
+                        features/admin/currency features/admin/payment features/admin/locale \
+                        features/admin/taxation features/admin/inventory --rerun || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/taxonomy features/admin/addressing features/admin/shipping \
+                        features/admin/order features/admin/channel features/admin/user \
+                        features/admin/currency features/admin/payment features/admin/locale \
+                        features/admin/taxation features/admin/inventory --rerun
+
+            -   name: Run Behat (Chromedriver) - Admin Others (@failing)
+                run: |
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/taxonomy features/admin/addressing features/admin/shipping \
+                        features/admin/order features/admin/channel features/admin/user \
+                        features/admin/currency features/admin/payment features/admin/locale \
+                        features/admin/taxation features/admin/inventory || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/taxonomy features/admin/addressing features/admin/shipping \
+                        features/admin/order features/admin/channel features/admin/user \
+                        features/admin/currency features/admin/payment features/admin/locale \
+                        features/admin/taxation features/admin/inventory --rerun || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@ui" \
+                        features/admin/taxonomy features/admin/addressing features/admin/shipping \
+                        features/admin/order features/admin/channel features/admin/user \
+                        features/admin/currency features/admin/payment features/admin/locale \
+                        features/admin/taxation features/admin/inventory --rerun
+                continue-on-error: true
+
+            -   name: Upload logs
+                uses: actions/upload-artifact@v4
+                if: failure()
+                with:
+                    name: "Logs (Chromedriver Admin Part 2 Unstable, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}"
+                    path: |
+                        etc/build/
+                        var/log
+                    if-no-files-found: ignore
+                    overwrite: true
+
+    behat-ui-js-chromedriver-shop-unstable:
+        needs: build-chromedriver-env-unstable
+        runs-on: ubuntu-latest
+        name: "Shop & Others (Unstable), PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        timeout-minutes: 20
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    -
+                        php: "8.3"
+                        symfony: "^7.4@beta"
+                        mysql: "8.4"
+
+        env:
+            APP_ENV: ${{ matrix.env || 'test_cached' }}
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+
+        steps:
+            -   name: Download built application
+                uses: actions/download-artifact@v4
+                with:
+                    name: "chromedriver-env-unstable-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
+
+            -   name: Run Behat (Chromedriver) - Shop & Hybrid
+                run: |
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@hybrid,@ui" \
+                        features/shop features/hybrid || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@hybrid,@ui" \
+                        features/shop features/hybrid --rerun || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        --suite-tags="@hybrid,@ui" \
+                        features/shop features/hybrid --rerun
+
+            -   name: Run Behat (Chromedriver) - Shop & Hybrid (@failing)
+                run: |
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@hybrid,@ui" \
+                        features/shop features/hybrid || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@hybrid,@ui" \
+                        features/shop features/hybrid --rerun || \
+                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        --suite-tags="@hybrid,@ui" \
+                        features/shop features/hybrid --rerun
+                continue-on-error: true
+
+            -   name: Upload logs
+                uses: actions/upload-artifact@v4
+                if: failure()
+                with:
+                    name: "Logs (Chromedriver Shop Unstable, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}"
                     path: |
                         etc/build/
                         var/log
