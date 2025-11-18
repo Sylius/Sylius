@@ -10,12 +10,6 @@ sylius:
         variant:
             tracked: 'Tracked'
     ui:
-        estimated_delivery_time: 'Delivery'
-        delivery_time:
-            exact: '%count% days'
-            max_until: 'up to %max% days'
-            min_plus: '%min%+ days'
-            range: '%min%-%max% days'
         abandoned: 'Abandoned'
         about: 'About'
         accept: 'Accept'
@@ -272,6 +266,11 @@ sylius:
         delete_products: 'Delete products'
         deleted: 'Deleted'
         delivery_and_shipping: 'Delivery & Shipping'
+        delivery_time:
+            exact: '%count% days'
+            max_until: 'up to %max% days'
+            min_plus: '%min%+ days'
+            range: '%min%-%max% days'
         depth: 'Depth'
         description: 'Description'
         details: 'Details'
@@ -369,6 +368,7 @@ sylius:
         existing_customer: 'Existing Customer'
         expiration_and_usage_limits: 'Expiration and usage limits'
         expires_at: 'Expires at'
+        estimated_delivery_time: 'Delivery'
         extra_information: 'Extra information'
         extra_notes: 'Extra notes'
         failed: 'Failed'
