@@ -241,6 +241,11 @@ jobs:
                 with:
                     name: "chromedriver-env-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
 
+            -   name: Restore file permissions
+                run: |
+                    chmod +x vendor/bin/*
+                    chmod +x bin/console
+
             -   name: Debug - List directory structure and test behat
                 run: |
                     echo "=== Current directory ==="
@@ -256,11 +261,6 @@ jobs:
                     vendor/bin/behat --suite-tags="@ui" features/admin --dry-run | head -20 || echo "Failed!"
                     echo "=== Try our command ==="
                     vendor/bin/behat --suite-tags="@ui" features/admin/product --dry-run | head -20 || echo "Failed!"
-
-            -   name: Restore file permissions
-                run: |
-                    chmod +x vendor/bin/*
-                    chmod +x bin/console
 
             -   name: Run Behat (Chromedriver) - Admin Product & Promotion
                 run: |
