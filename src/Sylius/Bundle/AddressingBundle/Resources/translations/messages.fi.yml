@@ -38,5 +38,6 @@ sylius:
                 all: Kaikki
             select: Valitse
             select_scope: Valitse alue
+            priority: Prioriteetti
         zone_member:
             select: Valitse

@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Mailer;
 
 use PHPUnit\Framework\Attributes\Test;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -24,8 +23,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class AccountRegistrationEmailManagerTest extends KernelTestCase
 {
-    use ProphecyTrait;
-
     #[Test]
     public function it_sends_account_registration_email(): void
     {
@@ -37,17 +34,17 @@ final class AccountRegistrationEmailManagerTest extends KernelTestCase
         /** @var AccountRegistrationEmailManagerInterface $accountRegistrationEmailManager */
         $accountRegistrationEmailManager = $container->get(AccountRegistrationEmailManagerInterface::class);
 
-        /** @var UserInterface|ObjectProphecy $user */
-        $user = $this->prophesize(UserInterface::class);
-        $user->getUsername()->willReturn('username');
-        $user->getEmail()->willReturn('customer@example.com');
-        $user->getEmailVerificationToken()->willReturn('token');
-        /** @var ChannelInterface|ObjectProphecy $channel */
-        $channel = $this->prophesize(ChannelInterface::class);
+        /** @var UserInterface&MockObject $user */
+        $user = $this->createMock(UserInterface::class);
+        $user->method('getUsername')->willReturn('username');
+        $user->method('getEmail')->willReturn('customer@example.com');
+        $user->method('getEmailVerificationToken')->willReturn('token');
+        /** @var ChannelInterface&MockObject $channel */
+        $channel = $this->createMock(ChannelInterface::class);
 
         $accountRegistrationEmailManager->sendAccountRegistrationEmail(
-            $user->reveal(),
-            $channel->reveal(),
+            $user,
+            $channel,
             'en_US',
         );
 

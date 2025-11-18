@@ -27,14 +27,6 @@
           "mariadb": "11.4.7",
           "dbal": "^3.0",
           "state_machine_adapter": "symfony_workflow"
-        },
-        {
-          "php": "8.4",
-          "symfony": "^7.3",
-          "mariadb": "11.4.7",
-          "dbal": "^3.0",
-          "state_machine_adapter": "symfony_workflow",
-          "api_platform": "~4.1.7"
         }
       ]
     },

@@ -41,6 +41,12 @@
             <group>sylius:admin:zone:index</group>
             <group>sylius:admin:zone:show</group>
         </attribute>
+        <attribute name="priority">
+            <group>sylius:admin:zone:create</group>
+            <group>sylius:admin:zone:index</group>
+            <group>sylius:admin:zone:show</group>
+            <group>sylius:admin:zone:update</group>
+        </attribute>
         <attribute name="createdAt">
             <group>sylius:admin:zone:index</group>
             <group>sylius:admin:zone:show</group>

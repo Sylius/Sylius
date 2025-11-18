@@ -31,6 +31,11 @@ class FormElement extends BaseFormElement implements FormElementInterface
         return $this->getElement('name')->getValue();
     }
 
+    public function getPriority(): int
+    {
+        return (int) $this->getElement('priority')->getValue();
+    }
+
     public function getType(): string
     {
         return $this->getElement('type')->getValue();
@@ -67,6 +72,11 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $this->waitForElement(5, 'zone_member_added');
     }
 
+    public function prioritizeIt(int $priority): void
+    {
+        $this->getElement('priority')->setValue($priority);
+    }
+
     public function removeMember(string $member): void
     {
         $this->getElement('zone_member_delete', ['%name%' => $member])->click();
@@ -100,6 +110,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'code' => '[data-test-code]',
             'form_validation_message' => 'form > div.alert.alert-danger.d-block',
             'name' => '[data-test-name]',
+            'priority' => '#sylius_admin_zone_priority',
             'scope' => '[data-test-scope]',
             'type' => '[data-test-type]',
             'zone_member' => '[data-test-zone-member]:contains("%name%")',

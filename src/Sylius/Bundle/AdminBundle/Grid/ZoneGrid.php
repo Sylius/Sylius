@@ -41,15 +41,28 @@ final class ZoneGrid extends AbstractGrid
         $gridBuilder
             ->setDriverOption('class', $this->resourceClass)
             ->setLimits([10, 25, 50])
+            ->addOrderBy('priority', 'desc')
 
             // -- Fields
             ->addField(
-                TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
-                    ->setLabel('sylius.ui.code'),
+                TwigField::create('priority', '@SyliusAdmin/zone/grid/field/priority.html.twig')
+                    ->setLabel('sylius.ui.name')
+                    ->setSortable(true)
+                    ->withOptions([
+                        'vars' => [
+                            'th_class' => 'w-1 text-center',
+                            'td_class' => 'text-center',
+                        ]
+                    ])
+                ,
             )
             ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name'),
+            )
+            ->addField(
+                TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
+                    ->setLabel('sylius.ui.code'),
             )
             ->addField(
                 TwigField::create('type', '@SyliusAdmin/zone/grid/field/type.html.twig')
