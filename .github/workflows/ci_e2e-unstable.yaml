@@ -155,10 +155,7 @@ jobs:
                         .env.test.local
                         vendor/
                         var/
-                        public/build/
-                        public/media/
-                        bin/
-                        config/
+                        public/
                     retention-days: 1
                     overwrite: true
 
