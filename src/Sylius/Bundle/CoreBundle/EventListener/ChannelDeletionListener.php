@@ -13,19 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Core\ShippingMethod\Updater\ChannelAwareShippingMethodUpdaterInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
-final class ChannelDeletionListener
+final readonly class ChannelDeletionListener
 {
     public function __construct(
         private ChannelDeletionCheckerInterface $channelDeletionChecker,
-        private ShippingMethodRepositoryInterface $shippingMethodRepository,
-        private EntityManagerInterface $entityManager,
+        private ChannelAwareShippingMethodUpdaterInterface $shippingMethodUpdater,
     ) {
     }
 
@@ -34,14 +32,7 @@ final class ChannelDeletionListener
      */
     public function onChannelPreDelete(GenericEvent $event): void
     {
-        $channel = $event->getSubject();
-
-        if (!$channel instanceof ChannelInterface) {
-            throw new UnexpectedTypeException(
-                $channel,
-                ChannelInterface::class,
-            );
-        }
+        $channel = $this->getChannel($event);
 
         if (!$this->channelDeletionChecker->isDeletable($channel)) {
             $event->stop('sylius.channel.delete_error');
@@ -49,6 +40,18 @@ final class ChannelDeletionListener
     }
 
     public function removeChannelConfigurationFromShippingMethods(GenericEvent $event): void
+    {
+        $channel = $this->getChannel($event);
+
+        $channelCode = $channel->getCode();
+        if ($channelCode === null) {
+            return;
+        }
+
+        $this->shippingMethodUpdater->removeChannelConfigurationFromShippingMethods($channelCode);
+    }
+
+    private function getChannel(GenericEvent $event): ChannelInterface
     {
         $channel = $event->getSubject();
 
@@ -59,19 +62,6 @@ final class ChannelDeletionListener
             );
         }
 
-        $channelCode = $channel->getCode();
-        if ($channelCode === null) {
-            return;
-        }
-
-        $shippingMethods = $this->shippingMethodRepository->findByChannelCodeInConfiguration($channelCode);
-
-        foreach ($shippingMethods as $shippingMethod) {
-            $configuration = $shippingMethod->getConfiguration();
-            unset($configuration[$channelCode]);
-            $shippingMethod->setConfiguration($configuration);
-        }
-
-        $this->entityManager->flush();
+        return $channel;
     }
 }

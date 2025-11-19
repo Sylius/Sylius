@@ -32,14 +32,16 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->setParameter('locale', $locale);
+            ->setParameter('locale', $locale)
+        ;
     }
 
     public function findEnabledForChannel(ChannelInterface $channel): array
     {
         return $this->createEnabledForChannelQueryBuilder($channel)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel): array
@@ -48,7 +50,8 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
             ->andWhere('o.zone IN (:zones)')
             ->setParameter('zones', $zones)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
     }
 
     public function findByChannelCodeInConfiguration(string $channelCode): array
@@ -70,6 +73,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
             ->andWhere(':channel MEMBER OF o.channels')
             ->setParameter('channel', $channel)
             ->setParameter('enabled', true)
-            ->addOrderBy('o.position', 'ASC');
+            ->addOrderBy('o.position', 'ASC')
+        ;
     }
 }

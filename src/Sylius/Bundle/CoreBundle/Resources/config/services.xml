@@ -296,5 +296,13 @@
             <argument type="service" id="security.firewall.map" />
             <tag name="security.voter" />
         </service>
+
+        <service id="sylius.updater.shipping_method"
+                 class="Sylius\Bundle\CoreBundle\ShippingMethod\Updater\ShippingMethodUpdater">
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        <service id="Sylius\Component\Core\ShippingMethod\Updater\ChannelAwareShippingMethodUpdaterInterface"
+                 alias="sylius.updater.shipping_method" />
     </services>
 </container>

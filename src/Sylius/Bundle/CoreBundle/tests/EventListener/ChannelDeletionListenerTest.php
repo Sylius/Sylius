@@ -13,36 +13,30 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener;
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Core\ShippingMethod\Updater\ChannelAwareShippingMethodUpdaterInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
 final class ChannelDeletionListenerTest extends TestCase
 {
     private ChannelDeletionCheckerInterface&MockObject $channelDeletionChecker;
 
-    private MockObject&ShippingMethodRepositoryInterface $shippingMethodRepository;
-
-    private EntityManagerInterface&MockObject $entityManager;
+    private ChannelAwareShippingMethodUpdaterInterface&MockObject $shippingMethodUpdater;
 
     private ChannelDeletionListener $channelDeletionListener;
 
     protected function setUp(): void
     {
         $this->channelDeletionChecker = $this->createMock(ChannelDeletionCheckerInterface::class);
-        $this->shippingMethodRepository = $this->createMock(ShippingMethodRepositoryInterface::class);
-        $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $this->shippingMethodUpdater = $this->createMock(ChannelAwareShippingMethodUpdaterInterface::class);
         $this->channelDeletionListener = new ChannelDeletionListener(
             $this->channelDeletionChecker,
-            $this->shippingMethodRepository,
-            $this->entityManager,
+            $this->shippingMethodUpdater,
         );
     }
 
@@ -103,8 +97,10 @@ final class ChannelDeletionListenerTest extends TestCase
         $channel = $this->createChannelWithCode(null);
         $event = $this->createEventWithSubject($channel);
 
-        $this->shippingMethodRepository->expects(self::never())->method('findByChannelCodeInConfiguration');
-        $this->entityManager->expects(self::never())->method('flush');
+        $this->shippingMethodUpdater
+            ->expects(self::never())
+            ->method('removeChannelConfigurationFromShippingMethods')
+        ;
 
         $this->channelDeletionListener->removeChannelConfigurationFromShippingMethods($event);
     }
@@ -114,51 +110,11 @@ final class ChannelDeletionListenerTest extends TestCase
         $channel = $this->createChannelWithCode('DELETED_CHANNEL');
         $event = $this->createEventWithSubject($channel);
 
-        $shippingMethod1 = $this->createShippingMethodWithConfiguration([
-            'DELETED_CHANNEL' => ['amount' => 100],
-            'OTHER_CHANNEL' => ['amount' => 200],
-        ]);
-        $shippingMethod2 = $this->createShippingMethodWithConfiguration([
-            'DELETED_CHANNEL' => ['amount' => 300],
-        ]);
-
-        $this->shippingMethodRepository
+        $this->shippingMethodUpdater
             ->expects(self::once())
-            ->method('findByChannelCodeInConfiguration')
+            ->method('removeChannelConfigurationFromShippingMethods')
             ->with('DELETED_CHANNEL')
-            ->willReturn([$shippingMethod1, $shippingMethod2])
         ;
-
-        $shippingMethod1
-            ->expects(self::once())
-            ->method('setConfiguration')
-            ->with(['OTHER_CHANNEL' => ['amount' => 200]])
-        ;
-
-        $shippingMethod2
-            ->expects(self::once())
-            ->method('setConfiguration')
-            ->with([])
-        ;
-
-        $this->entityManager->expects(self::once())->method('flush');
-
-        $this->channelDeletionListener->removeChannelConfigurationFromShippingMethods($event);
-    }
-
-    public function testFlushesChangesEvenWhenNoShippingMethodsFound(): void
-    {
-        $channel = $this->createChannelWithCode('DELETED_CHANNEL');
-        $event = $this->createEventWithSubject($channel);
-
-        $this->shippingMethodRepository
-            ->expects(self::once())
-            ->method('findByChannelCodeInConfiguration')
-            ->with('DELETED_CHANNEL')
-            ->willReturn([])
-        ;
-
-        $this->entityManager->expects(self::once())->method('flush');
 
         $this->channelDeletionListener->removeChannelConfigurationFromShippingMethods($event);
     }
@@ -177,14 +133,5 @@ final class ChannelDeletionListenerTest extends TestCase
         $channel->expects(self::once())->method('getCode')->willReturn($code);
 
         return $channel;
-    }
-
-    /** @param array<string, mixed> $configuration */
-    private function createShippingMethodWithConfiguration(array $configuration): MockObject&ShippingMethodInterface
-    {
-        $shippingMethod = $this->createMock(ShippingMethodInterface::class);
-        $shippingMethod->expects(self::once())->method('getConfiguration')->willReturn($configuration);
-
-        return $shippingMethod;
     }
 }
