@@ -21,7 +21,9 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
+use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
+use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 
@@ -43,6 +45,8 @@ final class TaxRateGrid extends AbstractGrid
             ->setDriverOption('class', $this->taxRateClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('name', 'asc')
+
+            // -- Fields
             ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
@@ -73,23 +77,21 @@ final class TaxRateGrid extends AbstractGrid
                         'inclusive_to' => true,
                     ]),
             )
+
+            // -- Filters
             ->addFilter(
-                Filter::create('endDate', 'date')
+                DateFilter::create('endDate')
                     ->setLabel('sylius.ui.end_date')
                     ->setOptions([
                         'inclusive_to' => true,
                     ]),
             )
             ->addFilter(
-                Filter::create('search', 'string')
+                StringFilter::create('search', ['code', 'name'])
                     ->setLabel('sylius.ui.search')
-                    ->setOptions([
-                        'fields' => [
-                            'code',
-                            'name',
-                        ],
-                    ]),
             )
+
+            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     CreateAction::create(),
