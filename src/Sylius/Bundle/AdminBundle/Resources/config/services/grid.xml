@@ -100,6 +100,26 @@
             <tag name="sylius.grid" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grid\TaxCategoryGrid">
+            <argument>%sylius.model.tax_category.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\TaxRateGrid">
+            <argument>%sylius.model.tax_rate.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\PromotionCouponGrid">
+            <argument>%sylius.model.promotion_coupon.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\PromotionGrid">
+            <argument>%sylius.model.promotion.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\ZoneGrid">
             <argument>%sylius.model.zone.class%</argument>
             <tag name="sylius.grid" />
@@ -129,6 +149,12 @@
         <service id="Sylius\Bundle\AdminBundle\Grid\ProductOptionGrid">
             <argument>%sylius.model.product_option.class%</argument>
             <argument>%locale%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductReviewGrid">
+            <argument>%sylius.model.product_review.class%</argument>
+            <argument>%sylius.model.product.class%</argument>
             <tag name="sylius.grid" />
         </service>
     </services>
