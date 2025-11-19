@@ -125,6 +125,14 @@ final readonly class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When /^I fill in "([^"]+)" with "([^"]+)"$/
+     */
+    public function iFillInWith(string $label, string $value): void
+    {
+        $this->shippingMethodFormElement->setField($label, $value);
+    }
+
+    /**
      * @When I check (also) the :shippingMethodName shipping method
      */
     public function iCheckTheShippingMethod(string $shippingMethodName): void
@@ -624,5 +632,13 @@ final readonly class ManagingShippingMethodsContext implements Context
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::same($this->shippingMethodFormElement->getValidationMessage($element), $expectedMessage);
+    }
+
+    /**
+     * @Then I should be notified that Maximum delivery time must be greater than or equal to the minimum.
+     */
+    public function iShouldBeNotifiedThatMaxDeliveryIsGreaterOrEqualMin(): void
+    {
+        $this->assertFieldValidationMessage('max_delivery_time_days', 'Maximum delivery time must be greater than or equal to the minimum.');
     }
 }
