@@ -265,26 +265,26 @@ jobs:
             -   name: Run Behat (Chromedriver) - Admin Product & Promotion
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&~@failing" \
-                        features/admin/product features/admin/promotion || \
+                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&~@failing" \
-                        features/admin/product features/admin/promotion --rerun || \
+                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&~@failing" \
-                        features/admin/product features/admin/promotion --rerun
+                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" --rerun
 
             -   name: Run Behat (Chromedriver) - Admin Product & Promotion (@failing)
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&@failing" \
-                        features/admin/product features/admin/promotion || \
+                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&@failing" \
-                        features/admin/product features/admin/promotion --rerun || \
+                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&@failing" \
-                        features/admin/product features/admin/promotion --rerun
+                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" --rerun
                 continue-on-error: true
 
             -   name: Upload logs
