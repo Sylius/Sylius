@@ -100,6 +100,16 @@
             <tag name="sylius.grid" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grid\TaxCategoryGrid">
+            <argument>%sylius.model.tax_category.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\TaxRateGrid">
+            <argument>%sylius.model.tax_rate.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\PromotionCouponGrid">
             <argument>%sylius.model.promotion_coupon.class%</argument>
             <tag name="sylius.grid" />
