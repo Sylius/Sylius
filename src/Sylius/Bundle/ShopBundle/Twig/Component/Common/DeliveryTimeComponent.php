@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Common;
 use Sylius\Bundle\CoreBundle\Provider\DeliveryTimeProviderInterface;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface as CoreChannelInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -44,6 +45,11 @@ final class DeliveryTimeComponent
     public function deliveryTime(): ?string
     {
         $channel = $this->channelContext->getChannel();
+
+        if (!$channel instanceof CoreChannelInterface) {
+            return null;
+        }
+
         $deliveryTime = $this->deliveryTimeProvider->provide($channel);
 
         if ($deliveryTime === null) {
