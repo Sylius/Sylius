@@ -4,8 +4,6 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "email: This email is already used.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('email: This email is already used.').optional()",
     "status": 422,
     "violations": [
         {

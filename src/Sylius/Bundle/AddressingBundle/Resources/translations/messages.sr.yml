@@ -35,5 +35,6 @@ sylius:
             scope: Обухват
             select: Изаберите
             select_scope: Изабери обухват
+            priority: Приоритет
         zone_member:
             select: Изаберите

@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Installation\Setup;
 
 use PHPUnit\Framework\Attributes\Test;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -29,19 +28,17 @@ use Symfony\Component\Yaml\Yaml;
 
 final class LocaleSetupTest extends KernelTestCase
 {
-    use ProphecyTrait;
-
-    private $filesystem;
+    private Filesystem $filesystem;
 
     private string $originalLocale;
 
-    private $localeRepository;
+    private RepositoryInterface&MockObject $localeRepository;
 
-    private $localeFactory;
+    private FactoryInterface&MockObject $localeFactory;
 
-    private $localeSetup;
+    private LocaleSetup $localeSetup;
 
-    private $localeParameterFilePath;
+    private string $localeParameterFilePath;
 
     protected function setUp(): void
     {
@@ -52,14 +49,14 @@ final class LocaleSetupTest extends KernelTestCase
         \Locale::setDefault('en_US');
 
         $this->filesystem = new Filesystem();
-        $this->localeRepository = $this->prophesize(RepositoryInterface::class);
-        $this->localeFactory = $this->prophesize(FactoryInterface::class);
+        $this->localeRepository = $this->createMock(RepositoryInterface::class);
+        $this->localeFactory = $this->createMock(FactoryInterface::class);
         $this->localeParameterFilePath = self::$kernel->getProjectDir() . '/var/temporary_services_file.yaml';
         $this->createTemporaryServicesFile(['parameters' => ['locale' => 'en_US']]);
 
         $this->localeSetup = new LocaleSetup(
-            $this->localeRepository->reveal(),
-            $this->localeFactory->reveal(),
+            $this->localeRepository,
+            $this->localeFactory,
             'en_US',
             $this->filesystem,
             $this->localeParameterFilePath,
@@ -76,19 +73,39 @@ final class LocaleSetupTest extends KernelTestCase
     #[Test]
     public function it_updates_locale_with_a_given_one_if_it_is_different_than_default_one(): void
     {
-        $questionHelper = $this->prophesize(QuestionHelper::class);
-        $questionHelper->ask(Argument::cetera())->willReturn('fr_FR');
-        $locale = $this->prophesize(LocaleInterface::class);
+        $questionHelper = $this->createMock(QuestionHelper::class);
+        $questionHelper
+            ->expects($this->once())
+            ->method('ask')
+            ->willReturn('fr_FR');
 
-        $this->localeRepository->findOneBy(['code' => 'fr_FR'])->willReturn(null);
-        $this->localeFactory->createNew()->willReturn($locale->reveal());
-        $locale->setCode('fr_FR')->shouldBeCalled();
-        $this->localeRepository->add($locale->reveal())->shouldBeCalled();
+        $locale = $this->createMock(LocaleInterface::class);
+
+        $this->localeRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->with(['code' => 'fr_FR'])
+            ->willReturn(null);
+
+        $this->localeFactory
+            ->expects($this->once())
+            ->method('createNew')
+            ->willReturn($locale);
+
+        $locale
+            ->expects($this->once())
+            ->method('setCode')
+            ->with('fr_FR');
+
+        $this->localeRepository
+            ->expects($this->once())
+            ->method('add')
+            ->with($locale);
 
         $this->localeSetup->setup(
-            $this->prophesize(InputInterface::class)->reveal(),
-            $this->prophesize(OutputInterface::class)->reveal(),
-            $questionHelper->reveal(),
+            $this->createMock(InputInterface::class),
+            $this->createMock(OutputInterface::class),
+            $questionHelper,
         );
 
         $fileContent = Yaml::parseFile($this->localeParameterFilePath);
@@ -100,19 +117,36 @@ final class LocaleSetupTest extends KernelTestCase
     #[Test]
     public function it_does_not_update_locale_with_existing_locale(): void
     {
-        $questionHelper = $this->prophesize(QuestionHelper::class);
-        $questionHelper->ask(Argument::cetera())->willReturn('en_US');
-        $locale = $this->prophesize(LocaleInterface::class);
+        $questionHelper = $this->createMock(QuestionHelper::class);
+        $questionHelper
+            ->expects($this->once())
+            ->method('ask')
+            ->willReturn('en_US');
 
-        $this->localeRepository->findOneBy(['code' => 'en_US'])->willReturn($locale->reveal());
-        $this->localeFactory->createNew()->shouldNotBeCalled();
-        $locale->setCode('en_US')->shouldNotBeCalled();
-        $this->localeRepository->add($locale->reveal())->shouldNotBeCalled();
+        $locale = $this->createMock(LocaleInterface::class);
+
+        $this->localeRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->with(['code' => 'en_US'])
+            ->willReturn($locale);
+
+        $this->localeFactory
+            ->expects($this->never())
+            ->method('createNew');
+
+        $locale
+            ->expects($this->never())
+            ->method('setCode');
+
+        $this->localeRepository
+            ->expects($this->never())
+            ->method('add');
 
         $this->localeSetup->setup(
-            $this->prophesize(InputInterface::class)->reveal(),
-            $this->prophesize(OutputInterface::class)->reveal(),
-            $questionHelper->reveal(),
+            $this->createMock(InputInterface::class),
+            $this->createMock(OutputInterface::class),
+            $questionHelper,
         );
 
         $this->assertEquals('en_US', Yaml::parseFile($this->localeParameterFilePath)['parameters']['locale']);
@@ -125,24 +159,49 @@ final class LocaleSetupTest extends KernelTestCase
     {
         unlink($this->localeParameterFilePath);
 
-        $questionHelper = $this->prophesize(QuestionHelper::class);
-        $questionHelper->ask(Argument::cetera())->willReturn('fr_FR');
-        $locale = $this->prophesize(LocaleInterface::class);
+        $questionHelper = $this->createMock(QuestionHelper::class);
+        $questionHelper
+            ->expects($this->once())
+            ->method('ask')
+            ->willReturn('fr_FR');
 
-        $this->localeRepository->findOneBy(['code' => 'fr_FR'])->willReturn(null);
-        $this->localeFactory->createNew()->willReturn($locale->reveal());
-        $locale->setCode('fr_FR')->shouldBeCalled();
-        $this->localeRepository->add($locale->reveal())->shouldBeCalled();
+        $locale = $this->createMock(LocaleInterface::class);
 
-        $output = $this->prophesize(OutputInterface::class);
-        $output->writeln('Adding <info>French</info> Language.')->shouldBeCalled();
-        $output->writeln('Adding <info>fr_FR</info> locale.')->shouldBeCalled();
-        $output->writeln('<info>You may also need to add this locale into config/parameters.yaml configuration.</info>')->shouldBeCalled();
+        $this->localeRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->with(['code' => 'fr_FR'])
+            ->willReturn(null);
+
+        $this->localeFactory
+            ->expects($this->once())
+            ->method('createNew')
+            ->willReturn($locale);
+
+        $locale
+            ->expects($this->once())
+            ->method('setCode')
+            ->with('fr_FR');
+
+        $this->localeRepository
+            ->expects($this->once())
+            ->method('add')
+            ->with($locale);
+
+        $output = $this->createMock(OutputInterface::class);
+        $output
+            ->expects($this->exactly(3))
+            ->method('writeln')
+            ->with($this->logicalOr(
+                'Adding <info>French</info> Language.',
+                'Adding <info>fr_FR</info> locale.',
+                '<info>You may also need to add this locale into config/parameters.yaml configuration.</info>',
+            ));
 
         $this->localeSetup->setup(
-            $this->prophesize(InputInterface::class)->reveal(),
-            $output->reveal(),
-            $questionHelper->reveal(),
+            $this->createMock(InputInterface::class),
+            $output,
+            $questionHelper,
         );
     }
 
@@ -150,8 +209,8 @@ final class LocaleSetupTest extends KernelTestCase
     public function it_does_not_update_locale_if_file_is_not_writable(): void
     {
         $this->localeSetup = new LocaleSetup(
-            $this->localeRepository->reveal(),
-            $this->localeFactory->reveal(),
+            $this->localeRepository,
+            $this->localeFactory,
             'en_US',
             $this->filesystem,
             $this->localeParameterFilePath,
@@ -159,24 +218,49 @@ final class LocaleSetupTest extends KernelTestCase
 
         $this->filesystem->chmod($this->localeParameterFilePath, 0444);
 
-        $questionHelper = $this->prophesize(QuestionHelper::class);
-        $questionHelper->ask(Argument::cetera())->willReturn('fr_FR');
-        $locale = $this->prophesize(LocaleInterface::class);
+        $questionHelper = $this->createMock(QuestionHelper::class);
+        $questionHelper
+            ->expects($this->once())
+            ->method('ask')
+            ->willReturn('fr_FR');
 
-        $this->localeRepository->findOneBy(['code' => 'fr_FR'])->willReturn(null);
-        $this->localeFactory->createNew()->willReturn($locale->reveal());
-        $locale->setCode('fr_FR')->shouldBeCalled();
-        $this->localeRepository->add($locale->reveal())->shouldBeCalled();
+        $locale = $this->createMock(LocaleInterface::class);
 
-        $output = $this->prophesize(OutputInterface::class);
-        $output->writeln('Adding <info>French</info> Language.')->shouldBeCalled();
-        $output->writeln('Adding <info>fr_FR</info> locale.')->shouldBeCalled();
-        $output->writeln('<info>You may also need to add this locale into config/parameters.yaml configuration.</info>')->shouldBeCalled();
+        $this->localeRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->with(['code' => 'fr_FR'])
+            ->willReturn(null);
+
+        $this->localeFactory
+            ->expects($this->once())
+            ->method('createNew')
+            ->willReturn($locale);
+
+        $locale
+            ->expects($this->once())
+            ->method('setCode')
+            ->with('fr_FR');
+
+        $this->localeRepository
+            ->expects($this->once())
+            ->method('add')
+            ->with($locale);
+
+        $output = $this->createMock(OutputInterface::class);
+        $output
+            ->expects($this->exactly(3))
+            ->method('writeln')
+            ->with($this->logicalOr(
+                'Adding <info>French</info> Language.',
+                'Adding <info>fr_FR</info> locale.',
+                '<info>You may also need to add this locale into config/parameters.yaml configuration.</info>',
+            ));
 
         $this->localeSetup->setup(
-            $this->prophesize(InputInterface::class)->reveal(),
-            $output->reveal(),
-            $questionHelper->reveal(),
+            $this->createMock(InputInterface::class),
+            $output,
+            $questionHelper,
         );
 
         $this->assertEquals('en_US', Yaml::parseFile($this->localeParameterFilePath)['parameters']['locale']);

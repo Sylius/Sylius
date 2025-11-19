@@ -4,8 +4,6 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "Configuration max entries value must be greater or equal to the min entries value.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('Configuration max entries value must be greater or equal to the min entries value.').optional()",
     "status": 422,
     "violations":[
         {
