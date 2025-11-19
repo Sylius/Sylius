@@ -220,7 +220,7 @@ jobs:
                     overwrite: true
 
     behat-ui-js-chromedriver-admin-part1:
-        needs: [get-matrix, build-chromedriver-env]
+        needs: [get-matrix]
         runs-on: ubuntu-latest
         name: "Admin Part 1 (Product+Promotion), PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
         timeout-minutes: 30
@@ -233,18 +233,18 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
 
         steps:
-            -   name: "Checkout"
-                uses: actions/checkout@v4
-
-            -   name: Download built application
-                uses: actions/download-artifact@v4
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v3.0.1
                 with:
-                    name: "chromedriver-env-php${{ matrix.php }}-sf${{ matrix.symfony }}-mysql${{ matrix.mysql }}-${{ github.run_id }}"
-
-            -   name: Restore file permissions
-                run: |
-                    chmod +x vendor/bin/*
-                    chmod +x bin/console
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ github.run_attempt }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    e2e: "yes"
+                    e2e_js: "yes"
+                    database_version: ${{ matrix.mysql }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
 
             -   name: Debug - List directory structure and test behat
                 run: |
