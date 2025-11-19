@@ -38,5 +38,6 @@ sylius:
                 all: Allt
             select: Vallisti
             select_scope: Velja umfang
+            priority: Forgangur
         zone_member:
             select: Vallisti

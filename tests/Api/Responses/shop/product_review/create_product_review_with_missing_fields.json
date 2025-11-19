@@ -6,7 +6,5 @@
     "status": 400,
     "type": "\/errors\/400",
     "hydra:description": "Request does not have the following required fields specified: title, rating, comment, product.",
-    "hydra:title": "An error occurred",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('Request does not have the following required fields specified: title, rating, comment, product.').optional()"
+    "hydra:title": "An error occurred"
 }

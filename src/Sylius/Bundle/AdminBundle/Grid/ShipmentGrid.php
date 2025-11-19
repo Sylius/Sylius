@@ -26,7 +26,7 @@ final class ShipmentGrid extends AbstractGrid
 {
     public function __construct(
         private readonly string $shipmentClass,
-        private readonly string $channelResourceClass,
+        private readonly string $channelClass,
         private readonly string $shippingMethodClass,
     ) {
     }
@@ -113,7 +113,7 @@ final class ShipmentGrid extends AbstractGrid
                     ])
                     ->setFormOptions([
                         'extra_options' => [
-                            'class' => $this->channelResourceClass,
+                            'class' => $this->channelClass,
                             'choice_label' => 'name',
                         ],
                     ]),
