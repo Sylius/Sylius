@@ -34,3 +34,4 @@ sylius:
                 header: 'Twoje Konto'
                 order_history: 'Historia zamówień'
                 personal_information: 'Dane osobowe'
+    

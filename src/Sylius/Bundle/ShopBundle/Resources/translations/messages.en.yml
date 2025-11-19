@@ -60,3 +60,4 @@ sylius:
                 order_history: 'Order history'
                 personal_information: 'Personal information'
     top_bar: 'Sign up to our newsletter and grab -20% off'
+
