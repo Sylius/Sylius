@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Admin\ShippingMethod\FormElementInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
@@ -124,9 +125,7 @@ final readonly class ManagingShippingMethodsContext implements Context
         $this->shippingMethodFormElement->chooseCalculator($calculatorName);
     }
 
-    /**
-     * @When /^I fill in "([^"]+)" with "([^"]+)"$/
-     */
+    #[When('I fill in :label with :value')]
     public function iFillInWith(string $label, string $value): void
     {
         $this->shippingMethodFormElement->setField($label, $value);
