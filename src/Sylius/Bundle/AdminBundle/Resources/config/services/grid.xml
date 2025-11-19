@@ -145,5 +145,11 @@
             <argument>%sylius.model.shipping_method.class%</argument>
             <tag name="sylius.grid" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductReviewGrid">
+            <argument>%sylius.model.product_review.class%</argument>
+            <argument>%sylius.model.product.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
     </services>
 </container>
