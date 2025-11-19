@@ -36,6 +36,9 @@ class Zone implements ZoneInterface, \Stringable
     /** @var Collection<array-key, ZoneMemberInterface> */
     protected $members;
 
+    /** @var int */
+    protected $priority = 0;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -125,5 +128,15 @@ class Zone implements ZoneInterface, \Stringable
     public function hasMember(ZoneMemberInterface $member): bool
     {
         return $this->members->contains($member);
+    }
+
+    public function getPriority(): int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): void
+    {
+        $this->priority = $priority;
     }
 }

@@ -48,6 +48,35 @@
             <tag name="sylius.grid" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grid\CustomerGroupGrid">
+            <argument>%sylius.model.customer_group.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\LocaleGrid">
+            <argument>%sylius.model.locale.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\InventoryGrid">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument>%sylius.model.product.class%</argument>
+            <argument>%locale%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\PaymentMethodGrid">
+            <argument>%sylius.model.payment_method.class%</argument>
+            <argument>%locale%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductAssociationTypeGrid">
+            <argument>%sylius.model.product_association_type.class%</argument>
+            <argument>%locale%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\ProductFromTaxonGrid">
             <argument>%sylius.model.taxon.class%</argument>
             <tag name="sylius.grid" />
@@ -78,6 +107,32 @@
 
         <service id="Sylius\Bundle\AdminBundle\Grid\PromotionGrid">
             <argument>%sylius.model.promotion.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\ZoneGrid">
+            <argument>%sylius.model.zone.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\PaymentGrid">
+            <argument>%sylius.model.payment.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <tag name="sylius.grid"/>
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\CustomerOrderGrid">
+            <argument>%sylius.model.order.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\OrderGrid">
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.model.product.class%</argument>
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument>%sylius.model.shipping_method.class%</argument>
             <tag name="sylius.grid" />
         </service>
     </services>

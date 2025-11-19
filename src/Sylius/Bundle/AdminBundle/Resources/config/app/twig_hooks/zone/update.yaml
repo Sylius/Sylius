@@ -45,3 +45,6 @@ sylius_twig_hooks:
             scope:
                 template: '@SyliusAdmin/zone/form/sections/general/scope.html.twig'
                 priority: 0
+            priority:
+                template: '@SyliusAdmin/zone/form/sections/general/priority.html.twig'
+                priority: -100
