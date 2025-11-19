@@ -29,7 +29,6 @@ final class OverridenGridsTest extends KernelTestCase
     public function testPhpGridsHavingTheSameConfigurationAsYAMLGrids(string $gridName): void
     {
         $container = self::getContainer();
-
         $arrayProvider = $container->get(ArrayGridProvider::class);
         $serviceProvider = $container->get(ServiceGridProvider::class);
 
@@ -55,6 +54,8 @@ final class OverridenGridsTest extends KernelTestCase
         foreach (array_keys($gridConfiguration) as $gridName) {
             yield $gridName => [$gridName];
         }
+
+        self::ensureKernelShutdown();
     }
 
     /**

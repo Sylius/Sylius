@@ -52,9 +52,8 @@ final class ZoneGrid extends AbstractGrid
                         'vars' => [
                             'th_class' => 'w-1 text-center',
                             'td_class' => 'text-center',
-                        ]
-                    ])
-                ,
+                        ],
+                    ]),
             )
             ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
