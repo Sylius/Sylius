@@ -14,27 +14,19 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ShippingBundle\Validator;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShippingBundle\Validator\Constraint\ValidDeliveryTimeRange;
 use Sylius\Bundle\ShippingBundle\Validator\ValidDeliveryTimeRangeValidator;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
-final class ValidDeliveryTimeRangeValidatorTest extends TestCase
+final class ValidDeliveryTimeRangeValidatorTest extends ConstraintValidatorTestCase
 {
-    private ExecutionContextInterface&MockObject $executionContext;
-
-    private ValidDeliveryTimeRangeValidator $validator;
-
-    protected function setUp(): void
+    protected function createValidator(): \Symfony\Component\Validator\ConstraintValidatorInterface
     {
-        $this->executionContext = $this->createMock(ExecutionContextInterface::class);
-        $this->validator = new ValidDeliveryTimeRangeValidator();
-        $this->validator->initialize($this->executionContext);
+        return new ValidDeliveryTimeRangeValidator();
     }
 
     public function testThrowsWhenConstraintIsInvalid(): void
@@ -63,9 +55,8 @@ final class ValidDeliveryTimeRangeValidatorTest extends TestCase
         $method->method('getMinDeliveryTimeDays')->willReturn(null);
         $method->method('getMaxDeliveryTimeDays')->willReturn(null);
 
-        $this->executionContext->expects($this->never())->method('buildViolation');
-
         $this->validator->validate($method, new ValidDeliveryTimeRange());
+        $this->assertNoViolation();
     }
 
     public function testDoesNotAddViolationWhenMaxIsGreaterOrEqualMin(): void
@@ -75,30 +66,23 @@ final class ValidDeliveryTimeRangeValidatorTest extends TestCase
         $method->method('getMinDeliveryTimeDays')->willReturn(3);
         $method->method('getMaxDeliveryTimeDays')->willReturn(3);
 
-        $this->executionContext->expects($this->never())->method('buildViolation');
-
         $this->validator->validate($method, new ValidDeliveryTimeRange());
+        $this->assertNoViolation();
     }
 
     public function testAddsViolationWhenMaxIsLowerThanMin(): void
     {
-        /** @var ConstraintViolationBuilderInterface&MockObject $violationBuilder */
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
         /** @var ShippingMethodInterface&MockObject $method */
         $method = $this->createMock(ShippingMethodInterface::class);
         $method->method('getMinDeliveryTimeDays')->willReturn(5);
         $method->method('getMaxDeliveryTimeDays')->willReturn(3);
 
-        $this->executionContext
-            ->expects($this->once())
-            ->method('buildViolation')
-            ->with((new ValidDeliveryTimeRange())->message)
-            ->willReturn($violationBuilder)
-        ;
-
-        $violationBuilder->expects($this->once())->method('atPath')->with('maxDeliveryTimeDays')->willReturn($violationBuilder);
-        $violationBuilder->expects($this->once())->method('addViolation');
-
         $this->validator->validate($method, new ValidDeliveryTimeRange());
+
+        $this
+            ->buildViolation((new ValidDeliveryTimeRange())->message)
+            ->atPath('property.path.maxDeliveryTimeDays')
+            ->assertRaised()
+        ;
     }
 }
