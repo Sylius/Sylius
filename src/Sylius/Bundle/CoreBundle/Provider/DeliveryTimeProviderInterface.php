@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 interface DeliveryTimeProviderInterface
 {
@@ -22,5 +22,5 @@ interface DeliveryTimeProviderInterface
      *
      * @return array{minimumDays:int, maximumDays:int}|null
      */
-    public function provide(BaseChannelInterface $channel, array $context = []): ?array;
+    public function provide(ChannelInterface $channel, array $context = []): ?array;
 }

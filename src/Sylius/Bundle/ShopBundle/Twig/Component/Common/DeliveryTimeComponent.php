@@ -23,7 +23,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
 #[AsLiveComponent]
-final class FastestDeliveryTimeComponent
+final class DeliveryTimeComponent
 {
     use DefaultActionTrait;
     use HookableLiveComponentTrait;
@@ -44,16 +44,16 @@ final class FastestDeliveryTimeComponent
     public function deliveryTime(): ?string
     {
         $channel = $this->channelContext->getChannel();
-        $best = $this->deliveryTimeProvider->provide($channel);
+        $deliveryTime = $this->deliveryTimeProvider->provide($channel);
 
-        if ($best === null) {
+        if ($deliveryTime === null) {
             return null;
         }
 
-        if ($best['minimumDays'] === $best['maximumDays']) {
-            return $this->translator->trans(self::TRANS_EXACT, ['%count%' => $best['minimumDays']]);
+        if ($deliveryTime['minimumDays'] === $deliveryTime['maximumDays']) {
+            return $this->translator->trans(self::TRANS_EXACT, ['%count%' => $deliveryTime['minimumDays']]);
         }
 
-        return $this->translator->trans(self::TRANS_RANGE, ['%min%' => $best['minimumDays'], '%max%' => $best['maximumDays']]);
+        return $this->translator->trans(self::TRANS_RANGE, ['%min%' => $deliveryTime['minimumDays'], '%max%' => $deliveryTime['maximumDays']]);
     }
 }

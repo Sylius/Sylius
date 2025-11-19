@@ -13,12 +13,6 @@ sylius:
         variant:
             tracked: 'Śledzone'
     ui:
-        estimated_delivery_time: 'Dostawa'
-        delivery_time:
-            exact: '%count% dni'
-            max_until: 'do %max% dni'
-            min_plus: 'od %min% dni'
-            range: '%min%-%max% dni'
         abandoned: 'Porzucony'
         about: 'O stronie'
         accept: 'Akceptuję'
@@ -248,6 +242,11 @@ sylius:
         delete_image: 'Usuń zdjęcie'
         deleted: 'Usunięto'
         delivery_and_shipping: 'Dostawy i wysyłki'
+        delivery_time:
+            exact: '%count% dni'
+            max_until: 'do %max% dni'
+            min_plus: 'od %min% dni'
+            range: '%min%-%max% dni'
         depth: 'Głębokość'
         description: 'Opis'
         details: 'Szczegóły'
@@ -340,6 +339,7 @@ sylius:
         existing_customer: 'Istniejący Klient'
         expiration_and_usage_limits: 'Data wygaśnięcia i limit użyć'
         expires_at: 'Wygasa'
+        estimated_delivery_time: 'Dostawa'
         extra_information: 'Dodatkowe informacje'
         extra_notes: 'Dodatkowe uwagi'
         failed: 'Nieudane'
