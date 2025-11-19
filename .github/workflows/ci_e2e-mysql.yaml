@@ -265,26 +265,26 @@ jobs:
             -   name: Run Behat (Chromedriver) - Admin Product & Promotion
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
-                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" || \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        features/admin/product features/admin/promotion || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
-                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" --rerun || \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        features/admin/product features/admin/promotion --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
-                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" --rerun
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
+                        features/admin/product features/admin/promotion --rerun
 
             -   name: Run Behat (Chromedriver) - Admin Product & Promotion (@failing)
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
-                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" || \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        features/admin/product features/admin/promotion || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
-                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" --rerun || \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        features/admin/product features/admin/promotion --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --suite ui_accessing_price_history,ui_adding_product_review,ui_managing_product_association_types,ui_managing_product_attributes,ui_managing_product_options,ui_managing_product_reviews,ui_managing_product_variants,ui_managing_products,ui_viewing_product_reviews,ui_viewing_products,ui_applying_catalog_promotions,ui_applying_promotion_coupon,ui_applying_promotion_rules,ui_managing_catalog_promotions,ui_managing_promotion_coupons,ui_managing_promotions,ui_receiving_discount,ui_removing_catalog_promotions \
-                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" --rerun
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
+                        features/admin/product features/admin/promotion --rerun
                 continue-on-error: true
 
             -   name: Upload logs
@@ -328,19 +328,19 @@ jobs:
             -   name: Run Behat (Chromedriver) - Admin Others
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&~@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
                         features/admin/taxonomy features/admin/addressing features/admin/shipping \
                         features/admin/order features/admin/channel features/admin/user \
                         features/admin/currency features/admin/payment features/admin/locale \
                         features/admin/taxation features/admin/inventory || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&~@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
                         features/admin/taxonomy features/admin/addressing features/admin/shipping \
                         features/admin/order features/admin/channel features/admin/user \
                         features/admin/currency features/admin/payment features/admin/locale \
                         features/admin/taxation features/admin/inventory --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&~@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
                         features/admin/taxonomy features/admin/addressing features/admin/shipping \
                         features/admin/order features/admin/channel features/admin/user \
                         features/admin/currency features/admin/payment features/admin/locale \
@@ -349,19 +349,19 @@ jobs:
             -   name: Run Behat (Chromedriver) - Admin Others (@failing)
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
                         features/admin/taxonomy features/admin/addressing features/admin/shipping \
                         features/admin/order features/admin/channel features/admin/user \
                         features/admin/currency features/admin/payment features/admin/locale \
                         features/admin/taxation features/admin/inventory || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
                         features/admin/taxonomy features/admin/addressing features/admin/shipping \
                         features/admin/order features/admin/channel features/admin/user \
                         features/admin/currency features/admin/payment features/admin/locale \
                         features/admin/taxation features/admin/inventory --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&@ui&&~@todo&&~@cli&&@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
                         features/admin/taxonomy features/admin/addressing features/admin/shipping \
                         features/admin/order features/admin/channel features/admin/user \
                         features/admin/currency features/admin/payment features/admin/locale \
@@ -409,25 +409,25 @@ jobs:
             -   name: Run Behat (Chromedriver) - Shop & Hybrid
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&(@ui||@hybrid)&&~@todo&&~@cli&&~@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
                         features/shop features/hybrid || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&(@ui||@hybrid)&&~@todo&&~@cli&&~@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
                         features/shop features/hybrid --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&(@ui||@hybrid)&&~@todo&&~@cli&&~@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&~@failing" \
                         features/shop features/hybrid --rerun
 
             -   name: Run Behat (Chromedriver) - Shop & Hybrid (@failing)
                 run: |
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&(@ui||@hybrid)&&~@todo&&~@cli&&@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
                         features/shop features/hybrid || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&(@ui||@hybrid)&&~@todo&&~@cli&&@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
                         features/shop features/hybrid --rerun || \
                     vendor/bin/behat --colors --strict --no-interaction -vvv -f progress \
-                        --tags="(@mink:chromedriver||@javascript)&&(@ui||@hybrid)&&~@todo&&~@cli&&@failing" \
+                        --tags="(@mink:chromedriver||@javascript)&&~@todo&&~@cli&&@failing" \
                         features/shop features/hybrid --rerun
                 continue-on-error: true
 
