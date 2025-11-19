@@ -30,5 +30,6 @@ sylius:
                 zone: Area
             scope: Gebied
             select: Kies
+            priority: Prioriteit
         zone_member:
             select: Kies

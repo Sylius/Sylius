@@ -36,5 +36,6 @@ sylius:
             scopes:
                 all: All
             select: Choose
+            priority: Priority
         zone_member:
             select: Choose

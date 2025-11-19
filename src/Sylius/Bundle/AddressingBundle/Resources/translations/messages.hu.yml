@@ -38,5 +38,6 @@ sylius:
                 all: Mind
             select: Válassza ki
             select_scope: Hatókör kiválasztása
+            priority: Prioritás
         zone_member:
             select: Válassza ki

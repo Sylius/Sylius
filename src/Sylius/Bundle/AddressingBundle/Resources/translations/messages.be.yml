@@ -38,5 +38,6 @@ sylius:
                 all: Усе
             select: Выберыце
             select_scope: Выбярыце сферу ўжывання
+            priority: Прыярытэт
         zone_member:
             select: Выберыце

@@ -4,8 +4,6 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "gender: The value you selected is not a valid choice.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('gender: The value you selected is not a valid choice.').optional()",
     "status": 422,
     "violations": [
         {
