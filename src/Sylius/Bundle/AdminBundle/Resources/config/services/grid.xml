@@ -179,5 +179,11 @@
             <argument>%sylius.model.channel_pricing_log_entry.class%</argument>
             <tag name="sylius.grid" />
         </service>
+
+        <service id="Sylius\Bundle\AdminBundle\Grid\PaymentRequestGrid">
+            <argument>%sylius.model.payment_request.class%</argument>
+            <argument>%sylius.model.payment_method.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
     </services>
 </container>

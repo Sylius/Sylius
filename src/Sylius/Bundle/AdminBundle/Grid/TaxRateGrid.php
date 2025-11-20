@@ -88,7 +88,7 @@ final class TaxRateGrid extends AbstractGrid
             )
             ->addFilter(
                 StringFilter::create('search', ['code', 'name'])
-                    ->setLabel('sylius.ui.search')
+                    ->setLabel('sylius.ui.search'),
             )
 
             // -- Actions
