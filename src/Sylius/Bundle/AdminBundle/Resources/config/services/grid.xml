@@ -96,6 +96,11 @@
             <tag name="sylius.grid" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductVariantGrid">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\ProductVariantWithCatalogPromotionGrid">
             <argument>%sylius.model.product_variant.class%</argument>
             <argument>%locale%</argument>
