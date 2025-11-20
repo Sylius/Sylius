@@ -77,8 +77,9 @@
             <tag name="sylius.grid" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Grid\ProductFromTaxonGrid">
-            <argument>%sylius.model.taxon.class%</argument>
+        <service id="Sylius\Bundle\AdminBundle\Grid\ProductTaxonGrid">
+            <argument>%sylius.model.product_taxon.class%</argument>
+            <argument>%sylius.model.channel.class%</argument>
             <tag name="sylius.grid" />
         </service>
 

@@ -134,7 +134,7 @@ class PaymentRequestGrid extends AbstractGrid
                                     'hash' => 'resource.hash',
                                     'paymentId' => 'resource.payment.id',
                                 ],
-                            ]
+                            ],
                         ]),
                 ),
             )
