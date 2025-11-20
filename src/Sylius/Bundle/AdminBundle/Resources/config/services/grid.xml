@@ -163,6 +163,12 @@
             <tag name="sylius.grid" />
         </service>
 
+        <service id="Sylius\Bundle\AdminBundle\Grid\ExchangeRateGrid">
+            <argument>%sylius.model.exchange_rate.class%</argument>
+            <argument>%sylius.model.currency.class%</argument>
+            <tag name="sylius.grid" />
+        </service>
+
         <service id="Sylius\Bundle\AdminBundle\Grid\ProductOptionGrid">
             <argument>%sylius.model.product_option.class%</argument>
             <argument>%locale%</argument>
