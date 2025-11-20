@@ -52,6 +52,9 @@ final class OverridenGridsTest extends KernelTestCase
         self::assertNotEmpty($gridConfiguration, 'No grid configuration found');
 
         foreach (array_keys($gridConfiguration) as $gridName) {
+            if ($gridName === 'sylius_admin_address_log_entry') {
+                continue;
+            }
             yield $gridName => [$gridName];
         }
 

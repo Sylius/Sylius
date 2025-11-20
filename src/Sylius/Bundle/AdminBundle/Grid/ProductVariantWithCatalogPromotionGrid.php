@@ -1,0 +1,104 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\AdminBundle\Grid;
+
+use Sylius\Bundle\GridBundle\Builder\Action\Action;
+use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
+use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
+use Sylius\Bundle\GridBundle\Builder\Field\StringField;
+use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
+use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
+use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
+use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
+use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+
+final class ProductVariantWithCatalogPromotionGrid extends AbstractGrid
+{
+    public function __construct(
+        private readonly string $productVariantClass,
+        private readonly string $locale,
+    ) {
+    }
+
+    public static function getName(): string
+    {
+        return 'sylius_admin_product_variant_with_catalog_promotion';
+    }
+
+    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            ->setDriverOption('class', $this->productVariantClass)
+            ->setLimits([10, 25, 50])
+            ->setRepositoryMethod('createCatalogPromotionListQueryBuilder', [
+                $this->locale,
+                'expr:notFoundOnNull(service("sylius.repository.catalog_promotion").find($id))',
+            ])
+            ->addOrderBy('code', 'asc')
+
+            // -- Field
+            ->addField(
+                TwigField::create('name', '@SyliusAdmin/product_variant/grid/field/name.html.twig')
+                    ->setLabel('sylius.ui.name')
+                    ->setPath('.'),
+            )
+            ->addField(
+                StringField::create('code')
+                    ->setLabel('sylius.ui.code'),
+            )
+            ->addField(
+                TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
+                    ->setLabel('sylius.ui.enabled'),
+            )
+            ->addField(
+                TwigField::create('inventory', '@SyliusAdmin/product_variant/grid/field/inventory.html.twig')
+                    ->setLabel('sylius.ui.inventory')
+                    ->setPath('.'),
+            )
+
+            // -- Filter
+            ->addFilter(
+                Filter::create('code', 'string')
+                    ->setLabel('sylius.ui.code'),
+            )
+            ->addFilter(
+                StringFilter::create('name', ['translation.name'])
+                    ->setLabel('sylius.ui.name'),
+            )
+
+            // -- Actions
+            ->addActionGroup(
+                ItemActionGroup::create(
+                    Action::create('show_product', 'show')
+                        ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_product_show',
+                            'parameters' => [
+                                'id' => 'resource.product.id',
+                            ],
+                        ],
+                    ])
+                        ->setLabel('sylius.ui.show_product'),
+                    UpdateAction::create([
+                        'link' => [
+                            'parameters' => [
+                                'id' => 'resource.id',
+                                'productId' => 'resource.product.id',
+                            ],
+                        ],
+                    ]),
+                ),
+            );
+    }
+}
