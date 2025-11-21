@@ -127,6 +127,8 @@ jobs:
                     database_version: ${{ matrix.mariadb }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
+                    composer_minimum_stability: ${{ matrix.php == '8.5' && 'dev' || '' }}
+                    composer_prefer_stable: "true"
                     node_version: ${{ env.NODE_VERSION }}
                     chrome_version: stable
 
