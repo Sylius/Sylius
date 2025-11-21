@@ -141,4 +141,17 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
         $translationAccordion->click();
     }
+
+    public function searchParentTaxon(string $searchTerm): array
+    {
+        DriverHelper::waitForPageToLoad($this->getSession());
+
+        $searchResults = $this->autocompleteHelper->search(
+            $this->getDriver(),
+            $this->getElement('parent')->getXpath(),
+            $searchTerm
+        );
+
+        return is_array($searchResults) ? array_values($searchResults) : [];
+    }
 }

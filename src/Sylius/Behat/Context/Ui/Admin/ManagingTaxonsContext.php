@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\ImageFormElementInterface;
@@ -228,6 +229,16 @@ final readonly class ManagingTaxonsContext implements Context
     {
         $this->updatePage->open(['id' => $taxon->getId()]);
         Assert::same($this->formElement->getCode(), $taxon->getCode());
+    }
+
+    /**
+     * @Given /^I search for parent taxon "([^"]*)"$/
+     */
+    public function iSearchForParentTaxon(string $searchTerm)
+    {
+        $this->sharedStorage->set('autocompleteSearchResults', $this->formElement->searchParentTaxon($searchTerm));
+
+        return $this->formElement->searchParentTaxon($searchTerm);
     }
 
     /**
@@ -486,5 +497,21 @@ final readonly class ManagingTaxonsContext implements Context
     public function itShouldBeDisabled(): void
     {
         Assert::false($this->formElement->isEnabled());
+    }
+
+    /**
+     * @Then /^I should see "([^"]*)" in the found results$/
+     */
+    public function iShouldSeeInTheFoundResults(string $taxonName)
+    {
+        $autocompleteSearchResults = $this->sharedStorage->get('autocompleteSearchResults');
+        Assert::true(
+            in_array($taxonName, $autocompleteSearchResults, true),
+            sprintf(
+                'Expected to see "%s" in autocomplete results, but found: %s',
+                $taxonName,
+                implode(', ', $autocompleteSearchResults),
+            ),
+        );
     }
 }
