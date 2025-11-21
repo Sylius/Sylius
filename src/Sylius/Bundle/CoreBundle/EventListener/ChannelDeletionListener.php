@@ -15,19 +15,43 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\ShippingMethod\Updater\ChannelAwareShippingMethodUpdaterInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
-final class ChannelDeletionListener
+final readonly class ChannelDeletionListener
 {
-    public function __construct(private ChannelDeletionCheckerInterface $channelDeletionChecker)
-    {
+    public function __construct(
+        private ChannelDeletionCheckerInterface $channelDeletionChecker,
+        private ChannelAwareShippingMethodUpdaterInterface $shippingMethodUpdater,
+    ) {
     }
 
     /**
      * Prevent channel deletion if no more channels enabled.
      */
     public function onChannelPreDelete(GenericEvent $event): void
+    {
+        $channel = $this->getChannel($event);
+
+        if (!$this->channelDeletionChecker->isDeletable($channel)) {
+            $event->stop('sylius.channel.delete_error');
+        }
+    }
+
+    public function removeChannelConfigurationFromShippingMethods(GenericEvent $event): void
+    {
+        $channel = $this->getChannel($event);
+
+        $channelCode = $channel->getCode();
+        if ($channelCode === null) {
+            return;
+        }
+
+        $this->shippingMethodUpdater->removeChannelConfigurationFromShippingMethods($channelCode);
+    }
+
+    private function getChannel(GenericEvent $event): ChannelInterface
     {
         $channel = $event->getSubject();
 
@@ -38,8 +62,6 @@ final class ChannelDeletionListener
             );
         }
 
-        if (!$this->channelDeletionChecker->isDeletable($channel)) {
-            $event->stop('sylius.channel.delete_error');
-        }
+        return $channel;
     }
 }
