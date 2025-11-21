@@ -30,6 +30,9 @@ jobs:
                     -
                         php: "8.3"
                         symfony: "^7.4@beta"
+                    -
+                        php: "8.5"
+                        symfony: "^7.4@beta"
 
         env:
             COMPOSER_ROOT_VERSION: "dev-main"

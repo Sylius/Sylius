@@ -93,6 +93,12 @@ jobs:
                 if: matrix.php == '8.2'
                 run: composer require ext-random --no-update --no-scripts --no-interaction
 
+            -   name: "Allow dev dependencies for PHP 8.5"
+                if: matrix.php == '8.5'
+                run: |
+                    composer config minimum-stability dev
+                    composer config prefer-stable true
+
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
@@ -116,6 +122,7 @@ jobs:
                 run: vendor/bin/monorepo-builder validate
 
             -   name: Run PHPArkitect
+                if: matrix.php != '8.5'
                 run: vendor/bin/phparkitect check
 
             -   name: Run PHPStan
