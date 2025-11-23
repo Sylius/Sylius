@@ -72,12 +72,6 @@ jobs:
                     tools: symfony, composer-require-checker
                     coverage: none
 
-            -   name: Install intl extension for PHP 8.5
-                if: matrix.php == '8.5'
-                run: |
-                    sudo apt-get update
-                    sudo apt-get install -y php8.5-intl
-
             -   name: "Restrict packages' versions"
                 run: |
                     composer global config --no-plugins allow-plugins.symfony/flex true

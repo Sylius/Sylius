@@ -71,13 +71,8 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: "${{ matrix.php }}"
+                    extensions: intl, gd, opcache, mysql, pdo_mysql
                     coverage: none
-
-            -   name: Install intl extension for PHP 8.5
-                if: matrix.php == '8.5'
-                run: |
-                    sudo apt-get update
-                    sudo apt-get install -y php8.5-intl
 
             -   name: Restrict Symfony version
                 if: matrix.symfony != ''
