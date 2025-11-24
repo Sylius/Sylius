@@ -1,8 +1,0 @@
-ux_icons:
-    iconify:
-        # Allow Iconify API as fallback for missing icons (e.g., country flags not bundled locally)
-        enabled: true
-    icon_dir: '%kernel.project_dir%/src/Sylius/Bundle/UiBundle/Resources/assets/icons'
-    default_icon_attributes:
-        'class': 'icon'
-    ignore_not_found: true
