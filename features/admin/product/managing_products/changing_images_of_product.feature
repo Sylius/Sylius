@@ -75,3 +75,14 @@ Feature: Changing images of an existing product
         And I select "Green" variant for the first image
         And I save my changes to the images
         Then I should be notified that the "Green" variant does not belong to this product
+
+    @no-api @ui @mink:chromedriver
+    Scenario: Changing the product’s single image by removing the old one and adding a new one
+        Given the store has a product "Lamborghini Gallardo Model"
+        And this product has an image "ford.jpg" with "thumbnail" type
+        When I want to modify this product
+        And I remove an image with "thumbnail" type
+        And I attach the "lamborghini.jpg" image with "thumbnail" type
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this product should have an image with "thumbnail" type
