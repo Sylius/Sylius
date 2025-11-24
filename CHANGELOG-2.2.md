@@ -4,4 +4,4 @@
 
 #### Details
 
-- [#18509](https://github.com/Sylius/Sylius/pull/18509) Adds the ability to activate the functionality of changing the main product image along with changing the product variant ([@tomkalon](https://github.com/tomkalon))
+- [#18509](https://github.com/Sylius/Sylius/pull/18509) Adds the ability of changing the main product image along with changing the product variant ([@tomkalon](https://github.com/tomkalon))

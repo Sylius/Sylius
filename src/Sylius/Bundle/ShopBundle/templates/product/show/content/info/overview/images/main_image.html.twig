@@ -1,10 +1,20 @@
-{% set product = hookable_metadata.context.product %}
+{% set main_image = variant and variant.images|length > 0 ? variant.images.first : product.images.first %}
 
-<div class="col pe-lg-5 pe-xxl-5">
-    <a href="{{ hookable_metadata.context.original_path }}" class="d-block overflow-auto bg-light rounded-3{% if product.images|length < 2 %} spotlight{% endif %}">
-        <img id="main-image" src="{{ hookable_metadata.context.path }}" alt="{{ product.name }}" class="img-fluid w-100 h-100 object-fit-cover"
-            {% if product.images.first %}
-                {{ sylius_test_html_attribute('main-image', product.images.first.type) }}
+{% if main_image %}
+    {% set original_path = main_image.path|imagine_filter('sylius_shop_product_original') %}
+    {% set path = main_image.path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+{% else %}
+    {% set original_path = asset('build/shop/images/400x300.png', 'shop') %}
+    {% set path = original_path %}
+{% endif %}
+
+<div class="col pe-lg-5 pe-xxl-5" {{ attributes }}>
+    <a href="{{ original_path }}" class="d-block overflow-auto bg-light rounded-3 spotlight">
+        <img src="{{ path }}"
+             alt="{{ product.name }}"
+             class="img-fluid w-100 h-100 object-fit-cover"
+            {% if main_image %}
+                {{ sylius_test_html_attribute('main-image', main_image.type) }}
             {% else %}
                 {{ sylius_test_html_attribute('main-image') }}
             {% endif %}

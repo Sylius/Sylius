@@ -7,10 +7,7 @@
 
 ### Twig Hooks
 
-1. `'sylius_shop.product.show.content.info.overview.images.main_image'` hook has been deprecated and will be replaced
-with `'sylius_shop.product.show.content.info.overview.images.main_image_component'`.
-
-To activate the image update function after changing the product variant, overwrite the configuration:
+1. `'sylius_shop.product.show.content.info.overview.images.main_image'` hook has been changed. A live component has been added to the template.
 
 ```yaml
 # src/Sylius/Bundle/ShopBundle/Resources/config/app/twig_hooks/product/show.yaml
@@ -19,10 +16,10 @@ sylius_twig_hooks:
     hooks:
         'sylius_shop.product.show.content.info.overview.images':
             main_image:
-                enabled: false
-            main_image_component:
-                component: 'sylius_shop:product:images'
-                props:
-                    product: '@=_context.product'
-                    template: '@SyliusShop/product/show/content/info/overview/images/main_image_component.html.twig'
+-               template: '@SyliusShop/product/show/content/info/overview/images/main_image.html.twig'
++               component: 'sylius_shop:product:images'
++               props:
++                    product: '@=_context.product'
++                    template: '@SyliusShop/product/show/content/info/overview/images/main_image.html.twig'
+                priority: 0
 ```
