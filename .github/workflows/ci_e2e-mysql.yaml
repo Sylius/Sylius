@@ -206,16 +206,26 @@ jobs:
                     node_version: ${{ env.NODE_VERSION }}
 
             -   name: Run Behat (Chromedriver)
-                run: |
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun
+                uses: nick-fields/retry@v3
+                env:
+                    BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+                    BEHAT_TAGS: "@mink:chromedriver&&~@todo&&~@cli&&~@failing"
+                    BEHAT_SUITES: "@hybrid,@ui"
+                with:
+                    timeout_minutes: 45
+                    max_attempts: 3
+                    command: $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" --rerun
 
             -   name: Run Behat (Chromedriver) for randomly failing scenarios (@failing)
-                run: |
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun
+                uses: nick-fields/retry@v3
+                env:
+                    BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+                    BEHAT_TAGS: "@mink:chromedriver&&~@todo&&~@cli&&@failing"
+                    BEHAT_SUITES: "@hybrid,@ui"
+                with:
+                    timeout_minutes: 45
+                    max_attempts: 3
+                    command: $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" --rerun
                 continue-on-error: true
 
             -   name: Upload logs
@@ -312,7 +322,15 @@ jobs:
                     chrome_version: stable
 
             -   name: Run Behat (Panther)
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
+                uses: nick-fields/retry@v3
+                env:
+                    BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+                    BEHAT_TAGS: "@javascript&&~@todo&&~@cli"
+                    BEHAT_SUITES: "@hybrid,@ui"
+                with:
+                    timeout_minutes: 45
+                    max_attempts: 3
+                    command: $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" --rerun
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
