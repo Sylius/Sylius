@@ -65,6 +65,10 @@ export default class extends Controller {
             togglerPrototyp.classList.add('infinite-tree-leaf');
         }
 
-        return itemPrototyp.outerHTML.replaceAll('__TAXON_ID__', id).replaceAll('__TAXON_NAME__', name);
+        const div = document.createElement('div');
+        div.textContent = name;
+        const escapedName = div.innerHTML;
+
+        return itemPrototyp.outerHTML.replaceAll('__TAXON_ID__', id).replaceAll('__TAXON_NAME__', escapedName);
     }
 }

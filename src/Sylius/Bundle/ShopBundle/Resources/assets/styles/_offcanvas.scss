@@ -10,4 +10,37 @@
 .offcanvas.offcanvas-start.offcanvas-wide,
 .offcanvas.offcanvas-end.offcanvas-wide {
     width: 550px;
+
+    @include media-breakpoint-between(md, lg) {
+        max-width: 90vw;
+    }
+}
+
+.offcanvas {
+    .navbar-nav {
+        overflow-x: hidden;
+
+        @include media-breakpoint-between(md, lg) {
+            .nav-item .nav-link {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                word-break: break-word;
+            }
+        }
+    }
+
+    .dropdown-menu {
+        width: 100%;
+        max-width: 100%;
+
+        .nav-link {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            word-break: break-word;
+        }
+    }
 }
