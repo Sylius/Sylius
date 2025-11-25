@@ -153,6 +153,7 @@ final class ProductAttributeValueDenormalizerTest extends TestCase
             ->with(
                 $this->callback(function (array $data) {
                     $keys = array_keys($data);
+
                     return $keys[0] === 'attribute';
                 }),
                 $this->equalTo(ProductAttributeValueInterface::class),
