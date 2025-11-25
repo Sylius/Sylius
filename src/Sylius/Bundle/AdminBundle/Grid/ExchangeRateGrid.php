@@ -23,18 +23,15 @@ use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ExchangeRateGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_exchange_rate')]
+final class ExchangeRateGrid extends AbstractGrid implements ExchangeRateGridInterface
 {
     public function __construct(
         private readonly string $exchangeRateClass,
         private readonly string $currencyClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_exchange_rate';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

@@ -20,23 +20,20 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class CurrencyGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_currency')]
+final class CurrencyGrid extends AbstractGrid implements CurrencyGridInterface
 {
     public function __construct(
-        private readonly string $resourceClass,
+        private readonly string $currencyClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_currency';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->currencyClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
             ->addField(

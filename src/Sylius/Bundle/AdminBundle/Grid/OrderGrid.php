@@ -22,11 +22,13 @@ use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class OrderGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_order')]
+final class OrderGrid extends AbstractGrid implements OrderGridInterface
 {
     public function __construct(
-        private readonly string $resourceClass,
+        private readonly string $orderClass,
         private readonly string $channelClass,
         private readonly string $customerClass,
         private readonly string $productClass,
@@ -35,15 +37,10 @@ final class OrderGrid extends AbstractGrid
     ) {
     }
 
-    public static function getName(): string
-    {
-        return 'sylius_admin_order';
-    }
-
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->orderClass)
             ->setLimits([10, 25, 50])
             ->setRepositoryMethod(
                 'createCriteriaAwareSearchListQueryBuilder',

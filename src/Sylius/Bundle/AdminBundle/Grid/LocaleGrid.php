@@ -21,17 +21,14 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class LocaleGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_locale')]
+final class LocaleGrid extends AbstractGrid implements LocaleGridInterface
 {
     public function __construct(
         private readonly string $localeClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_locale';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

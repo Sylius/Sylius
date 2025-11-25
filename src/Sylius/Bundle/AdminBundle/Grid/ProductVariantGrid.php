@@ -26,17 +26,14 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ProductVariantGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_product_variant')]
+final class ProductVariantGrid extends AbstractGrid implements ProductVariantGridInterface
 {
     public function __construct(
         private readonly string $productVariantClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_product_variant';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

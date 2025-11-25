@@ -24,23 +24,20 @@ use Sylius\Bundle\GridBundle\Builder\Filter\BooleanFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ChannelGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_channel')]
+final class ChannelGrid extends AbstractGrid implements ChannelGridInterface
 {
     public function __construct(
-        private readonly string $resourceClass,
+        private readonly string $channelClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_channel';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->channelClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('nameAndDescription', 'asc')
             ->addField(

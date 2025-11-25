@@ -27,17 +27,14 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class PromotionGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_promotion')]
+final class PromotionGrid extends AbstractGrid implements PromotionGridInterface
 {
     public function __construct(
         private readonly string $promotionClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_promotion';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

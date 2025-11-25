@@ -22,10 +22,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 
-final class CountryGrid extends AbstractGrid
+final class CountryGrid extends AbstractGrid implements CountryGridInterface
 {
     public function __construct(
-        private readonly string $resourceClass,
+        private readonly string $countryClass,
     ) {
     }
 
@@ -37,7 +37,7 @@ final class CountryGrid extends AbstractGrid
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->countryClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
 

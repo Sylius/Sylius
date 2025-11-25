@@ -17,23 +17,20 @@ use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class CustomerOrderGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_customer_order')]
+final class CustomerOrderGrid extends AbstractGrid implements CustomerOrderGridInterface
 {
     public function __construct(
-        private readonly string $resourceClass,
+        private readonly string $orderClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_customer_order';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->orderClass)
             ->setRepositoryMethod('createByCustomerIdCriteriaAwareQueryBuilder', [
                 'criteria' => null,
                 'customerId' => '$id',

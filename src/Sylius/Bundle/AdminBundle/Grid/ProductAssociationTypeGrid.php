@@ -23,24 +23,21 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ProductAssociationTypeGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_product_association_type')]
+final class ProductAssociationTypeGrid extends AbstractGrid implements ProductAssociationTypeGridInterface
 {
     public function __construct(
-        private readonly string $resourceClass,
+        private readonly string $productAssociationTypeClass,
         private readonly string $locale,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_product_association_type';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->productAssociationTypeClass)
             ->setRepositoryMethod('createListQueryBuilder', [
                 $this->locale,
             ])

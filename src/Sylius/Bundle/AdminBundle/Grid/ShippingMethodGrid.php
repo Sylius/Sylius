@@ -27,17 +27,14 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ShippingMethodGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_shipping_method')]
+final class ShippingMethodGrid extends AbstractGrid implements ShippingMethodGridInterface
 {
     public function __construct(
         private readonly string $shippingMethodClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_shipping_method';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

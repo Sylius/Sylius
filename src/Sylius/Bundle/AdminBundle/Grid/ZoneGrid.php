@@ -23,17 +23,14 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ZoneGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_zone')]
+final class ZoneGrid extends AbstractGrid implements ZoneGridInterface
 {
     public function __construct(
         private readonly string $resourceClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_zone';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
