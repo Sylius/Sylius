@@ -41,7 +41,7 @@ sylius:
         currency_code:
             not_valid: Zadaný kód měny je neplatný.
         payment_method_eligibility: 'Tato platební metoda %paymentMethodName% byla zakázána. Prosím znovu vyberte způsob platby.'
-        product_eligibility: 'Tento produkt %productName% byl zakázán.'
+        product_eligibility: 'Produkt %productName% již není dostupný.'
         shipping_method_eligibility: 'Produkt se nevejde požadavky na %shippingMethodName% způsob dopravy. Prosím znovu vyberte způsob dopravy.'
     locale:
         enabled:

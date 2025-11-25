@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: کد واحد پول وارد شده نامعتبر است.
         payment_method_eligibility: 'این روش پرداخت %paymentMethodName% غیرفعال شده است. لطفا نحوه پرداخت را مجددا انتخاب کنید.'
-        product_eligibility: 'این محصول %productName% غیرفعال شده است.'
+        product_eligibility: 'محصول %productName% دیگر در دسترس نیست.'
     locale:
         enabled:
             cannot_disable_base: زبان پایه را نمی توانید غیر فعال کنید.

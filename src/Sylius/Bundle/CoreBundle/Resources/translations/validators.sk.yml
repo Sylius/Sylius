@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: Zadaný kód meny nie je neplatný.
         payment_method_eligibility: 'Táto platba metóda %paymentMethodName% bola vypnutá. Vyberte iný spôsob platby.'
-        product_eligibility: 'Tento produkt %productName% bola vypnutý.'
+        product_eligibility: 'Produkt %productName% už nie je dostupný.'
         shipping_method_eligibility: 'Produkt nezodpovedá požiadavkám dopravy %shippingMethodName%. Prosím vyberte iný spôsob dopravy.'
     locale:
         enabled:

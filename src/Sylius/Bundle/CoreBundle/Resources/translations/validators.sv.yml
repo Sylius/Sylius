@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: Valutakoden du angav är ogiltig.
         payment_method_eligibility: 'Den här betalningsmetoden %paymentMethodName% har inaktiverats. Vänligen välj en ny betalningsmetod.'
-        product_eligibility: 'Denna produkt %productName% har inaktiverats.'
+        product_eligibility: 'Produkten %productName% är inte längre tillgänglig.'
         shipping_method_eligibility: 'Produkten passar inte kraven för %shippingMethodName% leveransmetoden. Vänligen välj en ny leveransmetod.'
     locale:
         enabled:

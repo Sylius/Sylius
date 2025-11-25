@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: Kode mata uang yang anda masukkan tidak valid.
         payment_method_eligibility: 'Metode pembayaran %paymentMethodName% ini telah dinonaktifkan. Silahkan pilih ulang metode pembayaran Anda.'
-        product_eligibility: 'Produk %productName% ini telah dinonaktifkan.'
+        product_eligibility: 'Produk %productName% tidak lagi tersedia.'
         shipping_method_eligibility: 'Produk tidak memenuhi persyaratan untuk pengiriman metode %shippingMethodName%. Silahkan memilih ulang metode pengiriman Anda.'
     locale:
         enabled:

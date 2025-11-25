@@ -101,7 +101,7 @@ sylius:
             not_valid: 'رمز العملة الذي أدخلته غير صالح.'
         invalid_state_transition: 'لا يمكن إتمام الطلب لأنه في حالة خاطئة. الحالة الحالية: %currentState%. التحولات الممكنة: %possibleTransitions%.'
         payment_method_eligibility: 'تم تعطيل طريقة الدفع هذه %paymentMethodName%. يرجى إعادة اختيار طريقة الدفع الخاصة بك.'
-        product_eligibility: 'تم تعطيل المنتج هذا %productName%.'
+        product_eligibility: 'المنتج %productName% لم يعد متاحًا.'
         shipping_method_eligibility: 'المنتج لا يتناسب مع متطلبات طريقة الشحن %shippingMethodName%. يرجى إعادة اختيار طريقة الشحن.'
         shipping_method_not_available: 'طريقة الشحن "%shippingMethodName%" غير متوفرة. يرجى إعادة اختيار طريقة الشحن.'
     resend_order_confirmation_email:

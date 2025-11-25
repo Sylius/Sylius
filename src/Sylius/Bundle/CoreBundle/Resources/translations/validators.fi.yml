@@ -18,6 +18,7 @@ sylius:
     order:
         currency_code:
             not_valid: Ilmoittamasi valuuttakoodi ei kelpaa.
+        product_eligibility: 'Tuote %productName% ei ole enää saatavilla.'
     review:
         author:
             not_blank: Kirjoita sähköpostiosoitteesi.

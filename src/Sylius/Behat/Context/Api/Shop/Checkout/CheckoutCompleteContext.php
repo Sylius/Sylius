@@ -55,7 +55,7 @@ final class CheckoutCompleteContext implements Context
         $lastResponseContent = $this->client->getLastResponse()->getContent();
 
         Assert::string($lastResponseContent);
-        Assert::contains($lastResponseContent, sprintf('This product %s has been disabled.', $productVariant->getName()));
+        Assert::contains($lastResponseContent, sprintf('The product %s is no longer available.', $productVariant->getName()));
     }
 
     /**
