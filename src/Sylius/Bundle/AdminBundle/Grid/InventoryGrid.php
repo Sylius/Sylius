@@ -20,25 +20,22 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class InventoryGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_inventory')]
+final class InventoryGrid extends AbstractGrid implements InventoryGridInterface
 {
     public function __construct(
-        private readonly string $resourceClass,
+        private readonly string $productVariantClass,
         private readonly string $productClass,
         private readonly string $locale,
     ) {
     }
 
-    public static function getName(): string
-    {
-        return 'sylius_admin_inventory';
-    }
-
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->productVariantClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('name', 'asc')
             ->setRepositoryMethod('createInventoryListQueryBuilder', [

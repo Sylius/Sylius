@@ -26,17 +26,14 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class TaxRateGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_tax_rate')]
+final class TaxRateGrid extends AbstractGrid implements TaxRateGridInterface
 {
     public function __construct(
         private string $taxRateClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_tax_rate';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

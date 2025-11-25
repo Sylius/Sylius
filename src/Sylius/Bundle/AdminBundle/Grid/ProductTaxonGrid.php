@@ -25,18 +25,15 @@ use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ProductTaxonGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_product_taxon')]
+final class ProductTaxonGrid extends AbstractGrid implements ProductTaxonGridInterface
 {
     public function __construct(
         private readonly string $productTaxonClass,
         private readonly string $channelClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_product_taxon';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

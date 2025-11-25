@@ -27,19 +27,16 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ProductGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_product')]
+final class ProductGrid extends AbstractGrid implements ProductGridInterface
 {
     public function __construct(
         private readonly string $productClass,
-        private readonly string $channelResourceClass,
+        private readonly string $channelClass,
         private readonly string $taxonClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_product';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
@@ -96,11 +93,11 @@ final class ProductGrid extends AbstractGrid
                     ->setLabel('sylius.ui.enabled'),
             )
             ->addFilter(
-                EntityFilter::create('channel', $this->channelResourceClass, fields: ['channels.id'])
+                EntityFilter::create('channel', $this->channelClass, fields: ['channels.id'])
                     ->setLabel('sylius.ui.channel'),
             )
             ->addFilter(
-                EntityFilter::create('channel', $this->channelResourceClass, fields: ['channels.id'])
+                EntityFilter::create('channel', $this->channelClass, fields: ['channels.id'])
                     ->setLabel('sylius.ui.channel'),
             )
             ->addFilter(

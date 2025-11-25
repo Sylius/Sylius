@@ -34,17 +34,14 @@ use Sylius\Component\Attribute\AttributeType\PercentAttributeType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextareaAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ProductAttributeGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_product_attribute')]
+final class ProductAttributeGrid extends AbstractGrid implements ProductAttributeGridInterface
 {
     public function __construct(
         private readonly string $productAttributeClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_product_attribute';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

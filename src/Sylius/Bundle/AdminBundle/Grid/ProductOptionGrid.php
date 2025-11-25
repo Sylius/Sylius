@@ -23,18 +23,15 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ProductOptionGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_product_option')]
+final class ProductOptionGrid extends AbstractGrid implements ProductOptionGridInterface
 {
     public function __construct(
         private readonly string $productOptionClass,
         private readonly string $locale,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_product_option';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

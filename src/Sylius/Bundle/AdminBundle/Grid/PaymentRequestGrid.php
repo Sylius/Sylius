@@ -21,19 +21,16 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-class PaymentRequestGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_payment_request')]
+final class PaymentRequestGrid extends AbstractGrid implements PaymentRequestGridInterface
 {
     public function __construct(
         private readonly string $paymentRequestClass,
         private readonly string $paymentMethodClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_payment_request';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void

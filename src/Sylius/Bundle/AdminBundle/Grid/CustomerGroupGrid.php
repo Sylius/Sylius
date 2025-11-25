@@ -23,23 +23,20 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class CustomerGroupGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_customer_group')]
+final class CustomerGroupGrid extends AbstractGrid implements CustomerGroupGridInterface
 {
     public function __construct(
-        private readonly string $resourceClass,
+        private readonly string $customerGroupClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_customer_group';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->customerGroupClass)
             ->addOrderBy('name', 'asc')
             ->setLimits([10, 25, 50])
             ->addField(

@@ -27,25 +27,22 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 
-final class CatalogPromotionGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_catalog_promotion')]
+final class CatalogPromotionGrid extends AbstractGrid implements CatalogPromotionGridInterface
 {
     public function __construct(
-        private string $resourceClass,
-        private string $channelResourceClass,
+        private readonly string $catalogPromotionClass,
+        private readonly string $channelClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_catalog_promotion';
     }
 
     public function buildGrid(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->catalogPromotionClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
 
@@ -134,7 +131,7 @@ final class CatalogPromotionGrid extends AbstractGrid
             ->addFilter(
                 EntityFilter::create(
                     'channel',
-                    resourceClass: $this->channelResourceClass,
+                    resourceClass: $this->channelClass,
                     fields: ['channels.id'],
                 )
                     ->setLabel('sylius.ui.channel'),
@@ -199,10 +196,5 @@ final class CatalogPromotionGrid extends AbstractGrid
                         ]),
                 ),
             );
-    }
-
-    public function getResourceClass(): string
-    {
-        return $this->resourceClass;
     }
 }

@@ -24,8 +24,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ProductReviewGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_admin_product_review')]
+final class ProductReviewGrid extends AbstractGrid implements ProductReviewGridInterface
 {
     public function __construct(
         private readonly string $productReviewClass,
