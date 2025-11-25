@@ -66,7 +66,6 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
 
     /**
      * @param array<array-key, mixed> $data
-     * @param ProductAttributeInterface $attribute
      *
      * @return array<array-key, mixed>
      */
@@ -93,6 +92,7 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
     {
         $attribute = $data['attribute'];
         unset($data['attribute']);
+
         return ['attribute' => $attribute, ...$data];
     }
 
