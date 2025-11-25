@@ -8,7 +8,7 @@ Feature: Adding a new product option
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a new product option with two required option values
         When I want to create a new product option
         And I name it "T-Shirt size" in "English (United States)"
@@ -31,7 +31,7 @@ Feature: Adding a new product option
         Then I should be notified that it has been successfully created
         And the product option "T-Shirt size" should appear in the registry
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a new product option with one option value
         When I want to create a new product option
         And I name it "T-Shirt size" in "English (United States)"
@@ -42,7 +42,7 @@ Feature: Adding a new product option
         And the product option "T-Shirt size" should appear in the registry
         And product option "T-Shirt size" should have the "S" option value
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Adding a new product option with applying option value to all option values
         Given the store is also available in "Polish (Poland)"
         When I want to create a new product option
