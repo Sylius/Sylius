@@ -13,7 +13,7 @@ The average rating updater callback had priority `-100` and was being executed t
             after:
                 sylius_update_rating:
                     on: ["accept"]
-                    do: ["@sylius.product_review.average_rating_updater", "updateFromReview"]
+                    do: ["@sylius.updater.product_review.average_rating", "updateFromReview"]
                     args: ["object"]
                     priority: -100
 +                   disabled: true
