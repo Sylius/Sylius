@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Abstraction/StateMachine/src" isTestSource="false" packagePrefix="Sylius\Abstraction\StateMachine\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Abstraction/StateMachine/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Abstraction/StateMachine/tests" isTestSource="true" packagePrefix="Tests\Sylius\Abstraction\StateMachine\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Behat" isTestSource="false" packagePrefix="Sylius\Behat\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Behat/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Behat/tests" isTestSource="true" packagePrefix="Tests\Sylius\Behat\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle" isTestSource="false" packagePrefix="Sylius\Bundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AddressingBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\AddressingBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AddressingBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AddressingBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\AddressingBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AdminBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\AdminBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AdminBundle/test/src" isTestSource="false" packagePrefix="Sylius\Bundle\AdminBundle\Application\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AdminBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AdminBundle/tests" isTestSource="false" packagePrefix="Tests\Sylius\Bundle\AdminBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ApiBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\ApiBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ApiBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ApiBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\ApiBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ApiBundle/tests/Application/src" isTestSource="true" packagePrefix="Sylius\Bundle\ApiBundle\Application\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AttributeBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\AttributeBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AttributeBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/AttributeBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\AttributeBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ChannelBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\ChannelBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ChannelBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ChannelBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\ChannelBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/CoreBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\CoreBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/CoreBundle/test/src" isTestSource="true" packagePrefix="Sylius\Bundle\CoreBundle\Application\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/CoreBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/CoreBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\CoreBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/CurrencyBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\CurrencyBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/CurrencyBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/CurrencyBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\CurrencyBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/CustomerBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\CustomerBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/InventoryBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\InventoryBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/InventoryBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/InventoryBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\InventoryBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/LocaleBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\LocaleBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/LocaleBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/LocaleBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\LocaleBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/MoneyBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\MoneyBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/MoneyBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/MoneyBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\MoneyBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/OrderBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\OrderBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/OrderBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/OrderBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\OrderBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PaymentBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\PaymentBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PaymentBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PaymentBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\PaymentBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PayumBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\PayumBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PayumBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PayumBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\PayumBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ProductBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\ProductBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ProductBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ProductBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\ProductBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PromotionBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\PromotionBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PromotionBundle/test/src" isTestSource="true" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PromotionBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/PromotionBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\PromotionBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ReviewBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\ReviewBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ReviewBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ReviewBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\ReviewBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ShippingBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\ShippingBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ShippingBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ShippingBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\ShippingBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ShopBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\ShopBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ShopBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/ShopBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\ShopBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/TaxationBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\TaxationBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/TaxationBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/TaxationBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\TaxationBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/TaxonomyBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\TaxonomyBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/TaxonomyBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/TaxonomyBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\TaxonomyBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/UiBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\UiBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/UiBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/UiBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\UiBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/UserBundle/" isTestSource="false" packagePrefix="Sylius\Bundle\UserBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/UserBundle/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Bundle/UserBundle/tests" isTestSource="true" packagePrefix="Tests\Sylius\Bundle\UserBundle\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component" isTestSource="false" packagePrefix="Sylius\Component\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Addressing/" isTestSource="false" packagePrefix="Sylius\Component\Addressing\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Addressing/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Addressing/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Addressing\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Attribute/" isTestSource="false" packagePrefix="Sylius\Component\Attribute\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Attribute/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Attribute/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Attribute\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Channel/" isTestSource="false" packagePrefix="Sylius\Component\Channel\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Channel/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Channel/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Channel\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Core/" isTestSource="false" packagePrefix="Sylius\Component\Core\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Core/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Core/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Core\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Currency/" isTestSource="false" packagePrefix="Sylius\Component\Currency\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Currency/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Currency/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Currency\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Customer/" isTestSource="false" packagePrefix="Sylius\Component\Customer\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Customer/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Customer/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Customer\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Inventory/" isTestSource="false" packagePrefix="Sylius\Component\Inventory\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Inventory/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Inventory/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Inventory\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Locale/" isTestSource="false" packagePrefix="Sylius\Component\Locale\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Locale/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Locale/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Locale\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Order/" isTestSource="false" packagePrefix="Sylius\Component\Order\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Order/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Order/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Order\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Payment/" isTestSource="false" packagePrefix="Sylius\Component\Payment\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Payment/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Payment/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Payment\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Product/" isTestSource="false" packagePrefix="Sylius\Component\Product\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Product/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Product/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Product\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Promotion/" isTestSource="false" packagePrefix="Sylius\Component\Promotion\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Promotion/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Promotion/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Promotion\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Review/" isTestSource="false" packagePrefix="Sylius\Component\Review\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Review/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Review/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Review\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Shipping/" isTestSource="false" packagePrefix="Sylius\Component\Shipping\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Shipping/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Shipping/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Shipping\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Taxation/" isTestSource="false" packagePrefix="Sylius\Component\Taxation\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Taxation/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Taxation/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Taxation\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Taxonomy/" isTestSource="false" packagePrefix="Sylius\Component\Taxonomy\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Taxonomy/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/Taxonomy/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\Taxonomy\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/User/" isTestSource="false" packagePrefix="Sylius\Component\User\" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/User/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sylius/Component/User/tests" isTestSource="true" packagePrefix="Tests\Sylius\Component\User\" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Sylius\Tests\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aeon-php/calendar" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/alcohol/iso4217" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/doctrine-common" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/doctrine-orm" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/documentation" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/http-cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/hydra" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/json-schema" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/jsonld" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/metadata" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/openapi" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/serializer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/state" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/symfony" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/api-platform/validator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/babdev/pagerfanta-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/behat/behat" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/behat/gherkin" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/behat/mink-selenium2-driver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/behat/transliterator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/brick/math" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/clue/stream-filter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/coduo/php-matcher" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/coduo/php-to-string" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/consolidation/annotated-command" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/consolidation/config" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/consolidation/log" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/consolidation/output-formatters" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/consolidation/robo" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dbrekelmans/bdi" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dealerdirect/phpcodesniffer-composer-installer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dflydev/dot-access-data" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dmore/behat-chrome-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dmore/chrome-mink-driver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/collections" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/common" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/migrations" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/persistence" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/sql-formatter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/fakerphp/faker" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/mink" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/mink-browserkit-driver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/mink-debug-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/mink-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/page-object-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/symfony-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friends-of-behat/variadic-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofphp/proxy-manager-lts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/gedmo/doctrine-extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/grasmash/expander" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/promises" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/hamcrest/hamcrest-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/hwi/oauth-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/imagine/imagine" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/instaclick/php-webdriver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/jangregor/phpstan-prophecy" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/gaufrette" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-gaufrette-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-menu" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/knplabs/knp-menu-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-code" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-stdlib" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lchrusciel/api-test-case" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lcobucci/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/container" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/flysystem" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/flysystem-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/flysystem-local" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/mime-type-detection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri-components" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/league/uri-interfaces" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lexik/jwt-authentication-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/liip/imagine-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/marcj/topsort" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/masterminds/html5" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/matthiasnoback/symfony-config-test" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/matthiasnoback/symfony-dependency-injection-test" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mikey179/vfsstream" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mockery/mockery" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nelmio/alice" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ondram/ci-detector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/openlss/lib-array2xml" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pagerfanta/pagerfanta" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/constant_time_encoding" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/halite" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/hidden-string" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/sodium_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/payum/core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/payum/iso4217" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/payum/offline" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/payum/payum-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/manifest" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phootwork/collection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phootwork/lang" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/discovery" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/guzzle7-adapter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/httplug" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/message-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-webdriver/webdriver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phparkitect/phparkitect" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpowermove/docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpspec/php-diff" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpspec/prophecy" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpspec/prophecy-phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/extension-installer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpdoc-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpstan" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpstan-doctrine" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpstan-symfony" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpstan/phpstan-webmozart-assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-invoker" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-timer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/phpunit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phrity/net-stream" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phrity/net-uri" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phrity/util-errorhandler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phrity/websocket" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/link" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/collection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ramsey/uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/rector/rector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/robertfausk/behat-panther-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/robertfausk/mink-panther-driver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/cli-parser" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/complexity" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/diff" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/environment" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/global-state" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/lines-of-code" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/object-enumerator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/object-reflector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/recursion-context" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/type" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/version" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/slevomat/coding-standard" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/squizlabs/php_codesniffer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/staabm/side-effects-detector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/stof/doctrine-extensions-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius-labs/association-hydrator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius-labs/coding-standard" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius-labs/doctrine-migrations-extra-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius-labs/polyfill-symfony-event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius-labs/suite-tags-extension" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius/fixtures-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius/grid-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius/mailer-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius/registry" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius/resource-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius/theme-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius/twig-extra" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/sylius/twig-hooks" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/asset" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/cache-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/config" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/debug-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dependency-injection" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/doctrine-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/doctrine-messenger" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dom-crawler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/error-handler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/expression-language" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/filesystem" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/flex" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/form" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/framework-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-client-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-foundation" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/http-kernel" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/intl" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/messenger" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/mime" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/monolog-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/options-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/panther" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/password-hasher" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-iconv" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-icu" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-idn" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php81" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php83" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php84" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/process" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-access" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-info" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/proxy-manager-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/routing" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/runtime" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-csrf" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-http" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/serializer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/service-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/stimulus-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/stopwatch" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/string" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/twig-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/twig-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/type-info" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/uid" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/ux-autocomplete" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/ux-icons" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/ux-live-component" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/ux-twig-component" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/validator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-exporter" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-link" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-profiler-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/webpack-encore-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/workflow" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfonycasts/dynamic-forms" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symplify/easy-coding-standard" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symplify/monorepo-builder" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theofidry/alice-data-fixtures" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/theseer/tokenizer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/extra-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/intl-extra" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/string-extra" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/willdurand/negotiation" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

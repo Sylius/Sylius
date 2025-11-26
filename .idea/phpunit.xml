@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PHPUnit">
+    <option name="directories">
+      <list>
+        <option value="$PROJECT_DIR$/src/Sylius/Abstraction/StateMachine/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/OrderBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Product/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Addressing/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Locale/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Promotion/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Core/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/TaxationBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AdminBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/UiBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Taxonomy/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/ReviewBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/MoneyBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Currency/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/TaxonomyBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Payment/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/PromotionBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Review/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/CoreBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/ApiBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Order/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/UserBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Inventory/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Customer/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/PayumBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/ProductBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/ChannelBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/CurrencyBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Channel/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Attribute/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/ShopBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Shipping/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/AddressingBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/InventoryBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/Taxation/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/ShippingBundle/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Component/User/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Bundle/LocaleBundle/tests" />
+        <option value="$PROJECT_DIR$/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Behat/tests" />
+      </list>
+    </option>
+  </component>
+</project>
