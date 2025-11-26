@@ -8,7 +8,7 @@ This change affects the `sylius_product_review` state machine configuration in t
 
 The average rating updater callback had priority `-100` and was being executed twice, which has now been fixed by disabling this specific callback.
 
-```yaml
+```diff
         callbacks:
             after:
                 sylius_update_rating:
@@ -16,7 +16,7 @@ The average rating updater callback had priority `-100` and was being executed t
                     do: ["@sylius.product_review.average_rating_updater", "updateFromReview"]
                     args: ["object"]
                     priority: -100
-                    disabled: true
++                   disabled: true
 ```
 # UPGRADE FROM `v1.14.11` TO `v1.14.12`
 
