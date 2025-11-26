@@ -42,23 +42,43 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
-    public function createListQueryBuilder(string $locale, mixed $taxonId = null): QueryBuilder
-    {
-        $queryBuilder = $this->createQueryBuilder('o')
+    public function createListQueryBuilder(
+        string $locale,
+        mixed $taxonId = null,
+        ?string $fallbackLocale = null
+    ): QueryBuilder {
+        $qb = $this->createQueryBuilder('o')
             ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->setParameter('locale', $locale)
         ;
 
         if (null !== $taxonId) {
-            $queryBuilder
+            $qb
                 ->innerJoin('o.productTaxons', 'productTaxon')
                 ->andWhere('productTaxon.taxon = :taxonId')
                 ->setParameter('taxonId', $taxonId)
             ;
         }
 
-        return $queryBuilder;
+        $qb
+            ->leftJoin('o.translations', 'translation', Join::WITH, 'translation.locale = :locale')
+            ->setParameter('locale', $locale)
+        ;
+
+        if (null !== $fallbackLocale && $fallbackLocale !== $locale) {
+            $qb
+                ->addSelect('fallbackTranslation')
+                ->leftJoin('o.translations', 'fallbackTranslation', Join::WITH, 'fallbackTranslation.locale = :fallbackLocale')
+                ->setParameter('fallbackLocale', $fallbackLocale)
+            ;
+
+            $qb->addSelect(
+                'COALESCE(translation.name, fallbackTranslation.name) AS HIDDEN sortName'
+            );
+        } else {
+            $qb->addSelect('translation.name AS HIDDEN sortName');
+        }
+
+        return $qb;
     }
 
     public function createShopListQueryBuilder(
