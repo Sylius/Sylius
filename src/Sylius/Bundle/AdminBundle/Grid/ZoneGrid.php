@@ -33,7 +33,7 @@ final class ZoneGrid extends AbstractGrid implements ZoneGridInterface
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->resourceClass)

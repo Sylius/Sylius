@@ -35,7 +35,7 @@ final class AdminUserGrid extends AbstractGrid implements AdminUserGridInterface
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->adminUserClass)

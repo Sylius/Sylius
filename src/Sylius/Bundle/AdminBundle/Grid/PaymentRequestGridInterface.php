@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Grid;
 
+use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\GridInterface;
 
 /** @experimental */
 interface PaymentRequestGridInterface extends GridInterface
 {
+    public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

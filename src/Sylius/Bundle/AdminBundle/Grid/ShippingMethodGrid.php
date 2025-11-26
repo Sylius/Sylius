@@ -37,7 +37,7 @@ final class ShippingMethodGrid extends AbstractGrid implements ShippingMethodGri
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->shippingMethodClass)

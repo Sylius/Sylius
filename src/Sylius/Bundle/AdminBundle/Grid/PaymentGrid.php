@@ -30,7 +30,7 @@ final class PaymentGrid extends AbstractGrid implements PaymentGridInterface
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->paymentGrid)

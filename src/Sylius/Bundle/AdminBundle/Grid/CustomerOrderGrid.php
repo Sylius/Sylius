@@ -27,7 +27,7 @@ final class CustomerOrderGrid extends AbstractGrid implements CustomerOrderGridI
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->orderClass)

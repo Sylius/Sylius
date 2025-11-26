@@ -39,7 +39,7 @@ final class ProductGrid extends AbstractGrid implements ProductGridInterface
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->productClass)

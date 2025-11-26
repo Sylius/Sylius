@@ -34,7 +34,7 @@ final class CountryGrid extends AbstractGrid implements CountryGridInterface
         return 'sylius_admin_country';
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->countryClass)

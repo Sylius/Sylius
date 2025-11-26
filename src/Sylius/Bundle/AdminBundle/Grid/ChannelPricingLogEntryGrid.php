@@ -28,7 +28,7 @@ final class ChannelPricingLogEntryGrid extends AbstractGrid implements ChannelPr
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->channelPricingLogEntryClass)

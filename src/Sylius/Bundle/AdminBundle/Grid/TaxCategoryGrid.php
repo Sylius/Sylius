@@ -33,7 +33,7 @@ final class TaxCategoryGrid extends AbstractGrid implements TaxCategoryGridInter
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->taxCategoryClass)
