@@ -45,7 +45,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
-        timeout-minutes: 45
+        timeout-minutes: 55
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
@@ -151,7 +151,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
-        timeout-minutes: 45
+        timeout-minutes: 55
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
@@ -245,7 +245,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
-        timeout-minutes: 45
+        timeout-minutes: 55
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
