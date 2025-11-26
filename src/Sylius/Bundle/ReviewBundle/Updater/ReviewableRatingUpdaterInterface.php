@@ -20,5 +20,8 @@ interface ReviewableRatingUpdaterInterface
 {
     public function update(ReviewableInterface $reviewSubject): void;
 
+    /**
+     * @deprecated since Sylius 2.2, will be removed in Sylius 3.0. Use state machine mechanism implemented by Symfony Workflow instead.
+     */
     public function updateFromReview(ReviewInterface $review): void;
 }
