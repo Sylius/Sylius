@@ -1,3 +1,23 @@
+# UPGRADE FROM `v1.14.12` TO `v1.14.13`
+
+## State Machine
+
+1. Product Review Average Rating Update
+The `after` callback for updating average ratings when a review is accepted has been disabled to prevent duplicate calculations.
+This change affects the `sylius_product_review` state machine configuration in the `accept` transition.
+
+The average rating updater callback had priority `-100` and was being executed twice, which has now been fixed by disabling this specific callback.
+
+```diff
+        callbacks:
+            after:
+                sylius_update_rating:
+                    on: ["accept"]
+                    do: ["@sylius.product_review.average_rating_updater", "updateFromReview"]
+                    args: ["object"]
+                    priority: -100
++                   disabled: true
+```
 # UPGRADE FROM `v1.14.11` TO `v1.14.12`
 
 ## Configuration
