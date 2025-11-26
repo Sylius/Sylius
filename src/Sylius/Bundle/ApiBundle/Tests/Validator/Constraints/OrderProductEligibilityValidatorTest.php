@@ -30,7 +30,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 final class OrderProductEligibilityValidatorTest extends TestCase
 {
     private MockObject|OrderRepositoryInterface $orderRepository;
-    private MockObject|ExecutionContextInterface $context;
+
+    private ExecutionContextInterface|MockObject $context;
+
     private OrderProductEligibilityValidator $validator;
 
     protected function setUp(): void
