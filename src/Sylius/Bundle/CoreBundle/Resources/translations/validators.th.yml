@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: รหัสสกุลเงินที่คุณป้อนไม่ถูกต้อง
         payment_method_eligibility: '%paymentMethodName% วิธีการชำระเงินนี้ถูกปิดใช้งาน กรุณาเลือกวิธีการชำระเงินใหม่'
-        product_eligibility: '%productName% สินค้านี้ถูกปิดใช้งาน'
+        product_eligibility: 'สินค้า %productName% ไม่สามารถใช้งานได้อีกต่อไป.'
         shipping_method_eligibility: 'สินค้าไม่สามารถจัดส่งด้วยวิธีจัดส่ง %shippingMethodName% กรุณาเลือกวิธีการจัดส่งใหม่'
     locale:
         enabled:

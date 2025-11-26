@@ -22,3 +22,4 @@ winzou_state_machine:
                     do: ["@sylius.updater.product_review.average_rating", "updateFromReview"]
                     args: ["object"]
                     priority: -100
+                    disabled: true

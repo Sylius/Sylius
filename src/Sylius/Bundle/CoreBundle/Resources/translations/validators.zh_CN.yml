@@ -106,7 +106,7 @@ sylius:
             not_valid: '您输入的货币代码无效。'
         invalid_state_transition: '订单状态错误，无法完成。当前状态：%currentState%。可用状态变更：%possibleTransitions%。'
         payment_method_eligibility: '支付方式 %paymentMethodName% 已禁用。请重新选择支付方式。'
-        product_eligibility: '产品 %productName% 已禁用。'
+        product_eligibility: '产品 %productName% 已不再提供。'
         shipping_method_eligibility: '产品不符合 %shippingMethodName% 配送方式的要求。请重新选择配送方式。'
         shipping_method_not_available: '“%shippingMethodName%”配送方式不可用。请重新选择配送方式。'
         cart_items_immutable: '结账完成后无法更改购物车商品。'

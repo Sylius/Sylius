@@ -106,7 +106,7 @@ sylius:
             not_valid: 'Zadaný kód měny je neplatný.'
         invalid_state_transition: 'Nelze dokončit, protože objednávka je v nesprávném stavu. Aktuální: %currentState%. Možné přechody: %possibleTransitions%.'
         payment_method_eligibility: 'Tato platební metoda %paymentMethodName% byla zakázána. Prosím vyberte jinou platební metodu.'
-        product_eligibility: 'Tento produkt %productName% byl zakázán.'
+        product_eligibility: 'Produkt %productName% již není dostupný.'
         shipping_method_eligibility: 'Produkt nesplňuje požadavky pro dopravní metodu %shippingMethodName%. Prosím vyberte jinou dopravní metodu.'
         shipping_method_not_available: 'Dopravní metoda "%shippingMethodName%" není k dispozici. Prosím vyberte jinou dopravní metodu.'
         cart_items_immutable: 'Po dokončení objednávky nelze změnit položky v košíku.'

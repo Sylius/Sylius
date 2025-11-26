@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: Ο κωδικός συναλλάγματος που έχετε εισάγει δεν είναι έγκυρος.
         payment_method_eligibility: 'Η %paymentMethodName% μέθοδος πληρωμής έχει απενεργοποιηθεί. Παρακαλώ επιλέξτε ξανά τη μέθοδο πληρωμής σας.'
-        product_eligibility: 'Αυτό το προϊόν %productName% έχει απενεργοποιηθεί.'
+        product_eligibility: 'Το προϊόν %productName% δεν είναι πλέον διαθέσιμο.'
         shipping_method_eligibility: 'Το προϊόν δεν ανταποκρίνεται στις απαιτήσεις για την μέθοδο αποστολής %shippingMethodName%. Παρακαλώ επιλέξτε ξανά τη μέθοδο αποστολής σας.'
     locale:
         enabled:

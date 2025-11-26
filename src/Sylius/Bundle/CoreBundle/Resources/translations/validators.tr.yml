@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: Girdiğiniz para birimi kodu geçersiz.
         payment_method_eligibility: 'Bu ödeme şekli %paymentMethodName% devre dışı bırakılmıştır. Lütfen ödeme şeklinizi tekrar seçiniz.'
-        product_eligibility: 'Bu ürün%productName% devre dışı bırakılmıştır.'
+        product_eligibility: 'Ürün %productName% artık mevcut değil.'
         shipping_method_eligibility: 'Ürün gereksinimleri %shippingMethodName% sevkiyat yöntemi için uygun değil. Lütfen, sevkiyat yöntemi yeniden seçin.'
     locale:
         enabled:
