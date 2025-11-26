@@ -4,8 +4,14 @@
 sylius:
     channel:
         code:
-            not_blank: Zadajte kód kanálu.
-            regex: Kód kanálu môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: Kód kanálu musí byť jedinečný.
+            max_length: 'Kód nesmie byť dlhší ako {{ limit }} znakov.'
+            not_blank: 'Zadajte kód kanála.'
+            regex: 'Kód kanála môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            unique: 'Kód kanála musí byť jedinečný.'
         name:
-            not_blank: Zadajte názov kanálu.
+            not_blank: 'Zadajte názov kanála.'
+            max_length: 'Názov kanála nesmie byť dlhší ako {{ limit }} znakov.'
+        color:
+            max_length: 'Farba nesmie byť dlhšia ako {{ limit }} znakov.'
+        hostname:
+            max_length: 'Názov hostiteľa nesmie byť dlhší ako {{ limit }} znakov.'

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\OrderBundle\Controller\OrderController as BaseOrderController;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\SyliusCartEvents;
@@ -46,7 +45,7 @@ class OrderController extends BaseOrderController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($cart));
+            return $this->createRestView($configuration, $cart);
         }
 
         $form = $this->resourceFormFactory->create($configuration, $cart);

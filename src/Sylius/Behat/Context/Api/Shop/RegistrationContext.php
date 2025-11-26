@@ -18,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -25,6 +26,8 @@ use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
 {
+    use SecurePasswordTrait;
+
     private array $content = [];
 
     public function __construct(
@@ -87,7 +90,7 @@ final class RegistrationContext implements Context
      */
     public function iSpecifyThePasswordAs(string $password = ''): void
     {
-        $this->content['password'] = $password;
+        $this->content['password'] = $this->replaceWithSecurePassword($password);
     }
 
     /**
@@ -200,10 +203,10 @@ final class RegistrationContext implements Context
         $content = $this->getResponseContent();
 
         Assert::same(
-            $content['message'],
+            $content['hydra:description'],
             'Request does not have the following required fields specified: ' . implode(', ', $fields) . '.',
         );
-        Assert::same($content['code'], 400);
+        Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 400);
     }
 
     /**
@@ -290,7 +293,7 @@ final class RegistrationContext implements Context
     {
         $this->content = [
             'email' => $email,
-            'password' => $password,
+            'password' => $this->replaceWithSecurePassword($password),
         ];
     }
 

@@ -3,4 +3,6 @@
 
 sylius:
     promotion_coupon:
-        generate: 'Propagační kupóny byly úspěšně vytvořeny.'
+        generate: 'Kupóny na propagaci byly úspěšně vygenerovány.'
+    catalog_promotion:
+        remove: 'Byl požádán o odstranění propagace katalogu. Tento proces může chvíli trvat v závislosti na počtu postižených produktů.'

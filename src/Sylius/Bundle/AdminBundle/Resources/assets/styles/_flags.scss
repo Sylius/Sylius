@@ -1,0 +1,25 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+.flag {
+    position: relative;
+    display: inline-block;
+    height: $avatar-size;
+    aspect-ratio: 1.33333;
+    background-position: center;
+    background-repeat: no-repeat;
+    vertical-align: bottom;
+    border: 1px solid $gray-300;
+}
+
+@each $flag-size, $size in $flag-sizes {
+    .flag-#{$flag-size} {
+        height: map-get($size, size);
+    }
+}

@@ -1,0 +1,5 @@
+{% set address = hookable_metadata.context.address %}
+
+{% if address.company is not null %}
+    <strong>{{ address.company }}</strong>
+{% endif %}

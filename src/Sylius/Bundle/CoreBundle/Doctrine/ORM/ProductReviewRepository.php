@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -26,7 +27,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
  */
 class ProductReviewRepository extends EntityRepository implements ProductReviewRepositoryInterface
 {
-    public function findLatestByProductId($productId, int $count): array
+    public function findLatestByProductId(mixed $productId, int $count): array
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.reviewSubject = :productId')
@@ -58,6 +59,19 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
         ;
     }
 
+    public function countAcceptedByProduct(ProductInterface $product): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.reviewSubject = :product')
+            ->andWhere('o.status = :status')
+            ->setParameter('product', $product)
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder
     {
         return $this->createQueryBuilder('o')
@@ -70,7 +84,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
         ;
     }
 
-    public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface
+    public function findOneByIdAndProductCode(mixed $id, string $productCode): ?ReviewInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.reviewSubject', 'product')
@@ -80,6 +94,17 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    public function countNew(): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.status = :status')
+            ->setParameter('status', ReviewInterface::STATUS_NEW)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 }

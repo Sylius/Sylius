@@ -1,20 +1,24 @@
 services:
     static:
-        image: sylius/standard:1.11-traditional
+        build:
+            dockerfile: .docker/test/Dockerfile
+            context: .
         entrypoint: ["make", "static"]
         profiles: ["static-analyze"]
         environment:
             APP_ENV: "test_cached"
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
         volumes:
-            - ./:/app:delegated
-            - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
-            - ./.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated
+            - ./:/srv/sylius:delegated
+            - .docker/test/php.ini:/etc/php/8.2/fpm/php.ini:delegated
+            - .docker/test/php.ini:/usr/local/etc/php/php-cli.ini:delegated
         networks:
             - sylius
     
     behat:
-        image: sylius/standard:1.11-traditional
+        build:
+            dockerfile: .docker/test/Dockerfile
+            context: .
         entrypoint: ["make", "integration"]
         profiles: ["integration"]
         environment:
@@ -27,9 +31,9 @@ services:
             SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_DSN: "sync://"
             SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN: "sync://"
         volumes:
-            - ./:/app:delegated
-            - ./.docker/test/php.ini:/etc/php/8.0/fpm/php.ini:delegated
-            - ./.docker/test/php.ini:/etc/php/8.0/cli/php.ini:delegated
+            - ./:/srv/sylius:delegated
+            - .docker/test/php.ini:/etc/php/8.2/fpm/php.ini:delegated
+            - .docker/test/php.ini:/usr/local/etc/php/php-cli.ini:delegated
         depends_on:
             - mysql
         networks:

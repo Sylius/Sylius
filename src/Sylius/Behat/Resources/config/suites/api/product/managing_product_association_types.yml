@@ -22,6 +22,7 @@ default:
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
                 - sylius.behat.context.api.admin.translation
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@managing_product_association_types&&@api"

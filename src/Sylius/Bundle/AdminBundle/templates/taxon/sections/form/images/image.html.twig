@@ -1,0 +1,14 @@
+{% set form = hookable_metadata.context.form %}
+
+<div class="col-12 col-md-6 row mb-4"
+    {{ sylius_test_html_attribute('image')}}
+    {{ sylius_test_html_attribute('type', form.type.vars.value) }}
+    {{ sylius_test_html_attribute('image-url', form.vars.value.path ? form.vars.value.path|imagine_filter('sylius_small') : null) }}
+>
+    <div class="col-auto">
+        {% hook "image#left" %}
+    </div>
+    <div class="col">
+        {% hook "image#right" %}
+    </div>
+</div>

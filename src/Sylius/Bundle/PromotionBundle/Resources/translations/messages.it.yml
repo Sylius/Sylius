@@ -4,66 +4,80 @@
 sylius:
     form:
         catalog_promotion:
-            description: Descrizione
-            name: "Nome\n"
-            priority: Priorità
+            action:
+                fixed_discount: 'Sconto fisso'
+                percentage_discount: 'Sconto percentuale'
+            description: 'Descrizione'
+            enabled: 'Abilitato'
+            end_date: 'Data di fine'
+            label: 'Etichetta'
+            name: 'Nome'
+            priority: 'Priorità'
+            start_date: 'Data di inizio'
+            translations: 'Traduzioni'
         promotion:
-            actions: Azioni
-            add_action: Aggiungi azione
-            add_rule: Aggiungi regola
-            coupon_based: Basata su codice sconto
-            description: Descrizione
-            ends_at: Termina
-            exclusive: Esclusivo
-            name: "Nome\n"
-            priority: Priorità
-            rules: Regole
-            starts_at: Inizia il
-            usage_limit: Limite di utilizzo
+            actions: 'Azioni'
+            add_action: 'Aggiungi azione'
+            add_rule: 'Aggiungi regola'
+            applies_to_discounted: 'Si applica agli articoli dell''ordine già scontati'
+            applies_to_discounted_details: 'Con questa opzione la promozione del carrello sarà applicata agli articoli dell''ordine già scontati da promozioni del catalogo.'
+            coupon_based: 'Basato su coupon'
+            description: 'Descrizione'
+            ends_at: 'Finisce il'
+            exclusive: 'Esclusivo'
+            label: 'Etichetta'
+            name: 'Nome'
+            priority: 'Priorità'
+            rules: 'Regole'
+            starts_at: 'Inizia il'
+            usage_limit: 'Limite di utilizzo'
         promotion_action:
-            item_fixed_discount: Sconto fisso articolo
-            item_percentage_discount: Sconto percentuale articolo
-            order_fixed_discount: Sconto fisso ordine
-            order_percentage_discount: Sconto percentuale ordine
-            shipping_percentage_discount: Sconto percentuale spedizione
+            item_fixed_discount: 'Sconto fisso per articolo'
+            item_percentage_discount: 'Sconto percentuale per articolo'
+            order_fixed_discount: 'Sconto fisso per ordine'
+            order_percentage_discount: 'Sconto percentuale per ordine'
+            shipping_percentage_discount: 'Sconto percentuale su spedizione'
+            filters: 'Filtri'
             fixed_discount_configuration:
-                amount: Importo
+                amount: 'Importo'
             percentage_discount_configuration:
-                percentage: Percentuale
-            type: Tipo
+                percentage: 'Percentuale'
+            type: 'Tipo'
         promotion_coupon:
-            expires_at: Scade il
-            usage_limit: Limite di utilizzo
+            expires_at: 'Scade il'
+            usage_limit: 'Limite di utilizzo'
         promotion_coupon_generator_instruction:
-            amount: Importo
-            code_length: Lunghezza del codice
-            expires_at: Scade il
-            usage_limit: Limite di utilizzo
+            amount: 'Importo'
+            code_length: 'Lunghezza del codice'
+            expires_at: 'Scade il'
+            prefix: 'Prefisso'
+            suffix: 'Suffisso'
+            usage_limit: 'Limite di utilizzo'
         promotion_filter:
-            price_range: Filtro di fascia di prezzo
+            price_range: 'Filtro intervallo di prezzo'
         promotion_rule:
-            cart_quantity: Quantità carrello
-            contains_product: Contenuto prodotto
-            customer_group: Gruppo clienti
-            has_at_least_one_from_taxons: Ha almeno uno da taxons
-            item_total: Totale articolo
-            nth_order: Ennesimo ordine
-            shipping_country: Paese di spedizione
-            taxonomy: Tassonomia
-            total_price_of_items_from_taxon: Prezzo totale degli articoli da taxon
+            cart_quantity: 'Quantità nel carrello'
+            contains_product: 'Contiene prodotto'
+            customer_group: 'Gruppo cliente'
+            has_at_least_one_from_taxons: 'Ha almeno uno dei taxon'
+            item_total: 'Totale articolo'
+            nth_order: 'Ordine n-esimo'
+            shipping_country: 'Paese di spedizione'
+            taxonomy: 'Tassonomia'
+            total_price_of_items_from_taxon: 'Prezzo totale degli articoli del taxon'
             cart_quantity_configuration:
-                count: Quantità
-                equal: Uguale
+                count: 'Conteggio'
+                equal: 'Uguale'
             contains_product_configuration:
-                exclude: Escludi
-                variants: Prodotti
+                exclude: 'Escludi'
+                variants: 'Prodotti'
             item_total_configuration:
-                amount: Importo
+                amount: 'Importo'
             nth_order_configuration:
-                nth: Ennesimo
+                nth: 'N-esimo'
             shipping_country_configuration:
-                country: Nazione
+                country: 'Paese'
             taxonomy_configuration:
-                exclude: Escludi
-                taxons: Tassonomia
-            type: Tipo
+                exclude: 'Escludi'
+                taxons: 'Taxons'
+            type: 'Tipo'

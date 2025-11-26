@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\OpenApi\Documentation;
 
-use ApiPlatform\Core\OpenApi\Model\Parameter;
+use ApiPlatform\OpenApi\Model\Parameter;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\OpenApi;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -56,8 +56,12 @@ final class AcceptLanguageHeaderDocumentationModifier implements DocumentationMo
                 $parameters = $operation->getParameters();
                 $parameters[] = $acceptLanguageHeaderParameter;
 
+                if (!isset($pathItems[$path])) {
+                    $pathItems[$path] = $pathItem;
+                }
+
                 $operation = $operation->withParameters($parameters);
-                $pathItems[$path] = $pathItem->{'with' . ucfirst($method)}($operation);
+                $pathItems[$path] = $pathItems[$path]->{'with' . ucfirst($method)}($operation);
             }
         }
 

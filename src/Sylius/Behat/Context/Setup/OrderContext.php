@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -49,9 +49,10 @@ use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Webmozart\Assert\Assert;
 
-final class OrderContext implements Context
+final readonly class OrderContext implements Context
 {
     /**
      * @param FactoryInterface<OrderInterface> $orderFactory
@@ -66,23 +67,23 @@ final class OrderContext implements Context
      * @param ShippingMethodRepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
      */
     public function __construct(
-        private readonly SharedStorageInterface $sharedStorage,
-        private readonly FactoryInterface $orderFactory,
-        private readonly FactoryInterface $addressFactory,
-        private readonly FactoryInterface $customerFactory,
-        private readonly FactoryInterface $orderItemFactory,
-        private readonly FactoryInterface $shipmentFactory,
-        private readonly StateMachineInterface $stateMachine,
-        private readonly RepositoryInterface $countryRepository,
-        private readonly RepositoryInterface $customerRepository,
-        private readonly OrderRepositoryInterface $orderRepository,
-        private readonly PaymentMethodRepositoryInterface $paymentMethodRepository,
-        private readonly ShippingMethodRepositoryInterface $shippingMethodRepository,
-        private readonly ProductVariantResolverInterface $variantResolver,
-        private readonly OrderItemQuantityModifierInterface $itemQuantityModifier,
-        private readonly ObjectManager $objectManager,
-        private readonly DateTimeProviderInterface $dateTimeProvider,
-        private readonly RandomnessGeneratorInterface $randomnessGenerator,
+        private SharedStorageInterface $sharedStorage,
+        private FactoryInterface $orderFactory,
+        private FactoryInterface $addressFactory,
+        private FactoryInterface $customerFactory,
+        private FactoryInterface $orderItemFactory,
+        private FactoryInterface $shipmentFactory,
+        private StateMachineInterface $stateMachine,
+        private RepositoryInterface $countryRepository,
+        private RepositoryInterface $customerRepository,
+        private OrderRepositoryInterface $orderRepository,
+        private PaymentMethodRepositoryInterface $paymentMethodRepository,
+        private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ProductVariantResolverInterface $variantResolver,
+        private OrderItemQuantityModifierInterface $itemQuantityModifier,
+        private ObjectManager $objectManager,
+        private ClockInterface $clock,
+        private RandomnessGeneratorInterface $randomnessGenerator,
     ) {
     }
 
@@ -127,6 +128,20 @@ final class OrderContext implements Context
         PaymentMethodInterface $paymentMethod,
     ): void {
         $this->placeOrder($product, $shippingMethod, $address, $paymentMethod, $customer, 1);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^there is a (customer "[^"]+") that placed order with ("[^"]+" product) to ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment) method without completing it$/
+     */
+    public function thereIsACustomerThatPlacedOrderWithProductToBasedBillingAddressWithShippingMethodAndPaymentMethodWithoutCompletingIt(
+        CustomerInterface $customer,
+        ProductInterface $product,
+        AddressInterface $address,
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod,
+    ): void {
+        $this->placeOrder($product, $shippingMethod, $address, $paymentMethod, $customer, 1, false);
         $this->objectManager->flush();
     }
 
@@ -200,9 +215,7 @@ final class OrderContext implements Context
         $this->sharedStorage->set('cart', $cart);
     }
 
-    /**
-     * @Given /^(I) placed (an order "[^"]+")$/
-     */
+    #[Given('/^(I) placed (an order "[^"]+")$/')]
     public function iPlacedAnOrder(ShopUserInterface $user, string $orderNumber): void
     {
         /** @var CustomerInterface $customer */
@@ -321,27 +334,6 @@ final class OrderContext implements Context
 
         $this->proceedSelectingShippingAndPaymentMethod($order, $shippingMethod, $paymentMethod);
         $this->completeCheckout($order);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given /^the customer chose ("[^"]+" shipping method)$/
-     */
-    public function theCustomerChoseShippingMethod(ShippingMethodInterface $shippingMethod): void
-    {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        foreach ($order->getShipments() as $shipment) {
-            $shipment->setMethod($shippingMethod);
-        }
-
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
-        if (!$order->getPayments()->isEmpty()) {
-            $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PAY);
-        }
 
         $this->objectManager->flush();
     }
@@ -468,9 +460,7 @@ final class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(I) have already placed (\d+) orders choosing ("[^"]+" product), ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
-     */
+    #[Given('/^(I) have already placed (\d+) orders choosing ("[^"]+" product), ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/')]
     public function iHaveAlreadyPlacedOrderNthTimes(
         ShopUserInterface $user,
         int $numberOfOrders,
@@ -876,7 +866,10 @@ final class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->orderFactory->createNew();
 
-        $order->setCustomer($customer);
+        $customer->getUser() === null
+            ? $order->setCustomer($customer)
+            : $order->setCustomerWithAuthorization($customer)
+        ;
         $order->setChannel($channel ?? $this->sharedStorage->get('channel'));
         $order->setLocaleCode($this->sharedStorage->get('locale')->getCode());
         $order->setCurrencyCode($order->getChannel()->getBaseCurrency()->getCode());
@@ -917,7 +910,7 @@ final class OrderContext implements Context
             $customer->setFirstname('John');
             $customer->setLastname('Doe' . $i);
 
-            $customer->setCreatedAt($this->dateTimeProvider->now());
+            $customer->setCreatedAt($this->clock->now());
 
             $customers[] = $customer;
 
@@ -932,6 +925,7 @@ final class OrderContext implements Context
         ShippingMethodInterface $shippingMethod,
         AddressInterface $address,
         PaymentMethodInterface $paymentMethod,
+        bool $completeOrder = true,
     ): void {
         $order->setShippingAddress($address);
         $order->setBillingAddress(clone $address);
@@ -939,7 +933,9 @@ final class OrderContext implements Context
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         $this->proceedSelectingShippingAndPaymentMethod($order, $shippingMethod, $paymentMethod);
-        $this->completeCheckout($order);
+        if ($completeOrder) {
+            $this->completeCheckout($order);
+        }
     }
 
     private function completeCheckout(OrderInterface $order): void
@@ -1021,7 +1017,7 @@ final class OrderContext implements Context
                 $this->shipOrder($order);
             }
 
-            $order->setCheckoutCompletedAt($this->dateTimeProvider->now());
+            $order->setCheckoutCompletedAt($this->clock->now());
 
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);
@@ -1139,6 +1135,7 @@ final class OrderContext implements Context
         PaymentMethodInterface $paymentMethod,
         CustomerInterface $customer,
         int $number,
+        bool $completeOrder = true,
     ): void {
         $variant = $this->getProductVariant($product);
 
@@ -1151,14 +1148,20 @@ final class OrderContext implements Context
 
         $this->itemQuantityModifier->modify($item, 1);
 
-        $order = $this->createOrder($customer, '#00000' . $number);
+        $order = $this->createOrder($customer, '00000' . $number);
         $order->addItem($item);
 
-        $this->checkoutUsing($order, $shippingMethod, clone $address, $paymentMethod);
-        $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
+        $this->checkoutUsing($order, $shippingMethod, clone $address, $paymentMethod, $completeOrder);
+
+        if ($completeOrder) {
+            $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
+        }
 
         $this->objectManager->persist($order);
         $this->sharedStorage->set('order', $order);
+        if (!$completeOrder) {
+            $this->sharedStorage->set('cart_token', $order->getTokenValue());
+        }
     }
 
     private function getProductVariant(ProductInterface $product): ProductVariantInterface

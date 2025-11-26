@@ -4,6 +4,7 @@
 sylius:
     locale:
         code:
-            not_blank: Zvolte kód národního prostředí (locale).
-            regex: Kód národního prostředí (locale) můžou tvořit pouze písmena, číslice, pomlčky a podtržítka.
-            unique: Kód národního prostředí (locale) musí být unikátní.
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím vyberte kód jazykové verze.'
+            locale: 'Tato hodnota není platný kód jazykové verze.'
+            unique: 'Kód jazykové verze musí být jedinečný.'

@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    currency:
+        code:
+            not_blank: '통화 코드를 선택하세요.'
+            unique: '통화 코드는 고유해야 합니다.'
+            currency: '유효한 통화 코드가 아닙니다.'
+        exchange_rate:
+            not_blank: '환율을 입력하세요.'
+    exchange_rate:
+        ratio:
+            greater_than: '비율은 {{ compared_value }}보다 커야 합니다.'
+            less_than: '비율은 {{ compared_value }}보다 작아야 합니다.'
+            invalid: '비율은 숫자여야 합니다.'
+            not_blank: '환율 비율을 입력하세요.'
+        source_currency:
+            not_blank: '환율의 기준 통화를 입력하세요.'
+        target_currency:
+            not_blank: '환율이 설정될 대상 통화를 입력하세요.'
+        unique_currency_pair: '통화 쌍은 고유해야 합니다.'
+        different_source_target_currency: '기준 통화와 대상 통화는 달라야 합니다.'

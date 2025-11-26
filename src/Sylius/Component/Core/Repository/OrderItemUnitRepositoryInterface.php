@@ -24,5 +24,5 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface OrderItemUnitRepositoryInterface extends RepositoryInterface
 {
-    public function findOneByCustomer($id, CustomerInterface $customer): ?OrderItemUnitInterface;
+    public function findOneByCustomer(mixed $id, CustomerInterface $customer): ?OrderItemUnitInterface;
 }

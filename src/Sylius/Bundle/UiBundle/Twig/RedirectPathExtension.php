@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Twig;
 
-use Sylius\Bundle\UiBundle\Storage\FilterStorageInterface;
+use Sylius\Bundle\GridBundle\Storage\FilterStorageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
@@ -59,6 +59,7 @@ final class RedirectPathExtension extends AbstractExtension
         return $this->router->generate($route, $this->filterStorage->all());
     }
 
+    /** @param array<string, mixed> $routeInfo */
     private function hasAdditionalParameters(array $routeInfo): bool
     {
         return count($routeInfo) > self::NUMBER_OF_ROUTE_PROPERTIES;

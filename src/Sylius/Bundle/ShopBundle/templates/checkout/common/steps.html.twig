@@ -1,0 +1,53 @@
+{% set order = hookable_metadata.context.order %}
+{% set active_step = hookable_metadata.context.active_step|default('') %}
+{% set order_requires_shipping = sylius_is_shipping_required(order) %}
+{% set order_requires_payment = sylius_is_payment_required(order) %}
+
+{% set steps = [
+    {
+        'name': 'address',
+        'route': 'sylius_shop_checkout_address',
+        'label': 'sylius.ui.address'|trans,
+        'required': true,
+        'state': active_step == 'address' ? 'active' : 'completed',
+        'test_attribute': 'step-address',
+    },
+    {
+        'name': 'select_shipping',
+        'route': 'sylius_shop_checkout_select_shipping',
+        'label': 'sylius.ui.shipping'|trans,
+        'required': order_requires_shipping,
+        'state': active_step == 'select_shipping' ? 'active' : (active_step == 'address' ? 'disabled' : 'completed'),
+        'test_attribute': 'step-shipping',
+    },
+    {
+        'name': 'select_payment',
+        'route': 'sylius_shop_checkout_select_payment',
+        'label': 'sylius.ui.payment'|trans,
+        'required': order_requires_payment,
+        'state': active_step == 'select_payment' ? 'active' : (active_step == 'complete' ? 'completed' : 'disabled'),
+        'test_attribute': 'step-payment',
+    },
+    {
+        'name': 'complete',
+        'route': 'sylius_shop_checkout_complete',
+        'label': 'sylius.ui.complete'|trans,
+        'required': true,
+        'state': active_step == 'complete' ? 'active' : 'disabled',
+        'test_attribute': 'step-complete',
+    },
+] %}
+
+<div class="steps steps-{{ active_step }} mb-5">
+    {% for step in steps|filter(step => step.required) %}
+        <div class="steps-item steps-item-{{ step.state }}">
+            {% if step.state != 'disabled' %}
+                <a href="{{ path(step.route) }}" {{ sylius_test_html_attribute(step.test_attribute) }}>
+                    {{ step.label|trans }}
+                </a>
+            {% else %}
+                {{ step.label|trans }}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>

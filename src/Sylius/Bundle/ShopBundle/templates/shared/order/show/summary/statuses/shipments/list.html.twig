@@ -1,0 +1,7 @@
+{% for shipment in hookable_metadata.context.order.shipments %}
+    <div class="card-body d-flex flex-column gap-2">
+        <div class="d-flex justify-content-between gap-4">
+            {% hook 'list' with { shipment } %}
+        </div>
+    </div>
+{% endfor %}

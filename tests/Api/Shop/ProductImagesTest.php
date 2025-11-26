@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use PHPUnit\Framework\Attributes\Test;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\ProductImageInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,65 +29,114 @@ final class ProductImagesTest extends JsonApiTestCase
         $this->setUpDefaultGetHeaders();
     }
 
-    /** @test */
-    public function it_gets_a_product_image(): void
+    #[Test]
+    public function it_gets_product_images(): void
     {
-        $fixtures = $this->loadFixturesFromFiles([
-            'product/product_image.yaml',
-        ]);
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml']);
 
-        /** @var ProductImageInterface $productImage */
-        $productImage = $fixtures['product_mug_thumbnail'];
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
 
         $this->requestGet(
-            uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
-            headers: ['HTTPS' => true]
+            uri: sprintf('/api/v2/shop/products/%s/images', $product->getCode()),
+            headers: ['HTTPS' => true],
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'shop/product_image/get_product_images');
+    }
+
+    #[Test]
+    public function it_gets_product_images_with_image_filter(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml']);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+
+        $this->requestGet(
+            sprintf('/api/v2/shop/products/%s/images', $product->getCode()),
+            [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
+            ['HTTPS' => true],
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'shop/product_image/get_product_images_with_image_filter');
+    }
+
+    #[Test]
+    public function it_prevents_getting_product_images_with_an_invalid_image_filter(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml']);
+
+        /** @var ProductInterface $product */
+        $product = $fixtures['product_mug'];
+
+        $this->requestGet(
+            sprintf('/api/v2/shop/products/%s/images', $product->getCode()),
+            [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
+            ['HTTPS' => true],
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product_image/get_product_image_response',
-            Response::HTTP_OK,
+            'common/image/invalid_filter',
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
-    /** @test */
-    public function it_gets_a_product_image_with_an_image_filter(): void
+    #[Test]
+    public function it_gets_a_product_image(): void
     {
-        $fixtures = $this->loadFixturesFromFiles([
-            'product/product_image.yaml',
-        ]);
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml']);
 
         /** @var ProductImageInterface $productImage */
         $productImage = $fixtures['product_mug_thumbnail'];
+        /** @var ProductInterface $product */
+        $product = $productImage->getOwner();
 
         $this->requestGet(
-            uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
-            queryParameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
-            headers: ['HTTPS' => true]
+            uri: sprintf('/api/v2/shop/products/%s/images/%s', $product->getCode(), $productImage->getId()),
+            headers: ['HTTPS' => true],
+        );
+
+        $this->assertResponse($this->client->getResponse(), 'shop/product_image/get_product_image_response');
+    }
+
+    #[Test]
+    public function it_gets_a_product_image_with_an_image_filter(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml']);
+
+        /** @var ProductImageInterface $productImage */
+        $productImage = $fixtures['product_mug_thumbnail'];
+        /** @var ProductInterface $product */
+        $product = $productImage->getOwner();
+
+        $this->requestGet(
+            sprintf('/api/v2/shop/products/%s/images/%s', $product->getCode(), $productImage->getId()),
+            [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
+            ['HTTPS' => true],
         );
 
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product_image/get_product_image_with_image_filter_response',
-            Response::HTTP_OK,
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_getting_a_product_image_with_an_invalid_image_filter(): void
     {
-        $fixtures = $this->loadFixturesFromFiles([
-            'product/product_image.yaml',
-        ]);
+        $fixtures = $this->loadFixturesFromFiles(['product/product_image.yaml']);
 
         /** @var ProductImageInterface $productImage */
         $productImage = $fixtures['product_mug_thumbnail'];
+        /** @var ProductInterface $product */
+        $product = $productImage->getOwner();
 
         $this->requestGet(
-            uri: sprintf('/api/v2/shop/product-images/%s', $productImage->getId()),
-            queryParameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
-            headers: ['HTTPS' => true]
+            sprintf('/api/v2/shop/products/%s/images/%s', $product->getCode(), $productImage->getId()),
+            [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
+            ['HTTPS' => true],
         );
 
         $this->assertResponse(

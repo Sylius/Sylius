@@ -35,9 +35,9 @@ final class ManagingPlacedOrderAddressesContext implements Context
     ];
 
     public function __construct(
-        private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker,
-        private SharedStorageInterface $sharedStorage,
+        private readonly ApiClientInterface $client,
+        private readonly ResponseCheckerInterface $responseChecker,
+        private readonly SharedStorageInterface $sharedStorage,
     ) {
     }
 

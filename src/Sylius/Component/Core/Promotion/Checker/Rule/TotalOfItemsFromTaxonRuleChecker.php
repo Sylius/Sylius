@@ -30,6 +30,8 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
     }
 
     /**
+     * @param array<string, mixed> $configuration
+     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool

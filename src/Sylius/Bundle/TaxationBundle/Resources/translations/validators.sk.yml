@@ -4,23 +4,32 @@
 sylius:
     tax_category:
         name:
-            not_blank: Zadajte názov daňovej kategórie.
+            not_blank: 'Prosím, zadajte názov daňovej kategórie.'
+            min_length: 'Názov daňovej kategórie musí mať aspoň 1 znak.|Názov daňovej kategórie musí mať aspoň {{ limit }} znakov.'
+            max_length: 'Názov daňovej kategórie nesmie byť dlhší než 1 znak.|Názov daňovej kategórie nesmie byť dlhší než {{ limit }} znakov.'
         code:
-            not_blank: Zadajte kód daňovej kategórie.
-            regex: Kód dane môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: Daňová kategória s daným kódom už existuje.
+            max_length: 'Kód nesmie byť dlhší než {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte kód daňovej kategórie.'
+            regex: 'Kód daňovej kategórie môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            unique: 'Daňová kategória s daným kódom už existuje.'
     tax_rate:
         category:
-            not_blank: Prosím vyberte daňovú kategóriu.
+            not_blank: 'Prosím, vyberte daňovú kategóriu.'
         name:
-            not_blank: Zadajte názov sadzby dane.
+            not_blank: 'Prosím, zadajte názov daňovej sadzby.'
+            min_length: 'Názov daňovej sadzby musí mať aspoň 1 znak.|Názov daňovej sadzby musí mať aspoň {{ limit }} znakov.'
+            max_length: 'Názov daňovej sadzby nesmie byť dlhší než 1 znak.|Názov daňovej sadzby nesmie byť dlhší než {{ limit }} znakov.'
         amount:
-            not_blank: Zadajte čiastku sadzby dane.
+            invalid: 'Hodnota daňovej sadzby je neplatná.'
+            not_blank: 'Prosím, zadajte hodnotu daňovej sadzby.'
         calculator:
-            not_blank: Vyberte spôsob výpočtu daňe.
+            not_blank: 'Prosím, vyberte kalkulačku dane.'
         zone:
-            not_blank: Prosím vyberte daňovú zónu.
+            not_blank: 'Prosím, vyberte daňovú zónu.'
         code:
-            not_blank: Zadajte kód daňovej sadzby.
-            regex: Kód sadzby dane môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: Sadzba dane s daným kódom už existuje.
+            max_length: 'Kód nesmie byť dlhší než {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte kód daňovej sadzby.'
+            regex: 'Kód daňovej sadzby môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            unique: 'Daňová sadzba s daným kódom už existuje.'
+        date:
+            greater_than_start_date: 'Daňová sadzba nesmie končiť pred začiatkom.'

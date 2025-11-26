@@ -1,8 +1,0 @@
-{% if data.user is not null %}
-    {% import '@SyliusUi/Macro/labels.html.twig' as label %}
-    {{ label.status(data.user.enabled) }}
-{% else %}
-    <span class="ui icon label">
-        <i class="spy icon"></i> {{ 'sylius.ui.guest'|trans }}
-    </span>
-{% endif %}

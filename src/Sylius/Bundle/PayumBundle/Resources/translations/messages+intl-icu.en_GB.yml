@@ -1,0 +1,4 @@
+sylius:
+    payum_action:
+        payment:
+            description: '{items, plural, one {Payment contains # item for a total of {total}} other {Payment contains # items for a total of {total}}}'

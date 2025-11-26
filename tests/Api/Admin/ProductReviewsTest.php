@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ProductReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -23,7 +25,7 @@ final class ProductReviewsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -45,7 +47,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_product_reviews(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -60,11 +62,11 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_accepts_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::PATCH_CONTENT_TYPE_HEADER);
 
         /** @var ProductReviewerInterface $review */
         $review = $fixtures['new_review'];
@@ -82,11 +84,11 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_rejects_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::PATCH_CONTENT_TYPE_HEADER);
 
         /** @var ProductReviewerInterface $review */
         $review = $fixtures['new_review'];
@@ -104,7 +106,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -131,11 +133,8 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider invalidRatingRangeDataProvider
-     */
+    #[DataProvider('invalidRatingRangeDataProvider')]
+    #[Test]
     public function it_does_not_allow_to_update_a_product_review_with_invalid_rating(int $rating): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -164,7 +163,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    public function invalidRatingRangeDataProvider(): iterable
+    public static function invalidRatingRangeDataProvider(): iterable
     {
         yield [-1];
         yield [6];

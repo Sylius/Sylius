@@ -6,6 +6,7 @@ default:
         api_receiving_discount:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.guest_cart
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.cart
@@ -17,21 +18,25 @@ default:
                 - sylius.behat.context.transform.product_variant
                 - sylius.behat.context.transform.promotion
                 - sylius.behat.context.transform.shared_storage
-                - sylius.behat.context.transform.taxon
                 - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout.address
+                - sylius.behat.context.setup.checkout.shipping
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.promotion
-                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.shipping
-                - sylius.behat.context.setup.taxonomy
                 - sylius.behat.context.setup.shop_api_security
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.taxonomy
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
                 - sylius.behat.context.api.shop.order

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Command;
 
 final class ApplyCatalogPromotionsOnVariants
 {
+    /** @param array<string> $variantsCodes */
     public function __construct(public array $variantsCodes)
     {
     }

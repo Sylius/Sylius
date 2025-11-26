@@ -1,0 +1,24 @@
+{%- macro label(log) -%}
+    {% if log.action == 'create' %}
+        <div class="status status-success">
+            <div class="text-start ps-2">
+                {{ 'sylius.ui.created'|trans }}
+            </div>
+            {{ ux_icon('tabler:plus') }}
+        </div>
+    {% elseif log.action == 'update' %}
+        <div class="status status-yellow">
+            <div class="text-start ps-2">
+                {{ 'sylius.ui.updated'|trans }}
+            </div>
+            {{ ux_icon('tabler:pencil') }}
+        </div>
+    {% else %}
+        <div class="status status-secondary">
+            <div class="text-start ps-2">
+                {{ log.action|title }}
+            </div>
+            <span class="status-dot"></span>
+        </div>
+    {% endif %}
+{%- endmacro -%}

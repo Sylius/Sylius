@@ -26,9 +26,7 @@ interface OrderRepositoryInterface extends RepositoryInterface
 {
     public function countPlacedOrders(): int;
 
-    /**
-     * @return array|OrderInterface[]
-     */
+    /** @return T[] */
     public function findLatest(int $count): array;
 
     public function findLatestCart(): ?OrderInterface;
@@ -37,17 +35,13 @@ interface OrderRepositoryInterface extends RepositoryInterface
 
     public function findOneByTokenValue(string $tokenValue): ?OrderInterface;
 
-    /** @deprecated since Sylius 1.9 and  will be removed in Sylius 2.0, use src/Sylius/Component/Core/Repository/OrderRepositoryInterface instead */
-    public function findCartByTokenValue(string $tokenValue): ?OrderInterface;
+    public function findCartById(mixed $id): ?OrderInterface;
 
-    public function findCartById($id): ?OrderInterface;
-
-    /**
-     * @return array|OrderInterface[]
-     */
+    /** @return T[] */
     public function findCartsNotModifiedSince(\DateTimeInterface $terminalDate, ?int $limit = null): array;
 
     public function createCartQueryBuilder(): QueryBuilder;
 
+    /** @return T[] */
     public function findAllExceptCarts(): array;
 }

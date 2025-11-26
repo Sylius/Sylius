@@ -5,18 +5,27 @@ sylius:
     attribute:
         name:
             not_blank: Ange attributnamn.
-            min_length: Attributnamn måste vara minst 1 tecken.|Attributnamn måste vara minst {{ limit }} tecken.
-            max_length: Attributnamn får inte vara längre än 1 tecken.|Attributnamn får inte vara längre än {{ limit }} tecken.
+            min_length: Attributnamnet måste vara minst 1 tecken långt.|Attributnamnet måste vara minst {{ limit }} tecken långt.
+            max_length: Attributnamnet får inte vara längre än 1 tecken.|Attributnamnet får inte vara längre än {{ limit }} tecken.
         code:
+            min_length: Attributkoden måste vara minst 1 tecken lång.|Attributkoden måste vara minst {{ limit }} tecken lång.
+            max_length: Attributkoden får inte vara längre än 1 tecken.|Attributkoden får inte vara längre än {{ limit }} tecken.
             not_blank: Var god ange en attributkod.
-            regex: Attributs kod kan endast bestå av bokstäver, siffror, bindestreck och understreck.
+            regex: Attributkoden kan endast bestå av bokstäver, siffror, bindestreck och understreck.
             unique: Denna kod används redan.
+        configuration:
+            max_entries: Konfigurationsvärdet för max poster måste vara större än eller lika med min poster-värdet.
+            max_length: Konfigurationsvärdet för max längd måste vara större än eller lika med min längd-värdet.
+            min_entries: Konfigurationsvärdet för min poster måste vara mindre än eller lika med antalet tillagda val.
+            multiple: Konfigurationsinställningen ”multiple” måste vara sann om min- eller maxvärden anges.
         presentation:
-            not_blank: Ange attributpresentation.
-            min_length: Attributpresentationen måste vara minst 1 tecken långt.|Attributpresentationen måste vara minst {{ limit }} tecken långt.
-            max_length: Attributetpresentationen får inte vara längre än 1 tecken.|Attributetpresentationen får inte vara längre än {{ limit }} tecken.
+            not_blank: Ange presentationsnamn för attributet.
+            min_length: Presentationsnamnet måste vara minst 1 tecken långt.|Presentationsnamnet måste vara minst {{ limit }} tecken långt.
+            max_length: Presentationsnamnet får inte vara längre än 1 tecken.|Presentationsnamnet får inte vara längre än {{ limit }} tecken.
+        type:
+            unregistered: 'Attributtypen "%type%" är inte registrerad. Tillgängliga typer: %available_types%.'
     attribute_value:
         attribute:
-            not_blank: Välj attribut.
+            not_blank: Välj ett attribut.
         value:
-            not_blank: Ange attributvärde.
+            not_blank: Ange ett attributvärde.

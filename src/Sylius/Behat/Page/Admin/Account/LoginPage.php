@@ -13,10 +13,25 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Account;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Behat\Mink\Session;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Page\SyliusPage;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-class LoginPage extends SymfonyPage implements LoginPageInterface
+class LoginPage extends SyliusPage implements LoginPageInterface
 {
+    use SecurePasswordTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        private SharedStorageInterface $sharedStorage,
+    ) {
+        parent::__construct($session, $minkParameters, $router);
+    }
+
     public function hasValidationErrorWith(string $message): bool
     {
         return $this->getElement('validation_error')->getText() === $message;
@@ -29,7 +44,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
 
     public function specifyPassword(string $password): void
     {
-        $this->getDocument()->fillField('Password', $password);
+        $this->getDocument()->fillField('Password', $this->retrieveSecurePassword($password));
     }
 
     public function specifyUsername(string $username): void
@@ -45,7 +60,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'validation_error' => '.message.negative',
+            'validation_error' => '[data-test-invalid-credentials-message]',
         ]);
     }
 }

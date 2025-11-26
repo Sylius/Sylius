@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius_shop.form.type.address" class="Sylius\Bundle\ShopBundle\Form\Type\AddressType" >
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.add_to_cart" class="Sylius\Bundle\ShopBundle\Form\Type\AddToCartType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.cart" class="Sylius\Bundle\ShopBundle\Form\Type\CartType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.cart_item" class="Sylius\Bundle\ShopBundle\Form\Type\CartItemType" >
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.customer_registration" class="Sylius\Bundle\ShopBundle\Form\Type\CustomerRegistrationType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.form.type.customer_registration.validation_groups%</argument>
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.customer_profile" class="Sylius\Bundle\ShopBundle\Form\Type\CustomerProfileType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.form.type.customer_profile.validation_groups%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.user_change_password" class="Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.checkout.address" class="Sylius\Bundle\ShopBundle\Form\Type\Checkout\AddressType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.checkout.select_shipping" class="Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectShippingType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.checkout.select_payment" class="Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectPaymentType">
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius_shop.form.type.product_review" class="Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType">
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>

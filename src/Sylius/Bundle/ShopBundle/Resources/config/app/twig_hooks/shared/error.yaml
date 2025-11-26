@@ -1,0 +1,14 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.shared.error':
+            layout:
+                template: '@SyliusShop/shared/error/layout.html.twig'
+                priority: 0
+
+        'sylius_shop.shared.error.layout':
+            logo:
+                template: '@SyliusShop/shared/error/layout/logo.html.twig'
+                priority: 100
+            message:
+                template: '@SyliusShop/shared/error/layout/message.html.twig'
+                priority: 0

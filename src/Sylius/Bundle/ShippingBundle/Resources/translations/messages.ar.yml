@@ -7,27 +7,27 @@ sylius:
             unit_count_configuration:
                 count: العدد
                 equal: يساوي
-            type: نوع القاعدة
+            type: نوع القاعدة       
         shipment:
             state: الحالة
             states:
-                checkout: الخروج
-                pending: معلق
+                checkout: قيد الإعداد
+                pending: قيد الانتظار
                 ready: جاهز
                 shipped: تم الشحن
                 returned: تم الإرجاع
                 cancelled: تم الإلغاء
-            tracking_code: رمز التتبع
+            tracking_code: رمز التتبع      
         shipping_calculator:
             flat_rate_configuration:
-                label: السعر الثابت لكل شحنة
+                label: سعر ثابت لكل شحنة
                 amount: المبلغ
             per_unit_rate_configuration:
-                label: السعر الثابت لكل وحدة
-                amount: المبلغ
+                label: سعر ثابت لكل وحدة
+                amount: المبلغ       
         shipping_category:
             description: الوصف
-            name: الاسم
+            name: الاسم        
         shipping_method:
             add_rule: إضافة قاعدة
             calculator: الآلة الحاسبة
@@ -36,24 +36,26 @@ sylius:
             channels: القنوات
             configuration: الإعدادات
             description: الوصف
-            enabled: مفعل
-            match_all_category_requirement: يجب أن تتوافق جميع الوحدات مع فئة الطريقة
-            match_any_category_requirement: يجب أن تتوافق وحدة واحدة على الأقل مع فئة الطريقة
-            match_none_category_requirement: لا ينبغي أن تتوافق أي من الوحدات مع فئة الطريقة
+            enabled: مفعّل
+            match_all_category_requirement: يجب أن تطابق جميع الوحدات فئة طريقة الشحن
+            match_any_category_requirement: يجب أن تطابق وحدة واحدة على الأقل فئة طريقة الشحن
+            match_none_category_requirement: لا يجب أن تطابق أي وحدة فئة طريقة الشحن
             name: الاسم
-            position: الموقع
+            position: الترتيب
             rules: القواعد
-            rules_help: استخدم القواعد لتحديد ما إذا كانت طريقة الشحن هذه يمكن تطبيقها على الطلب المحدد.
-                إذا كانت القاعدة صحيحة، يمكن تطبيق طريقة الشحن هذه. لاحظ أنه إذا أضفت قواعد متعددة،
-                يجب أن تكون جميع القواعد صحيحة.
-            tax_category: فئة الضرائب
+            rules_help: استخدم القواعد لتحديد ما إذا كان يمكن تطبيق طريقة الشحن على الطلب.
+                إذا كانت القاعدة صحيحة، يمكن تطبيق طريقة الشحن. لاحظ أنه إذا أضفت عدة قواعد،
+                يجب أن تكون جميعها صحيحة.
+            select_calculator: اختر آلة حاسبة
+            tax_category: فئة الضريبة
             translations: الترجمات
         shipping_method_rule:
             items_total_greater_than_or_equal: إجمالي العناصر أكبر من أو يساوي
             items_total_less_than_or_equal: إجمالي العناصر أقل من أو يساوي
             type: النوع
             total: الإجمالي
-            total_weight_greater_than_or_equal: إجمالي الوزن أكبر من أو يساوي
-            total_weight_less_than_or_equal: إجمالي الوزن أقل من أو يساوي
+            total_weight_greater_than_or_equal: الوزن الإجمالي أكبر من أو يساوي
+            total_weight_less_than_or_equal: الوزن الإجمالي أقل من أو يساوي
             weight: الوزن
             amount: المبلغ
+            select: اختر نوع القاعدة

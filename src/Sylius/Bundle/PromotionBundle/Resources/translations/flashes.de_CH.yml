@@ -3,4 +3,6 @@
 
 sylius:
     promotion_coupon:
-        generate: 'Die Gutscheine wurden erfolgreich erstellt.'
+        generate: 'Die Aktionsgutscheine wurden erfolgreich generiert.'
+    catalog_promotion:
+        remove: 'Die Entfernung der Katalogaktion wurde angefordert. Dieser Vorgang kann je nach Anzahl der betroffenen Produkte eine Weile dauern.'

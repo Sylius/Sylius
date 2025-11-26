@@ -29,6 +29,7 @@ final class HomepageContext implements Context
     /**
      * @When I check latest products
      * @When I check available taxons
+     * @When I check latest deals
      */
     public function iCheckLatestProducts(): void
     {
@@ -98,5 +99,13 @@ final class HomepageContext implements Context
     {
         $this->homePage->verify();
         Assert::true($this->homePage->hasLogoutButton());
+    }
+
+    /**
+     * @Then I should see :numberOfProducts products in the latest deals list
+     */
+    public function iShouldSeeProductsInTheDealsList(int $numberOfProducts): void
+    {
+        Assert::same(count($this->homePage->getLatestDealsNames()), $numberOfProducts);
     }
 }

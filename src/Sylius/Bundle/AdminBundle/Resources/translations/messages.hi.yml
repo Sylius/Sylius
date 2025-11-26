@@ -1,0 +1,131 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'भेजा गया है'
+            subject: 'शिपमेंट पुष्टि'
+            thank_you_for_transaction: 'सफल लेन-देन के लिए धन्यवाद।'
+            you_can_check_its_location_with_the_tracking_code: 'आप %tracking_code% ट्रैकिंग कोड से इसका स्थान देख सकते हैं।'
+            your_order_with_number: 'आपका ऑर्डर नंबर'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'वर्तमान छूट से पहले की न्यूनतम कीमत दिखाएँ?'
+                period_for_which_the_lowest_price_is_calculated: 'वह अवधि जिसके लिए न्यूनतम कीमत गणना की जाती है'
+            reset_password:
+                password:
+                    label: 'नई पासवर्ड'
+                    confirmation: 'नई पासवर्ड की पुष्टि'
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: 'एसोसिएशन प्रकार'
+                    attributes: 'गुण'
+                    header: 'कैटलॉग'
+                    inventory: 'इन्वेंटरी'
+                    options: 'विकल्प'
+                    products: 'उत्पाद'
+                    taxons: 'टैक्सन'
+                configuration:
+                    admin_users: 'प्रशासक'
+                    channels: 'चैनल'
+                    countries: 'देश'
+                    currencies: 'मुद्राएँ'
+                    exchange_rates: 'विनिमय दरें'
+                    header: 'कॉन्फ़िगरेशन'
+                    locales: 'लोकेल'
+                    payment_methods: 'भुगतान विधियाँ'
+                    shipping_categories: 'शिपिंग श्रेणियाँ'
+                    shipping_methods: 'शिपिंग विधियाँ'
+                    tax_categories: 'कर श्रेणियाँ'
+                    tax_rates: 'कर दरें'
+                    zones: 'ज़ोन'
+                marketing:
+                    cart_promotions: 'कार्ट प्रमोशन'
+                    catalog_promotions: 'कैटलॉग प्रमोशन'
+                    header: 'मार्केटिंग'
+                    product_reviews: 'उत्पाद समीक्षाएँ'
+                    promotions: 'प्रमोशन'
+                customers:
+                    customers: 'ग्राहक'
+                    groups: 'समूह'
+                    header: 'ग्राहक'
+                sales:
+                    header: 'बिक्री'
+                    orders: 'ऑर्डर'
+                official_support:
+                    header: 'आधिकारिक सहायता'
+                    browse_plugins: 'प्लग-इन ब्राउज़ करें'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'प्रोफेशनल सर्विसेज'
+                    find_a_partner: 'पार्टनर खोजें'
+                    sylius_certification: 'Sylius सर्टिफिकेशन'
+    ui:
+        account: 'खाता'
+        admin_user: 'प्रशासक'
+        add_new_entry: 'नई प्रविष्टि जोड़ें'
+        back_to_dashboard: 'डैशबोर्ड पर वापस जाएँ'
+        catalog_promotion:
+            dates_details: 'यह प्रक्रिया समय-सापेक्ष है! कृपया निर्दिष्ट तारीखों से 2-10 मिनट की देरी का ध्यान रखें। देरी कैटलॉग के आकार पर निर्भर करती है।'
+        channel:
+            account_verification_required_details: 'यदि यह विकल्प अक्षम किया गया तो बिना ई-मेल सत्यापन के खाते बनाए और एक्सेस किए जा सकेंगे, जिससे अतिथि द्वारा दिए गए ऑर्डर डेटा तक पहुँच संभव होगी।'
+        channel_pricing_history: 'चैनल कीमत इतिहास'
+        channel_pricings: 'चैनल कीमतें'
+        create_new:
+            customer_group: 'नया ग्राहक समूह बनाएँ'
+        delete_avatar: 'अवतार मिटाएँ'
+        full_screen: 'पूर्ण स्क्रीन'
+        global: 'वैश्विक'
+        ip_address: 'आईपी पता'
+        language: 'भाषा'
+        lowest_price_before_discount: 'छूट से पहले की न्यूनतम कीमत'
+        minimum_price_details: 'न्यूनतम कीमत — यह वह सीमा है जिसके नीचे वर्तमान कीमत को कैटलॉग या कार्ट प्रमोशन से घटाया नहीं जा सकता। बिक्री-लाभ की सुरक्षा के लिए इसका उपयोग करें।'
+        more: 'और'
+        no_main_taxon: 'मुख्य टैक्सन नहीं'
+        no_depth: 'गहराई नहीं'
+        no_height: 'ऊँचाई नहीं'
+        no_results: 'कोई परिणाम नहीं मिला'
+        no_results_adjust_your_search: 'अपनी खोज बदलें और पुनः प्रयास करें।'
+        no_weight: 'वज़न नहीं'
+        no_width: 'चौड़ाई नहीं'
+        omnibus: 'ओम्निबस'
+        order:
+            date: 'ऑर्डर तिथि'
+        original_price_details: 'मूल कीमत — यह उत्पाद वेरिएंट की वह कीमत है जो कैटलॉग में काटी गई रूप में दिखती है। यह वर्तमान कीमत के हिसाब की आधार है। यदि यह मान परिभाषित नहीं है तो कैटलॉग प्रमोशन "मूल कीमत" में "कीमत" की प्रति कॉपी करेगा।'
+        original_product_price_details: 'मूल कीमत — यह उत्पाद की कीमत है जो कैटलॉग में काटी गई रूप में दिखती है। यह वर्तमान कीमत के हिसाब की आधार है। यदि यह मान परिभाषित नहीं है तो कैटलॉग प्रमोशन "मूल कीमत" में "कीमत" की प्रति कॉपी करेगा।'
+        overdue: 'देरी से'
+        page_not_found: 'पृष्ठ नहीं मिला'
+        pagination:
+            number_of_results: '%from% से %to% तक कुल %total% प्रविष्टियाँ दिखा रहे हैं'
+        partially_refunded: 'आंशिक रूप से रिफ़ंड किया गया'
+        pending_actions: 'लंबित कार्य'
+        price_details: 'कीमत — यह वर्तमान कीमत है जो कैटलॉग में दिखाई देती है और इसे कैटलॉग प्रमोशन आदि से बदला जा सकता है।'
+        product_price_details: 'कीमत — यह उत्पाद की वर्तमान कीमत है जो कैटलॉग में दिखाई देती है और इसे कैटलॉग प्रमोशन आदि से बदला जा सकता है।'
+        price_history: 'कीमत इतिहास'
+        product:
+            product_not_active_in_channel: 'यह उत्पाद अभी इस चैनल में सक्रिय नहीं है।'
+        product_variant: 'उत्पाद वेरिएंट'
+        sales_summary: 'बिक्री सारांश'
+        search_menu: 'मेनू खोजें'
+        shipment_for_order: 'ऑर्डर के लिए शिपमेंट'
+        show_history_for_channel_pricing: 'चैनल मूल्य इतिहास दिखाएँ'
+        start_typing_to_search: 'खोजने के लिए टाइप शुरू करें'
+        statistics:
+            day: 'दिन'
+            lifetime: 'आजीवन'
+            month: 'महीना'
+            week: 'सप्ताह'
+            2weeks: '2 सप्ताह'
+            year: 'साल'
+        taxon: 'टैक्सन'
+        to_approve: 'मंजूरी हेतु'
+        to_process: 'प्रक्रिया हेतु'
+        to_ship: 'भेजने हेतु'
+        view_in_store: 'स्टोर में देखें'
+        work_in_progress: 'कार्य प्रगति पर'
+        empty_date: 'खाली'
+        notifications:
+            new_version_of_sylius_available: 'Sylius का नया संस्करण उपलब्ध है। अपग्रेड के लिए अपने तकनीशियन से संपर्क करें।'

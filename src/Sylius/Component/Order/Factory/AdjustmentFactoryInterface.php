@@ -23,6 +23,7 @@ use Sylius\Resource\Factory\FactoryInterface;
  */
 interface AdjustmentFactoryInterface extends FactoryInterface
 {
+    /** @param array<mixed> $details */
     public function createWithData(
         string $type,
         string $label,

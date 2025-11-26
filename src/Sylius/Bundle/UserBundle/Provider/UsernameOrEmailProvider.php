@@ -21,10 +21,7 @@ class UsernameOrEmailProvider extends AbstractUserProvider
     protected function findUser(string $uniqueIdentifier): ?UserInterface
     {
         if (filter_var($uniqueIdentifier, \FILTER_VALIDATE_EMAIL)) {
-            $user = $this->userRepository->findOneByEmail($uniqueIdentifier);
-            Assert::nullOrIsInstanceOf($user, UserInterface::class);
-
-            return $user;
+            return $this->userRepository->findOneByEmail($uniqueIdentifier);
         }
 
         $user = $this->userRepository->findOneBy(['usernameCanonical' => $uniqueIdentifier]);

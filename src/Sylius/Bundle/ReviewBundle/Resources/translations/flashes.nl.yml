@@ -3,6 +3,6 @@
 
 sylius:
     review:
-        accept: 'Beoordeling werd aanvaard.'
-        reject: 'Beoordeling werd verworpen.'
-        wait_for_the_acceptation: 'Uw beoordeling wacht op de acceptatie.'
+        accept: 'Beoordeling is succesvol geaccepteerd.'
+        reject: 'Beoordeling is succesvol afgewezen.'
+        wait_for_the_acceptation: 'Je beoordeling wacht op goedkeuring.'

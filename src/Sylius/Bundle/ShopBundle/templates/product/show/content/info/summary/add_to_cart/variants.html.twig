@@ -1,0 +1,11 @@
+{% set product = hookable_metadata.context.product %}
+
+<div class="mb-3">
+    {% if not product.simple %}
+        {% if product.variantSelectionMethodChoice %}
+            {% hook 'variants' %}
+        {% else %}
+            {% hook 'options' %}
+        {% endif %}
+    {% endif %}
+</div>

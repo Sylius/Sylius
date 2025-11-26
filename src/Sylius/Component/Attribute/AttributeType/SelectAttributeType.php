@@ -55,6 +55,10 @@ final class SelectAttributeType implements AttributeTypeInterface
         }
     }
 
+    /**
+     * @param array<array-key, mixed>|null $value
+     * @param array<string, bool|string|int|null> $validationConfiguration
+     */
     private function getValidationErrors(
         ExecutionContextInterface $context,
         ?array $value,

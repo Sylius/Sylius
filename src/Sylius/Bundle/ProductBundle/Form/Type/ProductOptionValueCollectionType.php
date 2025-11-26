@@ -70,9 +70,11 @@ final class ProductOptionValueCollectionType extends AbstractType
     }
 
     /**
+     * @param array<string, mixed> $options
+     *
      * @throws \InvalidArgumentException
      */
-    private function assertOptionsAreValid($options): void
+    private function assertOptionsAreValid(array $options): void
     {
         Assert::true(
             isset($options['options']) && is_iterable($options['options']),

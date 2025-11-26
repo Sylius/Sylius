@@ -1,0 +1,7 @@
+{% set form = hookable_metadata.context.form %}
+{% set type = hookable_metadata.configuration.type %}
+{% set field = hookable_metadata.configuration.field %}
+
+<div class="mb-5">
+    {{ form_row(attribute(form, field), sylius_test_form_attribute('different-' ~ type ~ '-address')) }}
+</div>

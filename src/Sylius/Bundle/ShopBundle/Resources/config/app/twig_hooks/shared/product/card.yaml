@@ -1,0 +1,32 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.shared.product.card':
+            details:
+                template: "@SyliusShop/shared/product/card/details.html.twig"
+                priority: 100
+            prices:
+                template: "@SyliusShop/shared/product/card/prices.html.twig"
+                priority: 0
+
+        'sylius_shop.shared.product.card.details':
+            image:
+                template: "@SyliusShop/shared/product/card/details/image.html.twig"
+                priority: 100
+            name:
+                template: "@SyliusShop/shared/product/card/details/name.html.twig"
+                priority: 0
+
+        'sylius_shop.shared.product.card.prices':
+            catalog_promotions:
+                component: 'sylius_shop:catalog_promotions'
+                props:
+                    variant: '@=_context.variant'
+                    applied_promotions: '@=_context.applied_promotions'
+                    withDescription: false
+                priority: 100
+            price:
+                component: 'sylius_shop:product:card:price'
+                props:
+                    variant: '@=_context.variant'
+                    template: "@SyliusShop/product/common/price.html.twig"
+                priority: 0

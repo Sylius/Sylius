@@ -4,41 +4,50 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: O nome do titular do cartão deve ter pelo menos {{ limit }} caracteres.
-            not_blank: Por favor introduza o nome do titular do cartão.
+            min_length: 'O nome do titular deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Informe o nome do titular.'
         expiry_month:
-            max_range: O mês de validade do cartão de crédito deve estar entre {{ min }} e {{ max }}.
-            min_range: O mês de validade do cartão de crédito deve estar entre {{ min }} e {{ max }}.
-            not_blank: Selecione o mês de validade.
+            max_range: 'O mês de validade deve estar entre {{ min }} e {{ max }}.'
+            min_range: 'O mês de validade deve estar entre {{ min }} e {{ max }}.'
+            not_blank: 'Selecione o mês de validade.'
         number:
-            not_blank: Por favor, insira o número do cartão.
-            luhn: O número de cartão de crédito inserido é inválido.
+            not_blank: 'Informe o número do cartão.'
+            luhn: 'O número do cartão informado é inválido.'
         security_code:
-            not_blank: Por favor introduza o código de segurança.
-            max_length: O código de segurança (CVV) do cartão de crédito deve ter pelo menos {{ limit }} dígitos.
-            min_length: O código de segurança (CVV) do cartão de crédito deve ter pelo menos {{ limit }} dígitos.
+            not_blank: 'Informe o código de segurança.'
+            max_length: 'O CVV deve ter pelo menos {{ limit }} dígitos.'
+            min_length: 'O CVV deve ter no máximo {{ limit }} dígitos.'
         expiry_year:
-            not_blank: Por favor selecione o ano de validade.
+            not_blank: 'Selecione o ano de validade.'
+    gateway_config:
+        invalid_gateway_factory: 'Gateway inválido. Fábricas disponíveis: {{ available_factories }}.'
+        gateway_name:
+            not_blank: 'Informe o nome do gateway.'
+        factory_name:
+            not_blank: 'Informe o nome da fábrica de gateway.'
     payment:
         currency_code:
-            not_valid: O código de moeda introduzido é inválido.
+            not_valid: 'O código de moeda informado é inválido.'
         method:
-            not_blank: 'Por favor, selecione um método de pagamento.'
+            not_blank: 'Selecione um método de pagamento.'
     payment_method:
         gateway:
-            not_blank: Por favor selecione o gateway do método de pagamento.
+            not_blank: 'Selecione o gateway do método de pagamento.'
         name:
-            max_length: O nome do método de pagamento deve ter mais ou menos {{ limit }} caracteres.
-            min_length: O nome do método de pagamento deve ter pelo menos {{ limit }} caracteres.
-            not_blank: Por favor introduza o nome do método de pagamento.
+            max_length: 'O nome do método de pagamento deve ter no máximo {{ limit }} caracteres.'
+            min_length: 'O nome do método de pagamento deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Informe o nome do método de pagamento.'
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: A taxa não pode ser inferior a {{ compared_value }}.
-                not_blank: Por favor, digite a quantidade de taxa.
+                greater_than_or_equal: 'A taxa não pode ser menor que {{ compared_value }}.'
+                not_blank: 'Informe o valor da taxa.'
             percent:
-                max_range: A taxa de percentagem não pode ser maior que {{ limit }}.
-                min_range: A taxa de percentagem não pode ser inferior a {{ limit }}.
-                not_blank: Por favor introduza a percentagem de taxa.
+                max_range: 'A taxa percentual não pode ser maior que {{ limit }}.'
+                min_range: 'A taxa percentual não pode ser menor que {{ limit }}.'
+                not_blank: 'Informe a taxa percentual.'
         code:
-            not_blank: 'Por favor introduza o código do método de pagamento.'
-            unique: 'Já existe um método de pagamento com o código introduzido.'
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Informe o código do método de pagamento.'
+            regex: 'O código pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Já existe um método de pagamento com esse código.'
+

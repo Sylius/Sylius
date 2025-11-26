@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -21,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ChannelPricingLogEntryTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_denies_access_to_a_channel_pricing_log_entries_for_not_authenticated_user(): void
     {
         $this->loadFixturesFromFiles(['product/product_variant_with_lowest_price.yaml']);
@@ -36,7 +37,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_single_channel_pricing_log_entry(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_variant_with_lowest_price.yaml']);
@@ -62,7 +63,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_all_channel_pricing_log_entries(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_variant_with_lowest_price.yaml']);
@@ -80,7 +81,7 @@ final class ChannelPricingLogEntryTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_filtered_channel_pricing_log_entries(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_variant_with_lowest_price.yaml']);

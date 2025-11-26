@@ -21,8 +21,10 @@ interface CatalogPromotionScopeInterface extends ResourceInterface
 
     public function getType(): ?string;
 
+    /** @return array<string, mixed> */
     public function getConfiguration(): array;
 
+    /** @param array<string, mixed> $configuration */
     public function setConfiguration(array $configuration): void;
 
     public function getCatalogPromotion(): ?CatalogPromotionInterface;

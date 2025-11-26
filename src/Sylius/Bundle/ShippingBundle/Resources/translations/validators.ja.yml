@@ -2,6 +2,36 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    shipping_category:
+        name:
+            max_length: 'カテゴリ名は {{ limit }} 文字以内で入力してください。'
+            min_length: 'カテゴリ名は少なくとも {{ limit }} 文字以上で入力してください。'
+            not_blank: '配送カテゴリ名を入力してください。'
+        code:
+            max_length: 'コードは {{ limit }} 文字以内で入力してください。'
+            not_blank: '配送カテゴリコードを入力してください。'
+            regex: '配送カテゴリコードには英数字、ハイフン、アンダースコアのみ使用できます。'
+            unique: '指定されたコードの配送カテゴリは既に存在します。'
+
+    shipping_method:
+        calculator:
+            min: '配送料は 0 以上でなければなりません。'
+            not_blank: '配送方法の計算方法を選択してください。'
+            invalid: '無効な計算方法です。利用可能な計算方法は {{ available_calculators }} です。'
+        name:
+            max_length: '配送方法名は {{ limit }} 文字以内で入力してください。'
+            min_length: '配送方法名は少なくとも {{ limit }} 文字以上で入力してください。'
+            not_blank: '配送方法名を入力してください。'
+        code:
+            max_length: 'コードは {{ limit }} 文字以内で入力してください。'
+            not_blank: '配送方法コードを入力してください。'
+            regex: '配送方法コードには英数字、ハイフン、アンダースコアのみ使用できます。'
+            unique: '指定されたコードの配送方法は既に存在します。'
+        zone:
+            not_blank: '配送方法のゾーンを選択してください。'
+        rule:
+            invalid_type: '無効なルールタイプです。利用可能なタイプは {{ available_rule_types }} です。'
+
     shipment:
         shipping_method:
-            not_blank: '発送方法を選択してください。'
+            not_blank: '配送方法を選択してください。'

@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    currency:
+        code:
+            not_blank: 'कृपया मुद्रा कोड चुनें।'
+            unique: 'मुद्रा कोड अद्वितीय होना चाहिए।'
+            currency: 'यह मान मान्य मुद्रा कोड नहीं है।'
+        exchange_rate:
+            not_blank: 'कृपया विनिमय दर दर्ज करें।'
+    exchange_rate:
+        ratio:
+            greater_than: 'अनुपात {{ compared_value }} से अधिक होना चाहिए।'
+            less_than: 'अनुपात {{ compared_value }} से कम होना चाहिए।'
+            invalid: 'अनुपात संख्या होना चाहिए।'
+            not_blank: 'कृपया विनिमय दर अनुपात दर्ज करें।'
+        source_currency:
+            not_blank: 'कृपया वह स्रोत मुद्रा दर्ज करें जिससे विनिमय दर प्राप्त की जानी है।'
+        target_currency:
+            not_blank: 'कृपया वह लक्ष्य मुद्रा दर्ज करें जिसके लिए विनिमय दर निर्धारित की जानी है।'
+        unique_currency_pair: 'मुद्रा जोड़ी अद्वितीय होनी चाहिए।'
+        different_source_target_currency: 'स्रोत और लक्ष्य मुद्राएँ अलग-अलग होनी चाहिए।'

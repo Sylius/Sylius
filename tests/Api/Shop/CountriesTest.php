@@ -13,15 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 final class CountriesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_countries(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'country.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'country.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/countries', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
@@ -29,10 +30,10 @@ final class CountriesTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/country/get_countries_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_only_countries_from_current_channel(): void
     {
-        $this->loadFixturesFromFiles(['channel_with_countries.yaml', 'country.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel_with_countries.yaml', 'country.yaml']);
 
         $this->client->request(method: 'GET', uri: '/api/v2/shop/countries', server: self::CONTENT_TYPE_HEADER);
         $response = $this->client->getResponse();
@@ -40,7 +41,7 @@ final class CountriesTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/country/get_countries_from_channel_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_country(): void
     {
         $this->loadFixturesFromFiles(['country.yaml']);

@@ -1,0 +1,83 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        catalog_promotion:
+            action:
+                fixed_discount: 'Fester Rabatt'
+                percentage_discount: 'Prozentualer Rabatt'
+            description: 'Beschreibung'
+            enabled: 'Aktiviert'
+            end_date: 'Enddatum'
+            label: 'Label'
+            name: 'Name'
+            priority: 'Priorität'
+            start_date: 'Startdatum'
+            translations: 'Übersetzungen'
+        promotion:
+            actions: 'Aktionen'
+            add_action: 'Aktion hinzufügen'
+            add_rule: 'Regel hinzufügen'
+            applies_to_discounted: 'Gilt für bereits rabattierte Bestellartikel'
+            applies_to_discounted_details: 'Mit dieser Option wird die Warenkorbaktion auch auf Bestellartikel angewendet, die bereits durch Katalogaktionen rabattiert wurden.'
+            coupon_based: 'Coupon-basiert'
+            description: 'Beschreibung'
+            ends_at: 'Endet am'
+            exclusive: 'Exklusiv'
+            label: 'Label'
+            name: 'Name'
+            priority: 'Priorität'
+            rules: 'Regeln'
+            starts_at: 'Beginnt am'
+            usage_limit: 'Nutzungsbegrenzung'
+        promotion_action:
+            item_fixed_discount: 'Fester Rabatt pro Artikel'
+            item_percentage_discount: 'Prozentualer Rabatt pro Artikel'
+            order_fixed_discount: 'Fester Rabatt pro Bestellung'
+            order_percentage_discount: 'Prozentualer Rabatt pro Bestellung'
+            shipping_percentage_discount: 'Prozentualer Rabatt für Versand'
+            filters: 'Filter'
+            fixed_discount_configuration:
+                amount: 'Betrag'
+            percentage_discount_configuration:
+                percentage: 'Prozentsatz'
+            type: 'Typ'
+        promotion_coupon:
+            expires_at: 'Läuft ab am'
+            usage_limit: 'Nutzungsbegrenzung'
+        promotion_coupon_generator_instruction:
+            amount: 'Betrag'
+            code_length: 'Code-Länge'
+            expires_at: 'Läuft ab am'
+            prefix: 'Präfix'
+            suffix: 'Suffix'
+            usage_limit: 'Nutzungsbegrenzung'
+        promotion_filter:
+            price_range: 'Preisspannenfilter'
+        promotion_rule:
+            cart_quantity: 'Warenkorbmengen'
+            contains_product: 'Enthält Produkt'
+            customer_group: 'Kundengruppe'
+            has_at_least_one_from_taxons: 'Hat mindestens eines der Taxons'
+            item_total: 'Gesamtbetrag pro Artikel'
+            nth_order: 'N-te Bestellung'
+            shipping_country: 'Versandland'
+            taxonomy: 'Taxonomie'
+            total_price_of_items_from_taxon: 'Gesamtpreis der Artikel aus dem Taxon'
+            cart_quantity_configuration:
+                count: 'Anzahl'
+                equal: 'Gleich'
+            contains_product_configuration:
+                exclude: 'Ausschließen'
+                variants: 'Produkte'
+            item_total_configuration:
+                amount: 'Betrag'
+            nth_order_configuration:
+                nth: 'N-te'
+            shipping_country_configuration:
+                country: 'Land'
+            taxonomy_configuration:
+                exclude: 'Ausschließen'
+                taxons: 'Taxons'
+            type: 'Typ'

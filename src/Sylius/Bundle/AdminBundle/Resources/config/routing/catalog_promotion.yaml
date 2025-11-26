@@ -2,30 +2,14 @@ sylius_admin_catalog_promotion:
     resource: |
         alias: sylius.catalog_promotion
         section: admin
-        templates: "@SyliusAdmin\\Crud"
-        only: ['index', 'create', 'update']
+        templates: "@SyliusAdmin\\shared\\crud"
+        except: ['delete']
         redirect: update
         grid: sylius_admin_catalog_promotion
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_discounts_on_product_catalog
-                templates:
-                    form: "@SyliusAdmin/CatalogPromotion/_form.html.twig"
-            index:
-                icon: bookmark
     type: sylius.resource
-
-sylius_admin_catalog_promotion_show:
-    path: /catalog-promotions/{id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.catalog_promotion::showAction
-        _sylius:
-            section: admin
-            template: "@SyliusAdmin/CatalogPromotion/show.html.twig"
-            permission: true
-            alias: catalog_promotion
 
 sylius_admin_catalog_promotion_product_variant_index:
     path: /catalog-promotions/{id}/variants
@@ -35,10 +19,10 @@ sylius_admin_catalog_promotion_product_variant_index:
         _sylius:
             section: admin
             grid: sylius_admin_product_variant_with_catalog_promotion
-            template: "@SyliusAdmin/CatalogPromotion/ProductVariant/index.html.twig"
+            template: "@SyliusAdmin/catalog_promotion/product_variant/index.html.twig"
             permission: true
             vars:
-                subheader: sylius.ui.manage_discounts_on_product_catalog
+                catalogPromotion: expr:service('sylius.repository.catalog_promotion').find($id)
 
 sylius_admin_catalog_promotion_delete:
     path: /catalog-promotions/{code}

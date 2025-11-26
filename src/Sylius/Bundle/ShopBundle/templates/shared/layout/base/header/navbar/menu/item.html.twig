@@ -1,0 +1,11 @@
+{% set taxons = hookable_metadata.context.taxons %}
+
+{% for taxon in taxons %}
+    {% if taxon.enabledChildren|length > 0 %}
+        <div class="nav-item dropdown" {{ sylius_test_html_attribute('menu-item', taxon.name) }}>
+            {% hook 'item#dropdown' with { taxon } %}
+        </div>
+    {% else %}
+        {% hook 'item#link' with { taxon } %}
+    {% endif %}
+{% endfor %}

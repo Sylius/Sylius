@@ -19,6 +19,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 final class LoadMetadataSubscriber implements EventSubscriber
 {
+    /** @param array<string, mixed> $subjects */
     public function __construct(private array $subjects)
     {
     }
@@ -61,6 +62,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
         }
     }
 
+    /** @return array<string, array<array-key, array<string, mixed>>|string> */
     private function createSubjectMapping(
         string $reviewableEntity,
         string $subject,
@@ -79,6 +81,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
+    /** @return array<string, array<array-key, array<string, mixed>>|string[]|string> */
     private function createReviewerMapping(string $reviewerEntity, ClassMetadata $reviewerEntityMetadata): array
     {
         return [
@@ -94,6 +97,7 @@ final class LoadMetadataSubscriber implements EventSubscriber
         ];
     }
 
+    /** @return array<string, string[]|string> */
     private function createReviewsMapping(string $reviewEntity): array
     {
         return [

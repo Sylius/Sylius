@@ -15,7 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodTranslation;
@@ -25,14 +24,9 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
     /** @var Collection<array-key, BaseChannelInterface> */
     protected $channels;
 
-    /** @var GatewayConfigInterface|null */
-    protected $gatewayConfig;
-
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, BaseChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
     }
 
@@ -58,16 +52,6 @@ class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }
-    }
-
-    public function setGatewayConfig(?GatewayConfigInterface $gateway): void
-    {
-        $this->gatewayConfig = $gateway;
-    }
-
-    public function getGatewayConfig(): ?GatewayConfigInterface
-    {
-        return $this->gatewayConfig;
     }
 
     public static function getTranslationClass(): string

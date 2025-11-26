@@ -30,6 +30,7 @@ final class ProductVariantOriginalPriceMapProvider implements ProductVariantMapP
         ];
     }
 
+    /** @param array<string, mixed> $context */
     public function supports(ProductVariantInterface $variant, array $context): bool
     {
         return
@@ -40,6 +41,7 @@ final class ProductVariantOriginalPriceMapProvider implements ProductVariantMapP
         ;
     }
 
+    /** @param array<string, mixed> $context */
     private function isPriceLowerThanOriginalPrice(ProductVariantInterface $variant, array $context): bool
     {
         return

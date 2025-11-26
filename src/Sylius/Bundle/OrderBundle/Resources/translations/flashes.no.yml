@@ -3,7 +3,8 @@
 
 sylius:
     cart:
-        add_item: 'Varen ble lagt i handlevognen'
-        cannot_modify: 'Bestilling har allerede blitt gjort på handlekurven du forsøker å endre.'
-        remove_item: 'Varen ble fjernet fra handlevognen'
-        save: 'Handlevognen ble oppdatert'
+        add_item: 'Varen er lagt til i handlekurven'
+        cannot_modify: 'En bestilling er allerede sendt inn for handlekurven du prøvde å endre.'
+        not_recalculated: 'På grunn av ugyldige verdier i handlekurven din har den ikke blitt regnet på nytt.'
+        remove_item: 'Varen er fjernet fra handlekurven'
+        save: 'Handlekurven har blitt oppdatert'

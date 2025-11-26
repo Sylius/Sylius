@@ -11,22 +11,21 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" class="Sylius\Component\Addressing\Checker\ZoneDeletionChecker">
+        <service id="sylius.checker.zone_deletion" class="Sylius\Component\Addressing\Checker\ZoneDeletionChecker">
             <argument type="service" id="sylius.repository.zone_member" />
         </service>
-        <service id="sylius.checker.zone_deletion" alias="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" />
+        <service id="Sylius\Component\Addressing\Checker\ZoneDeletionCheckerInterface" alias="sylius.checker.zone_deletion" />
 
-        <service id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" class="Sylius\Component\Addressing\Checker\CountryProvincesDeletionChecker">
+        <service id="sylius.checker.country_provinces_deletion" class="Sylius\Component\Addressing\Checker\CountryProvincesDeletionChecker">
             <argument type="service" id="sylius.repository.zone_member" />
             <argument type="service" id="sylius.repository.province" />
         </service>
-        <service id="sylius.checker.country_provinces_deletion" alias="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" />
+        <service id="Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface" alias="sylius.checker.country_provinces_deletion" />
     </services>
 </container>

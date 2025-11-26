@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Provider;
 
-use Sylius\Component\Core\Model\CatalogPromotionInterface;
+use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
+/**
+ * @template T of CatalogPromotionInterface
+ */
 interface EligibleCatalogPromotionsProviderInterface
 {
-    /**
-     * @return array|CatalogPromotionInterface[]
-     */
+    /** @return T[] */
     public function provide(): array;
 }

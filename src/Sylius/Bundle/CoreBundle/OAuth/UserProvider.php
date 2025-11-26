@@ -26,7 +26,7 @@ use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use SyliusLabs\Polyfill\Symfony\Security\Core\Exception\UserNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
@@ -78,7 +78,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
             return $this->createUserByOAuthUserResponse($response);
         }
 
-        /** @phpstan-ignore-next-line */
         throw new UserNotFoundException('Email is null or not provided');
     }
 
@@ -97,7 +96,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         /** @var SyliusUserInterface|object $user */
         $user = $this->userFactory->createNew();
         Assert::isInstanceOf($user, SyliusUserInterface::class);
-        Assert::methodExists($user, 'getUsername');
 
         $canonicalEmail = $this->canonicalizer->canonicalize($response->getEmail());
 
@@ -132,9 +130,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
 
         // set random password to prevent issue with not nullable field & potential security hole
         $user->setPlainPassword(substr(sha1($response->getAccessToken()), 0, 10));
-
         $user->setEnabled(true);
-        Assert::isInstanceOf($user, SymfonyUserInterface::class);
 
         return $this->updateUserByOAuthUserResponse($user, $response);
     }
@@ -147,7 +143,6 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     private function updateUserByOAuthUserResponse(SymfonyUserInterface $user, UserResponseInterface $response): SyliusUserInterface
     {
         /** @var SyliusUserInterface $user */
-        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         Assert::isInstanceOf($user, SyliusUserInterface::class);
 
         /** @var UserOAuthInterface $oauth */

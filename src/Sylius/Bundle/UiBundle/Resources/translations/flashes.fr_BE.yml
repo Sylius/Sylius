@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        delete_error: 'Le canal ne peut pas être supprimé, il faut au moins un canal activé.'
+    checkout:
+        complete_error: 'Un problème inattendu est survenu au cours de la commande. Veuillez essayer à nouveau.'
+    contact:
+        request_success: 'Votre demande de contact a été soumise avec succès.'
+        request_error: 'Un problème est survenu lors de l’envoi de la demande de contact. Veuillez réessayer ultérieurement.'
+    customer:
+        add_address: 'L''adresse a été ajoutée avec succès.'
+        impersonate: 'Vous voyez maintenant le site en tant que %name%.'
+        set_address_as_default: 'Cette adresse est maintenant l''adresse par défaut.'
+    order:
+        apply_state_machine_transition_error: 'Il y a eu une erreur inconnue lors de la mise à jour de la commande. Veuillez réessayer.'
+        promotion_integrity: 'Vous n’êtes plus admissible à la promotion %promotionName%.'
+        total_integrity: 'Le total de votre commande a été changé, vérifiez les informations de votre commande et confirmez.'
+        update_error: 'Il y a eu une erreur inconnue lors de la mise à jour de la commande. Veuillez réessayer.'
+    payment:
+        apply_state_machine_transition_error: 'Il y a eu une erreur inconnue lors de la mise à jour du paiement. Veuillez réessayer.'
+    product:
+        in_use_by_promotion_rule: ''
+        out_of_stock: 'Il ne reste que %quantity% produit(s) en stock.'
+    product_variant:
+        update_error: 'Il y a eu une erreur inconnue lors de la mise à jour de la variante du produit. Veuillez réessayer.'
+    promotion:
+        update_rules: 'Certaines règles des promotions avec les codes %codes% ont été mises à jour.'
+    taxon:
+        in_use_by_promotion_rule: ''
+        menu_taxon_delete: 'Vous ne pouvez pas supprimer la Taxon de menu d''un canal.'

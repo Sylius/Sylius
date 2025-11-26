@@ -1,18 +1,24 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
-    "@type": "ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.').optional()",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "code",
             "message": "Please enter association type code.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "translations[en_US].name",
             "message": "Please enter association type name.",
-            "code": @string@
+            "code": "@string@"
         }
-    ]
+    ],
+    "detail": "code: Please enter association type code.\ntranslations[en_US].name: Please enter association type name.",
+    "type": "\/validation_errors\/@string@"
 }

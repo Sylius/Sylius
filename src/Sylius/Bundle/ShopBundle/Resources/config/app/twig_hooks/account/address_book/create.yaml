@@ -1,0 +1,45 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.address_book.create.content':
+            breadcrumbs:
+                template: '@SyliusShop/account/address_book/create/content/breadcrumbs.html.twig'
+                priority: 200
+            menu:
+                template: '@SyliusShop/account/common/content/menu.html.twig'
+                priority: 100
+            main:
+                template: '@SyliusShop/account/common/content/main.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.create.content.main':
+            form:
+                component: 'sylius_shop:account:address:form'
+                props:
+                    form: '@=_context.form'
+                    resource: '@=_context.address'
+                    template: '@SyliusShop/account/address_book/common/main/form.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.create.content.main.header':
+            title:
+                template: '@SyliusShop/account/address_book/create/content/main/header/title.html.twig'
+                priority: 100
+            subtitle:
+                template: '@SyliusShop/account/address_book/create/content/main/header/subtitle.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.create.content.main.form':
+            fields:
+                template: '@SyliusShop/account/address_book/common/main/form/fields.html.twig'
+                priority: 100
+            buttons:
+                template: '@SyliusShop/account/address_book/common/main/form/buttons.html.twig'
+                priority: 0
+
+        'sylius_shop.account.address_book.create.content.main.form.buttons':
+            add:
+                template: '@SyliusShop/account/address_book/create/content/main/form/buttons/add.html.twig'
+                priority: 100
+            cancel:
+                template: '@SyliusShop/account/address_book/common/main/form/buttons/cancel.html.twig'
+                priority: 0

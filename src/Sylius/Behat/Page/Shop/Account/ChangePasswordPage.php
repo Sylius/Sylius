@@ -14,10 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use Behat\Mink\Session;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Page\SyliusPage;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterface
+class ChangePasswordPage extends SyliusPage implements ChangePasswordPageInterface
 {
+    use SecurePasswordTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        protected SharedStorageInterface $sharedStorage,
+    ) {
+        parent::__construct($session, $minkParameters, $router);
+    }
+
     public function getRouteName(): string
     {
         return 'sylius_shop_account_change_password';
@@ -36,17 +51,17 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
 
     public function specifyCurrentPassword(string $password): void
     {
-        $this->getElement('current_password')->setValue($password);
+        $this->getElement('current_password')->setValue($this->retrieveSecurePassword($password));
     }
 
     public function specifyNewPassword(string $password): void
     {
-        $this->getElement('new_password')->setValue($password);
+        $this->getElement('new_password')->setValue($this->replaceWithSecurePassword($password));
     }
 
     public function specifyConfirmationPassword(string $password): void
     {
-        $this->getElement('confirmation')->setValue($password);
+        $this->getElement('confirmation')->setValue($this->confirmSecurePassword($password));
     }
 
     protected function getDefinedElements(): array

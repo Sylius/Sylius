@@ -24,7 +24,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
-    public function createQueryBuilderByPromotionId($promotionId): QueryBuilder;
+    public function createQueryBuilderByPromotionId(mixed $promotionId): QueryBuilder;
 
     public function countByCodeLength(
         int $codeLength,
@@ -34,5 +34,6 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
 
     public function findOneByCodeAndPromotionCode(string $code, string $promotionCode): ?PromotionCouponInterface;
 
+    /** @return iterable<mixed> */
     public function createPaginatorForPromotion(string $promotionCode): iterable;
 }

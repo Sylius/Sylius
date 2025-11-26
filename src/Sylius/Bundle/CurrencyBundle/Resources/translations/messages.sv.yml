@@ -4,11 +4,12 @@
 sylius:
     form:
         currency:
-            base: Basvaluta
-            code: Namn
-            enabled: Aktiverad
-            exchange_rate: Växlingskurs
+            base: 'Basvaluta'
+            code: 'Namn'
+            enabled: 'Aktiverad'
+            exchange_rate: 'Växelkurs'
         exchange_rate:
-            source_currency: Ursprungsvaluta
-            target_currency: Målvaluta
-            ratio: Förhållande
+            source_currency: 'Källvaluta'
+            target_currency: 'Målvaluta'
+            ratio: 'Förhållande'
+

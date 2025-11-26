@@ -21,21 +21,14 @@
             <tag name="messenger.message_handler" bus="sylius.query_bus" />
         </defaults>
 
-        <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetCustomerStatisticsHandler">
+        <service id="sylius_api.query_handler.get_customer_statistics"  class="Sylius\Bundle\ApiBundle\QueryHandler\GetCustomerStatisticsHandler">
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.provider.statistics.customer" />
         </service>
-        <service id="sylius_api.query_handler.get_customer_statistics" alias="Sylius\Bundle\ApiBundle\QueryHandler\GetCustomerStatisticsHandler" />
 
-        <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler">
+        <service id="sylius_api.query_handler.get_statistics" class="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler">
             <argument type="service" id="sylius.provider.statistics" />
             <argument type="service" id="sylius.repository.channel" />
-        </service>
-        <service id="sylius_api.query_handler.get_statistics" alias="Sylius\Bundle\ApiBundle\QueryHandler\GetStatisticsHandler" />
-
-        <service id="Sylius\Bundle\ApiBundle\QueryHandler\GetAddressLogEntryCollectionHandler">
-            <argument type="service" id="sylius.repository.address_log_entry" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
     </services>
 </container>

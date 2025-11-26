@@ -2,30 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Non hai un account?'
+        register_here: 'Registrati qui'
     email:
         order_confirmation:
+            has_been_successfully_placed: 'è stato effettuato con successo.'
             subject: 'Conferma dell''ordine'
-            view_order_or_change_payment_method: 'Mostra l''ordine o cambia il metodo di pagamento'
+            view_order_or_change_payment_method: 'Visualizza ordine o cambia metodo di pagamento'
+            thank_you: 'Grazie per aver acquistato nel nostro negozio!'
+            your_order_number: 'Il numero del tuo ordine'
         password_reset:
             hello: 'Ciao'
-            subject: 'Reimpostazione password'
+            reset_your_password: 'Reimposta la tua password'
+            subject: 'Reset della password'
+            to_reset_your_password: 'Per reimpostare la tua password - clicca sul link qui sotto'
+            to_reset_your_password_token: 'Per reimpostare la tua password - usa il token qui sotto'
+            token: 'Il tuo token per il reset della password è'
         user_registration:
+            start_shopping: 'Inizia a fare shopping'
+            subject: 'Registrazione utente'
             welcome_to_our_store: 'Benvenuto nel nostro negozio!'
+            you_have_just_been_registered: 'Sei appena stato registrato. Grazie'
         verification_token:
             hello: 'Ciao'
-            subject: 'Verifica dell''indirizzo di posta elettronica'
+            subject: 'Verifica indirizzo email'
+            to_verify_your_email_address: 'Per verificare il tuo indirizzo email - clicca sul link qui sotto'
+            verify_your_email_address: 'Verifica il tuo indirizzo email'
+    footer:
+        banner:
+            free_shipping_title: 'Spedizione e reso gratuiti'
+            free_shipping_content: 'Spedizione gratuita su tutti gli ordini'
+            guarantee_title: 'Garanzia di rimborso'
+            guarantee_content: 'Garanzia di rimborso entro 30 giorni'
+            multiple_payments_title: 'Metodi di pagamento multipli'
+            multiple_payments_content: 'Accettiamo carte di credito e PayPal'
     homepage:
-        about_us_content: 'Benvenuti nel nostro negozio, il negozio online numero uno che ti offre i migliori prodotti. È possibile scegliere tra i migliori vestiti e scarpe dalle nostre offerte. (<i>Puoi modificare questo contenuto sovrascrivendo la chiave "sylius.homepage.about_us_content" nel tuo file di traduzione</i>)'
+        about_us: 'Chi siamo'
+        about_us_content: 'Benvenuto nel nostro negozio, il tuo negozio online numero uno che ti offre i migliori prodotti. Puoi scegliere tra i migliori vestiti e scarpe della nostra offerta. (<i>Puoi modificare questo contenuto sovrascrivendo la chiave "sylius.homepage.about_us_content" nel tuo file di traduzione</i>)'
         banner_content: 'Preparati! L''inverno sta arrivando'
-        newsletter_description: 'Iscriviti alla nostra newsletter per ricevere le nuove offerte che ti aspettano! (<i>Puoi modificare questo contenuto sovrascrivendo "sylius. omepage.newsletter_description" chiave nel tuo file di traduzione</i>)'
+        banner_button: 'Scopri la nuova collezione'
+        carousel_header: 'Prodotti in evidenza'
+        latest_deals: 'Ultime offerte'
+        new_collection: 'Nuova collezione'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Iscriviti alla nostra newsletter per vedere le nuove offerte che ti aspettano! (<i>Puoi modificare questo contenuto sovrascrivendo la chiave "sylius.homepage.newsletter_description" nel tuo file di traduzione</i>)'
+        subscribe: 'Iscriviti'
     lightbox:
         image_album_label: 'Immagine %1 di %2'
     menu:
         shop:
             account:
-                address_book: 'Indirizzi'
-                change_password: 'Modifica la password'
-                dashboard: 'Pannello di amministrazione'
-                header: 'Il tuo conto cliente'
-                order_history: 'Storico ordini'
+                address_book: 'Rubrica indirizzi'
+                change_password: 'Cambia password'
+                dashboard: 'Dashboard'
+                header: 'Il tuo account'
+                order_history: 'Storia degli ordini'
                 personal_information: 'Informazioni personali'
+    top_bar: 'Iscriviti alla nostra newsletter e ottieni -20% di sconto'

@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
-            author: Autor
-            comment: Comentariu
-            header: Adăugă o recenzie
-            rating: Rating
+            author: 'Autor'
+            comment: 'Comentariu'
+            header: 'Adaugă o recenzie'
+            rating: 'Evaluare'
             status:
-                approved: Aprobat
-                label: Stare
-                new: Nou
-                rejected: Respins
-            submit: Trimite
-            title: Titlu
+                approved: 'Aprobat'
+                label: 'Stare'
+                new: 'Nou'
+                rejected: 'Respins'
+            submit: 'Trimite'
+            title: 'Titlu'

@@ -13,33 +13,64 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
-use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 final class ProductOptionValuesTest extends JsonApiTestCase
 {
-    /** @test */
-    public function it_gets_product_option_value(): void
+    public function setUp(): void
     {
-        $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
-            'product/product_option.yaml',
+        parent::setUp();
+
+        $this->setUpDefaultGetHeaders();
+    }
+
+    #[Test]
+    public function it_returns_product_option_values(): void
+    {
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'product/products_with_options.yaml',
         ]);
 
-        /** @var ProductOptionValueInterface $productOptionValue */
-        $productOptionValue = $fixtures['product_option_value_color_red'];
+        $this->requestGet('/api/v2/shop/product-option-values');
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/product-option-values/%s', $productOptionValue->getCode()),
-            server: self::CONTENT_TYPE_HEADER,
-        );
+        $this->assertResponseSuccessful('shop/product_option_value/get_product_option_values');
+    }
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/product_option/get_product_option_value',
-            Response::HTTP_OK,
-        );
+    #[DataProvider('productCodesProvider')]
+    #[Test]
+    public function it_returns_product_option_values_within_product_with_code(string $productCode): void
+    {
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'product/products_with_options.yaml',
+        ]);
+
+        $this->requestGet('/api/v2/shop/product-option-values', [
+            'productCode' => $productCode,
+        ]);
+
+        $this->assertResponseSuccessful(sprintf(
+            'shop/product_option_value/get_product_option_values_of_product_%s',
+            strtolower($productCode),
+        ));
+    }
+
+    #[Test]
+    public function it_returns_product_option_value(): void
+    {
+        $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
+
+        $this->requestGet('/api/v2/shop/product-options/COLOR/values/COLOR_RED');
+
+        $this->assertResponseSuccessful('shop/product_option_value/get_product_option_value');
+    }
+
+    public static function productCodesProvider(): iterable
+    {
+        yield ['MUG'];
+        yield ['CAP'];
     }
 }

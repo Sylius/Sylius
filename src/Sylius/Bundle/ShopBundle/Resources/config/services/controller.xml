@@ -19,7 +19,7 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.controller.shop.contact" class="Sylius\Bundle\ShopBundle\Controller\ContactController">
+        <service id="sylius_shop.controller.contact" class="Sylius\Bundle\ShopBundle\Controller\ContactController">
             <argument type="service" id="router" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="twig" />
@@ -28,41 +28,23 @@
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius_shop.mailer.contact_email_manager" />
         </service>
-        <service id="sylius_shop.controller.contact" alias="sylius.controller.shop.contact" />
 
-        <service id="sylius.controller.shop.homepage" class="Sylius\Bundle\ShopBundle\Controller\HomepageController">
-            <argument type="service" id="twig" />
-            <deprecated package="sylius/shop-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.controller.shop.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController">
-            <argument type="service" id="twig" />
-            <argument type="service" id="sylius.context.currency" />
+        <service id="sylius_shop.controller.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController">
             <argument type="service" id="sylius.storage.currency" />
             <argument type="service" id="sylius.context.channel" />
         </service>
-        <service id="sylius_shop.controller.currency_switch" alias="sylius.controller.shop.currency_switch" />
 
-        <service id="sylius.controller.shop.locale_switch" class="Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController">
-            <argument type="service" id="twig" />
-            <argument type="service" id="sylius.context.locale" />
+        <service id="sylius_shop.controller.locale_switch" class="Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController">
             <argument type="service" id="sylius.provider.locale" />
             <argument type="service" id="sylius_shop.locale_switcher" />
         </service>
-        <service id="sylius_shop.controller.locale_switch" alias="sylius.controller.shop.locale_switch" />
 
-        <service id="sylius.controller.shop.security_widget" class="Sylius\Bundle\ShopBundle\Controller\SecurityWidgetController">
-            <argument type="service" id="twig" />
-            <deprecated package="sylius/shop-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.controller.shop.register_thank_you" class="Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController">
+        <service id="sylius_shop.controller.register_thank_you" class="Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController">
             <argument type="service" id="twig" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="router.default" />
 
             <tag name="controller.service_arguments" />
         </service>
-        <service id="sylius_shop.controller.register_thank_you" alias="sylius.controller.shop.register_thank_you" />
     </services>
 </container>

@@ -45,7 +45,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function isShowInShopButtonDisabled(): bool;
 
-    public function showProductInChannel(string $channel): void;
+    public function showProductInChannel(ChannelInterface $channel): void;
 
     public function showProductInSingleChannel(): void;
 

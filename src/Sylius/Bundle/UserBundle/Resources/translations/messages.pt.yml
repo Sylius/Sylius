@@ -4,21 +4,22 @@
 sylius:
     form:
         user:
-            email: Endereço de e-mail
-            enabled: Ativado
+            email: 'E-mail'
+            enabled: 'Ativo'
             password:
-                label: Palavra-passe
-                confirmation: Verificação
-            remember_me: Lembrar-me
-            shipping_address: Morada de expedição
-            username: Nome de utilizador
-            verified: Verificado
+                label: 'Senha'
+                confirmation: 'Verificação'
+            remember_me: 'Lembrar-me'
+            shipping_address: 'Endereço de entrega'
+            username: 'Nome de usuário'
+            verified: 'Verificado'
         user_filter:
-            query: Pesquisar
+            query: 'Pesquisar'
         user_change_password:
-            confirmation: Confirmação da palavra-passe
-            current: Palavra-passe atual
-            new: Nova Palavra-Passe
+            confirmation: 'Confirmação'
+            current: 'Senha atual'
+            new: 'Nova senha'
         user_reset_password:
-            confirmation: Confirmação da palavra-passe
-            new: Nova Palavra-Passe
+            confirmation: 'Confirmação'
+            new: 'Nova senha'
+

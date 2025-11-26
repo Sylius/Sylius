@@ -4,11 +4,11 @@
 sylius:
     form:
         currency:
-            base: Základní měna
-            code: Jméno
-            enabled: Povoleno
-            exchange_rate: Směnný kurz
+            base: 'Základní měna'
+            code: 'Název'
+            enabled: 'Povoleno'
+            exchange_rate: 'Kurz'
         exchange_rate:
-            source_currency: Zdrojová měna
-            target_currency: Cílová měna
-            ratio: Poměr
+            source_currency: 'Zdrojová měna'
+            target_currency: 'Cílová měna'
+            ratio: 'Poměr'

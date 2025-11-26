@@ -17,38 +17,26 @@
 >
     <class name="Sylius\Component\Shipping\Model\ShippingMethodTranslation">
         <attribute name="id">
-            <group>admin:shipping_method:index</group>
             <group>sylius:admin:shipping_method:index</group>
-            <group>admin:shipping_method:show</group>
             <group>sylius:admin:shipping_method:show</group>
         </attribute>
 
         <attribute name="name">
-            <group>admin:shipping_method:create</group>
             <group>sylius:admin:shipping_method:create</group>
-            <group>admin:shipping_method:index</group>
             <group>sylius:admin:shipping_method:index</group>
-            <group>admin:shipping_method:show</group>
             <group>sylius:admin:shipping_method:show</group>
-            <group>admin:shipping_method:update</group>
             <group>sylius:admin:shipping_method:update</group>
         </attribute>
 
         <attribute name="description">
-            <group>admin:shipping_method:create</group>
             <group>sylius:admin:shipping_method:create</group>
-            <group>admin:shipping_method:index</group>
             <group>sylius:admin:shipping_method:index</group>
-            <group>admin:shipping_method:show</group>
             <group>sylius:admin:shipping_method:show</group>
-            <group>admin:shipping_method:update</group>
             <group>sylius:admin:shipping_method:update</group>
         </attribute>
 
         <attribute name="locale">
-            <group>admin:shipping_method:create</group>
             <group>sylius:admin:shipping_method:create</group>
-            <group>admin:shipping_method:update</group>
             <group>sylius:admin:shipping_method:update</group>
         </attribute>
     </class>

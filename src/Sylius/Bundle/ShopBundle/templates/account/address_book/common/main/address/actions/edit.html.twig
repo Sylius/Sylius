@@ -1,0 +1,4 @@
+<a {{ sylius_test_html_attribute('edit-button') }} class="btn btn-sm btn-icon btn-outline-gray" href="{{ path('sylius_shop_account_address_book_update', { 'id': hookable_metadata.context.address.id }) }}">
+    {{ ux_icon('tabler:pencil', { class: 'icon icon-xs' }) }}
+    {{ 'sylius.ui.edit'|trans }}
+</a>

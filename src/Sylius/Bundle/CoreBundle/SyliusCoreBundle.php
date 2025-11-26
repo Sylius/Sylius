@@ -21,7 +21,6 @@ use Doctrine\Inflector\Rules\Substitutions;
 use Doctrine\Inflector\Rules\Transformations;
 use Doctrine\Inflector\Rules\Word;
 use Doctrine\ORM\Query;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\CancelOrderStateMachineCallbackPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\ResolveShopUserTargetEntityPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony5AuthenticationManagerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\BackwardsCompatibility\Symfony6PrivateServicesPass;
@@ -29,11 +28,9 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CheckStatisticsOrdersT
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LiipImageFiltersPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\OverrideResourceControllerStateMachinePass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectionResolverPass;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\SyliusPriceHistoryLegacyAliasesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLocalePass;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
@@ -43,18 +40,19 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusCoreBundle extends AbstractResourceBundle
 {
-    public const VERSION = '1.14.13-DEV';
+    public const VERSION = '2.1.8-DEV';
 
-    public const VERSION_ID = '11413';
+    public const VERSION_ID = '20108';
 
-    public const MAJOR_VERSION = '1';
+    public const MAJOR_VERSION = '2';
 
-    public const MINOR_VERSION = '14';
+    public const MINOR_VERSION = '1';
 
-    public const RELEASE_VERSION = '13';
+    public const RELEASE_VERSION = '8';
 
     public const EXTRA_VERSION = 'DEV';
 
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [
@@ -88,15 +86,12 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new CircularDependencyBreakingErrorListenerPass());
         $container->addCompilerPass(new IgnoreAnnotationsPass());
         $container->addCompilerPass(new LazyCacheWarmupPass());
-        $container->addCompilerPass(new LiipImageFiltersPass());
         $container->addCompilerPass(new RegisterTaxCalculationStrategiesPass());
         $container->addCompilerPass(new RegisterUriBasedSectionResolverPass());
         $container->addCompilerPass(new ResolveShopUserTargetEntityPass());
         $container->addCompilerPass(new Symfony5AuthenticationManagerPass());
         $container->addCompilerPass(new Symfony6PrivateServicesPass());
         $container->addCompilerPass(new TranslatableEntityLocalePass());
-        $container->addCompilerPass(new CancelOrderStateMachineCallbackPass());
-        $container->addCompilerPass(new SyliusPriceHistoryLegacyAliasesPass());
         $container->addCompilerPass(new CheckStatisticsOrdersTotalsProviderTypePass());
         $container->addCompilerPass(new OverrideResourceControllerStateMachinePass(), priority: -1024);
     }

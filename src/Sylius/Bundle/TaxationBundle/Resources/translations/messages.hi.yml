@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        tax_category:
+            description: 'विवरण'
+            name: 'नाम'
+        tax_rate:
+            amount: 'राशि'
+            calculator: 'कैलकुलेटर'
+            category: 'श्रेणी'
+            end_date: 'समाप्ति तिथि'
+            included_in_price: 'क्या कीमत में शामिल है?'
+            name: 'नाम'
+            start_date: 'प्रारंभ तिथि'

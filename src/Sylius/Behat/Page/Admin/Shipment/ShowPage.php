@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Shipment;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SyliusPage implements ShowPageInterface
 {
     public function getRouteName(): string
     {
@@ -24,15 +24,21 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getAmountOfUnits(string $productName): int
     {
-        $table = $this->getElement('table');
+        $items = $this->getElement('items');
 
-        return count($table->findAll('css', sprintf('tr:contains("%s")', $productName)));
+        return count($items->findAll('css', sprintf('[data-test-item="%s"]', $productName)));
+    }
+
+    public function getState(): string
+    {
+        return $this->getElement('state')->getText();
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'table' => 'table tbody',
+            'items' => '[data-test-table-items]',
+            'state' => '[data-test-shipment-state]',
         ]);
     }
 }

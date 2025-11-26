@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    review:
+        author:
+            already_exists: Ce courriel est déjà utilisé, veuillez vous connecter ou réinitialiser votre mot de passe.
+        comment:
+            not_blank: Le commentaire ne peut pas être vide.
+        rating:
+            not_blank: Vous devez indiquer une évaluation pour le commentaire.
+        title:
+            not_blank: Le titre du commentaire ne doit pas être vide.
+            min_length: Le titre du commentaire doit contenir au moins 2 caractères.
+            max_length: Le titre du commentaire ne doit pas dépasser 255 caractères.

@@ -1,0 +1,59 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        rule:
+            unit_count_configuration:
+                count: 'Anzahl'
+                equal: 'Gleich'
+            type: 'Regeltyp'
+        shipment:
+            state: 'Status'
+            states:
+                checkout: 'Checkout'
+                pending: 'Ausstehend'
+                ready: 'Bereit'
+                shipped: 'Versendet'
+                returned: 'Retourniert'
+                cancelled: 'Storniert'
+            tracking_code: 'Sendungsverfolgungscode'
+        shipping_calculator:
+            flat_rate_configuration:
+                label: 'Pauschale pro Versand'
+                amount: 'Betrag'
+            per_unit_rate_configuration:
+                label: 'Pauschale pro Einheit'
+                amount: 'Betrag'
+        shipping_category:
+            description: 'Beschreibung'
+            name: 'Name'
+        shipping_method:
+            add_rule: 'Regel hinzufügen'
+            calculator: 'Rechner'
+            category: 'Kategorie'
+            category_requirement: 'Kategorievoraussetzung'
+            channels: 'Kanäle'
+            configuration: 'Konfiguration'
+            description: 'Beschreibung'
+            enabled: 'Aktiviert'
+            match_all_category_requirement: 'Alle Einheiten müssen mit der Methoden-Kategorie übereinstimmen'
+            match_any_category_requirement: 'Mindestens 1 Einheit muss mit der Methoden-Kategorie übereinstimmen'
+            match_none_category_requirement: 'Keine der Einheiten muss mit der Methoden-Kategorie übereinstimmen'
+            name: 'Name'
+            position: 'Position'
+            rules: 'Regeln'
+            rules_help: 'Verwenden Sie Regeln, um zu entscheiden, ob diese Versandmethode für eine bestimmte Bestellung angewendet werden kann. Wenn eine Regel wahr ist, kann diese Versandmethode angewendet werden. Beachten Sie, dass alle Regeln wahr sein müssen, wenn mehrere Regeln hinzugefügt werden.'
+            select_calculator: 'Rechner auswählen'
+            tax_category: 'Steuerkategorie'
+            translations: 'Übersetzungen'
+        shipping_method_rule:
+            items_total_greater_than_or_equal: 'Gesamtbetrag der Artikel größer oder gleich'
+            items_total_less_than_or_equal: 'Gesamtbetrag der Artikel weniger als oder gleich'
+            type: 'Typ'
+            total: 'Gesamt'
+            total_weight_greater_than_or_equal: 'Gesamtgewicht größer oder gleich'
+            total_weight_less_than_or_equal: 'Gesamtgewicht weniger als oder gleich'
+            weight: 'Gewicht'
+            amount: 'Betrag'
+            select: 'Regeltyp auswählen'

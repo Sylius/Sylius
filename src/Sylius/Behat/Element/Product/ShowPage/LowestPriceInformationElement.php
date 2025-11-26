@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-final class LowestPriceInformationElement extends Element implements LowestPriceInformationElementInterface
+class LowestPriceInformationElement extends SyliusElement implements LowestPriceInformationElementInterface
 {
     public function isThereInformationAboutProductLowestPriceWithPrice(string $lowestPriceBeforeDiscount): bool
     {
@@ -32,8 +32,8 @@ final class LowestPriceInformationElement extends Element implements LowestPrice
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'lowest_price_information_element' => '#lowest-price-before-discount:contains("The lowest price of this product from")',
-            'lowest_price_information_element_with_price' => '#lowest-price-before-discount:contains("%lowestPriceBeforeDiscount%")',
+            'lowest_price_information_element' => '[data-test-lowest-price-before-discount]:contains("The lowest price of this product from")',
+            'lowest_price_information_element_with_price' => '[data-test-lowest-price-before-discount]:contains("%lowestPriceBeforeDiscount%")',
         ]);
     }
 }

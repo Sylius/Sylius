@@ -30,6 +30,7 @@ final class ProductVariantPriceMapProvider implements ProductVariantMapProviderI
         ];
     }
 
+    /** @param array<string, mixed> $context */
     public function supports(ProductVariantInterface $variant, array $context): bool
     {
         return

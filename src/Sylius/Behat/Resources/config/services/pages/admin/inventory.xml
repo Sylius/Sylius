@@ -21,6 +21,7 @@
 
         <service id="sylius.behat.page.admin.inventory.index" class="%sylius.behat.page.admin.inventory.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_inventory_index</argument>
+            <argument type="service" id="Sylius\Behat\Service\Helper\AutocompleteHelperInterface" />
         </service>
     </services>
 </container>

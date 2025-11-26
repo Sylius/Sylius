@@ -1,0 +1,62 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    account:
+        dont_have_an_account: 'Haben Sie noch kein Konto?'
+        register_here: 'Hier registrieren'
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'wurde erfolgreich platziert.'
+            subject: 'Bestellbestätigung'
+            view_order_or_change_payment_method: 'Bestellung ansehen oder Zahlungsmethode ändern'
+            thank_you: 'Danke für Ihren Einkauf in unserem Shop!'
+            your_order_number: 'Ihre Bestellnummer'
+        password_reset:
+            hello: 'Hallo'
+            reset_your_password: 'Setzen Sie Ihr Passwort zurück'
+            subject: 'Passwort zurücksetzen'
+            to_reset_your_password: 'Um Ihr Passwort zurückzusetzen, klicken Sie auf den unten stehenden Link'
+            to_reset_your_password_token: 'Um Ihr Passwort zurückzusetzen, verwenden Sie das unten stehende Token'
+            token: 'Ihr Passwort-Zurücksetzungstoken lautet'
+        user_registration:
+            start_shopping: 'Jetzt einkaufen'
+            subject: 'Benutzerregistrierung'
+            welcome_to_our_store: 'Willkommen in unserem Shop!'
+            you_have_just_been_registered: 'Sie wurden gerade registriert. Vielen Dank'
+        verification_token:
+            hello: 'Hallo'
+            subject: 'E-Mail-Adresse Bestätigung'
+            to_verify_your_email_address: 'Um Ihre E-Mail-Adresse zu bestätigen, klicken Sie auf den unten stehenden Link'
+            verify_your_email_address: 'Bestätigen Sie Ihre E-Mail-Adresse'
+    footer:
+        banner:
+            free_shipping_title: 'Kostenloser Versand & Rücksendung'
+            free_shipping_content: 'Kostenloser Versand für alle Bestellungen'
+            guarantee_title: 'Geld-Zurück-Garantie'
+            guarantee_content: '30 Tage Geld-Zurück-Garantie'
+            multiple_payments_title: 'Mehrere Zahlungsmethoden'
+            multiple_payments_content: 'Wir akzeptieren Kreditkarten und PayPal'
+    homepage:
+        about_us: 'Über uns'
+        about_us_content: 'Willkommen in unserem Shop, Ihrem führenden Online-Shop, der Ihnen die besten Produkte bietet. Sie können aus den besten Kleidern und Schuhen aus unserem Angebot wählen. (<i>Sie können diesen Inhalt anpassen, indem Sie den Schlüssel "sylius.homepage.about_us_content" in Ihrer Übersetzungsdatei überschreiben</i>)'
+        banner_content: 'Bereiten Sie sich vor! Der Winter kommt'
+        banner_button: 'Sehen Sie sich die neue Kollektion an'
+        carousel_header: 'Empfohlene Produkte'
+        latest_deals: 'Neueste Angebote'
+        new_collection: 'Neue Kollektion'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Abonnieren Sie unseren Newsletter, um neue Angebote zu sehen, die auf Sie warten! (<i>Sie können diesen Inhalt anpassen, indem Sie den Schlüssel "sylius.homepage.newsletter_description" in Ihrer Übersetzungsdatei überschreiben</i>)'
+        subscribe: 'Abonnieren'
+    lightbox:
+        image_album_label: 'Bild %1 von %2'
+    menu:
+        shop:
+            account:
+                address_book: 'Adressbuch'
+                change_password: 'Passwort ändern'
+                dashboard: 'Dashboard'
+                header: 'Ihr Konto'
+                order_history: 'Bestellhistorie'
+                personal_information: 'Persönliche Informationen'
+    top_bar: 'Melden Sie sich für unseren Newsletter an und erhalten Sie 20% Rabatt'

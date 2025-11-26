@@ -4,18 +4,18 @@
 sylius:
     taxon:
         code:
-            not_blank: Por favor, introduzca un código de taxón.
-            regex: El código de taxón solo puede contener letras, números, guiones y guiones bajos.
-            unique: Ya existe un taxón con ese código.
+            not_blank: 'Por favor, introduzca un código de taxón.'
+            regex: 'El código de taxón solo puede contener letras, números, guiones y guiones bajos.'
+            unique: 'Ya existe un taxón con ese código.'
         name:
-            max_length: El nombre del taxón no debe ser más largo de 255 caracteres.
-            not_blank: Por favor, introduzca el nombre del taxón.
+            max_length: 'El nombre del taxón no debe tener más de 255 caracteres.'
+            not_blank: 'Por favor, introduzca el nombre del taxón.'
         slug:
-            not_blank: Por favor, introduzca el slug del taxón.
-            unique: El slug del taxón debe ser único.
+            not_blank: 'Por favor, introduzca el identificador del taxón.'
+            unique: 'El identificador del taxón debe ser único.'
         parent:
             invalid_relation: 'El padre no debe ser ni el propio taxón ni ninguno de sus descendientes.'
     taxonomy:
         name:
-            max_length: El nombre de la taxonomía no debe ser más largo de 255 caracteres.
-            not_blank: Por favor, introduzca un nombre de taxonomía.
+            max_length: 'El nombre de la taxonomía no debe tener más de 255 caracteres.'
+            not_blank: 'Por favor, introduzca un nombre para la taxonomía.'

@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -25,7 +24,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
  */
 final class DefaultUsernameORMListener
 {
-    public function onFlush(OnFlushEventArgs $onFlushEventArgs)
+    public function onFlush(OnFlushEventArgs $onFlushEventArgs): void
     {
         $entityManager = $onFlushEventArgs->getObjectManager();
         $unitOfWork = $entityManager->getUnitOfWork();
@@ -34,6 +33,7 @@ final class DefaultUsernameORMListener
         $this->processEntities($unitOfWork->getScheduledEntityUpdates(), $entityManager, $unitOfWork);
     }
 
+    /** @param array<mixed> $entities */
     private function processEntities(array $entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {
         foreach ($entities as $entity) {
@@ -53,9 +53,6 @@ final class DefaultUsernameORMListener
                 continue;
             }
 
-            if (!method_exists($user, 'getUsername')) {
-                continue;
-            }
             if ($customer->getEmail() === $user->getUsername() && $customer->getEmailCanonical() === $user->getUsernameCanonical()) {
                 continue;
             }
@@ -63,7 +60,6 @@ final class DefaultUsernameORMListener
             $user->setUsername($customer->getEmail());
             $user->setUsernameCanonical($customer->getEmailCanonical());
 
-            /** @var ClassMetadata $userMetadata */
             $userMetadata = $entityManager->getClassMetadata($user::class);
             $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user);
         }

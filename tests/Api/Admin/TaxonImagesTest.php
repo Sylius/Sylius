@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use PHPUnit\Framework\Attributes\Test;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\TaxonImageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -24,62 +25,7 @@ final class TaxonImagesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
-    public function it_gets_taxon_images(): void
-    {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/taxon-images', server: $header);
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/taxon_image/get_taxon_images_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
-    public function it_gets_taxon_images_with_an_image_filter(): void
-    {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/taxon-images',
-            parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'admin/taxon_image/get_taxon_images_with_image_filter_response',
-            Response::HTTP_OK,
-        );
-    }
-
-    /** @test */
-    public function it_prevents_getting_taxon_images_with_an_invalid_image_filter(): void
-    {
-        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
-
-        $this->client->request(
-            method: 'GET',
-            uri: '/api/v2/admin/taxon-images',
-            parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
-            server: $header,
-        );
-
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'common/image/invalid_filter',
-            Response::HTTP_BAD_REQUEST,
-        );
-    }
-
-    /** @test */
+    #[Test]
     public function it_gets_a_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -88,9 +34,12 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $fixtures['taxon_thumbnail'];
 
+        /** @var TaxonInterface $taxon */
+        $taxon = $taxonImage->getOwner();
+
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             server: $header,
         );
 
@@ -101,7 +50,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_a_taxon_image_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -110,9 +59,12 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $fixtures['taxon_thumbnail'];
 
+        /** @var TaxonInterface $taxon */
+        $taxon = $taxonImage->getOwner();
+
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
             server: $header,
         );
@@ -124,7 +76,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_getting_a_taxon_image_with_an_invalid_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -133,9 +85,12 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $fixtures['taxon_thumbnail'];
 
+        /** @var TaxonInterface $taxon */
+        $taxon = $taxonImage->getOwner();
+
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
             server: $header,
         );
@@ -147,7 +102,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_taxon_images_for_the_given_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -169,7 +124,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_taxon_images_for_the_given_taxon_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -192,7 +147,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_getting_taxon_images_for_the_given_taxon_with_an_invalid_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -215,11 +170,11 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::FILE_CONTENT_TYPE_HEADER);
 
         /** @var TaxonInterface $taxon */
         $taxon = $fixtures['taxon'];
@@ -238,11 +193,11 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_taxon_image_with_type(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::FILE_CONTENT_TYPE_HEADER);
 
         /** @var TaxonInterface $taxon */
         $taxon = $fixtures['taxon'];
@@ -262,7 +217,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_only_the_type_of_the_existing_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -272,11 +227,11 @@ final class TaxonImagesTest extends JsonApiTestCase
         $taxonImage = $fixtures['taxon_thumbnail'];
 
         /** @var TaxonInterface $taxon */
-        $taxon = $fixtures['taxon_mug'];
+        $taxon = $taxonImage->getOwner();
 
         $this->client->request(
             method: 'PUT',
-            uri: sprintf('/api/v2/admin/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             server: $header,
             content: json_encode([
                 'type' => 'logo',
@@ -292,7 +247,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_a_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -301,9 +256,12 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonImageInterface $taxonImage */
         $taxonImage = $fixtures['taxon_thumbnail'];
 
+        /** @var TaxonInterface $taxon */
+        $taxon = $taxonImage->getOwner();
+
         $this->client->request(
             method: 'DELETE',
-            uri: sprintf('/api/v2/admin/taxon-images/%s', $taxonImage->getId()),
+            uri: sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
             server: $header,
         );
 

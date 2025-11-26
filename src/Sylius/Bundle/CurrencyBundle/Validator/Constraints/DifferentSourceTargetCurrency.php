@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 class DifferentSourceTargetCurrency extends Constraint
 {
     /** @var string */

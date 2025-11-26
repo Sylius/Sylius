@@ -4,8 +4,14 @@
 sylius:
     channel:
         code:
-            not_blank: Voer kanaal code in.
-            regex: Kanaal code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Kanaalcode moet uniek zijn.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer kanaalcode in.'
+            regex: 'Kanaalcode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'Kanaalcode moet uniek zijn.'
         name:
-            not_blank: Voer kanaal naam in.
+            not_blank: 'Voer kanaalnaam in.'
+            max_length: 'Kanaalnaam mag niet langer zijn dan {{ limit }} tekens.'
+        color:
+            max_length: 'Kleur mag niet langer zijn dan {{ limit }} tekens.'
+        hostname:
+            max_length: 'Hostname mag niet langer zijn dan {{ limit }} tekens.'

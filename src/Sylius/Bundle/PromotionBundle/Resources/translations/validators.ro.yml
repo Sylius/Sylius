@@ -2,41 +2,77 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    catalog_promotion:
+        code:
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            unique: 'Promoția din catalog cu codul dat există deja.'
+            regex: 'Codul promoției din catalog poate conține doar litere, cifre, cratime și underscore-uri.'
+            not_blank: 'Vă rugăm să introduceți codul promoției din catalog.'
+        date:
+            greater_than_start_date: 'Data de încheiere nu poate fi setată înainte de data de început.'
+        name:
+            max_length: 'Numele promoției din catalog nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Numele promoției din catalog trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți numele promoției din catalog.'
+        state:
+            processing: 'Promoția din catalog nu poate fi editată deoarece este în curs de procesare.'
+    catalog_promotion_action:
+        type:
+            not_blank: 'Vă rugăm să alegeți un tip de acțiune.'
+            invalid: 'Tipul acțiunii promoției din catalog este invalid. Tipurile disponibile sunt {{ available_action_types }}.'
+        invalid_type: 'Tipul acțiunii promoției din catalog este invalid. Vă rugăm să alegeți un tip valid.'
+        percentage_discount:
+            not_in_range: 'Valoarea reducerii procentuale trebuie să fie între 0% și 100%.'
+            not_number_or_empty: 'Valoarea reducerii procentuale trebuie să fie un număr și nu poate fi goală.'
+            not_valid: 'Valoarea reducerii procentuale trebuie configurată.'
+    catalog_promotion_scope:
+        type:
+            not_blank: 'Vă rugăm să alegeți un tip de domeniu.'
+            invalid: 'Tipul domeniului promoției din catalog este invalid. Tipurile disponibile sunt {{ available_scope_types }}.'
     promotion:
         code:
-            unique: Codul promoției trebuie să fie unic.
-            regex: Codul promoției poate să conțină litere, numere, - și _.
-            not_blank: Introdu codul promoției.
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            unique: 'Promoția cu codul dat există deja.'
+            regex: 'Codul promoției poate conține doar litere, cifre, cratime și underscore-uri.'
+            not_blank: 'Vă rugăm să introduceți codul promoției.'
         description:
-            max_length: Descrierea promoției nu poate depăși un caracter.|Descrierea promoției nu poate depăși {{ limit }} de caractere.
-            min_length: Descrierea promoției trebuie să conţină cel puţin un caracter.|Descrierea promoției trebuie să conţină cel puţin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați descrierea promoţiei.
-        end_date_cannot_be_set_prior_start_date: Data de sfârșit nu poate fi setată înaintea datei de început.
+            max_length: 'Descrierea promoției nu poate avea mai mult de 1 caracter.|Descrierea promoției nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Descrierea promoției trebuie să aibă cel puțin 1 caracter.|Descrierea promoției trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți descrierea promoției.'
+        end_date_cannot_be_set_prior_start_date: 'Data de încheiere nu poate fi setată înainte de data de început.'
+        is_invalid: 'Promoția este invalidă.'
         name:
-            max_length: Numele promoției nu poate depăși un caracter.|Numele promoției nu poate depăși {{ limit }} de caractere.
-            min_length: Numele promoţiei trebuie să conţină cel puţin un caracter. |Numele promoţiei trebuie să conţină cel puţin {{ limit }} caractere.
-            not_blank: Vă rugăm să completați numele promoţiei.
+            max_length: 'Numele promoției nu poate avea mai mult de 1 caracter.|Numele promoției nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Numele promoției trebuie să aibă cel puțin 1 caracter.|Numele promoției trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți numele promoției.'
     promotion_action:
+        invalid_type: 'Tipul acțiunii promoției este invalid. Tipurile de acțiuni disponibile sunt {{ available_action_types }}.'
         percentage_discount_configuration:
-            not_in_range: Reducerea procentuală trebuie să fie între 0% şi 100%.
+            not_in_range: 'Reducerea procentuală trebuie să fie între 0% și 100%.'
+    promotion_rule:
+        invalid_type: 'Tipul regulii promoției este invalid. Tipurile de reguli disponibile sunt {{ available_rule_types }}.'
     promotion_coupon:
         code:
-            max_length: Codul promoţional nu poate depăși un caracter.|Codul promoţional nu poate depăși {{ limit }} de caractere.
-            min_length: Codul promoţional trebuie să conţină cel puţin un caracter.|Codul promoţional trebuie să conţină cel puţin {{ limit }} caractere.
-            not_blank: Vă rugăm să introduceţi codul promoţional.
-            regex: Codul cuponului poate conține doar litere, numere, cratime și linii de subliniere.
-            unique: Cuponul există deja.
-        is_invalid: Codul cuponului este invalid.
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            min_length: 'Codul cuponului trebuie să aibă cel puțin 1 caracter.|Codul cuponului trebuie să aibă cel puțin {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți codul cuponului.'
+            regex: 'Codul cuponului poate conține doar litere, cifre, cratime și underscore-uri.'
+            unique: 'Acest cupon există deja.'
+        is_invalid: 'Codul cuponului este invalid.'
+        promotion:
+            not_blank: 'Vă rugăm să furnizați o promoție pentru acest cupon.'
+            not_coupon_based: 'Doar promoțiile bazate pe cupon pot avea cupoane.'
         usage_limit:
-            min: Limita de utilizare a codului promoțional trebuie să fie cel puţin {{ limit }}.
+            min: 'Limita de utilizare a cuponului trebuie să fie cel puțin {{ limit }}.'
     promotion_coupon_generator_instruction:
         amount:
-            min: Pot fi generate minim {{ limit }} cupoane.
-            not_blank: Introdu numărul de cupoane ce trebuie generate.
+            min: 'Numărul de cupoane de generat trebuie să fie cel puțin {{ limit }}.'
+            not_blank: 'Vă rugăm să introduceți numărul de cupoane de generat.'
         code_length:
-            min: Codul cuponului trebuie să conțină cel puţin {{ limit }} caractere.
-            max: Codul cuponului nu poate depăși {{ limit }} de caractere.
-            not_blank: Vă rugăm să introduceţi lungimea codului promoţional.
-        possible_generation_amount: Valoare gresita pentru lungime sau valoare cod cupoane. Nu putem genera cupoane unice in valoare de %expectedAmount% avand lungime cod cupon %codeLength%. Putem genera cupoane de maxim %possibleAmount%.
+            min: 'Lungimea codului cuponului trebuie să fie cel puțin {{ limit }} caractere.'
+            max: 'Lungimea codului cuponului nu poate fi mai mare decât {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți lungimea codului cuponului.'
+            not_in_range: 'Lungimea codului cuponului trebuie să fie între {{ min }} și {{ max }}.'
+        possible_generation_amount: 'Lungime invalidă a codului cuponului sau număr de cupoane. Nu este posibil să generați %expectedAmount% cupoane unice cu lungimea codului %codeLength%. Numărul posibil de generare este %possibleAmount%.'
         usage_limit:
-            min: Limita de utilizare a codurilor promoționale generate trebuie să fie de cel puţin {{ limit }}.
+            min: 'Limita de utilizare a cupoanelor generate trebuie să fie cel puțin {{ limit }}.'

@@ -4,5 +4,5 @@
 sylius:
     review:
         accept: 'La recensione è stata accettata con successo.'
-        reject: 'La recensione è stata respinta con successo.'
+        reject: 'La recensione è stata rifiutata con successo.'
         wait_for_the_acceptation: 'La tua recensione è in attesa di accettazione.'

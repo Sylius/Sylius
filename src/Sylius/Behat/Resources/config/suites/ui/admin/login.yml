@@ -5,6 +5,7 @@ default:
     suites:
         ui_administrator_login:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -12,9 +13,9 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.user
 
-                - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.user
 
                 - sylius.behat.context.ui.admin.dashboard

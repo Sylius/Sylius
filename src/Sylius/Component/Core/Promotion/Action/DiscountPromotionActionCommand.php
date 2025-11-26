@@ -24,10 +24,13 @@ use Webmozart\Assert\Assert;
 abstract class DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     /**
+     * @param array<string, mixed> $configuration
+     *
      * @throws \InvalidArgumentException
      */
     abstract protected function isConfigurationValid(array $configuration): void;
 
+    /** @param array<string, mixed> $configuration */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void
     {
         /** @var OrderInterface $subject */
@@ -45,9 +48,7 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
         }
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     protected function isSubjectValid(PromotionSubjectInterface $subject): bool
     {
         /** @var OrderInterface $subject */

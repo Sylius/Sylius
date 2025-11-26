@@ -1,0 +1,7 @@
+{% set product = hookable_metadata.context.product %}
+
+<div class="mb-4">
+    <div class="overflow-auto bg-light rounded-3" style="aspect-ratio: 3/4; ">
+        {{ component('sylius_shop:main_image', { product: product, class: "w-100 h-100 object-fit-cover" }) }}
+    </div>
+</div>

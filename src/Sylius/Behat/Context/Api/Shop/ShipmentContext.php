@@ -16,14 +16,13 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
-use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Webmozart\Assert\Assert;
 
-final class ShipmentContext implements Context
+final readonly class ShipmentContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,
@@ -44,7 +43,24 @@ final class ShipmentContext implements Context
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
 
-        $this->client->show(Resources::SHIPMENTS, (string) $shipment->getId());
+        $this->client->requestGet(
+            sprintf('orders/%s/shipments/%s', $order->getTokenValue(), $shipment->getId()),
+        );
+    }
+
+    /**
+     * @Then the shipment state should be :state
+     * @Then the order's shipment state should be :state
+     */
+    public function theShipmentStateShouldBe(string $state): void
+    {
+        $response = $this->client->getLastResponse();
+        $shipments = $this->responseChecker->getValue($response, 'shipments');
+        $token = $this->responseChecker->getValue($response, 'tokenValue');
+
+        $response = $this->client->requestGet(sprintf('orders/%s/shipments/%s', $token, $shipments[0]['id']));
+
+        Assert::true($this->responseChecker->hasValue($response, 'state', $state, isCaseSensitive: false));
     }
 
     /**

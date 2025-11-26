@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    product_variant:
+        generate: 'उत्पाद वेरिएंट सफलतापूर्वक उत्पन्न कर दिए गए हैं।'

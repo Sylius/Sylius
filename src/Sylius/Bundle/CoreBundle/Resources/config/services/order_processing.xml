@@ -35,8 +35,6 @@
         </parameter>
     </parameters>
     <services>
-        <defaults public="true" />
-
         <service id="sylius.order_processing.order_adjustments_clearer" class="Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer">
             <argument>%sylius.order_processing.adjustment_clearing_types%</argument>
             <tag name="sylius.order_processor" priority="60"/>
@@ -75,16 +73,16 @@
 
         <service id="sylius.order_processing.order_payment_processor.checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.provider.payment.order" />
-            <argument>cart</argument>
             <argument type="service" id="sylius.remover.payment.order" />
             <argument>%sylius.order_payment_processor.checkout.unsupported_states%</argument>
+            <argument>cart</argument>
             <tag name="sylius.order_processor" priority="0"/>
         </service>
-        <service id="sylius.order_processing.order_payment_processor.after_checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
+        <service id="sylius.order_processing.order_payment_processor.after_checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor" public="true">
             <argument type="service" id="sylius.provider.payment.order" />
-            <argument>new</argument>
             <argument type="service" id="sylius.remover.payment.order" />
             <argument>%sylius.order_payment_processor.after_checkout.unsupported_states%</argument>
+            <argument>new</argument>
         </service>
     </services>
 </container>

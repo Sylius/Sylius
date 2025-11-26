@@ -15,24 +15,40 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Workflow\Event\Event;
 use Webmozart\Assert\Assert;
 
 final class OrderCustomerIpListener
 {
-    public function __construct(private IpAssignerInterface $ipAssigner, private RequestStack $requestStack)
-    {
+    public function __construct(
+        private readonly IpAssignerInterface $ipAssigner,
+        private readonly RequestStack $requestStack,
+    ) {
     }
 
-    public function assignCustomerIpToOrder(GenericEvent $event): void
+    public function __invoke(Event|OrderInterface $event): void
     {
-        $subject = $event->getSubject();
-        Assert::isInstanceOf($subject, OrderInterface::class);
-
+        $order = $this->getOrder($event);
         $request = $this->requestStack->getMainRequest();
-        Assert::notNull($request);
+        if (null === $request) {
+            return;
+        }
 
-        $this->ipAssigner->assign($subject, $request);
+        $this->ipAssigner->assign($order, $request);
+    }
+
+    private function getOrder(Event|OrderInterface $event): OrderInterface
+    {
+        if ($event instanceof Event) {
+            $order = $event->getSubject();
+            Assert::isInstanceOf($order, OrderInterface::class);
+        }
+
+        if ($event instanceof OrderInterface) {
+            $order = $event;
+        }
+
+        return $order;
     }
 }

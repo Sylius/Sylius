@@ -18,7 +18,9 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 interface PromotionActionCommandInterface
 {
+    /** @param array<string, mixed> $configuration */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool;
 
+    /** @param array<string, mixed> $configuration */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void;
 }
