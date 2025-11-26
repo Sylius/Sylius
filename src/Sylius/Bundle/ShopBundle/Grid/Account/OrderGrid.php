@@ -19,27 +19,24 @@ use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class OrderGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_shop_account_order')]
+final class OrderGrid extends AbstractGrid implements OrderGridInterface
 {
     public function __construct(
-        private string $resourceClass,
+        private readonly string $orderClass,
     ) {
     }
 
-    public static function getName(): string
-    {
-        return 'sylius_shop_account_order';
-    }
-
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setRepositoryMethod('createByCustomerAndChannelIdQueryBuilder', [
                 "expr:service('sylius.context.customer').getCustomer().getId()",
                 "expr:service('sylius.context.channel').getChannel().getId()",
             ])
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->orderClass)
             ->orderBy('checkoutCompletedAt', 'desc')
             ->setLimits([10, 25, 50])
             ->addField(

@@ -19,20 +19,17 @@ use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
+use Sylius\Component\Grid\Attribute\AsGrid;
 
-final class ProductGrid extends AbstractGrid
+#[AsGrid(name: 'sylius_shop_product')]
+final class ProductGrid extends AbstractGrid implements ProductGridInterface
 {
     public function __construct(
-        private string $resourceClass,
+        private readonly string $productClass,
     ) {
     }
 
-    public static function getName(): string
-    {
-        return 'sylius_shop_product';
-    }
-
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setRepositoryMethod('createShopListQueryBuilder', [
@@ -42,7 +39,7 @@ final class ProductGrid extends AbstractGrid
                'sorting' => "expr:service('request_stack').getCurrentRequest().get('sorting', [])",
                'includeAllDescendants' => "expr:parameter('sylius_shop.product_grid.include_all_descendants')",
             ])
-            ->setDriverOption('class', $this->resourceClass)
+            ->setDriverOption('class', $this->productClass)
             ->orderBy('position', 'asc')
             ->setLimits([
                 9,
