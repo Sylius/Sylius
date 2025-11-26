@@ -40,7 +40,7 @@ final class ProductReviewGrid extends AbstractGrid implements ProductReviewGridI
         return 'sylius_admin_product_review';
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->productReviewClass)

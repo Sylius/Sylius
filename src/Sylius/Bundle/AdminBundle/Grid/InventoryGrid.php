@@ -32,7 +32,7 @@ final class InventoryGrid extends AbstractGrid implements InventoryGridInterface
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->productVariantClass)

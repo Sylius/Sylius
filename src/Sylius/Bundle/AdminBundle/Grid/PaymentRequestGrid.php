@@ -33,7 +33,7 @@ final class PaymentRequestGrid extends AbstractGrid implements PaymentRequestGri
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder->setDriverOption('class', $this->paymentRequestClass);
         $gridBuilder->setRepositoryMethod('createQueryBuilderForPayment', [

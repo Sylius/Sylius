@@ -34,7 +34,7 @@ final class ProductAssociationTypeGrid extends AbstractGrid implements ProductAs
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->productAssociationTypeClass)

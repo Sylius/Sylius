@@ -37,7 +37,7 @@ final class PromotionGrid extends AbstractGrid implements PromotionGridInterface
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->promotionClass)

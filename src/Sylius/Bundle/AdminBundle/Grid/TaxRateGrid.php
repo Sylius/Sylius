@@ -36,7 +36,7 @@ final class TaxRateGrid extends AbstractGrid implements TaxRateGridInterface
     ) {
     }
 
-    public function buildGrid(GridBuilderInterface $gridBuilder): void
+    public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
             ->setDriverOption('class', $this->taxRateClass)
