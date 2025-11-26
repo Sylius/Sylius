@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: A megadott pénznem érvénytelen.
         payment_method_eligibility: 'A %paymentMethodName% fizetési mód le van tiltva. Kérjük válasszon másik fizetési módot.'
-        product_eligibility: 'A %productName% termék le van tiltva.'
+        product_eligibility: 'A %productName% termék már nem elérhető.'
         shipping_method_eligibility: 'A termék nem felel meg a %shippingMethodName% kiszállítási mód feltételeinek. Kérjük válasszon másik kiszállítási módot.'
     locale:
         enabled:

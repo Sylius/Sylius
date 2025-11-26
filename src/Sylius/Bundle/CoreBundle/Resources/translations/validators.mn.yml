@@ -41,7 +41,7 @@ sylius:
         currency_code:
             not_valid: Таны оруулсан валютын код буруу байна.
         payment_method_eligibility: 'Энэ төлбөрийн хэрэгсэлийг  %paymentMethodName% идэвхгүй болгосон. Төлбөрийн хэрэгслээ дахин сонгоно уу.'
-        product_eligibility: 'Энэ бүтээгдэхүүнийг %productName% идэвхгүй болгосон.'
+        product_eligibility: 'Бүтээгдэхүүн %productName% дахин худалдаалагдахгүй байна.'
         shipping_method_eligibility: 'Бүтээгдэхүүн нь %shippingMethodName% хүргэлтийн төрлийн шаардлагад нийцэхгүй байна. Хүргэлтийн төрлийг дахин сонгоно уу.'
     locale:
         enabled:
