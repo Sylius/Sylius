@@ -127,4 +127,42 @@ final class ProductAttributeValueDenormalizerTest extends TestCase
             ProductAttributeValueInterface::class,
         );
     }
+
+    public function testItReordersAttributeKeyToBeFirst(): void
+    {
+        /** @var DenormalizerInterface|MockObject $denormalizerMock */
+        $denormalizerMock = $this->createMock(DenormalizerInterface::class);
+        /** @var ProductAttributeInterface|MockObject $attributeMock */
+        $attributeMock = $this->createMock(ProductAttributeInterface::class);
+        /** @var ProductAttributeValueInterface|MockObject $productAttributeValueMock */
+        $productAttributeValueMock = $this->createMock(ProductAttributeValueInterface::class);
+
+        $this->iriConverter->method('getResourceFromIri')
+                           ->with('/attributes/material')
+                           ->willReturn($attributeMock);
+
+        $attributeMock->expects(self::once())->method('getStorageType')->willReturn('text');
+
+        $attributeMock->expects(self::once())->method('getType')->willReturn('Material');
+
+        $this->productAttributeValueDenormalizer->setDenormalizer($denormalizerMock);
+
+        $denormalizerMock
+            ->expects($this->once())
+            ->method('denormalize')
+            ->with(
+                $this->callback(function (array $data) {
+                    $keys = array_keys($data);
+
+                    return $keys[0] === 'attribute';
+                }),
+                $this->equalTo(ProductAttributeValueInterface::class),
+            )
+            ->willReturn($productAttributeValueMock);
+
+        $this->productAttributeValueDenormalizer->denormalize(
+            ['value' => 'Red', 'attribute' => '/attributes/material'],
+            ProductAttributeValueInterface::class,
+        );
+    }
 }
