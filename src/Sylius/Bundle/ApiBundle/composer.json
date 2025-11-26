@@ -25,8 +25,8 @@
     "require": {
         "php": "^8.2",
         "doctrine/dbal": "^3.9",
-        "api-platform/doctrine-orm": "^4.1.7",
-        "api-platform/symfony": "^4.1.7",
+        "api-platform/doctrine-orm": "^4.2.1",
+        "api-platform/symfony": "^4.2.1",
         "lexik/jwt-authentication-bundle": "^3.1",
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
@@ -38,7 +38,6 @@
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "nelmio/alice": "^3.13",
         "phparkitect/phparkitect": "^0.6",
-        "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "^6.4 || ^7.2",
         "symfony/debug-bundle": "^6.4 || ^7.2",

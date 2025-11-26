@@ -14,10 +14,8 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\ResourceNotFoundException;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -26,61 +24,61 @@ use Symfony\Component\OptionsResolver\Options;
 
 final class LazyOptionTest extends TestCase
 {
-    use ProphecyTrait;
-
     #[Test]
     public function it_gets_object_from_provided_repository(): void
     {
-        /** @var RepositoryInterface|ObjectProphecy $repository */
-        $repository = $this->prophesize(RepositoryInterface::class);
-        $resource = $this->prophesize(ResourceInterface::class);
-        $options = $this->prophesize(Options::class);
+        /** @var RepositoryInterface&MockObject $repository */
+        $repository = $this->createMock(RepositoryInterface::class);
+        $resource = $this->createMock(ResourceInterface::class);
+        $options = $this->createMock(Options::class);
 
-        $repository->findOneBy(['code' => 'OBJECT_CODE'])->willReturn($resource->reveal());
+        $repository->method('findOneBy')->with(['code' => 'OBJECT_CODE'])->willReturn($resource);
 
-        $closure = LazyOption::getOneBy($repository->reveal(), 'code');
+        $closure = LazyOption::getOneBy($repository, 'code');
 
-        self::assertSame($resource->reveal(), $closure($options->reveal(), 'OBJECT_CODE'));
+        self::assertSame($resource, $closure($options, 'OBJECT_CODE'));
     }
 
     #[Test]
     public function it_finds_an_object_from_provided_repository_or_returns_null(): void
     {
-        /** @var RepositoryInterface|ObjectProphecy $repository */
-        $repository = $this->prophesize(RepositoryInterface::class);
-        $resource = $this->prophesize(ResourceInterface::class);
-        $options = $this->prophesize(Options::class);
+        /** @var RepositoryInterface&MockObject $repository */
+        $repository = $this->createMock(RepositoryInterface::class);
+        $resource = $this->createMock(ResourceInterface::class);
+        $options = $this->createMock(Options::class);
 
-        $repository->findOneBy(['code' => 'OBJECT_CODE'])->willReturn($resource->reveal());
-        $repository->findOneBy(['code' => 'NOT_EXISTING_OBJECT_CODE'])->willReturn(null);
+        $repository->method('findOneBy')->willReturnMap([
+            [['code' => 'OBJECT_CODE'], $resource],
+            [['code' => 'NOT_EXISTING_OBJECT_CODE'], null],
+        ]);
 
-        $closure = LazyOption::findOneBy($repository->reveal(), 'code');
+        $closure = LazyOption::findOneBy($repository, 'code');
 
-        self::assertSame($resource->reveal(), $closure($options->reveal(), 'OBJECT_CODE'));
-        self::assertNull($closure($options->reveal(), 'NOT_EXISTING_OBJECT_CODE'));
+        self::assertSame($resource, $closure($options, 'OBJECT_CODE'));
+        self::assertNull($closure($options, 'NOT_EXISTING_OBJECT_CODE'));
     }
 
     #[Test]
     public function it_returns_previous_value_if_it_is_an_object_null_or_empty_array(): void
     {
-        /** @var RepositoryInterface|ObjectProphecy $repository */
-        $repository = $this->prophesize(RepositoryInterface::class);
-        $resource = $this->prophesize(ResourceInterface::class);
-        $options = $this->prophesize(Options::class);
+        /** @var RepositoryInterface&MockObject $repository */
+        $repository = $this->createMock(RepositoryInterface::class);
+        $resource = $this->createMock(ResourceInterface::class);
+        $options = $this->createMock(Options::class);
 
-        $repository->findOneBy(Argument::any())->shouldNotBeCalled();
+        $repository->expects($this->never())->method('findOneBy');
 
-        $getOneByClosure = LazyOption::getOneBy($repository->reveal(), 'code');
+        $getOneByClosure = LazyOption::getOneBy($repository, 'code');
 
-        self::assertSame($resource->reveal(), $getOneByClosure($options->reveal(), $resource->reveal()));
-        self::assertNull($getOneByClosure($options->reveal(), []));
-        self::assertNull($getOneByClosure($options->reveal(), null));
+        self::assertSame($resource, $getOneByClosure($options, $resource));
+        self::assertNull($getOneByClosure($options, []));
+        self::assertNull($getOneByClosure($options, null));
 
-        $findOneByClosure = LazyOption::findOneBy($repository->reveal(), 'code');
+        $findOneByClosure = LazyOption::findOneBy($repository, 'code');
 
-        self::assertSame($resource->reveal(), $findOneByClosure($options->reveal(), $resource->reveal()));
-        self::assertNull($findOneByClosure($options->reveal(), []));
-        self::assertNull($findOneByClosure($options->reveal(), null));
+        self::assertSame($resource, $findOneByClosure($options, $resource));
+        self::assertNull($findOneByClosure($options, []));
+        self::assertNull($findOneByClosure($options, null));
     }
 
     #[Test]
@@ -88,15 +86,15 @@ final class LazyOptionTest extends TestCase
     {
         $this->expectException(ResourceNotFoundException::class);
 
-        /** @var RepositoryInterface|ObjectProphecy $repository */
-        $repository = $this->prophesize(RepositoryInterface::class);
-        $options = $this->prophesize(Options::class);
+        /** @var RepositoryInterface&MockObject $repository */
+        $repository = $this->createMock(RepositoryInterface::class);
+        $options = $this->createMock(Options::class);
 
-        $repository->findOneBy(['code' => 'OBJECT_CODE'])->willReturn(null);
-        $repository->getClassName()->willReturn('App\\Entity');
+        $repository->method('findOneBy')->with(['code' => 'OBJECT_CODE'])->willReturn(null);
+        $repository->method('getClassName')->willReturn('App\\Entity');
 
-        $closure = LazyOption::getOneBy($repository->reveal(), 'code');
+        $closure = LazyOption::getOneBy($repository, 'code');
 
-        $closure($options->reveal(), 'OBJECT_CODE');
+        $closure($options, 'OBJECT_CODE');
     }
 }

@@ -38,5 +38,6 @@ sylius:
                 all: Kõik
             select: Vali
             select_scope: Valige
+            priority: Prioriteet
         zone_member:
             select: Vali

@@ -38,5 +38,6 @@ sylius:
                 all: 'Alle'
             select: 'Zone auswählen'
             select_scope: 'Geltungsbereich auswählen'
+            priority: 'Priorität'
         zone_member:
             select: 'Mitglied auswählen'

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use ApiPlatform\Symfony\Bundle\Test\ApiTestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\HttpFoundation\Response;
 
 final class MergingConfigsTest extends ApiTestCase
 {
@@ -79,7 +80,7 @@ final class MergingConfigsTest extends ApiTestCase
             ],
         ]);
 
-        self::assertResponseStatusCodeSame(400);
+        self::assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
 
         static::createClient()->request('POST', '/api/v2/shop/bar', [
             'json' => [

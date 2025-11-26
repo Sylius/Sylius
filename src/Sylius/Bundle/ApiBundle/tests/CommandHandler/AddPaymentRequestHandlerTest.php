@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
 use Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler;
 use Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException;
@@ -33,38 +32,36 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
 final class AddPaymentRequestHandlerTest extends TestCase
 {
-    use ProphecyTrait;
+    private PaymentMethodRepositoryInterface&MockObject $paymentMethodRepository;
 
-    private ObjectProphecy|PaymentMethodRepositoryInterface $paymentMethodRepository;
+    private PaymentRepositoryInterface&MockObject $paymentRepository;
 
-    private ObjectProphecy|PaymentRepositoryInterface $paymentRepository;
+    private PaymentRequestFactoryInterface&MockObject $paymentRequestFactory;
 
-    private ObjectProphecy|PaymentRequestFactoryInterface $paymentRequestFactory;
+    private PaymentRequestRepositoryInterface&MockObject $paymentRequestRepository;
 
-    private ObjectProphecy|PaymentRequestRepositoryInterface $paymentRequestRepository;
+    private DefaultActionProviderInterface&MockObject $defaultActionProvider;
 
-    private DefaultActionProviderInterface|ObjectProphecy $defaultActionProvider;
-
-    private DefaultPayloadProviderInterface|ObjectProphecy $defaultPayloadProvider;
+    private DefaultPayloadProviderInterface&MockObject $defaultPayloadProvider;
 
     private AddPaymentRequestHandler $addPaymentRequestHandler;
 
     protected function setUp(): void
     {
-        $this->paymentMethodRepository = $this->prophesize(PaymentMethodRepositoryInterface::class);
-        $this->paymentRepository = $this->prophesize(PaymentRepositoryInterface::class);
-        $this->paymentRequestFactory = $this->prophesize(PaymentRequestFactoryInterface::class);
-        $this->paymentRequestRepository = $this->prophesize(PaymentRequestRepositoryInterface::class);
-        $this->defaultActionProvider = $this->prophesize(DefaultActionProviderInterface::class);
-        $this->defaultPayloadProvider = $this->prophesize(DefaultPayloadProviderInterface::class);
+        $this->paymentMethodRepository = $this->createMock(PaymentMethodRepositoryInterface::class);
+        $this->paymentRepository = $this->createMock(PaymentRepositoryInterface::class);
+        $this->paymentRequestFactory = $this->createMock(PaymentRequestFactoryInterface::class);
+        $this->paymentRequestRepository = $this->createMock(PaymentRequestRepositoryInterface::class);
+        $this->defaultActionProvider = $this->createMock(DefaultActionProviderInterface::class);
+        $this->defaultPayloadProvider = $this->createMock(DefaultPayloadProviderInterface::class);
 
         $this->addPaymentRequestHandler = new AddPaymentRequestHandler(
-            $this->paymentMethodRepository->reveal(),
-            $this->paymentRepository->reveal(),
-            $this->paymentRequestFactory->reveal(),
-            $this->paymentRequestRepository->reveal(),
-            $this->defaultActionProvider->reveal(),
-            $this->defaultPayloadProvider->reveal(),
+            $this->paymentMethodRepository,
+            $this->paymentRepository,
+            $this->paymentRequestFactory,
+            $this->paymentRequestRepository,
+            $this->defaultActionProvider,
+            $this->defaultPayloadProvider,
         );
     }
 
@@ -73,7 +70,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
     {
         self::expectException(PaymentNotFoundException::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn(null);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn(null);
 
         $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
@@ -83,10 +80,10 @@ final class AddPaymentRequestHandlerTest extends TestCase
     {
         self::expectException(PaymentMethodNotFoundException::class);
 
-        $payment = $this->prophesize(PaymentInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn($payment->reveal());
-        $this->paymentMethodRepository->findOneBy(['code' => 'bank_transfer'])->willReturn(null);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn($payment);
+        $this->paymentMethodRepository->method('findOneBy')->with(['code' => 'bank_transfer'])->willReturn(null);
 
         $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
@@ -94,21 +91,21 @@ final class AddPaymentRequestHandlerTest extends TestCase
     #[Test]
     public function it_creates_a_payment_request(): void
     {
-        $payment = $this->prophesize(PaymentInterface::class);
-        $paymentMethod = $this->prophesize(PaymentMethodInterface::class);
-        $paymentRequest = $this->prophesize(PaymentRequestInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
+        $paymentMethod = $this->createMock(PaymentMethodInterface::class);
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn($payment->reveal());
-        $this->paymentMethodRepository->findOneBy(['code' => 'bank_transfer'])->willReturn($paymentMethod->reveal());
-        $this->defaultActionProvider->getAction($paymentRequest)->willReturn('authorize');
-        $this->defaultPayloadProvider->getPayload($paymentRequest)->willReturn(['foo' => 'bar']);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn($payment);
+        $this->paymentMethodRepository->method('findOneBy')->with(['code' => 'bank_transfer'])->willReturn($paymentMethod);
+        $this->defaultActionProvider->method('getAction')->with($paymentRequest)->willReturn('authorize');
+        $this->defaultPayloadProvider->method('getPayload')->with($paymentRequest)->willReturn(['foo' => 'bar']);
 
-        $this->paymentRequestFactory->create($payment->reveal(), $paymentMethod->reveal())->willReturn($paymentRequest->reveal());
-        $paymentRequest->setAction('authorize')->shouldBeCalled();
-        $paymentRequest->setPayload(['foo' => 'bar'])->shouldBeCalled();
+        $this->paymentRequestFactory->method('create')->with($payment, $paymentMethod)->willReturn($paymentRequest);
+        $paymentRequest->expects($this->once())->method('setAction')->with('authorize');
+        $paymentRequest->expects($this->once())->method('setPayload')->with(['foo' => 'bar']);
 
         self::assertSame(
-            $paymentRequest->reveal(),
+            $paymentRequest,
             $this->addPaymentRequestHandler->__invoke(
                 new AddPaymentRequest('token', 1, 'bank_transfer'),
             ),
