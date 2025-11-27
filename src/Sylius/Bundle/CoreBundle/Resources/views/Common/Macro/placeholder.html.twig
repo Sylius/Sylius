@@ -1,0 +1,7 @@
+{% macro placeholder_image(path, area) %}
+    {{- asset(path, area) -}}
+{% endmacro %}
+
+{% macro placeholder_image_absolute(path, area) %}
+    {{- absolute_url(asset(path, area)) -}}
+{% endmacro %}

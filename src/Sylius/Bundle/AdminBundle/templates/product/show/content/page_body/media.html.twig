@@ -1,3 +1,4 @@
+{% import '@SyliusCore/Common/Macro/placeholder.html.twig' as macros %}
 {% set product = hookable_metadata.context.resource %}
 
 <div class="bg-white mb-3">
@@ -16,7 +17,7 @@
                     {% if product.images|length >= 1 %}
                         <div class="spotlight-group" {{ sylius_test_html_attribute('media') }}>
                             {% for image in product.images %}
-                                {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_thumbnail') : asset('bundles/syliusui/images/200x200.png') %}
+                                {% set path = image.path is not null ? image.path|imagine_filter('sylius_admin_product_thumbnail') : macros.placeholder_image('build/admin/images/200x200.png', 'admin') %}
                                     {% if product.isConfigurable() and product.variants|length > 0 %}
                                         {% if product.getVariantSelectionMethod() == 'match' %}
                                             {% for variant in image.productVariants %}
