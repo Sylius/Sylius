@@ -64,22 +64,3 @@ Feature: Sorting listed products
         And I sort the products descending by name
         Then I should see 3 products in the list
         And the first product on the list should have name "Szałowy Mops"
-
-    @api @ui @no-postgres @failing
-    Scenario: Missing translations are sorted as first when sorting by name ascending
-        When I change my locale to "Polish"
-        And I browse products
-        And I sort the products ascending by name
-        Then I should see 3 products in the list
-        And the first product on the list shouldn't have a name
-        And the last product on the list should have name "Ekstremalny Mops"
-
-    @api @ui @no-postgres @failing
-    Scenario: Missing translation are sorted as last when sorting by name descending
-        When I change my locale to "Polish"
-        And I browse products
-        And the products are already sorted ascending by name
-        And I sort the products descending by name
-        Then I should see 3 products in the list
-        And the first product on the list should have name "Ekstremalny Mops"
-        And the last product on the list shouldn't have a name

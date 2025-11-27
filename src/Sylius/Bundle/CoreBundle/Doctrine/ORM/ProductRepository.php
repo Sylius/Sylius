@@ -47,38 +47,42 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         mixed $taxonId = null,
         ?string $fallbackLocale = null
     ): QueryBuilder {
-        $qb = $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
         ;
 
         if (null !== $taxonId) {
-            $qb
+            $queryBuilder
                 ->innerJoin('o.productTaxons', 'productTaxon')
                 ->andWhere('productTaxon.taxon = :taxonId')
                 ->setParameter('taxonId', $taxonId)
             ;
         }
 
-        $qb
-            ->leftJoin('o.translations', 'translation', Join::WITH, 'translation.locale = :locale')
+        $queryBuilder
+            ->leftJoin(
+                'o.translations',
+                'translation',
+                Join::WITH,
+                'translation.locale = :locale'
+            )
             ->setParameter('locale', $locale)
         ;
 
         if (null !== $fallbackLocale && $fallbackLocale !== $locale) {
-            $qb
+            $queryBuilder
                 ->addSelect('fallbackTranslation')
-                ->leftJoin('o.translations', 'fallbackTranslation', Join::WITH, 'fallbackTranslation.locale = :fallbackLocale')
+                ->leftJoin(
+                    'o.translations',
+                    'fallbackTranslation',
+                    Join::WITH,
+                    'fallbackTranslation.locale = :fallbackLocale AND translation.id IS NULL'
+                )
                 ->setParameter('fallbackLocale', $fallbackLocale)
             ;
-
-            $qb->addSelect(
-                'COALESCE(translation.name, fallbackTranslation.name) AS HIDDEN sortName'
-            );
-        } else {
-            $qb->addSelect('translation.name AS HIDDEN sortName');
         }
 
-        return $qb;
+        return $queryBuilder;
     }
 
     public function createShopListQueryBuilder(
