@@ -13,14 +13,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.shop.grid.account.order" class="Sylius\Bundle\ShopBundle\Grid\Account\OrderGrid">
+        <service id="sylius_shop.grid.account.order" class="Sylius\Bundle\ShopBundle\Grid\Account\OrderGrid">
             <argument>%sylius.model.order.class%</argument>
             <tag name="sylius.grid" />
         </service>
+        <service id="Sylius\Bundle\ShopBundle\Grid\Account\OrderGridInterface" alias="sylius_shop.grid.account.order" />
 
-        <service id="sylius.shop.grid.product" class="Sylius\Bundle\ShopBundle\Grid\ProductGrid">
+        <service id="sylius_shop.grid.product" class="Sylius\Bundle\ShopBundle\Grid\ProductGrid">
             <argument>%sylius.model.product.class%</argument>
             <tag name="sylius.grid" />
         </service>
+        <service id="Sylius\Bundle\ShopBundle\Grid\ProductGridInterface" alias="sylius_shop.grid.product" />
     </services>
 </container>
