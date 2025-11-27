@@ -81,6 +81,7 @@
         "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
         "symfony/dotenv": "^6.4 || ^7.2",
+        "theofidry/alice-data-fixtures": "^1.7",
         "nyholm/psr7": "^1.8"
     },
     "config": {

@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\ORM\EntityManagerInterface;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+#[Group('database')]
 final class ShippingMethodRepositoryTest extends KernelTestCase
 {
     /** @var ShippingMethodRepositoryInterface<ShippingMethodInterface> */
@@ -88,13 +88,8 @@ final class ShippingMethodRepositoryTest extends KernelTestCase
         /** @var LoaderInterface $fixtureLoader */
         $fixtureLoader = self::getContainer()->get('fidry_alice_data_fixtures.loader.doctrine');
 
-        /** @var EntityManagerInterface $manager */
-        $manager = self::getContainer()->get('doctrine.orm.default_entity_manager');
-
-        (new ORMPurger($manager))->purge();
-
         $fixtureLoader->load([
             __DIR__ . '/ShippingMethodRepositoryTest/fixtures.yaml',
-        ], [], [], PurgeMode::createDeleteMode());
+        ], [], [], PurgeMode::createNoPurgeMode());
     }
 }
