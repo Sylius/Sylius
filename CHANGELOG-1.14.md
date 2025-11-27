@@ -1,5 +1,17 @@
 # CHANGELOG FOR `1.14.X`
 
+## v1.14.13 (2025-11-27)
+
+#### Details
+
+- [#18469](https://github.com/Sylius/Sylius/pull/18469) [CI] Fix Panther tests Chrome user data directory conflict ([@Rafikooo](https://github.com/Rafikooo))
+- [#18479](https://github.com/Sylius/Sylius/pull/18479) Add conflict for broken Doctrine ORM version 2.20.7 ([@Rafikooo](https://github.com/Rafikooo))
+- [#18549](https://github.com/Sylius/Sylius/pull/18549) Add filtering cve ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18553](https://github.com/Sylius/Sylius/pull/18553) Add md file with description ignored CVE and fix format ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18445](https://github.com/Sylius/Sylius/pull/18445) Validate product's channel eligibility when finalizing an order ([@tomkalon](https://github.com/tomkalon))
+- [#18577](https://github.com/Sylius/Sylius/pull/18577) [CS][DX] Refactor
+- [#18567](https://github.com/Sylius/Sylius/pull/18567) Fix twice calculation rating review ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+
 ## v1.14.12 (2025-10-22)
 
 #### Details
