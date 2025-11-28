@@ -32,6 +32,11 @@ sylius:
         rule:
             invalid_type: 'Invalid rule type. Available rule types are {{ available_rule_types }}.'
 
+    form:
+        shipping_method:
+            max_delivery_time_days:
+                greater_or_equal_min: 'Maximum delivery time must be greater than or equal to the minimum.'
+    
     shipment:
         shipping_method:
             not_blank: 'Please select shipping method.'

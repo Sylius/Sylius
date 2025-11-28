@@ -36,5 +36,6 @@ sylius:
             scope: Področje
             select: Izberite
             select_scope: Izberite področje
+            priority: Prednost
         zone_member:
             select: Izberite

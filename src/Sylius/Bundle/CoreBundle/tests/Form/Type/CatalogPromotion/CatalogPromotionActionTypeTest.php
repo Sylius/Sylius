@@ -14,10 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotion;
 
 use PHPUnit\Framework\Attributes\Test;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Prophecy\ProphecyInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\CoreBundle\Form\Type\CatalogPromotionAction\ChannelBasedFixedDiscountActionConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CatalogPromotionAction\PercentageDiscountActionConfigurationType;
@@ -34,19 +31,17 @@ use Symfony\Component\Validator\Validation;
 
 final class CatalogPromotionActionTypeTest extends TypeTestCase
 {
-    use ProphecyTrait;
+    private ChannelInterface&MockObject $channel;
 
-    private ChannelInterface|ProphecyInterface $channel;
-
-    private ObjectProphecy $channelRepository;
+    private ChannelRepositoryInterface&MockObject $channelRepository;
 
     #[Test]
     public function it_updates_amount_of_fixed_discount(): void
     {
         $fixedDiscount = $this->setupFixedDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -72,8 +67,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     {
         $percentageDiscount = $this->setupPercentageDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -97,8 +92,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     {
         $percentageDiscount = $this->setupPercentageDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -124,8 +119,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     {
         $fixedDiscount = $this->setupFixedDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -149,8 +144,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     {
         $fixedDiscount = $this->setupFixedDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -174,8 +169,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     {
         $percentageDiscount = $this->setupPercentageDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -201,8 +196,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     {
         $fixedDiscount = $this->setupFixedDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -228,8 +223,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     {
         $fixedDiscount = $this->setupFixedDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -255,8 +250,8 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
     {
         $percentageDiscount = $this->setupPercentageDiscount();
 
-        $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()],
+        $this->channelRepository->method('findAll')->willReturn(
+            [$this->channel],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -277,15 +272,15 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
 
     protected function setUp(): void
     {
-        $this->channelRepository = $this->prophesize(ChannelRepositoryInterface::class);
+        $this->channelRepository = $this->createMock(ChannelRepositoryInterface::class);
 
-        $currency = $this->prophesize(CurrencyInterface::class);
-        $currency->getCode()->willReturn('USD');
+        $currency = $this->createMock(CurrencyInterface::class);
+        $currency->method('getCode')->willReturn('USD');
 
-        $channel = $this->prophesize(ChannelInterface::class);
-        $channel->getCode()->willReturn('WEB_US');
-        $channel->getName()->willReturn('United States');
-        $channel->getBaseCurrency()->willReturn($currency->reveal());
+        $channel = $this->createMock(ChannelInterface::class);
+        $channel->method('getCode')->willReturn('WEB_US');
+        $channel->method('getName')->willReturn('United States');
+        $channel->method('getBaseCurrency')->willReturn($currency);
         $this->channel = $channel;
 
         parent::setUp();
@@ -303,7 +298,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         );
 
         $channelCollectionType = new ChannelCollectionType(
-            $this->channelRepository->reveal(),
+            $this->channelRepository,
         );
 
         $validator = Validation::createValidatorBuilder()->getValidator();

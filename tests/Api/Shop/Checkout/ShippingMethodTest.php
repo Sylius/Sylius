@@ -118,7 +118,7 @@ final class ShippingMethodTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/checkout/shipping_method/select_shipping_method_with_missing_fields',
-            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

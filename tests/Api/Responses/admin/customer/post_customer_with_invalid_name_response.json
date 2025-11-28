@@ -4,8 +4,6 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "firstName: First name must be at least 2 characters long.\nlastName: Last name must be at least 2 characters long.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('firstName: First name must be at least 2 characters long.\nlastName: Last name must be at least 2 characters long.').optional()",
     "status": 422,
     "violations": [
         {

@@ -25,39 +25,39 @@ use Doctrine\Migrations\Version\ExecutionResult;
 use Doctrine\Migrations\Version\Version;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+use Psr\Log\LoggerInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\MigrationSkipInterface;
 use Sylius\Bundle\CoreBundle\EventListener\MigrationSkipListener;
 
 final class MigrationSkipListenerTest extends TestCase
 {
-    use ProphecyTrait;
+    private MetadataStorage&MockObject $metadataStorage;
 
-    private MetadataStorage|ObjectProphecy $metadataStorage;
-
-    private DependencyFactory|ObjectProphecy $dependencyFactory;
+    private DependencyFactory&MockObject $dependencyFactory;
 
     private MigrationSkipListener $listener;
 
     protected function setUp(): void
     {
-        $this->metadataStorage = $this->prophesize(MetadataStorage::class);
-        $this->dependencyFactory = $this->prophesize(DependencyFactory::class);
+        $this->metadataStorage = $this->createMock(MetadataStorage::class);
+        $this->dependencyFactory = $this->createMock(DependencyFactory::class);
 
-        $this->dependencyFactory->getMetadataStorage()->willReturn($this->metadataStorage);
+        $this->dependencyFactory
+            ->method('getMetadataStorage')
+            ->willReturn($this->metadataStorage);
 
-        $this->listener = new MigrationSkipListener($this->dependencyFactory->reveal());
+        $this->listener = new MigrationSkipListener($this->dependencyFactory);
     }
 
     #[DataProvider('getInvalidSkipConditions')]
     #[Test]
     public function it_does_nothing_when_conditions_are_not_met(bool $isUp, bool $isMigrationSkip, bool $skipped): void
     {
-        $this->dependencyFactory->getMetadataStorage()->shouldNotBeCalled();
-        $this->metadataStorage->complete(Argument::any())->shouldNotBeCalled();
+        $this->metadataStorage
+            ->expects($this->never())
+            ->method('complete');
 
         $this->listener->onMigrationsVersionSkipped($this->createEvent(
             $isUp,
@@ -69,8 +69,9 @@ final class MigrationSkipListenerTest extends TestCase
     #[Test]
     public function it_completed_the_skipped_migration(): void
     {
-        $this->dependencyFactory->getMetadataStorage()->shouldBeCalled();
-        $this->metadataStorage->complete(Argument::any())->shouldBeCalled();
+        $this->metadataStorage
+            ->expects($this->once())
+            ->method('complete');
 
         $this->listener->onMigrationsVersionSkipped($this->createEvent(true, true, true));
     }
@@ -97,23 +98,40 @@ final class MigrationSkipListenerTest extends TestCase
         $migrationResult = new ExecutionResult($version, $direction);
         $migrationResult->setSkipped($skipped);
 
-        $migration = $this->prophesize(AbstractMigration::class);
         if ($isMigrationSkip) {
-            $migration->willImplement(MigrationSkipInterface::class);
+            $migration = new class($this->createMock(Connection::class), $this->createMock(LoggerInterface::class)) extends AbstractMigration implements MigrationSkipInterface {
+                public function up(\Doctrine\DBAL\Schema\Schema $schema): void
+                {
+                }
+
+                public function down(\Doctrine\DBAL\Schema\Schema $schema): void
+                {
+                }
+            };
+        } else {
+            $migration = new class($this->createMock(Connection::class), $this->createMock(LoggerInterface::class)) extends AbstractMigration {
+                public function up(\Doctrine\DBAL\Schema\Schema $schema): void
+                {
+                }
+
+                public function down(\Doctrine\DBAL\Schema\Schema $schema): void
+                {
+                }
+            };
         }
 
         $plan = new MigrationPlan(
             $version,
-            $migration->reveal(),
+            $migration,
             $direction,
         );
 
         $plan->markAsExecuted($migrationResult);
 
         return new MigrationsVersionEventArgs(
-            $this->prophesize(Connection::class)->reveal(),
+            $this->createMock(Connection::class),
             $plan,
-            $this->prophesize(MigratorConfiguration::class)->reveal(),
+            $this->createMock(MigratorConfiguration::class),
         );
     }
 }

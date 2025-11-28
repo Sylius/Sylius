@@ -21,6 +21,11 @@
     </parameters>
 
     <services>
+        <service id="sylius.provider.delivery_time" class="Sylius\Bundle\CoreBundle\Provider\FastestDeliveryTimeProvider">
+            <argument type="service" id="sylius.repository.shipping_method" />
+        </service>
+        <service id="Sylius\Bundle\CoreBundle\Provider\DeliveryTimeProviderInterface" alias="sylius.provider.delivery_time" />
+
         <service id="sylius.provider.channel_based_default_zone" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
 
         <service id="sylius.provider.channel_based_product_translation" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProvider">
