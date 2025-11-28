@@ -68,9 +68,7 @@ final class SelectAttributeType implements AttributeTypeInterface
 
         $constraints = [
             new All([
-                new Type([
-                    'type' => 'string',
-                ]),
+                new Type(type: 'string'),
             ]),
         ];
 
