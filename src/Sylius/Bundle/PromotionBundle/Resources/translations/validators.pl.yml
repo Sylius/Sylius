@@ -2,37 +2,77 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    catalog_promotion:
+        code:
+            max_length: Kod nie może być dłuższy niż {{ limit }} znaków.
+            unique: Promocja katalogowa z podanym kodem już istnieje.
+            regex: Kod promocji katalogowej może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
+            not_blank: Proszę podać kod promocji katalogowej.
+        date:
+            greater_than_start_date: Data zakończenia nie może być wcześniejsza niż data rozpoczęcia.
+        name:
+            max_length: Nazwa promocji katalogowej nie może być dłuższa niż {{ limit }} znaków.
+            min_length: Nazwa promocji katalogowej musi mieć co najmniej {{ limit }} znaków.
+            not_blank: Proszę podać nazwę promocji katalogowej.
+        state:
+            processing: Promocja katalogowa nie może być edytowana, ponieważ jest aktualnie przetwarzana.
+    catalog_promotion_action:
+        type:
+            not_blank: Proszę wybrać typ akcji.
+            invalid: "Typ akcji promocji katalogowej jest nieprawidłowy. Dostępne typy: {{ available_action_types }}."
+        invalid_type: Typ akcji promocji katalogowej jest nieprawidłowy. Proszę wybrać prawidłowy typ.
+        percentage_discount:
+            not_in_range: Wartość procentowej zniżki musi mieścić się w przedziale od 0% do 100%.
+            not_number_or_empty: Wartość procentowej zniżki musi być liczbą i nie może być pusta.
+            not_valid: Wartość procentowej zniżki musi zostać skonfigurowana.
+    catalog_promotion_scope:
+        type:
+            not_blank: Proszę wybrać typ zakresu.
+            invalid: "Typ zakresu promocji katalogowej jest nieprawidłowy. Dostępne typy: {{ available_scope_types }}."
     promotion:
         code:
+            max_length: Kod nie może być dłuższy niż {{ limit }} znaków.
             unique: Promocja z podanym kodem już istnieje.
             regex: Kod promocyjny może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             not_blank: Proszę wprowadzić kod promocyjny.
         description:
-            max_length: '{1} Opis promocji nie może być dłuższy niż 1 znak.|{2,3,4} Opis promocji nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji nie może być dłuższy niż {{ limit}} znaków.'
-            min_length: '{1} Opis promocji musi być dłuższy niż 1 znak.|{2,3,4} Opis promocji musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji musi być dłuższy niż {{ limit }} znaków.'
+            max_length: Opis promocji nie może być dłuższy niż 1 znak.|Opis promocji nie może być dłuższy niż {{ limit }} znaków.
+            min_length: Opis promocji musi mieć co najmniej 1 znak.|Opis promocji musi mieć co najmniej {{ limit }} znaków.
             not_blank: Proszę podać opis promocji.
-        end_date_cannot_be_set_prior_start_date: Data zakończenia nie może być wcześniejsza niż data startu.
+        end_date_cannot_be_set_prior_start_date: Data zakończenia nie może być wcześniejsza niż data rozpoczęcia.
+        is_invalid: Promocja jest nieprawidłowa.
         name:
-            max_length: '{1} Nazwa promocji nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji nie może być dłuższa niż {{ limit}} znaków.'
-            min_length: '{1} Nazwa promocji musi być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji musi być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji musi być dłuższa niż {{ limit }} znaków.'
+            max_length: Nazwa promocji nie może być dłuższa niż 1 znak.|Nazwa promocji nie może przekraczać {{ limit }} znaków.
+            min_length: Nazwa promocji musi mieć co najmniej 1 znak.|Nazwa promocji musi mieć co najmniej {{ limit }} znaków.
             not_blank: Proszę podać nazwę promocji.
+    promotion_action:
+        invalid_type: "Typ akcji promocji jest nieprawidłowy. Dostępne typy: {{ available_action_types }}."
+        percentage_discount_configuration:
+            not_in_range: Zniżka procentowa musi mieścić się w przedziale od 0% do 100%.
+    promotion_rule:
+        invalid_type: "Typ reguły promocji jest nieprawidłowy. Dostępne typy: {{ available_rule_types }}."
     promotion_coupon:
         code:
-            max_length: '{1} Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.'
-            min_length: '{1} Kod kuponu promocyjnego musi być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaków.'
+            max_length: Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|Kod kuponu promocyjnego nie może przekraczać {{ limit }} znaków.
+            min_length: Kod kuponu promocyjnego musi mieć co najmniej 1 znak.|Kod kuponu promocyjnego musi mieć co najmniej {{ limit }} znaków.
             not_blank: Proszę podać kod kuponu.
             regex: Kod kuponu rabatowego może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Ten kupon już istnieje.
-        is_invalid: Kod rabatowy jest nieprawidłowy.
+        is_invalid: Kod kuponu jest nieprawidłowy.
+        promotion:
+            not_blank: Proszę podać promocję dla tego kuponu.
+            not_coupon_based: Tylko promocje oparte na kuponach mogą posiadać kupony.
         usage_limit:
-            min: Ograniczenie użycia musi wynosić co najmniej {{ limit }}.
+            min: Limit użycia kuponu musi wynosić co najmniej {{ limit }}.
     promotion_coupon_generator_instruction:
         amount:
-            min: Ilość kuponów rabatowych do wygenerowania musi wynosić co najmniej {{ limit }}.
-            not_blank: Wprowadź ilość kuponów rabatowych do wygenerowania.
+            min: Ilość kuponów do wygenerowania musi wynosić co najmniej {{ limit }}.
+            not_blank: Proszę podać liczbę kuponów do wygenerowania.
         code_length:
-            min: Kod kuponu rabatowego musi składać się co najmniej z {{ limit }} znaków.
-            max: Kod kuponu rabatowego nie może zawierać więcej niż {{ limit }} znaków.
-            not_blank: Wprowadź długość kodu kuponu rabatowego.
+            min: Kod kuponu musi mieć co najmniej {{ limit }} znaków.
+            max: Kod kuponu nie może być dłuższy niż {{ limit }} znaków.
+            not_blank: Proszę podać długość kodu kuponu.
+            not_in_range: Długość kodu kuponu musi mieścić się w przedziale od {{ min }} do {{ max }}.
+        possible_generation_amount: "Podana długość kodu lub liczba kuponów są nieprawidłowe. Nie można wygenerować %expectedAmount% unikalnych kuponów o długości %codeLength%. Możliwa do wygenerowania liczba: %possibleAmount%."
         usage_limit:
-            min: Ilość dostępnych do wykorzystania kodów rabatowych musi wynosić co najmniej {{ limit }}.
+            min: Limit użycia wygenerowanych kuponów musi wynosić co najmniej {{ limit }}.

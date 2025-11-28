@@ -2,5 +2,18 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        request_reset_password:
+            success: 'Jeśli podany adres e-mail istnieje w naszym systemie, wysłaliśmy na niego instrukcję resetowania hasła.'
+        password_reset:
+            success: 'Twoje hasło zostało pomyślnie zmienione!'
+            token_expired: 'Token resetowania hasła wygasł.'
+    email:
+        order_confirmation_resent: 'Potwierdzenie zamówienia zostało ponownie wysłane do klienta.'
+        shipment_confirmation_resent: 'Potwierdzenie wysyłki zostało ponownie wysłane do klienta.'
     product_variant:
         cannot_generate_variants: 'Nie można wygenerować wariantów produktu bez wartości opcji.'
+    locale:
+        delete:
+            is_used: 'Nie można usunąć języka lokalizacji, ponieważ jest używany przez co najmniej jedno tłumaczenie.'
+            success: 'Język lokalizacji został pomyślnie usunięty.'
