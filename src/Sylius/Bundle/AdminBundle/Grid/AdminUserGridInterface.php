@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\GridInterface;
 
 /** @experimental */
-interface AdminUserGridInterface extends GridInterface
+interface AdminUserGridInterface
 {
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }
