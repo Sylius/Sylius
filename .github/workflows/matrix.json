@@ -4,26 +4,30 @@
       "include": [
         {
           "php": "8.3",
-          "symfony": "^6.4"
+          "symfony": "~6.4.0"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.3.0"
         },
         {
           "php": "8.5",
-          "symfony": "^7.3"
+          "symfony": "~7.4.0"
         }
       ]
     },
     "e2e-mariadb": {
       "include": [
         {
-          "php": "8.3",
-          "symfony": "^6.4",
+          "php": "8.4",
+          "symfony": "~6.4.0",
           "mariadb": "10.11.13",
           "dbal": "^3.0",
           "state_machine_adapter": "winzou_state_machine"
         },
         {
           "php": "8.5",
-          "symfony": "^7.3",
+          "symfony": "~7.4.0",
           "mariadb": "11.4.7",
           "dbal": "^3.0",
           "state_machine_adapter": "symfony_workflow"
@@ -33,14 +37,14 @@
     "e2e-mysql": {
       "include": [
         {
-          "php": "8.3",
-          "symfony": "^6.4",
+          "php": "8.4",
+          "symfony": "~6.4.0",
           "mysql": "8.0",
           "twig": "^3.3"
         },
         {
           "php": "8.5",
-          "symfony": "^7.3",
+          "symfony": "~7.4.0",
           "mysql": "8.4",
           "twig": "^3.3"
         }
@@ -49,43 +53,65 @@
     "e2e-pgsql": {
       "include": [
         {
-          "php": "8.3",
-          "symfony": "^6.4",
+          "php": "8.4",
+          "symfony": "~6.4.0",
           "postgres": "15.13"
         },
         {
           "php": "8.5",
-          "symfony": "^7.3",
+          "symfony": "~7.4.0",
           "postgres": "17.5"
         }
       ]
     },
     "frontend": {
-      "node": ["24.x"]
+      "node": [
+        "24.x"
+      ]
     },
     "packages": {
       "include": [
         {
-          "php": "8.3",
-          "symfony": "^6.4"
+          "php": "8.4",
+          "symfony": "~6.4.0"
         },
         {
           "php": "8.5",
-          "symfony": "^7.3"
+          "symfony": "~7.3.0"
         }
       ]
     }
   },
   "full": {
     "static-checks": {
-      "php": ["8.3", "8.4", "8.5"],
-      "symfony": ["^6.4", "~7.3.0"]
+      "php": [
+        "8.3",
+        "8.4",
+        "8.5"
+      ],
+      "symfony": [
+        "~6.4.0",
+        "~7.3.0",
+        "~7.4.0"
+      ]
     },
     "e2e-mariadb": {
-      "php": ["8.3", "8.4", "8.5"],
-      "symfony": ["^6.4", "~7.3.0"],
-      "mariadb": ["11.4.7"],
-      "state_machine_adapter": ["symfony_workflow"],
+      "php": [
+        "8.3",
+        "8.4",
+        "8.5"
+      ],
+      "symfony": [
+        "~6.4.0",
+        "~7.3.0",
+        "~7.4.0"
+      ],
+      "mariadb": [
+        "11.4.7"
+      ],
+      "state_machine_adapter": [
+        "symfony_workflow"
+      ],
       "include": [
         {
           "php": "8.3",
@@ -96,10 +122,21 @@
       ]
     },
     "e2e-mysql": {
-      "php": ["8.3", "8.4"],
-      "symfony": ["^6.4", "~7.3.0"],
-      "mysql": ["8.4"],
-      "twig": ["^3.3"],
+      "php": [
+        "8.3",
+        "8.4"
+      ],
+      "symfony": [
+        "~6.4.0",
+        "~7.3.0",
+        "~7.4.0"
+      ],
+      "mysql": [
+        "8.4"
+      ],
+      "twig": [
+        "^3.3"
+      ],
       "include": [
         {
           "php": "8.3",
@@ -110,16 +147,39 @@
       ]
     },
     "e2e-pgsql": {
-      "php": ["8.3", "8.4", "8.5"],
-      "symfony": ["^6.4", "~7.3.0"],
-      "postgres": ["15.13", "16.9", "17.5"]
+      "php": [
+        "8.3",
+        "8.4",
+        "8.5"
+      ],
+      "symfony": [
+        "~6.4.0",
+        "~7.3.0",
+        "~7.4.0"
+      ],
+      "postgres": [
+        "15.13",
+        "16.9",
+        "17.5"
+      ]
     },
     "frontend": {
-      "node": ["22.x", "24.x"]
+      "node": [
+        "22.x",
+        "24.x"
+      ]
     },
     "packages": {
-      "php": ["8.3", "8.4", "8.5"],
-      "symfony": ["^6.4", "~7.3.0"]
+      "php": [
+        "8.3",
+        "8.4",
+        "8.5"
+      ],
+      "symfony": [
+        "~6.4.0",
+        "~7.3.0",
+        "~7.4.0"
+      ]
     }
   }
 }

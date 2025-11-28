@@ -33,6 +33,11 @@ parameters:
 
     ignoreErrors:
         - identifier: missingType.generics # This need to be fixed, too many classes are using generics without PHPDoc type
+        # Symfony 7.4 introduced generics on NodeBuilder which phpstan-symfony does not handle correctly yet
+        # See: https://github.com/phpstan/phpstan-symfony/issues/431
+        -
+            message: '#Call to method \w+Node\(\) on an unknown class Symfony\\Component\\Config\\Definition\\Builder\\NodeBuilder<.*>#'
+            identifier: class.notFound
         - '/(Interface|Class) [a-zA-Z\\]+Repository[a-zA-Z\\]* specifies template type (\w+) of interface [a-zA-Z\\]+ as [a-zA-Z\\]+ (of [a-zA-Z\\]+ )?but it''s already specified as/' # turns off a weird generics check behavior for repositories
         - '/Method Sylius\\Bundle\\(Admin|Shop)Bundle\\Twig\\Component\\[a-zA-Z\\]+\:\:getDataModelValue\(\) is unused./'
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'

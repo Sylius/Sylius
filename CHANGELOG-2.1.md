@@ -1,5 +1,44 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.8 (2025-11-27)
+
+#### Details
+
+- [#18469](https://github.com/Sylius/Sylius/pull/18469) [CI] Fix Panther tests Chrome user data directory conflict ([@Rafikooo](https://github.com/Rafikooo))
+- [#18456](https://github.com/Sylius/Sylius/pull/18456) BUGFIX: [2.1] [UserBundle] [Console] adjust wording in description for Demote User Command ([@crydotsnake](https://github.com/crydotsnake))
+- [#18479](https://github.com/Sylius/Sylius/pull/18479) Add conflict for broken Doctrine ORM version 2.20.7 ([@Rafikooo](https://github.com/Rafikooo))
+- [#18480](https://github.com/Sylius/Sylius/pull/18480) Add Symfony 7.4 testing to CI ([@Rafikooo](https://github.com/Rafikooo))
+- [#18447](https://github.com/Sylius/Sylius/pull/18447) Refactor CookieSetter to optimize browser navigation ([@Rafikooo](https://github.com/Rafikooo))
+- [#18504](https://github.com/Sylius/Sylius/pull/18504) [Behat] Wait for notification elements to appear ([@Rafikooo](https://github.com/Rafikooo))
+- [#18502](https://github.com/Sylius/Sylius/pull/18502) Remove unused SlugGenerationHelper ([@Rafikooo](https://github.com/Rafikooo))
+- [#18499](https://github.com/Sylius/Sylius/pull/18499) [Behat] Remove `@javascript` tag from taxon slug scenarios ([@Rafikooo](https://github.com/Rafikooo))
+- [#18505](https://github.com/Sylius/Sylius/pull/18505) [Behat] Add missing waits for page load in admin pages ([@Rafikooo](https://github.com/Rafikooo))
+- [#18476](https://github.com/Sylius/Sylius/pull/18476) [API] Fix HTTP error codes for cart operations (fixes #18475) ([@Rafikooo](https://github.com/Rafikooo))
+- [#18503](https://github.com/Sylius/Sylius/pull/18503) Remove `JQueryHelper` ([@Rafikooo](https://github.com/Rafikooo))
+- [#18510](https://github.com/Sylius/Sylius/pull/18510) [CS][DX] Refactor
+- [#18498](https://github.com/Sylius/Sylius/pull/18498) TASK: [2.1] [AdminBundle] [CoreBundle] [UiBundle] various missing german translations added ([@crydotsnake](https://github.com/crydotsnake))
+- [#18517](https://github.com/Sylius/Sylius/pull/18517) BUGFIX: [2.1] [AdminBundle] adjust z-index in side navigation to prevent overlapping with header ([@crydotsnake](https://github.com/crydotsnake))
+- [#18542](https://github.com/Sylius/Sylius/pull/18542) Fix Symfony 7.4 compatibility ([@Rafikooo](https://github.com/Rafikooo))
+- [#18545](https://github.com/Sylius/Sylius/pull/18545) [CI] Remove `DOCTRINE_ORM_VERSION` from packages workflow ([@Rafikooo](https://github.com/Rafikooo))
+- [#18483](https://github.com/Sylius/Sylius/pull/18483) BUGFIX: [2.0] [AdminBundle] add label option too CustomerType form class to load translations ([@crydotsnake](https://github.com/crydotsnake))
+- [#18548](https://github.com/Sylius/Sylius/pull/18548) Remove unused RuntimeException import from RoboFile ([@Rafikooo](https://github.com/Rafikooo))
+- [#18549](https://github.com/Sylius/Sylius/pull/18549) Add filtering cve ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18488](https://github.com/Sylius/Sylius/pull/18488) Add deprecation note to `sylius_admin_address_log_entry` configuration ([@mamazu](https://github.com/mamazu))
+- [#18553](https://github.com/Sylius/Sylius/pull/18553) Add md file with description ignored CVE and fix format ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18541](https://github.com/Sylius/Sylius/pull/18541) Fix text overflow in category navigation menus ([@Rafikooo](https://github.com/Rafikooo))
+- [#18512](https://github.com/Sylius/Sylius/pull/18512) Cleanup configuration shipping method after channel deletion ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18484](https://github.com/Sylius/Sylius/pull/18484) Fix product creation by admin api ([@Glancu](https://github.com/Glancu))
+- [#18478](https://github.com/Sylius/Sylius/pull/18478) Solves the problem with changing product image ([@tomkalon](https://github.com/tomkalon))
+- [#18563](https://github.com/Sylius/Sylius/pull/18563) [CI] Add PHP 8.5 support to workflows ([@Rafikooo](https://github.com/Rafikooo))
+- [#18557](https://github.com/Sylius/Sylius/pull/18557) Bundle UX Icons locally instead of using Iconify API ([@Rafikooo](https://github.com/Rafikooo))
+- [#18570](https://github.com/Sylius/Sylius/pull/18570) [CS][DX] Refactor
+- [#18445](https://github.com/Sylius/Sylius/pull/18445) Validate product's channel eligibility when finalizing an order ([@tomkalon](https://github.com/tomkalon))
+- [#18577](https://github.com/Sylius/Sylius/pull/18577) [CS][DX] Refactor
+- [#18573](https://github.com/Sylius/Sylius/pull/18573) [CI] Parametrize Behat commands in E2E workflows ([@Rafikooo](https://github.com/Rafikooo))
+- [#18567](https://github.com/Sylius/Sylius/pull/18567) Fix twice calculation rating review ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18580](https://github.com/Sylius/Sylius/pull/18580) Add info about disabled callback for state machine sylius_product_review ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18586](https://github.com/Sylius/Sylius/pull/18586) Refine `.env` configs to satisfy Symfony 7.4 ([@Rafikooo](https://github.com/Rafikooo))
+
 ## v2.1.7 (2025-10-22)
 
 #### Details
