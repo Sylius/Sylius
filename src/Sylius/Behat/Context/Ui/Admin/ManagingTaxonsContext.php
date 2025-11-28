@@ -23,7 +23,6 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
-use Sylius\Behat\Service\Helper\JavaScriptTestHelper;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -41,7 +40,6 @@ final readonly class ManagingTaxonsContext implements Context
         private ImageFormElementInterface $imageFormElement,
         private TreeElementInterface $treeElement,
         private NotificationCheckerInterface $notificationChecker,
-        private JavaScriptTestHelper $testHelper,
         private UpdateSimpleProductPageInterface $updateSimpleProductPage,
         private TaxonomyFormElementInterface $productTaxonomyFormElement,
     ) {
@@ -61,7 +59,7 @@ final readonly class ManagingTaxonsContext implements Context
      */
     public function iWantToCreateANewTaxonForParent(TaxonInterface $taxon): void
     {
-        $this->testHelper->waitUntilPageOpens($this->createForParentPage, ['id' => $taxon->getId()]);
+        $this->createForParentPage->open(['id' => $taxon->getId()]);
     }
 
     /**
@@ -71,7 +69,7 @@ final readonly class ManagingTaxonsContext implements Context
     {
         $this->sharedStorage->set('taxon', $taxon);
 
-        $this->testHelper->waitUntilPageOpens($this->updatePage, ['id' => $taxon->getId()]);
+        $this->updatePage->open(['id' => $taxon->getId()]);
     }
 
     /**

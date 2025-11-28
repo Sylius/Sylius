@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -53,8 +52,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function create(): void
     {
-        $this->waitForFormUpdate();
-
         parent::create();
     }
 
@@ -67,10 +64,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     protected function changeTab(string $tabName): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $this->getElement('side_navigation_tab', ['%name%' => $tabName])->click();
     }
 

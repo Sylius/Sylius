@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Shop\Account;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Element\SyliusElement;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\SharedStorageInterface;
 
 class RegisterElement extends SyliusElement implements RegisterElementInterface
@@ -36,14 +35,11 @@ class RegisterElement extends SyliusElement implements RegisterElementInterface
     public function register(): void
     {
         $this->getElement('register_button')->click();
-
-        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function specifyEmail(?string $email): void
     {
         $this->getElement('email')->setValue($email);
-        $this->waitForFormUpdate();
     }
 
     public function getEmail(): string
@@ -54,37 +50,31 @@ class RegisterElement extends SyliusElement implements RegisterElementInterface
     public function specifyFirstName(?string $firstName): void
     {
         $this->getElement('first_name')->setValue($firstName);
-        $this->waitForFormUpdate();
     }
 
     public function specifyLastName(?string $lastName): void
     {
         $this->getElement('last_name')->setValue($lastName);
-        $this->waitForFormUpdate();
     }
 
     public function specifyPassword(string $password): void
     {
         $this->getElement('password')->setValue($this->replaceWithSecurePassword($password));
-        $this->waitForFormUpdate();
     }
 
     public function specifyPhoneNumber(string $phoneNumber): void
     {
         $this->getElement('phone_number')->setValue($phoneNumber);
-        $this->waitForFormUpdate();
     }
 
     public function verifyPassword(string $password): void
     {
         $this->getElement('password_verification')->setValue($this->confirmSecurePassword($password));
-        $this->waitForFormUpdate();
     }
 
     public function subscribeToTheNewsletter(): void
     {
         $this->getElement('newsletter')->check();
-        $this->waitForFormUpdate();
     }
 
     /**
@@ -115,14 +105,6 @@ class RegisterElement extends SyliusElement implements RegisterElementInterface
             'phone_number' => '[data-test-phone-number]',
             'register_button' => '[data-test-button="register-button"]',
         ]);
-    }
-
-    protected function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
     }
 
     /**

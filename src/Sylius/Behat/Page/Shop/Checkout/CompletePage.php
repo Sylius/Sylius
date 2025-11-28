@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -181,9 +180,7 @@ class CompletePage extends SyliusPage implements CompletePageInterface
 
     public function confirmOrder(): void
     {
-        $this->getElement('confirm_button')->press();
-
-        DriverHelper::waitForPageToLoad($this->getSession());
+        $this->getElement('confirm_button')->click();
     }
 
     public function changeAddress(): void
@@ -231,22 +228,6 @@ class CompletePage extends SyliusPage implements CompletePageInterface
         $shippingPromotions = $this->getElement('order_promotions_details');
 
         return str_contains($shippingPromotions->getText(), $promotionName);
-    }
-
-    public function tryToOpen(array $urlParameters = []): void
-    {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $start = microtime(true);
-            $end = $start + 15;
-            do {
-                parent::tryToOpen($urlParameters);
-                sleep(3);
-            } while (!$this->isOpen() && microtime(true) < $end);
-
-            return;
-        }
-
-        parent::tryToOpen($urlParameters);
     }
 
     protected function getDefinedElements(): array

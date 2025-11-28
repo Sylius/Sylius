@@ -62,8 +62,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             $this->getElement('filter_group')->getXpath(),
             $groupName,
         );
-
-        $this->waitForFormUpdate();
     }
 
     protected function getDefinedElements(): array

@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Taxon;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
@@ -56,7 +55,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
     public function generateSlug(string $localeCode): void
     {
         $this->getElement('generate_slug_button', ['%locale_code%' => $localeCode])->click();
-        $this->waitForFormUpdate();
     }
 
     public function describeItAs(string $description, string $localeCode): void
@@ -76,19 +74,15 @@ class FormElement extends BaseFormElement implements FormElementInterface
             $this->getElement('parent')->getXpath(),
             $taxon->getName(),
         );
-        $this->waitForFormUpdate();
     }
 
     public function removeCurrentParent(): void
     {
         $this->autocompleteHelper->clear($this->getDriver(), $this->getElement('parent')->getXpath());
-        $this->waitForFormUpdate();
     }
 
     public function getTranslationFieldValue(string $element, string $localeCode): string
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
-
         return $this->getElement($element, ['%locale_code%' => $localeCode])->getValue();
     }
 
@@ -129,10 +123,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     protected function expandTranslationAccordion(string $localeCode): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $translationAccordion = $this->getElement('translation_accordion', ['%locale_code%' => $localeCode]);
 
         if ($translationAccordion->getAttribute('aria-expanded') === 'true') {

@@ -14,9 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service\Helper;
 
 use Behat\Mink\Driver\DriverInterface;
+use Sylius\Behat\Element\NodeElement;
 
 final class AutocompleteHelper implements AutocompleteHelperInterface
 {
+    public static function isValueVisible(NodeElement $element, $value): bool
+    {
+        $result = $element->find('css', sprintf('div.item:contains("%s")', $value));
+
+        return null !== $result;
+    }
+
     public function getSelectedItems(DriverInterface $driver, string $selector): array
     {
         $selector = $this->normalizeSelector($selector);

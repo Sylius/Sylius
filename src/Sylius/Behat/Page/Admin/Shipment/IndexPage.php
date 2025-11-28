@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Shipment;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
@@ -45,7 +45,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             $this->getElement('filter_channel')->getXpath(),
             $channelName,
         );
-        $this->waitForFormUpdate();
     }
 
     public function chooseShippingMethodFilter(string $shippingMethodName): void
@@ -55,7 +54,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
             $this->getElement('filter_shipping_method')->getXpath(),
             $shippingMethodName,
         );
-        $this->waitForFormUpdate();
     }
 
     public function isShipmentWithOrderNumberInPosition(string $orderNumber, int $position): bool

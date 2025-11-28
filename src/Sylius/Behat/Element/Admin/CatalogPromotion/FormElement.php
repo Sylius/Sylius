@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\TabsHelper;
 
@@ -83,19 +83,16 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
         $this->getElement('end_date_date')->setValue(date('Y-m-d', $timestamp));
         $this->getElement('end_date_time')->setValue(date('H:i', $timestamp));
-        $this->waitForFormUpdate();
     }
 
     public function addScope(string $type): void
     {
-        $this->getElement('add_scope_button', ['%type%' => $type])->press();
-        $this->waitForFormUpdate();
+        $this->getElement('add_scope_button', ['%type%' => $type])->click();
     }
 
     public function addAction(string $type): void
     {
-        $this->getElement('add_action_button', ['%type%' => $type])->press();
-        $this->waitForFormUpdate();
+        $this->getElement('add_action_button', ['%type%' => $type])->click();
     }
 
     public function selectScopeOption(array $values): void
@@ -108,8 +105,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
                 $value,
             );
         }
-
-        $this->waitForFormUpdate();
     }
 
     public function fillActionOption(string $option, string $value): void
@@ -186,8 +181,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
                 $value,
             );
         }
-
-        $this->waitForFormUpdate();
     }
 
     public function removeLastAction(): void

@@ -14,13 +14,12 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Customer;
 
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\DriverHelper;
 
 class ShowPage extends SyliusPage implements ShowPageInterface
 {
     public function deleteAccount(): void
     {
-        $this->getElement('delete_account_button')->press();
+        $this->getElement('delete_account_button')->click();
     }
 
     public function getCustomerEmail(): string
@@ -87,9 +86,13 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function impersonate(): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
+        if ($this->isJavascript() === true) {
             $this->getElement('actions_button')->click();
+            $this->getElement('impersonate_button')->click();
+
+            return;
         }
+
         $this->getElement('impersonate_button')->click();
     }
 

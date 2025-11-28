@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -97,7 +96,7 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function shipOrder(OrderInterface $order): void
     {
-        $this->getElement('shipment_ship_button')->press();
+        $this->getElement('shipment_ship_button')->click();
     }
 
     public function hasPayment(string $paymentMethodName): bool
@@ -341,8 +340,6 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function getOrderCurrency(): string
     {
-        DriverHelper::waitForPageToLoad($this->getSession());
-
         return $this->getElement('currency')->getText();
     }
 

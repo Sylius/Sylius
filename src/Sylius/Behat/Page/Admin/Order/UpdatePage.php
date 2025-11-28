@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
@@ -66,13 +66,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function changeBillingCountry(string $countryCode): void
     {
         $this->getElement('billing_country')->selectOption($countryCode);
-        $this->waitForFormUpdate();
     }
 
     public function changeShippingCountry(string $countryCode): void
     {
         $this->getElement('shipping_country')->selectOption($countryCode);
-        $this->waitForFormUpdate();
     }
 
     public function getAvailableProvincesForBillingAddress(): array
@@ -143,10 +141,5 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         return $element;
-    }
-
-    protected function waitForFormUpdate(): void
-    {
-        $this->getElement('live_form')->waitFor('5', fn (NodeElement $element) => !$element->hasAttribute('busy'));
     }
 }

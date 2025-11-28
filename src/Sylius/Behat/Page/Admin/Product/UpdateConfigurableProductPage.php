@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Service\AutocompleteHelper;
+use Sylius\Behat\Service\Helper\AutocompleteHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -47,8 +47,6 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
     public function saveChanges(): void
     {
-        $this->waitForFormUpdate();
-
         parent::saveChanges();
     }
 
@@ -56,7 +54,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     {
         $optionElement = $this->getElement('options')->getParent();
 
-        return AutocompleteHelper::isValueVisible($this->getSession(), $optionElement, $option);
+        return AutocompleteHelper::isValueVisible($optionElement, $option);
     }
 
     public function isProductOptionsDisabled(): bool

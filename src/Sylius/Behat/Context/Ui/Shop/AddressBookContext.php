@@ -356,7 +356,21 @@ final class AddressBookContext implements Context
      */
     public function iShouldBeAbleToUpdateItWithoutUnexpectedAlert(): void
     {
-        $this->addressBookUpdatePage->waitForFormToStopLoading();
+        try {
+            Assert::true(
+                $this->addressBookUpdatePage->isFormAccessible(),
+                'Expected to be able to interact with the address form, but the page appears to be blocked (possibly by an alert)',
+            );
+
+            $provinceValue = $this->addressBookUpdatePage->getSpecifiedProvince();
+            Assert::contains($provinceValue, '<img', 'The province value should contain the escaped HTML tag');
+        } catch (\Exception $e) {
+            throw new \RuntimeException(
+                'An XSS alert may have appeared and blocked the page interaction: ' . $e->getMessage(),
+                0,
+                $e,
+            );
+        }
     }
 
     /**

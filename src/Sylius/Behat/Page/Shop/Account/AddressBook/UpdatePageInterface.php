@@ -29,7 +29,7 @@ interface UpdatePageInterface extends SyliusPageInterface
 
     public function selectCountry(string $name): void;
 
-    public function waitForFormToStopLoading(): void;
+    public function isFormAccessible(): bool;
 
     public function saveChanges(): void;
 }

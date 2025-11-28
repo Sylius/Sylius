@@ -19,7 +19,7 @@ class GeneratePage extends BasePage implements GeneratePageInterface
 {
     public function generate(): void
     {
-        $this->getElement('generate_button')->press();
+        $this->getElement('generate_button')->click();
     }
 
     public function specifyPrefix(string $prefix): void

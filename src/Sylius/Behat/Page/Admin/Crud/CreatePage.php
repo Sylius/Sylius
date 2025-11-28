@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 
 class CreatePage extends SyliusPage implements CreatePageInterface
@@ -35,12 +34,8 @@ class CreatePage extends SyliusPage implements CreatePageInterface
 
     public function create(): void
     {
-        if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->blur();
-            $this->waitForFormUpdate();
-        }
+        $this->blur();
         $this->getDocument()->pressButton('Create');
-        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function getValidationMessage(string $element, array $parameters = []): string
@@ -82,15 +77,6 @@ class CreatePage extends SyliusPage implements CreatePageInterface
             'form' => 'form',
             'cancel_button' => '[data-test-cancel-changes-button]',
         ]);
-    }
-
-    protected function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
     }
 
     protected function verifyStatusCode(): void

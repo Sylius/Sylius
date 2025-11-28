@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
-use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Resource\Model\ResourceInterface;
@@ -40,16 +40,16 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         $actions = $this->getActionsForResource(['name' => $name]);
         $archiveRestoreModal = $actions->find('css', '[data-test-modal="archive-restore"]');
-        $archiveRestoreModal->find('css', '[data-test-trigger-button="Archive"]')->press();
-        $archiveRestoreModal->find('css', '[data-test-confirm-button]')->press();
+        $archiveRestoreModal->find('css', '[data-test-trigger-button="Archive"]')->click();
+        $archiveRestoreModal->find('css', '[data-test-confirm-button]')->click();
     }
 
     public function restoreShippingMethod(string $name): void
     {
         $actions = $this->getActionsForResource(['name' => $name]);
         $archiveRestoreModal = $actions->find('css', '[data-test-modal="archive-restore"]');
-        $archiveRestoreModal->find('css', '[data-test-trigger-button="Restore"]')->press();
-        $archiveRestoreModal->find('css', '[data-test-confirm-button]')->press();
+        $archiveRestoreModal->find('css', '[data-test-trigger-button="Restore"]')->click();
+        $archiveRestoreModal->find('css', '[data-test-confirm-button]')->click();
     }
 
     public function isShippingMethodDisabled(ShippingMethodInterface $shippingMethod): bool

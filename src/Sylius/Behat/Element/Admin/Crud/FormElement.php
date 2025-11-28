@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Crud;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Element\SyliusElement;
 
 class FormElement extends SyliusElement implements FormElementInterface
@@ -64,14 +64,6 @@ class FormElement extends SyliusElement implements FormElementInterface
             'form' => 'form',
             'form_error_alert' => '[data-test-form-error-alert]',
         ]);
-    }
-
-    protected function waitForFormUpdate(): void
-    {
-        $form = $this->getElement('form');
-
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
     }
 
     /**

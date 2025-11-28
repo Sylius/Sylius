@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Product;
 
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
-use Sylius\Behat\Service\DriverHelper;
 
 class TranslationsFormElement extends BaseFormElement implements TranslationsFormElementInterface
 {
@@ -34,7 +33,6 @@ class TranslationsFormElement extends BaseFormElement implements TranslationsFor
     public function generateSlug(string $localeCode): void
     {
         $this->getElement('generate_product_slug_button', ['%locale_code%' => $localeCode])->click();
-        $this->waitForFormUpdate();
     }
 
     public function getSlug(string $locale): string
@@ -61,10 +59,6 @@ class TranslationsFormElement extends BaseFormElement implements TranslationsFor
 
     public function activateLanguageTab(string $localeCode): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $languageTabTitle = $this->getElement('language_tab', ['%locale_code%' => $localeCode]);
         if (!$languageTabTitle->hasClass('active')) {
             $languageTabTitle->click();
@@ -89,10 +83,6 @@ class TranslationsFormElement extends BaseFormElement implements TranslationsFor
 
     protected function expandTranslationAccordion(string $localeCode): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $translationAccordion = $this->getElement('product_translation_accordion', ['%locale_code%' => $localeCode]);
 
         if ($translationAccordion->getAttribute('aria-expanded') === 'true') {
@@ -104,10 +94,6 @@ class TranslationsFormElement extends BaseFormElement implements TranslationsFor
 
     protected function changeTab(): void
     {
-        if (DriverHelper::isNotJavascript($this->getDriver())) {
-            return;
-        }
-
         $this->getElement('side_navigation_tab', ['%name%' => 'translations'])->click();
     }
 }

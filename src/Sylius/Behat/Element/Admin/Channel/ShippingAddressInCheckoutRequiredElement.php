@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Channel;
 
-use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Element\SyliusElement;
 use Webmozart\Assert\Assert;
 

@@ -44,7 +44,7 @@ class DashboardPage extends SyliusPage implements DashboardPageInterface
 
     public function pressResendVerificationEmail(): void
     {
-        $this->getElement('verification_button')->press();
+        $this->getElement('verification_button')->click();
     }
 
     protected function getDefinedElements(): array

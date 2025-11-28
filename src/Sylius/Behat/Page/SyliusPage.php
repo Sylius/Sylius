@@ -13,21 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page;
 
-use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage as BaseSymfonyPage;
-use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Behaviour\WaitsForElements;
 
 abstract class SyliusPage extends BaseSymfonyPage implements SyliusPageInterface
 {
-    protected function getElement(string $name, array $parameters = []): NodeElement
-    {
-        DriverHelper::waitForPageToLoad($this->getSession());
-
-        return parent::getElement($name, $parameters);
-    }
+    use WaitsForElements;
 
     protected function blur(): void
     {
+        if ($this->isJavascript() === false) {
+            return;
+        }
+
         $this->getDocument()->find('css', 'body')->click();
     }
 }

@@ -109,20 +109,20 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
 
     public function removeProduct(string $productName): void
     {
-        $this->getElement('remove_item', ['%name%' => $productName])->press();
+        $this->getElement('remove_item', ['%name%' => $productName])->click();
         $this->waitForComponentsUpdate();
     }
 
     public function applyCoupon(string $couponCode): void
     {
         $this->getElement('coupon_field')->setValue($couponCode);
-        $this->getElement('apply_coupon_button')->press();
+        $this->getElement('apply_coupon_button')->click();
         $this->waitForComponentsUpdate();
     }
 
     public function removeCoupon(): void
     {
-        $this->getElement('remove_coupon')->press();
+        $this->getElement('remove_coupon')->click();
         $this->waitForComponentsUpdate();
     }
 

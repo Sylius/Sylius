@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Service;
 
 use Behat\Mink\Driver\Selenium2Driver;
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use DMore\ChromeDriver\ChromeDriver;
+use Sylius\Behat\Element\NodeElement;
 
 abstract class TabsHelper
 {

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
@@ -48,7 +48,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
     public function savePositions(): void
     {
-        $this->getElement('save_configuration_button')->press();
+        $this->getElement('save_configuration_button')->click();
 
         $this->getDocument()->waitFor(5, fn () => null === $this->getElement('save_configuration_button')->find('css', '.loading'));
     }

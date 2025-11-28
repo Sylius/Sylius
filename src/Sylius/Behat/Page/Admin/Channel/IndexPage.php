@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
 
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     public function getUsedThemeName(string $channelCode): ?string
     {
-        $table = $this->getDocument()->find('css', 'table');
+        $table = new NodeElement($this->getDocument()->find('css', 'table')->getXpath(), $this->getSession());
 
         $row = $this->getTableAccessor()->getRowWithFields($table, ['code' => $channelCode]);
 

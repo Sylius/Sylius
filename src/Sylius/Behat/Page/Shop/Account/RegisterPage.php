@@ -44,7 +44,7 @@ class RegisterPage extends SyliusPage implements RegisterPageInterface
 
     public function register(): void
     {
-        $this->getElement('create_account_button')->press();
+        $this->getElement('create_account_button')->click();
     }
 
     public function specifyEmail(string $email): void

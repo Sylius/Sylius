@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\ProductOption;
 
-use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
+use Sylius\Behat\Element\NodeElement;
 
 class FormElement extends BaseFormElement implements FormElementInterface
 {
@@ -34,20 +34,17 @@ class FormElement extends BaseFormElement implements FormElementInterface
         foreach ($optionValues as $optionValueElement) {
             if ($optionValueElement->has('css', sprintf('input[value="%s"]', $optionValue))) {
                 $optionValueElement->find('css', '[data-test-delete-option-value]')->click();
-                $this->waitForFormUpdate();
             }
         }
     }
 
     public function addOptionValue(string $code, string $localeCode, string $value): void
     {
-        $this->getElement('add_option_value')->press();
-        $this->waitForFormUpdate();
+        $this->getElement('add_option_value')->click();
 
         $lastValue = $this->getElement('last_option_value');
         $lastValue->find('css', '[data-test-code]')->setValue($code);
         $lastValue->find('css', sprintf('[id$="_translations_%s_value"]', $localeCode))->setValue($value);
-        $this->waitForFormUpdate();
     }
 
     public function hasOptionValue(string $optionValue, string $localeCode): bool
@@ -58,7 +55,6 @@ class FormElement extends BaseFormElement implements FormElementInterface
     public function applyToAllOptionValues(string $code, string $localeCode): void
     {
         $this->getElement('apply_to_all', ['%value_code%' => $code, '%locale_code%' => $localeCode])->click();
-        $this->waitForFormUpdate();
     }
 
     protected function getDefinedElements(): array

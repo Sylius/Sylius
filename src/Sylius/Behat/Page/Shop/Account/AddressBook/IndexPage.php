@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Sylius\Behat\Page\SyliusPage;
-use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
 class IndexPage extends SyliusPage implements IndexPageInterface
@@ -52,19 +51,17 @@ class IndexPage extends SyliusPage implements IndexPageInterface
 
     public function editAddress(string $fullName): void
     {
-        $this->getElement('edit_address', ['%full_name%' => $fullName])->press();
+        $this->getElement('edit_address', ['%full_name%' => $fullName])->click();
     }
 
     public function deleteAddress(string $fullName): void
     {
-        $this->getElement('delete_button', ['%full_name%' => $fullName])->press();
-
-        DriverHelper::waitForPageToLoad($this->getSession());
+        $this->getElement('delete_button', ['%full_name%' => $fullName])->click();
     }
 
     public function setAsDefault(string $fullName): void
     {
-        $this->getElement('set_as_default_button', ['%full_name%' => $fullName])->press();
+        $this->getElement('set_as_default_button', ['%full_name%' => $fullName])->click();
     }
 
     public function hasNoDefaultAddress(): bool

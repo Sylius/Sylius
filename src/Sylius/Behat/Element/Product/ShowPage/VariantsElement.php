@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\NodeElement;
 use Sylius\Behat\Element\SyliusElement;
 
 class VariantsElement extends SyliusElement implements VariantsElementInterface
 {
     public function countVariantsOnPage(): int
     {
-        /** @var NodeElement $variants|array */
         $variants = $this->getDocument()->findAll('css', '[data-test-variant]');
 
         return \count($variants);
@@ -38,11 +37,11 @@ class VariantsElement extends SyliusElement implements VariantsElementInterface
         string $currentStock,
         string $channelCode,
     ): bool {
-        /** @var NodeElement $variantRow */
         $variantRows = $this->getDocument()->findAll('css', '[data-test-variant]');
 
-        /** @var NodeElement $variant */
-        foreach ($variantRows as $variant) {
+        foreach ($variantRows as $variantRow) {
+            $variant = new NodeElement($variantRow->getXpath(), $this->getSession());
+
             if (
                 $this->hasProductWithGivenNameCodePriceAndCurrentStock(
                     $variant,
@@ -65,7 +64,6 @@ class VariantsElement extends SyliusElement implements VariantsElementInterface
         string $lowestPriceBeforeDiscount,
         string $channelCode,
     ): bool {
-        /** @var NodeElement $variant */
         $variant = $this->getDocument()->find('css', sprintf('[data-test-lowest-price-before-the-discount="%s.%s"]', $productVariantCode, $channelCode));
 
         if ($variant) {

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Behaviour;
 
-use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Element\NodeElement;
 
 trait ChecksCodeImmutability
 {
