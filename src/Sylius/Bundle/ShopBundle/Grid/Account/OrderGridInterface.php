@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Grid\Account;
 
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\GridInterface;
 
 /** @experimental */
-interface OrderGridInterface extends GridInterface
+interface OrderGridInterface
 {
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }
