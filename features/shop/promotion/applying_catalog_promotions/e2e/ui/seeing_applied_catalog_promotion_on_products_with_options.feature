@@ -20,20 +20,20 @@ Feature: Seeing applied catalog promotions on products configured with the optio
         When I view product "T-Shirt"
         Then I should see this product is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Seeing applied catalog promotion on the product with non default option
         When I view product "T-Shirt"
         And I select its "Size" as "L"
         Then I should see this product is discounted from "$50.00" to "$37.50" with "Surprise sale" promotion
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Seeing applied catalog promotion on the product after changing the options multiple times
         When I view product "T-Shirt"
         And I select its "Size" as "L"
         And I select its "Size" as "S"
         Then I should see this product is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Seeing no applied catalog promotion on the product option without applied catalog promotion
         When I view product "T-Shirt"
         And I select its "Size" as "M"
