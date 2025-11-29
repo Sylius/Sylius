@@ -51,7 +51,7 @@ final class OrdersTest extends JsonApiTestCase
         $this->placeOrder('nAWw2jewpB', 'oliver@doe.com');
         $this->placeOrder('nAWw2jewpC', 'dave@doe.com');
         $this->pickUpCart('nAWw2jewpD');
-        $this->updateCartWithAddressAndCouponCode('nAWw2jewpD', 'oliver@doe.com');
+        $this->updateCartWithAddress('nAWw2jewpD', 'oliver@doe.com');
         $this->pickUpCart('nAWw2jewpE');
 
         $this->requestGet(
@@ -461,7 +461,6 @@ final class OrdersTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'You cannot change the payment method for a cancelled order.'],
             ],
