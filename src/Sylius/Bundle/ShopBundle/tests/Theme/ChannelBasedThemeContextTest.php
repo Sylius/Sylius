@@ -80,7 +80,6 @@ final class ChannelBasedThemeContextTest extends TestCase
 
         $reflection = new \ReflectionObject($this->channelBasedThemeContext);
         $property = $reflection->getProperty('theme');
-        $property->setAccessible(true);
         $property->setValue($this->channelBasedThemeContext, $theme);
 
         $this->channelContext->expects($this->never())->method('getChannel');
@@ -93,7 +92,6 @@ final class ChannelBasedThemeContextTest extends TestCase
     {
         $reflection = new \ReflectionObject($this->channelBasedThemeContext);
         $property = $reflection->getProperty('theme');
-        $property->setAccessible(true);
         $property->setValue($this->channelBasedThemeContext, null);
 
         $this->channelContext->expects($this->never())->method('getChannel');
