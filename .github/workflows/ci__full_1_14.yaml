@@ -1,6 +1,12 @@
 name: Continuous Integration 1.14 (Full)
 
 on:
+    pull_request:
+        branches:
+            - '1.14'
+    push:
+        branches:
+            - 'full-ci/**'
     schedule:
         -
             cron: "0 1 * * *" # Run every day at 1am
@@ -15,6 +21,7 @@ permissions:
 
 jobs:
     static-checks:
+        if: ${{ github.event_name != 'pull_request' || startsWith(github.head_ref, 'full-ci/') }}
         strategy:
             matrix:
                 branch: ["1.14"]

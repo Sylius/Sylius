@@ -10,6 +10,7 @@ on:
     push:
         branches-ignore:
             - 'dependabot/**'
+            - 'full-ci/**'
             - 'upmerge/**'
 
 concurrency:
@@ -21,6 +22,7 @@ permissions:
 
 jobs:
     static-checks:
+        if: ${{ github.event_name != 'pull_request' || !startsWith(github.head_ref, 'full-ci/') }}
         name: Static checks
         uses: ./.github/workflows/ci_static-checks.yaml
         with:
