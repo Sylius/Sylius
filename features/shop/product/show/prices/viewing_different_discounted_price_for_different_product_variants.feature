@@ -19,14 +19,14 @@ Feature: Viewing different discounted price for different product variants
         Then the product price should be "$40.00"
         And I should not see any original price
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Viewing a detailed page with product's discount price for different variant
         When I view product "Wyborowa Vodka"
         And I select "Wyborowa Apple" variant
         Then the product variant price should be "$12.55"
         And the product original price should be "$20.00"
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Not seeing the discount when a variant's original price is lower than current price
         When I view product "Wyborowa Vodka"
         And I select "Wyborowa Pear" variant

@@ -16,7 +16,7 @@ Feature: Viewing different price for different product variants selected with op
         When I view product "Wyborowa Vodka"
         Then I should see the product price "$20.00"
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Viewing a detailed page with product's price for different option
         When I view product "Wyborowa Vodka"
         And I select its volume as "0,7L"
