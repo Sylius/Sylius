@@ -10,7 +10,7 @@ Feature: Verify Add-to-Cart Button State Validation
         And "Sylius T-Shirt" product is tracked by the inventory
         And there are 2 units of product "Sylius T-Shirt" available in the inventory
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: "Add to cart" button is disabled when requested quantity exceeds stock
         When I view product "Sylius T-Shirt"
         And I update the quantity of this product to 3
