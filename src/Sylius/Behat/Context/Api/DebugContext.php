@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
@@ -47,21 +48,31 @@ final class DebugContext implements Context
     }
 
     /** @AfterScenario */
-    public function afterScenario(): void
+    public function afterScenario(AfterScenarioScope $scope): void
     {
-        if (!empty($this->errorStack)) {
-            $output = new ConsoleOutput();
-            $styleKey = new OutputFormatterStyle('cyan');
-            $styleValue = new OutputFormatterStyle('green');
-            $output->getFormatter()->setStyle('key', $styleKey);
-            $output->getFormatter()->setStyle('value', $styleValue);
-
-            $json = json_encode($this->errorStack, \JSON_PRETTY_PRINT);
-
-            $formattedJson = preg_replace('/"([^"]+)":/', '<key>"$1"</key>:', $json);
-            $formattedJson = preg_replace('/: "([^"]+)"/', ': <value>"$1"</value>', $formattedJson);
-
-            $output->writeln($formattedJson);
+        if (empty($this->errorStack)) {
+            return;
         }
+
+        if ($scope->getTestResult()->isPassed()) {
+            $this->errorStack = [];
+
+            return;
+        }
+
+        $output = new ConsoleOutput();
+        $styleKey = new OutputFormatterStyle('cyan');
+        $styleValue = new OutputFormatterStyle('green');
+        $output->getFormatter()->setStyle('key', $styleKey);
+        $output->getFormatter()->setStyle('value', $styleValue);
+
+        $json = json_encode($this->errorStack, \JSON_PRETTY_PRINT);
+
+        $formattedJson = preg_replace('/"([^"]+)":/', '<key>"$1"</key>:', $json);
+        $formattedJson = preg_replace('/: "([^"]+)"/', ': <value>"$1"</value>', $formattedJson);
+
+        $output->writeln($formattedJson);
+
+        $this->errorStack = [];
     }
 }
