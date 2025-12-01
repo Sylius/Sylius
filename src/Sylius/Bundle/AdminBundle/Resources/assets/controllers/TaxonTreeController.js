@@ -38,7 +38,7 @@ export default class extends Controller {
     }
 
     rowRenderer(node) {
-        const { id, name, children, state } = node;
+        const { id, name, children, state, enabled } = node;
         const { depth, open, path, total } = state;
         const more = node.hasChildren();
         const nodeMargin = 20;
@@ -57,6 +57,10 @@ export default class extends Controller {
         itemPrototyp.setAttribute('data-path', path);
         itemPrototyp.setAttribute('data-children', children.length);
         itemPrototyp.setAttribute('data-total', total);
+
+        if (!enabled) {
+            itemPrototyp.classList.add('taxon-disabled');
+        }
 
         togglerPrototyp.style.width = `${nodeMargin}px`;
         if (more) {
