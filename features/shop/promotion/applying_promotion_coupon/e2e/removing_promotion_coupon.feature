@@ -11,7 +11,7 @@ Feature: Removing promotion coupon
         And this promotion gives "$10.00" discount to every order
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Removing coupon code from cart
         Given I added product "PHP T-Shirt" to the cart
         And this cart has promotion applied with coupon "SANTA2016"
