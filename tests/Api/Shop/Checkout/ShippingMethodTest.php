@@ -147,7 +147,6 @@ final class ShippingMethodTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'The shipping method with invalid code does not exist.'],
             ],

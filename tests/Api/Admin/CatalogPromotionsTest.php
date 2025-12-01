@@ -277,7 +277,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ],
         );
 
-        $this->assertJsonResponseViolations($this->client->getResponse(), [
+        $this->assertResponseContainsViolations([
             [
                 'propertyPath' => 'scopes[0].type',
                 'message' => 'Catalog promotion scope type is invalid. Available types are for_products, for_taxons, for_variants.',
@@ -453,7 +453,7 @@ final class CatalogPromotionsTest extends JsonApiTestCase
             ],
         );
 
-        $this->assertJsonResponseViolations($this->client->getResponse(), [
+        $this->assertResponseContainsViolations([
             [
                 'propertyPath' => 'actions[0].type',
                 'message' => 'Please choose an action type.',

@@ -185,12 +185,9 @@ final class PaymentRequestsTest extends JsonApiTestCase
             ], \JSON_THROW_ON_ERROR),
         );
 
-        $this->assertResponseViolations(
-            $this->client->getResponse(),
-            [
-                ['propertyPath' => '', 'message' => sprintf('The payment request (method code: %s and payment id: %d) has no handler. Please choose another payment method.', $payment->getMethod()->getCode(), $payment->getId())],
-            ],
-        );
+        $this->assertResponseContainsViolations([
+            ['propertyPath' => '', 'message' => sprintf('The payment request (method code: %s and payment id: %d) has no handler. Please choose another payment method.', $payment->getMethod()->getCode(), $payment->getId())],
+        ]);
     }
 
     /**

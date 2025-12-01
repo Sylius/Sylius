@@ -169,15 +169,12 @@ final class StatisticsTest extends JsonApiTestCase
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponseViolations(
-            $this->client->getResponse(),
+        $this->assertResponseContainsViolations([
             [
-                [
-                    'propertyPath' => '',
-                    'message' => 'The start date must be earlier than the end date.',
-                ],
+                'propertyPath' => '',
+                'message' => 'The start date must be earlier than the end date.',
             ],
-        );
+        ]);
     }
 
     #[DataProvider('missingQueryParameters')]
@@ -197,7 +194,7 @@ final class StatisticsTest extends JsonApiTestCase
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponseViolations($this->client->getResponse(), $expectedViolations);
+        $this->assertResponseContainsViolations($expectedViolations);
     }
 
     public static function missingQueryParameters(): iterable
