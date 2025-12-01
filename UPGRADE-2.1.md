@@ -1,3 +1,9 @@
+# UPGRADE FROM `2.1.8` TO `2.1.9`
+
+1. The `Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\StatisticsComponent` constructor now requires
+   a `Symfony\Component\Clock\ClockInterface` as the third argument. Not passing it is deprecated
+   and will be prohibited in Sylius 3.0.
+
 # UPGRADE FROM `2.1.7` TO `2.1.8`
 
 ## State Machine
