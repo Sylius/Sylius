@@ -92,12 +92,10 @@ jobs:
                     restore-keys: |
                         "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
 
-            -   name: Install Robo
-                run: |
-                    wget https://github.com/consolidation/Robo/releases/latest/download/robo.phar
-                    chmod +x robo.phar && sudo mv robo.phar /tmp/robo
+            -   name: Install dependencies
+                run: composer install --no-interaction --no-scripts
 
             -   name: "Run pipeline"
                 run: |
                     PACKAGES=$(find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq --raw-input . | jq --slurp . | jq -c .)
-                    /tmp/robo ci:packages "$PACKAGES"
+                    vendor/bin/robo ci:packages "$PACKAGES"
