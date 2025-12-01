@@ -51,6 +51,7 @@ final class AllTaxons implements AllTaxonsInterface
                 'taxon.tree_right as tree_right',
                 'taxon.tree_level as tree_level',
                 'taxon.position as position',
+                'taxon.enabled as enabled',
                 'COALESCE(current_translation.name, fallback_translation.name) as name',
             ])
             ->from('sylius_taxon', 'taxon')
