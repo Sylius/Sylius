@@ -33,4 +33,14 @@ final class BadGatewayContext implements Context
             exit(1);
         }
     }
+
+    #[AfterStep]
+    public function delayAfterStep(): void
+    {
+        $delay = (int) (getenv('BEHAT_STEP_DELAY') ?: 0);
+
+        if ($delay > 0) {
+            usleep($delay * 1000);
+        }
+    }
 }
