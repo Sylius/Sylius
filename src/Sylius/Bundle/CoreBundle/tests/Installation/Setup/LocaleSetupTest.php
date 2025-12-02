@@ -32,7 +32,7 @@ final class LocaleSetupTest extends KernelTestCase
 
     private string $originalLocale;
 
-    private RepositoryInterface&MockObject $localeRepository;
+    private MockObject&RepositoryInterface $localeRepository;
 
     private FactoryInterface&MockObject $localeFactory;
 
