@@ -13,9 +13,6 @@ parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
 
 api_platform:
-    enable_swagger_ui: false
-    enable_re_doc: false
-    enable_swagger: false
     enable_entrypoint: false
     enable_docs: false
     mapping:
