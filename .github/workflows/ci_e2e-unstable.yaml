@@ -32,12 +32,12 @@ jobs:
             APP_ENV: test_cached
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
-            BEHAT_CLI_TAGS: "@cli&&~@todo"
-            BEHAT_CLI_SUITES: "@cli"
-            BEHAT_NON_UI_TAGS: "~@todo&&~@cli"
-            BEHAT_NON_UI_SUITES: "@api,@domain"
-            BEHAT_NON_JS_TAGS: "~@javascript&&~@mink:chromedriver&&~@todo&&~@cli"
-            BEHAT_NON_JS_SUITES: "@hybrid,@ui"
+            CLI_TAGS: "@cli&&~@todo"
+            CLI_SUITE_TAGS: "@cli"
+            NON_UI_TAGS: "~@todo&&~@cli"
+            NON_UI_SUITE_TAGS: "@api,@domain"
+            NON_JS_TAGS: "~@javascript&&~@mink:chromedriver&&~@todo&&~@cli"
+            NON_JS_SUITE_TAGS: "@hybrid,@ui"
 
         steps:
             -
@@ -76,13 +76,13 @@ jobs:
                 run: vendor/bin/phpunit --testsuite all --colors=always
 
             -   name: Run CLI Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_CLI_TAGS" --suite-tags="$BEHAT_CLI_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_CLI_TAGS" --suite-tags="$BEHAT_CLI_SUITES" --rerun
+                run: $BEHAT_BASE_CMD --tags="$CLI_TAGS" --suite-tags="$CLI_SUITE_TAGS" || $BEHAT_BASE_CMD --tags="$CLI_TAGS" --suite-tags="$CLI_SUITE_TAGS" --rerun
 
             -   name: Run non-UI Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_NON_UI_TAGS" --suite-tags="$BEHAT_NON_UI_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_NON_UI_TAGS" --suite-tags="$BEHAT_NON_UI_SUITES" --rerun
+                run: $BEHAT_BASE_CMD --tags="$NON_UI_TAGS" --suite-tags="$NON_UI_SUITE_TAGS" || $BEHAT_BASE_CMD --tags="$NON_UI_TAGS" --suite-tags="$NON_UI_SUITE_TAGS" --rerun
 
             -   name: Run non-JS Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_NON_JS_TAGS" --suite-tags="$BEHAT_NON_JS_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_NON_JS_TAGS" --suite-tags="$BEHAT_NON_JS_SUITES" --rerun
+                run: $BEHAT_BASE_CMD --tags="$NON_JS_TAGS" --suite-tags="$NON_JS_SUITE_TAGS" || $BEHAT_BASE_CMD --tags="$NON_JS_TAGS" --suite-tags="$NON_JS_SUITE_TAGS" --rerun
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
@@ -112,9 +112,9 @@ jobs:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
-            BEHAT_TAGS: "@mink:chromedriver&&~@todo&&~@cli&&~@failing"
-            BEHAT_SUITES: "@hybrid,@ui"
-            BEHAT_FAILING_TAGS: "@mink:chromedriver&&~@todo&&~@cli&&@failing"
+            TAGS: "@mink:chromedriver&&~@todo&&~@cli&&~@failing"
+            SUITE_TAGS: "@hybrid,@ui"
+            FAILING_TAGS: "@mink:chromedriver&&~@todo&&~@cli&&@failing"
 
         steps:
             -   name: "Checkout (With Branch)"
@@ -158,15 +158,15 @@ jobs:
 
             -   name: Run Behat (Chromedriver)
                 run: |
-                    $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" || \
-                    $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" --rerun || \
-                    $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" --rerun
+                    $BEHAT_BASE_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" || \
+                    $BEHAT_BASE_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" --rerun || \
+                    $BEHAT_BASE_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" --rerun
 
             -   name: Run Behat (Chromedriver) for randomly failing scenarios (@failing)
                 run: |
-                    $BEHAT_BASE_CMD --tags="$BEHAT_FAILING_TAGS" --suite-tags="$BEHAT_SUITES" || \
-                    $BEHAT_BASE_CMD --tags="$BEHAT_FAILING_TAGS" --suite-tags="$BEHAT_SUITES" --rerun || \
-                    $BEHAT_BASE_CMD --tags="$BEHAT_FAILING_TAGS" --suite-tags="$BEHAT_SUITES" --rerun
+                    $BEHAT_BASE_CMD --tags="$FAILING_TAGS" --suite-tags="$SUITE_TAGS" || \
+                    $BEHAT_BASE_CMD --tags="$FAILING_TAGS" --suite-tags="$SUITE_TAGS" --rerun || \
+                    $BEHAT_BASE_CMD --tags="$FAILING_TAGS" --suite-tags="$SUITE_TAGS" --rerun
                 continue-on-error: true
 
             -   name: Upload logs
@@ -197,8 +197,8 @@ jobs:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
-            BEHAT_TAGS: "@javascript&&~@todo&&~@cli"
-            BEHAT_SUITES: "@hybrid,@ui"
+            TAGS: "@javascript&&~@todo&&~@cli"
+            SUITE_TAGS: "@hybrid,@ui"
 
         steps:
             -   name: "Checkout (With Branch)"
@@ -244,9 +244,9 @@ jobs:
 
             -   name: Run Behat (Panther)
                 run: |
-                    $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" || \
-                    $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" --rerun || \
-                    $BEHAT_BASE_CMD --tags="$BEHAT_TAGS" --suite-tags="$BEHAT_SUITES" --rerun
+                    $BEHAT_BASE_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" || \
+                    $BEHAT_BASE_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" --rerun || \
+                    $BEHAT_BASE_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" --rerun
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4

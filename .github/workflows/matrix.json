@@ -51,6 +51,54 @@
         }
       ]
     },
+    "e2e-js": {
+      "include": [
+        {
+          "php": "8.4",
+          "symfony": "~6.4.0",
+          "mysql": "8.0",
+          "group": "Products",
+          "tags": "@managing_products"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~6.4.0",
+          "mysql": "8.0",
+          "group": "Catalog",
+          "tags": "@managing_taxons,@managing_shipping_methods,@managing_countries,@managing_zones"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~6.4.0",
+          "mysql": "8.0",
+          "group": "Promotions",
+          "tags": "@managing_promotions,@managing_catalog_promotions,@applying_catalog_promotions,@managing_promotion_coupons"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~6.4.0",
+          "mysql": "8.0",
+          "group": "Checkout",
+          "tags": "@checkout,@shopping_cart,@cart_inventory,@accessing_cart,@address_book"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~6.4.0",
+          "mysql": "8.0",
+          "group": "Remaining",
+          "tags": "@mink:chromedriver&&~@managing_products&&~@managing_taxons&&~@managing_shipping_methods&&~@managing_countries&&~@managing_zones&&~@managing_promotions&&~@managing_catalog_promotions&&~@applying_catalog_promotions&&~@managing_promotion_coupons&&~@checkout&&~@shopping_cart&&~@cart_inventory&&~@accessing_cart&&~@address_book&&~@todo&&~@cli&&~@failing"
+        }
+      ]
+    },
+    "e2e-js-panther": {
+      "include": [
+        {
+          "php": "8.4",
+          "symfony": "~6.4.0",
+          "mysql": "8.0"
+        }
+      ]
+    },
     "e2e-pgsql": {
       "include": [
         {
@@ -144,6 +192,54 @@
           "symfony": "~7.3.0",
           "mysql": "8.0",
           "twig": "^3.3"
+        }
+      ]
+    },
+    "e2e-js": {
+      "include": [
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "mysql": "8.4",
+          "group": "Products",
+          "tags": "@managing_products"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "mysql": "8.4",
+          "group": "Catalog",
+          "tags": "@managing_taxons,@managing_shipping_methods,@managing_countries,@managing_zones"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "mysql": "8.4",
+          "group": "Promotions",
+          "tags": "@managing_promotions,@managing_catalog_promotions,@applying_catalog_promotions,@managing_promotion_coupons"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "mysql": "8.4",
+          "group": "Checkout",
+          "tags": "@checkout,@shopping_cart,@cart_inventory,@accessing_cart,@address_book"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "mysql": "8.4",
+          "group": "Remaining",
+          "tags": "@mink:chromedriver&&~@managing_products&&~@managing_taxons&&~@managing_shipping_methods&&~@managing_countries&&~@managing_zones&&~@managing_promotions&&~@managing_catalog_promotions&&~@applying_catalog_promotions&&~@managing_promotion_coupons&&~@checkout&&~@shopping_cart&&~@cart_inventory&&~@accessing_cart&&~@address_book&&~@todo&&~@cli&&~@failing"
+        }
+      ]
+    },
+    "e2e-js-panther": {
+      "include": [
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "mysql": "8.4"
         }
       ]
     },

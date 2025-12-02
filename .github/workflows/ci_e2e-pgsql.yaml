@@ -1,4 +1,4 @@
-name: End-to-End (PostgreSQL)
+name: Tests (PostgreSQL)
 
 on:
     workflow_dispatch: ~
@@ -41,10 +41,10 @@ jobs:
                     path: '.github/workflows/matrix.json'
                     prop_path: '${{ inputs.type }}.e2e-pgsql'
 
-    behat-no-js:
+    phpunit-cli-api:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}"
+        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -54,12 +54,11 @@ jobs:
             APP_ENV: test_cached
             DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion=${{ matrix.postgres }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
-            BEHAT_CLI_TAGS: "@cli&&~@todo"
-            BEHAT_CLI_SUITES: "@cli"
-            BEHAT_NON_UI_TAGS: "~@todo&&~@cli&&~@no-postgres"
-            BEHAT_NON_UI_SUITES: "@api,@domain"
-            BEHAT_NON_JS_TAGS: "~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres"
-            BEHAT_NON_JS_SUITES: "@hybrid,@ui"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty"
+            CLI_TAGS: "@cli&&~@todo"
+            CLI_SUITE_TAGS: "@cli"
+            API_TAGS: "~@todo&&~@cli&&~@no-postgres"
+            API_SUITE_TAGS: "@api,@domain"
 
         steps:
             -   name: Set variables
@@ -115,19 +114,95 @@ jobs:
                     vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always
 
             -   name: Run CLI Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_CLI_TAGS" --suite-tags="$BEHAT_CLI_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_CLI_TAGS" --suite-tags="$BEHAT_CLI_SUITES" --rerun
+                run: $BEHAT_BASE_CMD --tags="$CLI_TAGS" --suite-tags="$CLI_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$CLI_TAGS" --suite-tags="$CLI_SUITE_TAGS" --rerun
 
-            -   name: Run non-UI Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_NON_UI_TAGS" --suite-tags="$BEHAT_NON_UI_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_NON_UI_TAGS" --suite-tags="$BEHAT_NON_UI_SUITES" --rerun
-
-            -   name: Run non-JS Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_NON_JS_TAGS" --suite-tags="$BEHAT_NON_JS_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_NON_JS_TAGS" --suite-tags="$BEHAT_NON_JS_SUITES" --rerun
+            -   name: Run API Behat
+                run: $BEHAT_BASE_CMD --tags="$API_TAGS" --suite-tags="$API_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$API_TAGS" --suite-tags="$API_SUITE_TAGS" --rerun
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    path: |
+                        etc/build/
+                        var/log
+                    if-no-files-found: ignore
+                    overwrite: true
+
+    behat-ui:
+        needs: get-matrix
+        runs-on: ubuntu-latest
+        name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}"
+        timeout-minutes: 45
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion=${{ matrix.postgres }}"
+            BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty"
+            UI_TAGS: "~@javascript&&~@mink:chromedriver&&~@todo&&~@cli&&~@no-postgres"
+            UI_SUITE_TAGS: "@hybrid,@ui"
+
+        steps:
+            -   name: Set variables
+                shell: bash
+                env:
+                    BRANCH: ${{ inputs.branch }}
+                run: |
+                    if [ "$BRANCH" == "1.14" ]; then
+                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
+                    else
+                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
+                    fi
+
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
+
+            -   name: Prepare manifest.json files
+                if: "${{ inputs.branch != '1.14' }}"
+                run: |
+                    mkdir -p public/build/admin
+                    mkdir -p public/build/shop
+                    mkdir -p public/build/app/admin
+                    mkdir -p public/build/app/shop
+                    echo "{}" > public/build/admin/manifest.json
+                    echo "{}" > public/build/shop/manifest.json
+                    echo "{}" > public/build/app/admin/manifest.json
+                    echo "{}" > public/build/app/shop/manifest.json
+
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v3.0.1
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
+                    e2e: "yes"
+                    database: "postgresql"
+                    database_version: ${{ matrix.postgres }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
+                    chrome_version: stable
+
+            -   name: Run UI Behat
+                run: $BEHAT_BASE_CMD --tags="$UI_TAGS" --suite-tags="$UI_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$UI_TAGS" --suite-tags="$UI_SUITE_TAGS" --rerun
+
+            -   name: Upload logs
+                uses: actions/upload-artifact@v4
+                if: failure()
+                with:
+                    name: "Logs (UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log

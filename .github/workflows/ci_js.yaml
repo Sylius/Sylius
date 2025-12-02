@@ -1,4 +1,4 @@
-name: Tests (MySQL)
+name: Javascript Tests (MySQL)
 
 on:
     workflow_dispatch: ~
@@ -23,6 +23,7 @@ jobs:
         name: "Get matrix"
         outputs:
             matrix: ${{ steps.matrix.outputs.prop }}
+            panther-matrix: ${{ steps.panther-matrix.outputs.prop }}
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
@@ -39,13 +40,20 @@ jobs:
                 uses: notiz-dev/github-action-json-property@release
                 with:
                     path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.e2e-mysql'
+                    prop_path: '${{ inputs.type }}.e2e-js'
 
-    phpunit-cli-api:
+            -   name: "Get panther matrix"
+                id: panther-matrix
+                uses: notiz-dev/github-action-json-property@release
+                with:
+                    path: '.github/workflows/matrix.json'
+                    prop_path: '${{ inputs.type }}.e2e-js-panther'
+
+    behat-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
-        timeout-minutes: 45
+        name: "[${{ matrix.group }}] [PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}]"
+        timeout-minutes: 10
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
@@ -55,10 +63,7 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty"
-            CLI_TAGS: "@cli&&~@todo"
-            CLI_SUITE_TAGS: "@cli"
-            API_TAGS: "~@todo&&~@cli"
-            API_SUITE_TAGS: "@api,@domain"
+            SUITE_TAGS: "@hybrid,@ui"
 
         steps:
             -   name: Set variables
@@ -82,21 +87,20 @@ jobs:
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
 
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: "Restore dependencies"
+                uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
-
-            -   name: Prepare manifest.json files
-                if: "${{ inputs.branch != '1.14' }}"
-                run: |
-                    mkdir -p public/build/admin
-                    mkdir -p public/build/shop
-                    mkdir -p public/build/app/admin
-                    mkdir -p public/build/app/shop
-                    echo "{}" > public/build/admin/manifest.json
-                    echo "{}" > public/build/shop/manifest.json
-                    echo "{}" > public/build/app/admin/manifest.json
-                    echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v3.0.1
@@ -105,58 +109,61 @@ jobs:
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
+                    e2e_js: "yes"
                     database_version: ${{ matrix.mysql }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
 
-            -   name: Fix permissions for Symfony logs directory
+            -   name: Run Behat (${{ matrix.group }})
+                env:
+                    TAGS: ${{ matrix.tags }}
                 run: |
-                    LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
-                    mkdir -p "$LOGS_DIR"
-                    chmod -R 777 "$LOGS_DIR"
+                    run_behat() {
+                        local tag=$1
+                        # Check if tag already contains full expression (for Remaining group)
+                        if [[ "$tag" == *"&&"* ]]; then
+                            local full_tag="$tag"
+                        else
+                            local full_tag="@mink:chromedriver&&${tag}&&~@todo&&~@cli&&~@failing"
+                        fi
+                        $BEHAT_BASE_CMD --tags="$full_tag" --suite-tags="$SUITE_TAGS" || \
+                        BEHAT_STEP_DELAY=5000 $BEHAT_RERUN_CMD --tags="$full_tag" --suite-tags="$SUITE_TAGS" --rerun || \
+                        BEHAT_STEP_DELAY=5000 $BEHAT_RERUN_CMD --tags="$full_tag" --suite-tags="$SUITE_TAGS" --rerun
+                    }
 
-            -   name: Test installer
-                run: bin/console sylius:install --no-interaction -vvv
-
-            -   name: Run PHPUnit
-                run: |
-                    vendor/bin/phpunit --testsuite all --colors=always
-                    vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always
-
-            -   name: Run CLI Behat
-                run: $BEHAT_BASE_CMD --tags="$CLI_TAGS" --suite-tags="$CLI_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$CLI_TAGS" --suite-tags="$CLI_SUITE_TAGS" --rerun
-
-            -   name: Run API Behat
-                run: $BEHAT_BASE_CMD --tags="$API_TAGS" --suite-tags="$API_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$API_TAGS" --suite-tags="$API_SUITE_TAGS" --rerun
+                    IFS=',' read -ra TAG_ARRAY <<< "$TAGS"
+                    for tag in "${TAG_ARRAY[@]}"; do
+                        run_behat "$tag"
+                    done
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (${{ matrix.group }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
                     if-no-files-found: ignore
                     overwrite: true
 
-    behat-ui:
+    behat-panther:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
-        timeout-minutes: 45
+        name: "Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        timeout-minutes: 10
         strategy:
             fail-fast: false
-            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+            matrix: ${{ fromJson(needs.get-matrix.outputs.panther-matrix) }}
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty"
-            UI_TAGS: "~@javascript&&~@mink:chromedriver&&~@todo&&~@cli"
-            UI_SUITE_TAGS: "@hybrid,@ui"
+            TAGS: "@javascript&&~@todo&&~@cli"
+            SUITE_TAGS: "@hybrid,@ui"
 
         steps:
             -   name: Set variables
@@ -180,21 +187,20 @@ jobs:
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
 
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: "Restore dependencies"
+                uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
-
-            -   name: Prepare manifest.json files
-                if: "${{ inputs.branch != '1.14' }}"
-                run: |
-                    mkdir -p public/build/admin
-                    mkdir -p public/build/shop
-                    mkdir -p public/build/app/admin
-                    mkdir -p public/build/app/shop
-                    echo "{}" > public/build/admin/manifest.json
-                    echo "{}" > public/build/shop/manifest.json
-                    echo "{}" > public/build/app/admin/manifest.json
-                    echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v3.0.1
@@ -203,19 +209,24 @@ jobs:
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
+                    e2e_js: "yes"
                     database_version: ${{ matrix.mysql }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
+                    chrome_version: stable
 
-            -   name: Run UI Behat
-                run: $BEHAT_BASE_CMD --tags="$UI_TAGS" --suite-tags="$UI_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$UI_TAGS" --suite-tags="$UI_SUITE_TAGS" --rerun
+            -   name: Run Behat (Panther)
+                run: |
+                    $BEHAT_BASE_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" || \
+                    $BEHAT_RERUN_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" --rerun || \
+                    $BEHAT_RERUN_CMD --tags="$TAGS" --suite-tags="$SUITE_TAGS" --rerun
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log

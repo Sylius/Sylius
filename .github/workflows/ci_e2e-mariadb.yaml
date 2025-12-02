@@ -1,4 +1,4 @@
-name: End-to-End (MariaDB)
+name: Tests (MariaDB)
 
 on:
     workflow_dispatch: ~
@@ -41,10 +41,10 @@ jobs:
                     path: '.github/workflows/matrix.json'
                     prop_path: '${{ inputs.type }}.e2e-mariadb'
 
-    behat-no-js:
+    phpunit-cli-api:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
+        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
         timeout-minutes: 45
         strategy:
             fail-fast: false
@@ -55,12 +55,11 @@ jobs:
             DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
             TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
-            BEHAT_CLI_TAGS: "@cli&&~@todo"
-            BEHAT_CLI_SUITES: "@cli"
-            BEHAT_NON_UI_TAGS: "~@todo&&~@cli"
-            BEHAT_NON_UI_SUITES: "@api,@domain"
-            BEHAT_NON_JS_TAGS: "~@javascript&&~@mink:chromedriver&&~@todo&&~@cli"
-            BEHAT_NON_JS_SUITES: "@hybrid,@ui"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty"
+            CLI_TAGS: "@cli&&~@todo"
+            CLI_SUITE_TAGS: "@cli"
+            API_TAGS: "~@todo&&~@cli"
+            API_SUITE_TAGS: "@api,@domain"
 
         steps:
             -   name: Set variables
@@ -87,8 +86,8 @@ jobs:
             -   name: Require Winzou State Machine
                 if: "${{ matrix.state_machine_adapter == 'winzou_state_machine' }}"
                 run: |
-                    composer require winzou/state-machine:^0.4 --no-update   
-                    composer require winzou/state-machine-bundle:^0.6 --no-update   
+                    composer require winzou/state-machine:^0.4 --no-update
+                    composer require winzou/state-machine-bundle:^0.6 --no-update
 
             -   name: Prepare manifest.json files
                 if: "${{ inputs.branch != '1.14' }}"
@@ -101,7 +100,7 @@ jobs:
                     echo "{}" > public/build/shop/manifest.json
                     echo "{}" > public/build/app/admin/manifest.json
                     echo "{}" > public/build/app/shop/manifest.json
-                    
+
             -   name: Require Api Platform packages
                 if: ${{ matrix.api_platform != '' && matrix.api_platform != null }}
                 run: |
@@ -141,19 +140,121 @@ jobs:
                     vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always
 
             -   name: Run CLI Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_CLI_TAGS" --suite-tags="$BEHAT_CLI_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_CLI_TAGS" --suite-tags="$BEHAT_CLI_SUITES" --rerun
+                run: $BEHAT_BASE_CMD --tags="$CLI_TAGS" --suite-tags="$CLI_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$CLI_TAGS" --suite-tags="$CLI_SUITE_TAGS" --rerun
 
-            -   name: Run non-UI Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_NON_UI_TAGS" --suite-tags="$BEHAT_NON_UI_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_NON_UI_TAGS" --suite-tags="$BEHAT_NON_UI_SUITES" --rerun
-
-            -   name: Run non-JS Behat
-                run: $BEHAT_BASE_CMD --tags="$BEHAT_NON_JS_TAGS" --suite-tags="$BEHAT_NON_JS_SUITES" || $BEHAT_BASE_CMD --tags="$BEHAT_NON_JS_TAGS" --suite-tags="$BEHAT_NON_JS_SUITES" --rerun
+            -   name: Run API Behat
+                run: $BEHAT_BASE_CMD --tags="$API_TAGS" --suite-tags="$API_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$API_TAGS" --suite-tags="$API_SUITE_TAGS" --rerun
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    path: |
+                        etc/build/
+                        var/log
+                    if-no-files-found: ignore
+                    overwrite: true
+
+    behat-ui:
+        needs: get-matrix
+        runs-on: ubuntu-latest
+        name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
+        timeout-minutes: 45
+        strategy:
+            fail-fast: false
+            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+
+        env:
+            APP_ENV: test_cached
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=mariadb-${{ matrix.mariadb }}"
+            TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
+            BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty"
+            UI_TAGS: "~@javascript&&~@mink:chromedriver&&~@todo&&~@cli"
+            UI_SUITE_TAGS: "@hybrid,@ui"
+
+        steps:
+            -   name: Set variables
+                shell: bash
+                env:
+                    BRANCH: ${{ inputs.branch }}
+                run: |
+                    if [ "$BRANCH" == "1.14" ]; then
+                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
+                    else
+                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
+                    fi
+
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
+
+            -   name: Require Winzou State Machine
+                if: "${{ matrix.state_machine_adapter == 'winzou_state_machine' }}"
+                run: |
+                    composer require winzou/state-machine:^0.4 --no-update
+                    composer require winzou/state-machine-bundle:^0.6 --no-update
+
+            -   name: Prepare manifest.json files
+                if: "${{ inputs.branch != '1.14' }}"
+                run: |
+                    mkdir -p public/build/admin
+                    mkdir -p public/build/shop
+                    mkdir -p public/build/app/admin
+                    mkdir -p public/build/app/shop
+                    echo "{}" > public/build/admin/manifest.json
+                    echo "{}" > public/build/shop/manifest.json
+                    echo "{}" > public/build/app/admin/manifest.json
+                    echo "{}" > public/build/app/shop/manifest.json
+
+            -   name: Require Api Platform packages
+                if: ${{ matrix.api_platform != '' && matrix.api_platform != null }}
+                run: |
+                    REQ="${{ matrix.api_platform }}"
+                    composer require --no-update \
+                        api-platform/doctrine-common:${REQ} \
+                        api-platform/doctrine-orm:${REQ} \
+                        api-platform/documentation:${REQ} \
+                        api-platform/http-cache:${REQ} \
+                        api-platform/hydra:${REQ} \
+                        api-platform/json-schema:${REQ} \
+                        api-platform/jsonld:${REQ} \
+                        api-platform/metadata:${REQ} \
+                        api-platform/openapi:${REQ} \
+                        api-platform/serializer:${REQ} \
+                        api-platform/state:${REQ} \
+                        api-platform/symfony:${REQ} \
+                        api-platform/validator:${REQ}
+
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v3.0.1
+                with:
+                    build_type: "sylius"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-apip-${{ matrix.api_platform || 'none' }}-"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-apip-${{ matrix.api_platform || 'none' }}-"
+                    e2e: "yes"
+                    database: "mariadb"
+                    database_version: ${{ matrix.mariadb }}
+                    php_version: ${{ matrix.php }}
+                    symfony_version: ${{ matrix.symfony }}
+                    node_version: ${{ env.NODE_VERSION }}
+                    chrome_version: stable
+
+            -   name: Run UI Behat
+                run: $BEHAT_BASE_CMD --tags="$UI_TAGS" --suite-tags="$UI_SUITE_TAGS" || $BEHAT_RERUN_CMD --tags="$UI_TAGS" --suite-tags="$UI_SUITE_TAGS" --rerun
+
+            -   name: Upload logs
+                uses: actions/upload-artifact@v4
+                if: failure()
+                with:
+                    name: "Logs (UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
