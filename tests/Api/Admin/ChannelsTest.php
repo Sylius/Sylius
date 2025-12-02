@@ -123,8 +123,7 @@ final class ChannelsTest extends JsonApiTestCase
 
         $this->requestPost('/api/v2/admin/channels', $inputData);
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $this->assertJsonResponseViolations($this->client->getResponse(), [$validation], false);
+        $this->assertResponseContainsViolations([$validation]);
     }
 
     #[Test]

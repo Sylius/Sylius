@@ -15,7 +15,7 @@ Feature: Adding a simple product of given quantity to the cart
         When I check the details of my cart
         And I should see "T-Shirt banana" with quantity 5 in my cart
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding way too many products sets their quantity to 9999
         Given there are 100000 units of product "T-Shirt banana" available in the inventory
         When I try to add 20000 products "T-Shirt banana" to the cart

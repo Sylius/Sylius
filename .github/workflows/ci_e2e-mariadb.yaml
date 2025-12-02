@@ -70,8 +70,6 @@ jobs:
                 run: |
                     if [ "$BRANCH" == "1.14" ]; then
                         echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    elif [ "$BRANCH" == "2.0" ]; then
-                        echo "NODE_VERSION=22.x" >> $GITHUB_ENV
                     else
                         echo "NODE_VERSION=24.x" >> $GITHUB_ENV
                     fi

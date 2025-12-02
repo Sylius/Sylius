@@ -9,7 +9,7 @@ Feature: Changing quantity of a product in cart
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Increasing quantity of an item in cart
         Given I added product "T-Shirt banana" to the cart
         When I see the summary of my cart
@@ -17,7 +17,7 @@ Feature: Changing quantity of a product in cart
         Then I should see "T-Shirt banana" with quantity 2 in my cart
         And my cart items total should be "$25.08"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Increasing quantity of an item in cart beyond the threshold
         Given I added product "T-Shirt banana" to the cart
         When I see the summary of my cart

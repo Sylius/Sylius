@@ -11,7 +11,7 @@ Feature: Applying promotion coupon
         And this promotion gives "$10.00" discount to every order
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Receiving fixed discount for my cart
         Given I added product "PHP T-Shirt" to the cart
         When I check the details of my cart
@@ -19,7 +19,7 @@ Feature: Applying promotion coupon
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Receiving no discount if promotion for the applied coupon is invalid
         Given I added product "PHP T-Shirt" to the cart
         When I check the details of my cart

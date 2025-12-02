@@ -52,7 +52,6 @@ final class ProcessLowestPricesOnChannelChangeObserverTest extends TestCase
 
         $ref = new \ReflectionObject($this->observer);
         $prop = $ref->getProperty('channelsCurrentlyProcessed');
-        $prop->setAccessible(true);
         $prop->setValue($this->observer, ['test' => true]);
 
         $this->assertFalse($this->observer->supports($channel));

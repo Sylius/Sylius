@@ -222,6 +222,92 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         return $this->request('DELETE', $uri, $queryParameters, $headers);
     }
 
+    protected function assertJsonResponseContent(Response $response, string $filename): void
+    {
+        $responseSource = $this->expectedResponsesPath;
+        $filepath = sprintf('%s/%s.json', $responseSource, $filename);
+        $contents = file_get_contents($filepath);
+
+        if ($contents === false) {
+            throw new \RuntimeException(sprintf('File %s does not exist', $filepath));
+        }
+
+        $expectedResponse = trim($contents);
+        $actualResponse = trim($this->prettifyJson($response->getContent()));
+
+        $matcher = $this->buildMatcher();
+        $result = $matcher->match($actualResponse, $expectedResponse);
+
+        if (!$result) {
+            $this->failWithJsonDiff($expectedResponse, $actualResponse, $filepath, $matcher->getError());
+        }
+    }
+
+    private function failWithJsonDiff(
+        string $expectedJson,
+        string $actualJson,
+        string $filepath,
+        ?string $matcherError = null,
+    ): void {
+        $expected = json_decode($expectedJson, true);
+        $actual = json_decode($actualJson, true);
+
+        $actualNormalized = $this->normalizeDynamicValues($actual, $expected);
+
+        $reset = "\033[0m";
+        self::assertSame($expected, $actualNormalized, $reset . "\nExpected response file: " . $filepath . ':1');
+    }
+
+    private function normalizeDynamicValues(mixed $actual, mixed $expected): mixed
+    {
+        if (!is_array($actual) || !is_array($expected)) {
+            return $actual;
+        }
+
+        $result = [];
+
+        foreach ($expected as $key => $expectedValue) {
+            if (!array_key_exists($key, $actual)) {
+                continue;
+            }
+
+            $actualValue = $actual[$key];
+
+            if (is_string($expectedValue) && $this->isPattern($expectedValue)) {
+                $result[$key] = $expectedValue;
+            } elseif (is_array($actualValue) && is_array($expectedValue)) {
+                $result[$key] = $this->normalizeDynamicValues($actualValue, $expectedValue);
+            } else {
+                $result[$key] = $actualValue;
+            }
+        }
+
+        foreach ($actual as $key => $value) {
+            if (!array_key_exists($key, $result)) {
+                $result[$key] = $value;
+            }
+        }
+
+        return $result;
+    }
+
+    private function isPattern(string $value): bool
+    {
+        // Patterns like @integer@, @string@, @uuid@, etc.
+        if (preg_match('/^@\w+@/', $value)) {
+            return true;
+        }
+        // Patterns embedded in strings like "/api/v2/shop/orders/@integer@"
+        if (str_contains($value, '@integer@') || str_contains($value, '@string@') || str_contains($value, '@uuid@')) {
+            return true;
+        }
+        // Patterns with methods like @string@.contains('...')
+        if (preg_match('/@\w+@\./', $value)) {
+            return true;
+        }
+        return false;
+    }
+
     /** @throws \Exception */
     protected function assertResponseSuccessful(string $filename): void
     {
@@ -286,38 +372,74 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     }
 
     /**
-     * @throws \Exception
+     * Asserts that response contains exactly the expected violations (exact match).
      *
      * @param array<array-key, mixed> $expectedViolations
+     *
+     * @throws \Exception
      */
-    protected function assertResponseViolations(Response $response, array $expectedViolations): void
+    protected function assertResponseViolations(array $expectedViolations): void
     {
-        if (isset($_SERVER['OPEN_ERROR_IN_BROWSER']) && true === $_SERVER['OPEN_ERROR_IN_BROWSER']) {
-            $this->showErrorInBrowserIfOccurred($response);
-        }
+        $this->assertViolationResponseHeaders();
 
-        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
-        $this->assertJsonHeader($response);
-        $this->assertJsonResponseViolations($response, $expectedViolations);
+        $response = $this->client->getResponse();
+        $responseContent = $response->getContent() ?: '';
+        $this->assertNotEmpty($responseContent);
+
+        $decoded = json_decode($responseContent, true);
+        $actualViolations = $decoded['violations'];
+        $actualDescription = $decoded['hydra:description'];
+
+        array_walk($actualViolations, function (&$item): void {
+            unset($item['code']);
+        });
+
+        $mappedViolations = array_map(function (array $violation): string {
+            if (empty($violation['propertyPath'])) {
+                return $violation['message'];
+            }
+
+            return $violation['propertyPath'] . ': ' . $violation['message'];
+        }, $expectedViolations);
+
+        $expectedDescription = implode("\n", $mappedViolations);
+
+        $expected = [
+            '@context' => '/api/v2/contexts/ConstraintViolationList',
+            '@type' => 'ConstraintViolationList',
+            'hydra:title' => 'An error occurred',
+            'hydra:description' => $expectedDescription,
+            'violations' => $expectedViolations,
+        ];
+
+        $actual = [
+            '@context' => '/api/v2/contexts/ConstraintViolationList',
+            '@type' => 'ConstraintViolationList',
+            'hydra:title' => 'An error occurred',
+            'hydra:description' => $actualDescription,
+            'violations' => $actualViolations,
+        ];
+
+        $this->assertSame($expected, $actual);
     }
 
     /**
-     * @throws \Exception
+     * Asserts that response contains at least the expected violations (contains mode).
+     * Use this when the response may contain additional violations beyond those specified.
      *
      * @param array<array-key, mixed> $expectedViolations
+     *
+     * @throws \Exception
      */
-    protected function assertJsonResponseViolations(
-        Response $response,
-        array $expectedViolations,
-        bool $assertViolationsCount = true,
-    ): void {
+    protected function assertResponseContainsViolations(array $expectedViolations): void
+    {
+        $this->assertViolationResponseHeaders();
+
+        $response = $this->client->getResponse();
         $responseContent = $response->getContent() ?: '';
         $this->assertNotEmpty($responseContent);
-        $violations = json_decode($responseContent, true)['violations'] ?? [];
 
-        if ($assertViolationsCount) {
-            $this->assertCount(count($expectedViolations), $violations, $responseContent);
-        }
+        $violations = json_decode($responseContent, true)['violations'] ?? [];
 
         $violationMap = [];
         foreach ($violations as $violation) {
@@ -329,6 +451,18 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             $this->assertArrayHasKey($propertyPath, $violationMap, $responseContent);
             $this->assertContains($expectedViolation['message'], $violationMap[$propertyPath], $responseContent);
         }
+    }
+
+    private function assertViolationResponseHeaders(): void
+    {
+        $response = $this->client->getResponse();
+
+        if (isset($_SERVER['OPEN_ERROR_IN_BROWSER']) && true === $_SERVER['OPEN_ERROR_IN_BROWSER']) {
+            $this->showErrorInBrowserIfOccurred($response);
+        }
+
+        $this->assertResponseCode($response, Response::HTTP_UNPROCESSABLE_ENTITY);
+        $this->assertJsonHeader($response);
     }
 
     /**

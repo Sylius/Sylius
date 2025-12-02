@@ -79,6 +79,7 @@ class TreeComponent
             $treeChild = [
                 'id' => $taxon['id'],
                 'name' => $taxon['name'],
+                'enabled' => (bool) $taxon['enabled'],
                 'children' => $children[$taxon['id']] ?? [],
             ];
 

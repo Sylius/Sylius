@@ -153,7 +153,6 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'rating',

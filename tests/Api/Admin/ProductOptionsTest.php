@@ -118,27 +118,24 @@ final class ProductOptionsTest extends JsonApiTestCase
             ],
         );
 
-        $this->assertResponseViolations(
-            $this->client->getResponse(),
+        $this->assertResponseContainsViolations([
             [
-                [
-                    'propertyPath' => 'code',
-                    'message' => 'Please enter option code.',
-                ],
-                [
-                    'propertyPath' => 'values[0].code',
-                    'message' => 'Please enter option value code.',
-                ],
-                [
-                    'propertyPath' => 'values[0].translations[en_US].value',
-                    'message' => 'Please enter option value.',
-                ],
-                [
-                    'propertyPath' => 'translations[en_US].name',
-                    'message' => 'Please enter option name.',
-                ],
+                'propertyPath' => 'code',
+                'message' => 'Please enter option code.',
             ],
-        );
+            [
+                'propertyPath' => 'values[0].code',
+                'message' => 'Please enter option value code.',
+            ],
+            [
+                'propertyPath' => 'values[0].translations[en_US].value',
+                'message' => 'Please enter option value.',
+            ],
+            [
+                'propertyPath' => 'translations[en_US].name',
+                'message' => 'Please enter option name.',
+            ],
+        ]);
     }
 
     #[Test]

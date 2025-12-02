@@ -111,7 +111,6 @@ final class CatalogPromotionExecutorListenerTest extends TestCase
         $dispatchedCodes = array_map(function (UpdateCatalogPromotionState $command) {
             $reflection = new \ReflectionObject($command);
             $property = $reflection->getProperty('code');
-            $property->setAccessible(true);
 
             return $property->getValue($command);
         }, $dispatchedCommands)

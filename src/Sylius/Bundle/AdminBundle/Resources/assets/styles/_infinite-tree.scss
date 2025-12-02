@@ -32,6 +32,12 @@
             border: none;
         }
 
+        &.taxon-disabled {
+            .infinite-tree-title {
+                color: $text-secondary;
+            }
+        }
+
         .infinite-tree-node {
             display: flex;
             flex: 1;

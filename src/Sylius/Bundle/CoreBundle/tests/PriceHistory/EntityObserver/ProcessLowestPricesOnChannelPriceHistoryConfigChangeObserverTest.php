@@ -75,7 +75,6 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserverTest ext
 
         $reflection = new \ReflectionObject($this->observer);
         $property = $reflection->getProperty('configsCurrentlyProcessed');
-        $property->setAccessible(true);
         $property->setValue($this->observer, [1 => true]);
 
         $this->assertFalse($this->observer->supports($config));
@@ -100,6 +99,7 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserverTest ext
     public function testDoesNothingWhenNoChannelFoundForConfig(): void
     {
         $config = $this->createMock(ChannelPriceHistoryConfigInterface::class);
+        $config->method('getId')->willReturn(1);
 
         $this->channelRepository
             ->expects($this->once())
@@ -119,6 +119,7 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserverTest ext
     public function testDelegatesProcessingToCommandDispatcher(): void
     {
         $config = $this->createMock(ChannelPriceHistoryConfigInterface::class);
+        $config->method('getId')->willReturn(1);
         $channel = $this->createMock(ChannelInterface::class);
 
         $this->channelRepository

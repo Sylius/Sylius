@@ -9,7 +9,7 @@ Feature: Adding a simple product to the cart
         And the store has a product "Sylius T-Shirt"
         And the store ships everywhere for free
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Adding a simple product to the cart
         When I add product "Sylius T-Shirt" to the cart
         Then I should be on my cart summary page
