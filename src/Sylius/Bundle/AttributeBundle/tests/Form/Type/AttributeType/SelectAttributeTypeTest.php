@@ -24,7 +24,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class SelectAttributeTypeTest extends TypeTestCase
 {
-    private TranslationLocaleProviderInterface&MockObject $translationProvider;
+    private MockObject&TranslationLocaleProviderInterface $translationProvider;
 
     #[Test]
     public function it_return_all_choices(): void

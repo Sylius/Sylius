@@ -34,11 +34,11 @@ final class HubNotificationProviderTest extends TestCase
 {
     private ClientInterface&MockObject $client;
 
-    private RequestStack&MockObject $requestStack;
+    private MockObject&RequestStack $requestStack;
 
-    private RequestFactoryInterface&MockObject $requestFactory;
+    private MockObject&RequestFactoryInterface $requestFactory;
 
-    private StreamFactoryInterface&MockObject $streamFactory;
+    private MockObject&StreamFactoryInterface $streamFactory;
 
     private CacheInterface&MockObject $cache;
 

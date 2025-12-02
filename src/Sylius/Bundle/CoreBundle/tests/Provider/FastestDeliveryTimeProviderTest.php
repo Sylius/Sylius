@@ -23,7 +23,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 final class FastestDeliveryTimeProviderTest extends TestCase
 {
-    private ShippingMethodRepositoryInterface&MockObject $repository;
+    private MockObject&ShippingMethodRepositoryInterface $repository;
 
     private FastestDeliveryTimeProvider $provider;
 

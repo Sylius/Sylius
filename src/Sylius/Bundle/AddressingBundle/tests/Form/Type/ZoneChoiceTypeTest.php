@@ -26,13 +26,13 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class ZoneChoiceTypeTest extends TypeTestCase
 {
-    private RepositoryInterface&MockObject $zoneRepository;
+    private MockObject&RepositoryInterface $zoneRepository;
 
-    private ZoneInterface&MockObject $zoneAllScopes;
+    private MockObject&ZoneInterface $zoneAllScopes;
 
-    private ZoneInterface&MockObject $zoneTaxScope;
+    private MockObject&ZoneInterface $zoneTaxScope;
 
-    private ZoneInterface&MockObject $zoneShippingScope;
+    private MockObject&ZoneInterface $zoneShippingScope;
 
     protected function setUp(): void
     {

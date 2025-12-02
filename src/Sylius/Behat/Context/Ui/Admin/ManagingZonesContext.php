@@ -377,7 +377,6 @@ final class ManagingZonesContext implements Context
         );
     }
 
-
     /**
      * @Given the :zone zone should have priority :priority
      */

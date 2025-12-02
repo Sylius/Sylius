@@ -94,7 +94,6 @@ final readonly class ZoneContext implements Context
         $this->saveZone($zone, 'zone');
     }
 
-
     /**
      * @Given the store has zones :firstName, :secondName and :thirdName
      */
