@@ -4,6 +4,20 @@
    a `Symfony\Component\Clock\ClockInterface` as the third argument. Not passing it is deprecated
    and will be prohibited in Sylius 3.0.
 
+1. The priorities of hookables in `sylius_admin.order.update.content.form.shipping_address` hook have been adjusted
+   to match `sylius_admin.order.update.content.form.billing_address` and fix duplicate priority values.
+   If you have customized these hooks or added custom hookables with priorities between the old values,
+   please review your priority configuration:
+
+   | Hookable       | Old Priority | New Priority |
+   |----------------|--------------|--------------|
+   | company        | 700          | 800          |
+   | first_name     | 600          | 700          |
+   | last_name      | 500          | 600          |
+   | country        | 400          | 500          |
+   | phone_number   | 300          | 400          |
+   | street_address | 200          | 300          |
+
 # UPGRADE FROM `2.1.7` TO `2.1.8`
 
 ## State Machine

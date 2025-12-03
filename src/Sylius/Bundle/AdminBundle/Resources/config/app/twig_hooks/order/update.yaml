@@ -61,22 +61,22 @@ sylius_twig_hooks:
         'sylius_admin.order.update.content.form.shipping_address':
             company:
                 template: '@SyliusAdmin/order/form/common/company.html.twig'
-                priority: 700
+                priority: 800
             first_name:
                 template: '@SyliusAdmin/order/form/common/first_name.html.twig'
-                priority: 600
+                priority: 700
             last_name:
                 template: '@SyliusAdmin/order/form/common/last_name.html.twig'
-                priority: 500
+                priority: 600
             country:
                 template: '@SyliusAdmin/order/form/common/country.html.twig'
-                priority: 400
+                priority: 500
             phone_number:
                 template: '@SyliusAdmin/order/form/common/phone_number.html.twig'
-                priority: 300
+                priority: 400
             street_address:
                 template: '@SyliusAdmin/order/form/common/street_address.html.twig'
-                priority: 200
+                priority: 300
             city:
                 template: '@SyliusAdmin/order/form/common/city.html.twig'
                 priority: 200
