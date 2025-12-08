@@ -24,7 +24,6 @@
 .navbar-collapse a.nav-link,
 .navbar-collapse a.dropdown-item {
     transition: all .1s;
-    min-height: 44px;
 
     &:hover {
         color: var(--tblr-primary) !important;
