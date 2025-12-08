@@ -24,6 +24,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class UniqueReviewerEmailValidatorTest extends TestCase
@@ -55,15 +56,19 @@ final class UniqueReviewerEmailValidatorTest extends TestCase
     {
         /** @var ShopUserInterface|MockObject $shopUserMock */
         $shopUserMock = $this->createMock(ShopUserInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $this->userContext->expects(self::once())->method('getUser')->willReturn(null);
         $this->shopUserRepository->expects(self::once())->method('findOneByEmail')->with('email@example.com')->willReturn($shopUserMock);
-        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.review.author.already_exists');
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.review.author.already_exists')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(UniqueReviewerEmail::REVIEWER_ALREADY_EXISTS_ERROR)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
         $this->uniqueReviewerEmailValidator->validate('email@example.com', new UniqueReviewerEmail());
     }
 
     public function testDoesNothingIfValueIsNull(): void
     {
-        $this->executionContext->expects(self::never())->method('addViolation');
+        $this->executionContext->expects(self::never())->method('buildViolation');
         $this->uniqueReviewerEmailValidator->validate(null, new UniqueReviewerEmail());
     }
 
@@ -82,7 +87,7 @@ final class UniqueReviewerEmailValidatorTest extends TestCase
         $shopUserMock = $this->createMock(ShopUserInterface::class);
         $this->userContext->expects(self::once())->method('getUser')->willReturn($shopUserMock);
         $shopUserMock->expects(self::once())->method('getEmail')->willReturn('email@example.com');
-        $this->executionContext->expects(self::never())->method('addViolation');
+        $this->executionContext->expects(self::never())->method('buildViolation');
         $this->uniqueReviewerEmailValidator->validate('email@example.com', new UniqueReviewerEmail());
     }
 }

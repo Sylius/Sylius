@@ -19,6 +19,9 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class CorrectOrderAddress extends Constraint
 {
+    public const COUNTRY_NOT_EXIST_ERROR = 'COUNTRY_NOT_FOUND';
+    public const ADDRESS_WITHOUT_COUNTRY_ERROR = 'ADDRESS_WITHOUT_COUNTRY';
+
     /**
      * @param array<string, mixed>|null $options
      */

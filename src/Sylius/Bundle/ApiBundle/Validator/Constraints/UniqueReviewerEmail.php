@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class UniqueReviewerEmail extends Constraint
 {
+    public const REVIEWER_ALREADY_EXISTS_ERROR = 'REVIEWER_ALREADY_EXISTS';
+
     /**
      * @param array<string, mixed>|null $options
      */

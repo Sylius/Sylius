@@ -62,6 +62,7 @@ final class ConfirmResetPasswordValidatorTest extends TestCase
         $value = new ResetPassword('token', 'password', 'differentPassword');
         $executionContextMock->expects(self::once())->method('buildViolation')->with($constraint->message)->willReturn($constraintViolationBuilderMock);
         $constraintViolationBuilderMock->expects(self::once())->method('atPath')->with('newPassword')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(ConfirmResetPassword::PASSWORD_MISMATCH_ERROR)->willReturn($constraintViolationBuilderMock);
         $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
         $this->confirmResetPasswordValidator->validate($value, $constraint);
     }

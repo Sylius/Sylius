@@ -59,10 +59,12 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $value->productVariantCode]);
 
         if ($productVariant === null) {
-            $this->context->addViolation(
-                $constraint->productVariantNotExistMessage,
-                ['%productVariantCode%' => $value->productVariantCode],
-            );
+            $this->context
+                ->buildViolation($constraint->productVariantNotExistMessage)
+                ->setParameter('%productVariantCode%', $value->productVariantCode)
+                ->setCode(AddingEligibleProductVariantToCart::PRODUCT_VARIANT_NOT_EXIST_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -70,19 +72,23 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         /** @var ProductInterface $product */
         $product = $productVariant->getProduct();
         if (!$product->isEnabled()) {
-            $this->context->addViolation(
-                $constraint->productNotExistMessage,
-                ['%productName%' => $product->getName()],
-            );
+            $this->context
+                ->buildViolation($constraint->productNotExistMessage)
+                ->setParameter('%productName%', $product->getName())
+                ->setCode(AddingEligibleProductVariantToCart::PRODUCT_NOT_EXIST_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
 
         if (!$productVariant->isEnabled()) {
-            $this->context->addViolation(
-                $constraint->productVariantNotExistMessage,
-                ['%productVariantCode%' => $productVariant->getCode()],
-            );
+            $this->context
+                ->buildViolation($constraint->productVariantNotExistMessage)
+                ->setParameter('%productVariantCode%', $productVariant->getCode())
+                ->setCode(AddingEligibleProductVariantToCart::PRODUCT_VARIANT_NOT_EXIST_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -91,10 +97,12 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
             $productVariant,
             $value->quantity + $this->getExistingCartItemQuantityFromCart($cart, $productVariant),
         )) {
-            $this->context->addViolation(
-                $constraint->productVariantNotSufficientMessage,
-                ['%productVariantCode%' => $productVariant->getCode()],
-            );
+            $this->context
+                ->buildViolation($constraint->productVariantNotSufficientMessage)
+                ->setParameter('%productVariantCode%', (string) $productVariant->getCode())
+                ->setCode(AddingEligibleProductVariantToCart::PRODUCT_VARIANT_NOT_SUFFICIENT_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -103,10 +111,12 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         Assert::notNull($channel);
 
         if (!$product->hasChannel($channel)) {
-            $this->context->addViolation(
-                $constraint->productNotExistMessage,
-                ['%productName%' => $product->getName()],
-            );
+            $this->context
+                ->buildViolation($constraint->productNotExistMessage)
+                ->setParameter('%productName%', $product->getName())
+                ->setCode(AddingEligibleProductVariantToCart::PRODUCT_NOT_EXIST_ERROR)
+                ->addViolation()
+            ;
         }
     }
 

@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class PlacedOrderCartItemsImmutable extends Constraint
 {
+    public const CART_ITEMS_IMMUTABLE_ERROR = 'CART_ITEMS_IMMUTABLE';
+
     /**
      * @param array<string, mixed>|null $options
      */

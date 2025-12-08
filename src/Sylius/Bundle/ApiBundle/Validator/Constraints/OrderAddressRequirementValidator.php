@@ -53,7 +53,12 @@ final class OrderAddressRequirementValidator extends ConstraintValidator
         [$property, $addressName] = $channel->isShippingAddressInCheckoutRequired() ? ['shippingAddress', 'shipping address'] : ['billingAddress', 'billing address'];
 
         if (null === $value->$property) {
-            $this->context->addViolation($constraint->message, ['%addressName%' => $addressName]);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setParameter('%addressName%', $addressName)
+                ->setCode(OrderAddressRequirement::ADDRESS_REQUIRED_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

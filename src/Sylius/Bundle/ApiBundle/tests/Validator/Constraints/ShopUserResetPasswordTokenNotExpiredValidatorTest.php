@@ -23,6 +23,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ShopUserResetPasswordTokenNotExpiredValidatorTest extends TestCase
@@ -91,6 +92,7 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorTest extends TestCase
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
         /** @var UserInterface|MockObject $userMock */
         $userMock = $this->createMock(UserInterface::class);
+        $constraint = new ShopUserResetPasswordTokenNotExpired();
         $this->shopUserResetPasswordTokenNotExpiredValidator->initialize($executionContextMock);
         $userMock->expects(self::once())->method('isPasswordRequestNonExpired')->with($this->callback(function (\DateInterval $dateInterval) {
             $this->assertSame('1', $dateInterval->format('%d'));
@@ -98,7 +100,22 @@ final class ShopUserResetPasswordTokenNotExpiredValidatorTest extends TestCase
             return true;
         }))->willReturn(false);
         $this->userRepository->expects(self::once())->method('findOneBy')->with(['passwordResetToken' => 'token'])->willReturn($userMock);
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.reset_password.token_expired');
-        $this->shopUserResetPasswordTokenNotExpiredValidator->validate('token', new ShopUserResetPasswordTokenNotExpired());
+
+        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $executionContextMock
+            ->expects(self::once())
+            ->method('buildViolation')
+            ->with($constraint->message)
+            ->willReturn($violationBuilder);
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setCode')
+            ->with(ShopUserResetPasswordTokenNotExpired::TOKEN_EXPIRED_ERROR)
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('addViolation');
+
+        $this->shopUserResetPasswordTokenNotExpiredValidator->validate('token', $constraint);
     }
 }

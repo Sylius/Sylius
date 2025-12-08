@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class UniqueShopUserEmail extends Constraint
 {
+    public const EMAIL_NOT_UNIQUE_ERROR = 'EMAIL_ALREADY_EXISTS';
+
     /**
      * @param array<string, mixed>|null $options
      */

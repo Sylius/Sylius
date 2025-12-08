@@ -28,6 +28,7 @@ use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ChosenPaymentMethodEligibilityValidatorTest extends TestCase
@@ -98,8 +99,13 @@ final class ChosenPaymentMethodEligibilityValidatorTest extends TestCase
         $firstPaymentMethodMock->expects(self::once())->method('getName')->willReturn('offline');
         $this->paymentRepository->expects(self::once())->method('find')->with('123')->willReturn($paymentMock);
         $this->paymentMethodsResolver->expects(self::once())->method('getSupportedMethods')->with($paymentMock)->willReturn([$secondPaymentMethodMock, $thirdPaymentMethodMock]);
-        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.payment_method.not_available', ['%name%' => 'offline'])
-        ;
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.payment_method.not_available')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%name%', 'offline')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChosenPaymentMethodEligibility::PAYMENT_METHOD_NOT_AVAILABLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
+
         $this->chosenPaymentMethodEligibilityValidator->validate($command, new ChosenPaymentMethodEligibility());
     }
 
@@ -136,8 +142,12 @@ final class ChosenPaymentMethodEligibilityValidatorTest extends TestCase
         );
         $this->paymentMethodRepository->expects(self::once())->method('findOneBy')->with(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($paymentMethodMock);
         $this->paymentRepository->expects(self::once())->method('find')->with('123')->willReturn(null);
-        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.payment.not_found')
-        ;
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.payment.not_found')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChosenPaymentMethodEligibility::PAYMENT_NOT_FOUND_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
+
         $this->chosenPaymentMethodEligibilityValidator->validate($command, new ChosenPaymentMethodEligibility());
     }
 
@@ -149,8 +159,13 @@ final class ChosenPaymentMethodEligibilityValidatorTest extends TestCase
             paymentId: 123,
         );
         $this->paymentMethodRepository->expects(self::once())->method('findOneBy')->with(['code' => 'PAYMENT_METHOD_CODE'])->willReturn(null);
-        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.payment_method.not_exist', ['%code%' => 'PAYMENT_METHOD_CODE'])
-        ;
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.payment_method.not_exist')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%code%', 'PAYMENT_METHOD_CODE')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChosenPaymentMethodEligibility::PAYMENT_METHOD_NOT_EXIST_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
+
         $this->chosenPaymentMethodEligibilityValidator->validate($command, new ChosenPaymentMethodEligibility());
     }
 
@@ -171,8 +186,8 @@ final class ChosenPaymentMethodEligibilityValidatorTest extends TestCase
         $firstPaymentMethodMock->method('getName')->willReturn('offline');
         $this->paymentRepository->expects(self::once())->method('find')->with('123')->willReturn($paymentMock);
         $this->paymentMethodsResolver->expects(self::once())->method('getSupportedMethods')->with($paymentMock)->willReturn([$firstPaymentMethodMock, $secondPaymentMethodMock]);
-        $this->executionContext->expects(self::never())->method('addViolation')->with('sylius.payment_method.not_exist', ['%code%' => 'PAYMENT_METHOD_CODE'])
-        ;
+        $this->executionContext->expects(self::never())->method('buildViolation');
+
         $this->chosenPaymentMethodEligibilityValidator->validate(
             $command,
             new ChosenPaymentMethodEligibility(),

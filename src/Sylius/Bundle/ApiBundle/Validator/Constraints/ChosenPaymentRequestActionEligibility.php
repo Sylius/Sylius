@@ -19,6 +19,9 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ChosenPaymentRequestActionEligibility extends Constraint
 {
+    public const ACTION_NOT_AVAILABLE_ERROR = 'PAYMENT_REQUEST_ACTION_NOT_AVAILABLE';
+    public const PAYMENT_METHOD_NOT_EXIST_ERROR = 'PAYMENT_METHOD_NOT_FOUND';
+
     /** @deprecated since Sylius 2.3, use $notAvailableMessage instead. It will be removed in Sylius 3.0. */
     public string $notAvailable = 'sylius.payment_request.action_not_available';
 
