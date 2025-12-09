@@ -1,9 +1,6 @@
 name: Continuous Integration 2.1 (Full)
 
 on:
-    pull_request:
-        branches:
-            - '2.1'
     push:
         branches:
             - 'full-ci/**'
@@ -21,7 +18,6 @@ permissions:
 
 jobs:
     static-checks:
-        if: ${{ github.event_name != 'pull_request' || startsWith(github.head_ref, 'full-ci/') }}
         strategy:
             matrix:
                 branch: ["2.1"]
