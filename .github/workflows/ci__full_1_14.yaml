@@ -1,9 +1,6 @@
 name: Continuous Integration 1.14 (Full)
 
 on:
-    pull_request:
-        branches:
-            - '1.14'
     push:
         branches:
             - 'full-ci/**'
@@ -21,7 +18,6 @@ permissions:
 
 jobs:
     static-checks:
-        if: ${{ github.event_name != 'pull_request' || startsWith(github.head_ref, 'full-ci/') }}
         strategy:
             matrix:
                 branch: ["1.14"]
@@ -80,7 +76,7 @@ jobs:
     notify-about-build-status:
         if: ${{ always() }}
         name: "Notify about build status"
-        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, packages]
+        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, frontend, packages]
         runs-on: ubuntu-latest
         timeout-minutes: 5
 
@@ -107,6 +103,7 @@ jobs:
                         ${{ needs.e2e-mariadb.result == 'success' && ':+1:' || ':x:' }} End-to-End (MariaDB)
                         ${{ needs.e2e-mysql.result == 'success' && ':+1:' || ':x:' }} End-to-End (MySQL)
                         ${{ needs.e2e-pgsql.result == 'success' && ':+1:' || ':x:' }} End-to-End (PostgreSQL)
+                        ${{ needs.frontend.result == 'success' && ':+1:' || ':x:' }} Frontend
                         ${{ needs.packages.result == 'success' && ':+1:' || ':x:' }} Packages
 
                         _ _ _ _ _ _ _
