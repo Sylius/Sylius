@@ -13,13 +13,9 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Notification;
 
-use GuzzleHttp\Exception\ConnectException;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Clock\ClockInterface;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -34,126 +30,88 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 final class HubNotificationProviderTest extends TestCase
 {
-    use ProphecyTrait;
-
-    private ClientInterface|ObjectProphecy $client;
-
-    private ObjectProphecy|RequestStack $requestStack;
-
-    private ObjectProphecy|RequestFactoryInterface $requestFactory;
-
-    private ObjectProphecy|StreamFactoryInterface $streamFactory;
-
-    private CacheInterface|ObjectProphecy $cache;
-
-    private ClockInterface|ObjectProphecy $clock;
-
-    private HubNotificationProvider $hubNotificationsProvider;
-
-    private static string $hubUri = 'www.doesnotexist.test.com';
-
-    public function setUp(): void
+    public function testDoesNotReturnNotificationIfClientExceptionOccurs(): void
     {
-        parent::setUp();
+        $provider = $this->createProvider(
+            hubResponse: $this->createMock(ClientExceptionInterface::class),
+        );
 
-        $this->client = $this->prophesize(ClientInterface::class);
-        $this->requestStack = $this->prophesize(RequestStack::class);
-        $this->requestFactory = $this->prophesize(RequestFactoryInterface::class);
-        $this->streamFactory = $this->prophesize(StreamFactoryInterface::class);
-        $this->cache = $this->prophesize(CacheInterface::class);
-        $this->clock = $this->prophesize(ClockInterface::class);
+        $this->assertEmpty($provider->getNotifications());
+    }
 
-        $this->hubNotificationsProvider = new HubNotificationProvider(
-            $this->client->reveal(),
-            $this->requestStack->reveal(),
-            $this->requestFactory->reveal(),
-            $this->streamFactory->reveal(),
-            $this->cache->reveal(),
-            $this->clock->reveal(),
-            self::$hubUri,
+    public function testDoesNotReturnNotificationIfCurrentVersionIsSameAsLatest(): void
+    {
+        $provider = $this->createProvider(
+            hubResponse: ['version' => SyliusCoreBundle::VERSION],
+        );
+
+        $this->assertEmpty($provider->getNotifications());
+    }
+
+    public function testReturnsNotificationIfVersionIsDifferent(): void
+    {
+        $provider = $this->createProvider(hubResponse: ['version' => '1.0.0']);
+
+        $this->assertSame([
+            'latest_sylius_version' => [
+                'message' => 'sylius.ui.notifications.new_version_of_sylius_available',
+                'latest_version' => '1.0.0',
+            ],
+        ], $provider->getNotifications());
+    }
+
+    public function testDoesNotReturnNotificationIfHubResponseHasNoVersion(): void
+    {
+        $provider = $this->createProvider(hubResponse: ['foo' => 'bar']);
+
+        $this->assertEmpty($provider->getNotifications());
+    }
+
+    private function createProvider(array|\Throwable $hubResponse): HubNotificationProvider
+    {
+        $request = $this->createMock(RequestInterface::class);
+        $request->method('withHeader')->willReturnSelf();
+        $request->method('withBody')->willReturnSelf();
+
+        $requestFactory = $this->createMock(RequestFactoryInterface::class);
+        $requestFactory->method('createRequest')->willReturn($request);
+
+        $stream = $this->createMock(StreamInterface::class);
+
+        $streamFactory = $this->createMock(StreamFactoryInterface::class);
+        $streamFactory->method('createStream')->willReturn($stream);
+
+        $requestStack = $this->createMock(RequestStack::class);
+        $requestStack->method('getCurrentRequest')->willReturn(new Request());
+
+        $clock = $this->createMock(ClockInterface::class);
+        $clock->method('now')->willReturn(new \DateTimeImmutable());
+
+        $cache = $this->createMock(CacheInterface::class);
+        $cache->method('get')->willReturnCallback(fn ($key, $callback) => $callback());
+
+        $client = $this->createMock(ClientInterface::class);
+
+        if ($hubResponse instanceof \Throwable) {
+            $client->method('sendRequest')->willThrowException($hubResponse);
+        } else {
+            $stream->method('getContents')->willReturn(json_encode($hubResponse));
+            $response = $this->createMock(ResponseInterface::class);
+            $response->method('getBody')->willReturn($stream);
+            $client->method('sendRequest')->willReturn($response);
+        }
+
+        return new HubNotificationProvider(
+            $client,
+            $requestStack,
+            $requestFactory,
+            $streamFactory,
+            $cache,
+            $clock,
+            'https://hub.example.com',
             'prod',
             true,
             60,
         );
-    }
-
-    #[Test]
-    public function it_returns_an_empty_array_if_client_exception_occurs(): void
-    {
-        $request = $this->prophesize(RequestInterface::class);
-        $stream = $this->prophesize(StreamInterface::class);
-
-        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(fn ($args) => $args[1]());
-
-        $this->requestStack->getCurrentRequest()->willReturn(new Request());
-        $this->clock->now()->willReturn(new \DateTimeImmutable());
-        $this->streamFactory->createStream(Argument::cetera())->willReturn($stream);
-
-        $this->requestFactory->createRequest(Argument::cetera())->willReturn($request);
-        $request->withHeader('Content-Type', 'application/json')->willReturn($request);
-        $request->withBody($stream)->willReturn($request);
-
-        $this->client->sendRequest(Argument::cetera())->willThrow(ConnectException::class);
-
-        $this->assertEmpty($this->hubNotificationsProvider->getNotifications());
-    }
-
-    #[Test]
-    public function it_returns_an_empty_array_if_the_current_version_is_the_same_as_latest(): void
-    {
-        $request = $this->prophesize(RequestInterface::class);
-        $stream = $this->prophesize(StreamInterface::class);
-        $externalResponse = $this->prophesize(ResponseInterface::class);
-
-        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(fn ($args) => $args[1]());
-
-        $this->requestStack->getCurrentRequest()->willReturn(new Request());
-        $this->clock->now()->willReturn(new \DateTimeImmutable());
-        $this->streamFactory->createStream(Argument::cetera())->willReturn($stream);
-
-        $content = json_encode(['version' => SyliusCoreBundle::VERSION]);
-        $stream->getContents()->willReturn($content);
-
-        $this->requestFactory->createRequest(Argument::cetera())->willReturn($request);
-        $request->withHeader('Content-Type', 'application/json')->willReturn($request);
-        $request->withBody($stream)->willReturn($request);
-
-        $externalResponse->getBody()->willReturn($stream->reveal());
-        $this->client->sendRequest(Argument::cetera())->willReturn($externalResponse->reveal());
-
-        $this->assertEmpty($this->hubNotificationsProvider->getNotifications());
-    }
-
-    #[Test]
-    public function it_returns_a_notification_if_the_current_version_is_different_than_latest(): void
-    {
-        $request = $this->prophesize(RequestInterface::class);
-        $stream = $this->prophesize(StreamInterface::class);
-        $externalResponse = $this->prophesize(ResponseInterface::class);
-
-        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(fn ($args) => $args[1]());
-
-        $this->requestStack->getCurrentRequest()->willReturn(new Request());
-        $this->clock->now()->willReturn(new \DateTimeImmutable());
-        $this->streamFactory->createStream(Argument::cetera())->willReturn($stream);
-
-        $content = json_encode(['version' => '1.0.0']);
-        $stream->getContents()->willReturn($content);
-
-        $this->requestFactory->createRequest(Argument::cetera())->willReturn($request);
-        $request->withHeader('Content-Type', 'application/json')->willReturn($request);
-        $request->withBody($stream)->willReturn($request);
-
-        $externalResponse->getBody()->willReturn($stream->reveal());
-        $this->client->sendRequest(Argument::cetera())->willReturn($externalResponse->reveal());
-
-        $notifications = $this->hubNotificationsProvider->getNotifications();
-
-        $this->assertNotEmpty($notifications);
-        $this->assertArrayHasKey('latest_sylius_version', $notifications);
-        $this->assertSame($notifications['latest_sylius_version'], [
-            'message' => 'sylius.ui.notifications.new_version_of_sylius_available',
-            'latest_version' => '1.0.0',
-        ]);
     }
 }
