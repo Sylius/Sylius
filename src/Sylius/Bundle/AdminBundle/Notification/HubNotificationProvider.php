@@ -28,6 +28,7 @@ final readonly class HubNotificationProvider implements NotificationProviderInte
 {
     public const LATEST_SYLIUS_VERSION_KEY = 'latest_sylius_version';
 
+    /** @param ClockInterface $clock @deprecated since Sylius 2.1.9, will be removed in Sylius 3.0 */
     public function __construct(
         private ClientInterface $client,
         private RequestStack $requestStack,
