@@ -83,7 +83,25 @@ final class ListAdminUsersCommandTest extends TestCase
         self::assertStringContainsString('List available admin users', $output);
         self::assertStringContainsString('admin@example.com', $output);
         self::assertStringContainsString('John', $output);
-        self::assertStringContainsString('ROLE_ADMINISTRATION_ACCESS', $output);
+        self::assertStringContainsString('ADMINISTRATION_ACCESS', $output);
+    }
+
+    #[Test]
+    public function it_displays_empty_table_when_no_admin_users_exist(): void
+    {
+        $this->userRepository
+            ->expects($this->once())
+            ->method('findAll')
+            ->willReturn([]);
+
+        $exitCode = $this->commandTester->execute([]);
+
+        self::assertSame(Command::SUCCESS, $exitCode);
+        $output = $this->commandTester->getDisplay();
+
+        self::assertStringContainsString('List available admin users', $output);
+        self::assertStringContainsString('ID', $output);
+        self::assertStringContainsString('E-Mail', $output);
     }
 
     #[Test]

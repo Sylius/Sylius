@@ -19,7 +19,6 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Helper\TableStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -36,7 +35,7 @@ final class ListAdminUsersCommand extends Command
     /** @param UserRepositoryInterface<AdminUserInterface> $adminUserRepository */
     public function __construct(
         private readonly UserRepositoryInterface $adminUserRepository,
-        private readonly EntityManagerInterface $adminManager,
+        private readonly EntityManagerInterface $entityManager,
     ) {
         parent::__construct();
     }
@@ -48,6 +47,7 @@ final class ListAdminUsersCommand extends Command
 
     protected function configure(): void
     {
+        $this->setAliases(['sylius:admin-users:list']);
         $this->addOption(
             'search',
             's',
@@ -87,7 +87,7 @@ final class ListAdminUsersCommand extends Command
     {
         $criteria = '%' . mb_strtolower($searchTerm) . '%';
 
-        return $this->adminManager->createQueryBuilder()
+        return $this->entityManager->createQueryBuilder()
             ->from(AdminUserInterface::class, 'u')
             ->select('u')
             ->where('LOWER(u.email) LIKE :criteria
@@ -107,7 +107,7 @@ final class ListAdminUsersCommand extends Command
     {
         $table = new Table($output);
         $table->setHeaders([
-            'ID', 'E-Mail', 'Username', 'First name', 'Last name', 'Locale code', 'Enabled', 'Roles',
+            'ID', 'E-Mail', 'Username', 'First name', 'Last name', 'Locale', 'Enabled', 'Roles',
         ]);
 
         foreach ($adminUsers as $adminUser) {
@@ -118,13 +118,28 @@ final class ListAdminUsersCommand extends Command
                 $adminUser->getFirstName() ?? '',
                 $adminUser->getLastName() ?? '',
                 $adminUser->getLocaleCode(),
-                $adminUser->isEnabled() ? 'Enabled' : 'Disabled',
-                $adminUser->getRoles() !== [] ? implode(', ', $adminUser->getRoles()) : 'No roles assigned',
+                $adminUser->isEnabled() ? '✔' : '✘',
+                $this->formatRoles($adminUser->getRoles()),
             ]);
         }
 
-        $tableStyle = new TableStyle();
-        $tableStyle->setPadType(\STR_PAD_BOTH);
-        $table->setStyle($tableStyle)->render();
+        $table->render();
+    }
+
+    /**
+     * @param array<string> $roles
+     */
+    private function formatRoles(array $roles): string
+    {
+        if ($roles === []) {
+            return 'No roles';
+        }
+
+        $formatted = array_map(
+            static fn (string $role): string => str_replace('ROLE_', '', $role),
+            $roles,
+        );
+
+        return implode(",\n", $formatted);
     }
 }
