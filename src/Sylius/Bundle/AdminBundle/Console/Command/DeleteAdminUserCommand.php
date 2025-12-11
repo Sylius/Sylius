@@ -53,41 +53,24 @@ final class DeleteAdminUserCommand extends Command
     {
         $this->io->title('Delete admin user');
 
-        if ($input->isInteractive()) {
-            $emailArgument = $input->getArgument('email');
+        $email = $input->getArgument('email');
 
-            $email = $this->userRepository->findOneBy(['email' => $emailArgument]);
-            if ($email === null) {
-                $this->io->error(sprintf('Admin Account with the email "%s" does not exist', $emailArgument));
+        $adminUser = $this->userRepository->findOneBy(['email' => $email]);
+        if ($adminUser === null) {
+            $this->io->error(sprintf('Admin Account with the email "%s" does not exist', $email));
 
-                return Command::FAILURE;
-            }
-
-            if (!$this->io->confirm(
-                sprintf('Are you sure you want to delete the admin user "%s"?', $emailArgument),
-                false,
-            )) {
-                return Command::FAILURE;
-            }
-        } else {
-            $emailArgument = $input->getArgument('email');
-
-            if (!$emailArgument) {
-                $this->io->error('Email argument is required when using --no-interaction.');
-
-                return Command::FAILURE;
-            }
-
-            $email = $this->userRepository->findOneBy(['email' => $emailArgument]);
-            if ($email === null) {
-                $this->io->error(sprintf('Admin Account with the email "%s" does not exist', $emailArgument));
-
-                return Command::FAILURE;
-            }
+            return Command::FAILURE;
         }
 
-        $this->userRepository->remove($email);
-        $this->io->success(sprintf('Admin Account with the email "%s" has been deleted successfully', $emailArgument));
+        if ($input->isInteractive() && !$this->io->confirm(
+            sprintf('Are you sure you want to delete the admin user "%s"?', $email),
+            false,
+        )) {
+            return Command::FAILURE;
+        }
+
+        $this->userRepository->remove($adminUser);
+        $this->io->success(sprintf('Admin Account with the email "%s" has been deleted successfully', $email));
 
         return Command::SUCCESS;
     }

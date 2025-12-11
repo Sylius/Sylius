@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\AdminBundle\Console\Command;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Bundle\AdminBundle\Console\Command\DeleteAdminUserCommand;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Console\Command\Command;
