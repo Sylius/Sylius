@@ -44,7 +44,7 @@
             <tag name="console.command" />
         </service>
 
-        <service id="Sylius\Bundle\AdminBundle\Console\Command\DeleteAdminUserCommand">
+        <service id="sylius_admin.command_handler.delete_admin_user" class="Sylius\Bundle\AdminBundle\Console\Command\DeleteAdminUserCommand">
             <argument type="service" id="sylius.repository.admin_user" />
             <tag name="console.command" />
         </service>

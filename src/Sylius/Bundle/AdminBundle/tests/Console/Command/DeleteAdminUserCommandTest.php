@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Console\Command;
+namespace Tests\Sylius\Bundle\AdminBundle\Console\Command;
 
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -26,8 +26,7 @@ final class DeleteAdminUserCommandTest extends TestCase
 {
     private CommandTester $commandTester;
 
-    /** @var MockObject&UserRepositoryInterface<AdminUserInterface> */
-    private MockObject $userRepository;
+    private MockObject&UserRepositoryInterface $userRepository;
 
     protected function setUp(): void
     {
@@ -39,7 +38,7 @@ final class DeleteAdminUserCommandTest extends TestCase
     }
 
     #[Test]
-    public function test_it_fails_when_admin_user_does_not_exist(): void
+    public function it_fails_when_admin_user_does_not_exist(): void
     {
         $this->userRepository
             ->expects($this->once())
@@ -60,7 +59,8 @@ final class DeleteAdminUserCommandTest extends TestCase
         );
     }
 
-    public function test_it_deletes_existing_admin_user_successfully(): void
+    #[Test]
+    public function it_deletes_existing_admin_user_successfully(): void
     {
         $adminUser = $this->createMock(AdminUserInterface::class);
 
@@ -88,7 +88,8 @@ final class DeleteAdminUserCommandTest extends TestCase
         );
     }
 
-    public function test_it_requires_email_argument_in_non_interactive_mode(): void
+    #[Test]
+    public function it_requires_email_argument_in_non_interactive_mode(): void
     {
         $this->expectException(RuntimeException::class);
         $this->expectExceptionMessage('Not enough arguments (missing: "email").');
@@ -98,7 +99,8 @@ final class DeleteAdminUserCommandTest extends TestCase
         ]);
     }
 
-    public function test_it_aborts_when_user_declines_confirmation(): void
+    #[Test]
+    public function it_aborts_when_user_declines_confirmation(): void
     {
         $adminUser = $this->createMock(AdminUserInterface::class);
 
@@ -108,9 +110,7 @@ final class DeleteAdminUserCommandTest extends TestCase
             ->with(['email' => 'decline@example.com'])
             ->willReturn($adminUser);
 
-        $this->userRepository
-            ->expects($this->never())
-            ->method('remove');
+        $this->userRepository->expects($this->never())->method('remove');
 
         // simulate user typing "no" at confirmation
         $this->commandTester->setInputs(['no']);
