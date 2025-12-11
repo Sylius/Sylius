@@ -372,7 +372,7 @@ sylius:
         filters: 'Filter'
         first_name: 'Vorname'
         fixed_discount: 'Fester Rabatt'
-        float: 'Fließkommazahl'
+        float: 'Gleitkommazahl'
         for_products: 'Für Produkte'
         for_taxons: 'Für Taxons'
         for_variants: 'Für Varianten'
