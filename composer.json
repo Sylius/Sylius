@@ -243,6 +243,8 @@
     },
     "conflict": {
         "api-platform/jsonld": "^4.1.1",
+        "api-platform/metadata": ">=4.1.0 <4.2.0",
+        "api-platform/serializer": ">=4.1.0 <4.2.0",
         "behat/gherkin": "^4.13.0",
         "symfony/ux-live-component": "2.28.0 || 2.28.1"
     },
@@ -256,6 +258,11 @@
             "php-http/discovery": false,
             "symfony/flex": true,
             "symfony/runtime": true
+        },
+        "audit": {
+            "ignore": [
+                "PKSA-365x-2zjk-pt47"
+            ]
         }
     },
     "extra": {

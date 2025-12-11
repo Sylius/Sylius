@@ -47,3 +47,8 @@ parameters:
         - '/Method Symfony\\Component\\HttpKernel\\CacheWarmer\\WarmableInterface\:\:warmUp\(\) invoked with 2 parameters\, 1 required\./' # Symfony compatibility
         - '/Method Sylius\\Component\\(\w+)\\Model\\(\w+)\:\:getId\(\) has no return type specified./'
         - '/Method Sylius\\Bundle\\(Admin|Shop)Bundle\\Twig\\Component\\[a-zA-Z\\]+\:\:getDataModelValue\(\) is unused./'
+        -
+            message: '/Property Sylius\\Bundle\\AdminBundle\\Notification\\HubNotificationProvider::\$clock is never read, only written\./'
+            identifier: property.onlyWritten
+            count: 1
+            path: src/Sylius/Bundle/AdminBundle/Notification/HubNotificationProvider.php

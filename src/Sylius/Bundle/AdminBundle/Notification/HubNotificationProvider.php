@@ -44,10 +44,9 @@ final readonly class HubNotificationProvider implements NotificationProviderInte
 
     public function getNotifications(array $context = []): array
     {
-        $metadata = $this->cache instanceof ItemInterface ? $this->cache->getMetadata() : [];
-        $metadata[ItemInterface::METADATA_EXPIRY] = $this->clock->now()->modify(sprintf('+%d minutes', $this->checkFrequency))->getTimestamp();
+        $latestVersion = $this->cache->get(self::LATEST_SYLIUS_VERSION_KEY, function (ItemInterface $item): ?string {
+            $item->expiresAfter($this->checkFrequency * 60);
 
-        $latestVersion = $this->cache->get(self::LATEST_SYLIUS_VERSION_KEY, function (): ?string {
             return $this->getLatestVersion();
         });
 
@@ -74,6 +73,10 @@ final readonly class HubNotificationProvider implements NotificationProviderInte
     private function getLatestVersion(): ?string
     {
         $request = $this->requestStack->getCurrentRequest();
+
+        if ($request === null) {
+            return null;
+        }
 
         $content = json_encode([
             'version' => SyliusCoreBundle::VERSION,
