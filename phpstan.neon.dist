@@ -32,6 +32,13 @@ parameters:
         - 'src/Sylius/Abstraction/StateMachine/src/WinzouStateMachineAdapter.php'
 
     ignoreErrors:
+        # Deprecated property, will be removed in Sylius 3.0
+        -
+            message: '/Property Sylius\\Bundle\\AdminBundle\\Notification\\HubNotificationProvider::\$clock is never read, only written\./'
+            identifier: property.onlyWritten
+            count: 1
+            path: src/Sylius/Bundle/AdminBundle/Notification/HubNotificationProvider.php
+
         - identifier: missingType.generics # This need to be fixed, too many classes are using generics without PHPDoc type
         # Symfony 7.4 introduced generics on NodeBuilder which phpstan-symfony does not handle correctly yet
         # See: https://github.com/phpstan/phpstan-symfony/issues/431
