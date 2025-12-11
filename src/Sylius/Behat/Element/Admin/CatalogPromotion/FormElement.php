@@ -98,14 +98,14 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $this->waitForFormUpdate();
     }
 
-    public function selectScopeOption(array $values): void
+    public function selectScopeOption(array $names): void
     {
         $lastScope = $this->getElement('last_scope');
-        foreach ($values as $value) {
-            $this->autocompleteHelper->selectByValue(
+        foreach ($names as $name) {
+            $this->autocompleteHelper->selectByName(
                 $this->getDriver(),
                 $lastScope->find('css', 'select')->getXpath(),
-                $value,
+                $name,
             );
         }
 
@@ -128,12 +128,12 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $lastAction->find('css', sprintf('[id$="_configuration_%s"]', $channelCode))->fillField($option, $value);
     }
 
-    public function getLastScopeCodes(): array
+    public function getLastScopeNames(): array
     {
         $lastScope = $this->getElement('last_scope');
 
         return array_map(
-            fn (NodeElement $element) => $element->getValue(),
+            fn (NodeElement $element) => $element->getText(),
             $lastScope->findAll('css', 'option[selected="selected"]'),
         );
     }
@@ -176,14 +176,14 @@ class FormElement extends BaseFormElement implements FormElementInterface
         return array_map(fn (NodeElement $element) => $element->getText(), $errors);
     }
 
-    public function removeScopeOption(array $values): void
+    public function removeScopeOption(array $names): void
     {
         $lastScope = $this->getElement('last_scope');
-        foreach ($values as $value) {
-            $this->autocompleteHelper->removeByValue(
+        foreach ($names as $name) {
+            $this->autocompleteHelper->removeByName(
                 $this->getDriver(),
                 $lastScope->find('css', 'select')->getXpath(),
-                $value,
+                $name,
             );
         }
 

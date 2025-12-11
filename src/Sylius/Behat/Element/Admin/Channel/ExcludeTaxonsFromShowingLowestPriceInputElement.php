@@ -33,10 +33,10 @@ class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement im
     {
         $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price');
 
-        $this->autocompleteHelper->selectByValue(
+        $this->autocompleteHelper->selectByName(
             $this->getDriver(),
             $excludeTaxonElement->getXpath(),
-            $taxon->getCode(),
+            $taxon->getName(),
         );
         $this->waitForFormUpdate();
     }
@@ -45,10 +45,10 @@ class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement im
     {
         $excludeTaxonElement = $this->getElement('taxons_excluded_from_showing_lowest_price');
 
-        $this->autocompleteHelper->removeByValue(
+        $this->autocompleteHelper->removeByName(
             $this->getDriver(),
             $excludeTaxonElement->getXpath(),
-            $taxon->getCode(),
+            $taxon->getName(),
         );
         $this->waitForFormUpdate();
     }
