@@ -48,10 +48,10 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
         }
 
         if (null !== $productVariant) {
-            $this->autocompleteHelper->selectByValue(
+            $this->autocompleteHelper->selectByName(
                 $this->getDriver(),
                 $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
-                $productVariant->getCode(),
+                $productVariant->getName(),
             );
         }
 
@@ -107,11 +107,29 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
 
     public function hasImageWithVariant(ProductVariantInterface $productVariant): bool
     {
+        $selectedVariantName = $this->getFirstImageSelectedVariantName();
+
+        if (null === $selectedVariantName) {
+            return false;
+        }
+
+        return str_contains($selectedVariantName, $productVariant->getName());
+    }
+
+    public function getFirstImageSelectedVariantName(): ?string
+    {
         $this->changeTab();
 
-        $images = $this->getElement('images');
+        $imageSubform = $this->getFirstImageSubform();
+        $variantField = $imageSubform->find('css', '[data-test-product-variant]');
 
-        return $images->has('css', sprintf('[data-test-product-variant*="%s"]', $productVariant->getCode()));
+        $selectedOption = $variantField->find('css', 'option[selected]');
+
+        if (null === $selectedOption) {
+            return null;
+        }
+
+        return $selectedOption->getText();
     }
 
     public function countImages(): int
@@ -189,10 +207,10 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
         $this->changeTab();
 
         $imageSubform = $this->getFirstImageSubform();
-        $this->autocompleteHelper->selectByValue(
+        $this->autocompleteHelper->selectByName(
             $this->getDriver(),
             $imageSubform->find('css', '[data-test-product-variant]')->getXpath(),
-            $productVariant->getCode(),
+            $productVariant->getName(),
         );
     }
 

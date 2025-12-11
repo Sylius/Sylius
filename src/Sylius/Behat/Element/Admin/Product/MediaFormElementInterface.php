@@ -29,6 +29,8 @@ interface MediaFormElementInterface
 
     public function hasImageWithVariant(ProductVariantInterface $productVariant): bool;
 
+    public function getFirstImageSelectedVariantName(): ?string;
+
     public function countImages(): int;
 
     public function getImages(): array;

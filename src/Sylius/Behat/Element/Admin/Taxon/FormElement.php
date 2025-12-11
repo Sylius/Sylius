@@ -66,7 +66,20 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function getParent(): string
     {
-        return $this->getElement('parent')->getValue();
+        $parentElement = $this->getElement('parent');
+
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $items = $this->autocompleteHelper->getSelectedItems(
+                $this->getDriver(),
+                $parentElement->getXpath(),
+            );
+
+            return count($items) > 0 ? reset($items) : '';
+        }
+
+        $selectedOption = $parentElement->find('css', 'option[selected]');
+
+        return $selectedOption?->getText() ?? '';
     }
 
     public function chooseParent(TaxonInterface $taxon): void
