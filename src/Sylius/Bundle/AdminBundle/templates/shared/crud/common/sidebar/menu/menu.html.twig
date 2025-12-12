@@ -1,4 +1,4 @@
-{% extends 'knp_menu.html.twig' %}
+{% extends '@KnpMenu/menu.html.twig' %}
 
 {% block root %}
     <ul class="sidebar navbar-nav">
@@ -48,7 +48,7 @@
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     {{ block('icon') }}
                 </span>
-                <span class="nav-link-title">{{ item.label|trans }}</span>
+                <span class="nav-link-title">{{ block('label') }}</span>
             </a>
             <div class="dropdown-menu {{ is_active ? 'show' : '' }}">
                 <div class="dropdown-menu-columns">
@@ -65,7 +65,7 @@
                     {{ block('icon') }}
                 </span>
                 <span class="nav-link-title">
-                    {{ item.label|trans }}
+                    {{ block('label') }}
                 </span>
             </a>
         </li>
@@ -90,7 +90,7 @@
     {%- endif %}
 
     <a class="dropdown-item justify-content-lg-between gap-2 {% if attributes.class is defined %}{{ attributes.class }}{% endif %}" href="{{ item.uri }}" target="{{ target }}">
-        {{ item.label|trans }}
+        {{ block('label') }}
         {% if item.extra('plus_logo') is not empty %}
             <img src="{{ asset('build/admin/images/sylius-plus-sidebar.svg', 'admin') }}" alt="Sylius Plus" class="navbar-plus-badge" />
         {% elseif target == '_blank' %}

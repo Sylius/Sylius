@@ -38,5 +38,6 @@ sylius:
                 all: Visi
             select: Pasirinkite
             select_scope: Pasirinkite sritį
+            priority: Prioritetas
         zone_member:
             select: Pasirinkite

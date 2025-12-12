@@ -99,6 +99,15 @@ final class GeographicalFixtureTest extends TestCase
     }
 
     #[Test]
+    protected function zones_can_have_priority(): void
+    {
+        $this->assertConfigurationIsValid(
+            [['zones' => ['EU' => ['name' => 'Some EU countries', 'countries' => ['PL', 'DE', 'FR'], 'priority' => 2]]]],
+            'zones',
+        );
+    }
+
+    #[Test]
     public function zones_can_be_defined_as_province_based(): void
     {
         $this->assertConfigurationIsValid(

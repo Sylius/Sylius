@@ -19,6 +19,8 @@ interface FormElementInterface extends BaseFormElementInterface
 {
     public function getName(): string;
 
+    public function getPriority(): int;
+
     public function nameIt(string $name): void;
 
     public function getType(): string;
@@ -30,6 +32,8 @@ interface FormElementInterface extends BaseFormElementInterface
     public function specifyCode(string $code): void;
 
     public function addMember(): void;
+
+    public function prioritizeIt(int $priority): void;
 
     public function getScope(): string;
 

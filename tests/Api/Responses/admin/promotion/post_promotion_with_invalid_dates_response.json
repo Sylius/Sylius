@@ -4,8 +4,6 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "endsAt: End date cannot be set prior start date.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('endsAt: End date cannot be set prior start date.').optional()",
     "status": 422,
     "violations": [
         {

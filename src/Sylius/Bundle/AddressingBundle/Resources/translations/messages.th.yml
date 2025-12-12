@@ -38,5 +38,6 @@ sylius:
                 all: ทั้งหมด
             select: เลือก
             select_scope: เลือกขอบเขต
+            priority: ลำดับความสำคัญ
         zone_member:
             select: เลือก

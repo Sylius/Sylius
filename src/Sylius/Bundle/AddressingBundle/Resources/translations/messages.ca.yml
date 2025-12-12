@@ -38,5 +38,6 @@ sylius:
                 all: Totes
             select: Tria
             select_scope: Seleccioneu l'àmbit
+            priority: Prioritat
         zone_member:
             select: Tria

@@ -38,5 +38,6 @@ sylius:
                 all: Todos(as)
             select: Selecione
             select_scope: Selecione o escopo
+            priority: Prioridade
         zone_member:
             select: Selecione
