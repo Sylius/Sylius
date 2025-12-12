@@ -33,8 +33,8 @@
         "sylius/twig-hooks": "^0.8",
         "sylius/ui-bundle": "^2.0",
         "sylius/theme-bundle": "^2.4",
-        "symfony/framework-bundle": "^6.4.1 || ^7.2",
-        "symfony/security-bundle": "^6.4 || ^7.2",
+        "symfony/framework-bundle": "^6.4.1 || ^7.4",
+        "symfony/security-bundle": "^6.4 || ^7.4",
         "symfony/stimulus-bundle": "^2.20",
         "symfony/ux-autocomplete": "^2.20",
         "symfony/ux-live-component": "^2.20",
@@ -47,7 +47,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "mockery/mockery": "^1.6",
         "phpunit/phpunit": "^11.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.2"
+        "symfony/dependency-injection": "^6.4.1 || ^7.4"
     },
     "config": {
         "allow-plugins": {

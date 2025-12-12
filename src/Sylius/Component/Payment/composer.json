@@ -30,7 +30,7 @@
         "paragonie/halite": "^5.0",
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.12",
-        "symfony/uid": "^6.4 || ^7.2",
+        "symfony/uid": "^6.4 || ^7.4",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {

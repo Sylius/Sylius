@@ -37,6 +37,7 @@ sylius:
             scopes:
                 all: 'すべて'
             select: '選択'
+            priority: '優先度'
         zone_member:
             select: '選択'
 

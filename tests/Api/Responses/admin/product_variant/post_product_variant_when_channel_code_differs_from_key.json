@@ -6,7 +6,5 @@
     "status": 422,
     "type": "\/errors\/422",
     "hydra:title": "An error occurred",
-    "hydra:description": "The channelCode of channelPricing does not match the key. Key: \"WEB\", channelCode: \"MOBILE\"",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('The channelCode of channelPricing does not match the key. Key: \"WEB\", channelCode: \"MOBILE\"').optional()"
+    "hydra:description": "The channelCode of channelPricing does not match the key. Key: \"WEB\", channelCode: \"MOBILE\""
 }

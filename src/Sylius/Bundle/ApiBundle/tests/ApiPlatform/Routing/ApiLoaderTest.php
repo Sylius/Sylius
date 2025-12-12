@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\ApiPlatform\Routing;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Routing\ApiLoader;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
@@ -24,18 +23,16 @@ use Symfony\Component\Routing\RouteCollection;
 
 final class ApiLoaderTest extends TestCase
 {
-    use ProphecyTrait;
-
-    private LoaderInterface|ObjectProphecy $baseApiLoader;
+    private LoaderInterface&MockObject $baseApiLoader;
 
     private LoaderInterface $apiLoader;
 
     protected function setUp(): void
     {
-        $this->baseApiLoader = $this->prophesize(LoaderInterface::class);
+        $this->baseApiLoader = $this->createMock(LoaderInterface::class);
 
         $this->apiLoader = new ApiLoader(
-            $this->baseApiLoader->reveal(),
+            $this->baseApiLoader,
             [
                 'sylius_api_shop_currency_get',
                 'sylius_api_shop_currency_get_collection',
@@ -52,24 +49,33 @@ final class ApiLoaderTest extends TestCase
     #[Test]
     public function it_removes_routes_from_route_collection_loaded_by_base_api_loader(): void
     {
-        $routeCollection = $this->prophesize(RouteCollection::class);
+        $routeCollection = $this->createMock(RouteCollection::class);
 
-        $this->baseApiLoader->load('.', 'api_platform')->willReturn($routeCollection);
+        $this->baseApiLoader
+            ->expects($this->once())
+            ->method('load')
+            ->with('.', 'api_platform')
+            ->willReturn($routeCollection);
+
         $routeCollection
-            ->remove([
+            ->expects($this->once())
+            ->method('remove')
+            ->with([
                 'sylius_api_shop_currency_get',
                 'sylius_api_shop_currency_get_collection',
-            ])
-            ->shouldBeCalled()
-        ;
+            ]);
 
-        $this->assertSame($routeCollection->reveal(), $this->apiLoader->load('.', 'api_platform'));
+        $this->assertSame($routeCollection, $this->apiLoader->load('.', 'api_platform'));
     }
 
     #[Test]
     public function it_uses_base_api_loader_for_supports_method(): void
     {
-        $this->baseApiLoader->supports('.', 'api_platform')->willReturn(true);
+        $this->baseApiLoader
+            ->expects($this->once())
+            ->method('supports')
+            ->with('.', 'api_platform')
+            ->willReturn(true);
 
         $this->assertTrue($this->apiLoader->supports('.', 'api_platform'));
     }
@@ -77,20 +83,26 @@ final class ApiLoaderTest extends TestCase
     #[Test]
     public function it_uses_base_api_loader_to_get_resolver(): void
     {
-        $loaderResolver = $this->prophesize(LoaderResolverInterface::class);
+        $loaderResolver = $this->createMock(LoaderResolverInterface::class);
 
-        $this->baseApiLoader->getResolver()->willReturn($loaderResolver);
+        $this->baseApiLoader
+            ->expects($this->once())
+            ->method('getResolver')
+            ->willReturn($loaderResolver);
 
-        $this->assertSame($loaderResolver->reveal(), $this->apiLoader->getResolver());
+        $this->assertSame($loaderResolver, $this->apiLoader->getResolver());
     }
 
     #[Test]
     public function it_uses_base_api_loader_to_set_resolver(): void
     {
-        $loaderResolver = $this->prophesize(LoaderResolverInterface::class);
+        $loaderResolver = $this->createMock(LoaderResolverInterface::class);
 
-        $this->baseApiLoader->setResolver($loaderResolver->reveal())->shouldBeCalled();
+        $this->baseApiLoader
+            ->expects($this->once())
+            ->method('setResolver')
+            ->with($loaderResolver);
 
-        $this->apiLoader->setResolver($loaderResolver->reveal());
+        $this->apiLoader->setResolver($loaderResolver);
     }
 }

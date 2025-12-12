@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Mailer;
 
 use PHPUnit\Framework\Attributes\Test;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -24,8 +23,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ContactEmailManagerTest extends KernelTestCase
 {
-    use ProphecyTrait;
-
     #[Test]
     public function it_sends_contact_request(): void
     {
@@ -36,22 +33,22 @@ final class ContactEmailManagerTest extends KernelTestCase
 
         $emailSender = $container->get('sylius.email_sender');
 
-        /** @var ChannelRepositoryInterface|ObjectProphecy $channelRepository */
-        $channelRepository = $this->prophesize(ChannelRepositoryInterface::class);
-        /** @var ChannelInterface|ObjectProphecy $channel */
-        $channel = $this->prophesize(ChannelInterface::class);
+        /** @var ChannelRepositoryInterface&MockObject $channelRepository */
+        $channelRepository = $this->createMock(ChannelRepositoryInterface::class);
+        /** @var ChannelInterface&MockObject $channel */
+        $channel = $this->createMock(ChannelInterface::class);
 
-        $channel->getHostname()->willReturn('Channel.host');
-        $channel->getContactEmail()->willReturn('shop@example.com');
+        $channel->method('getHostname')->willReturn('Channel.host');
+        $channel->method('getContactEmail')->willReturn('shop@example.com');
 
-        $channelRepository->findOneByCode('CHANNEL_CODE')->willReturn($channel->reveal());
+        $channelRepository->method('findOneByCode')->with('CHANNEL_CODE')->willReturn($channel);
 
         $contactEmailManager = new ContactEmailManager($emailSender);
 
         $contactEmailManager->sendContactRequest(
             ['email' => 'shop@example.com', 'message' => 'Hello contact request!'],
             ['shop@example.com'],
-            $channel->reveal(),
+            $channel,
             'en_US',
         );
 
