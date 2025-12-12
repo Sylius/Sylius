@@ -35,14 +35,23 @@ final class TranslatableAutocompleteType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('entity_fields', ['code']);
+        $resolver->setDefault('choice_label', function (Options $options): string {
+            return $options['extra_options']['choice_label'] ?? 'name';
+        });
+
+        $resolver->setDefault('entity_fields', function (Options $options): array {
+            return $options['extra_options']['entity_fields'] ?? ['code'];
+        });
+
         $resolver->setAllowedTypes('entity_fields', ['array', 'null']);
         $resolver->setNormalizer('entity_fields', fn (Options $options, ?array $entityFields) => array_map(
             fn (string $field) => self::ENTITY_ALIAS . '.' . $field,
             $entityFields ?? [],
         ));
 
-        $resolver->setDefault('translation_fields', ['name']);
+        $resolver->setDefault('translation_fields', function (Options $options): array {
+            return $options['extra_options']['translation_fields'] ?? ['name'];
+        });
         $resolver->setAllowedTypes('translation_fields', 'array');
         $resolver->setNormalizer('translation_fields', fn (Options $options, array $translationFields) => array_map(
             fn (string $field) => self::TRANSLATION_ALIAS . '.' . $field,
