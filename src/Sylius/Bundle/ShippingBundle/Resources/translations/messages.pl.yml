@@ -45,10 +45,17 @@ sylius:
             name: Nazwa
             position: Pozycja
             rules: Reguły
+            rules_help: Użyj reguł, aby określić, czy dana metoda wysyłki może zostać zastosowana do zamówienia. Jeśli reguła jest spełniona, metoda wysyłki może zostać zastosowana. Pamiętaj, że jeśli dodasz wiele reguł, wszystkie muszą być spełnione.
+            select_calculator: Wybierz kalkulator
             tax_category: Kategoria podatkowa
             translations: Tłumaczenia
         shipping_method_rule:
+            items_total_greater_than_or_equal: Łączna wartość przedmiotów większa lub równa
+            items_total_less_than_or_equal: Łączna wartość przedmiotów mniejsza lub równa
             type: Typ
             total: Łącznie
+            total_weight_greater_than_or_equal: Łączna waga większa lub równa
+            total_weight_less_than_or_equal: Łączna waga mniejsza lub równa
             weight: Waga
             amount: Wartość
+            select: Wybierz typ reguły

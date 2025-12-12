@@ -2,36 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Nie masz konta?'
+        register_here: 'Zarejestruj się tutaj'
     email:
         order_confirmation:
+            has_been_successfully_placed: 'zostało pomyślnie złożone.'
             subject: 'Potwierdzenie zamówienia'
             view_order_or_change_payment_method: 'Wyświetl zamówienie lub zmień metodę płatności'
+            thank_you: 'Dziękujemy za zakupy w naszym sklepie!'
             your_order_number: 'Twoje zamówienie nr.'
         password_reset:
             hello: 'Witaj'
             reset_your_password: 'Zresetuj swoje hasło'
             subject: 'Resetowanie hasła'
             to_reset_your_password: 'Aby zresetować hasło - kliknij na poniższy link'
+            to_reset_your_password_token: 'Aby zresetować hasło - użyj poniższego tokenu'
+            token: 'Twój token do resetowania hasła to'
         user_registration:
             start_shopping: 'Rozpocznij zakupy'
             subject: 'Rejestracja użytkownika'
             welcome_to_our_store: 'Zapraszamy do naszego sklepu!'
+            you_have_just_been_registered: 'Zostałeś właśnie zarejestrowany. Dziękujemy.'
         verification_token:
             hello: 'Witaj'
             subject: 'Weryfikacja adresu e-mail'
+            to_verify_your_email_address: 'Aby zweryfikować adres e-mail - kliknij na poniższy link'
+            verify_your_email_address: 'Zweryfikuj swój adres e-mail'
+    footer:
+        banner:
+            free_shipping_title: 'Darmowa dostawa i zwrot'
+            free_shipping_content: 'Darmowa dostawa dla wszystkich zamówień'
+            guarantee_title: 'Gwarancja zwrotu pieniędzy'
+            guarantee_content: '30 dni gwarancji zwrotu pieniędzy'
+            multiple_payments_title: 'Różne metody płatności'
+            multiple_payments_content: 'Akceptujemy karty płatnicze i PayPal'
     homepage:
         about_us: 'O nas'
+        about_us_content: 'Witamy w naszym sklepie, Twoim numerze jeden wśród sklepów online oferujących najlepsze produkty. Możesz wybierać spośród najlepszych ubrań i butów dostępnych w naszej ofercie. (<i>Możesz zmodyfikować tę treść, nadpisując klucz "sylius.homepage.about_us_content" w swoim pliku tłumaczeń</i>)'
+        banner_content: 'Przygotuj się! Nadchodzi zima'
+        banner_button: 'Sprawdź nową kolekcję'
+        carousel_header: 'Polecane produkty'
+        latest_deals: 'Najnowsze okazje'
+        new_collection: 'Nowa kolekcja'
         newsletter: 'Newsletter'
+        newsletter_description: 'Zapisz się do naszego newslettera, aby zobaczyć nowe oferty, które na Ciebie czekają! (<i>Możesz zmodyfikować tę treść, nadpisując klucz "sylius.homepage.newsletter_description" w swoim pliku tłumaczeń</i>)'
         subscribe: 'Subskrybuj'
     lightbox:
         image_album_label: 'Obraz %1 z %2'
     menu:
         shop:
             account:
-                address_book: 'Książka Adresowa'
+                address_book: 'Książka adresowa'
                 change_password: 'Zmień hasło'
                 dashboard: 'Panel'
-                header: 'Twoje Konto'
+                header: 'Twoje konto'
                 order_history: 'Historia zamówień'
                 personal_information: 'Dane osobowe'
-    
+    top_bar: 'Zapisz się do naszego newslettera i zgarnij -20% zniżki'
