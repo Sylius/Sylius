@@ -1,4 +1,4 @@
-name: Javascript Tests (MySQL)
+name: Javascript Tests
 
 on:
     workflow_dispatch: ~
@@ -22,8 +22,8 @@ jobs:
         runs-on: ubuntu-latest
         name: "Get matrix"
         outputs:
-            matrix: ${{ steps.matrix.outputs.prop }}
-            panther-matrix: ${{ steps.panther-matrix.outputs.prop }}
+            matrix: ${{ steps.matrix.outputs.result }}
+            panther-matrix: ${{ steps.panther-matrix.outputs.result }}
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
@@ -37,22 +37,32 @@ jobs:
 
             -   name: "Get matrix"
                 id: matrix
-                uses: notiz-dev/github-action-json-property@release
+                uses: actions/github-script@v7
                 with:
-                    path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.js'
+                    script: |
+                        const fs = require('fs');
+                        const matrix = JSON.parse(fs.readFileSync('.github/workflows/matrix.json', 'utf8'));
+                        const type = '${{ inputs.type }}';
+                        const js = matrix[type]['js']?.include || [];
+                        const jsPgsql = matrix[type]['js-pgsql']?.include || [];
+                        return JSON.stringify({ include: [...js, ...jsPgsql] });
 
             -   name: "Get panther matrix"
                 id: panther-matrix
-                uses: notiz-dev/github-action-json-property@release
+                uses: actions/github-script@v7
                 with:
-                    path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.js-panther'
+                    script: |
+                        const fs = require('fs');
+                        const matrix = JSON.parse(fs.readFileSync('.github/workflows/matrix.json', 'utf8'));
+                        const type = '${{ inputs.type }}';
+                        const panther = matrix[type]['js-panther']?.include || [];
+                        const pantherPgsql = matrix[type]['js-panther-pgsql']?.include || [];
+                        return JSON.stringify({ include: [...panther, ...pantherPgsql] });
 
     behat-js:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "[${{ matrix.group }}] [PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}]"
+        name: "[${{ matrix.group }}] [PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ${{ matrix.database }} ${{ matrix.database_version }}]"
         timeout-minutes: 10
         strategy:
             fail-fast: false
@@ -60,7 +70,7 @@ jobs:
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+            DATABASE_URL: "${{ matrix.database == 'postgresql' && format('pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion={0}', matrix.database_version) || format('mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion={0}', matrix.database_version) }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
@@ -109,8 +119,8 @@ jobs:
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
                     e2e_js: "yes"
-                    database: "mysql"
-                    database_version: ${{ matrix.mysql }}
+                    database: ${{ matrix.database }}
+                    database_version: ${{ matrix.database_version }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
@@ -125,7 +135,7 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (${{ matrix.group }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (${{ matrix.group }}, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ${{ matrix.database }} ${{ matrix.database_version }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
@@ -135,7 +145,7 @@ jobs:
     behat-panther:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        name: "Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ${{ matrix.database }} ${{ matrix.database_version }}"
         timeout-minutes: 10
         strategy:
             fail-fast: false
@@ -143,7 +153,7 @@ jobs:
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+            DATABASE_URL: "${{ matrix.database == 'postgresql' && format('pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion={0}', matrix.database_version) || format('mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion={0}', matrix.database_version) }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
@@ -192,7 +202,8 @@ jobs:
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
                     e2e_js: "yes"
-                    database_version: ${{ matrix.mysql }}
+                    database: ${{ matrix.database }}
+                    database_version: ${{ matrix.database_version }}
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
@@ -208,7 +219,7 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ${{ matrix.database }} ${{ matrix.database_version }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
