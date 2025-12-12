@@ -4,6 +4,9 @@
    a `Symfony\Component\Clock\ClockInterface` as the third argument. Not passing it is deprecated
    and will be prohibited in Sylius 3.0.
 
+1. The `$clock` argument in `Sylius\Bundle\AdminBundle\Notification\HubNotificationProvider` constructor is deprecated
+   and will be removed in Sylius 3.0.
+
 1. The priorities of hookables in `sylius_admin.order.update.content.form.shipping_address` hook have been adjusted
    to match `sylius_admin.order.update.content.form.billing_address` and fix duplicate priority values.
    If you have customized these hooks or added custom hookables with priorities between the old values,
