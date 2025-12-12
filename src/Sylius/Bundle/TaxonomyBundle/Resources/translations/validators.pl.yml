@@ -4,12 +4,13 @@
 sylius:
     taxon:
         code:
+            max_length: 'Kod nie może być dłuższy niż {{ limit }} znaków.'
             not_blank: 'Proszę wprowadzić kod taksonu.'
             regex: 'Kod taxonu może być złożony tylko z liter, cyfr, myślników i podkreśleń.'
             unique: 'Takson z podanym kodem już istnieje.'
         name:
-            max_length: 'Nazwa taksonomii nie może być dłuższa niż 255 znaków.'
-            not_blank: 'Proszę podać nazwę taksonomii.'
+            max_length: 'Nazwa taksonu nie może być dłuższa niż 255 znaków.'
+            not_blank: 'Proszę podać nazwę taksonu.'
         slug:
             not_blank: 'Wprowadź fragment URL kategorii.'
             unique: 'Fragment URL kategorii musi być unikalny.'
