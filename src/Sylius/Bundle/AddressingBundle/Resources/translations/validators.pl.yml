@@ -4,29 +4,29 @@
 sylius:
     address:
         city:
-            max_length: Miejscowość nie może być dłuższa niż {{ limit }} znak.|Miejscowość nie może być dłuższa niż {{ limit }} znaków.
-            min_length: Miejscowość musi mieć co najmniej {{ limit }} znaki.|Miejscowość musi mieć co najmniej {{ limit }} znaków.
+            max_length: '{1} Miejscowość nie może być dłuższa niż 1 znak.|{2,3,4} Miejscowość nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Miejscowość nie może być dłuższa niż {{ limit }} znaków.'
+            min_length: '{1} Miejscowość musi mieć co najmniej 1 znak.|{2,3,4} Miejscowość musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Miejscowość musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać miejscowość.
         country:
             not_blank: Proszę wybrać kraj.
             disabled: Wybrany kraj nie jest dostępny. Proszę wybrać inny.
         first_name:
-            max_length: Imię nie może być dłuższe niż {{ limit }} znak.|Imię nie może być dłuższe niż {{ limit }} znaków.
-            min_length: Imię musi mieć co najmniej {{ limit }} znaki.|Imię musi mieć co najmniej {{ limit }} znaków.
+            max_length: '{1} Imię nie może być dłuższe niż 1 znak.|{2,3,4} Imię nie może być dłuższe niż {{ limit }} znaki.|[5,Inf[ Imię nie może być dłuższe niż {{ limit }} znaków.'
+            min_length: '{1} Imię musi mieć co najmniej 1 znak.|{2,3,4} Imię musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Imię musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać swoje imię.
         last_name:
-            max_length: Nazwisko nie może być dłuższe niż {{ limit }} znak.|Nazwisko nie może być dłuższe niż {{ limit }} znaków.
-            min_length: Nazwisko musi mieć co najmniej {{ limit }} znaki.|Nazwisko musi mieć co najmniej {{ limit }} znaków.
+            max_length: '{1} Nazwisko nie może być dłuższe niż 1 znak.|{2,3,4} Nazwisko nie może być dłuższe niż {{ limit }} znaki.|[5,Inf[ Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
+            min_length: '{1} Nazwisko musi mieć co najmniej 1 znak.|{2,3,4} Nazwisko musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwisko musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać swoje nazwisko.
         postcode:
-            max_length: Kod pocztowy nie może być dłuższy niż {{ limit }} znak.|Kod pocztowy nie może być dłuższy niż {{ limit }} znaków.
-            min_length: Kod pocztowy musi mieć co najmniej {{ limit }} znak.|Kod pocztowy musi mieć co najmniej {{ limit }} znaków.
+            max_length: '{1} Kod pocztowy nie może być dłuższy niż 1 znak.|{2,3,4} Kod pocztowy nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod pocztowy nie może być dłuższy niż {{ limit }} znaków.'
+            min_length: '{1} Kod pocztowy musi mieć co najmniej 1 znak.|{2,3,4} Kod pocztowy musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Kod pocztowy musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać kod pocztowy.
         province:
             valid: Proszę wybrać prawidłowe województwo.
         street:
-            max_length: Ulica nie może być dłuższa niż {{ limit }} znak.|Ulica nie może być dłuższa niż {{ limit }} znaków.
-            min_length: Ulica musi mieć co najmniej {{ limit }} znaki.|Ulica musi mieć co najmniej {{ limit }} znaków.
+            max_length: '{1} Ulica nie może być dłuższa niż 1 znak.|{2,3,4} Ulica nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Ulica nie może być dłuższa niż {{ limit }} znaków.'
+            min_length: '{1} Ulica musi mieć co najmniej 1 znak.|{2,3,4} Ulica musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Ulica musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać ulicę.
         not_shippable: Ten adres nie jest prawidłowym adresem dostawy.
     country:
@@ -42,8 +42,8 @@ sylius:
             regex: Kod województwa powinien być w formacie XX-XX (np. US-FL).
             unique: Kod województwa musi być unikalny.
         name:
-            max_length: Nazwa województwa nie może być dłuższa niż {{ limit }} znak.|Nazwa województwa nie może być dłuższa niż {{ limit }} znaków.
-            min_length: Nazwa województwa musi mieć co najmniej {{ limit }} znaki.|Nazwa województwa musi mieć co najmniej {{ limit }} znaków.
+            max_length: '{1} Nazwa województwa nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa województwa nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa województwa nie może być dłuższa niż {{ limit }} znaków.'
+            min_length: '{1} Nazwa województwa musi mieć co najmniej 1 znak.|{2,3,4} Nazwa województwa musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa województwa musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać nazwę województwa.
             unique: Nazwa województwa musi być unikalna.
     zone:
@@ -57,10 +57,10 @@ sylius:
         type:
             invalid: "Typ {{ value }} jest nieprawidłowy. Dozwolone typy to: {{ choices }}."
         members:
-            min_count: Proszę dodać co najmniej {{ limit }} członka strefy.
+            min_count: '{1} Proszę dodać co najmniej 1 członka strefy.|{2,3,4} Proszę dodać co najmniej {{ limit }} członków strefy.|[5,Inf[ Proszę dodać co najmniej {{ limit }} członków strefy.'
         name:
-            max_length: Nazwa strefy nie może być dłuższa niż {{ limit }} znak.|Nazwa strefy nie może być dłuższa niż {{ limit }} znaków.
-            min_length: Nazwa strefy musi mieć co najmniej {{ limit }} znaki.|Nazwa strefy musi mieć co najmniej {{ limit }} znaków.
+            max_length: '{1} Nazwa strefy nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa strefy nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa strefy nie może być dłuższa niż {{ limit }} znaków.'
+            min_length: '{1} Nazwa strefy musi mieć co najmniej 1 znak.|{2,3,4} Nazwa strefy musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa strefy musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać nazwę strefy.
     zone_member:
         cannot_be_the_same_as_zone: Członek strefy nie może być tym samym co strefa.

@@ -4,24 +4,24 @@
 sylius:
     customer:
         first_name:
-            max: Imię nie może być dłuższe niż {{ limit }} znaków.
-            min: Imię nie może mieć mniej niż {{ limit }} znaków.
+            max: '{1} Imię nie może być dłuższe niż 1 znak.|{2,3,4} Imię nie może być dłuższe niż {{ limit }} znaki.|[5,Inf[ Imię nie może być dłuższe niż {{ limit }} znaków.'
+            min: '{1} Imię musi mieć co najmniej 1 znak.|{2,3,4} Imię musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Imię musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać swoje imię.
         last_name:
-            max: Nazwisko nie może być dłuższe niż {{ limit }} znaków.
-            min: Nazwisko nie może mieć mniej niż {{ limit }} znaków.
+            max: '{1} Nazwisko nie może być dłuższe niż 1 znak.|{2,3,4} Nazwisko nie może być dłuższe niż {{ limit }} znaki.|[5,Inf[ Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
+            min: '{1} Nazwisko musi mieć co najmniej 1 znak.|{2,3,4} Nazwisko musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwisko musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać swoje nazwisko.
         gender:
             not_blank: Proszę wybrać płeć.
         email:
             already_used: Ten e-mail jest już używany, proszę się zalogować lub użyć opcji przypominania hasła.
-            max: E-mail nie może być dłuższy niż {{ limit }} znaków.
+            max: '{1} E-mail nie może być dłuższy niż 1 znak.|{2,3,4} E-mail nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ E-mail nie może być dłuższy niż {{ limit }} znaków.'
             not_blank: Proszę podać swój e-mail.
             invalid: Ten e-mail jest nieprawidłowy.
             unique: Ten e-mail jest już używany.
             registered: Ten e-mail jest już zarejestrowany, proszę się zalogować lub użyć opcji przypominania hasła.
         phone_number:
-            max: Numer telefonu nie może być dłuższy niż {{ limit }} znaków.
+            max: '{1} Numer telefonu nie może być dłuższy niż 1 znak.|{2,3,4} Numer telefonu nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Numer telefonu nie może być dłuższy niż {{ limit }} znaków.'
     customer_group:
         code:
             max_length: Kod nie może być dłuższy niż {{ limit }} znaków.
@@ -29,6 +29,6 @@ sylius:
             unique: Kod grupy klientów musi być unikatowy.
             not_blank: Proszę podać kod grupy klientów.
         name:
-            max: Nazwa grupy klientów nie może być dłuższa niż {{ limit }} znaków.
-            min: Nazwa grupy klientów musi mieć co najmniej {{ limit }} znaków.
+            max: '{1} Nazwa grupy klientów nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa grupy klientów nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa grupy klientów nie może być dłuższa niż {{ limit }} znaków.'
+            min: '{1} Nazwa grupy klientów musi mieć co najmniej 1 znak.|{2,3,4} Nazwa grupy klientów musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa grupy klientów musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Wprowadź nazwę grupy klientów.

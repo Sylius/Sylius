@@ -9,7 +9,7 @@ sylius:
         slug:
             not_blank: Wprowadź fragment URL dla produktu.
             unique: Slug produktu musi być unikalny.
-            max_length: Slug produktu nie może być dłuższy niż 1 znak.|Slug produktu nie może przekraczać {{ limit }} znaków.
+            max_length: '{1} Slug produktu nie może być dłuższy niż 1 znak.|{2,3,4} Slug produktu nie może przekraczać {{ limit }} znaków.|[5,Inf[ Slug produktu nie może przekraczać {{ limit }} znaków.'
         code:
             max_length: Kod nie może być dłuższy niż {{ limit }} znaków.
             not_blank: Proszę podać kod produktu.
@@ -17,12 +17,12 @@ sylius:
             unique: Kod produktu musi być unikalny.
         name:
             not_blank: Proszę podać nazwę produktu.
-            min_length: Nazwa produktu musi składać się z co najmniej 1 znaku.|Nazwa produktu musi składać się z co najmniej {{ limit }} znaków.
-            max_length: Nazwa produktu nie może być dłuższa niż 1 znak.|Nazwa produktu nie może przekraczać {{ limit }} znaków.
+            min_length: '{1} Nazwa produktu musi składać się z co najmniej 1 znaku.|{2,3,4} Nazwa produktu musi składać się z co najmniej {{ limit }} znaków.|[5,Inf[ Nazwa produktu musi składać się z co najmniej {{ limit }} znaków.'
+            max_length: '{1} Nazwa produktu nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa produktu nie może przekraczać {{ limit }} znaków.|[5,Inf[ Nazwa produktu nie może przekraczać {{ limit }} znaków.'
         meta_keywords:
-            max_length: Słowa kluczowe produktu nie mogą być dłuższe niż 1 znak.|Słowa kluczowe produktu nie mogą przekraczać {{ limit }} znaków.
+            max_length: '{1} Słowa kluczowe produktu nie mogą być dłuższe niż 1 znak.|{2,3,4} Słowa kluczowe produktu nie mogą przekraczać {{ limit }} znaków.|[5,Inf[ Słowa kluczowe produktu nie mogą przekraczać {{ limit }} znaków.'
         meta_description:
-            max_length: Meta opis produktu nie może być dłuższy niż 1 znak.|Meta opis produktu nie może przekraczać {{ limit }} znaków.
+            max_length: '{1} Meta opis produktu nie może być dłuższy niż 1 znak.|{2,3,4} Meta opis produktu nie może przekraczać {{ limit }} znaków.|[5,Inf[ Meta opis produktu nie może przekraczać {{ limit }} znaków.'
     product_variant:
         combination: Wariant z tym zestawem opcji już istnieje.
         code:
@@ -44,10 +44,10 @@ sylius:
             unique: Opcja z podanym kodem już istnieje.
         name:
             not_blank: Proszę wprowadzić nazwę opcji.
-            min_length: Nazwa opcji powinna mieć co najmniej 1 znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.
-            max_length: Nazwa opcji nie może być dłuższa niż 1 znak.|Nazwa opcji nie może przekraczać {{ limit }} znaków.
+            min_length: '{1} Nazwa opcji musi zawierać co najmniej 1 znak.|{2,3,4} Nazwa opcji musi zawierać co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.'
+            max_length: '{1} Nazwa opcji nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa opcji nie może przekraczać {{ limit }} znaków.|[5,Inf[ Nazwa opcji nie może przekraczać {{ limit }} znaków.'
         values:
-            min_count: Proszę dodać co najmniej {{ limit }} wartość opcji.|Proszę dodać co najmniej {{ limit }} wartości opcji.
+            min_count: '{1} Proszę dodać co najmniej 1 wartość opcji.|{2,3,4} Proszę dodać co najmniej {{ limit }} wartości opcji.|[5,Inf[ Proszę dodać co najmniej {{ limit }} wartości opcji.'
     option_value:
         code:
             max_length: Kod nie może być dłuższy niż {{ limit }} znaków.
@@ -65,11 +65,11 @@ sylius:
     association_type:
         name:
             not_blank: Wprowadź nazwę typu powiązania.
-            min_length: Nazwa typu powiązania musi zawierać co najmniej 1 znak.|Nazwa typu powiązania musi zawierać co najmniej {{ limit }} znaków.
-            max_length: Nazwa typu powiązania nie może być dłuższa niż 1 znak.|Nazwa typu powiązania nie może przekraczać {{ limit }} znaków.
+            min_length: '{1} Nazwa typu powiązania musi zawierać co najmniej 1 znak.|{2,3,4} Nazwa typu powiązania musi zawierać co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa typu powiązania musi zawierać co najmniej {{ limit }} znaków.'
+            max_length: '{1} Nazwa typu powiązania nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa typu powiązania nie może przekraczać {{ limit }} znaków.|[5,Inf[ Nazwa typu powiązania nie może przekraczać {{ limit }} znaków.'
         code:
-            min_length: Kod typu powiązania musi mieć co najmniej 1 znak.|Kod typu powiązania musi mieć co najmniej {{ limit }} znaków.
-            max_length: Kod typu powiązania nie może być dłuższy niż 1 znak.|Kod typu powiązania nie może przekraczać {{ limit }} znaków.
+            min_length: '{1} Kod typu powiązania musi mieć co najmniej 1 znak.|{2,3,4} Kod typu powiązania musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Kod typu powiązania musi mieć co najmniej {{ limit }} znaków.'
+            max_length: '{1} Kod typu powiązania nie może być dłuższy niż 1 znak.|{2,3,4} Kod typu powiązania nie może przekraczać {{ limit }} znaków.|[5,Inf[ Kod typu powiązania nie może przekraczać {{ limit }} znaków.'
             not_blank: Wprowadź kod typu powiązania.
             regex: Kod typu powiązania może zawierać wyłącznie litery, cyfry, myślniki i podkreślenia.
             unique: Typ powiązania z podanym kodem już istnieje.

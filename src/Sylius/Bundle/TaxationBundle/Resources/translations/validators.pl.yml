@@ -5,8 +5,8 @@ sylius:
     tax_category:
         name:
             not_blank: 'Proszę podać nazwę kategorii podatkowej.'
-            min_length: 'Nazwa kategorii podatkowej musi mieć co najmniej 1 znak.|Nazwa kategorii podatkowej musi mieć co najmniej {{ limit }} znaków.'
-            max_length: 'Nazwa kategorii podatkowej nie może być dłuższa niż 1 znak.|Nazwa kategorii podatkowej nie może przekraczać {{ limit }} znaków.'
+            min_length: '{1} Nazwa kategorii podatkowej musi mieć co najmniej 1 znak.|{2,3,4} Nazwa kategorii podatkowej musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa kategorii podatkowej musi mieć co najmniej {{ limit }} znaków.'
+            max_length: '{1} Nazwa kategorii podatkowej nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa kategorii podatkowej nie może przekraczać {{ limit }} znaków.|[5,Inf[ Nazwa kategorii podatkowej nie może przekraczać {{ limit }} znaków.'
         code:
             max_length: 'Kod nie może być dłuższy niż {{ limit }} znaków.'
             not_blank: 'Proszę podać kod kategorii podatkowej.'
@@ -17,8 +17,8 @@ sylius:
             not_blank: 'Proszę wybrać kategorię podatkową.'
         name:
             not_blank: 'Proszę podać nazwę stawki podatkowej.'
-            min_length: 'Nazwa stawki podatkowej musi mieć co najmniej 1 znak.|Nazwa stawki podatkowej musi mieć co najmniej {{ limit }} znaków.'
-            max_length: 'Nazwa stawki podatkowej nie może być dłuższa niż 1 znak.|Nazwa stawki podatkowej nie może przekraczać {{ limit }} znaków.'
+            min_length: '{1} Nazwa stawki podatkowej musi mieć co najmniej 1 znak.|{2,3,4} Nazwa stawki podatkowej musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa stawki podatkowej musi mieć co najmniej {{ limit }} znaków.'
+            max_length: '{1} Nazwa stawki podatkowej nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa stawki podatkowej nie może przekraczać {{ limit }} znaków.|[5,Inf[ Nazwa stawki podatkowej nie może przekraczać {{ limit }} znaków.'
         amount:
             invalid: 'Wartość stawki podatkowej jest nieprawidłowa.'
             not_blank: 'Proszę podać wartość stawki podatkowej.'
