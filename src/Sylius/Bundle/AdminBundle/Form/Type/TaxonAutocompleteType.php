@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 
@@ -32,8 +33,11 @@ final class TaxonAutocompleteType extends AbstractType
     {
         $resolver->setDefaults([
             'class' => $this->taxonClass,
-            'choice_label' => 'fullname',
         ]);
+
+        $resolver->setDefault('choice_label', function (Options $options): string {
+            return $options['extra_options']['choice_label'] ?? 'fullname';
+        });
     }
 
     public function getBlockPrefix(): string
