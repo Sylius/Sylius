@@ -1,5 +1,7 @@
 {% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
+{% set prefixes = ['sylius_shop.product.index'] %}
+
 {% block content %}
     {% hook 'sylius_shop.product.index' with { products, resources } %}
 {% endblock %}
