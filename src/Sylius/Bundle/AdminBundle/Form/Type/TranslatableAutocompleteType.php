@@ -39,6 +39,10 @@ final class TranslatableAutocompleteType extends AbstractType
             return $options['extra_options']['choice_label'] ?? 'name';
         });
 
+        $resolver->setDefault('choice_value', function (Options $options, $previousValue): mixed {
+            return $options['extra_options']['choice_value'] ?? $previousValue;
+        });
+
         $resolver->setDefault('entity_fields', function (Options $options): array {
             return $options['extra_options']['entity_fields'] ?? ['code'];
         });
