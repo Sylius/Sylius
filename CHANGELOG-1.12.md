@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.20 (2025-12-16)
+
+#### Details
+
+- [#17417](https://github.com/Sylius/Sylius/pull/17417) [Docs] Add links to 2.x docs on the 1.x documentation ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#17472](https://github.com/Sylius/Sylius/pull/17472) [Docs] Disallow indexing old-docs in search engines ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#17494](https://github.com/Sylius/Sylius/pull/17494) [Docs v1] Organization docs ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#17500](https://github.com/Sylius/Sylius/pull/17500) Update README.md ([@kulczy](https://github.com/kulczy))
+- [#17502](https://github.com/Sylius/Sylius/pull/17502) Update breadcrumbs.html ([@kulczy](https://github.com/kulczy))
+- [#18589](https://github.com/Sylius/Sylius/pull/18589) [RFC] Add telemetry feature ([@TheMilek](https://github.com/TheMilek))
+
 ## v1.12.19 (2024-07-17)
 
 #### Details
