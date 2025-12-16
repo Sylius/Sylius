@@ -22,8 +22,7 @@ final class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /** @test */
-    public function it_configures_batch_size_to_100_by_default(): void
+    public function test_it_configures_batch_size_to_100_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -32,8 +31,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_for_assigning_integer_as_batch_size(): void
+    public function test_it_allows_for_assigning_integer_as_batch_size(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['catalog_promotions' => ['batch_size' => 200]]],
@@ -42,8 +40,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_enables_order_by_identifier_by_default(): void
+    public function test_it_enables_order_by_identifier_by_default(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -52,8 +49,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_to_enable_order_by_identifier(): void
+    public function test_it_allows_to_enable_order_by_identifier(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['order_by_identifier' => true]],
@@ -62,8 +58,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_to_disable_order_by_identifier(): void
+    public function test_it_allows_to_disable_order_by_identifier(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['order_by_identifier' => false]],
@@ -72,8 +67,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_has_a_set_default_order_token_length(): void
+    public function test_it_has_a_set_default_order_token_length(): void
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -82,8 +76,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_allows_changing_the_order_token_length(): void
+    public function test_it_allows_changing_the_order_token_length(): void
     {
         $this->assertProcessedConfigurationEquals(
             [['order_token_length' => 128]],
@@ -92,8 +85,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_throws_exception_when_order_token_length_is_invalid(): void
+    public function test_it_throws_exception_when_order_token_length_is_invalid(): void
     {
         $this->assertConfigurationIsInvalid([['order_token_length' => 'string']]);
         $this->assertConfigurationIsInvalid(
@@ -108,16 +100,14 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_throws_an_exception_if_value_other_then_integer_is_declared_as_batch_size(): void
+    public function test_it_throws_an_exception_if_value_other_then_integer_is_declared_as_batch_size(): void
     {
         $this->assertConfigurationIsInvalid([['catalog_promotions' => ['batch_size' => 'rep']]]);
 
         $this->assertConfigurationIsInvalid([['catalog_promotions' => ['batch_size' => 10.1]]]);
     }
 
-    /** @test */
-    public function it_throws_an_exception_if_value_of_batch_size_is_lower_then_1(): void
+    public function test_it_throws_an_exception_if_value_of_batch_size_is_lower_then_1(): void
     {
         $this->assertConfigurationIsInvalid(
             [['catalog_promotions' => ['batch_size' => -1]]],
@@ -127,6 +117,47 @@ final class ConfigurationTest extends TestCase
         $this->assertConfigurationIsInvalid(
             [['catalog_promotions' => ['batch_size' => 0]]],
             ' Expected value bigger than 0, but got 0.',
+        );
+    }
+
+    public function test_it_sets_default_telemetry_configuration(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            [
+                'telemetry' => [
+                    'enabled' => true,
+                    'salt' => null,
+                    'business' => true,
+                    'technical' => true,
+                    'plugins' => true,
+                    'url' => 'https://prism.sylius.com/telemetry',
+                ],
+            ],
+            'telemetry',
+        );
+    }
+
+    public function test_it_allows_overriding_telemetry_configuration(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[
+                'telemetry' => [
+                    'enabled' => false,
+                    'salt' => 'custom-salt',
+                ],
+            ]],
+            [
+                'telemetry' => [
+                    'enabled' => false,
+                    'salt' => 'custom-salt',
+                    'business' => true,
+                    'technical' => true,
+                    'plugins' => true,
+                    'url' => 'https://prism.sylius.com/telemetry',
+                ],
+            ],
+            'telemetry',
         );
     }
 
