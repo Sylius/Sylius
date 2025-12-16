@@ -1,5 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 use Robo\Exception\TaskException;
 use Robo\Result;
 use Robo\Symfony\ConsoleIO;
@@ -7,13 +18,13 @@ use Robo\Tasks;
 
 class RoboFile extends Tasks
 {
-    const ROOT_DIR = __DIR__;
+    private const ROOT_DIR = __DIR__;
 
-    const SUCCESS = 'success';
+    private const SUCCESS = 'success';
 
-    const FAILED = 'failed';
+    private const FAILED = 'failed';
 
-    const YES = 'yes';
+    private const YES = 'yes';
 
     public function ciPackages(ConsoleIO $io, string $packagesJson): ?Result
     {
@@ -26,34 +37,38 @@ class RoboFile extends Tasks
 
             try {
                 $processResult = $this->processPackagePipeline($package);
-                $result[$package] = null !== $processResult && $processResult->wasSuccessful() ? self::SUCCESS : self::FAILED;
+                $result[$package] = $processResult->wasSuccessful() ? self::SUCCESS : self::FAILED;
             } catch (TaskException) {
                 $result[$package] = self::FAILED;
             }
+
+            $this->endGroup();
         }
 
-        $this->endGroup();
-
         foreach ($result as $packageName => $value) {
-            printf("%s %s%s", $value === self::SUCCESS ? '✅' : '❌', $packageName, PHP_EOL);
+            printf('%s %s%s', $value === self::SUCCESS ? '✅' : '❌', $packageName, \PHP_EOL);
             $failed = $failed || $value === self::FAILED;
         }
 
-        exit(false === $failed ? 0 : 1);
+        exit($failed ? 1 : 0);
     }
 
     /**
      * @throws TaskException
      */
-    private function processPackagePipeline(string $package): ?Result
+    private function processPackagePipeline(string $package): Result
     {
         $symfonyVersion = getenv('SYMFONY_VERSION');
-        $useSwiftmailer = getenv('USE_SWIFTMAILER');
         $unstable = getenv('UNSTABLE');
         $packagePath = sprintf('%s/src/Sylius/%s', self::ROOT_DIR, $package);
+        $composerJsonPath = sprintf('%s/composer.json', $packagePath);
 
         if (false === $symfonyVersion) {
-            throw new RuntimeException('SYMFONY_VERSION environment variable is not set.');
+            throw new \RuntimeException('SYMFONY_VERSION environment variable is not set.');
+        }
+
+        if (!file_exists($composerJsonPath)) {
+            throw new \RuntimeException('composer.json file does not exist.');
         }
 
         $task = $this->taskExecStack()
@@ -62,16 +77,9 @@ class RoboFile extends Tasks
             ->exec(sprintf('composer config extra.symfony.require "%s"', $symfonyVersion))
         ;
 
-        if (self::YES === $useSwiftmailer) {
-            $task
-                ->exec('composer require --no-progress --no-update --no-scripts --no-plugins "sylius/mailer-bundle:^1.8"')
-                ->exec('composer require --no-progress --no-update --no-scripts --no-plugins "symfony/swiftmailer-bundle:^3.4"')
-            ;
-        }
-
         if (self::YES === $unstable) {
             $task->exec('composer config minimum-stability dev');
-            $task->exec('composer config prefer-stable false');
+            $task->exec('composer config prefer-stable true');
         }
 
         $task
@@ -80,20 +88,12 @@ class RoboFile extends Tasks
         ;
 
         if (in_array($package, ['Bundle/AdminBundle', 'Bundle/ApiBundle', 'Bundle/CoreBundle'])) {
-            $this->createTestAssets(sprintf('%s/Tests/Application', $packagePath));
+            $this->createTestAssets(sprintf('%s/tests/Application', $packagePath));
             $this->createTestAssets(sprintf('%s/test', $packagePath)); // Remove after all test apps have been moved
         }
 
         if ('Bundle/ApiBundle' === $package) {
-            $task->exec('Tests/Application/bin/console doctrine:schema:update --force');
-        }
-
-        if (false === str_starts_with($symfonyVersion, '^5.4') && 'Bundle/UserBundle' === $package) {
-            $task->exec('rm spec/Security/UserPasswordEncoderSpec.php');
-        }
-
-        if (file_exists(sprintf('%s/phpspec.yml', $packagePath)) || file_exists(sprintf('%s/phpspec.yml.dist', $packagePath)) || file_exists(sprintf('%s/phpspec.yaml', $packagePath))) {
-            $task->exec('vendor/bin/phpspec run --ansi --no-interaction -f dot');
+            $task->exec('tests/Application/bin/console doctrine:schema:update --force');
         }
 
         if (file_exists(sprintf('%s/phpunit.xml', $packagePath)) || file_exists(sprintf('%s/phpunit.xml.dist', $packagePath))) {

@@ -1,0 +1,9 @@
+{% set form = hookable_metadata.context.form %}
+
+{{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'novalidate': 'novalidate'}}) }}
+
+{% hook 'form' %}
+
+{% include '@SyliusShop/account/login/content/login_container/form/csrf_token.html.twig' %}
+
+{{ form_end(form, {'render_rest': false}) }}

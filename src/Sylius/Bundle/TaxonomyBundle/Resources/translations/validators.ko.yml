@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    taxon:
+        code:
+            max_length: '코드는 {{ limit }}자를 초과할 수 없습니다.'
+            not_blank: '택슨 코드를 입력하세요.'
+            regex: '택슨 코드는 문자, 숫자, 하이픈(-), 밑줄(_)만 사용할 수 있습니다.'
+            unique: '해당 코드의 택슨이 이미 존재합니다.'
+        name:
+            max_length: '택슨 이름은 255자를 초과할 수 없습니다.'
+            not_blank: '택슨 이름을 입력하세요.'
+        slug:
+            not_blank: '택슨 슬러그를 입력하세요.'
+            unique: '택슨 슬러그는 고유해야 합니다.'
+    taxonomy:
+        name:
+            max_length: '택소노미 이름은 255자를 초과할 수 없습니다.'
+            not_blank: '택소노미 이름을 입력하세요.'

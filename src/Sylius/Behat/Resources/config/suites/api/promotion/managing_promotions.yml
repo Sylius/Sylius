@@ -21,6 +21,7 @@ default:
                 - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.taxon
 
+                - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer_group
                 - sylius.behat.context.setup.locale
@@ -31,14 +32,14 @@ default:
                 - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.taxonomy
-                - sylius.behat.context.setup.admin_api_security
 
                 - sylius.behat.context.api.admin.managing_promotions
+                - sylius.behat.context.api.admin.removing_product
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
-                - Sylius\Behat\Context\Api\Admin\RemovingProductContext
-                - Sylius\Behat\Context\Api\Admin\RemovingTaxonContext
                 - sylius.behat.context.api.admin.translation
+                - sylius.behat.context.api.debug
+                - Sylius\Behat\Context\Api\Admin\RemovingTaxonContext
 
             filters:
                 tags: "@managing_promotions&&@api"

@@ -82,9 +82,8 @@ final class WinzouStateMachineAdapter implements StateMachineInterface
     {
         $reflection = new \ReflectionClass($stateMachine);
         $configProperty = $reflection->getProperty('config');
-        $configProperty->setAccessible(true);
 
-        return  $configProperty->getValue($stateMachine);
+        return $configProperty->getValue($stateMachine);
     }
 
     public function getTransitionFromState(object $subject, string $graphName, string $fromState): ?string

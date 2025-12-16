@@ -13,8 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
+use Sylius\Behat\Exception\SharedStorageElementNotFoundException;
+
 interface SharedStorageInterface
 {
+    /** @throws SharedStorageElementNotFoundException */
     public function get(string $key);
 
     public function has(string $key): bool;

@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    locale:
+        code:
+            max_length: 'कोड {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+            not_blank: 'कृपया लोकेल कोड चुनें।'
+            locale: 'यह मान मान्य लोकेल कोड नहीं है।'
+            unique: 'लोकेल कोड अद्वितीय होना चाहिए।'

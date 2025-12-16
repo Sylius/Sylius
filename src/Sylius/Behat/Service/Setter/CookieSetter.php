@@ -20,7 +20,7 @@ use DMore\ChromeDriver\ChromeDriver;
 use FriendsOfBehat\SymfonyExtension\Driver\SymfonyDriver;
 use Symfony\Component\BrowserKit\Cookie;
 
-final class CookieSetter implements CookieSetterInterface
+final readonly class CookieSetter implements CookieSetterInterface
 {
     public function __construct(
         private Session $minkSession,
@@ -28,17 +28,11 @@ final class CookieSetter implements CookieSetterInterface
     ) {
     }
 
-    public function setCookie($name, $value)
+    public function setCookie(string $name, string $value): void
     {
         $driver = $this->minkSession->getDriver();
 
-        if ($driver instanceof ChromeDriver || $driver instanceof PantherDriver) {
-            if (!$driver->isStarted()) {
-                $driver->start();
-            }
-        }
-
-        $this->prepareMinkSessionIfNeeded($this->minkSession);
+        $this->ensureDriverStarted($driver);
 
         if ($driver instanceof SymfonyDriver) {
             $driver->getClient()->getCookieJar()->set(
@@ -48,7 +42,15 @@ final class CookieSetter implements CookieSetterInterface
             return;
         }
 
+        $this->prepareMinkSessionIfNeeded($this->minkSession);
         $this->minkSession->setCookie($name, $value);
+    }
+
+    private function ensureDriverStarted(mixed $driver): void
+    {
+        if (($driver instanceof ChromeDriver || $driver instanceof PantherDriver) && !$driver->isStarted()) {
+            $driver->start();
+        }
     }
 
     private function prepareMinkSessionIfNeeded(Session $session): void
@@ -66,18 +68,19 @@ final class CookieSetter implements CookieSetterInterface
             return false;
         }
 
-        if ($driver instanceof Selenium2Driver && $driver->getWebDriverSession() === null) {
-            return true;
+        if ($driver instanceof Selenium2Driver) {
+            return $driver->getWebDriverSession() === null || $this->isPageNotLoaded($session->getCurrentUrl());
         }
 
         if ($driver instanceof ChromeDriver) {
-            return true;
+            return $this->isPageNotLoaded($session->getCurrentUrl());
         }
 
-        if (str_contains($session->getCurrentUrl(), $this->minkParameters['base_url'])) {
-            return false;
-        }
+        return !str_contains($session->getCurrentUrl(), $this->minkParameters['base_url']);
+    }
 
-        return true;
+    private function isPageNotLoaded(string $url): bool
+    {
+        return in_array($url, ['', 'about:blank', 'data:,'], true);
     }
 }

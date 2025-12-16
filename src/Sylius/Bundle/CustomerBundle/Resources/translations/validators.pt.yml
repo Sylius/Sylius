@@ -4,19 +4,31 @@
 sylius:
     customer:
         first_name:
-            max: O nome não deve ter mais que {{ limit }} caracteres.
-            min: O primeiro nome deve ter pelo menos {{ limit }} carateres.
-            not_blank: Por favor, insira o seu primeiro nome.
+            max: 'O nome não pode ter mais de {{ limit }} caracteres.'
+            min: 'O nome deve ter pelo menos {{ limit }} caractere.|O nome deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe seu nome.'
         last_name:
-            max: O apelido não deve ter mais que {{ limit }} carateres.
-            min: O apelido deve ter pelo menos {{ limit }} carateres.
-            not_blank: Por favor introduza o seu apelido.
+            max: 'O sobrenome não pode ter mais de {{ limit }} caracteres.'
+            min: 'O sobrenome deve ter pelo menos {{ limit }} caractere.|O sobrenome deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe seu sobrenome.'
         gender:
-            not_blank: Por favor escolha o seu género.
+            not_blank: 'Escolha seu gênero.'
         email:
-            already_used: Este email já está registado. Faça login ou redefina a sua palavra-passe.
-            max: O e-mail não deve ter mais que {{ limit }} carateres.
-            not_blank: Por favor introduza o seu endereço de e-mail.
-            invalid: Este endereço de e-mail é inválido.
-            unique: Este endereço de e-mail já está registado.
-            registered: Este endereço de e-mail já se encontra registado. Faça login ou redefina a sua palavra-passe.
+            already_used: 'Este e-mail já está em uso, faça login ou use a opção de recuperar senha.'
+            max: 'O e-mail não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe seu e-mail.'
+            invalid: 'Este e-mail é inválido.'
+            unique: 'Este e-mail já está em uso.'
+            registered: 'Este e-mail já está registrado, faça login ou use a opção de recuperar senha.'
+        phone_number:
+            max: 'O telefone não pode ter mais de {{ limit }} caracteres.'
+    customer_group:
+        code:
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            regex: 'O código do grupo de clientes pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'O código do grupo de clientes deve ser único.'
+            not_blank: 'Informe um código para o grupo de clientes.'
+        name:
+            max: 'O nome do grupo de clientes não pode ter mais de {{ limit }} caracteres.'
+            min: 'O nome do grupo de clientes deve ter pelo menos {{ limit }} caractere.|O nome do grupo de clientes deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Informe o nome do grupo de clientes.'

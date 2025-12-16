@@ -1,0 +1,7 @@
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {, 1 artikel} other {, # artiklar}}'
+        lowest_price_days_before_discount_was: '{days, plural, 
+            one {Det lägsta priset från # dag före nuvarande rabatt var {price}} 
+            other {Det lägsta priset från # dagar före nuvarande rabatt var {price}}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Denna kund har inte lagt någon order} one {Denna kund har lagt en order} other {Totalt har denna kund lagt # order över alla kanaler}}'

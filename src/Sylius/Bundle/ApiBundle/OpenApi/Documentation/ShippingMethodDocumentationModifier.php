@@ -38,16 +38,26 @@ final class ShippingMethodDocumentationModifier implements DocumentationModifier
         $components = $docs->getComponents();
         $schemas = $components->getSchemas();
 
-        if (isset($schemas['ShippingMethod.jsonld-shop.shipping_method.read'])) {
-            $schemas['ShippingMethod.jsonld-shop.shipping_method.read']['properties']['price'] = [
+        $schemasToBeUpdated = [
+            'ShippingMethod-sylius.shop.shipping_method.index',
+            'ShippingMethod-sylius.shop.shipping_method.show',
+            'ShippingMethod.jsonld-sylius.shop.shipping_method.index',
+            'ShippingMethod.jsonld-sylius.shop.shipping_method.show',
+        ];
+
+        foreach ($schemasToBeUpdated as $schemaToBeUpdated) {
+            if (!isset($schemas[$schemaToBeUpdated])) {
+                continue;
+            }
+
+            $schemas[$schemaToBeUpdated]['properties']['price'] = [
                 'type' => 'integer',
                 'readOnly' => true,
                 'default' => 0,
             ];
-
-            $components = $components->withSchemas($schemas);
-            $docs = $docs->withComponents($components);
         }
+
+        $docs->withComponents($components->withSchemas($schemas));
 
         return $this->modifyDescription($docs);
     }

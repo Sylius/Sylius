@@ -1,0 +1,6 @@
+{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
+
+{% set form = hookable_metadata.context.form %}
+{% set prefixes = hookable_metadata.prefixes %}
+
+{{ translations.with_hook(form.translations, prefixes, 'list', { accordion_flush: true }) }}

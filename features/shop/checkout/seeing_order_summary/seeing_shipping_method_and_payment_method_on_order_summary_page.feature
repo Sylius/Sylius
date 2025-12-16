@@ -1,0 +1,23 @@
+@checkout
+Feature: Seeing an order shipping method and payment method details on summary page
+    In order to be certain about a shipping method and payment method
+    As a Visitor
+    I want to be able to see all details of chosen shipping method and payment method
+
+    Background:
+        Given the store operates on a single channel in "United States"
+        And the store has a product "Lannister Coat" priced at "$19.99"
+        And the store allows shipping with "Cash on delivery"
+        And the store allows paying "Offline"
+
+    @api @ui
+    Scenario: Seeing shipping method and payment method
+        Given I added product "Lannister Coat" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        And I proceed with "Cash on delivery" shipping method and "Offline" payment
+        Then I should be on the checkout summary step
+        And my order's shipping method should be "Cash on delivery"
+        And my order's payment method should be "Offline"

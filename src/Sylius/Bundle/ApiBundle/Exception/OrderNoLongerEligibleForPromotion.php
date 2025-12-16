@@ -13,10 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Exception;
 
-final class OrderNoLongerEligibleForPromotion extends \RuntimeException
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
+
+final class OrderNoLongerEligibleForPromotion extends UnprocessableEntityHttpException
 {
     public function __construct(string $promotionName)
     {
-        parent::__construct(\sprintf('Order is no longer eligible for this %s promotion. Your cart was recalculated.', $promotionName));
+        parent::__construct(
+            sprintf('Order is no longer eligible for this %s promotion. Your cart was recalculated.', $promotionName),
+        );
     }
 }

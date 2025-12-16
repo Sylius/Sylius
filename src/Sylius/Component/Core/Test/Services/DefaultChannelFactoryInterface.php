@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Test\Services;
 
 interface DefaultChannelFactoryInterface
 {
+    /** @return array<string, mixed> */
     public function create(
         ?string $code = null,
         ?string $name = null,

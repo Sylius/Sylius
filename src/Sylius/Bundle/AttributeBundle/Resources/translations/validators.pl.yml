@@ -5,19 +5,25 @@ sylius:
     attribute:
         name:
             not_blank: Proszę podać nazwę atrybutu.
-            min_length: Nazwa atrybutu musi mieć co najmniej 1 znak.|Nazwa atrybutu musi mieć co najmniej {{ limit }} znaków.
-            max_length: Nazwa atrybutu nie może mieć więcej niż 1 znak.|Nazwa atrybutu nie może mieć więcej niż {{ limit }} znaków.
+            min_length: '{1} Nazwa atrybutu musi mieć co najmniej 1 znak.|{2,3,4} Nazwa atrybutu musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa atrybutu musi mieć co najmniej {{ limit }} znaków.'
+            max_length: '{1} Nazwa atrybutu nie może mieć więcej niż 1 znak.|{2,3,4} Nazwa atrybutu nie może mieć więcej niż {{ limit }} znaki.|[5,Inf[ Nazwa atrybutu nie może mieć więcej niż {{ limit }} znaków.'
         code:
+            min_length: '{1} Kod atrybutu musi mieć co najmniej 1 znak.|{2,3,4} Kod atrybutu musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Kod atrybutu musi mieć co najmniej {{ limit }} znaków.'
+            max_length: '{1} Kod atrybutu nie może być dłuższy niż 1 znak.|{2,3,4} Kod atrybutu nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod atrybutu nie może być dłuższy niż {{ limit }} znaków.'
             not_blank: Proszę podać kod atrybutu.
             regex: Kod atrybutu może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Ten kod jest już w użyciu.
         configuration:
-            max_entries: Maksymalna długość musi być większa bądź równa minimalnej długości.
+            max_entries: Wartość maksymalnej liczby wpisów musi być większa lub równa minimalnej liczbie wpisów.
             max_length: Maksymalna długość musi być większa bądź równa minimalnej długości.
+            min_entries: Minimalna liczba wpisów musi być mniejsza lub równa liczbie dodanych opcji.
+            multiple: Pole „wiele wartości” musi być ustawione na true, jeśli podano wartości minimalne lub maksymalne.
         presentation:
             not_blank: Proszę wprowadzić opis atrybutu.
-            min_length: Opis atrybutu musi zawierać co najmniej 1 znak.|Opis atrybutu musi zawierać co najmniej {{ limit }} znaków.
-            max_length: Opis atrybutu nie może składać się z więcej niż 1 znaku.|Opis atrybutu nie może składać się z więcej niż {{ limit }} znaków.
+            min_length: '{1} Opis atrybutu musi zawierać co najmniej 1 znak.|{2,3,4} Opis atrybutu musi zawierać co najmniej {{ limit }} znaki.|[5,Inf[ Opis atrybutu musi zawierać co najmniej {{ limit }} znaków.'
+            max_length: '{1} Opis atrybutu nie może składać się z więcej niż 1 znaku.|{2,3,4} Opis atrybutu nie może składać się z więcej niż {{ limit }} znaków.|[5,Inf[ Opis atrybutu nie może składać się z więcej niż {{ limit }} znaków.'
+        type:
+            unregistered: 'Typ atrybutu "%type%" nie jest zarejestrowany. Dostępne typy atrybutów: %available_types%.'
     attribute_value:
         attribute:
             not_blank: Proszę wybrać atrybut.

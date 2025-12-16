@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -29,15 +30,8 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     public function __construct(
         private DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         private FactoryInterface $shipmentFactory,
-        private ?ShippingMethodsResolverInterface $shippingMethodsResolver = null,
+        private ShippingMethodsResolverInterface $shippingMethodsResolver,
     ) {
-        if (2 === func_num_args() || null === $shippingMethodsResolver) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.2',
-                'Not passing a $shippingMethodsResolver explicitly is deprecated and will be prohibited in Sylius 2.0',
-            );
-        }
     }
 
     public function process(BaseOrderInterface $order): void
@@ -93,7 +87,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         Assert::isInstanceOf($order, OrderInterface::class);
 
         foreach ($order->getItemUnits() as $itemUnit) {
-            if (null === $itemUnit->getShipment()) {
+            /** @var ProductVariantInterface $shippable */
+            $shippable = $itemUnit->getShippable();
+
+            if (null === $itemUnit->getShipment() && $shippable->isShippingRequired()) {
                 $shipment->addUnit($itemUnit);
             }
         }
@@ -105,10 +102,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
         $shipment = $order->getShipments()->first();
 
         $this->processShipmentUnits($order, $shipment);
-
-        if (null === $this->shippingMethodsResolver) {
-            return;
-        }
 
         if (!in_array($shipment->getMethod(), $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
             try {

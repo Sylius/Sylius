@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-interface ShowPageInterface extends SymfonyPageInterface
+interface ShowPageInterface extends SyliusPageInterface
 {
     public function getNumber(): string;
 
@@ -46,7 +46,7 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function getSubtotal(): string;
 
-    public function getOrderShipmentStatus(): string;
+    public function getOrderShipmentState(): string;
 
     public function getShipmentStatus(): string;
 
@@ -54,7 +54,7 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     public function getPaymentPrice(): string;
 
-    public function getPaymentStatus(): string;
+    public function getPaymentState(): string;
 
     public function getOrderPaymentStatus(): string;
 

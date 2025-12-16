@@ -1,0 +1,8 @@
+{% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+
+{% set promotion = hookable_metadata.context.resource %}
+{% set index_url = path('sylius_admin_promotion_coupon_index', {promotionId: promotion.id}) %}
+
+{% if promotion.couponBased %}
+    {{ button.default(sylius_test_form_attribute('manage-coupons')|merge({ text: 'sylius.ui.manage_coupons'|trans, url: index_url, class: 'btn'})) }}
+{% endif %}

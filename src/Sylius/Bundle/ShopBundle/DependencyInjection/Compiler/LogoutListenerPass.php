@@ -37,7 +37,7 @@ final class LogoutListenerPass implements CompilerPassInterface
 
         $logoutListener = new Definition(ShopUserLogoutHandler::class, [
             new Reference('sylius.context.channel.composite'),
-            new Reference('sylius.storage.cart_session'),
+            new Reference('sylius_shop.storage.cart_session'),
         ]);
         $logoutListener->addTag('kernel.event_listener', [
             'event' => LogoutEvent::class,

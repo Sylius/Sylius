@@ -1,8 +1,0 @@
-{% import '@SyliusUi/Macro/labels.html.twig' as label %}
-
-{% set cart = constant('Sylius\\Component\\Shipping\\Model\\Shipment::STATE_CART') %}
-{% set shipped = constant('Sylius\\Component\\Shipping\\Model\\Shipment::STATE_SHIPPED') %}
-
-<div class="item">
-    {{ sylius_template_event('sylius.admin.order.show.shipment_content', _context) }}
-</div>

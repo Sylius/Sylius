@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.error500.error.layout':
+            message:
+                template: '@SyliusShop/errors/error500/layout/message.html.twig'
+                priority: 0

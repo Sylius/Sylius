@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ResendOrderConfirmationEmailWithValidOrderState extends Constraint
 {
     public string $message = 'sylius.resend_order_confirmation_email.invalid_order_state';

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -22,7 +22,7 @@ use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class TaxonContext implements Context
+final readonly class TaxonContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,

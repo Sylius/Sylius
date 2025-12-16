@@ -22,6 +22,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Range;
 
 /**
  * We extend the item form type a bit, to add a variant select field
@@ -31,11 +32,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class CartItemTypeExtension extends AbstractTypeExtension
 {
+    public function __construct(private readonly int $orderItemQuantityModifierLimit)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('quantity', IntegerType::class, [
             'attr' => ['min' => 1],
             'label' => 'sylius.ui.quantity',
+            'constraints' => [
+                new Range([
+                    'min' => 1,
+                    'max' => $this->orderItemQuantityModifierLimit,
+                    'notInRangeMessage' => 'sylius.cart_item.quantity.not_in_range',
+                    'groups' => 'sylius',
+                ]),
+            ],
         ]);
 
         if (isset($options['product']) && $options['product']->hasVariants() && !$options['product']->isSimple()) {

@@ -1,0 +1,12 @@
+{% set order = hookable_metadata.context.resource %}
+
+<tbody>
+    {% for item in order.items %}
+        {% set variant = item.variant %}
+        {% set product = variant.product %}
+
+        <tr {{ sylius_test_html_attribute('item', item.productName) }}>
+            {% hook 'body' with {item, product, variant} %}
+        </tr>
+    {% endfor %}
+</tbody>

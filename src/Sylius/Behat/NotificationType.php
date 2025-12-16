@@ -26,9 +26,19 @@ final class NotificationType implements \Stringable
         return $this->value;
     }
 
+    /**
+     * @deprecated Use ::error() instead
+     *
+     * @todo remove and replace all usages with ::error() in 2.0
+     */
     public static function failure(): self
     {
         return static::getTyped('failure');
+    }
+
+    public static function error(): self
+    {
+        return static::getTyped('error');
     }
 
     public static function success(): self

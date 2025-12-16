@@ -38,7 +38,11 @@ final class ProductVariantsToCodesTransformer implements DataTransformerInterfac
         return new ArrayCollection($this->productVariantRepository->findBy(['code' => $value]));
     }
 
-    /** @throws \InvalidArgumentException */
+    /**
+     * @return array<string>
+     *
+     * @throws \InvalidArgumentException
+     */
     public function reverseTransform($value): array
     {
         Assert::isInstanceOf($value, Collection::class);

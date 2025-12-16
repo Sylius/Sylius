@@ -17,5 +17,10 @@ use Sylius\Component\Core\Model\ProductInterface;
 
 interface ProductVariantsMapProviderInterface
 {
+    /**
+     * @param array<string, mixed> $context
+     *
+     * @return array<array-key, mixed>
+     */
     public function provide(ProductInterface $product, array $context): array;
 }

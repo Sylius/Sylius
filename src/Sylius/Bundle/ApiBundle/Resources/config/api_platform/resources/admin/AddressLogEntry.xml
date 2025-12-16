@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.address_log_entry.class%">
+        <operations>
+            <operation name="sylius_api_admin_address_log_entry_get" class="ApiPlatform\Metadata\NotExposed" routePrefix="admin" />
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.address_log_entry.class%" uriTemplate="/admin/addresses/{id}/log-entries">
+        <uriVariables>
+            <uriVariable parameterName="id" fromClass="%sylius.model.address_log_entry.class%">
+                <identifiers>
+                    <values>
+                        <value>objectId</value>
+                    </values>
+                </identifiers>
+            </uriVariable>
+        </uriVariables>
+
+        <operations>
+            <operation name="sylius_api_admin_address_address_log_entry_get_collection" class="ApiPlatform\Metadata\GetCollection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:address:log_entry:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

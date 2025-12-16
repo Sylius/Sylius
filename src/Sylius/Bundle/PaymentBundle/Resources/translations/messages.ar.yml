@@ -4,31 +4,35 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: 'اسم حامل البطاقة'
-            expiry_month: 'شهر انتهاء الصلاحية'
-            expiry_year: 'سنة انتهاء الصلاحية'
-            number: 'رقم البطاقة'
-            security_code: 'رمز الأمان (CVV)'
-            type: 'نوع البطاقة'
+            cardholder_name: اسم صاحب البطاقة
+            expiry_month: شهر الانتهاء
+            expiry_year: سنة الانتهاء
+            number: رقم البطاقة
+            security_code: رمز الأمان (CVV)
+            type: نوع البطاقة
         payment:
-            amount: 'مبلغ الدفع'
-            method: 'طريقة الدفع'
+            amount: مبلغ الدفع
+            method: طريقة الدفع
             state:
-                header: 'حالة الدفع'
-                checkout: 'إتمام الشراء'
-                completed: 'تم الإتمام'
-                authorized: 'تم التفويض'
-                failed: 'فشل الدفع'
-                new: 'جديد'
-                pending: 'معلق'
-                processing: 'قيد المعالجة'
-                unknown: 'غير معروف'
-                void: 'ملغي'
-                cancelled: 'تم الإلغاء'
-                refunded: 'تم الاسترداد'
+                header: حالة الدفع
+                checkout: في مرحلة الدفع
+                completed: مكتمل
+                authorized: تم التفويض
+                failed: فشل
+                new: جديد
+                pending: قيد الانتظار
+                processing: جاري المعالجة
+                unknown: غير معروف
+                void: لاغٍ
+                cancelled: تم الإلغاء
+                refunded: تم الاسترداد
         payment_method:
-            description: 'الوصف'
-            enabled: 'مفعل؟'
-            instructions: 'التعليمات'
-            name: 'الاسم'
-            position: 'الموقع'
+            description: الوصف
+            enabled: مفعّل
+            instructions: التعليمات
+            name: الاسم
+            position: الترتيب
+        gateway_config:
+            type: النوع
+    gateway_factory:
+        offline: دون اتصال

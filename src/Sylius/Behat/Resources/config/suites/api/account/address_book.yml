@@ -6,6 +6,7 @@ default:
         api_address_book:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.guest_cart
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.cart
@@ -20,8 +21,10 @@ default:
                 - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.address
-                - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.cart
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout
+                - sylius.behat.context.setup.checkout.address
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.payment
@@ -30,7 +33,9 @@ default:
                 - sylius.behat.context.setup.shop_api_security
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.address
+                - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
                 - sylius.behat.context.api.shop.save
 

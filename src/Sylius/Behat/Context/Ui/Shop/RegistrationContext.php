@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
@@ -93,14 +94,16 @@ class RegistrationContext implements Context
         $this->registerElement->specifyEmail($email);
     }
 
-    /**
-     * @When I specify the password as :password
-     * @When I do not specify the password
-     */
-    public function iSpecifyThePasswordAs(?string $password = null): void
+    #[When('I specify the password as :password')]
+    public function iSpecifyThePasswordAs(string $password): void
     {
         $this->registerElement->specifyPassword($password);
-        $this->sharedStorage->set('password', $password);
+    }
+
+    #[When('I do not specify the password')]
+    public function iDoNotSpecifyThePassword(): void
+    {
+        $this->registerElement->specifyPassword('');
     }
 
     /**
@@ -111,12 +114,10 @@ class RegistrationContext implements Context
         $this->registerElement->verifyPassword($password);
     }
 
-    /**
-     * @Given I do not confirm the password
-     */
+    #[When('I do not confirm the password')]
     public function iDoNotConfirmPassword(): void
     {
-        $this->registerElement->verifyPassword(null);
+        $this->registerElement->verifyPassword('');
     }
 
     /**
@@ -390,6 +391,6 @@ class RegistrationContext implements Context
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
-        Assert::true($this->registerElement->checkValidationMessageFor($element, $expectedMessage));
+        Assert::same($this->registerElement->getValidationMessage(str_replace(' ', '_', $element)), $expectedMessage);
     }
 }

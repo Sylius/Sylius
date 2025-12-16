@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        delete_error: 'The channel cannot be deleted. At least one enabled channel is required.'
+    checkout:
+        complete_error: 'There was an unexpected problem with completing an order. Please, try to place your order again.'
+    contact:
+        request_success: 'Your contact request has been submitted successfully.'
+        request_error: 'A problem occurred while sending the contact request. Please try again later.'
+    customer:
+        add_address: 'Address has been successfully added.'
+        impersonate: 'Successfully impersonated customer %name%.'
+        set_address_as_default: 'Address has been set as default.'
+    order:
+        apply_state_machine_transition_error: 'There was an unexpected problem with updating an order. Please, try to update order again.'
+        promotion_integrity: 'You are no longer eligible for this promotion %promotionName%.'
+        total_integrity: 'Your order total has been changed, check your order information and confirm it again.'
+        update_error: 'There was an unexpected problem with updating an order. Please, try to update order again.'
+    payment:
+        apply_state_machine_transition_error: 'There was an unexpected problem with updating a payment. Please, try to update payment again.'
+    product:
+        in_use_by_promotion_rule: 'Cannot delete a product that is in use by a promotion rule.'
+        out_of_stock: 'There is only %quantity% of this product in the stock.'
+    product_variant:
+        update_error: 'There was an unexpected problem with updating a product variant. Please, try to update product variant again.'
+    promotion:
+        update_rules: 'Some rules of the promotions with codes %codes% have been updated.'
+    taxon:
+        in_use_by_promotion_rule: 'Cannot delete a taxon that is in use by a promotion rule.'
+        menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'

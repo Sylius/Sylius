@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Account;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-final class ResetElement extends Element implements ResetElementInterface
+class ResetElement extends SyliusElement implements ResetElementInterface
 {
     public function reset(): void
     {

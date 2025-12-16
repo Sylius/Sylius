@@ -1,0 +1,41 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        address:
+            city: 'शहर'
+            company: 'कंपनी'
+            country: 'देश'
+            first_name: 'पहला नाम'
+            last_name: 'अंतिम नाम'
+            phone_number: 'फ़ोन नंबर'
+            postcode: 'पिन कोड'
+            street: 'सड़क का पता'
+            province: 'प्रांत'
+            zone: 'क्षेत्र'
+        country:
+            add_province: 'प्रांत जोड़ें'
+            name: 'नाम'
+            provinces: 'प्रांत'
+            select: 'चयन करें'
+            enabled: 'सक्रिय'
+        province:
+            name: 'नाम'
+            abbreviation: 'संक्षेप'
+            select: 'चयन करें'
+        zone:
+            add_member: 'सदस्य जोड़ें'
+            members: 'सदस्य'
+            name: 'नाम'
+            type: 'प्रकार'
+            types:
+                country: 'देश'
+                province: 'प्रांत'
+                zone: 'क्षेत्र'
+            scope: 'स्कोप'
+            scopes:
+                all: 'सभी'
+            select: 'चयन करें'
+        zone_member:
+            select: 'चयन करें'

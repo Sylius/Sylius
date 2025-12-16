@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="sylius_admin.provider.notification" class="Sylius\Bundle\AdminBundle\Notification\CompositeNotificationProvider">
+            <argument type="tagged_iterator" tag="sylius_admin.notification" />
+        </service>
+        <service id="Sylius\Bundle\AdminBundle\Notification\NotificationProviderInterface" alias="sylius_admin.provider.notification" />
+        <service id="sylius_admin.provider.notification.composite" alias="sylius_admin.provider.notification" />
+
+        <service id="sylius_admin.provider.notification.hub" class="Sylius\Bundle\AdminBundle\Notification\HubNotificationProvider">
+            <argument type="service" id="sylius.http_client" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="Psr\Http\Message\RequestFactoryInterface" />
+            <argument type="service" id="Psr\Http\Message\StreamFactoryInterface" />
+            <argument type="service" id="cache.app" />
+            <argument type="service" id="clock" />
+            <argument type="string">%sylius.admin.notification.uri%</argument>
+            <argument type="string">%kernel.environment%</argument>
+            <argument>%sylius.admin.notification.hub_enabled%</argument>
+            <argument>%sylius.admin.notification.frequency%</argument>
+            <tag name="sylius_admin.notification" />
+        </service>
+    </services>
+</container>

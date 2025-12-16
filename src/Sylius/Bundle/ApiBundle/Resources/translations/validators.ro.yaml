@@ -1,0 +1,56 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        expired_password_reset_token: 'Tokenul de resetare a parolei a expirat.'
+    account:
+        invalid_verification_token: 'Nu există utilizator în magazin cu tokenul de verificare a emailului %verificationToken%.'
+        is_verified: 'Contul cu emailul %email% este deja verificat.'
+    address:
+        without_country: 'O adresă fără țară nu poate exista'
+    code:
+        not_blank: 'Vă rugăm să introduceți un cod.'
+        invalid: 'Codul trebuie să conțină doar litere, cifre, cratime ("-" simbol) și underscore-uri ("_" simbol).'
+    contact_request:
+        email_is_invalid: 'Adresa de email furnizată este invalidă.'
+    country:
+        not_exist: 'Țara %countryCode% nu există.'
+    date_interval:
+        empty: 'Intervalul de date nu poate fi gol.'
+        invalid: 'Intervalul de date nu este un interval ISO 8601 valid.'
+    date_time:
+        invalid: 'Data și ora nu sunt în formatul ISO 8601 valid Y-m-d\TH:i:s.'
+    order:
+        not_empty: 'O comandă goală nu poate fi procesată.'
+    payment:
+        not_found: 'Plata nu există.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'Nu puteți schimba metoda de plată pentru o comandă anulată.'
+        not_available: 'Metoda de plată %name% nu este disponibilă pentru această comandă. Vă rugăm să alegeți alta.'
+        not_exist: 'Metoda de plată cu codul %code% nu există.'
+    payment_request:
+        action_not_available: 'Solicitarea de plată (cod metodă: %code% și id plată: %id%) nu are un handler. Vă rugăm să alegeți altă metodă de plată.'
+        not_available: 'Solicitarea de plată nu suportă această acțiune.'
+    product:
+        not_exist: 'Produsul %productName% nu există.'
+    product_variant:
+        not_exist: 'Varianta de produs %productVariantCode% nu există.'
+        not_longer_available: 'Varianta de produs cu numele %productVariantName% nu mai există.'
+        not_sufficient: 'Varianta de produs cu codul %productVariantCode% nu are stoc suficient.'
+        product_variant_with_name_not_sufficient: 'Varianta de produs cu numele %productVariantName% nu are stoc suficient.'
+        option_values:
+            single_value: 'Varianta de produs poate avea configurată o singură valoare pentru o singură opțiune.'
+    reset_password:
+        invalid_token: 'Tokenul de resetare a parolei %token% este invalid.'
+        token_expired: 'Tokenul de resetare a parolei a expirat.'
+    shipment:
+        not_found: 'Expedierea nu există.'
+        shipped: 'Nu puteți expedia o expediere care a fost deja expediată.'
+    shipping_method:
+        not_found: 'Metoda de livrare cu codul %code% nu există.'
+        not_available: 'Metoda de livrare %name% nu este disponibilă pentru această comandă. Vă rugăm să selectați din nou metoda de livrare.'
+        shipping_address_not_found: 'Comanda trebuie adăugată o adresă întâi.'
+    statistics:
+        end_date:
+            invalid: 'Data de început trebuie să fie înainte de data de sfârșit.'

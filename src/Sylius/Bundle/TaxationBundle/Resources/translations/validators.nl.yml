@@ -4,23 +4,32 @@
 sylius:
     tax_category:
         name:
-            not_blank: Voer een belastingcategorie naam in.
+            not_blank: 'Voer belastingcategorie naam in.'
+            min_length: 'Belastingcategorie naam moet minstens 1 teken lang zijn.|Belastingcategorie naam moet minstens {{ limit }} tekens lang zijn.'
+            max_length: 'Belastingcategorie naam mag niet langer zijn dan 1 teken.|Belastingcategorie naam mag niet langer zijn dan {{ limit }} tekens.'
         code:
-            not_blank: Voer een belastingcategorie code in.
-            regex: Belastingcategorie kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: De belastingscategorie met gegeven code al bestaat.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer belastingcategorie code in.'
+            regex: 'Belastingcategorie code mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'De belastingcategorie met de gegeven code bestaat al.'
     tax_rate:
         category:
-            not_blank: Selecteer een belastingcategorie.
+            not_blank: 'Selecteer belastingcategorie.'
         name:
-            not_blank: Voer een belastingdruk naam in.
+            not_blank: 'Voer belastingtarief naam in.'
+            min_length: 'Belastingtarief naam moet minstens 1 teken lang zijn.|Belastingtarief naam moet minstens {{ limit }} tekens lang zijn.'
+            max_length: 'Belastingtarief naam mag niet langer zijn dan 1 teken.|Belastingtarief naam mag niet langer zijn dan {{ limit }} tekens.'
         amount:
-            not_blank: Voer een belastingdruk hoeveelheid in.
+            invalid: 'Het belastingtarief bedrag is ongeldig.'
+            not_blank: 'Voer belastingtarief bedrag in.'
         calculator:
-            not_blank: Selecteer een belasting calculator.
+            not_blank: 'Selecteer belastingcalculator.'
         zone:
-            not_blank: Selecteer de zone van de belasting.
+            not_blank: 'Selecteer belastingzone.'
         code:
-            not_blank: Voer een zone voor het belastingtarief in.
-            regex: Belastingtarief code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Het belastingtarief met gegeven code al bestaat.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer belastingtarief code in.'
+            regex: 'Belastingtarief code mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'Het belastingtarief met de gegeven code bestaat al.'
+        date:
+            greater_than_start_date: 'Het belastingtarief mag niet eindigen voordat het begint.'

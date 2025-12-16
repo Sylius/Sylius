@@ -6,7 +6,7 @@
         {
             "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
             "@type": "ExchangeRate",
-            "id": @integer@,
+            "id": "@integer@",
             "ratio": 4.44,
             "sourceCurrency": "\/api\/v2\/admin\/currencies\/USD",
             "targetCurrency": "\/api\/v2\/admin\/currencies\/PLN"
@@ -14,7 +14,7 @@
         {
             "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
             "@type": "ExchangeRate",
-            "id": @integer@,
+            "id": "@integer@",
             "ratio": 0.7,
             "sourceCurrency": "\/api\/v2\/admin\/currencies\/USD",
             "targetCurrency": "\/api\/v2\/admin\/currencies\/GBP"
@@ -22,7 +22,7 @@
         {
             "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
             "@type": "ExchangeRate",
-            "id": @integer@,
+            "id": "@integer@",
             "ratio": 0.15,
             "sourceCurrency": "\/api\/v2\/admin\/currencies\/CNY",
             "targetCurrency": "\/api\/v2\/admin\/currencies\/USD"
@@ -30,7 +30,7 @@
         {
             "@id": "\/api\/v2\/admin\/exchange-rates\/@integer@",
             "@type": "ExchangeRate",
-            "id": @integer@,
+            "id": "@integer@",
             "ratio": 2.37,
             "sourceCurrency": "\/api\/v2\/admin\/currencies\/GBP",
             "targetCurrency": "\/api\/v2\/admin\/currencies\/BTN"

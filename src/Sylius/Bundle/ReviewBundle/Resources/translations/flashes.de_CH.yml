@@ -3,6 +3,6 @@
 
 sylius:
     review:
-        accept: 'Rezension wurde erfolgreich angenommen.'
-        reject: 'Rezension wurde erfolgreich abgewiesen.'
-        wait_for_the_acceptation: 'Ihre Rezension wartet auf die Annahme.'
+        accept: 'Die Bewertung wurde erfolgreich akzeptiert.'
+        reject: 'Die Bewertung wurde erfolgreich abgelehnt.'
+        wait_for_the_acceptation: 'Ihre Bewertung wartet auf die Akzeptanz.'

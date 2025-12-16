@@ -13,26 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Command\Cart;
 
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 
-class RemoveItemFromCart implements OrderTokenValueAwareInterface
+#[OrderTokenValueAware]
+class RemoveItemFromCart
 {
-    public function __construct(public ?string $orderTokenValue, public string $itemId)
-    {
-    }
-
-    public static function removeFromData(string $tokenValue, string $orderItemId): self
-    {
-        return new self($tokenValue, $orderItemId);
-    }
-
-    public function getOrderTokenValue(): ?string
-    {
-        return $this->orderTokenValue;
-    }
-
-    public function setOrderTokenValue(?string $orderTokenValue): void
-    {
-        $this->orderTokenValue = $orderTokenValue;
+    public function __construct(
+        public readonly string $orderTokenValue,
+        public readonly mixed $itemId,
+    ) {
     }
 }

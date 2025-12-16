@@ -1,0 +1,35 @@
+/*!
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+@mixin text-truncate-ellipsis($max-width: null) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @if $max-width {
+        max-width: $max-width;
+    }
+}
+
+@mixin text-truncate-flex($max-width: null) {
+    display: flex;
+    min-width: 0;
+
+    @if $max-width {
+        max-width: $max-width;
+    }
+}
+
+@mixin text-truncate-flex-child {
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -4,29 +4,35 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: Navn på kortinnehaver
-            expiry_month: Gyldig til måned
-            expiry_year: Utløpsår
-            number: Kortnummer
-            security_code: Sikkerhetskode (CVV)
-            type: Korttype
+            cardholder_name: 'Kortholders navn'
+            expiry_month: 'Utløpsmåned'
+            expiry_year: 'Utløpsår'
+            number: 'Kortnummer'
+            security_code: 'Sikkerhetskode (CVV)'
+            type: 'Korttype'
         payment:
-            amount: Beløp
-            method: Betalingsmetode
+            amount: 'Betalingsbeløp'
+            method: 'Betalingsmetode'
             state:
-                header: Betalingsstatus
-                checkout: Gå til kassen
-                completed: Fullført
-                failed: Mislyktes
-                new: Ny
-                pending: Venter
-                processing: Behandler
-                unknown: Ukjent
-                void: Ugyldig
-                cancelled: Avbrutt
-                refunded: Refundert
+                header: 'Betalingsstatus'
+                checkout: 'Til betaling'
+                completed: 'Fullført'
+                authorized: 'Autorisert'
+                failed: 'Mislyktes'
+                new: 'Ny'
+                pending: 'Avventer'
+                processing: 'Behandles'
+                unknown: 'Ukjent'
+                void: 'Ugyldig'
+                cancelled: 'Avbrutt'
+                refunded: 'Refundert'
         payment_method:
-            description: Beskrivelse
-            enabled: Aktivert?
-            name: Navn
-            position: Plassering
+            description: 'Beskrivelse'
+            enabled: 'Aktivert'
+            instructions: 'Instruksjoner'
+            name: 'Navn'
+            position: 'Posisjon'
+        gateway_config:
+            type: 'Type'
+    gateway_factory:
+        offline: 'Offline'

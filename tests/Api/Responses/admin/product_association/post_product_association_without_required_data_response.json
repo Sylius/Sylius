@@ -1,18 +1,24 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
-    "@type": "ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "type: Please enter association type.\nowner: Please enter association owner.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('type: Please enter association type.\nowner: Please enter association owner.').optional()",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "type",
             "message": "Please enter association type.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "owner",
             "message": "Please enter association owner.",
-            "code": @string@
+            "code": "@string@"
         }
-    ]
+    ],
+    "detail": "type: Please enter association type.\nowner: Please enter association owner.",
+    "type": "\/validation_errors\/@string@"
 }

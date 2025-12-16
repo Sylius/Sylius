@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    customer:
+        register: 'Danke für Ihre Registrierung! Bitte schauen Sie in Ihr E-Mail-Postfach und bestätigen Sie Ihren Account.'

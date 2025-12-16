@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
-            author: Autore
-            comment: Commento
-            header: Aggiungi una recensione
-            rating: Voto
+            author: 'Autore'
+            comment: 'Commento'
+            header: 'Aggiungi una recensione'
+            rating: 'Valutazione'
             status:
-                approved: Approvato
-                label: Stato
-                new: Nuovo
-                rejected: Respinto
-            submit: Invia
-            title: Titolo
+                approved: 'Approvato'
+                label: 'Stato'
+                new: 'Nuovo'
+                rejected: 'Rifiutato'
+            submit: 'Invia'
+            title: 'Titolo'

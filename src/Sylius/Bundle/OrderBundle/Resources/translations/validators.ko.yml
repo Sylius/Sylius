@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    order_item:
+        product_variant:
+            not_blank: '상품 바리아ント가 제공되지 않았습니다.'
+        quantity:
+            min: '주문 항목 수량은 1보다 작을 수 없습니다.'
+            not_blank: '수량이 제공되지 않았습니다.'

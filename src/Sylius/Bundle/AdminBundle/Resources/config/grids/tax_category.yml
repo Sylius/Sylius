@@ -8,23 +8,27 @@ sylius_grid:
             sorting:
                 nameAndDescription: asc
             fields:
-                code:
-                    type: string
-                    label: sylius.ui.code
-                    sortable: ~
                 nameAndDescription:
                     type: twig
                     label: sylius.ui.name
                     path: .
                     sortable: name
                     options:
-                        template: "@SyliusUi/Grid/Field/nameAndDescription.html.twig"
+                        template: "@SyliusUi/grid/field/name_and_description.html.twig"
+                code:
+                    type: twig
+                    label: sylius.ui.code
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/code.html.twig"
             filters:
                 search:
                     type: string
                     label: sylius.ui.search
                     options:
                         fields: [code, name]
+                    form_options:
+                        type: !php/const Sylius\Component\Grid\Filter\StringFilter::TYPE_CONTAINS
             actions:
                 main:
                     create:

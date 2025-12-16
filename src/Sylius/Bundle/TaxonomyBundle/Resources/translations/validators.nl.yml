@@ -4,18 +4,19 @@
 sylius:
     taxon:
         code:
-            not_blank: Voer een taxoncode in.
-            regex: Taxon code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Taxon met deze code bestaat al.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer taxon code in.'
+            regex: 'Taxon code mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'Taxon met de gegeven code bestaat al.'
         name:
-            max_length: Taxonnaam mag niet meer dan 255 tekens bevatten.
-            not_blank: Voer een taxonnaam in.
+            max_length: 'Taxon naam mag niet langer zijn dan 255 tekens.'
+            not_blank: 'Voer taxon naam in.'
         slug:
-            not_blank: Gelieve een korte naam in te vullen.
-            unique: Taxon korte naam moet uniek zijn.
+            not_blank: 'Voer taxon slug in.'
+            unique: 'Taxon slug moet uniek zijn.'
         parent:
             invalid_relation: 'De ouder mag niet het taxon zelf of een van zijn afstammelingen zijn.'
     taxonomy:
         name:
-            max_length: Taxonomienaam mag niet langer zijn dan 255 karakters.
-            not_blank: Voer een taxonomie naam in.
+            max_length: 'Taxonomie naam mag niet langer zijn dan 255 tekens.'
+            not_blank: 'Voer taxonomie naam in.'

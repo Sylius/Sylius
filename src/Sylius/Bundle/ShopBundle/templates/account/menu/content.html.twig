@@ -1,0 +1,23 @@
+{% extends 'knp_menu.html.twig' %}
+
+{% block root %}
+    <div class="h3 mb-4">{{ item.label|trans }}</div>
+    {{ block('list') }}
+{% endblock %}
+
+{% block list %}
+    <div class="d-inline-flex flex-column">
+        {% for item in item.children %}
+            {{ block('item') }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block item %}
+    <a class="d-flex align-items-center gap-2 py-1 link-reset" href="{{ item.uri }}">
+        {%- if item.labelAttributes.icon is defined %}
+            {{ ux_icon(item.labelAttributes.icon, {'class': 'icon mr-2'}) }}
+        {%- endif %}
+        {{ item.label|trans }}
+    </a>
+{% endblock %}

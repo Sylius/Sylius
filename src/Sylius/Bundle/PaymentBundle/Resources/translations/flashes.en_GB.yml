@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    payment:
+        authorized: 'Payment has been authorized.'
+        cancelled: 'Payment has been cancelled.'
+        completed: 'Payment has been completed.'
+        failed: 'Payment has failed.'
+        processing: 'Payment is being processed.'
+        refunded: 'Payment has been successfully refunded.'
+        unknown: 'There was an unknown problem with payment.'

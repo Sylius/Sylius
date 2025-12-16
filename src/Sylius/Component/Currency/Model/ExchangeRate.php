@@ -53,9 +53,6 @@ class ExchangeRate implements ExchangeRateInterface
         return is_string($ratio) ? (float) $ratio : $ratio;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function setRatio(?float $ratio): void
     {
         $this->ratio = $ratio;

@@ -1,0 +1,70 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.profile_update.update.content':
+            breadcrumbs:
+                template: '@SyliusShop/account/profile_update/update/content/breadcrumbs.html.twig'
+                priority: 200
+            menu:
+                template: '@SyliusShop/account/common/content/menu.html.twig'
+                priority: 100
+            main:
+                template: '@SyliusShop/account/common/content/main.html.twig'
+                priority: 0
+
+        'sylius_shop.account.profile_update.update.content.main':
+            form:
+                component: 'sylius_shop:account:profile_update:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusShop/account/profile_update/update/content/main/form.html.twig'
+                priority: 0
+
+        'sylius_shop.account.profile_update.update.content.main.header':
+            title:
+                template: '@SyliusShop/account/profile_update/update/content/main/header/title.html.twig'
+                priority: 100
+            subtitle:
+                template: '@SyliusShop/account/profile_update/update/content/main/header/subtitle.html.twig'
+                priority: 0
+
+        'sylius_shop.account.profile_update.update.content.main.form':
+            full_name:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/full_name.html.twig'
+                priority: 500
+            email:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/email.html.twig'
+                priority: 400
+            additional_information:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/additional_information.html.twig'
+                priority: 300
+            phone_number:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/phone_number.html.twig'
+                priority: 200
+            newsletter:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/newsletter.html.twig'
+                priority: 100
+            buttons:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/buttons.html.twig'
+                priority: 0
+
+        'sylius_shop.account.profile_update.update.content.main.form.full_name':
+            name:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/full_name/name.html.twig'
+                priority: 100
+            surname:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/full_name/surname.html.twig'
+                priority: 0
+
+        'sylius_shop.account.profile_update.update.content.main.form.additional_information':
+            birthday:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/additional_information/birthday.html.twig'
+                priority: 100
+            gender:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/additional_information/gender.html.twig'
+                priority: 0
+
+        'sylius_shop.account.profile_update.update.content.main.form.buttons':
+            submit:
+                template: '@SyliusShop/account/profile_update/update/content/main/form/buttons/submit.html.twig'
+                priority: 0

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -22,7 +23,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
 
-final class CheckoutCompleteContext implements Context
+final readonly class CheckoutCompleteContext implements Context
 {
     public function __construct(
         private RequestFactoryInterface $requestFactory,
@@ -31,9 +32,16 @@ final class CheckoutCompleteContext implements Context
     ) {
     }
 
+    #[When('I check summary of my order')]
+    public function iCheckSummaryOfMyOrder(): void
+    {
+        $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+    }
+
     /**
      * @Given I have confirmed order
      */
+    #[When('I try to complete checkout')]
     public function iConfirmMyOrder(): void
     {
         $request = $this->requestFactory->customItemAction(

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShippingBundle\Validator\Constraint;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ShippingMethodCalculatorExists extends Constraint
 {
     public string $invalidShippingCalculator = 'sylius.shipping_method.calculator.invalid';

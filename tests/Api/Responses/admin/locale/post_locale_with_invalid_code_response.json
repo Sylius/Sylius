@@ -1,13 +1,19 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
-    "@type": "ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: This value is not a valid locale code.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('code: This value is not a valid locale code.').optional()",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "code",
             "message": "This value is not a valid locale code.",
-            "code": @string@
+            "code": "@string@"
         }
-    ]
+    ],
+    "detail": "code: This value is not a valid locale code.",
+    "type": "\/validation_errors\/@string@"
 }

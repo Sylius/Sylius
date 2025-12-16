@@ -1,0 +1,8 @@
+{% if not hookable_metadata.context.customer.user.verified %}
+    <form {{ sylius_test_html_attribute('verification-form') }} action="{{ path('sylius_shop_user_request_verification_token') }}" method="post">
+        <button class="btn btn-sm btn-icon btn-outline-gray text-primary" type="submit" {{ sylius_test_html_attribute('verification-button') }}>
+            {{ ux_icon('tabler:check', { class: 'icon icon-xs' }) }}
+            {{ 'sylius.ui.verify'|trans }}
+        </button>
+    </form>
+{% endif %}

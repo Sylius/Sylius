@@ -1,0 +1,12 @@
+{% extends '@SyliusShop/checkout/common/layout.html.twig' %}
+
+{% set active_step = 'select_payment' %}
+{% set prefixes = ['sylius_shop.checkout'] %}
+
+{% block title %}
+    {{ 'sylius.ui.payment'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% hook 'select_payment' with { _prefixes: prefixes, active_step, form, order } %}
+{% endblock %}

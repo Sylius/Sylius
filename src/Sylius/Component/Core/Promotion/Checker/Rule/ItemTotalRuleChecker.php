@@ -22,20 +22,9 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'item_total';
 
-    public function __construct(private ?RuleCheckerInterface $itemTotalRuleChecker = null)
-    {
-        if ($this->itemTotalRuleChecker instanceof self) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in 2.0.',
-                self::class,
-                self::class,
-            );
-        }
-    }
-
     /**
+     * @param array<string, mixed> $configuration
+     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool

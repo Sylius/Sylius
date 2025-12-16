@@ -4,48 +4,68 @@
 sylius:
     address:
         city:
+            max_length: '{1} Miejscowość nie może być dłuższa niż 1 znak.|{2,3,4} Miejscowość nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Miejscowość nie może być dłuższa niż {{ limit }} znaków.'
+            min_length: '{1} Miejscowość musi mieć co najmniej 1 znak.|{2,3,4} Miejscowość musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Miejscowość musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać miejscowość.
         country:
             not_blank: Proszę wybrać kraj.
             disabled: Wybrany kraj nie jest dostępny. Proszę wybrać inny.
         first_name:
+            max_length: '{1} Imię nie może być dłuższe niż 1 znak.|{2,3,4} Imię nie może być dłuższe niż {{ limit }} znaki.|[5,Inf[ Imię nie może być dłuższe niż {{ limit }} znaków.'
+            min_length: '{1} Imię musi mieć co najmniej 1 znak.|{2,3,4} Imię musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Imię musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać swoje imię.
         last_name:
+            max_length: '{1} Nazwisko nie może być dłuższe niż 1 znak.|{2,3,4} Nazwisko nie może być dłuższe niż {{ limit }} znaki.|[5,Inf[ Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
+            min_length: '{1} Nazwisko musi mieć co najmniej 1 znak.|{2,3,4} Nazwisko musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwisko musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać swoje nazwisko.
         postcode:
+            max_length: '{1} Kod pocztowy nie może być dłuższy niż 1 znak.|{2,3,4} Kod pocztowy nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod pocztowy nie może być dłuższy niż {{ limit }} znaków.'
+            min_length: '{1} Kod pocztowy musi mieć co najmniej 1 znak.|{2,3,4} Kod pocztowy musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Kod pocztowy musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać kod pocztowy.
         province:
             valid: Proszę wybrać prawidłowe województwo.
         street:
+            max_length: '{1} Ulica nie może być dłuższa niż 1 znak.|{2,3,4} Ulica nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Ulica nie może być dłuższa niż {{ limit }} znaków.'
+            min_length: '{1} Ulica musi mieć co najmniej 1 znak.|{2,3,4} Ulica musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Ulica musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać ulicę.
         not_shippable: Ten adres nie jest prawidłowym adresem dostawy.
     country:
         code:
             not_blank: Proszę podać kod ISO kraju.
-            regex: Kod kraju może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Kod ISO kraju musi być unikalny.
+            country: Kod ISO kraju jest nieprawidłowy.
+        unique_provinces: Wszystkie województwa w tym kraju muszą mieć unikalne kody i nazwy.
     province:
         code:
-            min_length: Kod województwa musi mieć co najmniej 5 znaków|Kod województwa musi mieć co najmniej 5 znaków.
+            max_length: Kod nie może być dłuższy niż {{ limit }} znaków.
             not_blank: Proszę podać kod województwa.
             regex: Kod województwa powinien być w formacie XX-XX (np. US-FL).
             unique: Kod województwa musi być unikalny.
         name:
+            max_length: '{1} Nazwa województwa nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa województwa nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa województwa nie może być dłuższa niż {{ limit }} znaków.'
+            min_length: '{1} Nazwa województwa musi mieć co najmniej 1 znak.|{2,3,4} Nazwa województwa musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa województwa musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać nazwę województwa.
             unique: Nazwa województwa musi być unikalna.
     zone:
         scope:
             not_blank: Proszę wprowadzić zakres.
         code:
+            max_length: Kod nie może być dłuższy niż {{ limit }} znaków.
             not_blank: Proszę podać kod strefy.
             regex: Kod strefy może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
             unique: Kod strefy musi być unikalny.
+        type:
+            invalid: "Typ {{ value }} jest nieprawidłowy. Dozwolone typy to: {{ choices }}."
         members:
-            min_count: '{1} Proszę podać co najmniej 1 kraj.|{2,3,4} Proszę podać co najmniej {{ limit }} kraje.|[5,Inf[ Proszę podać co najmniej {{ limit }} krajów.'
+            min_count: '{1} Proszę dodać co najmniej 1 członka strefy.|{2,3,4} Proszę dodać co najmniej {{ limit }} członków strefy.|[5,Inf[ Proszę dodać co najmniej {{ limit }} członków strefy.'
         name:
+            max_length: '{1} Nazwa strefy nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa strefy nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa strefy nie może być dłuższa niż {{ limit }} znaków.'
+            min_length: '{1} Nazwa strefy musi mieć co najmniej 1 znak.|{2,3,4} Nazwa strefy musi mieć co najmniej {{ limit }} znaki.|[5,Inf[ Nazwa strefy musi mieć co najmniej {{ limit }} znaków.'
             not_blank: Proszę podać nazwę strefy.
     zone_member:
+        cannot_be_the_same_as_zone: Członek strefy nie może być tym samym co strefa.
         code:
+            max_length: Kod członka strefy nie może być dłuższy niż {{ limit }} znaków.
             not_blank: Proszę wybrać członka strefy.
-            regex: Kod strefy może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
+            regex: Kod członka strefy może się składać wyłącznie z liter, cyfr, myślników i podkreśleń.
         unique: Wybrany członek należy już do tej strefy.

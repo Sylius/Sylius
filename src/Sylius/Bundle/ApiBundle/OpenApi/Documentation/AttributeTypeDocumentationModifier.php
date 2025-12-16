@@ -47,10 +47,16 @@ final class AttributeTypeDocumentationModifier implements DocumentationModifierI
         $attributeTypes = $this->getAttributeTypes();
 
         $schemasToBeUpdated = [
-            'ProductAttribute.admin.product_attribute.read',
-            'ProductAttribute.admin.product_attribute.create',
-            'ProductAttribute.jsonld-admin.product_attribute.read',
-            'ProductAttribute.jsonld-admin.product_attribute.create',
+            'ProductAttribute',
+            'ProductAttribute-sylius.admin.product_attribute.create',
+            'ProductAttribute-sylius.admin.product_attribute.index',
+            'ProductAttribute-sylius.admin.product_attribute.show',
+            'ProductAttribute-sylius.admin.product_attribute.update',
+            'ProductAttribute.jsonld',
+            'ProductAttribute.jsonld-sylius.admin.product_attribute.create',
+            'ProductAttribute.jsonld-sylius.admin.product_attribute.index',
+            'ProductAttribute.jsonld-sylius.admin.product_attribute.show',
+            'ProductAttribute.jsonld-sylius.admin.product_attribute.update',
         ];
 
         foreach ($schemasToBeUpdated as $schemaToBeUpdated) {

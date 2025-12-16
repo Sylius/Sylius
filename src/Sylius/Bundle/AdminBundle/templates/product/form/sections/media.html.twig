@@ -1,0 +1,15 @@
+{% set form = hookable_metadata.context.form %}
+{% set product = hookable_metadata.context.resource %}
+
+<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-media" role="tabpanel" tabindex="0">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 id="productMedia" class="card-title">
+                {{ 'sylius.ui.media'|trans }}
+            </h2>
+        </div>
+        <div class="card-body">
+            {% hook 'media' with { product } %}
+        </div>
+    </div>
+</div>

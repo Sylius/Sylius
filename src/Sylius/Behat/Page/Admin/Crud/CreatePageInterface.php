@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Crud;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface CreatePageInterface extends SymfonyPageInterface
+interface CreatePageInterface extends SyliusPageInterface
 {
     /**
      * @throws ElementNotFoundException
      */
-    public function getValidationMessage(string $element): string;
+    public function getValidationMessage(string $element, array $parameters = []): string;
 
     /**
      * @throws ElementNotFoundException

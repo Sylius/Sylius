@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Fixture;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistryInterface;
 use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
@@ -23,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class ProductAttributeFixturesTest extends KernelTestCase
 {
-    /** @test */
+    #[Test]
     public function fixtures_are_loaded_properly(): void
     {
         $kernel = static::bootKernel();

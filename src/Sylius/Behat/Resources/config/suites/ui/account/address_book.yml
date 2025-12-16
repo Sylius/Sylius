@@ -5,18 +5,25 @@ default:
     suites:
         ui_address_book:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.guest_cart
                 - sylius.behat.context.hook.session
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.address
+                - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout
+                - sylius.behat.context.setup.checkout.address
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.payment
@@ -25,6 +32,7 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.address_book
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout

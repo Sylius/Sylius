@@ -4,27 +4,32 @@
 sylius:
     customer:
         first_name:
-            max: Fornavn må ikke være lengre enn {{ limit }} tegn.
-            min: Fornavn må være minst {{ limit }} tegn.
-            not_blank: Vennligst skriv inn ditt fornavn.
+            max: 'Fornavn kan ikke være lengre enn {{ limit }} tegn.'
+            min: 'Fornavn må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst skriv inn fornavnet ditt.'
         last_name:
-            max: Etternavn må ikke være lengre enn {{ limit }} tegn.
-            min: Etternavnet må være minst {{ limit }} tegn.
-            not_blank: Vennligst skriv inn ditt etternavn.
+            max: 'Etternavn kan ikke være lengre enn {{ limit }} tegn.'
+            min: 'Etternavn må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst skriv inn etternavnet ditt.'
         gender:
-            not_blank: Oppgi kjønn.
+            not_blank: 'Vennligst velg kjønn.'
         email:
-            already_used: Denne e-postadressen er allerede registrert, vennligst logg inn eller bruk glemt passord.
-            max: E-post må ikke være lengre enn {{ limit }} tegn.
-            not_blank: Skriv inn din e-post.
-            invalid: Ugyldig epostadresse.
-            unique: Denne e-postadressen er allerede i bruk.
-            registered: Denne e-postadressen er allerede registrert, vennligst logg inn eller bruk glemt passord.
+            already_used: 'Denne e-posten er allerede i bruk, vennligst logg inn eller bruk glemt passord.'
+            max: 'E-post kan ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst skriv inn e-posten din.'
+            invalid: 'Denne e-posten er ugyldig.'
+            unique: 'Denne e-posten er allerede i bruk.'
+            registered: 'Denne e-posten er allerede registrert, vennligst logg inn eller bruk glemt passord.'
+        phone_number:
+            max: 'Telefonnummer kan ikke være lengre enn {{ limit }} tegn.'
     customer_group:
         code:
-            regex: Kundegruppe kan kun bestå av bokstaver, tall, bindestrek og understrek.
-            unique: Kundegruppe må være unik.
+            max_length: 'Koden kan ikke være lengre enn {{ limit }} tegn.'
+            regex: 'Kunden gruppens kode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Kundegruppens kode må være unik.'
+            not_blank: 'Vennligst skriv inn en kundeggruppekode.'
         name:
-            max: Navn på kundegruppe kan ikke være lenger enn {{ limit }} tegn.
-            min: Navn på kundegruppe må være på minst {{ limit }} tegn.
-            not_blank: Vennligst oppgi navn på kundegruppe.
+            max: 'Kundeggruppenavn kan ikke være lengre enn {{ limit }} tegn.'
+            min: 'Kundeggruppenavn må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst skriv inn et kundeggruppenavn.'
+

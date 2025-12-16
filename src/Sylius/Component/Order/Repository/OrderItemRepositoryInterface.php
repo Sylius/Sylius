@@ -23,7 +23,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface OrderItemRepositoryInterface extends RepositoryInterface
 {
-    public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface;
+    public function findOneByIdAndCartId(mixed $id, mixed $cartId): ?OrderItemInterface;
 
-    public function findOneByIdAndCartTokenValue($id, $tokenValue): ?OrderItemInterface;
+    public function findOneByIdAndCartTokenValue(mixed $id, mixed $tokenValue): ?OrderItemInterface;
 }

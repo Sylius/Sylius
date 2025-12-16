@@ -1,0 +1,4 @@
+{% set required_class = hookable_metadata.context.required_class %}
+{% set product_attribute_value = hookable_metadata.context.product_attribute_value %}
+
+{{ form_label(product_attribute_value.value, null, {label_attr: {class: required_class}}) }}

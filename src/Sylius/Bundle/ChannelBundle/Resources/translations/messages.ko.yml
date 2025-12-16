@@ -4,5 +4,8 @@
 sylius:
     form:
         channel:
-            enabled: 사용
-            name: 이름
+            color: '색상'
+            description: '설명'
+            enabled: '사용'
+            name: '이름'
+            url: 'URL'

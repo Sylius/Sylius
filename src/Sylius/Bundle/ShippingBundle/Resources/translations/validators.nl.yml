@@ -6,25 +6,32 @@ sylius:
         name:
             max_length: 'Categorie naam mag niet langer zijn dan {{ limit }} tekens.'
             min_length: 'Categorie naam moet minstens {{ limit }} tekens lang zijn.'
-            not_blank: 'Voer een naam in voor de verzendingscategorie.'
+            not_blank: 'Voer de naam van de verzendcategorie in.'
         code:
-            not_blank: 'Gelieve een verzendcategoriecode in te vullen.'
-            regex: 'Verzendcategorie kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.'
-            unique: 'De verzendcategorie met gegeven code bestaat al.'
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer de code van de verzendcategorie in.'
+            regex: 'De code van de verzendcategorie mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'De verzendcategorie met de gegeven code bestaat al.'
+
     shipping_method:
         calculator:
             min: 'Verzendkosten kunnen niet lager zijn dan 0.'
-            not_blank: 'Gelieve een verzendkosten calculator te selecteren.'
+            not_blank: 'Selecteer een verzendmethode calculator.'
+            invalid: 'Ongeldige rekenmachine. Beschikbare rekenmachines zijn {{ available_calculators }}.'
         name:
-            max_length: 'Naam van verzendingsmethode mag niet langer zijn dan {{ limit }} tekens.'
-            min_length: 'Naam van verzendingsmethode moet minstens {{ limit }} tekens lang zijn.'
-            not_blank: 'Voer een naam in voor de verzendingsmethode.'
+            max_length: 'Verzendmethode naam mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Verzendmethode naam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer de naam van de verzendmethode in.'
         code:
-            not_blank: 'Gelieve een verzendmethode code in te voeren.'
-            regex: 'Verzendmethode code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.'
-            unique: 'De verzendmethode met gegeven code bestaat al.'
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer de code van de verzendmethode in.'
+            regex: 'De code van de verzendmethode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'De verzendmethode met de gegeven code bestaat al.'
         zone:
-            not_blank: 'Gelieve een verzendmethode zone te selecteren.'
+            not_blank: 'Selecteer de verzendmethode zone.'
+        rule:
+            invalid_type: 'Ongeldig regeltype. Beschikbare regeltypes zijn {{ available_rule_types }}.'
+
     shipment:
         shipping_method:
-            not_blank: 'Gelieve een verzendmethode te kiezen.'
+            not_blank: 'Selecteer een verzendmethode.'

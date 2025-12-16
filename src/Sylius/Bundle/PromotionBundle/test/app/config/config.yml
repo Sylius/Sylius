@@ -26,27 +26,23 @@ doctrine:
         path: "%database_path%"
         charset: UTF8
     orm:
-        entity_managers:
-            default:
-                auto_mapping: true
-
-fos_rest:
-    view:
-        formats:
-            json: true
-        empty_content: 204
-    format_listener:
-        rules:
-            - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
+        auto_mapping: true
+        mappings:
+            App:
+                type: attribute
+                is_bundle: false
+                dir: "%kernel.project_dir%/src/Entity"
+                prefix: 'App\Entity'
+                alias: App
 
 sylius_resource:
     resources:
         app.promotion_subject:
             classes:
-                model: AppBundle\Entity\PromotionSubject
+                model: App\Entity\PromotionSubject
 
 sylius_promotion:
     resources:
         promotion_subject:
             classes:
-                model: AppBundle\Entity\PromotionSubject
+                model: App\Entity\PromotionSubject

@@ -4,10 +4,10 @@
 sylius:
     form:
         taxon:
-            description: Popis
-            enabled: Povoleno
-            name: Jméno
-            parent: Rodič
-            slug: Unikátní identifikátor URL (slug)
+            description: 'Popis'
+            enabled: 'Povoleno'
+            name: 'Název'
+            parent: 'Rodič'
+            slug: 'Slug'
         taxonomy:
-            name: Jméno
+            name: 'Název'

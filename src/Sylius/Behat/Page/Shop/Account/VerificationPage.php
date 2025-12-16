@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class VerificationPage extends SymfonyPage implements VerificationPageInterface
+class VerificationPage extends SyliusPage implements VerificationPageInterface
 {
     public function verifyAccount(string $token): void
     {

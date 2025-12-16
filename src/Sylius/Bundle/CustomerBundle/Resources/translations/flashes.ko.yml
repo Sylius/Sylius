@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    customer:
+        register: '회원 가입이 완료되었습니다. 계정 인증을 위해 이메일을 확인하세요.'

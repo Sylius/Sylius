@@ -26,6 +26,8 @@ interface CatalogPromotionRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param iterable|CriteriaInterface[] $criteria
+     *
+     * @return T[]
      */
     public function findByCriteria(iterable $criteria): array;
 }

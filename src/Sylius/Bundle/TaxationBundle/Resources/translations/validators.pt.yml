@@ -4,21 +4,33 @@
 sylius:
     tax_category:
         name:
-            not_blank: Introduza o nome da categoria de imposto.
+            not_blank: 'Por favor, informe o nome da categoria de imposto.'
+            min_length: 'O nome da categoria de imposto deve ter pelo menos 1 caractere.|O nome da categoria de imposto deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O nome da categoria de imposto não pode ter mais de 1 caractere.|O nome da categoria de imposto não pode ter mais de {{ limit }} caracteres.'
         code:
-            not_blank: Por favor, insira o código da categoria do imposto.
-            unique: Já existe uma categoria de imposto com o código indicado.
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código da categoria de imposto.'
+            regex: 'O código da categoria de imposto pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Já existe uma categoria de imposto com esse código.'
     tax_rate:
         category:
-            not_blank: Por favor, selecione a categoria do imposto.
+            not_blank: 'Por favor, selecione a categoria de imposto.'
         name:
-            not_blank: Por favor, insira nome da taxa de imposto.
+            not_blank: 'Por favor, informe o nome da taxa de imposto.'
+            min_length: 'O nome da taxa de imposto deve ter pelo menos 1 caractere.|O nome da taxa de imposto deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O nome da taxa de imposto não pode ter mais de 1 caractere.|O nome da taxa de imposto não pode ter mais de {{ limit }} caracteres.'
         amount:
-            not_blank: Por favor introduza o valor da taxa de imposto.
+            invalid: 'O valor da taxa de imposto é inválido.'
+            not_blank: 'Por favor, informe o valor da taxa de imposto.'
         calculator:
-            not_blank: Por favor selecione a calculadora de imposto.
+            not_blank: 'Por favor, selecione a calculadora de imposto.'
         zone:
-            not_blank: Por favor selecione a zona fiscal.
+            not_blank: 'Por favor, selecione a zona de imposto.'
         code:
-            not_blank: Por favor introduza o código de taxa de imposto.
-            unique: Já existe uma taxa de imposto com o código introduzido.
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código da taxa de imposto.'
+            regex: 'O código da taxa de imposto pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Já existe uma taxa de imposto com esse código.'
+        date:
+            greater_than_start_date: 'A taxa de imposto não deve terminar antes de começar'
+

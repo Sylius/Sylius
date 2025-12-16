@@ -4,11 +4,13 @@
 sylius:
     form:
         tax_category:
-            name: Jméno
-            description: Popis
+            description: 'Popis'
+            name: 'Název'
         tax_rate:
-            category: Kategorie
-            name: Jméno
-            amount: Částka
-            included_in_price: Zahrnuto v ceně?
-            calculator: Kalkulačka
+            amount: 'Částka'
+            calculator: 'Kalkulátor'
+            category: 'Kategorie'
+            end_date: 'Datum ukončení'
+            included_in_price: 'Zahrnuto v ceně?'
+            name: 'Název'
+            start_date: 'Datum zahájení'

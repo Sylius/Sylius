@@ -20,6 +20,7 @@ class CatalogPromotionScope implements CatalogPromotionScopeInterface
 
     protected ?string $type = null;
 
+    /** @var array<string, mixed> */
     protected array $configuration = [];
 
     protected ?CatalogPromotionInterface $catalogPromotion = null;

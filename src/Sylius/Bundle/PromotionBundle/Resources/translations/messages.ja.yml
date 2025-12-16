@@ -4,34 +4,80 @@
 sylius:
     form:
         catalog_promotion:
-            description: 説明
-            name: ゾーン名
+            action:
+                fixed_discount: '固定割引'
+                percentage_discount: '割引率'
+            description: '説明'
+            enabled: '有効'
+            end_date: '終了日'
+            label: 'ラベル'
+            name: '名前'
+            priority: '優先度'
+            start_date: '開始日'
+            translations: '翻訳'
         promotion:
-            actions: 値引き設定
-            add_action: 値引き設定を追加
-            add_rule: 条件を追加
-            description: 説明
-            ends_at: 終了日
-            name: ゾーン名
-            rules: 条件
-            starts_at: 開始日
-            usage_limit: 利用件数制限
+            actions: 'アクション'
+            add_action: 'アクションを追加'
+            add_rule: 'ルールを追加'
+            applies_to_discounted: '既に割引された注文アイテムに適用'
+            applies_to_discounted_details: 'このオプションを有効にすると、カートプロモーションはカタログプロモーションにより既に割引された注文アイテムにも適用されます。'
+            coupon_based: 'クーポンベース'
+            description: '説明'
+            ends_at: '終了日時'
+            exclusive: '排他'
+            label: 'ラベル'
+            name: '名前'
+            priority: '優先度'
+            rules: 'ルール'
+            starts_at: '開始日時'
+            usage_limit: '使用制限'
         promotion_action:
+            item_fixed_discount: 'アイテム固定割引'
+            item_percentage_discount: 'アイテム割合割引'
+            order_fixed_discount: '注文固定割引'
+            order_percentage_discount: '注文割合割引'
+            shipping_percentage_discount: '送料割合割引'
+            filters: 'フィルター'
             fixed_discount_configuration:
-                amount: 税率
-            type: タイプ
+                amount: '金額'
+            percentage_discount_configuration:
+                percentage: '割合'
+            type: '種類'
         promotion_coupon:
-            usage_limit: 利用件数制限
+            expires_at: '有効期限'
+            usage_limit: '使用制限'
         promotion_coupon_generator_instruction:
-            amount: 税率
-            usage_limit: 利用件数制限
+            amount: '数'
+            code_length: 'コード長'
+            expires_at: '有効期限'
+            prefix: '接頭辞'
+            suffix: '接尾辞'
+            usage_limit: '使用制限'
+        promotion_filter:
+            price_range: '価格範囲フィルター'
         promotion_rule:
+            cart_quantity: 'カート数量'
+            contains_product: '商品を含む'
+            customer_group: '顧客グループ'
+            has_at_least_one_from_taxons: 'タクソンのいずれかを含む'
+            item_total: 'アイテム合計'
+            nth_order: 'N番目の注文'
+            shipping_country: '配送国'
+            taxonomy: 'タクソノミー'
+            total_price_of_items_from_taxon: 'タクソンからのアイテム合計価格'
+            cart_quantity_configuration:
+                count: '数'
+                equal: '等しい'
             contains_product_configuration:
-                variants: sylius.breadcrumb.product.index
+                exclude: '除外'
+                variants: '商品'
             item_total_configuration:
-                amount: 税率
+                amount: '金額'
+            nth_order_configuration:
+                nth: 'N番目'
             shipping_country_configuration:
-                country: 国
+                country: '国'
             taxonomy_configuration:
-                taxons: タクソン(分類群)
-            type: タイプ
+                exclude: '除外'
+                taxons: 'タクソン'
+            type: '種類'

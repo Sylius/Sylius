@@ -27,6 +27,7 @@ use Webmozart\Assert\Assert;
 
 final class ChannelPriceHistoryConfigType extends AbstractResourceType implements DataMapperInterface
 {
+    /** @param string[] $validationGroups */
     public function __construct(
         private DataMapperInterface $propertyPathDataMapper,
         string $dataClass,
@@ -64,9 +65,7 @@ final class ChannelPriceHistoryConfigType extends AbstractResourceType implement
     {
         Assert::isInstanceOf($channelPriceHistoryConfig = $viewData, ChannelPriceHistoryConfigInterface::class);
 
-        /** @var \Traversable $traversableForms */
-        $traversableForms = $forms;
-        $forms = iterator_to_array($traversableForms);
+        $forms = iterator_to_array($forms);
 
         $channelPriceHistoryConfig->clearTaxonsExcludedFromShowingLowestPrice();
 

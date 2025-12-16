@@ -1,0 +1,24 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        customer:
+            first_name: 'Vorname'
+            group: 'Gruppe'
+            last_name: 'Nachname'
+            email: 'E-Mail'
+            phone_number: 'Telefonnummer'
+            gender: 'Geschlecht'
+            birthday: 'Geburtstag'
+            billing_address: 'Rechnungsadresse'
+            different_shipping_address: 'Andere Adresse für den Versand verwenden?'
+            only_customer_registration: 'Konto erstellen?'
+            subscribed_to_newsletter: 'Für den Newsletter anmelden'
+        customer_group:
+            name: 'Name'
+            roles: 'Rollen'
+    gender:
+        unknown: 'Unbekannt'
+        male: 'Männlich'
+        female: 'Weiblich'

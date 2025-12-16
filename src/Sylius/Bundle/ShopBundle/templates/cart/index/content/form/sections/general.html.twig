@@ -1,0 +1,11 @@
+{% import '@SyliusShop/shared/macro/loader.html.twig' as loader %}
+
+<div class="row">
+    <div class="col-12 col-xl-8 mb-4 position-relative">
+        {{ loader.render() }}
+        {% hook 'general#left' %}
+    </div>
+    <div class="col-12 col-xl-4 ps-xl-5 mb-4">
+        {% hook 'general#right' %}
+    </div>
+</div>

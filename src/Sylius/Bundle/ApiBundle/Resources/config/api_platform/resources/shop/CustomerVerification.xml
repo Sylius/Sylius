@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource
+        class="Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser"
+        shortName="Customer"
+        messenger="input"
+        output="false"
+        status="202"
+    >
+        <operations>
+            <operation
+                name="sylius_api_shop_customer_post_verify"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/shop/customers/verify"
+                input="Sylius\Bundle\ApiBundle\Command\Account\RequestShopUserVerification"
+                security="is_granted('ROLE_USER')"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:shop_user_verification:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_shop_customer_patch_verify"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/shop/customers/verify/{token}"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser"
+                read="false"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:shop_user_verification:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

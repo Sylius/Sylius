@@ -1,71 +1,82 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
-
 sylius:
     form:
         catalog_promotion:
-            description: Popis
-            name: Jméno
-            priority: Priorita
+            action:
+                fixed_discount: 'Pevná sleva'
+                percentage_discount: 'Procentuální sleva'
+            description: 'Popis'
+            enabled: 'Povoleno'
+            end_date: 'Datum ukončení'
+            label: 'Štítek'
+            name: 'Název'
+            priority: 'Priorita'
+            start_date: 'Datum zahájení'
+            translations: 'Překlady'
         promotion:
-            actions: Akce
-            add_action: Přidat akci
-            add_rule: Přidat pravidlo
-            coupon_based: Na bázi kupónů
-            description: Popis
-            ends_at: Končí
-            exclusive: Exkluzivní
-            name: Jméno
-            priority: Priorita
-            rules: Pravidla
-            starts_at: Začíná
-            usage_limit: Omezení použití
+            actions: 'Akce'
+            add_action: 'Přidat akci'
+            add_rule: 'Přidat pravidlo'
+            applies_to_discounted: 'Aplikuje se na již zlevněné položky objednávky'
+            applies_to_discounted_details: 'Tato možnost způsobí, že se propagace košíku aplikuje na položky objednávky, které již byly zlevněny pomocí katalogových propagací.'
+            coupon_based: 'Na základě kupónu'
+            description: 'Popis'
+            ends_at: 'Ukončeno k'
+            exclusive: 'Exkluzivní'
+            label: 'Štítek'
+            name: 'Název'
+            priority: 'Priorita'
+            rules: 'Pravidla'
+            starts_at: 'Začíná k'
+            usage_limit: 'Limit použití'
         promotion_action:
-            item_fixed_discount: Fixní sleva položky
-            item_percentage_discount: Procentuální sleva položky
-            order_fixed_discount: Fixní sleva objednávky
-            order_percentage_discount: Procentuální sleva objednávky
-            shipping_percentage_discount: Procentuální sleva dopravy
+            item_fixed_discount: 'Pevná sleva na položku'
+            item_percentage_discount: 'Procentuální sleva na položku'
+            order_fixed_discount: 'Pevná sleva na objednávku'
+            order_percentage_discount: 'Procentuální sleva na objednávku'
+            shipping_percentage_discount: 'Procentuální sleva na dopravu'
+            filters: 'Filtry'
             fixed_discount_configuration:
-                amount: Částka
+                amount: 'Částka'
             percentage_discount_configuration:
-                percentage: Procentuální
-            type: Typ
+                percentage: 'Procento'
+            type: 'Typ'
         promotion_coupon:
-            expires_at: Vyprší za
-            usage_limit: Omezení použití
+            expires_at: 'Expiruje k'
+            usage_limit: 'Limit použití'
         promotion_coupon_generator_instruction:
-            amount: Množství
-            code_length: Délka kódu
-            expires_at: Vyprší za
-            prefix: Prefix
-            suffix: Sufix
-            usage_limit: Omezení použití
+            amount: 'Částka'
+            code_length: 'Délka kódu'
+            expires_at: 'Expiruje k'
+            prefix: 'Předpona'
+            suffix: 'Přípona'
+            usage_limit: 'Limit použití'
         promotion_filter:
-            price_range: Cenový rozsah
+            price_range: 'Filtr cenového rozsahu'
         promotion_rule:
-            cart_quantity: Množství položek v košíku
-            contains_product: Obsahuje produkt
-            customer_group: Skupina zákazníků
-            has_at_least_one_from_taxons: Má alespoň jeden z taxonů
-            item_total: Položka celkem
-            nth_order: V pořadí objednávka
-            shipping_country: Dodací adresa – země
-            taxonomy: Taxy DPH
-            total_price_of_items_from_taxon: Celková cena položek z taxonu
+            cart_quantity: 'Množství v košíku'
+            contains_product: 'Obsahuje produkt'
+            customer_group: 'Skupina zákazníků'
+            has_at_least_one_from_taxons: 'Má alespoň jeden z taxonů'
+            item_total: 'Celková cena položky'
+            nth_order: 'N-tá objednávka'
+            shipping_country: 'Země doručení'
+            taxonomy: 'Taxonomie'
+            total_price_of_items_from_taxon: 'Celková cena položek z taxonu'
             cart_quantity_configuration:
-                count: Počet
-                equal: Rovno
+                count: 'Počet'
+                equal: 'Rovná se'
             contains_product_configuration:
-                exclude: Výjma
-                variants: Produkty
+                exclude: 'Vyloučit'
+                variants: 'Produkty'
             item_total_configuration:
-                amount: Množství
+                amount: 'Částka'
             nth_order_configuration:
-                nth: N-tá
+                nth: 'N-tý'
             shipping_country_configuration:
-                country: Země
+                country: 'Země'
             taxonomy_configuration:
-                exclude: Vyloučit
-                taxons: Taxony
-            type: Typ
+                exclude: 'Vyloučit'
+                taxons: 'Taxony'
+            type: 'Typ'

@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Sylius\Behat\Context\Setup\Checkout\PaymentContext;
+use Sylius\Behat\Context\Setup\Checkout\ShippingContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
@@ -30,8 +33,14 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
-final class CheckoutContext implements Context
+final readonly class CheckoutContext implements Context
 {
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     * @param RepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
+     * @param RepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     * @param FactoryInterface<AddressInterface> $addressFactory
+     */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
         private RepositoryInterface $shippingMethodRepository,
@@ -39,15 +48,27 @@ final class CheckoutContext implements Context
         private MessageBusInterface $commandBus,
         private FactoryInterface $addressFactory,
         private SharedStorageInterface $sharedStorage,
+        private ShippingContext $checkoutShippingContext,
+        private PaymentContext $checkoutPaymentContext,
     ) {
+    }
+
+    #[Given('I chose :shippingMethod shipping method and :paymentMethod payment method')]
+    public function iProceedOrderWithShippingMethodAndPayment(
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod,
+    ): void {
+        $this->checkoutShippingContext->chooseShippingMethod($shippingMethod);
+        $this->checkoutPaymentContext->choosePaymentMethod($paymentMethod);
     }
 
     /**
      * @Given I have proceeded through checkout process in the :localeCode locale with email :email
      */
-    public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email)
+    public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
+        $this->sharedStorage->set('locale_code', $localeCode);
 
         /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
@@ -55,8 +76,11 @@ final class CheckoutContext implements Context
 
         $cart->setLocaleCode($localeCode);
 
-        $command = new UpdateCart($email, $this->getDefaultAddress());
-        $command->setOrderTokenValue($cartToken);
+        $command = new UpdateCart(
+            orderTokenValue: $cartToken,
+            email: $email,
+            billingAddress: $this->getDefaultAddress(),
+        );
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
@@ -73,39 +97,14 @@ final class CheckoutContext implements Context
         $cart = $this->orderRepository->findCartByTokenValue($cartToken);
         Assert::notNull($cart);
 
-        $command = new UpdateCart(null, $this->getDefaultAddress());
-        $command->setOrderTokenValue($cartToken);
+        $command = new UpdateCart(
+            orderTokenValue: $cartToken,
+            email: null,
+            billingAddress: $this->getDefaultAddress(),
+        );
         $this->commandBus->dispatch($command);
 
         $this->completeCheckout($cart);
-    }
-
-    /**
-     * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
-    public function iHaveSpecifiedDefaultBillingAddressForName(): void
-    {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
-        $command = new UpdateCart(null, $this->getDefaultAddress());
-        $command->setOrderTokenValue($cartToken);
-        $this->commandBus->dispatch($command);
-    }
-
-    /**
-     * @Given I proceeded with :shippingMethod shipping method and :paymentMethod payment method
-     */
-    public function iHaveProceededWithSelectingPaymentMethod(
-        ShippingMethodInterface $shippingMethod,
-        PaymentMethodInterface $paymentMethod,
-    ): void {
-        $cartToken = $this->sharedStorage->get('cart_token');
-
-        /** @var OrderInterface|null $cart */
-        $cart = $this->orderRepository->findCartByTokenValue($cartToken);
-        Assert::notNull($cart);
-
-        $this->completeCheckout($cart, $shippingMethod, $paymentMethod);
     }
 
     private function getDefaultAddress(): AddressInterface
@@ -130,23 +129,25 @@ final class CheckoutContext implements Context
     ): void {
         $shippingMethod = $shippingMethod ?: $this->shippingMethodRepository->findOneBy([]);
 
-        $command = new ChooseShippingMethod($shippingMethod->getCode());
-        $command->setOrderTokenValue($order->getTokenValue());
-
         /** @var ShipmentInterface $shipment */
         $shipment = $order->getShipments()->first();
+        $command = new ChooseShippingMethod(
+            orderTokenValue: $order->getTokenValue(),
+            shipmentId: $shipment->getId(),
+            shippingMethodCode: $shippingMethod->getCode(),
+        );
 
-        $command->setSubresourceId((string) $shipment->getId());
         $this->commandBus->dispatch($command);
 
         $paymentMethod = $paymentMethod ?: $this->paymentMethodRepository->findOneBy([]);
 
-        $command = new ChoosePaymentMethod($paymentMethod->getCode());
-        $command->setOrderTokenValue($order->getTokenValue());
-
         /** @var PaymentInterface $payment */
         $payment = $order->getPayments()->first();
-        $command->setSubresourceId((string) $payment->getId());
+        $command = new ChoosePaymentMethod(
+            orderTokenValue: $order->getTokenValue(),
+            paymentId: $payment->getId(),
+            paymentMethodCode: $paymentMethod->getCode(),
+        );
 
         $this->commandBus->dispatch($command);
     }

@@ -4,42 +4,49 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: Jméno držitele karty musí být alespoň {{ limit }} znaků dlouhé.
-            not_blank: Zadejte prosím Jméno držitele karty.
+            min_length: 'Jméno držitele karty musí mít alespoň {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte jméno držitele karty.'
         expiry_month:
-            max_range: Měsíc vypršení platnosti karty musí být mezi {{ min }} max {{ max }}
-            min_range: Měsíc vypršení platnosti karty musí být mezi {{ min }} a {{ max }}.
-            not_blank: Vyberte prosím měsíc vypršení platnosti.
+            max_range: 'Měsíc expirace kreditní karty musí být mezi {{ min }} a {{ max }}.'
+            min_range: 'Měsíc expirace kreditní karty musí být mezi {{ min }} a {{ max }}.'
+            not_blank: 'Prosím vyberte měsíc expirace.'
         number:
-            not_blank: Zadejte prosím číslo karty.
-            luhn: Číslo kreditní karty, které jste zadali je neplatné.
+            not_blank: 'Prosím zadejte číslo karty.'
+            luhn: 'Číslo kreditní karty, které jste zadali, je neplatné.'
         security_code:
-            not_blank: Zadejte prosím bezpečnostní kód.
-            max_length: CVV kód kreditní karty musí být mít alespoň {{ limit }} číslic.
-            min_length: CVV kód kreditní karty musí být nanejvýš {{ limit }} číslic dlouhý.
+            not_blank: 'Prosím zadejte bezpečnostní kód.'
+            max_length: 'CVV kód kreditní karty musí mít alespoň {{ limit }} číslic.'
+            min_length: 'CVV kód kreditní karty nesmí mít více než {{ limit }} číslic.'
         expiry_year:
-            not_blank: Vyberte prosím rok vypršení platnosti.
+            not_blank: 'Prosím vyberte rok expirace.'
+    gateway_config:
+        invalid_gateway_factory: 'Neplatná brána. Dostupné brány jsou {{ available_factories }}.'
+        gateway_name:
+            not_blank: 'Prosím zadejte název brány.'
+        factory_name:
+            not_blank: 'Prosím zadejte název brány.'
     payment:
         currency_code:
-            not_valid: Kód měny, kterou jste zadali, je neplatný.
+            not_valid: 'Zadaný kód měny je neplatný.'
         method:
-            not_blank: 'Vyberte, prosím, způsob platby.'
+            not_blank: 'Prosím vyberte platební metodu.'
     payment_method:
         gateway:
-            not_blank: Prosím vyberte bránu platební metody.
+            not_blank: 'Prosím vyberte bránu platební metody.'
         name:
-            max_length: Název metody platby musí obsahovat {{ limit }} znaků nebo méně.
-            min_length: Název metody platby musí obsahovat alespoň {{ limit }} znaků.
-            not_blank: Zadejte prosím název metody platby.
+            max_length: 'Název platební metody nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Název platební metody musí mít alespoň {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte název platební metody.'
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: Poplatek nesmí být nižší než {{ compared_value }}.
-                not_blank: Prosím zadejte velikost poplatku.
+                greater_than_or_equal: 'Poplatek nemůže být nižší než {{ compared_value }}.'
+                not_blank: 'Prosím zadejte částku poplatku.'
             percent:
-                max_range: Procentuální poplatek nemůže být větší než {{ limit }}.
-                min_range: Procentuální poplatek nemůže být nižší než {{ limit }}.
-                not_blank: Zadejte procentuální poplatek.
+                max_range: 'Procentuální poplatek nemůže být vyšší než {{ limit }}.'
+                min_range: 'Procentuální poplatek nemůže být nižší než {{ limit }}.'
+                not_blank: 'Prosím zadejte procentní poplatek.'
         code:
-            not_blank: 'Zadejte, prosím, kód způsobu platby.'
-            regex: 'Kód způsobu platby můžou tvořit pouze písmena, číslice, pomlčky a podtržítka.'
-            unique: 'Způsob platby se zadaným kódem již existuje.'
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód platební metody.'
+            regex: 'Kód platební metody může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            unique: 'Platební metoda s daným kódem již existuje.'

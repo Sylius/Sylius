@@ -17,18 +17,14 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="false" />
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderPayment\SellOrderInventoryListener">
+        <service id="sylius.listener.workflow.order_payment.sell_order_inventory" class="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderPayment\SellOrderInventoryListener">
             <argument type="service" id="sylius.operator.inventory.order_inventory" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_payment.completed.pay" priority="200"/>
         </service>
-        <service id="sylius.listener.workflow.order_payment.sell_order_inventory" alias="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderPayment\SellOrderInventoryListener" />
 
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderPayment\ResolveOrderStateListener">
+        <service id="sylius.listener.workflow.order_payment.resolve_order_state" class="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderPayment\ResolveOrderStateListener">
             <argument type="service" id="sylius.state_resolver.order" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_payment.completed.pay" priority="100"/>
         </service>
-        <service id="sylius.listener.workflow.order_payment.resolve_order_state" alias="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderPayment\ResolveOrderStateListener" />
     </services>
 </container>

@@ -57,28 +57,33 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I choose :countryName
      */
-    public function iChoose($countryName)
+    public function iChoose(string $countryName): void
     {
-        $this->createPage->chooseName($countryName);
+        $this->createPage->selectCountry($countryName);
     }
 
     /**
      * @When I add the :provinceName province with :provinceCode code
      * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
      */
-    public function iAddProvinceWithCode($provinceName, $provinceCode, $provinceAbbreviation = null)
+    public function iAddProvinceWithCode(string $provinceName, string $provinceCode, ?string $provinceAbbreviation = null): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->addProvince($provinceName, $provinceCode, $provinceAbbreviation);
+        $currentPage->addProvince();
+        $currentPage->specifyProvinceName($provinceName);
+        $currentPage->specifyProvinceCode($provinceCode);
+        if (null !== $provinceAbbreviation) {
+            $currentPage->specifyProvinceAbbreviation($provinceAbbreviation);
+        }
     }
 
     /**
      * @When I add it
      * @When I try to add it
      */
-    public function iAddIt()
+    public function iAddIt(): void
     {
         $this->createPage->create();
     }
@@ -94,18 +99,9 @@ final class ManagingCountriesContext implements Context
     /**
      * @When I disable it
      */
-    public function iDisableIt()
+    public function iDisableIt(): void
     {
         $this->updatePage->disable();
-    }
-
-    /**
-     * @When I save my changes
-     * @When I try to save my changes
-     */
-    public function iSaveMyChanges()
-    {
-        $this->updatePage->saveChanges();
     }
 
     /**
@@ -131,7 +127,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then /^(this country) should be disabled$/
      */
-    public function thisCountryShouldBeDisabled(CountryInterface $country)
+    public function thisCountryShouldBeDisabled(CountryInterface $country): void
     {
         $this->indexPage->open();
 
@@ -141,10 +137,10 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then I should not be able to choose :name
      */
-    public function iShouldNotBeAbleToChoose($name)
+    public function iShouldNotBeAbleToChoose(string $name): void
     {
         try {
-            $this->createPage->chooseName($name);
+            $this->createPage->selectCountry($name);
         } catch (ElementNotFoundException) {
             return;
         }
@@ -155,7 +151,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @Then I should not be able to edit its code
      */
-    public function theCodeFieldShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeFieldDisabled());
     }
@@ -217,7 +213,7 @@ final class ManagingCountriesContext implements Context
     /**
      * @When /^I(?:| also) delete the "([^"]*)" province of this country$/
      */
-    public function iDeleteTheProvinceOfCountry($provinceName)
+    public function iDeleteTheProvinceOfCountry($provinceName): void
     {
         $this->updatePage->removeProvince($provinceName);
     }
@@ -225,27 +221,27 @@ final class ManagingCountriesContext implements Context
     /**
      * @When /^I want to create a new province in (country "([^"]*)")$/
      */
-    public function iWantToCreateANewProvinceInCountry(CountryInterface $country)
+    public function iWantToCreateANewProvinceInCountry(CountryInterface $country): void
     {
         $this->updatePage->open(['id' => $country->getId()]);
 
-        $this->updatePage->clickAddProvinceButton();
+        $this->updatePage->addProvince();
     }
 
     /**
      * @When I name the province :provinceName
      * @When I do not name the province
      */
-    public function iNameTheProvince($provinceName = null)
+    public function iNameTheProvince($provinceName = null): void
     {
-        $this->updatePage->nameProvince($provinceName ?? '');
+        $this->updatePage->specifyProvinceName($provinceName ?? '');
     }
 
     /**
      * @When I do not specify the province code
      * @When I specify the province code as :provinceCode
      */
-    public function iSpecifyTheProvinceCode($provinceCode = null)
+    public function iSpecifyTheProvinceCode($provinceCode = null): void
     {
         $this->updatePage->specifyProvinceCode($provinceCode ?? '');
     }
@@ -272,7 +268,7 @@ final class ManagingCountriesContext implements Context
     public function iRemoveProvinceName(string $provinceName): void
     {
         $this->updatePage->removeProvinceName($provinceName);
-        $this->iSaveMyChanges();
+        $this->updatePage->saveChanges();
     }
 
     /**
@@ -315,6 +311,9 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedThatProvincesThatAreInUseCannotBeDeleted(): void
     {
-        $this->notificationChecker->checkNotification('Error Cannot delete, the province is in use.', NotificationType::failure());
+        $this->notificationChecker->checkNotification(
+            'Error Cannot delete, the Province is in use.',
+            NotificationType::failure(),
+        );
     }
 }

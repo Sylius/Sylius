@@ -4,13 +4,13 @@
 sylius:
     user:
         email:
-            not_blank: Vul uw e-mailadres in.
-            invalid: Deze e-mail is ongeldig.
-            not_registered: Gebruiker met deze email bestaat niet. Gelieve eerst te registreren.
+            not_blank: 'Voer je e-mail in.'
+            invalid: 'Deze e-mail is ongeldig.'
+            not_registered: 'Er is geen gebruiker met deze e-mail. Registreer je eerst.'
         plainPassword:
-            not_blank: Voer uw wachtwoord in.
-            mismatch: De ingevoerde wachtwoorden komen niet overeen
-            wrong_current: Het opgegeven paswoord komt niet overeen.
+            not_blank: 'Voer je wachtwoord in.'
+            mismatch: 'De ingevoerde wachtwoorden komen niet overeen.'
+            wrong_current: 'Het opgegeven wachtwoord is anders dan het huidige wachtwoord.'
         password:
-            min: Wachtwoord moet ten minste {{ limit }} tekens bevatten.
-            max: Wachtwoord mag niet meer dan {{ limit }} tekens bevatten.
+            min: 'Wachtwoord moet minstens {{ limit }} tekens lang zijn.'
+            max: 'Wachtwoord mag niet langer zijn dan {{ limit }} tekens.'

@@ -18,5 +18,5 @@ use Symfony\Component\Security\Core\User\UserProviderInterface as BaseUserProvid
 
 interface UserProviderInterface extends BaseUserProviderInterface
 {
-    public function loadUserByUsername($username): UserInterface;
+    public function loadUserByUsername(mixed $username): UserInterface;
 }

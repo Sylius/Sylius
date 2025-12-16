@@ -1,0 +1,8 @@
+{% embed '@SyliusShop/shared/accordion/accordion_item_title.html.twig' with { accordion_item_id: 'attributes' } %}
+    {% block accordion_item_title %}
+        <span {{ sylius_test_html_attribute('tab', 'attributes') }}>
+            {{ 'sylius.ui.attributes'|trans }}
+        </span>
+    {% endblock %}
+{% endembed %}
+

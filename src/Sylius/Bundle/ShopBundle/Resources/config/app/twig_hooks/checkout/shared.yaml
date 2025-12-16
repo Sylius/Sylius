@@ -1,0 +1,58 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.checkout.common.header':
+            logo:
+                template: '@SyliusShop/checkout/common/header/logo.html.twig'
+                priority: 100
+            account:
+                template: '@SyliusShop/checkout/common/header/account.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.common.sidebar':
+            summary:
+                template: '@SyliusShop/checkout/common/sidebar/summary.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.common.sidebar.summary':
+            header:
+                template: '@SyliusShop/checkout/common/sidebar/summary/header.html.twig'
+                priority: 200
+            items:
+                template: '@SyliusShop/checkout/common/sidebar/summary/items.html.twig'
+                priority: 100
+            total:
+                template: '@SyliusShop/checkout/common/sidebar/summary/total.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.common.sidebar.summary.items':
+            item:
+                template: '@SyliusShop/checkout/common/sidebar/summary/items/item.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.common.sidebar.summary.items.item':
+            name:
+                template: '@SyliusShop/checkout/common/sidebar/summary/items/item/name.html.twig'
+                priority: 200
+            quantity:
+                template: '@SyliusShop/checkout/common/sidebar/summary/items/item/quantity.html.twig'
+                priority: 100
+            subtotal:
+                template: '@SyliusShop/checkout/common/sidebar/summary/items/item/subtotal.html.twig'
+                priority: 0
+
+        'sylius_shop.checkout.common.sidebar.summary.total':
+            items_total:
+                template: '@SyliusShop/checkout/common/sidebar/summary/total/items_total.html.twig'
+                priority: 400
+            promotion_total:
+                template: '@SyliusShop/checkout/common/sidebar/summary/total/promotion_total.html.twig'
+                priority: 300
+            shipping_total:
+                template: '@SyliusShop/checkout/common/sidebar/summary/total/shipping_total.html.twig'
+                priority: 200
+            taxes_total:
+                template: '@SyliusShop/checkout/common/sidebar/summary/total/taxes_total.html.twig'
+                priority: 100
+            order_total:
+                template: '@SyliusShop/checkout/common/sidebar/summary/total/order_total.html.twig'
+                priority: 0

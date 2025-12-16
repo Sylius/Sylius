@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    taxon:
+        code:
+            max_length: 'コードは {{ limit }} 文字を超えてはいけません。'
+            not_blank: '分類コードを入力してください。'
+            regex: '分類コードは英字・数字・ハイフン・アンダースコアのみ使用できます。'
+            unique: '指定されたコードの分類は既に存在します。'
+        name:
+            max_length: '分類名は255文字以内で入力してください。'
+            not_blank: '分類名を入力してください。'
+        slug:
+            not_blank: '分類スラッグを入力してください。'
+            unique: '分類スラッグは一意でなければなりません。'
+    taxonomy:
+        name:
+            max_length: 'タクソノミー名は255文字以内で入力してください。'
+            not_blank: 'タクソノミー名を入力してください。'

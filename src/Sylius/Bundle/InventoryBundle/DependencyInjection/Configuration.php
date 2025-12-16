@@ -34,11 +34,6 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('checker')
-                    ->setDeprecated('sylius/inventory-bundle', '1.13', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
-                    ->defaultValue('sylius.availability_checker.default')
-                    ->cannotBeEmpty()
-                ->end()
             ->end()
         ;
 
@@ -57,9 +52,6 @@ final class Configuration implements ConfigurationInterface
                         ->arrayNode('inventory_unit')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('options')
-                                    ->setDeprecated('sylius/inventory-bundle', '1.13', 'The "%node%" node at "%path%" is deprecated and will be removed in 2.0.')
-                                ->end()
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()

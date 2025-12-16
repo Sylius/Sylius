@@ -37,12 +37,12 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "doctrine/collections": "^1.6",
-        "sylius/resource": "^1.11"
+        "php": "^8.2",
+        "doctrine/collections": "^2.2",
+        "sylius/resource": "^1.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2"
+        "phpunit/phpunit": "^11.5"
     },
     "config": {
         "allow-plugins": {
@@ -51,7 +51,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^7.2"
         }
     },
     "autoload": {
@@ -61,7 +64,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\Review\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\Review\\": "tests/"
         }
     },
     "repositories": [

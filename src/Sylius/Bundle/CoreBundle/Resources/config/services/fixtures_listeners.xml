@@ -19,20 +19,18 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius_fixtures.listener.catalog_promotion_executor" class="Sylius\Bundle\CoreBundle\Fixture\Listener\CatalogPromotionExecutorListener" public="false">
+        <service id="sylius.fixture.listener.catalog_promotion_executor" class="Sylius\Bundle\CoreBundle\Fixture\Listener\CatalogPromotionExecutorListener" public="false">
             <argument type="service" id="sylius.processor.catalog_promotion.all_product_variant" />
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="sylius.command_bus" />
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
             <tag name="sylius_fixtures.listener" />
         </service>
-        <service id="sylius.fixture.listener.catalog_promotion_executor" alias="sylius_fixtures.listener.catalog_promotion_executor" />
 
-        <service id="Sylius\Bundle\CoreBundle\Fixture\Listener\ImagesPurgerListener" public="false">
+        <service id="sylius.fixture.listener.images_purger" class="Sylius\Bundle\CoreBundle\Fixture\Listener\ImagesPurgerListener" public="false">
             <argument type="service" id="filesystem" />
             <argument>%sylius_core.images_dir%</argument>
             <tag name="sylius_fixtures.listener" />
         </service>
-        <service id="sylius.fixture.listener.images_purger" alias="Sylius\Bundle\CoreBundle\Fixture\Listener\ImagesPurgerListener" />
     </services>
 </container>

@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Provider;
 
+use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
 final class EligibleCatalogPromotionsProvider implements EligibleCatalogPromotionsProviderInterface
 {
+    /** @param iterable<CriteriaInterface> $defaultCriteria */
     public function __construct(
         private CatalogPromotionRepositoryInterface $catalogPromotionRepository,
         private iterable $defaultCriteria = [],

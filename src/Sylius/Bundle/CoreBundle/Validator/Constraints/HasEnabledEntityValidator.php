@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -26,18 +25,8 @@ final class HasEnabledEntityValidator extends ConstraintValidator
 {
     public function __construct(
         private ManagerRegistry $registry,
-        private ?PropertyAccessorInterface $accessor = null,
+        private PropertyAccessorInterface $accessor,
     ) {
-        if (null === $this->accessor) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                'Not passing a PropertyAccessorInterface as the second constructor argument for %s is deprecated and will be required in Sylius 2.0.',
-                self::class,
-            );
-
-            $this->accessor = PropertyAccess::createPropertyAccessor();
-        }
     }
 
     public function validate(mixed $value, Constraint $constraint): void
@@ -79,6 +68,8 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     /**
      * If no entity matched the query criteria or a single entity matched, which is the same as the entity being
      * validated, the entity is the last enabled entity available.
+     *
+     * @param array<object> $result
      */
     private function isLastEnabledEntity(array|\Iterator $result, object $entity): bool
     {
@@ -109,9 +100,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
         return $objectManager;
     }
 
-    /**
-     * @throws ConstraintDefinitionException
-     */
+    /** @throws ConstraintDefinitionException */
     private function validateObjectManager(?ObjectManager $objectManager, string $exceptionMessage): void
     {
         if (null === $objectManager) {
@@ -119,9 +108,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @throws ConstraintDefinitionException
-     */
+    /** @throws ConstraintDefinitionException */
     private function ensureEntityHasProvidedEnabledField(
         ObjectManager $objectManager,
         object $entity,

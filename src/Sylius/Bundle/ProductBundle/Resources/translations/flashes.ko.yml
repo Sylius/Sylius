@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    product_variant:
+        generate: '상품 바리아ント가 성공적으로 생성되었습니다.'

@@ -15,6 +15,7 @@ namespace Sylius\Tests\Functional;
 
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\CoreBundle\Collector\CartCollector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,29 +27,29 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CartCollectorTest extends KernelTestCase
 {
-    /** @test */
+    #[Test]
     public function it_has_no_cart_when_no_channel_is_present(): void
     {
         $this->loadFixtures([]);
 
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect(new Request(), new Response());
 
         $this->assertFalse($collector->hasCart());
     }
 
-    /** @test */
+    #[Test]
     public function it_has_no_cart_data_when_no_cart_and_no_session_are_available(): void
     {
         $this->loadFixtures([__DIR__ . '/../DataFixtures/ORM/resources/order.yml']);
 
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect(new Request(), new Response());
 
         $this->assertFalse($collector->hasCart());
     }
 
-    /** @test */
+    #[Test]
     public function it_has_no_cart_data_when_cart_is_not_available(): void
     {
         $this->loadFixtures([__DIR__ . '/../DataFixtures/ORM/resources/order.yml']);
@@ -62,13 +63,13 @@ final class CartCollectorTest extends KernelTestCase
         $requestStack = self::getContainer()->get('request_stack');
         $requestStack->push($request);
 
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect($request, new Response());
 
         $this->assertFalse($collector->hasCart());
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_no_cart_data_when_request_is_stateless(): void
     {
         $sessionFactory = self::getContainer()->get('session.factory');
@@ -90,13 +91,13 @@ final class CartCollectorTest extends KernelTestCase
         $sessionCartStorage = self::getContainer()->get(CartStorageInterface::class);
         $sessionCartStorage->setForChannel($channel, $cart);
 
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect($request, new Response());
 
         $this->assertFalse($collector->hasCart());
     }
 
-    /** @test */
+    #[Test]
     public function it_collects_cart_data(): void
     {
         $sessionFactory = self::getContainer()->get('session.factory');
@@ -118,7 +119,7 @@ final class CartCollectorTest extends KernelTestCase
         $sessionCartStorage->setForChannel($channel, $cart);
 
         /** @var CartCollector $collector */
-        $collector = self::getContainer()->get(CartCollector::class);
+        $collector = self::getContainer()->get('sylius.collector.cart');
         $collector->collect($request, new Response());
 
         $this->assertTrue($collector->hasCart());

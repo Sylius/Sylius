@@ -2,41 +2,77 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    catalog_promotion:
+        code:
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            unique: 'De catalogus promotie met de gegeven code bestaat al.'
+            regex: 'Catalogus promotiecode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            not_blank: 'Voer catalogus promotiecode in.'
+        date:
+            greater_than_start_date: 'Einddatum kan niet vóór de startdatum worden ingesteld.'
+        name:
+            max_length: 'Catalogus promotienaam mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Catalogus promotienaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer catalogus promotienaam in.'
+        state:
+            processing: 'De catalogus promotie kan niet worden bewerkt omdat deze momenteel in behandeling is.'
+    catalog_promotion_action:
+        type:
+            not_blank: 'Kies een actietype.'
+            invalid: 'Catalogus promotie actie type is ongeldig. Beschikbare typen zijn {{ available_action_types }}.'
+        invalid_type: 'Catalogus promotie actie type is ongeldig. Kies een geldig type.'
+        percentage_discount:
+            not_in_range: 'Het percentage kortingsbedrag moet tussen 0% en 100% liggen.'
+            not_number_or_empty: 'Het percentage kortingsbedrag moet een getal zijn en mag niet leeg zijn.'
+            not_valid: 'Het percentage kortingsbedrag moet geconfigureerd zijn.'
+    catalog_promotion_scope:
+        type:
+            not_blank: 'Kies een scopetype.'
+            invalid: 'Catalogus promotie scope type is ongeldig. Beschikbare typen zijn {{ available_scope_types }}.'
     promotion:
         code:
-            unique: De opgegeven promotiecode is reeds in gebruik.
-            regex: Coupon code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            not_blank: Gelieve een promotiecode in te geven.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            unique: 'De promotie met de gegeven code bestaat al.'
+            regex: 'Promotiecode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            not_blank: 'Voer promotiecode in.'
         description:
-            max_length: Promotie omschrijving mag niet langer zijn dan 1 teken.|Promotie omschrijving mag niet langer zijn dan {{ limit }} tekens.
-            min_length: Promotie omschrijving moet minstens 1 teken lang zijn.|Promotie omschrijving moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een promotie omschrijving in.
-        end_date_cannot_be_set_prior_start_date: Einddatum kan niet voor de begindatum liggen.
+            max_length: 'Promotiebeschrijving mag niet langer zijn dan 1 teken.|Promotiebeschrijving mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Promotiebeschrijving moet minstens 1 teken lang zijn.|Promotiebeschrijving moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer promotiebeschrijving in.'
+        end_date_cannot_be_set_prior_start_date: 'Einddatum kan niet vóór de startdatum worden ingesteld.'
+        is_invalid: 'Promotie is ongeldig.'
         name:
-            max_length: Promotie naam mag niet langer zijn dan 1 teken.|Promotie naam mag niet langer zijn dan {{ limit }} tekens.
-            min_length: Promotie naam moet minstens 1 teken lang zijn.|Promotie naam moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een promotie naam in.
+            max_length: 'Promotienaam mag niet langer zijn dan 1 teken.|Promotienaam mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Promotienaam moet minstens 1 teken lang zijn.|Promotienaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer promotienaam in.'
     promotion_action:
+        invalid_type: 'Promotie actie type is ongeldig. Beschikbare actietypes zijn {{ available_action_types }}.'
         percentage_discount_configuration:
-            not_in_range: Het kortingspercentage moet tussen 0% en 100% liggen.
+            not_in_range: 'De percentage korting moet tussen 0% en 100% liggen.'
+    promotion_rule:
+        invalid_type: 'Promotie regel type is ongeldig. Beschikbare regeltypes zijn {{ available_rule_types }}.'
     promotion_coupon:
         code:
-            max_length: Coupon code mag niet langer zijn dan 1 teken.|Coupon code mag niet langer zijn dan {{ limit }} tekens.
-            min_length: Coupon code moet minstens 1 teken lang zijn.|Coupon code moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een coupon code in.
-            regex: Coupon code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Deze coupon bestaat al.
-        is_invalid: Couponcode is ongeldig.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            min_length: 'Couponcode moet minstens 1 teken lang zijn.|Couponcode moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer couponcode in.'
+            regex: 'Couponcode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'Deze coupon bestaat al.'
+        is_invalid: 'Couponcode is ongeldig.'
+        promotion:
+            not_blank: 'Geef een promotie voor deze coupon op.'
+            not_coupon_based: 'Alleen op coupon gebaseerde promoties kunnen coupons hebben.'
         usage_limit:
-            min: Coupon gebruikslimiet moet minstens {{ limit }} zijn.
+            min: 'Coupon gebruikslimiet moet minstens {{ limit }} zijn.'
     promotion_coupon_generator_instruction:
         amount:
-            min: Hoeveelheid te genereren coupons moet minstens {{ limit }} zijn.
-            not_blank: Voer het aantal te genereren coupons in.
+            min: 'Aantal te genereren coupons moet minstens {{ limit }} zijn.'
+            not_blank: 'Voer het aantal te genereren coupons in.'
         code_length:
-            min: Couponcode moet ten minste {{ limit }} tekens lang zijn.
-            max: Couponcode mag niet meer dan {{ limit }} karakters bevatten.
-            not_blank: Voer de lengte van de couponcode in.
-        possible_generation_amount: Ongeldige lengte van de kortingscode of aantal kortingsbonnen. Het is niet mogelijk om %expectedAmount% unieke coupons met code lengte %codeLength%te genereren. De mogelijke hoeveelheid om te genereren is %possibleAmount%.
+            min: 'Couponcode moet minstens {{ limit }} tekens lang zijn.'
+            max: 'Couponcode mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer couponcode lengte in.'
+            not_in_range: 'Couponcode lengte moet tussen {{ min }} en {{ max }} liggen.'
+        possible_generation_amount: 'Ongeldige couponcode lengte of couponhoeveelheid. Het is niet mogelijk om %expectedAmount% unieke coupons te genereren met een code lengte van %codeLength%. De mogelijke hoeveelheid die gegenereerd kan worden is %possibleAmount%.'
         usage_limit:
-            min: Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.
+            min: 'Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.'

@@ -4,24 +4,28 @@
 sylius:
     attribute:
         name:
-            not_blank: 请输入属性名称。
-            min_length: 属性名称必须是至少 1 个字符长。 |属性名称必须至少 {{limit}} 个字符长。
-            max_length: 属性名称必须不能超过 1 个字符。 |属性名称不能长于 {{limit}} 字符。
+            not_blank: '请输入属性名称。'
+            min_length: '属性名称长度不得少于 1 个字符。|属性名称长度不得少于 {{ limit }} 个字符。'
+            max_length: '属性名称长度不得超过 1 个字符。|属性名称长度不得超过 {{ limit }} 个字符。'
         code:
-            not_blank: 请输入属性的编码。
-            regex: 货币代码仅由字母、数字、破折号和下划线组成
-            unique: 此编码已被使用。
+            min_length: '属性代码长度不得少于 1 个字符。|属性代码长度不得少于 {{ limit }} 个字符。'
+            max_length: '属性代码长度不得超过 1 个字符。|属性代码长度不得超过 {{ limit }} 个字符。'
+            not_blank: '请输入属性代码。'
+            regex: '属性代码只能包含字母、数字、短横线和下划线。'
+            unique: '该代码已被使用。'
         configuration:
-            max_entries: 配置最大条目值必须大于或等于最小的项值。
-            max_length: 配置最大长度值必须大于或等于最小的项值。
-            min_entries: 配置最大条目值必须大于或等于最小的项值。
-            multiple: 多配置必须如果指定 min 或 max 条目的值为 true。
+            max_entries: '配置中的最大条目数必须大于或等于最小条目数。'
+            max_length: '配置中的最大长度必须大于或等于最小长度。'
+            min_entries: '配置中的最小条目数必须小于或等于已添加选项的数量。'
+            multiple: '如果指定了最小或最大条目数，配置中的“多选”必须为 true。'
         presentation:
-            not_blank: 请输入属性介绍。
-            min_length: 属性介绍必须是至少 1 个字符长。 |属性介绍必须至少 {{limit}} 个字符长。
-            max_length: 属性介绍必须不能超过 1 个字符。 |属性介绍不能长于 {{limit}} 字符。
+            not_blank: '请输入属性展示名称。'
+            min_length: '属性展示名称长度不得少于 1 个字符。|属性展示名称长度不得少于 {{ limit }} 个字符。'
+            max_length: '属性展示名称长度不得超过 1 个字符。|属性展示名称长度不得超过 {{ limit }} 个字符。'
+        type:
+            unregistered: '"%type%" 属性类型未注册。可用属性类型：%available_types%。'
     attribute_value:
         attribute:
-            not_blank: 请选择属性。
+            not_blank: '请选择属性。'
         value:
-            not_blank: 请输入属性值。
+            not_blank: '请输入属性值。'

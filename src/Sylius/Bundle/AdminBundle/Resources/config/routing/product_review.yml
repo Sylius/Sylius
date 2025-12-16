@@ -3,17 +3,12 @@ sylius_admin_product_review:
         alias: sylius.product_review
         section: admin
         permission: true
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_product_review
-        vars:
-            all:
-                subheader: sylius.ui.manage_reviews_of_your_products
-                templates:
-                    form: "@SyliusAdmin/ProductReview/_form.html.twig"
-            index:
-                icon: newspaper
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\ProductReviewType
     type: sylius.resource
 
 sylius_admin_product_review_accept:

@@ -17,55 +17,53 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface"
+            id="sylius.processor.catalog_promotion.all_product_variant"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessor"
         >
             <argument type="service" id="sylius.repository.product_variant" />
             <argument type="service" id="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants" />
         </service>
-        <service id="sylius.processor.catalog_promotion.all_product_variant" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessorInterface" alias="sylius.processor.catalog_promotion.all_product_variant" />
 
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionClearerInterface"
+            id="sylius.processor.catalog_promotion.clearer"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionClearer"
         />
-        <service id="sylius.processor.catalog_promotion.clearer" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionClearerInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionClearerInterface" alias="sylius.processor.catalog_promotion.clearer" />
 
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface"
+            id="sylius.processor.catalog_promotion.state"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessor"
         >
             <argument type="service" id="sylius.checker.catalog_promotion_eligibility" />
-            <argument type="service" id="SM\Factory\Factory" />
+            <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
-        <service id="sylius.processor.catalog_promotion.state" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionStateProcessorInterface" alias="sylius.processor.catalog_promotion.state" />
 
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotionsProcessorInterface"
+            id="sylius.processor.catalog_promotion.product"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotionsProcessor"
         >
             <argument type="service" id="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants" />
         </service>
-        <service id="sylius.processor.catalog_promotion.product" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotionsProcessorInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotionsProcessorInterface" alias="sylius.processor.catalog_promotion.product" />
 
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPromotionsProcessorInterface"
+            id="sylius.processor.catalog_promotion.product_variant"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPromotionsProcessor"
         >
             <argument type="service" id="sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants" />
         </service>
-        <service id="sylius.processor.catalog_promotion.product_variant" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPromotionsProcessorInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPromotionsProcessorInterface" alias="sylius.processor.catalog_promotion.product_variant" />
 
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface"
+            id="sylius.processor.catalog_promotion.removal"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessor"
         >
             <argument type="service" id="sylius.repository.catalog_promotion" />
             <argument type="service" id="sylius.announcer.catalog_promotion.removal" />
         </service>
-        <service id="sylius.processor.catalog_promotion.removal" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\CatalogPromotionRemovalProcessorInterface" alias="sylius.processor.catalog_promotion.removal" />
     </services>
 </container>

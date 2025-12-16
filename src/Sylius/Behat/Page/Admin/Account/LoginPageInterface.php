@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Account;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface LoginPageInterface extends SymfonyPageInterface
+interface LoginPageInterface extends SyliusPageInterface
 {
     public function hasValidationErrorWith(string $message): bool;
 

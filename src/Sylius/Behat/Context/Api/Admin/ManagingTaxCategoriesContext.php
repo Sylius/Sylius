@@ -32,6 +32,15 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
+     * @Given I am browsing tax categories
+     * @When I browse tax categories
+     */
+    public function iWantToBrowseTaxCategories(): void
+    {
+        $this->client->index(Resources::TAX_CATEGORIES);
+    }
+
+    /**
      * @When I want to create a new tax category
      */
     public function iWantToCreateNewTaxCategory(): void
@@ -104,11 +113,12 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
-     * @When I browse tax categories
+     * @When /^I search by "([^"]+)" (code|name)$/
      */
-    public function iWantToBrowseTaxCategories(): void
+    public function iSearchByName(string $phrase, string $field): void
     {
-        $this->client->index(Resources::TAX_CATEGORIES);
+        $this->client->addFilter($field, $phrase);
+        $this->client->filter();
     }
 
     /**
@@ -125,6 +135,7 @@ final class ManagingTaxCategoriesContext implements Context
 
     /**
      * @Then I should see the tax category :taxCategoryName in the list
+     * @Then I should see the tax category :taxCategoryName
      * @Then the tax category :taxCategoryName should appear in the registry
      */
     public function theTaxCategoryShouldAppearInTheRegistry(string $taxCategoryName): void
@@ -132,6 +143,17 @@ final class ManagingTaxCategoriesContext implements Context
         Assert::true(
             $this->isItemOnIndex('name', $taxCategoryName),
             sprintf('Tax category with name %s does not exist', $taxCategoryName),
+        );
+    }
+
+    /**
+     * @Then I should not see the tax category :taxCategoryName
+     */
+    public function iShouldNotSeeTheTaxCategory(string $taxCategoryName): void
+    {
+        Assert::false(
+            $this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $taxCategoryName),
+            sprintf('Tax category with name %s exist', $taxCategoryName),
         );
     }
 
@@ -202,11 +224,15 @@ final class ManagingTaxCategoriesContext implements Context
     }
 
     /**
+     * @Then I should see :count tax categories in the list
      * @Then I should see a single tax category in the list
      */
-    public function iShouldSeeSingleTaxCategoryInTheList(): void
+    public function iShouldSeeCountTaxCategoriesInTheList(int $count = 1): void
     {
-        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
+        Assert::same(
+            $this->responseChecker->countCollectionItems($this->client->getLastResponse()),
+            $count,
+        );
     }
 
     /**

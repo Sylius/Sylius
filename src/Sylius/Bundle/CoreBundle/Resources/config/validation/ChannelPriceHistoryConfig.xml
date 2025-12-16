@@ -23,7 +23,7 @@
                 </option>
             </constraint>
             <constraint name="Type">
-                <option name="value">int</option>
+                <option name="type">int</option>
                 <option name="groups">
                     <value>sylius</value>
                 </option>

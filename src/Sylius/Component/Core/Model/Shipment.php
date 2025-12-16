@@ -35,8 +35,6 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, BaseAdjustmentInterface> $this->adjustments */
         $this->adjustments = new ArrayCollection();
     }
 

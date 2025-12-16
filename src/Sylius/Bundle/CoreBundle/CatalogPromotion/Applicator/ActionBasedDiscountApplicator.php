@@ -22,6 +22,7 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 
 final class ActionBasedDiscountApplicator implements ActionBasedDiscountApplicatorInterface
 {
+    /** @param iterable<DiscountApplicationCriteriaInterface> $discountApplicatorCriteria */
     public function __construct(
         private CatalogPromotionPriceCalculatorInterface $priceCalculator,
         private iterable $discountApplicatorCriteria,
@@ -33,7 +34,6 @@ final class ActionBasedDiscountApplicator implements ActionBasedDiscountApplicat
         CatalogPromotionActionInterface $action,
         ChannelPricingInterface $channelPricing,
     ): void {
-        /** @var DiscountApplicationCriteriaInterface $applicatorCriterion */
         foreach ($this->discountApplicatorCriteria as $applicatorCriterion) {
             if (!$applicatorCriterion->isApplicable($catalogPromotion, ['channelPricing' => $channelPricing, 'action' => $action])) {
                 return;

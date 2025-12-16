@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        delete_error: 'Der Kanal kann nicht gelöscht werden. Mindestens ein aktivierter Kanal ist erforderlich.'
+    checkout:
+        complete_error: 'Es gab ein unerwartetes Problem beim Abschließen der Bestellung. Bitte versuchen Sie, Ihre Bestellung erneut aufzugeben.'
+    contact:
+        request_success: 'Ihre Kontaktanfrage wurde erfolgreich abgeschickt.'
+        request_error: 'Beim Senden der Kontaktanfrage ist ein Problem aufgetreten. Bitte versuchen Sie es später erneut.'
+    customer:
+        add_address: 'Die Adresse wurde erfolgreich hinzugefügt.'
+        impersonate: 'Erfolgreich als Kunde %name% angemeldet.'
+        set_address_as_default: 'Die Adresse wurde als Standardadresse festgelegt.'
+    order:
+        apply_state_machine_transition_error: 'Es gab ein unerwartetes Problem beim Aktualisieren einer Bestellung. Bitte versuchen Sie, die Bestellung erneut zu aktualisieren.'
+        promotion_integrity: 'Sie sind nicht mehr berechtigt für diese Promotion %promotionName%.'
+        total_integrity: 'Der Gesamtbetrag Ihrer Bestellung wurde geändert, überprüfen Sie Ihre Bestellinformationen und bestätigen Sie diese erneut.'
+        update_error: 'Es gab ein unerwartetes Problem beim Aktualisieren einer Bestellung. Bitte versuchen Sie, die Bestellung erneut zu aktualisieren.'
+    payment:
+        apply_state_machine_transition_error: 'Es gab ein unerwartetes Problem beim Aktualisieren einer Zahlung. Bitte versuchen Sie, die Zahlung erneut zu aktualisieren.'
+    product:
+        in_use_by_promotion_rule: 'Ein Produkt, das in einer Aktionsregel verwendet wird, kann nicht gelöscht werden.'
+        out_of_stock: 'Es sind nur noch %quantity% dieses Produkts auf Lager.'
+    product_variant:
+        update_error: 'Es gab ein unerwartetes Problem beim Aktualisieren einer Produktvariante. Bitte versuchen Sie, die Produktvariante erneut zu aktualisieren.'
+    promotion:
+        update_rules: 'Einige Regeln der Promotionen mit den Codes %codes% wurden aktualisiert.'
+    taxon:
+        in_use_by_promotion_rule: 'Ein Taxon, das in einer Aktionsregel verwendet wird, kann nicht gelöscht werden.'
+        menu_taxon_delete: 'Sie können ein Menü-Taxon für einen Kanal nicht löschen.'

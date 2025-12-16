@@ -17,12 +17,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service
-            id="Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface"
+            id="sylius.checker.product_variant_lowest_price_display"
             class="Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayChecker"
         />
-        <service id="sylius.checker.product_variant_lowest_price_display" alias="Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface" />
+        <service id="Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayCheckerInterface" alias="sylius.checker.product_variant_lowest_price_display" />
     </services>
 </container>

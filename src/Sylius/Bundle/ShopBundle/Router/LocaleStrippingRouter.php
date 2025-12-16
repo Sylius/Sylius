@@ -28,11 +28,13 @@ final class LocaleStrippingRouter implements RouterInterface, RequestMatcherInte
     {
     }
 
+    /** @return array<mixed> */
     public function match(string $pathinfo): array
     {
         return $this->router->match($pathinfo);
     }
 
+    /** @return array<mixed> */
     public function matchRequest(Request $request): array
     {
         if ($this->router instanceof RequestMatcherInterface) {
@@ -42,6 +44,7 @@ final class LocaleStrippingRouter implements RouterInterface, RequestMatcherInte
         return $this->match($request->getPathInfo());
     }
 
+    /** @param array<string, mixed> $parameters */
     public function generate(string $name, array $parameters = [], int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH): string
     {
         $url = $this->router->generate($name, $parameters, $referenceType);
@@ -69,10 +72,10 @@ final class LocaleStrippingRouter implements RouterInterface, RequestMatcherInte
     }
 
     /** @return string[] */
-    public function warmUp(string $cacheDir): array
+    public function warmUp(string $cacheDir, ?string $buildDir = null): array
     {
         if ($this->router instanceof WarmableInterface) {
-            return $this->router->warmUp($cacheDir);
+            return $this->router->warmUp($cacheDir, $buildDir);
         }
 
         return [];

@@ -1,0 +1,8 @@
+{% set selected_variant = hookable_metadata.context.variant %}
+<tbody>
+{% for key, variant in hookable_metadata.context.product.enabledVariants %}
+    <tr class="{% if variant.code == selected_variant.code %}table-success{% endif %}" {{ sylius_test_html_attribute('product-variants-row') }}>
+        {% hook 'body' with { variant, key } %}
+    </tr>
+{% endfor %}
+</tbody>

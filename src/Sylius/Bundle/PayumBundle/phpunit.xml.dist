@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+
+         colors="true"
+>
+    <php>
+        <server name="KERNEL_CLASS" value="AppKernel" />
+    </php>
+
+    <testsuites>
+        <testsuite name="sylius-payum-bundle">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

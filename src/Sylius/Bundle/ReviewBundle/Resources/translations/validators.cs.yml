@@ -4,12 +4,12 @@
 sylius:
     review:
         author:
-            already_exists: Tento e-mail je již registrován, prosím přihlašte se nebo obnovte své heslo.
+            already_exists: 'Tento e-mail je již registrován, prosím přihlaste se nebo použijte zapomenuté heslo.'
         comment:
-            not_blank: Komentář recenze nesmí být prázdný.
+            not_blank: 'Komentář recenze nesmí být prázdný.'
         rating:
-            not_blank: Musíte zaškrtnout hodnocení.
+            not_blank: 'Musíte zkontrolovat hodnocení recenze.'
         title:
-            not_blank: Nadpis recenze nesmí být prázdný.
-            min_length: Název recenze musí mít nejméně 2 znaky.
-            max_length: Název recenze může mít maximálně 255 znaků.
+            not_blank: 'Název recenze nesmí být prázdný.'
+            min_length: 'Název recenze musí mít alespoň 2 znaky.'
+            max_length: 'Název recenze nesmí být delší než 255 znaků.'

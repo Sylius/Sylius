@@ -1,0 +1,12 @@
+{% extends '@SyliusShop/checkout/common/layout.html.twig' %}
+
+{% set prefixes = ['sylius_shop.checkout'] %}
+{% set active_step = 'address' %}
+
+{% block title %}
+    {{ 'sylius.ui.address'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    {% hook 'address' with { _prefixes: prefixes, active_step, form, order } %}
+{% endblock %}
