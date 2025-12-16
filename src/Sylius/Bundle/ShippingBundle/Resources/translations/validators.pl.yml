@@ -32,6 +32,11 @@ sylius:
         shipping_method:
             max_delivery_time_days:
                 greater_or_equal_min: 'Maksymalny czas dostawy musi być większy lub równy minimalnemu.'
+                greater_or_equal_zero: 'Maksymalny czas dostawy musi być większy lub równy 0.'
+                less_or_equal_max: 'Maksymalny czas dostawy musi być mniejszy lub równy {{ compared_value }}.'
+            min_delivery_time_days:
+                greater_or_equal_zero: 'Minimalny czas dostawy musi być większy lub równy 0.'
+                less_or_equal_max: 'Minimalny czas dostawy musi być mniejszy lub równy {{ compared_value }}.'
         rule:
             invalid_type: 'Nieprawidłowy typ reguły. Dostępne typy: {{ available_rule_types }}.'
     shipment:
