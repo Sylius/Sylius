@@ -1,10 +1,14 @@
 {% extends '@SyliusAdmin/shared/form_theme.html.twig' %}
 
-{%- block live_collection_widget -%}
+{%- block _sylius_admin_promotion_rules_widget -%}
     {{ block('form_widget') }}
-{%- endblock live_collection_widget -%}
+{%- endblock -%}
 
-{%- block sylius_promotion_rule_row -%}
+{%- block _sylius_admin_promotion_actions_widget -%}
+    {{ block('form_widget') }}
+{%- endblock -%}
+
+{%- block _sylius_admin_promotion_rules_entry_row -%}
     <div id="{{ id }}" {{ block('attributes') }} {{ sylius_test_html_attribute('entry-row') }}>
         {{- form_errors(form) -}}
         {{- form_row(form.type) -}}
@@ -18,9 +22,9 @@
             </div>
         </div>
     </div>
-{%- endblock sylius_promotion_rule_row -%}
+{%- endblock -%}
 
-{%- block sylius_promotion_action_row -%}
+{%- block _sylius_admin_promotion_actions_entry_row -%}
     <div id="{{ id }}" {{ block('attributes') }} {{ sylius_test_html_attribute('entry-row') }}>
         {{- form_errors(form) -}}
         {{- form_row(form.type) -}}
@@ -34,9 +38,26 @@
             </div>
         </div>
     </div>
-{%- endblock sylius_promotion_action_row -%}
+{%- endblock -%}
 
-{% block add_button_row %}
+{% block _sylius_admin_promotion_rules_add_row %}
+    {% if types is not empty %}
+        <div class="dropdown">
+            <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ label|trans }}</button>
+            <ul class="dropdown-menu">
+                {% for type, label in types %}
+                    <li>
+                        <button class="dropdown-item" type="button" {{ block('button_attributes') }} data-live-type-param="{{ type }}" {{ sylius_test_html_attribute('add-' ~ type) }}>
+                            {{ (label)|trans }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block _sylius_admin_promotion_actions_add_row %}
     {% if types is not empty %}
         <div class="dropdown">
             <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">{{ label|trans }}</button>
