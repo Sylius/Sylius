@@ -22,6 +22,7 @@
     "Behat\\Testwork\\Tester\\Result\\TestResult",
     "Behat\\Testwork\\Tester\\Setup\\Setup",
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
+    "Composer\\InstalledVersions",
     "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
     "Doctrine\\DBAL\\Platforms\\MySQLPlatform",
     "enshrined\\svgSanitize\\Sanitizer",
@@ -62,6 +63,8 @@
     "Psr\\Container\\ContainerInterface",
     "Psr\\Http\\Message\\RequestFactoryInterface",
     "Psr\\Http\\Message\\StreamFactoryInterface",
+    "Symfony\\Contracts\\HttpClient\\HttpClientInterface",
+    "Symfony\\Contracts\\HttpClient\\Exception\\TransportExceptionInterface",
     "Symfony\\Component\\Security\\Core\\Encoder\\EncoderFactoryInterface"
   ],
   "php-core-extensions" : [
