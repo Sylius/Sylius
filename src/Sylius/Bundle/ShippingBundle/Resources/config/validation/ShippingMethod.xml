@@ -62,7 +62,7 @@
             </constraint>
             <constraint name="Symfony\Component\Validator\Constraints\LessThanOrEqual">
                 <option name="value">1000</option>
-                <option name="message">sylius.form.shipping_method.min_delivery_time_days.less_or_equal_int_max</option>
+                <option name="message">sylius.form.shipping_method.min_delivery_time_days.less_or_equal_max</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

@@ -40,7 +40,7 @@ sylius:
                 less_or_equal_max: 'Maximum delivery time must be less than or equal to {{ compared_value }}.'
             min_delivery_time_days:
                 greater_or_equal_zero: 'Minimum delivery time must be greater than or equal to 0.'
-                less_or_equal_int_max: 'Minimum delivery time must be less than or equal to {{ compared_value }}.'
+                less_or_equal_max: 'Minimum delivery time must be less than or equal to {{ compared_value }}.'
     
     shipment:
         shipping_method:
