@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
@@ -425,7 +426,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         }
     }
 
-    public function telemetryDisabledEnvValueProvider(): iterable
+    public static function telemetryDisabledEnvValueProvider(): iterable
     {
         yield 'zero' => ['0'];
         yield 'false' => ['false'];
@@ -556,7 +557,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         }
     }
 
-    public function granularTelemetryEnvProvider(): iterable
+    public static function granularTelemetryEnvProvider(): iterable
     {
         yield 'business with false' => ['SYLIUS_TELEMETRY_BUSINESS', 'sylius_core.telemetry.business', 'false'];
         yield 'business with 0' => ['SYLIUS_TELEMETRY_BUSINESS', 'sylius_core.telemetry.business', '0'];
@@ -587,7 +588,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         }
     }
 
-    public function telemetryEnvironmentProvider(): iterable
+    public static function telemetryEnvironmentProvider(): iterable
     {
         yield 'dev' => ['dev', false];
         yield 'dev_local' => ['dev_local', false];

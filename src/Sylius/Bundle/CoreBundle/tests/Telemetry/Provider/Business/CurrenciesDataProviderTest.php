@@ -1,0 +1,64 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Tests\Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
+
+use Doctrine\DBAL\Connection;
+use PHPUnit\Framework\TestCase;
+use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\CurrenciesData;
+use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\CurrenciesDataProvider;
+
+final class CurrenciesDataProviderTest extends TestCase
+{
+    private Connection $connection;
+    private CurrenciesDataProvider $provider;
+
+    protected function setUp(): void
+    {
+        $this->connection = $this->createMock(Connection::class);
+        $this->provider = new CurrenciesDataProvider($this->connection);
+    }
+
+    public function test_it_provides_currency_codes(): void
+    {
+        $this->connection->method('fetchFirstColumn')->willReturn(['USD', 'EUR', 'GBP']);
+
+        $data = $this->provider->provide();
+
+        self::assertInstanceOf(CurrenciesData::class, $data);
+        self::assertCount(3, $data->currencies);
+        self::assertContains('USD', $data->currencies);
+        self::assertContains('EUR', $data->currencies);
+        self::assertContains('GBP', $data->currencies);
+    }
+
+    public function test_it_returns_empty_array_on_error(): void
+    {
+        $this->connection->method('fetchFirstColumn')->willThrowException(new \RuntimeException('Database error'));
+
+        $data = $this->provider->provide();
+
+        self::assertInstanceOf(CurrenciesData::class, $data);
+        self::assertSame([], $data->currencies);
+    }
+
+    public function test_it_returns_empty_array_when_no_currencies(): void
+    {
+        $this->connection->method('fetchFirstColumn')->willReturn([]);
+
+        $data = $this->provider->provide();
+
+        self::assertInstanceOf(CurrenciesData::class, $data);
+        self::assertSame([], $data->currencies);
+    }
+}
