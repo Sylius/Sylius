@@ -54,5 +54,29 @@
         <property name="translations">
             <constraint name="Valid" />
         </property>
+        <property name="minDeliveryTimeDays">
+            <constraint name="Symfony\Component\Validator\Constraints\GreaterThanOrEqual">
+                <option name="value">0</option>
+                <option name="message">sylius.form.shipping_method.min_delivery_time_days.greater_or_equal_zero</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Symfony\Component\Validator\Constraints\LessThanOrEqual">
+                <option name="value">1000</option>
+                <option name="message">sylius.form.shipping_method.min_delivery_time_days.less_or_equal_int_max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="maxDeliveryTimeDays">
+            <constraint name="Symfony\Component\Validator\Constraints\GreaterThanOrEqual">
+                <option name="value">0</option>
+                <option name="message">sylius.form.shipping_method.max_delivery_time_days.greater_or_equal_zero</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Symfony\Component\Validator\Constraints\LessThanOrEqual">
+                <option name="value">1000</option>
+                <option name="message">sylius.form.shipping_method.max_delivery_time_days.less_or_equal_int_max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
