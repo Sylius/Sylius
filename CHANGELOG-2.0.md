@@ -1,5 +1,12 @@
 # CHANGELOG FOR `2.0.X`
 
+## v2.0.14 (2025-12-16)
+
+#### Details
+
+- [#18632](https://github.com/Sylius/Sylius/pull/18632) [Admin] Fix cache TTL in HubNotificationProvider and tests - `Sylius 2.0` ([@Rafikooo](https://github.com/Rafikooo))
+- [#18648](https://github.com/Sylius/Sylius/pull/18648) Add telemetry feature 2.0 ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.0.13 (2025-09-09)
 
 #### Details
