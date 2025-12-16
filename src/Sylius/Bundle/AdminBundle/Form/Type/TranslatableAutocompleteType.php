@@ -35,11 +35,11 @@ final class TranslatableAutocompleteType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('choice_label', function (Options $options): string {
-            return $options['extra_options']['choice_label'] ?? 'name';
+        $resolver->setDefault('choice_label', function (Options $options, mixed $previousValue): mixed {
+            return $options['extra_options']['choice_label'] ?? $previousValue;
         });
 
-        $resolver->setDefault('choice_value', function (Options $options, $previousValue): mixed {
+        $resolver->setDefault('choice_value', function (Options $options, mixed $previousValue): mixed {
             return $options['extra_options']['choice_value'] ?? $previousValue;
         });
 
