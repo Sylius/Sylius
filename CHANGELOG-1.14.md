@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.14.X`
 
+## v1.14.14 (2025-12-16)
+
+#### Details
+
+- [#18635](https://github.com/Sylius/Sylius/pull/18635) [RFC] Add telemetry feature 1.14 ([@TheMilek](https://github.com/TheMilek))
+
 ## v1.14.13 (2025-11-27)
 
 #### Details
