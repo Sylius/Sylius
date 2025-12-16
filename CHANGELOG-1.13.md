@@ -1,5 +1,13 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.12 (2025-12-16)
+
+#### Details
+
+- [#17730](https://github.com/Sylius/Sylius/pull/17730) [CI] Update actions/upload-artifact to v4 ([@mpysiak](https://github.com/mpysiak))
+- [#17838](https://github.com/Sylius/Sylius/pull/17838) [Documentation] Update Contributing Translations page ([@GSadee](https://github.com/GSadee))
+- [#18643](https://github.com/Sylius/Sylius/pull/18643) Add telemetry feature 1.13 ([@TheMilek](https://github.com/TheMilek))
+
 ## v1.13.11 (2025-02-26)
 
 #### Details
