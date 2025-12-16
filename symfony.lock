@@ -364,20 +364,8 @@
     "phparkitect/phparkitect": {
         "version": "0.2.9"
     },
-    "phpdocumentor/reflection-common": {
-        "version": "1.0.1"
-    },
-    "phpdocumentor/reflection-docblock": {
-        "version": "4.3.0"
-    },
-    "phpdocumentor/type-resolver": {
-        "version": "0.4.0"
-    },
     "phpspec/php-diff": {
         "version": "v1.1.0"
-    },
-    "phpspec/prophecy": {
-        "version": "1.8.0"
     },
     "phpstan/phpdoc-parser": {
         "version": "0.4.9"
