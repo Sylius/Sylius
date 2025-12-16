@@ -964,7 +964,14 @@ final readonly class ManagingProductsContext implements Context
      */
     public function itsImageShouldHaveVariantSelected(ProductVariantInterface $productVariant): void
     {
-        Assert::true($this->mediaFormElement->hasImageWithVariant($productVariant));
+        Assert::true(
+            $this->mediaFormElement->hasImageWithVariant($productVariant),
+            sprintf(
+                'Expected variant "%s" to be selected, but got "%s".',
+                $productVariant->getName(),
+                $this->mediaFormElement->getFirstImageSelectedVariantName() ?? 'none',
+            ),
+        );
     }
 
     /**

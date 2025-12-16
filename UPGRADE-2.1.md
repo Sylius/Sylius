@@ -1,5 +1,14 @@
 # UPGRADE FROM `2.1.8` TO `2.1.9`
 
+## Autocomplete Form Types
+
+1. The `choice_value => 'code'` option has been removed from autocomplete form types (`ProductAutocompleteType`,
+   `ProductVariantAutocompleteType`, `ProductAttributeAutocompleteType`, `TaxonAutocompleteType`,
+   `ProductOptionAutocompleteType`) to fix performance issue with large datasets (#17953).
+   Autocomplete fields now use entity IDs instead of codes as their internal values.
+
+## Dashboard
+
 1. The `Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\StatisticsComponent` constructor now requires
    a `Symfony\Component\Clock\ClockInterface` as the third argument. Not passing it is deprecated
    and will be prohibited in Sylius 3.0.

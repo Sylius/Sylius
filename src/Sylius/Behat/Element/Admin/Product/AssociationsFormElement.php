@@ -50,10 +50,10 @@ class AssociationsFormElement extends BaseFormElement implements AssociationsFor
         $this->changeTab();
         $associationField = $this->getElement('associations', ['%association%' => $productAssociationType->getCode()]);
 
-        $this->autocompleteHelper->removeByValue(
+        $this->autocompleteHelper->removeByName(
             $this->getDriver(),
             $associationField->getXpath(),
-            $product->getCode(),
+            $product->getName(),
         );
     }
 
@@ -62,7 +62,12 @@ class AssociationsFormElement extends BaseFormElement implements AssociationsFor
         $this->changeTab();
         $associationField = $this->getElement('associations', ['%association%' => $productAssociationType->getCode()]);
 
-        return in_array($product->getCode(), $associationField->getValue(), true);
+        $selectedItems = $this->autocompleteHelper->getSelectedItems(
+            $this->getDriver(),
+            $associationField->getXpath(),
+        );
+
+        return in_array($product->getName(), $selectedItems, true);
     }
 
     protected function getDefinedElements(): array
