@@ -27,6 +27,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "doctrine/dbal": "^3.9",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "egulias/email-validator": "^4.0",
         "fakerphp/faker": "^1.23",
