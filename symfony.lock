@@ -182,9 +182,6 @@
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
-    "hamcrest/hamcrest-php": {
-        "version": "v2.0.1"
-    },
     "hwi/oauth-bundle": {
         "version": "0.6",
         "recipe": {
@@ -278,12 +275,6 @@
     },
     "matthiasnoback/symfony-dependency-injection-test": {
         "version": "4.1.1"
-    },
-    "mikey179/vfsstream": {
-        "version": "v1.6.8"
-    },
-    "mockery/mockery": {
-        "version": "1.4.2"
     },
     "monolog/monolog": {
         "version": "1.25.5"
