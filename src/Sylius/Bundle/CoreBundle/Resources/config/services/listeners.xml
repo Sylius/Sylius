@@ -136,5 +136,10 @@
             <argument type="service" id="doctrine.migrations.dependency_factory"/>
             <tag name="doctrine.event_listener" event="onMigrationsVersionSkipped" method="onMigrationsVersionSkipped" lazy="true" />
         </service>
+
+        <service id="sylius.listener.telemetry_index_schema" class="Sylius\Bundle\CoreBundle\Telemetry\EventListener\TelemetryIndexSchemaListener">
+            <argument type="service" id="doctrine.dbal.default_connection" />
+            <tag name="doctrine.event_listener" event="postGenerateSchema" />
+        </service>
     </services>
 </container>

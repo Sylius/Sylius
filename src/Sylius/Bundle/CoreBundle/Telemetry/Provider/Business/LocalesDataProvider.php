@@ -33,7 +33,8 @@ final class LocalesDataProvider implements DataProviderInterface
             $locales = $this->connection->fetchFirstColumn('SELECT code FROM sylius_locale');
             $channelDefaultLocales = $this->connection->fetchFirstColumn(
                 'SELECT DISTINCT l.code FROM sylius_locale l
-                 INNER JOIN sylius_channel c ON c.default_locale_id = l.id',
+                 INNER JOIN sylius_channel c ON c.default_locale_id = l.id
+                 WHERE c.enabled = 1',
             );
 
             return new LocalesData($locales, $channelDefaultLocales, $this->defaultLocale);
