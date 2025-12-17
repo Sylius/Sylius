@@ -11,10 +11,7 @@
 
 -->
 
-<doctrine-mapping
-    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-    xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
->
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
     <mapped-superclass name="Sylius\Component\Addressing\Model\Zone" table="sylius_zone">
         <id name="id" column="id" type="integer">
@@ -27,7 +24,6 @@
         <field name="scope" column="scope" type="string" nullable="true"/>
 
         <field name="priority" type="integer">
-            <gedmo:sortable-position/>
             <options>
                 <option name="default">0</option>
             </options>
