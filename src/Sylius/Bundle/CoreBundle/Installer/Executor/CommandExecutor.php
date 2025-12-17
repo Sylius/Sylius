@@ -27,6 +27,8 @@ final class CommandExecutor
     }
 
     /**
+     * @param array<string, mixed> $parameters
+     *
      * @throws \Exception
      */
     public function runCommand(string $command, array $parameters = [], ?OutputInterface $output = null): self
@@ -56,13 +58,12 @@ final class CommandExecutor
         return $this;
     }
 
+    /** @return array<string, mixed> */
     private function getDefaultParameters(): array
     {
         $defaultParameters = ['--no-debug' => true];
 
-        if ($this->input->hasOption('env')) {
-            $defaultParameters['--env'] = $this->input->hasOption('env') ? $this->input->getOption('env') : 'dev';
-        }
+        $defaultParameters['--env'] = $this->input->hasOption('env') ? $this->input->getOption('env') : 'dev';
 
         if ($this->input->hasOption('no-interaction') && true === $this->input->getOption('no-interaction')) {
             $defaultParameters['--no-interaction'] = true;

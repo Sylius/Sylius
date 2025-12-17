@@ -23,5 +23,6 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface CustomerGroupRepositoryInterface extends RepositoryInterface
 {
+    /** @return iterable<T> */
     public function findByPhrase(string $phrase, ?int $limit = null): iterable;
 }

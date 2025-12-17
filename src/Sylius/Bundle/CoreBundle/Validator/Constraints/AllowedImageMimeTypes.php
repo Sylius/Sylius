@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class AllowedImageMimeTypes extends Constraint
 {
     public string $message = 'sylius.image.file.allowed_mime_types';

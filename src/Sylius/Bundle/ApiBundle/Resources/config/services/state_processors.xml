@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="sylius_api.state_processor.admin.admin_user.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser\RemoveProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <argument type="service" id="security.token_storage" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.admin.admin_user.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius.security.password_updater" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.admin.country.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Country\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius.checker.country_provinces_deletion" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.admin.channel.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Channel\RemoveProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <argument type="service" id="sylius.checker.channel_deletion" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.admin.locale.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Locale\RemoveProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <argument type="service" id="sylius.checker.locale_usage" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.admin.avatar_image.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius_api.creator.avatar_image" />
+            <argument type="service" id="sylius.repository.avatar_image" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.admin.zone.remove" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Zone\RemoveProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.remove_processor" />
+            <argument type="service" id="sylius.checker.zone_deletion" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.shop.address.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Shop\Address\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.admin.product_image.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductImage\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius_api.creator.product_image" />
+            <argument type="service" id="validator" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service id="sylius_api.state_processor.admin.taxon_image.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius_api.creator.taxon_image" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service
+            id="sylius_api.state_processor.common.messenger.persist"
+            class="Sylius\Bundle\ApiBundle\StateProcessor\Common\MessengerPersistProcessor"
+            decorates="api_platform.state_processor.write"
+        >
+            <argument type="service" id=".inner" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service
+            id="sylius_api.state_processor.admin.common.remove"
+            class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Common\ResourceRemoveProcessor"
+            decorates="api_platform.doctrine.orm.state.remove_processor"
+        >
+            <argument type="service" id=".inner" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
+        <service
+            id="sylius_api.state_processor.admin.promotion.promotion_coupon.persist"
+            class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Promotion\PromotionCoupon\PersistProcessor"
+        >
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius_api.resolver.uri_template_parent_resource_resolver"/>
+            <argument type="service" id="validator"/>
+            <tag name="api_platform.state_processor"/>
+        </service>
+
+        <service id="sylius_api.state_processor.admin.customer.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\Customer\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius.security.password_updater" />
+            <tag name="api_platform.state_processor" />
+        </service>
+    </services>
+</container>

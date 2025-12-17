@@ -1,0 +1,8 @@
+{% set log = hookable_metadata.context.log %}
+
+{% if log.data.city|default(false) %}
+    <tr>
+        <td class="col-4 border-0"><strong>{{ 'sylius.ui.city' |trans }}</strong></td>
+        <td class="col-8 border-0 text-body w-full"><span>{{ log.data.city }}</span></td>
+    </tr>
+{% endif %}

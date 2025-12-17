@@ -1,0 +1,78 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    catalog_promotion:
+        code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
+            unique: En katalogkampanj med angiven kod finns redan.
+            regex: Katalogkampanjens kod får endast bestå av bokstäver, siffror, bindestreck och understreck.
+            not_blank: Vänligen ange katalogkampanjens kod.
+        date:
+            greater_than_start_date: Slutdatum kan inte vara före startdatum.
+        name:
+            max_length: Katalogkampanjens namn får inte vara längre än {{ limit }} tecken.
+            min_length: Katalogkampanjens namn måste vara minst {{ limit }} tecken långt.
+            not_blank: Vänligen ange katalogkampanjens namn.
+        state:
+            processing: Katalogkampanjen kan inte redigeras eftersom den för närvarande behandlas.
+    catalog_promotion_action:
+        type:
+            not_blank: Vänligen välj en åtgärdstyp.
+            invalid: Katalogkampanjens åtgärdstyp är ogiltig. Tillgängliga typer är {{ available_action_types }}.
+        invalid_type: Katalogkampanjens åtgärdstyp är ogiltig. Vänligen välj en giltig typ.
+        percentage_discount:
+            not_in_range: Procentrabatten måste vara mellan 0 % och 100 %.
+            not_number_or_empty: Procentrabatten måste vara ett nummer och får inte vara tom.
+            not_valid: Procentrabatten måste konfigureras.
+    catalog_promotion_scope:
+        type:
+            not_blank: Vänligen välj en omfattningstyp.
+            invalid: Katalogkampanjens omfattningstyp är ogiltig. Tillgängliga typer är {{ available_scope_types }}.
+    promotion:
+        code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
+            unique: En kampanj med angiven kod finns redan.
+            regex: Kampanjens kod får endast bestå av bokstäver, siffror, bindestreck och understreck.
+            not_blank: Vänligen ange kampanjens kod.
+        description:
+            max_length: Kampanjbeskrivningen får inte vara längre än 1 tecken.|Kampanjbeskrivningen får inte vara längre än {{ limit }} tecken.
+            min_length: Kampanjbeskrivningen måste vara minst 1 tecken lång.|Kampanjbeskrivningen måste vara minst {{ limit }} tecken lång.
+            not_blank: Vänligen ange kampanjbeskrivning.
+        end_date_cannot_be_set_prior_start_date: Slutdatum kan inte vara före startdatum.
+        is_invalid: Kampanjen är ogiltig.
+        name:
+            max_length: Kampanjnamnet får inte vara längre än 1 tecken.|Kampanjnamnet får inte vara längre än {{ limit }} tecken.
+            min_length: Kampanjnamnet måste vara minst 1 tecken långt.|Kampanjnamnet måste vara minst {{ limit }} tecken långt.
+            not_blank: Vänligen ange kampanjnamn.
+    promotion_action:
+        invalid_type: Kampanjens åtgärdstyp är ogiltig. Tillgängliga åtgärdstyper är {{ available_action_types }}.
+        percentage_discount_configuration:
+            not_in_range: Procentrabatten måste vara mellan 0 % och 100 %.
+    promotion_rule:
+        invalid_type: Kampanjregelns typ är ogiltig. Tillgängliga regelryper är {{ available_rule_types }}.
+    promotion_coupon:
+        code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
+            min_length: Kupongkoden måste vara minst 1 tecken lång.|Kupongkoden måste vara minst {{ limit }} tecken lång.
+            not_blank: Vänligen ange kupongkod.
+            regex: Kupongkoden får endast bestå av bokstäver, siffror, bindestreck och understreck.
+            unique: Denna kupong finns redan.
+        is_invalid: Kupongkoden är ogiltig.
+        promotion:
+            not_blank: Vänligen ange kampanj för denna kupong.
+            not_coupon_based: Endast kupongbaserade kampanjer kan ha kuponger.
+        usage_limit:
+            min: Kupongens användningsgräns måste vara minst {{ limit }}.
+    promotion_coupon_generator_instruction:
+        amount:
+            min: Antal kuponger som ska genereras måste vara minst {{ limit }}.
+            not_blank: Vänligen ange antal kuponger som ska genereras.
+        code_length:
+            min: Kupongkodens längd måste vara minst {{ limit }} tecken.
+            max: Kupongkodens längd får inte vara längre än {{ limit }} tecken.
+            not_blank: Vänligen ange kupongkodens längd.
+            not_in_range: Kupongkodens längd måste vara mellan {{ min }} och {{ max }}.
+        possible_generation_amount: Ogiltig längd på kupongkod eller antal kuponger. Det är inte möjligt att generera %expectedAmount% unika kuponger med kodlängd %codeLength%. Möjligt antal att generera är %possibleAmount%.
+        usage_limit:
+            min: Användningsgränsen för genererade kuponger måste vara minst {{ limit }}.

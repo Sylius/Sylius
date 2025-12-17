@@ -19,6 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PaymentGatewayChoiceType extends AbstractType
 {
+    /** @param array<string, string> $gateways */
     public function __construct(private array $gateways)
     {
     }

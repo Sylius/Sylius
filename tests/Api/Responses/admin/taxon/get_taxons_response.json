@@ -17,18 +17,18 @@
             ],
             "images": [
                 {
-                    "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxons\/CATEGORY\/images\/@integer@",
                     "@type": "TaxonImage",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "type": "thumbnail",
                     "path": "@string@.contains('sylius_original').endsWith('category.jpeg')"
                 }
             ],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/CATEGORY\/translations\/en_US",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Categories",
                     "slug": "categories",
                     "description": "Some description Lorem ipsum dolor sit amet."
@@ -46,17 +46,17 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/MUG\/translations\/en_US",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Mugs",
                     "slug": "categories/mugs",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/MUG\/translations\/de_DE",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Tassen",
                     "slug": "tassen",
                     "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
@@ -75,17 +75,17 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/HAT\/translations\/en_US",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Hats",
                     "slug": "categories/hats",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/HAT\/translations\/de_DE",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Hüte",
                     "slug": "hute",
                     "description": null
@@ -106,26 +106,26 @@
             ],
             "images": [
                 {
-                    "@id": "\/api\/v2\/admin\/taxon-images\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxons\/T_SHIRTS\/images\/@integer@",
                     "@type": "TaxonImage",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "type": "thumbnail",
                     "path": "@string@.contains('sylius_original').endsWith('tshirt.jpeg')"
                 }
             ],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/T_SHIRTS\/translations\/en_US",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "T-Shirts",
                     "slug": "categories/t-shirts",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/T_SHIRTS\/translations\/de_DE",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "T-Shirts",
                     "slug": "t-shirts",
                     "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
@@ -144,17 +144,17 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/MEN_T_SHIRTS\/translations\/en_US",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Men T-Shirts",
                     "slug": "categories/t-shirts/men-t-shirts",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/MEN_T_SHIRTS\/translations\/de_DE",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Männer T-Shirts",
                     "slug": "männer-t-shirts",
                     "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
@@ -173,17 +173,17 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/WOMEN_T_SHIRTS\/translations\/en_US",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Women T-Shirts",
                     "slug": "categories/t-shirts/women-t-shirts",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/WOMEN_T_SHIRTS\/translations\/de_DE",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Frauen T-Shirts",
                     "slug": "frauen-t-shirts",
                     "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
@@ -202,17 +202,17 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/BRAND\/translations\/en_US",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Brands",
                     "slug": "brands",
                     "description": "Some description Lorem ipsum dolor sit amet."
                 },
                 "de_DE": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/BRAND\/translations\/de_DE",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Marken",
                     "slug": "marken",
                     "description": "Einige Beschreibung Lorem ipsum dolor sit amet."
@@ -231,9 +231,9 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/taxon-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/taxon\/de%3Flol=xd%23boom\/translations\/en_US",
                     "@type": "TaxonTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Yet another taxon",
                     "slug": "yet_another_taxons",
                     "description": "Some description Lorem ipsum dolor sit amet."

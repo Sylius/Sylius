@@ -13,55 +13,39 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Storage;
 
-use Doctrine\Persistence\ObjectManager;
-use Payum\Core\Model\Identity;
-use Payum\Core\Storage\AbstractStorage;
+use Payum\Core\Bridge\Doctrine\Storage\DoctrineStorage as BaseDoctrineStorage;
+use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 
-/**
- * It's a drop-in replacement for DoctrineStorage that accepts
- * Doctrine\Persistence\ObjectManager instead of Doctrine\Common\Persistence\ObjectManager.
- *
- * @internal
- *
- * @see \Payum\Core\Bridge\Doctrine\Storage\DoctrineStorage
- */
-class DoctrineStorage extends AbstractStorage
+class DoctrineStorage extends BaseDoctrineStorage
 {
-    public function __construct(protected ObjectManager $objectManager, $modelClass)
-    {
-        parent::__construct($modelClass);
-    }
-
-    public function findBy(array $criteria): array
-    {
-        return $this->objectManager->getRepository($this->modelClass)->findBy($criteria);
-    }
-
     protected function doFind($id): ?object
     {
-        return $this->objectManager->find($this->modelClass, $id);
-    }
+        /** @var object|GatewayConfigInterface|null $resource */
+        $resource = parent::doFind($id);
 
-    protected function doUpdateModel($model): void
-    {
-        $this->objectManager->persist($model);
-        $this->objectManager->flush();
-    }
-
-    protected function doDeleteModel($model): void
-    {
-        $this->objectManager->remove($model);
-        $this->objectManager->flush();
-    }
-
-    protected function doGetIdentity($model): Identity
-    {
-        $modelMetadata = $this->objectManager->getClassMetadata($model::class);
-        $id = $modelMetadata->getIdentifierValues($model);
-        if (count($id) > 1) {
-            throw new \LogicException('Storage not support composite primary ids');
+        if (null === $resource) {
+            return null;
         }
 
-        return new Identity(array_shift($id), $model);
+        if (!$resource instanceof GatewayConfigInterface) {
+            return $resource;
+        }
+
+        return $resource->getUsePayum() ? $resource : null;
+    }
+
+    /** @param array<mixed> $criteria */
+    public function findBy(array $criteria): array
+    {
+        /** @var object[]|GatewayConfigInterface[] $resources */
+        $resources = parent::findBy($criteria);
+
+        return array_filter($resources, static function ($resource) {
+            if (!$resource instanceof GatewayConfigInterface) {
+                return true;
+            }
+
+            return $resource->getUsePayum();
+        });
     }
 }

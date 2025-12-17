@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class DashboardPage extends SymfonyPage implements DashboardPageInterface
+class DashboardPage extends SyliusPage implements DashboardPageInterface
 {
     public function getRouteName(): string
     {
@@ -56,7 +56,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         ]);
     }
 
-    private function hasValueInCustomerSection(string $value): bool
+    protected function hasValueInCustomerSection(string $value): bool
     {
         $customerText = $this->getElement('customer')->getText();
 

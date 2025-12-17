@@ -1,0 +1,38 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        credit_card:
+            cardholder_name: 'कार्डधारक का नाम'
+            expiry_month: 'समाप्ति माह'
+            expiry_year: 'समाप्ति वर्ष'
+            number: 'कार्ड नंबर'
+            security_code: 'सुरक्षा (CVV) कोड'
+            type: 'कार्ड प्रकार'
+        payment:
+            amount: 'भुगतान राशि'
+            method: 'भुगतान विधि'
+            state:
+                header: 'भुगतान स्थिति'
+                checkout: 'चेकआउट'
+                completed: 'पूर्ण'
+                authorized: 'अधिकृत'
+                failed: 'असफल'
+                new: 'नया'
+                pending: 'लंबित'
+                processing: 'प्रसंस्करण'
+                unknown: 'अज्ञात'
+                void: 'निरस्त'
+                cancelled: 'रद्द'
+                refunded: 'वापसी की गई'
+        payment_method:
+            description: 'विवरण'
+            enabled: 'सक्रिय'
+            instructions: 'निर्देश'
+            name: 'नाम'
+            position: 'स्थिति'
+        gateway_config:
+            type: 'प्रकार'
+    gateway_factory:
+        offline: 'ऑफ़लाइन'

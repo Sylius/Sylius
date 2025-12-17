@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-interface IndexPageInterface extends SymfonyPageInterface
+interface IndexPageInterface extends SyliusPageInterface
 {
     public function countOrders(): int;
 
-    public function changePaymentMethod(OrderInterface $order);
+    public function changePaymentMethod(OrderInterface $order): void;
 
     public function hasFlashMessage(string $message): bool;
 

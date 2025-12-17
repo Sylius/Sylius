@@ -4,5 +4,12 @@
 sylius:
     form:
         currency:
-            code: ゾーン名
-            enabled: 有効
+            base: '基準通貨'
+            code: '名前'
+            enabled: '有効'
+            exchange_rate: '為替レート'
+        exchange_rate:
+            source_currency: '変換元通貨'
+            target_currency: '変換先通貨'
+            ratio: '比率'
+

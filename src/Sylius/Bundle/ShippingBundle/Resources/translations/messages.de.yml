@@ -43,7 +43,7 @@ sylius:
             name: Name
             position: Position
             rules: Regeln
-            rules_help: Verwenden Sie Regeln, um zu entscheiden, ob diese Versandart auf eine bestimmte Bestellung angewendet werden kann. Wenn eine Regel zutrifft ist, kann diese Versandart angewendet werden. Beachten Sie, dass, wenn Sie mehrere Regeln hinzufügen, alle Regeln wahr sein müssen.
+            rules_help: Verwenden Sie Regeln, um zu entscheiden, ob diese Versandart auf eine bestimmte Bestellung angewendet werden kann. Wenn eine Regel zutrifft, kann diese Versandart angewendet werden. Beachten Sie, dass, wenn Sie mehrere Regeln hinzufügen, alle Regeln wahr sein müssen.
             tax_category: Steuerkategorie
             translations: Übersetzungen
         shipping_method_rule:

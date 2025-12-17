@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Model;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\Order;
@@ -43,7 +44,7 @@ final class OrderAdjustmentsRecalculationTest extends TestCase
         $this->order->addAdjustment($neutralAdjustment);
     }
 
-    /** @test */
+    #[Test]
     public function it_recalculates_order_total_properly_with_order_item_adjustments(): void
     {
         $adjustmentNumberOne = $this->createAdjustment(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT, -300, false);
@@ -64,7 +65,7 @@ final class OrderAdjustmentsRecalculationTest extends TestCase
         $this->assertEquals(-155, $this->item->getAdjustmentsTotal());
     }
 
-    /** @test */
+    #[Test]
     public function it_recalculates_order_total_properly_with_order_adjustments(): void
     {
         $adjustmentNumberOne = $this->createAdjustment(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, -100, false);
@@ -85,7 +86,7 @@ final class OrderAdjustmentsRecalculationTest extends TestCase
         $this->assertEquals(-155, $this->order->getAdjustmentsTotal());
     }
 
-    /** @test */
+    #[Test]
     public function it_recalculates_order_total_properly_with_order_unit_adjustments(): void
     {
         $adjustmentNumberOne = $this->createAdjustment(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, -200, false);

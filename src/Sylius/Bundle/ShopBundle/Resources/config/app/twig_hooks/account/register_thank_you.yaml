@@ -1,0 +1,14 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.account.register_thank_you':
+            content:
+                template: '@SyliusShop/account/register/thank_you/content.html.twig'
+                priority: 0
+        
+        'sylius_shop.account.register_thank_you.content':
+            title:
+                template: '@SyliusShop/account/register/thank_you/content/title.html.twig'
+                priority: 100
+            subtitle:
+                template: '@SyliusShop/account/register/thank_you/content/subtitle.html.twig'
+                priority: 0

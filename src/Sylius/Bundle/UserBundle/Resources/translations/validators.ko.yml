@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email:
+            not_blank: '이메일을 입력하세요.'
+            invalid: '유효하지 않은 이메일입니다.'
+            not_registered: '해당 이메일로 등록된 사용자가 없습니다. 먼저 회원가입하세요.'
+        plainPassword:
+            not_blank: '비밀번호를 입력하세요.'
+            mismatch: '입력한 비밀번호가 일치하지 않습니다'
+            wrong_current: '현재 비밀번호와 일치하지 않습니다.'
+        password:
+            min: '비밀번호는 최소 {{ limit }}자 이상이어야 합니다.'
+            max: '비밀번호는 {{ limit }}자를 초과할 수 없습니다.'

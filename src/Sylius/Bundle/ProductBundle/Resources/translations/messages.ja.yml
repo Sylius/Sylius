@@ -4,19 +4,28 @@
 sylius:
     form:
         product:
-            name: ゾーン名
-            description: 説明
-            attributes: 属性
-            options: オプション
-            meta_keywords: Metaタグ(keywords)
-            meta_description: metaタグ(description)
-            taxons: タクソン(分類群)
+            name: '名前'
+            description: '説明'
+            attributes: '属性'
+            options: 'オプション'
+            meta_keywords: 'メタキーワード'
+            meta_description: 'メタディスクリプション'
+            slug: 'スラッグ'
+            taxons: 'タクソン'
         product_variant:
-            name: ゾーン名
+            name: '名前'
         association_type:
-            name: ゾーン名
-            translations: 翻訳
+            name: '名前'
+            translations: '翻訳'
+        association:
+            type: '関連タイプ'
+            product: '関連商品'
         variant:
-            name: ゾーン名
+            name: '名前'
         option:
-            name: ゾーン名
+            name: '名前'
+            position: '位置'
+            values: '可能な値'
+        option_value:
+            add_value: '値を追加'
+            value: '値'

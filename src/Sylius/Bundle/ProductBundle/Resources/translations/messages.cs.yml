@@ -4,28 +4,28 @@
 sylius:
     form:
         product:
-            name: Jméno
-            description: Popis
-            attributes: Atributy
-            options: Možnosti
-            meta_keywords: Meta klíčová slova
-            meta_description: Meta popis
-            slug: Unikátní identifikátor URL (slug)
-            taxons: Taxony
+            name: 'Název'
+            description: 'Popis'
+            attributes: 'Atributy'
+            options: 'Možnosti'
+            meta_keywords: 'Meta klíčová slova'
+            meta_description: 'Meta popis'
+            slug: 'Slug'
+            taxons: 'Taxony'
         product_variant:
-            name: Jméno
+            name: 'Název'
         association_type:
-            name: Jméno
-            translations: Překlady
+            name: 'Název'
+            translations: 'Překlady'
         association:
-            type: Typ asociace
-            product: Související produkt
+            type: 'Typ asociace'
+            product: 'Související produkt'
         variant:
-            name: Jméno
+            name: 'Název'
         option:
-            name: Jméno
-            position: Pozice
-            values: Možné hodnoty
+            name: 'Název'
+            position: 'Pozice'
+            values: 'Možné hodnoty'
         option_value:
-            add_value: Přidat hodnotu
-            value: Hodnota
+            add_value: 'Přidat hodnotu'
+            value: 'Hodnota'

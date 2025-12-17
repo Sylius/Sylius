@@ -4,3 +4,5 @@
 sylius:
     promotion_coupon:
         generate: 'Promotie coupons zijn succesvol gegenereerd.'
+    catalog_promotion:
+        remove: 'Het verwijderen van catalogus promotie is aangevraagd. Dit proces kan even duren, afhankelijk van het aantal getroffen producten.'

@@ -1,0 +1,6 @@
+{% set channel_pricing_form = hookable_metadata.context.channel_pricing_form %}
+{% set channel_code = hookable_metadata.context.channel_code %}
+
+<div class="col-sm">
+    {{ form_row(channel_pricing_form.price, sylius_test_form_attribute('price-in-channel', channel_code)) }}
+</div>

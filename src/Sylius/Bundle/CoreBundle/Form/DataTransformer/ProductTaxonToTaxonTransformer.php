@@ -34,7 +34,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
     ) {
     }
 
-    public function transform($value): ?TaxonInterface
+    public function transform(mixed $value): ?TaxonInterface
     {
         if (null === $value) {
             return null;
@@ -45,7 +45,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
         return $value->getTaxon();
     }
 
-    public function reverseTransform($value): ?ProductTaxonInterface
+    public function reverseTransform(mixed $value): ?ProductTaxonInterface
     {
         if (null === $value) {
             return null;
@@ -69,7 +69,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
     /**
      * @throws TransformationFailedException
      */
-    private function assertTransformationValueType($value, string $expectedType): void
+    private function assertTransformationValueType(mixed $value, string $expectedType): void
     {
         if (!($value instanceof $expectedType)) {
             throw new TransformationFailedException(

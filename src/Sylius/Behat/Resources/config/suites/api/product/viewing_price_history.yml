@@ -19,9 +19,10 @@ default:
                 - sylius.behat.context.setup.product
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
+                - sylius.behat.context.api.admin.channel_pricing_log_entry
                 - sylius.behat.context.api.admin.managing_product_variants
                 - sylius.behat.context.api.admin.save
-                - Sylius\Behat\Context\Api\Admin\ChannelPricingLogEntryContext
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@viewing_price_history&&@api"

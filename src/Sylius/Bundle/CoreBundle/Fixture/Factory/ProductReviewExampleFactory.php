@@ -15,10 +15,12 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Faker\Factory;
 use Faker\Generator;
-use SM\Factory\FactoryInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
-use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductReviewInterface;
+use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
@@ -26,41 +28,34 @@ use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ProductReviewInterface> */
 class ProductReviewExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
+    /**
+     * @param ReviewFactoryInterface<ReviewInterface> $productReviewFactory
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param CustomerRepositoryInterface<CustomerInterface> $customerRepository
+     */
     public function __construct(
-        private ReviewFactoryInterface $productReviewFactory,
-        private ProductRepositoryInterface $productRepository,
-        private CustomerRepositoryInterface $customerRepository,
-        private FactoryInterface|StateMachineInterface $stateMachineFactory,
+        protected readonly ReviewFactoryInterface $productReviewFactory,
+        protected readonly ProductRepositoryInterface $productRepository,
+        protected readonly CustomerRepositoryInterface $customerRepository,
+        protected readonly StateMachineInterface $stateMachine,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
-
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.13',
-                sprintf(
-                    'Passing an instance of "%s" as the fourth argument is deprecated. It will accept only instances of "%s" in Sylius 2.0.',
-                    FactoryInterface::class,
-                    StateMachineInterface::class,
-                ),
-            );
-        }
     }
 
     public function create(array $options = []): ReviewInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var ReviewInterface $productReview */
         $productReview = $this->productReviewFactory->createForSubjectWithReviewer(
             $options['product'],
             $options['author'],
@@ -78,19 +73,9 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('title', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('title', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('rating', fn (Options $options): int => $this->faker->numberBetween(1, 5))
-            ->setDefault('comment', function (Options $options): string {
-                /** @var string $sentences */
-                $sentences = $this->faker->sentences(3, true);
-
-                return $sentences;
-            })
+            ->setDefault('comment', fn (Options $options): string => $this->faker->sentences(3, true))
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setNormalizer('author', LazyOption::getOneBy($this->customerRepository, 'email'))
             ->setDefault('product', LazyOption::randomOne($this->productRepository))
@@ -108,21 +93,10 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
 
     private function applyReviewTransition(ReviewInterface $productReview, string $targetState): void
     {
-        $stateMachine = $this->getStateMachine();
-
-        $transition = $stateMachine->getTransitionToState($productReview, 'sylius_product_review', $targetState);
+        $transition = $this->stateMachine->getTransitionToState($productReview, ProductReviewTransitions::GRAPH, $targetState);
 
         if (null !== $transition) {
-            $stateMachine->apply($productReview, 'sylius_product_review', $transition);
+            $this->stateMachine->apply($productReview, ProductReviewTransitions::GRAPH, $transition);
         }
-    }
-
-    private function getStateMachine(): StateMachineInterface
-    {
-        if ($this->stateMachineFactory instanceof FactoryInterface) {
-            return new WinzouStateMachineAdapter($this->stateMachineFactory);
-        }
-
-        return $this->stateMachineFactory;
     }
 }

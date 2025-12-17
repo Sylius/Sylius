@@ -2,13 +2,216 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: 'このメールアドレスは無効です。'
+                max: 'メールアドレスは{{ limit }}文字以内で入力してください。'
+                min: 'メールアドレスは{{ limit }}文字以上で入力してください。'
+                not_blank: 'メールアドレスを入力してください。'
+        reset_password:
+            mismatch: '入力されたパスワードが一致しません。'
+            password:
+                min: 'パスワードは{{ limit }}文字以上で入力してください。'
+                max: 'パスワードは{{ limit }}文字以内で入力してください。'
+                not_blank: 'パスワードを入力してください。'
+    avatar_image:
+        file:
+            max_size: '画像が大きすぎます - {{ size }}{{ suffix }}。最大許可サイズは{{ limit }}{{ suffix }}です。'
+            upload_ini_size: '画像が大きすぎます。最大許可サイズは{{ limit }}{{ suffix }}です。'
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: '必須チャンネルの設定が行われていません。'
+            not_valid: '構成に誤りがあります。0 より大きい数値の固定割引額を入力してください。'
+    catalog_promotion_scope:
+        invalid_type: 'カタログプロモーションのスコープタイプが無効です。正しいタイプを選択してください。'
+        for_products:
+            invalid_products: '構成に誤りがあります。存在する商品のみを追加してください。'
+            not_empty: '構成に誤りがあります。少なくとも 1 件の商品を追加してください。'
+            unique: '構成に誤りがあります。重複しない商品を追加してください。'
+        for_variants:
+            invalid_variants: '構成に誤りがあります。存在するバリアントのみを追加してください。'
+            not_empty: '少なくとも 1 件のバリアントを追加してください。'
+            unique: '構成に誤りがあります。重複しないバリアントを追加してください。'
+        for_taxons:
+            invalid_taxons: '構成に誤りがあります。存在する分類のみを追加してください。'
+            not_empty: '構成に誤りがあります。少なくとも 1 件の分類を追加してください。'
+            unique: '構成に誤りがあります。重複しない分類を追加してください。'
+    channel:
+        base_currency:
+            not_blank: 'チャンネルの基準通貨を入力してください。'
+        default_locale:
+            enabled: 'デフォルトロケールは有効でなければなりません。'
+            not_blank: 'チャンネルのデフォルトロケールを入力してください。'
+        contact_email:
+            invalid: 'このメールアドレスは無効です。'
+            max: 'メールアドレスは{{ limit }}文字以内で入力してください。'
+            min: 'メールアドレスは{{ limit }}文字以上で入力してください。'
+        contact_phone_number:
+            max_length: '連絡先電話番号は{{ limit }}文字以内で入力してください。'
+        theme_name:
+            max_length: 'テーマ名は{{ limit }}文字以内で入力してください。'
+        tax_calculation_strategy:
+            not_blank: '税計算方式を入力してください。'
+            max_length: '税計算方式は{{ limit }}文字以内で入力してください。'
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: '値は{{ compared_value }}より大きくなければなりません'
+            less_than: '値は{{ compared_value }}より小さくなければなりません'
     channel_pricing:
+        channel_code:
+            not_blank: 'チャンネルコードを設定してください。'
+            unique: 'このチャンネルにはすでにこのバリアントの価格が設定されています。'
         price:
-            not_blank: 価格を入力してください。
+            min: '価格は 0 以上でなければなりません。'
+            not_blank: '価格を入力してください。'
+    channel_code_collection:
+        invalid_channel: 'コード {{ channel_code }} のチャンネルは存在しません。'
     checkout:
+        addressing:
+            csrf_error: 'フォームを再送信してください。'
         shipping_method:
-            not_blank: 発送方法を選択してください。
+            not_blank: '配送方法を選択してください。'
+        email:
+            not_changeable: 'メールアドレスはゲスト購入の場合のみ変更できます。ログイン後は変更できません。'
+    contact:
+        email:
+            invalid: 'このメールアドレスは無効です。'
+            not_blank: 'メールアドレスを入力してください。'
+        message:
+            not_blank: 'メッセージを入力してください。'
+    country:
+        code:
+            not_exist: 'コード {{ code }} の国は存在しません。'
+    currency:
+        enabled:
+            cannot_disable_base: '基準通貨は無効にできません。'
+    customer:
+        currency_code:
+            not_valid: '入力した通貨コードは無効です。'
+    customer_group:
+        code:
+            not_exist: 'コード {{ code }} の顧客グループは存在しません。'
+    cart_item:
+        not_available: '%itemName% の在庫が不足しています。'
+        insufficient_stock: '在庫不足'
+        quantity:
+            not_in_range: '数量は {{ min }} から {{ max }} の間で指定してください。'
+        variant:
+            not_available: '%variantName% は利用できません。'
+    max_integer: '値は {{ compared_value }} 未満でなければなりません。'
+    order:
+        address_requirement: '%addressName% を入力してください。'
+        currency_code:
+            not_valid: '入力した通貨コードは無効です。'
+        invalid_state_transition: '注文の状態が正しくないため実行できません。現在: %currentState%。可能な遷移: %possibleTransitions%。'
+        payment_method_eligibility: '支払方法 %paymentMethodName% は無効化されています。別の方法を選択してください。'
+        product_eligibility: '商品 %productName% は無効化されています。'
+        shipping_method_eligibility: '%shippingMethodName% 配送方法の条件を満たしていません。配送方法を再選択してください。'
+        shipping_method_not_available: '"%shippingMethodName%" 配送方法は利用できません。配送方法を再選択してください。'
+        cart_items_immutable: 'チェックアウト完了後はカート商品を変更できません。'
+    resend_order_confirmation_email:
+        invalid_order_state: '注文状態 %state% では確認メールを再送できません。'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: '配送状態 %state% では発送確認メールを再送できません。'
+    locale:
+        enabled:
+            cannot_disable_base: '基準ロケールは無効にできません。'
+    product:
+        variants:
+            all_prices_defined: '先に新しく割り当てたチャンネル用のバリアント価格を設定する必要があります。'
+        code:
+            not_exist: 'コード {{ code }} の商品は存在しません。'
+    product_attribute:
+        invalid: '位置は整数でなければなりません。'
+    image:
+        file:
+            allowed_mime_types: 'ファイルが有効な画像ではありません。許可タイプ: %types%。'
+    product_image:
+        file:
+            max_size: '画像が大きすぎます - {{ size }}{{ suffix }}。最大許可サイズは {{ limit }}{{ suffix }} です。'
+            upload_ini_size: '画像が大きすぎます。最大許可サイズは {{ limit }}{{ suffix }} です。'
+        product_variant:
+            not_belong_to_owner: 'コード "%productVariantCode%" のバリアントは、画像の所有者であるコード "%ownerCode%" の商品に属していません。'
+    product_taxon:
+        unique: '商品分類は重複できません。'
+        product:
+            not_blank: '商品を選択してください。'
+        taxon:
+            not_blank: '分類を選択してください。'
     product_variant:
+        code:
+            not_exist: 'コード {{ code }} のバリアントは存在しません。'
         onHand:
-            min: 在庫は{{ limit }}以上で入力してください。
-            not_blank: 在庫を入力してください。
+            min: '在庫数は {{ limit }} より大きくなければなりません。'
+            not_blank: '在庫数を入力してください。'
+            reserved: '在庫数は予約数より多くなければなりません。'
+        original_price:
+            min: '元の価格は 0 以上でなければなりません。'
+        weight:
+            min: '重量は 0 以上でなければなりません。'
+            invalid: '重量は数値で入力してください。'
+        width:
+            min: '幅は 0 以上でなければなりません。'
+            invalid: '幅は数値で入力してください。'
+        height:
+            min: '高さは 0 以上でなければなりません。'
+            invalid: '高さは数値で入力してください。'
+        depth:
+            min: '奥行きは 0 以上でなければなりません。'
+            invalid: '奥行きは数値で入力してください。'
+        channel_pricing:
+            price:
+                not_defined: '価格を設定してください。'
+            existing_code: 'コード {{ channelCode }} のチャンネルは存在しません。'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: '顧客ごとのクーポン利用回数は {{ limit }} 以上でなければなりません。'
+    product_translation:
+        short_description:
+            max: '短い説明は {{ limit }} 文字以内で入力してください。'
+    province:
+        code:
+            not_exist: 'コード {{ code }} の州/県は存在しません。'
+    review:
+        author:
+            not_blank: 'メールアドレスを入力してください。'
+        product:
+            not_blank: '商品を入力してください。'
+        rating:
+            range: '評価は 1〜5 の整数でなければなりません。'
+            not_in_range: '評価は {{ min }}〜{{ max }} の間で指定してください。'
+    taxon:
+        code:
+            not_exist: 'コード {{ code }} の分類は存在しません。'
+    taxon_image:
+        file:
+            max_size: '画像が大きすぎます - {{ size }}{{ suffix }}。最大許可サイズは {{ limit }}{{ suffix }} です。'
+            upload_ini_size: '画像が大きすぎます。最大許可サイズは {{ limit }}{{ suffix }} です。'
+    translation:
+        locale:
+            not_blank: 'ロケールを入力してください。'
+            invalid: 'この値は有効なロケールではありません。'
+            unique: '{{ value }} ロケールコードの翻訳は既に存在します。'
+        locale_code:
+            invalid: '利用可能なロケールから選択してください: %locales%'
+    user:
+        email:
+            unique: 'このメールアドレスは既に使用されています。'
+            min: 'メールアドレスは {{ limit }} 文字以上で入力してください。'
+            max: 'メールアドレスは {{ limit }} 文字以内で入力してください。'
+            invalid: 'このメールアドレスは無効です。'
+        username:
+            unique: 'このユーザー名は既に使用されています。'
+            not_blank: '名前を入力してください。'
+            max: 'ユーザー名は {{ limit }} 文字以内で入力してください。'
+        first_name:
+            max: '名は {{ limit }} 文字以内で入力してください。'
+        last_name:
+            max: '姓は {{ limit }} 文字以内で入力してください。'
+        locale_code:
+            not_blank: 'ロケールを選択してください。'
+    zone:
+        code:
+            not_exist: 'コード {{ code }} のゾーンは存在しません。'
+

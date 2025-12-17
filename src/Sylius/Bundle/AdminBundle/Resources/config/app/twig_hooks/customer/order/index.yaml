@@ -1,0 +1,9 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.customer.order.index.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/customer/order/index/content/header/breadcrumbs.html.twig'
+                
+        'sylius_admin.customer.order.index.content.header.title_block':        
+            title:
+                template: '@SyliusAdmin/customer/order/index/content/header/title_block/title.html.twig'

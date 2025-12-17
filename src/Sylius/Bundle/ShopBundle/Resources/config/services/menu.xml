@@ -17,14 +17,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.shop.menu_builder.account" class="Sylius\Bundle\ShopBundle\Menu\AccountMenuBuilder">
+        <service id="sylius_shop.menu_builder.account" class="Sylius\Bundle\ShopBundle\Menu\AccountMenuBuilder">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="event_dispatcher" />
-            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.shop.account" />
             <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius_shop.account" />
         </service>
-        <service id="sylius_shop.menu_builder.account" alias="sylius.shop.menu_builder.account" />
     </services>
 </container>

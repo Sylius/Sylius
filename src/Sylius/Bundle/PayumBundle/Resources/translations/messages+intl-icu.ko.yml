@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    payum_action:
+        payment:
+            description: '{items, plural, one {결제에는 총 {total} 금액의 #개 항목이 포함되어 있습니다} other {결제에는 총 {total} 금액의 #개 항목이 포함되어 있습니다}}'

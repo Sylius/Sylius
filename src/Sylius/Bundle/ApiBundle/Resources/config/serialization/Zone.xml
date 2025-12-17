@@ -17,65 +17,42 @@
 >
     <class name="Sylius\Component\Addressing\Model\Zone">
         <attribute name="id">
-            <group>admin:zone:index</group>
             <group>sylius:admin:zone:index</group>
-            <group>admin:zone:show</group>
             <group>sylius:admin:zone:show</group>
         </attribute>
         <attribute name="code">
-            <group>admin:zone:create</group>
             <group>sylius:admin:zone:create</group>
-            <group>admin:zone:index</group>
             <group>sylius:admin:zone:index</group>
-            <group>admin:zone:show</group>
             <group>sylius:admin:zone:show</group>
         </attribute>
         <attribute name="name">
-            <group>admin:zone:create</group>
             <group>sylius:admin:zone:create</group>
-            <group>admin:zone:index</group>
             <group>sylius:admin:zone:index</group>
-            <group>admin:zone:show</group>
             <group>sylius:admin:zone:show</group>
-            <group>admin:zone:update</group>
             <group>sylius:admin:zone:update</group>
         </attribute>
         <attribute name="type">
-            <group>admin:zone:create</group>
             <group>sylius:admin:zone:create</group>
-            <group>admin:zone:index</group>
             <group>sylius:admin:zone:index</group>
-            <group>admin:zone:show</group>
             <group>sylius:admin:zone:show</group>
         </attribute>
         <attribute name="scope">
-            <group>admin:zone:create</group>
             <group>sylius:admin:zone:create</group>
-            <group>admin:zone:index</group>
             <group>sylius:admin:zone:index</group>
-            <group>admin:zone:show</group>
             <group>sylius:admin:zone:show</group>
         </attribute>
         <attribute name="createdAt">
-            <group>admin:zone:index</group>
             <group>sylius:admin:zone:index</group>
-            <group>admin:zone:show</group>
             <group>sylius:admin:zone:show</group>
         </attribute>
         <attribute name="updatedAt">
-            <group>admin:zone:index</group>
             <group>sylius:admin:zone:index</group>
-            <group>admin:zone:show</group>
             <group>sylius:admin:zone:show</group>
         </attribute>
         <attribute name="members">
-            <group>admin:zone:create</group>
             <group>sylius:admin:zone:create</group>
-            <group>admin:zone:index</group>
             <group>sylius:admin:zone:index</group>
-            <group>admin:zone:show</group>
             <group>sylius:admin:zone:show</group>
-            <group>admin:zone:update</group>
             <group>sylius:admin:zone:update</group>
         </attribute>
     </class>

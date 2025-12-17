@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 class UniqueCurrencyPair extends Constraint
 {
     /** @var string */

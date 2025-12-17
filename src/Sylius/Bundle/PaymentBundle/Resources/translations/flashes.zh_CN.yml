@@ -3,9 +3,10 @@
 
 sylius:
     payment:
-        cancelled: '付款已被取消。'
-        completed: '已完成付款。'
-        failed: '付款已失败。'
-        processing: '正在处理付款。'
-        refunded: '成功地退还款项。'
-        unknown: '支付时出现了未知的错误。'
+        authorized: '支付已授权。'
+        cancelled: '支付已取消。'
+        completed: '支付已完成。'
+        failed: '支付失败。'
+        processing: '支付处理中。'
+        refunded: '支付已成功退款。'
+        unknown: '支付出现未知问题。'

@@ -2,7 +2,7 @@
     "@context": "\/api\/v2\/contexts\/Product",
     "@id": "\/api\/v2\/admin\/products\/MUG",
     "@type": "Product",
-    "id": @integer@,
+    "id": "@integer@",
     "code": "MUG",
     "variantSelectionMethod": "choice",
     "enabled": true,
@@ -32,7 +32,7 @@
         {
             "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
             "value": "Ceramic",
             "localeCode": "en_US"
@@ -40,7 +40,7 @@
         {
             "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
             "@type": "ProductAttributeValue",
-            "id": @integer@,
+            "id": "@integer@",
             "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
             "value": "Ceramika",
             "localeCode": "pl_PL"
@@ -49,19 +49,20 @@
     "averageRating": 0,
     "images": [
         {
-            "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+            "@id": "\/api\/v2\/admin\/products\/MUG\/images\/@integer@",
             "@type": "ProductImage",
-            "id": @integer@,
+            "id": "@integer@",
             "type": "thumbnail",
-            "path": "@string@.contains('sylius_original').endsWith('product.jpg')",
-            "productVariants": []
+            "path": "@string@\/sylius_original\/product.jpg",
+            "productVariants": [],
+            "position": 0
         }
     ],
     "translations": {
         "en_US": {
-            "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/products\/MUG\/translations\/en_US",
             "@type": "ProductTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Mug",
             "slug": "mug",
             "description": "This is a mug",
@@ -70,9 +71,9 @@
             "metaDescription": "Mug description"
         },
         "pl_PL": {
-            "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+            "@id": "\/api\/v2\/admin\/products\/MUG\/translations\/pl_PL",
             "@type": "ProductTranslation",
-            "id": @integer@,
+            "id": "@integer@",
             "name": "Kubek",
             "slug": "kubek",
             "description": "To jest kubek",
@@ -81,6 +82,6 @@
             "metaDescription": "Opis kubka"
         }
     },
-    "createdAt": @date@,
-    "updatedAt": @date@
+    "createdAt": "@date@",
+    "updatedAt": "@date@"
 }

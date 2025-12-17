@@ -4,10 +4,10 @@
 sylius:
     form:
         taxon:
-            description: Descriere
-            enabled: Activat
-            name: Nume produs
-            parent: Părinte
-            slug: Slug
+            description: 'Descriere'
+            enabled: 'Activat'
+            name: 'Nume'
+            parent: 'Părinte'
+            slug: 'Slug'
         taxonomy:
-            name: Nume produs
+            name: 'Nume'

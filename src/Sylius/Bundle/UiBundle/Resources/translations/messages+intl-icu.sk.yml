@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    ui:
+        item.choice: '{count, plural, =0 {} one {, 1 položka} other {, # položiek}}'
+        lowest_price_days_before_discount_was: '{days, plural, one {Najnižšia cena pred # dňom pred aktuálnou zľavou bola {price}} other {Najnižšia cena pred # dňami pred aktuálnou zľavou bola {price}}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Tento zákazník nevykonal žiadnu objednávku} one {Tento zákazník vykonal jednu objednávku} other {Celkovo tento zákazník vykonal # objednávok naprieč všetkými kanálmi}}'

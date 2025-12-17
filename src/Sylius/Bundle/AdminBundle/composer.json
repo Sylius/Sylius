@@ -11,7 +11,8 @@
         "ui",
         "admin interface",
         "admin",
-        "backend"
+        "backend",
+        "symfony-ux"
     ],
     "homepage": "https://sylius.com",
     "license": "MIT",
@@ -30,27 +31,30 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "knplabs/knp-menu": "^3.1",
-        "knplabs/knp-menu-bundle": "^3.0",
-        "sylius/core-bundle": "^1.13",
-        "sylius/ui-bundle": "^1.13",
-        "symfony/framework-bundle": "^5.4.21 || ^6.4",
-        "symfony/webpack-encore-bundle": "^1.15",
-        "twig/intl-extra": "^2.12 || ^3.4",
-        "twig/twig": "^2.12 || ^3.3"
+        "php": "^8.2",
+        "knplabs/knp-menu": "^3.5",
+        "knplabs/knp-menu-bundle": "^3.4",
+        "sylius/core-bundle": "^2.0",
+        "sylius/payum-bundle": "^2.0",
+        "sylius/ui-bundle": "^2.0",
+        "sylius/twig-hooks": "^0.8",
+        "symfony/framework-bundle": "^6.4.1 || ^7.2",
+        "symfony/stimulus-bundle": "^2.20",
+        "symfony/ux-autocomplete": "^2.20",
+        "symfony/ux-live-component": "^2.20",
+        "symfony/webpack-encore-bundle": "^2.2",
+        "symfonycasts/dynamic-forms": "^0.1",
+        "twig/extra-bundle": "^3.13",
+        "twig/twig": "^3.14"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "php-http/message-factory": "^1.0",
-        "phpspec/phpspec": "^7.2",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/dotenv": "^5.4.21 || ^6.4"
-    },
-    "conflict": {
-        "twig/twig": "3.9.0"
+        "doctrine/orm": "^2.18 || ^3.3",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "php-http/message-factory": "^1.1",
+        "phpspec/prophecy-phpunit": "^2.2",
+        "phpunit/phpunit": "^11.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2",
+        "symfony/dotenv": "^6.4 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -59,14 +63,17 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^7.2"
         }
     },
     "autoload": {
         "psr-4": {
             "Sylius\\Bundle\\AdminBundle\\": "",
-            "Sylius\\Bundle\\AdminBundle\\Tests\\": "Tests/",
-            "Sylius\\Bundle\\AdminBundle\\Application\\": "test/src/"
+            "Sylius\\Bundle\\AdminBundle\\Application\\": "test/src/",
+            "Tests\\Sylius\\Bundle\\AdminBundle\\": "tests/"
         }
     },
     "repositories": [

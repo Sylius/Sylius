@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Checker;
 
+use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 final class CatalogPromotionEligibilityChecker implements CatalogPromotionEligibilityCheckerInterface
 {
+    /** @param iterable<CriteriaInterface> $defaultCriteria */
     public function __construct(private iterable $defaultCriteria = [])
     {
     }

@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: '제품 "%productVariantCode%" 의 재고가 부족하여 결제를 완료할 수 없습니다.'

@@ -4,6 +4,9 @@
 sylius:
     form:
         channel:
-            description: 説明
-            enabled: 有効
-            name: ゾーン名
+            color: 'カラー'
+            description: '説明'
+            enabled: '有効'
+            name: '名前'
+            url: 'URL'
+

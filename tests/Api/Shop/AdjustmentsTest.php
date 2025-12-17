@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,11 +29,11 @@ final class AdjustmentsTest extends JsonApiTestCase
         $this->setUpOrderPlacer();
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_not_found_on_get_adjustment(): void
     {
         $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'cart.yaml',
             'country.yaml',
             'shipping_method.yaml',

@@ -18,6 +18,7 @@ use Twig\TwigFunction;
 
 final class BundleLoadedCheckerExtension extends AbstractExtension
 {
+    /** @param array<string> $listOfBundles */
     public function __construct(private array $listOfBundles)
     {
     }

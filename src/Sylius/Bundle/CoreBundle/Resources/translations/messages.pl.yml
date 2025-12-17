@@ -2,6 +2,56 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        admin_password_reset:
+            hello: 'Witaj'
+            subject: 'Reset hasła administratora'
+            reset_your_password: 'Zresetuj swoje hasło'
+            to_reset_your_password: 'Aby zresetować hasło, kliknij poniższy link.'
+            to_reset_your_password_token: 'Aby zresetować hasło, użyj poniższego tokenu.'
+            token: 'Twój token do resetowania hasła to'
+        contact_request:
+            content: 'Treść'
+            message_from: 'Wiadomość od'
+            subject: 'Formularz kontaktowy'
+        order_confirmation:
+            has_been_successfully_placed: 'zostało pomyślnie złożone.'
+            subject: 'Potwierdzenie zamówienia'
+            view_order_or_change_payment_method: 'Zobacz zamówienie lub zmień metodę płatności'
+            thank_you: 'Dziękujemy za zakupy w naszym sklepie!'
+            your_order_number: 'Numer Twojego zamówienia'
+        password_reset:
+            hello: 'Witaj'
+            reset_your_password: 'Zresetuj swoje hasło'
+            subject: 'Reset hasła'
+            to_reset_your_password: 'Aby zresetować hasło, kliknij poniższy link.'
+            to_reset_your_password_token: 'Aby zresetować hasło, użyj poniższego tokenu.'
+            token: 'Twój token do resetowania hasła to'
+        shipment_confirmation:
+            has_been_sent_using: 'zostało wysłane za pomocą'
+            subject: 'Potwierdzenie dostawy'
+            thank_you_for_transaction: 'Dziękujemy za udaną transakcję.'
+            you_can_check_its_location_with_the_tracking_code: 'Możesz sprawdzić lokalizację przesyłki za pomocą kodu śledzenia %tracking_code%.'
+            your_order_with_number: 'Twoje zamówienie o numerze'
+        user_registration:
+            start_shopping: 'Rozpocznij zakupy'
+            subject: 'Rejestracja użytkownika'
+            welcome_to_our_store: 'Witamy w naszym sklepie!'
+            you_have_just_been_registered: 'Zostałeś właśnie zarejestrowany. Dziękujemy.'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
+        verification_token:
+            hello: 'Witaj'
+            message: 'Zweryfikuj swoje konto za pomocą tokenu: '
+            subject: 'Weryfikacja adresu e-mail'
+            to_verify_your_email_address: 'Aby zweryfikować adres e-mail, kliknij poniższy link.'
+            verify_your_email_address: 'Zweryfikuj swój adres e-mail'
+        user:
+            account_verification:
+                greeting: 'Witaj'
+                message: 'Zweryfikuj swoje konto za pomocą tokenu: '
+                statement: 'Zweryfikuj swój adres e-mail'
+                strategy: 'Aby zweryfikować adres e-mail, kliknij poniższy link.'
+                subject: 'Weryfikacja adresu e-mail'
     form:
         block:
             body: Zawartość
@@ -11,11 +61,18 @@ sylius:
             coupon: Kupon
         catalog_promotion:
             channels: Kanały
+            scope:
+                for_products: Dla produktów
+                for_taxons: Dla taksonów
+                for_variants: Dla wariantów
         checkout:
             addressing:
                 different_billing_address: Użyć innego adresu do rozliczeń?
+                different_shipping_address: Użyć innego adresu do wysyłki?
             payment_method: Metoda płatności
             shipping_method: Metoda wysyłki
+        currency:
+            select: Wybierz walutę
         promotion:
             channels: Kanały
         promotion_action:
@@ -23,6 +80,7 @@ sylius:
                 product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Limit użycia na 1 klienta
+            reusable_from_cancelled_orders: Możliwość ponownego użycia w anulowanych zamówieniach
         group:
             name: Nazwa
             roles: Role
@@ -33,7 +91,9 @@ sylius:
                 country: Kraj
                 postcode: Kod pocztowy
                 street: Adres
+                tax_id: NIP
             contact_email: E-mail do kontaktu
+            contact_phone_number: Telefon kontaktowy
             countries: Kraje
             currencies: Waluty
             currency_base: Waluta podstawowa
@@ -41,8 +101,11 @@ sylius:
             hostname: Nazwa hosta
             locale_default: Domyślne ustawienia regionalne
             locales: Ustawienia regionalne
+            menu_taxon: Takson w menu
             payment_methods: Metody płatności
+            shipping_address_in_checkout_required: Adres wymagany w koszyku
             shipping_methods: Metody wysyłki
+            shop_billing_data: Dane rozliczeniowe sklepu
             skipping_shipping_step_allowed: Czy pomijać krok wysyłki, jeżeli dostępna jest tylko jedna metoda wysyłki?
             skipping_payment_step_allowed: Pominąć krok wyboru płatności, jeżeli tylko jedna metoda płatności jest dostępna?
             tax_calculation_strategy: Strategia obliczania podatku
@@ -103,6 +166,7 @@ sylius:
             file: Wybierz zdjęcie
         user:
             billing_address: Adres do rachunku
+            different_shipping_address: Użyć innego adresu do wysyłki?
             enabled: Aktywne
             first_name: Imię
             groups: Grupy
@@ -121,6 +185,7 @@ sylius:
             shipping_required: Czy wymagana jest dostawa?
             weight: Waga
             width: Szerokość
+            tracked_help: 'Jeśli ta opcja jest włączona, Sylius będzie śledził stan magazynowy i zatrzyma sprzedaż produktu, gdy stan osiągnie 0.'
         attribute:
             product_attribute_value:
                 attribute: Cecha
@@ -198,6 +263,7 @@ sylius:
             header: Wersja PHP i ustawienia
             any: którekolwiek
             detect_unicode: detect_unicode
+            detect_unicode_help: "Ustaw 'detect_unicode = Off' w pliku php.ini."
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: nieprzestarzałe
             off: false
@@ -205,16 +271,15 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
+                auto_start_help: "Ustaw 'session.auto_start = Off' w pliku php.ini."
             short_open_tag: short_open_tag
             timezone: strefa czasowa
+            timezone_help: 'Ustaw "date.timezone" w pliku php.ini (np. date.timezone = "Europe/Amsterdam").'
             timezone_deprecated:
                 header: Przestarzała strefa czasowa
                 help: 'Strefa czasowa %timezone% jest przestarzała. Popraw wpis w pliku php.ini (lista przestarzałych stref czasowych: http://php.net/manual/en/timezones.others.php).'
             version: Wersja PHP
             version_recommended: Rekomendowana wersja PHP
-    payum_gateway:
-        cash_on_delivery: Opłata za pobraniem
-        offline: Tryb offline
-        paypal_express_checkout: Płatności PayPal Express
+            version_help: 'Sylius zaleca wersję PHP %recommended%, Twoja aktualna wersja to %current%. Prosimy o aktualizację.'
     shipping_method_resolver:
         by_zones_and_channel: Za pomocą stref i kanału

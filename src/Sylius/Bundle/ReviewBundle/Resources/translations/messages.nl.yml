@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
-            author: Auteur
-            comment: Commentaar
-            header: Voeg een review toe
-            rating: Beoordeling
+            author: 'Auteur'
+            comment: 'Opmerking'
+            header: 'Voeg een beoordeling toe'
+            rating: 'Beoordeling'
             status:
-                approved: Goedgekeurd
-                label: Status
-                new: Nieuw
-                rejected: Afgewezen
-            submit: Verzend
-            title: Titel
+                approved: 'Goedgekeurd'
+                label: 'Status'
+                new: 'Nieuw'
+                rejected: 'Afgewezen'
+            submit: 'Indienen'
+            title: 'Titel'

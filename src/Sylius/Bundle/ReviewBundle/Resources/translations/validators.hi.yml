@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    review:
+        author:
+            already_exists: 'यह ईमेल पहले से पंजीकृत है, कृपया लॉगिन करें या “पासवर्ड भूल गए” विकल्प का उपयोग करें।'
+        comment:
+            not_blank: 'समीक्षा टिप्पणी खाली नहीं होनी चाहिए।'
+        rating:
+            not_blank: 'कृपया समीक्षा रेटिंग चयनित करें।'
+        title:
+            not_blank: 'समीक्षा शीर्षक खाली नहीं होना चाहिए।'
+            min_length: 'समीक्षा शीर्षक में कम से कम 2 अक्षर होने चाहिए।'
+            max_length: 'समीक्षा शीर्षक अधिकतम 255 अक्षरों का हो सकता है।'

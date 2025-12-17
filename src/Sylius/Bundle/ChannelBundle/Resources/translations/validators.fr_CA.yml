@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        code:
+            not_blank: Veuillez entrer le code du canal.
+            regex: Le code du canal peut uniquement contenir des lettres, des chiffres, des tirets et des traits de soulignement.
+            unique: Le code du canal doit être unique.
+        name:
+            not_blank: Veuillez entrer le nom du canal.

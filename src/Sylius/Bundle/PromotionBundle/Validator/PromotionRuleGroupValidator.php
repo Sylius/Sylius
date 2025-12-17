@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class PromotionRuleGroupValidator extends ConstraintValidator
 {
-    /** @param array<string, array<string, string>> $validationGroups */
+    /** @param array<string, array<int, string>> $validationGroups */
     public function __construct(private array $validationGroups)
     {
     }

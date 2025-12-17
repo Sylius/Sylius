@@ -33,15 +33,15 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "doctrine/collections": "^1.6",
-        "sylius-labs/polyfill-symfony-security": "^1.1",
-        "sylius/resource": "^1.11",
-        "symfony/polyfill-mbstring": "^1.17",
-        "symfony/security-core": "^5.4.21 || ^6.4"
+        "php": "^8.2",
+        "doctrine/collections": "^2.2",
+        "sylius/resource": "^1.12",
+        "symfony/polyfill-mbstring": "^1.31",
+        "symfony/security-core": "^6.4 || ^7.2",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2"
+        "phpunit/phpunit": "^11.5"
     },
     "suggest": {
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"
@@ -53,7 +53,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^7.2"
         }
     },
     "autoload": {
@@ -63,7 +66,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Component\\User\\spec\\": "spec/"
+            "Tests\\Sylius\\Component\\User\\": "tests/"
         }
     },
     "repositories": [

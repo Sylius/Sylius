@@ -1,0 +1,75 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    product:
+        sku:
+            not_blank: 'Bitte geben Sie die Produkt-SKU ein.'
+            unique: 'Die Produkt-SKU muss eindeutig sein.'
+        slug:
+            not_blank: 'Bitte geben Sie den Produkt-Slug ein.'
+            unique: 'Der Produkt-Slug muss eindeutig sein.'
+            max_length: 'Der Produkt-Slug darf höchstens 1 Zeichen lang sein.|Der Produkt-Slug darf höchstens {{ limit }} Zeichen lang sein.'
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Produkt-Code ein.'
+            regex: 'Der Produkt-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Der Produkt-Code muss eindeutig sein.'
+        name:
+            not_blank: 'Bitte geben Sie den Produktnamen ein.'
+            min_length: 'Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Produktname darf höchstens 1 Zeichen lang sein.|Der Produktname darf höchstens {{ limit }} Zeichen lang sein.'
+        meta_keywords:
+            max_length: 'Die Meta-Schlüsselwörter des Produkts dürfen höchstens 1 Zeichen lang sein.|Die Meta-Schlüsselwörter des Produkts dürfen höchstens {{ limit }} Zeichen lang sein.'
+        meta_description:
+            max_length: 'Die Meta-Beschreibung des Produkts darf höchstens 1 Zeichen lang sein.|Die Meta-Beschreibung des Produkts darf höchstens {{ limit }} Zeichen lang sein.'
+    product_variant:
+        combination: 'Eine Variante mit diesem Optionssatz existiert bereits.'
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Code ein.'
+            regex: 'Der Produktvariant-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Der Produktvariant-Code muss eindeutig sein.'
+            within_product_unique: 'Dieser Code muss innerhalb dieses Produkts eindeutig sein.'
+        option_values:
+            not_configured: 'Die Produktvariante muss für alle Optionen, die für das Produkt gewählt wurden, konfigurierte Werte haben.'
+    simple_product:
+        code:
+            unique: 'Der Code des einfachen Produkts muss eindeutig sein und darf nicht mit anderen Produkten und Produktvarianten übereinstimmen.'
+    option:
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Optionscode ein.'
+            regex: 'Der Optionscode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Die Option mit dem angegebenen Code existiert bereits.'
+        name:
+            not_blank: 'Bitte geben Sie den Optionsnamen ein.'
+            min_length: 'Der Optionsname muss mindestens 1 Zeichen lang sein.|Der Optionsname muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Optionsname darf höchstens 1 Zeichen lang sein.|Der Optionsname darf höchstens {{ limit }} Zeichen lang sein.'
+        values:
+            min_count: 'Bitte fügen Sie mindestens {{ limit }} Option(en) hinzu.|Bitte fügen Sie mindestens {{ limit }} Optionen hinzu.'
+    option_value:
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Optionswertcode ein.'
+            regex: 'Der Optionswertcode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Der Optionswert mit dem angegebenen Code existiert bereits.'
+        value:
+            not_blank: 'Bitte geben Sie den Optionswert ein.'
+    association:
+        unique: 'Eine Assoziation mit diesem Besitzer und Typ existiert bereits.'
+        type:
+            not_blank: 'Bitte geben Sie den Assoziationstyp ein.'
+        owner:
+            not_blank: 'Bitte geben Sie den Assoziationsbesitzer ein.'
+    association_type:
+        name:
+            not_blank: 'Bitte geben Sie den Namen des Assoziationstyps ein.'
+            min_length: 'Der Name des Assoziationstyps muss mindestens 1 Zeichen lang sein.|Der Name des Assoziationstyps muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Name des Assoziationstyps darf höchstens 1 Zeichen lang sein.|Der Name des Assoziationstyps darf höchstens {{ limit }} Zeichen lang sein.'
+        code:
+            min_length: 'Der Code des Assoziationstyps muss mindestens 1 Zeichen lang sein.|Der Code des Assoziationstyps muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Code des Assoziationstyps darf höchstens 1 Zeichen lang sein.|Der Code des Assoziationstyps darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Code des Assoziationstyps ein.'
+            regex: 'Der Code des Assoziationstyps darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Der Assoziationstyp mit dem angegebenen Code existiert bereits.'

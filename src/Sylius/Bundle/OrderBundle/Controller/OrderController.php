@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Controller;
 
-use FOS\RestBundle\View\View;
 use Sylius\Bundle\OrderBundle\Resetter\CartChangesResetterInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -26,8 +24,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OrderController extends ResourceController
@@ -49,7 +45,7 @@ class OrderController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($cart));
+            return $this->createRestView($configuration, $cart);
         }
 
         $form = $this->resourceFormFactory->create($configuration, $cart);
@@ -59,24 +55,6 @@ class OrderController extends ResourceController
             [
                 'cart' => $cart,
                 'form' => $form->createView(),
-            ],
-        );
-    }
-
-    public function widgetAction(Request $request): Response
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $cart = $this->getCurrentCart();
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($cart));
-        }
-
-        return $this->render(
-            $configuration->getTemplate('summary.html'),
-            [
-                'cart' => $cart,
             ],
         );
     }
@@ -114,7 +92,7 @@ class OrderController extends ResourceController
             $this->manager->flush();
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+                return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
@@ -128,7 +106,7 @@ class OrderController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+            return $this->createRestView($configuration, $form, Response::HTTP_BAD_REQUEST);
         }
 
         return $this->render(
@@ -140,69 +118,6 @@ class OrderController extends ResourceController
                 'cart' => $resource,
             ],
         );
-    }
-
-    protected function addFlash(string $type, $message): void
-    {
-        /** @var SessionInterface $session */
-        $session = $this->get('request_stack')->getSession();
-        /** @var FlashBagInterface $flashBag */
-        $flashBag = $session->getBag('flashes');
-        $flashBag->add($type, $message);
-    }
-
-    public function clearAction(Request $request): Response
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $this->isGrantedOr403($configuration, ResourceActions::DELETE);
-        $resource = $this->getCurrentCart();
-
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid((string) $resource->getId(), $this->getParameterFromRequest($request, '_csrf_token'))) {
-            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
-        }
-
-        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
-
-        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
-            throw new HttpException($event->getErrorCode(), $event->getMessage());
-        }
-        if ($event->isStopped()) {
-            $this->flashHelper->addFlashFromEvent($configuration, $event);
-
-            return $this->redirectHandler->redirectToIndex($configuration, $resource);
-        }
-
-        $this->repository->remove($resource);
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
-
-        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
-
-        return $this->redirectHandler->redirectToIndex($configuration, $resource);
-    }
-
-    protected function redirectToCartSummary(RequestConfiguration $configuration): Response
-    {
-        trigger_deprecation(
-            'sylius/order-bundle',
-            '1.13',
-            'The %s::redirectToCartSummary() method is deprecated and will be removed in Sylius 2.0.',
-            self::class,
-        );
-        if (null === $configuration->getParameters()->get('redirect')) {
-            return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
-        }
-
-        return $this->redirectHandler->redirectToRoute($configuration, $configuration->getParameters()->get('redirect'));
-    }
-
-    protected function getCartSummaryRoute(): string
-    {
-        return 'sylius_cart_summary';
     }
 
     protected function getCurrentCart(): OrderInterface
@@ -228,28 +143,5 @@ class OrderController extends ResourceController
     protected function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->container->get('event_dispatcher');
-    }
-
-    /**
-     * @return mixed
-     *
-     * @deprecated This function will be removed in Sylius 2.0, since Symfony 5.4, use explicit input sources instead
-     * based on Symfony\Component\HttpFoundation\Request::get
-     */
-    private function getParameterFromRequest(Request $request, string $key)
-    {
-        if ($request !== $result = $request->attributes->get($key, $request)) {
-            return $result;
-        }
-
-        if ($request->query->has($key)) {
-            return $request->query->all()[$key];
-        }
-
-        if ($request->request->has($key)) {
-            return $request->request->all()[$key];
-        }
-
-        return null;
     }
 }

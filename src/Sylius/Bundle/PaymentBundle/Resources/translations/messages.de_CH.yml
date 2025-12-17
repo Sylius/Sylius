@@ -4,31 +4,35 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: Name des Karteninhabers
-            expiry_month: Ablaufmonat
-            expiry_year: Ablaufjahr
-            number: Kartennummer
-            security_code: Sicherheitscode (CVV)
-            type: Kartentyp
+            cardholder_name: 'Name des Karteninhabers'
+            expiry_month: 'Ablaufmonat'
+            expiry_year: 'Ablaufjahr'
+            number: 'Kartennummer'
+            security_code: 'Sicherheitscode (CVV)'
+            type: 'Kartentyp'
         payment:
-            amount: Zahlungsbetrag
-            method: Zahlungsart
+            amount: 'Zahlungsbetrag'
+            method: 'Zahlungsmethode'
             state:
-                header: Zahlungsstatus
-                checkout: Zur Kasse
-                completed: Abgeschlossen
-                authorized: Autorisiert
-                failed: Fehlgeschlagen
-                new: Neu
-                pending: Ausstehend
-                processing: Wird verarbeitet
-                unknown: Unbekannt
-                void: Ungültig
-                cancelled: Abgebrochen
-                refunded: Rückerstattet
+                header: 'Zahlungsstatus'
+                checkout: 'Checkout'
+                completed: 'Abgeschlossen'
+                authorized: 'Autorisierte Zahlung'
+                failed: 'Fehlgeschlagen'
+                new: 'Neu'
+                pending: 'Ausstehend'
+                processing: 'In Bearbeitung'
+                unknown: 'Unbekannt'
+                void: 'Ungültig'
+                cancelled: 'Storniert'
+                refunded: 'Erstattet'
         payment_method:
-            description: Beschreibung
-            enabled: Aktiviert?
-            instructions: Anweisungen
-            name: Name
-            position: Position
+            description: 'Beschreibung'
+            enabled: 'Aktiviert'
+            instructions: 'Anweisungen'
+            name: 'Name'
+            position: 'Position'
+        gateway_config:
+            type: 'Typ'
+    gateway_factory:
+        offline: 'Offline'

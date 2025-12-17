@@ -13,12 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 {
+    use SecurePasswordTrait;
+
     /** @var array<string, string|object> */
     private array $request = [];
 
@@ -48,7 +51,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
     public function setPassword(string $password): void
     {
-        $this->request['body']['password'] = $password;
+        $this->request['body']['password'] = $this->retrieveSecurePassword($password);
     }
 
     public function call(): void
@@ -91,7 +94,6 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
 
         if ($this->sharedStorage->has('cart_token')) {
             $this->sharedStorage->set('previous_cart_token', $this->sharedStorage->get('cart_token'));
-            $this->sharedStorage->set('cart_token', null);
         }
     }
 }

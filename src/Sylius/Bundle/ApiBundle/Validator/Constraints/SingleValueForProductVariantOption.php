@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class SingleValueForProductVariantOption extends Constraint
 {
     public string $message = 'sylius.product_variant.option_values.single_value';

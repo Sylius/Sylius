@@ -5,77 +5,79 @@ sylius:
     form:
         catalog_promotion:
             action:
-                fixed_discount: Fixer Rabatt
-                percentage_discount: Prozentualer Rabatt
-            description: Beschreibung
-            enabled: Aktiviert
-            end_date: Enddatum
-            label: Bezeichnung
-            name: Name
-            priority: Priorität
-            start_date: Startdatum
-            translations: Übersetzungen
+                fixed_discount: 'Fester Rabatt'
+                percentage_discount: 'Prozentualer Rabatt'
+            description: 'Beschreibung'
+            enabled: 'Aktiviert'
+            end_date: 'Enddatum'
+            label: 'Bezeichnung'
+            name: 'Name'
+            priority: 'Priorität'
+            start_date: 'Startdatum'
+            translations: 'Übersetzungen'
         promotion:
-            actions: Aktionen
-            add_action: Aktion hinzufügen
-            add_rule: Regel hinzufügen
-            applies_to_discounted: Gilt für bereits reduzierte Bestellartikel
-            applies_to_discounted_details: Mit dieser Option wird die Warenkorb Aktion auch auf bereits durch Katalog Aktionen reduzierte Produkte angewendet.
-            coupon_based: Gutschein basierend
-            description: Beschreibung
-            ends_at: Endet am
-            exclusive: Exklusiv
-            name: Name
-            priority: Priorität
-            rules: Regeln
-            starts_at: Beginnt am
-            usage_limit: Nutzungslimit
+            actions: 'Aktionen'
+            add_action: 'Aktion hinzufügen'
+            add_rule: 'Regel hinzufügen'
+            applies_to_discounted: 'Gilt für bereits rabattierte Bestellartikel'
+            applies_to_discounted_details: 'Mit dieser Option wird die Warenkorbabnahme auch auf bereits rabattierte Bestellartikel angewendet, die durch eine Katalogaktion rabattiert wurden.'
+            coupon_based: 'Gutscheinbasiert'
+            description: 'Beschreibung'
+            ends_at: 'Endet um'
+            exclusive: 'Exklusiv'
+            label: 'Bezeichnung'
+            name: 'Name'
+            priority: 'Priorität'
+            rules: 'Regeln'
+            starts_at: 'Beginnt um'
+            usage_limit: 'Nutzungsgrenze'
         promotion_action:
-            item_fixed_discount: Fixer Rabatt
-            item_percentage_discount: Prozentualer Rabatt
-            order_fixed_discount: Fester Rabatt
-            order_percentage_discount: Prozentualer Rabatt
-            shipping_percentage_discount: Prozentualer Versandrabatt
+            item_fixed_discount: 'Fester Artikelrabatt'
+            item_percentage_discount: 'Prozentualer Artikelrabatt'
+            order_fixed_discount: 'Fester Bestellrabatt'
+            order_percentage_discount: 'Prozentualer Bestellrabatt'
+            shipping_percentage_discount: 'Prozentualer Versandrabatt'
+            filters: 'Filter'
             fixed_discount_configuration:
-                amount: Steuersatz
+                amount: 'Betrag'
             percentage_discount_configuration:
-                percentage: Prozent
-            type: Typ
+                percentage: 'Prozentsatz'
+            type: 'Typ'
         promotion_coupon:
-            expires_at: Verfällt am
-            usage_limit: Nutzungslimit
+            expires_at: 'Läuft ab am'
+            usage_limit: 'Nutzungsgrenze'
         promotion_coupon_generator_instruction:
-            amount: Betrag
-            code_length: Codelänge
-            expires_at: Verfällt am
-            prefix: Präfix
-            suffix: Suffix
-            usage_limit: Nutzungslimit
+            amount: 'Betrag'
+            code_length: 'Code-Länge'
+            expires_at: 'Läuft ab am'
+            prefix: 'Präfix'
+            suffix: 'Suffix'
+            usage_limit: 'Nutzungsgrenze'
         promotion_filter:
-            price_range: Preisspanne Filter
+            price_range: 'Preisbereichsfilter'
         promotion_rule:
-            cart_quantity: Warenkorb Menge
-            contains_product: Enthält Produkt
-            customer_group: Kundengruppe
-            has_at_least_one_from_taxons: Hat mindestens eine aus der Klassifizierung
-            item_total: Stückzahl gesamt
-            nth_order: N-te Bestellung
-            shipping_country: Lieferadresse Land
-            taxonomy: Klassifizierung
-            total_price_of_items_from_taxon: Gesamtpreis aller Produkte
+            cart_quantity: 'Warenkorbmengen'
+            contains_product: 'Enthält Produkt'
+            customer_group: 'Kundengruppe'
+            has_at_least_one_from_taxons: 'Hat mindestens ein Produkt aus Taxons'
+            item_total: 'Artikelbetrag'
+            nth_order: 'N-te Bestellung'
+            shipping_country: 'Versandland'
+            taxonomy: 'Taxonomie'
+            total_price_of_items_from_taxon: 'Gesamtpreis der Artikel aus Taxon'
             cart_quantity_configuration:
-                count: Anzahl
-                equal: Gleich
+                count: 'Anzahl'
+                equal: 'Gleich'
             contains_product_configuration:
-                exclude: Ausgenommen
-                variants: Produkte
+                exclude: 'Ausschließen'
+                variants: 'Produkte'
             item_total_configuration:
-                amount: Betrag
+                amount: 'Betrag'
             nth_order_configuration:
-                nth: N-ter
+                nth: 'N-te'
             shipping_country_configuration:
-                country: Land
+                country: 'Land'
             taxonomy_configuration:
-                exclude: Ausgenommen
-                taxons: Produktgruppen
-            type: Typ
+                exclude: 'Ausschließen'
+                taxons: 'Taxons'
+            type: 'Typ'

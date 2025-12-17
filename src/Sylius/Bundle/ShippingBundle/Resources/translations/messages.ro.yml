@@ -5,48 +5,55 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Număr
-                equal: Egal cu
-            type: Tipul de regulă
+                count: 'Număr'
+                equal: 'Egal cu'
+            type: 'Tip regulă'
         shipment:
-            state: Status
+            state: 'Stare'
             states:
-                checkout: Finalizare comandă
-                pending: În așteptare
-                ready: Gata
-                shipped: Expediată
-                returned: Returnată
-                cancelled: Anulată
-            tracking_code: Codul de urmărire
+                checkout: 'Finalizare'
+                pending: 'În așteptare'
+                ready: 'Gata'
+                shipped: 'Expediată'
+                returned: 'Returnată'
+                cancelled: 'Anulată'
+            tracking_code: 'Cod de urmărire'
         shipping_calculator:
             flat_rate_configuration:
-                label: Sumă forfetară pe expediere
-                amount: Valoare
+                label: 'Tarif fix per expediere'
+                amount: 'Sumă'
             per_unit_rate_configuration:
-                label: Sumă forfetară pe unitate
-                amount: Valoare
+                label: 'Tarif fix per unitate'
+                amount: 'Sumă'
         shipping_category:
-            description: Descriere
-            name: Nume produs
+            description: 'Descriere'
+            name: 'Nume'
         shipping_method:
-            add_rule: Adaugă regulă
-            calculator: Calculator
-            category: Categorie
-            category_requirement: Cerința categoriei
-            channels: Canale
-            configuration: Configurare
-            description: Descriere
-            enabled: Activat
-            match_all_category_requirement: Toate categoriile unităților trebuie să coincidă cu categoria metodei
-            match_any_category_requirement: Cel puțin o unitate trebuie să aibă aceeași categorie cu metoda
-            match_none_category_requirement: Nicio unitate nu trebuie să aibă aceeași categorie cu metoda
-            name: Nume produs
-            position: Poziţie
-            rules: Reguli
-            tax_category: Categoria de taxă
-            translations: Traduceri
+            add_rule: 'Adaugă regulă'
+            calculator: 'Calculator'
+            category: 'Categorie'
+            category_requirement: 'Cerință de categorie'
+            channels: 'Canale'
+            configuration: 'Configurare'
+            description: 'Descriere'
+            enabled: 'Activat'
+            match_all_category_requirement: 'Toate unitățile trebuie să corespundă categoriei metodei'
+            match_any_category_requirement: 'Cel puțin o unitate trebuie să corespundă categoriei metodei'
+            match_none_category_requirement: 'Niciuna dintre unități nu trebuie să corespundă categoriei metodei'
+            name: 'Nume'
+            position: 'Poziție'
+            rules: 'Reguli'
+            rules_help: 'Utilizați regulile pentru a decide dacă această metodă de livrare poate fi aplicată unei comenzi. Dacă o regulă este adevărată, această metodă de livrare poate fi aplicată. Rețineți că, dacă adăugați mai multe reguli, toate regulile trebuie să fie adevărate.'
+            select_calculator: 'Selectați un calculator'
+            tax_category: 'Categorie de taxă'
+            translations: 'Traduceri'
         shipping_method_rule:
-            type: Tip
-            total: Total
-            weight: Greutate
-            amount: Valoare
+            items_total_greater_than_or_equal: 'Totalul articolelor mai mare sau egal'
+            items_total_less_than_or_equal: 'Totalul articolelor mai mic sau egal'
+            type: 'Tip'
+            total: 'Total'
+            total_weight_greater_than_or_equal: 'Greutate totală mai mare sau egală'
+            total_weight_less_than_or_equal: 'Greutate totală mai mică sau egală'
+            weight: 'Greutate'
+            amount: 'Sumă'
+            select: 'Selectați un tip de regulă'

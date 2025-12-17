@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    taxon:
+        code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
+            not_blank: Vänligen ange taxon-kod.
+            regex: Taxon-koden kan endast bestå av bokstäver, siffror, bindestreck och understreck.
+            unique: Taxon med angiven kod finns redan.
+        name:
+            max_length: Taxon-namnet får inte vara längre än 255 tecken.
+            not_blank: Vänligen ange taxon-namn.
+        slug:
+            not_blank: Vänligen ange taxon slug.
+            unique: Taxon slug måste vara unik.
+    taxonomy:
+        name:
+            max_length: Taxonominamnet får inte vara längre än 255 tecken.
+            not_blank: Vänligen ange taxonominamnet.

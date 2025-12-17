@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/shared/helper/channel_pricings.html.twig' import channel_pricings %}
+
+{% set product_variant = hookable_metadata.context.form.vars.data %}
+{% set body %}
+    {% verbatim %}
+        {% hook 'accordion' with { _prefixes: ['sylius_admin.product_variant.update.content.form.sections.channel_pricing'], product_variant, channel_code } %}
+    {% endverbatim %}
+{% endset %}
+
+{{ channel_pricings(hookable_metadata.context.form.channelPricings, product_variant, body) }}

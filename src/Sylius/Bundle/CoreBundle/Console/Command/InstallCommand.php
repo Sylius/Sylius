@@ -13,16 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Console\Command;
 
+use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Exception\RuntimeException;
 
-final class InstallCommand extends AbstractInstallCommand
+#[AsCommand(
+    name: 'sylius:install',
+    description: 'Installs Sylius in your preferred environment.',
+)]
+final class InstallCommand extends Command
 {
-    protected static $defaultName = 'sylius:install';
-
     /** @var array<int, array<string, string>> */
     private array $commands = [
         [
@@ -42,6 +47,10 @@ final class InstallCommand extends AbstractInstallCommand
             'message' => 'Configuring JWT token.',
         ],
         [
+            'command' => 'sylius:payment:generate-key',
+            'message' => 'Generating payment encryption key.',
+        ],
+        [
             'command' => 'sylius:install:assets',
             'message' => 'Installing assets.',
         ],
@@ -54,7 +63,6 @@ final class InstallCommand extends AbstractInstallCommand
     protected function configure(): void
     {
         $this
-            ->setDescription('Installs Sylius in your preferred environment.')
             ->setHelp(
                 <<<EOT
 The <info>%command.name%</info> command installs Sylius.
@@ -72,7 +80,7 @@ EOT
         $outputStyle->writeln('<info>Installing Sylius...</info>');
         $outputStyle->writeln($this->getSyliusLogo());
 
-        $this->ensureDirectoryExistsAndIsWritable((string) $this->getContainer()->getParameter('kernel.cache_dir'), $output);
+        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
 
         $errored = false;
         foreach ($this->commands as $step => $command) {
@@ -90,7 +98,7 @@ EOT
                     $parameters['--fixture-suite'] = $suite;
                 }
 
-                $this->commandExecutor->runCommand($command['command'], $parameters, $output);
+                $commandExecutor->runCommand($command['command'], $parameters, $output);
             } catch (RuntimeException) {
                 $errored = true;
             }
@@ -100,7 +108,7 @@ EOT
         $outputStyle->success($this->getProperFinalMessage($errored));
         $outputStyle->writeln('You can now open your store at the following path under the website root: /');
 
-        return $errored ? 1 : 0;
+        return $errored ? Command::FAILURE : Command::SUCCESS;
     }
 
     private function getProperFinalMessage(bool $errored): string
@@ -135,5 +143,3 @@ EOT
         ;
     }
 }
-
-class_alias(InstallCommand::class, '\Sylius\Bundle\CoreBundle\Command\InstallCommand');

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
-interface CreatePageInterface extends SymfonyPageInterface
+interface CreatePageInterface extends SyliusPageInterface
 {
     public function fillAddressData(AddressInterface $address): void;
 

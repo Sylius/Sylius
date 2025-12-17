@@ -4,28 +4,31 @@
 sylius:
     customer:
         first_name:
-            max: Voornaam mag niet meer dan {{ limit }} karakters bevatten.
-            min: Voornaam moet ten minste {{ limit }} karakters lang zijn.
-            not_blank: Vul uw voornaam in.
+            max: 'Voornaam mag niet langer zijn dan {{ limit }} tekens.'
+            min: 'Voornaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer je voornaam in.'
         last_name:
-            max: Achternaam mag niet langer zijn dan {{ limit }} tekens.
-            min: Achternaam moet ten minste {{ limit }} karakters lang zijn.
-            not_blank: Vul uw achternaam in.
+            max: 'Achternaam mag niet langer zijn dan {{ limit }} tekens.'
+            min: 'Achternaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer je achternaam in.'
         gender:
-            not_blank: Kies a.u.b. je geslacht.
+            not_blank: 'Kies je geslacht.'
         email:
-            already_used: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
-            max: E-mail mag niet meer dan {{ limit }} karakters zijn.
-            not_blank: Vul uw e-mailadres in.
-            invalid: Deze e-mail is ongeldig.
-            unique: Dit e-mailadres is al in gebruik.
-            registered: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
+            already_used: 'Dit e-mailadres wordt al gebruikt, log in of gebruik vergeten wachtwoord.'
+            max: 'E-mail mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer je e-mail in.'
+            invalid: 'Dit e-mailadres is ongeldig.'
+            unique: 'Dit e-mailadres wordt al gebruikt.'
+            registered: 'Dit e-mailadres is al geregistreerd, log in of gebruik vergeten wachtwoord.'
+        phone_number:
+            max: 'Telefoonnummer mag niet langer zijn dan {{ limit }} tekens.'
     customer_group:
         code:
-            regex: Klantgroep code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Klant groepcode moet uniek zijn.
-            not_blank: Voer a.u.b. een code voor de klantgroep in.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            regex: 'De klantgroepcode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'De klantgroepcode moet uniek zijn.'
+            not_blank: 'Voer een klantgroepcode in.'
         name:
-            max: De naam van de klantgroep mag niet langer zijn dan {{ limit }} tekens.
-            min: De naam van de klantgroep moet minimaal {{ limit }} karakters lang zijn.
-            not_blank: Voer a.u.b. een naam voor de klantgroep in.
+            max: 'Klantgroepnaam mag niet langer zijn dan {{ limit }} tekens.'
+            min: 'Klantgroepnaam moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer een klantgroepnaam in.'

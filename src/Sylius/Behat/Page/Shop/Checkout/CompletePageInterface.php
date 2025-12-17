@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 
-interface CompletePageInterface extends SymfonyPageInterface
+interface CompletePageInterface extends SyliusPageInterface
 {
     public function hasItemWithProductAndQuantity(string $productName, string $quantity): bool;
 

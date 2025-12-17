@@ -6,9 +6,9 @@ sylius:
         catalog_promotion:
             action:
                 fixed_discount: خصم ثابت
-                percentage_discount: خصم بنسبة مئوية
+                percentage_discount: خصم نسبي (بالنسبة المئوية)
             description: الوصف
-            enabled: مفعل
+            enabled: مفعّل
             end_date: تاريخ الانتهاء
             label: التسمية
             name: الاسم
@@ -19,9 +19,9 @@ sylius:
             actions: الإجراءات
             add_action: إضافة إجراء
             add_rule: إضافة قاعدة
-            applies_to_discounted: ينطبق على العناصر المخفضة بالفعل
-            applies_to_discounted_details: مع هذا الخيار سيتم تطبيق الترويج على العناصر المخفضة بالفعل بواسطة الترويج في الكتالوج.
-            coupon_based: قائم على الكوبون
+            applies_to_discounted: ينطبق على العناصر المخفضة مسبقًا
+            applies_to_discounted_details: عند تفعيل هذا الخيار، سيتم تطبيق عرض السلة على عناصر الطلب المخفضة مسبقًا من خلال عروض الكتالوج.
+            coupon_based: يعتمد على القسائم
             description: الوصف
             ends_at: ينتهي في
             exclusive: حصري
@@ -33,41 +33,41 @@ sylius:
             usage_limit: حد الاستخدام
         promotion_action:
             item_fixed_discount: خصم ثابت على العنصر
-            item_percentage_discount: خصم بنسبة مئوية على العنصر
+            item_percentage_discount: خصم نسبي على العنصر
             order_fixed_discount: خصم ثابت على الطلب
-            order_percentage_discount: خصم بنسبة مئوية على الطلب
-            shipping_percentage_discount: خصم بنسبة مئوية على الشحن
-            filters: الفلاتر
+            order_percentage_discount: خصم نسبي على الطلب
+            shipping_percentage_discount: خصم نسبي على الشحن
+            filters: عوامل التصفية
             fixed_discount_configuration:
                 amount: المبلغ
             percentage_discount_configuration:
                 percentage: النسبة المئوية
             type: النوع
         promotion_coupon:
-            expires_at: تنتهي في
+            expires_at: ينتهي في
             usage_limit: حد الاستخدام
         promotion_coupon_generator_instruction:
-            amount: المبلغ
-            code_length: طول الكود
-            expires_at: تنتهي في
+            amount: الكمية
+            code_length: طول الرمز
+            expires_at: ينتهي في
             prefix: البادئة
             suffix: اللاحقة
             usage_limit: حد الاستخدام
         promotion_filter:
-            price_range: نطاق السعر
+            price_range: فلتر نطاق السعر
         promotion_rule:
-            cart_quantity: كمية العربة
+            cart_quantity: كمية السلة
             contains_product: يحتوي على منتج
             customer_group: مجموعة العملاء
-            has_at_least_one_from_taxons: يحتوي على واحد على الأقل من الفئات الضريبية
-            item_total: إجمالي العنصر
-            nth_order: الطلب رقم
-            shipping_country: دولة الشحن
+            has_at_least_one_from_taxons: يحتوي على تصنيف واحد على الأقل
+            item_total: إجمالي العناصر
+            nth_order: الطلب رقم N
+            shipping_country: بلد الشحن
             taxonomy: التصنيف
-            total_price_of_items_from_taxon: إجمالي سعر العناصر من الفئة الضريبية
+            total_price_of_items_from_taxon: إجمالي سعر العناصر من تصنيف معين
             cart_quantity_configuration:
                 count: العدد
-                equal: متساوي
+                equal: يساوي
             contains_product_configuration:
                 exclude: استبعاد
                 variants: المنتجات
@@ -79,5 +79,5 @@ sylius:
                 country: الدولة
             taxonomy_configuration:
                 exclude: استبعاد
-                taxons: الفئات الضريبية
+                taxons: التصنيفات
             type: النوع

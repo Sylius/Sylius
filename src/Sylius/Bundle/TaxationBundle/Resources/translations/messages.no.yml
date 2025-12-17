@@ -4,11 +4,13 @@
 sylius:
     form:
         tax_category:
-            name: Navn
-            description: Beskrivelse
+            description: 'Beskrivelse'
+            name: 'Navn'
         tax_rate:
-            category: Kategori
-            name: Navn
-            amount: Antall
-            included_in_price: Inkludert i prisen?
-            calculator: Kalkulator
+            amount: 'Beløp'
+            calculator: 'Kalkulator'
+            category: 'Kategori'
+            end_date: 'Sluttdato'
+            included_in_price: 'Inkludert i prisen?'
+            name: 'Navn'
+            start_date: 'Startdato'

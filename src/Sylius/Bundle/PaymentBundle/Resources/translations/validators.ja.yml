@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: 'カード名義人の名前は{{ limit }}文字以上で入力してください。'
+            not_blank: 'カード名義人の名前を入力してください。'
+        expiry_month:
+            max_range: 'クレジットカードの有効期限（月）は{{ min }}〜{{ max }}の間でなければなりません。'
+            min_range: 'クレジットカードの有効期限（月）は{{ min }}〜{{ max }}の間でなければなりません。'
+            not_blank: '有効期限（月）を選択してください。'
+        number:
+            not_blank: 'カード番号を入力してください。'
+            luhn: '入力されたクレジットカード番号は無効です。'
+        security_code:
+            not_blank: 'セキュリティコードを入力してください。'
+            max_length: 'クレジットカードのCVVコードは{{ limit }}桁以上でなければなりません。'
+            min_length: 'クレジットカードのCVVコードは{{ limit }}桁以下でなければなりません。'
+        expiry_year:
+            not_blank: '有効期限（年）を選択してください。'
+    gateway_config:
+        invalid_gateway_factory: 'ゲートウェイファクトリーが無効です。利用可能なファクトリーは{{ available_factories }}です。'
+        gateway_name:
+            not_blank: 'ゲートウェイ名を入力してください。'
+        factory_name:
+            not_blank: 'ゲートウェイファクトリー名を入力してください。'
+    payment:
+        currency_code:
+            not_valid: '入力した通貨コードは無効です。'
+        method:
+            not_blank: '支払方法を選択してください。'
+    payment_method:
+        gateway:
+            not_blank: '決済ゲートウェイを選択してください。'
+        name:
+            max_length: '支払方法名は{{ limit }}文字以内でなければなりません。'
+            min_length: '支払方法名は{{ limit }}文字以上で入力してください。'
+            not_blank: '支払方法名を入力してください。'
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: '手数料は{{ compared_value }}以上でなければなりません。'
+                not_blank: '手数料額を入力してください。'
+            percent:
+                max_range: '手数料率は{{ limit }}を超えることはできません。'
+                min_range: '手数料率は{{ limit }}未満にすることはできません。'
+                not_blank: '手数料率を入力してください。'
+        code:
+            max_length: 'コードは{{ limit }}文字以内でなければなりません。'
+            not_blank: '支払方法コードを入力してください。'
+            regex: '支払方法コードは英数字・ハイフン・アンダースコアのみ使用できます。'
+            unique: '指定されたコードの支払方法は既に存在します。'

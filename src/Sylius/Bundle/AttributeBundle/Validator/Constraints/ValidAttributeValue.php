@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 class ValidAttributeValue extends Constraint
 {
     public function getTargets(): string

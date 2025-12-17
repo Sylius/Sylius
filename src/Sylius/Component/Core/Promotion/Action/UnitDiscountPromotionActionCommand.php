@@ -33,6 +33,8 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
     }
 
     /**
+     * @param array<string, mixed> $configuration
+     *
      * @throws UnexpectedTypeException
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void

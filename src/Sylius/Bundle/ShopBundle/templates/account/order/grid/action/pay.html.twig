@@ -1,0 +1,7 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
+
+{% if data.paymentState == constant('Sylius\\Component\\Core\\OrderPaymentStates::STATE_AWAITING_PAYMENT') %}
+    {{ buttons.default(path, action.label, 'pay', action.options.icon|default('tabler:credit-card'), 'btn-sm btn-outline-gray') }}
+{% endif %}

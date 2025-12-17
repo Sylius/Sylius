@@ -37,6 +37,5 @@ sylius:
             scopes:
                 all: Alla
             select: Välj
-            select_scope: Välj omfattning
         zone_member:
             select: Välj

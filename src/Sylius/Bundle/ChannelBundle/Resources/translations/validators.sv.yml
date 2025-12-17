@@ -4,8 +4,14 @@
 sylius:
     channel:
         code:
+            max_length: Koden får inte överstiga {{ limit }} tecken.
             not_blank: Var god ange kanalkod.
             regex: Kanalkod kan enbart bestå av bokstäver, siffror, bindestreck och understreck.
             unique: Kanalkoden måste vara unik.
         name:
             not_blank: Var god ange kanalnamn.
+            max_length: Kanalnamnet får inte överstiga {{ limit }} tecken.
+        color:
+            max_length: Färgen får inte överstiga {{ limit }} tecken.
+        hostname:
+            max_length: Värdnamnet får inte överstiga {{ limit }} tecken.

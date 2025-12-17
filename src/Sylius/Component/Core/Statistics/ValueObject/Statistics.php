@@ -15,14 +15,14 @@ namespace Sylius\Component\Core\Statistics\ValueObject;
 
 class Statistics
 {
-    /** @param array<array{total: int, period: string}> $sales */
+    /** @param array<array{period: string, ...}> $sales */
     public function __construct(
         private array $sales,
         private BusinessActivitySummary $businessActivitySummary,
     ) {
     }
 
-    /** @return array<array{total: int, period: string}> */
+    /** @return array<array{period: string, ...}> */
     public function getSales(): array
     {
         return $this->sales;

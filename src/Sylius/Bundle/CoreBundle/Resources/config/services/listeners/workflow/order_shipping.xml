@@ -17,12 +17,9 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="false" />
-
-        <service id="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderShipping\ResolveOrderStateListener">
+        <service id="sylius.listener.workflow.order_shipping.resolve_order_state" class="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderShipping\ResolveOrderStateListener">
             <argument type="service" id="sylius.state_resolver.order" />
             <tag name="kernel.event_listener" event="workflow.sylius_order_shipping.completed.ship" priority="100"/>
         </service>
-        <service id="sylius.listener.workflow.order_shipping.resolve_order_state" alias="Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderShipping\ResolveOrderStateListener" />
     </services>
 </container>

@@ -1,0 +1,34 @@
+{% macro table_header(grid, field, attributes) %}
+    {% from _self import link %}
+
+    {% set order = grid.getSortingOrder(field.name) %}
+
+    {% if grid.isSortedBy(field.name) %}
+        <th class="sortable sorted {{ order == 'desc' ? 'descending' : 'ascending' }} sylius-table-column-{{ field.name }}">
+            <a class="link-reset" href="{{ link(field.name, attributes, (order == 'desc' ? 'asc' : 'desc'), grid.parameters.all) }}">
+                {{ field.label|trans }}
+
+                {% if order == 'desc' %}
+                    {{ ux_icon('tabler:chevron-down') }}
+                {% endif %}
+                {% if order == 'asc' %}
+                    {{ ux_icon('tabler:chevron-up') }}
+                {% endif %}
+            </a>
+        </th>
+    {% else %}
+        <th class="sortable sylius-table-column-{{ field.name }}">
+            <a class="link-reset" href="{{ link(field.name, attributes, order, grid.parameters.all) }}">
+                {{ field.label|trans }}
+                {{ ux_icon('tabler:selector') }}
+            </a>
+        </th>
+    {% endif %}
+{% endmacro %}
+
+{% macro link(field_name, attributes, order, parameters) %}
+    {% set params = attributes.all('_route_params')|merge(parameters) %}
+    {% set sorting = {'sorting': {(field_name): (order)}} %}
+
+    {{ path(attributes.get('_route'), params|merge(sorting)|merge({'page': 1})) }}
+{% endmacro %}

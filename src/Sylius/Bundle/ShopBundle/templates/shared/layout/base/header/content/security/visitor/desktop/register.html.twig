@@ -1,0 +1,11 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+<small aria-hidden="true" role="presentation" class="text-black px-1">|</small>
+{{ buttons.transparent(
+    path('sylius_shop_register'),
+    'sylius.ui.register'|trans,
+    'register-page-button',
+    null,
+    null,
+    { 'role': 'menuitem', 'aria-label': 'sylius.ui.register'|trans }
+) }}

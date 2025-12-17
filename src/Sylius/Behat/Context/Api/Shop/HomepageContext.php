@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -39,7 +39,7 @@ final class HomepageContext implements Context
     public function iCheckLatestProducts(): void
     {
         $this->client->customAction(
-            sprintf('%s/shop/products?itemsPerPage=3&order[createdAt]=desc', $this->apiUrlPrefix),
+            sprintf('%s/shop/products?itemsPerPage=4&order[createdAt]=desc', $this->apiUrlPrefix),
             HttpRequest::METHOD_GET,
         );
     }

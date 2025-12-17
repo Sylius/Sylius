@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        review:
+            author: Auteur(e)
+            comment: Commentaire
+            header: Ajouter un commentaire
+            rating: Évaluation
+            status:
+                approved: Approuvé(e)
+                label: Statut
+                new: Nouveau
+                rejected: Refusé(e)
+            submit: Soumettre
+            title: Titre

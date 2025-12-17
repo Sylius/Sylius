@@ -1,0 +1,8 @@
+{% set form = hookable_metadata.context.form %}
+{% set locale = hookable_metadata.context.locale %}
+
+<div class="col-12 col-md-6">
+    <div class="mb-3 field">
+        {{ form_row(form.slug) }}
+    </div>
+</div>

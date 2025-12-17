@@ -3,12 +3,12 @@
 
 sylius:
     user:
-        expire_password_reset_token: 'Il token di reimpostazione della password è scaduto.'
-        change_password: 'La password è stata modificata con successo!'
-        reset_password: 'La password è stata reimpostata correttamente!'
-        reset_password_request: 'Se l''e-mail che avete specificato esiste nel nostro sistema, ti abbiamo inviato le istruzioni su come resettare la password.'
-        verify_email: 'Il tuo indirizzo email è stato verificato correttamente.'
+        expire_password_reset_token: 'Il token per il reset della password è scaduto.'
+        change_password: 'La tua password è stata cambiata con successo!'
+        reset_password: 'La tua password è stata reimpostata con successo!'
+        reset_password_request: 'Se l''email che hai specificato esiste nel nostro sistema, abbiamo inviato lì le istruzioni su come reimpostare la tua password.'
+        verify_email: 'La tua email è stata verificata con successo.'
         verify_email_by_invalid_token: 'Il token di verifica non è valido.'
         verify_email_request: 'Un''email con il link di verifica è stata inviata al tuo indirizzo email.'
-        verify_no_user: 'Non c''è nessun utente connesso.'
-        verify_verified_email: 'Il tuo indirizzo email è già verificato.'
+        verify_no_user: 'Non c''è alcun utente loggato.'
+        verify_verified_email: 'La tua email è già verificata.'

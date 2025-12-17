@@ -4,31 +4,35 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: Numele titularului de card
-            expiry_month: Luna expirării
-            expiry_year: Anul expirării
-            number: Numărul cardului
-            security_code: Codul de securitate (CVV)
-            type: Tipul cardului
+            cardholder_name: 'Numele titularului'
+            expiry_month: 'Luna expirării'
+            expiry_year: 'Anul expirării'
+            number: 'Numărul cardului'
+            security_code: 'Cod de securitate (CVV)'
+            type: 'Tip card'
         payment:
-            amount: Suma de plată
-            method: Mod de plată
+            amount: 'Sumă plată'
+            method: 'Metoda de plată'
             state:
-                header: Statusul plății
-                checkout: Finalizare comandă
-                completed: Finalizat
-                authorized: Autorizată
-                failed: Eșuată
-                new: Nou
-                pending: În așteptare
-                processing: În curs de procesare
-                unknown: Necunoscut
-                void: Nulă
-                cancelled: Anulată
-                refunded: Rambursată
+                header: 'Starea plății'
+                checkout: 'Finalizare'
+                completed: 'Finalizată'
+                authorized: 'Autorizată'
+                failed: 'Eșuată'
+                new: 'Nouă'
+                pending: 'În așteptare'
+                processing: 'În procesare'
+                unknown: 'Necunoscută'
+                void: 'Invalidă'
+                cancelled: 'Anulată'
+                refunded: 'Rambursată'
         payment_method:
-            description: Descriere
-            enabled: Activată?
-            instructions: Instrucțiuni
-            name: Nume produs
-            position: Poziție
+            description: 'Descriere'
+            enabled: 'Activat'
+            instructions: 'Instrucțiuni'
+            name: 'Nume'
+            position: 'Poziție'
+        gateway_config:
+            type: 'Tip'
+    gateway_factory:
+        offline: 'Offline'

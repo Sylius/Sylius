@@ -3,12 +3,12 @@
 
 sylius:
     user:
-        expire_password_reset_token: 'Denna lösenordsåterställningsnyckel har gått ut.'
-        change_password: 'Ditt lösenord har ändrats!'
-        reset_password: 'Ditt lösenord har återställts!'
-        reset_password_request: 'Om den e-post som du har angett finns i våra system, har vi skickat en instruktion på hur du återställer ditt lösenord.'
-        verify_email: 'Din e-postadress har verifierats.'
-        verify_email_by_invalid_token: 'Verifieringsnyckeln är ogiltig.'
-        verify_email_request: 'Ett e-postmeddelande med verifieringslänken har skickats till din e-postadress.'
-        verify_no_user: 'Det finns ingen inloggad användare.'
-        verify_verified_email: 'Din e-postadress är redan verifierad.'
+        expire_password_reset_token: 'Tokenet för lösenordsåterställning har gått ut.'
+        change_password: 'Ditt lösenord har ändrats.'
+        reset_password: 'Ditt lösenord har återställts.'
+        reset_password_request: 'Om e-postadressen du angav finns i vårt system har vi skickat instruktioner för hur du återställer ditt lösenord.'
+        verify_email: 'Din e-post har verifierats.'
+        verify_email_by_invalid_token: 'Verifieringstoken är ogiltig.'
+        verify_email_request: 'Ett e-postmeddelande med en verifieringslänk har skickats till din adress.'
+        verify_no_user: 'Ingen användare är inloggad.'
+        verify_verified_email: 'Din e-post är redan verifierad.'

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Controller;
 
-use ApiPlatform\Symfony\Validator\Exception\ValidationException;
 use Sylius\Bundle\ApiBundle\Query\GetStatistics;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\Code;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,6 +24,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -59,7 +59,7 @@ final class GetStatisticsAction
 
         $violations = $this->validator->validate($parameters, $this->constraints);
         if (count($violations) > 0) {
-            throw new ValidationException($violations);
+            return $this->createValidationErrorResponse($violations);
         }
 
         $interval = $parameters['interval'];
@@ -130,5 +130,21 @@ final class GetStatisticsAction
         }
 
         return $intervals;
+    }
+
+    private function createValidationErrorResponse(ConstraintViolationListInterface $violations): JsonResponse
+    {
+        $errors = [];
+        foreach ($violations as $violation) {
+            $errors[] = [
+                'propertyPath' => $violation->getPropertyPath(),
+                'message' => $violation->getMessage(),
+            ];
+        }
+
+        return new JsonResponse([
+            'status' => Response::HTTP_UNPROCESSABLE_ENTITY,
+            'violations' => $errors,
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

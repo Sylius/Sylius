@@ -1,0 +1,30 @@
+{
+  "name": "@sylius/shop-bundle",
+  "license": "MIT",
+  "author": "Sylius Sp. z o.o.",
+  "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/SyliusShopBundle.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
+  "symfony": {
+    "controllers": {
+      "api-login": {
+        "main": "controllers/ApiLoginController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      }
+    }
+  },
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  }
+}

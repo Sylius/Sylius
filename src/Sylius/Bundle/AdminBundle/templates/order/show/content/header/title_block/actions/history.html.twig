@@ -1,0 +1,8 @@
+{% deprecated 'The "history.html.twig" template is deprecated. Please use list/history.html.twig' %}
+
+{% set resource = hookable_metadata.context.resource %}
+
+<a class="dropdown-item" href="{{ path('sylius_admin_order_history', {'id': resource.id}) }}">
+    {{ ux_icon('tabler:history', {'class': 'icon dropdown-item-icon'}) }}
+    {{ 'sylius.ui.history'|trans }}
+</a>

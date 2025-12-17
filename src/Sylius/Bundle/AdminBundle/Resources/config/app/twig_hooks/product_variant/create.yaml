@@ -1,0 +1,187 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.product_variant.create.content':
+            form:
+                component: 'sylius_admin:product_variant:form'
+                props:
+                    resource: '@=_context.resource'
+                    product: '@=_context.resource.getProduct()'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/product_variant/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/product_variant/form/content/create/header/breadcrumbs.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form':
+            side_navigation:
+                template: '@SyliusAdmin/product_variant/form/side_navigation.html.twig'
+                priority: 100
+            sections:
+                template: '@SyliusAdmin/product_variant/form/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.side_navigation':
+            general:
+                template: '@SyliusAdmin/product_variant/form/side_navigation/general.html.twig'
+                configuration:
+                    active: true
+                priority: 400
+            channel_pricing:
+                template: '@SyliusAdmin/product_variant/form/side_navigation/channel_pricing.html.twig'
+                priority: 300
+            inventory:
+                template: '@SyliusAdmin/product_variant/form/side_navigation/inventory.html.twig'
+                priority: 200
+            translations:
+                template: '@SyliusAdmin/product_variant/form/side_navigation/translations.html.twig'
+                priority: 100
+            taxes:
+                template: '@SyliusAdmin/product_variant/form/side_navigation/taxes.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/product_variant/form/sections/general.html.twig'
+                priority: 400
+            channel_pricing:
+                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing.html.twig'
+                priority: 300
+            inventory:
+                template: '@SyliusAdmin/product_variant/form/sections/inventory.html.twig'
+                priority: 200
+            translations:
+                template: '@SyliusAdmin/product_variant/form/sections/translations.html.twig'
+                priority: 100
+            taxes:
+                template: '@SyliusAdmin/product_variant/form/sections/taxes.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.general':
+            header:
+                template: '@SyliusAdmin/product_variant/form/sections/general/header.html.twig'
+                priority: 100
+            body:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.general.body':
+            code_and_enabled:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/code_and_enabled.html.twig'
+                priority: 300
+            shipping:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/shipping.html.twig'
+                priority: 200
+            options:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/options.html.twig'
+                priority: 100
+            properties:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/properties.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.general.body.code_and_enabled':
+            code:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/code_and_enabled/code.html.twig'
+                priority: 100
+            enabled:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/code_and_enabled/enabled.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.general.body.shipping':
+            category:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/shipping/category.html.twig'
+                priority: 100
+            required:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/shipping/required.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.general.body.options':
+            label:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/options/label.html.twig'
+                priority: 100
+            list:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/options/list.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.general.body.properties':
+            header:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/properties/header.html.twig'
+                priority: 400
+            height:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/properties/height.html.twig'
+                priority: 300
+            width:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/properties/width.html.twig'
+                priority: 200
+            depth:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/properties/depth.html.twig'
+                priority: 100
+            weight:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/properties/weight.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.channel_pricing':
+            header:
+                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/header.html.twig'
+                priority: 200
+            info:
+                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info.html.twig'
+                priority: 100
+            accordion:
+                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/accordion.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.channel_pricing.info':
+            price_details:
+                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/price_details.html.twig'
+                priority: 200
+            original_price_details:
+                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/original_price_details.html.twig'
+                priority: 100
+            minimum_price_details:
+                template: '@SyliusAdmin/product_variant/form/sections/channel_pricing/info/minimum_price_details.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.inventory':
+            header:
+                template: '@SyliusAdmin/product_variant/form/sections/inventory/header.html.twig'
+                priority: 100
+            body:
+                template: '@SyliusAdmin/product_variant/form/sections/inventory/body.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.inventory.body':
+            on_hand:
+                template: '@SyliusAdmin/product_variant/form/sections/inventory/body/on_hand.html.twig'
+                priority: 200
+            tracked:
+                template: '@SyliusAdmin/product_variant/form/sections/inventory/body/tracked.html.twig'
+                priority: 100
+            version:
+                template: '@SyliusAdmin/product_variant/form/sections/inventory/body/version.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.translations':
+            header:
+                template: '@SyliusAdmin/product_variant/form/sections/translations/header.html.twig'
+                priority: 100
+            list:
+                template: '@SyliusAdmin/product_variant/form/sections/translations/list.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.translations.list':
+            name:
+                template: '@SyliusAdmin/product_variant/form/sections/translations/list/name.html.twig'
+                priority: 0
+
+        'sylius_admin.product_variant.create.content.form.sections.taxes':
+            header:
+                template: '@SyliusAdmin/product_variant/form/sections/taxes/header.html.twig'
+                priority: 100
+            body:
+                template: '@SyliusAdmin/product_variant/form/sections/taxes/body.html.twig'
+                priority: 0

@@ -27,6 +27,8 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
     }
 
     /**
+     * @return array<ProductOptionValueInterface>
+     *
      * @throws UnexpectedTypeException
      */
     public function transform($value): array
@@ -62,7 +64,7 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
     }
 
     /**
-     * @param (ProductOptionValueInterface|null)[] $optionValues
+     * @param array<ProductOptionValueInterface> $optionValues
      *
      * @throws TransformationFailedException
      */

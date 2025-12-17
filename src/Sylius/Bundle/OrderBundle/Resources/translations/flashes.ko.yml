@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    cart:
+        add_item: '상품이 장바구니에 추가되었습니다'
+        cannot_modify: '수정하려는 장바구니는 이미 주문이 제출되어 변경할 수 없습니다.'
+        not_recalculated: '장바구니에 잘못된 값이 있어 합계가 다시 계산되지 않았습니다.'
+        remove_item: '상품이 장바구니에서 제거되었습니다'
+        save: '장바구니가 성공적으로 업데이트되었습니다'

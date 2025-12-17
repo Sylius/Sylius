@@ -3,5 +3,8 @@
 
 sylius:
     ui:
-        item.choice: '{count, plural, =0 {} one {, 1 item} other {# items}}'
-        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Deze klant heeft geen bestelling geplaatst} one {Deze klant heeft een bestelling geplaatst} other {Over het geheel genomen heeft deze klant # bestellingen geplaatst via alle kanalen}}'
+        item.choice: '{count, plural, =0 {} one {, 1 item} other {, # items}}'
+        lowest_price_days_before_discount_was: '{days, plural, 
+            one {De laagste prijs van # dag voor de huidige korting was {price}} 
+            other {De laagste prijs van # dagen voor de huidige korting was {price}}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Deze klant heeft geen bestellingen geplaatst} one {Deze klant heeft 1 bestelling geplaatst} other {In totaal heeft deze klant # bestellingen geplaatst over alle kanalen}}'

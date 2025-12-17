@@ -13,16 +13,17 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ProductTaxonsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_a_product_taxon(): void
     {
-        $fixtures = $this->loadFixturesFromFiles(['channel.yaml', 'product/product_taxon.yaml']);
+        $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_taxon.yaml']);
 
         /** @var ProductTaxonInterface $productTaxon */
         $productTaxon = $fixtures['product_mug_taxon_mugs'];

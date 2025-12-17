@@ -11,18 +11,17 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\OrderBundle\Tests;
+namespace Tests\Sylius\Bundle\OrderBundle;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class SyliusOrderBundleTest extends WebTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function its_services_are_initializable(): void
     {
         /** @var ContainerBuilder $container */

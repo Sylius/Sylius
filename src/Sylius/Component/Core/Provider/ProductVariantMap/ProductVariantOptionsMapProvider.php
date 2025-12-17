@@ -27,6 +27,7 @@ final class ProductVariantOptionsMapProvider implements ProductVariantMapProvide
         return $data;
     }
 
+    /** @param array<string, mixed> $context */
     public function supports(ProductVariantInterface $variant, array $context): bool
     {
         return !$variant->getOptionValues()->isEmpty();
