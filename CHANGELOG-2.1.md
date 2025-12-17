@@ -1,5 +1,41 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.9 (2025-12-16)
+
+#### Details
+
+- [#18595](https://github.com/Sylius/Sylius/pull/18595) Pin Symfony versions to tilde constraints in CI ([@Rafikooo](https://github.com/Rafikooo))
+- [#18576](https://github.com/Sylius/Sylius/pull/18576) [Behat] Migrate admin @javascript tags to @mink:chromedriver ([@Rafikooo](https://github.com/Rafikooo))
+- [#18596](https://github.com/Sylius/Sylius/pull/18596) [Shop] Remove test attribute from order summary table ([@Rafikooo](https://github.com/Rafikooo))
+- [#18592](https://github.com/Sylius/Sylius/pull/18592) Introduce `Symfony 7.4` compatibility ([@Rafikooo](https://github.com/Rafikooo))
+- [#18587](https://github.com/Sylius/Sylius/pull/18587) Fix packages CI workflow and CoreBundle tests ([@Rafikooo](https://github.com/Rafikooo))
+- [#18608](https://github.com/Sylius/Sylius/pull/18608) Remove 2.0 branch references from CI workflows ([@Rafikooo](https://github.com/Rafikooo))
+- [#18605](https://github.com/Sylius/Sylius/pull/18605) [Behat] Show de errors only when scenario fails ([@Rafikooo](https://github.com/Rafikooo))
+- [#18607](https://github.com/Sylius/Sylius/pull/18607) [CI] Allow triggering full CI via branch name prefix ([@Rafikooo](https://github.com/Rafikooo))
+- [#18604](https://github.com/Sylius/Sylius/pull/18604) Fix some deprecations ([@Rafikooo](https://github.com/Rafikooo))
+- [#18609](https://github.com/Sylius/Sylius/pull/18609) [Behat] Migrate `cart` scenarios to chromedriver ([@Rafikooo](https://github.com/Rafikooo))
+- [#18602](https://github.com/Sylius/Sylius/pull/18602) [Behat] Migrate shop `promotion` scenarios to chromedriver ([@Rafikooo](https://github.com/Rafikooo))
+- [#16863](https://github.com/Sylius/Sylius/pull/16863) [Unit] Add PHPUnit-Like Array Difference Visualization ([@Rafikooo](https://github.com/Rafikooo))
+- [#18611](https://github.com/Sylius/Sylius/pull/18611) [Admin][Taxon] Add visual distinction for disabled taxon ([@Wojdylak](https://github.com/Wojdylak))
+- [#18613](https://github.com/Sylius/Sylius/pull/18613) [CI][Robo] Fix packages workflow for PHP 8.4 ([@Rafikooo](https://github.com/Rafikooo))
+- [#18612](https://github.com/Sylius/Sylius/pull/18612) [Admin] Fix StatisticsComponent to use ClockInterface for date calculations ([@Rafikooo](https://github.com/Rafikooo))
+- [#18616](https://github.com/Sylius/Sylius/pull/18616) [Behat] Temporarily disable hanging cart inventory UI test ([@Rafikooo](https://github.com/Rafikooo))
+- [#18617](https://github.com/Sylius/Sylius/pull/18617) [Admin] Fix shipping address form hooks priorities ([@Rafikooo](https://github.com/Rafikooo))
+- [#18619](https://github.com/Sylius/Sylius/pull/18619) [Docs] Bust GitHub camo cache for README image ([@Rafikooo](https://github.com/Rafikooo))
+- [#18622](https://github.com/Sylius/Sylius/pull/18622) Remove additional spacings in admin sidebar menu ([@bartek-sek](https://github.com/bartek-sek))
+- [#18626](https://github.com/Sylius/Sylius/pull/18626) [CI] Remove pull_request trigger from full CI workflows ([@Rafikooo](https://github.com/Rafikooo))
+- [#18603](https://github.com/Sylius/Sylius/pull/18603) [CI] Split Chromedriver tests into parallel jobs ([@Rafikooo](https://github.com/Rafikooo))
+- [#18403](https://github.com/Sylius/Sylius/pull/18403) TASK: [2.1] [AttributeBundle] add missing translations for float attributes type ([@crydotsnake](https://github.com/crydotsnake))
+- [#18404](https://github.com/Sylius/Sylius/pull/18404) TASK: [2.1] [Maintenance] adjust translation guide in github issue template config ([@crydotsnake](https://github.com/crydotsnake))
+- [#18630](https://github.com/Sylius/Sylius/pull/18630) [Admin] Fix cache TTL in `HubNotificationProvider` and tests ([@Rafikooo](https://github.com/Rafikooo))
+- [#18593](https://github.com/Sylius/Sylius/pull/18593) Updating polish translations using AI ([@SzymonFilipek](https://github.com/SzymonFilipek))
+- [#18629](https://github.com/Sylius/Sylius/pull/18629) Remove `choice_value` from autocomplete types to fix performance issue ([@Rafikooo](https://github.com/Rafikooo))
+- [#18191](https://github.com/Sylius/Sylius/pull/18191) feat ([@maximehuran](https://github.com/maximehuran))
+- [#18639](https://github.com/Sylius/Sylius/pull/18639) [Admin] Fix choice_label override via extra_options in autocomplete types ([@Wojdylak](https://github.com/Wojdylak))
+- [#18641](https://github.com/Sylius/Sylius/pull/18641) [Admin] Use specific block names in form themes ([@Wojdylak](https://github.com/Wojdylak))
+- [#18635](https://github.com/Sylius/Sylius/pull/18635) [RFC] Add telemetry feature 1.14 ([@TheMilek](https://github.com/TheMilek))
+- [#18642](https://github.com/Sylius/Sylius/pull/18642) Remove unnecessary h1 element ([@bartek-sek](https://github.com/bartek-sek))
+
 ## v2.1.8 (2025-11-27)
 
 #### Details
