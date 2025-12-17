@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Telemetry;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /** @internal */
 interface TelemetrySendManagerInterface
 {
-    public function sendIfNeeded(): void;
+    public function sendIfNeeded(Request $request): void;
 }

@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Telemetry;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /** @internal */
 interface TelemetryOrchestratorInterface
 {
     /**
      * @return array<string, mixed>
      */
-    public function getData(): array;
+    public function getData(Request $request): array;
 }

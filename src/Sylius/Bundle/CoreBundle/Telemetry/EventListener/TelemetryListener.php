@@ -34,7 +34,7 @@ class TelemetryListener
         }
 
         try {
-            $this->telemetrySendManager->sendIfNeeded();
+            $this->telemetrySendManager->sendIfNeeded($request);
         } catch (\Throwable) {
         }
     }
