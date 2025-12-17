@@ -261,7 +261,7 @@
             "require": "^7.2"
         },
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.2-dev"
         }
     },
     "autoload": {
