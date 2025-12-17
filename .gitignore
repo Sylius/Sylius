@@ -35,6 +35,7 @@
 .env.*.local
 .env.local
 .env.local.php
+/config/reference.php
 ###< symfony/framework-bundle ###
 
 ###> symfony/webpack-encore-bundle ###
