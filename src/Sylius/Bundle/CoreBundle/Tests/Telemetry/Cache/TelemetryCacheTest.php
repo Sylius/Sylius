@@ -20,6 +20,7 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 final class TelemetryCacheTest extends TestCase
 {
     private ArrayAdapter $cache;
+
     private TelemetryCache $telemetryCache;
 
     protected function setUp(): void

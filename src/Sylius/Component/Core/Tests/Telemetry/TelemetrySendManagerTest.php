@@ -17,8 +17,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Telemetry\Cache\TelemetryCacheInterface;
 use Sylius\Component\Core\Telemetry\Sender\TelemetrySenderInterface;
-use Sylius\Component\Core\Telemetry\TelemetrySendManager;
 use Sylius\Component\Core\Telemetry\TelemetryOrchestratorInterface;
+use Sylius\Component\Core\Telemetry\TelemetrySendManager;
 
 final class TelemetrySendManagerTest extends TestCase
 {

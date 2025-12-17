@@ -56,7 +56,7 @@ final class EnvironmentDataProviderTest extends TestCase
         $data = $this->provider->provide();
 
         self::assertInstanceOf(EnvironmentData::class, $data);
-        self::assertSame(PHP_OS_FAMILY, $data->os);
+        self::assertSame(\PHP_OS_FAMILY, $data->os);
     }
 
     public function test_it_returns_boolean_for_docker(): void

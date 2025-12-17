@@ -79,6 +79,7 @@ final class BusinessDataCollector implements TelemetryDataCollectorInterface
 
     /**
      * @param array<string, mixed> $normalized
+     *
      * @return array{0: array<string, mixed>, 1: array<string, mixed>}
      */
     private function separateMetrics(array $normalized): array

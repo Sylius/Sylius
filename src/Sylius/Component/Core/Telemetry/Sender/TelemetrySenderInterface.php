@@ -18,6 +18,7 @@ interface TelemetrySenderInterface
 {
     /**
      * @param array<string, mixed> $telemetryData
+     *
      * @return bool True if sent successfully, false otherwise
      */
     public function send(array $telemetryData): bool;

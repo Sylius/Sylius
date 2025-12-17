@@ -462,6 +462,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
     /**
      * @test
+     *
      * @dataProvider telemetryDisabledEnvValueProvider
      */
     public function it_does_not_load_telemetry_services_when_disabled_via_env_variable(string $envValue): void
@@ -532,6 +533,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
     /**
      * @test
+     *
      * @dataProvider telemetryEnvironmentProvider
      */
     public function it_loads_or_skips_telemetry_services_based_on_environment(string $env, bool $shouldLoad): void
@@ -597,6 +599,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
     /**
      * @test
+     *
      * @dataProvider granularTelemetryEnvProvider
      */
     public function it_disables_granular_telemetry_via_env_variable(string $envVar, string $paramName, string $envValue): void

@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\PaymentMethodsDataProvi
 final class PaymentMethodsDataProviderTest extends TestCase
 {
     private Connection $connection;
+
     private PaymentMethodsDataProvider $provider;
 
     protected function setUp(): void

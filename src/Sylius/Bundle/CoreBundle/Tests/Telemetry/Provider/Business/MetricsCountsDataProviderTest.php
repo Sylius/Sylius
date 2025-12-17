@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\MetricsCountsDataProvid
 final class MetricsCountsDataProviderTest extends TestCase
 {
     private Connection $connection;
+
     private MetricsCountsDataProvider $provider;
 
     protected function setUp(): void
