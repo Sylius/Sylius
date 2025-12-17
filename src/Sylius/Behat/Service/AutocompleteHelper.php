@@ -40,7 +40,7 @@ abstract class AutocompleteHelper
         foreach ($values as $value) {
             $element->find('css', sprintf('div.item:contains("%s")', $value))->click();
 
-            JQueryHelper::waitForAsynchronousActionsToFinish($session);
+            DriverHelper::waitForAsynchronousActionsToFinish($session);
         }
 
         static::waitForElementToBeVisible($session, $element);
@@ -56,35 +56,34 @@ abstract class AutocompleteHelper
         $elementToRemove = $element->find('css', sprintf('a.ui.label:contains("%s")', $value));
         $elementToRemove->find('css', 'i.delete')->click();
 
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
+        DriverHelper::waitForAsynchronousActionsToFinish($session);
     }
 
     public static function isValueVisible(Session $session, NodeElement $element, $value): bool
     {
-        static::activateAutocompleteDropdown($session, $element);
-
         $result = $element->find('css', sprintf('div.item:contains("%s")', $value));
-
-        static::waitForElementToBeVisible($session, $element);
 
         return null !== $result;
     }
 
     private static function activateAutocompleteDropdown(Session $session, NodeElement $element)
     {
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
+        DriverHelper::waitForAsynchronousActionsToFinish($session);
 
         $element->click();
 
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
+        DriverHelper::waitForAsynchronousActionsToFinish($session);
         static::waitForElementToBeVisible($session, $element);
     }
 
     private static function waitForElementToBeVisible(Session $session, NodeElement $element)
     {
+        $escapedXPath = str_replace('"', '\"', $element->getXpath());
+
         $session->wait(5000, sprintf(
-            '$(document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).dropdown("is visible")',
-            str_replace('"', '\"', $element->getXpath()),
+            'document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeStep.nodeType === 1 && document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeStep.offsetParent !== null',
+            $escapedXPath,
+            $escapedXPath,
         ));
     }
 }

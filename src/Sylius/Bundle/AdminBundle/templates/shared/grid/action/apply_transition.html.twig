@@ -1,0 +1,18 @@
+{% set labeled = options.labeled is defined ? options.labeled : true %}
+{% set show_disabled = options.show_disabled is defined ? options.show_disabled : true %}
+
+{% if sylius_sm_can(data, options.graph, options.transition) %}
+    <form action="{{ path(options.link.route, options.link.parameters) }}" method="post" {{ sylius_test_html_attribute('action', action.name) }}>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
+        <input type="hidden" name="_method" value="PUT">
+        <button class="btn {{ options.class|default }}" {% if labeled and 'btn-icon' in options.class|default %}data-bs-toggle="tooltip" data-bs-title="{{ action.label|trans }}"{% endif %}>
+            {% if action.icon %}{{ ux_icon(action.icon) }}{% endif %}
+            {% if labeled and 'btn-icon' not in options.class|default %}{{ action.label|trans }}{% endif %}
+        </button>
+    </form>
+{% elseif show_disabled %}
+    <button class="btn {{ options.class|default }} btn-ghost-dark disabled">
+        {% if action.icon %}{{ ux_icon(action.icon) }}{% endif %}
+        {% if labeled and 'btn-icon' not in options.class|default %}{{ action.label|trans }}{% endif %}
+    </button>
+{% endif %}

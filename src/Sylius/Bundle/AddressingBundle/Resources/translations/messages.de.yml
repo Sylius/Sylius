@@ -4,39 +4,39 @@
 sylius:
     form:
         address:
-            city: Stadt
-            company: Firma
-            country: Land
-            first_name: Vorname
-            last_name: Nachname
-            phone_number: Telefonnummer
-            postcode: PLZ
-            street: Straße und Hausnummer
-            province: Bundesland
-            zone: Versandgebiet
+            city: 'Stadt'
+            company: 'Unternehmen'
+            country: 'Land'
+            first_name: 'Vorname'
+            last_name: 'Nachname'
+            phone_number: 'Telefonnummer'
+            postcode: 'Postleitzahl'
+            street: 'Straße und Hausnummer'
+            province: 'Bundesland'
+            zone: 'Versandzone'
         country:
-            add_province: Bundesland hinzufügen
-            name: Name
-            provinces: Bundesländer
-            select: Land auswählen
-            enabled: Aktiviert
+            add_province: 'Bundesland hinzufügen'
+            name: 'Name des Landes'
+            provinces: 'Bundesländer'
+            select: 'Land auswählen'
+            enabled: 'Aktiviert'
         province:
-            name: Name
-            abbreviation: Abkürzung
-            select: Bundesland auswählen
+            name: 'Name des Bundeslands'
+            abbreviation: 'Abkürzung'
+            select: 'Bundesland auswählen'
         zone:
-            add_member: Mitglied hinzufügen
-            members: Mitglieder
-            name: Ländername
-            type: Aktionsregeltyp
+            add_member: 'Mitglied hinzufügen'
+            members: 'Mitglieder'
+            name: 'Zonenname'
+            type: 'Typ der Aktionsregel'
             types:
-                country: Land
-                province: Bundesland
-                zone: Gebiet
-            scope: Umfang
+                country: 'Land'
+                province: 'Bundesland'
+                zone: 'Zone'
+            scope: 'Geltungsbereich'
             scopes:
-                all: Alle
-            select: Gebiet auswählen
-            select_scope: Bereich wählen
+                all: 'Alle'
+            select: 'Zone auswählen'
+            select_scope: 'Geltungsbereich auswählen'
         zone_member:
-            select: Mitglied auswählen
+            select: 'Mitglied auswählen'

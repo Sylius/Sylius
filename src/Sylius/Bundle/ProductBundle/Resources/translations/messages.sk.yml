@@ -4,28 +4,28 @@
 sylius:
     form:
         product:
-            name: Názov
-            description: Popis
-            attributes: Produktové vlastnosti
-            options: Voľby
-            meta_keywords: Meta kľúčové slová
-            meta_description: Meta popis
-            slug: Slug
-            taxons: Kategórie
+            name: 'Názov'
+            description: 'Popis'
+            attributes: 'Atribúty'
+            options: 'Možnosti'
+            meta_keywords: 'Meta kľúčové slová'
+            meta_description: 'Meta popis'
+            slug: 'Slug'
+            taxons: 'Taxóny'
         product_variant:
-            name: Názov
+            name: 'Názov'
         association_type:
-            name: Názov
-            translations: Preklady
+            name: 'Názov'
+            translations: 'Preklady'
         association:
-            type: Typ priradenia
-            product: Priradený produkt
+            type: 'Typ asociácie'
+            product: 'Priradený produkt'
         variant:
-            name: Názov
+            name: 'Názov'
         option:
-            name: Názov
-            position: Pozícia
-            values: Možné hodnoty
+            name: 'Názov'
+            position: 'Pozícia'
+            values: 'Možné hodnoty'
         option_value:
-            add_value: Pridať hodnotu
-            value: Hodnota
+            add_value: 'Pridať hodnotu'
+            value: 'Hodnota'

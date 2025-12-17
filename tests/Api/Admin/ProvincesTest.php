@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,7 +23,7 @@ final class ProvincesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_a_province(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
@@ -33,7 +34,7 @@ final class ProvincesTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/provinces/%s', $province->getCode()),
+            uri: sprintf('/api/v2/admin/countries/%s/provinces/%s', $province->getCountry()->getCode(), $province->getCode()),
             server: $header,
         );
 
@@ -44,7 +45,7 @@ final class ProvincesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_existing_province(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
@@ -55,7 +56,7 @@ final class ProvincesTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'PUT',
-            uri: '/api/v2/admin/provinces/' . $province->getCode(),
+            uri: sprintf('/api/v2/admin/countries/%s/provinces/%s', $province->getCountry()->getCode(), $province->getCode()),
             server: $header,
             content: json_encode([
                 'abbreviation' => 'Minn.',

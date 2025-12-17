@@ -17,5 +17,6 @@ use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
 interface DiscountApplicationCriteriaInterface
 {
+    /** @param array<string, mixed> $context */
     public function isApplicable(CatalogPromotionInterface $catalogPromotion, array $context): bool;
 }

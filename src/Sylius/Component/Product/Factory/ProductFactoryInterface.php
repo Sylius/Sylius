@@ -23,5 +23,6 @@ use Sylius\Resource\Factory\TranslatableFactoryInterface;
  */
 interface ProductFactoryInterface extends TranslatableFactoryInterface
 {
+    /** @return T */
     public function createWithVariant(): ProductInterface;
 }

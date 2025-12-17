@@ -4,7 +4,20 @@
 sylius:
     email:
         shipment_confirmation:
+            has_been_sent_using: 'har skickats med'
             subject: 'Leveransbekräftelse'
+            thank_you_for_transaction: 'Tack för ett lyckat köp.'
+            you_can_check_its_location_with_the_tracking_code: 'Du kan spåra försändelsen med spårningskoden %tracking_code%.'
+            your_order_with_number: 'Din beställning med nummer'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Visa det lägsta priset för rabatterade produkter före aktuell rabatt?'
+                period_for_which_the_lowest_price_is_calculated: 'Period för vilken lägsta priset beräknas'
+            reset_password:
+                password:
+                    label: 'Nytt lösenord'
+                    confirmation: 'Bekräfta nytt lösenord'
     menu:
         admin:
             main:
@@ -31,6 +44,8 @@ sylius:
                     tax_rates: Skattesatser
                     zones: Zoner
                 marketing:
+                    cart_promotions: Kundvagnskampanjer
+                    catalog_promotions: Katalogkampanjer
                     header: Marknadsföring
                     product_reviews: Produktrecensioner
                     promotions: Kampanjer
@@ -47,3 +62,70 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Professionella tjänster
                     find_a_partner: Hitta en partner
+                    sylius_certification: Sylius-certifiering
+    ui:
+        account: Konto
+        admin_user: Administratör
+        add_new_entry: Lägg till ny post
+        back_to_dashboard: Tillbaka till instrumentpanelen
+        catalog_promotion:
+            dates_details: Denna process tar tid! Räkna med 2–10 minuters fördröjning från de angivna datumen beroende på katalogens storlek.
+        channel:
+            account_verification_required_details: Om du avaktiverar detta kan konton skapas och nås utan e-postverifiering och därmed potentiellt ge åtkomst till gästbeställningar.
+        channel_pricing_history: Historik för kanalpriser
+        channel_pricings: Kanalpriser
+        create_new:
+            customer_group: 'Skapa ny kundgrupp'
+        delete_avatar: Ta bort avatar
+        full_screen: Helskärm
+        global: Global
+        ip_address: IP-adress
+        language: Språk
+        lowest_price_before_discount: Lägsta pris före rabatt
+        minimum_price_details: Lägsta pris – detta är prisgolvet under vilket det aktuella priset inte kan rabatteras av katalog- eller kundvagnskampanjer.
+        more: Mer
+        no_main_taxon: inget huvudtaxon
+        no_depth: Ingen höjd
+        no_height: Ingen höjd
+        no_results: Inga resultat hittades
+        no_results_adjust_your_search: Justera din sökning och försök igen.
+        no_weight: Ingen vikt
+        no_width: Ingen bredd
+        omnibus: Omnibus
+        order:
+            date: Beställningsdatum
+        original_price_details: Ursprungspris – visas överstruket i katalogen och används som bas för prisberäkningar.
+        original_product_price_details: Ursprungspris – visas överstruket i katalogen och används som bas för prisberäkningar.
+        overdue: 'Försenad'
+        page_not_found: Sidan hittades inte
+        pagination:
+            number_of_results: Visar %from%–%to% av %total% poster
+        partially_refunded: Delvis återbetald
+        pending_actions: 'Väntande åtgärder'
+        price_details: Pris – aktuellt pris som visas i katalogen och kan justeras via kampanjer.
+        product_price_details: Pris – aktuellt pris som visas i katalogen och kan justeras via kampanjer.
+        price_history: Prishistorik
+        product:
+            product_not_active_in_channel: Produkten är ännu inte aktiverad i denna kanal.
+        product_variant: Produktvariant
+        sales_summary: Försäljningssammanfattning
+        search_menu: Sökmeny
+        shipment_for_order: Leverans för order
+        show_history_for_channel_pricing: Visa historik för kanalpriser
+        start_typing_to_search: Börja skriva för att söka
+        statistics:
+            day: Dag
+            lifetime: Totalt
+            month: Månad
+            week: Vecka
+            2weeks: 2 veckor
+            year: År
+        taxon: Taxon
+        to_approve: 'att godkänna'
+        to_process: 'att behandla'
+        to_ship: 'att skicka'
+        view_in_store: Visa i butiken
+        work_in_progress: Pågår
+        empty_date: tomt
+        notifications:
+            new_version_of_sylius_available: 'En ny version av Sylius finns tillgänglig. Kontakta din tekniker för uppgradering.'

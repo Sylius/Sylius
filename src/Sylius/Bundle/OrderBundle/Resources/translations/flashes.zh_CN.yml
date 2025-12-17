@@ -3,7 +3,8 @@
 
 sylius:
     cart:
-        add_item: '商品已添加到购物车。'
-        cannot_modify: '已经为你想修改购物车提交订单。'
-        remove_item: '已从购物车中移除该商品。'
-        save: '已成功更新购物车。'
+        add_item: '商品已添加到购物车'
+        cannot_modify: '您尝试修改的购物车订单已提交，无法修改。'
+        not_recalculated: '由于购物车中存在无效值，购物车未重新计算。'
+        remove_item: '商品已从购物车中移除'
+        save: '购物车已成功更新'

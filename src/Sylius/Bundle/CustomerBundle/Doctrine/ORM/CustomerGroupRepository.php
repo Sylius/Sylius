@@ -24,6 +24,7 @@ use Sylius\Component\Customer\Repository\CustomerGroupRepositoryInterface;
  */
 class CustomerGroupRepository extends EntityRepository implements CustomerGroupRepositoryInterface
 {
+    /** @return iterable<T> */
     public function findByPhrase(string $phrase, ?int $limit = null): iterable
     {
         $expr = $this->getEntityManager()->getExpressionBuilder();

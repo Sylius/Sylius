@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        locale:
+            name: 'Name'
+            select: 'Wählen Sie eine Lokalisierung aus...'

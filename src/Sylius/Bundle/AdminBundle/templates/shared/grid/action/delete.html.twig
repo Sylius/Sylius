@@ -1,0 +1,12 @@
+{% set id = options.link.parameters['id']|default(data.id)  %}
+
+{% if options.link.url is defined %}
+    {% set path = options.link.url %}
+{% else %}
+    {% set default_route = options.link.route|default(grid.requestConfiguration is defined ? grid.requestConfiguration.getRouteName('delete') : null) %}
+    {% set path = options.link.url|default(default_route ? path(default_route, options.link.parameters|default({'id': data.id})): null) %}
+{% endif %}
+
+{% set disabled = path is empty %}
+
+{{ component('sylius_admin:delete_modal', {id: id, path: path, label: action.label, icon: action.icon, disabled: disabled}) }}

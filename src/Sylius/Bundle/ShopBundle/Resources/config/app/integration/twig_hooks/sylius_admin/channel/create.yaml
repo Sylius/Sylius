@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.channel.create.content.form.sections.look_and_feel':
+            theme:
+                template: '@SyliusShop/integrations/sylius_admin/channel/form/sections/look_and_feel/theme.html.twig'
+                priority: 300

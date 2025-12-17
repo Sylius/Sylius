@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-use Sylius\Bundle\ApiBundle\Application\Kernel;
+use Sylius\Bundle\AdminBundle\Application\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 

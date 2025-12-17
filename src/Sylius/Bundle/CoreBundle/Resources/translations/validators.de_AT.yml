@@ -1,0 +1,216 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: 'Diese E-Mail-Adresse ist ungültig.'
+                max: 'Die E-Mail-Adresse darf höchstens {{ limit }} Zeichen lang sein.'
+                min: 'Die E-Mail-Adresse muss mindestens {{ limit }} Zeichen lang sein.'
+                not_blank: 'Bitte geben Sie eine E-Mail-Adresse ein.'
+        reset_password:
+            mismatch: 'Die eingegebenen Passwörter stimmen nicht überein.'
+            password:
+                min: 'Das Passwort muss mindestens {{ limit }} Zeichen lang sein.'
+                max: 'Das Passwort darf höchstens {{ limit }} Zeichen lang sein.'
+                not_blank: 'Bitte geben Sie ein Passwort ein.'
+    avatar_image:
+        file:
+            max_size: 'Das Bild ist zu groß - {{ size }}{{ suffix }}. Die maximal erlaubte Größe ist {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Das Bild ist zu groß. Die maximal erlaubte Größe ist {{ limit }}{{ suffix }}.'
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: 'Die Konfiguration für einen der erforderlichen Kanäle fehlt.'
+            not_valid: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte geben Sie den festen Rabattbetrag an, der eine Zahl größer als 0 ist.'
+    catalog_promotion_scope:
+        invalid_type: 'Der Typ der Katalogaktion ist ungültig. Bitte wählen Sie einen gültigen Typ.'
+        for_products:
+            invalid_products: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte fügen Sie nur existierende Produkte hinzu.'
+            not_empty: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte fügen Sie mindestens 1 Produkt hinzu.'
+            unique: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte fügen Sie nur einzigartige Produkte hinzu.'
+        for_variants:
+            invalid_variants: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte fügen Sie nur existierende Varianten hinzu.'
+            not_empty: 'Bitte fügen Sie mindestens 1 Variante hinzu.'
+            unique: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte fügen Sie nur einzigartige Varianten hinzu.'
+        for_taxons:
+            invalid_taxons: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte fügen Sie nur existierende Taxons hinzu.'
+            not_empty: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte fügen Sie mindestens 1 Taxon hinzu.'
+            unique: 'Die bereitgestellte Konfiguration enthält Fehler. Bitte fügen Sie nur einzigartige Taxons hinzu.'
+    channel:
+        base_currency:
+            not_blank: 'Bitte geben Sie die Basiswährung des Kanals ein.'
+        default_locale:
+            enabled: 'Die Standard-Lokalisierung muss aktiviert sein.'
+            not_blank: 'Bitte geben Sie die Standard-Lokalisierung des Kanals ein.'
+        contact_email:
+            invalid: 'Diese E-Mail-Adresse ist ungültig.'
+            max: 'Die E-Mail-Adresse darf höchstens {{ limit }} Zeichen lang sein.'
+            min: 'Die E-Mail-Adresse muss mindestens {{ limit }} Zeichen lang sein.'
+        contact_phone_number:
+            max_length: 'Die Telefonnummer darf höchstens {{ limit }} Zeichen lang sein.'
+        theme_name:
+            max_length: 'Der Name des Themes darf höchstens {{ limit }} Zeichen lang sein.'
+        tax_calculation_strategy:
+            not_blank: 'Bitte geben Sie die Steuerberechnungsstrategie ein.'
+            max_length: 'Die Steuerberechnungsstrategie darf höchstens {{ limit }} Zeichen lang sein.'
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'Der Wert muss größer sein als {{ compared_value }}'
+            less_than: 'Der Wert muss kleiner sein als {{ compared_value }}'
+    channel_pricing:
+        channel_code:
+            not_blank: 'Bitte legen Sie den Kanalcode fest.'
+            unique: 'Für diesen Produktvariant existiert bereits ein Preis für diesen Kanal.'
+        price:
+            min: 'Der Preis darf nicht kleiner als 0 sein.'
+            not_blank: 'Bitte geben Sie den Preis ein.'
+    channel_code_collection:
+        invalid_channel: 'Kanal mit dem Code {{ channel_code }} existiert nicht.'
+    checkout:
+        addressing:
+            csrf_error: 'Bitte reichen Sie das vollständige Formular erneut ein.'
+        shipping_method:
+            not_blank: 'Bitte wählen Sie eine Versandmethode aus.'
+        email:
+            not_changeable: 'Die E-Mail-Adresse kann nur für Gastkunden geändert werden. Sobald der Kunde sich anmeldet und der Warenkorb zugeordnet wurde, kann die E-Mail-Adresse nicht mehr geändert werden.'
+    contact:
+        email:
+            invalid: 'Diese E-Mail-Adresse ist ungültig.'
+            not_blank: 'Bitte geben Sie Ihre E-Mail-Adresse ein.'
+        message:
+            not_blank: 'Bitte geben Sie Ihre Nachricht ein.'
+    country:
+        code:
+            not_exist: 'Land mit dem Code {{ code }} existiert nicht.'
+    currency:
+        enabled:
+            cannot_disable_base: 'Die Basiswährung kann nicht deaktiviert werden.'
+    customer:
+        currency_code:
+            not_valid: 'Der eingegebene Währungscode ist ungültig.'
+    customer_group:
+        code:
+            not_exist: 'Kundengruppe mit dem Code {{ code }} existiert nicht.'
+    cart_item:
+        not_available: '%itemName% hat nicht genügend Lagerbestand.'
+        insufficient_stock: 'Unzureichender Bestand'
+        quantity:
+            not_in_range: 'Die Menge muss zwischen {{ min }} und {{ max }} liegen.'
+        variant:
+            not_available: '%variantName% ist nicht verfügbar.'
+    max_integer: 'Der Wert muss kleiner sein als {{ compared_value }}.'
+    order:
+        address_requirement: 'Bitte geben Sie eine %addressName% an.'
+        currency_code:
+            not_valid: 'Der eingegebene Währungscode ist ungültig.'
+        invalid_state_transition: 'Kann nicht abgeschlossen werden, da sich die Bestellung im falschen Status befindet. Aktuell: %currentState%. Mögliche Übergänge: %possibleTransitions%.'
+        payment_method_eligibility: 'Diese Zahlungsmethode %paymentMethodName% wurde deaktiviert. Bitte wählen Sie eine andere Zahlungsmethode.'
+        product_eligibility: 'Dieses Produkt %productName% wurde deaktiviert.'
+        shipping_method_eligibility: 'Produkt entspricht nicht den Anforderungen für die Versandmethode %shippingMethodName%. Bitte wählen Sie eine andere Versandmethode.'
+        shipping_method_not_available: 'Die Versandmethode "%shippingMethodName%" ist nicht verfügbar. Bitte wählen Sie eine andere Versandmethode.'
+        cart_items_immutable: 'Es können keine Warenkorb-Artikel nach Abschluss des Checkouts geändert werden.'
+    resend_order_confirmation_email:
+        invalid_order_state: 'Kann die Bestellbestätigungs-E-Mail für eine Bestellung im Status %state% nicht erneut senden.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Kann die Versandbestätigungs-E-Mail für eine Lieferung im Status %state% nicht erneut senden.'
+    locale:
+        enabled:
+            cannot_disable_base: 'Die Basis-Lokalisierung kann nicht deaktiviert werden.'
+    product:
+        variants:
+            all_prices_defined: 'Sie müssen die Produktvariantenpreise für neu zugeordnete Kanäle zuerst definieren.'
+        code:
+            not_exist: 'Produkt mit dem Code {{ code }} existiert nicht.'
+    product_attribute:
+        invalid: 'Die Position muss eine Ganzzahl sein.'
+    image:
+        file:
+            allowed_mime_types: 'Die Datei ist kein gültiges Bild. Erlaubte Typen sind %types%.'
+    product_image:
+        file:
+            max_size: 'Das Bild ist zu groß - {{ size }}{{ suffix }}. Die maximal erlaubte Größe ist {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Das Bild ist zu groß. Die maximal erlaubte Größe ist {{ limit }}{{ suffix }}.'
+        product_variant:
+            not_belong_to_owner: 'Die Produktvariante mit dem Code "%productVariantCode%" gehört nicht zum Produkt mit dem Code "%ownerCode%", welches das Bild besitzt.'
+    product_taxon:
+        unique: 'Produkt-Taxons dürfen nicht dupliziert werden.'
+        product:
+            not_blank: 'Bitte wählen Sie ein Produkt aus.'
+        taxon:
+            not_blank: 'Bitte wählen Sie ein Taxon aus.'
+    product_variant:
+        code:
+            not_exist: 'Produktvariante mit dem Code {{ code }} existiert nicht.'
+        onHand:
+            min: 'Der Bestand muss größer als {{ limit }} sein.'
+            not_blank: 'Bitte geben Sie den Bestand ein.'
+            reserved: 'Der Bestand muss größer sein als die Anzahl der reservierten Einheiten.'
+        original_price:
+            min: 'Der Originalpreis darf nicht negativ sein.'
+        weight:
+            min: 'Das Gewicht darf nicht negativ sein.'
+            invalid: 'Das Gewicht muss eine Zahl sein.'
+        width:
+            min: 'Die Breite darf nicht negativ sein.'
+            invalid: 'Die Breite muss eine Zahl sein.'
+        height:
+            min: 'Die Höhe darf nicht negativ sein.'
+            invalid: 'Die Höhe muss eine Zahl sein.'
+        depth:
+            min: 'Die Tiefe darf nicht negativ sein.'
+            invalid: 'Die Tiefe muss eine Zahl sein.'
+        channel_pricing:
+            price:
+                not_defined: 'Sie müssen den Preis definieren.'
+            existing_code: 'Kanal mit dem Code {{ channelCode }} existiert nicht.'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: 'Das Nutzungsbeschränkungs-Kontingent pro Kunde muss mindestens {{ limit }} betragen.'
+    product_translation:
+        short_description:
+            max: 'Die kurze Beschreibung darf nicht länger als {{ limit }} Zeichen sein.'
+    province:
+        code:
+            not_exist: 'Provinz mit dem Code {{ code }} existiert nicht.'
+    review:
+        author:
+            not_blank: 'Bitte geben Sie Ihre E-Mail-Adresse ein.'
+        product:
+            not_blank: 'Bitte geben Sie ein Produkt ein.'
+        rating:
+            range: 'Die Bewertungsbewertung muss eine Ganzzahl im Bereich von 1 bis 5 sein.'
+            not_in_range: 'Die Bewertungsbewertung muss zwischen {{ min }} und {{ max }} liegen.'
+    taxon:
+        code:
+            not_exist: 'Taxon mit dem Code {{ code }} existiert nicht.'
+    taxon_image:
+        file:
+            max_size: 'Das Bild ist zu groß - {{ size }}{{ suffix }}. Die maximal erlaubte Größe ist {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'Das Bild ist zu groß. Die maximal erlaubte Größe ist {{ limit }}{{ suffix }}.'
+    translation:
+        locale:
+            not_blank: 'Bitte geben Sie die Lokalisierung ein.'
+            invalid: 'Dieser Wert ist keine gültige Lokalisierung.'
+            unique: 'Eine Übersetzung für den Lokalisierungscode {{ value }} existiert bereits.'
+        locale_code:
+            invalid: 'Bitte wählen Sie eine der verfügbaren Lokalisierungen: %locales%'
+    user:
+        email:
+            unique: 'Diese E-Mail-Adresse wird bereits verwendet.'
+            min: 'Die E-Mail-Adresse muss mindestens {{ limit }} Zeichen lang sein.'
+            max: 'Die E-Mail-Adresse darf höchstens {{ limit }} Zeichen lang sein.'
+            invalid: 'Diese E-Mail-Adresse ist ungültig.'
+        username:
+            unique: 'Dieser Benutzername wird bereits verwendet.'
+            not_blank: 'Bitte geben Sie Ihren Namen ein.'
+            max: 'Der Benutzername darf höchstens {{ limit }} Zeichen lang sein.'
+        first_name:
+            max: 'Der Vorname darf höchstens {{ limit }} Zeichen lang sein.'
+        last_name:
+            max: 'Der Nachname darf höchstens {{ limit }} Zeichen lang sein.'
+        locale_code:
+            not_blank: 'Bitte wählen Sie eine Lokalisierung aus.'
+    zone:
+        code:
+            not_exist: 'Zone mit dem Code {{ code }} existiert nicht.'

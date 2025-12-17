@@ -3,5 +3,8 @@
 
 sylius:
     ui:
-        item.choice: '{count, plural, =0 {} one {, 1 položka} few {, # položek} many {, # položek} other {, # položek}}'
-        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Tento zákazník ještě nic neobjednal} one {Tento zákazník má jednu objednávku} other {Celkem má tento zákazník # objednávek ve všech kanálech}}'
+        item.choice: '{count, plural, =0 {} one {, 1 položka} other {, # položek}}'
+        lowest_price_days_before_discount_was: '{days, plural, 
+            one {Nejnižší cena z # dne před aktuální slevou byla {price}} 
+            other {Nejnižší cena z # dnů před aktuální slevou byla {price}}}'
+        overall_this_customer_has_placed_orders_across_all_channels.choice: '{count, plural, =0 {Tento zákazník neprovedl žádnou objednávku} one {Tento zákazník provedl jednu objednávku} other {Celkově tento zákazník provedl # objednávek ve všech kanálech}}'

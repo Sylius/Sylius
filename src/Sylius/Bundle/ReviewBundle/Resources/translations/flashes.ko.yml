@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    review:
+        accept: '리뷰가 성공적으로 승인되었습니다.'
+        reject: '리뷰가 성공적으로 거부되었습니다.'
+        wait_for_the_acceptation: '리뷰가 승인 대기 중입니다.'

@@ -1,0 +1,7 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/shop\/taxon-tree\/CATEGORY\/path",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 0,
+    "hydra:member": []
+}

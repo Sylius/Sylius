@@ -17,7 +17,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
 use Sylius\Bundle\ApiBundle\Event\OrderCompleted;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class OrderCompletedHandler
+final readonly class OrderCompletedHandler
 {
     public function __construct(private MessageBusInterface $commandBus)
     {

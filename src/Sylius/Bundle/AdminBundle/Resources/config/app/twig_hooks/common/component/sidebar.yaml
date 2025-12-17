@@ -1,0 +1,17 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.common.component.sidebar':
+            logo:
+                template: '@SyliusAdmin/shared/crud/common/sidebar/logo.html.twig'
+                priority: 200
+            toggle_button:
+                template: '@SyliusAdmin/shared/crud/common/sidebar/toggle_button.html.twig'
+                priority: 100
+            menu:
+                template: '@SyliusAdmin/shared/crud/common/sidebar/menu.html.twig'
+                priority: 0
+
+        'sylius_admin.common.component.sidebar.logo':
+            image:
+                template: '@SyliusAdmin/shared/crud/common/sidebar/logo/image.html.twig'
+                priority: 0

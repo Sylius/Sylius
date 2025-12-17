@@ -4,11 +4,13 @@
 sylius:
     form:
         tax_category:
-            name: 名称
             description: 描述
-        tax_rate:
-            category: 税目
             name: 名称
-            amount: 税率
-            included_in_price: 包含在价格中？
+        tax_rate:
+            amount: 税率金额
             calculator: 计算器
+            category: 分类
+            end_date: 结束日期
+            included_in_price: 是否包含在价格中？
+            name: 名称
+            start_date: 开始日期

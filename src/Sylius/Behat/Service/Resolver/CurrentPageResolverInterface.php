@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Resolver;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
 interface CurrentPageResolverInterface
 {
     /**
-     * @param SymfonyPageInterface[] $pages
+     * @param SyliusPageInterface[] $pages
      */
-    public function getCurrentPageWithForm(array $pages): SymfonyPageInterface;
+    public function getCurrentPageWithForm(array $pages): SyliusPageInterface;
 }

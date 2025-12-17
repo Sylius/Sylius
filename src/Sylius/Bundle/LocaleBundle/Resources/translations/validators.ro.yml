@@ -4,6 +4,7 @@
 sylius:
     locale:
         code:
-            not_blank: Vă rugăm să alegeţi codul de localizare.
-            regex: Codul de regionalizare poate conține doar litere, numere - și _.
-            unique: Codul de localizare trebuie să fie unic.
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să alegeți codul localului.'
+            locale: 'Această valoare nu este un cod de local valid.'
+            unique: 'Codul localului trebuie să fie unic.'

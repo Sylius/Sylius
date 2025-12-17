@@ -3,28 +3,30 @@
 
 sylius:
     channel:
-        delete_error: 'Der Kanal kann nicht gelöscht werden. Mindestens ein aktivierter Kanal wird benötigt.'
+        delete_error: 'Der Kanal kann nicht gelöscht werden. Mindestens ein aktivierter Kanal ist erforderlich.'
     checkout:
-        complete_error: 'Es trat ein unerwartetes Problem beim verarbeiten der Bestellung auf. Bitte versuchen Sie es noch einmal.'
+        complete_error: 'Es gab ein unerwartetes Problem beim Abschließen der Bestellung. Bitte versuchen Sie, Ihre Bestellung erneut aufzugeben.'
     contact:
-        request_success: 'Ihre Kontaktanfrage wurde erfolgreich übermittelt.'
-        request_error: 'Fehler beim Senden der Kontaktanfrage. Bitte versuchen Sie es später erneut.'
+        request_success: 'Ihre Kontaktanfrage wurde erfolgreich eingereicht.'
+        request_error: 'Beim Senden der Kontaktanfrage ist ein Problem aufgetreten. Bitte versuchen Sie es später erneut.'
     customer:
-        add_address: 'Adresse wurde erfolgreich hinzugefügt.'
-        impersonate: 'Rechte von %name% erfolgreich übernommen.'
-        set_address_as_default: 'Adresse wurde als Standard gesetzt.'
+        add_address: 'Die Adresse wurde erfolgreich hinzugefügt.'
+        impersonate: 'Kunde %name% erfolgreich impersoniert.'
+        set_address_as_default: 'Die Adresse wurde als Standardadresse festgelegt.'
     order:
-        apply_state_machine_transition_error: 'Es trat ein unerwartetes Problem beim verarbeiten der Bestellung auf. Bitte versuchen Sie es noch einmal.'
-        promotion_integrity: 'Sie sind nicht mehr berechtigt an dieser Aktion teilzunehmen %promotionName%.'
-        total_integrity: 'Der Gesamtbetrag Ihrer Bestellung hat sich geändert. Prüfen Sie die Bestelldetails und bestätigen Sie Ihre Bestellung erneut.'
-        update_error: 'Es trat ein unerwartetes Problem beim Aktualisieren der Bestellung auf. Bitte versuchen Sie es noch einmal.'
+        apply_state_machine_transition_error: 'Es gab ein unerwartetes Problem beim Aktualisieren der Bestellung. Bitte versuchen Sie, die Bestellung erneut zu aktualisieren.'
+        promotion_integrity: 'Sie sind nicht mehr berechtigt für diese Aktion %promotionName%.'
+        total_integrity: 'Der Gesamtbetrag Ihrer Bestellung wurde geändert, überprüfen Sie die Bestellinformationen und bestätigen Sie diese erneut.'
+        update_error: 'Es gab ein unerwartetes Problem beim Aktualisieren der Bestellung. Bitte versuchen Sie, die Bestellung erneut zu aktualisieren.'
     payment:
-        apply_state_machine_transition_error: 'Es trat ein unerwartetes Problem beim verarbeiten einer Zahlung auf. Bitte versuchen Sie es noch einmal.'
+        apply_state_machine_transition_error: 'Es gab ein unerwartetes Problem beim Aktualisieren einer Zahlung. Bitte versuchen Sie, die Zahlung erneut zu aktualisieren.'
     product:
-        out_of_stock: 'Es sind nur %quantity% dieses Produktes verfügbar.'
+        in_use_by_promotion_rule: 'Ein Produkt, das in einer Aktionsregel verwendet wird, kann nicht gelöscht werden.'
+        out_of_stock: 'Es sind nur noch %quantity% dieses Produkts auf Lager.'
     product_variant:
-        update_error: 'Es trat ein unerwartetes Problem bei der Aktualisierung einer Produktvariante auf. Bitte versuchen Sie es noch einmal.'
+        update_error: 'Es gab ein unerwartetes Problem beim Aktualisieren einer Produktvariante. Bitte versuchen Sie, die Produktvariante erneut zu aktualisieren.'
     promotion:
-        update_rules: 'Einige Regeln der Werbeaktion mit dem Code %codes% wurden aktualisiert.'
+        update_rules: 'Einige Regeln der Aktionen mit den Codes %codes% wurden aktualisiert.'
     taxon:
-        menu_taxon_delete: 'Sie können keine Produktklassifikation eines Kanals löschen.'
+        in_use_by_promotion_rule: 'Ein Taxon, das in einer Aktionsregel verwendet wird, kann nicht gelöscht werden.'
+        menu_taxon_delete: 'Sie können ein Menü-Taxon eines Kanals nicht löschen.'

@@ -25,7 +25,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface ProductVariantRepositoryInterface extends RepositoryInterface
 {
-    public function createQueryBuilderByProductId(string $locale, $productId): QueryBuilder;
+    public function createQueryBuilderByProductId(string $locale, mixed $productId): QueryBuilder;
 
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
 
@@ -55,7 +55,7 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      */
     public function findByCodes(array $codes): array;
 
-    public function findOneByIdAndProductId($id, $productId): ?ProductVariantInterface;
+    public function findOneByIdAndProductId(mixed $id, mixed $productId): ?ProductVariantInterface;
 
     /**
      * @return array|ProductVariantInterface[]

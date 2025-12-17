@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    order_item:
+        product_variant:
+            not_blank: 'उत्पाद वेरिएंट प्रदान नहीं किया गया है।'
+        quantity:
+            min: 'किसी ऑर्डर आइटम की मात्रा 1 से कम नहीं हो सकती।'
+            not_blank: 'मात्रा प्रदान नहीं की गई है।'

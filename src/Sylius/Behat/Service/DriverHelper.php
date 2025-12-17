@@ -34,7 +34,29 @@ abstract class DriverHelper
     public static function waitForPageToLoad(Session $session): void
     {
         if (self::isJavascript($session->getDriver())) {
-            $session->wait(500, "document.readyState === 'complete'");
+            $session->wait(1000, "document.readyState === 'complete' && !document.querySelector('[data-live-is-loading]')");
+        }
+    }
+
+    public static function waitForElement(Session $session, string $selector, int $timeout = 5000): void
+    {
+        if (self::isJavascript($session->getDriver())) {
+            $session->wait($timeout, sprintf(
+                'document.querySelector(%s) !== null',
+                json_encode($selector),
+            ));
+        }
+    }
+
+    public static function waitForAsynchronousActionsToFinish(Session $session): void
+    {
+        $session->wait(1000, "!document.querySelector('[data-live-is-loading]')");
+    }
+
+    public static function waitForFormToStopLoading(Session $session, int $timeout = 1000): void
+    {
+        if (self::isJavascript($session->getDriver())) {
+            $session->wait($timeout, "document.readyState === 'complete' && !document.querySelector('[data-live-is-loading]')");
         }
     }
 }

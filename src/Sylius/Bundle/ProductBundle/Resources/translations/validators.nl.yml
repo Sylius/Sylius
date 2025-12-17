@@ -4,54 +4,72 @@
 sylius:
     product:
         sku:
-            not_blank: Voer een product SKU in.
-            unique: Product SKU moet uniek zijn.
+            not_blank: 'Voer product SKU in.'
+            unique: 'Product SKU moet uniek zijn.'
         slug:
-            not_blank: Voer alstublieft een product slug in.
-            unique: Productcode moet uniek zijn.
-            max_length: Product slug mag niet langer zijn dan 1 teken.|Product slug mag niet langer zijn dan {{ limit }} tekens.
+            not_blank: 'Voer product slug in.'
+            unique: 'Product slug moet uniek zijn.'
+            max_length: 'Product slug mag niet langer zijn dan 1 teken.|Product slug mag niet langer zijn dan {{ limit }} tekens.'
         code:
-            not_blank: Voer een product code in.
-            regex: Product code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Product code moet uniek zijn.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer productcode in.'
+            regex: 'Productcode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'Productcode moet uniek zijn.'
         name:
-            not_blank: Voer een productnaam in.
-            min_length: Productnaam moet minstens 1 teken lang zijn.|Productnaam moet minstens {{ limit }} tekens lang zijn.
-            max_length: Productnaam mag niet langer zijn dan 1 teken.|Productnaam mag niet langer zijn dan {{ limit }} tekens.
+            not_blank: 'Voer productnaam in.'
+            min_length: 'Productnaam moet minstens 1 teken lang zijn.|Productnaam moet minstens {{ limit }} tekens lang zijn.'
+            max_length: 'Productnaam mag niet langer zijn dan 1 teken.|Productnaam mag niet langer zijn dan {{ limit }} tekens.'
+        meta_keywords:
+            max_length: 'Product meta keywords mogen niet langer zijn dan 1 teken.|Product meta keywords mogen niet langer zijn dan {{ limit }} tekens.'
+        meta_description:
+            max_length: 'Product meta beschrijving mag niet langer zijn dan 1 teken.|Product meta beschrijving mag niet langer zijn dan {{ limit }} tekens.'
     product_variant:
-        combination: Er bestaat al een variant met deze set opties.
+        combination: 'Variant met deze optie-set bestaat al.'
         code:
-            not_blank: Gelieve een code in te vullen.
-            regex: Product variant code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Product variant code moet uniek zijn.
-            within_product_unique: Deze code moet uniek zijn binnen dit product.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer de code in.'
+            regex: 'Product variant code mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'Product variant code moet uniek zijn.'
+            within_product_unique: 'Deze code moet uniek zijn binnen dit product.'
+        option_values:
+            not_configured: 'De productvariant moet geconfigureerde waarden hebben voor alle opties die op het product zijn gekozen.'
     simple_product:
         code:
-            unique: Eenvoudige product code moet uniek zijn binnen alle producten en product varianten.
+            unique: 'Eenvoudige productcode moet uniek zijn tussen alle producten en productvarianten.'
     option:
         code:
-            not_blank: Voer een optiecode in.
-            regex: Optie code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Er bestaat al een optie met deze code.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer optiecode in.'
+            regex: 'Optiecode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'De optie met de gegeven code bestaat al.'
         name:
-            not_blank: Voer een optie naam in.
-            min_length: Optie naam moet minstens 1 teken lang zijn.|Optie naam moet minstens {{ limit }} tekens lbevatten.
-            max_length: Optie naam mag niet langer zijn dan 1 teken.|Optie naam mag niet langer zijn dan {{ limit }} tekens.
+            not_blank: 'Voer optienaam in.'
+            min_length: 'Optienaam moet minstens 1 teken lang zijn.|Optienaam moet minstens {{ limit }} tekens lang zijn.'
+            max_length: 'Optienaam mag niet langer zijn dan 1 teken.|Optienaam mag niet langer zijn dan {{ limit }} tekens.'
         values:
-            min_count: Voeg minstens {{ limit }} optie waarde toe.|Voeg minstens {{ limit }} optie waardes toe.
+            min_count: 'Voeg minstens {{ limit }} optie waarde toe.|Voeg minstens {{ limit }} optie waarden toe.'
     option_value:
         code:
-            not_blank: Voer een optiecode in.
-            regex: Optie waarde code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: De optiewaarde met gegeven code bestaat al.
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer optie waarde code in.'
+            regex: 'Optie waarde code mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'De optie waarde met de gegeven code bestaat al.'
         value:
-            not_blank: Voer een optie waarde in.
+            not_blank: 'Voer optie waarde in.'
+    association:
+        unique: 'Er bestaat al een associatie met deze eigenaar en type.'
+        type:
+            not_blank: 'Voer associatietype in.'
+        owner:
+            not_blank: 'Voer associatie eigenaar in.'
     association_type:
         name:
-            not_blank: Voer a.u.b. een naam in voor de associatie type.
-            min_length: De naam van het gerelateerde type moet minimaal 1 teken bevatten. | De gerelateerde type naam moet ten minste {{ limit }} tekens bevatten.
-            max_length: De naam van de associatie mag niet langer zijn dan 1 teken.|De naam van de associatie mag niet langer zijn dan {{ limit }} tekens.
+            not_blank: 'Voer associatietype naam in.'
+            min_length: 'Associatietype naam moet minstens 1 teken lang zijn.|Associatienaam moet minstens {{ limit }} tekens lang zijn.'
+            max_length: 'Associatietype naam mag niet langer zijn dan 1 teken.|Associatienaam mag niet langer zijn dan {{ limit }} tekens.'
         code:
-            not_blank: Voer a.u.b. een een code in voor het associatietype.
-            regex: Associatie type code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: De associatie met de gegeven code bestaat al.
+            min_length: 'Associatietype code moet minstens 1 teken lang zijn.|Associatietype code moet minstens {{ limit }} tekens lang zijn.'
+            max_length: 'Associatietype code mag niet langer zijn dan 1 teken.|Associatietype code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer associatietype code in.'
+            regex: 'Associatietype code mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'Het associatietype met de gegeven code bestaat al.'

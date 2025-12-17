@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ProductVariantsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_gets_products_with_original_price(): void
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
@@ -38,7 +39,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_products_without_original_price(): void
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
@@ -53,7 +54,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/product_variant/get_product_variant_with_price_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_product_variant_with_translations(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -73,11 +74,11 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_product_variant_with_applied_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
-            'channel.yaml',
+            'channel/channel.yaml',
             'catalog_promotion/catalog_promotion.yaml',
             'catalog_promotion/product_variant.yaml',
         ]);
@@ -97,7 +98,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_nothing_if_variant_not_found(): void
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -112,7 +113,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_product_variants(): void
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');

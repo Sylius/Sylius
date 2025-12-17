@@ -15,11 +15,11 @@ namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Behat\Mink\Exception\DriverException;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
-use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Behat\Service\JQueryHelper;
+use Sylius\Behat\Page\SyliusPage;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
 
-class CreatePage extends SymfonyPage implements CreatePageInterface
+class CreatePage extends SyliusPage implements CreatePageInterface
 {
     public function getRouteName(): string
     {
@@ -35,14 +35,14 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         $this->getElement('city')->setValue($address->getCity());
         $this->getElement('postcode')->setValue($address->getPostcode());
 
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+        DriverHelper::waitForFormToStopLoading($this->getSession());
     }
 
     public function selectCountry(string $name): void
     {
         $this->getElement('country')->selectOption($name);
 
-        JQueryHelper::waitForFormToStopLoading($this->getDocument());
+        DriverHelper::waitForFormToStopLoading($this->getSession());
     }
 
     public function addAddress(): void
@@ -63,7 +63,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'add_button' => '[data-test-add-address]',
+            'add_button' => '[data-test-button="add-address"]',
             'city' => '[data-test-city]',
             'country' => '[data-test-country]',
             'first_name' => '[data-test-first-name]',

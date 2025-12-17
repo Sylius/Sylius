@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: '"%productVariantCode%" उत्पाद का स्टॉक अपर्याप्त होने के कारण भुगतान पूरा नहीं किया जा सकता।'

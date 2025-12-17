@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\User
-        psr4_prefix: Sylius\Component\User
-        src_path: .

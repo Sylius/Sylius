@@ -1,0 +1,12 @@
+{% set product = hookable_metadata.context.resource %}
+
+<li>
+    <a
+        class="dropdown-item"
+        href="{{ path('sylius_admin_product_variant_index', {'productId': product.id}) }}"
+        {{ sylius_test_html_attribute('list') }}
+    >
+        {{ ux_icon('tabler:list-details', {'class': 'icon dropdown-item-icon'}) }}
+        {{ 'sylius.ui.list_variants'|trans }}
+    </a>
+</li>

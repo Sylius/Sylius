@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class CouponPossibleGenerationAmount extends Constraint
 {
     public string $message = 'sylius.promotion_coupon_generator_instruction.possible_generation_amount';

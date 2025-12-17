@@ -4,5 +4,11 @@
 sylius:
     form:
         currency:
-            code: 이름
-            enabled: 사용
+            base: '기본 통화'
+            code: '이름'
+            enabled: '사용'
+            exchange_rate: '환율'
+        exchange_rate:
+            source_currency: '소스 통화'
+            target_currency: '대상 통화'
+            ratio: '비율'

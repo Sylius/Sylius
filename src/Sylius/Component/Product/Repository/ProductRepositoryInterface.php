@@ -23,15 +23,12 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface ProductRepositoryInterface extends RepositoryInterface
 {
-    /**
-     * @return array|ProductInterface[]
-     */
+    /** @return T[] */
     public function findByName(string $name, string $locale): array;
 
-    /**
-     * @return array|ProductInterface[]
-     */
+    /** @return T[] */
     public function findByNamePart(string $phrase, string $locale, ?int $limit = null): array;
 
+    /** @return iterable<T> */
     public function findByPhrase(string $phrase, string $locale, ?int $limit = null): iterable;
 }

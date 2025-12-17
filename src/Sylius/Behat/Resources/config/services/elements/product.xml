@@ -22,7 +22,7 @@
         <service id="sylius.behat.element.product.show.attributes" class="Sylius\Behat\Element\Product\ShowPage\AttributesElement" parent="sylius.behat.element" public="false" />
         <service id="sylius.behat.element.product.show.details" class="Sylius\Behat\Element\Product\ShowPage\DetailsElement" parent="sylius.behat.element" public="false" />
         <service id="sylius.behat.element.product.show.media" class="Sylius\Behat\Element\Product\ShowPage\MediaElement" parent="sylius.behat.element" public="false" />
-        <service id="sylius.behat.element.product.show.more_details" class="Sylius\Behat\Element\Product\ShowPage\MoreDetailsElement" parent="sylius.behat.element" public="false" />
+        <service id="sylius.behat.element.product.show.more_details" class="Sylius\Behat\Element\Product\ShowPage\TranslationsElement" parent="sylius.behat.element" public="false" />
         <service id="sylius.behat.element.product.show.pricing" class="Sylius\Behat\Element\Product\ShowPage\PricingElement" parent="sylius.behat.element" public="false" />
         <service id="sylius.behat.element.product.show.shipping" class="Sylius\Behat\Element\Product\ShowPage\ShippingElement" parent="sylius.behat.element" public="false" />
         <service id="sylius.behat.element.product.show.taxonomy" class="Sylius\Behat\Element\Product\ShowPage\TaxonomyElement" parent="sylius.behat.element" public="false" />

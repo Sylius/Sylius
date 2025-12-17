@@ -54,6 +54,17 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
         ;
     }
 
+    public function findByChannelCodeInConfiguration(string $channelCode): array
+    {
+        $shippingMethods = $this->findAll();
+
+        return array_filter($shippingMethods, function (ShippingMethodInterface $method) use ($channelCode) {
+            $configuration = $method->getConfiguration();
+
+            return array_key_exists($channelCode, $configuration);
+        });
+    }
+
     protected function createEnabledForChannelQueryBuilder(ChannelInterface $channel): QueryBuilder
     {
         return $this->createQueryBuilder('o')

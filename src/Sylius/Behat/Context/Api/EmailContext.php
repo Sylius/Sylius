@@ -109,7 +109,7 @@ final class EmailContext implements Context
             sprintf(
                 '%s %s %s',
                 $this->translator->trans('sylius.email.order_confirmation.your_order_number', [], null, $localeCode),
-                $order->getNumber(),
+                $order->getNumber() ?? $this->sharedStorage->get('order_number'),
                 $this->translator->trans('sylius.email.order_confirmation.has_been_successfully_placed', [], null, $localeCode),
             ),
             $recipient,

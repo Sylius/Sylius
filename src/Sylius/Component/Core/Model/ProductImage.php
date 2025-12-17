@@ -21,9 +21,10 @@ class ProductImage extends Image implements ProductImageInterface
     /** @var Collection<array-key, ProductVariantInterface> */
     protected $productVariants;
 
+    protected ?int $position;
+
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, ProductVariantInterface> $this->productVariants */
         $this->productVariants = new ArrayCollection();
     }
 
@@ -52,5 +53,15 @@ class ProductImage extends Image implements ProductImageInterface
         if ($this->hasProductVariant($productVariant)) {
             $this->productVariants->removeElement($productVariant);
         }
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): void
+    {
+        $this->position = $position;
     }
 }

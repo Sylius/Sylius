@@ -48,17 +48,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, ProductTaxonInterface> $this->productTaxons */
         $this->productTaxons = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ReviewInterface> $this->reviews */
         $this->reviews = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, ImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 
@@ -242,6 +234,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         }
     }
 
+    /** @return array<string, string> */
     public static function getVariantSelectionMethodLabels(): array
     {
         return [
@@ -250,9 +243,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         ];
     }
 
-    /**
-     * @return ProductTranslationInterface
-     */
+    /** @return ProductTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface
     {
         $productTranslation = parent::getTranslation($locale);
@@ -261,9 +252,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         return $productTranslation;
     }
 
-    /**
-     * @return ProductTranslationInterface
-     */
+    /** @return ProductTranslationInterface */
     protected function createTranslation(): BaseProductTranslationInterface
     {
         return new ProductTranslation();

@@ -1,0 +1,19 @@
+{
+    "@context": "\/api\/v2\/contexts\/PaymentRequest",
+    "@id": "\/api\/v2\/admin\/payment-requests\/@string@",
+    "@type": "PaymentRequest",
+    "hash": "@string@",
+    "state": "completed",
+    "action": "authorize",
+    "payload": {
+        "target_path": "https:\/\/myshop.tld\/target-path",
+        "after_path": "https:\/\/myshop.tld\/after-path"
+    },
+    "responseData": {
+        "after_url": "https:\/\/myshop.tld\/after-path"
+    },
+    "payment": "\/api\/v2\/admin\/payments\/@integer@",
+    "method": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY",
+    "createdAt": @datetime@,
+    "updatedAt": @datetime@
+}

@@ -17,25 +17,23 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplicatorInterface"
+            id="sylius.applicator.catalog_promotion"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplicator"
         >
             <argument type="service" id="sylius.applicator.catalog_promotion.action_based_discount" />
             <argument type="service" id="sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility" />
             <argument type="service" id="sylius.checker.catalog_promotion_eligibility" />
         </service>
-        <service id="sylius.applicator.catalog_promotion" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplicatorInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplicatorInterface" alias="sylius.applicator.catalog_promotion" />
 
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\ActionBasedDiscountApplicatorInterface"
+            id="sylius.applicator.catalog_promotion.action_based_discount"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\ActionBasedDiscountApplicator"
         >
             <argument type="service" id="sylius.calculator.catalog_promotion.price" />
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.applicator_criteria" />
         </service>
-        <service id="sylius.applicator.catalog_promotion.action_based_discount" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\ActionBasedDiscountApplicatorInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\ActionBasedDiscountApplicatorInterface" alias="sylius.applicator.catalog_promotion.action_based_discount" />
     </services>
 </container>

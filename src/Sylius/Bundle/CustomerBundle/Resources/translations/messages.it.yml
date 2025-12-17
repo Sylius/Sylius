@@ -4,20 +4,21 @@
 sylius:
     form:
         customer:
-            first_name: Nome
-            group: Guppo
-            last_name: Cognome
-            email: Email
-            phone_number: Numero di telefono
-            gender: Sesso
-            birthday: Data di nascita
-            billing_address: Indirizzo fatturazione
-            only_customer_registration: Crea un account?
-            subscribed_to_newsletter: Iscriviti alla newsletter
+            first_name: 'Nome'
+            group: 'Gruppo'
+            last_name: 'Cognome'
+            email: 'Email'
+            phone_number: 'Numero di telefono'
+            gender: 'Genere'
+            birthday: 'Data di nascita'
+            billing_address: 'Indirizzo di fatturazione'
+            different_shipping_address: 'Usare un indirizzo diverso per la spedizione?'
+            only_customer_registration: 'Crea account?'
+            subscribed_to_newsletter: 'Iscriviti alla newsletter'
         customer_group:
-            name: "Nome\n"
-            roles: Ruoli
+            name: 'Nome'
+            roles: 'Ruoli'
     gender:
-        unknown: Sconosciuto
-        male: Maschile
-        female: Femminile
+        unknown: 'Sconosciuto'
+        male: 'Maschio'
+        female: 'Femmina'

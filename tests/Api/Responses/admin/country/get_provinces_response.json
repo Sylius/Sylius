@@ -4,14 +4,14 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/admin\/provinces\/US-WY",
+            "@id": "\/api\/v2\/admin\/countries\/US\/provinces\/US-WY",
             "@type": "Province",
             "code": "US-WY",
             "name": "Wyoming",
             "abbreviation": null
         },
         {
-            "@id": "\/api\/v2\/admin\/provinces\/US-MI",
+            "@id": "\/api\/v2\/admin\/countries\/US\/provinces\/US-MI",
             "@type": "Province",
             "code": "US-MI",
             "name": "Minnesota",

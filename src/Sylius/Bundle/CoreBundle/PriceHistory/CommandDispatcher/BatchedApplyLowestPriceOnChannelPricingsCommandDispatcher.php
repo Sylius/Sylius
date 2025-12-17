@@ -42,6 +42,7 @@ final class BatchedApplyLowestPriceOnChannelPricingsCommandDispatcher implements
         }
     }
 
+    /** @return array<int> */
     private function getIdsBatch(ChannelInterface $channel, int $limit, int $offset): array
     {
         /** @var ChannelPricingInterface[] $channelPricings */

@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -26,6 +27,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class AdminUserContext implements Context
 {
+    use SecurePasswordTrait;
+
     /**
      * @param UserRepositoryInterface<AdminUserInterface> $userRepository
      * @param FactoryInterface<AvatarImageInterface> $avatarImageFactory
@@ -48,7 +51,7 @@ final class AdminUserContext implements Context
     public function thereIsAnAdministratorIdentifiedBy($email, $password = 'sylius')
     {
         /** @var AdminUserInterface $adminUser */
-        $adminUser = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true, 'api' => true]);
+        $adminUser = $this->userFactory->create(['email' => $email, 'password' => $this->replaceWithSecurePassword($password), 'enabled' => true, 'api' => true]);
 
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);

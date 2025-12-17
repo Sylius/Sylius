@@ -24,15 +24,13 @@
             <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_combination" />
         </service>
 
-        <service id="Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator">
+        <service id="sylius.validator.product_variant_option_values_configuration" class="Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator">
             <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_option_values_configuration" />
         </service>
-        <service id="sylius.validator.product_variant_option_values_configuration" alias="Sylius\Bundle\ProductBundle\Validator\ProductVariantOptionValuesConfigurationValidator" />
 
-        <service id="sylius.validator.product_code_uniqueness" class="Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator">
+        <service id="sylius.validator.unique_simple_product_code" class="Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="validator.constraint_validator" alias="sylius.validator.unique_simple_product_code" />
         </service>
-        <service id="sylius.validator.unique_simple_product_code" alias="sylius.validator.product_code_uniqueness" />
     </services>
 </container>

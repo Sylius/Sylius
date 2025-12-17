@@ -26,8 +26,8 @@ final class ManagingCustomerGroupsContext implements Context
     use ValidationTrait;
 
     public function __construct(
-        private ApiClientInterface $client,
-        private ResponseCheckerInterface $responseChecker,
+        private readonly ApiClientInterface $client,
+        private readonly ResponseCheckerInterface $responseChecker,
     ) {
     }
 
@@ -90,6 +90,32 @@ final class ManagingCustomerGroupsContext implements Context
     public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup): void
     {
         $this->client->delete(Resources::CUSTOMER_GROUPS, $customerGroup->getCode());
+    }
+
+    /**
+     * @When I search for them with :phrase name
+     */
+    public function iSearchResourceWith(string $phrase): void
+    {
+        $this->client->addFilter('name', $phrase);
+        $this->client->filter();
+    }
+
+    /**
+     * @When /^I sort them by the (code|name) in (asc|desc)ending order$/
+     */
+    public function iSortThemByTheField(string $field, string $order): void
+    {
+        $this->client->sort([$field => str_starts_with($order, 'de') ? 'desc' : 'asc']);
+        $this->client->filter();
+    }
+
+    /**
+     * @Then there should be :count customer groups in the list
+     */
+    public function thereShouldBeCustomerGroupsInTheList(int $count): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
     /**
@@ -209,6 +235,22 @@ final class ManagingCustomerGroupsContext implements Context
             ),
             'Customer group could not be deleted',
         );
+    }
+
+    /**
+     * @Then /^the (\d+)(?:|st|nd|rd|th) customer group on the list should have (name|code) "([^"]+)" and (name|code) "([^"]+)"$/
+     */
+    public function theFirstCustomerGroupOnTheListShouldHave(
+        int $position,
+        string $firstField,
+        string $firstValue,
+        string $secondField,
+        string $secondValue,
+    ): void {
+        $customerGroup = $this->responseChecker->getCollection($this->client->getLastResponse())[$position - 1];
+
+        Assert::same($customerGroup[$firstField], $firstValue);
+        Assert::same($customerGroup[$secondField], $secondValue);
     }
 
     private function isItemOnIndex(string $property, string $value): bool

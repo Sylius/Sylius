@@ -1,0 +1,7 @@
+{% set product = hookable_metadata.context.product %}
+
+{% if product.attributes|length > 0 %}
+    <div class="accordion-item">
+        {% hook 'attributes' %}
+    </div>
+{% endif %}

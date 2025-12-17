@@ -3,4 +3,6 @@
 
 sylius:
     promotion_coupon:
-        generate: '推广优惠券已成功生成。'
+        generate: '促销优惠券已成功生成。'
+    catalog_promotion:
+        remove: '已请求移除目录促销。根据受影响产品的数量，此过程可能需要一些时间。'

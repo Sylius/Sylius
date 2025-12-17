@@ -19,6 +19,7 @@ interface FilterInterface
 {
     /**
      * @param OrderItemInterface[] $items
+     * @param array<string, mixed> $configuration
      *
      * @return OrderItemInterface[]
      */

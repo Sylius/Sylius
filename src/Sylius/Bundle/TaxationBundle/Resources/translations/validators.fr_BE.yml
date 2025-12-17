@@ -1,0 +1,29 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    tax_category:
+        name:
+            not_blank: Veuillez entrez le nom de la catégorie de la taxe.
+        code:
+            not_blank: Veuillez saisir le code de catégorie de la taxe.
+            regex: Le code de la catégorie de taxe ne peut être constitué que de lettres, nombres, tirets et traits de soulignements.
+            unique: Ce code de catégorie de taxe existe déjà.
+    tax_rate:
+        category:
+            not_blank: Veuillez sélectionner la catégorie de la taxe.
+        name:
+            not_blank: Veuillez entrer le nom de la taxe.
+        amount:
+            invalid: Le montant du taux de taxe n'est pas valide.
+            not_blank: Veuillez entrer le taux de la taxe.
+        calculator:
+            not_blank: Veuillez sélectionner le calculateur de la taxe.
+        zone:
+            not_blank: Veuillez choisir une zone de taxe.
+        code:
+            not_blank: Veuillez saisir le code du taux de taxe.
+            regex: Le code de la catégorie de taxe ne peut être constitué que de lettres, nombres et tirets.
+            unique: Le taux de taxe avec ce code existe déjà.
+        date:
+            greater_than_start_date: Le taux d'imposition ne doit pas s'arrêter avant d'avoir commencé

@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        product:
+            name: 'नाम'
+            description: 'विवरण'
+            attributes: 'विशेषताएँ'
+            options: 'विकल्प'
+            meta_keywords: 'मेटा कुंजीशब्द'
+            meta_description: 'मेटा विवरण'
+            slug: 'स्लग'
+            taxons: 'टैक्सन'
+        product_variant:
+            name: 'नाम'
+        association_type:
+            name: 'नाम'
+            translations: 'अनुवाद'
+        association:
+            type: 'संबंध प्रकार'
+            product: 'संबंधित उत्पाद'
+        variant:
+            name: 'नाम'
+        option:
+            name: 'नाम'
+            position: 'स्थिति'
+            values: 'संभावित मान'
+        option_value:
+            add_value: 'मान जोड़ें'
+            value: 'मान'

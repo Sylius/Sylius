@@ -51,7 +51,11 @@ class ProvinceAddressConstraintValidator extends ConstraintValidator
         }
 
         if (!$this->isProvinceValid($value)) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->atPath('provinceCode')
+                ->addViolation()
+            ;
         }
     }
 

@@ -1,0 +1,11 @@
+{% set shipment = hookable_metadata.context.resource %}
+
+<tbody>
+    {% for unit in shipment.units %}
+        {% set item = unit.orderItem %}
+
+        <tr {{ sylius_test_html_attribute('item', item.productName) }}>
+            {% hook 'body' with { item } %}
+        </tr>
+    {% endfor %}
+</tbody>

@@ -14,8 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Distributor;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 
 interface MinimumPriceDistributorInterface
 {
+    /**
+     * @param OrderItemInterface[] $orderItems
+     *
+     * @return int[]
+     */
     public function distribute(array $orderItems, int $amount, ChannelInterface $channel, bool $appliesOnDiscounted): array;
 }

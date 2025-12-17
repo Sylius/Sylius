@@ -17,6 +17,7 @@
         <import resource="shop/checkout.xml" />
         <import resource="shop/contact.xml" />
         <import resource="shop/order.xml" />
+        <import resource="shop/payment_request.xml" />
         <import resource="shop/product.xml" />
     </imports>
 
@@ -28,7 +29,8 @@
     <services>
         <defaults public="true" />
 
-        <service id="sylius.behat.page.shop.cart_summary" class="%sylius.behat.page.shop.cart_summary.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.page" class="Sylius\Behat\Page\Shop\Page" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.cart_summary" class="%sylius.behat.page.shop.cart_summary.class%" parent="sylius.behat.page.shop.page" public="false" />
         <service id="sylius.behat.page.shop.home" class="%sylius.behat.page.shop.home.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>
 </container>

@@ -23,7 +23,7 @@ use Doctrine\ORM\Query\SqlWalker;
 
 final class OrderByIdentifierSqlWalker extends SqlWalker
 {
-    public function walkSelectStatement(SelectStatement $AST)
+    public function walkSelectStatement(SelectStatement $AST): string
     {
         $dqlAlias = $this->getDqlAlias();
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <service id="sylius.processor.payment_request.notify_payload" class="Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessor">
+            <argument type="service" id="sylius.normalizer.symfony_request" />
+        </service>
+        <service id="Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessorInterface" alias="sylius.processor.payment_request.notify_payload" />
+
+        <service id="sylius.processor.payment_request.http_response" class="Sylius\Bundle\PaymentBundle\Processor\HttpResponseProcessor">
+            <argument type="service" id="sylius.announcer.payment_request" />
+            <argument type="service" id="sylius.provider.http_response.default" />
+        </service>
+        <service id="Sylius\Bundle\PaymentBundle\Processor\HttpResponseProcessorInterface" alias="sylius.processor.payment_request.http_response" />
+    </services>
+</container>

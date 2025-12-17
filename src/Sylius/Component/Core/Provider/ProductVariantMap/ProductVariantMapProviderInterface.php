@@ -17,7 +17,13 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 interface ProductVariantMapProviderInterface
 {
+    /**
+     * @param array<string, mixed> $context
+     *
+     * @return array<string, mixed>
+     */
     public function provide(ProductVariantInterface $variant, array $context): array;
 
+    /** @param array<string, mixed> $context */
     public function supports(ProductVariantInterface $variant, array $context): bool;
 }

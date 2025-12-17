@@ -14,30 +14,21 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Product\ShowPage;
 
 use Behat\Mink\Element\NodeElement;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-final class VariantsElement extends Element implements VariantsElementInterface
+class VariantsElement extends SyliusElement implements VariantsElementInterface
 {
     public function countVariantsOnPage(): int
     {
         /** @var NodeElement $variants|array */
-        $variants = $this->getDocument()->findAll('css', '#variants .item');
+        $variants = $this->getDocument()->findAll('css', '[data-test-variant]');
 
         return \count($variants);
     }
 
-    public function hasProductVariant(string $name): bool
+    public function hasProductVariant(string $code): bool
     {
-        $variantRows = $this->getDocument()->findAll('css', '#variants .variants-accordion__title');
-
-        /** @var NodeElement $variant */
-        foreach ($variantRows as $variant) {
-            if ($variant->find('css', '.content .variant-name')->getText() === $name) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->hasElement('variant', ['%code%' => $code]);
     }
 
     public function hasProductVariantWithCodePriceAndCurrentStock(
@@ -45,10 +36,10 @@ final class VariantsElement extends Element implements VariantsElementInterface
         string $code,
         string $price,
         string $currentStock,
-        string $channel,
+        string $channelCode,
     ): bool {
         /** @var NodeElement $variantRow */
-        $variantRows = $this->getDocument()->findAll('css', '#variants .variants-accordion__title');
+        $variantRows = $this->getDocument()->findAll('css', '[data-test-variant]');
 
         /** @var NodeElement $variant */
         foreach ($variantRows as $variant) {
@@ -59,7 +50,7 @@ final class VariantsElement extends Element implements VariantsElementInterface
                     $code,
                     $price,
                     $currentStock,
-                    $channel,
+                    $channelCode,
                 )
             ) {
                 return true;
@@ -70,93 +61,48 @@ final class VariantsElement extends Element implements VariantsElementInterface
     }
 
     public function hasProductVariantWithLowestPriceBeforeDiscountInChannel(
-        string $productVariantName,
+        string $productVariantCode,
         string $lowestPriceBeforeDiscount,
-        string $channelName,
+        string $channelCode,
     ): bool {
-        /** @var NodeElement[] $variantRows */
-        $variantRows = $this->getDocument()->findAll('css', '#variants .variants-accordion__title');
-
         /** @var NodeElement $variant */
-        foreach ($variantRows as $variant) {
-            if ($this->isVariantWithLowestPriceBeforeDiscountInChannel(
-                $variant,
-                $productVariantName,
-                $lowestPriceBeforeDiscount,
-                $channelName,
-            )) {
-                return true;
-            }
+        $variant = $this->getDocument()->find('css', sprintf('[data-test-lowest-price-before-the-discount="%s.%s"]', $productVariantCode, $channelCode));
+
+        if ($variant) {
+            return $variant->getText() === $lowestPriceBeforeDiscount;
         }
 
         return false;
     }
 
-    private function hasProductWithGivenNameCodePriceAndCurrentStock(
+    protected function getDefinedElements(): array
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'variant' => '[data-test-variant="%code%"]',
+            'variant_pricing_row' => '[data-test-variant-pricing="%channel_code%.%variant_code%"]',
+        ]);
+    }
+
+    protected function hasProductWithGivenNameCodePriceAndCurrentStock(
         NodeElement $variant,
         string $name,
         string $code,
         string $price,
         string $currentStock,
-        string $channel,
+        string $channelCode,
     ): bool {
-        $variantContent = $variant->getParent()->find(
-            'css',
-            sprintf('.variants-accordion__content.%s', $this->getItemIndexClass($variant)),
-        );
-
         if (
-            $variant->find('css', '.content .variant-name')->getText() === $name &&
-            $variant->find('css', '.content .variant-code')->getText() === $code &&
-            $variantContent->find('css', sprintf('tr.pricing:contains("%s") td:nth-child(2)', $channel))->getText() === $price &&
-            $variant->find('css', '.current-stock')->getText() === $currentStock
+            $variant->find('css', '[data-test-product-variant-code]')->getText() === $code &&
+            $variant->find('css', '[data-test-product-variant-name]')->getText() === $name &&
+            $this->getElement('variant_pricing_row', [
+                '%channel_code%' => $channelCode,
+                '%variant_code%' => $code,
+            ])->find('css', '[data-test-price]')->getText() === $price &&
+            $variant->find('css', '[data-test-current-stock]')->getText() === $currentStock
         ) {
             return true;
         }
 
         return false;
-    }
-
-    private function isVariantWithLowestPriceBeforeDiscountInChannel(
-        NodeElement $variant,
-        string $name,
-        string $lowestPriceBeforeDiscount,
-        string $channel,
-    ): bool {
-        $variantContent = $variant->getParent()->find(
-            'css',
-            sprintf('.variants-accordion__content.%s', $this->getItemIndexClass($variant)),
-        );
-
-        $headerRow = $variantContent->find('css', '.pricing-header');
-        $lowestPriceColumnIndex = $this->getLowestPriceColumnIndex($headerRow);
-
-        if ($lowestPriceColumnIndex === null) {
-            return false;
-        }
-
-        return
-            $variant->find('css', '.content .variant-name')->getText() === $name &&
-            $variantContent->find(
-                'css',
-                sprintf('tr.pricing:contains("%s") td:nth-child(%s)', $channel, $lowestPriceColumnIndex),
-            )->getText() === $lowestPriceBeforeDiscount
-        ;
-    }
-
-    private function getItemIndexClass(NodeElement $variant): string
-    {
-        return explode(' ', $variant->getAttribute('class'))[1];
-    }
-
-    private function getLowestPriceColumnIndex(NodeElement $headerRow): ?int
-    {
-        foreach ($headerRow->findAll('css', 'td') as $index => $cell) {
-            if ($cell->getText() === 'Lowest price before discount') {
-                return $index + 1;
-            }
-        }
-
-        return null;
     }
 }

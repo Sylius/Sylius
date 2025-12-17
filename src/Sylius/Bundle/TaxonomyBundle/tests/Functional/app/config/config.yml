@@ -1,0 +1,35 @@
+imports:
+    - { resource: "parameters.yml" }
+
+parameters:
+    locale: en_US
+    secret: "Three can keep a secret, if two of them are dead."
+
+framework:
+    assets: false
+    translator: { fallbacks: ["%locale%"] }
+    secret: "%secret%"
+    router:
+        resource: "%kernel.project_dir%/app/config/routing.yml"
+    form: ~
+    csrf_protection: true
+    default_locale: "%locale%"
+    session:
+        handler_id: ~
+        storage_factory_id: session.storage.factory.mock_file
+    http_method_override: true
+    test: ~
+
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        path: "%database_path%"
+        charset: UTF8
+    orm:
+        entity_managers:
+            default:
+                auto_mapping: true

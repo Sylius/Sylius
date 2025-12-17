@@ -4,6 +4,7 @@
 sylius:
     locale:
         code:
-            not_blank: Scegliere Il codice di localizzazione.
-            regex: Il codice di localizzazione può contenere solo lettere, numeri, trattini e underscore.
-            unique: Il codice di localizzazione deve essere univoco.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore scegli il codice della lingua.'
+            locale: 'Questo valore non è un codice di lingua valido.'
+            unique: 'Il codice della lingua deve essere unico.'

@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -28,6 +29,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -41,7 +43,9 @@ final class ProductContext implements Context
         private IriConverterInterface $iriConverter,
         private ChannelContextSetterInterface $channelContextSetter,
         private RequestFactoryInterface $requestFactory,
+        private ObjectManager $objectManager,
         private string $apiUrlPrefix,
+        private ProductVariantResolverInterface $productVariantResolver,
     ) {
     }
 
@@ -52,10 +56,11 @@ final class ProductContext implements Context
      */
     public function iViewProduct(ProductInterface $product): void
     {
+        $this->objectManager->clear(); // it's needed to clear the entity manager to receive the product images in correct order, as the images are using fallback order when added programmatically
         $this->client->show(Resources::PRODUCTS, $product->getCode());
 
         /** @var ProductVariantInterface $productVariant */
-        $productVariant = $product->getVariants()->first();
+        $productVariant = $this->productVariantResolver->getVariant($product);
 
         $this->sharedStorage->set('product', $product);
         $this->sharedStorage->set('product_variant', $productVariant);
@@ -63,11 +68,11 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I try to reach unexistent product
+     * @When I try to reach nonexistent product
      */
-    public function iTryToReachUnexistentProduct(): void
+    public function iTryToReachNonexistentProduct(): void
     {
-        $this->client->show(Resources::PRODUCTS, 'unexistent');
+        $this->client->show(Resources::PRODUCTS, 'nonexistent');
     }
 
     /**
@@ -318,9 +323,9 @@ final class ProductContext implements Context
      */
     public function iShouldNotSeeAnyOriginalPrice(): void
     {
-        $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
+        $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($response['originalPrice'], $response['price']);
+        Assert::same($product['defaultVariantData']['originalPrice'], $product['defaultVariantData']['price']);
     }
 
     /**
@@ -409,13 +414,8 @@ final class ProductContext implements Context
     {
         $product = $this->responseChecker->getCollection($this->client->resend())[0];
 
-        $defaultVariantPrice = $this->responseChecker->getValue(
-            $this->client->showByIri($product['defaultVariant']),
-            'price',
-        );
-
         Assert::same($product['name'], $name);
-        Assert::same($defaultVariantPrice, $price);
+        Assert::same($product['defaultVariantData']['price'], $price);
     }
 
     /**
@@ -436,13 +436,8 @@ final class ProductContext implements Context
         $products = $this->responseChecker->getCollection($this->client->resend());
         $product = end($products);
 
-        $defaultVariantPrice = $this->responseChecker->getValue(
-            $this->client->showByIri($product['defaultVariant']),
-            'price',
-        );
-
         Assert::same($product['name'], $name);
-        Assert::same($defaultVariantPrice, $price);
+        Assert::same($product['defaultVariantData']['price'], $price);
     }
 
     /**
@@ -471,6 +466,28 @@ final class ProductContext implements Context
     public function iShouldSeeProductName(string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
+    }
+
+    /**
+     * @Then the main image should be of type :type
+     * @Then I should be able to see a main image of type :type
+     * @Then the first thumbnail image should be of type :type
+     */
+    public function theImageShouldBeOfType(string $type): void
+    {
+        $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
+
+        Assert::same($images[0]['type'], $type);
+    }
+
+    /**
+     * @Then the second thumbnail image should be of type :type
+     */
+    public function theSecondThumbnailImageShouldBeOfType(string $type): void
+    {
+        $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
+
+        Assert::same($images[1]['type'], $type);
     }
 
     /**
@@ -536,13 +553,9 @@ final class ProductContext implements Context
      */
     public function theProductPriceShouldBe(int $price): void
     {
-        $response = $this->client->getLastResponse();
+        $defaultVariant = $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariantData');
 
-        $defaultVariantResponse = $this->client->showByIri(
-            $this->responseChecker->getValue($response, 'defaultVariant'),
-        );
-
-        Assert::same($this->responseChecker->getValue($defaultVariantResponse, 'price'), $price);
+        Assert::same($defaultVariant['price'], $price);
     }
 
     /**
@@ -678,9 +691,7 @@ final class ProductContext implements Context
     public function iShouldNotSeeInformationAboutItsLowestPrice(): void
     {
         $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
-        $variant = $this->responseChecker->getResponseContent(
-            $this->client->showByIri((string) $product['defaultVariant']),
-        );
+        $variant = $product['defaultVariantData'];
 
         Assert::keyExists($variant, 'lowestPriceBeforeDiscount');
         Assert::same($variant['lowestPriceBeforeDiscount'], null);
@@ -692,9 +703,7 @@ final class ProductContext implements Context
     public function iShouldSeeAsItsLowestPriceBeforeTheDiscount(int $lowestPriceBeforeDiscount): void
     {
         $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
-        $variant = $this->responseChecker->getResponseContent(
-            $this->client->showByIri((string) $product['defaultVariant']),
-        );
+        $variant = $product['defaultVariantData'];
 
         Assert::keyExists($variant, 'lowestPriceBeforeDiscount');
         Assert::same($variant['lowestPriceBeforeDiscount'], $lowestPriceBeforeDiscount);

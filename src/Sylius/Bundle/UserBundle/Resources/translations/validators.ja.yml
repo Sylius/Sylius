@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email:
+            not_blank: 'メールアドレスを入力してください。'
+            invalid: '無効なメールアドレスです。'
+            not_registered: 'このメールアドレスのユーザーは存在しません。まず登録してください。'
+        plainPassword:
+            not_blank: 'パスワードを入力してください。'
+            mismatch: '入力されたパスワードが一致しません。'
+            wrong_current: '入力されたパスワードが現在のものと異なります。'
+        password:
+            min: 'パスワードは {{ limit }} 文字以上でなければなりません。'
+            max: 'パスワードは {{ limit }} 文字以内でなければなりません。'

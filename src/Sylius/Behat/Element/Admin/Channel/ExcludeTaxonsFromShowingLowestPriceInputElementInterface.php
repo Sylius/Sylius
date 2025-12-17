@@ -21,5 +21,5 @@ interface ExcludeTaxonsFromShowingLowestPriceInputElementInterface
 
     public function removeExcludedTaxon(TaxonInterface $taxon): void;
 
-    public function hasTaxonExcluded(TaxonInterface $taxons): bool;
+    public function hasTaxonExcluded(TaxonInterface $taxon): bool;
 }

@@ -17,11 +17,6 @@ use Webmozart\Assert\Assert;
 
 final class ProportionalIntegerDistributor implements ProportionalIntegerDistributorInterface
 {
-    /**
-     * @param array<array-key, int> $integers
-     *
-     * @return array<array-key, int>
-     */
     public function distribute(array $integers, int $amount): array
     {
         Assert::allInteger($integers);

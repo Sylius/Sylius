@@ -1,220 +1,284 @@
-# This file is part of the Sylius package.
-# (c) Sylius Sp. z o.o.
-
 sylius:
+    email:
+        admin_password_reset:
+            hello: 'Hej'
+            subject: 'Återställning av administratörslösenord'
+            reset_your_password: 'Återställ ditt lösenord'
+            to_reset_your_password: 'För att återställa ditt lösenord – klicka på länken nedan'
+            to_reset_your_password_token: 'För att återställa ditt lösenord – använd token nedan'
+            token: 'Din token för lösenordsåterställning är'
+        contact_request:
+            content: 'Innehåll'
+            message_from: 'Meddelande från'
+            subject: 'Kontaktförfrågan'
+        order_confirmation:
+            has_been_successfully_placed: 'har lagts framgångsrikt.'
+            subject: 'Orderbekräftelse'
+            view_order_or_change_payment_method: 'Visa order eller ändra betalningsmetod'
+            thank_you: 'Tack för att du handlat i vår butik!'
+            your_order_number: 'Ditt ordernummer'
+        password_reset:
+            hello: 'Hej'
+            reset_your_password: 'Återställ ditt lösenord'
+            subject: 'Återställning av lösenord'
+            to_reset_your_password: 'För att återställa ditt lösenord – klicka på länken nedan'
+            to_reset_your_password_token: 'För att återställa ditt lösenord – använd token nedan'
+            token: 'Din token för lösenordsåterställning är'
+        shipment_confirmation:
+            has_been_sent_using: 'har skickats med'
+            subject: 'Leveransbekräftelse'
+            thank_you_for_transaction: 'Tack för en lyckad transaktion.'
+            you_can_check_its_location_with_the_tracking_code: 'Du kan spåra dess plats med spårningskoden %tracking_code%.'
+            your_order_with_number: 'Din order med nummer'
+        user_registration:
+            start_shopping: 'Börja handla'
+            subject: 'Användarregistrering'
+            welcome_to_our_store: 'Välkommen till vår butik!'
+            you_have_just_been_registered: 'Du har just registrerats. Tack'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
+        verification_token:
+            hello: 'Hej'
+            message: 'Verifiera ditt konto med token: '
+            subject: 'Verifiering av e-postadress'
+            to_verify_your_email_address: 'För att verifiera din e-postadress – klicka på länken nedan'
+            verify_your_email_address: 'Verifiera din e-postadress'
+        user:
+            account_verification:
+                greeting: 'Hej'
+                message: 'Verifiera ditt konto med token: '
+                statement: 'Verifiera din e-postadress'
+                strategy: 'För att verifiera din e-postadress – klicka på länken nedan'
+                subject: 'Verifiering av e-postadress'
     form:
         block:
-            body: Brödtext
-            id: ID
-            title: Titel
+            body: 'Innehåll'
+            id: 'ID'
+            title: 'Titel'
         cart:
-            coupon: Rabattkupong
+            coupon: 'Kupong'
         catalog_promotion:
-            channels: Kanaler
+            channels: 'Kanaler'
+            scope:
+                for_products: 'För produkter'
+                for_taxons: 'För taxon'
+                for_variants: 'För varianter'
         checkout:
             addressing:
-                different_billing_address: Använda annan adress för fakturering?
-            payment_method: Betalsätt
-            shipping_method: Fraktsätt
+                different_billing_address: 'Använd annan adress för fakturering?'
+                different_shipping_address: 'Använd annan adress för leverans?'
+            payment_method: 'Betalningsmetod'
+            shipping_method: 'Fraktmetod'
+        currency:
+            select: 'Välj valuta'
         promotion:
-            channels: Kanaler
+            channels: 'Kanaler'
         promotion_action:
             add_product_configuration:
-                product: Produkt
+                product: 'Produkt'
         promotion_coupon:
-            per_customer_usage_limit: Användningsbegränsning per kund
+            per_customer_usage_limit: 'Användningsgräns per kund'
+            reusable_from_cancelled_orders: 'Kan återanvändas från annullerade beställningar'
         group:
-            name: Namn
-            roles: Roller
+            name: 'Namn'
+            roles: 'Roller'
         channel:
             billing_data:
-                city: Ort
-                company: Företag
-                country: Land
-                postcode: Postnummer
-                street: Gatuadress
-            contact_email: Kontakt e-post
-            countries: Länder
-            currencies: Valutor
-            currency_base: Basvaluta
-            account_verification_required: Krävs kontoverifiering?
-            hostname: Värdnamn
-            locale_default: Standardspråk
-            locales: Språk
-            payment_methods: Betalningsmetoder
-            shipping_methods: Leveransmetoder
-            skipping_shipping_step_allowed: Hoppa över fraktsteget om endast en leveransmetod är tillgänglig?
-            skipping_payment_step_allowed: Hoppa över betalningssteget om endast en betalningsmetod är tillgänglig?
-            tax_calculation_strategy: Skatteberäkningsstrategi
-            tax_zone_default: Standardmomszon
-            taxonomies: Taxonomier
-            theme: Tema
+                city: 'Stad'
+                company: 'Företag'
+                country: 'Land'
+                postcode: 'Postnummer'
+                street: 'Gata'
+                tax_id: 'Momsregistreringsnr'
+            contact_email: 'Kontakt-e-post'
+            contact_phone_number: 'Kontakttelefonnummer'
+            countries: 'Länder'
+            currencies: 'Valutor'
+            currency_base: 'Basvaluta'
+            account_verification_required: 'Krävs kontoverifiering?'
+            hostname: 'Värdnamn'
+            locale_default: 'Standard-locale'
+            locales: 'Locales'
+            menu_taxon: 'Meny-taxon'
+            payment_methods: 'Betalningsmetoder'
+            shipping_address_in_checkout_required: 'Adress krävs i kassan'
+            shipping_methods: 'Fraktmetoder'
+            shop_billing_data: 'Butikens faktureringsdata'
+            skipping_shipping_step_allowed: 'Hoppa över fraktsteg om endast en fraktmetod finns?'
+            skipping_payment_step_allowed: 'Hoppa över betalsteg om endast en betalningsmetod finns?'
+            tax_calculation_strategy: 'Skatteberäkningsstrategi'
+            tax_zone_default: 'Standard skattezon'
+            taxonomies: 'Taxonomier'
+            theme: 'Tema'
         image:
-            type: Typ
-            file: Bild
+            type: 'Typ'
+            file: 'Bild'
         locale:
-            code: Kod
-            enabled: Aktiverad
+            code: 'Kod'
+            enabled: 'Aktiverad'
         order_filter:
-            created_at_from: Skapad efter
-            created_at_to: Skapad före
-            number: Nummer
-            total_from: Från
-            total_to: Till
-            payment_state: Betalningsstatus
-            channel: Alla kanaler
+            created_at_from: 'Skapad efter'
+            created_at_to: 'Skapad före'
+            number: 'Nummer'
+            total_from: 'Från'
+            total_to: 'Till'
+            payment_state: 'Betalningsstatus'
+            channel: 'Alla kanaler'
         page:
-            body: Brödtext
-            id: ID
-            title: Titel
+            body: 'Innehåll'
+            id: 'ID'
+            title: 'Titel'
         product:
-            images: Bilder
-            restricted_zone: Begränsat område
-            short_description: Kort beskrivning
-            variant_selection_method: Metod för val av variant
-            main_taxon: Huvudsaklig taxon
-            channels: Kanaler
-            enabled: Aktiverad
+            images: 'Bilder'
+            restricted_zone: 'Begränsad zon'
+            short_description: 'Kort beskrivning'
+            variant_selection_method: 'Variantvalmetod'
+            main_taxon: 'Huvudtaxon'
+            channels: 'Kanaler'
+            enabled: 'Aktiverad'
         product_filter:
-            name: Namn
-            code: Kod
+            name: 'Namn'
+            code: 'Kod'
         product_variant:
-            tax_category: Momskategori
-            shipping_category: Fraktkategori
+            tax_category: 'Skattekategori'
+            shipping_category: 'Fraktkategori'
         shipment_filter:
-            created_at_from: Från
-            created_at_to: Till
-            number: Beställningsnummer
-            shipping_address: Skickas till
-            channel: Alla kanaler
+            created_at_from: 'Från'
+            created_at_to: 'Till'
+            number: 'Ordernummer'
+            shipping_address: 'Leveransnamn'
+            channel: 'Alla kanaler'
         payment_filter:
-            created_at_from: Från
-            created_at_to: Till
-            number: Beställningsnummer
-            billing_address: Namn på faktura
-            channel: Alla kanaler
+            created_at_from: 'Från'
+            created_at_to: 'Till'
+            number: 'Ordernummer'
+            billing_address: 'Faktureringsnamn'
+            channel: 'Alla kanaler'
         shipping_method:
-            zone: Zon
+            zone: 'Zon'
         taxon:
-            code: Kod
-            file: Välj bild
-            images: Bilder
+            code: 'Kod'
+            file: 'Välj bild'
+            images: 'Bilder'
         taxonomy:
-            file: Välj bild
+            file: 'Välj bild'
         user:
-            billing_address: Faktureringsadress
-            enabled: Aktiverad
-            first_name: Förnamn
-            groups: Grupper
-            roles: Roller
-            last_name: Efternamn
-            password: Lösenord
-            shipping_address: Leveransadress
+            billing_address: 'Faktureringsadress'
+            different_shipping_address: 'Använd annan adress för leverans?'
+            enabled: 'Aktiverad'
+            first_name: 'Förnamn'
+            groups: 'Grupper'
+            roles: 'Roller'
+            last_name: 'Efternamn'
+            password: 'Lösenord'
+            shipping_address: 'Leveransadress'
         user_filter:
-            query: Sök
+            query: 'Sök'
         variant:
-            depth: Djup
-            height: Höjd
-            on_hand: I lager
-            price: Pris
-            sku: SKU
-            shipping_required: Krävs frakt?
-            weight: Vikt
-            width: Bredd
+            depth: 'Djup'
+            height: 'Höjd'
+            on_hand: 'Lagersaldo'
+            price: 'Pris'
+            sku: 'SKU'
+            shipping_required: 'Krävs frakt?'
+            weight: 'Vikt'
+            width: 'Bredd'
+            tracked_help: 'Om detta alternativ är aktiverat kommer Sylius att hålla koll på lagret och sluta sälja produkten när lagret når 0.'
         attribute:
             product_attribute_value:
-                attribute: Attribut
-                value: Värde
+                attribute: 'Attribut'
+                value: 'Värde'
         guest:
-            email: E-post
+            email: 'E-post'
         product_association:
-            product: Tillhörande produkt
-            type: Associationstyp
+            product: 'Associerad produkt'
+            type: 'Associeringstyp'
         product_association_type:
-            name: Namn
+            name: 'Namn'
         promotion_filter:
-            products: Produktfilter
-            taxons: Taxons filter
+            products: 'Produktfilter'
+            taxons: 'Taxonfilter'
         promotion_rule:
             customer_group:
-                group: Kundgrupp
+                group: 'Kundgrupp'
             has_taxon:
-                taxons: Taxa
+                taxons: 'Taxon'
             product:
-                products: Produkter
+                products: 'Produkter'
             total_of_items_from_taxon:
-                taxon: Taxon
-                amount: Belopp
+                taxon: 'Taxon'
+                amount: 'Belopp'
         payment_method:
-            channels: Kanaler
+            channels: 'Kanaler'
         product_attribute:
-            position: Position
+            position: 'Position'
         zone:
             scopes:
-                shipping: Leverans
-                tax: Skatt
+                shipping: 'Frakt'
+                tax: 'Skatt'
+
     installer:
         extensions:
-            header: tillägg
+            header: 'tillägg'
             accelerator:
-                header: Accelerator
-                help: Aktivera Zend OpCache (rekommenderas starkt).
-            apc: APC
-            ctype: Ctype
-            gd: GD
-            help: Installera och aktivera tillägget %extension%.
-            iconv: Iconv
-            exif: Exif
-            fileinfo: Filinfo
-            icu: ICU
-            intl: Intl
-            json_encode: JSON
-            mbstring: Multibyte sträng
-            off: false
-            on: true
-            pcre: PCRE
-            pdo: PDO
-            php_xml: PHP-XML
-            session_start: Session
-            simplexml_import_dom: SimpleXML
-            token_get_all: Tokenizer
+                header: 'Accelerator'
+                help: 'Aktivera Zend OpCache (starkt rekommenderat).'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: 'Installera och aktivera tillägget %extension%.'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: 'Multibyte String'
+            off: 'av'
+            on: 'på'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: 'Session'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
         filesystem:
-            header: filsystem
+            header: 'filsystem'
             cache:
-                header: cache
-                help: "För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
-            exists: tillgängligt
+                header: 'cache'
+                help: 'För att ange behörigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: 'finns'
             logs:
-                header: loggar
-                help: "För att ställa in rättigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
-            not_exists: ej tillgängligt
-            not_writable: ej skrivbart
+                header: 'loggar'
+                help: 'För att ange behörigheter kör: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: 'finns inte'
+            not_writable: 'ej skrivbar'
             parameters:
-                header: parameters.yml
-                help: "För att ställa in rättigheter kör: sudo chmod a+w %path%"
-            vendors: vendors
-            writable: skrivbar
+                header: 'parameters.yml'
+                help: 'För att ange behörigheter kör: sudo chmod a+w %path%'
+            vendors: 'vendors'
+            writable: 'skrivbar'
         settings:
-            header: PHP-version och inställningar
-            any: valfritt
-            detect_unicode: detect_unicode
-            magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: inte utdaterad
-            off: false
-            on: true
-            register_globals: register_globals
+            header: 'PHP-version och inställningar'
+            any: 'vilken som helst'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: 'Sätt "detect_unicode = Off" i din php.ini-fil'
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: 'inte föråldrad'
+            off: 'av'
+            on: 'på'
+            register_globals: 'register_globals'
             session:
-                auto_start: session.auto_start
-            short_open_tag: short_open_tag
-            timezone: tidszon
+                auto_start: 'session.auto_start'
+                auto_start_help: 'Sätt "session.auto_start = Off" i din php.ini-fil'
+            short_open_tag: 'short_open_tag'
+            timezone: 'tidszon'
+            timezone_help: 'Ställ in "date.timezone" i din php.ini-fil (t.ex. date.timezone = "Europe/Amsterdam")'
             timezone_deprecated:
-                header: Utgången tidzon
-                help: Tidszonen %timezone% är utgången. Åtgärda din php.ini fil (lista med utgångna tidzoner http://php.net/manual/en/timezones.others.php).
-            version: PHP-version
-            version_recommended: Rekommenderad PHP-version
-    payum_gateway:
-        cash_on_delivery: Postförskott
-        offline: Offline
-        paypal_express_checkout: PayPal Express Checkout
+                header: 'Föråldrad tidszon'
+                help: 'Tidszonen %timezone% är föråldrad. Rätta din php.ini-fil (lista över föråldrade tidszoner http://php.net/manual/en/timezones.others.php).'
+            version: 'PHP-version'
+            version_recommended: 'Rekommenderad PHP-version'
+            version_help: 'Sylius rekommenderar PHP-version %recommended%, din nuvarande version är %current%. Uppgradera.'
+
     shipping_method_resolver:
-        by_zones_and_channel: Genom zoner och kanaler
+        by_zones_and_channel: 'Efter zoner och kanal'

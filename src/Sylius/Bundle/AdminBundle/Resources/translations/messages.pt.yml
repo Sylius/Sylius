@@ -4,46 +4,129 @@
 sylius:
     email:
         shipment_confirmation:
+            has_been_sent_using: 'foi enviada usando'
             subject: 'Confirmação de envio'
+            thank_you_for_transaction: 'Obrigado por uma transação bem-sucedida.'
+            you_can_check_its_location_with_the_tracking_code: 'Você pode verificar a localização com o código de rastreamento %tracking_code%.'
+            your_order_with_number: 'Seu pedido com número'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Mostrar o menor preço dos produtos com desconto antes do desconto atual?'
+                period_for_which_the_lowest_price_is_calculated: 'Período pelo qual o menor preço é calculado'
+            reset_password:
+                password:
+                    label: 'Nova senha'
+                    confirmation: 'Confirmar nova senha'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: Tipos de associação
-                    attributes: Atributos
-                    header: Catálogo
-                    inventory: Inventário
-                    options: Opções
-                    products: Produtos
-                    taxons: Táxons
+                    association_types: 'Tipos de associação'
+                    attributes: 'Atributos'
+                    header: 'Catálogo'
+                    inventory: 'Inventário'
+                    options: 'Opções'
+                    products: 'Produtos'
+                    taxons: 'Táxons'
                 configuration:
-                    admin_users: Administradores
-                    channels: Canais
-                    countries: Países
-                    currencies: Moedas
-                    exchange_rates: Taxas de câmbio
-                    header: Configuração
-                    locales: Linguagens
-                    payment_methods: Métodos de pagamento
-                    shipping_categories: Categorias de expedição
-                    shipping_methods: Métodos de envio
-                    tax_categories: Categorias de impostos
-                    tax_rates: Impostos
-                    zones: Zonas
+                    admin_users: 'Administradores'
+                    channels: 'Canais'
+                    countries: 'Países'
+                    currencies: 'Moedas'
+                    exchange_rates: 'Taxas de câmbio'
+                    header: 'Configuração'
+                    locales: 'Idiomas'
+                    payment_methods: 'Métodos de pagamento'
+                    shipping_categories: 'Categorias de envio'
+                    shipping_methods: 'Métodos de envio'
+                    tax_categories: 'Categorias de imposto'
+                    tax_rates: 'Taxas de imposto'
+                    zones: 'Zonas'
                 marketing:
-                    header: Marketing
-                    product_reviews: Críticas do produto
-                    promotions: Promoções
+                    cart_promotions: 'Promoções de carrinho'
+                    catalog_promotions: 'Promoções de catálogo'
+                    header: 'Marketing'
+                    product_reviews: 'Avaliações de produtos'
+                    promotions: 'Promoções'
                 customers:
-                    customers: Clientes
-                    groups: Grupos
-                    header: Cliente
+                    customers: 'Clientes'
+                    groups: 'Grupos'
+                    header: 'Cliente'
                 sales:
-                    header: Vendas
-                    orders: Encomendas
+                    header: 'Vendas'
+                    orders: 'Pedidos'
                 official_support:
-                    header: Suporte oficial
-                    browse_plugins: Navegar por plugins
-                    sylius_plus: Sylius Plus
-                    professional_services: Serviços profissionais
-                    find_a_partner: Encontre um parceiro
+                    header: 'Suporte oficial'
+                    browse_plugins: 'Explorar plugins'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Serviços profissionais'
+                    find_a_partner: 'Encontrar um parceiro'
+                    sylius_certification: 'Certificação Sylius'
+    ui:
+        account: 'Conta'
+        admin_user: 'Administrador'
+        add_new_entry: 'Adicionar uma nova entrada'
+        back_to_dashboard: 'Voltar ao painel'
+        catalog_promotion:
+            dates_details: 'Esta operação é demorada! Considere um atraso de 2-10 minutos a partir das datas especificadas. O atraso depende do tamanho do catálogo.'
+        channel:
+            account_verification_required_details: 'Ao desativar esta opção, será possível criar contas e acessá-las sem verificação de e-mail e, assim, potencialmente acessar dados de pedidos feitos como convidado.'
+        channel_pricing_history: 'Histórico de precificação de canal'
+        channel_pricings: 'Preços por canal'
+        create_new:
+            customer_group: 'Criar um novo grupo de clientes'
+        delete_avatar: 'Excluir avatar'
+        full_screen: 'Tela cheia'
+        global: 'Global'
+        ip_address: 'Endereço IP'
+        language: 'Idioma'
+        lowest_price_before_discount: 'Menor preço antes do desconto'
+        minimum_price_details: 'Preço mínimo – limite abaixo do qual o preço atual não pode ser reduzido por promoções de catálogo nem de carrinho. Use para proteger a lucratividade das vendas.'
+        more: 'Mais'
+        no_main_taxon: 'sem táxon principal'
+        no_depth: 'Sem profundidade'
+        no_height: 'Sem altura'
+        no_results: 'Nenhum resultado encontrado'
+        no_results_adjust_your_search: 'Ajuste sua pesquisa e tente novamente.'
+        no_weight: 'Sem peso'
+        no_width: 'Sem largura'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Data do pedido'
+        original_price_details: 'Preço original – preço da variante do produto exibido riscado no catálogo. Base para o preço atual. Se não definido, a Promoção de Catálogo copia o valor de Preço para Preço Original.'
+        original_product_price_details: 'Preço original – preço do produto exibido riscado no catálogo. Base para o preço atual. Se não definido, a Promoção de Catálogo copia o valor de Preço para Preço Original.'
+        overdue: 'Vencido'
+        page_not_found: 'Página não encontrada'
+        pagination:
+            number_of_results: 'Mostrando %from% a %to% de %total% entradas'
+        partially_refunded: 'Parcialmente reembolsado'
+        pending_actions: 'Ações pendentes'
+        price_details: 'Preço – preço atual da variante do produto exibido no catálogo. Pode ser modificado explicitamente, por exemplo, por promoções de catálogo.'
+        product_price_details: 'Preço – preço atual do produto exibido no catálogo. Pode ser modificado explicitamente, por exemplo, por promoções de catálogo.'
+        price_history: 'Histórico de preços'
+        product:
+            product_not_active_in_channel: 'O produto ainda não está ativado neste canal.'
+        product_variant: 'Variante de produto'
+        sales_summary: 'Resumo de vendas'
+        search_menu: 'Pesquisar menu'
+        shipment_for_order: 'Envio para o pedido'
+        show_history_for_channel_pricing: 'Mostrar histórico para precificação de canal'
+        start_typing_to_search: 'Comece a digitar para pesquisar'
+        statistics:
+            day: 'Dia'
+            lifetime: 'Vitalício'
+            month: 'Mês'
+            week: 'Semana'
+            2weeks: '2 Semanas'
+            year: 'Ano'
+        taxon: 'Táxon'
+        to_approve: 'para aprovar'
+        to_process: 'para processar'
+        to_ship: 'para enviar'
+        view_in_store: 'Ver na loja'
+        work_in_progress: 'Trabalho em andamento'
+        empty_date: 'vazio'
+        notifications:
+            new_version_of_sylius_available: 'Há uma nova versão do Sylius disponível. Entre em contato com seu técnico para atualizar.'
+

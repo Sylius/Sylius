@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -153,12 +153,12 @@ final class ManagingCountriesContext implements Context
      */
     public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province, CountryInterface $country): void
     {
-        $iri = $this->iriConverter->getItemIriFromResourceClass($province::class, ['code' => $province->getCode()]);
+        $iri = $this->iriConverter->getIriFromResource($province);
 
         $provinces = $this->responseChecker->getValue($this->client->show(Resources::COUNTRIES, $country->getCode()), 'provinces');
-        foreach ($provinces as $countryProvince) {
-            if ($iri === $countryProvince) {
-                $this->client->removeSubResource('provinces', $countryProvince);
+        foreach ($provinces as $provinceIri) {
+            if ($iri === $provinceIri) {
+                $this->client->removeSubResourceIri('provinces', $provinceIri);
             }
         }
     }
@@ -178,7 +178,9 @@ final class ManagingCountriesContext implements Context
      */
     public function iRemoveProvinceName(ProvinceInterface $province): void
     {
-        $this->client->buildUpdateRequest(Resources::PROVINCES, $province->getCode());
+        $this->client->buildUpdateRequest(
+            sprintf('countries/%s/provinces/%s', $province->getCountry()->getCode(), $province->getCode()),
+        );
         $this->client->addRequestData('name', '');
         $this->client->update();
     }

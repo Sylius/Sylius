@@ -1,0 +1,6 @@
+<strong>{{ data.name }}</strong>
+{% if data.description is not empty %}
+    <div class="fs-5 text-secondary text-wrap pt-1" style="min-width: 200px;">
+        {{ data.description }}
+    </div>
+{% endif %}

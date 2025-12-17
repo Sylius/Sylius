@@ -22,7 +22,6 @@ use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Scope;
-use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -33,49 +32,29 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ChannelInterface> */
 class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
-
-    private ?TaxonRepositoryInterface $taxonRepository;
-
-    /** @var FactoryInterface<ShopBillingDataInterface>|null */
-    private ?FactoryInterface $shopBillingDataFactory;
+    protected OptionsResolver $optionsResolver;
 
     /**
+     * @param ChannelFactoryInterface<ChannelInterface> $channelFactory
      * @param RepositoryInterface<LocaleInterface> $localeRepository
      * @param RepositoryInterface<CurrencyInterface> $currencyRepository
      * @param RepositoryInterface<ZoneInterface> $zoneRepository
-     * @param FactoryInterface<ShopBillingDataInterface>|null $shopBillingDataFactory
+     * @param TaxonRepositoryInterface<TaxonInterface> $taxonRepository
+     * @param FactoryInterface<ShopBillingDataInterface> $shopBillingDataFactory
      */
     public function __construct(
-        private ChannelFactoryInterface $channelFactory,
-        private RepositoryInterface $localeRepository,
-        private RepositoryInterface $currencyRepository,
-        private RepositoryInterface $zoneRepository,
-        ?TaxonRepositoryInterface $taxonRepository = null,
-        ?FactoryInterface $shopBillingDataFactory = null,
+        protected readonly ChannelFactoryInterface $channelFactory,
+        protected readonly RepositoryInterface $localeRepository,
+        protected readonly RepositoryInterface $currencyRepository,
+        protected readonly RepositoryInterface $zoneRepository,
+        protected readonly TaxonRepositoryInterface $taxonRepository,
+        protected readonly FactoryInterface $shopBillingDataFactory,
     ) {
-        if (null === $taxonRepository) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.8',
-                'Passing a $taxonRepository as the fifth argument is deprecated and will be prohibited in Sylius 2.0',
-            );
-        }
-
-        if (null === $shopBillingDataFactory) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.8',
-                'Passing a $shopBillingDataFactory as the sixth argument is deprecated and will be prohibited in Sylius 2.0',
-            );
-        }
-        $this->taxonRepository = $taxonRepository;
-        $this->shopBillingDataFactory = $shopBillingDataFactory;
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -101,10 +80,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setSkippingPaymentStepAllowed($options['skipping_payment_step_allowed']);
         $channel->setAccountVerificationRequired($options['account_verification_required']);
         $channel->setShippingAddressInCheckoutRequired($options['shipping_address_in_checkout_required']);
-
-        if (null !== $this->taxonRepository) {
-            $channel->setMenuTaxon($options['menu_taxon']);
-        }
+        $channel->setMenuTaxon($options['menu_taxon']);
 
         $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {
@@ -116,8 +92,8 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             $channel->addCurrency($currency);
         }
 
-        if (isset($options['shop_billing_data']) && null !== $options['shop_billing_data']) {
-            $shopBillingData = $this->shopBillingDataFactory ? $this->shopBillingDataFactory->createNew() : new ShopBillingData();
+        if (isset($options['shop_billing_data'])) {
+            $shopBillingData = $this->shopBillingDataFactory->createNew();
             $shopBillingData->setCompany($options['shop_billing_data']['company'] ?? null);
             $shopBillingData->setTaxId($options['shop_billing_data']['tax_id'] ?? null);
             $shopBillingData->setCountryCode($options['shop_billing_data']['country_code'] ?? null);
@@ -134,12 +110,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('name', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('hostname', fn (Options $options): string => $options['code'] . '.localhost')
             ->setDefault('color', fn (Options $options): string => $this->faker->hexColor)
@@ -182,12 +153,10 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('shop_billing_data', null)
         ;
 
-        if (null !== $this->taxonRepository) {
-            $resolver
-                ->setDefault('menu_taxon', LazyOption::randomOneOrNull($this->taxonRepository))
-                ->setAllowedTypes('menu_taxon', ['null', 'string', TaxonInterface::class])
-                ->setNormalizer('menu_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'))
-            ;
-        }
+        $resolver
+            ->setDefault('menu_taxon', LazyOption::randomOneOrNull($this->taxonRepository))
+            ->setAllowedTypes('menu_taxon', ['null', 'string', TaxonInterface::class])
+            ->setNormalizer('menu_taxon', LazyOption::findOneBy($this->taxonRepository, 'code'))
+        ;
     }
 }

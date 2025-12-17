@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        code:
+            max_length: '코드는 {{ limit }}자를 초과할 수 없습니다.'
+            not_blank: '채널 코드를 입력하세요.'
+            regex: '채널 코드는 문자, 숫자, 하이픈(-), 밑줄(_)만 사용할 수 있습니다.'
+            unique: '채널 코드는 고유해야 합니다.'
+        name:
+            not_blank: '채널 이름을 입력하세요.'
+            max_length: '채널 이름은 {{ limit }}자를 초과할 수 없습니다.'
+        color:
+            max_length: '색상은 {{ limit }}자를 초과할 수 없습니다.'
+        hostname:
+            max_length: '호스트 이름은 {{ limit }}자를 초과할 수 없습니다.'

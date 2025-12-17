@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: 'Der Name des Karteninhabers muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen des Karteninhabers ein.'
+        expiry_month:
+            max_range: 'Der Ablaufmonat der Kreditkarte muss zwischen {{ min }} und {{ max }} liegen.'
+            min_range: 'Der Ablaufmonat der Kreditkarte muss zwischen {{ min }} und {{ max }} liegen.'
+            not_blank: 'Bitte wählen Sie den Ablaufmonat aus.'
+        number:
+            not_blank: 'Bitte geben Sie die Kartennummer ein.'
+            luhn: 'Die eingegebene Kreditkartennummer ist ungültig.'
+        security_code:
+            not_blank: 'Bitte geben Sie den Sicherheitscode ein.'
+            max_length: 'Der CVV-Code der Kreditkarte muss höchstens {{ limit }} Ziffern lang sein.'
+            min_length: 'Der CVV-Code der Kreditkarte muss höchstens {{ limit }} Ziffern lang sein.'
+        expiry_year:
+            not_blank: 'Bitte wählen Sie das Ablaufjahr aus.'
+    gateway_config:
+        invalid_gateway_factory: 'Ungültige Gateway-Fabrik. Verfügbare Fabriken sind {{ available_factories }}.'
+        gateway_name:
+            not_blank: 'Bitte geben Sie den Gateway-Namen ein.'
+        factory_name:
+            not_blank: 'Bitte geben Sie den Namen der Gateway-Fabrik ein.'
+    payment:
+        currency_code:
+            not_valid: 'Der eingegebene Währungscode ist ungültig.'
+        method:
+            not_blank: 'Bitte wählen Sie eine Zahlungsmethode aus.'
+    payment_method:
+        gateway:
+            not_blank: 'Bitte wählen Sie die Zahlungsmethoden-Gateway aus.'
+        name:
+            max_length: 'Der Name der Zahlungsmethode darf höchstens {{ limit }} Zeichen lang sein.'
+            min_length: 'Der Name der Zahlungsmethode muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Zahlungsmethode ein.'
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: 'Die Gebühr darf nicht weniger als {{ compared_value }} betragen.'
+                not_blank: 'Bitte geben Sie den Gebührensatz ein.'
+            percent:
+                max_range: 'Die prozentuale Gebühr darf nicht größer als {{ limit }} sein.'
+                min_range: 'Die prozentuale Gebühr darf nicht kleiner als {{ limit }} sein.'
+                not_blank: 'Bitte geben Sie den prozentualen Gebührensatz ein.'
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Zahlungsmethoden-Code ein.'
+            regex: 'Der Zahlungsmethoden-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Die Zahlungsmethode mit diesem Code existiert bereits.'

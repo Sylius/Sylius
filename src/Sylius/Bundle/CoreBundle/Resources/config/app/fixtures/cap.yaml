@@ -65,7 +65,7 @@ sylius_fixtures:
                     name: product
                     options:
                         custom:
-                            -   name: 'Knitted burgundy winter cap'
+                            -   name: 'Radiant Rays Cap'
                                 tax_category: 'other'
                                 channels:
                                     - 'FASHION_WEB'
@@ -74,13 +74,13 @@ sylius_fixtures:
                                     - 'caps'
                                     - 'caps_with_pompons'
                                 product_attributes:
-                                    cap_brand: 'You are breathtaking'
-                                    cap_collection: 'Sylius Winter 2019'
-                                    cap_material: '100% wool'
+                                    cap_brand: 'Sunlit Voyage'
+                                    cap_collection: 'Sylius Euphoria 2024'
+                                    cap_material: '100% cotton'
                                 images:
-                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.jpg', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_01.webp', type: 'main' }
 
-                            -   name: 'Knitted wool-blend green cap'
+                            -   name: 'Blissful Breeze Cap'
                                 tax_category: 'other'
                                 channels:
                                     - 'FASHION_WEB'
@@ -89,13 +89,13 @@ sylius_fixtures:
                                     - 'caps'
                                     - 'simple_caps'
                                 product_attributes:
-                                    cap_brand: 'Modern Wear'
-                                    cap_collection: 'Sylius Winter 2019'
-                                    cap_material: '100% wool'
+                                    cap_brand: 'Radiant Rays'
+                                    cap_collection: 'Sylius Bliss 2024'
+                                    cap_material: '100% cotton'
                                 images:
-                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.jpg', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_02.webp', type: 'main' }
 
-                            -   name: 'Knitted white pompom cap'
+                            -   name: 'Serene Sunshine Cap'
                                 tax_category: 'other'
                                 channels:
                                     - 'FASHION_WEB'
@@ -104,13 +104,13 @@ sylius_fixtures:
                                     - 'caps'
                                     - 'caps_with_pompons'
                                 product_attributes:
-                                    cap_brand: 'Celsius Small'
-                                    cap_collection: 'Sylius Winter 2019'
-                                    cap_material: '100% wool'
+                                    cap_brand: 'Tranquil Trails'
+                                    cap_collection: 'Sylius Serenity 2024'
+                                    cap_material: '100% cotton'
                                 images:
-                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.jpg', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_03.webp', type: 'main' }
 
-                            -   name: 'Cashmere-blend violet beanie'
+                            -   name: 'Vibrant Voyage Cap'
                                 tax_category: 'other'
                                 channels:
                                     - 'FASHION_WEB'
@@ -119,8 +119,214 @@ sylius_fixtures:
                                     - 'caps'
                                     - 'simple_caps'
                                 product_attributes:
-                                    cap_brand: 'Date & Banana'
-                                    cap_collection: 'Sylius Winter 2019'
-                                    cap_material: '100% cashmere'
+                                    cap_brand: 'Radiant Rays'
+                                    cap_collection: 'Sylius Vibrant 2024'
+                                    cap_material: '100% cotton'
                                 images:
-                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_04.jpg', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_04.webp', type: 'main' }
+
+                            -   name: 'Elegant Escape Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'simple_caps'
+                                taxons:
+                                    - 'caps'
+                                    - 'simple_caps'
+                                product_attributes:
+                                    cap_brand: 'Graceful Glow'
+                                    cap_collection: 'Sylius Elegance 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_05_1.webp', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_05_2.webp' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_05_3.webp' }
+
+                            -   name: 'Classic Coastal Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'simple_caps'
+                                taxons:
+                                    - 'caps'
+                                    - 'simple_caps'
+                                product_attributes:
+                                    cap_brand: 'Timeless Treasures'
+                                    cap_collection: 'Sylius Classic 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_06_1.webp', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_06_2.webp' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_06_3.webp' }
+
+                            -   name: 'Dynamic Dawn Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'caps_with_pompons'
+                                taxons:
+                                    - 'caps'
+                                    - 'caps_with_pompons'
+                                product_attributes:
+                                    cap_brand: 'Energetic Essence'
+                                    cap_collection: 'Sylius Dynamic 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_07_1.webp', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_07_2.webp' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_07_3.webp' }
+
+                            -   name: 'Lively Luminous Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'simple_caps'
+                                taxons:
+                                    - 'caps'
+                                    - 'simple_caps'
+                                product_attributes:
+                                    cap_brand: 'Vibrant Vibes'
+                                    cap_collection: 'Sylius Lively 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_08_1.webp', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_08_2.webp' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_08_3.webp' }
+
+                            -   name: 'Playful Paradise Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'simple_caps'
+                                taxons:
+                                    - 'caps'
+                                    - 'simple_caps'
+                                product_attributes:
+                                    cap_brand: 'Joyful Journeys'
+                                    cap_collection: 'Sylius Playful 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_09_1.webp', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_09_2.webp' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_09_3.webp' }
+
+                            -   name: 'Inspiring Illumination Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'caps_with_pompons'
+                                taxons:
+                                    - 'caps'
+                                    - 'caps_with_pompons'
+                                product_attributes:
+                                    cap_brand: 'Motivational Moments'
+                                    cap_collection: 'Sylius Inspiring 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_10.webp', type: 'main' }
+
+                            -   name: 'Casual Coastal Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'simple_caps'
+                                taxons:
+                                    - 'caps'
+                                    - 'simple_caps'
+                                product_attributes:
+                                    cap_brand: 'Relaxed Rhythms'
+                                    cap_collection: 'Sylius Casual 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_11.webp', type: 'main' }
+
+                            -   name: 'Bold Beach Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'caps_with_pompons'
+                                taxons:
+                                    - 'caps'
+                                    - 'caps_with_pompons'
+                                product_attributes:
+                                    cap_brand: 'Confident Choices'
+                                    cap_collection: 'Sylius Bold 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_12.webp', type: 'main' }
+
+                            -   name: 'Sophisticated Sunset Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'simple_caps'
+                                taxons:
+                                    - 'caps'
+                                    - 'simple_caps'
+                                product_attributes:
+                                    cap_brand: 'Elegant Elegance'
+                                    cap_collection: 'Sylius Sophisticated 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_13_1.webp', type: 'main' }
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_13_2.webp' }
+
+                            -   name: 'Adventurous Aurora Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'caps_with_pompons'
+                                taxons:
+                                    - 'caps'
+                                    - 'caps_with_pompons'
+                                product_attributes:
+                                    cap_brand: 'Explorer Essentials'
+                                    cap_collection: 'Sylius Adventurous 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_14.webp', type: 'main' }
+
+                            -   name: 'Tranquil Twilight Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'caps_with_pompons'
+                                taxons:
+                                    - 'caps'
+                                    - 'caps_with_pompons'
+                                product_attributes:
+                                    cap_brand: 'Peaceful Paths'
+                                    cap_collection: 'Sylius Tranquil 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_15.webp', type: 'main' }
+
+                            -   name: 'Harmonious Horizon Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'simple_caps'
+                                taxons:
+                                    - 'caps'
+                                    - 'simple_caps'
+                                product_attributes:
+                                    cap_brand: 'Balanced Bliss'
+                                    cap_collection: 'Sylius Harmonious 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_16.webp', type: 'main' }
+
+                            -   name: 'Radiant Reflection Cap'
+                                tax_category: 'other'
+                                channels:
+                                    - 'FASHION_WEB'
+                                main_taxon: 'caps_with_pompons'
+                                taxons:
+                                    - 'caps'
+                                    - 'caps_with_pompons'
+                                product_attributes:
+                                    cap_brand: 'Luminous Light'
+                                    cap_collection: 'Sylius Radiant 2024'
+                                    cap_material: '100% cotton'
+                                images:
+                                    - { path: '@SyliusCoreBundle/Resources/fixtures/caps/cap_17.webp', type: 'main' }

@@ -1,0 +1,36 @@
+{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
+
+{% set configuration = hookable_metadata.context.configuration %}
+{% set resource = hookable_metadata.context.resource %}
+{% set metadata = hookable_metadata.context.metadata %}
+
+{% set resource_index = metadata.applicationName~'.ui.'~metadata.pluralName %}
+{% set index_url = path(
+    configuration.vars.index.route.name|default(configuration.getRouteName('index')),
+    configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
+) %}
+
+{% set rendered_field_prefix = hookable_metadata.configuration.rendered_field_prefix|default(null) %}
+{% set field_name = hookable_metadata.configuration.rendered_field|default('') %}
+{% set rendered_field = rendered_field_prefix ~ (attribute(resource, field_name) is defined ? attribute(resource, field_name) : null) %}
+
+{% set action = hookable_metadata.configuration.action|default(false)
+    ? { name: hookable_metadata.configuration.action, active: false }
+    : {}
+%}
+
+{% set resource_show_name = rendered_field|default(resource.translations[app.locale].name|default(resource.code|default(resource.id))) %}
+
+{% if action is defined and action.name is defined %}
+    {% set show_url = path(configuration.getRouteName('show'), { id: resource.id }) %}
+    {% set resource_show = { name: resource_show_name, url: show_url} %}
+{% else %}
+    {% set resource_show = { name: resource_show_name, active: true} %}
+{% endif %}
+
+{{ breadcrumbs([
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: resource_index, url: index_url, active: false },
+    resource_show,
+    action
+]) }}

@@ -23,33 +23,28 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "doctrine/dbal": "^3.0",
-        "api-platform/core": "^2.7.10",
-        "lexik/jwt-authentication-bundle": "^2.11",
-        "sylius/core-bundle": "^1.13",
-        "symfony/messenger": "^5.4.21 || ^6.4"
+        "php": "^8.2",
+        "doctrine/dbal": "^3.9",
+        "api-platform/doctrine-orm": "^4.1.7",
+        "api-platform/symfony": "^4.1.7",
+        "lexik/jwt-authentication-bundle": "^3.1",
+        "sylius/core-bundle": "^2.0",
+        "sylius/payum-bundle": "^2.0",
+        "symfony/messenger": "^6.4 || ^7.2"
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "matthiasnoback/symfony-config-test": "^4.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "nelmio/alice": "^3.8",
-        "phparkitect/phparkitect": "^0.2.9",
-        "phpspec/phpspec": "^7.2",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.5",
-        "symfony/browser-kit": "^5.4.21 || ^6.4",
-        "symfony/debug-bundle": "^5.4.21 || ^6.4",
-        "symfony/dotenv": "^5.4.21 || ^6.4",
-        "symfony/webpack-encore-bundle": "^1.15",
-        "theofidry/alice-data-fixtures": "^1.4"
-    },
-    "conflict": {
-        "api-platform/core": "2.7.17",
-        "doctrine/doctrine-bundle": "2.3.0",
-        "lexik/jwt-authentication-bundle": "^2.18",
-        "symfony/serializer": "^6.4.23"
+        "matthiasnoback/symfony-config-test": "^6.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "nelmio/alice": "^3.13",
+        "phparkitect/phparkitect": "^0.6",
+        "phpspec/prophecy-phpunit": "^2.2",
+        "phpunit/phpunit": "^11.5",
+        "symfony/browser-kit": "^6.4 || ^7.2",
+        "symfony/debug-bundle": "^6.4 || ^7.2",
+        "symfony/dotenv": "^6.4 || ^7.2",
+        "symfony/webpack-encore-bundle": "^2.2",
+        "theofidry/alice-data-fixtures": "^1.7"
     },
     "config": {
         "allow-plugins": {
@@ -58,7 +53,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^7.2"
         }
     },
     "autoload": {
@@ -66,15 +64,13 @@
             "Sylius\\Bundle\\ApiBundle\\": ""
         },
         "exclude-from-classmap": [
-            "spec/",
-            "Tests/"
+            "tests/"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Sylius\\Bundle\\ApiBundle\\": "spec/",
-            "Sylius\\Bundle\\ApiBundle\\Application\\": "Tests/Application/src/",
-            "Sylius\\Bundle\\ApiBundle\\Tests\\": "Tests/"
+            "Sylius\\Bundle\\ApiBundle\\Application\\": "tests/Application/src/",
+            "Tests\\Sylius\\Bundle\\ApiBundle\\": "tests/"
         }
     },
     "repositories": [

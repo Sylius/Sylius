@@ -4,65 +4,128 @@
 sylius:
     email:
         shipment_confirmation:
-            has_been_sent_using: 'byl odeslán pomocí'
+            has_been_sent_using: 'bylo odesláno pomocí'
             subject: 'Potvrzení odeslání'
-            thank_you_for_transaction: 'Děkujeme vám za úspěšnou transakci.'
-            you_can_check_its_location_with_the_tracking_code: 'Můžete zkontrolovat polohu pomocí sledovacího kódu %tracking_code%.'
+            thank_you_for_transaction: 'Děkujeme za úspěšnou transakci.'
+            you_can_check_its_location_with_the_tracking_code: 'Můžete zkontrolovat jeho polohu pomocí sledovacího kódu %tracking_code%.'
             your_order_with_number: 'Vaše objednávka s číslem'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Zobrazit nejnižší cenu zlevněných produktů před aktuální slevou?'
+                period_for_which_the_lowest_price_is_calculated: 'Období, pro které je počítána nejnižší cena'
+            reset_password:
+                password:
+                    label: 'Nové heslo'
+                    confirmation: 'Potvrdit nové heslo'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: Typy asociace
-                    attributes: Atributy
-                    header: Katalog
-                    inventory: Sklad
-                    options: Možnosti
-                    products: Produkty
-                    taxons: Taxony
+                    association_types: 'Typy asociací'
+                    attributes: 'Atributy'
+                    header: 'Katalog'
+                    inventory: 'Sklad'
+                    options: 'Možnosti'
+                    products: 'Produkty'
+                    taxons: 'Taxony'
                 configuration:
-                    admin_users: Administrátoři
-                    channels: Kanály
-                    countries: Země
-                    currencies: Měny
-                    exchange_rates: Směnný kurz
-                    header: Nastavení
-                    locales: Lokalizace
-                    payment_methods: Způsoby plateb
-                    shipping_categories: Přepravní kategorie
-                    shipping_methods: Způsoby dopravy
-                    tax_categories: Daňové kategorie
-                    tax_rates: Daňové sazby
-                    zones: Oblasti
+                    admin_users: 'Administrátoři'
+                    channels: 'Kanály'
+                    countries: 'Země'
+                    currencies: 'Měny'
+                    exchange_rates: 'Kurzové sazby'
+                    header: 'Konfigurace'
+                    locales: 'Jazykové verze'
+                    payment_methods: 'Platební metody'
+                    shipping_categories: 'Kategorie dopravy'
+                    shipping_methods: 'Dopravní metody'
+                    tax_categories: 'Daňové kategorie'
+                    tax_rates: 'Daňové sazby'
+                    zones: 'Zóny'
                 marketing:
-                    header: Marketing
-                    product_reviews: Hodnocení produktů
-                    promotions: Akce
+                    cart_promotions: 'Propagace košíku'
+                    catalog_promotions: 'Propagace katalogu'
+                    header: 'Marketing'
+                    product_reviews: 'Recenze produktů'
+                    promotions: 'Propagace'
                 customers:
-                    customers: Zákazníci
-                    groups: Skupiny
-                    header: Zákazník
+                    customers: 'Zákazníci'
+                    groups: 'Skupiny'
+                    header: 'Zákazník'
                 sales:
-                    header: Prodeje
-                    orders: Objednávky
+                    header: 'Prodeje'
+                    orders: 'Objednávky'
                 official_support:
-                    header: Oficiální podpora
-                    browse_plugins: Procházet pluginy
-                    sylius_plus: Sylius Plus
-                    professional_services: Profesionální služby
-                    find_a_partner: Najít partnera
+                    header: 'Oficiální podpora'
+                    browse_plugins: 'Prohlížet pluginy'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Profesionální služby'
+                    find_a_partner: 'Najít partnera'
+                    sylius_certification: 'Sylius certifikace'
     ui:
+        account: 'Účet'
+        admin_user: 'Administrator'
+        add_new_entry: 'Přidat nový záznam'
+        back_to_dashboard: 'Zpět na hlavní panel'
+        catalog_promotion:
+            dates_details: 'Tato operace může trvat delší dobu! Zvažte zpoždění od 2 do 10 minut od uvedených dat. Zpoždění závisí na velikosti katalogu.'
+        channel:
+            account_verification_required_details: 'Deaktivací této možnosti bude možné vytvářet účty a přistupovat k nim bez ověření e-mailem a tímto způsobem potenciálně přistupovat k datům objednávek provedených jako host.'
+        channel_pricing_history: 'Historie cen kanálu'
+        channel_pricings: 'Ceny kanálů'
+        create_new:
+            customer_group: 'Vytvořit novou skupinu zákazníků'
+        delete_avatar: 'Smazat avatar'
+        full_screen: 'Celá obrazovka'
+        global: 'Globální'
+        ip_address: 'IP adresa'
+        language: 'Jazyk'
+        lowest_price_before_discount: 'Nejnižší cena před slevou'
+        minimum_price_details: 'Minimální cena – toto je cenový práh, pod který nelze aktuální cenu snížit ani pomocí propagace katalogu, ani košíkových slev. Použijte to k ochraně ziskovosti vašich prodejů.'
+        more: 'Více'
+        no_main_taxon: 'žádný hlavní taxon'
+        no_depth: 'Žádná hloubka'
+        no_height: 'Žádná výška'
+        no_results: 'Nenalezeny žádné výsledky'
+        no_results_adjust_your_search: 'Upravte svůj hledání a zkuste to znovu.'
+        no_weight: 'Žádná hmotnost'
+        no_width: 'Žádná šířka'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Datum objednávky'
+        original_price_details: 'Původní cena – toto je cena produktové varianty. Je zobrazená přeškrtnutá v katalogu. Používá se jako základ pro výpočty aktuální ceny. Pokud není tato hodnota definována, logika propagace katalogu zkopíruje hodnotu z ceny do původní ceny.'
+        original_product_price_details: 'Původní cena – toto je cena produktu. Je zobrazená přeškrtnutá v katalogu. Používá se jako základ pro výpočty aktuální ceny. Pokud není tato hodnota definována, logika propagace katalogu zkopíruje hodnotu z ceny do původní ceny.'
+        overdue: 'Po termínu'
+        page_not_found: 'Stránka nenalezena'
+        pagination:
+            number_of_results: 'Zobrazuji %from% až %to% z %total% záznamů'
+        partially_refunded: 'Částečně vráceno'
+        pending_actions: 'Čekající akce'
+        price_details: 'Cena – toto je aktuální cena produktové varianty zobrazená v katalogu. Může být explicitně upravena např. pomocí propagace katalogu.'
+        product_price_details: 'Cena – toto je aktuální cena produktu zobrazená v katalogu. Může být explicitně upravena např. pomocí propagace katalogu.'
+        price_history: 'Historie cen'
         product:
-            product_not_active_in_channel: Produkt ještě není v tomto kanálu aktivován.
-        gateway:
-            no_sca_support_notice: Zvolená platební brána nepodporuje SCA.
-            pay_pal_express_checkout_deprecation_notice: >
-                PayPal Express Checkout je zastaralý. Použijte prosím novou integraci <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
-        sales_summary: Přehled prodejů
+            product_not_active_in_channel: 'Produkt není v tomto kanálu ještě aktivován.'
+        product_variant: 'Produktová varianta'
+        sales_summary: 'Shrnutí prodeje'
+        search_menu: 'Hledat v menu'
+        shipment_for_order: 'Doprava pro objednávku'
+        show_history_for_channel_pricing: 'Zobrazit historii pro cenu kanálu'
+        start_typing_to_search: 'Začněte psát pro hledání'
         statistics:
-            day: Den
-            lifetime: Od počátku
-            month: Měsíc
-            week: Týden
-            2weeks: 2 týdny
-            year: Rok
+            day: 'Den'
+            lifetime: 'Životnost'
+            month: 'Měsíc'
+            week: 'Týden'
+            2weeks: '2 Týdny'
+            year: 'Rok'
+        taxon: 'Taxon'
+        to_approve: 'k schválení'
+        to_process: 'k vyřízení'
+        to_ship: 'k odeslání'
+        view_in_store: 'Zobrazit v obchodě'
+        work_in_progress: 'Práce v průběhu'
+        empty_date: 'prázdný'
+        notifications:
+            new_version_of_sylius_available: 'Je k dispozici nová verze Sylius. Kontaktujte svého technika pro upgrade.'

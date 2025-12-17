@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    locale:
+        code:
+            max_length: '코드는 {{ limit }}자를 넘을 수 없습니다.'
+            not_blank: '로케일 코드를 선택하세요.'
+            locale: '유효한 로케일 코드가 아닙니다.'
+            unique: '로케일 코드는 고유해야 합니다.'

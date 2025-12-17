@@ -1,0 +1,10 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set cart = hookable_metadata.context.cart %}
+
+{% if cart.currencyCode is not same as(sylius.currencyCode) %}
+    <div class="hstack gap-2 border-top pt-3 mt-3">
+        <div class="h5 pt-4 mt-4">{{ 'sylius.ui.base_currency_order_total'|trans }}:</div>
+        <div class="ms-auto h5 pt-4 mt-4 text-end" {{ sylius_test_html_attribute('cart-base-grand-total') }}>{{ money.format(cart.total, cart.currencyCode) }}</div>
+    </div>
+{% endif %}

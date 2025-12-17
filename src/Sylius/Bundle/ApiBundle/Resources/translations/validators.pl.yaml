@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'Token resetowania hasła wygasł.'
+    account:
+        invalid_verification_token: 'Nie istnieje użytkownik sklepu z tokenem weryfikacyjnym %verificationToken%.'
+        is_verified: 'Konto z adresem e-mail %email% jest już zweryfikowane.'
+    address:
+        without_country: 'Adres bez kraju nie może istnieć.'
+    code:
+        not_blank: 'Proszę podać kod.'
+        invalid: 'Kod powinien zawierać tylko litery, cyfry, myślniki ("-") oraz podkreślenia ("_").'
+    contact_request:
+        email_is_invalid: 'Podany adres e-mail jest nieprawidłowy.'
+    country:
+        not_exist: 'Kraj o kodzie %countryCode% nie istnieje.'
+    date_interval:
+        empty: 'Zakres dat nie może być pusty.'
+        invalid: 'Zakres dat nie jest prawidłowym zakresem w formacie ISO 8601.'
+    date_time:
+        invalid: 'Data i czas nie są prawidłowe w formacie ISO 8601 (Y-m-d\TH:i:s).'
+    order:
+        not_empty: 'Nie można przetworzyć pustego zamówienia.'
+    payment:
+        not_found: 'Płatność nie istnieje.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'Nie można zmienić metody płatności dla anulowanego zamówienia.'
+        not_available: 'Metoda płatności %name% nie jest dostępna dla tego zamówienia. Proszę wybrać inną.'
+        not_exist: 'Metoda płatności o kodzie %code% nie istnieje.'
+    payment_request:
+        action_not_available: 'Żądanie płatności (kod metody: %code%, ID płatności: %id%) nie ma obsługiwanej akcji. Proszę wybrać inną metodę płatności.'
+        not_available: 'To żądanie płatności nie obsługuje tej akcji.'
+    product:
+        not_exist: 'Produkt %productName% nie istnieje.'
+    product_variant:
+        not_exist: 'Wariant produktu %productVariantCode% nie istnieje.'
+        not_longer_available: 'Wariant produktu o nazwie %productVariantName% nie istnieje.'
+        not_sufficient: 'Wariant produktu o kodzie %productVariantCode% nie ma wystarczającej ilości w magazynie.'
+        product_variant_with_name_not_sufficient: 'Wariant produktu o nazwie %productVariantName% nie ma wystarczającej ilości w magazynie.'
+        option_values:
+            single_value: 'Wariant produktu może mieć tylko jedną wartość przypisaną do danej opcji.'
+    reset_password:
+        invalid_token: 'Token resetowania hasła %token% jest nieprawidłowy.'
+        token_expired: 'Token resetowania hasła wygasł.'
+    shipment:
+        not_found: 'Wysyłka nie istnieje.'
+        shipped: 'Nie można wysłać przesyłki, która została już wysłana.'
+    shipping_method:
+        not_found: 'Metoda wysyłki o kodzie %code% nie istnieje.'
+        not_available: 'Metoda wysyłki %name% nie jest dostępna dla tego zamówienia. Proszę wybrać inną metodę.'
+        shipping_address_not_found: 'Zamówienie musi mieć przypisany adres dostawy.'
+    statistics:
+        end_date:
+            invalid: 'Data początkowa musi być wcześniejsza niż data końcowa.'

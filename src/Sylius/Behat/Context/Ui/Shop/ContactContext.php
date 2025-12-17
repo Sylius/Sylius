@@ -19,7 +19,7 @@ use Sylius\Behat\Page\Shop\Contact\ContactPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
-final class ContactContext implements Context
+final readonly class ContactContext implements Context
 {
     public function __construct(
         private ContactPageInterface $contactPage,
@@ -30,7 +30,7 @@ final class ContactContext implements Context
     /**
      * @When I want to request contact
      */
-    public function iWantToRequestContact()
+    public function iWantToRequestContact(): void
     {
         $this->contactPage->open();
     }
@@ -39,25 +39,25 @@ final class ContactContext implements Context
      * @When I specify the email as :email
      * @When I do not specify the email
      */
-    public function iSpecifyTheEmail($email = null)
+    public function iSpecifyTheEmail(string $email = ''): void
     {
-        $this->contactPage->specifyEmail($email);
+        $this->contactPage->fillElement($email, 'email');
     }
 
     /**
      * @When I specify the message as :message
      * @When I do not specify the message
      */
-    public function iSpecifyTheMessage($message = null)
+    public function iSpecifyTheMessage(string $message = ''): void
     {
-        $this->contactPage->specifyMessage($message);
+        $this->contactPage->fillElement($message, 'message');
     }
 
     /**
      * @When I send it
      * @When I try to send it
      */
-    public function iSendIt()
+    public function iSendIt(): void
     {
         $this->contactPage->send();
     }
@@ -65,7 +65,7 @@ final class ContactContext implements Context
     /**
      * @Then I should be notified that the contact request has been submitted successfully
      */
-    public function iShouldBeNotifiedThatTheContactRequestHasBeenSubmittedSuccessfully()
+    public function iShouldBeNotifiedThatTheContactRequestHasBeenSubmittedSuccessfully(): void
     {
         $this->notificationChecker->checkNotification(
             'Your contact request has been submitted successfully.',
@@ -76,27 +76,27 @@ final class ContactContext implements Context
     /**
      * @Then /^I should be notified that the (email|message) is required$/
      */
-    public function iShouldBeNotifiedThatElementIsRequired($element)
+    public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
-        Assert::same($this->contactPage->getValidationMessageFor($element), sprintf('Please enter your %s.', $element));
+        Assert::same($this->contactPage->getValidationMessage($element), sprintf('Please enter your %s.', $element));
     }
 
     /**
      * @Then I should be notified that the email is invalid
      */
-    public function iShouldBeNotifiedThatEmailIsInvalid()
+    public function iShouldBeNotifiedThatEmailIsInvalid(): void
     {
-        Assert::same($this->contactPage->getValidationMessageFor('email'), 'This email is invalid.');
+        Assert::same($this->contactPage->getValidationMessage('email'), 'This email is invalid.');
     }
 
     /**
      * @Then I should be notified that a problem occurred while sending the contact request
      */
-    public function iShouldBeNotifiedThatAProblemOccurredWhileSendingTheContactRequest()
+    public function iShouldBeNotifiedThatAProblemOccurredWhileSendingTheContactRequest(): void
     {
         $this->notificationChecker->checkNotification(
             'A problem occurred while sending the contact request. Please try again later.',
-            NotificationType::failure(),
+            NotificationType::error(),
         );
     }
 }

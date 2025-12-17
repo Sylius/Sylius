@@ -1,0 +1,10 @@
+{% set order = hookable_metadata.context.resource %}
+
+<div>
+    <div class="mb-1">
+        <strong>{{ 'sylius.ui.channel'|trans }}:</strong>
+    </div>
+    <div class="mb-3">
+        <div>{% include('@SyliusAdmin/shared/grid/field/channel.html.twig') with { data: order.channel } %}</div>
+    </div>
+</div>

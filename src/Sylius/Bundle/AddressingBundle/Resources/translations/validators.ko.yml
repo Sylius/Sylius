@@ -4,9 +4,68 @@
 sylius:
     address:
         city:
-            not_blank: 도시를 입력해 주세요.
+            max_length: '도시 이름은 {{ limit }}자를 초과할 수 없습니다.|도시 이름은 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '도시 이름은 최소 {{ limit }}자 이상이어야 합니다.|도시 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '도시를 입력하세요.'
         country:
-            not_blank: 국가를 선택 해 주세요.
-            disabled: 선택하신 국가는 적용될 수 없습니다. 다른 국가를 선택 해 주세요.
+            not_blank: '국가를 선택하세요.'
+            disabled: '선택한 국가는 비활성화되어 있습니다. 다른 국가를 선택하세요.'
         first_name:
-            not_blank: 이름을 입력해 주세요.
+            max_length: '이름은 {{ limit }}자를 초과할 수 없습니다.|이름은 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '이름은 최소 {{ limit }}자 이상이어야 합니다.|이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '이름을 입력하세요.'
+        last_name:
+            max_length: '성은 {{ limit }}자를 초과할 수 없습니다.|성은 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '성은 최소 {{ limit }}자 이상이어야 합니다.|성은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '성을 입력하세요.'
+        postcode:
+            max_length: '우편번호는 {{ limit }}자를 초과할 수 없습니다.|우편번호는 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '우편번호는 최소 {{ limit }}자 이상이어야 합니다.|우편번호는 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '우편번호를 입력하세요.'
+        province:
+            valid: '올바른 도/주를 선택하세요.'
+        street:
+            max_length: '도로명 주소는 {{ limit }}자를 초과할 수 없습니다.|도로명 주소는 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '도로명 주소는 최소 {{ limit }}자 이상이어야 합니다.|도로명 주소는 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '도로명 주소를 입력하세요.'
+        not_shippable: '이 주소는 배송 가능 지역이 아닙니다.'
+    country:
+        code:
+            not_blank: '국가 ISO 코드를 입력하세요.'
+            unique: '국가 ISO 코드는 고유해야 합니다.'
+            country: '잘못된 국가 ISO 코드입니다.'
+        unique_provinces: '이 국가의 모든 도/주는 고유한 코드와 이름을 가져야 합니다.'
+    province:
+        code:
+            max_length: '코드는 {{ limit }}자를 초과할 수 없습니다.'
+            not_blank: '도/주 코드를 입력하세요.'
+            regex: '도/주 코드는 XX-XX 형식이어야 합니다 (예: US-FL).'
+            unique: '도/주 코드는 고유해야 합니다.'
+        name:
+            max_length: '도/주 이름은 {{ limit }}자를 초과할 수 없습니다.|도/주 이름은 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '도/주 이름은 최소 {{ limit }}자 이상이어야 합니다.|도/주 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '도/주 이름을 입력하세요.'
+            unique: '도/주 이름은 고유해야 합니다.'
+    zone:
+        scope:
+            not_blank: '스코프를 입력하세요.'
+        code:
+            max_length: '코드는 {{ limit }}자를 초과할 수 없습니다.'
+            not_blank: '존 코드를 입력하세요.'
+            regex: '존 코드는 문자, 숫자, 대시(-), 밑줄(_)만 사용할 수 있습니다.'
+            unique: '존 코드는 고유해야 합니다.'
+        type:
+            invalid: '"{{ value }}" 유형은 잘못되었습니다. 허용되는 유형: {{ choices }}.'
+        members:
+            min_count: '존 멤버를 최소 {{ limit }}개 이상 추가하세요.'
+        name:
+            max_length: '존 이름은 {{ limit }}자를 초과할 수 없습니다.|존 이름은 {{ limit }}자를 초과할 수 없습니다.'
+            min_length: '존 이름은 최소 {{ limit }}자 이상이어야 합니다.|존 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '존 이름을 입력하세요.'
+    zone_member:
+        cannot_be_the_same_as_zone: '존 멤버는 존과 동일할 수 없습니다.'
+        code:
+            max_length: '존 멤버 코드는 {{ limit }}자를 초과할 수 없습니다.'
+            not_blank: '존 멤버를 선택하세요.'
+            regex: '존 멤버 코드는 문자, 숫자, 대시(-), 밑줄(_)만 사용할 수 있습니다.'
+        unique: '선택한 존 멤버가 이미 이 존에 포함되어 있습니다.'

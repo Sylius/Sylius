@@ -1,0 +1,35 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.exchange_rate.create.content':
+            form:
+                component: 'sylius_admin:exchange_rate:form'
+                props:
+                    resource: '@=_context.resource'
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/shared/crud/common/content/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'sylius_admin.exchange_rate.create.content.form':
+            sections:
+                template: '@SyliusAdmin/exchange_rate/form/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.exchange_rate.create.content.form.sections':
+            general:
+                template: '@SyliusAdmin/exchange_rate/form/sections/general.html.twig'
+                priority: 0
+
+        'sylius_admin.exchange_rate.create.content.form.sections.general':
+            default:
+                enabled: false
+            ratio:
+                template: '@SyliusAdmin/exchange_rate/form/sections/general/ratio.html.twig'
+                priority: 200
+            source_currency:
+                template: '@SyliusAdmin/exchange_rate/form/sections/general/source_currency.html.twig'
+                priority: 100
+            target_currency:
+                template: '@SyliusAdmin/exchange_rate/form/sections/general/target_currency.html.twig'
+                priority: 0

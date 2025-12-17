@@ -1,0 +1,14 @@
+{%- macro label(state) -%}
+    {% set label = 'sylius.ui.' ~ state %}
+
+    {% set state_badge = {
+        (constant('Sylius\\Component\\Core\\OrderShippingStates::STATE_READY')): 'bg-blue-lt',
+        (constant('Sylius\\Component\\Core\\OrderShippingStates::STATE_SHIPPED')): 'bg-green-lt',
+        (constant('Sylius\\Component\\Core\\OrderShippingStates::STATE_PARTIALLY_SHIPPED')): 'bg-yellow-lt',
+        (constant('Sylius\\Component\\Core\\OrderShippingStates::STATE_CANCELLED')): 'bg-orange-lt',
+    } %}
+
+    <span class="badge {{ state_badge[state]|default('') }}" {{ sylius_test_html_attribute('order-shipping-state') }}>
+        {{ label|trans|title }}
+    </span>
+{%- endmacro -%}

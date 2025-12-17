@@ -17,17 +17,9 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.context.channel.cached" class="Sylius\Component\Channel\Context\CachedPerRequestChannelContext" decorates="sylius.context.channel" decoration-priority="256" public="false">
+        <service id="sylius.context.channel.cached" class="Sylius\Component\Channel\Context\CachedPerRequestChannelContext" decorates="sylius.context.channel" decoration-priority="256">
             <argument type="service" id="sylius.context.channel.cached.inner" />
             <argument type="service" id="request_stack" />
-        </service>
-
-        <service id="sylius.theme.context.channel_based" class="Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext" public="false">
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.repository.theme" />
-            <deprecated package="sylius/core-bundle" version="1.14">The "%service_id%" service is deprecated and will be moved to the ShopBundle in Sylius 2.0.</deprecated>
         </service>
 
         <service id="sylius.context.shopper" class="Sylius\Component\Core\Context\ShopperContext" lazy="true">
@@ -38,7 +30,7 @@
         </service>
         <service id="Sylius\Component\Core\Context\ShopperContextInterface" alias="sylius.context.shopper" />
 
-        <service id="sylius.context.cart.new_shop_based" class="Sylius\Component\Core\Cart\Context\ShopBasedCartContext" decorates="sylius.context.cart.new" decoration-priority="256" public="false">
+        <service id="sylius.context.cart.new_shop_based" class="Sylius\Component\Core\Cart\Context\ShopBasedCartContext" decorates="sylius.context.cart.new" decoration-priority="256">
             <argument type="service" id="sylius.context.cart.new_shop_based.inner" />
             <argument type="service" id="sylius.context.shopper" />
             <argument type="service" id="sylius.resolver.cart.created_by_guest_flag" />
@@ -66,11 +58,10 @@
             <argument type="service" id="sylius.context.channel" />
         </service>
 
-        <service id="sylius.locale_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedLocaleProvider" decorates="sylius.provider.locale" decoration-priority="256">
+        <service id="sylius.provider.locale.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedLocaleProvider" decorates="sylius.provider.locale" decoration-priority="256">
             <argument type="service" id="sylius.context.channel" />
             <argument>%locale%</argument>
         </service>
-        <service id="sylius.provider.locale.channel_based" alias="sylius.locale_provider.channel_based" />
 
         <service id="sylius.context.locale.request_based" class="Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext">
             <argument type="service" id="request_stack" />

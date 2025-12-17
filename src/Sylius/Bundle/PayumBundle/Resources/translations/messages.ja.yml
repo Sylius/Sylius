@@ -4,8 +4,9 @@
 sylius:
     form:
         gateway_config:
-            type: タイプ
-        gateway_configuration:
-            paypal:
-                password: パスワード
-                username: ユーザー名
+            use_payum: 'Payum を使用'
+    payum_gateway:
+        cash_on_delivery: '代引き'
+        offline: 'オフライン (Payum)'
+    payum_gateway_factory:
+        offline: 'オフライン'

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    promotion_coupon:
+        generate: '프로모션 쿠폰이 성공적으로 생성되었습니다.'
+    catalog_promotion:
+        remove: '카탈로그 프로모션 제거가 요청되었습니다. 영향받는 상품 수에 따라 시간이 걸릴 수 있습니다.'

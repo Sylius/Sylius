@@ -30,36 +30,28 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<ShippingMethodInterface> */
 class ShippingMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param FactoryInterface<ShippingMethodInterface> $shippingMethodFactory
      * @param RepositoryInterface<ZoneInterface> $zoneRepository
      * @param RepositoryInterface<ShippingCategoryInterface> $shippingCategoryRepository
      * @param RepositoryInterface<LocaleInterface> $localeRepository
-     * @param RepositoryInterface<TaxCategoryInterface>|null $taxCategoryRepository
+     * @param RepositoryInterface<TaxCategoryInterface> $taxCategoryRepository
      */
     public function __construct(
-        private FactoryInterface $shippingMethodFactory,
-        private RepositoryInterface $zoneRepository,
-        private RepositoryInterface $shippingCategoryRepository,
-        private RepositoryInterface $localeRepository,
-        private ChannelRepositoryInterface $channelRepository,
-        private ?RepositoryInterface $taxCategoryRepository = null,
+        protected readonly FactoryInterface $shippingMethodFactory,
+        protected readonly RepositoryInterface $zoneRepository,
+        protected readonly RepositoryInterface $shippingCategoryRepository,
+        protected readonly RepositoryInterface $localeRepository,
+        protected readonly ChannelRepositoryInterface $channelRepository,
+        protected readonly RepositoryInterface $taxCategoryRepository,
     ) {
-        if ($this->taxCategoryRepository === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.4',
-                'Not passing a $taxCategoryRepository to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
-
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
@@ -106,12 +98,7 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
     {
         $resolver
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
-            ->setDefault('name', function (Options $options): string {
-                /** @var string $words */
-                $words = $this->faker->words(3, true);
-
-                return $words;
-            })
+            ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('description', fn (Options $options): string => $this->faker->sentence())
             ->setDefault('enabled', fn (Options $options): bool => $this->faker->boolean(90))
             ->setAllowedTypes('enabled', 'bool')
@@ -142,14 +129,12 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
             ->setAllowedTypes('archived_at', ['null', \DateTimeInterface::class])
         ;
 
-        if ($this->taxCategoryRepository !== null) {
-            $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
-        }
+        $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
     }
 
+    /** @return iterable<string> */
     private function getLocales(): iterable
     {
-        /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();
         foreach ($locales as $locale) {
             yield $locale->getCode();

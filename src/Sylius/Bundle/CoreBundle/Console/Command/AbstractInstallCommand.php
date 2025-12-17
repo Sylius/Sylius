@@ -14,30 +14,26 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Console\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
 use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
-use SyliusLabs\Polyfill\Symfony\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class AbstractInstallCommand extends ContainerAwareCommand
+abstract class AbstractInstallCommand extends Command
 {
-    /** @deprecated */
-    public const WEB_ASSETS_DIRECTORY = 'web/assets/';
-
-    /** @deprecated */
-    public const WEB_BUNDLES_DIRECTORY = 'web/bundles/';
-
-    /** @deprecated */
-    public const WEB_MEDIA_DIRECTORY = 'web/media/';
-
-    /** @deprecated */
-    public const WEB_MEDIA_IMAGE_DIRECTORY = 'web/media/image/';
-
     /** @var CommandExecutor|null */
     protected $commandExecutor;
+
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly CommandDirectoryChecker $commandDirectoryChecker,
+    ) {
+        parent::__construct();
+    }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
@@ -47,37 +43,20 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $this->commandExecutor = new CommandExecutor($input, $output, $application);
     }
 
-    /**
-     * @return object
-     */
-    protected function get(string $id)
-    {
-        return $this->getContainer()->get($id);
-    }
-
     protected function getEnvironment(): string
     {
-        return (string) $this->getContainer()->getParameter('kernel.environment');
+        /** @var Application $application */
+        $application = $this->getApplication();
+
+        return $application->getKernel()->getEnvironment();
     }
 
     protected function isDebug(): bool
     {
-        return (bool) $this->getContainer()->getParameter('kernel.debug');
-    }
+        /** @var Application $application */
+        $application = $this->getApplication();
 
-    /**
-     * @param array<array-key, mixed>   $headers
-     * @param array<array-key, mixed>   $rows
-     */
-    protected function renderTable(array $headers, array $rows, OutputInterface $output): void
-    {
-        $table = new Table($output);
-
-        $table
-            ->setHeaders($headers)
-            ->setRows($rows)
-            ->render()
-        ;
+        return $application->getKernel()->isDebug();
     }
 
     protected function createProgressBar(OutputInterface $output, int $length = 10): ProgressBar
@@ -110,9 +89,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
             // PDO does not always close the connection after Doctrine commands.
             // See https://github.com/symfony/symfony/issues/11750.
-            /** @var EntityManagerInterface $entityManager */
-            $entityManager = $this->getContainer()->get('doctrine')->getManager();
-            $entityManager->getConnection()->close();
+            $this->entityManager->getConnection()->close();
 
             $progress->advance();
         }
@@ -122,12 +99,9 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
     protected function ensureDirectoryExistsAndIsWritable(string $directory, OutputInterface $output): void
     {
-        $checker = $this->getContainer()->get('sylius.installer.checker.command_directory');
-        $checker->setCommandName($this->getName());
+        $this->commandDirectoryChecker->setCommandName($this->getName());
 
-        $checker->ensureDirectoryExists($directory, $output);
-        $checker->ensureDirectoryIsWritable($directory, $output);
+        $this->commandDirectoryChecker->ensureDirectoryExists($directory, $output);
+        $this->commandDirectoryChecker->ensureDirectoryIsWritable($directory, $output);
     }
 }
-
-class_alias(AbstractInstallCommand::class, '\Sylius\Bundle\CoreBundle\Command\AbstractInstallCommand');

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- http://phpunit.de/manual/4.1/en/appendixes.configuration.html -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
-         convertDeprecationsToExceptions="true"
 >
     <testsuites>
-        <testsuite name="Sylius Test Suite">
-            <directory>./Tests</directory>
+        <testsuite name="sylius-core-bundle">
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 

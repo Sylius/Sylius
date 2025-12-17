@@ -5,6 +5,7 @@ default:
     suites:
         ui_managing_catalog_promotions:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -25,6 +26,8 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.ui.admin.search_filter
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.product
                 - Sylius\Behat\Context\Ui\Admin\BrowsingCatalogPromotionProductVariantsContext
                 - Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext

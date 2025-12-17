@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    attribute:
+        name:
+            not_blank: 'Bitte geben Sie den Attributnamen ein.'
+            min_length: 'Der Attributname muss mindestens 1 Zeichen lang sein.|Der Attributname muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Attributname darf nicht länger als 1 Zeichen sein.|Der Attributname darf nicht länger als {{ limit }} Zeichen sein.'
+        code:
+            min_length: 'Der Attributcode muss mindestens 1 Zeichen lang sein.|Der Attributcode muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Attributcode darf nicht länger als 1 Zeichen sein.|Der Attributcode darf nicht länger als {{ limit }} Zeichen sein.'
+            not_blank: 'Bitte geben Sie den Attributcode ein.'
+            regex: 'Der Attributcode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Dieser Code wird bereits verwendet.'
+        configuration:
+            max_entries: 'Der Wert für die maximalen Einträge in der Konfiguration muss größer oder gleich dem Wert für die minimalen Einträge sein.'
+            max_length: 'Die maximale Länge der Konfiguration muss größer oder gleich der minimalen Länge sein.'
+            min_entries: 'Der Wert für die minimalen Einträge in der Konfiguration muss kleiner oder gleich der Anzahl der hinzugefügten Auswahlmöglichkeiten sein.'
+            multiple: 'Die Konfiguration für mehrere Einträge muss wahr sein, wenn minimale oder maximale Eintragswerte angegeben sind.'
+        presentation:
+            not_blank: 'Bitte geben Sie die Attributpräsentation ein.'
+            min_length: 'Die Attributpräsentation muss mindestens 1 Zeichen lang sein.|Die Attributpräsentation muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Die Attributpräsentation darf nicht länger als 1 Zeichen sein.|Die Attributpräsentation darf nicht länger als {{ limit }} Zeichen sein.'
+        type:
+            unregistered: 'Der Attributtyp "%type%" ist nicht registriert. Verfügbare Attributtypen: %available_types%.'
+    attribute_value:
+        attribute:
+            not_blank: 'Bitte wählen Sie ein Attribut aus.'
+        value:
+            not_blank: 'Bitte geben Sie den Attributwert ein.'

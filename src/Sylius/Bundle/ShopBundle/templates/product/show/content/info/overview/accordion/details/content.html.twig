@@ -1,0 +1,11 @@
+{% set product = hookable_metadata.context.product %}
+
+{% embed '@SyliusShop/shared/accordion/accordion_item_content.html.twig' with { accordion_item_id: 'details', expanded: true, test_html_attribute: 'product-details' } %}
+    {% block accordion_item_content %}
+        {% if product.description is not empty %}
+            {{ product.description | nl2br }}
+        {% else %}
+            {{ 'sylius.ui.no_description'|trans }}.
+        {% endif %}
+    {% endblock %}
+{% endembed %}

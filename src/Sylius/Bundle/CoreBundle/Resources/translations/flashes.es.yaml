@@ -1,0 +1,4 @@
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: 'El pago no puede completarse debido a la falta de existencias del producto "%productVariantCode%".'

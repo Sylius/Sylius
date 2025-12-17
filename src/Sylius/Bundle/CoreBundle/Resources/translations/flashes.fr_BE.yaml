@@ -1,0 +1,4 @@
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: 'Le paiement ne peut pas être complété en raison du stock insuffisant du produit "%productVariantCode%".'

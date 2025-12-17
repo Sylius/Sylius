@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'O token de redefinição de senha expirou.'
+    account:
+        invalid_verification_token: 'Não há nenhum utilizador da loja com o token de verificação de email %verificationToken%.'
+        is_verified: 'A conta com o email %email% já está verificada.'
+    address:
+        without_country: 'O endereço sem país não pode existir.'
+    code:
+        not_blank: 'Por favor, insira um código.'
+        invalid: 'O código deve conter apenas letras, números, hífens ("-") e sublinhados ("_").'
+    contact_request:
+        email_is_invalid: 'O email fornecido é inválido.'
+    country:
+        not_exist: 'O país com o código %countryCode% não existe.'
+    date_interval:
+        empty: 'O intervalo de datas não pode estar vazio.'
+        invalid: 'O intervalo de datas não está num formato ISO 8601 válido.'
+    date_time:
+        invalid: 'A data e hora não estão num formato ISO 8601 válido (Y-m-d\TH:i:s).'
+    order:
+        not_empty: 'Uma encomenda vazia não pode ser processada.'
+    payment:
+        not_found: 'O pagamento não existe.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'Não é possível alterar o método de pagamento de uma encomenda cancelada.'
+        not_available: 'O método de pagamento %name% não está disponível para esta encomenda. Por favor, escolha outro.'
+        not_exist: 'O método de pagamento com o código %code% não existe.'
+    payment_request:
+        action_not_available: 'O pedido de pagamento (código do método: %code%, ID do pagamento: %id%) não tem um manipulador. Por favor, escolha outro método de pagamento.'
+        not_available: 'O pedido de pagamento não suporta esta ação.'
+    product:
+        not_exist: 'O produto %productName% não existe.'
+    product_variant:
+        not_exist: 'A variante de produto com o código %productVariantCode% não existe.'
+        not_longer_available: 'A variante de produto com o nome %productVariantName% não existe.'
+        not_sufficient: 'A variante de produto com o código %productVariantCode% não tem stock suficiente.'
+        product_variant_with_name_not_sufficient: 'A variante de produto com o nome %productVariantName% não tem stock suficiente.'
+        option_values:
+            single_value: 'A variante de produto pode ter apenas um valor configurado por opção.'
+    reset_password:
+        invalid_token: 'O token de redefinição de senha %token% é inválido.'
+        token_expired: 'O token de redefinição de senha expirou.'
+    shipment:
+        not_found: 'O envio não existe.'
+        shipped: 'Não é possível enviar uma remessa que já foi enviada anteriormente.'
+    shipping_method:
+        not_found: 'O método de envio com o código %code% não existe.'
+        not_available: 'O método de envio %name% não está disponível para esta encomenda. Por favor, selecione outro.'
+        shipping_address_not_found: 'A encomenda deve ter um endereço definido primeiro.'
+    statistics:
+        end_date:
+            invalid: 'A data de início deve ser anterior à data de fim.'

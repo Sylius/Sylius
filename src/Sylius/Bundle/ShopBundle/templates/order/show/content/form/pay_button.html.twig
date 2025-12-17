@@ -1,0 +1,8 @@
+{% set order = hookable_metadata.context.order %}
+{% set order_cannot_be_paid = not sylius_order_can_be_paid(order) %}
+
+<div class="d-grid">
+    <button type="submit" class="btn btn-primary{% if order_cannot_be_paid %} disabled{% endif %}" {{ sylius_test_html_attribute('pay-link') }} {% if order_cannot_be_paid %}disabled{% endif %}>
+        {{ 'sylius.ui.pay'|trans }}
+    </button>
+</div>
