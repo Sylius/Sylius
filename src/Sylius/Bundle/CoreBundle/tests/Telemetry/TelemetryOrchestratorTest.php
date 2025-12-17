@@ -17,9 +17,17 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Telemetry\Collector\TelemetryDataCollectorInterface;
 use Sylius\Component\Core\Telemetry\Generator\InstallationIdGeneratorInterface;
 use Sylius\Component\Core\Telemetry\TelemetryOrchestrator;
+use Symfony\Component\HttpFoundation\Request;
 
 final class TelemetryOrchestratorTest extends TestCase
 {
+    private Request $request;
+
+    protected function setUp(): void
+    {
+        $this->request = Request::create('https://example.com');
+    }
+
     public function test_it_generates_state_with_installation_id_and_timestamp(): void
     {
         $installationIdGenerator = $this->createMock(InstallationIdGeneratorInterface::class);
@@ -35,7 +43,7 @@ final class TelemetryOrchestratorTest extends TestCase
 
         $orchestrator = new TelemetryOrchestrator($installationIdGenerator, [$collector]);
 
-        $data = $orchestrator->getData();
+        $data = $orchestrator->getData($this->request);
 
         self::assertArrayHasKey('schema_version', $data);
         self::assertArrayHasKey('installation_id', $data);
@@ -64,7 +72,7 @@ final class TelemetryOrchestratorTest extends TestCase
 
         $orchestrator = new TelemetryOrchestrator($installationIdGenerator, [$collector]);
 
-        $data = $orchestrator->getData();
+        $data = $orchestrator->getData($this->request);
 
         self::assertIsArray($data);
         self::assertArrayHasKey('schema_version', $data);
@@ -96,7 +104,7 @@ final class TelemetryOrchestratorTest extends TestCase
 
         $orchestrator = new TelemetryOrchestrator($installationIdGenerator, [$technicalCollector, $businessCollector]);
 
-        $data = $orchestrator->getData();
+        $data = $orchestrator->getData($this->request);
 
         self::assertArrayHasKey('technical', $data);
         self::assertArrayHasKey('business', $data);
@@ -123,7 +131,7 @@ final class TelemetryOrchestratorTest extends TestCase
 
         $orchestrator = new TelemetryOrchestrator($installationIdGenerator, [$failingCollector, $workingCollector]);
 
-        $data = $orchestrator->getData();
+        $data = $orchestrator->getData($this->request);
 
         self::assertArrayHasKey('technical', $data);
         self::assertSame('1.12.0', $data['technical']['sylius_version']);
@@ -148,7 +156,7 @@ final class TelemetryOrchestratorTest extends TestCase
 
         $orchestrator = new TelemetryOrchestrator($installationIdGenerator, [$disabledCollector, $enabledCollector]);
 
-        $data = $orchestrator->getData();
+        $data = $orchestrator->getData($this->request);
 
         self::assertArrayHasKey('technical', $data);
         self::assertArrayNotHasKey('business', $data);
