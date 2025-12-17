@@ -23,7 +23,9 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\DatabasePlatformDataPr
 final class DatabasePlatformDataProviderTest extends TestCase
 {
     private Connection $connection;
+
     private ManagerRegistry $managerRegistry;
+
     private DatabasePlatformDataProvider $provider;
 
     protected function setUp(): void
