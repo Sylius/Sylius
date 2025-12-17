@@ -108,7 +108,7 @@
         "symfony/intl": "^6.4 || ^7.4",
         "symfony/mailer": "^6.4 || ^7.4",
         "symfony/messenger": "^6.4 || ^7.4",
-        "symfony/monolog-bundle": "^3.8.0",
+        "symfony/monolog-bundle": "^4.0.1",
         "symfony/options-resolver": "^6.4 || ^7.4",
         "symfony/password-hasher": "^6.4 || ^7.4",
         "symfony/polyfill-iconv": "^1.31",
