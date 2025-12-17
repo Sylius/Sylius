@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\ShippingMethodsDataProv
 final class ShippingMethodsDataProviderTest extends TestCase
 {
     private Connection $connection;
+
     private ShippingMethodsDataProvider $provider;
 
     protected function setUp(): void

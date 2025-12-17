@@ -19,11 +19,17 @@ use Psr\Cache\CacheItemPoolInterface;
 final class TelemetryCache implements TelemetryCacheInterface
 {
     private const CACHE_KEY = 'sylius_telemetry';
+
     private const CACHE_TTL_SUCCESS = 604800; // 7 days
+
     private const CACHE_TTL_FAILURE = 259200; // 3 days
+
     private const RETRY_DELAY = 86400; // 24 hours between retries
+
     private const MAX_ATTEMPTS = 3;
+
     private const STATUS_SUCCESS = 'success';
+
     private const STATUS_FAILED = 'failed';
 
     public function __construct(

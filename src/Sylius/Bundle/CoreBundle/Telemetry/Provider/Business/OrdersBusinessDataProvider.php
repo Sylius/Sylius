@@ -81,6 +81,7 @@ final class OrdersBusinessDataProvider implements DataProviderInterface
 
     /**
      * @param list<array<string, mixed>> $results
+     *
      * @return array<string, mixed>
      */
     private function processResults(array $results): array
