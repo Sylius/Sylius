@@ -30,6 +30,8 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('sylius_api.enabled', $config['enabled']);
+        $container->setParameter('sylius_api.endpoints.admin_enabled', $config['endpoints']['admin_enabled']);
+        $container->setParameter('sylius_api.endpoints.shop_enabled', $config['endpoints']['shop_enabled']);
         $container->setParameter('sylius_api.default_image_filter', $config['default_image_filter']);
         $container->setParameter(
             'sylius_api.filter_eager_loading_extension.restricted_resources',
@@ -57,12 +59,27 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
 
     private function prependApiPlatformMapping(ContainerBuilder $container): void
     {
+        $configs = $container->getExtensionConfig($this->getAlias());
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
+
         /** @var array<string, array<string, string>> $metadata */
         $metadata = $container->getParameter('kernel.bundles_metadata');
 
-        $path = $metadata['SyliusApiBundle']['path'] . '/Resources/config/api_platform';
+        $basePath = $metadata['SyliusApiBundle']['path'] . '/Resources/config/api_platform/resources';
 
-        $container->prependExtensionConfig('api_platform', ['mapping' => ['paths' => [$path]]]);
+        $paths = [];
+
+        if ($config['endpoints']['admin_enabled']) {
+            $paths[] = $basePath . '/admin';
+        }
+
+        if ($config['endpoints']['shop_enabled']) {
+            $paths[] = $basePath . '/shop';
+        }
+
+        if (!empty($paths)) {
+            $container->prependExtensionConfig('api_platform', ['mapping' => ['paths' => $paths]]);
+        }
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void
