@@ -13,8 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Telemetry\Generator;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /** @internal */
 interface InstallationIdGeneratorInterface
 {
-    public function generate(): string;
+    public function generate(Request $request): string;
 }
