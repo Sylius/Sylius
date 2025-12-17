@@ -43,9 +43,10 @@ php bin/console doctrine:migrations:migrate
 If you want to skip this migration:
 
 ```bash
-php bin/console doctrine:migrations:migrate --exclude-migrations="Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120000"
+php bin/console doctrine:migrations:version 'Sylius\Bundle\CoreBundle\Migrations\Version20251126120000' --add --no-interaction
+
 # For PostgreSQL:
-php bin/console doctrine:migrations:migrate --exclude-migrations="Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120001"
+php bin/console doctrine:migrations:version 'Sylius\Bundle\CoreBundle\Migrations\Version20251126120001' --add --no-interaction
 ```
 
 For more details, see the [Telemetry documentation](https://docs.sylius.com/the-book/configuration/telemetry).
