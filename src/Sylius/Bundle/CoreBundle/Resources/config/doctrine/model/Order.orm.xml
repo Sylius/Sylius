@@ -92,6 +92,10 @@
 
         <field type="string" name="tokenValue" column="token_value" nullable="true" unique="true" />
         <field type="string" name="customerIp" column="customer_ip" nullable="true" />
+
+        <indexes>
+            <index name="IDX_TELEMETRY_ORDER_STATS" columns="checkout_completed_at,checkout_state,payment_state"/>
+        </indexes>
     </mapped-superclass>
 
 </doctrine-mapping>
