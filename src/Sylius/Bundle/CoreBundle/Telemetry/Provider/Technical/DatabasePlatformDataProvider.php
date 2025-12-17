@@ -125,7 +125,7 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
             ],
             'oracle' => [
                 "SELECT BANNER FROM v\$version WHERE BANNER LIKE 'Oracle%'",
-                "SELECT version FROM v\$instance",
+                'SELECT version FROM v$instance',
                 "SELECT * FROM PRODUCT_COMPONENT_VERSION WHERE PRODUCT LIKE 'Oracle%'",
             ],
             default => [

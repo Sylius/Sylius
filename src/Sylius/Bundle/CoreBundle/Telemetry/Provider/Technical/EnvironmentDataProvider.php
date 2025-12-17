@@ -29,7 +29,7 @@ final class EnvironmentDataProvider implements DataProviderInterface
         return new EnvironmentData(
             app: $this->appEnvironment,
             webserver: $this->getWebServerSoftware(),
-            os: PHP_OS_FAMILY,
+            os: \PHP_OS_FAMILY,
             docker: $this->isRunningInDocker(),
             ramGb: $this->getSystemMemoryInGb(),
             phpMemoryLimit: ini_get('memory_limit') ?: null,
@@ -42,7 +42,7 @@ final class EnvironmentDataProvider implements DataProviderInterface
             return $_SERVER['SERVER_SOFTWARE'];
         }
 
-        return PHP_SAPI;
+        return \PHP_SAPI;
     }
 
     private function isRunningInDocker(): bool
@@ -52,7 +52,7 @@ final class EnvironmentDataProvider implements DataProviderInterface
 
     private function getSystemMemoryInGb(): ?float
     {
-        return match (PHP_OS_FAMILY) {
+        return match (\PHP_OS_FAMILY) {
             'Linux' => $this->getLinuxMemory(),
             'Darwin' => $this->getMacOsMemory(),
             'Windows' => $this->getWindowsMemory(),

@@ -28,7 +28,7 @@ final class VersionDataProvider implements DataProviderInterface
     {
         return new VersionData(
             syliusVersion: SyliusCoreBundle::VERSION,
-            phpVersion: PHP_VERSION,
+            phpVersion: \PHP_VERSION,
             symfonyVersion: Kernel::VERSION,
             doctrineVersion: $this->getInstalledPackageVersion('doctrine/orm'),
             twigVersion: Environment::VERSION,

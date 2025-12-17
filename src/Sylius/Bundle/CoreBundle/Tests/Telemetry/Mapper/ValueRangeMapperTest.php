@@ -21,7 +21,7 @@ final class ValueRangeMapperTest extends TestCase
     /**
      * @dataProvider gmvDataProvider
      */
-    public function test_it_maps_gmv_to_correct_range(int|float $value, string $expectedRange): void
+    public function test_it_maps_gmv_to_correct_range(float|int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapGmv($value));
     }
@@ -51,7 +51,7 @@ final class ValueRangeMapperTest extends TestCase
     /**
      * @dataProvider aovDataProvider
      */
-    public function test_it_maps_aov_to_correct_range(int|float $value, string $expectedRange): void
+    public function test_it_maps_aov_to_correct_range(float|int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapAov($value));
     }
@@ -160,7 +160,7 @@ final class ValueRangeMapperTest extends TestCase
     /**
      * @dataProvider avgItemsDataProvider
      */
-    public function test_it_maps_avg_items_to_correct_range(int|float $value, string $expectedRange): void
+    public function test_it_maps_avg_items_to_correct_range(float|int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapAvgItems($value));
     }

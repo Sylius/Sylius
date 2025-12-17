@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\OrdersBusinessDataProvi
 final class OrdersBusinessDataProviderTest extends TestCase
 {
     private Connection $connection;
+
     private OrdersBusinessDataProvider $provider;
 
     protected function setUp(): void

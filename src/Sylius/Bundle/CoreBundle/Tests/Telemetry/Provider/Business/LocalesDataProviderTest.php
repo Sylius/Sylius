@@ -23,6 +23,7 @@ final class LocalesDataProviderTest extends TestCase
     private const DEFAULT_LOCALE = 'en_US';
 
     private Connection $connection;
+
     private LocalesDataProvider $provider;
 
     protected function setUp(): void

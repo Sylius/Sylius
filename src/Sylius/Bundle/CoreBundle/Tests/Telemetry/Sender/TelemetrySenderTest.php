@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Sender;
 
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\Sender\TelemetrySender;
-use Sylius\Component\Core\Telemetry\Sender\TelemetrySenderInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -35,13 +34,13 @@ final class TelemetrySenderTest extends TestCase
                 'POST',
                 'http://localhost:8000/telemetry',
                 $this->callback(function ($options) {
-                    return isset($options['json'])
-                        && isset($options['timeout'])
-                        && $options['timeout'] === 5
-                        && isset($options['headers']['Content-Type'])
-                        && $options['headers']['Content-Type'] === 'application/json'
-                        && isset($options['headers']['User-Agent'])
-                        && $options['headers']['User-Agent'] === 'Sylius-Prism/1.0';
+                    return isset($options['json']) &&
+                        isset($options['timeout']) &&
+                        $options['timeout'] === 5 &&
+                        isset($options['headers']['Content-Type']) &&
+                        $options['headers']['Content-Type'] === 'application/json' &&
+                        isset($options['headers']['User-Agent']) &&
+                        $options['headers']['User-Agent'] === 'Sylius-Prism/1.0';
                 }),
             )
             ->willReturn($response);

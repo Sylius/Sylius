@@ -41,6 +41,6 @@ final class VersionDataProviderTest extends TestCase
         $data = $this->provider->provide();
 
         self::assertInstanceOf(VersionData::class, $data);
-        self::assertSame(PHP_VERSION, $data->phpVersion);
+        self::assertSame(\PHP_VERSION, $data->phpVersion);
     }
 }
