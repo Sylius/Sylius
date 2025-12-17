@@ -24,6 +24,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 final class TelemetryListenerTest extends TestCase
 {
     private TelemetrySendManagerInterface $telemetrySendManager;
+
     private TelemetryListener $listener;
 
     protected function setUp(): void

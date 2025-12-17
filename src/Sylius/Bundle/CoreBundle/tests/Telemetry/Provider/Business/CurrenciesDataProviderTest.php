@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\CurrenciesDataProvider;
 final class CurrenciesDataProviderTest extends TestCase
 {
     private Connection $connection;
+
     private CurrenciesDataProvider $provider;
 
     protected function setUp(): void

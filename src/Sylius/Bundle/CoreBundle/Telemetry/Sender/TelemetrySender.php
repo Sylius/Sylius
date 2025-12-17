@@ -45,10 +45,8 @@ final class TelemetrySender implements TelemetrySenderInterface
 
             return $statusCode === 200;
         } catch (TransportExceptionInterface $exception) {
-
             return false;
         } catch (\Throwable $exception) {
-
             return false;
         }
     }
