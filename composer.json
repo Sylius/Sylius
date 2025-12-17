@@ -258,7 +258,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "^7.2"
+            "require": "^7.4"
         },
         "branch-alias": {
             "dev-main": "2.2-dev"
