@@ -19,7 +19,6 @@
             lazy="Sylius\Component\Core\Telemetry\Generator\InstallationIdGeneratorInterface"
         >
             <argument>%sylius_core.telemetry.salt%</argument>
-            <argument type="service" id="request_stack" />
         </service>
 
         <service

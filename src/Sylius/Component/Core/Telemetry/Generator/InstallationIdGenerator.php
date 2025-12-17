@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Telemetry\Generator;
 
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /** @internal */
@@ -21,17 +22,16 @@ final class InstallationIdGenerator implements InstallationIdGeneratorInterface
 {
     public function __construct(
         private string $salt,
-        private RequestStack $requestStack,
     ) {
     }
 
-    public function generate(): string
+    public function generate(Request $request): string
     {
         if ('' === trim($this->salt)) {
             return '';
         }
 
-        $hostname = $this->getHostname();
+        $hostname = $this->getHostname($request);
         if ('' === $hostname) {
             return '';
         }
@@ -41,9 +41,9 @@ final class InstallationIdGenerator implements InstallationIdGeneratorInterface
         return Uuid::uuid5($saltNamespace, $hostname)->toString();
     }
 
-    private function getHostname(): string
+    private function getHostname(Request $request): string
     {
-        $host = $this->requestStack->getMainRequest()?->getHost();
+        $host = $request->getHost();
         if (null !== $host && '' !== trim($host)) {
             return mb_strtolower(trim($host));
         }
