@@ -35,6 +35,7 @@ final class MetricsCountsDataProviderTest extends TestCase
             'customers_count' => '250',
             'products_count' => '42',
             'product_variants_count' => '168',
+            'virtual_product_variants_count' => '50',
             'orders_count' => '500',
         ]);
 
@@ -44,6 +45,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertSame('100-1K', $data->customersCount);
         self::assertSame('0-100', $data->productsCount);
         self::assertSame('100-1K', $data->productVariantsCount);
+        self::assertSame('0-100', $data->virtualProductVariantsCount);
         self::assertSame(500, $data->ordersCount);
     }
 
@@ -53,6 +55,7 @@ final class MetricsCountsDataProviderTest extends TestCase
             'customers_count' => '1000',
             'products_count' => '5000',
             'product_variants_count' => '20000',
+            'virtual_product_variants_count' => '5000',
             'orders_count' => '50000',
         ]);
 
@@ -62,6 +65,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertSame('1K-10K', $data->customersCount);
         self::assertSame('1K-10K', $data->productsCount);
         self::assertSame('10K-100K', $data->productVariantsCount);
+        self::assertSame('1K-10K', $data->virtualProductVariantsCount);
         self::assertSame(50000, $data->ordersCount);
     }
 
@@ -71,6 +75,7 @@ final class MetricsCountsDataProviderTest extends TestCase
             'customers_count' => '0',
             'products_count' => '0',
             'product_variants_count' => '0',
+            'virtual_product_variants_count' => '0',
             'orders_count' => '0',
         ]);
 
@@ -80,6 +85,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertSame('0-100', $data->customersCount);
         self::assertSame('0-100', $data->productsCount);
         self::assertSame('0-100', $data->productVariantsCount);
+        self::assertSame('0-100', $data->virtualProductVariantsCount);
         self::assertSame(0, $data->ordersCount);
     }
 
@@ -89,6 +95,7 @@ final class MetricsCountsDataProviderTest extends TestCase
             'customers_count' => '500000',
             'products_count' => '150000',
             'product_variants_count' => '2500000',
+            'virtual_product_variants_count' => '250000',
             'orders_count' => '1500000',
         ]);
 
@@ -98,6 +105,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertSame('100K-1M', $data->customersCount);
         self::assertSame('100K-500K', $data->productsCount);
         self::assertSame('2M+', $data->productVariantsCount);
+        self::assertSame('100K-500K', $data->virtualProductVariantsCount);
         self::assertSame(1500000, $data->ordersCount);
     }
 
@@ -107,6 +115,7 @@ final class MetricsCountsDataProviderTest extends TestCase
             'customers_count' => '0',
             'products_count' => '100',
             'product_variants_count' => '0',
+            'virtual_product_variants_count' => '0',
             'orders_count' => '5000',
         ]);
 
@@ -116,6 +125,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertSame('0-100', $data->customersCount);
         self::assertSame('100-1K', $data->productsCount);
         self::assertSame('0-100', $data->productVariantsCount);
+        self::assertSame('0-100', $data->virtualProductVariantsCount);
         self::assertSame(5000, $data->ordersCount);
     }
 
@@ -130,6 +140,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertSame('0-100', $data->customersCount);
         self::assertSame('0-100', $data->productsCount);
         self::assertSame('0-100', $data->productVariantsCount);
+        self::assertSame('0-100', $data->virtualProductVariantsCount);
         self::assertSame(0, $data->ordersCount);
     }
 
@@ -144,6 +155,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertSame('0-100', $data->customersCount);
         self::assertSame('0-100', $data->productsCount);
         self::assertSame('0-100', $data->productVariantsCount);
+        self::assertSame('0-100', $data->virtualProductVariantsCount);
         self::assertSame(0, $data->ordersCount);
     }
 
@@ -153,6 +165,7 @@ final class MetricsCountsDataProviderTest extends TestCase
             'customers_count' => '123',
             'products_count' => '456',
             'product_variants_count' => '789',
+            'virtual_product_variants_count' => '100',
             'orders_count' => '1000',
         ]);
 
@@ -162,6 +175,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertIsString($data->customersCount);
         self::assertIsString($data->productsCount);
         self::assertIsString($data->productVariantsCount);
+        self::assertIsString($data->virtualProductVariantsCount);
         self::assertIsInt($data->ordersCount);
     }
 
@@ -174,6 +188,7 @@ final class MetricsCountsDataProviderTest extends TestCase
                 'customers_count' => '10',
                 'products_count' => '20',
                 'product_variants_count' => '30',
+                'virtual_product_variants_count' => '5',
                 'orders_count' => '40',
             ]);
 
@@ -183,6 +198,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertSame('0-100', $data->customersCount);
         self::assertSame('0-100', $data->productsCount);
         self::assertSame('0-100', $data->productVariantsCount);
+        self::assertSame('0-100', $data->virtualProductVariantsCount);
         self::assertSame(40, $data->ordersCount);
     }
 
@@ -192,6 +208,7 @@ final class MetricsCountsDataProviderTest extends TestCase
             'customers_count' => '100',
             'products_count' => '200',
             'product_variants_count' => '300',
+            'virtual_product_variants_count' => '50',
             'orders_count' => '400',
         ]);
 
@@ -201,6 +218,7 @@ final class MetricsCountsDataProviderTest extends TestCase
         self::assertIsString($data->customersCount);
         self::assertIsString($data->productsCount);
         self::assertIsString($data->productVariantsCount);
+        self::assertIsString($data->virtualProductVariantsCount);
         self::assertIsInt($data->ordersCount);
     }
 }

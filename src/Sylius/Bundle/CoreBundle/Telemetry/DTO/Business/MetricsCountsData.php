@@ -22,6 +22,7 @@ final class MetricsCountsData implements TelemetryDataInterface
         public string $customersCount,
         public string $productsCount,
         public string $productVariantsCount,
+        public string $virtualProductVariantsCount,
         public int $ordersCount,
     ) {
     }
@@ -32,6 +33,7 @@ final class MetricsCountsData implements TelemetryDataInterface
             'customers_count' => $this->customersCount,
             'products_count' => $this->productsCount,
             'product_variants_count' => $this->productVariantsCount,
+            'virtual_product_variants_count' => $this->virtualProductVariantsCount,
             'orders_count' => $this->ordersCount,
         ];
     }

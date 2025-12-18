@@ -114,6 +114,7 @@ final class BusinessDataCollectorTest extends TestCase
             customersCount: '100-1K',
             productsCount: '0-100',
             productVariantsCount: '1K-10K',
+            virtualProductVariantsCount: '0-100',
             ordersCount: 50000,
         );
         $ordersBusinessData = new OrdersBusinessData(
@@ -140,6 +141,7 @@ final class BusinessDataCollectorTest extends TestCase
         self::assertSame('100-1K', $data['metrics']['customers_count']);
         self::assertSame('0-100', $data['metrics']['products_count']);
         self::assertSame('1K-10K', $data['metrics']['product_variants_count']);
+        self::assertSame('0-100', $data['metrics']['virtual_product_variants_count']);
         self::assertSame(50000, $data['metrics']['orders_count']);
 
         // Metrics from OrdersBusinessData (order_metrics merged)

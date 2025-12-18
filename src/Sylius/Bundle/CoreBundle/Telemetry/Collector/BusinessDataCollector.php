@@ -23,6 +23,7 @@ final class BusinessDataCollector implements TelemetryDataCollectorInterface
         'customers_count',
         'products_count',
         'product_variants_count',
+        'virtual_product_variants_count',
         'orders_count',
         'orders_monthly_count',
         'orders_monthly_avg_items',
