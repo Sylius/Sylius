@@ -16,24 +16,19 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\DTO\Business;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 
 /** @internal */
-final class PaymentProviderData implements TelemetryDataInterface
+final class CountriesData implements TelemetryDataInterface
 {
+    /** @param list<string> $countries */
     public function __construct(
-        public string $name,
-        public string $gateway,
-        public string $paymentsCount,
-        public bool $enabled,
+        public array $countries,
     ) {
     }
 
-    /** @return array<string, bool|string> */
+    /** @return array<string, list<string>> */
     public function normalize(): array
     {
         return [
-            'name' => $this->name,
-            'gateway' => $this->gateway,
-            'payments_count' => $this->paymentsCount,
-            'enabled' => $this->enabled,
+            'countries' => $this->countries,
         ];
     }
 }
