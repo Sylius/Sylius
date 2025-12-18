@@ -1,5 +1,13 @@
 # CHANGELOG FOR `1.14.X`
 
+## v1.14.15 (2025-12-18)
+
+#### Details
+
+- [#18654](https://github.com/Sylius/Sylius/pull/18654) [CS][DX] Refactor
+- [#18669](https://github.com/Sylius/Sylius/pull/18669) Fix migrations skip commands 1.14 ([@TheMilek](https://github.com/TheMilek))
+- [#18680](https://github.com/Sylius/Sylius/pull/18680) [Telemetry] Fixes and improvements 1.14 ([@TheMilek](https://github.com/TheMilek))
+
 ## v1.14.14 (2025-12-16)
 
 #### Details
