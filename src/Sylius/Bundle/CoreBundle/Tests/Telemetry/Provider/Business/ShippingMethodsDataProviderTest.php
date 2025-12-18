@@ -29,13 +29,19 @@ final class ShippingMethodsDataProviderTest extends TestCase
         $this->provider = new ShippingMethodsDataProvider($this->connection);
     }
 
-    public function test_it_provides_active_shipping_providers_with_details(): void
+    public function test_it_provides_non_archived_shipping_providers_assigned_to_channel(): void
     {
-        $this->connection->method('fetchAllAssociative')->willReturn([
-            ['code' => 'dhl', 'calculator' => 'dhl_express', 'shipments_count' => 150],
-            ['code' => 'flat_rate', 'calculator' => 'flat_rate', 'shipments_count' => 5000],
-            ['code' => 'per_item', 'calculator' => 'per_unit_rate', 'shipments_count' => 0],
-        ]);
+        $this->connection->expects(self::once())
+            ->method('fetchAllAssociative')
+            ->with(self::logicalAnd(
+                self::stringContains('archived_at IS NULL'),
+                self::stringContains('EXISTS (SELECT 1 FROM sylius_shipping_method_channels'),
+            ))
+            ->willReturn([
+                ['code' => 'dhl', 'calculator' => 'dhl_express', 'is_enabled' => 1, 'shipments_count' => 150],
+                ['code' => 'flat_rate', 'calculator' => 'flat_rate', 'is_enabled' => 1, 'shipments_count' => 5000],
+                ['code' => 'per_item', 'calculator' => 'per_unit_rate', 'is_enabled' => 0, 'shipments_count' => 0],
+            ]);
 
         $data = $this->provider->provide();
 
@@ -45,14 +51,17 @@ final class ShippingMethodsDataProviderTest extends TestCase
         self::assertSame('dhl', $data->shippingProviders[0]->name);
         self::assertSame('dhl_express', $data->shippingProviders[0]->calculator);
         self::assertSame('100-1K', $data->shippingProviders[0]->shipmentsCount);
+        self::assertTrue($data->shippingProviders[0]->enabled);
 
         self::assertSame('flat_rate', $data->shippingProviders[1]->name);
         self::assertSame('flat_rate', $data->shippingProviders[1]->calculator);
         self::assertSame('1K-10K', $data->shippingProviders[1]->shipmentsCount);
+        self::assertTrue($data->shippingProviders[1]->enabled);
 
         self::assertSame('per_item', $data->shippingProviders[2]->name);
         self::assertSame('per_unit_rate', $data->shippingProviders[2]->calculator);
         self::assertSame('0-100', $data->shippingProviders[2]->shipmentsCount);
+        self::assertFalse($data->shippingProviders[2]->enabled);
     }
 
     public function test_it_returns_empty_array_on_error(): void
