@@ -16,51 +16,53 @@ namespace Tests\Sylius\Bundle\CoreBundle\Telemetry\Generator;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Telemetry\Generator\InstallationIdGenerator;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 final class InstallationIdGeneratorTest extends TestCase
 {
     public function test_it_generates_uuid_v5_like_string(): void
     {
-        $requestStack = new RequestStack();
-        $requestStack->push(Request::create('https://example.com'));
-
-        $generator = new InstallationIdGenerator('salt-value', $requestStack);
+        $request = Request::create('https://example.com');
+        $generator = new InstallationIdGenerator('salt-value');
 
         self::assertMatchesRegularExpression(
             '/^[0-9a-f]{8}-[0-9a-f]{4}-5[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/',
-            $generator->generate(),
+            $generator->generate($request),
         );
     }
 
     public function test_it_generates_deterministic_identifier(): void
     {
-        $requestStack = new RequestStack();
-        $requestStack->push(Request::create('https://example.com'));
+        $request = Request::create('https://example.com');
+        $generator = new InstallationIdGenerator('salt-value');
 
-        $generator = new InstallationIdGenerator('salt-value', $requestStack);
-
-        self::assertSame($generator->generate(), $generator->generate());
+        self::assertSame($generator->generate($request), $generator->generate($request));
     }
 
     public function test_it_returns_empty_string_when_salt_is_empty(): void
     {
-        $requestStack = new RequestStack();
-        $requestStack->push(Request::create('https://example.com'));
+        $request = Request::create('https://example.com');
+        $generator = new InstallationIdGenerator('   ');
 
-        $generator = new InstallationIdGenerator('   ', $requestStack);
-
-        self::assertSame('', $generator->generate());
+        self::assertSame('', $generator->generate($request));
     }
 
-    public function test_it_returns_empty_string_when_hostname_is_empty(): void
+    public function test_different_hostnames_produce_different_ids(): void
     {
-        $requestStack = new RequestStack();
+        $generator = new InstallationIdGenerator('salt-value');
 
-        $generator = new InstallationIdGenerator('salt-value', $requestStack);
+        $request1 = Request::create('https://shop1.example.com');
+        $request2 = Request::create('https://shop2.example.com');
 
-        $result = $generator->generate();
+        self::assertNotSame($generator->generate($request1), $generator->generate($request2));
+    }
 
-        self::assertIsString($result);
+    public function test_same_hostname_produces_same_id(): void
+    {
+        $generator = new InstallationIdGenerator('salt-value');
+
+        $request1 = Request::create('https://example.com/admin');
+        $request2 = Request::create('https://example.com/shop');
+
+        self::assertSame($generator->generate($request1), $generator->generate($request2));
     }
 }

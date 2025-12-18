@@ -99,6 +99,14 @@ final class ValueRangeMapperTest extends TestCase
         self::assertSame($expectedRange, ValueRangeMapper::mapVariantsCount($value));
     }
 
+    /**
+     * @dataProvider countDataProvider
+     */
+    public function test_it_maps_virtual_variants_count_to_correct_range(int $value, string $expectedRange): void
+    {
+        self::assertSame($expectedRange, ValueRangeMapper::mapVirtualVariantsCount($value));
+    }
+
     public static function countDataProvider(): array
     {
         return [

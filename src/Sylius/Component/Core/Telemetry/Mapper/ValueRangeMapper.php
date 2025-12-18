@@ -88,6 +88,11 @@ final class ValueRangeMapper
         return self::mapToRange($value, self::COUNT_RANGES);
     }
 
+    public static function mapVirtualVariantsCount(int $value): string
+    {
+        return self::mapToRange($value, self::COUNT_RANGES);
+    }
+
     public static function mapCustomersCount(int $value): string
     {
         return self::mapToRange($value, self::CUSTOMER_ORDER_PAYMENT_SHIPMENT_RANGES);
