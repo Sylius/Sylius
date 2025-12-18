@@ -197,7 +197,13 @@ final class MetricsCountsDataProviderTest extends TestCase
     {
         $this->connection->expects(self::once())
             ->method('fetchAssociative')
-            ->with(self::stringContains('SELECT COUNT(id) FROM sylius_customer'))
+            ->with(
+                self::stringContains('SELECT COUNT(id) FROM sylius_customer'),
+                self::callback(function (array $params): bool {
+                    return isset($params['completedState'])
+                        && $params['completedState'] === 'completed';
+                }),
+            )
             ->willReturn([
                 'customers_count' => '10',
                 'products_count' => '20',
