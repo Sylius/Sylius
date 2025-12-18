@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Technical;
 
+use Composer\InstalledVersions;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Technical\VersionData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\VersionDataProvider;
@@ -42,5 +43,20 @@ final class VersionDataProviderTest extends TestCase
 
         self::assertInstanceOf(VersionData::class, $data);
         self::assertSame(PHP_VERSION, $data->phpVersion);
+    }
+
+    public function test_it_returns_api_platform_version(): void
+    {
+        if (
+            !InstalledVersions::isInstalled('api-platform/core') &&
+            !InstalledVersions::isInstalled('api-platform/symfony')
+        ) {
+            self::markTestSkipped('API Platform is not installed');
+        }
+
+        $data = $this->provider->provide();
+
+        self::assertInstanceOf(VersionData::class, $data);
+        self::assertNotNull($data->apiPlatformVersion);
     }
 }

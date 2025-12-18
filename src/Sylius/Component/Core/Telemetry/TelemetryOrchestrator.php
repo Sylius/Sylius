@@ -15,11 +15,12 @@ namespace Sylius\Component\Core\Telemetry;
 
 use Sylius\Component\Core\Telemetry\Collector\TelemetryDataCollectorInterface;
 use Sylius\Component\Core\Telemetry\Generator\InstallationIdGeneratorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /** @internal */
 final class TelemetryOrchestrator implements TelemetryOrchestratorInterface
 {
-    private const SCHEMA_VERSION = 1;
+    private const SCHEMA_VERSION = 2;
 
     /**
      * @param iterable<TelemetryDataCollectorInterface> $collectors
@@ -30,7 +31,7 @@ final class TelemetryOrchestrator implements TelemetryOrchestratorInterface
     ) {
     }
 
-    public function getData(): array
+    public function getData(Request $request): array
     {
         try {
             $now = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
@@ -38,7 +39,7 @@ final class TelemetryOrchestrator implements TelemetryOrchestratorInterface
 
             $data = [
                 'schema_version' => self::SCHEMA_VERSION,
-                'installation_id' => $this->installationIdGenerator->generate(),
+                'installation_id' => $this->installationIdGenerator->generate($request),
                 'collected_at' => $now->format(\DATE_ATOM),
                 'period' => [
                     'start' => $oneMonthAgo->format(\DATE_ATOM),

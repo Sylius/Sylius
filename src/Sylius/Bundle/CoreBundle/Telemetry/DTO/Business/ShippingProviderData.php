@@ -22,16 +22,18 @@ final class ShippingProviderData implements TelemetryDataInterface
         public string $name,
         public string $calculator,
         public string $shipmentsCount,
+        public bool $enabled,
     ) {
     }
 
-    /** @return array<string, string> */
+    /** @return array<string, bool|string> */
     public function normalize(): array
     {
         return [
             'name' => $this->name,
             'calculator' => $this->calculator,
             'shipments_count' => $this->shipmentsCount,
+            'enabled' => $this->enabled,
         ];
     }
 }
