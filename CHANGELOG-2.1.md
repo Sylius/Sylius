@@ -1,5 +1,17 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.10 (2025-12-18)
+
+#### Details
+
+- [#18654](https://github.com/Sylius/Sylius/pull/18654) [CS][DX] Refactor
+- [#18655](https://github.com/Sylius/Sylius/pull/18655) Add missing upgrade note to the 2.1 ([@GSadee](https://github.com/GSadee))
+- [#18652](https://github.com/Sylius/Sylius/pull/18652) [CS][DX] Refactor
+- [#18661](https://github.com/Sylius/Sylius/pull/18661) Add config/reference.php to .gitignore ([@GSadee](https://github.com/GSadee))
+- [#18669](https://github.com/Sylius/Sylius/pull/18669) Fix migrations skip commands 1.14 ([@TheMilek](https://github.com/TheMilek))
+- [#18672](https://github.com/Sylius/Sylius/pull/18672) Fix migrations skip commands 2.1 ([@TheMilek](https://github.com/TheMilek))
+- [#18680](https://github.com/Sylius/Sylius/pull/18680) [Telemetry] Fixes and improvements 1.14 ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.1.9 (2025-12-16)
 
 #### Details
