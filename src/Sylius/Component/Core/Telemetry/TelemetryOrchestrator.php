@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 /** @internal */
 final class TelemetryOrchestrator implements TelemetryOrchestratorInterface
 {
-    private const SCHEMA_VERSION = 1;
+    private const SCHEMA_VERSION = 2;
 
     /**
      * @param iterable<TelemetryDataCollectorInterface> $collectors
