@@ -43,4 +43,12 @@ final class VersionDataProviderTest extends TestCase
         self::assertInstanceOf(VersionData::class, $data);
         self::assertSame(PHP_VERSION, $data->phpVersion);
     }
+
+    public function test_it_returns_api_platform_version(): void
+    {
+        $data = $this->provider->provide();
+
+        self::assertInstanceOf(VersionData::class, $data);
+        self::assertNotNull($data->apiPlatformVersion);
+    }
 }
