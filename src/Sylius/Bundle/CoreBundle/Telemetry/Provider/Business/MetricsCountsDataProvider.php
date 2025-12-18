@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\MetricsCountsData;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
@@ -35,8 +36,11 @@ final class MetricsCountsDataProvider implements DataProviderInterface
                     (SELECT COUNT(id) FROM sylius_product) as products_count,
                     (SELECT COUNT(id) FROM sylius_product_variant) as product_variants_count,
                     (SELECT COUNT(id) FROM sylius_product_variant WHERE shipping_required = 0) as virtual_product_variants_count,
-                    (SELECT COUNT(id) FROM sylius_order) as orders_count,
+                    (SELECT COUNT(id) FROM sylius_order WHERE checkout_state = :completedState) as orders_count,
                     (SELECT COUNT(id) FROM sylius_channel WHERE enabled = 1) as channels_count',
+                [
+                    'completedState' => OrderCheckoutStates::STATE_COMPLETED,
+                ],
             );
 
             return new MetricsCountsData(

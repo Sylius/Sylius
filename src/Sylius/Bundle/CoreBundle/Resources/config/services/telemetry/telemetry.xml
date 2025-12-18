@@ -132,6 +132,15 @@
         </service>
 
         <service
+            id="sylius.telemetry.data_provider.countries"
+            class="Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\CountriesDataProvider"
+            lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
+        >
+            <argument type="service" id="doctrine.dbal.default_connection" />
+            <tag name="sylius.telemetry.business_data_provider" />
+        </service>
+
+        <service
             id="sylius.telemetry.collector.business"
             class="Sylius\Bundle\CoreBundle\Telemetry\Collector\BusinessDataCollector"
             lazy="Sylius\Component\Core\Telemetry\Collector\TelemetryDataCollectorInterface"
