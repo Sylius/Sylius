@@ -35,7 +35,8 @@ final class MetricsCountsDataProvider implements DataProviderInterface
                     (SELECT COUNT(id) FROM sylius_product) as products_count,
                     (SELECT COUNT(id) FROM sylius_product_variant) as product_variants_count,
                     (SELECT COUNT(id) FROM sylius_product_variant WHERE shipping_required = 0) as virtual_product_variants_count,
-                    (SELECT COUNT(id) FROM sylius_order) as orders_count',
+                    (SELECT COUNT(id) FROM sylius_order) as orders_count,
+                    (SELECT COUNT(id) FROM sylius_channel WHERE enabled = 1) as channels_count',
             );
 
             return new MetricsCountsData(
@@ -44,6 +45,7 @@ final class MetricsCountsDataProvider implements DataProviderInterface
                 productVariantsCount: ValueRangeMapper::mapVariantsCount((int) $counts['product_variants_count']),
                 virtualProductVariantsCount: ValueRangeMapper::mapVirtualVariantsCount((int) $counts['virtual_product_variants_count']),
                 ordersCount: (int) $counts['orders_count'],
+                channelsCount: (int) $counts['channels_count'],
             );
         } catch (\Throwable) {
             return new MetricsCountsData(
@@ -52,6 +54,7 @@ final class MetricsCountsDataProvider implements DataProviderInterface
                 productVariantsCount: ValueRangeMapper::mapVariantsCount(0),
                 virtualProductVariantsCount: ValueRangeMapper::mapVirtualVariantsCount(0),
                 ordersCount: 0,
+                channelsCount: 0,
             );
         }
     }

@@ -20,6 +20,7 @@ use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 final class BusinessDataCollector implements TelemetryDataCollectorInterface
 {
     private const METRICS_KEYS = [
+        'channels_count',
         'customers_count',
         'products_count',
         'product_variants_count',
