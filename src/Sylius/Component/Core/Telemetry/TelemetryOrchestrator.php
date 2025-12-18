@@ -19,7 +19,7 @@ use Sylius\Component\Core\Telemetry\Generator\InstallationIdGeneratorInterface;
 /** @internal */
 final class TelemetryOrchestrator implements TelemetryOrchestratorInterface
 {
-    private const SCHEMA_VERSION = 1;
+    private const SCHEMA_VERSION = 2;
 
     /**
      * @param iterable<TelemetryDataCollectorInterface> $collectors
