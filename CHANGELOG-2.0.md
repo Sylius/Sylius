@@ -1,5 +1,12 @@
 # CHANGELOG FOR `2.0.X`
 
+## v2.0.15 (2025-12-18)
+
+#### Details
+
+- [#18671](https://github.com/Sylius/Sylius/pull/18671) Fix migrations skip commands 2.0 ([@TheMilek](https://github.com/TheMilek))
+- [#18683](https://github.com/Sylius/Sylius/pull/18683) [Telemetry] Fixes and improvements 2.0 ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.0.14 (2025-12-16)
 
 #### Details
