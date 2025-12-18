@@ -1,5 +1,11 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.1 (2025-12-18)
+
+#### Details
+
+- [#18680](https://github.com/Sylius/Sylius/pull/18680) [Telemetry] Fixes and improvements 1.14 ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.2.0 (2025-12-17)
 
 #### Details
