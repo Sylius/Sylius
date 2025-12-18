@@ -32,7 +32,8 @@ final class CountriesDataProvider implements DataProviderInterface
                 'SELECT c.id as channel_id, co.code as country_code
                  FROM sylius_channel c
                  LEFT JOIN sylius_channel_countries cc ON cc.channel_id = c.id
-                 LEFT JOIN sylius_country co ON co.id = cc.country_id AND co.enabled = 1',
+                 LEFT JOIN sylius_country co ON co.id = cc.country_id AND co.enabled = 1
+                 WHERE c.enabled = 1',
             );
 
             $allCountries = $this->connection->fetchFirstColumn(

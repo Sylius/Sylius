@@ -29,11 +29,14 @@ final class CountriesDataProviderTest extends TestCase
         $this->provider = new CountriesDataProvider($this->connection);
     }
 
-    public function test_it_provides_only_enabled_countries(): void
+    public function test_it_provides_countries_from_enabled_channels_with_enabled_countries(): void
     {
         $this->connection->expects(self::once())
             ->method('fetchAllAssociative')
-            ->with(self::stringContains('co.enabled = 1'))
+            ->with(self::logicalAnd(
+                self::stringContains('co.enabled = 1'),
+                self::stringContains('c.enabled = 1'),
+            ))
             ->willReturn([
                 ['channel_id' => 1, 'country_code' => 'US'],
                 ['channel_id' => 1, 'country_code' => 'CA'],

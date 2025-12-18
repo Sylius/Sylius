@@ -52,7 +52,7 @@ final class TelemetryOrchestratorTest extends TestCase
         self::assertArrayHasKey('start', $data['period']);
         self::assertArrayHasKey('end', $data['period']);
         self::assertArrayHasKey('technical', $data);
-        self::assertSame(1, $data['schema_version']);
+        self::assertSame(2, $data['schema_version']);
         self::assertSame('install-uuid', $data['installation_id']);
         self::assertNotEmpty($data['collected_at']);
         self::assertNotEmpty($data['period']['start']);
@@ -79,7 +79,7 @@ final class TelemetryOrchestratorTest extends TestCase
         self::assertArrayHasKey('installation_id', $data);
         self::assertArrayHasKey('collected_at', $data);
         self::assertArrayHasKey('period', $data);
-        self::assertSame(1, $data['schema_version']);
+        self::assertSame(2, $data['schema_version']);
         self::assertSame('', $data['installation_id']);
     }
 
