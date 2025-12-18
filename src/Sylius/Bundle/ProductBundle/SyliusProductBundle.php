@@ -13,20 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle;
 
-use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\DefaultProductVariantResolverCompilerPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusProductBundle extends AbstractResourceBundle
 {
-    public function build(ContainerBuilder $container): void
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new DefaultProductVariantResolverCompilerPass());
-    }
-
+    /** @return string[] */
     public function getSupportedDrivers(): array
     {
         return [

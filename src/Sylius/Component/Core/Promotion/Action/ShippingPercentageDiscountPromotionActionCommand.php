@@ -33,6 +33,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
     {
     }
 
+    /** @param array<string, mixed> $configuration */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {
@@ -74,6 +75,8 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
     }
 
     /**
+     * @param array<string, mixed> $configuration
+     *
      * @throws UnexpectedTypeException
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): void

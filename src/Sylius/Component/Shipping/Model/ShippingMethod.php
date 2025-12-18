@@ -180,9 +180,7 @@ class ShippingMethod implements ShippingMethodInterface, \Stringable
         $this->rules->removeElement($rule);
     }
 
-    /**
-     * @return ShippingMethodTranslationInterface
-     */
+    /** @return ShippingMethodTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface
     {
         /** @var ShippingMethodTranslationInterface $translation */

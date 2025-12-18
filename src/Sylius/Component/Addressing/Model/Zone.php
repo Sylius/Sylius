@@ -38,7 +38,6 @@ class Zone implements ZoneInterface, \Stringable
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, ZoneMemberInterface> $this->members */
         $this->members = new ArrayCollection();
     }
 
@@ -82,15 +81,8 @@ class Zone implements ZoneInterface, \Stringable
         return $this->type;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function setType(?string $type): void
     {
-        if (!in_array($type, static::getTypes(), true)) {
-            throw new \InvalidArgumentException('Wrong zone type supplied.');
-        }
-
         $this->type = $type;
     }
 

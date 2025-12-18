@@ -1,55 +1,82 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
-
 sylius:
     form:
         catalog_promotion:
-            description: Descrição
-            name: Nome
-            priority: Prioridade
+            action:
+                fixed_discount: 'Desconto fixo'
+                percentage_discount: 'Desconto percentual'
+            description: 'Descrição'
+            enabled: 'Ativo'
+            end_date: 'Data de término'
+            label: 'Rótulo'
+            name: 'Nome'
+            priority: 'Prioridade'
+            start_date: 'Data de início'
+            translations: 'Traduções'
         promotion:
-            actions: Ações
-            add_action: Adicionar ação
-            add_rule: Adicionar regra
-            coupon_based: Baseada em cupão
-            description: Descrição
-            ends_at: Termina em
-            exclusive: Exclusivo
-            name: Nome
-            priority: Prioridade
-            rules: Regras
-            starts_at: Começa em
-            usage_limit: Limite de utilização
+            actions: 'Ações'
+            add_action: 'Adicionar ação'
+            add_rule: 'Adicionar regra'
+            applies_to_discounted: 'Aplica-se a itens já com desconto'
+            applies_to_discounted_details: 'Com esta opção, a promoção do carrinho será aplicada a itens já descontados por promoções de catálogo.'
+            coupon_based: 'Baseada em cupom'
+            description: 'Descrição'
+            ends_at: 'Termina em'
+            exclusive: 'Exclusiva'
+            label: 'Rótulo'
+            name: 'Nome'
+            priority: 'Prioridade'
+            rules: 'Regras'
+            starts_at: 'Começa em'
+            usage_limit: 'Limite de uso'
         promotion_action:
+            item_fixed_discount: 'Desconto fixo por item'
+            item_percentage_discount: 'Desconto percentual por item'
+            order_fixed_discount: 'Desconto fixo no pedido'
+            order_percentage_discount: 'Desconto percentual no pedido'
+            shipping_percentage_discount: 'Desconto percentual no frete'
+            filters: 'Filtros'
             fixed_discount_configuration:
-                amount: Quantia
+                amount: 'Valor'
             percentage_discount_configuration:
-                percentage: Percentagem
-            type: Tipo
+                percentage: 'Percentual'
+            type: 'Tipo'
         promotion_coupon:
-            expires_at: Expira às
-            usage_limit: Limite de utilização
+            expires_at: 'Expira em'
+            usage_limit: 'Limite de uso'
         promotion_coupon_generator_instruction:
-            amount: Quantia
-            code_length: Comprimento do código
-            expires_at: Expira às
-            usage_limit: Limite de utilização
+            amount: 'Quantidade'
+            code_length: 'Comprimento do código'
+            expires_at: 'Expira em'
+            prefix: 'Prefixo'
+            suffix: 'Sufixo'
+            usage_limit: 'Limite de uso'
+        promotion_filter:
+            price_range: 'Filtro de faixa de preço'
         promotion_rule:
-            customer_group: Grupo de clientes
-            taxonomy: Taxonomia
+            cart_quantity: 'Quantidade no carrinho'
+            contains_product: 'Contém produto'
+            customer_group: 'Grupo de clientes'
+            has_at_least_one_from_taxons: 'Contém pelo menos um dos táxons'
+            item_total: 'Total de itens'
+            nth_order: 'Enésimo pedido'
+            shipping_country: 'País de envio'
+            taxonomy: 'Taxonomia'
+            total_price_of_items_from_taxon: 'Preço total de itens do táxon'
             cart_quantity_configuration:
-                count: Quantidade
-                equal: Igual
+                count: 'Contagem'
+                equal: 'Igual'
             contains_product_configuration:
-                exclude: Excluir
-                variants: Produtos
+                exclude: 'Excluir'
+                variants: 'Produtos'
             item_total_configuration:
-                amount: Quantia
+                amount: 'Valor'
             nth_order_configuration:
-                nth: N-ésimo
+                nth: 'Enésimo'
             shipping_country_configuration:
-                country: País
+                country: 'País'
             taxonomy_configuration:
-                exclude: Excluir
-                taxons: Táxons
-            type: Tipo
+                exclude: 'Excluir'
+                taxons: 'Táxons'
+            type: 'Tipo'

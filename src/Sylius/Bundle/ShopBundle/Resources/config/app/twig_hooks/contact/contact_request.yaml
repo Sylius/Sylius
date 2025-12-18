@@ -1,0 +1,25 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.contact.contact_request':
+            content:
+                template: '@SyliusShop/contact/contact_request/content.html.twig'
+                priority: 0      
+        
+        'sylius_shop.contact.contact_request.content':
+            header:
+                template: '@SyliusShop/contact/contact_request/content/header.html.twig'
+                priority: 100
+            form:
+                template: '@SyliusShop/contact/contact_request/content/form.html.twig'
+                priority: 0
+
+        'sylius_shop.contact.contact_request.content.form':
+            email:
+                template: '@SyliusShop/contact/contact_request/content/form/email.html.twig'
+                priority: 200
+            message:
+                template: '@SyliusShop/contact/contact_request/content/form/message.html.twig'
+                priority: 100
+            submit:
+                template: '@SyliusShop/contact/contact_request/content/form/submit.html.twig'
+                priority: 0

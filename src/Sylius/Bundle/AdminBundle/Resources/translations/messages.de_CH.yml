@@ -6,71 +6,121 @@ sylius:
         shipment_confirmation:
             has_been_sent_using: 'wurde gesendet mit'
             subject: 'Versandbestätigung'
-            thank_you_for_transaction: 'Vielen Dank für eine erfolgreiche Transaktion.'
-            you_can_check_its_location_with_the_tracking_code: 'Sie können den Standort mit dem Tracking-Code %tracking_code% überprüfen.'
-            your_order_with_number: 'Ihre Bestellung mit Nummer'
+            thank_you_for_transaction: 'Vielen Dank für die erfolgreiche Transaktion.'
+            you_can_check_its_location_with_the_tracking_code: 'Sie können den Standort mit dem %tracking_code% Sendungsverfolgungscode überprüfen.'
+            your_order_with_number: 'Ihre Bestellung mit der Nummer'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Soll der niedrigste Preis für rabattierte Produkte vor dem aktuellen Rabatt angezeigt werden?'
+                period_for_which_the_lowest_price_is_calculated: 'Zeitraum, für den der niedrigste Preis berechnet wird'
+            reset_password:
+                password:
+                    label: 'Neues Passwort'
+                    confirmation: 'Neues Passwort bestätigen'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: Verbindungstypen
-                    attributes: Attribute
-                    header: Katalog
-                    inventory: Lagerbestände
-                    options: Optionen
-                    products: Produkte
-                    taxons: Produktgruppen
+                    association_types: 'Assoziationstypen'
+                    attributes: 'Attribute'
+                    header: 'Katalog'
+                    inventory: 'Inventar'
+                    options: 'Optionen'
+                    products: 'Produkte'
+                    taxons: 'Taxons'
                 configuration:
-                    admin_users: Administratoren
-                    channels: Ausgabekanäle
-                    countries: Länder
-                    currencies: Währungen
-                    exchange_rates: Wechselkurse
-                    header: Einstellung
-                    locales: Gebietsschemata
-                    payment_methods: Bezahlmethoden
-                    shipping_categories: Versandkategorien
-                    shipping_methods: Versandarten
-                    tax_categories: Steuerkategorien
-                    tax_rates: Steuersätze
-                    zones: Gebiete
+                    admin_users: 'Administratorbenutzer'
+                    channels: 'Kanäle'
+                    countries: 'Länder'
+                    currencies: 'Währungen'
+                    exchange_rates: 'Wechselkurse'
+                    header: 'Konfiguration'
+                    locales: 'Sprachen'
+                    payment_methods: 'Zahlungsmethoden'
+                    shipping_categories: 'Versandkategorien'
+                    shipping_methods: 'Versandmethoden'
+                    tax_categories: 'Steuerkategorien'
+                    tax_rates: 'Steuersätze'
+                    zones: 'Zonen'
                 marketing:
-                    cart_promotions: Warenkorb Aktionen
-                    catalog_promotions: Katalog Aktionen
-                    header: Marketing
-                    product_reviews: Produkt-Bewertung
-                    promotions: Aktionen
+                    cart_promotions: 'Warenkorbaktionen'
+                    catalog_promotions: 'Katalogaktionen'
+                    header: 'Marketing'
+                    product_reviews: 'Produktbewertungen'
+                    promotions: 'Aktionen'
                 customers:
-                    customers: Kunden
-                    groups: Gruppen
-                    header: Kunde
+                    customers: 'Kunden'
+                    groups: 'Gruppen'
+                    header: 'Kunden'
                 sales:
-                    header: Verkäufe
-                    orders: Bestellungen
+                    header: 'Verkäufe'
+                    orders: 'Bestellungen'
                 official_support:
-                    header: Offizieller Support
-                    sylius_plus: Sylius Plus
-                    browse_plugins: Plugins durchsuchen
-                    professional_services: Professionelle Dienstleistungen
-                    find_a_partner: Einen Partner finden
+                    header: 'Offizieller Support'
+                    browse_plugins: 'Durchsuchen Sie Plugins'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Professionelle Dienstleistungen'
+                    find_a_partner: 'Finden Sie einen Partner'
+                    sylius_certification: 'Sylius-Zertifizierung'
     ui:
+        account: 'Konto'
+        admin_user: 'Administrator'
+        add_new_entry: 'Neuen Eintrag hinzufügen'
+        back_to_dashboard: 'Zurück zum Dashboard'
         catalog_promotion:
-            dates_details: Dieser Vorgang ist zeitintensiv! Bitte berücksichtigen Sie eine Verzögerung von 2-10 Minuten ab Start des angegebenen Datums. Die Verzögerung hängt von der Größe des Katalogs ab.
-        channel_pricings: Ausgabekanäle Bepreisung
+            dates_details: 'Dieser Vorgang kann zeitaufwändig sein! Bitte rechnen Sie mit einer Verzögerung von 2-10 Minuten ab den angegebenen Daten. Die Verzögerung hängt von der Größe des Katalogs ab.'
+        channel:
+            account_verification_required_details: 'Durch Deaktivieren dieser Option ist es möglich, Konten zu erstellen und darauf zuzugreifen, ohne dass eine E-Mail-Verifizierung erforderlich ist und damit möglicherweise Bestelldaten als Gast zugänglich sind.'
+        channel_pricing_history: 'Preishistorie des Kanals'
+        channel_pricings: 'Kanalpreise'
+        create_new:
+            customer_group: 'Erstellen Sie eine neue Kundengruppe'
+        delete_avatar: 'Avatar löschen'
+        full_screen: 'Vollbild'
+        global: 'Global'
+        ip_address: 'IP-Adresse'
+        language: 'Sprache'
+        lowest_price_before_discount: 'Niedrigster Preis vor Rabatt'
+        minimum_price_details: 'Mindestpreis - dies ist der Preisrahmen, unter dem der aktuelle Preis weder durch Katalog- noch Warenkorbaktionen rabattiert werden kann. Verwenden Sie dies, um die Rentabilität Ihrer Verkäufe zu schützen.'
+        more: 'Mehr'
+        no_main_taxon: 'Kein Haupt-Taxon'
+        no_depth: 'Keine Tiefe'
+        no_height: 'Keine Höhe'
+        no_results: 'Keine Ergebnisse gefunden'
+        no_results_adjust_your_search: 'Passen Sie Ihre Suche an und versuchen Sie es erneut.'
+        no_weight: 'Kein Gewicht'
+        no_width: 'Keine Breite'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Bestelldatum'
+        original_price_details: 'Originalpreis - dies ist der Preis der Produktvariante, der im Katalog durchgestrichen angezeigt wird. Dieser Preis wird als Basis für die Berechnung des aktuellen Preises verwendet. Wenn dieser Wert nicht definiert ist, wird die Katalogaktionslogik den Wert vom Preis auf den Originalpreis kopieren.'
+        original_product_price_details: 'Originalpreis - dies ist der Preis des Produkts, der im Katalog durchgestrichen angezeigt wird. Dieser Preis wird als Basis für die Berechnung des aktuellen Preises verwendet. Wenn dieser Wert nicht definiert ist, wird die Katalogaktionslogik den Wert vom Preis auf den Originalpreis kopieren.'
+        page_not_found: 'Seite nicht gefunden'
+        pagination:
+            number_of_results: 'Zeige %from% bis %to% von %total% Einträgen'
+        partially_refunded: 'Teilweise erstattet'
+        price_details: 'Preis - dies ist der aktuelle Preis der Produktvariante, der im Katalog angezeigt wird. Er kann explizit durch Katalogaktionen geändert werden.'
+        product_price_details: 'Preis - dies ist der aktuelle Preis des Produkts, der im Katalog angezeigt wird. Er kann explizit durch Katalogaktionen geändert werden.'
+        price_history: 'Preishistorie'
         product:
-            product_not_active_in_channel: Das Produkt ist in diesem Kanal noch nicht aktiviert.
-        original_price_details: Originalpreis - Dies ist der Preis der Produktvariante. Wird durchgestrichen im Katalog angezeigt. Dient als Basis für aktuelle Preisberechnungen. Ist dieser Wert nicht definiert, verwendet die Logik der Warbenkorb-Aktion den Ist-Preis.
-        price_details: Preis - Dies ist der aktuelle Preis der Produktvariante im Katalog. Kann explizit durch z.B. Katalog-Aktionen geändert werden.
-        minimum_price_details: Mindestpreis - die Schwelle, unter die der aktuelle Preis weder durch Katalog- noch Warenkorb-Werbeaktionen verringert werden kann. Verwenden Sie dieses Feld, um Rentabilität Ihre Verkäufe zu sichern.
-        gateway:
-            no_sca_support_notice: Das gewählte Zahlungs-Gateway unterstützt kein SCA.
-            pay_pal_express_checkout_deprecation_notice: >
-                PayPal Express Checkout ist veraltet. Bitte verwenden Sie die neue <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Handelsplattform</a> Integration.
-        sales_summary: Verkaufszusammenfassung
+            product_not_active_in_channel: 'Das Produkt ist in diesem Kanal noch nicht aktiviert.'
+        product_variant: 'Produktvariante'
+        sales_summary: 'Verkaufsübersicht'
+        search_menu: 'Suchmenü'
+        shipment_for_order: 'Versand für Bestellung'
+        show_history_for_channel_pricing: 'Zeige Historie für Kanalpreise'
+        start_typing_to_search: 'Beginnen Sie mit der Eingabe, um zu suchen'
         statistics:
-            day: Tag
-            lifetime: Gesamter Zeitraum
-            month: Monat
-            week: Woche
-            2weeks: 2 Wochen
-            year: Jahr
+            day: 'Tag'
+            lifetime: 'Lebensdauer'
+            month: 'Monat'
+            week: 'Woche'
+            2weeks: '2 Wochen'
+            year: 'Jahr'
+        taxon: 'Taxon'
+        view_in_store: 'Im Geschäft ansehen'
+        work_in_progress: 'In Bearbeitung'
+        empty_date: 'leer'
+        notifications:
+            new_version_of_sylius_available: 'Es ist eine neue Version von Sylius verfügbar. Kontaktieren Sie Ihren Techniker, um ein Upgrade durchzuführen.'

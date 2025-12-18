@@ -21,11 +21,11 @@ interface IndexPageInterface extends BaseIndexPageInterface
 
     public function specifyFilterDateTo(string $dateTime): void;
 
-    public function chooseChannelFilter(string $channelName): void;
+    public function specifyFilterChannel(string $channelName): void;
 
-    public function chooseShippingMethodFilter(string $methodName): void;
+    public function specifyFilterShippingMethod(string $methodName): void;
 
-    public function chooseCurrencyFilter(string $currencyName): void;
+    public function chooseFilterCurrency(string $currencyName): void;
 
     public function specifyFilterTotalGreaterThan(string $total): void;
 
@@ -34,4 +34,6 @@ interface IndexPageInterface extends BaseIndexPageInterface
     public function specifyFilterProduct(string $productName): void;
 
     public function specifyFilterVariant(string $variantName): void;
+
+    public function specifyFilterCustomer(string $customerName): void;
 }

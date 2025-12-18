@@ -1,0 +1,78 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    catalog_promotion:
+        code:
+            max_length: 'コードは {{ limit }} 文字以内で入力してください。'
+            unique: 'このコードのカタログプロモーションは既に存在します。'
+            regex: 'コードには英数字・ハイフン・アンダースコアのみ使用できます。'
+            not_blank: 'カタログプロモーションのコードを入力してください。'
+        date:
+            greater_than_start_date: '終了日は開始日より前に設定できません。'
+        name:
+            max_length: '名称は {{ limit }} 文字以内で入力してください。'
+            min_length: '名称は最低 {{ limit }} 文字以上で入力してください。'
+            not_blank: 'カタログプロモーションの名称を入力してください。'
+        state:
+            processing: 'このカタログプロモーションは処理中のため編集できません。'
+    catalog_promotion_action:
+        type:
+            not_blank: 'アクションタイプを選択してください。'
+            invalid: 'アクションタイプが無効です。利用可能なタイプ: {{ available_action_types }}。'
+        invalid_type: 'アクションタイプが無効です。正しいタイプを選択してください。'
+        percentage_discount:
+            not_in_range: '割引率は 0%〜100% の間で指定してください。'
+            not_number_or_empty: '割引率は数値で入力し、空欄にしないでください。'
+            not_valid: '割引率の設定が必要です。'
+    catalog_promotion_scope:
+        type:
+            not_blank: 'スコープタイプを選択してください。'
+            invalid: 'スコープタイプが無効です。利用可能なタイプ: {{ available_scope_types }}。'
+    promotion:
+        code:
+            max_length: 'コードは {{ limit }} 文字以内で入力してください。'
+            unique: 'このコードのプロモーションは既に存在します。'
+            regex: 'コードには英数字・ハイフン・アンダースコアのみ使用できます。'
+            not_blank: 'プロモーションコードを入力してください。'
+        description:
+            max_length: '説明は 1 文字を超えてはいけません。|説明は {{ limit }} 文字以内で入力してください。'
+            min_length: '説明は最低 1 文字以上で入力してください。|説明は最低 {{ limit }} 文字以上で入力してください。'
+            not_blank: 'プロモーションの説明を入力してください。'
+        end_date_cannot_be_set_prior_start_date: '終了日は開始日より前に設定できません。'
+        is_invalid: 'プロモーションが無効です。'
+        name:
+            max_length: '名称は 1 文字を超えてはいけません。|名称は {{ limit }} 文字以内で入力してください。'
+            min_length: '名称は最低 1 文字以上で入力してください。|名称は最低 {{ limit }} 文字以上で入力してください。'
+            not_blank: 'プロモーション名を入力してください。'
+    promotion_action:
+        invalid_type: 'アクションタイプが無効です。利用可能なタイプ: {{ available_action_types }}。'
+        percentage_discount_configuration:
+            not_in_range: '割引率は 0%〜100% の間で指定してください。'
+    promotion_rule:
+        invalid_type: 'ルールタイプが無効です。利用可能なタイプ: {{ available_rule_types }}。'
+    promotion_coupon:
+        code:
+            max_length: 'コードは {{ limit }} 文字以内で入力してください。'
+            min_length: 'クーポンコードは最低 1 文字以上で入力してください。|クーポンコードは最低 {{ limit }} 文字以上で入力してください。'
+            not_blank: 'クーポンコードを入力してください。'
+            regex: 'コードには英数字・ハイフン・アンダースコアのみ使用できます。'
+            unique: 'このクーポンは既に存在します。'
+        is_invalid: 'クーポンコードが無効です。'
+        promotion:
+            not_blank: 'このクーポンに紐づくプロモーションを指定してください。'
+            not_coupon_based: 'クーポンベースのプロモーションのみクーポンを持てます。'
+        usage_limit:
+            min: 'クーポンの利用制限は最低 {{ limit }} 以上で設定してください。'
+    promotion_coupon_generator_instruction:
+        amount:
+            min: '生成するクーポン数は最低 {{ limit }} 以上で設定してください。'
+            not_blank: '生成するクーポン数を入力してください。'
+        code_length:
+            min: 'クーポンコードは最低 {{ limit }} 文字以上で入力してください。'
+            max: 'クーポンコードは {{ limit }} 文字以内で入力してください。'
+            not_blank: 'クーポンコードの長さを入力してください。'
+            not_in_range: 'クーポンコードの長さは {{ min }}〜{{ max }} 文字で指定してください。'
+        possible_generation_amount: 'コード長または生成数が不正です。コード長 %codeLength% で %expectedAmount% 件の一意なクーポンは生成できません。生成可能な最大数は %possibleAmount% 件です。'
+        usage_limit:
+            min: '生成されるクーポンの利用制限は最低 {{ limit }} 以上で設定してください。'

@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+parameters:
+    env(SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_DSN): 'sync://'
+    env(SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_FAILED_DSN): 'sync://'
+
+    sylius_messenger_transport_payment_request_dsn: '%env(resolve:SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_DSN)%'
+    sylius_messenger_transport_payment_request_failed_dsn: '%env(resolve:SYLIUS_MESSENGER_TRANSPORT_PAYMENT_REQUEST_FAILED_DSN)%'
+
+framework:
+    messenger:
+        transports:
+            payment_request:
+                dsn: '%sylius_messenger_transport_payment_request_dsn%'
+                failure_transport: 'payment_request_failed'
+            payment_request_failed:
+                dsn: '%sylius_messenger_transport_payment_request_failed_dsn%'
+        routing:
+            'Sylius\Bundle\PaymentBundle\Command\PaymentRequestHashAwareInterface': payment_request
+        buses:
+            sylius.payment_request.command_bus:
+                middleware:
+                    - 'validation'
+                    - 'doctrine_transaction'

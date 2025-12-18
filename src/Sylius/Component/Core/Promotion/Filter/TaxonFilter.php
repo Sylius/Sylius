@@ -33,9 +33,7 @@ final class TaxonFilter implements FilterInterface
         return $filteredItems;
     }
 
-    /**
-     * @param string[] $taxonCodes
-     */
+    /** @param string[] $taxonCodes */
     private function hasProductValidTaxon(ProductInterface $product, array $taxonCodes): bool
     {
         foreach ($product->getTaxons() as $taxon) {

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -20,6 +21,7 @@ use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductOptionsContext implements Context
@@ -30,6 +32,7 @@ final class ManagingProductOptionsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -42,6 +45,7 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Given I am browsing product options
      * @When I browse product options
      */
     public function iBrowseProductOptions(): void
@@ -101,24 +105,23 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I add the :value option value identified by :code
-     */
-    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code): void
-    {
-        $this->client->addSubResourceData(
-            'values',
-            ['code' => $code, 'translations' => ['en_US' => ['value' => $value]]],
-        );
-    }
-
-    /**
      * @When I add the :value option value identified by :code in :localeCode
      */
-    public function iAddTheOptionValueWithCodeAndValueInLocale(string $value, string $code, string $localeCode): void
+    public function iAddTheOptionValueWithCodeAndValue(string $value, string $code, string $localeCode = 'en_US'): void
     {
         $this->client->addSubResourceData(
             'values',
             ['code' => $code, 'translations' => [$localeCode => ['value' => $value]]],
         );
+    }
+
+    /**
+     * @When I delete the :optionValue option value of this product option
+     */
+    public function iDeleteTheOptionValueOfThisProductOption(ProductOptionValueInterface $optionValue): void
+    {
+        $optionValueIri = $this->iriConverter->getIriFromResource($optionValue);
+        $this->client->removeSubResourceObject('values', $optionValueIri, 'value');
     }
 
     /**
@@ -135,6 +138,15 @@ final class ManagingProductOptionsContext implements Context
     public function iAddIt(): void
     {
         $this->client->create();
+    }
+
+    /**
+     * @When /^I search for product options with "([^"]+)" (code|name)$/
+     */
+    public function iSearchForProductOptionsWith(string $phrase, string $field): void
+    {
+        $this->client->addFilter($field === 'name' ? 'translations.name' : 'code', $phrase);
+        $this->client->filter();
     }
 
     /**
@@ -155,8 +167,9 @@ final class ManagingProductOptionsContext implements Context
     {
         $this->sharedStorage->set('product_option', $productOption);
 
+        $response = $this->client->index(Resources::PRODUCT_OPTIONS);
         Assert::true(
-            $this->responseChecker->hasItemWithValue($this->client->index(Resources::PRODUCT_OPTIONS), 'name', $productOption->getName()),
+            $this->responseChecker->hasItemWithValue($response, 'name', $productOption->getName()),
             sprintf('Product option should have name "%s", but it does not.', $productOption->getName()),
         );
     }
@@ -219,6 +232,7 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @Then /^(product option "[^"]+") should have the "([^"]+)" option value$/
+     * @Then /^(product option "[^"]+") should still have the "([^"]+)" option value$/
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      */
     public function productOptionShouldHaveTheOptionValue(
@@ -234,13 +248,30 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Then /^(this product option) should not have the "([^"]*)" option value$/
+     * @Then /^(this product option) should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
+     */
+    public function thisProductOptionShouldNotHaveTheOptionValue(
+        ProductOptionInterface $productOption,
+        string $optionValueName,
+    ): void {
+        Assert::false($this->responseChecker->hasItemWithTranslationInCollection(
+            $this->responseChecker->getValue($this->client->show(Resources::PRODUCT_OPTIONS, $productOption->getCode()), 'values'),
+            'en_US',
+            'value',
+            $optionValueName,
+        ));
+    }
+
+    /**
      * @Then I should not be able to edit its code
      */
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
 
-        Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
+        $res = $this->client->update();
+        Assert::false($this->responseChecker->hasValue($res, 'code', 'NEW_CODE'));
     }
 
     /**
@@ -267,6 +298,17 @@ final class ManagingProductOptionsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             sprintf('%s: Please enter option %s.', $element, $element),
+        );
+    }
+
+    /**
+     * @Then I should be notified that it is in use
+     */
+    public function iShouldBeNotifiedThatItIsInUse(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'Cannot delete, the product option value is in use.',
         );
     }
 

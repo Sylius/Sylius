@@ -1,0 +1,91 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.promotion_coupon.generate':
+            sidebar:
+                template: '@SyliusAdmin/shared/crud/common/sidebar.html.twig'
+                priority: 200
+            navbar:
+                template: '@SyliusAdmin/shared/crud/common/navbar.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+                priority: 0
+
+        'sylius_admin.promotion_coupon.generate.content':
+            flashes:
+                template: '@SyliusAdmin/shared/crud/common/content/flashes.html.twig'
+                priority: 200
+            header:
+                template: '@SyliusAdmin/shared/crud/common/content/header.html.twig'
+                priority: 100
+            form:
+                component: 'sylius_admin:promotion_coupon:generator_instruction_form'
+                props:
+                    form: '@=_context.form'
+                    template: '@SyliusAdmin/promotion_coupon/generate/form.html.twig'
+                configuration:
+                    render_rest: false
+                priority: 0
+
+        'sylius_admin.promotion_coupon.generate.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/promotion_coupon/generate/content/header/breadcrumbs.html.twig'
+                priority: 100
+            title_block:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block.html.twig'
+                priority: 0
+
+        'sylius_admin.promotion_coupon.generate.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    title: 'sylius.ui.generate_coupons'
+                priority: 100
+            actions:
+                template: '@SyliusAdmin/shared/crud/update/content/header/title_block/actions.html.twig'
+                priority: 0
+
+        'sylius_admin.promotion_coupon.generate.content.header.title_block.actions':
+            cancel:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/actions/cancel.html.twig'
+                priority: 100
+            generate:
+                template: '@SyliusAdmin/promotion_coupon/generate/content/header/title_block/actions/generate.html.twig'
+                priority: 0
+
+        'sylius_admin.promotion_coupon.generate.content.form':
+            sections:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections.html.twig'
+                priority: 0
+
+        'sylius_admin.promotion_coupon.generate.content.form.sections#left':
+            general:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/general.html.twig'
+                priority: 0
+        
+        'sylius_admin.promotion_coupon.generate.content.form.sections#right':
+            configuration:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration.html.twig'
+                priority: 0
+
+        'sylius_admin.promotion_coupon.generate.content.form.sections.general':
+            code:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/general/prefix.html.twig'
+                priority: 200
+            code_length:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/general/code_length.html.twig'
+                priority: 100
+            suffix:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/general/suffix.html.twig'
+                priority: 0
+
+        'sylius_admin.promotion_coupon.generate.content.form.sections.configuration':
+            amount:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/amount.html.twig'
+                priority: 200
+            expires_at:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/expires_at.html.twig'
+                priority: 100
+            usage_limit:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/usage_limit.html.twig'
+                priority: 0

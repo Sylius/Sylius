@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
@@ -29,8 +30,13 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Resource\Model\CodeAwareInterface;
 use Symfony\Component\Intl\Countries;
 
-final class ZoneContext implements Context
+final readonly class ZoneContext implements Context
 {
+    /**
+     * @param RepositoryInterface<ZoneInterface> $zoneRepository
+     * @param ZoneFactoryInterface<ZoneInterface> $zoneFactory
+     * @param FactoryInterface<ZoneMemberInterface> $zoneMemberFactory
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private RepositoryInterface $zoneRepository,
@@ -40,10 +46,8 @@ final class ZoneContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^there is a zone "The Rest of the World" containing all other countries$/
-     */
-    public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries()
+    #[Given('there is a zone "The Rest of the World" containing all other countries')]
+    public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries(): void
     {
         $restOfWorldCountries = Countries::getNames('en');
         unset($restOfWorldCountries['US']);
@@ -56,10 +60,8 @@ final class ZoneContext implements Context
         $this->zoneRepository->add($zone);
     }
 
-    /**
-     * @Given default tax zone is :zone
-     */
-    public function defaultTaxZoneIs(ZoneInterface $zone)
+    #[Given('default tax zone is :zone')]
+    public function defaultTaxZoneIs(ZoneInterface $zone): void
     {
         /** @var ChannelInterface $channel */
         $channel = $this->sharedStorage->get('channel');
@@ -68,10 +70,8 @@ final class ZoneContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the store does not have any zones defined
-     */
-    public function theStoreDoesNotHaveAnyZonesDefined()
+    #[Given('the store does not have any zones defined')]
+    public function theStoreDoesNotHaveAnyZonesDefined(): void
     {
         $zones = $this->zoneRepository->findAll();
 

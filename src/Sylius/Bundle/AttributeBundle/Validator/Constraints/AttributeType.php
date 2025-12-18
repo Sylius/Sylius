@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 class AttributeType extends Constraint
 {
     public string $unregisteredAttributeTypeMessage = 'sylius.attribute.type.unregistered';

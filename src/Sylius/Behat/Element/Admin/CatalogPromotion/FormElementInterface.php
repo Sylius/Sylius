@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\CatalogPromotion;
 
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Behat\Element\Admin\Crud\FormElementInterface as BaseFormElementInterface;
 
-interface FormElementInterface
+interface FormElementInterface extends BaseFormElementInterface
 {
     public function nameIt(string $name): void;
 
@@ -37,33 +37,33 @@ interface FormElementInterface
 
     public function specifyEndDate(\DateTimeInterface $endDate): void;
 
-    public function addScope(): void;
+    public function addScope(string $type): void;
 
-    public function addAction(): void;
+    public function addAction(string $type): void;
 
-    public function chooseScopeType(string $type): void;
+    public function selectScopeOption(array $names): void;
 
-    public function chooseActionType(string $type): void;
+    public function fillActionOption(string $option, string $value): void;
 
-    public function chooseLastScopeCodes(array $codes): void;
+    public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void;
 
-    public function specifyLastActionDiscount(string $discount): void;
+    public function getLastScopeNames(): array;
 
-    public function specifyLastActionDiscountForChannel(string $discount, ChannelInterface $channel): void;
+    public function getLastActionOption(string $option): string;
+
+    public function getLastActionOptionForChannel(string $channelCode, string $option): string;
 
     public function getFieldValueInLocale(string $field, string $localeCode): string;
 
-    public function getLastScopeCodes(): array;
+    public function checkIfScopeConfigurationFormIsVisible(): bool;
 
-    public function getLastActionDiscount(): string;
+    public function checkIfActionConfigurationFormIsVisible(): bool;
 
-    public function getLastActionFixedDiscount(ChannelInterface $channel): string;
+    public function getValidationMessages(): array;
 
-    public function getValidationMessage(): string;
+    public function removeScopeOption(array $names): void;
 
-    public function hasValidationMessage(string $message): bool;
+    public function removeLastAction(): void;
 
-    public function removeAllActions(): void;
-
-    public function removeAllScopes(): void;
+    public function removeLastScope(): void;
 }

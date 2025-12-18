@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.shipment.class%">
+        <operations>
+            <operation
+                name="sylius_api_admin_shipment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/shipments"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipment:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.admin.shipment</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="createdAt">DESC</value>
+                    </values>
+                </order>
+            </operation>
+
+            <operation name="sylius_api_admin_shipment_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/shipments/{id}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipment:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_shipment_post_resend_confirmation_email"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/shipments/{id}/resend-confirmation-email"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\ResendShipmentConfirmationEmail"
+                output="false"
+                status="202"
+            >
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_shipment_patch_ship"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/shipments/{id}/ship"
+                messenger="input"
+                input="Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment"
+                output="false"
+                status="202"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipment:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.shipment.class%" uriTemplate="/admin/orders/{tokenValue}/shipments">
+        <uriVariables>
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="shipments" />
+        </uriVariables>
+
+        <operations>
+            <operation name="sylius_api_admin_order_shipment_get_collection" class="ApiPlatform\Metadata\GetCollection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipment:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

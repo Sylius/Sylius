@@ -1,0 +1,10 @@
+{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
+
+{% set promotion = hookable_metadata.context.resources.requestConfiguration.vars.promotion %}
+
+{{ breadcrumbs([
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+    { name: 'sylius.ui.promotions'|trans, url: path('sylius_admin_promotion_index'), active: false },
+    { name: promotion.name|default(promotion.code), url: path('sylius_admin_promotion_update', {'id': promotion.id }), active: false },
+    { name: 'sylius.ui.coupons'|trans, active: true },
+]) }}

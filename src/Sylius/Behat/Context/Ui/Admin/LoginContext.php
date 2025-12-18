@@ -97,7 +97,7 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutBadCredentials()
     {
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Invalid credentials.'));
     }
 
     /**
@@ -116,7 +116,7 @@ final class LoginContext implements Context
     {
         $this->logInAgain($username, $password);
 
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
+        Assert::true($this->loginPage->hasValidationErrorWith('Invalid credentials.'));
         Assert::false($this->dashboardPage->isOpen());
     }
 

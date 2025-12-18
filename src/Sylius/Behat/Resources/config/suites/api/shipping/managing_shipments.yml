@@ -5,9 +5,9 @@ default:
     suites:
         api_managing_shipments:
             contexts:
+                - sylius.behat.context.hook.calendar
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.mailer
-                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.channel
@@ -22,6 +22,7 @@ default:
                 - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.calendar
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.order
@@ -29,11 +30,11 @@ default:
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.zone
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
-
-                - sylius.behat.context.api.email
 
                 - sylius.behat.context.api.admin.managing_shipments
+                - sylius.behat.context.api.debug
+                - sylius.behat.context.api.email
+
             filters:
                 tags: "@managing_shipments&&@api"
             javascript: false

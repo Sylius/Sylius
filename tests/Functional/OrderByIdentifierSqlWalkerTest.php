@@ -16,6 +16,7 @@ namespace Sylius\Tests\Functional;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 
 final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
@@ -28,7 +29,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         $this->entityManager = new EntityManager($this->getTestOrmConnection($config), $config);
     }
 
-    /** @test */
+    #[Test]
     public function it_appends_order_by_identifier_to_the_query(): void
     {
         self::assertStringEndsWith(
@@ -53,7 +54,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_appends_order_by_identifier_composite_to_the_query(): void
     {
         self::assertStringEndsWith(
@@ -78,7 +79,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_append_order_by_identifier_to_the_query_if_query_is_grouped(): void
     {
         self::assertStringEndsWith(
@@ -89,7 +90,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_append_order_by_identifier_to_the_query_if_aggregate_function_is_used(): void
     {
         self::assertStringEndsWith(

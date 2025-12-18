@@ -1,0 +1,56 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        expired_password_reset_token: '비밀번호 재설정 토큰이 만료되었습니다.'
+    account:
+        invalid_verification_token: '이메일 확인 토큰 %verificationToken% 을(를) 가진 상점 사용자가 존재하지 않습니다.'
+        is_verified: '이메일 %email% 계정은 이미 확인되었습니다.'
+    address:
+        without_country: '국가가 없는 주소는 존재할 수 없습니다.'
+    code:
+        not_blank: '코드를 입력하세요.'
+        invalid: '코드는 영문자, 숫자, 하이픈("-"), 밑줄("_")만 포함해야 합니다.'
+    contact_request:
+        email_is_invalid: '입력한 이메일이 유효하지 않습니다.'
+    country:
+        not_exist: '국가 %countryCode% 는 존재하지 않습니다.'
+    date_interval:
+        empty: '날짜 구간을 비워둘 수 없습니다.'
+        invalid: '날짜 구간이 유효한 ISO 8601 형식이 아닙니다.'
+    date_time:
+        invalid: '날짜·시간이 Y-m-d\TH:i:s 형식의 유효한 ISO 8601 값이 아닙니다.'
+    order:
+        not_empty: '빈 주문은 처리할 수 없습니다.'
+    payment:
+        not_found: '해당 결제가 존재하지 않습니다.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: '취소된 주문의 결제 방법은 변경할 수 없습니다.'
+        not_available: '결제 방법 %name% 은(는) 이 주문에 사용할 수 없습니다. 다른 방법을 선택하세요.'
+        not_exist: '코드 %code% 의 결제 방법이 존재하지 않습니다.'
+    payment_request:
+        action_not_available: '결제 요청(방법 코드: %code%, 결제 ID: %id%)을 처리할 핸들러가 없습니다. 다른 결제 방법을 선택하세요.'
+        not_available: '이 결제 요청은 해당 작업을 지원하지 않습니다.'
+    product:
+        not_exist: '상품 %productName% 은(는) 존재하지 않습니다.'
+    product_variant:
+        not_exist: '상품 바리아ント %productVariantCode% 은(는) 존재하지 않습니다.'
+        not_longer_available: '이름이 %productVariantName% 인 상품 바리아ント는 더 이상 존재하지 않습니다.'
+        not_sufficient: '코드 %productVariantCode% 의 상품 바리아ント는 재고가 부족합니다.'
+        product_variant_with_name_not_sufficient: '이름이 %productVariantName% 인 상품 바리아ント는 재고가 부족합니다.'
+        option_values:
+            single_value: '상품 바리아ント는 단일 옵션에 대해 하나의 값만 가질 수 있습니다.'
+    reset_password:
+        invalid_token: '비밀번호 재설정 토큰 %token% 이(가) 유효하지 않습니다.'
+        token_expired: '비밀번호 재설정 토큰이 만료되었습니다.'
+    shipment:
+        not_found: '배송이 존재하지 않습니다.'
+        shipped: '이미 발송된 배송을 다시 발송할 수 없습니다.'
+    shipping_method:
+        not_found: '코드 %code% 의 배송 방법이 존재하지 않습니다.'
+        not_available: '배송 방법 %name% 은(는) 이 주문에 사용할 수 없습니다. 배송 방법을 다시 선택하세요.'
+        shipping_address_not_found: '주문에는 먼저 배송 주소를 지정해야 합니다.'
+    statistics:
+        end_date:
+            invalid: '시작 날짜는 종료 날짜보다 이전이어야 합니다.'

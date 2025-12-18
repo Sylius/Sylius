@@ -1,0 +1,9 @@
+{% import '@SyliusAdmin/shared/helper/header.html.twig' as header %}
+
+{% set taxon = entity %}
+
+<div class="col-12 col-md">
+    <div class="d-md-flex gap-2 align-items-center">
+        {{ header.h1('sylius.ui.manage_product_positions_in_taxon'|trans({'%taxon_name%': taxon.fullname})) }}
+    </div>
+</div>

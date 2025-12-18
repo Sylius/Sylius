@@ -4,20 +4,20 @@
 sylius:
     currency:
         code:
-            exact_length: Il codice della valuta deve essere lunga esattamente 3 caratteri.
-            not_blank: Si prega di scegliere un codice valuta.
-            regex: Il codice di valuta può essere composto solo da lettere, numeri, trattini e underscore.
-            unique: Il codice valuta deve essere univoco.
+            not_blank: 'Per favore scegli il codice della valuta.'
+            unique: 'Il codice della valuta deve essere unico.'
+            currency: 'Questo valore non è un codice di valuta valido.'
         exchange_rate:
-            not_blank: Inserisci il tasso di cambio.
+            not_blank: 'Per favore inserisci il tasso di cambio.'
     exchange_rate:
         ratio:
-            greater_than: Il rapporto deve essere maggiore di 0.
-            invalid: Il rapporto deve essere un numero.
-            not_blank: Si prega di inserire il rapporto di tasso di cambio.
+            greater_than: 'Il rapporto deve essere maggiore di {{ compared_value }}.'
+            less_than: 'Il rapporto deve essere inferiore a {{ compared_value }}.'
+            invalid: 'Il rapporto deve essere un numero.'
+            not_blank: 'Per favore inserisci il rapporto del tasso di cambio.'
         source_currency:
-            not_blank: Si prega di inserire da quale valuta deve derivare il tasso di cambio.
+            not_blank: 'Per favore inserisci da quale valuta il tasso di cambio deve essere derivato.'
         target_currency:
-            not_blank: Inserisci in quale valuta deve essere impostato il tasso di cambio.
-        unique_currency_pair: La coppia di valute dovrà essere univoco.
-        different_source_target_currency: Le valute di origine e di destinazione devono essere diverse.
+            not_blank: 'Per favore inserisci a quale valuta il tasso di cambio deve essere impostato.'
+        unique_currency_pair: 'La coppia di valute deve essere unica.'
+        different_source_target_currency: 'La valuta di origine e la valuta di destinazione devono differire.'

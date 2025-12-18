@@ -3,10 +3,10 @@
 
 sylius:
     payment:
-        authorized: 'Zahlung erfolgreich durchgeführt.'
-        cancelled: 'Zahlung wurde abgebrochen.'
-        completed: 'Zahlung wurde abgeschlossen.'
-        failed: 'Zahlung ist fehlgeschlagen.'
-        processing: 'Zahlung wird bearbeitet.'
-        refunded: 'Zahlung wurde erfolgreich erstattet.'
-        unknown: 'Es trat ein unbekanntes Problem mit der Zahlung auf.'
+        authorized: 'Die Zahlung wurde autorisiert.'
+        cancelled: 'Die Zahlung wurde storniert.'
+        completed: 'Die Zahlung wurde abgeschlossen.'
+        failed: 'Die Zahlung ist fehlgeschlagen.'
+        processing: 'Die Zahlung wird bearbeitet.'
+        refunded: 'Die Zahlung wurde erfolgreich erstattet.'
+        unknown: 'Es gab ein unbekanntes Problem mit der Zahlung.'

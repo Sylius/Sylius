@@ -24,9 +24,10 @@ final class ManagingInventoryContext implements Context
     }
 
     /**
+     * @Given I am browsing inventory
      * @When I want to browse inventory
      */
-    public function iWantToBrowseInventory()
+    public function iWantToBrowseInventory(): void
     {
         $this->indexPage->open();
     }
@@ -43,11 +44,29 @@ final class ManagingInventoryContext implements Context
     }
 
     /**
-     * @Then I should see only one tracked variant in the list
+     * @When I filter tracked variants by :productName product
      */
-    public function iShouldSeeOnlyOneTrackedVariantInTheList()
+    public function iFilterTrackedVariantsByProduct(string $productName): void
     {
-        Assert::same($this->indexPage->countItems(), 1);
+        $this->indexPage->filterByProduct($productName);
+        $this->indexPage->filter();
+    }
+
+    /**
+     * @When I sort the tracked variants :sortingOrder by :field
+     */
+    public function iSortTrackedVariantsBy(string $sortingOrder, string $field): void
+    {
+        $this->indexPage->sortBy($field, $sortingOrder === 'descending' ? 'desc' : 'asc');
+    }
+
+    /**
+     * @Then I should see only one tracked variant in the list
+     * @Then I should see :count tracked variants in the list
+     */
+    public function iShouldSeeTrackedVariantsInTheList(int $count = 1): void
+    {
+        Assert::same($this->indexPage->countItems(), $count);
     }
 
     /**
@@ -59,5 +78,25 @@ final class ManagingInventoryContext implements Context
             'name' => $productVariantName,
             'inventory' => sprintf('%s Available on hand', $quantity),
         ]));
+    }
+
+    /**
+     * @Then the first variant on the list should have :field :name
+     */
+    public function theFirstVariantOnTheListShouldHave(string $field, string $variantName): void
+    {
+        $names = $this->indexPage->getColumnFields($field);
+
+        Assert::contains(reset($names), $variantName);
+    }
+
+    /**
+     * @Then the last variant on the list should have :field :name
+     */
+    public function theLastVariantOnTheListShouldHave(string $field, string $variantName): void
+    {
+        $names = $this->indexPage->getColumnFields($field);
+
+        Assert::contains(end($names), $variantName);
     }
 }

@@ -15,11 +15,11 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\ApiPlatformClient;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -29,6 +29,8 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
+    use SecurePasswordTrait;
+
     private ?string $verificationToken = '';
 
     public function __construct(
@@ -65,8 +67,7 @@ final class CustomerContext implements Context
         /** @var CustomerInterface $customer */
         $customer = $shopUser->getCustomer();
 
-        Assert::isInstanceOf($this->client, ApiPlatformClient::class);
-        $this->client->buildCustomUpdateRequest(Resources::CUSTOMERS, (string) $customer->getId(), 'password');
+        $this->client->buildCustomUpdateRequest(sprintf('customers/%s/password', $customer->getId()));
     }
 
     /**
@@ -150,9 +151,9 @@ final class CustomerContext implements Context
     public function iChangePasswordTo(string $oldPassword, string $newPassword): void
     {
         $this->client->setRequestData([
-            'currentPassword' => $oldPassword,
-            'newPassword' => $newPassword,
-            'confirmNewPassword' => $newPassword,
+            'currentPassword' => $this->retrieveSecurePassword($oldPassword),
+            'newPassword' => $this->replaceWithSecurePassword($newPassword),
+            'confirmNewPassword' => $this->confirmSecurePassword($newPassword),
         ]);
     }
 
@@ -188,6 +189,7 @@ final class CustomerContext implements Context
      */
     public function iTryToVerifyUsing(string $token): void
     {
+        $this->verificationToken = $token;
         $this->verifyAccount($token);
     }
 
@@ -378,6 +380,7 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheVerificationTokenIsInvalid(): void
     {
+        $response = $this->client->getLastResponse();
         $this->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
             sprintf('There is no shop user with %s email verification token.', $this->verificationToken),
@@ -385,7 +388,7 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @When I browse my orders
+     * @When I (try to) browse my orders
      */
     public function iBrowseMyOrders(): void
     {
@@ -555,7 +558,7 @@ final class CustomerContext implements Context
             'firstName' => 'First',
             'lastName' => 'Last',
             'email' => $email,
-            'password' => $password,
+            'password' => $this->replaceWithSecurePassword($password),
         ]);
 
         $this->client->executeCustomRequest($request);

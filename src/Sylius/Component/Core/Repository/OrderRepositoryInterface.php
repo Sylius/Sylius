@@ -31,32 +31,22 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function createListQueryBuilder(): QueryBuilder;
 
     /**
-     * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see createCriteriaAwareSearchListQueryBuilder()} instead.
-     */
-    public function createSearchListQueryBuilder(): QueryBuilder;
-
-    /**
-     * @param array{product: string, variant: string}|null $criteria
+     * @param array<string, mixed>|null $criteria
      */
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder;
 
     /**
-     * @deprecated since Sylius 1.13 and will be removed in Sylius 2.0. Use {@see createByCustomerIdCriteriaAwareQueryBuilder()} instead.
-     */
-    public function createByCustomerIdQueryBuilder($customerId): QueryBuilder;
-
-    /**
-     * @param array{product: string, variant: string}|null $criteria
+     * @param array<string, mixed>|null $criteria
      */
     public function createByCustomerIdCriteriaAwareQueryBuilder(?array $criteria, string $customerId): QueryBuilder;
 
-    public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder;
+    public function createByCustomerAndChannelIdQueryBuilder(mixed $customerId, mixed $channelId): QueryBuilder;
 
     public function countByCustomerAndCoupon(CustomerInterface $customer, PromotionCouponInterface $coupon): int;
 
     public function countByCustomer(CustomerInterface $customer): int;
 
-    public function findOrderById($id): ?OrderInterface;
+    public function findOrderById(mixed $id): ?OrderInterface;
 
     /**
      * @return array|OrderInterface[]
@@ -68,11 +58,11 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      */
     public function findForCustomerStatistics(CustomerInterface $customer): array;
 
-    public function findOneForPayment($id): ?OrderInterface;
+    public function findOneForPayment(mixed $id): ?OrderInterface;
 
     public function findOneByNumberAndCustomer(string $number, CustomerInterface $customer): ?OrderInterface;
 
-    public function findCartByChannel($id, ChannelInterface $channel): ?OrderInterface;
+    public function findCartByChannel(mixed $id, ChannelInterface $channel): ?OrderInterface;
 
     public function findLatestCartByChannelAndCustomer(ChannelInterface $channel, CustomerInterface $customer): ?OrderInterface;
 
@@ -100,13 +90,13 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      */
     public function findOrdersUnpaidSince(\DateTimeInterface $terminalDate, ?int $limit = null): array;
 
-    public function findCartForSummary($id): ?OrderInterface;
+    public function findCartForSummary(mixed $id): ?OrderInterface;
 
-    public function findCartForAddressing($id): ?OrderInterface;
+    public function findCartForAddressing(mixed $id): ?OrderInterface;
 
-    public function findCartForSelectingShipping($id): ?OrderInterface;
+    public function findCartForSelectingShipping(mixed $id): ?OrderInterface;
 
-    public function findCartForSelectingPayment($id): ?OrderInterface;
+    public function findCartForSelectingPayment(mixed $id): ?OrderInterface;
 
     public function findCartByTokenValue(string $tokenValue): ?BaseOrderInterface;
 
@@ -123,4 +113,20 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
         \DateTimeInterface $endDate,
         array $groupBy,
     ): array;
+
+    /**
+     * @param array<string, string> $groupBy
+     *
+     * @return array<array{paid_orders_count: int, year: int, month: int, day: int}>
+     */
+    public function countGroupedPaidForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        array $groupBy,
+    ): array;
+
+    public function findOneWithCompletedCheckout(string $tokenValue): ?OrderInterface;
+
+    public function countNewByChannel(ChannelInterface $channel): int;
 }

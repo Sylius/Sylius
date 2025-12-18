@@ -2,229 +2,284 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        admin_password_reset:
+            hello: 'Bună'
+            subject: 'Resetare parolă administrator'
+            reset_your_password: 'Resetați parola'
+            to_reset_your_password: 'Pentru a reseta parola - faceți clic pe linkul de mai jos'
+            to_reset_your_password_token: 'Pentru a reseta parola - folosiți tokenul de mai jos'
+            token: 'Tokenul de resetare a parolei este'
+        contact_request:
+            content: 'Conținut'
+            message_from: 'Mesaj de la'
+            subject: 'Cerere de contact'
+        order_confirmation:
+            has_been_successfully_placed: 'a fost plasată cu succes.'
+            subject: 'Confirmare comandă'
+            view_order_or_change_payment_method: 'Vezi comanda sau schimbă metoda de plată'
+            thank_you: 'Vă mulțumim pentru că ați cumpărat în magazinul nostru!'
+            your_order_number: 'Numărul comenzii dvs.'
+        password_reset:
+            hello: 'Bună'
+            reset_your_password: 'Resetați parola'
+            subject: 'Resetare parolă'
+            to_reset_your_password: 'Pentru a reseta parola - faceți clic pe linkul de mai jos'
+            to_reset_your_password_token: 'Pentru a reseta parola - folosiți tokenul de mai jos'
+            token: 'Tokenul de resetare a parolei este'
+        shipment_confirmation:
+            has_been_sent_using: 'a fost trimis folosind'
+            subject: 'Confirmare livrare'
+            thank_you_for_transaction: 'Vă mulțumim pentru o tranzacție reușită.'
+            you_can_check_its_location_with_the_tracking_code: 'Puteți verifica locația cu codul de urmărire %tracking_code%.'
+            your_order_with_number: 'Comanda dvs. cu numărul'
+        user_registration:
+            start_shopping: 'Începeți cumpărăturile'
+            subject: 'Înregistrare utilizator'
+            welcome_to_our_store: 'Bine ați venit la magazinul nostru!'
+            you_have_just_been_registered: 'Tocmai v-ați înregistrat. Vă mulțumim'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead
+        verification_token:
+            hello: 'Bună'
+            message: 'Verificați contul cu token: '
+            subject: 'Verificare adresă de email'
+            to_verify_your_email_address: 'Pentru a vă verifica adresa de email - faceți clic pe linkul de mai jos'
+            verify_your_email_address: 'Verificați adresa de email'
+        user:
+            account_verification:
+                greeting: 'Bună'
+                message: 'Verificați contul cu token: '
+                statement: 'Verificați adresa de email'
+                strategy: 'Pentru a vă verifica adresa de email - faceți clic pe linkul de mai jos'
+                subject: 'Verificare adresă de email'
     form:
         block:
-            body: Corp
-            id: Id
-            title: Titlu
+            body: 'Corp'
+            id: 'ID'
+            title: 'Titlu'
         cart:
-            coupon: Cod promoțional
+            coupon: 'Cupon'
         catalog_promotion:
-            channels: Canale
+            channels: 'Canale'
+            scope:
+                for_products: 'Pentru produse'
+                for_taxons: 'Pentru taxoni'
+                for_variants: 'Pentru variante'
         checkout:
             addressing:
-                different_billing_address: Folosiți o adresă de facturare diferită?
-                different_shipping_address: Folosiți o adresă diferită pentru livrare?
-            payment_method: Metoda de plată
-            shipping_method: Metoda de livrare
+                different_billing_address: 'Folosiți o adresă diferită pentru facturare?'
+                different_shipping_address: 'Folosiți o adresă diferită pentru livrare?'
+            payment_method: 'Metoda de plată'
+            shipping_method: 'Metoda de livrare'
+        currency:
+            select: 'Selectați moneda'
         promotion:
-            channels: Canale
+            channels: 'Canale'
         promotion_action:
             add_product_configuration:
-                product: Produs
+                product: 'Produs'
         promotion_coupon:
-            per_customer_usage_limit: Limita de utilizare per client
-            reusable_from_cancelled_orders: Reutilizabil din comenzile anulate
+            per_customer_usage_limit: 'Limită de utilizare per client'
+            reusable_from_cancelled_orders: 'Refolosibil din comenzile anulate'
         group:
-            name: Nume produs
-            roles: Roluri
+            name: 'Nume'
+            roles: 'Roluri'
         channel:
             billing_data:
-                city: Oraș
-                company: Firmă
-                country: Țară
-                postcode: Cod poștal
-                street: Adresă
-                tax_id: Cod Unic de identificare fiscală
-            contact_email: E-mail de contact
-            countries: Țări
-            currencies: Monede
-            currency_base: Monedă de bază
-            account_verification_required: Este necesară verificarea conturilor?
-            hostname: Nume domeniu
-            locale_default: Setări regionale implicite
-            locales: Setări regionale
-            menu_taxon: Meniu categorie
-            payment_methods: Metode de plată
-            shipping_methods: Metode de livrare
-            shop_billing_data: Date de facturare magazin
-            skipping_shipping_step_allowed: Treci peste pasul de livrare dacă există o singură metodă disponibilă?
-            skipping_payment_step_allowed: Treci peste pasul de plată dacă există o singură metodă disponibilă?
-            tax_calculation_strategy: Strategia de calcul a taxelor
-            tax_zone_default: Zona de taxă implicită
-            taxonomies: Categorizări
-            theme: Temă
+                city: 'Oraș'
+                company: 'Companie'
+                country: 'Țară'
+                postcode: 'Cod poștal'
+                street: 'Stradă'
+                tax_id: 'Cod fiscal'
+            contact_email: 'Email de contact'
+            contact_phone_number: 'Număr de telefon de contact'
+            countries: 'Țări'
+            currencies: 'Monede'
+            currency_base: 'Moneda de bază'
+            account_verification_required: 'Este necesară verificarea contului?'
+            hostname: 'Nume gazdă'
+            locale_default: 'Local implicit'
+            locales: 'Localizări'
+            menu_taxon: 'Taxon meniu'
+            payment_methods: 'Metode de plată'
+            shipping_address_in_checkout_required: 'Adresa de livrare necesară la checkout'
+            shipping_methods: 'Metode de livrare'
+            shop_billing_data: 'Date facturare magazin'
+            skipping_shipping_step_allowed: 'Permiteți trecerea peste pasul de livrare dacă este disponibilă o singură metodă de livrare?'
+            skipping_payment_step_allowed: 'Permiteți trecerea peste pasul de plată dacă este disponibilă o singură metodă de plată?'
+            tax_calculation_strategy: 'Strategia de calcul al taxelor'
+            tax_zone_default: 'Zona de taxare implicită'
+            taxonomies: 'Taxonomii'
+            theme: 'Temă'
         image:
-            type: Tip
-            file: Imagine
+            type: 'Tip'
+            file: 'Imagine'
         locale:
-            code: Cod
-            enabled: Activat
+            code: 'Cod'
+            enabled: 'Activat'
         order_filter:
-            created_at_from: Creată după
-            created_at_to: Creată înainte de
-            number: Număr
-            total_from: De la
-            total_to: Până la
-            payment_state: Statusul plății
-            channel: Toate canalele
+            created_at_from: 'Creat după'
+            created_at_to: 'Creat înainte'
+            number: 'Număr'
+            total_from: 'De la'
+            total_to: 'Până la'
+            payment_state: 'Stare plată'
+            channel: 'Toate canalele'
         page:
-            body: Corp
-            id: Id
-            title: Titlu
+            body: 'Corp'
+            id: 'ID'
+            title: 'Titlu'
         product:
-            images: Imagini
-            restricted_zone: Zonă cu restricție
-            short_description: Descriere scurtă
-            variant_selection_method: Metoda de selecţie a variantei
-            main_taxon: Taxonul principal
-            channels: Canale
-            enabled: Activat
+            images: 'Imagini'
+            restricted_zone: 'Zonă restricționată'
+            short_description: 'Descriere scurtă'
+            variant_selection_method: 'Metoda de selectare a variantei'
+            main_taxon: 'Taxon principal'
+            channels: 'Canale'
+            enabled: 'Activat'
         product_filter:
-            name: Nume produs
-            code: Cod
+            name: 'Nume'
+            code: 'Cod'
         product_variant:
-            tax_category: Categoria de taxă
-            shipping_category: Categoria de livrare
+            tax_category: 'Categorie de taxe'
+            shipping_category: 'Categorie de livrare'
         shipment_filter:
-            created_at_from: De la
-            created_at_to: Până la
-            number: Număr comandă
-            shipping_address: Livrează la
-            channel: Toate canalele
+            created_at_from: 'De la'
+            created_at_to: 'Până la'
+            number: 'Număr comandă'
+            shipping_address: 'Nume destinatar'
+            channel: 'Toate canalele'
         payment_filter:
-            created_at_from: De la
-            created_at_to: Până la
-            number: Număr comandă
-            billing_address: Facturat către
-            channel: Toate canalele
+            created_at_from: 'De la'
+            created_at_to: 'Până la'
+            number: 'Număr comandă'
+            billing_address: 'Nume facturare'
+            channel: 'Toate canalele'
         shipping_method:
-            zone: Zonă
+            zone: 'Zonă'
         taxon:
-            code: Cod
-            file: Alege imagine
-            images: Imagini
+            code: 'Cod'
+            file: 'Selectați imagine'
+            images: 'Imagini'
         taxonomy:
-            file: Alege imagine
+            file: 'Selectați imagine'
         user:
-            billing_address: Adresă de facturare
-            different_shipping_address: Folosiți o adresă diferită pentru livrare?
-            enabled: Activat
-            first_name: Prenume
-            groups: Grupuri
-            roles: Roluri
-            last_name: Nume
-            password: Parolă
-            shipping_address: Adresă de livrare
+            billing_address: 'Adresă facturare'
+            different_shipping_address: 'Folosiți o adresă diferită pentru livrare?'
+            enabled: 'Activat'
+            first_name: 'Prenume'
+            groups: 'Grupuri'
+            roles: 'Roluri'
+            last_name: 'Nume de familie'
+            password: 'Parolă'
+            shipping_address: 'Adresă livrare'
         user_filter:
-            query: Căutare
+            query: 'Căutare'
         variant:
-            depth: Adâncime
-            height: Înălţime
-            on_hand: Stoc curent
-            price: Preț
-            sku: SKU
-            shipping_required: Este livrarea obligatorie?
-            weight: Greutate
-            width: Lăţime
+            depth: 'Adâncime'
+            height: 'Înălțime'
+            on_hand: 'Stoc curent'
+            price: 'Preț'
+            sku: 'SKU'
+            shipping_required: 'Este necesară livrarea?'
+            weight: 'Greutate'
+            width: 'Lățime'
+            tracked_help: 'Dacă această opțiune este activată, Sylius va urmări stocul și va înceta vânzarea produsului când stocul va ajunge la 0.'
         attribute:
             product_attribute_value:
-                attribute: Atribut
-                value: Valoare
+                attribute: 'Atribut'
+                value: 'Valoare'
         guest:
-            email: E-mail
+            email: 'Email'
         product_association:
-            product: Produs asociat
-            type: Tipul de asociere
+            product: 'Produs asociat'
+            type: 'Tip asociație'
         product_association_type:
-            name: Nume produs
+            name: 'Nume'
         promotion_filter:
-            products: Filtru produse
-            taxons: Filtru de taxoni
+            products: 'Filtru produse'
+            taxons: 'Filtru taxoni'
         promotion_rule:
             customer_group:
-                group: Grup de clienți
+                group: 'Grup de clienți'
             has_taxon:
-                taxons: Taxoni
+                taxons: 'Taxoni'
             product:
-                products: Produse
+                products: 'Produse'
             total_of_items_from_taxon:
-                taxon: Taxon
-                amount: Valoare
+                taxon: 'Taxon'
+                amount: 'Sumă'
         payment_method:
-            channels: Canale
+            channels: 'Canale'
         product_attribute:
-            position: Poziţie
+            position: 'Poziție'
         zone:
             scopes:
-                shipping: Livrare
-                tax: Taxe
+                shipping: 'Livrare'
+                tax: 'Taxă'
     installer:
         extensions:
-            header: extensii
+            header: 'Extensii'
             accelerator:
-                header: Accelerator
-                help: Activează Zend OpCache (recomandat).
-            apc: APC
-            ctype: Ctype
-            gd: GD
-            help: Instalaţi şi activaţi extensia %extension%.
-            iconv: Iconv
-            exif: Exif
-            fileinfo: Fileinfo
-            icu: ICU
-            intl: Intl
-            json_encode: JSON
-            mbstring: Multibyte String
-            off: false
-            on: true
-            pcre: PCRE
-            pdo: PDO
-            php_xml: PHP-XML
-            session_start: Session
-            simplexml_import_dom: SimpleXML
-            token_get_all: Tokenizer
+                header: 'Accelerator'
+                help: 'Activați Zend OpCache (puternic recomandat).'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: 'Instalați și activați extensia %extension%.'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: 'Multibyte String'
+            off: 'dezactivat'
+            on: 'activat'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: 'Sesiune'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
         filesystem:
-            header: file system
+            header: 'Sistem de fișiere'
             cache:
-                header: cache
-                help: "Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: 'whoami': rwx %path%"
-            exists: există
+                header: 'Cache'
+                help: 'Pentru a seta permisiunile rulați: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: 'există'
             logs:
-                header: logs
-                help: "Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: 'whoami': rwx %path%"
-            not_exists: nu există
-            not_writable: nu sunt drepturi de scriere
+                header: 'Jurnale'
+                help: 'Pentru a seta permisiunile rulați: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: 'nu există'
+            not_writable: 'nepermisionat'
             parameters:
-                header: parameters.yml
-                help: "Pentru a seta permisiunile executa: sudo chmod o + w %path%"
-            vendors: vendors
-            writable: are drepturi de scriere
+                header: 'parameters.yml'
+                help: 'Pentru a seta permisiunile rulați: sudo chmod a+w %path%'
+            vendors: 'Vendors'
+            writable: 'Scriabil'
         settings:
-            header: Versiunea PHP şi setări
-            any: oricare
-            detect_unicode: detect_unicode
-            detect_unicode_help: Setați 'detect_unicode = Off' în fișierul dvs. php.ini
-            magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: nu este deprecat
-            off: false
-            on: true
-            register_globals: register_globals
+            header: 'Versiunea PHP și setări'
+            any: 'orice'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: 'Setați "detect_unicode = Off" în fișierul php.ini'
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: 'neînvechit'
+            off: 'dezactivat'
+            on: 'activat'
+            register_globals: 'register_globals'
             session:
-                auto_start: session.auto_start
-                auto_start_help: Seteaza 'session.auto_start = Off' in fisierul php.ini
-            short_open_tag: short_open_tag
-            timezone: Fus orar
-            timezone_help: Setați 'date.timezone' în fișierul dvs. php.ini (de ex. date.timezone = "Europe/Amsterdam")
+                auto_start: 'session.auto_start'
+                auto_start_help: 'Setați "session.auto_start  = Off" în fișierul php.ini'
+            short_open_tag: 'short_open_tag'
+            timezone: 'timezone'
+            timezone_help: 'Setați "date.timezone" în fișierul php.ini (ex. date.timezone = "Europe/Amsterdam")'
             timezone_deprecated:
-                header: Fus orar învechit
-                help: Fusul orar %timezone% este învechit. Corectează fişierul php.ini (lista fusuri orere învechite http://php.net/manual/en/timezones.others.php).
-            version: Versiunea PHP
-            version_recommended: Versiunea PHP recomandată
-            version_help: Sylius recomandă versiunea %recommended% de PHP, versiunea curentă este %current%. Vă rugăm să actualizați.
-    payum_gateway:
-        cash_on_delivery: Plată la livrare (ramburs)
-        offline: Offline
-        paypal_express_checkout: PayPal Express Checkout
+                header: 'Timezone învechit'
+                help: 'Timezone %timezone% este învechit. Remediați fișierul php.ini (lista zonelor învechite: http://php.net/manual/en/timezones.others.php).'
+            version: 'Versiunea PHP'
+            version_recommended: 'Versiunea recomandată PHP'
+            version_help: 'Sylius recomandă versiunea PHP %recommended%, versiunea curentă este %current%. Vă rugăm să faceți upgrade.'
     shipping_method_resolver:
-        by_zones_and_channel: Zone şi canal
+        by_zones_and_channel: 'După zone și canal'

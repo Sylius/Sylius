@@ -25,5 +25,6 @@ interface ZoneFactoryInterface extends FactoryInterface
 {
     public function createTyped(string $type): ZoneInterface;
 
+    /** @param array<string> $membersCodes */
     public function createWithMembers(array $membersCodes): ZoneInterface;
 }

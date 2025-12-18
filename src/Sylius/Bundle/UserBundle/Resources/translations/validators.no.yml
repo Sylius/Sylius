@@ -4,5 +4,13 @@
 sylius:
     user:
         email:
-            not_blank: Skriv inn din e-post.
-            invalid: Ugyldig epostadresse.
+            not_blank: 'Vennligst oppgi e-postadressen din.'
+            invalid: 'Denne e-postadressen er ugyldig.'
+            not_registered: 'Bruker med denne e-posten finnes ikke. Vennligst registrer deg først.'
+        plainPassword:
+            not_blank: 'Vennligst oppgi passordet ditt.'
+            mismatch: 'De oppgitte passordene stemmer ikke overens.'
+            wrong_current: 'Det oppgitte passordet er forskjellig fra det nåværende.'
+        password:
+            min: 'Passordet må være minst {{ limit }} tegn langt.'
+            max: 'Passordet kan ikke være lengre enn {{ limit }} tegn.'

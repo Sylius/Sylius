@@ -1,0 +1,47 @@
+{% import "@SyliusShop/shared/macro/money.html.twig" as money %}
+
+{% set variant = hookable_metadata.context.variant %}
+{% set channel_pricing = variant.getChannelPricingForChannel(sylius.channel) %}
+{% set applied_promotions = channel_pricing.appliedPromotions|map(p => {'label': p.label, 'description': p.description}) %}
+{% set days = sylius.channel.channelPriceHistoryConfig.lowestPriceForDiscountedProductsCheckingPeriod %}
+{% set has_discount = variant|sylius_has_discount({'channel': sylius.channel}) %}
+{% set has_lowest_price = variant|sylius_has_lowest_price({'channel': sylius.channel}) %}
+
+{% if has_discount %}
+    {% set original_int = channel_pricing.originalPrice %}
+    {% set current_int  = channel_pricing.price %}
+    {% set discount_pct = ((original_int - current_int) / original_int * 100)|round(0) %}
+{% endif %}
+
+<td class="text-end"
+    data-applied-promotions="{{ applied_promotions|json_encode }}"
+    {% if has_discount %}
+    data-original-price="{{ money.calculateOriginalPrice(variant) }}"
+    {% if has_lowest_price %}
+        data-lowest-price-before-discount="{{
+        'sylius.ui.lowest_price_days_before_discount_was'|trans({
+            '%days%': days,
+            '%price%': money.calculateLowestPrice(variant)
+        })
+        }}"
+    {% endif %}
+    {% endif %}>
+
+    {% if has_discount %}
+        <div class="d-inline-flex align-items-center gap-2">
+            <span class="fw-semibold text-success">
+                {{ money.calculatePrice(variant) }}
+            </span>
+
+            <span class="text-muted text-decoration-line-through small">
+                {{ money.calculateOriginalPrice(variant) }}
+            </span>
+
+            <span class="badge bg-danger-subtle text-danger">
+                -{{ discount_pct }}%
+            </span>
+        </div>
+    {% else %}
+        <span class="fw-semibold">{{ money.calculatePrice(variant) }}</span>
+    {% endif %}
+</td>

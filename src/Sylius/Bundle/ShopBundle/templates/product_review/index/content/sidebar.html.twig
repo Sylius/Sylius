@@ -1,0 +1,7 @@
+<div class="col-12 col-md-5 col-lg-4">
+    {% if hookable_metadata.context.product_reviews %}
+        {% hook 'sidebar' with { product: hookable_metadata.context.product_reviews[0].reviewSubject } %}
+    {% else %}
+        {% hook 'sidebar' with { slug: app.request.attributes.get('slug') } %}
+    {% endif %}
+</div>

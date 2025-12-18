@@ -4,24 +4,28 @@
 sylius:
     attribute:
         name:
-            not_blank: Inserisci il nome dell'attributo.
-            min_length: Il nome dell'attributo deve essere lungo almeno 1 carattere. | Il nome dell'attributo deve essere lungo almeno {{ limit }} caratteri.
-            max_length: Il nome dell' attributo non deve essere più lungo di 1 carattere.|Il nome dell'attributo non deve essere più lungo di {{ limit }} caratteri.
+            not_blank: 'Per favore inserisci il nome dell''attributo.'
+            min_length: 'Il nome dell''attributo deve essere lungo almeno 1 carattere.|Il nome dell''attributo deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il nome dell''attributo non deve essere più lungo di 1 carattere.|Il nome dell''attributo non deve essere più lungo di {{ limit }} caratteri.'
         code:
-            not_blank: Inserisci il codice di attributo.
-            regex: L'attributo del codice può essere composto solo da lettere, numeri, trattini e underscore.
-            unique: Questo codice è già in uso.
+            min_length: 'Il codice dell''attributo deve essere lungo almeno 1 carattere.|Il codice dell''attributo deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il codice dell''attributo non deve essere più lungo di 1 carattere.|Il codice dell''attributo non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice dell''attributo.'
+            regex: 'Il codice dell''attributo può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'Questo codice è già in uso.'
         configuration:
-            max_entries: Il valore massimo delle voci di configurazione deve essere maggiore o uguale al valore minimo delle voci.
-            max_length: La lunghezza massima della configurazione deve essere maggiore o uguale alla lunghezza minima
-            min_entries: Il valore massimo delle voci di configurazione deve essere maggiore o uguale al valore minimo delle voci.
-            multiple: Configurazione multipla deve essere abilitata se sono stati specificati valori di min o max.
+            max_entries: 'Il valore massimo di voci di configurazione deve essere maggiore o uguale al valore delle voci minime.'
+            max_length: 'La lunghezza massima di configurazione deve essere maggiore o uguale alla lunghezza minima.'
+            min_entries: 'Il valore delle voci minime di configurazione deve essere minore o uguale al numero delle scelte aggiunte.'
+            multiple: 'La configurazione multipla deve essere vera se sono specificati valori per le voci minime o massime.'
         presentation:
-            not_blank: Si prega di inserire un attributo di presentazione.
-            min_length: L' Attributo di presentazione deve essere lungo almeno 1 carattere.|Attributo di presentazione deve essere lungo almeno {{ limit }} caratteri.
-            max_length: L' Attributo di presentazione non deve essere più lungo di 1 carattere.|Attributo di presentazione non deve essere più lungo di {{ limit }} caratteri.
+            not_blank: 'Per favore inserisci la presentazione dell''attributo.'
+            min_length: 'La presentazione dell''attributo deve essere lunga almeno 1 carattere.|La presentazione dell''attributo deve essere lunga almeno {{ limit }} caratteri.'
+            max_length: 'La presentazione dell''attributo non deve essere più lunga di 1 carattere.|La presentazione dell''attributo non deve essere più lunga di {{ limit }} caratteri.'
+        type:
+            unregistered: 'Il tipo di attributo "%type%" non è registrato. Tipi di attributi disponibili: %available_types%.'
     attribute_value:
         attribute:
-            not_blank: Si prega di selezionare un attributo.
+            not_blank: 'Per favore seleziona un attributo.'
         value:
-            not_blank: Si prega di inserire un valore per l'attributo.
+            not_blank: 'Per favore inserisci il valore dell''attributo.'

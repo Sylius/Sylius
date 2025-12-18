@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    cart:
+        add_item: 'Artikel wurde zum Warenkorb hinzugefügt'
+        cannot_modify: 'Eine Bestellung wurde bereits für den Warenkorb abgeschickt, den Sie zu ändern versuchten.'
+        not_recalculated: 'Aufgrund ungültiger Werte in Ihrem Warenkorb wurde er nicht neu berechnet.'
+        remove_item: 'Artikel wurde aus dem Warenkorb entfernt'
+        save: 'Der Warenkorb wurde erfolgreich aktualisiert'

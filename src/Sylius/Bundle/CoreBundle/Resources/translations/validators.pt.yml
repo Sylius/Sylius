@@ -2,65 +2,216 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        password_reset_request:
+            email:
+                invalid: 'Este e-mail não é válido.'
+                max: 'O e-mail deve ter no máximo {{ limit }} caracteres.'
+                min: 'O e-mail deve ter pelo menos {{ limit }} caracteres.'
+                not_blank: 'Informe um e-mail.'
+        reset_password:
+            mismatch: 'As senhas digitadas não coincidem.'
+            password:
+                min: 'A senha deve ter pelo menos {{ limit }} caracteres.'
+                max: 'A senha deve ter no máximo {{ limit }} caracteres.'
+                not_blank: 'Informe a senha.'
+    avatar_image:
+        file:
+            max_size: 'A imagem é muito grande – {{ size }}{{ suffix }}. O tamanho máximo permitido é {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'A imagem é muito grande. O tamanho máximo permitido é {{ limit }}{{ suffix }}.'
+    catalog_promotion_action:
+        fixed_discount:
+            channel_not_configured: 'A configuração de um dos canais exigidos não foi fornecida.'
+            not_valid: 'A configuração contém erros. Adicione um valor numérico maior que 0 para o desconto fixo.'
+    catalog_promotion_scope:
+        invalid_type: 'Tipo de escopo de promoção de catálogo inválido. Escolha um tipo válido.'
+        for_products:
+            invalid_products: 'A configuração contém erros. Adicione apenas produtos existentes.'
+            not_empty: 'A configuração contém erros. Adicione pelo menos 1 produto.'
+            unique: 'A configuração contém erros. Adicione apenas produtos únicos.'
+        for_variants:
+            invalid_variants: 'A configuração contém erros. Adicione apenas variantes existentes.'
+            not_empty: 'Adicione pelo menos 1 variante.'
+            unique: 'A configuração contém erros. Adicione apenas variantes únicas.'
+        for_taxons:
+            invalid_taxons: 'A configuração contém erros. Adicione apenas táxons existentes.'
+            not_empty: 'A configuração contém erros. Adicione pelo menos 1 táxon.'
+            unique: 'A configuração contém erros. Adicione apenas táxons únicos.'
     channel:
+        base_currency:
+            not_blank: 'Informe a moeda base do canal.'
         default_locale:
-            not_blank: Por favor, insira a localidade predefinida do canal.
+            enabled: 'O idioma padrão precisa estar ativo.'
+            not_blank: 'Informe o idioma padrão do canal.'
         contact_email:
-            invalid: Este endereço de e-mail é inválido.
-            max: O e-mail não deve ter mais que {{ limit }} carateres.
-            min: O endereço de e-mail deve pelo menos {{ limit }} caracteres.
+            invalid: 'Este e-mail é inválido.'
+            max: 'O e-mail não pode ter mais de {{ limit }} caracteres.'
+            min: 'O e-mail deve ter pelo menos {{ limit }} caracteres.'
+        contact_phone_number:
+            max_length: 'O telefone não pode ter mais de {{ limit }} caracteres.'
+        theme_name:
+            max_length: 'O nome do tema não pode ter mais de {{ limit }} caracteres.'
+        tax_calculation_strategy:
+            not_blank: 'Informe a estratégia de cálculo de imposto.'
+            max_length: 'A estratégia de cálculo de imposto não pode ter mais de {{ limit }} caracteres.'
+    channel_price_history_config:
+        lowest_price_for_discounted_products_checking_period:
+            greater_than: 'O valor deve ser maior que {{ compared_value }}'
+            less_than: 'O valor deve ser menor que {{ compared_value }}'
     channel_pricing:
+        channel_code:
+            not_blank: 'Defina o código do canal.'
+            unique: 'Este canal já possui um preço para esta variante.'
         price:
-            not_blank: Introduza o preço.
+            min: 'O preço não pode ser menor que 0.'
+            not_blank: 'Informe o preço.'
+    channel_code_collection:
+        invalid_channel: 'O canal com código {{ channel_code }} não existe.'
     checkout:
+        addressing:
+            csrf_error: 'Reenvie o formulário completo.'
         shipping_method:
-            not_blank: Selecione o método de envio.
+            not_blank: 'Selecione o método de envio.'
+        email:
+            not_changeable: 'O e-mail só pode ser alterado para clientes convidados. Após o login e a atribuição do carrinho, o e-mail não pode ser modificado.'
     contact:
         email:
-            invalid: Este endereço de e-mail é inválido.
-            not_blank: Por favor introduza o seu endereço de e-mail.
+            invalid: 'Este e-mail é inválido.'
+            not_blank: 'Informe seu e-mail.'
         message:
-            not_blank: Por favor, insira a sua mensagem.
+            not_blank: 'Digite sua mensagem.'
+    country:
+        code:
+            not_exist: 'O país com código {{ code }} não existe.'
+    currency:
+        enabled:
+            cannot_disable_base: 'A moeda base não pode ser desativada.'
     customer:
         currency_code:
-            not_valid: O código de moeda introduzido é inválido.
+            not_valid: 'O código de moeda informado é inválido.'
+    customer_group:
+        code:
+            not_exist: 'O grupo de clientes com código {{ code }} não existe.'
+    cart_item:
+        not_available: '%itemName% não possui estoque suficiente.'
+        insufficient_stock: 'Estoque insuficiente'
+        quantity:
+            not_in_range: 'A quantidade deve estar entre {{ min }} e {{ max }}.'
+        variant:
+            not_available: '%variantName% não está disponível.'
+    max_integer: 'O valor deve ser menor que {{ compared_value }}.'
     order:
+        address_requirement: 'Forneça um(a) %addressName%.'
         currency_code:
-            not_valid: O código de moeda inserido é inválido.
+            not_valid: 'O código de moeda informado é inválido.'
+        invalid_state_transition: 'Não é possível concluir pois o pedido está em estado incorreto. Atual: %currentState%. Transições possíveis: %possibleTransitions%.'
+        payment_method_eligibility: 'O método de pagamento %paymentMethodName% foi desativado. Escolha outro método.'
+        product_eligibility: 'O produto %productName% foi desativado.'
+        shipping_method_eligibility: 'O produto não atende aos requisitos do método %shippingMethodName%. Selecione outro método de envio.'
+        shipping_method_not_available: 'O método de envio "%shippingMethodName%" não está disponível. Selecione outro método.'
+        cart_items_immutable: 'Não é possível alterar itens do carrinho após a finalização do checkout.'
+    resend_order_confirmation_email:
+        invalid_order_state: 'Não é possível reenviar confirmação para pedido no estado %state%.'
+    resend_shipment_confirmation_email:
+        invalid_shipment_state: 'Não é possível reenviar confirmação para envio no estado %state%.'
+    locale:
+        enabled:
+            cannot_disable_base: 'O idioma base não pode ser desativado.'
+    product:
+        variants:
+            all_prices_defined: 'Defina primeiro os preços das variantes para os novos canais atribuídos.'
+        code:
+            not_exist: 'Produto com código {{ code }} não existe.'
     product_attribute:
-        invalid: Posição deve ser um número inteiro.
+        invalid: 'A posição deve ser um número inteiro.'
+    image:
+        file:
+            allowed_mime_types: 'O arquivo não é uma imagem válida. Tipos permitidos: %types%.'
+    product_image:
+        file:
+            max_size: 'A imagem é muito grande – {{ size }}{{ suffix }}. O tamanho máximo permitido é {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'A imagem é muito grande. O tamanho máximo permitido é {{ limit }}{{ suffix }}.'
+        product_variant:
+            not_belong_to_owner: 'A variante com código "%productVariantCode%" não pertence ao produto "%ownerCode%", proprietário da imagem.'
+    product_taxon:
+        unique: 'Táxons de produto não podem ser duplicados.'
+        product:
+            not_blank: 'Selecione um produto.'
+        taxon:
+            not_blank: 'Selecione um táxon.'
     product_variant:
+        code:
+            not_exist: 'Variante com código {{ code }} não existe.'
         onHand:
-            min: A disponibilidade deve ser maior que {{ limit }}.
-            not_blank: Introduza a disponibilidade.
+            min: 'Estoque deve ser maior que {{ limit }}.'
+            not_blank: 'Informe o estoque.'
+            reserved: 'Estoque deve ser maior que o número de unidades reservadas'
         original_price:
-            min: O preço original não deve ser negativo.
+            min: 'O preço original não pode ser negativo.'
         weight:
-            min: O peso não pode ser negativo.
-            invalid: O peso deve ser um número.
+            min: 'O peso não pode ser negativo.'
+            invalid: 'O peso deve ser um número.'
         width:
-            min: A largura não pode ser negativa.
-            invalid: A largura deve ser um número.
+            min: 'A largura não pode ser negativa.'
+            invalid: 'A largura deve ser um número.'
         height:
-            min: A altura não pode ser negativa.
-            invalid: A altura deve ser um número.
+            min: 'A altura não pode ser negativa.'
+            invalid: 'A altura deve ser um número.'
         depth:
-            min: A profundidade não pode ser negativa.
-            invalid: A profundidade deve ser um número.
+            min: 'A profundidade não pode ser negativa.'
+            invalid: 'A profundidade deve ser um número.'
         channel_pricing:
-            all_defined: 'Deve definir o preço para cada canal.'
+            price:
+                not_defined: 'Você deve definir o preço.'
+            existing_code: 'O canal com código {{ channelCode }} não existe.'
+    promotion_coupon:
+        per_customer_usage_limit:
+            min: 'O limite por cliente deve ser pelo menos {{ limit }}.'
     product_translation:
         short_description:
-            max: A descrição curta não pode ter mais que {{ limit }} caracteres.
+            max: 'A descrição curta não pode exceder {{ limit }} caracteres.'
+    province:
+        code:
+            not_exist: 'A província com código {{ code }} não existe.'
     review:
         author:
-            not_blank: Por favor introduza o seu endereço de e-mail.
+            not_blank: 'Informe seu e-mail.'
+        product:
+            not_blank: 'Informe um produto.'
+        rating:
+            range: 'A nota deve ser um inteiro entre 1 e 5.'
+            not_in_range: 'A nota deve estar entre {{ min }} e {{ max }}.'
+    taxon:
+        code:
+            not_exist: 'Táxon com código {{ code }} não existe.'
+    taxon_image:
+        file:
+            max_size: 'A imagem é muito grande – {{ size }}{{ suffix }}. O tamanho máximo permitido é {{ limit }}{{ suffix }}.'
+            upload_ini_size: 'A imagem é muito grande. O tamanho máximo permitido é {{ limit }}{{ suffix }}.'
+    translation:
+        locale:
+            not_blank: 'Informe o locale.'
+            invalid: 'Este valor não é um locale válido.'
+            unique: 'Já existe tradução para o locale {{ value }}.'
+        locale_code:
+            invalid: 'Escolha um dos locales disponíveis: %locales%'
     user:
         email:
-            unique: Este endereço de e-mail já está registado.
-            invalid: Este endereço de e-mail é inválido.
+            unique: 'Este e-mail já está em uso.'
+            min: 'O e-mail deve ter pelo menos {{ limit }} caracteres.'
+            max: 'O e-mail deve ter no máximo {{ limit }} caracteres.'
+            invalid: 'Este e-mail é inválido.'
         username:
-            unique: Este nome de utilizador já foi utilizado.
-            not_blank: Introduza o seu nome.
+            unique: 'Este nome de usuário já está em uso.'
+            not_blank: 'Informe seu nome.'
+            max: 'O nome de usuário não pode ter mais de {{ limit }} caracteres.'
+        first_name:
+            max: 'O nome não pode ter mais de {{ limit }} caracteres.'
+        last_name:
+            max: 'O sobrenome não pode ter mais de {{ limit }} caracteres.'
         locale_code:
-            not_blank: Por favor, escolha uma localidade.
+            not_blank: 'Escolha um idioma.'
+    zone:
+        code:
+            not_exist: 'Zona com código {{ code }} não existe.'
+

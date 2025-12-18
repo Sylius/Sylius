@@ -4,20 +4,20 @@
 sylius:
     currency:
         code:
-            exact_length: Kód měny musí být přesně 3 znaky dlouhý.
-            not_blank: Zvolte kód měny.
-            regex: Kód měny můžou tvořit pouze písmena, číslice, pomlčky a podtržítka.
-            unique: Kód měny musí být unikátní.
+            not_blank: 'Prosím vyberte kód měny.'
+            unique: 'Kód měny musí být jedinečný.'
+            currency: 'Tato hodnota není platný kód měny.'
         exchange_rate:
-            not_blank: Zadejte měnu.
+            not_blank: 'Prosím zadejte kurz.'
     exchange_rate:
         ratio:
-            greater_than: Poměr musí být větší než 0.
-            invalid: Poměr musí být číslo.
-            not_blank: Zadejte směnný kurz.
+            greater_than: 'Poměr musí být větší než {{ compared_value }}.'
+            less_than: 'Poměr musí být menší než {{ compared_value }}.'
+            invalid: 'Poměr musí být číslo.'
+            not_blank: 'Prosím zadejte poměr kurzu.'
         source_currency:
-            not_blank: Zadejte prosím od jaké měny by měl být odvozen směnný kurz.
+            not_blank: 'Prosím zadejte, z jaké měny má být kurz odvozen.'
         target_currency:
-            not_blank: Zadejte měnu, do které má být nastaven směnný kurz.
-        unique_currency_pair: Měnový pár musí být unikátní.
-        different_source_target_currency: Zdrojové a cílové měny se musí lišit.
+            not_blank: 'Prosím zadejte, na kterou měnu má být kurz nastaven.'
+        unique_currency_pair: 'Měnový pár musí být jedinečný.'
+        different_source_target_currency: 'Zdrojová a cílová měna se musí lišit.'

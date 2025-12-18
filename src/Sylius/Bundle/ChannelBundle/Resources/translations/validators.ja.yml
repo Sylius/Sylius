@@ -1,0 +1,14 @@
+sylius:
+    channel:
+        code:
+            max_length: '{{ limit }} 文字以内で入力してください。'
+            not_blank: 'チャネルコードを入力してください。'
+            regex: 'チャネルコードは英字、数字、ダッシュ、アンダースコアのみ使用できます。'
+            unique: 'チャネルコードは一意である必要があります。'
+        name:
+            not_blank: 'チャネル名を入力してください。'
+            max_length: 'チャネル名は {{ limit }} 文字以内で入力してください。'
+        color:
+            max_length: 'カラーは {{ limit }} 文字以内で入力してください。'
+        hostname:
+            max_length: 'ホスト名は {{ limit }} 文字以内で入力してください。'

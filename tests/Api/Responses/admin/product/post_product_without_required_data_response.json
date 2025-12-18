@@ -1,23 +1,29 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
-    "@type": "ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: Please enter product code.\ntranslations[en_US].name: Please enter product name.\ntranslations[en_US].slug: Please enter product slug.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('code: Please enter product code.\ntranslations[en_US].name: Please enter product name.\ntranslations[en_US].slug: Please enter product slug.').optional()",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "code",
             "message": "Please enter product code.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "translations[en_US].name",
             "message": "Please enter product name.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "translations[en_US].slug",
             "message": "Please enter product slug.",
-            "code": @string@
+            "code": "@string@"
         }
-    ]
+    ],
+    "detail": "code: Please enter product code.\ntranslations[en_US].name: Please enter product name.\ntranslations[en_US].slug: Please enter product slug.",
+    "type": "\/validation_errors\/@string@"
 }

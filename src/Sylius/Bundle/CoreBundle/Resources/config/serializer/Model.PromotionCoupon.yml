@@ -1,8 +1,0 @@
-Sylius\Component\Core\Model\PromotionCoupon:
-    exclusion_policy: ALL
-    xml_root_name: promotion-coupon
-    properties:
-        perCustomerUsageLimit:
-            expose: true
-            type: integer
-            groups: [Detailed]

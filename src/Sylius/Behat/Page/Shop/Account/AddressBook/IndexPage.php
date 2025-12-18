@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
+use Sylius\Behat\Service\DriverHelper;
 use Webmozart\Assert\Assert;
 
-class IndexPage extends SymfonyPage implements IndexPageInterface
+class IndexPage extends SyliusPage implements IndexPageInterface
 {
     public function getRouteName(): string
     {
@@ -57,6 +58,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function deleteAddress(string $fullName): void
     {
         $this->getElement('delete_button', ['%full_name%' => $fullName])->press();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function setAsDefault(string $fullName): void
@@ -81,14 +84,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'address' => '[data-test-address-context="%full_name%"]',
+            'address' => '[data-test-address="%full_name%"]',
             'address_contains' => '[data-test-address-context="%full_name%"]:contains("%value%")',
             'addresses' => '[data-test-addresses]',
-            'content' => '[data-test-flash-message="info"]:contains("%message%")',
+            'content' => '[data-test-sylius-flash-message="alert-info"]:contains("%message%")',
             'default_address' => '[data-test-default-address] [data-test-full-name]',
-            'delete_button' => '[data-test-address="%full_name%"] [data-test-delete-button]',
-            'edit_address' => '[data-test-address="%full_name%"] [data-test-edit-button] [data-test-button]',
-            'set_as_default_button' => '[data-test-address="%full_name%"] [data-test-set-as-default-button]',
+            'delete_button' => '[data-test-address="%full_name%"] [data-test-button="delete"]',
+            'edit_address' => '[data-test-address="%full_name%"] [data-test-edit-button]',
+            'set_as_default_button' => '[data-test-address="%full_name%"] [data-test-button="set-as-default-button"]',
         ]);
     }
 }

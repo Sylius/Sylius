@@ -17,5 +17,6 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 interface RuleCheckerInterface
 {
+    /** @param array<string, mixed> $configuration */
     public function isEligible(ShippingSubjectInterface $subject, array $configuration): bool;
 }

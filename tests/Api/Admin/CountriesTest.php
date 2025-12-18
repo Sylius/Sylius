@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,7 +23,7 @@ final class CountriesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_a_country(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
@@ -44,7 +45,7 @@ final class CountriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_countries(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
@@ -59,7 +60,7 @@ final class CountriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_a_country(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -72,6 +73,16 @@ final class CountriesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'IE',
                 'enabled' => true,
+                'provinces' => [
+                    [
+                        'code' => 'IE-CON',
+                        'name' => 'Connacht',
+                    ],
+                    [
+                        'code' => 'IE-LEI',
+                        'name' => 'Leinster',
+                    ],
+                ],
             ], \JSON_THROW_ON_ERROR),
         );
 
@@ -82,7 +93,7 @@ final class CountriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_existing_country(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);
@@ -112,7 +123,7 @@ final class CountriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_provinces_from_country(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'country.yaml']);

@@ -4,21 +4,21 @@
 sylius:
     form:
         customer:
-            first_name: Vorname
-            group: Gruppe
-            last_name: Nachname
-            email: E-Mail
-            phone_number: Telefonnummer
-            gender: Geschlecht
-            birthday: Geburtstag
-            billing_address: Rechnungsadresse
-            different_shipping_address: Eine abweichende Lieferadresse benutzen?
-            only_customer_registration: Account erstellen?
-            subscribed_to_newsletter: Newsletter abonnieren
+            first_name: 'Vorname'
+            group: 'Gruppe'
+            last_name: 'Nachname'
+            email: 'E-Mail'
+            phone_number: 'Telefonnummer'
+            gender: 'Geschlecht'
+            birthday: 'Geburtsdatum'
+            billing_address: 'Rechnungsadresse'
+            different_shipping_address: 'Verwenden Sie eine andere Adresse für den Versand?'
+            only_customer_registration: 'Konto erstellen?'
+            subscribed_to_newsletter: 'Newsletter abonnieren'
         customer_group:
-            name: Name
-            roles: Rollen
+            name: 'Name'
+            roles: 'Rollen'
     gender:
-        unknown: Unbekannt
-        male: Männlich
-        female: Weiblich
+        unknown: 'Unbekannt'
+        male: 'Männlich'
+        female: 'Weiblich'

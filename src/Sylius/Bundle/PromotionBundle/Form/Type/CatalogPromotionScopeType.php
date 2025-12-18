@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -22,10 +23,13 @@ use Symfony\Component\Form\FormEvents;
 
 final class CatalogPromotionScopeType extends AbstractResourceType
 {
+    /** @var array<string, string> */
     private array $scopeTypes = [];
 
+    /** @var array<string, class-string> */
     private array $scopeConfigurationTypes;
 
+    /** @param array<string, AbstractType> $scopeConfigurationTypes */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -39,7 +43,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
         }
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $defaultScopeType = current($this->scopeTypes);
         $defaultScopeConfigurationType = $this->scopeConfigurationTypes[$defaultScopeType];
@@ -69,7 +73,7 @@ final class CatalogPromotionScopeType extends AbstractResourceType
 
     private function addScopeToForm(FormEvent $event): void
     {
-        /** @var CatalogPromotionScopeInterface|array|null $data */
+        /** @var CatalogPromotionScopeInterface|array<string, mixed>|null $data */
         $data = $event->getData();
         $form = $event->getForm();
 

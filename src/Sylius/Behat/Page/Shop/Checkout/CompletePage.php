@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -24,13 +24,13 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Routing\RouterInterface;
 
-class CompletePage extends SymfonyPage implements CompletePageInterface
+class CompletePage extends SyliusPage implements CompletePageInterface
 {
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private TableAccessorInterface $tableAccessor,
+        protected TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -134,7 +134,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         /** @var NodeElement $shippingPromotions */
         $shippingPromotions = $this->getElement('promotions_shipping_details');
 
-        return str_contains($shippingPromotions->getAttribute('data-html'), $promotionName);
+        return str_contains($shippingPromotions->getText(), $promotionName);
     }
 
     public function getTaxTotal(): string
@@ -182,6 +182,8 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     public function confirmOrder(): void
     {
         $this->getElement('confirm_button')->press();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeAddress(): void
@@ -220,7 +222,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         /** @var NodeElement $shippingPromotions */
         $shippingPromotions = $this->getElement('promotions_shipping_details');
 
-        return str_contains($shippingPromotions->getAttribute('data-html'), $promotionWithDiscount);
+        return str_contains($shippingPromotions->getText(), $promotionWithDiscount);
     }
 
     public function hasOrderPromotion(string $promotionName): bool
@@ -228,7 +230,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         /** @var NodeElement $shippingPromotions */
         $shippingPromotions = $this->getElement('order_promotions_details');
 
-        return str_contains($shippingPromotions->getAttribute('data-html'), $promotionName);
+        return str_contains($shippingPromotions->getText(), $promotionName);
     }
 
     public function tryToOpen(array $urlParameters = []): void
@@ -253,7 +255,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'addressing_step_label' => '[data-test-step-address]',
             'base_order_total' => '[data-test-summary-order-total]',
             'billing_address' => '[data-test-billing-address]',
-            'confirm_button' => '[data-test-confirmation-button]',
+            'confirm_button' => '[data-test-button="confirmation-button"]',
             'currency' => '[data-test-order-currency-code]',
             'extra_notes' => '[data-test-extra-notes]',
             'items_table' => '[data-test-order-table]',
@@ -278,7 +280,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ]);
     }
 
-    private function isAddressValid(string $displayedAddress, AddressInterface $address): bool
+    protected function isAddressValid(string $displayedAddress, AddressInterface $address): bool
     {
         return
             $this->hasAddressPart($displayedAddress, $address->getCompany(), true) &&
@@ -293,7 +295,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         ;
     }
 
-    private function hasAddressPart(string $address, ?string $addressPart, bool $optional = false): bool
+    protected function hasAddressPart(string $address, ?string $addressPart, bool $optional = false): bool
     {
         if ($optional && null === $addressPart) {
             return true;
@@ -302,24 +304,24 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return str_contains($address, $addressPart);
     }
 
-    private function getCountryName(string $countryCode): string
+    protected function getCountryName(string $countryCode): string
     {
         return strtoupper(Countries::getName($countryCode, 'en'));
     }
 
-    private function getPriceFromString(string $price): int
+    protected function getPriceFromString(string $price): int
     {
         return (int) round((float) str_replace(['€', '£', '$'], '', $price) * 100, 2);
     }
 
-    private function getTotalFromString(string $total): int
+    protected function getTotalFromString(string $total): int
     {
         $total = str_replace('Total:', '', $total);
 
         return $this->getPriceFromString($total);
     }
 
-    private function getBaseTotalFromString(string $total): int
+    protected function getBaseTotalFromString(string $total): int
     {
         $total = str_replace('Total in base currency:', '', $total);
 

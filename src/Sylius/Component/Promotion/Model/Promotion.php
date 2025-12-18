@@ -84,14 +84,8 @@ class Promotion implements PromotionInterface
         $this->initializeTranslationsCollection();
 
         $this->createdAt = new \DateTime();
-
-        /** @var ArrayCollection<array-key, PromotionCouponInterface> $this->coupons */
         $this->coupons = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, PromotionRuleInterface> $this->rules */
         $this->rules = new ArrayCollection();
-
-        /** @var ArrayCollection<array-key, PromotionActionInterface> $this->actions */
         $this->actions = new ArrayCollection();
     }
 

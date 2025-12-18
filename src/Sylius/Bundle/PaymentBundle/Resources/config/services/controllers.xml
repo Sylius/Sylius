@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <services>
+        <defaults public="true" />
+
+        <service id="sylius.controller.payment_request_notify" class="Sylius\Bundle\PaymentBundle\Action\PaymentRequestNotifyAction">
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius.checker.finalized_payment_request" />
+            <argument type="service" id="sylius.processor.payment_request.notify_payload" />
+            <argument type="service" id="sylius.manager.payment_request" />
+            <argument type="service" id="sylius.announcer.payment_request" />
+            <argument type="service" id="sylius.provider.payment_request.notify_response" />
+        </service>
+
+        <service id="sylius.controller.payment_method_notify" class="Sylius\Bundle\PaymentBundle\Action\PaymentMethodNotifyAction">
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.provider.payment_request.notify_payment" />
+            <argument type="service" id="sylius.factory.payment_request" />
+            <argument type="service" id="sylius.processor.payment_request.notify_payload" />
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius.announcer.payment_request" />
+            <argument type="service" id="sylius.provider.payment_request.notify_response" />
+        </service>
+    </services>
+</container>

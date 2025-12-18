@@ -1,0 +1,21 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductAttribute",
+    "@id": "\/api\/v2\/admin\/product-attributes\/material",
+    "@type": "ProductAttribute",
+    "code": "material",
+    "configuration": {
+        "min": 5,
+        "max": 255
+    },
+    "position": 3,
+    "storageType": "text",
+    "type": "text",
+    "translatable": true,
+    "translations": {
+        "en_US": {
+            "@id": "\/api\/v2\/admin\/product-attributes\/material\/translations\/en_US",
+            "@type": "ProductAttributeTranslation",
+            "name": "Material"
+        }
+    }
+}

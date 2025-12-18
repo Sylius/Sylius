@@ -1,0 +1,35 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    tax_category:
+        name:
+            not_blank: 'Bitte geben Sie den Namen der Steuerkategorie ein.'
+            min_length: 'Der Name der Steuerkategorie muss mindestens 1 Zeichen lang sein.|Der Name der Steuerkategorie muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Name der Steuerkategorie darf höchstens 1 Zeichen lang sein.|Der Name der Steuerkategorie darf höchstens {{ limit }} Zeichen lang sein.'
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Code der Steuerkategorie ein.'
+            regex: 'Der Code der Steuerkategorie darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Die Steuerkategorie mit dem angegebenen Code existiert bereits.'
+    tax_rate:
+        category:
+            not_blank: 'Bitte wählen Sie eine Steuerkategorie aus.'
+        name:
+            not_blank: 'Bitte geben Sie den Namen des Steuersatzes ein.'
+            min_length: 'Der Name des Steuersatzes muss mindestens 1 Zeichen lang sein.|Der Name des Steuersatzes muss mindestens {{ limit }} Zeichen lang sein.'
+            max_length: 'Der Name des Steuersatzes darf höchstens 1 Zeichen lang sein.|Der Name des Steuersatzes darf höchstens {{ limit }} Zeichen lang sein.'
+        amount:
+            invalid: 'Der Steuersatzbetrag ist ungültig.'
+            not_blank: 'Bitte geben Sie den Steuersatzbetrag ein.'
+        calculator:
+            not_blank: 'Bitte wählen Sie einen Steuerrechner aus.'
+        zone:
+            not_blank: 'Bitte wählen Sie eine Steuerzone aus.'
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Code des Steuersatzes ein.'
+            regex: 'Der Code des Steuersatzes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Der Steuersatz mit dem angegebenen Code existiert bereits.'
+        date:
+            greater_than_start_date: 'Der Steuersatz sollte nicht vor seinem Startdatum enden.'

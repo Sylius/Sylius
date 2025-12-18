@@ -4,8 +4,15 @@
 sylius:
     channel:
         code:
-            not_blank: Vennligst oppgi kanal kode.
-            regex: Kanal kode kan kun bestå av bokstaver, tall, bindestrek og understrek.
-            unique: Kanal koden må være unik.
+            max_length: 'Koden kan ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst skriv inn kanalens kode.'
+            regex: 'Kanalens kode kan bare bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Kanalens kode må være unik.'
         name:
-            not_blank: Vennligst oppgi kanal navn.
+            not_blank: 'Vennligst skriv inn kanalens navn.'
+            max_length: 'Kanalens navn kan ikke være lengre enn {{ limit }} tegn.'
+        color:
+            max_length: 'Fargen kan ikke være lengre enn {{ limit }} tegn.'
+        hostname:
+            max_length: 'Vertsnavnet kan ikke være lengre enn {{ limit }} tegn.'
+

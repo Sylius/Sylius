@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
-            author: Autor
-            comment: Komentár
-            header: Pridať recenziu
-            rating: Hodnotenie
+            author: 'Autor'
+            comment: 'Komentár'
+            header: 'Pridať recenziu'
+            rating: 'Hodnotenie'
             status:
-                approved: Schválené
-                label: Stav
-                new: Nová
-                rejected: Zamietnuté
-            submit: Odoslať
-            title: Názov
+                approved: 'Schválené'
+                label: 'Stav'
+                new: 'Nové'
+                rejected: 'Odmietnuté'
+            submit: 'Odoslať'
+            title: 'Nadpis'

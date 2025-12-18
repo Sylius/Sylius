@@ -2,37 +2,77 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    catalog_promotion:
+        code:
+            max_length: '代码长度不能超过 {{ limit }} 个字符。'
+            unique: '具有该代码的目录促销已存在。'
+            regex: '目录促销代码只能包含字母、数字、破折号和下划线。'
+            not_blank: '请输入目录促销代码。'
+        date:
+            greater_than_start_date: '结束日期不能早于开始日期。'
+        name:
+            max_length: '目录促销名称不能超过 {{ limit }} 个字符。'
+            min_length: '目录促销名称至少需要 {{ limit }} 个字符。'
+            not_blank: '请输入目录促销名称。'
+        state:
+            processing: '目录促销当前正在处理，无法编辑。'
+    catalog_promotion_action:
+        type:
+            not_blank: '请选择动作类型。'
+            invalid: '目录促销动作类型无效。可用类型为 {{ available_action_types }}。'
+        invalid_type: '目录促销动作类型无效。请选择有效类型。'
+        percentage_discount:
+            not_in_range: '百分比折扣金额必须在0%至100%之间。'
+            not_number_or_empty: '百分比折扣金额必须为数字且不能为空。'
+            not_valid: '必须配置百分比折扣金额。'
+    catalog_promotion_scope:
+        type:
+            not_blank: '请选择范围类型。'
+            invalid: '目录促销范围类型无效。可用类型为 {{ available_scope_types }}。'
     promotion:
         code:
-            unique: 促销编号已存在。
-            regex: 促销代码仅可以由字母、 数字、 破折号和下划线组成。
-            not_blank: 请输入促销代码。
+            max_length: '代码长度不能超过 {{ limit }} 个字符。'
+            unique: '具有该代码的促销已存在。'
+            regex: '促销代码只能包含字母、数字、破折号和下划线。'
+            not_blank: '请输入促销代码。'
         description:
-            max_length: 促销描述必须不会超过 1 个字符。 |促销描述不能超过 {{ limit }} 个字符。
-            min_length: 产品描述必须是至少 1 个字符长。 |产品描述必须至少 {{ limit }} 个字符长。
-            not_blank: 请输入促销的描述。
-        end_date_cannot_be_set_prior_start_date: 结束日期不能超过开始日期。
+            max_length: '促销描述不能超过 {{ limit }} 个字符。'
+            min_length: '促销描述至少需要 {{ limit }} 个字符。'
+            not_blank: '请输入促销描述。'
+        end_date_cannot_be_set_prior_start_date: '结束日期不能早于开始日期。'
+        is_invalid: '促销无效。'
         name:
-            max_length: 选项名称的长度必须超过 1 个字符。 |选项名称的长度不能超过 {{ limit }} 字符。
-            min_length: 促销名称必须是至少 1 个字符长。 |促销名称必须至少 {{ limit }} 个字符长。
-            not_blank: 请输入促销名称。
+            max_length: '促销名称不能超过 {{ limit }} 个字符。'
+            min_length: '促销名称至少需要 {{ limit }} 个字符。'
+            not_blank: '请输入促销名称。'
+    promotion_action:
+        invalid_type: '促销动作类型无效。可用动作类型为 {{ available_action_types }}。'
+        percentage_discount_configuration:
+            not_in_range: '百分比折扣必须在0%至100%之间。'
+    promotion_rule:
+        invalid_type: '促销规则类型无效。可用规则类型为 {{ available_rule_types }}。'
     promotion_coupon:
         code:
-            max_length: 优惠券代码必须不能超过 1 个字符。 |优惠券代码必须不能超过 {{ limit }} 个字符。
-            min_length: 优惠券代码必须至少 1 个字符长。 |优惠券代码必须至少 {{ limit }} 个字符长。
-            not_blank: 请输入优惠券代码。
-            regex: 优惠券代码仅可以由字母、 数字、 破折号和下划线组成。
-            unique: 此优惠券已存在。
-        is_invalid: 优惠券代码是无效的。
+            max_length: '优惠券代码长度不能超过 {{ limit }} 个字符。'
+            min_length: '优惠券代码至少需要 {{ limit }} 个字符。'
+            not_blank: '请输入优惠券代码。'
+            regex: '优惠券代码只能包含字母、数字、破折号和下划线。'
+            unique: '该优惠券已存在。'
+        is_invalid: '优惠券代码无效。'
+        promotion:
+            not_blank: '请为此优惠券指定一个促销。'
+            not_coupon_based: '只有基于优惠券的促销才可使用优惠券。'
         usage_limit:
-            min: 优惠券使用限制必须至少 {{ limit }}。
+            min: '优惠券使用次数限制至少为 {{ limit }}。'
     promotion_coupon_generator_instruction:
         amount:
-            min: 待生成的优惠券数量必须至少为 {{ limit }}。
-            not_blank: 请输入想要生成的优惠券的数量。
+            min: '生成的优惠券数量至少为 {{ limit }}。'
+            not_blank: '请输入生成优惠券的数量。'
         code_length:
-            min: 优惠券代码必须至少 {{ limit }} 个字符长。
-            max: 优惠券代码必须不能超过 {{ limit }} 个字符。
-            not_blank: 优惠券代码不能为空。
+            min: '优惠券代码长度至少为 {{ limit }} 个字符。'
+            max: '优惠券代码长度不能超过 {{ limit }} 个字符。'
+            not_blank: '请输入优惠券代码长度。'
+            not_in_range: '优惠券代码长度必须在 {{ min }} 到 {{ max }} 之间。'
+        possible_generation_amount: '优惠券代码长度或优惠券数量无效。无法生成 %expectedAmount% 个唯一优惠券，代码长度为 %codeLength%。最大可生成数量为 %possibleAmount%。'
         usage_limit:
-            min: 生成的优惠券必须至少使用 {{ limit }} 次。
+            min: '生成优惠券的使用限制至少为 {{ limit }}。'

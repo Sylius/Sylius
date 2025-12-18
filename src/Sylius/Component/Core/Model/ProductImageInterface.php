@@ -15,7 +15,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 
-interface ProductImageInterface extends ImageInterface
+interface ProductImageInterface extends ImageInterface, PositionAwareInterface
 {
     public function hasProductVariants(): bool;
 

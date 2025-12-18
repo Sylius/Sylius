@@ -1,18 +1,24 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
-    "@type": "ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "firstName: First name must be at least 2 characters long.\nlastName: Last name must be at least 2 characters long.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('firstName: First name must be at least 2 characters long.\nlastName: Last name must be at least 2 characters long.').optional()",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "firstName",
             "message": "First name must be at least 2 characters long.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "lastName",
             "message": "Last name must be at least 2 characters long.",
-            "code": @string@
+            "code": "@string@"
         }
-    ]
+    ],
+    "detail": "firstName: First name must be at least 2 characters long.\nlastName: Last name must be at least 2 characters long.",
+    "type": "\/validation_errors\/@string@"
 }

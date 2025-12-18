@@ -1,0 +1,94 @@
+sylius_grid:
+    grids:
+        sylius_admin_payment_request:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.payment_request.class%"
+                    repository:
+                        method: createQueryBuilderForPayment
+                        arguments:
+                            paymentId: $paymentId
+            sorting:
+                createdAt: desc
+            fields:
+                hash:
+                    type: string
+                    label: sylius.ui.hash
+                    sortable: ~
+                method:
+                    type: twig
+                    label: sylius.ui.payment_method
+                    path: .
+                    options:
+                        template: "@SyliusAdmin/payment_request/grid/field/method.html.twig"
+                action:
+                    type: twig
+                    label: sylius.ui.action
+                    options:
+                        template: "@SyliusAdmin/payment_request/grid/field/action.html.twig"
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    options:
+                        template: "@SyliusAdmin/payment_request/grid/field/state.html.twig"
+                createdAt:
+                    type: twig
+                    label: sylius.ui.creation_date
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                updatedAt:
+                    type: twig
+                    label: sylius.ui.updating_date
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/shared/grid/field/date.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+            filters:
+                payment_method:
+                    type: ux_translatable_autocomplete
+                    label: sylius.ui.payment_method
+                    form_options:
+                        extra_options:
+                            class: "%sylius.model.payment_method.class%"
+                            translation_fields: [ name ]
+                            choice_label: name
+                    options:
+                        fields: [ method.id ]
+                action:
+                    type: select
+                    label: sylius.ui.action
+                    form_options:
+                        choices:                            
+                            sylius.ui.authorize: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_AUTHORIZE
+                            sylius.ui.cancel: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_CANCEL
+                            sylius.ui.capture: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_CAPTURE
+                            sylius.ui.notify: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_NOTIFY
+                            sylius.ui.payout: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_PAYOUT
+                            sylius.ui.refund: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_REFUND
+                            sylius.ui.status: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_STATUS
+                            sylius.ui.sync: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_SYNC
+                state:
+                    type: select
+                    label: sylius.ui.state
+                    form_options:
+                        choices:
+                            sylius.ui.cancelled: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_CANCELLED
+                            sylius.ui.completed: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_COMPLETED
+                            sylius.ui.failed: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_FAILED
+                            sylius.ui.new: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_NEW
+                            sylius.ui.processing: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::STATE_PROCESSING
+            actions:
+                item:
+                    show:
+                        type: show
+                        options:
+                            link:
+                                route: sylius_admin_payment_request_show
+                                parameters:
+                                    hash: resource.hash
+                                    paymentId: resource.payment.id

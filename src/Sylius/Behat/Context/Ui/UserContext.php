@@ -54,14 +54,13 @@ final class UserContext implements Context
     }
 
     /**
-     * @Then the user account should be deleted
+     * @Then the customer should have no account
      */
-    public function accountShouldBeDeleted()
+    public function theCustomerShouldHaveNoAccount(): void
     {
         $deletedUser = $this->sharedStorage->get('deleted_user');
-
         $this->customerShowPage->open(['id' => $deletedUser->getCustomer()->getId()]);
 
-        Assert::false($this->customerShowPage->isRegistered());
+        Assert::false($this->customerShowPage->hasAccount());
     }
 }

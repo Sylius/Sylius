@@ -4,13 +4,38 @@
 sylius:
     form:
         attribute:
-            add: 追加
-            code: コード
-            name: ゾーン名
-            translations: 翻訳
-            type: タイプ
+            add: '追加'
+            add_attributes: '属性を追加'
+            choices: '選択肢'
+            code: 'コード'
+            name: '名前'
+            translatable: '翻訳可能'
+            translations: '翻訳'
+            type: 'タイプ'
         attribute_type:
-            configuration: 条件設定
-            date: 日付
-            percent: パーセント
-            select: 選択
+            checkbox: 'チェックボックス'
+            configuration: '設定'
+            date: '日付'
+            datetime: '日時'
+            float: '浮動小数'
+            integer: '整数'
+            percent: 'パーセント'
+            select: 'セレクト'
+            text: 'テキスト'
+            textarea: 'テキストエリア'
+            title: '属性タイプ'
+            validation: 'バリデーション'
+        attribute_type_configuration:
+            datetime:
+                format: 'フォーマット'
+            date:
+                format: 'フォーマット'
+            select:
+                multiple: '複数選択'
+                values: '値'
+                choose: 'オプションを選択'
+                min: '最小エントリ'
+                max: '最大エントリ'
+            text:
+                min: '最小長'
+                max: '最大長'

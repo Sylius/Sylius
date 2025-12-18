@@ -1,31 +1,49 @@
-# This file is part of the Sylius package.
-# (c) Sylius Sp. z o.o.
-
 sylius:
     credit_card:
         cardholder_name:
-            min_length: Kortinnehavers navn må være minst {{ limit }} tegn.
-            not_blank: Skriv inn navnet på kortholderen.
+            min_length: 'Kortholderens navn må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst skriv inn navnet til kortholderen.'
         expiry_month:
-            max_range: Kredittkortets utløpsmåned må være mellom {{ min }} og {{ max }}.
-            min_range: Kredittkortets utløpsmåned må være mellom {{ min }} og {{ max }}.
-            not_blank: Velg utløpsmåned.
+            max_range: 'Utløpsmåneden for kredittkortet må være mellom {{ min }} og {{ max }}.'
+            min_range: 'Utløpsmåneden for kredittkortet må være mellom {{ min }} og {{ max }}.'
+            not_blank: 'Vennligst velg utløpsmåned.'
         number:
-            not_blank: Skriv inn kortnummeret.
-            luhn: Kredittkortnummeret du skrev inn er ugyldig.
+            not_blank: 'Vennligst skriv inn kortnummer.'
+            luhn: 'Kredittkortnummeret du oppga er ugyldig.'
         security_code:
-            not_blank: Skriv inn sikkerhetskoden.
-            max_length: Kredittkortets CVV-kode må være minst {{ limit }} sifre.
-            min_length: Kredittkortets CVV koden må være maksimalt {{ limit }} sifre.
+            not_blank: 'Vennligst skriv inn sikkerhetskoden.'
+            max_length: 'Kredittkortets CVV-kode må være minst {{ limit }} siffer lang.'
+            min_length: 'Kredittkortets CVV-kode må være maks {{ limit }} siffer lang.'
         expiry_year:
-            not_blank: Velg utløpsår.
+            not_blank: 'Vennligst velg utløpsår.'
+    gateway_config:
+        invalid_gateway_factory: 'Ugyldig gateway-fabrikk. Tilgjengelige fabrikker er {{ available_factories }}.'
+        gateway_name:
+            not_blank: 'Vennligst skriv inn gateway-navn.'
+        factory_name:
+            not_blank: 'Vennligst skriv inn navn på gateway-fabrikk.'
     payment:
         currency_code:
-            not_valid: Valutakoden du oppga er ugyldig.
+            not_valid: 'Den valutakoden du oppga er ugyldig.'
+        method:
+            not_blank: 'Vennligst velg en betalingsmetode.'
     payment_method:
         gateway:
-            not_blank: Vennligst velg betalingsmetode.
+            not_blank: 'Vennligst velg gateway for betalingsmetode.'
         name:
-            max_length: Metodenavn må være {{ limit }} tegn lang eller mindre.
-            min_length: Metodenavn må være minst {{ limit }} tegn.
-            not_blank: Angi navnet på betalingsmetoden.
+            max_length: 'Navnet på betalingsmetoden må være {{ limit }} tegn langt eller kortere.'
+            min_length: 'Navnet på betalingsmetoden må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst skriv inn navn på betalingsmetode.'
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: 'Gebyr kan ikke være lavere enn {{ compared_value }}.'
+                not_blank: 'Vennligst skriv inn gebyrbeløp.'
+            percent:
+                max_range: 'Prosentgebyret kan ikke være høyere enn {{ limit }}.'
+                min_range: 'Prosentgebyret kan ikke være lavere enn {{ limit }}.'
+                not_blank: 'Vennligst skriv inn gebyr i prosent.'
+        code:
+            max_length: 'Koden må ikke være lenger enn {{ limit }} tegn.'
+            not_blank: 'Vennligst skriv inn betalingsmetodekode.'
+            regex: 'Betalingsmetodekoden kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Betalingsmetoden med denne koden eksisterer allerede.'

@@ -19,7 +19,7 @@ final class TaxonParentRelation extends Constraint
 {
     public string $message = 'sylius.taxon.parent.invalid_relation';
 
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return 'sylius_taxon_parent_relation_validator';
     }

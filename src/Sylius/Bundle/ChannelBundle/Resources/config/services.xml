@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <parameters>
         <parameter key="sylius.channel.validation_groups" type="collection">
@@ -26,8 +27,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.custom_factory.channel" class="Sylius\Component\Channel\Factory\ChannelFactory" decorates="sylius.factory.channel" decoration-priority="256" public="false">
             <argument type="service" id="sylius.custom_factory.channel.inner" />
         </service>
@@ -44,35 +43,34 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.context.channel.composite" class="Sylius\Component\Channel\Context\CompositeChannelContext" public="false" />
+        <service id="sylius.context.channel.composite" class="Sylius\Component\Channel\Context\CompositeChannelContext" />
         <service id="Sylius\Component\Channel\Context\ChannelContextInterface" alias="sylius.context.channel" />
 
-        <service id="sylius.context.channel.request_based" class="Sylius\Component\Channel\Context\RequestBased\ChannelContext" public="false">
+        <service id="sylius.context.channel.request_based" class="Sylius\Component\Channel\Context\RequestBased\ChannelContext">
             <argument type="service" id="sylius.context.channel.request_based.resolver" />
             <argument type="service" id="request_stack" />
             <tag name="sylius.context.channel" />
         </service>
 
-        <service id="sylius.context.channel.single_channel" class="Sylius\Component\Channel\Context\SingleChannelContext" public="false">
+        <service id="sylius.context.channel.single_channel" class="Sylius\Component\Channel\Context\SingleChannelContext">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="sylius.context.channel" priority="-128"/>
         </service>
 
-        <service id="sylius.context.channel.request_based.resolver.composite" class="Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver" public="false"/>
+        <service id="sylius.context.channel.request_based.resolver.composite" class="Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver" />
         <service id="Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface" alias="sylius.context.channel.request_based.resolver.composite" />
 
-        <service id="sylius.context.channel.request_based.resolver.hostname_based" class="Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver" public="false">
+        <service id="sylius.context.channel.request_based.resolver.hostname_based" class="Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="sylius.context.channel.request_based.resolver" />
         </service>
 
-        <service id="sylius.channel_collector" class="Sylius\Bundle\ChannelBundle\Collector\ChannelCollector" public="false">
+        <service id="sylius.collector.channel" class="Sylius\Bundle\ChannelBundle\Collector\ChannelCollector">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.context.channel" />
             <argument>false</argument>
-            <tag name="data_collector" template="@SyliusChannel/Collector/channel.html.twig" id="sylius.channel_collector" />
+            <tag name="data_collector" template="@SyliusChannel/Collector/channel.html.twig" id="sylius.collector.channel" />
         </service>
-        <service id="sylius.collector.channel" alias="sylius.channel_collector" />
 
         <service id="sylius.checker.channel_deletion" class="Sylius\Component\Channel\Checker\ChannelDeletionChecker">
             <argument type="service" id="sylius.repository.channel" />

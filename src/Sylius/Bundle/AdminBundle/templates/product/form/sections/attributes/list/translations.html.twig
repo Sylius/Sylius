@@ -1,0 +1,22 @@
+{% set product_attributes = hookable_metadata.context.product_attributes %}
+
+<div class="col-12 col-sm-8">
+    <div class="py-3 px-5">
+        <div class="tab-content">
+            {% for product_attribute_code, product_attribute_values in product_attributes %}
+                <div
+                    class="tab-pane show {% if loop.first %}active{% endif %}"
+                    id="{{ product_attribute_code }}"
+                    role="tabpanel"
+                >
+                    {% for product_attribute_value in product_attribute_values %}
+                        {% set locale_code = product_attribute_value.vars.data.localeCode %}
+                        <div class="field d-flex gap-2 mb-3">
+                            {% hook 'translations' with { locale_code, product_attribute_value, product_attribute_code } %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Shop;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-final class CheckoutSubtotalElement extends Element implements CheckoutSubtotalElementInterface
+class CheckoutSubtotalElement extends SyliusElement implements CheckoutSubtotalElementInterface
 {
     public function getProductQuantity(string $productName): int
     {

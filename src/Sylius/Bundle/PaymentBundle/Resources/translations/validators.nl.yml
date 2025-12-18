@@ -4,42 +4,49 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: De naam van de kaarthouder moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Vul de naam van de kaarthouder in.
+            min_length: 'De naam van de kaarthouder moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer de naam van de kaarthouder in.'
         expiry_month:
-            max_range: De vervalmaand moet tussen {{ min }} en {{ max }} liggen.
-            min_range: De vervalmaand moet tussen {{ min }} en {{ max }} liggen.
-            not_blank: Selecteer de vervalmaand.
+            max_range: 'De vervaldatum maand van de creditcard moet tussen {{ min }} en {{ max }} liggen.'
+            min_range: 'De vervaldatum maand van de creditcard moet tussen {{ min }} en {{ max }} liggen.'
+            not_blank: 'Selecteer de vervaldatum maand.'
         number:
-            not_blank: Voer uw kaart nummer in.
-            luhn: Uw kaartnummer in ongeldig.
+            not_blank: 'Voer het kaartnummer in.'
+            luhn: 'Het ingevoerde creditcardnummer is ongeldig.'
         security_code:
-            not_blank: Vul de beveiligingscode in.
-            max_length: De creditcard CVV-code moet minstens {{ limit }} cijfers lang zijn.
-            min_length: De creditcard CVV-code moet ten hoogste {{ limit }} cijfers lang zijn.
+            not_blank: 'Voer de beveiligingscode in.'
+            max_length: 'De CVV-code van de creditcard moet minstens {{ limit }} cijfers lang zijn.'
+            min_length: 'De CVV-code van de creditcard mag niet langer zijn dan {{ limit }} cijfers.'
         expiry_year:
-            not_blank: Selecteer het vervaljaar.
+            not_blank: 'Selecteer het vervaljaar.'
+    gateway_config:
+        invalid_gateway_factory: 'Ongeldige gateway factory. Beschikbare factories zijn {{ available_factories }}.'
+        gateway_name:
+            not_blank: 'Voer de naam van de gateway in.'
+        factory_name:
+            not_blank: 'Voer de naam van de gateway factory in.'
     payment:
         currency_code:
-            not_valid: De valutacode die je hebt ingevoerd is ongeldig.
+            not_valid: 'De ingevoerde valutacode is ongeldig.'
         method:
-            not_blank: 'Selecteer een betalingsmethode.'
+            not_blank: 'Selecteer een betaalmethode.'
     payment_method:
         gateway:
-            not_blank: Selecteer een betaalmethode.
+            not_blank: 'Selecteer de betaalmethode gateway.'
         name:
-            max_length: Betaalmethode naam mag niet langer zijn dan {{ limit }} tekens.
-            min_length: Betaalmethode naam moet minstens {{ limit }} tekens lang zijn.
-            not_blank: Voer een betaalmethode naam in.
+            max_length: 'De naam van de betaalmethode mag maximaal {{ limit }} tekens lang zijn.'
+            min_length: 'De naam van de betaalmethode moet minstens {{ limit }} tekens lang zijn.'
+            not_blank: 'Voer de naam van de betaalmethode in.'
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: De vergoeding mag niet lager zijn dan {{ compared_value }}.
-                not_blank: Voer het bedrag van de vergoeding in.
+                greater_than_or_equal: 'De vergoeding mag niet lager zijn dan {{ compared_value }}.'
+                not_blank: 'Voer het bedrag van de vergoeding in.'
             percent:
-                max_range: Percentage vergoeding kan niet groter zijn dan {{ limit }}.
-                min_range: Percentage vergoeding kan niet lager is dan {{ limit }}.
-                not_blank: Voer het vergoedingspercentage in.
+                max_range: 'De procentuele vergoeding mag niet groter zijn dan {{ limit }}.'
+                min_range: 'De procentuele vergoeding mag niet lager zijn dan {{ limit }}.'
+                not_blank: 'Voer het percentage van de vergoeding in.'
         code:
-            not_blank: 'Voer een betaalmethode code in.'
-            regex: 'Betalingsmethode kan alleen bestaan uit letters, cijfers, strepen en liggende strepen.'
-            unique: 'De betaalmethode met gegeven code bestaat reeds.'
+            max_length: 'De code mag niet langer zijn dan {{ limit }} tekens.'
+            not_blank: 'Voer de betaalmethodecode in.'
+            regex: 'De betaalmethodecode mag alleen uit letters, cijfers, streepjes en underscores bestaan.'
+            unique: 'De betaalmethode met de gegeven code bestaat al.'

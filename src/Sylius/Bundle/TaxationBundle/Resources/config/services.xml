@@ -25,8 +25,6 @@
     </parameters>
 
     <services>
-        <defaults public="true" />
-
         <service id="sylius.registry.tax_calculator" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>%sylius.tax_calculator.interface%</argument>
             <argument>Tax calculator</argument>
@@ -44,17 +42,15 @@
             <tag name="sylius.tax_calculator" calculator="decimal" />
         </service>
 
-        <service id="sylius.tax_rate_resolver" class="Sylius\Component\Taxation\Resolver\TaxRateResolver">
+        <service id="sylius.resolver.tax_rate" class="Sylius\Component\Taxation\Resolver\TaxRateResolver">
             <argument type="service" id="sylius.repository.tax_rate" />
             <argument type="service" id="sylius.checker.tax_rate_date_eligibility" on-invalid="null" />
         </service>
-        <service id="sylius.resolver.tax_rate" alias="sylius.tax_rate_resolver" />
-        <service id="Sylius\Component\Taxation\Resolver\TaxRateResolverInterface" alias="sylius.tax_rate_resolver" />
+        <service id="Sylius\Component\Taxation\Resolver\TaxRateResolverInterface" alias="sylius.resolver.tax_rate" />
 
-        <service id="sylius.tax_rate_date_eligibility_checker" class="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+        <service id="sylius.checker.tax_rate_date_eligibility" class="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityChecker">
+            <argument type="service" id="clock" />
         </service>
-        <service id="sylius.checker.tax_rate_date_eligibility" alias="sylius.tax_rate_date_eligibility_checker" />
-        <service id="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface" alias="sylius.tax_rate_date_eligibility_checker" />
+        <service id="Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface" alias="sylius.checker.tax_rate_date_eligibility" />
     </services>
 </container>

@@ -3,10 +3,60 @@
 
 sylius:
     form:
+        rule:
+            unit_count_configuration:
+                count: '개수'
+                equal: '같음'
+            type: '규칙 유형'
+        shipment:
+            state: '상태'
+            states:
+                checkout:   '체크아웃'
+                pending:    '보류 중'
+                ready:      '준비 완료'
+                shipped:    '배송됨'
+                returned:   '반품됨'
+                cancelled:  '취소됨'
+            tracking_code: '추적 코드'
+        shipping_calculator:
+            flat_rate_configuration:
+                label: '배송당 정액'
+                amount: '금액'
+            per_unit_rate_configuration:
+                label: '단위당 정액'
+                amount: '금액'
         shipping_category:
-            name: 이름
+            description: '설명'
+            name: '이름'
         shipping_method:
-            enabled: 사용
-            name: 이름
+            add_rule: '규칙 추가'
+            calculator: '계산기'
+            category: '카테고리'
+            category_requirement: '카테고리 요구 사항'
+            channels: '채널'
+            configuration: '구성'
+            description: '설명'
+            enabled: '사용'
+            match_all_category_requirement: '모든 단위가 방법 카테고리에 일치해야 합니다'
+            match_any_category_requirement: '최소 한 개 단위가 방법 카테고리에 일치해야 합니다'
+            match_none_category_requirement: '어떤 단위도 방법 카테고리에 일치할 필요 없습니다'
+            name: '이름'
+            position: '위치'
+            rules: '규칙'
+            rules_help: >-
+                규칙을 사용하여 이 배송 방법이 특정 주문에 적용될 수 있는지 결정합니다.
+                규칙이 참이면 이 배송 방법을 적용할 수 있습니다. 여러 규칙을 추가한 경우
+                모든 규칙이 참이어야 합니다.
+            select_calculator: '계산기 선택'
+            tax_category: '세금 카테고리'
+            translations: '번역'
         shipping_method_rule:
-            type: 타입
+            items_total_greater_than_or_equal: '아이템 합계 이상'
+            items_total_less_than_or_equal: '아이템 합계 이하'
+            type: '유형'
+            total: '합계'
+            total_weight_greater_than_or_equal: '총 무게 이상'
+            total_weight_less_than_or_equal: '총 무게 이하'
+            weight: '무게'
+            amount: '금액'
+            select: '규칙 유형 선택'

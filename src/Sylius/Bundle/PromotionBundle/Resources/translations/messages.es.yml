@@ -19,13 +19,13 @@ sylius:
             priority: Prioridad
             rules: Reglas
             starts_at: Fecha de inicio
-            usage_limit: límite de uso de la promoción
+            usage_limit: Límite de uso de la promoción
         promotion_action:
             item_fixed_discount: Descuento fijo en producto
-            item_percentage_discount: Porcentaje descuento en producto
+            item_percentage_discount: Descuento en porcentaje en producto
             order_fixed_discount: Descuento fijo en pedido
-            order_percentage_discount: Porcentaje descuento en pedido
-            shipping_percentage_discount: Porcentaje descuento en gastos de envío
+            order_percentage_discount: Descuento en porcentaje en pedido
+            shipping_percentage_discount: Descuento en porcentaje en gastos de envío
             fixed_discount_configuration:
                 amount: Cantidad
             percentage_discount_configuration:
@@ -33,24 +33,24 @@ sylius:
             type: Tipo
         promotion_coupon:
             expires_at: Caduca el
-            usage_limit: límite de uso de la promoción
+            usage_limit: Límite de uso de la promoción
         promotion_coupon_generator_instruction:
             amount: Cantidad
             code_length: Longitud del código
             expires_at: Caduca el
             prefix: Prefijo
             suffix: Sufijo
-            usage_limit: límite de uso de la promoción
+            usage_limit: Límite de uso de la promoción
         promotion_filter:
             price_range: Filtro de rango de precio
         promotion_rule:
-            cart_quantity: Cantidad productos en carrito
+            cart_quantity: Cantidad de productos en carrito
             contains_product: Contiene el producto
             customer_group: Grupo de clientes
             has_at_least_one_from_taxons: Tiene al menos uno de los taxones
-            item_total: Total productos
+            item_total: Total de productos
             nth_order: Pedido Nº
-            shipping_country: País origen
+            shipping_country: País de envío
             taxonomy: Taxonomía
             total_price_of_items_from_taxon: Precio total en productos del taxón
             cart_quantity_configuration:

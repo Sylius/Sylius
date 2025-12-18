@@ -35,7 +35,7 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
         ;
     }
 
-    public function findOneByOrderId($shipmentId, $orderId): ?ShipmentInterface
+    public function findOneByOrderId(mixed $shipmentId, mixed $orderId): ?ShipmentInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :shipmentId')
@@ -47,7 +47,7 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
         ;
     }
 
-    public function findOneByOrderTokenAndChannel($shipmentId, string $tokenValue, ChannelInterface $channel): ?ShipmentInterface
+    public function findOneByOrderTokenAndChannel(mixed $shipmentId, string $tokenValue, ChannelInterface $channel): ?ShipmentInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'orders')
@@ -62,7 +62,7 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
         ;
     }
 
-    public function findOneByCustomer($id, CustomerInterface $customer): ?ShipmentInterface
+    public function findOneByCustomer(mixed $id, CustomerInterface $customer): ?ShipmentInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'ord')
@@ -71,6 +71,22 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
             ->andWhere('customer = :customer')
             ->setParameter('id', $id)
             ->setParameter('customer', $customer)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneByCustomerAndOrderToken(mixed $id, CustomerInterface $customer, string $token): ?ShipmentInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.order', 'ord')
+            ->innerJoin('ord.customer', 'customer')
+            ->andWhere('o.id = :id')
+            ->andWhere('customer = :customer')
+            ->andWhere('ord.tokenValue = :token')
+            ->setParameter('id', $id)
+            ->setParameter('customer', $customer)
+            ->setParameter('token', $token)
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -86,6 +102,20 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
             ->setParameter('localeCode', $locale)
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    public function countReadyByChannel(ChannelInterface $channel): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->innerJoin('o.order', 'orders')
+            ->andWhere('o.state = :state')
+            ->andWhere('orders.channel = :channel')
+            ->setParameter('state', ShipmentInterface::STATE_READY)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getSingleScalarResult()
         ;
     }
 }

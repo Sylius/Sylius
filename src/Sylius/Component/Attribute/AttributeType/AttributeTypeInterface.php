@@ -22,6 +22,7 @@ interface AttributeTypeInterface
 
     public function getType(): string;
 
+    /** @param array<string, mixed> $configuration */
     public function validate(
         AttributeValueInterface $attributeValue,
         ExecutionContextInterface $context,

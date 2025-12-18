@@ -4,48 +4,68 @@
 sylius:
     address:
         city:
-            not_blank: Prosím zadajte mesto.
+            max_length: 'Mesto nesmie mať viac než {{ limit }} znakov.|Mesto nesmie mať viac než {{ limit }} znakov.'
+            min_length: 'Mesto musí mať aspoň {{ limit }} znakov.|Mesto musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte mesto.'
         country:
-            not_blank: Prosím vyberte krajinu.
-            disabled: Vybraná krajina nie aktivovaná. Prosím vyberte inú.
+            not_blank: 'Prosím, vyberte krajinu.'
+            disabled: 'Vybraná krajina je neaktívna. Prosím, vyberte inú krajinu.'
         first_name:
-            not_blank: Prosím zadajte Vaše meno.
+            max_length: 'Krstné meno nesmie mať viac než {{ limit }} znakov.|Krstné meno nesmie mať viac než {{ limit }} znakov.'
+            min_length: 'Krstné meno musí mať aspoň {{ limit }} znakov.|Krstné meno musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte krstné meno.'
         last_name:
-            not_blank: Prosím zadajte Vaše priezvisko.
+            max_length: 'Priezvisko nesmie mať viac než {{ limit }} znakov.|Priezvisko nesmie mať viac než {{ limit }} znakov.'
+            min_length: 'Priezvisko musí mať aspoň {{ limit }} znakov.|Priezvisko musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte priezvisko.'
         postcode:
-            not_blank: Prosím zadajte Vaše PSČ.
+            max_length: 'PSČ nesmie mať viac než {{ limit }} znakov.|PSČ nesmie mať viac než {{ limit }} znakov.'
+            min_length: 'PSČ musí mať aspoň {{ limit }} znakov.|PSČ musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte PSČ.'
         province:
-            valid: Prosím vyberte správnu provinciu.
+            valid: 'Prosím, vyberte správny kraj.'
         street:
-            not_blank: Prosím zadajte ulicu.
-        not_shippable: Adresa nie je platná pre doručenie.
+            max_length: 'Ulica nesmie mať viac než {{ limit }} znakov.|Ulica nesmie mať viac než {{ limit }} znakov.'
+            min_length: 'Ulica musí mať aspoň {{ limit }} znakov.|Ulica musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte ulicu.'
+        not_shippable: 'Táto adresa nie je platná pre doručenie.'
     country:
         code:
-            not_blank: Prosím zadajte ISO kód krajiny.
-            regex: Kód krajiny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: ISO kód krajiny musí byť jedinečný.
+            not_blank: 'Prosím, zadajte ISO kód krajiny.'
+            unique: 'ISO kód krajiny musí byť jedinečný.'
+            country: 'ISO kód krajiny je neplatný.'
+        unique_provinces: 'Všetky kraje v tejto krajine musia mať jedinečné kódy a názvy.'
     province:
         code:
-            min_length: Kód provincie musí obsahovať aspoň 5 znakov|Kód provincie musí obsahovať aspoň 5 znakov.
-            not_blank: Prosím zadajte kód provincie.
-            regex: Kód provincie musí mať nasledujúci formát XX-XX (napr USA-FL).
-            unique: Kód provincie musí byť jedinečný.
+            max_length: 'Kód nesmie mať viac než {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte kód kraja.'
+            regex: 'Kód kraja by mal mať formát XX-XX (napr.: SK-BA).'
+            unique: 'Kód kraja musí byť jedinečný.'
         name:
-            not_blank: Prosím zadajte názov provincie.
-            unique: Názov provincie musí byť jedinečný.
+            max_length: 'Názov kraja nesmie mať viac než {{ limit }} znakov.|Názov kraja nesmie mať viac než {{ limit }} znakov.'
+            min_length: 'Názov kraja musí mať aspoň {{ limit }} znakov.|Názov kraja musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte názov kraja.'
+            unique: 'Názov kraja musí byť jedinečný.'
     zone:
         scope:
-            not_blank: Prosím, zadajte oblasť.
+            not_blank: 'Prosím, zadajte rozsah.'
         code:
-            not_blank: Prosím zadajte kód zóny.
-            regex: Kód zóny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: Kód zóny musí byť jedinečný.
+            max_length: 'Kód nesmie mať viac než {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte kód zóny.'
+            regex: 'Kód zóny môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            unique: 'Kód zóny musí byť jedinečný.'
+        type:
+            invalid: 'Typ {{ value }} je neplatný. Povolené typy sú: {{ choices }}.'
         members:
-            min_count: Prosím pridajte zóne aspoň {{ limit }} členov.
+            min_count: 'Prosím, pridajte aspoň {{ limit }} člena zóny.'
         name:
-            not_blank: Prosím zadajte názov zóny.
+            max_length: 'Názov zóny nesmie mať viac než {{ limit }} znakov.|Názov zóny nesmie mať viac než {{ limit }} znakov.'
+            min_length: 'Názov zóny musí mať aspoň {{ limit }} znakov.|Názov zóny musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Prosím, zadajte názov zóny.'
     zone_member:
+        cannot_be_the_same_as_zone: 'Člen zóny nemôže byť rovnaký ako zóna.'
         code:
-            not_blank: Prosím zvolte členom zóny.
-            regex: Kód člena zóny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-        unique: Vybraný člen zóny je už v tejto zóne.
+            max_length: 'Kód člena zóny nesmie mať viac než {{ limit }} znakov.'
+            not_blank: 'Prosím, vyberte člena zóny.'
+            regex: 'Kód člena zóny môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+        unique: 'Vybraný člen zóny je už v tejto zóne.'

@@ -17,14 +17,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.shop.locale_switcher" class="Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher" public="false">
+        <service id="sylius_shop.locale_switcher" class="Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher">
             <argument type="service" id="router" />
         </service>
-        <service id="sylius_shop.locale_switcher" alias="sylius.shop.locale_switcher" />
 
-        <service id="sylius.listener.non_channel_request_locale" class="Sylius\Bundle\ShopBundle\EventListener\NonChannelLocaleListener">
+        <service id="sylius_shop.listener.non_channel_locale" class="Sylius\Bundle\ShopBundle\EventListener\NonChannelLocaleListener" public="true">
             <argument type="service" id="router" />
             <argument type="service" id="sylius.provider.locale" />
             <argument type="service" id="security.firewall.map" />
@@ -33,6 +30,5 @@
             </argument>
             <tag name="kernel.event_listener" event="kernel.request" method="restrictRequestLocale" priority="10"/>
         </service>
-        <service id="sylius_shop.listener.non_channel_locale" alias="sylius.listener.non_channel_request_locale" />
     </services>
 </container>

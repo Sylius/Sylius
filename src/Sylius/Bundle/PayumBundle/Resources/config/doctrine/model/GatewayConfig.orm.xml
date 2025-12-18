@@ -15,10 +15,12 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-        >
+>
     <mapped-superclass name="Sylius\Bundle\PayumBundle\Model\GatewayConfig" table="sylius_gateway_config">
-        <id name="id" column="id" type="integer">
-            <generator strategy="AUTO" />
-        </id>
+        <field type="boolean" name="usePayum" column="use_payum" >
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
     </mapped-superclass>
 </doctrine-mapping>

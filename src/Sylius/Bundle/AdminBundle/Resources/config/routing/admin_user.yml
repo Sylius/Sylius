@@ -3,18 +3,13 @@ sylius_admin_admin_user:
         alias: sylius.admin_user
         section: admin
         path: users
-        templates: "@SyliusAdmin\\Crud"
+        templates: "@SyliusAdmin\\shared\\crud"
         except: ['show']
         redirect: index
         grid: sylius_admin_admin_user
+        form:
+            type: Sylius\Bundle\AdminBundle\Form\Type\AdminUserType
         permission: true
-        vars:
-            all:
-                subheader: sylius.ui.manage_users_able_to_access_administration_panel
-                templates:
-                    form: "@SyliusAdmin/AdminUser/_form.html.twig"
-            index:
-                icon: lock
     type: sylius.resource
 
 sylius_admin_admin_user_remove_avatar:

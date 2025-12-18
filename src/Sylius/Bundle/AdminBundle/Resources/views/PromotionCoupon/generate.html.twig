@@ -1,9 +1,0 @@
-{% extends '@SyliusAdmin/layout.html.twig' %}
-
-{% set header = 'sylius.ui.generate_coupons' %}
-
-{% block title %}{{ header|trans }} {{ parent() }}{% endblock %}
-
-{% block content %}
-    {{ sylius_template_event('sylius.admin.promotion_coupon.generate.content', _context) }}
-{% endblock %}

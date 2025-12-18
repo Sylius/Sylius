@@ -35,6 +35,11 @@ final class ProductVariantsMapProvider implements ProductVariantsMapProviderInte
         return $variantsMap;
     }
 
+    /**
+     * @param array<string, mixed> $context
+     *
+     * @return array<array-key, mixed>
+     */
     private function getMapForVariant(ProductVariantInterface $variant, array $context): array
     {
         $data = [];

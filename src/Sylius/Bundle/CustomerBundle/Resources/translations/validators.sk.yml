@@ -4,27 +4,31 @@
 sylius:
     customer:
         first_name:
-            max: Meno nesmie byť dlhšie ako {{ limit }} znakov.
-            min: Meno musí obsahovať minimálne {{ limit }} znakov.
-            not_blank: Zadajte Vaše krstné meno.
+            max: 'Krstné meno nesmie byť dlhšie ako {{ limit }} znakov.'
+            min: 'Krstné meno musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Zadajte svoje krstné meno.'
         last_name:
-            max: Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.
-            min: Priezvisko musí obsahovať minimálne {{ limit }} znakov.
-            not_blank: Zadajte Vaše priezvisko.
+            max: 'Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.'
+            min: 'Priezvisko musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Zadajte svoje priezvisko.'
         gender:
-            not_blank: Pohlavie musí byť vyplnené.
+            not_blank: 'Vyberte svoje pohlavie.'
         email:
-            already_used: Tento e-mail sa už používa, prosím prihláste sa alebo použite reset hesla.
-            max: E-mail nesmie byť dlhší ako {{ limit }} znakov.
-            not_blank: Zadajte Váš e-mail.
-            invalid: Tento e-mail je neplatný.
-            unique: Tento e-mail sa už používa.
-            registered: Tento e-mail je už registrovaný, prosím prihláste sa alebo použite reset hesla.
+            already_used: 'Tento e-mail je už použitý, prihláste sa alebo použite zabudnuté heslo.'
+            max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'
+            not_blank: 'Zadajte svoj e-mail.'
+            invalid: 'Tento e-mail je neplatný.'
+            unique: 'Tento e-mail je už použitý.'
+            registered: 'Tento e-mail je už zaregistrovaný, prihláste sa alebo použite zabudnuté heslo.'
+        phone_number:
+            max: 'Telefónne číslo nesmie byť dlhšie ako {{ limit }} znakov.'
     customer_group:
         code:
-            regex: Kód zákazníckej skupiny môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: Kód zákazníckej skupiny musí byť jedinečný.
+            max_length: 'Kód skupiny zákazníkov nesmie byť dlhší ako {{ limit }} znakov.'
+            regex: 'Kód skupiny zákazníkov môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            unique: 'Kód skupiny zákazníkov musí byť jedinečný.'
+            not_blank: 'Zadajte kód skupiny zákazníkov.'
         name:
-            max: Názov zákazníckej skupiny nesmie byť dlhší ako {{ limit }} znakov.
-            min: Názov zákazníckej skupiny musí mať minimálne {{ limit }} znakov.
-            not_blank: Prosím, zadajte názov zákazníckej skupiny.
+            max: 'Názov skupiny zákazníkov nesmie byť dlhší ako {{ limit }} znakov.'
+            min: 'Názov skupiny zákazníkov musí mať aspoň {{ limit }} znakov.'
+            not_blank: 'Zadajte názov skupiny zákazníkov.'

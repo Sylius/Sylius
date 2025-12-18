@@ -1,0 +1,36 @@
+{
+    "@context": "\/api\/v2\/contexts\/ProductOptionValue",
+    "@id": "\/api\/v2\/admin\/product-options\/COLOR\/values",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 2,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_BLUE",
+            "@type": "ProductOptionValue",
+            "code": "COLOR_BLUE",
+            "option": "\/api\/v2\/admin\/product-options\/COLOR",
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-option-values\/COLOR_BLUE\/translations\/en_US",
+                    "@type": "ProductOptionValueTranslation",
+                    "value": "Blue"
+                }
+            },
+            "value": "Blue"
+        },
+        {
+            "@id": "\/api\/v2\/admin\/product-options\/COLOR\/values\/COLOR_RED",
+            "@type": "ProductOptionValue",
+            "code": "COLOR_RED",
+            "option": "\/api\/v2\/admin\/product-options\/COLOR",
+            "translations": {
+                "en_US": {
+                    "@id": "\/api\/v2\/admin\/product-option-values\/COLOR_RED\/translations\/en_US",
+                    "@type": "ProductOptionValueTranslation",
+                    "value": "Red"
+                }
+            },
+            "value": "Red"
+        }
+    ]
+}

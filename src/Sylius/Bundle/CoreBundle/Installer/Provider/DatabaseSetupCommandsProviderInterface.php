@@ -19,5 +19,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 interface DatabaseSetupCommandsProviderInterface
 {
+    /** @return array<string, array<mixed>> */
     public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array;
 }

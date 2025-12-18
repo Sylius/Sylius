@@ -1,59 +1,82 @@
 # This file is part of the Sylius package.
 # (c) Sylius Sp. z o.o.
-
 sylius:
     form:
         catalog_promotion:
-            description: Beskrivning
-            name: Namn
-            priority: Prioritet
+            action:
+                fixed_discount: 'Fast rabatt'
+                percentage_discount: 'Procentuell rabatt'
+            description: 'Beskrivning'
+            enabled: 'Aktiverad'
+            end_date: 'Slutdatum'
+            label: 'Etikett'
+            name: 'Namn'
+            priority: 'Prioritet'
+            start_date: 'Startdatum'
+            translations: 'Översättningar'
         promotion:
-            actions: Åtgärder
-            add_action: Lägg till åtgärd
-            add_rule: Lägg till regel
-            coupon_based: Kupongbaserad
-            description: Beskrivning
-            ends_at: Slutar vid
-            exclusive: Exklusiv
-            name: Namn
-            priority: Prioritet
-            rules: Regler
-            starts_at: Startar vid
-            usage_limit: Användningsbegränsning
+            actions: 'Åtgärder'
+            add_action: 'Lägg till åtgärd'
+            add_rule: 'Lägg till regel'
+            applies_to_discounted: 'Tillämpas på redan rabatterade orderrader'
+            applies_to_discounted_details: 'Med detta alternativ tillämpas kundvagnskampanjen på orderrader som redan rabatterats av katalogkampanj(er).'
+            coupon_based: 'Baserad på kupong'
+            description: 'Beskrivning'
+            ends_at: 'Slutar'
+            exclusive: 'Exklusiv'
+            label: 'Etikett'
+            name: 'Namn'
+            priority: 'Prioritet'
+            rules: 'Regler'
+            starts_at: 'Startar'
+            usage_limit: 'Användningsgräns'
         promotion_action:
-            order_percentage_discount: Beställning procentrabatt
+            item_fixed_discount: 'Fast rabatt per rad'
+            item_percentage_discount: 'Procentuell rabatt per rad'
+            order_fixed_discount: 'Fast rabatt på order'
+            order_percentage_discount: 'Procentuell rabatt på order'
+            shipping_percentage_discount: 'Procentuell rabatt på frakt'
+            filters: 'Filter'
             fixed_discount_configuration:
-                amount: Antal
+                amount: 'Belopp'
             percentage_discount_configuration:
-                percentage: Procentandel
-            type: Typ
+                percentage: 'Procent'
+            type: 'Typ'
         promotion_coupon:
-            expires_at: Förfaller den
-            usage_limit: Användningsbegränsning
+            expires_at: 'Giltig till'
+            usage_limit: 'Användningsgräns'
         promotion_coupon_generator_instruction:
-            amount: Belopp
-            code_length: Kodlängd
-            expires_at: Förfaller den
-            usage_limit: Användningsbegränsning
+            amount: 'Antal'
+            code_length: 'Kodlängd'
+            expires_at: 'Giltig till'
+            prefix: 'Prefix'
+            suffix: 'Suffix'
+            usage_limit: 'Användningsgräns'
+        promotion_filter:
+            price_range: 'Prisintervallfilter'
         promotion_rule:
-            cart_quantity: Antal artiklar
-            contains_product: Innehåller produkt
-            customer_group: Kundgrupp
-            has_at_least_one_from_taxons: Har åtminstone en från taxa
-            item_total: Artiklars totala värde
-            shipping_country: Leveransland
-            taxonomy: Taxonomi
+            cart_quantity: 'Kvantitet i kundvagn'
+            contains_product: 'Innehåller produkt'
+            customer_group: 'Kundgrupp'
+            has_at_least_one_from_taxons: 'Har minst en från taxon'
+            item_total: 'Varusumma'
+            nth_order: 'n:e order'
+            shipping_country: 'Leveransland'
+            taxonomy: 'Taxonomi'
+            total_price_of_items_from_taxon: 'Totalt pris för artiklar från taxon'
             cart_quantity_configuration:
-                count: Antal
-                equal: Lika
+                count: 'Antal'
+                equal: 'Lika med'
             contains_product_configuration:
-                exclude: Exkludera
-                variants: Produkter
+                exclude: 'Exkludera'
+                variants: 'Produkter'
             item_total_configuration:
-                amount: Belopp
+                amount: 'Belopp'
+            nth_order_configuration:
+                nth: 'n:e'
             shipping_country_configuration:
-                country: Land
+                country: 'Land'
             taxonomy_configuration:
-                exclude: Exkludera
-                taxons: Taxa
-            type: Typ
+                exclude: 'Exkludera'
+                taxons: 'Taxon'
+            type: 'Typ'

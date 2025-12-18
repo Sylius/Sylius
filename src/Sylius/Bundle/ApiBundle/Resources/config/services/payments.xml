@@ -19,10 +19,9 @@
     <services>
         <defaults public="true" />
 
-        <service id="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration">
+        <service id="sylius_api.controller.payment.get_payment_configuration" class="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius_api.provider.payment_configuration" />
         </service>
-        <service id="sylius_api.controller.payment.get_payment_configuration" alias="Sylius\Bundle\ApiBundle\Controller\Payment\GetPaymentConfiguration" />
     </services>
 </container>

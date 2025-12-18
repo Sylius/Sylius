@@ -1,0 +1,83 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        catalog_promotion:
+            action:
+                fixed_discount: 'फिक्स्ड छूट'
+                percentage_discount: 'प्रतिशत छूट'
+            description: 'विवरण'
+            enabled: 'सक्रिय'
+            end_date: 'समाप्ति तिथि'
+            label: 'लेबल'
+            name: 'नाम'
+            priority: 'प्राथमिकता'
+            start_date: 'प्रारंभ तिथि'
+            translations: 'अनुवाद'
+        promotion:
+            actions: 'क्रियाएँ'
+            add_action: 'क्रिया जोड़ें'
+            add_rule: 'नियम जोड़ें'
+            applies_to_discounted: 'पहले से छूट वाले ऑर्डर आइटम्स पर लागू होता है'
+            applies_to_discounted_details: 'इस विकल्प के साथ कार्ट प्रमोशन कैटलॉग प्रमोशन द्वारा पहले से ही छूट पाए ऑर्डर आइटम्स पर भी लागू होगा।'
+            coupon_based: 'कूपन आधारित'
+            description: 'विवरण'
+            ends_at: 'समाप्त होता है'
+            exclusive: 'एक्सक्लूसिव'
+            label: 'लेबल'
+            name: 'नाम'
+            priority: 'प्राथमिकता'
+            rules: 'नियम'
+            starts_at: 'प्रारंभ होता है'
+            usage_limit: 'उपयोग सीमा'
+        promotion_action:
+            item_fixed_discount: 'आइटम फिक्स्ड छूट'
+            item_percentage_discount: 'आइटम प्रतिशत छूट'
+            order_fixed_discount: 'ऑर्डर फिक्स्ड छूट'
+            order_percentage_discount: 'ऑर्डर प्रतिशत छूट'
+            shipping_percentage_discount: 'शिपिंग प्रतिशत छूट'
+            filters: 'फ़िल्टर'
+            fixed_discount_configuration:
+                amount: 'राशि'
+            percentage_discount_configuration:
+                percentage: 'प्रतिशत'
+            type: 'प्रकार'
+        promotion_coupon:
+            expires_at: 'समाप्ति'
+            usage_limit: 'उपयोग सीमा'
+        promotion_coupon_generator_instruction:
+            amount: 'मात्रा'
+            code_length: 'कोड लंबाई'
+            expires_at: 'समाप्ति'
+            prefix: 'उपसर्ग'
+            suffix: 'प्रत्यय'
+            usage_limit: 'उपयोग सीमा'
+        promotion_filter:
+            price_range: 'मूल्य सीमा फ़िल्टर'
+        promotion_rule:
+            cart_quantity: 'कार्ट मात्रा'
+            contains_product: 'उत्पाद शामिल करता है'
+            customer_group: 'ग्राहक समूह'
+            has_at_least_one_from_taxons: 'कम से कम एक टैक्सन से'
+            item_total: 'आइटम कुल'
+            nth_order: 'एनवाँ ऑर्डर'
+            shipping_country: 'शिपिंग देश'
+            taxonomy: 'टैक्सोनॉमी'
+            total_price_of_items_from_taxon: 'टैक्सन से आइटम का कुल मूल्य'
+            cart_quantity_configuration:
+                count: 'गिनती'
+                equal: 'बराबर'
+            contains_product_configuration:
+                exclude: 'बहिष्कृत'
+                variants: 'उत्पाद'
+            item_total_configuration:
+                amount: 'राशि'
+            nth_order_configuration:
+                nth: 'एनवाँ'
+            shipping_country_configuration:
+                country: 'देश'
+            taxonomy_configuration:
+                exclude: 'बहिष्कृत'
+                taxons: 'टैक्सन्स'
+            type: 'प्रकार'

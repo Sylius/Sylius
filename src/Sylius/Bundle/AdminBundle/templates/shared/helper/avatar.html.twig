@@ -1,0 +1,11 @@
+{% macro default(img, class) %}
+    <span class="sylius avatar {{ class }}" {% if img %} style="background-image: url({{ img }})" {% endif %}>
+        {% if img is not defined or img is empty %}
+            {{ ux_icon('tabler:user') }}
+        {% endif %}
+    </span>
+{% endmacro %}
+
+{% macro small(img, class) %}
+    {{ _self.default(img,  'avatar-sm ' ~ class) }}
+{% endmacro %}

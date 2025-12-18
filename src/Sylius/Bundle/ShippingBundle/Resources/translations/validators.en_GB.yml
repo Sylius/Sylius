@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    shipping_category:
+        name:
+            max_length: 'Category name must not be longer than {{ limit }} characters.'
+            min_length: 'Category name must be at least {{ limit }} characters long.'
+            not_blank: 'Please enter shipping category name.'
+        code:
+            max_length: 'The code must not be longer than {{ limit }} characters.'
+            not_blank: 'Please enter shipping category code.'
+            regex: 'Shipping category code can only be comprised of letters, numbers, dashes and underscores.'
+            unique: 'The shipping category with given code already exists.'
+
+    shipping_method:
+        calculator:
+            min: 'Shipping charge cannot be lower than 0.'
+            not_blank: 'Please select shipping method calculator.'
+            invalid: 'Invalid calculator. Available calculators are {{ available_calculators }}.'
+        name:
+            max_length: 'Shipping method name must not be longer than {{ limit }} characters.'
+            min_length: 'Shipping method name must be at least {{ limit }} characters long.'
+            not_blank: 'Please enter shipping method name.'
+        code:
+            max_length: 'The code must not be longer than {{ limit }} characters.'
+            not_blank: 'Please enter shipping method code.'
+            regex: 'Shipping method code can only be comprised of letters, numbers, dashes and underscores.'
+            unique: 'The shipping method with given code already exists.'
+        zone:
+            not_blank: 'Please select shipping method zone.'
+        rule:
+            invalid_type: 'Invalid rule type. Available rule types are {{ available_rule_types }}.'
+
+    shipment:
+        shipping_method:
+            not_blank: 'Please select shipping method.'

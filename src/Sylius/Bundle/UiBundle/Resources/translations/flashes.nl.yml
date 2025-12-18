@@ -3,28 +3,30 @@
 
 sylius:
     channel:
-        delete_error: 'Deze kanaal kan niet worden verwijderd, ten minste één ingeschakeld kanaal is vereist.'
+        delete_error: 'Het kanaal kan niet worden verwijderd. Ten minste één ingeschakeld kanaal is vereist.'
     checkout:
-        complete_error: 'Er was een onverwacht probleem met het voltooien van de order. Probeer uw bestelling opnieuw te plaatsen.'
+        complete_error: 'Er was een onverwacht probleem bij het afronden van een bestelling. Probeer je bestelling opnieuw te plaatsen.'
     contact:
-        request_success: 'Uw contactverzoek is succesvol ingediend.'
-        request_error: 'Er is een probleem opgetreden tijdens het verzenden van de contactverzoek. Probeert u het later nogmaals.'
+        request_success: 'Je contactverzoek is succesvol ingediend.'
+        request_error: 'Er is een probleem opgetreden bij het verzenden van het contactverzoek. Probeer het later opnieuw.'
     customer:
         add_address: 'Adres is succesvol toegevoegd.'
-        impersonate: 'Succesvol geimpersoneerd als klant %name%.'
+        impersonate: 'Klant %name% is succesvol geïmiteerd.'
         set_address_as_default: 'Adres is ingesteld als standaard.'
     order:
-        apply_state_machine_transition_error: 'Er was een onverwacht probleem met het bijwerken van de bestelling. Probeer alstublieft de bestelling opnieuw te bewerken.'
-        promotion_integrity: 'U komt helaas niet langer in aanmerking voor deze aanbieding %promotionName%.'
-        total_integrity: 'Uw order totaal is gewijzigd, controleer uw bestelling en bevestig het opnieuw.'
-        update_error: 'Er was een onverwacht probleem met het bijwerken van de bestelling. Probeer alstublieft de bestelling opnieuw te bewerken.'
+        apply_state_machine_transition_error: 'Er was een onverwacht probleem bij het bijwerken van een bestelling. Probeer de bestelling opnieuw bij te werken.'
+        promotion_integrity: 'Je komt niet langer in aanmerking voor deze promotie %promotionName%.'
+        total_integrity: 'Je bestelsom is gewijzigd, controleer je bestelgegevens en bevestig opnieuw.'
+        update_error: 'Er was een onverwacht probleem bij het bijwerken van een bestelling. Probeer de bestelling opnieuw bij te werken.'
     payment:
-        apply_state_machine_transition_error: 'Er was een onverwacht probleem met het bijwerken van een betaling. Probeer de betaling opnieuw bij te werken.'
+        apply_state_machine_transition_error: 'Er was een onverwacht probleem bij het bijwerken van een betaling. Probeer de betaling opnieuw bij te werken.'
     product:
-        out_of_stock: 'Er is alleen %quantity% van dit product in de voorraad.'
+        in_use_by_promotion_rule: 'Kan een product niet verwijderen dat in gebruik is door een promotie regel.'
+        out_of_stock: 'Er is slechts %quantity% van dit product op voorraad.'
     product_variant:
-        update_error: 'Er was een onverwacht probleem met het bijwerken van de product variant. Probeer de product variant nogmaals bij te werken.'
+        update_error: 'Er was een onverwacht probleem bij het bijwerken van een productvariant. Probeer de productvariant opnieuw bij te werken.'
     promotion:
         update_rules: 'Sommige regels van de promoties met codes %codes% zijn bijgewerkt.'
     taxon:
-        menu_taxon_delete: 'Je kan geen menu categorie van een kanaal verwijderen.'
+        in_use_by_promotion_rule: 'Kan een taxon niet verwijderen dat in gebruik is door een promotie regel.'
+        menu_taxon_delete: 'Je kunt een menu taxon van een kanaal niet verwijderen.'

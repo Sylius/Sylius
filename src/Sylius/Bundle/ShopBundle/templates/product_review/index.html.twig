@@ -1,0 +1,5 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% block content %}
+    {% hook 'sylius.shop.product_review.index' with { product_reviews } %}
+{% endblock %}

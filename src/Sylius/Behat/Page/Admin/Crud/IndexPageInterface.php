@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Crud;
 
 use Behat\Mink\Element\NodeElement;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface IndexPageInterface extends SymfonyPageInterface
+interface IndexPageInterface extends SyliusPageInterface
 {
     public function isSingleResourceOnPage(array $parameters): bool;
 
@@ -25,6 +25,8 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function getColumnFields(string $columnName): array;
 
     public function sortBy(string $fieldName, ?string $order = null): void;
+
+    public function getCellForResource(string $header, array $parameters): NodeElement;
 
     public function deleteResourceOnPage(array $parameters): void;
 

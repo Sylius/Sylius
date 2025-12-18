@@ -1,0 +1,16 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\ProductReview\FormComponent #}
+{% import '@SyliusShop/shared/macro/loader.html.twig' as loader %}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+<div {{ attributes }} class="mb-4 position-relative">
+    {{ loader.render() }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+    {% hook 'form' with { form } %}
+
+    {{ form_errors(form) }}
+
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

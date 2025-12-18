@@ -51,6 +51,7 @@ final class AdminUserType extends UserType
         return 'sylius_admin_user';
     }
 
+    /** @return array<string, mixed> */
     private function provideLocaleCodeOptions(): array
     {
         $localeCodeOptions = [

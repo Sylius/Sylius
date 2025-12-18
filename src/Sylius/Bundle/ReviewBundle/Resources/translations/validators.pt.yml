@@ -4,10 +4,13 @@
 sylius:
     review:
         author:
-            already_exists: Este endereço de e-mail já se encontra registado. Faça login ou redefina a sua palavra-passe.
+            already_exists: 'Este e-mail já está registrado, faça login ou use a opção de recuperar senha.'
         comment:
-            not_blank: O comentário não deverá estar em branco.
+            not_blank: 'O comentário da avaliação não deve estar em branco.'
         rating:
-            not_blank: Deve verificar a classificação da avaliação.
+            not_blank: 'Você deve atribuir uma nota à avaliação.'
         title:
-            not_blank: O título do comentário não deve estar vazio.
+            not_blank: 'O título da avaliação não deve estar em branco.'
+            min_length: 'O título da avaliação deve ter pelo menos 2 caracteres.'
+            max_length: 'O título da avaliação deve ter no máximo 255 caracteres.'
+

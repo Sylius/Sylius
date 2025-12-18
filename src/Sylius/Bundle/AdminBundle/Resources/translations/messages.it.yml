@@ -4,46 +4,128 @@
 sylius:
     email:
         shipment_confirmation:
-            subject: 'Informazioni di spedizione'
+            has_been_sent_using: 'è stato inviato utilizzando'
+            subject: 'Conferma di spedizione'
+            thank_you_for_transaction: 'Grazie per la transazione riuscita.'
+            you_can_check_its_location_with_the_tracking_code: 'Puoi verificarne la posizione con il codice di tracciamento %tracking_code%.'
+            your_order_with_number: 'Il tuo ordine con il numero'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Mostrare il prezzo più basso dei prodotti sconto prima dell''attuale sconto?'
+                period_for_which_the_lowest_price_is_calculated: 'Periodo per il quale viene calcolato il prezzo più basso'
+            reset_password:
+                password:
+                    label: 'Nuova password'
+                    confirmation: 'Conferma nuova password'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: "Tipi di relazione\n"
-                    attributes: Attributi
-                    header: Catalogo
-                    inventory: Magazzino
-                    options: Opzioni
-                    products: Prodotti
-                    taxons: Taxons
+                    association_types: 'Tipi di associazione'
+                    attributes: 'Attributi'
+                    header: 'Catalogo'
+                    inventory: 'Inventario'
+                    options: 'Opzioni'
+                    products: 'Prodotti'
+                    taxons: 'Taxons'
                 configuration:
-                    admin_users: Amministratori
-                    channels: Canali
-                    countries: Paesi
-                    currencies: Valute
-                    exchange_rates: Tassi di cambio
-                    header: Configurazione
-                    locales: Localizzazioni
-                    payment_methods: Metodi di pagamento
-                    shipping_categories: Categorie spedizioni
-                    shipping_methods: Metodo di spedizione
-                    tax_categories: Categorie di tassazione
-                    tax_rates: Aliquote fiscali
-                    zones: Zone
+                    admin_users: 'Amministratori'
+                    channels: 'Canali'
+                    countries: 'Paesi'
+                    currencies: 'Valute'
+                    exchange_rates: 'Tassi di cambio'
+                    header: 'Configurazione'
+                    locales: 'Lingue'
+                    payment_methods: 'Metodi di pagamento'
+                    shipping_categories: 'Categorie di spedizione'
+                    shipping_methods: 'Metodi di spedizione'
+                    tax_categories: 'Categorie fiscali'
+                    tax_rates: 'Tassi fiscali'
+                    zones: 'Zone'
                 marketing:
-                    header: Marketing
-                    product_reviews: Recensioni del prodotto
-                    promotions: Promozioni
+                    cart_promotions: 'Promozioni del carrello'
+                    catalog_promotions: 'Promozioni del catalogo'
+                    header: 'Marketing'
+                    product_reviews: 'Recensioni prodotto'
+                    promotions: 'Promozioni'
                 customers:
-                    customers: Clienti
-                    groups: Gruppi
-                    header: Cliente
+                    customers: 'Clienti'
+                    groups: 'Gruppi'
+                    header: 'Clienti'
                 sales:
-                    header: Vendite
-                    orders: Ordini
+                    header: 'Vendite'
+                    orders: 'Ordini'
                 official_support:
-                    header: Supporto ufficiale
-                    sylius_plus: Sylius Plus
-                    browse_plugins: Sfoglia i plugin
-                    professional_services: Servizi professionali
-                    find_a_partner: Trova un partner
+                    header: 'Supporto ufficiale'
+                    browse_plugins: 'Sfoglia i plugin'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Servizi professionali'
+                    find_a_partner: 'Trova un partner'
+                    sylius_certification: 'Certificazione Sylius'
+    ui:
+        account: 'Account'
+        admin_user: 'Amministratore'
+        add_new_entry: 'Aggiungi una nuova voce'
+        back_to_dashboard: 'Torna alla dashboard'
+        catalog_promotion:
+            dates_details: 'Questa operazione richiede tempo! Si prega di considerare un ritardo da 2 a 10 minuti a partire dalle date specificate. Il ritardo dipende dalle dimensioni del catalogo.'
+        channel:
+            account_verification_required_details: 'Disabilitando questa opzione, sarà possibile creare account e accedervi senza la verifica dell''email e quindi accedere ai dati degli ordini effettuati come ospite.'
+        channel_pricing_history: 'Storico dei prezzi del canale'
+        channel_pricings: 'Prezzi dei canali'
+        create_new:
+            customer_group: 'Crea un nuovo gruppo di clienti'
+        delete_avatar: 'Elimina avatar'
+        full_screen: 'Schermo intero'
+        global: 'Globale'
+        ip_address: 'Indirizzo IP'
+        language: 'Lingua'
+        lowest_price_before_discount: 'Prezzo più basso prima dello sconto'
+        minimum_price_details: 'Prezzo minimo - questa è la soglia di prezzo al di sotto della quale il prezzo attuale non può essere scontato né dalle promozioni del catalogo né dal carrello. Usalo per proteggere la redditività delle tue vendite.'
+        more: 'Di più'
+        no_main_taxon: 'nessun taxon principale'
+        no_depth: 'Nessuna profondità'
+        no_height: 'Nessuna altezza'
+        no_results: 'Nessun risultato trovato'
+        no_results_adjust_your_search: 'Regola la tua ricerca e riprova.'
+        no_weight: 'Nessun peso'
+        no_width: 'Nessuna larghezza'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Data ordine'
+        original_price_details: 'Prezzo originale - questo è il prezzo della variante del prodotto. Viene visualizzato come barrato nel catalogo. È usato come base per i calcoli del prezzo attuale. Se questo valore non è definito, la logica delle Promozioni del Catalogo copierà il valore dal Prezzo al Prezzo Originale.'
+        original_product_price_details: 'Prezzo originale - questo è il prezzo del prodotto. Viene visualizzato come barrato nel catalogo. È usato come base per i calcoli del prezzo attuale. Se questo valore non è definito, la logica delle Promozioni del Catalogo copierà il valore dal Prezzo al Prezzo Originale.'
+        overdue: 'In ritardo'
+        page_not_found: 'Pagina non trovata'
+        pagination:
+            number_of_results: 'Mostrando da %from% a %to% di %total% voci'
+        partially_refunded: 'Parzialmente rimborsato'
+        pending_actions: 'Azioni in sospeso'
+        price_details: 'Prezzo - questo è il prezzo attuale della variante del prodotto visualizzato nel catalogo. Può essere modificato esplicitamente da, ad esempio, le promozioni del catalogo.'
+        product_price_details: 'Prezzo - questo è il prezzo attuale del prodotto visualizzato nel catalogo. Può essere modificato esplicitamente da, ad esempio, le promozioni del catalogo.'
+        price_history: 'Storico prezzi'
+        product:
+            product_not_active_in_channel: 'Il prodotto non è ancora attivato in questo canale.'
+        product_variant: 'Variante di prodotto'
+        sales_summary: 'Riepilogo vendite'
+        search_menu: 'Menu di ricerca'
+        shipment_for_order: 'Spedizione per ordine'
+        show_history_for_channel_pricing: 'Mostra la cronologia dei prezzi del canale'
+        start_typing_to_search: 'Inizia a digitare per cercare'
+        statistics:
+            day: 'Giorno'
+            lifetime: 'Durata'
+            month: 'Mese'
+            week: 'Settimana'
+            2weeks: '2 Settimane'
+            year: 'Anno'
+        taxon: 'Taxon'
+        to_approve: 'da approvare'
+        to_process: 'da elaborare'
+        to_ship: 'da spedire'
+        view_in_store: 'Visualizza in negozio'
+        work_in_progress: 'Lavoro in corso'
+        empty_date: 'vuoto'
+        notifications:
+            new_version_of_sylius_available: 'È disponibile una nuova versione di Sylius. Contatta il tuo tecnico per l''aggiornamento.'

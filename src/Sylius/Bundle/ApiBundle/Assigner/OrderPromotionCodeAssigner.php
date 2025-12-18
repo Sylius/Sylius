@@ -17,10 +17,10 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
-use Webmozart\Assert\Assert;
 
-final class OrderPromotionCodeAssigner implements OrderPromotionCodeAssignerInterface
+final readonly class OrderPromotionCodeAssigner implements OrderPromotionCodeAssignerInterface
 {
+    /** @param PromotionCouponRepositoryInterface<PromotionCouponInterface> $promotionCouponRepository */
     public function __construct(
         private PromotionCouponRepositoryInterface $promotionCouponRepository,
         private OrderProcessorInterface $orderProcessor,
@@ -29,26 +29,17 @@ final class OrderPromotionCodeAssigner implements OrderPromotionCodeAssignerInte
 
     public function assign(OrderInterface $cart, ?string $couponCode = null): OrderInterface
     {
-        $promotionCoupon = $this->getPromotionCoupon($couponCode);
+        $promotionCoupon = $couponCode === null
+            ? null
+            : $this->promotionCouponRepository->findOneBy(['code' => $couponCode]);
+
+        if ($couponCode !== null && $promotionCoupon === null) {
+            return $cart;
+        }
 
         $cart->setPromotionCoupon($promotionCoupon);
-
         $this->orderProcessor->process($cart);
 
         return $cart;
-    }
-
-    private function getPromotionCoupon(?string $code): ?PromotionCouponInterface
-    {
-        if ($code === null) {
-            return null;
-        }
-
-        /** @var PromotionCouponInterface $promotionCoupon */
-        $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $code]);
-
-        Assert::notNull($promotionCoupon);
-
-        return $promotionCoupon;
     }
 }

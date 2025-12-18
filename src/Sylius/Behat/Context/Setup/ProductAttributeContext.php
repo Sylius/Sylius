@@ -85,6 +85,16 @@ final class ProductAttributeContext implements Context
     }
 
     /**
+     * @Given /^(this product attribute) is not translatable$/
+     */
+    public function thisProductAttributeIsNotTranslatable(ProductAttributeInterface $productAttribute): void
+    {
+        $productAttribute->setTranslatable(false);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product attribute) has(?:| also) a value "([^"]+)" in ("[^"]+" locale)$/
      */
     public function thisProductAttributeHasAValueInLocale(

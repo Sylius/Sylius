@@ -1,0 +1,6 @@
+{% extends '@SyliusShop/account/common/show.html.twig' %}
+
+{% set prefixes = ['sylius_shop.account.order'] %}
+{% set attrs = { order } %}
+
+{% block title %}{{ 'sylius.ui.order'|trans }} #{{ order.number }} | {{ parent() }}{% endblock %}

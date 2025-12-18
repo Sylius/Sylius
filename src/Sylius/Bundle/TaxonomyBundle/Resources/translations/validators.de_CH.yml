@@ -4,18 +4,19 @@
 sylius:
     taxon:
         code:
-            not_blank: Bitte geben Sie einen Code für die Produktgruppe ein.
-            regex: Kategoriekürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
-            unique: Es existiert bereits eine Produktgruppe mit diesem Code.
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Taxon-Code ein.'
+            regex: 'Der Taxon-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Ein Taxon mit dem angegebenen Code existiert bereits.'
         name:
-            max_length: Taxon darf nicht länger als 255 Zeichen sein.
-            not_blank: Bitte Taxonname eingeben.
+            max_length: 'Der Name des Taxons darf höchstens 255 Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen des Taxons ein.'
         slug:
-            not_blank: Bitte eine Kategorie SEO-URL angeben.
-            unique: SEO-URL der Kategorie muss eindeutig sein.
+            not_blank: 'Bitte geben Sie den Taxon-Slug ein.'
+            unique: 'Der Taxon-Slug muss eindeutig sein.'
         parent:
             invalid_relation: 'Der übergeordnete Taxon darf weder der Taxon selbst noch einer seiner Nachkommen sein.'
     taxonomy:
         name:
-            max_length: Name darf nicht länger als 255 Zeichen sein.
-            not_blank: Bitte Taxonomienamen eingeben.
+            max_length: 'Der Name der Taxonomie darf höchstens 255 Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Taxonomie ein.'

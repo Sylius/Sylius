@@ -4,20 +4,20 @@
 sylius:
     currency:
         code:
-            exact_length: Valutakoden må være nøyaktig 3 tegn.
-            not_blank: Velg valutakode.
-            regex: Valutakode kan bare bestå av bokstaver, tall, bindestreker og understrekingstegn.
-            unique: Valutakoden må være unik.
+            not_blank: 'Vennligst velg valutakode.'
+            unique: 'Valutakoden må være unik.'
+            currency: 'Denne verdien er ikke en gyldig valutakode.'
         exchange_rate:
-            not_blank: Angi valutakurs.
+            not_blank: 'Vennligst oppgi vekslingskurs.'
     exchange_rate:
         ratio:
-            greater_than: Valutakurs må være større enn 0.
-            invalid: Valutakurs må være et tall.
-            not_blank: Vennligst oppgi vekslingskurs.
+            greater_than: 'Forholdet må være større enn {{ compared_value }}.'
+            less_than: 'Forholdet må være mindre enn {{ compared_value }}.'
+            invalid: 'Forholdet må være et tall.'
+            not_blank: 'Vennligst oppgi vekslingskursforhold.'
         source_currency:
-            not_blank: Vennligst oppgi hvilken valuta vekslingskursen skal hentes fra.
+            not_blank: 'Vennligst oppgi hvilken valuta vekslingskursen skal være basert på.'
         target_currency:
-            not_blank: Vennligst oppgi hvilken valuta vekslingskursen skal settes til.
-        unique_currency_pair: Valutaparet må være unikt.
-        different_source_target_currency: Til og fra valutakode kan ikke være like.
+            not_blank: 'Vennligst oppgi hvilken valuta vekslingskursen skal settes til.'
+        unique_currency_pair: 'Valutaparet må være unikt.'
+        different_source_target_currency: 'Kilde- og målvaluta må være forskjellige.'

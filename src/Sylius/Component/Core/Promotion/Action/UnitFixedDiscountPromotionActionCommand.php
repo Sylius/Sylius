@@ -37,6 +37,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         parent::__construct($adjustmentFactory);
     }
 
+    /** @param array<string, mixed> $configuration */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         if (!$subject instanceof OrderInterface) {

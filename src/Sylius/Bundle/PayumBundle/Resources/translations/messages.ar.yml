@@ -4,17 +4,9 @@
 sylius:
     form:
         gateway_config:
-            type: نوع
-        gateway_configuration:
-            paypal:
-                password: كلمة المرور
-                signature: التوقيع
-                username: اسم المستخدم
-                sandbox: وضع الاختبار
-            stripe:
-                publishable_key: المفتاح العام
-                secret_key: المفتاح السري
+            use_payum: استخدام Payum
+    payum_gateway:
+        cash_on_delivery: الدفع عند الاستلام
+        offline: غير متصل (Payum)
     payum_gateway_factory:
         offline: غير متصل
-        paypal_express_checkout: دفع باي بال إكسبريس
-        stripe_checkout: دفع سترايب (دون دعم SCA)

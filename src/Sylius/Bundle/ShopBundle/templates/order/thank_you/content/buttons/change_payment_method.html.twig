@@ -1,0 +1,4 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+{% set order = hookable_metadata.context.order %}
+
+{{ buttons.primary(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.change_payment_method'|trans, 'payment-method-page', null) }}

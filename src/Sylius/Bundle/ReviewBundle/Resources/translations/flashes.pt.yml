@@ -3,4 +3,6 @@
 
 sylius:
     review:
-        reject: 'O comentário foi rejeitado com sucesso.'
+        accept: 'A avaliação foi aceita com sucesso.'
+        reject: 'A avaliação foi rejeitada com sucesso.'
+        wait_for_the_acceptation: 'Sua avaliação está aguardando aprovação.'

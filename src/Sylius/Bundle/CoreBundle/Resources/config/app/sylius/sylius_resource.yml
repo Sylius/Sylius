@@ -3,4 +3,4 @@
 
 sylius_resource:
     translation:
-        locale_provider: sylius.translation_locale_provider.admin
+        locale_provider: sylius.provider.translation_locale.admin

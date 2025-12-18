@@ -10,8 +10,6 @@ Sylius\Component\Core\Model\Promotion:
         usageLimit: 1
         used: 0
         couponBased: false
-        translations:
-            - '@promotion_50_off_en'
     promotion_1_off:
         code: 'dollar_off'
         name: '1 dollar off each item'
@@ -21,8 +19,6 @@ Sylius\Component\Core\Model\Promotion:
         exclusive: false
         appliesToDiscounted: true
         couponBased: true
-        translations:
-            - '@promotion_1_off_en'
     promotion_back_to_school:
         code: 'back_to_school'
         name: 'Back to school'
@@ -33,8 +29,6 @@ Sylius\Component\Core\Model\Promotion:
         appliesToDiscounted: true
         couponBased: false
         archivedAt: <dateTimeBetween('-1 month', 'now')>
-        translations:
-            - '@promotion_back_to_school_en'
 
 Sylius\Component\Promotion\Model\PromotionTranslation:
     promotion_50_off_en:
