@@ -1,5 +1,12 @@
 # CHANGELOG FOR `1.13.X`
 
+## v1.13.13 (2025-12-18)
+
+#### Details
+
+- [#18668](https://github.com/Sylius/Sylius/pull/18668) Fix migrations skip commands 1.13 ([@TheMilek](https://github.com/TheMilek))
+- [#18679](https://github.com/Sylius/Sylius/pull/18679) [Telemetry] Fixes and improvements 1.13 ([@TheMilek](https://github.com/TheMilek))
+
 ## v1.13.12 (2025-12-16)
 
 #### Details
