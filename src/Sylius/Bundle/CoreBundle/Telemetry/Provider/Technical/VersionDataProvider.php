@@ -32,8 +32,18 @@ final class VersionDataProvider implements DataProviderInterface
             symfonyVersion: Kernel::VERSION,
             doctrineVersion: $this->getInstalledPackageVersion('doctrine/orm'),
             twigVersion: Environment::VERSION,
-            apiPlatformVersion: $this->getInstalledPackageVersion('api-platform/core'),
+            apiPlatformVersion: $this->getApiPlatformVersion(),
         );
+    }
+
+    private function getApiPlatformVersion(): ?string
+    {
+        $version = $this->getInstalledPackageVersion('api-platform/core');
+        if ($version !== null) {
+            return $version;
+        }
+
+        return $this->getInstalledPackageVersion('api-platform/symfony');
     }
 
     private function getInstalledPackageVersion(string $package): ?string

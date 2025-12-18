@@ -30,13 +30,16 @@ final class PaymentMethodsDataProviderTest extends TestCase
         $this->provider = new PaymentMethodsDataProvider($this->connection);
     }
 
-    public function test_it_provides_active_payment_providers_with_details(): void
+    public function test_it_provides_payment_providers_assigned_to_channel(): void
     {
-        $this->connection->method('fetchAllAssociative')->willReturn([
-            ['code' => 'paypal_checkout', 'factory_name' => 'payum_paypal', 'payments_count' => 15000],
-            ['code' => 'stripe_payment', 'factory_name' => 'payum_stripe', 'payments_count' => 850],
-            ['code' => 'cash_on_delivery', 'factory_name' => 'offline', 'payments_count' => 0],
-        ]);
+        $this->connection->expects(self::once())
+            ->method('fetchAllAssociative')
+            ->with(self::stringContains('EXISTS (SELECT 1 FROM sylius_payment_method_channels'))
+            ->willReturn([
+                ['code' => 'paypal_checkout', 'factory_name' => 'payum_paypal', 'is_enabled' => 1, 'payments_count' => 15000],
+                ['code' => 'stripe_payment', 'factory_name' => 'payum_stripe', 'is_enabled' => 1, 'payments_count' => 850],
+                ['code' => 'cash_on_delivery', 'factory_name' => 'offline', 'is_enabled' => 0, 'payments_count' => 0],
+            ]);
 
         $data = $this->provider->provide();
 
@@ -46,14 +49,17 @@ final class PaymentMethodsDataProviderTest extends TestCase
         self::assertSame('paypal_checkout', $data->paymentProviders[0]->name);
         self::assertSame('payum_paypal', $data->paymentProviders[0]->gateway);
         self::assertSame('10K-100K', $data->paymentProviders[0]->paymentsCount);
+        self::assertTrue($data->paymentProviders[0]->enabled);
 
         self::assertSame('stripe_payment', $data->paymentProviders[1]->name);
         self::assertSame('payum_stripe', $data->paymentProviders[1]->gateway);
         self::assertSame('100-1K', $data->paymentProviders[1]->paymentsCount);
+        self::assertTrue($data->paymentProviders[1]->enabled);
 
         self::assertSame('cash_on_delivery', $data->paymentProviders[2]->name);
         self::assertSame('offline', $data->paymentProviders[2]->gateway);
         self::assertSame('0-100', $data->paymentProviders[2]->paymentsCount);
+        self::assertFalse($data->paymentProviders[2]->enabled);
     }
 
     public function test_it_returns_empty_array_on_error(): void
