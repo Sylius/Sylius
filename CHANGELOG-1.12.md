@@ -1,5 +1,16 @@
 # CHANGELOG FOR `1.12.X`
 
+## v1.12.21 (2025-12-18)
+
+#### Details
+
+- [#18666](https://github.com/Sylius/Sylius/pull/18666) Fix migrations skip commands in upgrade file 1.12 ([@TheMilek](https://github.com/TheMilek))
+- [#18676](https://github.com/Sylius/Sylius/pull/18676) Fix hostname resolving in Telemetry ([@TheMilek](https://github.com/TheMilek))
+- [#18678](https://github.com/Sylius/Sylius/pull/18678) [Telemetry] Add virtual product variants and channels counts + bump schema version + add APIP version fallback check ([@GSadee](https://github.com/GSadee))
+- [#18675](https://github.com/Sylius/Sylius/pull/18675) Add listener to skip optional telemetry index from schema validation ([@TheMilek](https://github.com/TheMilek))
+- [#18677](https://github.com/Sylius/Sylius/pull/18677) Fix orders count retrieving in telemetry and add missing data to telemetry ([@TheMilek](https://github.com/TheMilek))
+- [#18681](https://github.com/Sylius/Sylius/pull/18681) Fix telemetry phpstan and unit test ([@TheMilek](https://github.com/TheMilek))
+
 ## v1.12.20 (2025-12-16)
 
 #### Details
