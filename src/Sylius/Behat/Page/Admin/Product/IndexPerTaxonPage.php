@@ -44,11 +44,21 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
 
     public function setPositionOfProduct(string $productName, string $position): void
     {
+        $this->waitForSavePositionsController();
+
         /** @var NodeElement $productsRow */
         $productsRow = $this->getElement('table')->find('css', sprintf('tbody > tr:contains("%s")', $productName));
         Assert::notNull($productsRow, 'There are no row with given product\'s name!');
 
         $productsRow->find('css', '.sylius-product-taxon-position')->setValue($position);
+    }
+
+    private function waitForSavePositionsController(): void
+    {
+        $this->getSession()->wait(
+            5000,
+            'document.querySelector("[data-test-save-configuration-button][data-ready]") !== null',
+        );
     }
 
     public function savePositions(): void

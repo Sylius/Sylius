@@ -22,6 +22,8 @@ export default class extends Controller {
         document.querySelectorAll(this.inputSelectorValue).forEach(input => {
             input.addEventListener('change', (event) => this.handlePositionChange(event));
         });
+
+        this.element.dataset.ready = 'true';
     }
 
     handlePositionChange(event) {
