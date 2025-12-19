@@ -15,7 +15,6 @@ namespace Sylius\Component\Core\Telemetry\Generator;
 
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /** @internal */
 final class InstallationIdGenerator implements InstallationIdGeneratorInterface
