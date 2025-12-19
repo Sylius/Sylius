@@ -201,8 +201,8 @@ final class MetricsCountsDataProviderTest extends TestCase
             ->with(
                 self::stringContains('SELECT COUNT(id) FROM sylius_customer'),
                 self::callback(function (array $params): bool {
-                    return isset($params['completedState'])
-                        && $params['completedState'] === 'completed';
+                    return isset($params['completedState']) &&
+                        $params['completedState'] === 'completed';
                 }),
             )
             ->willReturn([
