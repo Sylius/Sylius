@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\CountriesDataProvider;
 final class CountriesDataProviderTest extends TestCase
 {
     private Connection $connection;
+
     private CountriesDataProvider $provider;
 
     protected function setUp(): void
