@@ -45,7 +45,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
-        timeout-minutes: 45
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
@@ -160,7 +160,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
-        timeout-minutes: 45
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}

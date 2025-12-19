@@ -53,7 +53,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "[${{ matrix.group }}] [PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}]"
-        timeout-minutes: 10
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
@@ -136,7 +136,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
-        timeout-minutes: 10
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.panther-matrix) }}
