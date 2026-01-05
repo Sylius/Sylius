@@ -50,6 +50,9 @@
         "stof/doctrine-extensions-bundle": "1.8.0"
     },
     "require-dev": {
+        "doctrine/doctrine-bundle": "^1.12 || ^2.3.1",
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^4.2",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
@@ -58,6 +61,7 @@
         "symfony/dependency-injection": "^5.4.21 || ^6.4",
         "symfony/form": "^5.4.21 || ^6.4",
         "symfony/security-bundle": "^5.4.21 || ^6.4",
+        "symfony/twig-bundle": "^5.4.21 || ^6.4",
         "symfony/validator": "^5.4.21 || ^6.4"
     },
     "config": {
