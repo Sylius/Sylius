@@ -43,9 +43,6 @@
         "symfony/framework-bundle": "^5.4.21 || ^6.4",
         "webmozart/assert": "^1.9"
     },
-    "conflict": {
-        "twig/twig": "^3.0"
-    },
     "require-dev": {
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
