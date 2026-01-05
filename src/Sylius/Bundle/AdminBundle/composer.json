@@ -41,13 +41,19 @@
         "twig/twig": "^2.12 || ^3.3"
     },
     "require-dev": {
+        "doctrine/doctrine-bundle": "^1.12 || ^2.3.1",
+        "friendsofsymfony/rest-bundle": "^3.0",
+        "jms/serializer-bundle": "^4.2",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "php-http/message-factory": "^1.0",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/dotenv": "^5.4.21 || ^6.4"
+        "symfony/dotenv": "^5.4.21 || ^6.4",
+        "symfony/security-bundle": "^5.4.21 || ^6.4",
+        "symfony/twig-bundle": "^5.4.21 || ^6.4",
+        "willdurand/hateoas-bundle": "^2.0"
     },
     "conflict": {
         "twig/twig": "3.9.0"
