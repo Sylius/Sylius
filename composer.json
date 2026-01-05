@@ -67,7 +67,7 @@
         "php-http/message-factory": "^1.0",
         "psr/cache": "^2.0",
         "psr/http-client": "^1.0",
-        "psr/http-message": "^1.0",
+        "psr/http-message": "^1.0 || ^2.0",
         "psr/log": "^2.0",
         "ramsey/uuid": "^4.0",
         "sonata-project/block-bundle": "^4.2 || ^5.0",
