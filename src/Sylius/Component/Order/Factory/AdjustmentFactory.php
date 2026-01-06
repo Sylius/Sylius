@@ -33,6 +33,7 @@ class AdjustmentFactory implements AdjustmentFactoryInterface
         return $this->adjustmentFactory->createNew();
     }
 
+    /** @param array<mixed> $details */
     public function createWithData(
         string $type,
         string $label,

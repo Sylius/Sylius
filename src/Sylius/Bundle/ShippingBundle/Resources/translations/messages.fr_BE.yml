@@ -1,0 +1,57 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        rule:
+            unit_count_configuration:
+                count: Nombre
+                equal: Est égal à
+            type: Type de règle
+        shipment:
+            state: État
+            states:
+                checkout: Paiement
+                pending: En attente
+                ready: Prêt
+                shipped: Expédié
+                returned: Retourné
+                cancelled: Annulé
+            tracking_code: Code de suivi
+        shipping_calculator:
+            flat_rate_configuration:
+                label: Prix fixe par envoi
+                amount: Montant
+            per_unit_rate_configuration:
+                label: Montant forfaitaire par unité
+                amount: Montant
+        shipping_category:
+            description: Description
+            name: Nom
+        shipping_method:
+            add_rule: Ajouter une règle
+            calculator: Calculateur
+            category: Catégorie
+            category_requirement: Exigence de la catégorie
+            channels: Canaux
+            configuration: Configuration
+            description: Description
+            enabled: Activée
+            match_all_category_requirement: Tous les produits doivent correspondre à la catégorie d'expédition
+            match_any_category_requirement: Au moins un des produits doivent correspondre à la catégorie d'expédition
+            match_none_category_requirement: Aucun produit ne doit correspondre à la catégorie d'expédition
+            name: Nom
+            position: Emplacement
+            rules: Règles
+            rules_help: Utilisez les règles pour décider si ce mode de livraison peut être appliqué à une commande donnée. Si une règle est vraie, ce mode de livraison peut être appliqué. Notez que si vous ajoutez plusieurs règles, toutes les règles doivent être vraies.
+            tax_category: Catégorie de taxe
+            translations: Traductions
+        shipping_method_rule:
+            items_total_greater_than_or_equal: Total de commande supérieur ou égal à
+            items_total_less_than_or_equal: Total de commande inférieur ou égal à
+            type: Type
+            total: Total
+            total_weight_greater_than_or_equal: Poids total supérieur ou égal à
+            total_weight_less_than_or_equal: Poids total inférieur ou égal à
+            weight: Poids
+            amount: Montant

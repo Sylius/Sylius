@@ -36,8 +36,6 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     public function __construct()
     {
         parent::__construct();
-
-        /** @var ArrayCollection<array-key, ChannelInterface> $this->channels */
         $this->channels = new ArrayCollection();
     }
 

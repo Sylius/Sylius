@@ -4,31 +4,35 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: Kortinnehavarens namn
-            expiry_month: Förfallomånad
-            expiry_year: Förfalloår
-            number: Kortnummer
-            security_code: Säkerhetskod (CVV)
-            type: Korttyp
+            cardholder_name: 'Kortinnehavarens namn'
+            expiry_month: 'Utgångsmånad'
+            expiry_year: 'Utgångsår'
+            number: 'Kortnummer'
+            security_code: 'Säkerhetskod (CVV)'
+            type: 'Korttyp'
         payment:
-            amount: Betalningsbelopp
-            method: Betalningsmetod
+            amount: 'Betalningsbelopp'
+            method: 'Betalningsmetod'
             state:
-                header: Betalningsstatus
-                checkout: Kassa
-                completed: Slutförd
-                authorized: Auktoriserad
-                failed: Misslyckad
-                new: Ny
-                pending: Väntande
-                processing: Behandlar
-                unknown: Okänd
-                void: Tom
-                cancelled: Avbruten
-                refunded: Återbetald
+                header: 'Betalningsstatus'
+                checkout: 'Kassa'
+                completed: 'Slutförd'
+                authorized: 'Godkänd'
+                failed: 'Misslyckad'
+                new: 'Ny'
+                pending: 'Väntande'
+                processing: 'Behandlas'
+                unknown: 'Okänd'
+                void: 'Makulerad'
+                cancelled: 'Avbruten'
+                refunded: 'Återbetald'
         payment_method:
-            description: Beskrivning
-            enabled: Aktiverad?
-            instructions: Instruktioner
-            name: Namn
-            position: Position
+            description: 'Beskrivning'
+            enabled: 'Aktiverad'
+            instructions: 'Instruktioner'
+            name: 'Namn'
+            position: 'Position'
+        gateway_config:
+            type: 'Typ'
+    gateway_factory:
+        offline: 'Offline'

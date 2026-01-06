@@ -3,5 +3,8 @@
 
 sylius:
     order_item:
+        product_variant:
+            not_blank: 'De productvariant is niet opgegeven.'
         quantity:
-            min: Hoeveelheid van een item kan niet niet lager dan 1 zijn.
+            min: 'Hoeveelheid van een bestellingsitem mag niet lager zijn dan 1.'
+            not_blank: 'De hoeveelheid is niet opgegeven.'

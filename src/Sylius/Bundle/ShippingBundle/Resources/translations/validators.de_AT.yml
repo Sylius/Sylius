@@ -1,0 +1,37 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    shipping_category:
+        name:
+            max_length: 'Der Kategoriename darf höchstens {{ limit }} Zeichen lang sein.'
+            min_length: 'Der Kategoriename muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Versandkategorie ein.'
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Code der Versandkategorie ein.'
+            regex: 'Der Code der Versandkategorie darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Die Versandkategorie mit dem angegebenen Code existiert bereits.'
+
+    shipping_method:
+        calculator:
+            min: 'Die Versandgebühr darf nicht kleiner als 0 sein.'
+            not_blank: 'Bitte wählen Sie einen Versandmethoden-Rechner aus.'
+            invalid: 'Ungültiger Rechner. Verfügbare Rechner sind {{ available_calculators }}.'
+        name:
+            max_length: 'Der Name der Versandmethode darf höchstens {{ limit }} Zeichen lang sein.'
+            min_length: 'Der Name der Versandmethode muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Versandmethode ein.'
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Code der Versandmethode ein.'
+            regex: 'Der Code der Versandmethode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Die Versandmethode mit dem angegebenen Code existiert bereits.'
+        zone:
+            not_blank: 'Bitte wählen Sie die Versandmethoden-Zone aus.'
+        rule:
+            invalid_type: 'Ungültiger Regeltyp. Verfügbare Regeltypen sind {{ available_rule_types }}.'
+
+    shipment:
+        shipping_method:
+            not_blank: 'Bitte wählen Sie eine Versandmethode aus.'

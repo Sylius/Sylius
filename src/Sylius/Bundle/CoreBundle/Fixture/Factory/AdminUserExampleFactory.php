@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Faker\Factory;
 use Faker\Generator;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\AvatarImage;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Resource\Factory\FactoryInterface;
@@ -25,45 +24,28 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @implements ExampleFactoryInterface<AdminUserInterface> */
 class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
-    private Generator $faker;
+    protected Generator $faker;
 
-    private OptionsResolver $optionsResolver;
+    protected OptionsResolver $optionsResolver;
 
     /**
      * @param FactoryInterface<AdminUserInterface> $userFactory
-     * @param FactoryInterface<ImageInterface>|null $avatarImageFactory
+     * @param FactoryInterface<ImageInterface> $avatarImageFactory
      */
     public function __construct(
-        private FactoryInterface $userFactory,
-        private string $localeCode,
-        private ?FileLocatorInterface $fileLocator = null,
-        private ?ImageUploaderInterface $imageUploader = null,
-        private ?FactoryInterface $avatarImageFactory = null,
+        protected readonly FactoryInterface $userFactory,
+        protected readonly string $localeCode,
+        protected readonly FileLocatorInterface $fileLocator,
+        protected readonly ImageUploaderInterface $imageUploader,
+        protected readonly FactoryInterface $avatarImageFactory,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
-
-        if ($this->fileLocator === null || $this->imageUploader === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.6',
-                'Not passing a $fileLocator or/and an $imageUploader to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
-
-        if ($this->avatarImageFactory === null) {
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.10',
-                'Not passing an $avatarImageFactory to %s constructor is deprecated and will be removed in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     public function create(array $options = []): AdminUserInterface
@@ -114,22 +96,13 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         ;
     }
 
+    /** @param array<string, mixed> $options */
     private function createAvatar(AdminUserInterface $adminUser, array $options): void
     {
-        if ($this->fileLocator === null || $this->imageUploader === null) {
-            throw new \RuntimeException('You must configure a $fileLocator or/and $imageUploader');
-        }
-
         $imagePath = $this->fileLocator->locate($options['avatar']);
         $uploadedImage = new UploadedFile($imagePath, basename($imagePath));
 
-        if ($this->avatarImageFactory === null) {
-            $avatarImage = new AvatarImage();
-        } else {
-            /** @var AvatarImage $avatarImage */
-            $avatarImage = $this->avatarImageFactory->createNew();
-        }
-
+        $avatarImage = $this->avatarImageFactory->createNew();
         $avatarImage->setFile($uploadedImage);
 
         $this->imageUploader->upload($avatarImage);

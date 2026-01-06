@@ -1,0 +1,41 @@
+.plus-blur {
+    position: relative;
+    overflow: hidden;
+
+    .blur-content {
+        transition: filter 0.3s ease;
+
+        &:hover {
+            filter: blur(2px);
+
+            * {
+                pointer-events: none;
+            }
+        }
+    }
+
+    .overlay-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        z-index: 10;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    &:hover {
+        .overlay-image {
+            opacity: 1;
+        }
+
+        .blur-content {
+            filter: blur(2px);
+
+            * {
+                pointer-events: none;
+            }
+        }
+    }
+}

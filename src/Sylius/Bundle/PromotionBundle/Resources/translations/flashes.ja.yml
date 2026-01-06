@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    promotion_coupon:
+        generate: 'プロモーションクーポンが正常に生成されました。'
+    catalog_promotion:
+        remove: 'カタログプロモーションの削除が要求されました。影響を受ける商品の数によっては処理に時間がかかる場合があります。'

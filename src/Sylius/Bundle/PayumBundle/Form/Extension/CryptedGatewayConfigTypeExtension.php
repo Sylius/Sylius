@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Form\Extension;
 
-use Payum\Core\Security\CryptedInterface;
-use Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType;
+use Payum\Core\Security\CypherInterface;
+use Sylius\Bundle\PaymentBundle\Form\Type\GatewayConfigType;
+use Sylius\Bundle\PayumBundle\Checker\PayumGatewayConfigEncryptionCheckerInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -22,8 +23,10 @@ use Symfony\Component\Form\FormEvents;
 
 final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 {
-    public function __construct(private ?\Payum\Core\Security\CypherInterface $cypher = null)
-    {
+    public function __construct(
+        private readonly PayumGatewayConfigEncryptionCheckerInterface $encryptionChecker,
+        private ?CypherInterface $cypher = null,
+    ) {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -36,7 +39,7 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $gatewayConfig = $event->getData();
 
-                if (!$gatewayConfig instanceof CryptedInterface) {
+                if (!$this->encryptionChecker->isPayumEncryptionEnabled($gatewayConfig)) {
                     return;
                 }
 
@@ -44,10 +47,10 @@ final class CryptedGatewayConfigTypeExtension extends AbstractTypeExtension
 
                 $event->setData($gatewayConfig);
             })
-            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
+            ->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
                 $gatewayConfig = $event->getData();
 
-                if (!$gatewayConfig instanceof CryptedInterface) {
+                if (!$this->encryptionChecker->isPayumEncryptionEnabled($gatewayConfig)) {
                     return;
                 }
 

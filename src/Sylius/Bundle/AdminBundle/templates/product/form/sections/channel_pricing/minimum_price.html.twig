@@ -1,0 +1,5 @@
+{% deprecated 'The "minimum_price.html.twig" template is deprecated, use "@SyliusAdmin/product/form/sections/channel_pricing/accordion/fields/minimum_price.html.twig" instead.' %}
+
+{% set channel_pricing = hookable_metadata.context.channel_pricing %}
+
+{{ form_row(channel_pricing.minimumPrice) }}

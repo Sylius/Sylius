@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Utils;
 
+/** @deprecated Call $this->setUpShopUserContext() instead. */
 trait ShopUserLoginTrait
 {
     use UserLoginTrait;
 
+    /** @deprecated Call $this->setUpShopUserContext() instead. */
     protected function logInShopUser(string $email): array
     {
         return $this->logInUser('shop', $email);

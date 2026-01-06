@@ -4,22 +4,34 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'O nome da categoria não deve ter mais que {{ limit }} caracteres.'
-            min_length: 'O nome da categoria deve ter pelo menos {{ limit }} carateres.'
-            not_blank: 'Por favor, insira o nome da categoria de expedição.'
+            max_length: 'O nome da categoria não pode ter mais de {{ limit }} caracteres.'
+            min_length: 'O nome da categoria deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o nome da categoria de envio.'
         code:
-            not_blank: 'Por favor, insira o código da categoria de expedição.'
-            unique: 'Já existe uma categoria de transporte com o código introduzido.'
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código da categoria de envio.'
+            regex: 'O código da categoria de envio pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Já existe uma categoria de envio com esse código.'
+
     shipping_method:
+        calculator:
+            min: 'A cobrança de envio não pode ser inferior a 0.'
+            not_blank: 'Por favor, selecione a calculadora do método de envio.'
+            invalid: 'Calculadora inválida. Calculadoras disponíveis: {{ available_calculators }}.'
         name:
-            max_length: 'O nome do método de envio não deve ter mais que {{ limit }} caracteres.'
+            max_length: 'O nome do método de envio não pode ter mais de {{ limit }} caracteres.'
             min_length: 'O nome do método de envio deve ter pelo menos {{ limit }} caracteres.'
-            not_blank: 'Introduza o nome do método de envio.'
+            not_blank: 'Por favor, informe o nome do método de envio.'
         code:
-            not_blank: 'Introduza o código do método de envio.'
-            unique: 'Já existe um método de envio com o código introduzido.'
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código do método de envio.'
+            regex: 'O código do método de envio pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'Já existe um método de envio com esse código.'
         zone:
-            not_blank: 'Por favor selecione a zona de método de envio.'
+            not_blank: 'Por favor, selecione a zona do método de envio.'
+        rule:
+            invalid_type: 'Tipo de regra inválido. Tipos disponíveis: {{ available_rule_types }}.'
+
     shipment:
         shipping_method:
-            not_blank: 'Selecione o método de envio.'
+            not_blank: 'Por favor, selecione o método de envio.'

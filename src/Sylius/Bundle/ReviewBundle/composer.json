@@ -38,28 +38,23 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/mailer-bundle": "^1.8 || ^2.0@beta",
-        "sylius/resource-bundle": "^1.11",
-        "sylius/review": "^1.13",
-        "sylius/user-bundle": "^1.13",
-        "symfony/framework-bundle": "^5.4.21 || ^6.4"
-    },
-    "conflict": {
-        "stof/doctrine-extensions-bundle": "1.8.0",
-        "twig/twig": "^3.0"
+        "php": "^8.2",
+        "stof/doctrine-extensions-bundle": "^1.12",
+        "sylius/mailer-bundle": "^2.1",
+        "sylius/resource-bundle": "^1.12",
+        "sylius/review": "^2.0",
+        "sylius/user-bundle": "^2.0",
+        "symfony/framework-bundle": "^6.4.1 || ^7.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.2",
-        "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.5",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^5.4.21 || ^6.4",
-        "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/form": "^5.4.21 || ^6.4",
-        "symfony/security-bundle": "^5.4.21 || ^6.4",
-        "symfony/validator": "^5.4.21 || ^6.4"
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/orm": "^2.18 || ^3.3",
+        "phpunit/phpunit": "^11.5",
+        "symfony/browser-kit": "^6.4 || ^7.2",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2",
+        "symfony/form": "^6.4.1 || ^7.2",
+        "symfony/security-bundle": "^6.4 || ^7.2",
+        "symfony/validator": "^6.4 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -68,7 +63,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^7.2"
         }
     },
     "autoload": {
@@ -78,7 +76,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\ReviewBundle\\spec\\": "spec/"
+            "Tests\\Sylius\\Bundle\\ReviewBundle\\": "tests/"
         },
         "classmap": [
             "test/app/AppKernel.php"

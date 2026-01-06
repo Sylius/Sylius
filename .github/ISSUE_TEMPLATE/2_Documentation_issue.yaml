@@ -1,0 +1,23 @@
+name: 📖 Documentation Issue
+description: Report missing or bugged documentation.
+labels: Documentation
+
+body:
+    - type: dropdown
+      attributes:
+          label: Version
+          description: Which version of the documentation are you using?
+          multiple: true
+          options:
+              - 2.x (docs.sylius.com)
+              - 1.x (old-docs.sylius.com)
+          default: 0
+      validations:
+          required: true
+    -   type: textarea
+        id: description
+        attributes:
+            label: Description
+            description: Describe what is missing or where exactly is the bug/typo/issue located. Links highly appreciated.
+        validations:
+            required: true

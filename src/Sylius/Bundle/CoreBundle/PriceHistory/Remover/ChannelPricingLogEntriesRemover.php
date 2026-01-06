@@ -15,18 +15,17 @@ namespace Sylius\Bundle\CoreBundle\PriceHistory\Remover;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\PriceHistory\Event\OldChannelPricingLogEntriesEvents;
-use Sylius\Calendar\Provider\DateTimeProviderInterface;
 use Sylius\Component\Core\Repository\ChannelPricingLogEntryRepositoryInterface;
+use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Webmozart\Assert\Assert;
 
 final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesRemoverInterface
 {
     public function __construct(
         private ChannelPricingLogEntryRepositoryInterface $channelPricingLogEntriesRepository,
         private ObjectManager $channelPricingLogEntriesManager,
-        private DateTimeProviderInterface $dateTimeProvider,
+        private ClockInterface $clock,
         private EventDispatcherInterface $eventDispatcher,
         private int $batchSize = 100,
     ) {
@@ -44,11 +43,13 @@ final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesR
         }
     }
 
+    /** @return array<mixed> */
     private function getBatch(\DateTimeInterface $fromDate): array
     {
         return $this->channelPricingLogEntriesRepository->findOlderThan($fromDate, $this->batchSize);
     }
 
+    /** @param array<mixed> $deletedChannelPricingLogEntries */
     private function processDeletion(array $deletedChannelPricingLogEntries): void
     {
         $this->eventDispatcher->dispatch(new GenericEvent($deletedChannelPricingLogEntries), OldChannelPricingLogEntriesEvents::PRE_REMOVE);
@@ -59,8 +60,7 @@ final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesR
 
     private function getFromDate(int $fromDays): \DateTimeInterface
     {
-        $now = $this->dateTimeProvider->now();
-        Assert::methodExists($now, 'modify');
+        $now = $this->clock->now();
 
         return $now->modify(sprintf('-%d days', $fromDays));
     }

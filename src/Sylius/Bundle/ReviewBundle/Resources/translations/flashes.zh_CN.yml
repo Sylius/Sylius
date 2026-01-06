@@ -3,6 +3,6 @@
 
 sylius:
     review:
-        accept: '评价已经成功接受.'
-        reject: '评价被拒绝。'
-        wait_for_the_acceptation: '您的评价正在等待确认。'
+        accept: '评论已成功通过审核。'
+        reject: '评论已成功被拒绝。'
+        wait_for_the_acceptation: '您的评论正在等待审核。'

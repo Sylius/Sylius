@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Console\Command;
 
+use Sylius\Bundle\AdminBundle\Command\CreateAdminUser;
 use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface;
 use Sylius\Bundle\AdminBundle\Exception\CreateAdminUserFailedException;
-use Sylius\Bundle\AdminBundle\Message\CreateAdminUser;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -74,11 +74,10 @@ final class CreateAdminUserCommand extends Command
         try {
             $this->handle(new CreateAdminUser(...array_values($adminUserData)));
         } catch (HandlerFailedException $exception) {
-            $this->io->error(
-                $exception
-                ->getNestedExceptionOfClass(CreateAdminUserFailedException::class)[0]
-                ->getMessage(),
-            );
+            $exceptions = $exception->getWrappedExceptions(CreateAdminUserFailedException::class);
+            if ($wrappedException = reset($exceptions)) {
+                $this->io->error($wrappedException->getMessage());
+            }
 
             return Command::FAILURE;
         }

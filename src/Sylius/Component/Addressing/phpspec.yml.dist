@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Addressing
-        psr4_prefix: Sylius\Component\Addressing
-        src_path: .

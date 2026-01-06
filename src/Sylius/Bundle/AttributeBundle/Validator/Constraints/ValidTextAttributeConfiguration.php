@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ValidTextAttributeConfiguration extends Constraint
 {
     public string $message = 'sylius.attribute.configuration.max_length';

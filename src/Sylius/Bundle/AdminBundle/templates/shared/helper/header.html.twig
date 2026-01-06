@@ -1,0 +1,19 @@
+{% macro default(level, header, icon, subheader) %}
+    <div class="d-flex gap-3 align-items-center">
+        {% if icon %}
+            <div>{{ ux_icon(icon, {'class': 'icon icon-md text-primary'}) }}</div>
+        {% endif %}
+        <div class="d-flex flex-column gap-2">
+            <h{{ level }} class="page-title">
+                {{ header }}
+            </h{{ level }}>
+            {% if subheader %}
+                <div>{{ subheader }}</div>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro h1(header, icon, subheader) %}
+    {{ _self.default(1, header, icon, subheader) }}
+{% endmacro %}

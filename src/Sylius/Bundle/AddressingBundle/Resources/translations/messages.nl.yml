@@ -4,39 +4,38 @@
 sylius:
     form:
         address:
-            city: Plaats
-            company: Bedrijf
-            country: Land
-            first_name: Voornaam
-            last_name: Achternaam
-            phone_number: Telefoonnummer
-            postcode: Postcode
-            street: Straat
-            province: Provincie
-            zone: Zone
+            city: 'Stad'
+            company: 'Bedrijf'
+            country: 'Land'
+            first_name: 'Voornaam'
+            last_name: 'Achternaam'
+            phone_number: 'Telefoonnummer'
+            postcode: 'Postcode'
+            street: 'Straatadres'
+            province: 'Provincie'
+            zone: 'Zone'
         country:
-            add_province: Provincie toevoegen
-            name: Promoties beheren
-            provinces: Provincies
-            select: Selecteer
-            enabled: Ingeschakeld
+            add_province: 'Provincie toevoegen'
+            name: 'Naam'
+            provinces: 'Provincies'
+            select: 'Selecteer'
+            enabled: 'Ingeschakeld'
         province:
-            name: Naam
-            abbreviation: Afkorting
-            select: Selecteer
+            name: 'Naam'
+            abbreviation: 'Afkorting'
+            select: 'Selecteer'
         zone:
-            add_member: Lid toevoegen
-            members: Leden
-            name: Naam
-            type: Type
+            add_member: 'Lid toevoegen'
+            members: 'Leden'
+            name: 'Naam'
+            type: 'Type'
             types:
-                country: Land
-                province: Provincie
-                zone: Zone
-            scope: Bereik
+                country: 'Land'
+                province: 'Provincie'
+                zone: 'Zone'
+            scope: 'Bereik'
             scopes:
-                all: Alles
-            select: Selecteer
-            select_scope: Selecteer bereik
+                all: 'Alle'
+            select: 'Selecteer'
         zone_member:
-            select: Selecteer
+            select: 'Selecteer'

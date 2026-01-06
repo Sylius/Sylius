@@ -62,6 +62,7 @@
 
         <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductImageInterface" mapped-by="owner" orphan-removal="true">
             <order-by>
+                <order-by-field name="position" />
                 <order-by-field name="id" />
             </order-by>
 
@@ -70,5 +71,4 @@
             </cascade>
         </one-to-many>
     </mapped-superclass>
-
 </doctrine-mapping>

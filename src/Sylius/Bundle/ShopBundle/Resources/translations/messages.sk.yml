@@ -2,26 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Nemáte účet?'
+        register_here: 'Zaregistrujte sa tu'
     email:
         order_confirmation:
+            has_been_successfully_placed: 'bola úspešne odoslaná.'
             subject: 'Potvrdenie objednávky'
             view_order_or_change_payment_method: 'Zobraziť objednávku alebo zmeniť spôsob platby'
+            thank_you: 'Ďakujeme za nákup v našom obchode!'
+            your_order_number: 'Číslo vašej objednávky'
         password_reset:
             hello: 'Ahoj'
-            subject: 'Obnoviť heslo'
+            reset_your_password: 'Obnovte svoje heslo'
+            subject: 'Obnovenie hesla'
+            to_reset_your_password: 'Ak chcete obnoviť svoje heslo – kliknite na odkaz nižšie'
+            to_reset_your_password_token: 'Ak chcete obnoviť svoje heslo – použite nasledujúci token'
+            token: 'Váš token na obnovenie hesla je'
         user_registration:
+            start_shopping: 'Začnite nakupovať'
+            subject: 'Registrácia používateľa'
             welcome_to_our_store: 'Vitajte v našom obchode!'
+            you_have_just_been_registered: 'Práve ste boli zaregistrovaní. Ďakujeme'
         verification_token:
             hello: 'Ahoj'
             subject: 'Overenie e-mailovej adresy'
+            to_verify_your_email_address: 'Ak chcete overiť svoju e-mailovú adresu – kliknite na odkaz nižšie'
+            verify_your_email_address: 'Overte svoju e-mailovú adresu'
+    footer:
+        banner:
+            free_shipping_title: 'Doprava a vrátenie zdarma'
+            free_shipping_content: 'Doprava zdarma pri všetkých objednávkach'
+            guarantee_title: 'Záruka vrátenia peňazí'
+            guarantee_content: '30-dňová záruka vrátenia peňazí'
+            multiple_payments_title: 'Viaceré spôsoby platby'
+            multiple_payments_content: 'Prijímame kreditné karty a PayPal'
+    homepage:
+        about_us: 'O nás'
+        about_us_content: 'Vitajte v našom obchode, vašom čísle jeden online obchode, ktorý vám prináša tie najlepšie produkty. Môžete si vybrať z najlepšieho oblečenia a obuvi z našej ponuky. (<i>Obsah môžete upraviť prepísaním kľúča "sylius.homepage.about_us_content" vo vašom prekladovom súbore</i>)'
+        banner_content: 'Pripravte sa! Zima prichádza'
+        banner_button: 'Pozrite si novú kolekciu'
+        carousel_header: 'Odporúčané produkty'
+        latest_deals: 'Najnovšie ponuky'
+        new_collection: 'Nová kolekcia'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Prihláste sa k nášmu newsletteru, aby ste videli nové ponuky, ktoré na vás čakajú! (<i>Obsah môžete upraviť prepísaním kľúča "sylius.homepage.newsletter_description" vo vašom prekladovom súbore</i>)'
+        subscribe: 'Prihlásiť sa'
     lightbox:
         image_album_label: 'Obrázok %1 z %2'
     menu:
         shop:
             account:
                 address_book: 'Adresár'
-                change_password: 'Zmena hesla'
-                dashboard: 'Administračný panel'
+                change_password: 'Zmeniť heslo'
+                dashboard: 'Prehľad'
                 header: 'Váš účet'
                 order_history: 'História objednávok'
-                personal_information: 'Osobné údaje'
+                personal_information: 'Osobné informácie'
+    top_bar: 'Prihláste sa na odber nášho newsletteru a získajte -20 % zľavu'

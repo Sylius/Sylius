@@ -1,0 +1,5 @@
+{% if hookable_metadata.context.form.position is defined %}
+    <div class="col-12 col-md-6">
+        {{ form_row(hookable_metadata.context.form.position, sylius_test_form_attribute('position')) }}
+    </div>
+{% endif %}

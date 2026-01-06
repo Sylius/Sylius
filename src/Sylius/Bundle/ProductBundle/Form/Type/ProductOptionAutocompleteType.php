@@ -24,7 +24,6 @@ final class ProductOptionAutocompleteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'choice_value' => 'code',
             'choice_name' => 'name',
             'resource' => 'sylius.product_option',
         ]);

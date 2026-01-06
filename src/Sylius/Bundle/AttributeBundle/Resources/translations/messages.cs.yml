@@ -4,36 +4,38 @@
 sylius:
     form:
         attribute:
-            add: Přidat
-            add_attributes: Přidat atribut
-            choices: Volby
-            code: Kód
-            name: Jméno
-            translations: Překlady
-            type: Typ
+            add: 'Přidat'
+            add_attributes: 'Přidat atributy'
+            choices: 'Možnosti'
+            code: 'Kód'
+            name: 'Název'
+            translatable: 'Přeložitelné'
+            translations: 'Překlady'
+            type: 'Typ'
         attribute_type:
-            checkbox: Zaškrt. pole
-            configuration: Konfigurace
-            date: Datum
-            datetime: Datum a čas
-            integer: Číslo
-            percent: Procent
-            select: Vybrat
-            text: Text
-            textarea: Textové pole
-            title: Typ atributu
-            validation: Ověření
+            checkbox: 'Zaškrtávací políčko'
+            configuration: 'Konfigurace'
+            date: 'Datum'
+            datetime: 'Datum a čas'
+            float: 'Desetinné číslo'
+            integer: 'Celé číslo'
+            percent: 'Procento'
+            select: 'Výběr'
+            text: 'Text'
+            textarea: 'Textové pole'
+            title: 'Typy atributů'
+            validation: 'Validace'
         attribute_type_configuration:
             datetime:
-                format: Formát
+                format: 'Formát'
             date:
-                format: Formát
+                format: 'Formát'
             select:
-                multiple: Více
-                values: Hodnoty
-                choose: Zvolte možnost
-                min: Min. položek
-                max: Max. položek
+                multiple: 'Vícenásobný'
+                values: 'Hodnoty'
+                choose: 'Vyberte možnost'
+                min: 'Min. počet položek'
+                max: 'Max. počet položek'
             text:
-                min: Min. délka
-                max: Max. délka
+                min: 'Min. délka'
+                max: 'Max. délka'

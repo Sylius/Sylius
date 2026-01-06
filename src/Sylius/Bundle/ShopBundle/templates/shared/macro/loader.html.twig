@@ -1,0 +1,17 @@
+{%- macro render(class='', spinnerClass='', color='#22b99a', dotSize='18px', speed=1500, gap=0.5, dots=3, label=null) -%}
+    {%- set _label = label is not null ? label : 'sylius.ui.loading'|trans -%}
+
+    <div data-loading>
+        <div class="sylius-shop-loader{{ class ? ' ' ~ class }}">
+            <span class="visually-hidden">{{ _label }}</span>
+            <div class="spinner-dots{{ spinnerClass ? ' ' ~ spinnerClass }}">
+                {% for i in 1..dots %}
+                    {% set delay = -((dots - i) * (speed / dots) * gap) %}
+                    <div class="spinner-dot-{{ i }}"
+                        style="background-color: {{ color }}; width: {{ dotSize }}; height: {{ dotSize }}; animation: bouncedelay {{ speed }}ms infinite ease-in-out both; animation-delay: {{ delay|round(0, 'floor') }}ms;">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{%- endmacro -%}

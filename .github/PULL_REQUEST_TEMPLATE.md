@@ -9,8 +9,8 @@
 | License         | MIT
 
 <!--
- - Bug fixes must be submitted against the 1.14 or 2.0 branch
- - Features and deprecations must be submitted against the 2.1 branch
+ - Bug fixes must be submitted against the 1.14 or 2.1 branch
+ - Features and deprecations must be submitted against the 2.2 branch
  - Make sure that the correct base branch is set
 
  To be sure you are not breaking any Backward Compatibilities, check the documentation:

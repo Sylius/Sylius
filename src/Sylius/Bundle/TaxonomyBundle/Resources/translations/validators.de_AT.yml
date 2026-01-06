@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    taxon:
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Taxon-Code ein.'
+            regex: 'Der Taxon-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Ein Taxon mit dem angegebenen Code existiert bereits.'
+        name:
+            max_length: 'Der Name des Taxons darf höchstens 255 Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Taxon-Namen ein.'
+        slug:
+            not_blank: 'Bitte geben Sie den Taxon-Slug ein.'
+            unique: 'Der Taxon-Slug muss eindeutig sein.'
+    taxonomy:
+        name:
+            max_length: 'Der Name der Taxonomie darf höchstens 255 Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Taxonomie ein.'

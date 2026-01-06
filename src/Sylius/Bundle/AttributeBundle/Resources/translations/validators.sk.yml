@@ -4,24 +4,28 @@
 sylius:
     attribute:
         name:
-            not_blank: Zadajte názov vlastnosti.
-            min_length: Názov vlastnosti musí obsahovať minimálne 1 znak.|Názov vlastnosti musí obsahovať minimálne {{ limit }} znakov.
-            max_length: Názov vlastnosti nesmie byť dlhší ako 1 znak.|Názov vlastnosti nesmie byť dlhší ako {{ limit }} znakov.
+            not_blank: 'Zadajte názov atribútu.'
+            min_length: 'Názov atribútu musí mať aspoň 1 znak.|Názov atribútu musí mať aspoň {{ limit }} znakov.'
+            max_length: 'Názov atribútu nesmie byť dlhší ako 1 znak.|Názov atribútu nesmie byť dlhší ako {{ limit }} znakov.'
         code:
-            not_blank: Prosím, zadajte kód vlastnosti.
-            regex: Kód vlastnosti môže obsahovať iba písmená, čísla, pomlčky a znaky podčiarknutia.
-            unique: Tento kód sa už používa.
+            min_length: 'Kód atribútu musí mať aspoň 1 znak.|Kód atribútu musí mať aspoň {{ limit }} znakov.'
+            max_length: 'Kód atribútu nesmie byť dlhší ako 1 znak.|Kód atribútu nesmie byť dlhší ako {{ limit }} znakov.'
+            not_blank: 'Zadajte kód atribútu.'
+            regex: 'Kód atribútu môže obsahovať iba písmená, čísla, pomlčky a podčiarkovníky.'
+            unique: 'Tento kód už je použiteľný.'
         configuration:
-            max_entries: Nastavenie maximálneho počtu hodnôt musí byť väčšie alebo rovné minimálnemu počtu hodnôt.
-            max_length: Nastavenie maximálnej dĺžky musí byť väčšie alebo rovné minimálnej dĺžke.
-            min_entries: Nastavenie minimálneho počtu hodnôt musí nižšie alebo rovné počtu pridaných možností.
-            multiple: Nastavenia viacerých musí byť povolené ak min. alebo max. počet hodnôt je nastavený.
+            max_entries: 'Maximálny počet položiek konfigurácie musí byť väčší alebo rovný minimálnemu počtu položiek.'
+            max_length: 'Maximálna dĺžka konfigurácie musí byť väčšia alebo rovná minimálnej dĺžke.'
+            min_entries: 'Minimálny počet položiek konfigurácie musí byť menší alebo rovný počtu pridaných možností.'
+            multiple: 'Konfigurácia multiple musí byť pravda, ak je zadaný minimálny alebo maximálny počet položiek.'
         presentation:
-            not_blank: Zadajte verejný názov vlastnosti.
-            min_length: Verejný názov vlastnosti musí mať dĺžku aspoň 1 znak.|Verejný názov vlastnosti musí mať dĺžku aspoň {{ limit }} znakov.
-            max_length: Verejný názov vlastnosti nesmie byt dlhší ako 1 znak.|Verejný názov vlastnosti nesmie byt dlhší ako {{ limit }} znakov.
+            not_blank: 'Zadajte popis atribútu.'
+            min_length: 'Popis atribútu musí mať aspoň 1 znak.|Popis atribútu musí mať aspoň {{ limit }} znakov.'
+            max_length: 'Popis atribútu nesmie byť dlhší ako 1 znak.|Popis atribútu nesmie byť dlhší ako {{ limit }} znakov.'
+        type:
+            unregistered: 'Typ atribútu "%type%" nie je zaregistrovaný. Dostupné typy atribútov: %available_types%.'
     attribute_value:
         attribute:
-            not_blank: Vyberte vlastnosť.
+            not_blank: 'Vyberte atribút.'
         value:
-            not_blank: Zadajte hodnotu vlastnosti.
+            not_blank: 'Zadajte hodnotu atribútu.'

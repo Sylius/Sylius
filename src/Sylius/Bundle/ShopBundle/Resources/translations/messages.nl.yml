@@ -2,35 +2,52 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: "Heb je geen account?"
+        register_here: 'Registreer hier'
     email:
         order_confirmation:
-            has_been_successfully_placed: 'is met succes geplaatst.'
-            subject: 'Order bevestiging'
-            view_order_or_change_payment_method: 'Bestelling bekijken of betalingsmethode wijzigen'
-            thank_you: 'Bedankt voor uw bestelling in onze winkel!'
-            your_order_number: 'Uw ordernummer'
+            has_been_successfully_placed: 'is succesvol geplaatst.'
+            subject: 'Bestelbevestiging'
+            view_order_or_change_payment_method: 'Bekijk bestelling of wijzig betaalmethode'
+            thank_you: 'Bedankt voor je aankoop bij onze winkel!'
+            your_order_number: 'Je bestelnummer'
         password_reset:
             hello: 'Hallo'
-            reset_your_password: 'Uw wachtwoord opnieuw instellen'
-            subject: 'Wachtwoord opnieuw instellen'
-            to_reset_your_password: 'Om uw wachtwoord opnieuw in te stellen - klik op de onderstaande link'
+            reset_your_password: 'Reset je wachtwoord'
+            subject: 'Wachtwoord reset'
+            to_reset_your_password: 'Klik op de onderstaande link om je wachtwoord te resetten'
+            to_reset_your_password_token: 'Gebruik de onderstaande token om je wachtwoord te resetten'
+            token: 'Je wachtwoord reset token is'
         user_registration:
             start_shopping: 'Begin met winkelen'
             subject: 'Gebruikersregistratie'
             welcome_to_our_store: 'Welkom in onze winkel!'
-            you_have_just_been_registered: 'U bent zojuist geregistreerd. Dank u'
+            you_have_just_been_registered: 'Je bent net geregistreerd. Bedankt'
         verification_token:
             hello: 'Hallo'
-            subject: 'Verificatie van e-mailadres'
-            to_verify_your_email_address: 'Om uw e-mailadres te verifiëren - klik op de onderstaande link'
-            verify_your_email_address: 'Verifieer uw e-mailadres'
+            subject: 'E-mailadres verificatie'
+            to_verify_your_email_address: 'Klik op de onderstaande link om je e-mailadres te verifiëren'
+            verify_your_email_address: 'Verifieer je e-mailadres'
+    footer:
+        banner:
+            free_shipping_title: 'Gratis Verzending & Retour'
+            free_shipping_content: 'Gratis verzending op alle bestellingen'
+            guarantee_title: 'Geld Terug Garantie'
+            guarantee_content: '30 dagen geld terug garantie'
+            multiple_payments_title: 'Meerdere Betalingsmethoden'
+            multiple_payments_content: 'We accepteren creditcards en PayPal'
     homepage:
         about_us: 'Over ons'
-        about_us_content: 'Welkom bij onze winkel, uw nummer één webwinkel die u de beste producten biedt. U kunt kiezen uit de allerbeste kleding en schoenen uit ons aanbod. (<i>U kunt deze inhoud wijzigen door de sleutel "sylius.homepage.about_us_content" in uw vertaalbestand te overschrijven</i>)'
-        banner_content: 'Zet je schrap! De winter komt eraan'
+        about_us_content: 'Welkom in onze winkel, je nummer één online winkel die je de allerbeste producten biedt. Je kunt kiezen uit de beste kleding en schoenen uit ons aanbod. (<i>Je kunt deze inhoud aanpassen door de "sylius.homepage.about_us_content" sleutel in je vertalingsbestand te overschrijven</i>)'
+        banner_content: 'Bereid je voor! De winter komt eraan'
+        banner_button: 'Bekijk de nieuwe collectie'
+        carousel_header: 'Uitgelichte producten'
+        latest_deals: 'Laatste deals'
+        new_collection: 'Nieuwe collectie'
         newsletter: 'Nieuwsbrief'
-        newsletter_description: 'Schrijf u in op onze nieuwsbrief om nieuwe aanbiedingen te zien die op u wachten! (<i>U kunt deze inhoud wijzigen door de sleutel "sylius.homepage.newsletter_description" in uw vertaalbestand te overschrijven</i>)'
-        subscribe: 'Abonneren'
+        newsletter_description: 'Abonneer je op onze nieuwsbrief om nieuwe aanbiedingen te zien die op je wachten! (<i>Je kunt deze inhoud aanpassen door de "sylius.homepage.newsletter_description" sleutel in je vertalingsbestand te overschrijven</i>)'
+        subscribe: 'Abonneer'
     lightbox:
         image_album_label: 'Afbeelding %1 van %2'
     menu:
@@ -39,6 +56,7 @@ sylius:
                 address_book: 'Adresboek'
                 change_password: 'Wachtwoord wijzigen'
                 dashboard: 'Dashboard'
-                header: 'Uw account'
+                header: 'Jouw account'
                 order_history: 'Bestelgeschiedenis'
                 personal_information: 'Persoonlijke gegevens'
+    top_bar: 'Meld je aan voor onze nieuwsbrief en krijg 20% korting'

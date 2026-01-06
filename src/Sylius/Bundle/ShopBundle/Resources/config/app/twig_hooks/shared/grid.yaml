@@ -1,0 +1,12 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.shared.grid':
+            filters:
+                template: '@SyliusShop/shared/grid/filters.html.twig'
+                priority: 200
+            data_table:
+                template: '@SyliusShop/shared/grid/data_table.html.twig'
+                priority: 100
+            no_results:
+                template: '@SyliusShop/shared/grid/no_results.html.twig'
+                priority: 0

@@ -1,0 +1,17 @@
+<a
+    href="{{ path('sylius_admin_product_review_index', { criteria: { 'status': constant('Sylius\\Component\\Review\\Model\\ReviewInterface::STATUS_NEW') } }) }}"
+    class="d-flex align-items-center justify-content-between list-group-item list-group-item-action border-bottom"
+    {{ attributes }}
+    {{ sylius_test_html_attribute('product-reviews-to-approve') }}
+>
+    <div><strong>{{ 'sylius.ui.product_reviews'|trans }}</strong> {{ 'sylius.ui.to_approve'|trans }}</div>
+    <div class="d-flex align-items-center gap-4">
+        <span
+            class="badge rounded-pill bg-dark-lt text-default-fg py-2 px-3 fs-4 fw-bold my-1"
+            {{ sylius_test_html_attribute('product-reviews-to-approve-count') }}
+        >
+            {{ count }}
+        </span>
+        {{ ux_icon('tabler:chevron-right') }}
+    </div>
+</a>

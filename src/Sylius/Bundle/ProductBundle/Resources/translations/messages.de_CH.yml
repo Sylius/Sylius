@@ -4,28 +4,28 @@
 sylius:
     form:
         product:
-            name: Name
-            description: Beschreibung
-            attributes: Attribute
-            options: Optionen
-            meta_keywords: Meta-Stichwörter
-            meta_description: Meta-Beschreibung
-            slug: Kategorie SEO-URL
-            taxons: Produktgruppen
+            name: 'Name'
+            description: 'Beschreibung'
+            attributes: 'Attribute'
+            options: 'Optionen'
+            meta_keywords: 'Meta-Schlüsselwörter'
+            meta_description: 'Meta-Beschreibung'
+            slug: 'Slug'
+            taxons: 'Taxons'
         product_variant:
-            name: Name
+            name: 'Name'
         association_type:
-            name: Name
-            translations: Übersetzungen
+            name: 'Name'
+            translations: 'Übersetzungen'
         association:
-            type: Verbindungs-Typ
-            product: Zugehöriges Produkt
+            type: 'Assoziationstyp'
+            product: 'Zugehöriges Produkt'
         variant:
-            name: Name
+            name: 'Name'
         option:
-            name: Name
-            position: Position
-            values: Mögliche Werte
+            name: 'Name'
+            position: 'Position'
+            values: 'Mögliche Werte'
         option_value:
-            add_value: Wert hinzufügen
-            value: Wert
+            add_value: 'Wert hinzufügen'
+            value: 'Wert'

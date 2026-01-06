@@ -3,10 +3,10 @@
 
 sylius:
     payment:
-        authorized: 'Platba bola schválená.'
+        authorized: 'Platba bola autorizovaná.'
         cancelled: 'Platba bola zrušená.'
         completed: 'Platba bola dokončená.'
-        failed: 'Platbu sa nepodarilo dokončiť.'
+        failed: 'Platba zlyhala.'
         processing: 'Platba sa spracováva.'
-        refunded: 'Platba bola úspešne refundovaná.'
-        unknown: 'Vyskytol sa neznámy problém s platbou.'
+        refunded: 'Platba bola úspešne vrátená.'
+        unknown: 'Pri platbe došlo k neznámej chybe.'

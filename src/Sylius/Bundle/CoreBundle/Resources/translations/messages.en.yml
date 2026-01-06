@@ -68,6 +68,8 @@ sylius:
                 different_shipping_address: Use different address for shipping?
             payment_method: Payment Method
             shipping_method: Shipping Method
+        currency:
+            select: Select currency
         promotion:
             channels: Channels
         promotion_action:
@@ -277,11 +279,6 @@ sylius:
             version: PHP version
             version_recommended: Recommended PHP version
             version_help: Sylius recommends %recommended% PHP version, your current version is %current%. Please upgrade.
-
-    payum_gateway:
-        cash_on_delivery: Cash on delivery
-        offline: Offline
-        paypal_express_checkout: Paypal Express Checkout
 
     shipping_method_resolver:
         by_zones_and_channel: By zones and channel

@@ -17,8 +17,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.registry.shipping_calculator" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>Sylius\Component\Shipping\Calculator\CalculatorInterface</argument>
             <argument>shipping calculator</argument>

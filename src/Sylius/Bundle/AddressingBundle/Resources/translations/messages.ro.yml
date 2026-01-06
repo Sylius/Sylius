@@ -4,39 +4,38 @@
 sylius:
     form:
         address:
-            city: Oraș
-            company: Firmă
-            country: Țară
-            first_name: Prenume
-            last_name: Nume
-            phone_number: Număr de telefon
-            postcode: Cod poștal
-            street: Stradă
-            province: Județ
-            zone: Zonă
+            city: 'Oraș'
+            company: 'Companie'
+            country: 'Țară'
+            first_name: 'Prenume'
+            last_name: 'Nume de familie'
+            phone_number: 'Număr de telefon'
+            postcode: 'Cod poștal'
+            street: 'Adresă stradală'
+            province: 'Județ'
+            zone: 'Zonă'
         country:
-            add_province: Adăugare județ
-            name: Nume produs
-            provinces: Județe
-            select: Selectaţi
-            enabled: Activat
+            add_province: 'Adăugați provincie'
+            name: 'Nume'
+            provinces: 'Județe'
+            select: 'Selectați'
+            enabled: 'Activat'
         province:
-            name: Nume produs
-            abbreviation: Abreviere
-            select: Selectaţi
+            name: 'Nume'
+            abbreviation: 'Abreviere'
+            select: 'Selectați'
         zone:
-            add_member: Adaugă membru
-            members: Membri
-            name: Nume produs
-            type: Tip
+            add_member: 'Adăugați membru'
+            members: 'Membri'
+            name: 'Nume'
+            type: 'Tip'
             types:
-                country: Țară
-                province: Județ
-                zone: Zonă
-            scope: Domeniul de aplicare
+                country: 'Țară'
+                province: 'Județ'
+                zone: 'Zonă'
+            scope: 'Scop'
             scopes:
-                all: Tot
-            select: Selectaţi
-            select_scope: Selectaţi domeniul de aplicare
+                all: 'Toate'
+            select: 'Selectați'
         zone_member:
-            select: Selectaţi
+            select: 'Selectați'

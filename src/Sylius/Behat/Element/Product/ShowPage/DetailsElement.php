@@ -13,25 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use Behat\Mink\Element\NodeElement;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-final class DetailsElement extends Element implements DetailsElementInterface
+class DetailsElement extends SyliusElement implements DetailsElementInterface
 {
     public function getProductCode(): string
     {
         return $this->getElement('product_code')->getText();
     }
 
-    public function hasChannel(string $channelName): bool
+    public function hasChannel(string $channelCode): bool
     {
-        $channels = $this->getElement('channels');
-
-        /** @var NodeElement $channel */
-        foreach ($channels->findAll('css', 'span') as $channel) {
-            if ($channel->getText() === $channelName) {
-                return true;
-            }
+        if ($this->hasElement('channel', ['%channel_code%' => $channelCode])) {
+            return true;
         }
 
         return false;
@@ -39,11 +33,11 @@ final class DetailsElement extends Element implements DetailsElementInterface
 
     public function countChannels(): int
     {
-        if (!$this->hasElement('channels')) {
+        if (!$this->hasElement('channel')) {
             return 0;
         }
 
-        $channels = $this->getElement('channels')->findAll('css', 'span.channel-name');
+        $channels = $this->getDocument()->findAll('css', ['data-test-channel']);
 
         return \count($channels);
     }
@@ -61,10 +55,10 @@ final class DetailsElement extends Element implements DetailsElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'channels' => '#details tr:contains("Channels") td:nth-child(2)',
-            'current_stock' => '#details tr:contains("Current stock") td:nth-child(2)',
-            'product_code' => '#details tr:contains("Code") td:nth-child(2)',
-            'tax_category' => '#details tr:contains("Tax category") td:nth-child(2)',
+            'channel' => '[data-test-channel="%channel_code%"]',
+            'current_stock' => '[data-test-current-stock]',
+            'product_code' => '[data-test-product-code]',
+            'tax_category' => '[data-test-tax-category]',
         ]);
     }
 }

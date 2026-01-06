@@ -16,27 +16,24 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
-use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Subresources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingPromotionCouponsContext implements Context
+final readonly class ManagingPromotionCouponsContext implements Context
 {
     use ValidationTrait;
-
-    private ?RequestInterface $request = null;
 
     public function __construct(
         private ApiClientInterface $client,
         private RequestFactoryInterface $requestFactory,
         private ResponseCheckerInterface $responseChecker,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
+        private IriConverterInterface $iriConverter,
     ) {
     }
 
@@ -47,20 +44,24 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iWantToViewAllCouponsOfThisPromotion(PromotionInterface $promotion): void
     {
-        $this->client->index(Resources::PROMOTION_COUPONS);
-        $this->client->addFilter(
-            'promotion',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($promotion, 'admin'),
-        );
+        $this->client->requestGet(sprintf('promotions/%s/coupons', $promotion->getCode()));
+    }
+
+    /**
+     * @When I filter by code containing :phrase
+     */
+    public function iFilterByCodeContaining(string $phrase): void
+    {
+        $this->client->addFilter('code', $phrase);
         $this->client->filter();
     }
 
     /**
-     * @When I want to create a new coupon
+     * @When I want to create a new coupon for a non-existing promotion
      */
-    public function iWantToCreateANewCoupon(): void
+    public function iWantToCreateANewCouponForNonExistingPromotion(): void
     {
-        $this->client->buildCreateRequest(Resources::PROMOTION_COUPONS);
+        $this->client->buildCreateRequest('promotions/non-existing-promotion/coupons');
     }
 
     /**
@@ -68,19 +69,17 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iWantToCreateANewCouponForPromotion(PromotionInterface $promotion): void
     {
-        $this->client->buildCreateRequest(Resources::PROMOTION_COUPONS);
-        $this->client->addRequestData(
-            'promotion',
-            $this->sectionAwareIriConverter->getIriFromResourceInSection($promotion, 'admin'),
-        );
+        $this->client->buildCreateRequest(sprintf('promotions/%s/coupons', $promotion->getCode()));
     }
 
     /**
-     * @When I want to modify the :coupon coupon for this promotion
+     * @When /^I want to modify the ("[^"]+" coupon) for (this promotion)$/
      */
-    public function iWantToModifyTheCouponOfThisPromotion(PromotionCouponInterface $coupon): void
+    public function iWantToModifyTheCouponForThisPromotion(PromotionCouponInterface $coupon, PromotionInterface $promotion): void
     {
-        $this->client->buildUpdateRequest(Resources::PROMOTION_COUPONS, $coupon->getCode());
+        $this->client->buildUpdateRequest(
+            sprintf('promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()),
+        );
     }
 
     /**
@@ -88,8 +87,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iWantToGenerateNewCouponsForThisPromotion(PromotionInterface $promotion): void
     {
-        $this->request = $this->requestFactory->create('admin', 'promotion-coupons/generate', 'Bearer');
-        $this->request->updateContent(['promotionCode' => $promotion->getCode()]);
+        $this->client->buildCreateRequest(sprintf('promotions/%s/coupons/generate', $promotion->getCode()));
     }
 
     /**
@@ -97,7 +95,9 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iDeleteCouponRelatedToThisPromotion(PromotionCouponInterface $coupon): void
     {
-        $this->client->delete(Resources::PROMOTION_COUPONS, $coupon->getCode());
+        $this->client->requestDelete(
+            sprintf('promotions/%s/coupons/%s', $coupon->getPromotion()->getCode(), $coupon->getCode()),
+        );
     }
 
     /**
@@ -148,7 +148,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyItsAmountAs(int $amount): void
     {
-        $this->request->updateContent(['amount' => $amount]);
+        $this->client->updateRequestData(['amount' => $amount]);
     }
 
     /**
@@ -156,7 +156,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyPrefixAs(string $prefix): void
     {
-        $this->request->updateContent(['prefix' => $prefix]);
+        $this->client->updateRequestData(['prefix' => $prefix]);
     }
 
     /**
@@ -164,7 +164,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifySuffixAs(string $suffix): void
     {
-        $this->request->updateContent(['suffix' => $suffix]);
+        $this->client->updateRequestData(['suffix' => $suffix]);
     }
 
     /**
@@ -173,7 +173,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
     {
-        $this->request->updateContent(['codeLength' => $codeLength]);
+        $this->client->updateRequestData(['codeLength' => $codeLength]);
     }
 
     /**
@@ -181,7 +181,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iSetGeneratedCouponsUsageLimitTo(int $limit): void
     {
-        $this->request->updateContent(['usageLimit' => $limit]);
+        $this->client->updateRequestData(['usageLimit' => $limit]);
     }
 
     /**
@@ -189,7 +189,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iMakeGeneratedCouponsValidUntil(\DateTimeInterface $date): void
     {
-        $this->request->updateContent(['expiresAt' => $date->format('Y-m-d')]);
+        $this->client->updateRequestData(['expiresAt' => $date->format('Y-m-d')]);
     }
 
     /**
@@ -213,7 +213,7 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iGenerateTheseCoupons(): void
     {
-        $this->client->executeCustomRequest($this->request);
+        $this->client->request();
     }
 
     /**
@@ -272,11 +272,13 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function thereShouldBeACouponWithCode(PromotionInterface $promotion, string $code): void
     {
-        Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->subResourceIndex(Resources::PROMOTIONS, Subresources::PROMOTION_COUPONS, $promotion->getCode()),
-            'code',
-            $code,
-        ));
+        Assert::true(
+            $this->responseChecker->hasItemWithValue(
+                $this->client->requestGet(sprintf('promotions/%s/coupons', $promotion->getCode())),
+                'code',
+                $code,
+            ),
+        );
     }
 
     /**
@@ -285,7 +287,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function thereShouldBeNoCouponWithCode(string $code): void
     {
         Assert::false($this->responseChecker->hasItemWithValue(
-            $this->client->index(Resources::PROMOTION_COUPONS),
+            $this->client->requestGet('promotions/non-existing-promotion/coupons'),
             'code',
             $code,
         ));
@@ -389,7 +391,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon): void
     {
         Assert::false($this->responseChecker->hasItemWithValue(
-            $this->client->index(Resources::PROMOTION_COUPONS),
+            $this->client->requestGet(sprintf('promotions/%s/coupons', $coupon->getPromotion()->getCode())),
             'code',
             $coupon->getCode(),
         ));
@@ -401,7 +403,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
-            $this->client->index(Resources::PROMOTION_COUPONS),
+            $this->client->requestGet(sprintf('promotions/%s/coupons', $coupon->getPromotion()->getCode())),
             'code',
             $coupon->getCode(),
         ));
@@ -509,7 +511,7 @@ final class ManagingPromotionCouponsContext implements Context
         );
         Assert::same(
             $this->responseChecker->getError($response),
-            'promotion: Please provide a promotion for this coupon.',
+            'Parent resource not found.',
         );
     }
 
@@ -630,6 +632,26 @@ final class ManagingPromotionCouponsContext implements Context
             $used,
             sprintf('The promotion coupon %s has been used %s times', $promotionCoupon->getCode(), $returnedPromotionCoupon['used']),
         );
+    }
+
+    /**
+     * @Then I should see a single promotion coupon in the list
+     */
+    public function iShouldSeeASinglePromotionCouponInTheList(): void
+    {
+        Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
+    }
+
+    /**
+     * @Then I should see the promotion coupon :coupon in the list
+     */
+    public function iShouldSeeThePromotionCouponInTheList(PromotionCouponInterface $coupon): void
+    {
+        Assert::true($this->responseChecker->hasItemWithValue(
+            $this->client->getLastResponse(),
+            'code',
+            $coupon->getCode(),
+        ));
     }
 
     private function sortBy(string $order, string $field): void

@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    payment:
+        authorized: '支払いが承認されました。'
+        cancelled: '支払いがキャンセルされました。'
+        completed: '支払いが完了しました。'
+        failed: '支払いに失敗しました。'
+        processing: '支払いを処理中です。'
+        refunded: '支払いが正常に返金されました。'
+        unknown: '支払いで不明な問題が発生しました。'

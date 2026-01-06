@@ -1,0 +1,46 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.payment_request.show.content':
+            sections:
+                template: '@SyliusAdmin/payment_request/show/content/sections.html.twig'
+                priority: 0
+        
+        'sylius_admin.payment_request.show.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/payment_request/show/content/header/breadcrumbs.html.twig'
+                priority: 0
+
+        'sylius_admin.payment_request.show.content.sections':
+            general:
+                template: '@SyliusAdmin/payment_request/show/content/sections/general.html.twig'
+                priority: 0
+
+        'sylius_admin.payment_request.show.content.sections#left':
+            payload:
+                template: '@SyliusAdmin/payment_request/show/content/sections/payload.html.twig'
+                priority: 0
+
+        'sylius_admin.payment_request.show.content.sections#right':
+            response_data:
+                template: '@SyliusAdmin/payment_request/show/content/sections/response_data.html.twig'
+                priority: 0
+
+        'sylius_admin.payment_request.show.content.sections.general':
+            hash:
+                template: '@SyliusAdmin/payment_request/show/content/sections/general/hash.html.twig'
+                priority: 500
+            method:
+                template: '@SyliusAdmin/payment_request/show/content/sections/general/method.html.twig'
+                priority: 400
+            action:
+                template: '@SyliusAdmin/payment_request/show/content/sections/general/action.html.twig'
+                priority: 300
+            state:
+                template: '@SyliusAdmin/payment_request/show/content/sections/general/state.html.twig'
+                priority: 200
+            created_at:
+                template: '@SyliusAdmin/payment_request/show/content/sections/general/created_at.html.twig'
+                priority: 100
+            updated_at:
+                template: '@SyliusAdmin/payment_request/show/content/sections/general/updated_at.html.twig'
+                priority: 0

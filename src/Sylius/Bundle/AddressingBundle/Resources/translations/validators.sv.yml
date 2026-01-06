@@ -4,48 +4,68 @@
 sylius:
     address:
         city:
+            max_length: Stadens namn får inte vara längre än {{ limit }} tecken.|Stadens namn får inte vara längre än {{ limit }} tecken.
+            min_length: Stadens namn måste vara minst {{ limit }} tecken långt.|Stadens namn måste vara minst {{ limit }} tecken långt.
             not_blank: Ange stad.
         country:
             not_blank: Välj ett land.
             disabled: Valt land är inaktiverat. Var god välj ett annat.
         first_name:
+            max_length: Förnamnet får inte vara längre än {{ limit }} tecken.|Förnamnet får inte vara längre än {{ limit }} tecken.
+            min_length: Förnamnet måste vara minst {{ limit }} tecken långt.|Förnamnet måste vara minst {{ limit }} tecken långt.
             not_blank: Ange förnamn.
         last_name:
+            max_length: Efternamnet får inte vara längre än {{ limit }} tecken.|Efternamnet får inte vara längre än {{ limit }} tecken.
+            min_length: Efternamnet måste vara minst {{ limit }} tecken långt.|Efternamnet måste vara minst {{ limit }} tecken långt.
             not_blank: Ange efternamn.
         postcode:
+            max_length: Postnumret får inte vara längre än {{ limit }} tecken.|Postnumret får inte vara längre än {{ limit }} tecken.
+            min_length: Postnumret måste vara minst {{ limit }} tecken långt.|Postnumret måste vara minst {{ limit }} tecken långt.
             not_blank: Ange postnummer.
         province:
             valid: Välj län.
         street:
+            max_length: Gatuadressen får inte vara längre än {{ limit }} tecken.|Gatuadressen får inte vara längre än {{ limit }} tecken.
+            min_length: Gatuadressen måste vara minst {{ limit }} tecken lång.|Gatuadressen måste vara minst {{ limit }} tecken lång.
             not_blank: Ange gatuadress.
         not_shippable: Denna adress är inte en giltig fraktadress.
     country:
         code:
             not_blank: Var god ange landets ISOkod.
-            regex: Landskoden kan enbart bestå av bokstäver, siffror, bindestreck och understreck.
             unique: Landets ISOkod måste vara unik.
+            country: Landets ISOkod är ogiltig.
+        unique_provinces: Alla län i detta land måste ha unika koder och namn.
     province:
         code:
-            min_length: Provinsens namn måste innehålla minst 5 tecken|Provinsens namn måste innehålla minst 5 tecken.
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
             not_blank: Var god ange provinskod.
             regex: Provinskoden bör ha följande format XX-XX (e.g. US-FL).
             unique: Provinskoden måste vara unik.
         name:
+            max_length: Länsnamnet får inte vara längre än {{ limit }} tecken.|Länsnamnet får inte vara längre än {{ limit }} tecken.
+            min_length: Länsnamnet måste vara minst {{ limit }} tecken långt.|Länsnamnet måste vara minst {{ limit }} tecken långt.
             not_blank: Ange län.
-            unique: Provinsens namn måste vara unik.
+            unique: Provinsens namn måste vara unikt.
     zone:
         scope:
             not_blank: Var god ange omfattningen.
         code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
             not_blank: Var god skriv in en zonkod.
             regex: Zonkod kan enbart bestå av bokstäver, siffror, bindestreck och understreck.
             unique: Zonkoden måste vara unik.
+        type:
+            invalid: "Typen {{ value }} är ogiltig. Tillåtna typer är: {{ choices }}."
         members:
             min_count: Lägg till minst {{ limit }} zonmedlem.
         name:
+            max_length: Zonnamnet får inte vara längre än {{ limit }} tecken.|Zonnamnet får inte vara längre än {{ limit }} tecken.
+            min_length: Zonnamnet måste vara minst {{ limit }} tecken långt.|Zonnamnet måste vara minst {{ limit }} tecken långt.
             not_blank: Ange zon.
     zone_member:
+        cannot_be_the_same_as_zone: En zonmedlem kan inte vara samma som zonen.
         code:
+            max_length: Koden får inte vara längre än {{ limit }} tecken.
             not_blank: Var god välj en zonmedlem.
             regex: En zonmedlems kod kan endast bestå av bokstäver, siffror, bindestreck och understreck.
         unique: Vald zonmedlem är redan i den här zonen.

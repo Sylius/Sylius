@@ -10,8 +10,8 @@ default:
                 - sylius.behat.context.transform.country
                 - sylius.behat.context.transform.province
                 - sylius.behat.context.transform.shared_storage
-                - sylius.behat.context.transform.zone_member
                 - sylius.behat.context.transform.zone
+                - sylius.behat.context.transform.zone_member
 
                 - sylius.behat.context.setup.admin_api_security
                 - sylius.behat.context.setup.geographical
@@ -21,6 +21,7 @@ default:
                 - sylius.behat.context.api.admin.managing_zones
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@managing_zones&&@api"

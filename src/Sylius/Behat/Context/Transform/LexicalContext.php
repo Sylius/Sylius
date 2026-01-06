@@ -14,12 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 
 final class LexicalContext implements Context
 {
-    /**
-     * @Transform /^"(\-)?(?:€|£|￥|\$)([0-9,]+(\.[0-9]*)?)"$/
-     */
+    #[Transform('/^"(\-)?(?:€|£|￥|\$)([0-9,]+(\.[0-9]*)?)"$/')]
     public function getPriceFromString(string $sign, string $price): int
     {
         $this->validatePriceString($price);
@@ -34,17 +33,13 @@ final class LexicalContext implements Context
         return $price;
     }
 
-    /**
-     * @Transform /^"((?:\d+\.)?\d+)%"$/
-     */
+    #[Transform('/^"((?:\d+\.)?\d+)%"$/')]
     public function getPercentageFromString(string $percentage): float
     {
         return (float) $percentage / 100;
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     private function validatePriceString(string $price): void
     {
         if (!preg_match('/^.*\.\d{2}$/', $price)) {

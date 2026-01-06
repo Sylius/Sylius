@@ -1,0 +1,43 @@
+{% import "@SyliusUi/macro/rtl.html.twig" as rtl %}
+
+{% set generic_hook = 'sylius_shop.base' %}
+{% set prefixes = prefixes|default([])|merge([generic_hook]) %}
+
+<!DOCTYPE html>
+
+<html lang="{{ app.request.locale|slice(0, 2) }}" {{ rtl.default(sylius.localeCode) }}>
+    <head>
+        {% block metatags %}
+            {% hook '#metatags' with { _prefixes: prefixes } %}
+        {% endblock %}
+
+        <title>{% block title %}{{ sylius.channel.name }}{% endblock %}</title>
+
+        {% block stylesheets %}
+            {% hook '#stylesheets' with { _prefixes: prefixes } %}
+        {% endblock %}
+
+        {% hook 'head' with { _prefixes: prefixes } %}
+    </head>
+
+    <body data-route="{{ app.request.get('_route') }}">
+        {% block body %}
+            <div class="{% apply escape %}{% hook '#body_classes' with { _prefixes: prefixes } %}{% endapply %}">
+                {% block header %}
+                    {% hook 'header' with { _prefixes: prefixes } %}
+                {% endblock %}
+
+                {% block content %}{% endblock %}
+
+                {% block footer %}
+                    {% hook 'footer' with { _prefixes: prefixes } %}
+                {% endblock %}
+            </div>
+            {% hook 'offcanvas' with { _prefixes: prefixes } %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% hook '#javascripts' with { _prefixes: prefixes } %}
+        {% endblock %}
+    </body>
+</html>

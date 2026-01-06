@@ -4,12 +4,12 @@
 sylius:
     review:
         author:
-            already_exists: 此电子邮件已被注册，请登录或找回密码。
+            already_exists: '该邮箱已注册，请登录或使用忘记密码功能。'
         comment:
-            not_blank: 评价不应为空。
+            not_blank: '评论内容不能为空。'
         rating:
-            not_blank: 请检查评论的评分。
+            not_blank: '您必须选择评论评分。'
         title:
-            not_blank: 评论标题不应为空。
-            min_length: 评论标题必须有至少 2 个字符
-            max_length: 评论标题最多 255 个字符
+            not_blank: '评论标题不能为空。'
+            min_length: '评论标题至少需要2个字符。'
+            max_length: '评论标题最多可包含255个字符。'

@@ -4,11 +4,13 @@
 sylius:
     form:
         tax_category:
-            name: Naam
-            description: Omschrijving
+            description: 'Beschrijving'
+            name: 'Naam'
         tax_rate:
-            category: Categorie
-            name: Naam
-            amount: Bedrag
-            included_in_price: Inbegrepen in de prijs?
-            calculator: Calculator
+            amount: 'Bedrag'
+            calculator: 'Rekenmachine'
+            category: 'Categorie'
+            end_date: 'Einddatum'
+            included_in_price: 'Inbegrepen in prijs?'
+            name: 'Naam'
+            start_date: 'Startdatum'

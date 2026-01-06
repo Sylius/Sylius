@@ -1,0 +1,7 @@
+{% from '@SyliusAdmin/order/macro/order_payment_state_label.html.twig' import label %}
+
+{% set payment = hookable_metadata.context.payment %}
+
+<td class="w-1" {{ sylius_test_html_attribute('payment-state') }}>
+    {{ label(payment.state) }}
+</td>

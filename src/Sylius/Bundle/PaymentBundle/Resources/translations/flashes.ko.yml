@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    payment:
+        authorized: '결제가 승인되었습니다.'
+        cancelled: '결제가 취소되었습니다.'
+        completed: '결제가 완료되었습니다.'
+        failed: '결제에 실패했습니다.'
+        processing: '결제가 처리 중입니다.'
+        refunded: '결제가 환불되었습니다.'
+        unknown: '결제에 알 수 없는 문제가 발생했습니다.'

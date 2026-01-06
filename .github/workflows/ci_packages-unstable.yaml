@@ -18,29 +18,18 @@ permissions:
     contents: read
 
 jobs:
-    get-matrix:
-        runs-on: ubuntu-latest
-        name: "Get matrix"
-        outputs:
-            matrix: ${{ steps.matrix.outputs.prop }}
-        steps:
-            -   uses: actions/checkout@v4
-            -   name: "Get matrix"
-                id: matrix
-                uses: notiz-dev/github-action-json-property@release
-                with:
-                    path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.packages'
-
     test_unstable:
-        needs: get-matrix
         runs-on: ubuntu-latest
         name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (Unstable Dependencies)"
         timeout-minutes: 25
 
         strategy:
             fail-fast: false
-            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
+            matrix:
+                include:
+                    -
+                        php: "8.3"
+                        symfony: "^7.4@beta"
 
         env:
             COMPOSER_ROOT_VERSION: "dev-main"
@@ -76,7 +65,7 @@ jobs:
                         "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
 
             -   name: Install dependencies
-                run: composer update --no-interaction --no-scripts
+                run: composer install --no-interaction --no-scripts
 
             -   name: "Run pipeline"
                 continue-on-error: ${{ inputs.ignore-failure }}

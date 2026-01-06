@@ -4,42 +4,49 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: Der Name des Kartenbesitzers muss mindestens {{ limit }} Zeichen lang sein.
-            not_blank: Bitte geben Sie den Namen des Karteninhabers ein.
+            min_length: 'Der Name des Karteninhabers muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen des Karteninhabers ein.'
         expiry_month:
-            max_range: Das Ablaufmonat der Kreditkarte muss zwischen {{ min }} und {{ max }} sein.
-            min_range: Das Ablaufmonat der Kreditkarte muss zwischen {{ min }} und {{ max }} sein.
-            not_blank: Bitte wählen Sie den Ablaufmonat aus.
+            max_range: 'Der Ablaufmonat der Kreditkarte muss zwischen {{ min }} und {{ max }} liegen.'
+            min_range: 'Der Ablaufmonat der Kreditkarte muss zwischen {{ min }} und {{ max }} liegen.'
+            not_blank: 'Bitte wählen Sie den Ablaufmonat aus.'
         number:
-            not_blank: Bitte geben Sie die Kartennummer ein.
-            luhn: Die eingegebene Kreditkartennummer ist ungültig.
+            not_blank: 'Bitte geben Sie die Kartennummer ein.'
+            luhn: 'Die eingegebene Kartennummer ist ungültig.'
         security_code:
-            not_blank: Bitte geben Sie den Sicherheitscode ein.
-            max_length: Der CVV Kreditkartencode muss mindestens {{ limit }} Zeichen lang sein.
-            min_length: Der CVV Kreditkartencode darf nur {{ limit }} Zeichen lang sein.
+            not_blank: 'Bitte geben Sie den Sicherheitscode ein.'
+            max_length: 'Der CVV-Code der Kreditkarte muss mindestens {{ limit }} Ziffern lang sein.'
+            min_length: 'Der CVV-Code der Kreditkarte darf höchstens {{ limit }} Ziffern lang sein.'
         expiry_year:
-            not_blank: Bitte wählen Sie das Ablaufjahr aus.
+            not_blank: 'Bitte wählen Sie das Ablaufjahr aus.'
+    gateway_config:
+        invalid_gateway_factory: 'Ungültige Gateway-Fabrik. Verfügbare Fabriken sind {{ available_factories }}.'
+        gateway_name:
+            not_blank: 'Bitte geben Sie den Namen des Gateways ein.'
+        factory_name:
+            not_blank: 'Bitte geben Sie den Namen der Gateway-Fabrik ein.'
     payment:
         currency_code:
-            not_valid: Der eingegebene Währungscode ist ungültig.
+            not_valid: 'Der eingegebene Währungscode ist ungültig.'
         method:
-            not_blank: 'Bitte wählen Sie eine Zahlungsart aus.'
+            not_blank: 'Bitte wählen Sie eine Zahlungsmethode aus.'
     payment_method:
         gateway:
-            not_blank: Bitte wählen Sie eine Zahlungsmethodeschnittstelle aus.
+            not_blank: 'Bitte wählen Sie das Gateway der Zahlungsmethode aus.'
         name:
-            max_length: Der Name der Zahlungsmethode muss {{ limit }} oder weniger Zeichen lang sein.
-            min_length: Der Name der Zahlungsmethode muss mindestens {{ limit }} Zeichen lang sein.
-            not_blank: Bitte geben Sie einen Namen für die Zahlungsmethode an.
+            max_length: 'Der Name der Zahlungsmethode darf höchstens {{ limit }} Zeichen lang sein.'
+            min_length: 'Der Name der Zahlungsmethode muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Zahlungsmethode ein.'
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: Die Gebühr kann nicht weniger als {{ compared_value }} betragen.
-                not_blank: Bitte geben Sie die Höhe der Gebühr ein.
+                greater_than_or_equal: 'Die Gebühr darf nicht kleiner als {{ compared_value }} sein.'
+                not_blank: 'Bitte geben Sie den Gebührenbetrag ein.'
             percent:
-                max_range: Prozentuale Gebühr darf nicht höher als {{ limit }} sein.
-                min_range: Prozentuale Gebühr darf nicht unter {{ limit }} sein.
-                not_blank: Bitte geben Sie die prozentuale Gebühr ein.
+                max_range: 'Der prozentuale Gebührensatz darf nicht höher als {{ limit }} sein.'
+                min_range: 'Der prozentuale Gebührensatz darf nicht niedriger als {{ limit }} sein.'
+                not_blank: 'Bitte geben Sie den prozentualen Gebührensatz ein.'
         code:
-            not_blank: 'Bitte geben Sie ein Kürzel für die Zahlungsmethode an.'
-            regex: 'Kürzel der Zahlungsweise darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
-            unique: 'Eine Zahlungsmethode mit diesem Kürzel existiert bereits.'
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Code der Zahlungsmethode ein.'
+            regex: 'Der Code der Zahlungsmethode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Die Zahlungsmethode mit dem angegebenen Code existiert bereits.'

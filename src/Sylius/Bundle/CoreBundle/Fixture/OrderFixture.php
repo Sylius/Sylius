@@ -16,97 +16,24 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
-use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\OrderExampleFactory;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
-use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
-use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementCheckerInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
-use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Webmozart\Assert\Assert;
 
 class OrderFixture extends AbstractFixture
 {
-    /** @var OrderExampleFactory */
-    protected $orderExampleFactory;
-
-    /** @var ObjectManager */
-    protected $orderManager;
-
     private Generator $faker;
 
-    /**
-     * @param FactoryInterface<OrderInterface> $orderFactory
-     * @param FactoryInterface<OrderItemInterface> $orderItemFactory
-     * @param RepositoryInterface<ChannelInterface> $channelRepository
-     * @param RepositoryInterface<CustomerInterface> $customerRepository
-     * @param RepositoryInterface<ProductInterface>|ProductRepositoryInterface<ProductInterface> $productRepository
-     * @param RepositoryInterface<CountryInterface> $countryRepository
-     * @param FactoryInterface<AddressInterface> $addressFactory
-     */
     public function __construct(
-        FactoryInterface $orderFactory,
-        FactoryInterface $orderItemFactory,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        ObjectManager $orderManager,
-        RepositoryInterface $channelRepository,
-        RepositoryInterface $customerRepository,
-        ProductRepositoryInterface|RepositoryInterface $productRepository,
-        RepositoryInterface $countryRepository,
-        PaymentMethodRepositoryInterface $paymentMethodRepository,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        FactoryInterface $addressFactory,
-        StateMachineFactoryInterface|StateMachineInterface $stateMachineFactory,
-        OrderShippingMethodSelectionRequirementCheckerInterface $orderShippingMethodSelectionRequirementChecker,
-        OrderPaymentMethodSelectionRequirementCheckerInterface $orderPaymentMethodSelectionRequirementChecker,
-        ?OrderExampleFactory $orderExampleFactory = null,
+        protected ObjectManager $orderManager,
+        protected OrderExampleFactory $orderExampleFactory,
     ) {
-        if ($orderExampleFactory === null) {
-            Assert::isInstanceOf($productRepository, ProductRepositoryInterface::class);
-
-            $orderExampleFactory = new OrderExampleFactory(
-                $orderFactory,
-                $orderItemFactory,
-                $orderItemQuantityModifier,
-                $orderManager,
-                $channelRepository,
-                $customerRepository,
-                $productRepository,
-                $countryRepository,
-                $paymentMethodRepository,
-                $shippingMethodRepository,
-                $addressFactory,
-                $stateMachineFactory,
-                $orderShippingMethodSelectionRequirementChecker,
-                $orderPaymentMethodSelectionRequirementChecker,
-            );
-
-            trigger_deprecation(
-                'sylius/core-bundle',
-                '1.6',
-                'Use OrderExampleFactory. OrderFixture is deprecated and will be prohibited since Sylius 2.0.',
-            );
-        }
-
-        $this->orderManager = $orderManager;
-        $this->orderExampleFactory = $orderExampleFactory;
-
         $this->faker = Factory::create();
     }
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function load(array $options): void
     {
         $generateDates = $this->generateDates($options['amount']);
@@ -144,7 +71,10 @@ class OrderFixture extends AbstractFixture
         ;
     }
 
-    private function generateDates(int $amount): array
+    /**
+     * @return \DateTimeInterface[]
+     */
+    protected function generateDates(int $amount): array
     {
         /** @var \DateTimeInterface[] $dates */
         $dates = [];

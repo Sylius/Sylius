@@ -1,0 +1,34 @@
+{
+  "controllers": {
+    "@sylius/shop-bundle": {
+      "api-login": {
+        "main": "controllers/ApiLoginController.js",
+        "enabled": true,
+        "webpackMode": "lazy",
+        "fetch": "lazy"
+      }
+    },
+    "@symfony/ux-autocomplete": {
+      "autocomplete": {
+        "main": "dist/controller.js",
+        "webpackMode": "eager",
+        "fetch": "eager",
+        "enabled": true,
+        "autoimport": {
+          "tom-select/dist/css/tom-select.default.css": false,
+          "tom-select/dist/css/tom-select.bootstrap5.css": false
+        }
+      }
+    },
+    "@symfony/ux-live-component": {
+      "live": {
+        "enabled": true,
+        "fetch": "eager",
+        "autoimport": {
+          "@symfony/ux-live-component/dist/live.min.css": true
+        }
+      }
+    }
+  },
+  "entrypoints": []
+}

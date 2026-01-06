@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\FixedDiscountPriceCalculator;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPriceCalculator;
@@ -34,7 +33,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-final class ManagingCatalogPromotionsContext implements Context
+final readonly class ManagingCatalogPromotionsContext implements Context
 {
     use ValidationTrait;
 
@@ -42,9 +41,17 @@ final class ManagingCatalogPromotionsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
+    }
+
+    /**
+     * @Given I am browsing catalog promotions
+     * @When I browse catalog promotions
+     */
+    public function iBrowseCatalogPromotions(): void
+    {
+        $this->client->index(Resources::CATALOG_PROMOTIONS);
     }
 
     /**
@@ -146,7 +153,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin')]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResourceInSection($channel, 'admin')]);
     }
 
     /**
@@ -156,7 +163,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $channels = $this->responseChecker->getValue($this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()), 'channels');
 
-        foreach (array_keys($channels, $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin')) as $key) {
+        foreach (array_keys($channels, $this->iriConverter->getIriFromResourceInSection($channel, 'admin')) as $key) {
             unset($channels[$key]);
         }
 
@@ -274,13 +281,16 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I remove its every action
+     * @When I remove its last action
      */
-    public function iRemoveItsEveryAction(): void
+    public function iRemoveItsLastAction(): void
     {
         $content = $this->client->getContent();
-        $content['actions'] = [];
-        $this->client->setRequestData($content);
+        $lastKey = array_key_last($content['actions']);
+        if (null !== $lastKey) {
+            unset($content['actions'][$lastKey]);
+            $this->client->setRequestData($content);
+        }
     }
 
     /**
@@ -323,14 +333,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iMakeCatalogPromotionOperateFrom(string $startDate): void
     {
         $this->client->updateRequestData(['startDate' => $startDate]);
-    }
-
-    /**
-     * @When I browse catalog promotions
-     */
-    public function iBrowseCatalogPromotions(): void
-    {
-        $this->client->index(Resources::CATALOG_PROMOTIONS);
     }
 
     /**
@@ -471,13 +473,39 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @When I remove its every scope
+     * @When I remove its last scope
      */
-    public function iRemoveItsEveryScope(): void
+    public function iRemoveItsLastScope(): void
     {
         $content = $this->client->getContent();
-        $content['scopes'] = [];
+        $lastKey = array_key_last($content['scopes']);
+        if (null !== $lastKey) {
+            unset($content['scopes'][$lastKey]);
+            $this->client->setRequestData($content);
+        }
+    }
+
+    /**
+     * @When I add :productVariant variant to its scope
+     */
+    public function iAddVariantToItsScope(ProductVariantInterface $productVariant): void
+    {
+        $content = $this->client->getContent();
+        $content['scopes'][0]['configuration']['variants'][] = $productVariant->getCode();
         $this->client->setRequestData($content);
+    }
+
+    /**
+     * @When I remove :productVariant variant from its scope
+     */
+    public function iRemoveVariantFromItsScope(ProductVariantInterface $productVariant): void
+    {
+        $content = $this->client->getContent();
+        $key = array_search($productVariant->getCode(), $content['scopes'][0]['configuration']['variants'] ?? []);
+        if (false !== $key) {
+            unset($content['scopes'][0]['configuration']['variants'][$key]);
+            $this->client->setRequestData($content);
+        }
     }
 
     /**
@@ -487,38 +515,20 @@ final class ManagingCatalogPromotionsContext implements Context
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantInterface $productVariant,
     ): void {
+        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
+
+        $content = $this->client->getContent();
+        unset($content['scopes'][0]);
+        $content['scopes'][0]['type'] = $type;
+        $content['scopes'][0]['configuration'] = $configuration;
+
+        $this->client->setRequestData($content);
+
+        $this->client->update();
         $this->changeFirstScopeConfigurationTo(
             $catalogPromotion,
             InForVariantsScopeVariantChecker::TYPE,
             ['variants' => [$productVariant->getCode()]],
-        );
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" taxon)$/
-     */
-    public function iEditCatalogPromotionToBeAppliedOnTaxon(
-        CatalogPromotionInterface $catalogPromotion,
-        TaxonInterface $taxon,
-    ): void {
-        $this->changeFirstScopeConfigurationTo(
-            $catalogPromotion,
-            InForTaxonsScopeVariantChecker::TYPE,
-            ['taxons' => [$taxon->getCode()]],
-        );
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to be applied on ("[^"]+" product)$/
-     */
-    public function iEditCatalogPromotionToBeAppliedOnProduct(
-        CatalogPromotionInterface $catalogPromotion,
-        ProductInterface $product,
-    ): void {
-        $this->changeFirstScopeConfigurationTo(
-            $catalogPromotion,
-            InForProductScopeVariantChecker::TYPE,
-            ['products' => [$product->getCode()]],
         );
     }
 
@@ -536,43 +546,6 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iEnableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->toggleCatalogPromotion($catalogPromotion, true);
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") discount$/
-     */
-    public function iEditCatalogPromotionToHaveDiscount(CatalogPromotionInterface $catalogPromotion, float $amount): void
-    {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-        $scopes = [[
-            'type' => PercentageDiscountPriceCalculator::TYPE,
-            'configuration' => [
-                'amount' => $amount,
-            ],
-        ]];
-
-        $this->client->updateRequestData(['actions' => $scopes]);
-        $this->client->update();
-    }
-
-    /**
-     * @When /^I edit ("[^"]+" catalog promotion) to have ("[^"]+") of fixed discount in the ("[^"]+" channel)$/
-     */
-    public function iEditCatalogPromotionToHaveFixedDiscountInTheChannel(
-        CatalogPromotionInterface $catalogPromotion,
-        int $amount,
-        ChannelInterface $channel,
-    ): void {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-        $content = $this->client->getContent();
-
-        $content['actions'] = [[
-            'type' => FixedDiscountPriceCalculator::TYPE,
-            'configuration' => [$channel->getCode() => ['amount' => $amount]],
-        ]];
-
-        $this->client->setRequestData($content);
-        $this->client->update();
     }
 
     /**
@@ -1175,7 +1148,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is not assigned to %s channel', $channel->getName()),
         );
@@ -1194,7 +1167,7 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode()),
                 'channels',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
+                $this->iriConverter->getIriFromResourceInSection($channel, 'admin'),
             ),
             sprintf('Catalog promotion is assigned to %s channel', $channel->getName()),
         );
@@ -1427,7 +1400,8 @@ final class ManagingCatalogPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that the fixed amount should be a number and cannot be empty
+     * @Then I should be notified that the fixed amount should be a number
+     * @Then I should be notified that the fixed amount cannot be empty
      */
     public function iShouldBeNotifiedThatTheFixedAmountShouldBeANumber(): void
     {
@@ -1442,9 +1416,9 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatAtLeastOneOfTheProvidedChannelCodesDoesNotExist(): void
     {
-        Assert::contains(
+        Assert::regex(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Provided configuration contains errors. At least one of the provided channel codes does not exist.',
+            '/Channel with code [^"]+ does not exist/',
         );
     }
 
@@ -1613,23 +1587,6 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->client->update();
 
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
-    }
-
-    private function changeFirstScopeConfigurationTo(
-        CatalogPromotionInterface $catalogPromotion,
-        string $type,
-        array $configuration,
-    ): void {
-        $this->client->buildUpdateRequest(Resources::CATALOG_PROMOTIONS, $catalogPromotion->getCode());
-
-        $content = $this->client->getContent();
-        unset($content['scopes'][0]);
-        $content['scopes'][0]['type'] = $type;
-        $content['scopes'][0]['configuration'] = $configuration;
-
-        $this->client->setRequestData($content);
-
-        $this->client->update();
     }
 
     private function createCatalogPromotion(

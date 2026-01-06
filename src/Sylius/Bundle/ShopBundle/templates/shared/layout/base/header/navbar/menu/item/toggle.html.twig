@@ -1,0 +1,6 @@
+{% set taxon = hookable_metadata.context.taxon %}
+
+<a class="nav-link d-flex align-items-center gap-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ taxon.name }}
+    {{ ux_icon('tabler:chevron-down', { 'class': 'icon icon-sm'}) }}
+</a>

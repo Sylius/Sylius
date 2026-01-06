@@ -1,0 +1,7 @@
+{% set product = hookable_metadata.context.resource.reviewSubject %}
+
+<div class="card-footer">
+    <div class="card-text">
+        {{ 'sylius.ui.average_rating'|trans }}: {{ product.averageRating|default(0)|round(2) }}
+    </div>
+</div>

@@ -28,22 +28,17 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "stof/doctrine-extensions-bundle": "^1.4",
-        "sylius/resource-bundle": "^1.11",
-        "sylius/taxonomy": "^1.13",
-        "symfony/framework-bundle": "^5.4.21 || ^6.4"
-    },
-    "conflict": {
-        "doctrine/orm": "2.15.2",
-        "stof/doctrine-extensions-bundle": "1.8.0",
-        "twig/twig": "^3.0"
+        "php": "^8.2",
+        "stof/doctrine-extensions-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.12",
+        "sylius/taxonomy": "^2.0",
+        "symfony/framework-bundle": "^6.4.1 || ^7.2"
     },
     "require-dev": {
-        "doctrine/orm": "^2.13",
-        "phpspec/phpspec": "^7.2",
-        "phpunit/phpunit": "^9.5",
-        "symfony/dependency-injection": "^5.4.21 || ^6.4"
+        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/orm": "^2.18 || ^3.3",
+        "phpunit/phpunit": "^11.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.2"
     },
     "config": {
         "allow-plugins": {
@@ -52,7 +47,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "2.0-dev"
+        },
+        "symfony": {
+            "require": "^7.2"
         }
     },
     "autoload": {
@@ -60,15 +58,15 @@
             "Sylius\\Bundle\\TaxonomyBundle\\": ""
         },
         "exclude-from-classmap": [
-            "/Tests/"
+            "/tests/"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\TaxonomyBundle\\Tests\\": "tests/"
+            "Tests\\Sylius\\Bundle\\TaxonomyBundle\\": "tests/"
         },
         "files": [
-            "Tests/Functional/app/AppKernel.php"
+            "tests/Functional/app/AppKernel.php"
         ]
     },
     "repositories": [

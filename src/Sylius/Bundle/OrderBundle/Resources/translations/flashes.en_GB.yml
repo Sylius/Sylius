@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    cart:
+        add_item: 'Item has been added to cart'
+        cannot_modify: 'An order has already been submitted for the cart you were trying to modify.'
+        not_recalculated: 'Due to invalid values in your cart, it has not been recalculated.'
+        remove_item: 'Item has been removed from cart'
+        save: 'The cart has been successfully updated'

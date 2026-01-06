@@ -64,7 +64,9 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
 
     public function getOrderItemUnit(): ?OrderItemUnitInterface;
 
+    /** @return array<mixed> */
     public function getDetails(): array;
 
+    /** @param array<mixed> $details */
     public function setDetails(array $details): void;
 }

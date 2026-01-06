@@ -5,26 +5,28 @@ sylius:
     channel:
         delete_error: 'Canalul nu poate fi șters. Este necesar cel puțin un canal activ.'
     checkout:
-        complete_error: 'A apărut o problemă la plasarea comenzii. Te rugăm, mai încearcă o dată.'
+        complete_error: 'A apărut o problemă neașteptată la finalizarea comenzii. Vă rugăm să încercați să plasați comanda din nou.'
     contact:
-        request_success: 'Mesajul tău a fost trimis cu succes.'
-        request_error: 'A apărut o problemă la trimiterea mesajului tău. Mai încearcă o dată.'
+        request_success: 'Cererea dvs. de contact a fost trimisă cu succes.'
+        request_error: 'A apărut o problemă la trimiterea cererii de contact. Vă rugăm să încercați mai târziu.'
     customer:
-        add_address: 'Adresa a fost salvată cu succes.'
-        impersonate: 'Te-ai autentificat cu succes în numele clientului %name%.'
+        add_address: 'Adresa a fost adăugată cu succes.'
+        impersonate: 'S-a preluat identitatea clientului %name% cu succes.'
         set_address_as_default: 'Adresa a fost setată ca implicită.'
     order:
-        apply_state_machine_transition_error: 'A apărut o problemă la actualizarea comenzii. Te rugăm, mai încearcă o dată.'
-        promotion_integrity: 'Coșul tău nu mai este eligibil pentru promoția %promotionName%.'
-        total_integrity: 'Valoarea comenzii s-a schimbat, verifică informațiile și confirmă încă o dată.'
-        update_error: 'A apărut o problemă la actualizarea comenzii. Te rugăm, mai încearcă o dată.'
+        apply_state_machine_transition_error: 'A apărut o problemă neașteptată la actualizarea comenzii. Vă rugăm să încercați din nou să actualizați comanda.'
+        promotion_integrity: 'Nu mai sunteți eligibil pentru această promoție %promotionName%.'
+        total_integrity: 'Totalul comenzii dvs. a fost modificat, verificați informațiile comenzii și confirmați din nou.'
+        update_error: 'A apărut o problemă neașteptată la actualizarea comenzii. Vă rugăm să încercați din nou să actualizați comanda.'
     payment:
-        apply_state_machine_transition_error: 'A apărut o problemă la actualizarea plății. Te rugăm, mai încearcă o dată.'
+        apply_state_machine_transition_error: 'A apărut o problemă neașteptată la actualizarea plății. Vă rugăm să încercați din nou să actualizați plata.'
     product:
-        out_of_stock: 'Sunt numai %quantity% ale acestui produs în stoc.'
+        in_use_by_promotion_rule: 'Nu se poate șterge un produs care este folosit de o regulă de promovare.'
+        out_of_stock: 'Mai există doar %quantity% din acest produs în stoc.'
     product_variant:
-        update_error: 'A apărut o problemă la actualizarea variantei produsului. Te rugăm, mai încearcă o dată.'
+        update_error: 'A apărut o problemă neașteptată la actualizarea variantei de produs. Vă rugăm să încercați din nou să actualizați varianta de produs.'
     promotion:
-        update_rules: 'Unele reguli pentru promoțiile cu codurile %codes% au fost actualizate.'
+        update_rules: 'Unele reguli ale promoțiilor cu codurile %codes% au fost actualizate.'
     taxon:
-        menu_taxon_delete: 'Pentru niciun canal nu puteţi şterge un meniu cateogire.'
+        in_use_by_promotion_rule: 'Nu se poate șterge un taxon care este folosit de o regulă de promovare.'
+        menu_taxon_delete: 'Nu puteți șterge un taxon de meniu al niciunui canal.'

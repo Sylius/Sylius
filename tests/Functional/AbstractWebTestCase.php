@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional;
 
+use Sylius\Tests\Functional\app\AppKernel;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -52,6 +53,6 @@ abstract class AbstractWebTestCase extends BaseWebTestCase
 
     protected static function getKernelClass(): string
     {
-        return 'Sylius\Tests\Functional\app\AppKernel';
+        return AppKernel::class;
     }
 }

@@ -4,23 +4,32 @@
 sylius:
     tax_category:
         name:
-            not_blank: Zadejte prosím název kategorie daně.
+            not_blank: 'Prosím zadejte název daňové kategorie.'
+            min_length: 'Název daňové kategorie musí mít alespoň 1 znak.|Název daňové kategorie musí mít alespoň {{ limit }} znaků.'
+            max_length: 'Název daňové kategorie nesmí být delší než 1 znak.|Název daňové kategorie nesmí být delší než {{ limit }} znaků.'
         code:
-            not_blank: Zadejte prosím kód daňové kategorie.
-            regex: Kód daňové kategorie může být složen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.
-            unique: Daňová kategorie s tímto kódem již existuje.
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód daňové kategorie.'
+            regex: 'Kód daňové kategorie může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            unique: 'Daňová kategorie s daným kódem již existuje.'
     tax_rate:
         category:
-            not_blank: Vyberte prosím kategorii daně.
+            not_blank: 'Prosím vyberte daňovou kategorii.'
         name:
-            not_blank: Zadejte prosím název sazby daně.
+            not_blank: 'Prosím zadejte název daňové sazby.'
+            min_length: 'Název daňové sazby musí mít alespoň 1 znak.|Název daňové sazby musí mít alespoň {{ limit }} znaků.'
+            max_length: 'Název daňové sazby nesmí být delší než 1 znak.|Název daňové sazby nesmí být delší než {{ limit }} znaků.'
         amount:
-            not_blank: Zadejte prosím čásku sazby daně.
+            invalid: 'Výše daňové sazby je neplatná.'
+            not_blank: 'Prosím zadejte výši daňové sazby.'
         calculator:
-            not_blank: Vyberte prosím daňovou kalkulačku.
+            not_blank: 'Prosím vyberte kalkulátor daně.'
         zone:
-            not_blank: Prosím zvolte daňovou zónu.
+            not_blank: 'Prosím vyberte daňovou zónu.'
         code:
-            not_blank: Zadejte prosím kód daňové sazby.
-            regex: Kód daňové sazby může být tvořen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.
-            unique: Daňová sazba s tímto kódem již existuje.
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód daňové sazby.'
+            regex: 'Kód daňové sazby může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            unique: 'Daňová sazba s daným kódem již existuje.'
+        date:
+            greater_than_start_date: 'Daňová sazba by neměla skončit před tím, než začne.'

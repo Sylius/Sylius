@@ -1,0 +1,16 @@
+services:
+    acme.sylius_example.command_provider.sylius_payment:
+        class: Sylius\Bundle\PaymentBundle\CommandProvider\ActionsCommandProvider
+        arguments:
+            - !tagged_locator
+                tag: acme.sylius_example.command_provider.sylius_payment
+                index_by: 'action'
+        tags:
+            - name: sylius.payment_request.command_provider
+              gateway_factory: 'sylius_payment'
+    
+    acme.sylius_example.command_provider.sylius_payment.capture:
+        class: stdClass
+        tags:
+            -   name: acme.sylius_example.command_provider.sylius_payment
+                action: !php/const Sylius\Component\Payment\Model\PaymentRequestInterface::ACTION_CAPTURE

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.payment_request.class%">
+        <operations>
+            <operation
+                name="sylius_api_admin_payment_request_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/payment-requests/{hash}"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment_request:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.payment_request.class%" uriTemplate="/admin/payments/{paymentId}/payment-requests">
+        <uriVariables>
+            <uriVariable parameterName="paymentId" fromClass="%sylius.model.payment.class%" fromProperty="paymentRequests"/>
+        </uriVariables>
+        <operations>
+            <operation name="sylius_api_admin_payment_payment_request_get_collection" class="ApiPlatform\Metadata\GetCollection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:payment_request:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.admin.payment_request</filter>
+                </filters>
+            </operation>
+        </operations>
+    </resource>
+</resources>

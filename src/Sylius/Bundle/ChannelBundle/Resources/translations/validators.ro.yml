@@ -4,8 +4,14 @@
 sylius:
     channel:
         code:
-            not_blank: Introdu un cod de canal.
-            regex: Codul canalului numai poate fi compus din litere, numere, - și _.
-            unique: Codul de canal trebuie să fie unic.
+            max_length: 'Codul nu poate avea mai mult de {{ limit }} caractere.'
+            not_blank: 'Vă rugăm să introduceți codul canalului.'
+            regex: 'Codul canalului poate conține doar litere, cifre, cratime și underscore-uri.'
+            unique: 'Codul canalului trebuie să fie unic.'
         name:
-            not_blank: Introdu numele canalului.
+            not_blank: 'Vă rugăm să introduceți numele canalului.'
+            max_length: 'Numele canalului nu poate avea mai mult de {{ limit }} caractere.'
+        color:
+            max_length: 'Culoarea nu poate avea mai mult de {{ limit }} caractere.'
+        hostname:
+            max_length: 'Numele de gazdă nu poate avea mai mult de {{ limit }} caractere.'

@@ -2,230 +2,284 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        admin_password_reset:
+            hello: 'Hallo'
+            subject: 'Wachtwoord reset voor de beheerder'
+            reset_your_password: 'Reset je wachtwoord'
+            to_reset_your_password: 'Klik op de onderstaande link om je wachtwoord te resetten'
+            to_reset_your_password_token: 'Gebruik de onderstaande token om je wachtwoord te resetten'
+            token: 'Je wachtwoord reset token is'
+        contact_request:
+            content: 'Inhoud'
+            message_from: 'Bericht van'
+            subject: 'Contactverzoek'
+        order_confirmation:
+            has_been_successfully_placed: 'is succesvol geplaatst.'
+            subject: 'Bestelbevestiging'
+            view_order_or_change_payment_method: 'Bekijk bestelling of wijzig betaalmethode'
+            thank_you: 'Dank je voor je aankoop bij onze winkel!'
+            your_order_number: 'Je bestelnummer'
+        password_reset:
+            hello: 'Hallo'
+            reset_your_password: 'Reset je wachtwoord'
+            subject: 'Wachtwoord reset'
+            to_reset_your_password: 'Klik op de onderstaande link om je wachtwoord te resetten'
+            to_reset_your_password_token: 'Gebruik de onderstaande token om je wachtwoord te resetten'
+            token: 'Je wachtwoord reset token is'
+        shipment_confirmation:
+            has_been_sent_using: 'is verzonden met'
+            subject: 'Verzendbevestiging'
+            thank_you_for_transaction: 'Bedankt voor een succesvolle transactie.'
+            you_can_check_its_location_with_the_tracking_code: 'Je kunt de locatie volgen met de %tracking_code% trackingcode.'
+            your_order_with_number: 'Je bestelling met nummer'
+        user_registration:
+            start_shopping: 'Begin met winkelen'
+            subject: 'Gebruikersregistratie'
+            welcome_to_our_store: 'Welkom in onze winkel!'
+            you_have_just_been_registered: 'Je bent net geregistreerd. Bedankt'
+        verification_token:
+            hello: 'Hallo'
+            message: 'Verifieer je account met de token: '
+            subject: 'E-mailadres verificatie'
+            to_verify_your_email_address: 'Klik op de onderstaande link om je e-mailadres te verifiëren'
+            verify_your_email_address: 'Verifieer je e-mailadres'
+        user:
+            account_verification:
+                greeting: 'Hallo'
+                message: 'Verifieer je account met de token: '
+                statement: 'Verifieer je e-mailadres'
+                strategy: 'Klik op de onderstaande link om je e-mailadres te verifiëren'
+                subject: 'E-mailadres verificatie'
     form:
         block:
-            body: Inhoud
-            id: ID
-            title: Titel
+            body: 'Inhoud'
+            id: 'ID'
+            title: 'Titel'
         cart:
-            coupon: Coupon
+            coupon: 'Coupon'
         catalog_promotion:
-            channels: Kanalen
+            channels: 'Kanalen'
+            scope:
+                for_products: 'Voor producten'
+                for_taxons: 'Voor taxons'
+                for_variants: 'Voor varianten'
         checkout:
             addressing:
-                different_billing_address: Gebruik een ander adres voor facturering?
-                different_shipping_address: Gebruik een ander adres voor verzending?
-            payment_method: Betalingsmethode
-            shipping_method: Verzendmethode
+                different_billing_address: 'Gebruik een ander adres voor de facturering?'
+                different_shipping_address: 'Gebruik een ander adres voor de verzending?'
+            payment_method: 'Betaalmethode'
+            shipping_method: 'Verzendmethode'
+        currency:
+            select: 'Selecteer valuta'
         promotion:
-            channels: Kanalen
+            channels: 'Kanalen'
         promotion_action:
             add_product_configuration:
-                product: Product
+                product: 'Product'
         promotion_coupon:
-            per_customer_usage_limit: Gebruikslimiet per klant
-            reusable_from_cancelled_orders: Herbruikbaar vanuit geannuleerde bestellingen
+            per_customer_usage_limit: 'Per-klant gebruiksbeperking'
+            reusable_from_cancelled_orders: 'Herbruikbaar vanaf geannuleerde bestellingen'
         group:
-            name: Naam
-            roles: Rollen
+            name: 'Naam'
+            roles: 'Rollen'
         channel:
             billing_data:
-                city: Plaats
-                company: Bedrijf
-                country: Land
-                postcode: Postcode
-                street: Straat
-                tax_id: BTW-nummer
-            contact_email: Contact e-mail
-            contact_phone_number: Telefoonnummer voor contact
-            countries: Landen
-            currencies: Valuta's
-            currency_base: Standaardvaluta
-            account_verification_required: Is account verificatie vereist?
-            hostname: Hostnaam
-            locale_default: Standaardlandinstelling
-            locales: Talen/Regio's
-            menu_taxon: Menu categorie
-            payment_methods: Betaalmethodes
-            shipping_methods: Verzendmethodes
-            shop_billing_data: Facturatiegegevens winkel
-            skipping_shipping_step_allowed: Verzending stap overslaan indien er slechts 1 verzendmethode beschikbaar is?
-            skipping_payment_step_allowed: Sla betaalstap over als er maar een enkele betaalmethode is?
-            tax_calculation_strategy: Belastingberekeningsstrategie
-            tax_zone_default: Standaard belastingzone
-            taxonomies: Taxonomieën
-            theme: Thema
+                city: 'Stad'
+                company: 'Bedrijf'
+                country: 'Land'
+                postcode: 'Postcode'
+                street: 'Straat'
+                tax_id: 'BTW-nummer'
+            contact_email: 'Contact e-mail'
+            contact_phone_number: 'Contact telefoonnummer'
+            countries: 'Landen'
+            currencies: "Valuta's"
+            currency_base: 'Basisvaluta'
+            account_verification_required: 'Is accountverificatie vereist?'
+            hostname: 'Hostname'
+            locale_default: 'Standaard taal'
+            locales: 'Talen'
+            menu_taxon: 'Menu taxon'
+            payment_methods: 'Betalingsmethoden'
+            shipping_address_in_checkout_required: 'Adres vereist in afrekenproces'
+            shipping_methods: 'Verzendmethoden'
+            shop_billing_data: 'Winkel factureringsgegevens'
+            skipping_shipping_step_allowed: 'Verzendstap overslaan toegestaan als er maar één verzendmethode beschikbaar is?'
+            skipping_payment_step_allowed: 'Betalingsstap overslaan toegestaan als er maar één betaalmethode beschikbaar is?'
+            tax_calculation_strategy: 'Belastingberekeningsstrategie'
+            tax_zone_default: 'Standaard belastingzone'
+            taxonomies: 'Taxonomieën'
+            theme: 'Thema'
         image:
-            type: Type
-            file: Afbeelding
+            type: 'Type'
+            file: 'Afbeelding'
         locale:
-            code: Code
-            enabled: Ingeschakeld
+            code: 'Code'
+            enabled: 'Ingeschakeld'
         order_filter:
-            created_at_from: Gemaakt na
-            created_at_to: Gemaakt voor
-            number: Nummer
-            total_from: Van
-            total_to: Tot
-            payment_state: Betaal status
-            channel: Alle kanalen
+            created_at_from: 'Gemaakt na'
+            created_at_to: 'Gemaakt voor'
+            number: 'Nummer'
+            total_from: 'Van'
+            total_to: 'Tot'
+            payment_state: 'Betalingsstatus'
+            channel: 'Alle kanalen'
         page:
-            body: Inhoud
-            id: ID
-            title: Titel
+            body: 'Inhoud'
+            id: 'ID'
+            title: 'Titel'
         product:
-            images: Afbeeldingen
-            restricted_zone: Beperkte zone
-            short_description: Korte omschrijving
-            variant_selection_method: Variant selectie methode
-            main_taxon: Hoofdcategorie
-            channels: Kanalen
-            enabled: Ingeschakeld
+            images: 'Afbeeldingen'
+            restricted_zone: 'Beperkte zone'
+            short_description: 'Korte beschrijving'
+            variant_selection_method: 'Variant selectie methode'
+            main_taxon: 'Hoofd taxon'
+            channels: 'Kanalen'
+            enabled: 'Ingeschakeld'
         product_filter:
-            name: Naam
-            code: Code
+            name: 'Naam'
+            code: 'Code'
         product_variant:
-            tax_category: Belastingcategorie
-            shipping_category: Verzend categorie
+            tax_category: 'Belastingcategorie'
+            shipping_category: 'Verzendcategorie'
         shipment_filter:
-            created_at_from: Van
-            created_at_to: Tot
-            number: Ordernummer
-            shipping_address: Verzend naar naam
-            channel: Alle kanalen
+            created_at_from: 'Van'
+            created_at_to: 'Tot'
+            number: 'Bestelnummer'
+            shipping_address: 'Verzend naar naam'
+            channel: 'Alle kanalen'
         payment_filter:
-            created_at_from: Van
-            created_at_to: Tot
-            number: Ordernummer
-            billing_address: Facturatie aan gebruiker
-            channel: Alle kanalen
+            created_at_from: 'Van'
+            created_at_to: 'Tot'
+            number: 'Bestelnummer'
+            billing_address: 'Factuur naar naam'
+            channel: 'Alle kanalen'
         shipping_method:
-            zone: Zone
+            zone: 'Zone'
         taxon:
-            code: Code
-            file: Selecteer afbeelding
-            images: Afbeeldingen
+            code: 'Code'
+            file: 'Selecteer afbeelding'
+            images: 'Afbeeldingen'
         taxonomy:
-            file: Selecteer afbeelding
+            file: 'Selecteer afbeelding'
         user:
-            billing_address: Factuuradres
-            different_shipping_address: Gebruik een ander adres voor verzending?
-            enabled: Ingeschakeld
-            first_name: Voornaam
-            groups: Groepen
-            roles: Rollen
-            last_name: Achternaam
-            password: Wachtwoord
-            shipping_address: Bezorgadres
+            billing_address: 'Factuuradres'
+            different_shipping_address: 'Gebruik een ander adres voor verzending?'
+            enabled: 'Ingeschakeld'
+            first_name: 'Voornaam'
+            groups: 'Groepen'
+            roles: 'Rollen'
+            last_name: 'Achternaam'
+            password: 'Wachtwoord'
+            shipping_address: 'Verzendadres'
         user_filter:
-            query: Zoeken
+            query: 'Zoeken'
         variant:
-            depth: Diepte
-            height: Hoogte
-            on_hand: Huidige voorraad
-            price: Prijs
-            sku: SKU
-            shipping_required: Verzendbaar?
-            weight: Gewicht
-            width: Breedte
+            depth: 'Diepte'
+            height: 'Hoogte'
+            on_hand: 'Huidige voorraad'
+            price: 'Prijs'
+            sku: 'SKU'
+            shipping_required: 'Is verzending vereist?'
+            weight: 'Gewicht'
+            width: 'Breedte'
+            tracked_help: 'Als deze optie is ingeschakeld, houdt Sylius de voorraad bij en stopt met de verkoop van het product zodra de voorraad op is.'
         attribute:
             product_attribute_value:
-                attribute: Attribuut
-                value: Waarde
+                attribute: 'Attribuut'
+                value: 'Waarde'
         guest:
-            email: E-mail
+            email: 'E-mail'
         product_association:
-            product: Gerelateerd product
-            type: Relatietype
+            product: 'Geassocieerd product'
+            type: 'Associatietype'
         product_association_type:
-            name: Naam
+            name: 'Naam'
         promotion_filter:
-            products: Producten filteren
-            taxons: Taxa filter
+            products: 'Producten filter'
+            taxons: 'Taxons filter'
         promotion_rule:
             customer_group:
-                group: Klantengroep
+                group: 'Klantgroep'
             has_taxon:
-                taxons: Taxa
+                taxons: 'Taxons'
             product:
-                products: Producten
+                products: 'Producten'
             total_of_items_from_taxon:
-                taxon: Taxon
-                amount: Bedrag
+                taxon: 'Taxon'
+                amount: 'Bedrag'
         payment_method:
-            channels: Kanalen
+            channels: 'Kanalen'
         product_attribute:
-            position: Positie
+            position: 'Positie'
         zone:
             scopes:
-                shipping: Verzending
-                tax: BTW
+                shipping: 'Verzending'
+                tax: 'Belasting'
+
     installer:
         extensions:
-            header: extensies
+            header: 'Uitbreidingen'
             accelerator:
-                header: Accelerator
-                help: Activeer Zend OpCache (sterk aangeraden).
-            apc: APC
-            ctype: Ctype
-            gd: GD
-            help: Installeer en activeer de %extension% extensie.
-            iconv: Iconv
-            exif: Exif
-            fileinfo: Bestandsinfo
-            icu: ICU
-            intl: Intl
-            json_encode: JSON
-            mbstring: Multibyte String
-            off: false
-            on: true
-            pcre: PCRE
-            pdo: PDO
-            php_xml: PHP-XML
-            session_start: Sessie
-            simplexml_import_dom: SimpleXML
-            token_get_all: Tokenizer
+                header: 'Accelerator'
+                help: 'Schakel Zend OpCache in (zeer aanbevolen).'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: 'Installeer en schakel de %extension% extensie in.'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: 'Multibyte String'
+            off: 'uit'
+            on: 'aan'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: 'Session'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
         filesystem:
-            header: bestandssysteem
+            header: 'Bestandssysteem'
             cache:
-                header: cache
-                help: "Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: 'whoami': rwx %path%"
-            exists: bestaat
+                header: 'Cache'
+                help: 'Om de rechten in te stellen voer uit: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: 'bestaat'
             logs:
-                header: logs
-                help: "Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: 'whoami': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: 'whoami': rwx %path%"
-            not_exists: niet bestaand
-            not_writable: niet schrijfbaar
+                header: 'Logbestanden'
+                help: 'Om de rechten in te stellen voer uit: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: 'bestaat niet'
+            not_writable: 'niet beschrijfbaar'
             parameters:
-                header: parameters.yml
-                help: "Machtigingen uitvoeren instellen: sudo chmod a + w %path%"
-            vendors: vendors
-            writable: schrijfbaar
+                header: 'parameters.yml'
+                help: 'Om de rechten in te stellen voer uit: sudo chmod a+w %path%'
+            vendors: 'leveranciers'
+            writable: 'beschrijfbaar'
         settings:
-            header: PHP-versie en -instellingen
-            any: elke
-            detect_unicode: detect_unicode
-            detect_unicode_help: Configureer 'detect_unicode = Off' in uw php.ini bestand
-            magic_quotes_gpc: magic_quotes_gpc
-            non_deprecated: niet verouderd
-            off: false
-            on: true
-            register_globals: register_globals
+            header: 'PHP versie en instellingen'
+            any: 'elk'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: 'Stel "detect_unicode = Off" in je php.ini bestand in'
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: 'niet verouderd'
+            off: 'uit'
+            on: 'aan'
+            register_globals: 'register_globals'
             session:
-                auto_start: session.auto_start
-                auto_start_help: Configureer 'session.auto_start = Off' in uw php.ini bestand
-            short_open_tag: short_open_tag
-            timezone: tijdzone
-            timezone_help: Configureer 'date.timezone' in uw php.ini bestand (bijv. date.timezone = "Europe/Amsterdam")
+                auto_start: 'session.auto_start'
+                auto_start_help: 'Stel "session.auto_start  = Off" in je php.ini bestand in'
+            short_open_tag: 'short_open_tag'
+            timezone: 'timezone'
+            timezone_help: 'Stel "date.timezone" in je php.ini bestand in (bijv. date.timezone = "Europe/Amsterdam")'
             timezone_deprecated:
-                header: Verouderde tijdzone
-                help: Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).
-            version: PHP versie
-            version_recommended: Aanbevolen PHP versie
-            version_help: Sylius raadt PHP-versie %recommended% aan, uw huidige versie is %current%. Upgrade alstublieft.
-    payum_gateway:
-        cash_on_delivery: Onder rembours
-        offline: Offline
-        paypal_express_checkout: Paypal Express Checkout
+                header: 'Verouderde tijdzone'
+                help: 'Tijdzone %timezone% is verouderd. Los het probleem op in je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).'
+            version: 'PHP versie'
+            version_recommended: 'Aanbevolen PHP versie'
+            version_help: 'Sylius beveelt de %recommended% PHP versie aan, je huidige versie is %current%. Werk bij.'
     shipping_method_resolver:
-        by_zones_and_channel: Per zones en kanalen
+        by_zones_and_channel: 'Op basis van zones en kanaal'

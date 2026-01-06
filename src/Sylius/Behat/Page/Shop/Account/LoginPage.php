@@ -13,10 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Behat\Mink\Session;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Page\SyliusPage;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\DriverHelper;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-class LoginPage extends SymfonyPage implements LoginPageInterface
+class LoginPage extends SyliusPage implements LoginPageInterface
 {
+    use SecurePasswordTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        protected TableAccessorInterface $tableAccessor,
+        private SharedStorageInterface $sharedStorage,
+    ) {
+        parent::__construct($session, $minkParameters, $router);
+    }
+
     public function getRouteName(): string
     {
         return 'sylius_shop_login';
@@ -24,17 +42,19 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
 
     public function hasValidationErrorWith(string $message): bool
     {
-        return $this->getElement('validation_error')->getText() === $message;
+        return $this->getElement('flash_message')->getText() === $message;
     }
 
     public function logIn(): void
     {
         $this->getElement('login_button')->click();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function specifyPassword(string $password): void
     {
-        $this->getElement('password')->setValue($password);
+        $this->getElement('password')->setValue($this->retrieveSecurePassword($password));
     }
 
     public function specifyUsername(string $username): void
@@ -45,10 +65,10 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'login_button' => '[data-test-login-button]',
+            'login_button' => '[data-test-button="login-button"]',
             'password' => '[data-test-login-password]',
             'username' => '[data-test-login-username]',
-            'validation_error' => '[data-test-flash-message="negative"]',
+            'flash_message' => '[data-test-sylius-flash-message]',
         ]);
     }
 }

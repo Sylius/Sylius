@@ -19,7 +19,9 @@ interface ResolveNextRouteInterface
 
     public function setRouteName(string $routeName): void;
 
+    /** @return array<string, mixed> */
     public function getRouteParameters(): array;
 
+    /** @param array<string, mixed> $parameters */
     public function setRouteParameters(array $parameters): void;
 }

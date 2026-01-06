@@ -1,0 +1,10 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.response_data'|trans }}
+        </div>
+    </div>
+    <div class="card-body">
+        <pre {{ sylius_test_html_attribute('response-data') }}>{{ hookable_metadata.context.resource.responseData|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+    </div>
+</div>

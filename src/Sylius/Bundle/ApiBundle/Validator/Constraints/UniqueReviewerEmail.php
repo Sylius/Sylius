@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class UniqueReviewerEmail extends Constraint
 {
     public string $message = 'sylius.review.author.already_exists';

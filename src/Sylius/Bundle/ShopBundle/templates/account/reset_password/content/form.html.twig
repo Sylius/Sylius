@@ -1,0 +1,11 @@
+{% set form = hookable_metadata.context.form %}
+{% set user = hookable_metadata.context.user %}
+
+{% form_theme form '@SyliusShop/form/theme.html.twig' %}
+
+{{ form_start(form, {'action': path('sylius_shop_password_reset', {'token' : user.passwordResetToken}), 'attr': {'novalidate': 'novalidate'}}) }}
+
+{% hook 'form' %}
+
+{{ form_row(form._token) }}
+{{ form_end(form, {render_rest: hookable.configuration.render_rest|default(false)}) }}

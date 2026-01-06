@@ -16,16 +16,19 @@ sylius:
         email:
             already_used: Cet e-mail est déjà utilisé, veuillez vous connecter ou procéder à la réinitialisation du mot de passe oublié.
             max: L'e-mail ne doit pas contenir plus de {{ limit }} caractères.
-            not_blank: Veuillez saisir votre adresse email.
+            not_blank: Veuillez saisir votre adresse e-mail.
             invalid: Cet e-mail n'est pas valide.
             unique: Cet e-mail est déjà utilisé.
             registered: Cet e-mail est déjà utilisé, veuillez vous connecter ou procéder à la réinitialisation du mot de passe oublié.
+        phone_number:
+            max: Le numéro de téléphone ne doit pas dépasser {{ limit }} caractères.
     customer_group:
         code:
-            regex: Le code du groupe de clients peut seulement être constitués de lettres, chiffres, tirets et tirets bas.
+            max_length: Le code ne doit pas dépasser {{ limit }} caractères.
+            regex: Le code du groupe de clients peut seulement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le code de groupe client doit être unique.
             not_blank: Veuillez entrer un code de groupe de clients.
         name:
-            max: Le nom de groupe de client ne doit pas avoir plus de {{ limit }} caractères.
-            min: Le nom de groupe de client doit avoir au moins {{ limit }} caractères.
+            max: Le nom de groupe de client ne doit pas dépasser {{ limit }} caractères.
+            min: Le nom de groupe de client doit comporter au moins {{ limit }} caractères.
             not_blank: Veuillez entrer un nom de groupe de client.

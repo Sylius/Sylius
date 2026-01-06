@@ -2,45 +2,131 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'har blitt sendt ved bruk av'
+            subject: 'Forsendelsesbekreftelse'
+            thank_you_for_transaction: 'Takk for en vellykket transaksjon.'
+            you_can_check_its_location_with_the_tracking_code: 'Du kan sjekke posisjonen med sporingskoden %tracking_code%.'
+            your_order_with_number: 'Din bestilling med nummer'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Vis den laveste prisen på rabatterte produkter før gjeldende rabatt?'
+                period_for_which_the_lowest_price_is_calculated: 'Periode for hvilken laveste pris beregnes'
+            reset_password:
+                password:
+                    label: 'Nytt passord'
+                    confirmation: 'Bekreft nytt passord'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: Relasjonstyper
-                    attributes: Egenskaper
-                    header: Katalog
-                    inventory: Lager
-                    options: Instillinger
-                    products: Produkter
-                    taxons: Taksonomier
+                    association_types: 'Assosiasjonstyper'
+                    attributes: 'Attributter'
+                    header: 'Katalog'
+                    inventory: 'Lagerbeholdning'
+                    options: 'Valg'
+                    products: 'Produkter'
+                    taxons: 'Taksonomier'
                 configuration:
-                    admin_users: Administratorer
-                    channels: Kanaler
-                    countries: Land
-                    currencies: Valutaer
-                    exchange_rates: Valutakurser
-                    header: Konfigurasjon
-                    locales: Nasjonale innstillinger
-                    payment_methods: Betalingsmetoder
-                    shipping_categories: Fraktkategorier
-                    shipping_methods: Fraktalternativ
-                    tax_categories: Merverdikategorier
-                    tax_rates: Skattesatser
-                    zones: Soner
+                    admin_users: 'Administratorer'
+                    channels: 'Kanaler'
+                    countries: 'Land'
+                    currencies: 'Valutaer'
+                    exchange_rates: 'Valutakurser'
+                    header: 'Konfigurasjon'
+                    locales: 'Lokaliseringer'
+                    payment_methods: 'Betalingsmetoder'
+                    shipping_categories: 'Fraktkategorier'
+                    shipping_methods: 'Fraktmetoder'
+                    tax_categories: 'Skattekategorier'
+                    tax_rates: 'Skattesatser'
+                    zones: 'Soner'
                 marketing:
-                    header: Markedsføring
-                    product_reviews: Produktomtaler
-                    promotions: Kampanjer
+                    cart_promotions: 'Handlekurvkampanjer'
+                    catalog_promotions: 'Katalogkampanjer'
+                    header: 'Markedsføring'
+                    product_reviews: 'Produktanmeldelser'
+                    promotions: 'Kampanjer'
                 customers:
-                    customers: Kunder
-                    groups: Grupper
-                    header: Kunde
+                    customers: 'Kunder'
+                    groups: 'Grupper'
+                    header: 'Kunde'
                 sales:
-                    header: Salg
-                    orders: Bestillinger
+                    header: 'Salg'
+                    orders: 'Ordre'
                 official_support:
-                    header: Offisiell støtte
-                    browse_plugins: Bla gjennom plugins
-                    sylius_plus: Sylius Plus
-                    professional_services: Profesjonelle tjenester
-                    find_a_partner: Finn en partner
+                    header: 'Offisiell støtte'
+                    browse_plugins: 'Bla gjennom plugins'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Profesjonelle tjenester'
+                    find_a_partner: 'Finn en partner'
+                    sylius_certification: 'Sylius-sertifisering'
+    ui:
+        account: 'Konto'
+        admin_user: 'Administrator'
+        add_new_entry: 'Legg til en ny post'
+        back_to_dashboard: 'Tilbake til dashbord'
+        catalog_promotion:
+            dates_details: 'Denne operasjonen tar tid! Vennligst forvent en forsinkelse på 2-10 minutter fra de angitte datoene. Forsinkelsen avhenger av størrelsen på katalogen.'
+        channel:
+            account_verification_required_details: 'Ved å deaktivere dette alternativet vil det være mulig å opprette kontoer og logge inn uten e-postverifisering, og dermed potensielt få tilgang til ordredata plassert som gjest.'
+        channel_pricing_history: 'Historikk for kanalprising'
+        channel_pricings: 'Kanalprisinger'
+        create_new:
+            customer_group: 'Opprett en ny kundegruppe'
+        delete_avatar: 'Slett avatar'
+        full_screen: 'Full skjerm'
+        global: 'Global'
+        ip_address: 'IP-adresse'
+        language: 'Språk'
+        lowest_price_before_discount: 'Laveste pris før rabatt'
+        minimum_price_details: 'Minimumspris - dette er prisgrensen under hvilken den gjeldende prisen ikke kan rabatteres verken av katalog- eller handlekurvkampanjer. Bruk dette for å beskytte lønnsomheten i salget ditt.'
+        more: 'Mer'
+        no_main_taxon: 'ingen hovedtaksonomi'
+        no_depth: 'Ingen dybde'
+        no_height: 'Ingen høyde'
+        no_results: 'Ingen resultater funnet'
+        no_results_adjust_your_search: 'Juster søket ditt og prøv igjen.'
+        no_weight: 'Ingen vekt'
+        no_width: 'Ingen bredde'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Bestillingsdato'
+        original_price_details: 'Originalpris - dette er prisen på produktvarianten. Den vises som gjennomstreket i katalogen. Den brukes som basis for beregning av gjeldende pris. Hvis denne verdien ikke er definert, kopierer katalogkampanjelogikken verdien fra Pris til Originalpris.'
+        original_product_price_details: 'Originalpris - dette er prisen på produktet. Den vises som gjennomstreket i katalogen. Den brukes som basis for beregning av gjeldende pris. Hvis denne verdien ikke er definert, kopierer katalogkampanjelogikken verdien fra Pris til Originalpris.'
+        overdue: 'Forsinket'
+        page_not_found: 'Siden ble ikke funnet'
+        pagination:
+            number_of_results: 'Viser %from% til %to% av %total% oppføringer'
+        partially_refunded: 'Delvis refundert'
+        pending_actions: 'Ventende handlinger'
+        price_details: 'Pris - dette er gjeldende pris på produktvarianten vist i katalogen. Den kan endres eksplisitt for eksempel via katalogkampanjer.'
+        product_price_details: 'Pris - dette er gjeldende pris på produktet vist i katalogen. Den kan endres eksplisitt for eksempel via katalogkampanjer.'
+        price_history: 'Prishistorikk'
+        product:
+            product_not_active_in_channel: 'Produktet er ikke aktivert i denne kanalen ennå.'
+        product_variant: 'Produktvariant'
+        sales_summary: 'Salgssammendrag'
+        search_menu: 'Søkemeny'
+        shipment_for_order: 'Forsendelse for ordre'
+        show_history_for_channel_pricing: 'Vis historikk for kanalprising'
+        start_typing_to_search: 'Begynn å skrive for å søke'
+        statistics:
+            day: 'Dag'
+            lifetime: 'Levetime'
+            month: 'Måned'
+            week: 'Uke'
+            2weeks: '2 uker'
+            year: 'År'
+        taxon: 'Taksonomi'
+        to_approve: 'til godkjenning'
+        to_process: 'til behandling'
+        to_ship: 'til utsendelse'
+        view_in_store: 'Se i butikk'
+        work_in_progress: 'Arbeid pågår'
+        empty_date: 'tom'
+        notifications:
+            new_version_of_sylius_available: 'Det finnes en ny versjon av Sylius tilgjengelig. Kontakt din tekniker for oppgradering.'
+

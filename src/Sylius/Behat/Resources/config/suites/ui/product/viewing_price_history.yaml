@@ -5,6 +5,7 @@ default:
     suites:
         ui_viewing_price_history:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.channel
@@ -21,6 +22,7 @@ default:
                 - Sylius\Behat\Context\Setup\CatalogPromotionContext
 
                 - sylius.behat.context.ui.admin.managing_product_variants
+                - sylius.behat.context.ui.save
                 - Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext
 
             filters:

@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    cart:
+        add_item: 'L''article a bien été ajouté au panier'
+        cannot_modify: 'Une commande a déjà été soumise pour le panier que vous avez essayé de modifier.'
+        not_recalculated: 'En raison de valeurs invalides dans votre panier, il n''a pas été recalculé.'
+        remove_item: 'L''article a bien été supprimé du panier'
+        save: 'Le panier a été mis à jour avec succès'

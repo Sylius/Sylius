@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -22,12 +23,12 @@ final class ExchangeRatesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_an_exchange_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -48,12 +49,12 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_exchange_rates(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -71,12 +72,12 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_an_exchange_rate(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -99,12 +100,12 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_existing_exchange_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
@@ -128,7 +129,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_an_exchange_rate(): void
     {
         $this->setUpAdminContext();
@@ -136,7 +137,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
 
         $fixtures = $this->loadFixturesFromFiles([
             'authentication/api_administrator.yaml',
-            'channel.yaml',
+            'channel/channel.yaml',
             'exchange_rate.yaml',
         ]);
 

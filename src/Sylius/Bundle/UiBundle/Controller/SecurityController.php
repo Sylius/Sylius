@@ -47,7 +47,7 @@ final class SecurityController
 
         $options = $request->attributes->get('_sylius', []);
 
-        $template = $options['template'] ?? '@SyliusUi/Security/login.html.twig';
+        $template = $options['template'] ?? '@SyliusUi/security/login.html.twig';
         $formType = $options['form'] ?? SecurityLoginType::class;
         $form = $this->formFactory->createNamed('', $formType);
 

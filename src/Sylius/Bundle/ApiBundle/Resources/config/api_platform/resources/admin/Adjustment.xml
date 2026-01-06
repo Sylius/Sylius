@@ -1,0 +1,128 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.adjustment.class%">
+        <operations>
+            <operation name="sylius_api_admin_adjustment_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/adjustments/{id}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:adjustment:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.adjustment.class%" uriTemplate="/admin/orders/{tokenValue}/adjustments">
+        <uriVariables>
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="adjustments" />
+        </uriVariables>
+
+        <operations>
+            <operation
+                name="sylius_api_admin_order_adjustment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.admin.order.adjustment.collection"
+            >
+                <parameters>
+                    <parameter key="type" />
+                </parameters>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:adjustment:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.adjustment.class%" uriTemplate="/admin/order-items/{id}/adjustments">
+        <uriVariables>
+            <uriVariable parameterName="id" fromClass="%sylius.model.order_item.class%" fromProperty="adjustments" />
+        </uriVariables>
+
+        <operations>
+            <operation
+                name="sylius_api_admin_order_item_adjustment_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.admin.order_item.adjustment.collection"
+            >
+                <parameters>
+                    <parameter key="type" />
+                </parameters>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:order_item:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.adjustment.class%" uriTemplate="/admin/order-item-units/{id}/adjustments">
+        <uriVariables>
+            <uriVariable parameterName="id" fromClass="%sylius.model.order_item_unit.class%" fromProperty="adjustments" />
+        </uriVariables>
+
+        <operations>
+            <operation name="sylius_api_admin_order_item_unit_adjustment_get_collection" class="ApiPlatform\Metadata\GetCollection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:order_item_unit:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.adjustment.class%" uriTemplate="/admin/shipments/{id}/adjustments">
+        <uriVariables>
+            <uriVariable parameterName="id" fromClass="%sylius.model.shipment.class%" fromProperty="adjustments" />
+        </uriVariables>
+
+        <operations>
+            <operation name="sylius_api_admin_shipment_adjustment_get_collection" class="ApiPlatform\Metadata\GetCollection">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:shipment:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

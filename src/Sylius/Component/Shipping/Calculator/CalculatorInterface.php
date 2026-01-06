@@ -17,6 +17,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 interface CalculatorInterface
 {
+    /** @param array<string, mixed> $configuration */
     public function calculate(ShipmentInterface $subject, array $configuration): int;
 
     public function getType(): string;

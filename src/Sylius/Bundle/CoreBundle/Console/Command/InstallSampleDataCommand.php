@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Console\Command;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -20,14 +24,23 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+    name: 'sylius:install:sample-data',
+    description: 'Install sample data into Sylius.',
+)]
 final class InstallSampleDataCommand extends AbstractInstallCommand
 {
-    protected static $defaultName = 'sylius:install:sample-data';
+    public function __construct(
+        protected readonly EntityManagerInterface $entityManager,
+        protected readonly CommandDirectoryChecker $commandDirectoryChecker,
+        protected readonly string $publicDir,
+    ) {
+        parent::__construct($this->entityManager, $this->commandDirectoryChecker);
+    }
 
     protected function configure(): void
     {
         $this
-            ->setDescription('Install sample data into Sylius.')
             ->setHelp(
                 <<<EOT
 The <info>%command.name%</info> command loads the sample data for Sylius.
@@ -55,18 +68,16 @@ EOT
         if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Continue? (y/N) ', null !== $suite))) {
             $outputStyle->writeln('Cancelled loading sample data.');
 
-            return 0;
+            return Command::SUCCESS;
         }
 
         try {
-            $publicDir = $this->getContainer()->getParameter('sylius_core.public_dir');
-
-            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/', $output);
-            $this->ensureDirectoryExistsAndIsWritable($publicDir . '/media/image/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/', $output);
+            $this->ensureDirectoryExistsAndIsWritable($this->publicDir . '/media/image/', $output);
         } catch (\RuntimeException $exception) {
             $outputStyle->writeln($exception->getMessage());
 
-            return 1;
+            return Command::FAILURE;
         }
 
         $parameters = ['--no-interaction' => true];
@@ -82,8 +93,6 @@ EOT
         $this->runCommands($commands, $output);
         $outputStyle->newLine(2);
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
-
-class_alias(InstallSampleDataCommand::class, '\Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand');

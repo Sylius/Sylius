@@ -43,14 +43,14 @@ sylius:
             hello: 'Bonjour'
             message: 'Vérifiez votre compte avec le jeton : '
             subject: 'Vérification de l''adresse e-mail'
-            to_verify_your_email_address: 'Pour vérifier votre adresse e-mail - cliquez sur le lien ci-dessous'
+            to_verify_your_email_address: 'Pour vérifier votre adresse e-mail – cliquez sur le lien ci-dessous'
             verify_your_email_address: 'Vérifiez votre adresse e-mail'
         user:
             account_verification:
                 greeting: 'Bonjour'
                 message: 'Vérifiez votre compte avec le jeton : '
                 statement: 'Vérifiez votre adresse e-mail'
-                strategy: 'Pour vérifier votre adresse e-mail - cliquez sur le lien ci-dessous'
+                strategy: 'Pour vérifier votre adresse e-mail – cliquez sur le lien ci-dessous'
                 subject: 'Vérification de l''adresse e-mail'
     form:
         block:
@@ -71,6 +71,8 @@ sylius:
                 different_shipping_address: Utiliser une adresse différente pour la livraison ?
             payment_method: Moyen de paiement
             shipping_method: Mode de livraison
+        currency:
+            select: Sélectionnez la devise
         promotion:
             channels: Canaux
         promotion_action:
@@ -104,8 +106,8 @@ sylius:
             shipping_address_in_checkout_required: Adresse requise durant le tunnel d'achat
             shipping_methods: Modes de livraison
             shop_billing_data: Données de facturation du magasin
-            skipping_shipping_step_allowed: Ignorez l’étape expédition si un seul mode de livraison est disponible ?
-            skipping_payment_step_allowed: Ignorez l’étape paiement si un seul mode de paiement est disponible ?
+            skipping_shipping_step_allowed: Ignorez l’étape expédition si un seul mode de livraison est disponible ?
+            skipping_payment_step_allowed: Ignorez l’étape paiement si un seul mode de paiement est disponible ?
             tax_calculation_strategy: Stratégie de calcul de la TVA
             tax_zone_default: Zone de taxe par défaut
             taxonomies: Taxonomies
@@ -186,7 +188,7 @@ sylius:
             tracked_help: Si cette option est activée, Sylius gardera une trace du stock et cessera de vendre le produit une fois que le stock aura atteint 0.
         attribute:
             product_attribute_value:
-                attribute: Attribut 
+                attribute: Attribut
                 value: Valeur
         guest:
             email: Courriel
@@ -216,6 +218,7 @@ sylius:
             scopes:
                 shipping: Expédition
                 tax: Tva
+
     installer:
         extensions:
             header: Extensions
@@ -245,23 +248,23 @@ sylius:
             header: Système de fichiers
             cache:
                 header: Cache
-                help: "Pour définir des autorisations exécute : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+                help: "Pour définir les permissions : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             exists: Existe
             logs:
                 header: logs
-                help: "Pour définir des autorisations exécute : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+                help: "Pour définir les permissions : sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
             not_exists: N'existe pas
-            not_writable: pas accessible en écriture
+            not_writable: Pas accessible en écriture
             parameters:
                 header: parameters.yml
-                help: "Pour définir les autorisations exécuter : sudo chmod a+w %path%"
+                help: "Pour définir les permissions : sudo chmod a+w %path%"
             vendors: vendors
-            writable: accessible en écriture
+            writable: Accessible en écriture
         settings:
             header: Paramètres et version de PHP
-            any: N'importe quel
+            any: n'importe
             detect_unicode: detect_unicode
-            detect_unicode_help: Définir 'detect_unicode = Off' dans votre fichier php.ini
+            detect_unicode_help: Définir « detect_unicode = Off » dans votre php.ini
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Non obsolète
             off: off
@@ -269,19 +272,16 @@ sylius:
             register_globals: register_globals
             session:
                 auto_start: session.auto_start
-                auto_start_help: Définir 'session.auto_start = Off' dans votre fichier php.ini
+                auto_start_help: Définir « session.auto_start = Off » dans votre php.ini
             short_open_tag: short_open_tag
             timezone: fuseau horaire
-            timezone_help: Définissez 'date.timezone' dans votre fichier php.ini (par exemple date.timezone = "Europe/Amsterdam")
+            timezone_help: Définir « date.timezone » dans votre php.ini (ex. date.timezone = "Europe/Paris")
             timezone_deprecated:
                 header: Fuseau horaire obsolète
-                help: Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).
+                help: Le fuseau horaire %timezone% est obsolète. Corrigez votre php.ini (liste  http://php.net/manual/fr/timezones.others.php).
             version: Version de PHP
-            version_recommended: Version de PHP recommandée
-            version_help: Sylius recommande la version %recommended% de PHP, votre version actuelle est la %current%. Veuillez la mettre à jour.
-    payum_gateway:
-        cash_on_delivery: Paiement à la livraison
-        offline: Hors-ligne
-        paypal_express_checkout: Paiement via PayPal Express
+            version_recommended: Version PHP recommandée
+            version_help: Sylius recommande la version PHP %recommended%, votre version actuelle est %current%. Veuillez mettre à jour.
+   
     shipping_method_resolver:
         by_zones_and_channel: Par zones et canal

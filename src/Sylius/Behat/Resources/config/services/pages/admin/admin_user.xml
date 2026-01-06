@@ -9,6 +9,7 @@
 
         <service id="sylius.behat.page.admin.administrator.create" class="Sylius\Behat\Page\Admin\Administrator\CreatePage" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">sylius_admin_admin_user_create</argument>
+            <argument type="service" id="sylius.behat.shared_storage"/>
         </service>
         <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Crud\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">sylius_admin_admin_user_index</argument>

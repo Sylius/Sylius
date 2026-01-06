@@ -1,0 +1,126 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'wurde gesendet mit'
+            subject: 'Versandbestätigung'
+            thank_you_for_transaction: 'Vielen Dank für die erfolgreiche Transaktion.'
+            you_can_check_its_location_with_the_tracking_code: 'Sie können den Standort mit dem %tracking_code% Tracking-Code überprüfen.'
+            your_order_with_number: 'Ihre Bestellung mit der Nummer'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Soll der niedrigste Preis für rabattierte Produkte vor dem aktuellen Rabatt angezeigt werden?'
+                period_for_which_the_lowest_price_is_calculated: 'Zeitraum, für den der niedrigste Preis berechnet wird'
+            reset_password:
+                password:
+                    label: Neues Passwort
+                    confirmation: Neues Passwort bestätigen
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: 'Assoziationstypen'
+                    attributes: 'Attribute'
+                    header: 'Katalog'
+                    inventory: 'Inventar'
+                    options: 'Optionen'
+                    products: 'Produkte'
+                    taxons: 'Taxons'
+                configuration:
+                    admin_users: 'Administratoren'
+                    channels: 'Kanäle'
+                    countries: 'Länder'
+                    currencies: 'Währungen'
+                    exchange_rates: 'Wechselkurse'
+                    header: 'Konfiguration'
+                    locales: 'Lokalisierungen'
+                    payment_methods: 'Zahlungsmethoden'
+                    shipping_categories: 'Versandkategorien'
+                    shipping_methods: 'Versandmethoden'
+                    tax_categories: 'Steuerkategorien'
+                    tax_rates: 'Steuersätze'
+                    zones: 'Zonen'
+                marketing:
+                    cart_promotions: 'Warenkorbaktionen'
+                    catalog_promotions: 'Katalogaktionen'
+                    header: 'Marketing'
+                    product_reviews: 'Produktbewertungen'
+                    promotions: 'Aktionen'
+                customers:
+                    customers: 'Kunden'
+                    groups: 'Gruppen'
+                    header: 'Kunden'
+                sales:
+                    header: 'Verkäufe'
+                    orders: 'Bestellungen'
+                official_support:
+                    header: 'Offizieller Support'
+                    browse_plugins: 'Plugins durchsuchen'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Professionelle Dienstleistungen'
+                    find_a_partner: 'Partner finden'
+                    sylius_certification: 'Sylius Zertifizierung'
+    ui:
+        account: 'Konto'
+        admin_user: 'Administrator'
+        add_new_entry: 'Neuen Eintrag hinzufügen'
+        back_to_dashboard: 'Zurück zum Dashboard'
+        catalog_promotion:
+            dates_details: 'Dieser Vorgang ist zeitaufwendig! Bitte rechnen Sie mit einer Verzögerung von 2-10 Minuten ab den angegebenen Daten. Die Verzögerung hängt von der Größe des Katalogs ab.'
+        channel:
+            account_verification_required_details: 'Wenn diese Option deaktiviert wird, können Konten erstellt und darauf zugegriffen werden, ohne dass eine E-Mail-Verifizierung erforderlich ist und somit möglicherweise auf Bestelldaten von Gastbestellungen zugegriffen wird.'
+        channel_pricing_history: 'Kanalpreisgeschichte'
+        channel_pricings: 'Kanalpreise'
+        create_new:
+            customer_group: 'Neue Kundengruppe erstellen'
+        delete_avatar: 'Avatar löschen'
+        full_screen: 'Vollbild'
+        global: 'Global'
+        ip_address: 'IP-Adresse'
+        language: 'Sprache'
+        lowest_price_before_discount: 'Niedrigster Preis vor Rabatt'
+        minimum_price_details: 'Mindestpreis - Dies ist der Preisuntergrenze, unterhalb der der aktuelle Preis weder durch Katalog- noch durch Warenkorbaktionen rabattiert werden kann. Verwenden Sie diesen Wert, um die Rentabilität Ihrer Verkäufe zu schützen.'
+        more: 'Mehr'
+        no_main_taxon: 'kein Haupttaxon'
+        no_depth: 'Keine Tiefe'
+        no_height: 'Keine Höhe'
+        no_results: 'Keine Ergebnisse gefunden'
+        no_results_adjust_your_search: 'Passen Sie Ihre Suche an und versuchen Sie es erneut.'
+        no_weight: 'Kein Gewicht'
+        no_width: 'Keine Breite'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Bestelldatum'
+        original_price_details: 'Originalpreis - Dies ist der Preis der Produktvariante. Er wird im Katalog durchgestrichen angezeigt und dient als Basis für die Berechnung des aktuellen Preises. Wenn dieser Wert nicht definiert ist, wird der Katalogaktions-Logikwert vom Preis in den Originalpreis kopiert.'
+        original_product_price_details: 'Originalpreis - Dies ist der Preis des Produkts. Er wird im Katalog durchgestrichen angezeigt und dient als Basis für die Berechnung des aktuellen Preises. Wenn dieser Wert nicht definiert ist, wird der Katalogaktions-Logikwert vom Preis in den Originalpreis kopiert.'
+        page_not_found: 'Seite nicht gefunden'
+        pagination:
+            number_of_results: 'Zeige %from% bis %to% von %total% Einträgen'
+        partially_refunded: 'Teilweise erstattet'
+        price_details: 'Preis - Dies ist der aktuelle Preis der Produktvariante, die im Katalog angezeigt wird. Er kann explizit durch Katalogaktionen geändert werden.'
+        product_price_details: 'Preis - Dies ist der aktuelle Preis des Produkts, das im Katalog angezeigt wird. Er kann explizit durch Katalogaktionen geändert werden.'
+        price_history: 'Preisehistorie'
+        product:
+            product_not_active_in_channel: 'Das Produkt ist in diesem Kanal noch nicht aktiviert.'
+        product_variant: 'Produktvariante'
+        sales_summary: 'Verkaufszusammenfassung'
+        search_menu: 'Suchmenü'
+        shipment_for_order: 'Versand für Bestellung'
+        show_history_for_channel_pricing: 'Preishistorie für Kanalpreise anzeigen'
+        start_typing_to_search: 'Beginnen Sie mit der Eingabe, um zu suchen'
+        statistics:
+            day: 'Tag'
+            lifetime: 'Lebenszeit'
+            month: 'Monat'
+            week: 'Woche'
+            2weeks: '2 Wochen'
+            year: 'Jahr'
+        taxon: 'Taxon'
+        view_in_store: 'Im Laden ansehen'
+        work_in_progress: 'In Bearbeitung'
+        empty_date: 'leer'
+        notifications:
+            new_version_of_sylius_available: 'Eine neue Version von Sylius ist verfügbar. Kontaktieren Sie Ihren Techniker, um ein Upgrade durchzuführen.'

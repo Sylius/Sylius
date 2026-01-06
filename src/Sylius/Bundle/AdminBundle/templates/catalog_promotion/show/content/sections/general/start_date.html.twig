@@ -1,0 +1,8 @@
+{% set date_format = hookable_metadata.configuration.date_format|default('YYYY-MM-dd HH:mm:ss') %}
+
+<div class="row">
+    <div class="col-12 col-md-4 fw-bold">{{ 'sylius.ui.start_date'|trans }}</div>
+    <div class="col-12 col-md-8" {{ sylius_test_html_attribute('start-date') }}>
+        {{ hookable_metadata.context.resource.startDate|format_datetime(pattern=date_format) }}
+    </div>
+</div>

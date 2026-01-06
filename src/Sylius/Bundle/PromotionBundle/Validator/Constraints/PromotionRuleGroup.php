@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class PromotionRuleGroup extends Constraint
 {
     public function validatedBy(): string

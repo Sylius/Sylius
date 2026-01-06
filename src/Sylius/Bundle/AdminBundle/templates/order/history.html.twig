@@ -1,0 +1,14 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% set prefixes = [
+    'sylius_admin.order.history',
+    'sylius_admin.common'
+] %}
+
+{% block title %}
+    {{ 'sylius.ui.history'|trans }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% hook prefixes with { resource, metadata, configuration } %}
+{% endblock %}

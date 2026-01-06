@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: '카드 소유자 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '카드 소유자 이름을 입력하세요.'
+        expiry_month:
+            max_range: '신용카드 만료 월은 {{ min }}에서 {{ max }} 사이여야 합니다.'
+            min_range: '신용카드 만료 월은 {{ min }}에서 {{ max }} 사이여야 합니다.'
+            not_blank: '만료 월을 선택하세요.'
+        number:
+            not_blank: '카드 번호를 입력하세요.'
+            luhn: '입력한 신용카드 번호가 유효하지 않습니다.'
+        security_code:
+            not_blank: '보안 코드를 입력하세요.'
+            max_length: '신용카드 CVV 코드는 최소 {{ limit }}자리여야 합니다.'
+            min_length: '신용카드 CVV 코드는 최대 {{ limit }}자리여야 합니다.'
+        expiry_year:
+            not_blank: '만료 연도를 선택하세요.'
+    gateway_config:
+        invalid_gateway_factory: '유효하지 않은 게이트웨이 팩토리입니다. 사용 가능한 팩토리: {{ available_factories }}.'
+        gateway_name:
+            not_blank: '게이트웨이 이름을 입력하세요.'
+        factory_name:
+            not_blank: '게이트웨이 팩토리 이름을 입력하세요.'
+    payment:
+        currency_code:
+            not_valid: '입력한 통화 코드가 유효하지 않습니다.'
+        method:
+            not_blank: '결제 방법을 선택하세요.'
+    payment_method:
+        gateway:
+            not_blank: '결제 방법 게이트웨이를 선택하세요.'
+        name:
+            max_length: '결제 방법 이름은 {{ limit }}자를 넘을 수 없습니다.'
+            min_length: '결제 방법 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '결제 방법 이름을 입력하세요.'
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: '수수료는 {{ compared_value }}보다 작을 수 없습니다.'
+                not_blank: '수수료 금액을 입력하세요.'
+            percent:
+                max_range: '수수료 비율은 {{ limit }}%를 초과할 수 없습니다.'
+                min_range: '수수료 비율은 {{ limit }}%보다 작을 수 없습니다.'
+                not_blank: '수수료 비율을 입력하세요.'
+        code:
+            max_length: '코드는 {{ limit }}자를 넘을 수 없습니다.'
+            not_blank: '결제 방법 코드를 입력하세요.'
+            regex: '결제 방법 코드는 문자, 숫자, 하이픈(-), 밑줄(_)만 사용할 수 있습니다.'
+            unique: '해당 코드의 결제 방법이 이미 존재합니다.'

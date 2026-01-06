@@ -4,68 +4,80 @@
 sylius:
     form:
         catalog_promotion:
-            description: Omschrijving
-            name: Naam
-            priority: Prioriteit
+            action:
+                fixed_discount: 'Vaste korting'
+                percentage_discount: 'Percentage korting'
+            description: 'Beschrijving'
+            enabled: 'Ingeschakeld'
+            end_date: 'Einddatum'
+            label: 'Label'
+            name: 'Naam'
+            priority: 'Prioriteit'
+            start_date: 'Startdatum'
+            translations: 'Vertalingen'
         promotion:
-            actions: Acties
-            add_action: Actie toevoegen
-            add_rule: Regel toevoegen
-            coupon_based: Coupon gebaseerd
-            description: Omschrijving
-            ends_at: Eindigt op
-            exclusive: Exclusief
-            name: Naam
-            priority: Prioriteit
-            rules: Regels
-            starts_at: Start op
-            usage_limit: Gebruikslimiet
+            actions: 'Acties'
+            add_action: 'Voeg actie toe'
+            add_rule: 'Voeg regel toe'
+            applies_to_discounted: 'Van toepassing op reeds afgeprijsde bestellingsitems'
+            applies_to_discounted_details: 'Met deze optie wordt de winkelwagentactiek toegepast op bestellingsitems die al zijn afgeprijsd door cataloguspromotie(s).'
+            coupon_based: 'Op basis van coupon'
+            description: 'Beschrijving'
+            ends_at: 'Eindigt op'
+            exclusive: 'Exclusief'
+            label: 'Label'
+            name: 'Naam'
+            priority: 'Prioriteit'
+            rules: 'Regels'
+            starts_at: 'Begint op'
+            usage_limit: 'Gebruiksbeperking'
         promotion_action:
-            item_fixed_discount: Vaste korting per item
-            item_percentage_discount: Percentage per item
-            order_fixed_discount: Vaste kortingsbedrag per bestelling
-            order_percentage_discount: Vaste percentage per bestelling
-            shipping_percentage_discount: Percentage op verzending
+            item_fixed_discount: 'Vaste korting op item'
+            item_percentage_discount: 'Percentage korting op item'
+            order_fixed_discount: 'Vaste korting op bestelling'
+            order_percentage_discount: 'Percentage korting op bestelling'
+            shipping_percentage_discount: 'Percentage korting op verzending'
+            filters: 'Filters'
             fixed_discount_configuration:
-                amount: Bedrag
+                amount: 'Bedrag'
             percentage_discount_configuration:
-                percentage: Percentage
-            type: Type
+                percentage: 'Percentage'
+            type: 'Type'
         promotion_coupon:
-            expires_at: Verloopt op
-            usage_limit: Gebruikslimiet
+            expires_at: 'Verloopt op'
+            usage_limit: 'Gebruiksbeperking'
         promotion_coupon_generator_instruction:
-            amount: Bedrag
-            code_length: Lengte van de code
-            expires_at: Verloopt op
-            prefix: Voorvoegsel
-            suffix: Achtervoegsel
-            usage_limit: Gebruikslimiet
+            amount: 'Bedrag'
+            code_length: 'Code lengte'
+            expires_at: 'Verloopt op'
+            prefix: 'Prefix'
+            suffix: 'Suffix'
+            usage_limit: 'Gebruiksbeperking'
         promotion_filter:
-            price_range: Prijs bereik filter
+            price_range: 'Prijsbereik filter'
         promotion_rule:
-            cart_quantity: Aantal items in winkelmand
-            contains_product: Bevat product
-            customer_group: Klantengroep
-            has_at_least_one_from_taxons: Heeft minstens een van volgende taxons
-            item_total: Item totaal
-            nth_order: N-de bestelling
-            shipping_country: Land van bestemming
-            taxonomy: Taxonomie
-            total_price_of_items_from_taxon: Totaalprijs voor alle items van dezelfde taxon
+            cart_quantity: 'Winkelwagentje hoeveelheid'
+            contains_product: 'Bevat product'
+            customer_group: 'Klantgroep'
+            has_at_least_one_from_taxons: 'Bevat minstens één van de taxons'
+            item_total: 'Item totaal'
+            nth_order: 'Nth bestelling'
+            shipping_country: 'Verzendland'
+            taxonomy: 'Taxonomie'
+            total_price_of_items_from_taxon: 'Totale prijs van items van taxon'
             cart_quantity_configuration:
-                count: Aantal
-                equal: Gelijk
+                count: 'Aantal'
+                equal: 'Gelijk'
             contains_product_configuration:
-                exclude: Uitsluiten
-                variants: Producten
+                exclude: 'Uitsluiten'
+                variants: 'Producten'
             item_total_configuration:
-                amount: Bedrag
+                amount: 'Bedrag'
             nth_order_configuration:
-                nth: N-de
+                nth: 'Nth'
             shipping_country_configuration:
-                country: Land
+                country: 'Land'
             taxonomy_configuration:
-                exclude: Uitsluiten
-                taxons: Taxa
-            type: Type
+                exclude: 'Uitsluiten'
+                taxons: 'Taxons'
+            type: 'Type'

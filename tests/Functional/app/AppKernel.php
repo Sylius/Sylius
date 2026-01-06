@@ -28,7 +28,7 @@ class AppKernel extends Kernel
         return sys_get_temp_dir() . sprintf('/sylius_functional_tests/%s/cache/%s', $this->testCase ?? '', $this->environment);
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         parent::registerContainerConfiguration($loader);
 

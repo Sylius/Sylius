@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    order_item:
+        product_variant:
+            not_blank: '商品バリアントが指定されていません。'
+        quantity:
+            min: '注文商品の数量は1未満にはできません。'
+            not_blank: '数量が指定されていません。'

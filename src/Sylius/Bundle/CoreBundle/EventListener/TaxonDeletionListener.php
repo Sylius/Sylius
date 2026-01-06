@@ -21,7 +21,6 @@ use Sylius\Component\Core\Promotion\Updater\Rule\TaxonAwareRuleUpdaterInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\EventDispatcher\GenericEvent as SymfonyGenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
 
 final class TaxonDeletionListener
@@ -30,23 +29,12 @@ final class TaxonDeletionListener
     private array $ruleUpdaters;
 
     public function __construct(
-        private RequestStack|SessionInterface $requestStackOrSession,
+        private RequestStack $requestStack,
         private ChannelRepositoryInterface $channelRepository,
         private TaxonInPromotionRuleCheckerInterface $taxonInPromotionRuleChecker,
         TaxonAwareRuleUpdaterInterface ...$ruleUpdaters,
     ) {
         $this->ruleUpdaters = $ruleUpdaters;
-
-        if ($requestStackOrSession instanceof SessionInterface) {
-            trigger_deprecation(
-                'sylius/user-bundle',
-                '1.12',
-                'Passing an instance of %s as constructor argument for %s is deprecated and will be removed in Sylius 2.0. Pass an instance of %s instead.',
-                SessionInterface::class,
-                self::class,
-                RequestStack::class,
-            );
-        }
     }
 
     public function protectFromRemovingMenuTaxon(SymfonyGenericEvent $event): void
@@ -56,7 +44,7 @@ final class TaxonDeletionListener
 
         $channel = $this->channelRepository->findOneBy(['menuTaxon' => $taxon]);
         if ($channel !== null) {
-            $flashes = FlashBagProvider::getFlashBag($this->requestStackOrSession);
+            $flashes = FlashBagProvider::getFlashBag($this->requestStack);
             $flashes->add('error', 'sylius.taxon.menu_taxon_delete');
 
             $event->stopPropagation();
@@ -86,7 +74,7 @@ final class TaxonDeletionListener
         }
 
         if (!empty($updatedPromotionCodes)) {
-            $flashes = FlashBagProvider::getFlashBag($this->requestStackOrSession);
+            $flashes = FlashBagProvider::getFlashBag($this->requestStack);
             $flashes->add('info', [
                 'message' => 'sylius.promotion.update_rules',
                 'parameters' => ['%codes%' => implode(', ', array_unique($updatedPromotionCodes))],

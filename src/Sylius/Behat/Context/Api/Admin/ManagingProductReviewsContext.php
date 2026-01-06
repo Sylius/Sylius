@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -27,11 +28,13 @@ final class ManagingProductReviewsContext implements Context
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
     ) {
     }
 
     /**
+     * @Given I am browsing product reviews
      * @When I (want to) browse product reviews
      */
     public function iWantToBrowseProductReviews(): void
@@ -48,11 +51,39 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @When I filter with title containing :title
+     */
+    public function iFilterWithTitleContaining(string $title): void
+    {
+        $this->client->addFilter('title', $title);
+        $this->client->filter();
+    }
+
+    /**
+     * @When I filter by :product product
+     */
+    public function iFilterByProduct(ProductInterface $product): void
+    {
+        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromResourceInSection($product, 'admin'));
+        $this->client->filter();
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter(): void
     {
         $this->client->filter();
+    }
+
+    /**
+     * @When I sort the product reviews :sortingOrder by :field
+     */
+    public function iSortProductReviewsBy(string $sortingOrder, string $field): void
+    {
+        $field = $field === 'date' ? 'createdAt' : $field;
+
+        $this->client->sort([$field => $sortingOrder === 'descending' ? 'desc' : 'asc']);
     }
 
     /**
@@ -221,6 +252,18 @@ final class ManagingProductReviewsContext implements Context
             $expectedRating,
             sprintf('Average rating of product %s is not %s', $product->getName(), $expectedRating),
         );
+    }
+
+    /**
+     * @Then /^the (first|last) product review in the list should have title "([^"]+)"$/
+     */
+    public function theNthProductReviewInTheListShouldHaveTitle(string $nth, string $title): void
+    {
+        $reviews = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        $review = 'first' === $nth ? reset($reviews) : end($reviews);
+
+        Assert::same($review['title'], $title);
     }
 
     private function isItemOnIndex(string $property, string $value): bool

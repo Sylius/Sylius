@@ -1,0 +1,27 @@
+{% macro label(state) %}
+    {% set value = 'sylius.ui.' ~ state %}
+    {% set view_options = {
+        authorized: { bg_color: 'orange' },
+        awaiting_payment: { bg_color: 'grey' },
+        cancelled: { bg_color: 'red' },
+        completed: { bg_color: 'green' },
+        cart: { bg_color: 'grey' },
+        failed: { bg_color: 'red' },
+        new: { bg_color: 'green' },
+        paid: { bg_color: 'green' },
+        partially_authorized: { bg_color: 'yellow' },
+        partially_paid: { bg_color: 'olive' },
+        partially_refunded: { bg_color: 'violet' },
+        processing: { bg_color: 'violet' },
+        ready: { bg_color: 'blue' },
+        refunded: { bg_color: 'purple' },
+        shipped: { bg_color: 'green' },
+        partially_shipped: { bg_color: 'yellow' },
+    } %}
+
+    <div class="d-inline-block">
+        <span class="badge rounded-pill" style="background-color: {{ view_options[state]['bg_color']|default('green') }}; color: {{ view_options[state]['text_color']|default('white') }}">
+            {{ value|trans }}
+        </span>
+    </div>
+{% endmacro %}

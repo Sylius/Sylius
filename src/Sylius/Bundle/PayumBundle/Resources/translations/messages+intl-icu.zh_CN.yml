@@ -1,0 +1,4 @@
+sylius:
+    payum_action:
+        payment:
+            description: '{items, plural, one {付款包含 # 件商品，总计 {total}} other {付款包含 # 件商品，总计 {total}}}'

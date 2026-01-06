@@ -4,3 +4,5 @@
 sylius:
     promotion_coupon:
         generate: 'Kupony promocyjne zostały pomyślnie wygenerowane.'
+    catalog_promotion:
+        remove: 'Usunięcie promocji katalogowej zostało zlecone. Proces może potrwać w zależności od liczby produktów objętych zmianą.'

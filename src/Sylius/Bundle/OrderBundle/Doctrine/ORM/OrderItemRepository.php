@@ -25,7 +25,7 @@ use Sylius\Component\Order\Repository\OrderItemRepositoryInterface;
  */
 class OrderItemRepository extends EntityRepository implements OrderItemRepositoryInterface
 {
-    public function findOneByIdAndCartId($id, $cartId): ?OrderItemInterface
+    public function findOneByIdAndCartId(mixed $id, mixed $cartId): ?OrderItemInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'cart')
@@ -40,7 +40,7 @@ class OrderItemRepository extends EntityRepository implements OrderItemRepositor
         ;
     }
 
-    public function findOneByIdAndCartTokenValue($id, $tokenValue): ?OrderItemInterface
+    public function findOneByIdAndCartTokenValue(mixed $id, mixed $tokenValue): ?OrderItemInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.order', 'cart')

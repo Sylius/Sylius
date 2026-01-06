@@ -4,18 +4,19 @@
 sylius:
     taxon:
         code:
-            not_blank: 请输入分类代码。
-            regex: 分类代码仅可以由字母、 数字、 破折号和下划线组成。
-            unique: 输入的分类编码已经存在
+            max_length: '代码长度不得超过 {{ limit }} 个字符。'
+            not_blank: '请输入分类代码。'
+            regex: '分类代码只能包含字母、数字、短横线和下划线。'
+            unique: '具有此代码的分类已存在。'
         name:
-            max_length: 分类名称不能超过 255 个字符。
-            not_blank: 请输入分类名称。
+            max_length: '分类名称长度不得超过 255 个字符。'
+            not_blank: '请输入分类名称。'
         slug:
-            not_blank: 请输入分类标识。
-            unique: 分类标识必须是唯一的。
+            not_blank: '请输入分类别名。'
+            unique: '分类别名必须唯一。'
         parent:
             invalid_relation: '父分类不能是该分类本身或其任何子分类。'
     taxonomy:
         name:
-            max_length: 分类名称不能超过 255 个字符。
-            not_blank: 请输入分类名称。
+            max_length: '分类法名称长度不得超过 255 个字符。'
+            not_blank: '请输入分类法名称。'

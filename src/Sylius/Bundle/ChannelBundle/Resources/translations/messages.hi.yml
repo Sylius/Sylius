@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        channel:
+            color: 'रंग'
+            description: 'विवरण'
+            enabled: 'सक्रिय'
+            name: 'नाम'
+            url: 'URL'

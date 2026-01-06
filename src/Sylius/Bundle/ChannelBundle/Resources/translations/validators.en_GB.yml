@@ -1,0 +1,14 @@
+sylius:
+    channel:
+        code:
+            max_length: 'The code must not be longer than {{ limit }} characters.'
+            not_blank: 'Please enter the channel code.'
+            regex: 'The channel code may only contain letters, numbers, dashes, and underscores.'
+            unique: 'The channel code must be unique.'
+        name:
+            not_blank: 'Please enter the channel name.'
+            max_length: 'The channel name must not be longer than {{ limit }} characters.'
+        color:
+            max_length: 'The colour must not be longer than {{ limit }} characters.'
+        hostname:
+            max_length: 'The hostname must not be longer than {{ limit }} characters.'

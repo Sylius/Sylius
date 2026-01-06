@@ -1,0 +1,62 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    account:
+        dont_have_an_account: '계정이 없으신가요?'
+        register_here: '여기에서 등록하세요'
+    email:
+        order_confirmation:
+            has_been_successfully_placed: '성공적으로 접수되었습니다.'
+            subject: '주문 확인'
+            view_order_or_change_payment_method: '주문 보기 또는 결제 방법 변경'
+            thank_you: '저희 상점을 이용해 주셔서 감사합니다!'
+            your_order_number: '주문 번호'
+        password_reset:
+            hello: '안녕하세요'
+            reset_your_password: '비밀번호를 재설정하세요'
+            subject: '비밀번호 재설정'
+            to_reset_your_password: '비밀번호를 재설정하려면 아래 링크를 클릭하세요'
+            to_reset_your_password_token: '비밀번호를 재설정하려면 아래 토큰을 사용하세요'
+            token: '비밀번호 재설정 토큰:'
+        user_registration:
+            start_shopping: '쇼핑 시작하기'
+            subject: '회원 가입'
+            welcome_to_our_store: '저희 상점에 오신 것을 환영합니다!'
+            you_have_just_been_registered: '회원 가입이 완료되었습니다. 감사합니다'
+        verification_token:
+            hello: '안녕하세요'
+            subject: '이메일 주소 인증'
+            to_verify_your_email_address: '이메일 주소를 인증하려면 아래 링크를 클릭하세요'
+            verify_your_email_address: '이메일 주소 인증'
+    footer:
+        banner:
+            free_shipping_title: '무료 배송 & 반품'
+            free_shipping_content: '모든 주문 무료 배송'
+            guarantee_title: '환불 보장'
+            guarantee_content: '30일 환불 보장'
+            multiple_payments_title: '다양한 결제 방법'
+            multiple_payments_content: '신용카드와 PayPal을 지원합니다'
+    homepage:
+        about_us: '회사 소개'
+        about_us_content: '저희 상점은 최고의 제품만을 제공하는 온라인 쇼핑몰입니다. 다양한 의류와 신발을 만나보세요. (<i>이 내용을 변경하려면 번역 파일에서 "sylius.homepage.about_us_content" 키를 재정의하세요</i>)'
+        banner_content: '준비하세요! 겨울이 다가옵니다'
+        banner_button: '새 컬렉션 확인'
+        carousel_header: '추천 상품'
+        latest_deals: '최신 할인'
+        new_collection: '신상품'
+        newsletter: '뉴스레터'
+        newsletter_description: '뉴스레터를 구독하고 새로운 혜택을 만나보세요! (<i>이 내용을 변경하려면 번역 파일에서 "sylius.homepage.newsletter_description" 키를 재정의하세요</i>)'
+        subscribe: '구독하기'
+    lightbox:
+        image_album_label: '이미지 %1 / %2'
+    menu:
+        shop:
+            account:
+                address_book: '주소록'
+                change_password: '비밀번호 변경'
+                dashboard: '대시보드'
+                header: '내 계정'
+                order_history: '주문 내역'
+                personal_information: '개인 정보'
+    top_bar: '뉴스레터에 가입하고 -20% 할인 혜택을 받으세요'

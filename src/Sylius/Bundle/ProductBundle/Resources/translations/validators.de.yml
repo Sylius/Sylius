@@ -52,6 +52,8 @@ sylius:
             min_length: Der Name der Zuordnung muss mindestens 1 Zeichen lang sein.|Der Name der Zuordnung muss mindestens {{ limit }} Zeichen lang sein.
             max_length: Der Name der Zuordnung darf nicht länger als 1 Zeichen sein.|Der Name der Zuordnung darf nicht länger als {{ limit }} Zeichen sein.
         code:
+            min_length: Der Beziehungstyp-Code muss mindestens 1 Zeichen lang sein.|Der Beziehungstyp-Code muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Beziehungstyp-Code darf nicht länger als 1 Zeichen sein.|Der Beziehungstyp-Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte den Code des Beziehungstypen angeben.
             regex: Kürzel des Beziehungstyps darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Der Beziehungstyp mit dem angegebenen Code existiert bereits.

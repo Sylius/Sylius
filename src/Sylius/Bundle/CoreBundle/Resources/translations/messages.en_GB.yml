@@ -1,0 +1,285 @@
+sylius:
+    email:
+        admin_password_reset:
+            hello: 'Hello'
+            subject: 'Administrator password reset'
+            reset_your_password: 'Reset your password'
+            to_reset_your_password: 'To reset your password - click the link below'
+            to_reset_your_password_token: 'To reset your password - use the token below'
+            token: 'Your password reset token is'
+        contact_request:
+            content: 'Content'
+            message_from: 'Message from'
+            subject: 'Contact request'
+        order_confirmation:
+            has_been_successfully_placed: 'has been successfully placed.'
+            subject: 'Order confirmation'
+            view_order_or_change_payment_method: 'View order or change payment method'
+            thank_you: 'Thank you for shopping at our store!'
+            your_order_number: 'Your order no.'
+        password_reset:
+            hello: 'Hello'
+            reset_your_password: 'Reset your password'
+            subject: 'Password reset'
+            to_reset_your_password: 'To reset your password - click the link below'
+            to_reset_your_password_token: 'To reset your password - use the token below'
+            token: 'Your password reset token is'
+        shipment_confirmation:
+            has_been_sent_using: 'has been sent using'
+            subject: 'Shipment confirmation'
+            thank_you_for_transaction: 'Thank you for a successful transaction.'
+            you_can_check_its_location_with_the_tracking_code: 'You can check its location with the %tracking_code% tracking code.'
+            your_order_with_number: 'Your order with number'
+        user_registration:
+            start_shopping: 'Start shopping'
+            subject: 'User registration'
+            welcome_to_our_store: 'Welcome to our store!'
+            you_have_just_been_registered: 'You have just been registered. Thank you'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
+        verification_token:
+            hello: 'Hello'
+            message: 'Verify your account with token: '
+            subject: 'Email address verification'
+            to_verify_your_email_address: 'To verify your email address - click the link below'
+            verify_your_email_address: 'Verify your email address'
+        user:
+            account_verification:
+                greeting: 'Hello'
+                message: 'Verify your account with token: '
+                statement: 'Verify your email address'
+                strategy: 'To verify your email address - click the link below'
+                subject: 'Email address verification'
+    form:
+        block:
+            body: Body
+            id: ID
+            title: Title
+        cart:
+            coupon: Coupon
+        catalog_promotion:
+            channels: Channels
+            scope:
+                for_products: For products
+                for_taxons: For taxons
+                for_variants: For variants
+        checkout:
+            addressing:
+                different_billing_address: Use different address for billing?
+                different_shipping_address: Use different address for shipping?
+            payment_method: Payment Method
+            shipping_method: Shipping Method
+        currency:
+            select: Select currency
+        promotion:
+            channels: Channels
+        promotion_action:
+            add_product_configuration:
+                product: Product
+        promotion_coupon:
+            per_customer_usage_limit: Per-Customer Usage Limit
+            reusable_from_cancelled_orders: Reusable from cancelled orders
+        group:
+            name: Name
+            roles: Roles
+        channel:
+            billing_data:
+                city: City
+                company: Company
+                country: Country
+                postcode: Postcode
+                street: Street
+                tax_id: Tax ID
+            contact_email: Contact email
+            contact_phone_number: Contact phone number
+            countries: Countries
+            currencies: Currencies
+            currency_base: Base currency
+            account_verification_required: Is account verification required?
+            hostname: Hostname
+            locale_default: Default locale
+            locales: Locales
+            menu_taxon: Menu taxon
+            payment_methods: Payment Methods
+            shipping_address_in_checkout_required: Address required in checkout
+            shipping_methods: Shipping Methods
+            shop_billing_data: Shop billing data
+            skipping_shipping_step_allowed: Skip shipping step if only one shipping method is available?
+            skipping_payment_step_allowed: Skip payment step if only one payment method is available?
+            tax_calculation_strategy: Tax calculation strategy
+            tax_zone_default: Default tax zone
+            taxonomies: Taxonomies
+            theme: Theme
+        image:
+            type: Type
+            file: Image
+        locale:
+            code: Code
+            enabled: Enabled
+        order_filter:
+            created_at_from: Created after
+            created_at_to: Created before
+            number: Number
+            total_from: From
+            total_to: To
+            payment_state: Payment state
+            channel: All channels
+        page:
+            body: Body
+            id: ID
+            title: Title
+        product:
+            images: Images
+            restricted_zone: Restricted zone
+            short_description: Short description
+            variant_selection_method: Variant selection method
+            main_taxon: Main taxon
+            channels: Channels
+            enabled: Enabled
+        product_filter:
+            name: Name
+            code: Code
+        product_variant:
+            tax_category: Tax category
+            shipping_category: Shipping category
+        shipment_filter:
+            created_at_from: From
+            created_at_to: To
+            number: Order number
+            shipping_address: Ship to name
+            channel: All channels
+        payment_filter:
+            created_at_from: From
+            created_at_to: To
+            number: Order number
+            billing_address: Bill to name
+            channel: All channels
+        shipping_method:
+            zone: Zone
+        taxon:
+            code: Code
+            file: Select image
+            images: Images
+        taxonomy:
+            file: Select image
+        user:
+            billing_address: Billing address
+            different_shipping_address: Use different address for shipping?
+            enabled: Enabled
+            first_name: First name
+            groups: Groups
+            roles: Roles
+            last_name: Last name
+            password: Password
+            shipping_address: Shipping address
+        user_filter:
+            query: Search
+        variant:
+            depth: Depth
+            height: Height
+            on_hand: Current stock
+            price: Price
+            sku: SKU
+            shipping_required: Is shipping required?
+            weight: Weight
+            width: Width
+            tracked_help: If this option is enabled Sylius will keep track of the stock and will stop selling the product once stock reaches 0.
+        attribute:
+            product_attribute_value:
+                attribute: Attribute
+                value: Value
+        guest:
+            email: Email
+        product_association:
+            product: Associated product
+            type: Association type
+        product_association_type:
+            name: Name
+        promotion_filter:
+            products: Products filter
+            taxons: Taxons filter
+        promotion_rule:
+            customer_group:
+                group: Customer group
+            has_taxon:
+                taxons: Taxons
+            product:
+                products: Products
+            total_of_items_from_taxon:
+                taxon: Taxon
+                amount: Amount
+        payment_method:
+            channels: Channels
+        product_attribute:
+            position: Position
+        zone:
+            scopes:
+                shipping: Shipping
+                tax: Tax
+
+    installer:
+        extensions:
+            header: extensions
+            accelerator:
+                header: Accelerator
+                help: Enable Zend OpCache (highly recommended).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Install and enable the %extension% extension.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            off: off
+            on: on
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: file system
+            cache:
+                header: cache
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: exists
+            logs:
+                header: logs
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: not exists
+            not_writable: not writable
+            parameters:
+                header: parameters.yml
+                help: "To set permissions run: sudo chmod a+w %path%"
+            vendors: vendors
+            writable: writable
+        settings:
+            header: PHP version and settings
+            any: any
+            detect_unicode: detect_unicode
+            detect_unicode_help: Set 'detect_unicode = Off' in your php.ini file
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: non deprecated
+            off: off
+            on: on
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+                auto_start_help: Set 'session.auto_start  = Off' in your php.ini file
+            short_open_tag: short_open_tag
+            timezone: timezone
+            timezone_help: Set 'date.timezone' in your php.ini file (e.g. date.timezone = "Europe/Amsterdam")
+            timezone_deprecated:
+                header: Deprecated timezone
+                help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
+            version: PHP version
+            version_recommended: Recommended PHP version
+            version_help: Sylius recommends %recommended% PHP version, your current version is %current%. Please upgrade.
+
+    shipping_method_resolver:
+        by_zones_and_channel: By zones and channel
+

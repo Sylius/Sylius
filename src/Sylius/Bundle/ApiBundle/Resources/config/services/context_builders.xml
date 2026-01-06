@@ -17,46 +17,201 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="false" />
-
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder"
-            decorates="api_platform.serializer.context_builder"
-            decoration-priority="64"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder.inner" />
-            <argument type="service" id="sylius.context.channel" />
-        </service>
-        <service id="sylius_api.context_builder.channel" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ChannelContextBuilder" />
-
-        <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\ReadOperationContextBuilder"
+            id="sylius_api.context_builder.channel_code_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\ChannelCodeAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
-            <argument>%sylius_api.serialization_groups.skip_adding_read_group%</argument>
-            <argument>%sylius_api.serialization_groups.skip_adding_index_and_show_groups%</argument>
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
+            <argument>Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder"
+            id="sylius_api.context_builder.logged_in_customer_email_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LoggedInCustomerEmailAwareContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder.inner" />
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument type="service" id="sylius_api.context.user.token_based" />
+        </service>
+
+        <service
+            id="sylius_api.context_builder.channel"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\ChannelContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument type="service" id="sylius.context.channel" />
+        </service>
+
+        <service
+            id="sylius_api.context_builder.locale_code_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LocaleCodeAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="sylius.context.locale" />
         </service>
-        <service id="sylius_api.context_builder.locale" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\LocaleContextBuilder" />
 
         <service
-            id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder"
+            id="sylius_api.context_builder.locale"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LocaleContextBuilder"
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder.inner" />
+            <argument type="service" id=".inner" />
+            <argument type="service" id="sylius.context.locale" />
         </service>
-        <service id="sylius_api.context_builder.http_request_method_type" alias="Sylius\Bundle\ApiBundle\SerializerContextBuilder\HttpRequestMethodTypeContextBuilder" />
+
+        <service
+            id="sylius_api.context_builder.http_request_method_type"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\HttpRequestMethodTypeContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+        </service>
+
+        <service
+            id="sylius_api.context_builder.logged_in_shop_user_id_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LoggedInShopUserIdAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument type="service" id="sylius_api.context.user.token_based" />
+        </service>
+
+        <service
+            id="sylius_api.context_builder.shipment_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Component\Core\Model\ShipmentInterface</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.payment_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Component\Core\Model\PaymentInterface</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.payment_request_hash_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentRequestHashAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentRequestHashAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Component\Payment\Model\PaymentRequestInterface</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.order_token_value_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Component\Core\Model\OrderInterface</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.order_item_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Component\Core\Model\OrderItemInterface</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.promotion_code_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Component\Core\Model\PromotionInterface</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.token_aware.admin_user_reset_password"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\Admin\Account\ResetPassword</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.token_aware.shop_user_reset_password"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\Account\ResetPassword</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.token_aware.verify_shop_user"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument>Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser</argument>
+        </service>
+
+        <service
+            id="sylius_api.context_builder.payment_request_action_aware"
+            class="Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\PaymentRequestActionAwareContextBuilder"
+            decorates="api_platform.serializer.context_builder"
+            decoration-priority="64"
+        >
+            <argument type="service" id=".inner" />
+            <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware</argument>
+            <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware::DEFAULT_ARGUMENT_NAME</argument>
+            <argument type="service" id="sylius.provider.payment_request.default_action" />
+        </service>
     </services>
 </container>

@@ -3,24 +3,30 @@
 
 sylius:
     channel:
-        delete_error: 'Kanalen kan inte raderas. Det krävs minst en aktiverad kanal.'
+        delete_error: 'Kanalen kan inte raderas. Minst en aktiverad kanal krävs.'
     checkout:
-        complete_error: 'Ett oväntat problem uppstod vid slutförandet av din order. Var god försök lägga din order igen.'
+        complete_error: 'Ett oväntat problem uppstod när ordern skulle slutföras. Försök att lägga din beställning igen.'
     contact:
-        request_success: 'Din kontaktförfråga har blivit mottagen.'
-        request_error: 'Ett problem uppstod när kontaktförfrågan skickades. Försök igen senare.'
+        request_success: 'Din kontaktförfrågan har skickats.'
+        request_error: 'Ett problem uppstod när kontaktförfrågan skulle skickas. Försök igen senare.'
     customer:
         add_address: 'Adressen har lagts till.'
-        impersonate: 'Lyckades personifiera kund %name%.'
-        set_address_as_default: 'Adressen har ställts in som standard.'
+        impersonate: 'Du imiterar nu kunden %name%.'
+        set_address_as_default: 'Adressen har satts som standard.'
     order:
-        apply_state_machine_transition_error: 'Ett oväntat problem uppstod vid uppdaterandet av din order. Var god försök uppdatera din order igen.'
-        promotion_integrity: 'Du är inte längre berättigad till denna kampanj %promotionName%.'
-        total_integrity: 'Din ordersumma har ändrats, kontrollera din orderinformation och bekräfta den igen.'
-        update_error: 'Ett oväntat problem uppstod vid uppdaterandet av din order. Var god försök uppdatera din order igen.'
+        apply_state_machine_transition_error: 'Ett oväntat problem uppstod när ordern skulle uppdateras. Försök igen.'
+        promotion_integrity: 'Du är inte längre berättigad till kampanjen %promotionName%.'
+        total_integrity: 'Din ordersumma har ändrats, kontrollera orderinformationen och bekräfta igen.'
+        update_error: 'Ett oväntat problem uppstod när ordern skulle uppdateras. Försök igen.'
     payment:
-        apply_state_machine_transition_error: 'Ett oväntat problem uppstod vid uppdatering av en betalning. Var god försök uppdatera betalningen igen.'
+        apply_state_machine_transition_error: 'Ett oväntat problem uppstod när betalningen skulle uppdateras. Försök igen.'
     product:
-        out_of_stock: 'Det finns endast %quantity% exemplar av denna produkt i lager.'
+        in_use_by_promotion_rule: 'Det går inte att ta bort en produkt som används av en kampanjregel.'
+        out_of_stock: 'Det finns endast %quantity% av denna produkt i lager.'
     product_variant:
-        update_error: 'Ett oväntat problem uppstod vid uppdatering av en produktvariant. Var god försök uppdatera produktvarianten igen.'
+        update_error: 'Ett oväntat problem uppstod när produktvarianten skulle uppdateras. Försök igen.'
+    promotion:
+        update_rules: 'Vissa regler för kampanjerna med koderna %codes% har uppdaterats.'
+    taxon:
+        in_use_by_promotion_rule: 'Det går inte att ta bort en taxon som används av en kampanjregel.'
+        menu_taxon_delete: 'Du kan inte ta bort en meny-taxon för någon kanal.'

@@ -2,25 +2,77 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
-    promotion:
-        description:
-            max_length: Kampanjebeskrivelse kan ikke være lengre enn ett tegn. |Kampanjebeskrivelse kan ikke være lengre enn {{ limit }} tegn.
-            min_length: Produktbeskrivelse må være minst ett tegn. |Produktbeskrivelse må være minst {{ limit }} tegn.
-            not_blank: Angi kampanjebeskrivelse.
+    catalog_promotion:
+        code:
+            max_length: 'Koden må ikke være lengre enn {{ limit }} tegn.'
+            unique: 'En katalogkampanje med denne koden finnes allerede.'
+            regex: 'Katalogkampanjekode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            not_blank: 'Vennligst oppgi katalogkampanjekode.'
+        date:
+            greater_than_start_date: 'Sluttdato kan ikke settes før startdato.'
         name:
-            max_length: Kampanjenavn kan ikke være lengre enn ett tegn. |Kampanjenavn kan ikke være lengre enn {{ limit }} tegn.
-            min_length: Navnet på prototypen må være minst ett tegn. |Navnet på prototypen må være minst {{ limit }} tegn.
-            not_blank: Angi kampanjenavn.
+            max_length: 'Katalogkampanjenavnet må ikke være lengre enn {{ limit }} tegn.'
+            min_length: 'Katalogkampanjenavnet må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst oppgi katalogkampanjenavn.'
+        state:
+            processing: 'Katalogkampanjen kan ikke redigeres mens den behandles.'
+    catalog_promotion_action:
+        type:
+            not_blank: 'Vennligst velg en handlingstype.'
+            invalid: 'Katalogkampanje-handlingstype er ugyldig. Tilgjengelige typer er {{ available_action_types }}.'
+        invalid_type: 'Katalogkampanje-handlingstype er ugyldig. Vennligst velg en gyldig type.'
+        percentage_discount:
+            not_in_range: 'Prosentrabatten må være mellom 0 % og 100 %.'
+            not_number_or_empty: 'Prosentrabatten må være et tall og kan ikke være tom.'
+            not_valid: 'Prosentrabatten må være konfigurert.'
+    catalog_promotion_scope:
+        type:
+            not_blank: 'Vennligst velg en omfangstype.'
+            invalid: 'Katalogkampanje-omfangstype er ugyldig. Tilgjengelige typer er {{ available_scope_types }}.'
+    promotion:
+        code:
+            max_length: 'Koden må ikke være lengre enn {{ limit }} tegn.'
+            unique: 'En kampanje med denne koden finnes allerede.'
+            regex: 'Kampanjekode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            not_blank: 'Vennligst oppgi kampanjekode.'
+        description:
+            max_length: 'Kampanjebeskrivelse må ikke være lengre enn 1 tegn.|Kampanjebeskrivelse må ikke være lengre enn {{ limit }} tegn.'
+            min_length: 'Kampanjebeskrivelse må være minst 1 tegn lang.|Kampanjebeskrivelse må være minst {{ limit }} tegn lang.'
+            not_blank: 'Vennligst oppgi kampanjebeskrivelse.'
+        end_date_cannot_be_set_prior_start_date: 'Sluttdato kan ikke settes før startdato.'
+        is_invalid: 'Kampanjen er ugyldig.'
+        name:
+            max_length: 'Kampanjenavn må ikke være lengre enn 1 tegn.|Kampanjenavn må ikke være lengre enn {{ limit }} tegn.'
+            min_length: 'Kampanjenavn må være minst 1 tegn langt.|Kampanjenavn må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst oppgi kampanjenavn.'
+    promotion_action:
+        invalid_type: 'Kampanjehandlingstype er ugyldig. Tilgjengelige handlingstyper er {{ available_action_types }}.'
+        percentage_discount_configuration:
+            not_in_range: 'Prosentrabatten må være mellom 0 % og 100 %.'
+    promotion_rule:
+        invalid_type: 'Kampanjeregeltype er ugyldig. Tilgjengelige regeltyper er {{ available_rule_types }}.'
     promotion_coupon:
         code:
-            max_length: Kupongkoden kan ikke være lengre enn ett tegn. |Kupongkoden kan ikke være lengre enn {{ limit }} tegn.
-            min_length: Kupongkoden må være minst ett tegn. |Kupongkoden må være minst {{ limit }} tegn.
-            not_blank: Angi kupongkode.
+            max_length: 'Koden må ikke være lengre enn {{ limit }} tegn.'
+            min_length: 'Kupongkode må være minst 1 tegn lang.|Kupongkode må være minst {{ limit }} tegn lang.'
+            not_blank: 'Vennligst oppgi kupongkode.'
+            regex: 'Kupongkode kan kun bestå av bokstaver, tall, bindestreker og understreker.'
+            unique: 'Denne kupongen finnes allerede.'
+        is_invalid: 'Kupongkoden er ugyldig.'
+        promotion:
+            not_blank: 'Vennligst oppgi en kampanje for denne kupongen.'
+            not_coupon_based: 'Kun kupongbaserte kampanjer kan ha kuponger.'
         usage_limit:
-            min: Kupongens bruksgrense må være minst {{ limit }}.
+            min: 'Kupongens bruksgrense må være minst {{ limit }}.'
     promotion_coupon_generator_instruction:
         amount:
-            min: Mengden av kuponger å generere må være minst {{ limit }}.
-            not_blank: Angi mengden kuponger å generere.
+            min: 'Antall kuponger som skal genereres må være minst {{ limit }}.'
+            not_blank: 'Vennligst oppgi antall kuponger som skal genereres.'
+        code_length:
+            min: 'Kupongkode må være minst {{ limit }} tegn lang.'
+            max: 'Kupongkode må ikke være lengre enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi lengde på kupongkode.'
+            not_in_range: 'Kupongkodelengde må være mellom {{ min }} og {{ max }}.'
+        possible_generation_amount: 'Ugyldig kupongkodelengde eller kupongantall. Det er ikke mulig å generere %expectedAmount% unike kuponger med kodelengde %codeLength%. Mulig antall å generere er %possibleAmount%.'
         usage_limit:
-            min: Bruksgrensen av genererte kuponger må være minst {{ limit }}.
+            min: 'Bruksgrense for genererte kuponger må være minst {{ limit }}.'

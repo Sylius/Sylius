@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.shipping_method.class%">
+        <operations>
+            <operation
+                name="sylius_api_shop_shipping_method_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/shipping-methods"
+                paginationEnabled="false"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:shipping_method:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <order>
+                    <values>
+                        <value name="position">ASC</value>
+                    </values>
+                </order>
+            </operation>
+
+            <operation
+                name="sylius_api_shop_shipping_method_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/shipping-methods/{code}"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:shipping_method:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+
+    <resource class="%sylius.model.shipping_method.class%" uriTemplate="/shop/orders/{tokenValue}/shipments/{shipmentId}/methods">
+        <uriVariables>
+            <uriVariable parameterName="tokenValue" fromClass="%sylius.model.order.class%" fromProperty="shipments" />
+            <uriVariable parameterName="shipmentId" fromClass="%sylius.model.shipment.class%" fromProperty="method" />
+        </uriVariables>
+        <operations>
+            <operation
+                name="sylius_api_shop_order_shipment_shipping_method_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                provider="sylius_api.state_provider.shop.order.shipment.shipping_method.collection"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:shipping_method:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+        </operations>
+    </resource>
+</resources>

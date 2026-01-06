@@ -1,0 +1,5 @@
+{% set sorting = hookable_metadata.configuration.sorting|default(null) %}
+{% set path = path(hookable_metadata.context.route, hookable_metadata.context.route_parameters|merge({sorting, 'criteria': hookable_metadata.context.criteria})) %}
+{% set title = hookable_metadata.configuration.title|trans %}
+
+<a class="dropdown-item" href="{{ path }}" data-text="{{ title|lower }}">{{ title }}</a>

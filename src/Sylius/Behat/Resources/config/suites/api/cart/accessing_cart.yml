@@ -6,15 +6,7 @@ default:
         api_accessing_cart:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
-
-                - sylius.behat.context.setup.admin_api_security
-                - sylius.behat.context.setup.cart
-                - sylius.behat.context.setup.channel
-                - sylius.behat.context.setup.payment
-                - sylius.behat.context.setup.product
-                - sylius.behat.context.setup.shipping
-                - sylius.behat.context.setup.shop_api_security
-                - sylius.behat.context.setup.user
+                - sylius.behat.context.hook.guest_cart
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.cart
@@ -25,8 +17,22 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
 
+                - sylius.behat.context.setup.admin_api_security
+                - sylius.behat.context.setup.cart
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout.address
+                - sylius.behat.context.setup.checkout.payment
+                - sylius.behat.context.setup.checkout.shipping
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shop_api_security
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.api.debug
                 - sylius.behat.context.api.shop.cart
                 - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.shop.checkout.shipping
                 - sylius.behat.context.api.shop.login
 
             filters:

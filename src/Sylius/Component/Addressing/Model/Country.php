@@ -37,7 +37,6 @@ class Country implements CountryInterface, \Stringable
 
     public function __construct()
     {
-        /** @var ArrayCollection<array-key, ProvinceInterface> $this->provinces */
         $this->provinces = new ArrayCollection();
     }
 
@@ -63,7 +62,7 @@ class Country implements CountryInterface, \Stringable
 
     public function getName(?string $locale = null): ?string
     {
-        return Countries::getName($this->code, $locale);
+        return $this->code !== null ? Countries::getName($this->code, $locale) : null;
     }
 
     public function getProvinces(): Collection
