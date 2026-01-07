@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
-use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Types\Types;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractPostgreSQLMigration;
 
 final class Version20160101084139 extends AbstractPostgreSQLMigration
@@ -33,11 +31,6 @@ final class Version20160101084139 extends AbstractPostgreSQLMigration
     public function getDescription(): string
     {
         return 'Regenerated Sylius migrations from 1.X';
-    }
-
-    public function postUp(Schema $schema): void
-    {
-        $this->cleanMigrationsTable();
     }
 
     public function up(Schema $schema): void
@@ -745,19 +738,4 @@ final class Version20160101084139 extends AbstractPostgreSQLMigration
         return false;
     }
 
-    private function cleanMigrationsTable(): void
-    {
-        $this->connection->executeStatement('DELETE FROM sylius_migrations WHERE version LIKE :version AND version NOT IN (:current) AND version < :new', [
-            'version' => 'Sylius\\\\Bundle\\\\CoreBundle\\\\Migrations\\\\Version%',
-            'current' => [
-                'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20160101092155',
-                self::class,
-            ],
-            'new' => 'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20241020131407',
-        ], [
-            'version' => Types::STRING,
-            'current' => ArrayParameterType::STRING,
-            'new' => Types::STRING,
-        ]);
-    }
 }
