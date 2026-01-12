@@ -25,7 +25,7 @@ return (new ResourceMetadata())
         new Delete(
             routeName: '_sylius_admin_shop_user_delete',
             redirectToRoute: 'sylius_admin_customer_show',
-            redirectArguments: ['id' => "request.query.get('customerId')"],
+            redirectArguments: ['id' => "@=request.query.get('customerId')"],
         )
     ]))
 ;

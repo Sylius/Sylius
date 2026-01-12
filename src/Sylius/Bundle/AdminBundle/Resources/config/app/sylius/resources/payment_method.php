@@ -32,7 +32,7 @@ return (new ResourceMetadata())
             path: 'payment-methods/new/{factory}',
             routeName: '_sylius_admin_payment_method_create',
             factoryMethod: 'createWithGateway',
-            factoryArguments: ["request.attributes.get('factory')"],
+            factoryArguments: ["@=request.attributes.get('factory')"],
             redirectToRoute: 'sylius_admin_payment_method_update',
         ),
         new Update(
