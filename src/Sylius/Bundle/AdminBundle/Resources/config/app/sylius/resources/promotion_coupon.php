@@ -33,11 +33,11 @@ return (new ResourceMetadata())
             routeName: '_sylius_admin_promotion_coupon_create',
             factoryMethod: 'createForPromotion',
             factoryArguments: [
-                "sylius_repositories.get('sylius.repository.promotion').find(request.attributes.get('promotionId'))",
+                "@=sylius_repositories.get('sylius.repository.promotion').find(request.attributes.get('promotionId'))",
             ],
             redirectToRoute: 'sylius_admin_promotion_coupon_index',
             redirectArguments: [
-                'promotionId' => "request.attributes.get('promotionId')",
+                'promotionId' => "@=request.attributes.get('promotionId')",
             ],
             vars: [
                 'route' => [
@@ -53,7 +53,7 @@ return (new ResourceMetadata())
             repositoryMethod: 'find',
             redirectToRoute: 'sylius_admin_promotion_coupon_index',
             redirectArguments: [
-                'promotionId' => "request.attributes.get('promotionId')",
+                'promotionId' => "@=request.attributes.get('promotionId')",
             ],
             vars: [
                 'route' => [
@@ -69,15 +69,15 @@ return (new ResourceMetadata())
             routeName: '_sylius_admin_promotion_coupon_delete',
             repositoryMethod: 'find',
             redirectToRoute: 'sylius_admin_promotion_coupon_index',
-            redirectArguments: ['promotionId' => "request.attributes.get('promotionId')"],
+            redirectArguments: ['promotionId' => "@=request.attributes.get('promotionId')"],
         ),
         new BulkDelete(
             path: 'coupons/bulk_delete',
             routeName: '_sylius_admin_promotion_coupon_bulk_delete',
-            repositoryArguments: ["request.request.all('ids')"],
+            repositoryArguments: ["@=request.request.all('ids')"],
             repositoryMethod: 'findById',
             redirectToRoute: 'sylius_admin_promotion_coupon_index',
-            redirectArguments: ['promotionId' => "request.attributes.get('promotionId')"],
+            redirectArguments: ['promotionId' => "@=request.attributes.get('promotionId')"],
         ),
         new Index(
             path: 'coupons/',
