@@ -33,8 +33,8 @@ return (new ResourceMetadata())
             routeName: '_sylius_admin_payment_request_show',
             repositoryMethod: 'findOneByPaymentId',
             repositoryArguments: [
-                'hash' => "request.attributes.get('hash')",
-                'paymentId' => "request.attributes.get('paymentId')",
+                'hash' => "@=request.attributes.get('hash')",
+                'paymentId' => "@=request.attributes.get('paymentId')",
             ],
         ),
     ]))

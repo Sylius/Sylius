@@ -49,7 +49,7 @@ return (new ResourceMetadata())
             routeName: '_sylius_admin_zone_create',
             routeRequirements: ['type' => 'country|province|zone'],
             factoryMethod: 'createTyped',
-            factoryArguments: ["request.attributes.get('type')"],
+            factoryArguments: ["@=request.attributes.get('type')"],
             redirectToRoute: 'sylius_admin_zone_update',
         ),
     ]))

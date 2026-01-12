@@ -37,7 +37,7 @@ return (new ResourceMetadata())
             template: '@SyliusAdmin/shared/crud/create.html.twig',
             shortName: 'create_for_parent',
             factoryMethod: 'createForParent',
-            factoryArguments: ['parent' => "sylius_repositories.get('sylius.repository.taxon').find(request.attributes.get('id'))"],
+            factoryArguments: ['parent' => "@=sylius_repositories.get('sylius.repository.taxon').find(request.attributes.get('id'))"],
             notificationMessage: 'sylius.resource.create',
             redirectToRoute: 'sylius_admin_taxon_update',
         ),

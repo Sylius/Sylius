@@ -32,7 +32,7 @@ return (new ResourceMetadata())
             path: 'product-attributes/{type}/new',
             routeName: '_sylius_admin_product_attribute_create',
             factoryMethod: 'createTyped',
-            factoryArguments: ["request.attributes.get('type')"],
+            factoryArguments: ["@=request.attributes.get('type')"],
             redirectToRoute: 'sylius_admin_product_attribute_update',
         ),
         new Update(
