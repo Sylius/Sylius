@@ -35,7 +35,7 @@ return (new ResourceMetadata())
             eventShortName: 'complete',
             notificationMessage: 'sylius.resource.update',
             redirectToRoute: 'sylius_admin_order_show',
-            redirectArguments: ['id' => "request.attributes.get('orderId')"],
+            redirectArguments: ['id' => "@=request.attributes.get('orderId')"],
             stateMachineTransition: 'complete',
             stateMachineGraph: 'sylius_payment',
         ),
@@ -50,7 +50,7 @@ return (new ResourceMetadata())
             ],
             notificationMessage: 'sylius.payment.refunded',
             redirectToRoute: 'sylius_admin_order_show',
-            redirectArguments: ['id' => "request.attributes.get('orderId')"],
+            redirectArguments: ['id' => "@=request.attributes.get('orderId')"],
             stateMachineTransition: 'refund',
             stateMachineGraph: 'sylius_payment'
         ),
