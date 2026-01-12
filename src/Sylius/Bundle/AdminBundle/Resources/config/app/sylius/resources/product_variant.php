@@ -44,7 +44,7 @@ return (new ResourceMetadata())
                 "throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').find(request.attributes.get('productId')))"
             ],
             redirectToRoute: 'sylius_admin_product_variant_index',
-            redirectArguments: ['productId' => "request.attributes.get('productId')"],
+            redirectArguments: ['productId' => "@=request.attributes.get('productId')"],
             vars: [
                 'route' => [
                     'parameters' => [
@@ -59,7 +59,7 @@ return (new ResourceMetadata())
             routeName: '_sylius_admin_product_variant_update',
             repositoryMethod: 'findOneByIdAndProductId',
             redirectToRoute: 'sylius_admin_product_variant_index',
-            redirectArguments: ['productId' => "request.attributes.get('productId')"],
+            redirectArguments: ['productId' => "@=request.attributes.get('productId')"],
             vars: [
                 'route' => [
                     'parameters' => [
@@ -77,7 +77,7 @@ return (new ResourceMetadata())
             ],
             repositoryMethod: 'findById',
             redirectToRoute: 'sylius_admin_product_variant_index',
-            redirectArguments: ['productId' => "request.attributes.get('productId')"],
+            redirectArguments: ['productId' => "@=request.attributes.get('productId')"],
             vars: [
                 'route' => [
                     'parameters' => [
@@ -92,7 +92,7 @@ return (new ResourceMetadata())
             routeName: '_sylius_admin_product_variant_delete',
             repositoryMethod: 'findOneByIdAndProductId',
             redirectToRoute: 'sylius_admin_product_variant_index',
-            redirectArguments: ['productId' => "request.attributes.get('productId')"],
+            redirectArguments: ['productId' => "@=request.attributes.get('productId')"],
             vars: [
                 'route' => [
                     'parameters' => [
