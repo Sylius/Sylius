@@ -113,6 +113,20 @@
         </service>
 
         <service
+            id="sylius_shop.twig.component.product.added_to_cart_modal"
+            class="Sylius\Bundle\ShopBundle\Twig\Component\Product\AddedToCartModalComponent"
+        >
+            <argument type="service" id="sylius.resolver.product_variant.default" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.repository.product_variant" />
+
+            <tag
+                name="sylius.live_component.shop"
+                key="sylius_shop:product_added_to_cart_modal"
+            />
+        </service>
+
+        <service
             id="sylius_shop.twig.component.product.breadcrumb"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Product\BreadcrumbComponent"
         >

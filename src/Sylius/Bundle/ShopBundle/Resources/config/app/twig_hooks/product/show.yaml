@@ -19,6 +19,7 @@ sylius_twig_hooks:
                 component: 'sylius_shop:product_added_to_cart_modal'
                 props:
                     product: '@=_context.product'
+                    template: '@SyliusShop/shared/components/product_added_to_cart_modal.html.twig'
                 priority: -100
 
         'sylius_shop.product.show.content.header':

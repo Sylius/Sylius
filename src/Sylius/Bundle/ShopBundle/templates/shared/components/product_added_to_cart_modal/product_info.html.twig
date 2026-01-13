@@ -1,5 +1,5 @@
 {% set product = hookable_metadata.context.product %}
-{% set variant = hookable_metadata.context.variant|default(product.enabledVariants.first|default(null)) %}
+{% set variant = hookable_metadata.context.variant %}
 
 <div class="d-flex align-items-center gap-4">
     <div class="flex-shrink-0" style="width: 6rem;">
@@ -13,9 +13,9 @@
     </div>
     <div class="flex-grow-1">
         <div class="h6 mb-2" {{ sylius_test_html_attribute('product-name') }}>{{ product.name }}</div>
-        {% if variant is not null and variant.code is not null %}
-            <div class="text-body-tertiary small mb-2">
-                {{ variant.code }}
+        {% if variant is not null and variant.name is not null %}
+            <div class="text-body-tertiary small mb-2" {{ sylius_test_html_attribute('variant-name') }}>
+                {{ variant.name }}
             </div>
         {% endif %}
         {% if variant is not null %}
