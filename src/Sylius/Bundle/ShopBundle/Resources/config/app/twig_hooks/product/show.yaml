@@ -15,6 +15,11 @@ sylius_twig_hooks:
             product_listing:
                 template: '@SyliusShop/product/show/content/product_listing.html.twig'
                 priority: 0
+            product_added_to_cart_modal:
+                component: 'sylius_shop:product_added_to_cart_modal'
+                props:
+                    product: '@=_context.product'
+                priority: -100
 
         'sylius_shop.product.show.content.header':
             breadcrumbs:
@@ -49,6 +54,7 @@ sylius_twig_hooks:
                 component: 'sylius_shop:product:add_to_cart_form'
                 props:
                     product: '@=_context.product'
+                    redirect: false
                     template: '@SyliusShop/product/show/content/info/summary/add_to_cart.html.twig'
                 priority: 100
             short_description:

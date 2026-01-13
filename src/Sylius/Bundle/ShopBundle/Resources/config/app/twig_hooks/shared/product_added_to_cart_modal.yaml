@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.shared.product_added_to_cart_modal.product_info':
+            product_details:
+                template: '@SyliusShop/shared/components/product_added_to_cart_modal/product_info.html.twig'
+                priority: 0

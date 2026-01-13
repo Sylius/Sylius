@@ -1,0 +1,39 @@
+{% props product, variant = null, hookableMetadata = null %}
+
+<div {{ attributes.defaults(stimulus_controller('@sylius/shop-bundle/product-added-to-cart-modal')) }}>
+    <div
+        class="modal fade"
+        id="product-added-to-cart-modal"
+        tabindex="-1"
+        aria-labelledby="product-added-to-cart-modal-label"
+        aria-hidden="true"
+        {{ stimulus_target('@sylius/shop-bundle/product-added-to-cart-modal', 'modal') }}
+        {{ sylius_test_html_attribute('product-added-to-cart-modal') }}
+    >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="product-added-to-cart-modal-label">
+                        {{ ux_icon('tabler:circle-check', { class: 'icon text-success me-2' }) }}
+                        {{ 'sylius.ui.product_added_to_cart'|trans }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{{ 'sylius.ui.close'|trans }}"></button>
+                </div>
+
+                <div class="modal-body">
+                    {% hook 'product_info' with { product: product, variant: variant, _prefixes: ['sylius_shop.shared.product_added_to_cart_modal'] } %}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" {{ sylius_test_html_attribute('continue-shopping-button') }}>
+                        {{ 'sylius.ui.continue_shopping'|trans }}
+                    </button>
+                    <a href="{{ path('sylius_shop_cart_summary') }}" class="btn btn-primary" {{ sylius_test_html_attribute('go-to-cart-button') }}>
+                        {{ ux_icon('tabler:shopping-cart', { class: 'icon icon-sm me-1' }) }}
+                        {{ 'sylius.ui.go_to_cart'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

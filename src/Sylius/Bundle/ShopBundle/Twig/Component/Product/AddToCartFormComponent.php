@@ -61,6 +61,8 @@ class AddToCartFormComponent
 
     public const SYLIUS_SHOP_VARIANT_CHANGED = 'sylius:shop:variant_changed';
 
+    public const SYLIUS_SHOP_PRODUCT_ADDED_TO_CART = 'sylius:shop:product_added_to_cart';
+
     #[LiveProp]
     public string $routeName = 'sylius_shop_cart_summary';
 
@@ -139,6 +141,15 @@ class AddToCartFormComponent
             $this->emit(
                 CartFormComponent::SYLIUS_SHOP_CART_CHANGED,
                 ['cartId' => $cartId],
+            );
+
+            $this->dispatchBrowserEvent(
+                self::SYLIUS_SHOP_PRODUCT_ADDED_TO_CART,
+                [
+                    'productId' => $this->product?->getId(),
+                    'variantId' => $this->variant?->getId(),
+                    'quantity' => $addToCartCommand->getCartItem()->getQuantity(),
+                ],
             );
 
             return null;

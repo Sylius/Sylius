@@ -6,6 +6,12 @@
         "enabled": true,
         "webpackMode": "lazy",
         "fetch": "lazy"
+      },
+      "product-added-to-cart-modal": {
+        "main": "controllers/ProductAddedToCartModalController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
       }
     },
     "@symfony/ux-autocomplete": {
