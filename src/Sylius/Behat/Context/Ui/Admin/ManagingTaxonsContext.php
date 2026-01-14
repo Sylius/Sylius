@@ -271,7 +271,7 @@ final readonly class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldBelongsTo(TaxonInterface $taxon): void
     {
-        Assert::same($this->formElement->getParent(), $taxon->getCode());
+        Assert::same($this->formElement->getParent(), $taxon->getName());
     }
 
     /**

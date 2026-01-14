@@ -135,7 +135,6 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 [
                     'propertyPath' => 'email',
@@ -167,7 +166,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/product_review/create_product_review_with_missing_fields',
-            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 }

@@ -147,7 +147,6 @@ final class UserProviderTest extends TestCase
         $this->userManager->expects($this->once())->method('flush');
 
         $result = (new \ReflectionClass(UserProvider::class))->getMethod('createUserByOAuthUserResponse');
-        $result->setAccessible(true);
         $createdUser = $result->invoke($this->provider, $response);
 
         $this->assertSame($user, $createdUser);

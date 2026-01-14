@@ -38,4 +38,9 @@ interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepository
      * @return T[]
      */
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel): array;
+
+    /**
+     * @return T[]
+     */
+    public function findByChannelCodeInConfiguration(string $channelCode): array;
 }

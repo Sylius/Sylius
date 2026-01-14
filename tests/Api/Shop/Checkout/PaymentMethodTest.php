@@ -257,7 +257,7 @@ final class PaymentMethodTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/checkout/payment_method/select_payment_method_with_missing_fields',
-            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 
@@ -287,7 +287,6 @@ final class PaymentMethodTest extends JsonApiTestCase
         );
 
         $this->assertResponseViolations(
-            $this->client->getResponse(),
             [
                 ['propertyPath' => '', 'message' => 'The payment method with invalid code does not exist.'],
             ],

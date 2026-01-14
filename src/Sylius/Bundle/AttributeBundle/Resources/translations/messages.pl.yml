@@ -9,6 +9,7 @@ sylius:
             choices: Opcje
             code: Kod
             name: Nazwa
+            translatable: Tłumaczalny
             translations: Tłumaczenia
             type: Typ
         attribute_type:
@@ -16,12 +17,13 @@ sylius:
             configuration: Konfiguracja
             date: Data
             datetime: Data i godzina
+            float: Liczba zmiennoprzecinkowa
             integer: Liczba całkowita
             percent: Procent
             select: Wybierz
             text: Tekst
             textarea: Pole tekstowe
-            title: Nazwa typu
+            title: Typy atrybutów
             validation: Walidacja
         attribute_type_configuration:
             datetime:
@@ -32,8 +34,8 @@ sylius:
                 multiple: Wiele
                 values: Wartości
                 choose: Wybierz opcję
-                min: Min
-                max: Max
+                min: Minimalna liczba wpisów
+                max: Maksymalna liczba wpisów
             text:
                 min: Minimalna długość
                 max: Maksymalna długość

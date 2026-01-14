@@ -1,3 +1,18 @@
+{% import '@SyliusShop/shared/macros/delivery_time.html.twig' as delivery %}
+
+{% set order = hookable_metadata.context.order %}
+
 <td class="text-end w-75">
     {{ 'sylius.ui.shipping_total'|trans }}:
+    {% if order is defined and order.shipments is not empty %}
+        {% set shipment = order.shipments|first %}
+        {% if shipment is not null and shipment.method is not null %}
+            {% set min = shipment.method.minDeliveryTimeDays %}
+            {% set max = shipment.method.maxDeliveryTimeDays %}
+            {% set text = delivery.delivery_time_text(min, max) %}
+            {% if text is not empty %}
+                <div><small class="text-body-tertiary">{{ 'sylius.ui.estimated_delivery_time'|trans }}: {{ text }}</small></div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
 </td>

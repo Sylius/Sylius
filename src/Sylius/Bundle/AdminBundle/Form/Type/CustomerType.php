@@ -26,9 +26,11 @@ final class CustomerType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
+                'label' => 'sylius.form.customer.first_name',
                 'required' => false,
             ])
             ->add('lastName', TextType::class, [
+                'label' => 'sylius.form.customer.last_name',
                 'required' => false,
             ])
             ->add('user', ShopUserType::class, [

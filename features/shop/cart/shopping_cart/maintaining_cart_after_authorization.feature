@@ -10,7 +10,7 @@ Feature: Maintaining cart after authorization
         And the store has a product "Stark T-Shirt" priced at "$12.00"
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Having cart maintained after logging in
         When I add "Stark T-Shirt" product to the cart
         And I log in as "robb@stark.com" with "KingInTheNorth" password
@@ -52,7 +52,7 @@ Feature: Maintaining cart after authorization
         Then there should be one item in my cart
         And this item should have name "Stark T-Shirt"
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Having cart maintained after registration
         When I add product "Stark T-Shirt" to the cart
         And I register with email "eddard@stak.com" and password "handOfTheKing"

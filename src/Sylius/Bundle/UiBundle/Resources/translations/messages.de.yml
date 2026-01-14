@@ -367,6 +367,7 @@ sylius:
         fulfill: 'Zu erfüllen'
         fulfilled: 'Erfüllt'
         fulfilled_orders: 'Erfüllte Bestellungen'
+        float: 'Gleitkommazahl'
         gateway: 'Schnittstelle'
         gateway_configuration: 'Gateway-Konfiguration'
         general: 'Allgemein'

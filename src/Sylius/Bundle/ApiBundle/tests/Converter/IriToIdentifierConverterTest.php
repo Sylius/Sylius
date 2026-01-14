@@ -31,11 +31,11 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class IriToIdentifierConverterTest extends TestCase
 {
-    private RouterInterface&MockObject $router;
+    private MockObject&RouterInterface $router;
 
-    private ResourceMetadataCollectionFactoryInterface&MockObject $metadataFactory;
+    private MockObject&ResourceMetadataCollectionFactoryInterface $metadataFactory;
 
-    private UriVariablesConverterInterface&MockObject $uriVariablesConverter;
+    private MockObject&UriVariablesConverterInterface $uriVariablesConverter;
 
     private IriToIdentifierConverterInterface $converter;
 

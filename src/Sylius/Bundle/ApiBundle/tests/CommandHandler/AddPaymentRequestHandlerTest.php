@@ -32,13 +32,13 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
 final class AddPaymentRequestHandlerTest extends TestCase
 {
-    private PaymentMethodRepositoryInterface&MockObject $paymentMethodRepository;
+    private MockObject&PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    private PaymentRepositoryInterface&MockObject $paymentRepository;
+    private MockObject&PaymentRepositoryInterface $paymentRepository;
 
-    private PaymentRequestFactoryInterface&MockObject $paymentRequestFactory;
+    private MockObject&PaymentRequestFactoryInterface $paymentRequestFactory;
 
-    private PaymentRequestRepositoryInterface&MockObject $paymentRequestRepository;
+    private MockObject&PaymentRequestRepositoryInterface $paymentRequestRepository;
 
     private DefaultActionProviderInterface&MockObject $defaultActionProvider;
 

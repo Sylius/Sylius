@@ -25,7 +25,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class CountryChoiceTypeTest extends TypeTestCase
 {
-    private RepositoryInterface&MockObject $countryRepository;
+    private MockObject&RepositoryInterface $countryRepository;
 
     private CountryInterface&MockObject $france;
 

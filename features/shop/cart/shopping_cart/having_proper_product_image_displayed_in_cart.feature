@@ -12,13 +12,13 @@ Feature: Having proper product image displayed in the cart
         And this product has an image "lamborghini.jpg" with "main" type at position 0
         And this product has an image "ford.jpg" with "main" type at position 1 for "Medium logo" variant
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Having a variant's image displayed in the cart
         When I add "Medium logo" variant of this product to the cart
         Then I should be on my cart summary page
         And 1st item in my cart should have "ford.jpg" image displayed
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Having a product's image displayed in the cart if variant does not have one
         When I add "Small logo" variant of this product to the cart
         Then I should be on my cart summary page

@@ -4,52 +4,128 @@
 sylius:
     email:
         shipment_confirmation:
+            has_been_sent_using: 'zostało wysłane za pomocą'
             subject: 'Potwierdzenie dostawy'
             thank_you_for_transaction: 'Dziękujemy za udaną transakcję.'
+            you_can_check_its_location_with_the_tracking_code: 'Możesz sprawdzić lokalizację przesyłki za pomocą kodu śledzenia %tracking_code%.'
             your_order_with_number: 'Twój numer zamówienia'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Wyświetlać najniższą cenę produktów przed obecną obniżką?'
+                period_for_which_the_lowest_price_is_calculated: 'Okres, z którego obliczana jest najniższa cena'
+            reset_password:
+                password:
+                    label: 'Nowe hasło'
+                    confirmation: 'Potwierdź nowe hasło'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: Typy powiązań
-                    attributes: Cechy
-                    header: Katalog
-                    inventory: Zapasy
-                    options: Warianty
-                    products: Produkty
-                    taxons: Taksonomie
+                    association_types: 'Typy powiązań'
+                    attributes: 'Cechy'
+                    header: 'Katalog'
+                    inventory: 'Zapasy'
+                    options: 'Warianty'
+                    products: 'Produkty'
+                    taxons: 'Taksonomie'
                 configuration:
-                    admin_users: Administratorzy
-                    channels: Kanały
-                    countries: Kraje
-                    currencies: Waluty
-                    exchange_rates: Kursy wymiany walut
-                    header: Konfiguracja
-                    locales: Ustawienia regionalne
-                    payment_methods: Metody płatności
-                    shipping_categories: Kategorie wysyłki
-                    shipping_methods: Sposoby wysyłki
-                    tax_categories: Kategorie podatkowe
-                    tax_rates: Stawki podatkowe
-                    zones: Strefy
+                    admin_users: 'Administratorzy'
+                    channels: 'Kanały'
+                    countries: 'Kraje'
+                    currencies: 'Waluty'
+                    exchange_rates: 'Kursy wymiany walut'
+                    header: 'Konfiguracja'
+                    locales: 'Ustawienia regionalne'
+                    payment_methods: 'Metody płatności'
+                    shipping_categories: 'Kategorie wysyłki'
+                    shipping_methods: 'Sposoby wysyłki'
+                    tax_categories: 'Kategorie podatkowe'
+                    tax_rates: 'Stawki podatkowe'
+                    zones: 'Strefy'
                 marketing:
-                    header: Marketing
-                    product_reviews: Recenzje produktu
-                    promotions: Promocje
+                    cart_promotions: 'Promocje koszyka'
+                    catalog_promotions: 'Promocje katalogu'
+                    header: 'Marketing'
+                    product_reviews: 'Recenzje produktu'
+                    promotions: 'Promocje'
                 customers:
-                    customers: Klienci
-                    groups: Grupy
-                    header: Klient
+                    customers: 'Klienci'
+                    groups: 'Grupy'
+                    header: 'Klient'
                 sales:
-                    header: Sprzedaż
-                    orders: Zamówienia
+                    header: 'Sprzedaż'
+                    orders: 'Zamówienia'
                 official_support:
-                    header: Oficjalne wsparcie
-                    sylius_plus: Sylius Plus
-                    browse_plugins: Przeglądaj wtyczki
-                    professional_services: Profesjonalne usługi
-                    find_a_partner: Znajdź partnera
+                    header: 'Oficjalne wsparcie'
+                    browse_plugins: 'Przeglądaj wtyczki'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Profesjonalne usługi'
+                    find_a_partner: 'Znajdź partnera'
+                    sylius_certification: 'Certyfikacja Sylius'
     ui:
-        gateway:
-            no_sca_support_notice: Wybrana bramka płatności nie obsługuje SCA.
-        sales_summary: Podsumowanie sprzedaży
+        account: 'Konto'
+        admin_user: 'Administrator'
+        add_new_entry: 'Dodaj nowy wpis'
+        back_to_dashboard: 'Powrót do pulpitu'
+        catalog_promotion:
+            dates_details: 'Ta operacja jest czasochłonna! Weź pod uwagę opóźnienie 2–10 minut od wskazanych dat. Opóźnienie zależy od rozmiaru katalogu.'
+        channel:
+            account_verification_required_details: 'Wyłączenie tej opcji pozwoli na tworzenie kont i dostęp do nich bez weryfikacji e-mail, co może umożliwić dostęp do danych zamówień złożonych jako gość.'
+        channel_pricing_history: 'Historia cen kanału'
+        channel_pricings: 'Ceny kanałów'
+        create_new:
+            customer_group: 'Utwórz nową grupę klientów'
+        delete_avatar: 'Usuń awatar'
+        full_screen: 'Pełny ekran'
+        global: 'Globalne'
+        ip_address: 'Adres IP'
+        language: 'Język'
+        lowest_price_before_discount: 'Najniższa cena przed obniżką'
+        minimum_price_details: 'Cena minimalna – to próg cenowy, poniżej którego obecna cena nie może zostać obniżona ani przez promocje katalogowe, ani koszykowe. Użyj tego, aby chronić rentowność sprzedaży.'
+        more: 'Więcej'
+        no_main_taxon: 'brak głównego taksonu'
+        no_depth: 'Brak głębokości'
+        no_height: 'Brak wysokości'
+        no_results: 'Brak wyników'
+        no_results_adjust_your_search: 'Dostosuj wyszukiwanie i spróbuj ponownie.'
+        no_weight: 'Brak wagi'
+        no_width: 'Brak szerokości'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Data zamówienia'
+        original_price_details: 'Cena oryginalna – to cena wariantu produktu wyświetlana jako przekreślona w katalogu. Jest podstawą do obliczenia aktualnej ceny. Jeśli ta wartość nie jest zdefiniowana, logika Promocji Katalogowych skopiuje wartość z Ceny do Ceny Oryginalnej.'
+        original_product_price_details: 'Cena oryginalna – to cena produktu wyświetlana jako przekreślona w katalogu. Jest podstawą do obliczenia aktualnej ceny. Jeśli ta wartość nie jest zdefiniowana, logika Promocji Katalogowych skopiuje wartość z Ceny do Ceny Oryginalnej.'
+        overdue: 'Przeterminowane'
+        page_not_found: 'Strona nie została znaleziona'
+        pagination:
+            number_of_results: 'Wyświetlanie od %from% do %to% z %total% wpisów'
+        partially_refunded: 'Częściowo zwrócone'
+        pending_actions: 'Oczekujące działania'
+        price_details: 'Cena – to aktualna cena wariantu produktu wyświetlana w katalogu. Może być modyfikowana przez promocje katalogowe.'
+        product_price_details: 'Cena – to aktualna cena produktu wyświetlana w katalogu. Może być modyfikowana przez promocje katalogowe.'
+        price_history: 'Historia cen'
+        product:
+            product_not_active_in_channel: 'Produkt nie jest jeszcze aktywny w tym kanale.'
+        product_variant: 'Wariant produktu'
+        sales_summary: 'Podsumowanie sprzedaży'
+        search_menu: 'Wyszukaj w menu'
+        shipment_for_order: 'Wysyłka dla zamówienia'
+        show_history_for_channel_pricing: 'Pokaż historię cen kanału'
+        start_typing_to_search: 'Zacznij pisać, aby wyszukać'
+        statistics:
+            day: 'Dzień'
+            lifetime: 'Całkowity'
+            month: 'Miesiąc'
+            week: 'Tydzień'
+            2weeks: '2 tygodnie'
+            year: 'Rok'
+        taxon: 'Takson'
+        to_approve: 'do zatwierdzenia'
+        to_process: 'do przetworzenia'
+        to_ship: 'do wysyłki'
+        view_in_store: 'Zobacz w sklepie'
+        work_in_progress: 'Prace w toku'
+        empty_date: 'puste'
+        notifications:
+            new_version_of_sylius_available: 'Dostępna jest nowa wersja Sylius. Skontaktuj się ze swoim technikiem, aby zaktualizować.'

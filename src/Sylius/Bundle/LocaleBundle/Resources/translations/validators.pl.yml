@@ -4,6 +4,7 @@
 sylius:
     locale:
         code:
+            max_length: Kod nie może być dłuższy niż {{ limit }} znaków.
             not_blank: Wybierz kod lokalizacji.
-            regex: Kod ustawień językowych może składać się wyłącznie z liter, cyfr, myślników i podkreśleń.
+            locale: Ta wartość nie jest prawidłowym kodem lokalizacji.
             unique: Kod lokalizacji musi być unikalny.

@@ -30,11 +30,11 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class ProductTaxonAutocompleteChoiceTypeTest extends TypeTestCase
 {
-    private ServiceRegistryInterface&MockObject $resourceRepositoryRegistry;
+    private MockObject&ServiceRegistryInterface $resourceRepositoryRegistry;
 
     private FactoryInterface&MockObject $productTaxonFactory;
 
-    private RepositoryInterface&MockObject $productTaxonRepository;
+    private MockObject&RepositoryInterface $productTaxonRepository;
 
     protected function setUp(): void
     {

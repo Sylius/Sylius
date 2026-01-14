@@ -197,7 +197,6 @@ final class WinzouStateMachineAdapterTest extends TestCase
     {
         $reflection = new \ReflectionClass($stateMachine);
         $configProperty = $reflection->getProperty('config');
-        $configProperty->setAccessible(true);
         $configProperty->setValue($stateMachine, $config);
     }
 }

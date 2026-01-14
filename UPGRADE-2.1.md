@@ -1,3 +1,106 @@
+# UPGRADE FROM `2.1.8` TO `2.1.9`
+
+## Telemetry
+
+Sylius 2.1.9 introduces anonymous telemetry to help us understand how Sylius is used and improve the platform.
+
+**What data is collected:**
+- Anonymous installation ID (hashed, non-reversible)
+- Sylius and PHP versions, default locale
+- Aggregated statistics as segments (broad ranges, not exact values):
+   - Customers/products/variants count (e.g., "1K-10K", "100K-1M")
+   - GMV and AOV ranges per month (e.g., "100K-500K", "50-100")
+
+**No sensitive data is ever collected** - no customer information, no order details, no personal data.
+
+**Configuration:**
+
+Telemetry is enabled by default and uses a default salt for hashing the installation ID.
+
+To disable telemetry, set the following environment variable in your `.env` file:
+
+```dotenv
+SYLIUS_TELEMETRY_ENABLED=0
+```
+
+To change the salt, set the `SYLIUS_TELEMETRY_SALT` environment variable:
+
+```dotenv
+SYLIUS_TELEMETRY_SALT=your-custom-salt
+```
+
+**Database migration (optional):**
+
+This release includes an optional database migration that adds an index to improve telemetry query performance.
+The telemetry system works without this index, but adding it will make data collection faster, especially for stores with large order volumes.
+
+To run the migration:
+
+```bash
+php bin/console doctrine:migrations:migrate
+```
+
+If you want to skip this migration:
+
+```bash
+php bin/console doctrine:migrations:version 'Sylius\Bundle\CoreBundle\Migrations\Version20251126120000' --add --no-interaction
+
+# For PostgreSQL:
+php bin/console doctrine:migrations:version 'Sylius\Bundle\CoreBundle\Migrations\Version20251126120001' --add --no-interaction
+```
+
+For more details, see the [Telemetry documentation](https://docs.sylius.com/the-book/configuration/telemetry).
+
+## Autocomplete Form Types
+
+1. The `choice_value => 'code'` option has been removed from autocomplete form types (`ProductAutocompleteType`,
+   `ProductVariantAutocompleteType`, `ProductAttributeAutocompleteType`, `TaxonAutocompleteType`,
+   `ProductOptionAutocompleteType`) to fix performance issue with large datasets (#17953).
+   Autocomplete fields now use entity IDs instead of codes as their internal values.
+
+## Dashboard
+
+1. The `Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\StatisticsComponent` constructor now requires
+   a `Symfony\Component\Clock\ClockInterface` as the third argument. Not passing it is deprecated
+   and will be prohibited in Sylius 3.0.
+
+1. The `$clock` argument in `Sylius\Bundle\AdminBundle\Notification\HubNotificationProvider` constructor is deprecated
+   and will be removed in Sylius 3.0.
+
+1. The priorities of hookables in `sylius_admin.order.update.content.form.shipping_address` hook have been adjusted
+   to match `sylius_admin.order.update.content.form.billing_address` and fix duplicate priority values.
+   If you have customized these hooks or added custom hookables with priorities between the old values,
+   please review your priority configuration:
+
+   | Hookable       | Old Priority | New Priority |
+   |----------------|--------------|--------------|
+   | company        | 700          | 800          |
+   | first_name     | 600          | 700          |
+   | last_name      | 500          | 600          |
+   | country        | 400          | 500          |
+   | phone_number   | 300          | 400          |
+   | street_address | 200          | 300          |
+
+# UPGRADE FROM `2.1.7` TO `2.1.8`
+
+## State Machine
+
+1. Product Review Average Rating Update
+   The `after` callback for updating average ratings when a review is accepted has been disabled to prevent duplicate calculations.
+   This change affects the `sylius_product_review` state machine configuration in the `accept` transition.
+
+The average rating updater callback had priority `-100` and was being executed twice, which has now been fixed by disabling this specific callback.
+
+```diff
+        callbacks:
+            after:
+                sylius_update_rating:
+                    on: ["accept"]
+                    do: ["@sylius.updater.product_review.average_rating", "updateFromReview"]
+                    args: ["object"]
+                    priority: -100
++                   disabled: true
+```
 # UPGRADE FROM `2.1.5` TO `2.1.6`
 
 ### API Platform

@@ -110,7 +110,6 @@ final readonly class CircularDependencyBreakingErrorListener implements EventSub
     private function removePreviousFromThrowable(\Throwable $throwable): void
     {
         $previous = new \ReflectionProperty($throwable instanceof \Exception ? \Exception::class : \Error::class, 'previous');
-        $previous->setAccessible(true);
         $previous->setValue($throwable, null);
     }
 }

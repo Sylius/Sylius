@@ -1089,7 +1089,7 @@ final class CheckoutContext implements Context
     {
         Assert::true($this->responseChecker->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
-            sprintf('This product %s has been disabled.', $product->getName()),
+            sprintf('The product %s is no longer available.', $product->getName()),
         ));
     }
 

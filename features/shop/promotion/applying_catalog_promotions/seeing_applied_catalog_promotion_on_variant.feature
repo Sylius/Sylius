@@ -16,7 +16,7 @@ Feature: Seeing applied catalog promotions on variant
         When I view "PHP T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is discounted from "$20.00" to "$10.00" with "Winter sale" promotion
 
-    @api @ui @javascript
+    @api @ui @mink:chromedriver
     Scenario: Seeing no applied catalog promotion on variant
         When I view "Sylius T-Shirt" variant of the "T-Shirt" product
         Then I should see this variant is not discounted

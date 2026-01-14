@@ -29,7 +29,7 @@ Feature: Viewing a cart summary in many channels
         Then there should be one item in my cart
         And this item should have name "Onion"
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Viewing item in cart after switching channels when product was added in every channel
         Given I changed my current channel to "Poland"
         And I added product "Onion" to the cart

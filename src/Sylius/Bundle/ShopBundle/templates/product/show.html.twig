@@ -1,5 +1,7 @@
 {% extends '@SyliusShop/shared/layout/base.html.twig' %}
 
+{% set prefixes = ['sylius_shop.product.show'] %}
+
 {% block title %}{{ product.name }} | {{ parent() }}{% endblock %}
 
 {% block content %}

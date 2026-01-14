@@ -21,7 +21,7 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponen
 
 final class NotificationsComponentTest extends TestCase
 {
-    private NotificationProviderInterface&MockObject $notificationProvider;
+    private MockObject&NotificationProviderInterface $notificationProvider;
 
     private NotificationsComponent $notificationsComponent;
 

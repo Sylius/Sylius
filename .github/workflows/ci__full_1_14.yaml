@@ -1,6 +1,9 @@
 name: Continuous Integration 1.14 (Full)
 
 on:
+    push:
+        branches:
+            - 'full-ci/**'
     schedule:
         -
             cron: "0 1 * * *" # Run every day at 1am
@@ -73,9 +76,9 @@ jobs:
     notify-about-build-status:
         if: ${{ always() }}
         name: "Notify about build status"
-        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, packages]
+        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, frontend, packages]
         runs-on: ubuntu-latest
-        timeout-minutes: 5
+        timeout-minutes: 15
 
         steps:
             -   name: "Process data"
@@ -100,6 +103,7 @@ jobs:
                         ${{ needs.e2e-mariadb.result == 'success' && ':+1:' || ':x:' }} End-to-End (MariaDB)
                         ${{ needs.e2e-mysql.result == 'success' && ':+1:' || ':x:' }} End-to-End (MySQL)
                         ${{ needs.e2e-pgsql.result == 'success' && ':+1:' || ':x:' }} End-to-End (PostgreSQL)
+                        ${{ needs.frontend.result == 'success' && ':+1:' || ':x:' }} Frontend
                         ${{ needs.packages.result == 'success' && ':+1:' || ':x:' }} Packages
 
                         _ _ _ _ _ _ _
