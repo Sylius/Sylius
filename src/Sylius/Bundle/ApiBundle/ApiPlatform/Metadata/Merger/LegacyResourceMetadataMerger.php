@@ -59,7 +59,7 @@ final class LegacyResourceMetadataMerger implements MetadataMergerInterface
                 continue;
             }
 
-            if ($value !== null || !isset($oldMetadata[$key])) {
+            if ($value !== null) {
                 $oldMetadata[$key] = $value;
             }
         }

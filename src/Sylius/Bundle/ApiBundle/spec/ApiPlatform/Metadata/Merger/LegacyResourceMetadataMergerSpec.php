@@ -170,6 +170,36 @@ final class LegacyResourceMetadataMergerSpec extends ObjectBehavior
         ]);
     }
 
+    function it_keeps_existing_item_operations_when_the_new_one_doesnt_have_them(): void
+    {
+        $this->merge([
+            'itemOperations' => [
+                'get' => ['foo' => 'bar'],
+            ],
+        ], [
+            'itemOperations' => null,
+        ])->shouldReturn([
+            'itemOperations' => [
+                'get' => ['foo' => 'bar'],
+            ],
+        ]);
+    }
+
+    function it_keeps_existing_collection_operations_when_the_new_one_doesnt_have_them(): void
+    {
+        $this->merge([
+            'collectionOperations' => [
+                'get' => ['foo' => 'bar'],
+            ],
+        ], [
+            'collectionOperations' => null,
+        ])->shouldReturn([
+            'collectionOperations' => [
+                'get' => ['foo' => 'bar'],
+            ],
+        ]);
+    }
+
     function it_keeps_existing_subresource_operations_when_the_new_one_doesnt_have_them(): void
     {
         $this->merge([
@@ -181,6 +211,56 @@ final class LegacyResourceMetadataMergerSpec extends ObjectBehavior
         ])->shouldReturn([
             'subresourceOperations' => [
                 'get' => ['foo' => 'bar'],
+            ],
+        ]);
+    }
+
+    function it_preserves_operations_when_extending_resource_with_only_properties(): void
+    {
+        // Simulates: XML extension defines only a new property without redefining operations
+        // This is what MergingXmlExtractor returns when XML has <property> but no <itemOperations>
+        $this->merge([
+            'shortName' => 'Order',
+            'itemOperations' => [
+                'get' => ['method' => 'GET', 'path' => '/orders/{id}'],
+                'put' => ['method' => 'PUT', 'path' => '/orders/{id}'],
+                'delete' => ['method' => 'DELETE', 'path' => '/orders/{id}'],
+            ],
+            'collectionOperations' => [
+                'get' => ['method' => 'GET', 'path' => '/orders'],
+                'post' => ['method' => 'POST', 'path' => '/orders'],
+            ],
+            'properties' => [
+                'id' => ['identifier' => true],
+                'number' => ['description' => 'Order number'],
+            ],
+        ], [
+            'shortName' => null,
+            'description' => null,
+            'iri' => null,
+            'itemOperations' => null,
+            'collectionOperations' => null,
+            'subresourceOperations' => null,
+            'graphql' => null,
+            'attributes' => null,
+            'properties' => [
+                'customField' => ['description' => 'Custom field added by extension'],
+            ],
+        ])->shouldReturn([
+            'shortName' => 'Order',
+            'itemOperations' => [
+                'get' => ['method' => 'GET', 'path' => '/orders/{id}'],
+                'put' => ['method' => 'PUT', 'path' => '/orders/{id}'],
+                'delete' => ['method' => 'DELETE', 'path' => '/orders/{id}'],
+            ],
+            'collectionOperations' => [
+                'get' => ['method' => 'GET', 'path' => '/orders'],
+                'post' => ['method' => 'POST', 'path' => '/orders'],
+            ],
+            'properties' => [
+                'id' => ['identifier' => true],
+                'number' => ['description' => 'Order number'],
+                'customField' => ['description' => 'Custom field added by extension'],
             ],
         ]);
     }
