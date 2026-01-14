@@ -57,7 +57,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.13-dev"
+            "dev-main": "1.14-dev"
         },
         "symfony": {
             "require": "^5.4"
