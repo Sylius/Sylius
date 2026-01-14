@@ -33,7 +33,7 @@
         "knplabs/knp-menu": "^3.5",
         "knplabs/knp-menu-bundle": "^3.4",
         "laminas/laminas-stdlib": "^3.19",
-        "sylius/grid-bundle": "^1.14",
+        "sylius/grid-bundle": "^1.13",
         "sylius/twig-extra": "^0.9",
         "symfony/config": "^6.4 || ^7.4",
         "symfony/expression-language": "^6.4 || ^7.4",
@@ -49,9 +49,9 @@
         "matthiasnoback/symfony-config-test": "^6.0",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpunit/phpunit": "^11.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.2",
-        "symfony/form": "^6.4.1 || ^7.2",
-        "twig/twig": "^3.14"
+        "symfony/dependency-injection": "^6.4.1 || ^7.4",
+        "symfony/form": "^6.4.1 || ^7.4",
+        "twig/twig": "^3.16"
     },
     "config": {
         "allow-plugins": {
@@ -60,11 +60,11 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.2-dev"
         },
         "symfony": {
             "allow-contrib": false,
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {
