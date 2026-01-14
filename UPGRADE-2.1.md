@@ -123,7 +123,9 @@ The average rating updater callback had priority `-100` and was being executed t
 ### General
 
 1. The `sylius_admin_customer_orders_statistics` route has been deprecated.
+
 1. The minimum version of Symfony 7 packages has been bumped from Symfony `^7.1` to `^7.2`
+
 1. The `tabler` package has been updated to version `^1.3.0`. Please pay attention to the accordion element in final applications, as its implementation has changed.
 
 ### Twig Hooks
