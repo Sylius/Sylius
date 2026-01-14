@@ -126,20 +126,6 @@ The average rating updater callback had priority `-100` and was being executed t
 1. The minimum version of Symfony 7 packages has been bumped from Symfony `^7.1` to `^7.2`
 1. The `tabler` package has been updated to version `^1.3.0`. Please pay attention to the accordion element in final applications, as its implementation has changed.
 
-## Grid providers are now configurable
-`GridProviders` are now configurable, allowing users to choose between PHP and YAML for Sylius grid configurations. You can now change the definition format Sylius will use. Note that configurations in different formats cannot be merged, so if you switch to PHP for an existing grid, you will need to recreate the vendor's YAML definition.
-
-Example configuration:
-
-```yaml
-sylius_core:
-    grid:
-        default_type: array # from the config directory (yaml or php)
-        grids:
-            sylius_admin_product_variant:
-                type: 'service' # from src directory, these are services tagged as "sylius.grid"
-```
-
 ### Twig Hooks
 
 1. The `sylius_admin.dashboard.index.content.latest_statistics.new_customers` hook has been deprecated and disabled.
