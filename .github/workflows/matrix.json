@@ -73,7 +73,7 @@
     "packages": {
       "include": [
         {
-          "php": "8.1",
+          "php": "8.3",
           "symfony": "^5.4"
         },
         {
@@ -85,7 +85,7 @@
     "packages-swiftmailer": {
       "include": [
         {
-          "php": "8.1",
+          "php": "8.3",
           "symfony": "^5.4"
         }
       ]
@@ -186,16 +186,10 @@
     },
     "packages": {
       "php": ["8.2", "8.3"],
-      "symfony": ["^5.4", "^6.4"],
-      "include": [
-        {
-          "php": "8.1",
-          "symfony": "^5.4"
-        }
-      ]
+      "symfony": ["^5.4", "^6.4"]
     },
     "packages-swiftmailer": {
-      "php": ["8.1"],
+      "php": ["8.3"],
       "symfony": ["^5.4"]
     }
   }
