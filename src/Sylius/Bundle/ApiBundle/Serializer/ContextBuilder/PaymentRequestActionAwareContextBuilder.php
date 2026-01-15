@@ -25,7 +25,7 @@ final class PaymentRequestActionAwareContextBuilder extends AbstractInputContext
     private ?Request $request = null;
 
     public function __construct(
-        private IriToIdentifierConverterInterface $iriToIdentifierConverter,
+        private readonly IriToIdentifierConverterInterface $iriToIdentifierConverter,
         SerializerContextBuilderInterface $decoratedContextBuilder,
         string $attributeClass,
         string $defaultConstructorArgumentName,
