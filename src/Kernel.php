@@ -19,5 +19,6 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 /** @final */
 class Kernel extends BaseKernel
 {
+    // test
     use MicroKernelTrait;
 }
