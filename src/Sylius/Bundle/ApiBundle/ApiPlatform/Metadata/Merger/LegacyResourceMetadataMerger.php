@@ -31,6 +31,10 @@ final class LegacyResourceMetadataMerger implements MetadataMergerInterface
 
         foreach ($newMetadata as $key => $value) {
             if ('properties' === $key) {
+                if ($value === null) {
+                    continue;
+                }
+
                 foreach ($value as $keyProperty => $property) {
                     $oldMetadata[$key][$keyProperty] = $property;
                 }
@@ -55,7 +59,9 @@ final class LegacyResourceMetadataMerger implements MetadataMergerInterface
                 continue;
             }
 
-            $oldMetadata[$key] = $value;
+            if ($value !== null) {
+                $oldMetadata[$key] = $value;
+            }
         }
 
         return $oldMetadata;
