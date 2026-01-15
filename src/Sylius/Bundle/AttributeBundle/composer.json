@@ -44,7 +44,8 @@
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.4.21 || ^6.4",
         "symfony/dependency-injection": "^5.4.21 || ^6.4",
-        "symfony/form": "^5.4.21 || ^6.4"
+        "symfony/form": "^5.4.21 || ^6.4",
+        "symfony/twig-bundle": "^5.4.21 || ^6.4"
     },
     "conflict": {
         "stof/doctrine-extensions-bundle": "1.8.0"

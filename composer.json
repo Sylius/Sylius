@@ -190,6 +190,7 @@
         "behat/gherkin": "^4.13.0",
         "doctrine/orm": "2.20.7",
         "lexik/jwt-authentication-bundle": "^2.18",
+        "liip/imagine-bundle": "2.17.0",
         "stof/doctrine-extensions-bundle": "1.8.0",
         "symfony/serializer": "6.4.23",
         "symfony/validator": "5.4.25",
