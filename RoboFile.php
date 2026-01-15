@@ -74,6 +74,10 @@ class RoboFile extends Tasks
             $task->exec('composer config prefer-stable false');
         }
 
+        if (str_starts_with($symfonyVersion, '^5.4')) {
+            $task->exec('composer require --no-progress --no-update --no-scripts --no-plugins "sylius/resource-bundle:~1.11.0"');
+        }
+
         $task
             ->exec('composer update --no-scripts --no-interaction')
             ->exec('composer validate --ansi --strict')

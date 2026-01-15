@@ -1,3 +1,13 @@
+# UPGRADING FROM `v1.14.14` TO `v1.14.15`
+
+## Symfony 5.4 Compatibility
+
+If you are using Sylius 1.14 with Symfony 5.4, it is recommended to use `sylius/resource-bundle:~1.11.0`:
+
+```bash
+composer require "sylius/resource-bundle:~1.11.0"
+```
+
 # UPGRADING FROM `v1.14.13` TO `v1.14.14`
 
 ## Telemetry
