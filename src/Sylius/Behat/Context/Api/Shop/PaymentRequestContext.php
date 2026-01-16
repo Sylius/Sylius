@@ -88,7 +88,6 @@ final readonly class PaymentRequestContext implements Context
         $request->setContent([
             'paymentId' => $payment['id'],
             'paymentMethodCode' => $payment['method'],
-            'action' => PaymentRequestInterface::ACTION_CAPTURE,
             'payload' => $payload,
         ]);
 
