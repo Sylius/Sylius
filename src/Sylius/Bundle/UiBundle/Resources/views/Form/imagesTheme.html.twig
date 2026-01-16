@@ -69,6 +69,7 @@
         </div>
         <div class="ui element">
             {{- form_errors(form.file) -}}
+            {{- form_help(form.file) -}}
         </div>
         {% if product.id is not null and 0 != product.variants|length and not product.simple %}
             {{ form_row(form.productVariants) }}
@@ -92,6 +93,7 @@
         </div>
         <div class="ui element">
             {{- form_errors(form.file) -}}
+            {{- form_help(form.file) -}}
         </div>
     {% endapply %}
 {% endblock %}
@@ -109,6 +111,7 @@
         </div>
         <div class="ui element">
             {{- form_errors(form.file) -}}
+            {{- form_help(form.file) -}}
         </div>
     {% endapply %}
 {% endblock %}

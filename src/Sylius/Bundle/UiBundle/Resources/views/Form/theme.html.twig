@@ -26,14 +26,26 @@
     {%- endif -%}
 {%- endblock form_errors -%}
 
+{%- block form_help -%}
+    {%- if help is not empty -%}
+        <p id="{{ id }}_help" class="text-muted" style="margin-top: 0.5em; font-size: 0.9em; color: #6c757d;"{% with { attr: help_attr } %}{{ block('attributes') }}{% endwith %}>
+            {%- if translation_domain is same as(false) -%}
+                {{- help -}}
+            {%- else -%}
+                {{- help|trans(help_translation_parameters, translation_domain) -}}
+            {%- endif -%}
+        </p>
+    {%- endif -%}
+{%- endblock form_help -%}
+
 {% block checkbox_row -%}
     <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
         <div class="ui toggle checkbox">
             {{- form_widget(form) -}}
             {{- form_label(form) -}}
-            {{- form_help(form) -}}
             {{- form_errors(form) -}}
         </div>
+        {{- form_help(form) -}}
     </div>
 {%- endblock checkbox_row %}
 
@@ -44,6 +56,7 @@
             {{- form_widget(form) -}}
             {{- form_errors(form) -}}
         </div>
+        {{- form_help(form) -}}
     </div>
 {%- endblock radio_row %}
 
@@ -59,6 +72,7 @@
         {{- form_label(form) -}}
         {% set attr = attr|merge({'class': attr.class|default ~ ' ui dropdown'}) %}
         {{- form_widget(form, {'attr': attr}) -}}
+        {{- form_help(form) -}}
         {{- form_errors(form) -}}
     </div>
 {%- endblock choice_row %}
@@ -224,6 +238,7 @@
             <div class="default text">{% if placeholder is defined %} {{ placeholder|trans }} {% endif %}</div>
             <div class="menu"></div>
         </div>
+        {{- form_help(form) -}}
         {{- form_errors(form) -}}
     </div>
 {% endblock %}
@@ -257,6 +272,7 @@
             {{ form_widget(form.file) }}
         </div>
         <div class="ui element">
+            {{- form_help(form.file) -}}
             {{- form_errors(form.file) -}}
         </div>
     {% endapply %}

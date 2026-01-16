@@ -17,6 +17,7 @@
             {% for categoryRequirementChoiceForm in form.categoryRequirement %}
                 {{ form_row(categoryRequirementChoiceForm) }}
             {% endfor %}
+            {{ form_help(form.categoryRequirement) }}
             <h4 class="ui dividing header">{{ 'sylius.ui.taxes'|trans }}</h4>
             {{ form_row(form.taxCategory) }}
             <h4 class="ui dividing header">{{ 'sylius.ui.shipping_charges'|trans }}</h4>

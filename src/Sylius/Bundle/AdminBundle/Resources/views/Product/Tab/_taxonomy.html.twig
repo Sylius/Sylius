@@ -13,6 +13,7 @@
             <div class="ui inverted dimmer">
                 <div class="ui loader"></div>
             </div>
+            {{ form_help(form.productTaxons) }}
         </div>
 
         {{ sylius_template_event(['sylius.admin.product.' ~ action ~ '.tab_taxonomy', 'sylius.admin.product.tab_taxonomy'], {'form': form}) }}
