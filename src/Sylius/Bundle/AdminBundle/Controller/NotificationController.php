@@ -37,7 +37,8 @@ final class NotificationController
 {
     public function __construct(
         private ClientInterface|DeprecatedClientInterface $client,
-        private RequestFactoryInterface $requestFactory,
+        /** @phpstan-ignore-next-line (Http\Message\MessageFactory is from abandoned php-http/message-factory, kept for BC) */
+        private MessageFactory|RequestFactoryInterface $requestFactory,
         private string $hubUri,
         private string $environment,
         private ?StreamFactoryInterface $streamFactory = null,
@@ -54,6 +55,7 @@ final class NotificationController
             'environment' => $this->environment,
         ]);
 
+        /** @phpstan-ignore-next-line */
         $hubRequest = $this->requestFactory
             ->createRequest(Request::METHOD_GET, $this->hubUri)
             ->withHeader('Content-Type', 'application/json')
