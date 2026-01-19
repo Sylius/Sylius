@@ -64,6 +64,7 @@
             </div>
             <div class="attribute-error">
                 {{ form_errors(form.value) }}
+                {{ form_help(form.value) }}
             </div>
         </div>
         <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.code }}"/>

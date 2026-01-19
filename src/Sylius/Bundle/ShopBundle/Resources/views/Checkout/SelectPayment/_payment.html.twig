@@ -8,5 +8,6 @@
         {% else %}
             {% include '@SyliusShop/Checkout/SelectPayment/_unavailable.html.twig' %}
         {% endfor %}
+        {{ form_help(form.method) }}
     </div>
 </div>
