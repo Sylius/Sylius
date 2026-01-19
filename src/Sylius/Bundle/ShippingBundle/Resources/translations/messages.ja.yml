@@ -3,32 +3,59 @@
 
 sylius:
     form:
+        rule:
+            unit_count_configuration:
+                count: '個数'
+                equal: '等しい'
+            type: 'ルールタイプ'
         shipment:
-            state: 出荷ステータス
+            state: '状態'
             states:
-                checkout: 注文に進む
-                pending: 未発送
+                checkout:   'チェックアウト'
+                pending:    '保留'
+                ready:      '準備完了'
+                shipped:    '出荷済み'
+                returned:   '返品済み'
+                cancelled:  'キャンセル済み'
+            tracking_code: '追跡コード'
         shipping_calculator:
             flat_rate_configuration:
-                amount: 税率
+                label: '1配送あたりの定額'
+                amount: '金額'
             per_unit_rate_configuration:
-                amount: 税率
+                label: '1単位あたりの定額'
+                amount: '金額'
         shipping_category:
-            description: 説明
-            name: ゾーン名
+            description: '説明'
+            name: '名称'
         shipping_method:
-            add_rule: 条件を追加
-            calculator: 算出方法
-            category: 税区分
-            channels: 経路
-            configuration: 条件設定
-            description: 説明
-            enabled: 有効
-            name: ゾーン名
-            rules: 条件
-            tax_category: 税区分
-            translations: 翻訳
+            add_rule: 'ルールを追加'
+            calculator: '計算方法'
+            category: 'カテゴリ'
+            category_requirement: 'カテゴリ要件'
+            channels: 'チャネル'
+            configuration: '設定'
+            description: '説明'
+            enabled: '有効'
+            match_all_category_requirement: 'すべてのユニットがこの配送方法のカテゴリに一致する必要があります'
+            match_any_category_requirement: '少なくとも1ユニットがこの配送方法のカテゴリに一致する必要があります'
+            match_none_category_requirement: 'どのユニットもこの配送方法のカテゴリに一致する必要はありません'
+            name: '名称'
+            position: '位置'
+            rules: 'ルール'
+            rules_help: 'ルールを使用して、この配送方法を注文に適用できるかどうかを判断します。
+                ルールが真の場合、この配送方法を適用できます。複数のルールを追加した場合、
+                すべてのルールが真である必要があります。'
+            select_calculator: '計算方法を選択'
+            tax_category: '税カテゴリ'
+            translations: '翻訳'
         shipping_method_rule:
-            type: タイプ
-            total: 小計
-            amount: 税率
+            items_total_greater_than_or_equal: '合計金額が次以上'
+            items_total_less_than_or_equal: '合計金額が次以下'
+            type: 'タイプ'
+            total: '合計'
+            total_weight_greater_than_or_equal: '総重量が次以上'
+            total_weight_less_than_or_equal: '総重量が次以下'
+            weight: '重量'
+            amount: '金額'
+            select: 'ルールタイプを選択'

@@ -1,0 +1,32 @@
+{% set form = hookable_metadata.context.form %}
+{% set form_promotion_coupon = form.promotionCoupon %}
+
+{% if form_promotion_coupon is defined %}
+    <div class="mb-4">
+        <div class="p-4 bg-light">
+            <div class="input-group field" {{ sylius_test_html_attribute('cart-promotion-coupon') }}>
+                {% if form_promotion_coupon.vars.value is not empty and form_promotion_coupon.vars.valid %}
+                    <div class="card d-flex flex-row justify-content-between align-items-center w-100 py-2 px-3">
+                        <div class="d-flex flex-wrap" style="gap: .5rem 0;">
+                            <span class="me-2">{{ 'sylius.ui.applied_coupon'|trans }}:</span>
+                            <span class="badge d-flex align-items-center text-bg-secondary">
+                                {{ form_promotion_coupon.vars.value }}
+                            </span>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-transparent d-flex align-items-center p-0"
+                            data-action="live#action:prevent"
+                            data-live-action-param="removeCoupon"
+                            {{ sylius_test_html_attribute('cart-promotion-remove-coupon') }}
+                        >
+                            {{ ux_icon('tabler:trash', {class: 'icon icon-sm'}) }}
+                        </button>
+                    </div>
+                {% else %}
+                    {{ form_widget(form_promotion_coupon, sylius_test_form_attribute('cart-promotion-coupon-input')|sylius_merge_recursive({'attr': {'data-model': 'norender|sylius_shop_cart[promotionCoupon]', 'form': form.vars.id, 'placeholder': 'sylius.ui.enter_your_code'|trans ~ '...'}})) }}
+                    <button class="btn btn-outline-gray" type="button" {{ sylius_test_html_attribute('apply-coupon-button') }} data-action="live#$render">{{ 'sylius.ui.apply_coupon'|trans }}</button>
+                    {{ form_errors(form_promotion_coupon) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

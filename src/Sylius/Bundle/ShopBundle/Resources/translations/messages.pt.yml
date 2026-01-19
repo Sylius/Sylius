@@ -2,22 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Não tem uma conta?'
+        register_here: 'Registre-se aqui'
     email:
         order_confirmation:
-            subject: 'Confirmação de encomenda'
-            view_order_or_change_payment_method: 'Ver encomenda ou alterar método de pagamento'
+            has_been_successfully_placed: 'foi realizada com sucesso.'
+            subject: 'Confirmação de pedido'
+            view_order_or_change_payment_method: 'Ver pedido ou alterar método de pagamento'
+            thank_you: 'Obrigado por comprar na nossa loja!'
+            your_order_number: 'Nº do seu pedido'
         password_reset:
             hello: 'Olá'
-            subject: 'Redefinir palavra-passe'
+            reset_your_password: 'Redefina sua senha'
+            subject: 'Redefinição de senha'
+            to_reset_your_password: 'Para redefinir sua senha - clique no link abaixo'
+            to_reset_your_password_token: 'Para redefinir sua senha - use o token abaixo'
+            token: 'Seu token de redefinição de senha é'
+        user_registration:
+            start_shopping: 'Começar compras'
+            subject: 'Registro de usuário'
+            welcome_to_our_store: 'Bem-vindo à nossa loja!'
+            you_have_just_been_registered: 'Você acaba de se registrar. Obrigado'
         verification_token:
             hello: 'Olá'
-            subject: 'Verificação de endereço de e-mail'
+            subject: 'Verificação de e-mail'
+            to_verify_your_email_address: 'Para verificar seu e-mail - clique no link abaixo'
+            verify_your_email_address: 'Verificar seu e-mail'
+    footer:
+        banner:
+            free_shipping_title: 'Frete e devolução grátis'
+            free_shipping_content: 'Envio gratuito em todos os pedidos'
+            guarantee_title: 'Garantia de dinheiro'
+            guarantee_content: '30 dias de garantia de devolução'
+            multiple_payments_title: 'Múltiplos métodos de pagamento'
+            multiple_payments_content: 'Aceitamos cartões de crédito e PayPal'
+    homepage:
+        about_us: 'Sobre nós'
+        about_us_content: 'Bem-vindo à nossa loja, sua loja online número um que oferece os melhores produtos. Você pode escolher entre as melhores roupas e calçados da nossa oferta. (<i>Você pode modificar este conteúdo sobrescrevendo a chave "sylius.homepage.about_us_content" no seu arquivo de tradução</i>)'
+        banner_content: 'Prepare-se! O inverno está chegando'
+        banner_button: 'Confira a nova coleção'
+        carousel_header: 'Produtos em destaque'
+        latest_deals: 'Últimas ofertas'
+        new_collection: 'Nova coleção'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Inscreva-se na nossa newsletter para ver as novas ofertas que aguardam por você! (<i>Você pode modificar este conteúdo sobrescrevendo a chave "sylius.homepage.newsletter_description" no seu arquivo de tradução</i>)'
+        subscribe: 'Inscrever-se'
+    lightbox:
+        image_album_label: 'Imagem %1 de %2'
     menu:
         shop:
             account:
-                address_book: 'Livros de moradas'
-                change_password: 'Alterar palavra-passe'
+                address_book: 'Endereços'
+                change_password: 'Alterar senha'
                 dashboard: 'Painel'
-                header: 'A sua conta'
-                order_history: 'Histórico de encomendas'
-                personal_information: 'Informação Pessoal'
+                header: 'Sua conta'
+                order_history: 'Histórico de pedidos'
+                personal_information: 'Informações pessoais'
+    top_bar: 'Inscreva-se em nossa newsletter e ganhe 20% de desconto'

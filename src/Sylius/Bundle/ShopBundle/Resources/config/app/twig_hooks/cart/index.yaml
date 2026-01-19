@@ -1,0 +1,126 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.cart.index':
+            content:
+                template: '@SyliusShop/cart/index/content.html.twig'
+                priority: 0        
+        
+        'sylius_shop.cart.index.content':
+            form:
+                component: 'sylius_shop:cart:form'
+                props:
+                    resource: '@=_context.cart'
+                    template: '@SyliusShop/cart/index/content/form.html.twig'
+                priority: 100
+            suggested_products:
+                component: 'sylius_shop:product:list'
+                props:
+                    limit: 4
+                    template: '@SyliusShop/product/common/list.html.twig'
+                configuration:
+                    title: 'sylius.ui.you_may_also_like'
+                priority: 0
+                    
+        'sylius_shop.cart.index.content.header':
+            flashes:
+                enabled: false
+
+        'sylius_shop.cart.index.content.form':
+            sections:
+                template: '@SyliusShop/cart/index/content/form/sections.html.twig'
+                priority: 0
+
+        'sylius_shop.cart.index.content.form.sections':
+            flashes:
+                template: "@SyliusShop/shared/flashes.html.twig"
+                priority: 200
+            header:
+                template: '@SyliusShop/cart/index/content/form/sections/header.html.twig'
+                priority: 100
+            general:
+                template: '@SyliusShop/cart/index/content/form/sections/general.html.twig'
+                priority: 0
+
+        'sylius_shop.cart.index.content.form.sections.general#left':
+            items:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items.html.twig'
+                priority: 200
+            coupon:
+                template: '@SyliusShop/cart/index/content/form/sections/general/coupon.html.twig'
+                priority: 100
+            clear_cart:
+                template: '@SyliusShop/cart/index/content/form/sections/general/clear_cart.html.twig'
+                priority: 0
+
+        'sylius_shop.cart.index.content.form.sections.general#right':
+            summary:
+                component: 'sylius_shop:cart:summary'
+                props:
+                    cart: '@=_context.cart'
+                    template: '@SyliusShop/cart/index/content/form/sections/general/summary.html.twig'
+                priority: 100
+            checkout:
+                template: '@SyliusShop/cart/index/content/form/sections/general/checkout.html.twig'
+                priority: 0
+
+        'sylius_shop.cart.index.content.form.sections.general.items':
+            head:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/head.html.twig'
+                priority: 100
+            body:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/body.html.twig'
+                priority: 0
+
+        'sylius_shop.cart.index.content.form.sections.general.items.head':
+            remove:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/head/remove.html.twig'
+                priority: 400
+            item:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/head/item.html.twig'
+                priority: 300
+            unit_price:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/head/unit_price.html.twig'
+                priority: 200
+            quantity:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/head/quantity.html.twig'
+                priority: 100
+            total:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/head/total.html.twig'
+                priority: 0
+
+        'sylius_shop.cart.index.content.form.sections.general.items.body':
+            remove:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/body/remove.html.twig'
+                priority: 400
+            item:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/body/item.html.twig'
+                priority: 300
+            unit_price:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/body/unit_price.html.twig'
+                priority: 200
+            quantity:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/body/quantity.html.twig'
+                priority: 100
+            total:
+                template: '@SyliusShop/cart/index/content/form/sections/general/items/body/total.html.twig'
+                priority: 0
+
+        'sylius_shop.cart.index.content.form.sections.general.summary':
+            items_total:
+                template: '@SyliusShop/cart/index/content/form/sections/general/summary/items_total.html.twig'
+                priority: 500
+            discount:
+                template: '@SyliusShop/cart/index/content/form/sections/general/summary/discount.html.twig'
+                priority: 400
+            estimated_cost:
+                template: '@SyliusShop/cart/index/content/form/sections/general/summary/estimated_cost.html.twig'
+                priority: 300
+            taxes_total:
+                template: '@SyliusShop/cart/index/content/form/sections/general/summary/taxes_total.html.twig'
+                priority: 200
+            order_total:
+                template: '@SyliusShop/cart/index/content/form/sections/general/summary/order_total.html.twig'
+                priority: 100
+            base_currency_order_total:
+                template: '@SyliusShop/cart/index/content/form/sections/general/summary/base_currency_order_total.html.twig'
+                priority: 0

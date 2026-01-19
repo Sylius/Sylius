@@ -18,10 +18,11 @@ use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
 use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Webmozart\Assert\Assert;
 
-final class SendContactRequestHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final readonly class SendContactRequestHandler
 {
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
@@ -35,19 +36,19 @@ final class SendContactRequestHandler implements MessageHandlerInterface
     public function __invoke(SendContactRequest $command): void
     {
         /** @var ChannelInterface|null $channel */
-        $channel = $this->channelRepository->findOneByCode($command->getChannelCode());
+        $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
         if ($channel === null) {
-            throw new ChannelNotFoundException($command->getChannelCode());
+            throw new ChannelNotFoundException($command->channelCode);
         }
 
-        $email = $command->getEmail();
+        $email = $command->email;
         Assert::notNull($email);
 
         $this->contactEmailManager->sendContactRequest(
             [
                 'email' => $email,
-                'message' => $command->getMessage(),
+                'message' => $command->message,
             ],
             [$channel->getContactEmail()],
             $channel,

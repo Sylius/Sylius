@@ -37,6 +37,5 @@ sylius:
             scopes:
                 all: Tous
             select: Sélectionner
-            select_scope: Sélectionnez le champ d'application
         zone_member:
             select: Sélectionner

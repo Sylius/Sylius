@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use Sylius\Bundle\ApiBundle\Serializer\ImageNormalizer;
+use PHPUnit\Framework\Attributes\Test;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,18 +24,18 @@ final class AvatarImageTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_gets_an_avatar_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        /** @var AvatarImageInterface $avatarImage */
-        $avatarImage = $fixtures['avatar_image'];
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $fixtures['admin'];
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
             server: $header,
         );
 
@@ -46,18 +46,18 @@ final class AvatarImageTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_avatar_image_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        /** @var AvatarImageInterface $avatarImage */
-        $avatarImage = $fixtures['avatar_image'];
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $fixtures['admin'];
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
             parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'sylius_small'],
             server: $header,
         );
@@ -69,18 +69,18 @@ final class AvatarImageTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_prevents_getting_an_avatar_image_with_an_invalid_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        /** @var AvatarImageInterface $avatarImage */
-        $avatarImage = $fixtures['avatar_image'];
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $fixtures['admin'];
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
             parameters: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid'],
             server: $header,
         );
@@ -92,7 +92,7 @@ final class AvatarImageTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_nothing_if_avatar_image_not_found(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
@@ -100,7 +100,7 @@ final class AvatarImageTest extends JsonApiTestCase
 
         $this->client->request(
             method: 'GET',
-            uri: sprintf('/api/v2/admin/avatar-images/%s', 'wrong input'),
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', 'wrong input'),
             server: $header,
         );
 
@@ -109,21 +109,18 @@ final class AvatarImageTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_an_avatar_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::FILE_CONTENT_TYPE_HEADER);
 
         /** @var AdminUserInterface $adminUser */
         $adminUser = $fixtures['admin'];
 
         $this->client->request(
             method: 'POST',
-            uri: '/api/v2/admin/avatar-images',
-            parameters: [
-                'owner' => sprintf('/api/v2/admin/administrators/%s', $adminUser->getId()),
-            ],
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
             files: ['file' => $this->getUploadedFile('fixtures/ford.jpg', 'ford.jpg')],
             server: $header,
         );
@@ -136,18 +133,18 @@ final class AvatarImageTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_an_avatar_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
         $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
 
-        /** @var AvatarImageInterface $avatarImage */
-        $avatarImage = $fixtures['avatar_image'];
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $fixtures['admin'];
 
         $this->client->request(
             method: 'DELETE',
-            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
             server: $header,
         );
 

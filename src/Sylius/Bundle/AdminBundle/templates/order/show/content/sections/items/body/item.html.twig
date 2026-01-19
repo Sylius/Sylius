@@ -1,0 +1,22 @@
+{% from '@SyliusAdmin/shared/helper/product_image.html.twig' import image %}
+
+{% set item = hookable_metadata.context.item %}
+{% set product = hookable_metadata.context.product %}
+{% set variant = hookable_metadata.context.variant %}
+
+<td>
+    <div class="thumbnail-box">
+        <div class="thumbnail-box-image">
+            {{ image(product) }}
+        </div>
+        <div class="thumbnail-box-content">
+            <div class="mb-1">
+                <a href="{{ path('sylius_admin_product_show', { id: product.id }) }}">
+                    <strong>{{ item.productName }}</strong>
+                </a>
+            </div>
+            <div class="text-muted small" {{ sylius_test_html_attribute('code') }}>{{ variant.code }}</div>
+            <div class="text-muted small">{{ item.variantName }}</div>
+        </div>
+    </div>
+</td>

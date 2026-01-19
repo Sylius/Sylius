@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -74,7 +74,10 @@ final class ProductReviewContext implements Context
     {
         $this->client->addRequestData('title', $title);
         $this->client->addRequestData('comment', $comment);
-        $this->client->addRequestData('email', $email);
+
+        if (null !== $email) {
+            $this->client->addRequestData('email', $email);
+        }
     }
 
     /**

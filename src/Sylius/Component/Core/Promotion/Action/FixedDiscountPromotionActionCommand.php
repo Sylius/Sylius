@@ -32,6 +32,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     ) {
     }
 
+    /** @param array<string, mixed> $configuration */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion): bool
     {
         /** @var OrderInterface $subject */
@@ -88,6 +89,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         return true;
     }
 
+    /** @param array<string, mixed> $configuration */
     protected function isConfigurationValid(array $configuration): void
     {
         Assert::keyExists($configuration, 'amount');

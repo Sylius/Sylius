@@ -4,20 +4,22 @@
 sylius:
     form:
         customer:
-            first_name: Förnamn
-            group: Grupp
-            last_name: Efternamn
-            email: E-post
-            phone_number: Telefonnummer
-            gender: Kön
-            birthday: Födelsedag
-            billing_address: Faktureringsadress
-            only_customer_registration: Skapa konto?
-            subscribed_to_newsletter: Prenumerera på nyhetsbrevet
+            first_name: 'Förnamn'
+            group: 'Grupp'
+            last_name: 'Efternamn'
+            email: 'E-post'
+            phone_number: 'Telefonnummer'
+            gender: 'Kön'
+            birthday: 'Födelsedag'
+            billing_address: 'Faktureringsadress'
+            different_shipping_address: 'Använd annan adress för leverans?'
+            only_customer_registration: 'Skapa konto?'
+            subscribed_to_newsletter: 'Prenumerera på nyhetsbrevet'
         customer_group:
-            name: Namn
-            roles: Roller
+            name: 'Namn'
+            roles: 'Roller'
     gender:
-        unknown: Okänd
-        male: Man
-        female: Kvinna
+        unknown: 'Okänt'
+        male: 'Man'
+        female: 'Kvinna'
+

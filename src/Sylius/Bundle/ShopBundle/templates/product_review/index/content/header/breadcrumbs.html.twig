@@ -1,0 +1,7 @@
+{% from '@SyliusShop/product/common/macro/breadcrumbs.html.twig' import product_breadcrumbs as product_breadcrumbs %}
+
+{% set additional_items = [
+    { label: 'sylius.ui.reviews'|trans, active: true }
+] %}
+
+{{ product_breadcrumbs(product, additional_items) }}

@@ -2,8 +2,18 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        request_reset_password:
+            success: 'Als het e-mailadres dat je hebt opgegeven bestaat in ons systeem, hebben we daar een instructie gestuurd over hoe je je wachtwoord kunt resetten.'
+        password_reset:
+            success: 'Je wachtwoord is succesvol gewijzigd!'
+            token_expired: 'De wachtwoord reset token is verlopen.'
     email:
-        order_confirmation_resent: 'Bestelbevestiging is opnieuw verzonden naar de klant.'
-        shipment_confirmation_resent: 'Verzendbevestiging is opnieuw verzonden naar de klant.'
+        order_confirmation_resent: 'Bestelbevestiging is succesvol opnieuw verzonden naar de klant.'
+        shipment_confirmation_resent: 'Verzendbevestiging is succesvol opnieuw verzonden naar de klant.'
     product_variant:
-        cannot_generate_variants: 'Kan geen varianten genereren voor een product zonder opties.'
+        cannot_generate_variants: 'Kan geen varianten genereren voor een product zonder optie-waarden.'
+    locale:
+        delete:
+            is_used: 'Kan de locale niet verwijderen, omdat deze wordt gebruikt door ten minste één vertaling.'
+            success: 'Locale is succesvol verwijderd.'

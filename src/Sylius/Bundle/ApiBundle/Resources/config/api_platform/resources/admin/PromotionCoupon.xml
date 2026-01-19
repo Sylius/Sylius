@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.promotion_coupon.class%">
+        <operations>
+            <operation
+                name="sylius_api_admin_promotion_promotion_coupon_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/promotions/{promotionCode}/coupons"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
+                        fromProperty="coupons"/>
+                </uriVariables>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion_coupon:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.order_filter.admin.promotion_coupon</filter>
+                    <filter>sylius_api.search_filter.admin.promotion_coupon</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="used">DESC</value>
+                    </values>
+                </order>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_promotion_promotion_coupon_get"
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
+                        fromProperty="coupons"/>
+                    <uriVariable parameterName="couponCode" fromClass="%sylius.model.promotion_coupon.class%"/>
+                </uriVariables>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion_coupon:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_promotion_promotion_coupon_post"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/admin/promotions/{promotionCode}/coupons"
+                processor="sylius_api.state_processor.admin.promotion.promotion_coupon.persist"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
+                        fromProperty="coupons"/>
+                </uriVariables>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion_coupon:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion_coupon:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_promotion_promotion_coupon_post_generate"
+                class="ApiPlatform\Metadata\Post"
+                messenger="input"
+                uriTemplate="/admin/promotions/{promotionCode}/coupons/generate"
+                input="Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon"
+                status="201"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
+                        fromProperty="coupons"/>
+                </uriVariables>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion_coupon:generate</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion_coupon:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_promotion_promotion_coupon_put"
+                class="ApiPlatform\Metadata\Put"
+                uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
+                        fromProperty="coupons"/>
+                    <uriVariable parameterName="couponCode" fromClass="%sylius.model.promotion_coupon.class%"/>
+                </uriVariables>
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion_coupon:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion_coupon:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_promotion_promotion_coupon_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/promotions/{promotionCode}/coupons/{couponCode}"
+            >
+                <uriVariables>
+                    <uriVariable parameterName="promotionCode" fromClass="%sylius.model.promotion.class%"
+                        fromProperty="coupons"/>
+                    <uriVariable parameterName="couponCode" fromClass="%sylius.model.promotion_coupon.class%"/>
+                </uriVariables>
+            </operation>
+        </operations>
+    </resource>
+</resources>

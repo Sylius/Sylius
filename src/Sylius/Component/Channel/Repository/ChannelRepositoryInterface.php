@@ -23,16 +23,14 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  */
 interface ChannelRepositoryInterface extends RepositoryInterface
 {
-    /** @deprecated since Sylius 1.11, use the `findOneEnabledByHostname` method instead */
-    public function findOneByHostname(string $hostname): ?ChannelInterface;
-
     public function findOneEnabledByHostname(string $hostname): ?ChannelInterface;
 
     public function findOneByCode(string $code): ?ChannelInterface;
 
-    /** @return iterable|ChannelInterface[] */
+    /** @return iterable<ChannelInterface> */
     public function findByName(string $name): iterable;
 
+    /** @return iterable<array<string, mixed>> */
     public function findAllWithBasicData(): iterable;
 
     /**

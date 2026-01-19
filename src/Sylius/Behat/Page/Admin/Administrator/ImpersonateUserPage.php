@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Administrator;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class ImpersonateUserPage extends SymfonyPage implements ImpersonateUserPageInterface
+class ImpersonateUserPage extends SyliusPage implements ImpersonateUserPageInterface
 {
     public function getRouteName(): string
     {

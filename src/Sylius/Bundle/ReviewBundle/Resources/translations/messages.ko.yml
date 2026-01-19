@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        review:
+            author: '작성자'
+            comment: '댓글'
+            header: '리뷰 추가'
+            rating: '평점'
+            status:
+                approved: '승인됨'
+                label: '상태'
+                new: '신규'
+                rejected: '거부됨'
+            submit: '제출'
+            title: '제목'

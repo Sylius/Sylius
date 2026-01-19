@@ -4,13 +4,13 @@
 sylius:
     user:
         email:
-            not_blank: Inserisci la tua email.
-            invalid: Questa e-mail non è valida.
-            not_registered: L'utente con questa e-mail non esiste. Si prega di registrarsi prima.
+            not_blank: 'Per favore inserisci la tua email.'
+            invalid: 'Questa email non è valida.'
+            not_registered: 'L''utente con questa email non esiste. Per favore registrati prima.'
         plainPassword:
-            not_blank: Inserisci la password.
-            mismatch: Le password immesse non corrispondono
-            wrong_current: La Password fornita è diversa da quella attuale.
+            not_blank: 'Per favore inserisci la tua password.'
+            mismatch: 'Le password inserite non corrispondono.'
+            wrong_current: 'La password fornita è diversa dalla password attuale.'
         password:
-            min: La password deve essere almeno di {{ limit }} caratteri.
-            max: Password non deve essere più di {{ limit }} caratteri.
+            min: 'La password deve essere lunga almeno {{ limit }} caratteri.'
+            max: 'La password non deve essere più lunga di {{ limit }} caratteri.'

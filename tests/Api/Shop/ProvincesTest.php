@@ -11,15 +11,22 @@
 
 declare(strict_types=1);
 
-namespace Api\Shop;
+namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
-use Symfony\Component\HttpFoundation\Response;
 
 final class ProvincesTest extends JsonApiTestCase
 {
-    /** @test */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->setUpDefaultGetHeaders();
+    }
+
+    #[Test]
     public function it_gets_a_province(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['country.yaml']);
@@ -27,16 +34,10 @@ final class ProvincesTest extends JsonApiTestCase
         /** @var ProvinceInterface $province */
         $province = $fixtures['province_US_WY'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/shop/provinces/%s', $province->getCode()),
-            server: self::CONTENT_TYPE_HEADER,
+        $this->requestGet(
+            sprintf('/api/v2/shop/countries/%s/provinces/%s', $province->getCountry()->getCode(), $province->getCode()),
         );
 
-        $this->assertResponse(
-            $this->client->getResponse(),
-            'shop/province/get_province_response',
-            Response::HTTP_OK,
-        );
+        $this->assertResponse($this->client->getResponse(), 'shop/province/get_province_response');
     }
 }

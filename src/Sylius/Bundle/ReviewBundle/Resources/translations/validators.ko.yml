@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    review:
+        author:
+            already_exists: '이 이메일은 이미 등록되어 있습니다. 로그인하거나 비밀번호 찾기를 이용하세요.'
+        comment:
+            not_blank: '리뷰 댓글은 비워둘 수 없습니다.'
+        rating:
+            not_blank: '리뷰 평점을 선택해야 합니다.'
+        title:
+            not_blank: '리뷰 제목은 비워둘 수 없습니다.'
+            min_length: '리뷰 제목은 최소 2자 이상이어야 합니다.'
+            max_length: '리뷰 제목은 최대 255자까지 입력할 수 있습니다.'

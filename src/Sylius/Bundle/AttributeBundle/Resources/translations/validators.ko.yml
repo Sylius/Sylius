@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    attribute:
+        name:
+            not_blank: '속성 이름을 입력하세요.'
+            min_length: '속성 이름은 최소 1자이어야 합니다.|속성 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            max_length: '속성 이름은 1자를 초과할 수 없습니다.|속성 이름은 {{ limit }}자를 초과할 수 없습니다.'
+        code:
+            min_length: '속성 코드는 최소 1자이어야 합니다.|속성 코드는 최소 {{ limit }}자 이상이어야 합니다.'
+            max_length: '속성 코드는 1자를 초과할 수 없습니다.|속성 코드는 {{ limit }}자를 초과할 수 없습니다.'
+            not_blank: '속성 코드를 입력하세요.'
+            regex: '속성 코드는 문자, 숫자, 대시(-) 및 밑줄(_)만 사용할 수 있습니다.'
+            unique: '이미 사용 중인 코드입니다.'
+        configuration:
+            max_entries: '구성의 최대 항목 수는 최소 항목 수보다 크거나 같아야 합니다.'
+            max_length: '구성의 최대 길이는 최소 길이보다 크거나 같아야 합니다.'
+            min_entries: '구성의 최소 항목 수는 추가된 선택지 수보다 작거나 같아야 합니다.'
+            multiple: '최소 또는 최대 항목 수가 지정된 경우, 다중 선택 설정은 true여야 합니다.'
+        presentation:
+            not_blank: '속성 표시 이름을 입력하세요.'
+            min_length: '속성 표시 이름은 최소 1자이어야 합니다.|속성 표시 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            max_length: '속성 표시 이름은 1자를 초과할 수 없습니다.|속성 표시 이름은 {{ limit }}자를 초과할 수 없습니다.'
+        type:
+            unregistered: '속성 유형 "%type%" 이(가) 등록되지 않았습니다. 사용 가능한 속성 유형: %available_types%.'
+    attribute_value:
+        attribute:
+            not_blank: '속성을 선택하세요.'
+        value:
+            not_blank: '속성 값을 입력하세요.'

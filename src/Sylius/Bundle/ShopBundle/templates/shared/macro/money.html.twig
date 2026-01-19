@@ -1,0 +1,19 @@
+{%- macro format(amount, currency_code) -%}
+    {{ amount|sylius_format_money(currency_code, sylius.localeCode) }}
+{%- endmacro -%}
+
+{%- macro convertAndFormat(amount) -%}
+    {{- _self.format(amount|sylius_convert_money(sylius.channel.baseCurrency.code, sylius.currencyCode), sylius.currencyCode) }}
+{%- endmacro -%}
+
+{%- macro calculatePrice(variant) -%}
+    {{- _self.convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
+{%- endmacro -%}
+
+{%- macro calculateOriginalPrice(variant) -%}
+    {{- _self.convertAndFormat(variant|sylius_calculate_original_price({'channel': sylius.channel})) }}
+{%- endmacro -%}
+
+{%- macro calculateLowestPrice(variant) -%}
+    {{- _self.convertAndFormat(variant|sylius_calculate_lowest_price({'channel': sylius.channel})) -}}
+{%- endmacro -%}

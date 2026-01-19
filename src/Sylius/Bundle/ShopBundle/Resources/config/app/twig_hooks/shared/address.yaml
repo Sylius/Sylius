@@ -1,0 +1,24 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.shared.address':
+            company:
+                template: "@SyliusShop/shared/address/company.html.twig"
+                priority: 600
+            name:
+                template: "@SyliusShop/shared/address/name.html.twig"
+                priority: 500
+            phone_number:
+                template: "@SyliusShop/shared/address/phone_number.html.twig"
+                priority: 400
+            street:
+                template: "@SyliusShop/shared/address/street.html.twig"
+                priority: 300
+            city_and_postcode:
+                template: "@SyliusShop/shared/address/city_and_postcode.html.twig"
+                priority: 200
+            province:
+                template: "@SyliusShop/shared/address/province.html.twig"
+                priority: 100
+            country:
+                template: "@SyliusShop/shared/address/country.html.twig"
+                priority: 0

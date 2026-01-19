@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    customer:
+        first_name:
+            max: '이름은 {{ limit }}자를 넘을 수 없습니다.'
+            min: '이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '이름을 입력하세요.'
+        last_name:
+            max: '성은 {{ limit }}자를 넘을 수 없습니다.'
+            min: '성은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '성을 입력하세요.'
+        gender:
+            not_blank: '성별을 선택하세요.'
+        email:
+            already_used: '이미 사용 중인 이메일입니다. 로그인하거나 비밀번호 찾기를 이용하세요.'
+            max: '이메일은 {{ limit }}자를 넘을 수 없습니다.'
+            not_blank: '이메일을 입력하세요.'
+            invalid: '유효하지 않은 이메일입니다.'
+            unique: '이미 사용 중인 이메일입니다.'
+            registered: '이미 등록된 이메일입니다. 로그인하거나 비밀번호 찾기를 이용하세요.'
+        phone_number:
+            max: '전화번호는 {{ limit }}자를 넘을 수 없습니다.'
+    customer_group:
+        code:
+            max_length: '코드는 {{ limit }}자를 넘을 수 없습니다.'
+            regex: '고객 그룹 코드는 문자, 숫자, 하이픈(-), 밑줄(_)만 사용할 수 있습니다.'
+            unique: '고객 그룹 코드는 고유해야 합니다.'
+            not_blank: '고객 그룹 코드를 입력하세요.'
+        name:
+            max: '고객 그룹 이름은 {{ limit }}자를 넘을 수 없습니다.'
+            min: '고객 그룹 이름은 최소 {{ limit }}자 이상이어야 합니다.'
+            not_blank: '고객 그룹 이름을 입력하세요.'

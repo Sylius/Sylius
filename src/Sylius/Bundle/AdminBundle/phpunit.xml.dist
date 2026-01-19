@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/8.5/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          colors="true"
 >
     <testsuites>
-        <testsuite name="SyliusAdminBundle Test Suite">
-            <directory>./Tests/</directory>
+        <testsuite name="sylius-admin-bundle">
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
 

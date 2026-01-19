@@ -4,11 +4,11 @@
 sylius:
     form:
         currency:
-            base: Moeda base
-            code: Nome
-            enabled: Ativado
-            exchange_rate: Taxa de câmbio
+            base: 'Moeda base'
+            code: 'Nome'
+            enabled: 'Ativo'
+            exchange_rate: 'Taxa de câmbio'
         exchange_rate:
-            source_currency: Moeda fonte
-            target_currency: Moeda de destino
-            ratio: Proporção
+            source_currency: 'Moeda de origem'
+            target_currency: 'Moeda de destino'
+            ratio: 'Proporção'

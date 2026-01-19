@@ -1,6 +1,12 @@
 {
     "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/422",
     "@type": "hydra:Error",
+    "detail": "The channelCode of channelPricing does not match the key. Key: \"WEB\", channelCode: \"MOBILE\"",
+    "status": 422,
+    "type": "\/errors\/422",
     "hydra:title": "An error occurred",
-    "hydra:description": "The channelCode of channelPricing does not match the key. Key: \"WEB\", channelCode: \"MOBILE\""
+    "hydra:description": "The channelCode of channelPricing does not match the key. Key: \"WEB\", channelCode: \"MOBILE\"",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('The channelCode of channelPricing does not match the key. Key: \"WEB\", channelCode: \"MOBILE\"').optional()"
 }

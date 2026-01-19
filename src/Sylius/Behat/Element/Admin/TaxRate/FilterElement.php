@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\TaxRate;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class FilterElement extends Element implements FilterElementInterface
+class FilterElement extends SyliusElement implements FilterElementInterface
 {
     public function specifyDateFrom(string $dateType, string $date): void
     {

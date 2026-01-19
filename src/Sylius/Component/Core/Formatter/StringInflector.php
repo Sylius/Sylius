@@ -28,6 +28,13 @@ final class StringInflector
         return str_replace([' ', '-', '\''], '_', $value);
     }
 
+    public static function nameToProductCode(string $value): string
+    {
+        $value = str_replace([' ', '-', '\''], '_', $value);
+
+        return preg_replace('/[^\w-]/', '', $value) ?? '';
+    }
+
     public static function nameToSlug(string $value): string
     {
         return str_replace(['_'], '-', self::nameToLowercaseCode(Transliterator::transliterate($value)));

@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        delete_error: 'Kanalen kan ikke slettes. Minst én aktiv kanal kreves.'
+    checkout:
+        complete_error: 'Det oppstod et uventet problem med å fullføre bestillingen. Vennligst prøv å legge inn bestillingen på nytt.'
+    contact:
+        request_success: 'Din kontaktforespørsel er sendt inn med suksess.'
+        request_error: 'Det oppstod et problem under sending av kontaktforespørselen. Vennligst prøv igjen senere.'
+    customer:
+        add_address: 'Adresse er lagt til med suksess.'
+        impersonate: 'Kunde %name% ble vellykket impersonert.'
+        set_address_as_default: 'Adresse er satt som standard.'
+    order:
+        apply_state_machine_transition_error: 'Det oppstod et uventet problem med å oppdatere bestillingen. Vennligst prøv å oppdatere bestillingen på nytt.'
+        promotion_integrity: 'Du er ikke lenger kvalifisert for denne kampanjen %promotionName%.'
+        total_integrity: 'Din bestillingssum har endret seg, sjekk bestillingsinformasjonen og bekreft på nytt.'
+        update_error: 'Det oppstod et uventet problem med å oppdatere bestillingen. Vennligst prøv å oppdatere bestillingen på nytt.'
+    payment:
+        apply_state_machine_transition_error: 'Det oppstod et uventet problem med å oppdatere betalingen. Vennligst prøv å oppdatere betalingen på nytt.'
+    product:
+        in_use_by_promotion_rule: 'Kan ikke slette et produkt som er i bruk av en kampanjeregel.'
+        out_of_stock: 'Det er bare %quantity% av dette produktet på lager.'
+    product_variant:
+        update_error: 'Det oppstod et uventet problem med å oppdatere produktvarianten. Vennligst prøv å oppdatere produktvarianten på nytt.'
+    promotion:
+        update_rules: 'Noen regler for kampanjer med kodene %codes% har blitt oppdatert.'
+    taxon:
+        in_use_by_promotion_rule: 'Kan ikke slette en taksonomi som er i bruk av en kampanjeregel.'
+        menu_taxon_delete: 'Du kan ikke slette en meny-taksonomi for noen kanal.'

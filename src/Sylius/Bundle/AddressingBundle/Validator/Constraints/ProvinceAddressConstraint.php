@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * Constraint to require a province to be valid.
  */
+#[\Attribute]
 class ProvinceAddressConstraint extends Constraint
 {
     /** @var string */

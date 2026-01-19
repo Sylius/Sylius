@@ -4,23 +4,32 @@
 sylius:
     tax_category:
         name:
-            not_blank: 请填写税目名称。
+            not_blank: '请输入税务类别名称。'
+            min_length: '税务类别名称至少应包含1个字符。|税务类别名称至少应包含{{ limit }}个字符。'
+            max_length: '税务类别名称不得超过1个字符。|税务类别名称不得超过{{ limit }}个字符。'
         code:
-            not_blank: 请输入税类别代码。
-            regex: 税类别代码仅可以由字母、 数字、 破折号和下划线组成。
-            unique: 给定代码的税收类别已存在。
+            max_length: '代码不得超过{{ limit }}个字符。'
+            not_blank: '请输入税务类别代码。'
+            regex: '税务类别代码只能由字母、数字、连字符和下划线组成。'
+            unique: '具有给定代码的税务类别已存在。'
     tax_rate:
         category:
-            not_blank: 请选择税目。
+            not_blank: '请选择税务类别。'
         name:
-            not_blank: 请填写税率名称。
+            not_blank: '请输入税率名称。'
+            min_length: '税率名称至少应包含1个字符。|税率名称至少应包含{{ limit }}个字符。'
+            max_length: '税率名称不得超过1个字符。|税率名称不得超过{{ limit }}个字符。'
         amount:
-            not_blank: 请填写税率值。
+            invalid: '税率金额无效。'
+            not_blank: '请输入税率金额。'
         calculator:
-            not_blank: 请选择税费计算器。
+            not_blank: '请选择税率计算器。'
         zone:
-            not_blank: 请选择税区。
+            not_blank: '请选择税区。'
         code:
-            not_blank: 请输入税率代码。
-            regex: 税收率代码仅可以由字母、 数字、 破折号和下划线。
-            unique: 给定代码的税率已存在。
+            max_length: '代码不得超过{{ limit }}个字符。'
+            not_blank: '请输入税率代码。'
+            regex: '税率代码只能由字母、数字、连字符和下划线组成。'
+            unique: '具有给定代码的税率已存在。'
+        date:
+            greater_than_start_date: '税率的结束日期不得早于开始日期。'

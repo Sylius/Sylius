@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    locale:
+        code:
+            max_length: 'コードは{{ limit }}文字以内でなければなりません。'
+            not_blank: 'ロケールコードを選択してください。'
+            locale: 'この値は有効なロケールコードではありません。'
+            unique: 'ロケールコードは一意でなければなりません。'

@@ -32,6 +32,10 @@ final class WinzouStateMachineAdapterTest extends TestCase
 
     protected function setUp(): void
     {
+        if (false === class_exists(WinzouStateMachine::class)) {
+            $this->markTestIncomplete('The Winzou State Machine library is not installed.');
+        }
+
         parent::setUp();
 
         $this->winzouStateMachine = $this->createMock(WinzouStateMachine::class);
@@ -193,7 +197,6 @@ final class WinzouStateMachineAdapterTest extends TestCase
     {
         $reflection = new \ReflectionClass($stateMachine);
         $configProperty = $reflection->getProperty('config');
-        $configProperty->setAccessible(true);
         $configProperty->setValue($stateMachine, $config);
     }
 }

@@ -15,5 +15,6 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher;
 
 interface ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface
 {
+    /** @param array<string> $variantsCodes */
     public function updateVariants(array $variantsCodes): void;
 }

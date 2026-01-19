@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -26,6 +27,8 @@ use Sylius\Resource\Factory\FactoryInterface;
 
 final class CustomerContext implements Context
 {
+    use SecurePasswordTrait;
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private CustomerRepositoryInterface $customerRepository,
@@ -111,6 +114,7 @@ final class CustomerContext implements Context
 
     /**
      * @Given there is a customer :name with an email :email
+     * @Given there is also a customer :name with an email :email
      */
     public function theStoreHasCustomerAccountWithEmailAndName(string $name, string $email): void
     {
@@ -230,7 +234,7 @@ final class CustomerContext implements Context
         $customer->setGender('m');
 
         $user->setUsername($email);
-        $user->setPlainPassword($password);
+        $user->setPlainPassword($this->replaceWithSecurePassword($password));
         $user->setEnabled($enabled);
         if (null !== $role) {
             $user->addRole($role);

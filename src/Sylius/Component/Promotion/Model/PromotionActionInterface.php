@@ -19,6 +19,7 @@ interface PromotionActionInterface extends ResourceInterface, ConfigurablePromot
 {
     public function setType(?string $type): void;
 
+    /** @param array<string, mixed> $configuration */
     public function setConfiguration(array $configuration): void;
 
     public function setPromotion(?PromotionInterface $promotion): void;

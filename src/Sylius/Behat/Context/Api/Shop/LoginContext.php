@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
@@ -21,6 +21,7 @@ use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -33,6 +34,8 @@ use Webmozart\Assert\Assert;
 
 final class LoginContext implements Context
 {
+    use SecurePasswordTrait;
+
     private ?RequestInterface $request = null;
 
     public function __construct(
@@ -66,7 +69,7 @@ final class LoginContext implements Context
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode(['email' => $email, 'password' => 'sylius']),
+            json_encode(['email' => $email, 'password' => $this->retrieveSecurePassword('sylius')]),
         );
 
         $response = $this->shopAuthenticationTokenClient->getResponse();
@@ -145,7 +148,7 @@ final class LoginContext implements Context
      */
     public function iSpecifyMyNewPassword(?string $password = null): void
     {
-        $this->request->updateContent(['newPassword' => $password]);
+        $this->request->updateContent(['newPassword' => $this->replaceWithSecurePassword($password)]);
     }
 
     /**
@@ -154,7 +157,7 @@ final class LoginContext implements Context
      */
     public function iConfirmMyNewPassword(?string $password = null): void
     {
-        $this->request->updateContent(['confirmNewPassword' => $password]);
+        $this->request->updateContent(['confirmNewPassword' => $this->confirmSecurePassword($password)]);
     }
 
     /**

@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: 'Platba nemôže byť dokončená z dôvodu nedostatku zásob produktu "%productVariantCode%".'

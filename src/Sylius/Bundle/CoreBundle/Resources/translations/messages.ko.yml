@@ -2,44 +2,286 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    email:
+        admin_password_reset:
+            hello: '안녕하세요'
+            subject: '관리자 비밀번호 재설정'
+            reset_your_password: '비밀번호를 재설정하세요'
+            to_reset_your_password: '비밀번호를 재설정하려면 아래 링크를 클릭하세요'
+            to_reset_your_password_token: '비밀번호를 재설정하려면 아래 토큰을 사용하세요'
+            token: '비밀번호 재설정 토큰:'
+        contact_request:
+            content: '내용'
+            message_from: '보낸 사람'
+            subject: '문의 요청'
+        order_confirmation:
+            has_been_successfully_placed: '가(이) 성공적으로 접수되었습니다.'
+            subject: '주문 확인'
+            view_order_or_change_payment_method: '주문 보기 또는 결제 방법 변경'
+            thank_you: '저희 상점을 이용해 주셔서 감사합니다!'
+            your_order_number: '주문 번호'
+        password_reset:
+            hello: '안녕하세요'
+            reset_your_password: '비밀번호를 재설정하세요'
+            subject: '비밀번호 재설정'
+            to_reset_your_password: '비밀번호를 재설정하려면 아래 링크를 클릭하세요'
+            to_reset_your_password_token: '비밀번호를 재설정하려면 아래 토큰을 사용하세요'
+            token: '비밀번호 재설정 토큰:'
+        shipment_confirmation:
+            has_been_sent_using: '다음을 통해 발송되었습니다'
+            subject: '배송 확인'
+            thank_you_for_transaction: '성공적인 거래에 감사드립니다.'
+            you_can_check_its_location_with_the_tracking_code: '%tracking_code% 추적 코드로 위치를 확인할 수 있습니다.'
+            your_order_with_number: '주문 번호'
+        user_registration:
+            start_shopping: '쇼핑 시작하기'
+            subject: '회원 가입'
+            welcome_to_our_store: '저희 상점에 오신 것을 환영합니다!'
+            you_have_just_been_registered: '회원 가입이 완료되었습니다. 감사합니다'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
+        verification_token:
+            hello: '안녕하세요'
+            message: '토큰으로 계정을 인증하세요: '
+            subject: '이메일 주소 인증'
+            to_verify_your_email_address: '이메일 주소를 인증하려면 아래 링크를 클릭하세요'
+            verify_your_email_address: '이메일 주소 인증'
+        user:
+            account_verification:
+                greeting: '안녕하세요'
+                message: '토큰으로 계정을 인증하세요: '
+                statement: '이메일 주소 인증'
+                strategy: '이메일 주소를 인증하려면 아래 링크를 클릭하세요'
+                subject: '이메일 주소 인증'
     form:
+        block:
+            body: '본문'
+            id: 'ID'
+            title: '제목'
+        cart:
+            coupon: '쿠폰'
+        catalog_promotion:
+            channels: '채널'
+            scope:
+                for_products: '상품 대상'
+                for_taxons: '택슨 대상'
+                for_variants: '바리아ント 대상'
+        checkout:
+            addressing:
+                different_billing_address: '다른 청구 주소를 사용하시겠습니까?'
+                different_shipping_address: '다른 배송 주소를 사용하시겠습니까?'
+            payment_method: '결제 방법'
+            shipping_method: '배송 방법'
+        currency:
+            select: '통화 선택'
+        promotion:
+            channels: '채널'
+        promotion_action:
+            add_product_configuration:
+                product: '상품'
+        promotion_coupon:
+            per_customer_usage_limit: '고객당 사용 제한'
+            reusable_from_cancelled_orders: '취소된 주문에서 재사용 가능'
         group:
-            name: 이름
-            roles: 역할
+            name: '이름'
+            roles: '역할'
         channel:
             billing_data:
-                city: 도시
-                company: 회사명
-                country: 국가
-                postcode: 우편번호
+                city: '도시'
+                company: '회사'
+                country: '국가'
+                postcode: '우편번호'
+                street: '주소'
+                tax_id: '세금 ID'
+            contact_email: '문의 이메일'
+            contact_phone_number: '문의 전화번호'
+            countries: '국가'
+            currencies: '통화'
+            currency_base: '기본 통화'
+            account_verification_required: '계정 인증이 필요합니까?'
+            hostname: '호스트명'
+            locale_default: '기본 로케일'
+            locales: '로케일'
+            menu_taxon: '메뉴 택슨'
+            payment_methods: '결제 방법'
+            shipping_address_in_checkout_required: '결제 시 주소 필수'
+            shipping_methods: '배송 방법'
+            shop_billing_data: '상점 청구 정보'
+            skipping_shipping_step_allowed: '배송 방법이 하나뿐이면 배송 단계 건너뛰기?'
+            skipping_payment_step_allowed: '결제 방법이 하나뿐이면 결제 단계 건너뛰기?'
+            tax_calculation_strategy: '세금 계산 전략'
+            tax_zone_default: '기본 세금 존'
+            taxonomies: '택소노미'
+            theme: '테마'
         image:
-            type: 타입
+            type: '유형'
+            file: '이미지'
         locale:
-            enabled: 사용
+            code: '코드'
+            enabled: '사용'
+        order_filter:
+            created_at_from: '이후 생성'
+            created_at_to: '이전에 생성'
+            number: '번호'
+            total_from: '최소 금액'
+            total_to: '최대 금액'
+            payment_state: '결제 상태'
+            channel: '모든 채널'
+        page:
+            body: '본문'
+            id: 'ID'
+            title: '제목'
         product:
-            enabled: 사용
+            images: '이미지'
+            restricted_zone: '제한 존'
+            short_description: '짧은 설명'
+            variant_selection_method: '바리아ント 선택 방법'
+            main_taxon: '메인 택슨'
+            channels: '채널'
+            enabled: '사용'
         product_filter:
-            name: 이름
+            name: '이름'
+            code: '코드'
+        product_variant:
+            tax_category: '세금 카테고리'
+            shipping_category: '배송 카테고리'
+        shipment_filter:
+            created_at_from: '이후 생성'
+            created_at_to: '이전에 생성'
+            number: '주문 번호'
+            shipping_address: '배송지 이름'
+            channel: '모든 채널'
+        payment_filter:
+            created_at_from: '이후 생성'
+            created_at_to: '이전에 생성'
+            number: '주문 번호'
+            billing_address: '청구지 이름'
+            channel: '모든 채널'
         shipping_method:
-            zone: 영역
+            zone: '존'
+        taxon:
+            code: '코드'
+            file: '이미지 선택'
+            images: '이미지'
+        taxonomy:
+            file: '이미지 선택'
         user:
-            billing_address: 청구지 주소
-            enabled: 활성
-            first_name: 이름
-            groups: 그룹
-            roles: 역할
-            last_name: 성
-            password: 비밀번호
+            billing_address: '청구 주소'
+            different_shipping_address: '다른 배송 주소를 사용하시겠습니까?'
+            enabled: '사용'
+            first_name: '이름'
+            groups: '그룹'
+            roles: '역할'
+            last_name: '성'
+            password: '비밀번호'
+            shipping_address: '배송 주소'
         user_filter:
-            query: 검색
+            query: '검색'
+        variant:
+            depth: '깊이'
+            height: '높이'
+            on_hand: '현재 재고'
+            price: '가격'
+            sku: 'SKU'
+            shipping_required: '배송 필요 여부'
+            weight: '무게'
+            width: '폭'
+            tracked_help: '이 옵션을 활성화하면 Sylius가 재고를 추적하며 재고가 0이 되면 판매를 중단합니다.'
+        attribute:
+            product_attribute_value:
+                attribute: '속성'
+                value: '값'
         guest:
-            email: 이메일
+            email: '이메일'
+        product_association:
+            product: '연관 상품'
+            type: '연관 유형'
         product_association_type:
-            name: 이름
+            name: '이름'
+        promotion_filter:
+            products: '상품 필터'
+            taxons: '택슨 필터'
+        promotion_rule:
+            customer_group:
+                group: '고객 그룹'
+            has_taxon:
+                taxons: '택슨'
+            product:
+                products: '상품'
+            total_of_items_from_taxon:
+                taxon: '택슨'
+                amount: '금액'
+        payment_method:
+            channels: '채널'
+        product_attribute:
+            position: '위치'
+        zone:
+            scopes:
+                shipping: '배송'
+                tax: '세금'
+
     installer:
         extensions:
-            off: false
-            on: true
+            header: '확장 모듈'
+            accelerator:
+                header: '가속기'
+                help: 'Zend OpCache를 활성화하세요(강력 권장).'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: '%extension% 확장 모듈을 설치하고 활성화하세요.'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: '멀티바이트 문자열'
+            off: '꺼짐'
+            on: '켜짐'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: '세션'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
+        filesystem:
+            header: '파일 시스템'
+            cache:
+                header: '캐시'
+                help: "권한 설정: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: '존재함'
+            logs:
+                header: '로그'
+                help: "권한 설정: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: '존재하지 않음'
+            not_writable: '쓰기 불가'
+            parameters:
+                header: 'parameters.yml'
+                help: "권한 설정: sudo chmod a+w %path%"
+            vendors: '벤더'
+            writable: '쓰기 가능'
         settings:
-            off: false
-            on: true
+            header: 'PHP 버전 및 설정'
+            any: '무관'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: "php.ini에서 'detect_unicode = Off'로 설정"
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: '비권장 아님'
+            off: '꺼짐'
+            on: '켜짐'
+            register_globals: 'register_globals'
+            session:
+                auto_start: 'session.auto_start'
+                auto_start_help: "php.ini에서 'session.auto_start = Off'로 설정"
+            short_open_tag: 'short_open_tag'
+            timezone: '타임존'
+            timezone_help: 'php.ini에서 "date.timezone" 설정 (예: date.timezone = "Asia/Seoul")'
+            timezone_deprecated:
+                header: '지원 중단된 타임존'
+                help: '타임존 %timezone% 은(는) 지원 중단되었습니다. php.ini를 수정하십시오 (지원 중단 타임존 목록 http://php.net/manual/en/timezones.others.php).'
+            version: 'PHP 버전'
+            version_recommended: '권장 PHP 버전'
+            version_help: 'Sylius는 %recommended% PHP 버전을 권장하며, 현재 버전은 %current% 입니다. 업그레이드를 권장합니다.'
+
+    shipping_method_resolver:
+        by_zones_and_channel: '존 및 채널별'

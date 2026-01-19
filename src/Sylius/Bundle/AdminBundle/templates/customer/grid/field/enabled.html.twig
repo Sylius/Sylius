@@ -1,0 +1,9 @@
+{% if data.user is not null %}
+    {% import "@SyliusAdmin/shared/helper/field/boolean.html.twig" as boolean %}
+
+    {{ boolean.default(data.user.enabled) }}
+{% else %}
+    <div class="text-center" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.guest'|trans }}">
+        {{ ux_icon('tabler:spy', { class: 'icon' }) }}
+    </div>
+{% endif %}

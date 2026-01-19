@@ -1,0 +1,21 @@
+{% set visible = options.visible is defined ? options.visible : true %}
+
+{% if visible %}
+    <div>
+        <span class="dropdown-header">{{ action.label|trans }}</span>
+        {% for channelPricing in data.channelPricings %}
+            {% set parameters = { 'productId': data.product.id, 'variantId': data.id, 'channelPricingId': channelPricing.id } %}
+            <a
+                class="dropdown-item"
+                href="{{ path('sylius_admin_channel_pricing_log_entry_index', parameters) }}"
+                {{ sylius_test_html_attribute('price-history-in-channel', channelPricing.channelCode) }}
+            >
+                {{ ux_icon('tabler:eye', { class: 'icon dropdown-item-icon'}) }}
+                <span>
+                    <span class="text-nowrap">{{ channelPricing.channelCode|sylius_channel_name }}</span>
+                </span>
+
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}

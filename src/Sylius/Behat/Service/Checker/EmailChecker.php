@@ -17,7 +17,7 @@ use Sylius\Behat\Service\Provider\EmailMessagesProviderInterface;
 use Symfony\Component\Mime\Email;
 use Webmozart\Assert\Assert;
 
-final class EmailChecker implements EmailCheckerInterface
+final readonly class EmailChecker implements EmailCheckerInterface
 {
     public function __construct(private EmailMessagesProviderInterface $emailMessagesProvider)
     {

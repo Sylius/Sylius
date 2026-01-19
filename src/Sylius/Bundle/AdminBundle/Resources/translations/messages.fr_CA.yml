@@ -1,0 +1,95 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        shipment_confirmation:
+            has_been_sent_using: 'a été envoyé en utilisant'
+            subject: 'Confirmation d’expédition'
+            thank_you_for_transaction: 'Merci pour votre transaction réussie.'
+            you_can_check_its_location_with_the_tracking_code: 'Vous pouvez suivre sa progression avec le code de repérage %tracking_code%.'
+            your_order_with_number: 'Votre commande numéro'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: 'Afficher le prix le plus bas des produits en rabais avant le rabais actuel ?'
+                period_for_which_the_lowest_price_is_calculated: 'Période pendant laquelle le prix le plus bas est calculé'
+            reset_password:
+                password:
+                    label: Nouveau mot de passe
+                    confirmation: Confirmer le nouveau mot de passe
+    menu:
+        admin:
+            main:
+                catalog:
+                    association_types: Types d’associations
+                    attributes: Attributs
+                    header: Catalogue
+                    inventory: Inventaire
+                    options: Options
+                    products: Produits
+                    taxons: Catégories
+                configuration:
+                    admin_users: Utilisateurs admin
+                    channels: Canaux
+                    countries: Pays
+                    currencies: Devises
+                    exchange_rates: Taux de change
+                    header: Configuration
+                    locales: Langues
+                    payment_methods: Méthodes de paiement
+                    shipping_categories: Catégories d’expédition
+                    shipping_methods: Méthodes de livraison
+                    tax_categories: Catégories de taxes
+                    tax_rates: Taux de taxes
+                    zones: Zones
+                marketing:
+                    cart_promotions: Promotions du panier
+                    catalog_promotions: Promotions du catalogue
+                    header: Marketing
+                    product_reviews: Avis sur les produits
+                    promotions: Promotions
+                customers:
+                    customers: Clients
+                    groups: Groupes
+                    header: Client
+                sales:
+                    header: Ventes
+                    orders: Commandes
+                official_support:
+                    header: Soutien officiel
+                    browse_plugins: Parcourir les modules
+                    sylius_plus: Sylius Plus
+                    professional_services: Services professionnels
+                    find_a_partner: Trouver un partenaire
+                    sylius_certification: Certification Sylius
+    ui:
+        catalog_promotion:
+            dates_details: Cette opération peut prendre un certain temps ! Veuillez prévoir un délai de 2 à 10 minutes à partir des dates spécifiées. Le temps dépend de la taille du catalogue.
+        channel:
+            account_verification_required_details: Si cette option est désactivée, des comptes pourront être créés et utilisés sans vérification de l’adresse courriel, ce qui pourrait permettre d’accéder aux données des commandes effectuées en tant qu’invité.
+        channel_pricing_history: 'Historique des prix des canaux'
+        channel_pricings: Prix du canal
+        gateway:
+            no_sca_support_notice: La passerelle de paiement choisie ne prend pas en charge l’authentification forte du client.
+            pay_pal_express_checkout_deprecation_notice: >
+                PayPal Express Checkout est désuet. Veuillez utiliser la nouvelle intégration de <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
+        lowest_price_before_discount: 'Prix le plus bas avant le rabais'
+        minimum_price_details: Prix minimum — seuil en dessous duquel aucune promotion ne peut réduire le prix. Utilisez ceci pour maintenir la rentabilité.
+        original_price_details: Prix original (aussi appelé prix barré) — prix de la variante du produit, affiché barré dans le catalogue. Sert de base aux calculs des prix actuels. S’il n’est pas défini, le système de promotions copiera la valeur du prix courant.
+        original_product_price_details: Prix original (aussi appelé prix barré) — prix du produit, affiché barré dans le catalogue. Sert de base aux calculs des prix actuels. S’il n’est pas défini, le système de promotions copiera la valeur du prix courant.
+        price_details: 'Prix — il s’agit du prix actuel de la variante de produit affichée dans le catalogue. Il peut être ajusté par les mécanismes internes, ex : promotions.'
+        product_price_details: 'Prix — il s’agit du prix actuel du produit affiché dans le catalogue. Il peut être ajusté par les mécanismes internes, ex : promotions.'
+        price_history: Historique des prix
+        product:
+            product_not_active_in_channel: Le produit n’est pas encore activé pour ce canal.
+        sales_summary: Sommaire des ventes
+        shipment_for_order: Expédition pour la commande
+        show_history_for_channel_pricing: 'Afficher l’historique des prix des canaux'
+        statistics:
+            day: Jour
+            lifetime: Durée de vie
+            month: Mois
+            week: Semaine
+            2weeks: 2 semaines
+            year: Année

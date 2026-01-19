@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        currency:
+            base: 'आधार मुद्रा'
+            code: 'नाम'
+            enabled: 'सक्रिय'
+            exchange_rate: 'विनिमय दर'
+        exchange_rate:
+            source_currency: 'स्रोत मुद्रा'
+            target_currency: 'लक्ष्य मुद्रा'
+            ratio: 'अनुपात'

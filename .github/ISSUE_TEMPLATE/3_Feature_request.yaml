@@ -1,0 +1,17 @@
+name: 🚀 Feature Request
+description: Share your ideas for new features and improvements in Sylius.
+body:
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: A clear and concise description of the new feature
+      validations:
+          required: true
+    - type: textarea
+      id: example
+      attributes:
+          label: Example
+          description: |
+                Provide a basic example demonstrating the new feature in action, including PHP code, YAML configuration, and other relevant elements.
+                If the feature modifies an existing one, include a straightforward before-and-after comparison.

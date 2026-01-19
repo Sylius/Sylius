@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShippingBundle\Validator\Constraint;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ShippingMethodRule extends Constraint
 {
     public string $invalidType = 'sylius.shipping_method.rule.invalid_type';

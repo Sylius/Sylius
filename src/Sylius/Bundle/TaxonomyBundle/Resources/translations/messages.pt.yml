@@ -4,9 +4,10 @@
 sylius:
     form:
         taxon:
-            description: Descrição
-            enabled: Ativado
-            name: Nome
-            parent: Pai
+            description: 'Descrição'
+            enabled: 'Ativo'
+            name: 'Nome'
+            parent: 'Pai'
+            slug: 'Slug'
         taxonomy:
-            name: Nome
+            name: 'Nome'

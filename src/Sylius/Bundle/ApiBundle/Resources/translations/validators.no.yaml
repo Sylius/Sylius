@@ -1,0 +1,53 @@
+sylius:
+    admin:
+        expired_password_reset_token: 'Passordtilbakestillingskoden er utløpt.'
+    account:
+        invalid_verification_token: 'Det finnes ingen butikkbruker med e-postbekreftelseskode %verificationToken%.'
+        is_verified: 'Kontoen med e-post %email% er allerede bekreftet.'
+    address:
+        without_country: 'Adresse uten land kan ikke eksistere.'
+    code:
+        not_blank: 'Vennligst oppgi en kode.'
+        invalid: 'Koden skal kun inneholde bokstaver, tall, bindestreker ("-") og understreker ("_").'
+    contact_request:
+        email_is_invalid: 'Den oppgitte e-posten er ugyldig.'
+    country:
+        not_exist: 'Landet %countryCode% finnes ikke.'
+    date_interval:
+        empty: 'Datointervallet kan ikke være tomt.'
+        invalid: 'Datointervallet er ikke et gyldig ISO 8601-intervall.'
+    date_time:
+        invalid: 'Dato/tid er ikke et gyldig ISO 8601-dato/tid i Y-m-d\TH:i:s-format.'
+    order:
+        not_empty: 'En tom ordre kan ikke behandles.'
+    payment:
+        not_found: 'Betalingen finnes ikke.'
+    payment_method:
+        cannot_change_payment_method_for_cancelled_order: 'Du kan ikke endre betalingsmetode for en kansellert ordre.'
+        not_available: 'Betalingsmetoden %name% er ikke tilgjengelig for denne ordren. Vennligst velg en annen.'
+        not_exist: 'Betalingsmetoden med kode %code% finnes ikke.'
+    payment_request:
+        action_not_available: 'Betalingsforespørselen (metodekode: %code%, betaling id: %id%) har ingen håndterer. Vennligst velg en annen betalingsmetode.'
+        not_available: 'Betalingsforespørselen støtter ikke denne handlingen.'
+    product:
+        not_exist: 'Produktet %productName% finnes ikke.'
+    product_variant:
+        not_exist: 'Produktvarianten %productVariantCode% finnes ikke.'
+        not_longer_available: 'Produktvarianten med navn %productVariantName% finnes ikke lenger.'
+        not_sufficient: 'Produktvarianten med kode %productVariantCode% har ikke tilstrekkelig lager.'
+        product_variant_with_name_not_sufficient: 'Produktvarianten med navn %productVariantName% har ikke tilstrekkelig lager.'
+        option_values:
+            single_value: 'Produktvarianten kan kun ha én verdi konfigurert per enkeltvalg.'
+    reset_password:
+        invalid_token: 'Passordtilbakestillingskoden %token% er ugyldig.'
+        token_expired: 'Passordtilbakestillingskoden er utløpt.'
+    shipment:
+        not_found: 'Forsendelsen finnes ikke.'
+        shipped: 'Du kan ikke sende en forsendelse som allerede er sendt.'
+    shipping_method:
+        not_found: 'Fraktmetoden med kode %code% finnes ikke.'
+        not_available: 'Fraktmetoden %name% er ikke tilgjengelig for denne ordren. Vennligst velg fraktmetode på nytt.'
+        shipping_address_not_found: 'Ordren må ha en leveringsadresse først.'
+    statistics:
+        end_date:
+            invalid: 'Startdato må være før sluttdato.'

@@ -33,13 +33,13 @@ interface IndexPageInterface extends PageInterface
 
     public function isEmpty(): bool;
 
-    public function getProductPrice(string $productName): string;
+    public function getProductPrice(string $productCode): string;
 
-    public function getProductOriginalPrice(string $productName): ?string;
+    public function getProductOriginalPrice(string $productCode): ?string;
 
     public function getProductPromotionLabel(string $productName): ?string;
 
-    public function isProductOnPageWithName(string $name): bool;
+    public function isProductOnPageWithName(string $productName): bool;
 
     public function hasProductsInOrder(array $productNames): bool;
 }

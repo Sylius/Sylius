@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ProductsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_preserves_query_param_when_redirecting_from_product_slug_to_product_code(): void
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
@@ -35,7 +37,7 @@ final class ProductsTest extends JsonApiTestCase
         $this->assertResponseCode($response, Response::HTTP_MOVED_PERMANENTLY);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_product_with_translations_in_default_locale(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -55,11 +57,8 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getGermanLocales
-     */
+    #[DataProvider('getGermanLocales')]
+    #[Test]
     public function it_returns_product_with_translations_in_locale_from_header(string $germanLocale): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -83,7 +82,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_products_collection(): void
     {
         $this->loadFixturesFromFiles(['product/product_variant_with_original_price.yaml']);
@@ -101,7 +100,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_products_collection_with_only_available_associations(): void
     {
         $this->loadFixturesFromFile('product/products_with_associations.yaml');
@@ -119,10 +118,10 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_products_with_reviews(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product/product.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -137,7 +136,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_product_item_with_only_available_associations(): void
     {
         $this->loadFixturesFromFile('product/products_with_associations.yaml');
@@ -150,20 +149,53 @@ final class ProductsTest extends JsonApiTestCase
 
         $this->assertResponse(
             $this->client->getResponse(),
-            'shop/product/get_product_with_default_locale_translation',
+            'shop/product/get_product_with_associations',
             Response::HTTP_OK,
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getPolishLocales
-     */
+    #[Test]
+    public function it_returns_associated_products_collection_by_association_type(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products?association[typeCode]=another_similar_products',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_associated_products_by_type_collection',
+            Response::HTTP_OK,
+        );
+    }
+
+    #[Test]
+    public function it_returns_associated_products_collection_by_association_owner(): void
+    {
+        $this->loadFixturesFromFile('product/products_with_associations.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products?association[ownerCode]=MUG',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'shop/product/get_associated_products_by_owner_collection',
+            Response::HTTP_OK,
+        );
+    }
+
+    #[DataProvider('getPolishLocales')]
+    #[Test]
     public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(
         string $polishLocale,
     ): void {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -177,10 +209,10 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_paginated_attributes_collection(): void
     {
-        $this->loadFixturesFromFiles(['channel.yaml', 'product/product_attribute.yaml']);
+        $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);
 
         $this->client->request(
             method: 'GET',
@@ -192,7 +224,7 @@ final class ProductsTest extends JsonApiTestCase
         $this->assertCount(2, json_decode($this->client->getResponse()->getContent(), true)['hydra:member']);
     }
 
-    public function getGermanLocales(): iterable
+    public static function getGermanLocales(): iterable
     {
         yield ['de_DE']; // Locale code syntax
         yield ['de-DE']; // RFC 4647 and RFC 3066
@@ -200,7 +232,7 @@ final class ProductsTest extends JsonApiTestCase
         yield ['de-de']; // RFC 4647 and RFC 3066
     }
 
-    public function getPolishLocales(): iterable
+    public static function getPolishLocales(): iterable
     {
         yield ['pl_PL']; // Locale code syntax
         yield ['pl-PL']; // RFC 4647 and RFC 3066

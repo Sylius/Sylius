@@ -2,35 +2,52 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Nemáte účet?'
+        register_here: 'Zaregistrujte se zde'
     email:
         order_confirmation:
-            has_been_successfully_placed: 'byl úspěšně umístěn.'
+            has_been_successfully_placed: 'byla úspěšně vytvořena.'
             subject: 'Potvrzení objednávky'
-            view_order_or_change_payment_method: 'Zobrazit objednávku nebo změnit způsob platby'
-            thank_you: 'Děkujeme za nákup v našem obchodě!'
-            your_order_number: 'Číslo vaší objednávky.'
+            view_order_or_change_payment_method: 'Zobrazit objednávku nebo změnit platební metodu'
+            thank_you: 'Děkujeme, že nakupujete v našem obchodě!'
+            your_order_number: 'Vaše objednávka č.'
         password_reset:
             hello: 'Ahoj'
-            reset_your_password: 'Resetovat heslo'
+            reset_your_password: 'Obnovte své heslo'
             subject: 'Obnovení hesla'
-            to_reset_your_password: 'Chcete-li obnovit své heslo - klikněte na odkaz níže'
+            to_reset_your_password: 'Pro obnovení hesla - klikněte na odkaz níže'
+            to_reset_your_password_token: 'Pro obnovení hesla - použijte token níže'
+            token: 'Váš token pro obnovení hesla je'
         user_registration:
-            start_shopping: 'Začít nakupovat'
+            start_shopping: 'Začněte nakupovat'
             subject: 'Registrace uživatele'
             welcome_to_our_store: 'Vítejte v našem obchodě!'
-            you_have_just_been_registered: 'Právě jste se zaregistrovali. Děkujeme'
+            you_have_just_been_registered: 'Byli jste právě zaregistrováni. Děkujeme'
         verification_token:
             hello: 'Ahoj'
             subject: 'Ověření e-mailové adresy'
             to_verify_your_email_address: 'Pro ověření vaší e-mailové adresy - klikněte na odkaz níže'
             verify_your_email_address: 'Ověřte svou e-mailovou adresu'
+    footer:
+        banner:
+            free_shipping_title: 'Doprava zdarma & Vrácení zboží'
+            free_shipping_content: 'Doprava zdarma na všechny objednávky'
+            guarantee_title: 'Garance vrácení peněz'
+            guarantee_content: '30 dní garance vrácení peněz'
+            multiple_payments_title: 'Více platebních metod'
+            multiple_payments_content: 'Akceptujeme kreditní karty a PayPal'
     homepage:
         about_us: 'O nás'
-        about_us_content: 'Vítejte v našem obchodě, Váš e-shop číslo jedna, který vám dává ty nejlepší produkty. Z naší nabídky si můžete vybrat ty nejlepší oblečení a boty. (<i>Tento obsah můžete upravit přepsáním klíče "sylius.homepage.about_us_content" ve vašem překladovém souboru</i>)'
-        banner_content: 'Brace yourself! Winter is coming'
-        newsletter: 'Odběr novinek'
-        newsletter_description: 'Přihlaste se k odběru našeho newsletteru a uvidíte nové nabídky, které na vás čekají! (<i>Můžete upravit tento obsah přepsáním klíče "sylius. homepage.newsletter_description" ve vašem překladovém souboru</i>)'
-        subscribe: 'Odebírat'
+        about_us_content: 'Vítejte v našem obchodě, vašem nejlepším online obchodě, který vám nabízí ty nejlepší produkty. Můžete si vybrat z těch nejlepších oblečení a bot z naší nabídky. (<i>Tento obsah můžete upravit přepsáním klíče "sylius.homepage.about_us_content" ve vašem překladovém souboru</i>)'
+        banner_content: 'Připravte se! Zima přichází'
+        banner_button: 'Podívejte se na novou kolekci'
+        carousel_header: 'Doporučené produkty'
+        latest_deals: 'Nejnovější nabídky'
+        new_collection: 'Nová kolekce'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Přihlaste se k odběru novinek a zjistěte nové nabídky, které na vás čekají! (<i>Tento obsah můžete upravit přepsáním klíče "sylius.homepage.newsletter_description" ve vašem překladovém souboru</i>)'
+        subscribe: 'Přihlásit se'
     lightbox:
         image_album_label: 'Obrázek %1 z %2'
     menu:
@@ -38,7 +55,8 @@ sylius:
             account:
                 address_book: 'Adresář'
                 change_password: 'Změnit heslo'
-                dashboard: 'Nástěnka'
+                dashboard: 'Přehled'
                 header: 'Váš účet'
                 order_history: 'Historie objednávek'
                 personal_information: 'Osobní údaje'
+    top_bar: 'Přihlaste se k našemu newsletteru a získejte -20% slevu'

@@ -1,0 +1,40 @@
+# This file is part of the Sylius package.
+
+sylius:
+    form:
+        address:
+            city: Town or city
+            company: Company
+            country: Country
+            first_name: Forename
+            last_name: Surname
+            phone_number: Telephone number
+            postcode: Postcode
+            street: Street and house number
+            province: County
+            zone: Zone
+        country:
+            add_province: Add county
+            name: Name
+            provinces: Counties
+            select: Choose
+            enabled: Enabled
+        province:
+            name: Name
+            abbreviation: Abbr.
+            select: Choose
+        zone:
+            add_member: Add member
+            members: Members
+            name: Name
+            type: Type
+            types:
+                country: Country
+                province: County
+                zone: Zone
+            scope: Scope
+            scopes:
+                all: All
+            select: Choose
+        zone_member:
+            select: Choose

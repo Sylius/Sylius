@@ -1,0 +1,28 @@
+sylius:
+    attribute:
+        name:
+            not_blank: 'Please enter the attribute name.'
+            min_length: 'The attribute name must be at least 1 character long.|The attribute name must be at least {{ limit }} characters long.'
+            max_length: 'The attribute name must not be longer than 1 character.|The attribute name must not be longer than {{ limit }} characters.'
+        code:
+            min_length: 'The attribute code must be at least 1 character long.|The attribute code must be at least {{ limit }} characters long.'
+            max_length: 'The attribute code must not be longer than 1 character.|The attribute code must not be longer than {{ limit }} characters.'
+            not_blank: 'Please enter the attribute code.'
+            regex: 'The attribute code may only contain letters, numbers, dashes, and underscores.'
+            unique: 'This code is already in use.'
+        configuration:
+            max_entries: 'The maximum entries value in the configuration must be greater than or equal to the minimum entries value.'
+            max_length: 'The maximum length in the configuration must be greater than or equal to the minimum length.'
+            min_entries: 'The minimum entries value in the configuration must be less than or equal to the number of added choices.'
+            multiple: 'The configuration must allow multiple values if minimum or maximum entries are defined.'
+        presentation:
+            not_blank: 'Please enter the attribute presentation.'
+            min_length: 'The attribute presentation must be at least 1 character long.|The attribute presentation must be at least {{ limit }} characters long.'
+            max_length: 'The attribute presentation must not be longer than 1 character.|The attribute presentation must not be longer than {{ limit }} characters.'
+        type:
+            unregistered: 'The attribute type "%type%" is not registered. Available attribute types: %available_types%.'
+    attribute_value:
+        attribute:
+            not_blank: 'Please select an attribute.'
+        value:
+            not_blank: 'Please enter an attribute value.'

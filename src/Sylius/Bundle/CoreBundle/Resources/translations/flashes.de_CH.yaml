@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    resource:
+        payment:
+            cannot_be_completed: 'Die Zahlung kann nicht abgeschlossen werden, da nicht genügend Lagerbestand des Produkts "%productVariantCode%" vorhanden ist.'

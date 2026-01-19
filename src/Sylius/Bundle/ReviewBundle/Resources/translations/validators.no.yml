@@ -4,10 +4,12 @@
 sylius:
     review:
         author:
-            already_exists: Denne e-postadressen er allerede registrert, vennligst logg inn eller bruk glemt passord.
+            already_exists: 'Denne e-posten er allerede registrert, vennligst logg inn eller bruk glemt passord.'
         comment:
-            not_blank: Anmeldelsen kan ikke være tom.
+            not_blank: 'Anmeldelseskommentaren må ikke være tom.'
+        rating:
+            not_blank: 'Du må velge vurdering for anmeldelsen.'
         title:
-            not_blank: Tittelen kan ikke være tom.
-            min_length: Tittelen må bestå av minst 2 tegn.
-            max_length: Tittelen kan ha maksimalt 255 tegn.
+            not_blank: 'Anmeldelsestittel må ikke være tom.'
+            min_length: 'Anmeldelsestittel må være minst 2 tegn lang.'
+            max_length: 'Anmeldelsestittel kan være maksimalt 255 tegn lang.'

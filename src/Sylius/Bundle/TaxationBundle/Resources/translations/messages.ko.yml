@@ -4,6 +4,13 @@
 sylius:
     form:
         tax_category:
-            name: 이름
+            description: '설명'
+            name: '이름'
         tax_rate:
-            name: 이름
+            amount: '금액'
+            calculator: '계산기'
+            category: '카테고리'
+            end_date: '종료일'
+            included_in_price: '가격에 포함?'
+            name: '이름'
+            start_date: '시작일'

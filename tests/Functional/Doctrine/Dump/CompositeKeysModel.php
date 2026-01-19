@@ -13,36 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Doctrine\Dump;
 
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Id;
-use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @Entity
- *
- * @Table(name="composite_keys_model")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'composite_keys_model')]
 class CompositeKeysModel
 {
     public function __construct(
-        /**
-         * @Column(length=250)
-         *
-         * @Id
-         */
+        #[ORM\Id]
+        #[ORM\Column(length: 250)]
         public string $email,
-
-        /**
-         * @Column(type="string", name="organization_name")
-         *
-         * @Id
-         */
+        #[ORM\Id]
+        #[ORM\Column(name: 'organization_name', type: 'string')]
         public string $organizationName,
-
-        /**
-         * @Column(type="string", name="description")
-         */
+        #[ORM\Column(name: 'description', type: 'string')]
         public string $description,
     ) {
     }

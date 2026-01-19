@@ -4,21 +4,21 @@
 sylius:
     form:
         user:
-            email: Adresă e-mail
-            enabled: Activat
+            email: 'Email'
+            enabled: 'Activat'
             password:
-                label: Parolă
-                confirmation: Verificare
-            remember_me: Ţine-mă minte
-            shipping_address: Adresă de livrare
-            username: Nume de utilizator
-            verified: Verificat
+                label: 'Parolă'
+                confirmation: 'Verificare'
+            remember_me: 'Ține-mă minte'
+            shipping_address: 'Adresă livrare'
+            username: 'Nume utilizator'
+            verified: 'Verificat'
         user_filter:
-            query: Căutare
+            query: 'Caută'
         user_change_password:
-            confirmation: Confirmare
-            current: Parola actuală
-            new: Parolă nouă
+            confirmation: 'Confirmare'
+            current: 'Parola curentă'
+            new: 'Parolă nouă'
         user_reset_password:
-            confirmation: Confirmare
-            new: Parolă nouă
+            confirmation: 'Confirmare'
+            new: 'Parolă nouă'

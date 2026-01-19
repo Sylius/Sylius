@@ -27,14 +27,14 @@ final class PriceRangeFilterConfigurationType extends AbstractType
             ->add('min', MoneyType::class, [
                 'required' => false,
                 'constraints' => [
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
+                    new Type(type: 'numeric', groups: ['sylius']),
                 ],
                 'currency' => $options['currency'],
             ])
             ->add('max', MoneyType::class, [
                 'required' => false,
                 'constraints' => [
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
+                    new Type(type: 'numeric', groups: ['sylius']),
                 ],
                 'currency' => $options['currency'],
             ])

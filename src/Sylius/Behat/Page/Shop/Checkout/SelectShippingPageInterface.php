@@ -13,17 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface SelectShippingPageInterface extends SymfonyPageInterface
+interface SelectShippingPageInterface extends SyliusPageInterface
 {
     public function selectShippingMethod(string $shippingMethod): void;
 
     public function getShippingMethods(): array;
 
     public function getSelectedShippingMethodName(): ?string;
-
-    public function hasNoShippingMethodsMessage(): bool;
 
     public function hasShippingMethodFee(string $shippingMethodName, string $fee): bool;
 
@@ -39,9 +37,9 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
 
     public function getValidationMessageForShipment(): string;
 
-    public function hasNoAvailableShippingMethodsWarning(): bool;
+    public function hasNoAvailableShippingMethodsMessage(): bool;
 
-    public function isNextStepButtonUnavailable(): bool;
+    public function isNextStepButtonEnabled(): bool;
 
     public function hasShippingMethod(string $shippingMethodName): bool;
 }

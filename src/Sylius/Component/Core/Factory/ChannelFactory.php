@@ -17,7 +17,6 @@ use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @template T of ChannelInterface
@@ -28,21 +27,13 @@ final class ChannelFactory implements ChannelFactoryInterface
 {
     /**
      * @param FactoryInterface<T> $decoratedFactory
-     * @param FactoryInterface<ChannelPriceHistoryConfigInterface>|null $channelPriceHistoryConfigFactory
+     * @param FactoryInterface<ChannelPriceHistoryConfigInterface> $channelPriceHistoryConfigFactory
      */
     public function __construct(
         private FactoryInterface $decoratedFactory,
         private string $defaultCalculationStrategy,
-        private ?FactoryInterface $channelPriceHistoryConfigFactory = null,
+        private FactoryInterface $channelPriceHistoryConfigFactory,
     ) {
-        if (null === $this->channelPriceHistoryConfigFactory) {
-            trigger_deprecation(
-                'sylius/core',
-                '1.13',
-                'Not passing a $channelPriceHistoryConfigFactory to %s constructor is deprecated and will be prohibited in Sylius 2.0.',
-                self::class,
-            );
-        }
     }
 
     /** @inheritdoc */
@@ -51,11 +42,9 @@ final class ChannelFactory implements ChannelFactoryInterface
         $channel = $this->decoratedFactory->createNew();
         $channel->setTaxCalculationStrategy($this->defaultCalculationStrategy);
 
-        if (null !== $this->channelPriceHistoryConfigFactory) {
-            /** @var ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig */
-            $channelPriceHistoryConfig = $this->channelPriceHistoryConfigFactory->createNew();
-            $channel->setChannelPriceHistoryConfig($channelPriceHistoryConfig);
-        }
+        /** @var ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig */
+        $channelPriceHistoryConfig = $this->channelPriceHistoryConfigFactory->createNew();
+        $channel->setChannelPriceHistoryConfig($channelPriceHistoryConfig);
 
         return $channel;
     }
@@ -64,7 +53,6 @@ final class ChannelFactory implements ChannelFactoryInterface
     {
         $channel = $this->createNew();
         $channel->setName($name);
-        Assert::isInstanceOf($channel, ChannelInterface::class);
 
         return $channel;
     }

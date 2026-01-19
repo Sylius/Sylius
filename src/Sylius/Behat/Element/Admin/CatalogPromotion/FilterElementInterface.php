@@ -31,7 +31,5 @@ interface FilterElementInterface
 
     public function specifyEndDateTo(string $date): void;
 
-    public function search(string $phrase): void;
-
     public function filter(): void;
 }

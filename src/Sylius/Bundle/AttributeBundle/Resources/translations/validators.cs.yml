@@ -4,24 +4,28 @@
 sylius:
     attribute:
         name:
-            not_blank: Prosím vložte název vlastnosti.
-            min_length: Název vlastnosti musí mít alespoň 1 znak.|Název vlastnosti musí mít alespoň {{ limit }} znaků.
-            max_length: Název atributu nesmí být delší než 1 znak. |Název atributu nesmí být delší než {{ limit }} znaků.
+            not_blank: 'Prosím zadejte název atributu.'
+            min_length: 'Název atributu musí mít alespoň 1 znak.|Název atributu musí mít alespoň {{ limit }} znaků.'
+            max_length: 'Název atributu nesmí být delší než 1 znak.|Název atributu nesmí být delší než {{ limit }} znaků.'
         code:
-            not_blank: Prosím zadejte kód vlastnosti.
-            regex: Kód země může tvořit pouze písmena, číslice, pomlčky a podtržítka.
-            unique: Tento kód je již používán.
+            min_length: 'Kód atributu musí mít alespoň 1 znak.|Kód atributu musí mít alespoň {{ limit }} znaků.'
+            max_length: 'Kód atributu nesmí být delší než 1 znak.|Kód atributu nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód atributu.'
+            regex: 'Kód atributu může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            unique: 'Tento kód je již použit.'
         configuration:
-            max_entries: Konfigurace maximálně možných vybraných hodnot musí být větší nebo rovna konfiguraci minimálně možných vybraných hodnot.
-            max_length: Konfigurace maximální délky hodnoty musí být větší nebo rovna konfiguraci minimální délky hodnoty.
-            min_entries: Konfigurace minimálně možných vybraných hodnot musí být menší nebo rovna konfiguraci maximálně možných vybraných hodnot.
-            multiple: Konfigurace násobku musí být pravdivá, pokud jsou zadány hodnoty minimálních nebo maximálních hodnot.
+            max_entries: 'Hodnota maximálního počtu položek v konfiguraci musí být větší nebo rovna hodnotě minimálního počtu položek.'
+            max_length: 'Maximální délka konfigurace musí být větší nebo rovna minimální délce.'
+            min_entries: 'Hodnota minimálního počtu položek v konfiguraci musí být nižší nebo rovna počtu přidaných možností.'
+            multiple: 'Konfigurace pro více položek musí být nastavena na true, pokud jsou specifikovány hodnoty pro minimální nebo maximální počet položek.'
         presentation:
-            not_blank: Prosím zadejte vlastnost prezentace.
-            min_length: Atribut musí být nejméně 1 znak. |Atribut musí mít alespoň {{ limit }} znaků.
-            max_length: Atribut prezentace nesmí být delší než 1 znak. |Atribut nesmí být delší než {{ limit }} znaků.
+            not_blank: 'Prosím zadejte prezentaci atributu.'
+            min_length: 'Prezentace atributu musí mít alespoň 1 znak.|Prezentace atributu musí mít alespoň {{ limit }} znaků.'
+            max_length: 'Prezentace atributu nesmí být delší než 1 znak.|Prezentace atributu nesmí být delší než {{ limit }} znaků.'
+        type:
+            unregistered: 'Typ atributu "%type%" není registrován. Dostupné typy atributů: %available_types%.'
     attribute_value:
         attribute:
-            not_blank: Prosím zvolte vlastnosti.
+            not_blank: 'Prosím vyberte atribut.'
         value:
-            not_blank: Prosím zadejte hodnotu vlastnosti.
+            not_blank: 'Prosím zadejte hodnotu atributu.'

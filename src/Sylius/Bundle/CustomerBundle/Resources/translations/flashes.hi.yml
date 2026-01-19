@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    customer:
+        register: 'पंजीकरण के लिए धन्यवाद, अपना खाता सत्यापित करने के लिए अपना ई-मेल जाँचें।'

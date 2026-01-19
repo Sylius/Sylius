@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        code:
+            max_length: 'कोड {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+            not_blank: 'कृपया चैनल कोड दर्ज करें।'
+            regex: 'चैनल कोड केवल अक्षर, संख्या, डैश और अंडरस्कोर से बना हो सकता है।'
+            unique: 'चैनल कोड अद्वितीय होना चाहिए।'
+        name:
+            not_blank: 'कृपया चैनल नाम दर्ज करें।'
+            max_length: 'चैनल नाम {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+        color:
+            max_length: 'रंग {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+        hostname:
+            max_length: 'होस्टनेम {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'

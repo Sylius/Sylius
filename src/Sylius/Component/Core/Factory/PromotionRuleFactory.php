@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Factory;
 
+use Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
-use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
@@ -73,6 +73,7 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->createPromotionRule(ContainsProductRuleChecker::TYPE, ['product_code' => $productCode]);
     }
 
+    /** @param array<string, mixed> $configuration */
     private function createPromotionRule(string $type, array $configuration): PromotionRuleInterface
     {
         /** @var PromotionRuleInterface $rule */

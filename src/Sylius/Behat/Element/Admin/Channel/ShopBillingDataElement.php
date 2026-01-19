@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Channel;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-final class ShopBillingDataElement extends Element implements ShopBillingDataElementInterface
+class ShopBillingDataElement extends SyliusElement implements ShopBillingDataElementInterface
 {
     public function specifyCompany(string $company): void
     {
@@ -58,12 +58,12 @@ final class ShopBillingDataElement extends Element implements ShopBillingDataEle
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'city' => '#sylius_channel_shopBillingData_city',
-            'company' => '#sylius_channel_shopBillingData_company',
-            'country_code' => '#sylius_channel_shopBillingData_countryCode',
-            'postcode' => '#sylius_channel_shopBillingData_postcode',
-            'street' => '#sylius_channel_shopBillingData_street',
-            'tax_id' => '#sylius_channel_shopBillingData_taxId',
+            'city' => '#sylius_admin_channel_shopBillingData_city',
+            'company' => '#sylius_admin_channel_shopBillingData_company',
+            'country_code' => '#sylius_admin_channel_shopBillingData_countryCode',
+            'postcode' => '#sylius_admin_channel_shopBillingData_postcode',
+            'street' => '#sylius_admin_channel_shopBillingData_street',
+            'tax_id' => '#sylius_admin_channel_shopBillingData_taxId',
         ]);
     }
 }

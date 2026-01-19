@@ -29,20 +29,20 @@ use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
-final class ChannelContext implements Context
+final readonly class ChannelContext implements Context
 {
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
      * @param FactoryInterface<ShopBillingDataInterface> $shopBillingDataFactory
      */
     public function __construct(
-        private readonly SharedStorageInterface $sharedStorage,
-        private readonly ChannelContextSetterInterface $channelContextSetter,
-        private readonly DefaultChannelFactoryInterface $unitedStatesChannelFactory,
-        private readonly DefaultChannelFactoryInterface $defaultChannelFactory,
-        private readonly ChannelRepositoryInterface $channelRepository,
-        private readonly ObjectManager $channelManager,
-        private readonly FactoryInterface $shopBillingDataFactory,
+        private SharedStorageInterface $sharedStorage,
+        private ChannelContextSetterInterface $channelContextSetter,
+        private DefaultChannelFactoryInterface $unitedStatesChannelFactory,
+        private DefaultChannelFactoryInterface $defaultChannelFactory,
+        private ChannelRepositoryInterface $channelRepository,
+        private ObjectManager $channelManager,
+        private FactoryInterface $shopBillingDataFactory,
     ) {
     }
 
@@ -71,9 +71,7 @@ final class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given the store operates on a single channel in "United States"
-     */
+    #[Given('the store operates on a single channel in "United States"')]
     public function storeOperatesOnASingleChannelInUnitedStates(): void
     {
         $defaultData = $this->unitedStatesChannelFactory->create();
@@ -82,9 +80,7 @@ final class ChannelContext implements Context
         $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
-    /**
-     * @Given the store operates on a single channel in the "United States" named :channelName
-     */
+    #[Given('the store operates on a single channel in the "United States" named :channelName')]
     public function storeOperatesOnASingleChannelInTheUnitedStatesNamed(string $channelName): void
     {
         $channelCode = StringInflector::nameToLowercaseCode($channelName);
@@ -117,13 +113,11 @@ final class ChannelContext implements Context
         $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
-    /**
-     * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)"$/
-     * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
-     * @Given /^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency and with hostname "([^"]+)"$/
-     * @Given the store (also) operates on a(nother) channel named :channelName with hostname :hostname
-     * @Given the store operates on a channel identified by :channelCode code
-     */
+    #[Given('/^the store(?:| also) operates on (?:a|another) channel named "([^"]+)"$/')]
+    #[Given('/^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/')]
+    #[Given('/^the store(?:| also) operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency and with hostname "([^"]+)"$/')]
+    #[Given('the store (also) operates on a(nother) channel named :channelName with hostname :hostname')]
+    #[Given('the store operates on a channel identified by :channelCode code')]
     public function theStoreOperatesOnAChannelNamed(
         ?string $channelName = null,
         ?string $currencyCode = null,
@@ -293,12 +287,12 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
      * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
      * @When customer view shop on :channel channel
-     * @When I am in the :channel channel
      */
-    public function iChangeMyCurrentChannelTo(ChannelInterface $channel): void
+    #[Given('/^I changed my current (channel to "([^"]+)")$/')]
+    #[Given('I am in the :channel channel')]
+    public function iChangedMyCurrentChannelTo(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('channel', $channel);
         $this->sharedStorage->set('hostname', $channel->getHostname());

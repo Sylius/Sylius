@@ -1,18 +1,22 @@
 {
-    "@context": "\/api\/v2\/contexts\/ConstraintViolationList",
-    "@type": "ConstraintViolationList",
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
-    "hydra:description": @string@,
+    "hydra:description": "@string@",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.optional()",
+    "status": 422,
     "violations": [
         {
             "propertyPath": "actions[0].configuration[WEB][amount]",
             "message": "This value should be of type numeric.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[1].configuration[WEB][amount]",
             "message": "This field is missing.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[1].configuration[WEB][filters]",
@@ -22,22 +26,24 @@
         {
             "propertyPath": "actions[2].configuration[percentage]",
             "message": "The percentage discount must be between 0% and 100%.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[3].configuration[WEB][percentage]",
             "message": "The percentage discount must be between 0% and 100%.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[4].configuration[percentage]",
             "message": "This field is missing.",
-            "code": @string@
+            "code": "@string@"
         },
         {
             "propertyPath": "actions[5].type",
             "message": "Promotion action type is invalid. Available action types are order_fixed_discount, unit_fixed_discount, order_percentage_discount, unit_percentage_discount, shipping_percentage_discount.",
             "code": null
         }
-    ]
+    ],
+    "detail": "@string@",
+    "type": "\/validation_errors\/@string@"
 }

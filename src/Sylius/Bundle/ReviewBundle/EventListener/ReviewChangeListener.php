@@ -18,9 +18,9 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-final class ReviewChangeListener
+final readonly class ReviewChangeListener
 {
-    public function __construct(private readonly ReviewableRatingUpdaterInterface $averageRatingUpdater)
+    public function __construct(private ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {
     }
 

@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    payment:
+        authorized: 'भुगतान सफलतापूर्वक अधिकृत किया गया है।'
+        cancelled: 'भुगतान रद्द कर दिया गया है।'
+        completed: 'भुगतान पूर्ण हो गया है।'
+        failed: 'भुगतान विफल हो गया है।'
+        processing: 'भुगतान प्रसंस्करण में है।'
+        refunded: 'भुगतान सफलतापूर्वक वापस कर दिया गया है।'
+        unknown: 'भुगतान में अज्ञात समस्या उत्पन्न हुई।'

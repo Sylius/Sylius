@@ -20,8 +20,10 @@ final class TableRenderer
 {
     private Table $table;
 
+    /** @var array<string>|null */
     private ?array $headers = null;
 
+    /** @var array<mixed> */
     private array $rows = [];
 
     private ?string $label = null;
@@ -31,11 +33,13 @@ final class TableRenderer
         $this->table = new Table($output);
     }
 
+    /** @param array<mixed> $headers */
     public function setHeaders(array $headers): void
     {
         $this->headers = $headers;
     }
 
+    /** @param array<mixed> $row */
     public function addRow(array $row): void
     {
         $this->rows[] = $row;

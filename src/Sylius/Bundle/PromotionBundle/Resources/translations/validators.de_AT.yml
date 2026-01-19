@@ -1,0 +1,78 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    catalog_promotion:
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            unique: 'Die Katalogaktion mit dem angegebenen Code existiert bereits.'
+            regex: 'Der Katalogaktionscode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            not_blank: 'Bitte geben Sie den Katalogaktionscode ein.'
+        date:
+            greater_than_start_date: 'Das Enddatum kann nicht vor dem Startdatum festgelegt werden.'
+        name:
+            max_length: 'Der Name der Katalogaktion darf höchstens {{ limit }} Zeichen lang sein.'
+            min_length: 'Der Name der Katalogaktion muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Katalogaktion ein.'
+        state:
+            processing: 'Die Katalogaktion kann nicht bearbeitet werden, da sie derzeit verarbeitet wird.'
+    catalog_promotion_action:
+        type:
+            not_blank: 'Bitte wählen Sie einen Aktionstyp aus.'
+            invalid: 'Der Aktionstyp der Katalogaktion ist ungültig. Verfügbare Typen sind {{ available_action_types }}.'
+        invalid_type: 'Der Aktionstyp der Katalogaktion ist ungültig. Bitte wählen Sie einen gültigen Typ aus.'
+        percentage_discount:
+            not_in_range: 'Der prozentuale Rabattbetrag muss zwischen 0% und 100% liegen.'
+            not_number_or_empty: 'Der prozentuale Rabattbetrag muss eine Zahl sein und darf nicht leer sein.'
+            not_valid: 'Der prozentuale Rabattbetrag muss konfiguriert werden.'
+    catalog_promotion_scope:
+        type:
+            not_blank: 'Bitte wählen Sie einen Umfangstyp aus.'
+            invalid: 'Der Umfangstyp der Katalogaktion ist ungültig. Verfügbare Typen sind {{ available_scope_types }}.'
+    promotion:
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            unique: 'Die Promotion mit dem angegebenen Code existiert bereits.'
+            regex: 'Der Promotion-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            not_blank: 'Bitte geben Sie den Promotion-Code ein.'
+        description:
+            max_length: 'Die Beschreibung der Promotion darf höchstens 1 Zeichen lang sein.|Die Beschreibung der Promotion darf höchstens {{ limit }} Zeichen lang sein.'
+            min_length: 'Die Beschreibung der Promotion muss mindestens 1 Zeichen lang sein.|Die Beschreibung der Promotion muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie eine Beschreibung für die Promotion ein.'
+        end_date_cannot_be_set_prior_start_date: 'Das Enddatum kann nicht vor dem Startdatum festgelegt werden.'
+        is_invalid: 'Die Promotion ist ungültig.'
+        name:
+            max_length: 'Der Name der Promotion darf höchstens 1 Zeichen lang sein.|Der Name der Promotion darf höchstens {{ limit }} Zeichen lang sein.'
+            min_length: 'Der Name der Promotion muss mindestens 1 Zeichen lang sein.|Der Name der Promotion muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Namen der Promotion ein.'
+    promotion_action:
+        invalid_type: 'Der Aktionstyp der Promotion ist ungültig. Verfügbare Aktionstypen sind {{ available_action_types }}.'
+        percentage_discount_configuration:
+            not_in_range: 'Der prozentuale Rabatt muss zwischen 0% und 100% liegen.'
+    promotion_rule:
+        invalid_type: 'Der Regeltyp der Promotion ist ungültig. Verfügbare Regeltypen sind {{ available_rule_types }}.'
+    promotion_coupon:
+        code:
+            max_length: 'Der Code darf höchstens {{ limit }} Zeichen lang sein.'
+            min_length: 'Der Coupon-Code muss mindestens 1 Zeichen lang sein.|Der Coupon-Code muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Coupon-Code ein.'
+            regex: 'Der Coupon-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Dieser Coupon existiert bereits.'
+        is_invalid: 'Der Coupon-Code ist ungültig.'
+        promotion:
+            not_blank: 'Bitte geben Sie eine Promotion für diesen Coupon an.'
+            not_coupon_based: 'Nur Coupon-basierte Promotionen können Coupons haben.'
+        usage_limit:
+            min: 'Das Nutzungsbegrenzungslimit für Coupons muss mindestens {{ limit }} betragen.'
+    promotion_coupon_generator_instruction:
+        amount:
+            min: 'Die Anzahl der zu generierenden Coupons muss mindestens {{ limit }} betragen.'
+            not_blank: 'Bitte geben Sie die Anzahl der zu generierenden Coupons ein.'
+        code_length:
+            min: 'Der Coupon-Code muss mindestens {{ limit }} Zeichen lang sein.'
+            max: 'Der Coupon-Code darf höchstens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie die Länge des Coupon-Codes ein.'
+            not_in_range: 'Die Coupon-Code-Länge muss zwischen {{ min }} und {{ max }} liegen.'
+        possible_generation_amount: 'Ungültige Coupon-Code-Länge oder -Anzahl. Es ist nicht möglich, %expectedAmount% einzigartige Coupons mit einer Code-Länge von %codeLength% zu generieren. Die mögliche Anzahl an zu generierenden Coupons ist %possibleAmount%.'
+        usage_limit:
+            min: 'Das Nutzungsbegrenzungslimit der generierten Coupons muss mindestens {{ limit }} betragen.'

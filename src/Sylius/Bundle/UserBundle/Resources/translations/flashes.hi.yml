@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        expire_password_reset_token: 'पुनर्स्थापित पासवर्ड टोकन की अवधि समाप्त हो गई है।'
+        change_password: 'आपका पासवर्ड सफलतापूर्वक बदल दिया गया है!'
+        reset_password: 'आपका पासवर्ड सफलतापूर्वक रीसेट हो गया है!'
+        reset_password_request: 'यदि आपने जो ईमेल निर्दिष्ट किया है वह हमारे सिस्टम में मौजूद है, तो हमने वहां एक निर्देश भेजा है कि आप अपना पासवर्ड कैसे रीसेट कर सकते हैं।'
+        verify_email: 'आपका ईमेल सफलतापूर्वक सत्यापित हो गया है।'
+        verify_email_by_invalid_token: 'सत्यापन टोकन अमान्य है।'
+        verify_email_request: 'सत्यापन लिंक के साथ एक ईमेल आपके ईमेल पते पर भेज दिया गया है।'
+        verify_no_user: 'कोई लॉग इन उपयोगकर्ता नहीं है।'
+        verify_verified_email: 'आपका ईमेल पहले से ही सत्यापित है।'

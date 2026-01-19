@@ -3,5 +3,8 @@
 
 sylius:
     order_item:
+        product_variant:
+            not_blank: 'Variant produktu nebol poskytnutý.'
         quantity:
-            min: Počet položiek v objednávke nemôže byť nižší ako 1.
+            min: 'Množstvo položky objednávky nemôže byť nižšie ako 1.'
+            not_blank: 'Množstvo nebolo poskytnuté.'

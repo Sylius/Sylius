@@ -1,0 +1,6 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.payment_request.index.content.header':
+            breadcrumbs:
+                template: '@SyliusAdmin/payment_request/index/content/header/breadcrumbs.html.twig'
+                priority: 0

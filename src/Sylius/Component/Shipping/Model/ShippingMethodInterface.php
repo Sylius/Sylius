@@ -50,7 +50,7 @@ interface ShippingMethodInterface extends
 
     public function getCategory(): ?ShippingCategoryInterface;
 
-    public function setCategory(?ShippingCategoryInterface $category);
+    public function setCategory(?ShippingCategoryInterface $category): void;
 
     /**
      * Get the one of matching requirements.
@@ -68,13 +68,13 @@ interface ShippingMethodInterface extends
 
     public function setCalculator(?string $calculator): void;
 
+    /** @return array<string, mixed> */
     public function getConfiguration(): array;
 
+    /** @param array<string, mixed> $configuration */
     public function setConfiguration(array $configuration): void;
 
-    /**
-     * @return Collection<array-key, ShippingMethodRuleInterface>
-     */
+    /** @return Collection<array-key, ShippingMethodRuleInterface> */
     public function getRules(): Collection;
 
     public function hasRules(): bool;
@@ -85,8 +85,6 @@ interface ShippingMethodInterface extends
 
     public function removeRule(ShippingMethodRuleInterface $rule): void;
 
-    /**
-     * @return ShippingMethodTranslationInterface
-     */
+    /** @return ShippingMethodTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface;
 }

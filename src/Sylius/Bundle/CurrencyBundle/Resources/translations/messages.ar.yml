@@ -6,9 +6,9 @@ sylius:
         currency:
             base: العملة الأساسية
             code: الاسم
-            enabled: مُمكّن
+            enabled: مفعّل
             exchange_rate: سعر الصرف
         exchange_rate:
             source_currency: العملة المصدر
-            target_currency: العملة المستهدفة
+            target_currency: العملة الهدف
             ratio: النسبة

@@ -1,0 +1,34 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    attribute:
+        name:
+            not_blank: Veuillez entrer un nom d'attribut.
+            min_length: Le nom d'attribut doit contenir au moins 1 caractère.|Le nom d'attribut doit contenir au moins {{ limit }} caractères.
+            max_length: Le nom d'attribut ne peut pas contenir plus de 1 caractère.|Le nom d'attribut ne peut pas contenir plus de {{ limit }} caractères.
+        code:
+            not_blank: Entrez le code de l'attribut.
+            regex: Le code de l'attribut peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
+            unique: Ce code est déjà utilisé.
+        configuration:
+            max_entries: La valeur des entrées max de configuration doit être supérieure ou égale à la valeur minimale des entrées.
+            max_length: La longueur maximale de la configuration doit être supérieure ou égale à la longueur minimale.
+            min_entries: La valeur minimale des entrées de configuration doit être inférieure ou égale au nombre de choix ajoutés.
+            multiple: Le multiple de configuration doit être vrai si les valeurs d'entrées min ou max sont spécifiées.
+        presentation:
+            not_blank: Veuillez entrer une description de l'attribut.
+            min_length: La description de l'attribut doit contenir au moins 1 caractère.|La description de l'attribut doit contenir au moins {{ limit }} caractères.
+            max_length: La description de l'attribut ne doit pas contenir plus de 1 caractère.|La description de l'attribut ne doit pas contenir plus de {{ limit }} caractères.
+        type:
+            unregistered: Le type d'attribut "%type%" n'est pas enregistré.
+    attribute_value:
+        attribute:
+            not_blank: Veuillez sélectionner un attribut.
+        value:
+            not_blank: Veuillez entrer une valeur d'attribut.
+    translation:
+        locale:
+            not_blank: Vous devez entrer une valeur.
+            invalid: Ce paramètre régional n'est pas valide.
+            unique: Une traduction pour la locale {{ value }} existe déjà.

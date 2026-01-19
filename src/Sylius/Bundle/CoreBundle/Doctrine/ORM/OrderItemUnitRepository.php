@@ -25,7 +25,7 @@ use Sylius\Component\Core\Repository\OrderItemUnitRepositoryInterface;
  */
 class OrderItemUnitRepository extends EntityRepository implements OrderItemUnitRepositoryInterface
 {
-    public function findOneByCustomer($id, CustomerInterface $customer): ?OrderItemUnitInterface
+    public function findOneByCustomer(mixed $id, CustomerInterface $customer): ?OrderItemUnitInterface
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.orderItem', 'orderItem')

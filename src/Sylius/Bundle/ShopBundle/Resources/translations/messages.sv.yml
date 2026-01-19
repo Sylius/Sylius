@@ -2,24 +2,61 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Har du inget konto?'
+        register_here: 'Registrera dig här'
     email:
         order_confirmation:
-            subject: 'Beställningsbekräftelse'
+            has_been_successfully_placed: 'har lagts framgångsrikt.'
+            subject: 'Orderbekräftelse'
             view_order_or_change_payment_method: 'Visa order eller ändra betalningsmetod'
+            thank_you: 'Tack för att du handlat i vår butik!'
+            your_order_number: 'Ditt ordernummer'
         password_reset:
             hello: 'Hej'
-            subject: 'Återställ lösenord'
+            reset_your_password: 'Återställ ditt lösenord'
+            subject: 'Återställning av lösenord'
+            to_reset_your_password: 'För att återställa ditt lösenord – klicka på länken nedan'
+            to_reset_your_password_token: 'För att återställa ditt lösenord – använd token nedan'
+            token: 'Din token för lösenordsåterställning är'
+        user_registration:
+            start_shopping: 'Börja handla'
+            subject: 'Användarregistrering'
+            welcome_to_our_store: 'Välkommen till vår butik!'
+            you_have_just_been_registered: 'Du har just registrerats. Tack'
         verification_token:
             hello: 'Hej'
-            subject: 'E-postadress verifikation'
+            subject: 'Verifiering av e-postadress'
+            to_verify_your_email_address: 'För att verifiera din e-postadress – klicka på länken nedan'
+            verify_your_email_address: 'Verifiera din e-postadress'
+    footer:
+        banner:
+            free_shipping_title: 'Fri frakt & retur'
+            free_shipping_content: 'Fri frakt på alla beställningar'
+            guarantee_title: 'Pengarna tillbaka-garanti'
+            guarantee_content: '30 dagars pengarna tillbaka-garanti'
+            multiple_payments_title: 'Flera betalningsmetoder'
+            multiple_payments_content: 'Vi accepterar kreditkort och PayPal'
+    homepage:
+        about_us: 'Om oss'
+        about_us_content: 'Välkommen till vår butik, din förstklassiga nätbutik som erbjuder dig de allra bästa produkterna. Du kan välja bland de bästa kläderna och skorna i vårt sortiment. (<i>Du kan ändra detta innehåll genom att överskrida nyckeln "sylius.homepage.about_us_content" i din översättningsfil</i>)'
+        banner_content: 'Gör dig redo! Vintern kommer'
+        banner_button: 'Kolla in den nya kollektionen'
+        carousel_header: 'Utvalda produkter'
+        latest_deals: 'Senaste erbjudandena'
+        new_collection: 'Ny kollektion'
+        newsletter: 'Nyhetsbrev'
+        newsletter_description: 'Prenumerera på vårt nyhetsbrev för att ta del av nya erbjudanden som väntar på dig! (<i>Du kan ändra detta innehåll genom att överskrida nyckeln "sylius.homepage.newsletter_description" i din översättningsfil</i>)'
+        subscribe: 'Prenumerera'
     lightbox:
         image_album_label: 'Bild %1 av %2'
     menu:
         shop:
             account:
                 address_book: 'Adressbok'
-                change_password: 'Byt lösenord'
-                dashboard: 'Kontrollpanel'
+                change_password: 'Ändra lösenord'
+                dashboard: 'Översikt'
                 header: 'Ditt konto'
-                order_history: 'Beställningshistorik'
-                personal_information: 'Personlig information'
+                order_history: 'Orderhistorik'
+                personal_information: 'Personuppgifter'
+    top_bar: 'Registrera dig för vårt nyhetsbrev och få -20 % rabatt'

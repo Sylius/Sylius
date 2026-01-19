@@ -1,0 +1,57 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        order_confirmation:
+            has_been_successfully_placed: 'a été passée avec succès.'
+            subject: 'Confirmation de commande'
+            view_order_or_change_payment_method: 'Afficher une commande ou changer le mode de paiement'
+            thank_you: 'Merci d''avoir acheté dans notre boutique !'
+            your_order_number: 'Votre commande n°'
+        password_reset:
+            hello: 'Bonjour'
+            reset_your_password: 'Réinitialiser votre mot de passe'
+            subject: 'Réinitialisation du mot de passe'
+            to_reset_your_password: 'Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous'
+            to_reset_your_password_token: 'Pour réinitialiser votre mot de passe, utilisez le jeton ci-dessous'
+            token: 'Votre jeton de réinitialisation de mot de passe est'
+        user_registration:
+            start_shopping: 'Commencer le shopping'
+            subject: 'Enregistrement de l''utilisateur'
+            welcome_to_our_store: 'Bienvenue dans notre boutique !'
+            you_have_just_been_registered: 'Vous venez d''être enregistré. Merci'
+        verification_token:
+            hello: 'Bonjour'
+            subject: 'Vérification de l''adresse e-mail'
+            to_verify_your_email_address: 'Pour confirmer votre adresse e-mail, cliquez sur le lien ci-dessous'
+            verify_your_email_address: 'Vérifiez votre adresse email'
+    footer:
+        banner:
+            free_shipping_title: 'Livraison et retour gratuits'
+            free_shipping_content: 'Livraison gratuite pour toutes les commandes'
+            guarantee_title: 'Satisfait ou remboursé'
+            guarantee_content: 'Satisfait ou remboursé sous 30 jours'
+            multiple_payments_title: 'Multiples options de paiement'
+            multiple_payments_content: 'Nous acceptons les cartes de crédit et PayPal'
+    homepage:
+        about_us: 'À propos de nous'
+        about_us_content: 'Bienvenu(e) dans notre magasin, votre boutique numéro un qui vous offre les meilleurs produits. Vous pouvez choisir parmi les meilleurs vêtements et chaussures de notre catalogue. (<i>Vous pouvez modifier ce contenu en surchargeant la clé "sylius.homepage.about_us_content" dans votre fichier de traduction</i>)'
+        banner_content: 'Préparez-vous ! L''hiver arrive'
+        banner_button: 'Jetez un coup d''œil à la nouvelle collection'
+        carousel_header: 'Les produits stars'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Abonnez-vous à notre newsletter pour recevoir les nouvelles offres qui n''attendent que vous ! (<i>Vous pouvez modifier ce contenu en surchargeant la clé "sylius.homepage.newsletter_description" dans votre fichier de traduction</i>)'
+        subscribe: 'S''abonner'
+    lightbox:
+        image_album_label: 'Page %1 de %2'
+    menu:
+        shop:
+            account:
+                address_book: 'Carnet d’adresses'
+                change_password: 'Changer votre mot de passe'
+                dashboard: 'Tableau de bord'
+                header: 'Votre compte'
+                order_history: 'Historique des commandes'
+                personal_information: 'Informations personnelles'
+    top_bar: 'Inscrivez-vous à notre newsletter et bénéficiez de -20% de réduction'

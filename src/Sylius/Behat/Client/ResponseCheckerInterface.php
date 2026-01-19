@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 interface ResponseCheckerInterface
 {
+    public function isViolationWithMessageInResponse(Response $response, string $message, ?string $property = null): bool;
+
     public function countCollectionItems(Response $response): int;
 
     public function countTotalCollectionItems(Response $response): int;
@@ -45,7 +47,7 @@ interface ResponseCheckerInterface
 
     public function hasCollection(Response $response): bool;
 
-    public function hasValue(Response $response, string $key, int|string $value): bool;
+    public function hasValue(Response $response, string $key, bool|int|string|null $value, bool $isCaseSensitive = true): bool;
 
     public function hasValueInCollection(Response $response, string $key, int|string $value): bool;
 
@@ -65,9 +67,21 @@ interface ResponseCheckerInterface
         array $expectedValues,
     ): bool;
 
+    public function hasValueInSubresourceObject(
+        Response $response,
+        string $subResource,
+        string $key,
+        bool|int|string $expectedValue,
+    ): bool;
+
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, array|string $value): bool;
 
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool;
+
+    /**
+     * @param array<array-key, array> $items
+     */
+    public function hasItemWithTranslationInCollection(array $items, string $locale, string $key, string $translation): bool;
 
     public function hasKey(Response $response, string $key): bool;
 
@@ -78,4 +92,14 @@ interface ResponseCheckerInterface
     public function getResponseContent(Response $response): array;
 
     public function hasViolationWithMessage(Response $response, string $message, ?string $property = null): bool;
+
+    public function cleanErrors(): void;
+
+    /** @return array{
+     *     step: string,
+     *     type: string,
+     *     error: string[]
+     * }
+     */
+    public function getDebugErrors(): array;
 }

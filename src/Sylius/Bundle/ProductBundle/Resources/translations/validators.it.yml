@@ -4,54 +4,72 @@
 sylius:
     product:
         sku:
-            not_blank: Inserisci il codice SKU del prodotto.
-            unique: Il codice SKU del prodotto deve essere univoco.
+            not_blank: 'Per favore inserisci il codice SKU del prodotto.'
+            unique: 'Il codice SKU del prodotto deve essere unico.'
         slug:
-            not_blank: Inserisci lo slug del prodotto.
-            unique: Lo slug del prodotto deve essere unico.
-            max_length: L'url del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.
+            not_blank: 'Per favore inserisci lo slug del prodotto.'
+            unique: 'Lo slug del prodotto deve essere unico.'
+            max_length: 'Lo slug del prodotto non deve essere più lungo di 1 carattere.|Lo slug del prodotto non deve essere più lungo di {{ limit }} caratteri.'
         code:
-            not_blank: Inserisci il codice prodotto.
-            regex: Il codice prodotto può contenere solo lettere, numeri, trattini e underscore.
-            unique: Codice prodotto deve essere univoco.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice del prodotto.'
+            regex: 'Il codice del prodotto può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'Il codice del prodotto deve essere unico.'
         name:
-            not_blank: Inserisci il nome del prodotto.
-            min_length: Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.
-            max_length: Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.
+            not_blank: 'Per favore inserisci il nome del prodotto.'
+            min_length: 'Il nome del prodotto deve essere lungo almeno 1 carattere.|Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il nome del prodotto non deve essere più lungo di 1 carattere.|Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.'
+        meta_keywords:
+            max_length: 'Le meta parole chiave del prodotto non devono essere più lunghe di 1 carattere.|Le meta parole chiave del prodotto non devono essere più lunghe di {{ limit }} caratteri.'
+        meta_description:
+            max_length: 'La meta descrizione del prodotto non deve essere più lunga di 1 carattere.|La meta descrizione del prodotto non deve essere più lunga di {{ limit }} caratteri.'
     product_variant:
-        combination: La variante con questa opzione impostata esiste già.
+        combination: 'Esiste già una variante con questa combinazione di opzioni.'
         code:
-            not_blank: Inserisci il codice.
-            regex: La variante del prodotto può contenere solo lettere, numeri, trattini e underscore.
-            unique: Il codice della variante del prodotto deve essere univoco.
-            within_product_unique: Questo codice deve essere univoco all'interno di questo prodotto.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice.'
+            regex: 'Il codice della variante del prodotto può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'Il codice della variante del prodotto deve essere unico.'
+            within_product_unique: 'Questo codice deve essere unico all''interno di questo prodotto.'
+        option_values:
+            not_configured: 'La variante del prodotto deve avere valori configurati per tutte le opzioni scelte nel prodotto.'
     simple_product:
         code:
-            unique: Codice prodotto semplice deve essere univoco tra tutti i prodotti e varianti di prodotto.
+            unique: 'Il codice del prodotto semplice deve essere unico tra tutti i prodotti e le varianti di prodotto.'
     option:
         code:
-            not_blank: Inserisci il codice dell'opzione.
-            regex: Il codice dell'opzione può essere composto solo da lettere, numeri, trattini e underscore.
-            unique: L'opzione con il codice dato esiste già.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice dell''opzione.'
+            regex: 'Il codice dell''opzione può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'Esiste già un''opzione con il codice fornito.'
         name:
-            not_blank: Inserisci il nome dell'opzione.
-            min_length: Il nome dell'opzione deve essere lungo almeno 1 carattere. |Il nome dell'opzione deve essere lungo almeno {{ limit }} caratteri.
-            max_length: Il nome dell'opzione non deve essere più lungo di 1 carattere. |Il nome dell'opzione non deve essere più lungo di {{ limit }} caratteri.
+            not_blank: 'Per favore inserisci il nome dell''opzione.'
+            min_length: 'Il nome dell''opzione deve essere lungo almeno 1 carattere.|Il nome dell''opzione deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il nome dell''opzione non deve essere più lungo di 1 carattere.|Il nome dell''opzione non deve essere più lungo di {{ limit }} caratteri.'
         values:
-            min_count: Aggiungere almeno {{ limit }} valore d'opzione. |Aggiungere almeno {{ limit }} valori di opzione.
+            min_count: 'Per favore aggiungi almeno {{ limit }} valore dell''opzione.|Per favore aggiungi almeno {{ limit }} valori dell''opzione.'
     option_value:
         code:
-            not_blank: Inserisci il codice del valore dell'opzione.
-            regex: Il valore del codice dell'opzione può essere composto solo da lettere, numeri, trattini e underscore.
-            unique: Il valore dell'opzione con il codice dato esiste già.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice del valore dell''opzione.'
+            regex: 'Il codice del valore dell''opzione può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'Il valore dell''opzione con il codice fornito esiste già.'
         value:
-            not_blank: Inserisci il valore dell'opzione.
+            not_blank: 'Per favore inserisci il valore dell''opzione.'
+    association:
+        unique: 'Esiste già un''associazione con questo proprietario e tipo.'
+        type:
+            not_blank: 'Per favore inserisci il tipo di associazione.'
+        owner:
+            not_blank: 'Per favore inserisci il proprietario dell''associazione.'
     association_type:
         name:
-            not_blank: Inserisci il nome del tipo di associazione.
-            min_length: Nome del tipo di associazione deve essere lungo almeno 1 carattere.| Il nome dell'associazione deve essere lungo almeno {{ limit }} caratteri.
-            max_length: Nome del tipo di associazione non può essere più lungo di 1 carattere.| Il nome dell'associazione non può essere lungo più di {{ limit }} caratteri.
+            not_blank: 'Per favore inserisci il nome del tipo di associazione.'
+            min_length: 'Il nome del tipo di associazione deve essere lungo almeno 1 carattere.|Il nome del tipo di associazione deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il nome del tipo di associazione non deve essere più lungo di 1 carattere.|Il nome del tipo di associazione non deve essere più lungo di {{ limit }} caratteri.'
         code:
-            not_blank: Inserisci il codice del tipo di associazione.
-            regex: Il tipo di associazione può essere composto solo da lettere, numeri, trattini e underscore.
-            unique: Il tipo di associazione con questo codice esiste già.
+            min_length: 'Il codice del tipo di associazione deve essere lungo almeno 1 carattere.|Il codice del tipo di associazione deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il codice del tipo di associazione non deve essere più lungo di 1 carattere.|Il codice del tipo di associazione non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice del tipo di associazione.'
+            regex: 'Il codice del tipo di associazione può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'Esiste già un tipo di associazione con il codice fornito.'

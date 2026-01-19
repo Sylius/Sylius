@@ -1,0 +1,6 @@
+{% import '@SyliusShop/shared/buttons.html.twig' as buttons %}
+
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('show')), options.link.parameters|default({'id': data.id}))) %}
+
+{% set labeled = options.labeled is defined ? options.labeled : true %}
+{{ buttons.default(path, action.label, 'show', null, 'btn-sm btn-outline-gray') }}

@@ -28,6 +28,7 @@ final class ProductAttributeContext implements Context
     /**
      * @Transform :attribute
      * @Transform :productAttribute
+     * @Transform /^"([^"]+)" product attribute$/
      */
     public function getProductAttributeByName(string $name): ProductAttributeInterface
     {

@@ -1,0 +1,12 @@
+services:
+    Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
+        tags:
+            - { name: messenger.message_handler, bus: sylius.command_bus }
+
+    Sylius\Bundle\ApiBundle\Application\CommandHandler\BarHandler:
+        tags:
+            - { name: messenger.message_handler, bus: sylius.command_bus }
+
+    Sylius\Bundle\ApiBundle\Application\CommandHandler\BazHandler:
+        tags:
+            - { name: messenger.message_handler, bus: sylius.command_bus }

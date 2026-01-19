@@ -1,0 +1,32 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    channel:
+        delete_error: 'このチャネルは削除できません。有効なチャネルが少なくとも 1 つ必要です。'
+    checkout:
+        complete_error: '注文の完了中に予期しない問題が発生しました。もう一度ご注文ください。'
+    contact:
+        request_success: 'お問い合わせが正常に送信されました。'
+        request_error: 'お問い合わせの送信中に問題が発生しました。しばらくしてから再度お試しください。'
+    customer:
+        add_address: '住所が正常に追加されました。'
+        impersonate: '顧客 %name% として正常にログインしました。'
+        set_address_as_default: '住所がデフォルトとして設定されました。'
+    order:
+        apply_state_machine_transition_error: '注文の更新中に予期しない問題が発生しました。再度お試しください。'
+        promotion_integrity: 'このプロモーション %promotionName% の対象外になりました。'
+        total_integrity: '注文合計が変更されました。情報を確認してもう一度確定してください。'
+        update_error: '注文の更新中に予期しない問題が発生しました。再度お試しください。'
+    payment:
+        apply_state_machine_transition_error: '支払いの更新中に予期しない問題が発生しました。再度お試しください。'
+    product:
+        in_use_by_promotion_rule: 'プロモーションルールで使用されている商品のため削除できません。'
+        out_of_stock: 'この商品の在庫は残り %quantity% です。'
+    product_variant:
+        update_error: '商品バリエーションの更新中に予期しない問題が発生しました。再度お試しください。'
+    promotion:
+        update_rules: 'コード %codes% のプロモーションの一部ルールが更新されました。'
+    taxon:
+        in_use_by_promotion_rule: 'プロモーションルールで使用されている分類は削除できません。'
+        menu_taxon_delete: 'チャネルのメニュー分類は削除できません。'

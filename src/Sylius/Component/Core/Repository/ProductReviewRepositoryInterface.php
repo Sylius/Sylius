@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
@@ -28,14 +29,18 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
     /**
      * @return array|ReviewInterface[]
      */
-    public function findLatestByProductId($productId, int $count): array;
+    public function findLatestByProductId(mixed $productId, int $count): array;
 
     /**
      * @return array|ReviewInterface[]
      */
     public function findAcceptedByProductSlugAndChannel(string $slug, string $locale, ChannelInterface $channel): array;
 
+    public function countAcceptedByProduct(ProductInterface $product): int;
+
     public function createQueryBuilderByProductCode(string $locale, string $productCode): QueryBuilder;
 
-    public function findOneByIdAndProductCode($id, string $productCode): ?ReviewInterface;
+    public function findOneByIdAndProductCode(mixed $id, string $productCode): ?ReviewInterface;
+
+    public function countNew(): int;
 }

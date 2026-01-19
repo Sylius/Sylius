@@ -32,9 +32,11 @@ interface ProductOptionRepositoryInterface extends RepositoryInterface
     public function findByName(string $name, string $locale): array;
 
     /**
+     * @param array<string>|null $excludes
+     *
      * @return ProductOptionInterface[]
      */
-    public function findByPhrase(string $phrase, string $locale, int $limit = 10): array;
+    public function findByPhrase(string $phrase, string $locale, int $limit = 10, ?array $excludes = null): array;
 
     /**
      * @param string[] $codes

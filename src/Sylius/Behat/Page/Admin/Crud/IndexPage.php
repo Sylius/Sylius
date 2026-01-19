@@ -16,19 +16,20 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
-class IndexPage extends SymfonyPage implements IndexPageInterface
+class IndexPage extends SyliusPage implements IndexPageInterface
 {
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private TableAccessorInterface $tableAccessor,
-        private string $routeName,
+        protected readonly TableAccessorInterface $tableAccessor,
+        protected readonly string $routeName,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -90,6 +91,16 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         }
     }
 
+    public function getCellForResource(string $header, array $parameters): NodeElement
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $resourceRow = $tableAccessor->getRowWithFields($table, $parameters);
+
+        return $tableAccessor->getFieldFromRow($table, $resourceRow, $header);
+    }
+
     public function deleteResourceOnPage(array $parameters): void
     {
         $tableAccessor = $this->getTableAccessor();
@@ -98,7 +109,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
         $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'actions');
 
-        $actionButtons->pressButton('Delete');
+        $actionButtons->find('css', '[data-test-modal="delete"] [data-test-confirm-button]')->press();
     }
 
     public function getActionsForResource(array $parameters): NodeElement
@@ -117,7 +128,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $table = $this->getElement('table');
 
         $resourceRow = $tableAccessor->getRowWithFields($table, $parameters);
-        $bulkCheckbox = $resourceRow->find('css', '.bulk-select-checkbox');
+        $bulkCheckbox = $resourceRow->find('css', '.form-check-input');
 
         Assert::notNull($bulkCheckbox);
 
@@ -132,7 +143,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function bulkDelete(): void
     {
         $this->getElement('bulk_actions')->pressButton('Delete');
-        $this->getElement('confirmation_button')->click();
+        $this->getElement('bulk_delete_confirm_button')->click();
     }
 
     public function sort(string $order): void
@@ -147,6 +158,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function isEnabledFilterApplied(): bool
     {
+        DriverHelper::waitForElement($this->getSession(), '[data-test-criterion-enabled]');
+
         return $this->getElement('enabled_filter')->getValue() === 'true';
     }
 
@@ -155,18 +168,57 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->routeName;
     }
 
+    public function goToPage(int $page): void
+    {
+        $this->getElement('page_button', ['%page%' => $page])->click();
+    }
+
+    public function getPageNumber(): int
+    {
+        return (int) $this->getElement('current_page')->getText();
+    }
+
     protected function getTableAccessor(): TableAccessorInterface
     {
         return $this->tableAccessor;
+    }
+
+    protected function toggleFilters(): void
+    {
+        $filtersToggle = $this->getElement('filters_toggle');
+        $filtersToggle->click();
+        $this->getDocument()->waitFor(1, function () use ($filtersToggle) {
+            $accordionCollapse = $filtersToggle->find('css', '.accordion-collapse');
+
+            return null !== $accordionCollapse && !$accordionCollapse->hasClass('collapsing');
+        });
+    }
+
+    protected function areFiltersVisible(): bool
+    {
+        return !$this->getElement('filters_toggle')->hasClass('collapsed');
+    }
+
+    protected function waitForFormUpdate(): void
+    {
+        $form = $this->getElement('filters_form');
+        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
+        $form->waitFor(1500, function () use ($form) {
+            return !$form->hasAttribute('busy');
+        });
     }
 
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.sylius-grid-nav__bulk',
-            'confirmation_button' => '#confirmation-button',
-            'enabled_filter' => '#criteria_enabled',
-            'filter' => 'button:contains("Filter")',
+            'bulk_delete_confirm_button' => '[data-test-modal="bulk-delete"] [data-test-confirm-button]',
+            'current_page' => '[data-test-current-page]',
+            'enabled_filter' => '[data-test-criterion-enabled]',
+            'filter' => '[data-test-filter]',
+            'filters_form' => '[data-test-filters-form]',
+            'filters_toggle' => '.accordion-button',
+            'page_button' => '[data-test-page="%page%"]',
             'table' => '.table',
         ]);
     }

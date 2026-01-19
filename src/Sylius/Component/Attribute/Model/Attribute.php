@@ -134,9 +134,7 @@ class Attribute implements AttributeInterface, \Stringable
         $this->translatable = $translatable;
     }
 
-    /**
-     * @return AttributeTranslationInterface
-     */
+    /** @return AttributeTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface
     {
         /** @var AttributeTranslationInterface $translation */

@@ -4,36 +4,38 @@
 sylius:
     form:
         attribute:
-            add: Adăugați
-            add_attributes: Adaugă atribut
-            choices: Opțiuni
-            code: Cod
-            name: Nume produs
-            translations: Traduceri
-            type: Tip
+            add: 'Adaugă'
+            add_attributes: 'Adaugă atribute'
+            choices: 'Opțiuni'
+            code: 'Cod'
+            name: 'Nume'
+            translatable: 'Traducibil'
+            translations: 'Traduceri'
+            type: 'Tip'
         attribute_type:
-            checkbox: Bifă
-            configuration: Configurare
-            date: Dată
-            datetime: Dată și Oră
-            integer: Număr întreg
-            percent: Procentaj
-            select: Selectaţi
-            text: Text
-            textarea: Text lung
-            title: Tipuri de atribut
-            validation: Validare
+            checkbox: 'Casetă de selectare'
+            configuration: 'Configurare'
+            date: 'Dată'
+            datetime: 'Dată și oră'
+            float: 'Număr zecimal'
+            integer: 'Număr întreg'
+            percent: 'Procent'
+            select: 'Selecție'
+            text: 'Text'
+            textarea: 'Zonă de text'
+            title: 'Tipuri de atribute'
+            validation: 'Validare'
         attribute_type_configuration:
             datetime:
-                format: Format
+                format: 'Format'
             date:
-                format: Format
+                format: 'Format'
             select:
-                multiple: Multiple
-                values: Valori
-                choose: Alege o opțiune
-                min: Intrări minime
-                max: Intrări maxime
+                multiple: 'Multiplu'
+                values: 'Valori'
+                choose: 'Alegeți o opțiune'
+                min: 'Intrări minime'
+                max: 'Intrări maxime'
             text:
-                min: Lungime minimă
-                max: Lungime maximă
+                min: 'Lungime minimă'
+                max: 'Lungime maximă'

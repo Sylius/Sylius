@@ -1,0 +1,6 @@
+{% extends '@SyliusShop/account/common/index.html.twig' %}
+
+{% set prefixes = ['sylius_shop.account.order'] %}
+{% set attrs = { resources } %}
+
+{% block title %}{{ 'sylius.ui.order_history'|trans }} | {{ parent() }}{% endblock %}

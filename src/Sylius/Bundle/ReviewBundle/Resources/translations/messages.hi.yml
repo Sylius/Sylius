@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        review:
+            author: 'लेखक'
+            comment: 'टिप्पणी'
+            header: 'समीक्षा जोड़ें'
+            rating: 'रेटिंग'
+            status:
+                approved: 'स्वीकृत'
+                label: 'स्थिति'
+                new: 'नई'
+                rejected: 'अस्वीकृत'
+            submit: 'जमा करें'
+            title: 'शीर्षक'

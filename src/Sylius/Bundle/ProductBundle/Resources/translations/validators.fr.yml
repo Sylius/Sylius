@@ -11,6 +11,7 @@ sylius:
             unique: Le slug du produit doit être unique.
             max_length: Le slug du produit ne doit pas dépasser 1 caractère.|Le slug du produit ne doit pas dépasser {{ limit }} caractères.
         code:
+            max_length: Le code du produit ne doit pas dépasser {{ limit }} caractères.
             not_blank: Veuillez introduire le code du produit.
             regex: Le code du produit peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le code du produit doit être unique.
@@ -25,6 +26,7 @@ sylius:
     product_variant:
         combination: La variante avec cette option existe déjà.
         code:
+            max_length: Le code de la variante du produit ne doit pas dépasser {{ limit }} caractères.
             not_blank: Veuillez saisir le code.
             regex: Le code de la variante du produit peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le code de la variante du produit doit être unique.
@@ -36,6 +38,7 @@ sylius:
             unique: Le code d'un simple produit doit être unique parmi tous les produits et les variantes de produit.
     option:
         code:
+            max_length: Le code de l'option ne doit pas dépasser {{ limit }} caractères.
             not_blank: Entrez le code de l'option.
             regex: Le code de l'option peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le code de l'option existe déjà.
@@ -47,6 +50,7 @@ sylius:
             min_count: Veuillez ajouter au moins {{ limit }} valeur pour l'option.|Veuillez ajouter au moins {{ limit }} valeurs pour l'option.
     option_value:
         code:
+            max_length: Le code de la valeur de l'option ne doit pas dépasser {{ limit }} caractères.
             not_blank: Entrez la valeur de l'option.
             regex: Le code de la valeur de l'option peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: La valeur de l'option existe déjà.
@@ -64,11 +68,8 @@ sylius:
             min_length: Le nom de l'association doit posséder au moins 1 caractère. | Le nom de l'association doit posséder au moins {{ limit }} caractères.
             max_length: Le nom de l'association ne doit pas excéder 1 caractère.|Le nom de l'association ne doit pas excéder {{ limit }} caractères.
         code:
+            min_length: Le code du type d'association doit contenir au moins {{ limit }} caractères.
+            max_length: Le code du type d'association ne doit pas dépasser {{ limit }} caractères.
             not_blank: Veuillez entrer le code du type d'association.
             regex: Le code du type d'association peut uniquement être constitué de lettres, chiffres, tirets et tirets bas.
             unique: Le type d'association avec le code donné existe déjà.
-    translation:
-        locale:
-            not_blank: Vous devez entrer une valeur.
-            invalid: Ce paramètre régional n'est pas valide.
-            unique: Une traduction pour la locale {{ value }} existe déjà.

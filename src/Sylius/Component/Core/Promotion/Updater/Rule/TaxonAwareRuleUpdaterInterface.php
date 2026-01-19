@@ -17,5 +17,6 @@ use Sylius\Component\Core\Model\TaxonInterface;
 
 interface TaxonAwareRuleUpdaterInterface
 {
+    /** @return array<array-key, string> */
     public function updateAfterDeletingTaxon(TaxonInterface $taxon): array;
 }

@@ -5,48 +5,55 @@ sylius:
     form:
         rule:
             unit_count_configuration:
-                count: Quantità
-                equal: Uguale a
-            type: Tipo di regola
+                count: 'Conteggio'
+                equal: 'Uguale a'
+            type: 'Tipo di regola'
         shipment:
-            state: Stato
+            state: 'Stato'
             states:
-                checkout: Vai alla cassa
-                pending: In attesa
-                ready: Pronto
-                shipped: Spedito
-                returned: Restituito
-                cancelled: Annullato
-            tracking_code: Codice di monitoraggio della spedizione
+                checkout: 'Checkout'
+                pending: 'In sospeso'
+                ready: 'Pronto'
+                shipped: 'Spedito'
+                returned: 'Restituito'
+                cancelled: 'Annullato'
+            tracking_code: 'Codice di tracciamento'
         shipping_calculator:
             flat_rate_configuration:
-                label: Tariffa fissa per spedizione
-                amount: Importo
+                label: 'Tariffa fissa per spedizione'
+                amount: 'Importo'
             per_unit_rate_configuration:
-                label: Tariffa fissa per unità
-                amount: Importo
+                label: 'Tariffa fissa per unità'
+                amount: 'Importo'
         shipping_category:
-            description: Descrizione
-            name: "Nome\n"
+            description: 'Descrizione'
+            name: 'Nome'
         shipping_method:
-            add_rule: Aggiungi regola
-            calculator: Calcolatore
-            category: Categoria
-            category_requirement: Requisito della categoria
-            channels: Canali
-            configuration: Configurazione
-            description: Descrizione
-            enabled: Abilitato
-            match_all_category_requirement: Tutte le unità deve corrispondere alla categoria del metodo
-            match_any_category_requirement: Almeno 1 unità deve corrispondere alla categoria del metodo
-            match_none_category_requirement: Nessuna delle unità deve corrispondere alla categoria del metodo
-            name: "Nome\n"
-            position: Posizione
-            rules: Regole
-            tax_category: Categoria fiscale
-            translations: Traduzioni
+            add_rule: 'Aggiungi regola'
+            calculator: 'Calcolatore'
+            category: 'Categoria'
+            category_requirement: 'Requisito di categoria'
+            channels: 'Canali'
+            configuration: 'Configurazione'
+            description: 'Descrizione'
+            enabled: 'Abilitato'
+            match_all_category_requirement: 'Tutte le unità devono corrispondere alla categoria del metodo'
+            match_any_category_requirement: 'Almeno 1 unità deve corrispondere alla categoria del metodo'
+            match_none_category_requirement: 'Nessuna unità deve corrispondere alla categoria del metodo'
+            name: 'Nome'
+            position: 'Posizione'
+            rules: 'Regole'
+            rules_help: 'Usa le regole per decidere se questo metodo di spedizione può essere applicato a un ordine dato. Se una regola è vera, questo metodo di spedizione può essere applicato. Nota che se aggiungi più regole, tutte le regole devono essere vere.'
+            select_calculator: 'Seleziona un calcolatore'
+            tax_category: 'Categoria fiscale'
+            translations: 'Traduzioni'
         shipping_method_rule:
-            type: Tipo
-            total: Totale
-            weight: Peso
-            amount: Importo
+            items_total_greater_than_or_equal: 'Totale articoli maggiore o uguale'
+            items_total_less_than_or_equal: 'Totale articoli inferiore o uguale'
+            type: 'Tipo'
+            total: 'Totale'
+            total_weight_greater_than_or_equal: 'Peso totale maggiore o uguale'
+            total_weight_less_than_or_equal: 'Peso totale inferiore o uguale'
+            weight: 'Peso'
+            amount: 'Importo'
+            select: 'Seleziona un tipo di regola'

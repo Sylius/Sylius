@@ -17,55 +17,18 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.twig.extension.percentage" class="Sylius\Bundle\UiBundle\Twig\PercentageExtension" public="false">
+        <service id="sylius.twig.extension.percentage" class="Sylius\Bundle\UiBundle\Twig\PercentageExtension">
             <tag name="twig.extension" />
-        </service>
-
-        <service id="sylius.twig.extension.form_test_attribute_array" class="Sylius\Bundle\UiBundle\Twig\TestFormAttributeExtension">
-            <argument>%kernel.environment%</argument>
-            <tag name="twig.extension" />
-            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.twig.extension.form_test_attribute_name" class="Sylius\Bundle\UiBundle\Twig\TestHtmlAttributeExtension">
-            <argument>%kernel.environment%</argument>
-            <tag name="twig.extension" />
-            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.twig.extension.sort_by" class="Sylius\Bundle\UiBundle\Twig\SortByExtension" public="false">
-            <tag name="twig.extension" />
-            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.twig.extension.template_event" class="Sylius\Bundle\UiBundle\Twig\TemplateEventExtension" public="false">
-            <argument type="service" id="Sylius\Bundle\UiBundle\Renderer\TemplateEventRendererInterface" />
-            <tag name="twig.extension" />
-            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
         </service>
 
         <service id="sylius.twig.extension.merge_recursive" class="Sylius\Bundle\UiBundle\Twig\MergeRecursiveExtension">
             <tag name="twig.extension" />
         </service>
 
-        <service id="Sylius\Bundle\UiBundle\Twig\LegacySonataBlockExtension">
-            <argument>%sylius_ui.sonata_block.whitelisted_variables%</argument>
-            <tag name="twig.extension" />
-            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\UiBundle\Twig\RedirectPathExtension">
-            <argument type="service" id="Sylius\Bundle\UiBundle\Storage\FilterStorage" />
+        <service id="sylius.twig.extension.redirect_path" class="Sylius\Bundle\UiBundle\Twig\RedirectPathExtension">
+            <argument type="service" id="sylius.grid.filter_storage" />
             <argument type="service" id="router" />
             <tag name="twig.extension" />
-        </service>
-        <service id="sylius.twig.extension.redirect_path" alias="Sylius\Bundle\UiBundle\Twig\RedirectPathExtension" />
-
-        <service id="Sylius\Bundle\UiBundle\Storage\FilterStorage" public="false">
-            <argument type="service" id="request_stack" />
-            <deprecated package="sylius/ui-bundle" version="1.14">The service %service_id% is deprecated and will be removed in Sylius 2.0.</deprecated>
         </service>
     </services>
 </container>

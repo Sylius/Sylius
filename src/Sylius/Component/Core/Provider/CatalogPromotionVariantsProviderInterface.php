@@ -17,5 +17,6 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 
 interface CatalogPromotionVariantsProviderInterface
 {
+    /** @return array<mixed> */
     public function provideEligibleVariants(CatalogPromotionInterface $catalogPromotion): array;
 }

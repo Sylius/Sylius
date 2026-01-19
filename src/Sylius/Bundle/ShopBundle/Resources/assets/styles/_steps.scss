@@ -1,0 +1,71 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include media-breakpoint-up(sm) {
+        flex-direction: row;
+        gap: 0;
+    }
+
+    &.steps-complete {
+        justify-content: center;
+    }
+
+    .steps-item {
+
+        @include media-breakpoint-up(sm) {
+            &:not(:last-child)::after {
+                content: '›';
+                padding: 0 1.4rem;
+                color: var(--bs-gray-500);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+
+            @include media-breakpoint-up(sm) {
+                padding: 1.4rem 0 0.6rem 0;
+            }
+
+            &:hover {
+                color: var(--bs-primary);
+            }
+        }
+
+        &-active a {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: calc(100% - 3px);
+                height: 3px;
+                border-radius: 99px;
+                background-color: var(--bs-primary);
+
+                @include media-breakpoint-up(sm) {
+                    top: -5px;
+                }
+            }
+        }
+
+        &-disabled,
+        &-disabled a {
+            color: var(--bs-gray-500);
+        }
+    }
+}

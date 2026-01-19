@@ -1,0 +1,7 @@
+{% set shipment = hookable_metadata.context.shipment %}
+
+{% if shipment.state != 'cart' %}
+    <a href="{{ path('sylius_admin_shipment_show', {'id': shipment.id}) }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.show'|trans }}" {{ sylius_test_html_attribute('shipment-show-button') }}>
+        {{ ux_icon('tabler:eye') }}
+    </a>
+{% endif %}

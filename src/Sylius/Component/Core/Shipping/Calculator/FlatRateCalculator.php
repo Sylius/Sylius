@@ -21,9 +21,7 @@ use Webmozart\Assert\Assert;
 
 final class FlatRateCalculator implements CalculatorInterface
 {
-    /**
-     * @throws MissingChannelConfigurationException
-     */
+    /** @throws MissingChannelConfigurationException */
     public function calculate(BaseShipmentInterface $subject, array $configuration): int
     {
         Assert::isInstanceOf($subject, ShipmentInterface::class);

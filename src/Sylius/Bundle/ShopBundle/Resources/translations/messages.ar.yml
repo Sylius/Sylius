@@ -2,56 +2,67 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: "ليس لديك حساب؟"
+        register_here: "سجّل هنا"
+    
     email:
         order_confirmation:
-            has_been_successfully_placed: 'تم وضع الطلب بنجاح.'
-            subject: 'تأكيد الطلب'
-            view_order_or_change_payment_method: 'عرض الطلب أو تغيير طريقة الدفع'
-            thank_you: 'شكراً لتسوقك في متجرنا!'
-            your_order_number: 'رقم طلبك'
+            has_been_successfully_placed: "تم تقديم الطلب بنجاح."
+            subject: "تأكيد الطلب"
+            view_order_or_change_payment_method: "عرض الطلب أو تغيير طريقة الدفع"
+            thank_you: "شكرًا لتسوقك من متجرنا!"
+            your_order_number: "رقم طلبك:"
         password_reset:
-            hello: 'مرحباً'
-            reset_your_password: 'إعادة تعيين كلمة المرور'
-            subject: 'إعادة تعيين كلمة المرور'
-            to_reset_your_password: 'لإعادة تعيين كلمة المرور، انقر على الرابط أدناه'
-            to_reset_your_password_token: 'لإعادة تعيين كلمة المرور، استخدم الرمز أدناه'
-            token: 'رمز إعادة تعيين كلمة المرور هو'
+            hello: "مرحبًا"
+            reset_your_password: "إعادة تعيين كلمة المرور"
+            subject: "إعادة تعيين كلمة المرور"
+            to_reset_your_password: "لإعادة تعيين كلمة المرور، انقر على الرابط أدناه"
+            to_reset_your_password_token: "لإعادة تعيين كلمة المرور، استخدم الرمز أدناه"
+            token: "رمز إعادة تعيين كلمة المرور هو"
         user_registration:
-            start_shopping: 'ابدأ التسوق'
-            subject: 'تسجيل المستخدم'
-            welcome_to_our_store: 'مرحباً بك في متجرنا!'
-            you_have_just_been_registered: 'لقد تم تسجيلك للتو. شكراً لك'
+            start_shopping: "ابدأ التسوق"
+            subject: "تسجيل مستخدم"
+            welcome_to_our_store: "مرحبًا بك في متجرنا!"
+            you_have_just_been_registered: "تم تسجيلك بنجاح. شكرًا لك"
         verification_token:
-            hello: 'مرحباً'
-            subject: 'التحقق من عنوان البريد الإلكتروني'
-            to_verify_your_email_address: 'للتحقق من عنوان بريدك الإلكتروني - انقر على الرابط أدناه'
-            verify_your_email_address: 'تحقق من عنوان بريدك الإلكتروني'
+            hello: "مرحبًا"
+            subject: "تأكيد عنوان البريد الإلكتروني"
+            to_verify_your_email_address: "لتأكيد بريدك الإلكتروني، انقر على الرابط أدناه"
+            verify_your_email_address: "تأكيد البريد الإلكتروني"
+    
     footer:
         banner:
-            free_shipping_title: 'الشحن والإرجاع مجاناً'
-            free_shipping_content: 'شحن مجاني على جميع الطلبات'
-            guarantee_title: 'ضمان استعادة الأموال'
-            guarantee_content: 'ضمان استعادة الأموال خلال 30 يوماً'
-            multiple_payments_title: 'طرق دفع متعددة'
-            multiple_payments_content: 'نقبل بطاقات الائتمان و PayPal'
+            free_shipping_title: "شحن وإرجاع مجاني"
+            free_shipping_content: "شحن مجاني على جميع الطلبات"
+            guarantee_title: "ضمان استرجاع الأموال"
+            guarantee_content: "ضمان استرجاع الأموال خلال 30 يومًا"
+            multiple_payments_title: "طرق دفع متعددة"
+            multiple_payments_content: "نقبل بطاقات الائتمان وPayPal"
+    
     homepage:
-        about_us: 'من نحن'
-        about_us_content: 'مرحباً بك في متجرنا، متجرك الأول عبر الإنترنت الذي يقدم لك أفضل المنتجات. يمكنك الاختيار من بين أفضل الملابس والأحذية من عرضنا. (<i>يمكنك تعديل هذا المحتوى من خلال تجاوز المفتاح "sylius.homepage.about_us_content" في ملف الترجمة الخاص بك</i>)'
-        banner_content: 'استعد! الشتاء قادم'
-        banner_button: 'تفقد المجموعة الجديدة'
-        carousel_header: 'المنتجات المميزة'
-        newsletter: 'النشرة الإخبارية'
-        newsletter_description: 'اشترك في نشرتنا الإخبارية لمتابعة العروض الجديدة التي تنتظرك! (<i>يمكنك تعديل هذا المحتوى من خلال تجاوز المفتاح "sylius.homepage.newsletter_description" في ملف الترجمة الخاص بك</i>)'
-        subscribe: 'اشترك'
+        about_us: "من نحن"
+        about_us_content: "مرحبًا بك في متجرنا، متجرك الإلكتروني الأول الذي يقدم لك أفضل المنتجات. يمكنك الاختيار من بين أفضل الملابس والأحذية ضمن عروضنا. (<i>يمكنك تعديل هذا المحتوى من خلال تجاوز المفتاح sylius.homepage.about_us_content في ملف الترجمة</i>)"
+        banner_content: "استعد! الشتاء قادم"
+        banner_button: "اكتشف المجموعة الجديدة"
+        carousel_header: "منتجات مميزة"
+        latest_deals: "أحدث العروض"
+        new_collection: "مجموعة جديدة"
+        newsletter: "النشرة الإخبارية"
+        newsletter_description: "اشترك في نشرتنا الإخبارية لتتلقى أحدث العروض في انتظارك! (<i>يمكنك تعديل هذا المحتوى من خلال تجاوز المفتاح sylius.homepage.newsletter_description في ملف الترجمة</i>)"
+        subscribe: "اشترك"
+    
     lightbox:
-        image_album_label: 'الصورة %1 من %2'
+        image_album_label: "الصورة %1 من %2"
+    
     menu:
         shop:
             account:
-                address_book: 'دليل العناوين'
-                change_password: 'تغيير كلمة المرور'
-                dashboard: 'لوحة التحكم'
-                header: 'حسابك'
-                order_history: 'تاريخ الطلبات'
-                personal_information: 'المعلومات الشخصية'
-    top_bar: 'اشترك في نشرتنا الإخبارية واحصل على خصم 20%'
+                address_book: "دفتر العناوين"
+                change_password: "تغيير كلمة المرور"
+                dashboard: "لوحة التحكم"
+                header: "حسابك"
+                order_history: "سجل الطلبات"
+                personal_information: "المعلومات الشخصية"
+    
+    top_bar: "اشترك في نشرتنا الإخبارية واحصل على خصم 20٪"

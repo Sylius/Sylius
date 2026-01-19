@@ -4,27 +4,34 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'Název kategorie nesmí mít více než {{ limit }} znaků.'
+            max_length: 'Název kategorie nesmí být delší než {{ limit }} znaků.'
             min_length: 'Název kategorie musí mít alespoň {{ limit }} znaků.'
-            not_blank: 'Prosím, zadejte název expediční kategorie.'
+            not_blank: 'Prosím zadejte název kategorie dopravy.'
         code:
-            not_blank: 'Prosím vložte kód přepravní kategorie.'
-            regex: 'Kód přepravní kategorie může být složen pouze z písmen bez diakritiky, čísel, pomlček a podtržítek.'
-            unique: 'Přepravní kategorie s tímto kódem již existuje.'
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód kategorie dopravy.'
+            regex: 'Kód kategorie dopravy může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            unique: 'Kategorie dopravy s daným kódem již existuje.'
+
     shipping_method:
         calculator:
             min: 'Poplatek za dopravu nemůže být nižší než 0.'
-            not_blank: 'Vyberte kalkulačku způsobu dopravy.'
+            not_blank: 'Prosím vyberte kalkulátor dopravní metody.'
+            invalid: 'Neplatný kalkulátor. Dostupné kalkulátory jsou {{ available_calculators }}.'
         name:
-            max_length: 'Název expediční metody nesmí být delší než {{ limit }} znaků.'
-            min_length: 'Název expediční metody musí mít alespoň {{ limit }} znaků.'
-            not_blank: 'Zadejte prosím název expediční metody.'
+            max_length: 'Název dopravní metody nesmí být delší než {{ limit }} znaků.'
+            min_length: 'Název dopravní metody musí mít alespoň {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte název dopravní metody.'
         code:
-            not_blank: 'Prosím vložte kód způsobu dopravy.'
-            regex: 'Kód způsobu dopravy může být složen pouze z písmen bez diakritiky, číslic, pomlček a podtržítek.'
-            unique: 'Způsob dopravy s tímto kódem již existuje.'
+            max_length: 'Kód nesmí být delší než {{ limit }} znaků.'
+            not_blank: 'Prosím zadejte kód dopravní metody.'
+            regex: 'Kód dopravní metody může obsahovat pouze písmena, číslice, pomlčky a podtržítka.'
+            unique: 'Dopravní metoda s daným kódem již existuje.'
         zone:
-            not_blank: 'Prosím vyberte zónu pro způsob dopravy.'
+            not_blank: 'Prosím vyberte zónu dopravní metody.'
+        rule:
+            invalid_type: 'Neplatný typ pravidla. Dostupné typy pravidel jsou {{ available_rule_types }}.'
+
     shipment:
         shipping_method:
-            not_blank: 'Vyberte prosím způsob dopravy.'
+            not_blank: 'Prosím vyberte dopravní metodu.'

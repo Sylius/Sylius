@@ -1,6 +1,12 @@
 {
     "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/422",
     "@type": "hydra:Error",
     "hydra:title": "An error occurred",
-    "hydra:description": "Cannot delete, the product is in use."
+    "hydra:description": "Cannot delete, the product is in use.",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('Cannot delete, the product is in use.').optional()",
+    "detail": "Cannot delete, the product is in use.",
+    "status": 422,
+    "type": "\/errors\/422"
 }

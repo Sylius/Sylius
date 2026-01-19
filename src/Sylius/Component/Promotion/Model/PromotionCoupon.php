@@ -31,8 +31,7 @@ class PromotionCoupon implements PromotionCouponInterface
     /** @var int */
     protected $used = 0;
 
-    /** @var PromotionInterface|null */
-    protected $promotion;
+    protected ?PromotionInterface $promotion = null;
 
     /** @var \DateTimeInterface|null */
     protected $expiresAt;

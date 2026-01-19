@@ -4,43 +4,69 @@
 sylius:
     address:
         city:
-            not_blank: Vennligst oppgi bynavn.
+            max_length: 'Byen kan ikke være lenger enn {{ limit }} tegn.'
+            min_length: 'Byen må være minst {{ limit }} tegn lang.'
+            not_blank: 'Vennligst oppgi by.'
         country:
-            not_blank: Vennligst velg land.
-            disabled: Valgt land er deaktivert. Vennligst velg et annet.
+            not_blank: 'Vennligst velg land.'
+            disabled: 'Det valgte landet er deaktivert. Vennligst velg et annet.'
         first_name:
-            not_blank: Vennligst oppgi fornavn.
+            max_length: 'Fornavnet kan ikke være lenger enn {{ limit }} tegn.'
+            min_length: 'Fornavnet må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst oppgi fornavn.'
         last_name:
-            not_blank: Vennligst oppgi etternavn.
+            max_length: 'Etternavnet kan ikke være lenger enn {{ limit }} tegn.'
+            min_length: 'Etternavnet må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst oppgi etternavn.'
         postcode:
-            not_blank: Vennligst oppgi postnummer.
+            max_length: 'Postnummeret kan ikke være lenger enn {{ limit }} tegn.'
+            min_length: 'Postnummeret må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst oppgi postnummer.'
         province:
-            valid: Velg et gyldig fylke.
+            valid: 'Vennligst velg riktig fylke.'
         street:
-            not_blank: Vennligst oppgi gateadresse.
-        not_shippable: Denne adressen er ikke en gyldig fraktdestinasjon.
+            max_length: 'Gatenavn kan ikke være lenger enn {{ limit }} tegn.'
+            min_length: 'Gatenavn må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst oppgi gatenavn.'
+        not_shippable: 'Denne adressen er ikke en gyldig leveringsadresse.'
     country:
         code:
-            not_blank: Vennligst oppgi ISO-kode på landet.
-            regex: Landkode kan bare bestå av bokstaver, tall, bindestrek og understrek.
-            unique: Land ISO-koden må være unike.
+            not_blank: 'Vennligst oppgi ISO-kode for landet.'
+            unique: 'ISO-koden for landet må være unik.'
+            country: 'ISO-koden for landet er ugyldig.'
+        unique_provinces: 'Alle fylker i dette landet må ha unike koder og navn.'
     province:
         code:
-            min_length: Fylkesnavnet må inneholde minst to tegn|Fylkesnavnet må inneholde minst to tegn.
-            not_blank: Vennligst oppgi navn på fylket.
-            regex: Fylkeskode bør ha følgende format XX-XX (f.eks U.S.-FL).
-            unique: Fyleskode må være unik.
+            max_length: 'Koden kan ikke være lenger enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi fylkeskode.'
+            regex: 'Fylkeskoden skal ha formatet XX-XX (f.eks. NO-01).'
+            unique: 'Fylkeskoden må være unik.'
         name:
-            not_blank: Vennligst oppgi navn på fylket.
-            unique: Fylkesnavn må være unik.
+            max_length: 'Fylkesnavnet kan ikke være lenger enn {{ limit }} tegn.'
+            min_length: 'Fylkesnavnet må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst oppgi fylkesnavn.'
+            unique: 'Fylkesnavnet må være unikt.'
     zone:
         scope:
-            not_blank: Vennligst angi omfanget.
+            not_blank: 'Vennligst oppgi område.'
         code:
-            not_blank: Vennligst angi sonekode.
-            regex: Sonekode kan kun bestå av bokstaver, tall, bindestrek og understrek.
-            unique: Sonekode må være unik.
+            max_length: 'Koden kan ikke være lenger enn {{ limit }} tegn.'
+            not_blank: 'Vennligst oppgi sonekode.'
+            regex: 'Sonekode kan kun inneholde bokstaver, tall, bindestreker og understreker.'
+            unique: 'Sonekode må være unik.'
+        type:
+            invalid: 'Type {{ value }} er ugyldig. Tillatte typer er: {{ choices }}.'
         members:
-            min_count: Legg til minst {{ limit }} sone-medlemmer.
+            min_count: 'Vennligst legg til minst {{ limit }} sone-medlem.'
         name:
-            not_blank: Vennligst oppgi sonenavn.
+            max_length: 'Sonenavnet kan ikke være lenger enn {{ limit }} tegn.'
+            min_length: 'Sonenavnet må være minst {{ limit }} tegn langt.'
+            not_blank: 'Vennligst oppgi sonenavn.'
+    zone_member:
+        cannot_be_the_same_as_zone: 'Sone-medlem kan ikke være den samme som en sone.'
+        code:
+            max_length: 'Sone-medlemskoden kan ikke være lenger enn {{ limit }} tegn.'
+            not_blank: 'Vennligst velg et sone-medlem.'
+            regex: 'Sone-medlemskoden kan kun inneholde bokstaver, tall, bindestreker og understreker.'
+        unique: 'Det valgte sone-medlemmet er allerede i denne sonen.'
+

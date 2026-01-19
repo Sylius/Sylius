@@ -4,46 +4,128 @@
 sylius:
     email:
         shipment_confirmation:
-            subject: '发货确认单'
+            has_been_sent_using: '已通过以下方式发送'
+            subject: '发货确认'
+            thank_you_for_transaction: '感谢您的成功交易。'
+            you_can_check_its_location_with_the_tracking_code: '您可以使用追踪码 %tracking_code% 查询物流信息。'
+            your_order_with_number: '您的订单编号为'
+    form:
+        admin:
+            channel:
+                lowest_price_for_discounted_products_visible: '是否显示当前折扣前的最低价格？'
+                period_for_which_the_lowest_price_is_calculated: '用于计算最低价格的时间段'
+            reset_password:
+                password:
+                    label: '新密码'
+                    confirmation: '确认新密码'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: 关联类型
-                    attributes: 属性
-                    header: 目录
-                    inventory: 库存
-                    options: 选项
-                    products: 商品
-                    taxons: 分类
+                    association_types: '关联类型'
+                    attributes: '属性'
+                    header: '目录'
+                    inventory: '库存'
+                    options: '选项'
+                    products: '商品'
+                    taxons: '分类'
                 configuration:
-                    admin_users: 管理员
-                    channels: 门店
-                    countries: 国家
-                    currencies: 货币
-                    exchange_rates: 汇率
-                    header: 配置
-                    locales: 区域设置
-                    payment_methods: 付款方法
-                    shipping_categories: 发货类别
-                    shipping_methods: 发货方式
-                    tax_categories: 税种
-                    tax_rates: 税率
-                    zones: 区域
+                    admin_users: '管理员'
+                    channels: '渠道'
+                    countries: '国家'
+                    currencies: '货币'
+                    exchange_rates: '汇率'
+                    header: '配置'
+                    locales: '语言区域'
+                    payment_methods: '支付方式'
+                    shipping_categories: '配送类别'
+                    shipping_methods: '配送方式'
+                    tax_categories: '税种类别'
+                    tax_rates: '税率'
+                    zones: '区域'
                 marketing:
-                    header: 市场
-                    product_reviews: 商品评论
-                    promotions: 促销活动
+                    cart_promotions: '购物车促销'
+                    catalog_promotions: '目录促销'
+                    header: '市场推广'
+                    product_reviews: '商品评价'
+                    promotions: '促销活动'
                 customers:
-                    customers: 客户
-                    groups: 团体
-                    header: 客户
+                    customers: '客户'
+                    groups: '客户组'
+                    header: '客户'
                 sales:
-                    header: 销售额
-                    orders: 订单
+                    header: '销售'
+                    orders: '订单'
                 official_support:
-                    header: 官方支持
-                    browse_plugins: 浏览插件
-                    sylius_plus: Sylius Plus
-                    professional_services: 专业服务
-                    find_a_partner: 找一个合作伙伴
+                    header: '官方支持'
+                    browse_plugins: '浏览插件'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: '专业服务'
+                    find_a_partner: '寻找合作伙伴'
+                    sylius_certification: 'Sylius 认证'
+    ui:
+        account: '账户'
+        admin_user: '管理员'
+        add_new_entry: '添加新条目'
+        back_to_dashboard: '返回仪表盘'
+        catalog_promotion:
+            dates_details: '此操作耗时较长！从指定日期起可能会有 2-10 分钟的延迟，具体时间取决于目录大小。'
+        channel:
+            account_verification_required_details: '禁用此选项将允许用户无需电子邮件验证即可创建和访问账户，从而可能访问以访客身份下的订单数据。'
+        channel_pricing_history: '渠道定价历史'
+        channel_pricings: '渠道定价'
+        create_new:
+            customer_group: '创建新客户组'
+        delete_avatar: '删除头像'
+        full_screen: '全屏'
+        global: '全局'
+        ip_address: 'IP 地址'
+        language: '语言'
+        lowest_price_before_discount: '折扣前最低价'
+        minimum_price_details: '最低价格 - 这是定价的下限，当前价格不可被目录或购物车促销低于此价格。用于保障销售利润。'
+        more: '更多'
+        no_main_taxon: '没有主分类'
+        no_depth: '无深度'
+        no_height: '无高度'
+        no_results: '未找到结果'
+        no_results_adjust_your_search: '调整您的搜索条件再试一次。'
+        no_weight: '无重量'
+        no_width: '无宽度'
+        omnibus: 'Omnibus'
+        order:
+            date: '订单日期'
+        original_price_details: '原价 - 产品变体的原始价格，在目录中显示为划线价格。用于当前价格的计算基础。如果未定义，将从当前价格复制。'
+        original_product_price_details: '原价 - 商品的原始价格，在目录中显示为划线价格。用于当前价格的计算基础。如果未定义，将从当前价格复制。'
+        overdue: '逾期'
+        page_not_found: '页面未找到'
+        pagination:
+            number_of_results: '显示第 %from% 到第 %to% 条，共 %total% 条记录'
+        partially_refunded: '部分退款'
+        pending_actions: '待处理操作'
+        price_details: '价格 - 当前产品变体在目录中的价格。可通过目录促销等方式修改。'
+        product_price_details: '价格 - 当前产品在目录中的价格。可通过目录促销等方式修改。'
+        price_history: '价格历史'
+        product:
+            product_not_active_in_channel: '该产品尚未在此渠道激活。'
+        product_variant: '产品变体'
+        sales_summary: '销售汇总'
+        search_menu: '搜索菜单'
+        shipment_for_order: '订单配送'
+        show_history_for_channel_pricing: '显示渠道定价历史'
+        start_typing_to_search: '开始输入以搜索'
+        statistics:
+            day: '天'
+            lifetime: '总计'
+            month: '月'
+            week: '周'
+            2weeks: '两周'
+            year: '年'
+        taxon: '分类'
+        to_approve: '待批准'
+        to_process: '待处理'
+        to_ship: '待发货'
+        view_in_store: '在商店中查看'
+        work_in_progress: '开发中'
+        empty_date: '空'
+        notifications:
+            new_version_of_sylius_available: '有新的 Sylius 版本可用。请联系技术人员进行升级。'

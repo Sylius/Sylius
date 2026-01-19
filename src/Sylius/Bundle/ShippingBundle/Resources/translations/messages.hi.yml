@@ -1,0 +1,59 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        rule:
+            unit_count_configuration:
+                count: 'गणना'
+                equal: 'के बराबर'
+            type: 'नियम प्रकार'
+        shipment:
+            state: 'स्थिति'
+            states:
+                checkout:   'चेकआउट'
+                pending:    'लंबित'
+                ready:      'तैयार'
+                shipped:    'भेजा गया'
+                returned:   'वापस किया गया'
+                cancelled:  'रद्द किया गया'
+            tracking_code: 'ट्रैकिंग कोड'
+        shipping_calculator:
+            flat_rate_configuration:
+                label: 'प्रति शिपमेंट फ्लैट दर'
+                amount: 'राशि'
+            per_unit_rate_configuration:
+                label: 'प्रति इकाई फ्लैट दर'
+                amount: 'राशि'
+        shipping_category:
+            description: 'विवरण'
+            name: 'नाम'
+        shipping_method:
+            add_rule: 'नियम जोड़ें'
+            calculator: 'कैलकुलेटर'
+            category: 'श्रेणी'
+            category_requirement: 'श्रेणी आवश्यकता'
+            channels: 'चैनल'
+            configuration: 'कॉन्फ़िगरेशन'
+            description: 'विवरण'
+            enabled: 'सक्रिय'
+            match_all_category_requirement: 'सभी इकाइयों को विधि श्रेणी से मेल खाना चाहिए'
+            match_any_category_requirement: 'कम से कम 1 इकाई को विधि श्रेणी से मेल खाना चाहिए'
+            match_none_category_requirement: 'किसी भी इकाई को विधि श्रेणी से मेल खाने की आवश्यकता नहीं'
+            name: 'नाम'
+            position: 'स्थिति'
+            rules: 'नियम'
+            rules_help: 'नियम यह तय करने के लिए उपयोग करें कि यह शिपिंग विधि किसी दिए गए ऑर्डर पर लागू हो सकती है या नहीं। यदि कोई नियम सत्य है तो यह शिपिंग विधि लागू होगी। ध्यान दें कि यदि आप एक से अधिक नियम जोड़ते हैं, तो सभी नियम सत्य होने चाहिए।'
+            select_calculator: 'कैलकुलेटर चुनें'
+            tax_category: 'कर श्रेणी'
+            translations: 'अनुवाद'
+        shipping_method_rule:
+            items_total_greater_than_or_equal: 'आइटम कुल इससे अधिक या बराबर'
+            items_total_less_than_or_equal: 'आइटम कुल इससे कम या बराबर'
+            type: 'प्रकार'
+            total: 'कुल'
+            total_weight_greater_than_or_equal: 'कुल वजन इससे अधिक या बराबर'
+            total_weight_less_than_or_equal: 'कुल वजन इससे कम या बराबर'
+            weight: 'वजन'
+            amount: 'राशि'
+            select: 'नियम प्रकार चुनें'

@@ -21,14 +21,11 @@ jobs:
             matrix:
                 include:
                     -
-                        base_branch: "1.12"
-                        target_branch: "1.13"
-                    -
-                        base_branch: "1.13"
-                        target_branch: "1.14"
-                    -
                         base_branch: "1.14"
-                        target_branch: "2.0"
+                        target_branch: "2.1"
+                    -
+                        base_branch: "2.1"
+                        target_branch: "2.2"
 
         steps:
             -
@@ -43,14 +40,26 @@ jobs:
                     git reset --hard ${{ matrix.base_branch }}
 
             -
+                name: Check if there are differences
+                id: check_diff
+                run: |
+                    git fetch origin ${{ matrix.target_branch }}
+                    if git diff --quiet ${{ matrix.base_branch }} origin/${{ matrix.target_branch }}; then
+                        echo "has_diff=false" >> $GITHUB_OUTPUT
+                    else
+                        echo "has_diff=true" >> $GITHUB_OUTPUT
+                    fi
+
+            -
                 name: Create Pull Request
+                if: steps.check_diff.outputs.has_diff == 'true'
                 uses: peter-evans/create-pull-request@v4
                 with:
                     token: ${{ secrets.SYLIUS_BOT_PAT }}
                     title: '[UPMERGE] ${{ matrix.base_branch }} -> ${{ matrix.target_branch }}'
                     body: |
                         This PR has been generated automatically.
-                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/1.13/.github/workflows/upmerge_pr.yaml).
+                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/2.1/.github/workflows/upmerge_pr.yaml).
                         
                         **Remember!** The upmerge should always be merged with using `Merge pull request` button.
                         

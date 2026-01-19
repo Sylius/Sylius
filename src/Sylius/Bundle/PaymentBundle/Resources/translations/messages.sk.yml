@@ -4,31 +4,35 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: Meno držiteľa karty
-            expiry_month: Mesiac expirácie
-            expiry_year: Rok expirácie
-            number: Číslo karty
-            security_code: Bezpečnostný (CVV) kód
-            type: Typ karty
+            cardholder_name: 'Meno držiteľa karty'
+            expiry_month: 'Mesiac expirácie'
+            expiry_year: 'Rok expirácie'
+            number: 'Číslo karty'
+            security_code: 'Bezpečnostný kód (CVV)'
+            type: 'Typ karty'
         payment:
-            amount: Suma platby
-            method: Spôsob platby
+            amount: 'Suma platby'
+            method: 'Spôsob platby'
             state:
-                header: Stav platby
-                checkout: Košík
-                completed: Dokončená
-                authorized: Autorizovaná
-                failed: Neúspešná
-                new: Nová
-                pending: Čakajúca
-                processing: Spracúvava sa
-                unknown: Neznáme
-                void: Neplatná
-                cancelled: Zrušená
-                refunded: Vrátené peniaze
+                header: 'Stav platby'
+                checkout: 'Pokladňa'
+                completed: 'Dokončené'
+                authorized: 'Autorizované'
+                failed: 'Zlyhané'
+                new: 'Nové'
+                pending: 'Čaká'
+                processing: 'Spracováva sa'
+                unknown: 'Neznáme'
+                void: 'Zrušené'
+                cancelled: 'Zrušené'
+                refunded: 'Vrátené'
         payment_method:
-            description: Popis
-            enabled: Zapnuté?
-            instructions: Inštrukcie
-            name: Názov
-            position: Pozícia
+            description: 'Popis'
+            enabled: 'Povolené'
+            instructions: 'Inštrukcie'
+            name: 'Názov'
+            position: 'Pozícia'
+        gateway_config:
+            type: 'Typ'
+    gateway_factory:
+        offline: 'Offline'

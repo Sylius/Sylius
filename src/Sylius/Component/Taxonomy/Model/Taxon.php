@@ -57,8 +57,6 @@ class Taxon implements TaxonInterface, \Stringable
     public function __construct()
     {
         $this->initializeTranslationsCollection();
-
-        /** @var ArrayCollection<array-key, TaxonInterface> $this->children */
         $this->children = new ArrayCollection();
     }
 
