@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ProductBundle\Validator\Constraint;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ProductVariantOptionValuesConfiguration extends Constraint
 {
     public string $message = 'sylius.product_variant.option_values.not_configured';

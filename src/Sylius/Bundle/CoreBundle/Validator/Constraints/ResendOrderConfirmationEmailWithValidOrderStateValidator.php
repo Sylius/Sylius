@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Sylius\Bundle\CoreBundle\Message\ResendOrderConfirmationEmail;
+use Sylius\Bundle\CoreBundle\Command\ResendOrderConfirmationEmail;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
@@ -43,7 +43,7 @@ final class ResendOrderConfirmationEmailWithValidOrderStateValidator extends Con
         }
 
         /** @var OrderInterface|null $order */
-        $order = $this->orderRepository->findOneBy(['tokenValue' => $value->getOrderTokenValue()]);
+        $order = $this->orderRepository->findOneBy(['tokenValue' => $value->orderTokenValue]);
         if (null === $order) {
             return;
         }

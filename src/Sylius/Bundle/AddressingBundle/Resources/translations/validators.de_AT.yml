@@ -1,0 +1,71 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    address:
+        city:
+            max_length: 'Die Stadt darf nicht länger als {{ limit }} Zeichen sein.|Die Stadt darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Die Stadt muss mindestens {{ limit }} Zeichen lang sein.|Die Stadt muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie eine Stadt ein.'
+        country:
+            not_blank: 'Bitte wählen Sie ein Land aus.'
+            disabled: 'Das gewählte Land ist deaktiviert. Bitte wählen Sie ein anderes.'
+        first_name:
+            max_length: 'Der Vorname darf nicht länger als {{ limit }} Zeichen sein.|Der Vorname darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Der Vorname muss mindestens {{ limit }} Zeichen lang sein.|Der Vorname muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Vornamen ein.'
+        last_name:
+            max_length: 'Der Nachname darf nicht länger als {{ limit }} Zeichen sein.|Der Nachname darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Der Nachname muss mindestens {{ limit }} Zeichen lang sein.|Der Nachname muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Nachnamen ein.'
+        postcode:
+            max_length: 'Die Postleitzahl darf nicht länger als {{ limit }} Zeichen sein.|Die Postleitzahl darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Die Postleitzahl muss mindestens {{ limit }} Zeichen lang sein.|Die Postleitzahl muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie die Postleitzahl ein.'
+        province:
+            valid: 'Bitte wählen Sie die richtige Provinz aus.'
+        street:
+            max_length: 'Die Straße darf nicht länger als {{ limit }} Zeichen sein.|Die Straße darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Die Straße muss mindestens {{ limit }} Zeichen lang sein.|Die Straße muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie die Straße ein.'
+        not_shippable: 'Diese Adresse ist kein gültiges Versandziel.'
+    country:
+        code:
+            not_blank: 'Bitte geben Sie den ISO-Code des Landes ein.'
+            unique: 'Der ISO-Code des Landes muss eindeutig sein.'
+            country: 'Der ISO-Code des Landes ist ungültig.'
+        unique_provinces: 'Alle Provinzen innerhalb dieses Landes müssen eindeutige Codes und Namen haben.'
+    province:
+        code:
+            max_length: 'Der Code darf nicht länger als {{ limit }} Zeichen sein.'
+            not_blank: 'Bitte geben Sie den Provinzcode ein.'
+            regex: 'Der Provinzcode sollte folgendes Format haben: XX-XX (z.B. US-FL).'
+            unique: 'Der Provinzcode muss eindeutig sein.'
+        name:
+            max_length: 'Der Provinzname darf nicht länger als {{ limit }} Zeichen sein.|Der Provinzname darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Der Provinzname muss mindestens {{ limit }} Zeichen lang sein.|Der Provinzname muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Provinznamen ein.'
+            unique: 'Der Provinzname muss eindeutig sein.'
+    zone:
+        scope:
+            not_blank: 'Bitte geben Sie den Bereich ein.'
+        code:
+            max_length: 'Der Code darf nicht länger als {{ limit }} Zeichen sein.'
+            not_blank: 'Bitte geben Sie den Zonencode ein.'
+            regex: 'Der Zonencode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+            unique: 'Der Zonencode muss eindeutig sein.'
+        type:
+            invalid: '"Typ {{ value }} ist ungültig. Erlaubte Typen sind: {{ choices }}.'
+        members:
+            min_count: 'Bitte fügen Sie mindestens {{ limit }} Zonenmitglieder hinzu.'
+        name:
+            max_length: 'Der Zonenname darf nicht länger als {{ limit }} Zeichen sein.|Der Zonenname darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: 'Der Zonenname muss mindestens {{ limit }} Zeichen lang sein.|Der Zonenname muss mindestens {{ limit }} Zeichen lang sein.'
+            not_blank: 'Bitte geben Sie den Zonenname ein.'
+    zone_member:
+        cannot_be_the_same_as_zone: 'Zonenmitglied kann nicht dasselbe wie eine Zone sein.'
+        code:
+            max_length: 'Der Zonemitgliedcode darf nicht länger als {{ limit }} Zeichen sein.'
+            not_blank: 'Bitte wählen Sie ein Zonenmitglied aus.'
+            regex: 'Der Zonemitgliedcode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
+        unique: 'Das gewählte Zonenmitglied ist bereits in dieser Zone.'

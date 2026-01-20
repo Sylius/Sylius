@@ -6,7 +6,7 @@
         {
             "@id": "\/api\/v2\/admin\/products\/CAP",
             "@type": "Product",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "CAP",
             "variantSelectionMethod": "choice",
             "enabled": true,
@@ -28,9 +28,9 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/products\/CAP\/translations\/en_US",
                     "@type": "ProductTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Cap",
                     "slug": "cap",
                     "description": null,
@@ -39,13 +39,13 @@
                     "metaDescription": null
                 }
             },
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         },
         {
             "@id": "\/api\/v2\/admin\/products\/MUG",
             "@type": "Product",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "MUG",
             "variantSelectionMethod": "choice",
             "enabled": true,
@@ -75,7 +75,7 @@
                 {
                     "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
                     "@type": "ProductAttributeValue",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
                     "value": "Ceramic",
                     "localeCode": "en_US"
@@ -83,7 +83,7 @@
                 {
                     "@id": "\/api\/v2\/admin\/product-attribute-values\/@integer@",
                     "@type": "ProductAttributeValue",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "attribute": "\/api\/v2\/admin\/product-attributes\/MATERIAL",
                     "value": "Ceramika",
                     "localeCode": "pl_PL"
@@ -92,19 +92,19 @@
             "averageRating": 0,
             "images": [
                 {
-                    "@id": "\/api\/v2\/admin\/product-images\/@integer@",
+                    "@id": "\/api\/v2\/admin\/products\/MUG\/images\/@integer@",
                     "@type": "ProductImage",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "type": "thumbnail",
-                    "path": "@string@.contains('sylius_small').endsWith('product.jpg')",
+                    "path": "@string@\/sylius_small\/product.jpg",
                     "productVariants": []
                 }
             ],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/products\/MUG\/translations\/en_US",
                     "@type": "ProductTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Mug",
                     "slug": "mug",
                     "description": "This is a mug",
@@ -113,9 +113,9 @@
                     "metaDescription": "Mug description"
                 },
                 "pl_PL": {
-                    "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/products\/MUG\/translations\/pl_PL",
                     "@type": "ProductTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Kubek",
                     "slug": "kubek",
                     "description": "To jest kubek",
@@ -124,13 +124,13 @@
                     "metaDescription": "Opis kubka"
                 }
             },
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         },
         {
             "@id": "\/api\/v2\/admin\/products\/SOCKS",
             "@type": "Product",
-            "id": @integer@,
+            "id": "@integer@",
             "code": "SOCKS",
             "variantSelectionMethod": "choice",
             "enabled": true,
@@ -150,9 +150,9 @@
             "images": [],
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/product-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/products\/SOCKS\/translations\/en_US",
                     "@type": "ProductTranslation",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "name": "Socks",
                     "slug": "socks",
                     "description": null,
@@ -161,8 +161,8 @@
                     "metaDescription": null
                 }
             },
-            "createdAt": @date@,
-            "updatedAt": @date@
+            "createdAt": "@date@",
+            "updatedAt": "@date@"
         }
     ],
     "hydra:totalItems": 3,
@@ -172,25 +172,19 @@
     },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],channel,order[translation.name],localeCode for order[translation.name]}",
+        "hydra:template": "\/api\/v2\/admin\/products{?code,translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],mainTaxon.code,mainTaxon.code[],channel,order[translation.name],localeCode for order[translation.name],order[code],order[createdAt]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
                 "@type": "IriTemplateMapping",
-                "variable": "translations.name",
-                "property": "translations.name",
-                "required": false
-            },
-            {
-                "@type": "IriTemplateMapping",
-                "variable": "order[code]",
+                "variable": "code",
                 "property": "code",
                 "required": false
             },
             {
                 "@type": "IriTemplateMapping",
-                "variable": "order[createdAt]",
-                "property": "createdAt",
+                "variable": "translations.name",
+                "property": "translations.name",
                 "required": false
             },
             {
@@ -203,6 +197,18 @@
                 "@type": "IriTemplateMapping",
                 "variable": "productTaxons.taxon.code[]",
                 "property": "productTaxons.taxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "mainTaxon.code",
+                "property": "mainTaxon.code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "mainTaxon.code[]",
+                "property": "mainTaxon.code",
                 "required": false
             },
             {
@@ -221,6 +227,18 @@
                 "@type": "IriTemplateMapping",
                 "variable": "localeCode for order[translation.name]",
                 "property": "localeCode",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
                 "required": false
             }
         ]

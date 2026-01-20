@@ -1,0 +1,6 @@
+{% set resource = hookable_metadata.context.resource %}
+
+<a class="dropdown-item" href="{{ path('sylius_admin_order_show', {'id': resource.id}) }}">
+    {{ ux_icon('tabler:arrow-back-up', {'class': 'icon dropdown-item-icon'}) }}
+    {{ 'sylius.ui.back'|trans }}
+</a>

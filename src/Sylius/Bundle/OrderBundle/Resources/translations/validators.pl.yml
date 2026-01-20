@@ -3,5 +3,8 @@
 
 sylius:
     order_item:
+        product_variant:
+            not_blank: Nie podano wariantu produktu.
         quantity:
             min: Ilość zamawianych elementów nie może być mniejsza od 1.
+            not_blank: Nie podano ilości.

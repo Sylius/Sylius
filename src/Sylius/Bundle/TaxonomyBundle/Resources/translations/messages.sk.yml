@@ -4,10 +4,10 @@
 sylius:
     form:
         taxon:
-            description: Popis
-            enabled: Zapnuté
-            name: Názov
-            parent: Nadradený prototyp
-            slug: Slug
+            description: 'Popis'
+            enabled: 'Povolené'
+            name: 'Názov'
+            parent: 'Rodič'
+            slug: 'Slug'
         taxonomy:
-            name: Názov
+            name: 'Názov'

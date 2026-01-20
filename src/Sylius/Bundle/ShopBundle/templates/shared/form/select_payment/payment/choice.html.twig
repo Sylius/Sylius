@@ -1,0 +1,13 @@
+{% set form = hookable_metadata.context.form %}
+
+<div class="mb-5">
+    {{ form_errors(form.method) }}
+
+    {% for key, choice_form in form.method %}
+        {% set method = form.method.vars.choices[key].data %}
+        {% set factory_name = method.gatewayConfig.factoryName %}
+        {% hook ['choice.' ~ factory_name, 'choice'] with { 'parent_form': form, 'form': choice_form, 'method': method } %}
+    {% else %}
+        {% hook 'choice#unavailable' %}
+    {% endfor %}
+</div>

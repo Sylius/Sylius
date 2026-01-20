@@ -19,7 +19,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Webmozart\Assert\Assert;
 
-final class ExchangeRateContext implements Context
+final readonly class ExchangeRateContext implements Context
 {
     public function __construct(
         private ApiClientInterface $client,

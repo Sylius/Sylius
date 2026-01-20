@@ -4,11 +4,13 @@
 sylius:
     form:
         tax_category:
-            name: 区分名
-            description: 説明
+            description: '説明'
+            name: '名前'
         tax_rate:
-            category: 税区分
-            name: ゾーン名
-            amount: 税率
-            included_in_price: 内税
-            calculator: 計算方法
+            amount: '金額'
+            calculator: '計算方法'
+            category: 'カテゴリー'
+            end_date: '終了日'
+            included_in_price: '価格に含む？'
+            name: '名前'
+            start_date: '開始日'

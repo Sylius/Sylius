@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+winzou_state_machine:
+    sylius_payment_request:
+        class: "%sylius.model.payment_request.class%"
+        property_path: state
+        graph: sylius_payment_request
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            new: ~
+            processing: ~
+            completed: ~
+            failed: ~
+            cancelled: ~
+        transitions:
+            process:
+                from: [new]
+                to: processing
+            complete:
+                from: [new, processing]
+                to: completed
+            fail:
+                from: [new, processing]
+                to: failed
+            cancel:
+                from: [new, processing]
+                to: cancelled

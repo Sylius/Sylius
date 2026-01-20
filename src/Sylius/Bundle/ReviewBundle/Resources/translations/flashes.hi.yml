@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    review:
+        accept: 'समीक्षा को सफलतापूर्वक स्वीकार कर लिया गया है।'
+        reject: 'समीक्षा को सफलतापूर्वक अस्वीकार कर दिया गया है।'
+        wait_for_the_acceptation: 'आपकी समीक्षा स्वीकृत होने की प्रतीक्षा कर रही है।'

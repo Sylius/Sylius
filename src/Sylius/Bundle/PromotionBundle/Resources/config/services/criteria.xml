@@ -17,14 +17,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service id="sylius.catalog_promotion.criteria.enabled" class="Sylius\Bundle\PromotionBundle\Criteria\Enabled">
             <tag name="sylius.catalog_promotion.criteria" />
         </service>
 
         <service id="sylius.catalog_promotion.criteria.date_range" class="Sylius\Bundle\PromotionBundle\Criteria\DateRange">
-            <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface" />
+            <argument type="service" id="clock" />
             <tag name="sylius.catalog_promotion.criteria" />
         </service>
     </services>

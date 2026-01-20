@@ -17,212 +17,229 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueShopUserEmailValidator">
+        <service id="sylius_api.validator.unique_shop_user_email" class="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueShopUserEmailValidator">
             <argument type="service" id="sylius.canonicalizer" />
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius_validator_unique_shop_user_email" />
         </service>
-        <service id="sylius_api.validator.unique_shop_user_email" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueShopUserEmailValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmptyValidator" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmptyValidator">
+        <service
+            id="sylius_api.validator.order_not_empty"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmptyValidator"
+        >
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_not_empty" />
         </service>
-        <service id="sylius_api.validator.order_not_empty" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmptyValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator">
+        <service
+            id="sylius_api.validator.order_product_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator"
+        >
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_product_eligibility" />
         </service>
-        <service id="sylius_api.validator.order_product_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator">
+        <service
+            id="sylius_api.validator.order_item_availability"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator"
+        >
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_item_availability" />
         </service>
-        <service id="sylius_api.validator.order_item_availability" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator">
+        <service
+            id="sylius_api.validator.order_shipping_method_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator"
+        >
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.checker.shipping_method_eligibility" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_order_shipping_method_eligibility" />
         </service>
-        <service id="sylius_api.validator.order_shipping_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator">
+        <service
+            id="sylius_api.validator.checkout_completion"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator"
+        >
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_checkout_completion" />
         </service>
-        <service id="sylius_api.validator.checkout_completion" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\CheckoutCompletionValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenShippingMethodEligibilityValidator">
+        <service
+            id="sylius_api.validator.chosen_shipping_method_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenShippingMethodEligibilityValidator"
+        >
             <argument type="service" id="sylius.repository.shipment" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.resolver.shipping_methods" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_chosen_shipping_method_eligibility" />
         </service>
-        <service id="sylius_api.validator.chosen_shipping_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenShippingMethodEligibilityValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCartValidator">
-            <argument type="service" id="sylius.repository.product_variant" />
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sylius.checker.inventory.availability" />
-            <tag name="validator.constraint_validator" alias="sylius_api_validator_adding_eligible_product_variant_to_cart" />
+        <service
+            id="sylius_api.validator.adding_eligible_product_variant_to_cart"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCartValidator"
+        >
+            <argument type="service" id="sylius.repository.product_variant"/>
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="sylius.checker.inventory.availability"/>
+            <tag name="validator.constraint_validator"
+                 alias="sylius_api_validator_adding_eligible_product_variant_to_cart"/>
         </service>
-        <service id="sylius_api.validator.adding_eligible_product_variant_to_cart" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\AddingEligibleProductVariantToCartValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCartValidator">
+        <service
+            id="sylius_api.validator.changed_item_quantity_in_cart"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCartValidator"
+        >
             <argument type="service" id="sylius.repository.order_item" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_changed_item_quantity_in_cart" />
         </service>
-        <service id="sylius_api.validator.changed_item_quantity_in_cart" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ChangedItemQuantityInCartValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddressValidator">
+        <service
+            id="sylius_api.validator.correct_order_address"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddressValidator"
+        >
             <argument type="service" id="sylius.repository.country" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_correct_order_address" />
         </service>
-        <service id="sylius_api.validator.correct_order_address" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectOrderAddressValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator">
+        <service
+            id="sylius_api.validator.order_payment_method_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator"
+        >
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_api_order_payment_method_eligibility" />
         </service>
-        <service id="sylius_api.validator.order_payment_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibilityValidator">
+        <service
+            id="sylius_api.validator.chosen_payment_method_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibilityValidator"
+        >
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.resolver.payment_methods" />
             <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_method_eligibility" />
         </service>
-        <service id="sylius_api.validator.chosen_payment_method_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibilityValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CanPaymentMethodBeChangedValidator">
+        <service
+            id="sylius_api.validator.can_payment_method_be_changed"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\CanPaymentMethodBeChangedValidator"
+        >
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_api_validator_can_payment_method_be_changed" />
         </service>
-        <service id="sylius_api.validator.can_payment_method_be_changed" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\CanPaymentMethodBeChangedValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPasswordValidator">
+        <service
+            id="sylius_api.validator.correct_change_shop_user_confirm_password"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPasswordValidator"
+        >
             <tag name="validator.constraint_validator" alias="sylius_api_correct_change_shop_user_confirm_password" />
         </service>
-        <service id="sylius_api.validator.correct_change_shop_user_confirm_password" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPasswordValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPasswordValidator">
+        <service id="sylius_api.validator.confirm_reset_password" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPasswordValidator">
             <tag name="validator.constraint_validator" alias="sylius_api_confirm_reset_password" />
         </service>
-        <service id="sylius_api.validator.confirm_reset_password" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPasswordValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator">
+        <service
+            id="sylius_api.validator.promotion_coupon_eligibility"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator"
+        >
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius_api.checker.applied_coupon_eligibility" />
             <tag name="validator.constraint_validator" alias="sylius_api_promotion_coupon_eligibility" />
         </service>
-        <service id="sylius_api.validator.promotion_coupon_eligibility" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentAlreadyShippedValidator">
+        <service id="sylius_api.validator.shipment_already_shipped" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentAlreadyShippedValidator">
             <argument type="service" id="sylius.repository.shipment" />
             <tag name="validator.constraint_validator" alias="sylius_api_shipment_already_shipped" />
         </service>
-        <service id="sylius_api.validator.shipment_already_shipped" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ShipmentAlreadyShippedValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenExistsValidator">
+        <service id="sylius_api.validator.shop_user_reset_password_token_exists" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenExistsValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius_api_shop_user_reset_password_token_exists" />
         </service>
-        <service id="sylius_api.validator.shop_user_reset_password_token_exists" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenExistsValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenNotExpiredValidator">
+        <service id="sylius_api.validator.shop_user_reset_password_token_not_expired" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenNotExpiredValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="string">%sylius.shop_user.token.password_reset.ttl%</argument>
             <tag name="validator.constraint_validator" alias="sylius_api_shop_user_reset_password_token_not_expired" />
         </service>
-        <service id="sylius_api.validator.shop_user_reset_password_token_not_expired" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserResetPasswordTokenNotExpiredValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerifiedValidator">
+        <service id="sylius_api.validator.shop_user_not_verified" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerifiedValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <tag name="validator.constraint_validator" alias="sylius_api_shop_user_not_verified" />
         </service>
-        <service id="sylius_api.validator.shop_user_not_verified" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserNotVerifiedValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\SingleValueForProductVariantOptionValidator">
+        <service id="sylius_api.validator.shop_user_verification_token_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ShopUserVerificationTokenEligibilityValidator">
+            <argument type="service" id="sylius.repository.shop_user" />
+            <tag name="validator.constraint_validator" alias="sylius_api_validator_shop_user_verification_token_eligibility" />
+        </service>
+
+        <service id="sylius_api.validator.single_value_for_product_variant_option" class="Sylius\Bundle\ApiBundle\Validator\Constraints\SingleValueForProductVariantOptionValidator">
             <tag name="validator.constraint_validator" alias="sylius_api_validator_single_value_for_product_variant_option" />
         </service>
-        <service id="sylius_api.validator.single_value_for_product_variant_option" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\SingleValueForProductVariantOptionValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AccountVerificationTokenEligibilityValidator">
-            <argument type="service" id="sylius.repository.shop_user" />
-            <tag name="validator.constraint_validator" alias="sylius_api_validator_account_verification_token_eligibility" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0, use the usual symfony logic for validation.</deprecated>
-        </service>
-
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator">
+        <service id="sylius_api.validator.unique_reviewer_email" class="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius_api.context.user.token_based" />
             <tag name="validator.constraint_validator" alias="sylius_api_unique_reviewer_email_validator" />
         </service>
-        <service id="sylius_api.validator.unique_reviewer_email" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\UniqueReviewerEmailValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\Constraints\AdminResetPasswordTokenNonExpiredValidator">
+        <service id="sylius_api.validator.admin_reset_password_token_non_expired" class="Sylius\Bundle\ApiBundle\Validator\Constraints\AdminResetPasswordTokenNonExpiredValidator">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="string">%sylius.admin_user.token.password_reset.ttl%</argument>
             <tag name="validator.constraint_validator" alias="sylius_api_validator_admin_non_expired_password_reset_token" />
         </service>
-        <service id="sylius_api.validator.admin_reset_password_token_non_expired" alias="Sylius\Bundle\ApiBundle\Validator\Constraints\AdminResetPasswordTokenNonExpiredValidator" />
 
-        <service id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\PercentageDiscountActionValidator">
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <tag name="sylius.catalog_promotion.action_validator" key="percentage_discount"/>
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0, use the usual symfony logic for validation.</deprecated>
+        <service id="sylius_api.validator.chosen_payment_request_action_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentRequestActionEligibilityValidator">
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.command_provider.payment_request.default" />
+            <argument type="service" id="sylius.provider.payment_request.gateway_factory_name" />
+            <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_request_action_eligibility" />
         </service>
 
-        <service
-            id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\FixedDiscountActionValidator"
-            decorates="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionAction\FixedDiscountActionValidator"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\FixedDiscountActionValidator.inner" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0, use the usual symfony logic for validation.</deprecated>
-        </service>
-
-        <service
-            id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForProductsScopeValidator"
-            decorates="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForProductsScopeValidator"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForProductsScopeValidator.inner" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0, use the usual symfony logic for validation.</deprecated>
-        </service>
-
-        <service
-            id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForTaxonsScopeValidator"
-            decorates="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForTaxonsScopeValidator"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForTaxonsScopeValidator.inner" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0, use the usual symfony logic for validation.</deprecated>
-        </service>
-
-        <service
-            id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForVariantsScopeValidator"
-            decorates="Sylius\Bundle\CoreBundle\CatalogPromotion\Validator\CatalogPromotionScope\ForVariantsScopeValidator"
-        >
-            <argument type="service" id="Sylius\Bundle\ApiBundle\Validator\CatalogPromotion\ForVariantsScopeValidator.inner" />
-            <argument type="service" id="Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface" />
-            <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0, use the usual symfony logic for validation.</deprecated>
-        </service>
-
-        <service id="sylius.validator.order_address_requirement" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirementValidator">
+        <service id="sylius_api.validator.order_address_requirement" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirementValidator">
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_order_address_requirement_validator" />
         </service>
-        <service id="sylius_api.validator.order_address_requirement" alias="sylius.validator.order_address_requirement" />
+
+        <service
+            id="sylius_api.validator.groups_generator.shipping_method_configuration"
+            class="Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator"
+            decorates="sylius.validator.groups_generator.shipping_method_configuration"
+        >
+            <argument>%sylius.shipping.shipping_method_calculator.validation_groups%</argument>
+            <tag name="api_platform.validation_groups_generator" />
+        </service>
+
+        <service
+            id="sylius_api.validator.groups_generator.payment_method"
+            class="Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\PaymentMethodGroupsGenerator"
+            decorates="sylius.validator.groups_generator.payment_method"
+        >
+            <argument>%sylius.form.type.payment_method.validation_groups%</argument>
+            <argument type="service" id="sylius.validator.groups_generator.gateway_config" />
+            <tag name="api_platform.validation_groups_generator" />
+        </service>
+
+        <service
+            id="sylius_api.validator.update_cart_email_not_allowed"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\UpdateCartEmailNotAllowedValidator"
+        >
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
+            <tag name="validator.constraint_validator" alias="sylius_validator_update_cart_email_not_allowed" />
+        </service>
+
+        <service
+            id="sylius_api.validator.placed_order_cart_items_immutable"
+            class="Sylius\Bundle\ApiBundle\Validator\Constraints\PlacedOrderCartItemsImmutableValidator"
+        >
+            <argument type="service" id="sylius.repository.order"/>
+            <tag name="validator.constraint_validator" alias="sylius_validator_placed_order_cart_items_immutable"/>
+        </service>
     </services>
 </container>

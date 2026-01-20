@@ -5,9 +5,11 @@ default:
     suites:
         ui_applying_taxes:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
+                - sylius.behat.context.hook.calendar
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.guest_cart
                 - sylius.behat.context.hook.session
-                - Sylius\Calendar\Tests\Behat\Context\Hook\CalendarContext
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.country
@@ -20,19 +22,23 @@ default:
                 - sylius.behat.context.transform.tax_rate
                 - sylius.behat.context.transform.zone
 
+                - sylius.behat.context.setup.calendar
+                - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout.address
+                - sylius.behat.context.setup.checkout.shipping
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
-                - sylius.behat.context.setup.shop_security
-                - Sylius\Calendar\Tests\Behat\Context\Setup\CalendarContext
 
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.checkout
                 - sylius.behat.context.ui.shop.checkout.addressing

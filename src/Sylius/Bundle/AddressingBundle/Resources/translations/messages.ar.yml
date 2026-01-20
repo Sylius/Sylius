@@ -12,14 +12,14 @@ sylius:
             phone_number: رقم الهاتف
             postcode: الرمز البريدي
             street: عنوان الشارع
-            province: المحافظة
+            province: المقاطعة
             zone: المنطقة
         country:
-            add_province: إضافة محافظة
+            add_province: إضافة مقاطعة
             name: الاسم
-            provinces: المحافظات
+            provinces: المقاطعات
             select: اختر
-            enabled: مفعل
+            enabled: مفعّل
         province:
             name: الاسم
             abbreviation: الاختصار
@@ -30,12 +30,13 @@ sylius:
             name: الاسم
             type: النوع
             types:
-                country: دولة
-                province: محافظة
-                zone: منطقة
+                country: الدولة
+                province: المقاطعة
+                zone: المنطقة
             scope: النطاق
             scopes:
                 all: الكل
             select: اختر
+            select_scope: اختر النطاق
         zone_member:
             select: اختر

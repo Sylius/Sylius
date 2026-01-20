@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        request_reset_password:
+            success: '입력하신 이메일이 시스템에 등록되어 있다면, 비밀번호 재설정 방법이 안내된 이메일을 보냈습니다.'
+        password_reset:
+            success: '비밀번호가 성공적으로 변경되었습니다!'
+            token_expired: '비밀번호 재설정 토큰이 만료되었습니다.'
+    email:
+        order_confirmation_resent: '주문 확인 메일이 고객에게 성공적으로 재전송되었습니다.'
+        shipment_confirmation_resent: '배송 확인 메일이 고객에게 성공적으로 재전송되었습니다.'
+    product_variant:
+        cannot_generate_variants: '옵션 값이 없는 상품에는 바리아ント를 생성할 수 없습니다.'
+    locale:
+        delete:
+            is_used: '해당 로케일은 하나 이상의 번역에 사용되고 있어 삭제할 수 없습니다.'
+            success: '로케일이 성공적으로 삭제되었습니다.'

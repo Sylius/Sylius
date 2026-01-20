@@ -32,7 +32,12 @@ abstract class AbstractOrmTestCase extends TestCase
         $config->setProxyNamespace('Sylius\Tests\Functional\Doctrine\Proxies');
         $config->setMetadataCache(new ArrayAdapter());
         $config->setQueryCache(new ArrayAdapter());
-        $config->setMetadataDriverImpl(ORMSetup::createDefaultAnnotationDriver());
+        $config->setMetadataDriverImpl(
+            ORMSetup::createAttributeMetadataConfiguration(
+                [],
+                true,
+            )->getMetadataDriverImpl(),
+        );
 
         return $config;
     }

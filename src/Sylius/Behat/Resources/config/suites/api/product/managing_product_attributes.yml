@@ -8,6 +8,7 @@ default:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.product_attribute
                 - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.setup.admin_api_security
@@ -20,6 +21,7 @@ default:
                 - sylius.behat.context.api.admin.response
                 - sylius.behat.context.api.admin.save
                 - sylius.behat.context.api.admin.translation
+                - sylius.behat.context.api.debug
 
             filters:
                 tags: "@managing_product_attributes&&@api"

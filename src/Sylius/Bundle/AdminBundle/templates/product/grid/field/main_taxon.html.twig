@@ -1,0 +1,10 @@
+{% if data.fullname is defined %}
+    {% set categories = data.fullname|replace({ (data.name): '' }) %}
+
+    {% if categories %}
+        <span class="text-muted cursor-default" data-bs-toggle="tooltip" data-bs-title="{{ categories[:-2] }}">.. /</span>
+    {% endif %}
+    {{ data.name }}
+{% else %}
+    <span class="text-muted">{{ ux_icon('tabler:exclamation-circle') }} {{ 'sylius.ui.no_main_taxon'|trans }}</span>
+{% endif %}

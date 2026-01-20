@@ -1,0 +1,12 @@
+{
+    "@context": "\/api\/v2\/contexts\/Error",
+    "@id": "\/api\/v2\/errors\/400",
+    "@type": "hydra:Error",
+    "detail": "Request does not have the following required fields specified: paymentMethodCode.",
+    "status": 400,
+    "type": "\/errors\/400",
+    "hydra:description": "Request does not have the following required fields specified: paymentMethodCode.",
+    "hydra:title": "An error occurred",
+    "title": "@string@.contains('An error occurred').optional()",
+    "description": "@string@.contains('Request does not have the following required fields specified: paymentMethodCode.').optional()"
+}

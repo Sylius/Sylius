@@ -37,7 +37,7 @@ final class SyliusChannelExtension extends AbstractResourceExtension
         if ($config['debug'] ?? $container->getParameter('kernel.debug')) {
             $loader->load('services/integrations/debug.xml');
 
-            $container->getDefinition('sylius.channel_collector')->replaceArgument(2, true);
+            $container->getDefinition('sylius.collector.channel')->replaceArgument(2, true);
         }
 
         $container->getDefinition('sylius.repository.channel')->setLazy(true);

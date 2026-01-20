@@ -4,4 +4,5 @@
 sylius:
     form:
         locale:
-            name: 이름
+            name: '이름'
+            select: '로케일 선택...'

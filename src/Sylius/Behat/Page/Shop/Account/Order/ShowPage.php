@@ -14,18 +14,18 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SyliusPage implements ShowPageInterface
 {
     public function __construct(
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private TableAccessorInterface $tableAccessor,
+        protected TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -84,7 +84,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         foreach ($paymentMethodItems as $method) {
             if ($method->find('css', '[data-test-payment-method-select]')->hasAttribute('checked')) {
-                return $method->find('css', 'a')->getText();
+                return $method->find('css', '[data-test-payment-method-checkbox]')->getText();
             }
         }
 
@@ -93,19 +93,15 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getTotal(): string
     {
-        $totalElement = $this->getElement('total');
-
-        return trim(str_replace('Total:', '', $totalElement->getText()));
+        return $this->getElement('total')->getText();
     }
 
     public function getSubtotal(): string
     {
-        $totalElement = $this->getElement('subtotal');
-
-        return trim(str_replace('Items total:', '', $totalElement->getText()));
+        return $this->getElement('subtotal')->getText();
     }
 
-    public function getOrderShipmentStatus(): string
+    public function getOrderShipmentState(): string
     {
         return $this->getElement('order_shipment_state')->getText();
     }
@@ -125,7 +121,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('payment_price')->getText();
     }
 
-    public function getPaymentStatus(): string
+    public function getPaymentState(): string
     {
         return $this->getElement('payment_state')->getText();
     }
@@ -163,6 +159,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '[data-test-billing-address]',
+            'checked_payment_method' => '[data-test-payment-item] div.form-check:has(input:checked)',
             'number' => '[data-test-order-number]',
             'order_items' => '[data-test-order-table]',
             'order_payment_state' => '[data-test-order-payment-state]',
@@ -172,7 +169,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'payment_price' => '[data-test-payment-price]',
             'payment_state' => '[data-test-payment-state]',
             'product_name' => '[data-test-order-table] [data-test-product-name="%productName%"]',
-            'product_price' => '[data-test-order-table] td:nth-child(2)',
+            'product_price' => '[data-test-order-table] [data-test-product-unit-price]',
             'shipment_state' => '[data-test-shipment-state]',
             'shipping_address' => '[data-test-shipping-address]',
             'subtotal' => '[data-test-subtotal]',
@@ -180,7 +177,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    private function hasAddress(
+    protected function hasAddress(
         string $elementText,
         string $customerName,
         string $street,

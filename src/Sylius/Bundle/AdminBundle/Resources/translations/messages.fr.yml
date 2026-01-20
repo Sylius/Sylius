@@ -16,80 +16,116 @@ sylius:
                 period_for_which_the_lowest_price_is_calculated: 'Période pour laquelle le prix le plus bas est calculé'
             reset_password:
                 password:
-                    label: Nouveau mot de passe
-                    confirmation: Confirmer nouveau mot de passe
+                    label: 'Nouveau mot de passe'
+                    confirmation: 'Confirmer nouveau mot de passe'
     menu:
         admin:
             main:
                 catalog:
-                    association_types: Types d'associations
-                    attributes: Attributs
-                    header: Catalogue
-                    inventory: Stock
-                    options: Options
-                    products: Produits
-                    taxons: Taxons
+                    association_types: 'Types d''associations'
+                    attributes: 'Attributs'
+                    header: 'Catalogue'
+                    inventory: 'Stock'
+                    options: 'Options'
+                    products: 'Produits'
+                    taxons: 'Taxons'
                 configuration:
-                    admin_users: Administrateurs
-                    channels: Canaux
-                    countries: Pays
-                    currencies: Devises
-                    exchange_rates: Taux de change
-                    header: Configuration
-                    locales: Locales
-                    payment_methods: Moyens de paiement
-                    shipping_categories: Catégories d'expédition
-                    shipping_methods: Modes de livraison
-                    tax_categories: Catégories de taxe
-                    tax_rates: Taux de taxe
-                    zones: Zones
+                    admin_users: 'Administrateurs'
+                    channels: 'Canaux'
+                    countries: 'Pays'
+                    currencies: 'Devises'
+                    exchange_rates: 'Taux de change'
+                    header: 'Configuration'
+                    locales: 'Locales'
+                    payment_methods: 'Moyens de paiement'
+                    shipping_categories: 'Catégories d''expédition'
+                    shipping_methods: 'Modes de livraison'
+                    tax_categories: 'Catégories de taxe'
+                    tax_rates: 'Taux de taxe'
+                    zones: 'Zones'
                 marketing:
-                    cart_promotions: Promotions panier
-                    catalog_promotions: Promotions catalogue
-                    header: Marketing
-                    product_reviews: Avis produit
-                    promotions: Promotions
+                    cart_promotions: 'Promotions panier'
+                    catalog_promotions: 'Promotions catalogue'
+                    header: 'Marketing'
+                    product_reviews: 'Avis produit'
+                    promotions: 'Promotions'
                 customers:
-                    customers: Clients
-                    groups: Groupes
-                    header: Client
+                    customers: 'Clients'
+                    groups: 'Groupes'
+                    header: 'Client'
                 sales:
-                    header: Ventes
-                    orders: Commandes
+                    header: 'Ventes'
+                    orders: 'Commandes'
                 official_support:
-                    header: Support officiel
-                    browse_plugins: Parcourir les plugins
-                    sylius_plus: Sylius Plus
-                    professional_services: Services professionnels
-                    find_a_partner: Trouver un partenaire
-                    sylius_certification: Certification Sylius
+                    header: 'Support officiel'
+                    browse_plugins: 'Parcourir les plugins'
+                    sylius_plus: 'Sylius Plus'
+                    professional_services: 'Services professionnels'
+                    find_a_partner: 'Trouver un partenaire'
+                    sylius_certification: 'Certification Sylius'
     ui:
+        account: 'Compte'
+        admin_user: 'Administrateur'
+        add_new_entry: 'Ajouter une nouvelle entrée'
+        back_to_dashboard: 'Retour au tableau de bord'
         catalog_promotion:
-            dates_details: Cette opération prend du temps ! Veuillez tenir compte d'un délai de 2 à 10 minutes à partir des dates spécifiées. Le délai dépend de la taille du catalogue.
+            dates_details: 'Cette opération prend du temps ! Veuillez tenir compte d''un délai de 2 à 10 minutes à partir des dates spécifiées. Le délai dépend de la taille du catalogue.'
         channel:
-            account_verification_required_details: En désactivant cette option, il sera possible de créer des comptes et d'y accéder sans vérification de l'adresse électronique et donc d'accéder potentiellement aux données des commandes passées en tant qu'invité.
+            account_verification_required_details: 'En désactivant cette option, il sera possible de créer des comptes et d''y accéder sans vérification de l''adresse électronique et donc d''accéder potentiellement aux données des commandes passées en tant qu''invité.'
         channel_pricing_history: 'Historique des prix des canaux'
-        channel_pricings: Prix du canal
-        gateway:
-            no_sca_support_notice: L'interface de paiement choisie ne prend pas en charge l'authentification forte du client.
-            pay_pal_express_checkout_deprecation_notice: >
-                PayPal Express Checkout est obsolète. Veuillez utiliser la nouvelle intégration de <a href="https://github.com/Sylius/PayPalPlugin" target="_blank">PayPal Commerce Platform</a>.
+        channel_pricings: 'Prix du canal'
+        create_new:
+            customer_group: 'Créer un nouveau groupe de clients'
+        delete_avatar: 'Supprimer l''avatar'
+        full_screen: 'Plein écran'
+        global: 'Global'
+        ip_address: 'Adresse IP'
+        language: 'Langue'
         lowest_price_before_discount: 'Prix le plus bas avant remise'
-        minimum_price_details: Prix minimum - il s'agit du seuil de prix en dessous duquel le prix actuel ne peut être remisé par une quelconque promotion. Utilisez ceci pour garder la rentabilité de vos ventes.
-        original_price_details: Prix original (aussi appelé prix barré) - il s'agit du prix de la variante de produit, il est affiché barré dans le catalogue. Il est utilisé comme base pour les calculs de prix actuels. Si cette valeur n'est pas définie, la logique de promotion du catalogue (Catalog Promotion) copiera la valeur du prix dans le prix d'origine.
-        original_product_price_details: Prix original (aussi appelé prix barré) - il s'agit du prix du produit, il est affiché barré dans le catalogue. Il est utilisé comme base pour les calculs de prix actuels. Si cette valeur n'est pas définie, la logique de promotion du catalogue (Catalog Promotion) copiera la valeur du prix dans le prix d'origine.
-        price_details: 'Prix - il s''agit du prix actuel de la variante de produit affichée dans le catalogue. Il peut être modifié par des mécanismes internes, ex: les promotions du catalogue.'
-        product_price_details: 'Prix - il s''agit du prix actuel du produit affiché dans le catalogue. Il peut être modifié par des mécanismes internes, ex: les promotions du catalogue.'
-        price_history: Historique des prix
+        minimum_price_details: 'Prix minimum - il s''agit du seuil de prix en dessous duquel le prix actuel ne peut être remisé par une quelconque promotion. Utilisez ceci pour garder la rentabilité de vos ventes.'
+        more: 'Plus'
+        no_main_taxon: 'pas de taxon principal'
+        no_depth: 'Aucune profondeur'
+        no_height: 'Aucune hauteur'
+        no_results: 'Aucun résultat'
+        no_results_adjust_your_search: 'Ajustez votre recherche et réessayez.'
+        no_weight: 'Aucun poids'
+        no_width: 'Aucune largeur'
+        omnibus: 'Omnibus'
+        order:
+            date: 'Date de commande'
+        original_price_details: 'Prix original (prix barré) - il s''agit du prix de la variante de produit ; il est affiché barré dans le catalogue. Il sert de base aux calculs de prix actuels. Si cette valeur n''est pas définie, la promotion du catalogue copiera la valeur du prix dans le prix d''origine.'
+        original_product_price_details: 'Prix original (prix barré) - il s''agit du prix du produit ; il est affiché barré dans le catalogue. Il sert de base aux calculs de prix actuels. Si cette valeur n''est pas définie, la promotion du catalogue copiera la valeur du prix dans le prix d''origine.'
+        overdue: 'En retard'
+        page_not_found: 'Page non trouvée'
+        pagination:
+            number_of_results: 'Affichage de %from% à %to% sur %total% entrées'
+        partially_refunded: 'Partiellement remboursé'
+        pending_actions: 'Actions en attente'
+        price_details: 'Prix - il s''agit du prix actuel de la variante de produit affichée dans le catalogue. Il peut être modifié par des mécanismes internes, par exemple les promotions du catalogue.'
+        product_price_details: 'Prix - il s''agit du prix actuel du produit affiché dans le catalogue. Il peut être modifié par des mécanismes internes, par exemple les promotions du catalogue.'
+        price_history: 'Historique des prix'
         product:
-            product_not_active_in_channel: Le produit n'est pas encore activé pour ce canal.
-        sales_summary: Récapitulatif des ventes
-        shipment_for_order: Expédition pour la commande
+            product_not_active_in_channel: 'Le produit n''est pas encore activé pour ce canal.'
+        product_variant: 'Variante de produit'
+        sales_summary: 'Récapitulatif des ventes'
+        search_menu: 'Rechercher dans le menu'
+        shipment_for_order: 'Expédition pour la commande'
         show_history_for_channel_pricing: 'Afficher l''historique des prix des canaux'
+        start_typing_to_search: 'Commencez à taper pour rechercher'
         statistics:
-            day: Jour
-            lifetime: Durée de vie
-            month: Mois
-            week: Semaine
-            2weeks: 2 Semaines
-            year: Année
+            day: 'Jour'
+            lifetime: 'Durée de vie'
+            month: 'Mois'
+            week: 'Semaine'
+            2weeks: '2 Semaines'
+            year: 'Année'
+        taxon: 'Taxon'
+        to_approve: 'à approuver'
+        to_process: 'à traiter'
+        to_ship: 'à expédier'
+        view_in_store: 'Voir en boutique'
+        work_in_progress: 'Travail en cours'
+        empty_date: 'vide'
+        notifications:
+            new_version_of_sylius_available: 'Une nouvelle version de Sylius est disponible. Contactez votre administrateur pour faire la mise à jour.'

@@ -1,0 +1,5 @@
+{% set form = hookable_metadata.context.form %}
+
+{% for option_form in form.optionValues %}
+    {{ form_row(option_form) }}
+{% endfor %}

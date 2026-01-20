@@ -192,11 +192,13 @@ class Adjustment implements AdjustmentInterface
         return $this->orderItemUnit;
     }
 
+    /** @return array<mixed> */
     public function getDetails(): array
     {
         return $this->details;
     }
 
+    /** @param array<mixed> $details */
     public function setDetails(array $details): void
     {
         $this->details = $details;

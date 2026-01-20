@@ -16,37 +16,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
-    <parameters>
-        <parameter key="sylius.form.type.gateway_config.validation_groups" type="collection">
-            <parameter>sylius</parameter>
-        </parameter>
-    </parameters>
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.form.type.gateway_config" class="Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType">
-            <argument>%sylius.model.gateway_config.class%</argument>
-            <argument>%sylius.form.type.gateway_config.validation_groups%</argument>
-            <argument type="service" id="sylius.form_registry.payum_gateway_config" />
-            <tag name="form.type" />
+        <service id="sylius_payum.form.extension.type.payum_gateway_config" class="Sylius\Bundle\PayumBundle\Form\Extension\PayumGatewayConfigTypeExtension">
+            <argument type="service" id="payum" />
+            <argument type="service" id="sylius.command_provider.payment_request.default" />
+            <tag name="form.type_extension" priority="200" />
         </service>
 
-        <service id="sylius.form.extension.type.gateway_config.crypted" class="Sylius\Bundle\PayumBundle\Form\Extension\CryptedGatewayConfigTypeExtension">
+        <service id="sylius_payum.form.extension.type.crypted_gateway_config" class="Sylius\Bundle\PayumBundle\Form\Extension\CryptedGatewayConfigTypeExtension">
+            <argument type="service" id="sylius_payum.checker.payum_gateway_config_encryption"/>
             <argument type="service" id="payum.dynamic_gateways.cypher" on-invalid="null" />
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PayumBundle\Form\Type\GatewayConfigType" priority="100" />
-        </service>
-        <service id="sylius_payum.form.extension.type.crypted_gateway_config" alias="sylius.form.extension.type.gateway_config.crypted" />
-
-        <service id="sylius.form.type.gateway_configuration.paypal" class="Sylius\Bundle\PayumBundle\Form\Type\PaypalGatewayConfigurationType">
-            <tag name="sylius.gateway_configuration_type" type="paypal_express_checkout" label="sylius.payum_gateway_factory.paypal_express_checkout" priority="100" />
-            <tag name="form.type" />
-            <deprecated package="sylius/payum-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
-        </service>
-
-        <service id="sylius.form.type.gateway_configuration.stripe" class="Sylius\Bundle\PayumBundle\Form\Type\StripeGatewayConfigurationType">
-            <tag name="sylius.gateway_configuration_type" type="stripe_checkout" label="sylius.payum_gateway_factory.stripe_checkout" priority="50" />
-            <tag name="form.type" />
-            <deprecated package="sylius/payum-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
+            <tag name="form.type_extension" priority="100" />
         </service>
     </services>
 </container>

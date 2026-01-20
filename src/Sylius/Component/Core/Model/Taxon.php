@@ -32,8 +32,6 @@ class Taxon extends BaseTaxon implements TaxonInterface, Comparable
         parent::__construct();
 
         $this->createdAt = new \DateTime();
-
-        /** @var ArrayCollection<array-key, ImageInterface> $this->images */
         $this->images = new ArrayCollection();
     }
 

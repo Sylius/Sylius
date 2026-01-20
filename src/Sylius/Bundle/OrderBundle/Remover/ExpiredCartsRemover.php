@@ -15,6 +15,7 @@ namespace Sylius\Bundle\OrderBundle\Remover;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\OrderBundle\SyliusExpiredCartsEvents;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -42,6 +43,7 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
         }
     }
 
+    /** @return array<OrderInterface> */
     private function getBatch(): array
     {
         $terminalDate = new \DateTime(sprintf('-%s', $this->expirationPeriod));
@@ -49,6 +51,7 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
         return $this->orderRepository->findCartsNotModifiedSince($terminalDate, $this->batchSize);
     }
 
+    /** @param array<mixed> $deletedCarts */
     private function processDeletion(array $deletedCarts): void
     {
         $this->eventDispatcher->dispatch(new GenericEvent($deletedCarts), SyliusExpiredCartsEvents::PRE_REMOVE);

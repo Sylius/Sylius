@@ -33,6 +33,11 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
         $this->registerAutoconfiguration($container);
     }
 
+    /**
+     * @param array<string, mixed> $resources
+     *
+     * @return array<string, mixed>
+     */
     private function resolveResources(array $resources, ContainerBuilder $container): array
     {
         $container->setParameter('sylius.attribute.subjects', $resources);

@@ -4,6 +4,7 @@
 sylius:
     cart:
         add_item: 'Položka byla přidána do košíku'
-        cannot_modify: 'Objednávka pro košík, který jste zkusili upravit, už byla odeslána.'
-        remove_item: 'Položka byla odebrána z košíku'
+        cannot_modify: 'Objednávka již byla odeslána pro košík, který jste se pokusili upravit.'
+        not_recalculated: 'Vzhledem k neplatným hodnotám ve vašem košíku nebyl přepočítán.'
+        remove_item: 'Položka byla odstraněna z košíku'
         save: 'Košík byl úspěšně aktualizován'

@@ -20,6 +20,7 @@ use Webmozart\Assert\Assert;
 
 final class OnFlushEntityObserverListener
 {
+    /** @param iterable<mixed> $entityObservers */
     public function __construct(private iterable $entityObservers)
     {
         Assert::allImplementsInterface($this->entityObservers, EntityObserverInterface::class);
@@ -57,6 +58,7 @@ final class OnFlushEntityObserverListener
         }
     }
 
+    /** @param array<mixed> $supportedFields */
     private function isEntityChanged(UnitOfWork $unitOfWork, object $entity, array $supportedFields): bool
     {
         $changedFields = array_keys($unitOfWork->getEntityChangeSet($entity));

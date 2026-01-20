@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -23,7 +24,7 @@ final class AdminUsersTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[Test]
     public function it_allows_admin_users_to_log_in(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -43,56 +44,13 @@ final class AdminUsersTest extends JsonApiTestCase
         $this->assertResponse($response, 'admin/admin_user/log_in_admin_response', Response::HTTP_OK);
     }
 
-    /** @test */
-    public function it_sends_administrator_password_reset_email(): void
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
-
-        $this->client->request(
-            method: Request::METHOD_POST,
-            uri: '/api/v2/admin/administrators/reset-password',
-            server: self::CONTENT_TYPE_HEADER,
-            content: json_encode([
-                'email' => 'api@example.com',
-            ], \JSON_THROW_ON_ERROR),
-        );
-
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
-    }
-
-    /** @test */
-    public function it_resets_administrator_password(): void
-    {
-        $loadedData = $this->loadFixturesFromFile('authentication/api_administrator.yaml');
-
-        /** @var AdminUserInterface $adminUser */
-        $adminUser = $loadedData['admin'];
-        $adminUser->setPasswordResetToken('token');
-        $adminUser->setPasswordRequestedAt(new \DateTime('now'));
-        $this->getEntityManager()->flush();
-
-        $this->client->request(
-            method: 'PATCH',
-            uri: '/api/v2/admin/administrators/reset-password/token',
-            server: self::PATCH_CONTENT_TYPE_HEADER,
-            content: json_encode([
-                'newPassword' => 'newPassword',
-                'confirmNewPassword' => 'newPassword',
-            ], \JSON_THROW_ON_ERROR),
-        );
-
-        $response = $this->client->getResponse();
-        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
-    }
-
-    /** @test */
+    #[Test]
     public function it_gets_administrators(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
 
-        $this->client->request(method: 'GET', uri: '/api/v2/admin/administrators', server: $header);
+        $this->requestGet(uri: '/api/v2/admin/administrators', headers: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -101,20 +59,16 @@ final class AdminUsersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_gets_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
 
         /** @var AdminUserInterface $administrator */
         $administrator = $fixtures['admin_user_wilhelm'];
 
-        $this->client->request(
-            method: 'GET',
-            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
-            server: $header,
-        );
+        $this->requestGet(uri: '/api/v2/admin/administrators/' . $administrator->getId(), headers: $header);
 
         $this->assertResponse(
             $this->client->getResponse(),
@@ -123,7 +77,7 @@ final class AdminUsersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_creates_an_administrator(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -151,7 +105,7 @@ final class AdminUsersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_updates_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
@@ -182,11 +136,11 @@ final class AdminUsersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_deletes_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
-        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+        $header = $this->headerBuilder()->withJsonLdAccept()->withAdminUserAuthorization('api@example.com')->build();
 
         /** @var AdminUserInterface $administrator */
         $administrator = $fixtures['admin_user_wilhelm'];
@@ -198,5 +152,48 @@ final class AdminUsersTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    #[Test]
+    public function it_sends_administrator_password_reset_email(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+
+        $this->client->request(
+            method: Request::METHOD_POST,
+            uri: '/api/v2/admin/administrators/reset-password',
+            server: self::CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'email' => 'api@example.com',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
+    }
+
+    #[Test]
+    public function it_resets_administrator_password(): void
+    {
+        $loadedData = $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $loadedData['admin'];
+        $adminUser->setPasswordResetToken('token');
+        $adminUser->setPasswordRequestedAt(new \DateTime('now'));
+        $this->getEntityManager()->flush();
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: '/api/v2/admin/administrators/reset-password/token',
+            server: self::PATCH_CONTENT_TYPE_HEADER,
+            content: json_encode([
+                'newPassword' => 'newPassword',
+                'confirmNewPassword' => 'newPassword',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_ACCEPTED);
     }
 }

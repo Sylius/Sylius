@@ -4,4 +4,5 @@
 sylius:
     form:
         locale:
-            name: ゾーン名
+            name: '名前'
+            select: 'ロケールを選択してください…'

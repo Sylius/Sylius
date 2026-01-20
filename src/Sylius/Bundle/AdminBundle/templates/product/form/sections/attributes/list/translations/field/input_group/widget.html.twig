@@ -1,0 +1,10 @@
+{% set product_attribute_value = hookable_metadata.context.product_attribute_value %}
+
+{{ form_widget(
+    product_attribute_value.value,
+    sylius_test_form_attributes({
+        'attribute-value': '',
+        'attribute-name': product_attribute_value.value.vars.label,
+        'locale-code': product_attribute_value.localeCode.vars.value,
+    })
+) }}

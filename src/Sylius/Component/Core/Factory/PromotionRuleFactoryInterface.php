@@ -27,9 +27,8 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
 
     public function createItemTotal(string $channelCode, int $amount): PromotionRuleInterface;
 
+    /** @param array<mixed> $taxons */
     public function createHasTaxon(array $taxons): PromotionRuleInterface;
-
-    public function createItemsFromTaxonTotal(string $channelCode, string $taxonCode, int $amount): PromotionRuleInterface;
 
     public function createNthOrder(int $nth): PromotionRuleInterface;
 

@@ -4,4 +4,4 @@
 sylius:
     payum_action:
         payment:
-            description: '{items, plural, one {Platba obsahuje # položky na celkem {total}} few {Platba obsahuje # položek na celkem {total}} many {Platba obsahuje # položek na celkem {total}} other {Platba obsahuje # položek na celkem {total}}}'
+            description: '{items, plural, one {Platba obsahuje # položku za celkovou částku {total}} other {Platba obsahuje # položky za celkovou částku {total}}}'

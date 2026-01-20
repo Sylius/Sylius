@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Console\Command;
 
+use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\HelperInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,14 +23,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Webmozart\Assert\Assert;
 
-final class JwtConfigurationCommand extends AbstractInstallCommand
+#[AsCommand(
+    name: 'sylius:install:jwt-setup',
+    description: 'Setup JWT token.',
+)]
+final class JwtConfigurationCommand extends Command
 {
-    protected static $defaultName = 'sylius:install:jwt-setup';
-
     protected function configure(): void
     {
         $this
-            ->setDescription('Setup JWT token')
             ->setHelp(
                 <<<EOT
 The <info>%command.name%</info> command generates JWT token.
@@ -47,16 +51,15 @@ EOT
 
         Assert::isInstanceOf($helper, QuestionHelper::class);
         if (!$helper->ask($input, $output, $question)) {
-            return 0;
+            return Command::SUCCESS;
         }
 
-        $this->commandExecutor->runCommand('lexik:jwt:generate-keypair', ['--overwrite' => true], $output);
+        $commandExecutor = new CommandExecutor($input, $output, $this->getApplication());
+        $commandExecutor->runCommand('lexik:jwt:generate-keypair', ['--overwrite' => true], $output);
 
         $output->writeln('Please, remember to enable Sylius API');
         $output->writeln('https://docs.sylius.com/en/1.10/book/api/introduction.html');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
-
-class_alias(JwtConfigurationCommand::class, '\Sylius\Bundle\CoreBundle\Command\JwtConfigurationCommand');

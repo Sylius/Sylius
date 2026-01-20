@@ -13,18 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
-use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionAutocompleteType;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Webmozart\Assert\Assert;
 
-final class ProductOptionFieldSubscriber implements EventSubscriberInterface
+final readonly class ProductOptionFieldSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private ProductVariantResolverInterface $variantResolver)
-    {
+    public function __construct(
+        private ProductVariantResolverInterface $variantResolver,
+        private string $productOptionClass,
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -46,11 +48,18 @@ final class ProductOptionFieldSubscriber implements EventSubscriberInterface
         /** Options should be disabled for configurable product if it has at least one defined variant */
         $disableOptions = null !== $this->variantResolver->getVariant($product);
 
-        $form->add('options', ProductOptionAutocompleteType::class, [
+        $form->add('options', EntityType::class, [
             'required' => false,
             'disabled' => $disableOptions,
             'multiple' => true,
             'label' => 'sylius.form.product.options',
+            'class' => $this->productOptionClass,
+            'choice_name' => 'code',
+            'choice_label' => 'name',
+            'autocomplete' => true,
+            'attr' => [
+                'data-test-product-options-autocomplete' => '',
+            ],
         ]);
     }
 }

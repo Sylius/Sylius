@@ -1,0 +1,11 @@
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('create')), options.link.parameters|default([]))) %}
+{% set message = action.label %}
+
+{% if message is empty %}
+    {% set message = 'sylius.ui.create' %}
+{% endif %}
+
+<a href="{{ path }}" class="btn">
+    {{ ux_icon(action.icon|default('tabler:plus'), {'class': 'icon dropdown-item-icon'}) }}
+    {{ message|trans }}
+</a>

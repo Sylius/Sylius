@@ -14,10 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Tests\Controller;
 
 use ApiTestCase\JsonApiTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 final class XFrameOptionsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[Test]
     public function it_sets_frame_options_header(): void
     {
         $this->client->request('GET', '/');

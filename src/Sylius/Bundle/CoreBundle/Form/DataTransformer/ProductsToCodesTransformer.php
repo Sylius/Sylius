@@ -26,9 +26,7 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
     {
     }
 
-    /**
-     * @throws \InvalidArgumentException
-     */
+    /** @throws \InvalidArgumentException */
     public function transform($value): Collection
     {
         Assert::nullOrIsArray($value);
@@ -41,6 +39,8 @@ final class ProductsToCodesTransformer implements DataTransformerInterface
     }
 
     /**
+     * @return array<string>
+     *
      * @throws \InvalidArgumentException
      */
     public function reverseTransform($value): array

@@ -13,16 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 
 interface ShowPageInterface extends PageInterface
 {
-    public function isRegistered(): bool;
-
-    /**
-     * @throws ElementNotFoundException If there is no delete account button on the page
-     */
     public function deleteAccount(): void;
 
     public function getCustomerEmail(): string;
@@ -53,11 +47,11 @@ interface ShowPageInterface extends PageInterface
 
     public function hasCustomerPlacedAnyOrders(): bool;
 
-    public function getOrdersCountInChannel(string $channelName): int;
+    public function getOrdersCountInChannel(string $channelCode): int;
 
-    public function getOrdersTotalInChannel(string $channelName): string;
+    public function getOrdersTotalInChannel(string $channelCode): string;
 
-    public function getAverageTotalInChannel(string $channelName): string;
+    public function getAverageTotalInChannel(string $channelCode): string;
 
     public function getSuccessFlashMessage(): string;
 }

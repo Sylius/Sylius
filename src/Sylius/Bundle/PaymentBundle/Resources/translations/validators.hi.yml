@@ -1,0 +1,52 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: 'कार्डधारक का नाम कम से कम {{ limit }} वर्ण लंबा होना चाहिए।'
+            not_blank: 'कृपया कार्डधारक का नाम दर्ज करें।'
+        expiry_month:
+            max_range: 'क्रेडिट कार्ड का समाप्ति माह {{ min }} और {{ max }} के बीच होना चाहिए।'
+            min_range: 'क्रेडिट कार्ड का समाप्ति माह {{ min }} और {{ max }} के बीच होना चाहिए।'
+            not_blank: 'कृपया समाप्ति माह चुनें।'
+        number:
+            not_blank: 'कृपया कार्ड नंबर दर्ज करें।'
+            luhn: 'आपके द्वारा दर्ज किया गया क्रेडिट कार्ड नंबर अमान्य है।'
+        security_code:
+            not_blank: 'कृपया सुरक्षा कोड (CVV) दर्ज करें।'
+            max_length: 'क्रेडिट कार्ड का CVV कोड कम से कम {{ limit }} अंक लंबा होना चाहिए।'
+            min_length: 'क्रेडिट कार्ड का CVV कोड अधिकतम {{ limit }} अंक लंबा हो सकता है।'
+        expiry_year:
+            not_blank: 'कृपया समाप्ति वर्ष चुनें।'
+    gateway_config:
+        invalid_gateway_factory: 'अमान्य गेटवे फ़ैक्टरी। उपलब्ध फ़ैक्ट्रियाँ {{ available_factories }} हैं।'
+        gateway_name:
+            not_blank: 'कृपया गेटवे नाम दर्ज करें।'
+        factory_name:
+            not_blank: 'कृपया गेटवे फ़ैक्टरी नाम दर्ज करें।'
+    payment:
+        currency_code:
+            not_valid: 'आपके द्वारा दर्ज किया गया मुद्रा कोड अमान्य है।'
+        method:
+            not_blank: 'कृपया एक भुगतान विधि चुनें।'
+    payment_method:
+        gateway:
+            not_blank: 'कृपया भुगतान विधि का गेटवे चुनें।'
+        name:
+            max_length: 'भुगतान विधि का नाम अधिकतम {{ limit }} वर्ण लंबा हो सकता है।'
+            min_length: 'भुगतान विधि का नाम कम से कम {{ limit }} वर्ण लंबा होना चाहिए।'
+            not_blank: 'कृपया भुगतान विधि का नाम दर्ज करें।'
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: 'शुल्क {{ compared_value }} से कम नहीं हो सकता।'
+                not_blank: 'कृपया शुल्क राशि दर्ज करें।'
+            percent:
+                max_range: 'प्रतिशत शुल्क {{ limit }} से अधिक नहीं हो सकता।'
+                min_range: 'प्रतिशत शुल्क {{ limit }} से कम नहीं हो सकता।'
+                not_blank: 'कृपया शुल्क प्रतिशत दर्ज करें।'
+        code:
+            max_length: 'कोड {{ limit }} वर्णों से अधिक लंबा नहीं हो सकता।'
+            not_blank: 'कृपया भुगतान विधि कोड दर्ज करें।'
+            regex: 'भुगतान विधि कोड केवल अक्षरों, संख्याओं, डैश और अंडरस्कोर से बन सकता है।'
+            unique: 'दिए गए कोड के साथ भुगतान विधि पहले से मौजूद है।'

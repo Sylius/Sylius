@@ -1,0 +1,17 @@
+<div class="w-100 border-bottom">
+    {% if taxons|length > 0 %}
+        <nav class="navbar offcanvas-lg offcanvas-start offcanvas-wide p-0" id="navbarNav" role="navigation" aria-label="{{ 'sylius.ui.taxon_navigation_desktop'|trans }}">
+            <div class="offcanvas-header w-full">
+                <h1 class="offcanvas-title fs-5">
+                    {{ 'sylius.ui.taxons'|trans }}
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#navbarNav" aria-label="{{ 'sylius.ui.close'|trans }}"></button>
+            </div>
+            <div class="offcanvas-body justify-content-lg-center w-full py-0">
+                <div class="navbar-nav my-2 flex-column flex-lg-row gap-lg-4" {{ sylius_test_html_attribute('menu') }}>
+                    {% hook 'menu' with { taxons } %}
+                </div>
+            </div>
+        </nav>
+    {% endif %}
+</div>

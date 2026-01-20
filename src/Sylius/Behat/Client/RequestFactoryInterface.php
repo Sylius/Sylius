@@ -50,8 +50,7 @@ interface RequestFactoryInterface
 
     public function update(
         string $section,
-        string $resource,
-        string $id,
+        string $uri,
         string $authorizationHeader,
         ?string $token = null,
     ): RequestInterface;
@@ -90,6 +89,15 @@ interface RequestFactoryInterface
     public function custom(
         string $url,
         string $method,
+        array $additionalHeaders = [],
+        ?string $token = null,
+    ): RequestInterface;
+
+    public function default(
+        string $section,
+        string $url,
+        string $method,
+        array $queryParameters = [],
         array $additionalHeaders = [],
         ?string $token = null,
     ): RequestInterface;

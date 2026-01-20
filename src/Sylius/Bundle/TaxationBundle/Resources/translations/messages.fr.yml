@@ -4,13 +4,13 @@
 sylius:
     form:
         tax_category:
-            description: Description
-            name: Nom
+            description: 'Description'
+            name: 'Nom'
         tax_rate:
-            amount: Montant
-            calculator: Calculateur
-            category: Catégorie
-            end_date: Date de fin
-            included_in_price: Inclus dans le prix?
-            name: Nom
-            start_date: Date de début
+            amount: 'Montant'
+            calculator: 'Calculateur'
+            category: 'Catégorie'
+            end_date: 'Date de fin'
+            included_in_price: 'Inclus dans le prix?'
+            name: 'Nom'
+            start_date: 'Date de début'

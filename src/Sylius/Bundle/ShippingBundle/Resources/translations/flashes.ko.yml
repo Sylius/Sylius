@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    shipment:
+        shipped: '배송이 성공적으로 발송되었습니다.'

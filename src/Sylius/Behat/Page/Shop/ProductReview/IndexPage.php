@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\ProductReview;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class IndexPage extends SymfonyPage implements IndexPageInterface
+class IndexPage extends SyliusPage implements IndexPageInterface
 {
     public function getRouteName(): string
     {
@@ -24,7 +24,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
 
     public function countReviews(): int
     {
-        return count($this->getElement('reviews')->findAll('css', '.comment'));
+        return count($this->getElement('reviews')->findAll('css', '[data-test-comment]'));
     }
 
     public function hasReviewTitled(string $title): bool

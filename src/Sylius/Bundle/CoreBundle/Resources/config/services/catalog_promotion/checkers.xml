@@ -17,37 +17,33 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <services>
-        <defaults public="true" />
-
         <service
-            id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\ProductVariantForCatalogPromotionEligibilityInterface"
+            id="sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility"
             class="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\ProductVariantForCatalogPromotionEligibility"
         >
             <argument type="tagged_locator" tag="sylius.catalog_promotion.variant_checker" index-by="type" />
         </service>
-        <service id="sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility"
-                 alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\ProductVariantForCatalogPromotionEligibilityInterface" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\ProductVariantForCatalogPromotionEligibilityInterface"
+                 alias="sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility" />
 
-        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker">
+        <service id="sylius.checker.catalog_promotion_eligibility" class="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker">
             <argument type="tagged_iterator" tag="sylius.catalog_promotion.criteria" />
         </service>
-        <service id="sylius.checker.catalog_promotion_eligibility" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityChecker" />
+        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\CatalogPromotionEligibilityCheckerInterface"
+                 alias="sylius.checker.catalog_promotion_eligibility" />
 
-        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker">
+        <service id="sylius.checker.catalog_promotion.in_for_product_scope_variant" class="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker">
             <tag name="sylius.catalog_promotion.variant_checker" type="for_products" />
         </service>
-        <service id="sylius.checker.catalog_promotion.in_for_product_scope_variant" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForProductScopeVariantChecker" />
 
-        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker">
+        <service id="sylius.checker.catalog_promotion.in_for_taxons_scope_variant" class="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker">
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.tree.taxon" />
             <tag name="sylius.catalog_promotion.variant_checker" type="for_taxons" />
         </service>
-        <service id="sylius.checker.catalog_promotion.in_for_taxons_scope_variant" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForTaxonsScopeVariantChecker" />
 
-        <service id="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker">
+        <service id="sylius.checker.catalog_promotion.in_for_variants_scope_variant" class="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker">
             <tag name="sylius.catalog_promotion.variant_checker" type="for_variants" />
         </service>
-        <service id="sylius.checker.catalog_promotion.in_for_variants_scope_variant" alias="Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\InForVariantsScopeVariantChecker" />
     </services>
 </container>

@@ -4,13 +4,13 @@
 sylius:
     user:
         email:
-            not_blank: Prosím vložte Váš email.
-            invalid: Tento email je neplatný.
-            not_registered: Neexistuje uživatel s tímto e-mailem. Nejprve se zaregistrujte.
+            not_blank: 'Prosím zadejte svůj e-mail.'
+            invalid: 'Tento e-mail je neplatný.'
+            not_registered: 'Uživatel s tímto e-mailem neexistuje. Prosím zaregistrujte se nejprve.'
         plainPassword:
-            not_blank: Prosím, zadejte své heslo.
-            mismatch: Zadaná hesla nejsou shodná
-            wrong_current: Zadané heslo se liší od stávajícího.
+            not_blank: 'Prosím zadejte své heslo.'
+            mismatch: 'Zadaná hesla se neshodují.'
+            wrong_current: 'Zadané heslo se liší od aktuálního.'
         password:
-            min: Heslo musí být alespoň {{ limit }} znaků dlouhé.
-            max: Heslo nesmí být delší než {{ limit }} znaků.
+            min: 'Heslo musí mít alespoň {{ limit }} znaků.'
+            max: 'Heslo nesmí být delší než {{ limit }} znaků.'

@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Component\Core\Formatter\StringInflector;
 
-class RegisterPage extends SymfonyPage implements RegisterPageInterface
+class RegisterPage extends SyliusPage implements RegisterPageInterface
 {
     public function getRouteName(): string
     {

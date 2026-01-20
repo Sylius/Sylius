@@ -4,20 +4,20 @@
 sylius:
     currency:
         code:
-            exact_length: Valutacode moet precies 3 tekens lang zijn.
-            not_blank: Kies valutacode.
-            regex: Wisselkoers code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
-            unique: Valutacode moet uniek zijn.
+            not_blank: 'Kies een valuta code.'
+            unique: 'Valutacode moet uniek zijn.'
+            currency: 'Deze waarde is geen geldige valutacode.'
         exchange_rate:
-            not_blank: Voer de wisselkoers in.
+            not_blank: 'Voer de wisselkoers in.'
     exchange_rate:
         ratio:
-            greater_than: De verhouding moet groter zijn dan 0.
-            invalid: De verhouding moet een getal zijn.
-            not_blank: Voer de wisselkoers verhouding in.
+            greater_than: 'De verhouding moet groter zijn dan {{ compared_value }}.'
+            less_than: 'De verhouding moet kleiner zijn dan {{ compared_value }}.'
+            invalid: 'De verhouding moet een getal zijn.'
+            not_blank: 'Voer de wisselkoersverhouding in.'
         source_currency:
-            not_blank: Geef vanaf welke valuta de wisselkoers moet worden afgeleid.
+            not_blank: 'Voer de valuta in waarvan de wisselkoers moet worden afgeleid.'
         target_currency:
-            not_blank: Geef aan welke valuta de wisselkoers moet worden ingesteld.
-        unique_currency_pair: Het valutapaar moet uniek zijn.
-        different_source_target_currency: De bron- en doel valuta's dienen verschillend te zijn.
+            not_blank: 'Voer de valuta in waaraan de wisselkoers moet worden ingesteld.'
+        unique_currency_pair: 'Valutapaar moet uniek zijn.'
+        different_source_target_currency: 'De bron- en doelfrancs moeten verschillen.'

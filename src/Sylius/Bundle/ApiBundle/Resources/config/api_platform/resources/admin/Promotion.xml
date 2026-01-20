@@ -1,0 +1,186 @@
+<?xml version="1.0" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="%sylius.model.promotion.class%">
+        <operations>
+            <operation
+                name="sylius_api_admin_promotion_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/promotions"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:index</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <filters>
+                    <filter>sylius_api.search_filter.admin.promotion</filter>
+                    <filter>sylius_api.order_filter.admin.promotion</filter>
+                    <filter>sylius_api.exists_filter.admin.promotion</filter>
+                </filters>
+                <order>
+                    <values>
+                        <value name="priority">DESC</value>
+                    </values>
+                </order>
+            </operation>
+
+            <operation name="sylius_api_admin_promotion_get" class="ApiPlatform\Metadata\Get" uriTemplate="/admin/promotions/{code}">
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+            </operation>
+
+            <operation name="sylius_api_admin_promotion_post" class="ApiPlatform\Metadata\Post" uriTemplate="/admin/promotions">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_api</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation name="sylius_api_admin_promotion_put" class="ApiPlatform\Metadata\Put" uriTemplate="/admin/promotions/{code}">
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:update</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_api</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_promotion_patch_archive"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/promotions/{code}/archive"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::archive"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                        <value name="skip_null_values">true</value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_api</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_promotion_patch_restore"
+                class="ApiPlatform\Metadata\Patch"
+                uriTemplate="/admin/promotions/{code}/restore"
+                input="false"
+                controller="Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicatorInterface::restore"
+            >
+                <normalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:admin:promotion:show</value>
+                            </values>
+                        </value>
+                        <value name="skip_null_values">true</value>
+                    </values>
+                </normalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                                <value>sylius_api</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
+
+            <operation
+                name="sylius_api_admin_promotion_delete"
+                class="ApiPlatform\Metadata\Delete"
+                uriTemplate="/admin/promotions/{code}"
+            />
+        </operations>
+    </resource>
+</resources>

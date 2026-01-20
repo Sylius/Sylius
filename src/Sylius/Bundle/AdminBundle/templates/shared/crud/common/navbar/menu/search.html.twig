@@ -1,0 +1,8 @@
+<form action="{{ path('sylius_admin_product_index') }}" method="get" {{ sylius_test_html_attribute('navbar-product-search') }}>
+    <div class="input-group">
+        <input type="text" name="criteria[search][value]" placeholder="{{ 'sylius.ui.search_products'|trans }}..." class="form-control">
+        <button type="submit" class="btn">
+            {{ ux_icon('tabler:search', {'class': 'icon mx-1'}) }}
+        </button>
+    </div>
+</form>

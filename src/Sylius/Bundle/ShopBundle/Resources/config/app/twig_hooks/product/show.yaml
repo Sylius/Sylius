@@ -1,0 +1,211 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.product.show':
+            content:
+                template: '@SyliusShop/product/show/content.html.twig'
+                priority: 0    
+        
+        'sylius_shop.product.show.content':
+            header:
+                template: '@SyliusShop/product/show/content/header.html.twig'
+                priority: 200
+            info:
+                template: '@SyliusShop/product/show/content/info.html.twig'
+                priority: 100
+            product_listing:
+                template: '@SyliusShop/product/show/content/product_listing.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.header':
+            breadcrumbs:
+                template: '@SyliusShop/product/show/content/header/breadcrumbs.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info':
+            summary:
+                component: 'sylius_shop:product:summary'
+                props:
+                    product: '@=_context.product'
+                    template: '@SyliusShop/product/show/content/info/summary.html.twig'
+                priority: 100
+            overview:
+                template: '@SyliusShop/product/show/content/info/overview.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.summary':
+            header:
+                template: '@SyliusShop/product/show/content/info/summary/header.html.twig'
+                priority: 500
+            average_rating:
+                template: '@SyliusShop/product/show/content/info/summary/average_rating.html.twig'
+                priority: 400
+            prices:
+                template: '@SyliusShop/product/show/content/info/summary/prices.html.twig'
+                priority: 300
+            catalog_promotions:
+                template: '@SyliusShop/product/show/content/info/summary/catalog_promotions.html.twig'
+                priority: 200
+            add_to_cart:
+                component: 'sylius_shop:product:add_to_cart_form'
+                props:
+                    product: '@=_context.product'
+                    template: '@SyliusShop/product/show/content/info/summary/add_to_cart.html.twig'
+                priority: 100
+            short_description:
+                template: '@SyliusShop/product/show/content/info/summary/short_description.html.twig'
+                priority: 0
+                
+        'sylius_shop.product.show.content.info.summary.average_rating':
+            rating:
+                template: '@SyliusShop/product/show/content/info/summary/average_rating/rating.html.twig'
+                priority: 200
+            number_of_reviews:
+                component: 'sylius_shop:product_review.count'
+                props:
+                    product: '@=_context.product'
+                    template: '@SyliusShop/product/show/content/info/summary/average_rating/number_of_reviews.html.twig'
+                priority: 100
+            add_review:
+                template: '@SyliusShop/product/show/content/info/summary/average_rating/add_review.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.summary.prices':
+            price:
+                component: 'sylius_shop:product:price'
+                props:
+                    variant: '@=_context.variant'
+                    template: '@SyliusShop/product/show/content/info/summary/prices/price.html.twig'
+                priority: 100
+            lowest_price_before_discount:
+                template: '@SyliusShop/product/show/content/info/summary/prices/lowest_price_before_discount.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.summary.add_to_cart':
+            table:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants.html.twig'
+                priority: 200
+            quantity:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/quantity.html.twig'
+                priority: 100
+            submit:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/submit.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.summary.add_to_cart.variants':
+            table:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.summary.add_to_cart.variants.table':
+            head:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table/head.html.twig'
+                priority: 100
+            body:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table/body.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.summary.add_to_cart.variants.table.head':
+            name:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table/head/name.html.twig'
+                priority: 200
+            price:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table/head/price.html.twig'
+                priority: 100
+            selection:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table/head/selection.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.summary.add_to_cart.variants.table.body':
+            name:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table/body/name.html.twig'
+                priority: 200
+            price:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table/body/price.html.twig'
+                priority: 100
+            selection:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/variants/table/body/selection.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.summary.add_to_cart.options':
+            list:
+                template: '@SyliusShop/product/show/content/info/summary/add_to_cart/options/list.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.overview':
+            images:
+                template: '@SyliusShop/product/show/content/info/overview/images.html.twig'
+                priority: 100
+            accordion:
+                template: '@SyliusShop/product/show/content/info/overview/accordion.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.overview.images':
+            thumbnails:
+                template: '@SyliusShop/product/show/content/info/overview/images/thumbnails.html.twig'
+                priority: 100
+            main_image:
+                template: '@SyliusShop/product/show/content/info/overview/images/main_image.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.overview.images.thumbnails':
+            image_variants:
+                template: '@SyliusShop/product/show/content/info/overview/images/thumbnails/image_variants.html.twig'
+                priority: 100
+            thumbnail:
+                template: '@SyliusShop/product/show/content/info/overview/images/thumbnails/thumbnail.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.overview.accordion':
+            details:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/details.html.twig'
+                priority: 200
+            attributes:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/attributes.html.twig'
+                priority: 100
+            reviews:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/reviews.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.overview.accordion.details':
+            title:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/details/title.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/details/content.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.overview.accordion.attributes':
+            title:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/attributes/title.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/attributes/content.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.overview.accordion.reviews':
+            title:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/reviews/title.html.twig'
+                priority: 100
+            content:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/reviews/content.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.info.overview.accordion.reviews.content':
+            list:
+                component: 'sylius_shop:product_review:list'
+                props:
+                    product: '@=_context.product'
+                    count: 3
+                    template: '@SyliusShop/shared/product_review/list.html.twig'
+                priority: 200
+            add_review:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/reviews/content/add_review.html.twig'
+                priority: 100
+            view_more:
+                template: '@SyliusShop/product/show/content/info/overview/accordion/reviews/content/view_more.html.twig'
+                priority: 0
+
+        'sylius_shop.product.show.content.product_listing':
+            associations:
+                template: '@SyliusShop/product/show/content/product_listing/associations.html.twig'
+                priority: 0

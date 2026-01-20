@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    review:
+        author:
+            already_exists: 'このメールアドレスは既に登録されています。ログインするか、パスワードをお忘れの場合は再発行してください。'
+        comment:
+            not_blank: 'レビューのコメントを入力してください。'
+        rating:
+            not_blank: 'レビュー評価を選択してください。'
+        title:
+            not_blank: 'レビュータイトルを入力してください。'
+            min_length: 'レビュータイトルは 2 文字以上で入力してください。'
+            max_length: 'レビュータイトルは 255 文字以内で入力してください。'

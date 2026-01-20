@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    admin:
+        request_reset_password:
+            success: 'यदि आपने जो ई-मेल प्रदान किया है वह हमारे सिस्टम में मौजूद है, तो हमने आपके पासवर्ड को रीसेट करने के निर्देश भेज दिए हैं।'
+        password_reset:
+            success: 'आपका पासवर्ड सफलतापूर्वक बदल दिया गया है!'
+            token_expired: 'पासवर्ड रीसेट टोकन की अवधि समाप्त हो गई है।'
+    email:
+        order_confirmation_resent: 'ऑर्डर पुष्टि सफलतापूर्वक ग्राहक को पुनः भेज दी गई है।'
+        shipment_confirmation_resent: 'शिपमेंट पुष्टि सफलतापूर्वक ग्राहक को पुनः भेज दी गई है।'
+    product_variant:
+        cannot_generate_variants: 'विकल्प मानों के बिना उत्पाद के वेरिएंट बनाए नहीं जा सकते।'
+    locale:
+        delete:
+            is_used: 'इस लोकैल को हटाया नहीं जा सकता, क्योंकि यह कम से कम एक अनुवाद में उपयोग हो रही है।'
+            success: 'लोकैल सफलतापूर्वक हटाई गई।'

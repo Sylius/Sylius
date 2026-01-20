@@ -1,0 +1,41 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    form:
+        attribute:
+            add: 'जोड़ें'
+            add_attributes: 'गुण जोड़ें'
+            choices: 'चयन'
+            code: 'कोड'
+            name: 'नाम'
+            translatable: 'अनुवाद योग्य'
+            translations: 'अनुवाद'
+            type: 'प्रकार'
+        attribute_type:
+            checkbox: 'चेकबॉक्स'
+            configuration: 'कॉन्फ़िगरेशन'
+            date: 'दिनांक'
+            datetime: 'दिनांक-समय'
+            float: 'फ़्लोट'
+            integer: 'पूर्णांक'
+            percent: 'प्रतिशत'
+            select: 'चयन करें'
+            text: 'पाठ'
+            textarea: 'पाठ क्षेत्र'
+            title: 'गुण प्रकार'
+            validation: 'सत्यापन'
+        attribute_type_configuration:
+            datetime:
+                format: 'प्रारूप'
+            date:
+                format: 'प्रारूप'
+            select:
+                multiple: 'एकाधिक'
+                values: 'मान'
+                choose: 'एक विकल्प चुनें'
+                min: 'न्यूनतम प्रविष्टियाँ'
+                max: 'अधिकतम प्रविष्टियाँ'
+            text:
+                min: 'न्यूनतम लंबाई'
+                max: 'अधिकतम लंबाई'

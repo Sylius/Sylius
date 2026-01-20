@@ -1,0 +1,29 @@
+@shopping_cart
+Feature: Currency rounding edge case
+    In order to pay proper value of my cart
+    As a Customer
+    I want to have total value of my cart items rounded properly
+
+    Background:
+        Given the store operates on a single channel in "United States"
+        And that channel allows to shop using the "EUR" currency
+        When the exchange rate of "US Dollar" to "Euro" is 0.9737
+        And the store has a product "The Pug Mug" priced at "$7.00"
+        And I am a logged in customer
+
+    @no-api @ui
+    Scenario: Changing the currency of my cart
+        Given I added product "The Pug Mug" to the cart
+        When I switch to the "EUR" currency
+        And I check the details of my cart
+        Then the grand total value should be "€6.82"
+        And the grand total value in base currency should be "$7.00"
+
+    @no-api @ui
+    Scenario: Changing the currency of my cart
+        Given I added 2 products "The Pug Mug" to the cart
+        When I switch to the "EUR" currency
+        And I check the details of my cart
+        Then the grand total value in base currency should be "$14.00"
+        And I should see "The Pug Mug" with unit price "€6.82" in my cart
+        But the grand total value should be "€13.63"

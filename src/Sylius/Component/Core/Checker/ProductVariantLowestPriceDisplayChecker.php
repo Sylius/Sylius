@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPriceHistoryConfigInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductVariantLowestPriceDisplayChecker implements ProductVariantLowestPriceDisplayCheckerInterface
@@ -52,13 +52,16 @@ final class ProductVariantLowestPriceDisplayChecker implements ProductVariantLow
         return !$this->isAnyTaxonExcluded($taxons->toArray(), $excludedTaxons->toArray());
     }
 
+    /**
+     * @param TaxonInterface[] $excludedTaxons
+     * @param TaxonInterface[] $taxons
+     */
     private function isAnyTaxonExcluded(array $taxons, array $excludedTaxons): bool
     {
         if ($this->isCommonPart($taxons, $excludedTaxons)) {
             return true;
         }
 
-        /** @var TaxonInterface $excludedTaxon */
         foreach ($excludedTaxons as $excludedTaxon) {
             $children = $excludedTaxon->getChildren();
             if (!$children->isEmpty()) {
@@ -71,12 +74,15 @@ final class ProductVariantLowestPriceDisplayChecker implements ProductVariantLow
         return false;
     }
 
+    /**
+     * @param TaxonInterface[] $firstArray
+     * @param TaxonInterface[] $secondArray
+     */
     private function isCommonPart(array $firstArray, array $secondArray): bool
     {
         return 0 < count(array_uintersect(
             $firstArray,
             $secondArray,
-            /** @phpstan-ignore-next-line  */
             fn (TaxonInterface $firstTaxon, TaxonInterface $secondTaxon): int => $firstTaxon->getCode() <=> $secondTaxon->getCode(),
         ));
     }

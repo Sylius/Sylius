@@ -1,0 +1,21 @@
+{
+    "@context": "\/api\/v2\/contexts\/Taxon",
+    "@id": "\/api\/v2\/shop\/taxon-tree\/CATEGORY\/path",
+    "@type": "hydra:Collection",
+    "hydra:totalItems": 1,
+    "hydra:member": [
+        {
+            "@id": "\/api\/v2\/shop\/taxons\/CATEGORY",
+            "@type": "Taxon",
+            "id": "@integer@",
+            "code": "CATEGORY",
+            "level": 0,
+            "name": "Categories",
+            "slug": "categories"
+        }
+    ],
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/taxon-tree\/CATEGORY\/path?includeRoot=true",
+        "@type": "hydra:PartialCollectionView"
+    }
+}

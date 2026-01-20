@@ -25,8 +25,8 @@ sylius:
                     header: Configuración
                     locales: Idiomas
                     payment_methods: Modos de pago
-                    shipping_categories: Categorías de envio
-                    shipping_methods: Métodos de envio
+                    shipping_categories: Categorías de envío
+                    shipping_methods: Métodos de envío
                     tax_categories: Categorías de impuestos
                     tax_rates: Tasas de impuestos
                     zones: Zonas

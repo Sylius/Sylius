@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\DriverHelper;
 
-class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterface
+class SelectPaymentPage extends SyliusPage implements SelectPaymentPageInterface
 {
     public function getRouteName(): string
     {
@@ -27,6 +27,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     public function selectPaymentMethod(string $paymentMethod): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
+            DriverHelper::waitForPageToLoad($this->getSession());
             $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
 
             return;
@@ -89,11 +90,11 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
 
     public function getPaymentMethods(): array
     {
-        $inputs = $this->getSession()->getPage()->findAll('css', '[data-test-payment-method-label]');
+        $inputs = $this->getDocument()->findAll('css', '[data-test-payment-method-select]');
 
         $paymentMethods = [];
         foreach ($inputs as $input) {
-            $paymentMethods[] = trim($input->getText());
+            $paymentMethods[] = trim($input->getParent()->getText());
         }
 
         return $paymentMethods;

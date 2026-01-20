@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Account;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface ResetPasswordPageInterface extends SymfonyPageInterface
+interface ResetPasswordPageInterface extends SyliusPageInterface
 {
     public function checkValidationMessageFor(string $element, string $message): bool;
 

@@ -1,0 +1,7 @@
+{% set show_different_address = hookable_metadata.context.show_different_address %}
+{% set is_different_address = hookable_metadata.configuration.isDifferentAddress|default(false) %}
+{% set type = hookable_metadata.configuration.type %}
+
+<div class="mb-4 {% if is_different_address and not show_different_address %}d-none {% endif %}" {{ sylius_test_html_attribute(type ~ '-address') }}>
+    {% hook type ~ '_address' %}
+</div>

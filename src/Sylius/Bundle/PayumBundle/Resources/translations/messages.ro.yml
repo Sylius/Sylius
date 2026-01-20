@@ -4,17 +4,9 @@
 sylius:
     form:
         gateway_config:
-            type: Tip
-        gateway_configuration:
-            paypal:
-                password: Parolă
-                signature: Semnătură
-                username: Nume de utilizator
-                sandbox: Zona de test
-            stripe:
-                publishable_key: Cheie publică
-                secret_key: Cheie secretă
+            use_payum: 'Folosește Payum'
+    payum_gateway:
+        cash_on_delivery: 'Plată la livrare'
+        offline: 'Offline (Payum)'
     payum_gateway_factory:
-        offline: Offline
-        paypal_express_checkout: PayPal Express Checkout
-        stripe_checkout: Finalizare comandă Stripe (fără suport SCA)
+        offline: 'Offline'

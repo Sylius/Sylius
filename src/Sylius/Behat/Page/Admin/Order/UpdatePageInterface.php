@@ -23,4 +23,18 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function specifyBillingAddress(AddressInterface $address): void;
 
     public function checkValidationMessageFor(string $element, string $message): bool;
+
+    public function changeBillingCountry(string $countryCode): void;
+
+    public function changeShippingCountry(string $countryCode): void;
+
+    /**
+     * @return array<string>
+     */
+    public function getAvailableProvincesForBillingAddress(): array;
+
+    /**
+     * @return array<string>
+     */
+    public function getAvailableProvincesForShippingAddress(): array;
 }

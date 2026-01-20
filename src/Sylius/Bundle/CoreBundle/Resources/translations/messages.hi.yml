@@ -1,0 +1,288 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    email:
+        admin_password_reset:
+            hello: 'नमस्ते'
+            subject: 'प्रशासक पासवर्ड रीसेट'
+            reset_your_password: 'अपना पासवर्ड रीसेट करें'
+            to_reset_your_password: 'अपना पासवर्ड रीसेट करने के लिए – नीचे दिए गए लिंक पर क्लिक करें'
+            to_reset_your_password_token: 'अपना पासवर्ड रीसेट करने के लिए – नीचे दिया गया टोकन उपयोग करें'
+            token: 'आपका पासवर्ड रीसेट टोकन है'
+        contact_request:
+            content: 'सामग्री'
+            message_from: 'संदेश भेजने वाला'
+            subject: 'संपर्क अनुरोध'
+        order_confirmation:
+            has_been_successfully_placed: 'सफलतापूर्वक दर्ज हो गया है।'
+            subject: 'ऑर्डर पुष्टि'
+            view_order_or_change_payment_method: 'ऑर्डर देखें या भुगतान विधि बदलें'
+            thank_you: 'हमारे स्टोर से खरीदारी के लिए धन्यवाद!'
+            your_order_number: 'आपका ऑर्डर क्रमांक'
+        password_reset:
+            hello: 'नमस्ते'
+            reset_your_password: 'अपना पासवर्ड रीसेट करें'
+            subject: 'पासवर्ड रीसेट'
+            to_reset_your_password: 'अपना पासवर्ड रीसेट करने के लिए – नीचे दिए गए लिंक पर क्लिक करें'
+            to_reset_your_password_token: 'अपना पासवर्ड रीसेट करने के लिए – नीचे दिया गया टोकन उपयोग करें'
+            token: 'आपका पासवर्ड रीसेट टोकन है'
+        shipment_confirmation:
+            has_been_sent_using: 'भेजा गया है'
+            subject: 'शिपमेंट पुष्टि'
+            thank_you_for_transaction: 'सफल लेन-देन के लिए धन्यवाद।'
+            you_can_check_its_location_with_the_tracking_code: 'आप %tracking_code% ट्रैकिंग कोड से इसका स्थान देख सकते हैं।'
+            your_order_with_number: 'आपका ऑर्डर क्रमांक'
+        user_registration:
+            start_shopping: 'खरीदारी शुरू करें'
+            subject: 'उपयोगकर्ता पंजीकरण'
+            welcome_to_our_store: 'हमारे स्टोर में आपका स्वागत है!'
+            you_have_just_been_registered: 'आपका पंजीकरण हो गया है। धन्यवाद'
+        #deprecated since Sylius 1.13 and will be removed in 2.0, use user.verification instead    
+        verification_token:
+            hello: 'नमस्ते'
+            message: 'अपने खाते को इस टोकन से सत्यापित करें: '
+            subject: 'ईमेल पता सत्यापन'
+            to_verify_your_email_address: 'अपना ईमेल पता सत्यापित करने के लिए – नीचे दिए गए लिंक पर क्लिक करें'
+            verify_your_email_address: 'अपना ईमेल पता सत्यापित करें'
+        user:
+            account_verification:
+                greeting: 'नमस्ते'
+                message: 'अपने खाते को इस टोकन से सत्यापित करें: '
+                statement: 'अपना ईमेल पता सत्यापित करें'
+                strategy: 'अपना ईमेल पता सत्यापित करने के लिए – नीचे दिए गए लिंक पर क्लिक करें'
+                subject: 'ईमेल पता सत्यापन'
+
+    form:
+        block:
+            body: 'मुख्य भाग'
+            id: 'आईडी'
+            title: 'शीर्षक'
+        cart:
+            coupon: 'कूपन'
+        catalog_promotion:
+            channels: 'चैनल'
+            scope:
+                for_products: 'उत्पादों पर'
+                for_taxons: 'टैक्सन पर'
+                for_variants: 'वेरिएंट पर'
+        checkout:
+            addressing:
+                different_billing_address: 'बिलिंग के लिए भिन्न पता इस्तेमाल करें?'
+                different_shipping_address: 'शिपिंग के लिए भिन्न पता इस्तेमाल करें?'
+            payment_method: 'भुगतान विधि'
+            shipping_method: 'शिपिंग विधि'
+        currency:
+            select: 'मुद्रा चुनें'
+        promotion:
+            channels: 'चैनल'
+        promotion_action:
+            add_product_configuration:
+                product: 'उत्पाद'
+        promotion_coupon:
+            per_customer_usage_limit: 'प्रति-ग्राहक उपयोग सीमा'
+            reusable_from_cancelled_orders: 'रद्द ऑर्डरों से पुनः उपयोग योग्य'
+        group:
+            name: 'नाम'
+            roles: 'भूमिकाएँ'
+        channel:
+            billing_data:
+                city: 'शहर'
+                company: 'कंपनी'
+                country: 'देश'
+                postcode: 'पिन कोड'
+                street: 'सड़क'
+                tax_id: 'टैक्स आईडी'
+            contact_email: 'संपर्क ई-मेल'
+            contact_phone_number: 'संपर्क फ़ोन नंबर'
+            countries: 'देश'
+            currencies: 'मुद्राएँ'
+            currency_base: 'आधार मुद्रा'
+            account_verification_required: 'क्या खाता सत्यापन आवश्यक है?'
+            hostname: 'होस्टनेम'
+            locale_default: 'डिफ़ॉल्ट लोकेल'
+            locales: 'लोकेल'
+            menu_taxon: 'मेनू टैक्सन'
+            payment_methods: 'भुगतान विधियाँ'
+            shipping_address_in_checkout_required: 'चेकआउट में पता आवश्यक'
+            shipping_methods: 'शिपिंग विधियाँ'
+            shop_billing_data: 'दुकान बिलिंग डेटा'
+            skipping_shipping_step_allowed: 'यदि केवल एक शिपिंग विधि उपलब्ध हो तो शिपिंग चरण छोड़ें?'
+            skipping_payment_step_allowed: 'यदि केवल एक भुगतान विधि उपलब्ध हो तो भुगतान चरण छोड़ें?'
+            tax_calculation_strategy: 'कर गणना रणनीति'
+            tax_zone_default: 'डिफ़ॉल्ट कर ज़ोन'
+            taxonomies: 'टैक्सोनॉमी'
+            theme: 'थीम'
+        image:
+            type: 'प्रकार'
+            file: 'छवि'
+        locale:
+            code: 'कोड'
+            enabled: 'सक्रिय'
+        order_filter:
+            created_at_from: 'इसके बाद बनाया गया'
+            created_at_to: 'इसके पहले बनाया गया'
+            number: 'संख्या'
+            total_from: 'न्यूनतम राशि'
+            total_to: 'अधिकतम राशि'
+            payment_state: 'भुगतान स्थिति'
+            channel: 'सभी चैनल'
+        page:
+            body: 'मुख्य भाग'
+            id: 'आईडी'
+            title: 'शीर्षक'
+        product:
+            images: 'छवियाँ'
+            restricted_zone: 'प्रतिबंधित क्षेत्र'
+            short_description: 'संक्षिप्त विवरण'
+            variant_selection_method: 'वेरिएंट चयन विधि'
+            main_taxon: 'मुख्य टैक्सन'
+            channels: 'चैनल'
+            enabled: 'सक्रिय'
+        product_filter:
+            name: 'नाम'
+            code: 'कोड'
+        product_variant:
+            tax_category: 'कर श्रेणी'
+            shipping_category: 'शिपिंग श्रेणी'
+        shipment_filter:
+            created_at_from: 'से'
+            created_at_to: 'तक'
+            number: 'ऑर्डर संख्या'
+            shipping_address: 'शिपिंग नाम'
+            channel: 'सभी चैनल'
+        payment_filter:
+            created_at_from: 'से'
+            created_at_to: 'तक'
+            number: 'ऑर्डर संख्या'
+            billing_address: 'बिलिंग नाम'
+            channel: 'सभी चैनल'
+        shipping_method:
+            zone: 'ज़ोन'
+        taxon:
+            code: 'कोड'
+            file: 'छवि चुनें'
+            images: 'छवियाँ'
+        taxonomy:
+            file: 'छवि चुनें'
+        user:
+            billing_address: 'बिलिंग पता'
+            different_shipping_address: 'शिपिंग के लिए भिन्न पता इस्तेमाल करें?'
+            enabled: 'सक्रिय'
+            first_name: 'पहला नाम'
+            groups: 'समूह'
+            roles: 'भूमिकाएँ'
+            last_name: 'अंतिम नाम'
+            password: 'पासवर्ड'
+            shipping_address: 'शिपिंग पता'
+        user_filter:
+            query: 'खोज'
+        variant:
+            depth: 'गहराई'
+            height: 'ऊँचाई'
+            on_hand: 'वर्तमान स्टॉक'
+            price: 'कीमत'
+            sku: 'SKU'
+            shipping_required: 'क्या शिपिंग आवश्यक है?'
+            weight: 'वज़न'
+            width: 'चौड़ाई'
+            tracked_help: 'यदि यह विकल्प सक्षम है, तो स्टॉक 0 होने पर Sylius बिक्री रोक देगा।'
+        attribute:
+            product_attribute_value:
+                attribute: 'गुण'
+                value: 'मान'
+        guest:
+            email: 'ई-मेल'
+        product_association:
+            product: 'संबंधित उत्पाद'
+            type: 'एसोसिएशन प्रकार'
+        product_association_type:
+            name: 'नाम'
+        promotion_filter:
+            products: 'उत्पाद फ़िल्टर'
+            taxons: 'टैक्सन फ़िल्टर'
+        promotion_rule:
+            customer_group:
+                group: 'ग्राहक समूह'
+            has_taxon:
+                taxons: 'टैक्सन'
+            product:
+                products: 'उत्पाद'
+            total_of_items_from_taxon:
+                taxon: 'टैक्सन'
+                amount: 'राशि'
+        payment_method:
+            channels: 'चैनल'
+        product_attribute:
+            position: 'स्थिति'
+        zone:
+            scopes:
+                shipping: 'शिपिंग'
+                tax: 'कर'
+
+    installer:
+        extensions:
+            header: 'एक्सटेंशन'
+            accelerator:
+                header: 'त्वरणक'
+                help: 'Zend OpCache सक्षम करें (काफ़ी अनुशंसित)।'
+            apc: 'APC'
+            ctype: 'Ctype'
+            gd: 'GD'
+            help: '%extension% एक्सटेंशन इंस्टॉल और सक्षम करें।'
+            iconv: 'Iconv'
+            exif: 'Exif'
+            fileinfo: 'Fileinfo'
+            icu: 'ICU'
+            intl: 'Intl'
+            json_encode: 'JSON'
+            mbstring: 'Multibyte String'
+            off: 'बंद'
+            on: 'चालू'
+            pcre: 'PCRE'
+            pdo: 'PDO'
+            php_xml: 'PHP-XML'
+            session_start: 'Session'
+            simplexml_import_dom: 'SimpleXML'
+            token_get_all: 'Tokenizer'
+        filesystem:
+            header: 'फ़ाइल सिस्टम'
+            cache:
+                header: 'कैश'
+                help: 'अनुमतियाँ सेट करने के लिए चलाएँ: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            exists: 'मौजूद है'
+            logs:
+                header: 'लॉग्स'
+                help: 'अनुमतियाँ सेट करने के लिए चलाएँ: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
+            not_exists: 'मौजूद नहीं'
+            not_writable: 'लिखने योग्य नहीं'
+            parameters:
+                header: 'parameters.yml'
+                help: 'अनुमतियाँ सेट करने के लिए चलाएँ: sudo chmod a+w %path%'
+            vendors: 'वेंडर'
+            writable: 'लिखने योग्य'
+        settings:
+            header: 'PHP संस्करण और सेटिंग्स'
+            any: 'कोई भी'
+            detect_unicode: 'detect_unicode'
+            detect_unicode_help: "अपनी php.ini फ़ाइल में 'detect_unicode = Off' सेट करें"
+            magic_quotes_gpc: 'magic_quotes_gpc'
+            non_deprecated: 'ग़ैर-प्रचलित'
+            off: 'बंद'
+            on: 'चालू'
+            register_globals: 'register_globals'
+            session:
+                auto_start: 'session.auto_start'
+                auto_start_help: "अपनी php.ini फ़ाइल में 'session.auto_start  = Off' सेट करें"
+            short_open_tag: 'short_open_tag'
+            timezone: 'समय क्षेत्र'
+            timezone_help: 'अपनी php.ini फ़ाइल में ''date.timezone'' सेट करें (उदा. date.timezone = "Europe/Amsterdam")'
+            timezone_deprecated:
+                header: 'प्रचलित समय-क्षेत्र'
+                help: 'समय-क्षेत्र %timezone% प्रचलित नहीं है। अपनी php.ini फ़ाइल ठीक करें (प्रचलित समय-क्षेत्र सूची http://php.net/manual/en/timezones.others.php)।'
+            version: 'PHP संस्करण'
+            version_recommended: 'अनुशंसित PHP संस्करण'
+            version_help: 'Sylius %recommended% PHP संस्करण की अनुशंसा करता है, आपका वर्तमान संस्करण %current% है। कृपया अपग्रेड करें।'
+
+    shipping_method_resolver:
+        by_zones_and_channel: 'ज़ोन और चैनल द्वारा'

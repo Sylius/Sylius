@@ -28,14 +28,18 @@ interface ShipmentRepositoryInterface extends RepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;
 
-    public function findOneByOrderId($shipmentId, $orderId): ?ShipmentInterface;
+    public function findOneByOrderId(mixed $shipmentId, mixed $orderId): ?ShipmentInterface;
 
-    public function findOneByOrderTokenAndChannel($shipmentId, string $tokenValue, ChannelInterface $channel): ?ShipmentInterface;
+    public function findOneByOrderTokenAndChannel(mixed $shipmentId, string $tokenValue, ChannelInterface $channel): ?ShipmentInterface;
 
-    public function findOneByCustomer($id, CustomerInterface $customer): ?ShipmentInterface;
+    public function findOneByCustomer(mixed $id, CustomerInterface $customer): ?ShipmentInterface;
+
+    public function findOneByCustomerAndOrderToken(mixed $id, CustomerInterface $customer, string $token): ?ShipmentInterface;
 
     /**
      * @return array|ShipmentInterface[]
      */
     public function findByName(string $name, string $locale): array;
+
+    public function countReadyByChannel(ChannelInterface $channel): int;
 }

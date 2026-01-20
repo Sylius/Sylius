@@ -8,9 +8,9 @@
             "@type": "Product",
             "productTaxons": [],
             "mainTaxon": null,
-            "averageRating": @integer@,
+            "averageRating": "@integer@",
             "images": [],
-            "id": @integer@,
+            "id": "@integer@",
             "code": "CAP",
             "variants": [
                 "\/api\/v2\/shop\/product-variants\/CAP_RED"
@@ -19,14 +19,23 @@
                 "\/api\/v2\/shop\/product-options\/COLOR"
             ],
             "associations": [],
-            "createdAt": @date@,
-            "updatedAt": @date@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
             "shortDescription": null,
             "reviews": [],
             "name": "Cap",
             "description": null,
             "slug": "cap",
-            "defaultVariant": "\/api\/v2\/shop\/product-variants\/CAP_RED"
+            "defaultVariant": "\/api\/v2\/shop\/product-variants\/CAP_RED",
+            "defaultVariantData": {
+                "@id": "\/api\/v2\/shop\/product-variants\/CAP_RED",
+                "@type": "ProductVariant",
+                "name": null,
+                "inStock": true,
+                "price": 2000,
+                "originalPrice": 2000,
+                "lowestPriceBeforeDiscount": null
+            }
         },
         {
             "@id": "\/api\/v2\/shop\/products\/MUG",
@@ -35,17 +44,17 @@
                 "\/api\/v2\/shop\/product-taxons\/@integer@"
             ],
             "mainTaxon": "\/api\/v2\/shop\/taxons\/MUGS",
-            "averageRating": @integer@,
+            "averageRating": "@integer@",
             "images": [
                 {
-                    "@id": "\/api\/v2\/shop\/product-images\/@integer@",
+                    "@id": "\/api\/v2\/shop\/products\/MUG\/images\/@integer@",
                     "@type": "ProductImage",
-                    "id": @integer@,
+                    "id": "@integer@",
                     "type": "thumbnail",
                     "path": "@string@.contains('sylius_original').endsWith('product.jpg')"
                 }
             ],
-            "id": @integer@,
+            "id": "@integer@",
             "code": "MUG",
             "variants": [
                 "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
@@ -57,9 +66,9 @@
             "associations": [
                 "\/api\/v2\/shop\/product-associations\/@integer@"
             ],
-            "createdAt": @date@,
-            "updatedAt": @date@,
-            "shortDescription": @string@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
+            "shortDescription": "@string@",
             "reviews": [
                 {
                     "@id": "\/api\/v2\/shop\/product-reviews\/@integer@",
@@ -67,94 +76,116 @@
                 }
             ],
             "name": "Mug",
-            "description": @string@,
+            "description": "@string@",
             "slug": "mug",
-            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
+            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+            "defaultVariantData": {
+                "@id": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+                "@type": "ProductVariant",
+                "name": "Blue Mug",
+                "inStock": true,
+                "price": 2000,
+                "originalPrice": 3000,
+                "lowestPriceBeforeDiscount": null
+            }
         },
         {
             "@id": "\/api\/v2\/shop\/products\/SOCKS",
             "@type": "Product",
             "productTaxons": [],
             "mainTaxon": null,
-            "averageRating": @integer@,
+            "averageRating": "@integer@",
             "images": [],
-            "id": @integer@,
+            "id": "@integer@",
             "code": "SOCKS",
             "variants": [],
             "options": [
                 "\/api\/v2\/shop\/product-options\/COLOR"
             ],
-            "createdAt": @date@,
-            "updatedAt": @date@,
+            "createdAt": "@date@",
+            "updatedAt": "@date@",
             "shortDescription": null,
             "reviews": [],
             "name": "Socks",
             "description": null,
             "slug": "socks",
             "associations": [],
-            "defaultVariant": null
+            "defaultVariant": null,
+            "defaultVariantData": null
         }
     ],
     "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,order[code],order[createdAt],productTaxons.taxon.code,productTaxons.taxon.code[],order[price],order[translation.name],localeCode for order[translation.name],taxon}",
+        "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon,association[typeCode],association[ownerCode]}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
-              "@type": "IriTemplateMapping",
-              "variable": "translations.name",
-              "property": "translations.name",
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
+                "required": false
             },
             {
-              "@type": "IriTemplateMapping",
-              "variable": "order[code]",
-              "property": "code",
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "productTaxons.taxon.code",
+                "property": "productTaxons.taxon.code",
+                "required": false
             },
             {
-              "@type": "IriTemplateMapping",
-              "variable": "order[createdAt]",
-              "property": "createdAt",
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "productTaxons.taxon.code[]",
+                "property": "productTaxons.taxon.code",
+                "required": false
             },
             {
-              "@type": "IriTemplateMapping",
-              "variable": "productTaxons.taxon.code",
-              "property": "productTaxons.taxon.code",
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "order[code]",
+                "property": "code",
+                "required": false
             },
             {
-              "@type": "IriTemplateMapping",
-              "variable": "productTaxons.taxon.code[]",
-              "property": "productTaxons.taxon.code",
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "order[createdAt]",
+                "property": "createdAt",
+                "required": false
             },
             {
-              "@type": "IriTemplateMapping",
-              "variable": "order[price]",
-              "property": "price",
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "order[price]",
+                "property": "price",
+                "required": false
             },
             {
-              "@type": "IriTemplateMapping",
-              "variable": "order[translation.name]",
-              "property": "translation",
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "order[translation.name]",
+                "property": "translation",
+                "required": false
             },
             {
-              "@type": "IriTemplateMapping",
-              "variable": "localeCode for order[translation.name]",
-              "property": "localeCode",
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "localeCode for order[translation.name]",
+                "property": "localeCode",
+                "required": false
             },
             {
-              "@type": "IriTemplateMapping",
-              "variable": "taxon",
-              "property": null,
-              "required": false
+                "@type": "IriTemplateMapping",
+                "variable": "taxon",
+                "property": null,
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[typeCode]",
+                "property": "association",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "association[ownerCode]",
+                "property": "association",
+                "required": false
             }
-      ]
+        ]
     }
 }

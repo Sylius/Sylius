@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Inventory\Exception;
 
-final class NotEnoughUnitsOnHandException extends \InvalidArgumentException
+final class NotEnoughUnitsOnHandException extends \RuntimeException
 {
     public function __construct(string $variantName)
     {

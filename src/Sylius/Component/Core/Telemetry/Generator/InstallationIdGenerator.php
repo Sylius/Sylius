@@ -43,7 +43,7 @@ final class InstallationIdGenerator implements InstallationIdGeneratorInterface
     private function getHostname(Request $request): string
     {
         $host = $request->getHost();
-        if (null !== $host && '' !== trim($host)) {
+        if ('' !== trim($host)) {
             return mb_strtolower(trim($host));
         }
 

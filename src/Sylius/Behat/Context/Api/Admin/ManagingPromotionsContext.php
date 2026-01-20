@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
-use Sylius\Behat\Service\Converter\SectionAwareIriConverterInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -32,13 +31,13 @@ use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionAction
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
-use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
-final class ManagingPromotionsContext implements Context
+final readonly class ManagingPromotionsContext implements Context
 {
     use ValidationTrait;
 
@@ -46,7 +45,6 @@ final class ManagingPromotionsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
-        private SectionAwareIriConverterInterface $sectionAwareIriConverter,
     ) {
     }
 
@@ -161,7 +159,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItApplicableForTheChannel(ChannelInterface $channel): void
     {
-        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromItem($channel)]);
+        $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResource($channel)]);
     }
 
     /**
@@ -321,25 +319,27 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I specify that this action should be applied to items from :taxon category
+     * @When I specify that this action should be applied to items from :taxon category for :channel channel
      */
-    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory(TaxonInterface $taxon): void
-    {
+    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory(
+        TaxonInterface $taxon,
+        ChannelInterface $channel,
+    ): void {
         $actions = $this->getActions();
-        $channelCode = key($actions[0]['configuration']);
-        $actions[0]['configuration'][$channelCode]['filters']['taxons_filter']['taxons'] = [$taxon->getCode()];
+        $actions[0]['configuration'][$channel->getCode()]['filters']['taxons_filter']['taxons'] = [$taxon->getCode()];
 
         $this->client->addRequestData('actions', $actions);
     }
 
     /**
-     * @When I specify that this action should be applied to the :product product
+     * @When I specify that this action should be applied to the :product product for :channel channel
      */
-    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct(ProductInterface $product): void
-    {
+    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct(
+        ProductInterface $product,
+        ChannelInterface $channel,
+    ): void {
         $actions = $this->getActions();
-        $channelCode = key($actions[0]['configuration']);
-        $actions[0]['configuration'][$channelCode]['filters']['products_filter']['products'] = [$product->getCode()];
+        $actions[0]['configuration'][$channel->getCode()]['filters']['products_filter']['products'] = [$product->getCode()];
 
         $this->client->addRequestData('actions', $actions);
     }
@@ -563,6 +563,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then the :promotionName promotion should be successfully created
+     */
+    public function thePromotionShouldBeSuccessfullyCreated(string $promotionName): void
+    {
+        $this->iShouldBeNotifiedThatItHasBeenSuccessfullyCreated();
+        $this->thePromotionShouldAppearInTheRegistry($promotionName);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
@@ -629,7 +638,7 @@ final class ManagingPromotionsContext implements Context
             $this->responseChecker->hasValueInCollection(
                 $this->client->show(Resources::PROMOTIONS, $promotion->getCode()),
                 'channels',
-                $this->sectionAwareIriConverter->getIriFromResourceInSection($channel, 'admin'),
+                $this->iriConverter->getIriFromResource($channel),
             ),
         );
     }

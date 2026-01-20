@@ -1,0 +1,5 @@
+{% set review = hookable_metadata.context.review %}
+
+{% if review.author.firstName is not null %}
+    {{ review.author.firstName }},
+{% endif %}

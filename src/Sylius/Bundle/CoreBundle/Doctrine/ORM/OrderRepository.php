@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -39,7 +40,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 {
     protected AssociationHydrator $associationHydrator;
 
-    public function __construct(EntityManager $entityManager, ClassMetadata $class)
+    public function __construct(EntityManagerInterface $entityManager, ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
 
@@ -56,29 +57,14 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function createSearchListQueryBuilder(): QueryBuilder
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.13',
-            'This method is deprecated and it will be removed in Sylius 2.0. Please use `createCriteriaAwareSearchListQueryBuilder` instead.',
-        );
-
-        return $this->createListQueryBuilder()
-            ->leftJoin('o.items', 'item')
-            ->leftJoin('item.variant', 'variant')
-            ->leftJoin('variant.product', 'product')
-        ;
-    }
-
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder
     {
         if ($criteria === null) {
             return $this->createListQueryBuilder();
         }
 
-        $hasProductCriteria = '' !== $criteria['product'];
-        $hasVariantCriteria = '' !== $criteria['variant'];
+        $hasProductCriteria = '' !== ($criteria['product'] ?? '');
+        $hasVariantCriteria = '' !== ($criteria['variant'] ?? '');
 
         $queryBuilder = $this->createListQueryBuilder();
 
@@ -98,20 +84,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $queryBuilder;
     }
 
-    public function createByCustomerIdQueryBuilder($customerId): QueryBuilder
-    {
-        trigger_deprecation(
-            'sylius/core',
-            '1.13',
-            'This method is deprecated and it will be removed in Sylius 2.0. Please use `createByCustomerIdCriteriaAwareQueryBuilder` instead.',
-        );
-
-        return $this->createListQueryBuilder()
-            ->andWhere('o.customer = :customerId')
-            ->setParameter('customerId', $customerId)
-        ;
-    }
-
     public function createByCustomerIdCriteriaAwareQueryBuilder(?array $criteria, string $customerId): QueryBuilder
     {
         $queryBuilder = $this->createCriteriaAwareSearchListQueryBuilder($criteria);
@@ -122,7 +94,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function createByCustomerAndChannelIdQueryBuilder($customerId, $channelId): QueryBuilder
+    public function createByCustomerAndChannelIdQueryBuilder(mixed $customerId, mixed $channelId): QueryBuilder
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.customer = :customerId')
@@ -134,7 +106,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findOrderById($id): ?OrderInterface
+    public function findOrderById(mixed $id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :id')
@@ -148,7 +120,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
     public function findByCustomer(CustomerInterface $customer): array
     {
-        return $this->createByCustomerIdQueryBuilder($customer->getId())
+        return $this->createByCustomerIdCriteriaAwareQueryBuilder(null, (string) $customer->getId())
             ->getQuery()
             ->getResult()
         ;
@@ -166,7 +138,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findOneForPayment($id): ?OrderInterface
+    public function findOneForPayment(mixed $id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->addSelect('payments')
@@ -227,7 +199,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
-    public function findCartByChannel($id, ChannelInterface $channel): ?OrderInterface
+    public function findCartByChannel(mixed $id, ChannelInterface $channel): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :id')
@@ -338,6 +310,28 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    public function countGroupedPaidForChannelInPeriod(
+        ChannelInterface $channel,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        array $groupBy,
+    ): array {
+        $queryBuilder = $this->createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder($channel, $startDate, $endDate);
+        $queryBuilder->select('COUNT(o) AS paid_orders_count');
+
+        foreach ($groupBy as $name => $select) {
+            $queryBuilder
+                ->addSelect($select)
+                ->addGroupBy($name)
+            ;
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
+
     public function countFulfilledByChannel(ChannelInterface $channel): int
     {
         return (int) $this->createQueryBuilder('o')
@@ -419,7 +413,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $queryBuilder->getQuery()->getResult();
     }
 
-    public function findCartForSummary($id): ?OrderInterface
+    public function findCartForSummary(mixed $id): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')
@@ -450,7 +444,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    public function findCartForAddressing($id): ?OrderInterface
+    public function findCartForAddressing(mixed $id): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')
@@ -472,7 +466,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    public function findCartForSelectingShipping($id): ?OrderInterface
+    public function findCartForSelectingShipping(mixed $id): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')
@@ -494,7 +488,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         return $order;
     }
 
-    public function findCartForSelectingPayment($id): ?OrderInterface
+    public function findCartForSelectingPayment(mixed $id): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')
@@ -542,6 +536,19 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    /** @throws NonUniqueResultException */
+    public function findOneWithCompletedCheckout(string $tokenValue): ?OrderInterface
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.checkoutState = :checkoutState')
+            ->andWhere('o.tokenValue = :tokenValue')
+            ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
+            ->setParameter('tokenValue', $tokenValue)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     protected function createPaidOrdersInChannelPlacedWithinDateRangeQueryBuilder(
         ChannelInterface $channel,
         \DateTimeInterface $startDate,
@@ -556,5 +563,18 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('channel', $channel)
             ->setParameter('startDate', $startDate)
             ->setParameter('endDate', $endDate);
+    }
+
+    public function countNewByChannel(ChannelInterface $channel): int
+    {
+        return $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.state = :state')
+            ->andWhere('o.channel = :channel')
+            ->setParameter('state', OrderInterface::STATE_NEW)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
     }
 }

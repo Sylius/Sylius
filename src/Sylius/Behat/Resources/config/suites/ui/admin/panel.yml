@@ -5,6 +5,7 @@ default:
     suites:
         ui_panel:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 
@@ -21,6 +22,7 @@ default:
 
                 - sylius.behat.context.ui.admin.browsing_product_variants
                 - sylius.behat.context.ui.admin.managing_products
+                - sylius.behat.context.ui.save
                 - sylius.behat.context.ui.shop.browsing_product
                 - Sylius\Behat\Context\Ui\Admin\ProductCreationContext
                 - Sylius\Behat\Context\Ui\Admin\RemovingProductContext

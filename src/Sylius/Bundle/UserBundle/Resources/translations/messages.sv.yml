@@ -4,21 +4,21 @@
 sylius:
     form:
         user:
-            email: E-post
-            enabled: Aktiverad
+            email: 'E-post'
+            enabled: 'Aktiverad'
             password:
-                label: Lösenord
-                confirmation: Verifikation
-            remember_me: Kom ihåg mig
-            shipping_address: Leveransadress
-            username: Användarnanm
-            verified: Verifierad
+                label: 'Lösenord'
+                confirmation: 'Verifiering'
+            remember_me: 'Kom ihåg mig'
+            shipping_address: 'Leveransadress'
+            username: 'Användarnamn'
+            verified: 'Verifierad'
         user_filter:
-            query: Sök
+            query: 'Sök'
         user_change_password:
-            confirmation: Bekräftelse
-            current: Nuvarande lösenord
-            new: Nytt lösenord
+            confirmation: 'Bekräftelse'
+            current: 'Nuvarande lösenord'
+            new: 'Nytt lösenord'
         user_reset_password:
-            confirmation: Bekräftelse
-            new: Nytt lösenord
+            confirmation: 'Bekräftelse'
+            new: 'Nytt lösenord'

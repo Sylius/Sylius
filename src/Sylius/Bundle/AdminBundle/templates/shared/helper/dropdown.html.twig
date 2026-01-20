@@ -1,0 +1,53 @@
+{% macro default(params) %}
+    {% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
+
+    {% set params = {
+        button: {},
+        class: null,
+        content: null,
+        custom_trigger: null,
+        direction: 'down'
+    }|merge(params) %}
+
+    {% if params.direction == 'down' %}{% set drop = '' %}{% endif %}
+    {% if params.direction == 'down-end' %}{% set drop = ' dropdown-menu-end' %}{% endif %}
+
+    <div class="dropdown">
+        {% if params.custom_trigger %}
+            <div data-bs-toggle="dropdown">{{ params.custom_trigger }}</div>
+        {% else %}
+            {{ button.default(params.button|merge({ dropdown: true })) }}
+        {% endif %}
+
+        <div class="dropdown-menu{{ drop }} {{ params.class }}">
+            {{ params.content }}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro list(params, items) %}
+    {% set content %}
+        {% for item in items %}
+            {% set item = {
+                type: null,
+                class: null,
+                icon: null,
+                attributes: {}
+            }|merge(item) %}
+
+            {% if item.type == 'header' %}
+                <span class="dropdown-header">{{ item.title|trans }}</span>
+            {% elseif item.type == 'divider' %}
+                <hr class="dropdown-divider">
+            {% else %}
+                {% set extra_class = item.class ? ' ' ~ item.class %}
+                <a class="dropdown-item{{ item.class ? extra_class }}" href="{{ item.url }}" {{ sylius_test_html_attribute('user-dropdown-item', item.title|trans({}, null, 'en_US')) }} {% for attr, value in item.attributes %}{{ attr }}="{{ value }}" {% endfor %}>
+                    {{ item.icon ? ux_icon(item.icon, {'class': 'icon dropdown-item-icon ' ~ extra_class }) }}
+                    {{ item.title|trans }}
+                </a>
+            {% endif %}
+        {% endfor %}
+    {% endset %}
+
+    {{ _self.default(params|merge({ content: content })) }}
+{% endmacro %}

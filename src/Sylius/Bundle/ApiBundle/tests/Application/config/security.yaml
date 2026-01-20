@@ -1,0 +1,45 @@
+security:
+    providers:
+        sylius_api_admin_user_provider:
+            id: sylius.admin_user_provider.email_or_name_based
+        sylius_api_shop_user_provider:
+            id: sylius.shop_user_provider.email_or_name_based
+
+    password_hashers:
+        Sylius\Component\User\Model\UserInterface: plaintext
+
+    firewalls:
+        api_admin:
+            pattern: "%sylius.security.api_admin_regex%/.*"
+            provider: sylius_api_admin_user_provider
+            stateless: true
+            json_login:
+                check_path: "%sylius.security.api_admin_route%/authentication-token"
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            jwt: ~
+
+        api_shop:
+            pattern: "%sylius.security.api_shop_regex%/.*"
+            provider: sylius_api_shop_user_provider
+            stateless: true
+            json_login:
+                check_path: "%sylius.security.api_shop_route%/authentication-token"
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            jwt: ~
+
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+    access_control:
+        - { path: "%sylius.security.api_admin_regex%/.*", role: ROLE_API_ACCESS }
+        - { path: "%sylius.security.api_admin_route%/authentication-token", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.api_shop_account_regex%/.*", role: ROLE_USER }
+        - { path: "%sylius.security.api_shop_route%/authentication-token", role: PUBLIC_ACCESS }
+        - { path: "%sylius.security.api_shop_regex%/.*", role: PUBLIC_ACCESS }

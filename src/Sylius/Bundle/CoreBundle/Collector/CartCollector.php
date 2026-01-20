@@ -66,11 +66,13 @@ final class CartCollector extends DataCollector
         return $this->data['quantity'] ?? null;
     }
 
+    /** @return array<string> */
     public function getItems(): ?array
     {
         return $this->data['items'] ?? null;
     }
 
+    /** @return array<string> */
     public function getStates(): ?array
     {
         return $this->data['states'] ?? null;

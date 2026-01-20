@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface HomePageInterface extends SymfonyPageInterface
+interface HomePageInterface extends SyliusPageInterface
 {
     public function getContent(): string;
 
@@ -38,4 +38,6 @@ interface HomePageInterface extends SymfonyPageInterface
     public function switchLocale(string $localeCode): void;
 
     public function getLatestProductsNames(): array;
+
+    public function getLatestDealsNames(): array;
 }

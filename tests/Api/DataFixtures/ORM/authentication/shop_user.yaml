@@ -1,0 +1,29 @@
+Sylius\Component\Core\Model\ShopUser:
+    default_shop_user:
+        plainPassword: "sylius"
+        roles: [ROLE_USER]
+        enabled: true
+        customer: "@default_customer"
+        username: "shop@example.com"
+        usernameCanonical: "shop@example.com"
+    shop_user_{oliver, dave}:
+        plainPassword: "sylius"
+        roles: [ROLE_USER]
+        enabled: true
+        customer: "@customer_<current()>"
+        username: "<current()>\\@doe.com"
+        usernameCanonical: "<current()>\\@doe.com"
+
+Sylius\Component\Core\Model\Customer:
+    default_customer:
+        firstName: "John"
+        lastName: "Doe"
+        email: "shop@example.com"
+        emailCanonical: "shop@example.com"
+        birthday: "<(new \\DateTime())>"
+    customer_{oliver, dave}:
+        firstName: "<current()>"
+        lastName: "Doe"
+        email: "<current()>\\@doe.com"
+        emailCanonical: "<current()>\\@doe.com"
+        birthday: "<(new \\DateTime())>"

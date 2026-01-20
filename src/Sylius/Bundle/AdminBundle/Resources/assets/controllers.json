@@ -1,0 +1,88 @@
+{
+  "controllers": {
+    "@symfony/ux-autocomplete": {
+      "autocomplete": {
+        "main": "dist/controller.js",
+        "webpackMode": "eager",
+        "fetch": "eager",
+        "enabled": true,
+        "autoimport": {
+          "tom-select/dist/css/tom-select.default.css": false,
+          "tom-select/dist/css/tom-select.bootstrap5.css": false
+        }
+      }
+    },
+    "@symfony/ux-live-component": {
+      "live": {
+        "enabled": true,
+        "fetch": "eager",
+        "autoimport": {
+          "@symfony/ux-live-component/dist/live.min.css": true
+        }
+      }
+    },
+    "@sylius/admin-bundle": {
+      "slug": {
+        "main": "controllers/SlugController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "taxon-slug": {
+        "main": "controllers/TaxonSlugController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "taxon-tree": {
+        "main": "controllers/TaxonTreeController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "delete-taxon": {
+        "main": "controllers/DeleteTaxonController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "product-attribute-autocomplete": {
+        "main": "controllers/ProductAttributeAutocomplete.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "product-taxon-tree": {
+        "main": "controllers/ProductTaxonTreeController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "save-positions": {
+        "main": "controllers/SavePositionsController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "compound-form-errors": {
+        "main": "controllers/CompoundFormErrorsController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "tabs-errors": {
+        "main": "controllers/TabsErrorsController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "back-button": {
+        "main": "controllers/BackButtonController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      }
+    }
+  },
+  "entrypoints": []
+}

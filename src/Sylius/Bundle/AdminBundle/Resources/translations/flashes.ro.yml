@@ -2,8 +2,18 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        request_reset_password:
+            success: 'Dacă adresa de email specificată există în sistemul nostru, am trimis acolo o instrucțiune despre cum să îți resetezi parola.'
+        password_reset:
+            success: 'Parola dumneavoastră a fost schimbată cu succes!'
+            token_expired: 'Tokenul de resetare a parolei a expirat.'
     email:
         order_confirmation_resent: 'Confirmarea comenzii a fost retrimisă cu succes clientului.'
-        shipment_confirmation_resent: 'Confirmarea expedierii a fost retrimisă cu succes clientului.'
+        shipment_confirmation_resent: 'Confirmarea livrării a fost retrimisă cu succes clientului.'
     product_variant:
-        cannot_generate_variants: 'Nu se pot genera variante pentru un produs fără valori opțiuni setate.'
+        cannot_generate_variants: 'Nu se pot genera variante pentru un produs fără valori ale opțiunilor.'
+    locale:
+        delete:
+            is_used: 'Nu se poate șterge localizarea, deoarece este folosită de cel puțin o traducere.'
+            success: 'Localizarea a fost ștearsă cu succes.'

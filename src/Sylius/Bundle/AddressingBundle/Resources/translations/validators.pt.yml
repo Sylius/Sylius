@@ -4,43 +4,69 @@
 sylius:
     address:
         city:
-            not_blank: Por favor, insira a cidade.
+            max_length: 'A cidade não pode ter mais de {{ limit }} caractere.|A cidade não pode ter mais de {{ limit }} caracteres.'
+            min_length: 'A cidade deve ter pelo menos {{ limit }} caractere.|A cidade deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe a cidade.'
         country:
-            not_blank: Por favor, selecione o país.
-            disabled: O país escolhido está desativado. Por favor, escolha um diferente.
+            not_blank: 'Por favor, selecione um país.'
+            disabled: 'O país escolhido está desativado. Por favor, escolha outro.'
         first_name:
-            not_blank: Por favor introduza o primeiro nome.
+            max_length: 'O nome não pode ter mais de {{ limit }} caractere.|O nome não pode ter mais de {{ limit }} caracteres.'
+            min_length: 'O nome deve ter pelo menos {{ limit }} caractere.|O nome deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o nome.'
         last_name:
-            not_blank: Por favor insira o último nome.
+            max_length: 'O sobrenome não pode ter mais de {{ limit }} caractere.|O sobrenome não pode ter mais de {{ limit }} caracteres.'
+            min_length: 'O sobrenome deve ter pelo menos {{ limit }} caractere.|O sobrenome deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o sobrenome.'
         postcode:
-            not_blank: Por favor introduza o código postal.
+            max_length: 'O código postal não pode ter mais de {{ limit }} caractere.|O código postal não pode ter mais de {{ limit }} caracteres.'
+            min_length: 'O código postal deve ter pelo menos {{ limit }} caractere.|O código postal deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código postal.'
         province:
-            valid: Por favor selecione a província adequada.
+            valid: 'Por favor, selecione uma província válida.'
         street:
-            not_blank: Por favor introduza a morada.
-        not_shippable: Este endereço de entrega não é válido.
+            max_length: 'A rua não pode ter mais de {{ limit }} caractere.|A rua não pode ter mais de {{ limit }} caracteres.'
+            min_length: 'A rua deve ter pelo menos {{ limit }} caractere.|A rua deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe a rua.'
+        not_shippable: 'Este endereço não é um destino de entrega válido.'
     country:
         code:
-            not_blank: Por favor introduza o código ISO do país.
-            unique: O código ISO do país deve ser único.
+            not_blank: 'Por favor, informe o código ISO do país.'
+            unique: 'O código ISO do país deve ser único.'
+            country: 'O código ISO do país é inválido.'
+        unique_provinces: 'Todas as províncias deste país precisam ter códigos e nomes únicos.'
     province:
         code:
-            min_length: O código da província deve ter pelo menos 5 caracteres|O código da província deve ter pelo menos 5 caracteres.
-            not_blank: Por favor introduza o código da província.
-            regex: O código de província deve ter o seguinte formato XX-XX (por exemplo, U.S.-FL).
-            unique: O código da província deve ser único.
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código da província.'
+            regex: 'O código da província deve ter o formato XX-XX (ex.: US-FL).'
+            unique: 'O código da província deve ser único.'
         name:
-            not_blank: Por favor introduza o nome de província.
-            unique: O nome da província deve ser único.
+            max_length: 'O nome da província não pode ter mais de {{ limit }} caractere.|O nome da província não pode ter mais de {{ limit }} caracteres.'
+            min_length: 'O nome da província deve ter pelo menos {{ limit }} caractere.|O nome da província deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o nome da província.'
+            unique: 'O nome da província deve ser único.'
     zone:
+        scope:
+            not_blank: 'Por favor, informe o escopo.'
         code:
-            not_blank: Por favor introduza o código de zona.
-            unique: O código de zona deve ser único.
+            max_length: 'O código não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o código da zona.'
+            regex: 'O código da zona pode conter apenas letras, números, hífens e sublinhados.'
+            unique: 'O código da zona deve ser único.'
+        type:
+            invalid: 'Tipo {{ value }} é inválido. Os tipos permitidos são: {{ choices }}.'
         members:
-            min_count: Por favor adicione pelo menos {{ limit }} membro(s) de zona.
+            min_count: 'Adicione pelo menos {{ limit }} membro de zona.'
         name:
-            not_blank: Por favor introduza o nome de zona.
+            max_length: 'O nome da zona não pode ter mais de {{ limit }} caractere.|O nome da zona não pode ter mais de {{ limit }} caracteres.'
+            min_length: 'O nome da zona deve ter pelo menos {{ limit }} caractere.|O nome da zona deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: 'Por favor, informe o nome da zona.'
     zone_member:
+        cannot_be_the_same_as_zone: 'O membro de zona não pode ser a própria zona.'
         code:
-            not_blank: Por favor escolha um membro de zona.
-        unique: Membro de zona escolhido já está nesta zona.
+            max_length: 'O código do membro da zona não pode ter mais de {{ limit }} caracteres.'
+            not_blank: 'Por favor, escolha um membro da zona.'
+            regex: 'O código do membro da zona pode conter apenas letras, números, hífens e sublinhados.'
+        unique: 'O membro da zona selecionado já pertence a esta zona.'
+

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
+#[\Attribute]
 final class ChannelCodeCollection extends Constraint
 {
     /** @var array<Constraint> */
@@ -29,6 +30,8 @@ final class ChannelCodeCollection extends Constraint
     public ?string $extraFieldsMessage = null;
 
     public ?string $missingFieldsMessage = null;
+
+    public string $invalidChannelMessage = 'sylius.channel_code_collection.invalid_channel';
 
     public bool $validateAgainstAllChannels = false;
 

@@ -4,23 +4,32 @@
 sylius:
     tax_category:
         name:
-            not_blank: Per favore inserisci il nome della categoria della tassa.
+            not_blank: 'Per favore inserisci il nome della categoria fiscale.'
+            min_length: 'Il nome della categoria fiscale deve essere lungo almeno 1 carattere.|Il nome della categoria fiscale deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il nome della categoria fiscale non deve essere più lungo di 1 carattere.|Il nome della categoria fiscale non deve essere più lungo di {{ limit }} caratteri.'
         code:
-            not_blank: Inserisci il codice della categoria fiscale.
-            regex: Il codice della categoria fiscale può contenere solo lettere, numeri, trattini e underscore.
-            unique: La categoria fiscale con il codice assegnato esiste già.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice della categoria fiscale.'
+            regex: 'Il codice della categoria fiscale può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'La categoria fiscale con il codice fornito esiste già.'
     tax_rate:
         category:
-            not_blank: Per favore seleziona la categoria della tassa.
+            not_blank: 'Per favore seleziona la categoria fiscale.'
         name:
-            not_blank: Per favore inserisci il nome della tassa.
+            not_blank: 'Per favore inserisci il nome della tassa.'
+            min_length: 'Il nome della tassa deve essere lungo almeno 1 carattere.|Il nome della tassa deve essere lungo almeno {{ limit }} caratteri.'
+            max_length: 'Il nome della tassa non deve essere più lungo di 1 carattere.|Il nome della tassa non deve essere più lungo di {{ limit }} caratteri.'
         amount:
-            not_blank: Per favore inserisci il valore della tassa.
+            invalid: 'L''importo della tassa non è valido.'
+            not_blank: 'Per favore inserisci l''importo della tassa.'
         calculator:
-            not_blank: Per favore seleziona il calcolatore della tassa.
+            not_blank: 'Per favore seleziona il calcolatore della tassa.'
         zone:
-            not_blank: Seleziona una zona di tassazione.
+            not_blank: 'Per favore seleziona la zona fiscale.'
         code:
-            not_blank: Inserisci il codice della tassazione fiscale locale.
-            regex: Il codice dell'aliquota fiscale può contenere solo lettere, numeri, trattini e underscore.
-            unique: L'aliquota d'imposta con il codice dato esiste già.
+            max_length: 'Il codice non deve essere più lungo di {{ limit }} caratteri.'
+            not_blank: 'Per favore inserisci il codice della tassa.'
+            regex: 'Il codice della tassa può contenere solo lettere, numeri, trattini e underscore.'
+            unique: 'La tassa con il codice fornito esiste già.'
+        date:
+            greater_than_start_date: 'Il tasso fiscale non deve scadere prima della data di inizio.'

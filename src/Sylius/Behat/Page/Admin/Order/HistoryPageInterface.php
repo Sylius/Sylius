@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface HistoryPageInterface extends SymfonyPageInterface
+interface HistoryPageInterface extends SyliusPageInterface
 {
-    public function countShippingAddressChanges(): int;
-
     public function countBillingAddressChanges(): int;
+
+    public function countShippingAddressChanges(): int;
 }

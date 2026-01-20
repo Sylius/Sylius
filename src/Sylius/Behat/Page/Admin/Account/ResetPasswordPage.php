@@ -14,26 +14,41 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Admin\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use Behat\Mink\Session;
+use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
+use Sylius\Behat\Page\SyliusPage;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Symfony\Component\Routing\RouterInterface;
 
-class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterface
+class ResetPasswordPage extends SyliusPage implements ResetPasswordPageInterface
 {
+    use SecurePasswordTrait;
+
+    public function __construct(
+        Session $session,
+        $minkParameters,
+        RouterInterface $router,
+        protected SharedStorageInterface $sharedStorage,
+    ) {
+        parent::__construct($session, $minkParameters, $router);
+    }
+
     public function specifyNewPassword(string $password): void
     {
-        $this->getElement('new_password')->setValue($password);
+        $this->getElement('new_password')->setValue($this->replaceWithSecurePassword($password));
     }
 
     public function specifyPasswordConfirmation(string $password): void
     {
-        $this->getElement('confirm_new_password')->setValue($password);
+        $this->getElement('confirm_new_password')->setValue($this->confirmSecurePassword($password));
     }
 
     public function getValidationMessageForNewPassword(): string
     {
-        $errorLabel = $this->getElement('new_password')->getParent()->find('css', '[data-test-validation-error]');
+        $errorLabel = $this->getElement('new_password')->getParent()->find('css', '.invalid-feedback');
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
         return $errorLabel->getText();
@@ -41,10 +56,10 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
 
     public function checkValidationMessageFor(string $element, string $message): bool
     {
-        $errorLabel = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '.invalid-feedback');
 
         if (null === $errorLabel) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.invalid-feedback');
         }
 
         return $message === $errorLabel->getText();

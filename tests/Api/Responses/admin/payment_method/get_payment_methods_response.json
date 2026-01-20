@@ -9,18 +9,23 @@
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
-            "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-            "id": @integer@,
+            "gatewayConfig": {
+                "@type": "GatewayConfig",
+                "@id": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+                "factoryName": "offline",
+                "gatewayName": "Offline",
+                "config": []
+            },
+            "id": "@integer@",
             "code": "CASH_ON_DELIVERY",
             "position": 0,
             "enabled": true,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/payment-methods\/CASH_ON_DELIVERY\/translations\/en_US",
                     "@type": "PaymentMethodTranslation",
-                    "id": @integer@,
                     "name": "Cash on delivery",
-                    "description": @string@,
+                    "description": "@string@",
                     "instructions": null
                 }
             }
@@ -31,18 +36,23 @@
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
-            "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-            "id": @integer@,
+            "gatewayConfig": {
+                "@type": "GatewayConfig",
+                "@id": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+                "factoryName": "offline",
+                "gatewayName": "Offline",
+                "config": []
+            },
+            "id": "@integer@",
             "code": "BANK_TRANSFER",
             "position": 1,
             "enabled": true,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/payment-methods\/BANK_TRANSFER\/translations\/en_US",
                     "@type": "PaymentMethodTranslation",
-                    "id": @integer@,
                     "name": "Bank transfer",
-                    "description": @string@,
+                    "description": "@string@",
                     "instructions": null
                 }
             }
@@ -53,49 +63,32 @@
             "channels": [
                 "\/api\/v2\/admin\/channels\/WEB"
             ],
-            "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-            "id": @integer@,
+            "gatewayConfig": {
+                "@type": "GatewayConfig",
+                "@id": "\/api\/v2\/admin\/gateway-configs\/@integer@",
+                "factoryName": "offline",
+                "gatewayName": "Offline",
+                "config": []
+            },
+            "id": "@integer@",
             "code": "DISABLED_PAYMENT_METHOD",
             "position": 2,
             "enabled": false,
             "translations": {
                 "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
+                    "@id": "\/api\/v2\/admin\/payment-methods\/DISABLED_PAYMENT_METHOD\/translations\/en_US",
                     "@type": "PaymentMethodTranslation",
-                    "id": @integer@,
                     "name": "Disabled payment method",
-                    "description": @string@,
-                    "instructions": null
-                }
-            }
-        },
-        {
-            "@id": "\/api\/v2\/admin\/payment-methods\/PAYPAL",
-            "@type": "PaymentMethod",
-            "channels": [
-                "\/api\/v2\/admin\/channels\/WEB"
-            ],
-            "gatewayConfig": "\/api\/v2\/admin\/gateway-configs\/@integer@",
-            "id": @integer@,
-            "code": "PAYPAL",
-            "position": 3,
-            "enabled": true,
-            "translations": {
-                "en_US": {
-                    "@id": "\/api\/v2\/admin\/payment-method-translations\/@integer@",
-                    "@type": "PaymentMethodTranslation",
-                    "id": @integer@,
-                    "name": "PayPal",
-                    "description": @string@,
+                    "description": "@string@",
                     "instructions": null
                 }
             }
         }
     ],
-    "hydra:totalItems": 4,
+    "hydra:totalItems": 3,
     "hydra:search": {
         "@type": "hydra:IriTemplate",
-        "hydra:template": "\/api\/v2\/admin\/payment-methods{?order[code],order[translation.name],localeCode for order[translation.name]}",
+        "hydra:template": "\/api\/v2\/admin\/payment-methods{?order[code],order[translation.name],localeCode for order[translation.name],translations.name,code,enabled}",
         "hydra:variableRepresentation": "BasicRepresentation",
         "hydra:mapping": [
             {
@@ -114,6 +107,24 @@
                 "@type": "IriTemplateMapping",
                 "variable": "localeCode for order[translation.name]",
                 "property": "localeCode",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "translations.name",
+                "property": "translations.name",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "code",
+                "property": "code",
+                "required": false
+            },
+            {
+                "@type": "IriTemplateMapping",
+                "variable": "enabled",
+                "property": "enabled",
                 "required": false
             }
         ]

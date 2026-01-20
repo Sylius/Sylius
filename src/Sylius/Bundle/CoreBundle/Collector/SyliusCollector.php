@@ -25,6 +25,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 final class SyliusCollector extends DataCollector
 {
+    /** @param array<mixed> $bundles */
     public function __construct(
         private ShopperContextInterface $shopperContext,
         array $bundles,
@@ -55,6 +56,7 @@ final class SyliusCollector extends DataCollector
         return $this->data['version'];
     }
 
+    /** @return array<string> */
     public function getExtensions(): array
     {
         return $this->data['extensions'];

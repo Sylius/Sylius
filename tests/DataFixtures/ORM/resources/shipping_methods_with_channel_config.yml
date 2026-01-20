@@ -1,0 +1,49 @@
+Sylius\Component\Addressing\Model\Zone:
+    zone_us:
+        code: US
+        name: United States
+        type: country
+
+    zone_eu:
+        code: EU
+        name: European Union
+        type: country
+
+Sylius\Component\Core\Model\ShippingMethod:
+    shipping_method_dhl:
+        code: dhl_express
+        calculator: flat_rate
+        configuration:
+            WEB_US:
+                amount: 1000
+            WEB_EU:
+                amount: 1500
+        zone: "@zone_us"
+        enabled: true
+
+    shipping_method_ups:
+        code: ups
+        calculator: flat_rate
+        configuration:
+            WEB_US:
+                amount: 1200
+        zone: "@zone_us"
+        enabled: true
+
+    shipping_method_fedex:
+        code: fedex
+        calculator: flat_rate
+        configuration:
+            WEB_EU:
+                amount: 2000
+        zone: "@zone_eu"
+        enabled: true
+
+    shipping_method_free:
+        code: free_shipping
+        calculator: flat_rate
+        configuration:
+            OTHER_CHANNEL:
+                amount: 0
+        zone: "@zone_us"
+        enabled: true

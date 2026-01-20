@@ -11,9 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
     <imports>
         <import resource="services/checkers.xml" />
@@ -22,32 +23,27 @@
     </imports>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.custom_factory.zone" class="Sylius\Component\Addressing\Factory\ZoneFactory" decorates="sylius.factory.zone" decoration-priority="256" public="false">
+        <service id="sylius.custom_factory.zone" class="Sylius\Component\Addressing\Factory\ZoneFactory" decorates="sylius.factory.zone" decoration-priority="256">
             <argument type="service" id="sylius.custom_factory.zone.inner" />
             <argument type="service" id="sylius.factory.zone_member" />
         </service>
         <service id="Sylius\Component\Addressing\Factory\ZoneFactoryInterface" alias="sylius.custom_factory.zone" />
 
-        <service id="sylius.province_naming_provider" class="Sylius\Component\Addressing\Provider\ProvinceNamingProvider" lazy="true">
+        <service id="sylius.provider.province_naming" class="Sylius\Component\Addressing\Provider\ProvinceNamingProvider" lazy="true">
             <argument type="service" id="sylius.repository.province" />
         </service>
-        <service id="Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface" alias="sylius.province_naming_provider" />
-        <service id="sylius.provider.province_naming" alias="sylius.province_naming_provider" />
+        <service id="Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface" alias="sylius.provider.province_naming" />
 
-        <service id="sylius.zone_matcher" class="Sylius\Component\Addressing\Matcher\ZoneMatcher">
+        <service id="sylius.matcher.zone" class="Sylius\Component\Addressing\Matcher\ZoneMatcher" public="true">
             <argument type="service" id="sylius.repository.zone" />
         </service>
-        <service id="Sylius\Component\Addressing\Matcher\ZoneMatcherInterface" alias="sylius.zone_matcher" />
-        <service id="sylius.matcher.zone" alias="sylius.zone_matcher" />
+        <service id="Sylius\Component\Addressing\Matcher\ZoneMatcherInterface" alias="sylius.matcher.zone" public="true" />
 
         <service id="sylius.converter.country_name" class="Sylius\Component\Addressing\Converter\CountryNameConverter" />
         <service id="Sylius\Component\Addressing\Converter\CountryNameConverterInterface" alias="sylius.converter.country_name" />
 
-        <service id="sylius.address_comparator" class="Sylius\Component\Addressing\Comparator\AddressComparator"/>
-        <service id="Sylius\Component\Addressing\Comparator\AddressComparatorInterface" alias="sylius.address_comparator" />
-        <service id="sylius.comparator.address" alias="sylius.address_comparator" />
+        <service id="sylius.comparator.address" class="Sylius\Component\Addressing\Comparator\AddressComparator"/>
+        <service id="Sylius\Component\Addressing\Comparator\AddressComparatorInterface" alias="sylius.comparator.address" />
 
         <service id="sylius.twig.extension.country_name" class="Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension">
             <argument type="string" id="isoCode" />
@@ -71,6 +67,11 @@
 
         <service id="sylius.validator.unique_province_collection" class="Sylius\Bundle\AddressingBundle\Validator\Constraints\UniqueProvinceCollectionValidator">
             <tag name="validator.constraint_validator" alias="sylius_unique_province_collection_validator" />
+        </service>
+
+        <service id="sylius.validator.zone_member_group" class="Sylius\Bundle\AddressingBundle\Validator\Constraints\ZoneMemberGroupValidator">
+            <argument>%sylius.addressing.zone_member.validation_groups%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_zone_member_group" />
         </service>
     </services>
 </container>

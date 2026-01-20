@@ -4,38 +4,39 @@
 sylius:
     form:
         address:
-            city: Cidade
-            company: Empresa
-            country: País
-            first_name: Nome próprio
-            last_name: Apelido
-            phone_number: Número de telefone
-            postcode: Código postal
-            province: Distrito
-            zone: Zona
+            city: 'Cidade'
+            company: 'Empresa'
+            country: 'País'
+            first_name: 'Nome próprio'
+            last_name: 'Sobrenome'
+            phone_number: 'Número de telefone'
+            postcode: 'Código postal'
+            street: 'Endereço'
+            province: 'Província'
+            zone: 'Zona'
         country:
-            add_province: Adicionar estado
-            name: Nome
-            provinces: Distritos
-            select: Seleccionar
-            enabled: Ativado
+            add_province: 'Adicionar província'
+            name: 'Nome'
+            provinces: 'Províncias'
+            select: 'Selecionar'
+            enabled: 'Ativado'
         province:
-            name: Nome
-            abbreviation: Abreviatura
-            select: Seleccionar
+            name: 'Nome'
+            abbreviation: 'Abreviatura'
+            select: 'Selecionar'
         zone:
-            add_member: Adicionar membro
-            members: Membros
-            name: Nome
-            type: Tipo
+            add_member: 'Adicionar membro'
+            members: 'Membros'
+            name: 'Nome'
+            type: 'Tipo'
             types:
-                country: País
-                province: Distrito
-                zone: Zona
-            scope: Âmbito
+                country: 'País'
+                province: 'Província'
+                zone: 'Zona'
+            scope: 'Âmbito'
             scopes:
-                all: Tudo
-            select: Seleccionar
-            select_scope: Selecione o âmbito
+                all: 'Todos'
+            select: 'Selecionar'
         zone_member:
-            select: Seleccionar
+            select: 'Selecionar'
+

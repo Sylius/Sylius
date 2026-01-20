@@ -1,0 +1,5 @@
+sylius:
+    form:
+        locale:
+            name: Name
+            select: Select a locale...

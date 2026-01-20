@@ -4,19 +4,31 @@
 sylius:
     customer:
         first_name:
-            max: Förnamn får inte vara längre än {{ limit }} tecken.
-            min: Förnamn måste vara minst {{ limit }} tecken långt.
-            not_blank: Var god skriv ditt förnamn.
+            max: 'Förnamn får inte vara längre än {{ limit }} tecken.'
+            min: 'Förnamn måste vara minst {{ limit }} tecken långt.'
+            not_blank: 'Ange ditt förnamn.'
         last_name:
-            max: Efternamn får inte vara längre än {{ limit }} tecken.
-            min: Efternamn måste vara minst {{ limit }} tecken långt.
-            not_blank: Var god skriv ditt efternamn.
+            max: 'Efternamn får inte vara längre än {{ limit }} tecken.'
+            min: 'Efternamn måste vara minst {{ limit }} tecken långt.'
+            not_blank: 'Ange ditt efternamn.'
         gender:
-            not_blank: Var god ange ditt kön.
+            not_blank: 'Välj ditt kön.'
         email:
-            already_used: Den här e-posten används redan, vänligen logga in eller använd glömt lösenord.
-            max: E-posten får inte vara längre än {{ limit }} tecken.
-            not_blank: Skriv din e-postadress.
-            invalid: E-postadressen är ogiltig.
-            unique: Den här e-posten används redan.
-            registered: Den här e-posten är redan registrerad, vänligen logga in eller använd glömt lösenord.
+            already_used: 'Denna e-postadress används redan, logga in eller använd funktionen för glömt lösenord.'
+            max: 'E-postadressen får inte vara längre än {{ limit }} tecken.'
+            not_blank: 'Ange din e-postadress.'
+            invalid: 'Denna e-postadress är ogiltig.'
+            unique: 'Denna e-postadress används redan.'
+            registered: 'Denna e-postadress är redan registrerad, logga in eller använd funktionen för glömt lösenord.'
+        phone_number:
+            max: 'Telefonnumret får inte vara längre än {{ limit }} tecken.'
+    customer_group:
+        code:
+            max_length: 'Koden får inte vara längre än {{ limit }} tecken.'
+            regex: 'Kundgruppskoden får endast bestå av bokstäver, siffror, bindestreck och understreck.'
+            unique: 'Kundgruppskoden måste vara unik.'
+            not_blank: 'Ange en kundgruppskod.'
+        name:
+            max: 'Kundgruppens namn får inte vara längre än {{ limit }} tecken.'
+            min: 'Kundgruppens namn måste vara minst {{ limit }} tecken långt.'
+            not_blank: 'Ange ett namn för kundgruppen.'

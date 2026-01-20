@@ -4,33 +4,39 @@
 sylius:
     form:
         attribute:
-            add: Adicionar
-            add_attributes: Adicionar atributos
-            choices: Escolhas
-            code: Código
-            name: Nome
-            translations: Traduções
-            type: Tipo
+            add: 'Adicionar'
+            add_attributes: 'Adicionar atributos'
+            choices: 'Opções'
+            code: 'Código'
+            name: 'Nome'
+            translatable: 'Traduzível'
+            translations: 'Traduções'
+            type: 'Tipo'
         attribute_type:
-            checkbox: Caixa de verificação
-            configuration: Configuração
-            date: Data
-            datetime: DateTime
-            integer: Número inteiro
-            percent: Percentagem
-            select: Seleccionar
-            text: Texto
-            textarea: Área de texto
-            title: Tipo de atributo
-            validation: Validação
+            checkbox: 'Caixa de seleção'
+            configuration: 'Configuração'
+            date: 'Data'
+            datetime: 'Data e hora'
+            float: 'Ponto flutuante'
+            integer: 'Inteiro'
+            percent: 'Percentual'
+            select: 'Selecionar'
+            text: 'Texto'
+            textarea: 'Área de texto'
+            title: 'Tipos de atributo'
+            validation: 'Validação'
         attribute_type_configuration:
             datetime:
-                format: Formato
+                format: 'Formato'
             date:
-                format: Formato
+                format: 'Formato'
             select:
-                values: Valores
-                choose: Escolha uma opção
+                multiple: 'Múltiplo'
+                values: 'Valores'
+                choose: 'Escolha uma opção'
+                min: 'Mín entradas'
+                max: 'Máx entradas'
             text:
-                min: Comprimento mínimo
-                max: Comprimento máximo
+                min: 'Mín comprimento'
+                max: 'Máx comprimento'
+

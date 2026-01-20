@@ -18,18 +18,12 @@
 >
     <imports>
         <import resource="services/**.xml" />
+        <import resource="services/payment_request/**/*.xml" />
     </imports>
 
     <services>
-        <defaults public="true" />
-
-        <service id="sylius.payum.http_client" class="Sylius\Bundle\PayumBundle\HttpClient\HttpClient">
+        <service id="sylius_payum.http_client" class="Sylius\Bundle\PayumBundle\HttpClient\HttpClient">
             <argument type="service" id="Psr\Http\Client\ClientInterface" />
-        </service>
-        <service id="sylius_payum.http_client" alias="sylius.payum.http_client" />
-
-        <service id="sylius.form_registry.payum_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry">
-            <deprecated package="sylius/payum-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be moved to the PayumBundle in 2.0.</deprecated>
         </service>
     </services>
 </container>
