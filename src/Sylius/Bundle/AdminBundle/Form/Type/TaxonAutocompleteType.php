@@ -35,9 +35,6 @@ final class TaxonAutocompleteType extends AbstractType
     {
         $resolver->setDefaults([
             'class' => $this->taxonClass,
-            'choice_label' => 'fullname',
-            'choice_value' => 'code',
-            'extra_options' => [],
         ]);
 
         $resolver->setDefault('choice_label', function (Options $options): string {
