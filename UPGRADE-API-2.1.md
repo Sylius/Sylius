@@ -1,3 +1,17 @@
+# UPGRADE FROM `2.1.10` TO `2.1.11`
+
+### Constructor signature changes
+
+1. `Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\PaymentRequestActionAwareContextBuilder`:
+   ```diff
+   public function __construct(
+   +   private readonly IriToIdentifierConverterInterface $iriToIdentifierConverter,
+       SerializerContextBuilderInterface $decoratedContextBuilder,
+       string $attributeClass,
+       string $defaultConstructorArgumentName,
+   )
+   ```
+
 # UPGRADE FROM `2.1.4` TO `2.1.5`
 
 ## Modified responses

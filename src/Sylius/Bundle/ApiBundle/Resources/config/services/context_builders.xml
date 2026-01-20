@@ -208,6 +208,7 @@
             decorates="api_platform.serializer.context_builder"
             decoration-priority="64"
         >
+            <argument type="service" id="sylius_api.converter.iri_to_identifier" />
             <argument type="service" id=".inner" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware::DEFAULT_ARGUMENT_NAME</argument>
