@@ -1,5 +1,32 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.2 (2026-01-20)
+
+#### Details
+
+- [#18691](https://github.com/Sylius/Sylius/pull/18691) [CS][DX] Refactor
+- [#18690](https://github.com/Sylius/Sylius/pull/18690) [CS][DX] Refactor
+- [#18689](https://github.com/Sylius/Sylius/pull/18689) [CS][DX] Refactor
+- [#18693](https://github.com/Sylius/Sylius/pull/18693) [CI] Standardize job timeouts to 15 minutes ([@Rafikooo](https://github.com/Rafikooo))
+- [#18703](https://github.com/Sylius/Sylius/pull/18703) [Deps] Allow psr/http-message ^2.0 ([@Rafikooo](https://github.com/Rafikooo))
+- [#18716](https://github.com/Sylius/Sylius/pull/18716) Try to fix build with PHP 8.5 and 8.4 ([@TheMilek](https://github.com/TheMilek))
+- [#18707](https://github.com/Sylius/Sylius/pull/18707) [DX] Update branch aliases to 1.14-dev ([@Rafikooo](https://github.com/Rafikooo))
+- [#18721](https://github.com/Sylius/Sylius/pull/18721) Fix tests application error templates ([@loic425](https://github.com/loic425))
+- [#16892](https://github.com/Sylius/Sylius/pull/16892) [FIXTURES] Fix menu taxon code ([@TheMilek](https://github.com/TheMilek))
+- [#18366](https://github.com/Sylius/Sylius/pull/18366) Fix ro PayumBundle Translation ([@revoltek-daniel](https://github.com/revoltek-daniel))
+- [#18725](https://github.com/Sylius/Sylius/pull/18725) Bugfix/merged overrides missing operations ([@TheMilek](https://github.com/TheMilek))
+- [#18702](https://github.com/Sylius/Sylius/pull/18702) [Composer] Remove outdated twig/twig conflicts from bundles ([@Rafikooo](https://github.com/Rafikooo))
+- [#18722](https://github.com/Sylius/Sylius/pull/18722) [API] Payment Request fix default action when IRI is given ([@Prometee](https://github.com/Prometee))
+- [#18732](https://github.com/Sylius/Sylius/pull/18732) Make PostgreSQL telemetry migration extend dedicated abstract ([@TheMilek](https://github.com/TheMilek))
+- [#18369](https://github.com/Sylius/Sylius/pull/18369) Add form help rendering to forms ([@tomkalon](https://github.com/tomkalon))
+- [#18735](https://github.com/Sylius/Sylius/pull/18735) [CS][DX] Refactor
+- [#18726](https://github.com/Sylius/Sylius/pull/18726) [Channel] Resolve localhost equivalents when matching channel by hostname ([@Rafikooo](https://github.com/Rafikooo))
+- [#18708](https://github.com/Sylius/Sylius/pull/18708) [DX] Improve AI contribution guidelines ([@Rafikooo](https://github.com/Rafikooo))
+- [#18711](https://github.com/Sylius/Sylius/pull/18711) Fix typo in first_name.html.twig ([@LucaGallinari](https://github.com/LucaGallinari))
+- [#18736](https://github.com/Sylius/Sylius/pull/18736) TASK: [2.2] [UiBundle] adjust translations for admin password reset page ([@crydotsnake](https://github.com/crydotsnake))
+- [#18565](https://github.com/Sylius/Sylius/pull/18565) Add ternary operator to fix  related with empty key ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18572](https://github.com/Sylius/Sylius/pull/18572) Bugfix/fix autocomplete in admin to be case insensitive ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+
 ## v2.2.1 (2025-12-18)
 
 #### Details
