@@ -84,9 +84,23 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function chooseParent(TaxonInterface $taxon): void
     {
+        DriverHelper::waitForPageToLoad($this->getSession());
+
+        $parentElement = $this->getElement('parent');
+        $selector = $this->normalizeXPathForJavaScript($parentElement->getXpath());
+
+        // Wait for Tom Select to initialize
+        $this->getDriver()->wait(5000, sprintf(
+            '(function() {
+                let element = document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                return element && element.tomselect !== undefined;
+            })()',
+            $selector,
+        ));
+
         $this->autocompleteHelper->selectByName(
             $this->getDriver(),
-            $this->getElement('parent')->getXpath(),
+            $parentElement->getXpath(),
             $taxon->getName(),
         );
         $this->waitForFormUpdate();
@@ -94,8 +108,58 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function removeCurrentParent(): void
     {
-        $this->autocompleteHelper->clear($this->getDriver(), $this->getElement('parent')->getXpath());
+        DriverHelper::waitForPageToLoad($this->getSession());
+
+        $parentElement = $this->getElement('parent');
+        $selector = $this->normalizeXPathForJavaScript($parentElement->getXpath());
+
+        // Wait for Tom Select to initialize
+        $this->getDriver()->wait(5000, sprintf(
+            '(function() {
+                let element = document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                return element && element.tomselect !== undefined;
+            })()',
+            $selector,
+        ));
+
+        $this->autocompleteHelper->clear($this->getDriver(), $parentElement->getXpath());
         $this->waitForFormUpdate();
+    }
+
+    public function searchInParentAutocomplete(string $searchString): array
+    {
+        // Wait for the parent element to appear in DOM
+        $this->getSession()->wait(10000, sprintf(
+            "document.querySelector('%s') !== null",
+            str_replace("'", "\\'", '[data-test-parent]'),
+        ));
+
+        // Now get the element through standard mechanism
+        $parentElement = $this->getElement('parent');
+
+        // Wait for Tom Select to be initialized
+        $this->getSession()->wait(10000, sprintf(
+            '(function() {
+                var container = document.querySelector(\'%s\');
+                if (!container) return false;
+                var select = container.querySelector(\'select\');
+                return select && select.tomselect !== undefined;
+            })()',
+            str_replace("'", "\\'", '[data-test-parent]'),
+        ));
+
+        $result = $this->autocompleteHelper->search(
+            $this->getDriver(),
+            $parentElement->getXpath(),
+            $searchString,
+        );
+
+        return is_array($result) ? $result : [];
+    }
+
+    private function normalizeXPathForJavaScript(string $xpath): string
+    {
+        return str_replace('"', '\\"', $xpath);
     }
 
     public function getTranslationFieldValue(string $element, string $localeCode): string
