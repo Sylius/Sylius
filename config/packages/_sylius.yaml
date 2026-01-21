@@ -19,6 +19,7 @@ sylius_core:
                 admin_admin_user: false
                 admin_catalog_promotion: false
                 admin_channel: false
+                admin_channel_pricing_log_entry: false
                 admin_country: false
                 admin_currency: false
                 admin_customer: false
