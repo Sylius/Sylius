@@ -63,6 +63,7 @@ sylius_admin_product_variant_generate:
 sylius_admin_channel_pricing_log_entry_index:
     path: products/{productId}/variants/{variantId}/channel-pricing/{channelPricingId}/channel-pricing-log-entries
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_channel_pricing_log_entry')"
     defaults:
         _controller: sylius.controller.channel_pricing_log_entry::indexAction
         _sylius:
