@@ -1,0 +1,11 @@
+sylius_core:
+    routing:
+        bc_layer:
+            enabled: false
+            # Disable bc-layer on specific domain routes    
+            # enabled: true
+            # routes:
+            #     admin_admin_user: false
+
+sylius_resource:
+    routing_path_bc_layer: false

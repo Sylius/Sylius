@@ -188,6 +188,13 @@
           "symfony": "~7.4.0",
           "mysql": "8.0",
           "twig": "^3.3"
+        },
+        {
+          "php": "8.3",
+          "symfony": "~7.4.0",
+          "mysql": "8.0",
+          "twig": "^3.3",
+          "routing_bc_layer": "enabled"
         }
       ]
     },

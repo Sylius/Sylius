@@ -5,48 +5,10 @@ imports:
     - { resource: "@SyliusApiBundle/Resources/config/app/config.yaml" }
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
     - { resource: "../parameters.yaml" }
+    - { resource: "../disable_routing_bc_layer.yaml" }
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
-
-sylius_core:
-    routing:
-        bc_layer:
-            enabled: true
-            routes:
-                admin_admin_user: false
-                admin_catalog_promotion: false
-                admin_channel: false
-                admin_country: false
-                admin_currency: false
-                admin_customer: false
-                admin_customer_group: false
-                admin_exchange_rate: false
-                admin_inventory: false
-                admin_locale: false
-                admin_order: false
-                admin_order_payment: false
-                admin_order_shipment: false
-                admin_payment: false
-                admin_payment_method: false
-                admin_payment_request: false
-                admin_product: false
-                admin_product_association_type: false
-                admin_product_attribute: false
-                admin_product_option: false
-                admin_product_review: false
-                admin_product_taxon: false
-                admin_product_variant: false
-                admin_promotion: false
-                admin_promotion_coupon: false
-                admin_shipment: false
-                admin_shipping_category: false
-                admin_shipping_method: false
-                admin_shop_user: false
-                admin_tax_category: false
-                admin_tax_rate: false
-                admin_taxon: false
-                admin_zone: false
 
 sylius_api:
     enabled: true
@@ -54,6 +16,3 @@ sylius_api:
 sylius_shop:
     product_grid:
         include_all_descendants: true
-
-sylius_resource:
-    routing_path_bc_layer: false

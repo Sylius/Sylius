@@ -207,6 +207,11 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
 
+            -   name: Enable Sylius Routing BC Layer
+                if: "${{ matrix.routing_bc_layer == 'enabled' }}"
+                run: |
+                    sed -i 's|^\(\s*- { resource: "../disable_routing_bc_layer.yaml" }\)|#\1|' config/packages/_sylius.yaml
+            
             -   name: Run UI Behat
                 run: |
                     $BEHAT_BASE_CMD --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || \
