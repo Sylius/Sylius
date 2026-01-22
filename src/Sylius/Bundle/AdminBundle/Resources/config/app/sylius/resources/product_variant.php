@@ -36,6 +36,17 @@ return (new ResourceMetadata())
             ],
             grid: 'sylius_admin_product_variant',
         ),
+        new Index(
+            path: 'catalog-promotions/{id}/variants',
+            routeName: '_sylius_admin_catalog_promotion_product_variant_index',
+            routePrefix: '/%sylius_admin.path_name%',
+            template: '@SyliusAdmin/catalog_promotion/product_variant/index.html.twig',
+            shortName: 'catalog_promotion_product_variants',
+            vars: [
+                'catalogPromotion' => '@=sylius_repositories.get(\'sylius.repository.catalog_promotion\').find(request.attributes.get(\'id\'))',
+            ],
+            grid: 'sylius_admin_product_variant_with_catalog_promotion',
+        ),
         new Create(
             path: 'variants/new',
             routeName: '_sylius_admin_product_variant_create',
