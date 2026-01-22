@@ -15,6 +15,7 @@ sylius_admin_customer:
 sylius_admin_customer_order_index:
     path: /customers/{id}/orders
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order')"
     defaults:
         _controller: sylius.controller.order::indexAction
         _sylius:
