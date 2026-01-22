@@ -32,6 +32,17 @@ return (new ResourceMetadata())
             routeName: '_sylius_admin_order_index',
             grid: 'sylius_admin_order',
         ),
+        new Index(
+            path: '/customers/{id}/orders',
+            routeName: '_sylius_admin_customer_order_index',
+            template: '@SyliusAdmin/shared/crud/index.html.twig',
+            shortName: 'customer_orders',
+            vars: [
+                'customer' => '@=sylius_repositories.get(\'sylius.repository.customer\').find(request.attributes.get(\'id\'))',
+                'hook_prefix' => 'sylius_admin.customer.order',
+            ],
+            grid: 'sylius_admin_customer_order',
+        ),
         new Show(
             routeName: '_sylius_admin_order_show',
             repositoryMethod: 'findOrderById',
