@@ -56,5 +56,25 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
 ## Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
-   is always placed at the beginning of the returned locales array.  
+   is always placed at the beginning of the returned locales array.
    Other locales remain in the same order as returned by the repository.
+
+## Shop Bootstrap separation
+
+Bootstrap has been extracted into a separate webpack entry point (`bootstrap-entry`) with dedicated twig hooks:
+- `sylius_shop.base#stylesheets` > `bootstrap` (priority 100)
+- `sylius_shop.base#javascripts` > `bootstrap` (priority 100)
+
+This allows disabling Bootstrap entirely if you want to use a different CSS framework.
+
+**If you have overridden the `styles` hook** in `sylius_shop.base#stylesheets` and included Bootstrap there, it may now load twice. To fix this, either:
+- Remove Bootstrap from your custom `styles` hook, or
+- Disable the new `bootstrap` hook by setting `enabled: false`
+
+**To disable Bootstrap in webpack**, pass `includeBootstrap: false` to the config:
+
+```js
+const shopConfig = SyliusShop.getBaseWebpackConfig(path.resolve(__dirname), {
+    includeBootstrap: false
+});
+```
