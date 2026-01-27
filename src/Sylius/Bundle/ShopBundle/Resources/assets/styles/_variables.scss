@@ -14,6 +14,7 @@ $enable-cssgrid: true;
 // Color system
 
 $primary: #22B99A;
+$danger: #dc3545;
 
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
@@ -24,6 +25,8 @@ $gray-600: #6c757d;
 $gray-700: #495057;
 $gray-800: #343a40;
 $gray-900: #212529;
+
+$link-hover-color: $primary;
 
 // Body
 

@@ -7,9 +7,5 @@
  * file that was distributed with this source code.
  */
 
-import './styles/main.scss';
-
-import './scripts/spotlight';
-
-const imagesContext = require.context('./images', true, /\.(jpg|jpeg|png|svg|gif|webp)$/);
-imagesContext.keys().forEach(imagesContext);
+@import "variables";
+@import "bootstrap/scss/bootstrap";

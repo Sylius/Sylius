@@ -1,0 +1,67 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+) !default;
+
+@function breakpoint-min($name) {
+    $min: map-get($grid-breakpoints, $name);
+    @return if($min != 0, $min, null);
+}
+
+@function breakpoint-max($name) {
+    $max: map-get($grid-breakpoints, $name);
+    @return if($max and $max > 0, $max - .02, null);
+}
+
+@mixin media-breakpoint-up($name) {
+    $min: breakpoint-min($name);
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+@mixin media-breakpoint-down($name) {
+    $max: breakpoint-max($name);
+    @if $max {
+        @media (max-width: $max) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+@mixin media-breakpoint-between($lower, $upper) {
+    $min: breakpoint-min($lower);
+    $max: breakpoint-max($upper);
+    @if $min and $max {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    } @else if $min {
+        @include media-breakpoint-up($lower) {
+            @content;
+        }
+    } @else if $max {
+        @include media-breakpoint-down($upper) {
+            @content;
+        }
+    }
+}

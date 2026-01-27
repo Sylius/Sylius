@@ -15,10 +15,15 @@ class SyliusShop {
      * Provide a light Webpack configuration for Sylius Admin
      * All the stimulus stuff should be handled by the app.shop entrypoint
      */
-    static getBaseWebpackConfig(rootDir) {
+    static getBaseWebpackConfig(rootDir, options = {}) {
+        const { includeBootstrap = true } = options;
+
         this._prepareWebpackConfig(rootDir);
-        Encore
-            .addEntry('shop-entry', path.resolve(__dirname, 'Resources/assets/entrypoint.js'));
+
+        if (includeBootstrap) {
+            Encore.addEntry('bootstrap-entry', path.resolve(__dirname, 'Resources/assets/bootstrap-entry.js'));
+        }
+        Encore.addEntry('shop-entry', path.resolve(__dirname, 'Resources/assets/entrypoint.js'));
 
         const shopConfig = Encore.getWebpackConfig();
 
@@ -39,6 +44,7 @@ class SyliusShop {
         this._prepareWebpackConfig(rootDir);
         // For a ready-to-use Stimulus bridge. Should be used only for sylius/sylius tests
         Encore
+            .addEntry('bootstrap-entry', path.resolve(__dirname, 'Resources/assets/bootstrap-entry.js'))
             .addEntry('shop-entry', path.resolve(__dirname, 'Resources/assets/app.js'))
             .enableStimulusBridge(path.resolve(__dirname, 'Resources/assets/controllers.json'));
         const shopConfig = Encore.getWebpackConfig();

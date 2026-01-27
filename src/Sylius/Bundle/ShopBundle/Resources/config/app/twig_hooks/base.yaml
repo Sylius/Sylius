@@ -4,18 +4,24 @@ sylius_twig_hooks:
             defaults:
                 template: '@SyliusShop/shared/layout/base/body_classes/defaults.html.twig'
                 priority: 0
-                
+
         'sylius_shop.base#metatags':
             metatags:
                 template: '@SyliusShop/shared/layout/base/metatags.html.twig'
                 priority: 0
-        
+
         'sylius_shop.base#stylesheets':
+            bootstrap:
+                template: '@SyliusShop/shared/layout/base/styles/bootstrap.html.twig'
+                priority: 100
             styles:
                 template: '@SyliusShop/shared/layout/base/styles.html.twig'
                 priority: 0
 
         'sylius_shop.base#javascripts':
+            bootstrap:
+                template: '@SyliusShop/shared/layout/base/scripts/bootstrap.html.twig'
+                priority: 100
             scripts:
                 template: '@SyliusShop/shared/layout/base/scripts.html.twig'
                 priority: 0

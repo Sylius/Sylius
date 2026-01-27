@@ -21,27 +21,22 @@
 }
 
 .btn-transparent {
-    @extend .btn-light;
-    background-color: transparent;
-    border-color: transparent;
-
-    &:hover {
-        background-color: $gray-100;
-        border-color: transparent;
-    }
-
-    &:focus {
-        background-color: transparent !important;
-        border-color: transparent !important;
-    }
-
-    &:active {
-        background-color: $gray-200 !important;
-        border-color: transparent !important;
-    }
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-bg: #{$gray-100};
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-bg: #{$gray-200};
+    --bs-btn-active-border-color: transparent;
+    --bs-btn-focus-shadow-rgb: 0, 0, 0;
 }
 
 .btn-outline-gray {
-    @extend .btn-outline-dark;
-    --bs-btn-border-color: var(--bs-gray-400);
+    --bs-btn-color: #{$gray-800};
+    --bs-btn-border-color: #{$gray-400};
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #{$gray-800};
+    --bs-btn-hover-border-color: #{$gray-800};
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #{$gray-800};
+    --bs-btn-active-border-color: #{$gray-800};
 }
