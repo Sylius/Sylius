@@ -14,12 +14,6 @@
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser">
         <property name="firstName">
-            <constraint name="NotBlank">
-                <option name="message">sylius.customer.first_name.not_blank</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="minMessage">sylius.customer.first_name.min</option>
@@ -29,12 +23,6 @@
             </constraint>
         </property>
         <property name="lastName">
-            <constraint name="NotBlank">
-                <option name="message">sylius.customer.last_name.not_blank</option>
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
-            </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="minMessage">sylius.customer.last_name.min</option>
