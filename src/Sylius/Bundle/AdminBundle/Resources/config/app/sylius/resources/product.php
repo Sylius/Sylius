@@ -63,6 +63,16 @@ return (new ResourceMetadata())
         ),
         new Delete(routeName: '_sylius_admin_product_delete', redirectToRoute: 'sylius_admin_product_index'),
         new BulkDelete(routeName: '_sylius_admin_product_bulk_delete', redirectToRoute: 'sylius_admin_product_index'),
+        new BulkDelete(
+            path: 'taxons/{taxonId}/products/bulk-delete',
+            routeName: '_sylius_admin_product_taxon_bulk_delete_products',
+            shortName: 'product_taxon_bulk_delete_products',
+            repositoryArguments: [
+                '@=request.request.all(\'ids\')',
+            ],
+            repositoryMethod: 'findByProductTaxonIds',
+            redirectTo: 'referer',
+        ),
         new Index(routeName: '_sylius_admin_product_index', grid: 'sylius_admin_product'),
         new Show(routeName: '_sylius_admin_product_show'),
     ]))
