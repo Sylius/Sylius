@@ -38,6 +38,34 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_returns_not_found_response_when_getting_product_not_in_current_channel(): void
+    {
+        $this->loadFixturesFromFile('product/product_not_in_channel.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products/T_SHIRT',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_returns_product_from_current_channel(): void
+    {
+        $this->loadFixturesFromFile('product/product_not_in_channel.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products/MUG',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+    }
+
+    #[Test]
     public function it_returns_product_with_translations_in_default_locale(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
