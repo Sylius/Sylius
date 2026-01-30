@@ -48,6 +48,15 @@ The `Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEligibilit
 `Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator` now checks also if 
 payment method is assigned to the channel of the order.
 
+## Shop API
+
+1. The `Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\ChannelAndLocaleBasedExtension` service (`sylius_api.doctrine.orm.query_extension.shop.product.channel_and_locale_based`)
+   now implements `QueryItemExtensionInterface` in addition to `QueryCollectionExtensionInterface`.
+   The service is tagged with `api_platform.doctrine.orm.query_extension.item`.
+
+If you decorate this service, make sure your decorator also implements
+`ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface` and proxies the `applyToItem` method.
+
 # UPGRADE FROM `2.1.12` TO `2.1.13`
 
 ### Telemetry improvements
