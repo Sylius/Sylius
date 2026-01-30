@@ -1,4 +1,13 @@
-# UPGRADE FROM `2.1.9` TO `2.1.10`
+# UPGRADE FROM `2.1.11` TO `2.1.12`
+
+## Shop API
+
+1. The `Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\ChannelAndLocaleBasedExtension` service (`sylius_api.doctrine.orm.query_extension.shop.product.channel_and_locale_based`)
+   now implements `QueryItemExtensionInterface` in addition to `QueryCollectionExtensionInterface`.
+   The service is tagged with `api_platform.doctrine.orm.query_extension.item`.
+
+If you decorate this service, make sure your decorator also implements
+`ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface` and proxies the `applyToItem` method.
 
 ## Redirect behavior changes
 
