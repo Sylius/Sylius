@@ -20,18 +20,18 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 final class SyliusPaymentExtension extends AbstractResourceExtension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $loader->load('services.xml');
+        $loader->load('services.php');
 
         $container->setParameter('sylius.payment_gateways', $config['gateways']);
         $container->setParameter('sylius.gateway_config.validation_groups', $config['gateway_config']['validation_groups']);
@@ -88,8 +88,8 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
 
         $container->setParameter('sylius.encryption.disabled_for_factories', $encryptionConfig['disabled_for_factories']);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services/encryption'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services/encryption'));
 
-        $loader->load('encryption.xml');
+        $loader->load('encryption.php');
     }
 }
