@@ -35,7 +35,6 @@ return (new ResourceMetadata())
                 'orderId' => "request.attributes.get('orderId')",
             ],
             eventShortName: 'ship',
-            notificationMessage: 'sylius.shipment.completed',
             redirectToRoute: 'sylius_admin_order_show',
             redirectArguments: ['id' => "@=request.attributes.get('orderId')"],
             vars: [
