@@ -4,10 +4,8 @@
 sylius_shop_order_thank_you:
     path: /thank-you
     methods: [GET]
+    controller: sylius_shop.controller.order_thank_you
     defaults:
-        _controller: sylius.controller.order::thankYouAction
-        _sylius:
-            template: "@SyliusShop/order/thank_you.html.twig"
 
 sylius_shop_order_pay:
     path: /{tokenValue}/pay
