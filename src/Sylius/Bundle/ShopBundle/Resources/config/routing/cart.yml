@@ -4,11 +4,18 @@
 sylius_shop_cart_summary:
     path: /
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_cart_summary')"
     defaults:
         _controller: sylius.controller.order::summaryAction
         _sylius:
             template: "@SyliusShop/cart/index.html.twig"
             form: Sylius\Bundle\ShopBundle\Form\Type\CartType
+            
+_sylius_shop_cart_summary:
+    path: /
+    methods: [GET]
+    condition: "not context.isSyliusRoutingBcLayerEnabled('shop_cart_summary')"
+    controller: sylius_shop.controller.order_thank_you          
 
 sylius_shop_cart_checkout:
     path: /checkout
