@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\ShopBundle\Controller\CartSummaryAction;
 use Sylius\Bundle\ShopBundle\Controller\ContactController;
 use Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController;
 use Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController;
@@ -23,6 +24,18 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->defaults()->public();
+
+    $services
+        ->set('sylius_shop.controller.cart_summary', CartSummaryAction::class)
+        ->args([
+            service('twig'),
+            service('sylius.context.cart'),
+            service('sylius.repository.order'),
+            service('form.factory'),
+            service('event_dispatcher'),
+        ])
+        ->tag('controller.service_arguments')
+    ;
 
     $services
         ->set('sylius_shop.controller.contact', ContactController::class)
@@ -53,6 +66,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius_shop.locale_switcher'),
         ])
     ;
+
     $services
         ->set('sylius_shop.controller.order_thank_you', OrderThankYouAction::class)
         ->args([
