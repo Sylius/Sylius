@@ -18,20 +18,20 @@ use Sylius\Bundle\TaxationBundle\Attribute\AsTaxCalculator;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 final class SyliusTaxationExtension extends AbstractResourceExtension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
+        $loader->load(sprintf('services/integrations/%s.php', $config['driver']));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $loader->load('services.xml');
+        $loader->load('services.php');
 
         $this->registerAutoconfiguration($container);
     }
