@@ -54,6 +54,7 @@ sylius_core:
                 shop_account_address_book: false
                 shop_account_order: false
                 shop_checkout: false
+                shop_order_thank_you: false
                 shop_product: false
                 shop_product_review: false
                 shop_register: false

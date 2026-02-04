@@ -20,6 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
+/**
+ * @experimental
+ */
 final readonly class OrderThankYouAction
 {
     private const ORDER_ID_PARAM = 'sylius_order_id';
@@ -33,6 +36,8 @@ final readonly class OrderThankYouAction
 
     public function __invoke(Request $request, ?string $template = null): Response
     {
+        $template ??= '@SyliusShop/order/thank_you.html.twig';
+
         $orderId = $request->getSession()->get(self::ORDER_ID_PARAM, null);
 
         if (null === $orderId) {
@@ -46,7 +51,7 @@ final readonly class OrderThankYouAction
             return new RedirectResponse($this->router->generate('sylius_shop_homepage'));
         }
 
-        return new Response($this->twig->render($template ?? '@SyliusShop/order/thank_you.html.twig', [
+        return new Response($this->twig->render($template, [
             'order' => $order,
         ]));
     }
