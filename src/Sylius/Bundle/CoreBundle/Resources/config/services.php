@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Context\CustomerContext;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\OrderInventoryOperator as OrmOrderInventoryOperator;
+use Sylius\Bundle\CoreBundle\ExpressionLanguage\CartContextVariables;
 use Sylius\Bundle\CoreBundle\ExpressionLanguage\ShopperContextVariables;
 use Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\ResourceAutocompleteFilterType;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityChecker;
@@ -446,10 +447,20 @@ return static function (ContainerConfigurator $container) {
         ->tag('sylius.state_processor')
     ;
 
+    $services->set('sylius.expression_language.variables.cart_context', CartContextVariables::class)
+        ->args([
+            service('sylius.context.cart'),
+        ])
+        ->tag('sylius.metadata_variables')
+        ->tag('sylius.resource_factory_variables')
+        ->tag('sylius.repository_variables')
+    ;
+
     $services->set('sylius.expression_language.variables.shopper_context', ShopperContextVariables::class)
         ->args([
             service('sylius.context.shopper'),
         ])
+        ->tag('sylius.form_variables')
         ->tag('sylius.metadata_variables')
         ->tag('sylius.resource_factory_variables')
         ->tag('sylius.repository_variables')
