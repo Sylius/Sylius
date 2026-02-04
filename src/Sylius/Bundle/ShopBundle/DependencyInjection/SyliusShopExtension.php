@@ -77,6 +77,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
                 new Reference('sylius.router.checkout_state'),
                 new Definition(PathRequestMatcher::class, [$config['pattern']]),
                 new Reference('sylius_abstraction.state_machine'),
+                new Reference('sylius.resource_metadata_operation.initiator.http_operation'),
             ],
         );
         $checkoutResolverDefinition->addTag('kernel.event_subscriber');
