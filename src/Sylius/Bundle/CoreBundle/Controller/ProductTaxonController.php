@@ -27,6 +27,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProductTaxonController extends ResourceController
 {
+    /** @deprecated This method is deprecated and will be removed in Sylius 3.0 */
     public function updateProductTaxonsPositionsAction(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
