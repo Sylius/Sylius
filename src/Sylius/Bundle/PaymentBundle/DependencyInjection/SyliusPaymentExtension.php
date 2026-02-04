@@ -83,6 +83,8 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
     ): void {
         $container->setParameter('sylius.encryption.enabled', $encryptionConfig['enabled']);
         if (false === $encryptionConfig['enabled']) {
+            $container->setParameter('sylius.encryption.disabled_for_factories', null);
+
             return;
         }
 

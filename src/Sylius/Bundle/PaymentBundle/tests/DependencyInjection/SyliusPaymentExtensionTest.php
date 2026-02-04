@@ -167,6 +167,7 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasParameter('sylius.encryption.enabled', false);
+        $this->assertContainerBuilderHasParameter('sylius.encryption.disabled_for_factories', null);
 
         $this->compile();
 
