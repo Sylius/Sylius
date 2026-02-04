@@ -16,6 +16,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Sylius\Bundle\ShopBundle\Controller\ContactController;
 use Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController;
 use Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController;
+use Sylius\Bundle\ShopBundle\Controller\OrderThankYouAction;
 use Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController;
 
 return static function (ContainerConfigurator $container) {
@@ -50,6 +51,15 @@ return static function (ContainerConfigurator $container) {
             service('sylius.provider.locale'),
             service('sylius_shop.locale_switcher'),
         ])
+    ;
+    $services
+        ->set('sylius_shop.controller.order_thank_you', OrderThankYouAction::class)
+        ->args([
+            service('twig'),
+            service('sylius.repository.order'),
+            service('router.default'),
+        ])
+        ->tag('controller.service_arguments')
     ;
 
     $services
