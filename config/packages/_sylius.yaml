@@ -49,6 +49,7 @@ sylius_core:
                 admin_taxon: false
                 admin_zone: false
                 shop_account_order: false
+                shop_product: false
                 shop_product_review: false
 
 sylius_api:
