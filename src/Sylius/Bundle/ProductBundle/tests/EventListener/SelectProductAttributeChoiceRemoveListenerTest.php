@@ -184,7 +184,7 @@ final class SelectProductAttributeChoiceRemoveListenerTest extends TestCase
 
     public function testDoesNothingIfAnEntityIsNotAProductAttribute(): void
     {
-        $this->event->expects($this->once())->method('getObject')->willReturn('wrongObject');
+        $this->event->expects($this->once())->method('getObject')->willReturn(new \stdClass());
 
         $this->entityManager->expects($this->never())->method('getRepository')->with(ProductAttributeValue::class);
         $this->entityManager->expects($this->never())->method('flush');
