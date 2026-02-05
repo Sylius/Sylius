@@ -46,6 +46,8 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
             }
         }
 
+        $container->setParameter('sylius_shop.locale_regex', $config['locale_regex']);
+
         $container->setParameter('sylius_shop.firewall_context_name', $config['firewall_context_name']);
         $container->setParameter(
             'sylius_shop.product_grid.include_all_descendants',
