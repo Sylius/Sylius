@@ -496,6 +496,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('sylius.context.shopper'),
         ])
+        ->tag('sylius.form_variables')
         ->tag('sylius.metadata_variables')
         ->tag('sylius.resource_factory_variables')
         ->tag('sylius.repository_variables')
