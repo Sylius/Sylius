@@ -93,7 +93,7 @@ final class PasswordUpdaterListenerTest extends TestCase
         /** @var LifecycleEventArgs&MockObject $event */
         $event = $this->createMock(LifecycleEventArgs::class);
 
-        $event->expects($this->once())->method('getObject')->willReturn('user');
+        $event->expects($this->once())->method('getObject')->willReturn(new \stdClass());
         $this->passwordUpdater->expects($this->never())->method('updatePassword');
 
         $this->passwordUpdaterListener->prePersist($event);
@@ -104,7 +104,7 @@ final class PasswordUpdaterListenerTest extends TestCase
         /** @var LifecycleEventArgs&MockObject $event */
         $event = $this->createMock(LifecycleEventArgs::class);
 
-        $event->expects($this->once())->method('getObject')->willReturn('user');
+        $event->expects($this->once())->method('getObject')->willReturn(new \stdClass());
         $this->passwordUpdater->expects($this->never())->method('updatePassword');
 
         $this->passwordUpdaterListener->preUpdate($event);
