@@ -581,7 +581,7 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            'Cannot delete, the Promotion is in use.',
+            'Cannot delete, the Cart promotion is in use.',
             NotificationType::failure(),
         );
     }
