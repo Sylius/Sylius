@@ -79,6 +79,24 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     }
 
     #[Test]
+    public function it_configures_a_locale_regex_parameter_by_default(): void
+    {
+        $this->load([]);
+
+        $this->assertContainerBuilderHasParameter('sylius_shop.locale_regex', '^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$');
+    }
+
+    #[Test]
+    public function it_allows_to_customize_the_locale_regex(): void
+    {
+        $this->load([
+            'locale_regex' => '/^custom_regex$/'
+        ]);
+
+        $this->assertContainerBuilderHasParameter('sylius_shop.locale_regex', '/^custom_regex$/');
+    }
+
+    #[Test]
     public function it_loads_checkout_resolver_services_by_default(): void
     {
         $this->load([]);
