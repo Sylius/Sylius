@@ -21,42 +21,54 @@ use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $parameters = $container->parameters();
+    $services = $container->services();
     $parameters->set('sylius.form.type.customer.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.customer_profile.validation_groups', ['sylius', 'sylius_customer_profile']);
     $parameters->set('sylius.form.type.customer_group.validation_groups', ['sylius']);
 
-    $services->set('sylius.form.type.customer', CustomerType::class)
+    $services
+        ->set('sylius.form.type.customer', CustomerType::class)
         ->args([
             '%sylius.model.customer.class%',
             '%sylius.form.type.customer.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.customer_profile', CustomerProfileType::class)
+    $services
+        ->set('sylius.form.type.customer_profile', CustomerProfileType::class)
         ->args([
             '%sylius.model.customer.class%',
             '%sylius.form.type.customer_profile.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.customer_choice', CustomerChoiceType::class)
+    $services
+        ->set('sylius.form.type.customer_choice', CustomerChoiceType::class)
         ->args([service('sylius.repository.customer')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.customer_group', CustomerGroupType::class)
+    $services
+        ->set('sylius.form.type.customer_group', CustomerGroupType::class)
         ->args([
             '%sylius.model.customer_group.class%',
             '%sylius.form.type.customer_group.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.customer_group_choice', CustomerGroupChoiceType::class)
+    $services
+        ->set('sylius.form.type.customer_group_choice', CustomerGroupChoiceType::class)
         ->args([service('sylius.repository.customer_group')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.customer_group_code_choice', CustomerGroupCodeChoiceType::class)
+    $services
+        ->set('sylius.form.type.customer_group_code_choice', CustomerGroupCodeChoiceType::class)
         ->args([service('sylius.repository.customer_group')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 };
