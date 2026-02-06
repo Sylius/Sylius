@@ -21,26 +21,34 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\StatisticsComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.dashboard.channel_selector', ChannelSelectorComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.dashboard.channel_selector', ChannelSelectorComponent::class)
         ->args([service('sylius.repository.channel')])
         ->call('setLiveResponder', [service('ux.live_component.live_responder')])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:dashboard:channel_selector']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:dashboard:channel_selector'])
+    ;
 
-    $services->set('sylius_admin.twig.component.dashboard.new_customers', NewCustomersComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.dashboard.new_customers', NewCustomersComponent::class)
         ->args([service('sylius.repository.customer')])
-        ->tag('sylius.twig_component', ['key' => 'sylius_admin:dashboard:new_customers']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_admin:dashboard:new_customers'])
+    ;
 
-    $services->set('sylius_admin.twig.component.dashboard.new_orders', NewOrdersComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.dashboard.new_orders', NewOrdersComponent::class)
         ->args([
             service('sylius.repository.order'),
             service('sylius.repository.channel'),
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:dashboard:new_orders']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:dashboard:new_orders'])
+    ;
 
-    $services->set('sylius_admin.twig.component.dashboard.statistics', StatisticsComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.dashboard.statistics', StatisticsComponent::class)
         ->args([
             service('sylius.repository.channel'),
             service('sylius.provider.statistics'),
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:dashboard:statistics']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:dashboard:statistics'])
+    ;
 };

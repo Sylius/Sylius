@@ -18,11 +18,13 @@ use Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.menu_builder.main', MainMenuBuilder::class)
+    $services
+        ->set('sylius_admin.menu_builder.main', MainMenuBuilder::class)
         ->args([
             service('knp_menu.factory'),
             service('event_dispatcher'),
             service('router'),
         ])
-        ->tag('knp_menu.menu_builder', ['method' => 'createMenu', 'alias' => 'sylius_admin.main']);
+        ->tag('knp_menu.menu_builder', ['method' => 'createMenu', 'alias' => 'sylius_admin.main'])
+    ;
 };

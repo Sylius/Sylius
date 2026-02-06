@@ -18,6 +18,8 @@ use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.mailer.shipment_email_manager', ShipmentEmailManager::class)
-        ->args([service('sylius.email_sender')]);
+    $services
+        ->set('sylius_admin.mailer.shipment_email_manager', ShipmentEmailManager::class)
+        ->args([service('sylius.email_sender')])
+    ;
 };

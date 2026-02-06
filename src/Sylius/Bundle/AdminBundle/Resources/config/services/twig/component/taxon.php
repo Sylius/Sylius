@@ -21,12 +21,15 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Taxon\TreeComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.taxon.delete', DeleteComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.taxon.delete', DeleteComponent::class)
         ->args([service('security.csrf.token_manager')])
         ->call('setLiveResponder', [service('ux.live_component.live_responder')])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:taxon:delete']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:taxon:delete'])
+    ;
 
-    $services->set('sylius_admin.twig.component.taxon.form', FormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.taxon.form', FormComponent::class)
         ->args([
             service('sylius.repository.taxon'),
             service('form.factory'),
@@ -34,13 +37,16 @@ return static function (ContainerConfigurator $container) {
             TaxonType::class,
             service('sylius_admin.generator.taxon_slug'),
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:taxon:form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:taxon:form'])
+    ;
 
-    $services->set('sylius_admin.twig.component.taxon.tree', TreeComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.taxon.tree', TreeComponent::class)
         ->args([
             service('sylius_admin.doctrine.query.taxon.all_taxons'),
             service('sylius.repository.taxon'),
             service('sylius.manager.taxon'),
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:taxon:tree']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:taxon:tree'])
+    ;
 };

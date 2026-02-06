@@ -18,10 +18,12 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Customer\OrderStatisticsComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.customer.order_statistics', OrderStatisticsComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.customer.order_statistics', OrderStatisticsComponent::class)
         ->args([
             service('sylius.repository.customer'),
             service('sylius.provider.statistics.customer'),
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:customer:order_statistics']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:customer:order_statistics'])
+    ;
 };

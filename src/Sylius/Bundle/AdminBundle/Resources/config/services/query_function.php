@@ -19,12 +19,13 @@ use Sylius\Bundle\AdminBundle\Doctrine\Query\Taxon\AllTaxonsInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.doctrine.query.taxon.all_taxons', AllTaxons::class)
+    $services
+        ->set('sylius_admin.doctrine.query.taxon.all_taxons', AllTaxons::class)
         ->args([
             service('doctrine.orm.entity_manager'),
             service('sylius_admin.context.locale.admin_based'),
             service('sylius.translation_locale_provider'),
-        ]);
-
+        ])
+    ;
     $services->alias(AllTaxonsInterface::class, 'sylius_admin.doctrine.query.taxon.all_taxons');
 };
