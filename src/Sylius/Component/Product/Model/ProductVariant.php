@@ -48,7 +48,7 @@ class ProductVariant implements ProductVariantInterface
         $this->initializeTranslationsCollection();
         $this->optionValues = new ArrayCollection();
 
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId()

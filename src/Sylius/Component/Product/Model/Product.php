@@ -52,7 +52,7 @@ class Product implements ProductInterface, \Stringable
     {
         $this->initializeTranslationsCollection();
 
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
         $this->attributes = new ArrayCollection();
         $this->associations = new ArrayCollection();
         $this->variants = new ArrayCollection();

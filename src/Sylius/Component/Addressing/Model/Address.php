@@ -54,7 +54,7 @@ class Address implements AddressInterface
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId()

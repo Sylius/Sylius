@@ -35,8 +35,8 @@ class ProductAssociation implements ProductAssociationInterface
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->updatedAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
         $this->associatedProducts = new ArrayCollection();
     }
 

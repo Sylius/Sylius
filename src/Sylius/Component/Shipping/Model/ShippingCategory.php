@@ -33,7 +33,7 @@ class ShippingCategory implements ShippingCategoryInterface, \Stringable
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function __toString(): string

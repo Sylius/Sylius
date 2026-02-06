@@ -107,7 +107,7 @@ class PromotionCoupon implements PromotionCouponInterface
             return false;
         }
 
-        if (null !== $this->expiresAt && $this->expiresAt < new \DateTime()) {
+        if (null !== $this->expiresAt && $this->expiresAt < new \DateTimeImmutable()) {
             return false;
         }
 

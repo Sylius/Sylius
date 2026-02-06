@@ -295,7 +295,7 @@ final class AdjustmentTest extends TestCase
 
     public function testResetsInternalInformationWhileCloning(): void
     {
-        $this->adjustment->setUpdatedAt(new \DateTime());
+        $this->adjustment->setUpdatedAt(new \DateTimeImmutable());
         $new = clone $this->adjustment;
 
         $this->assertNotSame($new->getCreatedAt(), $this->adjustment->getCreatedAt());
