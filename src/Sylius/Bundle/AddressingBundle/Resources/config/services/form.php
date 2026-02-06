@@ -27,15 +27,16 @@ use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $parameters = $container->parameters();
+    $services = $container->services();
     $parameters->set('sylius.form.type.address.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.country.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.province.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.zone.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.zone_member.validation_groups', ['sylius']);
 
-    $services->set('sylius.form.type.address', AddressType::class)
+    $services
+        ->set('sylius.form.type.address', AddressType::class)
         ->args([
             '%sylius.model.address.class%',
             '%sylius.form.type.address.validation_groups%',
@@ -45,61 +46,82 @@ return static function (ContainerConfigurator $container) {
                     service('form.factory'),
                 ]),
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.country', CountryType::class)
+    $services
+        ->set('sylius.form.type.country', CountryType::class)
         ->args([
             '%sylius.model.country.class%',
             '%sylius.form.type.country.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.country_choice', CountryChoiceType::class)
+    $services
+        ->set('sylius.form.type.country_choice', CountryChoiceType::class)
         ->args([service('sylius.repository.country')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.country_code_choice', CountryCodeChoiceType::class)
+    $services
+        ->set('sylius.form.type.country_code_choice', CountryCodeChoiceType::class)
         ->args([service('sylius.repository.country')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.province', ProvinceType::class)
+    $services
+        ->set('sylius.form.type.province', ProvinceType::class)
         ->args([
             '%sylius.model.province.class%',
             '%sylius.form.type.province.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.province_choice', ProvinceChoiceType::class)
+    $services
+        ->set('sylius.form.type.province_choice', ProvinceChoiceType::class)
         ->args([service('sylius.repository.province')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.province_code_choice', ProvinceCodeChoiceType::class)
+    $services
+        ->set('sylius.form.type.province_code_choice', ProvinceCodeChoiceType::class)
         ->args([service('sylius.repository.province')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.zone', ZoneType::class)
+    $services
+        ->set('sylius.form.type.zone', ZoneType::class)
         ->args([
             '%sylius.model.zone.class%',
             '%sylius.form.type.zone.validation_groups%',
             '%sylius.scope.zone%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.zone_choice', ZoneChoiceType::class)
+    $services
+        ->set('sylius.form.type.zone_choice', ZoneChoiceType::class)
         ->args([
             service('sylius.repository.zone'),
             '%sylius.scope.zone%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.zone_code_choice', ZoneCodeChoiceType::class)
+    $services
+        ->set('sylius.form.type.zone_code_choice', ZoneCodeChoiceType::class)
         ->args([service('sylius.repository.zone')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.zone_member', ZoneMemberType::class)
+    $services
+        ->set('sylius.form.type.zone_member', ZoneMemberType::class)
         ->args([
             '%sylius.model.zone_member.class%',
             '%sylius.form.type.zone_member.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 };

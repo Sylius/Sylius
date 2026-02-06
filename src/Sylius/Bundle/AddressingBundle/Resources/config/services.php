@@ -31,60 +31,70 @@ use Sylius\Component\Addressing\Provider\ProvinceNamingProvider;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('services/*.php');
 
-    $services->set('sylius.custom_factory.zone', ZoneFactory::class)
+    $services = $container->services();
+
+    $services
+        ->set('sylius.custom_factory.zone', ZoneFactory::class)
         ->decorate('sylius.factory.zone', null, 256)
         ->args([
             service('sylius.custom_factory.zone.inner'),
             service('sylius.factory.zone_member'),
-        ]);
-
+        ])
+    ;
     $services->alias(ZoneFactoryInterface::class, 'sylius.custom_factory.zone');
 
-    $services->set('sylius.provider.province_naming', ProvinceNamingProvider::class)
+    $services
+        ->set('sylius.provider.province_naming', ProvinceNamingProvider::class)
+        ->args([service('sylius.repository.province')])
         ->lazy()
-        ->args([service('sylius.repository.province')]);
-
+    ;
     $services->alias(ProvinceNamingProviderInterface::class, 'sylius.provider.province_naming');
 
-    $services->set('sylius.matcher.zone', ZoneMatcher::class)
+    $services
+        ->set('sylius.matcher.zone', ZoneMatcher::class)
+        ->args([service('sylius.repository.zone')])
         ->public()
-        ->args([service('sylius.repository.zone')]);
-
-    $services->alias(ZoneMatcherInterface::class, 'sylius.matcher.zone')
-        ->public();
+    ;
+    $services->alias(ZoneMatcherInterface::class, 'sylius.matcher.zone')->public();
 
     $services->set('sylius.converter.country_name', CountryNameConverter::class);
-
     $services->alias(CountryNameConverterInterface::class, 'sylius.converter.country_name');
 
     $services->set('sylius.comparator.address', AddressComparator::class);
-
     $services->alias(AddressComparatorInterface::class, 'sylius.comparator.address');
 
-    $services->set('sylius.twig.extension.country_name', CountryNameExtension::class)
-        ->tag('twig.extension');
+    $services->set('sylius.twig.extension.country_name', CountryNameExtension::class)->tag('twig.extension');
 
-    $services->set('sylius.twig.extension.province_naming', ProvinceNamingExtension::class)
+    $services
+        ->set('sylius.twig.extension.province_naming', ProvinceNamingExtension::class)
         ->args([service('sylius.provider.province_naming')])
-        ->tag('twig.extension');
+        ->tag('twig.extension')
+    ;
 
-    $services->set('sylius.validator.valid_province_address', ProvinceAddressConstraintValidator::class)
+    $services
+        ->set('sylius.validator.valid_province_address', ProvinceAddressConstraintValidator::class)
         ->args([
             service('sylius.repository.country'),
             service('sylius.repository.province'),
         ])
-        ->tag('validator.constraint_validator', ['alias' => 'sylius_province_address_validator']);
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_province_address_validator'])
+    ;
 
-    $services->set('sylius.validator.zone_cannot_contain_itself', ZoneCannotContainItselfValidator::class)
-        ->tag('validator.constraint_validator', ['alias' => 'sylius_zone_cannot_contain_itself_validator']);
+    $services
+        ->set('sylius.validator.zone_cannot_contain_itself', ZoneCannotContainItselfValidator::class)
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_zone_cannot_contain_itself_validator'])
+    ;
 
-    $services->set('sylius.validator.unique_province_collection', UniqueProvinceCollectionValidator::class)
-        ->tag('validator.constraint_validator', ['alias' => 'sylius_unique_province_collection_validator']);
+    $services
+        ->set('sylius.validator.unique_province_collection', UniqueProvinceCollectionValidator::class)
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_unique_province_collection_validator'])
+    ;
 
-    $services->set('sylius.validator.zone_member_group', ZoneMemberGroupValidator::class)
+    $services
+        ->set('sylius.validator.zone_member_group', ZoneMemberGroupValidator::class)
         ->args(['%sylius.addressing.zone_member.validation_groups%'])
-        ->tag('validator.constraint_validator', ['alias' => 'sylius_zone_member_group']);
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_zone_member_group'])
+    ;
 };
