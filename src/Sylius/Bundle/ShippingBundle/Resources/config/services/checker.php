@@ -21,16 +21,21 @@ use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodRulesEligibility
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.checker.shipping_method.category_requirement_eligibility', CategoryRequirementEligibilityChecker::class)
-        ->tag('sylius.shipping_method_eligibility_checker');
+    $services
+        ->set('sylius.checker.shipping_method.category_requirement_eligibility', CategoryRequirementEligibilityChecker::class)
+        ->tag('sylius.shipping_method_eligibility_checker')
+    ;
 
-    $services->set('sylius.checker.shipping_method.rules_eligibility', ShippingMethodRulesEligibilityChecker::class)
+    $services
+        ->set('sylius.checker.shipping_method.rules_eligibility', ShippingMethodRulesEligibilityChecker::class)
         ->args([service('sylius.registry.shipping_method_rule_checker')])
-        ->tag('sylius.shipping_method_eligibility_checker');
+        ->tag('sylius.shipping_method_eligibility_checker')
+    ;
 
-    $services->set('sylius.checker.shipping_method_eligibility', CompositeShippingMethodEligibilityChecker::class)
-        ->args([[]]);
-
+    $services
+        ->set('sylius.checker.shipping_method_eligibility', CompositeShippingMethodEligibilityChecker::class)
+        ->args([[]])
+    ;
     $services->alias('sylius.checker.shipping_method_eligibility.composite', 'sylius.checker.shipping_method_eligibility');
 
     $services->alias(ShippingMethodEligibilityCheckerInterface::class, 'sylius.checker.shipping_method_eligibility');
