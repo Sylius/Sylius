@@ -22,26 +22,36 @@ use Sylius\Bundle\CoreBundle\PriceHistory\EventListener\OnFlushEntityObserverLis
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.entity_observer.price_history.create_log_entry_on_price_change', CreateLogEntryOnPriceChangeObserver::class)
+    $services
+        ->set('sylius.entity_observer.price_history.create_log_entry_on_price_change', CreateLogEntryOnPriceChangeObserver::class)
         ->args([service('sylius.logger.price_history.price_change')])
-        ->tag('sylius.entity_observer');
+        ->tag('sylius.entity_observer')
+    ;
 
-    $services->set('sylius.entity_observer.price_history.process_lowest_prices_on_channel_change', ProcessLowestPricesOnChannelChangeObserver::class)
+    $services
+        ->set('sylius.entity_observer.price_history.process_lowest_prices_on_channel_change', ProcessLowestPricesOnChannelChangeObserver::class)
         ->args([service('sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings')])
-        ->tag('sylius.entity_observer');
+        ->tag('sylius.entity_observer')
+    ;
 
-    $services->set('sylius.entity_observer.price_history.process_lowest_prices_on_channel_price_history_config_change', ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver::class)
+    $services
+        ->set('sylius.entity_observer.price_history.process_lowest_prices_on_channel_price_history_config_change', ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserver::class)
         ->args([
             service('sylius.repository.channel'),
             service('sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings'),
         ])
-        ->tag('sylius.entity_observer');
+        ->tag('sylius.entity_observer')
+    ;
 
-    $services->set('sylius.listener.price_history.on_flush_entity_observer', OnFlushEntityObserverListener::class)
+    $services
+        ->set('sylius.listener.price_history.on_flush_entity_observer', OnFlushEntityObserverListener::class)
         ->args([tagged_iterator('sylius.entity_observer')])
-        ->tag('doctrine.event_listener', ['event' => 'onFlush', 'lazy' => true]);
+        ->tag('doctrine.event_listener', ['event' => 'onFlush', 'lazy' => true])
+    ;
 
-    $services->set('sylius.listener.price_history.channel_pricing_log_entry', ChannelPricingLogEntryEventListener::class)
+    $services
+        ->set('sylius.listener.price_history.channel_pricing_log_entry', ChannelPricingLogEntryEventListener::class)
         ->args([service('sylius.processor.price_history.product_lowest_price_before_discount')])
-        ->tag('doctrine.event_listener', ['event' => 'postPersist', 'priority' => 500, 'connection' => 'default']);
+        ->tag('doctrine.event_listener', ['event' => 'postPersist', 'priority' => 500, 'connection' => 'default'])
+    ;
 };

@@ -18,8 +18,8 @@ use Sylius\Bundle\CoreBundle\OAuth\UserProvider;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.oauth.user_provider', UserProvider::class)
-        ->lazy()
+    $services
+        ->set('sylius.oauth.user_provider', UserProvider::class)
         ->args([
             '%sylius.model.shop_user.class%',
             service('sylius.factory.customer'),
@@ -30,5 +30,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.manager.shop_user'),
             service('sylius.canonicalizer'),
             service('sylius.repository.customer'),
-        ]);
+        ])
+        ->lazy()
+    ;
 };

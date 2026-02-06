@@ -22,31 +22,41 @@ use Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.twig.extension.sylius_bundle_loaded_checker', BundleLoadedCheckerExtension::class)
+    $services
+        ->set('sylius.twig.extension.sylius_bundle_loaded_checker', BundleLoadedCheckerExtension::class)
         ->args(['%kernel.bundles%'])
-        ->tag('twig.extension');
+        ->tag('twig.extension')
+    ;
 
-    $services->set('sylius.twig.extension.price', PriceExtension::class)
-        ->private()
+    $services
+        ->set('sylius.twig.extension.price', PriceExtension::class)
         ->args([service('sylius.calculator.product_variant_price')])
-        ->tag('twig.extension');
-
-    $services->set('sylius.twig.extension.variant_resolver', VariantResolverExtension::class)
         ->private()
+        ->tag('twig.extension')
+    ;
+
+    $services
+        ->set('sylius.twig.extension.variant_resolver', VariantResolverExtension::class)
         ->args([service('sylius.resolver.product_variant')])
-        ->tag('twig.extension');
-
-    $services->set('sylius.twig.extension.channel_url', ChannelUrlExtension::class)
         ->private()
+        ->tag('twig.extension')
+    ;
+
+    $services
+        ->set('sylius.twig.extension.channel_url', ChannelUrlExtension::class)
         ->args([
             service('sylius.context.channel'),
             service('url_helper'),
             '%sylius.unsecured_urls%',
         ])
-        ->tag('twig.extension');
-
-    $services->set('sylius.twig.extension.product_translation', ProductTranslationExtension::class)
         ->private()
+        ->tag('twig.extension')
+    ;
+
+    $services
+        ->set('sylius.twig.extension.product_translation', ProductTranslationExtension::class)
         ->args([service('sylius.provider.channel_based_product_translation')])
-        ->tag('twig.extension');
+        ->private()
+        ->tag('twig.extension')
+    ;
 };

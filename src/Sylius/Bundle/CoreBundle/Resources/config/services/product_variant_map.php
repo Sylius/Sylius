@@ -24,26 +24,37 @@ use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderI
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.provider.product_variant_map', ProductVariantsMapProvider::class)
-        ->args([tagged_iterator('sylius.product_variant_data_map_provider')]);
-
+    $services
+        ->set('sylius.provider.product_variant_map', ProductVariantsMapProvider::class)
+        ->args([tagged_iterator('sylius.product_variant_data_map_provider')])
+    ;
     $services->alias(ProductVariantsMapProviderInterface::class, 'sylius.provider.product_variant_map');
 
-    $services->set('sylius.provider.product_variant_map.options', ProductVariantOptionsMapProvider::class)
-        ->tag('sylius.product_variant_data_map_provider');
+    $services
+        ->set('sylius.provider.product_variant_map.options', ProductVariantOptionsMapProvider::class)
+        ->tag('sylius.product_variant_data_map_provider')
+    ;
 
-    $services->set('sylius.provider.product_variant_map.price', ProductVariantPriceMapProvider::class)
+    $services
+        ->set('sylius.provider.product_variant_map.price', ProductVariantPriceMapProvider::class)
         ->args([service('sylius.calculator.product_variant_price')])
-        ->tag('sylius.product_variant_data_map_provider');
+        ->tag('sylius.product_variant_data_map_provider')
+    ;
 
-    $services->set('sylius.provider.product_variant_map.original_price', ProductVariantOriginalPriceMapProvider::class)
+    $services
+        ->set('sylius.provider.product_variant_map.original_price', ProductVariantOriginalPriceMapProvider::class)
         ->args([service('sylius.calculator.product_variant_price')])
-        ->tag('sylius.product_variant_data_map_provider');
+        ->tag('sylius.product_variant_data_map_provider')
+    ;
 
-    $services->set('sylius.provider.product_variant_map.applied_promotions', ProductVariantAppliedPromotionsMapProvider::class)
-        ->tag('sylius.product_variant_data_map_provider');
+    $services
+        ->set('sylius.provider.product_variant_map.applied_promotions', ProductVariantAppliedPromotionsMapProvider::class)
+        ->tag('sylius.product_variant_data_map_provider')
+    ;
 
-    $services->set('sylius.provider.product_variant_map.lowest_price', ProductVariantLowestPriceMapProvider::class)
+    $services
+        ->set('sylius.provider.product_variant_map.lowest_price', ProductVariantLowestPriceMapProvider::class)
         ->args([service('sylius.calculator.product_variant_price')])
-        ->tag('sylius.product_variant_data_map_provider');
+        ->tag('sylius.product_variant_data_map_provider')
+    ;
 };

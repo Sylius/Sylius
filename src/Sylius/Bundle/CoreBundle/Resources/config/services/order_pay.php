@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('order_pay/**/*.php');
 
+    $services = $container->services();
 };

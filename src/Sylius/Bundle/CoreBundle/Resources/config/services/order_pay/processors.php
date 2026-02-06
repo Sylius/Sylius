@@ -20,11 +20,12 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.processor.order_pay.route_parameters', RouteParametersProcessor::class)
+    $services
+        ->set('sylius.processor.order_pay.route_parameters', RouteParametersProcessor::class)
         ->args([
             inline_service(ExpressionLanguage::class),
             service('router'),
-        ]);
-
+        ])
+    ;
     $services->alias(RouteParametersProcessorInterface::class, 'sylius.processor.order_pay.route_parameters');
 };

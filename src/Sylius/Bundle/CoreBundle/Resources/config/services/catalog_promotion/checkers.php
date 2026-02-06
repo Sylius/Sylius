@@ -24,26 +24,34 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Checker\ProductVariantForCatalogPr
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility', ProductVariantForCatalogPromotionEligibility::class)
-        ->args([tagged_locator('sylius.catalog_promotion.variant_checker', indexAttribute: 'type')]);
-
+    $services
+        ->set('sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility', ProductVariantForCatalogPromotionEligibility::class)
+        ->args([tagged_locator('sylius.catalog_promotion.variant_checker', indexAttribute: 'type')])
+    ;
     $services->alias(ProductVariantForCatalogPromotionEligibilityInterface::class, 'sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility');
 
-    $services->set('sylius.checker.catalog_promotion_eligibility', CatalogPromotionEligibilityChecker::class)
-        ->args([tagged_iterator('sylius.catalog_promotion.criteria')]);
-
+    $services
+        ->set('sylius.checker.catalog_promotion_eligibility', CatalogPromotionEligibilityChecker::class)
+        ->args([tagged_iterator('sylius.catalog_promotion.criteria')])
+    ;
     $services->alias(CatalogPromotionEligibilityCheckerInterface::class, 'sylius.checker.catalog_promotion_eligibility');
 
-    $services->set('sylius.checker.catalog_promotion.in_for_product_scope_variant', InForProductScopeVariantChecker::class)
-        ->tag('sylius.catalog_promotion.variant_checker', ['type' => 'for_products']);
+    $services
+        ->set('sylius.checker.catalog_promotion.in_for_product_scope_variant', InForProductScopeVariantChecker::class)
+        ->tag('sylius.catalog_promotion.variant_checker', ['type' => 'for_products'])
+    ;
 
-    $services->set('sylius.checker.catalog_promotion.in_for_taxons_scope_variant', InForTaxonsScopeVariantChecker::class)
+    $services
+        ->set('sylius.checker.catalog_promotion.in_for_taxons_scope_variant', InForTaxonsScopeVariantChecker::class)
         ->args([
             service('sylius.repository.taxon'),
             service('sylius.repository.tree.taxon'),
         ])
-        ->tag('sylius.catalog_promotion.variant_checker', ['type' => 'for_taxons']);
+        ->tag('sylius.catalog_promotion.variant_checker', ['type' => 'for_taxons'])
+    ;
 
-    $services->set('sylius.checker.catalog_promotion.in_for_variants_scope_variant', InForVariantsScopeVariantChecker::class)
-        ->tag('sylius.catalog_promotion.variant_checker', ['type' => 'for_variants']);
+    $services
+        ->set('sylius.checker.catalog_promotion.in_for_variants_scope_variant', InForVariantsScopeVariantChecker::class)
+        ->tag('sylius.catalog_promotion.variant_checker', ['type' => 'for_variants'])
+    ;
 };

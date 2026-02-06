@@ -25,15 +25,23 @@ use Sylius\Component\Core\Shipping\Checker\Rule\OrderTotalLessThanOrEqualRuleChe
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.calculator.shipping.flat_rate', FlatRateCalculator::class)
-        ->tag('sylius.shipping_calculator', ['calculator' => 'flat_rate', 'form_type' => ChannelBasedFlatRateConfigurationType::class, 'label' => 'sylius.form.shipping_calculator.flat_rate_configuration.label']);
+    $services
+        ->set('sylius.calculator.shipping.flat_rate', FlatRateCalculator::class)
+        ->tag('sylius.shipping_calculator', ['calculator' => 'flat_rate', 'form_type' => ChannelBasedFlatRateConfigurationType::class, 'label' => 'sylius.form.shipping_calculator.flat_rate_configuration.label'])
+    ;
 
-    $services->set('sylius.calculator.shipping.per_unit_rate', PerUnitRateCalculator::class)
-        ->tag('sylius.shipping_calculator', ['calculator' => 'per_unit_rate', 'form_type' => ChannelBasedPerUnitRateConfigurationType::class, 'label' => 'sylius.form.shipping_calculator.per_unit_rate_configuration.label']);
+    $services
+        ->set('sylius.calculator.shipping.per_unit_rate', PerUnitRateCalculator::class)
+        ->tag('sylius.shipping_calculator', ['calculator' => 'per_unit_rate', 'form_type' => ChannelBasedPerUnitRateConfigurationType::class, 'label' => 'sylius.form.shipping_calculator.per_unit_rate_configuration.label'])
+    ;
 
-    $services->set('sylius.checker.shipping_method_rule.order_total_greater_than_or_equal', OrderTotalGreaterThanOrEqualRuleChecker::class)
-        ->tag('sylius.shipping_method_rule_checker', ['type' => 'order_total_greater_than_or_equal', 'label' => 'sylius.form.shipping_method_rule.items_total_greater_than_or_equal', 'form_type' => ChannelBasedOrderTotalGreaterThanOrEqualConfigurationType::class]);
+    $services
+        ->set('sylius.checker.shipping_method_rule.order_total_greater_than_or_equal', OrderTotalGreaterThanOrEqualRuleChecker::class)
+        ->tag('sylius.shipping_method_rule_checker', ['type' => 'order_total_greater_than_or_equal', 'label' => 'sylius.form.shipping_method_rule.items_total_greater_than_or_equal', 'form_type' => ChannelBasedOrderTotalGreaterThanOrEqualConfigurationType::class])
+    ;
 
-    $services->set('sylius.checker.shipping_method_rule.order_total_less_than_or_equal', OrderTotalLessThanOrEqualRuleChecker::class)
-        ->tag('sylius.shipping_method_rule_checker', ['type' => 'order_total_less_than_or_equal', 'label' => 'sylius.form.shipping_method_rule.items_total_less_than_or_equal', 'form_type' => ChannelBasedOrderTotalLessThanOrEqualConfigurationType::class]);
+    $services
+        ->set('sylius.checker.shipping_method_rule.order_total_less_than_or_equal', OrderTotalLessThanOrEqualRuleChecker::class)
+        ->tag('sylius.shipping_method_rule_checker', ['type' => 'order_total_less_than_or_equal', 'label' => 'sylius.form.shipping_method_rule.items_total_less_than_or_equal', 'form_type' => ChannelBasedOrderTotalLessThanOrEqualConfigurationType::class])
+    ;
 };

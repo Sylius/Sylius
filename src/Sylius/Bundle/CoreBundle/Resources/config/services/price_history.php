@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('price_history/checkers.php');
     $container->import('price_history/command_dispatcher.php');
     $container->import('price_history/command_handler.php');
@@ -22,4 +21,5 @@ return static function (ContainerConfigurator $container) {
     $container->import('price_history/logger.php');
     $container->import('price_history/processors.php');
 
+    $services = $container->services();
 };

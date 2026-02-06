@@ -19,8 +19,6 @@ use Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.handler.order_pay.payment_state_flash', PaymentStateFlashHandler::class)
-        ->abstract();
-
+    $services->set('sylius.handler.order_pay.payment_state_flash', PaymentStateFlashHandler::class)->abstract();
     $services->alias(PaymentStateFlashHandlerInterface::class, 'sylius.handler.order_pay.payment_state_flash');
 };

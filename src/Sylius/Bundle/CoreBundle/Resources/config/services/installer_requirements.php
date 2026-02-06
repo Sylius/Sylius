@@ -21,7 +21,8 @@ use Sylius\Bundle\CoreBundle\Installer\Requirement\SyliusRequirements;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.requirements.installer.sylius', SyliusRequirements::class)
+    $services
+        ->set('sylius.requirements.installer.sylius', SyliusRequirements::class)
         ->args([[
             inline_service(SettingsRequirements::class)
                 ->args([service('translator')]),
@@ -33,5 +34,6 @@ return static function (ContainerConfigurator $container) {
                     '%kernel.cache_dir%',
                     '%kernel.logs_dir%',
                 ]),
-        ]]);
+        ]])
+    ;
 };

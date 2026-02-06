@@ -22,8 +22,8 @@ use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $parameters = $container->parameters();
+    $services = $container->services();
     $parameters->set('sylius.form.type.checkout_address.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.checkout_select_shipping.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.checkout_shipment.validation_groups', ['sylius']);
@@ -31,50 +31,64 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.form.type.checkout_payment.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.checkout_complete.validation_groups', ['sylius', 'sylius_checkout_complete']);
 
-    $services->set('sylius.form.type.checkout.address', AddressType::class)
+    $services
+        ->set('sylius.form.type.checkout.address', AddressType::class)
         ->args([
             service('sylius.comparator.address'),
             '%sylius.model.order.class%',
             '%sylius.form.type.checkout_address.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.checkout.select_shipping', SelectShippingType::class)
+    $services
+        ->set('sylius.form.type.checkout.select_shipping', SelectShippingType::class)
         ->args([
             '%sylius.model.order.class%',
             '%sylius.form.type.checkout_select_shipping.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.checkout.shipment', ShipmentType::class)
+    $services
+        ->set('sylius.form.type.checkout.shipment', ShipmentType::class)
         ->args([
             '%sylius.model.shipment.class%',
             '%sylius.form.type.checkout_shipment.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.checkout.select_payment', SelectPaymentType::class)
+    $services
+        ->set('sylius.form.type.checkout.select_payment', SelectPaymentType::class)
         ->args([
             '%sylius.model.order.class%',
             '%sylius.form.type.checkout_select_payment.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.checkout.payment', PaymentType::class)
+    $services
+        ->set('sylius.form.type.checkout.payment', PaymentType::class)
         ->args([
             '%sylius.model.payment.class%',
             '%sylius.form.type.checkout_payment.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.checkout.complete', CompleteType::class)
+    $services
+        ->set('sylius.form.type.checkout.complete', CompleteType::class)
         ->args([
             '%sylius.model.order.class%',
             '%sylius.form.type.checkout_complete.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.checkout.change_payment_method', ChangePaymentMethodType::class)
+    $services
+        ->set('sylius.form.type.checkout.change_payment_method', ChangePaymentMethodType::class)
         ->args(['%sylius_core.checkout.payment.allowed_states%'])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 };

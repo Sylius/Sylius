@@ -20,6 +20,5 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->set('sylius.checker.product_variant_lowest_price_display', ProductVariantLowestPriceDisplayChecker::class);
-
     $services->alias(ProductVariantLowestPriceDisplayCheckerInterface::class, 'sylius.checker.product_variant_lowest_price_display');
 };
