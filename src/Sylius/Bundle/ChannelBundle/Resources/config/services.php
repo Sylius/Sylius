@@ -29,61 +29,74 @@ use Sylius\Component\Channel\Factory\ChannelFactory;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $parameters = $container->parameters();
+    $services = $container->services();
     $parameters->set('sylius.channel.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.channel.validation_groups', ['sylius']);
 
-    $services->set('sylius.custom_factory.channel', ChannelFactory::class)
+    $services
+        ->set('sylius.custom_factory.channel', ChannelFactory::class)
         ->decorate('sylius.factory.channel', null, 256)
-        ->args([service('sylius.custom_factory.channel.inner')]);
-
+        ->args([service('sylius.custom_factory.channel.inner')])
+    ;
     $services->alias(ChannelFactoryInterface::class, 'sylius.custom_factory.channel');
 
-    $services->set('sylius.form.type.channel', ChannelType::class)
+    $services
+        ->set('sylius.form.type.channel', ChannelType::class)
         ->args([
             '%sylius.model.channel.class%',
             '%sylius.form.type.channel.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.channel_choice', ChannelChoiceType::class)
+    $services
+        ->set('sylius.form.type.channel_choice', ChannelChoiceType::class)
         ->args([service('sylius.repository.channel')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
     $services->set('sylius.context.channel.composite', CompositeChannelContext::class);
 
     $services->alias(ChannelContextInterface::class, 'sylius.context.channel');
 
-    $services->set('sylius.context.channel.request_based', ChannelContext::class)
+    $services
+        ->set('sylius.context.channel.request_based', ChannelContext::class)
         ->args([
             service('sylius.context.channel.request_based.resolver'),
             service('request_stack'),
         ])
-        ->tag('sylius.context.channel');
+        ->tag('sylius.context.channel')
+    ;
 
-    $services->set('sylius.context.channel.single_channel', SingleChannelContext::class)
+    $services
+        ->set('sylius.context.channel.single_channel', SingleChannelContext::class)
         ->args([service('sylius.repository.channel')])
-        ->tag('sylius.context.channel', ['priority' => -128]);
+        ->tag('sylius.context.channel', ['priority' => -128])
+    ;
 
     $services->set('sylius.context.channel.request_based.resolver.composite', CompositeRequestResolver::class);
-
     $services->alias(RequestResolverInterface::class, 'sylius.context.channel.request_based.resolver.composite');
 
-    $services->set('sylius.context.channel.request_based.resolver.hostname_based', HostnameBasedRequestResolver::class)
+    $services
+        ->set('sylius.context.channel.request_based.resolver.hostname_based', HostnameBasedRequestResolver::class)
         ->args([service('sylius.repository.channel')])
-        ->tag('sylius.context.channel.request_based.resolver');
+        ->tag('sylius.context.channel.request_based.resolver')
+    ;
 
-    $services->set('sylius.collector.channel', ChannelCollector::class)
+    $services
+        ->set('sylius.collector.channel', ChannelCollector::class)
         ->args([
             service('sylius.repository.channel'),
             service('sylius.context.channel'),
             false,
         ])
-        ->tag('data_collector', ['template' => '@SyliusChannel/Collector/channel.html.twig', 'id' => 'sylius.collector.channel']);
+        ->tag('data_collector', ['template' => '@SyliusChannel/Collector/channel.html.twig', 'id' => 'sylius.collector.channel'])
+    ;
 
-    $services->set('sylius.checker.channel_deletion', ChannelDeletionChecker::class)
-        ->args([service('sylius.repository.channel')]);
-
+    $services
+        ->set('sylius.checker.channel_deletion', ChannelDeletionChecker::class)
+        ->args([service('sylius.repository.channel')])
+    ;
     $services->alias(ChannelDeletionCheckerInterface::class, 'sylius.checker.channel_deletion');
 };
