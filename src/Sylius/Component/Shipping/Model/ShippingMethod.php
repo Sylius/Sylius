@@ -63,7 +63,7 @@ class ShippingMethod implements ShippingMethodInterface, \Stringable
     {
         $this->initializeTranslationsCollection();
 
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
         $this->rules = new ArrayCollection();
     }
 

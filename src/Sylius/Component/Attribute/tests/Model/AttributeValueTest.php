@@ -90,8 +90,8 @@ class AttributeValueTest extends TestCase
             'text' => 'Lorem ipsum',
             'integer' => 42,
             'float' => 6.66,
-            'datetime' => new \DateTime(),
-            'date' => new \DateTime(),
+            'datetime' => new \DateTimeImmutable(),
+            'date' => new \DateTimeImmutable(),
             'json' => ['foo' => 'bar'],
         ];
 

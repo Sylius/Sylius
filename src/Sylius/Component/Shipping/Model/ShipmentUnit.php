@@ -30,7 +30,7 @@ class ShipmentUnit implements ShipmentUnitInterface, \Stringable
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function __toString(): string

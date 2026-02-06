@@ -71,7 +71,7 @@ final class ExchangeRateTest extends TestCase
 
     public function testCreationDateShouldBeMutable(): void
     {
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
 
         $this->exchangeRate->setCreatedAt($date);
         self::assertSame($date, $this->exchangeRate->getCreatedAt());
@@ -84,7 +84,7 @@ final class ExchangeRateTest extends TestCase
 
     public function testLastUpdateDateShouldBeMutable(): void
     {
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
 
         $this->exchangeRate->setUpdatedAt($date);
         self::assertSame($date, $this->exchangeRate->getUpdatedAt());

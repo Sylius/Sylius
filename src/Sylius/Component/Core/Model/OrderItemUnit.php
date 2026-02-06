@@ -31,7 +31,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     {
         parent::__construct($orderItem);
 
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getShipment(): ?BaseShipmentInterface

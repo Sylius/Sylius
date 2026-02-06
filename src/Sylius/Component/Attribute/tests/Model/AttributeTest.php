@@ -104,7 +104,7 @@ class AttributeTest extends TestCase
 
     public function testCreationDateShouldBeMutable(): void
     {
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
         $this->attribute->setCreatedAt($date);
         self::assertSame($date, $this->attribute->getCreatedAt());
     }
@@ -116,7 +116,7 @@ class AttributeTest extends TestCase
 
     public function testLastUpdateDateShouldBeMutable(): void
     {
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
         $this->attribute->setUpdatedAt($date);
         self::assertSame($date, $this->attribute->getUpdatedAt());
     }

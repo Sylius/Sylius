@@ -30,7 +30,7 @@ final class ChannelPricingLogEntryTest extends TestCase
         $this->channelPricing = $this->createMock(ChannelPricingInterface::class);
         $this->channelPricingLogEntry = new ChannelPricingLogEntry(
             $this->channelPricing,
-            new \DateTime(),
+            new \DateTimeImmutable(),
             1000,
             2000,
         );
@@ -45,7 +45,7 @@ final class ChannelPricingLogEntryTest extends TestCase
     {
         $this->channelPricingLogEntry = new ChannelPricingLogEntry(
             $this->channelPricing,
-            new \DateTime(),
+            new \DateTimeImmutable(),
             1000,
             null,
         );

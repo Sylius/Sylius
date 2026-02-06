@@ -85,7 +85,7 @@ final class ShipmentUnitTest extends TestCase
 
     public function testShouldCreationDateBeMutable(): void
     {
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
 
         $this->shipmentUnit->setCreatedAt($date);
 
@@ -99,7 +99,7 @@ final class ShipmentUnitTest extends TestCase
 
     public function testShouldLastUpdateDateBeMutable(): void
     {
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
 
         $this->shipmentUnit->setUpdatedAt($date);
 
