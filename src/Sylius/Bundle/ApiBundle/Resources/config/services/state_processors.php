@@ -31,100 +31,128 @@ use Sylius\Bundle\ApiBundle\StateProcessor\Shop\Address\PersistProcessor as Addr
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_api.state_processor.admin.admin_user.remove', AdminUserRemoveProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.admin_user.remove', AdminUserRemoveProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.remove_processor'),
             service('security.token_storage'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.admin_user.persist', AdminUserPersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.admin_user.persist', AdminUserPersistProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius.security.password_updater'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.country.persist', CountryPersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.country.persist', CountryPersistProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius.checker.country_provinces_deletion'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.channel.remove', ChannelRemoveProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.channel.remove', ChannelRemoveProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.remove_processor'),
             service('sylius.checker.channel_deletion'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.locale.remove', LocaleRemoveProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.locale.remove', LocaleRemoveProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.remove_processor'),
             service('sylius.checker.locale_usage'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.avatar_image.persist', AvatarImagePersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.avatar_image.persist', AvatarImagePersistProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius_api.creator.avatar_image'),
             service('sylius.repository.avatar_image'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.zone.remove', ZoneRemoveProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.zone.remove', ZoneRemoveProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.remove_processor'),
             service('sylius.checker.zone_deletion'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.shop.address.persist', AddressPersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.shop.address.persist', AddressPersistProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius_api.context.user.token_based'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.product_image.persist', ProductImagePersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.product_image.persist', ProductImagePersistProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius_api.creator.product_image'),
             service('validator'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.taxon_image.persist', TaxonImagePersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.taxon_image.persist', TaxonImagePersistProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius_api.creator.taxon_image'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.common.messenger.persist', MessengerPersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.common.messenger.persist', MessengerPersistProcessor::class)
         ->decorate('api_platform.state_processor.write')
         ->args([service('.inner')])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.common.remove', ResourceRemoveProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.common.remove', ResourceRemoveProcessor::class)
         ->decorate('api_platform.doctrine.orm.state.remove_processor')
         ->args([service('.inner')])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.promotion.promotion_coupon.persist', PromotionCouponPersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.promotion.promotion_coupon.persist', PromotionCouponPersistProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius_api.resolver.uri_template_parent_resource_resolver'),
             service('validator'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 
-    $services->set('sylius_api.state_processor.admin.customer.persist', CustomerPersistProcessor::class)
+    $services
+        ->set('sylius_api.state_processor.admin.customer.persist', CustomerPersistProcessor::class)
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius.security.password_updater'),
         ])
-        ->tag('api_platform.state_processor');
+        ->tag('api_platform.state_processor')
+    ;
 };

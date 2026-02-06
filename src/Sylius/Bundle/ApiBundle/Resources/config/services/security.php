@@ -19,12 +19,13 @@ use Sylius\Bundle\ApiBundle\Security\ShopUserVoter;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->tag('security.voter');
+    $services->defaults()->tag('security.voter');
 
     $services->set('sylius_api.security.voter.shop_user', ShopUserVoter::class);
 
-    $services->set('sylius_api.security.voter.order_adjustments', OrderAdjustmentsVoter::class)
+    $services
+        ->set('sylius_api.security.voter.order_adjustments', OrderAdjustmentsVoter::class)
         ->args([service('sylius_api.provider.adjustment_order')])
-        ->tag('security.voter');
+        ->tag('security.voter')
+    ;
 };

@@ -47,165 +47,225 @@ use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Taxon\EnabledChildr
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_api.doctrine.orm.query_extension.common.non_archived', NonArchivedExtension::class)
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.common.non_archived', NonArchivedExtension::class)
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.common.translation_order_locale', TranslationOrderLocaleExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.common.translation_order_locale', TranslationOrderLocaleExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.product_review.accepted', AcceptedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.product_review.accepted', AcceptedExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.address.shop_user_based', AddressShopUserBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.address.shop_user_based', AddressShopUserBasedExtension::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius_api.context.user.token_based'),
         ])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.product.channel_and_locale_based', ChannelAndLocaleBasedExtension::class)
-        ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
-
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.product.enabled_variants', EnabledVariantsExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.product.channel_and_locale_based', ChannelAndLocaleBasedExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.product.taxon_based', TaxonBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.product.enabled_variants', EnabledVariantsExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.order.channel_based', OrderChannelBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.product.taxon_based', TaxonBasedExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.order_item.visitor_based', OrderItemVisitorBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.order.channel_based', OrderChannelBasedExtension::class)
+        ->args([service('sylius.section_resolver.uri_based')])
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+    ;
+
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.order_item.visitor_based', OrderItemVisitorBasedExtension::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius_api.context.user.token_based'),
         ])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.order_item.shop_user_based', OrderItemShopUserBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.order_item.shop_user_based', OrderItemShopUserBasedExtension::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius_api.context.user.token_based'),
         ])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.country.channel_based', CountryChannelBasedExtension::class)
-        ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
-
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.taxon.channel_based', TaxonChannelBasedExtension::class)
-        ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
-
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.currency.channel_based', CurrencyChannelBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.country.channel_based', CountryChannelBasedExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.locale.channel_based', LocaleChannelBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.taxon.channel_based', TaxonChannelBasedExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection');
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.common.filter_eager_loading', RestrictingFilterEagerLoadingExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.currency.channel_based', CurrencyChannelBasedExtension::class)
+        ->args([service('sylius.section_resolver.uri_based')])
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
+
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.locale.channel_based', LocaleChannelBasedExtension::class)
+        ->args([service('sylius.section_resolver.uri_based')])
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+    ;
+
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.common.filter_eager_loading', RestrictingFilterEagerLoadingExtension::class)
         ->decorate('api_platform.doctrine.orm.query_extension.filter_eager_loading')
         ->args([
             service('sylius_api.doctrine.orm.query_extension.common.filter_eager_loading.inner'),
             '%sylius_api.filter_eager_loading_extension.restricted_resources%',
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.order.shop_user_based', OrderShopUserBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.order.shop_user_based', OrderShopUserBasedExtension::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius_api.context.user.token_based'),
         ])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.order.visitor_based', OrderVisitorBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.order.visitor_based', OrderVisitorBasedExtension::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius_api.context.user.token_based'),
         ])
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.order.state_based', ShopOrderStateBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.order.state_based', ShopOrderStateBasedExtension::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             '%sylius.api.doctrine.orm.query.extension.shop.order.filter_cart.allowed_operations%',
         ])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.common.enabled', EnabledExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.common.enabled', EnabledExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.product_association.enabled_products', EnabledProductsExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.product_association.enabled_products', EnabledProductsExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.exchange_rate.channel_based', ExchangeRateChannelBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.exchange_rate.channel_based', ExchangeRateChannelBasedExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.admin.order.state_based', AdminOrderStateBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.admin.order.state_based', AdminOrderStateBasedExtension::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             '%sylius_api.order_states_to_filter_out%',
         ])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.admin.promotion.promotion_coupon.post_result', PostResultExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.admin.promotion.promotion_coupon.post_result', PostResultExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.taxon.enabled_children', EnabledChildrenExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.taxon.enabled_children', EnabledChildrenExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.product.enabled_within_product_association', EnabledWithinProductAssociationExtension::class)
-        ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
-
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.shipping_method.channel_based', ShippingMethodChannelBasedExtension::class)
-        ->args([service('sylius.section_resolver.uri_based')])
-        ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
-
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.shipping_method.enabled', ShippingMethodEnabledExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.product.enabled_within_product_association', EnabledWithinProductAssociationExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.payment_method.channel_based', PaymentMethodChannelBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.shipping_method.channel_based', ShippingMethodChannelBasedExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.payment_method.enabled', PaymentMethodEnabledExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.shipping_method.enabled', ShippingMethodEnabledExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 
-    $services->set('sylius_api.doctrine.orm.query_extension.shop.customer.shop_user_based', CustomerShopUserBasedExtension::class)
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.payment_method.channel_based', PaymentMethodChannelBasedExtension::class)
+        ->args([service('sylius.section_resolver.uri_based')])
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
+
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.payment_method.enabled', PaymentMethodEnabledExtension::class)
+        ->args([service('sylius.section_resolver.uri_based')])
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
+
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.customer.shop_user_based', CustomerShopUserBasedExtension::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius_api.context.user.token_based'),
         ])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
-        ->tag('api_platform.doctrine.orm.query_extension.item');
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
 };
