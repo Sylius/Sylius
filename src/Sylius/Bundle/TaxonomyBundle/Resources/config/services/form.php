@@ -18,30 +18,36 @@ use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $parameters = $container->parameters();
+    $services = $container->services();
     $parameters->set('sylius.form.type.taxon.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.taxon_translation.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.taxon_position.validation_groups', ['sylius']);
 
-    $services->set('sylius.form.type.taxon', TaxonType::class)
+    $services
+        ->set('sylius.form.type.taxon', TaxonType::class)
         ->args([
             '%sylius.model.taxon.class%',
             '%sylius.form.type.taxon.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.taxon_translation', TaxonTranslationType::class)
+    $services
+        ->set('sylius.form.type.taxon_translation', TaxonTranslationType::class)
         ->args([
             '%sylius.model.taxon_translation.class%',
             '%sylius.form.type.taxon_translation.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.taxon_position', TaxonPositionType::class)
+    $services
+        ->set('sylius.form.type.taxon_position', TaxonPositionType::class)
         ->args([
             '%sylius.model.taxon.class%',
             '%sylius.form.type.taxon_position.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 };

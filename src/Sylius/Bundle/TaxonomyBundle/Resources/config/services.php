@@ -22,28 +22,32 @@ use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Provider\TaxonTreeProviderInterface;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('services/form.php');
     $container->import('services/tree_repository.php');
 
-    $services->set('sylius.custom_factory.taxon', TaxonFactory::class)
-        ->decorate('sylius.factory.taxon', null, 256)
-        ->args([service('sylius.custom_factory.taxon.inner')]);
+    $services = $container->services();
 
+    $services
+        ->set('sylius.custom_factory.taxon', TaxonFactory::class)
+        ->decorate('sylius.factory.taxon', null, 256)
+        ->args([service('sylius.custom_factory.taxon.inner')])
+    ;
     $services->alias(TaxonFactoryInterface::class, 'sylius.custom_factory.taxon');
 
     $services->set('sylius.generator.taxon_slug', TaxonSlugGenerator::class);
-
     $services->alias(TaxonSlugGeneratorInterface::class, 'sylius.generator.taxon_slug');
 
-    $services->set('sylius.provider.taxon_tree', TaxonTreeProvider::class)
+    $services
+        ->set('sylius.provider.taxon_tree', TaxonTreeProvider::class)
         ->args([
             service('sylius.repository.taxon'),
             service('sylius.repository.nested_tree.taxon'),
-        ]);
-
+        ])
+    ;
     $services->alias(TaxonTreeProviderInterface::class, 'sylius.provider.taxon_tree');
 
-    $services->set('sylius.validator.taxon_parent_relation', TaxonParentRelationValidator::class)
-        ->tag('validator.constraint_validator', ['alias' => 'sylius_taxon_parent_relation_validator']);
+    $services
+        ->set('sylius.validator.taxon_parent_relation', TaxonParentRelationValidator::class)
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_taxon_parent_relation_validator'])
+    ;
 };
