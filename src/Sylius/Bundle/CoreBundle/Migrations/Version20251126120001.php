@@ -63,6 +63,7 @@ final class Version20251126120001 extends AbstractPostgreSQLMigration
         if (method_exists($this->connection, 'createSchemaManager')) {
             $indexes = $this->connection->createSchemaManager()->listTableIndexes($tableName);
         } else {
+            /** @phpstan-ignore method.notFound (DBAL 3.x compatibility) */
             $indexes = $this->connection->getSchemaManager()->listTableIndexes($tableName);
         }
 
