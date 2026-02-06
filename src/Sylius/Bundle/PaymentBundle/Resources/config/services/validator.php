@@ -18,7 +18,9 @@ use Sylius\Bundle\PaymentBundle\Validator\Constraints\GatewayFactoryExistsValida
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.validator.gateway_factory_exists', GatewayFactoryExistsValidator::class)
+    $services
+        ->set('sylius.validator.gateway_factory_exists', GatewayFactoryExistsValidator::class)
         ->args(['%sylius.gateway_factories%'])
-        ->tag('validator.constraint_validator', ['alias' => 'sylius_gateway_factory_exists_validator']);
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_gateway_factory_exists_validator'])
+    ;
 };

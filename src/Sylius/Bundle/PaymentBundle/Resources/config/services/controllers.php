@@ -19,10 +19,10 @@ use Sylius\Bundle\PaymentBundle\Action\PaymentRequestNotifyAction;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius.controller.payment_request_notify', PaymentRequestNotifyAction::class)
+    $services
+        ->set('sylius.controller.payment_request_notify', PaymentRequestNotifyAction::class)
         ->args([
             service('sylius.repository.payment_request'),
             service('sylius.checker.finalized_payment_request'),
@@ -30,9 +30,11 @@ return static function (ContainerConfigurator $container) {
             service('sylius.manager.payment_request'),
             service('sylius.announcer.payment_request'),
             service('sylius.provider.payment_request.notify_response'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius.controller.payment_method_notify', PaymentMethodNotifyAction::class)
+    $services
+        ->set('sylius.controller.payment_method_notify', PaymentMethodNotifyAction::class)
         ->args([
             service('sylius.repository.payment_method'),
             service('sylius.provider.payment_request.notify_payment'),
@@ -41,5 +43,6 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.payment_request'),
             service('sylius.announcer.payment_request'),
             service('sylius.provider.payment_request.notify_response'),
-        ]);
+        ])
+    ;
 };

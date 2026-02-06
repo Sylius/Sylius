@@ -18,10 +18,11 @@ use Sylius\Bundle\PaymentBundle\EventListener\PaymentMethodChangeEventListener;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius.listener.payment_method_change', PaymentMethodChangeEventListener::class)
+    $services
+        ->set('sylius.listener.payment_method_change', PaymentMethodChangeEventListener::class)
         ->args([service('sylius.canceller.payment_request')])
-        ->tag('doctrine.event_listener', ['event' => 'postUpdate']);
+        ->tag('doctrine.event_listener', ['event' => 'postUpdate'])
+    ;
 };

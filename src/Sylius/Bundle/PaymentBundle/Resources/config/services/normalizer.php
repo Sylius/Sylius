@@ -20,6 +20,5 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->set('sylius.normalizer.symfony_request', SymfonyRequestNormalizer::class);
-
     $services->alias(SymfonyRequestNormalizerInterface::class, 'sylius.normalizer.symfony_request');
 };

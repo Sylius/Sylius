@@ -21,52 +21,64 @@ use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $parameters = $container->parameters();
+    $services = $container->services();
     $parameters->set('sylius.form.type.payment.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.payment_method.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.payment_method_translation.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.gateway_config.validation_groups', ['sylius']);
 
-    $services->set('sylius.form.type.gateway_config', GatewayConfigType::class)
+    $services
+        ->set('sylius.form.type.gateway_config', GatewayConfigType::class)
         ->args([
             '%sylius.model.gateway_config.class%',
             '%sylius.form.type.gateway_config.validation_groups%',
             service('sylius.form_registry.payment_gateway_config'),
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.payment', PaymentType::class)
+    $services
+        ->set('sylius.form.type.payment', PaymentType::class)
         ->args([
             '%sylius.model.payment.class%',
             '%sylius.form.type.payment.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.payment_method', PaymentMethodType::class)
+    $services
+        ->set('sylius.form.type.payment_method', PaymentMethodType::class)
         ->args([
             '%sylius.model.payment_method.class%',
             '%sylius.form.type.payment_method.validation_groups%',
             service('sylius.validator.groups_generator.payment_method'),
             service('sylius.generator.gateway_name'),
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.payment_method_translation', PaymentMethodTranslationType::class)
+    $services
+        ->set('sylius.form.type.payment_method_translation', PaymentMethodTranslationType::class)
         ->args([
             '%sylius.model.payment_method_translation.class%',
             '%sylius.form.type.payment_method_translation.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.payment_method_choice', PaymentMethodChoiceType::class)
+    $services
+        ->set('sylius.form.type.payment_method_choice', PaymentMethodChoiceType::class)
         ->args([
             service('sylius.resolver.payment_methods'),
             service('sylius.repository.payment_method'),
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.type.payment_gateway_choice', PaymentGatewayChoiceType::class)
+    $services
+        ->set('sylius.form.type.payment_gateway_choice', PaymentGatewayChoiceType::class)
         ->args(['%sylius.payment_gateways%'])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 };

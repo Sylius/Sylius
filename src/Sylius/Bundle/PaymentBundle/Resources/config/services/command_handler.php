@@ -19,17 +19,21 @@ use Sylius\Bundle\PaymentBundle\CommandHandler\Offline\StatusPaymentRequestHandl
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.command_handler.offline.capture_payment_request', CapturePaymentRequestHandler::class)
+    $services
+        ->set('sylius.command_handler.offline.capture_payment_request', CapturePaymentRequestHandler::class)
         ->args([
             service('sylius.provider.payment_request'),
             service('sylius_abstraction.state_machine'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.payment_request.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.payment_request.command_bus'])
+    ;
 
-    $services->set('sylius.command_handler.offline.status_payment_request', StatusPaymentRequestHandler::class)
+    $services
+        ->set('sylius.command_handler.offline.status_payment_request', StatusPaymentRequestHandler::class)
         ->args([
             service('sylius.provider.payment_request'),
             service('sylius_abstraction.state_machine'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.payment_request.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.payment_request.command_bus'])
+    ;
 };

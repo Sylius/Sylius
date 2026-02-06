@@ -33,46 +33,49 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->set('sylius.provider.payment_request.gateway_factory_name', GatewayFactoryNameProvider::class);
-
     $services->alias(GatewayFactoryNameProviderInterface::class, 'sylius.provider.payment_request.gateway_factory_name');
 
-    $services->set('sylius.provider.payment_request', PaymentRequestProvider::class)
-        ->args([service('sylius.repository.payment_request')]);
-
+    $services
+        ->set('sylius.provider.payment_request', PaymentRequestProvider::class)
+        ->args([service('sylius.repository.payment_request')])
+    ;
     $services->alias(PaymentRequestProviderInterface::class, 'sylius.provider.payment_request');
 
-    $services->set('sylius.provider.payment_request.http_response.gateway_factory', GatewayFactoryHttpResponseProvider::class)
+    $services
+        ->set('sylius.provider.payment_request.http_response.gateway_factory', GatewayFactoryHttpResponseProvider::class)
         ->args([
             service('sylius.provider.payment_request.gateway_factory_name'),
             tagged_locator('sylius.payment_request.provider.http_response', indexAttribute: 'gateway_factory'),
-        ]);
-
+        ])
+    ;
     $services->alias('sylius.provider.http_response.default', 'sylius.provider.payment_request.http_response.gateway_factory');
 
-    $services->set('sylius.provider.payment_request.default_action', DefaultActionProvider::class)
+    $services
+        ->set('sylius.provider.payment_request.default_action', DefaultActionProvider::class)
         ->args([
             service('sylius.repository.payment_method'),
             PaymentRequestInterface::ACTION_CAPTURE,
-        ]);
-
+        ])
+    ;
     $services->alias(DefaultActionProviderInterface::class, 'sylius.provider.payment_request.default_action');
 
     $services->set('sylius.provider.payment_request.default_payload', DefaultPayloadProvider::class);
-
     $services->alias(DefaultPayloadProviderInterface::class, 'sylius.provider.payment_request.default_payload');
 
-    $services->set('sylius.provider.payment_request.http_response.offline', ActionsHttpResponseProvider::class)
+    $services
+        ->set('sylius.provider.payment_request.http_response.offline', ActionsHttpResponseProvider::class)
         ->args([tagged_locator('sylius.provider.payment_request.http_response.offline', indexAttribute: 'action')])
-        ->tag('sylius.payment_request.provider.http_response', ['gateway_factory' => 'offline']);
+        ->tag('sylius.payment_request.provider.http_response', ['gateway_factory' => 'offline'])
+    ;
 
-    $services->set('sylius.provider.payment_request.notify_payment', CompositeNotifyPaymentProvider::class)
-        ->args([tagged_iterator('sylius.payment_request.payment_notify_provider')]);
-
+    $services
+        ->set('sylius.provider.payment_request.notify_payment', CompositeNotifyPaymentProvider::class)
+        ->args([tagged_iterator('sylius.payment_request.payment_notify_provider')])
+    ;
     $services->alias('sylius.provider.payment_request.notify_payment.composite', 'sylius.provider.payment_request.notify_payment');
 
     $services->alias(NotifyPaymentProviderInterface::class, 'sylius.provider.payment_request.notify_payment');
 
     $services->set('sylius.provider.payment_request.notify_response', NotifyResponseProvider::class);
-
     $services->alias(NotifyResponseProviderInterface::class, 'sylius.provider.payment_request.notify_response');
 };
