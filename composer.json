@@ -45,7 +45,7 @@
         "doctrine/inflector": "^2.0",
         "doctrine/migrations": "^3.8",
         "doctrine/orm": "^2.18 || ^3.5",
-        "doctrine/persistence": "^3.3",
+        "doctrine/persistence": "^3.3 || ^4.0",
         "egulias/email-validator": "^4.0",
         "fakerphp/faker": "^1.23",
         "friendsofphp/proxy-manager-lts": "^1.0",
