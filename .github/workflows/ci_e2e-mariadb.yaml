@@ -44,7 +44,7 @@ jobs:
     phpunit-cli-api:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
+        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.doctrine_bundle && format(', DoctrineBundle {0}', matrix.doctrine_bundle) || '' }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
         timeout-minutes: 20
         strategy:
             fail-fast: false
@@ -72,6 +72,10 @@ jobs:
                 run: |
                     composer require winzou/state-machine:^0.4 --no-update
                     composer require winzou/state-machine-bundle:^0.6 --no-update
+
+            -   name: Require Doctrine Bundle
+                if: ${{ matrix.doctrine_bundle != '' && matrix.doctrine_bundle != null }}
+                run: composer require --no-update --no-scripts --no-interaction "doctrine/doctrine-bundle:${{ matrix.doctrine_bundle }}"
 
             -   name: Prepare manifest.json files
                 run: |
@@ -145,7 +149,7 @@ jobs:
     behat-ui:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
+        name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.doctrine_bundle && format(', DoctrineBundle {0}', matrix.doctrine_bundle) || '' }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}"
         timeout-minutes: 20
         strategy:
             fail-fast: false
@@ -173,6 +177,10 @@ jobs:
                 run: |
                     composer require winzou/state-machine:^0.4 --no-update
                     composer require winzou/state-machine-bundle:^0.6 --no-update
+
+            -   name: Require Doctrine Bundle
+                if: ${{ matrix.doctrine_bundle != '' && matrix.doctrine_bundle != null }}
+                run: composer require --no-update --no-scripts --no-interaction "doctrine/doctrine-bundle:${{ matrix.doctrine_bundle }}"
 
             -   name: Prepare manifest.json files
                 run: |
