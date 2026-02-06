@@ -19,11 +19,13 @@ use Sylius\Bundle\ShopBundle\Twig\Component\Common\DeliveryTimeComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.twig.component.common.delivery_time', DeliveryTimeComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.common.delivery_time', DeliveryTimeComponent::class)
         ->args([
             service(DeliveryTimeProviderInterface::class),
             service('sylius.context.channel'),
             service('translator'),
         ])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:common:delivery_time']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:common:delivery_time'])
+    ;
 };

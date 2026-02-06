@@ -16,6 +16,8 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.handler.order_pay.payment_state_flash')
-        ->parent('sylius.handler.order_pay.payment_state_flash');
+    $services
+        ->set('sylius_shop.handler.order_pay.payment_state_flash')
+        ->parent('sylius.handler.order_pay.payment_state_flash')
+    ;
 };

@@ -19,16 +19,17 @@ use Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.locale_switcher', UrlBasedLocaleSwitcher::class)
-        ->args([service('router')]);
+    $services->set('sylius_shop.locale_switcher', UrlBasedLocaleSwitcher::class)->args([service('router')]);
 
-    $services->set('sylius_shop.listener.non_channel_locale', NonChannelLocaleListener::class)
-        ->public()
+    $services
+        ->set('sylius_shop.listener.non_channel_locale', NonChannelLocaleListener::class)
         ->args([
             service('router'),
             service('sylius.provider.locale'),
             service('security.firewall.map'),
             ['%sylius_shop.firewall_context_name%'],
         ])
-        ->tag('kernel.event_listener', ['event' => 'kernel.request', 'method' => 'restrictRequestLocale', 'priority' => 10]);
+        ->public()
+        ->tag('kernel.event_listener', ['event' => 'kernel.request', 'method' => 'restrictRequestLocale', 'priority' => 10])
+    ;
 };

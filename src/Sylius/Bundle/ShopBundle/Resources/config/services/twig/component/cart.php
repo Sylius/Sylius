@@ -21,7 +21,8 @@ use Sylius\Bundle\ShopBundle\Twig\Component\Cart\WidgetComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.twig.component.cart.form', FormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.cart.form', FormComponent::class)
         ->args([
             service('sylius.repository.order'),
             service('form.factory'),
@@ -31,23 +32,30 @@ return static function (ContainerConfigurator $container) {
             service('event_dispatcher'),
         ])
         ->call('setLiveResponder', [service('ux.live_component.live_responder')])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:cart:form']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:cart:form'])
+    ;
 
-    $services->set('sylius_shop.twig.component.cart.summary', SummaryComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.cart.summary', SummaryComponent::class)
         ->args([service('sylius.repository.order')])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:cart:summary']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:cart:summary'])
+    ;
 
-    $services->set('sylius_shop.twig.component.cart.widget', WidgetComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.cart.widget', WidgetComponent::class)
         ->args([
             service('sylius.context.cart'),
             service('sylius.repository.order'),
         ])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:cart:widget']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:cart:widget'])
+    ;
 
-    $services->set('sylius_shop.twig.component.cart.widget.offcanvas', WidgetComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.cart.widget.offcanvas', WidgetComponent::class)
         ->args([
             service('sylius.context.cart'),
             service('sylius.repository.order'),
         ])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:cart:widget:offcanvas']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:cart:widget:offcanvas'])
+    ;
 };

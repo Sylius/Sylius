@@ -18,9 +18,11 @@ use Sylius\Bundle\ShopBundle\Theme\ChannelBasedThemeContext;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.theme.context.channel_based', ChannelBasedThemeContext::class)
+    $services
+        ->set('sylius_shop.theme.context.channel_based', ChannelBasedThemeContext::class)
         ->args([
             service('sylius.context.channel'),
             service('sylius.repository.theme'),
-        ]);
+        ])
+    ;
 };

@@ -20,17 +20,23 @@ use Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.twig.error_template_finder', ErrorTemplateFinder::class)
+    $services
+        ->set('sylius_shop.twig.error_template_finder', ErrorTemplateFinder::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('twig'),
         ])
-        ->tag('sylius.twig.error_template_finder');
+        ->tag('sylius.twig.error_template_finder')
+    ;
 
-    $services->set('sylius_shop.twig.extension.order_item_original_price_to_display', OrderItemOriginalPriceToDisplayExtension::class)
-        ->tag('twig.extension');
+    $services
+        ->set('sylius_shop.twig.extension.order_item_original_price_to_display', OrderItemOriginalPriceToDisplayExtension::class)
+        ->tag('twig.extension')
+    ;
 
-    $services->set('sylius_shop.twig.extension.order_payments', OrderPaymentsExtension::class)
+    $services
+        ->set('sylius_shop.twig.extension.order_payments', OrderPaymentsExtension::class)
         ->args([service('sylius.resolver.payment_methods')])
-        ->tag('twig.extension');
+        ->tag('twig.extension')
+    ;
 };

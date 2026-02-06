@@ -18,6 +18,8 @@ use Sylius\Bundle\ShopBundle\Modifier\DefaultAddressFormValuesModifier;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.modifier.default_address_form_values', DefaultAddressFormValuesModifier::class)
-        ->tag('sylius_shop.modifier.address_form_values');
+    $services
+        ->set('sylius_shop.modifier.default_address_form_values', DefaultAddressFormValuesModifier::class)
+        ->tag('sylius_shop.modifier.address_form_values')
+    ;
 };
