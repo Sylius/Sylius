@@ -23,28 +23,34 @@ use Sylius\Component\Currency\Converter\CurrencyNameConverter;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('services/form.php');
 
-    $services->set('sylius.context.currency.composite', CompositeCurrencyContext::class)
-        ->decorate('sylius.context.currency', null, 256);
+    $services = $container->services();
 
-    $services->set('sylius.converter.currency', CurrencyConverter::class)
-        ->args([service('sylius.repository.exchange_rate')]);
+    $services
+        ->set('sylius.context.currency.composite', CompositeCurrencyContext::class)
+        ->decorate('sylius.context.currency', null, 256)
+    ;
 
+    $services
+        ->set('sylius.converter.currency', CurrencyConverter::class)
+        ->args([service('sylius.repository.exchange_rate')])
+    ;
     $services->alias(CurrencyConverterInterface::class, 'sylius.converter.currency');
 
     $services->set('sylius.converter.currency_name', CurrencyNameConverter::class);
-
     $services->alias(CurrencyNameConverterInterface::class, 'sylius.converter.currency_name');
 
-    $services->set('sylius.twig.extension.currency', CurrencyExtension::class)
-        ->tag('twig.extension');
+    $services->set('sylius.twig.extension.currency', CurrencyExtension::class)->tag('twig.extension');
 
-    $services->set('sylius.validator.different_source_target_currency', DifferentSourceTargetCurrencyValidator::class)
-        ->tag('validator.constraint_validator');
+    $services
+        ->set('sylius.validator.different_source_target_currency', DifferentSourceTargetCurrencyValidator::class)
+        ->tag('validator.constraint_validator')
+    ;
 
-    $services->set('sylius.validator.unique_currency_pair', UniqueCurrencyPairValidator::class)
+    $services
+        ->set('sylius.validator.unique_currency_pair', UniqueCurrencyPairValidator::class)
         ->args([service('sylius.repository.exchange_rate')])
-        ->tag('validator.constraint_validator');
+        ->tag('validator.constraint_validator')
+    ;
 };
