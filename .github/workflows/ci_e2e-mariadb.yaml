@@ -77,6 +77,10 @@ jobs:
                 if: ${{ matrix.doctrine_bundle != '' && matrix.doctrine_bundle != null }}
                 run: composer require --no-update --no-scripts --no-interaction "doctrine/doctrine-bundle:${{ matrix.doctrine_bundle }}"
 
+            -   name: Require DBAL 3.x for DoctrineBundle 2.x
+                if: ${{ matrix.doctrine_bundle == '^2.0' }}
+                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:^3.9"
+
             -   name: Prepare manifest.json files
                 run: |
                     mkdir -p public/build/admin
@@ -181,6 +185,10 @@ jobs:
             -   name: Require Doctrine Bundle
                 if: ${{ matrix.doctrine_bundle != '' && matrix.doctrine_bundle != null }}
                 run: composer require --no-update --no-scripts --no-interaction "doctrine/doctrine-bundle:${{ matrix.doctrine_bundle }}"
+
+            -   name: Require DBAL 3.x for DoctrineBundle 2.x
+                if: ${{ matrix.doctrine_bundle == '^2.0' }}
+                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:^3.9"
 
             -   name: Prepare manifest.json files
                 run: |
