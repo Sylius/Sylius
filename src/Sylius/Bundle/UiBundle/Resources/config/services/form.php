@@ -18,6 +18,5 @@ use Sylius\Bundle\UiBundle\Form\Type\SecurityLoginType;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.form.type.security_login', SecurityLoginType::class)
-        ->tag('form.type');
+    $services->set('sylius.form.type.security_login', SecurityLoginType::class)->tag('form.type');
 };

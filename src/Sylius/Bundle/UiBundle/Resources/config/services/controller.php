@@ -18,15 +18,16 @@ use Sylius\Bundle\UiBundle\Controller\SecurityController;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius.controller.security', SecurityController::class)
+    $services
+        ->set('sylius.controller.security', SecurityController::class)
         ->args([
             service('security.authentication_utils'),
             service('form.factory'),
             service('twig'),
             service('security.authorization_checker'),
             service('router'),
-        ]);
+        ])
+    ;
 };
