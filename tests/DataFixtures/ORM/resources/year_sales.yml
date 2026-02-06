@@ -21,7 +21,7 @@ Sylius\Component\Core\Model\ProductVariant:
         currentLocale: "en_US"
         translations:
             en_US: "@sw_mug_translation"
-        updatedAt: "<(new \\DateTime('2015-10-10'))>"
+        updatedAt: "<(new \\DateTimeImmutable('2015-10-10'))>"
         channelPricings:
             CHANNEL: "@sw_mug_channel_pricing"
             EXPENSIVE_CHANNEL: "@sw_mug_expensive_channel_pricing"
@@ -31,7 +31,7 @@ Sylius\Component\Core\Model\ProductVariant:
         currentLocale: "en_US"
         translations:
             en_US: "@hard_available_mug_translation"
-        updatedAt: "<(new \\DateTime('2015-10-05'))>"
+        updatedAt: "<(new \\DateTimeImmutable('2015-10-05'))>"
         channelPricings:
             CHANNEL: "@hard_available_mug_channel_pricing"
 
@@ -65,7 +65,7 @@ Sylius\Component\Core\Model\Order:
         state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('2019-12-27 00:00:01'))>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable('2019-12-27 00:00:01'))>"
     order_002:
         channel: "@channel"
         currencyCode: USD
@@ -74,7 +74,7 @@ Sylius\Component\Core\Model\Order:
         state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('2020-01-15 06:00:01'))>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable('2020-01-15 06:00:01'))>"
     order_003:
         channel: "@channel"
         currencyCode: USD
@@ -83,7 +83,7 @@ Sylius\Component\Core\Model\Order:
         state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('2020-01-15 15:00:01'))>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable('2020-01-15 15:00:01'))>"
     order_004:
         channel: "@channel"
         currencyCode: USD
@@ -92,7 +92,7 @@ Sylius\Component\Core\Model\Order:
         state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('2020-01-18 06:00:01'))>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable('2020-01-18 06:00:01'))>"
     order_005:
         channel: "@channel"
         currencyCode: USD
@@ -101,7 +101,7 @@ Sylius\Component\Core\Model\Order:
         state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('2020-02-18 08:00:01'))>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable('2020-02-18 08:00:01'))>"
     order_006:
         channel: "@channel"
         currencyCode: USD
@@ -110,7 +110,7 @@ Sylius\Component\Core\Model\Order:
         state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('2020-02-18 09:30:01'))>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable('2020-02-18 09:30:01'))>"
     expensive_order_001:
         channel: "@expensive_channel"
         currencyCode: USD
@@ -119,7 +119,7 @@ Sylius\Component\Core\Model\Order:
         state: cart
         checkoutState: completed
         paymentState: paid
-        checkoutCompletedAt: "<(new \\DateTime('2019-12-29 09:30:01'))>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable('2019-12-29 09:30:01'))>"
     expensive_order_002:
         channel: "@expensive_channel"
         currencyCode: USD
@@ -128,7 +128,7 @@ Sylius\Component\Core\Model\Order:
         state: cart
         checkoutState: completed
         paymentState: new
-        checkoutCompletedAt: "<(new \\DateTime('2020-01-18 09:30:01'))>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable('2020-01-18 09:30:01'))>"
 
 Sylius\Component\Core\Model\OrderItem:
     sw_mug_item_1:
@@ -216,4 +216,4 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Queen"
         email: "oliver.queen@star-city.com"
         emailCanonical: "oliver.queen@star-city.com"
-        birthday: <(new \DateTime())>
+        birthday: <(new \DateTimeImmutable())>

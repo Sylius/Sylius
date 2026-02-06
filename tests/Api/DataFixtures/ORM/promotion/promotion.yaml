@@ -28,7 +28,7 @@ Sylius\Component\Core\Model\Promotion:
         exclusive: false
         appliesToDiscounted: true
         couponBased: false
-        archivedAt: <dateTimeBetween('-1 month', 'now')>
+        archivedAt: "<(new \\DateTimeImmutable('-1 week'))>"
 
 Sylius\Component\Promotion\Model\PromotionTranslation:
     promotion_50_off_en:
@@ -59,7 +59,7 @@ Sylius\Component\Core\Model\PromotionCoupon:
         perCustomerUsageLimit: null
         reusableFromCancelledOrders: false
         promotion: '@promotion_1_off'
-        expiresAt: <dateTimeBetween('now', '+20 days')>
+        expiresAt: "<(new \\DateTimeImmutable('+20 days'))>"
 
 Sylius\Component\Promotion\Model\PromotionAction:
     10_percent_order_discount:

@@ -5,7 +5,7 @@ Sylius\Component\Core\Model\Order:
         localeCode: "en_US"
         state: "fulfilled"
         checkoutState: "completed"
-        checkoutCompletedAt: "<(new \\DateTime())>"
+        checkoutCompletedAt: "<(new \\DateTimeImmutable())>"
         paymentState: "paid"
         shippingState: "ready"
         tokenValue: "token"

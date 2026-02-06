@@ -4,4 +4,4 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Doe"
         email: "<current()>\\@doe.com"
         emailCanonical: "<current()>\\@doe.com"
-        birthday: "<(new \\DateTime())>"
+        birthday: "<(new \\DateTimeImmutable())>"
