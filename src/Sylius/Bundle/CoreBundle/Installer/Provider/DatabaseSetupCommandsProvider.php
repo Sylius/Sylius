@@ -119,14 +119,12 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
         return $this->schemaManager;
     }
 
+    /** Compatibility layer for DBAL 3.x (SqlitePlatform) and 4.x (SQLitePlatform) */
     private function isSQLite(): bool
     {
         $platform = $this->entityManager->getConnection()->getDatabasePlatform();
+        $platformClass = get_class($platform);
 
-        if (class_exists(\Doctrine\DBAL\Platforms\SqlitePlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\SqlitePlatform::class)) {
-            return true;
-        }
-
-        return false;
+        return str_contains($platformClass, 'SqlitePlatform') || str_contains($platformClass, 'SQLitePlatform');
     }
 }
