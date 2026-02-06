@@ -238,8 +238,7 @@ class User implements UserInterface, \Stringable
             return false;
         }
 
-        $threshold = new \DateTimeImmutable();
-        $threshold->sub($ttl);
+        $threshold = (new \DateTimeImmutable())->sub($ttl);
 
         return $threshold <= $this->passwordRequestedAt;
     }
