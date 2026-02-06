@@ -1,29 +1,53 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider as AdjustmentCollectionProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\Channel\CollectionProvider as ChannelCollectionProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\OrderItem\Adjustment\CollectionProvider as OrderItemAdjustmentCollectionProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Payment\PaymentMethod\CollectionProvider as PaymentMethodCollectionProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Shipment\ShippingMethod\CollectionProvider as ShippingMethodCollectionProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\ItemProvider as PaymentItemProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\PaymentRequest\ItemProvider as PaymentRequestItemProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\Product\ProductAttributeValue\CollectionProvider as ProductAttributeValueCollectionProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\Shipment\ItemProvider as ShipmentItemProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\TaxonTree\AbstractTaxonTreeProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\TaxonTree\TaxonTreeBranchProvider;
+use Sylius\Bundle\ApiBundle\StateProvider\Shop\TaxonTree\TaxonTreePathProvider;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_api.state_provider.shop.order.adjustment.collection', 'Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider')
+    $services->set('sylius_api.state_provider.shop.order.adjustment.collection', AdjustmentCollectionProvider::class)
         ->args([
             service('sylius.repository.order'),
             'tokenValue',
         ])
         ->tag('api_platform.state_provider', ['priority' => 10]);
 
-    $services->set('sylius_api.state_provider.shop.order.order_item.adjustment.collection', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\OrderItem\Adjustment\CollectionProvider')
+    $services->set('sylius_api.state_provider.shop.order.order_item.adjustment.collection', OrderItemAdjustmentCollectionProvider::class)
         ->args([
             service('sylius.repository.order_item'),
             service('sylius.section_resolver.uri_based'),
         ])
         ->tag('api_platform.state_provider', ['priority' => 10]);
 
-    $services->set('sylius_api.state_provider.shop.channel.collection', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\Channel\CollectionProvider')
+    $services->set('sylius_api.state_provider.shop.channel.collection', ChannelCollectionProvider::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.state_provider', ['priority' => 10]);
 
-    $services->set('sylius_api.state_provider.shop.product.product_attribute_value.collection', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\Product\ProductAttributeValue\CollectionProvider')
+    $services->set('sylius_api.state_provider.shop.product.product_attribute_value.collection', ProductAttributeValueCollectionProvider::class)
         ->args([
             tagged_iterator('api_platform.doctrine.orm.query_extension.collection'),
             service('sylius.section_resolver.uri_based'),
@@ -34,7 +58,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('api_platform.state_provider', ['priority' => 10]);
 
-    $services->set('sylius_api.state_provider.shop.order.shipment.shipping_method.collection', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Shipment\ShippingMethod\CollectionProvider')
+    $services->set('sylius_api.state_provider.shop.order.shipment.shipping_method.collection', ShippingMethodCollectionProvider::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius.repository.shipment'),
@@ -42,7 +66,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('api_platform.state_provider');
 
-    $services->set('sylius_api.state_provider.shop.order.payment.payment_method.collection', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Payment\PaymentMethod\CollectionProvider')
+    $services->set('sylius_api.state_provider.shop.order.payment.payment_method.collection', PaymentMethodCollectionProvider::class)
         ->args([
             service('sylius.repository.payment'),
             service('sylius.repository.order'),
@@ -51,7 +75,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('api_platform.state_provider');
 
-    $services->set('sylius_api.state_provider.shop.shipment.item', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\Shipment\ItemProvider')
+    $services->set('sylius_api.state_provider.shop.shipment.item', ShipmentItemProvider::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius_api.context.user.token_based'),
@@ -59,7 +83,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('api_platform.state_provider', ['priority' => 10]);
 
-    $services->set('sylius_api.state_provider.shop.payment.item', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\ItemProvider')
+    $services->set('sylius_api.state_provider.shop.payment.item', PaymentItemProvider::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius_api.context.user.token_based'),
@@ -67,7 +91,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('api_platform.state_provider', ['priority' => 10]);
 
-    $services->set('sylius_api.state_provider.shop.payment.payment_request.item', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\PaymentRequest\ItemProvider')
+    $services->set('sylius_api.state_provider.shop.payment.payment_request.item', PaymentRequestItemProvider::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius.repository.payment_request'),
@@ -75,18 +99,18 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('api_platform.state_provider', ['priority' => 10]);
 
-    $services->set('sylius_api.state_provider.shop.taxon_tree.abstract', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\TaxonTree\AbstractTaxonTreeProvider')
+    $services->set('sylius_api.state_provider.shop.taxon_tree.abstract', AbstractTaxonTreeProvider::class)
         ->abstract()
         ->args([
             service('sylius.provider.taxon_tree'),
             service('sylius.section_resolver.uri_based'),
         ]);
 
-    $services->set('sylius_api.state_provider.shop.taxon_tree.branch', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\TaxonTree\TaxonTreeBranchProvider')
+    $services->set('sylius_api.state_provider.shop.taxon_tree.branch', TaxonTreeBranchProvider::class)
         ->parent('sylius_api.state_provider.shop.taxon_tree.abstract')
         ->tag('api_platform.state_provider', ['priority' => 10]);
 
-    $services->set('sylius_api.state_provider.shop.taxon_tree.path', 'Sylius\Bundle\ApiBundle\StateProvider\Shop\TaxonTree\TaxonTreePathProvider')
+    $services->set('sylius_api.state_provider.shop.taxon_tree.path', TaxonTreePathProvider::class)
         ->parent('sylius_api.state_provider.shop.taxon_tree.abstract')
         ->tag('api_platform.state_provider', ['priority' => 10]);
 };

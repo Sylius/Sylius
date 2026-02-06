@@ -1,11 +1,52 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangePaymentMethodHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\RegisterShopUserHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestShopUserVerificationHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\SendShopUserVerificationEmailHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyShopUserHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Cart\BlameCartHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Cart\InformAboutCartRecalculationHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChoosePaymentMethodHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChooseShippingMethodHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\CompleteOrderHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ShipShipmentHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Customer\RemoveShopUserHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Payment\UpdatePaymentRequestHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\Promotion\GeneratePromotionCouponHandler;
+use Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_api.command_handler.account.register_shop_user', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\RegisterShopUserHandler')
+    $services->set('sylius_api.command_handler.account.register_shop_user', RegisterShopUserHandler::class)
         ->args([
             service('sylius.factory.shop_user'),
             service('sylius.manager.shop_user'),
@@ -16,7 +57,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.cart.pickup_cart', 'Sylius\Bundle\ApiBundle\CommandHandler\Cart\PickupCartHandler')
+    $services->set('sylius_api.command_handler.cart.pickup_cart', PickupCartHandler::class)
         ->args([
             service('sylius.factory.order'),
             service('sylius.repository.order'),
@@ -28,7 +69,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.cart.add_item_to_cart', 'Sylius\Bundle\ApiBundle\CommandHandler\Cart\AddItemToCartHandler')
+    $services->set('sylius_api.command_handler.cart.add_item_to_cart', AddItemToCartHandler::class)
         ->args([
             service('sylius.repository.order'),
             service('sylius.repository.product_variant'),
@@ -38,17 +79,17 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.cart.remove_item_from_cart', 'Sylius\Bundle\ApiBundle\CommandHandler\Cart\RemoveItemFromCartHandler')
+    $services->set('sylius_api.command_handler.cart.remove_item_from_cart', RemoveItemFromCartHandler::class)
         ->args([
             service('sylius.repository.order_item'),
             service('sylius.modifier.order'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.cart.inform_about_cart_recalculation', 'Sylius\Bundle\ApiBundle\CommandHandler\Cart\InformAboutCartRecalculationHandler')
+    $services->set('sylius_api.command_handler.cart.inform_about_cart_recalculation', InformAboutCartRecalculationHandler::class)
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.checkout.update_cart', 'Sylius\Bundle\ApiBundle\CommandHandler\Checkout\UpdateCartHandler')
+    $services->set('sylius_api.command_handler.checkout.update_cart', UpdateCartHandler::class)
         ->args([
             service('sylius.repository.order'),
             service('sylius_api.modifier.order_address'),
@@ -57,7 +98,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.checkout.choose_shipping_method', 'Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChooseShippingMethodHandler')
+    $services->set('sylius_api.command_handler.checkout.choose_shipping_method', ChooseShippingMethodHandler::class)
         ->args([
             service('sylius.repository.order'),
             service('sylius.repository.shipping_method'),
@@ -67,7 +108,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.checkout.choose_payment_method', 'Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ChoosePaymentMethodHandler')
+    $services->set('sylius_api.command_handler.checkout.choose_payment_method', ChoosePaymentMethodHandler::class)
         ->args([
             service('sylius.repository.order'),
             service('sylius.repository.payment_method'),
@@ -77,7 +118,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.checkout.complete_order', 'Sylius\Bundle\ApiBundle\CommandHandler\Checkout\CompleteOrderHandler')
+    $services->set('sylius_api.command_handler.checkout.complete_order', CompleteOrderHandler::class)
         ->args([
             service('sylius.repository.order'),
             service('sylius_abstraction.state_machine'),
@@ -87,7 +128,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.checkout.ship_shipment', 'Sylius\Bundle\ApiBundle\CommandHandler\Checkout\ShipShipmentHandler')
+    $services->set('sylius_api.command_handler.checkout.ship_shipment', ShipShipmentHandler::class)
         ->args([
             service('sylius.repository.shipment'),
             service('sylius_abstraction.state_machine'),
@@ -95,14 +136,14 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.change_payment_method', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangePaymentMethodHandler')
+    $services->set('sylius_api.command_handler.account.change_payment_method', ChangePaymentMethodHandler::class)
         ->args([
             service('sylius_api.changer.payment_method'),
             service('sylius.repository.order'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.cart.change_item_quantity_in_cart', 'Sylius\Bundle\ApiBundle\CommandHandler\Cart\ChangeItemQuantityInCartHandler')
+    $services->set('sylius_api.command_handler.cart.change_item_quantity_in_cart', ChangeItemQuantityInCartHandler::class)
         ->args([
             service('sylius.repository.order_item'),
             service('sylius.modifier.order_item_quantity'),
@@ -110,7 +151,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.catalog.add_product_review', 'Sylius\Bundle\ApiBundle\CommandHandler\Catalog\AddProductReviewHandler')
+    $services->set('sylius_api.command_handler.catalog.add_product_review', AddProductReviewHandler::class)
         ->args([
             service('sylius.factory.product_review'),
             service('sylius.repository.product_review'),
@@ -119,7 +160,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.cart.blame_cart', 'Sylius\Bundle\ApiBundle\CommandHandler\Cart\BlameCartHandler')
+    $services->set('sylius_api.command_handler.cart.blame_cart', BlameCartHandler::class)
         ->args([
             service('sylius.repository.shop_user'),
             service('sylius.repository.order'),
@@ -127,14 +168,14 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.change_shop_user_password', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\ChangeShopUserPasswordHandler')
+    $services->set('sylius_api.command_handler.account.change_shop_user_password', ChangeShopUserPasswordHandler::class)
         ->args([
             service('sylius.security.password_updater'),
             service('sylius.repository.shop_user'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.request_reset_password_token', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestResetPasswordTokenHandler')
+    $services->set('sylius_api.command_handler.account.request_reset_password_token', RequestResetPasswordTokenHandler::class)
         ->args([
             service('sylius.repository.shop_user'),
             service('messenger.default_bus'),
@@ -143,7 +184,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.request_shop_user_verification', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\RequestShopUserVerificationHandler')
+    $services->set('sylius_api.command_handler.account.request_shop_user_verification', RequestShopUserVerificationHandler::class)
         ->args([
             service('sylius.repository.shop_user'),
             service('sylius.shop_user.token_generator.email_verification'),
@@ -151,11 +192,11 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.reset_password', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\ResetPasswordHandler')
+    $services->set('sylius_api.command_handler.account.reset_password', ResetPasswordHandler::class)
         ->args([service('sylius.resetter.user_password.shop')])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.send_account_registration_email', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\SendAccountRegistrationEmailHandler')
+    $services->set('sylius_api.command_handler.account.send_account_registration_email', SendAccountRegistrationEmailHandler::class)
         ->args([
             service('sylius.repository.shop_user'),
             service('sylius.repository.channel'),
@@ -163,7 +204,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.send_shop_user_verification_email', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\SendShopUserVerificationEmailHandler')
+    $services->set('sylius_api.command_handler.account.send_shop_user_verification_email', SendShopUserVerificationEmailHandler::class)
         ->args([
             service('sylius.repository.shop_user'),
             service('sylius.repository.channel'),
@@ -171,14 +212,14 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.checkout.send_order_confirmation', 'Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendOrderConfirmationHandler')
+    $services->set('sylius_api.command_handler.checkout.send_order_confirmation', SendOrderConfirmationHandler::class)
         ->args([
             service('sylius.repository.order'),
             service('sylius.mailer.order_email_manager'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.send_reset_password_email', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\SendResetPasswordEmailHandler')
+    $services->set('sylius_api.command_handler.account.send_reset_password_email', SendResetPasswordEmailHandler::class)
         ->args([
             service('sylius.repository.channel'),
             service('sylius.repository.shop_user'),
@@ -186,14 +227,14 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.checkout.send_shipment_confirmation_email', 'Sylius\Bundle\ApiBundle\CommandHandler\Checkout\SendShipmentConfirmationEmailHandler')
+    $services->set('sylius_api.command_handler.checkout.send_shipment_confirmation_email', SendShipmentConfirmationEmailHandler::class)
         ->args([
             service('sylius.repository.shipment'),
             service('sylius.mailer.shipment_email_manager'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.account.verify_shop_user', 'Sylius\Bundle\ApiBundle\CommandHandler\Account\VerifyShopUserHandler')
+    $services->set('sylius_api.command_handler.account.verify_shop_user', VerifyShopUserHandler::class)
         ->args([
             service('sylius.repository.shop_user'),
             service('clock'),
@@ -201,25 +242,25 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.send_contract_request', 'Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler')
+    $services->set('sylius_api.command_handler.send_contract_request', SendContactRequestHandler::class)
         ->args([
             service('sylius.repository.channel'),
             service('sylius.mailer.contact_email_manager'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.promotion.generate_promotion_coupon', 'Sylius\Bundle\ApiBundle\CommandHandler\Promotion\GeneratePromotionCouponHandler')
+    $services->set('sylius_api.command_handler.promotion.generate_promotion_coupon', GeneratePromotionCouponHandler::class)
         ->args([
             service('sylius.repository.promotion'),
             service('sylius.generator.promotion_coupon'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.customer.remove_shop_user', 'Sylius\Bundle\ApiBundle\CommandHandler\Customer\RemoveShopUserHandler')
+    $services->set('sylius_api.command_handler.customer.remove_shop_user', RemoveShopUserHandler::class)
         ->args([service('sylius.repository.shop_user')])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.payment.add_payment_request', 'Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler')
+    $services->set('sylius_api.command_handler.payment.add_payment_request', AddPaymentRequestHandler::class)
         ->args([
             service('sylius.repository.payment_method'),
             service('sylius.repository.payment'),
@@ -230,7 +271,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 
-    $services->set('sylius_api.command_handler.payment.update_payment_request', 'Sylius\Bundle\ApiBundle\CommandHandler\Payment\UpdatePaymentRequestHandler')
+    $services->set('sylius_api.command_handler.payment.update_payment_request', UpdatePaymentRequestHandler::class)
         ->args([service('sylius.repository.payment_request')])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
 };

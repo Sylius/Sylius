@@ -1,14 +1,34 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\OwnerBasedProductAssociationTypesFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductBasedProductOptionFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductBasedProductOptionValueFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductByAssociationFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductPriceOrderFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductVariantOptionValueFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TaxonFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->defaults()
         ->public();
 
-    $services->set('sylius_api.taxon_search_filter.shop.product', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TaxonFilter')
+    $services->set('sylius_api.taxon_search_filter.shop.product', TaxonFilter::class)
         ->args([
             service('doctrine'),
             service('api_platform.symfony.iri_converter'),
@@ -30,7 +50,7 @@ return static function(ContainerConfigurator $container) {
         ->args([['type' => 'exact']])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.search_filter.shop.product_association_type.owner_based', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\OwnerBasedProductAssociationTypesFilter')
+    $services->set('sylius_api.search_filter.shop.product_association_type.owner_based', OwnerBasedProductAssociationTypesFilter::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             '%sylius.model.product_association.class%',
@@ -38,7 +58,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.search_filter.shop.products_by_association', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductByAssociationFilter')
+    $services->set('sylius_api.search_filter.shop.products_by_association', ProductByAssociationFilter::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             '%sylius.model.product_association.class%',
@@ -61,32 +81,32 @@ return static function(ContainerConfigurator $container) {
         ->args([['reviewSubject' => 'exact']])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.name_with_locale_order_filter.shop.translatable', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter')
+    $services->set('sylius_api.name_with_locale_order_filter.shop.translatable', TranslationOrderNameAndLocaleFilter::class)
         ->args([service('doctrine')])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.option_value_search_filter.shop.product_variant', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductVariantOptionValueFilter')
+    $services->set('sylius_api.option_value_search_filter.shop.product_variant', ProductVariantOptionValueFilter::class)
         ->args([
             service('api_platform.symfony.iri_converter'),
             service('doctrine'),
         ])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.product_code_search_filter.shop.product_option', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductBasedProductOptionFilter')
+    $services->set('sylius_api.product_code_search_filter.shop.product_option', ProductBasedProductOptionFilter::class)
         ->args([
             '%sylius.model.product.class%',
             service('doctrine'),
         ])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.product_code_search_filter.shop.product_option_value', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductBasedProductOptionValueFilter')
+    $services->set('sylius_api.product_code_search_filter.shop.product_option_value', ProductBasedProductOptionValueFilter::class)
         ->args([
             '%sylius.model.product.class%',
             service('doctrine'),
         ])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.price_order_filter.shop.product', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductPriceOrderFilter')
+    $services->set('sylius_api.price_order_filter.shop.product', ProductPriceOrderFilter::class)
         ->args([service('doctrine')])
         ->tag('api_platform.filter');
 };

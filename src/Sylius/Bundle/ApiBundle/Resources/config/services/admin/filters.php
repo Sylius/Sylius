@@ -1,8 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ChannelsAwareChannelFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ExchangeRateFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductVariantCatalogPromotionFilter;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->defaults()
@@ -148,15 +164,15 @@ return static function(ContainerConfigurator $container) {
         ->args([['translations.name' => 'partial', 'code' => 'partial']])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.currency_search_filter.admin.exchange_rate', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ExchangeRateFilter')
+    $services->set('sylius_api.currency_search_filter.admin.exchange_rate', ExchangeRateFilter::class)
         ->args([service('doctrine')])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.name_with_locale_order_filter.admin.translatable', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter')
+    $services->set('sylius_api.name_with_locale_order_filter.admin.translatable', TranslationOrderNameAndLocaleFilter::class)
         ->args([service('doctrine')])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.catalog_promotion_search_filter.admin.product_variant', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductVariantCatalogPromotionFilter')
+    $services->set('sylius_api.catalog_promotion_search_filter.admin.product_variant', ProductVariantCatalogPromotionFilter::class)
         ->args([
             service('api_platform.symfony.iri_converter'),
             service('doctrine'),
@@ -183,7 +199,7 @@ return static function(ContainerConfigurator $container) {
         ->args([['code' => '', 'name' => '', 'startDate' => '', 'endDate' => '', 'priority' => '']])
         ->tag('api_platform.filter');
 
-    $services->set('sylius_api.channel_search_filter.admin.channel_aware', 'Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ChannelsAwareChannelFilter')
+    $services->set('sylius_api.channel_search_filter.admin.channel_aware', ChannelsAwareChannelFilter::class)
         ->args([
             service('api_platform.symfony.iri_converter'),
             service('doctrine'),

@@ -1,11 +1,47 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\AddressDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ChannelDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ChannelPriceHistoryConfigDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandArgumentsDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CustomerDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\NumericToStringDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ProductAttributeValueDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ProductDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ProductVariantChannelPricingsChannelCodeKeyDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\TranslatableDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\TranslatableLocaleKeyDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ZoneDenormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\CommandNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\DoctrineCollectionValuesNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\GeneratedPromotionCouponsNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductAttributeValueNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductOptionValueNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductVariantNormalizer;
+use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ShippingMethodNormalizer;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_api.denormalizer.address', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\AddressDenormalizer')
+    $services->set('sylius_api.denormalizer.address', AddressDenormalizer::class)
         ->args([
             service('serializer.normalizer.object'),
             '%sylius.model.address.class%',
@@ -13,50 +49,50 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.command_arguments', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandArgumentsDenormalizer')
+    $services->set('sylius_api.denormalizer.command_arguments', CommandArgumentsDenormalizer::class)
         ->args([
             service('sylius_api.denormalizer.command'),
             service('sylius_api.converter.iri_to_identifier'),
         ])
         ->tag('serializer.normalizer', ['priority' => 128]);
 
-    $services->set('sylius_api.denormalizer.command', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandDenormalizer')
+    $services->set('sylius_api.denormalizer.command', CommandDenormalizer::class)
         ->args([
             service('api_platform.serializer.normalizer.item'),
             service('serializer.name_converter.metadata_aware'),
         ])
         ->tag('serializer.normalizer');
 
-    $services->set('sylius_api.normalizer.product', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductNormalizer')
+    $services->set('sylius_api.normalizer.product', ProductNormalizer::class)
         ->args([
             service('sylius.resolver.product_variant'),
             service('api_platform.symfony.iri_converter'),
             service('sylius.section_resolver.uri_based'),
-            ['' => 'sylius:shop:product:index', '' => 'sylius:shop:product:show'],
+            ['sylius:shop:product:index', 'sylius:shop:product:show'],
             service('serializer.normalizer.object'),
-            ['' => 'sylius:shop:product:index:default_variant', '' => 'sylius:shop:product:show:default_variant'],
+            ['sylius:shop:product:index:default_variant', 'sylius:shop:product:show:default_variant'],
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.product_attribute_value', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ProductAttributeValueDenormalizer')
+    $services->set('sylius_api.denormalizer.product_attribute_value', ProductAttributeValueDenormalizer::class)
         ->args([service('api_platform.symfony.iri_converter')])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.product', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ProductDenormalizer')
+    $services->set('sylius_api.denormalizer.product', ProductDenormalizer::class)
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.normalizer.product_attribute_value', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductAttributeValueNormalizer')
+    $services->set('sylius_api.normalizer.product_attribute_value', ProductAttributeValueNormalizer::class)
         ->args([
             service('sylius.provider.locale.channel_based'),
             '%locale%',
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.normalizer.product_option_value', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductOptionValueNormalizer')
+    $services->set('sylius_api.normalizer.product_option_value', ProductOptionValueNormalizer::class)
         ->args([service('sylius.translatable_entity_locale_assigner')])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.normalizer.image', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer')
+    $services->set('sylius_api.normalizer.image', ImageNormalizer::class)
         ->args([
             service('liip_imagine.cache.manager'),
             service('request_stack'),
@@ -64,91 +100,91 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.normalizer.command', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\CommandNormalizer')
+    $services->set('sylius_api.normalizer.command', CommandNormalizer::class)
         ->args([service('serializer.normalizer.object')])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.normalizer.product_variant', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductVariantNormalizer')
+    $services->set('sylius_api.normalizer.product_variant', ProductVariantNormalizer::class)
         ->args([
             service('sylius.calculator.product_variant_price'),
             service('sylius.checker.inventory.availability'),
             service('sylius.section_resolver.uri_based'),
             service('api_platform.symfony.iri_converter'),
-            ['' => 'sylius:shop:product_variant:index', '' => 'sylius:shop:product_variant:show', '' => 'sylius:shop:product:index', '' => 'sylius:shop:product:show'],
+            ['sylius:shop:product_variant:index', 'sylius:shop:product_variant:show', 'sylius:shop:product:index', 'sylius:shop:product:show'],
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.normalizer.shipping_method', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\ShippingMethodNormalizer')
+    $services->set('sylius_api.normalizer.shipping_method', ShippingMethodNormalizer::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
             service('sylius.repository.order'),
             service('sylius.repository.shipment'),
             service('sylius.registry.shipping_calculator'),
-            service('Symfony\Component\HttpFoundation\RequestStack'),
-            ['' => 'sylius:shop:shipping_method:index'],
+            service(RequestStack::class),
+            ['sylius:shop:shipping_method:index'],
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.normalizer.generated_promotion_coupons', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\GeneratedPromotionCouponsNormalizer')
+    $services->set('sylius_api.normalizer.generated_promotion_coupons', GeneratedPromotionCouponsNormalizer::class)
         ->args([
             service('sylius.section_resolver.uri_based'),
-            ['' => 'sylius:admin:promotion_coupon:index'],
+            ['sylius:admin:promotion_coupon:index'],
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.zone', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ZoneDenormalizer')
+    $services->set('sylius_api.denormalizer.zone', ZoneDenormalizer::class)
         ->args([
             service('serializer.normalizer.object'),
             service('sylius.section_resolver.uri_based'),
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.translatable', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\TranslatableDenormalizer')
+    $services->set('sylius_api.denormalizer.translatable', TranslatableDenormalizer::class)
         ->args([service('sylius.translation_locale_provider')])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.normalizer.date_time', 'Symfony\Component\Serializer\Normalizer\DateTimeNormalizer')
+    $services->set('sylius_api.normalizer.date_time', DateTimeNormalizer::class)
         ->args([['datetime_format' => 'Y-m-d H:i:s']])
         ->tag('serializer.normalizer');
 
-    $services->set('sylius_api.denormalizer.channel_price_history_config', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ChannelPriceHistoryConfigDenormalizer')
+    $services->set('sylius_api.denormalizer.channel_price_history_config', ChannelPriceHistoryConfigDenormalizer::class)
         ->args([
             service('api_platform.symfony.iri_converter'),
             service('sylius.factory.channel_price_history_config'),
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.channel', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ChannelDenormalizer')
+    $services->set('sylius_api.denormalizer.channel', ChannelDenormalizer::class)
         ->args([
             service('sylius.factory.channel_price_history_config'),
             service('sylius.factory.shop_billing_data'),
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.numeric_to_string.tax_rate', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\NumericToStringDenormalizer')
+    $services->set('sylius_api.denormalizer.numeric_to_string.tax_rate', NumericToStringDenormalizer::class)
         ->args([
             '%sylius.model.tax_rate.class%',
             'amount',
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.numeric_to_string.exchange_rate', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\NumericToStringDenormalizer')
+    $services->set('sylius_api.denormalizer.numeric_to_string.exchange_rate', NumericToStringDenormalizer::class)
         ->args([
             '%sylius.model.exchange_rate.class%',
             'ratio',
         ])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.customer', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CustomerDenormalizer')
+    $services->set('sylius_api.denormalizer.customer', CustomerDenormalizer::class)
         ->args([service('clock')])
         ->tag('serializer.normalizer', ['priority' => 64]);
 
-    $services->set('sylius_api.denormalizer.translatable_locale_key', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\TranslatableLocaleKeyDenormalizer')
+    $services->set('sylius_api.denormalizer.translatable_locale_key', TranslatableLocaleKeyDenormalizer::class)
         ->tag('serializer.normalizer', ['priority' => 96]);
 
-    $services->set('sylius_api.denormalizer.product_variant_channel_pricings_channel_code_key', 'Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ProductVariantChannelPricingsChannelCodeKeyDenormalizer')
+    $services->set('sylius_api.denormalizer.product_variant_channel_pricings_channel_code_key', ProductVariantChannelPricingsChannelCodeKeyDenormalizer::class)
         ->tag('serializer.normalizer', ['priority' => 96]);
 
-    $services->set('sylius_api.normalizer.doctrine_collection_values', 'Sylius\Bundle\ApiBundle\Serializer\Normalizer\DoctrineCollectionValuesNormalizer')
+    $services->set('sylius_api.normalizer.doctrine_collection_values', DoctrineCollectionValuesNormalizer::class)
         ->tag('serializer.normalizer', ['priority' => 64]);
 };
