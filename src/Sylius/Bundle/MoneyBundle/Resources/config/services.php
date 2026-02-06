@@ -21,14 +21,14 @@ use Sylius\Bundle\MoneyBundle\Twig\FormatMoneyExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.form.type.money', MoneyType::class)
-        ->tag('form.type');
+    $services->set('sylius.form.type.money', MoneyType::class)->tag('form.type');
 
     $services->set('sylius.formatter.money', MoneyFormatter::class);
-
     $services->alias(MoneyFormatterInterface::class, 'sylius.formatter.money');
 
-    $services->set('sylius.twig.extension.format_money', FormatMoneyExtension::class)
+    $services
+        ->set('sylius.twig.extension.format_money', FormatMoneyExtension::class)
         ->args([service('sylius.formatter.money')])
-        ->tag('twig.extension');
+        ->tag('twig.extension')
+    ;
 };

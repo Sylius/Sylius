@@ -18,8 +18,10 @@ use Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.twig.extension.convert_money', ConvertMoneyExtension::class)
-        ->private()
+    $services
+        ->set('sylius.twig.extension.convert_money', ConvertMoneyExtension::class)
         ->args([service('sylius.converter.currency')])
-        ->tag('twig.extension');
+        ->private()
+        ->tag('twig.extension')
+    ;
 };
