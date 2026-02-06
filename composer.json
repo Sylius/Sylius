@@ -201,7 +201,7 @@
         "friends-of-behat/symfony-extension": "^2.6.2",
         "friends-of-behat/variadic-extension": "^1.6",
         "hwi/oauth-bundle": "^2.2",
-        "lchrusciel/api-test-case": "^5.3",
+        "lchrusciel/api-test-case": "^5.3.5",
         "matthiasnoback/symfony-config-test": "^6.0",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "nyholm/psr7": "^1.8",
