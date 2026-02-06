@@ -120,8 +120,8 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setAllowedTypes('country', ['null', 'string', CountryInterface::class])
             ->setNormalizer('country', LazyOption::findOneBy($this->countryRepository, 'code'))
 
-            ->setDefault('complete_date', fn (Options $options): \DateTimeInterface => $this->faker->dateTimeBetween('-1 years'))
-            ->setAllowedTypes('complete_date', ['null', \DateTime::class])
+            ->setDefault('complete_date', fn (Options $options): \DateTimeInterface => \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-1 years')))
+            ->setAllowedTypes('complete_date', ['null', \DateTimeInterface::class])
 
             ->setDefault('fulfilled', false)
             ->setAllowedTypes('fulfilled', ['bool'])
