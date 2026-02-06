@@ -20,17 +20,22 @@ use Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius.validator.product_variant_combination', ProductVariantCombinationValidator::class)
+    $services
+        ->set('sylius.validator.product_variant_combination', ProductVariantCombinationValidator::class)
         ->args([service('sylius.checker.product_variants_parity')])
-        ->tag('validator.constraint_validator', ['alias' => 'sylius.validator.product_variant_combination']);
+        ->tag('validator.constraint_validator', ['alias' => 'sylius.validator.product_variant_combination'])
+    ;
 
-    $services->set('sylius.validator.product_variant_option_values_configuration', ProductVariantOptionValuesConfigurationValidator::class)
-        ->tag('validator.constraint_validator', ['alias' => 'sylius.validator.product_variant_option_values_configuration']);
+    $services
+        ->set('sylius.validator.product_variant_option_values_configuration', ProductVariantOptionValuesConfigurationValidator::class)
+        ->tag('validator.constraint_validator', ['alias' => 'sylius.validator.product_variant_option_values_configuration'])
+    ;
 
-    $services->set('sylius.validator.unique_simple_product_code', UniqueSimpleProductCodeValidator::class)
+    $services
+        ->set('sylius.validator.unique_simple_product_code', UniqueSimpleProductCodeValidator::class)
         ->args([service('sylius.repository.product_variant')])
-        ->tag('validator.constraint_validator', ['alias' => 'sylius.validator.unique_simple_product_code']);
+        ->tag('validator.constraint_validator', ['alias' => 'sylius.validator.unique_simple_product_code'])
+    ;
 };
