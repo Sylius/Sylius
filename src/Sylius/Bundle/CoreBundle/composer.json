@@ -73,7 +73,7 @@
         "phpstan/phpdoc-parser": ">= 2.0"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.0 || ^3.0",
+        "doctrine/doctrine-bundle": "^2.13 || ^3.0",
         "doctrine/orm": "^2.18 || ^3.5",
         "hwi/oauth-bundle": "^2.2",
         "matthiasnoback/symfony-config-test": "^6.0",
