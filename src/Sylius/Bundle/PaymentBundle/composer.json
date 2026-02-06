@@ -35,7 +35,7 @@
         "symfony/messenger": "^6.4 || ^7.4"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/doctrine-bundle": "^2.0 || ^3.0",
         "doctrine/orm": "^2.18 || ^3.5",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpunit/phpunit": "^11.5",
