@@ -43,8 +43,8 @@ Sylius\Component\Core\Model\OrderItem:
 Sylius\Component\Core\Model\OrderItemUnit:
     order_item_unit:
         __construct: ['@order_item']
-        createdAt: "<(new \\DateTime())>"
-        updatedAt: "<(new \\DateTime())>"
+        createdAt: "<(new \\DateTimeImmutable())>"
+        updatedAt: "<(new \\DateTimeImmutable())>"
     
 Sylius\Component\Core\Model\Adjustment:
     adjustment_1:
@@ -53,21 +53,21 @@ Sylius\Component\Core\Model\Adjustment:
         amount: 1000
         neutral: false
         adjustable: '@order_item'
-        createdAt: "<(new \\DateTime())>"
-        updatedAt: "<(new \\DateTime())>"
+        createdAt: "<(new \\DateTimeImmutable())>"
+        updatedAt: "<(new \\DateTimeImmutable())>"
     adjustment_2:
         type: order_promotion
         label: New Year
         amount: -500
         neutral: false
         adjustable: '@order_item_unit'
-        createdAt: "<(new \\DateTime())>"
-        updatedAt: "<(new \\DateTime())>"
+        createdAt: "<(new \\DateTimeImmutable())>"
+        updatedAt: "<(new \\DateTimeImmutable())>"
     adjustment_3:
         type: shipping
         label: UPS
         amount: 500
         neutral: false
         adjustable: '@order'
-        createdAt: "<(new \\DateTime())>"
-        updatedAt: "<(new \\DateTime())>"
+        createdAt: "<(new \\DateTimeImmutable())>"
+        updatedAt: "<(new \\DateTimeImmutable())>"
