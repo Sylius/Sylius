@@ -1,15 +1,28 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\CoreBundle\Fixture\Listener\CatalogPromotionExecutorListener;
+use Sylius\Bundle\CoreBundle\Fixture\Listener\ImagesPurgerListener;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
-    $parameters = $container->parameters();
 
     $services->defaults()
         ->public();
 
-    $services->set('sylius.fixture.listener.catalog_promotion_executor', 'Sylius\Bundle\CoreBundle\Fixture\Listener\CatalogPromotionExecutorListener')
+    $services->set('sylius.fixture.listener.catalog_promotion_executor', CatalogPromotionExecutorListener::class)
         ->private()
         ->args([
             service('sylius.processor.catalog_promotion.all_product_variant'),
@@ -19,7 +32,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('sylius_fixtures.listener');
 
-    $services->set('sylius.fixture.listener.images_purger', 'Sylius\Bundle\CoreBundle\Fixture\Listener\ImagesPurgerListener')
+    $services->set('sylius.fixture.listener.images_purger', ImagesPurgerListener::class)
         ->private()
         ->args([
             service('filesystem'),

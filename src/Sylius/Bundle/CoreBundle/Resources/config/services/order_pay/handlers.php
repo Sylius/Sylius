@@ -1,13 +1,26 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
-    $services = $container->services();
-    $parameters = $container->parameters();
+use Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandler;
+use Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface;
 
-    $services->set('sylius.handler.order_pay.payment_state_flash', 'Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandler')
+return static function (ContainerConfigurator $container) {
+    $services = $container->services();
+
+    $services->set('sylius.handler.order_pay.payment_state_flash', PaymentStateFlashHandler::class)
         ->abstract();
 
-    $services->alias('Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface', 'sylius.handler.order_pay.payment_state_flash');
+    $services->alias(PaymentStateFlashHandlerInterface::class, 'sylius.handler.order_pay.payment_state_flash');
 };

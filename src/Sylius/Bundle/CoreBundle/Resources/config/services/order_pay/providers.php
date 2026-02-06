@@ -1,24 +1,40 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProvider;
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider;
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider;
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider;
+use Sylius\Bundle\CoreBundle\OrderPay\Provider\UrlProvider;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
-    $parameters = $container->parameters();
 
-    $services->set('sylius.provider.order_pay.payment_request_pay_url', 'Sylius\Bundle\CoreBundle\OrderPay\Provider\UrlProvider')
+    $services->set('sylius.provider.order_pay.payment_request_pay_url', UrlProvider::class)
         ->abstract()
         ->args([service('sylius.processor.order_pay.route_parameters')]);
 
-    $services->set('sylius.provider.order_pay.after_pay_url', 'Sylius\Bundle\CoreBundle\OrderPay\Provider\UrlProvider')
+    $services->set('sylius.provider.order_pay.after_pay_url', UrlProvider::class)
         ->abstract()
         ->args([service('sylius.processor.order_pay.route_parameters')]);
 
-    $services->set('sylius.provider.order_pay.final_url', 'Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProvider')
+    $services->set('sylius.provider.order_pay.final_url', FinalUrlProvider::class)
         ->abstract()
         ->args([service('sylius.processor.order_pay.route_parameters')]);
 
-    $services->set('sylius.provider.order_pay.pay_response.payment_request', 'Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestPayResponseProvider')
+    $services->set('sylius.provider.order_pay.pay_response.payment_request', PaymentRequestPayResponseProvider::class)
         ->abstract()
         ->args([
             service('sylius.factory.payment_request'),
@@ -28,10 +44,10 @@ return static function(ContainerConfigurator $container) {
             service('sylius.checker.finalized_payment_request'),
         ]);
 
-    $services->set('sylius.provider.order_pay.pay_response.no_payment', 'Sylius\Bundle\CoreBundle\OrderPay\Provider\NoPaymentPayResponseProvider')
+    $services->set('sylius.provider.order_pay.pay_response.no_payment', NoPaymentPayResponseProvider::class)
         ->abstract();
 
-    $services->set('sylius.provider.order_pay.after_pay_response.payment_request', 'Sylius\Bundle\CoreBundle\OrderPay\Provider\PaymentRequestAfterPayResponseProvider')
+    $services->set('sylius.provider.order_pay.after_pay_response.payment_request', PaymentRequestAfterPayResponseProvider::class)
         ->abstract()
         ->args([
             service('sylius.factory.payment_request'),

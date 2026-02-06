@@ -1,26 +1,42 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
-    $services = $container->services();
-    $parameters = $container->parameters();
+use Sylius\Bundle\CoreBundle\Twig\BundleLoadedCheckerExtension;
+use Sylius\Bundle\CoreBundle\Twig\ChannelUrlExtension;
+use Sylius\Bundle\CoreBundle\Twig\PriceExtension;
+use Sylius\Bundle\CoreBundle\Twig\ProductTranslationExtension;
+use Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension;
 
-    $services->set('sylius.twig.extension.sylius_bundle_loaded_checker', 'Sylius\Bundle\CoreBundle\Twig\BundleLoadedCheckerExtension')
+return static function (ContainerConfigurator $container) {
+    $services = $container->services();
+
+    $services->set('sylius.twig.extension.sylius_bundle_loaded_checker', BundleLoadedCheckerExtension::class)
         ->args(['%kernel.bundles%'])
         ->tag('twig.extension');
 
-    $services->set('sylius.twig.extension.price', 'Sylius\Bundle\CoreBundle\Twig\PriceExtension')
+    $services->set('sylius.twig.extension.price', PriceExtension::class)
         ->private()
         ->args([service('sylius.calculator.product_variant_price')])
         ->tag('twig.extension');
 
-    $services->set('sylius.twig.extension.variant_resolver', 'Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension')
+    $services->set('sylius.twig.extension.variant_resolver', VariantResolverExtension::class)
         ->private()
         ->args([service('sylius.resolver.product_variant')])
         ->tag('twig.extension');
 
-    $services->set('sylius.twig.extension.channel_url', 'Sylius\Bundle\CoreBundle\Twig\ChannelUrlExtension')
+    $services->set('sylius.twig.extension.channel_url', ChannelUrlExtension::class)
         ->private()
         ->args([
             service('sylius.context.channel'),
@@ -29,7 +45,7 @@ return static function(ContainerConfigurator $container) {
         ])
         ->tag('twig.extension');
 
-    $services->set('sylius.twig.extension.product_translation', 'Sylius\Bundle\CoreBundle\Twig\ProductTranslationExtension')
+    $services->set('sylius.twig.extension.product_translation', ProductTranslationExtension::class)
         ->private()
         ->args([service('sylius.provider.channel_based_product_translation')])
         ->tag('twig.extension');

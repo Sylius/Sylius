@@ -1,12 +1,25 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator;
+use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
-    $parameters = $container->parameters();
 
-    $services->set('sylius.calculator.delay_stamp', 'Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator');
+    $services->set('sylius.calculator.delay_stamp', DelayStampCalculator::class);
 
-    $services->alias('Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface', 'sylius.calculator.delay_stamp');
+    $services->alias(DelayStampCalculatorInterface::class, 'sylius.calculator.delay_stamp');
 };

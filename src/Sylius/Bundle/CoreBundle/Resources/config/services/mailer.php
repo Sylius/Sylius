@@ -1,12 +1,36 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
-    $services = $container->services();
-    $parameters = $container->parameters();
+use Sylius\Bundle\CoreBundle\EventListener\MailerListener;
+use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManager;
+use Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManager;
+use Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager;
+use Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager;
+use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager;
+use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
+use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager;
+use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 
-    $services->set('sylius.listener.user_mailer', 'Sylius\Bundle\CoreBundle\EventListener\MailerListener')
+return static function (ContainerConfigurator $container) {
+    $services = $container->services();
+
+    $services->set('sylius.listener.user_mailer', MailerListener::class)
         ->args([
             service('sylius.email_sender'),
             service('sylius.context.channel'),
@@ -17,37 +41,37 @@ return static function(ContainerConfigurator $container) {
         ->tag('kernel.event_listener', ['event' => 'sylius.user.post_email_verification', 'method' => 'sendVerificationSuccessEmail'])
         ->tag('kernel.event_listener', ['event' => 'sylius.customer.post_register', 'method' => 'sendUserRegistrationEmail']);
 
-    $services->set('sylius.mailer.contact_email_manager', 'Sylius\Bundle\CoreBundle\Mailer\ContactEmailManager')
+    $services->set('sylius.mailer.contact_email_manager', ContactEmailManager::class)
         ->args([service('sylius.email_sender')]);
 
-    $services->alias('Sylius\Bundle\CoreBundle\Mailer\ContactEmailManagerInterface', 'sylius.mailer.contact_email_manager');
+    $services->alias(ContactEmailManagerInterface::class, 'sylius.mailer.contact_email_manager');
 
-    $services->set('sylius.mailer.order_email_manager', 'Sylius\Bundle\CoreBundle\Mailer\OrderEmailManager')
+    $services->set('sylius.mailer.order_email_manager', OrderEmailManager::class)
         ->args([service('sylius.email_sender')]);
 
-    $services->alias('Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface', 'sylius.mailer.order_email_manager');
+    $services->alias(OrderEmailManagerInterface::class, 'sylius.mailer.order_email_manager');
 
-    $services->set('sylius.mailer.shipment_email_manager', 'Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManager')
+    $services->set('sylius.mailer.shipment_email_manager', ShipmentEmailManager::class)
         ->args([service('sylius.email_sender')]);
 
-    $services->alias('Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface', 'sylius.mailer.shipment_email_manager');
+    $services->alias(ShipmentEmailManagerInterface::class, 'sylius.mailer.shipment_email_manager');
 
-    $services->set('sylius.mailer.reset_password_email_manager', 'Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager')
+    $services->set('sylius.mailer.reset_password_email_manager', ResetPasswordEmailManager::class)
         ->args([service('sylius.email_sender')]);
 
-    $services->alias('Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface', 'sylius.mailer.reset_password_email_manager');
+    $services->alias(ResetPasswordEmailManagerInterface::class, 'sylius.mailer.reset_password_email_manager');
 
-    $services->set('sylius.mailer.account_registration_email_manager', 'Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManager')
+    $services->set('sylius.mailer.account_registration_email_manager', AccountRegistrationEmailManager::class)
         ->public()
         ->args([service('sylius.email_sender')]);
 
-    $services->alias('Sylius\Bundle\CoreBundle\Mailer\AccountRegistrationEmailManagerInterface', 'sylius.mailer.account_registration_email_manager')
+    $services->alias(AccountRegistrationEmailManagerInterface::class, 'sylius.mailer.account_registration_email_manager')
         ->public();
 
-    $services->set('sylius.mailer.account_verification_email_manager', 'Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManager')
+    $services->set('sylius.mailer.account_verification_email_manager', AccountVerificationEmailManager::class)
         ->public()
         ->args([service('sylius.email_sender')]);
 
-    $services->alias('Sylius\Bundle\CoreBundle\Mailer\AccountVerificationEmailManagerInterface', 'sylius.mailer.account_verification_email_manager')
+    $services->alias(AccountVerificationEmailManagerInterface::class, 'sylius.mailer.account_verification_email_manager')
         ->public();
 };

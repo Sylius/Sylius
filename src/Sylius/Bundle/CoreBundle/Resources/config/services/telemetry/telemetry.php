@@ -49,7 +49,7 @@ return static function (ContainerConfigurator $container): void {
     $services->set('sylius.telemetry.installation_id_generator', InstallationIdGenerator::class)
         ->lazy(InstallationIdGeneratorInterface::class)
         ->args([
-            param('sylius_core.telemetry.salt'),
+            '%sylius_core.telemetry.salt%',
         ]);
 
     $services->set('sylius.telemetry.data_provider.version', VersionDataProvider::class)
@@ -66,7 +66,7 @@ return static function (ContainerConfigurator $container): void {
     $services->set('sylius.telemetry.data_provider.environment', EnvironmentDataProvider::class)
         ->lazy(DataProviderInterface::class)
         ->args([
-            param('kernel.environment'),
+            '%kernel.environment%',
         ])
         ->tag('sylius.telemetry.technical_data_provider');
 
@@ -74,14 +74,14 @@ return static function (ContainerConfigurator $container): void {
         ->lazy(TelemetryDataCollectorInterface::class)
         ->args([
             tagged_iterator('sylius.telemetry.technical_data_provider'),
-            param('sylius_core.telemetry.technical'),
+            '%sylius_core.telemetry.technical%',
         ])
         ->tag('sylius.telemetry.collector');
 
     $services->set('sylius.telemetry.data_provider.installed_plugins', InstalledPluginsDataProvider::class)
         ->lazy(DataProviderInterface::class)
         ->args([
-            param('kernel.project_dir'),
+            '%kernel.project_dir%',
         ])
         ->tag('sylius.telemetry.plugins_data_provider');
 
@@ -89,7 +89,7 @@ return static function (ContainerConfigurator $container): void {
         ->lazy(TelemetryDataCollectorInterface::class)
         ->args([
             tagged_iterator('sylius.telemetry.plugins_data_provider'),
-            param('sylius_core.telemetry.plugins'),
+            '%sylius_core.telemetry.plugins%',
         ])
         ->tag('sylius.telemetry.collector');
 
@@ -97,7 +97,7 @@ return static function (ContainerConfigurator $container): void {
         ->lazy(DataProviderInterface::class)
         ->args([
             service('doctrine.dbal.default_connection'),
-            param('locale'),
+            '%locale%',
         ])
         ->tag('sylius.telemetry.business_data_provider');
 
@@ -147,7 +147,7 @@ return static function (ContainerConfigurator $container): void {
         ->lazy(TelemetryDataCollectorInterface::class)
         ->args([
             tagged_iterator('sylius.telemetry.business_data_provider'),
-            param('sylius_core.telemetry.business'),
+            '%sylius_core.telemetry.business%',
         ])
         ->tag('sylius.telemetry.collector');
 
@@ -176,7 +176,7 @@ return static function (ContainerConfigurator $container): void {
         ->lazy()
         ->args([
             service('sylius.telemetry.send_manager'),
-            param('sylius.security.api_admin_route'),
+            '%sylius.security.api_admin_route%',
         ])
         ->tag('kernel.event_listener', [
             'event' => 'kernel.terminate',
@@ -189,7 +189,7 @@ return static function (ContainerConfigurator $container): void {
         ->args([
             inline_service(HttpClient::class)
                 ->factory([HttpClient::class, 'create']),
-            param('sylius_core.telemetry.url'),
+            '%sylius_core.telemetry.url%',
         ]);
 
     $services->set('sylius.telemetry.listener.notice', TelemetryNoticeListener::class)
