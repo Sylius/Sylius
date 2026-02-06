@@ -35,14 +35,14 @@
             </order-by>
         </one-to-many>
 
-        <field name="createdAt" column="created_at" type="datetime">
+        <field name="createdAt" column="created_at" type="datetime_immutable">
             <gedmo:timestampable on="create"/>
         </field>
-        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+        <field name="updatedAt" column="updated_at" type="datetime_immutable" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
 
-        <field name="shippedAt" column="shipped_at" type="datetime" nullable="true" />
+        <field name="shippedAt" column="shipped_at" type="datetime_immutable" nullable="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

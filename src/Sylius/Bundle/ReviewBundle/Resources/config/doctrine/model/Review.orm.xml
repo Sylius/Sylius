@@ -22,10 +22,10 @@
         <field name="rating" type="integer" column="rating" />
         <field name="comment" type="text" column="comment" nullable="true" />
         <field name="status" type="string" column="status" length="255" />
-        <field name="createdAt" column="created_at" type="datetime">
+        <field name="createdAt" column="created_at" type="datetime_immutable">
             <gedmo:timestampable on="create" />
         </field>
-        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
+        <field name="updatedAt" column="updated_at" type="datetime_immutable" nullable="true">
             <gedmo:timestampable on="update" />
         </field>
     </mapped-superclass>
