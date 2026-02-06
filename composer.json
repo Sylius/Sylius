@@ -197,7 +197,7 @@
         "dmore/behat-chrome-extension": "^1.4",
         "dmore/chrome-mink-driver": "^2.9",
         "doctrine/cache": "^2.2",
-        "doctrine/data-fixtures": "^1.7",
+        "doctrine/data-fixtures": "^1.7 || ^2.2",
         "friends-of-behat/mink": "^1.11",
         "friends-of-behat/mink-browserkit-driver": "^1.6",
         "friends-of-behat/mink-debug-extension": "^2.1",
