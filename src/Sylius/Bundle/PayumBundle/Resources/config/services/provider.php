@@ -19,8 +19,9 @@ use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_payum.provider.payment_description', PaymentDescriptionProvider::class)
-        ->args([service('translator')]);
-
+    $services
+        ->set('sylius_payum.provider.payment_description', PaymentDescriptionProvider::class)
+        ->args([service('translator')])
+    ;
     $services->alias(PaymentDescriptionProviderInterface::class, 'sylius_payum.provider.payment_description');
 };

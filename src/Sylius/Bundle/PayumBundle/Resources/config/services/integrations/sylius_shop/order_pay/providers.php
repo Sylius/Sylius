@@ -16,13 +16,17 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.provider.order_pay.pay_response.payum')
+    $services
+        ->set('sylius_shop.provider.order_pay.pay_response.payum')
         ->parent('sylius_payum.provider.order_pay.pay_response')
         ->args([service('sylius_shop.resolver.order_pay.payment_to_pay')])
-        ->tag('sylius_shop.provider.order_pay.pay_response', ['priority' => -200]);
+        ->tag('sylius_shop.provider.order_pay.pay_response', ['priority' => -200])
+    ;
 
-    $services->set('sylius_shop.provider.order_pay.after_pay_response.payum')
+    $services
+        ->set('sylius_shop.provider.order_pay.after_pay_response.payum')
         ->parent('sylius_payum.provider.order_pay.after_pay_response')
         ->args([service('sylius_shop.handler.order_pay.payment_state_flash')])
-        ->tag('sylius_shop.provider.order_pay.after_pay_response', ['priority' => -200]);
+        ->tag('sylius_shop.provider.order_pay.after_pay_response', ['priority' => -200])
+    ;
 };

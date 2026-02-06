@@ -19,8 +19,9 @@ use Sylius\Bundle\PayumBundle\PaymentRequest\Factory\PayumTokenFactoryInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_payum.factory.payment_request.payum_token', PayumTokenFactory::class)
-        ->args([service('payum')]);
-
+    $services
+        ->set('sylius_payum.factory.payment_request.payum_token', PayumTokenFactory::class)
+        ->args([service('payum')])
+    ;
     $services->alias(PayumTokenFactoryInterface::class, 'sylius_payum.factory.payment_request.payum_token');
 };

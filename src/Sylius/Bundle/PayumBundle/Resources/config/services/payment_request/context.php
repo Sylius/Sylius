@@ -20,6 +20,5 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->set('sylius_payum.context.payment_request', PaymentRequestContext::class);
-
     $services->alias(PaymentRequestContextInterface::class, 'sylius_payum.context.payment_request');
 };

@@ -18,10 +18,11 @@ use Sylius\Bundle\PayumBundle\Extension\UpdatePaymentStateExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius_payum.extension.update_payment_state', UpdatePaymentStateExtension::class)
+    $services
+        ->set('sylius_payum.extension.update_payment_state', UpdatePaymentStateExtension::class)
         ->args([service('sylius_abstraction.state_machine')])
-        ->tag('payum.extension', ['all' => true, 'prepend' => true]);
+        ->tag('payum.extension', ['all' => true, 'prepend' => true])
+    ;
 };

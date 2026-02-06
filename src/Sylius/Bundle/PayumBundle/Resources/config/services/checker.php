@@ -20,6 +20,5 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->set('sylius_payum.checker.payum_gateway_config_encryption', PayumGatewayConfigEncryptionChecker::class);
-
     $services->alias(PayumGatewayConfigEncryptionCheckerInterface::class, 'sylius_payum.checker.payum_gateway_config_encryption');
 };

@@ -19,16 +19,20 @@ use Sylius\Bundle\PayumBundle\OrderPay\Provider\PayumPayResponseProvider;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_payum.provider.order_pay.pay_response', PayumPayResponseProvider::class)
+    $services
+        ->set('sylius_payum.provider.order_pay.pay_response', PayumPayResponseProvider::class)
+        ->args([service('payum')])
         ->abstract()
-        ->args([service('payum')]);
+    ;
 
-    $services->set('sylius_payum.provider.order_pay.after_pay_response', PayumAfterPayResponseProvider::class)
-        ->abstract()
+    $services
+        ->set('sylius_payum.provider.order_pay.after_pay_response', PayumAfterPayResponseProvider::class)
         ->args([
             service('payum'),
             service('router'),
             service('sylius_payum.factory.get_status'),
             service('sylius_payum.factory.resolve_next_route'),
-        ]);
+        ])
+        ->abstract()
+    ;
 };

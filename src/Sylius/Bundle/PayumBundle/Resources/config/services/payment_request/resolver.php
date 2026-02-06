@@ -19,8 +19,9 @@ use Sylius\Bundle\PayumBundle\PaymentRequest\Resolver\DoctrineProxyObjectResolve
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_payum.resolver.payment_request.doctrine_proxy_object', DoctrineProxyObjectResolver::class)
-        ->args([service('doctrine.orm.entity_manager')]);
-
+    $services
+        ->set('sylius_payum.resolver.payment_request.doctrine_proxy_object', DoctrineProxyObjectResolver::class)
+        ->args([service('doctrine.orm.entity_manager')])
+    ;
     $services->alias(DoctrineProxyObjectResolverInterface::class, 'sylius_payum.resolver.payment_request.doctrine_proxy_object');
 };
