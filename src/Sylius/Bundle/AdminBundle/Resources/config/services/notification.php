@@ -1,18 +1,33 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-return static function(ContainerConfigurator $container) {
+use Sylius\Bundle\AdminBundle\Notification\CompositeNotificationProvider;
+use Sylius\Bundle\AdminBundle\Notification\HubNotificationProvider;
+use Sylius\Bundle\AdminBundle\Notification\NotificationProviderInterface;
+
+return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.provider.notification', 'Sylius\Bundle\AdminBundle\Notification\CompositeNotificationProvider')
+    $services->set('sylius_admin.provider.notification', CompositeNotificationProvider::class)
         ->args([tagged_iterator('sylius_admin.notification')]);
 
-    $services->alias('Sylius\Bundle\AdminBundle\Notification\NotificationProviderInterface', 'sylius_admin.provider.notification');
+    $services->alias(NotificationProviderInterface::class, 'sylius_admin.provider.notification');
 
     $services->alias('sylius_admin.provider.notification.composite', 'sylius_admin.provider.notification');
 
-    $services->set('sylius_admin.provider.notification.hub', 'Sylius\Bundle\AdminBundle\Notification\HubNotificationProvider')
+    $services->set('sylius_admin.provider.notification.hub', HubNotificationProvider::class)
         ->args([
             service('sylius.http_client'),
             service('request_stack'),
