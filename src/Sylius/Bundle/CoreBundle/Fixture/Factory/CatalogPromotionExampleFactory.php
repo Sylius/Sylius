@@ -65,11 +65,11 @@ class CatalogPromotionExampleFactory extends AbstractExampleFactory implements E
         $catalogPromotion->setName($options['name']);
 
         if (isset($options['start_date'])) {
-            $catalogPromotion->setStartDate(new \DateTime($options['start_date']));
+            $catalogPromotion->setStartDate(new \DateTimeImmutable($options['start_date']));
         }
 
         if (isset($options['end_date'])) {
-            $catalogPromotion->setEndDate(new \DateTime($options['end_date']));
+            $catalogPromotion->setEndDate(new \DateTimeImmutable($options['end_date']));
         }
 
         $catalogPromotion->setEnabled($options['enabled']);

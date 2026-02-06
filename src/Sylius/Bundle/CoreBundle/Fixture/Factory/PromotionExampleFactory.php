@@ -75,15 +75,15 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
         $promotion->setAppliesToDiscounted($options['applies_to_discounted']);
 
         if (isset($options['starts_at'])) {
-            $promotion->setStartsAt(new \DateTime($options['starts_at']));
+            $promotion->setStartsAt(new \DateTimeImmutable($options['starts_at']));
         }
 
         if (isset($options['ends_at'])) {
-            $promotion->setEndsAt(new \DateTime($options['ends_at']));
+            $promotion->setEndsAt(new \DateTimeImmutable($options['ends_at']));
         }
 
         if (isset($options['archived_at'])) {
-            $promotion->setArchivedAt(new \DateTime($options['archived_at']));
+            $promotion->setArchivedAt(new \DateTimeImmutable($options['archived_at']));
         }
 
         foreach ($options['channels'] as $channel) {
@@ -178,7 +178,7 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
                 $coupon->setUsageLimit($couponDefinition['usage_limit']);
 
                 if (null !== ($couponDefinition['expires_at'] ?? null)) {
-                    $coupon->setExpiresAt(new \DateTime($couponDefinition['expires_at']));
+                    $coupon->setExpiresAt(new \DateTimeImmutable($couponDefinition['expires_at']));
                 }
 
                 $coupons[] = $coupon;
