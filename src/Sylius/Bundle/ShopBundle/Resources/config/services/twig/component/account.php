@@ -26,46 +26,56 @@ use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.twig.component.account.register.form', ResourceFormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.account.register.form', ResourceFormComponent::class)
         ->args([
             service('sylius.repository.customer'),
             service('form.factory'),
             '%sylius.model.customer.class%',
             CustomerRegistrationType::class,
         ])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:account:register:form']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:account:register:form'])
+    ;
 
-    $services->set('sylius_shop.twig.component.account.profile_update.form', ResourceFormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.account.profile_update.form', ResourceFormComponent::class)
         ->args([
             service('sylius.repository.customer'),
             service('form.factory'),
             '%sylius.model.customer.class%',
             CustomerProfileType::class,
         ])
-        ->tag('sylius.live_component.shop_account', ['key' => 'sylius_shop:account:profile_update:form']);
+        ->tag('sylius.live_component.shop_account', ['key' => 'sylius_shop:account:profile_update:form'])
+    ;
 
-    $services->set('sylius_shop.twig.component.account.change_password_form', ChangePasswordFormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.account.change_password_form', ChangePasswordFormComponent::class)
         ->args([
             service('form.factory'),
             UserChangePasswordType::class,
         ])
-        ->tag('sylius.live_component.shop_account', ['key' => 'sylius_shop:account:change_password_form']);
+        ->tag('sylius.live_component.shop_account', ['key' => 'sylius_shop:account:change_password_form'])
+    ;
 
-    $services->set('sylius_shop.twig.component.account.address.default_form', DefaultFormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.account.address.default_form', DefaultFormComponent::class)
         ->args([
             service('sylius.repository.customer'),
             service('form.factory'),
             '%sylius.model.customer.class%',
             CustomerDefaultAddressType::class,
         ])
-        ->tag('sylius.live_component.shop_account', ['key' => 'sylius_shop:account:address:default_form']);
+        ->tag('sylius.live_component.shop_account', ['key' => 'sylius_shop:account:address:default_form'])
+    ;
 
-    $services->set('sylius_shop.twig.component.account.address.form', FormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.account.address.form', FormComponent::class)
         ->args([
             service('sylius.repository.address'),
             service('form.factory'),
             '%sylius.model.address.class%',
             AddressType::class,
         ])
-        ->tag('sylius.live_component.shop_account', ['key' => 'sylius_shop:account:address:form']);
+        ->tag('sylius.live_component.shop_account', ['key' => 'sylius_shop:account:address:form'])
+    ;
 };

@@ -19,10 +19,14 @@ use Sylius\Bundle\PromotionBundle\Criteria\Enabled;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.catalog_promotion.criteria.enabled', Enabled::class)
-        ->tag('sylius.catalog_promotion.criteria');
+    $services
+        ->set('sylius.catalog_promotion.criteria.enabled', Enabled::class)
+        ->tag('sylius.catalog_promotion.criteria')
+    ;
 
-    $services->set('sylius.catalog_promotion.criteria.date_range', DateRange::class)
+    $services
+        ->set('sylius.catalog_promotion.criteria.date_range', DateRange::class)
         ->args([service('clock')])
-        ->tag('sylius.catalog_promotion.criteria');
+        ->tag('sylius.catalog_promotion.criteria')
+    ;
 };

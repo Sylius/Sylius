@@ -21,33 +21,41 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\CommandHandler\UpdateCatalogPromot
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.command_handler.catalog_promotion.apply_variants', ApplyCatalogPromotionsOnVariantsHandler::class)
+    $services
+        ->set('sylius.command_handler.catalog_promotion.apply_variants', ApplyCatalogPromotionsOnVariantsHandler::class)
         ->args([
             service('sylius.provider.eligible_catalog_promotions'),
             service('sylius.applicator.catalog_promotion'),
             service('sylius.repository.product_variant'),
             service('sylius.processor.catalog_promotion.clearer'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 
-    $services->set('sylius.command_handler.catalog_promotion.disable', DisableCatalogPromotionHandler::class)
+    $services
+        ->set('sylius.command_handler.catalog_promotion.disable', DisableCatalogPromotionHandler::class)
         ->args([
             service('sylius.repository.catalog_promotion'),
             service('sylius.processor.catalog_promotion.all_product_variant'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 
-    $services->set('sylius.command_handler.catalog_promotion.remove', RemoveCatalogPromotionHandler::class)
+    $services
+        ->set('sylius.command_handler.catalog_promotion.remove', RemoveCatalogPromotionHandler::class)
         ->args([
             service('sylius.repository.catalog_promotion'),
             service('sylius.manager.catalog_promotion'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 
-    $services->set('sylius.command_handler.catalog_promotion.update_state', UpdateCatalogPromotionStateHandler::class)
+    $services
+        ->set('sylius.command_handler.catalog_promotion.update_state', UpdateCatalogPromotionStateHandler::class)
         ->args([
             service('sylius.processor.catalog_promotion.state'),
             service('sylius.repository.catalog_promotion'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 };

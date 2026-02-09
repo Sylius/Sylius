@@ -22,23 +22,29 @@ use Sylius\Component\Shipping\Checker\Rule\RuleCheckerInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.registry.shipping_calculator', ServiceRegistry::class)
+    $services
+        ->set('sylius.registry.shipping_calculator', ServiceRegistry::class)
         ->args([
             CalculatorInterface::class,
             'shipping calculator',
-        ]);
+        ])
+    ;
 
-    $services->set('sylius.registry.shipping_methods_resolver', PrioritizedServiceRegistry::class)
+    $services
+        ->set('sylius.registry.shipping_methods_resolver', PrioritizedServiceRegistry::class)
         ->args([
             '%sylius.shipping_methods_resolver.interface%',
             'Shipping methods resolver',
-        ]);
+        ])
+    ;
 
-    $services->set('sylius.registry.shipping_method_rule_checker', ServiceRegistry::class)
+    $services
+        ->set('sylius.registry.shipping_method_rule_checker', ServiceRegistry::class)
         ->args([
             RuleCheckerInterface::class,
             'shipping method rule checker',
-        ]);
+        ])
+    ;
 
     $services->set('sylius.form_registry.shipping_method_rule_checker', FormTypeRegistry::class);
 };

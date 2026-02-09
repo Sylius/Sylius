@@ -18,10 +18,12 @@ use Sylius\Bundle\ShopBundle\Menu\AccountMenuBuilder;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.menu_builder.account', AccountMenuBuilder::class)
+    $services
+        ->set('sylius_shop.menu_builder.account', AccountMenuBuilder::class)
         ->args([
             service('knp_menu.factory'),
             service('event_dispatcher'),
         ])
-        ->tag('knp_menu.menu_builder', ['method' => 'createMenu', 'alias' => 'sylius_shop.account']);
+        ->tag('knp_menu.menu_builder', ['method' => 'createMenu', 'alias' => 'sylius_shop.account'])
+    ;
 };

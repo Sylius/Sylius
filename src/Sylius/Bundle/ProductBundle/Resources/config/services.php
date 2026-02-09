@@ -31,61 +31,68 @@ use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('services/**/*.php');
 
-    $services->defaults()
-        ->public();
+    $services = $container->services();
 
-    $services->set('sylius.custom_factory.product_variant', ProductVariantFactory::class)
-        ->private()
+    $services->defaults()->public();
+
+    $services
+        ->set('sylius.custom_factory.product_variant', ProductVariantFactory::class)
         ->decorate('sylius.factory.product_variant', null, 256)
-        ->args([service('sylius.custom_factory.product_variant.inner')]);
+        ->args([service('sylius.custom_factory.product_variant.inner')])
+        ->private()
+    ;
 
     $services->alias(ProductVariantFactoryInterface::class, 'sylius.factory.product_variant');
 
-    $services->set('sylius.custom_factory.product', ProductFactory::class)
-        ->private()
+    $services
+        ->set('sylius.custom_factory.product', ProductFactory::class)
         ->decorate('sylius.factory.product', null, 256)
         ->args([
             service('sylius.custom_factory.product.inner'),
             service('sylius.factory.product_variant'),
-        ]);
+        ])
+        ->private()
+    ;
 
     $services->alias(ProductFactoryInterface::class, 'sylius.factory.product');
 
-    $services->set('sylius.generator.product_variant', ProductVariantGenerator::class)
+    $services
+        ->set('sylius.generator.product_variant', ProductVariantGenerator::class)
         ->args([
             service('sylius.factory.product_variant'),
             service('sylius.checker.product_variants_parity'),
-        ]);
-
+        ])
+    ;
     $services->alias(ProductVariantGeneratorInterface::class, 'sylius.generator.product_variant');
 
     $services->set('sylius.checker.product_variants_parity', ProductVariantsParityChecker::class);
-
     $services->alias(ProductVariantsParityCheckerInterface::class, 'sylius.checker.product_variants_parity');
 
     $services->set('sylius.generator.slug', SlugGenerator::class);
-
     $services->alias(SlugGeneratorInterface::class, 'sylius.generator.slug');
 
-    $services->set('sylius.resolver.product_variant', CompositeProductVariantResolver::class)
-        ->args([tagged_iterator('sylius.product_variant_resolver')]);
-
+    $services
+        ->set('sylius.resolver.product_variant', CompositeProductVariantResolver::class)
+        ->args([tagged_iterator('sylius.product_variant_resolver')])
+    ;
     $services->alias(ProductVariantResolverInterface::class, 'sylius.resolver.product_variant');
 
     $services->alias('sylius.resolver.product_variant.composite', 'sylius.resolver.product_variant');
 
-    $services->set('sylius.resolver.product_variant.default', DefaultProductVariantResolver::class)
+    $services
+        ->set('sylius.resolver.product_variant.default', DefaultProductVariantResolver::class)
         ->args([service('sylius.repository.product_variant')])
-        ->tag('sylius.product_variant_resolver', ['priority' => -999]);
+        ->tag('sylius.product_variant_resolver', ['priority' => -999])
+    ;
 
-    $services->set('sylius.listener.select_product_attribute_choice_remove', SelectProductAttributeChoiceRemoveListener::class)
+    $services
+        ->set('sylius.listener.select_product_attribute_choice_remove', SelectProductAttributeChoiceRemoveListener::class)
         ->args(['%sylius.model.product_attribute_value.class%'])
-        ->tag('doctrine.event_listener', ['event' => 'postUpdate', 'lazy' => true]);
+        ->tag('doctrine.event_listener', ['event' => 'postUpdate', 'lazy' => true])
+    ;
 
     $services->set('sylius.resolver.available_product_option_values', AvailableProductOptionValuesResolver::class);
-
     $services->alias(AvailableProductOptionValuesResolverInterface::class, 'sylius.resolver.available_product_option_values');
 };

@@ -19,12 +19,13 @@ use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.announcer.payment_request', PaymentRequestAnnouncer::class)
+    $services
+        ->set('sylius.announcer.payment_request', PaymentRequestAnnouncer::class)
         ->args([
             service('sylius.checker.finalized_payment_request'),
             service('sylius.command_provider.payment_request.default'),
             service('sylius.payment_request.command_bus'),
-        ]);
-
+        ])
+    ;
     $services->alias(PaymentRequestAnnouncerInterface::class, 'sylius.announcer.payment_request');
 };

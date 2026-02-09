@@ -21,13 +21,15 @@ use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestDuplicationCheckerInterfac
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.checker.payment_request_duplication', PaymentRequestDuplicationChecker::class)
-        ->args([service('sylius.repository.payment_request')]);
-
+    $services
+        ->set('sylius.checker.payment_request_duplication', PaymentRequestDuplicationChecker::class)
+        ->args([service('sylius.repository.payment_request')])
+    ;
     $services->alias(PaymentRequestDuplicationCheckerInterface::class, 'sylius.checker.payment_request_duplication');
 
-    $services->set('sylius.checker.finalized_payment_request', FinalizedPaymentRequestChecker::class)
-        ->args([service('sylius_abstraction.state_machine')]);
-
+    $services
+        ->set('sylius.checker.finalized_payment_request', FinalizedPaymentRequestChecker::class)
+        ->args([service('sylius_abstraction.state_machine')])
+    ;
     $services->alias(FinalizedPaymentRequestCheckerInterface::class, 'sylius.checker.finalized_payment_request');
 };

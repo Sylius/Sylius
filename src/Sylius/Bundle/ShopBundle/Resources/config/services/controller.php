@@ -21,10 +21,10 @@ use Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius_shop.controller.contact', ContactController::class)
+    $services
+        ->set('sylius_shop.controller.contact', ContactController::class)
         ->args([
             service('router'),
             service('form.factory'),
@@ -33,25 +33,32 @@ return static function (ContainerConfigurator $container) {
             service('sylius.context.customer'),
             service('sylius.context.locale'),
             service('sylius_shop.mailer.contact_email_manager'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_shop.controller.currency_switch', CurrencySwitchController::class)
+    $services
+        ->set('sylius_shop.controller.currency_switch', CurrencySwitchController::class)
         ->args([
             service('sylius.storage.currency'),
             service('sylius.context.channel'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_shop.controller.locale_switch', LocaleSwitchController::class)
+    $services
+        ->set('sylius_shop.controller.locale_switch', LocaleSwitchController::class)
         ->args([
             service('sylius.provider.locale'),
             service('sylius_shop.locale_switcher'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_shop.controller.register_thank_you', RegistrationThankYouController::class)
+    $services
+        ->set('sylius_shop.controller.register_thank_you', RegistrationThankYouController::class)
         ->args([
             service('twig'),
             service('sylius.context.channel'),
             service('router.default'),
         ])
-        ->tag('controller.service_arguments');
+        ->tag('controller.service_arguments')
+    ;
 };

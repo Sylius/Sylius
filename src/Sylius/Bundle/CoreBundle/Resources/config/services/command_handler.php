@@ -22,37 +22,47 @@ use Sylius\Bundle\CoreBundle\CommandHandler\ResendShipmentConfirmationEmailHandl
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.command_handler.admin.account.request_reset_password_email', RequestResetPasswordEmailHandler::class)
+    $services
+        ->set('sylius.command_handler.admin.account.request_reset_password_email', RequestResetPasswordEmailHandler::class)
         ->args([
             service('sylius.repository.admin_user'),
             service('sylius.admin_user.token_generator.password_reset'),
             service('clock'),
             service('messenger.default_bus'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 
-    $services->set('sylius.command_handler.resend_shipment_confirmation_email', ResendShipmentConfirmationEmailHandler::class)
+    $services
+        ->set('sylius.command_handler.resend_shipment_confirmation_email', ResendShipmentConfirmationEmailHandler::class)
         ->args([
             service('sylius.repository.shipment'),
             service('sylius.mailer.shipment_email_manager'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 
-    $services->set('sylius.command_handler.admin.account.reset_password', ResetPasswordHandler::class)
+    $services
+        ->set('sylius.command_handler.admin.account.reset_password', ResetPasswordHandler::class)
         ->args([service('sylius.resetter.user_password.admin')])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 
-    $services->set('sylius.command_handler.resend_order_confirmation_email', ResendOrderConfirmationEmailHandler::class)
+    $services
+        ->set('sylius.command_handler.resend_order_confirmation_email', ResendOrderConfirmationEmailHandler::class)
         ->args([
             service('sylius.mailer.order_email_manager'),
             service('sylius.repository.order'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 
-    $services->set('sylius.command_handler.admin.account.send_reset_password_email', SendResetPasswordEmailHandler::class)
+    $services
+        ->set('sylius.command_handler.admin.account.send_reset_password_email', SendResetPasswordEmailHandler::class)
         ->args([
             service('sylius.repository.admin_user'),
             service('sylius.mailer.reset_password_email_manager'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 };

@@ -19,12 +19,14 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Shipment\ShipFormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.shipment.ship_form', ShipFormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.shipment.ship_form', ShipFormComponent::class)
         ->args([
             service('sylius.repository.shipment'),
             service('form.factory'),
             '%sylius.model.shipment.class%',
             ShipmentShipType::class,
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:shipment:ship_form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:shipment:ship_form'])
+    ;
 };

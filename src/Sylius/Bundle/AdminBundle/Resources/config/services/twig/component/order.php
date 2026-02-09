@@ -20,16 +20,20 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Order\FormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.order.address_history', AddressHistoryComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.order.address_history', AddressHistoryComponent::class)
         ->args([service('sylius.repository.address_log_entry')])
-        ->tag('sylius.twig_component', ['key' => 'sylius_admin:order:address_history']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_admin:order:address_history'])
+    ;
 
-    $services->set('sylius_admin.twig.component.order.form', FormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.order.form', FormComponent::class)
         ->args([
             service('sylius.repository.order'),
             service('form.factory'),
             '%sylius.model.order.class%',
             OrderType::class,
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:order:form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:order:form'])
+    ;
 };

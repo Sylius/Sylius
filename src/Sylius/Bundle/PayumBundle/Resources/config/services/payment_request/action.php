@@ -19,14 +19,17 @@ use Sylius\Bundle\PayumBundle\PaymentRequest\Action\SyliusRenderTemplateAction;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius_payum.action.payment_request.get_http_request', SyliusGetHttpRequestAction::class)
+    $services
+        ->set('sylius_payum.action.payment_request.get_http_request', SyliusGetHttpRequestAction::class)
         ->args([service('sylius_payum.context.payment_request')])
-        ->tag('payum.action', ['all' => true, 'prepend' => true]);
+        ->tag('payum.action', ['all' => true, 'prepend' => true])
+    ;
 
-    $services->set('sylius_payum.action.payment_request.render_template', SyliusRenderTemplateAction::class)
+    $services
+        ->set('sylius_payum.action.payment_request.render_template', SyliusRenderTemplateAction::class)
         ->args([service('sylius_payum.context.payment_request')])
-        ->tag('payum.action', ['all' => true, 'prepend' => true]);
+        ->tag('payum.action', ['all' => true, 'prepend' => true])
+    ;
 };

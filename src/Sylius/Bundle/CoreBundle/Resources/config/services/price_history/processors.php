@@ -19,11 +19,12 @@ use Sylius\Bundle\CoreBundle\PriceHistory\Processor\ProductLowestPriceBeforeDisc
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.processor.price_history.product_lowest_price_before_discount', ProductLowestPriceBeforeDiscountProcessor::class)
+    $services
+        ->set('sylius.processor.price_history.product_lowest_price_before_discount', ProductLowestPriceBeforeDiscountProcessor::class)
         ->args([
             service('sylius.repository.channel_pricing_log_entry'),
             service('sylius.repository.channel'),
-        ]);
-
+        ])
+    ;
     $services->alias(ProductLowestPriceBeforeDiscountProcessorInterface::class, 'sylius.processor.price_history.product_lowest_price_before_discount');
 };

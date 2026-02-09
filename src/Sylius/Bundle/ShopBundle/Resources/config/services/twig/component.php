@@ -21,33 +21,41 @@ use Sylius\Bundle\ShopBundle\Twig\Component\Product\BySlugComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.twig.component.locale_switcher', LocaleSwitcherComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.locale_switcher', LocaleSwitcherComponent::class)
         ->args([
             service('sylius.context.locale'),
             service('sylius.provider.locale'),
         ])
-        ->tag('sylius.twig_component', ['key' => 'sylius_shop:common:locale_switcher']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_shop:common:locale_switcher'])
+    ;
 
-    $services->set('sylius_shop.twig.component.currency_switcher', CurrencySwitcherComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.currency_switcher', CurrencySwitcherComponent::class)
         ->args([
             service('sylius.context.channel'),
             service('sylius.context.currency'),
         ])
-        ->tag('sylius.twig_component', ['key' => 'sylius_shop:common:currency_switcher']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_shop:common:currency_switcher'])
+    ;
 
-    $services->set('sylius_shop.twig.component.taxon_menu', TaxonMenuComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.taxon_menu', TaxonMenuComponent::class)
         ->args([
             service('sylius.repository.taxon'),
             service('sylius.context.channel'),
             service('sylius.context.locale'),
         ])
-        ->tag('sylius.twig_component', ['key' => 'sylius_shop:common:taxon_menu']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_shop:common:taxon_menu'])
+    ;
 
-    $services->set('sylius_shop.twig.component.product.by_slug', BySlugComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.product.by_slug', BySlugComponent::class)
         ->args([
             service('sylius.repository.product'),
             service('sylius.context.channel'),
             service('sylius.context.locale'),
         ])
-        ->tag('sylius.twig_component', ['key' => 'sylius_shop:product.by_slug']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_shop:product.by_slug'])
+    ;
 };

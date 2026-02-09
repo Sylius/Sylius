@@ -20,6 +20,5 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->set('sylius.calculator.delay_stamp', DelayStampCalculator::class);
-
     $services->alias(DelayStampCalculatorInterface::class, 'sylius.calculator.delay_stamp');
 };

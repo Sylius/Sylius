@@ -19,17 +19,21 @@ use Sylius\Bundle\PayumBundle\Form\Extension\PayumGatewayConfigTypeExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_payum.form.extension.type.payum_gateway_config', PayumGatewayConfigTypeExtension::class)
+    $services
+        ->set('sylius_payum.form.extension.type.payum_gateway_config', PayumGatewayConfigTypeExtension::class)
         ->args([
             service('payum'),
             service('sylius.command_provider.payment_request.default'),
         ])
-        ->tag('form.type_extension', ['priority' => 200]);
+        ->tag('form.type_extension', ['priority' => 200])
+    ;
 
-    $services->set('sylius_payum.form.extension.type.crypted_gateway_config', CryptedGatewayConfigTypeExtension::class)
+    $services
+        ->set('sylius_payum.form.extension.type.crypted_gateway_config', CryptedGatewayConfigTypeExtension::class)
         ->args([
             service('sylius_payum.checker.payum_gateway_config_encryption'),
             service('payum.dynamic_gateways.cypher')->nullOnInvalid(),
         ])
-        ->tag('form.type_extension', ['priority' => 100]);
+        ->tag('form.type_extension', ['priority' => 100])
+    ;
 };

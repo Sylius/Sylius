@@ -30,7 +30,8 @@ use Sylius\Bundle\CoreBundle\Mailer\ShipmentEmailManagerInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.listener.user_mailer', MailerListener::class)
+    $services
+        ->set('sylius.listener.user_mailer', MailerListener::class)
         ->args([
             service('sylius.email_sender'),
             service('sylius.context.channel'),
@@ -39,39 +40,50 @@ return static function (ContainerConfigurator $container) {
         ->tag('kernel.event_listener', ['event' => 'sylius.user.password_reset.request.token', 'method' => 'sendResetPasswordTokenEmail'])
         ->tag('kernel.event_listener', ['event' => 'sylius.user.email_verification.token', 'method' => 'sendVerificationTokenEmail'])
         ->tag('kernel.event_listener', ['event' => 'sylius.user.post_email_verification', 'method' => 'sendVerificationSuccessEmail'])
-        ->tag('kernel.event_listener', ['event' => 'sylius.customer.post_register', 'method' => 'sendUserRegistrationEmail']);
+        ->tag('kernel.event_listener', ['event' => 'sylius.customer.post_register', 'method' => 'sendUserRegistrationEmail'])
+    ;
 
-    $services->set('sylius.mailer.contact_email_manager', ContactEmailManager::class)
-        ->args([service('sylius.email_sender')]);
-
+    $services
+        ->set('sylius.mailer.contact_email_manager', ContactEmailManager::class)
+        ->args([service('sylius.email_sender')])
+    ;
     $services->alias(ContactEmailManagerInterface::class, 'sylius.mailer.contact_email_manager');
 
-    $services->set('sylius.mailer.order_email_manager', OrderEmailManager::class)
-        ->args([service('sylius.email_sender')]);
-
+    $services
+        ->set('sylius.mailer.order_email_manager', OrderEmailManager::class)
+        ->args([service('sylius.email_sender')])
+    ;
     $services->alias(OrderEmailManagerInterface::class, 'sylius.mailer.order_email_manager');
 
-    $services->set('sylius.mailer.shipment_email_manager', ShipmentEmailManager::class)
-        ->args([service('sylius.email_sender')]);
-
+    $services
+        ->set('sylius.mailer.shipment_email_manager', ShipmentEmailManager::class)
+        ->args([service('sylius.email_sender')])
+    ;
     $services->alias(ShipmentEmailManagerInterface::class, 'sylius.mailer.shipment_email_manager');
 
-    $services->set('sylius.mailer.reset_password_email_manager', ResetPasswordEmailManager::class)
-        ->args([service('sylius.email_sender')]);
-
+    $services
+        ->set('sylius.mailer.reset_password_email_manager', ResetPasswordEmailManager::class)
+        ->args([service('sylius.email_sender')])
+    ;
     $services->alias(ResetPasswordEmailManagerInterface::class, 'sylius.mailer.reset_password_email_manager');
 
-    $services->set('sylius.mailer.account_registration_email_manager', AccountRegistrationEmailManager::class)
+    $services
+        ->set('sylius.mailer.account_registration_email_manager', AccountRegistrationEmailManager::class)
+        ->args([service('sylius.email_sender')])
         ->public()
-        ->args([service('sylius.email_sender')]);
-
-    $services->alias(AccountRegistrationEmailManagerInterface::class, 'sylius.mailer.account_registration_email_manager')
-        ->public();
-
-    $services->set('sylius.mailer.account_verification_email_manager', AccountVerificationEmailManager::class)
+    ;
+    $services
+        ->alias(AccountRegistrationEmailManagerInterface::class, 'sylius.mailer.account_registration_email_manager')
         ->public()
-        ->args([service('sylius.email_sender')]);
+    ;
 
-    $services->alias(AccountVerificationEmailManagerInterface::class, 'sylius.mailer.account_verification_email_manager')
-        ->public();
+    $services
+        ->set('sylius.mailer.account_verification_email_manager', AccountVerificationEmailManager::class)
+        ->args([service('sylius.email_sender')])
+        ->public()
+    ;
+    $services
+        ->alias(AccountVerificationEmailManagerInterface::class, 'sylius.mailer.account_verification_email_manager')
+        ->public()
+    ;
 };

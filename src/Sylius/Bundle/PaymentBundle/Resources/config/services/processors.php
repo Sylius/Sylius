@@ -21,16 +21,18 @@ use Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessorInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.processor.payment_request.notify_payload', NotifyPayloadProcessor::class)
-        ->args([service('sylius.normalizer.symfony_request')]);
-
+    $services
+        ->set('sylius.processor.payment_request.notify_payload', NotifyPayloadProcessor::class)
+        ->args([service('sylius.normalizer.symfony_request')])
+    ;
     $services->alias(NotifyPayloadProcessorInterface::class, 'sylius.processor.payment_request.notify_payload');
 
-    $services->set('sylius.processor.payment_request.http_response', HttpResponseProcessor::class)
+    $services
+        ->set('sylius.processor.payment_request.http_response', HttpResponseProcessor::class)
         ->args([
             service('sylius.announcer.payment_request'),
             service('sylius.provider.http_response.default'),
-        ]);
-
+        ])
+    ;
     $services->alias(HttpResponseProcessorInterface::class, 'sylius.processor.payment_request.http_response');
 };

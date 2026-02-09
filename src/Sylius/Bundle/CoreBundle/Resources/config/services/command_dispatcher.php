@@ -23,18 +23,21 @@ use Sylius\Bundle\CoreBundle\CommandDispatcher\ResetPasswordDispatcherInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.command_dispatcher.resend_order_confirmation_email', ResendOrderConfirmationEmailDispatcher::class)
-        ->args([service('sylius.command_bus')]);
-
+    $services
+        ->set('sylius.command_dispatcher.resend_order_confirmation_email', ResendOrderConfirmationEmailDispatcher::class)
+        ->args([service('sylius.command_bus')])
+    ;
     $services->alias(ResendOrderConfirmationEmailDispatcherInterface::class, 'sylius.command_dispatcher.resend_order_confirmation_email');
 
-    $services->set('sylius.command_dispatcher.resend_shipment_confirmation_email', ResendShipmentConfirmationEmailDispatcher::class)
-        ->args([service('sylius.command_bus')]);
-
+    $services
+        ->set('sylius.command_dispatcher.resend_shipment_confirmation_email', ResendShipmentConfirmationEmailDispatcher::class)
+        ->args([service('sylius.command_bus')])
+    ;
     $services->alias(ResendShipmentConfirmationEmailDispatcherInterface::class, 'sylius.command_dispatcher.resend_shipment_confirmation_email');
 
-    $services->set('sylius.command_dispatcher.reset_password', ResetPasswordDispatcher::class)
-        ->args([service('sylius.command_bus')]);
-
+    $services
+        ->set('sylius.command_dispatcher.reset_password', ResetPasswordDispatcher::class)
+        ->args([service('sylius.command_bus')])
+    ;
     $services->alias(ResetPasswordDispatcherInterface::class, 'sylius.command_dispatcher.reset_password');
 };

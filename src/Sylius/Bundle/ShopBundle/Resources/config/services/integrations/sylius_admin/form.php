@@ -18,6 +18,8 @@ use Sylius\Bundle\ShopBundle\Form\Extension\ChannelTypeExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.form.extension.type.channel', ChannelTypeExtension::class)
-        ->tag('form.type_extension', ['priority' => 100]);
+    $services
+        ->set('sylius_shop.form.extension.type.channel', ChannelTypeExtension::class)
+        ->tag('form.type_extension', ['priority' => 100])
+    ;
 };

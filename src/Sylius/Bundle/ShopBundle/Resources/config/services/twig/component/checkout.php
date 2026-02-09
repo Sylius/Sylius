@@ -23,7 +23,8 @@ use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.twig.component.checkout.address.form', FormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.checkout.address.form', FormComponent::class)
         ->args([
             service('sylius.repository.order'),
             service('form.factory'),
@@ -34,28 +35,35 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.address'),
             tagged_iterator('sylius_shop.modifier.address_form_values'),
         ])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:address:form']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:address:form'])
+    ;
 
-    $services->set('sylius_shop.twig.component.checkout.address.address_book', AddressBookComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.checkout.address.address_book', AddressBookComponent::class)
         ->args([service('sylius.context.customer')])
         ->call('setLiveResponder', [service('ux.live_component.live_responder')])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:address:address_book']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:address:address_book'])
+    ;
 
-    $services->set('sylius_shop.twig.component.checkout.shipping.form', ResourceFormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.checkout.shipping.form', ResourceFormComponent::class)
         ->args([
             service('sylius.repository.order'),
             service('form.factory'),
             '%sylius.model.order.class%',
             SelectShippingType::class,
         ])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:shipping:form']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:shipping:form'])
+    ;
 
-    $services->set('sylius_shop.twig.component.checkout.payment.form', ResourceFormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.checkout.payment.form', ResourceFormComponent::class)
         ->args([
             service('sylius.repository.order'),
             service('form.factory'),
             '%sylius.model.order.class%',
             SelectPaymentType::class,
         ])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:payment:form']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:payment:form'])
+    ;
 };

@@ -21,20 +21,22 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Applicator\CatalogPromotionApplica
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.applicator.catalog_promotion', CatalogPromotionApplicator::class)
+    $services
+        ->set('sylius.applicator.catalog_promotion', CatalogPromotionApplicator::class)
         ->args([
             service('sylius.applicator.catalog_promotion.action_based_discount'),
             service('sylius.checker.catalog_promotion.product_variant_for_catalog_promotion_eligibility'),
             service('sylius.checker.catalog_promotion_eligibility'),
-        ]);
-
+        ])
+    ;
     $services->alias(CatalogPromotionApplicatorInterface::class, 'sylius.applicator.catalog_promotion');
 
-    $services->set('sylius.applicator.catalog_promotion.action_based_discount', ActionBasedDiscountApplicator::class)
+    $services
+        ->set('sylius.applicator.catalog_promotion.action_based_discount', ActionBasedDiscountApplicator::class)
         ->args([
             service('sylius.calculator.catalog_promotion.price'),
             tagged_iterator('sylius.catalog_promotion.applicator_criteria'),
-        ]);
-
+        ])
+    ;
     $services->alias(ActionBasedDiscountApplicatorInterface::class, 'sylius.applicator.catalog_promotion.action_based_discount');
 };

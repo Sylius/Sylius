@@ -24,11 +24,9 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->set('sylius_payum.factory.get_status', GetStatusFactory::class);
-
     $services->alias(GetStatusFactoryInterface::class, 'sylius_payum.factory.get_status');
 
     $services->set('sylius_payum.factory.resolve_next_route', ResolveNextRouteFactory::class);
-
     $services->alias(ResolveNextRouteFactoryInterface::class, 'sylius_payum.factory.resolve_next_route');
 
     $services->set('sylius_payum.factory.capture', CaptureFactory::class);

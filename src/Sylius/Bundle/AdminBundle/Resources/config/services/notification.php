@@ -20,14 +20,16 @@ use Sylius\Bundle\AdminBundle\Notification\NotificationProviderInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.provider.notification', CompositeNotificationProvider::class)
-        ->args([tagged_iterator('sylius_admin.notification')]);
-
+    $services
+        ->set('sylius_admin.provider.notification', CompositeNotificationProvider::class)
+        ->args([tagged_iterator('sylius_admin.notification')])
+    ;
     $services->alias(NotificationProviderInterface::class, 'sylius_admin.provider.notification');
 
     $services->alias('sylius_admin.provider.notification.composite', 'sylius_admin.provider.notification');
 
-    $services->set('sylius_admin.provider.notification.hub', HubNotificationProvider::class)
+    $services
+        ->set('sylius_admin.provider.notification.hub', HubNotificationProvider::class)
         ->args([
             service('sylius.http_client'),
             service('request_stack'),
@@ -40,5 +42,6 @@ return static function (ContainerConfigurator $container) {
             '%sylius.admin.notification.hub_enabled%',
             '%sylius.admin.notification.frequency%',
         ])
-        ->tag('sylius_admin.notification');
+        ->tag('sylius_admin.notification')
+    ;
 };

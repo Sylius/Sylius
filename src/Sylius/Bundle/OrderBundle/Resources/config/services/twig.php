@@ -18,8 +18,10 @@ use Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.twig.extension.aggregate_adjustments', AggregateAdjustmentsExtension::class)
-        ->private()
+    $services
+        ->set('sylius.twig.extension.aggregate_adjustments', AggregateAdjustmentsExtension::class)
         ->args([service('sylius.aggregator.adjustments_by_label')])
-        ->tag('twig.extension');
+        ->private()
+        ->tag('twig.extension')
+    ;
 };

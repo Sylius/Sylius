@@ -21,19 +21,23 @@ use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.promotion_coupon.form', ResourceFormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.promotion_coupon.form', ResourceFormComponent::class)
         ->args([
             service('sylius.repository.promotion_coupon'),
             service('form.factory'),
             '%sylius.model.promotion_coupon.class%',
             PromotionCouponType::class,
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:promotion_coupon:form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:promotion_coupon:form'])
+    ;
 
-    $services->set('sylius_admin.twig.component.promotion_coupon.generator_instruction_form', GeneratorInstructionFormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.promotion_coupon.generator_instruction_form', GeneratorInstructionFormComponent::class)
         ->args([
             service('form.factory'),
             PromotionCouponGeneratorInstructionType::class,
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:promotion_coupon:generator_instruction_form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:promotion_coupon:generator_instruction_form'])
+    ;
 };

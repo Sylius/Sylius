@@ -21,21 +21,23 @@ use Sylius\Bundle\PayumBundle\PaymentRequest\Processor\RequestProcessorInterface
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_payum.processor.payment_request.after_token_request', AfterTokenRequestProcessor::class)
+    $services
+        ->set('sylius_payum.processor.payment_request.after_token_request', AfterTokenRequestProcessor::class)
         ->args([
             service('sylius.factory.payment_request'),
             service('sylius.repository.payment_request'),
             service('sylius.announcer.payment_request'),
-        ]);
-
+        ])
+    ;
     $services->alias(AfterTokenRequestProcessorInterface::class, 'sylius_payum.processor.payment_request.after_token_request');
 
-    $services->set('sylius_payum.processor.payment_request.request', RequestProcessor::class)
+    $services
+        ->set('sylius_payum.processor.payment_request.request', RequestProcessor::class)
         ->args([
             service('payum'),
             service('sylius_payum.context.payment_request'),
             service('sylius_abstraction.state_machine'),
-        ]);
-
+        ])
+    ;
     $services->alias(RequestProcessorInterface::class, 'sylius_payum.processor.payment_request.request');
 };

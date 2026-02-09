@@ -21,18 +21,21 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\PercentageDiscountPrice
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.calculator.catalog_promotion.price', CatalogPromotionPriceCalculator::class)
-        ->args([tagged_iterator('sylius.catalog_promotion.price_calculator')]);
-
+    $services
+        ->set('sylius.calculator.catalog_promotion.price', CatalogPromotionPriceCalculator::class)
+        ->args([tagged_iterator('sylius.catalog_promotion.price_calculator')])
+    ;
     $services->alias(CatalogPromotionPriceCalculatorInterface::class, 'sylius.calculator.catalog_promotion.price');
 
-    $services->set('sylius.calculator.catalog_promotion.fixed_discount_price', FixedDiscountPriceCalculator::class)
-        ->tag('sylius.catalog_promotion.price_calculator', ['type' => 'fixed_discount']);
-
+    $services
+        ->set('sylius.calculator.catalog_promotion.fixed_discount_price', FixedDiscountPriceCalculator::class)
+        ->tag('sylius.catalog_promotion.price_calculator', ['type' => 'fixed_discount'])
+    ;
     $services->alias('Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\ActionBasedPriceCalculatorInterface $fixedDiscountPriceCalculator', 'sylius.calculator.catalog_promotion.fixed_discount_price');
 
-    $services->set('sylius.calculator.catalog_promotion.percentage_discount_price', PercentageDiscountPriceCalculator::class)
-        ->tag('sylius.catalog_promotion.price_calculator', ['type' => 'percentage_discount']);
-
+    $services
+        ->set('sylius.calculator.catalog_promotion.percentage_discount_price', PercentageDiscountPriceCalculator::class)
+        ->tag('sylius.catalog_promotion.price_calculator', ['type' => 'percentage_discount'])
+    ;
     $services->alias('Sylius\Bundle\CoreBundle\CatalogPromotion\Calculator\ActionBasedPriceCalculatorInterface $percentageDiscountPriceCalculator', 'sylius.calculator.catalog_promotion.percentage_discount_price');
 };

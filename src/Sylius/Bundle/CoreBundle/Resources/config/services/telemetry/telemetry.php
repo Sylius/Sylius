@@ -46,158 +46,200 @@ use Symfony\Component\HttpClient\HttpClient;
 return static function (ContainerConfigurator $container): void {
     $services = $container->services();
 
-    $services->set('sylius.telemetry.installation_id_generator', InstallationIdGenerator::class)
-        ->lazy(InstallationIdGeneratorInterface::class)
+    $services
+        ->set('sylius.telemetry.installation_id_generator', InstallationIdGenerator::class)
         ->args([
             '%sylius_core.telemetry.salt%',
-        ]);
+        ])
+        ->lazy(InstallationIdGeneratorInterface::class)
+    ;
 
-    $services->set('sylius.telemetry.data_provider.version', VersionDataProvider::class)
+    $services
+        ->set('sylius.telemetry.data_provider.version', VersionDataProvider::class)
         ->lazy(DataProviderInterface::class)
-        ->tag('sylius.telemetry.technical_data_provider');
+        ->tag('sylius.telemetry.technical_data_provider')
+    ;
 
-    $services->set('sylius.telemetry.data_provider.database_platform', DatabasePlatformDataProvider::class)
-        ->lazy(DataProviderInterface::class)
+    $services
+        ->set('sylius.telemetry.data_provider.database_platform', DatabasePlatformDataProvider::class)
         ->args([
             service('doctrine'),
         ])
-        ->tag('sylius.telemetry.technical_data_provider');
-
-    $services->set('sylius.telemetry.data_provider.environment', EnvironmentDataProvider::class)
         ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.technical_data_provider')
+    ;
+
+    $services
+        ->set('sylius.telemetry.data_provider.environment', EnvironmentDataProvider::class)
         ->args([
             '%kernel.environment%',
         ])
-        ->tag('sylius.telemetry.technical_data_provider');
+        ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.technical_data_provider')
+    ;
 
-    $services->set('sylius.telemetry.collector.technical', TechnicalDataCollector::class)
-        ->lazy(TelemetryDataCollectorInterface::class)
+    $services
+        ->set('sylius.telemetry.collector.technical', TechnicalDataCollector::class)
         ->args([
             tagged_iterator('sylius.telemetry.technical_data_provider'),
             '%sylius_core.telemetry.technical%',
         ])
-        ->tag('sylius.telemetry.collector');
+        ->lazy(TelemetryDataCollectorInterface::class)
+        ->tag('sylius.telemetry.collector')
+    ;
 
-    $services->set('sylius.telemetry.data_provider.installed_plugins', InstalledPluginsDataProvider::class)
-        ->lazy(DataProviderInterface::class)
+    $services
+        ->set('sylius.telemetry.data_provider.installed_plugins', InstalledPluginsDataProvider::class)
         ->args([
             '%kernel.project_dir%',
         ])
-        ->tag('sylius.telemetry.plugins_data_provider');
+        ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.plugins_data_provider')
+    ;
 
-    $services->set('sylius.telemetry.collector.plugins', PluginsDataCollector::class)
-        ->lazy(TelemetryDataCollectorInterface::class)
+    $services
+        ->set('sylius.telemetry.collector.plugins', PluginsDataCollector::class)
         ->args([
             tagged_iterator('sylius.telemetry.plugins_data_provider'),
             '%sylius_core.telemetry.plugins%',
         ])
-        ->tag('sylius.telemetry.collector');
+        ->lazy(TelemetryDataCollectorInterface::class)
+        ->tag('sylius.telemetry.collector')
+    ;
 
-    $services->set('sylius.telemetry.data_provider.locales', LocalesDataProvider::class)
-        ->lazy(DataProviderInterface::class)
+    $services
+        ->set('sylius.telemetry.data_provider.locales', LocalesDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
             '%locale%',
         ])
-        ->tag('sylius.telemetry.business_data_provider');
-
-    $services->set('sylius.telemetry.data_provider.currencies', CurrenciesDataProvider::class)
         ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.business_data_provider')
+    ;
+
+    $services
+        ->set('sylius.telemetry.data_provider.currencies', CurrenciesDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
         ])
-        ->tag('sylius.telemetry.business_data_provider');
-
-    $services->set('sylius.telemetry.data_provider.payment_methods', PaymentMethodsDataProvider::class)
         ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.business_data_provider')
+    ;
+
+    $services
+        ->set('sylius.telemetry.data_provider.payment_methods', PaymentMethodsDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
         ])
-        ->tag('sylius.telemetry.business_data_provider');
-
-    $services->set('sylius.telemetry.data_provider.shipping_methods', ShippingMethodsDataProvider::class)
         ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.business_data_provider')
+    ;
+
+    $services
+        ->set('sylius.telemetry.data_provider.shipping_methods', ShippingMethodsDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
         ])
-        ->tag('sylius.telemetry.business_data_provider');
-
-    $services->set('sylius.telemetry.data_provider.metrics_counts', MetricsCountsDataProvider::class)
         ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.business_data_provider')
+    ;
+
+    $services
+        ->set('sylius.telemetry.data_provider.metrics_counts', MetricsCountsDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
         ])
-        ->tag('sylius.telemetry.business_data_provider');
-
-    $services->set('sylius.telemetry.data_provider.orders_business', OrdersBusinessDataProvider::class)
         ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.business_data_provider')
+    ;
+
+    $services
+        ->set('sylius.telemetry.data_provider.orders_business', OrdersBusinessDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
         ])
-        ->tag('sylius.telemetry.business_data_provider');
-
-    $services->set('sylius.telemetry.data_provider.countries', CountriesDataProvider::class)
         ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.business_data_provider')
+    ;
+
+    $services
+        ->set('sylius.telemetry.data_provider.countries', CountriesDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
         ])
-        ->tag('sylius.telemetry.business_data_provider');
+        ->lazy(DataProviderInterface::class)
+        ->tag('sylius.telemetry.business_data_provider')
+    ;
 
-    $services->set('sylius.telemetry.collector.business', BusinessDataCollector::class)
-        ->lazy(TelemetryDataCollectorInterface::class)
+    $services
+        ->set('sylius.telemetry.collector.business', BusinessDataCollector::class)
         ->args([
             tagged_iterator('sylius.telemetry.business_data_provider'),
             '%sylius_core.telemetry.business%',
         ])
-        ->tag('sylius.telemetry.collector');
+        ->lazy(TelemetryDataCollectorInterface::class)
+        ->tag('sylius.telemetry.collector')
+    ;
 
-    $services->set('sylius.telemetry.orchestrator', TelemetryOrchestrator::class)
-        ->lazy(TelemetryOrchestratorInterface::class)
+    $services
+        ->set('sylius.telemetry.orchestrator', TelemetryOrchestrator::class)
         ->args([
             service('sylius.telemetry.installation_id_generator'),
             tagged_iterator('sylius.telemetry.collector'),
-        ]);
+        ])
+        ->lazy(TelemetryOrchestratorInterface::class)
+    ;
 
-    $services->set('sylius.telemetry.cache', TelemetryCache::class)
-        ->lazy(TelemetryCacheInterface::class)
+    $services
+        ->set('sylius.telemetry.cache', TelemetryCache::class)
         ->args([
             service('cache.app'),
-        ]);
+        ])
+        ->lazy(TelemetryCacheInterface::class)
+    ;
 
-    $services->set('sylius.telemetry.send_manager', TelemetrySendManager::class)
-        ->lazy(TelemetrySendManagerInterface::class)
+    $services
+        ->set('sylius.telemetry.send_manager', TelemetrySendManager::class)
         ->args([
             service('sylius.telemetry.orchestrator'),
             service('sylius.telemetry.cache'),
             service('sylius.telemetry.sender'),
-        ]);
+        ])
+        ->lazy(TelemetrySendManagerInterface::class)
+    ;
 
-    $services->set('sylius.telemetry.listener', TelemetryListener::class)
-        ->lazy()
+    $services
+        ->set('sylius.telemetry.listener', TelemetryListener::class)
         ->args([
             service('sylius.telemetry.send_manager'),
             '%sylius.security.api_admin_route%',
         ])
+        ->lazy()
         ->tag('kernel.event_listener', [
             'event' => 'kernel.terminate',
             'method' => 'onAdminAccess',
             'priority' => -1024,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius.telemetry.sender', TelemetrySender::class)
-        ->lazy(TelemetrySenderInterface::class)
+    $services
+        ->set('sylius.telemetry.sender', TelemetrySender::class)
         ->args([
             inline_service(HttpClient::class)
                 ->factory([HttpClient::class, 'create']),
             '%sylius_core.telemetry.url%',
-        ]);
+        ])
+        ->lazy(TelemetrySenderInterface::class)
+    ;
 
-    $services->set('sylius.telemetry.listener.notice', TelemetryNoticeListener::class)
+    $services
+        ->set('sylius.telemetry.listener.notice', TelemetryNoticeListener::class)
         ->args([
             service('cache.app'),
         ])
         ->tag('kernel.event_listener', [
             'event' => 'console.terminate',
             'method' => 'onConsoleTerminate',
-        ]);
+        ])
+    ;
 };

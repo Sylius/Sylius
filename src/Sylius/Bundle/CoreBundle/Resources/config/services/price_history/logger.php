@@ -19,12 +19,13 @@ use Sylius\Bundle\CoreBundle\PriceHistory\Logger\PriceChangeLoggerInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.logger.price_history.price_change', PriceChangeLogger::class)
+    $services
+        ->set('sylius.logger.price_history.price_change', PriceChangeLogger::class)
         ->args([
             service('sylius.factory.channel_pricing_log_entry'),
             service('sylius.manager.channel_pricing_log_entry'),
             service('clock'),
-        ]);
-
+        ])
+    ;
     $services->alias(PriceChangeLoggerInterface::class, 'sylius.logger.price_history.price_change');
 };

@@ -36,87 +36,110 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
     $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.locale.validation_groups', ['sylius']);
 
-    $services->set('sylius.form.type.locale', LocaleType::class)
+    $services
+        ->set('sylius.form.type.locale', LocaleType::class)
         ->args([
             '%sylius.model.locale.class%',
             '%sylius.form.type.locale.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.form.data_transformer.locale_to_code', LocaleToCodeTransformer::class)
-        ->args([service('sylius.provider.locale_collection')]);
+    $services
+        ->set('sylius.form.data_transformer.locale_to_code', LocaleToCodeTransformer::class)
+        ->args([service('sylius.provider.locale_collection')])
+    ;
 
-    $services->set('sylius.form.type.locale_choice', LocaleChoiceType::class)
+    $services
+        ->set('sylius.form.type.locale_choice', LocaleChoiceType::class)
         ->args([service('sylius.repository.locale')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius.context.locale', ImmutableLocaleContext::class)
+    $services
+        ->set('sylius.context.locale', ImmutableLocaleContext::class)
+        ->args(['%sylius_locale.locale%'])
         ->public()
-        ->args(['%sylius_locale.locale%']);
-
+    ;
     $services->alias(LocaleContextInterface::class, 'sylius.context.locale');
 
-    $services->set('sylius.context.locale.composite', CompositeLocaleContext::class)
+    $services
+        ->set('sylius.context.locale.composite', CompositeLocaleContext::class)
+        ->decorate('sylius.context.locale', null, 256)
         ->private()
-        ->decorate('sylius.context.locale', null, 256);
+    ;
 
-    $services->set('sylius.context.locale.request_header_based', RequestHeaderBasedLocaleContext::class)
+    $services
+        ->set('sylius.context.locale.request_header_based', RequestHeaderBasedLocaleContext::class)
         ->args([
             service('request_stack'),
             service('sylius.provider.locale'),
         ])
-        ->tag('sylius.context.locale', ['priority' => 32]);
+        ->tag('sylius.context.locale', ['priority' => 32])
+    ;
 
-    $services->set('sylius.provider.locale_collection', LocaleCollectionProvider::class)
-        ->args([service('sylius.repository.locale')]);
+    $services
+        ->set('sylius.provider.locale_collection', LocaleCollectionProvider::class)
+        ->args([service('sylius.repository.locale')])
+    ;
 
-    $services->set('sylius.provider.locale_collection.cached', CachedLocaleCollectionProvider::class)
+    $services
+        ->set('sylius.provider.locale_collection.cached', CachedLocaleCollectionProvider::class)
         ->decorate('sylius.provider.locale_collection')
         ->args([
             service('.inner'),
             service('cache.app'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius.provider.locale', LocaleProvider::class)
+    $services
+        ->set('sylius.provider.locale', LocaleProvider::class)
         ->args([
             service('sylius.provider.locale_collection'),
             '%sylius_locale.locale%',
-        ]);
-
+        ])
+    ;
     $services->alias(LocaleProviderInterface::class, 'sylius.provider.locale');
 
     $services->set('sylius.converter.locale', LocaleConverter::class);
-
     $services->alias(LocaleConverterInterface::class, 'sylius.converter.locale');
 
-    $services->set('sylius.listener.request_locale_setter', RequestLocaleSetter::class)
+    $services
+        ->set('sylius.listener.request_locale_setter', RequestLocaleSetter::class)
         ->args([
             service('sylius.context.locale'),
             service('sylius.provider.locale'),
         ])
-        ->tag('kernel.event_listener', ['event' => 'kernel.request', 'priority' => 4]);
+        ->tag('kernel.event_listener', ['event' => 'kernel.request', 'priority' => 4])
+    ;
 
-    $services->set('sylius.twig.extension.locale', LocaleExtension::class)
+    $services
+        ->set('sylius.twig.extension.locale', LocaleExtension::class)
         ->args([
             service('sylius.converter.locale'),
             service('sylius.context.locale'),
         ])
-        ->tag('twig.extension');
+        ->tag('twig.extension')
+    ;
 
-    $services->set('sylius.checker.locale_usage', LocaleUsageChecker::class)
+    $services
+        ->set('sylius.checker.locale_usage', LocaleUsageChecker::class)
         ->args([
             service('sylius.repository.locale'),
             service('sylius.resource_registry'),
             service('doctrine.orm.entity_manager'),
-        ]);
-
+        ])
+    ;
     $services->alias(LocaleUsageCheckerInterface::class, 'sylius.checker.locale_usage');
 
-    $services->set('sylius.doctrine.listener.locale_modification', LocaleModificationListener::class)
+    $services
+        ->set('sylius.doctrine.listener.locale_modification', LocaleModificationListener::class)
         ->args([service('cache.app')])
         ->tag('doctrine.orm.entity_listener', ['event' => 'postPersist', 'entity' => Locale::class, 'method' => 'invalidateCachedLocales'])
         ->tag('doctrine.orm.entity_listener', ['event' => 'postUpdate', 'entity' => Locale::class, 'method' => 'invalidateCachedLocales'])
-        ->tag('doctrine.orm.entity_listener', ['event' => 'postRemove', 'entity' => Locale::class, 'method' => 'invalidateCachedLocales']);
+        ->tag('doctrine.orm.entity_listener', ['event' => 'postRemove', 'entity' => Locale::class, 'method' => 'invalidateCachedLocales'])
+    ;
 };

@@ -19,9 +19,10 @@ use Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProviderInterf
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_api.provider.payment_configuration', CompositePaymentConfigurationProvider::class)
-        ->args([tagged_iterator('sylius.api.payment_method_handler')]);
-
+    $services
+        ->set('sylius_api.provider.payment_configuration', CompositePaymentConfigurationProvider::class)
+        ->args([tagged_iterator('sylius.api.payment_method_handler')])
+    ;
     $services->alias('sylius_api.provider.payment_configuration.composite', 'sylius_api.provider.payment_configuration');
 
     $services->alias(CompositePaymentConfigurationProviderInterface::class, 'sylius_api.provider.payment_configuration');

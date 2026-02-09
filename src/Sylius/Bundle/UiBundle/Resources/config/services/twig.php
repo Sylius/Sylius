@@ -20,16 +20,16 @@ use Sylius\Bundle\UiBundle\Twig\RedirectPathExtension;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.twig.extension.percentage', PercentageExtension::class)
-        ->tag('twig.extension');
+    $services->set('sylius.twig.extension.percentage', PercentageExtension::class)->tag('twig.extension');
 
-    $services->set('sylius.twig.extension.merge_recursive', MergeRecursiveExtension::class)
-        ->tag('twig.extension');
+    $services->set('sylius.twig.extension.merge_recursive', MergeRecursiveExtension::class)->tag('twig.extension');
 
-    $services->set('sylius.twig.extension.redirect_path', RedirectPathExtension::class)
+    $services
+        ->set('sylius.twig.extension.redirect_path', RedirectPathExtension::class)
         ->args([
             service('sylius.grid.filter_storage'),
             service('router'),
         ])
-        ->tag('twig.extension');
+        ->tag('twig.extension')
+    ;
 };

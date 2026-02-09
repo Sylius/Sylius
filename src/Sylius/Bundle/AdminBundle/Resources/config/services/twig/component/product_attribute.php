@@ -19,12 +19,14 @@ use Sylius\Bundle\AdminBundle\Twig\Component\ProductAttribute\FormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.product_attribute.form', FormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.product_attribute.form', FormComponent::class)
         ->args([
             service('sylius.repository.product_attribute'),
             service('form.factory'),
             '%sylius.model.product_attribute.class%',
             ProductAttributeType::class,
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product_attribute:form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product_attribute:form'])
+    ;
 };

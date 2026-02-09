@@ -47,142 +47,175 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_api.context_builder.channel_code_aware', ChannelCodeAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.channel_code_aware', ChannelCodeAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             ChannelCodeAware::class,
             ChannelCodeAware::DEFAULT_ARGUMENT_NAME,
             service('sylius.context.channel'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.logged_in_customer_email_aware', LoggedInCustomerEmailAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.logged_in_customer_email_aware', LoggedInCustomerEmailAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             LoggedInCustomerEmailAware::class,
             LoggedInCustomerEmailAware::DEFAULT_ARGUMENT_NAME,
             service('sylius_api.context.user.token_based'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.channel', ChannelContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.channel', ChannelContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             service('sylius.context.channel'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.locale_code_aware', LocaleCodeAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.locale_code_aware', LocaleCodeAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             LocaleCodeAware::class,
             LocaleCodeAware::DEFAULT_ARGUMENT_NAME,
             service('sylius.context.locale'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.locale', LocaleContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.locale', LocaleContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             service('sylius.context.locale'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.http_request_method_type', HttpRequestMethodTypeContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.http_request_method_type', HttpRequestMethodTypeContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
-        ->args([service('.inner')]);
+        ->args([service('.inner')])
+    ;
 
-    $services->set('sylius_api.context_builder.logged_in_shop_user_id_aware', LoggedInShopUserIdAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.logged_in_shop_user_id_aware', LoggedInShopUserIdAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             ShopUserIdAware::class,
             ShopUserIdAware::DEFAULT_ARGUMENT_NAME,
             service('sylius_api.context.user.token_based'),
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.shipment_aware', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.shipment_aware', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             ShipmentIdAware::class,
             ShipmentIdAware::DEFAULT_ARGUMENT_NAME,
             ShipmentInterface::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.payment_aware', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.payment_aware', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             PaymentIdAware::class,
             PaymentIdAware::DEFAULT_ARGUMENT_NAME,
             PaymentInterface::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.payment_request_hash_aware', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.payment_request_hash_aware', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             PaymentRequestHashAware::class,
             PaymentRequestHashAware::DEFAULT_ARGUMENT_NAME,
             PaymentRequestInterface::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.order_token_value_aware', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.order_token_value_aware', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             OrderTokenValueAware::class,
             OrderTokenValueAware::DEFAULT_ARGUMENT_NAME,
             OrderInterface::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.order_item_aware', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.order_item_aware', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             OrderItemIdAware::class,
             OrderItemIdAware::DEFAULT_ARGUMENT_NAME,
             OrderItemInterface::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.promotion_code_aware', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.promotion_code_aware', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             PromotionCodeAware::class,
             PromotionCodeAware::DEFAULT_ARGUMENT_NAME,
             PromotionInterface::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.token_aware.admin_user_reset_password', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.token_aware.admin_user_reset_password', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             TokenAware::class,
             TokenAware::DEFAULT_ARGUMENT_NAME,
             AdminResetPassword::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.token_aware.shop_user_reset_password', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.token_aware.shop_user_reset_password', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             TokenAware::class,
             TokenAware::DEFAULT_ARGUMENT_NAME,
             ResetPassword::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.token_aware.verify_shop_user', UriVariablesAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.token_aware.verify_shop_user', UriVariablesAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('.inner'),
             TokenAware::class,
             TokenAware::DEFAULT_ARGUMENT_NAME,
             VerifyShopUser::class,
-        ]);
+        ])
+    ;
 
-    $services->set('sylius_api.context_builder.payment_request_action_aware', PaymentRequestActionAwareContextBuilder::class)
+    $services
+        ->set('sylius_api.context_builder.payment_request_action_aware', PaymentRequestActionAwareContextBuilder::class)
         ->decorate('api_platform.serializer.context_builder', null, 64)
         ->args([
             service('sylius_api.converter.iri_to_identifier'),
@@ -190,5 +223,6 @@ return static function (ContainerConfigurator $container) {
             PaymentRequestActionAware::class,
             PaymentRequestActionAware::DEFAULT_ARGUMENT_NAME,
             service('sylius.provider.payment_request.default_action'),
-        ]);
+        ])
+    ;
 };

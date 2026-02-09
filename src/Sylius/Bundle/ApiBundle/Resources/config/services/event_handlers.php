@@ -18,13 +18,14 @@ use Sylius\Bundle\ApiBundle\EventHandler\OrderCompletedHandler;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius_api.event_handler.order_completed', OrderCompletedHandler::class)
+    $services
+        ->set('sylius_api.event_handler.order_completed', OrderCompletedHandler::class)
         ->args([
             service('sylius.command_bus'),
             service('sylius.repository.order'),
         ])
-        ->tag('messenger.message_handler', ['bus' => 'sylius.event_bus']);
+        ->tag('messenger.message_handler', ['bus' => 'sylius.event_bus'])
+    ;
 };

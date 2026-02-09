@@ -21,20 +21,26 @@ use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.twig.component.product_review.list', ListComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.product_review.list', ListComponent::class)
         ->args([service('sylius.repository.product_review')])
-        ->tag('sylius.twig_component', ['key' => 'sylius_shop:product_review:list']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_shop:product_review:list'])
+    ;
 
-    $services->set('sylius_shop.twig.component.product_review.count', CountComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.product_review.count', CountComponent::class)
         ->args([service('sylius.repository.product_review')])
-        ->tag('sylius.twig_component', ['key' => 'sylius_shop:product_review.count']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_shop:product_review.count'])
+    ;
 
-    $services->set('sylius_shop.twig.component.product_review.form', ResourceFormComponent::class)
+    $services
+        ->set('sylius_shop.twig.component.product_review.form', ResourceFormComponent::class)
         ->args([
             service('sylius.repository.product_review'),
             service('form.factory'),
             '%sylius.model.product_review.class%',
             ProductReviewType::class,
         ])
-        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:product_review:form']);
+        ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:product_review:form'])
+    ;
 };

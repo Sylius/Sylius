@@ -19,6 +19,8 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.resolver.order_pay.payment_to_pay', PaymentToPayResolver::class)
-        ->args([PaymentInterface::STATE_NEW]);
+    $services
+        ->set('sylius_shop.resolver.order_pay.payment_to_pay', PaymentToPayResolver::class)
+        ->args([PaymentInterface::STATE_NEW])
+    ;
 };

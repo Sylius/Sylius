@@ -20,16 +20,19 @@ use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_api.context.user.token_based', TokenBasedUserContext::class)
-        ->args([service('security.token_storage')]);
-
+    $services
+        ->set('sylius_api.context.user.token_based', TokenBasedUserContext::class)
+        ->args([service('security.token_storage')])
+    ;
     $services->alias(UserContextInterface::class, 'sylius_api.context.user.token_based');
 
-    $services->set('sylius_api.context.cart.token_value_based', TokenValueBasedCartContext::class)
+    $services
+        ->set('sylius_api.context.cart.token_value_based', TokenValueBasedCartContext::class)
         ->args([
             service('request_stack'),
             service('sylius.repository.order'),
             '%sylius.security.api_route%',
         ])
-        ->tag('sylius.context.cart', ['priority' => -333]);
+        ->tag('sylius.context.cart', ['priority' => -333])
+    ;
 };

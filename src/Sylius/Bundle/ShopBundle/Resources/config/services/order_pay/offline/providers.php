@@ -18,7 +18,9 @@ use Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline\StatusHttpResponseProvide
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.provider.order_pay.http_response.offline.status', StatusHttpResponseProvider::class)
+    $services
+        ->set('sylius_shop.provider.order_pay.http_response.offline.status', StatusHttpResponseProvider::class)
         ->args([service('sylius_shop.provider.order_pay.final_url')])
-        ->tag('sylius.provider.payment_request.http_response.offline', ['action' => 'status']);
+        ->tag('sylius.provider.payment_request.http_response.offline', ['action' => 'status'])
+    ;
 };

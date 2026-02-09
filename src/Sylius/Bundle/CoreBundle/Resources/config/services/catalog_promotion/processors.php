@@ -29,41 +29,45 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPro
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.processor.catalog_promotion.all_product_variant', AllProductVariantsCatalogPromotionsProcessor::class)
+    $services
+        ->set('sylius.processor.catalog_promotion.all_product_variant', AllProductVariantsCatalogPromotionsProcessor::class)
         ->args([
             service('sylius.repository.product_variant'),
             service('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants'),
-        ]);
-
+        ])
+    ;
     $services->alias(AllProductVariantsCatalogPromotionsProcessorInterface::class, 'sylius.processor.catalog_promotion.all_product_variant');
 
     $services->set('sylius.processor.catalog_promotion.clearer', CatalogPromotionClearer::class);
-
     $services->alias(CatalogPromotionClearerInterface::class, 'sylius.processor.catalog_promotion.clearer');
 
-    $services->set('sylius.processor.catalog_promotion.state', CatalogPromotionStateProcessor::class)
+    $services
+        ->set('sylius.processor.catalog_promotion.state', CatalogPromotionStateProcessor::class)
         ->args([
             service('sylius.checker.catalog_promotion_eligibility'),
             service('sylius_abstraction.state_machine'),
-        ]);
-
+        ])
+    ;
     $services->alias(CatalogPromotionStateProcessorInterface::class, 'sylius.processor.catalog_promotion.state');
 
-    $services->set('sylius.processor.catalog_promotion.product', ProductCatalogPromotionsProcessor::class)
-        ->args([service('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants')]);
-
+    $services
+        ->set('sylius.processor.catalog_promotion.product', ProductCatalogPromotionsProcessor::class)
+        ->args([service('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants')])
+    ;
     $services->alias(ProductCatalogPromotionsProcessorInterface::class, 'sylius.processor.catalog_promotion.product');
 
-    $services->set('sylius.processor.catalog_promotion.product_variant', ProductVariantCatalogPromotionsProcessor::class)
-        ->args([service('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants')]);
-
+    $services
+        ->set('sylius.processor.catalog_promotion.product_variant', ProductVariantCatalogPromotionsProcessor::class)
+        ->args([service('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants')])
+    ;
     $services->alias(ProductVariantCatalogPromotionsProcessorInterface::class, 'sylius.processor.catalog_promotion.product_variant');
 
-    $services->set('sylius.processor.catalog_promotion.removal', CatalogPromotionRemovalProcessor::class)
+    $services
+        ->set('sylius.processor.catalog_promotion.removal', CatalogPromotionRemovalProcessor::class)
         ->args([
             service('sylius.repository.catalog_promotion'),
             service('sylius.announcer.catalog_promotion.removal'),
-        ]);
-
+        ])
+    ;
     $services->alias(CatalogPromotionRemovalProcessorInterface::class, 'sylius.processor.catalog_promotion.removal');
 };

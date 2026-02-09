@@ -19,7 +19,8 @@ use Sylius\Bundle\AdminBundle\Twig\Component\ProductVariant\FormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.product_variant.form', FormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.product_variant.form', FormComponent::class)
         ->args([
             service('sylius.repository.product_variant'),
             service('form.factory'),
@@ -28,5 +29,6 @@ return static function (ContainerConfigurator $container) {
             service('sylius.factory.product_variant'),
             service('sylius.repository.product'),
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product_variant:form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product_variant:form'])
+    ;
 };

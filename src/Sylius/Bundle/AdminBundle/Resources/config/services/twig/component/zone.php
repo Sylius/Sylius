@@ -19,12 +19,14 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Zone\FormComponent;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.zone.form', FormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.zone.form', FormComponent::class)
         ->args([
             service('sylius.repository.zone'),
             service('form.factory'),
             '%sylius.model.zone.class%',
             ZoneType::class,
         ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:zone:form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:zone:form'])
+    ;
 };

@@ -21,31 +21,39 @@ use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Grid\Filter\StringFilter;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('services/**.php');
     $container->import('services/order_pay/**/*.php');
     $container->import('services/twig/**/*.php');
 
-    $services->set('sylius_shop.section_resolver.shop_uri_based', ShopUriBasedSectionResolver::class)
-        ->args(['account'])
-        ->tag('sylius.uri_based_section_resolver', ['priority' => -10]);
+    $services = $container->services();
 
-    $services->set('sylius_shop.context.cart.session_and_channel_based', SessionAndChannelBasedCartContext::class)
+    $services
+        ->set('sylius_shop.section_resolver.shop_uri_based', ShopUriBasedSectionResolver::class)
+        ->args(['account'])
+        ->tag('sylius.uri_based_section_resolver', ['priority' => -10])
+    ;
+
+    $services
+        ->set('sylius_shop.context.cart.session_and_channel_based', SessionAndChannelBasedCartContext::class)
         ->args([
             service('sylius_shop.storage.cart_session'),
             service('sylius.context.channel'),
         ])
-        ->tag('sylius.context.cart', ['priority' => -777]);
+        ->tag('sylius.context.cart', ['priority' => -777])
+    ;
 
-    $services->set('sylius_shop.storage.cart_session', CartSessionStorage::class)
+    $services
+        ->set('sylius_shop.storage.cart_session', CartSessionStorage::class)
         ->args([
             service('request_stack'),
             '_sylius.cart',
             service('sylius.repository.order'),
-        ]);
-
+        ])
+    ;
     $services->alias(CartStorageInterface::class, 'sylius_shop.storage.cart_session');
 
-    $services->set('sylius_shop.grid_filter.string', StringFilter::class)
-        ->tag('sylius.grid_filter', ['type' => 'shop_string', 'form_type' => StringFilterType::class]);
+    $services
+        ->set('sylius_shop.grid_filter.string', StringFilter::class)
+        ->tag('sylius.grid_filter', ['type' => 'shop_string', 'form_type' => StringFilterType::class])
+    ;
 };

@@ -19,12 +19,13 @@ use Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\BatchedApplyLowestPr
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings', BatchedApplyLowestPriceOnChannelPricingsCommandDispatcher::class)
+    $services
+        ->set('sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings', BatchedApplyLowestPriceOnChannelPricingsCommandDispatcher::class)
         ->args([
             service('sylius.repository.channel_pricing'),
             service('sylius.command_bus'),
             '%sylius_core.price_history.batch_size%',
-        ]);
-
+        ])
+    ;
     $services->alias(ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface::class, 'sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings');
 };

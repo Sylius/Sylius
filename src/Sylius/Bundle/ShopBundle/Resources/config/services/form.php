@@ -28,46 +28,44 @@ use Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_shop.form.type.address', AddressType::class)
+    $services
+        ->set('sylius_shop.form.type.address', AddressType::class)
         ->args([service('sylius.repository.country')])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius_shop.form.type.add_to_cart', AddToCartType::class)
-        ->tag('form.type');
+    $services->set('sylius_shop.form.type.add_to_cart', AddToCartType::class)->tag('form.type');
 
-    $services->set('sylius_shop.form.type.cart', CartType::class)
-        ->tag('form.type');
+    $services->set('sylius_shop.form.type.cart', CartType::class)->tag('form.type');
 
-    $services->set('sylius_shop.form.type.cart_item', CartItemType::class)
-        ->tag('form.type');
+    $services->set('sylius_shop.form.type.cart_item', CartItemType::class)->tag('form.type');
 
-    $services->set('sylius_shop.form.type.customer_registration', CustomerRegistrationType::class)
+    $services
+        ->set('sylius_shop.form.type.customer_registration', CustomerRegistrationType::class)
         ->args([
             '%sylius.model.customer.class%',
             '%sylius.form.type.customer_registration.validation_groups%',
             service('sylius.repository.customer'),
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius_shop.form.type.customer_profile', CustomerProfileType::class)
+    $services
+        ->set('sylius_shop.form.type.customer_profile', CustomerProfileType::class)
         ->args([
             '%sylius.model.customer.class%',
             '%sylius.form.type.customer_profile.validation_groups%',
         ])
-        ->tag('form.type');
+        ->tag('form.type')
+    ;
 
-    $services->set('sylius_shop.form.type.user_change_password', UserChangePasswordType::class)
-        ->tag('form.type');
+    $services->set('sylius_shop.form.type.user_change_password', UserChangePasswordType::class)->tag('form.type');
 
-    $services->set('sylius_shop.form.type.checkout.address', CheckoutAddressType::class)
-        ->tag('form.type');
+    $services->set('sylius_shop.form.type.checkout.address', CheckoutAddressType::class)->tag('form.type');
 
-    $services->set('sylius_shop.form.type.checkout.select_shipping', SelectShippingType::class)
-        ->tag('form.type');
+    $services->set('sylius_shop.form.type.checkout.select_shipping', SelectShippingType::class)->tag('form.type');
 
-    $services->set('sylius_shop.form.type.checkout.select_payment', SelectPaymentType::class)
-        ->tag('form.type');
+    $services->set('sylius_shop.form.type.checkout.select_payment', SelectPaymentType::class)->tag('form.type');
 
-    $services->set('sylius_shop.form.type.product_review', ProductReviewType::class)
-        ->tag('form.type');
+    $services->set('sylius_shop.form.type.product_review', ProductReviewType::class)->tag('form.type');
 };

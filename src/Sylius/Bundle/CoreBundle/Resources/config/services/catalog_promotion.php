@@ -23,7 +23,6 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\DiscountApplicationCriteria\Exclus
 use Sylius\Bundle\CoreBundle\CatalogPromotion\DiscountApplicationCriteria\MinimumPriceCriteria;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('catalog_promotion/applicators.php');
     $container->import('catalog_promotion/calculators.php');
     $container->import('catalog_promotion/checkers.php');
@@ -31,33 +30,42 @@ return static function (ContainerConfigurator $container) {
     $container->import('catalog_promotion/listeners.php');
     $container->import('catalog_promotion/processors.php');
 
-    $services->set('sylius.discount_application_criteria.catalog_promotion.exclusive', ExclusiveCriteria::class)
-        ->tag('sylius.catalog_promotion.applicator_criteria');
+    $services = $container->services();
 
-    $services->set('sylius.discount_application_criteria.catalog_promotion.minimum_price', MinimumPriceCriteria::class)
-        ->tag('sylius.catalog_promotion.applicator_criteria');
+    $services
+        ->set('sylius.discount_application_criteria.catalog_promotion.exclusive', ExclusiveCriteria::class)
+        ->tag('sylius.catalog_promotion.applicator_criteria')
+    ;
 
-    $services->set('sylius.announcer.catalog_promotion', CatalogPromotionAnnouncer::class)
-        ->public()
+    $services
+        ->set('sylius.discount_application_criteria.catalog_promotion.minimum_price', MinimumPriceCriteria::class)
+        ->tag('sylius.catalog_promotion.applicator_criteria')
+    ;
+
+    $services
+        ->set('sylius.announcer.catalog_promotion', CatalogPromotionAnnouncer::class)
         ->args([
             service('sylius.event_bus'),
             service('sylius.calculator.delay_stamp'),
             service('clock'),
-        ]);
-
+        ])
+        ->public()
+    ;
     $services->alias(CatalogPromotionAnnouncerInterface::class, 'sylius.announcer.catalog_promotion');
 
-    $services->set('sylius.announcer.catalog_promotion.removal', CatalogPromotionRemovalAnnouncer::class)
+    $services
+        ->set('sylius.announcer.catalog_promotion.removal', CatalogPromotionRemovalAnnouncer::class)
+        ->args([service('sylius.command_bus')])
         ->public()
-        ->args([service('sylius.command_bus')]);
-
+    ;
     $services->alias(CatalogPromotionRemovalAnnouncerInterface::class, 'sylius.announcer.catalog_promotion.removal');
 
-    $services->set('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants', BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher::class)
+    $services
+        ->set('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants', BatchedApplyCatalogPromotionsOnVariantsCommandDispatcher::class)
         ->args([
             service('sylius.command_bus'),
             '%sylius_core.catalog_promotions.batch_size%',
-        ]);
-
+        ])
+    ;
     $services->alias(ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface::class, 'sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants');
 };

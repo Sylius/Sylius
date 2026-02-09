@@ -28,53 +28,64 @@ use Sylius\Bundle\CoreBundle\PriceHistory\Console\Command\ClearPriceHistoryComma
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->defaults()
-        ->public();
+    $services->defaults()->public();
 
-    $services->set('sylius.console.command.cancel_unpaid_orders', CancelUnpaidOrdersCommand::class)
+    $services
+        ->set('sylius.console.command.cancel_unpaid_orders', CancelUnpaidOrdersCommand::class)
         ->args([
             service('sylius.updater.unpaid_orders_state'),
             service('sylius.manager.order'),
             '%sylius_order.order_expiration_period%',
         ])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 
-    $services->set('sylius.console.command.check_requirements', CheckRequirementsCommand::class)
+    $services
+        ->set('sylius.console.command.check_requirements', CheckRequirementsCommand::class)
         ->args([service('sylius.checker.installer.sylius_requirements')])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 
-    $services->set('sylius.console.command.price_history.clear', ClearPriceHistoryCommand::class)
+    $services
+        ->set('sylius.console.command.price_history.clear', ClearPriceHistoryCommand::class)
         ->args([service('sylius.remover.channel_pricing_log_entries')])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 
-    $services->set('sylius.console.command.install_assets', InstallAssetsCommand::class)
+    $services
+        ->set('sylius.console.command.install_assets', InstallAssetsCommand::class)
         ->args([
             service('doctrine.orm.entity_manager'),
             service('sylius.checker.installer.command_directory'),
             '%sylius_core.public_dir%',
         ])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 
-    $services->set('sylius.console.command.install', InstallCommand::class)
-        ->tag('console.command');
+    $services->set('sylius.console.command.install', InstallCommand::class)->tag('console.command');
 
-    $services->set('sylius.console.command.install_database', InstallDatabaseCommand::class)
+    $services
+        ->set('sylius.console.command.install_database', InstallDatabaseCommand::class)
         ->args([
             service('doctrine.orm.entity_manager'),
             service('sylius.checker.installer.command_directory'),
             service('sylius.provider.installer.database_setup_commands'),
         ])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 
-    $services->set('sylius.console.command.install_sample_data', InstallSampleDataCommand::class)
+    $services
+        ->set('sylius.console.command.install_sample_data', InstallSampleDataCommand::class)
         ->args([
             service('doctrine.orm.entity_manager'),
             service('sylius.checker.installer.command_directory'),
             '%sylius_core.public_dir%',
         ])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 
-    $services->set('sylius.console.command.setup', SetupCommand::class)
+    $services
+        ->set('sylius.console.command.setup', SetupCommand::class)
         ->args([
             service('doctrine.orm.entity_manager'),
             service('sylius.checker.installer.command_directory'),
@@ -85,14 +96,12 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.admin_user'),
             service('validator'),
         ])
-        ->tag('console.command');
+        ->tag('console.command')
+    ;
 
-    $services->set('sylius.console.command.inform_about_gus', InformAboutGUSCommand::class)
-        ->tag('console.command');
+    $services->set('sylius.console.command.inform_about_gus', InformAboutGUSCommand::class)->tag('console.command');
 
-    $services->set('sylius.console.command.jwt_configuration', JwtConfigurationCommand::class)
-        ->tag('console.command');
+    $services->set('sylius.console.command.jwt_configuration', JwtConfigurationCommand::class)->tag('console.command');
 
-    $services->set('sylius.console.command.show_plus_info', ShowPlusInfoCommand::class)
-        ->tag('console.command');
+    $services->set('sylius.console.command.show_plus_info', ShowPlusInfoCommand::class)->tag('console.command');
 };

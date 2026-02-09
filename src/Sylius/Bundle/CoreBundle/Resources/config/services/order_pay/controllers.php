@@ -20,18 +20,20 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.controller.order_pay', OrderPayController::class)
-        ->abstract()
+    $services
+        ->set('sylius.controller.order_pay', OrderPayController::class)
         ->args([
             service('sylius.repository.order'),
             inline_service(MetadataInterface::class)
                 ->args(['sylius.order'])
                 ->factory([service('sylius.resource_registry'), 'get']),
             service('sylius.resource_controller.request_configuration_factory'),
-        ]);
-
-    $services->set('sylius.controller.payment_request_pay', PaymentRequestPayAction::class)
+        ])
         ->abstract()
+    ;
+
+    $services
+        ->set('sylius.controller.payment_request_pay', PaymentRequestPayAction::class)
         ->args([
             inline_service(MetadataInterface::class)
                 ->args(['sylius.payment_request'])
@@ -39,5 +41,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.resource_controller.request_configuration_factory'),
             service('sylius.repository.payment_request'),
             service('sylius.processor.payment_request.http_response'),
-        ]);
+        ])
+        ->abstract()
+    ;
 };

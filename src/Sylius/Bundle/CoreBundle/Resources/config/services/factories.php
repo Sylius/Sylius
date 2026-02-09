@@ -19,9 +19,10 @@ use Sylius\Bundle\CoreBundle\Factory\OrderFactoryInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.custom_factory.order', OrderFactory::class)
+    $services
+        ->set('sylius.custom_factory.order', OrderFactory::class)
         ->decorate('sylius.factory.order')
-        ->args([service('sylius.custom_factory.order.inner')]);
-
+        ->args([service('sylius.custom_factory.order.inner')])
+    ;
     $services->alias(OrderFactoryInterface::class, 'sylius.custom_factory.order');
 };

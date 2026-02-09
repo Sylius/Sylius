@@ -24,39 +24,49 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolver;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 return static function (ContainerConfigurator $container) {
+    $container->import('services/form.php');
+
     $services = $container->services();
     $parameters = $container->parameters();
-    $container->import('services/form.php');
 
     $parameters->set('sylius.tax_calculator.interface', CalculatorInterface::class);
 
-    $services->set('sylius.registry.tax_calculator', ServiceRegistry::class)
+    $services
+        ->set('sylius.registry.tax_calculator', ServiceRegistry::class)
         ->args([
             '%sylius.tax_calculator.interface%',
             'Tax calculator',
-        ]);
+        ])
+    ;
 
-    $services->set('sylius.tax_calculator', DelegatingCalculator::class)
-        ->args([service('sylius.registry.tax_calculator')]);
-
+    $services
+        ->set('sylius.tax_calculator', DelegatingCalculator::class)
+        ->args([service('sylius.registry.tax_calculator')])
+    ;
     $services->alias(CalculatorInterface::class, 'sylius.tax_calculator');
 
-    $services->set('sylius.tax_calculator.default', DefaultCalculator::class)
-        ->tag('sylius.tax_calculator', ['calculator' => 'default']);
+    $services
+        ->set('sylius.tax_calculator.default', DefaultCalculator::class)
+        ->tag('sylius.tax_calculator', ['calculator' => 'default'])
+    ;
 
-    $services->set('sylius.tax_calculator.decimal', DecimalCalculator::class)
-        ->tag('sylius.tax_calculator', ['calculator' => 'decimal']);
+    $services
+        ->set('sylius.tax_calculator.decimal', DecimalCalculator::class)
+        ->tag('sylius.tax_calculator', ['calculator' => 'decimal'])
+    ;
 
-    $services->set('sylius.resolver.tax_rate', TaxRateResolver::class)
+    $services
+        ->set('sylius.resolver.tax_rate', TaxRateResolver::class)
         ->args([
             service('sylius.repository.tax_rate'),
             service('sylius.checker.tax_rate_date_eligibility')->nullOnInvalid(),
-        ]);
-
+        ])
+    ;
     $services->alias(TaxRateResolverInterface::class, 'sylius.resolver.tax_rate');
 
-    $services->set('sylius.checker.tax_rate_date_eligibility', TaxRateDateEligibilityChecker::class)
-        ->args([service('clock')]);
-
+    $services
+        ->set('sylius.checker.tax_rate_date_eligibility', TaxRateDateEligibilityChecker::class)
+        ->args([service('clock')])
+    ;
     $services->alias(TaxRateDateEligibilityCheckerInterface::class, 'sylius.checker.tax_rate_date_eligibility');
 };

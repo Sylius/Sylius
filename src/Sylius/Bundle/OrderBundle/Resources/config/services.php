@@ -37,82 +37,92 @@ use Sylius\Component\Order\Processor\CompositeOrderProcessor;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('services/form.php');
     $container->import('services/twig.php');
 
-    $services->set('sylius.console.command.remove_expired_carts', RemoveExpiredCartsCommand::class)
-        ->public()
+    $services = $container->services();
+
+    $services
+        ->set('sylius.console.command.remove_expired_carts', RemoveExpiredCartsCommand::class)
         ->args([
             service('sylius.remover.expired_carts'),
             '%sylius_order.cart_expiration_period%',
         ])
-        ->tag('console.command');
+        ->public()
+        ->tag('console.command')
+    ;
 
-    $services->set('sylius.context.cart.new', CartContext::class)
+    $services
+        ->set('sylius.context.cart.new', CartContext::class)
         ->args([service('sylius.factory.order')])
-        ->tag('sylius.context.cart', ['priority' => -999]);
+        ->tag('sylius.context.cart', ['priority' => -999])
+    ;
 
     $services->set('sylius.context.cart.composite', CompositeCartContext::class);
 
     $services->set('sylius.order_processing.order_processor.composite', CompositeOrderProcessor::class);
 
-    $services->set('sylius.modifier.order', OrderModifier::class)
+    $services
+        ->set('sylius.modifier.order', OrderModifier::class)
         ->args([
             service('sylius.order_processing.order_processor'),
             service('sylius.modifier.order_item_quantity'),
-        ]);
-
+        ])
+    ;
     $services->alias(OrderModifierInterface::class, 'sylius.modifier.order');
 
-    $services->set('sylius.modifier.order_item_quantity', OrderItemQuantityModifier::class)
-        ->args([service('sylius.factory.order_item_unit')]);
-
+    $services
+        ->set('sylius.modifier.order_item_quantity', OrderItemQuantityModifier::class)
+        ->args([service('sylius.factory.order_item_unit')])
+    ;
     $services->alias(OrderItemQuantityModifierInterface::class, 'sylius.modifier.order_item_quantity');
 
-    $services->set('sylius.number_generator.sequential_order', SequentialOrderNumberGenerator::class)
+    $services
+        ->set('sylius.number_generator.sequential_order', SequentialOrderNumberGenerator::class)
         ->args([
             service('sylius.repository.order_sequence'),
             service('sylius.factory.order_sequence'),
-        ]);
-
+        ])
+    ;
     $services->alias(OrderNumberGeneratorInterface::class, 'sylius.number_generator.sequential_order');
 
-    $services->set('sylius.number_assigner.order_number', OrderNumberAssigner::class)
+    $services
+        ->set('sylius.number_assigner.order_number', OrderNumberAssigner::class)
+        ->args([service('sylius.number_generator.sequential_order')])
         ->public()
-        ->args([service('sylius.number_generator.sequential_order')]);
-
-    $services->alias(OrderNumberAssignerInterface::class, 'sylius.number_assigner.order_number')
-        ->public();
+    ;
+    $services->alias(OrderNumberAssignerInterface::class, 'sylius.number_assigner.order_number')->public();
 
     $services->set('sylius.aggregator.adjustments_by_label', AdjustmentsByLabelAggregator::class);
-
     $services->alias(AdjustmentsAggregatorInterface::class, 'sylius.aggregator.adjustments_by_label');
 
-    $services->set('sylius.custom_factory.adjustment', AdjustmentFactory::class)
-        ->private()
+    $services
+        ->set('sylius.custom_factory.adjustment', AdjustmentFactory::class)
         ->decorate('sylius.factory.adjustment', null, 256)
-        ->args([service('sylius.custom_factory.adjustment.inner')]);
+        ->args([service('sylius.custom_factory.adjustment.inner')])
+        ->private()
+    ;
 
     $services->alias(AdjustmentFactoryInterface::class, 'sylius.factory.adjustment');
 
-    $services->set('sylius.remover.expired_carts', ExpiredCartsRemover::class)
+    $services
+        ->set('sylius.remover.expired_carts', ExpiredCartsRemover::class)
         ->args([
             service('sylius.repository.order'),
             service('sylius.manager.order'),
             service('event_dispatcher'),
             '%sylius_order.cart_expiration_period%',
-        ]);
-
+        ])
+    ;
     $services->alias(ExpiredCartsRemoverInterface::class, 'sylius.remover.expired_carts');
 
     $services->set('sylius.factory.add_to_cart_command', AddToCartCommandFactory::class);
-
     $services->alias(AddToCartCommandFactoryInterface::class, 'sylius.factory.add_to_cart_command');
 
-    $services->set('sylius.resetter.cart_changes', CartChangesResetter::class)
+    $services
+        ->set('sylius.resetter.cart_changes', CartChangesResetter::class)
+        ->args([service('sylius.manager.order')])
         ->public()
-        ->args([service('sylius.manager.order')]);
-
+    ;
     $services->alias(CartChangesResetterInterface::class, 'sylius.resetter.cart_changes');
 };

@@ -19,12 +19,13 @@ use Sylius\Component\Core\Factory\PaymentMethodFactoryInterface;
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.custom_factory.payment_method', PaymentMethodFactory::class)
+    $services
+        ->set('sylius.custom_factory.payment_method', PaymentMethodFactory::class)
         ->decorate('sylius.factory.payment_method')
         ->args([
             service('sylius.custom_factory.payment_method.inner'),
             service('sylius.factory.gateway_config'),
-        ]);
-
+        ])
+    ;
     $services->alias(PaymentMethodFactoryInterface::class, 'sylius.custom_factory.payment_method');
 };

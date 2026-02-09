@@ -33,76 +33,90 @@ use Sylius\Component\Promotion\Provider\ActivePromotionsProvider;
 use Sylius\Component\Registry\ServiceRegistry;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('services/*.php');
 
-    $services->set('sylius.custom_factory.promotion_coupon', PromotionCouponFactory::class)
+    $services = $container->services();
+
+    $services
+        ->set('sylius.custom_factory.promotion_coupon', PromotionCouponFactory::class)
         ->decorate('sylius.factory.promotion_coupon', null, 256)
-        ->args([service('sylius.custom_factory.promotion_coupon.inner')]);
+        ->args([service('sylius.custom_factory.promotion_coupon.inner')])
+    ;
 
     $services->alias(PromotionCouponFactoryInterface::class, 'sylius.factory.promotion_coupon');
 
     $services->set('sylius.factory.promotion_coupon_generator_instruction', PromotionCouponGeneratorInstructionFactory::class);
-
     $services->alias(PromotionCouponGeneratorInstructionFactoryInterface::class, 'sylius.factory.promotion_coupon_generator_instruction');
 
-    $services->set('sylius.processor.promotion', PromotionProcessor::class)
+    $services
+        ->set('sylius.processor.promotion', PromotionProcessor::class)
         ->args([
             service('sylius.provider.active_promotions'),
             service('sylius.checker.promotion_eligibility'),
             service('sylius.action.applicator.promotion'),
-        ]);
-
+        ])
+    ;
     $services->alias(PromotionProcessorInterface::class, 'sylius.processor.promotion');
 
-    $services->set('sylius.action.applicator.promotion', PromotionApplicator::class)
-        ->args([service('sylius.registry.promotion_action')]);
-
+    $services
+        ->set('sylius.action.applicator.promotion', PromotionApplicator::class)
+        ->args([service('sylius.registry.promotion_action')])
+    ;
     $services->alias(PromotionApplicatorInterface::class, 'sylius.action.applicator.promotion');
 
-    $services->set('sylius.registry.promotion.rule_checker', ServiceRegistry::class)
+    $services
+        ->set('sylius.registry.promotion.rule_checker', ServiceRegistry::class)
         ->args([
             RuleCheckerInterface::class,
             'rule checker',
-        ]);
+        ])
+    ;
 
     $services->set('sylius.form_registry.promotion_rule_checker', FormTypeRegistry::class);
 
-    $services->set('sylius.registry.promotion_action', ServiceRegistry::class)
+    $services
+        ->set('sylius.registry.promotion_action', ServiceRegistry::class)
         ->args([
             PromotionActionCommandInterface::class,
             'promotion action',
-        ]);
+        ])
+    ;
 
     $services->set('sylius.form_registry.promotion_action', FormTypeRegistry::class);
 
-    $services->set('sylius.provider.active_promotions', ActivePromotionsProvider::class)
-        ->args([service('sylius.repository.promotion')]);
-
+    $services
+        ->set('sylius.provider.active_promotions', ActivePromotionsProvider::class)
+        ->args([service('sylius.repository.promotion')])
+    ;
     $services->alias(ActivePromotionsProvider::class, 'sylius.provider.active_promotions');
 
-    $services->set('sylius.generator.promotion_coupon', PromotionCouponGenerator::class)
-        ->public()
+    $services
+        ->set('sylius.generator.promotion_coupon', PromotionCouponGenerator::class)
         ->args([
             service('sylius.factory.promotion_coupon'),
             service('sylius.repository.promotion_coupon'),
             service('sylius.manager.promotion_coupon'),
             service('sylius.generator.percentage_generation_policy'),
-        ]);
-
-    $services->alias(PromotionCouponGeneratorInterface::class, 'sylius.generator.promotion_coupon')
-        ->public();
-
-    $services->set('sylius.generator.percentage_generation_policy', PercentageGenerationPolicy::class)
-        ->args([service('sylius.repository.promotion_coupon')]);
-
-    $services->set('sylius.provider.eligible_catalog_promotions', EligibleCatalogPromotionsProvider::class)
+        ])
         ->public()
+    ;
+    $services->alias(PromotionCouponGeneratorInterface::class, 'sylius.generator.promotion_coupon')->public();
+
+    $services
+        ->set('sylius.generator.percentage_generation_policy', PercentageGenerationPolicy::class)
+        ->args([service('sylius.repository.promotion_coupon')])
+    ;
+
+    $services
+        ->set('sylius.provider.eligible_catalog_promotions', EligibleCatalogPromotionsProvider::class)
         ->args([
             service('sylius.repository.catalog_promotion'),
             tagged_iterator('sylius.catalog_promotion.criteria'),
-        ]);
-
-    $services->alias(EligibleCatalogPromotionsProviderInterface::class, 'sylius.provider.eligible_catalog_promotions')
-        ->public();
+        ])
+        ->public()
+    ;
+    $services
+        ->alias(EligibleCatalogPromotionsProviderInterface::class, 'sylius.provider.eligible_catalog_promotions')
+        ->public()
+    ;
 };

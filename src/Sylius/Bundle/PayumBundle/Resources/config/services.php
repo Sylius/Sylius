@@ -17,10 +17,10 @@ use Psr\Http\Client\ClientInterface;
 use Sylius\Bundle\PayumBundle\HttpClient\HttpClient;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
     $container->import('services/**.php');
     $container->import('services/payment_request/**/*.php');
 
-    $services->set('sylius_payum.http_client', HttpClient::class)
-        ->args([service(ClientInterface::class)]);
+    $services = $container->services();
+
+    $services->set('sylius_payum.http_client', HttpClient::class)->args([service(ClientInterface::class)]);
 };

@@ -18,7 +18,9 @@ use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderShipping\ResolveOrderSt
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.listener.workflow.order_shipping.resolve_order_state', ResolveOrderStateListener::class)
+    $services
+        ->set('sylius.listener.workflow.order_shipping.resolve_order_state', ResolveOrderStateListener::class)
         ->args([service('sylius.state_resolver.order')])
-        ->tag('kernel.event_listener', ['event' => 'workflow.sylius_order_shipping.completed.ship', 'priority' => 100]);
+        ->tag('kernel.event_listener', ['event' => 'workflow.sylius_order_shipping.completed.ship', 'priority' => 100])
+    ;
 };

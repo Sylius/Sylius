@@ -21,7 +21,8 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Product\ProductAttributeAutocomplet
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_admin.twig.component.product.form', FormComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.product.form', FormComponent::class)
         ->args([
             service('sylius.repository.product'),
             service('form.factory'),
@@ -32,14 +33,19 @@ return static function (ContainerConfigurator $container) {
             service('sylius.factory.product'),
         ])
         ->call('setLiveResponder', [service('ux.live_component.live_responder')])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product:form']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product:form'])
+    ;
 
-    $services->set('sylius_admin.twig.component.product.product_attribute_autocomplete', ProductAttributeAutocompleteComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.product.product_attribute_autocomplete', ProductAttributeAutocompleteComponent::class)
         ->args([service('ux.autocomplete.checksum_calculator')])
         ->call('setLiveResponder', [service('ux.live_component.live_responder')])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product:product_attribute_autocomplete']);
+        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product:product_attribute_autocomplete'])
+    ;
 
-    $services->set('sylius_admin.twig.component.product.form.product_taxons', ProductTaxonsComponent::class)
+    $services
+        ->set('sylius_admin.twig.component.product.form.product_taxons', ProductTaxonsComponent::class)
         ->args([service('sylius_admin.doctrine.query.taxon.all_taxons')])
-        ->tag('sylius.twig_component', ['key' => 'sylius_admin:product:form:product_taxons']);
+        ->tag('sylius.twig_component', ['key' => 'sylius_admin:product:form:product_taxons'])
+    ;
 };

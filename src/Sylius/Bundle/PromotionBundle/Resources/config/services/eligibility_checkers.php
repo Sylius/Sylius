@@ -28,47 +28,60 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilit
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius.checker.promotion_coupon.duration_eligibility', PromotionCouponDurationEligibilityChecker::class)
+    $services
+        ->set('sylius.checker.promotion_coupon.duration_eligibility', PromotionCouponDurationEligibilityChecker::class)
         ->private()
-        ->tag('sylius.promotion_coupon_eligibility_checker');
+        ->tag('sylius.promotion_coupon_eligibility_checker')
+    ;
 
-    $services->set('sylius.checker.promotion_coupon.usage_limit_eligibility', PromotionCouponUsageLimitEligibilityChecker::class)
+    $services
+        ->set('sylius.checker.promotion_coupon.usage_limit_eligibility', PromotionCouponUsageLimitEligibilityChecker::class)
         ->private()
-        ->tag('sylius.promotion_coupon_eligibility_checker');
+        ->tag('sylius.promotion_coupon_eligibility_checker')
+    ;
 
-    $services->set('sylius.checker.promotion_coupon_eligibility', CompositePromotionCouponEligibilityChecker::class)
-        ->args([[]]);
-
+    $services
+        ->set('sylius.checker.promotion_coupon_eligibility', CompositePromotionCouponEligibilityChecker::class)
+        ->args([[]])
+    ;
     $services->alias('sylius.checker.promotion_coupon_eligibility.composite', 'sylius.checker.promotion_coupon_eligibility');
 
     $services->alias(PromotionCouponEligibilityCheckerInterface::class, 'sylius.checker.promotion_coupon_eligibility');
 
-    $services->set('sylius.checker.promotion.duration_eligibility', PromotionDurationEligibilityChecker::class)
+    $services
+        ->set('sylius.checker.promotion.duration_eligibility', PromotionDurationEligibilityChecker::class)
         ->private()
-        ->tag('sylius.promotion_eligibility_checker');
+        ->tag('sylius.promotion_eligibility_checker')
+    ;
 
-    $services->set('sylius.checker.promotion.usage_limit_eligibility', PromotionUsageLimitEligibilityChecker::class)
+    $services
+        ->set('sylius.checker.promotion.usage_limit_eligibility', PromotionUsageLimitEligibilityChecker::class)
         ->private()
-        ->tag('sylius.promotion_eligibility_checker');
+        ->tag('sylius.promotion_eligibility_checker')
+    ;
 
-    $services->set('sylius.checker.promotion.subject_coupon_eligibility', PromotionSubjectCouponEligibilityChecker::class)
-        ->private()
+    $services
+        ->set('sylius.checker.promotion.subject_coupon_eligibility', PromotionSubjectCouponEligibilityChecker::class)
         ->args([service('sylius.checker.promotion_coupon_eligibility')])
-        ->tag('sylius.promotion_eligibility_checker');
-
-    $services->set('sylius.checker.promotion.rules_eligibility', PromotionRulesEligibilityChecker::class)
         ->private()
+        ->tag('sylius.promotion_eligibility_checker')
+    ;
+
+    $services
+        ->set('sylius.checker.promotion.rules_eligibility', PromotionRulesEligibilityChecker::class)
         ->args([service('sylius.registry.promotion.rule_checker')])
-        ->tag('sylius.promotion_eligibility_checker');
+        ->private()
+        ->tag('sylius.promotion_eligibility_checker')
+    ;
 
-    $services->set('sylius.checker.promotion_eligibility', CompositePromotionEligibilityChecker::class)
-        ->args([[]]);
-
+    $services->set('sylius.checker.promotion_eligibility', CompositePromotionEligibilityChecker::class)->args([[]]);
     $services->alias('sylius.checker.promotion_eligibility.composite', 'sylius.checker.promotion_eligibility');
 
     $services->alias(PromotionEligibilityCheckerInterface::class, 'sylius.checker.promotion_eligibility');
 
-    $services->set('sylius.checker.promotion.archival_eligibility', PromotionArchivalEligibilityChecker::class)
+    $services
+        ->set('sylius.checker.promotion.archival_eligibility', PromotionArchivalEligibilityChecker::class)
         ->private()
-        ->tag('sylius.promotion_eligibility_checker');
+        ->tag('sylius.promotion_eligibility_checker')
+    ;
 };
