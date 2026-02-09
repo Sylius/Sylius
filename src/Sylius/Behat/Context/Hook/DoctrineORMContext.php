@@ -28,7 +28,10 @@ final class DoctrineORMContext implements Context
      */
     public function purgeDatabase()
     {
-        $this->entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
+        $configuration = $this->entityManager->getConnection()->getConfiguration();
+        if (method_exists($configuration, 'setSQLLogger')) {
+            $configuration->setSQLLogger(null);
+        }
         $purger = new ORMPurger($this->entityManager);
         $purger->purge();
         $this->entityManager->clear();

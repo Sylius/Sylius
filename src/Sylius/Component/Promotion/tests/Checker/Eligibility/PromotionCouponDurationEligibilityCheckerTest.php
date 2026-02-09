@@ -49,14 +49,14 @@ final class PromotionCouponDurationEligibilityCheckerTest extends TestCase
 
     public function testShouldReturnTrueIfPromotionCouponHasNotExpiredYet(): void
     {
-        $this->promotionCoupon->expects($this->once())->method('getExpiresAt')->willReturn(new \DateTime('tomorrow'));
+        $this->promotionCoupon->expects($this->once())->method('getExpiresAt')->willReturn(new \DateTimeImmutable('tomorrow'));
 
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotionCoupon));
     }
 
     public function testShouldReturnFalseIfPromotionCouponHasAlreadyExpired(): void
     {
-        $this->promotionCoupon->expects($this->once())->method('getExpiresAt')->willReturn(new \DateTime('yesterday'));
+        $this->promotionCoupon->expects($this->once())->method('getExpiresAt')->willReturn(new \DateTimeImmutable('yesterday'));
 
         $this->assertFalse($this->checker->isEligible($this->promotionSubject, $this->promotionCoupon));
     }

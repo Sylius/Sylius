@@ -62,8 +62,8 @@ final class ProductAttributeContext implements Context
     public function iShouldSeeTheProductAttributeWithDate(string $attributeName, string $expectedAttribute): void
     {
         Assert::eq(
-            new \DateTime($this->showPage->getAttributeByName($attributeName)),
-            new \DateTime($expectedAttribute),
+            new \DateTimeImmutable($this->showPage->getAttributeByName($attributeName)),
+            new \DateTimeImmutable($expectedAttribute),
         );
     }
 

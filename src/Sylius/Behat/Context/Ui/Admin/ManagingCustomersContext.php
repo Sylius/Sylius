@@ -432,7 +432,7 @@ final class ManagingCustomersContext implements Context
      */
     public function hisRegistrationDateShouldBe($registrationDate)
     {
-        Assert::eq($this->showPage->getRegistrationDate(), new \DateTime($registrationDate));
+        Assert::eq($this->showPage->getRegistrationDate(), new \DateTimeImmutable($registrationDate));
     }
 
     /**

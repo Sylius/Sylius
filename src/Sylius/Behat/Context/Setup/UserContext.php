@@ -141,7 +141,7 @@ final readonly class UserContext implements Context
      */
     public function iHaveAlreadyVerifiedMyAccount(UserInterface $user): void
     {
-        $user->setVerifiedAt(new \DateTime());
+        $user->setVerifiedAt(new \DateTimeImmutable());
 
         $this->userManager->flush();
     }
@@ -169,7 +169,7 @@ final readonly class UserContext implements Context
         $token = 'itotallyforgotmypassword';
 
         $user->setPasswordResetToken($token);
-        $user->setPasswordRequestedAt(new \DateTime());
+        $user->setPasswordRequestedAt(new \DateTimeImmutable());
 
         $this->userManager->flush();
     }

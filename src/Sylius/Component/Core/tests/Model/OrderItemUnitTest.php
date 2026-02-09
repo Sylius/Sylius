@@ -35,7 +35,7 @@ final class OrderItemUnitTest extends TestCase
 
     private AdjustmentInterface&MockObject $neutralTaxAdjustment;
 
-    private \DateTime $date;
+    private \DateTimeImmutable $date;
 
     private OrderItemUnit $orderItemUnit;
 

@@ -132,7 +132,7 @@ final class ShipmentTest extends TestCase
 
     public function testShouldInitilizeCreationDateByDefault(): void
     {
-        $this->assertInstanceOf(\DateTime::class, $this->shipment->getCreatedAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $this->shipment->getCreatedAt());
     }
 
     public function testShouldCreationDateBeMutable(): void

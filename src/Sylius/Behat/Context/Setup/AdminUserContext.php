@@ -125,7 +125,7 @@ final class AdminUserContext implements Context
     public function iHaveAlreadyReceivedAnAdministratorsPasswordResettingEmail(AdminUserInterface $administrator): void
     {
         $administrator->setPasswordResetToken('token');
-        $administrator->setPasswordRequestedAt(new \DateTime());
+        $administrator->setPasswordRequestedAt(new \DateTimeImmutable());
 
         $this->objectManager->flush();
     }
@@ -135,7 +135,7 @@ final class AdminUserContext implements Context
      */
     public function myPasswordResetTokenHasAlreadyExpired(AdminUserInterface $administrator): void
     {
-        $administrator->setPasswordRequestedAt(new \DateTime('-1 year'));
+        $administrator->setPasswordRequestedAt(new \DateTimeImmutable('-1 year'));
 
         $this->objectManager->flush();
     }

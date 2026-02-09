@@ -172,8 +172,8 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItOperateBetweenDates(string $startDate, string $endDate): void
     {
-        $this->formElement->specifyStartDate(new \DateTime($startDate));
-        $this->formElement->specifyEndDate(new \DateTime($endDate));
+        $this->formElement->specifyStartDate(new \DateTimeImmutable($startDate));
+        $this->formElement->specifyEndDate(new \DateTimeImmutable($endDate));
     }
 
     /**
@@ -181,8 +181,8 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItOperateBetweenYesterdayAndTomorrow(): void
     {
-        $this->formElement->specifyStartDate(new \DateTime('yesterday'));
-        $this->formElement->specifyEndDate(new \DateTime('tomorrow'));
+        $this->formElement->specifyStartDate(new \DateTimeImmutable('yesterday'));
+        $this->formElement->specifyEndDate(new \DateTimeImmutable('tomorrow'));
     }
 
     /**
@@ -190,7 +190,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeItOperateFromDate(string $startDate): void
     {
-        $this->formElement->specifyStartDate(new \DateTime($startDate));
+        $this->formElement->specifyStartDate(new \DateTimeImmutable($startDate));
     }
 
     /**
@@ -206,7 +206,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iChangeItsEndDateTo(string $endDate): void
     {
-        $this->formElement->specifyEndDate(new \DateTime($endDate));
+        $this->formElement->specifyEndDate(new \DateTimeImmutable($endDate));
     }
 
     /**
@@ -903,8 +903,8 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'name' => $catalogPromotion->getName(),
-            'startDate' => (new \DateTime('yesterday'))->format('Y-m-d'),
-            'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d'),
+            'startDate' => (new \DateTimeImmutable('yesterday'))->format('Y-m-d'),
+            'endDate' => (new \DateTimeImmutable('tomorrow'))->format('Y-m-d'),
         ]));
 
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);

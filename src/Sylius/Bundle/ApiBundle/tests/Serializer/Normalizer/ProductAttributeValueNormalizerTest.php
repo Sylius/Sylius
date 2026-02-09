@@ -160,7 +160,7 @@ final class ProductAttributeValueNormalizerTest extends TestCase
             )->willReturn([]);
         $this->productAttributeValue->method('getType')->willReturn('date');
         $this->productAttributeValue->method('getAttribute')->willReturn($this->productAttribute);
-        $this->productAttributeValue->method('getValue')->willReturn(new \DateTime('2022-01-01 14:16:53'));
+        $this->productAttributeValue->method('getValue')->willReturn(new \DateTimeImmutable('2022-01-01 14:16:53'));
         $this->productAttributeValue->method('getLocaleCode')->willReturn('pl_PL');
         $this->localeProvider->method('getDefaultLocaleCode')->willReturn('fr_FR');
         $this->productAttributeValueNormalizer->setNormalizer($this->normalizer);

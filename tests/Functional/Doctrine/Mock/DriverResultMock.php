@@ -34,14 +34,14 @@ class DriverResultMock implements Result
         $this->resultSet = $resultSet;
     }
 
-    public function fetchNumeric()
+    public function fetchNumeric(): array|false
     {
         $row = $this->fetchAssociative();
 
         return $row === false ? false : array_values($row);
     }
 
-    public function fetchAssociative()
+    public function fetchAssociative(): array|false
     {
         $current = current($this->resultSet);
         next($this->resultSet);
@@ -49,7 +49,7 @@ class DriverResultMock implements Result
         return $current;
     }
 
-    public function fetchOne()
+    public function fetchOne(): mixed
     {
         $row = $this->fetchNumeric();
 

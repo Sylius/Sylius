@@ -409,7 +409,7 @@ final class ProductAttributeContext implements Context
         $date,
     ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute);
+        $attributeValue = $this->createProductAttributeValue(new \DateTimeImmutable($date), $attribute);
 
         $product->addAttribute($attributeValue);
 
@@ -426,7 +426,7 @@ final class ProductAttributeContext implements Context
         $date,
     ) {
         $attribute = $this->provideProductAttribute($productAttributeType, $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute, 'en_US', false);
+        $attributeValue = $this->createProductAttributeValue(new \DateTimeImmutable($date), $attribute, 'en_US', false);
 
         $product->addAttribute($attributeValue);
 

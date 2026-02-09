@@ -524,7 +524,7 @@ final readonly class OrderContext implements Context
     public function thisCustomerHasPlacedAnOrderAtDate(CustomerInterface $customer, string $number, string $checkoutCompletedAt): void
     {
         $order = $this->createOrder($customer, $number);
-        $order->setCheckoutCompletedAt(new \DateTime($checkoutCompletedAt));
+        $order->setCheckoutCompletedAt(new \DateTimeImmutable($checkoutCompletedAt));
         $order->setState(BaseOrderInterface::STATE_NEW);
 
         $this->orderRepository->add($order);

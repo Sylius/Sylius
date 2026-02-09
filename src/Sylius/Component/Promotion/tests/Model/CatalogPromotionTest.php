@@ -78,7 +78,7 @@ final class CatalogPromotionTest extends TestCase
 
     public function testShouldStartDateBeMutable(): void
     {
-        $date = new \DateTime('2025-01-01');
+        $date = new \DateTimeImmutable('2025-01-01');
 
         $this->catalogPromotion->setStartDate($date);
 
@@ -87,7 +87,7 @@ final class CatalogPromotionTest extends TestCase
 
     public function testShouldEndDateBeMutable(): void
     {
-        $date = new \DateTime('2025-01-01');
+        $date = new \DateTimeImmutable('2025-01-01');
 
         $this->catalogPromotion->setEndDate($date);
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Review\Model;
 
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Review\Model\Review;
 use Sylius\Component\Review\Model\ReviewableInterface;
@@ -74,14 +74,14 @@ final class ReviewTest extends TestCase
 
     public function testCreatedAtShouldBeMutable(): void
     {
-        $createdAt = new DateTime();
+        $createdAt = new DateTimeImmutable();
         $this->review->setCreatedAt($createdAt);
         self::assertSame($createdAt, $this->review->getCreatedAt());
     }
 
     public function testUpdatedAtShouldBeMutable(): void
     {
-        $updatedAt = new DateTime();
+        $updatedAt = new DateTimeImmutable();
         $this->review->setUpdatedAt($updatedAt);
         self::assertSame($updatedAt, $this->review->getUpdatedAt());
     }
