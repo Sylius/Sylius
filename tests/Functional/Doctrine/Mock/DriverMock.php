@@ -13,32 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Doctrine\Mock;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\API\ExceptionConverter;
+use Doctrine\DBAL\Driver\AbstractSQLiteDriver;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Schema\AbstractSchemaManager;
 
-class DriverMock implements Driver
+class DriverMock extends AbstractSQLiteDriver
 {
     public function connect(array $params): DriverConnection
     {
         return new DriverConnectionMock();
-    }
-
-    public function getDatabasePlatform(): AbstractPlatform
-    {
-        throw new \BadMethodCallException('Not implemented');
-    }
-
-    public function getSchemaManager(Connection $conn, ?AbstractPlatform $platform = null): AbstractSchemaManager
-    {
-        throw new \BadMethodCallException('Not implemented');
-    }
-
-    public function getExceptionConverter(): ExceptionConverter
-    {
-        throw new \BadMethodCallException('Not implemented');
     }
 }
