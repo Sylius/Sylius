@@ -275,8 +275,8 @@ final readonly class ManagingCatalogPromotionsContext implements Context
     public function iMakeCatalogPromotionOperateBetweenYesterdayAndTomorrow(): void
     {
         $this->client->updateRequestData([
-            'startDate' => (new \DateTimeImmutable('yesterday'))->format('Y-m-d H:i:s'),
-            'endDate' => (new \DateTimeImmutable('tomorrow'))->format('Y-m-d H:i:s'),
+            'startDate' => (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
+            'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s'),
         ]);
     }
 
@@ -902,15 +902,15 @@ final readonly class ManagingCatalogPromotionsContext implements Context
                 $response,
                 [
                     'name' => $catalogPromotion->getName(),
-                    'startDate' => (new \DateTimeImmutable('yesterday'))->format('Y-m-d H:i:s'),
-                    'endDate' => (new \DateTimeImmutable('tomorrow'))->format('Y-m-d H:i:s'),
+                    'startDate' => (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
+                    'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s'),
                 ],
             ),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
                 $catalogPromotion->getName(),
-                (new \DateTimeImmutable('yesterday'))->format('Y-m-d H:i:s'),
-                (new \DateTimeImmutable('tomorrow'))->format('Y-m-d H:i:s'),
+                (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
+                (new \DateTime('tomorrow'))->format('Y-m-d H:i:s'),
             ),
         );
     }

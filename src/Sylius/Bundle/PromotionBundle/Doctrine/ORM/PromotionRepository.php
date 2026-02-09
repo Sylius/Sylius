@@ -44,7 +44,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
         return $queryBuilder
             ->andWhere('o.startsAt IS NULL OR o.startsAt < :date')
             ->andWhere('o.endsAt IS NULL OR o.endsAt > :date')
-            ->setParameter('date', $date ?: new \DateTimeImmutable())
+            ->setParameter('date', $date ?: new \DateTime())
         ;
     }
 }

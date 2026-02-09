@@ -132,12 +132,12 @@ final class ShipmentTest extends TestCase
 
     public function testShouldInitilizeCreationDateByDefault(): void
     {
-        $this->assertInstanceOf(\DateTimeImmutable::class, $this->shipment->getCreatedAt());
+        $this->assertInstanceOf(\DateTime::class, $this->shipment->getCreatedAt());
     }
 
     public function testShouldCreationDateBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
 
         $this->shipment->setCreatedAt($date);
 
@@ -151,7 +151,7 @@ final class ShipmentTest extends TestCase
 
     public function testShouldLastUpdateDateBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
 
         $this->shipment->setUpdatedAt($date);
 

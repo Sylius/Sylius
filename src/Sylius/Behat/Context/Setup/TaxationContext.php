@@ -59,8 +59,8 @@ final class TaxationContext implements Context
             $zone,
             $taxRateAmount,
             $includedInPrice,
-            $startDate !== null ? new \DateTimeImmutable($startDate) : null,
-            $endDate !== null ? new \DateTimeImmutable($endDate) : null,
+            $startDate !== null ? new \DateTime($startDate) : null,
+            $endDate !== null ? new \DateTime($endDate) : null,
         );
     }
 
@@ -72,7 +72,7 @@ final class TaxationContext implements Context
         ZoneInterface $zone,
         string $endDate,
     ) {
-        $this->configureTaxRate($taxCategoryName, null, $taxRateName, $zone, $taxRateAmount, false, null, new \DateTimeImmutable($endDate));
+        $this->configureTaxRate($taxCategoryName, null, $taxRateName, $zone, $taxRateAmount, false, null, new \DateTime($endDate));
     }
 
     #[Given('the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone starting at :startDate')]
@@ -83,7 +83,7 @@ final class TaxationContext implements Context
         ZoneInterface $zone,
         string $startDate,
     ) {
-        $this->configureTaxRate($taxCategoryName, StringInflector::nameToCode($taxRateName), $taxRateName, $zone, $taxRateAmount, false, new \DateTimeImmutable($startDate));
+        $this->configureTaxRate($taxCategoryName, StringInflector::nameToCode($taxRateName), $taxRateName, $zone, $taxRateAmount, false, new \DateTime($startDate));
     }
 
     #[Given('the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone')]
@@ -134,8 +134,8 @@ final class TaxationContext implements Context
         string $startDate,
         string $endDate,
     ): void {
-        $taxRate->setStartDate(new \DateTimeImmutable($startDate));
-        $taxRate->setEndDate(new \DateTimeImmutable($endDate));
+        $taxRate->setStartDate(new \DateTime($startDate));
+        $taxRate->setEndDate(new \DateTime($endDate));
         $this->objectManager->flush();
     }
 

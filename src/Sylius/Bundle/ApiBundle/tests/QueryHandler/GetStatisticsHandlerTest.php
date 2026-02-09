@@ -72,9 +72,9 @@ final class GetStatisticsHandlerTest extends TestCase
     public function testThrowsChannelNotFoundExceptionWhenChannelIsNull(): void
     {
         $datePeriod = new \DatePeriod(
-            new \DateTimeImmutable('2022-01-01'),
+            new \DateTime('2022-01-01'),
             new \DateInterval('P1D'),
-            new \DateTimeImmutable('2022-12-31'),
+            new \DateTime('2022-12-31'),
         );
 
         $this->channelRepository->expects(self::once())

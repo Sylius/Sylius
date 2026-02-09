@@ -72,15 +72,15 @@ class OrderFixture extends AbstractFixture
     }
 
     /**
-     * @return \DateTimeImmutable[]
+     * @return \DateTimeInterface[]
      */
     protected function generateDates(int $amount): array
     {
-        /** @var \DateTimeImmutable[] $dates */
+        /** @var \DateTimeInterface[] $dates */
         $dates = [];
 
         for ($i = 0; $i < $amount; ++$i) {
-            $dates[] = \DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-1 years', 'now'));
+            $dates[] = $this->faker->dateTimeBetween('-1 years', 'now');
         }
 
         sort($dates);

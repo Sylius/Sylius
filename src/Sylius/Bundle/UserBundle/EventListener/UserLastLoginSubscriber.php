@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\Persistence\ObjectManager;
-use Psr\Clock\ClockInterface;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
@@ -30,7 +29,6 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
         private readonly ObjectManager $userManager,
         private readonly string $userClass,
         ?string $trackInterval,
-        private readonly ?ClockInterface $clock = null,
     ) {
         $this->trackInterval = null === $trackInterval ? null : new \DateInterval($trackInterval);
     }
@@ -59,7 +57,7 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $user->setLastLogin($this->clock?->now() ?? new \DateTimeImmutable());
+        $user->setLastLogin(new \DateTime());
         $this->userManager->persist($user);
         $this->userManager->flush();
     }
@@ -79,6 +77,6 @@ final class UserLastLoginSubscriber implements EventSubscriberInterface
             return true;
         }
 
-        return $lastLoginDate <= ($this->clock?->now() ?? new \DateTimeImmutable())->sub($this->trackInterval);
+        return $lastLoginDate <= (new \DateTime())->sub($this->trackInterval);
     }
 }

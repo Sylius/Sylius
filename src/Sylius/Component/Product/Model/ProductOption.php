@@ -44,7 +44,7 @@ class ProductOption implements ProductOptionInterface, \Stringable
         $this->initializeTranslationsCollection();
         $this->values = new ArrayCollection();
 
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
     }
 
     public function __toString(): string

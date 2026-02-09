@@ -88,7 +88,7 @@ class ChannelTest extends TestCase
 
     public function testCreationDateShouldBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->channel->setCreatedAt($date);
         self::assertSame($date, $this->channel->getCreatedAt());
     }
@@ -100,7 +100,7 @@ class ChannelTest extends TestCase
 
     public function testLastUpdateDateShouldBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->channel->setUpdatedAt($date);
         self::assertSame($date, $this->channel->getUpdatedAt());
     }

@@ -82,7 +82,7 @@ final class ProductAttributeContext implements Context
     {
         $attribute = $this->getAttributeByName($attributeName);
 
-        Assert::true(new \DateTimeImmutable($attribute['value']) == new \DateTimeImmutable($expectedAttribute));
+        Assert::true(new \DateTime($attribute['value']) == new \DateTime($expectedAttribute));
     }
 
     #[Then('I should see :count attributes')]

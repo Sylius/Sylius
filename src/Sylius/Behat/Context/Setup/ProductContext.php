@@ -196,7 +196,7 @@ final readonly class ProductContext implements Context
     public function storeHasProductWithCode($productName, $code, $date = 'now')
     {
         $product = $this->createProduct($productName);
-        $product->setCreatedAt(new \DateTimeImmutable($date));
+        $product->setCreatedAt(new \DateTime($date));
         $product->setCode($code);
 
         $this->saveProduct($product);

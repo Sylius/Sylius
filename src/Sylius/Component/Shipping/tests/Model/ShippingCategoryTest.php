@@ -74,7 +74,7 @@ final class ShippingCategoryTest extends TestCase
 
     public function testShouldCreationDateBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
 
         $this->shippingCategory->setCreatedAt($date);
 
@@ -88,7 +88,7 @@ final class ShippingCategoryTest extends TestCase
 
     public function testShouldLastUpdateDateBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
 
         $this->shippingCategory->setUpdatedAt($date);
 

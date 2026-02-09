@@ -115,12 +115,12 @@ Sylius\Component\Product\Model\ProductAttributeValue:
         localeCode: en_US
         product: '@product'
         attribute: '@product_attribute_date'
-        value: "<(new \\DateTimeImmutable('2021-11-11'))>"
+        value: "<(new \\DateTime('2021-11-11'))>"
     product_attribute_value_datetime:
         localeCode: en_US
         product: '@product'
         attribute: '@product_attribute_datetime'
-        value: "<(new \\DateTimeImmutable('2023-05-02 13:45:00'))>"
+        value: "<(new \\DateTime('2023-05-02 13:45:00'))>"
     product_attribute_value_integer:
         localeCode: en_US
         product: '@product'

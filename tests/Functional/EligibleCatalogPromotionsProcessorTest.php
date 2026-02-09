@@ -49,9 +49,9 @@ final class EligibleCatalogPromotionsProcessorTest extends WebTestCase
         $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide();
 
         $expectedDateTimes = [
-            new \DateTimeImmutable('2021-10-12 00:00:00'),
-            new \DateTimeImmutable('2021-10-12 00:00:01'),
-            new \DateTimeImmutable('2021-10-12 00:00:02'),
+            new \DateTime('2021-10-12 00:00:00'),
+            new \DateTime('2021-10-12 00:00:01'),
+            new \DateTime('2021-10-12 00:00:02'),
         ];
 
         $actualDateTimes = array_map(
@@ -78,8 +78,8 @@ final class EligibleCatalogPromotionsProcessorTest extends WebTestCase
         $eligibleCatalogPromotions = $eligibleCatalogPromotionsProvider->provide();
 
         $expectedDateTimes = [
-            new \DateTimeImmutable('2021-10-12 23:59:59'),
-            new \DateTimeImmutable('2021-10-12 23:59:59'),
+            new \DateTime('2021-10-12 23:59:59'),
+            new \DateTime('2021-10-12 23:59:59'),
         ];
 
         $actualDateTimes = [];

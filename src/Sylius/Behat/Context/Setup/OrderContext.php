@@ -472,7 +472,7 @@ final readonly class OrderContext implements Context
     public function thisCustomerHasPlacedAnOrderAtDate(CustomerInterface $customer, string $number, string $checkoutCompletedAt): void
     {
         $order = $this->createOrder($customer, $number);
-        $order->setCheckoutCompletedAt(new \DateTimeImmutable($checkoutCompletedAt));
+        $order->setCheckoutCompletedAt(new \DateTime($checkoutCompletedAt));
         $order->setState(BaseOrderInterface::STATE_NEW);
 
         $this->orderRepository->add($order);
@@ -816,7 +816,7 @@ final readonly class OrderContext implements Context
             $customer->setFirstname('John');
             $customer->setLastname('Doe' . $i);
 
-            $customer->setCreatedAt($this->clock->now());
+            $customer->setCreatedAt(\DateTime::createFromImmutable($this->clock->now()));
 
             $customers[] = $customer;
 
@@ -923,7 +923,7 @@ final readonly class OrderContext implements Context
                 $this->shipOrder($order);
             }
 
-            $order->setCheckoutCompletedAt($this->clock->now());
+            $order->setCheckoutCompletedAt(\DateTime::createFromImmutable($this->clock->now()));
 
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);
@@ -949,7 +949,7 @@ final readonly class OrderContext implements Context
 
             $this->payOrder($order);
 
-            $order->setCheckoutCompletedAt($this->clock->now());
+            $order->setCheckoutCompletedAt(\DateTime::createFromImmutable($this->clock->now()));
 
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);
@@ -985,7 +985,7 @@ final readonly class OrderContext implements Context
                 $this->shipOrder($order);
             }
 
-            $order->setCheckoutCompletedAt($this->clock->now());
+            $order->setCheckoutCompletedAt(\DateTime::createFromImmutable($this->clock->now()));
 
             $this->objectManager->persist($order);
         }
@@ -1014,7 +1014,7 @@ final readonly class OrderContext implements Context
             );
 
             $order->setState($isFulfilled ? BaseOrderInterface::STATE_FULFILLED : BaseOrderInterface::STATE_NEW);
-            $order->setCheckoutCompletedAt($this->clock->now());
+            $order->setCheckoutCompletedAt(\DateTime::createFromImmutable($this->clock->now()));
 
             $this->objectManager->persist($order);
         }

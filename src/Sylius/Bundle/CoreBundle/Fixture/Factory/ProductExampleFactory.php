@@ -101,7 +101,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $product->setCode($options['code']);
         $product->setEnabled($options['enabled']);
         $product->setMainTaxon($options['main_taxon']);
-        $product->setCreatedAt(\DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-1 week')));
+        $product->setCreatedAt($this->faker->dateTimeBetween('-1 week'));
 
         $this->createTranslations($product, $options);
         $this->createRelations($product, $options);
@@ -319,7 +319,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $productAttributeValue->setAttribute($productAttribute);
 
         if ($value !== null && in_array($productAttribute->getStorageType(), [AttributeValueInterface::STORAGE_DATE, AttributeValueInterface::STORAGE_DATETIME], true)) {
-            $value = new \DateTimeImmutable($value);
+            $value = new \DateTime($value);
         }
 
         $productAttributeValue->setValue($value ?? $this->getRandomValueForProductAttribute($productAttribute));
@@ -344,7 +344,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $this->faker->sentence;
             case AttributeValueInterface::STORAGE_DATE:
             case AttributeValueInterface::STORAGE_DATETIME:
-                return \DateTimeImmutable::createFromMutable($this->faker->dateTimeThisCentury);
+                return $this->faker->dateTimeThisCentury;
             case AttributeValueInterface::STORAGE_JSON:
                 if ($productAttribute->getType() === SelectAttributeType::TYPE) {
                     if ($productAttribute->getConfiguration()['multiple']) {

@@ -51,7 +51,7 @@ final class ManagingPromotionsContext implements Context
     #[When('I archive the :promotion promotion')]
     public function iArchiveThePromotion(PromotionInterface $promotion): void
     {
-        $promotion->setArchivedAt(new \DateTimeImmutable());
+        $promotion->setArchivedAt(new \DateTime());
 
         $this->promotionManager->flush();
     }

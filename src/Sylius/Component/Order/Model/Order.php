@@ -60,7 +60,7 @@ class Order implements OrderInterface
         $this->items = new ArrayCollection();
         $this->adjustments = new ArrayCollection();
 
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId()
@@ -85,7 +85,7 @@ class Order implements OrderInterface
 
     public function completeCheckout(): void
     {
-        $this->checkoutCompletedAt = new \DateTimeImmutable();
+        $this->checkoutCompletedAt = new \DateTime();
     }
 
     public function getNumber(): ?string

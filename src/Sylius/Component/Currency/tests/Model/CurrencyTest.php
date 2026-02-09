@@ -67,7 +67,7 @@ final class CurrencyTest extends TestCase
 
     public function testCreationDateShouldBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->currency->setCreatedAt($date);
         self::assertSame($date, $this->currency->getCreatedAt());
     }
@@ -79,7 +79,7 @@ final class CurrencyTest extends TestCase
 
     public function testLastUpdateDateShouldBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $this->currency->setUpdatedAt($date);
         self::assertSame($date, $this->currency->getUpdatedAt());
     }

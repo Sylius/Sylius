@@ -64,20 +64,20 @@ final class ManagingTaxRateContext implements Context
     #[When('I make it start at :startDate and end at :endDate')]
     public function iMakeItStartAtAndEndAt(string $startDate, string $endDate): void
     {
-        $this->createPage->specifyStartDate(new \DateTimeImmutable($startDate));
-        $this->createPage->specifyEndDate(new \DateTimeImmutable($endDate));
+        $this->createPage->specifyStartDate(new \DateTime($startDate));
+        $this->createPage->specifyEndDate(new \DateTime($endDate));
     }
 
     #[When('I set the start date to :startDate')]
     public function iSetTheStartDateTo(string $startDate): void
     {
-        $this->createPage->specifyStartDate(new \DateTimeImmutable($startDate));
+        $this->createPage->specifyStartDate(new \DateTime($startDate));
     }
 
     #[When('I set the end date to :endDate')]
     public function iSetTheEndDateTo(string $endDate): void
     {
-        $this->createPage->specifyStartDate(new \DateTimeImmutable($endDate));
+        $this->createPage->specifyStartDate(new \DateTime($endDate));
     }
 
     #[When('I define it for the :zoneName zone')]

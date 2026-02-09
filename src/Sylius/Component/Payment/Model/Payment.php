@@ -44,7 +44,7 @@ class Payment implements PaymentInterface
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
         $this->paymentRequests = new ArrayCollection();
     }
 

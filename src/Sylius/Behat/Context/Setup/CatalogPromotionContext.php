@@ -635,8 +635,8 @@ final class CatalogPromotionContext implements Context
         string $startDate,
         string $endDate,
     ): void {
-        $catalogPromotion->setStartDate(new \DateTimeImmutable($startDate));
-        $catalogPromotion->setEndDate(new \DateTimeImmutable($endDate));
+        $catalogPromotion->setStartDate(new \DateTime($startDate));
+        $catalogPromotion->setEndDate(new \DateTime($endDate));
         $this->entityManager->flush();
 
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
@@ -645,7 +645,7 @@ final class CatalogPromotionContext implements Context
     #[Given('the catalog promotion :catalogPromotion starts at :startDate')]
     public function theCatalogPromotionStartsAt(CatalogPromotionInterface $catalogPromotion, string $startDate): void
     {
-        $catalogPromotion->setStartDate(new \DateTimeImmutable($startDate));
+        $catalogPromotion->setStartDate(new \DateTime($startDate));
 
         $this->entityManager->flush();
 
@@ -655,7 +655,7 @@ final class CatalogPromotionContext implements Context
     #[Given('the catalog promotion :catalogPromotion ended :endDate')]
     public function theCatalogPromotionEndedAt(CatalogPromotionInterface $catalogPromotion, string $endDate): void
     {
-        $catalogPromotion->setEndDate(new \DateTimeImmutable($endDate));
+        $catalogPromotion->setEndDate(new \DateTime($endDate));
         $this->entityManager->flush();
 
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
@@ -666,7 +666,7 @@ final class CatalogPromotionContext implements Context
         CatalogPromotionInterface $catalogPromotion,
         string $endDate,
     ): void {
-        $catalogPromotion->setEndDate(new \DateTimeImmutable($endDate));
+        $catalogPromotion->setEndDate(new \DateTime($endDate));
 
         $this->entityManager->flush();
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));

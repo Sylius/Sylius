@@ -54,7 +54,7 @@ final class ProductReviewContext implements Context
         $review = $this->createProductReview($product, $title, $rating, $title, $customer);
 
         if (null !== $daysSinceCreation) {
-            $review->setCreatedAt(new \DateTimeImmutable('-' . $daysSinceCreation . ' days'));
+            $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
 
         $this->productReviewRepository->add($review);
@@ -71,7 +71,7 @@ final class ProductReviewContext implements Context
         $review = $this->createProductReview($product, $title, $rating, $title, $customer, ProductReviewTransitions::TRANSITION_REJECT);
 
         if (null !== $daysSinceCreation) {
-            $review->setCreatedAt(new \DateTimeImmutable('-' . $daysSinceCreation . ' days'));
+            $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
 
         $this->productReviewRepository->add($review);
@@ -88,7 +88,7 @@ final class ProductReviewContext implements Context
         $review = $this->createProductReview($product, $title, $rating, $title, $customer, null);
 
         if (null !== $daysSinceCreation) {
-            $review->setCreatedAt(new \DateTimeImmutable('-' . $daysSinceCreation . ' days'));
+            $review->setCreatedAt(new \DateTime('-' . $daysSinceCreation . ' days'));
         }
 
         $this->productReviewRepository->add($review);

@@ -349,7 +349,7 @@ final class ManagingCustomersContext implements Context
     #[Then('he should be registered since :registrationDate')]
     public function hisRegistrationDateShouldBe($registrationDate)
     {
-        Assert::eq($this->showPage->getRegistrationDate(), new \DateTimeImmutable($registrationDate));
+        Assert::eq($this->showPage->getRegistrationDate(), new \DateTime($registrationDate));
     }
 
     #[Then('/^(?:their|his) email should be "([^"]+)"$/')]

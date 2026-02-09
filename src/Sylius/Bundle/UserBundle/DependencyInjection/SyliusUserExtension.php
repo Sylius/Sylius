@@ -183,7 +183,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
             new Reference($managerServiceId),
             $userClass,
             $config['login_tracking_interval'] ?? null,
-            new Reference('clock'),
         ]);
         $lastLoginListenerDefinition->addTag('kernel.event_subscriber');
         $container->setDefinition($lastLoginListenerServiceId, $lastLoginListenerDefinition);

@@ -22,6 +22,6 @@ final class PromotionCouponDurationEligibilityChecker implements PromotionCoupon
     {
         $endsAt = $promotionCoupon->getExpiresAt();
 
-        return $endsAt === null || new \DateTimeImmutable() < $endsAt;
+        return $endsAt === null || new \DateTime() < $endsAt;
     }
 }

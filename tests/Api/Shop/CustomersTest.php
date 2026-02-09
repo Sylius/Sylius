@@ -179,7 +179,7 @@ final class CustomersTest extends JsonApiTestCase
         /** @var ShopUserInterface $shopUser */
         $shopUser = $loadedData['shop_user_oliver'];
         $shopUser->setPasswordResetToken('token');
-        $shopUser->setPasswordRequestedAt(new \DateTimeImmutable('now'));
+        $shopUser->setPasswordRequestedAt(new \DateTime('now'));
         $this->getEntityManager()->flush();
 
         $this->requestPatch(
