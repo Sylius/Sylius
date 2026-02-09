@@ -42,7 +42,7 @@ class Shipment implements ShipmentInterface, \Stringable
     public function __construct()
     {
         $this->units = new ArrayCollection();
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
     }
 
     public function __toString(): string

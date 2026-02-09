@@ -51,7 +51,7 @@ class Attribute implements AttributeInterface, \Stringable
     {
         $this->initializeTranslationsCollection();
 
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
     }
 
     public function __toString(): string

@@ -92,7 +92,7 @@ class User implements UserInterface, \Stringable
     {
         $this->oauthAccounts = new ArrayCollection();
 
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
 
         // Set here to overwrite default value from trait
         $this->enabled = false;
@@ -238,7 +238,8 @@ class User implements UserInterface, \Stringable
             return false;
         }
 
-        $threshold = (new \DateTimeImmutable())->sub($ttl);
+        $threshold = new \DateTime();
+        $threshold->sub($ttl);
 
         return $threshold <= $this->passwordRequestedAt;
     }

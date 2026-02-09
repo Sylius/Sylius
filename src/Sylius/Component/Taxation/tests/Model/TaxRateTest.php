@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Taxation\Model;
 
-use DateTimeImmutable;
+use DateTime;
 use DateTimeInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -156,7 +156,7 @@ final class TaxRateTest extends TestCase
 
     public function testShouldHaveStartDate(): void
     {
-        $startDate = new DateTimeImmutable('01-01-2022');
+        $startDate = new DateTime('01-01-2022');
 
         $this->taxRate->setStartDate($startDate);
 
@@ -165,7 +165,7 @@ final class TaxRateTest extends TestCase
 
     public function testShouldHaveEndDate(): void
     {
-        $endDate = new DateTimeImmutable('01-01-2022');
+        $endDate = new DateTime('01-01-2022');
 
         $this->taxRate->setEndDate($endDate);
 

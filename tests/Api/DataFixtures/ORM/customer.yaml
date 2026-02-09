@@ -36,7 +36,7 @@ Sylius\Component\Core\Model\ShopUser:
         plainPassword: "sylius"
         roles: [ROLE_USER]
         enabled: true
-        verifiedAt: "<(new \\DateTimeImmutable())>"
+        verifiedAt: "<(new \\DateTime())>"
         customer: "@customer_<current()>"
         username: "<current()>\\@doe.com"
         usernameCanonical: "<current()>\\@doe.com"
@@ -47,22 +47,22 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Doe"
         email: "<current()>\\@doe.com"
         emailCanonical: "<current()>\\@doe.com"
-        birthday: "<(new \\DateTimeImmutable())>"
-        createdAt: "<(new \\DateTimeImmutable('-1 days'))>"
+        birthday: "<(new \\DateTime())>"
+        createdAt: "<(new \\DateTime('-1 days'))>"
         group: '@group_premium'
     customer_{dave}:
         firstName: "<current()>"
         lastName: "Doe"
         email: "<current()>\\@doe.com"
         emailCanonical: "<current()>\\@doe.com"
-        birthday: "<(new \\DateTimeImmutable())>"
-        createdAt: "<(new \\DateTimeImmutable('-2 days'))>"
+        birthday: "<(new \\DateTime())>"
+        createdAt: "<(new \\DateTime('-2 days'))>"
         group: '@group_premium'
     customer_{tony}:
         firstName: "<current()>"
         lastName: "Doe"
         email: "<current()>\\@doe.com"
         emailCanonical: "<current()>\\@doe.com"
-        birthday: "<(new \\DateTimeImmutable())>"
-        createdAt: "<(new \\DateTimeImmutable('-3 days'))>"
+        birthday: "<(new \\DateTime())>"
+        createdAt: "<(new \\DateTime('-3 days'))>"
         defaultAddress: '@address'

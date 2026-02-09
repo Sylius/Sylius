@@ -36,7 +36,7 @@ class PaymentRequest implements PaymentRequestInterface
         protected PaymentInterface $payment,
         protected PaymentMethodInterface $method,
     ) {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?string

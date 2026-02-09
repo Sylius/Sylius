@@ -31,7 +31,7 @@ class Taxon extends BaseTaxon implements TaxonInterface, Comparable
     {
         parent::__construct();
 
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
         $this->images = new ArrayCollection();
     }
 

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\User\Model;
 
 use DateInterval;
-use DateTimeImmutable;
+use DateTime;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
@@ -40,7 +40,7 @@ final class UserTest extends TestCase
 
     public function testShouldVerifiedAtDateBeMutable(): void
     {
-        $date = new DateTimeImmutable();
+        $date = new DateTime();
 
         $this->user->setVerifiedAt($date);
 
@@ -49,7 +49,7 @@ final class UserTest extends TestCase
 
     public function testShouldBeVerifiedWhenVerifiedAtIsNotEmpty(): void
     {
-        $date = new DateTimeImmutable();
+        $date = new DateTime();
 
         $this->user->setVerifiedAt($date);
 
@@ -63,7 +63,7 @@ final class UserTest extends TestCase
 
     public function testShouldPasswordRequestAtDateBeMutable(): void
     {
-        $date = new DateTimeImmutable();
+        $date = new DateTime();
 
         $this->user->setPasswordRequestedAt($date);
 
@@ -72,14 +72,14 @@ final class UserTest extends TestCase
 
     public function testShouldReturnTrueIfPasswordRequestIsNonExpired(): void
     {
-        $this->user->setPasswordRequestedAt(new DateTimeImmutable('-1 hour'));
+        $this->user->setPasswordRequestedAt(new DateTime('-1 hour'));
 
         $this->assertTrue($this->user->isPasswordRequestNonExpired(new DateInterval('P1D')));
     }
 
     public function testShouldReturnFalseIfPasswordRequestIsExpired(): void
     {
-        $this->user->setPasswordRequestedAt(new DateTimeImmutable('-2 hour'));
+        $this->user->setPasswordRequestedAt(new DateTime('-2 hour'));
 
         $this->assertFalse($this->user->isPasswordRequestNonExpired(new DateInterval('PT1H')));
     }

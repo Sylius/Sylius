@@ -69,7 +69,7 @@ final class NonChannelLocaleListenerTest extends TestCase
             $this->router,
             $this->localeProvider,
             $this->firewallMap,
-            [new \DateTimeImmutable(), 1, 5.0],
+            [new \DateTime(), 1, 5.0],
         );
     }
 

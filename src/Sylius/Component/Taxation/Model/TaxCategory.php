@@ -39,7 +39,7 @@ class TaxCategory implements TaxCategoryInterface, \Stringable
     public function __construct()
     {
         $this->rates = new ArrayCollection();
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
     }
 
     public function __toString(): string

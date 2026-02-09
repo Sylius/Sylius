@@ -34,7 +34,7 @@ Sylius\Component\Core\Model\ProductVariant:
         currentLocale: "en_US"
         translations:
             en_US: "@sw_mug_translation"
-        updatedAt: <(new DateTimeImmutable('2015-10-10'))>
+        updatedAt: <(new DateTime('2015-10-10'))>
         channelPricings:
             CHANNEL: "@sw_mug_web_channel_pricing"
         taxCategory: "@taxable_goods"
@@ -44,7 +44,7 @@ Sylius\Component\Core\Model\ProductVariant:
         currentLocale: "en_US"
         translations:
             en_US: "@hard_available_mug_translation"
-        updatedAt: <(new DateTimeImmutable('2015-10-05'))>
+        updatedAt: <(new DateTime('2015-10-05'))>
         channelPricings:
             CHANNEL: "@hard_available_mug_web_channel_pricing"
         taxCategory: "@taxable_goods"
@@ -166,7 +166,7 @@ Sylius\Component\Core\Model\Customer:
         lastName: "Queen"
         email: "oliver.queen@star-city.com"
         emailCanonical: "oliver.queen@star-city.com"
-        birthday: <(new \DateTimeImmutable())>
+        birthday: <(new \DateTime())>
 
 Sylius\Component\Taxation\Model\TaxCategory:
     taxable_goods:

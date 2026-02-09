@@ -35,7 +35,7 @@ final class OrderItemUnitTest extends TestCase
 
     private AdjustmentInterface&MockObject $neutralTaxAdjustment;
 
-    private \DateTimeImmutable $date;
+    private \DateTime $date;
 
     private OrderItemUnit $orderItemUnit;
 
@@ -45,7 +45,7 @@ final class OrderItemUnitTest extends TestCase
         $this->productVariant = $this->createMock(ProductVariantInterface::class);
         $this->nonNeutralTaxAdjustment = $this->createMock(AdjustmentInterface::class);
         $this->neutralTaxAdjustment = $this->createMock(AdjustmentInterface::class);
-        $this->date = new \DateTimeImmutable();
+        $this->date = new \DateTime();
         $this->orderItemUnit = new OrderItemUnit($this->orderItem);
     }
 

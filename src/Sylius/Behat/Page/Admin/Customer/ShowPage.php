@@ -40,7 +40,7 @@ class ShowPage extends SyliusPage implements ShowPageInterface
 
     public function getRegistrationDate(): \DateTimeInterface
     {
-        return \DateTimeImmutable::createFromFormat('d-m-Y H:i:s', $this->getElement('registration_date')->getText());
+        return \DateTime::createFromFormat('d-m-Y H:i:s', $this->getElement('registration_date')->getText());
     }
 
     public function getDefaultAddress(): string

@@ -38,8 +38,8 @@ class ProductAssociationType implements ProductAssociationTypeInterface, \String
     {
         $this->initializeTranslationsCollection();
 
-        $this->createdAt = new \DateTimeImmutable();
-        $this->updatedAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString(): string

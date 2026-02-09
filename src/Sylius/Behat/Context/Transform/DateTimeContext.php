@@ -25,6 +25,6 @@ final class DateTimeContext implements Context
      */
     public function getDate($date)
     {
-        return new \DateTimeImmutable($date);
+        return new \DateTime($date);
     }
 }

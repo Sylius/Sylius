@@ -46,7 +46,7 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
     /** @return array<OrderInterface> */
     private function getBatch(): array
     {
-        $terminalDate = new \DateTimeImmutable(sprintf('-%s', $this->expirationPeriod));
+        $terminalDate = new \DateTime(sprintf('-%s', $this->expirationPeriod));
 
         return $this->orderRepository->findCartsNotModifiedSince($terminalDate, $this->batchSize);
     }

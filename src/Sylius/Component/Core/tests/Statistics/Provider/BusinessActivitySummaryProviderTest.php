@@ -49,8 +49,8 @@ final class BusinessActivitySummaryProviderTest extends TestCase
     {
         $channel = $this->createMock(ChannelInterface::class);
         $datePeriod = $this->createMock(\DatePeriod::class);
-        $startDate = new \DateTimeImmutable('01-02-2022');
-        $endDate = new \DateTimeImmutable('01-12-2022');
+        $startDate = new \DateTime('01-02-2022');
+        $endDate = new \DateTime('01-12-2022');
 
         $datePeriod->expects($this->exactly(3))->method('getStartDate')->willReturn($startDate);
         $datePeriod->expects($this->exactly(3))->method('getEndDate')->willReturn($endDate);

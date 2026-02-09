@@ -90,13 +90,13 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
                 [CustomerComponent::UNKNOWN_GENDER, CustomerComponent::MALE_GENDER, CustomerComponent::FEMALE_GENDER],
             )
             ->setDefault('phone_number', fn (Options $options): string => $this->faker->phoneNumber)
-            ->setDefault('birthday', fn (Options $options): \DateTimeImmutable => \DateTimeImmutable::createFromMutable($this->faker->dateTimeThisCentury()))
+            ->setDefault('birthday', fn (Options $options): \DateTime => $this->faker->dateTimeThisCentury())
             ->setAllowedTypes('birthday', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer(
                 'birthday',
                 function (Options $options, \DateTimeInterface|string|null $value) {
                     if (is_string($value)) {
-                        return \DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $value);
+                        return \DateTime::createFromFormat('Y-m-d H:i:s', $value);
                     }
 
                     return $value;

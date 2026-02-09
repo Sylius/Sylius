@@ -69,8 +69,8 @@ final readonly class PromotionContext implements Context
         $this->createPromotion(
             name: $name,
             code: $code,
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
     }
 
@@ -98,8 +98,8 @@ final readonly class PromotionContext implements Context
                     'configuration' => ['taxons' => $taxonCodes],
                 ],
             ],
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
     }
 
@@ -122,8 +122,8 @@ final readonly class PromotionContext implements Context
                     'configuration' => [$channel->getCode() => ['taxon' => $taxon->getCode(), 'amount' => $amount]],
                 ],
             ],
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
     }
 
@@ -143,8 +143,8 @@ final readonly class PromotionContext implements Context
         $this->createPromotion(
             name: $name,
             rules: $rules,
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
     }
 
@@ -164,8 +164,8 @@ final readonly class PromotionContext implements Context
         $this->createPromotion(
             name: $promotionName,
             priority: $priority,
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
     }
 
@@ -178,8 +178,8 @@ final readonly class PromotionContext implements Context
             name: $promotionName,
             priority: $priority,
             exclusive: true,
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
     }
 
@@ -191,8 +191,8 @@ final readonly class PromotionContext implements Context
         $this->createPromotion(
             name: $promotionName,
             usageLimit: $usageLimit,
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
     }
 
@@ -211,8 +211,8 @@ final readonly class PromotionContext implements Context
                 ],
             ],
             couponBased: true,
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
 
         $this->sharedStorage->set('coupon', $promotion->getCoupons()->first());
@@ -224,8 +224,8 @@ final readonly class PromotionContext implements Context
         $this->createPromotion(
             name: $name,
             appliesToDiscounted: false,
-            startsAt: (new \DateTimeImmutable('-3 day'))->format('Y-m-d'),
-            endsAt: (new \DateTimeImmutable('+3 day'))->format('Y-m-d'),
+            startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
+            endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
     }
 
@@ -259,7 +259,7 @@ final readonly class PromotionContext implements Context
      */
     public function thisPromotionHasExpired(PromotionInterface $promotion): void
     {
-        $promotion->setEndsAt(new \DateTimeImmutable('1 day ago'));
+        $promotion->setEndsAt(new \DateTime('1 day ago'));
 
         $this->objectManager->flush();
     }
@@ -269,7 +269,7 @@ final readonly class PromotionContext implements Context
      */
     public function thisPromotionIsValidUntilTomorrow(PromotionInterface $promotion): void
     {
-        $promotion->setEndsAt(new \DateTimeImmutable('tomorrow'));
+        $promotion->setEndsAt(new \DateTime('tomorrow'));
 
         $this->objectManager->flush();
     }
@@ -279,7 +279,7 @@ final readonly class PromotionContext implements Context
      */
     public function thisPromotionStartedYesterday(PromotionInterface $promotion): void
     {
-        $promotion->setStartsAt(new \DateTimeImmutable('1 day ago'));
+        $promotion->setStartsAt(new \DateTime('1 day ago'));
 
         $this->objectManager->flush();
     }
@@ -289,7 +289,7 @@ final readonly class PromotionContext implements Context
      */
     public function thisPromotionStartsTomorrow(PromotionInterface $promotion): void
     {
-        $promotion->setStartsAt(new \DateTimeImmutable('tomorrow'));
+        $promotion->setStartsAt(new \DateTime('tomorrow'));
 
         $this->objectManager->flush();
     }
@@ -299,7 +299,7 @@ final readonly class PromotionContext implements Context
      */
     public function thisPromotionIsArchived(PromotionInterface $promotion): void
     {
-        $promotion->setArchivedAt(new \DateTimeImmutable());
+        $promotion->setArchivedAt(new \DateTime());
 
         $this->objectManager->flush();
     }
@@ -309,7 +309,7 @@ final readonly class PromotionContext implements Context
      */
     public function thisCouponHasExpired(PromotionCouponInterface $coupon): void
     {
-        $coupon->setExpiresAt(new \DateTimeImmutable('1 day ago'));
+        $coupon->setExpiresAt(new \DateTime('1 day ago'));
 
         $this->objectManager->flush();
     }
@@ -317,7 +317,7 @@ final readonly class PromotionContext implements Context
     #[Given('/^(this coupon) is valid until tomorrow$/')]
     public function thisCouponIsValidUntilTomorrow(PromotionCouponInterface $coupon): void
     {
-        $coupon->setExpiresAt(new \DateTimeImmutable('tomorrow'));
+        $coupon->setExpiresAt(new \DateTime('tomorrow'));
 
         $this->objectManager->flush();
     }

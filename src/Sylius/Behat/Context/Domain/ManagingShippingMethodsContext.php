@@ -32,7 +32,7 @@ final class ManagingShippingMethodsContext implements Context
     #[When('/^I archive the ("[^"]+" shipping method)$/')]
     public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod)
     {
-        $shippingMethod->setArchivedAt(new \DateTimeImmutable());
+        $shippingMethod->setArchivedAt(new \DateTime());
 
         $this->shippingMethodManager->flush();
     }

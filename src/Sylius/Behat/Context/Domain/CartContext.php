@@ -32,7 +32,7 @@ final class CartContext implements Context
     #[Given('/^(?:|he|she) abandoned (the cart) (\d+) (day|days|hour|hours) ago$/')]
     public function theyAbandonedTheirCart(OrderInterface $cart, $amount, $time)
     {
-        $cart->setUpdatedAt(new \DateTimeImmutable('-' . $amount . ' ' . $time));
+        $cart->setUpdatedAt(new \DateTime('-' . $amount . ' ' . $time));
         $this->orderManager->flush();
     }
 

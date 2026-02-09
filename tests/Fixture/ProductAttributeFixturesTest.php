@@ -77,7 +77,7 @@ final class ProductAttributeFixturesTest extends KernelTestCase
         $product = $productRepository->findOneByCode('LOTR');
         $this->assertNotNull($product);
 
-        $this->assertValueOfAttributeWithCode($product, 'DATE', new \DateTimeImmutable('19-07-1954'));
+        $this->assertValueOfAttributeWithCode($product, 'DATE', new \DateTime('19-07-1954'));
         $this->assertValueOfAttributeWithCode($product, 'ADULT', false);
         $this->assertValueOfAttributeWithCode($product, 'PAGES', 448);
         $this->assertValueOfAttributeWithCode($product, 'COVER', ['SOFT']);

@@ -18,7 +18,7 @@
         </id>
 
         <field name="action" column="action" type="string" />
-        <field name="loggedAt" column="logged_at" type="datetime_immutable" />
+        <field name="loggedAt" column="logged_at" type="datetime" />
         <field name="objectId" column="object_id" length="64" nullable="true" />
         <field name="objectClass" column="object_class" type="string" />
         <field name="version" column="version" type="integer" />

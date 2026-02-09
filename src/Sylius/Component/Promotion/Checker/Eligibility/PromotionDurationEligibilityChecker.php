@@ -20,7 +20,7 @@ final class PromotionDurationEligibilityChecker implements PromotionEligibilityC
 {
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion): bool
     {
-        $now = new \DateTimeImmutable();
+        $now = new \DateTime();
 
         $startsAt = $promotion->getStartsAt();
         if (null !== $startsAt && $now < $startsAt) {

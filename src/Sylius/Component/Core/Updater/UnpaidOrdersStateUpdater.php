@@ -55,7 +55,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     private function findExpiredUnpaidOrders(int $batchSize): array
     {
         return $this->orderRepository->findOrdersUnpaidSince(
-            new \DateTimeImmutable('-' . $this->expirationPeriod),
+            new \DateTime('-' . $this->expirationPeriod),
             $batchSize,
         );
     }

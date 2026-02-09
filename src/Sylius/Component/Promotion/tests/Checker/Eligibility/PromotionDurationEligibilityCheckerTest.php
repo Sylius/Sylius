@@ -42,23 +42,23 @@ final class PromotionDurationEligibilityCheckerTest extends TestCase
 
     public function testShouldReturnFalseIfPromotionHasNotStartedYet(): void
     {
-        $this->promotion->expects($this->once())->method('getStartsAt')->willReturn(new \DateTimeImmutable('+3 days'));
+        $this->promotion->expects($this->once())->method('getStartsAt')->willReturn(new \DateTime('+3 days'));
 
         $this->assertFalse($this->checker->isEligible($this->promotionSubject, $this->promotion));
     }
 
     public function testShouldReturnFalseIfPromotionHasAlreadyEnded(): void
     {
-        $this->promotion->expects($this->once())->method('getStartsAt')->willReturn(new \DateTimeImmutable('-5 days'));
-        $this->promotion->expects($this->once())->method('getEndsAt')->willReturn(new \DateTimeImmutable('-3 days'));
+        $this->promotion->expects($this->once())->method('getStartsAt')->willReturn(new \DateTime('-5 days'));
+        $this->promotion->expects($this->once())->method('getEndsAt')->willReturn(new \DateTime('-3 days'));
 
         $this->assertFalse($this->checker->isEligible($this->promotionSubject, $this->promotion));
     }
 
     public function testShouldReturnTrueIfPromotionIsCurrentlyAvailable(): void
     {
-        $this->promotion->expects($this->once())->method('getStartsAt')->willReturn(new \DateTimeImmutable('-2 days'));
-        $this->promotion->expects($this->once())->method('getEndsAt')->willReturn(new \DateTimeImmutable('+2 days'));
+        $this->promotion->expects($this->once())->method('getStartsAt')->willReturn(new \DateTime('-2 days'));
+        $this->promotion->expects($this->once())->method('getEndsAt')->willReturn(new \DateTime('+2 days'));
 
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotion));
     }

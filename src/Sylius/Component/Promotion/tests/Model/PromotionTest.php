@@ -139,7 +139,7 @@ final class PromotionTest extends TestCase
 
     public function testShouldStartsAtDateBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
 
         $this->promotion->setStartsAt($date);
 
@@ -148,7 +148,7 @@ final class PromotionTest extends TestCase
 
     public function testShouldEndsAtDateBeMutable(): void
     {
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
 
         $this->promotion->setEndsAt($date);
 

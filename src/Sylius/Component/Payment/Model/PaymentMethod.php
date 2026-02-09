@@ -44,7 +44,7 @@ class PaymentMethod implements PaymentMethodInterface, \Stringable
     {
         $this->initializeTranslationsCollection();
 
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
     }
 
     public function __toString(): string

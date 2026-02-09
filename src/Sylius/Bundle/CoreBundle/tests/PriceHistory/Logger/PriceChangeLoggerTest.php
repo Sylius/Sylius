@@ -76,7 +76,7 @@ final class PriceChangeLoggerTest extends TestCase
         $this->logEntryFactory
             ->expects($this->once())
             ->method('create')
-            ->with($channelPricing, $now, $price, $originalPrice)
+            ->with($channelPricing, \DateTime::createFromImmutable($now), $price, $originalPrice)
             ->willReturn($logEntry)
         ;
 

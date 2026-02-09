@@ -17,9 +17,4 @@ use Sylius\Resource\Model\ResourceLogEntry;
 
 class AddressLogEntry extends ResourceLogEntry
 {
-    public function setLoggedAt(): void
-    {
-        /** @phpstan-ignore assign.propertyType (Gedmo expects DateTime but we use DateTimeImmutable for DBAL 4.x compatibility) */
-        $this->loggedAt = new \DateTimeImmutable();
-    }
 }

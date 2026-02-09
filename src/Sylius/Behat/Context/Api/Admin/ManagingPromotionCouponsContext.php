@@ -330,7 +330,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
      */
     public function thisCouponShouldBeValidUntil(\DateTime $date): void
     {
-        $actualDate = \DateTimeImmutable::createFromFormat(
+        $actualDate = \DateTime::createFromFormat(
             'Y-m-d h:i:s',
             $this->responseChecker->getValue($this->client->getLastResponse(), 'expiresAt'),
         );

@@ -254,7 +254,9 @@ trait OrderPlacerTrait
     ): OrderInterface {
         $objectManager = $this->get('doctrine.orm.entity_manager');
 
-        $order->setCheckoutCompletedAt($checkoutCompletedAt);
+        $order->setCheckoutCompletedAt(
+            $checkoutCompletedAt !== null ? \DateTime::createFromImmutable($checkoutCompletedAt) : null,
+        );
 
         $objectManager->flush();
 

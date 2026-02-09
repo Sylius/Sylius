@@ -78,7 +78,7 @@ final class CustomerContext implements Context
     public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $since, $phoneNumber = null)
     {
         $names = explode(' ', $fullName);
-        $customer = $this->createCustomer($email, $names[0], $names[1], new \DateTimeImmutable($since), $phoneNumber);
+        $customer = $this->createCustomer($email, $names[0], $names[1], new \DateTime($since), $phoneNumber);
 
         $this->customerRepository->add($customer);
     }
@@ -136,7 +136,7 @@ final class CustomerContext implements Context
      */
     public function theCustomerVerifiedTheirEmail(CustomerInterface $customer)
     {
-        $customer->getUser()->setVerifiedAt(new \DateTimeImmutable());
+        $customer->getUser()->setVerifiedAt(new \DateTime());
 
         $this->customerManager->flush();
     }

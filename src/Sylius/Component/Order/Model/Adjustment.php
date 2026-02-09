@@ -54,13 +54,13 @@ class Adjustment implements AdjustmentInterface
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
     }
 
     public function __clone()
     {
         $this->id = null;
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTime();
         $this->updatedAt = null;
     }
 

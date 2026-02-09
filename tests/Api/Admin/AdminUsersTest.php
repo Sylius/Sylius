@@ -180,7 +180,7 @@ final class AdminUsersTest extends JsonApiTestCase
         /** @var AdminUserInterface $adminUser */
         $adminUser = $loadedData['admin'];
         $adminUser->setPasswordResetToken('token');
-        $adminUser->setPasswordRequestedAt(new \DateTimeImmutable('now'));
+        $adminUser->setPasswordRequestedAt(new \DateTime('now'));
         $this->getEntityManager()->flush();
 
         $this->client->request(

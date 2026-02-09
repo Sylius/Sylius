@@ -49,7 +49,7 @@ final class PromotionArchivalEligibilityCheckerTest extends TestCase
 
     public function testShouldNotBeEligibleWhenArchivedAtIsNotNull(): void
     {
-        $this->promotion->expects($this->once())->method('getArchivedAt')->willReturn(new \DateTimeImmutable());
+        $this->promotion->expects($this->once())->method('getArchivedAt')->willReturn(new \DateTime());
 
         $this->assertFalse($this->checker->isEligible($this->promotionSubject, $this->promotion));
     }

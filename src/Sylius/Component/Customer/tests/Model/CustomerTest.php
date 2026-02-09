@@ -60,7 +60,7 @@ final class CustomerTest extends TestCase
 
     public function testBirthdayShouldBeMutable(): void
     {
-        $birthday = new \DateTimeImmutable('1987-07-08');
+        $birthday = new \DateTime('1987-07-08');
         $this->customer->setBirthday($birthday);
         self::assertSame($birthday, $this->customer->getBirthday());
     }

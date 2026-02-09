@@ -179,7 +179,7 @@ final class UserLastLoginSubscriberTest extends TestCase
         $this->userLastLoginSubscriber = new UserLastLoginSubscriber($this->userManager, UserInterface::class, 'P1D');
 
         $token->expects($this->once())->method('getUser')->willReturn($user);
-        $lastLogin = (new \DateTimeImmutable())->modify('-6 hours');
+        $lastLogin = (new \DateTime())->modify('-6 hours');
         $user->expects($this->once())->method('getLastLogin')->willReturn($lastLogin);
         $user->expects($this->never())->method('setLastLogin');
         $this->userManager->expects($this->never())->method('persist')->with($user);
@@ -196,7 +196,7 @@ final class UserLastLoginSubscriberTest extends TestCase
 
         $this->userLastLoginSubscriber = new UserLastLoginSubscriber($this->userManager, UserInterface::class, 'P1D');
 
-        $lastLogin = (new \DateTimeImmutable())->modify('-6 hours');
+        $lastLogin = (new \DateTime())->modify('-6 hours');
         $user->expects($this->once())->method('getLastLogin')->willReturn($lastLogin);
         $event->expects($this->once())->method('getUser')->willReturn($user);
         $user->expects($this->never())->method('setLastLogin');
@@ -218,7 +218,7 @@ final class UserLastLoginSubscriberTest extends TestCase
         $this->userLastLoginSubscriber = new UserLastLoginSubscriber($this->userManager, UserInterface::class, 'P1D');
 
         $token->expects($this->once())->method('getUser')->willReturn($user);
-        $lastLogin = (new \DateTimeImmutable())->modify('-3 days');
+        $lastLogin = (new \DateTime())->modify('-3 days');
         $user->expects($this->once())->method('getLastLogin')->willReturn($lastLogin);
         $user->expects($this->once())->method('setLastLogin')->with($this->isInstanceOf(\DateTimeInterface::class));
         $this->userManager->expects($this->once())->method('persist')->with($user);
@@ -236,7 +236,7 @@ final class UserLastLoginSubscriberTest extends TestCase
 
         $this->userLastLoginSubscriber = new UserLastLoginSubscriber($this->userManager, UserInterface::class, 'P1D');
 
-        $lastLogin = (new \DateTimeImmutable())->modify('-3 days');
+        $lastLogin = (new \DateTime())->modify('-3 days');
         $user->expects($this->once())->method('getLastLogin')->willReturn($lastLogin);
         $event->expects($this->once())->method('getUser')->willReturn($user);
         $user->expects($this->once())->method('setLastLogin')->with($this->isInstanceOf(\DateTimeInterface::class));

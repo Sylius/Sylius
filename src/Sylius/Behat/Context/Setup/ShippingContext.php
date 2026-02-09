@@ -353,7 +353,7 @@ final readonly class ShippingContext implements Context
                 'configuration' => $configuration,
             ],
             'channels' => [$this->sharedStorage->get('channel')],
-            'archived_at' => new \DateTimeImmutable(),
+            'archived_at' => new \DateTime(),
         ]));
     }
 
@@ -465,7 +465,7 @@ final readonly class ShippingContext implements Context
      */
     public function theShippingMethodIsArchival(ShippingMethodInterface $shippingMethod): void
     {
-        $shippingMethod->setArchivedAt(new \DateTimeImmutable());
+        $shippingMethod->setArchivedAt(new \DateTime());
         $this->shippingMethodManager->flush();
     }
 
