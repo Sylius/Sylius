@@ -26,8 +26,9 @@ use Sylius\Bundle\AdminBundle\Controller\RedirectHandler;
 use Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.admin.notification.uri', 'https://gus.sylius.com/version');
 
     $services->defaults()->public();

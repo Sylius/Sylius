@@ -35,8 +35,9 @@ use Sylius\Component\Core\Statistics\Provider\StatisticsProvider;
 use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius_core.orders_statistics.cache_expires_after', 1800);
 
     $services

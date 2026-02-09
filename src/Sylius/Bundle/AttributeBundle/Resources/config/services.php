@@ -26,8 +26,8 @@ use Sylius\Component\Registry\ServiceRegistry;
 return static function (ContainerConfigurator $container) {
     $container->import('services/attribute_types.php');
 
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
 
     $parameters->set('sylius.model.attribute.interface', AttributeTypeInterface::class);
 

@@ -22,8 +22,9 @@ use Sylius\Bundle\ApiBundle\Provider\PathPrefixProvider;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.api_path_prefixes', [PathPrefixes::ADMIN_PREFIX, PathPrefixes::SHOP_PREFIX]);
 
     $services

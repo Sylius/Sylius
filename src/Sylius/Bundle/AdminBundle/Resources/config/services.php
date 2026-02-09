@@ -33,8 +33,8 @@ return static function (ContainerConfigurator $container) {
     $container->import('services/product/*.php');
     $container->import('services/twig/*.php');
 
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
 
     $parameters->set('sylius_admin.command_handler.create_admin_user.validation_groups', ['sylius', 'sylius_user_create']);
 

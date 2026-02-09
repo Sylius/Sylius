@@ -23,8 +23,9 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ImagesAwareInterface;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius_api.normalization.image_filter.supported_interfaces', [ImageInterface::class, ImageAwareInterface::class, ImagesAwareInterface::class]);
 
     $services

@@ -39,8 +39,9 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.product_association.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.product_association_type.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.product_association_type_translation.validation_groups', ['sylius']);

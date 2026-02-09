@@ -18,8 +18,9 @@ use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.taxon.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.taxon_translation.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.taxon_position.validation_groups', ['sylius']);

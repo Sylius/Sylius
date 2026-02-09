@@ -21,8 +21,9 @@ use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.customer.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.customer_profile.validation_groups', ['sylius', 'sylius_customer_profile']);
     $parameters->set('sylius.form.type.customer_group.validation_groups', ['sylius']);

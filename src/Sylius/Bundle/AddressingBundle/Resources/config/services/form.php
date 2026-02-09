@@ -27,8 +27,9 @@ use Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.address.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.country.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.province.validation_groups', ['sylius']);

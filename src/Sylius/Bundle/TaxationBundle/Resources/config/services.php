@@ -26,8 +26,8 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 return static function (ContainerConfigurator $container) {
     $container->import('services/form.php');
 
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
 
     $parameters->set('sylius.tax_calculator.interface', CalculatorInterface::class);
 

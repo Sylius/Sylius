@@ -22,8 +22,9 @@ use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.checkout_address.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.checkout_select_shipping.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.checkout_shipment.validation_groups', ['sylius']);

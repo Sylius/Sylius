@@ -34,8 +34,9 @@ use Sylius\Component\User\Security\PasswordUpdater;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.user_request_password_reset.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.user_reset_password.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.user_change_password.validation_groups', ['sylius']);

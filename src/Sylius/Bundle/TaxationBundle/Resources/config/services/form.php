@@ -19,8 +19,9 @@ use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.tax_category.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.tax_rate.validation_groups', ['sylius']);
 

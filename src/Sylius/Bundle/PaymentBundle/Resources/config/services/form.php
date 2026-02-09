@@ -21,8 +21,9 @@ use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.payment.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.payment_method.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.payment_method_translation.validation_groups', ['sylius']);

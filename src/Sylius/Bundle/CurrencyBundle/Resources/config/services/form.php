@@ -18,8 +18,9 @@ use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\ExchangeRateType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.currency.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.exchange_rate.validation_groups', ['sylius']);
 

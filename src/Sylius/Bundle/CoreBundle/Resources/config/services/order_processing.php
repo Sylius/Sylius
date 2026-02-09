@@ -24,8 +24,9 @@ use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor;
 use Sylius\Component\Order\Model\OrderInterface;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.order_payment_processor.checkout.unsupported_states', [OrderInterface::STATE_CANCELLED, OrderInterface::STATE_FULFILLED]);
     $parameters->set('sylius.order_payment_processor.after_checkout.unsupported_states', [OrderInterface::STATE_CANCELLED, OrderInterface::STATE_FULFILLED]);
     $parameters->set('sylius.order_processing.adjustment_clearing_types', [AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::SHIPPING_ADJUSTMENT, AdjustmentInterface::TAX_ADJUSTMENT]);

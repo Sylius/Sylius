@@ -21,8 +21,9 @@ use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Symfony\Component\Form\Extension\Core\DataMapper\DataMapper;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.order.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.order_item.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.cart.validation_groups', ['sylius']);

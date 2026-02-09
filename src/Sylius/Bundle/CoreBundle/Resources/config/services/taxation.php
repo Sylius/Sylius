@@ -21,8 +21,9 @@ use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistry;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.tax_calculation_strategy.interface', TaxCalculationStrategyInterface::class);
 
     $services

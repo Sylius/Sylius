@@ -33,8 +33,8 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 return static function (ContainerConfigurator $container) {
     $container->import('services/**.php');
 
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
 
     $parameters->set('sylius.shipping_methods_resolver.interface', ShippingMethodsResolverInterface::class);
 

@@ -30,8 +30,8 @@ use Sylius\Component\Registry\PrioritizedServiceRegistry;
 return static function (ContainerConfigurator $container) {
     $container->import('services/*.php');
 
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
 
     $parameters->set('sylius.payment_methods_resolver.interface', PaymentMethodsResolverInterface::class);
 

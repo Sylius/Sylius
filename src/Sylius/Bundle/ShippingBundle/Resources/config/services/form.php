@@ -27,8 +27,9 @@ use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.shipping_method.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.shipping_method_translation.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.shipping_method_rule.validation_groups', ['sylius']);

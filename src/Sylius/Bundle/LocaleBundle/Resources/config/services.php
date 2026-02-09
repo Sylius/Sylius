@@ -34,8 +34,9 @@ use Sylius\Component\Locale\Provider\LocaleProvider;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.locale.validation_groups', ['sylius']);
 
     $services

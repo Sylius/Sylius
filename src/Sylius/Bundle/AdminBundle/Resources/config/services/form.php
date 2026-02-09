@@ -71,8 +71,9 @@ use Sylius\Bundle\AdminBundle\Form\Type\ZoneType;
 use Symfony\Component\Form\Extension\Core\DataMapper\DataMapper;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.product_review.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.admin.password_reset_request.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.admin.reset_password.validation_groups', ['sylius']);

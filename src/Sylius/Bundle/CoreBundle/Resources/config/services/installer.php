@@ -25,8 +25,9 @@ use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup;
 use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius_installer_currency', 'USD');
 
     $services

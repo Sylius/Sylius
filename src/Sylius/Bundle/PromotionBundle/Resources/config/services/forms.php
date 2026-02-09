@@ -32,8 +32,9 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Symfony\Component\Form\Extension\Core\DataMapper\DataMapper;
 
 return static function (ContainerConfigurator $container) {
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
+
     $parameters->set('sylius.form.type.catalog_promotion.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.catalog_promotion_translation.validation_groups', ['sylius']);
     $parameters->set('sylius.form.type.promotion.validation_groups', ['sylius']);

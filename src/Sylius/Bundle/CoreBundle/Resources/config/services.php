@@ -100,8 +100,8 @@ use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 return static function (ContainerConfigurator $container) {
     $container->import('services/*.php');
 
-    $parameters = $container->parameters();
     $services = $container->services();
+    $parameters = $container->parameters();
 
     $parameters->set('sylius.order_item_quantity_modifier.limit', 9999);
     $parameters->set('env(SYLIUS_UNSECURED_URLS)', 'yes');
