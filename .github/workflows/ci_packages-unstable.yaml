@@ -28,8 +28,8 @@ jobs:
             matrix:
                 include:
                     -
-                        php: "8.3"
-                        symfony: "^7.4@beta"
+                        php: "8.4"
+                        symfony: "~8.0.0"
 
         env:
             COMPOSER_ROOT_VERSION: "dev-main"
