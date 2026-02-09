@@ -39,7 +39,7 @@
         "symfony/ux-autocomplete": "^2.25",
         "symfony/ux-live-component": "^2.25",
         "symfony/webpack-encore-bundle": "^2.2",
-        "symfonycasts/dynamic-forms": "^0.1",
+        "symfonycasts/dynamic-forms": "^0.2",
         "twig/twig": "^3.16"
     },
     "require-dev": {
