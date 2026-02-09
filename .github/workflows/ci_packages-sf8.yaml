@@ -1,44 +1,80 @@
 name: Packages (Symfony 8)
 
 on:
-    workflow_dispatch:
-        inputs:
-            packages:
-                description: "Comma-separated list of packages to test (e.g. Bundle/ChannelBundle,Component/Channel)"
-                required: true
-                type: string
+    pull_request:
+        paths:
+            - "src/Sylius/Bundle/*/composer.json"
+            - "src/Sylius/Component/*/composer.json"
+            - "src/Sylius/Bundle/*/test/**"
+            - "src/Sylius/Bundle/*/tests/**"
+            - "src/Sylius/Component/*/tests/**"
+            - ".github/workflows/ci_packages-sf8.yaml"
+    workflow_dispatch: ~
 
 permissions:
     contents: read
 
 jobs:
-    prepare:
-        runs-on: ubuntu-latest
-        name: "Prepare matrix"
-        outputs:
-            matrix: ${{ steps.set-matrix.outputs.matrix }}
-        steps:
-            -   id: set-matrix
-                run: |
-                    MATRIX=$(echo "${{ inputs.packages }}" | tr ',' '\n' | sed 's/^ *//;s/ *$//' | jq --raw-input . | jq --slurp -c .)
-                    echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
-
     test:
-        needs: prepare
         runs-on: ubuntu-latest
-        name: "${{ matrix.package }} (PHP 8.4, Sf 8.0)"
-        timeout-minutes: 20
+        name: "PHP 8.4, Symfony 8.0 - ${{ matrix.package }}"
+        timeout-minutes: 10
 
         strategy:
             fail-fast: false
             matrix:
-                package: ${{ fromJson(needs.prepare.outputs.matrix) }}
+                package:
+                    - "Bundle/AddressingBundle"
+                    - "Bundle/AdminBundle"
+                    - "Bundle/ApiBundle"
+                    - "Bundle/AttributeBundle"
+                    - "Bundle/ChannelBundle"
+                    - "Bundle/CoreBundle"
+                    - "Bundle/CurrencyBundle"
+                    - "Bundle/CustomerBundle"
+                    - "Bundle/InventoryBundle"
+                    - "Bundle/LocaleBundle"
+                    - "Bundle/MoneyBundle"
+                    - "Bundle/OrderBundle"
+                    - "Bundle/PaymentBundle"
+                    - "Bundle/PayumBundle"
+                    - "Bundle/ProductBundle"
+                    - "Bundle/PromotionBundle"
+                    - "Bundle/ReviewBundle"
+                    - "Bundle/ShippingBundle"
+                    - "Bundle/ShopBundle"
+                    - "Bundle/TaxationBundle"
+                    - "Bundle/TaxonomyBundle"
+                    - "Bundle/UiBundle"
+                    - "Bundle/UserBundle"
+                    - "Component/Addressing"
+                    - "Component/Attribute"
+                    - "Component/Channel"
+                    - "Component/Core"
+                    - "Component/Currency"
+                    - "Component/Customer"
+                    - "Component/Inventory"
+                    - "Component/Locale"
+                    - "Component/Order"
+                    - "Component/Payment"
+                    - "Component/Product"
+                    - "Component/Promotion"
+                    - "Component/Review"
+                    - "Component/Shipping"
+                    - "Component/Taxation"
+                    - "Component/Taxonomy"
+                    - "Component/User"
 
         env:
             COMPOSER_ROOT_VERSION: "dev-main"
 
+        defaults:
+            run:
+                working-directory: "src/Sylius/${{ matrix.package }}"
+
         steps:
-            -   uses: actions/checkout@v4
+            -
+                uses: actions/checkout@v4
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
@@ -46,26 +82,26 @@ jobs:
                     php-version: "8.4"
                     coverage: none
 
-            -   name: Configure Symfony version
-                working-directory: "src/Sylius/${{ matrix.package }}"
+            -   name: Restrict Symfony version
                 run: |
+                    composer global config --no-plugins allow-plugins.symfony/flex true
+                    composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.4"
                     composer config extra.symfony.require "~8.0.0"
-                    composer config minimum-stability dev
-                    composer config prefer-stable true
+
+            -   name: Get Composer cache directory
+                id: composer-cache
+                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            -   name: Cache Composer
+                uses: actions/cache@v4
+                with:
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: "sf8-${{ runner.os }}-${{ matrix.package }}-${{ hashFiles(format('src/Sylius/{0}/composer.json', matrix.package)) }}"
+                    restore-keys: |
+                        sf8-${{ runner.os }}-${{ matrix.package }}-
 
             -   name: Install dependencies
-                working-directory: "src/Sylius/${{ matrix.package }}"
-                run: composer update --no-scripts --no-interaction
+                run: composer update --no-interaction --no-scripts --prefer-dist
 
-            -   name: Validate composer.json
-                working-directory: "src/Sylius/${{ matrix.package }}"
-                run: composer validate --ansi --strict
-
-            -   name: Run PHPUnit
-                working-directory: "src/Sylius/${{ matrix.package }}"
-                run: |
-                    if [ -f phpunit.xml ] || [ -f phpunit.xml.dist ]; then
-                        vendor/bin/phpunit --colors=always
-                    else
-                        echo "No phpunit.xml found, skipping tests"
-                    fi
+            -   name: Run tests
+                run: vendor/bin/phpunit --colors=always
