@@ -53,58 +53,6 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
 
 1. The `Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface::updateFromReview()` method has been deprecated and will be removed in Sylius 3.0. Use state machine mechanism implemented by Symfony Workflow instead.
 
-## Routing
-
-The routing path for the `sylius_admin_locale_delete` route has been updated:
-
-```diff
-- admin/locales/{id}
-+ admin/locales/{id}/delete
-```
-
-The routing path for the `sylius_admin_product_review_accept` route has been updated:
-
-```diff
-- admin/product-review/{id}/accept
-+ admin/product-reviews/{id}/accept
-```
-
-The routing path for the `sylius_admin_product_review_reject` route has been updated:
-
-```diff
-- admin/product-review/{id}/reject
-+ admin/product-reviews/{id}/reject
-```
-
-The routing path for the `sylius_admin_product_variant_delete` route has been updated:
-
-```diff
-- admin/products/{productId}/variants/{id}
-+ admin/products/{productId}/variants/{id}/delete
-```
-
-The routing path for the `sylius_admin_promotion_coupon_delete` route has been updated:
-
-```diff
-- /admin/promotions/{promotionId}/coupons/{id}
-+ /admin/promotions/{promotionId}/coupons/{id}/delete
-```
-
-
-The routing path for the `sylius_admin_promotion_coupon_bulk_delete` route has been updated:
-
-```diff
-- /admin/promotions/{promotionId}/coupons/bulk-delete
-+ /admin/promotions/{promotionId}/coupons/bulk_delete
-```
-
-The routing path for the `sylius_admin_shop_user_delete` route has been updated:
-
-```diff
-- /admin/shop-user/{id}
-+ /admin/shop-users/{id}/delete
-```
-
 ## Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
