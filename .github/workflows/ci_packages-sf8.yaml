@@ -1,0 +1,71 @@
+name: Packages (Symfony 8)
+
+on:
+    workflow_dispatch:
+        inputs:
+            packages:
+                description: "Comma-separated list of packages to test (e.g. Bundle/ChannelBundle,Component/Channel)"
+                required: true
+                type: string
+
+permissions:
+    contents: read
+
+jobs:
+    prepare:
+        runs-on: ubuntu-latest
+        name: "Prepare matrix"
+        outputs:
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
+        steps:
+            -   id: set-matrix
+                run: |
+                    MATRIX=$(echo "${{ inputs.packages }}" | tr ',' '\n' | sed 's/^ *//;s/ *$//' | jq --raw-input . | jq --slurp -c .)
+                    echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+
+    test:
+        needs: prepare
+        runs-on: ubuntu-latest
+        name: "${{ matrix.package }} (PHP 8.4, Sf 8.0)"
+        timeout-minutes: 20
+
+        strategy:
+            fail-fast: false
+            matrix:
+                package: ${{ fromJson(needs.prepare.outputs.matrix) }}
+
+        env:
+            COMPOSER_ROOT_VERSION: "dev-main"
+
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "8.4"
+                    coverage: none
+
+            -   name: Configure Symfony version
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: |
+                    composer config extra.symfony.require "~8.0.0"
+                    composer config minimum-stability dev
+                    composer config prefer-stable true
+
+            -   name: Install dependencies
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: composer update --no-scripts --no-interaction
+
+            -   name: Validate composer.json
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: composer validate --ansi --strict
+
+            -   name: Run PHPUnit
+                working-directory: "src/Sylius/${{ matrix.package }}"
+                run: |
+                    if [ -f phpunit.xml ] || [ -f phpunit.xml.dist ]; then
+                        vendor/bin/phpunit --colors=always
+                    else
+                        echo "No phpunit.xml found, skipping tests"
+                    fi

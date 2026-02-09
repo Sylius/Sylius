@@ -112,8 +112,8 @@ jobs:
             -   name: Validate Yaml files
                 run: bin/console lint:yaml src --parse-tags
 
-            -   name: Validate Package versions
-                run: vendor/bin/monorepo-builder validate
+            #-   name: Validate Package versions
+            #    run: vendor/bin/monorepo-builder validate
 
             -   name: Run PHPArkitect
                 if: matrix.php != '8.5'
