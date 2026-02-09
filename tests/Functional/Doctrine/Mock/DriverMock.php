@@ -15,11 +15,16 @@ namespace Sylius\Tests\Functional\Doctrine\Mock;
 
 use Doctrine\DBAL\Driver\AbstractSQLiteDriver;
 use Doctrine\DBAL\Driver\Connection as DriverConnection;
+use Doctrine\DBAL\ServerVersionProvider;
 
 class DriverMock extends AbstractSQLiteDriver
 {
     public function connect(array $params): DriverConnection
     {
+        if (is_a(DriverConnection::class, ServerVersionProvider::class, true)) {
+            return new Dbal4DriverConnectionMock();
+        }
+
         return new DriverConnectionMock();
     }
 }

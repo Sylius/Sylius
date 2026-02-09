@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Calculator;
 
-use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculator;
 use Sylius\Bundle\CoreBundle\Calculator\DelayStampCalculatorInterface;
@@ -35,8 +35,8 @@ final class DelayStampCalculatorTest extends TestCase
 
     public function testCalculatesDelayStampFromGivenDates(): void
     {
-        $currentTime = new DateTime('2021-11-11 20:20');
-        $targetTime = new DateTime('2021-11-11 20:21');
+        $currentTime = new DateTimeImmutable('2021-11-11 20:20');
+        $targetTime = new DateTimeImmutable('2021-11-11 20:21');
 
         $expectedStamp = new DelayStamp(60000);
 
@@ -47,8 +47,8 @@ final class DelayStampCalculatorTest extends TestCase
 
     public function testReturns0DelayIfDatesTargetTimeIsSmallerThanCurrentTime(): void
     {
-        $currentTime = new DateTime('2021-11-11 20:21');
-        $targetTime = new DateTime('2021-11-11 19:05');
+        $currentTime = new DateTimeImmutable('2021-11-11 20:21');
+        $targetTime = new DateTimeImmutable('2021-11-11 19:05');
 
         $expectedStamp = new DelayStamp(0);
 

@@ -24,6 +24,6 @@ final class UserVerifiedAtToBooleanTransformer implements DataTransformerInterfa
 
     public function reverseTransform(mixed $value): mixed
     {
-        return $value ? new \DateTime() : null;
+        return $value ? new \DateTimeImmutable() : null;
     }
 }

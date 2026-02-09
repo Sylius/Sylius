@@ -174,8 +174,8 @@ final class ManagingShipmentsContext implements Context
     public function iShouldSeeTheShippingDateAs(OrderInterface $order, string $dateTime): void
     {
         Assert::eq(
-            new \DateTime($this->responseChecker->getValue($this->client->show(Resources::SHIPMENTS, (string) $order->getShipments()->first()->getId()), 'shippedAt')),
-            new \DateTime($dateTime),
+            new \DateTimeImmutable($this->responseChecker->getValue($this->client->show(Resources::SHIPMENTS, (string) $order->getShipments()->first()->getId()), 'shippedAt')),
+            new \DateTimeImmutable($dateTime),
             'Shipment was shipped in different date',
         );
     }

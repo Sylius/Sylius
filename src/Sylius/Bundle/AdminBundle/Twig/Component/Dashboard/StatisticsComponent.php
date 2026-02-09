@@ -184,12 +184,12 @@ class StatisticsComponent
         };
     }
 
-    private function createDateTime(string $datetime): \DateTime
+    private function createDateTime(string $datetime): \DateTimeImmutable
     {
         if ($this->clock === null) {
-            return new \DateTime($datetime);
+            return new \DateTimeImmutable($datetime);
         }
 
-        return \DateTime::createFromImmutable($this->clock->now()->modify($datetime));
+        return $this->clock->now()->modify($datetime);
     }
 }

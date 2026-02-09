@@ -72,7 +72,7 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
     private function denormalizeValue(array $data, ProductAttributeInterface $attribute): array
     {
         if (in_array($attribute->getType(), [DateAttributeType::TYPE, DateTimeAttributeType::TYPE], true)) {
-            $data['value'] = new \DateTime($data['value']);
+            $data['value'] = new \DateTimeImmutable($data['value']);
         }
 
         return $data;

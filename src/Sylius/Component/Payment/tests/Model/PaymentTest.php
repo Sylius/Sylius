@@ -86,7 +86,7 @@ final class PaymentTest extends TestCase
 
     public function testItsCreationDateIsMutable(): void
     {
-        $date = new \DateTime('last year');
+        $date = new \DateTimeImmutable('last year');
 
         $this->payment->setCreatedAt($date);
         $this->assertSame($date, $this->payment->getCreatedAt());
@@ -99,7 +99,7 @@ final class PaymentTest extends TestCase
 
     public function testItsLastUpdateDateIsMutable(): void
     {
-        $date = new \DateTime('last year');
+        $date = new \DateTimeImmutable('last year');
 
         $this->payment->setUpdatedAt($date);
         $this->assertSame($date, $this->payment->getUpdatedAt());

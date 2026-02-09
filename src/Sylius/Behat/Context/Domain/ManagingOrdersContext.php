@@ -106,7 +106,7 @@ final class ManagingOrdersContext implements Context
     #[Given('/^(this order) has not been paid for (\d+) (day|days|hour|hours)$/')]
     public function thisOrderHasNotBeenPaidForDays(OrderInterface $order, $amount, $time)
     {
-        $order->setCheckoutCompletedAt(new \DateTime('-' . $amount . ' ' . $time));
+        $order->setCheckoutCompletedAt(new \DateTimeImmutable('-' . $amount . ' ' . $time));
         $this->orderManager->flush();
 
         $this->unpaidOrdersStateUpdater->cancel();
@@ -115,7 +115,7 @@ final class ManagingOrdersContext implements Context
     #[Given('/^the (order "[^"]+") has not been paid for (\d+) (day|days)$/')]
     public function orderWithNumberHasNotBeenPaidForDays(OrderInterface $order, int $amount, string $days): void
     {
-        $order->setCheckoutCompletedAt(new \DateTime(sprintf('-%d %s', $amount, $days)));
+        $order->setCheckoutCompletedAt(new \DateTimeImmutable(sprintf('-%d %s', $amount, $days)));
 
         $this->orderManager->flush();
     }

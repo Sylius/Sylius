@@ -81,7 +81,7 @@ final class OrderTest extends TestCase
     public function testHasCheckoutCompletedWhenCompletionDateIsSet(): void
     {
         $this->assertFalse($this->order->isCheckoutCompleted());
-        $this->order->setCheckoutCompletedAt(new \DateTime('2 days ago'));
+        $this->order->setCheckoutCompletedAt(new \DateTimeImmutable('2 days ago'));
         $this->assertTrue($this->order->isCheckoutCompleted());
     }
 
@@ -92,7 +92,7 @@ final class OrderTest extends TestCase
 
     public function testItsCheckoutCompletionDateIsMutable(): void
     {
-        $date = new \DateTime('1 hour ago');
+        $date = new \DateTimeImmutable('1 hour ago');
 
         $this->order->setCheckoutCompletedAt($date);
         $this->assertSame($date, $this->order->getCheckoutCompletedAt());

@@ -54,8 +54,8 @@ final class CatalogPromotionAnnouncerTest extends TestCase
     {
         $catalogPromotion = $this->createMock(CatalogPromotionInterface::class);
 
-        $startDateTime = new \DateTime('2021-10-10');
-        $endDateTime = new \DateTime('2021-10-11');
+        $startDateTime = new \DateTimeImmutable('2021-10-10');
+        $endDateTime = new \DateTimeImmutable('2021-10-11');
 
         $now = new \DateTimeImmutable();
 
@@ -106,7 +106,7 @@ final class CatalogPromotionAnnouncerTest extends TestCase
     {
         $catalogPromotion = $this->createMock(CatalogPromotionInterface::class);
 
-        $startDateTime = new \DateTime('2021-10-10');
+        $startDateTime = new \DateTimeImmutable('2021-10-10');
         $now = new \DateTimeImmutable();
 
         $catalogPromotion->method('getCode')->willReturn('SALE');
@@ -151,8 +151,8 @@ final class CatalogPromotionAnnouncerTest extends TestCase
     {
         $catalogPromotion = $this->createMock(CatalogPromotionInterface::class);
 
-        $startDateTime = new \DateTime('2021-10-10');
-        $endDateTime = new \DateTime('2021-10-11');
+        $startDateTime = new \DateTimeImmutable('2021-10-10');
+        $endDateTime = new \DateTimeImmutable('2021-10-11');
         $now = new \DateTimeImmutable();
 
         $catalogPromotion->method('getCode')->willReturn('SALE');
@@ -203,8 +203,8 @@ final class CatalogPromotionAnnouncerTest extends TestCase
         $catalogPromotion = $this->createMock(CatalogPromotionInterface::class);
 
         $now = new \DateTimeImmutable('2021-10-09');
-        $startDateTime = new \DateTime('2021-10-10');
-        $endDateTime = new \DateTime('2021-10-11');
+        $startDateTime = new \DateTimeImmutable('2021-10-10');
+        $endDateTime = new \DateTimeImmutable('2021-10-11');
 
         $catalogPromotion->method('getCode')->willReturn('SALE');
         $catalogPromotion->method('getStartDate')->willReturn($startDateTime);

@@ -24,6 +24,6 @@ final class DateTimeContext implements Context
     #[Transform('/^on "([^"]+)"$/')]
     public function getDate($date)
     {
-        return new \DateTime($date);
+        return new \DateTimeImmutable($date);
     }
 }

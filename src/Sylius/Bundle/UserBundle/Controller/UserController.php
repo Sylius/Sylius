@@ -127,7 +127,7 @@ class UserController extends ResourceController
             return $this->redirectToRoute($redirectRoute);
         }
 
-        $user->setVerifiedAt(new \DateTime());
+        $user->setVerifiedAt(new \DateTimeImmutable());
         $user->setEmailVerificationToken(null);
         $user->enable();
 
@@ -290,7 +290,7 @@ class UserController extends ResourceController
         string $senderEvent,
     ): void {
         $user->setPasswordResetToken($generator->generate());
-        $user->setPasswordRequestedAt(new \DateTime());
+        $user->setPasswordRequestedAt(new \DateTimeImmutable());
 
         // I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.
         $manager = $this->container->get('doctrine.orm.default_entity_manager');

@@ -103,6 +103,6 @@ final class LocalesAwareValidAttributeValueValidatorTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $constraint = new ValidAttributeValue();
 
-        $this->validator->validate(new \DateTime(), $constraint);
+        $this->validator->validate(new \DateTimeImmutable(), $constraint);
     }
 }

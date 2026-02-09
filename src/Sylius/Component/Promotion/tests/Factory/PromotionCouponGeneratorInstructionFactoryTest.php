@@ -37,7 +37,7 @@ final class PromotionCouponGeneratorInstructionFactoryTest extends TestCase
 
     public function testShouldCreateFromArray(): void
     {
-        $now = new \DateTime();
+        $now = new \DateTimeImmutable();
         $data = [
             'expiresAt' => $now,
             'suffix' => 'suffix',
