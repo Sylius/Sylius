@@ -55,8 +55,9 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
     {
         try {
             $platform = $connection->getDatabasePlatform();
-            if ($platform instanceof AbstractPlatform) {
-                return $platform->getName();
+            $platformName = $this->getPlatformName($platform);
+            if (null !== $platformName) {
+                return $platformName;
             }
         } catch (\Throwable) {
         }
@@ -67,6 +68,27 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
         }
 
         return null;
+    }
+
+    /** Compatibility layer for DBAL 3.x (getName()) and 4.x (class name based) */
+    private function getPlatformName(AbstractPlatform $platform): ?string
+    {
+        // DBAL 3.x has getName() method
+        if (method_exists($platform, 'getName')) {
+            return $platform->getName();
+        }
+
+        // DBAL 4.x removed getName(), use class name mapping
+        $className = get_class($platform);
+
+        return match (true) {
+            str_contains($className, 'MySQL') => 'mysql',
+            str_contains($className, 'PostgreSQL') => 'postgresql',
+            str_contains($className, 'Sqlite') || str_contains($className, 'SQLite') => 'sqlite',
+            str_contains($className, 'SQLServer') || str_contains($className, 'SQLSrv') => 'mssql',
+            str_contains($className, 'Oracle') => 'oracle',
+            default => null,
+        };
     }
 
     private function mapDriverToDatabase(string $driver): ?string

@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\DQL;
 
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Parser;
@@ -49,10 +48,16 @@ final class Year extends FunctionNode
             return sprintf('EXTRACT(YEAR FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
-        if (is_a($platform, SqlitePlatform::class, true)) {
+        if ($this->isSqlitePlatform($platform)) {
             return sprintf('CAST(STRFTIME("%%Y", %s) AS NUMBER)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
         throw new \RuntimeException(sprintf('Platform "%s" is not supported!', get_class($platform)));
+    }
+
+    /** Compatibility layer for DBAL 3.x (SqlitePlatform) and 4.x (SQLitePlatform) */
+    private function isSqlitePlatform(object $platform): bool
+    {
+        return str_contains(get_class($platform), 'SqlitePlatform') || str_contains(get_class($platform), 'SQLitePlatform');
     }
 }

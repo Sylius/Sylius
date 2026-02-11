@@ -55,11 +55,12 @@ final class VerifyShopUserHandlerTest extends TestCase
             ->method('findOneBy')
             ->with(['emailVerificationToken' => 'ToKeN'])
             ->willReturn($user);
-        $this->clock->expects(self::once())->method('now')->willReturn(new \DateTimeImmutable());
+        $now = new \DateTimeImmutable();
+        $this->clock->expects(self::once())->method('now')->willReturn($now);
         $user->expects(self::once())->method('getEmail')->willReturn('shop@example.com');
         $user->expects(self::once())
             ->method('setVerifiedAt')
-            ->with($this->isInstanceOf(\DateTimeImmutable::class));
+            ->with(\DateTime::createFromImmutable($now));
         $user->expects(self::once())->method('setEmailVerificationToken')->with(null);
         $user->expects(self::once())->method('enable');
         $this->commandBus->expects(self::once())

@@ -7,6 +7,11 @@ imports:
 parameters:
     env(SYLIUS_PAYMENT_ENCRYPTION_KEY_PATH): '%kernel.project_dir%/config/encryption/key'
 
+doctrine:
+    dbal:
+        types:
+            object: Sylius\Bundle\PaymentBundle\Doctrine\DBAL\Type\ObjectType
+
 sylius_payment:
     payment_request:
         states_to_be_cancelled_when_payment_method_changed:

@@ -16,13 +16,12 @@ namespace Sylius\Tests\Functional\Doctrine\Mock;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\Driver\Result;
 use Doctrine\DBAL\Driver\Statement;
-use Doctrine\DBAL\ParameterType;
 
-class DriverConnectionMock implements Connection
+class Dbal4DriverConnectionMock implements Connection
 {
     public function prepare(string $sql): Statement
     {
-        return new StatementMock();
+        return new Dbal4StatementMock();
     }
 
     public function query(string $sql): Result
@@ -30,33 +29,40 @@ class DriverConnectionMock implements Connection
         return new DriverResultMock();
     }
 
-    public function quote($value, $type = ParameterType::STRING)
+    public function quote(string $value): string
     {
-        return (string) $value;
+        return $value;
     }
 
-    public function exec(string $sql): int
+    public function exec(string $sql): int|string
     {
         throw new \BadMethodCallException('Not implemented');
     }
 
-    public function lastInsertId($name = null): string|int|false
+    public function lastInsertId(): int|string
     {
-        return false;
+        return 0;
     }
 
-    public function beginTransaction(): bool
+    public function beginTransaction(): void
     {
-        return true;
     }
 
-    public function commit(): bool
+    public function commit(): void
     {
-        return true;
     }
 
-    public function rollBack(): bool
+    public function rollBack(): void
     {
-        return true;
+    }
+
+    public function getNativeConnection(): mixed
+    {
+        throw new \BadMethodCallException('Not implemented');
+    }
+
+    public function getServerVersion(): string
+    {
+        return '3.0.0';
     }
 }

@@ -44,7 +44,7 @@ jobs:
     phpunit-cli-api:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}${{ matrix.doctrine_bundle && format(', DoctrineBundle {0}', matrix.doctrine_bundle) || '' }}"
         timeout-minutes: 20
         strategy:
             fail-fast: false
@@ -81,6 +81,14 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
+            -   name: Require Doctrine Bundle
+                if: ${{ matrix.doctrine_bundle != '' && matrix.doctrine_bundle != null }}
+                run: composer require --no-update --no-scripts --no-interaction "doctrine/doctrine-bundle:${{ matrix.doctrine_bundle }}"
+
+            -   name: Require DBAL 3.x for DoctrineBundle 2.x
+                if: ${{ matrix.doctrine_bundle == '^2.0' }}
+                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:^3.9"
+
             -   name: Prepare manifest.json files
                 if: "${{ inputs.branch != '1.14' }}"
                 run: |
@@ -97,8 +105,8 @@ jobs:
                 uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
-                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-doctrine-${{ matrix.doctrine_bundle || 'default' }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-doctrine-${{ matrix.doctrine_bundle || 'default' }}"
                     e2e: "yes"
                     database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
@@ -143,7 +151,7 @@ jobs:
     behat-ui:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}${{ matrix.doctrine_bundle && format(', DoctrineBundle {0}', matrix.doctrine_bundle) || '' }}"
         timeout-minutes: 20
         strategy:
             fail-fast: false
@@ -180,6 +188,14 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
+            -   name: Require Doctrine Bundle
+                if: ${{ matrix.doctrine_bundle != '' && matrix.doctrine_bundle != null }}
+                run: composer require --no-update --no-scripts --no-interaction "doctrine/doctrine-bundle:${{ matrix.doctrine_bundle }}"
+
+            -   name: Require DBAL 3.x for DoctrineBundle 2.x
+                if: ${{ matrix.doctrine_bundle == '^2.0' }}
+                run: composer require --no-update --no-scripts --no-interaction "doctrine/dbal:^3.9"
+
             -   name: Prepare manifest.json files
                 if: "${{ inputs.branch != '1.14' }}"
                 run: |
@@ -196,8 +212,8 @@ jobs:
                 uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
-                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
+                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-doctrine-${{ matrix.doctrine_bundle || 'default' }}"
+                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-doctrine-${{ matrix.doctrine_bundle || 'default' }}"
                     e2e: "yes"
                     database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
