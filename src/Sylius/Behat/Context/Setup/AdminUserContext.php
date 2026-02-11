@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
@@ -44,10 +46,8 @@ final class AdminUserContext implements Context
     ) {
     }
 
-    /**
-     * @Given there is an administrator :email identified by :password
-     * @Given /^there is(?:| also) an administrator "([^"]+)"$/
-     */
+    #[Given('there is an administrator :email identified by :password')]
+    #[Given('/^there is(?:| also) an administrator "([^"]+)"$/')]
     public function thereIsAnAdministratorIdentifiedBy($email, $password = 'sylius')
     {
         /** @var AdminUserInterface $adminUser */
@@ -57,9 +57,7 @@ final class AdminUserContext implements Context
         $this->sharedStorage->set('administrator', $adminUser);
     }
 
-    /**
-     * @Given there is an administrator with name :username
-     */
+    #[Given('there is an administrator with name :username')]
     public function thereIsAnAdministratorWithName($username)
     {
         /** @var AdminUserInterface $adminUser */
@@ -70,18 +68,14 @@ final class AdminUserContext implements Context
         $this->sharedStorage->set('administrator', $adminUser);
     }
 
-    /**
-     * @Given /^(this administrator) has the "([^"]*)" image as avatar$/
-     */
+    #[Given('/^(this administrator) has the "([^"]*)" image as avatar$/')]
     public function thisAdministratorHasTheImageAsAvatar(AdminUserInterface $administrator, string $avatarPath): void
     {
         $this->iHaveTheImageAsMyAvatar($avatarPath, $administrator);
     }
 
-    /**
-     * @Given /^(this administrator) account is disabled$/
-     * @When /^(this administrator) account becomes disabled$/
-     */
+    #[Given('/^(this administrator) account is disabled$/')]
+    #[When('/^(this administrator) account becomes disabled$/')]
     public function thisAccountIsDisabled(AdminUserInterface $administrator): void
     {
         $administrator->setEnabled(false);
@@ -89,10 +83,8 @@ final class AdminUserContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this administrator) is using ("[^"]+" locale)$/
-     * @Given /^(I) am using ("[^"]+" locale) for my panel$/
-     */
+    #[Given('/^(this administrator) is using ("[^"]+" locale)$/')]
+    #[Given('/^(I) am using ("[^"]+" locale) for my panel$/')]
     public function thisAdministratorIsUsingLocale(AdminUserInterface $adminUser, $localeCode)
     {
         $adminUser->setLocaleCode($localeCode);
@@ -101,9 +93,7 @@ final class AdminUserContext implements Context
         $this->sharedStorage->set('administrator', $adminUser);
     }
 
-    /**
-     * @Given /^I have the "([^"]*)" image as (my) avatar$/
-     */
+    #[Given('/^I have the "([^"]*)" image as (my) avatar$/')]
     public function iHaveTheImageAsMyAvatar(string $avatarPath, AdminUserInterface $administrator): void
     {
         $filesPath = $this->minkParameters['files_path'];
@@ -119,9 +109,7 @@ final class AdminUserContext implements Context
         $this->sharedStorage->set($avatarPath, $avatar->getPath());
     }
 
-    /**
-     * @Given /^(I) have already received an administrator's password resetting email$/
-     */
+    #[Given('/^(I) have already received an administrator\'s password resetting email$/')]
     public function iHaveAlreadyReceivedAnAdministratorsPasswordResettingEmail(AdminUserInterface $administrator): void
     {
         $administrator->setPasswordResetToken('token');
@@ -130,9 +118,7 @@ final class AdminUserContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(my) password reset token has already expired$/
-     */
+    #[Given('/^(my) password reset token has already expired$/')]
     public function myPasswordResetTokenHasAlreadyExpired(AdminUserInterface $administrator): void
     {
         $administrator->setPasswordRequestedAt(new \DateTime('-1 year'));

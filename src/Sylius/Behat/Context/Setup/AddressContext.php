@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -31,18 +32,14 @@ final class AddressContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^(their) default (address is "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
-     * @Given /^(their) default (address is "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+")$/
-     */
+    #[Given('/^(their) default (address is "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/')]
+    #[Given('/^(their) default (address is "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+")$/')]
     public function theirDefaultAddressIs(CustomerInterface $customer, AddressInterface $address)
     {
         $this->setDefaultAddressOfCustomer($customer, $address);
     }
 
-    /**
-     * @Given /^(my) default address is of "([^"]+)"$/
-     */
+    #[Given('/^(my) default address is of "([^"]+)"$/')]
     public function myDefaultAddressIsOf(ShopUserInterface $user, $fullName)
     {
         [$firstName, $lastName] = explode(' ', $fullName);
@@ -57,9 +54,7 @@ final class AddressContext implements Context
         $this->setDefaultAddressOfCustomer($customer, $address);
     }
 
-    /**
-     * @Given /^(I) have an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in my address book$/
-     */
+    #[Given('/^(I) have an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in my address book$/')]
     public function iHaveAnAddressInAddressBook(ShopUserInterface $user, AddressInterface $address)
     {
         /** @var CustomerInterface $customer */
@@ -70,9 +65,7 @@ final class AddressContext implements Context
         $this->sharedStorage->set('address', $address);
     }
 
-    /**
-     * @Given this address has province :province
-     */
+    #[Given('this address has province :province')]
     public function thisAddressHasProvince(string $provinceName): void
     {
         $address = $this->sharedStorage->get('address');
@@ -81,10 +74,8 @@ final class AddressContext implements Context
         $this->customerManager->flush();
     }
 
-    /**
-     * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in their address book$/
-     * @Given /^(this customer) has an? ("[^"]+" based address) in their address book$/
-     */
+    #[Given('/^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in their address book$/')]
+    #[Given('/^(this customer) has an? ("[^"]+" based address) in their address book$/')]
     public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address): void
     {
         $this->addAddressToCustomer($customer, $address);

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Sylius\Behat\Context\Setup\Checkout\AddressContext;
@@ -57,19 +58,15 @@ final readonly class CartContext implements Context
     ) {
     }
 
-    /**
-     * @Given the customer has created empty cart
-     */
+    #[Given('the customer has created empty cart')]
     public function theCustomerHasTheCart(): void
     {
         $this->pickupCart();
     }
 
-    /**
-     * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
-     */
     #[Given('/^I added (\d+) (products "[^"]+") to the (cart)$/')]
     #[Given('/^I added (\d+) of (them) to (?:the|my) (cart)$/')]
+    #[Given('/^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/')]
     public function iAddedGivenQuantityOfProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue, $quantity);
@@ -84,11 +81,10 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given /^I added (products "([^"]+)" and "([^"]+)") to the (cart)$/
-     * @Given /^I added (products "([^"]+)", "([^"]+)" and "([^"]+)") to the (cart)$/
-     *
      * @param ProductInterface[] $products
      */
+    #[Given('/^I added (products "([^"]+)" and "([^"]+)") to the (cart)$/')]
+    #[Given('/^I added (products "([^"]+)", "([^"]+)" and "([^"]+)") to the (cart)$/')]
     public function iAddedProductsAndToTheCart(array $products, ?string $tokenValue): void
     {
         foreach ($products as $product) {
@@ -96,17 +92,15 @@ final readonly class CartContext implements Context
         }
     }
 
-    /**
-     * @Given /^I have (product "[^"]+") in the (cart)$/
-     * @Given /^I have (product "[^"]+") added to the (cart)$/
-     * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
-     * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
-     */
     #[Given('/^I added (product "[^"]+") to the (cart)$/')]
     #[Given('/^I added (this product) to the (cart)$/')]
     #[Given('/^I added (this product) to the (cart) again$/')]
     #[Given('/^the visitor added (product "[^"]+") to the (cart)$/')]
     #[Given('/^the customer added (product "[^"]+") to the (cart)$/')]
+    #[Given('/^I have (product "[^"]+") in the (cart)$/')]
+    #[Given('/^I have (product "[^"]+") added to the (cart)$/')]
+    #[Given('/^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/')]
+    #[When('/^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/')]
     public function iAddedProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue);
@@ -130,11 +124,9 @@ final readonly class CartContext implements Context
         ));
     }
 
-    /**
-     * @Given /^I have ("[^"]+" variant of product "[^"]+") in the (cart)$/
-     * @Given /^I have ("[^"]+" variant of this product) in the (cart)$/
-     */
     #[Given('/^I added ("[^"]+" variant of product "[^"]+") to the (cart)$/')]
+    #[Given('/^I have ("[^"]+" variant of product "[^"]+") in the (cart)$/')]
+    #[Given('/^I have ("[^"]+" variant of this product) in the (cart)$/')]
     public function iHaveVariantOfProductInTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
         if ($tokenValue === null || !$this->doesCartWithTokenExist($tokenValue)) {
@@ -205,9 +197,7 @@ final readonly class CartContext implements Context
         ));
     }
 
-    /**
-     * @Given /^this (cart) has promotion applied with coupon "([^"]+)"$/
-     */
+    #[Given('/^this (cart) has promotion applied with coupon "([^"]+)"$/')]
     public function thisCartHasCouponAppliedWithCode(?string $tokenValue, string $couponCode): void
     {
         if ($tokenValue === null) {
