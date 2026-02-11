@@ -1,4 +1,4 @@
-{% macro delivery_time_text(min, max) %}
+{% macro delivery_time_text(min, max) -%}
     {% if min is not null or max is not null %}
         {% if min is not null and max is not null %}
             {% if min == max %}
