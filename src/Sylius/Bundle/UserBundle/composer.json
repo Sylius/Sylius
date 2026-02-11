@@ -43,8 +43,8 @@
         "sylius/mailer-bundle": "^2.1",
         "sylius/resource-bundle": "^1.12",
         "sylius/user": "^2.0",
-        "symfony/framework-bundle": "^6.4.1 || ^7.4",
-        "symfony/password-hasher": "^6.4 || ^7.4",
+        "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
+        "symfony/password-hasher": "^6.4 || ^7.4 || ^8.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
@@ -52,9 +52,9 @@
         "hwi/oauth-bundle": "^2.2",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpunit/phpunit": "^11.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.4",
-        "symfony/mailer": "^6.4 || ^7.4",
-        "symfony/security-bundle": "^6.4 || ^7.4"
+        "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
+        "symfony/mailer": "^6.4 || ^7.4 || ^8.0",
+        "symfony/security-bundle": "^6.4 || ^7.4 || ^8.0"
     },
     "suggest": {
         "hwi/oauth-bundle": "For OAuth integration"

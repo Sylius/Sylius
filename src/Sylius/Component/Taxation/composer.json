@@ -31,7 +31,7 @@
         "php": "^8.2",
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.12",
-        "symfony/clock": "^6.4 || ^7.4"
+        "symfony/clock": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.5"

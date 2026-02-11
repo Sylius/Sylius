@@ -80,7 +80,7 @@ final class PromotionRuleGroupValidatorTest extends TestCase
             ->with($this->promotionRule, null, ['Default', 'rule_two'])
             ->willReturn($this->contextualValidator);
 
-        $constraint = new PromotionRuleGroup(['groups' => ['Default', 'test_group']]);
+        $constraint = new PromotionRuleGroup(groups: ['Default', 'test_group']);
         $this->promotionRuleGroupValidator->validate($this->promotionRule, $constraint);
     }
 
@@ -97,7 +97,7 @@ final class PromotionRuleGroupValidatorTest extends TestCase
             ->with($this->promotionRule, null, ['Default', 'test_group'])
             ->willReturn($this->contextualValidator);
 
-        $constraint = new PromotionRuleGroup(['groups' => ['Default', 'test_group']]);
+        $constraint = new PromotionRuleGroup(groups: ['Default', 'test_group']);
         $this->promotionRuleGroupValidator->validate($this->promotionRule, $constraint);
     }
 }
