@@ -58,13 +58,13 @@
         "sylius/taxation-bundle": "^2.0",
         "sylius/taxonomy-bundle": "^2.0",
         "sylius/user-bundle": "^2.0",
-        "symfony/clock": "^6.4 || ^7.4",
-        "symfony/framework-bundle": "^6.4.1 || ^7.4",
-        "symfony/intl": "^6.4 || ^7.4",
-        "symfony/mailer": "^6.4 || ^7.4",
-        "symfony/messenger": "^6.4 || ^7.4",
+        "symfony/clock": "^6.4 || ^7.4 || ^8.0",
+        "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
+        "symfony/intl": "^6.4 || ^7.4 || ^8.0",
+        "symfony/mailer": "^6.4 || ^7.4 || ^8.0",
+        "symfony/messenger": "^6.4 || ^7.4 || ^8.0",
         "symfony/webpack-encore-bundle": "^2.2",
-        "symfony/workflow": "^6.4 || ^7.4",
+        "symfony/workflow": "^6.4 || ^7.4 || ^8.0",
         "php-http/discovery": "^1.20"
     },
     "conflict": {
@@ -77,8 +77,8 @@
         "matthiasnoback/symfony-config-test": "^6.0",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpunit/phpunit": "^11.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.4",
-        "symfony/dotenv": "^6.4 || ^7.4",
+        "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
+        "symfony/dotenv": "^6.4 || ^7.4 || ^8.0",
         "nyholm/psr7": "^1.8"
     },
     "config": {

@@ -21,9 +21,9 @@
     },
     "require": {
         "php": "^8.2",
-        "symfony/dependency-injection": "^6.4.1 || ^7.4",
-        "symfony/http-kernel": "^6.4.1 || ^7.4",
-        "symfony/workflow": "^6.4 || ^7.4"
+        "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
+        "symfony/http-kernel": "^6.4.1 || ^7.4 || ^8.0",
+        "symfony/workflow": "^6.4 || ^7.4 || ^8.0"
     },
     "suggest": {
         "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)",
