@@ -1,7 +1,7 @@
 {% block body %}
+    {% import '@SyliusCore/Common/Macro/placeholder.html.twig' as placeholder_macros %}
     {% autoescape false %}
-        {% set logo = sylius_channel_url(asset('bundles/syliuscore/images/sylius-logo.png'), channel) %}
-
+        {% set logo = placeholder_macros.placeholder_image_absolute('build/shop/images/logo.webp', 'shop') %}
         <div style="font-family: sans-serif; background: #eee; padding-top: 30px; padding-bottom: 30px; font-size: 16px; color: #333; line-height: 1.5">
             <div style="max-width: 600px; margin: 20px auto;">
                 <div style="margin-bottom: 30px; text-align: center;">

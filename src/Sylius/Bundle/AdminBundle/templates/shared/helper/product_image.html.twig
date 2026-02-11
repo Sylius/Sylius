@@ -1,4 +1,5 @@
 {% macro image(product, config = {}) %}
+    {% import '@SyliusCore/Common/Macro/placeholder.html.twig' as placeholder_macros %}
     {% set config = {
         class: 'img-fluid',
         type: 'thumbnail',
@@ -10,7 +11,7 @@
     {% elseif product.images.first %}
         {% set path = product.images.first.path|imagine_filter(config.filter) %}
     {% else %}
-        {% set path = asset('bundles/syliusui/images/200x200.png') %}
+        {% set path = placeholder_macros.placeholder_image('build/admin/images/200x200.png', 'admin') %}
     {% endif %}
 
     <img src="{{ path }}" alt="{{ product.name }}" class="{{ config.class }}" />

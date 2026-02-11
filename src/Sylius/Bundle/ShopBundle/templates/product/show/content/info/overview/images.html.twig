@@ -1,3 +1,4 @@
+{% import '@SyliusCore/Common/Macro/placeholder.html.twig' as placeholder_macros %}
 {% set product = hookable_metadata.context.product %}
 
 {% if product.images.first %}
@@ -5,7 +6,7 @@
     {% set original_path = source_path|imagine_filter('sylius_shop_product_original') %}
     {% set path = source_path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
 {% else %}
-    {% set original_path = asset('bundles/syliusui/images/400x300.png') %}
+    {% set original_path = placeholder_macros.placeholder_image('build/shop/images/400x300.png', 'shop') %}
     {% set path = original_path %}
 {% endif %}
 

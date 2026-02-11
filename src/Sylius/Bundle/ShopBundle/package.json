@@ -1,6 +1,6 @@
 {
   "name": "@sylius-ui/shop",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -9,9 +9,8 @@
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
-    "@babel/core": "^7.17.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@babel/preset-env": "^7.25.8",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
     "@hotwired/stimulus": "^3.0.0",
     "@popperjs/core": "^2.11.8",
     "@sylius/shop-bundle": "file:Resources/assets/",
