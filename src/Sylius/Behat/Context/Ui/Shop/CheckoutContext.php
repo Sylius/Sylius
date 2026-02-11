@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Behat\Step\When;
@@ -48,19 +49,15 @@ final readonly class CheckoutContext implements Context
     ) {
     }
 
-    /**
-     * @Given I was at the checkout summary step
-     */
+    #[Given('I was at the checkout summary step')]
     public function iWasAtTheCheckoutSummaryStep(): void
     {
         $this->addressingContext->iSpecifiedTheBillingAddress();
         $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
     }
 
-    /**
-     * @Given I have proceeded selecting :paymentMethodName payment method
-     * @When I proceed with selecting :paymentMethodName payment method
-     */
+    #[Given('I have proceeded selecting :paymentMethodName payment method')]
+    #[When('I proceed with selecting :paymentMethodName payment method')]
     public function iProceedSelectingPaymentMethod(string $paymentMethodName): void
     {
         $this->addressingContext->iSpecifiedTheBillingAddress();
@@ -68,10 +65,8 @@ final readonly class CheckoutContext implements Context
         $this->paymentContext->iChoosePaymentMethod($paymentMethodName);
     }
 
-    /**
-     * @Given I have proceeded order with :shippingMethodName shipping method and :paymentMethodName payment
-     * @When I proceed with :shippingMethodName shipping method and :paymentMethodName payment
-     */
+    #[Given('I have proceeded order with :shippingMethodName shipping method and :paymentMethodName payment')]
+    #[When('I proceed with :shippingMethodName shipping method and :paymentMethodName payment')]
     public function iProceedOrderWithShippingMethodAndPayment(string $shippingMethodName, string $paymentMethodName): void
     {
         if (!$this->selectShippingPage->isOpen()) {
@@ -85,11 +80,9 @@ final readonly class CheckoutContext implements Context
         $this->selectPaymentPage->nextStep();
     }
 
-    /**
-     * @When I proceed through checkout process
-     * @When I proceed through checkout process in the :localeCode locale
-     * @When I proceed through checkout process in the :localeCode locale with email :email
-     */
+    #[When('I proceed through checkout process')]
+    #[When('I proceed through checkout process in the :localeCode locale')]
+    #[When('I proceed through checkout process in the :localeCode locale with email :email')]
     public function iProceedThroughCheckoutProcess(string $localeCode = 'en_US', ?string $email = null): void
     {
         $this->addressingContext->iProceedSelectingBillingCountry(null, $localeCode, $email);
@@ -97,9 +90,7 @@ final readonly class CheckoutContext implements Context
         $this->paymentContext->iCompleteThePaymentStep();
     }
 
-    /**
-     * @When I proceed through checkout with :shippingMethod shipping method
-     */
+    #[When('I proceed through checkout with :shippingMethod shipping method')]
     public function iHaveProceededThroughCheckoutProcessWithShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->addressingContext->iProceedSelectingBillingCountry();
@@ -111,9 +102,7 @@ final readonly class CheckoutContext implements Context
         $this->sharedStorage->set('shipping_method', $shippingMethod);
     }
 
-    /**
-     * @When I proceed with selecting :shippingMethodName shipping method
-     */
+    #[When('I proceed with selecting :shippingMethodName shipping method')]
     public function iProceedWithSelectingShippingMethod(string $shippingMethodName): void
     {
         $this->addressingContext->iProceedSelectingBillingCountry();
@@ -144,9 +133,7 @@ final readonly class CheckoutContext implements Context
         throw new UnexpectedPageException('It is impossible to go to addressing step from current page.');
     }
 
-    /**
-     * @Then the subtotal of :item item should be :price
-     */
+    #[Then('the subtotal of :item item should be :price')]
     public function theSubtotalOfItemShouldBe($item, $price)
     {
         /** @var AddressPageInterface|SelectPaymentPageInterface|SelectShippingPageInterface|CompletePageInterface $currentPage */
@@ -160,17 +147,13 @@ final readonly class CheckoutContext implements Context
         Assert::eq($currentPage->getItemSubtotal($item), $price);
     }
 
-    /**
-     * @Then I should not be able to change email
-     */
+    #[Then('I should not be able to change email')]
     public function iShouldNotBeAbleToChangeEmail(): void
     {
         Assert::false($this->addressPage->hasEmailInput());
     }
 
-    /**
-     * @When I register with previously used :email email and :password password
-     */
+    #[When('I register with previously used :email email and :password password')]
     public function iRegisterWithPreviouslyUsedEmailAndPassword(string $email, string $password): void
     {
         $this->registerPage->open();

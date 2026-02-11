@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
@@ -31,17 +33,13 @@ final class UserContext implements Context
     ) {
     }
 
-    /**
-     * @When I log out
-     */
+    #[When('I log out')]
     public function iLogOut()
     {
         $this->homePage->logOut();
     }
 
-    /**
-     * @When I delete the account of :email user
-     */
+    #[When('I delete the account of :email user')]
     public function iDeleteAccount($email)
     {
         /** @var ShopUserInterface $user */
@@ -53,9 +51,7 @@ final class UserContext implements Context
         $this->customerShowPage->deleteAccount();
     }
 
-    /**
-     * @Then the customer should have no account
-     */
+    #[Then('the customer should have no account')]
     public function theCustomerShouldHaveNoAccount(): void
     {
         $deletedUser = $this->sharedStorage->get('deleted_user');

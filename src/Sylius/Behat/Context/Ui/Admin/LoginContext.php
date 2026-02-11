@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Account\LoginPageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
@@ -27,91 +30,69 @@ final class LoginContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to log in
-     */
+    #[When('I want to log in')]
     public function iWantToLogIn()
     {
         $this->loginPage->open();
     }
 
-    /**
-     * @When I specify the username as :username
-     */
+    #[When('I specify the username as :username')]
     public function iSpecifyTheUsername($username = null)
     {
         $this->loginPage->specifyUsername($username);
     }
 
-    /**
-     * @When I specify the password as :password
-     * @When I do not specify the password
-     */
+    #[When('I specify the password as :password')]
+    #[When('I do not specify the password')]
     public function iSpecifyThePasswordAs($password = null)
     {
         $this->loginPage->specifyPassword($password);
     }
 
-    /**
-     * @When /^(this administrator) logs in using "([^"]+)" password$/
-     */
+    #[When('/^(this administrator) logs in using "([^"]+)" password$/')]
     public function theyLogIn(AdminUserInterface $adminUser, $password)
     {
         $this->logInAgain($adminUser->getUsername(), $password);
     }
 
-    /**
-     * @When I log in
-     */
+    #[When('I log in')]
     public function iLogIn()
     {
         $this->loginPage->logIn();
     }
 
-    /**
-     * @Then I should be logged in
-     */
+    #[Then('I should be logged in')]
     public function iShouldBeLoggedIn()
     {
         $this->dashboardPage->verify();
     }
 
-    /**
-     * @Then I should not be logged in
-     */
+    #[Then('I should not be logged in')]
     public function iShouldNotBeLoggedIn()
     {
         Assert::false($this->dashboardPage->isOpen());
     }
 
-    /**
-     * @Given I should be on login page
-     */
+    #[Given('I should be on login page')]
     public function iShouldBeOnLoginPage()
     {
         Assert::true($this->loginPage->isOpen());
     }
 
-    /**
-     * @Then I should be notified about bad credentials
-     */
+    #[Then('I should be notified about bad credentials')]
     public function iShouldBeNotifiedAboutBadCredentials()
     {
         Assert::true($this->loginPage->hasValidationErrorWith('Invalid credentials.'));
     }
 
-    /**
-     * @Then I should be able to log in as :username authenticated by :password password
-     */
+    #[Then('I should be able to log in as :username authenticated by :password password')]
     public function iShouldBeAbleToLogInAsAuthenticatedByPassword($username, $password)
     {
         $this->logInAgain($username, $password);
         $this->iShouldBeLoggedIn();
     }
 
-    /**
-     * @Then I should not be able to log in as :username authenticated by :password password
-     */
+    #[Then('I should not be able to log in as :username authenticated by :password password')]
     public function iShouldNotBeAbleToLogInAsAuthenticatedByPassword($username, $password)
     {
         $this->logInAgain($username, $password);
@@ -120,9 +101,7 @@ final class LoginContext implements Context
         Assert::false($this->dashboardPage->isOpen());
     }
 
-    /**
-     * @Then I should be on the login page
-     */
+    #[Then('I should be on the login page')]
     public function iShouldBeOnTheLoginPage(): void
     {
         Assert::true($this->loginPage->isOpen());

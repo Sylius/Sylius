@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -33,9 +35,7 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I (enable|disable) showing the lowest price of discounted products$/
-     */
+    #[When('/^I (enable|disable) showing the lowest price of discounted products$/')]
     public function iEnableShowingTheLowestPriceOfDiscountedProducts(string $visible): void
     {
         $this->client->addRequestData(
@@ -44,9 +44,7 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         );
     }
 
-    /**
-     * @When /^I specify (-?\d+) days as the lowest price for discounted products checking period$/
-     */
+    #[When('/^I specify (-?\d+) days as the lowest price for discounted products checking period$/')]
     public function iSpecifyDaysAsTheLowestPriceForDiscountedProductsCheckingPeriod(int $days): void
     {
         $this->client->addRequestData(
@@ -55,17 +53,13 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         );
     }
 
-    /**
-     * @When I exclude the :taxon taxon from showing the lowest price of discounted products
-     */
+    #[When('I exclude the :taxon taxon from showing the lowest price of discounted products')]
     public function iExcludeTheTaxonFromShowingTheLowestPriceOfDiscountedProducts(TaxonInterface $taxon): void
     {
         $this->iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts([$taxon]);
     }
 
-    /**
-     * @When I remove the :taxon taxon from excluded taxons from showing the lowest price of discounted products
-     */
+    #[When('I remove the :taxon taxon from excluded taxons from showing the lowest price of discounted products')]
     public function iRemoveTheTaxonFromExcludedTaxonsFromShowingTheLowestPriceOfDiscountedProducts(TaxonInterface $taxon): void
     {
         /** @var ChannelInterface $channel */
@@ -81,9 +75,7 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         $this->iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts($leftTaxons);
     }
 
-    /**
-     * @When /^I exclude the ("[^"]+" and "[^"]+" taxons) from showing the lowest price of discounted products$/
-     */
+    #[When('/^I exclude the ("[^"]+" and "[^"]+" taxons) from showing the lowest price of discounted products$/')]
     public function iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts(iterable $taxons): void
     {
         $taxonsIris = [];
@@ -97,9 +89,7 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         );
     }
 
-    /**
-     * @Then /^the "[^"]+" channel should have the lowest price of discounted products prior to the current discount (enabled|disabled)$/
-     */
+    #[Then('/^the "[^"]+" channel should have the lowest price of discounted products prior to the current discount (enabled|disabled)$/')]
     public function theChannelShouldHaveTheLowestPriceOfDiscountedProductsPriorToTheCurrentDiscountEnabledOrDisabled(
         string $visible,
     ): void {
@@ -109,10 +99,8 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         );
     }
 
-    /**
-     * @Then /^the "[^"]+" channel should have the lowest price for discounted products checking period set to (\d+) days$/
-     * @Then its lowest price for discounted products checking period should be set to :days days
-     */
+    #[Then('/^the "[^"]+" channel should have the lowest price for discounted products checking period set to (\d+) days$/')]
+    #[Then('its lowest price for discounted products checking period should be set to :days days')]
     public function theChannelShouldHaveTheLowestPriceForDiscountedProductsCheckingPeriodSetToDays(int $days): void
     {
         Assert::same(
@@ -121,9 +109,7 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the lowest price for discounted products checking period must be greater than 0
-     */
+    #[Then('I should be notified that the lowest price for discounted products checking period must be greater than 0')]
     public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeGreaterThanZero(): void
     {
         Assert::true($this->responseChecker->hasViolationWithMessage(
@@ -133,9 +119,7 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that the lowest price for discounted products checking period must be lower
-     */
+    #[Then('I should be notified that the lowest price for discounted products checking period must be lower')]
     public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeLower(): void
     {
         Assert::true($this->responseChecker->hasViolationWithMessage(
@@ -145,18 +129,14 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         ));
     }
 
-    /**
-     * @Then /^this channel should have ("[^"]+" taxon) excluded from displaying the lowest price of discounted products$/
-     */
+    #[Then('/^this channel should have ("[^"]+" taxon) excluded from displaying the lowest price of discounted products$/')]
     public function thisChannelShouldHaveTaxonExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
         TaxonInterface $taxon,
     ): void {
         $this->thisChannelShouldHaveTaxonsExcludedFromDisplayingTheLowestPriceOfDiscountedProducts([$taxon]);
     }
 
-    /**
-     * @Then /^this channel should have ("([^"]+)" and "([^"]+)" taxons) excluded from displaying the lowest price of discounted products$/
-     */
+    #[Then('/^this channel should have ("([^"]+)" and "([^"]+)" taxons) excluded from displaying the lowest price of discounted products$/')]
     public function thisChannelShouldHaveTaxonsExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
         iterable $taxons,
     ): void {
@@ -167,9 +147,7 @@ final class ManagingChannelPriceHistoryConfigContext implements Context
         }
     }
 
-    /**
-     * @Then /^this channel should not have ("[^"]+" taxon) excluded from displaying the lowest price of discounted products$/
-     */
+    #[Then('/^this channel should not have ("[^"]+" taxon) excluded from displaying the lowest price of discounted products$/')]
     public function thisChannelShouldNotHaveTaxonExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
         TaxonInterface $taxon,
     ): void {

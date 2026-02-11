@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\Given;
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
@@ -27,11 +29,9 @@ final class DashboardContext implements Context
     {
     }
 
-    /**
-     * @Given I am on the administration dashboard
-     * @When I (try to )open administration dashboard
-     * @When I (try to )view statistics
-     */
+    #[Given('I am on the administration dashboard')]
+    #[When('I (try to )open administration dashboard')]
+    #[When('I (try to )view statistics')]
     public function iViewStatistics(): void
     {
         try {
@@ -41,20 +41,18 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @When I view statistics for :channel channel
-     *
      * @throws UnexpectedPageException
      */
+    #[When('I view statistics for :channel channel')]
     public function iViewStatisticsForChannel(ChannelInterface $channel): void
     {
         $this->dashboardPage->open(['channel' => $channel->getCode()]);
     }
 
     /**
-     * @When /^I view statistics for ("[^"]+" channel) and (current|previous|next) year split by (month|day)$/
-     *
      * @throws UnexpectedPageException
      */
+    #[When('/^I view statistics for ("[^"]+" channel) and (current|previous|next) year split by (month|day)$/')]
     public function iViewStatisticsForChannelAndYear(
         ChannelInterface $channel,
         string $period,
@@ -78,10 +76,9 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @When /^I view statistics for ("[^"]+" channel) and (previous|next) year$/
-     *
      * @throws UnexpectedPageException
      */
+    #[When('/^I view statistics for ("[^"]+" channel) and (previous|next) year$/')]
     public function iViewStatisticsForPreviousPeriod(
         ChannelInterface $channel,
         string $period,
@@ -97,57 +94,43 @@ final class DashboardContext implements Context
         };
     }
 
-    /**
-     * @When I choose :channelName channel
-     */
+    #[When('I choose :channelName channel')]
     public function iChooseChannel(string $channelName): void
     {
         $this->dashboardPage->chooseChannel($channelName);
     }
 
-    /**
-     * @When I search for product :product via the navbar
-     */
+    #[When('I search for product :product via the navbar')]
     public function iSearchForProductViaTheNavbar(ProductInterface $product): void
     {
         $this->dashboardPage->searchForProductViaNavbar($product);
     }
 
-    /**
-     * @When I log out
-     */
+    #[When('I log out')]
     public function iLogOut(): void
     {
         $this->dashboardPage->logOut();
     }
 
-    /**
-     * @Then I should see :number paid orders
-     */
+    #[Then('I should see :number paid orders')]
     public function iShouldSeePaidOrders(int $number): void
     {
         Assert::same($this->dashboardPage->getNumberOfPaidOrders(), $number);
     }
 
-    /**
-     * @Then I should see :number new customers
-     */
+    #[Then('I should see :number new customers')]
     public function iShouldSeeNewCustomers(int $number): void
     {
         Assert::same($this->dashboardPage->getNumberOfNewCustomers(), $number);
     }
 
-    /**
-     * @Then there should be total sales of :total
-     */
+    #[Then('there should be total sales of :total')]
     public function thereShouldBeTotalSalesOf(string $total): void
     {
         Assert::same($this->dashboardPage->getTotalSales(), $total);
     }
 
-    /**
-     * @Then the average order value should be :value
-     */
+    #[Then('the average order value should be :value')]
     public function myAverageOrderValueShouldBe(string $value): void
     {
         Assert::same(
@@ -157,25 +140,19 @@ final class DashboardContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :number new customers in the list
-     */
+    #[Then('I should see :number new customers in the list')]
     public function iShouldSeeNewCustomersInTheList(int $number): void
     {
         Assert::same($this->dashboardPage->getNumberOfNewCustomersInTheList(), $number);
     }
 
-    /**
-     * @Then I should see :number new orders in the list
-     */
+    #[Then('I should see :number new orders in the list')]
     public function iShouldSeeNewOrdersInTheList(int $number): void
     {
         Assert::same($this->dashboardPage->getNumberOfNewOrdersInTheList(), $number);
     }
 
-    /**
-     * @Then I should not see the administration dashboard
-     */
+    #[Then('I should not see the administration dashboard')]
     public function iShouldNotSeeTheAdministrationDashboard(): void
     {
         Assert::false($this->dashboardPage->isOpen());

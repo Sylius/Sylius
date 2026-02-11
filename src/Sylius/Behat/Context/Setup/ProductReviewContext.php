@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -33,9 +34,7 @@ final class ProductReviewContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^(this product) has one review from (customer "[^"]+")$/
-     */
+    #[Given('/^(this product) has one review from (customer "[^"]+")$/')]
     public function productHasAReview(ProductInterface $product, CustomerInterface $customer): void
     {
         $review = $this->createProductReview($product, 'Title', 5, 'Comment', $customer);
@@ -43,10 +42,8 @@ final class ProductReviewContext implements Context
         $this->productReviewRepository->add($review);
     }
 
-    /**
-     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
-     * @Given /^(this product) has(?:| also) an accepted review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
-     */
+    #[Given('/^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/')]
+    #[Given('/^(this product) has(?:| also) an accepted review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/')]
     public function thisProductHasAnAcceptedReviewTitledAndRatedAddedByCustomer(
         ProductInterface $product,
         string $title,
@@ -63,9 +60,7 @@ final class ProductReviewContext implements Context
         $this->productReviewRepository->add($review);
     }
 
-    /**
-     * @Given /^(this product) has(?:| also) a rejected review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
-     */
+    #[Given('/^(this product) has(?:| also) a rejected review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/')]
     public function thisProductHasARejectedReviewTitledAndRatedAddedByCustomer(
         ProductInterface $product,
         string $title,
@@ -82,9 +77,7 @@ final class ProductReviewContext implements Context
         $this->productReviewRepository->add($review);
     }
 
-    /**
-     * @Given /^(this product) has(?:| also) a new review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
-     */
+    #[Given('/^(this product) has(?:| also) a new review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/')]
     public function thisProductHasANewReviewTitledAndRatedAddedByCustomer(
         ProductInterface $product,
         string $title,
@@ -101,9 +94,7 @@ final class ProductReviewContext implements Context
         $this->productReviewRepository->add($review);
     }
 
-    /**
-     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) with a comment "([^"]+)" added by (customer "[^"]+")$/
-     */
+    #[Given('/^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) with a comment "([^"]+)" added by (customer "[^"]+")$/')]
     public function thisProductHasAReviewTitledAndRatedWithACommentAddedByCustomer(
         ProductInterface $product,
         string $title,
@@ -116,10 +107,8 @@ final class ProductReviewContext implements Context
         $this->productReviewRepository->add($review);
     }
 
-    /**
-     * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+), (\d+), (\d+) and (\d+)$/
-     * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+) and (\d+)$/
-     */
+    #[Given('/^(this product)(?:| also) has accepted reviews rated (\d+), (\d+), (\d+), (\d+) and (\d+)$/')]
+    #[Given('/^(this product)(?:| also) has accepted reviews rated (\d+), (\d+) and (\d+)$/')]
     public function thisProductHasAcceptedReviewsRated(ProductInterface $product, int ...$rates): void
     {
         $customer = $this->sharedStorage->get('customer');
@@ -129,9 +118,7 @@ final class ProductReviewContext implements Context
         }
     }
 
-    /**
-     * @Given /^(this product)(?:| also) has review rated (\d+) which is not accepted yet$/
-     */
+    #[Given('/^(this product)(?:| also) has review rated (\d+) which is not accepted yet$/')]
     public function itAlsoHasReviewRatedWhichIsNotAcceptedYet(ProductInterface $product, int $rate): void
     {
         $customer = $this->sharedStorage->get('customer');
@@ -139,9 +126,7 @@ final class ProductReviewContext implements Context
         $this->productReviewRepository->add($review);
     }
 
-    /**
-     * @Given /^(this product) also has review rated (\d+) which is rejected$/
-     */
+    #[Given('/^(this product) also has review rated (\d+) which is rejected$/')]
     public function itAlsoHasReviewRatedWhichIsRejected(ProductInterface $product, int $rate): void
     {
         $customer = $this->sharedStorage->get('customer');

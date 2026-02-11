@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
@@ -46,9 +47,7 @@ final readonly class ChannelContext implements Context
     ) {
     }
 
-    /**
-     * @Given :channel channel has account verification disabled
-     */
+    #[Given(':channel channel has account verification disabled')]
     public function channelHasAccountVerificationDisabled(ChannelInterface $channel): void
     {
         $channel->setAccountVerificationRequired(false);
@@ -56,9 +55,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^the (channel "[^"]+") has ("([^"]+)" and "([^"]+)" taxons) excluded from showing the lowest price of discounted products$/
-     */
+    #[Given('/^the (channel "[^"]+") has ("([^"]+)" and "([^"]+)" taxons) excluded from showing the lowest price of discounted products$/')]
     public function theTaxonAndTaxonAreExcludedFromShowingTheLowestPriceOfDiscountedProductsOnThisChannel(
         ChannelInterface $channel,
         iterable $taxons,
@@ -90,10 +87,8 @@ final readonly class ChannelContext implements Context
         $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
-    /**
-     * @Given the store operates on a single channel
-     * @Given the store operates on a single channel in :currencyCode currency
-     */
+    #[Given('the store operates on a single channel')]
+    #[Given('the store operates on a single channel in :currencyCode currency')]
     public function storeOperatesOnASingleChannel(?string $currencyCode = null): void
     {
         $defaultData = $this->defaultChannelFactory->create(null, null, $currencyCode);
@@ -102,9 +97,7 @@ final readonly class ChannelContext implements Context
         $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
-    /**
-     * @Given the store operates on a single channel in :localeCode locale
-     */
+    #[Given('the store operates on a single channel in :localeCode locale')]
     public function storeOperatesOnASingleChannelInLocale(string $localeCode): void
     {
         $defaultData = $this->defaultChannelFactory->create(localeCode: $localeCode);
@@ -133,26 +126,20 @@ final readonly class ChannelContext implements Context
         $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
-    /**
-     * @Given the channel :channel is enabled
-     */
+    #[Given('the channel :channel is enabled')]
     public function theChannelIsEnabled(ChannelInterface $channel): void
     {
         $this->changeChannelState($channel, true);
     }
 
-    /**
-     * @Given the channel :channel is disabled
-     * @Given the channel :channel has been disabled
-     */
+    #[Given('the channel :channel is disabled')]
+    #[Given('the channel :channel has been disabled')]
     public function theChannelIsDisabled(ChannelInterface $channel): void
     {
         $this->changeChannelState($channel, false);
     }
 
-    /**
-     * @Given /^the (channel "[^"]+") has showing the lowest price of discounted products (enabled|disabled)$/
-     */
+    #[Given('/^the (channel "[^"]+") has showing the lowest price of discounted products (enabled|disabled)$/')]
     public function theChannelHasShowingTheLowestPriceOfDiscountedProducts(ChannelInterface $channel, string $visible): void
     {
         $channel->getChannelPriceHistoryConfig()->setLowestPriceForDiscountedProductsVisible($visible === 'enabled');
@@ -160,36 +147,28 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given channel :channel has been deleted
-     */
+    #[Given('channel :channel has been deleted')]
     public function iChannelHasBeenDeleted(ChannelInterface $channel): void
     {
         $this->channelRepository->remove($channel);
     }
 
-    /**
-     * @Given /^(its) default tax zone is (zone "([^"]+)")$/
-     */
+    #[Given('/^(its) default tax zone is (zone "([^"]+)")$/')]
     public function itsDefaultTaxRateIs(ChannelInterface $channel, ZoneInterface $defaultTaxZone): void
     {
         $channel->setDefaultTaxZone($defaultTaxZone);
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^(this channel) has contact email set as "([^"]+)"$/
-     * @Given /^(this channel) has no contact email set$/
-     */
+    #[Given('/^(this channel) has contact email set as "([^"]+)"$/')]
+    #[Given('/^(this channel) has no contact email set$/')]
     public function thisChannelHasContactEmailSetAs(ChannelInterface $channel, ?string $contactEmail = null): void
     {
         $channel->setContactEmail($contactEmail);
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^on (this channel) shipping step is skipped if only a single shipping method is available$/
-     */
+    #[Given('/^on (this channel) shipping step is skipped if only a single shipping method is available$/')]
     public function onThisChannelShippingStepIsSkippedIfOnlyASingleShippingMethodIsAvailable(ChannelInterface $channel): void
     {
         $channel->setSkippingShippingStepAllowed(true);
@@ -197,9 +176,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^on (this channel) payment step is skipped if only a single payment method is available$/
-     */
+    #[Given('/^on (this channel) payment step is skipped if only a single payment method is available$/')]
     public function onThisChannelPaymentStepIsSkippedIfOnlyASinglePaymentMethodIsAvailable(
         ChannelInterface $channel,
     ): void {
@@ -208,9 +185,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^on (this channel) account verification is not required$/
-     */
+    #[Given('/^on (this channel) account verification is not required$/')]
     public function onThisChannelAccountVerificationIsNotRequired(ChannelInterface $channel): void
     {
         $channel->setAccountVerificationRequired(false);
@@ -218,9 +193,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^on (this channel) account verification is required$/
-     */
+    #[Given('/^on (this channel) account verification is required$/')]
     public function onThisChannelAccountVerificationIsRequired(ChannelInterface $channel): void
     {
         $channel->setAccountVerificationRequired(true);
@@ -228,9 +201,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given channel :channel billing data is :company, :street, :postcode :city, :country with :taxId tax ID
-     */
+    #[Given('channel :channel billing data is :company, :street, :postcode :city, :country with :taxId tax ID')]
     public function channelBillingDataIs(
         ChannelInterface $channel,
         string $company,
@@ -253,10 +224,8 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given channel :channel has menu taxon :taxon
-     * @Given /^(this channel) has menu (taxon "[^"]+")$/
-     */
+    #[Given('channel :channel has menu taxon :taxon')]
+    #[Given('/^(this channel) has menu (taxon "[^"]+")$/')]
     public function channelHasMenuTaxon(ChannelInterface $channel, TaxonInterface $taxon): void
     {
         $channel->setMenuTaxon($taxon);
@@ -264,9 +233,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^(this channel) operates in the ("[^"]+" country)$/
-     */
+    #[Given('/^(this channel) operates in the ("[^"]+" country)$/')]
     public function channelOperatesInCountry(ChannelInterface $channel, CountryInterface $country): void
     {
         $channel->addCountry($country);
@@ -274,9 +241,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^(this channel) does not define operating countries$/
-     */
+    #[Given('/^(this channel) does not define operating countries$/')]
     public function channelDoesNotDefineOperatingCountries(ChannelInterface $channel): void
     {
         foreach ($channel->getCountries() as $country) {
@@ -287,11 +252,11 @@ final readonly class ChannelContext implements Context
     }
 
     /**
-     * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
-     * @When customer view shop on :channel channel
+     * @Whencustomer view shop on :channel channel
      */
     #[Given('/^I changed my current (channel to "([^"]+)")$/')]
     #[Given('I am in the :channel channel')]
+    #[When('/^I change (?:|back )my current (channel to "([^"]+)")$/')]
     public function iChangedMyCurrentChannelTo(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('channel', $channel);
@@ -299,9 +264,7 @@ final readonly class ChannelContext implements Context
         $this->channelContextSetter->setChannel($channel);
     }
 
-    /**
-     * @Given /^its required address in the checkout is (billing|shipping)$/
-     */
+    #[Given('/^its required address in the checkout is (billing|shipping)$/')]
     public function itsRequiredAddressInTheCheckoutIs(string $type): void
     {
         /** @var ChannelInterface $channel */
@@ -311,9 +274,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^(this channel) has (\d+) day(?:|s) set as the lowest price for discounted products checking period$/
-     */
+    #[Given('/^(this channel) has (\d+) day(?:|s) set as the lowest price for discounted products checking period$/')]
     public function thisChannelHasDaysSetAsTheLowestPriceForDiscountedProductsCheckingPeriod(
         ChannelInterface $channel,
         int $days,
@@ -323,9 +284,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given the :taxon taxon is excluded from showing the lowest price of discounted products in the :channel channel
-     */
+    #[Given('the :taxon taxon is excluded from showing the lowest price of discounted products in the :channel channel')]
     public function theTaxonIsExcludedFromShowingTheLowestPriceOfDiscountedProductsInTheChannel(
         TaxonInterface $taxon,
         ChannelInterface $channel,
@@ -335,17 +294,13 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^the lowest price of discounted products prior to the current discount is disabled on (this channel)$/
-     */
+    #[Given('/^the lowest price of discounted products prior to the current discount is disabled on (this channel)$/')]
     public function theLowestPriceOfDiscountedProductsPriorToTheCurrentDiscountIsDisabledOnThisChannel(ChannelInterface $channel): void
     {
         $channel->getChannelPriceHistoryConfig()->setLowestPriceForDiscountedProductsVisible(false);
     }
 
-    /**
-     * @Given the store also operates in :locale locale
-     */
+    #[Given('the store also operates in :locale locale')]
     public function theStoreAlsoOperatesInLocale(LocaleInterface $locale): void
     {
         /** @var ChannelInterface $channel */
@@ -355,9 +310,7 @@ final readonly class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given the store uses the :taxCalculationStrategy tax calculation strategy
-     */
+    #[Given('the store uses the :taxCalculationStrategy tax calculation strategy')]
     public function theStoreUsesTheTaxCalculationStrategy(string $taxCalculationStrategy): void
     {
         /** @var ChannelInterface $channel */

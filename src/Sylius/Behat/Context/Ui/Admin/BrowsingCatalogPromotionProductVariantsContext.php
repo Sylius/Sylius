@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\Given;
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\CatalogPromotion\ProductVariant\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\ShowPageInterface;
@@ -29,44 +32,34 @@ final readonly class BrowsingCatalogPromotionProductVariantsContext implements C
     ) {
     }
 
-    /**
-     * @Given I am browsing variants affected by catalog promotion :catalogPromotion
-     * @When I browse variants affected by catalog promotion :catalogPromotion
-     */
+    #[Given('I am browsing variants affected by catalog promotion :catalogPromotion')]
+    #[When('I browse variants affected by catalog promotion :catalogPromotion')]
     public function iBrowseVariantsAffectedByCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->catalogPromotionProductVariantIndexPage->open(['id' => $catalogPromotion->getId()]);
     }
 
-    /**
-     * @When I want to view the product of variant :variant
-     */
+    #[When('I want to view the product of variant :variant')]
     public function iWantToViewTheProductOfVariant(ProductVariantInterface $variant): void
     {
         $this->catalogPromotionProductVariantIndexPage->showProductOf($variant->getId());
     }
 
-    /**
-     * @When I filter by code containing :phrase
-     */
+    #[When('I filter by code containing :phrase')]
     public function iFilterByCodeContaining(string $phrase): void
     {
         $this->catalogPromotionProductVariantIndexPage->filterByCode($phrase);
         $this->catalogPromotionProductVariantIndexPage->filter();
     }
 
-    /**
-     * @When I filter by name containing :phrase
-     */
+    #[When('I filter by name containing :phrase')]
     public function iFilterByNameContaining(string $phrase): void
     {
         $this->catalogPromotionProductVariantIndexPage->filterByName($phrase);
         $this->catalogPromotionProductVariantIndexPage->filter();
     }
 
-    /**
-     * @Then /^there should be (\d+) product variants? on the list$/
-     */
+    #[Then('/^there should be (\d+) product variants? on the list$/')]
     public function thereShouldBeProductVariantsOnTheList(int $count): void
     {
         Assert::same(
@@ -75,10 +68,8 @@ final readonly class BrowsingCatalogPromotionProductVariantsContext implements C
         );
     }
 
-    /**
-     * @Then it should be the :variantName product variant
-     * @Then it should be :firstVariant and :secondVariant product variants
-     */
+    #[Then('it should be the :variantName product variant')]
+    #[Then('it should be :firstVariant and :secondVariant product variants')]
     public function theProductVariantShouldBeInTheRegistry(string ...$variantsNames): void
     {
         foreach ($variantsNames as $variantName) {
@@ -88,9 +79,7 @@ final readonly class BrowsingCatalogPromotionProductVariantsContext implements C
         }
     }
 
-    /**
-     * @Then I should be viewing the details of product :product
-     */
+    #[Then('I should be viewing the details of product :product')]
     public function iShouldBeViewingTheDetailsOfProduct(ProductInterface $product): void
     {
         Assert::true($this->productShowPage->isOpen(['id' => $product->getId()]));

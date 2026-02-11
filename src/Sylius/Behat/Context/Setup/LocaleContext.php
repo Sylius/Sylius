@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -38,11 +39,9 @@ final readonly class LocaleContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has locale :localeCode
-     * @Given the store is( also) available in :localeCode
-     * @Given the locale :localeCode is enabled
-     */
+    #[Given('the store has locale :localeCode')]
+    #[Given('the store is( also) available in :localeCode')]
+    #[Given('the locale :localeCode is enabled')]
     public function theStoreHasLocale(string $localeCode): void
     {
         $locale = $this->provideLocale($localeCode);
@@ -50,9 +49,7 @@ final readonly class LocaleContext implements Context
         $this->saveLocale($locale);
     }
 
-    /**
-     * @Given the store has many locales
-     */
+    #[Given('the store has many locales')]
     public function theStoreHasManyLocales(): void
     {
         $this->theStoreHasLocale('en_US');
@@ -68,9 +65,7 @@ final readonly class LocaleContext implements Context
         $this->theStoreHasLocale('da_DK');
     }
 
-    /**
-     * @Given the locale :localeCode does not exist in the store
-     */
+    #[Given('the locale :localeCode does not exist in the store')]
     public function theStoreDoesNotHaveLocale(string $localeCode): void
     {
         /** @var LocaleInterface $locale */
@@ -80,13 +75,11 @@ final readonly class LocaleContext implements Context
         }
     }
 
-    /**
-     * @Given /^(that channel) allows to shop using the "([^"]+)" locale$/
-     * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
-     * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" locales$/
-     * @Given /^(this channel) allows to shop using the "([^"]+)" locale$/
-     * @Given /^(this channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
-     */
+    #[Given('/^(that channel) allows to shop using the "([^"]+)" locale$/')]
+    #[Given('/^(that channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/')]
+    #[Given('/^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" locales$/')]
+    #[Given('/^(this channel) allows to shop using the "([^"]+)" locale$/')]
+    #[Given('/^(this channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/')]
     public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames): void
     {
         foreach ($channel->getLocales() as $locale) {
@@ -100,10 +93,8 @@ final readonly class LocaleContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given /^(it) uses the "([^"]+)" locale by default$/
-     * @Given /^(this channel) uses the "([^"]+)" locale as default$/
-     */
+    #[Given('/^(it) uses the "([^"]+)" locale by default$/')]
+    #[Given('/^(this channel) uses the "([^"]+)" locale as default$/')]
     public function itUsesTheLocaleByDefault(ChannelInterface $channel, string $localeName): void
     {
         $locale = $this->provideLocale($this->localeConverter->convertNameToCode($localeName));

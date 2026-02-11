@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -31,11 +33,9 @@ final class ChannelContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
-     * @When /^I (?:start browsing|try to browse|browse) (that channel)$/
-     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )(channel "[^"]+")$/
-     */
+    #[When('/^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/')]
+    #[When('/^I (?:start browsing|try to browse|browse) (that channel)$/')]
+    #[When('/^I (?:am browsing|start browsing|try to browse|browse) (?:|the )(channel "[^"]+")$/')]
     public function iAmBrowsingChannel(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('hostname', $channel->getHostname());
@@ -44,9 +44,7 @@ final class ChannelContext implements Context
         $this->client->show(Resources::CHANNELS, $channel->getCode());
     }
 
-    /**
-     * @Then I should (still) shop using the :currencyCode currency
-     */
+    #[Then('I should (still) shop using the :currencyCode currency')]
     public function iShouldShopUsingTheCurrency(string $currencyCode): void
     {
         Assert::same(
@@ -58,9 +56,7 @@ final class ChannelContext implements Context
         );
     }
 
-    /**
-     * @Then I should be able to shop using the :currencyCode currency
-     */
+    #[Then('I should be able to shop using the :currencyCode currency')]
     public function iShouldBeAbleToShopUsingTheCurrency(string $currencyCode): void
     {
         $this->client->index(Resources::CURRENCIES);
@@ -74,9 +70,7 @@ final class ChannelContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to shop using the :currencyCode currency
-     */
+    #[Then('I should not be able to shop using the :currencyCode currency')]
     public function iShouldNotBeAbleToShopUsingTheCurrency(string $currencyCode): void
     {
         $this->client->index(Resources::CURRENCIES);

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Product\ChannelPricingsFormElementInterface;
 use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
@@ -32,9 +33,7 @@ final readonly class ProductCreationContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I create a new simple product ("[^"]+") priced at "(?:€|£|\$)([^"]+)" with ("[^"]+" taxon) in the ("[^"]+" channel)$/
-     */
+    #[When('/^I create a new simple product ("[^"]+") priced at "(?:€|£|\$)([^"]+)" with ("[^"]+" taxon) in the ("[^"]+" channel)$/')]
     public function iCreateANewSimpleProductPricedAtWithTaxonInTheChannel(
         string $name,
         string $price,
