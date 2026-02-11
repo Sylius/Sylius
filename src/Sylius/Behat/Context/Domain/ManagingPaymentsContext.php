@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -24,9 +25,7 @@ final class ManagingPaymentsContext implements Context
     {
     }
 
-    /**
-     * @Then /^there should be no ("[^"]+" payments) in the registry$/
-     */
+    #[Then('/^there should be no ("[^"]+" payments) in the registry$/')]
     public function paymentShouldNotExistInTheRegistry(PaymentMethodInterface $paymentMethod)
     {
         $payments = $this->paymentRepository->findBy(['method' => $paymentMethod]);

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -24,9 +25,7 @@ final class ManagingShipmentsContext implements Context
     {
     }
 
-    /**
-     * @Then /^there should be no shipments with ("[^"]+" shipping method) in the registry$/
-     */
+    #[Then('/^there should be no shipments with ("[^"]+" shipping method) in the registry$/')]
     public function shipmentShouldNotExistInTheRegistry(ShippingMethodInterface $shippingMethod)
     {
         $shipments = $this->shipmentRepository->findBy(['method' => $shippingMethod]);
