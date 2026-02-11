@@ -81,7 +81,7 @@ final class PromotionActionGroupValidatorTest extends TestCase
             ->with($this->promotionAction, null, ['Default', 'action_two'])
             ->willReturn($this->contextualValidator);
 
-        $constraint = new PromotionActionGroup(['groups' => ['Default', 'test_group']]);
+        $constraint = new PromotionActionGroup(groups: ['Default', 'test_group']);
         $this->promotionActionGroupValidator->validate($this->promotionAction, $constraint);
     }
 
@@ -98,7 +98,7 @@ final class PromotionActionGroupValidatorTest extends TestCase
             ->with($this->promotionAction, null, ['Default', 'test_group'])
             ->willReturn($this->contextualValidator);
 
-        $constraint = new PromotionActionGroup(['groups' => ['Default', 'test_group']]);
+        $constraint = new PromotionActionGroup(groups: ['Default', 'test_group']);
         $this->promotionActionGroupValidator->validate($this->promotionAction, $constraint);
     }
 }
