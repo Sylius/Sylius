@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Step\When;
-use Doctrine\DBAL\DBALException;
 use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Doctrine\DBAL\Exception as DBALException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -44,8 +44,7 @@ final class ManagingProductsContext implements Context
     {
         try {
             $this->productVariantRepository->remove($productVariant);
-            /** @phpstan-ignore-next-line  */
-        } catch (DBALException|\Doctrine\DBAL\Exception $exception) {
+        } catch (DBALException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
     }
@@ -69,13 +68,7 @@ final class ManagingProductsContext implements Context
     #[Then('/^I should be notified that this (?:variant|product) is in use and cannot be deleted$/')]
     public function iShouldBeNotifiedThatThisProductVariantIsInUseAndCannotBeDeleted()
     {
-        if (class_exists('\Doctrine\DBAL\DBALException')) {
-            Assert::isInstanceOf($this->sharedStorage->get('last_exception'), DBALException::class);
-        }
-
-        if (class_exists('\Doctrine\DBAL\Exception')) {
-            Assert::isInstanceOf($this->sharedStorage->get('last_exception'), \Doctrine\DBAL\Exception::class);
-        }
+        Assert::isInstanceOf($this->sharedStorage->get('last_exception'), DBALException::class);
     }
 
     #[Then('/^(this variant) should not exist in the product catalog$/')]
