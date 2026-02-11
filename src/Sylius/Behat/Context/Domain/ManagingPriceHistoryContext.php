@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Bundle\CoreBundle\PriceHistory\Remover\ChannelPricingLogEntriesRemoverInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -30,17 +32,13 @@ final class ManagingPriceHistoryContext implements Context
     ) {
     }
 
-    /**
-     * @When I delete price history older than :days day(s)
-     */
+    #[When('I delete price history older than :days day(s)')]
     public function iDeletePriceHistoryOlderThanDays(int $days): void
     {
         $this->channelPricingLogEntriesRemover->remove($days);
     }
 
-    /**
-     * @Then /^there should be (\d+) price history entries for (this product)$/
-     */
+    #[Then('/^there should be (\d+) price history entries for (this product)$/')]
     public function thereShouldBeCountPriceHistoryEntriesForThisProduct(int $count, ProductInterface $product): void
     {
         $channelPricingLogEntries = $this->channelPricingLogEntryRepository->findBy([
@@ -50,9 +48,7 @@ final class ManagingPriceHistoryContext implements Context
         Assert::count($channelPricingLogEntries, $count);
     }
 
-    /**
-     * @Then /^(this product) should have no entry with original price changed to ("[^"]+")$/
-     */
+    #[Then('/^(this product) should have no entry with original price changed to ("[^"]+")$/')]
     public function thisProductShouldHaveNoEntryWithOriginalPriceChangedTo(
         ProductInterface $product,
         int $originalPrice,
@@ -63,9 +59,7 @@ final class ManagingPriceHistoryContext implements Context
         ]));
     }
 
-    /**
-     * @Then /^(this product)'s price history should be empty$/
-     */
+    #[Then('/^(this product)\'s price history should be empty$/')]
     public function thisProductsPriceHistoryShouldBeEmpty(ProductInterface $product): void
     {
         $this->thereShouldBeCountPriceHistoryEntriesForThisProduct(0, $product);
