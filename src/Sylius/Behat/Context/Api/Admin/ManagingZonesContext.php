@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -36,44 +38,34 @@ final readonly class ManagingZonesContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to create a new zone consisting of :memberType
-     */
+    #[When('I want to create a new zone consisting of :memberType')]
     public function iWantToCreateANewZoneConsistingOfCountry(string $memberType): void
     {
         $this->client->buildCreateRequest(Resources::ZONES);
         $this->client->addRequestData('type', $memberType);
     }
 
-    /**
-     * @When I name it :name
-     * @When I rename it to :name
-     */
+    #[When('I name it :name')]
+    #[When('I rename it to :name')]
     public function iNameIt(string $name): void
     {
         $this->client->addRequestData('name', $name);
     }
 
-    /**
-     * @When I specify its code as :code
-     */
+    #[When('I specify its code as :code')]
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
     }
 
-    /**
-     * @When I do not specify its :type
-     * @When I do not add a country member
-     */
+    #[When('I do not specify its :type')]
+    #[When('I do not add a country member')]
     public function iDoNotSpecifyItsField(): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @When I add a country :country
-     */
+    #[When('I add a country :country')]
     public function iAddACountry(CountryInterface $country): void
     {
         $this->client->addSubResourceData('members', [
@@ -81,9 +73,7 @@ final readonly class ManagingZonesContext implements Context
         ]);
     }
 
-    /**
-     * @When I add a province :province
-     */
+    #[When('I add a province :province')]
     public function iAddAProvince(ProvinceInterface $province): void
     {
         $this->client->addSubResourceData('members', [
@@ -91,9 +81,7 @@ final readonly class ManagingZonesContext implements Context
         ]);
     }
 
-    /**
-     * @When I add a zone :zone
-     */
+    #[When('I add a zone :zone')]
     public function iAddAZone(ZoneInterface $zone): void
     {
         $this->client->addSubResourceData('members', [
@@ -101,9 +89,7 @@ final readonly class ManagingZonesContext implements Context
         ]);
     }
 
-    /**
-     * @When I add a member with a code :code
-     */
+    #[When('I add a member with a code :code')]
     public function iAddAMemberWithACode(string $code): void
     {
         $this->client->addSubResourceData('members', [
@@ -111,9 +97,7 @@ final readonly class ManagingZonesContext implements Context
         ]);
     }
 
-    /**
-     * @When I provide a too long zone member code
-     */
+    #[When('I provide a too long zone member code')]
     public function iProvideATooLongZoneMemberCode(): void
     {
         $this->client->addSubResourceData('members', [
@@ -121,50 +105,38 @@ final readonly class ManagingZonesContext implements Context
         ]);
     }
 
-    /**
-     * @When I select its scope as :scope
-     */
+    #[When('I select its scope as :scope')]
     public function iSelectItsScopeAs(string $scope): void
     {
         $this->client->addRequestData('scope', $scope);
     }
 
-    /**
-     * @When I set its priority to :priority
-     */
+    #[When('I set its priority to :priority')]
     public function iSetsItsPriorityTo(int $priority): void
     {
         $this->client->addRequestData('priority', $priority);
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I want to see all zones in store
-     * @When I browse zones
-     */
+    #[When('I want to see all zones in store')]
+    #[When('I browse zones')]
     public function iWantToSeeAllZonesInStore(): void
     {
         $this->client->index(Resources::ZONES);
     }
 
-    /**
-     * @When /^I(?:| try to) delete the (zone named "([^"]*)")$/
-     */
+    #[When('/^I(?:| try to) delete the (zone named "([^"]*)")$/')]
     public function iDeleteZoneNamed(ZoneInterface $zone): void
     {
         $this->client->delete(Resources::ZONES, $zone->getCode());
     }
 
-    /**
-     * @When I want to modify the zone named :zone
-     */
+    #[When('I want to modify the zone named :zone')]
     public function iWantToModifyTheZoneNamed(ZoneInterface $zone): void
     {
         $this->sharedStorage->set('zone', $zone);
@@ -172,17 +144,13 @@ final readonly class ManagingZonesContext implements Context
         $this->client->buildUpdateRequest(Resources::ZONES, $zone->getCode());
     }
 
-    /**
-     * @When /^I(?:| also) remove the ("([^"]+)" country) member$/
-     */
+    #[When('/^I(?:| also) remove the ("([^"]+)" country) member$/')]
     public function iRemoveTheCountryMember(CountryInterface $country): void
     {
         $this->removeZoneMember($country);
     }
 
-    /**
-     * @When /^I(?:| also) remove the ("([^"]+)", "([^"]+)" and "([^"]+)" country) members$/
-     */
+    #[When('/^I(?:| also) remove the ("([^"]+)", "([^"]+)" and "([^"]+)" country) members$/')]
     public function iRemoveCountryMembers(array $countries): void
     {
         foreach ($countries as $country) {
@@ -190,25 +158,19 @@ final readonly class ManagingZonesContext implements Context
         }
     }
 
-    /**
-     * @When I remove the :province province member
-     */
+    #[When('I remove the :province province member')]
     public function iRemoveTheProvinceMember(ProvinceInterface $province): void
     {
         $this->removeZoneMember($province);
     }
 
-    /**
-     * @When I remove the :zone zone member
-     */
+    #[When('I remove the :zone zone member')]
     public function iRemoveTheZoneMember(ZoneInterface $zone): void
     {
         $this->removeZoneMember($zone);
     }
 
-    /**
-     * @When I add the country :country again
-     */
+    #[When('I add the country :country again')]
     public function iAddTheCountryToTheZoneNamedAgain(CountryInterface $country): void
     {
         $this->iWantToModifyTheZoneNamed($this->sharedStorage->get('zone'));
@@ -219,9 +181,7 @@ final readonly class ManagingZonesContext implements Context
         $this->client->update();
     }
 
-    /**
-     * @Then the zone named :zone with the :country country member should appear in the registry
-     */
+    #[Then('the zone named :zone with the :country country member should appear in the registry')]
     public function theZoneNamedWithTheCountryMemberShouldAppearInTheRegistry(
         ZoneInterface $zone,
         CountryInterface $country,
@@ -233,9 +193,7 @@ final readonly class ManagingZonesContext implements Context
         Assert::inArray($country->getCode(), array_column($members, 'code'));
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->addRequestData('code', 'NEW_CODE');
@@ -246,9 +204,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should not be able to add the ("[^"]+" zone) as a member$/
-     */
+    #[Then('/^I should not be able to add the ("[^"]+" zone) as a member$/')]
     public function iShouldNotBeAbleToAddZoneAsAMember(ZoneInterface $zone): void
     {
         $this->client->addSubResourceData('members', [
@@ -261,9 +217,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then the zone named :zone with the :province province member should appear in the registry
-     */
+    #[Then('the zone named :zone with the :province province member should appear in the registry')]
     public function theZoneNamedWithTheProvinceMemberShouldAppearInTheRegistry(
         ZoneInterface $zone,
         ProvinceInterface $province,
@@ -275,9 +229,7 @@ final readonly class ManagingZonesContext implements Context
         Assert::inArray($province->getCode(), array_column($members, 'code'));
     }
 
-    /**
-     * @Then the zone named :zone with the :otherZone zone member should appear in the registry
-     */
+    #[Then('the zone named :zone with the :otherZone zone member should appear in the registry')]
     public function theZoneNamedWithTheZoneMemberShouldAppearInTheRegistry(
         ZoneInterface $zone,
         ZoneInterface $otherZone,
@@ -289,9 +241,7 @@ final readonly class ManagingZonesContext implements Context
         Assert::inArray($otherZone->getCode(), array_column($members, 'code'));
     }
 
-    /**
-     * @Then its scope should be :scope
-     */
+    #[Then('its scope should be :scope')]
     public function itsScopeShouldBe(string $scope): void
     {
         Assert::true(
@@ -300,19 +250,15 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :count zones in the list
-     * @Then I should see a single zone in the list
-     */
+    #[Then('I should see :count zones in the list')]
+    #[Then('I should see a single zone in the list')]
     public function iShouldSeeZonesInTheList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::ZONES)), $count);
     }
 
-    /**
-     * @Then I should see the zone named :name in the list
-     * @Then I should still see the zone named :name in the list
-     */
+    #[Then('I should see the zone named :name in the list')]
+    #[Then('I should still see the zone named :name in the list')]
     public function iShouldSeeTheZoneNamedInTheList(string $name): void
     {
         Assert::true(
@@ -321,9 +267,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one zone with code :code
-     */
+    #[Then('there should still be only one zone with code :code')]
     public function thereShouldStillBeOnlyOneZoneWithCode(string $code): void
     {
         Assert::count(
@@ -333,9 +277,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then the zone named :name should no longer exist in the registry
-     */
+    #[Then('the zone named :name should no longer exist in the registry')]
     public function theZoneNamedShouldNoLongerExistInTheRegistry(string $name): void
     {
         Assert::false(
@@ -344,9 +286,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then /^zone with (code|name) "([^"]*)" should not be added$/
-     */
+    #[Then('/^zone with (code|name) "([^"]*)" should not be added$/')]
     public function zoneShouldNotBeAdded(string $field, string $value): void
     {
         Assert::false(
@@ -355,9 +295,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/
-     */
+    #[Then('/^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/')]
     public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember): void
     {
         $members = $this->responseChecker->getValue(
@@ -368,9 +306,7 @@ final readonly class ManagingZonesContext implements Context
         Assert::count($members, 1);
     }
 
-    /**
-     * @Then /^(this zone) should have ("([^"]+)" and "([^"]+)" country members)$/
-     */
+    #[Then('/^(this zone) should have ("([^"]+)" and "([^"]+)" country members)$/')]
     public function thisZoneShouldHaveTheCountryAndTheProvinceMembers(
         ZoneInterface $zone,
         array $zoneMembers,
@@ -391,9 +327,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this zone) name should be "([^"]*)"$/
-     */
+    #[Then('/^(this zone) name should be "([^"]*)"$/')]
     public function thisZoneNameShouldBe(ZoneInterface $zone, string $name): void
     {
         Assert::true(
@@ -402,9 +336,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -413,9 +345,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(
@@ -426,10 +356,8 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that this zone cannot be deleted
-     * @Then I should be notified that the zone is in use and cannot be deleted
-     */
+    #[Then('I should be notified that this zone cannot be deleted')]
+    #[Then('I should be notified that the zone is in use and cannot be deleted')]
     public function iShouldBeNotifiedThatThisZoneCannotBeDeleted(): void
     {
         Assert::contains(
@@ -438,9 +366,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that zone with this code already exists
-     */
+    #[Then('I should be notified that zone with this code already exists')]
     public function iShouldBeNotifiedThatZoneWithThisCodeAlreadyExists(): void
     {
         Assert::contains(
@@ -449,9 +375,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that (code|name) is required$/
-     */
+    #[Then('/^I should be notified that (code|name) is required$/')]
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         Assert::contains(
@@ -460,9 +384,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that at least one zone member is required
-     */
+    #[Then('I should be notified that at least one zone member is required')]
     public function iShouldBeNotifiedThatAtLeastOneZoneMemberIsRequired(): void
     {
         Assert::contains(
@@ -471,9 +393,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be informed that the provided zone member code is too long
-     */
+    #[Then('I should be informed that the provided zone member code is too long')]
     public function iShouldBeNotifiedThatTheZoneMemberCodeIsTooLong(): void
     {
         Assert::contains(
@@ -482,9 +402,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that "([^"]*)" is not a valid (country|province|zone) code$/
-     */
+    #[Then('/^I should be notified that "([^"]*)" is not a valid (country|province|zone) code$/')]
     public function iShouldBeNotifiedThatIsNotAValidElementCode(string $code, string $element): void
     {
         Assert::contains(
@@ -493,9 +411,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that :type is not a valid zone type
-     */
+    #[Then('I should be notified that :type is not a valid zone type')]
     public function iShouldBeNotifiedThatIsNotAValidZoneType(string $type): void
     {
         Assert::contains(
@@ -504,9 +420,7 @@ final readonly class ManagingZonesContext implements Context
         );
     }
 
-    /**
-     * @Then /^the (first|last) zone on the list should have ([^"]+) "([^"]+)"$/
-     */
+    #[Then('/^the (first|last) zone on the list should have ([^"]+) "([^"]+)"$/')]
     public function theFirstZoneOnTheListShouldHave(string $togglePosition, string $field, string $value): void
     {
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:member');
@@ -519,9 +433,7 @@ final readonly class ManagingZonesContext implements Context
         Assert::same($item[$field], $value);
     }
 
-    /**
-     * @Then the :zone zone should have priority :priority
-     */
+    #[Then('the :zone zone should have priority :priority')]
     public function theZoneShouldHavePriority(ZoneInterface $zone, int $priority): void
     {
         Assert::true(

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -29,19 +31,15 @@ final class DashboardContext implements Context
     ) {
     }
 
-    /**
-     * @When I view statistics
-     */
+    #[When('I view statistics')]
     public function iBrowseStatistics(): void
     {
         $this->client->index('statistics');
     }
 
-    /**
-     * @When I view statistics for :channel channel and current year split by month
-     * @When I choose :channel channel
-     * @When I view statistics for :channel channel
-     */
+    #[When('I view statistics for :channel channel and current year split by month')]
+    #[When('I choose :channel channel')]
+    #[When('I view statistics for :channel channel')]
     public function iViewStatisticsForChannelAndYear(ChannelInterface $channel): void
     {
         $this->client->index(
@@ -55,9 +53,7 @@ final class DashboardContext implements Context
         );
     }
 
-    /**
-     * @When I view statistics for :channel channel and previous year split by month
-     */
+    #[When('I view statistics for :channel channel and previous year split by month')]
     public function iViewStatisticsForChannelAndPreviousYear(ChannelInterface $channel): void
     {
         $currentYear = (int) $this->clock->now()->format('Y');
@@ -73,9 +69,7 @@ final class DashboardContext implements Context
         );
     }
 
-    /**
-     * @When I view statistics for :channel channel and next year split by month
-     */
+    #[When('I view statistics for :channel channel and next year split by month')]
     public function iViewStatisticsForChannelAndNextYear(ChannelInterface $channel): void
     {
         $currentYear = (int) $this->clock->now()->format('Y');
@@ -91,9 +85,7 @@ final class DashboardContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :count paid orders
-     */
+    #[Then('I should see :count paid orders')]
     public function iShouldSeePaidOrders(int $count): void
     {
         Assert::true(
@@ -105,9 +97,7 @@ final class DashboardContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :number new customers( in the list)
-     */
+    #[Then('I should see :number new customers( in the list)')]
     public function iShouldSeeNewCustomers(int $count): void
     {
         Assert::true(
@@ -126,9 +116,7 @@ final class DashboardContext implements Context
         );
     }
 
-    /**
-     * @Then /^there should be total sales of ("[^"]+")$/
-     */
+    #[Then('/^there should be total sales of ("[^"]+")$/')]
     public function thereShouldBeTotalSalesOf(int $totalSales): void
     {
         Assert::true(
@@ -140,9 +128,7 @@ final class DashboardContext implements Context
         );
     }
 
-    /**
-     * @Then /^the average order value should be ("[^"]+")$/
-     */
+    #[Then('/^the average order value should be ("[^"]+")$/')]
     public function myAverageOrderValueShouldBe(int $averageTotalValue): void
     {
         Assert::true(
