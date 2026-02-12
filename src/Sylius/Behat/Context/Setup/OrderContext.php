@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
@@ -87,14 +88,12 @@ final readonly class OrderContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^there is (?:a|another) (customer "[^"]+") that placed an order$/
-     * @Given /^there is (?:a|another) (customer "[^"]+") that placed (an order "[^"]+")$/
-     * @Given a customer :customer placed an order :orderNumber
-     * @Given the customer :customer has already placed an order :orderNumber
-     * @Given there is a customer :customer that placed an order :orderNumber in channel :channel
-     * @Given /^(this customer) placed (another order "[^"]+")$/
-     */
+    #[Given('/^there is (?:a|another) (customer "[^"]+") that placed an order$/')]
+    #[Given('/^there is (?:a|another) (customer "[^"]+") that placed (an order "[^"]+")$/')]
+    #[Given('a customer :customer placed an order :orderNumber')]
+    #[Given('the customer :customer has already placed an order :orderNumber')]
+    #[Given('there is a customer :customer that placed an order :orderNumber in channel :channel')]
+    #[Given('/^(this customer) placed (another order "[^"]+")$/')]
     public function thereIsCustomerThatPlacedOrder(
         CustomerInterface $customer,
         ?string $orderNumber = null,
@@ -108,18 +107,14 @@ final readonly class OrderContext implements Context
         $this->orderRepository->add($order);
     }
 
-    /**
-     * @Given there is a customer :customer that placed an order :orderNumber later
-     */
+    #[Given('there is a customer :customer that placed an order :orderNumber later')]
     public function thereIsACustomerThatPlacedAnOrderLater(CustomerInterface $customer, string $orderNumber): void
     {
         sleep(1);
         $this->thereIsCustomerThatPlacedOrder($customer, $orderNumber);
     }
 
-    /**
-     * @Given /^there is a (customer "[^"]+") that placed order with ("[^"]+" product) to ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment) method$/
-     */
+    #[Given('/^there is a (customer "[^"]+") that placed order with ("[^"]+" product) to ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment) method$/')]
     public function thereIsACustomerThatPlacedOrderWithProductToBasedBillingAddressWithShippingMethodAndPaymentMethod(
         CustomerInterface $customer,
         ProductInterface $product,
@@ -131,9 +126,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^there is a (customer "[^"]+") that placed order with ("[^"]+" product) to ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment) method without completing it$/
-     */
+    #[Given('/^there is a (customer "[^"]+") that placed order with ("[^"]+" product) to ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment) method without completing it$/')]
     public function thereIsACustomerThatPlacedOrderWithProductToBasedBillingAddressWithShippingMethodAndPaymentMethodWithoutCompletingIt(
         CustomerInterface $customer,
         ProductInterface $product,
@@ -145,9 +138,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the guest customer placed order with ("[^"]+" product) for "([^"]+)" and ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment)$/
-     */
+    #[Given('/^the guest customer placed order with ("[^"]+" product) for "([^"]+)" and ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment)$/')]
     public function theGuestCustomerPlacedOrderWithForAndBasedShippingAddress(
         ProductInterface $product,
         string $email,
@@ -163,9 +154,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the another guest customer placed order with ("[^"]+" product) for "([^"]+)" and ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment)$/
-     */
+    #[Given('/^the another guest customer placed order with ("[^"]+" product) for "([^"]+)" and ("[^"]+" based billing address) with ("[^"]+" shipping method) and ("[^"]+" payment)$/')]
     public function theAnotherGuestCustomerPlacedOrderWithForAndBasedShippingAddress(
         ProductInterface $product,
         string $email,
@@ -183,9 +172,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given a customer :customer added something to cart
-     */
+    #[Given('a customer :customer added something to cart')]
     public function customerStartedCheckout(CustomerInterface $customer): void
     {
         $cart = $this->createCart($customer);
@@ -195,9 +182,7 @@ final readonly class OrderContext implements Context
         $this->orderRepository->add($cart);
     }
 
-    /**
-     * @Given the customer :customer added :product product to the cart
-     */
+    #[Given('the customer :customer added :product product to the cart')]
     public function theCustomerAddedProductToTheCart(CustomerInterface $customer, ProductInterface $product): void
     {
         $cart = $this->createCart($customer);
@@ -227,10 +212,8 @@ final readonly class OrderContext implements Context
         $this->orderRepository->add($order);
     }
 
-    /**
-     * @Given /^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+"(?:|, "[^"]+"))$/
-     * @Given /^I (addressed it to "[^"]+", "[^"]+", "[^"]+" "[^"]+" in the "[^"]+"(?:|, "[^"]+"))$/
-     */
+    #[Given('/^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+"(?:|, "[^"]+"))$/')]
+    #[Given('/^I (addressed it to "[^"]+", "[^"]+", "[^"]+" "[^"]+" in the "[^"]+"(?:|, "[^"]+"))$/')]
     public function theCustomerAddressedItTo(AddressInterface $address): void
     {
         /** @var OrderInterface $order */
@@ -240,9 +223,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the customer changed shipping address' street to :street
-     */
+    #[Given('the customer changed shipping address\' street to :street')]
     public function theCustomerChangedShippingAddressStreetTo(string $street): void
     {
         /** @var OrderInterface $order */
@@ -256,11 +237,9 @@ final readonly class OrderContext implements Context
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }
 
-    /**
-     * @Given /^the customer set the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     * @Given /^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "[^"]+", "[^"]+")$/
-     * @Given /^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "([^"]+)", "[^"]+", "[^"]+")$/
-     */
+    #[Given('/^the customer set the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/')]
+    #[Given('/^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "[^"]+", "[^"]+")$/')]
+    #[Given('/^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "([^"]+)", "[^"]+", "[^"]+")$/')]
     public function forTheBillingAddressOf(AddressInterface $address): void
     {
         /** @var OrderInterface $order */
@@ -273,20 +252,16 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical billing address$/
-     * @Given /^I (addressed it to "[^"]+", "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical billing address$/
-     */
+    #[Given('/^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical billing address$/')]
+    #[Given('/^I (addressed it to "[^"]+", "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical billing address$/')]
     public function theCustomerAddressedItToWithIdenticalBillingAddress(AddressInterface $address): void
     {
         $this->theCustomerAddressedItTo($address);
         $this->forTheBillingAddressOf(clone $address);
     }
 
-    /**
-     * @Given /^the customer chose ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
-     * @Given /^I chose ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
-     */
+    #[Given('/^the customer chose ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/')]
+    #[Given('/^I chose ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/')]
     public function theCustomerChoseShippingToWithPayment(
         ShippingMethodInterface $shippingMethod,
         AddressInterface $address,
@@ -300,9 +275,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the customer chose ("[^"]+" shipping method) (to "[^"]+")$/
-     */
+    #[Given('/^the customer chose ("[^"]+" shipping method) (to "[^"]+")$/')]
     public function theCustomerChoseShippingTo(ShippingMethodInterface $shippingMethod, AddressInterface $address): void
     {
         /** @var OrderInterface $order */
@@ -321,10 +294,8 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the customer chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
-     * @Given /^I chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
-     */
+    #[Given('/^the customer chose ("[^"]+" shipping method) with ("[^"]+" payment)$/')]
+    #[Given('/^I chose ("[^"]+" shipping method) with ("[^"]+" payment)$/')]
     public function theCustomerChoseShippingWithPayment(
         ShippingMethodInterface $shippingMethod,
         PaymentMethodInterface $paymentMethod,
@@ -338,9 +309,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the customer chose ("[^"]+" payment)$/
-     */
+    #[Given('/^the customer chose ("[^"]+" payment)$/')]
     public function theCustomerChosePayment(PaymentMethodInterface $paymentMethod): void
     {
         /** @var OrderInterface $order */
@@ -356,10 +325,8 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the customer bought a single :product
-     * @Given I bought a single :product
-     */
+    #[Given('the customer bought a single :product')]
+    #[Given('I bought a single :product')]
     public function theCustomerBoughtSingleProduct(ProductInterface $product, ?ChannelInterface $channel = null): void
     {
         $variant = $this->getProductVariant($product);
@@ -369,9 +336,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the customer bought another :product with separate :shippingMethod shipment
-     */
+    #[Given('the customer bought another :product with separate :shippingMethod shipment')]
     public function theCustomerBoughtAnotherProductWithSeparateShipment(
         ProductInterface $product,
         ShippingMethodInterface $shippingMethod,
@@ -392,19 +357,15 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the customer bought ((?:a|an) "[^"]+") and ((?:a|an) "[^"]+")$/
-     * @Given /^I bought ((?:a|an) "[^"]+") and ((?:a|an) "[^"]+")$/
-     */
+    #[Given('/^the customer bought ((?:a|an) "[^"]+") and ((?:a|an) "[^"]+")$/')]
+    #[Given('/^I bought ((?:a|an) "[^"]+") and ((?:a|an) "[^"]+")$/')]
     public function theCustomerBoughtProductAndProduct(ProductInterface $product, ProductInterface $secondProduct): void
     {
         $this->theCustomerBoughtSingleProduct($product);
         $this->theCustomerBoughtSingleProduct($secondProduct);
     }
 
-    /**
-     * @Given /^the customer bought (\d+) ("[^"]+" products)$/
-     */
+    #[Given('/^the customer bought (\d+) ("[^"]+" products)$/')]
     public function theCustomerBoughtSeveralProducts(int $quantity, ProductInterface $product): void
     {
         $variant = $this->getProductVariant($product);
@@ -414,9 +375,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the customer bought ([^"]+) units of ("[^"]+" variant of product "[^"]+")$/
-     */
+    #[Given('/^the customer bought ([^"]+) units of ("[^"]+" variant of product "[^"]+")$/')]
     public function theCustomerBoughtSeveralVariantsOfProduct(int $quantity, ProductVariantInterface $variant): void
     {
         $this->addProductVariantToOrder($variant, $quantity);
@@ -424,10 +383,8 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the customer bought a single ("[^"]+" variant of product "[^"]+")$/
-     * @Given /^the customer also bought a ("[^"]+" variant of product "[^"]+")$/
-     */
+    #[Given('/^the customer bought a single ("[^"]+" variant of product "[^"]+")$/')]
+    #[Given('/^the customer also bought a ("[^"]+" variant of product "[^"]+")$/')]
     public function theCustomerBoughtSingleProductVariant(ProductVariantInterface $productVariant): void
     {
         $this->addProductVariantToOrder($productVariant);
@@ -435,10 +392,8 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the customer bought a single :product using :coupon coupon
-     * @Given I bought a single :product using :coupon coupon
-     */
+    #[Given('the customer bought a single :product using :coupon coupon')]
+    #[Given('I bought a single :product using :coupon coupon')]
     public function theCustomerBoughtSingleUsing(ProductInterface $product, PromotionCouponInterface $coupon): void
     {
         $variant = $this->getProductVariant($product);
@@ -449,9 +404,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given I used :coupon coupon
-     */
+    #[Given('I used :coupon coupon')]
     public function iUsedCoupon(PromotionCouponInterface $coupon): void
     {
         $order = $this->sharedStorage->get('order');
@@ -478,12 +431,10 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given there is an :orderNumber order with :product product
-     * @Given there is an :orderNumber order with :product product in this channel
-     * @Given there is an :orderNumber order with :product product in :channel channel
-     * @Given there is a :state :orderNumber order with :product product
-     */
+    #[Given('there is an :orderNumber order with :product product')]
+    #[Given('there is an :orderNumber order with :product product in this channel')]
+    #[Given('there is an :orderNumber order with :product product in :channel channel')]
+    #[Given('there is a :state :orderNumber order with :product product')]
     public function thereIsAOrderWithProduct(
         string $orderNumber,
         ProductInterface $product,
@@ -507,9 +458,7 @@ final readonly class OrderContext implements Context
         $this->orderRepository->add($order);
     }
 
-    /**
-     * @Given there is an :orderNumber order with :product product ordered later
-     */
+    #[Given('there is an :orderNumber order with :product product ordered later')]
     public function thereIsAnOrderWithProductOrderedLater(string $orderNumber, ProductInterface $product): void
     {
         sleep(1);
@@ -517,10 +466,9 @@ final readonly class OrderContext implements Context
     }
 
     /**
-     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") at "([^"]+)"$/
-     *
      * @throws \Exception
      */
+    #[Given('/^(this customer) has(?:| also) placed (an order "[^"]+") at "([^"]+)"$/')]
     public function thisCustomerHasPlacedAnOrderAtDate(CustomerInterface $customer, string $number, string $checkoutCompletedAt): void
     {
         $order = $this->createOrder($customer, $number);
@@ -530,9 +478,7 @@ final readonly class OrderContext implements Context
         $this->orderRepository->add($order);
     }
 
-    /**
-     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") on a (channel "[^"]+")$/
-     */
+    #[Given('/^(this customer) has(?:| also) placed (an order "[^"]+") on a (channel "[^"]+")$/')]
     public function thisCustomerHasPlacedAnOrderOnAChannel(CustomerInterface $customer, string $number, ChannelInterface $channel): void
     {
         $order = $this->createOrder($customer, $number, $channel);
@@ -542,9 +488,7 @@ final readonly class OrderContext implements Context
         $this->sharedStorage->set('order', $order);
     }
 
-    /**
-     * @Given /^(this customer) has(?:| also) started checkout on a (channel "[^"]+")$/
-     */
+    #[Given('/^(this customer) has(?:| also) started checkout on a (channel "[^"]+")$/')]
     public function thisCustomerHasStartedCheckoutOnAChannel(CustomerInterface $customer, ChannelInterface $channel): void
     {
         $order = $this->createOrder($customer, null, $channel);
@@ -553,9 +497,7 @@ final readonly class OrderContext implements Context
         $this->sharedStorage->set('order', $order);
     }
 
-    /**
-     * @Given /^(customer "[^"]+"|this customer) has(?:| also) placed (\d+) orders on the ("[^"]+" channel) in each buying (\d+) ("[^"]+" products?)$/
-     */
+    #[Given('/^(customer "[^"]+"|this customer) has(?:| also) placed (\d+) orders on the ("[^"]+" channel) in each buying (\d+) ("[^"]+" products?)$/')]
     public function thisCustomerPlacedOrdersOnChannelBuyingProducts(
         CustomerInterface $customer,
         int $orderCount,
@@ -566,9 +508,7 @@ final readonly class OrderContext implements Context
         $this->createOrdersForCustomer($customer, $orderCount, $channel, $productCount, $product);
     }
 
-    /**
-     * @Given /^(customer "[^"]+"|this customer) has(?:| also) fulfilled (\d+) orders placed on the ("[^"]+" channel) in each buying (\d+) ("[^"]+" products?)$/
-     */
+    #[Given('/^(customer "[^"]+"|this customer) has(?:| also) fulfilled (\d+) orders placed on the ("[^"]+" channel) in each buying (\d+) ("[^"]+" products?)$/')]
     public function thisCustomerFulfilledOrdersPlacedOnChannelBuyingProducts(
         CustomerInterface $customer,
         int $orderCount,
@@ -579,9 +519,7 @@ final readonly class OrderContext implements Context
         $this->createOrdersForCustomer($customer, $orderCount, $channel, $productCount, $product, true);
     }
 
-    /**
-     * @Given /^(\d+) new customers have added products to the cart for total of ("[^"]+")$/
-     */
+    #[Given('/^(\d+) new customers have added products to the cart for total of ("[^"]+")$/')]
     public function customersHaveAddedProductsToTheCartForTotalOf(int $numberOfCustomers, int $total): void
     {
         $customers = $this->generateCustomers($numberOfCustomers);
@@ -602,25 +540,19 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^a single customer has placed an order for total of ("[^"]+")$/
-     */
+    #[Given('/^a single customer has placed an order for total of ("[^"]+")$/')]
     public function aSingleCustomerHasPlacedAnOrderForTotalOf(int $total): void
     {
         $this->createOrders(numberOfCustomers: 1, numberOfOrders: 1, total: $total);
     }
 
-    /**
-     * @Given /^(\d+) (?:|more )new customers have placed (\d+) orders for total of ("[^"]+")$/
-     */
+    #[Given('/^(\d+) (?:|more )new customers have placed (\d+) orders for total of ("[^"]+")$/')]
     public function customersHavePlacedOrdersForTotalOf(int $numberOfCustomers, int $numberOfOrders, int $total): void
     {
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total);
     }
 
-    /**
-     * @Given /^(\d+) new customers have fulfilled (\d+) orders placed for total of ("[^"]+")$/
-     */
+    #[Given('/^(\d+) new customers have fulfilled (\d+) orders placed for total of ("[^"]+")$/')]
     public function customersHaveFulfilledOrdersPlacedForTotalOf(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -629,9 +561,7 @@ final readonly class OrderContext implements Context
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total, true);
     }
 
-    /**
-     * @Given /^(\d+) (?:|more )new customers have placed (\d+) orders for total of ("[^"]+") mostly ("[^"]+" product)$/
-     */
+    #[Given('/^(\d+) (?:|more )new customers have placed (\d+) orders for total of ("[^"]+") mostly ("[^"]+" product)$/')]
     public function customersHavePlacedOrdersForTotalOfMostlyProduct(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -641,9 +571,7 @@ final readonly class OrderContext implements Context
         $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product);
     }
 
-    /**
-     * @Given /^(\d+) (?:|more )new customers have fulfilled (\d+) orders placed for total of ("[^"]+") mostly ("[^"]+" product)$/
-     */
+    #[Given('/^(\d+) (?:|more )new customers have fulfilled (\d+) orders placed for total of ("[^"]+") mostly ("[^"]+" product)$/')]
     public function customersHaveFulfilledOrdersPlacedForTotalOfMostlyProduct(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -653,9 +581,7 @@ final readonly class OrderContext implements Context
         $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product, true);
     }
 
-    /**
-     * @Given /^(\d+) (?:|more )new customers have paid (\d+) orders placed for total of ("[^"]+")$/
-     */
+    #[Given('/^(\d+) (?:|more )new customers have paid (\d+) orders placed for total of ("[^"]+")$/')]
     public function moreCustomersHavePaidOrdersPlacedForTotalOf(
         int $numberOfCustomers,
         int $numberOfOrders,
@@ -664,9 +590,7 @@ final readonly class OrderContext implements Context
         $this->createPaidOrders($numberOfCustomers, $numberOfOrders, $total);
     }
 
-    /**
-     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") buying a single ("[^"]+" product) for ("[^"]+") on the ("[^"]+" channel)$/
-     */
+    #[Given('/^(this customer) has(?:| also) placed (an order "[^"]+") buying a single ("[^"]+" product) for ("[^"]+") on the ("[^"]+" channel)$/')]
     public function customerHasPlacedAnOrderBuyingASingleProductForOnTheChannel(
         CustomerInterface $customer,
         string $orderNumber,
@@ -685,10 +609,8 @@ final readonly class OrderContext implements Context
         $this->sharedStorage->set('order', $order);
     }
 
-    /**
-     * @Given /^(this order) is already paid$/
-     * @Given the order :order is already paid
-     */
+    #[Given('/^(this order) is already paid$/')]
+    #[Given('the order :order is already paid')]
     public function thisOrderIsAlreadyPaid(OrderInterface $order): void
     {
         $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
@@ -696,10 +618,8 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this order) has been refunded$/
-     * @Given the customer has refunded the order with number :order
-     */
+    #[Given('/^(this order) has been refunded$/')]
+    #[Given('the customer has refunded the order with number :order')]
     public function thisOrderHasBeenRefunded(OrderInterface $order): void
     {
         $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_REFUND);
@@ -707,12 +627,10 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the customer cancelled (this order)$/
-     * @Given /^(this order) was cancelled$/
-     * @Given the order :order was cancelled
-     * @Given /^I cancelled (this order)$/
-     */
+    #[Given('/^the customer cancelled (this order)$/')]
+    #[Given('/^(this order) was cancelled$/')]
+    #[Given('the order :order was cancelled')]
+    #[Given('/^I cancelled (this order)$/')]
     public function theCustomerCancelledThisOrder(OrderInterface $order): void
     {
         $this->stateMachine->apply($order, OrderTransitions::GRAPH, OrderTransitions::TRANSITION_CANCEL);
@@ -720,9 +638,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^I cancelled my last order$/
-     */
+    #[Given('/^I cancelled my last order$/')]
     public function theCustomerCancelledMyLastOrder(): void
     {
         $order = $this->sharedStorage->get('order');
@@ -731,10 +647,8 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this order) has already been shipped$/
-     * @Given the order :order is already shipped
-     */
+    #[Given('/^(this order) has already been shipped$/')]
+    #[Given('the order :order is already shipped')]
     public function thisOrderHasAlreadyBeenShipped(OrderInterface $order): void
     {
         $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::TRANSITION_SHIP);
@@ -742,9 +656,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @When the customer used coupon :coupon
-     */
+    #[When('the customer used coupon :coupon')]
     public function theCustomerUsedCoupon(PromotionCouponInterface $coupon): void
     {
         /** @var OrderInterface $order */
@@ -754,9 +666,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the order :order has been placed in :localeCode locale
-     */
+    #[Given('the order :order has been placed in :localeCode locale')]
     public function theOrderHasBeenPlacedInLocale(OrderInterface $order, string $localeCode): void
     {
         $order->setLocaleCode($localeCode);
@@ -764,9 +674,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the customer completed the order
-     */
+    #[Given('the customer completed the order')]
     public function theCustomerCompletedTheOrder(): void
     {
         /** @var OrderInterface $order */
@@ -776,9 +684,7 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the :product product's inventory has become tracked with :numberOfItems items
-     */
+    #[Given('the :product product\'s inventory has become tracked with :numberOfItems items')]
     public function theProductSInventoryHasBecameTrackedWithItems(ProductInterface $product, int $numberOfItems): void
     {
         /** @var ProductVariantInterface $productVariant */

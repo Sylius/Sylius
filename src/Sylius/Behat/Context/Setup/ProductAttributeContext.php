@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -43,9 +45,7 @@ final class ProductAttributeContext implements Context
         $this->faker = Factory::create();
     }
 
-    /**
-     * @Given the store has a :type product attribute :name with code :code
-     */
+    #[Given('the store has a :type product attribute :name with code :code')]
     public function theStoreHasAProductAttributeWithCode($type, $name, $code)
     {
         $productAttribute = $this->createProductAttribute($type, $name, $code);
@@ -53,9 +53,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given the store has( also) a :type product attribute :name at position :position
-     */
+    #[Given('the store has( also) a :type product attribute :name at position :position')]
     public function theStoreHasAProductAttributeWithPosition($type, $name, $position)
     {
         $productAttribute = $this->createProductAttribute($type, $name);
@@ -64,9 +62,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given /^the store has(?:| also)(?:| a| an) (text|textarea|integer|percent|float) product attribute "([^"]+)"$/
-     */
+    #[Given('/^the store has(?:| also)(?:| a| an) (text|textarea|integer|percent|float) product attribute "([^"]+)"$/')]
     public function theStoreHasAProductAttribute(string $type, string $name): void
     {
         $productAttribute = $this->createProductAttribute($type, $name);
@@ -74,9 +70,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given /^the store has(?:| also)(?:| a| an) non-translatable (text|textarea|integer|percent|float) product attribute "([^"]+)"$/
-     */
+    #[Given('/^the store has(?:| also)(?:| a| an) non-translatable (text|textarea|integer|percent|float) product attribute "([^"]+)"$/')]
     public function theStoreHasANonTranslatableProductAttribute(string $type, string $name): void
     {
         $productAttribute = $this->createProductAttribute($type, $name, null, false);
@@ -84,9 +78,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given /^(this product attribute) is not translatable$/
-     */
+    #[Given('/^(this product attribute) is not translatable$/')]
     public function thisProductAttributeIsNotTranslatable(ProductAttributeInterface $productAttribute): void
     {
         $productAttribute->setTranslatable(false);
@@ -94,9 +86,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product attribute) has(?:| also) a value "([^"]+)" in ("[^"]+" locale)$/
-     */
+    #[Given('/^(this product attribute) has(?:| also) a value "([^"]+)" in ("[^"]+" locale)$/')]
     public function thisProductAttributeHasAValueInLocale(
         ProductAttributeInterface $productAttribute,
         string $value,
@@ -115,9 +105,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given /^(this product attribute) has(?:| also) a value "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
-     */
+    #[Given('/^(this product attribute) has(?:| also) a value "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/')]
     public function thisProductAttributeHasAValueInLocaleAndInLocale(
         ProductAttributeInterface $productAttribute,
         string $firstValue,
@@ -139,18 +127,14 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given the store has a select product attribute :name
-     */
+    #[Given('the store has a select product attribute :name')]
     public function theStoreHasASelectProductAttribute(string $name): void
     {
         $this->theStoreHasASelectProductAttributeWithValue($name);
     }
 
-    /**
-     * @Given the store has a select product attribute :name with value :value
-     * @Given the store has a select product attribute :name with values :firstValue and :secondValue
-     */
+    #[Given('the store has a select product attribute :name with value :value')]
+    #[Given('the store has a select product attribute :name with values :firstValue and :secondValue')]
     public function theStoreHasASelectProductAttributeWithValue(string $name, string ...$values): void
     {
         $choices = [];
@@ -169,9 +153,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given the store has a non-translatable select product attribute :name with value :value
-     */
+    #[Given('the store has a non-translatable select product attribute :name with value :value')]
     public function theStoreHasANonTranslatableSelectProductAttributeWithValue(string $name, string $value): void
     {
         $choices[$this->faker->uuid] = ['en_US' => $value];
@@ -188,9 +170,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given the store has a non-translatable date product attribute :name with format :format
-     */
+    #[Given('the store has a non-translatable date product attribute :name with format :format')]
     public function theStoreHasANonTranslatableDateProductAttributeWithFormat(string $name, string $format): void
     {
         $productAttribute = $this->createProductAttribute(DateAttributeType::TYPE, $name);
@@ -202,9 +182,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given the store has a non-translatable datetime product attribute :name with format :format
-     */
+    #[Given('the store has a non-translatable datetime product attribute :name with format :format')]
     public function theStoreHasANonTranslatableDatetimeProductAttributeWithFormat(string $name, string $format): void
     {
         $productAttribute = $this->createProductAttribute(DatetimeAttributeType::TYPE, $name);
@@ -216,9 +194,7 @@ final class ProductAttributeContext implements Context
         $this->saveProductAttribute($productAttribute);
     }
 
-    /**
-     * @Given /^(this product attribute)'s "([^"]+)" value is labeled "([^"]+)" in the ("[^"]+" locale)$/
-     */
+    #[Given('/^(this product attribute)\'s "([^"]+)" value is labeled "([^"]+)" in the ("[^"]+" locale)$/')]
     public function thisProductAttributeValueIsLabeledInTheLocale(
         ProductAttributeInterface $attribute,
         string $value,
@@ -255,9 +231,7 @@ final class ProductAttributeContext implements Context
         ));
     }
 
-    /**
-     * @Given /^(this product attribute) has set min value as (\d+) and max value as (\d+)$/
-     */
+    #[Given('/^(this product attribute) has set min value as (\d+) and max value as (\d+)$/')]
     public function thisAttributeHasSetMinValueAsAndMaxValueAs(ProductAttributeInterface $attribute, $min, $max)
     {
         $attribute->setConfiguration(['min' => $min, 'max' => $max]);
@@ -265,10 +239,8 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)"$/
-     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
-     */
+    #[Given('/^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)"$/')]
+    #[Given('/^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with values "([^"]+)" and "([^"]+)"$/')]
     public function thisProductHasSelectAttributeWithValues(
         ProductInterface $product,
         string $productAttributeName,
@@ -277,9 +249,7 @@ final class ProductAttributeContext implements Context
         $this->createSelectProductAttributeValue($product, $productAttributeName, $productAttributeValues);
     }
 
-    /**
-     * @Given /^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
-     */
+    #[Given('/^(this product) has(?:| also)(?:| a) select attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/')]
     public function thisProductHasSelectAttributeWithValueInLocale(
         ProductInterface $product,
         string $productAttributeName,
@@ -289,10 +259,8 @@ final class ProductAttributeContext implements Context
         $this->createSelectProductAttributeValue($product, $productAttributeName, [$productAttributeValue], $localeCode);
     }
 
-    /**
-     * @Given /^(this product) has a (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/
-     * @Given /^(this product) has a (text|textarea) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/
-     */
+    #[Given('/^(this product) has a (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/')]
+    #[Given('/^(this product) has a (text|textarea) attribute "([^"]+)" with value "([^"]+)" in ("[^"]+" locale)$/')]
     public function thisProductHasAttributeWithValue(
         ProductInterface $product,
         string $productAttributeType,
@@ -307,9 +275,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has non-translatable (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/
-     */
+    #[Given('/^(this product) has non-translatable (text|textarea) attribute "([^"]+)" with value "([^"]+)"$/')]
     public function thisProductHasNonTranslatableTextAttributeWithValue(
         ProductInterface $product,
         string $productAttributeType,
@@ -324,9 +290,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has a percent attribute "([^"]+)" with value ([^"]+)%$/
-     */
+    #[Given('/^(this product) has a percent attribute "([^"]+)" with value ([^"]+)%$/')]
     public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
     {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
@@ -336,9 +300,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has non-translatable percent attribute "([^"]+)" with value ([^"]+)%$/
-     */
+    #[Given('/^(this product) has non-translatable percent attribute "([^"]+)" with value ([^"]+)%$/')]
     public function thisProductHasNonTranslatablePercentAttributeWithValue(ProductInterface $product, string $productAttributeName, int $value): void
     {
         $attribute = $this->provideProductAttribute('percent', $productAttributeName);
@@ -348,9 +310,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has a "([^"]+)" attribute "([^"]+)" set to "([^"]+)"$/
-     */
+    #[Given('/^(this product) has a "([^"]+)" attribute "([^"]+)" set to "([^"]+)"$/')]
     public function thisProductHasCheckboxAttributeWithValue(
         ProductInterface $product,
         $productAttributeType,
@@ -365,9 +325,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has non-translatable "([^"]+)" attribute "([^"]+)" set to "([^"]+)"$/
-     */
+    #[Given('/^(this product) has non-translatable "([^"]+)" attribute "([^"]+)" set to "([^"]+)"$/')]
     public function thisProductHasNonTranslatableCheckboxAttributeWithValue(
         ProductInterface $product,
         string $productAttributeType,
@@ -382,9 +340,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has percent attribute "([^"]+)" at position (\d+)$/
-     */
+    #[Given('/^(this product) has percent attribute "([^"]+)" at position (\d+)$/')]
     public function thisProductHasPercentAttributeWithValueAtPosition(
         ProductInterface $product,
         $productAttributeName,
@@ -399,9 +355,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has a ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/
-     */
+    #[Given('/^(this product) has a ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/')]
     public function thisProductHasDateTimeAttributeWithDate(
         ProductInterface $product,
         $productAttributeType,
@@ -416,9 +370,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) has non-translatable ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/
-     */
+    #[Given('/^(this product) has non-translatable ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/')]
     public function thisProductHasNonTranslatableDateTimeAttributeWithDate(
         ProductInterface $product,
         string $productAttributeType,
@@ -433,9 +385,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @When /^(this product attribute)'s value changed from "([^"]+)" to "([^"]+)"$/
-     */
+    #[When('/^(this product attribute)\'s value changed from "([^"]+)" to "([^"]+)"$/')]
     public function thisAttributeValueChangedFromTo(
         ProductAttributeInterface $attribute,
         string $from,
@@ -460,9 +410,7 @@ final class ProductAttributeContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @When /^(this product attribute)'s value "([^"]+)" has been removed$/
-     */
+    #[When('/^(this product attribute)\'s value "([^"]+)" has been removed$/')]
     public function thisAttributeValueHasBeenRemoved(
         ProductAttributeInterface $attribute,
         string $value,
