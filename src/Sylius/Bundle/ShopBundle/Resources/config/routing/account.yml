@@ -25,6 +25,7 @@ sylius_shop_account_root:
 sylius_shop_account_dashboard:
     path: /dashboard
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_account')"
     defaults:
         _controller: sylius.controller.customer::showAction
         _sylius:
@@ -37,6 +38,7 @@ sylius_shop_account_dashboard:
 sylius_shop_account_profile_update:
     path: /profile/edit
     methods: [GET, PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_account')"
     defaults:
         _controller: sylius.controller.customer::updateAction
         _sylius:

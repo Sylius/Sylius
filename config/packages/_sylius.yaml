@@ -48,6 +48,7 @@ sylius_core:
                 admin_tax_rate: false
                 admin_taxon: false
                 admin_zone: false
+                shop_account: false
                 shop_account_address_book: false
                 shop_account_order: false
                 shop_checkout: false
