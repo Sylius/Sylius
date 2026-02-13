@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
@@ -27,25 +29,19 @@ final readonly class ManagingTranslatableEntitiesContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to create a new translatable entity
-     */
+    #[When('I want to create a new translatable entity')]
     public function iWantToCreateANewTranslatableEntity(): void
     {
         $this->taxonCreatePage->open();
     }
 
-    /**
-     * @Then I should be able to translate it in :localeCode
-     */
+    #[Then('I should be able to translate it in :localeCode')]
     public function iShouldBeAbleToTranslateItIn(string $localeCode): void
     {
         $this->taxonFormElement->describeItAs('Description', $localeCode);
     }
 
-    /**
-     * @Then I should not be able to translate it in :localeCode
-     */
+    #[Then('I should not be able to translate it in :localeCode')]
     public function iShouldNotBeAbleToTranslateItIn(string $localeCode): void
     {
         Assert::throws(
