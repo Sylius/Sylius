@@ -17,6 +17,7 @@ import './scripts/spotlight';
 import './scripts/statistics_chart';
 import './scripts/sticky-header';
 
+import './scripts/autocomplete-xss-protection';
 import './scripts/bootstrap';
 
 const imagesContext = require.context('./images', true, /\.(jpg|jpeg|png|svg|gif|webp)$/);
