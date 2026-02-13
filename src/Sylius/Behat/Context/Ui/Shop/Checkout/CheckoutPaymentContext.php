@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
+use Behat\Step\Given;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Step\When;
@@ -29,25 +31,21 @@ final readonly class CheckoutPaymentContext implements Context
     ) {
     }
 
-    /**
-     * @Given I completed the payment step with :paymentMethodName payment method
-     * @Given the visitor has proceeded :paymentMethodName payment
-     * @Given the customer has proceeded :paymentMethodName payment
-     * @Given the visitor proceed with :paymentMethodName payment
-     * @Given the customer proceed with :paymentMethodName payment
-     * @When /^I choose "([^"]*)" payment method$/
-     */
     #[When('the visitor proceeds with :paymentMethod payment method')]
     #[When('the customer proceeds with :paymentMethod payment method')]
+    #[Given('I completed the payment step with :paymentMethodName payment method')]
+    #[Given('the visitor has proceeded :paymentMethodName payment')]
+    #[Given('the customer has proceeded :paymentMethodName payment')]
+    #[Given('the visitor proceed with :paymentMethodName payment')]
+    #[Given('the customer proceed with :paymentMethodName payment')]
+    #[When('/^I choose "([^"]*)" payment method$/')]
     public function iChoosePaymentMethod(string $paymentMethodName): void
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
         $this->selectPaymentPage->nextStep();
     }
 
-    /**
-     * @When I want to pay for order
-     */
+    #[When('I want to pay for order')]
     public function iWantToPayForOrder(): void
     {
         $this->selectPaymentPage->tryToOpen();
@@ -61,65 +59,49 @@ final readonly class CheckoutPaymentContext implements Context
         $this->selectPaymentPage->open();
     }
 
-    /**
-     * @When /^I complete(?:|d) the payment step$/
-     */
+    #[When('/^I complete(?:|d) the payment step$/')]
     public function iCompleteThePaymentStep(): void
     {
         $this->selectPaymentPage->nextStep();
     }
 
-    /**
-     * @When I select :paymentMethodName payment method
-     */
+    #[When('I select :paymentMethodName payment method')]
     public function iSelectPaymentMethod(string $paymentMethodName): void
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName);
     }
 
-    /**
-     * @When I do not select any payment method
-     */
+    #[When('I do not select any payment method')]
     public function iDoNotSelectAnyPaymentMethod(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
 
-    /**
-     * @Then I should be on the checkout payment step
-     */
+    #[Then('I should be on the checkout payment step')]
     public function iShouldBeOnTheCheckoutPaymentStep(): void
     {
         $this->selectPaymentPage->verify();
     }
 
-    /**
-     * @Then I should be able to select :paymentMethodName payment method
-     */
+    #[Then('I should be able to select :paymentMethodName payment method')]
     public function iShouldBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
         Assert::true($this->selectPaymentPage->hasPaymentMethod($paymentMethodName));
     }
 
-    /**
-     * @Then I should not be able to select :paymentMethodName payment method
-     */
+    #[Then('I should not be able to select :paymentMethodName payment method')]
     public function iShouldNotBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
         Assert::false($this->selectPaymentPage->hasPaymentMethod($paymentMethodName));
     }
 
-    /**
-     * @Then I should be redirected to the payment step
-     */
+    #[Then('I should be redirected to the payment step')]
     public function iShouldBeRedirectedToThePaymentStep(): void
     {
         $this->selectPaymentPage->verify();
     }
 
-    /**
-     * @Then I should be able to go to the summary page again
-     */
+    #[Then('I should be able to go to the summary page again')]
     public function iShouldBeAbleToGoToTheSummaryPageAgain(): void
     {
         $this->selectPaymentPage->nextStep();
@@ -127,9 +109,7 @@ final readonly class CheckoutPaymentContext implements Context
         $this->completePage->verify();
     }
 
-    /**
-     * @Then I should have :paymentMethodName payment method available as the first choice
-     */
+    #[Then('I should have :paymentMethodName payment method available as the first choice')]
     public function iShouldHavePaymentMethodAvailableAsFirstChoice(string $paymentMethodName): void
     {
         $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
@@ -137,9 +117,7 @@ final readonly class CheckoutPaymentContext implements Context
         Assert::same(reset($paymentMethods), $paymentMethodName);
     }
 
-    /**
-     * @Then I should have :paymentMethodName payment method available as the last choice
-     */
+    #[Then('I should have :paymentMethodName payment method available as the last choice')]
     public function iShouldHavePaymentMethodAvailableAsLastChoice(string $paymentMethodName): void
     {
         $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
@@ -147,9 +125,7 @@ final readonly class CheckoutPaymentContext implements Context
         Assert::same(end($paymentMethods), $paymentMethodName);
     }
 
-    /**
-     * @Then I should not be able to proceed checkout payment step
-     */
+    #[Then('I should not be able to proceed checkout payment step')]
     public function iShouldNotBeAbleToProceedCheckoutPaymentStep(): void
     {
         $this->selectPaymentPage->tryToOpen();
@@ -163,9 +139,7 @@ final readonly class CheckoutPaymentContext implements Context
         throw new UnexpectedPageException('It should not be possible to complete checkout payment step.');
     }
 
-    /**
-     * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
-     */
+    #[Then('I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods')]
     public function iShouldSeeAndPaymentMethods(string ...$paymentMethodsNames): void
     {
         foreach ($paymentMethodsNames as $paymentMethodName) {
@@ -176,10 +150,8 @@ final readonly class CheckoutPaymentContext implements Context
         }
     }
 
-    /**
-     * @Then the customer should have checkout payment step completed
-     * @Then the visitor should have checkout payment step completed
-     */
+    #[Then('the customer should have checkout payment step completed')]
+    #[Then('the visitor should have checkout payment step completed')]
     public function theCustomerShouldHaveCheckoutPaymentStepCompleted(): void
     {
         Assert::false(
@@ -188,9 +160,7 @@ final readonly class CheckoutPaymentContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
-     */
+    #[Then('I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods')]
     public function iShouldNotSeeAndPaymentMethods(string ...$paymentMethodsNames): void
     {
         foreach ($paymentMethodsNames as $paymentMethodName) {
@@ -201,9 +171,7 @@ final readonly class CheckoutPaymentContext implements Context
         }
     }
 
-    /**
-     * @Then I should not be able to complete the payment step
-     */
+    #[Then('I should not be able to complete the payment step')]
     public function iShouldNotBeAbleToCompleteThePaymentStep(): void
     {
         Assert::true(
@@ -212,9 +180,7 @@ final readonly class CheckoutPaymentContext implements Context
         );
     }
 
-    /**
-     * @Then there should be information about no payment methods available for my order
-     */
+    #[Then('there should be information about no payment methods available for my order')]
     public function thereShouldBeInformationAboutNoPaymentMethodsAvailableForMyOrder(): void
     {
         Assert::true(

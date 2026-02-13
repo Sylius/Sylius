@@ -9,8 +9,8 @@ use Rector\Set\ValueObject\LevelSetList;
 return RectorConfig::configure()
     ->withImportNames(importShortClasses: false, removeUnusedImports: true)
     ->withAttributesSets(behat: true)
-    ->withSets([
-        LevelSetList::UP_TO_PHP_82,
-        PHPUnitSetList::PHPUNIT_110,
-    ])
+//    ->withSets([
+//        LevelSetList::UP_TO_PHP_82,
+//        PHPUnitSetList::PHPUNIT_110,
+//    ])
 ;

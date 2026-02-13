@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Step\Then;
@@ -57,27 +58,21 @@ final readonly class CartContext implements Context
         $this->summaryPage->open();
     }
 
-    /**
-     * @Given I've been gone for a long time
-     */
+    #[Given('I\'ve been gone for a long time')]
     public function iveBeenGoneForLongTime(): void
     {
         $this->browserElement->resetSession();
     }
 
-    /**
-     * @When I proceed to the checkout
-     * @When I try to proceed to the checkout
-     */
+    #[When('I proceed to the checkout')]
+    #[When('I try to proceed to the checkout')]
     public function iProceedToTheCheckout(): void
     {
         $this->summaryPage->checkout();
     }
 
-    /**
-     * @Then my cart should be empty
-     * @Then my cart should be cleared
-     */
+    #[Then('my cart should be empty')]
+    #[Then('my cart should be cleared')]
     public function iShouldBeNotifiedThatMyCartIsEmpty(): void
     {
         $this->summaryPage->open();
@@ -92,9 +87,7 @@ final readonly class CartContext implements Context
         $this->summaryPage->removeProduct($productName);
     }
 
-    /**
-     * @When I remove :variant variant from the cart
-     */
+    #[When('I remove :variant variant from the cart')]
     public function iRemoveVariantFromTheCart(ProductVariantInterface $variant): void
     {
         if (!$this->summaryPage->isOpen()) {
@@ -104,13 +97,11 @@ final readonly class CartContext implements Context
         $this->summaryPage->removeProduct($variant->getProduct()->getName());
     }
 
-    /**
-     * @Given I change :productName quantity to :quantity
-     * @Given I change product :productName quantity to :quantity
-     * @Given I change product :productName quantity to :quantity in my cart
-     * @When the customer change product :productName quantity to :quantity in his cart
-     * @When the visitor change product :productName quantity to :quantity in his cart
-     */
+    #[Given('I change :productName quantity to :quantity')]
+    #[Given('I change product :productName quantity to :quantity')]
+    #[Given('I change product :productName quantity to :quantity in my cart')]
+    #[When('the customer change product :productName quantity to :quantity in his cart')]
+    #[When('the visitor change product :productName quantity to :quantity in his cart')]
     public function iChangeQuantityTo(string $productName, string $quantity): void
     {
         if (!$this->summaryPage->isOpen()) {
@@ -135,18 +126,14 @@ final readonly class CartContext implements Context
         Assert::same($this->summaryPage->getBaseGrandTotal(), $total);
     }
 
-    /**
-     * @Then my cart items total should be :total
-     * @Then my cart should have :total items total
-     */
+    #[Then('my cart items total should be :total')]
+    #[Then('my cart should have :total items total')]
     public function myCartItemsTotalShouldBe(string $itemsTotal): void
     {
         Assert::same($this->summaryPage->getItemsTotal(), $itemsTotal);
     }
 
-    /**
-     * @Then my cart taxes should be :taxTotal
-     */
+    #[Then('my cart taxes should be :taxTotal')]
     public function myCartTaxesShouldBe(string $taxTotal): void
     {
         $this->summaryPage->open();
@@ -154,10 +141,8 @@ final readonly class CartContext implements Context
         Assert::same($this->summaryPage->getExcludedTaxTotal(), $taxTotal);
     }
 
-    /**
-     * @Then my included in price taxes should be :taxTotal
-     * @Then my cart included in price taxes should be :taxTotal
-     */
+    #[Then('my included in price taxes should be :taxTotal')]
+    #[Then('my cart included in price taxes should be :taxTotal')]
     public function myIncludedInPriceTaxesShouldBe(string $taxTotal): void
     {
         $this->summaryPage->open();
@@ -165,9 +150,7 @@ final readonly class CartContext implements Context
         Assert::same($this->summaryPage->getIncludedTaxTotal(), $taxTotal);
     }
 
-    /**
-     * @Then there should be no taxes charged
-     */
+    #[Then('there should be no taxes charged')]
     public function thereShouldBeNoTaxesCharged(): void
     {
         $this->summaryPage->open();
@@ -183,9 +166,7 @@ final readonly class CartContext implements Context
         Assert::same($this->summaryPage->getShippingTotal(), $shippingTotal);
     }
 
-    /**
-     * @Then I should not see shipping total for my cart
-     */
+    #[Then('I should not see shipping total for my cart')]
     public function iShouldNotSeeShippingTotalForMyCart(): void
     {
         if (!$this->summaryPage->isOpen()) {
@@ -203,9 +184,7 @@ final readonly class CartContext implements Context
         Assert::same($this->summaryPage->getPromotionTotal(), $promotionsTotal);
     }
 
-    /**
-     * @Then there should be no shipping fee
-     */
+    #[Then('there should be no shipping fee')]
     public function thereShouldBeNoShippingFee(): void
     {
         $this->summaryPage->open();
@@ -247,9 +226,7 @@ final readonly class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^(product "[^"]+") price should be discounted by ("[^"]+")$/
-     */
+    #[Then('/^(product "[^"]+") price should be discounted by ("[^"]+")$/')]
     public function itsPriceShouldBeDiscountedBy(ProductInterface $product, int $amount): void
     {
         $this->summaryPage->open();
@@ -272,18 +249,16 @@ final readonly class CartContext implements Context
         Assert::false($this->summaryPage->isItemDiscounted($product->getName()));
     }
 
-    /**
-     * @Given /^an anonymous user added (product "([^"]+)") to the cart$/
-     * @Given /^I add (this product) to the cart$/
-     * @Given /^I have (product "[^"]+") added to the cart$/
-     * @Given he added product :product to the cart
-     * @When /^the customer adds ("[^"]+" product) to the cart$/
-     * @When /^I add ("[^"]+" product) to the (cart)$/
-     * @When /^the visitor adds ("[^"]+" product) to the cart$/
-     * @When I add product :product to the cart
-     * @When I add the product :product to the cart
-     * @When they add product :product to the cart
-     */
+    #[Given('/^an anonymous user added (product "([^"]+)") to the cart$/')]
+    #[Given('/^I add (this product) to the cart$/')]
+    #[Given('/^I have (product "[^"]+") added to the cart$/')]
+    #[When('/^the customer adds ("[^"]+" product) to the cart$/')]
+    #[When('/^I add ("[^"]+" product) to the (cart)$/')]
+    #[When('/^the visitor adds ("[^"]+" product) to the cart$/')]
+    #[Given('he added product :product to the cart')]
+    #[When('I add product :product to the cart')]
+    #[When('I add the product :product to the cart')]
+    #[When('they add product :product to the cart')]
     public function iAddProductToTheCart(ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
@@ -293,11 +268,10 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @When /^I add (products "([^"]+)" and "([^"]+)") to the cart$/
-     * @When /^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/
-     *
      * @param ProductInterface[] $products
      */
+    #[When('/^I add (products "([^"]+)" and "([^"]+)") to the cart$/')]
+    #[When('/^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/')]
     public function iAddMultipleProductsToTheCart(array $products): void
     {
         foreach ($products as $product) {
@@ -306,10 +280,9 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @When /^an anonymous user in another browser adds (products "([^"]+)" and "([^"]+)") to the cart$/
-     *
      * @param ProductInterface[] $products
      */
+    #[When('/^an anonymous user in another browser adds (products "([^"]+)" and "([^"]+)") to the cart$/')]
     public function anonymousUserAddsMultipleProductsToTheCart(array $products): void
     {
         $this->sessionManager->changeSession();
@@ -319,10 +292,8 @@ final readonly class CartContext implements Context
         }
     }
 
-    /**
-     * @When I add :variantName variant of product :product to the cart
-     * @When /^I add "([^"]+)" variant of (this product) to the cart$/
-     */
+    #[When('I add :variantName variant of product :product to the cart')]
+    #[When('/^I add "([^"]+)" variant of (this product) to the cart$/')]
     public function iAddProductToTheCartSelectingVariant(string $variantName, ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
@@ -338,19 +309,15 @@ final readonly class CartContext implements Context
         }
     }
 
-    /**
-     * @When /^I add (\d+) of (them) to (?:the|my) cart$/
-     * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/
-     */
+    #[When('/^I add (\d+) of (them) to (?:the|my) cart$/')]
+    #[When('/^I try to add (\d+) (products "[^"]+") to the (cart)$/')]
     public function iAddQuantityOfProductsToTheCart(string $quantity, ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCartWithQuantity($quantity);
     }
 
-    /**
-     * @When /^I add(?:| again) (\d+) (products "([^"]+)") to the cart$/
-     */
+    #[When('/^I add(?:| again) (\d+) (products "([^"]+)") to the cart$/')]
     public function iAddProductsToTheCart(string $quantity, ProductInterface $product): void
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
@@ -368,49 +335,37 @@ final readonly class CartContext implements Context
         $this->summaryPage->verify();
     }
 
-    /**
-     * @Then I should be notified that the product has been successfully added
-     */
+    #[Then('I should be notified that the product has been successfully added')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyAdded(): void
     {
         $this->notificationChecker->checkNotification('Item has been added to cart', NotificationType::success());
     }
 
-    /**
-     * @Then there should be one item in my cart
-     */
+    #[Then('there should be one item in my cart')]
     public function thereShouldBeOneItemInMyCart(): void
     {
         Assert::same($this->summaryPage->countOrderItems(), 1);
     }
 
-    /**
-     * @Then this item should have name :itemName
-     */
+    #[Then('this item should have name :itemName')]
     public function thisProductShouldHaveName(string $itemName): void
     {
         Assert::true($this->summaryPage->hasItemNamed($itemName));
     }
 
-    /**
-     * @Then this item should have variant :variantName
-     */
+    #[Then('this item should have variant :variantName')]
     public function thisItemShouldHaveVariant(string $variantName): void
     {
         Assert::true($this->summaryPage->hasItemWithVariantNamed($variantName));
     }
 
-    /**
-     * @Then this item should have code :variantCode
-     */
+    #[Then('this item should have code :variantCode')]
     public function thisItemShouldHaveCode(string $variantCode): void
     {
         Assert::true($this->summaryPage->hasItemWithCode($variantCode));
     }
 
-    /**
-     * @When I view my cart in the previous session
-     */
+    #[When('I view my cart in the previous session')]
     public function iViewMyCartInPreviousSession(): void
     {
         $this->sessionManager->restorePreviousSession();
@@ -418,10 +373,8 @@ final readonly class CartContext implements Context
         $this->summaryPage->open();
     }
 
-    /**
-     * @Given I have :product with :productOption :productOptionValue in the cart
-     * @When I add :product with :productOption :productOptionValue to the cart
-     */
+    #[Given('I have :product with :productOption :productOptionValue in the cart')]
+    #[When('I add :product with :productOption :productOptionValue to the cart')]
     public function iAddThisProductWithToTheCart(
         ProductInterface $product,
         ProductOptionInterface $productOption,
@@ -432,28 +385,22 @@ final readonly class CartContext implements Context
         $this->productShowPage->addToCartWithOption($productOption, $productOptionValue);
     }
 
-    /**
-     * @When I clear my cart
-     */
+    #[When('I clear my cart')]
     public function iClearMyCart(): void
     {
         $this->summaryPage->clearCart();
     }
 
-    /**
-     * @When I remove coupon from my cart
-     */
+    #[When('I remove coupon from my cart')]
     public function iRemoveCouponFromMyCart(): void
     {
         $this->summaryPage->removeCoupon();
     }
 
-    /**
-     * @Then /^I should see "([^"]+)" with quantity (\d+) in my cart$/
-     * @Then my cart should have quantity of :quantity items of product :productName
-     * @Then /^the visitor should see product "([^"]+)" with quantity (\d+) in his cart$/
-     * @Then /^the customer should see product "([^"]+)" with quantity (\d+) in his cart$/
-     */
+    #[Then('/^I should see "([^"]+)" with quantity (\d+) in my cart$/')]
+    #[Then('my cart should have quantity of :quantity items of product :productName')]
+    #[Then('/^the visitor should see product "([^"]+)" with quantity (\d+) in his cart$/')]
+    #[Then('/^the customer should see product "([^"]+)" with quantity (\d+) in his cart$/')]
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
         Assert::same($this->summaryPage->getQuantity($productName), $quantity);
@@ -469,44 +416,34 @@ final readonly class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see(?:| also) "([^"]+)" with unit price "([^"]+)" in my cart$/
-     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price "([^"]+)" in my cart$/
-     * @Then /^the product "([^"]+)" should have discounted unit price "([^"]+)" in the cart$/
-     */
+    #[Then('/^I should see(?:| also) "([^"]+)" with unit price "([^"]+)" in my cart$/')]
+    #[Then('/^I should see(?:| also) "([^"]+)" with discounted unit price "([^"]+)" in my cart$/')]
+    #[Then('/^the product "([^"]+)" should have discounted unit price "([^"]+)" in the cart$/')]
     public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, string $unitPrice): void
     {
         Assert::same($this->summaryPage->getItemUnitPrice($productName), $unitPrice);
     }
 
-    /**
-     * @Then /^the product "([^"]+)" should have total price ("[^"]+") in the cart$/
-     */
+    #[Then('/^the product "([^"]+)" should have total price ("[^"]+") in the cart$/')]
     public function theProductShouldHaveTotalPrice(string $productName, string $totalPrice): void
     {
         Assert::same($this->summaryPage->getItemTotal($productName), $totalPrice);
     }
 
-    /**
-     * @Then /^I should see "([^"]+)" with original price "([^"]+)" in my cart$/
-     */
+    #[Then('/^I should see "([^"]+)" with original price "([^"]+)" in my cart$/')]
     public function iShouldSeeWithOriginalPriceInMyCart(string $productName, string $originalPrice): void
     {
         Assert::same($this->summaryPage->getItemUnitRegularPrice($productName), $originalPrice);
     }
 
-    /**
-     * @Then /^I should see "([^"]+)" only with unit price "([^"]+)" in my cart$/
-     */
+    #[Then('/^I should see "([^"]+)" only with unit price "([^"]+)" in my cart$/')]
     public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, string $unitPrice): void
     {
         $this->iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice);
         Assert::false($this->summaryPage->hasOriginalPrice($productName));
     }
 
-    /**
-     * @Then /^(this product) should have ([^"]+) "([^"]+)"$/
-     */
+    #[Then('/^(this product) should have ([^"]+) "([^"]+)"$/')]
     public function thisItemShouldHaveOptionValue(ProductInterface $product, string $optionName, string $optionValue): void
     {
         Assert::same($this->summaryPage->getItemOptionValue($product->getName(), $optionName), $optionValue);
@@ -527,9 +464,7 @@ final readonly class CartContext implements Context
         );
     }
 
-    /**
-     * @Then total price of :productName item should be :productPrice
-     */
+    #[Then('total price of :productName item should be :productPrice')]
     public function thisItemPriceShouldBe(string $productName, string $productPrice): void
     {
         $this->summaryPage->open();
@@ -537,25 +472,19 @@ final readonly class CartContext implements Context
         Assert::same($this->summaryPage->getItemTotal($productName), $productPrice);
     }
 
-    /**
-     * @Then /^I should be notified that (this product) has insufficient stock$/
-     */
+    #[Then('/^I should be notified that (this product) has insufficient stock$/')]
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::true($this->summaryPage->hasItemWithInsufficientStock($product->getName()));
     }
 
-    /**
-     * @Then /^I should not be notified that (this product) cannot be updated$/
-     */
+    #[Then('/^I should not be notified that (this product) cannot be updated$/')]
     public function iShouldNotBeNotifiedThatThisProductCannotBeUpdated(ProductInterface $product): void
     {
         Assert::false($this->summaryPage->hasProductOutOfStockValidationMessage($product));
     }
 
-    /**
-     * @Then my cart's total should be :total
-     */
+    #[Then('my cart\'s total should be :total')]
     public function myCartSTotalShouldBe(string $total): void
     {
         if (!$this->summaryPage->isOpen()) {
@@ -565,49 +494,37 @@ final readonly class CartContext implements Context
         Assert::same($this->summaryPage->getCartTotal(), $total);
     }
 
-    /**
-     * @Then /^(\d)(?:st|nd|rd|th) item in my cart should have "([^"]+)" image displayed$/
-     */
+    #[Then('/^(\d)(?:st|nd|rd|th) item in my cart should have "([^"]+)" image displayed$/')]
     public function itemShouldHaveImageDisplayed(int $itemNumber, string $image): void
     {
         Assert::contains($this->summaryPage->getItemImage($itemNumber), $image);
     }
 
-    /**
-     * @Then I should see cart total quantity is :totalQuantity
-     */
+    #[Then('I should see cart total quantity is :totalQuantity')]
     public function iShouldSeeCartTotalQuantity(int $totalQuantity): void
     {
         Assert::same($this->cartWidgetElement->getCartTotalQuantity(), $totalQuantity);
     }
 
-    /**
-     * @Then I should be on the checkout addressing page
-     */
+    #[Then('I should be on the checkout addressing page')]
     public function iShouldBeOnTheCheckoutAddressingStep(): void
     {
         $this->addressPage->verify();
     }
 
-    /**
-     * @Then the quantity of :productName should be :quantity
-     */
+    #[Then('the quantity of :productName should be :quantity')]
     public function theQuantityOfShouldBe(string $productName, int $quantity): void
     {
         Assert::same($this->checkoutSubtotalElement->getProductQuantity($productName), $quantity);
     }
 
-    /**
-     * @Then I should see an empty cart
-     */
+    #[Then('I should see an empty cart')]
     public function iShouldSeeAnEmptyCart(): void
     {
         Assert::true($this->summaryPage->cartIsEmpty());
     }
 
-    /**
-     * @Then I should be notified that the quantity of the product :productName must be between 1 and 9999
-     */
+    #[Then('I should be notified that the quantity of the product :productName must be between 1 and 9999')]
     public function iShouldBeNotifiedThatTheQuantityOfTheProductMustBeBetween1And9999(string $productName): void
     {
         Assert::same(
