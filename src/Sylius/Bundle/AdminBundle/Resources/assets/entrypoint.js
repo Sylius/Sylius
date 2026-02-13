@@ -19,6 +19,7 @@ import './scripts/spotlight';
 import './scripts/statistics_chart';
 import './scripts/sticky-header';
 
+import './scripts/autocomplete-xss-protection';
 import './scripts/bootstrap';
 
 import './images/404.svg';
