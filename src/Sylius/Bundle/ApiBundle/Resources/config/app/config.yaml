@@ -25,6 +25,7 @@ api_platform:
                 type: header
     exception_to_status:
         SM\SMException: 422
+        Doctrine\ORM\OptimisticLockException: 409
         Sylius\Bundle\ApiBundle\Exception\CannotRemoveCurrentlyLoggedInUser: 422
         Sylius\Bundle\ApiBundle\Exception\ShippingMethodCannotBeRemoved: 422
         Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException: 400
