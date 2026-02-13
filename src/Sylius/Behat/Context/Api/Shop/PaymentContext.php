@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -31,9 +33,7 @@ final readonly class PaymentContext implements Context
     ) {
     }
 
-    /**
-     * @When I try to see the payment of the order placed by a customer :customer
-     */
+    #[When('I try to see the payment of the order placed by a customer :customer')]
     public function iTryToSeeThePaymentOfTheOrderPlacedByACustomer(CustomerInterface $customer): void
     {
         /** @var OrderInterface $order */
@@ -48,17 +48,13 @@ final readonly class PaymentContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to see that payment
-     */
+    #[Then('I should not be able to see that payment')]
     public function iShouldNotBeAbleToSeeThatPayment(): void
     {
         Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 
-    /**
-     * @Then I should see its payment state as :state
-     */
+    #[Then('I should see its payment state as :state')]
     public function iShouldSeeItsPaymentStateAs(string $state): void
     {
         $response = $this->client->getLastResponse();

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -37,9 +38,7 @@ final class PromotionContext implements Context
         $this->useCouponCode($couponCode);
     }
 
-    /**
-     * @Then I should be notified that the coupon is invalid
-     */
+    #[Then('I should be notified that the coupon is invalid')]
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
         $response = $this->client->getLastResponse();
