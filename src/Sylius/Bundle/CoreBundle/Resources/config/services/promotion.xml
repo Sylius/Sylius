@@ -115,6 +115,14 @@
 
         <service id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface" alias="sylius.promotion_usage_modifier" />
 
+        <service
+            id="sylius.promotion_usage_modifier.atomic"
+            class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier"
+            decorates="sylius.promotion_usage_modifier"
+        >
+            <argument type="service" id="doctrine.dbal.default_connection" />
+        </service>
+
         <service id="sylius.promotion_rule_updater.has_taxon" class="Sylius\Component\Core\Promotion\Updater\Rule\HasTaxonRuleUpdater">
             <argument type="service" id="sylius.repository.promotion_rule" />
             <argument type="service" id="doctrine.orm.entity_manager" />
