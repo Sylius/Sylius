@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\Given;
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
@@ -53,12 +54,10 @@ final readonly class ManagingOrdersContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^I am viewing the summary of (this order)$/
-     * @Given I am viewing the summary of the order :order
-     * @When I view the summary of the order :order
-     * @When /^I view the summary of the (order placed by "[^"]+")$/
-     */
+    #[Given('/^I am viewing the summary of (this order)$/')]
+    #[Given('I am viewing the summary of the order :order')]
+    #[When('I view the summary of the order :order')]
+    #[When('/^I view the summary of the (order placed by "[^"]+")$/')]
     public function iSeeTheOrder(OrderInterface $order): void
     {
         $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
@@ -73,50 +72,38 @@ final readonly class ManagingOrdersContext implements Context
         $this->client->show(Resources::ORDERS, $order->getTokenValue());
     }
 
-    /**
-     * @Given I am browsing orders
-     * @When I browse orders
-     */
+    #[Given('I am browsing orders')]
+    #[When('I browse orders')]
     public function iBrowseOrders(): void
     {
         $this->client->index(Resources::ORDERS);
     }
 
-    /**
-     * @When I browse order's :order history
-     */
+    #[When('I browse order\'s :order history')]
     public function iBrowseOrderHistory(OrderInterface $order): void
     {
         $this->iSeeTheOrder($order);
     }
 
-    /**
-     * @When I filter
-     */
+    #[When('I filter')]
     public function iFilter(): void
     {
         $this->client->filter();
     }
 
-    /**
-     * @When I choose :channel as a channel filter
-     */
+    #[When('I choose :channel as a channel filter')]
     public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
     {
         $this->client->addFilter('channel.code', $channel->getCode());
     }
 
-    /**
-     * @When I specify filter date from as :dateTime
-     */
+    #[When('I specify filter date from as :dateTime')]
     public function iSpecifyFilterDateFromAs(string $dateTime): void
     {
         $this->client->addFilter('checkoutCompletedAt[after]', $dateTime);
     }
 
-    /**
-     * @When specify its tracking code as :trackingCode
-     */
+    #[When('specify its tracking code as :trackingCode')]
     public function specifyItsTrackingCodeAs(string $trackingCode): void
     {
         $shipment = $this->sharedStorage->get('order')->getShipments()->first();
@@ -130,25 +117,19 @@ final readonly class ManagingOrdersContext implements Context
         $this->client->update();
     }
 
-    /**
-     * @When /^I try to view the summary of the (customer's latest cart)$/
-     */
+    #[When('/^I try to view the summary of the (customer\'s latest cart)$/')]
     public function iTryToViewTheSummaryOfTheCustomersLatestCart(OrderInterface $cart): void
     {
         $this->client->show(Resources::ORDERS, $cart->getTokenValue());
     }
 
-    /**
-     * @When I specify filter date to as :dateTime
-     */
+    #[When('I specify filter date to as :dateTime')]
     public function iSpecifyFilterDateToAs(string $dateTime): void
     {
         $this->client->addFilter('checkoutCompletedAt[before]', $dateTime);
     }
 
-    /**
-     * @When I resend the order confirmation email
-     */
+    #[When('I resend the order confirmation email')]
     public function iResendTheOrderConfirmationEmail(): void
     {
         $this->client->customItemAction(
@@ -159,10 +140,8 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @When I filter by product :productName
-     * @When I filter by products :firstProduct and :secondProduct
-     */
+    #[When('I filter by product :productName')]
+    #[When('I filter by products :firstProduct and :secondProduct')]
     public function iFilterByProduct(string ...$productNames): void
     {
         foreach ($productNames as $productName) {
@@ -172,18 +151,14 @@ final readonly class ManagingOrdersContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I filter by customer :customer
-     */
+    #[When('I filter by customer :customer')]
     public function iFilterByCustomer(CustomerInterface $customer): void
     {
         $this->client->addFilter('customer.id', $customer->getId());
         $this->client->filter();
     }
 
-    /**
-     * @When I resend the shipment confirmation email
-     */
+    #[When('I resend the shipment confirmation email')]
     public function iResendTheShipmentConfirmationEmail(): void
     {
         $this->client->customItemAction(
@@ -194,25 +169,19 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @When I choose :shippingMethod as a shipping method filter
-     */
+    #[When('I choose :shippingMethod as a shipping method filter')]
     public function iChooseAsAShippingMethodFilter(ShippingMethodInterface $shippingMethod): void
     {
         $this->client->addFilter('shipments.method.code', $shippingMethod->getCode());
     }
 
-    /**
-     * @When I choose :currency as the filter currency
-     */
+    #[When('I choose :currency as the filter currency')]
     public function iChooseCurrencyAsTheFilterCurrency(CurrencyInterface $currency): void
     {
         $this->client->addFilter('currencyCode', $currency->getCode());
     }
 
-    /**
-     * @When I specify filter total being greater than :total
-     */
+    #[When('I specify filter total being greater than :total')]
     public function iSpecifyFilterTotalBeingGreaterThan(string $total): void
     {
         if (str_contains($total, '.')) {
@@ -225,18 +194,14 @@ final readonly class ManagingOrdersContext implements Context
         $this->client->addFilter('total[gt]', $total . '00');
     }
 
-    /**
-     * @When I specify filter total being less than :total
-     */
+    #[When('I specify filter total being less than :total')]
     public function iSpecifyFilterTotalBeingLessThan(string $total): void
     {
         $this->client->addFilter('total[lt]', $total . '00');
     }
 
-    /**
-     * @When I filter by variant :variantName
-     * @When I filter by variants :firstVariant and :secondVariant
-     */
+    #[When('I filter by variant :variantName')]
+    #[When('I filter by variants :firstVariant and :secondVariant')]
     public function iFilterByVariant(string ...$variantsNames): void
     {
         foreach ($variantsNames as $variantName) {
@@ -246,18 +211,14 @@ final readonly class ManagingOrdersContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I switch the way orders are sorted by :fieldName
-     */
+    #[When('I switch the way orders are sorted by :fieldName')]
     public function iSwitchSortingBy(string $fieldName): void
     {
         $this->client->addFilter('order[number]', 'asc');
         $this->client->filter();
     }
 
-    /**
-     * @When /^I cancel (this order)$/
-     */
+    #[When('/^I cancel (this order)$/')]
     public function iCancelThisOrder(OrderInterface $order): void
     {
         $this->client->applyTransition(
@@ -267,9 +228,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @When /^I mark (this order) as paid$/
-     */
+    #[When('/^I mark (this order) as paid$/')]
     public function iMarkThisOrderAsAPaid(OrderInterface $order): void
     {
         $this->client->applyTransition(
@@ -279,9 +238,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @When /^I mark (this order)'s payment as refunded$/
-     */
+    #[When('/^I mark (this order)\'s payment as refunded$/')]
     public function iMarkThisOrderSPaymentAsRefunded(OrderInterface $order): void
     {
         $this->client->applyTransition(
@@ -291,9 +248,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @When /^I ship (this order)$/
-     */
+    #[When('/^I ship (this order)$/')]
     public function iShipThisOrder(OrderInterface $order): void
     {
         $shipment = $order->getShipments()->last();
@@ -308,18 +263,14 @@ final readonly class ManagingOrdersContext implements Context
         $this->sharedStorage->set('shipment', $shipment);
     }
 
-    /**
-     * @When I limit number of items to :limit
-     */
+    #[When('I limit number of items to :limit')]
     public function iLimitNumberOfItemsTo(int $limit): void
     {
         $this->client->addFilter('itemsPerPage', $limit);
         $this->client->filter();
     }
 
-    /**
-     * @When I check :itemName data
-     */
+    #[When('I check :itemName data')]
     public function iCheckData(string $itemName): void
     {
         /** @var string $lastResponseContent */
@@ -338,9 +289,7 @@ final readonly class ManagingOrdersContext implements Context
         throw new \InvalidArgumentException(sprintf('There is no item with name "%s".', $itemName));
     }
 
-    /**
-     * @Then I should see a single order from customer :customer
-     */
+    #[Then('I should see a single order from customer :customer')]
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer): void
     {
         Assert::true(
@@ -353,35 +302,27 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/
-     */
+    #[Then('/^I should be notified that the (order|shipment) confirmation email has been successfully resent to the customer$/')]
     public function iShouldBeNotifiedThatTheOrderConfirmationEmailHasBeenSuccessfullyResentToTheCustomer(): void
     {
         $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }
 
-    /**
-     * @Then it should( still) have a :state state
-     */
+    #[Then('it should( still) have a :state state')]
     public function itShouldHaveState(string $state): void
     {
         Assert::true($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'state', $state));
         Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), 1);
     }
 
-    /**
-     * @Then I should see a single order in the list
-     * @Then I should see :number orders in the list
-     */
+    #[Then('I should see a single order in the list')]
+    #[Then('I should see :number orders in the list')]
     public function iShouldSeeASingleOrderInTheList(int $number = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $number);
     }
 
-    /**
-     * @Then I should be notified that it has been successfully updated
-     */
+    #[Then('I should be notified that it has been successfully updated')]
     public function iShouldBeNotifiedAboutItHasBeenSuccessfullyCanceled(): void
     {
         $response = $this->client->getLastResponse();
@@ -391,10 +332,8 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then this order should have state :state
-     * @Then its state should be :state
-     */
+    #[Then('this order should have state :state')]
+    #[Then('its state should be :state')]
     public function itsStateShouldBe(string $state): void
     {
         /** @var OrderInterface $order */
@@ -404,10 +343,8 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($orderState, strtolower($state));
     }
 
-    /**
-     * @Then /^(it) should have shipment in state "([^"]+)"$/
-     * @Then /^(order "[^"]+") should have shipment state "([^"]+)"$/
-     */
+    #[Then('/^(it) should have shipment in state "([^"]+)"$/')]
+    #[Then('/^(order "[^"]+") should have shipment state "([^"]+)"$/')]
     public function itShouldHaveShipmentState(OrderInterface $order, string $state): void
     {
         $shipmentIri = $this->responseChecker->getValue(
@@ -421,10 +358,8 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then it should have payment state :state
-     * @Then it should have payment with state :paymentState
-     */
+    #[Then('it should have payment state :state')]
+    #[Then('it should have payment with state :paymentState')]
     public function itShouldHavePaymentState(string $state): void
     {
         $paymentIri = $this->responseChecker->getValue(
@@ -438,9 +373,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^(its) payment state should be refunded$/
-     */
+    #[Then('/^(its) payment state should be refunded$/')]
     public function itsPaymentStateShouldBeRefunded(OrderInterface $order): void
     {
         $response = $this->client->show(Resources::ORDERS, $order->getTokenValue());
@@ -448,9 +381,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->responseChecker->getValue($response, 'paymentState'), 'refunded');
     }
 
-    /**
-     * @Then /^there should be(?:| only) (\d+) payments?$/
-     */
+    #[Then('/^there should be(?:| only) (\d+) payments?$/')]
     public function theOrderShouldHaveNumberOfPayments(int $number): void
     {
         Assert::count(
@@ -459,10 +390,8 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then the order :order should have order payment state :orderPaymentState
-     * @Then /^(this order) should have order payment state "([^"]+)"$/
-     */
+    #[Then('the order :order should have order payment state :orderPaymentState')]
+    #[Then('/^(this order) should have order payment state "([^"]+)"$/')]
     public function theOrderShouldHavePaymentState(OrderInterface $order, string $paymentState): void
     {
         Assert::true(
@@ -487,17 +416,13 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then it should have :amount items
-     */
+    #[Then('it should have :amount items')]
     public function itShouldHaveAmountOfItems(int $amount): void
     {
         Assert::count($this->responseChecker->getValue($this->client->getLastResponse(), 'items'), $amount);
     }
 
-    /**
-     * @Then the product named :productName should be in the items list
-     */
+    #[Then('the product named :productName should be in the items list')]
     public function theProductShouldBeInTheItemsList(string $productName): void
     {
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
@@ -511,25 +436,19 @@ final readonly class ManagingOrdersContext implements Context
         throw new \InvalidArgumentException('There is no product with given name.');
     }
 
-    /**
-     * @Then /^the order's shipping total should be ("[^"]+")$/
-     */
+    #[Then('/^the order\'s shipping total should be ("[^"]+")$/')]
     public function theOrdersShippingTotalShouldBe(int $shippingTotal): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingTotal'), $shippingTotal);
     }
 
-    /**
-     * @Then /^the order's tax total should(?:| still) be ("[^"]+")$/
-     */
+    #[Then('/^the order\'s tax total should(?:| still) be ("[^"]+")$/')]
     public function theOrdersTaxTotalShouldBe(int $taxTotal): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), $taxTotal);
     }
 
-    /**
-     * @Then I should not be able to resend the shipment confirmation email
-     */
+    #[Then('I should not be able to resend the shipment confirmation email')]
     public function iShouldNotBeAbleToResendTheShipmentConfirmationEmail(): void
     {
         $this->client->customItemAction(
@@ -545,17 +464,13 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^the order's items total should be ("[^"]+")$/
-     */
+    #[Then('/^the order\'s items total should be ("[^"]+")$/')]
     public function theOrdersItemsTotalShouldBe(int $itemsTotal): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'itemsTotal'), $itemsTotal);
     }
 
-    /**
-     * @Then /^the order's payment should(?:| also) be ("[^"]+")$/
-     */
+    #[Then('/^the order\'s payment should(?:| also) be ("[^"]+")$/')]
     public function theOrdersPaymentShouldBe(int $paymentAmount): void
     {
         $response = $this->client->showByIri(
@@ -565,9 +480,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->responseChecker->getValue($response, 'amount'), $paymentAmount);
     }
 
-    /**
-     * @Then /^I should not be able to cancel (this order)$/
-     */
+    #[Then('/^I should not be able to cancel (this order)$/')]
     public function iShouldNotBeAbleToCancelThisOrder(OrderInterface $order): void
     {
         $this->iCancelThisOrder($order);
@@ -577,9 +490,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^the order's total should(?:| still) be ("[^"]+")$/
-     */
+    #[Then('/^the order\'s total should(?:| still) be ("[^"]+")$/')]
     public function theOrdersTotalShouldBe(int $total): void
     {
         $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
@@ -590,9 +501,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^the order's promotion total should(?:| still) be ("[^"]+")$/
-     */
+    #[Then('/^the order\'s promotion total should(?:| still) be ("[^"]+")$/')]
     public function theOrdersPromotionTotalShouldBe(int $promotionTotal): void
     {
         $response = $this->client->show(Resources::ORDERS, $this->sharedStorage->get('order')->getTokenValue());
@@ -603,9 +512,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then the order's promotion discount should be :promotionAmount from :promotionName promotion
-     */
+    #[Then('the order\'s promotion discount should be :promotionAmount from :promotionName promotion')]
     public function theOrdersPromotionDiscountShouldBeFromPromotion(string $promotionAmount, string $promotionName): void
     {
         $this->responseChecker->hasItemWithValues(
@@ -618,9 +525,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then the order's shipping promotion should be :promotionAmount
-     */
+    #[Then('the order\'s shipping promotion should be :promotionAmount')]
     public function theOrdersShippingPromotionDiscountShouldBe(string $promotionAmount): void
     {
         $this->responseChecker->hasItemWithValues(
@@ -632,9 +537,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then there should be a shipping charge :shippingCharge for :shippingMethodName method
-     */
+    #[Then('there should be a shipping charge :shippingCharge for :shippingMethodName method')]
     public function thereShouldBeAShippingChargeForMethod(string $shippingCharge, string $shippingMethodName): void
     {
         $this->responseChecker->hasItemWithValues(
@@ -647,9 +550,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then there should be a shipping tax :shippingTax for :shippingMethodName method
-     */
+    #[Then('there should be a shipping tax :shippingTax for :shippingMethodName method')]
     public function thereShouldBeAShippingTaxForMethod(string $shippingTax, string $shippingMethodName): void
     {
         $this->responseChecker->hasItemWithValues(
@@ -662,9 +563,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
-     */
+    #[Then('/^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/')]
     public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
         AdminUserInterface $user,
         OrderInterface $order,
@@ -677,9 +576,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($currencyCode, $currency);
     }
 
-    /**
-     * @Then I should see an order with :orderNumber number
-     */
+    #[Then('I should see an order with :orderNumber number')]
     public function iShouldSeeOrderWithNumber(string $orderNumber): void
     {
         $response = $this->client->getLastResponse();
@@ -690,9 +587,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see an order with :orderNumber number
-     */
+    #[Then('I should not see an order with :orderNumber number')]
     public function iShouldNotSeeOrderWithNumber(string $orderNumber)
     {
         $response = $this->client->getLastResponse();
@@ -703,9 +598,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see any orders with currency :currencyCode
-     */
+    #[Then('I should not see any orders with currency :currencyCode')]
     public function iShouldNotSeeAnyOrderWithCurrency(string $currencyCode): void
     {
         $response = $this->client->getLastResponse();
@@ -716,9 +609,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then the first order should have number :number
-     */
+    #[Then('the first order should have number :number')]
     public function theFirstOrderShouldHaveNumber(string $number): void
     {
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:member');
@@ -727,9 +618,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($firstItem['number'], str_replace('#', '', $number));
     }
 
-    /**
-     * @Then /^I should see the order "([^"]+)" with total ("[^"]+")$/
-     */
+    #[Then('/^I should see the order "([^"]+)" with total ("[^"]+")$/')]
     public function iShouldSeeTheOrderWithTotal(string $orderNumber, int $total): void
     {
         $order = $this->responseChecker->getCollectionItemsWithValue(
@@ -744,9 +633,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then the administrator should see the order with total :total in order list
-     */
+    #[Then('the administrator should see the order with total :total in order list')]
     public function theAdministratorShouldSeeTheOrderWithTotalInOrderList(string $total): void
     {
         $adminUser = $this->sharedStorage->get('administrator');
@@ -770,9 +657,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($firstItem['total'], $total);
     }
 
-    /**
-     * @Then it should have been placed by the customer :customer
-     */
+    #[Then('it should have been placed by the customer :customer')]
     public function itShouldHaveBeenPlacedByTheCustomer(CustomerInterface $customer): void
     {
         Assert::same(
@@ -781,9 +666,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then it should be shipped via the :shippingMethod shipping method
-     */
+    #[Then('it should be shipped via the :shippingMethod shipping method')]
     public function itShouldBeShippedViaTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         Assert::same(
@@ -792,9 +675,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then it should be paid with :paymentMethod
-     */
+    #[Then('it should be paid with :paymentMethod')]
     public function itShouldBePaidWith(PaymentMethodInterface $paymentMethod): void
     {
         Assert::same(
@@ -803,17 +684,13 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then it should have no shipping address set
-     */
+    #[Then('it should have no shipping address set')]
     public function itShouldHaveNoShippingAddressSet(): void
     {
         Assert::null($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress'));
     }
 
-    /**
-     * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
-     */
+    #[Then('it should be shipped to :customerName, :street, :postcode, :city, :countryName')]
     public function itShouldBeShippedTo(
         string $customerName,
         string $street,
@@ -833,9 +710,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then it should have :customerName, :street, :postcode, :city, :countryName as its billing address
-     */
+    #[Then('it should have :customerName, :street, :postcode, :city, :countryName as its billing address')]
     public function itShouldHaveAddressAsItBillingAddress(
         string $customerName,
         string $street,
@@ -855,9 +730,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :provinceName as province in the shipping address
-     */
+    #[Then('I should see :provinceName as province in the shipping address')]
     public function iShouldSeeAsProvinceInTheShippingAddress(string $provinceName): void
     {
         Assert::same(
@@ -866,9 +739,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :provinceName as province in the billing address
-     */
+    #[Then('I should see :provinceName as province in the billing address')]
     public function iShouldSeeAsProvinceInTheBillingAddress(string $provinceName): void
     {
         Assert::same(
@@ -877,9 +748,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the shipping date as :dateTime
-     */
+    #[Then('I should see the shipping date as :dateTime')]
     public function iShouldSeeTheShippingDateAs(string $dateTime): void
     {
         $response = $this->client->show(Resources::SHIPMENTS, (string) $this->sharedStorage->get('shipment')->getId());
@@ -890,41 +759,31 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^(its) unit price should be ([^"]+)$/
-     */
+    #[Then('/^(its) unit price should be ([^"]+)$/')]
     public function itemUnitPriceShouldBe(array $orderItem, string $unitPrice): void
     {
         Assert::same($this->getTotalAsInt($unitPrice), $orderItem['unitPrice']);
     }
 
-    /**
-     * @Then /^(its) total should be ([^"]+)$/
-     */
+    #[Then('/^(its) total should be ([^"]+)$/')]
     public function itemTotalShouldBe(array $orderItem, string $total): void
     {
         Assert::same($this->getTotalAsInt($total), $orderItem['total']);
     }
 
-    /**
-     * @Then /^(its) code should be "([^"]+)"$/
-     */
+    #[Then('/^(its) code should be "([^"]+)"$/')]
     public function itemCodeShouldBe(array $orderItem, string $code): void
     {
         Assert::endsWith($orderItem['variant'], $code);
     }
 
-    /**
-     * @Then /^(its) quantity should be ([^"]+)$/
-     */
+    #[Then('/^(its) quantity should be ([^"]+)$/')]
     public function itemQuantityShouldBe(array $orderItem, int $quantity): void
     {
         Assert::same($quantity, $orderItem['quantity']);
     }
 
-    /**
-     * @Then /^its discounted unit price should be ([^"]+)$/
-     */
+    #[Then('/^its discounted unit price should be ([^"]+)$/')]
     public function itemDiscountedUnitPriceShouldBe(string $discountedUnitPrice): void
     {
         $this->responseChecker->hasItemWithValues(
@@ -936,9 +795,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^its subtotal should be ([^"]+)$/
-     */
+    #[Then('/^its subtotal should be ([^"]+)$/')]
     public function itemSubtotalShouldBe(string $subtotal): void
     {
         $orderItem = $this->sharedStorage->get('item');
@@ -953,9 +810,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->getTotalAsInt($subtotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
     }
 
-    /**
-     * @Then /^its discount should be ([^"]+)$/
-     */
+    #[Then('/^its discount should be ([^"]+)$/')]
     public function theItemShouldHaveDiscount(string $discount): void
     {
         $this->responseChecker->hasItemWithValues(
@@ -967,9 +822,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^its tax should be ([^"]+)$/
-     */
+    #[Then('/^its tax should be ([^"]+)$/')]
     public function itemTaxShouldBe(string $tax): void
     {
         $this->responseChecker->hasItemWithValues(
@@ -981,9 +834,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^its tax included in price should be ([^"]+)$/
-     */
+    #[Then('/^its tax included in price should be ([^"]+)$/')]
     public function itsTaxIncludedInPriceShouldBe(string $tax): void
     {
         $unitPromotionAdjustments = $this->responseChecker->getCollectionItemsWithValue(
@@ -1011,10 +862,8 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then /^the order "[^"]+" should have order shipping state "([^"]+)"$/
-     * @Then it should have order's shipping state :orderShippingState
-     */
+    #[Then('/^the order "[^"]+" should have order shipping state "([^"]+)"$/')]
+    #[Then('it should have order\'s shipping state :orderShippingState')]
     public function theOrderShouldHaveShippingState(string $orderShippingState): void
     {
         $ordersResponse = $this->client->index(Resources::ORDERS, forgetResponse: true);
@@ -1025,9 +874,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see information about shipments
-     */
+    #[Then('I should not see information about shipments')]
     public function iShouldNotSeeInformationAboutShipping(): void
     {
         Assert::same(
@@ -1036,9 +883,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then the :productName product's unit price should be :price
-     */
+    #[Then('the :productName product\'s unit price should be :price')]
     public function productUnitPriceShouldBe(string $productName, string $price): void
     {
         $this->iCheckData($productName);
@@ -1046,27 +891,21 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->getTotalAsInt($price), $orderItem['unitPrice']);
     }
 
-    /**
-     * @Then the :productName product's discounted unit price should be :price
-     */
+    #[Then('the :productName product\'s discounted unit price should be :price')]
     public function productDiscountedUnitPriceShouldBe(string $productName, string $price): void
     {
         $orderItem = $this->sharedStorage->get('item');
         Assert::same($this->getTotalAsInt($price), $orderItem['fullDiscountedUnitPrice']);
     }
 
-    /**
-     * @Then the :productName product's quantity should be :quantity
-     */
+    #[Then('the :productName product\'s quantity should be :quantity')]
     public function productQuantityShouldBe(string $productName, int $quantity): void
     {
         $orderItem = $this->sharedStorage->get('item');
         Assert::same($quantity, $orderItem['quantity']);
     }
 
-    /**
-     * @Then the :productName product's item discount should be :price
-     */
+    #[Then('the :productName product\'s item discount should be :price')]
     public function productItemDiscountShouldBe(string $productName, string $price): void
     {
         $orderItem = $this->sharedStorage->get('item');
@@ -1086,9 +925,7 @@ final readonly class ManagingOrdersContext implements Context
         }
     }
 
-    /**
-     * @Then the :productName product's order discount should be :price
-     */
+    #[Then('the :productName product\'s order discount should be :price')]
     public function productOrderDiscountShouldBe(string $productName, string $price): void
     {
         $orderItem = $this->sharedStorage->get('item');
@@ -1108,9 +945,7 @@ final readonly class ManagingOrdersContext implements Context
         }
     }
 
-    /**
-     * @Then the :productName product's subtotal should be :subTotal
-     */
+    #[Then('the :productName product\'s subtotal should be :subTotal')]
     public function productSubtotalShouldBe(string $productName, string $subTotal): void
     {
         $orderItem = $this->sharedStorage->get('item');
@@ -1128,9 +963,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->getTotalAsInt($subTotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
     }
 
-    /**
-     * @Then I should be notified that the order has been successfully shipped
-     */
+    #[Then('I should be notified that the order has been successfully shipped')]
     public function iShouldBeNotifiedThatTheOrderHasBeenSuccessfullyShipped(): void
     {
         $response = $this->client->getLastResponse();
@@ -1140,9 +973,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then it should have shipment in state shipped
-     */
+    #[Then('it should have shipment in state shipped')]
     public function itShouldHaveShipmentInStateShipped(): void
     {
         $shipmentIri = $this->responseChecker->getValue(
@@ -1156,9 +987,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then this order should have order shipping state :orderShippingState
-     */
+    #[Then('this order should have order shipping state :orderShippingState')]
     public function thisOrderShouldHaveOrderShippingState(string $orderShippingState): void
     {
         $ordersResponse = $this->client->index(Resources::ORDERS);
@@ -1169,9 +998,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to ship this order
-     */
+    #[Then('I should not be able to ship this order')]
     public function iShouldNotBeAbleToShipThisOrder(): void
     {
         $order = $this->sharedStorage->get('order');
@@ -1188,9 +1015,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should be informed that the order does not exist
-     */
+    #[Then('I should be informed that the order does not exist')]
     public function iShouldBeInformedThatTheOrderDoesNotExist(): void
     {
         Assert::same(
@@ -1199,9 +1024,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then there should be :count shipping address changes in the registry
-     */
+    #[Then('there should be :count shipping address changes in the registry')]
     public function thereShouldBeCountShippingAddressChangesInTheRegistry(int $count): void
     {
         $order = $this->sharedStorage->get('order');
@@ -1213,9 +1036,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->responseChecker->countCollectionItems($response), $count);
     }
 
-    /**
-     * @Then I should not be able to resend the order confirmation email
-     */
+    #[Then('I should not be able to resend the order confirmation email')]
     public function iShouldNotBeAbleToResendTheOrderConfirmationEmail(): void
     {
         $this->client->customItemAction(
@@ -1231,9 +1052,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then there should be :count billing address changes in the registry
-     */
+    #[Then('there should be :count billing address changes in the registry')]
     public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
     {
         $order = $this->sharedStorage->get('order');
@@ -1245,25 +1064,19 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same($this->responseChecker->countCollectionItems($response), $count);
     }
 
-    /**
-     * @Then I should be notified that the order's payment has been successfully completed
-     */
+    #[Then('I should be notified that the order\'s payment has been successfully completed')]
     public function iShouldBeNotifiedThatTheOrdersPaymentHasBeenSuccessfullyCompleted(): void
     {
         Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
-    /**
-     * @Then I should be notified that the order's payment has been successfully refunded
-     */
+    #[Then('I should be notified that the order\'s payment has been successfully refunded')]
     public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyRefunded(): void
     {
         Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
-    /**
-     * @Then /^I should not be able to mark (this order) as paid again$/
-     */
+    #[Then('/^I should not be able to mark (this order) as paid again$/')]
     public function iShouldNotBeAbleToMarkThisOrderAsPaidAgain(OrderInterface $order): void
     {
         $this->client->applyTransition(
@@ -1275,9 +1088,7 @@ final readonly class ManagingOrdersContext implements Context
         Assert::false($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()));
     }
 
-    /**
-     * @Then I should be notified that the order's payment could not be finalized due to insufficient stock
-     */
+    #[Then('I should be notified that the order\'s payment could not be finalized due to insufficient stock')]
     public function iShouldBeNotifiedThatTheOrdersPaymentCouldNotBeFinalizedDueToInsufficientStock(): void
     {
         Assert::contains(
@@ -1286,9 +1097,7 @@ final readonly class ManagingOrdersContext implements Context
         );
     }
 
-    /**
-     * @Then I should see this customer's IP address
-     */
+    #[Then('I should see this customer\'s IP address')]
     public function iShouldSeeCustomersIpAddress(): void
     {
         Assert::notEmpty($this->responseChecker->getValue($this->client->getLastResponse(), 'customerIp'));
