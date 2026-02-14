@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Ramsey\Uuid\Uuid;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -31,43 +33,33 @@ final readonly class ManagingProductAttributesContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to see all product attributes in store
-     * @When I am browsing product attributes
-     */
+    #[When('I want to see all product attributes in store')]
+    #[When('I am browsing product attributes')]
     public function iWantToBrowseProductAttributes(): void
     {
         $this->client->index(Resources::PRODUCT_ATTRIBUTES);
     }
 
-    /**
-     * @When /^I(?:| try to) delete (this product attribute)$/
-     */
+    #[When('/^I(?:| try to) delete (this product attribute)$/')]
     public function iDeleteThisProductAttribute(ProductAttributeInterface $attribute): void
     {
         $this->client->delete(Resources::PRODUCT_ATTRIBUTES, $attribute->getCode());
     }
 
-    /**
-     * @When I want to create a new :type product attribute
-     */
+    #[When('I want to create a new :type product attribute')]
     public function iWantToCreateANewTypedProductAttribute(string $type): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_ATTRIBUTES);
         $this->client->addRequestData('type', $type);
     }
 
-    /**
-     * @When I specify its code as :code
-     */
+    #[When('I specify its code as :code')]
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
     }
 
-    /**
-     * @When /^I search by "([^"]+)" (code|name)$/
-     */
+    #[When('/^I search by "([^"]+)" (code|name)$/')]
     public function iSearchBy(string $phrase, string $field): void
     {
         $field = $field === 'name' ? 'translations.name' : $field;
@@ -76,10 +68,8 @@ final readonly class ManagingProductAttributesContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I choose :type in the type filter
-     * @When I choose :firstType and :secondType in the type filter
-     */
+    #[When('I choose :type in the type filter')]
+    #[When('I choose :firstType and :secondType in the type filter')]
     public function iChooseInTheTypeFilter(string ...$types): void
     {
         foreach ($types as $type) {
@@ -87,9 +77,7 @@ final readonly class ManagingProductAttributesContext implements Context
         }
     }
 
-    /**
-     * @When I choose :translatable in the translatable filter
-     */
+    #[When('I choose :translatable in the translatable filter')]
     public function iChooseInTheTranslatableFilter(string $translatable): void
     {
         match ($translatable) {
@@ -99,28 +87,22 @@ final readonly class ManagingProductAttributesContext implements Context
         };
     }
 
-    /**
-     * @When I filter
-     */
+    #[When('I filter')]
     public function iFilter(): void
     {
         $this->client->filter();
     }
 
-    /**
-     * @When I name it :name in :localeCode
-     * @When I change its name to :name in :localeCode
-     * @When I do not name it
-     * @When I remove its name from :localeCode translation
-     */
+    #[When('I name it :name in :localeCode')]
+    #[When('I change its name to :name in :localeCode')]
+    #[When('I do not name it')]
+    #[When('I remove its name from :localeCode translation')]
     public function iNameItIn(string $name = '', string $localeCode = 'en_US'): void
     {
         $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
     }
 
-    /**
-     * @When I (also) add value :value in :localeCode
-     */
+    #[When('I (also) add value :value in :localeCode')]
     public function iAddValueIn(string $value, string $localeCode): void
     {
         $uuid = Uuid::uuid4()->toString();
@@ -128,43 +110,33 @@ final readonly class ManagingProductAttributesContext implements Context
         $this->client->addRequestData('configuration', ['choices' => [$uuid => [$localeCode => $value]]]);
     }
 
-    /**
-     * @When I disable its translatability
-     */
+    #[When('I disable its translatability')]
     public function iDisableItsTranslatability(): void
     {
         $this->client->addRequestData('translatable', false);
     }
 
-    /**
-     * @When I check multiple option
-     */
+    #[When('I check multiple option')]
     public function iCheckMultipleOption(): void
     {
         $this->client->addRequestData('configuration', ['multiple' => true]);
     }
 
-    /**
-     * @When I do not check multiple option
-     * @When I do not specify its code
-     */
+    #[When('I do not check multiple option')]
+    #[When('I do not specify its code')]
     public function intentionallyBlank(): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @When I specify its :limitType entries value as :count
-     * @When I specify its :limitType length as :count
-     */
+    #[When('I specify its :limitType entries value as :count')]
+    #[When('I specify its :limitType length as :count')]
     public function iSpecifyItsLimitTypeEntriesAs(string $limitType, int $count): void
     {
         $this->client->addRequestData('configuration', [$limitType => $count]);
     }
 
-    /**
-     * @When /^I want to edit (this product attribute)$/
-     */
+    #[When('/^I want to edit (this product attribute)$/')]
     public function iWantToEditThisProductAttribute(ProductAttributeInterface $productAttribute): void
     {
         $this->sharedStorage->set('product_attribute', $productAttribute);
@@ -172,18 +144,14 @@ final readonly class ManagingProductAttributesContext implements Context
         $this->client->buildUpdateRequest(Resources::PRODUCT_ATTRIBUTES, $productAttribute->getCode());
     }
 
-    /**
-     * @When I add it
-     * @When I try to add it
-     */
+    #[When('I add it')]
+    #[When('I try to add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When /^I change (its) value "([^"]+)" to "([^"]+)"$/
-     */
+    #[When('/^I change (its) value "([^"]+)" to "([^"]+)"$/')]
     public function iChangeItsValueTo(
         ProductAttributeInterface $productAttribute,
         string $oldValue,
@@ -204,9 +172,7 @@ final readonly class ManagingProductAttributesContext implements Context
         $this->client->updateRequestData(['configuration' => ['choices' => $choices]]);
     }
 
-    /**
-     * @When I delete value :value
-     */
+    #[When('I delete value :value')]
     public function iDeleteValue(string $value): void
     {
         /** @var ProductAttributeInterface $productAttribute */
@@ -226,18 +192,14 @@ final readonly class ManagingProductAttributesContext implements Context
         $this->client->setRequestData(['configuration' => ['choices' => $choices]]);
     }
 
-    /**
-     * @Then I should see :count product attributes in the list
-     * @Then I should see a single product attribute in the list
-     */
+    #[Then('I should see :count product attributes in the list')]
+    #[Then('I should see a single product attribute in the list')]
     public function iShouldSeeCountProductAttributesInTheList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then the first product attribute on the list should have name :name
-     */
+    #[Then('the first product attribute on the list should have name :name')]
     public function theFirstProductAttributeOnTheListShouldHaveName(string $name): void
     {
         $first = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
@@ -245,9 +207,7 @@ final readonly class ManagingProductAttributesContext implements Context
         Assert::same($first['translations']['en_US']['name'], $name);
     }
 
-    /**
-     * @Then the last product attribute on the list should have name :name
-     */
+    #[Then('the last product attribute on the list should have name :name')]
     public function theLastProductAttributeOnTheListShouldHaveName(string $name): void
     {
         $collection = $this->responseChecker->getCollection($this->client->getLastResponse());
@@ -256,9 +216,7 @@ final readonly class ManagingProductAttributesContext implements Context
         Assert::same($last['translations']['en_US']['name'], $name);
     }
 
-    /**
-     * @Then /^I should(?:| also) see the product attribute "([^"]+)" in the list$/
-     */
+    #[Then('/^I should(?:| also) see the product attribute "([^"]+)" in the list$/')]
     public function iShouldSeeTheProductAttributeInTheList(string $attributeName): void
     {
         Assert::true($this->responseChecker->hasItemWithTranslation(
@@ -269,17 +227,13 @@ final readonly class ManagingProductAttributesContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse());
     }
 
-    /**
-     * @Then /^(this product attribute) should no longer exist in the registry$/
-     */
+    #[Then('/^(this product attribute) should no longer exist in the registry$/')]
     public function thisProductAttributeShouldNoLongerExistInTheRegistry(ProductAttributeInterface $productAttribute): void
     {
         $response = $this->client->index(Resources::PRODUCT_ATTRIBUTES);
@@ -290,9 +244,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it is in use
-     */
+    #[Then('I should be notified that it is in use')]
     public function iShouldBeNotifiedThatItIsInUse(): void
     {
         Assert::contains(
@@ -301,9 +253,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -312,10 +262,8 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then the :type attribute :name should appear in the store
-     * @Then the :type attribute :name should still be in the store
-     */
+    #[Then('the :type attribute :name should appear in the store')]
+    #[Then('the :type attribute :name should still be in the store')]
     public function theAttributeShouldAppearInTheStore(string $type, string $name): void
     {
         $response = $this->client->index(Resources::PRODUCT_ATTRIBUTES);
@@ -334,9 +282,7 @@ final readonly class ManagingProductAttributesContext implements Context
         ));
     }
 
-    /**
-     * @Then the attribute with :field :value should not appear in the store
-     */
+    #[Then('the attribute with :field :value should not appear in the store')]
     public function theAttributeWithCodeShouldNotAppearInTheStore(string $field, string $value): void
     {
         $response = $this->client->index(Resources::PRODUCT_ATTRIBUTES);
@@ -347,9 +293,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the value :value in :localeCode locale
-     */
+    #[Then('I should see the value :value in :localeCode locale')]
     public function iShouldSeeTheValueInLocale(string $value, string $localeCode): void
     {
         $content = $this->responseChecker->getResponseContent($this->client->getLastResponse());
@@ -368,10 +312,8 @@ final readonly class ManagingProductAttributesContext implements Context
         ));
     }
 
-    /**
-     * @Then /^(this product attribute) should have value "([^"]+)"$/
-     * @Then /^the ("[^"]+" product attribute) should(?:| also) have value "([^"]+)"/
-     */
+    #[Then('/^(this product attribute) should have value "([^"]+)"$/')]
+    #[Then('/^the ("[^"]+" product attribute) should(?:| also) have value "([^"]+)"/')]
     public function thisProductAttributeShouldHaveValue(
         ProductAttributeInterface $productAttribute,
         string $value,
@@ -381,9 +323,7 @@ final readonly class ManagingProductAttributesContext implements Context
         $this->iShouldSeeTheValueInLocale($value, 'en_US');
     }
 
-    /**
-     * @Then /^(this product attribute) should not have value "([^"]+)"$/
-     */
+    #[Then('/^(this product attribute) should not have value "([^"]+)"$/')]
     public function thisProductAttributeShouldNotHaveValue(
         ProductAttributeInterface $productAttribute,
         string $value,
@@ -402,9 +342,7 @@ final readonly class ManagingProductAttributesContext implements Context
         }
     }
 
-    /**
-     * @Then I should be notified that :element is required
-     */
+    #[Then('I should be notified that :element is required')]
     public function iShouldBeNotifiedThatFieldIsRequired(string $field): void
     {
         Assert::contains(
@@ -413,9 +351,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that product attribute with this code already exists
-     */
+    #[Then('I should be notified that product attribute with this code already exists')]
     public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists(): void
     {
         Assert::contains(
@@ -424,9 +360,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that max length must be greater or equal to the min length
-     */
+    #[Then('I should be notified that max length must be greater or equal to the min length')]
     public function iShouldBeNotifiedThatMaxLengthMustBeGreaterOrEqualToTheMinLength(): void
     {
         Assert::contains(
@@ -435,9 +369,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one product attribute with code :code
-     */
+    #[Then('there should still be only one product attribute with code :code')]
     public function thereShouldStillBeOnlyOneProductAttributeWithCode(string $code): void
     {
         $items = $this->responseChecker->getCollectionItemsWithValue(
@@ -449,9 +381,7 @@ final readonly class ManagingProductAttributesContext implements Context
         Assert::count($items, 1, sprintf('More than one attribute with code %s found', $code));
     }
 
-    /**
-     * @Then I should be notified that max entries value must be greater or equal to the min entries value
-     */
+    #[Then('I should be notified that max entries value must be greater or equal to the min entries value')]
     public function iShouldBeNotifiedThatMaxEntriesValueMustBeGreaterOrEqualToTheMinEntriesValue(): void
     {
         Assert::contains(
@@ -460,9 +390,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that min entries value must be lower or equal to the number of added choices
-     */
+    #[Then('I should be notified that min entries value must be lower or equal to the number of added choices')]
     public function iShouldBeNotifiedThatMinEntriesValueMustBeLowerOrEqualToTheNumberOfAddedChoices(): void
     {
         Assert::contains(
@@ -471,9 +399,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that multiple must be true if min or max entries values are specified
-     */
+    #[Then('I should be notified that multiple must be true if min or max entries values are specified')]
     public function iShouldBeNotifiedThatMultipleMustBeTrueIfMinOrMaxEntriesValuesAreSpecified(): void
     {
         Assert::contains(
@@ -482,9 +408,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
@@ -495,9 +419,7 @@ final readonly class ManagingProductAttributesContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to edit its type
-     */
+    #[Then('I should not be able to edit its type')]
     public function iShouldNotBeAbleToEditItsType(): void
     {
         $this->client->updateRequestData(['type' => 'percent']);
