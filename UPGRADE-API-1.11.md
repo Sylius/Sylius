@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.11.16` TO `v1.11.17`
+
+1. The `api/v2/shop/adjustments/{id}` endpoint has been disabled.
+
 # UPGRADE FROM `v1.11.11` TO `v1.11.12`
 
 1. So far, on production environment when any non-validation related error occurred, the `FOS\RestBundle\Serializer\Normalizer\FlattenExceptionHandler` was used, even on API Platform endpoints.
