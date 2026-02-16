@@ -254,6 +254,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.factory.customer_after_checkout', CustomerAfterCheckoutFactory::class)
         ->args([service('sylius.factory.customer')])
+        ->tag('sylius.resource_factory')
         ->public()
     ;
     $services->alias(CustomerAfterCheckoutFactoryInterface::class, 'sylius.factory.customer_after_checkout')->public();

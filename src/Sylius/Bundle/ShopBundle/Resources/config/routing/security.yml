@@ -29,6 +29,7 @@ sylius_shop_logout:
 sylius_shop_register:
     path: /register
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_register')"
     defaults:
         _controller: sylius.controller.customer::createAction
         _sylius:
@@ -42,6 +43,7 @@ sylius_shop_register:
 sylius_shop_register_after_checkout:
     path: /register-after-checkout/{tokenValue}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_register')"
     defaults:
         _controller: sylius.controller.customer::createAction
         _sylius:
