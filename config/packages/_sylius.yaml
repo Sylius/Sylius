@@ -54,6 +54,7 @@ sylius_core:
                 shop_checkout: false
                 shop_product: false
                 shop_product_review: false
+                shop_register: false
 
 sylius_api:
     enabled: true
