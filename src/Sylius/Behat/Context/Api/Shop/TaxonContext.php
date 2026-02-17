@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
@@ -32,19 +34,15 @@ final readonly class TaxonContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I try to browse products from (taxon "([^"]+)")$/
-     * @When /^I check the ("[^"]+" taxon)'s details$/
-     */
+    #[When('/^I try to browse products from (taxon "([^"]+)")$/')]
+    #[When('/^I check the ("[^"]+" taxon)\'s details$/')]
     public function iTryToBrowseProductsFrom(TaxonInterface $taxon): void
     {
         $this->objectManager->clear(); // avoiding doctrine cache
         $this->client->show(Resources::TAXONS, $taxon->getCode());
     }
 
-    /**
-     * @Then I should not see :taxon in the vertical menu
-     */
+    #[Then('I should not see :taxon in the vertical menu')]
     public function iShouldNotSeeInTheVerticalMenu(TaxonInterface $taxon): void
     {
         Assert::false(
@@ -53,9 +51,7 @@ final readonly class TaxonContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the taxon name :name
-     */
+    #[Then('I should see the taxon name :name')]
     public function iShouldSeeTaxonName(string $name): void
     {
         Assert::true(
@@ -64,9 +60,7 @@ final readonly class TaxonContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see ("([^"]+)" and "([^"]+)" in the vertical menu)$/
-     */
+    #[Then('/^I should see ("([^"]+)" and "([^"]+)" in the vertical menu)$/')]
     public function iShouldSeeInTheVerticalMenu(iterable $taxons): void
     {
         foreach ($taxons as $taxon) {
