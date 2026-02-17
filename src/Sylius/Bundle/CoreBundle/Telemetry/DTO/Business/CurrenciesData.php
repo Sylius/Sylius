@@ -18,10 +18,13 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class CurrenciesData implements TelemetryDataInterface
 {
+    /** @var list<string> */
+    public $currencies;
+
     /** @param list<string> $currencies */
-    public function __construct(
-        public array $currencies,
-    ) {
+    public function __construct(array $currencies)
+    {
+        $this->currencies = $currencies;
     }
 
     public function normalize(): array

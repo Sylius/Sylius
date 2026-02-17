@@ -23,8 +23,12 @@ use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
 /** @internal */
 final class ShippingMethodsDataProvider implements DataProviderInterface
 {
-    public function __construct(private Connection $connection)
+    /** @var Connection */
+    private $connection;
+
+    public function __construct(Connection $connection)
     {
+        $this->connection = $connection;
     }
 
     public function provide(): TelemetryDataInterface
@@ -43,20 +47,20 @@ final class ShippingMethodsDataProvider implements DataProviderInterface
                  ) s ON s.method_id = sm.id
                  WHERE sm.is_enabled = :enabled
                  GROUP BY sm.id, sm.code, sm.calculator',
-                ['enabled' => true, 'oneMonthAgo' => $oneMonthAgo],
+                ['enabled' => true, 'oneMonthAgo' => $oneMonthAgo]
             );
 
             $providers = [];
             foreach ($results as $row) {
                 $providers[] = new ShippingProviderData(
-                    name: $row['code'],
-                    calculator: $row['calculator'] ?? '',
-                    shipmentsCount: ValueRangeMapper::mapShipmentsCount((int) $row['shipments_count']),
+                    $row['code'],
+                    $row['calculator'] ?? '',
+                    ValueRangeMapper::mapShipmentsCount((int) $row['shipments_count'])
                 );
             }
 
             return new ShippingMethodsData(...$providers);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return new ShippingMethodsData();
         }
     }

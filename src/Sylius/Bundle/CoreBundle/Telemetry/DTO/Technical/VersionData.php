@@ -18,14 +18,38 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class VersionData implements TelemetryDataInterface
 {
+    /** @var string */
+    public $syliusVersion;
+
+    /** @var string */
+    public $phpVersion;
+
+    /** @var string */
+    public $symfonyVersion;
+
+    /** @var string|null */
+    public $doctrineVersion;
+
+    /** @var string|null */
+    public $twigVersion;
+
+    /** @var string|null */
+    public $apiPlatformVersion;
+
     public function __construct(
-        public string $syliusVersion,
-        public string $phpVersion,
-        public string $symfonyVersion,
-        public ?string $doctrineVersion,
-        public ?string $twigVersion,
-        public ?string $apiPlatformVersion,
+        string $syliusVersion,
+        string $phpVersion,
+        string $symfonyVersion,
+        ?string $doctrineVersion,
+        ?string $twigVersion,
+        ?string $apiPlatformVersion
     ) {
+        $this->syliusVersion = $syliusVersion;
+        $this->phpVersion = $phpVersion;
+        $this->symfonyVersion = $symfonyVersion;
+        $this->doctrineVersion = $doctrineVersion;
+        $this->twigVersion = $twigVersion;
+        $this->apiPlatformVersion = $apiPlatformVersion;
     }
 
     public function normalize(): array

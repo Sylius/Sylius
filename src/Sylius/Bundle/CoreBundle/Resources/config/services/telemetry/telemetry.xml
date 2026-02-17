@@ -184,11 +184,6 @@
             class="Sylius\Bundle\CoreBundle\Telemetry\Sender\TelemetrySender"
             lazy="Sylius\Component\Core\Telemetry\Sender\TelemetrySenderInterface"
         >
-            <argument type="service">
-                <service class="Symfony\Component\HttpClient\HttpClient">
-                    <factory class="Symfony\Component\HttpClient\HttpClient" method="create" />
-                </service>
-            </argument>
             <argument>%sylius_core.telemetry.url%</argument>
         </service>
 

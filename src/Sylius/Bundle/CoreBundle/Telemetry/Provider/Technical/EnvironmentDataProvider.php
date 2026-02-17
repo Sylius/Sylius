@@ -20,19 +20,23 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class EnvironmentDataProvider implements DataProviderInterface
 {
-    public function __construct(private string $appEnvironment)
+    /** @var string */
+    private $appEnvironment;
+
+    public function __construct(string $appEnvironment)
     {
+        $this->appEnvironment = $appEnvironment;
     }
 
     public function provide(): TelemetryDataInterface
     {
         return new EnvironmentData(
-            app: $this->appEnvironment,
-            webserver: $this->getWebServerSoftware(),
-            os: PHP_OS_FAMILY,
-            docker: $this->isRunningInDocker(),
-            ramGb: $this->getSystemMemoryInGb(),
-            phpMemoryLimit: ini_get('memory_limit') ?: null,
+            $this->appEnvironment,
+            $this->getWebServerSoftware(),
+            PHP_OS_FAMILY,
+            $this->isRunningInDocker(),
+            $this->getSystemMemoryInGb(),
+            ini_get('memory_limit') ?: null
         );
     }
 
@@ -52,12 +56,16 @@ final class EnvironmentDataProvider implements DataProviderInterface
 
     private function getSystemMemoryInGb(): ?float
     {
-        return match (PHP_OS_FAMILY) {
-            'Linux' => $this->getLinuxMemory(),
-            'Darwin' => $this->getMacOsMemory(),
-            'Windows' => $this->getWindowsMemory(),
-            default => null,
-        };
+        switch (PHP_OS_FAMILY) {
+            case 'Linux':
+                return $this->getLinuxMemory();
+            case 'Darwin':
+                return $this->getMacOsMemory();
+            case 'Windows':
+                return $this->getWindowsMemory();
+            default:
+                return null;
+        }
     }
 
     private function getLinuxMemory(): ?float
@@ -95,7 +103,7 @@ final class EnvironmentDataProvider implements DataProviderInterface
             }
 
             return round($bytes / 1024 / 1024 / 1024, 2);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return null;
         }
     }
@@ -120,7 +128,7 @@ final class EnvironmentDataProvider implements DataProviderInterface
             }
 
             return null;
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return null;
         }
     }

@@ -27,12 +27,12 @@ final class VersionDataProvider implements DataProviderInterface
     public function provide(): TelemetryDataInterface
     {
         return new VersionData(
-            syliusVersion: SyliusCoreBundle::VERSION,
-            phpVersion: PHP_VERSION,
-            symfonyVersion: Kernel::VERSION,
-            doctrineVersion: $this->getInstalledPackageVersion('doctrine/orm'),
-            twigVersion: Environment::VERSION,
-            apiPlatformVersion: $this->getInstalledPackageVersion('api-platform/core'),
+            SyliusCoreBundle::VERSION,
+            PHP_VERSION,
+            Kernel::VERSION,
+            $this->getInstalledPackageVersion('doctrine/orm'),
+            Environment::VERSION,
+            $this->getInstalledPackageVersion('api-platform/core')
         );
     }
 

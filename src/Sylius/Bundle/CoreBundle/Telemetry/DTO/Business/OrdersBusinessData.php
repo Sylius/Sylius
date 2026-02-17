@@ -18,15 +18,27 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class OrdersBusinessData implements TelemetryDataInterface
 {
+    /** @var array<string, string> */
+    public $gmvMonthly;
+
+    /** @var array<string, string> */
+    public $aovMonthly;
+
+    /** @var OrderMetricsData */
+    public $metrics;
+
     /**
      * @param array<string, string> $gmvMonthly
      * @param array<string, string> $aovMonthly
      */
     public function __construct(
-        public array $gmvMonthly,
-        public array $aovMonthly,
-        public OrderMetricsData $metrics,
+        array $gmvMonthly,
+        array $aovMonthly,
+        OrderMetricsData $metrics
     ) {
+        $this->gmvMonthly = $gmvMonthly;
+        $this->aovMonthly = $aovMonthly;
+        $this->metrics = $metrics;
     }
 
     public function normalize(): array

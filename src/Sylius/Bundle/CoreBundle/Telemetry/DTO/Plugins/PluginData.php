@@ -18,10 +18,16 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class PluginData implements TelemetryDataInterface
 {
-    public function __construct(
-        public string $name,
-        public string $version,
-    ) {
+    /** @var string */
+    public $name;
+
+    /** @var string */
+    public $version;
+
+    public function __construct(string $name, string $version)
+    {
+        $this->name = $name;
+        $this->version = $version;
     }
 
     /** @return array<string, string> */

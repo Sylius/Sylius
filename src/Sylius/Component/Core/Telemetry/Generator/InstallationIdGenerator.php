@@ -19,10 +19,16 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /** @internal */
 final class InstallationIdGenerator implements InstallationIdGeneratorInterface
 {
-    public function __construct(
-        private string $salt,
-        private RequestStack $requestStack,
-    ) {
+    /** @var string */
+    private $salt;
+
+    /** @var RequestStack */
+    private $requestStack;
+
+    public function __construct(string $salt, RequestStack $requestStack)
+    {
+        $this->salt = $salt;
+        $this->requestStack = $requestStack;
     }
 
     public function generate(): string
@@ -43,7 +49,8 @@ final class InstallationIdGenerator implements InstallationIdGeneratorInterface
 
     private function getHostname(): string
     {
-        $host = $this->requestStack->getMainRequest()?->getHost();
+        $mainRequest = $this->requestStack->getMainRequest();
+        $host = $mainRequest !== null ? $mainRequest->getHost() : null;
         if (null !== $host && '' !== trim($host)) {
             return mb_strtolower(trim($host));
         }

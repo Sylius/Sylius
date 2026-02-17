@@ -19,10 +19,16 @@ use Symfony\Component\HttpKernel\Event\TerminateEvent;
 /** @internal */
 class TelemetryListener
 {
-    public function __construct(
-        private TelemetrySendManagerInterface $telemetrySendManager,
-        private string $adminApiPrefix,
-    ) {
+    /** @var TelemetrySendManagerInterface */
+    private $telemetrySendManager;
+
+    /** @var string */
+    private $adminApiPrefix;
+
+    public function __construct(TelemetrySendManagerInterface $telemetrySendManager, string $adminApiPrefix)
+    {
+        $this->telemetrySendManager = $telemetrySendManager;
+        $this->adminApiPrefix = $adminApiPrefix;
     }
 
     public function onAdminAccess(TerminateEvent $event): void
@@ -35,17 +41,17 @@ class TelemetryListener
 
         try {
             $this->telemetrySendManager->sendIfNeeded();
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
         }
     }
 
     private function isAdminRequest(?string $route, string $path): bool
     {
-        if ($route !== null && str_starts_with($route, 'sylius_admin_')) {
+        if ($route !== null && strpos($route, 'sylius_admin_') === 0) {
             return true;
         }
 
-        if (str_starts_with($path, $this->adminApiPrefix)) {
+        if (strpos($path, $this->adminApiPrefix) === 0) {
             return true;
         }
 

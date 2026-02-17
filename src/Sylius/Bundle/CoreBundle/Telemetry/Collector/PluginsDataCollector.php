@@ -19,13 +19,19 @@ use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 /** @internal */
 final class PluginsDataCollector implements TelemetryDataCollectorInterface
 {
+    /** @var iterable<DataProviderInterface> */
+    private $dataProviders;
+
+    /** @var bool */
+    private $enabled;
+
     /**
      * @param iterable<DataProviderInterface> $dataProviders
      */
-    public function __construct(
-        private iterable $dataProviders,
-        private bool $enabled = true,
-    ) {
+    public function __construct(iterable $dataProviders, bool $enabled = true)
+    {
+        $this->dataProviders = $dataProviders;
+        $this->enabled = $enabled;
     }
 
     public function getName(): string
@@ -50,7 +56,7 @@ final class PluginsDataCollector implements TelemetryDataCollectorInterface
             try {
                 $dto = $dataProvider->provide();
                 $pluginsData = array_merge($pluginsData, $dto->normalize());
-            } catch (\Throwable) {
+            } catch (\Throwable $e) {
             }
         }
 

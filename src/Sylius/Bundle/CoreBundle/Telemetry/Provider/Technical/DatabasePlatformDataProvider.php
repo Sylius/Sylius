@@ -23,22 +23,26 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class DatabasePlatformDataProvider implements DataProviderInterface
 {
-    public function __construct(private ManagerRegistry $managerRegistry)
+    /** @var ManagerRegistry */
+    private $managerRegistry;
+
+    public function __construct(ManagerRegistry $managerRegistry)
     {
+        $this->managerRegistry = $managerRegistry;
     }
 
     public function provide(): TelemetryDataInterface
     {
         $connection = $this->getConnection();
         if (null === $connection) {
-            return new DatabaseData(type: null, version: null);
+            return new DatabaseData(null, null);
         }
 
         $databaseType = $this->guessDatabaseType($connection);
 
         return new DatabaseData(
-            type: $databaseType,
-            version: $this->detectDatabaseVersion($connection, $databaseType),
+            $databaseType,
+            $this->detectDatabaseVersion($connection, $databaseType)
         );
     }
 
@@ -46,7 +50,7 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
     {
         try {
             return $this->managerRegistry->getConnection();
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return null;
         }
     }
@@ -58,7 +62,7 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
             if ($platform instanceof AbstractPlatform) {
                 return $platform->getName();
             }
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
         }
 
         $params = $connection->getParams();
@@ -71,14 +75,23 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
 
     private function mapDriverToDatabase(string $driver): ?string
     {
-        return match (true) {
-            str_contains($driver, 'mysql') || str_contains($driver, 'mysqli') => 'mysql',
-            str_contains($driver, 'pgsql') || str_contains($driver, 'postgres') => 'postgresql',
-            str_contains($driver, 'sqlite') => 'sqlite',
-            str_contains($driver, 'sqlsrv') || str_contains($driver, 'mssql') => 'mssql',
-            str_contains($driver, 'oci') || str_contains($driver, 'oracle') => 'oracle',
-            default => null,
-        };
+        if (strpos($driver, 'mysql') !== false || strpos($driver, 'mysqli') !== false) {
+            return 'mysql';
+        }
+        if (strpos($driver, 'pgsql') !== false || strpos($driver, 'postgres') !== false) {
+            return 'postgresql';
+        }
+        if (strpos($driver, 'sqlite') !== false) {
+            return 'sqlite';
+        }
+        if (strpos($driver, 'sqlsrv') !== false || strpos($driver, 'mssql') !== false) {
+            return 'mssql';
+        }
+        if (strpos($driver, 'oci') !== false || strpos($driver, 'oracle') !== false) {
+            return 'oracle';
+        }
+
+        return null;
     }
 
     private function detectDatabaseVersion(Connection $connection, ?string $databaseType): ?string
@@ -95,7 +108,7 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
                 if (is_string($result) && '' !== trim($result)) {
                     return $result;
                 }
-            } catch (\Throwable) {
+            } catch (\Throwable $e) {
             }
         }
 
@@ -107,30 +120,36 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
      */
     private function getVersionQueries(?string $databaseType): array
     {
-        return match ($databaseType) {
-            'postgresql' => [
-                'SHOW server_version',
-                "SELECT current_setting('server_version')",
-                'SELECT VERSION()',
-            ],
-            'mysql' => [
-                'SELECT VERSION()',
-            ],
-            'sqlite' => [
-                'SELECT sqlite_version()',
-            ],
-            'mssql' => [
-                'SELECT @@VERSION',
-                "SELECT SERVERPROPERTY('ProductVersion')",
-            ],
-            'oracle' => [
-                "SELECT BANNER FROM v\$version WHERE BANNER LIKE 'Oracle%'",
-                "SELECT version FROM v\$instance",
-                "SELECT * FROM PRODUCT_COMPONENT_VERSION WHERE PRODUCT LIKE 'Oracle%'",
-            ],
-            default => [
-                'SELECT VERSION()',
-            ],
-        };
+        switch ($databaseType) {
+            case 'postgresql':
+                return [
+                    'SHOW server_version',
+                    "SELECT current_setting('server_version')",
+                    'SELECT VERSION()',
+                ];
+            case 'mysql':
+                return [
+                    'SELECT VERSION()',
+                ];
+            case 'sqlite':
+                return [
+                    'SELECT sqlite_version()',
+                ];
+            case 'mssql':
+                return [
+                    'SELECT @@VERSION',
+                    "SELECT SERVERPROPERTY('ProductVersion')",
+                ];
+            case 'oracle':
+                return [
+                    "SELECT BANNER FROM v\$version WHERE BANNER LIKE 'Oracle%'",
+                    "SELECT version FROM v\$instance",
+                    "SELECT * FROM PRODUCT_COMPONENT_VERSION WHERE PRODUCT LIKE 'Oracle%'",
+                ];
+            default:
+                return [
+                    'SELECT VERSION()',
+                ];
+        }
     }
 }

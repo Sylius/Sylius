@@ -19,7 +19,7 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 final class PaymentMethodsData implements TelemetryDataInterface
 {
     /** @var list<PaymentProviderData> */
-    public array $paymentProviders;
+    public $paymentProviders;
 
     public function __construct(PaymentProviderData ...$paymentProviders)
     {
@@ -31,7 +31,7 @@ final class PaymentMethodsData implements TelemetryDataInterface
         return [
             'payment_providers' => array_map(
                 static fn (PaymentProviderData $provider) => $provider->normalize(),
-                $this->paymentProviders,
+                $this->paymentProviders
             ),
         ];
     }

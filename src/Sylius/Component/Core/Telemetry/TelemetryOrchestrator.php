@@ -21,13 +21,21 @@ final class TelemetryOrchestrator implements TelemetryOrchestratorInterface
 {
     private const SCHEMA_VERSION = 1;
 
+    /** @var InstallationIdGeneratorInterface */
+    private $installationIdGenerator;
+
+    /** @var iterable<TelemetryDataCollectorInterface> */
+    private $collectors;
+
     /**
      * @param iterable<TelemetryDataCollectorInterface> $collectors
      */
     public function __construct(
-        private InstallationIdGeneratorInterface $installationIdGenerator,
-        private iterable $collectors,
+        InstallationIdGeneratorInterface $installationIdGenerator,
+        iterable $collectors
     ) {
+        $this->installationIdGenerator = $installationIdGenerator;
+        $this->collectors = $collectors;
     }
 
     public function getData(): array
@@ -57,12 +65,12 @@ final class TelemetryOrchestrator implements TelemetryOrchestratorInterface
                     }
 
                     $data[$collector->getName()] = $collector->collect();
-                } catch (\Throwable) {
+                } catch (\Throwable $e) {
                 }
             }
 
             return $data;
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             $now = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
 
             return [

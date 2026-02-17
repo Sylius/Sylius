@@ -18,10 +18,16 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class DatabaseData implements TelemetryDataInterface
 {
-    public function __construct(
-        public ?string $type,
-        public ?string $version,
-    ) {
+    /** @var string|null */
+    public $type;
+
+    /** @var string|null */
+    public $version;
+
+    public function __construct(?string $type, ?string $version)
+    {
+        $this->type = $type;
+        $this->version = $version;
     }
 
     public function normalize(): array
