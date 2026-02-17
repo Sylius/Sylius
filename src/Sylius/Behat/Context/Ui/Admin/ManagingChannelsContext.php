@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElementInterface;
@@ -49,46 +52,36 @@ final class ManagingChannelsContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to create a new channel
-     */
+    #[When('I want to create a new channel')]
     public function iWantToCreateANewChannel(): void
     {
         $this->createPage->open();
     }
 
-    /**
-     * @When I specify its code as :code
-     * @When I do not specify its code
-     */
+    #[When('I specify its code as :code')]
+    #[When('I do not specify its code')]
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
 
-    /**
-     * @When I name it :name
-     * @When I rename it to :name
-     * @When I do not name it
-     * @When I remove its name
-     */
+    #[When('I name it :name')]
+    #[When('I rename it to :name')]
+    #[When('I do not name it')]
+    #[When('I remove its name')]
     public function iNameIt(?string $name = null): void
     {
         $this->createPage->nameIt($name ?? '');
     }
 
-    /**
-     * @When I specify its name as a too long string
-     */
+    #[When('I specify its name as a too long string')]
     public function iSpecifyItsNameAsATooLongString(): void
     {
         $this->createPage->nameIt($this->getTooLongString());
     }
 
-    /**
-     * @When I choose :currency as the base currency
-     * @When I do not choose base currency
-     */
+    #[When('I choose :currency as the base currency')]
+    #[When('I do not choose base currency')]
     public function iChooseAsABaseCurrency(?CurrencyInterface $currency = null): void
     {
         if (null !== $currency) {
@@ -96,10 +89,8 @@ final class ManagingChannelsContext implements Context
         }
     }
 
-    /**
-     * @When I choose :defaultLocaleName as a default locale
-     * @When I do not choose default locale
-     */
+    #[When('I choose :defaultLocaleName as a default locale')]
+    #[When('I do not choose default locale')]
     public function iChooseAsADefaultLocale(?string $defaultLocaleName = null): void
     {
         if (null !== $defaultLocaleName) {
@@ -107,61 +98,47 @@ final class ManagingChannelsContext implements Context
         }
     }
 
-    /**
-     * @When I choose :firstCountry and :secondCountry as operating countries
-     */
+    #[When('I choose :firstCountry and :secondCountry as operating countries')]
     public function iChooseOperatingCountries(string ...$countries): void
     {
         $this->createPage->chooseOperatingCountries($countries);
     }
 
-    /**
-     * @When I specify menu taxon as :menuTaxon
-     * @When I change its menu taxon to :menuTaxon
-     */
+    #[When('I specify menu taxon as :menuTaxon')]
+    #[When('I change its menu taxon to :menuTaxon')]
     public function iSpecifyMenuTaxonAs(string $menuTaxon): void
     {
         $this->resolveCurrentPage()->specifyMenuTaxon($menuTaxon);
     }
 
-    /**
-     * @When I allow to skip shipping step if only one shipping method is available
-     */
+    #[When('I allow to skip shipping step if only one shipping method is available')]
     public function iAllowToSkipShippingStepIfOnlyOneShippingMethodIsAvailable(): void
     {
         $this->createPage->allowToSkipShippingStep();
     }
 
-    /**
-     * @When I allow to skip payment step if only one payment method is available
-     */
+    #[When('I allow to skip payment step if only one payment method is available')]
     public function iAllowToSkipPaymentStepIfOnlyOnePaymentMethodIsAvailable(): void
     {
         $this->createPage->allowToSkipPaymentStep();
     }
 
-    /**
-     * @When I add it
-     * @When I try to add it
-     */
+    #[When('I add it')]
+    #[When('I try to add it')]
     public function iAddIt(): void
     {
         $this->createPage->create();
     }
 
-    /**
-     * @When /^I choose (billing|shipping) address as a required address in the checkout$/
-     */
+    #[When('/^I choose (billing|shipping) address as a required address in the checkout$/')]
     public function iChooseAddressAsARequiredAddressInTheCheckout(string $type): void
     {
         $this->shippingAddressInCheckoutRequiredElement->requireAddressTypeInCheckout($type);
     }
 
-    /**
-     * @Then I should see the channel :channelName in the list
-     * @Then the channel :channelName should appear in the registry
-     * @Then the channel :channelName should be in the registry
-     */
+    #[Then('I should see the channel :channelName in the list')]
+    #[Then('the channel :channelName should appear in the registry')]
+    #[Then('the channel :channelName should be in the registry')]
     public function theChannelShouldAppearInTheRegistry(string $channelName): void
     {
         $this->iWantToBrowseChannels();
@@ -169,97 +146,73 @@ final class ManagingChannelsContext implements Context
         Assert::true($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $channelName]));
     }
 
-    /**
-     * @Then /^(this channel) should still be in the registry$/
-     */
+    #[Then('/^(this channel) should still be in the registry$/')]
     public function thisChannelShouldAppearInTheRegistry(ChannelInterface $channel): void
     {
         $this->theChannelShouldAppearInTheRegistry($channel->getName());
     }
 
-    /**
-     * @When I describe it as :description
-     */
+    #[When('I describe it as :description')]
     public function iDescribeItAs(string $description): void
     {
         $this->createPage->describeItAs($description);
     }
 
-    /**
-     * @When I set its hostname as :hostname
-     */
+    #[When('I set its hostname as :hostname')]
     public function iSetItsHostnameAs(string $hostname): void
     {
         $this->createPage->setHostname($hostname);
     }
 
-    /**
-     * @When I specify its hostname as a too long string
-     */
+    #[When('I specify its hostname as a too long string')]
     public function iSpecifyItsHostnameAsATooLongString(): void
     {
         $this->createPage->setHostname($this->getTooLongString());
     }
 
-    /**
-     * @When I set its contact email as :contactEmail
-     */
+    #[When('I set its contact email as :contactEmail')]
     public function iSetItsContactEmailAs(string $contactEmail): void
     {
         $this->createPage->setContactEmail($contactEmail);
     }
 
-    /**
-     * @When I specify its contact email as a too long string
-     */
+    #[When('I specify its contact email as a too long string')]
     public function iSpecifyItsContactEmailAsATooLongString(): void
     {
         $this->createPage->setContactEmail($this->getTooLongString());
     }
 
-    /**
-     * @When I set its contact phone number as :contactPhoneNumber
-     */
+    #[When('I set its contact phone number as :contactPhoneNumber')]
     public function iSetItsContactPhoneNumberAs(string $contactPhoneNumber): void
     {
         $this->createPage->setContactPhoneNumber($contactPhoneNumber);
     }
 
-    /**
-     * @When I specify its contact phone number as a too long string
-     */
+    #[When('I specify its contact phone number as a too long string')]
     public function iSpecifyItsContactPhoneNumberAsATooLongString(): void
     {
         $this->createPage->setContactPhoneNumber($this->getTooLongString());
     }
 
-    /**
-     * @When I define its color as :color
-     */
+    #[When('I define its color as :color')]
     public function iDefineItsColorAs(string $color): void
     {
         $this->createPage->defineColor($color);
     }
 
-    /**
-     * @When I specify its color as a too long string
-     */
+    #[When('I specify its color as a too long string')]
     public function iSpecifyItsColorAsATooLongString(): void
     {
         $this->createPage->defineColor($this->getTooLongString());
     }
 
-    /**
-     * @When I enable it
-     */
+    #[When('I enable it')]
     public function iEnableIt(): void
     {
         $this->updatePage->enable();
     }
 
-    /**
-     * @When I disable it
-     */
+    #[When('I disable it')]
     public function iDisableIt(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -268,17 +221,13 @@ final class ManagingChannelsContext implements Context
         $currentPage->disable();
     }
 
-    /**
-     * @When I exclude the :taxon taxon from showing the lowest price of discounted products
-     */
+    #[When('I exclude the :taxon taxon from showing the lowest price of discounted products')]
     public function iExcludeTheTaxonFromShowingTheLowestPriceOfDiscountedProducts(TaxonInterface $taxon): void
     {
         $this->excludeTaxonsFromShowingLowestPriceInputElement->excludeTaxon($taxon);
     }
 
-    /**
-     * @When /^I exclude the ("([^"]+)" and "([^"]+)" taxons) from showing the lowest price of discounted products$/
-     */
+    #[When('/^I exclude the ("([^"]+)" and "([^"]+)" taxons) from showing the lowest price of discounted products$/')]
     public function iExcludeTheTaxonsFromShowingTheLowestPriceOfDiscountedProducts(iterable $taxons): void
     {
         foreach ($taxons as $taxon) {
@@ -286,17 +235,13 @@ final class ManagingChannelsContext implements Context
         }
     }
 
-    /**
-     * @When I remove the :taxon taxon from excluded taxons from showing the lowest price of discounted products
-     */
+    #[When('I remove the :taxon taxon from excluded taxons from showing the lowest price of discounted products')]
     public function iRemoveTheTaxonFromExcludedTaxonsFromShowingTheLowestPriceOfDiscountedProducts(TaxonInterface $taxon): void
     {
         $this->excludeTaxonsFromShowingLowestPriceInputElement->removeExcludedTaxon($taxon);
     }
 
-    /**
-     * @Then I should be notified that at least one channel has to be defined
-     */
+    #[Then('I should be notified that at least one channel has to be defined')]
     public function iShouldBeNotifiedThatAtLeastOneChannelHasToBeDefinedIsRequired(): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -305,9 +250,7 @@ final class ManagingChannelsContext implements Context
         Assert::same($currentPage->getValidationMessage('enabled'), 'Must have at least one enabled entity');
     }
 
-    /**
-     * @Then channel with :element :value should not be added
-     */
+    #[Then('channel with :element :value should not be added')]
     public function channelWithShouldNotBeAdded(string $element, string $value): void
     {
         $this->iWantToBrowseChannels();
@@ -315,9 +258,7 @@ final class ManagingChannelsContext implements Context
         Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
     }
 
-    /**
-     * @Then /^I should be notified that ([^"]+) is required$/
-     */
+    #[Then('/^I should be notified that ([^"]+) is required$/')]
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -329,21 +270,17 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @Given I am modifying a channel :channel
-     * @When I want to modify a channel :channel
-     * @When /^I want to modify (this channel)$/
-     * @When I want to modify a billing data of channel :channel
-     */
+    #[Given('I am modifying a channel :channel')]
+    #[When('I want to modify a channel :channel')]
+    #[When('/^I want to modify (this channel)$/')]
+    #[When('I want to modify a billing data of channel :channel')]
     public function iWantToModifyChannel(ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
     }
 
-    /**
-     * @Then /^(this channel) name should be "([^"]+)"$/
-     * @Then /^(this channel) should still be named "([^"]+)"$/
-     */
+    #[Then('/^(this channel) name should be "([^"]+)"$/')]
+    #[Then('/^(this channel) should still be named "([^"]+)"$/')]
     public function thisChannelNameShouldBe(ChannelInterface $channel, string $channelName): void
     {
         $this->iWantToBrowseChannels();
@@ -354,17 +291,13 @@ final class ManagingChannelsContext implements Context
         ]));
     }
 
-    /**
-     * @Then I should be notified that channel with this code already exists
-     */
+    #[Then('I should be notified that channel with this code already exists')]
     public function iShouldBeNotifiedThatChannelWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'Channel code has to be unique.');
     }
 
-    /**
-     * @Then there should still be only one channel with :element :value
-     */
+    #[Then('there should still be only one channel with :element :value')]
     public function thereShouldStillBeOnlyOneChannelWithCode(string $element, string $value): void
     {
         $this->iWantToBrowseChannels();
@@ -372,86 +305,66 @@ final class ManagingChannelsContext implements Context
         Assert::true($this->indexPage->isSingleResourceOnPage([$element => $value]));
     }
 
-    /**
-     * @When I browse channels
-     * @When I want to browse channels
-     */
+    #[When('I browse channels')]
+    #[When('I want to browse channels')]
     public function iWantToBrowseChannels(): void
     {
         $this->indexPage->open();
     }
 
-    /**
-     * @When I check (also) the :channelName channel
-     */
+    #[When('I check (also) the :channelName channel')]
     public function iCheckTheChannel(string $channelName): void
     {
         $this->indexPage->checkResourceOnPage(['nameAndDescription' => $channelName]);
     }
 
-    /**
-     * @When I delete them
-     */
+    #[When('I delete them')]
     public function iDeleteThem(): void
     {
         $this->indexPage->bulkDelete();
     }
 
-    /**
-     * @Then I should see a single channel in the list
-     * @Then I should see :numberOfChannels channels in the list
-     */
+    #[Then('I should see a single channel in the list')]
+    #[Then('I should see :numberOfChannels channels in the list')]
     public function iShouldSeeChannelsInTheList(int $numberOfChannels = 1): void
     {
         Assert::same($this->indexPage->countItems(), $numberOfChannels);
     }
 
-    /**
-     * @Then the code field should be disabled
-     * @Then I should not be able to edit its code
-     */
+    #[Then('the code field should be disabled')]
+    #[Then('I should not be able to edit its code')]
     public function theCodeFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
 
-    /**
-     * @Then /^(this channel) should be disabled$/
-     */
+    #[Then('/^(this channel) should be disabled$/')]
     public function thisChannelShouldBeDisabled(ChannelInterface $channel): void
     {
         $this->assertChannelState($channel, false);
     }
 
-    /**
-     * @Then /^(this channel) should be enabled$/
-     * @Then channel with name :channel should still be enabled
-     */
+    #[Then('/^(this channel) should be enabled$/')]
+    #[Then('channel with name :channel should still be enabled')]
     public function thisChannelShouldBeEnabled(ChannelInterface $channel): void
     {
         $this->assertChannelState($channel, true);
     }
 
-    /**
-     * @When I delete channel :channel
-     */
+    #[When('I delete channel :channel')]
     public function iDeleteChannel(ChannelInterface $channel): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['nameAndDescription' => $channel->getName()]);
     }
 
-    /**
-     * @Then the :channelName channel should no longer exist in the registry
-     */
+    #[Then('the :channelName channel should no longer exist in the registry')]
     public function thisChannelShouldNoLongerExistInTheRegistry(string $channelName): void
     {
         Assert::false($this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $channelName]));
     }
 
-    /**
-     * @Then I should be notified that it cannot be deleted
-     */
+    #[Then('I should be notified that it cannot be deleted')]
     public function iShouldBeNotifiedThatItCannotBeDeleted(): void
     {
         $this->notificationChecker->checkNotification(
@@ -460,9 +373,7 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @When I make it available (only) in :nameOfLocale
-     */
+    #[When('I make it available (only) in :nameOfLocale')]
     public function iMakeItAvailableIn(string $nameOfLocale): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -471,9 +382,7 @@ final class ManagingChannelsContext implements Context
         $currentPage->chooseLocale($nameOfLocale);
     }
 
-    /**
-     * @Then the channel :channel should be available in :nameOfLocale
-     */
+    #[Then('the channel :channel should be available in :nameOfLocale')]
     public function theChannelShouldBeAvailableIn(ChannelInterface $channel, string $nameOfLocale): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
@@ -481,9 +390,7 @@ final class ManagingChannelsContext implements Context
         Assert::inArray($nameOfLocale, $this->updatePage->getLocales());
     }
 
-    /**
-     * @When I allow for paying in :currencyCode
-     */
+    #[When('I allow for paying in :currencyCode')]
     public function iAllowToPayingForThisChannel(string $currencyCode): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -492,9 +399,7 @@ final class ManagingChannelsContext implements Context
         $currentPage->chooseCurrency($currencyCode);
     }
 
-    /**
-     * @Then paying in :currency should be possible for the :channel channel
-     */
+    #[Then('paying in :currency should be possible for the :channel channel')]
     public function payingInCurrencyShouldBePossibleForTheChannel(CurrencyInterface $currency, ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
@@ -502,9 +407,7 @@ final class ManagingChannelsContext implements Context
         Assert::inArray($currency->getName(), $this->updatePage->getCurrencies());
     }
 
-    /**
-     * @When I select the :taxZone as default tax zone
-     */
+    #[When('I select the :taxZone as default tax zone')]
     public function iSelectDefaultTaxZone(string $taxZone): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -513,17 +416,13 @@ final class ManagingChannelsContext implements Context
         $currentPage->chooseDefaultTaxZone($taxZone);
     }
 
-    /**
-     * @Given I remove its default tax zone
-     */
+    #[Given('I remove its default tax zone')]
     public function iRemoveItsDefaultTaxZone(): void
     {
         $this->updatePage->chooseDefaultTaxZone('');
     }
 
-    /**
-     * @When I select the :taxCalculationStrategy as tax calculation strategy
-     */
+    #[When('I select the :taxCalculationStrategy as tax calculation strategy')]
     public function iSelectTaxCalculationStrategy(string $taxCalculationStrategy): void
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
@@ -532,18 +431,14 @@ final class ManagingChannelsContext implements Context
         $currentPage->chooseTaxCalculationStrategy($taxCalculationStrategy);
     }
 
-    /**
-     * @When /^I specify (-?\d+) days as the lowest price for discounted products checking period$/
-     */
+    #[When('/^I specify (-?\d+) days as the lowest price for discounted products checking period$/')]
     public function iSpecifyDaysAsTheLowestPriceForDiscountedProductsCheckingPeriod(int $days): void
     {
         $this->discountedProductsCheckingPeriodInputElement->specifyPeriod($days);
     }
 
-    /**
-     * @Then /^the "[^"]+" channel should have the lowest price for discounted products checking period set to (\d+) days$/
-     * @Then its lowest price for discounted products checking period should be set to :days days
-     */
+    #[Then('/^the "[^"]+" channel should have the lowest price for discounted products checking period set to (\d+) days$/')]
+    #[Then('its lowest price for discounted products checking period should be set to :days days')]
     public function theChannelShouldHaveTheLowestPriceForDiscountedProductsCheckingPeriodSetToDays(int $days): void
     {
         $lowestPriceForDiscountedProductsCheckingPeriod = $this->discountedProductsCheckingPeriodInputElement->getPeriod();
@@ -551,9 +446,7 @@ final class ManagingChannelsContext implements Context
         Assert::same($days, $lowestPriceForDiscountedProductsCheckingPeriod);
     }
 
-    /**
-     * @Then I should be notified that the lowest price for discounted products checking period must be lower
-     */
+    #[Then('I should be notified that the lowest price for discounted products checking period must be lower')]
     public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeLower(): void
     {
         Assert::same(
@@ -562,17 +455,13 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @When /^I (enable|disable) showing the lowest price of discounted products$/
-     */
+    #[When('/^I (enable|disable) showing the lowest price of discounted products$/')]
     public function iEnableShowingTheLowestPriceOfDiscountedProducts(string $visible): void
     {
         $this->lowestPriceFlagElement->$visible();
     }
 
-    /**
-     * @Then I should be notified that the lowest price for discounted products checking period must be greater than 0
-     */
+    #[Then('I should be notified that the lowest price for discounted products checking period must be greater than 0')]
     public function iShouldBeNotifiedThatTheLowestPriceForDiscountedProductsCheckingPeriodMustBeGreaterThanZero(): void
     {
         Assert::same(
@@ -581,9 +470,7 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @Then /^the ("[^"]+" channel) should have the lowest price of discounted products prior to the current discount (enabled|disabled)$/
-     */
+    #[Then('/^the ("[^"]+" channel) should have the lowest price of discounted products prior to the current discount (enabled|disabled)$/')]
     public function theChannelShouldHaveTheLowestPriceOfDiscountedProductsPriorToTheCurrentDiscountEnabledOrDisabled(
         ChannelInterface $channel,
         string $visible,
@@ -594,9 +481,7 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @Then /^this channel should have ("([^"]+)" and "([^"]+)" taxons) excluded from displaying the lowest price of discounted products$/
-     */
+    #[Then('/^this channel should have ("([^"]+)" and "([^"]+)" taxons) excluded from displaying the lowest price of discounted products$/')]
     public function thisChannelShouldHaveTaxonsExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(iterable $taxons): void
     {
         foreach ($taxons as $taxon) {
@@ -607,9 +492,7 @@ final class ManagingChannelsContext implements Context
         }
     }
 
-    /**
-     * @Then the default tax zone for the :channel channel should be :taxZone
-     */
+    #[Then('the default tax zone for the :channel channel should be :taxZone')]
     public function theDefaultTaxZoneForTheChannelShouldBe(ChannelInterface $channel, string $taxZone): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
@@ -617,9 +500,7 @@ final class ManagingChannelsContext implements Context
         Assert::same($this->updatePage->getDefaultTaxZone(), $taxZone);
     }
 
-    /**
-     * @Then channel :channel should not have default tax zone
-     */
+    #[Then('channel :channel should not have default tax zone')]
     public function channelShouldNotHaveDefaultTaxZone(ChannelInterface $channel): void
     {
         $this->updatePage->open(['id' => $channel->getId()]);
@@ -627,9 +508,7 @@ final class ManagingChannelsContext implements Context
         Assert::isEmpty($this->updatePage->getDefaultTaxZone());
     }
 
-    /**
-     * @Then the tax calculation strategy for the :channel channel should be :taxCalculationStrategy
-     */
+    #[Then('the tax calculation strategy for the :channel channel should be :taxCalculationStrategy')]
     public function theTaxCalculationStrategyForTheChannelShouldBe(
         ChannelInterface $channel,
         string $taxCalculationStrategy,
@@ -642,18 +521,14 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @Then the base currency field should be disabled
-     * @Then I should not be able to edit its base currency
-     */
+    #[Then('the base currency field should be disabled')]
+    #[Then('I should not be able to edit its base currency')]
     public function theBaseCurrencyFieldShouldBeDisabled(): void
     {
         Assert::true($this->updatePage->isBaseCurrencyDisabled());
     }
 
-    /**
-     * @Then I should be notified that the default locale has to be enabled
-     */
+    #[Then('I should be notified that the default locale has to be enabled')]
     public function iShouldBeNotifiedThatTheDefaultLocaleHasToBeEnabled(): void
     {
         Assert::same(
@@ -662,10 +537,8 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @Given /^(this channel) menu taxon should be "([^"]+)"$/
-     * @Given the channel :channel should have :menuTaxon as a menu taxon
-     */
+    #[Given('/^(this channel) menu taxon should be "([^"]+)"$/')]
+    #[Given('the channel :channel should have :menuTaxon as a menu taxon')]
     public function thisChannelMenuTaxonShouldBe(ChannelInterface $channel, string $menuTaxon): void
     {
         if (!$this->updatePage->isOpen(['id' => $channel->getId()])) {
@@ -675,9 +548,7 @@ final class ManagingChannelsContext implements Context
         Assert::same($this->updatePage->getMenuTaxon(), $menuTaxon);
     }
 
-    /**
-     * @Then this channel should have :taxon taxon excluded from displaying the lowest price of discounted products
-     */
+    #[Then('this channel should have :taxon taxon excluded from displaying the lowest price of discounted products')]
     public function thisChannelShouldHaveTaxonExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
         TaxonInterface $taxon,
     ): void {
@@ -687,9 +558,7 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @Then this channel should not have :taxon taxon excluded from displaying the lowest price of discounted products
-     */
+    #[Then('this channel should not have :taxon taxon excluded from displaying the lowest price of discounted products')]
     public function thisChannelShouldNotHaveTaxonExcludedFromDisplayingTheLowestPriceOfDiscountedProducts(
         TaxonInterface $taxon,
     ): void {
@@ -699,9 +568,7 @@ final class ManagingChannelsContext implements Context
         );
     }
 
-    /**
-     * @Then /^the required address in the checkout for this channel should be (billing|shipping)$/
-     */
+    #[Then('/^the required address in the checkout for this channel should be (billing|shipping)$/')]
     public function theRequiredAddressInTheCheckoutForThisChannelShouldBe(string $type): void
     {
         Assert::same($this->shippingAddressInCheckoutRequiredElement->getRequiredAddressTypeInCheckout(), $type);
