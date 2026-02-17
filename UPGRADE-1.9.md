@@ -1,3 +1,11 @@
+# UPGRADE FROM `v1.9.10` TO `v1.9.11`
+
+## Telemetry
+
+Sylius now collects anonymous usage data to help improve the platform. No personal or sensitive information is collected.
+
+For more details, see the [Telemetry documentation](https://docs.sylius.com/the-book/configuration/telemetry).
+
 # UPGRADE FROM `v1.9.5` TO `v1.9.6`
 
 1. API is disabled by default, to enable it you need to set flag to ``true`` in ``config/packages/_sylius.yaml``:
