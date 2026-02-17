@@ -34,21 +34,13 @@ final class PaymentMethodsDataProvider implements DataProviderInterface
     public function provide(): TelemetryDataInterface
     {
         try {
-            $oneMonthAgo = (new \DateTimeImmutable('-1 month'))->format('Y-m-d H:i:s');
-
             $results = $this->connection->fetchAllAssociative(
-                'SELECT pm.code, gc.factory_name, COUNT(p.id) as payments_count
+                'SELECT pm.code, gc.factory_name, pm.is_enabled, COUNT(p.id) as payments_count
                  FROM sylius_payment_method pm
                  JOIN sylius_gateway_config gc ON pm.gateway_config_id = gc.id
-                 LEFT JOIN (
-                    SELECT p.id, p.method_id
-                    FROM sylius_payment p
-                    INNER JOIN sylius_order o ON p.order_id = o.id
-                    WHERE o.checkout_completed_at >= :oneMonthAgo
-                 ) p ON p.method_id = pm.id
-                 WHERE pm.is_enabled = :enabled
-                 GROUP BY pm.id, pm.code, gc.factory_name',
-                ['enabled' => true, 'oneMonthAgo' => $oneMonthAgo]
+                 LEFT JOIN sylius_payment p ON p.method_id = pm.id
+                 WHERE EXISTS (SELECT 1 FROM sylius_payment_method_channels pmc WHERE pmc.payment_method_id = pm.id)
+                 GROUP BY pm.id, pm.code, gc.factory_name, pm.is_enabled'
             );
 
             $providers = [];
@@ -56,7 +48,8 @@ final class PaymentMethodsDataProvider implements DataProviderInterface
                 $providers[] = new PaymentProviderData(
                     $row['code'],
                     $row['factory_name'] ?? '',
-                    ValueRangeMapper::mapPaymentsCount((int) $row['payments_count'])
+                    ValueRangeMapper::mapPaymentsCount((int) $row['payments_count']),
+                    (bool) $row['is_enabled']
                 );
             }
 

@@ -34,20 +34,13 @@ final class ShippingMethodsDataProvider implements DataProviderInterface
     public function provide(): TelemetryDataInterface
     {
         try {
-            $oneMonthAgo = (new \DateTimeImmutable('-1 month'))->format('Y-m-d H:i:s');
-
             $results = $this->connection->fetchAllAssociative(
-                'SELECT sm.code, sm.calculator, COUNT(s.id) as shipments_count
+                'SELECT sm.code, sm.calculator, sm.is_enabled, COUNT(s.id) as shipments_count
                  FROM sylius_shipping_method sm
-                 LEFT JOIN (
-                    SELECT s.id, s.method_id
-                    FROM sylius_shipment s
-                    INNER JOIN sylius_order o ON s.order_id = o.id
-                    WHERE o.checkout_completed_at >= :oneMonthAgo
-                 ) s ON s.method_id = sm.id
-                 WHERE sm.is_enabled = :enabled
-                 GROUP BY sm.id, sm.code, sm.calculator',
-                ['enabled' => true, 'oneMonthAgo' => $oneMonthAgo]
+                 LEFT JOIN sylius_shipment s ON s.method_id = sm.id
+                 WHERE sm.archived_at IS NULL
+                   AND EXISTS (SELECT 1 FROM sylius_shipping_method_channels smc WHERE smc.shipping_method_id = sm.id)
+                 GROUP BY sm.id, sm.code, sm.calculator, sm.is_enabled'
             );
 
             $providers = [];
@@ -55,7 +48,8 @@ final class ShippingMethodsDataProvider implements DataProviderInterface
                 $providers[] = new ShippingProviderData(
                     $row['code'],
                     $row['calculator'] ?? '',
-                    ValueRangeMapper::mapShipmentsCount((int) $row['shipments_count'])
+                    ValueRangeMapper::mapShipmentsCount((int) $row['shipments_count']),
+                    (bool) $row['is_enabled']
                 );
             }
 

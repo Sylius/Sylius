@@ -59,8 +59,9 @@ final class TelemetryNoticeListener
                 '',
                 '  <comment>php bin/console doctrine:migrations:migrate</>',
                 '',
-                'To skip (MySQL):      <comment>--exclude-migrations="Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120000"</>',
-                'To skip (PostgreSQL): <comment>--exclude-migrations="Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120001"</>',
+                'To skip, mark the migration as executed without running it:',
+                '  MySQL:      <comment>php bin/console doctrine:migrations:version \'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120000\' --add --no-interaction</>',
+                '  PostgreSQL: <comment>php bin/console doctrine:migrations:version \'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120001\' --add --no-interaction</>',
             ]);
             $io->newLine();
 

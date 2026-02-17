@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Telemetry;
 
 use Sylius\Component\Core\Telemetry\Cache\TelemetryCacheInterface;
 use Sylius\Component\Core\Telemetry\Sender\TelemetrySenderInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /** @internal */
 final class TelemetrySendManager implements TelemetrySendManagerInterface
@@ -38,13 +39,13 @@ final class TelemetrySendManager implements TelemetrySendManagerInterface
         $this->telemetrySender = $telemetrySender;
     }
 
-    public function sendIfNeeded(): void
+    public function sendIfNeeded(Request $request): void
     {
         if (!$this->telemetryCache->shouldSendTelemetry()) {
             return;
         }
 
-        $data = $this->telemetryCache->getCachedTelemetryData() ?? $this->telemetryOrchestrator->getData();
+        $data = $this->telemetryCache->getCachedTelemetryData() ?? $this->telemetryOrchestrator->getData($request);
 
         $installationId = $data['installation_id'] ?? '';
 
