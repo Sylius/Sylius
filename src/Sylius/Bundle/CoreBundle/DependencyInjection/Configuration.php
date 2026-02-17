@@ -53,6 +53,17 @@ final class Configuration implements ConfigurationInterface
                     ->setDeprecated('sylius/sylius', '1.10', 'The "%path%.%node%" parameter is deprecated and will be removed in 2.0.')
                     ->defaultFalse()
                 ->end()
+                ->arrayNode('telemetry')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')->defaultTrue()->end()
+                        ->booleanNode('business')->defaultTrue()->end()
+                        ->booleanNode('technical')->defaultTrue()->end()
+                        ->booleanNode('plugins')->defaultTrue()->end()
+                        ->scalarNode('salt')->defaultNull()->end()
+                        ->scalarNode('url')->defaultValue('https://prism.sylius.com/telemetry')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
