@@ -48,6 +48,17 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
+                ->arrayNode('telemetry')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')->defaultTrue()->end()
+                        ->booleanNode('business')->defaultTrue()->end()
+                        ->booleanNode('technical')->defaultTrue()->end()
+                        ->booleanNode('plugins')->defaultTrue()->end()
+                        ->scalarNode('salt')->defaultNull()->end()
+                        ->scalarNode('url')->defaultValue('https://prism.sylius.com/telemetry')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
