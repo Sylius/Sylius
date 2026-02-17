@@ -53,15 +53,6 @@ final class TelemetryNoticeListener
                 'No personal or sensitive information is collected.',
                 '',
                 '  * Learn more: <comment>https://docs.sylius.com/the-book/configuration/telemetry</>',
-                '',
-                'This release includes an optional database migration that adds an index to improve',
-                'telemetry query performance. To run the migration:',
-                '',
-                '  <comment>php bin/console doctrine:migrations:migrate</>',
-                '',
-                'To skip, mark the migration as executed without running it:',
-                '  MySQL:      <comment>php bin/console doctrine:migrations:version \'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120000\' --add --no-interaction</>',
-                '  PostgreSQL: <comment>php bin/console doctrine:migrations:version \'Sylius\\Bundle\\CoreBundle\\Migrations\\Version20251126120001\' --add --no-interaction</>',
             ]);
             $io->newLine();
 
