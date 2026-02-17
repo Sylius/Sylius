@@ -52,7 +52,6 @@ jobs:
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
@@ -95,13 +94,13 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v3.0.1
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
-                    database_version: ${{ matrix.mysql }}
+                    database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
@@ -152,7 +151,6 @@ jobs:
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
@@ -195,14 +193,13 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v3.0.1
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
-                    database: "mysql"
-                    database_version: ${{ matrix.mysql }}
+                    database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
