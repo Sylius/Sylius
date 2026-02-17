@@ -26,6 +26,15 @@
         <service id="sylius.payum.http_client" class="Sylius\Bundle\PayumBundle\HttpClient\HttpClient">
             <argument type="service" id="Psr\Http\Client\ClientInterface" />
         </service>
+
+        <service
+            id="sylius.payum.http_client.paypal_header_injecting"
+            class="Sylius\Bundle\PayumBundle\Client\PaypalHeaderInjectingClient"
+            decorates="sylius.payum.http_client"
+        >
+            <argument type="service" id="sylius.payum.http_client.paypal_header_injecting.inner" />
+        </service>
+
         <service id="sylius.form_registry.payum_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
     </services>
 </container>
