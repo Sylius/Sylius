@@ -39,8 +39,6 @@ final readonly class CheckoutShippingContext implements Context
         $this->selectShippingPage->changeAddressByStepLabel();
     }
 
-    #[When('the visitor proceeds with :shippingMethod shipping method')]
-    #[When('the customer proceeds with :shippingMethod shipping method')]
     #[Given('the visitor has proceeded :shippingMethodName shipping method')]
     #[Given('the customer has proceeded with :shippingMethodName shipping method')]
     #[Given('the visitor proceed with :shippingMethodName shipping method')]
@@ -49,6 +47,8 @@ final readonly class CheckoutShippingContext implements Context
     #[Given('I have proceeded with :shippingMethodName shipping method')]
     #[Given('I have proceeded selecting :shippingMethodName shipping method')]
     #[When('I proceed with :shippingMethodName shipping method')]
+    #[When('the visitor proceeds with :shippingMethod shipping method')]
+    #[When('the customer proceeds with :shippingMethod shipping method')]
     public function iHaveProceededWithSelectingShippingMethod(string $shippingMethodName): void
     {
         if (!$this->selectShippingPage->isOpen()) {

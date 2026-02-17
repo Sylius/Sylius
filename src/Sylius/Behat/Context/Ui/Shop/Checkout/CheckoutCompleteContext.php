@@ -88,12 +88,12 @@ final readonly class CheckoutCompleteContext implements Context
         $this->completePage->open();
     }
 
-    #[When('I confirm my order')]
     #[Given('I have confirmed order')]
     #[Given('the visitor confirm his order')]
     #[Given('the customer confirm his order')]
     #[Given('the customer confirmed the order')]
     #[When('I try to confirm my order')]
+    #[When('I confirm my order')]
     public function iConfirmMyOrder(): void
     {
         if (!$this->completePage->isOpen()) {

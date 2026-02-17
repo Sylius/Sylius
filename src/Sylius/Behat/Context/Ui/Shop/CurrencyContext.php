@@ -32,8 +32,8 @@ final readonly class CurrencyContext implements Context
         $this->homePage->open();
     }
 
-    #[When('I switch to the :currencyCode currency')]
     #[Given('I changed my currency to :currencyCode')]
+    #[When('I switch to the :currencyCode currency')]
     public function iSwitchTheCurrencyToTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();
