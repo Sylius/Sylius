@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical;
 
 use Composer\InstalledVersions;
-use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
+use Sylius\Bundle\CoreBundle\Application\Kernel as SyliusKernel;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Technical\VersionData;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
@@ -27,13 +27,28 @@ final class VersionDataProvider implements DataProviderInterface
     public function provide(): TelemetryDataInterface
     {
         return new VersionData(
-            SyliusCoreBundle::VERSION,
+            $this->getSyliusVersion(),
             PHP_VERSION,
             Kernel::VERSION,
             $this->getInstalledPackageVersion('doctrine/orm'),
             Environment::VERSION,
-            $this->getInstalledPackageVersion('api-platform/core')
+            $this->getApiPlatformVersion()
         );
+    }
+
+    private function getSyliusVersion(): string
+    {
+        return SyliusKernel::VERSION;
+    }
+
+    private function getApiPlatformVersion(): ?string
+    {
+        $version = $this->getInstalledPackageVersion('api-platform/core');
+        if ($version !== null) {
+            return $version;
+        }
+
+        return $this->getInstalledPackageVersion('api-platform/symfony');
     }
 
     private function getInstalledPackageVersion(string $package): ?string

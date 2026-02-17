@@ -27,20 +27,25 @@ final class PaymentProviderData implements TelemetryDataInterface
     /** @var string */
     public $paymentsCount;
 
-    public function __construct(string $name, string $gateway, string $paymentsCount)
+    /** @var bool */
+    public $enabled;
+
+    public function __construct(string $name, string $gateway, string $paymentsCount, bool $enabled)
     {
         $this->name = $name;
         $this->gateway = $gateway;
         $this->paymentsCount = $paymentsCount;
+        $this->enabled = $enabled;
     }
 
-    /** @return array<string, string> */
+    /** @return array<string, bool|string> */
     public function normalize(): array
     {
         return [
             'name' => $this->name,
             'gateway' => $this->gateway,
             'payments_count' => $this->paymentsCount,
+            'enabled' => $this->enabled,
         ];
     }
 }

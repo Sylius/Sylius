@@ -107,5 +107,10 @@
             <tag name="kernel.event_listener" event="sylius.taxon.pre_delete" method="protectFromRemovingMenuTaxon" />
             <tag name="kernel.event_listener" event="sylius.taxon.post_delete" method="removeTaxonFromPromotionRules" />
         </service>
+
+        <service id="sylius.listener.telemetry_index_schema" class="Sylius\Bundle\CoreBundle\Telemetry\EventListener\TelemetryIndexSchemaListener">
+            <argument type="service" id="doctrine.dbal.default_connection" />
+            <tag name="doctrine.event_listener" event="postGenerateSchema" />
+        </service>
     </services>
 </container>

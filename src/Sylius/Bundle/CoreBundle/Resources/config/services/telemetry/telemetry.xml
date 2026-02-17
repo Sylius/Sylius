@@ -19,7 +19,6 @@
             lazy="Sylius\Component\Core\Telemetry\Generator\InstallationIdGeneratorInterface"
         >
             <argument>%sylius_core.telemetry.salt%</argument>
-            <argument type="service" id="request_stack" />
         </service>
 
         <service
@@ -126,6 +125,15 @@
         <service
             id="sylius.telemetry.data_provider.orders_business"
             class="Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\OrdersBusinessDataProvider"
+            lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
+        >
+            <argument type="service" id="doctrine.dbal.default_connection" />
+            <tag name="sylius.telemetry.business_data_provider" />
+        </service>
+
+        <service
+            id="sylius.telemetry.data_provider.countries"
+            class="Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\CountriesDataProvider"
             lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
         >
             <argument type="service" id="doctrine.dbal.default_connection" />

@@ -27,20 +27,25 @@ final class ShippingProviderData implements TelemetryDataInterface
     /** @var string */
     public $shipmentsCount;
 
-    public function __construct(string $name, string $calculator, string $shipmentsCount)
+    /** @var bool */
+    public $enabled;
+
+    public function __construct(string $name, string $calculator, string $shipmentsCount, bool $enabled)
     {
         $this->name = $name;
         $this->calculator = $calculator;
         $this->shipmentsCount = $shipmentsCount;
+        $this->enabled = $enabled;
     }
 
-    /** @return array<string, string> */
+    /** @return array<string, bool|string> */
     public function normalize(): array
     {
         return [
             'name' => $this->name,
             'calculator' => $this->calculator,
             'shipments_count' => $this->shipmentsCount,
+            'enabled' => $this->enabled,
         ];
     }
 }

@@ -27,19 +27,29 @@ final class MetricsCountsData implements TelemetryDataInterface
     /** @var string */
     public $productVariantsCount;
 
+    /** @var string */
+    public $virtualProductVariantsCount;
+
     /** @var int */
     public $ordersCount;
+
+    /** @var int */
+    public $channelsCount;
 
     public function __construct(
         string $customersCount,
         string $productsCount,
         string $productVariantsCount,
-        int $ordersCount
+        string $virtualProductVariantsCount,
+        int $ordersCount,
+        int $channelsCount
     ) {
         $this->customersCount = $customersCount;
         $this->productsCount = $productsCount;
         $this->productVariantsCount = $productVariantsCount;
+        $this->virtualProductVariantsCount = $virtualProductVariantsCount;
         $this->ordersCount = $ordersCount;
+        $this->channelsCount = $channelsCount;
     }
 
     public function normalize(): array
@@ -48,7 +58,9 @@ final class MetricsCountsData implements TelemetryDataInterface
             'customers_count' => $this->customersCount,
             'products_count' => $this->productsCount,
             'product_variants_count' => $this->productVariantsCount,
+            'virtual_product_variants_count' => $this->virtualProductVariantsCount,
             'orders_count' => $this->ordersCount,
+            'channels_count' => $this->channelsCount,
         ];
     }
 }
