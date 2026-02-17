@@ -44,7 +44,7 @@ return (new ResourceMetadata())
             redirectToRoute: 'sylius_admin_admin_user_index',
         ),
         new BulkDelete(
-            path: 'users/bulk_delete',
+            path: 'users/bulk-delete',
             routeName: '_sylius_admin_admin_user_bulk_delete',
             redirectToRoute: 'sylius_admin_admin_user_index',
         ),

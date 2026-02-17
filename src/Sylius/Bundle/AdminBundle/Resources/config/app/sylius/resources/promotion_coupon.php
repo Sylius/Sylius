@@ -72,7 +72,7 @@ return (new ResourceMetadata())
             redirectArguments: ['promotionId' => "@=request.attributes.get('promotionId')"],
         ),
         new BulkDelete(
-            path: 'coupons/bulk_delete',
+            path: 'coupons/bulk-delete',
             routeName: '_sylius_admin_promotion_coupon_bulk_delete',
             repositoryArguments: ["@=request.request.all('ids')"],
             repositoryMethod: 'findById',
