@@ -68,12 +68,18 @@ final class ValueRangeMapper
         \PHP_INT_MAX => '20+',
     ];
 
-    public static function mapGmv(int|float $value): string
+    /**
+     * @param int|float $value
+     */
+    public static function mapGmv($value): string
     {
         return self::mapToRange($value, self::GMV_RANGES);
     }
 
-    public static function mapAov(int|float $value): string
+    /**
+     * @param int|float $value
+     */
+    public static function mapAov($value): string
     {
         return self::mapToRange($value, self::AOV_RANGES);
     }
@@ -98,7 +104,10 @@ final class ValueRangeMapper
         return self::mapToRange($value, self::CUSTOMER_ORDER_PAYMENT_SHIPMENT_RANGES);
     }
 
-    public static function mapAvgItems(int|float $value): string
+    /**
+     * @param int|float $value
+     */
+    public static function mapAvgItems($value): string
     {
         return self::mapToRange($value, self::AVG_ITEMS_RANGES);
     }
@@ -113,8 +122,11 @@ final class ValueRangeMapper
         return self::mapToRange($value, self::CUSTOMER_ORDER_PAYMENT_SHIPMENT_RANGES);
     }
 
-    /** @param array<int, string> $ranges */
-    private static function mapToRange(int|float $value, array $ranges): string
+    /**
+     * @param int|float $value
+     * @param array<int, string> $ranges
+     */
+    private static function mapToRange($value, array $ranges): string
     {
         foreach ($ranges as $threshold => $label) {
             if ($value < $threshold) {

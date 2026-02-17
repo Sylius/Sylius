@@ -26,9 +26,12 @@ final class TelemetryCache implements TelemetryCacheInterface
     private const STATUS_SUCCESS = 'success';
     private const STATUS_FAILED = 'failed';
 
-    public function __construct(
-        private CacheItemPoolInterface $cache,
-    ) {
+    /** @var CacheItemPoolInterface */
+    private $cache;
+
+    public function __construct(CacheItemPoolInterface $cache)
+    {
+        $this->cache = $cache;
     }
 
     public function shouldSendTelemetry(): bool

@@ -23,8 +23,12 @@ use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
 /** @internal */
 final class PaymentMethodsDataProvider implements DataProviderInterface
 {
-    public function __construct(private Connection $connection)
+    /** @var Connection */
+    private $connection;
+
+    public function __construct(Connection $connection)
     {
+        $this->connection = $connection;
     }
 
     public function provide(): TelemetryDataInterface
@@ -44,20 +48,20 @@ final class PaymentMethodsDataProvider implements DataProviderInterface
                  ) p ON p.method_id = pm.id
                  WHERE pm.is_enabled = :enabled
                  GROUP BY pm.id, pm.code, gc.factory_name',
-                ['enabled' => true, 'oneMonthAgo' => $oneMonthAgo],
+                ['enabled' => true, 'oneMonthAgo' => $oneMonthAgo]
             );
 
             $providers = [];
             foreach ($results as $row) {
                 $providers[] = new PaymentProviderData(
-                    name: $row['code'],
-                    gateway: $row['factory_name'] ?? '',
-                    paymentsCount: ValueRangeMapper::mapPaymentsCount((int) $row['payments_count']),
+                    $row['code'],
+                    $row['factory_name'] ?? '',
+                    ValueRangeMapper::mapPaymentsCount((int) $row['payments_count'])
                 );
             }
 
             return new PaymentMethodsData(...$providers);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return new PaymentMethodsData();
         }
     }

@@ -29,13 +29,19 @@ final class BusinessDataCollector implements TelemetryDataCollectorInterface
         'orders_monthly_avg_item_units',
     ];
 
+    /** @var iterable<DataProviderInterface> */
+    private $dataProviders;
+
+    /** @var bool */
+    private $enabled;
+
     /**
      * @param iterable<DataProviderInterface> $dataProviders
      */
-    public function __construct(
-        private iterable $dataProviders,
-        private bool $enabled = true,
-    ) {
+    public function __construct(iterable $dataProviders, bool $enabled = true)
+    {
+        $this->dataProviders = $dataProviders;
+        $this->enabled = $enabled;
     }
 
     public function getName(): string
@@ -65,7 +71,7 @@ final class BusinessDataCollector implements TelemetryDataCollectorInterface
                 [$metricsData, $otherData] = $this->separateMetrics($normalized);
                 $metrics = array_merge($metrics, $metricsData);
                 $data = array_merge($data, $otherData);
-            } catch (\Throwable) {
+            } catch (\Throwable $e) {
                 continue;
             }
         }

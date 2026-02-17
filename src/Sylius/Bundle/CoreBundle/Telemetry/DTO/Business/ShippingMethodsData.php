@@ -19,7 +19,7 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 final class ShippingMethodsData implements TelemetryDataInterface
 {
     /** @var list<ShippingProviderData> */
-    public array $shippingProviders;
+    public $shippingProviders;
 
     public function __construct(ShippingProviderData ...$shippingProviders)
     {
@@ -31,7 +31,7 @@ final class ShippingMethodsData implements TelemetryDataInterface
         return [
             'shipping_providers' => array_map(
                 static fn (ShippingProviderData $provider) => $provider->normalize(),
-                $this->shippingProviders,
+                $this->shippingProviders
             ),
         ];
     }

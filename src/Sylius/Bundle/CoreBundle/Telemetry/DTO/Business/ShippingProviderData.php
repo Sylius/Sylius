@@ -18,11 +18,20 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class ShippingProviderData implements TelemetryDataInterface
 {
-    public function __construct(
-        public string $name,
-        public string $calculator,
-        public string $shipmentsCount,
-    ) {
+    /** @var string */
+    public $name;
+
+    /** @var string */
+    public $calculator;
+
+    /** @var string */
+    public $shipmentsCount;
+
+    public function __construct(string $name, string $calculator, string $shipmentsCount)
+    {
+        $this->name = $name;
+        $this->calculator = $calculator;
+        $this->shipmentsCount = $shipmentsCount;
     }
 
     /** @return array<string, string> */

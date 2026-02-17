@@ -18,14 +18,38 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class EnvironmentData implements TelemetryDataInterface
 {
+    /** @var string */
+    public $app;
+
+    /** @var string|null */
+    public $webserver;
+
+    /** @var string */
+    public $os;
+
+    /** @var bool */
+    public $docker;
+
+    /** @var float|null */
+    public $ramGb;
+
+    /** @var string|null */
+    public $phpMemoryLimit;
+
     public function __construct(
-        public string $app,
-        public ?string $webserver,
-        public string $os,
-        public bool $docker,
-        public ?float $ramGb,
-        public ?string $phpMemoryLimit,
+        string $app,
+        ?string $webserver,
+        string $os,
+        bool $docker,
+        ?float $ramGb,
+        ?string $phpMemoryLimit
     ) {
+        $this->app = $app;
+        $this->webserver = $webserver;
+        $this->os = $os;
+        $this->docker = $docker;
+        $this->ramGb = $ramGb;
+        $this->phpMemoryLimit = $phpMemoryLimit;
     }
 
     public function normalize(): array

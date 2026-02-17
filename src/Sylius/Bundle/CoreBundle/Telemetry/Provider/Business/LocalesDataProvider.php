@@ -21,10 +21,16 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class LocalesDataProvider implements DataProviderInterface
 {
-    public function __construct(
-        private Connection $connection,
-        private string $defaultLocale,
-    ) {
+    /** @var Connection */
+    private $connection;
+
+    /** @var string */
+    private $defaultLocale;
+
+    public function __construct(Connection $connection, string $defaultLocale)
+    {
+        $this->connection = $connection;
+        $this->defaultLocale = $defaultLocale;
     }
 
     public function provide(): TelemetryDataInterface
@@ -33,11 +39,11 @@ final class LocalesDataProvider implements DataProviderInterface
             $locales = $this->connection->fetchFirstColumn('SELECT code FROM sylius_locale');
             $channelDefaultLocales = $this->connection->fetchFirstColumn(
                 'SELECT DISTINCT l.code FROM sylius_locale l
-                 INNER JOIN sylius_channel c ON c.default_locale_id = l.id',
+                 INNER JOIN sylius_channel c ON c.default_locale_id = l.id'
             );
 
             return new LocalesData($locales, $channelDefaultLocales, $this->defaultLocale);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return new LocalesData([], [], $this->defaultLocale);
         }
     }

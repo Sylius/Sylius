@@ -18,11 +18,23 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class OrderMetricsData implements TelemetryDataInterface
 {
+    /** @var string */
+    public $ordersMonthlyCount;
+
+    /** @var string */
+    public $ordersMonthlyAvgItems;
+
+    /** @var string */
+    public $ordersMonthlyAvgItemUnits;
+
     public function __construct(
-        public string $ordersMonthlyCount,
-        public string $ordersMonthlyAvgItems,
-        public string $ordersMonthlyAvgItemUnits,
+        string $ordersMonthlyCount,
+        string $ordersMonthlyAvgItems,
+        string $ordersMonthlyAvgItemUnits
     ) {
+        $this->ordersMonthlyCount = $ordersMonthlyCount;
+        $this->ordersMonthlyAvgItems = $ordersMonthlyAvgItems;
+        $this->ordersMonthlyAvgItemUnits = $ordersMonthlyAvgItemUnits;
     }
 
     /** @return array<string, string> */

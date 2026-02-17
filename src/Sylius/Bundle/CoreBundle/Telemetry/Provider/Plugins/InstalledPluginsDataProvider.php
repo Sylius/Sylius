@@ -22,8 +22,12 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class InstalledPluginsDataProvider implements DataProviderInterface
 {
-    public function __construct(private string $projectDir)
+    /** @var string */
+    private $projectDir;
+
+    public function __construct(string $projectDir)
     {
+        $this->projectDir = $projectDir;
     }
 
     public function provide(): TelemetryDataInterface
@@ -42,8 +46,8 @@ final class InstalledPluginsDataProvider implements DataProviderInterface
             }
 
             $plugins[] = new PluginData(
-                name: $name,
-                version: InstalledVersions::getPrettyVersion($name) ?? 'unknown',
+                $name,
+                InstalledVersions::getPrettyVersion($name) ?? 'unknown'
             );
         }
 
@@ -64,9 +68,9 @@ final class InstalledPluginsDataProvider implements DataProviderInterface
         return array_column(
             array_filter(
                 $lock['packages'] ?? [],
-                fn ($package) => ($package['notification-url'] ?? '') === 'https://packagist.org/downloads/',
+                fn ($package) => ($package['notification-url'] ?? '') === 'https://packagist.org/downloads/'
             ),
-            'name',
+            'name'
         );
     }
 }

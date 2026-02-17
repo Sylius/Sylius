@@ -21,8 +21,12 @@ final class TelemetryNoticeListener
 {
     private const CACHE_KEY = 'sylius_telemetry_notice_shown';
 
-    public function __construct(private CacheItemPoolInterface $cache)
+    /** @var CacheItemPoolInterface */
+    private $cache;
+
+    public function __construct(CacheItemPoolInterface $cache)
     {
+        $this->cache = $cache;
     }
 
     public function onConsoleTerminate(ConsoleTerminateEvent $event): void
@@ -62,7 +66,7 @@ final class TelemetryNoticeListener
 
             $item->set(true);
             $this->cache->save($item);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
         }
     }
 

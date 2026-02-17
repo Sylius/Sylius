@@ -18,11 +18,20 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class PaymentProviderData implements TelemetryDataInterface
 {
-    public function __construct(
-        public string $name,
-        public string $gateway,
-        public string $paymentsCount,
-    ) {
+    /** @var string */
+    public $name;
+
+    /** @var string */
+    public $gateway;
+
+    /** @var string */
+    public $paymentsCount;
+
+    public function __construct(string $name, string $gateway, string $paymentsCount)
+    {
+        $this->name = $name;
+        $this->gateway = $gateway;
+        $this->paymentsCount = $paymentsCount;
     }
 
     /** @return array<string, string> */

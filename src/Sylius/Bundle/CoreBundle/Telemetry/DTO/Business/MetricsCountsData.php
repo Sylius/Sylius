@@ -18,12 +18,28 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class MetricsCountsData implements TelemetryDataInterface
 {
+    /** @var string */
+    public $customersCount;
+
+    /** @var string */
+    public $productsCount;
+
+    /** @var string */
+    public $productVariantsCount;
+
+    /** @var int */
+    public $ordersCount;
+
     public function __construct(
-        public string $customersCount,
-        public string $productsCount,
-        public string $productVariantsCount,
-        public int $ordersCount,
+        string $customersCount,
+        string $productsCount,
+        string $productVariantsCount,
+        int $ordersCount
     ) {
+        $this->customersCount = $customersCount;
+        $this->productsCount = $productsCount;
+        $this->productVariantsCount = $productVariantsCount;
+        $this->ordersCount = $ordersCount;
     }
 
     public function normalize(): array

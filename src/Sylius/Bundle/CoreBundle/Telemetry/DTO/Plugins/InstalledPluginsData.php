@@ -19,7 +19,7 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 final class InstalledPluginsData implements TelemetryDataInterface
 {
     /** @var list<PluginData> */
-    public array $plugins;
+    public $plugins;
 
     public function __construct(PluginData ...$plugins)
     {
@@ -31,7 +31,7 @@ final class InstalledPluginsData implements TelemetryDataInterface
     {
         return array_map(
             static fn (PluginData $plugin) => $plugin->normalize(),
-            $this->plugins,
+            $this->plugins
         );
     }
 }

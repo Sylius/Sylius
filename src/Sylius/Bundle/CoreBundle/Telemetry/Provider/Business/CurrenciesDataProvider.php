@@ -21,8 +21,12 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class CurrenciesDataProvider implements DataProviderInterface
 {
-    public function __construct(private Connection $connection)
+    /** @var Connection */
+    private $connection;
+
+    public function __construct(Connection $connection)
     {
+        $this->connection = $connection;
     }
 
     public function provide(): TelemetryDataInterface
@@ -31,7 +35,7 @@ final class CurrenciesDataProvider implements DataProviderInterface
             $currencies = $this->connection->fetchFirstColumn('SELECT code FROM sylius_currency');
 
             return new CurrenciesData($currencies);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return new CurrenciesData([]);
         }
     }

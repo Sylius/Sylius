@@ -25,8 +25,12 @@ use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
 /** @internal */
 final class OrdersBusinessDataProvider implements DataProviderInterface
 {
-    public function __construct(private Connection $connection)
+    /** @var Connection */
+    private $connection;
+
+    public function __construct(Connection $connection)
     {
+        $this->connection = $connection;
     }
 
     public function provide(): TelemetryDataInterface
@@ -36,7 +40,7 @@ final class OrdersBusinessDataProvider implements DataProviderInterface
             $processedData = $this->processResults($results);
 
             return $this->buildDto($processedData);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return $this->getEmptyDto();
         }
     }
@@ -75,7 +79,7 @@ final class OrdersBusinessDataProvider implements DataProviderInterface
                 'oneMonthAgo' => $oneMonthAgo,
                 'completedState' => OrderCheckoutStates::STATE_COMPLETED,
                 'cancelledState' => OrderPaymentStates::STATE_CANCELLED,
-            ],
+            ]
         );
     }
 
@@ -122,26 +126,26 @@ final class OrdersBusinessDataProvider implements DataProviderInterface
     private function buildDto(array $processedData): OrdersBusinessData
     {
         return new OrdersBusinessData(
-            gmvMonthly: $processedData['gmv_by_currency'],
-            aovMonthly: $processedData['aov_by_currency'],
-            metrics: new OrderMetricsData(
-                ordersMonthlyCount: ValueRangeMapper::mapOrdersCount($processedData['total_orders']),
-                ordersMonthlyAvgItems: ValueRangeMapper::mapAvgItems($processedData['avg_items']),
-                ordersMonthlyAvgItemUnits: ValueRangeMapper::mapAvgItems($processedData['avg_units']),
-            ),
+            $processedData['gmv_by_currency'],
+            $processedData['aov_by_currency'],
+            new OrderMetricsData(
+                ValueRangeMapper::mapOrdersCount($processedData['total_orders']),
+                ValueRangeMapper::mapAvgItems($processedData['avg_items']),
+                ValueRangeMapper::mapAvgItems($processedData['avg_units'])
+            )
         );
     }
 
     private function getEmptyDto(): OrdersBusinessData
     {
         return new OrdersBusinessData(
-            gmvMonthly: [],
-            aovMonthly: [],
-            metrics: new OrderMetricsData(
-                ordersMonthlyCount: ValueRangeMapper::mapOrdersCount(0),
-                ordersMonthlyAvgItems: ValueRangeMapper::mapAvgItems(0),
-                ordersMonthlyAvgItemUnits: ValueRangeMapper::mapAvgItems(0),
-            ),
+            [],
+            [],
+            new OrderMetricsData(
+                ValueRangeMapper::mapOrdersCount(0),
+                ValueRangeMapper::mapAvgItems(0),
+                ValueRangeMapper::mapAvgItems(0)
+            )
         );
     }
 }

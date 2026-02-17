@@ -18,15 +18,24 @@ use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 /** @internal */
 final class LocalesData implements TelemetryDataInterface
 {
+    /** @var list<string> */
+    public $locales;
+
+    /** @var list<string> */
+    public $channelDefaultLocales;
+
+    /** @var string */
+    public $defaultLocale;
+
     /**
      * @param list<string> $locales
      * @param list<string> $channelDefaultLocales
      */
-    public function __construct(
-        public array $locales,
-        public array $channelDefaultLocales,
-        public string $defaultLocale,
-    ) {
+    public function __construct(array $locales, array $channelDefaultLocales, string $defaultLocale)
+    {
+        $this->locales = $locales;
+        $this->channelDefaultLocales = $channelDefaultLocales;
+        $this->defaultLocale = $defaultLocale;
     }
 
     public function normalize(): array

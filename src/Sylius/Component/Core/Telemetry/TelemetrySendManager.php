@@ -19,11 +19,23 @@ use Sylius\Component\Core\Telemetry\Sender\TelemetrySenderInterface;
 /** @internal */
 final class TelemetrySendManager implements TelemetrySendManagerInterface
 {
+    /** @var TelemetryOrchestratorInterface */
+    private $telemetryOrchestrator;
+
+    /** @var TelemetryCacheInterface */
+    private $telemetryCache;
+
+    /** @var TelemetrySenderInterface */
+    private $telemetrySender;
+
     public function __construct(
-        private TelemetryOrchestratorInterface $telemetryOrchestrator,
-        private TelemetryCacheInterface $telemetryCache,
-        private TelemetrySenderInterface $telemetrySender,
+        TelemetryOrchestratorInterface $telemetryOrchestrator,
+        TelemetryCacheInterface $telemetryCache,
+        TelemetrySenderInterface $telemetrySender
     ) {
+        $this->telemetryOrchestrator = $telemetryOrchestrator;
+        $this->telemetryCache = $telemetryCache;
+        $this->telemetrySender = $telemetrySender;
     }
 
     public function sendIfNeeded(): void
@@ -54,7 +66,7 @@ final class TelemetrySendManager implements TelemetrySendManagerInterface
     {
         try {
             return $this->telemetrySender->send($data);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return false;
         }
     }
