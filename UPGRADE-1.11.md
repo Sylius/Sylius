@@ -1,3 +1,11 @@
+# UPGRADE FROM `v1.11.15` TO `v1.11.16`
+
+## Telemetry
+
+Sylius now collects anonymous usage data to help improve the platform. No personal or sensitive information is collected.
+
+For more details, see the [Telemetry documentation](https://docs.sylius.com/the-book/configuration/telemetry).
+
 # UPGRADE FROM `v1.11.11` TO `v1.11.12`
 
 1. All entities and their relationships have a default order by identifier if no order is specified. You can disable
