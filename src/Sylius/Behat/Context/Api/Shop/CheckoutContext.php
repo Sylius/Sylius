@@ -76,9 +76,7 @@ final class CheckoutContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^(my) billing address is fulfilled automatically through default address$/
-     */
+    #[Given('/^(my) billing address is fulfilled automatically through default address$/')]
     public function myBillingAddressIsFulfilledAutomaticallyThroughDefaultAddress(ShopUserInterface $user): void
     {
         /** @var CustomerInterface|null $customer */
@@ -91,9 +89,7 @@ final class CheckoutContext implements Context
         $this->iSpecifyTheBillingAddressAs($defaultAddress);
     }
 
-    /**
-     * @When I try to complete the shipping step
-     */
+    #[When('I try to complete the shipping step')]
     public function iTryToCompleteTheShippingStep(): void
     {
         $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
@@ -133,18 +129,14 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @When I specified the billing address
-     */
+    #[When('I specified the billing address')]
     public function iSpecifiedTheBillingAddress(): void
     {
         $this->addressOrder($this->getArrayWithDefaultAddress());
     }
 
-    /**
-     * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
-     * @When I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
-     */
+    #[When('I proceed with :shippingMethod shipping method and :paymentMethod payment')]
+    #[When('I have proceeded order with :shippingMethod shipping method and :paymentMethod payment')]
     public function iProceedOrderWithShippingMethodAndPayment(
         ShippingMethodInterface $shippingMethod,
         PaymentMethodInterface $paymentMethod,
@@ -153,23 +145,19 @@ final class CheckoutContext implements Context
         $this->iChoosePaymentMethod($paymentMethod);
     }
 
-    /**
-     * @Given I am at the checkout addressing step
-     * @When I complete the payment step
-     * @When I complete the shipping step
-     * @When I go to the checkout addressing step
-     * @Then there should be information about no available shipping methods
-     * @Then I should be informed that my order cannot be shipped to this address
-     * @Then I should not be able to address an order with an empty cart
-     */
+    #[Given('I am at the checkout addressing step')]
+    #[When('I complete the payment step')]
+    #[When('I complete the shipping step')]
+    #[When('I go to the checkout addressing step')]
+    #[Then('there should be information about no available shipping methods')]
+    #[Then('I should be informed that my order cannot be shipped to this address')]
+    #[Then('I should not be able to address an order with an empty cart')]
     public function iAmAtTheCheckoutAddressingStep(): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @Then I should see that there is no shipment assigned
-     */
+    #[Then('I should see that there is no shipment assigned')]
     public function iShouldSeeThatThereIsNoShipmentAssigned(): void
     {
         $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
@@ -177,9 +165,7 @@ final class CheckoutContext implements Context
         Assert::isEmpty($this->responseChecker->getValue($response, 'shipments'));
     }
 
-    /**
-     * @Then I should see that no payment method is assigned
-     */
+    #[Then('I should see that no payment method is assigned')]
     public function iShouldSeeThatNoPaymentMethodIsAssigned(): void
     {
         $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
@@ -187,9 +173,7 @@ final class CheckoutContext implements Context
         Assert::isEmpty($this->responseChecker->getValue($response, 'payments'));
     }
 
-    /**
-     * @Then there should not be any payment methods available for selection
-     */
+    #[Then('there should not be any payment methods available for selection')]
     public function thereShouldNotBeAnyPaymentMethodsAvailableForSelection(): void
     {
         $response = $this->client->requestGet('payment-methods');
@@ -197,9 +181,7 @@ final class CheckoutContext implements Context
         Assert::isEmpty($this->responseChecker->getCollection($response));
     }
 
-    /**
-     * @When /^I choose "([^"]+)" street for (billing|shipping) address$/
-     */
+    #[When('/^I choose "([^"]+)" street for (billing|shipping) address$/')]
     public function iChooseForBillingAddress(string $street, string $addressType): void
     {
         $addressBook = $this->responseChecker->getCollection($this->client->index(Resources::ADDRESSES));
@@ -217,33 +199,27 @@ final class CheckoutContext implements Context
         $this->addressOrder($this->content);
     }
 
-    /**
-     * @Given /^the (?:customer|visitor) has specified the email as "([^"]+)"$/
-     * @When I specify the email as :email
-     * @When /^the (?:customer|visitor) specify the email as "([^"]+)"$/
-     */
+    #[Given('/^the (?:customer|visitor) has specified the email as "([^"]+)"$/')]
+    #[When('I specify the email as :email')]
+    #[When('/^the (?:customer|visitor) specify the email as "([^"]+)"$/')]
     public function iSpecifyTheEmailAs(?string $email): void
     {
         $this->content['email'] = $email;
     }
 
-    /**
-     * @Given /^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^I specify(?: the| different) billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^the visitor changes the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     */
     #[Given('the customer specify the billing address')]
     #[Given('the visitor specify the billing address')]
+    #[Given('/^the (?:visitor|customer) has specified (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
+    #[When('/^I specify(?: the| different) billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
+    #[When('/^the visitor changes the billing (address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
+    #[When('/^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
+    #[When('/^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/')]
     public function iSpecifyTheBillingAddressAs(?AddressInterface $address = null): void
     {
         $this->fillAddress('billingAddress', $address ?? $this->addressFactory->createDefault());
     }
 
-    /**
-     * @When /^the visitor try to specify the incorrect billing address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
-     */
+    #[When('/^the visitor try to specify the incorrect billing address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/')]
     public function iTryToSpecifyTheIncorrectBillingAddressAs(
         string $city,
         string $street,
@@ -256,9 +232,7 @@ final class CheckoutContext implements Context
         $this->addAddress($addressType, $city, $street, $postcode, $customerName, $countryName);
     }
 
-    /**
-     * @When /^the visitor try to specify the billing address without country as "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
-     */
+    #[When('/^the visitor try to specify the billing address without country as "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/')]
     public function iTryToSpecifyTheBillingAddressWithoutCountryAs(
         string $city,
         string $street,
@@ -268,37 +242,29 @@ final class CheckoutContext implements Context
         $this->addAddress('billingAddress', $city, $street, $postcode, $customerName);
     }
 
-    /**
-     * @When /^I specify the(?:| required) shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^I specify the shipping (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     */
+    #[When('/^I specify the(?:| required) shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
+    #[When('/^I specify the shipping (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/')]
     public function iSpecifyTheShippingAddressAs(AddressInterface $address): void
     {
         $this->fillAddress('shippingAddress', $address);
     }
 
-    /**
-     * @When /^I (do not specify any shipping address) information$/
-     */
+    #[When('/^I (do not specify any shipping address) information$/')]
     public function iDoNotSpecifyAnyShippingAddressInformation(AddressInterface $address): void
     {
         $this->fillAddress('billingAddress', $address);
         $this->fillAddress('shippingAddress', $address);
     }
 
-    /**
-     * @When /^I (do not specify any billing address) information$/
-     */
+    #[When('/^I (do not specify any billing address) information$/')]
     public function iDoNotSpecifyAnyBillingAddressInformation(AddressInterface $address): void
     {
         $this->fillAddress('billingAddress', $address);
     }
 
-    /**
-     * @When /^I specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^I define the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     * @When /^I try to change the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
+    #[When('/^I specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
+    #[When('/^I define the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
+    #[When('/^I try to change the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
     public function iSpecifiedTheBillingAddressAs(AddressInterface $address): void
     {
         $this->fillAddress('billingAddress', $address);
@@ -306,25 +272,19 @@ final class CheckoutContext implements Context
         $this->content = [];
     }
 
-    /**
-     * @When /^I specify (billing|shipping) country (province as "[^"]+")$/
-     */
+    #[When('/^I specify (billing|shipping) country (province as "[^"]+")$/')]
     public function iSpecifyCountryProvinceAs(string $addressType, ProvinceInterface $province): void
     {
         $this->content[$addressType . 'Address']['provinceCode'] = $province->getCode();
     }
 
-    /**
-     * @When /^I specify the province name manually as "([^"]+)" for (billing|shipping) address$/
-     */
+    #[When('/^I specify the province name manually as "([^"]+)" for (billing|shipping) address$/')]
     public function iSpecifyTheProvinceNameManuallyAsForAddress(string $provinceName, string $addressType): void
     {
         $this->content[$addressType . 'Address']['provinceName'] = $provinceName;
     }
 
-    /**
-     * @When I specify the first and last name as :fullName for billing address
-     */
+    #[When('I specify the first and last name as :fullName for billing address')]
     public function iSpecifyTheFirstAndLastNameAsForBillingAddress(string $fullName): void
     {
         $names = explode(' ', $fullName);
@@ -333,10 +293,8 @@ final class CheckoutContext implements Context
         $this->content['billingAddress']['lastName'] = $names[1];
     }
 
-    /**
-     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
-     * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/
-     */
+    #[Given('/^I have completed addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/')]
+    #[When('/^I complete addressing step with email "([^"]+)" and ("[^"]+" based billing address)$/')]
     public function iCompleteAddressingStepWithEmail(string $email, AddressInterface $address): void
     {
         $this->addressOrder([
@@ -352,9 +310,7 @@ final class CheckoutContext implements Context
         ]);
     }
 
-    /**
-     * @When /^I complete addressing step with ("[^"]+" based billing address)$/
-     */
+    #[When('/^I complete addressing step with ("[^"]+" based billing address)$/')]
     public function iCompleteAddressingStepWithAddress(AddressInterface $address): void
     {
         $this->addressOrder([
@@ -369,13 +325,11 @@ final class CheckoutContext implements Context
         ]);
     }
 
-    /**
-     * @Given /^the (?:customer|visitor) has completed the addressing step$/
-     * @When I complete the addressing step
-     * @When I try to complete the addressing step
-     * @When /^the (?:customer|visitor) completes the addressing step$/
-     * @When the visitor try to complete the addressing step in the customer cart
-     */
+    #[Given('/^the (?:customer|visitor) has completed the addressing step$/')]
+    #[When('I complete the addressing step')]
+    #[When('I try to complete the addressing step')]
+    #[When('/^the (?:customer|visitor) completes the addressing step$/')]
+    #[When('the visitor try to complete the addressing step in the customer cart')]
     public function iCompleteTheAddressingStep(): void
     {
         $this->addressOrder($this->content);
@@ -383,25 +337,19 @@ final class CheckoutContext implements Context
         $this->content = [];
     }
 
-    /**
-     * @When I proceed as guest :email with :country as billing country
-     */
+    #[When('I proceed as guest :email with :country as billing country')]
     public function iProceedLoggingAsGuestWithAsBillingCountry(string $email, CountryInterface $country): void
     {
         $this->addressOrderWithCountryAndEmail($country, $email);
     }
 
-    /**
-     * @When I proceed with selecting :country as billing country
-     */
+    #[When('I proceed with selecting :country as billing country')]
     public function iProceedWithSelectingCountryAsBillingCountry(CountryInterface $country): void
     {
         $this->addressOrderWithCountryAndEmail($country);
     }
 
-    /**
-     * @When I provide additional note like :notes
-     */
+    #[When('I provide additional note like :notes')]
     public function iProvideAdditionalNotesLike(string $notes): void
     {
         $this->content['additionalNote'] = $notes;
@@ -409,9 +357,7 @@ final class CheckoutContext implements Context
         $this->sharedStorage->set('additional_note', $notes);
     }
 
-    /**
-     * @When I want to complete checkout
-     */
+    #[When('I want to complete checkout')]
     public function iWantToCompleteCheckout(): void
     {
         $response = $this->completeOrder();
@@ -421,12 +367,10 @@ final class CheckoutContext implements Context
         $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
     }
 
-    /**
-     * @Given I confirmed my order
-     * @Given the customer confirmed the order
-     * @When /^the (?:visitor|customer) confirm his order$/
-     */
     #[When('I confirm my order')]
+    #[Given('I confirmed my order')]
+    #[Given('the customer confirmed the order')]
+    #[When('/^the (?:visitor|customer) confirm his order$/')]
     public function iConfirmMyOrder(): void
     {
         $response = $this->completeOrder();
@@ -443,9 +387,7 @@ final class CheckoutContext implements Context
         $this->sharedStorage->set('order', $this->orderRepository->findOneByNumber($this->sharedStorage->get('order_number')));
     }
 
-    /**
-     * @When I try to confirm my order
-     */
+    #[When('I try to confirm my order')]
     public function iTryToConfirmMyOrder(): void
     {
         $response = $this->completeOrder();
@@ -460,9 +402,7 @@ final class CheckoutContext implements Context
         // This step is relevant only for the UI
     }
 
-    /**
-     * @When I try to select :shippingMethodCode shipping method
-     */
+    #[When('I try to select :shippingMethodCode shipping method')]
     public function iTryToSelectShippingMethod(string $shippingMethodCode): void
     {
         $request = $this->requestFactory->customItemAction(
@@ -482,9 +422,7 @@ final class CheckoutContext implements Context
         $this->client->executeCustomRequest($request);
     }
 
-    /**
-     * @When I try to select :paymentMethodCode payment method
-     */
+    #[When('I try to select :paymentMethodCode payment method')]
     public function iTryToSelectPaymentMethod(string $paymentMethodCode): void
     {
         $cart = $this->getCart();
@@ -512,9 +450,7 @@ final class CheckoutContext implements Context
         // This step is relevant only for the UI
     }
 
-    /**
-     * @Then I should be notified that the order should be addressed first
-     */
+    #[Then('I should be notified that the order should be addressed first')]
     public function iShouldBeNotifiedThatTheOrderShouldBeAddressedFirst(): void
     {
         Assert::true($this->responseChecker->isViolationWithMessageInResponse(
@@ -523,12 +459,10 @@ final class CheckoutContext implements Context
         ));
     }
 
-    /**
-     * @Then the visitor has no access to proceed with :shippingMethod shipping method in the customer cart
-     * @Then the visitor has no access to proceed with :paymentMethod payment in the customer cart
-     * @Then the visitor has no access to confirm the customer order
-     * @Then the visitor has no access to change product :product quantity to :quantity in the customer cart
-     */
+    #[Then('the visitor has no access to proceed with :shippingMethod shipping method in the customer cart')]
+    #[Then('the visitor has no access to proceed with :paymentMethod payment in the customer cart')]
+    #[Then('the visitor has no access to confirm the customer order')]
+    #[Then('the visitor has no access to change product :product quantity to :quantity in the customer cart')]
     public function theVisitorHasNoProceedWithShippingMethodInTheCustomerCart(): void
     {
         $response = $this->client->getLastResponse();
@@ -537,18 +471,16 @@ final class CheckoutContext implements Context
         Assert::same($this->responseChecker->getResponseContent($response)['hydra:description'], 'Not Found');
     }
 
-    /**
-     * @Given I completed the payment step with :paymentMethod payment method
-     * @Given /^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/
-     * @When I choose :paymentMethod payment method
-     * @When I select :paymentMethod payment method
-     * @When /^the (?:customer|visitor) proceed with ("[^"]+" payment)$/
-     * @When I try to change payment method to :paymentMethod payment
-     * @When I change payment method to :paymentMethod after checkout
-     * @When I retry the payment with :paymentMethod payment method
-     */
     #[When('the visitor proceeds with :paymentMethod payment method')]
     #[When('the customer proceeds with :paymentMethod payment method')]
+    #[Given('I completed the payment step with :paymentMethod payment method')]
+    #[Given('/^the (?:customer|visitor) has proceeded ("[^"]+" payment)$/')]
+    #[When('I choose :paymentMethod payment method')]
+    #[When('I select :paymentMethod payment method')]
+    #[When('/^the (?:customer|visitor) proceed with ("[^"]+" payment)$/')]
+    #[When('I try to change payment method to :paymentMethod payment')]
+    #[When('I change payment method to :paymentMethod after checkout')]
+    #[When('I retry the payment with :paymentMethod payment method')]
     public function iChoosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $request = $this->requestFactory->customItemAction(
@@ -563,9 +495,7 @@ final class CheckoutContext implements Context
         $this->client->executeCustomRequest($request);
     }
 
-    /**
-     * @When I proceed through checkout process
-     */
+    #[When('I proceed through checkout process')]
     public function iProceedThroughCheckoutProcess(): void
     {
         $this->addressOrder($this->getArrayWithDefaultAddress());
@@ -577,10 +507,8 @@ final class CheckoutContext implements Context
         $this->iChoosePaymentMethod($paymentMethod);
     }
 
-    /**
-     * @When I proceed with selecting :paymentMethod payment method
-     * @When I have proceeded selecting :paymentMethod payment method
-     */
+    #[When('I proceed with selecting :paymentMethod payment method')]
+    #[When('I have proceeded selecting :paymentMethod payment method')]
     public function iHaveProceededSelectingPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->addressOrder($this->getArrayWithDefaultAddress());
@@ -588,28 +516,22 @@ final class CheckoutContext implements Context
         $this->iChoosePaymentMethod($paymentMethod);
     }
 
-    /**
-     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (billing) address$/
-     * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (billing) address$/
-     */
+    #[Then('/^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (billing) address$/')]
+    #[Then('/^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (billing) address$/')]
     public function addressShouldBeFilledAsBillingAddress(AddressInterface $address, string $addressType): void
     {
         $this->addressShouldBeFilledAs($address, $addressType);
     }
 
-    /**
-     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (shipping) address$/
-     * @Then /^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (shipping) address$/
-     */
+    #[Then('/^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as (shipping) address$/')]
+    #[Then('/^the visitor should has ("[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+" specified as) (shipping) address$/')]
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address, string $addressType): void
     {
         $this->addressShouldBeFilledAs($address, $addressType);
     }
 
-    /**
-     * @Then I should be on the checkout complete step
-     * @Then I should be on the checkout summary step
-     */
+    #[Then('I should be on the checkout complete step')]
+    #[Then('I should be on the checkout summary step')]
     public function iShouldBeOnTheCheckoutCompleteStep(): void
     {
         Assert::inArray(
@@ -618,9 +540,7 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then I should be informed with :paymentMethod payment method instructions
-     */
+    #[Then('I should be informed with :paymentMethod payment method instructions')]
     public function iShouldBeInformedWithPaymentMethodInstructions(PaymentMethodInterface $paymentMethod): void
     {
         $response = $this->client->getLastResponse();
@@ -666,9 +586,7 @@ final class CheckoutContext implements Context
         ));
     }
 
-    /**
-     * @Then I should not be able to select :paymentMethod payment method
-     */
+    #[Then('I should not be able to select :paymentMethod payment method')]
     public function iShouldNotBeAbleToSelectPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->iChoosePaymentMethod($paymentMethod);
@@ -684,9 +602,7 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then I should be informed that payment method with code :code does not exist
-     */
+    #[Then('I should be informed that payment method with code :code does not exist')]
     public function iShouldBeInformedThatPaymentMethodWithCodeDoesNotExist(string $code): void
     {
         Assert::true(
@@ -697,9 +613,7 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then I should be able to select :paymentMethodName payment method
-     */
+    #[Then('I should be able to select :paymentMethodName payment method')]
     public function iShouldBeAbleToSelectPaymentMethod(string $paymentMethodName): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
@@ -707,9 +621,7 @@ final class CheckoutContext implements Context
         Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods, 'name'), true));
     }
 
-    /**
-     * @Then I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods
-     */
+    #[Then('I should see :firstPaymentMethodName and :secondPaymentMethodName payment methods')]
     public function iShouldSeePaymentMethods(string ...$paymentMethodsNames): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
@@ -719,9 +631,7 @@ final class CheckoutContext implements Context
         }
     }
 
-    /**
-     * @Then I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods
-     */
+    #[Then('I should not see :firstPaymentMethodName and :secondPaymentMethodName payment methods')]
     public function iShouldNotSeePaymentMethods(string ...$paymentMethodsNames): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
@@ -731,9 +641,7 @@ final class CheckoutContext implements Context
         }
     }
 
-    /**
-     * @Then I should have :paymentMethodName payment method available as the :choice choice
-     */
+    #[Then('I should have :paymentMethodName payment method available as the :choice choice')]
     public function iShouldHavePaymentMethodAvailableAsTheChoice(string $paymentMethodName, string $choice): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
@@ -747,17 +655,13 @@ final class CheckoutContext implements Context
         }
     }
 
-    /**
-     * @Then I should still be on the checkout addressing step
-     */
+    #[Then('I should still be on the checkout addressing step')]
     public function iShouldStillBeOnTheCheckoutAddressingStep(): void
     {
         Assert::same($this->getCart()['checkoutState'], OrderCheckoutStates::STATE_CART);
     }
 
-    /**
-     * @Then I should be on the checkout payment step
-     */
+    #[Then('I should be on the checkout payment step')]
     public function iShouldBeOnTheCheckoutPaymentStep(): void
     {
         Assert::inArray(
@@ -766,9 +670,7 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see any information about payment method
-     */
+    #[Then('I should not see any information about payment method')]
     public function iShouldNotSeeAnyInformationAboutPaymentMethod(): void
     {
         $response = $this->client->getLastResponse();
@@ -776,25 +678,19 @@ final class CheckoutContext implements Context
         Assert::true(empty($this->responseChecker->getResponseContent($response)['payments']));
     }
 
-    /**
-     * @Then I should see :shippingMethod shipping method
-     */
+    #[Then('I should see :shippingMethod shipping method')]
     public function iShouldSeeShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         Assert::true($this->hasShippingMethod($shippingMethod));
     }
 
-    /**
-     * @Then /^I should see (shipping method "[^"]+") with fee ("[^"]+")/
-     */
+    #[Then('/^I should see (shipping method "[^"]+") with fee ("[^"]+")/')]
     public function iShouldSeeShippingFee(ShippingMethodInterface $shippingMethod, int $fee): void
     {
         Assert::true($this->hasShippingMethodWithFee($shippingMethod, $fee));
     }
 
-    /**
-     * @Then my order's payment method should be :paymentMethod
-     */
+    #[Then('my order\'s payment method should be :paymentMethod')]
     public function myOrdersPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod): void
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
@@ -809,9 +705,7 @@ final class CheckoutContext implements Context
         throw new \InvalidArgumentException('Couldn\'t find given payment method for this order');
     }
 
-    /**
-     * @Then my order's shipping method should be :shippingMethod
-     */
+    #[Then('my order\'s shipping method should be :shippingMethod')]
     public function myOrdersShippingMethodShouldBe(ShippingMethodInterface $shippingMethod): void
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
@@ -826,9 +720,7 @@ final class CheckoutContext implements Context
         throw new \InvalidArgumentException('Couldn\'t find given shipping method for this order');
     }
 
-    /**
-     * @Then I should be on the checkout shipping step
-     */
+    #[Then('I should be on the checkout shipping step')]
     public function iShouldBeOnTheCheckoutShippingStep(): void
     {
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
@@ -841,18 +733,14 @@ final class CheckoutContext implements Context
         Assert::isEmpty($this->getCart()['shipments']);
     }
 
-    /**
-     * @Then I should not be able to proceed checkout payment step
-     */
+    #[Then('I should not be able to proceed checkout payment step')]
     public function iShouldNotBeAbleToProceedCheckoutPaymentStep(): void
     {
         $this->iShouldBeOnTheCheckoutPaymentStep();
         Assert::isEmpty($this->getCart()['payments']);
     }
 
-    /**
-     * @Then I should not be able to proceed checkout complete step
-     */
+    #[Then('I should not be able to proceed checkout complete step')]
     public function iShouldNotBeAbleToProceedCheckoutCompleteStep(): void
     {
         $this->iShouldBeOnTheCheckoutCompleteStep();
@@ -862,18 +750,14 @@ final class CheckoutContext implements Context
         Assert::same($this->responseChecker->getError($response), 'An empty order cannot be processed.');
     }
 
-    /**
-     * @Then /^the (?:visitor|customer) should have checkout (address|shipping method|payment) step completed$/
-     */
+    #[Then('/^the (?:visitor|customer) should have checkout (address|shipping method|payment) step completed$/')]
     public function theVisitorShouldHaveCheckoutAddressStepCompleted(string $stepType): void
     {
         Assert::same($this->getCheckoutState(), $this::CHECKOUT_STATE_TYPES[$stepType]);
     }
 
-    /**
-     * @Then I should be notified that :countryName country does not exist
-     * @Then they should be notified that :countryName country does not exist
-     */
+    #[Then('I should be notified that :countryName country does not exist')]
+    #[Then('they should be notified that :countryName country does not exist')]
     public function iShouldBeNotifiedThatCountryDoesNotExist(string $countryName): void
     {
         $this->responseChecker->hasViolationWithMessage(
@@ -882,10 +766,8 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that address without country cannot exist
-     * @Then they should be notified that address without country cannot exist
-     */
+    #[Then('I should be notified that address without country cannot exist')]
+    #[Then('they should be notified that address without country cannot exist')]
     public function iShouldBeNotifiedThatAddressWithoutCountryCannotExist(): void
     {
         $this->responseChecker->hasViolationWithMessage(
@@ -894,9 +776,7 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then they should be notified that they cannot address an empty cart
-     */
+    #[Then('they should be notified that they cannot address an empty cart')]
     public function theyShouldBeNotifiedThatTheyCannotAddressAnEmptyCart(): void
     {
         $response = $this->client->getLastResponse();
@@ -905,35 +785,27 @@ final class CheckoutContext implements Context
         $this->responseChecker->hasViolationWithMessage($response, 'The empty cart cannot be addressed');
     }
 
-    /**
-     * @Then I should see the thank you page
-     * @Then /^the (?:visitor|customer) should see the thank you page$/
-     */
     #[Then('my order should be completed successfully')]
+    #[Then('I should see the thank you page')]
+    #[Then('/^the (?:visitor|customer) should see the thank you page$/')]
     public function iShouldSeeTheThankYouPage(): void
     {
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
     }
 
-    /**
-     * @Then I should see selected :shippingMethod shipping method
-     */
+    #[Then('I should see selected :shippingMethod shipping method')]
     public function iShouldSeeSelectedShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         Assert::true($this->hasShippingMethod($shippingMethod));
     }
 
-    /**
-     * @Then I should not see :shippingMethod shipping method
-     */
+    #[Then('I should not see :shippingMethod shipping method')]
     public function iShouldNotSeeShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         Assert::false($this->hasShippingMethod($shippingMethod));
     }
 
-    /**
-     * @Then I should have :shippingMethod shipping method available as the first choice
-     */
+    #[Then('I should have :shippingMethod shipping method available as the first choice')]
     public function iShouldHaveShippingMethodAvailableAsFirstChoice(ShippingMethodInterface $shippingMethod): void
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
@@ -941,9 +813,7 @@ final class CheckoutContext implements Context
         Assert::true($shippingMethods[0]['code'] === $shippingMethod->getCode());
     }
 
-    /**
-     * @Then I should have :shippingMethod shipping method available as the last choice
-     */
+    #[Then('I should have :shippingMethod shipping method available as the last choice')]
     public function iShouldHaveShippingMethodAvailableAsLastChoice(ShippingMethodInterface $shippingMethod): void
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
@@ -951,17 +821,13 @@ final class CheckoutContext implements Context
         Assert::true(end($shippingMethods)['code'] === $shippingMethod->getCode());
     }
 
-    /**
-     * @Then /^my order total should be ("[^"]+")$/
-     */
+    #[Then('/^my order total should be ("[^"]+")$/')]
     public function myOrderTotalShouldBe(int $total): void
     {
         Assert::same($total, (int) $this->getCart()['total']);
     }
 
-    /**
-     * @Then /^my order promotion total should be ("[^"]+")$/
-     */
+    #[Then('/^my order promotion total should be ("[^"]+")$/')]
     public function myOrderPromotionTotalShouldBe(int $promotionTotal): void
     {
         $responsePromotionTotal = $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal');
@@ -969,9 +835,7 @@ final class CheckoutContext implements Context
         Assert::same($promotionTotal, $responsePromotionTotal);
     }
 
-    /**
-     * @Then /^my tax total should be ("[^"]+")$/
-     */
+    #[Then('/^my tax total should be ("[^"]+")$/')]
     public function myTaxTotalShouldBe(int $taxTotal): void
     {
         $responseTaxTotal = $this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal');
@@ -979,9 +843,7 @@ final class CheckoutContext implements Context
         Assert::same($taxTotal, $responseTaxTotal);
     }
 
-    /**
-     * @Then I should have :quantity :productName products in the cart
-     */
+    #[Then('I should have :quantity :productName products in the cart')]
     public function iShouldHaveProductsInTheCart(int $quantity, string $productName): void
     {
         Assert::true(
@@ -1008,9 +870,7 @@ final class CheckoutContext implements Context
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'), $discount);
     }
 
-    /**
-     * @Then there should be no taxes charged
-     */
+    #[Then('there should be no taxes charged')]
     public function thereShouldBeNoTaxesCharged(): void
     {
         $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
@@ -1018,33 +878,25 @@ final class CheckoutContext implements Context
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'taxTotal'), 0);
     }
 
-    /**
-     * @Then my order's locale should be :localeCode
-     */
+    #[Then('my order\'s locale should be :localeCode')]
     public function myOrderLocaleShouldBe(string $localeCode): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'localeCode'), $localeCode);
     }
 
-    /**
-     * @Then /^my order shipping should be ("(?:\£|\$)\d+(?:\.\d+)?")$/
-     */
+    #[Then('/^my order shipping should be ("(?:\£|\$)\d+(?:\.\d+)?")$/')]
     public function myOrderShippingShouldBe(int $price): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingTotal'), $price);
     }
 
-    /**
-     * @Then I should not see shipping total
-     */
+    #[Then('I should not see shipping total')]
     public function iShouldNotSeeShippingTotal(): void
     {
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'shippingTotal'), 0);
     }
 
-    /**
-     * @Then /^I should(?:| also) be notified that the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/
-     */
+    #[Then('/^I should(?:| also) be notified that the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/')]
     public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired(string $firstElement, string $secondElement, string $detailType): void
     {
         $response = $this->client->getLastResponse();
@@ -1065,9 +917,7 @@ final class CheckoutContext implements Context
         }
     }
 
-    /**
-     * @Then /^I should(?:| also) be notified that the "([^"]+)" in (shipping|billing) details is required$/
-     */
+    #[Then('/^I should(?:| also) be notified that the "([^"]+)" in (shipping|billing) details is required$/')]
     public function iShouldBeNotifiedThatTheInShippingDetailsIsRequired(string $element, string $type): void
     {
         /** @var array|null $violations */
@@ -1081,10 +931,8 @@ final class CheckoutContext implements Context
         Assert::same($violation['message'], sprintf('Please enter %s.', $element));
     }
 
-    /**
-     * @Then /^I should be informed that (this product) has been disabled$/
-     * @Then /^I should be informed that (product "[^"]+") is disabled$/
-     */
+    #[Then('/^I should be informed that (this product) has been disabled$/')]
+    #[Then('/^I should be informed that (product "[^"]+") is disabled$/')]
     public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
     {
         Assert::true($this->responseChecker->isViolationWithMessageInResponse(
@@ -1093,9 +941,7 @@ final class CheckoutContext implements Context
         ));
     }
 
-    /**
-     * @Then /^I should be informed that (product "[^"]+") does not exist$/
-     */
+    #[Then('/^I should be informed that (product "[^"]+") does not exist$/')]
     public function iShouldBeInformedThatThisProductDoesNotExist(ProductInterface $product): void
     {
         Assert::true($this->responseChecker->isViolationWithMessageInResponse(
@@ -1104,9 +950,7 @@ final class CheckoutContext implements Context
         ));
     }
 
-    /**
-     * @Then /^I should be informed that ("([^"]*)" product variant) does not exist$/
-     */
+    #[Then('/^I should be informed that ("([^"]*)" product variant) does not exist$/')]
     public function iShouldBeInformedThatProductVariantDoesNotExist(ProductVariantInterface $productVariant): void
     {
         Assert::true($this->responseChecker->isViolationWithMessageInResponse(
@@ -1115,9 +959,7 @@ final class CheckoutContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be informed that product variant with code :code does not exist
-     */
+    #[Then('I should be informed that product variant with code :code does not exist')]
     public function iShouldBeInformedThatProductVariantWithCodeDoesNotExist(string $code): void
     {
         Assert::true($this->responseChecker->isViolationWithMessageInResponse(
@@ -1132,10 +974,8 @@ final class CheckoutContext implements Context
         Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
     }
 
-    /**
-     * @Then address to :fullName should be used for both :addressType1 and :addressType2 of my order
-     * @Then my order's :addressType address should be to :fullName
-     */
+    #[Then('address to :fullName should be used for both :addressType1 and :addressType2 of my order')]
+    #[Then('my order\'s :addressType address should be to :fullName')]
     public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress(string $fullName, string ...$addressTypes): void
     {
         foreach ($addressTypes as $addressType) {
@@ -1143,17 +983,13 @@ final class CheckoutContext implements Context
         }
     }
 
-    /**
-     * @Then I should see :provinceName in the :addressType address
-     */
+    #[Then('I should see :provinceName in the :addressType address')]
     public function iShouldSeeInTheBillingAddress(string $provinceName, string $addressType): void
     {
         $this->hasProvinceNameInAddress($provinceName, $addressType);
     }
 
-    /**
-     * @Then /^I should be informed that (this payment method) has been disabled$/
-     */
+    #[Then('/^I should be informed that (this payment method) has been disabled$/')]
     public function iShouldBeInformedThatThisPaymentMethodHasBeenDisabled(PaymentMethodInterface $paymentMethod): void
     {
         $response = $this->client->getLastResponse();
@@ -1169,27 +1005,21 @@ final class CheckoutContext implements Context
         ));
     }
 
-    /**
-     * @When /^I try to add (product "[^"]+") to the cart$/
-     */
+    #[When('/^I try to add (product "[^"]+") to the cart$/')]
     public function iTryToAddProductToCart(ProductInterface $product): void
     {
         $this->putProductToCart($product, $this->sharedStorage->get('cart_token'));
     }
 
-    /**
-     * @When /^I try to add ("([^"]+)" product variant)$/
-     * @When /^I try to add ("([^"]+)" variant of product "([^"]+)")$/
-     */
+    #[When('/^I try to add ("([^"]+)" product variant)$/')]
+    #[When('/^I try to add ("([^"]+)" variant of product "([^"]+)")$/')]
     public function iTryToAddProductVariant(ProductVariantInterface $productVariant): void
     {
         $tokenValue = $this->getCartTokenValue();
         $this->putVariantToCart($productVariant, $tokenValue);
     }
 
-    /**
-     * @When /^I try to add (product "[^"]+") with variant code "([^"]+)"$/
-     */
+    #[When('/^I try to add (product "[^"]+") with variant code "([^"]+)"$/')]
     public function iTryToAddProductVariantWithCode(ProductInterface $product, string $code): void
     {
         $tokenValue = $this->getCartTokenValue();
@@ -1214,25 +1044,19 @@ final class CheckoutContext implements Context
         $this->sharedStorage->set('response', $this->client->executeCustomRequest($request));
     }
 
-    /**
-     * @When /^I try to remove (product "[^"]+") from the cart$/
-     */
+    #[When('/^I try to remove (product "[^"]+") from the cart$/')]
     public function iTryToRemoveProductFromTheCart(ProductInterface $product): void
     {
         $this->removeOrderItemFromCart($product->getId(), $this->sharedStorage->get('cart_token'));
     }
 
-    /**
-     * @When /^I try to change quantity to (\d+) of (product "[^"]+") from the (cart)$/
-     */
+    #[When('/^I try to change quantity to (\d+) of (product "[^"]+") from the (cart)$/')]
     public function iTryToChangeQuantityToOfProductFromTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue, $quantity);
     }
 
-    /**
-     * @Then I should be informed that cart is no longer available
-     */
+    #[Then('I should be informed that cart is no longer available')]
     public function iShouldBeInformedThatCartIsNoLongerAvailable(): void
     {
         $response = $this->client->getLastResponse();
@@ -1242,10 +1066,8 @@ final class CheckoutContext implements Context
         Assert::same($this->responseChecker->getResponseContent($response)['hydra:description'], 'Not Found');
     }
 
-    /**
-     * @Then /^I should not be able to specify province name manually for (billing address|shipping address)$/
-     * @Then /^I should be notified that selected province is invalid for (billing address|shipping address)$/
-     */
+    #[Then('/^I should not be able to specify province name manually for (billing address|shipping address)$/')]
+    #[Then('/^I should be notified that selected province is invalid for (billing address|shipping address)$/')]
     public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForAddress(string $addressType): void
     {
         $response = $this->client->getLastResponse();
@@ -1264,9 +1086,7 @@ final class CheckoutContext implements Context
         ));
     }
 
-    /**
-     * @Then /^I should be informed that (this promotion) is no longer applied$/
-     */
+    #[Then('/^I should be informed that (this promotion) is no longer applied$/')]
     public function iShouldBeInformedThatMyPromotionIsNoLongerApplied(PromotionInterface $promotion): void
     {
         Assert::contains(
@@ -1275,9 +1095,7 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
-     */
+    #[Then('I should not be able to confirm order because the :shippingMethodName shipping method is not available')]
     public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(string $shippingMethodName): void
     {
         Assert::same(
@@ -1289,17 +1107,13 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @When /^I should see (product "[^"]+") with unit price ("[^"]+")$/
-     */
+    #[When('/^I should see (product "[^"]+") with unit price ("[^"]+")$/')]
     public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
     {
         Assert::true($this->hasProductWithUnitPrice($product->getName(), $unitPrice));
     }
 
-    /**
-     * @Then I should be checking out as :email
-     */
+    #[Then('I should be checking out as :email')]
     public function iShouldBeCheckingOutAs(string $email): void
     {
         $cart = $this->getCart();
@@ -1308,9 +1122,7 @@ final class CheckoutContext implements Context
         Assert::same($cart['customer']['email'], $email);
     }
 
-    /**
-     * @Then I should not be able to change email
-     */
+    #[Then('I should not be able to change email')]
     public function iShouldNotBeAbleToChangeEmail(): void
     {
         $response = $this->client

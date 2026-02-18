@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop;
 
+use Behat\Step\Given;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Behat\Step\When;
 use Sylius\Behat\Page\Shop\HomePageInterface;
@@ -24,17 +26,13 @@ final readonly class CurrencyContext implements Context
     {
     }
 
-    /**
-     * @When I browse currencies
-     */
+    #[When('I browse currencies')]
     public function iBrowseCurrencies(): void
     {
         $this->homePage->open();
     }
 
-    /**
-     * @Given I changed my currency to :currencyCode
-     */
+    #[Given('I changed my currency to :currencyCode')]
     #[When('I switch to the :currencyCode currency')]
     public function iSwitchTheCurrencyToTheCurrency(string $currencyCode): void
     {
@@ -42,9 +40,7 @@ final readonly class CurrencyContext implements Context
         $this->homePage->switchCurrency($currencyCode);
     }
 
-    /**
-     * @Then I should (still) shop using the :currencyCode currency
-     */
+    #[Then('I should (still) shop using the :currencyCode currency')]
     public function iShouldShopUsingTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();
@@ -52,9 +48,7 @@ final readonly class CurrencyContext implements Context
         Assert::same($this->homePage->getActiveCurrency(), $currencyCode);
     }
 
-    /**
-     * @Then I should be able to shop using the :currencyCode currency
-     */
+    #[Then('I should be able to shop using the :currencyCode currency')]
     public function iShouldBeAbleToShopUsingTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();
@@ -62,9 +56,7 @@ final readonly class CurrencyContext implements Context
         Assert::oneOf($currencyCode, $this->homePage->getAvailableCurrencies());
     }
 
-    /**
-     * @Then I should not be able to shop using the :currencyCode currency
-     */
+    #[Then('I should not be able to shop using the :currencyCode currency')]
     public function iShouldNotBeAbleToShopUsingTheCurrency(string $currencyCode): void
     {
         $this->homePage->open();
@@ -78,9 +70,7 @@ final readonly class CurrencyContext implements Context
         }
     }
 
-    /**
-     * @Then I should see :firstCurrency and :secondCurrency in the list
-     */
+    #[Then('I should see :firstCurrency and :secondCurrency in the list')]
     public function iShouldSeeCurrenciesInTheList(string ...$currenciesCodes): void
     {
         $this->homePage->open();
