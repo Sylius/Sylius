@@ -51,7 +51,7 @@ final class UniqueSimpleProductCodeValidatorTest extends TestCase
         /** @var ProductInterface&MockObject $product */
         $product = $this->createMock(ProductInterface::class);
 
-        $constraint = new UniqueSimpleProductCode(['message' => 'Simple product code has to be unique']);
+        $constraint = new UniqueSimpleProductCode(message: 'Simple product code has to be unique');
 
         $product->expects($this->once())->method('isSimple')->willReturn(false);
         $this->context->expects($this->never())->method('buildViolation');
@@ -64,7 +64,7 @@ final class UniqueSimpleProductCodeValidatorTest extends TestCase
         /** @var ProductInterface&MockObject $product */
         $product = $this->createMock(ProductInterface::class);
 
-        $constraint = new UniqueSimpleProductCode(['message' => 'Simple product code has to be unique']);
+        $constraint = new UniqueSimpleProductCode(message: 'Simple product code has to be unique');
 
         $product->expects($this->once())->method('isSimple')->willReturn(true);
         $product->expects($this->once())->method('getCode')->willReturn('AWESOME_PRODUCT');
@@ -81,7 +81,7 @@ final class UniqueSimpleProductCodeValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $existingProductVariant */
         $existingProductVariant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new UniqueSimpleProductCode(['message' => 'Simple product code has to be unique']);
+        $constraint = new UniqueSimpleProductCode(message: 'Simple product code has to be unique');
 
         $product->expects($this->once())->method('isSimple')->willReturn(true);
         $product->expects($this->once())->method('getCode')->willReturn('AWESOME_PRODUCT');
@@ -109,7 +109,7 @@ final class UniqueSimpleProductCodeValidatorTest extends TestCase
         /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
         $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
 
-        $constraint = new UniqueSimpleProductCode(['message' => 'Simple product code has to be unique']);
+        $constraint = new UniqueSimpleProductCode(message: 'Simple product code has to be unique');
 
         $product->expects($this->once())->method('isSimple')->willReturn(true);
         $product->expects($this->once())->method('getCode')->willReturn('AWESOME_PRODUCT');

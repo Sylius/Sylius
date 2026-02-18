@@ -87,7 +87,7 @@ final class ShippingMethodRuleValidatorTest extends TestCase
         $validator->expects($this->once())->method('inContext')->with($this->executionContext)->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate')->with($shippingMethodRule, null, ['sylius', 'total_weight'])->willReturn($contextualValidator);
 
-        $this->shippingMethodRuleValidator->validate($shippingMethodRule, new ShippingMethodRule(['groups' => ['sylius', 'total_weight']]));
+        $this->shippingMethodRuleValidator->validate($shippingMethodRule, new ShippingMethodRule(groups: ['sylius', 'total_weight']));
     }
 
     public function testCallsValidatorWithDefaultGroupsIfNoneAssignedToShippingMethodRule(): void
@@ -104,6 +104,6 @@ final class ShippingMethodRuleValidatorTest extends TestCase
         $validator->expects($this->once())->method('inContext')->with($this->executionContext)->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate')->with($shippingMethodRule, null, ['sylius'])->willReturn($contextualValidator);
 
-        $this->shippingMethodRuleValidator->validate($shippingMethodRule, new ShippingMethodRule(['groups' => ['sylius']]));
+        $this->shippingMethodRuleValidator->validate($shippingMethodRule, new ShippingMethodRule(groups: ['sylius']));
     }
 }
