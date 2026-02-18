@@ -107,5 +107,9 @@ jobs:
             -   name: Install dependencies
                 run: composer update --no-interaction --no-scripts --prefer-dist
 
+            -   name: Create test database schema
+                if: matrix.package == 'Bundle/ApiBundle'
+                run: tests/Application/bin/console doctrine:schema:update --force
+
             -   name: Run tests
                 run: vendor/bin/phpunit --colors=always
