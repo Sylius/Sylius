@@ -3,10 +3,6 @@
     "static-checks": {
       "include": [
         {
-          "php": "8.3",
-          "symfony": "~6.4.0"
-        },
-        {
           "php": "8.4",
           "symfony": "~7.4.0"
         },
@@ -19,14 +15,6 @@
     "e2e-mariadb": {
       "include": [
         {
-          "php": "8.4",
-          "symfony": "~6.4.0",
-          "mariadb": "10.11.13",
-          "doctrine_bundle": "^2.0",
-          "state_machine_adapter": "winzou_state_machine",
-          "legacy_grid_config": true
-        },
-        {
           "php": "8.5",
           "symfony": "~7.4.0",
           "mariadb": "11.4.7",
@@ -38,13 +26,6 @@
     },
     "e2e-mysql": {
       "include": [
-        {
-          "php": "8.4",
-          "symfony": "~6.4.0",
-          "mysql": "8.0",
-          "twig": "^3.3",
-          "doctrine_bundle": "^2.0"
-        },
         {
           "php": "8.5",
           "symfony": "~7.4.0",
@@ -105,12 +86,6 @@
     "e2e-pgsql": {
       "include": [
         {
-          "php": "8.4",
-          "symfony": "~6.4.0",
-          "postgres": "15.13",
-          "doctrine_bundle": "^2.0"
-        },
-        {
           "php": "8.5",
           "symfony": "~7.4.0",
           "postgres": "17.5",
@@ -126,10 +101,6 @@
     "packages": {
       "include": [
         {
-          "php": "8.4",
-          "symfony": "~6.4.0"
-        },
-        {
           "php": "8.5",
           "symfony": "~7.4.0"
         }
@@ -144,7 +115,6 @@
         "8.5"
       ],
       "symfony": [
-        "~6.4.0",
         "~7.4.0"
       ]
     },
@@ -155,7 +125,6 @@
         "8.5"
       ],
       "symfony": [
-        "~6.4.0",
         "~7.4.0"
       ],
       "mariadb": [
@@ -188,7 +157,6 @@
         "8.4"
       ],
       "symfony": [
-        "~6.4.0",
         "~7.4.0"
       ],
       "mysql": [
@@ -266,7 +234,6 @@
         "8.5"
       ],
       "symfony": [
-        "~6.4.0",
         "~7.4.0"
       ],
       "postgres": [
@@ -275,12 +242,6 @@
         "17.5"
       ],
       "include": [
-        {
-          "php": "8.4",
-          "symfony": "~6.4.0",
-          "postgres": "15.13",
-          "doctrine_bundle": "^2.0"
-        },
         {
           "php": "8.5",
           "symfony": "~7.4.0",
@@ -302,7 +263,6 @@
         "8.5"
       ],
       "symfony": [
-        "~6.4.0",
         "~7.4.0"
       ]
     }
