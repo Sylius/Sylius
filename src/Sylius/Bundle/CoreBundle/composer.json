@@ -73,7 +73,7 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13 || ^3.0",
         "doctrine/orm": "^2.18 || ^3.5",
-        "hwi/oauth-bundle": "^2.2",
+        "hwi/oauth-bundle": "dev-master as 2.5.0",
         "matthiasnoback/symfony-config-test": "^6.0",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpunit/phpunit": "^11.5",
