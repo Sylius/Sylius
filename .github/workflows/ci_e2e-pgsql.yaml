@@ -52,7 +52,6 @@ jobs:
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion=${{ matrix.postgres }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
@@ -91,14 +90,13 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v3.0.1
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     e2e: "yes"
-                    database: "postgresql"
-                    database_version: ${{ matrix.postgres }}
+                    database: "postgres:${{ matrix.postgres }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
@@ -141,7 +139,6 @@ jobs:
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "pgsql://postgres:postgres@127.0.0.1/sylius?charset=utf8&serverVersion=${{ matrix.postgres }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
@@ -180,14 +177,13 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v3.0.1
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     e2e: "yes"
-                    database: "postgresql"
-                    database_version: ${{ matrix.postgres }}
+                    database: "postgres:${{ matrix.postgres }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
