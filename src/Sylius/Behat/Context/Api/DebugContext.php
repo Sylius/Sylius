@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api;
 
+use Behat\Hook\AfterStep;
+use Behat\Hook\AfterScenario;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\AfterStepScope;
@@ -29,7 +31,7 @@ final class DebugContext implements Context
     {
     }
 
-    /** @AfterStep */
+    #[AfterStep]
     public function afterStep(AfterStepScope $scope): void
     {
         $debugErrors = $this->responseChecker->getDebugErrors();
@@ -47,7 +49,7 @@ final class DebugContext implements Context
         $this->responseChecker->cleanErrors();
     }
 
-    /** @AfterScenario */
+    #[AfterScenario]
     public function afterScenario(AfterScenarioScope $scope): void
     {
         if (empty($this->errorStack)) {

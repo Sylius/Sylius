@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\Checker\EmailCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -30,10 +31,8 @@ final class EmailContext implements Context
     ) {
     }
 
-    /**
-     * @Then an email with reset token should be sent to :recipient
-     * @Then an email with reset token should be sent to :recipient in :localeCode locale
-     */
+    #[Then('an email with reset token should be sent to :recipient')]
+    #[Then('an email with reset token should be sent to :recipient in :localeCode locale')]
     public function anEmailWithResetTokenShouldBeSentTo(string $recipient, string $localeCode = 'en_US'): void
     {
         $this->assertEmailContainsMessageTo(
@@ -42,9 +41,7 @@ final class EmailContext implements Context
         );
     }
 
-    /**
-     * @Then a verification email should have been sent to :recipient
-     */
+    #[Then('a verification email should have been sent to :recipient')]
     public function aVerificationEmailShouldHaveBeenSentTo(string $recipient): void
     {
         $this->assertEmailContainsMessageTo(
@@ -53,9 +50,7 @@ final class EmailContext implements Context
         );
     }
 
-    /**
-     * @Then a welcoming email should not have been sent to :recipient
-     */
+    #[Then('a welcoming email should not have been sent to :recipient')]
     public function aWelcomingEmailShouldNotHaveBeenSentTo(string $recipient): void
     {
         $this->assertEmailDoesNotContainMessageTo(
@@ -64,17 +59,13 @@ final class EmailContext implements Context
         );
     }
 
-    /**
-     * @Then :count email(s) should be sent to :recipient
-     */
+    #[Then(':count email(s) should be sent to :recipient')]
     public function numberOfEmailsShouldBeSentTo(int $count, string $recipient): void
     {
         Assert::same($this->emailChecker->countMessagesTo($recipient), $count);
     }
 
-    /**
-     * @Then an email with the :method shipment's confirmation for the :orderNumber order should be sent to :email
-     */
+    #[Then('an email with the :method shipment\'s confirmation for the :orderNumber order should be sent to :email')]
     public function anEmailWithShipmentsConfirmationForTheOrderShouldBeSentTo(string $method, string $orderNumber, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo(
@@ -87,19 +78,15 @@ final class EmailContext implements Context
         ));
     }
 
-    /**
-     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him$/
-     * @Then /^an email with the summary of (order placed by "[^"]+") should be sent to him in ("([^"]+)" locale)$/
-     */
+    #[Then('/^an email with the summary of (order placed by "[^"]+") should be sent to him$/')]
+    #[Then('/^an email with the summary of (order placed by "[^"]+") should be sent to him in ("([^"]+)" locale)$/')]
     public function anEmailWithSummaryOfOrderPlacedByShouldBeSentTo(OrderInterface $order, string $localeCode = 'en_US'): void
     {
         $this->anEmailWithTheConfirmationOfTheOrderShouldBeSentTo($order, $order->getCustomer()->getEmailCanonical(), $localeCode);
     }
 
-    /**
-     * @Then an email with the confirmation of the order :order should be sent to :email
-     * @Then an email with the confirmation of the order :order should be sent to :email in :localeCode locale
-     */
+    #[Then('an email with the confirmation of the order :order should be sent to :email')]
+    #[Then('an email with the confirmation of the order :order should be sent to :email in :localeCode locale')]
     public function anEmailWithTheConfirmationOfTheOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
@@ -116,9 +103,7 @@ final class EmailContext implements Context
         );
     }
 
-    /**
-     * @Then an email with the confirmation of the order :order should not be sent to :email
-     */
+    #[Then('an email with the confirmation of the order :order should not be sent to :email')]
     public function anEmailWithTheConfirmationOfTheOrderShouldNotBeSentTo(
         OrderInterface $order,
         string $recipient,
@@ -135,12 +120,10 @@ final class EmailContext implements Context
         );
     }
 
-    /**
-     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
-     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)" in ("([^"]+)" locale)$/
-     * @Then an email with the shipment's confirmation of the order :order should be sent to :recipient
-     * @Then an email with the shipment's confirmation of the order :order should be sent to :recipient in :localeCode locale
-     */
+    #[Then('/^an email with shipment\'s details of (this order) should be sent to "([^"]+)"$/')]
+    #[Then('/^an email with shipment\'s details of (this order) should be sent to "([^"]+)" in ("([^"]+)" locale)$/')]
+    #[Then('an email with the shipment\'s confirmation of the order :order should be sent to :recipient')]
+    #[Then('an email with the shipment\'s confirmation of the order :order should be sent to :recipient in :localeCode locale')]
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(
         OrderInterface $order,
         string $recipient,
@@ -170,19 +153,15 @@ final class EmailContext implements Context
         }
     }
 
-    /**
-     * @Then it should be sent to :recipient
-     * @Then the email with contact request should be sent to :recipient
-     */
+    #[Then('it should be sent to :recipient')]
+    #[Then('the email with contact request should be sent to :recipient')]
     public function anEmailShouldBeSentTo(string $recipient): void
     {
         Assert::true($this->emailChecker->hasRecipient($recipient));
     }
 
-    /**
-     * @Then a welcoming email should have been sent to :recipient
-     * @Then a welcoming email should have been sent to :recipient in :localeCode locale
-     */
+    #[Then('a welcoming email should have been sent to :recipient')]
+    #[Then('a welcoming email should have been sent to :recipient in :localeCode locale')]
     public function aWelcomingEmailShouldHaveBeenSentTo(string $recipient, string $localeCode = 'en_US'): void
     {
         $this->assertEmailContainsMessageTo(
@@ -191,9 +170,7 @@ final class EmailContext implements Context
         );
     }
 
-    /**
-     * @Then an email with instructions on how to reset the administrator's password should be sent to :recipient
-     */
+    #[Then('an email with instructions on how to reset the administrator\'s password should be sent to :recipient')]
     public function anEmailWithInstructionsOnHowToResetTheAdministratorsPasswordShouldBeSentTo(string $recipient): void
     {
         $this->assertEmailContainsMessageTo(
@@ -202,17 +179,13 @@ final class EmailContext implements Context
         );
     }
 
-    /**
-     * @Then :recipient should receive no emails
-     */
+    #[Then(':recipient should receive no emails')]
     public function recipientShouldReceiveNoEmails(string $recipient): void
     {
         Assert::false($this->emailChecker->hasRecipient($recipient));
     }
 
-    /**
-     * @Then only one email should have been sent to :recipient
-     */
+    #[Then('only one email should have been sent to :recipient')]
     public function onlyOneEmailShouldHaveBeenSentTo(string $recipient): void
     {
         Assert::eq($this->emailChecker->countMessagesTo($recipient), 1);
