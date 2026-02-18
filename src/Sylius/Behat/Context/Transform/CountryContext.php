@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -26,14 +27,12 @@ final class CountryContext implements Context
     ) {
     }
 
-    /**
-     * @Transform /^country "([^"]+)"$/
-     * @Transform /^"([^"]+)" country$/
-     * @Transform /^"([^"]+)" as shipping country$/
-     * @Transform /^"([^"]+)" as billing country$/
-     * @Transform :country
-     * @Transform :otherCountry
-     */
+    #[Transform('/^country "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" country$/')]
+    #[Transform('/^"([^"]+)" as shipping country$/')]
+    #[Transform('/^"([^"]+)" as billing country$/')]
+    #[Transform(':country')]
+    #[Transform(':otherCountry')]
     public function getCountryByName($countryName)
     {
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
@@ -47,9 +46,7 @@ final class CountryContext implements Context
         return $country;
     }
 
-    /**
-     * @Transform /^"([^"]+)", "([^"]+)" and "([^"]+)" country$/
-     */
+    #[Transform('/^"([^"]+)", "([^"]+)" and "([^"]+)" country$/')]
     public function getCountriesByNames(string ...$countryNames): array
     {
         $countryCodes = $countryNames;
@@ -58,9 +55,7 @@ final class CountryContext implements Context
         return $this->countryRepository->findBy(['code' => $countryCodes]);
     }
 
-    /**
-     * @Transform :countryCode
-     */
+    #[Transform(':countryCode')]
     public function getCountryCodeByName(string $countryName): string
     {
         return $this->countryNameConverter->convertToCode($countryName);
