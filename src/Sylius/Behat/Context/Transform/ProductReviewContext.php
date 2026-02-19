@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -24,10 +25,8 @@ final class ProductReviewContext implements Context
     {
     }
 
-    /**
-     * @Transform :productReview
-     * @Transform /^"([^"]+)" product review$/
-     */
+    #[Transform(':productReview')]
+    #[Transform('/^"([^"]+)" product review$/')]
     public function getProductReviewByTitle(string $title): ReviewInterface
     {
         $productReview = $this->productReviewRepository->findOneBy(['title' => $title]);

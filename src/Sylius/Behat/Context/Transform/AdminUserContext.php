@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -27,9 +28,7 @@ final class AdminUserContext implements Context
     ) {
     }
 
-    /**
-     * @Transform :adminUser
-     */
+    #[Transform(':adminUser')]
     public function getAdminUserByEmail(string $email): AdminUserInterface
     {
         $adminUser = $this->adminUserRepository->findOneBy(['email' => $email]);
@@ -39,9 +38,7 @@ final class AdminUserContext implements Context
         return $adminUser;
     }
 
-    /**
-     * @Transform /^(I|my)$/
-     */
+    #[Transform('/^(I|my)$/')]
     public function getLoggedAdminUser()
     {
         return $this->sharedStorage->get('administrator');
