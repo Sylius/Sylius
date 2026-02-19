@@ -12,7 +12,7 @@ sylius:
             type: 'Kaarttype'
         payment:
             amount: 'Betalingsbedrag'
-            method: 'Betalmethode'
+            method: 'Betaalmethode'
             state:
                 header: 'Betalingsstatus'
                 checkout: 'Afrekenen'
