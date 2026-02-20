@@ -15,5 +15,4 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $container) {
     $container->import('api/**/*.php');
-    $container->import('api/**/*.xml');
 };
