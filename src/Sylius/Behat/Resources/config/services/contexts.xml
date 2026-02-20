@@ -15,7 +15,7 @@
     <imports>
         <import resource="contexts/api.php" />
         <import resource="contexts/cli.php" />
-        <import resource="contexts/domain.xml" />
+        <import resource="contexts/domain.php" />
         <import resource="contexts/hook.xml" />
         <import resource="contexts/hybrid.xml" />
         <import resource="contexts/setup.php" />
