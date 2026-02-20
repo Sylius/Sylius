@@ -20,6 +20,6 @@
         <import resource="contexts/hybrid.xml" />
         <import resource="contexts/setup.php" />
         <import resource="contexts/transform.php" />
-        <import resource="contexts/ui.xml" />
+        <import resource="contexts/ui.php" />
     </imports>
 </container>
