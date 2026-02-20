@@ -51,7 +51,7 @@ return static function (ContainerConfigurator $container) {
 
     $container->import('services/api.xml');
     $container->import('services/contexts.xml');
-    $container->import('services/elements/**/*.xml');
+    $container->import('services/elements/**/*.php');
     $container->import('services/pages.xml');
 
     $parameters->set('sylius.behat.clock.date_file', '%kernel.project_dir%/var/date.txt');
