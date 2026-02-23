@@ -12,8 +12,8 @@
 declare(strict_types=1);
 
 use Sylius\Behat\Page\Admin\Channel\CreatePage;
-use Sylius\Behat\Page\Admin\Channel\UpdatePage;
 use Sylius\Behat\Page\Admin\Channel\IndexPage;
+use Sylius\Behat\Page\Admin\Channel\UpdatePage;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;

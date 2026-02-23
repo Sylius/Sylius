@@ -24,32 +24,26 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.promotion_coupon.index.class', IndexPage::class);
     $parameters->set('sylius.behat.page.admin.promotion_coupon.update.class', '%sylius.behat.page.admin.crud.update.class%');
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.promotion_coupon.create', '%sylius.behat.page.admin.promotion_coupon.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_promotion_coupon_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.promotion_coupon.generate', '%sylius.behat.page.admin.promotion_coupon.generate.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_promotion_coupon_generate'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.promotion_coupon.index', '%sylius.behat.page.admin.promotion_coupon.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_promotion_coupon_index'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.promotion_coupon.update', '%sylius.behat.page.admin.promotion_coupon.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_promotion_coupon_update'])
     ;

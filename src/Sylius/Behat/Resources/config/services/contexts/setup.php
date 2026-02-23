@@ -12,13 +12,16 @@
 declare(strict_types=1);
 
 use Sylius\Behat\Context\Setup\AddressContext;
+use Sylius\Behat\Context\Setup\AdminSecurityContext;
 use Sylius\Behat\Context\Setup\AdminUserContext;
 use Sylius\Behat\Context\Setup\CalendarContext;
 use Sylius\Behat\Context\Setup\CartContext;
-use Sylius\Behat\Context\Setup\CheckoutContext;
-use Sylius\Behat\Context\Setup\Checkout\ShippingContext;
-use Sylius\Behat\Context\Setup\Checkout\PaymentContext;
+use Sylius\Behat\Context\Setup\CatalogPromotionContext;
 use Sylius\Behat\Context\Setup\ChannelContext;
+use Sylius\Behat\Context\Setup\Checkout\AddressContext as CheckoutAddressContext;
+use Sylius\Behat\Context\Setup\Checkout\PaymentContext as CheckoutPaymentContext;
+use Sylius\Behat\Context\Setup\Checkout\ShippingContext as CheckoutShippingContext;
+use Sylius\Behat\Context\Setup\CheckoutContext;
 use Sylius\Behat\Context\Setup\CurrencyContext;
 use Sylius\Behat\Context\Setup\CustomerContext;
 use Sylius\Behat\Context\Setup\CustomerGroupContext;
@@ -26,26 +29,26 @@ use Sylius\Behat\Context\Setup\ExchangeRateContext;
 use Sylius\Behat\Context\Setup\GeographicalContext;
 use Sylius\Behat\Context\Setup\LocaleContext;
 use Sylius\Behat\Context\Setup\OrderContext;
-use Sylius\Resource\Generator\RandomnessGeneratorInterface;
+use Sylius\Behat\Context\Setup\PaymentContext;
+use Sylius\Behat\Context\Setup\PaymentRequestContext;
 use Sylius\Behat\Context\Setup\PriceHistoryContext;
-use Sylius\Behat\Context\Setup\ProductContext;
 use Sylius\Behat\Context\Setup\ProductAssociationContext;
 use Sylius\Behat\Context\Setup\ProductAttributeContext;
+use Sylius\Behat\Context\Setup\ProductContext;
 use Sylius\Behat\Context\Setup\ProductOptionContext;
 use Sylius\Behat\Context\Setup\ProductReviewContext;
 use Sylius\Behat\Context\Setup\ProductTaxonContext;
 use Sylius\Behat\Context\Setup\PromotionContext;
-use Sylius\Behat\Context\Setup\AdminSecurityContext;
-use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Context\Setup\ShippingCategoryContext;
+use Sylius\Behat\Context\Setup\ShippingContext;
+use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Context\Setup\TaxationContext;
 use Sylius\Behat\Context\Setup\TaxonomyContext;
 use Sylius\Behat\Context\Setup\ThemeContext;
-use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 use Sylius\Behat\Context\Setup\UserContext;
 use Sylius\Behat\Context\Setup\ZoneContext;
-use Sylius\Behat\Context\Setup\CatalogPromotionContext;
-use Sylius\Behat\Context\Setup\PaymentRequestContext;
+use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
+use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
@@ -111,7 +114,7 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.setup.checkout.address', \Sylius\Behat\Context\Setup\Checkout\AddressContext::class)
+        ->set('sylius.behat.context.setup.checkout.address', CheckoutAddressContext::class)
         ->args([
             service('sylius.behat.shared_storage'),
             service('sylius.command_bus'),
@@ -121,8 +124,10 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.setup.checkout.shipping',
-            ShippingContext::class)
+        ->set(
+            'sylius.behat.context.setup.checkout.shipping',
+            CheckoutShippingContext::class,
+        )
         ->args([
             service('sylius.behat.shared_storage'),
             service('sylius.command_bus'),
@@ -130,7 +135,7 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.setup.checkout.payment', PaymentContext::class)
+        ->set('sylius.behat.context.setup.checkout.payment', CheckoutPaymentContext::class)
         ->args([
             service('sylius.behat.shared_storage'),
             service('sylius.command_bus'),
@@ -239,7 +244,7 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.setup.payment', \Sylius\Behat\Context\Setup\PaymentContext::class)
+        ->set('sylius.behat.context.setup.payment', PaymentContext::class)
         ->args([
             service('sylius.behat.shared_storage'),
             service('sylius.repository.payment_method'),
@@ -286,8 +291,10 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.setup.product_association',
-            ProductAssociationContext::class)
+        ->set(
+            'sylius.behat.context.setup.product_association',
+            ProductAssociationContext::class,
+        )
         ->args([
             service('sylius.behat.shared_storage'),
             service('sylius.factory.product_association_type'),
@@ -300,8 +307,10 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.setup.product_attribute',
-            ProductAttributeContext::class)
+        ->set(
+            'sylius.behat.context.setup.product_attribute',
+            ProductAttributeContext::class,
+        )
         ->args([
             service('sylius.behat.shared_storage'),
             service('sylius.repository.product_attribute'),
@@ -398,7 +407,7 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.setup.shipping', \Sylius\Behat\Context\Setup\ShippingContext::class)
+        ->set('sylius.behat.context.setup.shipping', ShippingContext::class)
         ->args([
             service('sylius.behat.shared_storage'),
             service('sylius.repository.shipping_method'),
@@ -410,8 +419,10 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.setup.shipping_category',
-            ShippingCategoryContext::class)
+        ->set(
+            'sylius.behat.context.setup.shipping_category',
+            ShippingCategoryContext::class,
+        )
         ->args([
             service('sylius.behat.shared_storage'),
             service('sylius.factory.shipping_category'),

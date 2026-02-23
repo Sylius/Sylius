@@ -12,8 +12,8 @@
 declare(strict_types=1);
 
 use Sylius\Behat\Page\Admin\CatalogPromotion\CreatePage;
-use Sylius\Behat\Page\Admin\CatalogPromotion\ShowPage;
 use Sylius\Behat\Page\Admin\CatalogPromotion\ProductVariant\IndexPage;
+use Sylius\Behat\Page\Admin\CatalogPromotion\ShowPage;
 use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePage;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 

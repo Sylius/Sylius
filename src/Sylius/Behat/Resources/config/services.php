@@ -49,10 +49,10 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
     $parameters = $container->parameters();
 
-    $container->import('services/api.xml');
-    $container->import('services/contexts.xml');
+    $container->import('services/api.php');
+    $container->import('services/contexts.php');
     $container->import('services/elements/**/*.php');
-    $container->import('services/pages.xml');
+    $container->import('services/pages.php');
 
     $parameters->set('sylius.behat.clock.date_file', '%kernel.project_dir%/var/date.txt');
     $parameters->set('sylius.behat.guest_cart_token_file', '%kernel.project_dir%/var/guest_cart_token.txt');

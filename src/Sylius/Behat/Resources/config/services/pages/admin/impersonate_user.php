@@ -20,11 +20,8 @@ return static function (ContainerConfigurator $container) {
 
     $parameters->set('sylius.behat.page.admin.impersonate_user.class', ImpersonateUserPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.impersonate_user', '%sylius.behat.page.admin.impersonate_user.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 };

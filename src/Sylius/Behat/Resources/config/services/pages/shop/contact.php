@@ -20,11 +20,8 @@ return static function (ContainerConfigurator $container) {
 
     $parameters->set('sylius.behat.page.shop.contact.class', ContactPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.shop.contact', '%sylius.behat.page.shop.contact.class%')
-        ->private()
         ->parent('sylius.behat.page.shop.page')
     ;
 };

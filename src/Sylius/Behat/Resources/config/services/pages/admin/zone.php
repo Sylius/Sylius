@@ -21,25 +21,20 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.zone.index.class', '%sylius.behat.page.admin.crud.index.class%');
     $parameters->set('sylius.behat.page.admin.zone.update.class', '%sylius.behat.page.admin.crud.update.class%');
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.zone.create', '%sylius.behat.page.admin.zone.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_zone_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.zone.index', '%sylius.behat.page.admin.zone.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_zone_index'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.zone.update', '%sylius.behat.page.admin.zone.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_zone_update'])
     ;

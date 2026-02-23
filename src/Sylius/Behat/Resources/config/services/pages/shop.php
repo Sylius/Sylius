@@ -25,23 +25,18 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.shop.cart_summary.class', SummaryPage::class);
     $parameters->set('sylius.behat.page.shop.home.class', HomePage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.shop.page', Page::class)
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.cart_summary', '%sylius.behat.page.shop.cart_summary.class%')
-        ->private()
         ->parent('sylius.behat.page.shop.page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.home', '%sylius.behat.page.shop.home.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 };

@@ -12,6 +12,8 @@
 declare(strict_types=1);
 
 use Sylius\Behat\Context\Transform\AddressContext;
+use Sylius\Behat\Context\Transform\AdminUserContext;
+use Sylius\Behat\Context\Transform\CartContext;
 use Sylius\Behat\Context\Transform\CatalogPromotionContext;
 use Sylius\Behat\Context\Transform\ChannelContext;
 use Sylius\Behat\Context\Transform\CountryContext;
@@ -25,9 +27,9 @@ use Sylius\Behat\Context\Transform\LexicalContext;
 use Sylius\Behat\Context\Transform\LocaleContext;
 use Sylius\Behat\Context\Transform\OrderContext;
 use Sylius\Behat\Context\Transform\PaymentMethodContext;
-use Sylius\Behat\Context\Transform\ProductContext;
 use Sylius\Behat\Context\Transform\ProductAssociationTypeContext;
 use Sylius\Behat\Context\Transform\ProductAttributeContext;
+use Sylius\Behat\Context\Transform\ProductContext;
 use Sylius\Behat\Context\Transform\ProductOptionContext;
 use Sylius\Behat\Context\Transform\ProductOptionValueContext;
 use Sylius\Behat\Context\Transform\ProductReviewContext;
@@ -38,16 +40,14 @@ use Sylius\Behat\Context\Transform\SharedStorageContext;
 use Sylius\Behat\Context\Transform\ShippingCalculatorContext;
 use Sylius\Behat\Context\Transform\ShippingCategoryContext;
 use Sylius\Behat\Context\Transform\ShippingMethodContext;
+use Sylius\Behat\Context\Transform\ShopUserContext;
 use Sylius\Behat\Context\Transform\TaxCategoryContext;
-use Sylius\Behat\Context\Transform\TaxRateContext;
 use Sylius\Behat\Context\Transform\TaxonContext;
+use Sylius\Behat\Context\Transform\TaxRateContext;
 use Sylius\Behat\Context\Transform\ThemeContext;
 use Sylius\Behat\Context\Transform\UserContext;
-use Sylius\Behat\Context\Transform\AdminUserContext;
-use Sylius\Behat\Context\Transform\CartContext;
 use Sylius\Behat\Context\Transform\ZoneContext;
 use Sylius\Behat\Context\Transform\ZoneMemberContext;
-use Sylius\Behat\Context\Transform\ShopUserContext;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 

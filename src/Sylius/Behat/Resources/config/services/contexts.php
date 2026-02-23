@@ -11,14 +11,15 @@
 
 declare(strict_types=1);
 
-use Sylius\Behat\Page\TestPlugin\MainPage;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $container) {
-    $services = $container->services();
-
-    $services
-        ->set('sylius.behat.page.test_plugin.main', MainPage::class)
-        ->parent('sylius.behat.symfony_page')
-    ;
+    $container->import('contexts/api.php');
+    $container->import('contexts/cli.php');
+    $container->import('contexts/domain.php');
+    $container->import('contexts/hook.php');
+    $container->import('contexts/hybrid.php');
+    $container->import('contexts/setup.php');
+    $container->import('contexts/transform.php');
+    $container->import('contexts/ui.php');
 };

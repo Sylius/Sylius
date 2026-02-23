@@ -21,11 +21,8 @@ return static function (ContainerConfigurator $container) {
 
     $parameters->set('sylius.behat.page.admin.dashboard.class', DashboardPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.dashboard', '%sylius.behat.page.admin.dashboard.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
         ->args([service('sylius.behat.table_accessor')])
     ;

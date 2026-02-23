@@ -11,14 +11,14 @@
 
 declare(strict_types=1);
 
-use Sylius\Behat\Element\Admin\ProductAssociationType\FormElement;
-use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Element\Admin\Product\AssociationsFormElement;
 use Sylius\Behat\Element\Admin\Product\AttributesFormElement;
 use Sylius\Behat\Element\Admin\Product\ChannelPricingsFormElement;
 use Sylius\Behat\Element\Admin\Product\MediaFormElement;
 use Sylius\Behat\Element\Admin\Product\TaxonomyFormElement;
 use Sylius\Behat\Element\Admin\Product\TranslationsFormElement;
+use Sylius\Behat\Element\Admin\ProductAssociationType\FormElement;
+use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 

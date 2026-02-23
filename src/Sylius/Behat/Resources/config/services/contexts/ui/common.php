@@ -14,10 +14,10 @@ declare(strict_types=1);
 use Sylius\Behat\Context\Ui\BrowserContext;
 use Sylius\Behat\Context\Ui\ChannelContext;
 use Sylius\Behat\Context\Ui\CustomerContext;
-use Sylius\Behat\Context\Ui\ThemeContext;
-use Sylius\Behat\Context\Ui\UserContext;
 use Sylius\Behat\Context\Ui\EmailContext;
 use Sylius\Behat\Context\Ui\SaveContext;
+use Sylius\Behat\Context\Ui\ThemeContext;
+use Sylius\Behat\Context\Ui\UserContext;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 

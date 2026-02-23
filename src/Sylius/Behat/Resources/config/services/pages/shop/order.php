@@ -11,8 +11,8 @@
 
 declare(strict_types=1);
 
-use Sylius\Behat\Page\Shop\Order\ThankYouPage;
 use Sylius\Behat\Page\Shop\Order\ShowPage;
+use Sylius\Behat\Page\Shop\Order\ThankYouPage;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $container) {
@@ -22,17 +22,13 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.shop.order.thank_you.class', ThankYouPage::class);
     $parameters->set('sylius.behat.page.shop.order.show.class', ShowPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.shop.order.thank_you', '%sylius.behat.page.shop.order.thank_you.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.order.show', '%sylius.behat.page.shop.order.show.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 };

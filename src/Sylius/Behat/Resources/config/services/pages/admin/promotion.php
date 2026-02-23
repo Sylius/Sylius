@@ -12,8 +12,8 @@
 declare(strict_types=1);
 
 use Sylius\Behat\Page\Admin\Promotion\CreatePage;
-use Sylius\Behat\Page\Admin\Promotion\UpdatePage;
 use Sylius\Behat\Page\Admin\Promotion\IndexPage;
+use Sylius\Behat\Page\Admin\Promotion\UpdatePage;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $container) {
@@ -24,25 +24,20 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.promotion.update.class', UpdatePage::class);
     $parameters->set('sylius.behat.page.admin.promotion.index.class', IndexPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.promotion.create', '%sylius.behat.page.admin.promotion.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_promotion_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.promotion.update', '%sylius.behat.page.admin.promotion.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_promotion_update'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.promotion.index', '%sylius.behat.page.admin.promotion.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_promotion_index'])
     ;
