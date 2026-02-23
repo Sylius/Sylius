@@ -18,8 +18,8 @@
         <import resource="contexts/domain.xml" />
         <import resource="contexts/hook.xml" />
         <import resource="contexts/hybrid.xml" />
-        <import resource="contexts/setup.xml" />
-        <import resource="contexts/transform.xml" />
-        <import resource="contexts/ui.xml" />
+        <import resource="contexts/setup.php" />
+        <import resource="contexts/transform.php" />
+        <import resource="contexts/ui.php" />
     </imports>
 </container>
