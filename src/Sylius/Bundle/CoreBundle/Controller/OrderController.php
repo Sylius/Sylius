@@ -27,6 +27,8 @@ class OrderController extends BaseOrderController
     /** @deprecated This method is deprecated and will be removed in Sylius 3.0 */
     public function summaryAction(Request $request): Response
     {
+        trigger_deprecation('sylius/shop-bundle', '2.3', '"%s" method is deprecated and will be removed in Sylius 3.0', __METHOD__);
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $cart = $this->getCurrentCart();
