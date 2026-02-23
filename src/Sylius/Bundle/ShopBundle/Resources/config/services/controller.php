@@ -20,6 +20,7 @@ use Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController;
 use Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController;
 use Sylius\Bundle\ShopBundle\Controller\OrderThankYouAction;
 use Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController;
+use Sylius\Bundle\ShopBundle\Controller\ResetPasswordAction;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -99,6 +100,21 @@ return static function (ContainerConfigurator $container) {
             service('twig'),
             service('sylius.context.channel'),
             service('router.default'),
+        ])
+        ->tag('controller.service_arguments')
+    ;
+
+    $services
+        ->set('sylius_shop.controller.reset_password', ResetPasswordAction::class)
+        ->args([
+            service('twig'),
+            service('router.default'),
+            service('form.factory'),
+            service('sylius.repository.shop_user'),
+            service('translator'),
+            service('request_stack'),
+            service('sylius.command_dispatcher.reset_password.shop'),
+            param('sylius.shop_user.token.password_reset.ttl'),
         ])
         ->tag('controller.service_arguments')
     ;

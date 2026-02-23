@@ -72,8 +72,11 @@ class UserController extends ResourceController
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
+    /** @deprecated This method is deprecated and will be removed in Sylius 3.0 */
     public function resetPasswordAction(Request $request, string $token): Response
     {
+        trigger_deprecation('sylius/user-bundle', '2.3', '"%s" method is deprecated and will be removed in Sylius 3.0', __METHOD__);
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         /** @var UserInterface|null $user */
         $user = $this->repository->findOneBy(['passwordResetToken' => $token]);
