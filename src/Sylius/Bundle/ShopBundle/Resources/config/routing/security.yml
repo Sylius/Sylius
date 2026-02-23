@@ -76,8 +76,15 @@ sylius_shop_request_password_reset_token:
 sylius_shop_password_reset:
     path: /forgotten-password/{token}
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_reset_password')"
     defaults:
         _controller: sylius.controller.shop_user::resetPasswordAction
         _sylius:
             template: "@SyliusShop/account/reset_password.html.twig"
             redirect: sylius_shop_login
+
+_sylius_shop_password_reset:
+    path: /forgotten-password/{token}
+    methods: [GET, POST]
+    controller: sylius_shop.controller.reset_password
+    condition: "not context.isSyliusRoutingBcLayerEnabled('shop_reset_password')"
