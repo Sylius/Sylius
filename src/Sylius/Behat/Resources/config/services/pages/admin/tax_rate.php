@@ -23,25 +23,20 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.tax_rate.index.class', '%sylius.behat.page.admin.crud.index.class%');
     $parameters->set('sylius.behat.page.admin.tax_rate.update.class', UpdatePage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.tax_rate.create', '%sylius.behat.page.admin.tax_rate.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_tax_rate_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.tax_rate.index', '%sylius.behat.page.admin.tax_rate.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_tax_rate_index'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.tax_rate.update', '%sylius.behat.page.admin.tax_rate.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_tax_rate_update'])
     ;

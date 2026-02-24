@@ -24,25 +24,20 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.country.index.class', IndexPage::class);
     $parameters->set('sylius.behat.page.admin.country.update.class', UpdatePage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.country.index', '%sylius.behat.page.admin.country.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_country_index'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.country.create', '%sylius.behat.page.admin.country.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_country_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.country.update', '%sylius.behat.page.admin.country.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_country_update'])
     ;

@@ -23,25 +23,20 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.payment_method.index.class', '%sylius.behat.page.admin.crud.index.class%');
     $parameters->set('sylius.behat.page.admin.payment_method.update.class', UpdatePage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.payment_method.create', '%sylius.behat.page.admin.payment_method.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_payment_method_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.payment_method.index', '%sylius.behat.page.admin.payment_method.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_payment_method_index'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.payment_method.update', '%sylius.behat.page.admin.payment_method.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_payment_method_update'])
     ;

@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
+use Sylius\Behat\Context\Hook\BadGatewayContext;
+use Sylius\Behat\Context\Hook\CacheContext;
 use Sylius\Behat\Context\Hook\CalendarContext;
 use Sylius\Behat\Context\Hook\DoctrineORMContext;
+use Sylius\Behat\Context\Hook\GuestCartContext;
+use Sylius\Behat\Context\Hook\MailerContext;
 use Sylius\Behat\Context\Hook\SessionContext;
 use Sylius\Behat\Context\Hook\TestThemeContext;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
-use Sylius\Behat\Context\Hook\MailerContext;
-use Sylius\Behat\Context\Hook\CacheContext;
-use Sylius\Behat\Context\Hook\GuestCartContext;
-use Sylius\Behat\Context\Hook\BadGatewayContext;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 

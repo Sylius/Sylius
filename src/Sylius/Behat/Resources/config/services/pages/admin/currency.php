@@ -21,18 +21,14 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.currency.create.class', '%sylius.behat.page.admin.crud.create.class%');
     $parameters->set('sylius.behat.page.admin.currency.index.class', IndexPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.currency.create', '%sylius.behat.page.admin.currency.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_currency_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.currency.index', '%sylius.behat.page.admin.currency.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_currency_index'])
     ;

@@ -11,8 +11,8 @@
 
 declare(strict_types=1);
 
-use Sylius\Behat\Page\Admin\Crud\IndexPage;
 use Sylius\Behat\Page\Admin\Crud\CreatePage;
+use Sylius\Behat\Page\Admin\Crud\IndexPage;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -27,11 +27,8 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.crud.create.class', CreatePage::class);
     $parameters->set('sylius.behat.page.admin.crud.update.class', UpdatePage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.crud.index', '%sylius.behat.page.admin.crud.index.class%')
-        ->private()
         ->abstract()
         ->parent('sylius.behat.symfony_page')
         ->args([service('sylius.behat.table_accessor')])
@@ -39,14 +36,12 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.admin.crud.create', '%sylius.behat.page.admin.crud.create.class%')
-        ->private()
         ->abstract()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.admin.crud.update', '%sylius.behat.page.admin.crud.update.class%')
-        ->private()
         ->abstract()
         ->parent('sylius.behat.symfony_page')
     ;

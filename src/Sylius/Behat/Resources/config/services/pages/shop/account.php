@@ -49,42 +49,34 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.shop.account.verify.class', VerificationPage::class);
     $parameters->set('sylius.behat.page.shop.account.well_known_password_change.class', WellKnownPasswordChangePage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.shop.account.address_book.create', '%sylius.behat.page.shop.account.address_book.create.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.address_book.index', '%sylius.behat.page.shop.account.address_book.index.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.address_book.update', '%sylius.behat.page.shop.account.address_book.update.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.change_password', '%sylius.behat.page.shop.account.change_password.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
         ->args([service('sylius.behat.shared_storage')])
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.dashboard', '%sylius.behat.page.shop.account.dashboard.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.login', '%sylius.behat.page.shop.account.login.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
         ->args([
             service('sylius.behat.table_accessor'),
@@ -94,58 +86,49 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.shop.account.order.index', '%sylius.behat.page.shop.account.order.index.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
         ->args([service('sylius.behat.table_accessor')])
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.order.show', '%sylius.behat.page.shop.account.order.show.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
         ->args([service('sylius.behat.table_accessor')])
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.profile_update', '%sylius.behat.page.shop.account.profile_update.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.register', '%sylius.behat.page.shop.account.register.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.register.thank_you', '%sylius.behat.page.shop.account.register.thank_you.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.request_password_reset', '%sylius.behat.page.shop.account.request_password_reset.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.reset_password', '%sylius.behat.page.shop.account.reset_password.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
         ->args([service('sylius.behat.shared_storage')])
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.verify', '%sylius.behat.page.shop.account.verify.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 
     $services
         ->set('sylius.behat.page.shop.account.well_known_password_change', '%sylius.behat.page.shop.account.well_known_password_change.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 };

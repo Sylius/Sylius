@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-use Sylius\Behat\Page\Admin\Account\ResetPasswordPage;
 use Sylius\Behat\Page\Admin\Account\LoginPage;
 use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage;
+use Sylius\Behat\Page\Admin\Account\ResetPasswordPage;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 

@@ -24,11 +24,8 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.shipment.index.class', IndexPage::class);
     $parameters->set('sylius.behat.page.admin.shipment.show.class', ShowPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.shipment.index', '%sylius.behat.page.admin.shipment.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args([
             'sylius_admin_shipment_index',
@@ -38,7 +35,6 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.admin.shipment.show', '%sylius.behat.page.admin.shipment.show.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 };

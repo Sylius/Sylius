@@ -21,25 +21,20 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.taxon.create_for_parent.class', '%sylius.behat.page.admin.crud.create.class%');
     $parameters->set('sylius.behat.page.admin.taxon.update.class', '%sylius.behat.page.admin.crud.update.class%');
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.taxon.create', '%sylius.behat.page.admin.taxon.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_taxon_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.taxon.create_for_parent', '%sylius.behat.page.admin.taxon.create_for_parent.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_taxon_create_for_parent'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.taxon.update', '%sylius.behat.page.admin.taxon.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_taxon_update'])
     ;

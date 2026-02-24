@@ -26,32 +26,26 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.product_variant.index.class', IndexPage::class);
     $parameters->set('sylius.behat.page.admin.product_variant.update.class', UpdatePage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.product_variant.create', '%sylius.behat.page.admin.product_variant.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_product_variant_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.product_variant.generate', '%sylius.behat.page.admin.product_variant.generate.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
         ->args(['product_variant'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.product_variant.index', '%sylius.behat.page.admin.product_variant.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_product_variant_index'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.product_variant.update', '%sylius.behat.page.admin.product_variant.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_product_variant_update'])
     ;

@@ -21,18 +21,14 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.locale.create.class', '%sylius.behat.page.admin.crud.create.class%');
     $parameters->set('sylius.behat.page.admin.locale.index.class', IndexPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.locale.create', '%sylius.behat.page.admin.locale.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_locale_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.locale.index', '%sylius.behat.page.admin.locale.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_locale_index'])
     ;

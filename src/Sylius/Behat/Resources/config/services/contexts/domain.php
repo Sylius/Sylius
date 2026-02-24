@@ -11,17 +11,17 @@
 
 declare(strict_types=1);
 
-use Sylius\Behat\Context\Domain\NotificationContext;
+use Sylius\Behat\Context\Domain\CartContext;
 use Sylius\Behat\Context\Domain\ManagingOrdersContext;
 use Sylius\Behat\Context\Domain\ManagingPaymentsContext;
 use Sylius\Behat\Context\Domain\ManagingPriceHistoryContext;
 use Sylius\Behat\Context\Domain\ManagingProductsContext;
-use Sylius\Behat\Context\Domain\ManagingPromotionsContext;
 use Sylius\Behat\Context\Domain\ManagingPromotionCouponsContext;
-use Sylius\Behat\Context\Domain\SecurityContext;
+use Sylius\Behat\Context\Domain\ManagingPromotionsContext;
 use Sylius\Behat\Context\Domain\ManagingShipmentsContext;
-use Sylius\Behat\Context\Domain\CartContext;
 use Sylius\Behat\Context\Domain\ManagingShippingMethodsContext;
+use Sylius\Behat\Context\Domain\NotificationContext;
+use Sylius\Behat\Context\Domain\SecurityContext;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 

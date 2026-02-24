@@ -11,64 +11,65 @@
 
 declare(strict_types=1);
 
+use Sylius\Behat\Context\Ui\Admin\BrowsingCatalogPromotionProductVariantsContext;
+use Sylius\Behat\Context\Ui\Admin\BrowsingProductVariantsContext;
+use Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext;
 use Sylius\Behat\Context\Ui\Admin\DashboardContext;
 use Sylius\Behat\Context\Ui\Admin\ErrorPageContext;
+use Sylius\Behat\Context\Ui\Admin\ImpersonatingCustomersContext;
 use Sylius\Behat\Context\Ui\Admin\LocaleContext;
 use Sylius\Behat\Context\Ui\Admin\LoginContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingAdministratorsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingAdministratorLocalesContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingAdministratorsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingCatalogPromotionsContext;
-use Sylius\Behat\Element\Admin\CatalogPromotion\FormElement;
-use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElement;
-use Sylius\Behat\Context\Ui\Admin\BrowsingCatalogPromotionProductVariantsContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingChannelsContext;
-use Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElementInterface;
-use Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElementInterface;
-use Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface;
 use Sylius\Behat\Context\Ui\Admin\ManagingChannelsBillingDataContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingChannelsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingCurrenciesContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingCustomersContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingCustomerGroupsContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingCustomersContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingExchangeRatesContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingInventoryContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingOrdersContext;
-use Sylius\Behat\Context\Ui\Admin\OrderHistoryContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingPaymentsContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingShipmentsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingPaymentMethodsContext;
-use Sylius\Behat\Context\Ui\Admin\ProductShowPageContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingProductsContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingPaymentRequestsContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingPaymentsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingProductAssociationTypesContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingProductAttributesContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingProductOptionsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingProductReviewsContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingProductsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingProductTaxonsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsPricesContext;
-use Sylius\Behat\Context\Ui\Admin\BrowsingProductVariantsContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingPromotionsContext;
-use Sylius\Behat\Element\Admin\Promotion\FormElementInterface;
 use Sylius\Behat\Context\Ui\Admin\ManagingPromotionCouponsContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingPromotionsContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingShipmentsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingShippingCategoriesContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoriesContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingTranslatableEntitiesContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingTaxonsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext;
+use Sylius\Behat\Context\Ui\Admin\ManagingTranslatableEntitiesContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingZonesContext;
+use Sylius\Behat\Context\Ui\Admin\NavigatingBetweenProductShowAndEditPagesContext;
 use Sylius\Behat\Context\Ui\Admin\NotificationContext;
-use Sylius\Behat\Context\Ui\Admin\ImpersonatingCustomersContext;
+use Sylius\Behat\Context\Ui\Admin\OrderHistoryContext;
+use Sylius\Behat\Context\Ui\Admin\ProductCreationContext;
+use Sylius\Behat\Context\Ui\Admin\ProductShowPageContext;
+use Sylius\Behat\Context\Ui\Admin\ProductVariantsCreationContext;
 use Sylius\Behat\Context\Ui\Admin\RemovingProductContext;
 use Sylius\Behat\Context\Ui\Admin\RemovingTaxonContext;
 use Sylius\Behat\Context\Ui\Admin\ResettingPasswordContext;
-use Sylius\Behat\Context\Ui\Admin\NavigatingBetweenProductShowAndEditPagesContext;
-use Sylius\Behat\Context\Ui\Admin\ProductCreationContext;
-use Sylius\Behat\Context\Ui\Admin\ProductVariantsCreationContext;
-use Sylius\Behat\Context\Ui\Admin\ChannelPricingLogEntryContext;
 use Sylius\Behat\Context\Ui\Admin\SearchFilterContext;
-use Sylius\Behat\Context\Ui\Admin\ManagingPaymentRequestsContext;
+use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElement;
+use Sylius\Behat\Element\Admin\CatalogPromotion\FormElement;
+use Sylius\Behat\Element\Admin\Channel\DiscountedProductsCheckingPeriodInputElementInterface;
+use Sylius\Behat\Element\Admin\Channel\ExcludeTaxonsFromShowingLowestPriceInputElementInterface;
+use Sylius\Behat\Element\Admin\Channel\LowestPriceFlagElementInterface;
+use Sylius\Behat\Element\Admin\Promotion\FormElementInterface;
+use Sylius\Behat\Element\Admin\TaxRate\FilterElement as TaxRateFilterElement;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
@@ -492,7 +493,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.behat.page.admin.tax_rate.create'),
             service('sylius.behat.page.admin.tax_rate.update'),
             service('sylius.behat.current_page_resolver'),
-            service(\Sylius\Behat\Element\Admin\TaxRate\FilterElement::class),
+            service(TaxRateFilterElement::class),
         ])
     ;
 
@@ -552,8 +553,10 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.behat.context.ui.admin.navigating_between_product_show_and_edit_pages_context',
-            NavigatingBetweenProductShowAndEditPagesContext::class)
+        ->set(
+            'sylius.behat.context.ui.admin.navigating_between_product_show_and_edit_pages_context',
+            NavigatingBetweenProductShowAndEditPagesContext::class,
+        )
         ->args([
             service('sylius.behat.page.admin.product.update_simple'),
             service('sylius.behat.page.admin.product_variant.update'),

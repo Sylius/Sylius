@@ -21,25 +21,20 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.customer_group.index.class', '%sylius.behat.page.admin.crud.index.class%');
     $parameters->set('sylius.behat.page.admin.customer_group.update.class', '%sylius.behat.page.admin.crud.update.class%');
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.customer_group.create', '%sylius.behat.page.admin.customer_group.create.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args(['sylius_admin_customer_group_create'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.customer_group.index', '%sylius.behat.page.admin.customer_group.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_customer_group_index'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.customer_group.update', '%sylius.behat.page.admin.customer_group.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_customer_group_update'])
     ;

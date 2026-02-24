@@ -16,8 +16,8 @@ use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPage;
 use Sylius\Behat\Page\Admin\Product\IndexPage;
 use Sylius\Behat\Page\Admin\Product\IndexPerTaxonPage;
 use Sylius\Behat\Page\Admin\Product\ShowPage;
-use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPage;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPage;
+use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPage;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -34,11 +34,8 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.product.update_simple.class', UpdateSimpleProductPage::class);
     $parameters->set('sylius.behat.page.admin.product.update_configurable.class', UpdateConfigurableProductPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.product.create_configurable', '%sylius.behat.page.admin.product.create_configurable.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args([
             'sylius_admin_product_create',
@@ -48,7 +45,6 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.admin.product.create_simple', '%sylius.behat.page.admin.product.create_simple.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.create')
         ->args([
             'sylius_admin_product_create',
@@ -58,7 +54,6 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.admin.product.index', '%sylius.behat.page.admin.product.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args([
             'sylius_admin_product_index',
@@ -69,14 +64,12 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.admin.product.index_per_taxon', '%sylius.behat.page.admin.product.index_per_taxon.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args(['sylius_admin_product_taxon_index'])
     ;
 
     $services
         ->set('sylius.behat.page.admin.product.update_configurable', '%sylius.behat.page.admin.product.update_configurable.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args([
             'sylius_admin_product_update',
@@ -86,7 +79,6 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.admin.product.update_simple', '%sylius.behat.page.admin.product.update_simple.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args([
             'sylius_admin_product_update',
@@ -96,7 +88,6 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.admin.product.show_page', '%sylius.behat.page.admin.product.show.class%')
-        ->private()
         ->parent('sylius.behat.symfony_page')
     ;
 };

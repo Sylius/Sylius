@@ -22,11 +22,8 @@ return static function (ContainerConfigurator $container) {
 
     $parameters->set('sylius.behat.page.admin.inventory.index.class', IndexPage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.inventory.index', '%sylius.behat.page.admin.inventory.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args([
             'sylius_admin_inventory_index',

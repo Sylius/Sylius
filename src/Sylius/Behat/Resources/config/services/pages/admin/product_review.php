@@ -24,11 +24,8 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.admin.product_review.index.class', IndexPage::class);
     $parameters->set('sylius.behat.page.admin.product_review.update.class', UpdatePage::class);
 
-    $services->defaults()->public();
-
     $services
         ->set('sylius.behat.page.admin.product_review.index', '%sylius.behat.page.admin.product_review.index.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.index')
         ->args([
             'sylius_admin_product_review_index',
@@ -38,7 +35,6 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.admin.product_review.update', '%sylius.behat.page.admin.product_review.update.class%')
-        ->private()
         ->parent('sylius.behat.page.admin.crud.update')
         ->args(['sylius_admin_product_review_update'])
     ;
