@@ -9,6 +9,7 @@ use Sylius\Resource\Metadata\ResourceMetadata;
 
 return (new ResourceMetadata())
     ->withClass('%sylius.model.customer.class%')
+    ->withSection('shop')
     ->withRoutePrefix('/{_locale<%sylius_shop.locale_regex%>}')
     ->withFormType(CustomerRegistrationType::class)
     ->withRouteCondition("not context.isSyliusRoutingBcLayerEnabled('shop_register')")
