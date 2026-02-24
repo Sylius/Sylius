@@ -18,10 +18,10 @@ use Sylius\Resource\Metadata\Operations;
 use Sylius\Resource\Metadata\ResourceMetadata;
 
 return (new ResourceMetadata())
-    ->withRoutePrefix('/{_locale}/products/{slug}/reviews')
     ->withClass('%sylius.model.product_review.class%')
-    ->withFormType(ProductReviewType::class)
     ->withSection('shop')
+    ->withRoutePrefix('/{_locale<%sylius_shop.locale_regex%>}/products/{slug}/reviews')
+    ->withFormType(ProductReviewType::class)
     ->withTemplatesDir('@SyliusShop/product_review')
     ->withRouteCondition("not context.isSyliusRoutingBcLayerEnabled('shop_product_review')")
     ->withOperations(operations: new Operations(operations: [
