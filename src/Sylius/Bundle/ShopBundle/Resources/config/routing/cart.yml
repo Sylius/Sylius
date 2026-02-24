@@ -15,11 +15,12 @@ _sylius_shop_cart_summary:
     path: /
     methods: [GET]
     condition: "not context.isSyliusRoutingBcLayerEnabled('shop_cart_summary')"
-    controller: sylius_shop.controller.order_thank_you          
+    controller: sylius_shop.controller.cart_summary          
 
 sylius_shop_cart_checkout:
     path: /checkout
     methods: [PATCH]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_cart_checkout')"
     defaults:
         _controller: sylius.controller.order::saveAction
         _sylius:
@@ -27,3 +28,9 @@ sylius_shop_cart_checkout:
             redirect: sylius_shop_checkout_start
             form: Sylius\Bundle\ShopBundle\Form\Type\CartType
             flash: false
+
+_sylius_shop_cart_checkout:
+    path: /checkout
+    methods: [PATCH, POST]
+    condition: "not context.isSyliusRoutingBcLayerEnabled('shop_cart_checkout')"
+    controller: sylius_shop.controller.cart_checkout

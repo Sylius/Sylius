@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\ShopBundle\Controller\CartCheckoutAction;
 use Sylius\Bundle\ShopBundle\Controller\CartSummaryAction;
 use Sylius\Bundle\ShopBundle\Controller\ContactController;
 use Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController;
@@ -24,6 +25,21 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->defaults()->public();
+
+    $services
+        ->set('sylius_shop.controller.cart_checkout', CartCheckoutAction::class)
+        ->args([
+            service('twig'),
+            service('sylius.context.cart'),
+            service('form.factory'),
+            service('event_dispatcher'),
+            service('router.default'),
+            service('doctrine.orm.default_entity_manager'),
+            service('sylius.resetter.cart_changes'),
+            service('request_stack'),
+        ])
+        ->tag('controller.service_arguments')
+    ;
 
     $services
         ->set('sylius_shop.controller.cart_summary', CartSummaryAction::class)
