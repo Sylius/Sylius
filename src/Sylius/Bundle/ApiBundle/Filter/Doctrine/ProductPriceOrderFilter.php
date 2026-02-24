@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Filter\Doctrine;
 
-use ApiPlatform\Core\Bridge\Doctrine\Common\Filter\OrderFilterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -23,6 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class ProductPriceOrderFilter extends AbstractContextAwareFilter
 {
+    private const ALLOWED_DIRECTIONS = ['asc', 'desc'];
+
     protected function filterProperty(
         string $property,
         $value,
@@ -33,6 +34,11 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
         array $context = [],
     ): void {
         if ('order' !== $property || !isset($value['price'])) {
+            return;
+        }
+
+        $direction = strtolower($value['price']);
+        if (!in_array($direction, self::ALLOWED_DIRECTIONS, true)) {
             return;
         }
 
@@ -65,7 +71,7 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
                 ),
             )
             ->andWhere('channelPricing.channelCode = :channelCode')
-            ->orderBy('channelPricing.price', $value['price'])
+            ->orderBy('channelPricing.price', $direction)
             ->setParameter($enabledParameterName, true)
             ->setParameter('channelCode', $channel->getCode())
         ;
@@ -80,10 +86,7 @@ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
                 'property' => 'price',
                 'schema' => [
                     'type' => 'string',
-                    'enum' => [
-                        strtolower(OrderFilterInterface::DIRECTION_ASC),
-                        strtolower(OrderFilterInterface::DIRECTION_DESC),
-                    ],
+                    'enum' => self::ALLOWED_DIRECTIONS,
                 ],
             ],
         ];
