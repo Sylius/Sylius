@@ -19,6 +19,6 @@ return (new Config())
         'suites/cli.php',
         'suites/domain.php',
         'suites/hybrid.php',
-        'suites/ui.yml',
+        'suites/ui.php',
     ])
 ;
