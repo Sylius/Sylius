@@ -15,7 +15,7 @@ use Behat\Config\Config;
 
 return (new Config())
     ->import([
-        'suites/api.yml',
+        'suites/api.php',
         'suites/cli.php',
         'suites/domain.php',
         'suites/hybrid.php',
