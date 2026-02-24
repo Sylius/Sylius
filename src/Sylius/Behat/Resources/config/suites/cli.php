@@ -15,10 +15,8 @@ use Behat\Config\Config;
 
 return (new Config())
     ->import([
-        'suites/api.yml',
-        'suites/cli.php',
-        'suites/domain.php',
-        'suites/hybrid.php',
-        'suites/ui.yml',
+        'cli/canceling_unpaid_orders.php',
+        'cli/change_admin_password.php',
+        'cli/installer.php',
     ])
 ;
