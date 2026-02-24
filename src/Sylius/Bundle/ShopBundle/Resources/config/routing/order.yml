@@ -4,10 +4,17 @@
 sylius_shop_order_thank_you:
     path: /thank-you
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_order_thank_you')"
     defaults:
         _controller: sylius.controller.order::thankYouAction
         _sylius:
             template: "@SyliusShop/order/thank_you.html.twig"
+            
+_sylius_shop_order_thank_you:
+    path: /thank-you
+    methods: [GET]
+    controller: sylius_shop.controller.order_thank_you
+    condition: "not context.isSyliusRoutingBcLayerEnabled('shop_order_thank_you')"
 
 sylius_shop_order_pay:
     path: /{tokenValue}/pay
