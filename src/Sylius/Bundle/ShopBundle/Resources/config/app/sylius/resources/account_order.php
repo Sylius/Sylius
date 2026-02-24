@@ -10,7 +10,7 @@ use Sylius\Resource\Metadata\Show;
 return (new ResourceMetadata())
     ->withClass('%sylius.model.order.class%')
     ->withSection('shop_account')
-    ->withRoutePrefix('/{_locale}/account/orders')
+    ->withRoutePrefix('/{_locale<%sylius_shop.locale_regex%>}/account/orders')
     ->withRouteCondition("not context.isSyliusRoutingBcLayerEnabled('shop_account_order')")
     ->withOperations(new Operations([
         new Index(

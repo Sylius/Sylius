@@ -21,7 +21,7 @@ use Sylius\Resource\Metadata\Update;
 return (new ResourceMetadata())
     ->withClass('%sylius.model.address.class%')
     ->withSection('shop_account')
-    ->withRoutePrefix('/{_locale}/account/address-book')
+    ->withRoutePrefix('/{_locale<%sylius_shop.locale_regex%>}/account/address-book')
     ->withTemplatesDir('@SyliusShop/account/address_book')
     ->withRouteCondition("not context.isSyliusRoutingBcLayerEnabled('shop_account_address_book')")
     ->withOperations(new Operations([
