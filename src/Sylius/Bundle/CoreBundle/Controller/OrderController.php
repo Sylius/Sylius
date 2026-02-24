@@ -24,6 +24,7 @@ use Webmozart\Assert\Assert;
 
 class OrderController extends BaseOrderController
 {
+    /** @deprecated This method is deprecated and will be removed in Sylius 3.0 */
     public function summaryAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
