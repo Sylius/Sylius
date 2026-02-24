@@ -18,6 +18,7 @@ use Sylius\Resource\Metadata\Show;
 
 return (new ResourceMetadata())
     ->withClass('%sylius.model.product.class%')
+    ->withSection('shop')
     ->withRoutePrefix('/{_locale<%sylius_shop.locale_regex%>}')
     ->withTemplatesDir('@SyliusShop/product')
     ->withRouteCondition("not context.isSyliusRoutingBcLayerEnabled('shop_product')")
