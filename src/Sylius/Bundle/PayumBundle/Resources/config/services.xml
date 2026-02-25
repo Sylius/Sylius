@@ -28,6 +28,14 @@
         </service>
         <service id="sylius_payum.http_client" alias="sylius.payum.http_client" />
 
+        <service
+            id="sylius.payum.http_client.paypal_header_injecting"
+            class="Sylius\Bundle\PayumBundle\Client\PaypalHeaderInjectingClient"
+            decorates="sylius.payum.http_client"
+        >
+            <argument type="service" id="sylius.payum.http_client.paypal_header_injecting.inner" />
+        </service>
+
         <service id="sylius.form_registry.payum_gateway_config" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry">
             <deprecated package="sylius/payum-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be moved to the PayumBundle in 2.0.</deprecated>
         </service>
