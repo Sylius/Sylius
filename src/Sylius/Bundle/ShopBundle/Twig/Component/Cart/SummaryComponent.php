@@ -48,6 +48,10 @@ class SummaryComponent
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CHANGED)]
     public function refreshCart(#[LiveArg] mixed $cartId): void
     {
-        $this->cart = $this->hydrateResource($cartId);
+        if ($this->cart === null) {
+            return;
+        }
+
+        $this->cart = $this->hydrateResource($this->cart->getId());
     }
 }
