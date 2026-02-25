@@ -14,11 +14,5 @@ declare(strict_types=1);
 use Behat\Config\Config;
 
 return (new Config())
-    ->import([
-        'suites/api.yml',
-        'suites/cli.php',
-        'suites/domain.php',
-        'suites/hybrid.php',
-        'suites/ui.yml',
-    ])
+    ->import('hybrid/cart/shopping_cart.php')
 ;
