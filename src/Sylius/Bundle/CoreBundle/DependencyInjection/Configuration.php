@@ -66,6 +66,17 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('telemetry')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')->defaultTrue()->end()
+                        ->booleanNode('business')->defaultTrue()->end()
+                        ->booleanNode('technical')->defaultTrue()->end()
+                        ->booleanNode('plugins')->defaultTrue()->end()
+                        ->scalarNode('salt')->defaultNull()->end()
+                        ->scalarNode('url')->defaultValue('https://prism.sylius.com/telemetry')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
