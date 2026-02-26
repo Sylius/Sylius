@@ -34,7 +34,7 @@ export default class extends Controller {
                     window.location.reload();
                 } else {
                     const errorElement = this.errorPrototypeTarget.cloneNode(true);
-                    errorElement.innerHTML = response.message;
+                    errorElement.textContent = response.message;
                     this.errorTarget.innerHTML = errorElement.outerHTML;
                 }
             })
