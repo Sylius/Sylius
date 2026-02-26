@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\RequestResetPasswordEmailHandler;
-use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\ResetPasswordHandler as AdminResetPasswordEmailHandler;
+use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\ResetPasswordHandler as AdminResetPasswordHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\SendResetPasswordEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\ResendOrderConfirmationEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\ResendShipmentConfirmationEmailHandler;
-use Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account\ResetPasswordHandler as ShopResetPasswordEmailHandler;
+use Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account\ResetPasswordHandler as ShopResetPasswordHandler;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -44,13 +44,13 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius.command_handler.admin.account.reset_password', AdminResetPasswordEmailHandler::class)
+        ->set('sylius.command_handler.admin.account.reset_password', AdminResetPasswordHandler::class)
         ->args([service('sylius.resetter.user_password.admin')])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;
 
     $services
-        ->set('sylius.command_handler.shop.account.reset_password', ShopResetPasswordEmailHandler::class)
+        ->set('sylius.command_handler.shop.account.reset_password', ShopResetPasswordHandler::class)
         ->args([service('sylius.resetter.user_password.shop')])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;
