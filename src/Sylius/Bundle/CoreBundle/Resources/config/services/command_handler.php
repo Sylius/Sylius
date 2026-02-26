@@ -20,6 +20,7 @@ use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\SendResetPasswordEmail
 use Sylius\Bundle\CoreBundle\CommandHandler\ResendOrderConfirmationEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\ResendShipmentConfirmationEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account\ResetPasswordHandler as ShopResetPasswordHandler;
+use Sylius\Bundle\CoreBundle\CommandHandler\Shop\ChangeShopUserPasswordHandler;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -32,6 +33,15 @@ return static function (ContainerConfigurator $container) {
             service('sylius.shop_user.token_generator.email_verification'),
             service('sylius.email_sender'),
             service('sylius.manager.shop_user'),
+        ])
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
+
+    $services
+        ->set('sylius.command_handler.shop.account.change_password', ChangeShopUserPasswordHandler::class)
+        ->args([
+            service('sylius.security.password_updater'),
+            service('sylius.repository.shop_user'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;
