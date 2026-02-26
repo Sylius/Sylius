@@ -27,6 +27,8 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.calendar',
                 'sylius.behat.context.setup.channel',
@@ -41,6 +43,8 @@ return (new Config())
                 'sylius.behat.context.setup.taxonomy',
                 PriceHistoryContext::class,
                 SetupCatalogPromotionContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.currency',
                 'sylius.behat.context.transform.lexical',
@@ -56,6 +60,8 @@ return (new Config())
                 'sylius.behat.context.transform.tax_category',
                 'sylius.behat.context.transform.taxon',
                 TransformCatalogPromotionContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_products',
                 'sylius.behat.context.api.debug',
                 BrowsingCatalogPromotionProductVariantsContext::class,

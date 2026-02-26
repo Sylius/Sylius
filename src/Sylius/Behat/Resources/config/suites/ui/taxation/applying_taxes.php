@@ -27,6 +27,8 @@ return (new Config())
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.guest_cart',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.calendar',
                 'sylius.behat.context.setup.cart',
                 'sylius.behat.context.setup.channel',
@@ -42,6 +44,8 @@ return (new Config())
                 'sylius.behat.context.setup.taxation',
                 'sylius.behat.context.setup.user',
                 'sylius.behat.context.setup.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.country',
                 'sylius.behat.context.transform.lexical',
@@ -52,6 +56,8 @@ return (new Config())
                 'sylius.behat.context.transform.tax_category',
                 'sylius.behat.context.transform.tax_rate',
                 'sylius.behat.context.transform.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.save',
                 'sylius.behat.context.ui.shop.cart',
                 'sylius.behat.context.ui.shop.checkout',

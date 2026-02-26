@@ -23,14 +23,20 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.taxation',
                 'sylius.behat.context.setup.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.tax_category',
                 'sylius.behat.context.transform.tax_rate',
                 'sylius.behat.context.transform.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_tax_rates',
                 'sylius.behat.context.api.admin.response',
                 'sylius.behat.context.api.admin.save',

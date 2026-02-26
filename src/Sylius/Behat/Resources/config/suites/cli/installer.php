@@ -21,6 +21,8 @@ return (new Config())
         ->withSuite((new Suite('cli_installer'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.cli.installer',
             )
             ->withFilter(new TagFilter('@installer&&@cli'))

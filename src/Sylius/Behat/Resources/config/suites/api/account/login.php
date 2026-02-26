@@ -24,14 +24,20 @@ return (new Config())
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.mailer',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.customer',
                 'sylius.behat.context.setup.locale',
                 'sylius.behat.context.setup.user',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.locale',
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.user',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.debug',
                 'sylius.behat.context.api.email',
                 'sylius.behat.context.api.shop.customer',

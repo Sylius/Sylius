@@ -25,17 +25,23 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.admin_user',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.product',
                 SetupCatalogPromotionContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.product',
                 'sylius.behat.context.transform.product_variant',
                 'sylius.behat.context.transform.shared_storage',
                 TransformCatalogPromotionContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.channel_pricing_log_entry',
                 'sylius.behat.context.api.admin.managing_catalog_promotions',
                 'sylius.behat.context.api.debug',

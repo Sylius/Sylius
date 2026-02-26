@@ -25,10 +25,16 @@ return (new Config())
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_security',
                 'sylius.behat.context.setup.taxation',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.tax_category',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.admin.managing_tax_categories',
                 'sylius.behat.context.ui.admin.notification',
                 'sylius.behat.context.ui.admin.search_filter',

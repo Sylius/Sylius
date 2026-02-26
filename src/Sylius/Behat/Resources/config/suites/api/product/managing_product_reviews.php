@@ -23,16 +23,22 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.customer',
                 'sylius.behat.context.setup.product',
                 'sylius.behat.context.setup.product_review',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.customer',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.product',
                 'sylius.behat.context.transform.product_review',
                 'sylius.behat.context.transform.shared_storage',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_product_reviews',
                 'sylius.behat.context.api.admin.response',
                 'sylius.behat.context.api.admin.save',

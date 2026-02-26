@@ -25,10 +25,16 @@ return (new Config())
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.product',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.product',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.admin.browsing_product_variants',
                 'sylius.behat.context.ui.admin.managing_inventory',
                 'sylius.behat.context.ui.admin.managing_products',

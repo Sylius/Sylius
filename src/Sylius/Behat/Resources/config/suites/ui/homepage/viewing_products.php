@@ -25,15 +25,21 @@ return (new Config())
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.product',
                 'sylius.behat.context.setup.shop_security',
                 'sylius.behat.context.setup.taxonomy',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.product',
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.taxon',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.channel',
                 'sylius.behat.context.ui.shop.cart',
                 'sylius.behat.context.ui.shop.homepage',

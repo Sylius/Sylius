@@ -25,6 +25,8 @@ return (new Config())
                 'sylius.behat.context.hook.calendar',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.mailer',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.calendar',
                 'sylius.behat.context.setup.channel',
@@ -34,6 +36,8 @@ return (new Config())
                 'sylius.behat.context.setup.product',
                 'sylius.behat.context.setup.shipping',
                 'sylius.behat.context.setup.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.country',
@@ -45,6 +49,8 @@ return (new Config())
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.shipping_method',
                 'sylius.behat.context.transform.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_shipments',
                 'sylius.behat.context.api.debug',
                 'sylius.behat.context.api.email',

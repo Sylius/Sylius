@@ -23,12 +23,18 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.currency',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.currency',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.shared_storage',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_currencies',
                 'sylius.behat.context.api.debug',
             )

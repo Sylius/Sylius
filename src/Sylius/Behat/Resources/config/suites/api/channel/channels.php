@@ -23,9 +23,15 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.product',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.channel',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.debug',
                 'sylius.behat.context.api.shop.channel',
                 'sylius.behat.context.api.shop.homepage',

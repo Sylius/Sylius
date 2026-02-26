@@ -23,6 +23,8 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.admin_user',
                 'sylius.behat.context.setup.channel',
@@ -41,6 +43,8 @@ return (new Config())
                 'sylius.behat.context.setup.shipping_category',
                 'sylius.behat.context.setup.taxonomy',
                 'sylius.behat.context.setup.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.admin',
                 'sylius.behat.context.transform.channel',
@@ -58,6 +62,8 @@ return (new Config())
                 'sylius.behat.context.transform.shipping_method',
                 'sylius.behat.context.transform.taxon',
                 'sylius.behat.context.transform.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_product_associations',
                 'sylius.behat.context.api.admin.managing_product_images',
                 'sylius.behat.context.api.admin.managing_product_taxons',

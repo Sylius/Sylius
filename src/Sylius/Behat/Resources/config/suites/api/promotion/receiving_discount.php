@@ -25,6 +25,8 @@ return (new Config())
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.guest_cart',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.cart',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.checkout.address',
@@ -39,6 +41,8 @@ return (new Config())
                 'sylius.behat.context.setup.shop_security',
                 'sylius.behat.context.setup.taxonomy',
                 CatalogPromotionContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.cart',
                 'sylius.behat.context.transform.channel',
@@ -51,6 +55,8 @@ return (new Config())
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.shipping_method',
                 'sylius.behat.context.transform.taxon',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.debug',
                 'sylius.behat.context.api.shop.cart',
                 'sylius.behat.context.api.shop.checkout',
