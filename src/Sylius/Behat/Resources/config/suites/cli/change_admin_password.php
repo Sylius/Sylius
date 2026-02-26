@@ -21,7 +21,11 @@ return (new Config())
         ->withSuite((new Suite('change_admin_password'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_user',
+            )
+            ->withContexts(
                 'sylius.behat.context.cli.change_admin_password',
             )
             ->withFilter(new TagFilter('@change_admin_password&&@cli'))

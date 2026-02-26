@@ -23,13 +23,19 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.currency',
                 'sylius.behat.context.setup.exchange_rate',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.currency',
                 'sylius.behat.context.transform.exchange_rate',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.shared_storage',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_exchange_rates',
                 'sylius.behat.context.api.admin.response',
                 'sylius.behat.context.api.admin.save',

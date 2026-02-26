@@ -23,6 +23,8 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.order',
@@ -30,6 +32,8 @@ return (new Config())
                 'sylius.behat.context.setup.product',
                 'sylius.behat.context.setup.promotion',
                 'sylius.behat.context.setup.shipping',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.coupon',
                 'sylius.behat.context.transform.customer',
@@ -40,6 +44,8 @@ return (new Config())
                 'sylius.behat.context.transform.promotion',
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.shipping_method',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_promotion_coupons',
                 'sylius.behat.context.api.admin.response',
                 'sylius.behat.context.api.admin.save',

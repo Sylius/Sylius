@@ -21,9 +21,15 @@ return (new Config())
         ->withSuite((new Suite('domain_managing_shipping_methods'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
-                'sylius.behat.context.transform.shipping_method',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.shipping',
+            )
+            ->withContexts(
+                'sylius.behat.context.transform.shipping_method',
+            )
+            ->withContexts(
                 'sylius.behat.context.domain.managing_shipping_methods',
                 'sylius.behat.context.domain.security',
             )

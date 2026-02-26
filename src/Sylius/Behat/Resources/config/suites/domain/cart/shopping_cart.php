@@ -21,12 +21,18 @@ return (new Config())
         ->withSuite((new Suite('domain_shopping_cart'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
+                'sylius.behat.context.setup.channel',
+                'sylius.behat.context.setup.order',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.customer',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.shared_storage',
-                'sylius.behat.context.setup.channel',
-                'sylius.behat.context.setup.order',
+            )
+            ->withContexts(
                 'sylius.behat.context.domain.cart',
             )
             ->withFilter(new TagFilter('@shopping_cart&&@domain'))

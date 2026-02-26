@@ -24,6 +24,8 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.currency',
@@ -37,6 +39,8 @@ return (new Config())
                 'sylius.behat.context.setup.shipping_category',
                 'sylius.behat.context.setup.taxonomy',
                 CatalogPromotionContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.channel',
@@ -52,6 +56,8 @@ return (new Config())
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.shipping_category',
                 'sylius.behat.context.transform.shipping_method',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.browsing_product_variant',
                 'sylius.behat.context.api.admin.channel_pricing_log_entry',
                 'sylius.behat.context.api.admin.managing_product_variants',

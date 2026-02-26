@@ -25,6 +25,8 @@ return (new Config())
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.currency',
@@ -34,6 +36,8 @@ return (new Config())
                 'sylius.behat.context.setup.shipping',
                 'sylius.behat.context.setup.taxonomy',
                 'sylius.behat.context.setup.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.country',
@@ -42,6 +46,8 @@ return (new Config())
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.taxon',
                 'sylius.behat.context.transform.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.admin.managing_channels',
                 'sylius.behat.context.ui.admin.managing_channels_billing_data',
                 'sylius.behat.context.ui.admin.notification',

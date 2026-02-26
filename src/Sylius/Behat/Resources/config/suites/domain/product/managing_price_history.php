@@ -23,14 +23,20 @@ return (new Config())
         ->withSuite((new Suite('domain_managing_price_history'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
+                'sylius.behat.context.setup.channel',
+                'sylius.behat.context.setup.product',
+                'sylius.behat.context.setup.calendar',
+                PriceHistoryContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.product',
                 'sylius.behat.context.transform.shared_storage',
-                'sylius.behat.context.setup.channel',
-                'sylius.behat.context.setup.product',
-                PriceHistoryContext::class,
-                'sylius.behat.context.setup.calendar',
+            )
+            ->withContexts(
                 ManagingPriceHistoryContext::class,
             )
             ->withFilter(new TagFilter('@managing_price_history&&@domain'))

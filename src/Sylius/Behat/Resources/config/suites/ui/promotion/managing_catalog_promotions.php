@@ -29,12 +29,16 @@ return (new Config())
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.product',
                 'sylius.behat.context.setup.product_taxon',
                 'sylius.behat.context.setup.taxonomy',
                 SetupCatalogPromotionContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.locale',
@@ -43,6 +47,8 @@ return (new Config())
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.taxon',
                 TransformCatalogPromotionContext::class,
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.admin.notification',
                 'sylius.behat.context.ui.admin.search_filter',
                 'sylius.behat.context.ui.save',

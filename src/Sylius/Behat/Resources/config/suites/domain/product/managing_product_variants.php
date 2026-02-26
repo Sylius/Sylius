@@ -21,6 +21,18 @@ return (new Config())
         ->withSuite((new Suite('domain_managing_product_variants'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
+                'sylius.behat.context.setup.channel',
+                'sylius.behat.context.setup.currency',
+                'sylius.behat.context.setup.locale',
+                'sylius.behat.context.setup.order',
+                'sylius.behat.context.setup.payment',
+                'sylius.behat.context.setup.product',
+                'sylius.behat.context.setup.product_review',
+                'sylius.behat.context.setup.shipping',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.currency',
                 'sylius.behat.context.transform.customer',
@@ -31,14 +43,8 @@ return (new Config())
                 'sylius.behat.context.transform.product_variant',
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.shipping_method',
-                'sylius.behat.context.setup.channel',
-                'sylius.behat.context.setup.currency',
-                'sylius.behat.context.setup.locale',
-                'sylius.behat.context.setup.order',
-                'sylius.behat.context.setup.payment',
-                'sylius.behat.context.setup.product',
-                'sylius.behat.context.setup.product_review',
-                'sylius.behat.context.setup.shipping',
+            )
+            ->withContexts(
                 'sylius.behat.context.domain.managing_products',
                 'sylius.behat.context.domain.notification',
                 'sylius.behat.context.domain.security',

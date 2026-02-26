@@ -23,11 +23,17 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.shipping_category',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.shipping_category',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_shipping_categories',
                 'sylius.behat.context.api.admin.response',
                 'sylius.behat.context.api.admin.save',

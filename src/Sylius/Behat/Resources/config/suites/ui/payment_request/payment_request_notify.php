@@ -24,12 +24,16 @@ return (new Config())
             ->withContexts(
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.order',
                 'sylius.behat.context.setup.payment',
                 'sylius.behat.context.setup.payment_request',
                 'sylius.behat.context.setup.product',
                 'sylius.behat.context.setup.shipping',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.customer',
                 'sylius.behat.context.transform.order',
@@ -37,6 +41,8 @@ return (new Config())
                 'sylius.behat.context.transform.product',
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.shipping_method',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.shop.payment_request',
             )
             ->withFilter(new TagFilter('@payment_request_notify&&@ui')),

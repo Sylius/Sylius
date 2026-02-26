@@ -27,6 +27,8 @@ return (new Config())
                 'sylius.behat.context.hook.guest_cart',
                 'sylius.behat.context.hook.mailer',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.cart',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.checkout.address',
@@ -40,6 +42,8 @@ return (new Config())
                 'sylius.behat.context.setup.shop_security',
                 'sylius.behat.context.setup.user',
                 'sylius.behat.context.setup.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.country',
@@ -52,6 +56,8 @@ return (new Config())
                 'sylius.behat.context.transform.shipping_method',
                 'sylius.behat.context.transform.user',
                 'sylius.behat.context.transform.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.browser',
                 'sylius.behat.context.ui.channel',
                 'sylius.behat.context.ui.email',

@@ -23,12 +23,18 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.admin_user',
                 'sylius.behat.context.setup.channel',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.admin',
                 'sylius.behat.context.transform.locale',
                 'sylius.behat.context.transform.shared_storage',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.login',
                 'sylius.behat.context.api.admin.managing_administrators',
                 'sylius.behat.context.api.admin.response',

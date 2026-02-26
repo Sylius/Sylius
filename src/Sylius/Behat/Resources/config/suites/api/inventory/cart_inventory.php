@@ -24,14 +24,20 @@ return (new Config())
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.guest_cart',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.cart',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.product',
                 'sylius.behat.context.setup.shop_security',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.cart',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.product',
                 'sylius.behat.context.transform.shared_storage',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.shop.cart',
                 'sylius.behat.context.api.shop.product',
             )

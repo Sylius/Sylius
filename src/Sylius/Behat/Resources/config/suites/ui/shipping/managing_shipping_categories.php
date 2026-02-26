@@ -25,11 +25,17 @@ return (new Config())
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.shipping_category',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.shared_storage',
                 'sylius.behat.context.transform.shipping_category',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.admin.managing_shipping_categories',
                 'sylius.behat.context.ui.admin.notification',
                 'sylius.behat.context.ui.save',

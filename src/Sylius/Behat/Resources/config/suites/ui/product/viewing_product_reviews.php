@@ -25,15 +25,21 @@ return (new Config())
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.customer',
                 'sylius.behat.context.setup.product',
                 'sylius.behat.context.setup.product_review',
                 'sylius.behat.context.setup.shop_security',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.customer',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.product',
                 'sylius.behat.context.transform.shared_storage',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.shop.product',
             )
             ->withFilter(new TagFilter('@viewing_product_reviews&&@ui')),

@@ -23,6 +23,8 @@ return (new Config())
         ]))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_api_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.currency',
@@ -34,6 +36,8 @@ return (new Config())
                 'sylius.behat.context.setup.shipping',
                 'sylius.behat.context.setup.taxation',
                 'sylius.behat.context.setup.taxonomy',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.address',
                 'sylius.behat.context.transform.channel',
                 'sylius.behat.context.transform.coupon',
@@ -48,6 +52,8 @@ return (new Config())
                 'sylius.behat.context.transform.tax_rate',
                 'sylius.behat.context.transform.taxon',
                 'sylius.behat.context.transform.zone',
+            )
+            ->withContexts(
                 'sylius.behat.context.api.admin.managing_orders',
                 'sylius.behat.context.api.admin.managing_placed_order_addresses',
                 'sylius.behat.context.api.admin.response',

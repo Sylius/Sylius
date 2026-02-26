@@ -25,12 +25,18 @@ return (new Config())
                 'sylius.behat.context.hook.bad_gateway',
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.session',
+            )
+            ->withContexts(
                 'sylius.behat.context.setup.admin_security',
                 'sylius.behat.context.setup.channel',
                 'sylius.behat.context.setup.currency',
+            )
+            ->withContexts(
                 'sylius.behat.context.transform.currency',
                 'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.shared_storage',
+            )
+            ->withContexts(
                 'sylius.behat.context.ui.admin.managing_currencies',
                 'sylius.behat.context.ui.admin.notification',
             )
