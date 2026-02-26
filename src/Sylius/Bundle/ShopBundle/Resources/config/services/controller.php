@@ -15,6 +15,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\ShopBundle\Controller\CartCheckoutAction;
 use Sylius\Bundle\ShopBundle\Controller\CartSummaryAction;
+use Sylius\Bundle\ShopBundle\Controller\ChangePasswordAction;
 use Sylius\Bundle\ShopBundle\Controller\ContactController;
 use Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController;
 use Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController;
@@ -50,6 +51,19 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.order'),
             service('form.factory'),
             service('event_dispatcher'),
+        ])
+        ->tag('controller.service_arguments')
+    ;
+
+    $services
+        ->set('sylius_shop.controller.change_password', ChangePasswordAction::class)
+        ->args([
+            service('twig'),
+            service('security.token_storage'),
+            service('form.factory'),
+            service('sylius.command_bus'),
+            service('router.default'),
+            service('request_stack')
         ])
         ->tag('controller.service_arguments')
     ;

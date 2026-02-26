@@ -11,20 +11,16 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Command\Account;
+namespace Sylius\Bundle\CoreBundle\Command\Shop\Account;
 
-use Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware;
-
-#[ShopUserIdAware]
+/**
+ * @experimental
+ */
 class ChangeShopUserPassword
 {
     public function __construct(
         #[\SensitiveParameter]
         public readonly string $newPassword,
-        #[\SensitiveParameter]
-        public readonly string $confirmNewPassword,
-        #[\SensitiveParameter]
-        public readonly string $currentPassword,
         public readonly mixed $shopUserId,
     ) {
     }

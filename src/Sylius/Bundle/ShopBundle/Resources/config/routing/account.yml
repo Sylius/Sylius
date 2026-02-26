@@ -55,9 +55,16 @@ sylius_shop_account_profile_update:
 sylius_shop_account_change_password:
     path: /change-password
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_account_change_password')"
     defaults:
         _controller: sylius.controller.shop_user::changePasswordAction
         _sylius:
             form: Sylius\Bundle\ShopBundle\Form\Type\UserChangePasswordType
             template: "@SyliusShop/account/change_password.html.twig"
             redirect: sylius_shop_account_dashboard
+
+_sylius_shop_account_change_password:
+    path: /change-password
+    methods: [GET, POST]
+    condition: "not context.isSyliusRoutingBcLayerEnabled('shop_account_change_password')"
+    controller: sylius_shop.controller.change_password
