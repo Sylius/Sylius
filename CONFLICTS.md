@@ -13,3 +13,12 @@ This document explains why certain conflicts were added to `composer.json` and r
   This leads to invalid SQL queries like `WHERE t0.id IN ()`.
 
   References: https://github.com/doctrine/orm/issues/12245
+
+- `api-platform/serializer:4.2.17`:
+
+  This version introduces a `api_platform_input` context flag (PR #7779) that causes input DTOs (command classes) to be
+  denormalized through API Platform's `AbstractItemNormalizer` instead of Symfony's `ObjectNormalizer`. This exposes a
+  pre-existing bug in `AbstractItemNormalizer::instantiateObject()` (missing `continue` statement) that causes only the
+  first missing constructor argument to be reported instead of all of them.
+
+  References: https://github.com/api-platform/core/pull/7779
