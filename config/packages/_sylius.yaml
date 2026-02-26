@@ -59,6 +59,7 @@ sylius_core:
                 shop_product: false
                 shop_product_review: false
                 shop_register: false
+                shop_reset_password: false
 
 sylius_api:
     enabled: true
