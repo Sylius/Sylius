@@ -34,6 +34,7 @@
             <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.storage.currency" />
             <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="router" />
         </service>
 
         <service id="sylius.controller.shop.locale_switch" class="Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController">
