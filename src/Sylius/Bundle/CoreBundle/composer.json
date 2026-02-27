@@ -31,8 +31,6 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "egulias/email-validator": "^4.0",
         "fakerphp/faker": "^1.23",
-        "knplabs/gaufrette": "^0.11",
-        "knplabs/knp-gaufrette-bundle": "^0.9",
         "league/flysystem-bundle": "^3.3",
         "liip/imagine-bundle": "^2.15",
         "sylius-labs/association-hydrator": "^1.2",
