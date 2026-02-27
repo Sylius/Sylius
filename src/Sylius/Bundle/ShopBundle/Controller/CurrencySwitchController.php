@@ -22,10 +22,13 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
 final class CurrencySwitchController
 {
+    use RedirectTrait;
+
     /** @var EngineInterface|Environment */
     private $templatingEngine;
 
@@ -38,6 +41,9 @@ final class CurrencySwitchController
     /** @var ChannelContextInterface */
     private $channelContext;
 
+    /** @var RouterInterface|null */
+    private $router;
+
     /**
      * @param EngineInterface|Environment $templatingEngine
      */
@@ -45,12 +51,14 @@ final class CurrencySwitchController
         object $templatingEngine,
         CurrencyContextInterface $currencyContext,
         CurrencyStorageInterface $currencyStorage,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
+        ?RouterInterface $router = null
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->currencyContext = $currencyContext;
         $this->currencyStorage = $currencyStorage;
         $this->channelContext = $channelContext;
+        $this->router = $router;
     }
 
     public function renderAction(): Response
@@ -76,6 +84,6 @@ final class CurrencySwitchController
 
         $this->currencyStorage->set($channel, $code);
 
-        return new RedirectResponse($request->headers->get('referer', $request->getSchemeAndHttpHost()));
+        return new RedirectResponse($this->getRedirectUrl($request, $this->router));
     }
 }
