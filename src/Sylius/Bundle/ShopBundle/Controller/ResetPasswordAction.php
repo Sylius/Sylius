@@ -39,7 +39,6 @@ final readonly class ResetPasswordAction
         private RouterInterface $router,
         private FormFactoryInterface $formFactory,
         private UserRepositoryInterface $userRepository,
-        private TranslatorInterface $translator,
         private RequestStack $requestStack,
         private ResetPasswordDispatcherInterface $resetPasswordDispatcher,
         private string $tokenTtl,
@@ -86,11 +85,11 @@ final readonly class ResetPasswordAction
 
     private function addSuccessNotification(): void
     {
-        FlashBagProvider::getFlashBag($this->requestStack)->add('success', $this->translator->trans('sylius.user.reset_password', [], 'flashes'));
+        FlashBagProvider::getFlashBag($this->requestStack)->add('success', 'sylius.user.reset_password');
     }
 
     private function addErrorNotification(): void
     {
-        FlashBagProvider::getFlashBag($this->requestStack)->add('error', $this->translator->trans('sylius.user.expire_password_reset_token', [], 'flashes'));
+        FlashBagProvider::getFlashBag($this->requestStack)->add('error', 'sylius.user.expire_password_reset_token');
     }
 }

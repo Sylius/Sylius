@@ -20,8 +20,8 @@ class SendAccountRegistrationEmail
 {
     public function __construct(
         public readonly string $shopUserEmail,
-        public readonly string $localeCode,
         public readonly string $channelCode,
+        public readonly string $localeCode,
     ) {
     }
 }

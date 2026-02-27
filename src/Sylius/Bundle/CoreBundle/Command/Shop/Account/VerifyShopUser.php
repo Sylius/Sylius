@@ -19,9 +19,9 @@ namespace Sylius\Bundle\CoreBundle\Command\Shop\Account;
 class VerifyShopUser
 {
     public function __construct(
+        public readonly string $token,
         public readonly string $channelCode,
         public readonly string $localeCode,
-        public readonly string $token,
     ) {
     }
 }

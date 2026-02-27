@@ -20,9 +20,10 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Webmozart\Assert\Assert;
 
 #[AsMessageHandler]
-final class SendAccountRegistrationEmailHandler
+final readonly class SendAccountRegistrationEmailHandler
 {
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
@@ -35,19 +36,11 @@ final class SendAccountRegistrationEmailHandler
     {
         /** @var ShopUserInterface|null $shopUser */
         $shopUser = $this->shopUserRepository->findOneByEmail($command->shopUserEmail);
-        if (null === $shopUser) {
-            throw new \InvalidArgumentException(
-                sprintf('There is no shop user with %s email', $command->shopUserEmail),
-            );
-        }
+        Assert::notNull($shopUser, sprintf('There is no shop user with %s email', $command->shopUserEmail));
 
         /** @var ChannelInterface|null $channel */
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
-        if (null === $channel) {
-            throw new \InvalidArgumentException(
-                sprintf('There is no channel with %s code', $command->channelCode),
-            );
-        }
+        Assert::notNull($channel, sprintf('There is no channel with %s email', $command->channelCode));
 
         if ($channel->isAccountVerificationRequired() && !$shopUser->isEnabled()) {
             return;

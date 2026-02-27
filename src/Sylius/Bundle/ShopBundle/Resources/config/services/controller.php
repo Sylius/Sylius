@@ -127,7 +127,6 @@ return static function (ContainerConfigurator $container) {
             service('router.default'),
             service('form.factory'),
             service('sylius.repository.shop_user'),
-            service('translator'),
             service('request_stack'),
             service('sylius.command_dispatcher.reset_password.shop'),
             param('sylius.shop_user.token.password_reset.ttl'),
@@ -142,7 +141,6 @@ return static function (ContainerConfigurator $container) {
             service('router.default'),
             service('form.factory'),
             service('sylius.command_bus'),
-            service('translator'),
             service('request_stack'),
         ])
         ->tag('controller.service_arguments')
@@ -153,7 +151,6 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('router.default'),
             service('sylius.repository.shop_user'),
-            service('translator'),
             service('request_stack'),
             service('sylius.context.channel'),
             service('sylius.context.locale'),

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account;
 
-use InvalidArgumentException;
 use Sylius\Bundle\CoreBundle\Command\Shop\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\CoreBundle\Command\Shop\Account\VerifyShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -22,6 +21,7 @@ use Symfony\Component\Clock\ClockInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
+use Webmozart\Assert\Assert;
 
 #[AsMessageHandler]
 final readonly class VerifyShopUserHandler
@@ -38,18 +38,14 @@ final readonly class VerifyShopUserHandler
     {
         /** @var ShopUserInterface|null $user */
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $command->token]);
-        if (null === $user) {
-            throw new InvalidArgumentException(
-                sprintf('There is no shop user with %s email verification token', $command->token),
-            );
-        }
+        Assert::notNull($user, sprintf('There is no shop user with %s email verification token', $command->token));
 
         $user->setVerifiedAt($this->clock->now());
         $user->setEmailVerificationToken(null);
         $user->enable();
 
         $this->commandBus->dispatch(
-            new SendAccountRegistrationEmail($user->getEmail(), $command->localeCode, $command->channelCode),
+            new SendAccountRegistrationEmail($user->getEmail(), $command->channelCode, $command->localeCode),
             [new DispatchAfterCurrentBusStamp()],
         );
     }
