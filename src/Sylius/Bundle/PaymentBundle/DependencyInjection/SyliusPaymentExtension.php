@@ -88,6 +88,7 @@ final class SyliusPaymentExtension extends AbstractResourceExtension
             return;
         }
 
+        $container->setParameter('sylius.encryption.strict_mode', $encryptionConfig['strict_mode']);
         $container->setParameter('sylius.encryption.disabled_for_factories', $encryptionConfig['disabled_for_factories']);
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/services/encryption'));

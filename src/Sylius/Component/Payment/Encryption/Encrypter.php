@@ -29,7 +29,16 @@ final class Encrypter implements EncrypterInterface
 
     public function __construct(
         private readonly string $encryptionKeyPath,
+        private readonly bool $strictDecryption = false,
     ) {
+        if (false === $this->strictDecryption) {
+            trigger_deprecation(
+                'sylius/payment',
+                '2.1',
+                'Passing "false" as the second argument of "%s" constructor is deprecated and will be removed in Sylius 3.0. Please pass "true" to enable strict decryption.',
+                self::class,
+            );
+        }
     }
 
     public function encrypt(string $data): string
@@ -44,6 +53,12 @@ final class Encrypter implements EncrypterInterface
     public function decrypt(string $data): string
     {
         if (!str_ends_with($data, self::ENCRYPTION_SUFFIX)) {
+            if ($this->strictDecryption) {
+                throw EncryptionException::cannotDecrypt(
+                    new \RuntimeException('Data is not encrypted.'),
+                );
+            }
+
             return $data;
         }
 

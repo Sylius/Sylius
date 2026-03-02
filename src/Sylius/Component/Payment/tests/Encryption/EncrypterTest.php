@@ -84,4 +84,12 @@ final class EncrypterTest extends TestCase
     {
         $this->assertSame('data', $this->encrypter->decrypt('data'));
     }
+
+    public function testThrowsAnExceptionWhenStrictDecryptionIsEnabledAndDataIsNotEncrypted(): void
+    {
+        $encrypter = new Encrypter('', true);
+
+        $this->expectException(EncryptionException::class);
+        $encrypter->decrypt('data');
+    }
 }

@@ -54,6 +54,7 @@ final class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('enabled')->defaultTrue()->end()
+                        ->booleanNode('strict_mode')->defaultFalse()->end()
                         ->arrayNode('disabled_for_factories')
                             ->scalarPrototype()->end()
                         ->end()

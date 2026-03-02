@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Payment\Encryption;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @implements EntityEncrypterInterface<PaymentRequestInterface>
@@ -24,9 +25,22 @@ final readonly class PaymentRequestEncrypter implements EntityEncrypterInterface
 {
     use EncryptionCheckTrait;
 
+    /** @param list<class-string> $allowedClasses */
     public function __construct(
         private EncrypterInterface $encrypter,
+        private bool|array $allowedClasses = true,
     ) {
+        if (true === $this->allowedClasses) {
+            trigger_deprecation(
+                'sylius/payment',
+                '2.1',
+                'Passing "true" as allowed classes is deprecated and support for it will be removed in Sylius 3.0. Please provide an explicit list of allowed classes or set it to "false" if you do not want to allow any classes.',
+            );
+        }
+        if (is_array($this->allowedClasses)) {
+            Assert::allStringNotEmpty($allowedClasses, 'Each allowed class must be a non-empty string. Got: %s');
+            Assert::allClassExists($allowedClasses, 'Allowed class %s does not exist.');
+        }
     }
 
     public function encrypt(EncryptionAwareInterface $resource): void
@@ -46,18 +60,21 @@ final readonly class PaymentRequestEncrypter implements EntityEncrypterInterface
     public function decrypt(EncryptionAwareInterface $resource): void
     {
         if (null !== $resource->getPayload() && $this->isEncrypted($resource->getPayload())) {
-            $resource->setPayload(unserialize($this->encrypter->decrypt($resource->getPayload())));
+            $resource->setPayload(unserialize($this->encrypter->decrypt($resource->getPayload()), ['allowed_classes' => $this->allowedClasses]));
         }
 
-        if (!$this->isEncrypted(current($resource->getResponseData()))) {
+        $responseData = $resource->getResponseData();
+        if (!$this->allIsEncrypted($responseData)) {
             return;
         }
 
         $decryptedRequestData = [];
-        foreach ($resource->getResponseData() as $key => $value) {
-            $decryptedRequestData[$key] = unserialize($this->encrypter->decrypt($value));
+        foreach ($responseData as $key => $value) {
+            $decryptedRequestData[$key] = unserialize($this->encrypter->decrypt($value), ['allowed_classes' => $this->allowedClasses]);
         }
 
-        $resource->setResponseData($decryptedRequestData);
+        if ([] !== $decryptedRequestData) {
+            $resource->setResponseData($decryptedRequestData);
+        }
     }
 }

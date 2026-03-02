@@ -445,4 +445,133 @@ final class PaymentRequestEncrypterTest extends TestCase
 
         $this->paymentRequestEncrypter->decrypt($this->paymentRequest);
     }
+
+    public function testDoesNotDecryptResponseDataWhenOnlySomeElementsAreEncrypted(): void
+    {
+        $this->paymentRequest
+            ->expects($this->once())
+            ->method('getPayload')
+            ->willReturn(null);
+        $this->paymentRequest
+            ->expects($this->once())
+            ->method('getResponseData')
+            ->willReturn([
+                'key' => 'encrypted_value#ENCRYPTED',
+                'key-two' => 'not_encrypted_value',
+            ]);
+        $this->encrypter
+            ->expects($this->never())
+            ->method('decrypt');
+        $this->paymentRequest
+            ->expects($this->never())
+            ->method('setResponseData');
+
+        $this->paymentRequestEncrypter->decrypt($this->paymentRequest);
+    }
+
+    public function testDecryptsPayloadWithExplicitAllowedClasses(): void
+    {
+        $encrypter = $this->createMock(EncrypterInterface::class);
+        $paymentRequestEncrypter = new PaymentRequestEncrypter($encrypter, [\stdClass::class]);
+
+        $object = new \stdClass();
+        $object->foo = 'bar';
+
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $paymentRequest
+            ->expects($this->atLeastOnce())
+            ->method('getPayload')
+            ->willReturn('encrypted_payload#ENCRYPTED');
+        $paymentRequest
+            ->expects($this->once())
+            ->method('getResponseData')
+            ->willReturn([]);
+        $encrypter
+            ->expects($this->once())
+            ->method('decrypt')
+            ->with('encrypted_payload#ENCRYPTED')
+            ->willReturn(serialize($object));
+        $paymentRequest
+            ->expects($this->once())
+            ->method('setPayload')
+            ->with($this->callback(function (mixed $payload): bool {
+                return $payload instanceof \stdClass && $payload->foo === 'bar';
+            }));
+        $paymentRequest
+            ->expects($this->never())
+            ->method('setResponseData');
+
+        $paymentRequestEncrypter->decrypt($paymentRequest);
+    }
+
+    public function testDecryptsWithNoAllowedClasses(): void
+    {
+        $encrypter = $this->createMock(EncrypterInterface::class);
+        $paymentRequestEncrypter = new PaymentRequestEncrypter($encrypter, false);
+
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $object = new \stdClass();
+        $object->foo = 'bar';
+
+        $paymentRequest
+            ->expects($this->atLeastOnce())
+            ->method('getPayload')
+            ->willReturn('encrypted_payload#ENCRYPTED');
+        $paymentRequest
+            ->expects($this->once())
+            ->method('getResponseData')
+            ->willReturn([]);
+        $encrypter
+            ->expects($this->once())
+            ->method('decrypt')
+            ->with('encrypted_payload#ENCRYPTED')
+            ->willReturn(serialize($object));
+        $paymentRequest
+            ->expects($this->once())
+            ->method('setPayload')
+            ->with($this->callback(function (mixed $payload): bool {
+                return $payload instanceof \__PHP_Incomplete_Class;
+            }));
+        $paymentRequest
+            ->expects($this->never())
+            ->method('setResponseData');
+
+        $paymentRequestEncrypter->decrypt($paymentRequest);
+    }
+
+    public function testDecryptsResponseDataWithExplicitAllowedClasses(): void
+    {
+        $encrypter = $this->createMock(EncrypterInterface::class);
+        $paymentRequestEncrypter = new PaymentRequestEncrypter($encrypter, [\stdClass::class]);
+
+        $object = new \stdClass();
+        $object->foo = 'bar';
+
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $paymentRequest
+            ->expects($this->atLeastOnce())
+            ->method('getPayload')
+            ->willReturn(null);
+        $paymentRequest
+            ->expects($this->atLeastOnce())
+            ->method('getResponseData')
+            ->willReturn(['key' => 'encrypted_value#ENCRYPTED']);
+        $encrypter
+            ->expects($this->once())
+            ->method('decrypt')
+            ->with('encrypted_value#ENCRYPTED')
+            ->willReturn(serialize($object));
+        $paymentRequest
+            ->expects($this->once())
+            ->method('setResponseData')
+            ->with($this->callback(function (array $data): bool {
+                return
+                    isset($data['key']) &&
+                    $data['key'] instanceof \stdClass &&
+                    $data['key']->foo === 'bar'
+                ;
+            }));
+
+        $paymentRequestEncrypter->decrypt($paymentRequest);
+    }
 }

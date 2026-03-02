@@ -20,4 +20,16 @@ trait EncryptionCheckTrait
     {
         return is_string($value) && str_ends_with($value, EncrypterInterface::ENCRYPTION_SUFFIX);
     }
+
+    /** @param array<array-key, mixed> $values */
+    protected function allIsEncrypted(array $values): bool
+    {
+        foreach ($values as $value) {
+            if (!$this->isEncrypted($value)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
