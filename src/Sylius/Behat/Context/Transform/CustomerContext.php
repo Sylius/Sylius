@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -28,10 +29,8 @@ final class CustomerContext implements Context
     ) {
     }
 
-    /**
-     * @Transform :customer
-     * @Transform /^customer "([^"]+)"$/
-     */
+    #[Transform(':customer')]
+    #[Transform('/^customer "([^"]+)"$/')]
     public function getOrCreateCustomerByEmail($email)
     {
         /** @var CustomerInterface $customer */
@@ -47,9 +46,7 @@ final class CustomerContext implements Context
         return $customer;
     }
 
-    /**
-     * @Transform /^(he|his|she|her|their|the customer of my account)$/
-     */
+    #[Transform('/^(he|his|she|her|their|the customer of my account)$/')]
     public function getLastCustomer()
     {
         return $this->sharedStorage->get('customer');
