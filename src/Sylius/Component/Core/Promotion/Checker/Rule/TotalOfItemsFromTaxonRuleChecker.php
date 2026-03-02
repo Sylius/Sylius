@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
@@ -60,11 +61,26 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 
         /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
-            if ($item->getProduct()->hasTaxon($targetTaxon)) {
+            if ($this->productBelongsToTaxonOrDescendant($item->getProduct(), $targetTaxon)) {
                 $itemsWithTaxonTotal += $item->getTotal();
             }
         }
 
         return $itemsWithTaxonTotal >= $configuration['amount'];
+    }
+
+    private function productBelongsToTaxonOrDescendant(?ProductInterface $product, TaxonInterface $targetTaxon): bool
+    {
+        if ($product === null) {
+            return false;
+        }
+
+        foreach ($product->getTaxons() as $taxon) {
+            if ($taxon === $targetTaxon || $taxon->getAncestors()->contains($targetTaxon)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
