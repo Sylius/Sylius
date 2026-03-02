@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\Filters;
 
-use ApiPlatform\Core\Bridge\Doctrine\Common\Filter\OrderFilterInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\AbstractContextAwareFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Core\Model\ProductInterface;
 
 /** @experimental */
 final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilter
 {
+    private const ALLOWED_DIRECTIONS = ['asc', 'desc'];
+
     protected function filterProperty(
         string $property,
         $value,
@@ -34,7 +36,16 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
                 return;
             }
 
-            $direction = $value['translation.name'];
+            $direction = strtolower($value['translation.name']);
+            if (!in_array($direction, self::ALLOWED_DIRECTIONS, true)) {
+                return;
+            }
+
+            if (is_a($resourceClass, ProductInterface::class, true)) {
+                $queryBuilder->orderBy('translation.name', $direction);
+
+                return;
+            }
 
             if (isset($value['localeCode'])) {
                 $queryBuilder
@@ -69,10 +80,7 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilt
                 'property' => 'translation',
                 'schema' => [
                     'type' => 'string',
-                    'enum' => [
-                        strtolower(OrderFilterInterface::DIRECTION_ASC),
-                        strtolower(OrderFilterInterface::DIRECTION_DESC),
-                    ],
+                    'enum' => self::ALLOWED_DIRECTIONS,
                 ],
             ],
             'localeCode for order[translation.name]' => [
