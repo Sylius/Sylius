@@ -63,6 +63,7 @@
             <argument type="service" id="sylius.http_message_factory" />
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
+            <argument type="service" id="cache.app" />
         </service>
     </services>
 </container>
