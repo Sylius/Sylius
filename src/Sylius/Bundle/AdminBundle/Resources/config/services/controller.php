@@ -25,6 +25,7 @@ use Sylius\Bundle\AdminBundle\Controller\DashboardController;
 use Sylius\Bundle\AdminBundle\Controller\RedirectHandler;
 use Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction;
 use Sylius\Bundle\AdminBundle\Controller\UpdateProductTaxonPositionAction;
+use Sylius\Bundle\AdminBundle\Controller\UpdateProductVariantPositionAction;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -93,6 +94,15 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.product_taxon'),
             service('request_stack'),
             service('sylius.positioner'),
+            service('doctrine.orm.default_entity_manager'),
+            service('security.csrf.token_manager'),
+        ])
+    ;
+
+    $services
+        ->set('sylius_admin.controller.update_product_variant_positions', UpdateProductVariantPositionAction::class)
+        ->args([
+            service('sylius.repository.product_variant'),
             service('doctrine.orm.default_entity_manager'),
             service('security.csrf.token_manager'),
         ])

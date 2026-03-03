@@ -24,10 +24,14 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class ProductVariantController extends ResourceController
 {
     /**
+     * @deprecated This method is deprecated and will be removed in Sylius 3.0
+     *
      * @throws HttpException
      */
     public function updatePositionsAction(Request $request): Response
     {
+        trigger_deprecation('sylius/core-bundle', '2.3', '"%s" method is deprecated and will be removed in Sylius 3.0', __METHOD__);
+
         $data = json_decode($request->getContent(), true);
 
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
