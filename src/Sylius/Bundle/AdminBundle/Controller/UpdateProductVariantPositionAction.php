@@ -11,36 +11,39 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Controller;
+namespace Sylius\Bundle\AdminBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Resource\ResourceActions;
+use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-class ProductVariantController extends ResourceController
+/**
+ * @experimental
+ */
+final readonly class UpdateProductVariantPositionAction
 {
-    /**
-     * @deprecated This method is deprecated and will be removed in Sylius 3.0
-     *
-     * @throws HttpException
-     */
-    public function updatePositionsAction(Request $request): Response
+    private const CSRF_TOKEN_NAME = 'update-product-variant-position';
+
+    public function __construct(
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private ObjectManager $manager,
+        private CsrfTokenManagerInterface $csrfTokenManager,
+    ) {
+    }
+
+    public function __invoke(Request $request): Response
     {
-        trigger_deprecation('sylius/core-bundle', '2.3', '"%s" method is deprecated and will be removed in Sylius 3.0', __METHOD__);
-
         $data = json_decode($request->getContent(), true);
+        $csrfToken = new CsrfToken(self::CSRF_TOKEN_NAME, $data['_csrf_token'] ?? '');
+        $this->validateCsrfProtection($csrfToken);
 
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         $productVariantsToUpdate = $data['productVariants'] ?? [];
-
-        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid('update-product-variant-position', $data['_csrf_token'] ?? '')) {
-            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
-        }
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true)) {
             foreach ($productVariantsToUpdate as $productVariantToUpdate) {
@@ -52,12 +55,19 @@ class ProductVariantController extends ResourceController
                 }
 
                 /** @var ProductVariantInterface $productVariant */
-                $productVariant = $this->repository->findOneBy(['id' => $productVariantToUpdate['id']]);
+                $productVariant = $this->productVariantRepository->findOneBy(['id' => $productVariantToUpdate['id']]);
                 $productVariant->setPosition((int) $productVariantToUpdate['position']);
                 $this->manager->flush();
             }
         }
 
         return new JsonResponse();
+    }
+
+    private function validateCsrfProtection(CsrfToken $csrfToken): void
+    {
+        if (!$this->csrfTokenManager->isTokenValid($csrfToken)) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
     }
 }
