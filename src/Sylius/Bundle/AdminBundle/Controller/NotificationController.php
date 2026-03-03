@@ -17,6 +17,8 @@ use GuzzleHttp\ClientInterface as DeprecatedClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Http\Message\MessageFactory;
 use Nyholm\Psr7\Stream;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -35,17 +37,33 @@ trigger_deprecation(
 /** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class NotificationController
 {
+    private const CACHE_KEY = 'sylius_admin_notification_version';
+
+    private const TTL = 86400;
+
     public function __construct(
         private ClientInterface|DeprecatedClientInterface $client,
         private MessageFactory|RequestFactoryInterface $requestFactory,
         private string $hubUri,
         private string $environment,
+        private CacheItemPoolInterface $cache,
         private ?StreamFactoryInterface $streamFactory = null,
     ) {
     }
 
     public function getVersionAction(Request $request): JsonResponse
     {
+        $cacheItem = $this->cache->getItem(self::CACHE_KEY);
+
+        if ($cacheItem->isHit()) {
+            $cached = $cacheItem->get();
+            if (null === $cached || '' === $cached) {
+                return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
+            }
+
+            return new JsonResponse($cached);
+        }
+
         $content = json_encode([
             'version' => SyliusCoreBundle::VERSION,
             'hostname' => $request->getHost(),
@@ -66,16 +84,32 @@ final class NotificationController
 
         try {
             if ($this->client instanceof DeprecatedClientInterface) {
-                $hubResponse = $this->client->send($hubRequest, ['verify' => false]);
+                $hubResponse = $this->client->send($hubRequest, [
+                    'verify' => false,
+                    'timeout' => 2,
+                    'connect_timeout' => 1,
+                ]);
             } else {
                 $hubResponse = $this->client->sendRequest($hubRequest);
             }
         } catch (ClientExceptionInterface|GuzzleException) {
+            $this->saveToCache($cacheItem, '');
+
             return new JsonResponse('', JsonResponse::HTTP_NO_CONTENT);
         }
 
         $hubResponse = json_decode($hubResponse->getBody()->getContents(), true);
 
+        $this->saveToCache($cacheItem, $hubResponse);
+
         return new JsonResponse($hubResponse);
+    }
+
+    private function saveToCache(CacheItemInterface $cacheItem, $data): void
+    {
+        $cacheItem->set($data);
+        $cacheItem->expiresAfter(self::TTL);
+
+        $this->cache->save($cacheItem);
     }
 }
