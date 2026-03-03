@@ -20,7 +20,7 @@ class DoctrineStorage extends BaseDoctrineStorage
 {
     protected function doFind($id): ?object
     {
-        /** @var object|GatewayConfigInterface|null $resource */
+        /** @var object|null $resource */
         $resource = parent::doFind($id);
 
         if (null === $resource) {
@@ -37,7 +37,7 @@ class DoctrineStorage extends BaseDoctrineStorage
     /** @param array<mixed> $criteria */
     public function findBy(array $criteria): array
     {
-        /** @var object[]|GatewayConfigInterface[] $resources */
+        /** @var array<object> $resources */
         $resources = parent::findBy($criteria);
 
         return array_filter($resources, static function ($resource) {
