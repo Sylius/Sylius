@@ -37,7 +37,7 @@ final class Configuration implements ConfigurationInterface
                             ->defaultTrue()
                         ->end()
                         ->integerNode('frequency')
-                            ->defaultValue(60)
+                            ->defaultValue(1440) // in minutes, 1440 = 24h
                         ->end()
                     ->end()
                 ->end()
