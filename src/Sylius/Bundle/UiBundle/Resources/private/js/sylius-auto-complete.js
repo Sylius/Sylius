@@ -9,6 +9,7 @@
 
 import 'semantic-ui-css/components/dropdown';
 import $ from 'jquery';
+import { sanitizeInput } from "./sylius-sanitizer";
 
 $.fn.extend({
   autoComplete() {
@@ -38,8 +39,8 @@ $.fn.extend({
             return {
               success: true,
               results: response.map(item => ({
-                name: item[choiceName],
-                value: item[choiceValue],
+                name: sanitizeInput(item[choiceName]),
+                value: sanitizeInput(item[choiceValue]),
               })),
             };
           },
@@ -62,7 +63,7 @@ $.fn.extend({
           onSuccess(response) {
             response.forEach((item) => {
               menuElement.append((
-                $(`<div class="item" data-value="${item[choiceValue]}">${item[choiceName]}</div>`)
+                $(`<div class="item" data-value="${item[choiceValue]}">${sanitizeInput(item[choiceName])}</div>`)
               ));
             });
 
