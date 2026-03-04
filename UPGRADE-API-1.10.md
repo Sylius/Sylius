@@ -1,3 +1,7 @@
+# UPGRADE FROM `v1.10.15` TO `v1.10.16`
+
+1. The `api/v2/shop/adjustments/{id}` endpoint has been disabled.
+
 # UPGRADE FROM `v1.10.0` TO `v1.10.1`
 
 1. API is disabled by default, to enable it you need to set flag to ``true`` in ``config/packages/_sylius.yaml``:
