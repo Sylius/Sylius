@@ -78,7 +78,6 @@ export default class extends Controller {
             itemPrototyp.dataset.testTreeTaxon = name;
         }
 
-        return itemPrototyp.outerHTML.replaceAll('__TAXON_ID__', id);
         const div = document.createElement('div');
         div.textContent = name;
         const escapedName = div.innerHTML;

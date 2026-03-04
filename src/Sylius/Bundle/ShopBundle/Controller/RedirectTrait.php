@@ -18,6 +18,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 trait RedirectTrait
 {
+    /** @param array<string, mixed> $fallbackParameters */
     private function getRedirectUrl(Request $request, ?RouterInterface $router, string $fallbackRoute = 'sylius_shop_homepage', array $fallbackParameters = []): string
     {
         if (null === $router) {

@@ -93,8 +93,8 @@ final readonly class AddItemToCartHandler
         $currentUser = $this->userContext->getUser();
 
         if (
-            $currentUser instanceof ShopUserInterface
-            && $currentUser->getCustomer()?->getId() === $cartCustomer->getId()
+            $currentUser instanceof ShopUserInterface &&
+            $currentUser->getCustomer()?->getId() === $cartCustomer->getId()
         ) {
             return;
         }
