@@ -103,10 +103,11 @@
         <service id="sylius_admin.controller.customer_statistics" alias="sylius.controller.customer_statistics" />
 
         <service id="sylius.controller.admin.notification" class="Sylius\Bundle\AdminBundle\Controller\NotificationController" public="true">
-            <argument type="service" id="sylius.http_client" />
+            <argument type="service" id="sylius.admin.http_client" />
             <argument type="service" id="Psr\Http\Message\RequestFactoryInterface" />
             <argument type="string">%sylius.admin.notification.uri%</argument>
             <argument type="string">%kernel.environment%</argument>
+            <argument type="service" id="cache.app" />
             <argument type="service" id="Psr\Http\Message\StreamFactoryInterface" />
             <deprecated package="sylius/admin-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
