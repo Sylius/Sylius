@@ -44,6 +44,7 @@
             <argument type="service" id="sylius.modifier.order" />
             <argument type="service" id="sylius.factory.order_item" />
             <argument type="service" id="sylius.modifier.order_item_quantity" />
+            <argument type="service" id="Sylius\Bundle\ApiBundle\Context\UserContextInterface" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 

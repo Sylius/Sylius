@@ -14,14 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Factory\CartItemFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
@@ -37,6 +40,7 @@ final readonly class AddItemToCartHandler
         private OrderModifierInterface $orderModifier,
         private CartItemFactoryInterface $cartItemFactory,
         private OrderItemQuantityModifierInterface $orderItemQuantityModifier,
+        private ?UserContextInterface $userContext = null,
     ) {
     }
 
@@ -56,6 +60,8 @@ final readonly class AddItemToCartHandler
             throw new \InvalidArgumentException('Cart with given token has not been found.');
         }
 
+        $this->assertCartAccessible($cart);
+
         /** @var OrderItemInterface $cartItem */
         $cartItem = $this->cartItemFactory->createNew();
         $cartItem->setVariant($productVariant);
@@ -64,5 +70,37 @@ final readonly class AddItemToCartHandler
         $this->orderModifier->addToOrder($cart, $cartItem);
 
         return $cart;
+    }
+
+    private function assertCartAccessible(OrderInterface $cart): void
+    {
+        if (null === $this->userContext) {
+            return;
+        }
+
+        $currentUser = $this->userContext->getUser();
+
+        if (null === $currentUser) {
+            return;
+        }
+
+        if ($cart->isCreatedByGuest()) {
+            return;
+        }
+
+        $cartCustomer = $cart->getCustomer();
+
+        if (null === $cartCustomer || null === $cartCustomer->getUser()) {
+            return;
+        }
+
+        if (
+            $currentUser instanceof ShopUserInterface
+            && $currentUser->getCustomer()?->getId() === $cartCustomer->getId()
+        ) {
+            return;
+        }
+
+        throw new NotFoundHttpException('Cart not found.');
     }
 }
