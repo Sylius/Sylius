@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Tests\Controller;
 
-use GuzzleHttp\Exception\ConnectException;
-use Http\Message\MessageFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Prophecy\ProphecyInterface;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -31,149 +31,165 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class NotificationControllerTest extends TestCase
 {
-    use ProphecyTrait;
+    /** @var ObjectProphecy|ClientInterface */
+    private $client;
 
-    private ObjectProphecy $client;
+    /** @var ObjectProphecy|RequestFactoryInterface */
+    private $requestFactory;
 
-    private ObjectProphecy $legacyClient;
+    /** @var ObjectProphecy|StreamFactoryInterface */
+    private $streamFactory;
 
-    private ObjectProphecy $requestFactory;
+    /** @var ObjectProphecy|CacheItemPoolInterface */
+    private $cache;
 
-    private ObjectProphecy $messageFactory;
+    /** @var ObjectProphecy|CacheItemInterface */
+    private $cacheItem;
 
-    private ObjectProphecy $streamFactory;
+    /** @var NotificationController */
+    private $controller;
 
-    private NotificationController $controller;
+    /** @var string */
+    private static $hubUri = 'www.doesnotexist.test.com';
 
-    private NotificationController $legacyController;
+    /**
+     * @test
+     */
+    public function it_returns_cached_response_when_cache_is_hit(): void
+    {
+        $cachedData = ['version' => '9001'];
 
-    private static string $hubUri = 'www.doesnotexist.test.com';
+        $this->cache->getItem('sylius_admin_notification_version')->willReturn($this->cacheItem->reveal());
+        $this->cacheItem->isHit()->willReturn(true);
+        $this->cacheItem->get()->willReturn($cachedData);
 
-    /** @test */
+        $this->client->sendRequest(Argument::cetera())->shouldNotBeCalled();
+        $this->requestFactory->createRequest(Argument::cetera())->shouldNotBeCalled();
+
+        $response = $this->controller->getVersionAction(new Request());
+
+        $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
+        $this->assertEquals(json_encode($cachedData), $response->getContent());
+        $this->cache->save(Argument::any())->shouldNotHaveBeenCalled();
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_no_content_when_cached_value_is_empty(): void
+    {
+        $this->cacheItem->isHit()->willReturn(true);
+        $this->cacheItem->get()->willReturn('');
+
+        $this->client->sendRequest(Argument::cetera())->shouldNotBeCalled();
+        $this->requestFactory->createRequest(Argument::cetera())->shouldNotBeCalled();
+
+        $response = $this->controller->getVersionAction(new Request());
+
+        $this->assertEquals(JsonResponse::HTTP_NO_CONTENT, $response->getStatusCode());
+        $this->cache->save(Argument::any())->shouldNotHaveBeenCalled();
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_no_content_when_cached_value_is_null(): void
+    {
+        $this->cacheItem->isHit()->willReturn(true);
+        $this->cacheItem->get()->willReturn(null);
+
+        $this->client->sendRequest(Argument::cetera())->shouldNotBeCalled();
+        $this->requestFactory->createRequest(Argument::cetera())->shouldNotBeCalled();
+
+        $response = $this->controller->getVersionAction(new Request());
+
+        $this->assertEquals(JsonResponse::HTTP_NO_CONTENT, $response->getStatusCode());
+        $this->cache->save(Argument::any())->shouldNotHaveBeenCalled();
+    }
+
+    /**
+     * @test
+     */
     public function it_returns_an_empty_json_response_upon_client_exception(): void
     {
-        $requestInterface = $this->prophesize(RequestInterface::class);
-        $streamInterface = $this->prophesize(StreamInterface::class);
+        $this->stubRequestFactory();
 
-        $this->streamFactory->createStream(Argument::cetera())->willReturn($streamInterface);
-
-        $this->requestFactory->createRequest(Argument::cetera())->willReturn($requestInterface);
-        $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
-        $requestInterface->withBody($streamInterface)->willReturn($requestInterface);
-
-        $this->client->sendRequest(Argument::cetera())->willThrow(ConnectException::class);
+        $this->client->sendRequest(Argument::any())
+            ->willThrow(new class () extends \RuntimeException implements ClientExceptionInterface {});
 
         $emptyResponse = $this->controller->getVersionAction(new Request());
 
         $this->assertEquals(JsonResponse::HTTP_NO_CONTENT, $emptyResponse->getStatusCode());
         $this->assertEquals('""', $emptyResponse->getContent());
+        $this->cacheItem->set('')->shouldHaveBeenCalled();
+        $this->cacheItem->expiresAfter(86400)->shouldHaveBeenCalled();
+        $this->cache->save($this->cacheItem->reveal())->shouldHaveBeenCalled();
     }
 
     /**
      * @test
-     *
-     * @legacy This test will be removed in Sylius 2.0.
      */
-    public function it_returns_an_empty_json_response_upon_client_exception_deprecated(): void
-    {
-        $requestInterface = $this->prophesize(RequestInterface::class);
-
-        $this->messageFactory->createRequest(Argument::cetera())->willReturn($requestInterface);
-        $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
-        $requestInterface->withBody(Argument::any())->willReturn($requestInterface);
-
-        $this->legacyClient->send(Argument::cetera())->willThrow(ConnectException::class);
-
-        $emptyResponse = $this->legacyController->getVersionAction(new Request());
-
-        $this->assertEquals(JsonResponse::HTTP_NO_CONTENT, $emptyResponse->getStatusCode());
-        $this->assertEquals('""', $emptyResponse->getContent());
-    }
-
-    /** @test */
     public function it_returns_json_response_from_client_on_success(): void
     {
         $content = json_encode(['version' => '9001']);
 
-        $requestInterface = $this->prophesize(RequestInterface::class);
-        $streamInterface = $this->prophesize(StreamInterface::class);
+        $this->stubRequestFactory();
 
-        $this->streamFactory->createStream(Argument::cetera())->willReturn($streamInterface);
-
-        $this->requestFactory->createRequest(Argument::cetera())->willReturn($requestInterface);
-        $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
-        $requestInterface->withBody($streamInterface)->willReturn($requestInterface);
-
-        /** @var ProphecyInterface|StreamInterface $stream */
+        /** @var ObjectProphecy|StreamInterface $stream */
         $stream = $this->prophesize(StreamInterface::class);
         $stream->getContents()->willReturn($content);
 
-        /** @var ProphecyInterface|ResponseInterface $externalResponse */
+        /** @var ObjectProphecy|ResponseInterface $externalResponse */
         $externalResponse = $this->prophesize(ResponseInterface::class);
         $externalResponse->getBody()->willReturn($stream->reveal());
 
-        $this->client->sendRequest(Argument::cetera())->willReturn($externalResponse->reveal());
+        $this->client->sendRequest(Argument::any())->willReturn($externalResponse->reveal());
 
         $response = $this->controller->getVersionAction(new Request());
 
         $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
         $this->assertEquals($content, $response->getContent());
-    }
-
-    /**
-     * @test
-     *
-     * @legacy This test will be removed in Sylius 2.0.
-     */
-    public function it_returns_json_response_from_client_on_success_deprecated(): void
-    {
-        $content = json_encode(['version' => '9001']);
-
-        $requestInterface = $this->prophesize(RequestInterface::class);
-
-        $this->messageFactory->createRequest(Argument::cetera())->willReturn($requestInterface);
-        $requestInterface->withHeader('Content-Type', 'application/json')->willReturn($requestInterface);
-        $requestInterface->withBody(Argument::any())->willReturn($requestInterface);
-
-        /** @var ProphecyInterface|StreamInterface $stream */
-        $stream = $this->prophesize(StreamInterface::class);
-        $stream->getContents()->willReturn($content);
-
-        /** @var ProphecyInterface|ResponseInterface $externalResponse */
-        $externalResponse = $this->prophesize(ResponseInterface::class);
-        $externalResponse->getBody()->willReturn($stream->reveal());
-
-        $this->legacyClient->send(Argument::cetera())->willReturn($externalResponse->reveal());
-
-        $response = $this->legacyController->getVersionAction(new Request());
-
-        $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
-        $this->assertEquals($content, $response->getContent());
+        $this->cacheItem->set(['version' => '9001'])->shouldHaveBeenCalled();
+        $this->cacheItem->expiresAfter(86400)->shouldHaveBeenCalled();
+        $this->cache->save($this->cacheItem->reveal())->shouldHaveBeenCalled();
     }
 
     protected function setUp(): void
     {
-        $this->client = $this->prophesize(\Psr\Http\Client\ClientInterface::class);
-        $this->legacyClient = $this->prophesize(\GuzzleHttp\ClientInterface::class);
+        $this->client = $this->prophesize(ClientInterface::class);
         $this->requestFactory = $this->prophesize(RequestFactoryInterface::class);
-        $this->messageFactory = $this->prophesize(MessageFactory::class);
         $this->streamFactory = $this->prophesize(StreamFactoryInterface::class);
+        $this->cache = $this->prophesize(CacheItemPoolInterface::class);
+        $this->cacheItem = $this->prophesize(CacheItemInterface::class);
+
+        $this->cache->getItem('sylius_admin_notification_version')->willReturn($this->cacheItem->reveal());
+        $this->cacheItem->isHit()->willReturn(false);
+        $this->cacheItem->set(Argument::any())->willReturn($this->cacheItem->reveal());
+        $this->cacheItem->expiresAfter(Argument::any())->willReturn($this->cacheItem->reveal());
+        $this->cache->save(Argument::any())->willReturn(true);
 
         $this->controller = new NotificationController(
             $this->client->reveal(),
             $this->requestFactory->reveal(),
             self::$hubUri,
             'environment',
+            $this->cache->reveal(),
             $this->streamFactory->reveal(),
         );
 
-        $this->legacyController = new NotificationController(
-            $this->legacyClient->reveal(),
-            $this->messageFactory->reveal(),
-            self::$hubUri,
-            'environment',
-        );
-
         parent::setUp();
+    }
+
+    private function stubRequestFactory(): void
+    {
+        $hubRequest = $this->prophesize(RequestInterface::class);
+        $hubRequest->withHeader('Content-Type', 'application/json')->willReturn($hubRequest->reveal());
+        $hubRequest->withBody(Argument::any())->willReturn($hubRequest->reveal());
+
+        $this->requestFactory->createRequest(Request::METHOD_GET, self::$hubUri)
+            ->willReturn($hubRequest->reveal());
+
+        $this->streamFactory->createStream(Argument::any())
+            ->willReturn($this->prophesize(StreamInterface::class)->reveal());
     }
 }
