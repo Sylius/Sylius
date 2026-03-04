@@ -19,6 +19,8 @@ use Http\Message\MessageFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ProphecyInterface;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -34,11 +36,65 @@ final class NotificationControllerTest extends TestCase
     /** @var ProphecyInterface|MessageFactory */
     private $messageFactory;
 
+    /** @var ProphecyInterface|CacheItemPoolInterface */
+    private $cache;
+
+    /** @var ProphecyInterface|CacheItemInterface */
+    private $cacheItem;
+
     /** @var NotificationController */
     private $controller;
 
     /** @var string */
     private static $hubUri = 'www.doesnotexist.test.com';
+
+    /**
+     * @test
+     */
+    public function it_returns_cached_response_when_cache_is_hit(): void
+    {
+        $cachedData = ['version' => '9001'];
+
+        $this->cacheItem->isHit()->willReturn(true);
+        $this->cacheItem->get()->willReturn($cachedData);
+
+        $this->client->send(Argument::cetera())->shouldNotBeCalled();
+
+        $response = $this->controller->getVersionAction(new Request());
+
+        $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
+        $this->assertEquals(json_encode($cachedData), $response->getContent());
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_no_content_when_cached_value_is_empty(): void
+    {
+        $this->cacheItem->isHit()->willReturn(true);
+        $this->cacheItem->get()->willReturn('');
+
+        $this->client->send(Argument::cetera())->shouldNotBeCalled();
+
+        $response = $this->controller->getVersionAction(new Request());
+
+        $this->assertEquals(JsonResponse::HTTP_NO_CONTENT, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_no_content_when_cached_value_is_null(): void
+    {
+        $this->cacheItem->isHit()->willReturn(true);
+        $this->cacheItem->get()->willReturn(null);
+
+        $this->client->send(Argument::cetera())->shouldNotBeCalled();
+
+        $response = $this->controller->getVersionAction(new Request());
+
+        $this->assertEquals(JsonResponse::HTTP_NO_CONTENT, $response->getStatusCode());
+    }
 
     /**
      * @test
@@ -55,6 +111,7 @@ final class NotificationControllerTest extends TestCase
 
         $this->assertEquals(JsonResponse::HTTP_NO_CONTENT, $emptyResponse->getStatusCode());
         $this->assertEquals('""', $emptyResponse->getContent());
+        $this->cache->save(Argument::any())->shouldHaveBeenCalled();
     }
 
     /**
@@ -82,18 +139,28 @@ final class NotificationControllerTest extends TestCase
 
         $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
         $this->assertEquals($content, $response->getContent());
+        $this->cache->save(Argument::any())->shouldHaveBeenCalled();
     }
 
     protected function setUp(): void
     {
         $this->client = $this->prophesize(ClientInterface::class);
         $this->messageFactory = $this->prophesize(MessageFactory::class);
+        $this->cache = $this->prophesize(CacheItemPoolInterface::class);
+        $this->cacheItem = $this->prophesize(CacheItemInterface::class);
+
+        $this->cache->getItem(Argument::any())->willReturn($this->cacheItem->reveal());
+        $this->cacheItem->isHit()->willReturn(false);
+        $this->cacheItem->set(Argument::any())->willReturn($this->cacheItem->reveal());
+        $this->cacheItem->expiresAfter(Argument::any())->willReturn($this->cacheItem->reveal());
+        $this->cache->save(Argument::any())->willReturn(true);
 
         $this->controller = new NotificationController(
             $this->client->reveal(),
             $this->messageFactory->reveal(),
             self::$hubUri,
-            'environment'
+            'environment',
+            $this->cache->reveal()
         );
 
         parent::setUp();
