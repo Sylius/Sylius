@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter;
 
-use ApiPlatform\Doctrine\Common\Filter\OrderFilterInterface;
 use ApiPlatform\Doctrine\Orm\Filter\AbstractFilter;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Operation;
@@ -21,6 +20,8 @@ use Doctrine\ORM\QueryBuilder;
 
 final class TranslationOrderNameAndLocaleFilter extends AbstractFilter
 {
+    private const ALLOWED_DIRECTIONS = ['asc', 'desc'];
+
     protected function filterProperty(
         string $property,
         $value,
@@ -36,8 +37,13 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractFilter
                 return;
             }
 
+            $direction = strtolower($value['translation.name']);
+            if (!in_array($direction, self::ALLOWED_DIRECTIONS, true)) {
+                return;
+            }
+
             $queryBuilder
-                ->orderBy('translation.name', $value['translation.name'])
+                ->orderBy('translation.name', $direction)
             ;
         }
     }
@@ -51,10 +57,7 @@ final class TranslationOrderNameAndLocaleFilter extends AbstractFilter
                 'property' => 'translation',
                 'schema' => [
                     'type' => 'string',
-                    'enum' => [
-                        strtolower(OrderFilterInterface::DIRECTION_ASC),
-                        strtolower(OrderFilterInterface::DIRECTION_DESC),
-                    ],
+                    'enum' => self::ALLOWED_DIRECTIONS,
                 ],
             ],
             /* @see \Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\TranslationOrderLocaleExtension */
