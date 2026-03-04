@@ -1,3 +1,25 @@
+# UPGRADE FROM `v1.12.20` TO `v1.12.21`
+
+## Redirect behavior changes
+
+`CurrencySwitchController`, `ImpersonateUserController` and `StorageBasedLocaleSwitcher` no longer use the
+HTTP `Referer` header for redirects. Instead, they use the `RouterInterface` to generate a redirect URL based on
+the `_sylius.redirect` route attribute (defaulting to `sylius_shop_homepage`).
+
+If your application relied on the Referer-based redirect behavior (e.g., to return the user to the page they came from
+after switching currency or locale), you can customize the redirect target by overriding the route definition:
+
+```yaml
+# config/routes/sylius_shop.yaml
+sylius_shop_switch_currency:
+    path: /{_locale}/switch-currency/{code}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shop.currency_switch:switchAction
+        _sylius:
+            redirect: sylius_shop_homepage # or any route name you prefer
+```
+
 # UPGRADING FROM `v1.12.19` TO `v1.12.20`
 
 ## Telemetry
