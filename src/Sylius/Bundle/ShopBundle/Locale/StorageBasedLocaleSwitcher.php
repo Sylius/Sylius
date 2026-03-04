@@ -13,21 +13,33 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShopBundle\Locale;
 
+use Sylius\Bundle\ShopBundle\Controller\RedirectTrait;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RouterInterface;
 
 final class StorageBasedLocaleSwitcher implements LocaleSwitcherInterface
 {
-    public function __construct(private LocaleStorageInterface $localeStorage, private ChannelContextInterface $channelContext)
-    {
+    use RedirectTrait;
+
+    public function __construct(
+        private LocaleStorageInterface $localeStorage,
+        private ChannelContextInterface $channelContext,
+        private ?RouterInterface $router = null,
+    ) {
     }
 
     public function handle(Request $request, string $localeCode): RedirectResponse
     {
         $this->localeStorage->set($this->channelContext->getChannel(), $localeCode);
 
-        return new RedirectResponse($request->headers->get('referer', $request->getSchemeAndHttpHost()));
+        return new RedirectResponse($this->getRedirectUrl(
+            $request,
+            $this->router,
+            'sylius_shop_homepage',
+            ['_locale' => $localeCode],
+        ));
     }
 }
