@@ -7,6 +7,6 @@
         { label: 'sylius.ui.home'|trans, path: path('sylius_shop_homepage')},
         { label: 'sylius.ui.my_account'|trans, path: path('sylius_shop_account_dashboard')},
         { label: 'sylius.ui.order_history'|trans, path: path('sylius_shop_account_order_index')},
-        { label: '<span '~sylius_test_html_attribute('order-number')~'>#'~order.number~'</span>', active: true }
+        { label: '#'~order.number, active: true, test_attribute: 'order-number' }
     ]) }}
 </div>

@@ -65,6 +65,15 @@ export default class extends Controller {
             togglerPrototyp.classList.add('infinite-tree-leaf');
         }
 
-        return itemPrototyp.outerHTML.replaceAll('__TAXON_ID__', id).replaceAll('__TAXON_NAME__', name);
+        const titleElement = itemPrototyp.querySelector('.infinite-tree-title');
+        if (titleElement) {
+            titleElement.textContent = name;
+        }
+
+        if (itemPrototyp.dataset.testTreeTaxon !== undefined) {
+            itemPrototyp.dataset.testTreeTaxon = name;
+        }
+
+        return itemPrototyp.outerHTML.replaceAll('__TAXON_ID__', id);
     }
 }
