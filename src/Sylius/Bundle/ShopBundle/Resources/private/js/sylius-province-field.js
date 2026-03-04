@@ -8,9 +8,10 @@
  */
 
 import $ from 'jquery';
+import { sanitizeInput } from 'sylius/ui/sylius-sanitizer';
 
 const getProvinceInputValue = function getProvinceInputValue(valueSelector) {
-  return valueSelector == undefined ? '' : `value="${valueSelector}"`;
+  return valueSelector == undefined ? '' : `value="${sanitizeInput(valueSelector)}"`;
 };
 
 $.fn.extend({
