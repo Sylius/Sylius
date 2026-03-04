@@ -80,12 +80,6 @@ final readonly class AddItemToCartHandler
             return;
         }
 
-        $currentUser = $this->userContext->getUser();
-
-        if (null === $currentUser) {
-            return;
-        }
-
         if ($cart->isCreatedByGuest()) {
             return;
         }
@@ -95,6 +89,8 @@ final readonly class AddItemToCartHandler
         if (null === $cartCustomer || null === $cartCustomer->getUser()) {
             return;
         }
+
+        $currentUser = $this->userContext->getUser();
 
         if (
             $currentUser instanceof ShopUserInterface
