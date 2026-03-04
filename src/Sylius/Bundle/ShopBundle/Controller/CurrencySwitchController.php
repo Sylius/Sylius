@@ -21,16 +21,20 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Twig\Environment;
 
 final class CurrencySwitchController
 {
+    use RedirectTrait;
+
     public function __construct(
         private EngineInterface|Environment $templatingEngine,
         private CurrencyContextInterface $currencyContext,
         private CurrencyStorageInterface $currencyStorage,
         private ChannelContextInterface $channelContext,
+        private ?RouterInterface $router = null,
     ) {
     }
 
@@ -57,6 +61,6 @@ final class CurrencySwitchController
 
         $this->currencyStorage->set($channel, $code);
 
-        return new RedirectResponse($request->headers->get('referer', $request->getSchemeAndHttpHost()));
+        return new RedirectResponse($this->getRedirectUrl($request, $this->router));
     }
 }
