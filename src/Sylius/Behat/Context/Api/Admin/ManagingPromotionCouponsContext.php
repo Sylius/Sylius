@@ -173,7 +173,9 @@ final readonly class ManagingPromotionCouponsContext implements Context
      */
     public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
     {
-        $this->client->updateRequestData(['codeLength' => $codeLength]);
+        if ($codeLength !== null) {
+            $this->client->updateRequestData(['codeLength' => $codeLength]);
+        }
     }
 
     /**
