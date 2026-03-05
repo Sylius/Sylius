@@ -56,3 +56,37 @@ Feature: Receiving discount based on total of items from specific taxon
         When I check the details of my cart
         Then my cart total should be "$125.00"
         And my discount should be "-$15.00"
+
+    @api @ui
+    Scenario: Receiving discount on order while buying product from child taxon of promoted taxon
+        Given the "T-Shirts" taxon has child taxon "Polo T-Shirts"
+        And the store has a product "Polo T-Shirt" priced at "$100.00"
+        And it belongs to "Polo T-Shirts"
+        And the promotion gives "$20.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
+        And I added product "Polo T-Shirt" to the cart
+        When I check the details of my cart
+        Then my cart total should be "$80.00"
+        And my discount should be "-$20.00"
+
+    @api @ui
+    Scenario: Receiving no discount on order while buying product from child taxon of promoted taxon which not fits price criteria
+        Given the "T-Shirts" taxon has child taxon "Polo T-Shirts"
+        And the store has a product "Polo T-Shirt" priced at "$30.00"
+        And it belongs to "Polo T-Shirts"
+        And the promotion gives "$20.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
+        And I added product "Polo T-Shirt" to the cart
+        When I check the details of my cart
+        Then my cart total should be "$30.00"
+        And there should be no discount applied
+
+    @api @ui
+    Scenario: Receiving discount on order while buying products from both parent and child taxon which fit price criteria
+        Given the "T-Shirts" taxon has child taxon "Polo T-Shirts"
+        And the store has a product "Polo T-Shirt" priced at "$60.00"
+        And it belongs to "Polo T-Shirts"
+        And the promotion gives "$10.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
+        And I added product "PHP T-Shirt" to the cart
+        And I added product "Polo T-Shirt" to the cart
+        When I check the details of my cart
+        Then my cart total should be "$150.00"
+        And my discount should be "-$10.00"
