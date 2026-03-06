@@ -57,16 +57,29 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
             return false;
         }
 
+        $includeChildTaxons = $configuration['include_child_taxons'] ?? false;
         $itemsWithTaxonTotal = 0;
 
         /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
-            if ($this->productBelongsToTaxonOrDescendant($item->getProduct(), $targetTaxon)) {
+            $belongs = $includeChildTaxons
+                ? $this->productBelongsToTaxonOrDescendant($item->getProduct(), $targetTaxon)
+                : $this->productBelongsToTaxon($item->getProduct(), $targetTaxon);
+            if ($belongs) {
                 $itemsWithTaxonTotal += $item->getTotal();
             }
         }
 
         return $itemsWithTaxonTotal >= $configuration['amount'];
+    }
+
+    private function productBelongsToTaxon(?ProductInterface $product, TaxonInterface $targetTaxon): bool
+    {
+        if ($product === null) {
+            return false;
+        }
+
+        return $product->getTaxons()->contains($targetTaxon);
     }
 
     private function productBelongsToTaxonOrDescendant(?ProductInterface $product, TaxonInterface $targetTaxon): bool

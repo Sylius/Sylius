@@ -54,13 +54,16 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->createPromotionRule(HasTaxonRuleChecker::TYPE, ['taxons' => $taxons]);
     }
 
-    public function createItemsFromTaxonTotal(string $channelCode, string $taxonCode, int $amount): PromotionRuleInterface
-    {
+    public function createItemsFromTaxonTotal(
+        string $channelCode,
+        string $taxonCode,
+        int $amount,
+        bool $includeChildTaxons = false,
+    ): PromotionRuleInterface {
         return $this->createPromotionRule(
             TotalOfItemsFromTaxonRuleChecker::TYPE,
-            [$channelCode => ['taxon' => $taxonCode, 'amount' => $amount]],
-        )
-        ;
+            [$channelCode => ['amount' => $amount, 'include_child_taxons' => $includeChildTaxons, 'taxon' => $taxonCode]],
+        );
     }
 
     public function createNthOrder(int $nth): PromotionRuleInterface

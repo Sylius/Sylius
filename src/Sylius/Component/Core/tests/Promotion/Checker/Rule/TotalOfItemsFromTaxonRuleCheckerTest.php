@@ -150,7 +150,32 @@ final class TotalOfItemsFromTaxonRuleCheckerTest extends TestCase
         $recurveBowItem->expects($this->once())->method('getTotal')->willReturn(5000);
 
         $this->assertTrue(
-            $this->ruleChecker->isEligible($this->order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]]),
+            $this->ruleChecker->isEligible($this->order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000, 'include_child_taxons' => true]]),
+        );
+    }
+
+    public function testShouldNotRecognizeSubjectAsEligibleIfItHasItemsOnlyFromChildTaxonWhenChildTaxonsExcluded(): void
+    {
+        $recurveBows = $this->createMock(TaxonInterface::class);
+
+        $recurveBowItem = $this->createMock(OrderItemInterface::class);
+        $recurveBow = $this->createMock(ProductInterface::class);
+
+        $this->order->expects($this->once())->method('getChannel')->willReturn($this->channel);
+        $this->channel->expects($this->once())->method('getCode')->willReturn('WEB_US');
+        $this->order->expects($this->once())->method('getItems')->willReturn(new ArrayCollection([
+            $recurveBowItem,
+        ]));
+        $this->taxonRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->with(['code' => 'bows'])
+            ->willReturn($this->bows);
+        $recurveBowItem->expects($this->once())->method('getProduct')->willReturn($recurveBow);
+        $recurveBow->expects($this->once())->method('getTaxons')->willReturn(new ArrayCollection([$recurveBows]));
+
+        $this->assertFalse(
+            $this->ruleChecker->isEligible($this->order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 5000, 'include_child_taxons' => false]]),
         );
     }
 

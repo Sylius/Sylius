@@ -58,11 +58,11 @@ Feature: Receiving discount based on total of items from specific taxon
         And my discount should be "-$15.00"
 
     @api @ui
-    Scenario: Receiving discount on order while buying product from child taxon of promoted taxon
+    Scenario: Receiving discount on order while buying product from child taxon of promoted taxon when child taxons are included
         Given the "T-Shirts" taxon has child taxon "Polo T-Shirts"
         And the store has a product "Polo T-Shirt" priced at "$100.00"
         And it belongs to "Polo T-Shirts"
-        And the promotion gives "$20.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
+        And the promotion gives "$20.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00", including child taxons
         And I added product "Polo T-Shirt" to the cart
         When I check the details of my cart
         Then my cart total should be "$80.00"
@@ -73,7 +73,7 @@ Feature: Receiving discount based on total of items from specific taxon
         Given the "T-Shirts" taxon has child taxon "Polo T-Shirts"
         And the store has a product "Polo T-Shirt" priced at "$30.00"
         And it belongs to "Polo T-Shirts"
-        And the promotion gives "$20.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
+        And the promotion gives "$20.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00", including child taxons
         And I added product "Polo T-Shirt" to the cart
         When I check the details of my cart
         Then my cart total should be "$30.00"
@@ -84,9 +84,20 @@ Feature: Receiving discount based on total of items from specific taxon
         Given the "T-Shirts" taxon has child taxon "Polo T-Shirts"
         And the store has a product "Polo T-Shirt" priced at "$60.00"
         And it belongs to "Polo T-Shirts"
-        And the promotion gives "$10.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
+        And the promotion gives "$10.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00", including child taxons
         And I added product "PHP T-Shirt" to the cart
         And I added product "Polo T-Shirt" to the cart
         When I check the details of my cart
         Then my cart total should be "$150.00"
         And my discount should be "-$10.00"
+
+    @api @ui
+    Scenario: Receiving no discount on order while buying product from child taxon when child taxons are excluded from the rule
+        Given the "T-Shirts" taxon has child taxon "Polo T-Shirts"
+        And the store has a product "Polo T-Shirt" priced at "$100.00"
+        And it belongs to "Polo T-Shirts"
+        And the promotion gives "$20.00" off if order contains products classified as "T-Shirts" with a minimum value of "$50.00"
+        And I added product "Polo T-Shirt" to the cart
+        When I check the details of my cart
+        Then my cart total should be "$100.00"
+        And there should be no discount applied

@@ -635,6 +635,19 @@ final readonly class PromotionContext implements Context
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
 
+    #[Given('/^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains products (classified as "[^"]+") with a minimum value of ("(?:€|£|\$)[^"]+"), including child taxons$/')]
+    public function thePromotionGivesOffIfOrderContainsProductsClassifiedAsAndPricedAtIncludingChildTaxons(
+        PromotionInterface $promotion,
+        int $discount,
+        TaxonInterface $taxon,
+        int $amount,
+    ): void {
+        $channelCode = $this->getChannelCode();
+        $rule = $this->ruleFactory->createItemsFromTaxonTotal($channelCode, $taxon->getCode(), $amount, true);
+
+        $this->createFixedPromotion($promotion, $discount, [], $rule);
+    }
+
     #[Given('/^([^"]+) gives ("(?:€|£|\$)[^"]+") off customer\'s (\d)(?:st|nd|rd|th) order$/')]
     public function itGivesFixedOffCustomersNthOrder(PromotionInterface $promotion, int $discount, int $nth): void
     {

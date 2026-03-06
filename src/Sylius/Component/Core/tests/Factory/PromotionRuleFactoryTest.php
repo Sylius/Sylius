@@ -84,9 +84,18 @@ final class PromotionRuleFactoryTest extends TestCase
     {
         $this->decoratedFactory->expects($this->once())->method('createNew')->willReturn($this->rule);
         $this->rule->expects($this->once())->method('setType')->with(TotalOfItemsFromTaxonRuleChecker::TYPE);
-        $this->rule->expects($this->once())->method('setConfiguration')->with(['WEB_US' => ['taxon' => 'spears', 'amount' => 1000]]);
+        $this->rule->expects($this->once())->method('setConfiguration')->with(['WEB_US' => ['amount' => 1000, 'include_child_taxons' => false, 'taxon' => 'spears']]);
 
         $this->assertSame($this->rule, $this->factory->createItemsFromTaxonTotal('WEB_US', 'spears', 1000));
+    }
+
+    public function testShouldCreateTotalOfItemsFromTaxonRuleWithChildTaxons(): void
+    {
+        $this->decoratedFactory->expects($this->once())->method('createNew')->willReturn($this->rule);
+        $this->rule->expects($this->once())->method('setType')->with(TotalOfItemsFromTaxonRuleChecker::TYPE);
+        $this->rule->expects($this->once())->method('setConfiguration')->with(['WEB_US' => ['amount' => 1000, 'include_child_taxons' => true, 'taxon' => 'spears']]);
+
+        $this->assertSame($this->rule, $this->factory->createItemsFromTaxonTotal('WEB_US', 'spears', 1000, true));
     }
 
     public function testShouldCreateNthOrderRule(): void

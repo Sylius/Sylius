@@ -205,8 +205,9 @@ sylius:
             product:
                 products: Products
             total_of_items_from_taxon:
-                taxon: Taxon
                 amount: Amount
+                include_child_taxons: Include products from child taxons
+                taxon: Taxon
         payment_method:
             channels: Channels
         product_attribute:

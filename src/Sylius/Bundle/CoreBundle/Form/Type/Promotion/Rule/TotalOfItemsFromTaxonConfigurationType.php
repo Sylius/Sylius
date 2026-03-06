@@ -19,6 +19,7 @@ use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonAutocompleteChoiceType;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,6 +40,10 @@ final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.amount',
                 'currency' => $options['currency'],
+            ])
+            ->add('include_child_taxons', CheckboxType::class, [
+                'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.include_child_taxons',
+                'required' => false,
             ])
         ;
 
