@@ -62,7 +62,9 @@ final class ChannelCodeCollection extends Constraint
     }
 
     /**
+     * @param array<string, mixed>|null $options
      * @param array<Constraint>|null $constraints
+     * @param array<string>|null $groups
      */
     public function __construct(
         ?array $options = null,
