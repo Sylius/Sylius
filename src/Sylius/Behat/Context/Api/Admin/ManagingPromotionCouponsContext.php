@@ -144,7 +144,9 @@ final readonly class ManagingPromotionCouponsContext implements Context
     #[When('I do not specify their code length')]
     public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
     {
-        $this->client->updateRequestData(['codeLength' => $codeLength]);
+        if (null !== $codeLength) {
+            $this->client->updateRequestData(['codeLength' => $codeLength]);
+        }
     }
 
     #[When('/^I limit generated coupons usage to (\d+) times?$/')]

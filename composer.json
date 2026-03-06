@@ -52,8 +52,6 @@
         "gedmo/doctrine-extensions": "^3.20",
         "guzzlehttp/guzzle": "^7.9",
         "guzzlehttp/psr7": "^2.5",
-        "knplabs/gaufrette": "^0.11",
-        "knplabs/knp-gaufrette-bundle": "^0.9",
         "knplabs/knp-menu": "^3.5",
         "knplabs/knp-menu-bundle": "^3.4",
         "laminas/laminas-stdlib": "^3.19",
