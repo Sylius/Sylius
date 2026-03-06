@@ -38,5 +38,6 @@ sylius:
                 all: الكل
             select: اختر
             select_scope: اختر النطاق
+            priority: الأولوية
         zone_member:
             select: اختر

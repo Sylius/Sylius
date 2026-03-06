@@ -38,5 +38,6 @@ sylius:
                 all: Бүгд
             select: Сонгох
             select_scope: Бүс сонгох
+            priority: Эрэмбэ
         zone_member:
             select: Сонгох
