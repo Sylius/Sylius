@@ -163,7 +163,7 @@ sylius_shop_payum:
 -   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 +   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
 
-sylius_payment_notify:
++sylius_payment_notify:
 +   resource: "@SyliusPaymentBundle/Resources/config/routing/integrations/sylius.yaml"
 
 ```
@@ -202,6 +202,7 @@ return [
 +   Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
 +   Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
 ];
+```
 
 * New Symfony/Messenger transports for handling payment requests have been added. 
 Therefore, you need to add the following configuration to your .env file:
