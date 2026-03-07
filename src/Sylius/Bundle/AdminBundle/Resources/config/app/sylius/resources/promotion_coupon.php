@@ -11,6 +11,7 @@
 
 declare(strict_types=1);
 
+use Sylius\Bundle\AdminBundle\Form\Type\PromotionCouponGeneratorInstructionType;
 use Sylius\Bundle\AdminBundle\Form\Type\PromotionCouponType;
 use Sylius\Resource\Metadata\BulkDelete;
 use Sylius\Resource\Metadata\Create;
@@ -21,7 +22,7 @@ use Sylius\Resource\Metadata\ResourceMetadata;
 use Sylius\Resource\Metadata\Update;
 
 return (new ResourceMetadata())
-    ->withRoutePrefix('/%sylius_admin.path_name%/promotions/{promotionId}')
+    ->withRoutePrefix('/%sylius_admin.path_name%/promotions/{promotionId}/coupons')
     ->withClass('%sylius.model.promotion_coupon.class%')
     ->withSection('admin')
     ->withTemplatesDir('@SyliusAdmin/shared/crud')
@@ -29,7 +30,7 @@ return (new ResourceMetadata())
     ->withRouteCondition("not context.isSyliusRoutingBcLayerEnabled('admin_promotion_coupon')")
     ->withOperations(new Operations(operations: [
         new Create(
-            path: 'coupons/new',
+            path: '/new',
             routeName: '_sylius_admin_promotion_coupon_create',
             factoryMethod: 'createForPromotion',
             factoryArguments: [
@@ -47,8 +48,30 @@ return (new ResourceMetadata())
                 ],
             ],
         ),
+        new Create(
+            path: '/generate',
+            routeName: '_sylius_admin_promotion_coupon_generate',
+            template: '@SyliusAdmin/promotion_coupon/generate.html.twig',
+            shortName: 'generate',
+            provider: 'sylius.admin.state_provider.generate_promotion_coupons',
+            processor: 'sylius.admin.state_processor.generate_promotion_coupons',
+            factory: false,
+            formType: PromotionCouponGeneratorInstructionType::class,
+            twigContextFactory: 'sylius.admin.twig_context_factory.promotion',
+            redirectToRoute: 'sylius_admin_promotion_coupon_index',
+            redirectArguments: [
+                'promotionId' => "@=request.attributes.get('promotionId')",
+            ],
+            vars: [
+                'route' => [
+                    'parameters' => [
+                        'promotionId' => "@=request.attributes.get('promotionId')",
+                    ],
+                ],
+            ],
+        ),
         new Update(
-            path: 'coupons/{id}/edit',
+            path: '/{id}/edit',
             routeName: '_sylius_admin_promotion_coupon_update',
             repositoryMethod: 'find',
             redirectToRoute: 'sylius_admin_promotion_coupon_index',
@@ -65,14 +88,14 @@ return (new ResourceMetadata())
             ],
         ),
         new Delete(
-            path: 'coupons/{id}/delete',
+            path: '/{id}/delete',
             routeName: '_sylius_admin_promotion_coupon_delete',
             repositoryMethod: 'find',
             redirectToRoute: 'sylius_admin_promotion_coupon_index',
             redirectArguments: ['promotionId' => "@=request.attributes.get('promotionId')"],
         ),
         new BulkDelete(
-            path: 'coupons/bulk-delete',
+            path: '/bulk-delete',
             routeName: '_sylius_admin_promotion_coupon_bulk_delete',
             repositoryArguments: ["@=request.request.all('ids')"],
             repositoryMethod: 'findById',
@@ -80,7 +103,7 @@ return (new ResourceMetadata())
             redirectArguments: ['promotionId' => "@=request.attributes.get('promotionId')"],
         ),
         new Index(
-            path: 'coupons/',
+            path: '/',
             routeName: '_sylius_admin_promotion_coupon_index',
             vars: [
                 'promotion' => "@=sylius_repositories.get('sylius.repository.promotion').find(request.attributes.get('promotionId'))",

@@ -22,6 +22,7 @@ use Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction;
 use Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction;
 use Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController;
 use Sylius\Bundle\AdminBundle\Controller\DashboardController;
+use Sylius\Bundle\AdminBundle\Controller\GeneratePromotionCouponsAction;
 use Sylius\Bundle\AdminBundle\Controller\RedirectHandler;
 use Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction;
 use Sylius\Bundle\AdminBundle\Controller\UpdateProductTaxonPositionAction;
