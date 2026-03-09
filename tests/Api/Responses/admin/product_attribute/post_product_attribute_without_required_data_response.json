@@ -4,8 +4,6 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "code: Please enter attribute code.\ntranslations[en_US].name: Please enter attribute name.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('code: Please enter attribute code.\ntranslations[en_US].name: Please enter attribute name.').optional()",
     "status": 422,
     "violations":[
         {

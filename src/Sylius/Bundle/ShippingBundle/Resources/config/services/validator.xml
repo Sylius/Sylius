@@ -37,5 +37,11 @@
         >
             <argument>%sylius.shipping.shipping_method_calculator.validation_groups%</argument>
         </service>
+
+        <service id="sylius.validator.shipping_method_valid_delivery_time_range"
+                 class="Sylius\Bundle\ShippingBundle\Validator\ValidDeliveryTimeRangeValidator"
+        >
+            <tag name="validator.constraint_validator" alias="sylius_shipping_method_valid_delivery_time_range" />
+        </service>
     </services>
 </container>

@@ -4,8 +4,6 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "translations[a].locale: This value is not a valid locale.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('translations[a].locale: This value is not a valid locale.').optional()",
     "status": 422,
     "violations": [
         {
