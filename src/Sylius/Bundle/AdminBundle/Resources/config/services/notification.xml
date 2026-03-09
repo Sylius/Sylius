@@ -24,7 +24,7 @@
         <service id="sylius_admin.provider.notification.composite" alias="sylius_admin.provider.notification" />
 
         <service id="sylius_admin.provider.notification.hub" class="Sylius\Bundle\AdminBundle\Notification\HubNotificationProvider">
-            <argument type="service" id="sylius.http_client" />
+            <argument type="service" id="sylius_admin.http_client" />
             <argument type="service" id="request_stack" />
             <argument type="service" id="Psr\Http\Message\RequestFactoryInterface" />
             <argument type="service" id="Psr\Http\Message\StreamFactoryInterface" />

@@ -45,6 +45,7 @@
             <argument type="service" id="sylius.behat.context.setup.checkout.shipping" />
             <argument type="service" id="sylius.behat.context.setup.checkout.payment" />
             <argument>%sylius.behat.guest_cart_token_file%</argument>
+            <argument type="service" id="security.token_storage" />
         </service>
 
         <service id="sylius.behat.context.setup.checkout" class="Sylius\Behat\Context\Setup\CheckoutContext">

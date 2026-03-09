@@ -79,6 +79,18 @@
 
         <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" />
 
+        <service id="sylius_admin.http_client" class="Symfony\Component\HttpClient\Psr18Client" public="false">
+            <argument type="service">
+                <service class="Symfony\Component\HttpClient\HttpClient">
+                    <factory class="Symfony\Component\HttpClient\HttpClient" method="create" />
+                    <argument type="collection">
+                        <argument key="timeout">2</argument>
+                        <argument key="max_duration">2</argument>
+                    </argument>
+                </service>
+            </argument>
+        </service>
+
         <service id="sylius.attribute_type.select" class="Sylius\Component\Attribute\AttributeType\SelectAttributeType">
             <tag name="sylius.attribute.type" attribute-type="select" label="Select"
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType"
