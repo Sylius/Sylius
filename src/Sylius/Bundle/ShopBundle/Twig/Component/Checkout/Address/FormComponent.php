@@ -15,11 +15,11 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address;
 
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
