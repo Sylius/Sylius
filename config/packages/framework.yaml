@@ -1,5 +1,4 @@
 framework:
-    annotations: false
     secret: '%env(APP_SECRET)%'
     form: 
         enabled: true
