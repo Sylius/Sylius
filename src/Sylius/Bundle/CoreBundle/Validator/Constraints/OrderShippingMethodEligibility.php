@@ -13,22 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class OrderShippingMethodEligibility extends Constraint
 {
-    /**
-     * @param array<array-key, mixed> $options
-     */
+    #[HasNamedArguments]
     public function __construct(
-        array $options = [],
         public string $message = 'sylius.order.shipping_method_eligibility',
         public string $methodNotAvailableMessage = 'sylius.order.shipping_method_not_available',
-        mixed $groups = null,
+        ?array $groups = null,
         mixed $payload = null,
     ) {
-        parent::__construct($options, $groups, $payload);
+        parent::__construct(groups: $groups, payload: $payload);
     }
 
     public function getMessage(): string

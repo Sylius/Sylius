@@ -13,11 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class PromotionSubjectCoupon extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.promotion_coupon.is_invalid',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+    }
+
     public string $message = 'sylius.promotion_coupon.is_invalid';
 
     public function getTargets(): string

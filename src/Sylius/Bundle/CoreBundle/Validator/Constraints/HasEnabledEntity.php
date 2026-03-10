@@ -13,11 +13,32 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class HasEnabledEntity extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        ?string $objectManager = null,
+        string $message = 'Must have at least one enabled entity',
+        string $repositoryMethod = 'findBy',
+        ?string $errorPath = null,
+        string $enabledPath = 'enabled',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->objectManager = $objectManager;
+        $this->message = $message;
+        $this->repositoryMethod = $repositoryMethod;
+        $this->errorPath = $errorPath;
+        $this->enabledPath = $enabledPath;
+    }
+
     public ?string $objectManager = null;
 
     public string $message = 'Must have at least one enabled entity';

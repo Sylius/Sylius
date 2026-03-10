@@ -13,11 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class ValidSelectAttributeConfiguration extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $messageMultiple = 'sylius.attribute.configuration.multiple',
+        string $messageMinEntries = 'sylius.attribute.configuration.min_entries',
+        string $messageMaxEntries = 'sylius.attribute.configuration.max_entries',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->messageMultiple = $messageMultiple;
+        $this->messageMinEntries = $messageMinEntries;
+        $this->messageMaxEntries = $messageMaxEntries;
+    }
+
     public string $messageMultiple = 'sylius.attribute.configuration.multiple';
 
     public string $messageMinEntries = 'sylius.attribute.configuration.min_entries';

@@ -13,11 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class ProvinceCodeExists extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.province.code.not_exist',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+    }
+
     public string $message = 'sylius.province.code.not_exist';
 
     public function validatedBy(): string

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
@@ -36,30 +37,32 @@ final class ChannelCodeCollection extends Constraint
     public bool $validateAgainstAllChannels = false;
 
     /**
-     * @param array<Constraint> $constraints
+     * @param array<Constraint>|null $constraints
+     * @param array<string>|null $groups
      */
+    #[HasNamedArguments]
     public function __construct(
-        array $constraints = [],
-        bool $allowExtraFields = false,
-        bool $allowMissingFields = false,
+        ?array $constraints = null,
+        ?bool $allowExtraFields = null,
+        ?bool $allowMissingFields = null,
         ?string $channelAwarePropertyPath = null,
         ?string $extraFieldsMessage = null,
         ?string $missingFieldsMessage = null,
-        string $invalidChannelMessage = 'sylius.channel_code_collection.invalid_channel',
-        bool $validateAgainstAllChannels = false,
+        ?string $invalidChannelMessage = null,
+        ?bool $validateAgainstAllChannels = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->constraints = $constraints;
-        $this->allowExtraFields = $allowExtraFields;
-        $this->allowMissingFields = $allowMissingFields;
-        $this->channelAwarePropertyPath = $channelAwarePropertyPath;
-        $this->extraFieldsMessage = $extraFieldsMessage;
-        $this->missingFieldsMessage = $missingFieldsMessage;
-        $this->invalidChannelMessage = $invalidChannelMessage;
-        $this->validateAgainstAllChannels = $validateAgainstAllChannels;
+        $this->constraints = $constraints ?? $this->constraints;
+        $this->allowExtraFields = $allowExtraFields ?? $this->allowExtraFields;
+        $this->allowMissingFields = $allowMissingFields ?? $this->allowMissingFields;
+        $this->channelAwarePropertyPath = $channelAwarePropertyPath ?? $this->channelAwarePropertyPath;
+        $this->extraFieldsMessage = $extraFieldsMessage ?? $this->extraFieldsMessage;
+        $this->missingFieldsMessage = $missingFieldsMessage ?? $this->missingFieldsMessage;
+        $this->invalidChannelMessage = $invalidChannelMessage ?? $this->invalidChannelMessage;
+        $this->validateAgainstAllChannels = $validateAgainstAllChannels ?? $this->validateAgainstAllChannels;
     }
 
     public function validatedBy(): string

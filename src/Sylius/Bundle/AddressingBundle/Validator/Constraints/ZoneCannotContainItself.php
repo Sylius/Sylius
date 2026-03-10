@@ -13,11 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class ZoneCannotContainItself extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.zone_member.cannot_be_the_same_as_zone',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+    }
+
     public string $message = 'sylius.zone_member.cannot_be_the_same_as_zone';
 
     public function validatedBy(): string

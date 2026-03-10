@@ -13,12 +13,25 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class CartItemAvailability extends Constraint
 {
-    public string $message;
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.cart_item.not_available',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+    }
+
+    public string $message = 'sylius.cart_item.not_available';
 
     public function validatedBy(): string
     {

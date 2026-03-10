@@ -13,11 +13,26 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class CorrectOrderAddress extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $countryCodeNotExistMessage = 'sylius.country.not_exist',
+        string $addressWithoutCountryCodeCanNotExistMessage = 'sylius.address.without_country',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->countryCodeNotExistMessage = $countryCodeNotExistMessage;
+        $this->addressWithoutCountryCodeCanNotExistMessage = $addressWithoutCountryCodeCanNotExistMessage;
+    }
+
     public string $countryCodeNotExistMessage = 'sylius.country.not_exist';
 
     public string $addressWithoutCountryCodeCanNotExistMessage = 'sylius.address.without_country';

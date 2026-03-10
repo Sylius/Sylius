@@ -13,11 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class PromotionDateRange extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.promotion.end_date_cannot_be_set_prior_start_date',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+    }
+
     public string $message = 'sylius.promotion.end_date_cannot_be_set_prior_start_date';
 
     public function getTargets(): string

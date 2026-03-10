@@ -13,11 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class HasAllPricesDefined extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.product_variant.channel_pricing.price.not_defined',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+    }
+
     public string $message = 'sylius.product_variant.channel_pricing.price.not_defined';
 
     public function validatedBy(): string

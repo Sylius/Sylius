@@ -13,11 +13,28 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class ChangedItemQuantityInCart extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $productNotExistMessage = 'sylius.product.not_exist',
+        string $productVariantNotLongerAvailable = 'sylius.product_variant.not_longer_available',
+        string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->productNotExistMessage = $productNotExistMessage;
+        $this->productVariantNotLongerAvailable = $productVariantNotLongerAvailable;
+        $this->productVariantNotSufficient = $productVariantNotSufficient;
+    }
+
     public string $productNotExistMessage = 'sylius.product.not_exist';
 
     public string $productVariantNotLongerAvailable = 'sylius.product_variant.not_longer_available';

@@ -13,12 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Validator\Constraint;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class ProductVariantOptionValuesConfiguration extends Constraint
 {
     public string $message = 'sylius.product_variant.option_values.not_configured';
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.product_variant.option_values.not_configured',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+    }
 
     public function validatedBy(): string
     {

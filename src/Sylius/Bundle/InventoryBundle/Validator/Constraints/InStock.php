@@ -13,11 +13,30 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class InStock extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.cart_item.not_available',
+        string $shortMessage = 'sylius.cart_item.insufficient_stock',
+        string $stockablePath = 'stockable',
+        string $quantityPath = 'quantity',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+        $this->shortMessage = $shortMessage;
+        $this->stockablePath = $stockablePath;
+        $this->quantityPath = $quantityPath;
+    }
+
     public string $message = 'sylius.cart_item.not_available';
 
     public string $shortMessage = 'sylius.cart_item.insufficient_stock';

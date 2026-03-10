@@ -13,12 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Validator\Constraint;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class UniqueSimpleProductCode extends Constraint
 {
     public string $message = 'sylius.simple_product.code.unique';
+
+    /**
+     * @param array<string>|null $groups
+     */
+    #[HasNamedArguments]
+    public function __construct(
+        ?string $message = null,
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message ?? $this->message;
+    }
 
     public function validatedBy(): string
     {

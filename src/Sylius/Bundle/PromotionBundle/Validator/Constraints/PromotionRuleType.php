@@ -13,11 +13,24 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class PromotionRuleType extends Constraint
 {
+
+    #[HasNamedArguments]
+    public function __construct(
+        string $invalidType = 'sylius.promotion_rule.invalid_type',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->invalidType = $invalidType;
+    }
+
     public string $invalidType = 'sylius.promotion_rule.invalid_type';
 
     public function validatedBy(): string
