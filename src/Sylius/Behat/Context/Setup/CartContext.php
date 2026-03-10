@@ -312,9 +312,9 @@ final readonly class CartContext implements Context
         $previousToken = $this->tokenStorage?->getToken();
 
         if (
-            null !== $this->tokenStorage
-            && $this->sharedStorage->has('user')
-            && $this->sharedStorage->get('user') instanceof ShopUserInterface
+            null !== $this->tokenStorage &&
+            $this->sharedStorage->has('user') &&
+            $this->sharedStorage->get('user') instanceof ShopUserInterface
         ) {
             /** @var ShopUserInterface $user */
             $user = $this->sharedStorage->get('user');
