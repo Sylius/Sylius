@@ -62,12 +62,11 @@ final class ChannelCodeCollection extends Constraint
     }
 
     /**
-     * @param array<string, mixed>|null $options
      * @param array<Constraint>|null $constraints
      * @param array<string>|null $groups
      */
+    #[HasNamedArguments]
     public function __construct(
-        ?array $options = null,
         ?array $constraints = null,
         ?bool $allowExtraFields = null,
         ?bool $allowMissingFields = null,
@@ -79,7 +78,7 @@ final class ChannelCodeCollection extends Constraint
         ?array $groups = null,
         mixed $payload = null,
     ) {
-        parent::__construct($options, $groups, $payload);
+        parent::__construct(groups: $groups, payload: $payload);
 
         $this->constraints = $constraints ?? $this->constraints;
         $this->allowExtraFields = $allowExtraFields ?? $this->allowExtraFields;

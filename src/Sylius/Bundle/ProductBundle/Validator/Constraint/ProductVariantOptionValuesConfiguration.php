@@ -45,6 +45,17 @@ final class ProductVariantOptionValuesConfiguration extends Constraint
         parent::__construct(groups: $groups, payload: $payload);
     }
 
+    #[HasNamedArguments]
+    public function __construct(
+        string $message = 'sylius.product_variant.option_values.not_configured',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message;
+    }
+
     public function validatedBy(): string
     {
         return 'sylius.validator.product_variant_option_values_configuration';
