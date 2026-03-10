@@ -22,7 +22,6 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Webmozart\Assert\Assert;
 
 final readonly class ChannelAndLocaleBasedExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
@@ -75,8 +74,9 @@ final readonly class ChannelAndLocaleBasedExtension implements QueryCollectionEx
             return;
         }
 
-        Assert::keyExists($context, ContextKeys::CHANNEL);
-        Assert::keyExists($context, ContextKeys::LOCALE_CODE);
+        if (!isset($context[ContextKeys::CHANNEL]) || !isset($context[ContextKeys::LOCALE_CODE])) {
+            return;
+        }
 
         $channel = $context[ContextKeys::CHANNEL];
         $localeCode = $context[ContextKeys::LOCALE_CODE];
