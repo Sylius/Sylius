@@ -25,6 +25,14 @@
           "doctrine_bundle": "^3.0",
           "state_machine_adapter": "symfony_workflow",
           "legacy_grid_config": false
+        },
+        {
+          "php": "8.4",
+          "symfony": "~8.0.0",
+          "mariadb": "11.4.7",
+          "doctrine_bundle": "^3.0",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": false
         }
       ]
     },
@@ -33,6 +41,13 @@
         {
           "php": "8.5",
           "symfony": "~7.4.0",
+          "mysql": "8.4",
+          "twig": "^3.3",
+          "doctrine_bundle": "^3.0"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~8.0.0",
           "mysql": "8.4",
           "twig": "^3.3",
           "doctrine_bundle": "^3.0"
@@ -94,6 +109,12 @@
           "symfony": "~7.4.0",
           "postgres": "17.5",
           "doctrine_bundle": "^3.0"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~8.0.0",
+          "postgres": "17.5",
+          "doctrine_bundle": "^3.0"
         }
       ]
     },
@@ -107,6 +128,10 @@
         {
           "php": "8.5",
           "symfony": "~7.4.0"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~8.0.0"
         }
       ]
     }
@@ -130,7 +155,8 @@
         "8.5"
       ],
       "symfony": [
-        "~7.4.0"
+        "~7.4.0",
+        "~8.0.0"
       ],
       "mariadb": [
         "11.4.7"
@@ -162,7 +188,8 @@
         "8.4"
       ],
       "symfony": [
-        "~7.4.0"
+        "~7.4.0",
+        "~8.0.0"
       ],
       "mysql": [
         "8.4"
@@ -239,7 +266,8 @@
         "8.5"
       ],
       "symfony": [
-        "~7.4.0"
+        "~7.4.0",
+        "~8.0.0"
       ],
       "postgres": [
         "15.13",
@@ -268,7 +296,8 @@
         "8.5"
       ],
       "symfony": [
-        "~7.4.0"
+        "~7.4.0",
+        "~8.0.0"
       ]
     }
   }
