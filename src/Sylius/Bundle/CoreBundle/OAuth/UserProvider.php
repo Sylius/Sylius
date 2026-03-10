@@ -93,7 +93,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     private function createUserByOAuthUserResponse(UserResponseInterface $response): SyliusUserInterface
     {
-        /** @var SyliusUserInterface|object $user */
+        /** @var SyliusUserInterface $user */
         $user = $this->userFactory->createNew();
         Assert::isInstanceOf($user, SyliusUserInterface::class);
 
