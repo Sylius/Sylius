@@ -193,15 +193,15 @@
         "dmore/chrome-mink-driver": "^2.9",
         "doctrine/cache": "^2.2",
         "doctrine/data-fixtures": "^1.7 || ^2.2",
-        "friends-of-behat/mink": "^1.11",
+        "behat/mink": "^1.13",
         "friends-of-behat/mink-browserkit-driver": "dev-symfony-8-support as 2.2.0",
         "friends-of-behat/mink-debug-extension": "^2.1",
         "friends-of-behat/mink-extension": "dev-symfony-8 as 2.7.5.1",
         "friends-of-behat/page-object-extension": "^0.3",
-        "friends-of-behat/symfony-extension": "^2.6.2",
-        "friends-of-behat/variadic-extension": "^1.6",
-        "hwi/oauth-bundle": "dev-master as 2.5.0",
-        "lchrusciel/api-test-case": "^5.3.5",
+        "friends-of-behat/symfony-extension": "dev-symfony-8 as 2.6.2",
+        "friends-of-behat/variadic-extension": "dev-symfony-8-support as 1.6.0",
+        "hwi/oauth-bundle": "^2.5",
+        "lchrusciel/api-test-case": "dev-bump-symfony-doctrine-deps as 5.3.5",
         "matthiasnoback/symfony-config-test": "^6.0",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "nyholm/psr7": "^1.8",
@@ -250,6 +250,18 @@
         {
             "type": "vcs",
             "url": "https://github.com/loic425/MinkExtension.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/acrobat/ApiTestCase.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Kocal/FriendsOfBehat-SymfonyExtension.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/TheMilek/VariadicExtension.git"
         }
     ],
     "config": {
