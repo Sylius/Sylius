@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\ApiPlatform\Routing;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\ResourceClassResolverInterface;
 use ApiPlatform\Metadata\UrlGeneratorInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -35,6 +36,8 @@ final class IriConverterTest extends TestCase
 
     private MockObject&RouterInterface $router;
 
+    private MockObject&ResourceClassResolverInterface $resourceClassResolver;
+
     private IriConverter $iriConverter;
 
     private CountryInterface&MockObject $country;
@@ -46,11 +49,13 @@ final class IriConverterTest extends TestCase
         $this->pathPrefixProvider = $this->createMock(PathPrefixProviderInterface::class);
         $this->operationResolver = $this->createMock(OperationResolverInterface::class);
         $this->router = $this->createMock(RouterInterface::class);
+        $this->resourceClassResolver = $this->createMock(ResourceClassResolverInterface::class);
         $this->iriConverter = new IriConverter(
             $this->decoratedIriConverter,
             $this->pathPrefixProvider,
             $this->operationResolver,
             $this->router,
+            $this->resourceClassResolver,
         );
         $this->country = $this->createMock(CountryInterface::class);
     }
@@ -102,6 +107,49 @@ final class IriConverterTest extends TestCase
                     'request_uri' => 'api/v2/admin/countries',
                     'force_resource_class' => Country::class,
                 ],
+            ));
+    }
+
+    public function testUsesResourceClassResolverToGetProperIriWhenConcreteClassHasNoOperations(): void
+    {
+        /** @var Operation&MockObject $operation */
+        $operation = $this->createMock(Operation::class);
+
+        $country = new Country();
+
+        $this->resourceClassResolver->expects(self::once())
+            ->method('isResourceClass')
+            ->with(Country::class)
+            ->willReturn(true);
+
+        $this->resourceClassResolver->expects(self::once())
+            ->method('getResourceClass')
+            ->with($country)
+            ->willReturn(CountryInterface::class);
+
+        $this->pathPrefixProvider->expects(self::once())
+            ->method('getPathPrefix')
+            ->with('api/v2/shop/countries')
+            ->willReturn('shop');
+
+        $this->operationResolver->expects(self::once())
+            ->method('resolve')
+            ->with(CountryInterface::class, 'shop', null)
+            ->willReturn($operation);
+
+        $this->decoratedIriConverter->expects(self::once())
+            ->method('getIriFromResource')
+            ->with(self::identicalTo($country), UrlGeneratorInterface::ABS_PATH, $operation, [
+                'request_uri' => 'api/v2/shop/countries',
+            ])
+            ->willReturn('api/v2/shop/countries/CODE');
+
+        self::assertSame('api/v2/shop/countries/CODE', $this->iriConverter
+            ->getIriFromResource(
+                $country,
+                UrlGeneratorInterface::ABS_PATH,
+                null,
+                ['request_uri' => 'api/v2/shop/countries'],
             ));
     }
 }
