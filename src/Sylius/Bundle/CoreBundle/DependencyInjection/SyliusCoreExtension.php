@@ -286,7 +286,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     }
 
     /**
-     * @param array{enabled: bool, business: bool, technical: bool, plugins: bool, salt: string|null, url: string} $telemetryConfig
+     * @param array{enabled: bool, business: bool, technical: bool, plugins: bool, salt: string|null, url: string, query_timeout: int} $telemetryConfig
      */
     private function configureTelemetry(array $telemetryConfig, ContainerBuilder $container, XmlFileLoader $loader): void
     {
@@ -295,6 +295,12 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.telemetry.enabled', $telemetryConfig['enabled']);
         $container->setParameter('sylius_core.telemetry.salt', $telemetrySalt);
         $container->setParameter('sylius_core.telemetry.url', $telemetryConfig['url']);
+        $queryTimeout = $telemetryConfig['query_timeout'];
+        $envQueryTimeout = $_ENV['SYLIUS_TELEMETRY_QUERY_TIMEOUT'] ?? $_SERVER['SYLIUS_TELEMETRY_QUERY_TIMEOUT'] ?? getenv('SYLIUS_TELEMETRY_QUERY_TIMEOUT');
+        if ($envQueryTimeout !== false) {
+            $queryTimeout = max(1000, (int) $envQueryTimeout);
+        }
+        $container->setParameter('sylius_core.telemetry.query_timeout', $queryTimeout);
 
         $businessEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['business'], 'SYLIUS_TELEMETRY_BUSINESS');
         $technicalEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['technical'], 'SYLIUS_TELEMETRY_TECHNICAL');
