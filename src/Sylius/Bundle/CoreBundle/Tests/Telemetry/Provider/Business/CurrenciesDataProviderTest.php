@@ -14,19 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\CurrenciesData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\CurrenciesDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 
 final class CurrenciesDataProviderTest extends TestCase
 {
-    private Connection $connection;
-    private CurrenciesDataProvider $provider;
+    /** @var Connection|MockObject */
+    private $connection;
+    /** @var CurrenciesDataProvider */
+    private $provider;
 
     protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
-        $this->provider = new CurrenciesDataProvider($this->connection);
+        $this->connection->method('getDatabasePlatform')->willReturn($this->createMock(MySqlPlatform::class));
+        $this->provider = new CurrenciesDataProvider($this->connection, new TimeoutRunner());
     }
 
     public function test_it_provides_currency_codes(): void

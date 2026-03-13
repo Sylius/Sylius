@@ -14,21 +14,27 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\LocalesData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\LocalesDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 
 final class LocalesDataProviderTest extends TestCase
 {
     private const DEFAULT_LOCALE = 'en_US';
 
-    private Connection $connection;
-    private LocalesDataProvider $provider;
+    /** @var Connection|MockObject */
+    private $connection;
+    /** @var LocalesDataProvider */
+    private $provider;
 
     protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
-        $this->provider = new LocalesDataProvider($this->connection, self::DEFAULT_LOCALE);
+        $this->connection->method('getDatabasePlatform')->willReturn($this->createMock(MySqlPlatform::class));
+        $this->provider = new LocalesDataProvider($this->connection, new TimeoutRunner(), self::DEFAULT_LOCALE);
     }
 
     public function test_it_provides_locales_channel_defaults_and_default_locale(): void

@@ -20,7 +20,8 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Plugins\InstalledPluginsDataProv
 
 final class InstalledPluginsDataProviderTest extends TestCase
 {
-    private string $tempDir;
+    /** @var string */
+    private $tempDir;
 
     protected function setUp(): void
     {

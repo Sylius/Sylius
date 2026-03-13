@@ -14,19 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\MetricsCountsData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\MetricsCountsDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 
 final class MetricsCountsDataProviderTest extends TestCase
 {
-    private Connection $connection;
-    private MetricsCountsDataProvider $provider;
+    /** @var Connection|MockObject */
+    private $connection;
+    /** @var MetricsCountsDataProvider */
+    private $provider;
 
     protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
-        $this->provider = new MetricsCountsDataProvider($this->connection);
+        $this->connection->method('getDatabasePlatform')->willReturn($this->createMock(MySqlPlatform::class));
+        $this->provider = new MetricsCountsDataProvider($this->connection, new TimeoutRunner());
     }
 
     public function test_it_provides_all_counts(): void

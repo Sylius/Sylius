@@ -19,7 +19,8 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\VersionDataProvider;
 
 final class VersionDataProviderTest extends TestCase
 {
-    private VersionDataProvider $provider;
+    /** @var VersionDataProvider */
+    private $provider;
 
     protected function setUp(): void
     {

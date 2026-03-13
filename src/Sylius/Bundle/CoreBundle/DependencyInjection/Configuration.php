@@ -62,6 +62,7 @@ final class Configuration implements ConfigurationInterface
                         ->booleanNode('plugins')->defaultTrue()->end()
                         ->scalarNode('salt')->defaultNull()->end()
                         ->scalarNode('url')->defaultValue('https://prism.sylius.com/telemetry')->end()
+                        ->integerNode('query_timeout')->defaultValue(60000)->min(1000)->end()
                     ->end()
                 ->end()
             ->end()

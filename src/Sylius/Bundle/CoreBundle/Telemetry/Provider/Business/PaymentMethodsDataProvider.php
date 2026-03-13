@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 use Doctrine\DBAL\Connection;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\PaymentMethodsData;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\PaymentProviderData;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
@@ -26,15 +27,20 @@ final class PaymentMethodsDataProvider implements DataProviderInterface
     /** @var Connection */
     private $connection;
 
-    public function __construct(Connection $connection)
+    /** @var TimeoutRunner */
+    private $queryTimeoutRunner;
+
+    public function __construct(Connection $connection, TimeoutRunner $queryTimeoutRunner)
     {
         $this->connection = $connection;
+        $this->queryTimeoutRunner = $queryTimeoutRunner;
     }
 
     public function provide(): TelemetryDataInterface
     {
         try {
-            $results = $this->connection->fetchAllAssociative(
+            $results = $this->queryTimeoutRunner->fetchAllAssociative(
+                $this->connection,
                 'SELECT pm.code, gc.factory_name, pm.is_enabled, COUNT(p.id) as payments_count
                  FROM sylius_payment_method pm
                  JOIN sylius_gateway_config gc ON pm.gateway_config_id = gc.id
