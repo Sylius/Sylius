@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Sender;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\Sender\TelemetrySender;
 use Sylius\Component\Core\Telemetry\Sender\TelemetrySenderInterface;
