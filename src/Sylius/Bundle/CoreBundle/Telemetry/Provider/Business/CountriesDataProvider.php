@@ -15,29 +15,34 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\CountriesData;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 
 /** @internal */
 final class CountriesDataProvider implements DataProviderInterface
 {
-    public function __construct(private Connection $connection)
-    {
+    public function __construct(
+        private Connection $connection,
+        private TimeoutRunner $queryTimeoutRunner,
+    ) {
     }
 
     public function provide(): TelemetryDataInterface
     {
         try {
-            $channelsWithCountries = $this->connection->fetchAllAssociative(
+            $channelsWithCountries = $this->queryTimeoutRunner->fetchAllAssociative(
+                $this->connection,
                 'SELECT c.id as channel_id, co.code as country_code
                  FROM sylius_channel c
                  LEFT JOIN sylius_channel_countries cc ON cc.channel_id = c.id
-                 LEFT JOIN sylius_country co ON co.id = cc.country_id AND co.enabled = 1
-                 WHERE c.enabled = 1',
+                 LEFT JOIN sylius_country co ON co.id = cc.country_id AND co.enabled = true
+                 WHERE c.enabled = true',
             );
 
-            $allCountries = $this->connection->fetchFirstColumn(
-                'SELECT code FROM sylius_country WHERE enabled = 1',
+            $allCountries = $this->queryTimeoutRunner->fetchFirstColumn(
+                $this->connection,
+                'SELECT code FROM sylius_country WHERE enabled = true',
             );
 
             $countriesByChannel = [];
