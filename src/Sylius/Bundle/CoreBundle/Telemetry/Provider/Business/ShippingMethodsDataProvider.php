@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 use Doctrine\DBAL\Connection;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\ShippingMethodsData;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\ShippingProviderData;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
@@ -23,14 +24,17 @@ use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
 /** @internal */
 final class ShippingMethodsDataProvider implements DataProviderInterface
 {
-    public function __construct(private Connection $connection)
-    {
+    public function __construct(
+        private Connection $connection,
+        private TimeoutRunner $queryTimeoutRunner,
+    ) {
     }
 
     public function provide(): TelemetryDataInterface
     {
         try {
-            $results = $this->connection->fetchAllAssociative(
+            $results = $this->queryTimeoutRunner->fetchAllAssociative(
+                $this->connection,
                 'SELECT sm.code, sm.calculator, sm.is_enabled, COUNT(s.id) as shipments_count
                  FROM sylius_shipping_method sm
                  LEFT JOIN sylius_shipment s ON s.method_id = sm.id

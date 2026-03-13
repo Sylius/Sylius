@@ -14,6 +14,13 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service
+            id="sylius.telemetry.query.timeout_runner"
+            class="Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner"
+        >
+            <argument>%sylius_core.telemetry.query_timeout%</argument>
+        </service>
+
+        <service
             id="sylius.telemetry.installation_id_generator"
             class="Sylius\Component\Core\Telemetry\Generator\InstallationIdGenerator"
             lazy="Sylius\Component\Core\Telemetry\Generator\InstallationIdGeneratorInterface"
@@ -82,6 +89,7 @@
             lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
         >
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="service" id="sylius.telemetry.query.timeout_runner" />
             <argument type="string">%locale%</argument>
             <tag name="sylius.telemetry.business_data_provider" />
         </service>
@@ -92,6 +100,7 @@
             lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
         >
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="service" id="sylius.telemetry.query.timeout_runner" />
             <tag name="sylius.telemetry.business_data_provider" />
         </service>
 
@@ -101,6 +110,7 @@
             lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
         >
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="service" id="sylius.telemetry.query.timeout_runner" />
             <tag name="sylius.telemetry.business_data_provider" />
         </service>
 
@@ -110,6 +120,7 @@
             lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
         >
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="service" id="sylius.telemetry.query.timeout_runner" />
             <tag name="sylius.telemetry.business_data_provider" />
         </service>
 
@@ -119,6 +130,7 @@
             lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
         >
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="service" id="sylius.telemetry.query.timeout_runner" />
             <tag name="sylius.telemetry.business_data_provider" />
         </service>
 
@@ -128,6 +140,7 @@
             lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
         >
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="service" id="sylius.telemetry.query.timeout_runner" />
             <tag name="sylius.telemetry.business_data_provider" />
         </service>
 
@@ -137,6 +150,7 @@
             lazy="Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface"
         >
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="service" id="sylius.telemetry.query.timeout_runner" />
             <tag name="sylius.telemetry.business_data_provider" />
         </service>
 
@@ -183,6 +197,7 @@
             lazy="true"
         >
             <argument type="service" id="sylius.telemetry.send_manager" />
+            <argument type="service" id="sylius.telemetry.cache" />
             <argument>%sylius.security.new_api_admin_route%</argument>
             <tag name="kernel.event_listener" event="kernel.terminate" method="onAdminAccess" priority="-1024" />
         </service>

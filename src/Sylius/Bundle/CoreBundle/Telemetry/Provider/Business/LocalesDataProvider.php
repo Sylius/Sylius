@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\LocalesData;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 
@@ -23,6 +24,7 @@ final class LocalesDataProvider implements DataProviderInterface
 {
     public function __construct(
         private Connection $connection,
+        private TimeoutRunner $queryTimeoutRunner,
         private string $defaultLocale,
     ) {
     }
@@ -30,11 +32,15 @@ final class LocalesDataProvider implements DataProviderInterface
     public function provide(): TelemetryDataInterface
     {
         try {
-            $locales = $this->connection->fetchFirstColumn('SELECT code FROM sylius_locale');
-            $channelDefaultLocales = $this->connection->fetchFirstColumn(
+            $locales = $this->queryTimeoutRunner->fetchFirstColumn(
+                $this->connection,
+                'SELECT code FROM sylius_locale',
+            );
+            $channelDefaultLocales = $this->queryTimeoutRunner->fetchFirstColumn(
+                $this->connection,
                 'SELECT DISTINCT l.code FROM sylius_locale l
                  INNER JOIN sylius_channel c ON c.default_locale_id = l.id
-                 WHERE c.enabled = 1',
+                 WHERE c.enabled = true',
             );
 
             return new LocalesData($locales, $channelDefaultLocales, $this->defaultLocale);
