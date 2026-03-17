@@ -1,5 +1,22 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.12 (2026-03-09)
+
+#### Details
+
+- [#18747](https://github.com/Sylius/Sylius/pull/18747) Fix panther build ([@TheMilek](https://github.com/TheMilek))
+- [#18758](https://github.com/Sylius/Sylius/pull/18758) Remove duplicated serialization group field ([@TheMilek](https://github.com/TheMilek))
+- [#18785](https://github.com/Sylius/Sylius/pull/18785) Try to fix build after ResourceBundle release ([@TheMilek](https://github.com/TheMilek))
+- [#18742](https://github.com/Sylius/Sylius/pull/18742) [Admin] Fix order history address fields not displaying empty values ([@Wojdylak](https://github.com/Wojdylak))
+- [#18806](https://github.com/Sylius/Sylius/pull/18806) Fix after new release of PayumBundle ([@TheMilek](https://github.com/TheMilek))
+- [#18836](https://github.com/Sylius/Sylius/pull/18836) Upgrade BuildTestAppAction from v3.0.1 to v4 ([@TheMilek](https://github.com/TheMilek))
+- [#18832](https://github.com/Sylius/Sylius/pull/18832) [Admin] Fix images not being emitted with Webpack 5.105+ ([@GSadee](https://github.com/GSadee))
+- [#18841](https://github.com/Sylius/Sylius/pull/18841) Fix Dutch translation for payment method ([@JordiDekker](https://github.com/JordiDekker))
+- [#18871](https://github.com/Sylius/Sylius/pull/18871) Add conflict to api-platform/serializer 4.2.17 ([@TheMilek](https://github.com/TheMilek))
+- [#18888](https://github.com/Sylius/Sylius/pull/18888) Remove redundant check with apip4.1.7 in matrix ([@TheMilek](https://github.com/TheMilek))
+- [#18887](https://github.com/Sylius/Sylius/pull/18887) [BUGFIX] Make GitHub actions green again 2.1 ([@rust-le](https://github.com/rust-le))
+- [#18844](https://github.com/Sylius/Sylius/pull/18844) Fix formatting in UPGRADE-2.0.md ([@LucaGallinari](https://github.com/LucaGallinari))
+
 ## v2.1.11 (2026-01-29)
 
 #### Details
