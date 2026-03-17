@@ -42,6 +42,17 @@ final class TranslatableDenormalizerTest extends TestCase
     {
         self::assertFalse(
             $this->translatableDenormalizer->supportsDenormalization(
+                'iri-string',
+                TranslatableInterface::class,
+                null,
+                [
+                    ContextKeys::HTTP_REQUEST_METHOD_TYPE => 'POST',
+                ],
+            ),
+        );
+
+        self::assertFalse(
+            $this->translatableDenormalizer->supportsDenormalization(
                 [],
                 TranslatableInterface::class,
                 null,
