@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -26,9 +27,7 @@ final class ManagingAdministratorLocalesContext implements Context
     ) {
     }
 
-    /**
-     * @When I change my locale to :localeCode
-     */
+    #[When('I change my locale to :localeCode')]
     public function iChangeMyLocaleTo(string $localeCode): void
     {
         /** @var AdminUserInterface $adminUser */

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Taxon\TreeElementInterface;
 use Sylius\Behat\NotificationType;
@@ -30,20 +32,16 @@ final readonly class RemovingTaxonContext implements Context
     ) {
     }
 
-    /**
-     * @When I remove taxon named :taxon
-     * @When I delete taxon named :taxon
-     * @When I try to delete taxon named :taxon
-     */
+    #[When('I remove taxon named :taxon')]
+    #[When('I delete taxon named :taxon')]
+    #[When('I try to delete taxon named :taxon')]
     public function iRemoveTaxonNamed(TaxonInterface $taxon): void
     {
         $this->createPage->open();
         $this->treeElement->deleteTaxon($taxon->getName());
     }
 
-    /**
-     * @Then the :taxonName taxon should still exist
-     */
+    #[Then('the :taxonName taxon should still exist')]
     public function theTaxonShouldStillExist(string $taxonName): void
     {
         $this->createPage->open();
@@ -51,9 +49,7 @@ final readonly class RemovingTaxonContext implements Context
         Assert::true($this->treeElement->isTaxonOnTheList($taxonName));
     }
 
-    /**
-     * @Then I should be notified that this taxon could not be deleted as it is in use by a promotion rule
-     */
+    #[Then('I should be notified that this taxon could not be deleted as it is in use by a promotion rule')]
     public function iShouldBeNotifiedThatThisTaxonCouldNotBeDeleted(): void
     {
         $this->notificationChecker->checkNotification(

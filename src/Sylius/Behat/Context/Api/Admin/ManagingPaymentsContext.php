@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\Given;
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -36,18 +39,14 @@ final readonly class ManagingPaymentsContext implements Context
     ) {
     }
 
-    /**
-     * @Given I am browsing payments
-     * @When I browse payments
-     */
+    #[Given('I am browsing payments')]
+    #[When('I browse payments')]
     public function iAmBrowsingPayments(): void
     {
         $this->client->index(Resources::PAYMENTS);
     }
 
-    /**
-     * @When I go to the details of the first payment's order
-     */
+    #[When('I go to the details of the first payment\'s order')]
     public function iGoToTheDetailsOfTheFirstPaymentSOrder(): void
     {
         $firstPayment = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
@@ -58,9 +57,7 @@ final readonly class ManagingPaymentsContext implements Context
         $this->client->customItemAction(Resources::ORDERS, $order->getTokenValue(), HttpRequest::METHOD_GET, 'payments');
     }
 
-    /**
-     * @When I want to view the payment requests of the first payment
-     */
+    #[When('I want to view the payment requests of the first payment')]
     public function iWantToViewThePaymentRequestsOfTheFirstPayment(): void
     {
         $response = $this->client->getLastResponse();
@@ -72,9 +69,7 @@ final readonly class ManagingPaymentsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the details of order :order
-     */
+    #[Then('I should see the details of order :order')]
     public function iShouldSeeOrderWithDetails(OrderInterface $order): void
     {
         Assert::true(
@@ -87,9 +82,7 @@ final readonly class ManagingPaymentsContext implements Context
         );
     }
 
-    /**
-     * @When I complete the payment of order :order
-     */
+    #[When('I complete the payment of order :order')]
     public function iCompleteThePaymentOfOrder(OrderInterface $order): void
     {
         $payment = $order->getLastPayment();
@@ -102,51 +95,39 @@ final readonly class ManagingPaymentsContext implements Context
         );
     }
 
-    /**
-     * @When I choose :state as a payment state
-     */
+    #[When('I choose :state as a payment state')]
     public function iChooseAsAPaymentState(string $state): void
     {
         $this->client->addFilter('state', $state);
     }
 
-    /**
-     * @When I choose :channel as a channel filter
-     */
+    #[When('I choose :channel as a channel filter')]
     public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
     {
         $this->client->addFilter('order.channel.code', $channel->getCode());
     }
 
-    /**
-     * @When /^I sort payments by date in (ascending|descending) order$/
-     */
+    #[When('/^I sort payments by date in (ascending|descending) order$/')]
     public function iSortPaymentsByRegistrationDate(string $order): void
     {
         $this->client->sort(['createdAt' => str_starts_with($order, 'de') ? 'desc' : 'asc']);
         $this->client->filter();
     }
 
-    /**
-     * @When I filter
-     */
+    #[When('I filter')]
     public function iFilter(): void
     {
         $this->client->filter();
     }
 
-    /**
-     * @Then I should see a single payment in the list
-     * @Then I should see :count payments in the list
-     */
+    #[Then('I should see a single payment in the list')]
+    #[Then('I should see :count payments in the list')]
     public function iShouldSeePaymentsInTheList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then the payment of the :orderNumber order should be :paymentState for :customer
-     */
+    #[Then('the payment of the :orderNumber order should be :paymentState for :customer')]
     public function thePaymentOfTheOrderShouldBeFor(
         string $orderNumber,
         string $paymentState,
@@ -177,9 +158,7 @@ final readonly class ManagingPaymentsContext implements Context
         throw new \InvalidArgumentException('There is no payment with given data.');
     }
 
-    /**
-     * @Then /^I should see payment for the ("[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
-     */
+    #[Then('/^I should see payment for the ("[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/')]
     public function iShouldSeePaymentForTheOrderInTheList(OrderInterface $order, int $position): void
     {
         Assert::true($this->responseChecker->hasItemOnPositionWithValue(
@@ -190,17 +169,13 @@ final readonly class ManagingPaymentsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that the payment has been completed
-     */
+    #[Then('I should be notified that the payment has been completed')]
     public function iShouldBeNotifiedThatThePaymentHasBeenCompleted(): void
     {
         Assert::true($this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()), 'Resource could not be completed');
     }
 
-    /**
-     * @Then I should see the payment of order :order as :paymentState
-     */
+    #[Then('I should see the payment of order :order as :paymentState')]
     public function iShouldSeeThePaymentOfOrderAs(OrderInterface $order, string $paymentState): void
     {
         $payment = $order->getLastPayment();
@@ -213,9 +188,7 @@ final readonly class ManagingPaymentsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should see (also) the payment of the :order order
-     */
+    #[Then('I should see (also) the payment of the :order order')]
     public function iShouldSeeThePaymentOfTheOrder(OrderInterface $order): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
@@ -225,9 +198,7 @@ final readonly class ManagingPaymentsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should not see the payment of the :order order
-     */
+    #[Then('I should not see the payment of the :order order')]
     public function iShouldNotSeeThePaymentOfTheOrder(OrderInterface $order): void
     {
         Assert::false($this->responseChecker->hasItemWithValue(

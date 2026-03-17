@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -24,9 +25,7 @@ final class ShippingCalculatorContext implements Context
     ) {
     }
 
-    /**
-     * @Transform :shippingCalculator
-     */
+    #[Transform(':shippingCalculator')]
     public function getShippingCalculatorByName(string $shippingCalculator): string
     {
         $flippedCalculators = array_flip(array_map(

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,10 +55,8 @@ final class CatalogPromotionContext implements Context
     ) {
     }
 
-    /**
-     * @Given there is a catalog promotion with :code code and :name name
-     * @Given there is also a catalog promotion with :code code and :name name
-     */
+    #[Given('there is a catalog promotion with :code code and :name name')]
+    #[Given('there is also a catalog promotion with :code code and :name name')]
     public function thereIsACatalogPromotionWithCodeAndName(string $code, string $name): void
     {
         $this->createCatalogPromotion($name, $code);
@@ -65,9 +64,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^(it) is enabled$/
-     */
+    #[Given('/^(it) is enabled$/')]
     public function itIsEnabled(CatalogPromotionInterface $catalogPromotion): void
     {
         $catalogPromotion->setEnabled(true);
@@ -76,9 +73,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^(this catalog promotion) is disabled$/
-     */
+    #[Given('/^(this catalog promotion) is disabled$/')]
     public function thisCatalogPromotionIsDisabled(CatalogPromotionInterface $catalogPromotion): void
     {
         $catalogPromotion->setEnabled(false);
@@ -87,10 +82,8 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given there are catalog promotions named :firstName and :secondName
-     * @Given there is a catalog promotion named :name
-     */
+    #[Given('there are catalog promotions named :firstName and :secondName')]
+    #[Given('there is a catalog promotion named :name')]
     public function thereAreCatalogPromotionsNamed(string ...$names): void
     {
         foreach ($names as $name) {
@@ -100,10 +93,8 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given the catalog promotion :catalogPromotion is available in :channel
-     * @Given /^(this catalog promotion) is(?:| also) available in the ("[^"]+" channel)$/
-     */
+    #[Given('the catalog promotion :catalogPromotion is available in :channel')]
+    #[Given('/^(this catalog promotion) is(?:| also) available in the ("[^"]+" channel)$/')]
     public function theCatalogPromotionIsAvailableIn(
         CatalogPromotionInterface $catalogPromotion,
         ChannelInterface $channel,
@@ -113,9 +104,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^(it) applies(?:| also) on ("[^"]+" variant)$/
-     */
+    #[Given('/^(it) applies(?:| also) on ("[^"]+" variant)$/')]
     public function itAppliesOnVariant(CatalogPromotionInterface $catalogPromotion, ProductVariantInterface $variant): void
     {
         /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
@@ -128,9 +117,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^(it) applies(?:| also) on ("[^"]+" product)$/
-     */
+    #[Given('/^(it) applies(?:| also) on ("[^"]+" product)$/')]
     public function itAppliesOnProduct(CatalogPromotionInterface $catalogPromotion, ProductInterface $product): void
     {
         /** @var CatalogPromotionScopeInterface $catalogPromotionScope */
@@ -145,9 +132,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given :catalogPromotion catalog promotion is exclusive
-     */
+    #[Given(':catalogPromotion catalog promotion is exclusive')]
     public function catalogPromotionIsExclusive(CatalogPromotionInterface $catalogPromotion): void
     {
         $catalogPromotion->setExclusive(true);
@@ -155,9 +140,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^(it) reduces price by ("[^"]+")$/
-     */
+    #[Given('/^(it) reduces price by ("[^"]+")$/')]
     public function itWillReducePrice(CatalogPromotionInterface $catalogPromotion, float $discount): void
     {
         /** @var CatalogPromotionActionInterface $catalogPromotionAction */
@@ -170,9 +153,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^(it) reduces(?:| also) price by fixed ("[^"]+") in the ("[^"]+" channel)$/
-     */
+    #[Given('/^(it) reduces(?:| also) price by fixed ("[^"]+") in the ("[^"]+" channel)$/')]
     public function itReducesPriceByFixedInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
         int $discount,
@@ -219,9 +200,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" variant)$/
-     */
+    #[Given('/^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" variant)$/')]
     public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnVariant(
         string $name,
         int $discount,
@@ -247,9 +226,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
-     */
+    #[Given('/^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/')]
     public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
         string $name,
         int $discount,
@@ -275,9 +252,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" taxon)$/
-     */
+    #[Given('/^there is a catalog promotion "([^"]*)" that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" taxon)$/')]
     public function thereIsACatalogPromotionThatReducesPriceByFixedInTheChannelAndAppliesOnTaxon(
         string $name,
         int $discount,
@@ -303,10 +278,8 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxon)$/
-     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
-     */
+    #[Given('/^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon) and ("[^"]+" taxon)$/')]
+    #[Given('/^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/')]
     public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOnTaxon(
         string $name,
         float $discount,
@@ -331,9 +304,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
-     */
+    #[Given('/^there is (?:a|another) catalog promotion "([^"]*)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/')]
     public function thereIsACatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
         string $name,
         ChannelInterface $channel,
@@ -358,9 +329,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
-     */
+    #[Given('/^there is (?:a|another) catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/')]
     public function thereIsACatalogPromotionBetweenAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
         string $name,
         string $startDate,
@@ -387,9 +356,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^there is disabled catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
-     */
+    #[Given('/^there is disabled catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/')]
     public function thereIsDisabledCatalogPromotionAvailableInChannelThatReducesPriceByAndAppliesOnVariant(
         string $name,
         string $startDate,
@@ -417,9 +384,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^there is another catalog promotion "([^"]*)" available in ("[^"]+" channel) and ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
-     */
+    #[Given('/^there is another catalog promotion "([^"]*)" available in ("[^"]+" channel) and ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/')]
     public function thereIsAnotherCatalogPromotionAvailableInChannelsThatReducesPriceByAndAppliesOnVariant(
         string $name,
         ChannelInterface $firstChannel,
@@ -447,9 +412,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
-     */
+    #[Given('/^there is (?:a|another) catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/')]
     public function thereIsACatalogPromotionBetweenAvailableInChannelThatReducesPriceByAndAppliesOnTaxon(
         string $name,
         string $startDate,
@@ -476,9 +439,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^there is disabled catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/
-     */
+    #[Given('/^there is disabled catalog promotion "([^"]*)" between "([^"]+)" and "([^"]+)" available in ("[^"]+" channel) that reduces price by ("[^"]+") and applies on ("[^"]+" taxon)$/')]
     public function thereIsDisabledCatalogPromotionBetweenAvailableInChannelThatReducesPriceByAndAppliesOnTaxon(
         string $name,
         string $startDate,
@@ -531,9 +492,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionCreated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+)$/
-     */
+    #[Given('/^there is a catalog promotion "([^"]+)" with priority ([^"]+)$/')]
     public function thereIsACatalogPromotionWithPriority(
         string $name,
         int $priority,
@@ -545,9 +504,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
-     */
+    #[Given('/^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/')]
     public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnVariant(
         string $name,
         int $priority,
@@ -574,9 +531,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is (?:an|another) exclusive catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
-     */
+    #[Given('/^there is (?:an|another) exclusive catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/')]
     public function thereIsAnExclusiveCatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnVariant(
         string $name,
         int $priority,
@@ -604,9 +559,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
-     */
+    #[Given('/^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/')]
     public function thereIsACatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
         string $name,
         int $priority,
@@ -634,9 +587,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" taxon)$/
-     */
+    #[Given('/^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" taxon)$/')]
     public function thereIsACatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnTaxon(
         string $name,
         int $priority,
@@ -664,9 +615,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @When the :catalogPromotion catalog promotion is no longer available
-     */
+    #[When('the :catalogPromotion catalog promotion is no longer available')]
     public function theAdministratorMakesThisCatalogPromotionUnavailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
     ): void {
@@ -679,10 +628,8 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given the catalog promotion :catalogPromotion operates between :startDate and :endDate
-     * @Given /^(this catalog promotion) operates between "([^"]+)" and "([^"]+)"$/
-     */
+    #[Given('the catalog promotion :catalogPromotion operates between :startDate and :endDate')]
+    #[Given('/^(this catalog promotion) operates between "([^"]+)" and "([^"]+)"$/')]
     public function theCatalogPromotionOperatesBetweenDates(
         CatalogPromotionInterface $catalogPromotion,
         string $startDate,
@@ -695,9 +642,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given the catalog promotion :catalogPromotion starts at :startDate
-     */
+    #[Given('the catalog promotion :catalogPromotion starts at :startDate')]
     public function theCatalogPromotionStartsAt(CatalogPromotionInterface $catalogPromotion, string $startDate): void
     {
         $catalogPromotion->setStartDate(new \DateTime($startDate));
@@ -707,9 +652,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given the catalog promotion :catalogPromotion ended :endDate
-     */
+    #[Given('the catalog promotion :catalogPromotion ended :endDate')]
     public function theCatalogPromotionEndedAt(CatalogPromotionInterface $catalogPromotion, string $endDate): void
     {
         $catalogPromotion->setEndDate(new \DateTime($endDate));
@@ -718,9 +661,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given the end date of catalog promotion :catalogPromotion was changed to :endDate
-     */
+    #[Given('the end date of catalog promotion :catalogPromotion was changed to :endDate')]
     public function theEndDateOfCatalogPromotionWasChangedTo(
         CatalogPromotionInterface $catalogPromotion,
         string $endDate,
@@ -731,9 +672,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^(its) priority is ([^"]+)$/
-     */
+    #[Given('/^(its) priority is ([^"]+)$/')]
     public function theCatalogPromotionPriorityIs(CatalogPromotionInterface $catalogPromotion, int $priority): void
     {
         $catalogPromotion->setPriority($priority);
@@ -742,10 +681,8 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^the ("[^"]+" catalog promotion) is active$/
-     * @Given /^(this catalog promotion) is active$/
-     */
+    #[Given('/^the ("[^"]+" catalog promotion) is active$/')]
+    #[Given('/^(this catalog promotion) is active$/')]
     public function theCatalogPromotionIsActive(CatalogPromotionInterface $catalogPromotion)
     {
         if (CatalogPromotionStates::STATE_ACTIVE === $catalogPromotion->getState()) {
@@ -758,9 +695,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given the catalog promotion :catalogPromotion is currently being processed
-     */
+    #[Given('the catalog promotion :catalogPromotion is currently being processed')]
     public function theCatalogPromotionIsCurrentlyBeingProcessed(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->stateMachine->apply($catalogPromotion, CatalogPromotionTransitions::GRAPH, CatalogPromotionTransitions::TRANSITION_PROCESS);
@@ -768,9 +703,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given the :catalogPromotion catalog promotion is enabled
-     */
+    #[Given('the :catalogPromotion catalog promotion is enabled')]
     public function theCatalogPromotionIsEnabled(CatalogPromotionInterface $catalogPromotion): void
     {
         $catalogPromotion->setEnabled(true);
@@ -779,9 +712,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given there is disabled catalog promotion named :name
-     */
+    #[Given('there is disabled catalog promotion named :name')]
     public function thereIsCatalogPromotionsNamed(string $name): void
     {
         $this->createCatalogPromotion(name: $name, enabled: false);
@@ -789,9 +720,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" product)$/
-     */
+    #[Given('/^there is a catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by ("[^"]+") and applies on ("[^"]+" product)$/')]
     public function thereIsACatalogPromotionWithPriorityThatReducesPriceByAndAppliesOnProduct(
         string $name,
         int $priority,
@@ -816,9 +745,7 @@ final class CatalogPromotionContext implements Context
         $this->eventBus->dispatch(new CatalogPromotionUpdated($catalogPromotion->getCode()));
     }
 
-    /**
-     * @Given /^there is disabled catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/
-     */
+    #[Given('/^there is disabled catalog promotion "([^"]+)" with priority ([^"]+) that reduces price by fixed ("[^"]+") in the ("[^"]+" channel) and applies on ("[^"]+" product)$/')]
     public function thereIsDisabledCatalogPromotionWithPriorityThatReducesPriceByFixedInTheChannelAndAppliesOnProduct(
         string $name,
         int $priority,

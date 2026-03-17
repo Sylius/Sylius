@@ -15,18 +15,20 @@ jobs:
         runs-on: ubuntu-latest
         if: github.repository == 'Sylius/Sylius'
         name: "Upmerge PR"
-        timeout-minutes: 15
+        timeout-minutes: 20
         strategy:
             fail-fast: false
             matrix:
                 include:
                     -
-                        base_branch: "1.14"
-                        target_branch: "2.1"
-                    -
                         base_branch: "2.1"
                         target_branch: "2.2"
-
+                    -
+                        base_branch: "2.2"
+                        target_branch: "2.3"
+                    -
+                        base_branch: "2.3"
+                        target_branch: "symfony-8"
         steps:
             -
                 uses: actions/checkout@v4
@@ -59,7 +61,7 @@ jobs:
                     title: '[UPMERGE] ${{ matrix.base_branch }} -> ${{ matrix.target_branch }}'
                     body: |
                         This PR has been generated automatically.
-                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/2.1/.github/workflows/upmerge_pr.yaml).
+                        For more details see [upmerge_pr.yaml](/Sylius/Sylius/blob/2.3/.github/workflows/upmerge_pr.yaml).
                         
                         **Remember!** The upmerge should always be merged with using `Merge pull request` button.
                         

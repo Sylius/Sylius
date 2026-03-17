@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Shop\MenuElementInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
@@ -26,62 +28,48 @@ final class HomepageContext implements Context
     ) {
     }
 
-    /**
-     * @When I check latest products
-     * @When I check available taxons
-     * @When I check latest deals
-     */
+    #[When('I check latest products')]
+    #[When('I check available taxons')]
+    #[When('I check latest deals')]
     public function iCheckLatestProducts(): void
     {
         $this->homePage->open();
     }
 
-    /**
-     * @Then I should be redirected to the homepage
-     */
+    #[Then('I should be redirected to the homepage')]
     public function iShouldBeRedirectedToTheHomepage(): void
     {
         $this->homePage->verify();
     }
 
-    /**
-     * @Then I should see :numberOfProducts products in the list
-     */
+    #[Then('I should see :numberOfProducts products in the list')]
     public function iShouldSeeProductsInTheList(int $numberOfProducts): void
     {
         Assert::same(count($this->homePage->getLatestProductsNames()), $numberOfProducts);
     }
 
-    /**
-     * @Then I should see :productName product
-     */
+    #[Then('I should see :productName product')]
     public function iShouldSeeProduct(string $productName): void
     {
         Assert::inArray($productName, $this->homePage->getLatestProductsNames());
     }
 
-    /**
-     * @Then I should not see :productName product
-     */
+    #[Then('I should not see :productName product')]
     public function iShouldNotSeeProduct(string $productName): void
     {
         Assert::true(!in_array($productName, $this->homePage->getLatestProductsNames()));
     }
 
-    /**
-     * @Then I should see :firstMenuItem in the menu
-     * @Then I should see :firstMenuItem and :secondMenuItem in the menu
-     */
+    #[Then('I should see :firstMenuItem in the menu')]
+    #[Then('I should see :firstMenuItem and :secondMenuItem in the menu')]
     public function iShouldSeeAndInTheMenu(string ...$menuItems): void
     {
         Assert::allOneOf($menuItems, $this->menuElement->getMenuItems());
     }
 
-    /**
-     * @Then I should not see :firstMenuItem and :secondMenuItem in the menu
-     * @Then I should not see :firstMenuItem, :secondMenuItem and :thirdMenuItem in the menu
-     * @Then I should not see :firstMenuItem, :secondMenuItem, :thirdMenuItem and :fourthMenuItem in the menu
-     */
+    #[Then('I should not see :firstMenuItem and :secondMenuItem in the menu')]
+    #[Then('I should not see :firstMenuItem, :secondMenuItem and :thirdMenuItem in the menu')]
+    #[Then('I should not see :firstMenuItem, :secondMenuItem, :thirdMenuItem and :fourthMenuItem in the menu')]
     public function iShouldNotSeeAndInTheMenu(string ...$menuItems): void
     {
         $actualMenuItems = $this->menuElement->getMenuItems();
@@ -92,18 +80,14 @@ final class HomepageContext implements Context
         }
     }
 
-    /**
-     * @Then I should be logged in
-     */
+    #[Then('I should be logged in')]
     public function iShouldBeLoggedIn(): void
     {
         $this->homePage->verify();
         Assert::true($this->homePage->hasLogoutButton());
     }
 
-    /**
-     * @Then I should see :numberOfProducts products in the latest deals list
-     */
+    #[Then('I should see :numberOfProducts products in the latest deals list')]
     public function iShouldSeeProductsInTheDealsList(int $numberOfProducts): void
     {
         Assert::same(count($this->homePage->getLatestDealsNames()), $numberOfProducts);
