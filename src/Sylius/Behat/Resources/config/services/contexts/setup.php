@@ -96,6 +96,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.behat.context.setup.checkout.shipping'),
             service('sylius.behat.context.setup.checkout.payment'),
             '%sylius.behat.guest_cart_token_file%',
+            service('security.token_storage'),
         ])
     ;
 

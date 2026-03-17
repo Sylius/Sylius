@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedFixedDiscountConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitFixedDiscountConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitPercentageDiscountConfigurationType;
@@ -202,6 +203,12 @@ return static function (ContainerConfigurator $container) {
         ->public()
     ;
     $services->alias(OrderPromotionsUsageModifierInterface::class, 'sylius.modifier.promotion.order_usage')->public();
+
+    $services
+        ->set('sylius.modifier.promotion.order_usage.atomic', AtomicOrderPromotionsUsageModifier::class)
+        ->decorate('sylius.modifier.promotion.order_usage')
+        ->args([service('doctrine.dbal.default_connection')])
+    ;
 
     $services
         ->set('sylius.updater.promotion_rule.has_taxon', HasTaxonRuleUpdater::class)

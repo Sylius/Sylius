@@ -41,6 +41,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('sylius.storage.currency'),
             service('sylius.context.channel'),
+            service('router'),
         ])
     ;
 

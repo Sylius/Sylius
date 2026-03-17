@@ -17,6 +17,7 @@ use Sylius\Bundle\ShopBundle\Modifier\AddressFormValuesModifierInterface;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
@@ -81,7 +82,12 @@ class FormComponent
     #[LiveListener(AddressBookComponent::SYLIUS_SHOP_ADDRESS_UPDATED)]
     public function addressFieldUpdated(#[LiveArg] mixed $addressId, #[LiveArg] string $field): void
     {
-        $address = $this->addressRepository->find($addressId);
+        $customer = $this->customerContext->getCustomer();
+        if (!$customer instanceof CustomerInterface) {
+            return;
+        }
+
+        $address = $this->addressRepository->findOneByCustomer((string) $addressId, $customer);
         if (null === $address) {
             return;
         }

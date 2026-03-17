@@ -69,6 +69,15 @@ export default class extends Controller {
             togglerPrototyp.classList.add('infinite-tree-leaf');
         }
 
+        const titleElement = itemPrototyp.querySelector('.infinite-tree-title');
+        if (titleElement) {
+            titleElement.textContent = name;
+        }
+
+        if (itemPrototyp.dataset.testTreeTaxon !== undefined) {
+            itemPrototyp.dataset.testTreeTaxon = name;
+        }
+
         const div = document.createElement('div');
         div.textContent = name;
         const escapedName = div.innerHTML;

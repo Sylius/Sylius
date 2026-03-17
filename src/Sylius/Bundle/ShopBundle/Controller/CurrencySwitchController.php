@@ -19,12 +19,16 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
 final readonly class CurrencySwitchController
 {
+    use RedirectTrait;
+
     public function __construct(
         private CurrencyStorageInterface $currencyStorage,
         private ChannelContextInterface $channelContext,
+        private ?RouterInterface $router = null,
     ) {
     }
 
@@ -35,6 +39,6 @@ final readonly class CurrencySwitchController
 
         $this->currencyStorage->set($channel, $code);
 
-        return new RedirectResponse($request->headers->get('referer', $request->getSchemeAndHttpHost()));
+        return new RedirectResponse($this->getRedirectUrl($request, $this->router));
     }
 }

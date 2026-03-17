@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Psr\Http\Client\ClientInterface;
+use Sylius\Bundle\PayumBundle\Client\PaypalHeaderInjectingClient;
 use Sylius\Bundle\PayumBundle\HttpClient\HttpClient;
 
 return static function (ContainerConfigurator $container) {
@@ -23,4 +24,9 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services->set('sylius_payum.http_client', HttpClient::class)->args([service(ClientInterface::class)]);
+    $services
+        ->set('sylius_payum.http_client.paypal_header_injecting', PaypalHeaderInjectingClient::class)
+        ->decorate('sylius_payum.http_client')
+        ->args([service('.inner')])
+    ;
 };
