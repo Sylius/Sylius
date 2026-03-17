@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Admin\ShippingMethod\FormElementInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingMethod\IndexPageInterface;
@@ -122,6 +123,12 @@ final readonly class ManagingShippingMethodsContext implements Context
     public function iChooseCalculator(string $calculatorName): void
     {
         $this->shippingMethodFormElement->chooseCalculator($calculatorName);
+    }
+
+    #[When('I fill in :label with :value')]
+    public function iFillInWith(string $label, string $value): void
+    {
+        $this->shippingMethodFormElement->setField($label, $value);
     }
 
     /**
@@ -624,5 +631,13 @@ final readonly class ManagingShippingMethodsContext implements Context
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void
     {
         Assert::same($this->shippingMethodFormElement->getValidationMessage($element), $expectedMessage);
+    }
+
+    /**
+     * @Then I should be notified that Maximum delivery time must be greater than or equal to the minimum.
+     */
+    public function iShouldBeNotifiedThatMaxDeliveryIsGreaterOrEqualMin(): void
+    {
+        $this->assertFieldValidationMessage('max_delivery_time_days', 'Maximum delivery time must be greater than or equal to the minimum.');
     }
 }

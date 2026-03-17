@@ -23,6 +23,12 @@
         <field name="type" column="type" type="string" length="8" />
         <field name="scope" column="scope" type="string" nullable="true"/>
 
+        <field name="priority" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+
         <one-to-many field="members" target-entity="Sylius\Component\Addressing\Model\ZoneMemberInterface" mapped-by="belongsTo" orphan-removal="true">
             <cascade>
                 <cascade-all/>

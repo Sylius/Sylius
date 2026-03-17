@@ -182,9 +182,6 @@
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
-    "hamcrest/hamcrest-php": {
-        "version": "v2.0.1"
-    },
     "hwi/oauth-bundle": {
         "version": "0.6",
         "recipe": {
@@ -279,12 +276,6 @@
     "matthiasnoback/symfony-dependency-injection-test": {
         "version": "4.1.1"
     },
-    "mikey179/vfsstream": {
-        "version": "v1.6.8"
-    },
-    "mockery/mockery": {
-        "version": "1.4.2"
-    },
     "monolog/monolog": {
         "version": "1.25.5"
     },
@@ -364,20 +355,8 @@
     "phparkitect/phparkitect": {
         "version": "0.2.9"
     },
-    "phpdocumentor/reflection-common": {
-        "version": "1.0.1"
-    },
-    "phpdocumentor/reflection-docblock": {
-        "version": "4.3.0"
-    },
-    "phpdocumentor/type-resolver": {
-        "version": "0.4.0"
-    },
     "phpspec/php-diff": {
         "version": "v1.1.0"
-    },
-    "phpspec/prophecy": {
-        "version": "1.8.0"
     },
     "phpstan/phpdoc-parser": {
         "version": "0.4.9"

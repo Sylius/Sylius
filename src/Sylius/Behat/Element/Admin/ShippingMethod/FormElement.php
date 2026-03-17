@@ -164,6 +164,8 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'last_rule' => '[data-test-rules] [data-test-entry-row]:last-child',
             'last_rule_amount' => '[data-test-rules] [data-test-entry-row]:last-child [id$="_configuration_%channelCode%_amount"]',
             'last_rule_weight' => '[data-test-rules] [data-test-entry-row]:last-child [id$="_configuration_weight"]',
+            'max_delivery_time_days' => '#sylius_admin_shipping_method_maxDeliveryTimeDays',
+            'min_delivery_time_days' => '#sylius_admin_shipping_method_minDeliveryTimeDays',
             'name' => '#sylius_admin_shipping_method_translations_%localeCode%_name',
             'position' => '#sylius_admin_shipping_method_position',
             'zone' => '#sylius_admin_shipping_method_zone',

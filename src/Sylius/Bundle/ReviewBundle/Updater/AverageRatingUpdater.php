@@ -31,8 +31,18 @@ class AverageRatingUpdater implements ReviewableRatingUpdaterInterface
         $this->modifyReviewSubjectAverageRating($reviewSubject);
     }
 
+    /**
+     * @deprecated since Sylius 2.2, will be removed in Sylius 3.0. Use state machine mechanism implemented by Symfony Workflow instead.
+     */
     public function updateFromReview(ReviewInterface $review): void
     {
+        trigger_deprecation(
+            'sylius/review-bundle',
+            '2.2',
+            'The "%s()" method is deprecated since Sylius 2.2 and will be removed in Sylius 3.0. Use state machine mechanism implemented by Symfony Workflow instead.',
+            __METHOD__,
+        );
+
         $this->modifyReviewSubjectAverageRating($review->getReviewSubject());
     }
 

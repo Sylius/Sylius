@@ -15,9 +15,7 @@ namespace Tests\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\Test;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Prophecy\ProphecyInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Component\Addressing\Model\Scope as AddressingScope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -28,39 +26,31 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class ZoneChoiceTypeTest extends TypeTestCase
 {
-    use ProphecyTrait;
+    private MockObject&RepositoryInterface $zoneRepository;
 
-    private ObjectProphecy $zoneRepository;
+    private MockObject&ZoneInterface $zoneAllScopes;
 
-    /** @var ProphecyInterface|ZoneInterface */
-    private $zoneAllScopes;
+    private MockObject&ZoneInterface $zoneTaxScope;
 
-    /** @var ProphecyInterface|ZoneInterface */
-    private $zoneTaxScope;
-
-    /** @var ProphecyInterface|ZoneInterface */
-    private $zoneShippingScope;
+    private MockObject&ZoneInterface $zoneShippingScope;
 
     protected function setUp(): void
     {
-        $this->zoneRepository = $this->prophesize(RepositoryInterface::class);
+        $this->zoneRepository = $this->createMock(RepositoryInterface::class);
 
-        /** @var ProphecyInterface|ZoneInterface $zoneAllScopes */
-        $zoneAllScopes = $this->prophesize(ZoneInterface::class);
-        $zoneAllScopes->getCode()->willReturn('all');
-        $zoneAllScopes->getName()->willReturn('All');
+        $zoneAllScopes = $this->createMock(ZoneInterface::class);
+        $zoneAllScopes->method('getCode')->willReturn('all');
+        $zoneAllScopes->method('getName')->willReturn('All');
         $this->zoneAllScopes = $zoneAllScopes;
 
-        /** @var ProphecyInterface|ZoneInterface $zoneTaxScope */
-        $zoneTaxScope = $this->prophesize(ZoneInterface::class);
-        $zoneTaxScope->getCode()->willReturn('tax');
-        $zoneTaxScope->getName()->willReturn('Tax');
+        $zoneTaxScope = $this->createMock(ZoneInterface::class);
+        $zoneTaxScope->method('getCode')->willReturn('tax');
+        $zoneTaxScope->method('getName')->willReturn('Tax');
         $this->zoneTaxScope = $zoneTaxScope;
 
-        /** @var ProphecyInterface|ZoneInterface $zoneShippingScope */
-        $zoneShippingScope = $this->prophesize(ZoneInterface::class);
-        $zoneShippingScope->getCode()->willReturn('shipping');
-        $zoneShippingScope->getName()->willReturn('Shipping');
+        $zoneShippingScope = $this->createMock(ZoneInterface::class);
+        $zoneShippingScope->method('getCode')->willReturn('shipping');
+        $zoneShippingScope->method('getName')->willReturn('Shipping');
         $this->zoneShippingScope = $zoneShippingScope;
 
         parent::setUp();
@@ -74,7 +64,7 @@ final class ZoneChoiceTypeTest extends TypeTestCase
             'shipping' => 'Shipping',
         ];
 
-        $type = new ZoneChoiceType($this->zoneRepository->reveal(), $scopeTypes);
+        $type = new ZoneChoiceType($this->zoneRepository, $scopeTypes);
 
         return [
             new PreloadedExtension([$type], []),
@@ -84,10 +74,10 @@ final class ZoneChoiceTypeTest extends TypeTestCase
     #[Test]
     public function it_returns_all_scopes_by_default(): void
     {
-        $this->zoneRepository->findBy([])->willReturn([
-            $this->zoneAllScopes->reveal(),
-            $this->zoneTaxScope->reveal(),
-            $this->zoneShippingScope->reveal(),
+        $this->zoneRepository->method('findBy')->with([])->willReturn([
+            $this->zoneAllScopes,
+            $this->zoneTaxScope,
+            $this->zoneShippingScope,
         ]);
 
         $this->assertChoicesLabels(['All', 'Tax', 'Shipping']);
@@ -96,10 +86,10 @@ final class ZoneChoiceTypeTest extends TypeTestCase
     #[Test]
     public function it_returns_all_scopes_when_zone_scope_set_to_all(): void
     {
-        $this->zoneRepository->findBy([])->willReturn([
-            $this->zoneAllScopes->reveal(),
-            $this->zoneTaxScope->reveal(),
-            $this->zoneShippingScope->reveal(),
+        $this->zoneRepository->method('findBy')->with([])->willReturn([
+            $this->zoneAllScopes,
+            $this->zoneTaxScope,
+            $this->zoneShippingScope,
         ]);
 
         $this->assertChoicesLabels(['All', 'Tax', 'Shipping'], ['zone_scope' => AddressingScope::ALL]);
@@ -108,9 +98,9 @@ final class ZoneChoiceTypeTest extends TypeTestCase
     #[Test]
     public function it_returns_tax_scopes_when_zone_scope_set_to_tax(): void
     {
-        $this->zoneRepository->findBy(['scope' => ['tax', AddressingScope::ALL]])->willReturn([
-            $this->zoneAllScopes->reveal(),
-            $this->zoneTaxScope->reveal(),
+        $this->zoneRepository->method('findBy')->with(['scope' => ['tax', AddressingScope::ALL]])->willReturn([
+            $this->zoneAllScopes,
+            $this->zoneTaxScope,
         ]);
 
         $this->assertChoicesLabels(['All', 'Tax'], ['zone_scope' => 'tax']);
@@ -119,9 +109,9 @@ final class ZoneChoiceTypeTest extends TypeTestCase
     #[Test]
     public function it_returns_shipping_scopes_when_zone_scope_set_to_shipping(): void
     {
-        $this->zoneRepository->findBy(['scope' => ['shipping', AddressingScope::ALL]])->willReturn([
-            $this->zoneAllScopes->reveal(),
-            $this->zoneShippingScope->reveal(),
+        $this->zoneRepository->method('findBy')->with(['scope' => ['shipping', AddressingScope::ALL]])->willReturn([
+            $this->zoneAllScopes,
+            $this->zoneShippingScope,
         ]);
 
         $this->assertChoicesLabels(['All', 'Shipping'], ['zone_scope' => 'shipping']);

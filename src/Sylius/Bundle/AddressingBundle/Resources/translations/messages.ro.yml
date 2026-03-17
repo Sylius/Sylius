@@ -37,5 +37,6 @@ sylius:
             scopes:
                 all: 'Toate'
             select: 'Selectați'
+            priority: 'Prioritate'
         zone_member:
             select: 'Selectați'
