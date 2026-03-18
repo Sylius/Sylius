@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Telemetry\EventListener;
 
+use Sylius\Component\Core\Telemetry\Cache\TelemetryCacheInterface;
 use Sylius\Component\Core\Telemetry\TelemetrySendManagerInterface;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;
 
@@ -22,12 +23,16 @@ class TelemetryListener
     /** @var TelemetrySendManagerInterface */
     private $telemetrySendManager;
 
+    /** @var TelemetryCacheInterface */
+    private $telemetryCache;
+
     /** @var string */
     private $adminApiPrefix;
 
-    public function __construct(TelemetrySendManagerInterface $telemetrySendManager, string $adminApiPrefix)
+    public function __construct(TelemetrySendManagerInterface $telemetrySendManager, TelemetryCacheInterface $telemetryCache, string $adminApiPrefix)
     {
         $this->telemetrySendManager = $telemetrySendManager;
+        $this->telemetryCache = $telemetryCache;
         $this->adminApiPrefix = $adminApiPrefix;
     }
 
@@ -39,7 +44,12 @@ class TelemetryListener
             return;
         }
 
+        if ($this->telemetryCache->wasRecentlyTriggered()) {
+            return;
+        }
+
         try {
+            $this->telemetryCache->markAsRecentlyTriggered();
             $this->telemetrySendManager->sendIfNeeded($request);
         } catch (\Throwable $e) {
         }

@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Technical;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Technical\VersionData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\VersionDataProvider;
 
 final class VersionDataProviderTest extends TestCase
 {
-    private VersionDataProvider $provider;
+    /** @var VersionDataProvider */
+    private $provider;
 
     protected function setUp(): void
     {

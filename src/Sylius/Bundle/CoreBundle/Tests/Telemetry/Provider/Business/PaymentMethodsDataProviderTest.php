@@ -14,19 +14,25 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\PaymentMethodsData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\PaymentMethodsDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 
 final class PaymentMethodsDataProviderTest extends TestCase
 {
-    private Connection $connection;
-    private PaymentMethodsDataProvider $provider;
+    /** @var Connection|MockObject */
+    private $connection;
+    /** @var PaymentMethodsDataProvider */
+    private $provider;
 
     protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
-        $this->provider = new PaymentMethodsDataProvider($this->connection);
+        $this->connection->method('getDatabasePlatform')->willReturn($this->createMock(MySqlPlatform::class));
+        $this->provider = new PaymentMethodsDataProvider($this->connection, new TimeoutRunner());
     }
 
     public function test_it_provides_active_payment_providers_with_details(): void

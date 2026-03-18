@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\CurrenciesData;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
 
@@ -24,15 +25,22 @@ final class CurrenciesDataProvider implements DataProviderInterface
     /** @var Connection */
     private $connection;
 
-    public function __construct(Connection $connection)
+    /** @var TimeoutRunner */
+    private $queryTimeoutRunner;
+
+    public function __construct(Connection $connection, TimeoutRunner $queryTimeoutRunner)
     {
         $this->connection = $connection;
+        $this->queryTimeoutRunner = $queryTimeoutRunner;
     }
 
     public function provide(): TelemetryDataInterface
     {
         try {
-            $currencies = $this->connection->fetchFirstColumn('SELECT code FROM sylius_currency');
+            $currencies = $this->queryTimeoutRunner->fetchFirstColumn(
+                $this->connection,
+                'SELECT code FROM sylius_currency',
+            );
 
             return new CurrenciesData($currencies);
         } catch (\Throwable $e) {

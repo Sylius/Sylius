@@ -19,8 +19,10 @@ use Psr\Cache\CacheItemPoolInterface;
 final class TelemetryCache implements TelemetryCacheInterface
 {
     private const CACHE_KEY = 'sylius_telemetry';
+    private const TRIGGER_CACHE_KEY = 'sylius_telemetry_recently_triggered';
     private const CACHE_TTL_SUCCESS = 604800; // 7 days
     private const CACHE_TTL_FAILURE = 259200; // 3 days
+    private const CACHE_TTL_RECENT_TRIGGER = 3600; // 1 hour
     private const RETRY_DELAY = 86400; // 24 hours between retries
     private const MAX_ATTEMPTS = 3;
     private const STATUS_SUCCESS = 'success';
@@ -86,6 +88,20 @@ final class TelemetryCache implements TelemetryCacheInterface
         return $data['telemetry_data'] ?? null;
     }
 
+    public function wasRecentlyTriggered(): bool
+    {
+        return $this->cache->getItem(self::TRIGGER_CACHE_KEY)->isHit();
+    }
+
+    public function markAsRecentlyTriggered(): void
+    {
+        $item = $this->cache->getItem(self::TRIGGER_CACHE_KEY);
+        $item->set(true);
+        $item->expiresAfter(self::CACHE_TTL_RECENT_TRIGGER);
+
+        $this->cache->save($item);
+    }
+
     public function storeSuccess(string $installationId): void
     {
         $item = $this->cache->getItem(self::CACHE_KEY);
@@ -124,5 +140,6 @@ final class TelemetryCache implements TelemetryCacheInterface
     public function clear(): void
     {
         $this->cache->deleteItem(self::CACHE_KEY);
+        $this->cache->deleteItem(self::TRIGGER_CACHE_KEY);
     }
 }

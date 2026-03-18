@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Telemetry\Collector\TelemetryDataCollectorInterface;
 use Sylius\Component\Core\Telemetry\Generator\InstallationIdGeneratorInterface;
