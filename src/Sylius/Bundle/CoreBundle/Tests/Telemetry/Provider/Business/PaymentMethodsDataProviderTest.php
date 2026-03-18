@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\PaymentMethodsData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\PaymentMethodsDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 
 final class PaymentMethodsDataProviderTest extends TestCase
 {
@@ -26,7 +28,8 @@ final class PaymentMethodsDataProviderTest extends TestCase
     protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
-        $this->provider = new PaymentMethodsDataProvider($this->connection);
+        $this->connection->method('getDatabasePlatform')->willReturn($this->createMock(AbstractMySQLPlatform::class));
+        $this->provider = new PaymentMethodsDataProvider($this->connection, new TimeoutRunner());
     }
 
     public function test_it_provides_payment_providers_assigned_to_channel(): void

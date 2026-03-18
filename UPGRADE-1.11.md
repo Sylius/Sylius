@@ -1,24 +1,236 @@
+# UPGRADE FROM `v1.11.17` TO `v1.11.18`
+
+### Telemetry improvements
+
+Telemetry has been improved with per-query database timeouts to prevent slow queries from blocking admin panel
+requests. Timeouts are applied automatically using platform-specific mechanisms (MySQL, MariaDB, PostgreSQL).
+
+The global query timeout (in milliseconds, default: 60000, minimum: 1000) is **configurable** via environment variable:
+
+```dotenv
+SYLIUS_TELEMETRY_QUERY_TIMEOUT=30000
+```
+
+Additionally, telemetry collection is now rate-limited — it will be skipped if it was already triggered within
+the last hour, preventing redundant data collection on rapid admin page loads.
+
 # UPGRADE FROM `v1.11.16` TO `v1.11.17`
 
-## Redirect behavior changes
+This is a **security release** addressing multiple vulnerabilities. Updating is strongly recommended.
 
-`CurrencySwitchController`, `ImpersonateUserController` and `StorageBasedLocaleSwitcher` no longer use the
-HTTP `Referer` header for redirects. Instead, they use the `RouterInterface` to generate a redirect URL based on
-the `_sylius.redirect` route attribute (defaulting to `sylius_shop_homepage`).
+## Security fixes
 
-If your application relied on the Referer-based redirect behavior (e.g., to return the user to the page they came from
-after switching currency or locale), you can customize the redirect target by overriding the route definition:
+### [API] DQL Injection via API Order Filters (Critical)
+
+An unauthenticated DQL injection vulnerability has been fixed in the following API order filters:
+
+- `Sylius\Bundle\ApiBundle\Filter\Doctrine\ProductPriceOrderFilter`
+- `Sylius\Bundle\ApiBundle\Filter\Doctrine\TranslationOrderNameAndLocaleFilter`
+
+Previously, user-supplied sort direction values (e.g. `order[price]`, `order[translation.name]`) were passed directly
+into DQL `ORDER BY` clauses without validation, allowing an attacker to inject arbitrary DQL expressions.
+
+Both filters now define an `ALLOWED_DIRECTIONS` whitelist (`['asc', 'desc']`) and validate the input against it
+before applying it to the query. Invalid values are silently ignored.
+
+**Changes in `ProductPriceOrderFilter`:**
+
+```diff
+ final class ProductPriceOrderFilter extends AbstractContextAwareFilter
+ {
++    private const ALLOWED_DIRECTIONS = ['asc', 'desc'];
++
+     protected function filterProperty(/* ... */)
+     {
+         // ...
++        $direction = strtolower($value['price']);
++        if (!in_array($direction, self::ALLOWED_DIRECTIONS, true)) {
++            return;
++        }
+         // ...
+-        ->orderBy('channelPricing.price', $value['price'])
++        ->orderBy('channelPricing.price', $direction)
+     }
+ }
+```
+
+**Changes in `TranslationOrderNameAndLocaleFilter`:**
+
+```diff
+ final class TranslationOrderNameAndLocaleFilter extends AbstractContextAwareFilter
+ {
++    private const ALLOWED_DIRECTIONS = ['asc', 'desc'];
++
+     protected function filterProperty(/* ... */)
+     {
+         // ...
+-        $direction = $value['translation.name'];
++        $direction = strtolower($value['translation.name']);
++        if (!in_array($direction, self::ALLOWED_DIRECTIONS, true)) {
++            return;
++        }
+         // ...
+-        ->orderBy('translation.name', $value['translation.name'])
++        ->orderBy('translation.name', $direction)
+     }
+ }
+```
+
+**No action required** — this fix is applied automatically upon updating. If you have extended or overridden either
+of these filters, verify that your custom implementation also validates the sort direction.
+
+### [Promotion] Race condition on promotion usage limit (High)
+
+A race condition has been fixed where concurrent orders could exceed a promotion's usage limit. When multiple checkouts
+completed simultaneously, the non-atomic read-then-write of `Promotion::$used` allowed the counter to be incremented
+beyond `usageLimit`.
+
+1. A new class has been introduced:
+
+   `Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier`
+
+   This class implements `Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface` and uses
+   atomic SQL statements (`UPDATE ... WHERE used < usage_limit` and `SELECT ... FOR UPDATE`) to enforce promotion
+   and coupon usage limits at the database level, preventing race conditions.
+
+   Its constructor accepts a `Doctrine\DBAL\Connection`:
+
+   ```php
+   public function __construct(Connection $connection)
+   ```
+
+2. The new service **decorates** the existing `sylius.promotion_usage_modifier` service:
+
+   ```xml
+   <service
+       id="sylius.promotion_usage_modifier.atomic"
+       class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier"
+       decorates="sylius.promotion_usage_modifier"
+   >
+       <argument type="service" id="doctrine.dbal.default_connection" />
+   </service>
+   ```
+
+   If you have overridden or decorated the `sylius.promotion_usage_modifier` service, review your customizations
+   to ensure compatibility with the new decorator chain.
+
+3. A new exception class has been introduced:
+
+   `Sylius\Component\Core\Promotion\Exception\PromotionUsageLimitReachedException`
+
+   This exception extends `Doctrine\ORM\OptimisticLockException` and is thrown when a promotion or coupon usage
+   limit has been reached during checkout. It provides two named constructors:
+
+   ```php
+   PromotionUsageLimitReachedException::withPromotionCode(string $code): self
+   PromotionUsageLimitReachedException::withCouponCode(string $code): self
+   ```
+
+   If you have custom error handling around the checkout completion workflow (e.g. in state machine callbacks
+   or event listeners), you may want to catch this exception to display an appropriate message to the customer.
+
+### XSS in dynamic inputs in shop and admin (High)
+
+A stored XSS vulnerability has been fixed in multiple JavaScript components that rendered user-controlled data
+without escaping.
+
+A new sanitizer utility has been introduced:
+
+`Sylius\Bundle\UiBundle\Resources\private\js\sylius-sanitizer.js`
+
+```js
+export function sanitizeInput(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+}
+```
+
+**Affected files:**
+
+- `sylius-lazy-choice-tree.js` — taxon tree leaf node names and codes are now sanitized before DOM insertion.
+- `sylius-auto-complete.js` — autocomplete choice names and values are now sanitized.
+- `sylius-product-auto-complete.js` — product autocomplete names and codes are now sanitized.
+- `sylius-province-field.js` — province field values are now sanitized before insertion into HTML attributes.
+
+**No action required** — this fix is applied automatically upon updating. If you have custom JavaScript that renders
+API response data using jQuery DOM insertion or string templates, review your code for similar XSS vectors.
+
+### [API] Disable shop GET adjustment endpoint (Medium)
+
+The `api/v2/shop/adjustments/{id}` endpoint has been disabled. This endpoint exposed adjustment details
+(including internal pricing data) to unauthenticated shop users.
+
+The endpoint now returns a 404 response using `ApiPlatform\Core\Action\NotFoundAction`.
+
+If your application depends on this endpoint, you will need to re-enable it by overriding the API Platform
+resource configuration for `Adjustment`.
+
+### Open Redirect vulnerability (Medium)
+
+An open redirect vulnerability has been fixed in `CurrencySwitchController`, `ImpersonateUserController` and
+`StorageBasedLocaleSwitcher`. These controllers no longer use the HTTP `Referer` header for redirects. Instead,
+they use the `RouterInterface` to generate a redirect URL based on the `_sylius.redirect` route attribute
+(defaulting to `sylius_shop_homepage`).
+
+A new trait has been added: `Sylius\Bundle\ShopBundle\Controller\RedirectTrait`.
+
+**Affected classes:**
+
+- `Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController`
+- `Sylius\Bundle\AdminBundle\Controller\ImpersonateUserController`
+- `Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher`
+
+If your application relied on the Referer-based redirect behavior, you can customize the redirect target
+by overriding the route definition:
 
 ```yaml
-# config/routes/sylius_shop.yaml
 sylius_shop_switch_currency:
     path: /{_locale}/switch-currency/{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.shop.currency_switch:switchAction
         _sylius:
-            redirect: sylius_shop_homepage # or any route name you prefer
+            redirect: sylius_shop_homepage
 ```
+
+## Other changes
+
+### Fix too frequent/long requests to GUS
+
+The `Sylius\Bundle\AdminBundle\Controller\NotificationController` has been updated to reduce the frequency and
+duration of outbound requests to GUS.
+
+1. The constructor of `NotificationController` has been modified:
+
+   ```diff
+    public function __construct(
+        private ClientInterface $client,
+        private MessageFactory $messageFactory,
+        string $hubUri,
+        private string $environment,
+   +    private CacheItemPoolInterface $cache,
+    )
+   ```
+
+   The `cache.app` service is injected as the new argument.
+
+2. Responses are now **cached for 24 hours** (`TTL = 86400s`) using PSR-6 `CacheItemPoolInterface`.
+   Subsequent calls to `getVersionAction()` return the cached result without making an HTTP request.
+
+3. HTTP request timeouts have been added:
+
+   ```diff
+   -$hubResponse = $this->client->send($hubRequest, ['verify' => false]);
+   +$hubResponse = $this->client->send($hubRequest, [
+   +    'verify' => false,
+   +    'timeout' => 2,
+   +    'connect_timeout' => 1,
+   +]);
+   ```
+
+   If you have overridden the `sylius.controller.admin.notification` service or its arguments, update your
+   configuration to include the new `CacheItemPoolInterface` argument.
 
 # UPGRADE FROM `v1.11.15` TO `v1.11.16`
 
