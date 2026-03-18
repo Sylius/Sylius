@@ -1,5 +1,16 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.4 (2026-03-18)
+
+#### Details
+
+- [#18904](https://github.com/sylius/sylius/issues/18904) [BUGFIX] remove redundant `object` from PHPDoc union types
+- [#18899](https://github.com/sylius/sylius/issues/18899) [CS][DX] Refactor
+- [#18898](https://github.com/sylius/sylius/issues/18898) [CS][DX] Refactor
+- [#18895](https://github.com/sylius/sylius/issues/18895) [Admin] Fix product taxon grid `enabled` field always showing `true`
+- [#18911](https://github.com/sylius/sylius/issues/18911) [BUGFIX] fix build errors
+- [#18920](https://github.com/sylius/sylius/issues/18920) Telemetry improvements 2.1
+
 ## v2.2.3 (2026-03-09)
 
 #### Details
