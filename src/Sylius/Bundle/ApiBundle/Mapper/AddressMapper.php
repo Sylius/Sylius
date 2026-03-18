@@ -28,10 +28,8 @@ final readonly class AddressMapper implements AddressMapperInterface
         $currentAddress->setPostcode($targetAddress->getPostcode());
         $currentAddress->setPhoneNumber($targetAddress->getPhoneNumber());
 
-        if (null !== $targetAddress->getProvinceCode()) {
-            $currentAddress->setProvinceCode($targetAddress->getProvinceCode());
-            $currentAddress->setProvinceName($targetAddress->getProvinceName());
-        }
+        $currentAddress->setProvinceCode($targetAddress->getProvinceCode());
+        $currentAddress->setProvinceName($targetAddress->getProvinceName());
 
         return $currentAddress;
     }
