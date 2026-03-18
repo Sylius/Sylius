@@ -16,15 +16,19 @@ namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Technical;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Technical\DatabaseData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\DatabasePlatformDataProvider;
 
 final class DatabasePlatformDataProviderTest extends TestCase
 {
-    private Connection $connection;
-    private ManagerRegistry $managerRegistry;
-    private DatabasePlatformDataProvider $provider;
+    /** @var Connection|MockObject */
+    private $connection;
+    /** @var ManagerRegistry|MockObject */
+    private $managerRegistry;
+    /** @var DatabasePlatformDataProvider */
+    private $provider;
 
     protected function setUp(): void
     {

@@ -19,8 +19,10 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 final class TelemetryCacheTest extends TestCase
 {
-    private ArrayAdapter $cache;
-    private TelemetryCache $telemetryCache;
+    /** @var ArrayAdapter */
+    private $cache;
+    /** @var TelemetryCache */
+    private $telemetryCache;
 
     protected function setUp(): void
     {

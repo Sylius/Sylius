@@ -19,7 +19,8 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\EnvironmentDataProvide
 
 final class EnvironmentDataProviderTest extends TestCase
 {
-    private EnvironmentDataProvider $provider;
+    /** @var EnvironmentDataProvider */
+    private $provider;
 
     protected function setUp(): void
     {

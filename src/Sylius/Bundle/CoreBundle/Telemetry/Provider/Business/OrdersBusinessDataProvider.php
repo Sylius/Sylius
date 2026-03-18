@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 use Doctrine\DBAL\Connection;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\OrderMetricsData;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\OrdersBusinessData;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
@@ -28,9 +29,13 @@ final class OrdersBusinessDataProvider implements DataProviderInterface
     /** @var Connection */
     private $connection;
 
-    public function __construct(Connection $connection)
+    /** @var TimeoutRunner */
+    private $queryTimeoutRunner;
+
+    public function __construct(Connection $connection, TimeoutRunner $queryTimeoutRunner)
     {
         $this->connection = $connection;
+        $this->queryTimeoutRunner = $queryTimeoutRunner;
     }
 
     public function provide(): TelemetryDataInterface
@@ -50,7 +55,8 @@ final class OrdersBusinessDataProvider implements DataProviderInterface
     {
         $oneMonthAgo = (new \DateTimeImmutable('-1 month'))->format('Y-m-d H:i:s');
 
-        return $this->connection->fetchAllAssociative(
+        return $this->queryTimeoutRunner->fetchAllAssociative(
+            $this->connection,
             'SELECT
                 o.currency_code,
                 COUNT(o.id) as order_count,
