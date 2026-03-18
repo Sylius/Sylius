@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Tests\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\OrdersBusinessData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\OrdersBusinessDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 
 final class OrdersBusinessDataProviderTest extends TestCase
 {
@@ -27,7 +29,8 @@ final class OrdersBusinessDataProviderTest extends TestCase
     protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
-        $this->provider = new OrdersBusinessDataProvider($this->connection);
+        $this->connection->method('getDatabasePlatform')->willReturn($this->createMock(AbstractMySQLPlatform::class));
+        $this->provider = new OrdersBusinessDataProvider($this->connection, new TimeoutRunner());
     }
 
     public function test_it_provides_all_order_metrics_for_single_currency(): void
@@ -55,19 +58,18 @@ final class OrdersBusinessDataProviderTest extends TestCase
 
     public function test_it_provides_all_order_metrics_for_multiple_currencies(): void
     {
-        // Values in minor units
         $this->connection->method('fetchAllAssociative')->willReturn([
             [
                 'currency_code' => 'USD',
                 'order_count' => 100,
-                'gmv' => 3000000, // 30,000 in minor units, AOV = 300
+                'gmv' => 3000000,
                 'avg_items' => 3.0,
                 'avg_units' => 4.5,
             ],
             [
                 'currency_code' => 'EUR',
                 'order_count' => 50,
-                'gmv' => 1500000, // 15,000 in minor units, AOV = 300
+                'gmv' => 1500000,
                 'avg_items' => 2.5,
                 'avg_units' => 3.5,
             ],
@@ -114,12 +116,11 @@ final class OrdersBusinessDataProviderTest extends TestCase
 
     public function test_it_rounds_averages_correctly(): void
     {
-        // Values in minor units - 1,500 GMV, 10 orders = 150 AOV
         $this->connection->method('fetchAllAssociative')->willReturn([
             [
                 'currency_code' => 'USD',
                 'order_count' => 10,
-                'gmv' => 150000, // 1,500 in minor units
+                'gmv' => 150000,
                 'avg_items' => 2.4,
                 'avg_units' => 3.6,
             ],
