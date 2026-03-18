@@ -164,14 +164,17 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ));
         }
 
+        $currentLocale = $order->getLocaleCode();
+        $fallbackLocale = $channel->getDefaultLocale()->getCode();
+
         $generatedItems = [];
 
         for ($i = 0; $i < $numberOfItems; ++$i) {
             /** @var ProductInterface $product */
             $product = $this->faker->randomElement($products);
             $variant = $this->faker->randomElement($product->getVariants()->toArray());
-            $product->setCurrentLocale($order->getLocaleCode());
-            $product->setFallbackLocale($product->getTranslations()->first()->getLocale());
+            $product->setCurrentLocale($currentLocale);
+            $product->setFallbackLocale($fallbackLocale);
 
             if (array_key_exists($variant->getCode(), $generatedItems)) {
                 /** @var OrderItemInterface $item */
