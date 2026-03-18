@@ -21,6 +21,10 @@ interface TelemetryCacheInterface
     /** @return array<string, mixed>|null */
     public function getCachedTelemetryData(): ?array;
 
+    public function wasRecentlyTriggered(): bool;
+
+    public function markAsRecentlyTriggered(): void;
+
     public function storeSuccess(string $installationId): void;
 
     /** @param array<string, mixed> $telemetryData */
