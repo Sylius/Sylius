@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\MetricsCountsData;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Telemetry\DataProvider\DataProviderInterface;
 use Sylius\Component\Core\Telemetry\DTO\TelemetryDataInterface;
@@ -23,21 +24,24 @@ use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
 /** @internal */
 final class MetricsCountsDataProvider implements DataProviderInterface
 {
-    public function __construct(private Connection $connection)
-    {
+    public function __construct(
+        private Connection $connection,
+        private TimeoutRunner $queryTimeoutRunner,
+    ) {
     }
 
     public function provide(): TelemetryDataInterface
     {
         try {
-            $counts = $this->connection->fetchAssociative(
+            $counts = $this->queryTimeoutRunner->fetchAssociative(
+                $this->connection,
                 'SELECT
                     (SELECT COUNT(id) FROM sylius_customer) as customers_count,
                     (SELECT COUNT(id) FROM sylius_product) as products_count,
                     (SELECT COUNT(id) FROM sylius_product_variant) as product_variants_count,
-                    (SELECT COUNT(id) FROM sylius_product_variant WHERE shipping_required = 0) as virtual_product_variants_count,
+                    (SELECT COUNT(id) FROM sylius_product_variant WHERE shipping_required = false) as virtual_product_variants_count,
                     (SELECT COUNT(id) FROM sylius_order WHERE checkout_state = :completedState) as orders_count,
-                    (SELECT COUNT(id) FROM sylius_channel WHERE enabled = 1) as channels_count',
+                    (SELECT COUNT(id) FROM sylius_channel WHERE enabled = true) as channels_count',
                 [
                     'completedState' => OrderCheckoutStates::STATE_COMPLETED,
                 ],
