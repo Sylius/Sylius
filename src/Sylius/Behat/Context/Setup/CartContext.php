@@ -39,6 +39,8 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 final readonly class CartContext implements Context
 {
@@ -55,6 +57,7 @@ final readonly class CartContext implements Context
         private ShippingContext $shippingContext,
         private PaymentContext $paymentContext,
         private string $guestCartTokenFilePath,
+        private ?TokenStorageInterface $tokenStorage = null,
     ) {
     }
 
@@ -133,11 +136,13 @@ final readonly class CartContext implements Context
             $tokenValue = $this->pickupCart();
         }
 
-        $this->commandBus->dispatch(new AddItemToCart(
-            orderTokenValue: $tokenValue,
-            productVariantCode: $productVariant->getCode(),
-            quantity: 1,
-        ));
+        $this->runWithSecurityToken(function () use ($tokenValue, $productVariant): void {
+            $this->commandBus->dispatch(new AddItemToCart(
+                orderTokenValue: $tokenValue,
+                productVariantCode: $productVariant->getCode(),
+                quantity: 1,
+            ));
+        });
 
         $this->sharedStorage->set('product', $productVariant->getProduct());
         $this->sharedStorage->set('variant', $productVariant);
@@ -154,17 +159,19 @@ final readonly class CartContext implements Context
             $tokenValue = $this->pickupCart($tokenValue);
         }
 
-        $this->commandBus->dispatch(new AddItemToCart(
-            orderTokenValue: $tokenValue,
-            productVariantCode: $this
-                ->getProductVariantWithProductOptionAndProductOptionValue(
-                    $product,
-                    $productOption,
-                    $productOptionValue,
-                )
-                ->getCode(),
-            quantity: 1,
-        ));
+        $this->runWithSecurityToken(function () use ($tokenValue, $product, $productOption, $productOptionValue): void {
+            $this->commandBus->dispatch(new AddItemToCart(
+                orderTokenValue: $tokenValue,
+                productVariantCode: $this
+                    ->getProductVariantWithProductOptionAndProductOptionValue(
+                        $product,
+                        $productOption,
+                        $productOptionValue,
+                    )
+                    ->getCode(),
+                quantity: 1,
+            ));
+        });
     }
 
     #[Given('/^I removed (product "[^"]+") from the (cart)$/')]
@@ -279,13 +286,38 @@ final readonly class CartContext implements Context
             $tokenValue = $this->pickupCart($tokenValue);
         }
 
-        $this->commandBus->dispatch(new AddItemToCart(
-            orderTokenValue: $tokenValue,
-            productVariantCode: $this->productVariantResolver->getVariant($product)->getCode(),
-            quantity: $quantity,
-        ));
+        $this->runWithSecurityToken(function () use ($tokenValue, $product, $quantity): void {
+            $this->commandBus->dispatch(new AddItemToCart(
+                orderTokenValue: $tokenValue,
+                productVariantCode: $this->productVariantResolver->getVariant($product)->getCode(),
+                quantity: $quantity,
+            ));
+        });
 
         $this->sharedStorage->set('product', $product);
+    }
+
+    private function runWithSecurityToken(callable $callback): void
+    {
+        $previousToken = $this->tokenStorage?->getToken();
+
+        if (
+            null !== $this->tokenStorage &&
+            $this->sharedStorage->has('user') &&
+            $this->sharedStorage->get('user') instanceof ShopUserInterface
+        ) {
+            /** @var ShopUserInterface $user */
+            $user = $this->sharedStorage->get('user');
+            $this->tokenStorage->setToken(
+                new UsernamePasswordToken($user, 'api_shop', $user->getRoles()),
+            );
+        }
+
+        try {
+            $callback();
+        } finally {
+            $this->tokenStorage?->setToken($previousToken);
+        }
     }
 
     private function doesCartWithTokenExist(string $tokenValue): bool

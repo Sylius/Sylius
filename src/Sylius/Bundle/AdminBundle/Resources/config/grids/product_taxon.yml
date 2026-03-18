@@ -44,7 +44,7 @@ sylius_grid:
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
-                    path: product
+                    path: product.enabled
                     options:
                         template: "@SyliusAdmin/shared/grid/field/boolean.html.twig"
                 position:

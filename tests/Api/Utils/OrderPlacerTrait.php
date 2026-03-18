@@ -22,12 +22,16 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\PaymentTransitions;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Webmozart\Assert\Assert;
 
 trait OrderPlacerTrait
@@ -56,7 +60,7 @@ trait OrderPlacerTrait
         $this->checkSetUpOrderPlacerCalled();
 
         $this->pickUpCart($tokenValue);
-        $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
+        $this->addItemToCart($productVariantCode, $quantity, $tokenValue, $email);
         $cart = $this->updateCartWithAddress($tokenValue, $email);
         $this->dispatchShippingMethodChooseCommand(
             $tokenValue,
@@ -86,7 +90,7 @@ trait OrderPlacerTrait
         $this->checkSetUpOrderPlacerCalled();
 
         $this->pickUpCart(tokenValue: $tokenValue, email: $email);
-        $this->addItemToCart($productVariantCode, $quantity, $tokenValue);
+        $this->addItemToCart($productVariantCode, $quantity, $tokenValue, $email);
         $cart = $this->updateCartWithAddressAndCouponCode($tokenValue, $email, $couponCode);
         $this->dispatchShippingMethodChooseCommand(
             $tokenValue,
@@ -203,7 +207,7 @@ trait OrderPlacerTrait
         return $tokenValue;
     }
 
-    protected function addItemToCart(string $productVariantCode, int $quantity, string $tokenValue): string
+    protected function addItemToCart(string $productVariantCode, int $quantity, string $tokenValue, ?string $email = null): string
     {
         $addItemToCartCommand = new AddItemToCart(
             orderTokenValue: $tokenValue,
@@ -211,7 +215,12 @@ trait OrderPlacerTrait
             quantity: $quantity,
         );
 
-        $this->commandBus->dispatch($addItemToCartCommand);
+        if (null === $email) {
+            $cart = $this->orderRepository->findCartByTokenValue($tokenValue);
+            $email = $cart?->getCustomer()?->getEmail();
+        }
+
+        $this->dispatchWithShopUserToken($email, $addItemToCartCommand);
 
         return $tokenValue;
     }
@@ -261,6 +270,33 @@ trait OrderPlacerTrait
         $objectManager->flush();
 
         return $order;
+    }
+
+    private function dispatchWithShopUserToken(?string $email, object $command): void
+    {
+        /** @var TokenStorageInterface $tokenStorage */
+        $tokenStorage = self::getContainer()->get('security.token_storage');
+        $previousToken = $tokenStorage->getToken();
+
+        if (null !== $email) {
+            /** @var UserRepositoryInterface $shopUserRepository */
+            $shopUserRepository = self::getContainer()->get('sylius.repository.shop_user');
+
+            /** @var ShopUserInterface|null $user */
+            $user = $shopUserRepository->findOneByEmail($email);
+
+            if (null !== $user) {
+                $tokenStorage->setToken(
+                    new UsernamePasswordToken($user, 'api_shop', $user->getRoles()),
+                );
+            }
+        }
+
+        try {
+            $this->commandBus->dispatch($command);
+        } finally {
+            $tokenStorage->setToken($previousToken);
+        }
     }
 
     private function checkSetUpOrderPlacerCalled(): void

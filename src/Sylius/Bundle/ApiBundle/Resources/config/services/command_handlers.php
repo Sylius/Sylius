@@ -42,6 +42,7 @@ use Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler;
 use Sylius\Bundle\ApiBundle\CommandHandler\Payment\UpdatePaymentRequestHandler;
 use Sylius\Bundle\ApiBundle\CommandHandler\Promotion\GeneratePromotionCouponHandler;
 use Sylius\Bundle\ApiBundle\CommandHandler\SendContactRequestHandler;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -81,6 +82,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.modifier.order'),
             service('sylius.factory.order_item'),
             service('sylius.modifier.order_item_quantity'),
+            service(UserContextInterface::class)
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;

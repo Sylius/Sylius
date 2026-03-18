@@ -31,7 +31,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius_admin.provider.notification.hub', HubNotificationProvider::class)
         ->args([
-            service('sylius.http_client'),
+            service('sylius_admin.http_client'),
             service('request_stack'),
             service('Psr\Http\Message\RequestFactoryInterface'),
             service('Psr\Http\Message\StreamFactoryInterface'),

@@ -27,6 +27,8 @@ use Sylius\Bundle\AdminBundle\Provider\LoggedInAdminUserProviderInterface;
 use Sylius\Bundle\AdminBundle\SectionResolver\AdminUriBasedSectionResolver;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType as SelectAttributeFormType;
 use Sylius\Component\Attribute\AttributeType\SelectAttributeType;
+use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpClient\Psr18Client;
 
 return static function (ContainerConfigurator $container) {
     $container->import('services/*.php');
@@ -88,6 +90,17 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services->alias('sylius.http_client', 'Psr\Http\Client\ClientInterface');
+
+    $services
+        ->set('sylius_admin.http_client', Psr18Client::class)
+        ->args([inline_service(HttpClient::class)
+            ->factory([HttpClient::class, 'create'])
+            ->args([
+                ['timeout' => 2, 'max_duration' => 2],
+            ])
+        ])
+        ->public()
+    ;
 
     $services
         ->set('sylius.attribute_type.select', SelectAttributeType::class)
