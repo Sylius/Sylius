@@ -15,9 +15,11 @@ namespace Sylius\Bundle\ApiBundle\Command\Payment;
 
 use Sylius\Bundle\ApiBundle\Attribute\PaymentRequestHashAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentRequestEligibility;
 
 /** @experimental */
 #[PaymentRequestHashAware]
+#[OrderPaymentRequestEligibility]
 class UpdatePaymentRequest implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(

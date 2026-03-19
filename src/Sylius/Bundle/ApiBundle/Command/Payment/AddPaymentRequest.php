@@ -16,10 +16,12 @@ namespace Sylius\Bundle\ApiBundle\Command\Payment;
 use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentRequestEligibility;
 
 /** @experimental */
 #[OrderTokenValueAware]
 #[PaymentRequestActionAware]
+#[OrderPaymentRequestEligibility]
 class AddPaymentRequest implements IriToIdentifierConversionAwareInterface
 {
     public function __construct(
