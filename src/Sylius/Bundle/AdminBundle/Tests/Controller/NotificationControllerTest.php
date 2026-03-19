@@ -115,7 +115,8 @@ final class NotificationControllerTest extends TestCase
         $this->stubRequestFactory();
 
         $this->client->sendRequest(Argument::any())
-            ->willThrow(new class () extends \RuntimeException implements ClientExceptionInterface {});
+            ->willThrow(new class() extends \RuntimeException implements ClientExceptionInterface {
+            });
 
         $emptyResponse = $this->controller->getVersionAction(new Request());
 
