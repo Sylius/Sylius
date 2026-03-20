@@ -53,7 +53,7 @@ final class Version20240315112656 extends AbstractMigration
         }
 
         $connection = $this->connection;
-        $rows = $connection->fetchAllAssociative(sprintf('SELECT %s, %s FROM %s', 'id', $dataColumn, $table));
+        $rows = $connection->iterateAssociative(sprintf('SELECT %s, %s FROM %s', 'id', $dataColumn, $table));
 
         foreach ($rows as $row) {
             $id = $row['id'];
@@ -75,7 +75,7 @@ final class Version20240315112656 extends AbstractMigration
     private function serializeEncodedData(string $table, string $dataColumn): void
     {
         $connection = $this->connection;
-        $rows = $connection->fetchAllAssociative(sprintf('SELECT %s, %s FROM %s', 'id', $dataColumn, $table));
+        $rows = $connection->iterateAssociative(sprintf('SELECT %s, %s FROM %s', 'id', $dataColumn, $table));
 
         foreach ($rows as $row) {
             $id = $row['id'];
