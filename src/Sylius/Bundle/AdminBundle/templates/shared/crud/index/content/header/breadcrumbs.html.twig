@@ -6,7 +6,7 @@
 {% if title_from_context is not null or resource_metadata is not null %}
     {% set title = title_from_context|default(resource_metadata.applicationName~'.ui.'~resource_metadata.pluralName) %}
 {% else %}
-    {% set title = hookable_metadata.configuration.title %}
+    {% set title = hookable_metadata.configuration.title|default('') %}
 {% endif %}
 
 {{ breadcrumbs([
