@@ -1,8 +1,10 @@
 framework:
     secret: '%env(APP_SECRET)%'
-    form: 
+    form:
         enabled: true
     csrf_protection: true
     http_method_override: true
+    property_info:
+        with_constructor_extractor: false
     session:
         handler_id: ~
