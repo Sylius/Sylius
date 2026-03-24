@@ -39,6 +39,8 @@ abstract class AbstractOrmTestCase extends TestCase
             )->getMetadataDriverImpl(),
         );
 
+        $config->enableNativeLazyObjects(true);
+
         return $config;
     }
 
