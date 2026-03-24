@@ -70,7 +70,7 @@ final class InstallerContext implements Context
     public function iRunSyliusCommandLineInstaller(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new SetupCommand(
+        $this->application->addCommand(new SetupCommand(
             $this->entityManager,
             $this->commandDirectoryChecker,
             $this->currencySetup,
@@ -91,7 +91,7 @@ final class InstallerContext implements Context
     public function iRunSyliusInstallSampleDataCommand(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new InstallSampleDataCommand(
+        $this->application->addCommand(new InstallSampleDataCommand(
             $this->entityManager,
             $this->commandDirectoryChecker,
             $this->publicDir,
