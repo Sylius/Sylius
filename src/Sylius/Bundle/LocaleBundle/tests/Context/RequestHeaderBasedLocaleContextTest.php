@@ -74,6 +74,26 @@ final class RequestHeaderBasedLocaleContextTest extends TestCase
         $this->requestHeaderBasedLocaleContext->getLocaleCode();
     }
 
+    public function testThrowsLocaleNotFoundExceptionWhenLanguagePrefixHasNoMatchingLocale(): void
+    {
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'en');
+
+        $this->requestStack->expects(self::once())->method('getMainRequest')->willReturn($request);
+
+        $this->localeProvider->expects(self::once())
+            ->method('getDefaultLocaleCode')
+            ->willReturn('it_IT');
+
+        $this->localeProvider->expects(self::once())
+            ->method('getAvailableLocalesCodes')
+            ->willReturn(['it_IT']);
+
+        self::expectException(LocaleNotFoundException::class);
+
+        $this->requestHeaderBasedLocaleContext->getLocaleCode();
+    }
+
     public function testResolvesLocaleFromMainRequestPreferredLanguageInLocaleSyntax(): void
     {
         $request = new Request();
@@ -144,5 +164,59 @@ final class RequestHeaderBasedLocaleContextTest extends TestCase
             ->willReturn(['pl_PL', 'de_DE']);
 
         self::assertSame('de_DE', $this->requestHeaderBasedLocaleContext->getLocaleCode());
+    }
+
+    public function testResolvesLocaleByLanguagePrefixForMacroRegionLocale(): void
+    {
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'en');
+
+        $this->requestStack->expects(self::once())->method('getMainRequest')->willReturn($request);
+
+        $this->localeProvider->expects(self::once())
+            ->method('getDefaultLocaleCode')
+            ->willReturn('en_150');
+
+        $this->localeProvider->expects(self::once())
+            ->method('getAvailableLocalesCodes')
+            ->willReturn(['en_150']);
+
+        self::assertSame('en_150', $this->requestHeaderBasedLocaleContext->getLocaleCode());
+    }
+
+    public function testResolvesLocaleByLanguagePrefixForLatinAmericaMacroRegionLocale(): void
+    {
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'es');
+
+        $this->requestStack->expects(self::once())->method('getMainRequest')->willReturn($request);
+
+        $this->localeProvider->expects(self::once())
+            ->method('getDefaultLocaleCode')
+            ->willReturn('es_419');
+
+        $this->localeProvider->expects(self::once())
+            ->method('getAvailableLocalesCodes')
+            ->willReturn(['es_419']);
+
+        self::assertSame('es_419', $this->requestHeaderBasedLocaleContext->getLocaleCode());
+    }
+
+    public function testResolvesFirstLocaleByLanguagePrefixWhenMultipleMacroRegionLocalesAvailable(): void
+    {
+        $request = new Request();
+        $request->headers->set('Accept-Language', 'en');
+
+        $this->requestStack->expects(self::once())->method('getMainRequest')->willReturn($request);
+
+        $this->localeProvider->expects(self::once())
+            ->method('getDefaultLocaleCode')
+            ->willReturn('en_001');
+
+        $this->localeProvider->expects(self::once())
+            ->method('getAvailableLocalesCodes')
+            ->willReturn(['en_001', 'en_150']);
+
+        self::assertSame('en_001', $this->requestHeaderBasedLocaleContext->getLocaleCode());
     }
 }

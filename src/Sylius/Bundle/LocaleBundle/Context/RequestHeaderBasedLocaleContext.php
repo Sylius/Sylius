@@ -61,7 +61,26 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface, R
             ));
         }
 
-        return $bestLocaleCode;
+        if (in_array($bestLocaleCode, $this->availableLocalesCodes, strict: true)) {
+            return $bestLocaleCode;
+        }
+
+        // Symfony 8+ strips numeric region subtags (UN M.49, e.g. "150" in "en_150"), returning only the
+        // language part. Fall back to the first available locale that starts with that language prefix.
+        $localesMatchingLanguagePrefix = array_values(array_filter(
+            $this->availableLocalesCodes,
+            static fn (string $code): bool => str_starts_with($code, $bestLocaleCode . '_') ||
+                str_starts_with($code, $bestLocaleCode . '-'),
+        ));
+
+        if ([] === $localesMatchingLanguagePrefix) {
+            throw new LocaleNotFoundException(sprintf(
+                'None of the available locales is acceptable: "%s".',
+                implode('", "', $this->availableLocalesCodes),
+            ));
+        }
+
+        return $localesMatchingLanguagePrefix[0];
     }
 
     public function reset(): void
