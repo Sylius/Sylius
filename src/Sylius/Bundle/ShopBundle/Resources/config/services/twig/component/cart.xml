@@ -21,6 +21,7 @@
             <argument>Sylius\Bundle\ShopBundle\Form\Type\CartType</argument>
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="request_stack" />
 
             <call method="setLiveResponder">
                 <argument type="service" id="ux.live_component.live_responder"/>
