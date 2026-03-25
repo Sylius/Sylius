@@ -27,6 +27,7 @@ use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -111,6 +112,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
         $this->prependDoctrineIdentityGenerationPreferences($container);
+        $this->prependPropertyInfo($container);
     }
 
     protected function getMigrationsNamespace(): string
@@ -149,6 +151,19 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 'identity_generation_preferences' => [
                     PostgreSQLPlatform::class => ClassMetadata::GENERATOR_TYPE_SEQUENCE,
                 ],
+            ],
+        ]);
+    }
+
+    private function prependPropertyInfo(ContainerBuilder $container): void
+    {
+        if (version_compare(Kernel::VERSION, '7.0.0', '<')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('framework', [
+            'property_info' => [
+                'with_constructor_extractor' => false,
             ],
         ]);
     }
