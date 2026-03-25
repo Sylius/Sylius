@@ -69,8 +69,7 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface, R
         // language part. Fall back to the first available locale that starts with that language prefix.
         $localesMatchingLanguagePrefix = array_values(array_filter(
             $this->availableLocalesCodes,
-            static fn (string $code): bool => str_starts_with($code, $bestLocaleCode . '_') ||
-                str_starts_with($code, $bestLocaleCode . '-'),
+            static fn (string $code): bool => str_starts_with($code, $bestLocaleCode . '_')
         ));
 
         if ([] === $localesMatchingLanguagePrefix) {
