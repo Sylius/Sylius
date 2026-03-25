@@ -110,12 +110,64 @@ final class IriConverterTest extends TestCase
             ));
     }
 
-    public function testUsesResourceClassResolverToGetProperIriWhenConcreteClassHasNoOperations(): void
+    public function testInstantiationWithoutResourceClassResolverTriggersDeprecation(): void
+    {
+        $this->expectUserDeprecationMessageMatches('/Not passing a.*ResourceClassResolverInterface.*IriConverter.*is deprecated/');
+
+        new IriConverter(
+            $this->decoratedIriConverter,
+            $this->pathPrefixProvider,
+            $this->operationResolver,
+            $this->router,
+        );
+    }
+
+    public function testFallsBackToObjectClassWhenResourceClassResolverIsNotProvided(): void
     {
         /** @var Operation&MockObject $operation */
         $operation = $this->createMock(Operation::class);
 
         $country = new Country();
+
+        $iriConverter = new IriConverter(
+            $this->decoratedIriConverter,
+            $this->pathPrefixProvider,
+            $this->operationResolver,
+            $this->router,
+        );
+
+        $this->pathPrefixProvider->expects(self::once())
+            ->method('getPathPrefix')
+            ->with('api/v2/shop/countries')
+            ->willReturn('shop');
+
+        $this->operationResolver->expects(self::once())
+            ->method('resolve')
+            ->with(Country::class, 'shop', null)
+            ->willReturn($operation);
+
+        $this->decoratedIriConverter->expects(self::once())
+            ->method('getIriFromResource')
+            ->with(self::identicalTo($country), UrlGeneratorInterface::ABS_PATH, $operation, [
+                'request_uri' => 'api/v2/shop/countries',
+            ])
+            ->willReturn('api/v2/shop/countries/CODE');
+
+        self::assertSame('api/v2/shop/countries/CODE', $iriConverter
+            ->getIriFromResource(
+                $country,
+                UrlGeneratorInterface::ABS_PATH,
+                null,
+                ['request_uri' => 'api/v2/shop/countries'],
+            ));
+    }
+
+    public function testResolvesDiscriminatorSubclassToParentResourceClassBeforeResolvingOperation(): void
+    {
+        /** @var Operation&MockObject $shopOperation */
+        $shopOperation = $this->createMock(Operation::class);
+
+        $concreteSubclassInstance = new Country();
 
         $this->resourceClassResolver->expects(self::once())
             ->method('isResourceClass')
@@ -124,7 +176,7 @@ final class IriConverterTest extends TestCase
 
         $this->resourceClassResolver->expects(self::once())
             ->method('getResourceClass')
-            ->with($country)
+            ->with($concreteSubclassInstance)
             ->willReturn(CountryInterface::class);
 
         $this->pathPrefixProvider->expects(self::once())
@@ -135,21 +187,66 @@ final class IriConverterTest extends TestCase
         $this->operationResolver->expects(self::once())
             ->method('resolve')
             ->with(CountryInterface::class, 'shop', null)
-            ->willReturn($operation);
+            ->willReturn($shopOperation);
 
         $this->decoratedIriConverter->expects(self::once())
             ->method('getIriFromResource')
-            ->with(self::identicalTo($country), UrlGeneratorInterface::ABS_PATH, $operation, [
+            ->with(self::identicalTo($concreteSubclassInstance), UrlGeneratorInterface::ABS_PATH, $shopOperation, [
                 'request_uri' => 'api/v2/shop/countries',
             ])
             ->willReturn('api/v2/shop/countries/CODE');
 
-        self::assertSame('api/v2/shop/countries/CODE', $this->iriConverter
-            ->getIriFromResource(
-                $country,
+        self::assertSame(
+            'api/v2/shop/countries/CODE',
+            $this->iriConverter->getIriFromResource(
+                $concreteSubclassInstance,
                 UrlGeneratorInterface::ABS_PATH,
                 null,
                 ['request_uri' => 'api/v2/shop/countries'],
-            ));
+            ),
+        );
+    }
+
+    public function testUsesConcreteClassDirectlyWhenItIsNotAKnownResourceClass(): void
+    {
+        /** @var Operation&MockObject $operation */
+        $operation = $this->createMock(Operation::class);
+
+        $concreteInstance = new Country();
+
+        $this->resourceClassResolver->expects(self::once())
+            ->method('isResourceClass')
+            ->with(Country::class)
+            ->willReturn(false);
+
+        $this->resourceClassResolver->expects(self::never())
+            ->method('getResourceClass');
+
+        $this->pathPrefixProvider->expects(self::once())
+            ->method('getPathPrefix')
+            ->with('api/v2/shop/countries')
+            ->willReturn('shop');
+
+        $this->operationResolver->expects(self::once())
+            ->method('resolve')
+            ->with(Country::class, 'shop', null)
+            ->willReturn($operation);
+
+        $this->decoratedIriConverter->expects(self::once())
+            ->method('getIriFromResource')
+            ->with(self::identicalTo($concreteInstance), UrlGeneratorInterface::ABS_PATH, $operation, [
+                'request_uri' => 'api/v2/shop/countries',
+            ])
+            ->willReturn('api/v2/shop/countries/CODE');
+
+        self::assertSame(
+            'api/v2/shop/countries/CODE',
+            $this->iriConverter->getIriFromResource(
+                $concreteInstance,
+                UrlGeneratorInterface::ABS_PATH,
+                null,
+                ['request_uri' => 'api/v2/shop/countries'],
+            ),
+        );
     }
 }

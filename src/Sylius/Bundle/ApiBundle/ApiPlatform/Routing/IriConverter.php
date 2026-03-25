@@ -31,8 +31,17 @@ final readonly class IriConverter implements IriConverterInterface
         private PathPrefixProviderInterface $pathPrefixProvider,
         private OperationResolverInterface $operationResolver,
         private RouterInterface $router,
-        private ResourceClassResolverInterface $resourceClassResolver,
+        private ?ResourceClassResolverInterface $resourceClassResolver = null,
     ) {
+        if ($this->resourceClassResolver === null) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.1',
+                'Not passing a "%s" to "%s" constructor is deprecated and will be required in Sylius 3.0.',
+                ResourceClassResolverInterface::class,
+                self::class,
+            );
+        }
     }
 
     public function getResourceFromIri(string $iri, array $context = [], ?Operation $operation = null): object
@@ -52,7 +61,7 @@ final readonly class IriConverter implements IriConverterInterface
             $resourceClass = $resource;
         } else {
             $objectClass = $this->getObjectClass($resource);
-            $resourceClass = $this->resourceClassResolver->isResourceClass($objectClass)
+            $resourceClass = $this->resourceClassResolver !== null && $this->resourceClassResolver->isResourceClass($objectClass)
                 ? $this->resourceClassResolver->getResourceClass($resource)
                 : $objectClass;
         }
