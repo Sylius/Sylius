@@ -54,32 +54,28 @@ final class RequestHeaderBasedLocaleContext implements LocaleContextInterface, R
         $prependedAvailableLocalesCodes = array_merge([self::NO_CODE_VALID_STUB], $this->availableLocalesCodes);
 
         $bestLocaleCode = $request->getPreferredLanguage($prependedAvailableLocalesCodes);
-        if (self::NO_CODE_VALID_STUB === $bestLocaleCode) {
-            throw new LocaleNotFoundException(sprintf(
-                'None of the available locales is acceptable: "%s".',
-                implode('", "', $this->availableLocalesCodes),
-            ));
-        }
 
-        if (in_array($bestLocaleCode, $this->availableLocalesCodes, strict: true)) {
+        if (self::NO_CODE_VALID_STUB !== $bestLocaleCode && in_array($bestLocaleCode, $this->availableLocalesCodes, strict: true)) {
             return $bestLocaleCode;
         }
 
-        // Symfony 8+ strips numeric region subtags (UN M.49, e.g. "150" in "en_150"), returning only the
-        // language part. Fall back to the first available locale that starts with that language prefix.
-        $localesMatchingLanguagePrefix = array_values(array_filter(
-            $this->availableLocalesCodes,
-            static fn (string $code): bool => str_starts_with($code, $bestLocaleCode . '_')
-        ));
-
-        if ([] === $localesMatchingLanguagePrefix) {
-            throw new LocaleNotFoundException(sprintf(
-                'None of the available locales is acceptable: "%s".',
-                implode('", "', $this->availableLocalesCodes),
+        // Symfony 8+ stripped a numeric region subtag (UN M.49, e.g. "150" in "en_150") and returned only the
+        // language prefix. In both cases, fall back to prefix matching across all preferred languages.
+        foreach ($request->getLanguages() as $language) {
+            $localesMatchingLanguagePrefix = array_values(array_filter(
+                $this->availableLocalesCodes,
+                static fn (string $code): bool => str_starts_with($code, $language . '_'),
             ));
+
+            if ([] !== $localesMatchingLanguagePrefix) {
+                return $localesMatchingLanguagePrefix[0];
+            }
         }
 
-        return $localesMatchingLanguagePrefix[0];
+        throw new LocaleNotFoundException(sprintf(
+            'None of the available locales is acceptable: "%s".',
+            implode('", "', $this->availableLocalesCodes),
+        ));
     }
 
     public function reset(): void
