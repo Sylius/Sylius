@@ -1,5 +1,11 @@
 # UPGRADE FROM `2.1.13` TO `2.1.14`
 
+### Restore missing admin resource show title
+
+A missing page title has been restored to the admin resource show pages (e.g. product, order, customer, shipment, catalog promotion).
+
+Added separated show routes for each resource with dedicated show page templates.
+
 ### Order payment method eligibility check
 
 The `Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator` and 
