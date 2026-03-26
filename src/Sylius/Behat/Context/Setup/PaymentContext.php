@@ -155,6 +155,16 @@ final readonly class PaymentContext implements Context
     }
 
     /**
+     * @Given the payment method :paymentMethod has been disabled in :channel channel
+     */
+    public function theStoreHasDisabledPaymentMethodInChannel(PaymentMethodInterface $paymentMethod, ChannelInterface $channel): void
+    {
+        $paymentMethod->removeChannel($channel);
+
+        $this->paymentMethodManager->flush();
+    }
+
+    /**
      * @Given the store allows paying with :paymentMethodName in :channel channel
      */
     public function theStoreAllowsPayingWithInChannel(string $paymentMethodName, ChannelInterface $channel): void

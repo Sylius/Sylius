@@ -77,6 +77,11 @@
             <tag name="validator.constraint_validator" alias="sylius_order_payment_method_eligibility_validator" />
         </service>
 
+        <service id="sylius.validator.payment_method_enabled_in_channel_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEnabledInChannelEligibilityValidator">
+            <argument type="service" id="sylius.context.channel" />
+            <tag name="validator.constraint_validator" alias="sylius_order_payment_method_enabled_in_channel_eligibility_validator" />
+        </service>
+
         <service id="sylius.validator.order_product_eligibility" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderProductEligibilityValidator">
             <tag name="validator.constraint_validator" alias="sylius_order_product_eligibility_validator" />
         </service>

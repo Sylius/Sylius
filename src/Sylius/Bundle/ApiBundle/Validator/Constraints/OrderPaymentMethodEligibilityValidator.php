@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -37,14 +38,21 @@ final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $value->orderTokenValue]);
+
         Assert::notNull($order);
+
+        $channel = $order->getChannel();
+        Assert::notNull($channel);
 
         /** @var PaymentInterface $payment */
         foreach ($order->getPayments() as $payment) {
-            if (!$payment->getMethod()->isEnabled()) {
+            /** @var PaymentMethodInterface $paymentMethod */
+            $paymentMethod = $payment->getMethod();
+
+            if (!$paymentMethod->isEnabled() || !$paymentMethod->hasChannel($channel)) {
                 $this->context->addViolation(
                     $constraint->message,
-                    ['%paymentMethodName%' => $payment->getMethod()->getName()],
+                    ['%paymentMethodName%' => $paymentMethod->getName()],
                 );
             }
         }
