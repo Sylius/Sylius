@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\LocaleBundle\Context;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\LocaleBundle\Context\RequestHeaderBasedLocaleContext;
@@ -54,11 +55,8 @@ final class RequestHeaderBasedLocaleContextTest extends TestCase
         $this->requestHeaderBasedLocaleContext->getLocaleCode();
     }
 
-    /**
-     * @dataProvider provideResolvingCases
-     *
-     * @param list<string> $availableLocales
-     */
+    /** @param list<string> $availableLocales */
+    #[DataProvider('provideResolvingCases')]
     public function testResolvesLocaleCode(string $acceptLanguage, string $default, array $availableLocales, string $expected): void
     {
         $request = new Request();
@@ -77,11 +75,8 @@ final class RequestHeaderBasedLocaleContextTest extends TestCase
         self::assertSame($expected, $this->requestHeaderBasedLocaleContext->getLocaleCode());
     }
 
-    /**
-     * @dataProvider provideNotFoundCases
-     *
-     * @param list<string> $availableLocales
-     */
+    /** @param list<string> $availableLocales */
+    #[DataProvider('provideNotFoundCases')]
     public function testThrowsLocaleNotFoundExceptionForRequest(string $acceptLanguage, string $default, array $availableLocales): void
     {
         $request = new Request();
