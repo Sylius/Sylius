@@ -30,7 +30,7 @@ class ProductTaxonRepository extends EntityRepository implements ProductTaxonRep
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.product', 'product')
-            ->innerJoin('product.translations', 'translations', Join::WITH, 'translations.locale = :locale')
+            ->leftJoin('product.translations', 'translations', Join::WITH, 'translations.locale = :locale')
             ->andWhere('o.taxon = :taxonId')
             ->setParameter('taxonId', $taxonId)
             ->setParameter('locale', $locale)
