@@ -1,3 +1,11 @@
+# UPGRADE FROM `2.1.13` TO `2.1.14`
+
+### Order payment method eligibility check
+
+The `Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator` and 
+`Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator` now checks also if 
+payment method is assigned to the channel of the order.
+
 # UPGRADE FROM `2.1.12` TO `2.1.13`
 
 ### Telemetry improvements
