@@ -38,7 +38,6 @@ final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
 
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneBy(['tokenValue' => $value->orderTokenValue]);
-
         Assert::notNull($order);
 
         $channel = $order->getChannel();
