@@ -43,6 +43,8 @@ final class InstallerContext implements Context
         'locale' => 'en_US',
         'e-mail' => 'test@email.com',
         'username' => 'test',
+        'firstName' => '',
+        'lastName' => '',
         'password' => 'pswd',
         'confirmation' => 'pswd',
     ];
@@ -146,6 +148,8 @@ final class InstallerContext implements Context
     {
         $this->inputChoices['e-mail'] = 'test@admin.com';
         $this->inputChoices['username'] = 'test';
+        $this->inputChoices['firstName'] = 'John';
+        $this->inputChoices['lastName'] = 'Doe';
         $this->inputChoices['password'] = 'pswd1$';
         $this->inputChoices['confirmation'] = $this->inputChoices['password'];
     }

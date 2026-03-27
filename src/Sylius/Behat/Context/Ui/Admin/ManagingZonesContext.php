@@ -133,6 +133,14 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I set its priority to :priority
+     */
+    public function iSetItsPriorityTo(int $priority): void
+    {
+        $this->formElement->prioritizeIt($priority);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -337,5 +345,45 @@ final class ManagingZonesContext implements Context
         }
 
         throw new \InvalidArgumentException(sprintf('Member "%s" should not be selectable.', $name));
+    }
+
+    /**
+     * @Then the first zone on the list should have :field :value
+     */
+    public function theFirstZoneOnTheListShouldHave(string $field, string $value): void
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = reset($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first zone\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue),
+        );
+    }
+
+    /**
+     * @Then the last zone on the list should have :field :value
+     */
+    public function theLastZoneOnTheListShouldHave(string $field, string $value): void
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last zone\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue),
+        );
+    }
+
+    /**
+     * @Given the :zone zone should have priority :priority
+     */
+    public function theZoneShouldHavePriority(ZoneInterface $zone, int $priority)
+    {
+        $this->iWantToModifyAZoneNamed($zone);
+
+        Assert::same($this->formElement->getPriority(), $priority);
     }
 }

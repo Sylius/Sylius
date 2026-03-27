@@ -49,6 +49,16 @@ final class ShippingMethodType extends AbstractResourceType
                 'entry_type' => $this->shippingMethodTranslationType,
                 'label' => 'sylius.form.shipping_method.translations',
             ])
+            ->add('minDeliveryTimeDays', IntegerType::class, [
+                'required' => false,
+                'label' => 'sylius.form.shipping_method.min_delivery_time_days',
+                'attr' => ['min' => 0, 'max' => 1000],
+            ])
+            ->add('maxDeliveryTimeDays', IntegerType::class, [
+                'required' => false,
+                'label' => 'sylius.form.shipping_method.max_delivery_time_days',
+                'attr' => ['min' => 0, 'max' => 1000],
+            ])
             ->add('position', IntegerType::class, [
                 'required' => false,
                 'label' => 'sylius.form.shipping_method.position',
