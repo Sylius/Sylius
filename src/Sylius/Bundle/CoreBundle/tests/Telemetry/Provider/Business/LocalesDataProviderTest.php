@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\LocalesData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\LocalesDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 
 final class LocalesDataProviderTest extends TestCase
 {
@@ -29,7 +31,8 @@ final class LocalesDataProviderTest extends TestCase
     protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
-        $this->provider = new LocalesDataProvider($this->connection, self::DEFAULT_LOCALE);
+        $this->connection->method('getDatabasePlatform')->willReturn($this->createMock(AbstractMySQLPlatform::class));
+        $this->provider = new LocalesDataProvider($this->connection, new TimeoutRunner(), self::DEFAULT_LOCALE);
     }
 
     public function test_it_provides_locales_channel_defaults_from_enabled_channels(): void
@@ -40,7 +43,7 @@ final class LocalesDataProviderTest extends TestCase
                 if (str_contains($sql, 'sylius_locale') && !str_contains($sql, 'sylius_channel')) {
                     return ['en_US', 'pl_PL', 'de_DE'];
                 }
-                self::assertStringContainsString('c.enabled = 1', $sql);
+                self::assertStringContainsString('c.enabled = true', $sql);
 
                 return ['en_US', 'de_DE'];
             });
