@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -23,11 +24,9 @@ final class ShippingMethodContext implements Context
     {
     }
 
-    /**
-     * @Transform /^"([^"]+)" shipping method$/
-     * @Transform /^shipping method "([^"]+)"$/
-     * @Transform :shippingMethod
-     */
+    #[Transform('/^"([^"]+)" shipping method$/')]
+    #[Transform('/^shipping method "([^"]+)"$/')]
+    #[Transform(':shippingMethod')]
     public function getShippingMethodByName($shippingMethodName)
     {
         $shippingMethods = $this->shippingMethodRepository->findByName($shippingMethodName, 'en_US');

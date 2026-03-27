@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop\Checkout;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -32,9 +34,7 @@ final class CheckoutOrderDetailsContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I want to browse order details for (this order)$/
-     */
+    #[When('/^I want to browse order details for (this order)$/')]
     public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order): void
     {
         $this->sharedStorage->set('cart_token', $order->getTokenValue());
@@ -42,28 +42,22 @@ final class CheckoutOrderDetailsContext implements Context
         $this->client->show(Resources::ORDERS, $order->getTokenValue());
     }
 
-    /**
-     * @Then I should be able to pay (again)
-     */
+    #[Then('I should be able to pay (again)')]
     public function iShouldBeAbleToPay(): void
     {
         $state = $this->getLatestPaymentState();
         Assert::eq($state, PaymentInterface::STATE_NEW);
     }
 
-    /**
-     * @Then I should not be able to pay (again)
-     */
+    #[Then('I should not be able to pay (again)')]
     public function iShouldNotBeAbleToPay(): void
     {
         $state = $this->getLatestPaymentState();
         Assert::notEq($state, PaymentInterface::STATE_NEW);
     }
 
-    /**
-     * @When I want to pay for my order
-     * @When I go to the change payment method page
-     */
+    #[When('I want to pay for my order')]
+    #[When('I go to the change payment method page')]
     public function iWantToPayForMyOrder(): void
     {
         $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));

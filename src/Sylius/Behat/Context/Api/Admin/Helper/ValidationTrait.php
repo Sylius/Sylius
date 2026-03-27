@@ -13,23 +13,21 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin\Helper;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
 trait ValidationTrait
 {
-    /**
-     * @When I specify a too long :field
-     */
+    #[When('I specify a too long :field')]
     public function iSpecifyATooLong(string $field): void
     {
         $this->client->addRequestData($field, str_repeat('a', $this->getMaxCodeLength() + 1));
     }
 
-    /**
-     * @Then I should be notified that :field is too long
-     * @Then I should be notified that :field should be no longer than :maxLength characters
-     */
+    #[Then('I should be notified that :field is too long')]
+    #[Then('I should be notified that :field should be no longer than :maxLength characters')]
     public function iShouldBeNotifiedThatFieldIsTooLong(string $field, int $maxLength = 255): void
     {
         Assert::regex(

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -31,9 +32,7 @@ final class CurrencyContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has currency :currencyCode
-     */
+    #[Given('the store has currency :currencyCode')]
     public function theStoreHasCurrency($currencyCode)
     {
         $currency = $this->createCurrency($currencyCode);
@@ -41,11 +40,9 @@ final class CurrencyContext implements Context
         $this->saveCurrency($currency);
     }
 
-    /**
-     * @Given the store has currency :currencyCode, :secondCurrencyCode
-     * @Given the store has currency :currencyCode and :secondCurrencyCode
-     * @Given the store has currency :currencyCode, :secondCurrencyCode and :thirdCurrencyCode
-     */
+    #[Given('the store has currency :currencyCode, :secondCurrencyCode')]
+    #[Given('the store has currency :currencyCode and :secondCurrencyCode')]
+    #[Given('the store has currency :currencyCode, :secondCurrencyCode and :thirdCurrencyCode')]
     public function theStoreHasCurrencyAnd($currencyCode, $secondCurrencyCode, $thirdCurrencyCode = null)
     {
         $this->saveCurrency($this->createCurrency($currencyCode));
@@ -56,9 +53,7 @@ final class CurrencyContext implements Context
         }
     }
 
-    /**
-     * @Given the currency :currencyCode has been disabled
-     */
+    #[Given('the currency :currencyCode has been disabled')]
     public function theStoreHasDisabledCurrency($currencyCode)
     {
         $currency = $this->provideCurrency($currencyCode);
@@ -66,11 +61,9 @@ final class CurrencyContext implements Context
         $this->saveCurrency($currency);
     }
 
-    /**
-     * @Given /^(that channel|"[^"]+" channel)(?: also|) allows to shop using the "([^"]+)" currency$/
-     * @Given /^(that channel|"[^"]+" channel)(?: also|) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
-     * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
-     */
+    #[Given('/^(that channel|"[^"]+" channel)(?: also|) allows to shop using the "([^"]+)" currency$/')]
+    #[Given('/^(that channel|"[^"]+" channel)(?: also|) allows to shop using "([^"]+)" and "([^"]+)" currencies$/')]
+    #[Given('/^(that channel)(?: also|) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/')]
     public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, ...$currenciesCodes)
     {
         foreach ($currenciesCodes as $currencyCode) {

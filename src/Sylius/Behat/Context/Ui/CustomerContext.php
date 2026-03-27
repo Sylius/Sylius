@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
@@ -27,9 +28,7 @@ final class CustomerContext implements Context
     ) {
     }
 
-    /**
-     * @Then I should not be able to delete it again
-     */
+    #[Then('I should not be able to delete it again')]
     public function iShouldNotBeAbleToDeleteCustomerAgain()
     {
         $customer = $this->sharedStorage->get('customer');
@@ -45,9 +44,7 @@ final class CustomerContext implements Context
         throw new \DomainException('Delete account should throw an exception!');
     }
 
-    /**
-     * @Then the customer with this email should still exist
-     */
+    #[Then('the customer with this email should still exist')]
     public function customerShouldStillExist()
     {
         $deletedUser = $this->sharedStorage->get('deleted_user');

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -26,9 +27,7 @@ final class TranslationContext implements Context
     ) {
     }
 
-    /**
-     * @Then I should be notified that the locale is not available
-     */
+    #[Then('I should be notified that the locale is not available')]
     public function iShouldBeNotifiedThatLocaleIsNotAvailable(): void
     {
         Assert::contains($this->responseChecker->getError($this->client->getLastResponse()), 'Please choose one of the available locales');

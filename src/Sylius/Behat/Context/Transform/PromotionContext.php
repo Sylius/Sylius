@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
@@ -26,11 +27,9 @@ final class PromotionContext implements Context
     ) {
     }
 
-    /**
-     * @Transform /^promotion "([^"]+)"$/
-     * @Transform /^"([^"]+)" promotion$/
-     * @Transform :promotion
-     */
+    #[Transform('/^promotion "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" promotion$/')]
+    #[Transform(':promotion')]
     public function getPromotionByName($promotionName)
     {
         $promotion = $this->promotionRepository->findOneBy(['name' => $promotionName]);
@@ -43,11 +42,9 @@ final class PromotionContext implements Context
         return $promotion;
     }
 
-    /**
-     * @Transform /^coupon "([^"]+)"$/
-     * @Transform /^"([^"]+)" coupon$/
-     * @Transform :coupon
-     */
+    #[Transform('/^coupon "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" coupon$/')]
+    #[Transform(':coupon')]
     public function getPromotionCouponByCode($promotionCouponCode)
     {
         $promotionCoupon = $this->promotionCouponRepository->findOneBy(['code' => $promotionCouponCode]);

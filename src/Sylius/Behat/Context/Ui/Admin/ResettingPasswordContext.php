@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Element\Admin\Account\ResetElementInterface;
 use Sylius\Behat\NotificationType;
@@ -32,60 +34,46 @@ final class ResettingPasswordContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to reset password
-     */
+    #[When('I want to reset password')]
     public function iWantToResetPassword(): void
     {
         $this->requestPasswordResetPage->open();
     }
 
-    /**
-     * @When I specify email as :email
-     * @When I do not specify an email
-     */
+    #[When('I specify email as :email')]
+    #[When('I do not specify an email')]
     public function iSpecifyEmailAs(string $email = ''): void
     {
         $this->requestPasswordResetPage->specifyEmail($email);
     }
 
-    /**
-     * @When /^I(?:| try to) reset it$/
-     */
+    #[When('/^I(?:| try to) reset it$/')]
     public function iResetIt(): void
     {
         $this->resetElement->reset();
     }
 
-    /**
-     * @When /^(I)(?:| try to) follow the instructions to reset my password$/
-     */
+    #[When('/^(I)(?:| try to) follow the instructions to reset my password$/')]
     public function iFollowTheInstructionsToResetMyPassword(AdminUserInterface $admin): void
     {
         $this->resetPasswordPage->tryToOpen(['token' => $admin->getPasswordResetToken()]);
     }
 
-    /**
-     * @When I specify my new password as :password
-     * @When I do not specify my new password
-     */
+    #[When('I specify my new password as :password')]
+    #[When('I do not specify my new password')]
     public function iSpecifyMyNewPassword(string $password = ''): void
     {
         $this->resetPasswordPage->specifyNewPassword($password);
     }
 
-    /**
-     * @When I confirm my new password as :password
-     * @When I do not confirm my new password
-     */
+    #[When('I confirm my new password as :password')]
+    #[When('I do not confirm my new password')]
     public function iConfirmMyNewPassword(string $password = ''): void
     {
         $this->resetPasswordPage->specifyPasswordConfirmation($password);
     }
 
-    /**
-     * @Then I should be notified that email with reset instruction has been sent
-     */
+    #[Then('I should be notified that email with reset instruction has been sent')]
     public function iShouldBeNotifiedThatEmailWithResetInstructionHasBeenSent(): void
     {
         $this->notificationChecker->checkNotification(
@@ -94,9 +82,7 @@ final class ResettingPasswordContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the email is required
-     */
+    #[Then('I should be notified that the email is required')]
     public function iShouldBeNotifiedThatTheEmailIsRequired(): void
     {
         Assert::same(
@@ -105,9 +91,7 @@ final class ResettingPasswordContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the email is not valid
-     */
+    #[Then('I should be notified that the email is not valid')]
     public function iShouldBeNotifiedThatTheEmailIsNotValid(): void
     {
         Assert::same(
@@ -116,9 +100,7 @@ final class ResettingPasswordContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that my password has been successfully changed
-     */
+    #[Then('I should be notified that my password has been successfully changed')]
     public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged(): void
     {
         $this->notificationChecker->checkNotification(
@@ -127,9 +109,7 @@ final class ResettingPasswordContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to change my password again with the same token
-     */
+    #[Then('I should not be able to change my password again with the same token')]
     public function iShouldNotBeAbleToChangeMyPasswordAgainWithTheSameToken(): void
     {
         $this->resetPasswordPage->tryToOpen(['token' => 'itotallyforgotmypassword']);
@@ -137,9 +117,7 @@ final class ResettingPasswordContext implements Context
         Assert::false($this->resetPasswordPage->isOpen(), 'User should not be on the forgotten password page');
     }
 
-    /**
-     * @Then I should be notified that the password reset token has expired
-     */
+    #[Then('I should be notified that the password reset token has expired')]
     public function iShouldBeNotifiedThatThePasswordResetTokenHasExpired(): void
     {
         $this->notificationChecker->checkNotification(
@@ -148,9 +126,7 @@ final class ResettingPasswordContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the new password is required
-     */
+    #[Then('I should be notified that the new password is required')]
     public function iShouldBeNotifiedThatTheNewPasswordIsRequired(): void
     {
         Assert::contains(
@@ -159,9 +135,7 @@ final class ResettingPasswordContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the entered passwords do not match
-     */
+    #[Then('I should be notified that the entered passwords do not match')]
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
     {
         Assert::contains(
@@ -170,9 +144,7 @@ final class ResettingPasswordContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the password should be at least :length characters long
-     */
+    #[Then('I should be notified that the password should be at least :length characters long')]
     public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong(int $length): void
     {
         Assert::true($this->resetPasswordPage->checkValidationMessageFor(

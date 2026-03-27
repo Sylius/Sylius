@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\Given;
+use Behat\Step\When;
+use Behat\Step\Then;
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -36,36 +39,28 @@ final class ManagingProductOptionsContext implements Context
     ) {
     }
 
-    /**
-     * @Given I want to create a new product option
-     */
+    #[Given('I want to create a new product option')]
     public function iWantToCreateANewProductOption(): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_OPTIONS);
     }
 
-    /**
-     * @Given I am browsing product options
-     * @When I browse product options
-     */
+    #[Given('I am browsing product options')]
+    #[When('I browse product options')]
     public function iBrowseProductOptions(): void
     {
         $this->client->index(Resources::PRODUCT_OPTIONS);
     }
 
-    /**
-     * @When I want to modify the :productOption product option
-     */
+    #[When('I want to modify the :productOption product option')]
     public function iWantToModifyProductOption(ProductOptionInterface $productOption): void
     {
         $this->sharedStorage->set('product_option', $productOption);
         $this->client->buildUpdateRequest(Resources::PRODUCT_OPTIONS, $productOption->getCode());
     }
 
-    /**
-     * @When I name it :name in :localeCode
-     * @When I do not name it
-     */
+    #[When('I name it :name in :localeCode')]
+    #[When('I do not name it')]
     public function iNameItInLanguage(?string $name = null, ?string $localeCode = 'en_US'): void
     {
         $data = ['translations' => [$localeCode => []]];
@@ -76,26 +71,20 @@ final class ManagingProductOptionsContext implements Context
         $this->client->updateRequestData($data);
     }
 
-    /**
-     * @When I rename it to :name in :localeCode
-     */
+    #[When('I rename it to :name in :localeCode')]
     public function iRenameItInLanguage(string $name, string $localeCode): void
     {
         $this->client->updateRequestData(['translations' => [$localeCode => ['name' => $name]]]);
     }
 
-    /**
-     * @When I remove its name from :localeCode translation
-     */
+    #[When('I remove its name from :localeCode translation')]
     public function iRemoveItsNameFromTranslation(string $localeCode): void
     {
         $this->client->updateRequestData(['translations' => [$localeCode => ['name' => '']]]);
     }
 
-    /**
-     * @When I specify its code as :code
-     * @When I do not specify its code
-     */
+    #[When('I specify its code as :code')]
+    #[When('I do not specify its code')]
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
         if ($code !== null) {
@@ -103,10 +92,8 @@ final class ManagingProductOptionsContext implements Context
         }
     }
 
-    /**
-     * @When I add the :value option value identified by :code
-     * @When I add the :value option value identified by :code in :localeCode
-     */
+    #[When('I add the :value option value identified by :code')]
+    #[When('I add the :value option value identified by :code in :localeCode')]
     public function iAddTheOptionValueWithCodeAndValue(string $value, string $code, string $localeCode = 'en_US'): void
     {
         $this->client->addSubResourceData(
@@ -115,43 +102,33 @@ final class ManagingProductOptionsContext implements Context
         );
     }
 
-    /**
-     * @When I delete the :optionValue option value of this product option
-     */
+    #[When('I delete the :optionValue option value of this product option')]
     public function iDeleteTheOptionValueOfThisProductOption(ProductOptionValueInterface $optionValue): void
     {
         $optionValueIri = $this->iriConverter->getIriFromResource($optionValue);
         $this->client->removeSubResourceObject('values', $optionValueIri, 'value');
     }
 
-    /**
-     * @When I do not add an option value
-     */
+    #[When('I do not add an option value')]
     public function iDoNotAddAnOptionValue(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When /^I search for product options with "([^"]+)" (code|name)$/
-     */
+    #[When('/^I search for product options with "([^"]+)" (code|name)$/')]
     public function iSearchForProductOptionsWith(string $phrase, string $field): void
     {
         $this->client->addFilter($field === 'name' ? 'translations.name' : 'code', $phrase);
         $this->client->filter();
     }
 
-    /**
-     * @Then I should see :count product options in the list
-     */
+    #[Then('I should see :count product options in the list')]
     public function iShouldSeeProductOptionsInTheList(int $count): void
     {
         $itemsCount = $this->responseChecker->countCollectionItems($this->client->getLastResponse());
@@ -159,10 +136,8 @@ final class ManagingProductOptionsContext implements Context
         Assert::eq($count, $itemsCount, sprintf('Expected %d product options, but got %d', $count, $itemsCount));
     }
 
-    /**
-     * @Then the product option :productOption should be in the registry
-     * @Then the product option :productOption should appear in the registry
-     */
+    #[Then('the product option :productOption should be in the registry')]
+    #[Then('the product option :productOption should appear in the registry')]
     public function theProductOptionShouldAppearInTheRegistry(ProductOptionInterface $productOption): void
     {
         $this->sharedStorage->set('product_option', $productOption);
@@ -174,9 +149,7 @@ final class ManagingProductOptionsContext implements Context
         );
     }
 
-    /**
-     * @Then the first product option in the list should have :field :value
-     */
+    #[Then('the first product option in the list should have :field :value')]
     public function theFirstProductOptionInTheListShouldHave(string $field, string $value): void
     {
         Assert::true(
@@ -185,9 +158,7 @@ final class ManagingProductOptionsContext implements Context
         );
     }
 
-    /**
-     * @Then the last product option in the list should have :field :value
-     */
+    #[Then('the last product option in the list should have :field :value')]
     public function theLastProductOptionInTheListShouldHave(string $field, string $value): void
     {
         $count = $this->responseChecker->countCollectionItems($this->client->getLastResponse());
@@ -198,9 +169,7 @@ final class ManagingProductOptionsContext implements Context
         );
     }
 
-    /**
-     * @Then the product option with :element :value should not be added
-     */
+    #[Then('the product option with :element :value should not be added')]
     public function theProductOptionWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
         Assert::false(
@@ -209,9 +178,7 @@ final class ManagingProductOptionsContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one product option with :element :value
-     */
+    #[Then('there should still be only one product option with :element :value')]
     public function thereShouldStillBeOnlyOneProductOptionWith(string $element, string $value): void
     {
         $response = $this->client->index(Resources::PRODUCT_OPTIONS);
@@ -221,20 +188,16 @@ final class ManagingProductOptionsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValue($response, $element, $value));
     }
 
-    /**
-     * @Then /^(this product option) name should be "([^"]+)"$/
-     * @Then /^(this product option) should still be named "([^"]+)"$/
-     */
+    #[Then('/^(this product option) name should be "([^"]+)"$/')]
+    #[Then('/^(this product option) should still be named "([^"]+)"$/')]
     public function thisProductOptionNameShouldBe(ProductOptionInterface $productOption, string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->show(Resources::PRODUCT_OPTIONS, $productOption->getCode()), 'name', $name));
     }
 
-    /**
-     * @Then /^(product option "[^"]+") should have the "([^"]+)" option value$/
-     * @Then /^(product option "[^"]+") should still have the "([^"]+)" option value$/
-     * @Then /^(this product option) should have the "([^"]*)" option value$/
-     */
+    #[Then('/^(product option "[^"]+") should have the "([^"]+)" option value$/')]
+    #[Then('/^(product option "[^"]+") should still have the "([^"]+)" option value$/')]
+    #[Then('/^(this product option) should have the "([^"]*)" option value$/')]
     public function productOptionShouldHaveTheOptionValue(
         ProductOptionInterface $productOption,
         string $optionValueName,
@@ -248,9 +211,9 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then /^(this product option) should not have the "([^"]*)" option value$/
-     * @Then /^(this product option) should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
+     *      * @Then /^(this product option) should not have the "([^"]*)" option value in ("([^"]+)" locale)$/
      */
+    #[Then('/^(this product option) should not have the "([^"]*)" option value$/')]
     public function thisProductOptionShouldNotHaveTheOptionValue(
         ProductOptionInterface $productOption,
         string $optionValueName,
@@ -263,9 +226,7 @@ final class ManagingProductOptionsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
@@ -274,9 +235,7 @@ final class ManagingProductOptionsContext implements Context
         Assert::false($this->responseChecker->hasValue($res, 'code', 'NEW_CODE'));
     }
 
-    /**
-     * @Then I should be notified that product option with this code already exists
-     */
+    #[Then('I should be notified that product option with this code already exists')]
     public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists(): void
     {
         $response = $this->client->getLastResponse();
@@ -290,9 +249,7 @@ final class ManagingProductOptionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that :element is required
-     */
+    #[Then('I should be notified that :element is required')]
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         Assert::contains(
@@ -301,9 +258,7 @@ final class ManagingProductOptionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it is in use
-     */
+    #[Then('I should be notified that it is in use')]
     public function iShouldBeNotifiedThatItIsInUse(): void
     {
         Assert::contains(
@@ -312,9 +267,7 @@ final class ManagingProductOptionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
