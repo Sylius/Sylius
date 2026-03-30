@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
+use Sylius\Bundle\ShopBundle\Cart\DisabledCartItemsRemover;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -57,7 +58,8 @@ class FormComponent
         string $formClass,
         protected readonly ObjectManager $manager,
         protected readonly EventDispatcherInterface $eventDispatcher,
-        protected readonly RequestStack $requestStack,
+        protected readonly DisabledCartItemsRemover $disabledCartItemsRemover,
+        protected readonly ?RequestStack $requestStack = null,
     ) {
         $this->initialize($orderRepository, $formFactory, $resourceClass, $formClass);
     }
@@ -72,33 +74,11 @@ class FormComponent
             return;
         }
 
-        $channel = $order->getChannel();
-        $itemsToRemove = [];
+        $removed = $this->disabledCartItemsRemover->removeFromOrder($order);
 
-        foreach ($order->getItems() as $item) {
-            $variant = $item->getVariant();
-            $product = $item->getProduct();
-
-            if ((null === $variant || !$variant->isEnabled()) ||
-                (null === $product || !$product->isEnabled()) ||
-                (null !== $channel && !$product->hasChannel($channel))) {
-                $itemsToRemove[] = $item;
-            }
+        if ($removed && null !== $this->requestStack) {
+            FlashBagProvider::getFlashBag($this->requestStack)->add('error', 'sylius.order.cart_item_removed');
         }
-
-        if ([] === $itemsToRemove) {
-            return;
-        }
-
-        foreach ($itemsToRemove as $item) {
-            $order->removeItem($item);
-        }
-
-        $this->eventDispatcher->dispatch(new GenericEvent($order), SyliusCartEvents::CART_CHANGE);
-        $this->manager->flush();
-        $this->manager->refresh($order);
-
-        FlashBagProvider::getFlashBag($this->requestStack)->add('error', 'sylius.order.cart_item_removed');
     }
 
     public function hydrateResource(mixed $value): ?ResourceInterface

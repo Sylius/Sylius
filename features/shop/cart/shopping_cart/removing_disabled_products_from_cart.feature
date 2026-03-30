@@ -12,7 +12,7 @@ Feature: Removing disabled products from cart
         And this product's price is "$19.99"
         And I am a logged in customer
 
-    @ui
+    @no-api @ui
     Scenario: Disabled product is automatically removed from cart when cart page is loaded
         Given I added product "PHP T-Shirt" to the cart
         But the product "PHP T-Shirt" has been disabled
@@ -20,7 +20,7 @@ Feature: Removing disabled products from cart
         Then my cart should be empty
         And I should be notified that some products in my cart are no longer available
 
-    @ui
+    @no-api @ui
     Scenario: Disabled product variant is automatically removed from cart when cart page is loaded
         Given I have "Large" variant of product "Super Cool T-Shirt" in the cart
         But the "Large" product variant is disabled
@@ -28,7 +28,7 @@ Feature: Removing disabled products from cart
         Then my cart should be empty
         And I should be notified that some products in my cart are no longer available
 
-    @ui
+    @no-api @ui
     Scenario: Product no longer available in channel is automatically removed from cart when cart page is loaded
         Given I added product "PHP T-Shirt" to the cart
         But this product is not available in "United States" channel
