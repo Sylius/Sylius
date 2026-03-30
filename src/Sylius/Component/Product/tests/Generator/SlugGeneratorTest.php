@@ -66,6 +66,14 @@ final class SlugGeneratorTest extends TestCase
         );
     }
 
+    public function testGeneratesSlugReplacingApostrophesWithHyphens(): void
+    {
+        $this->assertSame(
+            'rock-n-roll',
+            $this->slugGenerator->generate("Rock'n'roll"),
+        );
+    }
+
     public function testGeneratesSlugWithoutSpecialSigns(): void
     {
         $this->assertSame(

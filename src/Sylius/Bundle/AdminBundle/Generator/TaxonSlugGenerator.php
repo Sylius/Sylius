@@ -40,6 +40,6 @@ final readonly class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 
     private function transliterate(string $string): string
     {
-        return $this->slugger->slug(str_replace('\'', '-', $string))->lower()->toString();
+        return $this->slugger->slug($string)->lower()->toString();
     }
 }
