@@ -109,7 +109,10 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius_admin.generator.taxon_slug', TaxonSlugGenerator::class)
-        ->args([service('sylius.generator.taxon_slug')])
+        ->args([
+            service('sylius.generator.taxon_slug'),
+            service('slugger')
+        ])
     ;
     $services->alias(TaxonSlugGeneratorInterface::class, 'sylius_admin.generator.taxon_slug');
 
