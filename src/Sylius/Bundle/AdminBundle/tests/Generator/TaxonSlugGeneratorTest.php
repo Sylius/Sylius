@@ -18,17 +18,23 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Generator\TaxonSlugGenerator;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface as BaseTaxonSlugGeneratorInterface;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class TaxonSlugGeneratorTest extends TestCase
 {
     private BaseTaxonSlugGeneratorInterface&MockObject $baseSlugGenerator;
+
+    private SluggerInterface&MockObject $slugger;
 
     private TaxonSlugGenerator $slugGenerator;
 
     protected function setUp(): void
     {
         $this->baseSlugGenerator = $this->createMock(BaseTaxonSlugGeneratorInterface::class);
-        $this->slugGenerator = new TaxonSlugGenerator($this->baseSlugGenerator);
+        $this->slugger = $this->createMock(SluggerInterface::class);
+        $this->slugger->method('slug')->willReturnCallback((new AsciiSlugger())->slug(...));
+        $this->slugGenerator = new TaxonSlugGenerator($this->baseSlugGenerator, $this->slugger);
     }
 
     public function testGeneratesSlugForTaxonName(): void

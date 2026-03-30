@@ -13,15 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Product\Generator;
 
-use Behat\Transliterator\Transliterator;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class SlugGenerator implements SlugGeneratorInterface
 {
+    public function __construct(private SluggerInterface $slugger)
+    {
+    }
+
     public function generate(string $name): string
     {
         // Manually replacing apostrophes since Transliterator started removing them at v1.2.
         $name = str_replace('\'', '-', $name);
 
-        return Transliterator::transliterate($name);
+        return $this->slugger->slug($name)->lower()->toString();
     }
 }

@@ -35,7 +35,6 @@
         "api-platform/state": "^4.2.1",
         "api-platform/symfony": "^4.2.1",
         "babdev/pagerfanta-bundle": "^4.6",
-        "behat/transliterator": "^1.5",
         "doctrine/collections": "^2.2",
         "doctrine/common": "^3.2",
         "doctrine/dbal": "^3.9",

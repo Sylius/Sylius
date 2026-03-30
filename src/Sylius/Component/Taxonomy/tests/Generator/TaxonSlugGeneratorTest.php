@@ -20,6 +20,8 @@ use Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class TaxonSlugGeneratorTest extends TestCase
 {
@@ -35,6 +37,9 @@ final class TaxonSlugGeneratorTest extends TestCase
     /** @var TaxonTranslationInterface&MockObject */
     private MockObject $parentTaxonTranslation;
 
+    /** @var SluggerInterface&MockObject */
+    private MockObject $slugger;
+
     private TaxonSlugGenerator $taxonSlugGenerator;
 
     protected function setUp(): void
@@ -43,7 +48,9 @@ final class TaxonSlugGeneratorTest extends TestCase
         $this->parentTaxon = $this->createMock(TaxonInterface::class);
         $this->taxonTranslation = $this->createMock(TaxonTranslationInterface::class);
         $this->parentTaxonTranslation = $this->createMock(TaxonTranslationInterface::class);
-        $this->taxonSlugGenerator = new TaxonSlugGenerator();
+        $this->slugger = $this->createMock(SluggerInterface::class);
+        $this->slugger->method('slug')->willReturnCallback((new AsciiSlugger())->slug(...));
+        $this->taxonSlugGenerator = new TaxonSlugGenerator($this->slugger);
     }
 
     public function testShouldImplementTaxonSlugGeneratorInterface(): void

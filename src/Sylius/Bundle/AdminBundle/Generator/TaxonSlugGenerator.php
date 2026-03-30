@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Generator;
 
-use Behat\Transliterator\Transliterator;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface as BaseTaxonSlugGeneratorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final readonly class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 {
-    public function __construct(private BaseTaxonSlugGeneratorInterface $slugGenerator)
-    {
+    public function __construct(
+        private BaseTaxonSlugGeneratorInterface $slugGenerator,
+        private SluggerInterface $slugger
+    ) {
     }
 
     public function generate(string $name, string $localeCode, ?TaxonInterface $parent = null): string
@@ -38,7 +40,6 @@ final readonly class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 
     private function transliterate(string $string): string
     {
-        // Manually replacing apostrophes since Transliterator started removing them at v1.2.
-        return Transliterator::transliterate(str_replace('\'', '-', $string));
+        return $this->slugger->slug(str_replace('\'', '-', $string))->lower()->toString();
     }
 }
