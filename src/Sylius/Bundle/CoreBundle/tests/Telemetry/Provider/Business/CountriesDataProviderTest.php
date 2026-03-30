@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Telemetry\Provider\Business;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Telemetry\DTO\Business\CountriesData;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\CountriesDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 
 final class CountriesDataProviderTest extends TestCase
 {
@@ -27,7 +29,8 @@ final class CountriesDataProviderTest extends TestCase
     protected function setUp(): void
     {
         $this->connection = $this->createMock(Connection::class);
-        $this->provider = new CountriesDataProvider($this->connection);
+        $this->connection->method('getDatabasePlatform')->willReturn($this->createMock(AbstractMySQLPlatform::class));
+        $this->provider = new CountriesDataProvider($this->connection, new TimeoutRunner());
     }
 
     public function test_it_provides_countries_from_enabled_channels_with_enabled_countries(): void
@@ -35,8 +38,8 @@ final class CountriesDataProviderTest extends TestCase
         $this->connection->expects(self::once())
             ->method('fetchAllAssociative')
             ->with(self::logicalAnd(
-                self::stringContains('co.enabled = 1'),
-                self::stringContains('c.enabled = 1'),
+                self::stringContains('co.enabled = true'),
+                self::stringContains('c.enabled = true'),
             ))
             ->willReturn([
                 ['channel_id' => 1, 'country_code' => 'US'],
@@ -46,7 +49,7 @@ final class CountriesDataProviderTest extends TestCase
             ]);
         $this->connection->expects(self::once())
             ->method('fetchFirstColumn')
-            ->with(self::stringContains('WHERE enabled = 1'))
+            ->with(self::stringContains('WHERE enabled = true'))
             ->willReturn(['US', 'CA', 'DE', 'FR', 'PL', 'GB']);
 
         $data = $this->provider->provide();

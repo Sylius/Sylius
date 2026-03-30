@@ -27,6 +27,7 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\PaymentMethodsDataProvi
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\ShippingMethodsDataProvider;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Plugins\InstalledPluginsDataProvider;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\DatabasePlatformDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\EnvironmentDataProvider;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\VersionDataProvider;
 use Sylius\Bundle\CoreBundle\Telemetry\Sender\TelemetrySender;
@@ -45,6 +46,13 @@ use Symfony\Component\HttpClient\HttpClient;
 
 return static function (ContainerConfigurator $container): void {
     $services = $container->services();
+
+    $services
+        ->set('sylius.telemetry.query.timeout_runner', TimeoutRunner::class)
+        ->args([
+            '%sylius_core.telemetry.query_timeout%',
+        ])
+    ;
 
     $services
         ->set('sylius.telemetry.installation_id_generator', InstallationIdGenerator::class)
@@ -111,6 +119,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('sylius.telemetry.data_provider.locales', LocalesDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
+            service('sylius.telemetry.query.timeout_runner'),
             '%locale%',
         ])
         ->lazy(DataProviderInterface::class)
@@ -121,6 +130,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('sylius.telemetry.data_provider.currencies', CurrenciesDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
+            service('sylius.telemetry.query.timeout_runner'),
         ])
         ->lazy(DataProviderInterface::class)
         ->tag('sylius.telemetry.business_data_provider')
@@ -130,6 +140,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('sylius.telemetry.data_provider.payment_methods', PaymentMethodsDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
+            service('sylius.telemetry.query.timeout_runner'),
         ])
         ->lazy(DataProviderInterface::class)
         ->tag('sylius.telemetry.business_data_provider')
@@ -139,6 +150,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('sylius.telemetry.data_provider.shipping_methods', ShippingMethodsDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
+            service('sylius.telemetry.query.timeout_runner'),
         ])
         ->lazy(DataProviderInterface::class)
         ->tag('sylius.telemetry.business_data_provider')
@@ -148,6 +160,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('sylius.telemetry.data_provider.metrics_counts', MetricsCountsDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
+            service('sylius.telemetry.query.timeout_runner'),
         ])
         ->lazy(DataProviderInterface::class)
         ->tag('sylius.telemetry.business_data_provider')
@@ -157,6 +170,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('sylius.telemetry.data_provider.orders_business', OrdersBusinessDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
+            service('sylius.telemetry.query.timeout_runner'),
         ])
         ->lazy(DataProviderInterface::class)
         ->tag('sylius.telemetry.business_data_provider')
@@ -166,6 +180,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('sylius.telemetry.data_provider.countries', CountriesDataProvider::class)
         ->args([
             service('doctrine.dbal.default_connection'),
+            service('sylius.telemetry.query.timeout_runner'),
         ])
         ->lazy(DataProviderInterface::class)
         ->tag('sylius.telemetry.business_data_provider')
@@ -212,6 +227,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('sylius.telemetry.listener', TelemetryListener::class)
         ->args([
             service('sylius.telemetry.send_manager'),
+            service('sylius.telemetry.cache'),
             '%sylius.security.api_admin_route%',
         ])
         ->lazy()
