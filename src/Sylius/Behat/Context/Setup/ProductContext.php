@@ -116,13 +116,15 @@ final class ProductContext implements Context
 
     /**
      * @Given /^the store(?:| also) has a product "([^"]+)" in the ("[^"]+" taxon) at (\d+)(?:st|nd|rd|th) position$/
+     * @Given /^the store(?:| also) has a product "([^"]+)" in the ("[^"]+" taxon) at (\d+)(?:st|nd|rd|th) position priced at ("[^"]+")$/
      */
     public function theStoreHasAProductInTheTaxonAtPosition(
         string $productName,
         TaxonInterface $taxon,
         int $position,
+        int $price = 100,
     ): void {
-        $product = $this->createProduct($productName);
+        $product = $this->createProduct($productName, $price);
 
         $productTaxon = $this->createProductTaxon($taxon, $product, $position);
         $product->addProductTaxon($productTaxon);
