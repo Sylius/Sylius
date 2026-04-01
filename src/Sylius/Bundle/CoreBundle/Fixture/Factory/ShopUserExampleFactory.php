@@ -75,7 +75,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('email', fn (Options $options): string => $this->faker->email)
+            ->setDefault('email', fn (Options $options): string => $this->faker->unique()->email)
             ->setDefault('first_name', fn (Options $options): string => $this->faker->firstName)
             ->setDefault('last_name', fn (Options $options): string => $this->faker->lastName)
             ->setDefault('enabled', true)
