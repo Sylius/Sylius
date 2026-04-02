@@ -75,7 +75,7 @@ final class AddressMapperTest extends TestCase
         $targetAddressMock->expects(self::once())->method('getPostcode')->willReturn('00000');
         $targetAddressMock->expects(self::once())->method('getPhoneNumber')->willReturn('123456789');
         $targetAddressMock->expects(self::once())->method('getProvinceCode')->willReturn(null);
-        $targetAddressMock->expects(self::never())->method('getProvinceName')->willReturn('east');
+        $targetAddressMock->expects(self::once())->method('getProvinceName')->willReturn(null);
         $currentAddressMock->expects(self::once())->method('setFirstName')->with('John');
         $currentAddressMock->expects(self::once())->method('setLastName')->with('Doe');
         $currentAddressMock->expects(self::once())->method('setCompany')->with('CocaCola');
@@ -84,8 +84,39 @@ final class AddressMapperTest extends TestCase
         $currentAddressMock->expects(self::once())->method('setCity')->with('New York');
         $currentAddressMock->expects(self::once())->method('setPostcode')->with('00000');
         $currentAddressMock->expects(self::once())->method('setPhoneNumber')->with('123456789');
-        $currentAddressMock->expects(self::never())->method('setProvinceCode')->with('999');
-        $currentAddressMock->expects(self::never())->method('setProvinceName')->with('east');
+        $currentAddressMock->expects(self::never())->method('setProvinceCode');
+        $currentAddressMock->expects(self::never())->method('setProvinceName');
+
+        self::assertSame($currentAddressMock, $this->addressMapper->mapExisting($currentAddressMock, $targetAddressMock));
+    }
+
+    public function testUpdatesAnAddressWithProvinceNameOnly(): void
+    {
+        /** @var AddressInterface|MockObject $currentAddressMock */
+        $currentAddressMock = $this->createMock(AddressInterface::class);
+        /** @var AddressInterface|MockObject $targetAddressMock */
+        $targetAddressMock = $this->createMock(AddressInterface::class);
+
+        $targetAddressMock->expects(self::once())->method('getFirstName')->willReturn('John');
+        $targetAddressMock->expects(self::once())->method('getLastName')->willReturn('Doe');
+        $targetAddressMock->expects(self::once())->method('getCompany')->willReturn('CocaCola');
+        $targetAddressMock->expects(self::once())->method('getStreet')->willReturn('Green Avenue');
+        $targetAddressMock->expects(self::once())->method('getCountryCode')->willReturn('US');
+        $targetAddressMock->expects(self::once())->method('getCity')->willReturn('New York');
+        $targetAddressMock->expects(self::once())->method('getPostcode')->willReturn('00000');
+        $targetAddressMock->expects(self::once())->method('getPhoneNumber')->willReturn('123456789');
+        $targetAddressMock->expects(self::atLeastOnce())->method('getProvinceCode')->willReturn(null);
+        $targetAddressMock->expects(self::atLeastOnce())->method('getProvinceName')->willReturn('East');
+        $currentAddressMock->expects(self::once())->method('setFirstName')->with('John');
+        $currentAddressMock->expects(self::once())->method('setLastName')->with('Doe');
+        $currentAddressMock->expects(self::once())->method('setCompany')->with('CocaCola');
+        $currentAddressMock->expects(self::once())->method('setStreet')->with('Green Avenue');
+        $currentAddressMock->expects(self::once())->method('setCountryCode')->with('US');
+        $currentAddressMock->expects(self::once())->method('setCity')->with('New York');
+        $currentAddressMock->expects(self::once())->method('setPostcode')->with('00000');
+        $currentAddressMock->expects(self::once())->method('setPhoneNumber')->with('123456789');
+        $currentAddressMock->expects(self::once())->method('setProvinceCode')->with(null);
+        $currentAddressMock->expects(self::once())->method('setProvinceName')->with('East');
 
         self::assertSame($currentAddressMock, $this->addressMapper->mapExisting($currentAddressMock, $targetAddressMock));
     }
