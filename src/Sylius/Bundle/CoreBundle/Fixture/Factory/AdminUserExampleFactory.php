@@ -31,6 +31,16 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
 
     protected OptionsResolver $optionsResolver;
 
+    /** @var array<string, true> */
+    private array $usedEmails = [];
+
+    private int $emailCounter = 0;
+
+    /** @var array<string, true> */
+    private array $usedUsernames = [];
+
+    private int $usernameCounter = 0;
+
     /**
      * @param FactoryInterface<AdminUserInterface> $userFactory
      * @param FactoryInterface<ImageInterface> $avatarImageFactory
@@ -82,8 +92,8 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('email', fn (Options $options): string => $this->faker->email)
-            ->setDefault('username', fn (Options $options): string => $this->faker->firstName . ' ' . $this->faker->lastName)
+            ->setDefault('email', fn (Options $options): string => $this->generateUniqueEmail())
+            ->setDefault('username', fn (Options $options): string => $this->generateUniqueUsername())
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('password', 'password123')
@@ -94,6 +104,38 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
             ->setDefault('avatar', '')
             ->setAllowedTypes('avatar', 'string')
         ;
+    }
+
+    private function generateUniqueEmail(): string
+    {
+        $email = $this->faker->email;
+
+        if (!isset($this->usedEmails[$email])) {
+            $this->usedEmails[$email] = true;
+
+            return $email;
+        }
+
+        $email = preg_replace('/@/', ++$this->emailCounter . '@', $email, 1);
+        $this->usedEmails[$email] = true;
+
+        return $email;
+    }
+
+    private function generateUniqueUsername(): string
+    {
+        $username = $this->faker->firstName . ' ' . $this->faker->lastName;
+
+        if (!isset($this->usedUsernames[$username])) {
+            $this->usedUsernames[$username] = true;
+
+            return $username;
+        }
+
+        $username .= ++$this->usernameCounter;
+        $this->usedUsernames[$username] = true;
+
+        return $username;
     }
 
     /** @param array<string, mixed> $options */

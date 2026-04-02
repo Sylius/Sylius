@@ -32,6 +32,11 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
 
     protected OptionsResolver $optionsResolver;
 
+    /** @var array<string, true> */
+    private array $usedEmails = [];
+
+    private int $emailCounter = 0;
+
     /**
      * @param FactoryInterface<ShopUserInterface> $shopUserFactory
      * @param FactoryInterface<CustomerInterface> $customerFactory
@@ -75,7 +80,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('email', fn (Options $options): string => $this->faker->email)
+            ->setDefault('email', fn (Options $options): string => $this->generateUniqueEmail())
             ->setDefault('first_name', fn (Options $options): string => $this->faker->firstName)
             ->setDefault('last_name', fn (Options $options): string => $this->faker->lastName)
             ->setDefault('enabled', true)
@@ -103,5 +108,21 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
                 },
             )
         ;
+    }
+
+    private function generateUniqueEmail(): string
+    {
+        $email = $this->faker->email;
+
+        if (!isset($this->usedEmails[$email])) {
+            $this->usedEmails[$email] = true;
+
+            return $email;
+        }
+
+        $email = preg_replace('/@/', ++$this->emailCounter . '@', $email, 1);
+        $this->usedEmails[$email] = true;
+
+        return $email;
     }
 }
