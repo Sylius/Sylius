@@ -82,8 +82,8 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
     protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
-            ->setDefault('email', fn (Options $options): string => $this->faker->unique()->email)
-            ->setDefault('username', fn (Options $options): string => $this->faker->unique()->firstName . ' ' . $this->faker->unique()->lastName)
+            ->setDefault('email', fn (Options $options): string => $this->faker->email)
+            ->setDefault('username', fn (Options $options): string => $this->faker->firstName . ' ' . $this->faker->lastName)
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('password', 'password123')
