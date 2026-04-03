@@ -28,6 +28,16 @@ final class StringInflectorTest extends TestCase
         self::assertEquals('Test?_value!', StringInflector::nameToCode('Test? value!'));
     }
 
+    public function testShouldConvertNameToSlug(): void
+    {
+        self::assertEquals('test-value', StringInflector::nameToSlug('Test value'));
+    }
+
+    public function testShouldConvertNameWithSpecialCharactersToSlug(): void
+    {
+        self::assertEquals('test-value', StringInflector::nameToSlug('Test!%-value!'));
+    }
+
     public function testShouldConvertNameToLowercaseCode(): void
     {
         self::assertEquals('test_value', StringInflector::nameToLowercaseCode('Test value'));

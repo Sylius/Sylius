@@ -81,4 +81,12 @@ final class SlugGeneratorTest extends TestCase
             $this->slugGenerator->generate('Wsiąść do Pociągu: Europa'),
         );
     }
+
+    public function testGeneratesSlugUsingBehatTransliteratorWhenNoSluggerProvided(): void
+    {
+        $generator = new SlugGenerator(null);
+
+        $this->assertSame('board-games', $generator->generate('Board games'));
+        $this->assertSame('rock-n-roll', $generator->generate("Rock'n'roll"));
+    }
 }

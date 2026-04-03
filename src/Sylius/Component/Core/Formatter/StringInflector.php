@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Formatter;
 
+use Behat\Transliterator\Transliterator;
 use function Symfony\Component\String\u;
 
 final class StringInflector
@@ -32,6 +33,14 @@ final class StringInflector
         $value = str_replace([' ', '-', '\''], '_', $value);
 
         return preg_replace('/[^\w-]/', '', $value) ?? '';
+    }
+
+    /**
+     * @deprecated This method will be removed in 3.0 - use vendor/symfony/string/Slugger/SluggerInterface.php instead
+     */
+    public static function nameToSlug(string $value): string
+    {
+        return str_replace(['_'], '-', self::nameToLowercaseCode(Transliterator::transliterate($value)));
     }
 
     public static function nameToLowercaseCode(string $value): string

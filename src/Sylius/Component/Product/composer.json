@@ -29,6 +29,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "behat/transliterator": "^1.5",
         "sylius/attribute": "^2.0",
         "sylius/resource": "^1.12",
         "symfony/polyfill-iconv": "^1.31",

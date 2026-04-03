@@ -69,4 +69,14 @@ final class TaxonSlugGeneratorTest extends TestCase
 
         $this->assertSame('games/board-games', $result);
     }
+
+    public function testGeneratesSlugUsingBehatTransliteratorWhenNoSluggerProvided(): void
+    {
+        $generator = new TaxonSlugGenerator($this->baseSlugGenerator, null);
+
+        $this->baseSlugGenerator->expects($this->never())->method('generate');
+
+        $this->assertSame('board-games', $generator->generate('Board games', 'pl_PL'));
+        $this->assertSame('rock-n-roll', $generator->generate("Rock'n'roll", 'pl_PL'));
+    }
 }

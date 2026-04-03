@@ -109,4 +109,26 @@ final class TaxonSlugGeneratorTest extends TestCase
 
         $this->taxonSlugGenerator->generate($this->taxon, 'pl_PL');
     }
+
+    public function testShouldGenerateSlugForRootTaxonUsingBehatTransliteratorWhenNoSluggerProvided(): void
+    {
+        $generator = new TaxonSlugGenerator(null);
+
+        $this->taxon->method('getTranslation')->with('pl_PL')->willReturn($this->taxonTranslation);
+        $this->taxonTranslation->method('getName')->willReturn('Board games');
+        $this->taxon->method('getParent')->willReturn(null);
+
+        $this->assertSame('board-games', $generator->generate($this->taxon, 'pl_PL'));
+    }
+
+    public function testShouldGenerateSlugForRootTaxonReplacingApostrophesWithHyphensUsingBehatTransliteratorWhenNoSluggerProvided(): void
+    {
+        $generator = new TaxonSlugGenerator(null);
+
+        $this->taxon->method('getTranslation')->with('pl_PL')->willReturn($this->taxonTranslation);
+        $this->taxonTranslation->method('getName')->willReturn("Rock'n'roll");
+        $this->taxon->method('getParent')->willReturn(null);
+
+        $this->assertSame('rock-n-roll', $generator->generate($this->taxon, 'pl_PL'));
+    }
 }
