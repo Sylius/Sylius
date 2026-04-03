@@ -47,18 +47,25 @@ final class OrderByIdentifierSqlWalker extends SqlWalker
             $ast->orderByClause = new OrderByClause([]);
         }
 
+        $direction = 'ASC';
+        $existingItems = $ast->orderByClause->orderByItems;
+        if (!empty($existingItems)) {
+            $lastItem = end($existingItems);
+            $direction = $lastItem->type;
+        }
+
         if (!$metadata->isIdentifierComposite) {
-            $ast->orderByClause->orderByItems[] = $this->createOrderByItem($dqlAlias, $identifierFieldNames[0]);
+            $ast->orderByClause->orderByItems[] = $this->createOrderByItem($dqlAlias, $identifierFieldNames[0], $direction);
 
             return;
         }
 
         foreach ($identifierFieldNames as $fieldName) {
-            $ast->orderByClause->orderByItems[] = $this->createOrderByItem($dqlAlias, $fieldName);
+            $ast->orderByClause->orderByItems[] = $this->createOrderByItem($dqlAlias, $fieldName, $direction);
         }
     }
 
-    private function createOrderByItem(string $dqlAlias, string $fieldName): OrderByItem
+    private function createOrderByItem(string $dqlAlias, string $fieldName, string $direction = 'ASC'): OrderByItem
     {
         $expression = new PathExpression(
             PathExpression::TYPE_STATE_FIELD | PathExpression::TYPE_SINGLE_VALUED_ASSOCIATION,
@@ -68,7 +75,7 @@ final class OrderByIdentifierSqlWalker extends SqlWalker
         $expression->type = PathExpression::TYPE_STATE_FIELD;
 
         $orderByItem = new OrderByItem($expression);
-        $orderByItem->type = 'ASC';
+        $orderByItem->type = $direction;
 
         return $orderByItem;
     }

@@ -40,14 +40,14 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         );
 
         self::assertStringEndsWith(
-            'ORDER BY m0_.email DESC, m0_.id ASC',
+            'ORDER BY m0_.email DESC, m0_.id DESC',
             $this->generateSql(
                 'select u from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc',
             ),
         );
 
         self::assertStringEndsWith(
-            'ORDER BY m0_.email DESC, m0_.id ASC',
+            'ORDER BY m0_.email DESC, m0_.id DESC',
             $this->generateSql(
                 'select u.id, (CASE WHEN u.id = 1 THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\Model u order by u.email desc',
             ),
@@ -65,14 +65,14 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         );
 
         self::assertStringEndsWith(
-            'ORDER BY c0_.description DESC, c0_.email ASC, c0_.organization_name ASC',
+            'ORDER BY c0_.description DESC, c0_.email DESC, c0_.organization_name DESC',
             $this->generateSql(
                 'select u from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc',
             ),
         );
 
         self::assertStringEndsWith(
-            'ORDER BY c0_.description DESC, c0_.email ASC, c0_.organization_name ASC',
+            'ORDER BY c0_.description DESC, c0_.email DESC, c0_.organization_name DESC',
             $this->generateSql(
                 'select (CASE WHEN u.email = \'admin@example.com\' THEN \'yolo\' ELSE u.email END) AS HIDDEN yoloOrEmail from Sylius\Tests\Functional\Doctrine\Dump\CompositeKeysModel u order by u.description desc',
             ),
