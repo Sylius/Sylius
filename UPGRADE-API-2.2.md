@@ -66,5 +66,5 @@ To override a class, define the parameter in your configuration:
 
 ```yaml
 parameters:
-    sylius_api.command.account.reset_password.class: App\Command\CustomResetPassword
+    sylius_api.command.account.reset_password.class: App\Api\Command\CustomResetPassword
 ```
