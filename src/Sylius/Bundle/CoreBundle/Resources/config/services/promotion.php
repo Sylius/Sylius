@@ -199,7 +199,6 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.modifier.promotion.order_usage', OrderPromotionsUsageModifier::class)
-        ->args([service('sylius.manager.promotion')])
         ->public()
     ;
     $services->alias(OrderPromotionsUsageModifierInterface::class, 'sylius.modifier.promotion.order_usage')->public();
@@ -207,7 +206,11 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.modifier.promotion.order_usage.atomic', AtomicOrderPromotionsUsageModifier::class)
         ->decorate('sylius.modifier.promotion.order_usage')
-        ->args([service('doctrine.dbal.default_connection')])
+        ->args([
+            null,
+            service('.inner'),
+            service('doctrine.orm.entity_manager'),
+        ])
     ;
 
     $services
