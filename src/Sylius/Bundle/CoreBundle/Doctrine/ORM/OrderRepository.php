@@ -60,6 +60,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     public function createGridListQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'customer')
             ->andWhere('o.state != :state')
             ->setParameter('state', OrderInterface::STATE_CART)
         ;
