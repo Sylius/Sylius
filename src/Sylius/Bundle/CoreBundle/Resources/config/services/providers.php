@@ -138,12 +138,12 @@ return static function (ContainerConfigurator $container) {
         ->tag('sylius.statistics.orders_count_provider', ['type' => 'year'])
     ;
 
-    $services->set("sylius.provider.override_grid_provider", OverrideGridProvider::class)
-        ->decorate("sylius.grid.chain_provider")
+    $services->set('sylius.provider.override_grid_provider', OverrideGridProvider::class)
+        ->decorate('sylius.grid.chain_provider')
         ->args([
             '%sylius_core.grids_configuration%',
-            service("sylius.provider.override_grid_provider.inner"),
-            service("sylius.grid.array_grid_provider"),
+            service('sylius.provider.override_grid_provider.inner'),
+            service('sylius.grid.array_grid_provider'),
         ])
     ;
 };
