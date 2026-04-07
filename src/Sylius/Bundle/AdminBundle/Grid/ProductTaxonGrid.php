@@ -83,7 +83,7 @@ final class ProductTaxonGrid extends AbstractGrid implements ProductTaxonGridInt
             ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
-                    ->setPath('product'),
+                    ->setPath('product.enabled'),
             )
             ->addField(
                 TwigField::create('position', '@SyliusAdmin/product_taxon/grid/field/position.html.twig')
