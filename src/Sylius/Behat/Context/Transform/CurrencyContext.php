@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -26,13 +27,11 @@ final class CurrencyContext implements Context
     ) {
     }
 
-    /**
-     * @Transform :currency
-     * @Transform :sourceCurrency
-     * @Transform :targetCurrency
-     * @Transform /^currency "([^"]+)"$/
-     * @Transform /^"([^"]+)" currency$/
-     */
+    #[Transform(':currency')]
+    #[Transform(':sourceCurrency')]
+    #[Transform(':targetCurrency')]
+    #[Transform('/^currency "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" currency$/')]
     public function getCurrencyByName($currencyName)
     {
         $currency = $this->currencyRepository->findOneBy(['code' => $this->getCurrencyCodeByName($currencyName)]);
@@ -44,11 +43,9 @@ final class CurrencyContext implements Context
         return $currency;
     }
 
-    /**
-     * @Transform :currencyCode
-     * @Transform :secondCurrencyCode
-     * @Transform :thirdCurrencyCode
-     */
+    #[Transform(':currencyCode')]
+    #[Transform(':secondCurrencyCode')]
+    #[Transform(':thirdCurrencyCode')]
     public function getCurrencyCodeByName($currencyName)
     {
         // If it's already a currency code - just return it.

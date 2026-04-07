@@ -50,6 +50,7 @@ final class TranslatableDenormalizer implements DenormalizerInterface, Denormali
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return
+            is_array($data) &&
             Request::METHOD_POST === ($context[ContextKeys::HTTP_REQUEST_METHOD_TYPE] ?? null) &&
             !isset($context[self::getAlreadyCalledKey($type)]) &&
             is_a($type, TranslatableInterface::class, true)

@@ -1,5 +1,5 @@
 {% if data.fullname is defined %}
-    {% set categories = data.fullname|replace({ (data.name): '' }) %}
+    {% set categories = data.name ? data.fullname|replace({ (data.name): '' }) : data.fullname %}
 
     {% if categories %}
         <span class="text-muted cursor-default" data-bs-toggle="tooltip" data-bs-title="{{ categories[:-2] }}">.. /</span>

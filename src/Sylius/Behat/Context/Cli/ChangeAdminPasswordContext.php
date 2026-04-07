@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Cli;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -47,9 +49,7 @@ final class ChangeAdminPasswordContext implements Context
         $this->application = new Application($kernel);
     }
 
-    /**
-     * @When I want to change password
-     */
+    #[When('I want to change password')]
     public function iWantToChangePassword(): void
     {
         $command = $this->application->find(self::ADMIN_USER_CHANGE_PASSWORD);
@@ -57,42 +57,32 @@ final class ChangeAdminPasswordContext implements Context
         $this->commandTester = new CommandTester($command);
     }
 
-    /**
-     * @When I specify email as :email
-     */
+    #[When('I specify email as :email')]
     public function iSpecifyEmailAs(string $email = ''): void
     {
         $this->input['email'] = $email;
     }
 
-    /**
-     * @When I specify my new password as :password
-     */
+    #[When('I specify my new password as :password')]
     public function iSpecifyMyNewPassword(string $password = ''): void
     {
         $this->input['password'] = $this->replaceWithSecurePassword($password);
     }
 
-    /**
-     * @When I run command
-     */
+    #[When('I run command')]
     public function iRunCommand(): void
     {
         $this->commandTester->setInputs($this->input);
         $this->commandTester->execute(['command' => self::ADMIN_USER_CHANGE_PASSWORD]);
     }
 
-    /**
-     * @Then I should be informed that password has been changed successfully
-     */
+    #[Then('I should be informed that password has been changed successfully')]
     public function iShouldBeInformedThatPasswordHasBeenChangedSuccessfully(): void
     {
         Assert::contains($this->commandTester->getDisplay(), 'Admin user password has been changed successfully.');
     }
 
-    /**
-     * @Then I should be able to log in as :email authenticated by :password password
-     */
+    #[Then('I should be able to log in as :email authenticated by :password password')]
     public function iShouldBeAbleToLoginWithEmailAndPassword(string $email = '', string $password = ''): void
     {
         /** @var AdminUserInterface|null $adminUser */

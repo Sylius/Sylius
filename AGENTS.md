@@ -1,18 +1,51 @@
 # AI Contribution Guidelines
 
-Welcome, 🤖 AI assistant! Please follow these guidelines when contributing to this Sylius:
+Guidelines for AI assistants contributing to Sylius.
+
+## Reference Files
+
+When working on specific areas, check these files for patterns:
+
+### Entities & Models
+- Entity pattern: `src/Sylius/Component/Core/Model/Product.php`
+- Interface pattern: `src/Sylius/Component/Core/Model/ProductInterface.php`
+- Doctrine mapping: `src/Sylius/Bundle/CoreBundle/Resources/config/doctrine/model/`
+
+### API Platform 4.x
+- Resource definitions: `src/Sylius/Bundle/ApiBundle/Resources/config/api_platform/resources/`
+- Properties/serialization: `src/Sylius/Bundle/ApiBundle/Resources/config/api_platform/properties/`
+- Admin resources: `resources/admin/Product.xml`
+- Shop resources: `resources/shop/Product.xml`
+
+### Services & Configuration
+- Service definitions: `src/Sylius/Bundle/CoreBundle/Resources/config/services.xml`
+- Bundle config: `src/Sylius/Bundle/*/Resources/config/`
+
+### Templates & Hooks
+- Admin templates: `src/Sylius/Bundle/AdminBundle/templates/`
+- Shop templates: `src/Sylius/Bundle/ShopBundle/templates/`
+- Twig hooks: check existing hooks in templates for naming patterns
+
+### Tests
+- PHPUnit functional: `tests/Functional/`
+- PHPUnit API: `tests/Api/`
+- Behat contexts: `src/Sylius/Behat/Context/`
+
+### Migrations
+- Location: `src/Sylius/Bundle/CoreBundle/Migrations/`
+- **ALWAYS create TWO migrations**: one for MySQL, one for PostgreSQL
+- MySQL: extend `Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration`
+- PostgreSQL: extend `Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractPostgreSQLMigration`
+- When reviewing PRs that touch migrations, verify both versions exist
 
 ## General Guidelines
 
 ### Project Structure & Design
 
-- This is Sylius: e-commerce framework
-- Sylius is built on top of **Symfony**
-- Sylius must be easily extendable in the end application
-- Sylius contains Bundles and Components that can be used independently
-- Sylius is designed to be modular and flexible
-- Sylius is designed to be fast and efficient
+- Sylius is an e-commerce framework built on **Symfony**
+- Bundles and Components can be used independently
 - Follow the Sylius Backward Compatibility (BC) policy
+- When changing interfaces, always provide BC layer
 
 ### Compatibility & Security
 
@@ -80,9 +113,28 @@ Welcome, 🤖 AI assistant! Please follow these guidelines when contributing to 
 
 ## PHPUnit
 
+- Place unit tests in `tests/Unit/`
+- Place functional tests in `tests/Functional/`
+- Place API tests in `tests/Api/`
+- Test class names must end with `Test` suffix
+- Use `#[Covers]` attribute for unit tests
+- For API tests, extend `ApiTestCase` and use `assertResponse*` methods
+- Run specific test: `vendor/bin/phpunit --filter TestClassName`
+
 ## Behat
 
+- Place feature files in `features/` directory
+- Use existing contexts from `src/Sylius/Behat/Context/`
+- Follow Given-When-Then pattern strictly
+- Use `@ui` tag for UI tests, `@api` for API tests
+- Page objects are in `src/Sylius/Behat/Page/`
+
 ## JavaScript
+
+- Use TypeScript where possible
+- Use Stimulus controllers for interactive components
+- Place controllers in `assets/admin/controllers/` or `assets/shop/controllers/`
+- Follow existing naming conventions for controller files
 
 ## CSS
 
@@ -94,3 +146,12 @@ Welcome, 🤖 AI assistant! Please follow these guidelines when contributing to 
 - Avoid `!important` unless absolutely necessary
 - Prefer `rem` over `px` for spacing, font size, etc.
 - Use `mixins/` for reusable logic (e.g., `@include icon-size(24px)`)
+
+## Common Mistakes to Avoid
+
+- **BC breaks**: Never change method signatures in interfaces without deprecation layer
+- **Missing Doctrine mapping**: New entity properties need XML mapping in `Resources/config/doctrine/`
+- **Hardcoded strings**: Always use translation keys in templates
+- **Missing serialization groups**: API properties need proper groups in `properties/*.xml`
+- **Wrong namespace**: Components have no Symfony dependency, Bundles can
+- **Forgetting tests**: API changes need PHPUnit tests in `tests/Api/`

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
@@ -34,9 +35,7 @@ final readonly class PaymentRequestContext implements Context
     ) {
     }
 
-    /**
-     * @Given the payment request action :action has been executed for order :order with the payment method :paymentMethod
-     */
+    #[Given('the payment request action :action has been executed for order :order with the payment method :paymentMethod')]
     public function thePaymentRequestActionHasBeenExecutedForOrderWithThePaymentMethod(
         string $action,
         OrderInterface $order,
@@ -52,9 +51,7 @@ final readonly class PaymentRequestContext implements Context
         $this->commandBus->dispatch($addPaymentRequest);
     }
 
-    /**
-     * @Given there is (also) a :state :action payment request for order :order using the :paymentMethod payment method
-     */
+    #[Given('there is (also) a :state :action payment request for order :order using the :paymentMethod payment method')]
     public function thePaymentRequestActionHasBeenExecutedForOrderWithThePaymentMethodAndState(
         string $state,
         string $action,

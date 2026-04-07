@@ -13,11 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
-use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
+use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractPostgreSQLMigration;
 
-final class Version20251126120001 extends AbstractMigration
+final class Version20251126120001 extends AbstractPostgreSQLMigration
 {
     private const INDEX_NAME = 'IDX_TELEMETRY_ORDER_STATS';
 
@@ -30,10 +29,6 @@ final class Version20251126120001 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        if (!$this->isPostgreSql()) {
-            return;
-        }
-
         if (!$schema->hasTable(self::TABLE_NAME)) {
             return;
         }
@@ -49,10 +44,6 @@ final class Version20251126120001 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        if (!$this->isPostgreSql()) {
-            return;
-        }
-
         if (!$schema->hasTable(self::TABLE_NAME)) {
             return;
         }
@@ -64,11 +55,6 @@ final class Version20251126120001 extends AbstractMigration
         }
 
         $this->addSql('DROP INDEX ' . self::INDEX_NAME);
-    }
-
-    private function isPostgreSql(): bool
-    {
-        return $this->connection->getDatabasePlatform() instanceof PostgreSQLPlatform;
     }
 
     /** @return list<string> */

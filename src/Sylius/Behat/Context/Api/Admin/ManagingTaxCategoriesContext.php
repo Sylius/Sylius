@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\Given;
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -31,44 +34,34 @@ final class ManagingTaxCategoriesContext implements Context
     ) {
     }
 
-    /**
-     * @Given I am browsing tax categories
-     * @When I browse tax categories
-     */
+    #[Given('I am browsing tax categories')]
+    #[When('I browse tax categories')]
     public function iWantToBrowseTaxCategories(): void
     {
         $this->client->index(Resources::TAX_CATEGORIES);
     }
 
-    /**
-     * @When I want to create a new tax category
-     */
+    #[When('I want to create a new tax category')]
     public function iWantToCreateNewTaxCategory(): void
     {
         $this->client->buildCreateRequest(Resources::TAX_CATEGORIES);
     }
 
-    /**
-     * @When I want to modify a tax category :taxCategory
-     * @When /^I want to modify (this tax category)$/
-     */
+    #[When('I want to modify a tax category :taxCategory')]
+    #[When('/^I want to modify (this tax category)$/')]
     public function iWantToModifyTaxCategory(TaxCategoryInterface $taxCategory): void
     {
         $this->client->buildUpdateRequest(Resources::TAX_CATEGORIES, $taxCategory->getCode());
     }
 
-    /**
-     * @When I delete tax category :taxCategory
-     */
+    #[When('I delete tax category :taxCategory')]
     public function iDeleteTaxCategory(TaxCategoryInterface $taxCategory): void
     {
         $this->client->delete(Resources::TAX_CATEGORIES, $taxCategory->getCode());
     }
 
-    /**
-     * @When I specify its code as :code
-     * @When I do not specify its code
-     */
+    #[When('I specify its code as :code')]
+    #[When('I do not specify its code')]
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
         if ($code !== null) {
@@ -76,11 +69,9 @@ final class ManagingTaxCategoriesContext implements Context
         }
     }
 
-    /**
-     * @When I name it :name
-     * @When I rename it to :name
-     * @When I do not name it
-     */
+    #[When('I name it :name')]
+    #[When('I rename it to :name')]
+    #[When('I do not name it')]
     public function iNameIt(?string $name = null): void
     {
         if ($name !== null) {
@@ -88,42 +79,32 @@ final class ManagingTaxCategoriesContext implements Context
         }
     }
 
-    /**
-     * @When I remove its name
-     */
+    #[When('I remove its name')]
     public function iRemoveItsName(): void
     {
         $this->client->addRequestData('name', '');
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I describe it as :description
-     */
+    #[When('I describe it as :description')]
     public function iDescribeItAs(string $description): void
     {
         $this->client->addRequestData('description', $description);
     }
 
-    /**
-     * @When /^I search by "([^"]+)" (code|name)$/
-     */
+    #[When('/^I search by "([^"]+)" (code|name)$/')]
     public function iSearchByName(string $phrase, string $field): void
     {
         $this->client->addFilter($field, $phrase);
         $this->client->filter();
     }
 
-    /**
-     * @Then /^(this tax category) should no longer exist in the registry$/
-     */
+    #[Then('/^(this tax category) should no longer exist in the registry$/')]
     public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory): void
     {
         $code = $taxCategory->getCode();
@@ -133,11 +114,9 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the tax category :taxCategoryName in the list
-     * @Then I should see the tax category :taxCategoryName
-     * @Then the tax category :taxCategoryName should appear in the registry
-     */
+    #[Then('I should see the tax category :taxCategoryName in the list')]
+    #[Then('I should see the tax category :taxCategoryName')]
+    #[Then('the tax category :taxCategoryName should appear in the registry')]
     public function theTaxCategoryShouldAppearInTheRegistry(string $taxCategoryName): void
     {
         Assert::true(
@@ -146,9 +125,7 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see the tax category :taxCategoryName
-     */
+    #[Then('I should not see the tax category :taxCategoryName')]
     public function iShouldNotSeeTheTaxCategory(string $taxCategoryName): void
     {
         Assert::false(
@@ -157,9 +134,7 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->addRequestData('code', 'NEW_CODE');
@@ -170,10 +145,8 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this tax category) name should be "([^"]+)"$/
-     * @Then /^(this tax category) should still be named "([^"]+)"$/
-     */
+    #[Then('/^(this tax category) name should be "([^"]+)"$/')]
+    #[Then('/^(this tax category) should still be named "([^"]+)"$/')]
     public function thisTaxCategoryNameShouldBe(TaxCategoryInterface $taxCategory, string $taxCategoryName): void
     {
         Assert::true(
@@ -182,9 +155,7 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that tax category with this code already exists
-     */
+    #[Then('I should be notified that tax category with this code already exists')]
     public function iShouldBeNotifiedThatTaxCategoryWithThisCodeAlreadyExists(): void
     {
         Assert::same(
@@ -193,9 +164,7 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one tax category with :element :value
-     */
+    #[Then('there should still be only one tax category with :element :value')]
     public function thereShouldStillBeOnlyOneTaxCategoryWith(string $element, string $value): void
     {
         Assert::same(
@@ -204,9 +173,7 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that :element is required
-     */
+    #[Then('I should be notified that :element is required')]
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         Assert::contains(
@@ -215,18 +182,14 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then tax category with :element :name should not be added
-     */
+    #[Then('tax category with :element :name should not be added')]
     public function taxCategoryWithNamedElementShouldNotBeAdded(string $element, string $name): void
     {
         Assert::false($this->isItemOnIndex($element, $name), sprintf('Tax category with %s %s does not exist', $element, $name));
     }
 
-    /**
-     * @Then I should see :count tax categories in the list
-     * @Then I should see a single tax category in the list
-     */
+    #[Then('I should see :count tax categories in the list')]
+    #[Then('I should see a single tax category in the list')]
     public function iShouldSeeCountTaxCategoriesInTheList(int $count = 1): void
     {
         Assert::same(
@@ -235,9 +198,7 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -246,9 +207,7 @@ final class ManagingTaxCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(

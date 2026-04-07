@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Sylius\Behat\Context\Setup\Checkout\AddressContext;
@@ -38,6 +39,8 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 final readonly class CartContext implements Context
 {
@@ -54,22 +57,19 @@ final readonly class CartContext implements Context
         private ShippingContext $shippingContext,
         private PaymentContext $paymentContext,
         private string $guestCartTokenFilePath,
+        private ?TokenStorageInterface $tokenStorage = null,
     ) {
     }
 
-    /**
-     * @Given the customer has created empty cart
-     */
+    #[Given('the customer has created empty cart')]
     public function theCustomerHasTheCart(): void
     {
         $this->pickupCart();
     }
 
-    /**
-     * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
-     */
     #[Given('/^I added (\d+) (products "[^"]+") to the (cart)$/')]
     #[Given('/^I added (\d+) of (them) to (?:the|my) (cart)$/')]
+    #[Given('/^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/')]
     public function iAddedGivenQuantityOfProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue, $quantity);
@@ -84,11 +84,10 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given /^I added (products "([^"]+)" and "([^"]+)") to the (cart)$/
-     * @Given /^I added (products "([^"]+)", "([^"]+)" and "([^"]+)") to the (cart)$/
-     *
      * @param ProductInterface[] $products
      */
+    #[Given('/^I added (products "([^"]+)" and "([^"]+)") to the (cart)$/')]
+    #[Given('/^I added (products "([^"]+)", "([^"]+)" and "([^"]+)") to the (cart)$/')]
     public function iAddedProductsAndToTheCart(array $products, ?string $tokenValue): void
     {
         foreach ($products as $product) {
@@ -96,17 +95,15 @@ final readonly class CartContext implements Context
         }
     }
 
-    /**
-     * @Given /^I have (product "[^"]+") in the (cart)$/
-     * @Given /^I have (product "[^"]+") added to the (cart)$/
-     * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
-     * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
-     */
     #[Given('/^I added (product "[^"]+") to the (cart)$/')]
     #[Given('/^I added (this product) to the (cart)$/')]
     #[Given('/^I added (this product) to the (cart) again$/')]
     #[Given('/^the visitor added (product "[^"]+") to the (cart)$/')]
     #[Given('/^the customer added (product "[^"]+") to the (cart)$/')]
+    #[Given('/^I have (product "[^"]+") in the (cart)$/')]
+    #[Given('/^I have (product "[^"]+") added to the (cart)$/')]
+    #[Given('/^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/')]
+    #[When('/^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/')]
     public function iAddedProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue);
@@ -130,22 +127,22 @@ final readonly class CartContext implements Context
         ));
     }
 
-    /**
-     * @Given /^I have ("[^"]+" variant of product "[^"]+") in the (cart)$/
-     * @Given /^I have ("[^"]+" variant of this product) in the (cart)$/
-     */
     #[Given('/^I added ("[^"]+" variant of product "[^"]+") to the (cart)$/')]
+    #[Given('/^I have ("[^"]+" variant of product "[^"]+") in the (cart)$/')]
+    #[Given('/^I have ("[^"]+" variant of this product) in the (cart)$/')]
     public function iHaveVariantOfProductInTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
         if ($tokenValue === null || !$this->doesCartWithTokenExist($tokenValue)) {
             $tokenValue = $this->pickupCart();
         }
 
-        $this->commandBus->dispatch(new AddItemToCart(
-            orderTokenValue: $tokenValue,
-            productVariantCode: $productVariant->getCode(),
-            quantity: 1,
-        ));
+        $this->runWithSecurityToken(function () use ($tokenValue, $productVariant): void {
+            $this->commandBus->dispatch(new AddItemToCart(
+                orderTokenValue: $tokenValue,
+                productVariantCode: $productVariant->getCode(),
+                quantity: 1,
+            ));
+        });
 
         $this->sharedStorage->set('product', $productVariant->getProduct());
         $this->sharedStorage->set('variant', $productVariant);
@@ -162,17 +159,19 @@ final readonly class CartContext implements Context
             $tokenValue = $this->pickupCart($tokenValue);
         }
 
-        $this->commandBus->dispatch(new AddItemToCart(
-            orderTokenValue: $tokenValue,
-            productVariantCode: $this
-                ->getProductVariantWithProductOptionAndProductOptionValue(
-                    $product,
-                    $productOption,
-                    $productOptionValue,
-                )
-                ->getCode(),
-            quantity: 1,
-        ));
+        $this->runWithSecurityToken(function () use ($tokenValue, $product, $productOption, $productOptionValue): void {
+            $this->commandBus->dispatch(new AddItemToCart(
+                orderTokenValue: $tokenValue,
+                productVariantCode: $this
+                    ->getProductVariantWithProductOptionAndProductOptionValue(
+                        $product,
+                        $productOption,
+                        $productOptionValue,
+                    )
+                    ->getCode(),
+                quantity: 1,
+            ));
+        });
     }
 
     #[Given('/^I removed (product "[^"]+") from the (cart)$/')]
@@ -205,9 +204,7 @@ final readonly class CartContext implements Context
         ));
     }
 
-    /**
-     * @Given /^this (cart) has promotion applied with coupon "([^"]+)"$/
-     */
+    #[Given('/^this (cart) has promotion applied with coupon "([^"]+)"$/')]
     public function thisCartHasCouponAppliedWithCode(?string $tokenValue, string $couponCode): void
     {
         if ($tokenValue === null) {
@@ -289,13 +286,38 @@ final readonly class CartContext implements Context
             $tokenValue = $this->pickupCart($tokenValue);
         }
 
-        $this->commandBus->dispatch(new AddItemToCart(
-            orderTokenValue: $tokenValue,
-            productVariantCode: $this->productVariantResolver->getVariant($product)->getCode(),
-            quantity: $quantity,
-        ));
+        $this->runWithSecurityToken(function () use ($tokenValue, $product, $quantity): void {
+            $this->commandBus->dispatch(new AddItemToCart(
+                orderTokenValue: $tokenValue,
+                productVariantCode: $this->productVariantResolver->getVariant($product)->getCode(),
+                quantity: $quantity,
+            ));
+        });
 
         $this->sharedStorage->set('product', $product);
+    }
+
+    private function runWithSecurityToken(callable $callback): void
+    {
+        $previousToken = $this->tokenStorage?->getToken();
+
+        if (
+            null !== $this->tokenStorage &&
+            $this->sharedStorage->has('user') &&
+            $this->sharedStorage->get('user') instanceof ShopUserInterface
+        ) {
+            /** @var ShopUserInterface $user */
+            $user = $this->sharedStorage->get('user');
+            $this->tokenStorage->setToken(
+                new UsernamePasswordToken($user, 'api_shop', $user->getRoles()),
+            );
+        }
+
+        try {
+            $callback();
+        } finally {
+            $this->tokenStorage?->setToken($previousToken);
+        }
     }
 
     private function doesCartWithTokenExist(string $tokenValue): bool

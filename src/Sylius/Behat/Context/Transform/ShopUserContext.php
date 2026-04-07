@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
+use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -24,9 +25,7 @@ final class ShopUserContext implements Context
     {
     }
 
-    /**
-     * @Transform :shopUser
-     */
+    #[Transform(':shopUser')]
     public function getShopUserByEmail(string $email): ShopUserInterface
     {
         $shopUser = $this->shopUserRepository->findOneByEmail($email);

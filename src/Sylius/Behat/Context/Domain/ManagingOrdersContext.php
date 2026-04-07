@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
+use Behat\Step\When;
+use Behat\Step\Then;
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -39,9 +42,7 @@ final class ManagingOrdersContext implements Context
     ) {
     }
 
-    /**
-     * @When I delete the order :order
-     */
+    #[When('I delete the order :order')]
     public function iDeleteTheOrder(OrderInterface $order)
     {
         $adjustmentsId = [];
@@ -59,17 +60,13 @@ final class ManagingOrdersContext implements Context
         $this->orderRepository->remove($order);
     }
 
-    /**
-     * @When I view the summary of the order :order
-     */
+    #[When('I view the summary of the order :order')]
     public function iViewTheSummaryOfTheOrder(OrderInterface $order): void
     {
         $this->sharedStorage->set('order', $order);
     }
 
-    /**
-     * @Then this order should not exist in the registry
-     */
+    #[Then('this order should not exist in the registry')]
     public function orderShouldNotExistInTheRegistry()
     {
         $orderId = $this->sharedStorage->get('order_id');
@@ -78,9 +75,7 @@ final class ManagingOrdersContext implements Context
         Assert::null($order);
     }
 
-    /**
-     * @Then the order item with product :product should not exist
-     */
+    #[Then('the order item with product :product should not exist')]
     public function orderItemShouldNotExistInTheRegistry(ProductInterface $product)
     {
         $orderItems = $this->orderItemRepository->findBy(['variant' => $this->variantResolver->getVariant($product)]);
@@ -88,9 +83,7 @@ final class ManagingOrdersContext implements Context
         Assert::same($orderItems, []);
     }
 
-    /**
-     * @Then billing and shipping addresses of this order should not exist
-     */
+    #[Then('billing and shipping addresses of this order should not exist')]
     public function addressesShouldNotExistInTheRegistry()
     {
         $addresses = $this->sharedStorage->get('deleted_addresses');
@@ -100,9 +93,7 @@ final class ManagingOrdersContext implements Context
         Assert::same($addresses, []);
     }
 
-    /**
-     * @Then adjustments of this order should not exist
-     */
+    #[Then('adjustments of this order should not exist')]
     public function adjustmentShouldNotExistInTheRegistry()
     {
         $adjustments = $this->sharedStorage->get('deleted_adjustments');
@@ -112,9 +103,7 @@ final class ManagingOrdersContext implements Context
         Assert::same($adjustments, []);
     }
 
-    /**
-     * @Given /^(this order) has not been paid for (\d+) (day|days|hour|hours)$/
-     */
+    #[Given('/^(this order) has not been paid for (\d+) (day|days|hour|hours)$/')]
     public function thisOrderHasNotBeenPaidForDays(OrderInterface $order, $amount, $time)
     {
         $order->setCheckoutCompletedAt(new \DateTime('-' . $amount . ' ' . $time));
@@ -123,9 +112,7 @@ final class ManagingOrdersContext implements Context
         $this->unpaidOrdersStateUpdater->cancel();
     }
 
-    /**
-     * @Given /^the (order "[^"]+") has not been paid for (\d+) (day|days)$/
-     */
+    #[Given('/^the (order "[^"]+") has not been paid for (\d+) (day|days)$/')]
     public function orderWithNumberHasNotBeenPaidForDays(OrderInterface $order, int $amount, string $days): void
     {
         $order->setCheckoutCompletedAt(new \DateTime(sprintf('-%d %s', $amount, $days)));
@@ -133,33 +120,25 @@ final class ManagingOrdersContext implements Context
         $this->orderManager->flush();
     }
 
-    /**
-     * @Then /^(this order) should be automatically cancelled$/
-     */
+    #[Then('/^(this order) should be automatically cancelled$/')]
     public function thisOrderShouldBeAutomaticallyCancelled(OrderInterface $order)
     {
         Assert::same($order->getState(), OrderInterface::STATE_CANCELLED);
     }
 
-    /**
-     * @Then /^(this order) should not be cancelled$/
-     */
+    #[Then('/^(this order) should not be cancelled$/')]
     public function thisOrderShouldNotBeCancelled(OrderInterface $order)
     {
         Assert::notSame($order->getState(), OrderInterface::STATE_CANCELLED);
     }
 
-    /**
-     * @Then /^(the order)'s items total should be ("[^"]+")$/
-     */
+    #[Then('/^(the order)\'s items total should be ("[^"]+")$/')]
     public function theOrdersItemsTotalShouldBe(OrderInterface $order, int $itemsTotal): void
     {
         Assert::same($order->getItemsTotal(), $itemsTotal);
     }
 
-    /**
-     * @Then /^there should be a shipping charge ("[^"]+") for "([^"]+)" method$/
-     */
+    #[Then('/^there should be a shipping charge ("[^"]+") for "([^"]+)" method$/')]
     public function thereShouldBeAShippingChargeForMethod(int $shippingCharge, string $shippingMethodName): void
     {
         /** @var OrderInterface $order */
@@ -173,9 +152,7 @@ final class ManagingOrdersContext implements Context
         throw new \DomainException('The given order has no shipping adjustment with proper amount and method');
     }
 
-    /**
-     * @Then /^there should be a shipping tax ("[^"]+") for "([^"]+)" method$/
-     */
+    #[Then('/^there should be a shipping tax ("[^"]+") for "([^"]+)" method$/')]
     public function thereShouldBeAShippingTaxForMethod(int $shippingTax, string $shippingMethodName): void
     {
         /** @var OrderInterface $order */
@@ -189,25 +166,19 @@ final class ManagingOrdersContext implements Context
         throw new \DomainException('The given order has no shipping adjustment with proper amount and method');
     }
 
-    /**
-     * @Then /^(the order)'s shipping total should be ("[^"]+")$/
-     */
+    #[Then('/^(the order)\'s shipping total should be ("[^"]+")$/')]
     public function theOrdersShippingTotalShouldBe(OrderInterface $order, int $shippingTotal): void
     {
         Assert::same($order->getShippingTotal(), $shippingTotal);
     }
 
-    /**
-     * @Then /^(the order)'s tax total should be ("[^"]+")$/
-     */
+    #[Then('/^(the order)\'s tax total should be ("[^"]+")$/')]
     public function theOrdersTaxTotalShouldBe(OrderInterface $order, int $taxTotal): void
     {
         Assert::same($order->getTaxTotal(), $taxTotal);
     }
 
-    /**
-     * @Then /^(the order)'s total should be ("[^"]+")$/
-     */
+    #[Then('/^(the order)\'s total should be ("[^"]+")$/')]
     public function theOrdersTotalShouldBe(OrderInterface $order, int $total): void
     {
         Assert::same($order->getTotal(), $total);

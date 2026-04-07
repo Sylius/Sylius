@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -33,10 +34,8 @@ final class ProductOptionContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has (also) a product option :name
-     * @Given the store has a product option :name with a code :code
-     */
+    #[Given('the store has (also) a product option :name')]
+    #[Given('the store has a product option :name with a code :code')]
     public function theStoreHasAProductOptionWithACode(string $name, ?string $code = null): void
     {
         $productOption = $this->createProductOption($name, $code);
@@ -44,17 +43,13 @@ final class ProductOptionContext implements Context
         $this->sharedStorage->set('product_option', $productOption);
     }
 
-    /**
-     * @Given /^the store has(?:| also) a product option "([^"]+)" at position ([^"]+)$/
-     */
+    #[Given('/^the store has(?:| also) a product option "([^"]+)" at position ([^"]+)$/')]
     public function theStoreHasAProductOptionAtPosition($name, $position)
     {
         $this->createProductOption($name, null, $position);
     }
 
-    /**
-     * @Given /^(this product option) has(?:| also) the "([^"]+)" option value with code "([^"]+)"$/
-     */
+    #[Given('/^(this product option) has(?:| also) the "([^"]+)" option value with code "([^"]+)"$/')]
     public function thisProductOptionHasTheOptionValueWithCode(
         ProductOptionInterface $productOption,
         $productOptionValueName,

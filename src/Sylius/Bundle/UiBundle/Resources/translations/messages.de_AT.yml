@@ -60,7 +60,7 @@ sylius:
         administration: 'Administration'
         administration_dashboard: 'Administrations‑Dashboard'
         administration_panel_login: 'Login Administrationsbereich'
-        administration_reset_password: 'Administrations‑Passwort zurücksetzen'
+        administration_reset_password: 'Administrations-Passwort zurücksetzen'
         all: 'Alle'
         all_rights_reserved: 'Alle Rechte vorbehalten'
         all_your_addresses: 'Alle Ihre Adressen'

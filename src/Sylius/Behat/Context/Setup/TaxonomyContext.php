@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -39,13 +40,11 @@ final class TaxonomyContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has :firstTaxonName taxonomy
-     * @Given the store classifies its products as :firstTaxonName
-     * @Given the store classifies its products as :firstTaxonName and :secondTaxonName
-     * @Given the store classifies its products as :firstTaxonName, :secondTaxonName and :thirdTaxonName
-     * @Given the store classifies its products as :firstTaxonName, :secondTaxonName, :thirdTaxonName and :fourthTaxonName
-     */
+    #[Given('the store has :firstTaxonName taxonomy')]
+    #[Given('the store classifies its products as :firstTaxonName')]
+    #[Given('the store classifies its products as :firstTaxonName and :secondTaxonName')]
+    #[Given('the store classifies its products as :firstTaxonName, :secondTaxonName and :thirdTaxonName')]
+    #[Given('the store classifies its products as :firstTaxonName, :secondTaxonName, :thirdTaxonName and :fourthTaxonName')]
     public function storeClassifiesItsProductsAs(...$taxonsNames)
     {
         foreach ($taxonsNames as $taxonName) {
@@ -53,9 +52,13 @@ final class TaxonomyContext implements Context
         }
     }
 
-    /**
-     * @Given /^the store has taxonomy named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
-     */
+    #[Given('the store classifies its products as :taxonName with :taxonCode code')]
+    public function storeClassifiesItsProductsAsWithCode(string $taxonName, string $taxonCode): void
+    {
+        $this->taxonRepository->add($this->createTaxonWithCode($taxonName, $taxonCode));
+    }
+
+    #[Given('/^the store has taxonomy named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/')]
     public function theStoreHasTaxonomyNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale)
     {
         $translationMap = [
@@ -66,9 +69,7 @@ final class TaxonomyContext implements Context
         $this->taxonRepository->add($this->createTaxonInManyLanguages($translationMap));
     }
 
-    /**
-     * @Given /^the ("[^"]+" taxon) has child taxon "([^"]+)" in many locales$/
-     */
+    #[Given('/^the ("[^"]+" taxon) has child taxon "([^"]+)" in many locales$/')]
     public function theTaxonHasChildrenTaxonsInManyLocales(TaxonInterface $taxon, string $childTaxonName): void
     {
         $translationMap = [
@@ -91,9 +92,7 @@ final class TaxonomyContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the ("[^"]+" taxon)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/
-     */
+    #[Given('/^the ("[^"]+" taxon)(?:| also) has an image "([^"]+)" with "([^"]+)" type$/')]
     public function theTaxonHasAnImageWithType(TaxonInterface $taxon, $imagePath, $imageType)
     {
         $filesPath = $this->getParameter('files_path');
@@ -110,12 +109,10 @@ final class TaxonomyContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the ("[^"]+" taxon) has child taxon "([^"]+)"$/
-     * @Given /^the ("[^"]+" taxon) has children taxon "([^"]+)" and "([^"]+)"$/
-     * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)" and "([^"]+)"$/
-     * @Given /^the ("[^"]+" taxon) has children taxons "([^"]+)", "([^"]+)" and "([^"]+)"$/
-     */
+    #[Given('/^the ("[^"]+" taxon) has child taxon "([^"]+)"$/')]
+    #[Given('/^the ("[^"]+" taxon) has children taxon "([^"]+)" and "([^"]+)"$/')]
+    #[Given('/^the ("[^"]+" taxon) has children taxons "([^"]+)" and "([^"]+)"$/')]
+    #[Given('/^the ("[^"]+" taxon) has children taxons "([^"]+)", "([^"]+)" and "([^"]+)"$/')]
     public function theTaxonHasChildrenTaxonAnd(TaxonInterface $taxon, string ...$taxonsNames): void
     {
         foreach ($taxonsNames as $taxonName) {
@@ -126,9 +123,7 @@ final class TaxonomyContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the ("[^"]+" taxon)(?:| also) is enabled/
-     */
+    #[Given('/^the ("[^"]+" taxon)(?:| also) is enabled/')]
     public function theTaxonIsEnabled(TaxonInterface $taxon): void
     {
         $taxon->setEnabled(true);
@@ -136,12 +131,18 @@ final class TaxonomyContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the ("[^"]+" taxon)(?:| also) is disabled$/
-     */
+    #[Given('/^the ("[^"]+" taxon)(?:| also) is disabled$/')]
     public function theTaxonIsDisabled(TaxonInterface $taxon): void
     {
         $taxon->setEnabled(false);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^the ("[^"]+" taxon) has an empty name in the ("[^"]+" locale)$/')]
+    public function theTaxonHasEmptyNameInLocale(TaxonInterface $taxon, string $localeCode): void
+    {
+        $taxon->getTranslation($localeCode)->setName('');
 
         $this->objectManager->flush();
     }
@@ -157,6 +158,17 @@ final class TaxonomyContext implements Context
         return $taxon;
     }
 
+    private function createTaxonWithCode(string $name, string $code): TaxonInterface
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->taxonFactory->createNew();
+        $taxon->setName($name);
+        $taxon->setCode($code);
+        $taxon->setSlug($this->taxonSlugGenerator->generate($taxon));
+
+        return $taxon;
+    }
+
     private function createChildTaxon(string $name, TaxonInterface $parent): TaxonInterface
     {
         $child = $this->createTaxon($name);
@@ -166,10 +178,7 @@ final class TaxonomyContext implements Context
         return $child;
     }
 
-    /**
-     * @return TaxonInterface
-     */
-    private function createTaxonInManyLanguages(array $names)
+    private function createTaxonInManyLanguages(array $names): TaxonInterface
     {
         /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->createNew();

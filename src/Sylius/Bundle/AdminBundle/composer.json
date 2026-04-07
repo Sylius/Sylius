@@ -39,11 +39,12 @@
         "sylius/ui-bundle": "^2.0",
         "sylius/twig-hooks": "^0.9",
         "symfony/framework-bundle": "^6.4.1 || ^7.4",
+        "symfony/http-client": "^6.4 || ^7.4",
         "symfony/stimulus-bundle": "^2.25",
         "symfony/ux-autocomplete": "^2.25",
         "symfony/ux-live-component": "^2.25",
         "symfony/webpack-encore-bundle": "^2.2",
-        "symfonycasts/dynamic-forms": "^0.1",
+        "symfonycasts/dynamic-forms": "^0.2",
         "twig/extra-bundle": "^3.16",
         "twig/twig": "^3.16"
     },

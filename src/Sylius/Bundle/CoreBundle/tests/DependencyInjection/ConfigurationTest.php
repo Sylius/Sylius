@@ -48,7 +48,7 @@ final class ConfigurationTest extends TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
-            ['order_by_identifier' => true],
+            ['order_by_identifier' => false],
             'order_by_identifier',
         );
     }
@@ -248,6 +248,7 @@ final class ConfigurationTest extends TestCase
                     'technical' => true,
                     'plugins' => true,
                     'url' => 'https://prism.sylius.com/telemetry',
+                    'query_timeout' => 60000,
                 ],
             ],
             'telemetry',
@@ -272,6 +273,7 @@ final class ConfigurationTest extends TestCase
                     'technical' => true,
                     'plugins' => true,
                     'url' => 'https://prism.sylius.com/telemetry',
+                    'query_timeout' => 60000,
                 ],
             ],
             'telemetry',

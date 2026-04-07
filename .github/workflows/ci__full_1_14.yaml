@@ -78,7 +78,7 @@ jobs:
         name: "Notify about build status"
         needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, frontend, packages]
         runs-on: ubuntu-latest
-        timeout-minutes: 15
+        timeout-minutes: 20
 
         steps:
             -   name: "Process data"

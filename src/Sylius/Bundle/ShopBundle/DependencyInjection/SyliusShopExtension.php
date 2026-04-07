@@ -21,7 +21,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -31,18 +31,18 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->configureOrderPay($config['order_pay'], $container);
 
-        $loader->load('services.xml');
-        $loader->load(sprintf('services/integrations/locale/%s.xml', $config['locale_switcher']));
+        $loader->load('services.php');
+        $loader->load(sprintf('services/integrations/locale/%s.php', $config['locale_switcher']));
         $container->setAlias(LocaleSwitcherInterface::class, 'sylius_shop.locale_switcher');
 
         if ($container->hasParameter('kernel.bundles')) {
             $bundles = $container->getParameter('kernel.bundles');
             if (array_key_exists('SyliusAdminBundle', $bundles)) {
-                $loader->load('services/integrations/sylius_admin.xml');
+                $loader->load('services/integrations/sylius_admin.php');
             }
         }
 

@@ -1,5 +1,60 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.4 (2026-03-18)
+
+#### Details
+
+- [#18904](https://github.com/sylius/sylius/issues/18904) [BUGFIX] remove redundant `object` from PHPDoc union types
+- [#18899](https://github.com/sylius/sylius/issues/18899) [CS][DX] Refactor
+- [#18898](https://github.com/sylius/sylius/issues/18898) [CS][DX] Refactor
+- [#18895](https://github.com/sylius/sylius/issues/18895) [Admin] Fix product taxon grid `enabled` field always showing `true`
+- [#18911](https://github.com/sylius/sylius/issues/18911) [BUGFIX] fix build errors
+- [#18920](https://github.com/sylius/sylius/issues/18920) Telemetry improvements 2.1
+
+## v2.2.3 (2026-03-09)
+
+#### Details
+
+- [#18747](https://github.com/Sylius/Sylius/pull/18747) Fix panther build ([@TheMilek](https://github.com/TheMilek))
+- [#18758](https://github.com/Sylius/Sylius/pull/18758) Remove duplicated serialization group field ([@TheMilek](https://github.com/TheMilek))
+- [#18785](https://github.com/Sylius/Sylius/pull/18785) Try to fix build after ResourceBundle release ([@TheMilek](https://github.com/TheMilek))
+- [#18742](https://github.com/Sylius/Sylius/pull/18742) [Admin] Fix order history address fields not displaying empty values ([@Wojdylak](https://github.com/Wojdylak))
+- [#18806](https://github.com/Sylius/Sylius/pull/18806) Fix after new release of PayumBundle ([@TheMilek](https://github.com/TheMilek))
+- [#18836](https://github.com/Sylius/Sylius/pull/18836) Upgrade BuildTestAppAction from v3.0.1 to v4 ([@TheMilek](https://github.com/TheMilek))
+- [#18832](https://github.com/Sylius/Sylius/pull/18832) [Admin] Fix images not being emitted with Webpack 5.105+ ([@GSadee](https://github.com/GSadee))
+- [#18841](https://github.com/Sylius/Sylius/pull/18841) Fix Dutch translation for payment method ([@JordiDekker](https://github.com/JordiDekker))
+- [#18871](https://github.com/Sylius/Sylius/pull/18871) Add conflict to api-platform/serializer 4.2.17 ([@TheMilek](https://github.com/TheMilek))
+- [#18888](https://github.com/Sylius/Sylius/pull/18888) Remove redundant check with apip4.1.7 in matrix ([@TheMilek](https://github.com/TheMilek))
+- [#18887](https://github.com/Sylius/Sylius/pull/18887) [BUGFIX] Make GitHub actions green again 2.1 ([@rust-le](https://github.com/rust-le))
+- [#18844](https://github.com/Sylius/Sylius/pull/18844) Fix formatting in UPGRADE-2.0.md ([@LucaGallinari](https://github.com/LucaGallinari))
+
+## v2.2.2 (2026-01-20)
+
+#### Details
+
+- [#18691](https://github.com/Sylius/Sylius/pull/18691) [CS][DX] Refactor
+- [#18690](https://github.com/Sylius/Sylius/pull/18690) [CS][DX] Refactor
+- [#18689](https://github.com/Sylius/Sylius/pull/18689) [CS][DX] Refactor
+- [#18693](https://github.com/Sylius/Sylius/pull/18693) [CI] Standardize job timeouts to 15 minutes ([@Rafikooo](https://github.com/Rafikooo))
+- [#18703](https://github.com/Sylius/Sylius/pull/18703) [Deps] Allow psr/http-message ^2.0 ([@Rafikooo](https://github.com/Rafikooo))
+- [#18716](https://github.com/Sylius/Sylius/pull/18716) Try to fix build with PHP 8.5 and 8.4 ([@TheMilek](https://github.com/TheMilek))
+- [#18707](https://github.com/Sylius/Sylius/pull/18707) [DX] Update branch aliases to 1.14-dev ([@Rafikooo](https://github.com/Rafikooo))
+- [#18721](https://github.com/Sylius/Sylius/pull/18721) Fix tests application error templates ([@loic425](https://github.com/loic425))
+- [#16892](https://github.com/Sylius/Sylius/pull/16892) [FIXTURES] Fix menu taxon code ([@TheMilek](https://github.com/TheMilek))
+- [#18366](https://github.com/Sylius/Sylius/pull/18366) Fix ro PayumBundle Translation ([@revoltek-daniel](https://github.com/revoltek-daniel))
+- [#18725](https://github.com/Sylius/Sylius/pull/18725) Bugfix/merged overrides missing operations ([@TheMilek](https://github.com/TheMilek))
+- [#18702](https://github.com/Sylius/Sylius/pull/18702) [Composer] Remove outdated twig/twig conflicts from bundles ([@Rafikooo](https://github.com/Rafikooo))
+- [#18722](https://github.com/Sylius/Sylius/pull/18722) [API] Payment Request fix default action when IRI is given ([@Prometee](https://github.com/Prometee))
+- [#18732](https://github.com/Sylius/Sylius/pull/18732) Make PostgreSQL telemetry migration extend dedicated abstract ([@TheMilek](https://github.com/TheMilek))
+- [#18369](https://github.com/Sylius/Sylius/pull/18369) Add form help rendering to forms ([@tomkalon](https://github.com/tomkalon))
+- [#18735](https://github.com/Sylius/Sylius/pull/18735) [CS][DX] Refactor
+- [#18726](https://github.com/Sylius/Sylius/pull/18726) [Channel] Resolve localhost equivalents when matching channel by hostname ([@Rafikooo](https://github.com/Rafikooo))
+- [#18708](https://github.com/Sylius/Sylius/pull/18708) [DX] Improve AI contribution guidelines ([@Rafikooo](https://github.com/Rafikooo))
+- [#18711](https://github.com/Sylius/Sylius/pull/18711) Fix typo in first_name.html.twig ([@LucaGallinari](https://github.com/LucaGallinari))
+- [#18736](https://github.com/Sylius/Sylius/pull/18736) TASK: [2.2] [UiBundle] adjust translations for admin password reset page ([@crydotsnake](https://github.com/crydotsnake))
+- [#18565](https://github.com/Sylius/Sylius/pull/18565) Add ternary operator to fix  related with empty key ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#18572](https://github.com/Sylius/Sylius/pull/18572) Bugfix/fix autocomplete in admin to be case insensitive ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+
 ## v2.2.1 (2025-12-18)
 
 #### Details

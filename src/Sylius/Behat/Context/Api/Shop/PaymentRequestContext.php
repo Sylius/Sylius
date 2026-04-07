@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
@@ -21,7 +23,6 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
@@ -37,9 +38,7 @@ final readonly class PaymentRequestContext implements Context
     ) {
     }
 
-    /**
-     * @When I try to pay for my order
-     */
+    #[When('I try to pay for my order')]
     public function iTryToPayForMyOrder(array $payload = []): void
     {
         $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
@@ -52,17 +51,13 @@ final readonly class PaymentRequestContext implements Context
         $this->sharedStorage->set('payment_request_uri', $uri);
     }
 
-    /**
-     * @When I try to update my payment request
-     */
+    #[When('I try to update my payment request')]
     public function iTryToUpdateMyPaymentRequest(array $payload = []): void
     {
         $this->putPaymentRequest($this->sharedStorage->get('payment_request_uri'), $payload);
     }
 
-    /**
-     * @Then a payment request with action :action for payment method :paymentMethod should have state :state
-     */
+    #[Then('a payment request with action :action for payment method :paymentMethod should have state :state')]
     public function aPaymentRequestWithActionForPaymentMethodShouldHaveState(string $action, PaymentMethodInterface $paymentMethod, string $state): void
     {
         $request = $this->getRequestForPaymentRequestWithAction($action);
@@ -88,7 +83,6 @@ final readonly class PaymentRequestContext implements Context
         $request->setContent([
             'paymentId' => $payment['id'],
             'paymentMethodCode' => $payment['method'],
-            'action' => PaymentRequestInterface::ACTION_CAPTURE,
             'payload' => $payload,
         ]);
 

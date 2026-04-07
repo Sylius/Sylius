@@ -28,7 +28,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
@@ -58,13 +58,13 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
+        $loader->load(sprintf('services/integrations/%s.php', $config['driver']));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $loader->load('services.xml');
+        $loader->load('services.php');
 
         $this->configureTelemetry($config['telemetry'], $container, $loader);
 
@@ -82,7 +82,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
         if (str_starts_with($env, 'test')) {
-            $loader->load('test_services.xml');
+            $loader->load('test_services.php');
         }
 
         $container->setAlias(
@@ -141,9 +141,9 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             return;
         }
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $loader->load('services/integrations/hwi_oauth.xml');
+        $loader->load('services/integrations/hwi_oauth.php');
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void
@@ -220,15 +220,21 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     }
 
     /**
-     * @param array{enabled: bool, business: bool, technical: bool, plugins: bool, salt: string|null, url: string} $telemetryConfig
+     * @param array{enabled: bool, business: bool, technical: bool, plugins: bool, salt: string|null, url: string, query_timeout: int} $telemetryConfig
      */
-    private function configureTelemetry(array $telemetryConfig, ContainerBuilder $container, XmlFileLoader $loader): void
+    private function configureTelemetry(array $telemetryConfig, ContainerBuilder $container, PhpFileLoader $loader): void
     {
         $telemetrySalt = $telemetryConfig['salt'] ?? (string) $container->getParameter('kernel.secret');
 
         $container->setParameter('sylius_core.telemetry.enabled', $telemetryConfig['enabled']);
         $container->setParameter('sylius_core.telemetry.salt', $telemetrySalt);
         $container->setParameter('sylius_core.telemetry.url', $telemetryConfig['url']);
+        $queryTimeout = $telemetryConfig['query_timeout'];
+        $envQueryTimeout = $_ENV['SYLIUS_TELEMETRY_QUERY_TIMEOUT'] ?? $_SERVER['SYLIUS_TELEMETRY_QUERY_TIMEOUT'] ?? getenv('SYLIUS_TELEMETRY_QUERY_TIMEOUT');
+        if ($envQueryTimeout !== false) {
+            $queryTimeout = max(1000, (int) $envQueryTimeout);
+        }
+        $container->setParameter('sylius_core.telemetry.query_timeout', $queryTimeout);
 
         $businessEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['business'], 'SYLIUS_TELEMETRY_BUSINESS');
         $technicalEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['technical'], 'SYLIUS_TELEMETRY_TECHNICAL');
@@ -248,7 +254,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             return;
         }
 
-        $loader->load('services/telemetry/telemetry.xml');
+        $loader->load('services/telemetry/telemetry.php');
     }
 
     private function isTelemetryCategoryEnabled(bool $configValue, string $envVarName): bool

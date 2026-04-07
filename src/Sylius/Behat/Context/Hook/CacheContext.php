@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Hook;
 
+use Behat\Hook\BeforeScenario;
 use Behat\Behat\Context\Context;
 use Symfony\Contracts\Cache\CacheInterface;
 
@@ -22,9 +23,7 @@ final class CacheContext implements Context
     {
     }
 
-    /**
-     * @BeforeScenario
-     */
+    #[BeforeScenario]
     public function purgeCache(): void
     {
         $this->cache->clear();
