@@ -36,7 +36,7 @@ final class StringInflector
     }
 
     /**
-     * @deprecated This method will be removed in 3.0 - use vendor/symfony/string/Slugger/SluggerInterface.php instead
+     * @deprecated This method will be removed in 3.0 - use Symfony\Component\String\Slugger\SluggerInterface::slug() instead
      */
     public static function nameToSlug(string $value): string
     {

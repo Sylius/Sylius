@@ -20,14 +20,15 @@ use Webmozart\Assert\Assert;
 
 final class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 {
-    public function __construct(private ?SluggerInterface $slugger)
+    public function __construct(private ?SluggerInterface $slugger = null)
     {
         if (null === $this->slugger) {
             trigger_deprecation(
                 'sylius/sylius',
                 '2.3',
-                'Not passing $slugger through constructor is deprecated and will be prohibited in Sylius 3.0.',
-                self::class,
+                'Not passing a "%s" to "%s" is deprecated and will be required in Sylius 3.0.',
+                SluggerInterface::class,
+                self::class
             );
         }
     }

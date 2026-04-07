@@ -4,8 +4,8 @@
 
 1. The `behat/transliterator` package has been **deprecated** and will be removed in Sylius 3.0.
 
-   All slug generation now uses `symfony/string` (`Symfony\Component\String\Slugger\SluggerInterface`) instead of `Behat\Transliterator\Transliterator`.
-   The `behat/transliterator` package is still used as a fallback when no `$slugger` is injected, but this behavior is deprecated and will be removed in Sylius 3.0.
+    Slug generation now **primarily** uses `symfony/string` (`Symfony\Component\String\Slugger\SluggerInterface`).
+    When no `$slugger` is injected, the system falls back to `Behat\Transliterator\Transliterator`, but this fallback behavior is deprecated and will be removed in Sylius 3.0.
 
    The following classes have been updated — if you have extended or decorated them, update your constructor accordingly:
 
