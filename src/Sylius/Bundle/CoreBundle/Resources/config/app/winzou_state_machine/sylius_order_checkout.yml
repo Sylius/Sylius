@@ -32,6 +32,12 @@ winzou_state_machine:
                 from: [payment_selected, payment_skipped]
                 to: completed
         callbacks:
+            guard:
+                sylius_block_select_payment_from_payment_skipped:
+                    on: ["select_payment"]
+                    from: ["payment_skipped"]
+                    do: ["@sylius.checker.order_payment_method_selection_availability", "isPaymentMethodSelectionAvailable"]
+                    args: ["object"]
             after:
                 sylius_process_cart:
                     on: ["select_shipping", "address", "select_payment", "skip_shipping", "skip_payment"]
