@@ -5,6 +5,7 @@
     "code": "XYZ3",
     "usageLimit": 100,
     "perCustomerUsageLimit": 3,
+    "trackUsage": true,
     "used": 0,
     "reusableFromCancelledOrders": false,
     "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",

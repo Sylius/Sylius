@@ -12,6 +12,7 @@
     "priority": 1,
     "exclusive": true,
     "usageLimit": 1,
+    "trackUsage": true,
     "used": 0,
     "couponBased": false,
     "coupons": [],

@@ -57,6 +57,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerTest extends T
         $this->customer->expects($this->once())->method('getId')->willReturn(1);
         $this->promotionSubject->expects($this->once())->method('getCustomer')->willReturn($this->customer);
         $this->promotionCoupon->expects($this->once())->method('getPerCustomerUsageLimit')->willReturn(42);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(true);
         $this->orderRepository
             ->expects($this->once())
             ->method('countByCustomerAndCoupon')
@@ -71,6 +72,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerTest extends T
         $this->customer->expects($this->once())->method('getId')->willReturn(1);
         $this->promotionSubject->expects($this->once())->method('getCustomer')->willReturn($this->customer);
         $this->promotionCoupon->expects($this->once())->method('getPerCustomerUsageLimit')->willReturn(42);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(true);
         $this->orderRepository
             ->expects($this->once())
             ->method('countByCustomerAndCoupon')
@@ -80,11 +82,20 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerTest extends T
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotionCoupon));
     }
 
+    public function testShouldReturnTrueIfPromotionCouponHasTrackUsageDisabled(): void
+    {
+        $this->promotionCoupon->expects($this->once())->method('getPerCustomerUsageLimit')->willReturn(42);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(false);
+
+        $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotionCoupon));
+    }
+
     public function testShouldReturnTrueIfPromotionSubjectHasCustomerThatIsNotPersisted(): void
     {
         $this->customer->expects($this->once())->method('getId')->willReturn(null);
         $this->promotionSubject->expects($this->once())->method('getCustomer')->willReturn($this->customer);
         $this->promotionCoupon->expects($this->once())->method('getPerCustomerUsageLimit')->willReturn(42);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(true);
 
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotionCoupon));
     }
@@ -93,6 +104,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerTest extends T
     {
         $this->promotionSubject->expects($this->once())->method('getCustomer')->willReturn(null);
         $this->promotionCoupon->expects($this->once())->method('getPerCustomerUsageLimit')->willReturn(42);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(true);
 
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotionCoupon));
     }
