@@ -59,6 +59,9 @@ sylius_twig_hooks:
         'sylius_admin.promotion.update.content.form.sections.configuration#left':
             usage_limit:
                 template: '@SyliusAdmin/promotion/form/sections/configuration/usage_limit.html.twig'
+                priority: 400
+            track_usage:
+                template: '@SyliusAdmin/promotion/form/sections/configuration/track_usage.html.twig'
                 priority: 300
             priority:
                 template: '@SyliusAdmin/promotion/form/sections/configuration/priority.html.twig'
