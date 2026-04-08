@@ -33,7 +33,14 @@ final class OrderPaymentMethodSelectionRequirementChecker implements OrderPaymen
         }
 
         foreach ($order->getPayments() as $payment) {
-            if (count($this->paymentMethodsResolver->getSupportedMethods($payment)) !== 1) {
+            $supportedMethods = $this->paymentMethodsResolver->getSupportedMethods($payment);
+
+            if (count($supportedMethods) !== 1) {
+                return true;
+            }
+
+            $currentMethod = $payment->getMethod();
+            if (null !== $currentMethod && !in_array($currentMethod, $supportedMethods, true)) {
                 return true;
             }
         }

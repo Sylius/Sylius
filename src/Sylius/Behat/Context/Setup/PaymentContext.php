@@ -123,6 +123,15 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
+    #[Given('the payment method :paymentMethod is enabled')]
+    #[Given('the payment method :paymentMethod gets enabled')]
+    public function theStoreHasAPaymentMethodEnabled(PaymentMethodInterface $paymentMethod): void
+    {
+        $paymentMethod->enable();
+
+        $this->paymentMethodManager->flush();
+    }
+
     /**
      * @Given /^(it) has instructions "([^"]+)"$/
      */

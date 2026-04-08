@@ -110,6 +110,7 @@ final class CheckoutContext implements Context
     }
 
     #[When('the customer is at the checkout payment step')]
+    #[When('I go back to payment step of the checkout')]
     public function theCustomerIsAtTheCheckoutPaymentStep(): void
     {
         // Intentionally left blank, as this is a UI-specific action.

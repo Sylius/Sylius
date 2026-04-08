@@ -45,3 +45,35 @@ Feature: Skipping payment step when only one payment method is available
         When I complete addressing step with email "guest@example.com" and "United States" based billing address
         And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
+
+    @api @ui
+    Scenario: Being able to recover after the auto-selected payment method gets disabled
+        Given the payment method "Bank transfer" is disabled
+        And the store allows paying with "Offline"
+        And I added product "Guards! Guards!" to the cart
+        And I complete addressing step with email "guest@example.com" and "United States" based billing address
+        And I complete the shipping step with the first shipping method
+        And the payment method "Offline" is disabled
+        And the payment method "Bank transfer" is enabled
+        When I try to confirm my order
+        Then I should be informed that this payment method has been disabled
+        When I go back to payment step of the checkout
+        And I choose "Bank transfer" payment method
+        And I confirm my order
+        Then I should see the thank you page
+
+    @api @ui
+    Scenario: Being able to recover after the auto-selected payment method gets removed from channel
+        Given the payment method "Bank transfer" is disabled
+        And the store allows paying with "Offline"
+        And I added product "Guards! Guards!" to the cart
+        And I complete addressing step with email "guest@example.com" and "United States" based billing address
+        And I complete the shipping step with the first shipping method
+        And the payment method "Offline" has been disabled in "United States" channel
+        And the payment method "Bank transfer" is enabled
+        When I try to confirm my order
+        Then I should be informed that this payment method has been disabled
+        When I go back to payment step of the checkout
+        And I choose "Bank transfer" payment method
+        And I confirm my order
+        Then I should see the thank you page
