@@ -57,12 +57,16 @@ final class AtomicOrderPromotionsUsageModifier implements OrderPromotionsUsageMo
     private function lockEntities(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {
+            if (!$promotion->isTrackUsage()) {
+                continue;
+            }
+
             $this->refreshAndLock($promotion);
         }
 
         /** @var PromotionCouponInterface|null $coupon */
         $coupon = $order->getPromotionCoupon();
-        if (null !== $coupon) {
+        if (null !== $coupon && $coupon->isTrackUsage()) {
             $this->refreshAndLock($coupon);
         }
     }

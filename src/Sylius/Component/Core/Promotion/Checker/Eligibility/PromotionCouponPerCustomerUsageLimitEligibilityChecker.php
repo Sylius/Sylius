@@ -38,7 +38,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
         }
 
         $perCustomerUsageLimit = $promotionCoupon->getPerCustomerUsageLimit();
-        if ($perCustomerUsageLimit === null) {
+        if ($perCustomerUsageLimit === null || false === $promotionCoupon->isTrackUsage()) {
             return true;
         }
 
