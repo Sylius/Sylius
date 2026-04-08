@@ -22,6 +22,7 @@ use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final readonly class ProductCreationContext implements Context
 {
@@ -30,6 +31,7 @@ final readonly class ProductCreationContext implements Context
         private TranslationsFormElementInterface $productTranslationsFormElement,
         private ChannelPricingsFormElementInterface $productChannelPricingsFormElement,
         private TaxonomyFormElementInterface $productTaxonomyFormElement,
+        private SluggerInterface $slugger
     ) {
     }
 
@@ -41,11 +43,12 @@ final readonly class ProductCreationContext implements Context
         ChannelInterface $channel,
     ): void {
         $localeCode = $channel->getDefaultLocale()->getCode();
+        $slug = $this->slugger->slug($name)->lower()->toString();
 
         $this->createPage->open();
 
         $this->productTranslationsFormElement->nameItIn(str_replace('"', '', $name), $localeCode);
-        $this->productTranslationsFormElement->specifySlugIn(StringInflector::nameToSlug($name), $localeCode);
+        $this->productTranslationsFormElement->specifySlugIn($slug, $localeCode);
         $this->createPage->specifyCode(str_replace('"', '', StringInflector::nameToUppercaseCode($name)));
 
         $this->productChannelPricingsFormElement->specifyPrice($channel, $price);

@@ -13,17 +13,24 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Product\Generator;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Generator\SlugGenerator;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class SlugGeneratorTest extends TestCase
 {
+    private MockObject&SluggerInterface $slugger;
+
     private SlugGenerator $slugGenerator;
 
     protected function setUp(): void
     {
-        $this->slugGenerator = new SlugGenerator();
+        $this->slugger = $this->createMock(SluggerInterface::class);
+        $this->slugger->method('slug')->willReturnCallback((new AsciiSlugger())->slug(...));
+        $this->slugGenerator = new SlugGenerator($this->slugger);
     }
 
     public function testImplementsSlugGeneratorInterface(): void
@@ -59,11 +66,27 @@ final class SlugGeneratorTest extends TestCase
         );
     }
 
+    public function testGeneratesSlugReplacingApostrophesWithHyphens(): void
+    {
+        $this->assertSame(
+            'rock-n-roll',
+            $this->slugGenerator->generate("Rock'n'roll"),
+        );
+    }
+
     public function testGeneratesSlugWithoutSpecialSigns(): void
     {
         $this->assertSame(
             'wsiasc-do-pociagu-europa',
             $this->slugGenerator->generate('Wsiąść do Pociągu: Europa'),
         );
+    }
+
+    public function testGeneratesSlugUsingBehatTransliteratorWhenNoSluggerProvided(): void
+    {
+        $generator = new SlugGenerator(null);
+
+        $this->assertSame('board-games', $generator->generate('Board games'));
+        $this->assertSame('rock-n-roll', $generator->generate("Rock'n'roll"));
     }
 }

@@ -34,7 +34,10 @@ return static function (ContainerConfigurator $container) {
     ;
     $services->alias(TaxonFactoryInterface::class, 'sylius.custom_factory.taxon');
 
-    $services->set('sylius.generator.taxon_slug', TaxonSlugGenerator::class);
+    $services
+        ->set('sylius.generator.taxon_slug', TaxonSlugGenerator::class)
+        ->args([service('slugger')])
+    ;
     $services->alias(TaxonSlugGeneratorInterface::class, 'sylius.generator.taxon_slug');
 
     $services

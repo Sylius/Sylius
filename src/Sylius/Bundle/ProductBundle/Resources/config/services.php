@@ -70,7 +70,10 @@ return static function (ContainerConfigurator $container) {
     $services->set('sylius.checker.product_variants_parity', ProductVariantsParityChecker::class);
     $services->alias(ProductVariantsParityCheckerInterface::class, 'sylius.checker.product_variants_parity');
 
-    $services->set('sylius.generator.slug', SlugGenerator::class);
+    $services
+        ->set('sylius.generator.slug', SlugGenerator::class)
+        ->args([service('slugger')])
+    ;
     $services->alias(SlugGeneratorInterface::class, 'sylius.generator.slug');
 
     $services
