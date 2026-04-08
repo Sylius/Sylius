@@ -22,7 +22,7 @@ final class SlugGenerator implements SlugGeneratorInterface
     {
         if (null === $this->slugger) {
             trigger_deprecation(
-                'sylius/sylius',
+                'sylius/product',
                 '2.3',
                 'Not passing a "%s" to "%s" is deprecated and will be required in Sylius 3.0.',
                 SluggerInterface::class,
