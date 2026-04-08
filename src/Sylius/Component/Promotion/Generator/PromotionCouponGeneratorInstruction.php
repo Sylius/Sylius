@@ -22,6 +22,7 @@ final class PromotionCouponGeneratorInstruction implements ReadablePromotionCoup
         private ?string $suffix = null,
         private ?\DateTimeInterface $expiresAt = null,
         private ?int $usageLimit = null,
+        private bool $trackUsage = true,
     ) {
     }
 
@@ -53,5 +54,10 @@ final class PromotionCouponGeneratorInstruction implements ReadablePromotionCoup
     public function getUsageLimit(): ?int
     {
         return $this->usageLimit;
+    }
+
+    public function isTrackUsage(): bool
+    {
+        return $this->trackUsage;
     }
 }

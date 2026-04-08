@@ -122,6 +122,18 @@ final readonly class ManagingPromotionCouponsContext implements Context
         $this->client->addRequestData('reusableFromCancelledOrders', false);
     }
 
+    #[When('I enable track usage for it')]
+    public function iEnableTrackUsageForIt(): void
+    {
+        $this->client->addRequestData('trackUsage', true);
+    }
+
+    #[When('I disable track usage for it')]
+    public function iDisableTrackUsageForIt(): void
+    {
+        $this->client->addRequestData('trackUsage', false);
+    }
+
     #[When('I choose the amount of :amount coupons to be generated')]
     public function iSpecifyItsAmountAs(int $amount): void
     {
@@ -153,6 +165,18 @@ final readonly class ManagingPromotionCouponsContext implements Context
     public function iSetGeneratedCouponsUsageLimitTo(int $limit): void
     {
         $this->client->updateRequestData(['usageLimit' => $limit]);
+    }
+
+    #[When('I enable track usage for generated coupons')]
+    public function iEnableTrackUsageForGeneratedCoupons(): void
+    {
+        $this->client->updateRequestData(['trackUsage' => true]);
+    }
+
+    #[When('I disable track usage for generated coupons')]
+    public function iDisableTrackUsageForGeneratedCoupons(): void
+    {
+        $this->client->updateRequestData(['trackUsage' => false]);
     }
 
     #[When('I make generated coupons valid until :date')]
@@ -304,6 +328,24 @@ final readonly class ManagingPromotionCouponsContext implements Context
         Assert::false($this->responseChecker->getValue(
             $this->client->getLastResponse(),
             'reusableFromCancelledOrders',
+        ));
+    }
+
+    #[Then('this coupon should track usage')]
+    public function thisCouponShouldTrackUsage(): void
+    {
+        Assert::true($this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'trackUsage',
+        ));
+    }
+
+    #[Then('this coupon should not track usage')]
+    public function thisCouponShouldNotTrackUsage(): void
+    {
+        Assert::false($this->responseChecker->getValue(
+            $this->client->getLastResponse(),
+            'trackUsage',
         ));
     }
 

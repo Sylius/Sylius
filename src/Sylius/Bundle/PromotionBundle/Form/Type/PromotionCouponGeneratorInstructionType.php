@@ -79,6 +79,13 @@ final class PromotionCouponGeneratorInstructionType extends AbstractType impleme
 
     public function mapDataToForms($viewData, \Traversable $forms): void
     {
+        if (null === $viewData) {
+            $formsArray = iterator_to_array($forms);
+            $formsArray['trackUsage']->setData(true);
+
+            return;
+        }
+
         $this->propertyPathDataMapper->mapDataToForms($viewData, $forms);
     }
 

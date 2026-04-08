@@ -29,6 +29,8 @@ sylius:
             priority: Priority
             rules: Rules
             starts_at: Starts at
+            track_usage: Track usage
+            track_usage_details: When disabled, the usage count for this promotion will not be updated — orders will not count towards the usage limit.
             usage_limit: Usage limit
         promotion_action:
             item_fixed_discount: Item fixed discount
@@ -44,6 +46,8 @@ sylius:
             type: Type
         promotion_coupon:
             expires_at: Expires at
+            track_usage: Track usage
+            track_usage_details: When disabled, the usage count for this coupon will not be updated — orders will not count towards the usage limit.
             usage_limit: Usage limit
         promotion_coupon_generator_instruction:
             amount: Amount

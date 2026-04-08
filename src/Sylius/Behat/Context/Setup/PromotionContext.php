@@ -300,6 +300,14 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
+    #[Given('/^(this coupon) has track usage disabled$/')]
+    public function thisCouponHasTrackUsageDisabled(PromotionCouponInterface $coupon): void
+    {
+        $coupon->setTrackUsage(false);
+
+        $this->objectManager->flush();
+    }
+
     #[Given('/^(this coupon) has already reached its usage limit$/')]
     public function thisCouponHasReachedItsUsageLimit(PromotionCouponInterface $coupon): void
     {
@@ -852,6 +860,14 @@ final readonly class PromotionContext implements Context
     public function thisPromotionHasUsageLimitEqualTo(PromotionInterface $promotion, int $usageLimit): void
     {
         $promotion->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this promotion) has track usage disabled$/')]
+    public function thisPromotionHasTrackUsageDisabled(PromotionInterface $promotion): void
+    {
+        $promotion->setTrackUsage(false);
 
         $this->objectManager->flush();
     }

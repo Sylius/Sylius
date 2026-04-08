@@ -1,5 +1,5 @@
 <div class="mb-3"
      {{ stimulus_target('@sylius/admin-bundle/track-usage', 'source') }}
      {{ stimulus_action('@sylius/admin-bundle/track-usage', 'toggle', 'change') }}>
-    {{ form_row(hookable_metadata.context.form.trackUsage, {help_attr: { 'class': 'form-hint' }}) }}
+    {{ form_row(hookable_metadata.context.form.trackUsage, sylius_test_form_attribute('track-usage')|merge({help_attr: { 'class': 'form-hint' }})) }}
 </div>
