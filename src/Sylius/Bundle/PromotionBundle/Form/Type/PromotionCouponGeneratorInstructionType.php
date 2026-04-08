@@ -16,6 +16,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Component\Promotion\Factory\PromotionCouponGeneratorInstructionFactoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -58,6 +59,11 @@ final class PromotionCouponGeneratorInstructionType extends AbstractType impleme
                 'required' => false,
                 'label' => 'sylius.form.promotion_coupon_generator_instruction.expires_at',
                 'widget' => 'single_text',
+            ])
+            ->add('trackUsage', CheckboxType::class, [
+                'label' => 'sylius.form.promotion_coupon.track_usage',
+                'help' => 'sylius.form.promotion_coupon.track_usage_details',
+                'required' => false,
             ])
             ->setDataMapper($this)
         ;

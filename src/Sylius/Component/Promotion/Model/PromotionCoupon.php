@@ -33,6 +33,8 @@ class PromotionCoupon implements PromotionCouponInterface
 
     protected ?PromotionInterface $promotion = null;
 
+    protected bool $trackUsage = true;
+
     /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
@@ -99,6 +101,16 @@ class PromotionCoupon implements PromotionCouponInterface
     public function setExpiresAt(?\DateTimeInterface $expiresAt = null): void
     {
         $this->expiresAt = $expiresAt;
+    }
+
+    public function isTrackUsage(): bool
+    {
+        return $this->trackUsage;
+    }
+
+    public function setTrackUsage(bool $trackUsage): void
+    {
+        $this->trackUsage = $trackUsage;
     }
 
     public function isValid(): bool

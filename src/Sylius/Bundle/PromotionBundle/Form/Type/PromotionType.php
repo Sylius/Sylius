@@ -78,6 +78,11 @@ final class PromotionType extends AbstractResourceType
                 'label' => 'sylius.form.promotion.coupon_based',
                 'required' => false,
             ])
+            ->add('trackUsage', CheckboxType::class, [
+                'label' => 'sylius.form.promotion.track_usage',
+                'help' => 'sylius.form.promotion.track_usage_details',
+                'required' => false,
+            ])
             ->add('rules', PromotionRuleCollectionType::class, [
                 'label' => 'sylius.form.promotion.rules',
                 'button_add_label' => 'sylius.form.promotion.add_rule',
