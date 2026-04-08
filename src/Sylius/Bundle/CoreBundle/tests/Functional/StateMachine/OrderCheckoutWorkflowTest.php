@@ -180,6 +180,7 @@ final class OrderCheckoutWorkflowTest extends KernelTestCase
     {
         yield ['address', 'addressed'];
         yield ['select_shipping', 'shipping_selected'];
+        yield ['select_payment', 'payment_selected'];
         yield ['complete', 'completed'];
     }
 
