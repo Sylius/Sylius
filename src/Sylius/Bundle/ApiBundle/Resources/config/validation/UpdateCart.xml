@@ -28,6 +28,22 @@
         <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\UpdateCartEmailNotAllowed">
             <option name="groups">sylius</option>
         </constraint>
+        <property name="email">
+            <constraint name="Length">
+                <option name="max">254</option>
+                <option name="maxMessage">sylius.customer.email.max</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="message">sylius.customer.email.invalid</option>
+                <option name="mode">strict</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
         <property name="billingAddress">
             <constraint name="Valid" />
         </property>
