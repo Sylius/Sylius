@@ -1,7 +1,7 @@
-{% set configuration = hookable_metadata.context.configuration %}
-{% set show_route_name = configuration.vars.index.route.name|default(configuration.getRouteName('show')) %}
+{% set configuration = hookable_metadata.context.configuration|default(null) %}
+{% set show_route_name = configuration.vars.index.route.name|default(configuration.getRouteName('show')|default(null)) %}
 
-{% if sylius_route_exists(show_route_name) %}
+{% if show_route_name is not null and sylius_route_exists(show_route_name) %}
     {% set resource_id = hookable_metadata.context.resource.id %}
     {% set resource_name = hookable_metadata.context.metadata.name %}
 

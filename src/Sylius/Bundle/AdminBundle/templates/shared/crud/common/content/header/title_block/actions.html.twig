@@ -1,4 +1,4 @@
-{% set resources = hookable_metadata.context.resources %}
+{% set resources = hookable_metadata.context.resources|default(null) %}
 
 <div class="col-12 col-md-auto ms-auto d-print-none">
     <div class="btn-list">

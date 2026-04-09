@@ -7,8 +7,8 @@
     {% set singular_name = hookable_metadata.configuration.resource_name|default(metadata.applicationName ~ '.ui.' ~ _context.metadata.name) %}
     {% set header = hookable_metadata.configuration.header|default(null) %}
 {% else %}
-    {% set singular_name = hookable_metadata.configuration.resource_name %}
-    {% set header = hookable_metadata.configuration.header %}
+    {% set singular_name = hookable_metadata.configuration.resource_name|default(null) %}
+    {% set header = hookable_metadata.configuration.header|default(null) %}
 {% endif %}
 
 <div class="col-12 col-md-6">
