@@ -1,9 +1,9 @@
 {% import '@SyliusAdmin/shared/helper/table.html.twig' as table %}
 {% import '@SyliusAdmin/shared/helper/pagination.html.twig' as pagination %}
 
-{% set resources = hookable_metadata.context.resources %}
-{% set data = resources.data %}
-{% set definition = resources.definition %}
+{% set resources = hookable_metadata.context.resources|default(null) %}
+{% set data = resources.data|default([]) %}
+{% set definition = resources.definition|default(null) %}
 
 {% if data|length > 0 %}
     <div class="card">

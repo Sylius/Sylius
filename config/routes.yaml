@@ -1,0 +1,23 @@
+admin_basic_create:
+    path: /admin/basic/create
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: admin/basic/create.html.twig
+
+admin_basic_update:
+    path: /admin/basic/update
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: admin/basic/update.html.twig
+
+admin_basic_index:
+    path: /admin/basic/index
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: admin/basic/index.html.twig
+
+admin_basic_show:
+    path: /admin/basic/show
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: admin/basic/show.html.twig
