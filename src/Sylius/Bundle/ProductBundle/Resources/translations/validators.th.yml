@@ -8,6 +8,7 @@ sylius:
             unique: SKU ต้องไม่ซ้ำกัน
         slug:
             not_blank: กรุณาระบุ Slug ของสินค้า
+            invalid_characters: Slug มีอักขระที่ไม่ถูกต้อง
         code:
             not_blank: กรุณาระบุรหัสสินค้า
             regex: รหัสต้องประกอบด้วยตัวอักษร ตัวเลข เส้นประ และขีดเส้นใต้เท่านั้น

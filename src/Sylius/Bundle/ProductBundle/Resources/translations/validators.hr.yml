@@ -9,6 +9,7 @@ sylius:
         slug:
             not_blank: Molimo unesite kratki identifikator proizvoda.
             unique: Slug proizvoda mora biti jedinstven.
+            invalid_characters: Slug sadrži nevažeće znakove.
         code:
             not_blank: Molimo vas unesite kod proizvoda.
             regex: Kod proizvoda može sadržavati samo slova, brojeve, povlake i podvlake.

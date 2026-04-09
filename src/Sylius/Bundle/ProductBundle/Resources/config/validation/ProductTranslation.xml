@@ -59,6 +59,12 @@
                 <option name="maxMessage">sylius.product.slug.max_length</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Regex">
+                <option name="pattern">~^[^/]+$~u</option>
+                <option name="htmlPattern">[^/]+</option>
+                <option name="message">sylius.product.slug.invalid_characters</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

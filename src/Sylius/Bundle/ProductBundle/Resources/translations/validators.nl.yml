@@ -10,6 +10,7 @@ sylius:
             not_blank: Voer alstublieft een product slug in.
             unique: Productcode moet uniek zijn.
             max_length: Product slug mag niet langer zijn dan 1 teken.|Product slug mag niet langer zijn dan {{ limit }} tekens.
+            invalid_characters: Product slug bevat ongeldige tekens.
         code:
             not_blank: Voer een product code in.
             regex: Product code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.

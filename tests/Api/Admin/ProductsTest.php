@@ -278,7 +278,7 @@ final class ProductsTest extends JsonApiTestCase
                 'translations' => [
                     'en_US' => [
                         '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('en_US')->getId()),
-                        'slug' => 'caps/cap',
+                        'slug' => 'caps-cap',
                         'name' => 'Cap',
                         'description' => 'This is a cap',
                         'shortDescription' => 'Short cap description',
@@ -287,7 +287,7 @@ final class ProductsTest extends JsonApiTestCase
                     ],
                     'pl_PL' => [
                         '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('pl_PL')->getId()),
-                        'slug' => 'czapki/czapka',
+                        'slug' => 'czapki-czapka',
                         'name' => 'Czapka',
                         'description' => 'To jest czapka',
                         'shortDescription' => 'Krótki opis czapki',
@@ -326,7 +326,7 @@ final class ProductsTest extends JsonApiTestCase
                 'translations' => [
                     'en_US' => [
                         '@id' => sprintf('/api/v2/admin/product-translations/%s', $product->getTranslation('en_US')->getId()),
-                        'slug' => 'caps/cap',
+                        'slug' => 'caps-cap',
                         'name' => 'Cap',
                     ],
                     'pl_PL' => [
