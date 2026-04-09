@@ -167,9 +167,6 @@
     "friends-of-behat/variadic-extension": {
         "version": "v1.3.0"
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.2"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.42"
     },
@@ -690,9 +687,6 @@
     },
     "symfony/property-info": {
         "version": "v5.0.7"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v4.4.13"
     },
     "symfony/routing": {
         "version": "4.2",
