@@ -27,6 +27,9 @@
         </service>
         <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface" alias="sylius.checker.order_payment_method_selection_requirement" />
 
+        <service id="sylius.checker.order_payment_method_selection_availability" class="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionAvailabilityChecker" public="true" />
+        <service id="Sylius\Component\Core\Checker\OrderPaymentMethodSelectionAvailabilityCheckerInterface" alias="sylius.checker.order_payment_method_selection_availability" />
+
         <service id="sylius.checker.cli_context" class="Sylius\Component\Core\Checker\CLIContextChecker">
             <argument type="service" id="request_stack" />
         </service>
