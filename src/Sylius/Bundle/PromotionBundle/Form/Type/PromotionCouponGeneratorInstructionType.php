@@ -81,7 +81,10 @@ final class PromotionCouponGeneratorInstructionType extends AbstractType impleme
     {
         if (null === $viewData) {
             $formsArray = iterator_to_array($forms);
-            $formsArray['trackUsage']->setData(true);
+
+            if (isset($formsArray['trackUsage'])) {
+                $formsArray['trackUsage']->setData(true);
+            }
 
             return;
         }
