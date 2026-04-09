@@ -55,8 +55,8 @@ Feature: Skipping payment step when only one payment method is available
         And I complete the shipping step with the first shipping method
         And the payment method "Offline" is disabled
         And the payment method "Bank transfer" is enabled
-        When I try to confirm my order
-        Then I should be informed that this payment method has been disabled
+        And I have tried to confirm my order
+        And I have been informed that this payment method has been disabled
         When I go back to payment step of the checkout
         And I choose "Bank transfer" payment method
         And I confirm my order
@@ -71,8 +71,8 @@ Feature: Skipping payment step when only one payment method is available
         And I complete the shipping step with the first shipping method
         And the payment method "Offline" has been disabled in "United States" channel
         And the payment method "Bank transfer" is enabled
-        When I try to confirm my order
-        Then I should be informed that this payment method has been disabled
+        And I have tried to confirm my order
+        And I have been informed that this payment method has been disabled
         When I go back to payment step of the checkout
         And I choose "Bank transfer" payment method
         And I confirm my order
