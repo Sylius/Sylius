@@ -33,7 +33,10 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
     public function createInventoryListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
+            ->addSelect('translation', 'product', 'productTranslation')
             ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->innerJoin('o.product', 'product')
+            ->leftJoin('product.translations', 'productTranslation', 'WITH', 'productTranslation.locale = :locale')
             ->andWhere('o.tracked = :tracked')
             ->setParameter('locale', $locale)
             ->setParameter('tracked', true)
