@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Mailer;
 
 use PHPUnit\Framework\Attributes\Test;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -25,8 +24,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class OrderEmailManagerTest extends KernelTestCase
 {
-    use ProphecyTrait;
-
     private const RECIPIENT_EMAIL = 'test@example.com';
 
     private const LOCALE_CODE = 'en_US';
@@ -43,21 +40,21 @@ final class OrderEmailManagerTest extends KernelTestCase
 
         /** @var OrderEmailManagerInterface $orderEmailManager */
         $orderEmailManager = $container->get('sylius.mailer.order_email_manager');
-        /** @var OrderInterface|ObjectProphecy $order */
-        $order = $this->prophesize(OrderInterface::class);
-        /** @var CustomerInterface|ObjectProphecy $customer */
-        $customer = $this->prophesize(CustomerInterface::class);
-        $customer->getEmail()->willReturn(self::RECIPIENT_EMAIL);
-        /** @var ChannelInterface|ObjectProphecy $channel */
-        $channel = $this->prophesize(ChannelInterface::class);
+        /** @var OrderInterface&MockObject $order */
+        $order = $this->createMock(OrderInterface::class);
+        /** @var CustomerInterface&MockObject $customer */
+        $customer = $this->createMock(CustomerInterface::class);
+        $customer->method('getEmail')->willReturn(self::RECIPIENT_EMAIL);
+        /** @var ChannelInterface&MockObject $channel */
+        $channel = $this->createMock(ChannelInterface::class);
 
-        $order->getCustomer()->willReturn($customer->reveal());
-        $order->getChannel()->willReturn($channel->reveal());
-        $order->getLocaleCode()->willReturn(self::LOCALE_CODE);
-        $order->getNumber()->willReturn(self::ORDER_NUMBER);
-        $order->getTokenValue()->willReturn('ASFAFA4654AF');
+        $order->method('getCustomer')->willReturn($customer);
+        $order->method('getChannel')->willReturn($channel);
+        $order->method('getLocaleCode')->willReturn(self::LOCALE_CODE);
+        $order->method('getNumber')->willReturn(self::ORDER_NUMBER);
+        $order->method('getTokenValue')->willReturn('ASFAFA4654AF');
 
-        $orderEmailManager->sendConfirmationEmail($order->reveal());
+        $orderEmailManager->sendConfirmationEmail($order);
 
         self::assertEmailCount(1);
         $email = self::getMailerMessage();

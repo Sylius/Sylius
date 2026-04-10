@@ -11,6 +11,7 @@
             "name": "Weimar Triangle",
             "type": "country",
             "scope": "all",
+            "priority": 0,
             "members": [
                 {
                     "@type": "ZoneMember",
@@ -34,6 +35,7 @@
             "name": "European Union",
             "type": "country",
             "scope": "all",
+            "priority": 0,
             "members": [
                 {
                     "@type": "ZoneMember",

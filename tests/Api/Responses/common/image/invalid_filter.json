@@ -6,7 +6,5 @@
     "status": 400,
     "type": "\/errors\/400",
     "hydra:title": "An error occurred",
-    "hydra:description": "Filter \"invalid\" is not configured.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('Filter \"invalid\" is not configured.').optional()"
+    "hydra:description": "Filter \"invalid\" is not configured."
 }

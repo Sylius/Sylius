@@ -87,4 +87,12 @@ interface ShippingMethodInterface extends
 
     /** @return ShippingMethodTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface;
+
+    public function getMinDeliveryTimeDays(): ?int;
+
+    public function setMinDeliveryTimeDays(?int $days): void;
+
+    public function getMaxDeliveryTimeDays(): ?int;
+
+    public function setMaxDeliveryTimeDays(?int $days): void;
 }

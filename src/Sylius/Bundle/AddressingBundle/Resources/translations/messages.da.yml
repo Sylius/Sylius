@@ -38,5 +38,6 @@ sylius:
                 all: Alle
             select: Vælg
             select_scope: Vælg omfang
+            priority: Prioritet
         zone_member:
             select: Vælg

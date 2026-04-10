@@ -16,6 +16,7 @@
         <!-- ###+ symfony/framework-bundle ### -->
         <env name="APP_ENV" value="test"/>
         <env name="SHELL_VERBOSITY" value="-1" />
+        <env name="COLUMNS" value="300" />
         <!-- ###- symfony/framework-bundle ### -->
 
         <server name="KERNEL_CLASS" value="\Sylius\Bundle\AdminBundle\Application\Kernel" />

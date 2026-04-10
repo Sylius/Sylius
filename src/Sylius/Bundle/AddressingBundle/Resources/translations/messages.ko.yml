@@ -37,5 +37,6 @@ sylius:
             scopes:
                 all: '전체'
             select: '선택'
+            priority: '우선순위'
         zone_member:
             select: '선택'

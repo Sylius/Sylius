@@ -34,3 +34,4 @@ sylius:
             scopes:
                 all: Visas
             select_scope: Izvēlēties tvērumu
+            priority: Prioritāte

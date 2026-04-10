@@ -15,8 +15,7 @@ namespace Tests\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\Test;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType;
 use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
@@ -25,9 +24,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 final class SelectAttributeTypeTest extends TypeTestCase
 {
-    use ProphecyTrait;
-
-    private ObjectProphecy $translationProvider;
+    private MockObject&TranslationLocaleProviderInterface $translationProvider;
 
     #[Test]
     public function it_return_all_choices(): void
@@ -44,15 +41,15 @@ final class SelectAttributeTypeTest extends TypeTestCase
 
     protected function setUp(): void
     {
-        $this->translationProvider = $this->prophesize(TranslationLocaleProviderInterface::class);
-        $this->translationProvider->getDefaultLocaleCode()->willReturn('en_GB');
+        $this->translationProvider = $this->createMock(TranslationLocaleProviderInterface::class);
+        $this->translationProvider->method('getDefaultLocaleCode')->willReturn('en_GB');
 
         parent::setUp();
     }
 
     protected function getExtensions(): array
     {
-        $type = new SelectAttributeType($this->translationProvider->reveal());
+        $type = new SelectAttributeType($this->translationProvider);
 
         return [
             new PreloadedExtension([$type], []),

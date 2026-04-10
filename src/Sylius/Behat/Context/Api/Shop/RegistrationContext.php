@@ -22,6 +22,7 @@ use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
@@ -206,7 +207,7 @@ final class RegistrationContext implements Context
             $content['hydra:description'],
             'Request does not have the following required fields specified: ' . implode(', ', $fields) . '.',
         );
-        Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 400);
+        Assert::same($this->shopClient->getLastResponse()->getStatusCode(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /**
