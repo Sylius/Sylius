@@ -1,5 +1,26 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.5 (2026-04-10)
+
+#### Details
+
+- [#18579](https://github.com/Sylius/Sylius/pull/18579) Fix problem with empty taxon product index ([@tomkalon](https://github.com/tomkalon))
+- [#18932](https://github.com/Sylius/Sylius/pull/18932) TASK: improve german translations for CH, DE, and AT ([@crydotsnake](https://github.com/crydotsnake))
+- [#18933](https://github.com/Sylius/Sylius/pull/18933) fix: add default filter to breadcrumbs configuration title to prevent ScalarDataBag exception ([@camilleislasse](https://github.com/camilleislasse))
+- [#18943](https://github.com/Sylius/Sylius/pull/18943) Fix build after APIPlatform 4.3.2 release ([@TheMilek](https://github.com/TheMilek))
+- [#18941](https://github.com/Sylius/Sylius/pull/18941) Add payment enabled in channel validation ([@marekrzytki](https://github.com/marekrzytki))
+- [#18926](https://github.com/Sylius/Sylius/pull/18926) [BUGFIX] Allow updating provinceName when provinceCode is null in API ([@rust-le](https://github.com/rust-le))
+- [#18953](https://github.com/Sylius/Sylius/pull/18953) [BUGFIX] Make mailer services public to allow usage in state machine callbacks ([@rust-le](https://github.com/rust-le))
+- [#18961](https://github.com/Sylius/Sylius/pull/18961) Resolve flash alert correctly without breaking translation ([@TheMilek](https://github.com/TheMilek))
+- [#18940](https://github.com/Sylius/Sylius/pull/18940) Restore missing page titles for admin resource show pages ([@marekrzytki](https://github.com/marekrzytki))
+- [#18922](https://github.com/Sylius/Sylius/pull/18922) Unified name translations handling in admin grid index ([@pbalcerzak](https://github.com/pbalcerzak))
+- [#18965](https://github.com/Sylius/Sylius/pull/18965) Allow choosing different payment method with skip payment step when it gets disabled ([@TheMilek](https://github.com/TheMilek))
+- [#18969](https://github.com/Sylius/Sylius/pull/18969) Add missing status code mapping for OrderItemNotFoundException ([@marekrzytki](https://github.com/marekrzytki))
+- [#18970](https://github.com/Sylius/Sylius/pull/18970) Add email validation constraints to cart update ([@marekrzytki](https://github.com/marekrzytki))
+- [#18972](https://github.com/Sylius/Sylius/pull/18972) Fix admin templates ([@loic425](https://github.com/loic425))
+- [#18958](https://github.com/Sylius/Sylius/pull/18958) [API] Make API Platform resource command classes overridable via container parameters ([@Prometee](https://github.com/Prometee))
+- [#18974](https://github.com/Sylius/Sylius/pull/18974) Unify Tests directory with tests ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.2.4 (2026-03-18)
 
 #### Details
