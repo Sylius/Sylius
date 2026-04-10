@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\TaxonomyBundle\Tests\Validator\Constraints;
+namespace Tests\Sylius\Bundle\TaxonomyBundle\Validator\Constraints;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
