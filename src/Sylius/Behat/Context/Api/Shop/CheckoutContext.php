@@ -110,6 +110,7 @@ final class CheckoutContext implements Context
     }
 
     #[When('the customer is at the checkout payment step')]
+    #[When('I go back to payment step of the checkout')]
     public function theCustomerIsAtTheCheckoutPaymentStep(): void
     {
         // Intentionally left blank, as this is a UI-specific action.
@@ -443,9 +444,8 @@ final class CheckoutContext implements Context
         $this->sharedStorage->set('order', $this->orderRepository->findOneByNumber($this->sharedStorage->get('order_number')));
     }
 
-    /**
-     * @When I try to confirm my order
-     */
+    #[Given('I have tried to confirm my order')]
+    #[When('I try to confirm my order')]
     public function iTryToConfirmMyOrder(): void
     {
         $response = $this->completeOrder();
@@ -1151,9 +1151,8 @@ final class CheckoutContext implements Context
         $this->hasProvinceNameInAddress($provinceName, $addressType);
     }
 
-    /**
-     * @Then /^I should be informed that (this payment method) has been disabled$/
-     */
+    #[Given('/^I have been informed that (this payment method) has been disabled$/')]
+    #[Then('/^I should be informed that (this payment method) has been disabled$/')]
     public function iShouldBeInformedThatThisPaymentMethodHasBeenDisabled(PaymentMethodInterface $paymentMethod): void
     {
         $response = $this->client->getLastResponse();

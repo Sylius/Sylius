@@ -4,18 +4,28 @@
     {% set metadata = hookable_metadata.context.metadata %}
     {% set resource_name = hookable_metadata.configuration.resource_name|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 {% else %}
-    {% set resource_name = hookable_metadata.configuration.resource_name %}
+    {% set resource_name = hookable_metadata.configuration.resource_name|default(null) %}
 {% endif %}
 
-{% set configuration = hookable_metadata.context.configuration %}
-{% set index_url = path(
-    configuration.vars.index.route.name|default(configuration.getRouteName('index')),
-    configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
-)
-%}
+{% set configuration = hookable_metadata.context.configuration|default(null) %}
 
-{{ breadcrumbs([
-    { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
-    { name: resource_name, url: index_url, active: false },
-    { name: 'sylius.ui.new'|trans, active: true}
-]) }}
+{% if configuration is not null %}
+    {% set index_url = path(
+        configuration.vars.index.route.name|default(configuration.getRouteName('index')),
+        configuration.vars.index.route.parameters|default(configuration.vars.route.parameters|default({}))
+    )
+    %}
+{% endif %}
+
+{% if index_url is defined and resource_name is not null %}
+    {{ breadcrumbs([
+        { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+        { name: resource_name, url: index_url, active: false },
+        { name: 'sylius.ui.new'|trans, active: true}
+    ]) }}
+{% else %}
+    {{ breadcrumbs([
+        { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
+        { name: 'sylius.ui.new'|trans, active: true}
+    ]) }}
+{% endif %}
