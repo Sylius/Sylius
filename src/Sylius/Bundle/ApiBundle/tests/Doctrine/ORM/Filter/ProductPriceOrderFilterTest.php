@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Tests\Doctrine\ORM\Filter;
+namespace Tests\Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter;
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\EntityManagerInterface;

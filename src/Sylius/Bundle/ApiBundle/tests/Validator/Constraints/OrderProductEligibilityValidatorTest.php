@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ApiBundle\Tests\Validator\Constraints;
+namespace Tests\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Bundle\ApiBundle\Command\OrderTokenValueAwareInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibility;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -48,8 +48,7 @@ final class OrderProductEligibilityValidatorTest extends TestCase
         $orderToken = 'ORDER_TOKEN';
         $variantName = 'Variant 1';
 
-        $command = $this->createMock(OrderTokenValueAwareInterface::class);
-        $command->method('getOrderTokenValue')->willReturn($orderToken);
+        $command = new CompleteOrder($orderToken);
 
         $variant = $this->createMock(ProductVariantInterface::class);
         $variant->method('isEnabled')->willReturn(false);
@@ -86,8 +85,7 @@ final class OrderProductEligibilityValidatorTest extends TestCase
         $orderToken = 'ORDER_TOKEN';
         $productName = 'Product 2';
 
-        $command = $this->createMock(OrderTokenValueAwareInterface::class);
-        $command->method('getOrderTokenValue')->willReturn($orderToken);
+        $command = new CompleteOrder($orderToken);
 
         $variant = $this->createMock(ProductVariantInterface::class);
         $variant->method('isEnabled')->willReturn(true);
@@ -124,8 +122,7 @@ final class OrderProductEligibilityValidatorTest extends TestCase
         $orderToken = 'ORDER_TOKEN';
         $productName = 'Product 3';
 
-        $command = $this->createMock(OrderTokenValueAwareInterface::class);
-        $command->method('getOrderTokenValue')->willReturn($orderToken);
+        $command = new CompleteOrder($orderToken);
 
         $variant = $this->createMock(ProductVariantInterface::class);
         $variant->method('isEnabled')->willReturn(true);
@@ -161,8 +158,7 @@ final class OrderProductEligibilityValidatorTest extends TestCase
     {
         $orderToken = 'ORDER_TOKEN';
 
-        $command = $this->createMock(OrderTokenValueAwareInterface::class);
-        $command->method('getOrderTokenValue')->willReturn($orderToken);
+        $command = new CompleteOrder($orderToken);
 
         $variant = $this->createMock(ProductVariantInterface::class);
         $variant->method('isEnabled')->willReturn(true);
