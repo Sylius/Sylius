@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
@@ -40,9 +41,13 @@ class BreadcrumbComponent
     public function taxon(): TaxonInterface
     {
         $request = $this->requestStack->getCurrentRequest();
+        if (false === $request instanceof Request) {
+            throw new \InvalidArgumentException('Request is required to render breadcrumb.');
+        }
+
         $taxonSlug = $request->attributes->get('slug');
 
-        if (null === $taxonSlug) {
+        if (null === $taxonSlug || false === is_string($taxonSlug)) {
             throw new \InvalidArgumentException('Taxon slug is required to render breadcrumb.');
         }
 

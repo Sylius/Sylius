@@ -144,7 +144,10 @@ sylius_twig_hooks:
                 template: '@SyliusShop/product/show/content/info/overview/images/thumbnails.html.twig'
                 priority: 100
             main_image:
-                template: '@SyliusShop/product/show/content/info/overview/images/main_image.html.twig'
+                component: 'sylius_shop:product:images'
+                props:
+                    product: '@=_context.product'
+                    template: '@SyliusShop/product/show/content/info/overview/images/main_image.html.twig'
                 priority: 0
 
         'sylius_shop.product.show.content.info.overview.images.thumbnails':

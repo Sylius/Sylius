@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\TwigHooks\Twig\Component\HookableComponentTrait;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
@@ -75,9 +76,15 @@ class PriceComponent
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
 
+        /** @var CurrencyInterface $baseCurrency */
+        $baseCurrency = $channel->getBaseCurrency();
+
+        /** @var string $baseCurrencyCode */
+        $baseCurrencyCode = $baseCurrency->getCode();
+
         return $this->currencyConverter->convert(
             $price,
-            $channel->getBaseCurrency()->getCode(),
+            $baseCurrencyCode,
             $this->currencyContext->getCurrencyCode(),
         );
     }
