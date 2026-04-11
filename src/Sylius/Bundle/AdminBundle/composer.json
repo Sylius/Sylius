@@ -51,7 +51,6 @@
     "require-dev": {
         "doctrine/orm": "^2.18 || ^3.3",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
-        "php-http/message-factory": "^1.1",
         "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.2",
