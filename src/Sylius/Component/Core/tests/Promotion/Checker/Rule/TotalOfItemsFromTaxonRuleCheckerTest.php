@@ -86,12 +86,14 @@ final class TotalOfItemsFromTaxonRuleCheckerTest extends TestCase
             ->willReturn($this->bows);
         $this->compositeBowItem->expects($this->once())->method('getProduct')->willReturn($this->compositeBow);
         $this->compositeBow->expects($this->once())->method('hasTaxon')->with($this->bows)->willReturn(true);
-        $this->compositeBowItem->expects($this->once())->method('getTotal')->willReturn(5000);
+        $this->compositeBowItem->expects($this->once())->method('getQuantity')->willReturn(1);
+        $this->compositeBowItem->expects($this->once())->method('getUnitPrice')->willReturn(5000);
         $this->longswordItem->expects($this->once())->method('getProduct')->willReturn($this->longsword);
         $this->longsword->expects($this->once())->method('hasTaxon')->with($this->bows)->willReturn(false);
         $this->reflexBowItem->expects($this->once())->method('getProduct')->willReturn($this->reflexBow);
         $this->reflexBow->expects($this->once())->method('hasTaxon')->with($this->bows)->willReturn(true);
-        $this->reflexBowItem->expects($this->once())->method('getTotal')->willReturn(9000);
+        $this->reflexBowItem->expects($this->once())->method('getQuantity')->willReturn(1);
+        $this->reflexBowItem->expects($this->once())->method('getUnitPrice')->willReturn(9000);
 
         $this->assertTrue(
             $this->ruleChecker->isEligible($this->order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]]),
@@ -113,10 +115,12 @@ final class TotalOfItemsFromTaxonRuleCheckerTest extends TestCase
             ->willReturn($this->bows);
         $this->compositeBowItem->expects($this->once())->method('getProduct')->willReturn($this->compositeBow);
         $this->compositeBow->expects($this->once())->method('hasTaxon')->with($this->bows)->willReturn(true);
-        $this->compositeBowItem->expects($this->once())->method('getTotal')->willReturn(5000);
+        $this->compositeBowItem->expects($this->once())->method('getQuantity')->willReturn(2);
+        $this->compositeBowItem->expects($this->once())->method('getUnitPrice')->willReturn(2500);
         $this->reflexBowItem->expects($this->once())->method('getProduct')->willReturn($this->reflexBow);
         $this->reflexBow->expects($this->once())->method('hasTaxon')->with($this->bows)->willReturn(true);
-        $this->reflexBowItem->expects($this->once())->method('getTotal')->willReturn(5000);
+        $this->reflexBowItem->expects($this->once())->method('getQuantity')->willReturn(1);
+        $this->reflexBowItem->expects($this->once())->method('getUnitPrice')->willReturn(5000);
 
         $this->assertTrue(
             $this->ruleChecker->isEligible($this->order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]]),
@@ -138,12 +142,35 @@ final class TotalOfItemsFromTaxonRuleCheckerTest extends TestCase
             ->willReturn($this->bows);
         $this->compositeBowItem->expects($this->once())->method('getProduct')->willReturn($this->compositeBow);
         $this->compositeBow->expects($this->once())->method('hasTaxon')->with($this->bows)->willReturn(true);
-        $this->compositeBowItem->expects($this->once())->method('getTotal')->willReturn(5000);
+        $this->compositeBowItem->expects($this->once())->method('getQuantity')->willReturn(1);
+        $this->compositeBowItem->expects($this->once())->method('getUnitPrice')->willReturn(5000);
         $this->longswordItem->expects($this->once())->method('getProduct')->willReturn($this->longsword);
         $this->longsword->expects($this->once())->method('hasTaxon')->with($this->bows)->willReturn(false);
 
         $this->assertFalse(
             $this->ruleChecker->isEligible($this->order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]]),
+        );
+    }
+
+    public function testShouldRecognizeSubjectAsEligibleBasedOnOriginalUnitPriceEvenWhenDiscountsAreApplied(): void
+    {
+        $this->order->expects($this->once())->method('getChannel')->willReturn($this->channel);
+        $this->channel->expects($this->once())->method('getCode')->willReturn('WEB_US');
+        $this->order->expects($this->once())->method('getItems')->willReturn(new ArrayCollection([
+            $this->compositeBowItem,
+        ]));
+        $this->taxonRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->with(['code' => 'bows'])
+            ->willReturn($this->bows);
+        $this->compositeBowItem->expects($this->once())->method('getProduct')->willReturn($this->compositeBow);
+        $this->compositeBow->expects($this->once())->method('hasTaxon')->with($this->bows)->willReturn(true);
+        $this->compositeBowItem->expects($this->once())->method('getQuantity')->willReturn(3);
+        $this->compositeBowItem->expects($this->once())->method('getUnitPrice')->willReturn(2038);
+
+        $this->assertTrue(
+            $this->ruleChecker->isEligible($this->order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 6000]]),
         );
     }
 

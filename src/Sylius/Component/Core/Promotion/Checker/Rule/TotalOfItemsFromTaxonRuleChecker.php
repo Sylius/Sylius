@@ -61,7 +61,7 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
         /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
             if ($item->getProduct()->hasTaxon($targetTaxon)) {
-                $itemsWithTaxonTotal += $item->getTotal();
+                $itemsWithTaxonTotal += $item->getQuantity() * $item->getUnitPrice();
             }
         }
 
