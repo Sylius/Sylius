@@ -58,7 +58,7 @@ class FormComponent
         string $formClass,
         protected readonly ObjectManager $manager,
         protected readonly EventDispatcherInterface $eventDispatcher,
-        protected readonly DisabledCartItemsRemover $disabledCartItemsRemover,
+        protected readonly ?DisabledCartItemsRemover $disabledCartItemsRemover = null,
         protected readonly ?RequestStack $requestStack = null,
     ) {
         $this->initialize($orderRepository, $formFactory, $resourceClass, $formClass);
@@ -67,6 +67,10 @@ class FormComponent
     #[PostMount(priority: 10)]
     public function removeDisabledCartItems(): void
     {
+        if (null === $this->disabledCartItemsRemover) {
+            return;
+        }
+
         /** @var OrderInterface|null $order */
         $order = $this->resource;
 
