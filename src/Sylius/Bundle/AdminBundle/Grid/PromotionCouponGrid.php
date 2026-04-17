@@ -32,14 +32,14 @@ use Sylius\Component\Grid\Attribute\AsGrid;
 final class PromotionCouponGrid extends AbstractGrid implements PromotionCouponGridInterface
 {
     public function __construct(
-        private readonly string $promotionClass,
+        private readonly string $promotionCouponClass,
     ) {
     }
 
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->promotionClass)
+            ->setDriverOption('class', $this->promotionCouponClass)
             ->setLimits([10, 25, 50])
             ->orderBy('used', 'desc')
             ->setRepositoryMethod('createQueryBuilderByPromotionId', [

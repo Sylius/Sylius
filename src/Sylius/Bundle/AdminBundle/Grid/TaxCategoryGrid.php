@@ -29,7 +29,7 @@ use Sylius\Component\Grid\Attribute\AsGrid;
 final class TaxCategoryGrid extends AbstractGrid implements TaxCategoryGridInterface
 {
     public function __construct(
-        private string $taxCategoryClass,
+        private readonly string $taxCategoryClass,
     ) {
     }
 

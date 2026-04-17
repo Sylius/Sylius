@@ -25,7 +25,7 @@ use Sylius\Component\Grid\Attribute\AsGrid;
 final class PaymentGrid extends AbstractGrid implements PaymentGridInterface
 {
     public function __construct(
-        private readonly string $paymentGrid,
+        private readonly string $paymentClass,
         private readonly string $channelClass,
     ) {
     }
@@ -33,7 +33,7 @@ final class PaymentGrid extends AbstractGrid implements PaymentGridInterface
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->paymentGrid)
+            ->setDriverOption('class', $this->paymentClass)
             ->setRepositoryMethod('createListQueryBuilder')
             ->addOrderBy('createdAt', 'desc')
             ->setLimits([10, 25, 50])

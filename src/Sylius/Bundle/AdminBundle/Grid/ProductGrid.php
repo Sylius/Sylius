@@ -97,10 +97,6 @@ final class ProductGrid extends AbstractGrid implements ProductGridInterface
                     ->setLabel('sylius.ui.channel'),
             )
             ->addFilter(
-                EntityFilter::create('channel', $this->channelClass, fields: ['channels.id'])
-                    ->setLabel('sylius.ui.channel'),
-            )
-            ->addFilter(
                 Filter::create('main_taxon', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.main_taxon')
                     ->setFormOptions([

@@ -78,11 +78,6 @@ final class ShipmentGrid extends AbstractGrid implements ShipmentGridInterface
                     ->setPath('order.channel'),
             )
             ->addField(
-                TwigField::create('channel', '@SyliusAdmin/shared/grid/field/channel.html.twig')
-                    ->setLabel('sylius.ui.channel')
-                    ->setPath('order.channel'),
-            )
-            ->addField(
                 TwigField::create('state', '@SyliusAdmin/shared/grid/field/shipment_state.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->withOptions([

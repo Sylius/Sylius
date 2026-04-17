@@ -70,5 +70,5 @@ sylius_core:
         default_type: array # from the config directory (yaml or php)
         grids:
             sylius_admin_product_variant:
-                type: 'service' # from src directory, these are services tagged as "sylius.grid"
+                use_legacy_config: true # from src directory, these are services tagged as "sylius.grid"
 ```
