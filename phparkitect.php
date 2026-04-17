@@ -97,5 +97,10 @@ return static function (Config $config): void
             ))
             ->because('Api should not depend on Admin and Shop')
         ,
+        Rule::allClasses()
+            ->that(new Implement(GridInterface::class))
+            ->should(new IsFinal())
+            ->because('Grids should only be decorated')
+        ,
     );
 };
