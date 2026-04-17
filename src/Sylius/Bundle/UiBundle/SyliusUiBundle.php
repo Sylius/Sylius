@@ -25,7 +25,7 @@ final class SyliusUiBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new LiveComponentTagPass(), priority: 500);
-        $container->addCompilerPass(new TwigComponentTagPass(), priority: 500);
+        $container->addCompilerPass(new LiveComponentTagPass(), priority: 50);
+        $container->addCompilerPass(new TwigComponentTagPass(), priority: 50);
     }
 }
