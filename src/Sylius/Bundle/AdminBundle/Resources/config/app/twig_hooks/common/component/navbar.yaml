@@ -9,6 +9,9 @@ sylius_twig_hooks:
                 priority: 0
 
         'sylius_admin.common.component.navbar.items':
+            theme_switcher:
+                template: '@SyliusAdmin/shared/crud/common/navbar/items/theme_switcher.html.twig'
+                priority: 50
             shop_preview:
                 component: 'sylius_admin:navbar:shop_preview'
                 props:

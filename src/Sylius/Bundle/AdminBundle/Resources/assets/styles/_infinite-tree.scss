@@ -16,7 +16,7 @@
 .infinite-tree-content {
     .infinite-tree-title {
         cursor: default;
-        color: $body-color;
+        color: var(--tblr-body-color);
         @include text-truncate-flex-child;
     }
 
@@ -28,7 +28,7 @@
         @include text-truncate-flex;
 
         &:hover {
-            background: #F7F8FB;
+            background: var(--tblr-bg-surface);
             border: none;
         }
 
@@ -92,7 +92,29 @@
     }
 
     .form-check-input[type=checkbox]:indeterminate {
-        background-color: #c7c7c7;
-        border-color: #afafaf;
+        background-color: var(--tblr-gray-400);
+        border-color: var(--tblr-gray-500);
+    }
+
+}
+
+@include color-mode(dark) {
+    .infinite-tree-content {
+        .form-check-input[type=checkbox]:indeterminate {
+            background-color: var(--tblr-gray-600);
+            border-color: var(--tblr-gray-500);
+        }
+
+        .infinite-tree-item:hover {
+            background: rgba(var(--tblr-emphasis-color-rgb), 0.08);
+        }
+
+        .infinite-tree-title {
+            color: var(--tblr-body-color);
+        }
+
+        .infinite-tree-toggler:hover {
+            color: var(--tblr-body-color);
+        }
     }
 }

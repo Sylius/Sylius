@@ -72,6 +72,12 @@
         "webpackMode": "lazy",
         "fetch": "lazy",
         "enabled": true
+      },
+      "theme-switcher": {
+        "main": "controllers/ThemeSwitcherController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
       }
     }
   },
