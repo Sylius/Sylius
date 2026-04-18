@@ -1,9 +1,12 @@
 <script>
     (function() {
+        let stored = null;
         try {
-            const stored = localStorage.getItem('sylius-admin-theme');
-            const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-bs-theme', theme);
-        } catch {}
+            stored = localStorage.getItem('sylius-admin-theme');
+        } catch {
+            // storage unavailable (private mode, quota exceeded)
+        }
+        const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-bs-theme', theme);
     })();
 </script>
