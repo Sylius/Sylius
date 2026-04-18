@@ -6,7 +6,8 @@
         } catch {
             // storage unavailable (private mode, quota exceeded)
         }
-        const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const storedTheme = ['light', 'dark'].includes(stored) ? stored : null;
+        const theme = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.setAttribute('data-bs-theme', theme);
     })();
 </script>
