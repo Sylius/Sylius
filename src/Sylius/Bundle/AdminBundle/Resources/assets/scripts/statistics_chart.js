@@ -137,6 +137,7 @@ if (element) {
             if (mutation.attributeName === 'data-sales' || mutation.attributeName === 'data-intervals') {
                 if (chart) {
                     chart.destroy();
+                    chart = null;
                 }
                 renderChart();
             }
@@ -156,6 +157,7 @@ if (element) {
                 }
                 if (chart) {
                     chart.destroy();
+                    chart = null;
                 }
                 renderChart();
             }
