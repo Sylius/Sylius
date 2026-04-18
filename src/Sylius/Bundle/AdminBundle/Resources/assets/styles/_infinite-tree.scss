@@ -113,8 +113,12 @@
             color: var(--tblr-body-color);
         }
 
-        .infinite-tree-toggler:hover {
-            color: var(--tblr-body-color);
+        .infinite-tree-toggler {
+            &.infinite-tree-open::before,
+            &.infinite-tree-closed::before,
+            &.infinite-tree-leaf::before {
+                filter: invert(1);
+            }
         }
     }
 }
