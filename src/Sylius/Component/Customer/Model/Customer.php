@@ -93,8 +93,12 @@ class Customer implements CustomerInterface, \Stringable
     {
         $fullName = $this->getFullName();
 
-        if ('' !== $fullName) {
+        if ('' !== $fullName && null !== $this->email) {
             return sprintf('%s (%s)', $fullName, $this->email);
+        }
+
+        if ('' !== $fullName) {
+            return $fullName;
         }
 
         return (string) $this->email;
