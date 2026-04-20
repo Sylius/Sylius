@@ -89,6 +89,17 @@ class Customer implements CustomerInterface, \Stringable
         return trim(sprintf('%s %s', $this->firstName, $this->lastName));
     }
 
+    public function getNameOrEmail(): string
+    {
+        $fullName = $this->getFullName();
+
+        if ('' !== $fullName) {
+            return sprintf('%s (%s)', $fullName, $this->email);
+        }
+
+        return (string) $this->email;
+    }
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
