@@ -250,7 +250,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         return $this
             ->createQueryBuilder('product')
             ->distinct()
-            ->addSelect('productTaxon')
             ->innerJoin('product.productTaxons', 'productTaxon')
             ->andWhere('productTaxon.taxon = :taxon')
             ->setParameter('taxon', $taxon)
