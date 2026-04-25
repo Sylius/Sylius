@@ -18,6 +18,7 @@ use Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand;
 use Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand;
 use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory;
 use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface;
+use Sylius\Bundle\AdminBundle\Console\Command\ListAdminUsersCommand;
 use Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext;
 use Sylius\Bundle\AdminBundle\Form\Type\AttributeType\Configuration\SelectAttributeConfigurationType;
 use Sylius\Bundle\AdminBundle\Generator\TaxonSlugGenerator;
@@ -57,6 +58,16 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.admin_user'),
             service('sylius.security.password_updater'),
             service('sylius_admin.console.command_factory.question'),
+        ])
+        ->public()
+        ->tag('console.command')
+    ;
+
+    $services
+        ->set('sylius_admin.console.command.list_admin_users', ListAdminUsersCommand::class)
+        ->args([
+            service('sylius.repository.admin_user'),
+            service('sylius.manager.admin_user'),
         ])
         ->public()
         ->tag('console.command')
