@@ -39,17 +39,15 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     public function archiveShippingMethod(string $name): void
     {
         $actions = $this->getActionsForResource(['name' => $name]);
-        $archiveRestoreModal = $actions->find('css', '[data-test-modal="archive-restore"]');
-        $archiveRestoreModal->find('css', '[data-test-trigger-button="Archive"]')->press();
-        $archiveRestoreModal->find('css', '[data-test-confirm-button]')->press();
+        $actions->find('css', '[data-test-trigger-button="Archive"]')->press();
+        $this->getDocument()->find('css', '.modal.show [data-test-confirm-button]')->press();
     }
 
     public function restoreShippingMethod(string $name): void
     {
         $actions = $this->getActionsForResource(['name' => $name]);
-        $archiveRestoreModal = $actions->find('css', '[data-test-modal="archive-restore"]');
-        $archiveRestoreModal->find('css', '[data-test-trigger-button="Restore"]')->press();
-        $archiveRestoreModal->find('css', '[data-test-confirm-button]')->press();
+        $actions->find('css', '[data-test-trigger-button="Restore"]')->press();
+        $this->getDocument()->find('css', '.modal.show [data-test-confirm-button]')->press();
     }
 
     public function isShippingMethodDisabled(ShippingMethodInterface $shippingMethod): bool
