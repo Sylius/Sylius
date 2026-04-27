@@ -40,14 +40,14 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         $actions = $this->getActionsForResource(['name' => $name]);
         $actions->find('css', '[data-test-trigger-button="Archive"]')->press();
-        $this->getDocument()->find('css', '.modal.show [data-test-confirm-button]')->press();
+        $this->getDocument()->find('css', '.modal.show[data-test-modal="archive-restore"] [data-test-confirm-button]')->press();
     }
 
     public function restoreShippingMethod(string $name): void
     {
         $actions = $this->getActionsForResource(['name' => $name]);
         $actions->find('css', '[data-test-trigger-button="Restore"]')->press();
-        $this->getDocument()->find('css', '.modal.show [data-test-confirm-button]')->press();
+        $this->getDocument()->find('css', '.modal.show[data-test-modal="archive-restore"] [data-test-confirm-button]')->press();
     }
 
     public function isShippingMethodDisabled(ShippingMethodInterface $shippingMethod): bool
