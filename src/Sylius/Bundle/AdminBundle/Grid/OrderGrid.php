@@ -62,9 +62,10 @@ final class OrderGrid implements OrderGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-                TwigField::create('customer', '@SyliusAdmin/shared/grid/field/customer.html.twig')
+                TwigField::create('customer', '@SyliusAdmin/order/grid/field/customer.html.twig')
                     ->setLabel('sylius.ui.customer')
                     ->setSortable(true, 'customer.lastName')
+                    ->setPath('.')
                     ->withOptions([
                         'vars' => [
                             'th_class' => 'w-100',

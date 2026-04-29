@@ -209,6 +209,24 @@ final readonly class ManagingOrdersContext implements Context
         Assert::true($this->indexPage->isSingleResourceOnPage(['customer' => $customer->getEmail()]));
     }
 
+    #[Then('the order placed by :email should be marked as a guest order')]
+    public function theOrderPlacedByShouldBeMarkedAsGuestOrder(string $email): void
+    {
+        Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
+            ['customer' => $email],
+            '[data-test-order-customer-type="guest"]',
+        ));
+    }
+
+    #[Then('the order placed by :email should be marked as a customer order')]
+    public function theOrderPlacedByShouldBeMarkedAsCustomerOrder(string $email): void
+    {
+        Assert::true($this->indexPage->isSingleResourceWithSpecificElementOnPage(
+            ['customer' => $email],
+            '[data-test-order-customer-type="customer"]',
+        ));
+    }
+
     #[Then('I should not be able to resend the shipment confirmation email')]
     public function iShouldNotBeAbleToResendTheShipmentConfirmationEmail(): void
     {
