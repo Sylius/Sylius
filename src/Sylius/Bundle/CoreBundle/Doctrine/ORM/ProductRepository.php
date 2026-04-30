@@ -42,12 +42,13 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $this->associationHydrator = new AssociationHydrator($entityManager, $class);
     }
 
-    public function createListQueryBuilder(string $locale, mixed $taxonId = null): QueryBuilder
-    {
+    public function createListQueryBuilder(
+        string $locale,
+        mixed $taxonId = null,
+        ?string $fallbackLocale = null
+    ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
-            ->setParameter('locale', $locale)
         ;
 
         if (null !== $taxonId) {
@@ -55,6 +56,29 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
                 ->innerJoin('o.productTaxons', 'productTaxon')
                 ->andWhere('productTaxon.taxon = :taxonId')
                 ->setParameter('taxonId', $taxonId)
+            ;
+        }
+
+        $queryBuilder
+            ->leftJoin(
+                'o.translations',
+                'translation',
+                Join::WITH,
+                'translation.locale = :locale'
+            )
+            ->setParameter('locale', $locale)
+        ;
+
+        if (null !== $fallbackLocale && $fallbackLocale !== $locale) {
+            $queryBuilder
+                ->addSelect('fallbackTranslation')
+                ->leftJoin(
+                    'o.translations',
+                    'fallbackTranslation',
+                    Join::WITH,
+                    'fallbackTranslation.locale = :fallbackLocale AND translation.id IS NULL'
+                )
+                ->setParameter('fallbackLocale', $fallbackLocale)
             ;
         }
 

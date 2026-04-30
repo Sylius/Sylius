@@ -26,7 +26,7 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
  */
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
-    public function createListQueryBuilder(string $locale, mixed $taxonId = null): QueryBuilder;
+    public function createListQueryBuilder(string $locale, mixed $taxonId = null, ?string $fallbackLocale = null): QueryBuilder;
 
     /** @param array<string, string> $sorting */
     public function createShopListQueryBuilder(
