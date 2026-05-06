@@ -22,6 +22,7 @@ use Sylius\Bundle\CoreBundle\Attribute\AsOrdersTotalsProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsProductVariantMapProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
 use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
+use Sylius\Bundle\CoreBundle\Theme\Webpack\ThemeWebpackEncoreConfigurator;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Symfony\Component\Config\FileLocator;
@@ -107,6 +108,23 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependDefaultDriver($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
+        $this->prependThemeWebpackEncoreBuilds($container, $config['theme_assets']);
+    }
+
+    private function prependThemeWebpackEncoreBuilds(ContainerBuilder $container, array $themeAssets): void
+    {
+        if (!$container->hasExtension('webpack_encore')) {
+            return;
+        }
+
+        ThemeWebpackEncoreConfigurator::configure(
+            $container,
+            $container->getParameterBag()->resolveValue($themeAssets['themes_dir']),
+            $themeAssets['channels'],
+            $themeAssets['entrypoint'],
+            $themeAssets['build_name'],
+            $container->getParameterBag()->resolveValue($themeAssets['output_path']),
+        );
     }
 
     protected function getMigrationsNamespace(): string

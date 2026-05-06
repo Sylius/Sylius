@@ -9,6 +9,7 @@
 
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
+const SyliusCore = require('@sylius-ui/core');
 
 class SyliusShop {
     /**
@@ -63,6 +64,13 @@ class SyliusShop {
                 // eslint-disable-next-line no-param-reassign
                 options.additionalData = `$rootDir: '${rootDir}';`;
             });
+    }
+
+    static getThemesWebpackConfigs(rootDir, options = {}) {
+        return SyliusCore.getThemesWebpackConfigs(rootDir, {
+            channel: 'shop',
+            ...options
+        });
     }
 }
 

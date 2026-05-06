@@ -1,0 +1,24 @@
+{
+  "name": "@sylius-ui/core",
+  "version": "2.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/SyliusCoreBundle.git"
+  },
+  "license": "MIT",
+  "author": "Sylius Sp. z o.o.",
+  "dependencies": {
+    "@symfony/webpack-encore": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
+  "files": [
+    "./package.json",
+    "./README.md",
+    "./LICENSE",
+    "./index.js"
+  ]
+}
