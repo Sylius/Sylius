@@ -18,7 +18,7 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\AdminBundle\Menu\Provider\MenuProviderInterface;
 use Webmozart\Assert\Assert;
 
-final class CompositeMenuBuilder implements MenuBuilderInterface
+final readonly class CompositeMenuBuilder implements MenuBuilderInterface
 {
     /**
      * @param iterable<MenuProviderInterface> $providers

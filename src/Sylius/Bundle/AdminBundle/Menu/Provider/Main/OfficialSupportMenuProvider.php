@@ -11,12 +11,12 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Menu;
+namespace Sylius\Bundle\AdminBundle\Menu\Provider\Main;
 
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\AdminBundle\Menu\Provider\MenuProviderInterface;
 
-final readonly class OfficialSupportProvider implements MenuProviderInterface
+final readonly class OfficialSupportMenuProvider implements MenuProviderInterface
 {
     public function __invoke(ItemInterface $menu): void
     {

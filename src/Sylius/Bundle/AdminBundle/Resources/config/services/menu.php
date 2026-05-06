@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\AdminBundle\Menu\CompositeMenuBuilder;
-use Sylius\Bundle\AdminBundle\Menu\OfficialSupportProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\AdministrationMenuProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\CatalogMenuProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\ConfigurationMenuProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\DashboardMenuProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\EventMenuProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\MarketingMenuProvider;
+use Sylius\Bundle\AdminBundle\Menu\Provider\Main\OfficialSupportMenuProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\SalesMenuProvider;
 
 return static function (ContainerConfigurator $container) {
@@ -64,7 +64,7 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius_admin.menu_builder.provider.main.official_support', OfficialSupportProvider::class)
+        ->set('sylius_admin.menu_builder.provider.main.official_support', OfficialSupportMenuProvider::class)
         ->tag('sylius_admin.main_menu_provider', ['priority' => -600])
     ;
 
