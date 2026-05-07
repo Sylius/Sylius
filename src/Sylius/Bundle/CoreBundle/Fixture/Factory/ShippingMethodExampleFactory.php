@@ -132,9 +132,9 @@ class ShippingMethodExampleFactory extends AbstractExampleFactory implements Exa
         $resolver->setNormalizer('tax_category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'));
     }
 
+    /** @return iterable<string> */
     private function getLocales(): iterable
     {
-        /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findAll();
         foreach ($locales as $locale) {
             yield $locale->getCode();

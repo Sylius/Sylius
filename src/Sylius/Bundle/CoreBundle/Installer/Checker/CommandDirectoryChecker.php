@@ -25,7 +25,7 @@ final class CommandDirectoryChecker
     {
     }
 
-    public function ensureDirectoryExists($directory, OutputInterface $output): void
+    public function ensureDirectoryExists(string $directory, OutputInterface $output): void
     {
         if (is_dir($directory)) {
             return;
@@ -48,7 +48,7 @@ final class CommandDirectoryChecker
         }
     }
 
-    public function ensureDirectoryIsWritable($directory, OutputInterface $output): void
+    public function ensureDirectoryIsWritable(string $directory, OutputInterface $output): void
     {
         if (is_writable($directory)) {
             return;

@@ -38,5 +38,6 @@ sylius:
                 all: Sve
             select: Izaberite
             select_scope: Izaberite adresu isporuke
+            priority: Prioritet
         zone_member:
             select: Izaberite

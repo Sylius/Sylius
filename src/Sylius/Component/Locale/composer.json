@@ -29,11 +29,11 @@
         "php": "^8.2",
         "laminas/laminas-stdlib": "^3.19",
         "sylius/resource": "^1.12",
-        "symfony/intl": "^6.4 || ^7.2",
+        "symfony/intl": "^6.4 || ^7.4",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.5"
+        "phpunit/phpunit": "^11.5"
     },
     "config": {
         "allow-plugins": {
@@ -42,10 +42,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.2-dev"
         },
         "symfony": {
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
 use ApiPlatform\State\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware;
+use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Bundle\PaymentBundle\Provider\DefaultActionProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,6 +25,7 @@ final class PaymentRequestActionAwareContextBuilder extends AbstractInputContext
     private ?Request $request = null;
 
     public function __construct(
+        private readonly IriToIdentifierConverterInterface $iriToIdentifierConverter,
         SerializerContextBuilderInterface $decoratedContextBuilder,
         string $attributeClass,
         string $defaultConstructorArgumentName,
@@ -50,6 +52,11 @@ final class PaymentRequestActionAwareContextBuilder extends AbstractInputContext
     {
         $data = $this->request->toArray();
 
-        return $this->defaultActionProvider->getActionFromPaymentMethodCode($data['paymentMethodCode']);
+        $paymentMethodCode = $data['paymentMethodCode'];
+        if (is_string($paymentMethodCode) && $paymentMethodCode !== '' && $this->iriToIdentifierConverter->isIdentifier($paymentMethodCode)) {
+            $paymentMethodCode = $this->iriToIdentifierConverter->getIdentifier($paymentMethodCode);
+        }
+
+        return $this->defaultActionProvider->getActionFromPaymentMethodCode($paymentMethodCode);
     }
 }

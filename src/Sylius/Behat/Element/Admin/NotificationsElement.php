@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin;
 
 use Behat\Mink\Element\NodeElement;
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 use Sylius\Behat\Service\DriverHelper;
 
-class NotificationsElement extends Element implements NotificationsElementInterface
+class NotificationsElement extends SyliusElement implements NotificationsElementInterface
 {
     public function hasNotification(string $type, string $message): bool
     {

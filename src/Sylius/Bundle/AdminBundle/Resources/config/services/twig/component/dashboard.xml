@@ -56,6 +56,7 @@
         >
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.provider.statistics" />
+            <argument type="service" id="clock" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:dashboard:statistics" />
         </service>

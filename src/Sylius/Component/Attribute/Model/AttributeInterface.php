@@ -33,8 +33,10 @@ interface AttributeInterface extends
 
     public function setType(?string $type): void;
 
+    /** @return array<string, mixed> */
     public function getConfiguration(): array;
 
+    /** @param array<string, mixed> $configuration */
     public function setConfiguration(array $configuration): void;
 
     public function getStorageType(): ?string;

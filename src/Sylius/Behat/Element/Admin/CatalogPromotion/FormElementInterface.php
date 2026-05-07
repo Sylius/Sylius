@@ -41,13 +41,13 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function addAction(string $type): void;
 
-    public function selectScopeOption(array $values): void;
+    public function selectScopeOption(array $names): void;
 
     public function fillActionOption(string $option, string $value): void;
 
     public function fillActionOptionForChannel(string $channelCode, string $option, string $value): void;
 
-    public function getLastScopeCodes(): array;
+    public function getLastScopeNames(): array;
 
     public function getLastActionOption(string $option): string;
 
@@ -61,7 +61,7 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function getValidationMessages(): array;
 
-    public function removeScopeOption(array $values): void;
+    public function removeScopeOption(array $names): void;
 
     public function removeLastAction(): void;
 

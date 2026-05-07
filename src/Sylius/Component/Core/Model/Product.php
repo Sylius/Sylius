@@ -234,6 +234,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         }
     }
 
+    /** @return array<string, string> */
     public static function getVariantSelectionMethodLabels(): array
     {
         return [
@@ -242,9 +243,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         ];
     }
 
-    /**
-     * @return ProductTranslationInterface
-     */
+    /** @return ProductTranslationInterface */
     public function getTranslation(?string $locale = null): TranslationInterface
     {
         $productTranslation = parent::getTranslation($locale);
@@ -253,9 +252,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         return $productTranslation;
     }
 
-    /**
-     * @return ProductTranslationInterface
-     */
+    /** @return ProductTranslationInterface */
     protected function createTranslation(): BaseProductTranslationInterface
     {
         return new ProductTranslation();

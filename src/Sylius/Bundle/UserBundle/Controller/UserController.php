@@ -252,13 +252,11 @@ class UserController extends ResourceController
         $this->container->get('request_stack')->getSession()->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
-    /**
-     * @param object $object
-     */
+    /** @param object $object */
     protected function createResourceForm(
         RequestConfiguration $configuration,
         string $type,
-        $object,
+        mixed $object,
     ): FormInterface {
         if (!$configuration->isHtmlRequest()) {
             return $this->container->get('form.factory')->createNamed('', $type, $object, ['csrf_protection' => false]);
@@ -372,7 +370,7 @@ class UserController extends ResourceController
         return null;
     }
 
-    private function getSyliusAttribute(Request $request, string $attribute, $default = null): mixed
+    private function getSyliusAttribute(Request $request, string $attribute, mixed $default = null): mixed
     {
         $attributes = $request->attributes->get('_sylius', []);
 

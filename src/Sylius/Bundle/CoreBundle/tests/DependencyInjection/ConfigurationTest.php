@@ -73,7 +73,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    public function it_allows_to_configure_orders_statistics_intervals_map(): void
+    public function test_it_allows_to_configure_orders_statistics_intervals_map(): void
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -232,6 +232,51 @@ final class ConfigurationTest extends TestCase
             [['checkout' => ['payment' => ['allowed_states' => ['new', 'cart', 'pending']]]]],
             ['checkout' => ['payment' => ['allowed_states' => ['new', 'cart', 'pending']]]],
             'checkout',
+        );
+    }
+
+    #[Test]
+    public function it_sets_default_telemetry_configuration(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            [
+                'telemetry' => [
+                    'enabled' => true,
+                    'salt' => null,
+                    'business' => true,
+                    'technical' => true,
+                    'plugins' => true,
+                    'url' => 'https://prism.sylius.com/telemetry',
+                    'query_timeout' => 60000,
+                ],
+            ],
+            'telemetry',
+        );
+    }
+
+    #[Test]
+    public function it_allows_overriding_telemetry_configuration(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[
+                'telemetry' => [
+                    'enabled' => false,
+                    'salt' => 'custom-salt',
+                ],
+            ]],
+            [
+                'telemetry' => [
+                    'enabled' => false,
+                    'salt' => 'custom-salt',
+                    'business' => true,
+                    'technical' => true,
+                    'plugins' => true,
+                    'url' => 'https://prism.sylius.com/telemetry',
+                    'query_timeout' => 60000,
+                ],
+            ],
+            'telemetry',
         );
     }
 

@@ -18,7 +18,5 @@
         }
     ],
     "detail": "firstName: First name must be at least 2 characters long.\nlastName: Last name must be at least 2 characters long.",
-    "description": "firstName: First name must be at least 2 characters long.\nlastName: Last name must be at least 2 characters long.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

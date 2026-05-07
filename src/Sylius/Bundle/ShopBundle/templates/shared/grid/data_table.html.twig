@@ -11,7 +11,7 @@
             <div class="d-flex border-bottom pb-3">
                 {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
                     <div class="sylius-grid-nav__bulk">
-                        {% for action in definition.getEnabledActions('bulk') %}
+                        {% for action in definition.getEnabledActions('bulk')|sylius_sort_by('position') %}
                             {{ sylius_grid_render_bulk_action(grid, action, null) }}
                         {% endfor %}
                     </div>

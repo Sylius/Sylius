@@ -94,7 +94,7 @@ final class ChannelBasedExtensionTest extends TestCase
         $countries = new ArrayCollection([$country]);
 
         $queryBuilder->method('getRootAliases')->willReturn(['o']);
-        $channel->method('getCountries')->willReturn($countries);
+        $channel->method('getEnabledCountries')->willReturn($countries);
         $queryNameGenerator->expects($this->once())->method('generateParameterName')->with('countries')->willReturn('countries');
 
         $queryBuilder->expects($this->once())->method('andWhere')->with('o.id in (:countries)')->willReturnSelf();

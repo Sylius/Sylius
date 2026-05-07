@@ -28,7 +28,7 @@ final class CustomerGroupConfigurationType extends AbstractType
                 'label' => 'sylius.form.promotion_rule.customer_group.group',
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'string', 'groups' => ['sylius']]),
+                    new Type(type: 'string', groups: ['sylius']),
                 ],
             ])
         ;

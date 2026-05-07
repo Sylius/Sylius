@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\FormElementInterface;
 use Sylius\Behat\Element\Admin\Taxon\ImageFormElementInterface;
@@ -230,6 +231,12 @@ final readonly class ManagingTaxonsContext implements Context
         Assert::same($this->formElement->getCode(), $taxon->getCode());
     }
 
+    #[When('/^I search for parent taxon "([^"]*)"$/')]
+    public function iSearchForParentTaxon(string $searchTerm): void
+    {
+        $this->sharedStorage->set('autocompleteSearchResults', $this->formElement->searchParentTaxon($searchTerm));
+    }
+
     /**
      * @Then this taxon :element should be :value
      * @Then this taxon :element should be :value in :localeCode
@@ -271,7 +278,7 @@ final readonly class ManagingTaxonsContext implements Context
      */
     public function thisTaxonShouldBelongsTo(TaxonInterface $taxon): void
     {
-        Assert::same($this->formElement->getParent(), $taxon->getCode());
+        Assert::same($this->formElement->getParent(), $taxon->getName());
     }
 
     /**
@@ -486,5 +493,30 @@ final readonly class ManagingTaxonsContext implements Context
     public function itShouldBeDisabled(): void
     {
         Assert::false($this->formElement->isEnabled());
+    }
+
+    /**
+     * @Then /^I should see "([^"]*)" in the found results$/
+     */
+    public function iShouldSeeInTheFoundResults(string $taxonName): void
+    {
+        $autocompleteSearchResults = $this->sharedStorage->get('autocompleteSearchResults');
+        $found = false;
+        foreach ($autocompleteSearchResults as $result) {
+            if (str_contains($result, $taxonName)) {
+                $found = true;
+
+                break;
+            }
+        }
+
+        Assert::true(
+            $found,
+            sprintf(
+                'Expected to see "%s" in autocomplete results, but found: %s',
+                $taxonName,
+                implode(', ', $autocompleteSearchResults),
+            ),
+        );
     }
 }

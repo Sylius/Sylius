@@ -123,6 +123,15 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
+    #[Given('the payment method :paymentMethod is enabled')]
+    #[Given('the payment method :paymentMethod gets enabled')]
+    public function theStoreHasAPaymentMethodEnabled(PaymentMethodInterface $paymentMethod): void
+    {
+        $paymentMethod->enable();
+
+        $this->paymentMethodManager->flush();
+    }
+
     /**
      * @Given /^(it) has instructions "([^"]+)"$/
      */
@@ -150,6 +159,16 @@ final readonly class PaymentContext implements Context
         $config = $paymentMethod->getGatewayConfig();
         $config->setConfig(array_merge($config->getConfig(), ['use_authorize' => true]));
         $paymentMethod->setGatewayConfig($config);
+
+        $this->paymentMethodManager->flush();
+    }
+
+    /**
+     * @Given the payment method :paymentMethod has been disabled in :channel channel
+     */
+    public function theStoreHasDisabledPaymentMethodInChannel(PaymentMethodInterface $paymentMethod, ChannelInterface $channel): void
+    {
+        $paymentMethod->removeChannel($channel);
 
         $this->paymentMethodManager->flush();
     }

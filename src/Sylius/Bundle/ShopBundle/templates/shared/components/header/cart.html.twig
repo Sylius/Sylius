@@ -1,13 +1,9 @@
 {# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Common\CartComponent #}
-
+{% import '@SyliusShop/shared/macro/loader.html.twig' as loader %}
 {% import "@SyliusShop/shared/macro/money.html.twig" as money %}
 
 <div class="col-auto position-relative" {{ attributes }}>
-    <div data-loading>
-        <div class="sylius-shop-loader">
-            <img src="{{ asset('build/shop/images/loader.gif', 'shop') }}" alt="{{ 'sylius.ui.loading'|trans }}" loading="lazy"/>
-        </div>
-    </div>
+    {{ loader.render() }}
     <div {{ sylius_test_html_attribute('cart-button') }}>
         <button class="btn btn-icon btn-transparent px-0 position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-label="cart button">
             {{ ux_icon('tabler:shopping-bag') }}

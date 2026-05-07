@@ -1,3 +1,5 @@
+# This configuration is deprecated. The address log entries are no longer rendered with Sylius grids.
+# This will be removed in Sylius 3.0
 sylius_grid:
     grids:
         sylius_admin_address_log_entry:

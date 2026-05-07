@@ -19,10 +19,12 @@ use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\Address;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 final class ShippingMethodsTest extends JsonApiTestCase
 {
@@ -185,7 +187,24 @@ final class ShippingMethodsTest extends JsonApiTestCase
             productVariantCode: 'MUG_BLUE',
             quantity: 3,
         );
-        $commandBus->dispatch($addItemToCartCommand);
+
+        $tokenStorage = self::getContainer()->get('security.token_storage');
+        $previousToken = $tokenStorage->getToken();
+
+        $shopUserRepository = self::getContainer()->get('sylius.repository.shop_user');
+        /** @var ShopUserInterface|null $user */
+        $user = $shopUserRepository->findOneByEmail($customerEmail);
+        if (null !== $user) {
+            $tokenStorage->setToken(
+                new UsernamePasswordToken($user, 'api_shop', $user->getRoles()),
+            );
+        }
+
+        try {
+            $commandBus->dispatch($addItemToCartCommand);
+        } finally {
+            $tokenStorage->setToken($previousToken);
+        }
 
         $address = new Address();
         $address->setFirstName('John');

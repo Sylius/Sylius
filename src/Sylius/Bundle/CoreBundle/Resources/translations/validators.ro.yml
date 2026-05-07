@@ -106,7 +106,7 @@ sylius:
             not_valid: 'Codul valutei introdus este invalid.'
         invalid_state_transition: 'Nu se poate finaliza deoarece comanda este într-o stare incorectă. Curent: %currentState%. Tranziții posibile: %possibleTransitions%.'
         payment_method_eligibility: 'Această metodă de plată %paymentMethodName% a fost dezactivată. Vă rugăm să selectați o altă metodă de plată.'
-        product_eligibility: 'Acest produs %productName% a fost dezactivat.'
+        product_eligibility: 'Produsul %productName% nu mai este disponibil.'
         shipping_method_eligibility: 'Produsul nu îndeplinește cerințele pentru metoda de livrare %shippingMethodName%. Vă rugăm să selectați din nou metoda de livrare.'
         shipping_method_not_available: 'Metoda de livrare "%shippingMethodName%" nu este disponibilă. Vă rugăm să selectați din nou metoda de livrare.'
         cart_items_immutable: 'Nu puteți modifica articolele din coș după ce finalizarea comenzii a fost realizată.'

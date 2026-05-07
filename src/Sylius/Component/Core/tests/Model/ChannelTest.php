@@ -16,6 +16,7 @@ namespace Tests\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\Collection;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Core\Model\Channel;
@@ -234,5 +235,23 @@ final class ChannelTest extends TestCase
         $this->channel->setChannelPriceHistoryConfig($config);
 
         $this->assertSame($config, $this->channel->getChannelPriceHistoryConfig());
+    }
+
+    public function testShouldReturnOnlyEnabledCountries(): void
+    {
+        $country1 = $this->createMock(CountryInterface::class);
+        $country2 = $this->createMock(CountryInterface::class);
+
+        $country1->method('isEnabled')->willReturn(true);
+        $country2->method('isEnabled')->willReturn(false);
+
+        $this->channel->addCountry($country1);
+        $this->channel->addCountry($country2);
+
+        $enabledCountries = $this->channel->getEnabledCountries();
+
+        $this->assertCount(1, $enabledCountries);
+        $this->assertContains($country1, $enabledCountries);
+        $this->assertNotContains($country2, $enabledCountries);
     }
 }

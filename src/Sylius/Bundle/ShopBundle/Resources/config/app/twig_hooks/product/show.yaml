@@ -90,6 +90,11 @@ sylius_twig_hooks:
             submit:
                 template: '@SyliusShop/product/show/content/info/summary/add_to_cart/submit.html.twig'
                 priority: 0
+            fastest_delivery:
+                component: 'sylius_shop:common:delivery_time'
+                props:
+                    template: '@SyliusShop/shared/components/common/fastest_delivery_time.html.twig'
+                priority: -100
 
         'sylius_shop.product.show.content.info.summary.add_to_cart.variants':
             table:

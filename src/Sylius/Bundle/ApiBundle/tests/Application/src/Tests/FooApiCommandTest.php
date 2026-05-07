@@ -38,9 +38,8 @@ final class FooApiCommandTest extends ApiTestCase
 
         $this->assertResponseHeaderSame('content-type', 'application/problem+json; charset=utf-8');
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_BAD_REQUEST);
+        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertJsonContains([
-            'description' => 'Request does not have the following required fields specified: bar.',
             'hydra:description' => 'Request does not have the following required fields specified: bar.',
             'hydra:title' => 'An error occurred',
         ]);

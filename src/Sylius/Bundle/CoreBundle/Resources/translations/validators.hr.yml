@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: Kod valute koji ste unjeli nije ispravan.
         payment_method_eligibility: 'Metoda plaćanja %paymentMethodName% je onemogućena. Molimo ponovo odaberite svoju metodu plaćanja.'
-        product_eligibility: 'Proizvod %productName% je onemogućen.'
+        product_eligibility: 'Proizvod %productName% više nije dostupan.'
         shipping_method_eligibility: 'Proizvod ne spada u tražene zahtjeve za %shippingMethodName% metodu dostave. Molimo ponovo odaberite svoju metodu dostave.'
     locale:
         enabled:

@@ -84,10 +84,14 @@ final readonly class ZoneContext implements Context
      * @Given the store has (also) a zone :zoneName
      * @Given the store has a zone :zoneName with code :code
      * @Given the store also has a zone :zoneName with code :code
+     * @Given the store has a zone :zoneName with code :code and priority :priority
      */
-    public function theStoreHasAZoneWithCode(string $zoneName, ?string $code = null): void
+    public function theStoreHasAZoneWithCode(string $zoneName, ?string $code = null, ?int $priority = 0): void
     {
-        $this->saveZone($this->createZone($zoneName, $code, Scope::ALL), 'zone');
+        $zone = $this->createZone($zoneName, $code, Scope::ALL);
+        $zone->setPriority($priority);
+
+        $this->saveZone($zone, 'zone');
     }
 
     /**

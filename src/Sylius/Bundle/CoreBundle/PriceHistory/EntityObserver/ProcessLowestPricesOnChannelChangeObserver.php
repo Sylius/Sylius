@@ -19,6 +19,7 @@ use Webmozart\Assert\Assert;
 
 final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserverInterface
 {
+    /** @var array<mixed> */
     private array $channelsCurrentlyProcessed = [];
 
     public function __construct(private ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface $commandDispatcher)

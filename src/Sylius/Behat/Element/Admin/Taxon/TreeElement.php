@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Taxon;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element as BaseElement;
+use Sylius\Behat\Element\SyliusElement;
 use Sylius\Behat\Service\DriverHelper;
 
-class TreeElement extends BaseElement implements TreeElementInterface
+class TreeElement extends SyliusElement implements TreeElementInterface
 {
     public function getTaxonsNames(): array
     {
@@ -85,7 +85,7 @@ class TreeElement extends BaseElement implements TreeElementInterface
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'confirm_delete_button' => '[data-test-tree-taxons] [data-test-tree-taxon="%name%"] [data-test-delete-modal] [data-test-confirm-button]',
+            'confirm_delete_button' => '.modal.show[data-test-delete-modal] [data-test-confirm-button]',
             'first_tree_taxon' => '[data-test-tree-taxons] [data-test-tree-taxon]:first-child',
             'last_tree_taxon' => '[data-test-tree-taxons] [data-test-tree-taxon]:last-child',
             'tree_taxons' => '[data-test-tree-taxons]',

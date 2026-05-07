@@ -39,7 +39,7 @@ sylius:
         currency_code:
             not_valid: El código de la moneda que ingreso no es válido.
         payment_method_eligibility: 'El método de pago %paymentMethodName% no está activo. Por favor, seleccione otro método de pago.'
-        product_eligibility: 'El producto %productName% ha sido desactivado.'
+        product_eligibility: 'El producto %productName% ya no está disponible.'
         shipping_method_eligibility: 'El producto no cumple los requisitos para el método de envío %shippingMethodName%. Por favor, seleccionar otro método de envío.'
     locale:
         enabled:

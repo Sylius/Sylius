@@ -29,7 +29,8 @@ class ProductAttributeRepository extends EntityRepository implements ProductAttr
     public function createListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
-            ->innerJoin('o.translations', 'translation', Join::WITH, 'translation.locale = :locale')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation', Join::WITH, 'translation.locale = :locale')
             ->setParameter('locale', $locale)
         ;
     }

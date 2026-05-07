@@ -25,24 +25,23 @@
     "require": {
         "php": "^8.2",
         "doctrine/dbal": "^3.9",
-        "api-platform/doctrine-orm": "^4.1.7",
-        "api-platform/symfony": "^4.1.7",
+        "api-platform/doctrine-orm": "^4.2.1",
+        "api-platform/symfony": "^4.2.1",
         "lexik/jwt-authentication-bundle": "^3.1",
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
-        "symfony/messenger": "^6.4 || ^7.2"
+        "symfony/messenger": "^6.4 || ^7.4"
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+        "matthiasnoback/symfony-config-test": "^6.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "nelmio/alice": "^3.13",
         "phparkitect/phparkitect": "^0.6",
-        "phpspec/prophecy-phpunit": "^2.2",
-        "phpunit/phpunit": "^10.5",
-        "symfony/browser-kit": "^6.4 || ^7.2",
-        "symfony/debug-bundle": "^6.4 || ^7.2",
-        "symfony/dotenv": "^6.4 || ^7.2",
+        "phpunit/phpunit": "^11.5",
+        "symfony/browser-kit": "^6.4 || ^7.4",
+        "symfony/debug-bundle": "^6.4 || ^7.4",
+        "symfony/dotenv": "^6.4 || ^7.4",
         "symfony/webpack-encore-bundle": "^2.2",
         "theofidry/alice-data-fixtures": "^1.7"
     },
@@ -53,10 +52,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.2-dev"
         },
         "symfony": {
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {

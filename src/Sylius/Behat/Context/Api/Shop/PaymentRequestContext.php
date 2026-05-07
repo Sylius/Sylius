@@ -21,7 +21,6 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Webmozart\Assert\Assert;
@@ -88,7 +87,6 @@ final readonly class PaymentRequestContext implements Context
         $request->setContent([
             'paymentId' => $payment['id'],
             'paymentMethodCode' => $payment['method'],
-            'action' => PaymentRequestInterface::ACTION_CAPTURE,
             'payload' => $payload,
         ]);
 

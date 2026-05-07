@@ -96,7 +96,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         ;
     }
 
-    public function findCartById($id): ?OrderInterface
+    public function findCartById(mixed $id): ?OrderInterface
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.id = :id')

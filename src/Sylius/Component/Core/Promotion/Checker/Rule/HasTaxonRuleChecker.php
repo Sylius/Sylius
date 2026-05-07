@@ -25,6 +25,8 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
     public const TYPE = 'has_taxon';
 
     /**
+     * @param array<string, mixed> $configuration
+     *
      * @throws UnsupportedTypeException
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
@@ -47,6 +49,7 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
         return false;
     }
 
+    /** @param array<string, mixed> $configuration */
     private function hasProductValidTaxon(ProductInterface $product, array $configuration): bool
     {
         foreach ($product->getTaxons() as $taxon) {

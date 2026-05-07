@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Product\ShowPage;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class ShippingElement extends Element implements ShippingElementInterface
+class ShippingElement extends SyliusElement implements ShippingElementInterface
 {
     public function getProductShippingCategory(): string
     {

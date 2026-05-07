@@ -1,3 +1,41 @@
+# UPGRADE FROM `2.1.10` TO `2.1.11`
+
+### Constructor signature changes
+
+1. `Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\PaymentRequestActionAwareContextBuilder`:
+   ```diff
+   public function __construct(
+   +   private readonly IriToIdentifierConverterInterface $iriToIdentifierConverter,
+       SerializerContextBuilderInterface $decoratedContextBuilder,
+       string $attributeClass,
+       string $defaultConstructorArgumentName,
+   )
+   ```
+
+# UPGRADE FROM `2.1.4` TO `2.1.5`
+
+## Modified responses
+
+### OrderItem
+
+The `OrderItem` response has been modified to include the `variantName` property.
+
+```diff
+    "@context": "\/api\/v2\/contexts\/Order",
+    "@id": "\/api\/v2\/shop\/orders\/token",
+    "@type": "Order",
+    ...
+    "items": [
+         {
+             "@id": "\/api\/v2\/shop\/orders\/token\/items\/XYZ",
+             ...
+             "productName": "Mug",
++            "variantName": "Blue Mug"
+             ...
+         }
+    ...
+```
+
 # UPGRADE FROM `2.0` TO `2.1`
 
 ## Modified responses

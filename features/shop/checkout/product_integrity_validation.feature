@@ -31,3 +31,12 @@ Feature: Order products integrity
         When I confirm my order
         Then I should be informed that this variant has been disabled
         And I should not see the thank you page
+
+    @ui @api
+    Scenario: Preventing a customer from completing checkout when a product is no longer available in the current channel
+        Given I added product "PHP T-Shirt" to the cart
+        And I have proceeded through checkout process
+        But this product is not available in "United States" channel
+        When I try to confirm my order
+        Then I should be informed that this product has been disabled
+        And I should not see the thank you page

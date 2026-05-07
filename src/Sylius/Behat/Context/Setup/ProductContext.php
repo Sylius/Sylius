@@ -1188,6 +1188,15 @@ final readonly class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) is not available in ("[^"]+" channel)$/
+     */
+    public function thisProductIsNotAvailableInChannel(ProductInterface $product, ChannelInterface $channel): void
+    {
+        $product->removeChannel($channel);
+        $this->saveProduct($product);
+    }
+
+    /**
      * @Given /^(this product) is configured with the option matching selection method$/
      */
     public function thisProductIsConfiguredWithTheOptionMatchingSelectionMethod(ProductInterface $product): void

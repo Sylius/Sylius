@@ -65,6 +65,8 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     }
 
     /**
+     * @param array<mixed> $generatedCoupons
+     *
      * @throws \InvalidArgumentException
      */
     private function generateUniqueCode(
@@ -83,6 +85,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
         return $code;
     }
 
+    /** @param array<mixed> $generatedCoupons */
     private function isUsedCode(string $code, array $generatedCoupons): bool
     {
         if (isset($generatedCoupons[$code])) {

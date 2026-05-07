@@ -50,7 +50,7 @@ final class SyliusRequirementsChecker implements RequirementsCheckerInterface
         RequirementCollection $collection,
         TableRenderer $notFulfilledTable,
         TableRenderer $helpTable,
-        $verbose,
+        mixed $verbose,
     ): void {
         /** @var Requirement $requirement */
         foreach ($collection as $requirement) {

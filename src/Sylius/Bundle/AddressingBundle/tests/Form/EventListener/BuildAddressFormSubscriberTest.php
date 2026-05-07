@@ -77,12 +77,9 @@ final class BuildAddressFormSubscriberTest extends TestCase
         $this->formFactory
             ->expects($this->once())
             ->method('createNamed')
-            ->with('provinceCode', ProvinceCodeChoiceType::class, 'province', $this->callback(function (array $options) use ($country) {
-                return is_array($options) &&
-                    isset($options['country']) &&
-                    $options['country'] === $country
-                ;
-            }))
+            ->with('provinceCode', ProvinceCodeChoiceType::class, 'province', $this->callback(fn (array $options) => is_array($options) &&
+                isset($options['country']) &&
+                $options['country'] === $country))
             ->willReturn($provinceForm)
         ;
         $form->expects($this->once())->method('add')->with($provinceForm)->willReturn($form);
@@ -133,12 +130,9 @@ final class BuildAddressFormSubscriberTest extends TestCase
         $this->formFactory
             ->expects($this->once())
             ->method('createNamed')
-            ->with('provinceCode', ProvinceCodeChoiceType::class, null, $this->callback(function (array $options) use ($country) {
-                return is_array($options) &&
-                    isset($options['country']) &&
-                    $options['country'] === $country
-                ;
-            }))
+            ->with('provinceCode', ProvinceCodeChoiceType::class, null, $this->callback(fn (array $options) => is_array($options) &&
+                isset($options['country']) &&
+                $options['country'] === $country))
             ->willReturn($provinceForm)
         ;
         $form->expects($this->once())->method('add')->with($provinceForm)->willReturn($form);

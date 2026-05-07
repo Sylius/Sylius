@@ -13,7 +13,5 @@
         }
     ],
     "detail": "Configuration min entries value must be lower or equal to the number of added choices.",
-    "description": "Configuration min entries value must be lower or equal to the number of added choices.",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

@@ -34,7 +34,7 @@ final class AddressTypeExtension extends AbstractTypeExtension
         /** @var ChannelInterface|null $channel */
         $channel = $options['channel'];
 
-        if ($channel === null || $channel->getCountries()->count() === 0) {
+        if ($channel === null || $channel->getEnabledCountries()->count() === 0) {
             return;
         }
 
@@ -43,7 +43,7 @@ final class AddressTypeExtension extends AbstractTypeExtension
         $countryCodeField = $builder->create(
             $oldCountryCodeField->getName(),
             $oldCountryCodeField->getType()->getInnerType()::class,
-            array_replace($oldCountryCodeField->getOptions(), ['choices' => $channel->getCountries()->toArray()]),
+            array_replace($oldCountryCodeField->getOptions(), ['choices' => $channel->getEnabledCountries()->toArray()]),
         );
 
         $builder->add($countryCodeField);

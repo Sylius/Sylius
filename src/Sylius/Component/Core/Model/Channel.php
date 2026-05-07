@@ -292,4 +292,9 @@ class Channel extends BaseChannel implements ChannelInterface
     {
         $this->channelPriceHistoryConfig = $channelPriceHistoryConfig;
     }
+
+    public function getEnabledCountries(): Collection
+    {
+        return $this->getCountries()->filter(fn (CountryInterface $country): bool => true === $country->isEnabled());
+    }
 }

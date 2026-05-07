@@ -49,10 +49,14 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
         $context[self::ALREADY_CALLED] = true;
         $data = (array) $data;
 
-        $this->validateValue($data);
-        $data = $this->denormalizeValue($data);
+        /** @var ProductAttributeInterface $attribute */
+        $attribute = $this->iriConverter->getResourceFromIri($data['attribute']);
 
-        return $this->denormalizer->denormalize($data, $type, $format, $context);
+        $this->validateValue($data, $attribute);
+
+        $data = $this->denormalizeValue($data, $attribute);
+
+        return $this->denormalizer->denormalize($this->reorderAttributeFirst($data), $type, $format, $context);
     }
 
     public function getSupportedTypes(?string $format): array
@@ -65,11 +69,8 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
      *
      * @return array<array-key, mixed>
      */
-    private function denormalizeValue(array $data): array
+    private function denormalizeValue(array $data, ProductAttributeInterface $attribute): array
     {
-        /** @var ProductAttributeInterface $attribute */
-        $attribute = $this->iriConverter->getResourceFromIri($data['attribute']);
-
         if (in_array($attribute->getType(), [DateAttributeType::TYPE, DateTimeAttributeType::TYPE], true)) {
             $data['value'] = new \DateTime($data['value']);
         }
@@ -77,16 +78,35 @@ final class ProductAttributeValueDenormalizer implements DenormalizerInterface, 
         return $data;
     }
 
-    /** @param array<array-key, mixed> $data */
-    private function validateValue(array $data): void
+    /**
+     * Reorders the data array to ensure 'attribute' key comes first,
+     * preventing setValue() from being called before setAttribute().
+     *
+     * @see AttributeValue::setValue()
+     *
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
+     */
+    private function reorderAttributeFirst(array $data): array
     {
+        $attribute = $data['attribute'];
+        unset($data['attribute']);
+
+        return ['attribute' => $attribute, ...$data];
+    }
+
+    /** @param array<array-key, mixed> $data */
+    private function validateValue(array $data, ?ProductAttributeInterface $attribute = null): void
+    {
+        if (!isset($data['value']) || $attribute === null) {
+            return;
+        }
+
         $value = $data['value'];
         if ($value === null) {
             return;
         }
-
-        /** @var ProductAttributeInterface $attribute */
-        $attribute = $this->iriConverter->getResourceFromIri($data['attribute']);
 
         switch ($attribute->getStorageType()) {
             case AttributeValueInterface::STORAGE_BOOLEAN:

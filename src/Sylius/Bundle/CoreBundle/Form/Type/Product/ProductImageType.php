@@ -54,6 +54,7 @@ final class ProductImageType extends ImageType
                 ->add('position', IntegerType::class, [
                     'label' => 'sylius.ui.position',
                     'required' => false,
+                    'empty_data' => 0,
                 ])
             ;
         }

@@ -30,7 +30,6 @@ final class StatisticsTest extends JsonApiTestCase
         $this->setUpOrderPlacer();
     }
 
-
     #[DataProvider('getIntervals')]
     #[Test]
     public function it_gets_fulfilled_orders_in_specific_year_statistics(string $interval): void
@@ -170,24 +169,20 @@ final class StatisticsTest extends JsonApiTestCase
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponseViolations(
-            $this->client->getResponse(),
+        $this->assertResponseContainsViolations([
             [
-                [
-                    'propertyPath' => '',
-                    'message' => 'The start date must be earlier than the end date.',
-                ],
+                'propertyPath' => '',
+                'message' => 'The start date must be earlier than the end date.',
             ],
-        );
+        ]);
     }
-
 
     #[DataProvider('missingQueryParameters')]
     #[DataProvider('emptyQueryParameters')]
     #[DataProvider('invalidQueryParameters')]
     #[Test]
     public function it_returns_a_validation_error_if_any_of_required_parameters_is_missing_empty_or_invalid(
-        array $queryParameters,
+        array $parameters,
         array $expectedViolations,
     ): void {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml']);
@@ -195,11 +190,11 @@ final class StatisticsTest extends JsonApiTestCase
         $this->client->request(
             method: 'GET',
             uri: '/api/v2/admin/statistics',
-            parameters: $queryParameters,
+            parameters: $parameters,
             server: $this->headerBuilder()->withAdminUserAuthorization('api@example.com')->build(),
         );
 
-        $this->assertResponseViolations($this->client->getResponse(), $expectedViolations);
+        $this->assertResponseContainsViolations($expectedViolations);
     }
 
     public static function missingQueryParameters(): iterable

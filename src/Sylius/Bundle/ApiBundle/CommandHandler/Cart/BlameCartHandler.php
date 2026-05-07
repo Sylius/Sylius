@@ -14,11 +14,14 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Sylius\Bundle\ApiBundle\Command\Cart\BlameCart;
+use Sylius\Bundle\ApiBundle\Exception\UnprocessableCartException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
@@ -41,18 +44,18 @@ final readonly class BlameCartHandler
         $user = $this->shopUserRepository->findOneByEmail($blameCart->shopUserEmail);
 
         if ($user === null) {
-            throw new \InvalidArgumentException('There is currently no customer with given email');
+            throw new NotFoundHttpException('There is currently no customer with given email');
         }
 
         /** @var OrderInterface|null $cart */
         $cart = $this->orderRepository->findCartByTokenValue($blameCart->orderTokenValue);
 
         if ($cart === null) {
-            throw new \InvalidArgumentException('Cart with given token value could not be found');
+            throw new UnprocessableCartException();
         }
 
         if (null !== $cart->getCustomer()) {
-            throw new \InvalidArgumentException('There is an assigned customer to this cart');
+            throw new ConflictHttpException('There is an assigned customer to this cart');
         }
 
         $cart->setCustomerWithAuthorization($user->getCustomer());

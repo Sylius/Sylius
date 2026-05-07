@@ -17,7 +17,7 @@ sylius:
             configuration: 'Konfiguration'
             date: 'Datum'
             datetime: 'Datum/Uhrzeit'
-            float: 'Gleitkomma'
+            float: 'Gleitkommazahl'
             integer: 'Ganzzahl'
             percent: 'Prozent'
             select: 'Auswählen'

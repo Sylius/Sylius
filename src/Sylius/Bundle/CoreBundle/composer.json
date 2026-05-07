@@ -27,13 +27,14 @@
     ],
     "require": {
         "php": "^8.2",
+        "doctrine/dbal": "^3.9",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "egulias/email-validator": "^4.0",
         "fakerphp/faker": "^1.23",
         "knplabs/gaufrette": "^0.11",
         "knplabs/knp-gaufrette-bundle": "^0.9",
         "league/flysystem-bundle": "^3.3",
-        "liip/imagine-bundle": "^2.13",
+        "liip/imagine-bundle": "^2.15",
         "sylius-labs/association-hydrator": "^1.2",
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.2",
         "sylius/addressing-bundle": "^2.0",
@@ -59,13 +60,13 @@
         "sylius/taxation-bundle": "^2.0",
         "sylius/taxonomy-bundle": "^2.0",
         "sylius/user-bundle": "^2.0",
-        "symfony/clock": "^6.4 || ^7.2",
-        "symfony/framework-bundle": "^6.4.1 || ^7.2",
-        "symfony/intl": "^6.4 || ^7.2",
-        "symfony/mailer": "^6.4 || ^7.2",
-        "symfony/messenger": "^6.4 || ^7.2",
+        "symfony/clock": "^6.4 || ^7.4",
+        "symfony/framework-bundle": "^6.4.1 || ^7.4",
+        "symfony/intl": "^6.4 || ^7.4",
+        "symfony/mailer": "^6.4 || ^7.4",
+        "symfony/messenger": "^6.4 || ^7.4",
         "symfony/webpack-encore-bundle": "^2.2",
-        "symfony/workflow": "^6.4 || ^7.2",
+        "symfony/workflow": "^6.4 || ^7.4",
         "php-http/discovery": "^1.20"
     },
     "conflict": {
@@ -73,14 +74,13 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18 || ^3.3",
+        "doctrine/orm": "^2.18 || ^3.5",
         "hwi/oauth-bundle": "^2.2",
-        "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpspec/prophecy-phpunit": "^2.2",
-        "phpunit/phpunit": "^10.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.2",
-        "symfony/dotenv": "^6.4 || ^7.2",
+        "matthiasnoback/symfony-config-test": "^6.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "phpunit/phpunit": "^11.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.4",
+        "symfony/dotenv": "^6.4 || ^7.4",
         "nyholm/psr7": "^1.8"
     },
     "config": {
@@ -91,10 +91,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.2-dev"
         },
         "symfony": {
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {

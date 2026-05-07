@@ -43,7 +43,5 @@
         }
     ],
     "detail": "@string@",
-    "description": "@string@",
-    "type": "\/validation_errors\/@string@",
-    "title": "An error occurred"
+    "type": "\/validation_errors\/@string@"
 }

@@ -38,5 +38,6 @@ sylius:
                 all: Sve
             select: Odaberite
             select_scope: Odaberite doseg
+            priority: Prioritet
         zone_member:
             select: Odaberite

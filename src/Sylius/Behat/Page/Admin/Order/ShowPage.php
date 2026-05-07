@@ -16,13 +16,13 @@ namespace Sylius\Behat\Page\Admin\Order;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class ShowPage extends SyliusPage implements ShowPageInterface
 {
     public function __construct(
         Session $session,

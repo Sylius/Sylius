@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin\Channel;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class LowestPriceFlagElement extends Element implements LowestPriceFlagElementInterface
+class LowestPriceFlagElement extends SyliusElement implements LowestPriceFlagElementInterface
 {
     public function enable(): void
     {

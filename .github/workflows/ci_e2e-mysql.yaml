@@ -1,4 +1,4 @@
-name: End-to-End (MySQL)
+name: Tests (MySQL)
 
 on:
     workflow_dispatch: ~
@@ -41,18 +41,19 @@ jobs:
                     path: '.github/workflows/matrix.json'
                     prop_path: '${{ inputs.type }}.e2e-mysql'
 
-    behat-no-js:
+    phpunit-cli-api:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
-        timeout-minutes: 45
+        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+            BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
             -   name: Set variables
@@ -62,8 +63,6 @@ jobs:
                 run: |
                     if [ "$BRANCH" == "1.14" ]; then
                         echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    elif [ "$BRANCH" == "2.0" ]; then
-                        echo "NODE_VERSION=22.x" >> $GITHUB_ENV
                     else
                         echo "NODE_VERSION=24.x" >> $GITHUB_ENV
                     fi
@@ -95,13 +94,13 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.4
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
-                    database_version: ${{ matrix.mysql }}
+                    database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
@@ -121,37 +120,39 @@ jobs:
                     vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always
 
             -   name: Run CLI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
+                run: |
+                    $BEHAT_BASE_CMD --tags="@cli&&~@todo" --suite-tags="@cli" || \
+                    $BEHAT_RERUN_CMD --tags="@cli&&~@todo" --suite-tags="@cli"
 
-            -   name: Run non-UI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" --rerun
-
-            -   name: Run non-JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
+            -   name: Run API Behat
+                run: |
+                    $BEHAT_BASE_CMD --tags="~@todo&&~@cli" --suite-tags="@api,@domain" || \
+                    $BEHAT_RERUN_CMD --tags="~@todo&&~@cli" --suite-tags="@api,@domain"
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
                     if-no-files-found: ignore
                     overwrite: true
 
-    behat-ui-js-chromedriver:
+    behat-ui:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
-        timeout-minutes: 45
+        name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}"
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+            BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
             -   name: Set variables
@@ -161,8 +162,6 @@ jobs:
                 run: |
                     if [ "$BRANCH" == "1.14" ]; then
                         echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    elif [ "$BRANCH" == "2.0" ]; then
-                        echo "NODE_VERSION=22.x" >> $GITHUB_ENV
                     else
                         echo "NODE_VERSION=24.x" >> $GITHUB_ENV
                     fi
@@ -177,148 +176,44 @@ jobs:
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
 
-            -   name: Get Composer cache directory
-                id: composer-cache
-                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-            -   name: "Restore dependencies"
-                uses: actions/cache@v4
-                with:
-                    path: ${{ steps.composer-cache.outputs.dir }}
-                    key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                    restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
-            -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.4
-                with:
-                    build_type: "sylius"
-                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                    e2e: "yes"
-                    e2e_js: "yes"
-                    database_version: ${{ matrix.mysql }}
-                    php_version: ${{ matrix.php }}
-                    symfony_version: ${{ matrix.symfony }}
-                    node_version: ${{ env.NODE_VERSION }}
-
-            -   name: Run Behat (Chromedriver)
-                run: |
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun
-
-            -   name: Run Behat (Chromedriver) for randomly failing scenarios (@failing)
-                run: |
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun
-                continue-on-error: true
-
-            -   name: Upload logs
-                uses: actions/upload-artifact@v4
-                if: failure()
-                with:
-                    name: "Logs (JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
-                    path: |
-                        etc/build/
-                        var/log
-                    if-no-files-found: ignore
-                    overwrite: true
-
-    behat-ui-js-panther:
-        needs: get-matrix
-        runs-on: ubuntu-latest
-        name: "JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }}, Twig ${{ matrix.twig }}"
-        timeout-minutes: 45
-        strategy:
-            fail-fast: false
-            matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
-
-        env:
-            APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
-
-        steps:
-            -   name: Set variables
-                shell: bash
-                env:
-                    BRANCH: ${{ inputs.branch }}
-                run: |
-                    if [ "$BRANCH" == "1.14" ]; then
-                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    elif [ "$BRANCH" == "2.0" ]; then
-                        echo "NODE_VERSION=22.x" >> $GITHUB_ENV
-                    else
-                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
-                    fi
-
-            -   name: "Checkout (With Branch)"
-                if: "${{ inputs.branch != '' }}"
-                uses: actions/checkout@v4
-                with:
-                    ref: ${{ inputs.branch }}
-
-            -   name: "Checkout"
-                if: "${{ inputs.branch == '' }}"
-                uses: actions/checkout@v4
-
-            -   name: Get Composer cache directory
-                id: composer-cache
-                run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-            -   name: "Restore dependencies"
-                uses: actions/cache@v4
-                with:
-                    path: ${{ steps.composer-cache.outputs.dir }}
-                    key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                    restore-keys: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-
-            -   name: Restrict Twig
-                if: matrix.twig == '^2.12'
-                run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
-
-            -   name: Build application for Full 1.14 build
-                if: "${{ inputs.branch == '1.14' }}"
-                uses: SyliusLabs/BuildTestAppAction@v2.3
-                with:
-                    build_type: "sylius"
-                    cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                    cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
-                    e2e: "yes"
-                    e2e_js: "yes"
-                    database_version: ${{ matrix.mysql }}
-                    php_version: ${{ matrix.php }}
-                    symfony_version: ${{ matrix.symfony }}
-                    node_version: ${{ env.NODE_VERSION }}
-                    chrome_version: stable
-
-            -   name: Build application
+            -   name: Prepare manifest.json files
                 if: "${{ inputs.branch != '1.14' }}"
-                uses: SyliusLabs/BuildTestAppAction@v2.4
+                run: |
+                    mkdir -p public/build/admin
+                    mkdir -p public/build/shop
+                    mkdir -p public/build/app/admin
+                    mkdir -p public/build/app/shop
+                    echo "{}" > public/build/admin/manifest.json
+                    echo "{}" > public/build/shop/manifest.json
+                    echo "{}" > public/build/app/admin/manifest.json
+                    echo "{}" > public/build/app/shop/manifest.json
+
+            -   name: Build application
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
-                    e2e_js: "yes"
-                    database_version: ${{ matrix.mysql }}
+                    database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: ${{ env.NODE_VERSION }}
-                    chrome_version: stable
 
-            -   name: Run Behat (Panther)
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
+            -   name: Run UI Behat
+                run: |
+                    $BEHAT_BASE_CMD --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || \
+                    $BEHAT_RERUN_CMD --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui"
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log

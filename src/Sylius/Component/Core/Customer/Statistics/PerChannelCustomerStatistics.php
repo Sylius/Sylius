@@ -17,9 +17,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 final class PerChannelCustomerStatistics
 {
-    /**
-     * @throws \InvalidArgumentException
-     */
     public function __construct(private int $ordersCount, private int $ordersValue, private ChannelInterface $channel)
     {
     }

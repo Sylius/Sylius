@@ -31,6 +31,7 @@ final class ChannelsCurrenciesExtension extends AbstractExtension
         ];
     }
 
+    /** @return array<string, string> */
     public function getAllCurrencies(): array
     {
         $currencies = [];

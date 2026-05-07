@@ -41,20 +41,14 @@ final class SelectAttributeType extends AbstractType
             isset($options['configuration']['multiple']) &&
             !$options['configuration']['multiple']) {
             $builder->addModelTransformer(new CallbackTransformer(
-                /**
-                 * @param mixed $array
-                 *
-                 * @return mixed
-                 */
-                function ($array) {
+                function (mixed $array): mixed {
                     if (is_array($array) && count($array) > 0) {
                         return $array[0];
                     }
 
                     return null;
                 },
-                /** @param mixed $string */
-                function ($string): array {
+                function (mixed $string): array {
                     if (null !== $string) {
                         return [$string];
                     }
@@ -79,7 +73,7 @@ final class SelectAttributeType extends AbstractType
                     $localeCode = $options['locale_code'] ?? $this->defaultLocaleCode;
 
                     foreach ($options['configuration']['choices'] as $key => $choice) {
-                        if (isset($choice[$localeCode]) && '' !== $choice[$localeCode] && null !== $choice[$localeCode]) {
+                        if (isset($choice[$localeCode]) && '' !== $choice[$localeCode]) {
                             $choices[$key] = $choice[$localeCode];
 
                             continue;

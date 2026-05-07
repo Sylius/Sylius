@@ -67,7 +67,6 @@ class GeographicalFixture extends AbstractFixture
                 ->scalarPrototype()
         ;
 
-        /** @var ArrayNodeDefinition $provinceNode */
         $provinceNode = $optionsNodeBuilder
             ->arrayNode('provinces')
                 ->normalizeKeys(false)
@@ -82,7 +81,6 @@ class GeographicalFixture extends AbstractFixture
             ->scalarPrototype()
         ;
 
-        /** @var ArrayNodeDefinition $zoneNode */
         $zoneNode = $optionsNodeBuilder
             ->arrayNode('zones')
                 ->normalizeKeys(false)
@@ -98,6 +96,7 @@ class GeographicalFixture extends AbstractFixture
                 ->arrayNode('zones')->scalarPrototype()->end()->end()
                 ->arrayNode('provinces')->scalarPrototype()->end()->end()
                 ->scalarNode('scope')->end()
+                ->integerNode('priority')->end()
         ;
 
         $zoneNode
@@ -114,6 +113,10 @@ class GeographicalFixture extends AbstractFixture
         ;
     }
 
+    /**
+     * @param array<string> $countriesCodes
+     * @param array<string, string[]> $countriesProvinces
+     */
     private function loadCountriesWithProvinces(array $countriesCodes, array $countriesProvinces): void
     {
         $countries = [];
@@ -135,8 +138,11 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
+    /** @param array<string, mixed> $zones */
     private function loadZones(array $zones, \Closure $zoneValidator): void
     {
+        $priorityCounter = 0;
+
         foreach ($zones as $zoneCode => $zoneOptions) {
             $zoneName = $zoneOptions['name'];
 
@@ -146,11 +152,11 @@ class GeographicalFixture extends AbstractFixture
                 $zoneType = $this->getZoneType($zoneOptions);
                 $zoneMembers = $this->getZoneMembers($zoneOptions);
 
-                /** @var ZoneInterface $zone */
                 $zone = $this->zoneFactory->createWithMembers($zoneMembers);
                 $zone->setCode($zoneCode);
                 $zone->setName($zoneName);
                 $zone->setType($zoneType);
+                $zone->setPriority($zoneOptions['priority'] ?? $priorityCounter++);
 
                 if (isset($zoneOptions['scope'])) {
                     $zone->setScope($zoneOptions['scope']);
@@ -167,6 +173,7 @@ class GeographicalFixture extends AbstractFixture
         }
     }
 
+    /** @param array<string, string> $provinces */
     private function loadProvincesForCountry(array $provinces, CountryInterface $country): void
     {
         foreach ($provinces as $provinceCode => $provinceName) {
@@ -185,6 +192,8 @@ class GeographicalFixture extends AbstractFixture
     /**
      * @see ZoneInterface
      *
+     * @param array<string, mixed> $zoneOptions
+     *
      * @throws \InvalidArgumentException
      */
     private function getZoneType(array $zoneOptions): string
@@ -197,6 +206,11 @@ class GeographicalFixture extends AbstractFixture
         };
     }
 
+    /**
+     * @param array<string, mixed> $zoneOptions
+     *
+     * @return array<string, mixed>
+     */
     private function getZoneMembers(array $zoneOptions): array
     {
         $zoneType = $this->getZoneType($zoneOptions);
@@ -209,6 +223,7 @@ class GeographicalFixture extends AbstractFixture
         };
     }
 
+    /** @param array<string, mixed> $options */
     private function provideZoneValidator(array $options): \Closure
     {
         $memberValidators = [

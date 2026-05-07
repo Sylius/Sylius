@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -22,10 +23,13 @@ use Symfony\Component\Form\FormEvents;
 
 final class CatalogPromotionActionType extends AbstractResourceType
 {
+    /** @var array<string, string> */
     private array $actionTypes = [];
 
+    /** @var array<string, class-string> */
     private array $actionConfigurationTypes;
 
+    /** @param iterable<string, AbstractType> $actionConfigurationTypes */
     public function __construct(
         string $dataClass,
         array $validationGroups,
@@ -39,7 +43,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
         }
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $defaultActionType = current($this->actionTypes);
         $defaultActionConfigurationType = $this->actionConfigurationTypes[$defaultActionType];
@@ -59,7 +63,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
                 $this->addConfigurationTypeToForm($event);
             })
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event): void {
-                /** @var array|null $data */
+                /** @var array<string, mixed>|null $data */
                 $data = $event->getData();
                 if ($data === null) {
                     return;
@@ -84,6 +88,7 @@ final class CatalogPromotionActionType extends AbstractResourceType
 
     private function addConfigurationTypeToForm(FormEvent $event): void
     {
+        /** @var CatalogPromotionActionInterface|array<string, mixed>|null $data */
         $data = $event->getData();
         if ($data === null) {
             return;

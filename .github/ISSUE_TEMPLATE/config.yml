@@ -9,6 +9,6 @@ contact_links:
     - name: 🙋🏼 Support Question
       url: https://sylius.com/support/
       about: GitHub issues are just for reporting Sylius bugs and suggesting new features. If you have questions about using Sylius or third-party bundles, feel free to check out our support options in `https://sylius.com/support`
-    - name: 🇺🇸 Translations
-      url: https://translate.sylius.com/
-      about: See `https://translate.sylius.com/` to add or fix Sylius translations.
+    - name: 🌍 UI Translations
+      url: https://docs.sylius.com/the-book/contributing/contributing-translations
+      about: Have a look at `https://docs.sylius.com/the-book/contributing/contributing-translations` to read more about how you can contribute translations to Sylius.

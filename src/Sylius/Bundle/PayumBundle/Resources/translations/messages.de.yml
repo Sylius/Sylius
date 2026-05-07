@@ -5,6 +5,7 @@ sylius:
     form:
         gateway_config:
             type: Typ
+            use_payum: 'Payum verwenden'
         gateway_configuration:
             paypal:
                 password: Passwort

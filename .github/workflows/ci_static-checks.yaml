@@ -116,13 +116,14 @@ jobs:
                 run: vendor/bin/monorepo-builder validate
 
             -   name: Run PHPArkitect
+                if: matrix.php != '8.5'
                 run: vendor/bin/phparkitect check
 
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyse
 
             -   name: Run PHPSpec
-                if: ${{ inputs.branch == '1.14' || inputs.branch == '2.0' }}
+                if: ${{ inputs.branch == '1.14' }}
                 run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
             -   name: Run ComposerRequireChecker

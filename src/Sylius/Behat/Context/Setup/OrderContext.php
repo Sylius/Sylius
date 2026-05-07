@@ -1043,6 +1043,8 @@ final readonly class OrderContext implements Context
 
             $this->payOrder($order);
 
+            $order->setCheckoutCompletedAt($this->clock->now());
+
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);
         }
@@ -1077,6 +1079,8 @@ final readonly class OrderContext implements Context
                 $this->shipOrder($order);
             }
 
+            $order->setCheckoutCompletedAt($this->clock->now());
+
             $this->objectManager->persist($order);
         }
 
@@ -1104,6 +1108,7 @@ final readonly class OrderContext implements Context
             );
 
             $order->setState($isFulfilled ? BaseOrderInterface::STATE_FULFILLED : BaseOrderInterface::STATE_NEW);
+            $order->setCheckoutCompletedAt($this->clock->now());
 
             $this->objectManager->persist($order);
         }

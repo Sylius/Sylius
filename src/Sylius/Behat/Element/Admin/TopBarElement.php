@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Element\Admin;
 
-use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Element\SyliusElement;
 
-class TopBarElement extends Element implements TopBarElementInterface
+class TopBarElement extends SyliusElement implements TopBarElementInterface
 {
     public function hasAvatarInMainBar(string $avatarPath): bool
     {

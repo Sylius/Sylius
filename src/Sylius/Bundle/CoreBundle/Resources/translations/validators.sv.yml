@@ -103,7 +103,7 @@ sylius:
             not_valid: 'Valutakoden du angav är ogiltig.'
         invalid_state_transition: 'Kan inte slutföra eftersom ordern är i fel tillstånd. Nuvarande: %currentState%. Möjliga övergångar: %possibleTransitions%.'
         payment_method_eligibility: 'Betalningsmetoden %paymentMethodName% har inaktiverats. Välj en ny betalningsmetod.'
-        product_eligibility: 'Produkten %productName% har inaktiverats.'
+        product_eligibility: 'Produkten %productName% är inte längre tillgänglig.'
         shipping_method_eligibility: 'Produkten uppfyller inte kraven för fraktmetoden %shippingMethodName%. Välj en ny fraktmetod.'
         shipping_method_not_available: 'Fraktmetoden "%shippingMethodName%" är inte tillgänglig. Välj en ny fraktmetod.'
         cart_items_immutable: 'Det går inte att ändra varukorgsartiklar efter att kassan har slutförts.'

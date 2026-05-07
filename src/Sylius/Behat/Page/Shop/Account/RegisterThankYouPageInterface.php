@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface RegisterThankYouPageInterface extends SymfonyPageInterface
+interface RegisterThankYouPageInterface extends SyliusPageInterface
 {
 }

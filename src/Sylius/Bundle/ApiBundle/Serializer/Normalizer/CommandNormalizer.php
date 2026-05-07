@@ -42,7 +42,7 @@ final readonly class CommandNormalizer implements NormalizerInterface
     }
 
     /**
-     * @return array{code: int, message: string}
+     * @return array{message: string}
      */
     public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
@@ -50,7 +50,6 @@ final readonly class CommandNormalizer implements NormalizerInterface
         $data = $this->objectNormalizer->normalize($object, $format, $context);
 
         return [
-            'code' => 400,
             'message' => $data['message'],
         ];
     }

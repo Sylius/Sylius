@@ -64,7 +64,11 @@ final class EnabledProductsExtensionTest extends TestCase
     public function test_it_does_nothing_if_section_is_not_shop_api(): void
     {
         $section = $this->createMock(AdminApiSection::class);
-        $this->sectionProvider->method('getSection')->willReturn($section);
+        $this->sectionProvider->expects($this->once())->method('getSection')->willReturn($section);
+
+        $this->queryBuilder->expects($this->never())->method('innerJoin');
+        $this->queryBuilder->expects($this->never())->method('andWhere');
+        $this->queryBuilder->expects($this->never())->method('setParameter');
 
         $this->extension->applyToItem(
             $this->queryBuilder,

@@ -10,7 +10,7 @@
     {% elseif product.images.first %}
         {% set path = product.images.first.path|imagine_filter(config.filter) %}
     {% else %}
-        {% set path = asset('build/admin/images/200x200.png', 'admin') %}
+        {% set path = asset('bundles/syliusui/images/200x200.png') %}
     {% endif %}
 
     <img src="{{ path }}" alt="{{ product.name }}" class="{{ config.class }}" />

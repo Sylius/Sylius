@@ -15,6 +15,7 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Sylius\Bundle\CoreBundle\Security\UserImpersonatorInterface;
 use Sylius\Bundle\UserBundle\Provider\UserProviderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 use Webmozart\Assert\Assert;
 
 final class ImpersonateUserController
@@ -44,19 +44,17 @@ final class ImpersonateUserController
         }
 
         $user = $this->userProvider->loadUserByUsername($username);
-        Assert::isInstanceOf($user, SymfonyUserInterface::class);
         Assert::isInstanceOf($user, UserInterface::class);
 
         $this->impersonator->impersonate($user);
 
         $this->addFlash($request, $username);
 
-        $redirectUrl = $request->headers->get(
-            'referer',
-            $this->router->generate('sylius_admin_customer_show', ['id' => $user->getId()]),
-        );
+        $customerId = $user instanceof ShopUserInterface ? $user->getCustomer()->getId() : $user->getId();
 
-        return new RedirectResponse($redirectUrl);
+        return new RedirectResponse(
+            $this->router->generate('sylius_admin_customer_show', ['id' => $customerId]),
+        );
     }
 
     private function addFlash(Request $request, string $username): void

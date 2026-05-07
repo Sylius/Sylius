@@ -19,12 +19,14 @@ interface CatalogPromotionActionInterface extends ResourceInterface
 {
     public function setType(?string $type): void;
 
+    /** @param array<string, mixed> $configuration */
     public function setConfiguration(array $configuration): void;
 
     public function setCatalogPromotion(?CatalogPromotionInterface $catalogPromotion): void;
 
     public function getType(): ?string;
 
+    /** @return array<string, mixed> */
     public function getConfiguration(): array;
 
     public function getCatalogPromotion(): ?CatalogPromotionInterface;

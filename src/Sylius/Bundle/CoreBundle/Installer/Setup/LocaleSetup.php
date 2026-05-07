@@ -92,17 +92,8 @@ final class LocaleSetup implements LocaleSetupInterface
 
     private function getLanguageName(string $code): ?string
     {
-        $language = $code;
-        $region = null;
-
-        if (count(explode('_', $code, 2)) === 2) {
-            $codeParts = explode('_', $code, 2);
-            $language = $codeParts[0];
-            $region = $codeParts[1] ?? null;
-        }
-
         try {
-            return Languages::getName($language, $region);
+            return Languages::getName($code);
         } catch (MissingResourceException) {
             return null;
         }

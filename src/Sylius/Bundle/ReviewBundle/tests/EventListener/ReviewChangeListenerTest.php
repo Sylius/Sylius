@@ -78,7 +78,7 @@ final class ReviewChangeListenerTest extends TestCase
 
     public function testDoesNothingIfEventSubjectIsNotReviewObject(): void
     {
-        $this->event->expects(self::once())->method('getObject')->willReturn('badObject');
+        $this->event->expects(self::once())->method('getObject')->willReturn(new \stdClass());
 
         $this->averageRatingUpdater->expects(self::never())
             ->method('update')

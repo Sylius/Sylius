@@ -11,6 +11,16 @@ sylius_admin_customer:
         permission: true
     type: sylius.resource
 
+sylius_admin_customer_show:
+    path: /customers/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer::showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/customer/show.html.twig"
+            
 sylius_admin_customer_order_index:
     path: /customers/{id}/orders
     methods: [GET]
@@ -21,6 +31,9 @@ sylius_admin_customer_order_index:
             permission: true
             template: "@SyliusAdmin/shared/crud/index.html.twig"
             grid: sylius_admin_customer_order
+            vars:
+                customer: expr:service('sylius.repository.customer').find($id)
+                hook_prefix: 'sylius_admin.customer.order'
 
 # This route is deprecated since Sylius 2.0 and will be removed in 3.0.
 sylius_admin_customer_orders_statistics:

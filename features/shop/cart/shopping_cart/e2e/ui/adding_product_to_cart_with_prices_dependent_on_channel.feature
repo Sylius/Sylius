@@ -15,7 +15,7 @@ Feature: Adding a product to cart with prices dependent on a channel
         And this product is also priced at "£15.00" in "Web-GB" channel
         And I am a logged in customer
 
-    @no-api @ui @javascript
+    @no-api @ui @mink:chromedriver
     Scenario: Buying a product with proper price after currency change
         Given I changed my current channel to "Web-EU"
         And the exchange rate of "Euro" to "British Pound" is 0.7

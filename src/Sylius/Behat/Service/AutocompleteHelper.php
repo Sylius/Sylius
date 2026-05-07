@@ -40,7 +40,7 @@ abstract class AutocompleteHelper
         foreach ($values as $value) {
             $element->find('css', sprintf('div.item:contains("%s")', $value))->click();
 
-            JQueryHelper::waitForAsynchronousActionsToFinish($session);
+            DriverHelper::waitForAsynchronousActionsToFinish($session);
         }
 
         static::waitForElementToBeVisible($session, $element);
@@ -56,7 +56,7 @@ abstract class AutocompleteHelper
         $elementToRemove = $element->find('css', sprintf('a.ui.label:contains("%s")', $value));
         $elementToRemove->find('css', 'i.delete')->click();
 
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
+        DriverHelper::waitForAsynchronousActionsToFinish($session);
     }
 
     public static function isValueVisible(Session $session, NodeElement $element, $value): bool
@@ -68,11 +68,11 @@ abstract class AutocompleteHelper
 
     private static function activateAutocompleteDropdown(Session $session, NodeElement $element)
     {
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
+        DriverHelper::waitForAsynchronousActionsToFinish($session);
 
         $element->click();
 
-        JQueryHelper::waitForAsynchronousActionsToFinish($session);
+        DriverHelper::waitForAsynchronousActionsToFinish($session);
         static::waitForElementToBeVisible($session, $element);
     }
 

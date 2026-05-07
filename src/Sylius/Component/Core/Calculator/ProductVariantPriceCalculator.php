@@ -40,9 +40,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         return $channelPricing->getPrice();
     }
 
-    /**
-     * @throws \InvalidArgumentException|MissingChannelConfigurationException
-     */
+    /** @throws \InvalidArgumentException|MissingChannelConfigurationException */
     public function calculateOriginal(ProductVariantInterface $productVariant, array $context): int
     {
         Assert::keyExists($context, 'channel');

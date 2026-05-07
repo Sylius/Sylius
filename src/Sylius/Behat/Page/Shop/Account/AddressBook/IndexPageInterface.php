@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 
-interface IndexPageInterface extends SymfonyPageInterface
+interface IndexPageInterface extends SyliusPageInterface
 {
     public function getAddressesCount(): int;
 

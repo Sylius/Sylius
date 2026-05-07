@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\Given;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Doctrine\ORM\EntityManagerInterface;
@@ -100,6 +101,7 @@ final readonly class CheckoutCompleteContext implements Context
      * @Given the customer confirmed the order
      * @When I try to confirm my order
      */
+    #[Given('I have tried to confirm my order')]
     #[When('I confirm my order')]
     public function iConfirmMyOrder(): void
     {
@@ -325,9 +327,8 @@ final readonly class CheckoutCompleteContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be informed that (this payment method) has been disabled$/
-     */
+    #[Given('/^I have been informed that (this payment method) has been disabled$/')]
+    #[Then('/^I should be informed that (this payment method) has been disabled$/')]
     public function iShouldBeInformedThatThisPaymentMethodHasBeenDisabled(PaymentMethodInterface $paymentMethod): void
     {
         Assert::same(
@@ -347,7 +348,7 @@ final readonly class CheckoutCompleteContext implements Context
         Assert::same(
             $this->completePage->getValidationErrors(),
             sprintf(
-                'This product %s has been disabled.',
+                'The product %s is no longer available.',
                 $product->getName(),
             ),
         );
@@ -381,7 +382,7 @@ final readonly class CheckoutCompleteContext implements Context
         Assert::same(
             $this->completePage->getValidationErrors(),
             sprintf(
-                'This product %s has been disabled.',
+                'The product %s is no longer available.',
                 $productVariant->getName(),
             ),
         );

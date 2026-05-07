@@ -44,6 +44,11 @@
             <tag name="console.command" />
         </service>
 
+        <service id="sylius_admin.console.command.delete_admin_user" class="Sylius\Bundle\AdminBundle\Console\Command\DeleteAdminUserCommand">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <tag name="console.command" />
+        </service>
+
         <service id="sylius_admin.command_handler.create_admin_user" class="Sylius\Bundle\AdminBundle\CommandHandler\CreateAdminUserHandler">
             <argument type="service" id="sylius.repository.admin_user" />
             <argument type="service" id="sylius.factory.admin_user" />
@@ -51,6 +56,12 @@
             <argument type="service" id="validator" />
             <argument>%sylius_admin.command_handler.create_admin_user.validation_groups%</argument>
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
+        </service>
+
+         <service id="sylius_admin.console.command.list_admin_users" class="Sylius\Bundle\AdminBundle\Console\Command\ListAdminUsersCommand">
+            <argument type="service" id="sylius.repository.admin_user" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="console.command" />
         </service>
 
         <service id="sylius_admin.console.command_factory.question" class="Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory" />
@@ -67,6 +78,18 @@
         </service>
 
         <service id="sylius.http_client" alias="Psr\Http\Client\ClientInterface" />
+
+        <service id="sylius_admin.http_client" class="Symfony\Component\HttpClient\Psr18Client" public="false">
+            <argument type="service">
+                <service class="Symfony\Component\HttpClient\HttpClient">
+                    <factory class="Symfony\Component\HttpClient\HttpClient" method="create" />
+                    <argument type="collection">
+                        <argument key="timeout">2</argument>
+                        <argument key="max_duration">2</argument>
+                    </argument>
+                </service>
+            </argument>
+        </service>
 
         <service id="sylius.attribute_type.select" class="Sylius\Component\Attribute\AttributeType\SelectAttributeType">
             <tag name="sylius.attribute.type" attribute-type="select" label="Select"

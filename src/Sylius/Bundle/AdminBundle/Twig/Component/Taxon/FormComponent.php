@@ -53,7 +53,7 @@ class FormComponent
     public function generateTaxonSlug(#[LiveArg] string $localeCode): void
     {
         $name = $this->formValues['translations'][$localeCode]['name'];
-        $parent = $this->repository->findOneBy(['code' => $this->formValues['parent']]);
+        $parent = $this->repository->find($this->formValues['parent']);
 
         $this->formValues['translations'][$localeCode]['slug'] = $this->slugGenerator->generate($name, $localeCode, $parent);
     }

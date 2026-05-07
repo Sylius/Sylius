@@ -34,6 +34,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 {
     use PrependDoctrineMigrationsTrait;
 
+    /** @var string[] */
     private static array $bundles = [
         'sylius_addressing',
         'sylius_attribute',
@@ -64,6 +65,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
+
+        $this->configureTelemetry($config['telemetry'], $container, $loader);
 
         $container->setParameter('sylius_core.taxation.shipping_address_based_taxation', $config['shipping_address_based_taxation']);
         $container->setParameter('sylius_core.order_by_identifier', $config['order_by_identifier']);
@@ -116,6 +119,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         return '@SyliusCoreBundle/Migrations';
     }
 
+    /** @return array<mixed> */
     protected function getNamespacesOfMigrationsExecutedBefore(): array
     {
         return [];
@@ -212,5 +216,54 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 $definition->addTag(AsOrdersTotalsProvider::SERVICE_TAG, ['type' => $attribute->getType()]);
             },
         );
+    }
+
+    /**
+     * @param array{enabled: bool, business: bool, technical: bool, plugins: bool, salt: string|null, url: string, query_timeout: int} $telemetryConfig
+     */
+    private function configureTelemetry(array $telemetryConfig, ContainerBuilder $container, XmlFileLoader $loader): void
+    {
+        $telemetrySalt = $telemetryConfig['salt'] ?? (string) $container->getParameter('kernel.secret');
+
+        $container->setParameter('sylius_core.telemetry.enabled', $telemetryConfig['enabled']);
+        $container->setParameter('sylius_core.telemetry.salt', $telemetrySalt);
+        $container->setParameter('sylius_core.telemetry.url', $telemetryConfig['url']);
+        $queryTimeout = $telemetryConfig['query_timeout'];
+        $envQueryTimeout = $_ENV['SYLIUS_TELEMETRY_QUERY_TIMEOUT'] ?? $_SERVER['SYLIUS_TELEMETRY_QUERY_TIMEOUT'] ?? getenv('SYLIUS_TELEMETRY_QUERY_TIMEOUT');
+        if ($envQueryTimeout !== false) {
+            $queryTimeout = max(1000, (int) $envQueryTimeout);
+        }
+        $container->setParameter('sylius_core.telemetry.query_timeout', $queryTimeout);
+
+        $businessEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['business'], 'SYLIUS_TELEMETRY_BUSINESS');
+        $technicalEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['technical'], 'SYLIUS_TELEMETRY_TECHNICAL');
+        $pluginsEnabled = $this->isTelemetryCategoryEnabled($telemetryConfig['plugins'], 'SYLIUS_TELEMETRY_PLUGINS');
+
+        $container->setParameter('sylius_core.telemetry.business', $businessEnabled);
+        $container->setParameter('sylius_core.telemetry.technical', $technicalEnabled);
+        $container->setParameter('sylius_core.telemetry.plugins', $pluginsEnabled);
+
+        if (!$this->isTelemetryCategoryEnabled($telemetryConfig['enabled'], 'SYLIUS_TELEMETRY_ENABLED')) {
+            return;
+        }
+
+        /** @var string $env */
+        $env = $container->getParameter('kernel.environment');
+        if (str_starts_with($env, 'dev') || str_starts_with($env, 'test')) {
+            return;
+        }
+
+        $loader->load('services/telemetry/telemetry.xml');
+    }
+
+    private function isTelemetryCategoryEnabled(bool $configValue, string $envVarName): bool
+    {
+        $envValue = $_ENV[$envVarName] ?? $_SERVER[$envVarName] ?? getenv($envVarName);
+
+        if ($envValue === false) {
+            return $configValue;
+        }
+
+        return !in_array($envValue, ['0', 'false'], true);
     }
 }

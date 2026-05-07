@@ -1,0 +1,12 @@
+{% import '@SyliusShop/shared/macros/delivery_time.html.twig' as delivery %}
+
+{% set method = hookable_metadata.context.method %}
+
+{% if method is defined and method is not null %}
+    {% set min = attribute(method, 'minDeliveryTimeDays') %}
+    {% set max = attribute(method, 'maxDeliveryTimeDays') %}
+    {% set text = delivery.delivery_time_text(min, max)|trim %}
+    {% if text is not empty %}
+        <div class="ps-4"><small class="text-body-tertiary">{{ 'sylius.ui.estimated_delivery_time'|trans }}: {{ text }}</small></div>
+    {% endif %}
+{% endif %}

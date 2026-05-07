@@ -19,6 +19,7 @@ interface ShippingMethodRuleInterface extends ResourceInterface, ConfigurableShi
 {
     public function setType(?string $type): void;
 
+    /** @param array<string, mixed> $configuration */
     public function setConfiguration(array $configuration): void;
 
     public function setShippingMethod(?ShippingMethodInterface $shippingMethod): void;

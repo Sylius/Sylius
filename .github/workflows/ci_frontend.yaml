@@ -48,7 +48,6 @@ jobs:
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=8.0"
 
         steps:
             -   name: Set variables
@@ -73,13 +72,13 @@ jobs:
                 uses: actions/checkout@v4
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.4
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     e2e_js: "yes"
-                    database_version: "8.0"
-                    php_version: "8.2"
-                    symfony_version: "6.4.*"
+                    database: "mysql:8.0"
+                    php_version: "8.5"
+                    symfony_version: "~7.4.0"
                     node_version: ${{ matrix.node }}
                     chrome_version: stable
                     

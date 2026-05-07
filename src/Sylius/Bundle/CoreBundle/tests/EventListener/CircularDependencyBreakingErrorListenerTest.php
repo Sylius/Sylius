@@ -134,7 +134,6 @@ final class CircularDependencyBreakingErrorListenerTest extends TestCase
     private function setPreviousForException(\Exception $exception, ?\Exception $previous): void
     {
         $property = new \ReflectionProperty(\Exception::class, 'previous');
-        $property->setAccessible(true);
         $property->setValue($exception, $previous);
     }
 

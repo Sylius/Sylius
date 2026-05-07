@@ -6,7 +6,5 @@
     "hydra:description": "Amount must be a numeric value.",
     "status": 400,
     "type": "\/errors\/400",
-    "title": "An error occurred",
-    "detail": "Amount must be a numeric value.",
-    "description": "Amount must be a numeric value."
+    "detail": "Amount must be a numeric value."
 }

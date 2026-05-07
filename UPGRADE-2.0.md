@@ -1,3 +1,56 @@
+# UPGRADING FROM `v2.0.13` TO `v2.0.14`
+
+## Telemetry
+
+Sylius 2.0.14 introduces anonymous telemetry to help us understand how Sylius is used and improve the platform.
+
+**What data is collected:**
+- Anonymous installation ID (hashed, non-reversible)
+- Sylius and PHP versions, default locale
+- Aggregated statistics as segments (broad ranges, not exact values):
+    - Customers/products/variants count (e.g., "1K-10K", "100K-1M")
+    - GMV and AOV ranges per month (e.g., "100K-500K", "50-100")
+
+**No sensitive data is ever collected** - no customer information, no order details, no personal data.
+
+**Configuration:**
+
+Telemetry is enabled by default and uses a default salt for hashing the installation ID.
+
+To disable telemetry, set the following environment variable in your `.env` file:
+
+```dotenv
+SYLIUS_TELEMETRY_ENABLED=0
+```
+
+To change the salt, set the `SYLIUS_TELEMETRY_SALT` environment variable:
+
+```dotenv
+SYLIUS_TELEMETRY_SALT=your-custom-salt
+```
+
+**Database migration (optional):**
+
+This release includes an optional database migration that adds an index to improve telemetry query performance.
+The telemetry system works without this index, but adding it will make data collection faster, especially for stores with large order volumes.
+
+To run the migration:
+
+```bash
+php bin/console doctrine:migrations:migrate
+```
+
+If you want to skip this migration:
+
+```bash
+php bin/console doctrine:migrations:version 'Sylius\Bundle\CoreBundle\Migrations\Version20251126120000' --add --no-interaction
+
+# For PostgreSQL:
+php bin/console doctrine:migrations:version 'Sylius\Bundle\CoreBundle\Migrations\Version20251126120001' --add --no-interaction
+```
+
+For more details, see the [Telemetry documentation](https://docs.sylius.com/the-book/configuration/telemetry).
+
 # UPGRADE FROM `2.0.5` TO `2.0.6`
 
 ### Behat
@@ -110,7 +163,7 @@ sylius_shop_payum:
 -   resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 +   resource: "@SyliusPayumBundle/Resources/config/routing/integrations/sylius_shop.yaml"
 
-sylius_payment_notify:
++sylius_payment_notify:
 +   resource: "@SyliusPaymentBundle/Resources/config/routing/integrations/sylius.yaml"
 
 ```
@@ -149,6 +202,7 @@ return [
 +   Symfony\UX\LiveComponent\LiveComponentBundle::class => ['all' => true],
 +   Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
 ];
+```
 
 * New Symfony/Messenger transports for handling payment requests have been added. 
 Therefore, you need to add the following configuration to your .env file:

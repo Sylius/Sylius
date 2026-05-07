@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Page\SyliusPage;
 
-class RequestPasswordResetPage extends SymfonyPage implements RequestPasswordResetPageInterface
+class RequestPasswordResetPage extends SyliusPage implements RequestPasswordResetPageInterface
 {
     public function getRouteName(): string
     {

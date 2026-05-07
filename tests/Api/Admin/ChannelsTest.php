@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Admin;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
@@ -110,8 +110,6 @@ final class ChannelsTest extends JsonApiTestCase
     }
 
     /**
-     *
-     *
      * @param array<string, string> $inputData
      * @param array<string, string> $validation
      */
@@ -125,8 +123,7 @@ final class ChannelsTest extends JsonApiTestCase
 
         $this->requestPost('/api/v2/admin/channels', $inputData);
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $this->assertJsonResponseViolations($this->client->getResponse(), [$validation], false);
+        $this->assertResponseContainsViolations([$validation]);
     }
 
     #[Test]

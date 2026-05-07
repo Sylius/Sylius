@@ -21,6 +21,12 @@ sylius:
     payment:
         apply_state_machine_transition_error: 'Wystąpił nieoczekiwany problem w trakcie aktualizacji płatności. Spróbuj uaktualnić ją ponownie.'
     product:
+        in_use_by_promotion_rule: 'Nie można usunąć produktu, który jest używany przez regułę promocji.'
         out_of_stock: 'W sklepie dostępne jest tylko %quantity% sztuk produktu.'
     product_variant:
         update_error: 'Wystąpił nieoczekiwany problem w trakcie aktualizacji wariantu produktu. Spróbuj uaktualnić go ponownie.'
+    promotion:
+        update_rules: 'Niektóre reguły promocji o kodach %codes% zostały zaktualizowane.'
+    taxon:
+        in_use_by_promotion_rule: 'Nie można usunąć taksonu, który jest używany przez regułę promocji.'
+        menu_taxon_delete: 'Nie można usunąć taksonu menu żadnego kanału.'

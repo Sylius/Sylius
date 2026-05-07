@@ -38,23 +38,23 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/orm": "^2.18 || ^3.3",
+        "doctrine/orm": "^2.18 || ^3.5",
         "egulias/email-validator": "^4.0",
         "sylius/mailer-bundle": "^2.1",
         "sylius/resource-bundle": "^1.12",
         "sylius/user": "^2.0",
-        "symfony/framework-bundle": "^6.4.1 || ^7.2",
-        "symfony/password-hasher": "^6.4 || ^7.2",
+        "symfony/framework-bundle": "^6.4.1 || ^7.4",
+        "symfony/password-hasher": "^6.4 || ^7.4",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
         "hwi/oauth-bundle": "^2.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
-        "phpunit/phpunit": "^10.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.2",
-        "symfony/mailer": "^6.4 || ^7.2",
-        "symfony/security-bundle": "^6.4 || ^7.2"
+        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "phpunit/phpunit": "^11.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.4",
+        "symfony/mailer": "^6.4 || ^7.4",
+        "symfony/security-bundle": "^6.4 || ^7.4"
     },
     "suggest": {
         "hwi/oauth-bundle": "For OAuth integration"
@@ -66,10 +66,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.2-dev"
         },
         "symfony": {
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {

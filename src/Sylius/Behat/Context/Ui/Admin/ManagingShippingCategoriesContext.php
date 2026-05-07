@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ShippingCategory\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ShippingCategory\UpdatePageInterface;
+use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -218,7 +218,7 @@ class ManagingShippingCategoriesContext implements Context
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
     }
 
-    protected function resolveCurrentPage(): SymfonyPageInterface
+    protected function resolveCurrentPage(): SyliusPageInterface
     {
         return $this->createPage;
     }

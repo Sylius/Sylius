@@ -17,7 +17,7 @@ jobs:
     behat-no-js-unstable:
         runs-on: ubuntu-latest
         name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
-        timeout-minutes: 45
+        timeout-minutes: 15
         continue-on-error: true
         strategy:
             fail-fast: false
@@ -25,12 +25,13 @@ jobs:
                 include:
                     -
                         php: "8.3"
-                        symfony: "^7.3@beta"
+                        symfony: "^7.4@beta"
                         mysql: "8.4"
 
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+            BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
             -
@@ -53,13 +54,13 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.4
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
                     e2e: "yes"
-                    database_version: ${{ matrix.mysql }}
+                    database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "24.x"
@@ -69,13 +70,19 @@ jobs:
                 run: vendor/bin/phpunit --testsuite all --colors=always
 
             -   name: Run CLI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --suite-tags="@cli" --rerun
+                run: |
+                    $BEHAT_BASE_CMD --tags="@cli&&~@todo" --suite-tags="@cli" || \
+                    $BEHAT_RERUN_CMD --tags="@cli&&~@todo" --suite-tags="@cli"
 
             -   name: Run non-UI Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@todo&&~@cli" --suite-tags="@api,@domain" --rerun
+                run: |
+                    $BEHAT_BASE_CMD --tags="~@todo&&~@cli" --suite-tags="@api,@domain" || \
+                    $BEHAT_RERUN_CMD --tags="~@todo&&~@cli" --suite-tags="@api,@domain"
 
             -   name: Run non-JS Behat
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
+                run: |
+                    $BEHAT_BASE_CMD --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || \
+                    $BEHAT_RERUN_CMD --tags="~@javascript&&~@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@hybrid,@ui"
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4
@@ -91,19 +98,20 @@ jobs:
     behat-ui-js-chromedriver-unstable:
         runs-on: ubuntu-latest
         name: "JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
-        timeout-minutes: 45
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix:
                 include:
                     -
                         php: "8.3"
-                        symfony: "^7.3@beta"
+                        symfony: "^7.4@beta"
                         mysql: "8.4"
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+            BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
             -   name: "Checkout (With Branch)"
@@ -133,29 +141,29 @@ jobs:
                     composer config prefer-stable true
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.4
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
                     e2e_js: "yes"
-                    database_version: ${{ matrix.mysql }}
+                    database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "24.x"
 
             -   name: Run Behat (Chromedriver)
                 run: |
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" --rerun
+                    $BEHAT_BASE_CMD --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" || \
+                    $BEHAT_RERUN_CMD --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui" || \
+                    $BEHAT_RERUN_CMD --tags="@mink:chromedriver&&~@todo&&~@cli&&~@failing" --suite-tags="@hybrid,@ui"
 
             -   name: Run Behat (Chromedriver) for randomly failing scenarios (@failing)
                 run: |
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun || \
-                    vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" --rerun
+                    $BEHAT_BASE_CMD --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" || \
+                    $BEHAT_RERUN_CMD --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui" || \
+                    $BEHAT_RERUN_CMD --tags="@mink:chromedriver&&~@todo&&~@cli&&@failing" --suite-tags="@hybrid,@ui"
                 continue-on-error: true
 
             -   name: Upload logs
@@ -172,19 +180,20 @@ jobs:
     behat-ui-js-panther-unstable:
         runs-on: ubuntu-latest
         name: "JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
-        timeout-minutes: 45
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix:
                 include:
                     -
                         php: "8.3"
-                        symfony: "^7.3@beta"
+                        symfony: "^7.4@beta"
                         mysql: "8.4"
 
         env:
             APP_ENV: ${{ matrix.env || 'test_cached' }}
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+            BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
+            BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
             -   name: "Checkout (With Branch)"
@@ -214,22 +223,24 @@ jobs:
                     composer config prefer-stable true
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.4
+                uses: SyliusLabs/BuildTestAppAction@v4
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     cache_restore_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}"
                     e2e: "yes"
                     e2e_js: "yes"
-                    database_version: ${{ matrix.mysql }}
-                    legacy_postgresql_setup: "no"
+                    database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "24.x"
                     chrome_version: stable
 
             -   name: Run Behat (Panther)
-                run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" --rerun
+                run: |
+                    $BEHAT_BASE_CMD --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || \
+                    $BEHAT_RERUN_CMD --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui" || \
+                    $BEHAT_RERUN_CMD --tags="@javascript&&~@todo&&~@cli" --suite-tags="@hybrid,@ui"
 
             -   name: Upload logs
                 uses: actions/upload-artifact@v4

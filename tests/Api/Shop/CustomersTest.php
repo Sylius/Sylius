@@ -86,7 +86,7 @@ final class CustomersTest extends JsonApiTestCase
 
         $this->requestGet('/api/v2/shop/customers/' . $customer->getId());
 
-        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
     #[Test]

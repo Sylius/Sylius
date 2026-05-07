@@ -22,6 +22,10 @@
 
     <parameters>
         <parameter key="sylius.model.address.interface">Sylius\Component\Addressing\Model\AddressInterface</parameter>
+        <parameter key="sylius_api.command.account.reset_password.class">Sylius\Bundle\ApiBundle\Command\Account\ResetPassword</parameter>
+        <parameter key="sylius_api.command.account.verify_shop_user.class">Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser</parameter>
+        <parameter key="sylius_api.command.send_contact_request.class">Sylius\Bundle\ApiBundle\Command\SendContactRequest</parameter>
+        <parameter key="sylius_api.command.admin.account.reset_password.class">Sylius\Bundle\ApiBundle\Command\Admin\Account\ResetPassword</parameter>
     </parameters>
 
     <services>

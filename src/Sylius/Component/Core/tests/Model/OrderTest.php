@@ -737,17 +737,11 @@ final class OrderTest extends TestCase
         $orderUnitAdjustmentForItem->expects($this->once())->method('getAmount')->willReturn(-20);
         $orderUnitAdjustmentForItem->expects($this->once())->method('isNeutral')->willReturn(false);
         $this->firstItem->expects($this->once())->method('getTotal')->willReturn(200);
-        $this->firstItem->expects($this->exactly(3))->method('getAdjustmentsRecursively')->willReturnCallback(function ($type) use (
-            $orderAdjustmentForItem,
-            $orderItemAdjustmentForItem,
-            $orderUnitAdjustmentForItem
-        ) {
-            return match ($type) {
-                AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT => new ArrayCollection([$orderAdjustmentForItem]),
-                AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT => new ArrayCollection([$orderItemAdjustmentForItem]),
-                AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT => new ArrayCollection([$orderUnitAdjustmentForItem]),
-                default => new ArrayCollection(),
-            };
+        $this->firstItem->expects($this->exactly(3))->method('getAdjustmentsRecursively')->willReturnCallback(fn ($type) => match ($type) {
+            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT => new ArrayCollection([$orderAdjustmentForItem]),
+            AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT => new ArrayCollection([$orderItemAdjustmentForItem]),
+            AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT => new ArrayCollection([$orderUnitAdjustmentForItem]),
+            default => new ArrayCollection(),
         });
         $this->firstItem->expects($this->once())->method('setOrder')->with($this->order);
         $this->order->addItem($this->firstItem);

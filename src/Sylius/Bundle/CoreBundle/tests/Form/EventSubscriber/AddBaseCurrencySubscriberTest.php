@@ -61,9 +61,7 @@ final class AddBaseCurrencySubscriberTest extends TestCase
             ->with(
                 'baseCurrency',
                 $this->anything(),
-                $this->callback(function (array $options) {
-                    return $options['disabled'] === true;
-                }),
+                $this->callback(fn (array $options) => $options['disabled'] === true),
             )->willReturn($form)
         ;
 
@@ -88,9 +86,7 @@ final class AddBaseCurrencySubscriberTest extends TestCase
             ->with(
                 'baseCurrency',
                 $this->anything(),
-                $this->callback(function (array $options) {
-                    return $options['disabled'] === false;
-                }),
+                $this->callback(fn (array $options) => $options['disabled'] === false),
             )->willReturn($form)
         ;
 
@@ -114,9 +110,7 @@ final class AddBaseCurrencySubscriberTest extends TestCase
             ->with(
                 'baseCurrency',
                 $this->anything(),
-                $this->callback(function (array $options) {
-                    return $options['disabled'] === false;
-                }),
+                $this->callback(fn (array $options) => $options['disabled'] === false),
             )->willReturn($form)
         ;
 
@@ -140,9 +134,7 @@ final class AddBaseCurrencySubscriberTest extends TestCase
             ->with(
                 'baseCurrency',
                 $this->anything(),
-                $this->callback(function (array $options) {
-                    return $options['disabled'] === false;
-                }),
+                $this->callback(fn (array $options) => $options['disabled'] === false),
             )->willReturn($form)
         ;
 

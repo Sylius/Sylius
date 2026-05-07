@@ -117,7 +117,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $resolver
             ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
 
-            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('code', fn (Options $options): string => StringInflector::nameToProductCode($options['name']))
 
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')

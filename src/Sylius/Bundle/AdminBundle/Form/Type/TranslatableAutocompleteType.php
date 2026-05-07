@@ -35,14 +35,27 @@ final class TranslatableAutocompleteType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefault('entity_fields', ['code']);
+        $resolver->setDefault('choice_label', function (Options $options, mixed $previousValue): mixed {
+            return $options['extra_options']['choice_label'] ?? $previousValue;
+        });
+
+        $resolver->setDefault('choice_value', function (Options $options, mixed $previousValue): mixed {
+            return $options['extra_options']['choice_value'] ?? $previousValue;
+        });
+
+        $resolver->setDefault('entity_fields', function (Options $options): array {
+            return $options['extra_options']['entity_fields'] ?? ['code'];
+        });
+
         $resolver->setAllowedTypes('entity_fields', ['array', 'null']);
         $resolver->setNormalizer('entity_fields', fn (Options $options, ?array $entityFields) => array_map(
             fn (string $field) => self::ENTITY_ALIAS . '.' . $field,
             $entityFields ?? [],
         ));
 
-        $resolver->setDefault('translation_fields', ['name']);
+        $resolver->setDefault('translation_fields', function (Options $options): array {
+            return $options['extra_options']['translation_fields'] ?? ['name'];
+        });
         $resolver->setAllowedTypes('translation_fields', 'array');
         $resolver->setNormalizer('translation_fields', fn (Options $options, array $translationFields) => array_map(
             fn (string $field) => self::TRANSLATION_ALIAS . '.' . $field,
@@ -112,7 +125,7 @@ final class TranslatableAutocompleteType extends AbstractType
     private static function getComparisons(Expr $expr, array $fields): iterable
     {
         foreach ($fields as $field) {
-            yield $expr->like($field, ':query');
+            yield $expr->like((string) $expr->lower($field), 'LOWER(:query)');
         }
     }
 }
