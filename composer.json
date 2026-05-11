@@ -208,7 +208,7 @@
         "matthiasnoback/symfony-config-test": "^6.0",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "nyholm/psr7": "^1.8",
-        "phparkitect/phparkitect": "^0.8",
+        "phparkitect/phparkitect": "^1.0",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-doctrine": "^2.0",
