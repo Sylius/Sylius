@@ -77,6 +77,17 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
             $productOption->addValue($productOptionValue);
         }
 
+        foreach ($options['translations'] as $localeCode => $translation) {
+            $productOption->setCurrentLocale($localeCode);
+            $productOption->setFallbackLocale($localeCode);
+
+            $productOption->setName($translation['name'] ?? $productOption->getName());
+
+            if (isset($translation['values'])) {
+                $this->updateValuesTranslations($productOption, $localeCode, $translation['values']);
+            }
+        }
+
         return $productOption;
     }
 
@@ -99,7 +110,23 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
                 return $values;
             })
             ->setAllowedTypes('values', 'array')
+            ->setDefault('translations', [])
+            ->setAllowedTypes('translations', ['array'])
         ;
+    }
+
+    /**
+     * @param array<string, string> $values
+     */
+    private function updateValuesTranslations(ProductOptionInterface $productOption, string $localeCode, array $values): void
+    {
+        foreach ($productOption->getValues() as $value) {
+            $localizedName = $values[$value->getCode()];
+
+            $value->setCurrentLocale($localeCode);
+            $value->setFallbackLocale($localeCode);
+            $value->setValue($localizedName);
+        }
     }
 
     /** @return iterable<string> */
