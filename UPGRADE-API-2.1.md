@@ -1,3 +1,22 @@
+# UPGRADE FROM `2.1.14` TO `2.1.15`
+
+## Security
+
+### Payment request ownership enforcement
+
+`GET /api/v2/shop/payment-requests/{hash}` and `PUT /api/v2/shop/payment-requests/{hash}` now enforce ownership:
+
+- An unauthenticated request receives `404 Not Found`, unless the underlying order is a guest order (its customer has no associated user account).
+- An authenticated shop user can only access payment requests belonging to their own orders; requests for another customer's payment request also receive `404 Not Found`.
+
+Previously both operations could be performed by any authenticated user or even an anonymous user who knew the payment request hash, which constituted a broken object-level authorization (IDOR) vulnerability.
+
+**No action is required** unless your integration assumed that these endpoints were publicly accessible or shared across customers.
+
+### `Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\PaymentRequest\ItemProvider` constructor
+
+A new `UserContextInterface` argument is appended to the constructor. Omitting it is deprecated and will be required in Sylius 3.0; without it the ownership check is skipped and the provider falls back to its previous behavior.
+
 # UPGRADE FROM `2.1.10` TO `2.1.11`
 
 ### Constructor signature changes

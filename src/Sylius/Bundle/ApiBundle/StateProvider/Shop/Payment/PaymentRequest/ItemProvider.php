@@ -16,9 +16,14 @@ namespace Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\PaymentRequest;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProviderInterface;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\PaymentBundle\Checker\FinalizedPaymentRequestCheckerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -35,6 +40,7 @@ final readonly class ItemProvider implements ProviderInterface
         private SectionProviderInterface $sectionProvider,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private FinalizedPaymentRequestCheckerInterface $finalizedPaymentRequestChecker,
+        private ?UserContextInterface $userContext = null,
     ) {
     }
 
@@ -45,14 +51,60 @@ final readonly class ItemProvider implements ProviderInterface
         Assert::isInstanceOf($this->sectionProvider->getSection(), ShopApiSection::class);
 
         $paymentRequest = $this->paymentRequestRepository->find($uriVariables['hash']);
+        if (null === $paymentRequest) {
+            return null;
+        }
 
-        if (
-            $paymentRequest === null ||
-            $this->finalizedPaymentRequestChecker->isFinal($paymentRequest)
-        ) {
+        if ($this->userContext !== null && !$this->isAccessibleByCurrentUser($paymentRequest)) {
+            return null;
+        }
+
+        if ($this->finalizedPaymentRequestChecker->isFinal($paymentRequest)) {
             return null;
         }
 
         return $paymentRequest;
+    }
+
+    private function isAccessibleByCurrentUser(PaymentRequestInterface $paymentRequest): bool
+    {
+        $user = $this->userContext->getUser();
+
+        if ($user instanceof ShopUserInterface) {
+            $customer = $user->getCustomer();
+
+            return $customer instanceof CustomerInterface && $this->isOwnedByCustomer($paymentRequest, $customer);
+        }
+
+        return $this->isGuestOrder($paymentRequest);
+    }
+
+    private function isOwnedByCustomer(PaymentRequestInterface $paymentRequest, CustomerInterface $customer): bool
+    {
+        $payment = $paymentRequest->getPayment();
+        if (!$payment instanceof PaymentInterface) {
+            return false;
+        }
+
+        $order = $payment->getOrder();
+
+        return $order instanceof OrderInterface && $order->getCustomer() === $customer;
+    }
+
+    private function isGuestOrder(PaymentRequestInterface $paymentRequest): bool
+    {
+        $payment = $paymentRequest->getPayment();
+        if (!$payment instanceof PaymentInterface) {
+            return false;
+        }
+
+        $order = $payment->getOrder();
+        if (!$order instanceof OrderInterface) {
+            return false;
+        }
+
+        $customer = $order->getCustomer();
+
+        return null === $customer || null === $customer->getUser();
     }
 }

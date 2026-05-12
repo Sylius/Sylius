@@ -253,6 +253,199 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 
+    #[Test]
+    public function it_does_not_allow_an_anonymous_customer_to_get_a_payment_request_owned_by_a_customer(): void
+    {
+        $paymentRequest = $this->loadPaymentRequestOwnedByOliver();
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_does_not_allow_a_customer_to_get_a_payment_request_owned_by_another_customer(): void
+    {
+        $paymentRequest = $this->loadPaymentRequestOwnedByOliver();
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withShopUserAuthorization('dave@doe.com')->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_does_not_allow_an_anonymous_customer_to_update_a_payment_request_owned_by_a_customer(): void
+    {
+        $paymentRequest = $this->loadPaymentRequestOwnedByOliver();
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->build(),
+            content: json_encode([
+                'payload' => [
+                    'target_path' => 'https://attacker.tld/target-path',
+                    'after_path' => 'https://attacker.tld/after-path',
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_does_not_allow_a_customer_to_update_a_payment_request_owned_by_another_customer(): void
+    {
+        $paymentRequest = $this->loadPaymentRequestOwnedByOliver();
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('dave@doe.com')->build(),
+            content: json_encode([
+                'payload' => [
+                    'target_path' => 'https://attacker.tld/target-path',
+                    'after_path' => 'https://attacker.tld/after-path',
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_does_not_allow_a_shop_user_to_get_a_payment_request_for_a_guest_order(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'payment_method.yaml',
+            'payment_request/payment_request.yaml',
+            'payment_request/order.yaml',
+        ]);
+
+        /** @var PaymentRequestInterface $paymentRequest */
+        $paymentRequest = $fixtures['payment_request_capture'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withShopUserAuthorization('oliver@doe.com')->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_does_not_allow_a_shop_user_to_update_a_payment_request_for_a_guest_order(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'payment_method.yaml',
+            'payment_request/payment_request.yaml',
+            'payment_request/order.yaml',
+        ]);
+
+        /** @var PaymentRequestInterface $paymentRequest */
+        $paymentRequest = $fixtures['payment_request_capture'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
+            content: json_encode([
+                'payload' => [
+                    'target_path' => 'https://myshop.tld/target-path',
+                    'after_path' => 'https://myshop.tld/after-path',
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_allows_an_anonymous_user_to_get_a_payment_request_for_a_guest_order(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'payment_method.yaml',
+            'payment_request/payment_request.yaml',
+            'payment_request/order.yaml',
+        ]);
+
+        /** @var PaymentRequestInterface $paymentRequest */
+        $paymentRequest = $fixtures['payment_request_capture'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+    }
+
+    #[Test]
+    public function it_allows_an_anonymous_user_to_update_a_payment_request_for_a_guest_order(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'gateway_config_payment_request.yaml',
+            'payment_method.yaml',
+            'payment_request/payment_request.yaml',
+            'payment_request/order.yaml',
+        ]);
+
+        /** @var PaymentRequestInterface $paymentRequest */
+        $paymentRequest = $fixtures['payment_request_capture'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->build(),
+            content: json_encode([
+                'payload' => [
+                    'target_path' => 'https://myshop.tld/new-target-path',
+                    'after_path' => 'https://myshop.tld/new-after-path',
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+    }
+
+    private function loadPaymentRequestOwnedByOliver(): PaymentRequestInterface
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'payment_method.yaml',
+            'payment_request/payment_request.yaml',
+            'payment_request/order_with_customer.yaml',
+        ]);
+
+        /** @var PaymentRequestInterface $paymentRequest */
+        $paymentRequest = $fixtures['payment_request_capture'];
+
+        return $paymentRequest;
+    }
+
     public static function createPaymentRequestProvider(): iterable
     {
         yield 'Payment request' => [

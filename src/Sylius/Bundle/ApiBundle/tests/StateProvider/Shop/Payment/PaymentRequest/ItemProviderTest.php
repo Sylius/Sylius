@@ -18,17 +18,24 @@ use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProviderInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\PaymentRequest\ItemProvider;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\PaymentBundle\Checker\FinalizedPaymentRequestCheckerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
 final class ItemProviderTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;
+
+    private MockObject&UserContextInterface $userContext;
 
     private MockObject&PaymentRequestRepositoryInterface $paymentRequestRepository;
 
@@ -39,10 +46,17 @@ final class ItemProviderTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->sectionProvider = $this->createMock(SectionProviderInterface::class);
+        $this->userContext = $this->createMock(UserContextInterface::class);
         $this->paymentRequestRepository = $this->createMock(PaymentRequestRepositoryInterface::class);
         $this->finalizedPaymentRequestChecker = $this->createMock(FinalizedPaymentRequestCheckerInterface::class);
-        $this->itemProvider = new ItemProvider($this->sectionProvider, $this->paymentRequestRepository, $this->finalizedPaymentRequestChecker);
+        $this->itemProvider = new ItemProvider(
+            $this->sectionProvider,
+            $this->paymentRequestRepository,
+            $this->finalizedPaymentRequestChecker,
+            $this->userContext,
+        );
     }
 
     public function testAStateProvider(): void
@@ -50,63 +64,161 @@ final class ItemProviderTest extends TestCase
         self::assertInstanceOf(ProviderInterface::class, $this->itemProvider);
     }
 
-    public function testThrowsAnExceptionIfOperationClassIsNotPayment(): void
+    public function testThrowsAnExceptionIfOperationClassIsNotPaymentRequest(): void
     {
-        /** @var Operation|MockObject $operationMock */
-        $operationMock = $this->createMock(Operation::class);
-        $operationMock->expects(self::once())->method('getClass')->willReturn(\stdClass::class);
+        /** @var Operation&MockObject $operation */
+        $operation = $this->createMock(Operation::class);
+        $operation->expects(self::once())->method('getClass')->willReturn(\stdClass::class);
+
         self::expectException(\InvalidArgumentException::class);
-        $this->itemProvider->provide($operationMock);
+
+        $this->itemProvider->provide($operation);
     }
 
     public function testThrowsAnExceptionIfOperationIsNotPut(): void
     {
-        /** @var Operation|MockObject $operationMock */
-        $operationMock = $this->createMock(Operation::class);
-        $operationMock->expects(self::once())->method('getClass')->willReturn(PaymentRequestInterface::class);
+        /** @var Operation&MockObject $operation */
+        $operation = $this->createMock(Operation::class);
+        $operation->expects(self::once())->method('getClass')->willReturn(PaymentRequestInterface::class);
+
         self::expectException(\InvalidArgumentException::class);
-        $this->itemProvider->provide($operationMock);
+
+        $this->itemProvider->provide($operation);
     }
 
     public function testThrowsAnExceptionIfSectionIsNotShopApiSection(): void
     {
-        $operation = new Put(class: PaymentRequestInterface::class, name: 'put');
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new AdminApiSection());
+
         self::expectException(\InvalidArgumentException::class);
-        $this->itemProvider->provide($operation, [], []);
+
+        $this->itemProvider->provide($this->putOperation(), [], []);
     }
 
     public function testReturnsNothingIfPaymentRequestIsNotFound(): void
     {
-        $hash = 'hash';
-        $operation = new Put(class: PaymentRequestInterface::class, name: 'put');
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
-        $this->paymentRequestRepository->expects(self::once())->method('find')->with($hash)->willReturn(null);
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn(null);
+        $this->userContext->expects(self::never())->method('getUser');
         $this->finalizedPaymentRequestChecker->expects(self::never())->method('isFinal');
-        $this->assertNull($this->itemProvider->provide($operation, ['hash' => $hash], []));
+
+        self::assertNull($this->itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
     }
 
-    public function testReturnsNothingIfPaymentRequestIsInFinalState(): void
+    public function testReturnsNothingIfShopUserHasNoCustomer(): void
     {
-        /** @var PaymentRequestInterface|MockObject $paymentRequestMock */
-        $paymentRequestMock = $this->createMock(PaymentRequestInterface::class);
-        $hash = 'hash';
-        $operation = new Put(class: PaymentRequestInterface::class, name: 'put');
+        /** @var ShopUserInterface&MockObject $user */
+        $user = $this->createMock(ShopUserInterface::class);
+        $user->expects(self::once())->method('getCustomer')->willReturn(null);
+
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
-        $this->paymentRequestRepository->expects(self::once())->method('find')->with($hash)->willReturn($paymentRequestMock);
-        $this->finalizedPaymentRequestChecker->expects(self::once())->method('isFinal')->with($paymentRequestMock)->willReturn(true);
-        $this->assertNull($this->itemProvider->provide($operation, ['hash' => $hash], []));
+        $this->userContext->expects(self::once())->method('getUser')->willReturn($user);
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn(
+            $this->createMock(PaymentRequestInterface::class),
+        );
+        $this->finalizedPaymentRequestChecker->expects(self::never())->method('isFinal');
+
+        self::assertNull($this->itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
     }
 
-    public function testReturnsPaymentRequestByHash(): void
+    public function testReturnsNothingIfPaymentRequestIsNotOwnedByTheCustomer(): void
     {
-        /** @var PaymentRequestInterface|MockObject $paymentRequestMock */
-        $paymentRequestMock = $this->createMock(PaymentRequestInterface::class);
-        $hash = 'hash';
-        $operation = new Put(class: PaymentRequestInterface::class, name: 'put');
+        $customer = $this->stubAuthenticatedCustomer();
+
+        /** @var OrderInterface&MockObject $order */
+        $order = $this->createMock(OrderInterface::class);
+        $order->method('getCustomer')->willReturn($this->createMock(CustomerInterface::class));
+
+        /** @var PaymentInterface&MockObject $payment */
+        $payment = $this->createMock(PaymentInterface::class);
+        $payment->method('getOrder')->willReturn($order);
+
+        /** @var PaymentRequestInterface&MockObject $paymentRequest */
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $paymentRequest->method('getPayment')->willReturn($payment);
+
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
-        $this->paymentRequestRepository->expects(self::once())->method('find')->with($hash)->willReturn($paymentRequestMock);
-        $this->finalizedPaymentRequestChecker->expects(self::once())->method('isFinal')->with($paymentRequestMock)->willReturn(false);
-        self::assertSame($paymentRequestMock, $this->itemProvider->provide($operation, ['hash' => $hash], []));
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn($paymentRequest);
+        $this->finalizedPaymentRequestChecker->expects(self::never())->method('isFinal');
+
+        self::assertNull($this->itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
+        self::assertNotSame($customer, $order->getCustomer());
+    }
+
+    public function testReturnsNothingIfPaymentRequestIsOwnedByTheCustomerButInFinalState(): void
+    {
+        $paymentRequest = $this->createOwnedPaymentRequest($this->stubAuthenticatedCustomer());
+
+        $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn($paymentRequest);
+        $this->finalizedPaymentRequestChecker->expects(self::once())->method('isFinal')->with($paymentRequest)->willReturn(true);
+
+        self::assertNull($this->itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
+    }
+
+    public function testReturnsThePaymentRequestWhenOwnedByTheCustomerAndNotFinal(): void
+    {
+        $paymentRequest = $this->createOwnedPaymentRequest($this->stubAuthenticatedCustomer());
+
+        $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn($paymentRequest);
+        $this->finalizedPaymentRequestChecker->expects(self::once())->method('isFinal')->with($paymentRequest)->willReturn(false);
+
+        self::assertSame($paymentRequest, $this->itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
+    }
+
+    public function testWithoutUserContextSkipsOwnershipCheck(): void
+    {
+        $itemProvider = new ItemProvider(
+            $this->sectionProvider,
+            $this->paymentRequestRepository,
+            $this->finalizedPaymentRequestChecker,
+        );
+
+        /** @var PaymentRequestInterface&MockObject $paymentRequest */
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+
+        $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
+        $this->userContext->expects(self::never())->method('getUser');
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn($paymentRequest);
+        $this->finalizedPaymentRequestChecker->expects(self::once())->method('isFinal')->with($paymentRequest)->willReturn(false);
+
+        self::assertSame($paymentRequest, $itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
+    }
+
+    private function putOperation(): Put
+    {
+        return new Put(class: PaymentRequestInterface::class, name: 'put');
+    }
+
+    private function stubAuthenticatedCustomer(): CustomerInterface&MockObject
+    {
+        /** @var CustomerInterface&MockObject $customer */
+        $customer = $this->createMock(CustomerInterface::class);
+
+        /** @var ShopUserInterface&MockObject $user */
+        $user = $this->createMock(ShopUserInterface::class);
+        $user->method('getCustomer')->willReturn($customer);
+
+        $this->userContext->expects(self::once())->method('getUser')->willReturn($user);
+
+        return $customer;
+    }
+
+    private function createOwnedPaymentRequest(CustomerInterface $customer): MockObject&PaymentRequestInterface
+    {
+        /** @var OrderInterface&MockObject $order */
+        $order = $this->createMock(OrderInterface::class);
+        $order->method('getCustomer')->willReturn($customer);
+
+        /** @var PaymentInterface&MockObject $payment */
+        $payment = $this->createMock(PaymentInterface::class);
+        $payment->method('getOrder')->willReturn($order);
+
+        /** @var PaymentRequestInterface&MockObject $paymentRequest */
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $paymentRequest->method('getPayment')->willReturn($payment);
+
+        return $paymentRequest;
     }
 }
