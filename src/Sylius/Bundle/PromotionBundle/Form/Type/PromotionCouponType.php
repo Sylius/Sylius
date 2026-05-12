@@ -28,6 +28,7 @@ final class PromotionCouponType extends AbstractResourceType
             ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.promotion_coupon.usage_limit',
                 'required' => false,
+                'attr' => ['min' => 1],
             ])
             ->add('expiresAt', DateType::class, [
                 'label' => 'sylius.form.promotion_coupon.expires_at',

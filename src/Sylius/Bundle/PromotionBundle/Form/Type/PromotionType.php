@@ -57,6 +57,7 @@ final class PromotionType extends AbstractResourceType
             ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.promotion.usage_limit',
                 'required' => false,
+                'attr' => ['min' => 1],
             ])
             ->add('startsAt', DateTimeType::class, [
                 'label' => 'sylius.form.promotion.starts_at',

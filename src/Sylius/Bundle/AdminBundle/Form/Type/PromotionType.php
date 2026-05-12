@@ -33,6 +33,7 @@ final class PromotionType extends AbstractType
                     'label' => 'sylius.form.promotion.usage_limit',
                     'required' => false,
                     'disabled' => true,
+                    'attr' => ['min' => 1],
                 ]);
             }
         });
@@ -45,6 +46,7 @@ final class PromotionType extends AbstractType
                 'label' => 'sylius.form.promotion.usage_limit',
                 'required' => false,
                 'disabled' => !$trackUsage,
+                'attr' => ['min' => 1],
             ]);
         });
     }
