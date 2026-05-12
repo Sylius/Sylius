@@ -107,6 +107,10 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
                     $values[sprintf('%s-option#%d', $options['code'], $i)] = sprintf('%s #i%d', $options['name'], $i);
                 }
 
+                if (!empty($options['translations'])) {
+                    return [];
+                }
+
                 return $values;
             })
             ->setAllowedTypes('values', 'array')
@@ -120,13 +124,32 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
      */
     private function updateValuesTranslations(ProductOptionInterface $productOption, string $localeCode, array $values): void
     {
-        foreach ($productOption->getValues() as $value) {
-            $localizedName = $values[$value->getCode()];
+        foreach ($values as $code => $value) {
+            $productOptionValue = $this->findOptionValueWithCode($productOption, $code);
 
-            $value->setCurrentLocale($localeCode);
-            $value->setFallbackLocale($localeCode);
-            $value->setValue($localizedName);
+            if (null === $productOptionValue) {
+                /** @var ProductOptionValueInterface $productOptionValue */
+                $productOptionValue = $this->productOptionValueFactory->createNew();
+                $productOptionValue->setCode($code);
+            }
+
+            $productOptionValue->setCurrentLocale($localeCode);
+            $productOptionValue->setFallbackLocale($localeCode);
+            $productOptionValue->setValue($value);
+
+            $productOption->addValue($productOptionValue);
         }
+    }
+
+    private function findOptionValueWithCode(ProductOptionInterface $productOption, string $code): ?ProductOptionValueInterface
+    {
+        foreach ($productOption->getValues() as $value) {
+            if ($value->getCode() === $code) {
+                return $value;
+            }
+        }
+
+        return null;
     }
 
     /** @return iterable<string> */

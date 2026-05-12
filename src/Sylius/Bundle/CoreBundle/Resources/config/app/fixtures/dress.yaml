@@ -66,11 +66,12 @@ sylius_fixtures:
 
                             -   name: 'Dress height'
                                 code: 'dress_height'
-                                values:
-                                    dress_height_petite: 'Petite'
-                                    dress_height_regular: 'Regular'
-                                    dress_height_tall: 'Tall'
                                 translations:
+                                    en_US:
+                                        values:
+                                            dress_height_petite: 'Petite'
+                                            dress_height_regular: 'Regular'
+                                            dress_height_tall: 'Tall'
                                     fr_FR:
                                         values:
                                             dress_height_petite: 'Petite'

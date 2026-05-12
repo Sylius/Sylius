@@ -46,6 +46,13 @@ final class ProductOptionFixturesTest extends KernelTestCase
                 'name' => 'Dress height',
                 'code' => 'dress_height',
                 'translations' => [
+                    'en_US' => [
+                        'values' => [
+                            'dress_height_petite' => 'Petite',
+                            'dress_height_regular' => 'Regular',
+                            'dress_height_tall' => 'Tall',
+                        ],
+                    ],
                     'fr_FR' => [
                         'name' => 'Taille de robe',
                         'values' => [
@@ -54,11 +61,6 @@ final class ProductOptionFixturesTest extends KernelTestCase
                             'dress_height_tall' => 'Grande',
                         ],
                     ],
-                ],
-                'values' => [
-                    'dress_height_petite' => 'Petite',
-                    'dress_height_regular' => 'Regular',
-                    'dress_height_tall' => 'Tall',
                 ],
             ],
         ]]);
