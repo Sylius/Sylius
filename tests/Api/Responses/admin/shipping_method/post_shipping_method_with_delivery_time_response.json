@@ -10,18 +10,18 @@
     "createdAt": "@date@",
     "updatedAt": "@date@",
     "archivedAt": null,
-    "minDeliveryTimeDays": null,
-    "maxDeliveryTimeDays": null,
+    "minDeliveryTimeDays": 3,
+    "maxDeliveryTimeDays": 7,
     "shippingChargesCalculatorConfiguration": {
         "WEB": {
             "amount": 500
         },
         "MOBILE": {
-            "amount": 1000
+            "amount": 500
         }
     },
     "rules": [],
-    "zone": "\/api\/v2\/admin\/zones\/WORLD",
+    "zone": "\/api\/v2\/admin\/zones\/EU",
     "channels": [
         "\/api\/v2\/admin\/channels\/WEB"
     ],
@@ -31,7 +31,7 @@
             "@type": "ShippingMethodTranslation",
             "id": "@integer@",
             "name": "UPS",
-            "description": "@string@"
+            "description": "This is a UPS shipping method."
         }
     }
 }
