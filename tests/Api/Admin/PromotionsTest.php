@@ -550,4 +550,21 @@ final class PromotionsTest extends JsonApiTestCase
 
         $this->assertResponseSuccessful('admin/promotion/restore_promotion');
     }
+
+    #[Test]
+    public function it_does_not_create_a_promotion_with_invalid_usage_limit(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
+
+        $this->requestPost(
+            uri: '/api/v2/admin/promotions',
+            body: [
+                'name' => 'T-Shirts discount',
+                'code' => 'tshirts_discount',
+                'usageLimit' => -1,
+            ],
+        );
+
+        $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_invalid_usage_limit_response');
+    }
 }

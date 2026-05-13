@@ -215,4 +215,23 @@ final class PromotionCouponsTest extends JsonApiTestCase
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
+
+    #[Test]
+    public function it_does_not_create_a_promotion_coupon_with_invalid_usage_limit(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
+
+        $this->requestPost(
+            sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()),
+            [
+                'code' => 'INVALID_LIMIT',
+                'usageLimit' => -1,
+            ],
+        );
+
+        $this->assertResponseUnprocessableEntity('admin/promotion_coupon/post_promotion_coupon_with_invalid_usage_limit_response');
+    }
 }
