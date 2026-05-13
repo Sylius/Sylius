@@ -1,9 +1,13 @@
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import SyliusAdmin from '@sylius-ui/admin';
+import SyliusShop from '@sylius-ui/shop';
 
-const SyliusAdmin = require('@sylius-ui/admin');
-const SyliusShop = require('@sylius-ui/shop');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const adminConfig = SyliusAdmin.getWebpackConfig(path.resolve(__dirname));
-const shopConfig = SyliusShop.getWebpackConfig(path.resolve(__dirname));
+export default async () => {
+    const adminConfig = await SyliusAdmin.getWebpackConfig(path.resolve(__dirname));
+    const shopConfig = await SyliusShop.getWebpackConfig(path.resolve(__dirname));
 
-module.exports = [adminConfig, shopConfig];
+    return [adminConfig, shopConfig];
+};

@@ -7,20 +7,23 @@
  * file that was distributed with this source code.
  */
 
-const path = require('path');
-const Encore = require('@symfony/webpack-encore');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import Encore from '@symfony/webpack-encore';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 class SyliusShop {
     /**
      * Provide a light Webpack configuration for Sylius Admin
      * All the stimulus stuff should be handled by the app.shop entrypoint
      */
-    static getBaseWebpackConfig(rootDir) {
+    static async getBaseWebpackConfig(rootDir) {
         this._prepareWebpackConfig(rootDir);
         Encore
             .addEntry('shop-entry', path.resolve(__dirname, 'Resources/assets/entrypoint.js'));
 
-        const shopConfig = Encore.getWebpackConfig();
+        const shopConfig = await Encore.getWebpackConfig();
 
         shopConfig.externals = { ...shopConfig.externals, window: 'window', document: 'document' };
         shopConfig.name = 'shop';
@@ -35,13 +38,13 @@ class SyliusShop {
      * For instances started with Sylius-Standard < 2.0.4, it'll still be used unless upgrading webpack.config.js
      * to use the method above getBaseWebpackConfig()
      */
-    static getWebpackConfig(rootDir) {
+    static async getWebpackConfig(rootDir) {
         this._prepareWebpackConfig(rootDir);
         // For a ready-to-use Stimulus bridge. Should be used only for sylius/sylius tests
         Encore
             .addEntry('shop-entry', path.resolve(__dirname, 'Resources/assets/app.js'))
             .enableStimulusBridge(path.resolve(__dirname, 'Resources/assets/controllers.json'));
-        const shopConfig = Encore.getWebpackConfig();
+        const shopConfig = await Encore.getWebpackConfig();
 
         shopConfig.externals = { ...shopConfig.externals, window: 'window', document: 'document' };
         shopConfig.name = 'shop';
@@ -66,4 +69,4 @@ class SyliusShop {
     }
 }
 
-module.exports = SyliusShop;
+export default SyliusShop;

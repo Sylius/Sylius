@@ -5,6 +5,7 @@
     "type": "git",
     "url": "git+https://github.com/Sylius/Sylius.git"
   },
+  "type": "module",
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "scripts": {

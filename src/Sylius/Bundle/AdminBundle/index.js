@@ -7,21 +7,24 @@
  * file that was distributed with this source code.
  */
 
-const path = require('path');
-const Encore = require('@symfony/webpack-encore');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import Encore from '@symfony/webpack-encore';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 class SyliusAdmin {
     /**
      * Provide a light Webpack configuration for Sylius Admin
      * All the stimulus stuff should be handled by the app.admin entrypoint
      */
-    static getBaseWebpackConfig(rootDir) {
+    static async getBaseWebpackConfig(rootDir) {
         this._prepareWebpackConfig(rootDir);
 
         Encore
             .addEntry('admin-entry', path.resolve(__dirname, 'Resources/assets/entrypoint.js'));
 
-        const adminConfig = Encore.getWebpackConfig();
+        const adminConfig = await Encore.getWebpackConfig();
 
         adminConfig.externals = { ...adminConfig.externals, window: 'window', document: 'document' };
         adminConfig.name = 'admin';
@@ -36,14 +39,14 @@ class SyliusAdmin {
      * For instances started with Sylius-Standard < 2.0.4, it'll still be used unless upgrading webpack.config.js
      * to use the method above getBaseWebpackConfig()
      */
-    static getWebpackConfig(rootDir) {
+    static async getWebpackConfig(rootDir) {
         this._prepareWebpackConfig(rootDir);
 
         Encore
             .addEntry('admin-entry', path.resolve(__dirname, 'Resources/assets/app.js'))
             .enableStimulusBridge(path.resolve(__dirname, 'Resources/assets/controllers.json'));
 
-        const adminConfig = Encore.getWebpackConfig();
+        const adminConfig = await Encore.getWebpackConfig();
 
         adminConfig.externals = { ...adminConfig.externals, window: 'window', document: 'document' };
         adminConfig.name = 'admin';
@@ -69,4 +72,4 @@ class SyliusAdmin {
     }
 }
 
-module.exports = SyliusAdmin;
+export default SyliusAdmin;
