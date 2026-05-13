@@ -23,6 +23,7 @@ sylius:
                 product: Producte
         promotion_coupon:
             per_customer_usage_limit: Límit d'ús per client
+            per_customer_usage_limit_details: Les comandes fetes mentre el seguiment estava desactivat es comptaran en aquest límit quan el seguiment s'activi.
         group:
             name: Nom
             roles: Rols

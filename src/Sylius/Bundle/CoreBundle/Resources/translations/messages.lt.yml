@@ -23,6 +23,7 @@ sylius:
                 product: Produktas
         promotion_coupon:
             per_customer_usage_limit: Kliento naudojimosi ribos
+            per_customer_usage_limit_details: Užsakymai, pateikti kai sekimas buvo išjungtas, vis tiek bus skaičiuojami šios ribos atžvilgiu kai sekimas bus įjungtas.
         group:
             name: Pavadinimas
             roles: Rolės

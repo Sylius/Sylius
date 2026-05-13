@@ -80,6 +80,7 @@ sylius:
                 product: '상품'
         promotion_coupon:
             per_customer_usage_limit: '고객당 사용 제한'
+            per_customer_usage_limit_details: '추적이 비활성화된 동안 주문된 내역은 추적이 활성화될 때 이 한도에 계속 포함됩니다.'
             reusable_from_cancelled_orders: '취소된 주문에서 재사용 가능'
         group:
             name: '이름'

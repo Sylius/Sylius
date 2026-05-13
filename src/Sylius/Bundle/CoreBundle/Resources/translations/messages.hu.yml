@@ -23,6 +23,7 @@ sylius:
                 product: Termék
         promotion_coupon:
             per_customer_usage_limit: Felhasználókénti felhasználási korlát
+            per_customer_usage_limit_details: A követés letiltása alatt leadott rendelések a követés engedélyezésekor is beleszámítanak ebbe a korlátba.
         group:
             name: Név
             roles: Szerepek

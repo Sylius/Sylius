@@ -24,6 +24,7 @@ sylius:
                 product: Продукт
         promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
+            per_customer_usage_limit_details: Заказы, оформленные при отключённом отслеживании, будут учитываться в этом лимите при включении отслеживания.
             reusable_from_cancelled_orders: Повторное использование из отмененных заказов
         group:
             name: Название

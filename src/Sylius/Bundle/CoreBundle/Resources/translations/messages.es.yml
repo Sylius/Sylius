@@ -23,6 +23,7 @@ sylius:
                 product: Producto
         promotion_coupon:
             per_customer_usage_limit: Límite de uso por cliente
+            per_customer_usage_limit_details: Los pedidos realizados mientras el seguimiento estaba desactivado seguirán contando para este límite cuando el seguimiento se active.
             reusable_from_cancelled_orders: Reusable de pedidos cancelados
         group:
             name: Nombre

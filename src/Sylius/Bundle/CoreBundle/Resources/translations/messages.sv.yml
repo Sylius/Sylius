@@ -77,6 +77,7 @@ sylius:
                 product: 'Produkt'
         promotion_coupon:
             per_customer_usage_limit: 'Användningsgräns per kund'
+            per_customer_usage_limit_details: 'Beställningar som gjorts medan spårning var inaktiverat räknas fortfarande mot denna gräns när spårning aktiveras.'
             reusable_from_cancelled_orders: 'Kan återanvändas från annullerade beställningar'
         group:
             name: 'Namn'

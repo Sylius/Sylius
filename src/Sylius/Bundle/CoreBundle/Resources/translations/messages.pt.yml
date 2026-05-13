@@ -81,6 +81,7 @@ sylius:
                 product: 'Produto'
         promotion_coupon:
             per_customer_usage_limit: 'Limite de uso por cliente'
+            per_customer_usage_limit_details: 'Os pedidos feitos enquanto o rastreamento estava desativado ainda serão contabilizados neste limite quando o rastreamento for ativado.'
             reusable_from_cancelled_orders: 'Reutilizável para pedidos cancelados'
         group:
             name: 'Nome'

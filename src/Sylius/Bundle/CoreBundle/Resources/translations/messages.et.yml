@@ -23,6 +23,7 @@ sylius:
                 product: Toode
         promotion_coupon:
             per_customer_usage_limit: Kliendipõhine kasutuslimiit
+            per_customer_usage_limit_details: Jälgimise keelatud oleku ajal tehtud tellimused arvestatakse selle limiidi vastu ka siis, kui jälgimine on lubatud.
         group:
             name: Nimi
             roles: Rollid

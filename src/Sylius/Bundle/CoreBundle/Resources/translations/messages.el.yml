@@ -23,6 +23,7 @@ sylius:
                 product: Προϊόν
         promotion_coupon:
             per_customer_usage_limit: Όριο χρήσης ανά πελάτη
+            per_customer_usage_limit_details: Οι παραγγελίες που έγιναν ενώ η παρακολούθηση ήταν απενεργοποιημένη θα συνεχίσουν να μετρώνται προς αυτό το όριο όταν ενεργοποιηθεί η παρακολούθηση.
         group:
             name: Ονομασία
             roles: Ρόλοι

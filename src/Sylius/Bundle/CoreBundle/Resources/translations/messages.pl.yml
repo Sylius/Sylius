@@ -80,6 +80,7 @@ sylius:
                 product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Limit użycia na 1 klienta
+            per_customer_usage_limit_details: Zamówienia złożone podczas gdy śledzenie było wyłączone nadal będą wliczane do tego limitu po włączeniu śledzenia.
             reusable_from_cancelled_orders: Możliwość ponownego użycia w anulowanych zamówieniach
         group:
             name: Nazwa

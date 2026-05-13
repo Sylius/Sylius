@@ -24,6 +24,7 @@ sylius:
                 product: Товар
         promotion_coupon:
             per_customer_usage_limit: Ліміт використання на клієнта
+            per_customer_usage_limit_details: Замовлення, зроблені під час вимкненого відстеження, все одно зараховуватимуться до цього ліміту, коли відстеження буде увімкнено.
             reusable_from_cancelled_orders: Повторно використовується для скасованих замовлень
         group:
             name: Назва регіону

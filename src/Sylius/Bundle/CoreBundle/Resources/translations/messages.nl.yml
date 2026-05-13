@@ -79,6 +79,7 @@ sylius:
                 product: 'Product'
         promotion_coupon:
             per_customer_usage_limit: 'Per-klant gebruiksbeperking'
+            per_customer_usage_limit_details: 'Bestellingen geplaatst terwijl tracking uitgeschakeld was, tellen nog steeds mee voor deze limiet wanneer tracking wordt ingeschakeld.'
             reusable_from_cancelled_orders: 'Herbruikbaar vanaf geannuleerde bestellingen'
         group:
             name: 'Naam'

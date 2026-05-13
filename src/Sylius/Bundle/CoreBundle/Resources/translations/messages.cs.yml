@@ -79,6 +79,7 @@ sylius:
                 product: 'Produkt'
         promotion_coupon:
             per_customer_usage_limit: 'Limit použití na zákazníka'
+            per_customer_usage_limit_details: 'Objednávky zadané při deaktivovaném sledování se budou při aktivaci sledování stále počítat do tohoto limitu.'
             reusable_from_cancelled_orders: 'Opětovně použitelný z zrušených objednávek'
         group:
             name: 'Název'

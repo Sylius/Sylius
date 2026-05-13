@@ -23,6 +23,7 @@ sylius:
                 product: สินค้า
         promotion_coupon:
             per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
+            per_customer_usage_limit_details: คำสั่งซื้อที่ทำขณะปิดการติดตามจะยังนับรวมต่อขีดจำกัดนี้เมื่อเปิดใช้งานการติดตาม
         group:
             name: ชื่อภาษา
             roles: Roles

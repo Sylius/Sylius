@@ -80,6 +80,7 @@ sylius:
                 product: 'Prodotto'
         promotion_coupon:
             per_customer_usage_limit: 'Limite di utilizzo per cliente'
+            per_customer_usage_limit_details: 'Gli ordini effettuati mentre il tracciamento era disabilitato conteranno comunque verso questo limite quando il tracciamento viene abilitato.'
             reusable_from_cancelled_orders: 'Riutilizzabile da ordini cancellati'
         group:
             name: 'Nome'
