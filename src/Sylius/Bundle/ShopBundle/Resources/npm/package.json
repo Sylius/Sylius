@@ -16,7 +16,7 @@
     "@popperjs/core": "^2.11.8",
     "@sylius/shop-bundle": "file:../assets/",
     "@symfony/stimulus-bridge": "^3.2.0",
-    "@symfony/webpack-encore": "^5.0.1",
+    "@symfony/webpack-encore": "^6.0.0",
     "bootstrap": "^5.3.8",
     "sass": "1.77.6",
     "sass-loader": "^16.0.1",
