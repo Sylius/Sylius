@@ -57,17 +57,6 @@ jobs:
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
-            -   name: Set variables
-                shell: bash
-                env:
-                    BRANCH: ${{ inputs.branch }}
-                run: |
-                    if [ "$BRANCH" == "1.14" ]; then
-                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    else
-                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
-                    fi
-
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
@@ -85,7 +74,6 @@ jobs:
                     composer require winzou/state-machine-bundle:^0.6 --no-update
 
             -   name: Prepare manifest.json files
-                if: "${{ inputs.branch != '1.14' }}"
                 run: |
                     mkdir -p public/build/admin
                     mkdir -p public/build/shop
@@ -125,7 +113,7 @@ jobs:
                     database: "mariadb:${{ matrix.mariadb }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: ${{ env.NODE_VERSION }}
+                    node_version: "24.x"
                     chrome_version: stable
 
             -   name: Run PHPUnit
@@ -170,17 +158,6 @@ jobs:
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
-            -   name: Set variables
-                shell: bash
-                env:
-                    BRANCH: ${{ inputs.branch }}
-                run: |
-                    if [ "$BRANCH" == "1.14" ]; then
-                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    else
-                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
-                    fi
-
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
@@ -198,7 +175,6 @@ jobs:
                     composer require winzou/state-machine-bundle:^0.6 --no-update
 
             -   name: Prepare manifest.json files
-                if: "${{ inputs.branch != '1.14' }}"
                 run: |
                     mkdir -p public/build/admin
                     mkdir -p public/build/shop
@@ -238,7 +214,7 @@ jobs:
                     database: "mariadb:${{ matrix.mariadb }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: ${{ env.NODE_VERSION }}
+                    node_version: "24.x"
                     chrome_version: stable
 
             -   name: Run UI Behat
