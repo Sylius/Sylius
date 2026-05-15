@@ -2,16 +2,14 @@
     "@context": "\/api\/v2\/contexts\/ShippingMethod",
     "@id": "\/api\/v2\/admin\/shipping-methods\/UPS",
     "@type": "ShippingMethod",
+    "zone": "\/api\/v2\/admin\/zones\/WORLD",
+    "channels": [
+        "\/api\/v2\/admin\/channels\/WEB"
+    ],
     "id": "@integer@",
     "code": "UPS",
     "position": 0,
     "shippingChargesCalculator": "flat_rate",
-    "enabled": true,
-    "createdAt": "@date@",
-    "updatedAt": "@date@",
-    "archivedAt": null,
-    "minDeliveryTimeDays": null,
-    "maxDeliveryTimeDays": null,
     "shippingChargesCalculatorConfiguration": {
         "WEB": {
             "amount": 500
@@ -21,10 +19,12 @@
         }
     },
     "rules": [],
-    "zone": "\/api\/v2\/admin\/zones\/WORLD",
-    "channels": [
-        "\/api\/v2\/admin\/channels\/WEB"
-    ],
+    "createdAt": "@date@",
+    "updatedAt": "@date@",
+    "archivedAt": null,
+    "minDeliveryTimeDays": 1,
+    "maxDeliveryTimeDays": 5,
+    "enabled": true,
     "translations": {
         "en_US": {
             "@id": "\/api\/v2\/admin\/shipping-methods\/UPS\/translations\/en_US",

@@ -113,5 +113,19 @@
             <group>sylius:admin:shipping_method:index</group>
             <group>sylius:admin:shipping_method:show</group>
         </attribute>
+
+        <attribute name="minDeliveryTimeDays">
+            <group>sylius:admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:update</group>
+        </attribute>
+
+        <attribute name="maxDeliveryTimeDays">
+            <group>sylius:admin:shipping_method:index</group>
+            <group>sylius:admin:shipping_method:show</group>
+            <group>sylius:admin:shipping_method:create</group>
+            <group>sylius:admin:shipping_method:update</group>
+        </attribute>
     </class>
 </serializer>
