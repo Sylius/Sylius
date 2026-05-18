@@ -186,6 +186,85 @@ final class ItemProviderTest extends TestCase
         self::assertSame($paymentRequest, $itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
     }
 
+    public function testReturnsThePaymentRequestForAnonymousUserWhenOrderHasNoCustomer(): void
+    {
+        $this->userContext->expects(self::once())->method('getUser')->willReturn(null);
+
+        /** @var OrderInterface&MockObject $order */
+        $order = $this->createMock(OrderInterface::class);
+        $order->method('getCustomer')->willReturn(null);
+
+        /** @var PaymentInterface&MockObject $payment */
+        $payment = $this->createMock(PaymentInterface::class);
+        $payment->method('getOrder')->willReturn($order);
+
+        /** @var PaymentRequestInterface&MockObject $paymentRequest */
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $paymentRequest->method('getPayment')->willReturn($payment);
+
+        $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn($paymentRequest);
+        $this->finalizedPaymentRequestChecker->expects(self::once())->method('isFinal')->with($paymentRequest)->willReturn(false);
+
+        self::assertSame($paymentRequest, $this->itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
+    }
+
+    public function testReturnsThePaymentRequestForAnonymousUserWhenOrderWasCreatedByGuest(): void
+    {
+        $this->userContext->expects(self::once())->method('getUser')->willReturn(null);
+
+        /** @var CustomerInterface&MockObject $customer */
+        $customer = $this->createMock(CustomerInterface::class);
+        $customer->method('getUser')->willReturn($this->createMock(ShopUserInterface::class));
+
+        /** @var OrderInterface&MockObject $order */
+        $order = $this->createMock(OrderInterface::class);
+        $order->method('getCustomer')->willReturn($customer);
+        $order->method('isCreatedByGuest')->willReturn(true);
+
+        /** @var PaymentInterface&MockObject $payment */
+        $payment = $this->createMock(PaymentInterface::class);
+        $payment->method('getOrder')->willReturn($order);
+
+        /** @var PaymentRequestInterface&MockObject $paymentRequest */
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $paymentRequest->method('getPayment')->willReturn($payment);
+
+        $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn($paymentRequest);
+        $this->finalizedPaymentRequestChecker->expects(self::once())->method('isFinal')->with($paymentRequest)->willReturn(false);
+
+        self::assertSame($paymentRequest, $this->itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
+    }
+
+    public function testReturnsNothingForAnonymousUserWhenOrderHasRegisteredCustomerAndNotCreatedByGuest(): void
+    {
+        $this->userContext->expects(self::once())->method('getUser')->willReturn(null);
+
+        /** @var CustomerInterface&MockObject $customer */
+        $customer = $this->createMock(CustomerInterface::class);
+        $customer->method('getUser')->willReturn($this->createMock(ShopUserInterface::class));
+
+        /** @var OrderInterface&MockObject $order */
+        $order = $this->createMock(OrderInterface::class);
+        $order->method('getCustomer')->willReturn($customer);
+        $order->method('isCreatedByGuest')->willReturn(false);
+
+        /** @var PaymentInterface&MockObject $payment */
+        $payment = $this->createMock(PaymentInterface::class);
+        $payment->method('getOrder')->willReturn($order);
+
+        /** @var PaymentRequestInterface&MockObject $paymentRequest */
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $paymentRequest->method('getPayment')->willReturn($payment);
+
+        $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
+        $this->paymentRequestRepository->expects(self::once())->method('find')->with('hash')->willReturn($paymentRequest);
+        $this->finalizedPaymentRequestChecker->expects(self::never())->method('isFinal');
+
+        self::assertNull($this->itemProvider->provide($this->putOperation(), ['hash' => 'hash'], []));
+    }
+
     private function putOperation(): Put
     {
         return new Put(class: PaymentRequestInterface::class, name: 'put');

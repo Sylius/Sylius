@@ -16,6 +16,8 @@ namespace Tests\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Payment
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Andx;
+use Doctrine\ORM\Query\Expr\Comparison;
 use Doctrine\ORM\Query\Expr\Orx;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -85,6 +87,8 @@ final class VisitorBasedExtensionTest extends TestCase
         $nameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
         $expr = $this->createMock(Expr::class);
         $orX = $this->createMock(Orx::class);
+        $andX = $this->createMock(Andx::class);
+        $comparison = $this->createMock(Comparison::class);
 
         $this->sectionProvider->method('getSection')->willReturn(new ShopApiSection());
         $this->userContext->method('getUser')->willReturn(null);
@@ -94,6 +98,11 @@ final class VisitorBasedExtensionTest extends TestCase
         $nameGenerator->expects($this->exactly(4))
             ->method('generateJoinAlias')
             ->willReturnCallback(fn (string $alias) => $alias);
+
+        $nameGenerator->expects($this->once())
+            ->method('generateParameterName')
+            ->with('createdByGuest')
+            ->willReturn('createdByGuest');
 
         $queryBuilder->expects($this->exactly(2))
             ->method('innerJoin')
@@ -127,13 +136,34 @@ final class VisitorBasedExtensionTest extends TestCase
                 return $queryBuilder;
             });
 
-        $queryBuilder->expects($this->exactly(3))->method('expr')->willReturn($expr);
+        $queryBuilder->expects($this->exactly(6))->method('expr')->willReturn($expr);
+
         $expr->expects($this->exactly(2))
             ->method('isNull')
-            ->willReturnCallback(fn (string $alias) => $alias . ' IS NULL');
-        $expr->expects($this->once())->method('orX')->with('customer IS NULL', 'user IS NULL')->willReturn($orX);
+            ->willReturnCallback(fn (string $arg) => $arg . ' IS NULL');
+
+        $expr->expects($this->once())
+            ->method('isNotNull')
+            ->with('user')
+            ->willReturn('user IS NOT NULL');
+
+        $expr->expects($this->once())
+            ->method('eq')
+            ->with('order.createdByGuest', ':createdByGuest')
+            ->willReturn($comparison);
+
+        $expr->expects($this->once())
+            ->method('andX')
+            ->with('user IS NOT NULL', $comparison)
+            ->willReturn($andX);
+
+        $expr->expects($this->once())
+            ->method('orX')
+            ->with('user IS NULL', 'order.customer IS NULL', $andX)
+            ->willReturn($orX);
 
         $queryBuilder->expects($this->once())->method('andWhere')->with($orX)->willReturn($queryBuilder);
+        $queryBuilder->expects($this->once())->method('setParameter')->with('createdByGuest', true)->willReturn($queryBuilder);
 
         $this->extension->applyToItem($queryBuilder, $nameGenerator, PaymentRequestInterface::class, [], new Get());
     }

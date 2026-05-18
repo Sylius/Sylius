@@ -430,6 +430,63 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
     }
 
+    #[Test]
+    public function it_allows_an_anonymous_user_to_get_a_payment_request_for_an_order_created_as_guest_by_a_registered_customer(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'payment_method.yaml',
+            'payment_request/payment_request.yaml',
+            'payment_request/order_with_customer_created_as_guest.yaml',
+        ]);
+
+        /** @var PaymentRequestInterface $paymentRequest */
+        $paymentRequest = $fixtures['payment_request_capture'];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+    }
+
+    #[Test]
+    public function it_allows_an_anonymous_user_to_update_a_payment_request_for_an_order_created_as_guest_by_a_registered_customer(): void
+    {
+        $this->setUpDefaultGetHeaders();
+
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'gateway_config_payment_request.yaml',
+            'payment_method.yaml',
+            'payment_request/payment_request.yaml',
+            'payment_request/order_with_customer_created_as_guest.yaml',
+        ]);
+
+        /** @var PaymentRequestInterface $paymentRequest */
+        $paymentRequest = $fixtures['payment_request_capture'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->build(),
+            content: json_encode([
+                'payload' => [
+                    'target_path' => 'https://myshop.tld/new-target-path',
+                    'after_path' => 'https://myshop.tld/new-after-path',
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+    }
+
     private function loadPaymentRequestOwnedByOliver(): PaymentRequestInterface
     {
         $fixtures = $this->loadFixturesFromFiles([
