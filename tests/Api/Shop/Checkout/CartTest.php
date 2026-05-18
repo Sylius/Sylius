@@ -85,6 +85,32 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_does_not_return_existing_cart_when_guest_provides_registered_customer_email(): void
+    {
+        $this->setUpDefaultPostHeaders();
+
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'cart/existing_cart.yaml',
+        ]);
+
+        $this->requestPost(
+            uri: '/api/v2/shop/orders',
+            body: ['email' => 'shop@example.com'],
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_CREATED);
+
+        $response = json_decode($this->client->getResponse()->getContent(), true, flags: \JSON_THROW_ON_ERROR);
+
+        self::assertNotSame('existingCartToken', $response['tokenValue']);
+        self::assertNull($response['customer'] ?? null);
+        self::assertSame([], $response['items']);
+    }
+
+    #[Test]
     public function it_gets_an_empty_cart_as_guest(): void
     {
         $this->setUpDefaultGetHeaders();
