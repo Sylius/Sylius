@@ -59,6 +59,7 @@ final readonly class VisitorBasedExtension implements QueryItemExtensionInterfac
         $orderJoinAlias = $queryNameGenerator->generateJoinAlias('order');
         $customerJoinAlias = $queryNameGenerator->generateJoinAlias('customer');
         $userJoinAlias = $queryNameGenerator->generateJoinAlias('user');
+        $createdByGuestParameterName = $queryNameGenerator->generateParameterName('createdByGuest');
 
         $queryBuilder
             ->innerJoin(sprintf('%s.payment', $rootAlias), $paymentJoinAlias)
@@ -67,10 +68,15 @@ final readonly class VisitorBasedExtension implements QueryItemExtensionInterfac
             ->leftJoin(sprintf('%s.user', $customerJoinAlias), $userJoinAlias)
             ->andWhere(
                 $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->isNull($customerJoinAlias),
                     $queryBuilder->expr()->isNull($userJoinAlias),
+                    $queryBuilder->expr()->isNull(sprintf('%s.customer', $orderJoinAlias)),
+                    $queryBuilder->expr()->andX(
+                        $queryBuilder->expr()->isNotNull($userJoinAlias),
+                        $queryBuilder->expr()->eq(sprintf('%s.createdByGuest', $orderJoinAlias), sprintf(':%s', $createdByGuestParameterName)),
+                    ),
                 ),
             )
+            ->setParameter($createdByGuestParameterName, true)
         ;
     }
 }

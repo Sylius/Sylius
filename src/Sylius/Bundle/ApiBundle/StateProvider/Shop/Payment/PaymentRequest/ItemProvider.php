@@ -42,15 +42,6 @@ final readonly class ItemProvider implements ProviderInterface
         private FinalizedPaymentRequestCheckerInterface $finalizedPaymentRequestChecker,
         private ?UserContextInterface $userContext = null,
     ) {
-        if ($userContext === null) {
-            trigger_deprecation(
-                'sylius/api-bundle',
-                '2.2',
-                'Not passing a "%s" to the "%s" constructor is deprecated and will be required in Sylius 3.0.',
-                UserContextInterface::class,
-                self::class,
-            );
-        }
     }
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): array|object|null
@@ -114,6 +105,8 @@ final readonly class ItemProvider implements ProviderInterface
 
         $customer = $order->getCustomer();
 
-        return null === $customer || null === $customer->getUser();
+        return null === $customer
+            || null === $customer->getUser()
+            || $order->isCreatedByGuest();
     }
 }

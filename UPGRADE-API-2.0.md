@@ -6,7 +6,7 @@
 
 `GET /api/v2/shop/payment-requests/{hash}` and `PUT /api/v2/shop/payment-requests/{hash}` now enforce ownership:
 
-- An unauthenticated request receives `404 Not Found`, unless the underlying order is a guest order (its customer has no associated user account).
+- An unauthenticated request receives `404 Not Found`, unless the underlying order is a guest order. An order qualifies as a guest order when it has no customer, when its customer has no associated user account, or when it was placed through the guest checkout flow (`Order::isCreatedByGuest()` returns `true`).
 - An authenticated shop user can only access payment requests belonging to their own orders; requests for another customer's payment request also receive `404 Not Found`.
 
 Previously both operations could be performed by any authenticated user or even an anonymous user who knew the payment request hash, which constituted a broken object-level authorization (IDOR) vulnerability.
