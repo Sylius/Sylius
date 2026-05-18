@@ -62,6 +62,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.avatar_image'),
             service('router'),
             service('security.csrf.token_manager')->nullOnInvalid(),
+            param('sylius.resource.csrf_parameter'),
         ])
     ;
 
@@ -73,6 +74,7 @@ return static function (ContainerConfigurator $container) {
             service('security.csrf.token_manager')->nullOnInvalid(),
             service('request_stack'),
             service('router'),
+            param('sylius.resource.csrf_parameter'),
         ])
     ;
 
@@ -83,6 +85,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.command_dispatcher.resend_shipment_confirmation_email'),
             service('security.csrf.token_manager')->nullOnInvalid(),
             service('request_stack'),
+            param('sylius.resource.csrf_parameter'),
         ])
     ;
 

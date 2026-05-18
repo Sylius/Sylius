@@ -14,7 +14,7 @@
     <form action="{{ path }}" method="post" {{ form_attr }}>
         <input type="hidden" name="_method" value="DELETE">
         {% if sylius_csrf_protection_enabled() %}
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token(id) }}" />
+            <input type="hidden" name="{{ sylius_resource_csrf_parameter() }}" value="{{ csrf_token(id) }}" />
         {% endif %}
 
         {{ button.default({ text: 'sylius.ui.cancel'|trans, attr: 'data-bs-dismiss=modal' }) }}
