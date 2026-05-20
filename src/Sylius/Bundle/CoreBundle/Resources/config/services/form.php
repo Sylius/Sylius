@@ -26,6 +26,7 @@ use Sylius\Bundle\CoreBundle\Form\Extension\CartItemTypeExtension;
 use Sylius\Bundle\CoreBundle\Form\Extension\CartTypeExtension;
 use Sylius\Bundle\CoreBundle\Form\Extension\CatalogPromotionTypeExtension;
 use Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension;
+use Sylius\Bundle\CoreBundle\Form\Extension\DisabledCsrfProtectionFormExtension;
 use Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension;
 use Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension;
 use Sylius\Bundle\CoreBundle\Form\Extension\ProductTranslationTypeExtension;
@@ -178,6 +179,12 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.form.extension.type.product_variant_generation', ProductVariantGenerationTypeExtension::class)
+        ->tag('form.type_extension', ['priority' => 100])
+    ;
+
+    $services
+        ->set('sylius.form.extension.type.disabled_csrf_protection', DisabledCsrfProtectionFormExtension::class)
+        ->args([service('service_container')])
         ->tag('form.type_extension', ['priority' => 100])
     ;
 

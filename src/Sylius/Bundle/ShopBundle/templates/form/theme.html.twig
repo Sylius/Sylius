@@ -73,3 +73,12 @@
         {% endfor %}
     </div>
 {% endblock %}
+
+{%- block form_end -%}
+    {% for child in form %}
+        {% if 'csrf_token' in child.vars.block_prefixes and child.rendered == false %}
+            {{ form_row(child) }}
+        {% endif %}
+    {% endfor %}
+    </form>
+{%- endblock form_end -%}

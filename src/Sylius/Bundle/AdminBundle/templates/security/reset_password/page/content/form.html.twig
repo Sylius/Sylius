@@ -4,5 +4,4 @@
 
 {{ form_start(form, {'action': path('sylius_admin_password_reset', {'token': app.request.attributes.get('token')}), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
     {% hook 'form' with { form } %}
-    {{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

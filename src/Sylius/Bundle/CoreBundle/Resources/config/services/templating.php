@@ -15,8 +15,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\Twig\BundleLoadedCheckerExtension;
 use Sylius\Bundle\CoreBundle\Twig\ChannelUrlExtension;
+use Sylius\Bundle\CoreBundle\Twig\CsrfProtectionEnabledExtension;
 use Sylius\Bundle\CoreBundle\Twig\PriceExtension;
 use Sylius\Bundle\CoreBundle\Twig\ProductTranslationExtension;
+use Sylius\Bundle\CoreBundle\Twig\SecurityCsrfExtension;
 use Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension;
 
 return static function (ContainerConfigurator $container) {
@@ -56,6 +58,20 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.twig.extension.product_translation', ProductTranslationExtension::class)
         ->args([service('sylius.provider.channel_based_product_translation')])
+        ->private()
+        ->tag('twig.extension')
+    ;
+
+    $services
+        ->set('sylius.twig.extension.csrf_protection', CsrfProtectionEnabledExtension::class)
+        ->args([service('service_container')])
+        ->private()
+        ->tag('twig.extension')
+    ;
+
+    $services
+        ->set('sylius.twig.extension.security_csrf', SecurityCsrfExtension::class)
+        ->args([service('service_container')])
         ->private()
         ->tag('twig.extension')
     ;
