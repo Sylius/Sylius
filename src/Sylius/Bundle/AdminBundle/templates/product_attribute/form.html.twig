@@ -9,7 +9,6 @@
         {% if hookable_metadata.configuration.method is defined %}
             <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}" />
         {% endif %}
-        {{ form_widget(form._token) }}
 
         {% hook 'form' with { form } %}
     </div>

@@ -18,7 +18,7 @@
         {{ form_widget(hookable_metadata.context.form.avatar) }}
         {% if admin_user.id is not null and admin_user.avatar is not null and admin_user.avatar.path is not empty %}
             <button
-                formaction="{{ path('sylius_admin_admin_user_remove_avatar', {'id': admin_user.id, '_csrf_token': csrf_token(admin_user.id)}) }}"
+                formaction="{{ path('sylius_admin_admin_user_remove_avatar', {'id': admin_user.id, '_csrf_token': sylius_csrf_protection_enabled() ? csrf_token(admin_user.id) : null}) }}"
                 type="submit"
                 class="btn btn-danger"
                 {{ sylius_test_html_attribute('delete-avatar-button') }}

@@ -87,3 +87,12 @@
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn btn-outline-primary')|trim}) %}
     {{ parent() }}
 {%- endblock -%}
+
+{%- block form_end -%}
+        {% for child in form %}
+            {% if 'csrf_token' in child.vars.block_prefixes and child.rendered == false %}
+                {{ form_row(child) }}
+            {% endif %}
+        {% endfor %}
+    </form>
+{%- endblock form_end -%}
