@@ -93,6 +93,8 @@ interface ResponseCheckerInterface
 
     public function hasViolationWithMessage(Response $response, string $message, ?string $property = null): bool;
 
+    public function appendError(Response $response): ResponseCheckerInterface;
+
     public function cleanErrors(): void;
 
     /** @return array{
