@@ -1,0 +1,17 @@
+{% set notification = hookable_metadata.context.notification %}
+{% set has_route = notification.route is defined and notification.route %}
+{% set type = notification.type|default('danger') %}
+{% set tag = has_route ? 'a' : 'div' %}
+
+<{{ tag }} class="list-group-item{% if has_route %} list-group-item-action{% endif %}"{% if has_route %} href="{{ path(notification.route, notification.route_parameters|default({})) }}"{% endif %}>
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <span class="status-dot status-dot-animated bg-{{ type }} d-block"></span>
+        </div>
+        <div class="col">
+            <div class="d-block mt-n1">
+                {{ notification.message|trans(notification.message_parameters|default({}), notification.translation_domain|default(null)) }}
+            </div>
+        </div>
+    </div>
+</{{ tag }}>

@@ -48,4 +48,23 @@ final class NotificationsComponentTest extends TestCase
             'message' => 'sylius.ui.notifications.new_version_of_sylius_available',
         ]);
     }
+
+    #[Test]
+    public function it_propagates_optional_notification_fields_unchanged(): void
+    {
+        $notification = [
+            'message' => 'app.notification.legacy_secret_key',
+            'message_parameters' => ['%gateway_name%' => 'Stripe EU'],
+            'route' => 'sylius_admin_payment_method_update',
+            'route_parameters' => ['id' => 42],
+            'translation_domain' => 'messages',
+            'type' => 'warning',
+        ];
+
+        $this->notificationProvider->method('getNotifications')->willReturn(['legacy_secret_key.42' => $notification]);
+
+        $notifications = $this->notificationsComponent->getNotifications();
+
+        $this->assertSame($notification, $notifications['legacy_secret_key.42']);
+    }
 }

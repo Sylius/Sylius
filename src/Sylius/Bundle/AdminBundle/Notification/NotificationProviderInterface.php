@@ -16,6 +16,18 @@ namespace Sylius\Bundle\AdminBundle\Notification;
 interface NotificationProviderInterface
 {
     /**
+     * Each notification is identified by a string key. The value is a map with the following keys honored by the
+     * default admin navbar notifications template:
+     *
+     * - `message` (string, required): translation key passed to the `trans` filter.
+     * - `message_parameters` (array, optional): parameters passed to the `trans` filter.
+     * - `route` (string, optional): when present, the notification renders as a link to this route.
+     * - `route_parameters` (array, optional): parameters passed to `path()` together with `route`.
+     * - `translation_domain` (string, optional): translation domain passed to the `trans` filter.
+     * - `type` (string, optional): one of `info`, `warning`, `danger`. Defaults to `danger`.
+     *
+     * Providers MAY include additional keys for their own purposes; the default template ignores them.
+     *
      * @param array<mixed> $context
      *
      * @return array<array-key, mixed>
