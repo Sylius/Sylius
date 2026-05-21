@@ -86,7 +86,6 @@ final readonly class EnabledWithinProductAssociationExtension implements QueryCo
                     $queryBuilder->expr()->eq(sprintf('%s.owner', $associationAliasName), $rootAlias),
                 ),
             )
-            ->andWhere(sprintf('%s.associations IS EMPTY OR %s.id IS NOT NULL', $rootAlias, $productAssociationAliasName))
         ;
     }
 }
