@@ -21,7 +21,8 @@ interface NotificationProviderInterface
      *
      * - `message` (string, required): translation key passed to the `trans` filter.
      * - `message_parameters` (array, optional): parameters passed to the `trans` filter.
-     * - `route` (string, optional): when present, the notification renders as a link to this route.
+     * - `uri` (string, optional): plain URI used as the notification link. Takes precedence over `route` when both are present.
+     * - `route` (string, optional): when present (and `uri` is not), the notification renders as a link to this route.
      * - `route_parameters` (array, optional): parameters passed to `path()` together with `route`.
      * - `translation_domain` (string, optional): translation domain passed to the `trans` filter.
      * - `type` (string, optional): one of `info`, `warning`, `danger`. Defaults to `danger`.

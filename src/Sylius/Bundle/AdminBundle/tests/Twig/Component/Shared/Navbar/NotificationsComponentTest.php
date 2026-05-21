@@ -55,6 +55,7 @@ final class NotificationsComponentTest extends TestCase
         $notification = [
             'message' => 'app.notification.legacy_secret_key',
             'message_parameters' => ['%gateway_name%' => 'Stripe EU'],
+            'uri' => 'https://dashboard.stripe.com/apikeys',
             'route' => 'sylius_admin_payment_method_update',
             'route_parameters' => ['id' => 42],
             'translation_domain' => 'messages',
