@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class SecurityCsrfExtension extends AbstractExtension
 {
     public function __construct(
-        private readonly ContainerInterface $container,
+        private readonly string $adminCsrfParameter,
+        private readonly string $adminCsrfTokenId,
+        private readonly string $shopCsrfParameter,
+        private readonly string $shopCsrfTokenId,
     ) {
     }
 
@@ -34,11 +36,19 @@ final class SecurityCsrfExtension extends AbstractExtension
 
     public function getCsrfParameter(string $section): string
     {
-        return (string) $this->container->getParameter(sprintf('sylius_%s.security.csrf_parameter', $section));
+        return match ($section) {
+            'admin' => $this->adminCsrfParameter,
+            'shop' => $this->shopCsrfParameter,
+            default => throw new \InvalidArgumentException(sprintf('Unknown section "%s". Expected "admin" or "shop".', $section)),
+        };
     }
 
     public function getCsrfTokenId(string $section): string
     {
-        return (string) $this->container->getParameter(sprintf('sylius_%s.security.csrf_token_id', $section));
+        return match ($section) {
+            'admin' => $this->adminCsrfTokenId,
+            'shop' => $this->shopCsrfTokenId,
+            default => throw new \InvalidArgumentException(sprintf('Unknown section "%s". Expected "admin" or "shop".', $section)),
+        };
     }
 }
