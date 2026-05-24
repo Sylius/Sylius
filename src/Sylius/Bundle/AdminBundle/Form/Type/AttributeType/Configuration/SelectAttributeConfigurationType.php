@@ -33,6 +33,9 @@ class SelectAttributeConfigurationType extends BaseSelectAttributeConfigurationT
             'entry_options' => [
                 'entry_type' => TextType::class,
             ],
+            'button_add_options' => [
+                'label' => 'sylius.form.attribute_type_configuration.select.add_choice',
+            ],
         ]);
     }
 
