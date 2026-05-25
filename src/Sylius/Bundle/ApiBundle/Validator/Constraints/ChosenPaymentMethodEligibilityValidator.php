@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -38,7 +39,7 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
 
     public function validate(mixed $value, Constraint $constraint): void
     {
-        Assert::isInstanceOf($value, ChoosePaymentMethod::class);
+        Assert::isInstanceOfAny($value, [ChoosePaymentMethod::class, ChangePaymentMethod::class]);
 
         /** @var ChosenPaymentMethodEligibility $constraint */
         Assert::isInstanceOf($constraint, ChosenPaymentMethodEligibility::class);
