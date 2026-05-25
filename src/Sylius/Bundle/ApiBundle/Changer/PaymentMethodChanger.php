@@ -27,7 +27,7 @@ final readonly class PaymentMethodChanger implements PaymentMethodChangerInterfa
     public function __construct(
         private PaymentRepositoryInterface $paymentRepository,
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
-        private PaymentMethodsResolverInterface $paymentMethodsResolver,
+        private ?PaymentMethodsResolverInterface $paymentMethodsResolver = null,
     ) {
     }
 
@@ -45,7 +45,10 @@ final readonly class PaymentMethodChanger implements PaymentMethodChangerInterfa
         $payment = $this->paymentRepository->findOneByOrderId($paymentId, $order->getId());
         Assert::notNull($payment, 'Can not find payment with given identifier.');
 
-        if (!in_array($paymentMethod, $this->paymentMethodsResolver->getSupportedMethods($payment), true)) {
+        if (
+            $this->paymentMethodsResolver !== null &&
+            !in_array($paymentMethod, $this->paymentMethodsResolver->getSupportedMethods($payment), true)
+        ) {
             throw new PaymentMethodCannotBeChangedException();
         }
 
