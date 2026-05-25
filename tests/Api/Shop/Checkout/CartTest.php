@@ -265,6 +265,64 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_does_not_allow_to_remove_item_from_a_cart_of_another_user(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart(email: 'oliver@doe.com');
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestGet(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            headers: $this->headerBuilder()->withShopUserAuthorization('oliver@doe.com')->build(),
+        );
+        $itemId = json_decode($this->client->getResponse()->getContent(), true)['items'][0]['id'];
+
+        $this->requestDelete(
+            uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, $itemId),
+            headers: $this->headerBuilder()->withShopUserAuthorization('dave@doe.com')->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_does_not_allow_a_guest_to_remove_item_from_a_cart_of_a_user(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart(email: 'oliver@doe.com');
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestGet(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            headers: $this->headerBuilder()->withShopUserAuthorization('oliver@doe.com')->build(),
+        );
+        $itemId = json_decode($this->client->getResponse()->getContent(), true)['items'][0]['id'];
+
+        $this->requestDelete(
+            uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, $itemId),
+            headers: $this->headerBuilder()->build(),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
     public function it_updates_item_quantity_in_cart(): void
     {
         $this->loadFixturesFromFiles([
@@ -345,6 +403,72 @@ final class CartTest extends JsonApiTestCase
             uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, 'invalid-item-id'),
             server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
             content: json_encode(['quantity' => 5]),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_update_item_quantity_in_a_cart_of_another_user(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart(email: 'oliver@doe.com');
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestGet(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            headers: $this->headerBuilder()->withShopUserAuthorization('oliver@doe.com')->build(),
+        );
+        $itemId = json_decode($this->client->getResponse()->getContent(), true)['items'][0]['id'];
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, $itemId),
+            server: $this->headerBuilder()
+                ->withShopUserAuthorization('dave@doe.com')
+                ->withMergePatchJsonContentType()
+                ->withJsonLdAccept()
+                ->build(),
+            content: json_encode(['quantity' => 5], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
+    public function it_does_not_allow_a_guest_to_update_item_quantity_in_a_cart_of_a_user(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart(email: 'oliver@doe.com');
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestGet(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            headers: $this->headerBuilder()->withShopUserAuthorization('oliver@doe.com')->build(),
+        );
+        $itemId = json_decode($this->client->getResponse()->getContent(), true)['items'][0]['id'];
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/items/%s', $tokenValue, $itemId),
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
+            content: json_encode(['quantity' => 5], \JSON_THROW_ON_ERROR),
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
