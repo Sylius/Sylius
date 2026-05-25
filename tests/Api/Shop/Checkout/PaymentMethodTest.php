@@ -292,4 +292,41 @@ final class PaymentMethodTest extends JsonApiTestCase
             ],
         );
     }
+
+    /** @test */
+    public function it_does_not_allow_to_choose_payment_method_that_is_not_assigned_to_channel(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'payment_method/out_of_channel_payment_method.yaml',
+        ]);
+
+        /** @var PaymentMethodInterface $outOfChannelPaymentMethod */
+        $outOfChannelPaymentMethod = $fixtures['payment_method_not_in_channel'];
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+        $cart = $this->updateCartWithAddress($tokenValue);
+        $cart = $this->dispatchShippingMethodChooseCommand($tokenValue, 'DHL', $cart->getShipments()->first()->getId());
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/orders/%s/payments/%s', $tokenValue, $cart->getLastPayment()->getId()),
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->build(),
+            content: json_encode([
+                'paymentMethod' => $outOfChannelPaymentMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                ['propertyPath' => '', 'message' => 'The payment method Out of channel is not available for this order. Please choose another one.'],
+            ],
+        );
+    }
 }

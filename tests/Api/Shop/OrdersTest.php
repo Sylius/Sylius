@@ -468,6 +468,41 @@ final class OrdersTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_does_not_allow_to_change_payment_method_to_one_not_assigned_to_channel(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'customer.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+            'payment_method/out_of_channel_payment_method.yaml',
+        ]);
+
+        /** @var PaymentMethodInterface $outOfChannelPaymentMethod */
+        $outOfChannelPaymentMethod = $fixtures['payment_method_not_in_channel'];
+        $order = $this->placeOrder('token', 'oliver@doe.com');
+
+        $this->client->request(
+            method: 'PATCH',
+            uri: sprintf('/api/v2/shop/account/orders/token/payments/%s', $order->getPayments()->first()->getId()),
+            server: $this->headerBuilder()->withMergePatchJsonContentType()->withJsonLdAccept()->withShopUserAuthorization('oliver@doe.com')->build(),
+            content: json_encode([
+                'paymentMethod' => $outOfChannelPaymentMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                ['propertyPath' => '', 'message' => 'The payment method Out of channel is not available for this order. Please choose another one.'],
+            ],
+        );
+    }
+
+    /** @test */
     public function it_gets_payment_configuration_of_order_created_by_a_user_authenticated_as_a_user(): void
     {
         $this->setCompositePaymentConfigurationProvider();
