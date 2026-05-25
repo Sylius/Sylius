@@ -22,12 +22,15 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
 final class PaymentMethodChangerTest extends TestCase
 {
     private MockObject&PaymentRepositoryInterface $paymentRepository;
 
     private MockObject&PaymentMethodRepositoryInterface $paymentMethodRepository;
+
+    private MockObject&PaymentMethodsResolverInterface $paymentMethodsResolver;
 
     private PaymentMethodChanger $paymentMethodChanger;
 
@@ -42,9 +45,11 @@ final class PaymentMethodChangerTest extends TestCase
         parent::setUp();
         $this->paymentRepository = $this->createMock(PaymentRepositoryInterface::class);
         $this->paymentMethodRepository = $this->createMock(PaymentMethodRepositoryInterface::class);
+        $this->paymentMethodsResolver = $this->createMock(PaymentMethodsResolverInterface::class);
         $this->paymentMethodChanger = new PaymentMethodChanger(
             $this->paymentRepository,
             $this->paymentMethodRepository,
+            $this->paymentMethodsResolver,
         );
         $this->order = $this->createMock(OrderInterface::class);
         $this->paymentMethod = $this->createMock(PaymentMethodInterface::class);
@@ -69,6 +74,12 @@ final class PaymentMethodChangerTest extends TestCase
             ->method('findOneByOrderId')
             ->with('123', '444')
             ->willReturn($this->payment);
+
+        $this->paymentMethodsResolver
+            ->expects(self::once())
+            ->method('getSupportedMethods')
+            ->with($this->payment)
+            ->willReturn([$this->paymentMethod]);
 
         $this->order
             ->expects(self::once())
@@ -146,6 +157,12 @@ final class PaymentMethodChangerTest extends TestCase
             ->method('findOneByOrderId')
             ->with('123', '444')
             ->willReturn($this->payment);
+
+        $this->paymentMethodsResolver
+            ->expects(self::once())
+            ->method('getSupportedMethods')
+            ->with($this->payment)
+            ->willReturn([$this->paymentMethod]);
 
         $this->order->expects(self::once())->method('getState')->willReturn(OrderInterface::STATE_NEW);
 
