@@ -18,7 +18,7 @@
 >
     <services>
         <service id="sylius_api.denormalizer.address" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\AddressDenormalizer">
-            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="service" id="api_platform.normalizer.object" />
             <argument type="string">%sylius.model.address.class%</argument>
             <argument type="string">%sylius.model.address.interface%</argument>
             <tag name="serializer.normalizer" priority="64" />
@@ -44,7 +44,7 @@
                 <argument>sylius:shop:product:index</argument>
                 <argument>sylius:shop:product:show</argument>
             </argument>
-            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="service" id="api_platform.normalizer.object" />
             <argument type="collection">
                 <argument>sylius:shop:product:index:default_variant</argument>
                 <argument>sylius:shop:product:show:default_variant</argument>
@@ -80,7 +80,7 @@
         </service>
 
         <service id="sylius_api.normalizer.command" class="Sylius\Bundle\ApiBundle\Serializer\Normalizer\CommandNormalizer">
-            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="service" id="api_platform.normalizer.object" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
 
@@ -119,7 +119,7 @@
         </service>
 
         <service id="sylius_api.denormalizer.zone" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ZoneDenormalizer">
-            <argument type="service" id="serializer.normalizer.object" />
+            <argument type="service" id="api_platform.normalizer.object" />
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="serializer.normalizer" priority="64" />
         </service>
