@@ -17,6 +17,7 @@ imports:
     - ui/admin/security.yml
     - ui/cart/accessing_cart.yaml
     - ui/cart/shopping_cart.yml
+    - ui/cart/stale_cart_live_component.yml
     - ui/channel/channels.yml
     - ui/channel/managing_channels.yml
     - ui/channel/products_accessibility_in_multiple_channels.yml
