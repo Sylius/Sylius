@@ -505,6 +505,13 @@
             <argument type="service" id="sylius.behat.element.browser" />
         </service>
 
+        <service id="sylius.behat.context.ui.shop.stale_cart_live_component" class="Sylius\Behat\Context\Ui\Shop\StaleCartLiveComponentContext">
+            <argument type="service" id="behat.mink" />
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
         <service id="sylius.behat.context.ui.shop.contact" class="Sylius\Behat\Context\Ui\Shop\ContactContext">
             <argument type="service" id="sylius.behat.page.shop.contact" />
             <argument type="service" id="sylius.behat.notification_checker.shop" />

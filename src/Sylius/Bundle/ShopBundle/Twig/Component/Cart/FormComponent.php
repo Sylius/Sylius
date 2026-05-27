@@ -17,8 +17,10 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\SyliusCartEvents;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -56,10 +58,28 @@ class FormComponent
         $this->initialize($orderRepository, $formFactory, $resourceClass, $formClass);
     }
 
+    public function hydrateResource(mixed $value): ?ResourceInterface
+    {
+        if (empty($value)) {
+            return $this->createResource();
+        }
+
+        /** @var OrderInterface|null $order */
+        $order = $this->repository->find($value);
+
+        if (!$order instanceof OrderInterface
+            || $order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED
+        ) {
+            return $this->createResource();
+        }
+
+        return $order;
+    }
+
     #[PreReRender(priority: -100)]
     public function saveCart(): void
     {
-        if ($this->shouldSaveCart) {
+        if ($this->shouldSaveCart && $this->resource?->getId() !== null) {
             $form = $this->getForm();
             if ($form->isValid()) {
                 $this->eventDispatcher->dispatch(new GenericEvent($form->getData()), SyliusCartEvents::CART_CHANGE);
@@ -72,6 +92,10 @@ class FormComponent
     #[LiveAction]
     public function removeItem(#[LiveArg] int $index): void
     {
+        if ($this->resource?->getId() === null) {
+            return;
+        }
+
         $data = $this->formValues['items'];
         unset($data[$index]);
         $this->formValues['items'] = array_values($data);
@@ -91,6 +115,10 @@ class FormComponent
     #[LiveAction]
     public function clearCart(): void
     {
+        if ($this->resource?->getId() === null) {
+            return;
+        }
+
         $this->formValues['items'] = [];
         $this->eventDispatcher->dispatch(new GenericEvent($this->resource), SyliusCartEvents::CART_CLEAR);
         $this->manager->remove($this->resource);
