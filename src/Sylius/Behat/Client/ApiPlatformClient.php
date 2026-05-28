@@ -18,6 +18,7 @@ use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 final class ApiPlatformClient implements ApiClientInterface
 {
@@ -30,6 +31,7 @@ final class ApiPlatformClient implements ApiClientInterface
         private readonly SharedStorageInterface $sharedStorage,
         private readonly RequestFactoryInterface $requestFactory,
         private readonly ResponseCheckerInterface $responseChecker,
+        private readonly ?NameConverterInterface $nameConverter,
         private readonly string $authorizationHeader,
         private readonly string $section,
     ) {
@@ -210,7 +212,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
     public function setRequestData(array $data): self
     {
-        $this->request->setContent($data);
+        $this->request->setContent($this->convertArrayAttributesRecursively($data));
 
         return $this;
     }
@@ -233,7 +235,9 @@ final class ApiPlatformClient implements ApiClientInterface
     /** @param array<string, mixed> $value */
     public function addRequestData(string $key, array|bool|int|string|null $value): self
     {
-        $this->request->updateContent([$key => $value]);
+        $this->request->updateContent([
+            $this->getNormalizedKey($key) => is_array($value) ? $this->convertArrayAttributesRecursively($value) : $value,
+        ]);
 
         return $this;
     }
@@ -243,35 +247,37 @@ final class ApiPlatformClient implements ApiClientInterface
     {
         $requestContent = $this->request->getContent();
 
-        $this->request->setContent(array_replace($requestContent, [$key => $value]));
+        $this->request->setContent(array_replace($requestContent, [
+            $this->getNormalizedKey($key) => is_array($value) ? $this->convertArrayAttributesRecursively($value) : $value,
+        ]));
     }
 
     /** @param array<string, mixed> $data */
     public function updateRequestData(array $data): void
     {
-        $this->request->updateContent($data);
+        $this->request->updateContent($this->convertArrayAttributesRecursively($data));
     }
 
     /** @param array<string, mixed> $data */
     public function setSubResourceData(string $key, array $data): void
     {
-        $this->request->setSubResource($key, $data);
+        $this->request->setSubResource($this->getNormalizedKey($key), $this->convertArrayAttributesRecursively($data));
     }
 
     /** @param array<string, mixed> $data */
     public function addSubResourceData(string $key, array $data): void
     {
-        $this->request->addSubResource($key, $data);
+        $this->request->addSubResource($this->getNormalizedKey($key), $this->convertArrayAttributesRecursively($data));
     }
 
     public function removeSubResourceIri(string $subResourceKey, string $iri): void
     {
-        $this->request->removeSubResource($subResourceKey, $iri);
+        $this->request->removeSubResource($this->getNormalizedKey($subResourceKey), $iri);
     }
 
     public function removeSubResourceObject(string $subResourceKey, string $value, string $key = '@id'): void
     {
-        $this->request->removeSubResource($subResourceKey, $value, $key);
+        $this->request->removeSubResource($this->getNormalizedKey($subResourceKey), $value, $key);
     }
 
     /** @return array<string, mixed> */
@@ -388,5 +394,36 @@ final class ApiPlatformClient implements ApiClientInterface
         if (str_starts_with($uri, 'api')) {
             throw new \InvalidArgumentException('URI should not start with "api".');
         }
+    }
+
+    /**
+     * @param array<array-key, mixed> $data
+     *
+     * @return array<array-key, mixed>
+     */
+    private function convertArrayAttributesRecursively(array $data): array
+    {
+        if (array_is_list($data)) {
+            return array_map(
+                fn (mixed $value): mixed => is_array($value) ? $this->convertArrayAttributesRecursively($value) : $value,
+                $data,
+            );
+        }
+
+        $convertedData = [];
+
+        foreach ($data as $attribute => $value) {
+            $convertedAttribute = is_string($attribute) ? $this->getNormalizedKey($attribute) : $attribute;
+            $convertedData[$convertedAttribute] = is_array($value)
+                ? $this->convertArrayAttributesRecursively($value)
+                : $value;
+        }
+
+        return $convertedData;
+    }
+
+    private function getNormalizedKey(string $key): string
+    {
+        return $this->nameConverter ? $this->nameConverter->normalize($key) : $key;
     }
 }

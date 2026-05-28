@@ -18,6 +18,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>%sylius.api.authorization_header%</argument>
         </service>
 
@@ -29,7 +30,9 @@
             <argument>admin</argument>
         </service>
 
-        <service id="Sylius\Behat\Client\ResponseCheckerInterface" class="Sylius\Behat\Client\ResponseChecker"/>
+        <service id="Sylius\Behat\Client\ResponseCheckerInterface" class="Sylius\Behat\Client\ResponseChecker">
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
+        </service>
 
         <service id="sylius.behat.client.admin_api_platform_security_client" class="Sylius\Behat\Client\ApiPlatformSecurityClient">
             <argument type="service" id="test.client" />

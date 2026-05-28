@@ -16,6 +16,7 @@ namespace Sylius\Behat\Client;
 use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationFailureResponse;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class ResponseChecker implements ResponseCheckerInterface
@@ -23,8 +24,9 @@ final class ResponseChecker implements ResponseCheckerInterface
     /** @var array<array-key, string> */
     private array $errors;
 
-    public function __construct()
-    {
+    public function __construct(
+        private ?NameConverterInterface $nameConverter
+    ) {
         $this->errors = [];
     }
 
@@ -45,21 +47,24 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function getCollectionItemsWithValue(Response $response, string $key, string $value): array
     {
-        $items = array_filter($this->getCollection($response), fn (array $item): bool => $item[$key] === $value);
+        $items = array_filter(
+            $this->getCollection($response),
+            fn (array $item): bool => $item[$this->getNormalizedKey($key)] === $value,
+        );
 
         return $items;
     }
 
     public function getValue(Response $response, string $key)
     {
-        return $this->getResponseContentValue($response, $key);
+        return $this->getResponseContentValue($response, $this->getNormalizedKey($key));
     }
 
     public function getTranslationValue(Response $response, string $key, ?string $localeCode = 'en_US'): string
     {
         $translations = $this->getResponseContentValue($response, 'translations');
 
-        return $translations[$localeCode][$key];
+        return $translations[$localeCode][$this->getNormalizedKey($key)];
     }
 
     public function getError(Response $response): ?string
@@ -118,23 +123,27 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function hasValue(Response $response, string $key, bool|int|string|null $value, bool $isCaseSensitive = true): bool
     {
+        $normalizedKey = $this->getNormalizedKey($key);
+
         if ($isCaseSensitive) {
-            return $this->getResponseContentValue($response, $key) === $value;
+            return $this->getResponseContentValue($response, $normalizedKey) === $value;
         }
 
-        return strcasecmp((string) $this->getResponseContentValue($response, $key), (string) $value) === 0;
+        return strcasecmp((string) $this->getResponseContentValue($response, $normalizedKey), (string) $value) === 0;
     }
 
     public function hasValueInCollection(Response $response, string $key, bool|int|string $value): bool
     {
-        return in_array($value, $this->getResponseContentValue($response, $key), true);
+        return in_array($value, $this->getResponseContentValue($response, $this->getNormalizedKey($key)), true);
     }
 
     /** @param string|int $value */
     public function hasItemWithValue(Response $response, string $key, $value): bool
     {
+        $normalizedKey = $this->getNormalizedKey($key);
+
         foreach ($this->getCollection($response) as $resource) {
-            if ($resource[$key] === $value) {
+            if ($resource[$normalizedKey] === $value) {
                 return true;
             }
         }
@@ -192,27 +201,29 @@ final class ResponseChecker implements ResponseCheckerInterface
 
         $this->assertIsArray($resource);
 
-        return $resource[$key] === $expectedValue;
+        return $resource[$this->getNormalizedKey($key)] === $expectedValue;
     }
 
     /** @param string|array $value */
     public function hasItemOnPositionWithValue(Response $response, int $position, string $key, $value): bool
     {
-        return $this->getCollection($response)[$position][$key] === $value;
+        return $this->getCollection($response)[$position][$this->getNormalizedKey($key)] === $value;
     }
 
     public function hasItemWithTranslation(Response $response, string $locale, string $key, string $translation): bool
     {
+        $normalizedKey = $this->getNormalizedKey($key);
+
         if (!$this->hasCollection($response)) {
             $resource = $this->getResponseContent($response);
 
-            if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation) {
+            if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$normalizedKey] === $translation) {
                 return true;
             }
         }
 
         foreach ($this->getCollection($response) as $resource) {
-            if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation) {
+            if (isset($resource['translations'][$locale]) && $resource['translations'][$locale][$normalizedKey] === $translation) {
                 return true;
             }
         }
@@ -222,8 +233,10 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function hasItemWithTranslationInCollection(array $items, string $locale, string $key, string $translation): bool
     {
+        $normalizedKey = $this->getNormalizedKey($key);
+
         foreach ($items as $item) {
-            if (isset($item['translations'][$locale]) && $item['translations'][$locale][$key] === $translation) {
+            if (isset($item['translations'][$locale]) && $item['translations'][$locale][$normalizedKey] === $translation) {
                 return true;
             }
         }
@@ -235,14 +248,14 @@ final class ResponseChecker implements ResponseCheckerInterface
     {
         $content = json_decode($response->getContent(), true);
 
-        return array_key_exists($key, $content);
+        return array_key_exists($this->getNormalizedKey($key), $content);
     }
 
     public function hasTranslation(Response $response, string $locale, string $key, string $translation): bool
     {
         $resource = $this->getResponseContent($response);
 
-        return isset($resource['translations'][$locale]) && $resource['translations'][$locale][$key] === $translation;
+        return isset($resource['translations'][$locale]) && $resource['translations'][$locale][$this->getNormalizedKey($key)] === $translation;
     }
 
     public function hasItemWithValues(Response $response, array $parameters): bool
@@ -375,5 +388,10 @@ final class ResponseChecker implements ResponseCheckerInterface
                 implode(', ', array_keys($resource)),
             ),
         );
+    }
+
+    private function getNormalizedKey(string $key): string
+    {
+        return $this->nameConverter ? $this->nameConverter->normalize($key) : $key;
     }
 }
