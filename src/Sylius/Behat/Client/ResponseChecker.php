@@ -360,7 +360,7 @@ final class ResponseChecker implements ResponseCheckerInterface
     private function itemHasValues(array $element, array $parameters): bool
     {
         foreach ($parameters as $key => $value) {
-            if ($element[$key] !== $value) {
+            if ($element[$this->getNormalizedKey($key)] !== $value) {
                 return false;
             }
         }
