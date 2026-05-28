@@ -397,23 +397,17 @@ final class ApiPlatformClient implements ApiClientInterface
     }
 
     /**
-     * @param array<array-key, mixed> $data
+     * @param array<string, mixed> $data
      *
-     * @return array<array-key, mixed>
+     * @return array<string, mixed>
      */
     private function convertArrayAttributesRecursively(array $data): array
     {
-        if (array_is_list($data)) {
-            return array_map(
-                fn (mixed $value): mixed => is_array($value) ? $this->convertArrayAttributesRecursively($value) : $value,
-                $data,
-            );
-        }
-
         $convertedData = [];
 
+        /** @var array<string, mixed>|bool|int|string|null $value */
         foreach ($data as $attribute => $value) {
-            $convertedAttribute = is_string($attribute) ? $this->getNormalizedKey($attribute) : $attribute;
+            $convertedAttribute = $this->getNormalizedKey($attribute);
             $convertedData[$convertedAttribute] = is_array($value)
                 ? $this->convertArrayAttributesRecursively($value)
                 : $value;
