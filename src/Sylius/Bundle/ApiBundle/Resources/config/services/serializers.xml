@@ -32,7 +32,7 @@
 
         <service id="sylius_api.denormalizer.command" class="Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandDenormalizer">
             <argument type="service" id="api_platform.serializer.normalizer.item" />
-            <argument type="service" id="serializer.name_converter.metadata_aware" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <tag name="serializer.normalizer" />
         </service>
 
