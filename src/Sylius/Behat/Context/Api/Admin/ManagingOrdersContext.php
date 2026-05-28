@@ -39,6 +39,7 @@ use Sylius\Component\Shipping\ShipmentTransitions;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Countries;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingOrdersContext implements Context
@@ -50,6 +51,7 @@ final readonly class ManagingOrdersContext implements Context
         private SecurityServiceInterface $adminSecurityService,
         private SharedStorageInterface $sharedStorage,
         private SharedSecurityServiceInterface $sharedSecurityService,
+        private ?NameConverterInterface $nameConverter
     ) {
     }
 
@@ -327,8 +329,9 @@ final readonly class ManagingOrdersContext implements Context
         /** @var array{productName: string}[] $items */
         $items = json_decode($lastResponseContent, true)['items'];
 
+        $productNameKey = $this->getNormalizedKey('productName');
         foreach ($items as $item) {
-            if ($item['productName'] === $itemName) {
+            if ($item[$productNameKey] === $itemName) {
                 $this->sharedStorage->set('item', $item);
 
                 return;
@@ -480,10 +483,12 @@ final readonly class ManagingOrdersContext implements Context
     {
         $order = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
 
+        $paymentStateKey = $this->getNormalizedKey('paymentState');
+        $tokenValueKey = $this->getNormalizedKey('tokenValue');
         Assert::same(
-            $order['paymentState'],
+            $order[$paymentStateKey],
             strtolower($orderPaymentState),
-            sprintf('Order "%s" does not have "%s" payment state', $order['tokenValue'], $orderPaymentState),
+            sprintf('Order "%s" does not have "%s" payment state', $order[$tokenValueKey], $orderPaymentState),
         );
     }
 
@@ -502,8 +507,9 @@ final readonly class ManagingOrdersContext implements Context
     {
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
 
+        $productNameKey = $this->getNormalizedKey('productName');
         foreach ($items as $item) {
-            if ($item['productName'] === $productName) {
+            if ($item[$productNameKey] === $productName) {
                 return;
             }
         }
@@ -860,8 +866,9 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function iShouldSeeAsProvinceInTheShippingAddress(string $provinceName): void
     {
+        $provinceNameKey = $this->getNormalizedKey('provinceName');
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress')['provinceName'],
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'shippingAddress')[$provinceNameKey],
             $provinceName,
         );
     }
@@ -871,8 +878,9 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function iShouldSeeAsProvinceInTheBillingAddress(string $provinceName): void
     {
+        $provinceNameKey = $this->getNormalizedKey('provinceName');
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'billingAddress')['provinceName'],
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'billingAddress')[$provinceNameKey],
             $provinceName,
         );
     }
@@ -895,7 +903,8 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function itemUnitPriceShouldBe(array $orderItem, string $unitPrice): void
     {
-        Assert::same($this->getTotalAsInt($unitPrice), $orderItem['unitPrice']);
+        $unitPriceKey = $this->getNormalizedKey('unitPrice');
+        Assert::same($this->getTotalAsInt($unitPrice), $orderItem[$unitPriceKey]);
     }
 
     /**
@@ -943,14 +952,18 @@ final readonly class ManagingOrdersContext implements Context
     {
         $orderItem = $this->sharedStorage->get('item');
 
+        $typeKey = $this->getNormalizedKey('type');
+        $amountKey = $this->getNormalizedKey('amount');
+        $unitPriceKey = $this->getNormalizedKey('unitPrice');
+        $quantityKey = $this->getNormalizedKey('quantity');
         $unitPromotionAdjustments = 0;
         foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $item) {
-            if (in_array($item['type'], [AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT])) {
-                $unitPromotionAdjustments += $item['amount'];
+            if (in_array($item[$typeKey], [AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT])) {
+                $unitPromotionAdjustments += $item[$amountKey];
             }
         }
 
-        Assert::same($this->getTotalAsInt($subtotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
+        Assert::same($this->getTotalAsInt($subtotal), $orderItem[$unitPriceKey] * $orderItem[$quantityKey] + $unitPromotionAdjustments);
     }
 
     /**
@@ -1041,9 +1054,10 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function productUnitPriceShouldBe(string $productName, string $price): void
     {
+        $unitPriceKey = $this->getNormalizedKey('unitPrice');
         $this->iCheckData($productName);
         $orderItem = $this->sharedStorage->get('item');
-        Assert::same($this->getTotalAsInt($price), $orderItem['unitPrice']);
+        Assert::same($this->getTotalAsInt($price), $orderItem[$unitPriceKey]);
     }
 
     /**
@@ -1052,7 +1066,8 @@ final readonly class ManagingOrdersContext implements Context
     public function productDiscountedUnitPriceShouldBe(string $productName, string $price): void
     {
         $orderItem = $this->sharedStorage->get('item');
-        Assert::same($this->getTotalAsInt($price), $orderItem['fullDiscountedUnitPrice']);
+        $fullDiscountedUnitPriceKey = $this->getNormalizedKey('fullDiscountedUnitPrice');
+        Assert::same($this->getTotalAsInt($price), $orderItem[$fullDiscountedUnitPriceKey]);
     }
 
     /**
@@ -1061,6 +1076,7 @@ final readonly class ManagingOrdersContext implements Context
     public function productQuantityShouldBe(string $productName, int $quantity): void
     {
         $orderItem = $this->sharedStorage->get('item');
+        $quantityKey = $this->getNormalizedKey('quantity');
         Assert::same($quantity, $orderItem['quantity']);
     }
 
@@ -1077,9 +1093,12 @@ final readonly class ManagingOrdersContext implements Context
             AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
         );
 
+        $orderItemUnitsKey = $this->getNormalizedKey('orderItemUnits');
+        $unitsKey = $this->getNormalizedKey('units');
+        $amountKey = $this->getNormalizedKey('amount');
         foreach ($adjustments as $adjustment) {
-            if (in_array($adjustment['orderItemUnit'], $orderItem['units'])) {
-                Assert::same($this->getTotalAsInt($price), $adjustment['amount']);
+            if (in_array($adjustment[$orderItemUnitsKey], $orderItem[$unitsKey])) {
+                Assert::same($this->getTotalAsInt($price), $adjustment[$amountKey]);
 
                 return;
             }
@@ -1099,9 +1118,12 @@ final readonly class ManagingOrdersContext implements Context
             AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
         );
 
+        $orderItemUnitsKey = $this->getNormalizedKey('orderItemUnits');
+        $unitsKey = $this->getNormalizedKey('units');
+        $amountKey = $this->getNormalizedKey('amount');
         foreach ($adjustments as $adjustment) {
-            if (in_array($adjustment['orderItemUnit'], $orderItem['units'])) {
-                Assert::same($this->getTotalAsInt(trim($price, ' ~')), $adjustment['amount']);
+            if (in_array($adjustment[$orderItemUnitsKey], $orderItem[$unitsKey])) {
+                Assert::same($this->getTotalAsInt(trim($price, ' ~')), $adjustment[$amountKey]);
 
                 return;
             }
@@ -1116,16 +1138,22 @@ final readonly class ManagingOrdersContext implements Context
         $orderItem = $this->sharedStorage->get('item');
         $response = $this->getAdjustmentsResponseForOrder(true);
 
+        $typeKey = $this->getNormalizedKey('type');
+        $orderItemUnitsKey = $this->getNormalizedKey('orderItemUnits');
+        $unitsKey = $this->getNormalizedKey('units');
+        $amountKey = $this->getNormalizedKey('amount');
         $unitPromotionAdjustments = 0;
         foreach ($this->responseChecker->getCollection($response) as $adjustment) {
-            if (in_array($adjustment['type'], [AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT])) {
-                if (in_array($adjustment['orderItemUnit'], $orderItem['units'])) {
-                    $unitPromotionAdjustments += $adjustment['amount'];
+            if (in_array($adjustment[$typeKey], [AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT])) {
+                if (in_array($adjustment[$orderItemUnitsKey], $orderItem[$unitsKey])) {
+                    $unitPromotionAdjustments += $adjustment[$amountKey];
                 }
             }
         }
 
-        Assert::same($this->getTotalAsInt($subTotal), $orderItem['unitPrice'] * $orderItem['quantity'] + $unitPromotionAdjustments);
+        $quantityKey = $this->getNormalizedKey('quantity');
+        $unitPriceKey = $this->getNormalizedKey('unitPrice');
+        Assert::same($this->getTotalAsInt($subTotal), $orderItem[$unitPriceKey] * $orderItem[$quantityKey] + $unitPromotionAdjustments);
     }
 
     /**
@@ -1305,11 +1333,17 @@ final readonly class ManagingOrdersContext implements Context
         string $city,
         string $countryName,
     ): void {
-        Assert::same($address['firstName'] . ' ' . $address['lastName'], $customerName);
-        Assert::same($address['street'], $street);
-        Assert::same($address['postcode'], $postcode);
-        Assert::same($address['city'], $city);
-        Assert::same($address['countryCode'], $this->getCountryCodeFromName($countryName));
+        $firstNameKey = $this->getNormalizedKey('firstName');
+        $lastNameKey = $this->getNormalizedKey('lastName');
+        $streetKey = $this->getNormalizedKey('street');
+        $postcodeKey = $this->getNormalizedKey('postcode');
+        $cityKey = $this->getNormalizedKey('city');
+        $countryCodeKey = $this->getNormalizedKey('countryCode');
+        Assert::same($address[$firstNameKey] . ' ' . $address[$lastNameKey], $customerName);
+        Assert::same($address[$streetKey], $street);
+        Assert::same($address[$postcodeKey], $postcode);
+        Assert::same($address[$cityKey], $city);
+        Assert::same($address[$countryCodeKey], $this->getCountryCodeFromName($countryName));
     }
 
     private function getCountryCodeFromName(string $name): string
@@ -1351,5 +1385,10 @@ final readonly class ManagingOrdersContext implements Context
             (string) $orderToken,
             forgetResponse: $forgetResponse,
         );
+    }
+
+    private function getNormalizedKey(string $key): string
+    {
+        return $this->nameConverter ? $this->nameConverter->normalize($key) : $key;
     }
 }

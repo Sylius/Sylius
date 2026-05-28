@@ -208,6 +208,7 @@
             <argument type="service" id="sylius.behat.api_admin_security" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.api.shared_security" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_payment_methods" class="Sylius\Behat\Context\Api\Admin\ManagingPaymentMethodsContext">
