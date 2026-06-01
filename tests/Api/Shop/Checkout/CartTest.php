@@ -422,6 +422,52 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_updates_cart_with_province_name_only_in_address(): void
+    {
+        $this->setUpDefaultPutHeaders();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: [
+                'email' => 'changed@email.com',
+                'billingAddress' => [
+                    'firstName' => 'Updated: Jane',
+                    'lastName' => 'Updated: Doe',
+                    'phoneNumber' => '123456789',
+                    'countryCode' => 'DE',
+                    'provinceName' => 'Bavaria',
+                    'city' => 'Updated: Munich',
+                    'street' => 'Updated: Top secret',
+                    'postcode' => '80331',
+                ],
+                'shippingAddress' => [
+                    'firstName' => 'Updated: Jane',
+                    'lastName' => 'Updated: Doe',
+                    'phoneNumber' => '123456789',
+                    'countryCode' => 'DE',
+                    'provinceName' => 'Bavaria',
+                    'city' => 'Updated: Munich',
+                    'street' => 'Updated: Top secret',
+                    'postcode' => '80331',
+                ],
+            ],
+        );
+
+        $this->assertResponseSuccessful('shop/checkout/cart/update_cart_with_province_name_only');
+    }
+
+    #[Test]
     public function it_does_not_allow_to_change_email_as_a_shop_user(): void
     {
         $this->setUpDefaultPutHeaders();
@@ -449,6 +495,67 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseViolations(
             [
                 ['propertyPath' => '', 'message' => 'Email can be changed only for guest customers. Once the customer logs in and the cart is assigned, the email can\'t be changed.'],
+            ],
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_update_cart_with_invalid_email_format(): void
+    {
+        $this->setUpDefaultPutHeaders();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: [
+                'email' => 'not-a-valid-email',
+            ],
+        );
+
+        $this->assertResponseViolations(
+            [
+                ['propertyPath' => 'email', 'message' => 'This email is invalid.'],
+            ],
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_update_cart_with_too_long_email(): void
+    {
+        $this->setUpDefaultPutHeaders();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 3, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: [
+                'email' => str_repeat('a', 64) . '@' . str_repeat('b', 63) . '.' . str_repeat('c', 63) . '.' . str_repeat('d', 63) . '.com',
+            ],
+        );
+
+        $this->assertResponseViolations(
+            [
+                ['propertyPath' => 'email', 'message' => 'Email must not be longer than 254 characters.'],
+                ['propertyPath' => 'email', 'message' => 'This email is invalid.'],
             ],
         );
     }

@@ -88,9 +88,44 @@ final class OrderPaymentMethodSelectionRequirementCheckerTest extends TestCase
             ->method('getSupportedMethods')
             ->with($this->payment)
             ->willReturn([$this->paymentMethod]);
+        $this->payment->expects($this->once())->method('getMethod')->willReturn(null);
         $this->channel->expects($this->once())->method('isSkippingPaymentStepAllowed')->willReturn(true);
 
         $this->assertFalse($this->checker->isPaymentMethodSelectionRequired($this->order));
+    }
+
+    public function testShouldSayThatPaymentMethodDoesNotHaveToBeSelectedIfCurrentlySetMethodIsAmongSupportedMethods(): void
+    {
+        $this->order->expects($this->once())->method('getTotal')->willReturn(1000);
+        $this->order->expects($this->once())->method('getChannel')->willReturn($this->channel);
+        $this->order->expects($this->exactly(2))->method('getPayments')->willReturn(new ArrayCollection([$this->payment]));
+        $this->paymentMethodsResolver
+            ->expects($this->once())
+            ->method('getSupportedMethods')
+            ->with($this->payment)
+            ->willReturn([$this->paymentMethod]);
+        $this->payment->expects($this->once())->method('getMethod')->willReturn($this->paymentMethod);
+        $this->channel->expects($this->once())->method('isSkippingPaymentStepAllowed')->willReturn(true);
+
+        $this->assertFalse($this->checker->isPaymentMethodSelectionRequired($this->order));
+    }
+
+    public function testShouldSayThatPaymentMethodHasToBeSelectedIfCurrentlySetMethodIsNotAmongSupportedMethods(): void
+    {
+        $disabledPaymentMethod = $this->createMock(PaymentMethodInterface::class);
+
+        $this->order->expects($this->once())->method('getTotal')->willReturn(1000);
+        $this->order->expects($this->once())->method('getChannel')->willReturn($this->channel);
+        $this->order->expects($this->exactly(2))->method('getPayments')->willReturn(new ArrayCollection([$this->payment]));
+        $this->paymentMethodsResolver
+            ->expects($this->once())
+            ->method('getSupportedMethods')
+            ->with($this->payment)
+            ->willReturn([$this->paymentMethod]);
+        $this->payment->expects($this->once())->method('getMethod')->willReturn($disabledPaymentMethod);
+        $this->channel->expects($this->once())->method('isSkippingPaymentStepAllowed')->willReturn(true);
+
+        $this->assertTrue($this->checker->isPaymentMethodSelectionRequired($this->order));
     }
 
     public function testShouldSayThatPaymentMethodHasToBeSelectedIfSkippingPaymentStepIsEnabledAndThereAreMoreThanOnePaymentMethodsAvailable(): void

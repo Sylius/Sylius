@@ -60,6 +60,7 @@ api_platform:
         Sylius\Component\Payment\Exception\PaymentRequestNotFoundException: 404
         Sylius\Bundle\ApiBundle\Exception\PaymentNotFoundException: 404
         Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException: 404
+        Sylius\Bundle\ApiBundle\Exception\OrderItemNotFoundException: 404
         Sylius\Bundle\ApiBundle\Exception\StateMachineTransitionFailedException: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationInDefaultLocaleCannotBeRemoved: 422
         Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException: 422

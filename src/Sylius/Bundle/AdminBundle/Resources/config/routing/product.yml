@@ -9,6 +9,16 @@ sylius_admin_product:
             type: Sylius\Bundle\AdminBundle\Form\Type\ProductType
         permission: true
     type: sylius.resource
+    
+sylius_admin_product_show:
+    path: /products/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product::showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/product/show.html.twig"
 
 sylius_admin_product_create_simple:
     path: /products/new/simple
