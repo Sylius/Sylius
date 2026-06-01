@@ -16,19 +16,24 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingExchangeRatesContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -237,7 +242,7 @@ final readonly class ManagingExchangeRatesContext implements Context
             $exchangeRate->getTargetCurrency(),
         );
 
-        Assert::same($exchangeRate['ratio'], $ratio);
+        Assert::same($exchangeRate[$this->getNormalizedKey('ratio')], $ratio);
     }
 
     /**
@@ -361,8 +366,8 @@ final readonly class ManagingExchangeRatesContext implements Context
         /** @var array $item */
         foreach ($this->responseChecker->getCollection($this->client->index(Resources::EXCHANGE_RATES)) as $item) {
             if (
-                $item['sourceCurrency'] === sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $sourceCurrency->getCode()) &&
-                $item['targetCurrency'] === sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $targetCurrency->getCode())
+                $item[$this->getNormalizedKey('sourceCurrency')] === sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $sourceCurrency->getCode()) &&
+                $item[$this->getNormalizedKey('targetCurrency')] === sprintf('%s/admin/currencies/%s', $this->apiUrlPrefix, $targetCurrency->getCode())
             ) {
                 return $item;
             }
@@ -382,6 +387,6 @@ final readonly class ManagingExchangeRatesContext implements Context
             return false;
         }
 
-        return $exchangeRateResponse['ratio'] === $ratio;
+        return $exchangeRateResponse[$this->getNormalizedKey('ratio')] === $ratio;
     }
 }

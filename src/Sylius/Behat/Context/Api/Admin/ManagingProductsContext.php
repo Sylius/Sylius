@@ -18,6 +18,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -35,11 +36,13 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingProductsContext implements Context
 {
     use ValidationTrait;
+    use NormalizedKeyAwareTrait;
 
     public const SORT_TYPES = ['ascending' => 'asc', 'descending' => 'desc'];
 
@@ -49,6 +52,7 @@ final readonly class ManagingProductsContext implements Context
         private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
         private string $apiUrlPrefix,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -360,10 +364,12 @@ final readonly class ManagingProductsContext implements Context
     {
         $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
         $productCode = $this->responseChecker->getValue($this->client->getLastResponse(), 'code');
+        $typeKey = $this->getNormalizedKey('type');
+        $idKey = $this->getNormalizedKey('id');
 
         foreach ($images as $key => $imageData) {
-            if ($imageData['type'] === $imageType) {
-                $imageId = $imageData['id'];
+            if ($imageData[$typeKey] === $imageType) {
+                $imageId = $imageData[$idKey];
             }
         }
 
@@ -541,7 +547,7 @@ final readonly class ManagingProductsContext implements Context
     public function iShouldSeeVariants(int $count): void
     {
         Assert::count(
-            $this->responseChecker->getResponseContent($this->client->getLastResponse())['variants'] ?? [],
+            $this->responseChecker->getResponseContent($this->client->getLastResponse())[$this->getNormalizedKey('variants')] ?? [],
             $count,
         );
     }
@@ -650,8 +656,11 @@ final readonly class ManagingProductsContext implements Context
     {
         $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
 
-        Assert::same($images[count($images) - 2]['type'], $imageType);
-        Assert::same($images[count($images) - 2]['position'], $position);
+        $typeKey = $this->getNormalizedKey('type');
+        $positionKey = $this->getNormalizedKey('position');
+
+        Assert::same($images[count($images) - 2][$typeKey], $imageType);
+        Assert::same($images[count($images) - 2][$positionKey], $position);
     }
 
     /**
@@ -661,8 +670,11 @@ final readonly class ManagingProductsContext implements Context
     {
         $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
 
-        Assert::same($images[count($images) - 1]['type'], $imageType);
-        Assert::same($images[count($images) - 1]['position'], $position);
+        $typeKey = $this->getNormalizedKey('type');
+        $positionKey = $this->getNormalizedKey('position');
+
+        Assert::same($images[count($images) - 1][$typeKey], $imageType);
+        Assert::same($images[count($images) - 1][$positionKey], $position);
     }
 
     /**
@@ -831,7 +843,7 @@ final readonly class ManagingProductsContext implements Context
         $productFromResponse = $this->responseChecker->getResponseContent($response);
 
         Assert::true(
-            in_array($this->iriConverter->getIriFromResourceInSection($productOption, 'admin'), $productFromResponse['options'], true),
+            in_array($this->iriConverter->getIriFromResourceInSection($productOption, 'admin'), $productFromResponse[$this->getNormalizedKey('options')], true),
             sprintf('Product with option %s does not exist', $productOption->getName()),
         );
     }
@@ -976,8 +988,9 @@ final readonly class ManagingProductsContext implements Context
     public function productShouldNotHaveAttribute(ProductInterface $product, ProductAttributeInterface $attribute): void
     {
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
+        $attributeKey = $this->getNormalizedKey('attribute');
         foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $this->iriConverter->getIriFromResourceInSection($attribute, 'admin')) {
+            if ($attributeValue[$attributeKey] === $this->iriConverter->getIriFromResourceInSection($attribute, 'admin')) {
                 throw new \InvalidArgumentException(
                     sprintf('Product %s have attribute %s', $product->getName(), $attribute->getName()),
                 );
@@ -1093,11 +1106,14 @@ final readonly class ManagingProductsContext implements Context
     private function getFieldValueOfProduct(array $product, string $field): ?string
     {
         if ($field === 'code') {
-            return $product['code'];
+            return $product[$this->getNormalizedKey('code')];
         }
 
         if ($field === 'name') {
-            return $product['translations'][$this->getAdminLocaleCode()]['name'] ?? null;
+            $translationsKey = $this->getNormalizedKey('translations');
+            $nameKey = $this->getNormalizedKey('name');
+
+            return $product[$translationsKey][$this->getAdminLocaleCode()][$nameKey] ?? null;
         }
 
         return null;
@@ -1106,10 +1122,12 @@ final readonly class ManagingProductsContext implements Context
     private function hasProductImage(Response $response, ProductInterface $product): bool
     {
         $productFromResponse = $this->responseChecker->getResponseContent($response);
+        $imagesKey = $this->getNormalizedKey('images');
+        $pathKey = $this->getNormalizedKey('path');
 
         return
-            isset($productFromResponse['images'][0]) &&
-            str_contains($productFromResponse['images'][0]['path'], $product->getImages()->first()->getPath())
+            isset($productFromResponse[$imagesKey][0]) &&
+            str_contains($productFromResponse[$imagesKey][0][$pathKey], $product->getImages()->first()->getPath())
         ;
     }
 
@@ -1171,9 +1189,12 @@ final readonly class ManagingProductsContext implements Context
         $attributeIri = $this->iriConverter->getIriFromResourceInSection($attribute, 'admin');
 
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
+        $attributeKey = $this->getNormalizedKey('attribute');
+        $localeCodeKey = $this->getNormalizedKey('localeCode');
+        $valueKey = $this->getNormalizedKey('value');
         foreach ($attributes as $attributeValue) {
-            if ($attributeValue['attribute'] === $attributeIri && $attributeValue['localeCode'] === $localeCode) {
-                $this->assertAttributeValue($value, $attributeValue['value']);
+            if ($attributeValue[$attributeKey] === $attributeIri && $attributeValue[$localeCodeKey] === $localeCode) {
+                $this->assertAttributeValue($value, $attributeValue[$valueKey]);
 
                 return;
             }

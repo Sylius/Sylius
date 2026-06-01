@@ -327,7 +327,7 @@ final readonly class ManagingOrdersContext implements Context
         /** @var string $lastResponseContent */
         $lastResponseContent = $this->client->getLastResponse()->getContent();
         /** @var array{productName: string}[] $items */
-        $items = json_decode($lastResponseContent, true)['items'];
+        $items = json_decode($lastResponseContent, true)[$this->getNormalizedKey('items')];
 
         $productNameKey = $this->getNormalizedKey('productName');
         foreach ($items as $item) {
@@ -730,7 +730,7 @@ final readonly class ManagingOrdersContext implements Context
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'hydra:member');
         $firstItem = $items[0];
 
-        Assert::same($firstItem['number'], str_replace('#', '', $number));
+        Assert::same($firstItem[$this->getNormalizedKey('number')], str_replace('#', '', $number));
     }
 
     /**
@@ -745,7 +745,7 @@ final readonly class ManagingOrdersContext implements Context
         )[0];
 
         Assert::same(
-            $order['total'],
+            $order[$this->getNormalizedKey('total')],
             $total,
         );
     }
@@ -773,7 +773,7 @@ final readonly class ManagingOrdersContext implements Context
         $firstItem = array_pop($itemsWithCurrency);
 
         Assert::notEmpty($firstItem);
-        Assert::same($firstItem['total'], $total);
+        Assert::same($firstItem[$this->getNormalizedKey('total')], $total);
     }
 
     /**
@@ -793,7 +793,7 @@ final readonly class ManagingOrdersContext implements Context
     public function itShouldBeShippedViaTheShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'shipments')[0]['method'],
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'shipments')[0][$this->getNormalizedKey('method')],
             $this->iriConverter->getIriFromResource($shippingMethod),
         );
     }
@@ -804,7 +804,7 @@ final readonly class ManagingOrdersContext implements Context
     public function itShouldBePaidWith(PaymentMethodInterface $paymentMethod): void
     {
         Assert::same(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]['method'],
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0][$this->getNormalizedKey('method')],
             $this->iriConverter->getIriFromResource($paymentMethod),
         );
     }
@@ -912,7 +912,7 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function itemTotalShouldBe(array $orderItem, string $total): void
     {
-        Assert::same($this->getTotalAsInt($total), $orderItem['total']);
+        Assert::same($this->getTotalAsInt($total), $orderItem[$this->getNormalizedKey('total')]);
     }
 
     /**
@@ -920,7 +920,7 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function itemCodeShouldBe(array $orderItem, string $code): void
     {
-        Assert::endsWith($orderItem['variant'], $code);
+        Assert::endsWith($orderItem[$this->getNormalizedKey('variant')], $code);
     }
 
     /**
@@ -928,7 +928,7 @@ final readonly class ManagingOrdersContext implements Context
      */
     public function itemQuantityShouldBe(array $orderItem, int $quantity): void
     {
-        Assert::same($quantity, $orderItem['quantity']);
+        Assert::same($quantity, $orderItem[$this->getNormalizedKey('quantity')]);
     }
 
     /**
@@ -1007,8 +1007,8 @@ final readonly class ManagingOrdersContext implements Context
         $totalTax = 0;
 
         foreach ($unitPromotionAdjustments as $unitPromotionAdjustment) {
-            if (true === $unitPromotionAdjustment['neutral']) {
-                $totalTax += $unitPromotionAdjustment['amount'];
+            if (true === $unitPromotionAdjustment[$this->getNormalizedKey('neutral')]) {
+                $totalTax += $unitPromotionAdjustment[$this->getNormalizedKey('amount')];
             }
         }
 

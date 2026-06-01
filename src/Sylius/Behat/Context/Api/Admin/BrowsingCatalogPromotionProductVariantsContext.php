@@ -17,19 +17,24 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class BrowsingCatalogPromotionProductVariantsContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -145,9 +150,13 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     ): bool {
         $variantData = $this->getDataOfVariantWithCode($variant->getCode());
 
-        $promotions = $variantData['channelPricings'][$channel->getCode()]['appliedPromotions'] ?? [];
+        $channelPricingsKey = $this->getNormalizedKey('channelPricings');
+        $appliedPromotionsKey = $this->getNormalizedKey('appliedPromotions');
+        $codeKey = $this->getNormalizedKey('code');
+
+        $promotions = $variantData[$channelPricingsKey][$channel->getCode()][$appliedPromotionsKey] ?? [];
         foreach ($promotions as $promotion) {
-            if ($promotion['code'] === $catalogPromotion->getCode()) {
+            if ($promotion[$codeKey] === $catalogPromotion->getCode()) {
                 return true;
             }
         }
@@ -158,8 +167,10 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     private function getDataOfVariantWithCode(string $code): array
     {
         $variantsData = $this->responseChecker->getCollection($this->client->getLastResponse());
+        $codeKey = $this->getNormalizedKey('code');
+
         foreach ($variantsData as $variantData) {
-            if ($variantData['code'] === $code) {
+            if ($variantData[$codeKey] === $code) {
                 return $variantData;
             }
         }

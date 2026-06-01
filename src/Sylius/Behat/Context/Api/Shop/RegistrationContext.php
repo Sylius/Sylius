@@ -17,17 +17,20 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class RegistrationContext implements Context
 {
     use SecurePasswordTrait;
+    use NormalizedKeyAwareTrait;
 
     private array $content = [];
 
@@ -38,6 +41,7 @@ final class RegistrationContext implements Context
         private ResponseCheckerInterface $responseChecker,
         private RequestFactoryInterface $requestFactory,
         private string $apiUrlPrefix,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -268,7 +272,7 @@ final class RegistrationContext implements Context
 
         $response = $this->shopClient->show(Resources::CUSTOMERS, (string) $customer->getId());
 
-        Assert::true($this->responseChecker->getResponseContent($response)['subscribedToNewsletter']);
+        Assert::true($this->responseChecker->getResponseContent($response)[$this->getNormalizedKey('subscribedToNewsletter')]);
     }
 
     /**
@@ -282,11 +286,13 @@ final class RegistrationContext implements Context
     private function assertFieldValidationMessage(string $path, string $message): void
     {
         $decodedResponse = $this->getResponseContent();
+        $violationsKey = $this->getNormalizedKey('violations');
+        $codeKey = $this->getNormalizedKey('code');
 
-        Assert::keyExists($decodedResponse, 'violations');
+        Assert::keyExists($decodedResponse, $violationsKey);
         Assert::same(
-            $decodedResponse['violations'][0],
-            ['propertyPath' => $path, 'message' => $message, 'code' => $decodedResponse['violations'][0]['code']],
+            $decodedResponse[$violationsKey][0],
+            ['propertyPath' => $path, 'message' => $message, 'code' => $decodedResponse[$violationsKey][0][$codeKey]],
         );
     }
 

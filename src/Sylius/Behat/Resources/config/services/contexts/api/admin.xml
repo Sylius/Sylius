@@ -32,6 +32,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.admin.browsing_product_variant" class="Sylius\Behat\Context\Api\Admin\BrowsingProductVariantsContext">
@@ -68,6 +69,7 @@
         <service id="Sylius\Behat\Context\Api\Admin\ManagingChannelsBillingDataContext">
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_countries" class="Sylius\Behat\Context\Api\Admin\ManagingCountriesContext">
@@ -87,6 +89,7 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument>%sylius.security.api_route%</argument>
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_locales" class="Sylius\Behat\Context\Api\Admin\ManagingLocalesContext">
@@ -135,6 +138,7 @@
             <argument type="service" id="Sylius\Behat\Service\Converter\IriConverter" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument>%sylius.security.api_route%</argument>
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_product_variants" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsContext">
@@ -142,6 +146,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_product_variants_prices" class="Sylius\Behat\Context\Api\Admin\ManagingProductVariantsPricesContext">
@@ -238,6 +243,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_catalog_promotions" class="Sylius\Behat\Context\Api\Admin\ManagingCatalogPromotionsContext">
@@ -266,6 +272,7 @@
             <argument type="service" id="sylius.behat.api_platform_client.admin" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.admin.managing_customers" class="Sylius\Behat\Context\Api\Admin\ManagingCustomersContext">

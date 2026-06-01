@@ -17,21 +17,26 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class ProductVariantContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
         private IriConverterInterface $iriConverter,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -94,7 +99,7 @@ final class ProductVariantContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($response['price'], $price);
+        Assert::same($response[$this->getNormalizedKey('price')], $price);
     }
 
     /**
@@ -104,7 +109,7 @@ final class ProductVariantContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same($response['originalPrice'], $originalPrice);
+        Assert::same($response[$this->getNormalizedKey('originalPrice')], $originalPrice);
     }
 
     /**
@@ -122,13 +127,13 @@ final class ProductVariantContext implements Context
     ): void {
         $content = $this->findVariant($variant);
 
-        Assert::same($content['price'], $price);
-        Assert::same($content['originalPrice'], $originalPrice);
-        foreach ($content['appliedPromotions'] as $promotionIri) {
+        Assert::same($content[$this->getNormalizedKey('price')], $price);
+        Assert::same($content[$this->getNormalizedKey('originalPrice')], $originalPrice);
+        foreach ($content[$this->getNormalizedKey('appliedPromotions')] as $promotionIri) {
             $catalogPromotionContent = $this->responseChecker->getResponseContent(
                 $this->client->showByIri($promotionIri),
             );
-            Assert::inArray($catalogPromotionContent['label'], $promotionsNames);
+            Assert::inArray($catalogPromotionContent[$this->getNormalizedKey('label')], $promotionsNames);
         }
     }
 
@@ -143,9 +148,9 @@ final class ProductVariantContext implements Context
     ): void {
         $content = $this->findVariant($variant);
 
-        Assert::same($content['price'], $price);
-        Assert::same($content['originalPrice'], $originalPrice);
-        Assert::count($content['appliedPromotions'], $numberOfPromotions);
+        Assert::same($content[$this->getNormalizedKey('price')], $price);
+        Assert::same($content[$this->getNormalizedKey('originalPrice')], $originalPrice);
+        Assert::count($content[$this->getNormalizedKey('appliedPromotions')], $numberOfPromotions);
     }
 
     /**
@@ -158,13 +163,13 @@ final class ProductVariantContext implements Context
         string $promotionName,
     ): void {
         $variantContent = $this->findVariant($variant);
-        $catalogPromotionResponse = $this->client->showByIri($variantContent['appliedPromotions'][0]);
+        $catalogPromotionResponse = $this->client->showByIri($variantContent[$this->getNormalizedKey('appliedPromotions')][0]);
         $catalogPromotionContent = $this->responseChecker->getResponseContent($catalogPromotionResponse);
 
-        Assert::count($variantContent['appliedPromotions'], 1);
-        Assert::same($variantContent['price'], $price);
-        Assert::same($variantContent['originalPrice'], $originalPrice);
-        Assert::same($catalogPromotionContent['label'], $promotionName);
+        Assert::count($variantContent[$this->getNormalizedKey('appliedPromotions')], 1);
+        Assert::same($variantContent[$this->getNormalizedKey('price')], $price);
+        Assert::same($variantContent[$this->getNormalizedKey('originalPrice')], $originalPrice);
+        Assert::same($catalogPromotionContent[$this->getNormalizedKey('label')], $promotionName);
     }
 
     /**
@@ -206,7 +211,7 @@ final class ProductVariantContext implements Context
 
         $items = $this->responseChecker->getCollectionItemsWithValue($response, 'code', $variant->getCode());
         $item = array_pop($items);
-        Assert::keyNotExists($item, 'appliedPromotions');
+        Assert::keyNotExists($item, $this->getNormalizedKey('appliedPromotions'));
     }
 
     /**
@@ -227,7 +232,7 @@ final class ProductVariantContext implements Context
     {
         $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
 
-        Assert::keyNotExists($content, 'appliedPromotions');
+        Assert::keyNotExists($content, $this->getNormalizedKey('appliedPromotions'));
     }
 
     /**
@@ -243,7 +248,7 @@ final class ProductVariantContext implements Context
             $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
             Assert::keyExists(
                 $content,
-                'appliedPromotions',
+                $this->getNormalizedKey('appliedPromotions'),
                 sprintf('%s variant should be discounted', $variant->getName()),
             );
         }
@@ -262,7 +267,7 @@ final class ProductVariantContext implements Context
             $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
             Assert::keyNotExists(
                 $content,
-                'appliedPromotions',
+                $this->getNormalizedKey('appliedPromotions'),
                 sprintf('%s variant should not be discounted', $variant->getName()),
             );
         }
@@ -293,7 +298,7 @@ final class ProductVariantContext implements Context
         foreach ($variants as $variant) {
             $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
             Assert::same(
-                $content['name'],
+                $content[$this->getNormalizedKey('name')],
                 $variant->getName(),
                 sprintf('%s variant should be visible', $variant->getName()),
             );
@@ -313,11 +318,11 @@ final class ProductVariantContext implements Context
         Assert::greaterThan(count($variants), $position - 1, 'There are less variants than expected');
 
         $variant = $variants[$position - 1];
-        Assert::same($variant['price'], $price);
+        Assert::same($variant[$this->getNormalizedKey('price')], $price);
 
         Assert::true(
             $this->isOptionValueInVariant(
-                $variant['optionValues'],
+                $variant[$this->getNormalizedKey('optionValues')],
                 $expectedOptionName,
                 $expectedOptionValueValue,
             ),
@@ -335,7 +340,7 @@ final class ProductVariantContext implements Context
         foreach ($variants as $variant) {
             Assert::false(
                 $this->isOptionValueInVariant(
-                    $variant['optionValues'],
+                    $variant[$this->getNormalizedKey('optionValues')],
                     $expectedOptionName,
                     $expectedOptionValueValue,
                 ),
