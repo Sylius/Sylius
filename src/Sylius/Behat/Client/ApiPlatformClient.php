@@ -407,7 +407,7 @@ final class ApiPlatformClient implements ApiClientInterface
 
         /** @var array<string, mixed>|bool|int|string|null $value */
         foreach ($data as $attribute => $value) {
-            $convertedAttribute = $this->getNormalizedKey($attribute);
+            $convertedAttribute = is_string($attribute) ? $this->getNormalizedKey($attribute) : $attribute;
             $convertedData[$convertedAttribute] = is_array($value)
                 ? $this->convertArrayAttributesRecursively($value)
                 : $value;
