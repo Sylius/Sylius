@@ -60,7 +60,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.resolver.product_variant'),
             service('sylius.context.channel'),
             service('sylius.context.locale'),
-            service('sylius.calculator.product_variant_price'),
+            service('sylius.calculator.product_variant_catalog_price'),
         ])
         ->tag('sylius.twig_component', ['key' => 'sylius_shop:product:card'])
     ;
@@ -78,7 +78,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius_shop.twig.component.product.price', PriceComponent::class)
         ->args([
-            service('sylius.calculator.product_variant_price'),
+            service('sylius.calculator.product_variant_catalog_price'),
             service('sylius.formatter.money'),
             service('sylius.context.channel'),
             service('sylius.context.locale'),

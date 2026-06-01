@@ -37,13 +37,13 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.provider.product_variant_map.price', ProductVariantPriceMapProvider::class)
-        ->args([service('sylius.calculator.product_variant_price')])
+        ->args([service('sylius.calculator.product_variant_catalog_price')])
         ->tag('sylius.product_variant_data_map_provider')
     ;
 
     $services
         ->set('sylius.provider.product_variant_map.original_price', ProductVariantOriginalPriceMapProvider::class)
-        ->args([service('sylius.calculator.product_variant_price')])
+        ->args([service('sylius.calculator.product_variant_catalog_price')])
         ->tag('sylius.product_variant_data_map_provider')
     ;
 
@@ -54,7 +54,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.provider.product_variant_map.lowest_price', ProductVariantLowestPriceMapProvider::class)
-        ->args([service('sylius.calculator.product_variant_price')])
+        ->args([service('sylius.calculator.product_variant_catalog_price')])
         ->tag('sylius.product_variant_data_map_provider')
     ;
 };

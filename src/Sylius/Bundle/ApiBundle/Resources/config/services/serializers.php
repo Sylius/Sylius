@@ -127,7 +127,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius_api.normalizer.product_variant', ProductVariantNormalizer::class)
         ->args([
-            service('sylius.calculator.product_variant_price'),
+            service('sylius.calculator.product_variant_catalog_price'),
             service('sylius.checker.inventory.availability'),
             service('sylius.section_resolver.uri_based'),
             service('api_platform.symfony.iri_converter'),
