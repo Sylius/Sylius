@@ -169,6 +169,20 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_returns_not_found_for_product_not_assigned_to_current_channel(): void
+    {
+        $this->loadFixturesFromFile('product/product_not_in_channel.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products/MUG',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
+    #[Test]
     public function it_returns_associated_products_collection_by_association_type(): void
     {
         $this->loadFixturesFromFile('product/products_with_associations.yaml');
