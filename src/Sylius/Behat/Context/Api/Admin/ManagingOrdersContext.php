@@ -1077,7 +1077,7 @@ final readonly class ManagingOrdersContext implements Context
     {
         $orderItem = $this->sharedStorage->get('item');
         $quantityKey = $this->getNormalizedKey('quantity');
-        Assert::same($quantity, $orderItem['quantity']);
+        Assert::same($quantity, $orderItem[$quantityKey]);
     }
 
     /**
@@ -1093,11 +1093,11 @@ final readonly class ManagingOrdersContext implements Context
             AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
         );
 
-        $orderItemUnitsKey = $this->getNormalizedKey('orderItemUnits');
+        $orderItemUnitKey = $this->getNormalizedKey('orderItemUnit');
         $unitsKey = $this->getNormalizedKey('units');
         $amountKey = $this->getNormalizedKey('amount');
         foreach ($adjustments as $adjustment) {
-            if (in_array($adjustment[$orderItemUnitsKey], $orderItem[$unitsKey])) {
+            if (in_array($adjustment[$orderItemUnitKey], $orderItem[$unitsKey])) {
                 Assert::same($this->getTotalAsInt($price), $adjustment[$amountKey]);
 
                 return;
@@ -1118,11 +1118,11 @@ final readonly class ManagingOrdersContext implements Context
             AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
         );
 
-        $orderItemUnitsKey = $this->getNormalizedKey('orderItemUnits');
+        $orderItemUnitKey = $this->getNormalizedKey('orderItemUnit');
         $unitsKey = $this->getNormalizedKey('units');
         $amountKey = $this->getNormalizedKey('amount');
         foreach ($adjustments as $adjustment) {
-            if (in_array($adjustment[$orderItemUnitsKey], $orderItem[$unitsKey])) {
+            if (in_array($adjustment[$orderItemUnitKey], $orderItem[$unitsKey])) {
                 Assert::same($this->getTotalAsInt(trim($price, ' ~')), $adjustment[$amountKey]);
 
                 return;
@@ -1139,13 +1139,13 @@ final readonly class ManagingOrdersContext implements Context
         $response = $this->getAdjustmentsResponseForOrder(true);
 
         $typeKey = $this->getNormalizedKey('type');
-        $orderItemUnitsKey = $this->getNormalizedKey('orderItemUnits');
+        $orderItemUnitKey = $this->getNormalizedKey('orderItemUnit');
         $unitsKey = $this->getNormalizedKey('units');
         $amountKey = $this->getNormalizedKey('amount');
         $unitPromotionAdjustments = 0;
         foreach ($this->responseChecker->getCollection($response) as $adjustment) {
             if (in_array($adjustment[$typeKey], [AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT])) {
-                if (in_array($adjustment[$orderItemUnitsKey], $orderItem[$unitsKey])) {
+                if (in_array($adjustment[$orderItemUnitKey], $orderItem[$unitsKey])) {
                     $unitPromotionAdjustments += $adjustment[$amountKey];
                 }
             }
