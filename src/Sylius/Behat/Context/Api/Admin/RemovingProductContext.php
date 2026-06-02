@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -28,17 +30,13 @@ final readonly class RemovingProductContext implements Context
     ) {
     }
 
-    /**
-     * @When I (try to) delete the :product product
-     */
+    #[When('I (try to) delete the :product product')]
     public function iDeleteProduct(ProductInterface $product): void
     {
         $this->client->delete(Resources::PRODUCTS, $product->getCode());
     }
 
-    /**
-     * @Then /^(this product) should still exist$/
-     */
+    #[Then('/^(this product) should still exist$/')]
     public function theProductShouldStillExist(ProductInterface $product): void
     {
         $this->client->show(Resources::PRODUCTS, $product->getCode());
@@ -46,9 +44,7 @@ final readonly class RemovingProductContext implements Context
         Assert::true($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 
-    /**
-     * @Then I should be notified that this product could not be deleted as it is in use by a promotion rule
-     */
+    #[Then('I should be notified that this product could not be deleted as it is in use by a promotion rule')]
     public function iShouldBeNotifiedThatThisProductCouldNotBeDeleted(): void
     {
         Assert::contains(

@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\Given;
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
@@ -37,44 +40,34 @@ final readonly class ManagingPromotionCouponsContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^I am browsing coupons of (this promotion)$/
-     * @When /^I want to view all coupons of (this promotion)$/
-     * @When /^I browse all coupons of ("[^"]+" promotion)$/
-     */
+    #[Given('/^I am browsing coupons of (this promotion)$/')]
+    #[When('/^I want to view all coupons of (this promotion)$/')]
+    #[When('/^I browse all coupons of ("[^"]+" promotion)$/')]
     public function iWantToViewAllCouponsOfThisPromotion(PromotionInterface $promotion): void
     {
         $this->client->requestGet(sprintf('promotions/%s/coupons', $promotion->getCode()));
     }
 
-    /**
-     * @When I filter by code containing :phrase
-     */
+    #[When('I filter by code containing :phrase')]
     public function iFilterByCodeContaining(string $phrase): void
     {
         $this->client->addFilter('code', $phrase);
         $this->client->filter();
     }
 
-    /**
-     * @When I want to create a new coupon for a non-existing promotion
-     */
+    #[When('I want to create a new coupon for a non-existing promotion')]
     public function iWantToCreateANewCouponForNonExistingPromotion(): void
     {
         $this->client->buildCreateRequest('promotions/non-existing-promotion/coupons');
     }
 
-    /**
-     * @When /^I want to create a new coupon for (this promotion)$/
-     */
+    #[When('/^I want to create a new coupon for (this promotion)$/')]
     public function iWantToCreateANewCouponForPromotion(PromotionInterface $promotion): void
     {
         $this->client->buildCreateRequest(sprintf('promotions/%s/coupons', $promotion->getCode()));
     }
 
-    /**
-     * @When /^I want to modify the ("[^"]+" coupon) for (this promotion)$/
-     */
+    #[When('/^I want to modify the ("[^"]+" coupon) for (this promotion)$/')]
     public function iWantToModifyTheCouponForThisPromotion(PromotionCouponInterface $coupon, PromotionInterface $promotion): void
     {
         $this->client->buildUpdateRequest(
@@ -82,17 +75,13 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @When /^I want to generate new coupons for (this promotion)$/
-     */
+    #[When('/^I want to generate new coupons for (this promotion)$/')]
     public function iWantToGenerateNewCouponsForThisPromotion(PromotionInterface $promotion): void
     {
         $this->client->buildCreateRequest(sprintf('promotions/%s/coupons/generate', $promotion->getCode()));
     }
 
-    /**
-     * @When I (try to) delete :coupon coupon related to this promotion
-     */
+    #[When('I (try to) delete :coupon coupon related to this promotion')]
     public function iDeleteCouponRelatedToThisPromotion(PromotionCouponInterface $coupon): void
     {
         $this->client->requestDelete(
@@ -100,77 +89,59 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @When I specify its code as :code
-     */
+    #[When('I specify its code as :code')]
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
     }
 
-    /**
-     * @When I limit its usage to :times time(s)
-     * @When I change its usage limit to :times
-     */
+    #[When('I limit its usage to :times time(s)')]
+    #[When('I change its usage limit to :times')]
     public function iLimitItsUsageToTimes(int $times): void
     {
         $this->client->addRequestData('usageLimit', $times);
     }
 
-    /**
-     * @When I limit its per customer usage to :times time(s)
-     * @When I change its per customer usage limit to :times
-     */
+    #[When('I limit its per customer usage to :times time(s)')]
+    #[When('I change its per customer usage limit to :times')]
     public function iLimitItsPerCustomerUsageToTimes(int $times): void
     {
         $this->client->addRequestData('perCustomerUsageLimit', $times);
     }
 
-    /**
-     * @When I make it valid until :date
-     * @When I change its expiration date to :date
-     */
+    #[When('I make it valid until :date')]
+    #[When('I change its expiration date to :date')]
     public function iMakeItValidUntil(\DateTime $date): void
     {
         $this->client->addRequestData('expiresAt', $date->format('d-m-Y'));
     }
 
-    /**
-     * @When I make it not reusable from cancelled orders
-     */
+    #[When('I make it not reusable from cancelled orders')]
     public function iMakeItNotReusableFromCancelledOrders(): void
     {
         $this->client->addRequestData('reusableFromCancelledOrders', false);
     }
 
-    /**
-     * @When I choose the amount of :amount coupons to be generated
-     */
+    #[When('I choose the amount of :amount coupons to be generated')]
     public function iSpecifyItsAmountAs(int $amount): void
     {
         $this->client->updateRequestData(['amount' => $amount]);
     }
 
-    /**
-     * @When I specify their prefix as :prefix
-     */
+    #[When('I specify their prefix as :prefix')]
     public function iSpecifyPrefixAs(string $prefix): void
     {
         $this->client->updateRequestData(['prefix' => $prefix]);
     }
 
-    /**
-     * @When I specify their suffix as :suffix
-     */
+    #[When('I specify their suffix as :suffix')]
     public function iSpecifySuffixAs(string $suffix): void
     {
         $this->client->updateRequestData(['suffix' => $suffix]);
     }
 
-    /**
-     * @When /^I specify their code length as (\d+)$/
-     * @When I do not specify their code length
-     */
+    #[When('/^I specify their code length as (\d+)$/')]
+    #[When('I do not specify their code length')]
     public function iSpecifyTheirCodeLengthAs(?int $codeLength = null): void
     {
         if (null !== $codeLength) {
@@ -178,89 +149,67 @@ final readonly class ManagingPromotionCouponsContext implements Context
         }
     }
 
-    /**
-     * @When /^I limit generated coupons usage to (\d+) times?$/
-     */
+    #[When('/^I limit generated coupons usage to (\d+) times?$/')]
     public function iSetGeneratedCouponsUsageLimitTo(int $limit): void
     {
         $this->client->updateRequestData(['usageLimit' => $limit]);
     }
 
-    /**
-     * @When I make generated coupons valid until :date
-     */
+    #[When('I make generated coupons valid until :date')]
     public function iMakeGeneratedCouponsValidUntil(\DateTimeInterface $date): void
     {
         $this->client->updateRequestData(['expiresAt' => $date->format('Y-m-d')]);
     }
 
-    /**
-     * @When I do not specify its :field
-     */
+    #[When('I do not specify its :field')]
     public function iDoNotSpecifyIts(): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I (try to) generate these coupons
-     */
+    #[When('I (try to) generate these coupons')]
     public function iGenerateTheseCoupons(): void
     {
         $this->client->request();
     }
 
-    /**
-     * @When /^I sort coupons by (ascending|descending) number of uses$/
-     */
+    #[When('/^I sort coupons by (ascending|descending) number of uses$/')]
     public function iSortCouponsByNumberOfUses(string $order): void
     {
         $this->sortBy($order, 'used');
     }
 
-    /**
-     * @When /^I sort coupons by (ascending|descending) code$/
-     */
+    #[When('/^I sort coupons by (ascending|descending) code$/')]
     public function iSortCouponsByCode(string $order): void
     {
         $this->sortBy($order, 'code');
     }
 
-    /**
-     * @When /^I sort coupons by (ascending|descending) usage limit$/
-     */
+    #[When('/^I sort coupons by (ascending|descending) usage limit$/')]
     public function iSortCouponsByUsageLimit(string $order): void
     {
         $this->sortBy($order, 'usageLimit');
     }
 
-    /**
-     * @When /^I sort coupons by (ascending|descending) usage limit per customer$/
-     */
+    #[When('/^I sort coupons by (ascending|descending) usage limit per customer$/')]
     public function iSortCouponsByPerCustomerUsageLimit(string $order): void
     {
         $this->sortBy($order, 'perCustomerUsageLimit');
     }
 
-    /**
-     * @When /^I sort coupons by (ascending|descending) expiration date$/
-     */
+    #[When('/^I sort coupons by (ascending|descending) expiration date$/')]
     public function iSortCouponsByExpirationDate(string $order): void
     {
         $this->sortBy($order, 'expiresAt');
     }
 
-    /**
-     * @Then /^there should(?:| still) be (\d+) coupons? related to (this promotion)$/
-     */
+    #[Then('/^there should(?:| still) be (\d+) coupons? related to (this promotion)$/')]
     public function thereShouldBeCountCouponsRelatedToThisPromotion(int $count, PromotionInterface $promotion): void
     {
         $coupons = $this->responseChecker->getCollection(
@@ -269,9 +218,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         Assert::same(count($coupons), $count);
     }
 
-    /**
-     * @Then there should be a :promotion promotion with a coupon code :code
-     */
+    #[Then('there should be a :promotion promotion with a coupon code :code')]
     public function thereShouldBeACouponWithCode(PromotionInterface $promotion, string $code): void
     {
         Assert::true(
@@ -283,9 +230,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then there should be no coupon with code :code
-     */
+    #[Then('there should be no coupon with code :code')]
     public function thereShouldBeNoCouponWithCode(string $code): void
     {
         Assert::false($this->responseChecker->hasItemWithValue(
@@ -295,17 +240,13 @@ final readonly class ManagingPromotionCouponsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should see :count coupons on the list
-     */
+    #[Then('I should see :count coupons on the list')]
     public function iShouldSeeCountCouponsOnTheList(int $count): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then the first coupon should have code :code
-     */
+    #[Then('the first coupon should have code :code')]
     public function theFirstCouponShouldHaveCode(string $code): void
     {
         Assert::true($this->responseChecker->hasItemOnPositionWithValue(
@@ -316,9 +257,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -327,9 +266,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then this coupon should be valid until :date
-     */
+    #[Then('this coupon should be valid until :date')]
     public function thisCouponShouldBeValidUntil(\DateTime $date): void
     {
         $actualDate = \DateTime::createFromFormat(
@@ -343,9 +280,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then this coupon should have :limit usage limit
-     */
+    #[Then('this coupon should have :limit usage limit')]
     public function thisCouponShouldHaveUsageLimit(int $limit): void
     {
         Assert::same(
@@ -354,9 +289,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then this coupon should have :limit per customer usage limit
-     */
+    #[Then('this coupon should have :limit per customer usage limit')]
     public function thisCouponShouldHavePerCustomerUsageLimit(int $limit): void
     {
         Assert::same(
@@ -365,9 +298,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then this coupon should not be reusable from cancelled orders
-     */
+    #[Then('this coupon should not be reusable from cancelled orders')]
     public function thisCouponShouldNotBeReusableFromCancelledOrders(): void
     {
         Assert::false($this->responseChecker->getValue(
@@ -376,9 +307,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(
@@ -387,9 +316,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this coupon) should no longer exist in the coupon registry$/
-     */
+    #[Then('/^(this coupon) should no longer exist in the coupon registry$/')]
     public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon): void
     {
         Assert::false($this->responseChecker->hasItemWithValue(
@@ -399,9 +326,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         ));
     }
 
-    /**
-     * @Then /^(this coupon) should still exist in the registry$/
-     */
+    #[Then('/^(this coupon) should still exist in the registry$/')]
     public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
@@ -411,9 +336,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         ));
     }
 
-    /**
-     * @Then all of the coupon codes should be prefixed with :prefix
-     */
+    #[Then('all of the coupon codes should be prefixed with :prefix')]
     public function allOfTheCouponCodesShouldBePrefixedWith(string $prefix): void
     {
         foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $promotionCoupon) {
@@ -421,9 +344,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         }
     }
 
-    /**
-     * @Then all of the coupon codes should be suffixed with :suffix
-     */
+    #[Then('all of the coupon codes should be suffixed with :suffix')]
     public function allOfTheCouponCodesShouldBeSuffixedWith(string $suffix): void
     {
         foreach ($this->responseChecker->getCollection($this->client->getLastResponse()) as $promotionCoupon) {
@@ -431,9 +352,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         }
     }
 
-    /**
-     * @Then /^there should still be only one coupon with code "([^"]+)" related to (this promotion)$/
-     */
+    #[Then('/^there should still be only one coupon with code "([^"]+)" related to (this promotion)$/')]
     public function thereShouldStillBeOnlyOneCouponWithCodeRelatedTo(string $code, PromotionInterface $promotion): void
     {
         $coupons = $this->responseChecker->getCollectionItemsWithValue(
@@ -445,9 +364,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         Assert::count($coupons, 1);
     }
 
-    /**
-     * @Then I should be notified that it is in use and cannot be deleted
-     */
+    #[Then('I should be notified that it is in use and cannot be deleted')]
     public function iShouldBeNotifiedThatItIsInUseAndCannotBeDeleted(): void
     {
         Assert::contains(
@@ -456,9 +373,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that code is required
-     */
+    #[Then('I should be notified that code is required')]
     public function iShouldBeNotifiedThatCodeIsRequired(): void
     {
         $response = $this->client->getLastResponse();
@@ -469,9 +384,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         Assert::same($this->responseChecker->getError($response), 'code: Please enter coupon code.');
     }
 
-    /**
-     * @Then I should be notified that coupon usage limit must be at least one
-     */
+    #[Then('I should be notified that coupon usage limit must be at least one')]
     public function iShouldBeNotifiedThatCouponUsageLimitMustBeAtLeastOne(): void
     {
         $response = $this->client->getLastResponse();
@@ -485,9 +398,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that coupon usage limit per customer must be at least one
-     */
+    #[Then('I should be notified that coupon usage limit per customer must be at least one')]
     public function iShouldBeNotifiedThatCouponUsageLimitPerCustomerMustBeAtLeastOne(): void
     {
         $response = $this->client->getLastResponse();
@@ -501,9 +412,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that promotion is required
-     */
+    #[Then('I should be notified that promotion is required')]
     public function iShouldBeNotifiedThatPromotionIsRequired(): void
     {
         $response = $this->client->getLastResponse();
@@ -517,9 +426,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that only coupon based promotions can have coupons
-     */
+    #[Then('I should be notified that only coupon based promotions can have coupons')]
     public function iShouldBeNotifiedThatOnlyCouponBasedPromotionsCanHaveCoupons(): void
     {
         $response = $this->client->getLastResponse();
@@ -533,9 +440,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that generating :amount coupons with code length equal to :codeLength is not possible
-     */
+    #[Then('I should be notified that generating :amount coupons with code length equal to :codeLength is not possible')]
     public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible(int $amount, int $codeLength): void
     {
         Assert::contains(
@@ -548,9 +453,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that generate amount is required
-     */
+    #[Then('I should be notified that generate amount is required')]
     public function iShouldBeNotifiedThatGenerateAmountIsRequired(): void
     {
         Assert::same(
@@ -559,9 +462,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that generate code length is required
-     */
+    #[Then('I should be notified that generate code length is required')]
     public function iShouldBeNotifiedThatCodeLengthIsRequired(): void
     {
         Assert::same(
@@ -570,9 +471,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that generate code length is out of range
-     */
+    #[Then('I should be notified that generate code length is out of range')]
     public function iShouldBeNotifiedThatCodeLengthIsOutOfRange(): void
     {
         Assert::same(
@@ -581,9 +480,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that they have been successfully generated
-     */
+    #[Then('I should be notified that they have been successfully generated')]
     public function iShouldBeNotifiedThatTheyHaveBeenSuccessfullyGenerated(): void
     {
         Assert::true(
@@ -592,9 +489,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that coupon with this code already exists
-     */
+    #[Then('I should be notified that coupon with this code already exists')]
     public function iShouldBeNotifiedThatCouponWithThisCodeAlreadyExists(): void
     {
         $response = $this->client->getLastResponse();
@@ -608,9 +503,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
@@ -618,9 +511,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
         Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
     }
 
-    /**
-     * @Then /^("[^"]+" coupon) should be used (\d+) time(?:|s)$/
-     */
+    #[Then('/^("[^"]+" coupon) should be used (\d+) time(?:|s)$/')]
     public function couponShouldHaveUsageLimit(PromotionCouponInterface $promotionCoupon, int $used): void
     {
         $returnedPromotionCoupon = current($this->responseChecker->getCollectionItemsWithValue(
@@ -636,17 +527,13 @@ final readonly class ManagingPromotionCouponsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see a single promotion coupon in the list
-     */
+    #[Then('I should see a single promotion coupon in the list')]
     public function iShouldSeeASinglePromotionCouponInTheList(): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
     }
 
-    /**
-     * @Then I should see the promotion coupon :coupon in the list
-     */
+    #[Then('I should see the promotion coupon :coupon in the list')]
     public function iShouldSeeThePromotionCouponInTheList(PromotionCouponInterface $coupon): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(

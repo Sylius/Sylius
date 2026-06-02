@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -29,9 +30,7 @@ final class ExchangeRateContext implements Context
     ) {
     }
 
-    /**
-     * @Given the exchange rate of :sourceCurrency to :targetCurrency is :ratio
-     */
+    #[Given('the exchange rate of :sourceCurrency to :targetCurrency is :ratio')]
     public function thereIsAnExchangeRateWithSourceCurrencyAndTargetCurrency(
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency,

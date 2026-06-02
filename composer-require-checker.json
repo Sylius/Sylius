@@ -5,6 +5,7 @@
     "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object", "mixed", "never",
     "random_bytes", "random_int",
     "trigger_deprecation",
+    "inline_service", "service", "tagged_iterator", "tagged_locator",
     "ApiPlatform\\Doctrine\\Common\\Filter\\OrderFilterInterface",
     "ApiPlatform\\Hydra\\Serializer\\CollectionFiltersNormalizer",
     "ApiPlatform\\JsonLd\\Serializer\\HydraPrefixTrait",

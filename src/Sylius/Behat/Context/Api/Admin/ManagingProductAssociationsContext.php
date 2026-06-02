@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -36,9 +38,7 @@ final readonly class ManagingProductAssociationsContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I (associate as "[^"]+") the (product "[^"]+") with the ("[^"]+" product)$/
-     */
+    #[When('/^I (associate as "[^"]+") the (product "[^"]+") with the ("[^"]+" product)$/')]
     public function iAssociateAsTypeTheProductWithTheProduct(
         ProductAssociationTypeInterface $type,
         ProductInterface $owner,
@@ -47,9 +47,7 @@ final readonly class ManagingProductAssociationsContext implements Context
         $this->iAssociateAsTypeTheProductWithTheProducts($type, $owner, [$product]);
     }
 
-    /**
-     * @When /^I (associate as "[^"]+") the (product "[^"]+") with the (products "[^"]+" and "[^"]+")$/
-     */
+    #[When('/^I (associate as "[^"]+") the (product "[^"]+") with the (products "[^"]+" and "[^"]+")$/')]
     public function iAssociateAsTypeTheProductWithTheProducts(
         ProductAssociationTypeInterface $type,
         ProductInterface $owner,
@@ -77,9 +75,7 @@ final readonly class ManagingProductAssociationsContext implements Context
         $this->sharedStorage->set('product', $association->getOwner());
     }
 
-    /**
-     * @When /^I add the (product "[^"]+") to (this product association)$/
-     */
+    #[When('/^I add the (product "[^"]+") to (this product association)$/')]
     public function iAddTheProductToThisProductAssociation(
         ProductInterface $product,
         ProductAssociationInterface $association,
@@ -97,9 +93,7 @@ final readonly class ManagingProductAssociationsContext implements Context
         $this->sharedStorage->set('association', $association);
     }
 
-    /**
-     * @When /^I change (this product association)'s product to the ("[^"]+" product)$/
-     */
+    #[When('/^I change (this product association)\'s product to the ("[^"]+" product)$/')]
     public function iChangeThisProductAssociationProductToProduct(
         ProductAssociationInterface $association,
         ProductInterface $product,
@@ -111,9 +105,7 @@ final readonly class ManagingProductAssociationsContext implements Context
         $this->sharedStorage->set('association', $association);
     }
 
-    /**
-     * @When /^I remove the (product "[^"]+") from (this product association)$/
-     */
+    #[When('/^I remove the (product "[^"]+") from (this product association)$/')]
     public function iRemoveTheProductFromThisProductAssociation(
         ProductInterface $product,
         ProductAssociationInterface $association,
@@ -133,9 +125,7 @@ final readonly class ManagingProductAssociationsContext implements Context
         $this->sharedStorage->set('association', $association);
     }
 
-    /**
-     * @Then /^(this product) should have an (association "[^"]+")$/
-     */
+    #[Then('/^(this product) should have an (association "[^"]+")$/')]
     public function thisProductShouldHaveAnAssociation(
         ProductInterface $product,
         ProductAssociationTypeInterface $type,
@@ -161,9 +151,7 @@ final readonly class ManagingProductAssociationsContext implements Context
         ));
     }
 
-    /**
-     * @Then /^(this association) should only have (product "[^"]+")$/
-     */
+    #[Then('/^(this association) should only have (product "[^"]+")$/')]
     public function thisAssociationShouldOnlyHaveProduct(
         ProductAssociationInterface $association,
         ProductInterface $product,
@@ -171,9 +159,7 @@ final readonly class ManagingProductAssociationsContext implements Context
         $this->thisAssociationShouldHaveProducts($association, [$product]);
     }
 
-    /**
-     * @Then /^(this association) should have (products "[^"]+" and "[^"]+")$/
-     */
+    #[Then('/^(this association) should have (products "[^"]+" and "[^"]+")$/')]
     public function thisAssociationShouldHaveProducts(
         ProductAssociationInterface $association,
         array $products,

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
@@ -36,25 +38,19 @@ final readonly class ManagingProductImagesContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I attach the "([^"]+)" image with "([^"]+)" type to (this product)$/
-     */
+    #[When('/^I attach the "([^"]+)" image with "([^"]+)" type to (this product)$/')]
     public function iAttachTheImageWithTypeToThisProduct(string $path, string $type, ProductInterface $product): void
     {
         $this->createProductImage($path, $product, $type);
     }
 
-    /**
-     * @When /^I attach the "([^"]+)" image to (this product)$/
-     */
+    #[When('/^I attach the "([^"]+)" image to (this product)$/')]
     public function iAttachTheImageToThisProduct(string $path, ProductInterface $product): void
     {
         $this->createProductImage($path, $product);
     }
 
-    /**
-     * @When /^I attach the "([^"]+)" image with selected ("[^"]+" variant) to (this product)$/
-     */
+    #[When('/^I attach the "([^"]+)" image with selected ("[^"]+" variant) to (this product)$/')]
     public function iAttachImageWithSelectedVariantToThisProduct(
         string $path,
         ProductVariantInterface $productVariant,
@@ -63,9 +59,7 @@ final readonly class ManagingProductImagesContext implements Context
         $this->createProductImage($path, $product, null, [$productVariant]);
     }
 
-    /**
-     * @When I( also) remove an image with :type type
-     */
+    #[When('I( also) remove an image with :type type')]
     public function iRemoveAnImageWithType(string $type): void
     {
         /** @var ProductInterface $product */
@@ -77,9 +71,7 @@ final readonly class ManagingProductImagesContext implements Context
         $this->removeProductImage($product->getCode(), (string) $productImage->getId());
     }
 
-    /**
-     * @When I remove the first image
-     */
+    #[When('I remove the first image')]
     public function iRemoveTheFirstImage(): void
     {
         /** @var ProductInterface $product */
@@ -91,9 +83,7 @@ final readonly class ManagingProductImagesContext implements Context
         $this->removeProductImage($product->getCode(), (string) $productImage->getId());
     }
 
-    /**
-     * @When I change the first image type to :type
-     */
+    #[When('I change the first image type to :type')]
     public function iChangeTheFirstImageTypeTo(string $type): void
     {
         /** @var ProductInterface $product */
@@ -112,9 +102,7 @@ final readonly class ManagingProductImagesContext implements Context
         $this->client->request($builder->build());
     }
 
-    /**
-     * @When I select :productVariant variant for the first image
-     */
+    #[When('I select :productVariant variant for the first image')]
     public function iSelectVariantForTheFirstImage(ProductVariantInterface $productVariant): void
     {
         /** @var ProductInterface $product */
@@ -133,11 +121,9 @@ final readonly class ManagingProductImagesContext implements Context
         $this->client->request($builder->build());
     }
 
-    /**
-     * @Then the product :product should have an image with :type type
-     * @Then /^(this product) should(?:| also) have an image with "([^"]*)" type$/
-     * @Then /^(it) should(?:| also) have an image with "([^"]*)" type$/
-     */
+    #[Then('the product :product should have an image with :type type')]
+    #[Then('/^(this product) should(?:| also) have an image with "([^"]*)" type$/')]
+    #[Then('/^(it) should(?:| also) have an image with "([^"]*)" type$/')]
     public function theProductShouldHaveAnImageWithType(ProductInterface $product, string $type): void
     {
         Assert::true(
@@ -150,9 +136,7 @@ final readonly class ManagingProductImagesContext implements Context
         );
     }
 
-    /**
-     * @Then its image should have :productVariant variant selected
-     */
+    #[Then('its image should have :productVariant variant selected')]
     public function itsImageShouldHaveVariantSelected(ProductVariantInterface $productVariant): void
     {
         $images = $this->responseChecker->getValue(
@@ -167,10 +151,8 @@ final readonly class ManagingProductImagesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this product) should not have(?:| also) any images with "([^"]*)" type$/
-     * @Then /^(it) should not have(?:| also) any images with "([^"]*)" type$/
-     */
+    #[Then('/^(this product) should not have(?:| also) any images with "([^"]*)" type$/')]
+    #[Then('/^(it) should not have(?:| also) any images with "([^"]*)" type$/')]
     public function thisProductShouldNotHaveAnyImagesWithType(ProductInterface $product, string $type): void
     {
         Assert::false(
@@ -183,10 +165,8 @@ final readonly class ManagingProductImagesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this product) should(?:| still) have only one image$/
-     * @Then /^(this product) should(?:| still) have (\d+) images?$/
-     */
+    #[Then('/^(this product) should(?:| still) have only one image$/')]
+    #[Then('/^(this product) should(?:| still) have (\d+) images?$/')]
     public function thisProductShouldHaveImages(ProductInterface $product, int $count = 1): void
     {
         Assert::count(
@@ -195,17 +175,13 @@ final readonly class ManagingProductImagesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this product) should not have any images$/
-     */
+    #[Then('/^(this product) should not have any images$/')]
     public function thisProductShouldNotHaveAnyImages(ProductInterface $product): void
     {
         $this->thisProductShouldHaveImages($product, 0);
     }
 
-    /**
-     * @Then I should be notified that the changes have been successfully applied
-     */
+    #[Then('I should be notified that the changes have been successfully applied')]
     public function iShouldBeNotifiedThatTheChangesHaveBeenSuccessfullyApplied(): void
     {
         $response = $this->client->getLastResponse();
@@ -214,9 +190,7 @@ final readonly class ManagingProductImagesContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that the ("[^"]+" variant) does not belong to (this product)$/
-     */
+    #[Then('/^I should be notified that the ("[^"]+" variant) does not belong to (this product)$/')]
     public function iShouldBeNotifiedThatTheProductVariantDoesNotBelongToTheOwner(ProductVariantInterface $productVariant, ProductInterface $product): void
     {
         Assert::contains(
@@ -229,9 +203,7 @@ final readonly class ManagingProductImagesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that svg file is not allowed
-     */
+    #[Then('I should be notified that svg file is not allowed')]
     public function iShouldBeNotifiedThatSvgFileIsNotAllowed(): void
     {
         Assert::contains(

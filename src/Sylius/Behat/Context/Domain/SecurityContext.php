@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 
 final class SecurityContext implements Context
 {
-    /**
-     * @Given I am logged in as an administrator
-     */
+    #[Given('I am logged in as an administrator')]
     public function iAmLoggedInAsAnAdministrator()
     {
         // Not applicable in the domain scope

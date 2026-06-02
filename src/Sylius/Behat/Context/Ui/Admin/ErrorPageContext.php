@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Webmozart\Assert\Assert;
@@ -23,9 +24,7 @@ final readonly class ErrorPageContext implements Context
     {
     }
 
-    /**
-     * @Then I should see the not found page with the link to the dashboard
-     */
+    #[Then('I should see the not found page with the link to the dashboard')]
     public function iShouldSeeTheNotFoundPageWithTheLinkToTheDashboard(): void
     {
         Assert::true($this->errorPage->isItAdminNotFoundPage(), 'This test might require to be run without debug mode enabled.');

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -41,9 +43,7 @@ final class ManagingPlacedOrderAddressesContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to modify a customer's billing address of this order
-     */
+    #[When('I want to modify a customer\'s billing address of this order')]
     public function iWantToModifyCustomerBillingAddress(): void
     {
         $this->client->buildUpdateRequest(
@@ -52,9 +52,7 @@ final class ManagingPlacedOrderAddressesContext implements Context
         );
     }
 
-    /**
-     * @When I want to modify a customer's shipping address of this order
-     */
+    #[When('I want to modify a customer\'s shipping address of this order')]
     public function iWantToModifyCustomerShippingAddress(): void
     {
         $this->client->buildUpdateRequest(
@@ -63,25 +61,19 @@ final class ManagingPlacedOrderAddressesContext implements Context
         );
     }
 
-    /**
-     * @When /^I clear the (?:billing|shipping) address information$/
-     */
+    #[When('/^I clear the (?:billing|shipping) address information$/')]
     public function iClearTheAddressInformation(): void
     {
         $this->client->updateRequestData(array_fill_keys(array_keys($this->addressProperties), ''));
     }
 
-    /**
-     * @When /^I do not specify new information$/
-     */
+    #[When('/^I do not specify new information$/')]
     public function iDoNotSpecifyNewInformation(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
 
-    /**
-     * @When /^I specify their (?:|new )(?:billing|shipping) (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
+    #[When('/^I specify their (?:|new )(?:billing|shipping) (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
     public function iSpecifyTheirAddressAs(AddressInterface $address): void
     {
         $this->client->addRequestData('firstName', $address->getFirstName());
@@ -91,9 +83,7 @@ final class ManagingPlacedOrderAddressesContext implements Context
         $this->client->addRequestData('city', $address->getCity());
     }
 
-    /**
-     * @Then /^this order should(?:| still) have ("([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address)$/
-     */
+    #[Then('/^this order should(?:| still) have ("([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address)$/')]
     public function itsBillingAddressShouldContain(AddressInterface $address): void
     {
         $response = $this->client->show(
@@ -104,9 +94,7 @@ final class ManagingPlacedOrderAddressesContext implements Context
         $this->assertAddressResponseProperties($response, $address);
     }
 
-    /**
-     * @Then /^this order should(?:| still) (be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     */
+    #[Then('/^this order should(?:| still) (be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/')]
     public function itShouldBeShippedTo(AddressInterface $address): void
     {
         $response = $this->client->show(
@@ -117,9 +105,7 @@ final class ManagingPlacedOrderAddressesContext implements Context
         $this->assertAddressResponseProperties($response, $address);
     }
 
-    /**
-     * @Then /^I should be notified that all mandatory (?:shipping|billing) address details are incomplete$/
-     */
+    #[Then('/^I should be notified that all mandatory (?:shipping|billing) address details are incomplete$/')]
     public function iShouldBeNotifiedThatAllMandatoryAddressDetailsAreIncomplete(): void
     {
         /** @var array<string, array<string, string>> $mandatoryAddressProperties */

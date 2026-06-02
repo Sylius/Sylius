@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\Given;
+use Behat\Step\When;
+use Behat\Step\Then;
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -33,10 +36,8 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
     ) {
     }
 
-    /**
-     * @Given I am browsing variants affected by catalog promotion :catalogPromotion
-     * @When I browse variants affected by catalog promotion :catalogPromotion
-     */
+    #[Given('I am browsing variants affected by catalog promotion :catalogPromotion')]
+    #[When('I browse variants affected by catalog promotion :catalogPromotion')]
     public function iBrowseVariantsAffectedByCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->client->index(Resources::PRODUCT_VARIANTS);
@@ -44,10 +45,8 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When /^I want to view all variants of (this product)$/
-     * @When /^I view(?:| all) variants of the (product "[^"]+")$/
-     */
+    #[When('/^I want to view all variants of (this product)$/')]
+    #[When('/^I view(?:| all) variants of the (product "[^"]+")$/')]
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product): void
     {
         $this->client->index(Resources::PRODUCT_VARIANTS);
@@ -55,27 +54,21 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I filter by code containing :phrase
-     */
+    #[When('I filter by code containing :phrase')]
     public function iFilterByCodeContaining(string $phrase): void
     {
         $this->client->addFilter('code', $phrase);
         $this->client->filter();
     }
 
-    /**
-     * @When I filter by name containing :phrase
-     */
+    #[When('I filter by name containing :phrase')]
     public function iFilterByNameContaining(string $phrase): void
     {
         $this->client->addFilter('translations.name', $phrase);
         $this->client->filter();
     }
 
-    /**
-     * @Then /^there should be (\d+) product variants? on the list$/
-     */
+    #[Then('/^there should be (\d+) product variants? on the list$/')]
     public function thereShouldBeProductVariantsOnTheList(int $count): void
     {
         Assert::same(
@@ -84,10 +77,8 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
         );
     }
 
-    /**
-     * @Then it should be the :variantName product variant
-     * @Then it should be :firstVariant and :secondVariant product variants
-     */
+    #[Then('it should be the :variantName product variant')]
+    #[Then('it should be :firstVariant and :secondVariant product variants')]
     public function theProductVariantShouldBeInTheRegistry(string ...$variantsNames): void
     {
         foreach ($variantsNames as $variantName) {
@@ -100,9 +91,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
         }
     }
 
-    /**
-     * @Then :variant variant price should be decreased by catalog promotion :catalogPromotion in :channel channel
-     */
+    #[Then(':variant variant price should be decreased by catalog promotion :catalogPromotion in :channel channel')]
     public function variantPriceShouldBeDecreasedByCatalogPromotion(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,
@@ -119,9 +108,7 @@ final class BrowsingCatalogPromotionProductVariantsContext implements Context
         );
     }
 
-    /**
-     * @Then :variant variant price should not be decreased by catalog promotion :catalogPromotion in :channel channel
-     */
+    #[Then(':variant variant price should not be decreased by catalog promotion :catalogPromotion in :channel channel')]
     public function variantPriceShouldNotBeDecreasedByCatalogPromotion(
         ProductVariantInterface $variant,
         CatalogPromotionInterface $catalogPromotion,

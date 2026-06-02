@@ -29,7 +29,8 @@
         "php": "^8.2",
         "behat/transliterator": "^1.5",
         "sylius/resource": "^1.12",
-        "webmozart/assert": "^1.11"
+        "webmozart/assert": "^1.11",
+        "symfony/string": "^6.4 || ^7.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.5"

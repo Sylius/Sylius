@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -30,9 +31,7 @@ final class PriceHistoryContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^on "([^"]+)" (its) price changed to ("[^"]+")$/
-     */
+    #[Given('/^on "([^"]+)" (its) price changed to ("[^"]+")$/')]
     public function onDayItsPriceChangedTo(string $date, ProductInterface $product, int $price): void
     {
         $this->calendarContext->itIsNow($date);
@@ -44,9 +43,7 @@ final class PriceHistoryContext implements Context
         $this->channelPricingManager->flush();
     }
 
-    /**
-     * @Given /^on "([^"]+)" (its) original price changed to ("[^"]+")$/
-     */
+    #[Given('/^on "([^"]+)" (its) original price changed to ("[^"]+")$/')]
     public function onDayItsOriginalPriceChangedTo(string $date, ProductInterface $product, int $originalPrice): void
     {
         $this->calendarContext->itIsNow($date);
@@ -58,9 +55,7 @@ final class PriceHistoryContext implements Context
         $this->channelPricingManager->flush();
     }
 
-    /**
-     * @Given /^on "([^"]+)" (its) price changed to ("[^"]+") and original price to ("[^"]+")$/
-     */
+    #[Given('/^on "([^"]+)" (its) price changed to ("[^"]+") and original price to ("[^"]+")$/')]
     public function onDayItsOriginalPriceChangedToAndOriginalPriceTo(string $date, ProductInterface $product, int $price, int $originalPrice): void
     {
         $this->calendarContext->itIsNow($date);
@@ -73,9 +68,7 @@ final class PriceHistoryContext implements Context
         $this->channelPricingManager->flush();
     }
 
-    /**
-     * @Given /^on "([^"]+)" (its) original price has been removed$/
-     */
+    #[Given('/^on "([^"]+)" (its) original price has been removed$/')]
     public function onDayItsOriginalPriceHasBeenRemoved(string $date, ProductInterface $product): void
     {
         $this->calendarContext->itIsNow($date);

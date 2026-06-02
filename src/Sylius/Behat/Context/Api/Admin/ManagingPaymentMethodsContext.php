@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
+use Behat\Step\When;
+use Behat\Step\Given;
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -40,9 +43,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I search by "([^"]+)" (code|name)$/
-     */
+    #[When('/^I search by "([^"]+)" (code|name)$/')]
     public function iSearchByName(string $phrase, string $field): void
     {
         $field = $field === 'name' ? 'translations.name' : $field;
@@ -51,33 +52,25 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I choose enabled filter
-     */
+    #[When('I choose enabled filter')]
     public function iChooseEnabledFilter(): void
     {
         $this->client->addFilter('enabled', true);
     }
 
-    /**
-     * @When I filter
-     */
+    #[When('I filter')]
     public function iFilter(): void
     {
         $this->client->filter();
     }
 
-    /**
-     * @When I want to modify the :paymentMethod payment method
-     */
+    #[When('I want to modify the :paymentMethod payment method')]
     public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->client->buildUpdateRequest(Resources::PAYMENT_METHODS, $paymentMethod->getCode());
     }
 
-    /**
-     * @When /^I set its "Username" as "([^"]+)", "Password" as "([^"]+)" and "Signature" as "([^"]+)"$/
-     */
+    #[When('/^I set its "Username" as "([^"]+)", "Password" as "([^"]+)" and "Signature" as "([^"]+)"$/')]
     public function iSetItsUsernameAsPasswordAsAndSignatureAs(string $username, string $password, string $signature): void
     {
         $this->updateGatewayConfig([
@@ -87,9 +80,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         ]);
     }
 
-    /**
-     * @When /^I set its "Publishable key" as "([^"]+)" and "Secret key" as "([^"]+)"$/
-     */
+    #[When('/^I set its "Publishable key" as "([^"]+)" and "Secret key" as "([^"]+)"$/')]
     public function iSetItsPublishableKeyAsAndSecretKeyAs(string $publishableKey, string $secretKey): void
     {
         $this->updateGatewayConfig([
@@ -98,9 +89,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         ]);
     }
 
-    /**
-     * @When I update its :field with :value
-     */
+    #[When('I update its :field with :value')]
     public function iUpdateItsWith(string $field, string $value): void
     {
         $availableFields = ['Publishable key', 'Secret key', 'Username', 'Password', 'Signature', 'Sandbox'];
@@ -112,61 +101,47 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->updateGatewayConfig([StringInflector::nameToLowercaseCode($field) => $value]);
     }
 
-    /**
-     * @When I name it :name in :localeCode
-     * @When I rename it to :name in :localeCode
-     * @When I remove its name from :localeCode translation
-     */
+    #[When('I name it :name in :localeCode')]
+    #[When('I rename it to :name in :localeCode')]
+    #[When('I remove its name from :localeCode translation')]
     public function iNameItIn(string $localeCode, ?string $name = null): void
     {
         $this->client->addRequestData('translations', [$localeCode => ['name' => $name]]);
     }
 
-    /**
-     * @When I enable sandbox mode
-     */
+    #[When('I enable sandbox mode')]
     public function iEnableSandboxMode(): void
     {
         $this->client->addRequestData('gatewayConfig', ['config' => ['sandbox' => true]]);
     }
 
-    /**
-     * @When I do not name it
-     */
+    #[When('I do not name it')]
     public function iDoNotNameIt(): void
     {
         // Intentionally left blank to fulfill context expectation
     }
 
-    /**
-     * @When I enable it
-     */
+    #[When('I enable it')]
     public function iEnableIt(): void
     {
         $this->client->addRequestData('enabled', true);
     }
 
-    /**
-     * @When I disable it
-     */
+    #[When('I disable it')]
     public function iDisableIt(): void
     {
         $this->client->addRequestData('enabled', false);
     }
 
-    /**
-     * @When I delete the :paymentMethod payment method
-     * @When I try to delete the :paymentMethod payment method
-     */
+    #[When('I delete the :paymentMethod payment method')]
+    #[When('I try to delete the :paymentMethod payment method')]
     public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->client->delete(Resources::PAYMENT_METHODS, $paymentMethod->getCode());
     }
 
-    /**
-     * @When I want to create a new offline payment method
-     * @When I want to create a new payment method with :factory gateway factory
-     */
+    #[When('I want to create a new offline payment method')]
+    #[When('I want to create a new payment method with :factory gateway factory')]
     public function iWantToCreateANewPaymentMethod(string $factory = 'Offline'): void
     {
         $factory = str_replace(' ', '_', strtolower($factory));
@@ -175,18 +150,14 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->client->addRequestData('gatewayConfig', ['factoryName' => $factory, 'gatewayName' => $factory]);
     }
 
-    /**
-     * @When I want to create a new payment method without gateway configuration
-     */
+    #[When('I want to create a new payment method without gateway configuration')]
     public function iWantToCreateANewPaymentMethodWithoutGatewayConfiguration(): void
     {
         $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
         $this->client->addRequestData('code', 'TEST');
     }
 
-    /**
-     * @When I want to create a new payment method without gateway name
-     */
+    #[When('I want to create a new payment method without gateway name')]
     public function iWantToCreateANewPaymentMethodWithoutGatewayName(): void
     {
         $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
@@ -194,9 +165,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->client->addRequestData('gatewayConfig', ['factoryName' => 'offline']);
     }
 
-    /**
-     * @When I want to create a new payment method without factory name
-     */
+    #[When('I want to create a new payment method without factory name')]
     public function iWantToCreateANewPaymentMethodWithoutFactoryName(): void
     {
         $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
@@ -204,9 +173,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->client->addRequestData('gatewayConfig', ['gatewayName' => 'offline']);
     }
 
-    /**
-     * @When I want to create a new payment method with wrong factory name
-     */
+    #[When('I want to create a new payment method with wrong factory name')]
     public function iWantToCreateANewPaymentMethodWithWrongFactoryName(): void
     {
         $this->client->buildCreateRequest(Resources::PAYMENT_METHODS);
@@ -214,53 +181,41 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->client->addRequestData('gatewayConfig', ['factoryName' => 'gateway_with_wrong_factory_name', 'gatewayName' => 'gateway with wrong factory name']);
     }
 
-    /**
-     * @When I specify its code as :code
-     * @When I do not specify its code
-     */
+    #[When('I specify its code as :code')]
+    #[When('I do not specify its code')]
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->client->addRequestData('code', $code);
     }
 
-    /**
-     * @When I describe it as :description in :localeCode
-     */
+    #[When('I describe it as :description in :localeCode')]
     public function iDescribeItAsIn(string $description, string $localeCode): void
     {
         $this->client->addRequestData('translations', [$localeCode => ['description' => $description]]);
     }
 
-    /**
-     * @When make it available in channel :channel
-     */
+    #[When('make it available in channel :channel')]
     public function iMakeItAvailableInChannel(ChannelInterface $channel): void
     {
         $this->client->replaceRequestData('channels', [$this->iriConverter->getIriFromResourceInSection($channel, 'admin')]);
     }
 
-    /**
-     * @When I set its instruction as :instructions in :localeCode
-     */
+    #[When('I set its instruction as :instructions in :localeCode')]
     public function iSetItsInstructionAsIn(string $instructions, string $localeCode): void
     {
         $this->client->addRequestData('translations', [$localeCode => ['instructions' => $instructions]]);
     }
 
-    /**
-     * @When I add it
-     * @When I try to add it
-     */
+    #[When('I add it')]
+    #[When('I try to add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I start sorting payment methods by name
-     * @When the payment methods are already sorted by name
-     * @When I switch the way payment methods are sorted to :sortType by name
-     */
+    #[When('I start sorting payment methods by name')]
+    #[When('the payment methods are already sorted by name')]
+    #[When('I switch the way payment methods are sorted to :sortType by name')]
     public function iSortShippingMethodsByName(string $sortType = 'ascending'): void
     {
         $this->client->sort([
@@ -269,11 +224,9 @@ final readonly class ManagingPaymentMethodsContext implements Context
         ]);
     }
 
-    /**
-     * @Given the payment methods are already sorted by code
-     * @When I start sorting payment methods by code
-     * @When I switch the way payment methods are sorted to :sortType by code
-     */
+    #[Given('the payment methods are already sorted by code')]
+    #[When('I start sorting payment methods by code')]
+    #[When('I switch the way payment methods are sorted to :sortType by code')]
     public function iSortShippingMethodsByCode(string $sortType = 'ascending'): void
     {
         $this->client->sort([
@@ -282,9 +235,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         ]);
     }
 
-    /**
-     * @When I configure it for username :username with :signature signature
-     */
+    #[When('I configure it for username :username with :signature signature')]
     public function iConfigureItForUsernameWithSignature(string $username, string $signature): void
     {
         $this->client->addRequestData(
@@ -299,9 +250,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @When I configure it for username :username with :signature signature and password, but without sandbox
-     */
+    #[When('I configure it for username :username with :signature signature and password, but without sandbox')]
     public function iConfigureItForUsernameWithSignatureButWithoutSandbox(string $username, string $signature): void
     {
         $this->client->addRequestData(
@@ -317,9 +266,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @When I configure it for username :username with :signature signature and password, but with sandbox that has wrong type
-     */
+    #[When('I configure it for username :username with :signature signature and password, but with sandbox that has wrong type')]
     public function iConfigureItForUsernameWithSignatureButWithWrongSandboxType(string $username, string $signature): void
     {
         $this->client->addRequestData(
@@ -335,9 +282,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @When I configure it with only :element
-     */
+    #[When('I configure it with only :element')]
     public function iConfigureItWithOnly(string $element): void
     {
         $element = str_replace(' ', '_', strtolower($element));
@@ -353,9 +298,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @When I do not specify configuration password
-     */
+    #[When('I do not specify configuration password')]
     public function iDoNotSpecifyConfigurationPassword(): void
     {
         $this->client->addRequestData(
@@ -368,18 +311,14 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Given I am browsing payment methods
-     * @When I browse payment methods
-     */
+    #[Given('I am browsing payment methods')]
+    #[When('I browse payment methods')]
     public function iBrowsePaymentMethods(): void
     {
         $this->client->index(Resources::PAYMENT_METHODS);
     }
 
-    /**
-     * @When I change my locale to :localeCode
-     */
+    #[When('I change my locale to :localeCode')]
     public function iChangeMyLocaleTo(string $localeCode): void
     {
         /** @var AdminUserInterface $adminUser */
@@ -391,9 +330,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         $this->client->update();
     }
 
-    /**
-     * @Then the first payment method on the list should have :field :value
-     */
+    #[Then('the first payment method on the list should have :field :value')]
     public function theFirstPaymentMethodOnTheListShouldHave(string $field, string $value): void
     {
         $response = $this->client->getLastResponse();
@@ -403,9 +340,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         Assert::same($this->getFieldValueOfFirstPaymentMethod($paymentMethods[0], $field), $value);
     }
 
-    /**
-     * @Then the last payment method on the list should have :field :value
-     */
+    #[Then('the last payment method on the list should have :field :value')]
     public function theLastPaymentMethodOnTheListShouldHave(string $field, string $value): void
     {
         $response = $this->client->index(Resources::PAYMENT_METHODS);
@@ -426,18 +361,14 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see a single payment method in the list
-     * @Then I should see :amount payment methods in the list
-     */
+    #[Then('I should see a single payment method in the list')]
+    #[Then('I should see :amount payment methods in the list')]
     public function iShouldSeePaymentMethodsInTheList(int $amount = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $amount);
     }
 
-    /**
-     * @Then I should be notified that :element is required
-     */
+    #[Then('I should be notified that :element is required')]
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         Assert::contains(
@@ -446,9 +377,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that I have to specify payment method :element
-     */
+    #[Then('I should be notified that I have to specify payment method :element')]
     public function iShouldBeNotifiedThatINeedToSpecifyPaymentMethodName(string $element): void
     {
         Assert::contains(
@@ -457,9 +386,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that I have to specify gateway configuration
-     */
+    #[Then('I should be notified that I have to specify gateway configuration')]
     public function iShouldBeNotifiedThatIHaveToSpecifyGatewayConfiguration(): void
     {
         Assert::same(
@@ -468,9 +395,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that I have to specify gateway name
-     */
+    #[Then('I should be notified that I have to specify gateway name')]
     public function iShouldBeNotifiedThatIHaveToSpecifyGatewayName(): void
     {
         Assert::same(
@@ -479,9 +404,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that I have to specify factory name
-     */
+    #[Then('I should be notified that I have to specify factory name')]
     public function iShouldBeNotifiedThatIHaveToSpecifyFactoryName(): void
     {
         Assert::same(
@@ -490,9 +413,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that I have to specify factory name that is available
-     */
+    #[Then('I should be notified that I have to specify factory name that is available')]
     public function iShouldBeNotifiedThatIHaveToSpecifyFactoryNameThatIsAvailable(): void
     {
         Assert::contains(
@@ -501,9 +422,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then the payment method with :element :value should not be added
-     */
+    #[Then('the payment method with :element :value should not be added')]
     public function thePaymentMethodWithElementValueShouldNotBeAdded(string $element, string $value): void
     {
         if ($element === 'name') {
@@ -524,9 +443,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then this payment method should still be named :paymentMethodName
-     */
+    #[Then('this payment method should still be named :paymentMethodName')]
     public function thisPaymentMethodNameShouldStillBeNamed(string $paymentMethodName): void
     {
         Assert::inArray(
@@ -536,10 +453,8 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then the code field should be disabled
-     * @Then I should not be able to edit its code
-     */
+    #[Then('the code field should be disabled')]
+    #[Then('I should not be able to edit its code')]
     public function theCodeFieldShouldBeDisabled(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
@@ -547,9 +462,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
     }
 
-    /**
-     * @Then the factory name field should be disabled
-     */
+    #[Then('the factory name field should be disabled')]
     public function theFactoryNameFieldShouldBeDisabled(): void
     {
         $this->client->addRequestData('gatewayConfig', ['factoryName' => 'NEWFACTORYNAME']);
@@ -558,9 +471,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         Assert::false($this->responseChecker->hasValue($this->client->getLastResponse(), 'gatewayConfig', 'NEWFACTORYNAME'));
     }
 
-    /**
-     * @Then /^(this payment method) should be enabled/
-     */
+    #[Then('/^(this payment method) should be enabled/')]
     public function thisPaymentMethodShouldBeEnabled(PaymentMethodInterface $paymentMethod): void
     {
         Assert::true(
@@ -573,9 +484,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this payment method) should be disabled$/
-     */
+    #[Then('/^(this payment method) should be disabled$/')]
     public function thisShippingMethodShouldBeDisabled(PaymentMethodInterface $paymentMethod): void
     {
         Assert::true(
@@ -588,9 +497,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then the payment method :paymentMethod should have instructions :instructions in :localeCode
-     */
+    #[Then('the payment method :paymentMethod should have instructions :instructions in :localeCode')]
     public function thePaymentMethodShouldHaveInstructionsIn(
         PaymentMethodInterface $paymentMethod,
         string $instructions,
@@ -605,9 +512,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then the payment method :paymentMethod should be available in channel :channel
-     */
+    #[Then('the payment method :paymentMethod should be available in channel :channel')]
     public function thePaymentMethodShouldBeAvailableInChannel(
         PaymentMethodInterface $paymentMethod,
         ChannelInterface $channel,
@@ -618,9 +523,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         Assert::true(in_array($this->iriConverter->getIriFromResourceInSection($channel, 'admin'), $channelsArray));
     }
 
-    /**
-     * @Then /^(this payment method) should no longer exist in the registry$/
-     */
+    #[Then('/^(this payment method) should no longer exist in the registry$/')]
     public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod): void
     {
         Assert::false(
@@ -629,9 +532,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that payment method with this code already exists
-     */
+    #[Then('I should be notified that payment method with this code already exists')]
     public function iShouldBeNotifiedThatPaymentMethodWithThisCodeAlreadyExists(): void
     {
         $response = $this->client->getLastResponse();
@@ -645,9 +546,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one payment method with :element :code
-     */
+    #[Then('there should still be only one payment method with :element :code')]
     public function thereShouldStillBeOnlyOnePaymentMethodWith(string $element, string $code): void
     {
         $response = $this->client->index(Resources::PAYMENT_METHODS);
@@ -657,9 +556,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValue($response, $element, $code));
     }
 
-    /**
-     * @Then /^this payment method "([^"]+)" should be "([^"]+)"$/
-     */
+    #[Then('/^this payment method "([^"]+)" should be "([^"]+)"$/')]
     public function thisPaymentMethodElementShouldBe(
         string $element,
         string $value,
@@ -680,9 +577,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then /^its gateway configuration "([^"]+)" should be "([^"]+)"$/
-     */
+    #[Then('/^its gateway configuration "([^"]+)" should be "([^"]+)"$/')]
     public function itsGatewayConfigurationShouldBe(string $element, string $value): void
     {
         $gatewayConfig = $this->responseChecker->getValue($this->client->getLastResponse(), 'gatewayConfig');
@@ -694,9 +589,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then this payment method should be in sandbox mode
-     */
+    #[Then('this payment method should be in sandbox mode')]
     public function thisPaymentMethodShouldBeInSandboxMode(): void
     {
         $gatewayConfig = $this->responseChecker->getValue($this->client->getLastResponse(), 'gatewayConfig');
@@ -708,9 +601,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -719,9 +610,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(
@@ -730,9 +619,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it is in use
-     */
+    #[Then('I should be notified that it is in use')]
     public function iShouldBeNotifiedThatItIsInUse(): void
     {
         Assert::contains(
@@ -741,11 +628,9 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then the payment method :paymentMethodName should appear in the registry
-     * @Then the payment method :paymentMethodName should be in the registry
-     * @Then I should see the payment method :paymentMethodName in the list
-     */
+    #[Then('the payment method :paymentMethodName should appear in the registry')]
+    #[Then('the payment method :paymentMethodName should be in the registry')]
+    #[Then('I should see the payment method :paymentMethodName in the list')]
     public function thePaymentMethodShouldAppearInTheRegistry(string $paymentMethodName): void
     {
         Assert::inArray(
@@ -755,9 +640,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the payment method :paymentMethodName
-     */
+    #[Then('I should see the payment method :paymentMethodName')]
     public function iShouldSeeThePaymentMethod(string $paymentMethodName): void
     {
         Assert::true(
@@ -766,9 +649,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see the payment method :paymentMethodName
-     */
+    #[Then('I should not see the payment method :paymentMethodName')]
     public function iShouldNotSeeThePaymentMethod(string $paymentMethodName): void
     {
         Assert::false(
@@ -777,9 +658,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this payment method) should still be in the registry$/
-     */
+    #[Then('/^(this payment method) should still be in the registry$/')]
     public function thisPaymentMethodShouldStillBeInTheRegistry(PaymentMethodInterface $paymentMethod): void
     {
         $this->thePaymentMethodShouldAppearInTheRegistry($paymentMethod->getName());

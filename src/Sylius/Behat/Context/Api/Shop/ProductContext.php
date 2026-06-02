@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
+use Behat\Step\When;
+use Behat\Step\Then;
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -49,11 +51,9 @@ final class ProductContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I check (this product)'s details$/
-     * @When I view product :product
-     * @When customer view product :product
-     */
+    #[When('/^I check (this product)\'s details$/')]
+    #[When('I view product :product')]
+    #[When('customer view product :product')]
     public function iViewProduct(ProductInterface $product): void
     {
         $this->objectManager->clear(); // it's needed to clear the entity manager to receive the product images in correct order, as the images are using fallback order when added programmatically
@@ -67,19 +67,15 @@ final class ProductContext implements Context
         $this->sharedStorage->remove('product_attributes');
     }
 
-    /**
-     * @When I try to reach nonexistent product
-     */
+    #[When('I try to reach nonexistent product')]
     public function iTryToReachNonexistentProduct(): void
     {
         $this->client->show(Resources::PRODUCTS, 'nonexistent');
     }
 
-    /**
-     * @When I view product :product in the :localeCode locale
-     * @When /^I check (this product)'s details in the ("([^"]+)" locale)$/
-     * @When /^I try to check (this product)'s details in the ("([^"]+)" locale)$/
-     */
+    #[When('I view product :product in the :localeCode locale')]
+    #[When('/^I check (this product)\'s details in the ("([^"]+)" locale)$/')]
+    #[When('/^I try to check (this product)\'s details in the ("([^"]+)" locale)$/')]
     public function iViewProductInTheLocale(ProductInterface $product, string $localeCode): void
     {
         $this->sharedStorage->set('current_locale_code', $localeCode);
@@ -89,9 +85,7 @@ final class ProductContext implements Context
         $this->sharedStorage->remove('current_locale_code');
     }
 
-    /**
-     * @When I view product :product using slug
-     */
+    #[When('I view product :product using slug')]
     public function iViewProductUsingSlug(ProductInterface $product): void
     {
         $this->client->showByIri(sprintf('%s/shop/products-by-slug/%s', $this->apiUrlPrefix, $product->getSlug()));
@@ -99,9 +93,7 @@ final class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
-    /**
-     * @Then I should be redirected to :product product
-     */
+    #[Then('I should be redirected to :product product')]
     public function iShouldBeRedirectedToProduct(ProductInterface $product): void
     {
         $response = $this->client->getLastResponse();
@@ -109,10 +101,8 @@ final class ProductContext implements Context
         Assert::eq($response->headers->get('Location'), sprintf('%s/shop/products/%s', $this->apiUrlPrefix, $product->getCode()));
     }
 
-    /**
-     * @When I browse products from taxon :taxon
-     * @When I browse products
-     */
+    #[When('I browse products from taxon :taxon')]
+    #[When('I browse products')]
     public function iBrowseProductsFromTaxon(?TaxonInterface $taxon = null): void
     {
         $this->client->index(Resources::PRODUCTS);
@@ -123,9 +113,7 @@ final class ProductContext implements Context
         }
     }
 
-    /**
-     * @When I browse products from product taxon code :taxon
-     */
+    #[When('I browse products from product taxon code :taxon')]
     public function iBrowseProductsFromProductTaxonCode(TaxonInterface $taxon): void
     {
         $this->client->index(Resources::PRODUCTS);
@@ -133,9 +121,7 @@ final class ProductContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When /^I browse products from ("([^"]+)" and "([^"]+)" taxons)$/
-     */
+    #[When('/^I browse products from ("([^"]+)" and "([^"]+)" taxons)$/')]
     public function iBrowseProductsFromProductTaxonCodes(iterable $taxons): void
     {
         $this->client->index(Resources::PRODUCTS);
@@ -147,9 +133,7 @@ final class ProductContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I browse products from non existing taxon
-     */
+    #[When('I browse products from non existing taxon')]
     public function iBrowseProductsFromNonExistingTaxon(): void
     {
         $this->client->index(Resources::PRODUCTS);
@@ -158,9 +142,7 @@ final class ProductContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When /^I sort products by the (oldest|newest) date first$/
-     */
+    #[When('/^I sort products by the (oldest|newest) date first$/')]
     public function iSortProductsByTheDateFirst(string $sortDirection): void
     {
         $sortDirection = 'oldest' === $sortDirection ? 'asc' : 'desc';
@@ -168,67 +150,51 @@ final class ProductContext implements Context
         $this->client->sort(['createdAt' => $sortDirection]);
     }
 
-    /**
-     * @When I sort products by the lowest price first
-     */
+    #[When('I sort products by the lowest price first')]
     public function iSortProductsByTheLowestPriceFirst(): void
     {
         $this->client->sort(['price' => 'asc']);
     }
 
-    /**
-     * @When I sort products by the highest price first
-     */
+    #[When('I sort products by the highest price first')]
     public function iSortProductsByTheHighestPriceFirst(): void
     {
         $this->client->sort(['price' => 'desc']);
     }
 
-    /**
-     * @When I sort products alphabetically from a to z
-     */
+    #[When('I sort products alphabetically from a to z')]
     public function iSortProductsAlphabeticallyFromAToZ(): void
     {
         $this->client->sort(['translation.name' => 'asc']);
     }
 
-    /**
-     * @When I sort products alphabetically from z to a
-     */
+    #[When('I sort products alphabetically from z to a')]
     public function iSortProductsAlphabeticallyFromZToA(): void
     {
         $this->client->sort(['translation.name' => 'desc']);
     }
 
-    /**
-     * @When I clear filter
-     */
+    #[When('I clear filter')]
     public function iClearFilter(): void
     {
         $this->client->clearParameters();
         $this->client->filter();
     }
 
-    /**
-     * @When I search for products with name :name
-     */
+    #[When('I search for products with name :name')]
     public function iSearchForProductsWithName(string $name): void
     {
         $this->client->addFilter('translations.name', $name);
         $this->client->filter();
     }
 
-    /**
-     * @Then I should see :rating as its average rating
-     */
+    #[Then('I should see :rating as its average rating')]
     public function iShouldSeeAsItsAverageRating(float $rating): void
     {
         Assert::same(round($this->responseChecker->getValue($this->client->getLastResponse(), 'averageRating'), 2), $rating);
     }
 
-    /**
-     * @Then I should see the product :name
-     */
+    #[Then('I should see the product :name')]
     public function iShouldSeeTheProduct(string $name): void
     {
         Assert::true($this->hasProductWithName(
@@ -237,17 +203,13 @@ final class ProductContext implements Context
         ));
     }
 
-    /**
-     * @Then I should see a product with code :code
-     */
+    #[Then('I should see a product with code :code')]
     public function iShouldSeeAProductWithCode(string $code): void
     {
         Assert::true($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'code', $code));
     }
 
-    /**
-     * @Then I should see a product with name :name
-     */
+    #[Then('I should see a product with name :name')]
     public function iShouldSeeAProductWithName(string $name): void
     {
         Assert::true(
@@ -255,9 +217,7 @@ final class ProductContext implements Context
         );
     }
 
-    /**
-     * @Then I should see that it is out of stock
-     */
+    #[Then('I should see that it is out of stock')]
     public function iShouldSeeItIsOutOfStock(): void
     {
         /** @var ProductVariantInterface $productVariant */
@@ -268,9 +228,7 @@ final class ProductContext implements Context
         Assert::false($this->responseChecker->getValue($variantResponse, 'inStock'));
     }
 
-    /**
-     * @Then I should not see the product :name
-     */
+    #[Then('I should not see the product :name')]
     public function iShouldNotSeeTheProduct(string $name): void
     {
         Assert::false($this->hasProductWithName(
@@ -279,10 +237,8 @@ final class ProductContext implements Context
         ));
     }
 
-    /**
-     * @Then /^I should see the product price ("[^"]+")$/
-     * @Then /^customer should see the product price ("[^"]+")$/
-     */
+    #[Then('/^I should see the product price ("[^"]+")$/')]
+    #[Then('/^customer should see the product price ("[^"]+")$/')]
     public function iShouldSeeTheProductPrice(int $price): void
     {
         /** @var ProductVariantInterface $checkedVariant */
@@ -293,10 +249,8 @@ final class ProductContext implements Context
         Assert::same($variant['code'], $checkedVariant->getCode());
     }
 
-    /**
-     * @Then /^I should see the product original price ("[^"]+")$/
-     * @Then /^customer should see the product original price ("[^"]+")$/
-     */
+    #[Then('/^I should see the product original price ("[^"]+")$/')]
+    #[Then('/^customer should see the product original price ("[^"]+")$/')]
     public function iShouldSeeTheProductOriginalPrice(int $originalPrice): void
     {
         /** @var ProductVariantInterface $checkedVariant */
@@ -307,9 +261,7 @@ final class ProductContext implements Context
         Assert::same($variant['code'], $checkedVariant->getCode());
     }
 
-    /**
-     * @Then I should see this product has no catalog promotion applied
-     */
+    #[Then('I should see this product has no catalog promotion applied')]
     public function iShouldSeeThisProductHasNoCatalogPromotionApplied(): void
     {
         $variant = $this->responseChecker->getResponseContent($this->client->getLastResponse());
@@ -318,9 +270,7 @@ final class ProductContext implements Context
         Assert::keyNotExists($variant, 'appliedPromotions');
     }
 
-    /**
-     * @Then I should not see any original price
-     */
+    #[Then('I should not see any original price')]
     public function iShouldNotSeeAnyOriginalPrice(): void
     {
         $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
@@ -328,9 +278,7 @@ final class ProductContext implements Context
         Assert::same($product['defaultVariantData']['originalPrice'], $product['defaultVariantData']['price']);
     }
 
-    /**
-     * @Then /^I should see ("[^"]+" product) discounted from ("[^"]+") to ("[^"]+")$/
-     */
+    #[Then('/^I should see ("[^"]+" product) discounted from ("[^"]+") to ("[^"]+")$/')]
     public function iShouldSeeProductDiscountedFromTo(ProductInterface $product, int $originalPrice, int $price): void
     {
         $lastResponse = $this->client->getLastResponse();
@@ -347,9 +295,7 @@ final class ProductContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see the (product "[^"]+") with price ("[^"]+")$/
-     */
+    #[Then('/^I should see the (product "[^"]+") with price ("[^"]+")$/')]
     public function iShouldSeeTheProductWithPrice(ProductInterface $product, int $price): void
     {
         Assert::true(
@@ -362,9 +308,7 @@ final class ProductContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the product :product with short description :shortDescription
-     */
+    #[Then('I should see the product :product with short description :shortDescription')]
     public function iShouldSeeTheProductWithShortDescription(ProductInterface $product, string $shortDescription): void
     {
         Assert::true(
@@ -377,9 +321,7 @@ final class ProductContext implements Context
         );
     }
 
-    /**
-     * @Then the first product on the list should have code :code
-     */
+    #[Then('the first product on the list should have code :code')]
     public function theFirstProductOnTheListShouldHaveCode(string $code): void
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
@@ -387,9 +329,7 @@ final class ProductContext implements Context
         Assert::same($products[0]['code'], $code);
     }
 
-    /**
-     * @Then the last product on the list should have code :value
-     */
+    #[Then('the last product on the list should have code :value')]
     public function theLastProductOnTheListShouldHaveCode(string $code): void
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
@@ -397,9 +337,7 @@ final class ProductContext implements Context
         Assert::same(end($products)['code'], $code);
     }
 
-    /**
-     * @Then the first product on the list should have name :name
-     */
+    #[Then('the first product on the list should have name :name')]
     public function theFirstProductOnTheListShouldHaveName(string $name): void
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
@@ -407,9 +345,7 @@ final class ProductContext implements Context
         Assert::same($products[0]['name'], $name);
     }
 
-    /**
-     * @Then /^the first product on the list should have name "([^"]+)" and price ("[^"]+")$/
-     */
+    #[Then('/^the first product on the list should have name "([^"]+)" and price ("[^"]+")$/')]
     public function theFirstProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
     {
         $product = $this->responseChecker->getCollection($this->client->resend())[0];
@@ -418,9 +354,7 @@ final class ProductContext implements Context
         Assert::same($product['defaultVariantData']['price'], $price);
     }
 
-    /**
-     * @Then the last product on the list should have name :name
-     */
+    #[Then('the last product on the list should have name :name')]
     public function theLastProductOnTheListShouldHaveName(string $name): void
     {
         $products = $this->responseChecker->getCollection($this->client->getLastResponse());
@@ -428,9 +362,7 @@ final class ProductContext implements Context
         Assert::same(end($products)['name'], $name);
     }
 
-    /**
-     * @Then /^the last product on the list should have name "([^"]+)" and price ("[^"]+")$/
-     */
+    #[Then('/^the last product on the list should have name "([^"]+)" and price ("[^"]+")$/')]
     public function theLastProductOnTheListShouldHaveNameAndPrice(string $name, int $price): void
     {
         $products = $this->responseChecker->getCollection($this->client->resend());
@@ -440,9 +372,7 @@ final class ProductContext implements Context
         Assert::same($product['defaultVariantData']['price'], $price);
     }
 
-    /**
-     * @When /^I should see only (\d+) product(s)$/
-     */
+    #[When('/^I should see only (\d+) product(s)$/')]
     public function iShouldSeeOnlyProducts(int $count): void
     {
         Assert::same(
@@ -452,27 +382,21 @@ final class ProductContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see the product with name :name
-     */
+    #[Then('I should not see the product with name :name')]
     public function iShouldNotSeeProductWithName(string $name): void
     {
         Assert::false($this->responseChecker->hasItemWithValue($this->client->getLastResponse(), 'name', $name));
     }
 
-    /**
-     * @Then I should see the product name :name
-     */
+    #[Then('I should see the product name :name')]
     public function iShouldSeeProductName(string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name));
     }
 
-    /**
-     * @Then the main image should be of type :type
-     * @Then I should be able to see a main image of type :type
-     * @Then the first thumbnail image should be of type :type
-     */
+    #[Then('the main image should be of type :type')]
+    #[Then('I should be able to see a main image of type :type')]
+    #[Then('the first thumbnail image should be of type :type')]
     public function theImageShouldBeOfType(string $type): void
     {
         $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
@@ -480,9 +404,7 @@ final class ProductContext implements Context
         Assert::same($images[0]['type'], $type);
     }
 
-    /**
-     * @Then the second thumbnail image should be of type :type
-     */
+    #[Then('the second thumbnail image should be of type :type')]
     public function theSecondThumbnailImageShouldBeOfType(string $type): void
     {
         $images = $this->responseChecker->getValue($this->client->getLastResponse(), 'images');
@@ -490,9 +412,7 @@ final class ProductContext implements Context
         Assert::same($images[1]['type'], $type);
     }
 
-    /**
-     * @Then /^I should not be able to view (this product) in the ("([^"]+)" locale)$/
-     */
+    #[Then('/^I should not be able to view (this product) in the ("([^"]+)" locale)$/')]
     public function iShouldNotBeAbleToViewThisProductInLocale(ProductInterface $product, string $localeCode): void
     {
         Assert::false($this->responseChecker->hasValue(
@@ -502,9 +422,7 @@ final class ProductContext implements Context
         ));
     }
 
-    /**
-     * @Then its current variant should be named :variantName
-     */
+    #[Then('its current variant should be named :variantName')]
     public function itsCurrentVariantShouldBeNamed(string $variantName): void
     {
         $response = $this->client->getLastResponse();
@@ -516,25 +434,19 @@ final class ProductContext implements Context
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $variantName));
     }
 
-    /**
-     * @Then I should see empty list of products
-     */
+    #[Then('I should see empty list of products')]
     public function iShouldSeeEmptyListOfProducts(): void
     {
         Assert::same($this->responseChecker->countTotalCollectionItems($this->client->getLastResponse()), 0);
     }
 
-    /**
-     * @Then I should see :count products in the list
-     */
+    #[Then('I should see :count products in the list')]
     public function iShouldSeeProductsInTheList(int $count): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
-     */
+    #[Then('they should have order like :firstProductName, :secondProductName and :thirdProductName')]
     public function theyShouldHaveOrderLikeAnd(string ...$productNames): void
     {
         $productNamesFromResponse = new ArrayCollection();
@@ -548,9 +460,7 @@ final class ProductContext implements Context
         }
     }
 
-    /**
-     * @Then /^the product price should be ("[^"]+")$/
-     */
+    #[Then('/^the product price should be ("[^"]+")$/')]
     public function theProductPriceShouldBe(int $price): void
     {
         $defaultVariant = $this->responseChecker->getValue($this->client->getLastResponse(), 'defaultVariantData');
@@ -558,9 +468,7 @@ final class ProductContext implements Context
         Assert::same($defaultVariant['price'], $price);
     }
 
-    /**
-     * @Then I should see the product description :description
-     */
+    #[Then('I should see the product description :description')]
     public function iShouldSeeTheProductDescription(string $description): void
     {
         Assert::same(
@@ -569,9 +477,7 @@ final class ProductContext implements Context
         );
     }
 
-    /**
-     * @Then /^the visitor should(?:| still) see ("[^"]+") as the (price|original price) of the ("[^"]+" product) in the ("[^"]+" channel)$/
-     */
+    #[Then('/^the visitor should(?:| still) see ("[^"]+") as the (price|original price) of the ("[^"]+" product) in the ("[^"]+" channel)$/')]
     public function theVisitorShouldSeeAsThePriceOfTheProductInTheChannel(
         int $price,
         string $priceType,
@@ -590,25 +496,19 @@ final class ProductContext implements Context
         ));
     }
 
-    /**
-     * @Then I should see a main image
-     */
+    #[Then('I should see a main image')]
     public function iShouldSeeAMainImage(): void
     {
         Assert::true($this->hasProductWithMainImage());
     }
 
-    /**
-     * @Then /^I should not be able to select the "([^"]+)" ([^\s]+) option value$/
-     */
+    #[Then('/^I should not be able to select the "([^"]+)" ([^\s]+) option value$/')]
     public function iShouldNotBeAbleToSelectTheOptionValue(string $optionValueValue, string $optionName): void
     {
         Assert::false($this->hasProductOptionWithNameAndValue($optionName, $optionValueValue));
     }
 
-    /**
-     * @Then /^I should be able to select the "([^"]+)" and "([^"]+)" ([^\s]+) option values$/
-     */
+    #[Then('/^I should be able to select the "([^"]+)" and "([^"]+)" ([^\s]+) option values$/')]
     public function iShouldBeAbleToSelectTheAndColorOptionValues(
         string $optionValueValue1,
         string $optionValueValue2,
@@ -618,9 +518,7 @@ final class ProductContext implements Context
         Assert::true($this->hasProductOptionWithNameAndValue($optionName, $optionValueValue2));
     }
 
-    /**
-     * @Then I should be able to select between :count variants
-     */
+    #[Then('I should be able to select between :count variants')]
     public function iShouldBeAbleToSelectBetweenVariants(int $count): void
     {
         $response = $this->client->getLastResponse();
@@ -629,9 +527,7 @@ final class ProductContext implements Context
         Assert::count($variants, $count);
     }
 
-    /**
-     * @Then I should not be able to select the :productVariantName variant
-     */
+    #[Then('I should not be able to select the :productVariantName variant')]
     public function iShouldNotBeAbleToSelectTheVariant(string $productVariantName): void
     {
         $response = $this->client->getLastResponse();
@@ -640,33 +536,25 @@ final class ProductContext implements Context
         Assert::false($this->productHasProductVariantWithName($variants, $productVariantName));
     }
 
-    /**
-     * @Then /^I should(?:| also) see the product association "([^"]+)" with (products "[^"]+" and "[^"]+")$/
-     */
+    #[Then('/^I should(?:| also) see the product association "([^"]+)" with (products "[^"]+" and "[^"]+")$/')]
     public function iShouldSeeTheProductAssociationWithProductsAnd(string $productAssociationName, array $products): void
     {
         Assert::true($this->isProductAssociationWithProductsAvailable($productAssociationName, $products));
     }
 
-    /**
-     * @Then /^I should(?:| also) see the product association "([^"]+)" with (product "[^"]+")$/
-     */
+    #[Then('/^I should(?:| also) see the product association "([^"]+)" with (product "[^"]+")$/')]
     public function iShouldSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void
     {
         Assert::true($this->isProductAssociationWithProductsAvailable($productAssociationName, [$product]));
     }
 
-    /**
-     * @Then /^I should(?:| also) not see the product association "([^"]+)" with (product "[^"]+")$/
-     */
+    #[Then('/^I should(?:| also) not see the product association "([^"]+)" with (product "[^"]+")$/')]
     public function iShouldNotSeeTheProductAssociationWithProduct(string $productAssociationName, ProductInterface $product): void
     {
         Assert::false($this->isProductAssociationWithProductsAvailable($productAssociationName, [$product]));
     }
 
-    /**
-     * @Then /^I should not see the product (association "([^"]+)")$/
-     */
+    #[Then('/^I should not see the product (association "([^"]+)")$/')]
     public function iShouldNotSeeTheProductAssociation(ProductAssociationTypeInterface $productAssociationType): void
     {
         $productAssociationTypeIri = $this->iriConverter->getIriFromResource($productAssociationType);
@@ -685,9 +573,7 @@ final class ProductContext implements Context
         }
     }
 
-    /**
-     * @Then I should not see information about its lowest price
-     */
+    #[Then('I should not see information about its lowest price')]
     public function iShouldNotSeeInformationAboutItsLowestPrice(): void
     {
         $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
@@ -697,9 +583,7 @@ final class ProductContext implements Context
         Assert::same($variant['lowestPriceBeforeDiscount'], null);
     }
 
-    /**
-     * @Then /^I should see ("[^"]+") as its lowest price before the discount$/
-     */
+    #[Then('/^I should see ("[^"]+") as its lowest price before the discount$/')]
     public function iShouldSeeAsItsLowestPriceBeforeTheDiscount(int $lowestPriceBeforeDiscount): void
     {
         $product = $this->responseChecker->getResponseContent($this->client->getLastResponse());
@@ -709,17 +593,13 @@ final class ProductContext implements Context
         Assert::same($variant['lowestPriceBeforeDiscount'], $lowestPriceBeforeDiscount);
     }
 
-    /**
-     * @Then I should be informed that the product does not exist
-     */
+    #[Then('I should be informed that the product does not exist')]
     public function iShouldBeInformedThatTheProductDoesNotExist(): void
     {
         Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);
     }
 
-    /**
-     * @Then /^I should be informed that the taxon does not exist$/
-     */
+    #[Then('/^I should be informed that the taxon does not exist$/')]
     public function iShouldBeInformedThatTheTaxonDoesNotExist(): void
     {
         Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_NOT_FOUND);

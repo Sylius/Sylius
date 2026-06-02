@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
+use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 
 final class NotificationContext implements Context
 {
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotified()
     {
         // Not applicable in the domain scope

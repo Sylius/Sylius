@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -31,9 +32,7 @@ final readonly class ThemeContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has :themeName theme
-     */
+    #[Given('the store has :themeName theme')]
     public function storeHasTheme(string $themeName): void
     {
         $this->testThemeConfigurationManager->add([
@@ -43,9 +42,7 @@ final readonly class ThemeContext implements Context
         $this->sharedStorage->set('theme', $this->themeRepository->findOneByName($themeName));
     }
 
-    /**
-     * @Given channel :channel uses :theme theme
-     */
+    #[Given('channel :channel uses :theme theme')]
     public function channelUsesTheme(ChannelInterface $channel, ThemeInterface $theme): void
     {
         $channel->setThemeName($theme->getName());
@@ -57,9 +54,7 @@ final readonly class ThemeContext implements Context
         $this->sharedStorage->set('theme', $theme);
     }
 
-    /**
-     * @Given channel :channel does not use any theme
-     */
+    #[Given('channel :channel does not use any theme')]
     public function channelDoesNotUseAnyTheme(ChannelInterface $channel): void
     {
         $channel->setThemeName(null);
@@ -69,17 +64,13 @@ final readonly class ThemeContext implements Context
         $this->sharedStorage->set('channel', $channel);
     }
 
-    /**
-     * @Given /^(this theme) changes homepage template contents to "([^"]+)"$/
-     */
+    #[Given('/^(this theme) changes homepage template contents to "([^"]+)"$/')]
     public function themeChangesHomepageTemplateContents(ThemeInterface $theme, string $contents): void
     {
         $this->changeTemplateContents('/templates/bundles/SyliusShopBundle/homepage/index.html.twig', $theme, $contents);
     }
 
-    /**
-     * @Given /^(this theme) changes plugin main template's content to "([^"]+)"$/
-     */
+    #[Given('/^(this theme) changes plugin main template\'s content to "([^"]+)"$/')]
     public function themeChangesPluginMainTemplateContent(ThemeInterface $theme, string $content): void
     {
         $this->changeTemplateContents('/templates/bundles/SyliusTestPlugin/main.html.twig', $theme, $content);
