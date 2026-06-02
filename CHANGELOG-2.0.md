@@ -1,5 +1,13 @@
 # CHANGELOG FOR `2.0.X`
 
+## v2.0.18 (2026-06-02)
+
+#### Details
+
+- [#19035](https://github.com/Sylius/Sylius/pull/19035) [2.0] Check payment request ownership ([@TheMilek](https://github.com/TheMilek))
+- [#19036](https://github.com/Sylius/Sylius/pull/19036) [2.0] Prevent stale cart LiveComponents from mutating completed orders ([@TheMilek](https://github.com/TheMilek))
+- [#19037](https://github.com/Sylius/Sylius/pull/19037) [2.0][API] Enforce channel eligibility check when changing payment method via account endpoint ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.0.15 (2025-12-18)
 
 #### Details
