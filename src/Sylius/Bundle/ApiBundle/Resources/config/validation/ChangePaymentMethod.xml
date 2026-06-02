@@ -21,5 +21,10 @@
                 <value>sylius</value>
             </option>
         </constraint>
+        <constraint name="Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibility">
+            <option name="groups">
+                <value>sylius</value>
+            </option>
+        </constraint>
     </class>
 </constraint-mapping>
