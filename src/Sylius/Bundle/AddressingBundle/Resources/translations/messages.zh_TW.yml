@@ -37,5 +37,6 @@ sylius:
                 all: 全部
             select: 請選擇
             select_scope: 選擇範圍
+            priority: 優先順序
         zone_member:
             select: 請選擇

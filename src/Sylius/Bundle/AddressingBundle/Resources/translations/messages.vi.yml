@@ -38,5 +38,6 @@ sylius:
                 all: Tất cả
             select: Chọn
             select_scope: Chọn phạm vi
+            priority: Ưu tiên
         zone_member:
             select: Chọn

@@ -15,7 +15,9 @@ import './scripts/fullscreen';
 import './scripts/menu-search';
 import './scripts/spotlight';
 import './scripts/statistics_chart';
+
 import './scripts/sticky-header';
+import './scripts/modal-portal';
 
 import './scripts/autocomplete-xss-protection';
 import './scripts/bootstrap';

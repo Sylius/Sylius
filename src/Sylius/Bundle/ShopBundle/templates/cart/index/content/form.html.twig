@@ -11,7 +11,6 @@
         {{ form_start(form, {'action': path('sylius_shop_cart_checkout'), 'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
         <input type="hidden" name="_method" value="PATCH"/>
         {{ form_errors(form) }}
-        {{ form_widget(form._token) }}
 
         {% hook 'form' with { form }  %}
 

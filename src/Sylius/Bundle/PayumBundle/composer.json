@@ -42,7 +42,7 @@
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpunit/phpunit": "^11.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.2"
+        "symfony/dependency-injection": "^6.4.1 || ^7.4"
     },
     "config": {
         "allow-plugins": {
@@ -51,10 +51,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.2-dev"
         },
         "symfony": {
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {

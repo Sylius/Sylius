@@ -21,7 +21,7 @@
             id="sylius_admin.twig.component.taxon.delete"
             class="Sylius\Bundle\AdminBundle\Twig\Component\Taxon\DeleteComponent"
         >
-            <argument type="service" id="security.csrf.token_manager" />
+            <argument type="service" id="security.csrf.token_manager" on-invalid="null" />
 
             <call method="setLiveResponder">
                 <argument type="service" id="ux.live_component.live_responder"/>

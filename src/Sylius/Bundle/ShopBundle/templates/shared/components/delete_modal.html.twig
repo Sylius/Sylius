@@ -13,7 +13,9 @@
 {% block footer %}
     <form action="{{ path }}" method="post" {{ form_attr }}>
         <input type="hidden" name="_method" value="DELETE">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token(id) }}" />
+        {% if sylius_csrf_protection_enabled() %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token(id) }}" />
+        {% endif %}
 
         <button type="button" class="btn btn-sm" data-bs-dismiss="modal">
             {{ 'sylius.ui.cancel'|trans }}

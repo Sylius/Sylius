@@ -24,6 +24,7 @@
             <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.address" />
+            <argument type="tagged_iterator" tag="sylius_shop.modifier.address_form_values" />
 
             <tag name="sylius.live_component.shop" key="sylius_shop:checkout:address:form" />
         </service>
