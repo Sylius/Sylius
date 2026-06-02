@@ -280,5 +280,24 @@
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
             <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
+
+        <service
+            id="sylius_api.doctrine.orm.query_extension.shop.payment_request.shop_user_based"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\PaymentRequest\ShopUserBasedExtension"
+        >
+            <argument type="service" id="sylius.section_resolver.uri_based" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
+            <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
+
+        <service
+            id="sylius_api.doctrine.orm.query_extension.shop.payment_request.visitor_based"
+            class="Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\PaymentRequest\VisitorBasedExtension"
+        >
+            <argument type="service" id="sylius.section_resolver.uri_based" />
+            <argument type="service" id="sylius_api.context.user.token_based" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
+        </service>
     </services>
 </container>
