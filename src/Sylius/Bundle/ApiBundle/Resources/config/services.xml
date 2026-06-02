@@ -36,6 +36,7 @@
         <service id="sylius_api.changer.payment_method" class="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger">
             <argument type="service" id="sylius.repository.payment" />
             <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.resolver.payment_methods" />
         </service>
         <service id="Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface" alias="sylius_api.changer.payment_method" />
 

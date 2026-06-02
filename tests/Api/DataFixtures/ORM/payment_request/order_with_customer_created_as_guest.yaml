@@ -5,7 +5,7 @@ Sylius\Component\Core\Model\Payment:
         state: "processing"
         amount: 1000
         currencyCode: "USD"
-    
+
 Sylius\Component\Core\Model\Order:
     order:
         channel: "@channel_web"
@@ -15,5 +15,4 @@ Sylius\Component\Core\Model\Order:
         paymentState: "awaiting_payment"
         shippingState: "ready"
         tokenValue: "token"
-        __calls:
-            - setCustomerWithAuthorization: ["@customer_oliver"]
+        customer: "@customer_oliver"
