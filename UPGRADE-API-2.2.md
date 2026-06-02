@@ -49,3 +49,22 @@ Additionally, the redundant `code` field has been removed from the error respons
 - If your API client reads `response.data.code`, use `response.status` (HTTP header) instead
 
 **References:** RFC 9110 (400 = syntactic errors, 422 = semantic/validation errors)
+
+
+## API Platform resource classes as container parameters
+
+The following API Platform resource classes are now defined as container parameters, allowing you to override them:
+
+| Parameter | Default class |
+|---|---|
+| `sylius_api.command.account.reset_password.class` | `Sylius\Bundle\ApiBundle\Command\Account\ResetPassword` |
+| `sylius_api.command.account.verify_shop_user.class` | `Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser` |
+| `sylius_api.command.admin.account.reset_password.class` | `Sylius\Bundle\ApiBundle\Command\Admin\Account\ResetPassword` |
+| `sylius_api.command.send_contact_request.class` | `Sylius\Bundle\ApiBundle\Command\SendContactRequest` |
+
+To override a class, define the parameter in your configuration:
+
+```yaml
+parameters:
+    sylius_api.command.account.reset_password.class: App\Api\Command\CustomResetPassword
+```

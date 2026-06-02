@@ -1,6 +1,6 @@
-{% set resources = hookable_metadata.context.resources %}
+{% set resources = hookable_metadata.context.resources|default(null) %}
 
-{% if resources.data|length == 0 %}
+{% if resources.data is defined and resources.data|length == 0 %}
     <div class="card">
         <div class="empty">
             {% hook 'no_results' %}

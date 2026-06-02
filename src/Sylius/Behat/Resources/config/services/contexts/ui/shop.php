@@ -35,6 +35,7 @@ use Sylius\Behat\Context\Ui\Shop\ProductAttributeContext;
 use Sylius\Behat\Context\Ui\Shop\ProductContext;
 use Sylius\Behat\Context\Ui\Shop\ProductReviewContext;
 use Sylius\Behat\Context\Ui\Shop\RegistrationContext;
+use Sylius\Behat\Context\Ui\Shop\StaleCartLiveComponentContext;
 use Sylius\Behat\Element\Product\ShowPage\LowestPriceInformationElementInterface;
 use Sylius\Behat\Element\Shop\CartWidgetElementInterface;
 use Sylius\Behat\Element\Shop\CheckoutSubtotalElementInterface;
@@ -186,6 +187,16 @@ return static function (ContainerConfigurator $container) {
             service('sylius.behat.notification_checker.shop'),
             service(SessionManagerInterface::class),
             service('sylius.behat.element.browser'),
+        ])
+    ;
+
+    $services
+        ->set('sylius.behat.context.ui.shop.stale_cart_live_component', StaleCartLiveComponentContext::class)
+        ->args([
+            service('behat.mink'),
+            service('sylius.behat.shared_storage'),
+            service('sylius.repository.order'),
+            service('doctrine.orm.entity_manager'),
         ])
     ;
 

@@ -19,6 +19,10 @@ use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger;
 use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker;
 use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface;
+use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
+use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
+use Sylius\Bundle\ApiBundle\Command\Admin\Account\ResetPassword as AdminResetPassword;
+use Sylius\Bundle\ApiBundle\Command\SendContactRequest;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener;
@@ -39,6 +43,10 @@ return static function (ContainerConfigurator $container) {
     $parameters = $container->parameters();
 
     $parameters->set('sylius.model.address.interface', AddressInterface::class);
+    $parameters->set('sylius_api.command.account.reset_password.class', ResetPassword::class);
+    $parameters->set('sylius_api.command.account.verify_shop_user.class', VerifyShopUser::class);
+    $parameters->set('sylius_api.command.send_contact_request.class', SendContactRequest::class);
+    $parameters->set('sylius_api.command.admin.account.reset_password.class', AdminResetPassword::class);
 
     $services
         ->set('sylius_api.extractor.property_info.empty_property_list', EmptyPropertyListExtractor::class)
@@ -50,6 +58,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('sylius.repository.payment'),
             service('sylius.repository.payment_method'),
+            service('sylius.resolver.payment_methods'),
         ])
     ;
     $services->alias(PaymentMethodChangerInterface::class, 'sylius_api.changer.payment_method');

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ProductBundle\Doctrine\ORM;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
@@ -28,8 +29,8 @@ class ProductAssociationTypeRepository extends EntityRepository implements Produ
     public function createListQueryBuilder(string $locale): QueryBuilder
     {
         return $this->createQueryBuilder('o')
-            ->innerJoin('o.translations', 'translation')
-            ->andWhere('translation.locale = :locale')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation', Join::WITH, 'translation.locale = :locale')
             ->setParameter('locale', $locale)
         ;
     }

@@ -33,6 +33,8 @@ sylius:
                 choose: Choose an option
                 min: Min entries
                 max: Max entries
+                add_choice: Add
+                delete_choice: Delete
             text:
                 min: Min length
                 max: Max length

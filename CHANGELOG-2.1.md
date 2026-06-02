@@ -1,5 +1,42 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.15 (2026-06-02)
+
+#### Details
+
+- [#19038](https://github.com/Sylius/Sylius/pull/19038) [2.1] Prevent stale cart LiveComponents from mutating completed orders ([@TheMilek](https://github.com/TheMilek))
+- [#19039](https://github.com/Sylius/Sylius/pull/19039) [2.1][API] Enforce channel eligibility check when changing payment method via account endpoint ([@TheMilek](https://github.com/TheMilek))
+- [#19040](https://github.com/Sylius/Sylius/pull/19040) [2.1] Check payment request ownership ([@TheMilek](https://github.com/TheMilek))
+
+## v2.1.14 (2026-04-10)
+
+#### Details
+
+- [#18579](https://github.com/Sylius/Sylius/pull/18579) Fix problem with empty taxon product index ([@tomkalon](https://github.com/tomkalon))
+- [#18933](https://github.com/Sylius/Sylius/pull/18933) fix: add default filter to breadcrumbs configuration title to prevent ScalarDataBag exception ([@camilleislasse](https://github.com/camilleislasse))
+- [#18943](https://github.com/Sylius/Sylius/pull/18943) Fix build after APIPlatform 4.3.2 release ([@TheMilek](https://github.com/TheMilek))
+- [#18941](https://github.com/Sylius/Sylius/pull/18941) Add payment enabled in channel validation ([@marekrzytki](https://github.com/marekrzytki))
+- [#18926](https://github.com/Sylius/Sylius/pull/18926) [BUGFIX] Allow updating provinceName when provinceCode is null in API ([@rust-le](https://github.com/rust-le))
+- [#18953](https://github.com/Sylius/Sylius/pull/18953) [BUGFIX] Make mailer services public to allow usage in state machine callbacks ([@rust-le](https://github.com/rust-le))
+- [#18961](https://github.com/Sylius/Sylius/pull/18961) Resolve flash alert correctly without breaking translation ([@TheMilek](https://github.com/TheMilek))
+- [#18940](https://github.com/Sylius/Sylius/pull/18940) Restore missing page titles for admin resource show pages ([@marekrzytki](https://github.com/marekrzytki))
+- [#18922](https://github.com/Sylius/Sylius/pull/18922) Unified name translations handling in admin grid index ([@pbalcerzak](https://github.com/pbalcerzak))
+- [#18965](https://github.com/Sylius/Sylius/pull/18965) Allow choosing different payment method with skip payment step when it gets disabled ([@TheMilek](https://github.com/TheMilek))
+- [#18969](https://github.com/Sylius/Sylius/pull/18969) Add missing status code mapping for OrderItemNotFoundException ([@marekrzytki](https://github.com/marekrzytki))
+- [#18970](https://github.com/Sylius/Sylius/pull/18970) Add email validation constraints to cart update ([@marekrzytki](https://github.com/marekrzytki))
+- [#18972](https://github.com/Sylius/Sylius/pull/18972) Fix admin templates ([@loic425](https://github.com/loic425))
+- [#18974](https://github.com/Sylius/Sylius/pull/18974) Unify Tests directory with tests ([@TheMilek](https://github.com/TheMilek))
+
+## v2.1.13 (2026-03-18)
+
+#### Details
+
+- [#18904](https://github.com/Sylius/Sylius/pull/18904) [BUGFIX] remove redundant `object` from PHPDoc union types ([@rust-le](https://github.com/rust-le))
+- [#18899](https://github.com/Sylius/Sylius/pull/18899) [CS][DX] Refactor
+- [#18895](https://github.com/Sylius/Sylius/pull/18895) [Admin] Fix product taxon grid `enabled` field always showing `true` ([@serhiilabs](https://github.com/serhiilabs))
+- [#18911](https://github.com/Sylius/Sylius/pull/18911) [BUGFIX] fix build errors ([@rust-le](https://github.com/rust-le))
+- [#18920](https://github.com/Sylius/Sylius/pull/18920) Telemetry improvements 2.1 ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.1.12 (2026-03-09)
 
 #### Details

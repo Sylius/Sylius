@@ -113,6 +113,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.section_resolver.uri_based'),
             service('sylius.repository.payment_request'),
             service('sylius.checker.finalized_payment_request'),
+            service('sylius_api.context.user.token_based'),
         ])
         ->tag('api_platform.state_provider', ['priority' => 10])
     ;
