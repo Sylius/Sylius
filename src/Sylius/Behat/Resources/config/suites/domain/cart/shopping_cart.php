@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('domain_shopping_cart'))
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('domain_shopping_cart'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
             )
@@ -35,7 +37,7 @@ return (new Config())
             ->withContexts(
                 'sylius.behat.context.domain.cart',
             )
-            ->withFilter(new TagFilter('@shopping_cart&&@domain'))
-        )
+            ->withFilter(new TagFilter('@shopping_cart&&@domain')),
+        ),
     )
 ;

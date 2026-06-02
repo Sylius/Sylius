@@ -27,9 +27,9 @@ use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\PaymentMethodsDataProvi
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Business\ShippingMethodsDataProvider;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Plugins\InstalledPluginsDataProvider;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\DatabasePlatformDataProvider;
-use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\EnvironmentDataProvider;
 use Sylius\Bundle\CoreBundle\Telemetry\Provider\Technical\VersionDataProvider;
+use Sylius\Bundle\CoreBundle\Telemetry\Query\TimeoutRunner;
 use Sylius\Bundle\CoreBundle\Telemetry\Sender\TelemetrySender;
 use Sylius\Component\Core\Telemetry\Cache\TelemetryCache;
 use Sylius\Component\Core\Telemetry\Cache\TelemetryCacheInterface;

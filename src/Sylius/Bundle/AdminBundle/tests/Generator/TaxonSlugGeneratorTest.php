@@ -25,7 +25,7 @@ final class TaxonSlugGeneratorTest extends TestCase
 {
     private BaseTaxonSlugGeneratorInterface&MockObject $baseSlugGenerator;
 
-    private SluggerInterface&MockObject $slugger;
+    private MockObject&SluggerInterface $slugger;
 
     private TaxonSlugGenerator $slugGenerator;
 

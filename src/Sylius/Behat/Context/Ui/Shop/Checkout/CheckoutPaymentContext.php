@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
-use Behat\Step\Given;
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\Given;
+use Behat\Step\Then;
 use Behat\Step\When;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;

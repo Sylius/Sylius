@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('domain_managing_promotion_coupons'))
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('domain_managing_promotion_coupons'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
             )
@@ -46,7 +48,7 @@ return (new Config())
                 'sylius.behat.context.domain.notification',
                 'sylius.behat.context.domain.security',
             )
-            ->withFilter(new TagFilter('@managing_promotion_coupons&&@domain'))
-        )
+            ->withFilter(new TagFilter('@managing_promotion_coupons&&@domain')),
+        ),
     )
 ;

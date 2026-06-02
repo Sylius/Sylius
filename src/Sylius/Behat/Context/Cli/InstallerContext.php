@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Cli;
 
-use Behat\Step\When;
+use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Behat\Step\Then;
-use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand;
 use Sylius\Bundle\CoreBundle\Console\Command\SetupCommand;

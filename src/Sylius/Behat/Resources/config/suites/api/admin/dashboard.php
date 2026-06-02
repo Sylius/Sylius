@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_dashboard', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_dashboard', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -53,7 +55,7 @@ return (new Config())
                 'sylius.behat.context.api.admin.login',
                 'sylius.behat.context.api.debug',
             )
-            ->withFilter(new TagFilter('@admin_dashboard&&@api'))
-        )
+            ->withFilter(new TagFilter('@admin_dashboard&&@api')),
+        ),
     )
 ;

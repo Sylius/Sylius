@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Sylius\Behat\Page\Admin\Administrator\CreatePageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Hybrid\Setup;
 
-use Behat\Step\Given;
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Sylius\Behat\Context\Setup\ShopSecurityContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 

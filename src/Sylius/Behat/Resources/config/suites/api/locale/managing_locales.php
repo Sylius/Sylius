@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_managing_locales', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_managing_locales', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -39,7 +41,7 @@ return (new Config())
                 'sylius.behat.context.api.admin.managing_locales',
                 'sylius.behat.context.api.debug',
             )
-            ->withFilter(new TagFilter('@managing_locales&&@api'))
-        )
+            ->withFilter(new TagFilter('@managing_locales&&@api')),
+        ),
     )
 ;

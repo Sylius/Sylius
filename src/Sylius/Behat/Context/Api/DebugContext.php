@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api;
 
-use Behat\Hook\AfterStep;
-use Behat\Hook\AfterScenario;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Hook\AfterScenario;
+use Behat\Hook\AfterStep;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\ConsoleOutput;

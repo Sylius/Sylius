@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_managing_exchange_rates', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_managing_exchange_rates', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -41,7 +43,7 @@ return (new Config())
                 'sylius.behat.context.api.admin.save',
                 'sylius.behat.context.api.debug',
             )
-            ->withFilter(new TagFilter('@managing_exchange_rates&&@api'))
-        )
+            ->withFilter(new TagFilter('@managing_exchange_rates&&@api')),
+        ),
     )
 ;

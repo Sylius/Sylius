@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_customer_requesting_contact', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_customer_requesting_contact', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -38,7 +40,7 @@ return (new Config())
                 'sylius.behat.context.api.email',
                 'sylius.behat.context.api.shop.contact',
             )
-            ->withFilter(new TagFilter('@requesting_contact&&@api'))
-        )
+            ->withFilter(new TagFilter('@requesting_contact&&@api')),
+        ),
     )
 ;

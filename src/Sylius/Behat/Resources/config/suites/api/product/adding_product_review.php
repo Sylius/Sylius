@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_adding_product_review', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_adding_product_review', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -44,7 +46,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.product',
                 'sylius.behat.context.api.shop.product_review',
             )
-            ->withFilter(new TagFilter('@adding_product_review&&@api'))
-        )
+            ->withFilter(new TagFilter('@adding_product_review&&@api')),
+        ),
     )
 ;

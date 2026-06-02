@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin\Helper;
 
-use Behat\Step\When;
 use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Behaviour\SpecifiesItsField;
 use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;

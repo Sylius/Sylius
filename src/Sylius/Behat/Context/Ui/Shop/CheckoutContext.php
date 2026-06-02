@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop;
 
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Behat\Step\Then;
 use Behat\Step\When;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Context\Ui\Shop\Checkout\CheckoutAddressingContext;

@@ -82,7 +82,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.modifier.order'),
             service('sylius.factory.order_item'),
             service('sylius.modifier.order_item_quantity'),
-            service(UserContextInterface::class)
+            service(UserContextInterface::class),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;

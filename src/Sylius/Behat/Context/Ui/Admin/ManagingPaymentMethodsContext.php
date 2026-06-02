@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
-use Behat\Step\When;
-use Behat\Step\Then;
-use Behat\Step\Given;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
@@ -141,7 +141,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     *
      * @throws ElementNotFoundException
      */
     #[When('I add it')]
@@ -245,7 +244,6 @@ final readonly class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     *
      * @throws ElementNotFoundException
      */
     #[Then('I should be notified that :element is required')]

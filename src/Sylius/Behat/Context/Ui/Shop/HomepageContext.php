@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop;
 
-use Behat\Step\When;
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Element\Shop\MenuElementInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Webmozart\Assert\Assert;

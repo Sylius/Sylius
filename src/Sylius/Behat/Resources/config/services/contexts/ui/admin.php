@@ -573,7 +573,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.behat.element.admin.product.translations_form'),
             service('sylius.behat.element.admin.product.channel_pricing_form'),
             service('sylius.behat.element.admin.product.taxonomy_form'),
-            service('slugger')
+            service('slugger'),
         ])
     ;
 

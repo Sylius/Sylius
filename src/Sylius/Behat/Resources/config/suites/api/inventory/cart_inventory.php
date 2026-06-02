@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_cart_inventory', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_cart_inventory', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -41,7 +43,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.cart',
                 'sylius.behat.context.api.shop.product',
             )
-            ->withFilter(new TagFilter('@cart_inventory&&@api'))
-        )
+            ->withFilter(new TagFilter('@cart_inventory&&@api')),
+        ),
     )
 ;
