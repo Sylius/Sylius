@@ -10,6 +10,8 @@
     "createdAt": "@date@",
     "updatedAt": "@date@",
     "archivedAt": "@date@",
+    "minDeliveryTimeDays": null,
+    "maxDeliveryTimeDays": null,
     "shippingChargesCalculatorConfiguration": {
         "WEB": {
             "amount": 500

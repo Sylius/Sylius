@@ -5,7 +5,18 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.zone.class%"
+            sorting:
+                priority: desc
             fields:
+                priority:
+                    type: twig
+                    label: sylius.ui.priority
+                    sortable: ~
+                    options:
+                        template: "@SyliusAdmin/zone/grid/field/priority.html.twig"
+                        vars:
+                            th_class: "w-1 text-center"
+                            td_class: "text-center"
                 name:
                     type: twig
                     label: sylius.ui.name

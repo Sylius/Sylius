@@ -22,6 +22,8 @@
     "createdAt": "@date@",
     "updatedAt": "@date@",
     "archivedAt": null,
+    "minDeliveryTimeDays": null,
+    "maxDeliveryTimeDays": null,
     "enabled": true,
     "translations": {
         "en_US": {

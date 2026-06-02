@@ -599,6 +599,79 @@ final class ShippingMethodsTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_creates_a_shipping_method_with_delivery_time_days(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'country.yaml',
+            'zones.yaml',
+        ]);
+
+        $this->requestPost(
+            uri: '/api/v2/admin/shipping-methods',
+            body: [
+                'name' => 'UPS',
+                'code' => 'UPS',
+                'shippingChargesCalculator' => 'flat_rate',
+                'shippingChargesCalculatorConfiguration' => [
+                    'WEB' => [
+                        'amount' => 500,
+                    ],
+                    'MOBILE' => [
+                        'amount' => 500,
+                    ],
+                ],
+                'zone' => '/api/v2/admin/zones/EU',
+                'channels' => [
+                    '/api/v2/admin/channels/WEB',
+                ],
+                'minDeliveryTimeDays' => 3,
+                'maxDeliveryTimeDays' => 7,
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'UPS',
+                        'description' => 'This is a UPS shipping method.',
+                    ],
+                ],
+            ],
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/shipping_method/post_shipping_method_with_delivery_time_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    #[Test]
+    public function it_updates_delivery_time_days_of_a_shipping_method(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+        ]);
+
+        /** @var ShippingMethodInterface $shippingMethod */
+        $shippingMethod = $fixtures['shipping_method_ups'];
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/admin/shipping-methods/%s', $shippingMethod->getCode()),
+            body: [
+                'minDeliveryTimeDays' => 1,
+                'maxDeliveryTimeDays' => 5,
+            ],
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/shipping_method/update_shipping_method_delivery_time_response',
+        );
+    }
+
+    #[Test]
     public function it_archives_a_shipping_method(): void
     {
         $this->setUpDefaultPatchHeaders();

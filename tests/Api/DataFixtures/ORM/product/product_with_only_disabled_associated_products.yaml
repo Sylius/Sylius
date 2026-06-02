@@ -1,0 +1,63 @@
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: 'WEB'
+        name: 'Web Channel'
+        hostname: 'localhost'
+        description: 'Lorem ipsum'
+        baseCurrency: '@currency_usd'
+        defaultLocale: '@locale_en'
+        locales: ['@locale_en']
+        color: 'black'
+        enabled: true
+        taxCalculationStrategy: 'order_items_based'
+
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: 'USD'
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en:
+        code: 'en_US'
+
+Sylius\Component\Core\Model\Product:
+    product_kettle:
+        code: 'KETTLE'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+    product_disabled_hat:
+        code: 'DISABLED_HAT'
+        channels: ['@channel_web']
+        currentLocale: 'en_US'
+        enabled: false
+
+Sylius\Component\Core\Model\ProductTranslation:
+    product_translation_kettle_en_US:
+        slug: 'kettle'
+        locale: 'en_US'
+        name: 'Kettle'
+        description: 'A nice kettle'
+        shortDescription: 'Kettle'
+        translatable: '@product_kettle'
+    product_translation_disabled_hat_en_US:
+        slug: 'disabled-hat'
+        locale: 'en_US'
+        name: 'Disabled Hat'
+        description: 'A hat that is not enabled'
+        shortDescription: 'Disabled Hat'
+        translatable: '@product_disabled_hat'
+
+Sylius\Component\Product\Model\ProductAssociationType:
+    similar_products_type:
+        code: 'similar_products'
+
+Sylius\Component\Product\Model\ProductAssociationTypeTranslation:
+    similar_products_type_translation_en_US:
+        name: 'Similar products'
+        locale: 'en_US'
+        translatable: '@similar_products_type'
+
+Sylius\Component\Product\Model\ProductAssociation:
+    kettle_dead_association:
+        type: '@similar_products_type'
+        owner: '@product_kettle'
+        associatedProducts: ['@product_disabled_hat']

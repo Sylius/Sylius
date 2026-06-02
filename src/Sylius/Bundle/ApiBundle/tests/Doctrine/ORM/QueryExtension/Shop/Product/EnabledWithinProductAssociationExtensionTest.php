@@ -82,7 +82,7 @@ final class EnabledWithinProductAssociationExtensionTest extends TestCase
         );
     }
 
-    public function test_it_filters_products_by_available_associations(): void
+    public function test_it_eager_loads_only_enabled_associated_products(): void
     {
         $this->sectionProvider->method('getSection')->willReturn(new ShopApiSection());
 
@@ -147,10 +147,8 @@ final class EnabledWithinProductAssociationExtensionTest extends TestCase
             });
 
         $this->queryBuilder
-            ->expects(self::once())
-            ->method('andWhere')
-            ->with('o.associations IS EMPTY OR associatedProduct.id IS NOT NULL')
-            ->willReturnSelf();
+            ->expects(self::never())
+            ->method('andWhere');
 
         $this->extension->applyToCollection(
             $this->queryBuilder,

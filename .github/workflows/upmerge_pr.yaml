@@ -15,7 +15,7 @@ jobs:
         runs-on: ubuntu-latest
         if: github.repository == 'Sylius/Sylius'
         name: "Upmerge PR"
-        timeout-minutes: 5
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix:

@@ -45,7 +45,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}"
-        timeout-minutes: 45
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
@@ -132,7 +132,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "UI, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}"
-        timeout-minutes: 45
+        timeout-minutes: 15
         strategy:
             fail-fast: false
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
