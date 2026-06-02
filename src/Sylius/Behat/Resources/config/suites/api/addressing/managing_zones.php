@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_managing_zones', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_managing_zones', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -43,7 +45,7 @@ return (new Config())
                 'sylius.behat.context.api.admin.save',
                 'sylius.behat.context.api.debug',
             )
-            ->withFilter(new TagFilter('@managing_zones&&@api'))
-        )
+            ->withFilter(new TagFilter('@managing_zones&&@api')),
+        ),
     )
 ;

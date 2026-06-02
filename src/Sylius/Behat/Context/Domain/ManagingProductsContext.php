@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
-use Behat\Step\When;
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\DBAL\Exception as DBALException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;

@@ -22,7 +22,7 @@ final readonly class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 {
     public function __construct(
         private BaseTaxonSlugGeneratorInterface $slugGenerator,
-        private ?SluggerInterface $slugger = null
+        private ?SluggerInterface $slugger = null,
     ) {
         if (null === $this->slugger) {
             trigger_deprecation(
@@ -30,7 +30,7 @@ final readonly class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
                 '2.3',
                 'Not passing a "%s" to "%s" is deprecated and will be required in Sylius 3.0.',
                 SluggerInterface::class,
-                self::class
+                self::class,
             );
         }
     }

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin;
 
-use Behat\Step\Given;
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;

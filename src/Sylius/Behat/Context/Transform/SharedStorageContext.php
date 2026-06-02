@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
-use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 

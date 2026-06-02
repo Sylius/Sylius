@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_viewing_product_variants', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_viewing_product_variants', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -43,7 +45,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.product',
                 'sylius.behat.context.api.shop.product_variant',
             )
-            ->withFilter(new TagFilter('@viewing_product_variants&&@api'))
-        )
+            ->withFilter(new TagFilter('@viewing_product_variants&&@api')),
+        ),
     )
 ;

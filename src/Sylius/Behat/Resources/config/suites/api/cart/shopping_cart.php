@@ -18,8 +18,10 @@ use Behat\Config\Suite;
 use Sylius\Behat\Context\Setup\CatalogPromotionContext;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_shopping_cart', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_shopping_cart', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -53,7 +55,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.cart',
                 'sylius.behat.context.api.shop.registration',
             )
-            ->withFilter(new TagFilter('@shopping_cart&&@api'))
-        )
+            ->withFilter(new TagFilter('@shopping_cart&&@api')),
+        ),
     )
 ;

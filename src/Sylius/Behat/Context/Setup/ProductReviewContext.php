@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
-use Behat\Step\Given;
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;

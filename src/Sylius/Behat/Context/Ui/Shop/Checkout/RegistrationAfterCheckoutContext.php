@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;

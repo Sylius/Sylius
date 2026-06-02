@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
-use Behat\Step\When;
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Admin\Product\ChannelPricingsFormElementInterface;
 use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
 use Sylius\Behat\Element\Admin\Product\TranslationsFormElementInterface;
@@ -31,7 +31,7 @@ final readonly class ProductCreationContext implements Context
         private TranslationsFormElementInterface $productTranslationsFormElement,
         private ChannelPricingsFormElementInterface $productChannelPricingsFormElement,
         private TaxonomyFormElementInterface $productTaxonomyFormElement,
-        private SluggerInterface $slugger
+        private SluggerInterface $slugger,
     ) {
     }
 

@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
-use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Order\ShowPageInterface as OrderDetailsPage;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;

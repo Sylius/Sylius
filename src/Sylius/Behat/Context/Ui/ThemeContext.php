@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui;
 
-use Behat\Step\When;
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;

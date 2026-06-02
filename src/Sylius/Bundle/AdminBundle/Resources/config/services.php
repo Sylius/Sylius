@@ -108,7 +108,7 @@ return static function (ContainerConfigurator $container) {
             ->factory([HttpClient::class, 'create'])
             ->args([
                 ['timeout' => 2, 'max_duration' => 2],
-            ])
+            ]),
         ])
         ->public()
     ;
@@ -122,7 +122,7 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius_admin.generator.taxon_slug', TaxonSlugGenerator::class)
         ->args([
             service('sylius.generator.taxon_slug'),
-            service('slugger')
+            service('slugger'),
         ])
     ;
     $services->alias(TaxonSlugGeneratorInterface::class, 'sylius_admin.generator.taxon_slug');

@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_managing_products', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_managing_products', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -73,7 +75,7 @@ return (new Config())
                 'sylius.behat.context.api.admin.translation',
                 'sylius.behat.context.api.debug',
             )
-            ->withFilter(new TagFilter('@managing_products&&@api'))
-        )
+            ->withFilter(new TagFilter('@managing_products&&@api')),
+        ),
     )
 ;

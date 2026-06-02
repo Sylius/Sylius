@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop;
 
-use Behat\Step\Given;
-use Behat\Step\When;
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;

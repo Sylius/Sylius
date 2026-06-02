@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
-use Behat\Step\Given;
-use Behat\Step\When;
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;

@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_viewing_shipping_methods', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_viewing_shipping_methods', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -57,7 +59,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.checkout',
                 'sylius.behat.context.api.shop.checkout.shipping',
             )
-            ->withFilter(new TagFilter('@viewing_shipping_methods&&@api'))
-        )
+            ->withFilter(new TagFilter('@viewing_shipping_methods&&@api')),
+        ),
     )
 ;

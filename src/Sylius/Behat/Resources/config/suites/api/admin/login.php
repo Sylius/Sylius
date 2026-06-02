@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_administrator_login', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_administrator_login', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -41,7 +43,7 @@ return (new Config())
                 'sylius.behat.context.api.debug',
                 'sylius.behat.context.api.email',
             )
-            ->withFilter(new TagFilter('@administrator_login&&@api'))
-        )
+            ->withFilter(new TagFilter('@administrator_login&&@api')),
+        ),
     )
 ;

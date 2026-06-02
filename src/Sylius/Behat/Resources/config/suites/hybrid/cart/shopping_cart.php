@@ -18,8 +18,10 @@ use Behat\Config\Suite;
 use Sylius\Behat\Context\Setup\CatalogPromotionContext;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('hybrid_shopping_cart'))
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('hybrid_shopping_cart'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
                 'sylius.behat.context.hook.guest_cart',
@@ -51,7 +53,7 @@ return (new Config())
                 'sylius.behat.context.hybrid.shop.composite_cart',
                 'sylius.behat.context.hybrid.shop.composite_customer',
             )
-            ->withFilter(new TagFilter('@shopping_cart&&@hybrid'))
-        )
+            ->withFilter(new TagFilter('@shopping_cart&&@hybrid')),
+        ),
     )
 ;

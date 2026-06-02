@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Admin\Helper;
 
-use Behat\Step\When;
 use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
