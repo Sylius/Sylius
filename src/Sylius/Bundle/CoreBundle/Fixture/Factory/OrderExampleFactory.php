@@ -170,6 +170,7 @@ class OrderExampleFactory extends AbstractExampleFactory implements ExampleFacto
             /** @var ProductInterface $product */
             $product = $this->faker->randomElement($products);
             $variant = $this->faker->randomElement($product->getVariants()->toArray());
+            $product->setFallbackLocale($product->getTranslations()->first()->getLocale());
 
             if (array_key_exists($variant->getCode(), $generatedItems)) {
                 /** @var OrderItemInterface $item */
