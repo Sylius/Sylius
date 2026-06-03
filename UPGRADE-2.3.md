@@ -276,23 +276,48 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
      > **Deprecated:** Same as above.
 
-   The `StringInflector::nameToSlug()` method has been **deprecated** and will be removed in Sylius 3.0.
+1. The `StringInflector::nameToSlug()` method has been **deprecated** and will be removed in Sylius 3.0.
 
-2. The `knplabs/gaufrette` and `knplabs/knp-gaufrette-bundle` packages have been removed.
+2. The minimum required **PHP version** has been raised from `^8.2` to `^8.3`. ([#19034](https://github.com/Sylius/Sylius/pull/19034))
+
+   Ensure your environment runs PHP 8.3 or higher before upgrading.
+
+3. The minimum required **PHPUnit version** has been raised from `^11.5` to `^12.5`. ([#19034](https://github.com/Sylius/Sylius/pull/19034))
+
+   If you have custom test suites extending Sylius test infrastructure, review the [PHPUnit 12 migration guide](https://docs.phpunit.de/en/12.0/migration-guide.html) for breaking changes. The key changes are:
+    - PHPDoc annotations (`@dataProvider`, `@test`, `@depends`) are no longer supported — use PHP attributes (`#[DataProvider]`, `#[Test]`, `#[Depends]`) instead.
+    - `MockBuilder::addMethods()` has been removed — use anonymous classes or interfaces instead.
+    - `createMock()` without expectations now triggers a PHPUnit notice — add the `#[AllowMockObjectsWithoutExpectations]` attribute to your test class to suppress it.
+    - `tests/Api/JsonApiTestCase.php` initialization has been moved from the constructor to `setUp()`. If you extend this class and override `__construct()`, migrate your initialization to `setUp()`:
+
+      ```diff
+      -public function __construct(?string $name = null, array $data = [], int|string $dataName = '')
+      -{
+      -    parent::__construct($name, $data, $dataName);
+      -    // your initialization
+      -}
+      +protected function setUp(): void
+      +{
+      +    parent::setUp();
+      +    // your initialization
+      +}
+      ```
+
+4. The `knplabs/gaufrette` and `knplabs/knp-gaufrette-bundle` packages have been removed.
    
    The Gaufrette integration has been unusable as a filesystem adapter.
    Since Sylius 2.0 the default filesystem adapter uses Flysystem instead. 
 
    If your application depends on the Gaufrette packages directly, require them explicitly in your `composer.json`.
 
-3. The `symfony/proxy-manager-bridge` and `friendsofphp/proxy-manager-lts` packages have been removed.
+5. The `symfony/proxy-manager-bridge` and `friendsofphp/proxy-manager-lts` packages have been removed.
 
    They are no longer needed, lazy services now rely on PHP's native lazy proxies provided by
    `symfony/var-exporter` (the default since Symfony 6.4). No change is required in your application.
 
    If your application depends on these packages directly, require them explicitly in your `composer.json`.
 
-4. The supported Doctrine version ranges have been **broadened** to allow the newer stack
+6. The supported Doctrine version ranges have been **broadened** to allow the newer stack
    (`doctrine/doctrine-bundle` `^2.13 || ^3.0`, `doctrine/dbal` `^3.9 || ^4.0`,
    `doctrine/persistence` `^3.3 || ^4.0`, `doctrine/data-fixtures` `^1.7 || ^2.2`).
 
