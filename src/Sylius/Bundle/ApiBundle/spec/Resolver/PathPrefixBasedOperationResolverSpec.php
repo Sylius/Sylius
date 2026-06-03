@@ -24,9 +24,8 @@ final class PathPrefixBasedOperationResolverSpec extends ObjectBehavior
 {
     function let(
         ResourceMetadataCollectionFactoryInterface $resourceMetadataCollectionFactory,
-        PathPrefixProviderInterface $pathPrefixProvider,
     ): void {
-        $this->beConstructedWith($resourceMetadataCollectionFactory, $pathPrefixProvider);
+        $this->beConstructedWith($resourceMetadataCollectionFactory);
     }
 
     function it_implements_the_operation_resolver_interface(): void
