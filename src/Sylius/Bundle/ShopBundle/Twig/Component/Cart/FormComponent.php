@@ -67,8 +67,8 @@ class FormComponent
         /** @var OrderInterface|null $order */
         $order = $this->repository->find($value);
 
-        if (!$order instanceof OrderInterface
-            || $order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED
+        if (!$order instanceof OrderInterface ||
+            $order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED
         ) {
             return $this->createResource();
         }
