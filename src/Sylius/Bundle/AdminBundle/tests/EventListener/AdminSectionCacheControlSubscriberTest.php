@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\EventListener\AdminSectionCacheControlSubscriber;
@@ -26,6 +27,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AdminSectionCacheControlSubscriberTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;

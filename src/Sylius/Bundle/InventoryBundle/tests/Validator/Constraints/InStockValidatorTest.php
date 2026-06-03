@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
@@ -22,6 +23,7 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\Validator\Context\ExecutionContext;
 
+#[AllowMockObjectsWithoutExpectations]
 final class InStockValidatorTest extends TestCase
 {
     private AvailabilityCheckerInterface&MockObject $availabilityChecker;
@@ -67,11 +69,13 @@ final class InStockValidatorTest extends TestCase
         /** @var StockableInterface&MockObject $stockable */
         $stockable = $this->createMock(StockableInterface::class);
 
-        $inventoryUnit = $this->getMockBuilder(\stdClass::class)
-            ->addMethods(['getQuantity', 'getStockable'])
-            ->getMock();
-        $inventoryUnit->method('getStockable')->willReturn($stockable);
-        $inventoryUnit->method('getQuantity')->willReturn(null);
+        $inventoryUnit = new class ($stockable) {
+            public function __construct(private readonly mixed $stockable) {}
+
+            public function getStockable(): mixed { return $this->stockable; }
+
+            public function getQuantity(): mixed { return null; }
+        };
 
         $this->context->expects($this->never())->method('addViolation');
 
@@ -97,11 +101,13 @@ final class InStockValidatorTest extends TestCase
         /** @var StockableInterface&MockObject $stockable */
         $stockable = $this->createMock(StockableInterface::class);
 
-        $inventoryUnit = $this->getMockBuilder(\stdClass::class)
-            ->addMethods(['getQuantity', 'getStockable'])
-            ->getMock();
-        $inventoryUnit->method('getStockable')->willReturn($stockable);
-        $inventoryUnit->method('getQuantity')->willReturn(1);
+        $inventoryUnit = new class ($stockable) {
+            public function __construct(private readonly mixed $stockable) {}
+
+            public function getStockable(): mixed { return $this->stockable; }
+
+            public function getQuantity(): mixed { return 1; }
+        };
 
         $this->availabilityChecker->expects($this->once())->method('isStockSufficient')->with($stockable, 1)->willReturn(true);
         $this->context->expects($this->never())->method('addViolation');

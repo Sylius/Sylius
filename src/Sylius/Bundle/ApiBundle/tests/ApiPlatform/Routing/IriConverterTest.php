@@ -17,6 +17,7 @@ use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\ResourceClassResolverInterface;
 use ApiPlatform\Metadata\UrlGeneratorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter;
@@ -26,6 +27,7 @@ use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Routing\RouterInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class IriConverterTest extends TestCase
 {
     private IriConverterInterface&MockObject $decoratedIriConverter;

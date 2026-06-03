@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShopBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShopBundle\EventListener\NonChannelLocaleListener;
@@ -24,6 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class NonChannelLocaleListenerTest extends TestCase
 {
     private MockObject&RouterInterface $router;

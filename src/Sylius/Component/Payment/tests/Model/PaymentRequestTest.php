@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Payment\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -20,13 +21,12 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PaymentRequestTest extends TestCase
 {
-    /** @var PaymentInterface&MockObject */
-    private MockObject $payment;
+    private PaymentInterface&MockObject $payment;
 
-    /** @var PaymentMethodInterface&MockObject */
-    private MockObject $method;
+    private PaymentMethodInterface&MockObject $method;
 
     private PaymentRequest $paymentRequest;
 

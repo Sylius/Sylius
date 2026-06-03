@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Applicator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Clock\ClockInterface;
 use Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicator;
 use Sylius\Component\Core\Model\PromotionInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ArchivingPromotionApplicatorTest extends TestCase
 {
     private ClockInterface&MockObject $clock;

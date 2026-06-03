@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Promotion\Modifier;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderPromotionsUsageModifierTest extends TestCase
 {
     private MockObject&OrderInterface $order;

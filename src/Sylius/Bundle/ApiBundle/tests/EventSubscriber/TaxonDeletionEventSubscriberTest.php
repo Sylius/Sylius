@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\EventSubscriber;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\EventSubscriber\TaxonDeletionEventSubscriber;
@@ -25,6 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonDeletionEventSubscriberTest extends TestCase
 {
     private ChannelRepositoryInterface&MockObject $channelRepository;

@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShippingBundle\Validator\GroupsGenerator\ShippingMethodConfigurationGroupsGenerator;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Symfony\Component\Form\FormInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingMethodConfigurationGroupsGeneratorTest extends TestCase
 {
     private MockObject&ShippingMethodInterface $shippingMethod;

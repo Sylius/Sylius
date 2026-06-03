@@ -20,6 +20,7 @@ use Doctrine\ORM\UnitOfWork;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterConfiguration;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\ImagesRemoveListener;
@@ -27,6 +28,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ImagesRemoveListenerTest extends TestCase
 {
     private ImageUploaderInterface&MockObject $imageUploader;

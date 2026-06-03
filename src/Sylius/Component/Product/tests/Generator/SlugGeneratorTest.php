@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Product\Generator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Generator\SlugGenerator;
@@ -20,6 +21,7 @@ use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SlugGeneratorTest extends TestCase
 {
     private MockObject&SluggerInterface $slugger;

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Promotion\Generator;
 
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
@@ -26,6 +27,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionCouponGeneratorTest extends TestCase
 {
     /** @var FactoryInterface<PromotionCouponInterface>&MockObject */

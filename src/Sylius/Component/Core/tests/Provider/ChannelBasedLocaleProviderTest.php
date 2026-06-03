@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Provider\ChannelBasedLocaleProvider;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelBasedLocaleProviderTest extends TestCase
 {
     private ChannelContextInterface&MockObject $channelContext;

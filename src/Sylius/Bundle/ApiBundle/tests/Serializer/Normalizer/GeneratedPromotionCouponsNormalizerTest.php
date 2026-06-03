@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -24,6 +25,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GeneratedPromotionCouponsNormalizerTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Account\RequestResetPasswordToken;
@@ -27,6 +28,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RequestResetPasswordTokenHandlerTest extends TestCase
 {
     private MockObject&UserRepositoryInterface $userRepository;

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Review\Calculator;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Review\Calculator\AverageRatingCalculator;
@@ -21,6 +22,7 @@ use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AverageRatingCalculatorTest extends TestCase
 {
     private AverageRatingCalculator $averageRatingCalculator;

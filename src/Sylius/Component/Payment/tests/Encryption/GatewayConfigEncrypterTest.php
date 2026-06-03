@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Payment\Encryption;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Payment\Encryption\EncrypterInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
 use Sylius\Component\Payment\Encryption\GatewayConfigEncrypter;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GatewayConfigEncrypterTest extends TestCase
 {
     private MockObject $encrypter;

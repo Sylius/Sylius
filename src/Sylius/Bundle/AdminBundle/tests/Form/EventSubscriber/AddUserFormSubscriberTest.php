@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Form\EventSubscriber;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Sylius\Component\User\Model\UserAwareInterface;
@@ -21,6 +22,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AddUserFormSubscriberTest extends TestCase
 {
     private AddUserFormSubscriber $subscriber;

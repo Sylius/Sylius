@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Provider\ProductVariantMap;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantPriceMapProvider;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantPriceMapProviderTest extends TestCase
 {
     private MockObject&ProductVariantInterface $variant;
