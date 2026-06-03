@@ -31,7 +31,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "knplabs/knp-menu": "^3.8",
         "knplabs/knp-menu-bundle": "^3.7",
         "sylius/core-bundle": "^2.0",
@@ -52,7 +52,7 @@
         "doctrine/orm": "^2.20 || ^3.6",
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
         "php-http/message-factory": "^1.1",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/dotenv": "^6.4 || ^7.4 || ^8.0"
     },

@@ -90,7 +90,7 @@ jobs:
                     key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}
 
             -   name: "Require ext-random"
-                if: matrix.php == '8.2'
+                if: matrix.php == '8.3'
                 run: composer require ext-random --no-update --no-scripts --no-interaction
 
             -   name: "Install dependencies"

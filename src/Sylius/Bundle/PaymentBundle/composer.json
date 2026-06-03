@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "sylius/payment": "^2.0",
         "sylius/resource-bundle": "^1.14.2",
         "sylius/state-machine-abstraction": "^2.0",
@@ -38,7 +38,7 @@
         "doctrine/doctrine-bundle": "^2.18 || ^3.2",
         "doctrine/orm": "^2.20 || ^3.6",
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "sylius/locale-bundle": "^2.0",
         "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0"

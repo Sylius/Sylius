@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "ext-dom": "*",
         "ext-exif": "*",
         "ext-fileinfo": "*",
@@ -210,7 +210,7 @@
         "phpstan/phpstan-doctrine": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpstan/phpstan-webmozart-assert": "^2.0",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "psr/event-dispatcher": "^1.0",
         "rector/rector": "^2.5",
         "sylius-labs/behat-chrome-extension": "^1.5",

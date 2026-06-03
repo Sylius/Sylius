@@ -20,7 +20,7 @@
         }
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/http-kernel": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/workflow": "^6.4 || ^7.4 || ^8.0"
@@ -32,7 +32,7 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^6.2",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "webmozart/assert": "^1.11"
     },
     "extra": {

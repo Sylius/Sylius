@@ -27,7 +27,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
         "sylius/twig-hooks": "^0.12",
@@ -45,7 +45,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^6.2",
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0"
     },
     "config": {
