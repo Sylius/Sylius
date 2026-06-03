@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ApiBundle\ApiPlatform\Routing;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\Operation;
+use ApiPlatform\Metadata\ResourceClassResolverInterface;
 use ApiPlatform\Metadata\UrlGeneratorInterface;
 use ApiPlatform\Metadata\Util\ClassInfoTrait;
 use Sylius\Bundle\ApiBundle\Provider\PathPrefixProviderInterface;
@@ -30,6 +31,7 @@ final readonly class IriConverter implements IriConverterInterface
         private PathPrefixProviderInterface $pathPrefixProvider,
         private OperationResolverInterface $operationResolver,
         private RouterInterface $router,
+        private ResourceClassResolverInterface $resourceClassResolver,
     ) {
     }
 
@@ -44,7 +46,16 @@ final readonly class IriConverter implements IriConverterInterface
         ?Operation $operation = null,
         array $context = [],
     ): ?string {
-        $resourceClass = $context['force_resource_class'] ?? (\is_string($resource) ? $resource : $this->getObjectClass($resource));
+        if (isset($context['force_resource_class'])) {
+            $resourceClass = $context['force_resource_class'];
+        } elseif (\is_string($resource)) {
+            $resourceClass = $resource;
+        } else {
+            $objectClass = $this->getObjectClass($resource);
+            $resourceClass = $this->resourceClassResolver->isResourceClass($objectClass)
+                ? $this->resourceClassResolver->getResourceClass($resource)
+                : $objectClass;
+        }
         $pathPrefix = $this->pathPrefixProvider->getPathPrefix($context['request_uri'] ?? $this->router->getContext()->getPathInfo());
         $operation = $this->operationResolver->resolve($resourceClass, $pathPrefix, $operation);
 
