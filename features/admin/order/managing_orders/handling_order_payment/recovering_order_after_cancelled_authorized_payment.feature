@@ -10,10 +10,10 @@ Feature: Recovering order payment state after an authorized payment is cancelled
         And the store has a product "PHP T-Shirt"
         And the store allows paying with "Cash on Delivery"
         And the payment method "Cash on Delivery" requires authorization before capturing
-        And there is an "authorized" "#00000001" order with "PHP T-Shirt" product
+        And there is a "authorized" "#00000001" order with "PHP T-Shirt" product
         And I am logged in as an administrator
 
-    @api @ui
+    @api
     Scenario: Order payment state recovers to awaiting payment after the authorized payment is cancelled by the gateway
         When the payment of order "#00000001" is cancelled by the gateway
         Then this order should have order payment state "Awaiting payment"

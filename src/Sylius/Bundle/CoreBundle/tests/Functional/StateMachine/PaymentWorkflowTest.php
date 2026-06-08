@@ -95,7 +95,7 @@ final class PaymentWorkflowTest extends KernelTestCase
 
         $this->assertNotFalse($processOrderIndex, 'ProcessOrderListener must be subscribed to completed.cancel');
         $this->assertNotFalse($resolveStateIndex, 'ResolveOrderPaymentStateListener must be subscribed to completed.cancel');
-        $this->assertLessThan($processOrderIndex, $resolveStateIndex, 'ResolveOrderPaymentStateListener must run after ProcessOrderListener (higher index = lower priority)');
+        $this->assertGreaterThan($processOrderIndex, $resolveStateIndex, 'ResolveOrderPaymentStateListener must run after ProcessOrderListener (higher index = lower priority)');
     }
 
     #[Test]
@@ -116,7 +116,7 @@ final class PaymentWorkflowTest extends KernelTestCase
 
         $this->assertNotFalse($processOrderIndex, 'ProcessOrderListener must be subscribed to completed.fail');
         $this->assertNotFalse($resolveStateIndex, 'ResolveOrderPaymentStateListener must be subscribed to completed.fail');
-        $this->assertLessThan($processOrderIndex, $resolveStateIndex, 'ResolveOrderPaymentStateListener must run after ProcessOrderListener (higher index = lower priority)');
+        $this->assertGreaterThan($processOrderIndex, $resolveStateIndex, 'ResolveOrderPaymentStateListener must run after ProcessOrderListener (higher index = lower priority)');
     }
 
     private function getStateMachine(): StateMachineInterface
