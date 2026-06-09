@@ -55,6 +55,11 @@
    The `StringInflector::nameToSlug()` method has been **deprecated** and will be removed in Sylius 3.0.
 
 2. The `knplabs/gaufrette` and `knplabs/knp-gaufrette-bundle` packages have been removed.
+   
+   The Gaufrette integration has been unusable as a filesystem adapter.
+   Since Sylius 2.0 the default filesystem adapter uses Flysystem instead. 
+
+   If your application depends on the Gaufrette packages directly, require them explicitly in your `composer.json`.
 
 ## Deprecations
 
@@ -85,8 +90,3 @@
    This allows you to decorate catalog display pricing independently from cart/order pricing
    (`sylius.order_processing.order_prices_recalculator`, `sylius.filter.promotion.price_range`),
    which remain on `ProductVariantPricesCalculatorInterface`.
-
-   The Gaufrette integration has been unusable as a filesystem adapter.
-   Since Sylius 2.0 the default filesystem adapter uses Flysystem instead. 
-
-   If your application depends on the Gaufrette packages directly, require them explicitly in your `composer.json`.
