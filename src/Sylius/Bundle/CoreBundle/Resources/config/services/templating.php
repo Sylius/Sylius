@@ -31,7 +31,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.twig.extension.price', PriceExtension::class)
-        ->args([service('sylius.calculator.product_variant_price')])
+        ->args([service('sylius.calculator.product_variant_catalog_price')])
         ->private()
         ->tag('twig.extension')
     ;
