@@ -69,6 +69,12 @@
         <service id="sylius.checker.promotion_eligibility.composite" alias="sylius.checker.promotion_eligibility" />
         <service id="Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface" alias="sylius.checker.promotion_eligibility" />
 
+        <service id="sylius.checker.promotion_eligibility.without_own_adjustments"
+                 class="Sylius\Component\Promotion\Checker\Eligibility\WithoutOwnAdjustmentsPromotionEligibilityChecker">
+            <argument type="service" id="sylius.checker.promotion_eligibility" />
+            <argument type="service" id="sylius.action.applicator.promotion" />
+        </service>
+
         <service id="sylius.checker.promotion.archival_eligibility"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionArchivalEligibilityChecker"
                  public="false">
