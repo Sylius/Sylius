@@ -1,0 +1,8 @@
+{% set shipment = hookable_metadata.context.shipment %}
+
+{% if shipment.shippedAt is not empty %}
+    <div class="text-secondary-emphasis">
+        <strong>{{ 'sylius.ui.shipped_at'|trans }}:</strong>
+        <span {{ sylius_test_html_attribute('shipped-at-date') }}>{{ shipment.shippedAt|date('d-m-Y H:i:s') }}</span>
+    </div>
+{% endif %}

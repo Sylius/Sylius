@@ -228,6 +228,17 @@ sylius_twig_hooks:
                 template: '@SyliusAdmin/order/show/content/sections/shipments/item/actions.html.twig'
                 priority: 0
 
+        'sylius_admin.order.show.content.sections.shipments.item.general':
+            method:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/general/method.html.twig'
+                priority: 200
+            shipped_at:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/general/shipped_at.html.twig'
+                priority: 100
+            tracking:
+                template: '@SyliusAdmin/order/show/content/sections/shipments/item/general/tracking.html.twig'
+                priority: 0
+
         'sylius_admin.order.show.content.sections.shipments.item.actions':
             ship:
                 component: 'sylius_admin:shipment:ship_form'
