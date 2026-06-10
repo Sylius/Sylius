@@ -175,6 +175,14 @@ sylius_twig_hooks:
                 template: '@SyliusShop/shared/layout/base/footer/content/copy.html.twig'
                 priority: 0
 
+        'sylius_shop.base.footer.content.menu':
+            informational_links:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/informational_links.html.twig'
+                priority: 100
+            help_links:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/help_links.html.twig'
+                priority: 0
+
         'sylius_shop.base.offcanvas':
             cart:
                 component: 'sylius_shop:cart:widget:offcanvas'
