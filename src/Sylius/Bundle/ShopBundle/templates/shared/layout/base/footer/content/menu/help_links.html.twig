@@ -1,7 +1,5 @@
 <div class="col-12 col-sm-6">
     <nav aria-label="{{ 'sylius.ui.footer_help_links'|trans }}" class="nav flex-column mb-5">
-        <a class="nav-link" href="#">FAQ</a>
-        <a class="nav-link" href="#">Delivery & Shipping</a>
-        <a class="nav-link" href="#">Returns Policy</a>
+        {% hook 'help_links' %}
     </nav>
 </div>
