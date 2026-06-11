@@ -105,8 +105,8 @@ final readonly class ItemProvider implements ProviderInterface
 
         $customer = $order->getCustomer();
 
-        return null === $customer
-            || null === $customer->getUser()
-            || $order->isCreatedByGuest();
+        return null === $customer ||
+            null === $customer->getUser() ||
+            $order->isCreatedByGuest();
     }
 }
