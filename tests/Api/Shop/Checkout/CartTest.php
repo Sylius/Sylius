@@ -111,6 +111,78 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_does_not_return_a_cart_abandoned_before_the_customer_last_completed_checkout(): void
+    {
+        $this->setUpDefaultPostHeaders();
+        $this->setUpShopUserContext();
+
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $this->placeOrder(
+            tokenValue: 'placedOrderToken',
+            email: 'shop@example.com',
+            checkoutCompletedAt: new \DateTimeImmutable(),
+        );
+
+        $abandonedCartToken = $this->pickUpCart(tokenValue: 'abandonedCartToken', email: 'shop@example.com');
+        $this->addItemToCart('MUG_BLUE', 3, $abandonedCartToken);
+
+        $abandonedCart = $this->orderRepository->findCartByTokenValue($abandonedCartToken);
+        $abandonedCart->setCreatedAt(new \DateTime('-1 hour'));
+        $this->get('doctrine.orm.entity_manager')->flush();
+
+        $this->requestPost(uri: '/api/v2/shop/orders', body: []);
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_CREATED);
+
+        $response = json_decode($this->client->getResponse()->getContent(), true, flags: \JSON_THROW_ON_ERROR);
+
+        self::assertNotSame($abandonedCartToken, $response['tokenValue']);
+        self::assertSame([], $response['items']);
+    }
+
+    #[Test]
+    public function it_returns_the_customer_cart_created_after_the_last_completed_checkout(): void
+    {
+        $this->setUpDefaultPostHeaders();
+        $this->setUpShopUserContext();
+
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $this->placeOrder(
+            tokenValue: 'placedOrderToken',
+            email: 'shop@example.com',
+            checkoutCompletedAt: new \DateTimeImmutable('-1 hour'),
+        );
+
+        $newCartToken = $this->pickUpCart(tokenValue: 'newCartToken', email: 'shop@example.com');
+        $this->addItemToCart('MUG_BLUE', 3, $newCartToken);
+
+        $this->requestPost(uri: '/api/v2/shop/orders', body: []);
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_CREATED);
+
+        $response = json_decode($this->client->getResponse()->getContent(), true, flags: \JSON_THROW_ON_ERROR);
+
+        self::assertSame($newCartToken, $response['tokenValue']);
+        self::assertCount(1, $response['items']);
+    }
+
+    #[Test]
     public function it_gets_an_empty_cart_as_guest(): void
     {
         $this->setUpDefaultGetHeaders();
