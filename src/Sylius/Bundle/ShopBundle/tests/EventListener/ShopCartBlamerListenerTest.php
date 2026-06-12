@@ -103,7 +103,7 @@ final class ShopCartBlamerListenerTest extends TestCase
 
         $this->sectionResolver->expects($this->once())->method('getSection')->willReturn($shopSection);
         $this->cartContext->expects($this->once())->method('getCart')->willReturn($cart);
-        $cart->expects($this->once())->method('getCustomer')->willReturn(null);
+        $cart->expects($this->once())->method('isCreatedByGuest')->willReturn(true);
         $userEvent->expects($this->once())->method('getUser')->willReturn($user);
         $user->expects($this->once())->method('getCustomer')->willReturn($customer);
         $cart->expects($this->once())->method('setCustomerWithAuthorization')->with($customer);
@@ -128,7 +128,7 @@ final class ShopCartBlamerListenerTest extends TestCase
 
         $this->sectionResolver->expects($this->once())->method('getSection')->willReturn($shopSection);
         $this->cartContext->expects($this->once())->method('getCart')->willReturn($cart);
-        $cart->expects($this->once())->method('getCustomer')->willReturn(null);
+        $cart->expects($this->once())->method('isCreatedByGuest')->willReturn(true);
         $token->expects($this->once())->method('getUser')->willReturn($user);
         $user->expects($this->once())->method('getCustomer')->willReturn($customer);
         $cart->expects($this->once())->method('setCustomerWithAuthorization')->with($customer);
@@ -146,6 +146,28 @@ final class ShopCartBlamerListenerTest extends TestCase
         $token = $this->createMock(TokenInterface::class);
         /** @var ShopUserInterface&MockObject $user */
         $user = $this->createMock(ShopUserInterface::class);
+        /** @var ShopSection&MockObject $shopSection */
+        $shopSection = $this->createMock(ShopSection::class);
+
+        $this->sectionResolver->expects($this->once())->method('getSection')->willReturn($shopSection);
+        $this->cartContext->expects($this->once())->method('getCart')->willReturn($cart);
+        $cart->expects($this->once())->method('isCreatedByGuest')->willReturn(false);
+        $token->expects($this->once())->method('getUser')->willReturn($user);
+        $cart->expects($this->never())->method('setCustomerWithAuthorization');
+
+        $this->shopCartBlamerListener->onInteractiveLogin(new InteractiveLoginEvent($request, $token));
+    }
+
+    public function testBlamesCartWhenGuestCartAlreadyHasCustomerButIsStillGuestCart(): void
+    {
+        /** @var OrderInterface&MockObject $cart */
+        $cart = $this->createMock(OrderInterface::class);
+        /** @var Request&MockObject $request */
+        $request = $this->createMock(Request::class);
+        /** @var TokenInterface&MockObject $token */
+        $token = $this->createMock(TokenInterface::class);
+        /** @var ShopUserInterface&MockObject $user */
+        $user = $this->createMock(ShopUserInterface::class);
         /** @var CustomerInterface&MockObject $customer */
         $customer = $this->createMock(CustomerInterface::class);
         /** @var ShopSection&MockObject $shopSection */
@@ -153,9 +175,10 @@ final class ShopCartBlamerListenerTest extends TestCase
 
         $this->sectionResolver->expects($this->once())->method('getSection')->willReturn($shopSection);
         $this->cartContext->expects($this->once())->method('getCart')->willReturn($cart);
-        $cart->expects($this->once())->method('getCustomer')->willReturn($customer);
+        $cart->expects($this->once())->method('isCreatedByGuest')->willReturn(true);
         $token->expects($this->once())->method('getUser')->willReturn($user);
-        $cart->expects($this->never())->method('setCustomerWithAuthorization');
+        $user->expects($this->once())->method('getCustomer')->willReturn($customer);
+        $cart->expects($this->once())->method('setCustomerWithAuthorization')->with($customer);
 
         $this->shopCartBlamerListener->onInteractiveLogin(new InteractiveLoginEvent($request, $token));
     }
