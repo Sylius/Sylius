@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_applying_promotion_coupon', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_applying_promotion_coupon', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -57,7 +59,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.checkout',
                 'sylius.behat.context.api.shop.promotion',
             )
-            ->withFilter(new TagFilter('@applying_promotion_coupon&&@api'))
-        )
+            ->withFilter(new TagFilter('@applying_promotion_coupon&&@api')),
+        ),
     )
 ;

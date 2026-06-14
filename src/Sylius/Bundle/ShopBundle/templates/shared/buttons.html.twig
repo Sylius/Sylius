@@ -57,6 +57,8 @@
         <button class="btn btn-sm btn-icon btn-outline-danger w-full" type="submit" data-requires-confirmation {{ sylius_test_html_attribute('button', 'delete') }}>
             {{ ux_icon('tabler:trash', {'class': 'icon icon-xs'})}} {{ ((message is empty and labeled) ? 'sylius.ui.delete' : message)|trans }}
         </button>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
+        {% if sylius_csrf_protection_enabled() %}
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
+        {% endif %}
     </form>
 {% endmacro %}

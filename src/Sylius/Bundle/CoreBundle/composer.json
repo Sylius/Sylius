@@ -34,7 +34,7 @@
         "league/flysystem-bundle": "^3.3",
         "liip/imagine-bundle": "^2.15",
         "sylius-labs/association-hydrator": "^1.2",
-        "sylius-labs/doctrine-migrations-extra-bundle": "^0.3",
+        "sylius-labs/doctrine-migrations-extra-bundle": "^0.2 || ^0.3",
         "sylius/addressing-bundle": "^2.0",
         "sylius/attribute-bundle": "^2.0",
         "sylius/channel-bundle": "^2.0",

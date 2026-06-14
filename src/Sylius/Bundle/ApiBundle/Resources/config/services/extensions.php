@@ -33,6 +33,8 @@ use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrderItem\ShopUserB
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\OrderItem\VisitorBasedExtension as OrderItemVisitorBasedExtension;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\PaymentMethod\ChannelBasedExtension as PaymentMethodChannelBasedExtension;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\PaymentMethod\EnabledExtension as PaymentMethodEnabledExtension;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\PaymentRequest\ShopUserBasedExtension as PaymentRequestShopUserBasedExtension;
+use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\PaymentRequest\VisitorBasedExtension as PaymentRequestVisitorBasedExtension;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\ChannelAndLocaleBasedExtension;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\EnabledVariantsExtension;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\EnabledWithinProductAssociationExtension;
@@ -266,6 +268,25 @@ return static function (ContainerConfigurator $container) {
             service('sylius_api.context.user.token_based'),
         ])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
+
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.payment_request.shop_user_based', PaymentRequestShopUserBasedExtension::class)
+        ->args([
+            service('sylius.section_resolver.uri_based'),
+            service('sylius_api.context.user.token_based'),
+        ])
+        ->tag('api_platform.doctrine.orm.query_extension.collection')
+        ->tag('api_platform.doctrine.orm.query_extension.item')
+    ;
+
+    $services
+        ->set('sylius_api.doctrine.orm.query_extension.shop.payment_request.visitor_based', PaymentRequestVisitorBasedExtension::class)
+        ->args([
+            service('sylius.section_resolver.uri_based'),
+            service('sylius_api.context.user.token_based'),
+        ])
         ->tag('api_platform.doctrine.orm.query_extension.item')
     ;
 };

@@ -19,8 +19,10 @@ use Sylius\Behat\Context\Setup\CatalogPromotionContext as SetupCatalogPromotionC
 use Sylius\Behat\Context\Transform\CatalogPromotionContext as TransformCatalogPromotionContext;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_checkout', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_checkout', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -86,7 +88,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.checkout.shipping',
                 'sylius.behat.context.api.shop.order',
             )
-            ->withFilter(new TagFilter('@checkout&&@api'))
-        )
+            ->withFilter(new TagFilter('@checkout&&@api')),
+        ),
     )
 ;

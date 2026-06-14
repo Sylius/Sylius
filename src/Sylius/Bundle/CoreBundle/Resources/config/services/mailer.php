@@ -45,27 +45,31 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.mailer.contact_email_manager', ContactEmailManager::class)
+        ->public()
         ->args([service('sylius.email_sender')])
     ;
-    $services->alias(ContactEmailManagerInterface::class, 'sylius.mailer.contact_email_manager');
+    $services->alias(ContactEmailManagerInterface::class, 'sylius.mailer.contact_email_manager')->public();
 
     $services
         ->set('sylius.mailer.order_email_manager', OrderEmailManager::class)
+        ->public()
         ->args([service('sylius.email_sender')])
     ;
-    $services->alias(OrderEmailManagerInterface::class, 'sylius.mailer.order_email_manager');
+    $services->alias(OrderEmailManagerInterface::class, 'sylius.mailer.order_email_manager')->public();
 
     $services
         ->set('sylius.mailer.shipment_email_manager', ShipmentEmailManager::class)
+        ->public()
         ->args([service('sylius.email_sender')])
     ;
-    $services->alias(ShipmentEmailManagerInterface::class, 'sylius.mailer.shipment_email_manager');
+    $services->alias(ShipmentEmailManagerInterface::class, 'sylius.mailer.shipment_email_manager')->public();
 
     $services
         ->set('sylius.mailer.reset_password_email_manager', ResetPasswordEmailManager::class)
+        ->public()
         ->args([service('sylius.email_sender')])
     ;
-    $services->alias(ResetPasswordEmailManagerInterface::class, 'sylius.mailer.reset_password_email_manager');
+    $services->alias(ResetPasswordEmailManagerInterface::class, 'sylius.mailer.reset_password_email_manager')->public();
 
     $services
         ->set('sylius.mailer.account_registration_email_manager', AccountRegistrationEmailManager::class)

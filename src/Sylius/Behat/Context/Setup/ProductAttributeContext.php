@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Behat\Step\When;
-use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;

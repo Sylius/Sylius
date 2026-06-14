@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 
 final class NotificationContext implements Context
 {

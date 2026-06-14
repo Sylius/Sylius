@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Hook;
 
-use Behat\Hook\AfterScenario;
 use Behat\Behat\Context\Context;
+use Behat\Hook\AfterScenario;
 
 final class CalendarContext implements Context
 {

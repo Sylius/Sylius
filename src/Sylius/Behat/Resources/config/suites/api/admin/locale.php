@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_admin_locale', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_admin_locale', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -42,7 +44,7 @@ return (new Config())
                 'sylius.behat.context.api.admin.save',
                 'sylius.behat.context.api.debug',
             )
-            ->withFilter(new TagFilter('@admin_locale&&@api'))
-        )
+            ->withFilter(new TagFilter('@admin_locale&&@api')),
+        ),
     )
 ;

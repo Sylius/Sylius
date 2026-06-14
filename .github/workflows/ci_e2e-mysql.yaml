@@ -56,17 +56,6 @@ jobs:
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
-            -   name: Set variables
-                shell: bash
-                env:
-                    BRANCH: ${{ inputs.branch }}
-                run: |
-                    if [ "$BRANCH" == "1.14" ]; then
-                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    else
-                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
-                    fi
-
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
@@ -82,7 +71,6 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
             -   name: Prepare manifest.json files
-                if: "${{ inputs.branch != '1.14' }}"
                 run: |
                     mkdir -p public/build/admin
                     mkdir -p public/build/shop
@@ -103,7 +91,7 @@ jobs:
                     database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: ${{ env.NODE_VERSION }}
+                    node_version: "24.x"
 
             -   name: Fix permissions for Symfony logs directory
                 run: |
@@ -155,17 +143,6 @@ jobs:
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
-            -   name: Set variables
-                shell: bash
-                env:
-                    BRANCH: ${{ inputs.branch }}
-                run: |
-                    if [ "$BRANCH" == "1.14" ]; then
-                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    else
-                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
-                    fi
-
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
@@ -181,7 +158,6 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
             -   name: Prepare manifest.json files
-                if: "${{ inputs.branch != '1.14' }}"
                 run: |
                     mkdir -p public/build/admin
                     mkdir -p public/build/shop
@@ -202,7 +178,7 @@ jobs:
                     database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: ${{ env.NODE_VERSION }}
+                    node_version: "24.x"
 
             -   name: Run UI Behat
                 run: |

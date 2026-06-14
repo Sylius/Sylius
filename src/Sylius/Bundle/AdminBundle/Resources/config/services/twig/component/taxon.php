@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius_admin.twig.component.taxon.delete', DeleteComponent::class)
-        ->args([service('security.csrf.token_manager')])
+        ->args([service('security.csrf.token_manager')->ignoreOnInvalid()])
         ->call('setLiveResponder', [service('ux.live_component.live_responder')])
         ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:taxon:delete'])
     ;

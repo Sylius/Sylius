@@ -4,7 +4,7 @@
     {% set metadata = hookable_metadata.context.metadata %}
     {% set header = hookable_metadata.configuration.title|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
 {% else %}
-    {% set header = hookable_metadata.configuration.title %}
+    {% set header = hookable_metadata.configuration.title|default(null) %}
 {% endif %}
 
 {% set icon = hookable_metadata.configuration.icon|default(null) %}

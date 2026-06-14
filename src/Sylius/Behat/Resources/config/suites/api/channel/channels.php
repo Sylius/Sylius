@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_channels', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_channels', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -36,7 +38,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.channel',
                 'sylius.behat.context.api.shop.homepage',
             )
-            ->withFilter(new TagFilter('@channels&&@api'))
-        )
+            ->withFilter(new TagFilter('@channels&&@api')),
+        ),
     )
 ;

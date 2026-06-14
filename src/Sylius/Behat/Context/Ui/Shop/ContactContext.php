@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Shop;
 
-use Behat\Step\When;
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Contact\ContactPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;

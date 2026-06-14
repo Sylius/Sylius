@@ -18,8 +18,10 @@ use Behat\Config\Suite;
 use Sylius\Behat\Context\Api\Admin\RemovingTaxonContext;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_managing_promotions', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_managing_promotions', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -62,7 +64,7 @@ return (new Config())
                 'sylius.behat.context.api.debug',
                 RemovingTaxonContext::class,
             )
-            ->withFilter(new TagFilter('@managing_promotions&&@api'))
-        )
+            ->withFilter(new TagFilter('@managing_promotions&&@api')),
+        ),
     )
 ;

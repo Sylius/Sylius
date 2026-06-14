@@ -28,6 +28,10 @@ final readonly class PathPrefixProvider implements PathPrefixProviderInterface
         /** @var array<int, string> $pathElements */
         $pathElements = array_values(array_filter(explode('/', str_replace($this->apiRoute, '', $path))));
 
+        if ($pathElements === []) {
+            return null;
+        }
+
         if (in_array($pathElements[0], $this->pathPrefixes, true)) {
             return $pathElements[0];
         }

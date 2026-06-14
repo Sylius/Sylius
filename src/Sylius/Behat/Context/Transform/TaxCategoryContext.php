@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Transform;
 
-use Behat\Transformation\Transform;
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
 use Webmozart\Assert\Assert;
 

@@ -46,6 +46,16 @@ final class PathPrefixProviderTest extends TestCase
         $this->assertNull($this->pathPrefixProvider->getPathPrefix('/api/v2/wrong/certain-route'));
     }
 
+    public function testReturnsNullIfTheGivenPathEqualsTheApiRoute(): void
+    {
+        $this->assertNull($this->pathPrefixProvider->getPathPrefix('/api/v2'));
+    }
+
+    public function testReturnsNullIfTheGivenPathEqualsTheApiRouteWithTrailingSlash(): void
+    {
+        $this->assertNull($this->pathPrefixProvider->getPathPrefix('/api/v2/'));
+    }
+
     public function testReturnsShopPrefixBasedOnTheGivenPath(): void
     {
         self::assertSame('shop', $this->pathPrefixProvider->getPathPrefix('/api/v2/shop/certain-route'));

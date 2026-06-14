@@ -38,6 +38,7 @@ use Sylius\Bundle\CoreBundle\Security\UserPasswordResetter;
 use Sylius\Bundle\CoreBundle\ShippingMethod\Updater\ShippingMethodUpdater;
 use Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension;
 use Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension;
+use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculator;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier;
@@ -307,6 +308,12 @@ return static function (ContainerConfigurator $container) {
         ->args([service('sylius.checker.product_variant_lowest_price_display')])
     ;
     $services->alias(ProductVariantPricesCalculatorInterface::class, 'sylius.calculator.product_variant_price');
+
+    $services
+        ->set('sylius.calculator.product_variant_catalog_price', ProductVariantPriceCalculator::class)
+        ->args([service('sylius.checker.product_variant_lowest_price_display')])
+    ;
+    $services->alias(CatalogPricesCalculatorInterface::class, 'sylius.calculator.product_variant_catalog_price');
 
     $services
         ->set('sylius.section_resolver.uri_based', UriBasedSectionProvider::class)

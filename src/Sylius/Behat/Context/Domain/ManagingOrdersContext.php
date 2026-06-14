@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
-use Behat\Step\When;
-use Behat\Step\Then;
-use Behat\Step\Given;
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;

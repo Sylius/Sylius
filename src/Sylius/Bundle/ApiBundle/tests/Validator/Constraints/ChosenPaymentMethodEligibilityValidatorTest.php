@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Bundle\ApiBundle\Command\Account\ChangePaymentMethod;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibility;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ChosenPaymentMethodEligibilityValidator;
@@ -95,6 +96,28 @@ final class ChosenPaymentMethodEligibilityValidatorTest extends TestCase
         $firstPaymentMethodMock->expects(self::once())->method('getName')->willReturn('offline');
         $this->paymentRepository->expects(self::once())->method('find')->with('123')->willReturn($paymentMock);
         $this->paymentMethodsResolver->expects(self::once())->method('getSupportedMethods')->with($paymentMock)->willReturn([$secondPaymentMethodMock, $thirdPaymentMethodMock]);
+        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.payment_method.not_available', ['%name%' => 'offline'])
+        ;
+        $this->chosenPaymentMethodEligibilityValidator->validate($command, new ChosenPaymentMethodEligibility());
+    }
+
+    public function testAddsViolationIfChangePaymentMethodDoesNotMatchSupportedMethods(): void
+    {
+        /** @var PaymentMethodInterface|MockObject $outOfChannelPaymentMethodMock */
+        $outOfChannelPaymentMethodMock = $this->createMock(PaymentMethodInterface::class);
+        /** @var PaymentMethodInterface|MockObject $supportedPaymentMethodMock */
+        $supportedPaymentMethodMock = $this->createMock(PaymentMethodInterface::class);
+        /** @var PaymentInterface|MockObject $paymentMock */
+        $paymentMock = $this->createMock(PaymentInterface::class);
+        $command = new ChangePaymentMethod(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+        );
+        $this->paymentMethodRepository->expects(self::once())->method('findOneBy')->with(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($outOfChannelPaymentMethodMock);
+        $outOfChannelPaymentMethodMock->expects(self::once())->method('getName')->willReturn('offline');
+        $this->paymentRepository->expects(self::once())->method('find')->with('123')->willReturn($paymentMock);
+        $this->paymentMethodsResolver->expects(self::once())->method('getSupportedMethods')->with($paymentMock)->willReturn([$supportedPaymentMethodMock]);
         $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.payment_method.not_available', ['%name%' => 'offline'])
         ;
         $this->chosenPaymentMethodEligibilityValidator->validate($command, new ChosenPaymentMethodEligibility());

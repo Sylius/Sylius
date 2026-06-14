@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_accessing_cart', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_accessing_cart', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -55,7 +57,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.checkout.shipping',
                 'sylius.behat.context.api.shop.login',
             )
-            ->withFilter(new TagFilter('@accessing_cart&&@api'))
-        )
+            ->withFilter(new TagFilter('@accessing_cart&&@api')),
+        ),
     )
 ;

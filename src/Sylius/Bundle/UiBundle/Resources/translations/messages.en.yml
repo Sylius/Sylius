@@ -431,6 +431,7 @@ sylius:
         in: 'In'
         inactive: 'Inactive'
         included_in_price: 'Included in price'
+        index: 'Index'
         index_metadata: 'Metadata'
         index_of_all_configured_locales: 'Index of all configured locales'
         info: 'Info'

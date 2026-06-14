@@ -30,6 +30,7 @@ return (new Config())
         'ui/admin/security.php',
         'ui/cart/accessing_cart.php',
         'ui/cart/shopping_cart.php',
+        'ui/cart/stale_cart_live_component.php',
         'ui/channel/channels.php',
         'ui/channel/managing_channels.php',
         'ui/channel/products_accessibility_in_multiple_channels.php',

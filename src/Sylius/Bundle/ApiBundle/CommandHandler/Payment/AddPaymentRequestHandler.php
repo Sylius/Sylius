@@ -14,18 +14,23 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Payment;
 
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
+use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Bundle\ApiBundle\Exception\PaymentMethodNotFoundException;
 use Sylius\Bundle\ApiBundle\Exception\PaymentNotFoundException;
 use Sylius\Bundle\PaymentBundle\Provider\DefaultActionProviderInterface;
 use Sylius\Bundle\PaymentBundle\Provider\DefaultPayloadProviderInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /** @experimental */
 #[AsMessageHandler]
@@ -44,6 +49,7 @@ final class AddPaymentRequestHandler
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
         private DefaultActionProviderInterface $defaultActionProvider,
         private DefaultPayloadProviderInterface $defaultPayloadProvider,
+        private ?UserContextInterface $userContext = null,
     ) {
     }
 
@@ -64,6 +70,10 @@ final class AddPaymentRequestHandler
             throw new PaymentNotFoundException();
         }
 
+        if ($this->userContext !== null && !$this->isAccessibleByCurrentUser($payment, $this->userContext->getUser())) {
+            throw new PaymentNotFoundException();
+        }
+
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $addPaymentRequest->paymentMethodCode]);
         if (null === $paymentMethod) {
@@ -75,5 +85,30 @@ final class AddPaymentRequestHandler
         $paymentRequest->setPayload($addPaymentRequest->payload ?? $this->defaultPayloadProvider->getPayload($paymentRequest));
 
         return $paymentRequest;
+    }
+
+    private function isAccessibleByCurrentUser(PaymentInterface $payment, ?UserInterface $user): bool
+    {
+        $order = $payment->getOrder();
+        if (!$order instanceof OrderInterface) {
+            return false;
+        }
+
+        if ($user instanceof ShopUserInterface) {
+            $customer = $user->getCustomer();
+
+            return $customer instanceof CustomerInterface && $order->getCustomer() === $customer;
+        }
+
+        return $this->isGuestOrder($order);
+    }
+
+    private function isGuestOrder(OrderInterface $order): bool
+    {
+        $customer = $order->getCustomer();
+
+        return null === $customer ||
+            null === $customer->getUser() ||
+            $order->isCreatedByGuest();
     }
 }

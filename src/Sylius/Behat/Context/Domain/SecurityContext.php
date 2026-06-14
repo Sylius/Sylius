@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Domain;
 
-use Behat\Step\Given;
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 
 final class SecurityContext implements Context
 {
