@@ -31,7 +31,6 @@ final class PaymentMethodGrid extends AbstractGrid implements PaymentMethodGridI
 {
     public function __construct(
         private readonly string $paymentMethodClass,
-        private readonly string $locale,
     ) {
     }
 
@@ -39,7 +38,9 @@ final class PaymentMethodGrid extends AbstractGrid implements PaymentMethodGridI
     {
         $gridBuilder
             ->setDriverOption('class', $this->paymentMethodClass)
-            ->setRepositoryMethod('createListQueryBuilder', [$this->locale])
+            ->setRepositoryMethod('createListQueryBuilder', [
+                'expr:service(\'sylius.context.locale\').getLocaleCode()',
+            ])
             ->addOrderBy('position', 'asc')
             ->setLimits([10, 25, 50])
 

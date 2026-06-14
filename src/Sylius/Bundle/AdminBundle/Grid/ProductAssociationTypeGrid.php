@@ -30,7 +30,6 @@ final class ProductAssociationTypeGrid extends AbstractGrid implements ProductAs
 {
     public function __construct(
         private readonly string $productAssociationTypeClass,
-        private readonly string $locale,
     ) {
     }
 
@@ -39,7 +38,7 @@ final class ProductAssociationTypeGrid extends AbstractGrid implements ProductAs
         $gridBuilder
             ->setDriverOption('class', $this->productAssociationTypeClass)
             ->setRepositoryMethod('createListQueryBuilder', [
-                $this->locale,
+                'expr:service(\'sylius.context.locale\').getLocaleCode()',
             ])
             ->addOrderBy('code', 'asc')
             ->setLimits([10, 25, 50])

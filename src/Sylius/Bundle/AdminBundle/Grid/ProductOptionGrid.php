@@ -30,7 +30,6 @@ final class ProductOptionGrid extends AbstractGrid implements ProductOptionGridI
 {
     public function __construct(
         private readonly string $productOptionClass,
-        private readonly string $locale,
     ) {
     }
 
@@ -40,7 +39,7 @@ final class ProductOptionGrid extends AbstractGrid implements ProductOptionGridI
             ->setDriverOption('class', $this->productOptionClass)
             ->setLimits([10, 25, 50])
             ->setRepositoryMethod('createListQueryBuilder', [
-                $this->locale,
+                'expr:service(\'sylius.context.locale\').getLocaleCode()',
             ])
             ->addOrderBy('position', 'asc')
             ->addField(

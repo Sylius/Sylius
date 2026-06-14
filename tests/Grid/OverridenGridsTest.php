@@ -16,7 +16,6 @@ namespace Sylius\Tests\Grid;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Sylius\Bundle\GridBundle\Provider\ServiceGridProvider;
 use Sylius\Component\Grid\Definition\Grid;
-use Sylius\Component\Grid\Exception\UndefinedGridException;
 use Sylius\Component\Grid\Provider\ArrayGridProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -32,11 +31,7 @@ final class OverridenGridsTest extends KernelTestCase
         $arrayProvider = $container->get(ArrayGridProvider::class);
         $serviceProvider = $container->get(ServiceGridProvider::class);
 
-        try {
-            $serviceVersion = $serviceProvider->get($gridName);
-        } catch (UndefinedGridException) {
-            $this->markTestSkipped($gridName . ' is not migrated yet');
-        }
+        $serviceVersion = $serviceProvider->get($gridName);
         $yamlVersion = $arrayProvider->get($gridName);
 
         $this->prefillingRepository($yamlVersion);
@@ -52,6 +47,7 @@ final class OverridenGridsTest extends KernelTestCase
         self::assertNotEmpty($gridConfiguration, 'No grid configuration found');
 
         foreach (array_keys($gridConfiguration) as $gridName) {
+            // This deprecated grid will not be migrated
             if ($gridName === 'sylius_admin_address_log_entry') {
                 continue;
             }

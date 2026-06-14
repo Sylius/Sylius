@@ -28,7 +28,6 @@ final class InventoryGrid extends AbstractGrid implements InventoryGridInterface
     public function __construct(
         private readonly string $productVariantClass,
         private readonly string $productClass,
-        private readonly string $locale,
     ) {
     }
 
@@ -39,7 +38,7 @@ final class InventoryGrid extends AbstractGrid implements InventoryGridInterface
             ->setLimits([10, 25, 50])
             ->addOrderBy('name', 'asc')
             ->setRepositoryMethod('createInventoryListQueryBuilder', [
-                $this->locale,
+                'expr:service(\'sylius.context.locale\').getLocaleCode()',
             ])
             ->addField(
                 TwigField::create('name', '@SyliusAdmin/inventory/grid/field/name.html.twig')

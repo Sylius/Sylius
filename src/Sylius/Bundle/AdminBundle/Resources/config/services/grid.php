@@ -77,6 +77,8 @@ use Sylius\Bundle\AdminBundle\Grid\TaxCategoryGrid;
 use Sylius\Bundle\AdminBundle\Grid\TaxCategoryGridInterface;
 use Sylius\Bundle\AdminBundle\Grid\TaxRateGrid;
 use Sylius\Bundle\AdminBundle\Grid\TaxRateGridInterface;
+use Sylius\Bundle\AdminBundle\Grid\TaxonGrid;
+use Sylius\Bundle\AdminBundle\Grid\TaxonGridInterface;
 use Sylius\Bundle\AdminBundle\Grid\ZoneGrid;
 use Sylius\Bundle\AdminBundle\Grid\ZoneGridInterface;
 use Sylius\Component\Grid\Filter\EntityFilter;
@@ -157,7 +159,6 @@ return static function (ContainerConfigurator $container) {
         ->args([
             '%sylius.model.product_variant.class%',
             '%sylius.model.product.class%',
-            '%locale%',
         ])
         ->tag('sylius.grid')
     ;
@@ -166,7 +167,6 @@ return static function (ContainerConfigurator $container) {
     $services->set('sylius_admin.grid.payment_method', PaymentMethodGrid::class)
         ->args([
             '%sylius.model.payment_method.class%',
-            '%locale%',
         ])
         ->tag('sylius.grid')
     ;
@@ -175,11 +175,18 @@ return static function (ContainerConfigurator $container) {
     $services->set('sylius_admin.grid.product_association_type', ProductAssociationTypeGrid::class)
         ->args([
             '%sylius.model.product_association_type.class%',
-            '%locale%',
         ])
         ->tag('sylius.grid')
     ;
     $services->alias(ProductAssociationTypeGridInterface::class, 'sylius_admin.grid.product_association_type');
+
+    $services->set('syllabus_admin.grid.taxon', TaxonGrid::class)
+        ->args([
+            '%sylius.model.taxon.class%',
+        ])
+        ->tag('sylius.grid')
+    ;
+    $services->alias(TaxonGridInterface::class, 'sylius_admin.grid.taxon');
 
     $services->set('sylius_admin.grid.product_taxon', ProductTaxonGrid::class)
         ->args([
@@ -343,7 +350,6 @@ return static function (ContainerConfigurator $container) {
     $services->set('sylius_admin.grid.product_option', ProductOptionGrid::class)
         ->args([
             '%sylius.model.product_option.class%',
-            '%locale%',
         ])
         ->tag('sylius.grid')
     ;
