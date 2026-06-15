@@ -126,6 +126,7 @@ class AddToCartFormComponent
         $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_ADD);
         $this->manager->persist($addToCartCommand->getCart());
         $this->manager->flush();
+        $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_POST_ADD);
 
         if ($addFlashMessage) {
             FlashBagProvider::getFlashBag($this->requestStack)->add('success', 'sylius.cart.add_item');
