@@ -75,6 +75,7 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Product
+            channels: Applicable channels
         promotion_coupon:
             per_customer_usage_limit: Per-Customer Usage Limit
             reusable_from_cancelled_orders: Reusable from cancelled orders
@@ -198,6 +199,7 @@ sylius:
             products: Products filter
             taxons: Taxons filter
         promotion_rule:
+            channels: Applicable channels
             customer_group:
                 group: Customer group
             has_taxon:

@@ -28,6 +28,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CheckStatisticsOrdersT
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\CircularDependencyBreakingErrorListenerPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\IgnoreAnnotationsPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\OverridePromotionServicesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\OverrideResourceControllerStateMachinePass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterUriBasedSectionResolverPass;
@@ -93,6 +94,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new Symfony6PrivateServicesPass());
         $container->addCompilerPass(new TranslatableEntityLocalePass());
         $container->addCompilerPass(new CheckStatisticsOrdersTotalsProviderTypePass());
+        $container->addCompilerPass(new OverridePromotionServicesPass());
         $container->addCompilerPass(new OverrideResourceControllerStateMachinePass(), priority: -1024);
     }
 

@@ -113,6 +113,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius_admin.form.extension.type.promotion.promotion_action', PromotionActionTypeExtension::class)
+        ->args([service('sylius.repository.channel')])
         ->tag('form.type_extension')
     ;
 
@@ -130,6 +131,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius_admin.form.extension.type.promotion.promotion_rule', PromotionRuleTypeExtension::class)
+        ->args([service('sylius.repository.channel')])
         ->tag('form.type_extension')
     ;
 
