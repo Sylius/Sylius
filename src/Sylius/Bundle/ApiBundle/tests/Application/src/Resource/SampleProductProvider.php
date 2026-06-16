@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Tests\Api\Resource;
+namespace Sylius\Bundle\ApiBundle\Application\Resource;
 
 use ApiPlatform\Metadata\CollectionOperationInterface;
 use ApiPlatform\Metadata\Operation;

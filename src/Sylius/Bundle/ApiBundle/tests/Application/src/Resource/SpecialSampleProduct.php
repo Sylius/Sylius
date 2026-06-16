@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Tests\Api\Resource;
+namespace Sylius\Bundle\ApiBundle\Application\Resource;
 
 /**
  * Simulates an entity subclass (e.g. a Doctrine discriminator map subclass)
