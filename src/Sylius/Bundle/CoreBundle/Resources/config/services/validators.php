@@ -33,6 +33,7 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibilit
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExistsValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ProductImageVariantsBelongToOwnerValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ProductVariantCodeExistsValidator;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\PromotionConfigurationChannelCodesValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ProvinceCodeExistsValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUserValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ResendOrderConfirmationEmailWithValidOrderStateValidator;
@@ -132,6 +133,12 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.validator.channel_default_locale_enabled', ChannelDefaultLocaleEnabledValidator::class)
         ->tag('validator.constraint_validator', ['alias' => 'sylius_channel_default_locale_enabled'])
+    ;
+
+    $services
+        ->set('sylius.validator.promotion_configuration_channel_codes', PromotionConfigurationChannelCodesValidator::class)
+        ->args([service('sylius.repository.channel')])
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_promotion_configuration_channel_codes'])
     ;
 
     $services

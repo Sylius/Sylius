@@ -280,6 +280,11 @@
                     </constraint>
                 </option>
             </constraint>
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\PromotionConfigurationChannelCodes">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>
