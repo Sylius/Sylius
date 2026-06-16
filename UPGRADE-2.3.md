@@ -61,6 +61,13 @@
 
    If your application depends on the Gaufrette packages directly, require them explicitly in your `composer.json`.
 
+3. The `symfony/proxy-manager-bridge` and `friendsofphp/proxy-manager-lts` packages have been removed.
+
+   They are no longer needed, lazy services now rely on PHP's native lazy proxies provided by
+   `symfony/var-exporter` (the default since Symfony 6.4). No change is required in your application.
+
+   If your application depends on these packages directly, require them explicitly in your `composer.json`.
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
