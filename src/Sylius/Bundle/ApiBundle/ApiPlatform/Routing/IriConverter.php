@@ -31,7 +31,7 @@ final readonly class IriConverter implements IriConverterInterface
         private PathPrefixProviderInterface $pathPrefixProvider,
         private OperationResolverInterface $operationResolver,
         private RouterInterface $router,
-        private ResourceClassResolverInterface $resourceClassResolver,
+        private ?ResourceClassResolverInterface $resourceClassResolver = null,
     ) {
     }
 
@@ -52,7 +52,7 @@ final readonly class IriConverter implements IriConverterInterface
             $resourceClass = $resource;
         } else {
             $objectClass = $this->getObjectClass($resource);
-            $resourceClass = $this->resourceClassResolver->isResourceClass($objectClass)
+            $resourceClass = $this->resourceClassResolver !== null && $this->resourceClassResolver->isResourceClass($objectClass)
                 ? $this->resourceClassResolver->getResourceClass($resource)
                 : $objectClass;
         }
