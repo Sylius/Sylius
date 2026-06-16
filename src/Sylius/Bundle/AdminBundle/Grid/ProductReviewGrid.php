@@ -35,11 +35,6 @@ final class ProductReviewGrid extends AbstractGrid implements ProductReviewGridI
     ) {
     }
 
-    public static function getName(): string
-    {
-        return 'sylius_admin_product_review';
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder

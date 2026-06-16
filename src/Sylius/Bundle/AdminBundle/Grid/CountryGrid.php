@@ -22,16 +22,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 
+#[AsGrid(name: 'sylius_admin_country')]
 final class CountryGrid extends AbstractGrid implements CountryGridInterface
 {
     public function __construct(
         private readonly string $countryClass,
     ) {
-    }
-
-    public static function getName(): string
-    {
-        return 'sylius_admin_country';
     }
 
     public function __invoke(GridBuilderInterface $gridBuilder): void
