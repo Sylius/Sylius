@@ -35,6 +35,8 @@ class PromotionCoupon implements PromotionCouponInterface
 
     protected bool $trackUsage = true;
 
+    protected ?\DateTimeImmutable $trackUsageSince = null;
+
     /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
@@ -110,7 +112,18 @@ class PromotionCoupon implements PromotionCouponInterface
 
     public function setTrackUsage(bool $trackUsage): void
     {
+        if ($trackUsage) {
+            $this->trackUsageSince = new \DateTimeImmutable();
+        } else {
+            $this->trackUsageSince = null;
+        }
+
         $this->trackUsage = $trackUsage;
+    }
+
+    public function getTrackUsageSince(): ?\DateTimeImmutable
+    {
+        return $this->trackUsageSince;
     }
 
     public function isValid(): bool

@@ -41,7 +41,6 @@ final class PromotionCouponType extends AbstractType
                     'required' => false,
                     'disabled' => true,
                     'attr' => ['min' => 1],
-                    'help' => 'sylius.form.promotion_coupon.per_customer_usage_limit_details',
                 ]);
             }
         });
@@ -62,7 +61,6 @@ final class PromotionCouponType extends AbstractType
                 'required' => false,
                 'disabled' => !$trackUsage,
                 'attr' => ['min' => 1],
-                'help' => 'sylius.form.promotion_coupon.per_customer_usage_limit_details',
             ]);
         });
     }

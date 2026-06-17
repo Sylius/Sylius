@@ -47,7 +47,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
             return true;
         }
 
-        $placedOrdersNumber = $this->orderRepository->countByCustomerAndCoupon($customer, $promotionCoupon);
+        $placedOrdersNumber = $this->orderRepository->countByCustomerAndCouponSince($customer, $promotionCoupon, $promotionCoupon->getTrackUsageSince());
 
         return $placedOrdersNumber < $perCustomerUsageLimit;
     }

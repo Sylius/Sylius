@@ -44,6 +44,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     public function countByCustomerAndCoupon(CustomerInterface $customer, PromotionCouponInterface $coupon): int;
 
+    public function countByCustomerAndCouponSince(
+        CustomerInterface $customer,
+        PromotionCouponInterface $coupon,
+        ?\DateTimeInterface $since
+    ): int;
+
     public function countByCustomer(CustomerInterface $customer): int;
 
     public function findOrderById(mixed $id): ?OrderInterface;

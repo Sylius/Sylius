@@ -174,6 +174,36 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    public function countByCustomerAndCouponSince(
+        CustomerInterface $customer,
+        PromotionCouponInterface $coupon,
+        ?\DateTimeInterface $since,
+    ): int {
+        $states = [OrderInterface::STATE_CART];
+        if ($coupon->isReusableFromCancelledOrders()) {
+            $states[] = OrderInterface::STATE_CANCELLED;
+        }
+
+        $qb = $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.customer = :customer')
+            ->andWhere('o.promotionCoupon = :coupon')
+            ->andWhere('o.state NOT IN (:states)')
+            ->setParameter('customer', $customer)
+            ->setParameter('coupon', $coupon)
+            ->setParameter('states', $states)
+        ;
+
+        if ($since !== null) {
+            $qb
+                ->andWhere('o.checkoutCompletedAt >= :since')
+                ->setParameter('since', $since)
+            ;
+        }
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function countByCustomer(CustomerInterface $customer): int
     {
         return (int) $this->createQueryBuilder('o')

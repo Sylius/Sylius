@@ -28,7 +28,6 @@ final class PromotionCouponTypeExtension extends AbstractTypeExtension
                 'label' => 'sylius.form.promotion_coupon.per_customer_usage_limit',
                 'required' => false,
                 'attr' => ['min' => 1],
-                'help' => 'sylius.form.promotion_coupon.per_customer_usage_limit_details',
             ])
             ->add('reusableFromCancelledOrders', CheckboxType::class, [
                 'label' => 'sylius.form.promotion_coupon.reusable_from_cancelled_orders',

@@ -44,4 +44,6 @@ interface PromotionCouponInterface extends CodeAwareInterface, TimestampableInte
     public function isTrackUsage(): bool;
 
     public function setTrackUsage(bool $trackUsage): void;
+
+    public function getTrackUsageSince(): ?\DateTimeImmutable;
 }
