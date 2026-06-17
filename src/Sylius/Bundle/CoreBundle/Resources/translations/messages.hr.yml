@@ -23,7 +23,6 @@ sylius:
                 product: Artikal
         promotion_coupon:
             per_customer_usage_limit: Ograničenje korištenja po kupcu
-            per_customer_usage_limit_details: Narudžbe postavljene dok je praćenje bilo onemogućeno i dalje će se računati prema ovom ograničenju kada se praćenje omogući.
         group:
             name: Naziv regije
             roles: Uloge

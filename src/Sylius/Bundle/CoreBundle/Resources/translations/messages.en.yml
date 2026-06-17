@@ -77,7 +77,6 @@ sylius:
                 product: Product
         promotion_coupon:
             per_customer_usage_limit: Per-Customer Usage Limit
-            per_customer_usage_limit_details: Orders placed while tracking was disabled will still count towards this limit when tracking is enabled.
             reusable_from_cancelled_orders: Reusable from cancelled orders
         group:
             name: Name

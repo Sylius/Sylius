@@ -23,7 +23,6 @@ sylius:
                 product: Продукт
         promotion_coupon:
             per_customer_usage_limit: Лимит за потребление на потребител
-            per_customer_usage_limit_details: Поръчките, направени докато проследяването е било деактивирано, ще продължат да се броят в тази лимит при активиране на проследяването.
         group:
             name: Име
             roles: Роли

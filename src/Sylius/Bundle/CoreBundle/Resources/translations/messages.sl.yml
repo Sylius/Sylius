@@ -23,7 +23,6 @@ sylius:
                 product: Izdelek
         promotion_coupon:
             per_customer_usage_limit: Omejitev uporabe na kupca
-            per_customer_usage_limit_details: Naročila, oddana med onemogočenim sledenjem, bodo pri omogočenem sledenju še vedno štela k tej omejitvi.
         group:
             name: Ime
             roles: Vloge

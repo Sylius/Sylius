@@ -80,7 +80,6 @@ sylius:
                 product: '产品'
         promotion_coupon:
             per_customer_usage_limit: '每位客户的使用限制'
-            per_customer_usage_limit_details: '在追踪停用期间下的订单，在追踪启用后仍将计入此限制。'
             reusable_from_cancelled_orders: '可在已取消的订单中重复使用'
         group:
             name: '名称'

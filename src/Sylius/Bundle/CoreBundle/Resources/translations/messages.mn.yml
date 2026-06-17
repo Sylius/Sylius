@@ -24,7 +24,6 @@ sylius:
                 product: Бүтээгдэхүүн
         promotion_coupon:
             per_customer_usage_limit: Үйлчлүүлэгч бүрийн хэрэглээний хязгаарлалт
-            per_customer_usage_limit_details: Мөрдөлт идэвхгүй байх үед хийсэн захиалгууд мөрдөлт идэвхжсэн үед энэ хязгаарт тооцогдсон хэвээр байна.
             reusable_from_cancelled_orders: Цуцлагдсан захиалгаас дахин ашиглах боломжтой
         group:
             name: Нэр

@@ -23,7 +23,6 @@ sylius:
                 product: Produkti
         promotion_coupon:
             per_customer_usage_limit: Limiti i përdorimit për blerës
-            per_customer_usage_limit_details: Porositë e bëra ndërkohë që gjurmimi ishte i çaktivizuar do të vazhdojnë të llogariten ndaj këtij limiti kur gjurmimi të aktivizohet.
         group:
             name: Emri
             roles: Funksionet

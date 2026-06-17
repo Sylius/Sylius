@@ -23,7 +23,6 @@ sylius:
                 product: محصول
         promotion_coupon:
             per_customer_usage_limit: محدودیت استفاده به ازای هر مشتری
-            per_customer_usage_limit_details: سفارش‌هایی که در زمان غیرفعال بودن ردیابی ثبت شده‌اند، پس از فعال‌سازی ردیابی همچنان در این محدودیت محاسبه می‌شوند.
         group:
             name: نام
             roles: نقش ها

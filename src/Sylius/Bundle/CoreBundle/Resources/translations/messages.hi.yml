@@ -81,7 +81,6 @@ sylius:
                 product: 'उत्पाद'
         promotion_coupon:
             per_customer_usage_limit: 'प्रति-ग्राहक उपयोग सीमा'
-            per_customer_usage_limit_details: 'ट्रैकिंग अक्षम रहने के दौरान दिए गए ऑर्डर भी इस सीमा में गिने जाएंगे जब ट्रैकिंग सक्षम की जाएगी।'
             reusable_from_cancelled_orders: 'रद्द ऑर्डरों से पुनः उपयोग योग्य'
         group:
             name: 'नाम'

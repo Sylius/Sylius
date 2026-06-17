@@ -80,7 +80,6 @@ sylius:
                 product: 'Produkt'
         promotion_coupon:
             per_customer_usage_limit: 'Begrensning per kunde'
-            per_customer_usage_limit_details: 'Bestillinger lagt inn mens sporing var deaktivert, vil fortsatt telle mot denne grensen når sporing aktiveres.'
             reusable_from_cancelled_orders: 'Kan gjenbrukes fra kansellerte ordre'
         group:
             name: 'Navn'

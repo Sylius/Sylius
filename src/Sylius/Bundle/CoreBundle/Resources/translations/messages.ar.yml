@@ -81,7 +81,6 @@ sylius:
                 product: المنتج
         promotion_coupon:
             per_customer_usage_limit: الحد الأقصى للاستخدام لكل عميل
-            per_customer_usage_limit_details: ستُحتسب الطلبات المُقدَّمة أثناء تعطيل التتبع ضمن هذا الحد عند تفعيل التتبع.
             reusable_from_cancelled_orders: يمكن إعادة استخدامه من الطلبات الملغاة
         group:
             name: الاسم

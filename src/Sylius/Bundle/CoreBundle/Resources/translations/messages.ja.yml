@@ -80,7 +80,6 @@ sylius:
                 product: '商品'
         promotion_coupon:
             per_customer_usage_limit: '顧客ごとの利用制限'
-            per_customer_usage_limit_details: 'トラッキングが無効な状態で行われた注文は、トラッキングが有効になった際もこの制限にカウントされます。'
             reusable_from_cancelled_orders: 'キャンセル注文から再利用可能'
         group:
             name: '名前'

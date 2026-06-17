@@ -80,7 +80,6 @@ sylius:
                 product: 'Produs'
         promotion_coupon:
             per_customer_usage_limit: 'Limită de utilizare per client'
-            per_customer_usage_limit_details: 'Comenzile plasate în timp ce urmărirea era dezactivată vor conta în continuare față de această limită când urmărirea este activată.'
             reusable_from_cancelled_orders: 'Refolosibil din comenzile anulate'
         group:
             name: 'Nume'

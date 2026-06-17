@@ -23,7 +23,6 @@ sylius:
                 product: Ürün
         promotion_coupon:
             per_customer_usage_limit: Müşteri Başına Kullanım Limiti
-            per_customer_usage_limit_details: İzleme devre dışıyken verilen siparişler, izleme etkinleştirildiğinde bu limite sayılmaya devam edecektir.
             reusable_from_cancelled_orders: İptal edilen siparişlerden tekrar kullanılabilir
         group:
             name: Ad

@@ -23,7 +23,6 @@ sylius:
                 product: Produkt
         promotion_coupon:
             per_customer_usage_limit: Brugsgrænse pr. bruger
-            per_customer_usage_limit_details: Ordrer afgivet mens sporing var deaktiveret, vil stadig tælle mod denne grænse, når sporing aktiveres.
         group:
             name: Navn
             roles: Roller

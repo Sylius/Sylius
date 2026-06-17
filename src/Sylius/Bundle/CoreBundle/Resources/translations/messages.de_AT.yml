@@ -79,7 +79,6 @@ sylius:
                 product: 'Produkt'
         promotion_coupon:
             per_customer_usage_limit: 'Pro-Kunde-Nutzungsbeschränkung'
-            per_customer_usage_limit_details: 'Bestellungen, die während deaktiviertem Tracking aufgegeben wurden, werden bei aktiviertem Tracking weiterhin auf dieses Limit angerechnet.'
             reusable_from_cancelled_orders: 'Wiederverwendbar aus stornierten Bestellungen'
         group:
             name: 'Name'

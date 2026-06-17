@@ -23,7 +23,6 @@ sylius:
                 product: Тавар
         promotion_coupon:
             per_customer_usage_limit: Ліміт карыстання на кліента
-            per_customer_usage_limit_details: Замовы, зробленыя пры адключаным адсочванні, усё роўна будуць улічвацца ў гэтым ліміце пры ўключэнні адсочвання.
         group:
             name: Назва
             roles: Ролі

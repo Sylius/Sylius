@@ -23,7 +23,6 @@ sylius:
                 product: Produk
         promotion_coupon:
             per_customer_usage_limit: Batas penggunaan per pelanggan
-            per_customer_usage_limit_details: Pesanan yang dilakukan saat pelacakan dinonaktifkan tetap akan dihitung terhadap batas ini ketika pelacakan diaktifkan.
         group:
             name: Nama
             roles: Peran
