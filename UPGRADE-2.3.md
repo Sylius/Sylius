@@ -12,6 +12,33 @@
        order_by_identifier: true
    ```
 
+2. Configuration changes related to the broadened Doctrine support (see the *Dependencies* section). 
+   These only matter once you opt into **DoctrineBundle 3** / **DBAL 4**:
+
+   - The `auto_generate_proxy_classes: "%kernel.debug%"` option was removed from Sylius' Doctrine configuration 
+     (it no longer exists in DoctrineBundle 3, and since PHP 8.4 Doctrine uses native lazy objects). If you are still 
+     on DoctrineBundle 2 and rely on this behavior, set it explicitly in your own application configuration.
+
+   - The ORM metadata/query/result cache configuration was switched from wrapped `Doctrine\Common\Cache` services 
+     to **PSR-6 cache pools** (`type: pool`). This change lives in the application configuration (`config/packages/{prod,test}/doctrine.yaml`), 
+     which is **not** updated automatically on existing installations, update those files in your project accordingly:
+
+     ```diff
+     doctrine:
+         orm:
+             entity_managers:
+                 default:
+                     metadata_cache_driver:
+     -                    type: service
+     -                    id: doctrine.system_cache_provider
+     +                    type: pool
+     +                    pool: doctrine.system_cache_pool
+     ```
+
+   - On **PostgreSQL**, Sylius now forces the `SEQUENCE` identity generation strategy 
+     (`identity_generation_preferences` for `PostgreSQLPlatform`) to keep the database schema backward compatible 
+     with existing installations.
+
 ## Dependencies
 
 1. The `behat/transliterator` package has been **deprecated** and will be removed in Sylius 3.0.
@@ -67,6 +94,14 @@
    `symfony/var-exporter` (the default since Symfony 6.4). No change is required in your application.
 
    If your application depends on these packages directly, require them explicitly in your `composer.json`.
+
+4. The supported Doctrine version ranges have been **broadened** to allow the newer stack
+   (`doctrine/doctrine-bundle` `^2.13 || ^3.0`, `doctrine/dbal` `^3.9 || ^4.0`,
+   `doctrine/persistence` `^3.3 || ^4.0`, `doctrine/data-fixtures` `^1.7 || ^2.2`).
+
+   DBAL 4 removes the built-in `object` and `array` column types. Since Sylius maps two fields 
+   as `type="object"` (`PaymentSecurityToken.details` and `PaymentRequest.payload`), it registers
+   a custom `Sylius\Bundle\PaymentBundle\Doctrine\DBAL\Type\ObjectType` to keep them working.
 
 ## Deprecations
 
