@@ -56,18 +56,26 @@ final class PromotionActionTypeExtension extends AbstractTypeExtension
                 return;
             }
             $storedCodes = $data->getConfiguration()[ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY] ?? [];
+            if ($storedCodes === []) {
+                $storedCodes = $availableCodes;
+            }
             $event->getForm()->get(ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY)
                 ->setData(array_values(array_intersect($storedCodes, $availableCodes)));
         });
 
-        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event): void {
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($availableCodes): void {
             $data = $event->getData();
             if (!$data instanceof PromotionActionInterface) {
                 return;
             }
             $configuration = $data->getConfiguration();
+            $selectedChannels = $event->getForm()->get(ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY)->getData() ?? [];
+            $sortedSelected = $selectedChannels;
+            $sortedAvailable = $availableCodes;
+            sort($sortedSelected);
+            sort($sortedAvailable);
             $configuration[ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY] =
-                $event->getForm()->get(ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY)->getData() ?? [];
+                ($sortedSelected === $sortedAvailable) ? [] : $selectedChannels;
             $data->setConfiguration($configuration);
         });
     }
