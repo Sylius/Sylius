@@ -194,12 +194,6 @@
     "instaclick/php-webdriver": {
         "version": "1.4.7"
     },
-    "knplabs/gaufrette": {
-        "version": "v0.8.3"
-    },
-    "knplabs/knp-gaufrette-bundle": {
-        "version": "v0.7.1"
-    },
     "knplabs/knp-menu": {
         "version": "v3.1.2"
     },
