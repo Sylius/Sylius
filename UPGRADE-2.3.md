@@ -44,6 +44,18 @@
 
    If you have decorated or extended these classes, verify that your implementation also respects the `isTrackUsage()` flag.
 
+5. The `countByCustomerAndCoupon()` method on `Sylius\Component\Core\Repository\OrderRepositoryInterface` and its implementation in `Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository` has been deprecated and will be removed in Sylius 3.0.
+
+   Use `countByCustomerAndCouponSince()` instead, passing `null` as the `$since` argument to replicate the previous behaviour:
+
+   ```php
+   // Before
+   $repository->countByCustomerAndCoupon($customer, $coupon);
+
+   // After
+   $repository->countByCustomerAndCouponSince($customer, $coupon, null);
+   ```
+
 ## Configuration
 
 1. The default value of `sylius_core.order_by_identifier` has been changed from `true` to `false`. ([#18956](https://github.com/Sylius/Sylius/pull/18956))
