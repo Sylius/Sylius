@@ -35,6 +35,11 @@
      +                    pool: doctrine.system_cache_pool
      ```
 
+     As part of this switch, the `doctrine.result_cache_provider` and `doctrine.system_cache_provider` services 
+     (defined in Sylius' application configuration, wrapping the PSR-6 pools via `Doctrine\Common\Cache\Psr6\DoctrineProvider`) 
+     were **removed**. If you referenced them by id, use the cache pools directly (`doctrine.system_cache_pool`, 
+     `doctrine.result_cache_pool`) with `type: pool` as shown above.
+
    - On **PostgreSQL**, Sylius now forces the `SEQUENCE` identity generation strategy 
      (`identity_generation_preferences` for `PostgreSQLPlatform`) to keep the database schema backward compatible 
      with existing installations.
