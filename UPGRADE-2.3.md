@@ -56,6 +56,19 @@
    $repository->countByCustomerAndCouponSince($customer, $coupon, null);
    ```
 
+## Messenger
+
+1. A new `Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail` message has been introduced. ([#19002](https://github.com/Sylius/Sylius/pull/19002))
+
+   If you use an async transport, add the routing configuration:
+
+   ```yaml
+   framework:
+       messenger:
+           routing:
+               'Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail': your_async_transport
+   ```
+
 ## Configuration
 
 1. The default value of `sylius_core.order_by_identifier` has been changed from `true` to `false`. ([#18956](https://github.com/Sylius/Sylius/pull/18956))

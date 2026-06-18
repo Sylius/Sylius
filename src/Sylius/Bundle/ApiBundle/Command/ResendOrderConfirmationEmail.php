@@ -17,6 +17,6 @@ use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Bundle\CoreBundle\Command\ResendOrderConfirmationEmail as BaseResendOrderConfirmationEmail;
 
 #[OrderTokenValueAware]
-class ResendOrderConfirmationEmail extends BaseResendOrderConfirmationEmail
+readonly class ResendOrderConfirmationEmail extends BaseResendOrderConfirmationEmail
 {
 }

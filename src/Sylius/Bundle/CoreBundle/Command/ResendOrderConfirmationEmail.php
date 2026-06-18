@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-class ResendOrderConfirmationEmail
+readonly class ResendOrderConfirmationEmail
 {
     public function __construct(
-        public readonly string $orderTokenValue,
+        public string $orderTokenValue,
     ) {
     }
 }

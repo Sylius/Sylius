@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\CommandHandler\Account\ResendVerificationEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\RequestResetPasswordEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\ResetPasswordHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\SendResetPasswordEmailHandler;
@@ -21,6 +22,17 @@ use Sylius\Bundle\CoreBundle\CommandHandler\ResendShipmentConfirmationEmailHandl
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
+
+    $services
+        ->set('sylius.command_handler.account.resend_verification_email', ResendVerificationEmailHandler::class)
+        ->args([
+            service('sylius.repository.shop_user'),
+            service('sylius.repository.channel'),
+            service('sylius.shop_user.token_generator.email_verification'),
+            service('sylius.email_sender'),
+        ])
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
 
     $services
         ->set('sylius.command_handler.admin.account.request_reset_password_email', RequestResetPasswordEmailHandler::class)

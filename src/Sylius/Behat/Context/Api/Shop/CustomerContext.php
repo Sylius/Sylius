@@ -172,6 +172,14 @@ final class CustomerContext implements Context
         $this->resendVerificationEmail($user->getEmail());
     }
 
+    #[When('I resend the verification email to :email')]
+    public function iResendTheVerificationEmailTo(string $email): void
+    {
+        $request = $this->requestFactory->create('shop', 'customers/verification-request', '');
+        $request->setContent(['email' => $email]);
+        $this->client->executeCustomRequest($request);
+    }
+
     #[When('I use the verification link from the first email to verify')]
     public function iUseVerificationLinkFromFirstEmailToVerify(): void
     {
@@ -189,6 +197,12 @@ final class CustomerContext implements Context
 
     #[Then('I should be notified that the verification email has been sent')]
     public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 202);
+    }
+
+    #[Then('I should be notified that the verification email has been sent to the provided address')]
+    public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSentToTheProvidedAddress(): void
     {
         Assert::same($this->client->getLastResponse()->getStatusCode(), 202);
     }

@@ -36,6 +36,7 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LocaleContextBuilder;
 use Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LoggedInCustomerEmailAwareContextBuilder;
 use Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\LoggedInShopUserIdAwareContextBuilder;
 use Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\PaymentRequestActionAwareContextBuilder;
+use Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\ResendVerificationEmailContextBuilder;
 use Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -223,6 +224,16 @@ return static function (ContainerConfigurator $container) {
             PaymentRequestActionAware::class,
             PaymentRequestActionAware::DEFAULT_ARGUMENT_NAME,
             service('sylius.provider.payment_request.default_action'),
+        ])
+    ;
+
+    $services
+        ->set('sylius_api.context_builder.resend_verification_email', ResendVerificationEmailContextBuilder::class)
+        ->decorate('api_platform.serializer.context_builder', null, 64)
+        ->args([
+            service('.inner'),
+            service('sylius.context.channel'),
+            service('sylius.context.locale'),
         ])
     ;
 };

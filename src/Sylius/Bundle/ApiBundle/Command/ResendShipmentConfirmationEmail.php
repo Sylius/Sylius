@@ -17,6 +17,6 @@ use Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware;
 use Sylius\Bundle\CoreBundle\Command\ResendShipmentConfirmationEmail as BaseResendShipmentConfirmationEmail;
 
 #[ShipmentIdAware]
-class ResendShipmentConfirmationEmail extends BaseResendShipmentConfirmationEmail
+readonly class ResendShipmentConfirmationEmail extends BaseResendShipmentConfirmationEmail
 {
 }

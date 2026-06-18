@@ -11,12 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\CoreBundle\Command;
+namespace Sylius\Bundle\CoreBundle\Command\Account;
 
-readonly class ResendShipmentConfirmationEmail
+readonly class ResendVerificationEmail
 {
     public function __construct(
-        public mixed $shipmentId,
+        public string $channelCode,
+        public string $localeCode,
+        public string $email,
+        public bool $sendVerificationLink = false,
     ) {
     }
 }
