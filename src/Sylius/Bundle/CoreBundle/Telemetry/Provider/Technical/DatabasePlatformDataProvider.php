@@ -79,14 +79,14 @@ final class DatabasePlatformDataProvider implements DataProviderInterface
         }
 
         // DBAL 4.x removed getName(), use class name mapping
-        $className = get_class($platform);
+        $className = strtolower($platform::class);
 
         return match (true) {
-            str_contains($className, 'MySQL') => 'mysql',
-            str_contains($className, 'PostgreSQL') => 'postgresql',
-            str_contains($className, 'Sqlite') || str_contains($className, 'SQLite') => 'sqlite',
-            str_contains($className, 'SQLServer') || str_contains($className, 'SQLSrv') => 'mssql',
-            str_contains($className, 'Oracle') => 'oracle',
+            str_contains($className, 'mysql') => 'mysql',
+            str_contains($className, 'postgresql') => 'postgresql',
+            str_contains($className, 'sqlite') => 'sqlite',
+            str_contains($className, 'sqlserver'), str_contains($className, 'sqlsrv') => 'mssql',
+            str_contains($className, 'oracle') => 'oracle',
             default => null,
         };
     }

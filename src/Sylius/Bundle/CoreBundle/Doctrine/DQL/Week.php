@@ -20,6 +20,7 @@ use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
+use Sylius\Bundle\CoreBundle\Doctrine\Platform\PlatformHelper;
 
 final class Week extends FunctionNode
 {
@@ -48,16 +49,10 @@ final class Week extends FunctionNode
             return sprintf('EXTRACT(WEEK FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
-        if ($this->isSqlitePlatform($platform)) {
+        if (PlatformHelper::isSqlite($platform)) {
             return sprintf('CAST(STRFTIME("%%W", %s) AS NUMBER)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
         throw new \RuntimeException(sprintf('Platform "%s" is not supported!', get_class($platform)));
-    }
-
-    /** Compatibility layer for DBAL 3.x (SqlitePlatform) and 4.x (SQLitePlatform) */
-    private function isSqlitePlatform(object $platform): bool
-    {
-        return str_contains(get_class($platform), 'SqlitePlatform') || str_contains(get_class($platform), 'SQLitePlatform');
     }
 }
