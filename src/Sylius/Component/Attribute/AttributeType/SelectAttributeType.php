@@ -78,13 +78,13 @@ final class SelectAttributeType implements AttributeTypeInterface
 
         if (isset($validationConfiguration['min']) && !empty($validationConfiguration['min'])) {
             $constraints[] = new Count(
-                min: $validationConfiguration['min'],
+                min: (int) $validationConfiguration['min'],
             );
         }
 
         if (isset($validationConfiguration['max']) && !empty($validationConfiguration['max'])) {
             $constraints[] = new Count(
-                max: $validationConfiguration['max'],
+                max: (int) $validationConfiguration['max'],
             );
         }
 
