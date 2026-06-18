@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
@@ -20,6 +21,20 @@ class UniqueCurrencyPair extends Constraint
 {
     /** @var string */
     public $message = 'sylius.exchange_rate.unique_currency_pair';
+
+    /**
+     * @param array<string>|null $groups
+     */
+    #[HasNamedArguments]
+    public function __construct(
+        ?string $message = null,
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message ?? $this->message;
+    }
 
     public function getTargets(): string
     {

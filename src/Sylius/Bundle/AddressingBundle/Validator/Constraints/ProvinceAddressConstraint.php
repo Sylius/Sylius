@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 /**
@@ -23,6 +24,20 @@ class ProvinceAddressConstraint extends Constraint
 {
     /** @var string */
     public $message = 'sylius.address.province.valid';
+
+    /**
+     * @param array<string>|null $groups
+     */
+    #[HasNamedArguments]
+    public function __construct(
+        ?string $message = null,
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->message = $message ?? $this->message;
+    }
 
     public function getTargets(): string
     {

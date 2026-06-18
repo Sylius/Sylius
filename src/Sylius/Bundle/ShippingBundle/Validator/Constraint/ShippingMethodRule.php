@@ -13,12 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShippingBundle\Validator\Constraint;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class ShippingMethodRule extends Constraint
 {
     public string $invalidType = 'sylius.shipping_method.rule.invalid_type';
+
+    /**
+     * @param array<string>|null $groups
+     */
+    #[HasNamedArguments]
+    public function __construct(
+        ?string $invalidType = null,
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->invalidType = $invalidType ?? $this->invalidType;
+    }
 
     public function validatedBy(): string
     {

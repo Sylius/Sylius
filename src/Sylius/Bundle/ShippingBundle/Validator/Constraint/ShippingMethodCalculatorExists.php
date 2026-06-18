@@ -13,12 +13,27 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ShippingBundle\Validator\Constraint;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class ShippingMethodCalculatorExists extends Constraint
 {
     public string $invalidShippingCalculator = 'sylius.shipping_method.calculator.invalid';
+
+    /**
+     * @param array<string>|null $groups
+     */
+    #[HasNamedArguments]
+    public function __construct(
+        ?string $invalidShippingCalculator = null,
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        parent::__construct(groups: $groups, payload: $payload);
+
+        $this->invalidShippingCalculator = $invalidShippingCalculator ?? $this->invalidShippingCalculator;
+    }
 
     public function validatedBy(): string
     {
