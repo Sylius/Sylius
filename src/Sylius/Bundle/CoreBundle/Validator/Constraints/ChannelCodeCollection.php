@@ -27,13 +27,13 @@ final class ChannelCodeCollection extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
+        public ?string $extraFieldsMessage = null,
+        public ?string $missingFieldsMessage = null,
+        public string $invalidChannelMessage = 'sylius.channel_code_collection.invalid_channel',
         public array $constraints = [],
         public bool $allowExtraFields = false,
         public bool $allowMissingFields = false,
         public ?string $channelAwarePropertyPath = null,
-        public ?string $extraFieldsMessage = null,
-        public ?string $missingFieldsMessage = null,
-        public string $invalidChannelMessage = 'sylius.channel_code_collection.invalid_channel',
         public bool $validateAgainstAllChannels = false,
         ?array $groups = null,
         mixed $payload = null,

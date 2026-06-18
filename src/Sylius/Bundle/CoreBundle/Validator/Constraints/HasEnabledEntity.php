@@ -25,8 +25,8 @@ final class HasEnabledEntity extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        public ?string $objectManager = null,
         public string $message = 'Must have at least one enabled entity',
+        public ?string $objectManager = null,
         public string $repositoryMethod = 'findBy',
         public ?string $errorPath = null,
         public string $enabledPath = 'enabled',
