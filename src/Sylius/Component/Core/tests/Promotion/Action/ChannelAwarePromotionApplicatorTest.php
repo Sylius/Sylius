@@ -116,7 +116,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->action
             ->expects($this->once())
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
 
         $this->order->method('getChannel')->willReturn($this->channel);
         $this->channel->method('getCode')->willReturn('MOBILE');
@@ -137,7 +137,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->action
             ->expects($this->exactly(2))
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
         $this->action->expects($this->once())->method('getType')->willReturn('order_percentage_discount');
 
         $this->order->method('getChannel')->willReturn($this->channel);
@@ -164,7 +164,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->action
             ->expects($this->exactly(2))
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => []]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => []]);
         $this->action->expects($this->once())->method('getType')->willReturn('order_percentage_discount');
 
         $this->serviceRegistry->expects($this->once())->method('get')->willReturn($this->actionCommand);
@@ -188,7 +188,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->action
             ->expects($this->exactly(2))
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
         $this->action->expects($this->once())->method('getType')->willReturn('order_percentage_discount');
 
         $this->serviceRegistry->expects($this->once())->method('get')->willReturn($this->actionCommand);
@@ -203,7 +203,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->applicator->apply($this->subject, $this->promotion);
     }
 
-    public function testShouldStripChannelsKeyFromConfigurationDuringApply(): void
+    public function testShouldStripExcludedChannelsKeyFromConfigurationDuringApply(): void
     {
         $this->promotion->expects($this->once())->method('getActions')->willReturn(
             new ArrayCollection([$this->action]),
@@ -214,7 +214,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
             ->method('getConfiguration')
             ->willReturn([
                 'amount' => 100,
-                ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB'],
+                ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE'],
             ]);
         $this->action->expects($this->once())->method('getType')->willReturn('order_fixed_discount');
 
@@ -244,7 +244,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->action
             ->expects($this->once())
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
 
         $secondAction->expects($this->exactly(2))->method('getConfiguration')->willReturn([]);
         $secondAction->expects($this->once())->method('getType')->willReturn('order_percentage_discount');
@@ -275,11 +275,11 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->action
             ->expects($this->once())
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
         $secondAction
             ->expects($this->once())
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
 
         $this->order->method('getChannel')->willReturn($this->channel);
         $this->channel->method('getCode')->willReturn('MOBILE');
@@ -299,7 +299,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->action
             ->expects($this->once())
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
 
         $this->order->method('getChannel')->willReturn($this->channel);
         $this->channel->method('getCode')->willReturn('MOBILE');
@@ -320,7 +320,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->action
             ->expects($this->exactly(2))
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
         $this->action->expects($this->once())->method('getType')->willReturn('order_percentage_discount');
 
         $this->order->method('getChannel')->willReturn($this->channel);
@@ -337,7 +337,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
         $this->applicator->revert($this->order, $this->promotion);
     }
 
-    public function testShouldStripChannelsKeyFromConfigurationDuringRevert(): void
+    public function testShouldStripExcludedChannelsKeyFromConfigurationDuringRevert(): void
     {
         $this->promotion->expects($this->once())->method('getActions')->willReturn(
             new ArrayCollection([$this->action]),
@@ -348,7 +348,7 @@ final class ChannelAwarePromotionApplicatorTest extends TestCase
             ->method('getConfiguration')
             ->willReturn([
                 'amount' => 100,
-                ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB'],
+                ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE'],
             ]);
         $this->action->expects($this->once())->method('getType')->willReturn('order_fixed_discount');
 

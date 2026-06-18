@@ -141,7 +141,7 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
         $this->assertFalse($this->checker->isEligible($this->order, $this->promotion));
     }
 
-    public function testShouldSkipRuleIfCurrentChannelNotInChannelsList(): void
+    public function testShouldSkipRuleIfCurrentChannelIsInExcludedChannelsList(): void
     {
         $this->promotion->expects($this->once())->method('hasRules')->willReturn(true);
         $this->promotion->expects($this->once())->method('getRules')->willReturn(
@@ -151,7 +151,7 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
         $this->rule
             ->expects($this->once())
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
 
         $this->order->method('getChannel')->willReturn($this->channel);
         $this->channel->method('getCode')->willReturn('MOBILE');
@@ -161,7 +161,7 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
         $this->assertTrue($this->checker->isEligible($this->order, $this->promotion));
     }
 
-    public function testShouldNotSkipRuleIfCurrentChannelIsInChannelsList(): void
+    public function testShouldNotSkipRuleIfCurrentChannelIsNotInExcludedChannelsList(): void
     {
         $this->promotion->expects($this->once())->method('hasRules')->willReturn(true);
         $this->promotion->expects($this->once())->method('getRules')->willReturn(
@@ -171,7 +171,7 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
         $this->rule
             ->expects($this->exactly(2))
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
         $this->rule->expects($this->once())->method('getType')->willReturn('item_total');
 
         $this->order->method('getChannel')->willReturn($this->channel);
@@ -193,7 +193,7 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
         $this->rule
             ->expects($this->exactly(2))
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => []]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => []]);
         $this->rule->expects($this->once())->method('getType')->willReturn('item_total');
 
         $this->serviceRegistry->expects($this->once())->method('get')->willReturn($this->ruleChecker);
@@ -212,7 +212,7 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
         $this->rule
             ->expects($this->exactly(2))
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
         $this->rule->expects($this->once())->method('getType')->willReturn('item_total');
 
         $this->serviceRegistry->expects($this->once())->method('get')->willReturn($this->ruleChecker);
@@ -221,7 +221,7 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
         $this->assertTrue($this->checker->isEligible($this->subject, $this->promotion));
     }
 
-    public function testShouldStripChannelsKeyFromConfigurationBeforePassingToRuleChecker(): void
+    public function testShouldStripExcludedChannelsKeyFromConfigurationBeforePassingToRuleChecker(): void
     {
         $this->promotion->expects($this->once())->method('hasRules')->willReturn(true);
         $this->promotion->expects($this->once())->method('getRules')->willReturn(
@@ -233,7 +233,7 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
             ->method('getConfiguration')
             ->willReturn([
                 'count' => 3,
-                ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB'],
+                ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE'],
             ]);
         $this->rule->expects($this->once())->method('getType')->willReturn('cart_quantity');
 
@@ -262,11 +262,11 @@ final class ChannelAwarePromotionRulesEligibilityCheckerTest extends TestCase
         $this->rule
             ->expects($this->once())
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
         $secondRule
             ->expects($this->once())
             ->method('getConfiguration')
-            ->willReturn([ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB']]);
+            ->willReturn([ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE']]);
 
         $this->order->method('getChannel')->willReturn($this->channel);
         $this->channel->method('getCode')->willReturn('MOBILE');

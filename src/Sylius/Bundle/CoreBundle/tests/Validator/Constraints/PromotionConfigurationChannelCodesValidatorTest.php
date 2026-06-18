@@ -79,7 +79,7 @@ final class PromotionConfigurationChannelCodesValidatorTest extends TestCase
         $this->executionContext->expects($this->never())->method('buildViolation');
 
         $this->validator->validate(
-            [ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => []],
+            [ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => []],
             new PromotionConfigurationChannelCodes(),
         );
     }
@@ -96,7 +96,7 @@ final class PromotionConfigurationChannelCodesValidatorTest extends TestCase
         $this->executionContext->expects($this->never())->method('buildViolation');
 
         $this->validator->validate(
-            [ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB', 'MOBILE']],
+            [ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['WEB', 'MOBILE']],
             new PromotionConfigurationChannelCodes(),
         );
     }
@@ -118,7 +118,7 @@ final class PromotionConfigurationChannelCodesValidatorTest extends TestCase
         $violationBuilder
             ->expects($this->once())
             ->method('atPath')
-            ->with('[' . ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY . ']')
+            ->with('[' . ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY . ']')
             ->willReturn($violationBuilder);
         $violationBuilder->expects($this->once())->method('addViolation');
 
@@ -129,7 +129,7 @@ final class PromotionConfigurationChannelCodesValidatorTest extends TestCase
             ->willReturn($violationBuilder);
 
         $this->validator->validate(
-            [ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['INVALID_CODE']],
+            [ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['INVALID_CODE']],
             new PromotionConfigurationChannelCodes(),
         );
     }
@@ -158,7 +158,7 @@ final class PromotionConfigurationChannelCodesValidatorTest extends TestCase
             ->willReturn($violationBuilder);
 
         $this->validator->validate(
-            [ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => ['WEB', 'INVALID_ONE', 'INVALID_TWO']],
+            [ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['WEB', 'INVALID_ONE', 'INVALID_TWO']],
             new PromotionConfigurationChannelCodes(),
         );
     }
@@ -178,7 +178,7 @@ final class PromotionConfigurationChannelCodesValidatorTest extends TestCase
             ->willReturn($violationBuilder);
 
         $this->validator->validate(
-            [ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY => [42]],
+            [ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => [42]],
             new PromotionConfigurationChannelCodes(),
         );
     }

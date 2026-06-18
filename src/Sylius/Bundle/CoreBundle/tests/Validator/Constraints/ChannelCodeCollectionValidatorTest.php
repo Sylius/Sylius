@@ -21,6 +21,7 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollectionValidato
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Promotion\ChannelAwareConfigurationInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
@@ -252,6 +253,31 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
         $this->validator->validate($value, new ChannelCodeCollection([
             'constraints' => $constraints,
             'groups' => $groups,
+            'validateAgainstAllChannels' => true,
+        ]));
+    }
+
+    public function testItValidatesCollectionsForRemainingChannelsWhenExcludedChannelsKeyIsPresent(): void
+    {
+        $validator = $this->createMock(ValidatorInterface::class);
+        $contextualValidator = $this->createMock(ContextualValidatorInterface::class);
+
+        $this->channelRepository->method('findAllWithBasicData')->willReturn([
+            ['code' => 'WEB'], ['code' => 'MOBILE'],
+        ]);
+
+        $value = [
+            'WEB' => ['amount' => 1000],
+            ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => ['MOBILE'],
+        ];
+
+        $this->executionContext->method('getValidator')->willReturn($validator);
+        $validator->method('inContext')->willReturn($contextualValidator);
+        $contextualValidator->expects($this->once())->method('validate');
+
+        $this->validator->validate($value, new ChannelCodeCollection([
+            'constraints' => [new NotBlank(), new Type('numeric')],
+            'groups' => ['Default'],
             'validateAgainstAllChannels' => true,
         ]));
     }
