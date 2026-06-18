@@ -19,6 +19,15 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ChosenPaymentMethodEligibility extends Constraint
 {
+    /** @deprecated since Sylius 2.3, use $notAvailableMessage instead. It will be removed in Sylius 3.0. */
+    public string $notAvailable = 'sylius.payment_method.not_available';
+
+    /** @deprecated since Sylius 2.3, use $notExistMessage instead. It will be removed in Sylius 3.0. */
+    public string $notExist = 'sylius.payment_method.not_exist';
+
+    /** @deprecated since Sylius 2.3, use $paymentNotFoundMessage instead. It will be removed in Sylius 3.0. */
+    public string $paymentNotFound = 'sylius.payment.not_found';
+
     /**
      * @param array<string, mixed>|null $options
      */
@@ -90,15 +99,6 @@ final class ChosenPaymentMethodEligibility extends Constraint
         $this->notExist = $this->notExistMessage;
         $this->paymentNotFound = $this->paymentNotFoundMessage;
     }
-
-    /** @deprecated since Sylius 2.3, use $notAvailableMessage instead. It will be removed in Sylius 3.0. */
-    public string $notAvailable = 'sylius.payment_method.not_available';
-
-    /** @deprecated since Sylius 2.3, use $notExistMessage instead. It will be removed in Sylius 3.0. */
-    public string $notExist = 'sylius.payment_method.not_exist';
-
-    /** @deprecated since Sylius 2.3, use $paymentNotFoundMessage instead. It will be removed in Sylius 3.0. */
-    public string $paymentNotFound = 'sylius.payment.not_found';
 
     public function validatedBy(): string
     {

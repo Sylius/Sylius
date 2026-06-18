@@ -19,6 +19,9 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class GatewayFactoryExists extends Constraint
 {
+    /** @deprecated since Sylius 2.3, use $invalidGatewayFactoryMessage instead. It will be removed in Sylius 3.0. */
+    public string $invalidGatewayFactory = 'sylius.gateway_config.invalid_gateway_factory';
+
     /**
      * @param array<string, mixed>|null $options
      */
@@ -58,9 +61,6 @@ final class GatewayFactoryExists extends Constraint
         parent::__construct(groups: $groups, payload: $payload);
         $this->invalidGatewayFactory = $this->invalidGatewayFactoryMessage;
     }
-
-    /** @deprecated since Sylius 2.3, use $invalidGatewayFactoryMessage instead. It will be removed in Sylius 3.0. */
-    public string $invalidGatewayFactory = 'sylius.gateway_config.invalid_gateway_factory';
 
     public function validatedBy(): string
     {

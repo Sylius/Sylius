@@ -19,6 +19,9 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class AddingEligibleProductVariantToCart extends Constraint
 {
+    /** @deprecated since Sylius 2.3, use $productVariantNotSufficientMessage instead. It will be removed in Sylius 3.0. */
+    public string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
+
     /**
      * @param array<string, mixed>|null $options
      */
@@ -62,9 +65,6 @@ final class AddingEligibleProductVariantToCart extends Constraint
         parent::__construct(groups: $groups, payload: $payload);
         $this->productVariantNotSufficient = $this->productVariantNotSufficientMessage;
     }
-
-    /** @deprecated since Sylius 2.3, use $productVariantNotSufficientMessage instead. It will be removed in Sylius 3.0. */
-    public string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
 
     public function validatedBy(): string
     {

@@ -19,6 +19,12 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ChangedItemQuantityInCart extends Constraint
 {
+    /** @deprecated since Sylius 2.3, use $productVariantNotLongerAvailableMessage instead. It will be removed in Sylius 3.0. */
+    public string $productVariantNotLongerAvailable = 'sylius.product_variant.not_longer_available';
+
+    /** @deprecated since Sylius 2.3, use $productVariantNotSufficientMessage instead. It will be removed in Sylius 3.0. */
+    public string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
+
     /**
      * @param array<string, mixed>|null $options
      */
@@ -76,12 +82,6 @@ final class ChangedItemQuantityInCart extends Constraint
         $this->productVariantNotLongerAvailable = $this->productVariantNotLongerAvailableMessage;
         $this->productVariantNotSufficient = $this->productVariantNotSufficientMessage;
     }
-
-    /** @deprecated since Sylius 2.3, use $productVariantNotLongerAvailableMessage instead. It will be removed in Sylius 3.0. */
-    public string $productVariantNotLongerAvailable = 'sylius.product_variant.not_longer_available';
-
-    /** @deprecated since Sylius 2.3, use $productVariantNotSufficientMessage instead. It will be removed in Sylius 3.0. */
-    public string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
 
     public function validatedBy(): string
     {

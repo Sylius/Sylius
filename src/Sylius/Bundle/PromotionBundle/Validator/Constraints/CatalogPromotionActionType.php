@@ -19,6 +19,9 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class CatalogPromotionActionType extends Constraint
 {
+    /** @deprecated since Sylius 2.3, use $invalidTypeMessage instead. It will be removed in Sylius 3.0. */
+    public string $invalidType = 'sylius.catalog_promotion_action.type.invalid';
+
     /**
      * @param array<string, mixed>|null $options
      */
@@ -58,9 +61,6 @@ final class CatalogPromotionActionType extends Constraint
         parent::__construct(groups: $groups, payload: $payload);
         $this->invalidType = $this->invalidTypeMessage;
     }
-
-    /** @deprecated since Sylius 2.3, use $invalidTypeMessage instead. It will be removed in Sylius 3.0. */
-    public string $invalidType = 'sylius.catalog_promotion_action.type.invalid';
 
     public function validatedBy(): string
     {
