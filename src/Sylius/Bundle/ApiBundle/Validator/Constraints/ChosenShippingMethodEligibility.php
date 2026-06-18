@@ -28,6 +28,7 @@ final class ChosenShippingMethodEligibility extends Constraint
         ?string $message = null,
         ?string $notFoundMessage = null,
         ?string $shipmentNotFoundMessage = null,
+        ?string $shippingAddressNotFoundMessage = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -42,6 +43,7 @@ final class ChosenShippingMethodEligibility extends Constraint
             $message ??= $options['message'] ?? null;
             $notFoundMessage ??= $options['notFoundMessage'] ?? null;
             $shipmentNotFoundMessage ??= $options['shipmentNotFoundMessage'] ?? null;
+            $shippingAddressNotFoundMessage ??= $options['shippingAddressNotFoundMessage'] ?? null;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
@@ -51,6 +53,7 @@ final class ChosenShippingMethodEligibility extends Constraint
         $this->message = $message ?? $this->message;
         $this->notFoundMessage = $notFoundMessage ?? $this->notFoundMessage;
         $this->shipmentNotFoundMessage = $shipmentNotFoundMessage ?? $this->shipmentNotFoundMessage;
+        $this->shippingAddressNotFoundMessage = $shippingAddressNotFoundMessage ?? $this->shippingAddressNotFoundMessage;
     }
 
     public string $message = 'sylius.shipping_method.not_available';
