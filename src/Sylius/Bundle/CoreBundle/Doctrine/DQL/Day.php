@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\DQL;
 
-use Doctrine\DBAL\Platforms\MySQLPlatform;
-use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Parser;
@@ -41,11 +39,11 @@ final class Day extends FunctionNode
     {
         $platform = $sqlWalker->getConnection()->getDatabasePlatform();
 
-        if (is_a($platform, MySQLPlatform::class, true)) {
+        if (PlatformHelper::isMysql($platform)) {
             return sprintf('DAY(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
-        if (is_a($platform, PostgreSQLPlatform::class, true)) {
+        if (PlatformHelper::isPostgreSQL($platform)) {
             return sprintf('EXTRACT(DAY FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 

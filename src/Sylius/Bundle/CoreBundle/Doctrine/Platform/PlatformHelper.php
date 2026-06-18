@@ -13,10 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\Platform;
 
+use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+
 final class PlatformHelper
 {
     private function __construct()
     {
+    }
+
+    public static function isMysql(object $platform): bool
+    {
+        return is_a($platform, MySQLPlatform::class, true);
+    }
+
+    public static function isPostgreSQL(object $platform): bool
+    {
+        return is_a($platform, PostgreSQLPlatform::class, true);
     }
 
     /** Compatibility layer for DBAL 3.x (SqlitePlatform) and 4.x (SQLitePlatform). */
