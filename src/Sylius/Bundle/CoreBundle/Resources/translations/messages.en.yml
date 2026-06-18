@@ -105,6 +105,7 @@ sylius:
             shop_billing_data: Shop billing data
             skipping_shipping_step_allowed: Skip shipping step if only one shipping method is available?
             skipping_payment_step_allowed: Skip payment step if only one payment method is available?
+            show_prices_including_tax: Show prices including tax in catalog
             tax_calculation_strategy: Tax calculation strategy
             tax_zone_default: Default tax zone
             taxonomies: Taxonomies
