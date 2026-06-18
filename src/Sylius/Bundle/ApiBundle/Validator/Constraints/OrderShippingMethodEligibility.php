@@ -19,10 +19,6 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderShippingMethodEligibility extends Constraint
 {
-    public string $message = 'sylius.order.shipping_method_eligibility';
-
-    public string $methodNotAvailableMessage = 'sylius.order.shipping_method_not_available';
-
     /**
      * @param array<string, mixed>|null $options
      * @param array<string>|null $groups
@@ -30,8 +26,8 @@ final class OrderShippingMethodEligibility extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
-        ?string $methodNotAvailableMessage = null,
+        public string $message = 'sylius.order.shipping_method_eligibility',
+        public string $methodNotAvailableMessage = 'sylius.order.shipping_method_not_available',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -43,16 +39,13 @@ final class OrderShippingMethodEligibility extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
-            $methodNotAvailableMessage ??= $options['methodNotAvailableMessage'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
+            $this->methodNotAvailableMessage = $options['methodNotAvailableMessage'] ?? $this->methodNotAvailableMessage;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
-        $this->methodNotAvailableMessage = $methodNotAvailableMessage ?? $this->methodNotAvailableMessage;
     }
 
     public function getMessage(): string

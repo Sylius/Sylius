@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ProductVariantCombination extends Constraint
 {
-    public string $message = 'sylius.product_variant.combination';
-
     /**
      * @param array<string, mixed>|null $options
      * @param array<string>|null $groups
@@ -28,7 +26,7 @@ final class ProductVariantCombination extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
+        public string $message = 'sylius.product_variant.combination',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -40,14 +38,12 @@ final class ProductVariantCombination extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
     }
 
     public function validatedBy(): string

@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ShippingMethodRule extends Constraint
 {
-    public string $invalidTypeMessage = 'sylius.shipping_method.rule.invalid_type';
-
     /** @deprecated since Sylius 2.3, use $invalidTypeMessage instead. It will be removed in Sylius 3.0. */
     public string $invalidType = 'sylius.shipping_method.rule.invalid_type';
 
@@ -31,7 +29,7 @@ final class ShippingMethodRule extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $invalidTypeMessage = null,
+        public string $invalidTypeMessage = 'sylius.shipping_method.rule.invalid_type',
         ?string $invalidType = null,
         ?array $groups = null,
         mixed $payload = null,
@@ -44,7 +42,7 @@ final class ShippingMethodRule extends Constraint
                 static::class,
             );
 
-            $invalidTypeMessage ??= $options['invalidTypeMessage'] ?? null;
+            $this->invalidTypeMessage = $options['invalidTypeMessage'] ?? $this->invalidTypeMessage;
             $invalidType ??= $options['invalidType'] ?? null;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
@@ -58,12 +56,10 @@ final class ShippingMethodRule extends Constraint
                 static::class,
             );
 
-            $invalidTypeMessage ??= $invalidType;
+            $this->invalidTypeMessage = $invalidType;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->invalidTypeMessage = $invalidTypeMessage ?? $this->invalidTypeMessage;
         $this->invalidType = $this->invalidTypeMessage;
     }
 

@@ -25,7 +25,7 @@ final class PlacedOrderCartItemsImmutable extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
+        public string $message = 'sylius.order.cart_items_immutable',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -37,17 +37,13 @@ final class PlacedOrderCartItemsImmutable extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
     }
-
-    public string $message = 'sylius.order.cart_items_immutable';
 
     public function validatedBy(): string
     {

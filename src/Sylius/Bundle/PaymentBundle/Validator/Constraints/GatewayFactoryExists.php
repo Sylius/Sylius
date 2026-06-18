@@ -25,7 +25,7 @@ final class GatewayFactoryExists extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $invalidGatewayFactoryMessage = null,
+        public string $invalidGatewayFactoryMessage = 'sylius.gateway_config.invalid_gateway_factory',
         ?string $invalidGatewayFactory = null,
         ?array $groups = null,
         mixed $payload = null,
@@ -38,7 +38,7 @@ final class GatewayFactoryExists extends Constraint
                 static::class,
             );
 
-            $invalidGatewayFactoryMessage ??= $options['invalidGatewayFactoryMessage'] ?? null;
+            $this->invalidGatewayFactoryMessage = $options['invalidGatewayFactoryMessage'] ?? $this->invalidGatewayFactoryMessage;
             $invalidGatewayFactory ??= $options['invalidGatewayFactory'] ?? null;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
@@ -52,16 +52,12 @@ final class GatewayFactoryExists extends Constraint
                 static::class,
             );
 
-            $invalidGatewayFactoryMessage ??= $invalidGatewayFactory;
+            $this->invalidGatewayFactoryMessage = $invalidGatewayFactory;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->invalidGatewayFactoryMessage = $invalidGatewayFactoryMessage ?? $this->invalidGatewayFactoryMessage;
         $this->invalidGatewayFactory = $this->invalidGatewayFactoryMessage;
     }
-
-    public string $invalidGatewayFactoryMessage = 'sylius.gateway_config.invalid_gateway_factory';
 
     /** @deprecated since Sylius 2.3, use $invalidGatewayFactoryMessage instead. It will be removed in Sylius 3.0. */
     public string $invalidGatewayFactory = 'sylius.gateway_config.invalid_gateway_factory';

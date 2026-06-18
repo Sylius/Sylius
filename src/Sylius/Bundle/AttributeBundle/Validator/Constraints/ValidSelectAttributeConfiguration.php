@@ -25,9 +25,9 @@ final class ValidSelectAttributeConfiguration extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $messageMultiple = null,
-        ?string $messageMinEntries = null,
-        ?string $messageMaxEntries = null,
+        public string $messageMultiple = 'sylius.attribute.configuration.multiple',
+        public string $messageMinEntries = 'sylius.attribute.configuration.min_entries',
+        public string $messageMaxEntries = 'sylius.attribute.configuration.max_entries',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -39,25 +39,15 @@ final class ValidSelectAttributeConfiguration extends Constraint
                 static::class,
             );
 
-            $messageMultiple ??= $options['messageMultiple'] ?? null;
-            $messageMinEntries ??= $options['messageMinEntries'] ?? null;
-            $messageMaxEntries ??= $options['messageMaxEntries'] ?? null;
+            $this->messageMultiple = $options['messageMultiple'] ?? $this->messageMultiple;
+            $this->messageMinEntries = $options['messageMinEntries'] ?? $this->messageMinEntries;
+            $this->messageMaxEntries = $options['messageMaxEntries'] ?? $this->messageMaxEntries;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->messageMultiple = $messageMultiple ?? $this->messageMultiple;
-        $this->messageMinEntries = $messageMinEntries ?? $this->messageMinEntries;
-        $this->messageMaxEntries = $messageMaxEntries ?? $this->messageMaxEntries;
     }
-
-    public string $messageMultiple = 'sylius.attribute.configuration.multiple';
-
-    public string $messageMinEntries = 'sylius.attribute.configuration.min_entries';
-
-    public string $messageMaxEntries = 'sylius.attribute.configuration.max_entries';
 
     public function getTargets(): string
     {

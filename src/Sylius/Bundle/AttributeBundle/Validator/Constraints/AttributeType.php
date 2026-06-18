@@ -25,7 +25,7 @@ class AttributeType extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $unregisteredAttributeTypeMessage = null,
+        public string $unregisteredAttributeTypeMessage = 'sylius.attribute.type.unregistered',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -37,17 +37,13 @@ class AttributeType extends Constraint
                 static::class,
             );
 
-            $unregisteredAttributeTypeMessage ??= $options['unregisteredAttributeTypeMessage'] ?? null;
+            $this->unregisteredAttributeTypeMessage = $options['unregisteredAttributeTypeMessage'] ?? $this->unregisteredAttributeTypeMessage;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->unregisteredAttributeTypeMessage = $unregisteredAttributeTypeMessage ?? $this->unregisteredAttributeTypeMessage;
     }
-
-    public string $unregisteredAttributeTypeMessage = 'sylius.attribute.type.unregistered';
 
     public function getTargets(): string
     {

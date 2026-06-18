@@ -25,7 +25,7 @@ final class ZoneCannotContainItself extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
+        public string $message = 'sylius.zone_member.cannot_be_the_same_as_zone',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -37,17 +37,13 @@ final class ZoneCannotContainItself extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
     }
-
-    public string $message = 'sylius.zone_member.cannot_be_the_same_as_zone';
 
     public function validatedBy(): string
     {

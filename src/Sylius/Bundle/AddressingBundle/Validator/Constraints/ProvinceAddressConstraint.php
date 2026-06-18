@@ -22,9 +22,6 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 class ProvinceAddressConstraint extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.address.province.valid';
-
     /**
      * @param array<string, mixed>|null $options
      * @param array<string>|null $groups
@@ -32,7 +29,7 @@ class ProvinceAddressConstraint extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
+        public string $message = 'sylius.address.province.valid',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -44,14 +41,12 @@ class ProvinceAddressConstraint extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
     }
 
     public function getTargets(): string

@@ -25,9 +25,9 @@ final class ChosenPaymentMethodEligibility extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $notAvailableMessage = null,
-        ?string $notExistMessage = null,
-        ?string $paymentNotFoundMessage = null,
+        public string $notAvailableMessage = 'sylius.payment_method.not_available',
+        public string $notExistMessage = 'sylius.payment_method.not_exist',
+        public string $paymentNotFoundMessage = 'sylius.payment.not_found',
         ?string $notAvailable = null,
         ?string $notExist = null,
         ?string $paymentNotFound = null,
@@ -42,9 +42,9 @@ final class ChosenPaymentMethodEligibility extends Constraint
                 static::class,
             );
 
-            $notAvailableMessage ??= $options['notAvailableMessage'] ?? null;
-            $notExistMessage ??= $options['notExistMessage'] ?? null;
-            $paymentNotFoundMessage ??= $options['paymentNotFoundMessage'] ?? null;
+            $this->notAvailableMessage = $options['notAvailableMessage'] ?? $this->notAvailableMessage;
+            $this->notExistMessage = $options['notExistMessage'] ?? $this->notExistMessage;
+            $this->paymentNotFoundMessage = $options['paymentNotFoundMessage'] ?? $this->paymentNotFoundMessage;
             $notAvailable ??= $options['notAvailable'] ?? null;
             $notExist ??= $options['notExist'] ?? null;
             $paymentNotFound ??= $options['paymentNotFound'] ?? null;
@@ -60,7 +60,7 @@ final class ChosenPaymentMethodEligibility extends Constraint
                 static::class,
             );
 
-            $notAvailableMessage ??= $notAvailable;
+            $this->notAvailableMessage = $notAvailable;
         }
 
         if (null !== $notExist) {
@@ -71,7 +71,7 @@ final class ChosenPaymentMethodEligibility extends Constraint
                 static::class,
             );
 
-            $notExistMessage ??= $notExist;
+            $this->notExistMessage = $notExist;
         }
 
         if (null !== $paymentNotFound) {
@@ -82,24 +82,14 @@ final class ChosenPaymentMethodEligibility extends Constraint
                 static::class,
             );
 
-            $paymentNotFoundMessage ??= $paymentNotFound;
+            $this->paymentNotFoundMessage = $paymentNotFound;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->notAvailableMessage = $notAvailableMessage ?? $this->notAvailableMessage;
-        $this->notExistMessage = $notExistMessage ?? $this->notExistMessage;
-        $this->paymentNotFoundMessage = $paymentNotFoundMessage ?? $this->paymentNotFoundMessage;
         $this->notAvailable = $this->notAvailableMessage;
         $this->notExist = $this->notExistMessage;
         $this->paymentNotFound = $this->paymentNotFoundMessage;
     }
-
-    public string $notAvailableMessage = 'sylius.payment_method.not_available';
-
-    public string $notExistMessage = 'sylius.payment_method.not_exist';
-
-    public string $paymentNotFoundMessage = 'sylius.payment.not_found';
 
     /** @deprecated since Sylius 2.3, use $notAvailableMessage instead. It will be removed in Sylius 3.0. */
     public string $notAvailable = 'sylius.payment_method.not_available';

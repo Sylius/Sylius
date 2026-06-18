@@ -24,7 +24,7 @@ final class TaxonParentRelation extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
+        public string $message = 'sylius.taxon.parent.invalid_relation',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -36,17 +36,13 @@ final class TaxonParentRelation extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
     }
-
-    public string $message = 'sylius.taxon.parent.invalid_relation';
 
     public function validatedBy(): string
     {

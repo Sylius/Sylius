@@ -25,7 +25,7 @@ final class PromotionDateRange extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
+        public string $message = 'sylius.promotion.end_date_cannot_be_set_prior_start_date',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -37,17 +37,13 @@ final class PromotionDateRange extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
     }
-
-    public string $message = 'sylius.promotion.end_date_cannot_be_set_prior_start_date';
 
     public function getTargets(): string
     {

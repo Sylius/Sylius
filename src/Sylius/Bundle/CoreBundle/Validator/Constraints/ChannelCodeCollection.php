@@ -19,39 +19,22 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ChannelCodeCollection extends Constraint
 {
-    /** @var array<Constraint> */
-    public array $constraints = [];
-
-    public bool $allowExtraFields = false;
-
-    public bool $allowMissingFields = false;
-
-    public ?string $channelAwarePropertyPath = null;
-
-    public ?string $extraFieldsMessage = null;
-
-    public ?string $missingFieldsMessage = null;
-
-    public string $invalidChannelMessage = 'sylius.channel_code_collection.invalid_channel';
-
-    public bool $validateAgainstAllChannels = false;
-
     /**
      * @param array<string, mixed>|null $options
-     * @param array<Constraint>|null $constraints
+     * @param array<Constraint> $constraints
      * @param array<string>|null $groups
      */
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?array $constraints = null,
-        ?bool $allowExtraFields = null,
-        ?bool $allowMissingFields = null,
-        ?string $channelAwarePropertyPath = null,
-        ?string $extraFieldsMessage = null,
-        ?string $missingFieldsMessage = null,
-        ?string $invalidChannelMessage = null,
-        ?bool $validateAgainstAllChannels = null,
+        public array $constraints = [],
+        public bool $allowExtraFields = false,
+        public bool $allowMissingFields = false,
+        public ?string $channelAwarePropertyPath = null,
+        public ?string $extraFieldsMessage = null,
+        public ?string $missingFieldsMessage = null,
+        public string $invalidChannelMessage = 'sylius.channel_code_collection.invalid_channel',
+        public bool $validateAgainstAllChannels = false,
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -63,28 +46,19 @@ final class ChannelCodeCollection extends Constraint
                 static::class,
             );
 
-            $constraints ??= $options['constraints'] ?? null;
-            $allowExtraFields ??= $options['allowExtraFields'] ?? null;
-            $allowMissingFields ??= $options['allowMissingFields'] ?? null;
-            $channelAwarePropertyPath ??= $options['channelAwarePropertyPath'] ?? null;
-            $extraFieldsMessage ??= $options['extraFieldsMessage'] ?? null;
-            $missingFieldsMessage ??= $options['missingFieldsMessage'] ?? null;
-            $invalidChannelMessage ??= $options['invalidChannelMessage'] ?? null;
-            $validateAgainstAllChannels ??= $options['validateAgainstAllChannels'] ?? null;
+            $this->constraints = $options['constraints'] ?? $this->constraints;
+            $this->allowExtraFields = $options['allowExtraFields'] ?? $this->allowExtraFields;
+            $this->allowMissingFields = $options['allowMissingFields'] ?? $this->allowMissingFields;
+            $this->channelAwarePropertyPath = $options['channelAwarePropertyPath'] ?? $this->channelAwarePropertyPath;
+            $this->extraFieldsMessage = $options['extraFieldsMessage'] ?? $this->extraFieldsMessage;
+            $this->missingFieldsMessage = $options['missingFieldsMessage'] ?? $this->missingFieldsMessage;
+            $this->invalidChannelMessage = $options['invalidChannelMessage'] ?? $this->invalidChannelMessage;
+            $this->validateAgainstAllChannels = $options['validateAgainstAllChannels'] ?? $this->validateAgainstAllChannels;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->constraints = $constraints ?? $this->constraints;
-        $this->allowExtraFields = $allowExtraFields ?? $this->allowExtraFields;
-        $this->allowMissingFields = $allowMissingFields ?? $this->allowMissingFields;
-        $this->channelAwarePropertyPath = $channelAwarePropertyPath ?? $this->channelAwarePropertyPath;
-        $this->extraFieldsMessage = $extraFieldsMessage ?? $this->extraFieldsMessage;
-        $this->missingFieldsMessage = $missingFieldsMessage ?? $this->missingFieldsMessage;
-        $this->invalidChannelMessage = $invalidChannelMessage ?? $this->invalidChannelMessage;
-        $this->validateAgainstAllChannels = $validateAgainstAllChannels ?? $this->validateAgainstAllChannels;
     }
 
     public function validatedBy(): string

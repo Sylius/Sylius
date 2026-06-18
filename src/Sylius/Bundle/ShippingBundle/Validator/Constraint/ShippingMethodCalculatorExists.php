@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ShippingMethodCalculatorExists extends Constraint
 {
-    public string $invalidShippingCalculatorMessage = 'sylius.shipping_method.calculator.invalid';
-
     /** @deprecated since Sylius 2.3, use $invalidShippingCalculatorMessage instead. It will be removed in Sylius 3.0. */
     public string $invalidShippingCalculator = 'sylius.shipping_method.calculator.invalid';
 
@@ -31,7 +29,7 @@ final class ShippingMethodCalculatorExists extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $invalidShippingCalculatorMessage = null,
+        public string $invalidShippingCalculatorMessage = 'sylius.shipping_method.calculator.invalid',
         ?string $invalidShippingCalculator = null,
         ?array $groups = null,
         mixed $payload = null,
@@ -44,7 +42,7 @@ final class ShippingMethodCalculatorExists extends Constraint
                 static::class,
             );
 
-            $invalidShippingCalculatorMessage ??= $options['invalidShippingCalculatorMessage'] ?? null;
+            $this->invalidShippingCalculatorMessage = $options['invalidShippingCalculatorMessage'] ?? $this->invalidShippingCalculatorMessage;
             $invalidShippingCalculator ??= $options['invalidShippingCalculator'] ?? null;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
@@ -58,12 +56,10 @@ final class ShippingMethodCalculatorExists extends Constraint
                 static::class,
             );
 
-            $invalidShippingCalculatorMessage ??= $invalidShippingCalculator;
+            $this->invalidShippingCalculatorMessage = $invalidShippingCalculator;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->invalidShippingCalculatorMessage = $invalidShippingCalculatorMessage ?? $this->invalidShippingCalculatorMessage;
         $this->invalidShippingCalculator = $this->invalidShippingCalculatorMessage;
     }
 

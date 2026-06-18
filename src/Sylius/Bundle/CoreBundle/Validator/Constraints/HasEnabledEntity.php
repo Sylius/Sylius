@@ -25,11 +25,11 @@ final class HasEnabledEntity extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $objectManager = null,
-        ?string $message = null,
-        ?string $repositoryMethod = null,
-        ?string $errorPath = null,
-        ?string $enabledPath = null,
+        public ?string $objectManager = null,
+        public string $message = 'Must have at least one enabled entity',
+        public string $repositoryMethod = 'findBy',
+        public ?string $errorPath = null,
+        public string $enabledPath = 'enabled',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -41,33 +41,17 @@ final class HasEnabledEntity extends Constraint
                 static::class,
             );
 
-            $objectManager ??= $options['objectManager'] ?? null;
-            $message ??= $options['message'] ?? null;
-            $repositoryMethod ??= $options['repositoryMethod'] ?? null;
-            $errorPath ??= $options['errorPath'] ?? null;
-            $enabledPath ??= $options['enabledPath'] ?? null;
+            $this->objectManager = $options['objectManager'] ?? $this->objectManager;
+            $this->message = $options['message'] ?? $this->message;
+            $this->repositoryMethod = $options['repositoryMethod'] ?? $this->repositoryMethod;
+            $this->errorPath = $options['errorPath'] ?? $this->errorPath;
+            $this->enabledPath = $options['enabledPath'] ?? $this->enabledPath;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->objectManager = $objectManager ?? $this->objectManager;
-        $this->message = $message ?? $this->message;
-        $this->repositoryMethod = $repositoryMethod ?? $this->repositoryMethod;
-        $this->errorPath = $errorPath ?? $this->errorPath;
-        $this->enabledPath = $enabledPath ?? $this->enabledPath;
     }
-
-    public ?string $objectManager = null;
-
-    public string $message = 'Must have at least one enabled entity';
-
-    public string $repositoryMethod = 'findBy';
-
-    public ?string $errorPath = null;
-
-    public string $enabledPath = 'enabled';
 
     public function getTargets(): string
     {

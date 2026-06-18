@@ -25,9 +25,9 @@ final class ChangedItemQuantityInCart extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $productNotExistMessage = null,
-        ?string $productVariantNotLongerAvailableMessage = null,
-        ?string $productVariantNotSufficientMessage = null,
+        public string $productNotExistMessage = 'sylius.product.not_exist',
+        public string $productVariantNotLongerAvailableMessage = 'sylius.product_variant.not_longer_available',
+        public string $productVariantNotSufficientMessage = 'sylius.product_variant.not_sufficient',
         ?string $productVariantNotLongerAvailable = null,
         ?string $productVariantNotSufficient = null,
         ?array $groups = null,
@@ -41,9 +41,9 @@ final class ChangedItemQuantityInCart extends Constraint
                 static::class,
             );
 
-            $productNotExistMessage ??= $options['productNotExistMessage'] ?? null;
-            $productVariantNotLongerAvailableMessage ??= $options['productVariantNotLongerAvailableMessage'] ?? null;
-            $productVariantNotSufficientMessage ??= $options['productVariantNotSufficientMessage'] ?? null;
+            $this->productNotExistMessage = $options['productNotExistMessage'] ?? $this->productNotExistMessage;
+            $this->productVariantNotLongerAvailableMessage = $options['productVariantNotLongerAvailableMessage'] ?? $this->productVariantNotLongerAvailableMessage;
+            $this->productVariantNotSufficientMessage = $options['productVariantNotSufficientMessage'] ?? $this->productVariantNotSufficientMessage;
             $productVariantNotLongerAvailable ??= $options['productVariantNotLongerAvailable'] ?? null;
             $productVariantNotSufficient ??= $options['productVariantNotSufficient'] ?? null;
             $groups ??= $options['groups'] ?? null;
@@ -58,7 +58,7 @@ final class ChangedItemQuantityInCart extends Constraint
                 static::class,
             );
 
-            $productVariantNotLongerAvailableMessage ??= $productVariantNotLongerAvailable;
+            $this->productVariantNotLongerAvailableMessage = $productVariantNotLongerAvailable;
         }
 
         if (null !== $productVariantNotSufficient) {
@@ -69,23 +69,13 @@ final class ChangedItemQuantityInCart extends Constraint
                 static::class,
             );
 
-            $productVariantNotSufficientMessage ??= $productVariantNotSufficient;
+            $this->productVariantNotSufficientMessage = $productVariantNotSufficient;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->productNotExistMessage = $productNotExistMessage ?? $this->productNotExistMessage;
-        $this->productVariantNotLongerAvailableMessage = $productVariantNotLongerAvailableMessage ?? $this->productVariantNotLongerAvailableMessage;
-        $this->productVariantNotSufficientMessage = $productVariantNotSufficientMessage ?? $this->productVariantNotSufficientMessage;
         $this->productVariantNotLongerAvailable = $this->productVariantNotLongerAvailableMessage;
         $this->productVariantNotSufficient = $this->productVariantNotSufficientMessage;
     }
-
-    public string $productNotExistMessage = 'sylius.product.not_exist';
-
-    public string $productVariantNotLongerAvailableMessage = 'sylius.product_variant.not_longer_available';
-
-    public string $productVariantNotSufficientMessage = 'sylius.product_variant.not_sufficient';
 
     /** @deprecated since Sylius 2.3, use $productVariantNotLongerAvailableMessage instead. It will be removed in Sylius 3.0. */
     public string $productVariantNotLongerAvailable = 'sylius.product_variant.not_longer_available';

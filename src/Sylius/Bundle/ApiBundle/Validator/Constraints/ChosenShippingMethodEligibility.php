@@ -25,10 +25,10 @@ final class ChosenShippingMethodEligibility extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
-        ?string $notFoundMessage = null,
-        ?string $shipmentNotFoundMessage = null,
-        ?string $shippingAddressNotFoundMessage = null,
+        public string $message = 'sylius.shipping_method.not_available',
+        public string $notFoundMessage = 'sylius.shipping_method.not_found',
+        public string $shipmentNotFoundMessage = 'sylius.shipment.not_found',
+        public string $shippingAddressNotFoundMessage = 'sylius.shipping_method.shipping_address_not_found',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -40,30 +40,16 @@ final class ChosenShippingMethodEligibility extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
-            $notFoundMessage ??= $options['notFoundMessage'] ?? null;
-            $shipmentNotFoundMessage ??= $options['shipmentNotFoundMessage'] ?? null;
-            $shippingAddressNotFoundMessage ??= $options['shippingAddressNotFoundMessage'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
+            $this->notFoundMessage = $options['notFoundMessage'] ?? $this->notFoundMessage;
+            $this->shipmentNotFoundMessage = $options['shipmentNotFoundMessage'] ?? $this->shipmentNotFoundMessage;
+            $this->shippingAddressNotFoundMessage = $options['shippingAddressNotFoundMessage'] ?? $this->shippingAddressNotFoundMessage;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
-        $this->notFoundMessage = $notFoundMessage ?? $this->notFoundMessage;
-        $this->shipmentNotFoundMessage = $shipmentNotFoundMessage ?? $this->shipmentNotFoundMessage;
-        $this->shippingAddressNotFoundMessage = $shippingAddressNotFoundMessage ?? $this->shippingAddressNotFoundMessage;
     }
-
-    public string $message = 'sylius.shipping_method.not_available';
-
-    public string $notFoundMessage = 'sylius.shipping_method.not_found';
-
-    public string $shipmentNotFoundMessage = 'sylius.shipment.not_found';
-
-    /** @var string */
-    public $shippingAddressNotFoundMessage = 'sylius.shipping_method.shipping_address_not_found';
 
     public function validatedBy(): string
     {

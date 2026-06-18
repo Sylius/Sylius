@@ -26,8 +26,8 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $notAvailableMessage = null,
-        ?string $notExistMessage = null,
+        public string $notAvailableMessage = 'sylius.payment_request.action_not_available',
+        public string $notExistMessage = 'sylius.payment_method.not_exist',
         ?string $notAvailable = null,
         ?string $notExist = null,
         ?array $groups = null,
@@ -41,8 +41,8 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
                 static::class,
             );
 
-            $notAvailableMessage ??= $options['notAvailableMessage'] ?? null;
-            $notExistMessage ??= $options['notExistMessage'] ?? null;
+            $this->notAvailableMessage = $options['notAvailableMessage'] ?? $this->notAvailableMessage;
+            $this->notExistMessage = $options['notExistMessage'] ?? $this->notExistMessage;
             $notAvailable ??= $options['notAvailable'] ?? null;
             $notExist ??= $options['notExist'] ?? null;
             $groups ??= $options['groups'] ?? null;
@@ -57,7 +57,7 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
                 static::class,
             );
 
-            $notAvailableMessage ??= $notAvailable;
+            $this->notAvailableMessage = $notAvailable;
         }
 
         if (null !== $notExist) {
@@ -68,20 +68,13 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
                 static::class,
             );
 
-            $notExistMessage ??= $notExist;
+            $this->notExistMessage = $notExist;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->notAvailableMessage = $notAvailableMessage ?? $this->notAvailableMessage;
-        $this->notExistMessage = $notExistMessage ?? $this->notExistMessage;
         $this->notAvailable = $this->notAvailableMessage;
         $this->notExist = $this->notExistMessage;
     }
-
-    public string $notAvailableMessage = 'sylius.payment_request.action_not_available';
-
-    public string $notExistMessage = 'sylius.payment_method.not_exist';
 
     /** @deprecated since Sylius 2.3, use $notAvailableMessage instead. It will be removed in Sylius 3.0. */
     public string $notAvailable = 'sylius.payment_request.action_not_available';

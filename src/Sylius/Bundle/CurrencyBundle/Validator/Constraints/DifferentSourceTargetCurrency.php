@@ -19,9 +19,6 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 class DifferentSourceTargetCurrency extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.exchange_rate.different_source_target_currency';
-
     /**
      * @param array<string, mixed>|null $options
      * @param array<string>|null $groups
@@ -29,7 +26,7 @@ class DifferentSourceTargetCurrency extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
+        public string $message = 'sylius.exchange_rate.different_source_target_currency',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -41,14 +38,12 @@ class DifferentSourceTargetCurrency extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
     }
 
     public function getTargets(): string

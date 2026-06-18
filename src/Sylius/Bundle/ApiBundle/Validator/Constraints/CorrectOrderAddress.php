@@ -25,8 +25,8 @@ final class CorrectOrderAddress extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $countryCodeNotExistMessage = null,
-        ?string $addressWithoutCountryCodeCanNotExistMessage = null,
+        public string $countryCodeNotExistMessage = 'sylius.country.not_exist',
+        public string $addressWithoutCountryCodeCanNotExistMessage = 'sylius.address.without_country',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -38,21 +38,14 @@ final class CorrectOrderAddress extends Constraint
                 static::class,
             );
 
-            $countryCodeNotExistMessage ??= $options['countryCodeNotExistMessage'] ?? null;
-            $addressWithoutCountryCodeCanNotExistMessage ??= $options['addressWithoutCountryCodeCanNotExistMessage'] ?? null;
+            $this->countryCodeNotExistMessage = $options['countryCodeNotExistMessage'] ?? $this->countryCodeNotExistMessage;
+            $this->addressWithoutCountryCodeCanNotExistMessage = $options['addressWithoutCountryCodeCanNotExistMessage'] ?? $this->addressWithoutCountryCodeCanNotExistMessage;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->countryCodeNotExistMessage = $countryCodeNotExistMessage ?? $this->countryCodeNotExistMessage;
-        $this->addressWithoutCountryCodeCanNotExistMessage = $addressWithoutCountryCodeCanNotExistMessage ?? $this->addressWithoutCountryCodeCanNotExistMessage;
     }
-
-    public string $countryCodeNotExistMessage = 'sylius.country.not_exist';
-
-    public string $addressWithoutCountryCodeCanNotExistMessage = 'sylius.address.without_country';
 
     public function validatedBy(): string
     {

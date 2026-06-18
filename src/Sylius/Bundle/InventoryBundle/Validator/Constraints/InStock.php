@@ -25,10 +25,10 @@ final class InStock extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
-        ?string $message = null,
-        ?string $shortMessage = null,
-        ?string $stockablePath = null,
-        ?string $quantityPath = null,
+        public string $message = 'sylius.cart_item.not_available',
+        public string $shortMessage = 'sylius.cart_item.insufficient_stock',
+        public string $stockablePath = 'stockable',
+        public string $quantityPath = 'quantity',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -40,29 +40,16 @@ final class InStock extends Constraint
                 static::class,
             );
 
-            $message ??= $options['message'] ?? null;
-            $shortMessage ??= $options['shortMessage'] ?? null;
-            $stockablePath ??= $options['stockablePath'] ?? null;
-            $quantityPath ??= $options['quantityPath'] ?? null;
+            $this->message = $options['message'] ?? $this->message;
+            $this->shortMessage = $options['shortMessage'] ?? $this->shortMessage;
+            $this->stockablePath = $options['stockablePath'] ?? $this->stockablePath;
+            $this->quantityPath = $options['quantityPath'] ?? $this->quantityPath;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message ?? $this->message;
-        $this->shortMessage = $shortMessage ?? $this->shortMessage;
-        $this->stockablePath = $stockablePath ?? $this->stockablePath;
-        $this->quantityPath = $quantityPath ?? $this->quantityPath;
     }
-
-    public string $message = 'sylius.cart_item.not_available';
-
-    public string $shortMessage = 'sylius.cart_item.insufficient_stock';
-
-    public string $stockablePath = 'stockable';
-
-    public string $quantityPath = 'quantity';
 
     public function validatedBy(): string
     {
