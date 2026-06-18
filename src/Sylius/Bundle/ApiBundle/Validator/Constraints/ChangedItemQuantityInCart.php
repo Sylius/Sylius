@@ -19,20 +19,38 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ChangedItemQuantityInCart extends Constraint
 {
-
+    /**
+     * @param array<string, mixed>|null $options
+     */
     #[HasNamedArguments]
     public function __construct(
-        string $productNotExistMessage = 'sylius.product.not_exist',
-        string $productVariantNotLongerAvailable = 'sylius.product_variant.not_longer_available',
-        string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient',
+        ?array $options = null,
+        ?string $productNotExistMessage = null,
+        ?string $productVariantNotLongerAvailable = null,
+        ?string $productVariantNotSufficient = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $productNotExistMessage ??= $options['productNotExistMessage'] ?? null;
+            $productVariantNotLongerAvailable ??= $options['productVariantNotLongerAvailable'] ?? null;
+            $productVariantNotSufficient ??= $options['productVariantNotSufficient'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->productNotExistMessage = $productNotExistMessage;
-        $this->productVariantNotLongerAvailable = $productVariantNotLongerAvailable;
-        $this->productVariantNotSufficient = $productVariantNotSufficient;
+        $this->productNotExistMessage = $productNotExistMessage ?? $this->productNotExistMessage;
+        $this->productVariantNotLongerAvailable = $productVariantNotLongerAvailable ?? $this->productVariantNotLongerAvailable;
+        $this->productVariantNotSufficient = $productVariantNotSufficient ?? $this->productVariantNotSufficient;
     }
 
     public string $productNotExistMessage = 'sylius.product.not_exist';

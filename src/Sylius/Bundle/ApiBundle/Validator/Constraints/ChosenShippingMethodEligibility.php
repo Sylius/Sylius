@@ -19,20 +19,38 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ChosenShippingMethodEligibility extends Constraint
 {
-
+    /**
+     * @param array<string, mixed>|null $options
+     */
     #[HasNamedArguments]
     public function __construct(
-        string $message = 'sylius.shipping_method.not_available',
-        string $notFoundMessage = 'sylius.shipping_method.not_found',
-        string $shipmentNotFoundMessage = 'sylius.shipment.not_found',
+        ?array $options = null,
+        ?string $message = null,
+        ?string $notFoundMessage = null,
+        ?string $shipmentNotFoundMessage = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $message ??= $options['message'] ?? null;
+            $notFoundMessage ??= $options['notFoundMessage'] ?? null;
+            $shipmentNotFoundMessage ??= $options['shipmentNotFoundMessage'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->message = $message;
-        $this->notFoundMessage = $notFoundMessage;
-        $this->shipmentNotFoundMessage = $shipmentNotFoundMessage;
+        $this->message = $message ?? $this->message;
+        $this->notFoundMessage = $notFoundMessage ?? $this->notFoundMessage;
+        $this->shipmentNotFoundMessage = $shipmentNotFoundMessage ?? $this->shipmentNotFoundMessage;
     }
 
     public string $message = 'sylius.shipping_method.not_available';

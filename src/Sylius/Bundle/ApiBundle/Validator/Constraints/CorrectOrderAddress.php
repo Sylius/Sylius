@@ -19,18 +19,35 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class CorrectOrderAddress extends Constraint
 {
-
+    /**
+     * @param array<string, mixed>|null $options
+     */
     #[HasNamedArguments]
     public function __construct(
-        string $countryCodeNotExistMessage = 'sylius.country.not_exist',
-        string $addressWithoutCountryCodeCanNotExistMessage = 'sylius.address.without_country',
+        ?array $options = null,
+        ?string $countryCodeNotExistMessage = null,
+        ?string $addressWithoutCountryCodeCanNotExistMessage = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $countryCodeNotExistMessage ??= $options['countryCodeNotExistMessage'] ?? null;
+            $addressWithoutCountryCodeCanNotExistMessage ??= $options['addressWithoutCountryCodeCanNotExistMessage'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->countryCodeNotExistMessage = $countryCodeNotExistMessage;
-        $this->addressWithoutCountryCodeCanNotExistMessage = $addressWithoutCountryCodeCanNotExistMessage;
+        $this->countryCodeNotExistMessage = $countryCodeNotExistMessage ?? $this->countryCodeNotExistMessage;
+        $this->addressWithoutCountryCodeCanNotExistMessage = $addressWithoutCountryCodeCanNotExistMessage ?? $this->addressWithoutCountryCodeCanNotExistMessage;
     }
 
     public string $countryCodeNotExistMessage = 'sylius.country.not_exist';

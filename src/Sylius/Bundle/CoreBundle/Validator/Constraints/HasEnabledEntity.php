@@ -19,24 +19,44 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class HasEnabledEntity extends Constraint
 {
-
+    /**
+     * @param array<string, mixed>|null $options
+     */
     #[HasNamedArguments]
     public function __construct(
+        ?array $options = null,
         ?string $objectManager = null,
-        string $message = 'Must have at least one enabled entity',
-        string $repositoryMethod = 'findBy',
+        ?string $message = null,
+        ?string $repositoryMethod = null,
         ?string $errorPath = null,
-        string $enabledPath = 'enabled',
+        ?string $enabledPath = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $objectManager ??= $options['objectManager'] ?? null;
+            $message ??= $options['message'] ?? null;
+            $repositoryMethod ??= $options['repositoryMethod'] ?? null;
+            $errorPath ??= $options['errorPath'] ?? null;
+            $enabledPath ??= $options['enabledPath'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->objectManager = $objectManager;
-        $this->message = $message;
-        $this->repositoryMethod = $repositoryMethod;
-        $this->errorPath = $errorPath;
-        $this->enabledPath = $enabledPath;
+        $this->objectManager = $objectManager ?? $this->objectManager;
+        $this->message = $message ?? $this->message;
+        $this->repositoryMethod = $repositoryMethod ?? $this->repositoryMethod;
+        $this->errorPath = $errorPath ?? $this->errorPath;
+        $this->enabledPath = $enabledPath ?? $this->enabledPath;
     }
 
     public ?string $objectManager = null;

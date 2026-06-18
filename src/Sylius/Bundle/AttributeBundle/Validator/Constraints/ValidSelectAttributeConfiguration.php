@@ -19,20 +19,38 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ValidSelectAttributeConfiguration extends Constraint
 {
-
+    /**
+     * @param array<string, mixed>|null $options
+     */
     #[HasNamedArguments]
     public function __construct(
-        string $messageMultiple = 'sylius.attribute.configuration.multiple',
-        string $messageMinEntries = 'sylius.attribute.configuration.min_entries',
-        string $messageMaxEntries = 'sylius.attribute.configuration.max_entries',
+        ?array $options = null,
+        ?string $messageMultiple = null,
+        ?string $messageMinEntries = null,
+        ?string $messageMaxEntries = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/attribute-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $messageMultiple ??= $options['messageMultiple'] ?? null;
+            $messageMinEntries ??= $options['messageMinEntries'] ?? null;
+            $messageMaxEntries ??= $options['messageMaxEntries'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->messageMultiple = $messageMultiple;
-        $this->messageMinEntries = $messageMinEntries;
-        $this->messageMaxEntries = $messageMaxEntries;
+        $this->messageMultiple = $messageMultiple ?? $this->messageMultiple;
+        $this->messageMinEntries = $messageMinEntries ?? $this->messageMinEntries;
+        $this->messageMaxEntries = $messageMaxEntries ?? $this->messageMaxEntries;
     }
 
     public string $messageMultiple = 'sylius.attribute.configuration.multiple';

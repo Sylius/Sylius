@@ -19,20 +19,38 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ChosenPaymentMethodEligibility extends Constraint
 {
-
+    /**
+     * @param array<string, mixed>|null $options
+     */
     #[HasNamedArguments]
     public function __construct(
-        string $notAvailable = 'sylius.payment_method.not_available',
-        string $notExist = 'sylius.payment_method.not_exist',
-        string $paymentNotFound = 'sylius.payment.not_found',
+        ?array $options = null,
+        ?string $notAvailable = null,
+        ?string $notExist = null,
+        ?string $paymentNotFound = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $notAvailable ??= $options['notAvailable'] ?? null;
+            $notExist ??= $options['notExist'] ?? null;
+            $paymentNotFound ??= $options['paymentNotFound'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->notAvailable = $notAvailable;
-        $this->notExist = $notExist;
-        $this->paymentNotFound = $paymentNotFound;
+        $this->notAvailable = $notAvailable ?? $this->notAvailable;
+        $this->notExist = $notExist ?? $this->notExist;
+        $this->paymentNotFound = $paymentNotFound ?? $this->paymentNotFound;
     }
 
     public string $notAvailable = 'sylius.payment_method.not_available';

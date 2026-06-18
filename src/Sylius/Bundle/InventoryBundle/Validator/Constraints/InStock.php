@@ -19,22 +19,41 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class InStock extends Constraint
 {
-
+    /**
+     * @param array<string, mixed>|null $options
+     */
     #[HasNamedArguments]
     public function __construct(
-        string $message = 'sylius.cart_item.not_available',
-        string $shortMessage = 'sylius.cart_item.insufficient_stock',
-        string $stockablePath = 'stockable',
-        string $quantityPath = 'quantity',
+        ?array $options = null,
+        ?string $message = null,
+        ?string $shortMessage = null,
+        ?string $stockablePath = null,
+        ?string $quantityPath = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/inventory-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $message ??= $options['message'] ?? null;
+            $shortMessage ??= $options['shortMessage'] ?? null;
+            $stockablePath ??= $options['stockablePath'] ?? null;
+            $quantityPath ??= $options['quantityPath'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->message = $message;
-        $this->shortMessage = $shortMessage;
-        $this->stockablePath = $stockablePath;
-        $this->quantityPath = $quantityPath;
+        $this->message = $message ?? $this->message;
+        $this->shortMessage = $shortMessage ?? $this->shortMessage;
+        $this->stockablePath = $stockablePath ?? $this->stockablePath;
+        $this->quantityPath = $quantityPath ?? $this->quantityPath;
     }
 
     public string $message = 'sylius.cart_item.not_available';

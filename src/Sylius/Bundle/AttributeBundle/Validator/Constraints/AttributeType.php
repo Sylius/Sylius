@@ -19,16 +19,32 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 class AttributeType extends Constraint
 {
-
+    /**
+     * @param array<string, mixed>|null $options
+     */
     #[HasNamedArguments]
     public function __construct(
-        string $unregisteredAttributeTypeMessage = 'sylius.attribute.type.unregistered',
+        ?array $options = null,
+        ?string $unregisteredAttributeTypeMessage = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/attribute-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $unregisteredAttributeTypeMessage ??= $options['unregisteredAttributeTypeMessage'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->unregisteredAttributeTypeMessage = $unregisteredAttributeTypeMessage;
+        $this->unregisteredAttributeTypeMessage = $unregisteredAttributeTypeMessage ?? $this->unregisteredAttributeTypeMessage;
     }
 
     public string $unregisteredAttributeTypeMessage = 'sylius.attribute.type.unregistered';
