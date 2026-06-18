@@ -13,15 +13,74 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 /** @experimental  */
 #[\Attribute]
 final class ChosenPaymentRequestActionEligibility extends Constraint
 {
+    /** @deprecated since Sylius 2.3, use $notAvailableMessage instead. It will be removed in Sylius 3.0. */
     public string $notAvailable = 'sylius.payment_request.action_not_available';
 
+    /** @deprecated since Sylius 2.3, use $notExistMessage instead. It will be removed in Sylius 3.0. */
     public string $notExist = 'sylius.payment_method.not_exist';
+
+    /**
+     * @param array<string, mixed>|null $options
+     */
+    #[HasNamedArguments]
+    public function __construct(
+        ?array $options = null,
+        public string $notAvailableMessage = 'sylius.payment_request.action_not_available',
+        public string $notExistMessage = 'sylius.payment_method.not_exist',
+        ?string $notAvailable = null,
+        ?string $notExist = null,
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $this->notAvailableMessage = $options['notAvailableMessage'] ?? $this->notAvailableMessage;
+            $this->notExistMessage = $options['notExistMessage'] ?? $this->notExistMessage;
+            $notAvailable ??= $options['notAvailable'] ?? null;
+            $notExist ??= $options['notExist'] ?? null;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
+        if (null !== $notAvailable) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'The "notAvailable" option of the "%s" constraint is deprecated and will be removed in Sylius 3.0, use "notAvailableMessage" instead.',
+                static::class,
+            );
+
+            $this->notAvailableMessage = $notAvailable;
+        }
+
+        if (null !== $notExist) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'The "notExist" option of the "%s" constraint is deprecated and will be removed in Sylius 3.0, use "notExistMessage" instead.',
+                static::class,
+            );
+
+            $this->notExistMessage = $notExist;
+        }
+
+        parent::__construct(groups: $groups, payload: $payload);
+        $this->notAvailable = $this->notAvailableMessage;
+        $this->notExist = $this->notExistMessage;
+    }
 
     public function validatedBy(): string
     {
