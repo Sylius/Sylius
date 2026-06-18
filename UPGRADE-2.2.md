@@ -53,6 +53,14 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
 
 1. The `Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface::updateFromReview()` method has been deprecated and will be removed in Sylius 3.0. Use state machine mechanism implemented by Symfony Workflow instead.
 
+## Bahavior changes
+
+1. The `LiveComponentTagPass` and `TwigComponentTagPass` in `SyliusUiBundle` were registered with a priority of `500`,
+   which caused them to run before Symfony's autoconfiguration passes (priority `100`).
+   As a result, services tagged via `#[AutoconfigureTag]` or `registerForAutoconfiguration()` with the `sylius.twig_component`
+   or `sylius.live_component.*` tag did not receive the `twig.component` tag.
+   The priority has been lowered to `50` to ensure Symfony's autoconfiguration runs first.
+
 ## Admin UI
 
 1. A new `modal-portal.js` script has been added to `AdminBundle`.
