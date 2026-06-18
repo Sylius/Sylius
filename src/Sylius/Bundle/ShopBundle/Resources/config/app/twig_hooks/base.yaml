@@ -175,6 +175,69 @@ sylius_twig_hooks:
                 template: '@SyliusShop/shared/layout/base/footer/content/copy.html.twig'
                 priority: 0
 
+        'sylius_shop.base.footer.content.menu':
+            informational_links:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/informational_links.html.twig'
+                priority: 100
+            help_links:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/help_links.html.twig'
+                priority: 0
+
+        'sylius_shop.base.footer.content.menu.informational_links':
+            about:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/informational_links/about.html.twig'
+                priority: 300
+            terms_and_conditions:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/informational_links/terms_and_conditions.html.twig'
+                priority: 200
+            privacy_policy:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/informational_links/privacy_policy.html.twig'
+                priority: 100
+            contact_us:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/informational_links/contact_us.html.twig'
+                priority: 0
+
+        'sylius_shop.base.footer.content.menu.help_links':
+            faq:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/help_links/faq.html.twig'
+                priority: 200
+            delivery_and_shipping:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/help_links/delivery_and_shipping.html.twig'
+                priority: 100
+            returns_policy:
+                template: '@SyliusShop/shared/layout/base/footer/content/menu/help_links/returns_policy.html.twig'
+                priority: 0
+
+        'sylius_shop.base.footer.content.payment_methods':
+            providers:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers.html.twig'
+                priority: 100
+            social_media:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/social_media.html.twig'
+                priority: 0
+
+        'sylius_shop.base.footer.content.payment_methods.providers':
+            paypal:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers/paypal.html.twig'
+                priority: 200
+            adyen:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers/adyen.html.twig'
+                priority: 100
+            mollie:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers/mollie.html.twig'
+                priority: 0
+
+        'sylius_shop.base.footer.content.payment_methods.social_media':
+            instagram:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/social_media/instagram.html.twig'
+                priority: 200
+            facebook:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/social_media/facebook.html.twig'
+                priority: 100
+            x:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/social_media/x.html.twig'
+                priority: 0
+
         'sylius_shop.base.offcanvas':
             cart:
                 component: 'sylius_shop:cart:widget:offcanvas'

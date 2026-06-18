@@ -1,4 +1,4 @@
-# UPGRADE FROM `2.6.0` TO `2.7.0`
+# UPGRADE FROM `2.2.6` TO `2.2.7`
 
 ## Constructor Signature Changes
 
@@ -13,6 +13,14 @@
 +       ?ResourceClassResolverInterface $resourceClassResolver = null,
     )
 ```
+
+## Bahavior changes
+
+1. The `LiveComponentTagPass` and `TwigComponentTagPass` in `SyliusUiBundle` were registered with a priority of `500`,
+   which caused them to run before Symfony's autoconfiguration passes (priority `100`).
+   As a result, services tagged via `#[AutoconfigureTag]` or `registerForAutoconfiguration()` with the `sylius.twig_component`
+   or `sylius.live_component.*` tag did not receive the `twig.component` tag.
+   The priority has been lowered to `50` to ensure Symfony's autoconfiguration runs first.
 
 # UPGRADE FROM `2.1` TO `2.2`
 
