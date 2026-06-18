@@ -108,6 +108,22 @@
    as `type="object"` (`PaymentSecurityToken.details` and `PaymentRequest.payload`), it registers
    a custom `Sylius\Bundle\PaymentBundle\Doctrine\DBAL\Type\ObjectType` to keep them working.
 
+## Validation
+
+1. Passing an array of options to configure a Sylius validation constraint is **deprecated** since Sylius 2.3 
+   and will be removed in Sylius 3.0. Use named arguments instead.
+
+   All Sylius validation constraints now declare explicit constructors with named arguments 
+   (marked with `#[HasNamedArguments]`). The legacy array syntax keeps working, it only triggers deprecation.
+
+   Configuring constraints via **XML / YAML / PHP attributes is not affected** and requires no changes; the validator 
+   loaders pass the options as named arguments automatically. Only **direct instantiation in PHP** should be migrated:
+
+   ```diff
+   -new ProvinceAddressConstraint(['message' => 'My custom message'])
+   +new ProvinceAddressConstraint(message: 'My custom message')
+   ```
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
