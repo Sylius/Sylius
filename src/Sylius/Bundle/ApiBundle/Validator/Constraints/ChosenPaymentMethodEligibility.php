@@ -25,6 +25,9 @@ final class ChosenPaymentMethodEligibility extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
+        ?string $notAvailableMessage = null,
+        ?string $notExistMessage = null,
+        ?string $paymentNotFoundMessage = null,
         ?string $notAvailable = null,
         ?string $notExist = null,
         ?string $paymentNotFound = null,
@@ -39,6 +42,9 @@ final class ChosenPaymentMethodEligibility extends Constraint
                 static::class,
             );
 
+            $notAvailableMessage ??= $options['notAvailableMessage'] ?? null;
+            $notExistMessage ??= $options['notExistMessage'] ?? null;
+            $paymentNotFoundMessage ??= $options['paymentNotFoundMessage'] ?? null;
             $notAvailable ??= $options['notAvailable'] ?? null;
             $notExist ??= $options['notExist'] ?? null;
             $paymentNotFound ??= $options['paymentNotFound'] ?? null;
@@ -46,17 +52,62 @@ final class ChosenPaymentMethodEligibility extends Constraint
             $payload ??= $options['payload'] ?? null;
         }
 
+        if (null !== $notAvailable) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'The "notAvailable" option of the "%s" constraint is deprecated and will be removed in Sylius 3.0, use "notAvailableMessage" instead.',
+                static::class,
+            );
+
+            $notAvailableMessage ??= $notAvailable;
+        }
+
+        if (null !== $notExist) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'The "notExist" option of the "%s" constraint is deprecated and will be removed in Sylius 3.0, use "notExistMessage" instead.',
+                static::class,
+            );
+
+            $notExistMessage ??= $notExist;
+        }
+
+        if (null !== $paymentNotFound) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'The "paymentNotFound" option of the "%s" constraint is deprecated and will be removed in Sylius 3.0, use "paymentNotFoundMessage" instead.',
+                static::class,
+            );
+
+            $paymentNotFoundMessage ??= $paymentNotFound;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->notAvailable = $notAvailable ?? $this->notAvailable;
-        $this->notExist = $notExist ?? $this->notExist;
-        $this->paymentNotFound = $paymentNotFound ?? $this->paymentNotFound;
+        $this->notAvailableMessage = $notAvailableMessage ?? $this->notAvailableMessage;
+        $this->notExistMessage = $notExistMessage ?? $this->notExistMessage;
+        $this->paymentNotFoundMessage = $paymentNotFoundMessage ?? $this->paymentNotFoundMessage;
+        $this->notAvailable = $this->notAvailableMessage;
+        $this->notExist = $this->notExistMessage;
+        $this->paymentNotFound = $this->paymentNotFoundMessage;
     }
 
+    public string $notAvailableMessage = 'sylius.payment_method.not_available';
+
+    public string $notExistMessage = 'sylius.payment_method.not_exist';
+
+    public string $paymentNotFoundMessage = 'sylius.payment.not_found';
+
+    /** @deprecated since Sylius 2.3, use $notAvailableMessage instead. It will be removed in Sylius 3.0. */
     public string $notAvailable = 'sylius.payment_method.not_available';
 
+    /** @deprecated since Sylius 2.3, use $notExistMessage instead. It will be removed in Sylius 3.0. */
     public string $notExist = 'sylius.payment_method.not_exist';
 
+    /** @deprecated since Sylius 2.3, use $paymentNotFoundMessage instead. It will be removed in Sylius 3.0. */
     public string $paymentNotFound = 'sylius.payment.not_found';
 
     public function validatedBy(): string

@@ -65,7 +65,7 @@ final class ShippingMethodRuleValidatorTest extends TestCase
         $shippingMethodRule = $this->createMock(ShippingMethodRuleInterface::class);
 
         $shippingMethodRule->expects($this->once())->method('getType')->willReturn('wrong_rule');
-        $this->executionContext->expects($this->once())->method('buildViolation')->with((new ShippingMethodRule())->invalidType)->willReturn($constraintViolationBuilder);
+        $this->executionContext->expects($this->once())->method('buildViolation')->with((new ShippingMethodRule())->invalidTypeMessage)->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->expects($this->once())->method('setParameter')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->expects($this->once())->method('atPath')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->expects($this->once())->method('addViolation');

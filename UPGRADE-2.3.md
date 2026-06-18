@@ -124,6 +124,21 @@
    +new ProvinceAddressConstraint(message: 'My custom message')
    ```
 
+2. Several constraint message options have been renamed to follow the consistent `*Message` convention. The old option
+   names and public properties are **deprecated** since Sylius 2.3 and will be removed in Sylius 3.0. Both keep working
+   and stay in sync in the meantime; switch to the new `*Message` name:
+
+   | Constraint | Old | New |
+   |------------|-----|-----|
+   | `ApiBundle\...\ChosenPaymentMethodEligibility` | `notAvailable`, `notExist`, `paymentNotFound` | `notAvailableMessage`, `notExistMessage`, `paymentNotFoundMessage` |
+   | `ApiBundle\...\ChosenPaymentRequestActionEligibility` | `notAvailable`, `notExist` | `notAvailableMessage`, `notExistMessage` |
+   | `ApiBundle\...\AddingEligibleProductVariantToCart` | `productVariantNotSufficient` | `productVariantNotSufficientMessage` |
+   | `ApiBundle\...\ChangedItemQuantityInCart` | `productVariantNotLongerAvailable`, `productVariantNotSufficient` | `productVariantNotLongerAvailableMessage`, `productVariantNotSufficientMessage` |
+   | `PromotionBundle\...\PromotionRuleType`, `PromotionActionType`, `CatalogPromotionActionType`, `CatalogPromotionScopeType` | `invalidType` | `invalidTypeMessage` |
+   | `PaymentBundle\...\GatewayFactoryExists` | `invalidGatewayFactory` | `invalidGatewayFactoryMessage` |
+   | `ShippingBundle\...\ShippingMethodCalculatorExists` | `invalidShippingCalculator` | `invalidShippingCalculatorMessage` |
+   | `ShippingBundle\...\ShippingMethodRule` | `invalidType` | `invalidTypeMessage` |
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.

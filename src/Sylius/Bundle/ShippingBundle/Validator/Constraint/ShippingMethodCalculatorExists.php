@@ -19,6 +19,9 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ShippingMethodCalculatorExists extends Constraint
 {
+    public string $invalidShippingCalculatorMessage = 'sylius.shipping_method.calculator.invalid';
+
+    /** @deprecated since Sylius 2.3, use $invalidShippingCalculatorMessage instead. It will be removed in Sylius 3.0. */
     public string $invalidShippingCalculator = 'sylius.shipping_method.calculator.invalid';
 
     /**
@@ -28,6 +31,7 @@ final class ShippingMethodCalculatorExists extends Constraint
     #[HasNamedArguments]
     public function __construct(
         ?array $options = null,
+        ?string $invalidShippingCalculatorMessage = null,
         ?string $invalidShippingCalculator = null,
         ?array $groups = null,
         mixed $payload = null,
@@ -40,14 +44,27 @@ final class ShippingMethodCalculatorExists extends Constraint
                 static::class,
             );
 
+            $invalidShippingCalculatorMessage ??= $options['invalidShippingCalculatorMessage'] ?? null;
             $invalidShippingCalculator ??= $options['invalidShippingCalculator'] ?? null;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
 
+        if (null !== $invalidShippingCalculator) {
+            trigger_deprecation(
+                'sylius/shipping-bundle',
+                '2.3',
+                'The "invalidShippingCalculator" option of the "%s" constraint is deprecated and will be removed in Sylius 3.0, use "invalidShippingCalculatorMessage" instead.',
+                static::class,
+            );
+
+            $invalidShippingCalculatorMessage ??= $invalidShippingCalculator;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
 
-        $this->invalidShippingCalculator = $invalidShippingCalculator ?? $this->invalidShippingCalculator;
+        $this->invalidShippingCalculatorMessage = $invalidShippingCalculatorMessage ?? $this->invalidShippingCalculatorMessage;
+        $this->invalidShippingCalculator = $this->invalidShippingCalculatorMessage;
     }
 
     public function validatedBy(): string

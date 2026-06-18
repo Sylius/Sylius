@@ -27,6 +27,7 @@ final class AddingEligibleProductVariantToCart extends Constraint
         ?array $options = null,
         ?string $productNotExistMessage = null,
         ?string $productVariantNotExistMessage = null,
+        ?string $productVariantNotSufficientMessage = null,
         ?string $productVariantNotSufficient = null,
         ?array $groups = null,
         mixed $payload = null,
@@ -41,22 +42,38 @@ final class AddingEligibleProductVariantToCart extends Constraint
 
             $productNotExistMessage ??= $options['productNotExistMessage'] ?? null;
             $productVariantNotExistMessage ??= $options['productVariantNotExistMessage'] ?? null;
+            $productVariantNotSufficientMessage ??= $options['productVariantNotSufficientMessage'] ?? null;
             $productVariantNotSufficient ??= $options['productVariantNotSufficient'] ?? null;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
+        }
+
+        if (null !== $productVariantNotSufficient) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'The "productVariantNotSufficient" option of the "%s" constraint is deprecated and will be removed in Sylius 3.0, use "productVariantNotSufficientMessage" instead.',
+                static::class,
+            );
+
+            $productVariantNotSufficientMessage ??= $productVariantNotSufficient;
         }
 
         parent::__construct(groups: $groups, payload: $payload);
 
         $this->productNotExistMessage = $productNotExistMessage ?? $this->productNotExistMessage;
         $this->productVariantNotExistMessage = $productVariantNotExistMessage ?? $this->productVariantNotExistMessage;
-        $this->productVariantNotSufficient = $productVariantNotSufficient ?? $this->productVariantNotSufficient;
+        $this->productVariantNotSufficientMessage = $productVariantNotSufficientMessage ?? $this->productVariantNotSufficientMessage;
+        $this->productVariantNotSufficient = $this->productVariantNotSufficientMessage;
     }
 
     public string $productNotExistMessage = 'sylius.product.not_exist';
 
     public string $productVariantNotExistMessage = 'sylius.product_variant.not_exist';
 
+    public string $productVariantNotSufficientMessage = 'sylius.product_variant.not_sufficient';
+
+    /** @deprecated since Sylius 2.3, use $productVariantNotSufficientMessage instead. It will be removed in Sylius 3.0. */
     public string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
 
     public function validatedBy(): string
