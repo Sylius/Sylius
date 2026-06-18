@@ -21,6 +21,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -30,6 +31,8 @@ use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionComm
 use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\ChannelAwareConfigurationInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
@@ -47,6 +50,7 @@ final readonly class ManagingPromotionsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private ChannelRepositoryInterface $channelRepository,
     ) {
     }
 
@@ -334,6 +338,36 @@ final readonly class ManagingPromotionsContext implements Context
                 $secondChannel->getCode() => [
                     'amount' => $secondAmount,
                 ],
+            ],
+        );
+    }
+
+    #[When('/^I add the "Item total" rule configured with "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/')]
+    public function iAddTheItemTotalRuleConfiguredWithAmountForChannel(
+        int $amount,
+        ChannelInterface $channel,
+    ): void {
+        $this->appendRuleToRequest(
+            ItemTotalRuleChecker::TYPE,
+            [
+                $channel->getCode() => [
+                    'amount' => $amount,
+                ],
+                ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => $this->getExcludedChannelCodes($channel->getCode()),
+            ],
+        );
+    }
+
+    #[When('/^I add the "Cart quantity" rule with minimum (\d+) items for ("[^"]+" channel)$/')]
+    public function iAddTheCartQuantityRuleWithMinimumItemsForChannel(
+        int $quantity,
+        ChannelInterface $channel,
+    ): void {
+        $this->appendRuleToRequest(
+            CartQuantityRuleChecker::TYPE,
+            [
+                'count' => $quantity,
+                ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => $this->getExcludedChannelCodes($channel->getCode()),
             ],
         );
     }
@@ -784,5 +818,24 @@ final readonly class ManagingPromotionsContext implements Context
         ];
 
         $this->client->updateRequestData($data);
+    }
+
+    private function appendRuleToRequest(string $type, array $configuration): void
+    {
+        $rules = $this->client->getContent()['rules'] ?? [];
+        $rules[] = [
+            'type' => $type,
+            'configuration' => $configuration,
+        ];
+
+        $this->client->addRequestData('rules', $rules);
+    }
+
+    /** @return list<string> */
+    private function getExcludedChannelCodes(string $onlyChannelCode): array
+    {
+        $all = array_column($this->channelRepository->findAllWithBasicData(), 'code');
+
+        return array_values(array_filter($all, fn (string $code) => $code !== $onlyChannelCode));
     }
 }

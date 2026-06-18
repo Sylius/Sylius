@@ -778,4 +778,22 @@ final class ManagingPromotionsContext implements Context
     {
         return $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
     }
+
+    #[When('/^I add the "Cart quantity" rule with minimum (\d+) items for ("[^"]+" channel)$/')]
+    public function iAddTheCartQuantityRuleWithMinimumItemsForChannel(int $quantity, ChannelInterface $channel): void
+    {
+        $this->formElement->addRule(CartQuantityRuleChecker::TYPE);
+        $this->formElement->fillRuleOption('Count', (string) $quantity);
+        $this->formElement->excludeRuleChannelsExcept($channel->getCode());
+    }
+
+    #[When('/^I add the "Item total" rule configured with "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/')]
+    public function iAddTheItemTotalRuleConfiguredWithAmountForChannel(
+        $amount,
+        ChannelInterface $channel,
+    ): void {
+        $this->formElement->addRule(ItemTotalRuleChecker::TYPE);
+        $this->formElement->fillRuleOptionForChannel($channel->getCode(), 'Amount', $amount);
+        $this->formElement->excludeRuleChannelsExcept($channel->getCode());
+    }
 }

@@ -388,6 +388,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.behat.api_platform_client.admin'),
             service(ResponseCheckerInterface::class),
             service('api_platform.iri_converter'),
+            service('sylius.repository.channel'),
         ])
     ;
 

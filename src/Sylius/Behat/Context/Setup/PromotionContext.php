@@ -19,6 +19,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -27,6 +28,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Promotion\ChannelAwareConfigurationInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
@@ -58,6 +60,7 @@ final readonly class PromotionContext implements Context
         private ObjectManager $objectManager,
         private ExampleFactoryInterface $promotionExampleFactory,
         private MessageBusInterface $commandBus,
+        private ChannelRepositoryInterface $channelRepository,
     ) {
     }
 
@@ -399,6 +402,25 @@ final readonly class PromotionContext implements Context
 
         $promotion->addChannel($firstChannel);
         $promotion->addChannel($secondChannel);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel) only$/')]
+    public function thisPromotionGivesDiscountToEveryOrderInChannelOnly(
+        PromotionInterface $promotion,
+        int $amount,
+        ChannelInterface $channel,
+    ): void {
+        $action = $this->actionFactory->createFixedDiscount($amount, $channel->getCode());
+        $configuration = $action->getConfiguration();
+        $configuration[ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY] = $this->getExcludedChannelCodes($channel->getCode());
+        $action->setConfiguration($configuration);
+
+        foreach ($this->channelRepository->findAll() as $ch) {
+            $promotion->addChannel($ch);
+        }
         $promotion->addAction($action);
 
         $this->objectManager->flush();
@@ -872,8 +894,12 @@ final readonly class PromotionContext implements Context
         int $secondAmount,
         ChannelInterface $secondChannel,
     ): void {
-        $promotion->addRule($this->ruleFactory->createItemTotal($firstChannel->getCode(), $firstAmount));
-        $promotion->addRule($this->ruleFactory->createItemTotal($secondChannel->getCode(), $secondAmount));
+        $rule = $this->ruleFactory->createItemTotal($firstChannel->getCode(), $firstAmount);
+        $rule->setConfiguration(array_merge(
+            $rule->getConfiguration(),
+            [$secondChannel->getCode() => ['amount' => $secondAmount]],
+        ));
+        $promotion->addRule($rule);
 
         $this->objectManager->flush();
     }
@@ -1048,5 +1074,66 @@ final readonly class PromotionContext implements Context
     private function getChannelCode(): string
     {
         return $this->sharedStorage->get('channel')->getCode();
+    }
+
+    #[Given('/^(the promotion) has an item total rule for at least ("[^"]+") in ("[^"]+" channel)$/')]
+    public function thePromotionHasAnItemTotalRuleForChannelOnly(
+        PromotionInterface $promotion,
+        int $amount,
+        ChannelInterface $channel,
+    ): void {
+        $rule = $this->ruleFactory->createItemTotal($channel->getCode(), $amount);
+
+        $configuration = $rule->getConfiguration();
+        $configuration[ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY] = $this->getExcludedChannelCodes($channel->getCode());
+        $rule->setConfiguration($configuration);
+
+        $promotion->addRule($rule);
+        $promotion->addChannel($channel);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(the promotion) has a cart quantity rule for at least (\d+) items in ("[^"]+" channel)$/')]
+    public function thePromotionHasACartQuantityRuleForChannelOnly(
+        PromotionInterface $promotion,
+        int $count,
+        ChannelInterface $channel,
+    ): void {
+        $rule = $this->ruleFactory->createCartQuantity($count);
+
+        $configuration = $rule->getConfiguration();
+        $configuration[ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY] = $this->getExcludedChannelCodes($channel->getCode());
+        $rule->setConfiguration($configuration);
+
+        $promotion->addRule($rule);
+        $promotion->addChannel($channel);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this promotion) only applies to orders with a total of at least ("[^"]+") for ("[^"]+" channel)$/')]
+    public function thisPromotionOnlyAppliesToOrdersWithTotalOfAtLeast(
+        PromotionInterface $promotion,
+        int $amount,
+        ChannelInterface $channel,
+    ): void {
+        $rule = $this->ruleFactory->createItemTotal($channel->getCode(), $amount);
+        $rule->setConfiguration(array_merge(
+            $rule->getConfiguration(),
+            [ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY => $this->getExcludedChannelCodes($channel->getCode())],
+        ));
+        $promotion->addRule($rule);
+        $promotion->addChannel($channel);
+
+        $this->objectManager->flush();
+    }
+
+    /** @return list<string> */
+    private function getExcludedChannelCodes(string $onlyChannelCode): array
+    {
+        $all = array_column($this->channelRepository->findAllWithBasicData(), 'code');
+
+        return array_values(array_filter($all, fn (string $code) => $code !== $onlyChannelCode));
     }
 }
