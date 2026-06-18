@@ -56,6 +56,7 @@
         >
             <argument type="service" id="sylius.section_resolver.uri_based" />
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
         <service
