@@ -40,7 +40,7 @@ final class PromotionRuleTypeExtension extends AbstractTypeExtension
         }
         $availableCodes = array_values($choices);
 
-        $builder->add(ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY, ChoiceType::class, [
+        $builder->add(ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY, ChoiceType::class, [
             'label' => 'sylius.form.promotion_rule.channels',
             'choices' => $choices,
             'multiple' => true,
@@ -53,14 +53,26 @@ final class PromotionRuleTypeExtension extends AbstractTypeExtension
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) use ($availableCodes): void {
             $data = $event->getData();
             if (!$data instanceof PromotionRuleInterface) {
+                $event->getForm()->get(ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY)
+                    ->setData($availableCodes);
+
                 return;
             }
-            $storedCodes = $data->getConfiguration()[ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY] ?? [];
-            if ($storedCodes === []) {
-                $storedCodes = $availableCodes;
+            $excludedCodes = $data->getConfiguration()[ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY] ?? [];
+            $checkedCodes = $excludedCodes === [] ? $availableCodes : array_values(array_diff($availableCodes, $excludedCodes));
+            $event->getForm()->get(ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY)
+                ->setData($checkedCodes);
+        });
+
+        $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($availableCodes): void {
+            $data = $event->getData();
+            $entityData = $event->getForm()->getData();
+            if (is_array($data)
+                && !array_key_exists(ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY, $data)
+                && !$entityData instanceof PromotionRuleInterface) {
+                $data[ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY] = $availableCodes;
+                $event->setData($data);
             }
-            $event->getForm()->get(ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY)
-                ->setData(array_values(array_intersect($storedCodes, $availableCodes)));
         });
 
         $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) use ($availableCodes): void {
@@ -69,13 +81,9 @@ final class PromotionRuleTypeExtension extends AbstractTypeExtension
                 return;
             }
             $configuration = $data->getConfiguration();
-            $selectedChannels = $event->getForm()->get(ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY)->getData() ?? [];
-            $sortedSelected = $selectedChannels;
-            $sortedAvailable = $availableCodes;
-            sort($sortedSelected);
-            sort($sortedAvailable);
-            $configuration[ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY] =
-                ($sortedSelected === $sortedAvailable) ? [] : $selectedChannels;
+            $selectedChannels = $event->getForm()->get(ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY)->getData() ?? [];
+            $configuration[ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY] =
+                array_values(array_diff($availableCodes, $selectedChannels));
             $data->setConfiguration($configuration);
         });
     }

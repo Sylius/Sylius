@@ -147,6 +147,25 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $lastRule->fillField($option, $value);
     }
 
+    public function excludeRuleChannelsExcept(string $channelCode): void
+    {
+        while (true) {
+            $lastRule = $this->getLastRule();
+            $toUncheck = null;
+            foreach ($lastRule->findAll('css', 'input[type="checkbox"][id*="__excludedChannels_"]') as $checkbox) {
+                if ($checkbox->getAttribute('value') !== $channelCode && $checkbox->isChecked()) {
+                    $toUncheck = $checkbox;
+                    break;
+                }
+            }
+            if ($toUncheck === null) {
+                break;
+            }
+            $toUncheck->uncheck();
+            $this->waitForFormUpdate();
+        }
+    }
+
     public function selectAutocompleteRuleOptions(array $values, ?string $channelCode = null): void
     {
         $count = count($this->getElement('rules')->findAll('css', '[data-test-entry-row]'));

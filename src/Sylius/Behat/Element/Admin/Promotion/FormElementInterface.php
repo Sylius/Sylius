@@ -59,6 +59,8 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function fillRuleOptionForChannel(string $channelCode, string $option, string $value): void;
 
+    public function excludeRuleChannelsExcept(string $channelCode): void;
+
     public function selectAutocompleteRuleOptions(array $values, ?string $channelCode = null): void;
 
     public function selectAutocompleteActionFilterOptions(array $values, string $channelCode, string $filterType): void;

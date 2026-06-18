@@ -15,5 +15,5 @@ namespace Sylius\Component\Core\Promotion;
 
 interface ChannelAwareConfigurationInterface
 {
-    public const CHANNELS_CONFIGURATION_KEY = '_channels';
+    public const EXCLUDED_CHANNELS_CONFIGURATION_KEY = '_excludedChannels';
 }

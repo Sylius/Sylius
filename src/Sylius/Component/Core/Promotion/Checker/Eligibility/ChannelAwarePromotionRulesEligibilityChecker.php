@@ -49,8 +49,8 @@ final class ChannelAwarePromotionRulesEligibilityChecker implements PromotionEli
 
     private function isRuleSkippedForChannel(PromotionRuleInterface $rule, PromotionSubjectInterface $subject): bool
     {
-        $channels = $rule->getConfiguration()[self::CHANNELS_CONFIGURATION_KEY] ?? [];
-        if ($channels === []) {
+        $excludedChannels = $rule->getConfiguration()[self::EXCLUDED_CHANNELS_CONFIGURATION_KEY] ?? [];
+        if ($excludedChannels === []) {
             return false;
         }
 
@@ -58,7 +58,7 @@ final class ChannelAwarePromotionRulesEligibilityChecker implements PromotionEli
             return false;
         }
 
-        return !in_array($subject->getChannel()->getCode(), $channels, true);
+        return in_array($subject->getChannel()->getCode(), $excludedChannels, true);
     }
 
     private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionRuleInterface $rule): bool
@@ -67,7 +67,7 @@ final class ChannelAwarePromotionRulesEligibilityChecker implements PromotionEli
         $checker = $this->ruleRegistry->get($rule->getType());
 
         $configuration = $rule->getConfiguration();
-        unset($configuration[self::CHANNELS_CONFIGURATION_KEY]);
+        unset($configuration[self::EXCLUDED_CHANNELS_CONFIGURATION_KEY]);
 
         return $checker->isEligible($subject, $configuration);
     }

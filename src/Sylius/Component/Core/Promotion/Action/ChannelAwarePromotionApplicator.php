@@ -62,8 +62,8 @@ final class ChannelAwarePromotionApplicator implements PromotionApplicatorInterf
 
     private function isActionSkippedForChannel(PromotionActionInterface $action, PromotionSubjectInterface $subject): bool
     {
-        $channels = $action->getConfiguration()[self::CHANNELS_CONFIGURATION_KEY] ?? [];
-        if ($channels === []) {
+        $excludedChannels = $action->getConfiguration()[self::EXCLUDED_CHANNELS_CONFIGURATION_KEY] ?? [];
+        if ($excludedChannels === []) {
             return false;
         }
 
@@ -71,7 +71,7 @@ final class ChannelAwarePromotionApplicator implements PromotionApplicatorInterf
             return false;
         }
 
-        return !in_array($subject->getChannel()->getCode(), $channels, true);
+        return in_array($subject->getChannel()->getCode(), $excludedChannels, true);
     }
 
     /**
@@ -81,7 +81,7 @@ final class ChannelAwarePromotionApplicator implements PromotionApplicatorInterf
      */
     private function stripChannelKey(array $configuration): array
     {
-        unset($configuration[self::CHANNELS_CONFIGURATION_KEY]);
+        unset($configuration[self::EXCLUDED_CHANNELS_CONFIGURATION_KEY]);
 
         return $configuration;
     }

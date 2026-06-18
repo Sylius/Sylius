@@ -17,6 +17,7 @@ use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Promotion\ChannelAwareConfigurationInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Collection;
@@ -47,7 +48,10 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
         }
 
         if ($constraint->validateAgainstAllChannels) {
-            $this->validateInChannelCollection($value, array_keys($this->getAllChannelsCodes()), $constraint);
+            $excludedChannels = $value[ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY] ?? [];
+            $allCodes = array_keys($this->getAllChannelsCodes());
+            $channelCodes = $excludedChannels !== [] ? array_values(array_diff($allCodes, $excludedChannels)) : $allCodes;
+            $this->validateInChannelCollection($value, $channelCodes, $constraint);
 
             return;
         }

@@ -33,13 +33,13 @@ final class PromotionConfigurationChannelCodesValidator extends ConstraintValida
             return;
         }
 
-        $channelCodes = $value[ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY] ?? [];
+        $channelCodes = $value[ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY] ?? [];
 
         foreach ($channelCodes as $code) {
             if (!is_string($code) || $this->channelRepository->findOneByCode($code) === null) {
                 $this->context->buildViolation($constraint->invalidChannelCodeMessage)
                     ->setParameter('{{ channelCode }}', (string) $code)
-                    ->atPath('[' . ChannelAwareConfigurationInterface::CHANNELS_CONFIGURATION_KEY . ']')
+                    ->atPath('[' . ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY . ']')
                     ->addViolation()
                 ;
             }
