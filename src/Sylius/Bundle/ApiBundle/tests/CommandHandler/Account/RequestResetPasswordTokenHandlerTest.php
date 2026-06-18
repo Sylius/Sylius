@@ -64,12 +64,13 @@ final class RequestResetPasswordTokenHandlerTest extends TestCase
             ->method('findOneByEmail')
             ->with('test@email.com')
             ->willReturn($shopUser);
-        $this->clock->expects(self::once())->method('now')->willReturn(new \DateTimeImmutable());
+        $now = new \DateTimeImmutable();
+        $this->clock->expects(self::once())->method('now')->willReturn($now);
         $this->generator->expects(self::once())->method('generate')->willReturn('TOKEN');
         $shopUser->expects(self::once())->method('setPasswordResetToken')->with('TOKEN');
         $shopUser->expects(self::once())
             ->method('setPasswordRequestedAt')
-            ->with(self::isInstanceOf(\DateTimeImmutable::class));
+            ->with(\DateTime::createFromImmutable($now));
         $sendResetPasswordEmail = new SendResetPasswordEmail('test@email.com', 'WEB', 'en_US');
         $this->messageBus->expects(self::once())
             ->method('dispatch')

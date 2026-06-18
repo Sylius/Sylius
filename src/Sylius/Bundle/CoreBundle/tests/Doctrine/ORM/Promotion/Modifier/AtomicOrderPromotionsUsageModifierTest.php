@@ -66,7 +66,7 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         $this->entityManager
             ->expects($this->exactly(2))
             ->method('lock')
-            ->willReturnCallback(function (object $entity, int $lockMode, mixed $version) use ($promotion, $coupon): void {
+            ->willReturnCallback(function (object $entity, int|LockMode $lockMode, mixed $version) use ($promotion, $coupon): void {
                 $this->assertSame(LockMode::OPTIMISTIC, $lockMode);
 
                 if ($entity === $promotion) {
@@ -134,7 +134,7 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         $this->entityManager
             ->expects($this->exactly(2))
             ->method('lock')
-            ->willReturnCallback(function (object $entity, int $lockMode, mixed $version) use ($promotion, $coupon): void {
+            ->willReturnCallback(function (object $entity, int|LockMode $lockMode, mixed $version) use ($promotion, $coupon): void {
                 $this->assertSame(LockMode::OPTIMISTIC, $lockMode);
 
                 if ($entity === $promotion) {
@@ -202,7 +202,7 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         $this->entityManager
             ->expects($this->exactly(2))
             ->method('lock')
-            ->willReturnCallback(function (object $entity, int $lockMode, mixed $version) use ($firstPromotion, $secondPromotion): void {
+            ->willReturnCallback(function (object $entity, int|LockMode $lockMode, mixed $version) use ($firstPromotion, $secondPromotion): void {
                 $this->assertSame(LockMode::OPTIMISTIC, $lockMode);
 
                 if ($entity === $firstPromotion) {

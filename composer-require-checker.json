@@ -58,6 +58,7 @@
     "Behat\\Testwork\\Tester\\Setup\\Setup",
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
     "Composer\\InstalledVersions",
+    "Doctrine\\DBAL\\Platforms\\MariaDb1027Platform",
     "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
     "enshrined\\svgSanitize\\Sanitizer",
     "FriendsOfBehat\\SymfonyExtension\\Mink\\Mink",
