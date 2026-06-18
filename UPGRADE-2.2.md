@@ -1,3 +1,19 @@
+# UPGRADE FROM `2.6.0` TO `2.7.0`
+
+## Constructor Signature Changes
+
+1. The constructor of `Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter` has been extended with an optional `ApiPlatform\Metadata\ResourceClassResolverInterface` argument.
+
+```php
+    public function __construct(
+        IriConverterInterface $decoratedIriConverter,
+        PathPrefixProviderInterface $pathPrefixProvider,
+        OperationResolverInterface $operationResolver,
+        RouterInterface $router,
++       ?ResourceClassResolverInterface $resourceClassResolver = null,
+    )
+```
+
 # UPGRADE FROM `2.1` TO `2.2`
 
 ## Telemetry
@@ -30,18 +46,6 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
 ```
 
 ## Deprecations
-
-1. Not injecting a `Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter` with `ApiPlatform\Metadata\ResourceClassResolverInterface` is deprecated since Sylius 2.2 and will be required in Sylius 3.0.
-
-```php
-    public function __construct(
-        IriConverterInterface $decoratedIriConverter,
-        PathPrefixProviderInterface $pathPrefixProvider,
-        OperationResolverInterface $operationResolver,
-        RouterInterface $router,
-+       ?ResourceClassResolverInterface $resourceClassResolver = null,
-    )
-```
 
 1. Not injecting a `tagged_iterator` with the tag `sylius_shop.modifier.address_form_values` into the constructor of `Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\FormComponent` is deprecated since Sylius 2.2 and will be required in Sylius 3.0.
 
