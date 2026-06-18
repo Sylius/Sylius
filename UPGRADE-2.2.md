@@ -1,3 +1,13 @@
+# UPGRADE FROM `2.2.6` TO `2.2.7`
+
+## Bahavior changes
+
+1. The `LiveComponentTagPass` and `TwigComponentTagPass` in `SyliusUiBundle` were registered with a priority of `500`,
+   which caused them to run before Symfony's autoconfiguration passes (priority `100`).
+   As a result, services tagged via `#[AutoconfigureTag]` or `registerForAutoconfiguration()` with the `sylius.twig_component`
+   or `sylius.live_component.*` tag did not receive the `twig.component` tag.
+   The priority has been lowered to `50` to ensure Symfony's autoconfiguration runs first.
+
 # UPGRADE FROM `2.1` TO `2.2`
 
 ## Telemetry
@@ -52,14 +62,6 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
    Use `@SyliusAdmin/shared/helper/loader.html.twig` or `@SyliusShop/shared/macro/loader.html.twig` instead.
 
 1. The `Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface::updateFromReview()` method has been deprecated and will be removed in Sylius 3.0. Use state machine mechanism implemented by Symfony Workflow instead.
-
-## Bahavior changes
-
-1. The `LiveComponentTagPass` and `TwigComponentTagPass` in `SyliusUiBundle` were registered with a priority of `500`,
-   which caused them to run before Symfony's autoconfiguration passes (priority `100`).
-   As a result, services tagged via `#[AutoconfigureTag]` or `registerForAutoconfiguration()` with the `sylius.twig_component`
-   or `sylius.live_component.*` tag did not receive the `twig.component` tag.
-   The priority has been lowered to `50` to ensure Symfony's autoconfiguration runs first.
 
 ## Admin UI
 
