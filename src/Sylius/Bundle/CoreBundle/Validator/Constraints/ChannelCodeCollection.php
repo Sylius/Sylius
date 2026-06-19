@@ -61,35 +61,6 @@ final class ChannelCodeCollection extends Constraint
         parent::__construct(groups: $groups, payload: $payload);
     }
 
-    /**
-     * @param array<Constraint>|null $constraints
-     * @param array<string>|null $groups
-     */
-    #[HasNamedArguments]
-    public function __construct(
-        ?array $constraints = null,
-        ?bool $allowExtraFields = null,
-        ?bool $allowMissingFields = null,
-        ?string $channelAwarePropertyPath = null,
-        ?string $extraFieldsMessage = null,
-        ?string $missingFieldsMessage = null,
-        ?string $invalidChannelMessage = null,
-        ?bool $validateAgainstAllChannels = null,
-        ?array $groups = null,
-        mixed $payload = null,
-    ) {
-        parent::__construct(groups: $groups, payload: $payload);
-
-        $this->constraints = $constraints ?? $this->constraints;
-        $this->allowExtraFields = $allowExtraFields ?? $this->allowExtraFields;
-        $this->allowMissingFields = $allowMissingFields ?? $this->allowMissingFields;
-        $this->channelAwarePropertyPath = $channelAwarePropertyPath ?? $this->channelAwarePropertyPath;
-        $this->extraFieldsMessage = $extraFieldsMessage ?? $this->extraFieldsMessage;
-        $this->missingFieldsMessage = $missingFieldsMessage ?? $this->missingFieldsMessage;
-        $this->invalidChannelMessage = $invalidChannelMessage ?? $this->invalidChannelMessage;
-        $this->validateAgainstAllChannels = $validateAgainstAllChannels ?? $this->validateAgainstAllChannels;
-    }
-
     public function validatedBy(): string
     {
         return 'sylius_channel_code_collection';
