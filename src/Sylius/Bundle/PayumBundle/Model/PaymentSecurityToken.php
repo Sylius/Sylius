@@ -13,17 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PayumBundle\Model;
 
-use Payum\Core\Model\Identity;
 use Payum\Core\Security\Util\Random;
-use Payum\Core\Storage\IdentityInterface;
 
 class PaymentSecurityToken implements PaymentSecurityTokenInterface
 {
     /** @var string */
     protected $hash;
 
-    /** @var array<string, mixed>|null */
-    protected ?array $details = null;
+    /** @var object|null */
+    protected $details;
 
     /** @var string|null */
     protected $afterUrl;
@@ -46,28 +44,11 @@ class PaymentSecurityToken implements PaymentSecurityTokenInterface
 
     public function setDetails($details): void
     {
-        if ($details instanceof IdentityInterface) {
-            $this->details = ['id' => $details->getId(), 'class' => $details->getClass()];
-
-            return;
-        }
-
-        if (is_object($details)) {
-            $this->details = (array) $details;
-
-            return;
-        }
-
         $this->details = $details;
     }
 
-    /** @return IdentityInterface|array<string, mixed>|null */
-    public function getDetails(): array|IdentityInterface|null
+    public function getDetails()
     {
-        if (is_array($this->details) && isset($this->details['id'], $this->details['class'])) {
-            return new Identity($this->details['id'], $this->details['class']);
-        }
-
         return $this->details;
     }
 
