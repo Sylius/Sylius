@@ -15,6 +15,7 @@ use Behat\Config\Config;
 use Behat\Config\Extension;
 use Behat\Config\Filter\TagFilter;
 use Behat\Config\Formatter\PrettyFormatter;
+use Behat\Config\GherkinOptions;
 use Behat\Config\Profile;
 use Behat\Config\TesterOptions;
 use Behat\MinkExtension\ServiceContainer\MinkExtension;
@@ -31,7 +32,7 @@ return (new Config())
     ->withProfile(
         (new Profile('default'))
         ->withFormatter(new PrettyFormatter(paths: false))
-        ->withFilter(new TagFilter('~@todo&&~@cli'))
+        ->withGherkinOptions((new GherkinOptions())->withFilter(new TagFilter('~@todo&&~@cli')))
         ->withTesterOptions((new TesterOptions())
             ->withErrorReporting(\E_ALL & ~(\E_DEPRECATED | \E_USER_DEPRECATED)))
         ->withExtension(new Extension(ChromeExtension::class))
