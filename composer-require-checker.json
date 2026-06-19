@@ -101,6 +101,7 @@
     "Payum\\Core\\Security\\TokenInterface",
     "Payum\\Core\\Security\\Util\\Random",
     "Payum\\Core\\Storage\\AbstractStorage",
+    "Payum\\Core\\Storage\\IdentityInterface",
     "PHPUnit\\Framework\\ExpectationFailedException",
     "PHPUnit\\Framework\\MockObject\\MockObject",
     "PHPUnit\\Framework\\TestCase",
