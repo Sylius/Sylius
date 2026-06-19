@@ -13,12 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Order\Model\AdjustableInterface;
 use Sylius\Component\Order\Model\Adjustment as BaseAdjustment;
 
 class Adjustment extends BaseAdjustment implements AdjustmentInterface
 {
     /** @var ShipmentInterface|null */
     protected $shipment;
+
+    public function setAdjustable(?AdjustableInterface $adjustable): void
+    {
+        parent::setAdjustable($adjustable);
+
+        if ($adjustable === null && $this->shipment !== null) {
+            $this->setShipment(null);
+        }
+    }
 
     public function getShipment(): ?ShipmentInterface
     {
