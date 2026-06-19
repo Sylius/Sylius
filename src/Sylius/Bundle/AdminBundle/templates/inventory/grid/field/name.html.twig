@@ -1,6 +1,18 @@
 <div>
     <div>
-        <strong>{{ data.product.name }}</strong>
+        {% if data.product.name is not null %}
+            <strong>{{ data.product.name }}</strong>
+        {% else %}
+            <span class="text-danger" {{ sylius_test_html_attribute('missing-translation') }} >
+            {{ ux_icon('tabler:exclamation-circle') }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>
+        </span>
+        {% endif %}
     </div>
-    <div class="text-muted small">{{ data.name }}</div>
+    {% if data.name is not null %}
+        <div class="text-muted small">{{ data.name }}</div>
+    {% else %}
+        <span class="text-danger" {{ sylius_test_html_attribute('missing-translation') }} >
+            {{ ux_icon('tabler:exclamation-circle') }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>
+        </span>
+    {% endif %}
 </div>

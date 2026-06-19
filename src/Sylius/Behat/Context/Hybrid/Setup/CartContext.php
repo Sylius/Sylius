@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Hybrid\Setup;
 
-use Behat\Step\When;
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Context\Api\Shop\CartContext as ApiShopCartContext;
 use Sylius\Behat\Context\Ui\Shop\CartContext as UiCartContext;
 use Sylius\Component\Core\Model\ProductInterface;

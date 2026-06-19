@@ -18,6 +18,7 @@ use Sylius\Bundle\AdminBundle\Console\Command\ChangeAdminUserPasswordCommand;
 use Sylius\Bundle\AdminBundle\Console\Command\CreateAdminUserCommand;
 use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactory;
 use Sylius\Bundle\AdminBundle\Console\Command\Factory\QuestionFactoryInterface;
+use Sylius\Bundle\AdminBundle\Console\Command\ListAdminUsersCommand;
 use Sylius\Bundle\AdminBundle\Context\AdminBasedLocaleContext;
 use Sylius\Bundle\AdminBundle\Form\Type\AttributeType\Configuration\SelectAttributeConfigurationType;
 use Sylius\Bundle\AdminBundle\Generator\TaxonSlugGenerator;
@@ -63,6 +64,16 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
+        ->set('sylius_admin.console.command.list_admin_users', ListAdminUsersCommand::class)
+        ->args([
+            service('sylius.repository.admin_user'),
+            service('sylius.manager.admin_user'),
+        ])
+        ->public()
+        ->tag('console.command')
+    ;
+
+    $services
         ->set('sylius_admin.command_handler.create_admin_user', CreateAdminUserHandler::class)
         ->args([
             service('sylius.repository.admin_user'),
@@ -97,7 +108,7 @@ return static function (ContainerConfigurator $container) {
             ->factory([HttpClient::class, 'create'])
             ->args([
                 ['timeout' => 2, 'max_duration' => 2],
-            ])
+            ]),
         ])
         ->public()
     ;
@@ -109,7 +120,10 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius_admin.generator.taxon_slug', TaxonSlugGenerator::class)
-        ->args([service('sylius.generator.taxon_slug')])
+        ->args([
+            service('sylius.generator.taxon_slug'),
+            service('slugger'),
+        ])
     ;
     $services->alias(TaxonSlugGeneratorInterface::class, 'sylius_admin.generator.taxon_slug');
 

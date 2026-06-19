@@ -22,7 +22,7 @@ sylius_admin_order_show:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/shared/crud/show.html.twig"
+            template: "@SyliusAdmin/order/show.html.twig"
 
 sylius_admin_order_history:
     path: /orders/{id}/history
@@ -50,7 +50,7 @@ sylius_admin_order_update:
               arguments:
                 - '$id'
             permission: true
-            template: "@SyliusAdmin/shared/crud/update.html.twig"
+            template: "@SyliusAdmin/order/update.html.twig"
             form:
                 type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
                 options:

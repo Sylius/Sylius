@@ -6,7 +6,7 @@
 ] %}
 
 {% block title %}
-    {{ 'sylius.ui.history'|trans }} | {{ parent() }}
+    {{ 'sylius.ui.order'|trans ~ ' #' ~ order.number ~ ' - ' ~ 'sylius.ui.order_history'|trans ~ ' | ' }}{{ parent() }}
 {% endblock %}
 
 {% block body %}

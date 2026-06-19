@@ -155,6 +155,20 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_returns_enabled_product_item_when_all_its_associated_products_are_disabled(): void
+    {
+        $this->loadFixturesFromFile('product/product_with_only_disabled_associated_products.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/products/KETTLE',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+    }
+
+    #[Test]
     public function it_returns_associated_products_collection_by_association_type(): void
     {
         $this->loadFixturesFromFile('product/products_with_associations.yaml');

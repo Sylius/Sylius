@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
-use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Behat\Step\When;
 use Sylius\Behat\Context\Setup\Checkout\AddressContext;
 use Sylius\Behat\Context\Setup\Checkout\PaymentContext;
 use Sylius\Behat\Context\Setup\Checkout\ShippingContext;

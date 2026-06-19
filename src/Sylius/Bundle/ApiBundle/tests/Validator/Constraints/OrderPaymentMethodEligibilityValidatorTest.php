@@ -20,6 +20,7 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibility;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -79,6 +80,8 @@ final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
         $paymentMethodMock = $this->createMock(PaymentMethodInterface::class);
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ChannelInterface|MockObject $channelMock */
+        $channelMock = $this->createMock(ChannelInterface::class);
 
         $this->orderPaymentMethodEligibilityValidator->initialize($executionContextMock);
 
@@ -91,13 +94,14 @@ final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
             ->with(['tokenValue' => 'token'])
             ->willReturn($orderMock);
 
+        $orderMock->method('getChannel')->willReturn($channelMock);
+
         $orderMock
             ->expects(self::once())
             ->method('getPayments')
             ->willReturn(new ArrayCollection([$paymentMock]));
 
         $paymentMock
-            ->expects($this->exactly(2))
             ->method('getMethod')
             ->willReturn($paymentMethodMock);
 
@@ -122,7 +126,7 @@ final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
         $this->orderPaymentMethodEligibilityValidator->validate($value, $constraint);
     }
 
-    public function testDoesNotAddViolationIfPaymentIsAvailable(): void
+    public function testAddsViolationIfPaymentIsNotAvailableInChannel(): void
     {
         /** @var OrderInterface|MockObject $orderMock */
         $orderMock = $this->createMock(OrderInterface::class);
@@ -132,6 +136,8 @@ final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
         $paymentMethodMock = $this->createMock(PaymentMethodInterface::class);
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ChannelInterface|MockObject $channelMock */
+        $channelMock = $this->createMock(ChannelInterface::class);
 
         $this->orderPaymentMethodEligibilityValidator->initialize($executionContextMock);
 
@@ -144,20 +150,69 @@ final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
             ->with(['tokenValue' => 'token'])
             ->willReturn($orderMock);
 
+        $orderMock->method('getChannel')->willReturn($channelMock);
+
         $orderMock
             ->expects(self::once())
             ->method('getPayments')
             ->willReturn(new ArrayCollection([$paymentMock]));
 
         $paymentMock
-            ->expects(self::once())
             ->method('getMethod')
             ->willReturn($paymentMethodMock);
 
-        $paymentMethodMock
+        $paymentMethodMock->method('isEnabled')->willReturn(true);
+        $paymentMethodMock->method('hasChannel')->with($channelMock)->willReturn(false);
+        $paymentMethodMock->method('getName')->willReturn('bank transfer');
+
+        $executionContextMock
             ->expects(self::once())
-            ->method('isEnabled')
-            ->willReturn(true);
+            ->method('addViolation')
+            ->with(
+                'sylius.order.payment_method_eligibility',
+                ['%paymentMethodName%' => 'bank transfer'],
+            );
+
+        $this->orderPaymentMethodEligibilityValidator->validate($value, $constraint);
+    }
+
+    public function testDoesNotAddViolationIfPaymentIsAvailable(): void
+    {
+        /** @var OrderInterface|MockObject $orderMock */
+        $orderMock = $this->createMock(OrderInterface::class);
+        /** @var PaymentInterface|MockObject $paymentMock */
+        $paymentMock = $this->createMock(PaymentInterface::class);
+        /** @var PaymentMethodInterface|MockObject $paymentMethodMock */
+        $paymentMethodMock = $this->createMock(PaymentMethodInterface::class);
+        /** @var ExecutionContextInterface|MockObject $executionContextMock */
+        $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ChannelInterface|MockObject $channelMock */
+        $channelMock = $this->createMock(ChannelInterface::class);
+
+        $this->orderPaymentMethodEligibilityValidator->initialize($executionContextMock);
+
+        $constraint = new OrderPaymentMethodEligibility();
+        $value = new CompleteOrder(orderTokenValue: 'token');
+
+        $this->orderRepository
+            ->expects(self::once())
+            ->method('findOneBy')
+            ->with(['tokenValue' => 'token'])
+            ->willReturn($orderMock);
+
+        $orderMock->method('getChannel')->willReturn($channelMock);
+
+        $orderMock
+            ->expects(self::once())
+            ->method('getPayments')
+            ->willReturn(new ArrayCollection([$paymentMock]));
+
+        $paymentMock
+            ->method('getMethod')
+            ->willReturn($paymentMethodMock);
+
+        $paymentMethodMock->method('isEnabled')->willReturn(true);
+        $paymentMethodMock->method('hasChannel')->with($channelMock)->willReturn(true);
 
         $executionContextMock
             ->expects(self::never())

@@ -1,10 +1,10 @@
 {% import '@SyliusAdmin/shared/helper/button.html.twig' as button %}
 {% props modal_id = null, type = null%}
 
-<div {{ attributes }} {{ sylius_test_html_attribute('modal', type) }}>
+<div {{ attributes }}>
     {% block trigger %}{% endblock %}
 
-    <div class="modal fade" id="{{ modal_id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" {{ sylius_test_html_attribute('modal', type) }} id="{{ modal_id }}" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             {% block content %}
                 <div class="modal-content">

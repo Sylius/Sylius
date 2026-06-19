@@ -16,6 +16,8 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Sylius\Component\Core\Checker\CLIContextChecker;
 use Sylius\Component\Core\Checker\CLIContextCheckerInterface;
 use Sylius\Component\Core\Checker\Eligibility\PromotionCouponChannelEligibilityChecker;
+use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionAvailabilityChecker;
+use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionAvailabilityCheckerInterface;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementCheckerInterface;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker;
@@ -36,6 +38,12 @@ return static function (ContainerConfigurator $container) {
         ->args([service('sylius.resolver.payment_methods')])
     ;
     $services->alias(OrderPaymentMethodSelectionRequirementCheckerInterface::class, 'sylius.checker.order_payment_method_selection_requirement');
+
+    $services
+        ->set('sylius.checker.order_payment_method_selection_availability', OrderPaymentMethodSelectionAvailabilityChecker::class)
+        ->public()
+    ;
+    $services->alias(OrderPaymentMethodSelectionAvailabilityCheckerInterface::class, 'sylius.checker.order_payment_method_selection_availability');
 
     $services->set('sylius.checker.cli_context', CLIContextChecker::class)->args([service('request_stack')]);
     $services->alias(CLIContextCheckerInterface::class, 'sylius.checker.cli_context');

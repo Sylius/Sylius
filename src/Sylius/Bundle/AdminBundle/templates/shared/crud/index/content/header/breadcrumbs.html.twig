@@ -6,10 +6,10 @@
 {% if title_from_context is not null or resource_metadata is not null %}
     {% set title = title_from_context|default(resource_metadata.applicationName~'.ui.'~resource_metadata.pluralName) %}
 {% else %}
-    {% set title = hookable_metadata.configuration.title|default('') %}
+    {% set title = hookable_metadata.configuration.title|default(null) %}
 {% endif %}
 
 {{ breadcrumbs([
     { name: 'sylius.ui.dashboard', 'url': path('sylius_admin_dashboard'), 'active': false },
-    { name: title, 'active': true },
+    { name: title|default('sylius.ui.index'|trans), 'active': true },
 ]) }}

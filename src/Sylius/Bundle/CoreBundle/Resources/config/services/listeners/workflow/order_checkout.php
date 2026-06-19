@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ApplyCreateTransitionOnOrderListener;
+use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\BlockSelectPaymentFromPaymentSkippedListener;
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ProcessCartListener;
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderCheckoutStateListener;
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\OrderCheckout\ResolveOrderPaymentStateListener;
@@ -61,5 +62,11 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius.listener.workflow.order_checkout.resolve_order_shipping_state', ResolveOrderShippingStateListener::class)
         ->args([service('sylius.state_resolver.order_shipping')])
         ->tag('kernel.event_listener', ['event' => 'workflow.sylius_order_checkout.completed.complete', 'priority' => 100])
+    ;
+
+    $services
+        ->set('sylius.listener.workflow.order_checkout.block_select_payment_from_payment_skipped', BlockSelectPaymentFromPaymentSkippedListener::class)
+        ->args([service('sylius.checker.order_payment_method_selection_availability')])
+        ->tag('kernel.event_listener', ['event' => 'workflow.sylius_order_checkout.guard.select_payment'])
     ;
 };

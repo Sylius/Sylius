@@ -422,6 +422,7 @@ sylius:
         in: Dans
         inactive: Inactif
         included_in_price: Inclus dans le prix
+        index: Index
         index_metadata: Méta-données
         index_of_all_configured_locales: Index de tous les paramètres régionaux configurés
         info: Info

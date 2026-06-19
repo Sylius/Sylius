@@ -18,8 +18,10 @@ use Behat\Config\Suite;
 use Sylius\Behat\Context\Setup\CatalogPromotionContext;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_managing_product_variants', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_managing_product_variants', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -66,7 +68,7 @@ return (new Config())
                 'sylius.behat.context.api.admin.translation',
                 'sylius.behat.context.api.debug',
             )
-            ->withFilter(new TagFilter('@managing_product_variants&&@api'))
-        )
+            ->withFilter(new TagFilter('@managing_product_variants&&@api')),
+        ),
     )
 ;

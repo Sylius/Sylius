@@ -1,3 +1,53 @@
+# UPGRADE FROM `2.1.13` TO `2.1.14`
+
+### Admin resource translations
+
+Translations for admin-managed resources (such as product options, attributes, associations) are now resolved using the current admin locale instead of the default `%locale%` parameter.
+
+Previously, translation-aware query builders relied on a static `%locale%` parameter, which could lead to inconsistencies when the admin user was working in a different language than the application default.
+
+This has been updated to dynamically resolve the locale from the admin context.
+
+### Before
+```yaml
+sylius_grid:
+    grids:
+        sylius_admin_product_association_type:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_association_type.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
+```
+
+### After
+```yaml
+sylius_grid:
+    grids:
+        sylius_admin_product_association_type:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_association_type.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["expr:service('sylius.context.locale').getLocaleCode()"]
+```
+
+### Restore missing admin resource show title
+
+A missing page title has been restored to the admin resource show pages (e.g. product, order, customer, shipment, catalog promotion).
+
+Added separated show routes for each resource with dedicated show page templates.
+
+### Order payment method eligibility check
+
+The `Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator` and 
+`Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator` now checks also if 
+payment method is assigned to the channel of the order.
+
 # UPGRADE FROM `2.1.12` TO `2.1.13`
 
 ### Telemetry improvements

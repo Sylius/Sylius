@@ -19,6 +19,7 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\ApiBundle\Serializer\SerializationGroupsSupportTrait;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
+use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -38,12 +39,21 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
     private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
 
     public function __construct(
-        private readonly ProductVariantPricesCalculatorInterface $priceCalculator,
+        private readonly ProductVariantPricesCalculatorInterface|CatalogPricesCalculatorInterface $priceCalculator,
         private readonly AvailabilityCheckerInterface $availabilityChecker,
         private readonly SectionProviderInterface $uriBasedSectionContext,
         private readonly IriConverterInterface $iriConverter,
         private readonly array $serializationGroups,
     ) {
+        if (!$this->priceCalculator instanceof CatalogPricesCalculatorInterface) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '2.3',
+                'Passing an instance of "%s" as $priceCalculator is deprecated. It will require "%s" since Sylius 3.0.',
+                ProductVariantPricesCalculatorInterface::class,
+                CatalogPricesCalculatorInterface::class,
+            );
+        }
     }
 
     /**

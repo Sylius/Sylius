@@ -102,7 +102,7 @@ final class CatalogPromotionActionTypeValidatorTest extends TestCase
 
         $this->context->expects(self::once())
             ->method('buildViolation')
-            ->with($constraint->invalidType)
+            ->with($constraint->invalidTypeMessage)
             ->willReturn($violationBuilder);
 
         $violationBuilder->expects(self::once())

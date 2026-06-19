@@ -53,6 +53,12 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
 
 1. The `Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface::updateFromReview()` method has been deprecated and will be removed in Sylius 3.0. Use state machine mechanism implemented by Symfony Workflow instead.
 
+## Admin UI
+
+1. A new `modal-portal.js` script has been added to `AdminBundle`.
+   It moves Bootstrap modal elements to `<body>` before they are displayed,
+   preventing them from being rendered behind the Bootstrap backdrop when nested inside a CSS stacking context (e.g. the sticky `.page-header`).
+
 ## Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)

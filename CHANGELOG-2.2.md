@@ -1,5 +1,45 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.6 (2026-06-02)
+
+#### Details
+
+- [#18989](https://github.com/Sylius/Sylius/pull/18989) Fix modals appearing behind backdrop on sticky page-header ([@bartek-sek](https://github.com/bartek-sek))
+- [#18990](https://github.com/Sylius/Sylius/pull/18990) Fix attribute card style for product show ([@shochdoerfer](https://github.com/shochdoerfer))
+- [#18988](https://github.com/Sylius/Sylius/pull/18988) BUGFIX: Expose ShippingMethod *DeliveryTimeDays in admin API ([@daniellienert](https://github.com/daniellienert))
+- [#19009](https://github.com/Sylius/Sylius/pull/19009) [ApiBundle][Tests] Add regression test for anonymous cart pickup wit… ([@Wojdylak](https://github.com/Wojdylak))
+- [#19012](https://github.com/Sylius/Sylius/pull/19012) [ApiBundle] Fix "Undefined array key 0" in PathPrefixProvider when path equals API route ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#19001](https://github.com/Sylius/Sylius/pull/19001) Bugfix/csrf token ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#19017](https://github.com/Sylius/Sylius/pull/19017) Add appendError method to ResponseCheckerInterface ([@Prometee](https://github.com/Prometee))
+- [#19018](https://github.com/Sylius/Sylius/pull/19018) [ApiBundle] Fix 404 on GET /shop/products/{code} when all associated products are disabled ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#19024](https://github.com/Sylius/Sylius/pull/19024) [2.2] [AttributeBundle] make Add and Delete button translatable in product attribute select type ([@crydotsnake](https://github.com/crydotsnake))
+- [#19025](https://github.com/Sylius/Sylius/pull/19025) [API] Add regression tests for cross-customer cart item access ([@GSadee](https://github.com/GSadee))
+- [#19026](https://github.com/Sylius/Sylius/pull/19026) [API] Slim down Swagger UI override and drop broken auto-auth JS ([@GSadee](https://github.com/GSadee))
+- [#19038](https://github.com/Sylius/Sylius/pull/19038) [2.1] Prevent stale cart LiveComponents from mutating completed orders ([@TheMilek](https://github.com/TheMilek))
+- [#19039](https://github.com/Sylius/Sylius/pull/19039) [2.1][API] Enforce channel eligibility check when changing payment method via account endpoint ([@TheMilek](https://github.com/TheMilek))
+- [#19040](https://github.com/Sylius/Sylius/pull/19040) [2.1] Check payment request ownership ([@TheMilek](https://github.com/TheMilek))
+
+## v2.2.5 (2026-04-10)
+
+#### Details
+
+- [#18579](https://github.com/Sylius/Sylius/pull/18579) Fix problem with empty taxon product index ([@tomkalon](https://github.com/tomkalon))
+- [#18932](https://github.com/Sylius/Sylius/pull/18932) TASK: improve german translations for CH, DE, and AT ([@crydotsnake](https://github.com/crydotsnake))
+- [#18933](https://github.com/Sylius/Sylius/pull/18933) fix: add default filter to breadcrumbs configuration title to prevent ScalarDataBag exception ([@camilleislasse](https://github.com/camilleislasse))
+- [#18943](https://github.com/Sylius/Sylius/pull/18943) Fix build after APIPlatform 4.3.2 release ([@TheMilek](https://github.com/TheMilek))
+- [#18941](https://github.com/Sylius/Sylius/pull/18941) Add payment enabled in channel validation ([@marekrzytki](https://github.com/marekrzytki))
+- [#18926](https://github.com/Sylius/Sylius/pull/18926) [BUGFIX] Allow updating provinceName when provinceCode is null in API ([@rust-le](https://github.com/rust-le))
+- [#18953](https://github.com/Sylius/Sylius/pull/18953) [BUGFIX] Make mailer services public to allow usage in state machine callbacks ([@rust-le](https://github.com/rust-le))
+- [#18961](https://github.com/Sylius/Sylius/pull/18961) Resolve flash alert correctly without breaking translation ([@TheMilek](https://github.com/TheMilek))
+- [#18940](https://github.com/Sylius/Sylius/pull/18940) Restore missing page titles for admin resource show pages ([@marekrzytki](https://github.com/marekrzytki))
+- [#18922](https://github.com/Sylius/Sylius/pull/18922) Unified name translations handling in admin grid index ([@pbalcerzak](https://github.com/pbalcerzak))
+- [#18965](https://github.com/Sylius/Sylius/pull/18965) Allow choosing different payment method with skip payment step when it gets disabled ([@TheMilek](https://github.com/TheMilek))
+- [#18969](https://github.com/Sylius/Sylius/pull/18969) Add missing status code mapping for OrderItemNotFoundException ([@marekrzytki](https://github.com/marekrzytki))
+- [#18970](https://github.com/Sylius/Sylius/pull/18970) Add email validation constraints to cart update ([@marekrzytki](https://github.com/marekrzytki))
+- [#18972](https://github.com/Sylius/Sylius/pull/18972) Fix admin templates ([@loic425](https://github.com/loic425))
+- [#18958](https://github.com/Sylius/Sylius/pull/18958) [API] Make API Platform resource command classes overridable via container parameters ([@Prometee](https://github.com/Prometee))
+- [#18974](https://github.com/Sylius/Sylius/pull/18974) Unify Tests directory with tests ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.2.4 (2026-03-18)
 
 #### Details

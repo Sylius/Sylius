@@ -11,6 +11,16 @@ sylius_admin_customer:
         permission: true
     type: sylius.resource
 
+sylius_admin_customer_show:
+    path: /customers/{id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer::showAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/customer/show.html.twig"
+            
 sylius_admin_customer_order_index:
     path: /customers/{id}/orders
     methods: [GET]

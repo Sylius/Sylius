@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Setup;
 
-use Behat\Step\When;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Behat\Step\When;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;

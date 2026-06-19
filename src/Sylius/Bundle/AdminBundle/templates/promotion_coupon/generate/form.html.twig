@@ -4,7 +4,6 @@
     {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
     <div class="row">
         {{ form_errors(form) }}
-        {{ form_widget(form._token) }}
 
         {% hook 'form' with { form } %}
     </div>

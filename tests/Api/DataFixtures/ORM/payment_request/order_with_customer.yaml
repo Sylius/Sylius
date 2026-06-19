@@ -15,4 +15,5 @@ Sylius\Component\Core\Model\Order:
         paymentState: "awaiting_payment"
         shippingState: "ready"
         tokenValue: "token"
-        customer: "@customer_oliver"
+        __calls:
+            - setCustomerWithAuthorization: ["@customer_oliver"]

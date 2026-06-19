@@ -1,25 +1,26 @@
 {% if form is not defined %}
-    {% set form = hookable_metadata.context.form %}
+    {% set form = hookable_metadata.context.form|default(null) %}
 {% endif %}
 
 {% if resource is not defined %}
     {% set resource = hookable_metadata.context.resource|default(null) %}
 {% endif %}
 
-{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+{% if form is not null %}
+    {% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
 
-<div class="container-xl" {% if attributes is defined %} {{ attributes }} {% endif %}>
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
-    <div class="card-body">
-        {% if hookable_metadata.configuration.method is defined %}
-            <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}"/>
-        {% elseif form.vars.data.id|default(null) is not null %}
-            <input type="hidden" name="_method" value="PUT"/>
-        {% endif %}
-        {{ form_errors(form) }}
-        {{ form_widget(form._token) }}
+    <div class="container-xl" {% if attributes is defined %} {{ attributes }} {% endif %}>
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': form.vars.id}}) }}
+        <div class="card-body">
+            {% if hookable_metadata.configuration.method is defined %}
+                <input type="hidden" name="_method" value="{{ hookable_metadata.configuration.method }}"/>
+            {% elseif form.vars.data.id|default(null) is not null %}
+                <input type="hidden" name="_method" value="PUT"/>
+            {% endif %}
+            {{ form_errors(form) }}
 
-        {% hook 'form' with { form, resource } %}
+            {% hook 'form' with { form, resource } %}
+        </div>
+        {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
     </div>
-    {{ form_end(form, {render_rest: hookable_metadata.configuration.render_rest|default(false)}) }}
-</div>
+{% endif %}

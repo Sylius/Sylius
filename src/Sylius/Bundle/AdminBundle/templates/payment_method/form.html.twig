@@ -10,7 +10,6 @@
         <input type="hidden" name="_method" value="{{ configuration.method }}" />
     {% endif %}
     {{ form_errors(form) }}
-    {{ form_widget(form._token) }}
 
     {% hook 'form' with { form } %}
 

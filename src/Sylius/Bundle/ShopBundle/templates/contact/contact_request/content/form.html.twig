@@ -2,5 +2,4 @@
 
 {{ form_start(form, {'action': path('sylius_shop_contact_request'), 'attr': {'novalidate': 'novalidate'}}) }}
 {% hook 'form' %}
-{{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

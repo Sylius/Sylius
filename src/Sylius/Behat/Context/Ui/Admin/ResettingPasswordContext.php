@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
-use Behat\Step\When;
-use Behat\Step\Then;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Element\Admin\Account\ResetElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Account\RequestPasswordResetPage;

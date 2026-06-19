@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
+use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Twig\Extension\AbstractExtension;
@@ -21,8 +22,18 @@ use Webmozart\Assert\Assert;
 
 final class PriceExtension extends AbstractExtension
 {
-    public function __construct(private readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator)
-    {
+    public function __construct(
+        private readonly ProductVariantPricesCalculatorInterface|CatalogPricesCalculatorInterface $productVariantPricesCalculator,
+    ) {
+        if (!$this->productVariantPricesCalculator instanceof CatalogPricesCalculatorInterface) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '2.3',
+                'Passing an instance of "%s" as $productVariantPricesCalculator is deprecated. It will require "%s" since Sylius 3.0.',
+                ProductVariantPricesCalculatorInterface::class,
+                CatalogPricesCalculatorInterface::class,
+            );
+        }
     }
 
     public function getFilters(): array

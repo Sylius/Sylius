@@ -17,12 +17,14 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 use Sylius\Behat\Context\Api\Admin\BrowsingCatalogPromotionProductVariantsContext;
 use Sylius\Behat\Context\Setup\CatalogPromotionContext as SetupCatalogPromotionContext;
-use Sylius\Behat\Context\Transform\CatalogPromotionContext as TransformCatalogPromotionContext;
 use Sylius\Behat\Context\Setup\PriceHistoryContext;
+use Sylius\Behat\Context\Transform\CatalogPromotionContext as TransformCatalogPromotionContext;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_viewing_product_in_admin_panel', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_viewing_product_in_admin_panel', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -66,7 +68,7 @@ return (new Config())
                 'sylius.behat.context.api.debug',
                 BrowsingCatalogPromotionProductVariantsContext::class,
             )
-            ->withFilter(new TagFilter('@viewing_product_in_admin_panel&&@api'))
-        )
+            ->withFilter(new TagFilter('@viewing_product_in_admin_panel&&@api')),
+        ),
     )
 ;

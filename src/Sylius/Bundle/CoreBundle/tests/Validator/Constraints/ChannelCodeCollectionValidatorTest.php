@@ -75,10 +75,10 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
 
         $this->expectException(\LogicException::class);
 
-        $this->validator->validate([], new ChannelCodeCollection([
-            'validateAgainstAllChannels' => false,
-            'channelAwarePropertyPath' => 'promotion',
-        ]));
+        $this->validator->validate([], new ChannelCodeCollection(
+            validateAgainstAllChannels: false,
+            channelAwarePropertyPath: 'promotion',
+        ));
     }
 
     public function testItValidatesTheValueChannelsExistence(): void
@@ -99,11 +99,11 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
         $groups = ['Default', 'test_group'];
         $value = ['does_not_exist' => ['one']];
 
-        $constraint = new ChannelCodeCollection([
-            'constraints' => $constraints,
-            'groups' => $groups,
-            'channelAwarePropertyPath' => 'shippingMethod',
-        ]);
+        $constraint = new ChannelCodeCollection(
+            constraints: $constraints,
+            groups: $groups,
+            channelAwarePropertyPath: 'shippingMethod',
+        );
 
         $this->executionContext->expects($this->once())
             ->method('buildViolation')
@@ -144,11 +144,11 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
         $validator->method('inContext')->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate');
 
-        $this->validator->validate($value, new ChannelCodeCollection([
-            'constraints' => $constraints,
-            'groups' => $groups,
-            'channelAwarePropertyPath' => 'shippingMethod',
-        ]));
+        $this->validator->validate($value, new ChannelCodeCollection(
+            constraints: $constraints,
+            groups: $groups,
+            channelAwarePropertyPath: 'shippingMethod',
+        ));
     }
 
     public function testItValidatesCollectionsForChannelsFromValue(): void
@@ -174,11 +174,11 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
         $validator->method('inContext')->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate');
 
-        $this->validator->validate($value, new ChannelCodeCollection([
-            'constraints' => $constraints,
-            'groups' => $groups,
-            'channelAwarePropertyPath' => 'promotion',
-        ]));
+        $this->validator->validate($value, new ChannelCodeCollection(
+            constraints: $constraints,
+            groups: $groups,
+            channelAwarePropertyPath: 'promotion',
+        ));
     }
 
     public function testItValidatesCollectionsForLocalChannelsAndFromValue(): void
@@ -206,11 +206,11 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
         $validator->method('inContext')->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate');
 
-        $this->validator->validate($value, new ChannelCodeCollection([
-            'constraints' => $constraints,
-            'groups' => $groups,
-            'channelAwarePropertyPath' => 'promotion',
-        ]));
+        $this->validator->validate($value, new ChannelCodeCollection(
+            constraints: $constraints,
+            groups: $groups,
+            channelAwarePropertyPath: 'promotion',
+        ));
     }
 
     public function testItDoesNothingWhenLocalCollectionIfChannelsIsEmpty(): void
@@ -226,10 +226,10 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
         $this->executionContext->expects($this->never())->method('buildViolation');
         $this->executionContext->expects($this->never())->method('getValidator');
 
-        $this->validator->validate([], new ChannelCodeCollection([
-            'validateAgainstAllChannels' => false,
-            'channelAwarePropertyPath' => 'promotion',
-        ]));
+        $this->validator->validate([], new ChannelCodeCollection(
+            validateAgainstAllChannels: false,
+            channelAwarePropertyPath: 'promotion',
+        ));
     }
 
     public function testItValidatesCollectionsForAllChannels(): void
@@ -249,10 +249,10 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
         $validator->method('inContext')->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate');
 
-        $this->validator->validate($value, new ChannelCodeCollection([
-            'constraints' => $constraints,
-            'groups' => $groups,
-            'validateAgainstAllChannels' => true,
-        ]));
+        $this->validator->validate($value, new ChannelCodeCollection(
+            constraints: $constraints,
+            groups: $groups,
+            validateAgainstAllChannels: true,
+        ));
     }
 }

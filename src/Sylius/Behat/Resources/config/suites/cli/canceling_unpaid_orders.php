@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('cli_canceling_unpaid_orders'))
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('cli_canceling_unpaid_orders'))
             ->withContexts(
                 'sylius.behat.context.hook.doctrine_orm',
             )
@@ -43,7 +45,7 @@ return (new Config())
                 'sylius.behat.context.cli.cancel_unpaid_orders',
                 'sylius.behat.context.domain.managing_orders',
             )
-            ->withFilter(new TagFilter('@canceling_unpaid_orders&&@cli'))
-        )
+            ->withFilter(new TagFilter('@canceling_unpaid_orders&&@cli')),
+        ),
     )
 ;

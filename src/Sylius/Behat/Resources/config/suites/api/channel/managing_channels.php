@@ -19,8 +19,10 @@ use Sylius\Behat\Context\Api\Admin\ManagingChannelPriceHistoryConfigContext;
 use Sylius\Behat\Context\Api\Admin\ManagingChannelsBillingDataContext;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_managing_channels', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_managing_channels', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -55,7 +57,7 @@ return (new Config())
                 ManagingChannelPriceHistoryConfigContext::class,
                 ManagingChannelsBillingDataContext::class,
             )
-            ->withFilter(new TagFilter('@managing_channels&&@api'))
-        )
+            ->withFilter(new TagFilter('@managing_channels&&@api')),
+        ),
     )
 ;

@@ -24,7 +24,7 @@ abstract class AbstractPostgresqlJsonFunctionNode extends AbstractJsonFunctionNo
     protected function validatePlatform(SqlWalker $sqlWalker): void
     {
         if (!$sqlWalker->getConnection()->getDatabasePlatform() instanceof PostgreSQLPlatform) {
-            throw new \RuntimeException(sprintf('Function "%s" is not supported on this platform.', static::FUNCTION_NAME));
+            throw new \LogicException(sprintf('Function "%s" is not supported on this platform.', static::FUNCTION_NAME));
         }
     }
 

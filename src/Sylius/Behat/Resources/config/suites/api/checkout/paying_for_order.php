@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_paying_for_order', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_paying_for_order', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -76,7 +78,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.payment_request',
                 'sylius.behat.context.api.shop.response',
             )
-            ->withFilter(new TagFilter('@paying_for_order&&@api'))
-        )
+            ->withFilter(new TagFilter('@paying_for_order&&@api')),
+        ),
     )
 ;

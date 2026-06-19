@@ -167,9 +167,6 @@
     "friends-of-behat/variadic-extension": {
         "version": "v1.3.0"
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.2"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.42"
     },
@@ -196,12 +193,6 @@
     },
     "instaclick/php-webdriver": {
         "version": "1.4.7"
-    },
-    "knplabs/gaufrette": {
-        "version": "v0.8.3"
-    },
-    "knplabs/knp-gaufrette-bundle": {
-        "version": "v0.7.1"
     },
     "knplabs/knp-menu": {
         "version": "v3.1.2"
@@ -690,9 +681,6 @@
     },
     "symfony/property-info": {
         "version": "v5.0.7"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v4.4.13"
     },
     "symfony/routing": {
         "version": "4.2",

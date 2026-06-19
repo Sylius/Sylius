@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_currencies', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_currencies', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -39,7 +41,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.channel',
                 'sylius.behat.context.api.shop.currency',
             )
-            ->withFilter(new TagFilter('@currencies&&@api'))
-        )
+            ->withFilter(new TagFilter('@currencies&&@api')),
+        ),
     )
 ;

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Hook;
 
-use Behat\Hook\BeforeScenario;
 use Behat\Behat\Context\Context;
+use Behat\Hook\BeforeScenario;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 
