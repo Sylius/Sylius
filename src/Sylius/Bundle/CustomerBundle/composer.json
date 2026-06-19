@@ -60,7 +60,7 @@
             "dev-main": "2.2-dev"
         },
         "symfony": {
-            "require": "~8.0.0"
+            "require": "^7.4"
         }
     },
     "autoload": {
