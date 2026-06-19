@@ -45,17 +45,6 @@ final class ValidDeliveryTimeRange extends Constraint
         parent::__construct(groups: $groups, payload: $payload);
     }
 
-    #[HasNamedArguments]
-    public function __construct(
-        string $message = 'sylius.form.shipping_method.max_delivery_time_days.greater_or_equal_min',
-        ?array $groups = null,
-        mixed $payload = null,
-    ) {
-        parent::__construct(groups: $groups, payload: $payload);
-
-        $this->message = $message;
-    }
-
     public function validatedBy(): string
     {
         return 'sylius_shipping_method_valid_delivery_time_range';
