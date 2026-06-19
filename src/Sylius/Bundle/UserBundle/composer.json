@@ -49,7 +49,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13 || ^3.0",
-        "hwi/oauth-bundle": "dev-master as 2.5.0",
+        "hwi/oauth-bundle": "^2.5",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
