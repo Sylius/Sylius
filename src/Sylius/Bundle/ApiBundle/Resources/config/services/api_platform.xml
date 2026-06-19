@@ -35,6 +35,7 @@
             <argument type="service" id="sylius_api.provider.path_prefix" />
             <argument type="service" id="sylius_api.operation_resolver.path_prefix_based" />
             <argument type="service" id="api_platform.router" />
+            <argument type="service" id="api_platform.resource_class_resolver" />
         </service>
 
         <service

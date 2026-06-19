@@ -1,5 +1,19 @@
 # UPGRADE FROM `2.2.6` TO `2.2.7`
 
+## Constructor Signature Changes
+
+1. The constructor of `Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter` has been extended with an optional `ApiPlatform\Metadata\ResourceClassResolverInterface` argument.
+
+```php
+    public function __construct(
+        IriConverterInterface $decoratedIriConverter,
+        PathPrefixProviderInterface $pathPrefixProvider,
+        OperationResolverInterface $operationResolver,
+        RouterInterface $router,
++       ?ResourceClassResolverInterface $resourceClassResolver = null,
+    )
+```
+
 ## Bahavior changes
 
 1. The `LiveComponentTagPass` and `TwigComponentTagPass` in `SyliusUiBundle` were registered with a priority of `500`,
