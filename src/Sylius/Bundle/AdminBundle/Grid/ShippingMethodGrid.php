@@ -90,7 +90,9 @@ final class ShippingMethodGrid extends AbstractGrid implements ShippingMethodGri
             )
             ->addFilter(
                 ExistsFilter::create('archival', 'archivedAt')
-                    ->setLabel('sylius.ui.archival'),
+                    ->setLabel('sylius.ui.archival')
+                    ->setDefaultValue(false)
+                ,
             )
             ->addActionGroup(
                 MainActionGroup::create(

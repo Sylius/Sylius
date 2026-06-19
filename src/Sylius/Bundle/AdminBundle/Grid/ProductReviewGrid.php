@@ -126,7 +126,6 @@ final class ProductReviewGrid extends AbstractGrid implements ProductReviewGridI
             // -- Actions
             ->addActionGroup(
                 ItemActionGroup::create(
-                    UpdateAction::create(),
                     Action::create('accept', 'apply_transition')
                         ->setLabel('sylius.ui.accept')
                         ->setIcon('tabler:check')
@@ -157,6 +156,7 @@ final class ProductReviewGrid extends AbstractGrid implements ProductReviewGridI
                             'transition' => 'reject',
                             'graph' => 'sylius_product_review',
                         ]),
+                    UpdateAction::create(),
                     DeleteAction::create(),
                 ),
             )

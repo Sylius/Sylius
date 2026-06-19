@@ -107,7 +107,9 @@ final class PromotionGrid extends AbstractGrid implements PromotionGridInterface
             )
             ->addFilter(
                 ExistsFilter::create('archival', 'archivedAt')
-                    ->setLabel('sylius.ui.archival'),
+                    ->setLabel('sylius.ui.archival')
+                    ->setDefaultValue(false)
+                ,
             )
 
             // -- Actions
