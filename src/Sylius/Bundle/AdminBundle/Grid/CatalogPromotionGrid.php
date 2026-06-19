@@ -69,6 +69,15 @@ final class CatalogPromotionGrid extends AbstractGrid implements CatalogPromotio
                     ->setSortable(true),
             )
             ->addField(
+                TwigField::create('channels', '@SyliusAdmin/shared/grid/field/channels.html.twig')
+                    ->setLabel('sylius.ui.channels')
+                    ->withOptions([
+                        'vars' => [
+                            'th_class' => 'w-1 text-center',
+                        ],
+                    ]),
+            )
+            ->addField(
                 TwigField::create('startDate', '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.start_date')
                     ->setSortable(true)
@@ -85,15 +94,6 @@ final class CatalogPromotionGrid extends AbstractGrid implements CatalogPromotio
                     ->withOptions([
                         'vars' => [
                             'th_class' => 'text-center',
-                        ],
-                    ]),
-            )
-            ->addField(
-                TwigField::create('channels', '@SyliusAdmin/shared/grid/field/channels.html.twig')
-                    ->setLabel('sylius.ui.channels')
-                    ->withOptions([
-                        'vars' => [
-                            'th_class' => 'w-1 text-center',
                         ],
                     ]),
             )

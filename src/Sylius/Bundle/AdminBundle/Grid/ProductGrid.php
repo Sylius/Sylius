@@ -97,19 +97,6 @@ final class ProductGrid extends AbstractGrid implements ProductGridInterface
                     ->setLabel('sylius.ui.channel'),
             )
             ->addFilter(
-                Filter::create('main_taxon', 'ux_translatable_autocomplete')
-                    ->setLabel('sylius.ui.main_taxon')
-                    ->setFormOptions([
-                        'multiple' => false,
-                        'extra_options' => [
-                            'class' => $this->taxonClass,
-                            'translation_fields' => ['name'],
-                            'choice_label' => 'fullname',
-                        ],
-                    ])
-                    ->addOption('fields', ['mainTaxon.id']),
-            )
-            ->addFilter(
                 Filter::create('taxon', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.taxon')
                     ->setFormOptions([
@@ -121,6 +108,19 @@ final class ProductGrid extends AbstractGrid implements ProductGridInterface
                         ],
                     ])
                     ->addOption('fields', ['productTaxons.taxon.id']),
+            )
+            ->addFilter(
+                Filter::create('main_taxon', 'ux_translatable_autocomplete')
+                    ->setLabel('sylius.ui.main_taxon')
+                    ->setFormOptions([
+                        'multiple' => false,
+                        'extra_options' => [
+                            'class' => $this->taxonClass,
+                            'translation_fields' => ['name'],
+                            'choice_label' => 'fullname',
+                        ],
+                    ])
+                    ->addOption('fields', ['mainTaxon.id']),
             )
 
             // -- Actions
