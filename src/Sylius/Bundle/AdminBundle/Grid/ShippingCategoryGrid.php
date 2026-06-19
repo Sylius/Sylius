@@ -22,11 +22,10 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_shipping_category')]
-final class ShippingCategoryGrid extends AbstractGrid implements ShippingCategoryGridInterface
+final class ShippingCategoryGrid implements ShippingCategoryGridInterface
 {
     public function __construct(
         private readonly string $shippingCategoryClass,

@@ -17,11 +17,10 @@ use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_channel_pricing_log_entry')]
-final class ChannelPricingLogEntryGrid extends AbstractGrid implements ChannelPricingLogEntryGridInterface
+final class ChannelPricingLogEntryGrid implements ChannelPricingLogEntryGridInterface
 {
     public function __construct(
         private readonly string $channelPricingLogEntryClass,

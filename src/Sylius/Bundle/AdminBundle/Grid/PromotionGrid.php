@@ -26,11 +26,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\ExistsFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_promotion')]
-final class PromotionGrid extends AbstractGrid implements PromotionGridInterface
+final class PromotionGrid implements PromotionGridInterface
 {
     public function __construct(
         private readonly string $promotionClass,
@@ -107,7 +106,9 @@ final class PromotionGrid extends AbstractGrid implements PromotionGridInterface
             )
             ->addFilter(
                 ExistsFilter::create('archival', 'archivedAt')
-                    ->setLabel('sylius.ui.archival'),
+                    ->setLabel('sylius.ui.archival')
+                    ->setDefaultValue(false)
+                ,
             )
 
             // -- Actions

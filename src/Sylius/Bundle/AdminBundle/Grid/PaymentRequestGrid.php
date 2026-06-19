@@ -20,12 +20,11 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 #[AsGrid(name: 'sylius_admin_payment_request')]
-final class PaymentRequestGrid extends AbstractGrid implements PaymentRequestGridInterface
+final class PaymentRequestGrid implements PaymentRequestGridInterface
 {
     public function __construct(
         private readonly string $paymentRequestClass,

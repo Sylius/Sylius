@@ -21,11 +21,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_order')]
-final class OrderGrid extends AbstractGrid implements OrderGridInterface
+final class OrderGrid implements OrderGridInterface
 {
     public function __construct(
         private readonly string $orderClass,

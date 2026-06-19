@@ -18,11 +18,10 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_payment')]
-final class PaymentGrid extends AbstractGrid implements PaymentGridInterface
+final class PaymentGrid implements PaymentGridInterface
 {
     public function __construct(
         private readonly string $paymentClass,

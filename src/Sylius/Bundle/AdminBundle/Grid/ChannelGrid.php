@@ -23,11 +23,10 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\BooleanFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_channel')]
-final class ChannelGrid extends AbstractGrid implements ChannelGridInterface
+final class ChannelGrid implements ChannelGridInterface
 {
     public function __construct(
         private readonly string $channelClass,

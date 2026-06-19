@@ -16,11 +16,10 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_customer_order')]
-final class CustomerOrderGrid extends AbstractGrid implements CustomerOrderGridInterface
+final class CustomerOrderGrid implements CustomerOrderGridInterface
 {
     public function __construct(
         private readonly string $orderClass,

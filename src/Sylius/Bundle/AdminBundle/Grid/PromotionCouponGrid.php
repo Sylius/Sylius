@@ -25,11 +25,10 @@ use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_promotion_coupon')]
-final class PromotionCouponGrid extends AbstractGrid implements PromotionCouponGridInterface
+final class PromotionCouponGrid implements PromotionCouponGridInterface
 {
     public function __construct(
         private readonly string $promotionCouponClass,

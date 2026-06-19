@@ -24,11 +24,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\BooleanFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_product_taxon')]
-final class ProductTaxonGrid extends AbstractGrid implements ProductTaxonGridInterface
+final class ProductTaxonGrid implements ProductTaxonGridInterface
 {
     public function __construct(
         private readonly string $productTaxonClass,

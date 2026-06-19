@@ -26,11 +26,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_product')]
-final class ProductGrid extends AbstractGrid implements ProductGridInterface
+final class ProductGrid implements ProductGridInterface
 {
     public function __construct(
         private readonly string $productClass,

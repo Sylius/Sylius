@@ -22,11 +22,10 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_product_association_type')]
-final class ProductAssociationTypeGrid extends AbstractGrid implements ProductAssociationTypeGridInterface
+final class ProductAssociationTypeGrid implements ProductAssociationTypeGridInterface
 {
     public function __construct(
         private readonly string $productAssociationTypeClass,
