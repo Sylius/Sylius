@@ -36,8 +36,8 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
     public function __construct(
         private Payum $payum,
         private PaymentToPayResolverInterface $paymentToPayResolver,
-        private ?string $afterPayUrlRoute = null,
-        private array $afterPayUrlParameters = [],
+        private readonly ?string $afterPayUrlRoute = null,
+        private readonly array $afterPayUrlParameters = [],
     ) {
     }
 
