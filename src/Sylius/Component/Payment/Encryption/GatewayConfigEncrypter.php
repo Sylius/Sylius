@@ -49,7 +49,7 @@ final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
     public function decrypt(EncryptionAwareInterface $resource): void
     {
         $config = $resource->getConfig();
-        if (!$this->allIsEncrypted($config)) {
+        if (!$this->isFullyEncrypted($config)) {
             return;
         }
 
@@ -61,5 +61,17 @@ final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
         if ([] !== $decryptedConfig) {
             $resource->setConfig($decryptedConfig);
         }
+    }
+
+    /** @param array<array-key, mixed> $values */
+    private function isFullyEncrypted(array $values): bool
+    {
+        foreach ($values as $value) {
+            if (!$this->isEncrypted($value)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
