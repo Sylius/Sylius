@@ -17,7 +17,6 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 interface PayResponseProviderInterface
 {
     public function getResponse(RequestConfiguration $requestConfiguration, OrderInterface $order): Response;
