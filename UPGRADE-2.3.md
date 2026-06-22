@@ -44,6 +44,29 @@
      (`identity_generation_preferences` for `PostgreSQLPlatform`) to keep the database schema backward compatible 
      with existing installations.
 
+3. The `_sylius: redirect:` block has been removed from the `sylius_shop_order_pay` route definition.
+
+   Previously, `PayumPayResponseProvider` read the after-pay redirect route at runtime from the routing metadata:
+
+   ```yaml
+   # ShopBundle/Resources/config/routing/order.yml (removed)
+   sylius_shop_order_pay:
+       defaults:
+           _sylius:
+               redirect:
+                   route: sylius_shop_order_after_pay
+   ```
+
+   The redirect route is now resolved from the `sylius_shop` bundle configuration at compile time.
+   If you customized the after-pay redirect route by overriding this routing parameter, use the bundle configuration instead:
+
+   ```yaml
+   sylius_shop:
+       order_pay:
+           after_pay_route: sylius_shop_order_after_pay
+           after_pay_route_parameters: []
+   ```
+
 ## Dependencies
 
 1. The `behat/transliterator` package has been **deprecated** and will be removed in Sylius 3.0.
