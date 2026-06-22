@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Provider;
 
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /** @experimental */
 interface HttpResponseProviderInterface
 {
     public function supports(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         PaymentRequestInterface $paymentRequest,
     ): bool;
 
     public function getResponse(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         PaymentRequestInterface $paymentRequest,
     ): Response;
 }

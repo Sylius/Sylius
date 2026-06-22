@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\OrderPay\Handler;
 
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Symfony\Component\HttpFoundation\Request;
 
 /** @experimental */
 interface PaymentStateFlashHandlerInterface
 {
-    public function handle(RequestConfiguration $requestConfiguration, string $state): void;
+    public function handle(Request $request, string $state): void;
 }

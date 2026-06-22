@@ -17,7 +17,6 @@ use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
 use Sylius\Bundle\PaymentBundle\Checker\FinalizedPaymentRequestCheckerInterface;
 use Sylius\Bundle\PaymentBundle\Provider\DefaultActionProviderInterface;
 use Sylius\Bundle\PaymentBundle\Provider\DefaultPayloadProviderInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -25,6 +24,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -46,7 +46,7 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
     ) {
     }
 
-    public function getResponse(RequestConfiguration $requestConfiguration, OrderInterface $order): Response
+    public function getResponse(Request $request, OrderInterface $order): Response
     {
         $payment = $this->paymentToPayResolver->getPayment($order);
         Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId()));
@@ -62,7 +62,7 @@ final class PaymentRequestPayResponseProvider implements PayResponseProviderInte
         return new RedirectResponse($this->paymentRequestPayUrlProvider->getUrl($paymentRequest));
     }
 
-    public function supports(RequestConfiguration $requestConfiguration, OrderInterface $order): bool
+    public function supports(Request $request, OrderInterface $order): bool
     {
         return true;
     }

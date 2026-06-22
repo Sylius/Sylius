@@ -18,11 +18,11 @@ use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Provider\PayResponseProviderInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface as PayumGatewayConfigInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
@@ -41,7 +41,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
     }
 
     public function getResponse(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         OrderInterface $order,
     ): Response {
         $payment = $this->paymentToPayResolver->getPayment($order);
@@ -53,7 +53,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
     }
 
     public function supports(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         OrderInterface $order,
     ): bool {
         $payment = $this->paymentToPayResolver->getPayment($order);
