@@ -20,6 +20,7 @@ use Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\CoreBundle\CommandHandler\Account\ResendVerificationEmailHandler;
 use Sylius\Bundle\CoreBundle\Mailer\Emails as CoreEmails;
 use Sylius\Bundle\UserBundle\Mailer\Emails as UserEmails;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -41,6 +42,8 @@ final class ResendVerificationEmailHandlerTest extends TestCase
 
     private SenderInterface&MockObject $emailSender;
 
+    private ObjectManager&MockObject $shopUserManager;
+
     private ResendVerificationEmailHandler $handler;
 
     protected function setUp(): void
@@ -50,11 +53,13 @@ final class ResendVerificationEmailHandlerTest extends TestCase
         $this->channelRepository = $this->createMock(ChannelRepositoryInterface::class);
         $this->tokenGenerator = $this->createMock(GeneratorInterface::class);
         $this->emailSender = $this->createMock(SenderInterface::class);
+        $this->shopUserManager = $this->createMock(ObjectManager::class);
         $this->handler = new ResendVerificationEmailHandler(
             $this->shopUserRepository,
             $this->channelRepository,
             $this->tokenGenerator,
             $this->emailSender,
+            $this->shopUserManager,
         );
     }
 
@@ -80,6 +85,7 @@ final class ResendVerificationEmailHandlerTest extends TestCase
         $this->channelRepository->expects(self::once())->method('findOneByCode')->with('WEB')->willReturn($channel);
         $this->tokenGenerator->expects(self::once())->method('generate')->willReturn('TOKEN');
         $shopUser->expects(self::once())->method('setEmailVerificationToken')->with('TOKEN');
+        $this->shopUserManager->expects(self::once())->method('flush');
         $this->emailSender->expects(self::once())
             ->method('send')
             ->with(
@@ -106,6 +112,7 @@ final class ResendVerificationEmailHandlerTest extends TestCase
         $this->channelRepository->expects(self::once())->method('findOneByCode')->with('WEB')->willReturn($channel);
         $this->tokenGenerator->expects(self::once())->method('generate')->willReturn('TOKEN');
         $shopUser->expects(self::once())->method('setEmailVerificationToken')->with('TOKEN');
+        $this->shopUserManager->expects(self::once())->method('flush');
         $this->emailSender->expects(self::once())
             ->method('send')
             ->with(
@@ -122,6 +129,7 @@ final class ResendVerificationEmailHandlerTest extends TestCase
         $this->shopUserRepository->expects(self::once())->method('findOneByEmail')->with('unknown@example.com')->willReturn(null);
         $this->channelRepository->expects(self::never())->method('findOneByCode');
         $this->tokenGenerator->expects(self::never())->method('generate');
+        $this->shopUserManager->expects(self::never())->method('flush');
         $this->emailSender->expects(self::never())->method('send');
 
         ($this->handler)(new ResendVerificationEmail(channelCode: 'WEB', localeCode: 'en_US', email: 'unknown@example.com'));
@@ -136,6 +144,7 @@ final class ResendVerificationEmailHandlerTest extends TestCase
         $this->shopUserRepository->expects(self::once())->method('findOneByEmail')->with('verified@example.com')->willReturn($shopUser);
         $this->channelRepository->expects(self::never())->method('findOneByCode');
         $this->tokenGenerator->expects(self::never())->method('generate');
+        $this->shopUserManager->expects(self::never())->method('flush');
         $this->emailSender->expects(self::never())->method('send');
 
         ($this->handler)(new ResendVerificationEmail(channelCode: 'WEB', localeCode: 'en_US', email: 'verified@example.com'));
@@ -154,6 +163,7 @@ final class ResendVerificationEmailHandlerTest extends TestCase
         $this->shopUserRepository->expects(self::once())->method('findOneByEmail')->with('test@example.com')->willReturn($shopUser);
         $this->channelRepository->expects(self::once())->method('findOneByCode')->with('WEB')->willReturn($channel);
         $this->tokenGenerator->expects(self::never())->method('generate');
+        $this->shopUserManager->expects(self::never())->method('flush');
         $this->emailSender->expects(self::never())->method('send');
 
         ($this->handler)(new ResendVerificationEmail(channelCode: 'WEB', localeCode: 'en_US', email: 'test@example.com'));
@@ -168,6 +178,7 @@ final class ResendVerificationEmailHandlerTest extends TestCase
         $this->shopUserRepository->expects(self::once())->method('findOneByEmail')->with('test@example.com')->willReturn($shopUser);
         $this->channelRepository->expects(self::once())->method('findOneByCode')->with('INVALID')->willReturn(null);
         $this->tokenGenerator->expects(self::never())->method('generate');
+        $this->shopUserManager->expects(self::never())->method('flush');
         $this->emailSender->expects(self::never())->method('send');
 
         ($this->handler)(new ResendVerificationEmail(channelCode: 'INVALID', localeCode: 'en_US', email: 'test@example.com'));
