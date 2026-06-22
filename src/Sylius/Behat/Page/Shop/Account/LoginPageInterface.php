@@ -19,6 +19,8 @@ interface LoginPageInterface extends SyliusPageInterface
 {
     public function hasValidationErrorWith(string $message): bool;
 
+    public function hasResendVerificationEmailLink(): bool;
+
     public function logIn(): void;
 
     public function specifyPassword(string $password): void;

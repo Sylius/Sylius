@@ -27,3 +27,23 @@ Feature: Resending a verification email
         When I resend the verification email to "shop@example.com"
         Then I should be notified that the verification email has been sent to the provided address
         But "shop@example.com" should receive no emails
+
+    @ui
+    Scenario: Being informed about unverified account when trying to log in
+        Given on this channel account verification is required
+        When I log in as "shop@example.com" with "sylius" password
+        Then I should be notified that my account has not been verified
+        And I should see the resend verification email link
+        And I should not be logged in
+
+    @ui @email
+    Scenario: Resending a verification email from the login page
+        Given on this channel account verification is required
+        When I log in as "shop@example.com" with "sylius" password
+        Then I should be notified that my account has not been verified
+        And I should see the resend verification email link
+        And I should not be logged in
+        When I follow the resend verification email link
+        And I resend the verification email to "shop@example.com" on the resend page
+        Then I should be notified that the verification email has been sent to the provided address
+        And a verification email should have been sent to "shop@example.com"

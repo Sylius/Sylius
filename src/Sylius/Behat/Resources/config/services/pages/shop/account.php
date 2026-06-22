@@ -23,6 +23,7 @@ use Sylius\Behat\Page\Shop\Account\ProfileUpdatePage;
 use Sylius\Behat\Page\Shop\Account\RegisterPage;
 use Sylius\Behat\Page\Shop\Account\RegisterThankYouPage;
 use Sylius\Behat\Page\Shop\Account\RequestPasswordResetPage;
+use Sylius\Behat\Page\Shop\Account\ResendVerificationEmailPage;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPage;
 use Sylius\Behat\Page\Shop\Account\VerificationPage;
 use Sylius\Behat\Page\Shop\Account\WellKnownPasswordChangePage;
@@ -45,6 +46,7 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.behat.page.shop.account.register.class', RegisterPage::class);
     $parameters->set('sylius.behat.page.shop.account.register.thank_you.class', RegisterThankYouPage::class);
     $parameters->set('sylius.behat.page.shop.account.request_password_reset.class', RequestPasswordResetPage::class);
+    $parameters->set('sylius.behat.page.shop.account.resend_verification_email.class', ResendVerificationEmailPage::class);
     $parameters->set('sylius.behat.page.shop.account.reset_password.class', ResetPasswordPage::class);
     $parameters->set('sylius.behat.page.shop.account.verify.class', VerificationPage::class);
     $parameters->set('sylius.behat.page.shop.account.well_known_password_change.class', WellKnownPasswordChangePage::class);
@@ -113,6 +115,11 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.behat.page.shop.account.request_password_reset', '%sylius.behat.page.shop.account.request_password_reset.class%')
+        ->parent('sylius.behat.symfony_page')
+    ;
+
+    $services
+        ->set('sylius.behat.page.shop.account.resend_verification_email', '%sylius.behat.page.shop.account.resend_verification_email.class%')
         ->parent('sylius.behat.symfony_page')
     ;
 

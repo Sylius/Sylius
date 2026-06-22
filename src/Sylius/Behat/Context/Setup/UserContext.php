@@ -47,6 +47,7 @@ final readonly class UserContext implements Context
     {
         /** @var ShopUserInterface $user */
         $user = $this->userFactory->create(['email' => $email, 'password' => $this->replaceWithSecurePassword($password), 'enabled' => true]);
+        $user->setVerifiedAt(new \DateTime());
 
         $this->sharedStorage->set('user', $user);
 
@@ -71,6 +72,7 @@ final readonly class UserContext implements Context
     {
         /** @var ShopUserInterface $user */
         $user = $this->userFactory->create(['email' => $email, 'password' => $this->replaceWithSecurePassword($password), 'enabled' => true]);
+        $user->setVerifiedAt(new \DateTime());
 
         $user->setCustomer($this->sharedStorage->get('customer'));
         $this->sharedStorage->set('user', $user);

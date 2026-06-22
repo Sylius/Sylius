@@ -182,6 +182,27 @@ final class LoginContext implements Context
         Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
     }
 
+    #[Then('I should be notified that my account has not been verified')]
+    public function iShouldBeNotifiedThatMyAccountHasNotBeenVerified(): void
+    {
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Your account has not been verified yet. Please check your email inbox.'));
+    }
+
+    #[Then('I should see the resend verification email link')]
+    public function iShouldSeeTheResendVerificationEmailLink(): void
+    {
+        Assert::true($this->loginPage->hasResendVerificationEmailLink());
+    }
+
+    #[When('I log in as :email with :password password')]
+    public function iLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+    }
+
     #[Then('I should be notified that email with reset instruction has been sent')]
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSent(): void
     {

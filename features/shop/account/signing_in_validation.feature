@@ -17,7 +17,7 @@ Feature: Signing in to the store validation
         Then I should be notified about bad credentials
         And I should not be logged in
 
-    @api @ui
+    @api
     Scenario: Trying to sign in without confirming account
         When I register with email "sylius@example.com" and password "sylius"
         And I want to log in
@@ -25,6 +25,14 @@ Feature: Signing in to the store validation
         And I specify the password as "sylius"
         And I try to log in
         Then I should be notified about bad credentials
+        And I should not be logged in
+
+    @ui
+    Scenario: Trying to sign in without confirming account
+        When I register with email "sylius@example.com" and password "sylius"
+        And I log in as "sylius@example.com" with "sylius" password
+        Then I should be notified that my account has not been verified
+        And I should see the resend verification email link
         And I should not be logged in
 
     @api @ui
