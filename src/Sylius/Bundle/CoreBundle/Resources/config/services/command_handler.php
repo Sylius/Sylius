@@ -30,6 +30,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.channel'),
             service('sylius.shop_user.token_generator.email_verification'),
             service('sylius.email_sender'),
+            service('sylius.manager.shop_user'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;

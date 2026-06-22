@@ -1,0 +1,8 @@
+{% set last_error = hookable_metadata.context.last_error|default() %}
+
+{% if last_error is not empty and last_error.messageKey == 'sylius.user.email_not_verified' and sylius.channel.accountVerificationRequired %}
+<div class="mt-2 text-center">
+    {{ 'sylius.ui.verification_email_not_received'|trans }}<br />
+    <a href="{{ path('sylius_shop_resend_verification_email') }}" {{ sylius_test_html_attribute('resend-verification-email-link') }}>{{ 'sylius.ui.resend_verification_email'|trans }}</a>
+</div>
+{% endif %}

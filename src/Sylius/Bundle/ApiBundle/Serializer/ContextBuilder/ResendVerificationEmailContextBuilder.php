@@ -20,12 +20,12 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
-final class ResendVerificationEmailContextBuilder implements SerializerContextBuilderInterface
+final readonly class ResendVerificationEmailContextBuilder implements SerializerContextBuilderInterface
 {
     public function __construct(
-        private readonly SerializerContextBuilderInterface $decoratedContextBuilder,
-        private readonly ChannelContextInterface $channelContext,
-        private readonly LocaleContextInterface $localeContext,
+        private SerializerContextBuilderInterface $decoratedContextBuilder,
+        private ChannelContextInterface $channelContext,
+        private LocaleContextInterface $localeContext,
     ) {
     }
 

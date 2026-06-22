@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command\Account;
 
-readonly class ResendVerificationEmail
+class ResendVerificationEmail
 {
     public function __construct(
-        public string $channelCode,
-        public string $localeCode,
-        public string $email,
-        public bool $sendVerificationLink = false,
+        public readonly string $channelCode,
+        public readonly string $localeCode,
+        public readonly string $email,
+        public readonly bool $sendVerificationLink = false,
     ) {
     }
 }

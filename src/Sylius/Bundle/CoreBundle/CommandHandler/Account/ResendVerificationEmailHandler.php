@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\CommandHandler\Account;
 use Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\CoreBundle\Mailer\Emails as CoreEmails;
 use Sylius\Bundle\UserBundle\Mailer\Emails as UserEmails;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -36,6 +37,7 @@ final readonly class ResendVerificationEmailHandler
         private ChannelRepositoryInterface $channelRepository,
         private GeneratorInterface $tokenGenerator,
         private SenderInterface $emailSender,
+        private ObjectManager $shopUserManager,
     ) {
     }
 
@@ -56,6 +58,7 @@ final readonly class ResendVerificationEmailHandler
         }
 
         $user->setEmailVerificationToken($this->tokenGenerator->generate());
+        $this->shopUserManager->flush();
 
         $this->emailSender->send(
             $command->sendVerificationLink ? UserEmails::EMAIL_VERIFICATION_TOKEN : CoreEmails::ACCOUNT_VERIFICATION,
