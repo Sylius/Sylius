@@ -493,7 +493,6 @@ sylius:
         rating: 'Vlersimi'
         ready: 'Gati'
         resend_verification_email: 'Ridërgoni email-in e verifikimit'
-        resend_verification_email_info: 'Shkruani adresën tuaj të email-it dhe ne do t''ju ridërgojmë lidhjen e verifikimit.'
         recent_customers: 'Blerësit e fundit'
         recent_orders: 'Porositë e fundit'
         recent_users: 'Përdoruesit e fundit'

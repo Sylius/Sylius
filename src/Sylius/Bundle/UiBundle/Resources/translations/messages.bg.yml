@@ -652,7 +652,6 @@ sylius:
         ratio: 'Съотношение'
         ready: 'Готов'
         resend_verification_email: 'Изпращане на имейл за потвърждение отново'
-        resend_verification_email_info: 'Въведете своя имейл адрес и ние ще изпратим отново линка за потвърждение.'
         recent_customers: 'Последни клиенти'
         recent_orders: 'Последни поръчки'
         recent_users: 'Последни потребители'

@@ -528,7 +528,6 @@ sylius:
         ratio: 'Kurs'
         ready: 'Klar'
         resend_verification_email: 'Send bekræftelsesmail igen'
-        resend_verification_email_info: 'Indtast din e-mailadresse, så sender vi bekræftelseslinket igen.'
         recent_orders: 'De seneste ordrer'
         recent_users: 'De seneste brugere'
         refunded: 'Refunderet'

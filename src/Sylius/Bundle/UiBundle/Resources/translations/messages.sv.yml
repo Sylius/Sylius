@@ -762,7 +762,6 @@ sylius:
         resend_the_order_confirmation_email: 'Skicka om orderbekräftelsen'
         resend_the_shipment_confirmation_email: 'Skicka om leveransbekräftelsen'
         resend_verification_email: 'Skicka om verifieringsmail'
-        resend_verification_email_info: 'Ange din e-postadress så skickar vi verifieringslänken på nytt.'
         reserved: 'Reserverad'
         reset: 'Återställ'
         reset_button: 'Återställ'

@@ -617,7 +617,6 @@ sylius:
         ratio: 'Santykis'
         ready: 'Paruošta'
         resend_verification_email: 'Siųsti patvirtinimo el. laišką dar kartą'
-        resend_verification_email_info: 'Įveskite savo el. pašto adresą ir mes iš naujo atsiųsime patvirtinimo nuorodą.'
         recent_customers: 'Naujausi klientai'
         recent_orders: 'Naujausi užsakymai'
         recent_users: 'Naujausi vartotojai'

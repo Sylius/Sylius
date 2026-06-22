@@ -507,7 +507,6 @@ sylius:
         ratio: 'Razmerje'
         ready: 'Pripravljeno'
         resend_verification_email: 'Znova pošlji potrditveno e-pošto'
-        resend_verification_email_info: 'Vnesite svoj e-poštni naslov in mi bomo znova poslali potrditveno povezavo.'
         recent_customers: 'Nedavni kupci'
         recent_orders: 'Nedavna naročila'
         recent_users: 'Nedavni uporabniki'

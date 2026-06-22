@@ -56,6 +56,5 @@ sylius:
         username: 'Корисничко име'
         value: 'Вредност'
         resend_verification_email: 'Повторно испрати верификациски е-маил'
-        resend_verification_email_info: 'Внесете ја вашата е-маил адреса и ние ќе ви ја испратиме повторно верификациската врска.'
         verification_email_not_received: 'Verification email not received?'
         zone: 'Зона'

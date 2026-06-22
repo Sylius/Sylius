@@ -697,7 +697,6 @@ sylius:
         resend_the_order_confirmation_email: 'Захиалгын баталгаажуулах имэйлийг дахин илгээх'
         resend_the_shipment_confirmation_email: 'Хүргэлтийн баталгаажуулах имэйлийг дахин илгээх'
         resend_verification_email: 'Баталгаажуулах имэйлийг дахин илгээх'
-        resend_verification_email_info: 'Имэйл хаягаа оруулна уу, бид баталгаажуулах холбоосыг дахин илгээх болно.'
         reserved: 'Захиалсан'
         reset: 'Дахин тохируулах'
         reset_button: 'Дахин тохируулах'

@@ -759,7 +759,6 @@ sylius:
         resend_the_order_confirmation_email: '注文確認メールを再送'
         resend_the_shipment_confirmation_email: '発送確認メールを再送'
         resend_verification_email: '認証メールを再送する'
-        resend_verification_email_info: 'メールアドレスを入力してください。認証リンクを再送します。'
         reserved: '予約済み'
         reset: 'リセット'
         reset_button: 'リセット'

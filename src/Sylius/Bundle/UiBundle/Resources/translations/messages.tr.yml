@@ -662,7 +662,6 @@ sylius:
         ratio: 'Oran'
         ready: 'Hazır'
         resend_verification_email: 'Doğrulama e-postasını yeniden gönder'
-        resend_verification_email_info: 'E-posta adresinizi girin, doğrulama bağlantısını tekrar göndereceğiz.'
         recent_customers: 'Son müşteriler'
         recent_orders: 'Son siparişler'
         recent_users: 'Son kullanıcılar'

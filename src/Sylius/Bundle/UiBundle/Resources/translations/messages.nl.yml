@@ -762,7 +762,6 @@ sylius:
         resend_the_order_confirmation_email: 'Stuur de bestelbevestiging opnieuw'
         resend_the_shipment_confirmation_email: 'Stuur de verzendbevestiging opnieuw'
         resend_verification_email: 'Verificatie-e-mail opnieuw verzenden'
-        resend_verification_email_info: 'Voer uw e-mailadres in en wij sturen u de verificatielink opnieuw.'
         reserved: 'Gereserveerd'
         reset: 'Resetten'
         reset_button: 'Resetknop'

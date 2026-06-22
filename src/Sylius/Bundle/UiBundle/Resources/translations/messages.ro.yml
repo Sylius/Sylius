@@ -762,7 +762,6 @@ sylius:
         resend_the_order_confirmation_email: 'Retrimite emailul de confirmare a comenzii'
         resend_the_shipment_confirmation_email: 'Retrimite emailul de confirmare a expedierii'
         resend_verification_email: 'Retrimiteți e-mailul de verificare'
-        resend_verification_email_info: 'Introduceți adresa de e-mail și vom retrimite link-ul de verificare.'
         reserved: 'Rezervat'
         reset: 'Resetează'
         reset_button: 'Resetează'

@@ -194,7 +194,6 @@ sylius:
         ratio: 'יחס'
         ready: 'מוכן'
         resend_verification_email: 'שלח מחדש אימייל אימות'
-        resend_verification_email_info: 'הזן את כתובת האימייל שלך ואנו נשלח מחדש את קישור האימות.'
         register: 'הרשם'
         register_button: 'הרשם'
         rejected: 'נדחה'

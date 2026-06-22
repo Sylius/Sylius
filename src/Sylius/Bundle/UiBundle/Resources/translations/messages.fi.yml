@@ -228,7 +228,6 @@ sylius:
         remember_me: 'Muista minut'
         roles: 'Roolit'
         resend_verification_email: 'Lähetä vahvistussähköposti uudelleen'
-        resend_verification_email_info: 'Syötä sähköpostiosoitteesi ja lähetämme vahvistuslinkin uudelleen.'
         sales: 'Myynnit'
         sales_this_month: 'Myynnit'
         scope: 'Alue'

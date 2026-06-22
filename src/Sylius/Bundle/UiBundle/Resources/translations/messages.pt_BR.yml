@@ -658,7 +658,6 @@ sylius:
         ratio: 'Proporção'
         ready: 'Pronto'
         resend_verification_email: 'Reenviar e-mail de verificação'
-        resend_verification_email_info: 'Insira o seu endereço de e-mail e nós reenviaremos o link de verificação.'
         recent_customers: 'Clientes recentes'
         recent_orders: 'Pedidos Recentes'
         recent_users: 'Usuários recentes'

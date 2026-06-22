@@ -760,7 +760,6 @@ sylius:
         resend_the_order_confirmation_email: 'إعادة إرسال بريد تأكيد الطلب'
         resend_the_shipment_confirmation_email: 'إعادة إرسال بريد تأكيد الشحنة'
         resend_verification_email: 'إعادة إرسال بريد التحقق'
-        resend_verification_email_info: 'أدخل عنوان بريدك الإلكتروني وسنعيد إرسال رابط التحقق.'
         reserved: 'محجوز'
         reset: 'إعادة تعيين'
         reset_button: 'إعادة تعيين'

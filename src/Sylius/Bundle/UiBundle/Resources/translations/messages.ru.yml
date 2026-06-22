@@ -656,7 +656,6 @@ sylius:
         ratio: 'По рейтингу'
         ready: 'Готов'
         resend_verification_email: 'Повторно отправить письмо с подтверждением'
-        resend_verification_email_info: 'Введите ваш адрес электронной почты, и мы повторно отправим ссылку для подтверждения.'
         recent_customers: 'Последние клиенты'
         recent_orders: 'Недавние заказы'
         recent_users: 'Последние пользователи'

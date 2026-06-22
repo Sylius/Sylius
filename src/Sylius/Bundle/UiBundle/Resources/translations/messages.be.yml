@@ -294,7 +294,6 @@ sylius:
         quantity: 'Колькасць'
         ready: 'Гатова'
         resend_verification_email: 'Паўторна адправіць ліст пацверджання'
-        resend_verification_email_info: 'Увядзіце свой адрас электроннай пошты, і мы паўторна адправім спасылку для пацверджання.'
         recent_orders: 'Нядаўнія замовы'
         recent_users: 'Нядаўнія карыстальнікі'
         refunded: 'Вернута'

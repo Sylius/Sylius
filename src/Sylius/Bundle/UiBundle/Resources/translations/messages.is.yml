@@ -650,7 +650,6 @@ sylius:
         ratio: 'Hlutfall'
         ready: 'Tilbúið'
         resend_verification_email: 'Senda staðfestingarpóst aftur'
-        resend_verification_email_info: 'Sláðu inn netfangið þitt og við sendum staðfestingarhlekkinn aftur.'
         recent_customers: 'Nýir viðskiptavinir'
         recent_orders: 'Nýjar pantanir'
         recent_users: 'Nýlegir notendur'

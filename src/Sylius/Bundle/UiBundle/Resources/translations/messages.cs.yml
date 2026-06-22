@@ -762,7 +762,6 @@ sylius:
         resend_the_order_confirmation_email: 'Znovu odeslat potvrzení objednávky'
         resend_the_shipment_confirmation_email: 'Znovu odeslat potvrzení odeslání'
         resend_verification_email: 'Znovu odeslat ověřovací e-mail'
-        resend_verification_email_info: 'Zadejte svou e-mailovou adresu a my vám znovu pošleme ověřovací odkaz.'
         reserved: 'Rezervováno'
         reset: 'Obnovit'
         reset_button: 'Obnovit'

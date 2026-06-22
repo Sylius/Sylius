@@ -98,7 +98,6 @@ sylius:
         ratio: '比率'
         ready: '就緒'
         resend_verification_email: '重新發送驗證郵件'
-        resend_verification_email_info: '輸入您的電子郵件地址，我們將重新發送驗證連結。'
         remember_me: '記住我'
         returned: '已退還'
         roles: '角色'

@@ -652,7 +652,6 @@ sylius:
         ratio: 'Rasio'
         ready: 'Siap'
         resend_verification_email: 'Kirim ulang email verifikasi'
-        resend_verification_email_info: 'Masukkan alamat email Anda dan kami akan mengirim ulang tautan verifikasi.'
         recent_customers: 'pelanggan baru-baru ini'
         recent_orders: 'Pesanan baru-baru ini'
         recent_users: 'Pengguna Terbaru'

@@ -762,7 +762,6 @@ sylius:
         resend_the_order_confirmation_email: 'Reenviar e-mail de confirmação'
         resend_the_shipment_confirmation_email: 'Reenviar e-mail de envio'
         resend_verification_email: 'Reenviar e-mail de verificação'
-        resend_verification_email_info: 'Insira o seu endereço de e-mail e nós reenviaremos o link de verificação.'
         reserved: 'Reservado'
         reset: 'Repor'
         reset_button: 'Repor'

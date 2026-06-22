@@ -643,7 +643,6 @@ sylius:
         ratio: 'อัตราส่วน'
         ready: 'พร้อมส่ง'
         resend_verification_email: 'ส่งอีเมลยืนยันอีกครั้ง'
-        resend_verification_email_info: 'ป้อนที่อยู่อีเมลของคุณ และเราจะส่งลิงก์ยืนยันอีกครั้ง'
         recent_customers: 'ลูกค้าล่าสุด'
         recent_orders: 'ใบสั่งซื้อล่าสุด'
         recent_users: 'ผู้ใช้ล่าสุด'

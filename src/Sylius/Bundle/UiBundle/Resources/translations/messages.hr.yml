@@ -653,7 +653,6 @@ sylius:
         ratio: 'Omjer'
         ready: 'Spremno'
         resend_verification_email: 'Ponovo pošalji e-mail za provjeru'
-        resend_verification_email_info: 'Unesite svoju e-mail adresu i mi ćemo vam ponovo poslati link za provjeru.'
         recent_customers: 'Posljednji kupci'
         recent_orders: 'Posljednje narudžbe'
         recent_users: 'Posljednji korisnici'

@@ -762,7 +762,6 @@ sylius:
         resend_the_order_confirmation_email:  '重新发送订单确认邮件'
         resend_the_shipment_confirmation_email:  '重新发送发货确认邮件'
         resend_verification_email: '重新发送验证邮件'
-        resend_verification_email_info: '输入您的电子邮件地址，我们将重新发送验证链接。'
         reserved:  '已保留'
         reset:  '重置'
         reset_button:  '重置'

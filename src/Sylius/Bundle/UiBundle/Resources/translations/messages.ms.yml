@@ -26,6 +26,5 @@ sylius:
         select: 'Pilih'
         type: 'Jenis'
         resend_verification_email: 'Hantar semula e-mel pengesahan'
-        resend_verification_email_info: 'Masukkan alamat e-mel anda dan kami akan menghantar semula pautan pengesahan.'
         verification_email_not_received: 'Verification email not received?'
         zone: 'Zon'

@@ -588,7 +588,6 @@ sylius:
         ratio: 'Αναλογία'
         ready: 'Έτοιμα'
         resend_verification_email: 'Επαναποστολή email επαλήθευσης'
-        resend_verification_email_info: 'Εισάγετε τη διεύθυνση email σας και θα σας ξαναστείλουμε τον σύνδεσμο επαλήθευσης.'
         recent_customers: 'Πρόσφατοι πελάτες'
         recent_orders: 'Πρόσφατες Παραγγελείες'
         records: 'Εγγραφές'

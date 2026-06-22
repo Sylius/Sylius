@@ -673,7 +673,6 @@ sylius:
         ratio: 'Рейтинг'
         ready: 'Готове'
         resend_verification_email: 'Надіслати лист підтвердження повторно'
-        resend_verification_email_info: 'Введіть свою адресу електронної пошти, і ми знову надішлемо посилання для підтвердження.'
         recent_customers: 'Останні відвідувачі'
         recent_orders: 'Останні замовлення'
         recent_users: 'Недавні користувачі'

@@ -38,7 +38,6 @@ sylius:
         provinces: 'Provintsid'
         roles: 'Rollid'
         resend_verification_email: 'Saada kinnitusmeili uuesti'
-        resend_verification_email_info: 'Sisestage oma e-posti aadress ja saadame kinnituslingi uuesti.'
         scope: 'Ulatus'
         select: 'Vali'
         short_description: 'Lühikirjeldus'

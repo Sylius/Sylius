@@ -176,7 +176,6 @@ sylius:
         resend_the_order_confirmation_email: 'Nosūtī pasūtījuma apstiprinājumu vēlreiz'
         resend_the_shipment_confirmation_email: 'Nosūtī nosutīšanas apstiprinājumu vēlreiz'
         resend_verification_email: 'Atkārtoti nosūtīt verificēšanas e-pastu'
-        resend_verification_email_info: 'Ievadiet savu e-pasta adresi un mēs atkārtoti nosūtīsim verificēšanas saiti.'
         sales: 'Pārdošana'
         sales_this_month: 'Pārdošana'
         scope: 'Tvērums'

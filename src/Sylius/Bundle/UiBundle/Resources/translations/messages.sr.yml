@@ -278,7 +278,6 @@ sylius:
         your_cart_is_empty: 'Ваша корпа је празна'
         your_products: 'Ваши производи'
         resend_verification_email: 'Поново пошаљи верификациони имејл'
-        resend_verification_email_info: 'Унесите своју е-маил адресу и ми ћемо поново послати верификациону везу.'
         zone: 'Зона'
         zone_details: 'Детаљи зоне'
         zones: 'Зоне'

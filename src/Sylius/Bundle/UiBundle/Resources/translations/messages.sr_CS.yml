@@ -357,7 +357,6 @@ sylius:
         ratio: 'Odnos'
         ready: 'Spremno'
         resend_verification_email: 'Ponovo pošalji verifikacioni imejl'
-        resend_verification_email_info: 'Unesite svoju e-mail adresu i mi ćemo ponovo poslati verifikacionu vezu.'
         recent_orders: 'Poslednje narudžbine'
         recent_users: 'Poslednji korisnici'
         register: 'Registracija'

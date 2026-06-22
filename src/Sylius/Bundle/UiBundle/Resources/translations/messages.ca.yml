@@ -197,7 +197,6 @@ sylius:
         remember_me: 'Recorda''m'
         roles: 'Rols'
         resend_verification_email: 'Reenviar correu de verificació'
-        resend_verification_email_info: 'Introduïu la vostra adreça de correu electrònic i us tornarem a enviar l''enllaç de verificació.'
         sales: 'Vendes'
         sales_this_month: 'Vendes'
         scope: 'Àmbit d''aplicació'

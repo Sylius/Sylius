@@ -97,7 +97,6 @@ sylius:
         reports: 'Báo cáo'
         roles: 'Vai trò'
         resend_verification_email: 'Gửi lại email xác nhận'
-        resend_verification_email_info: 'Nhập địa chỉ email của bạn và chúng tôi sẽ gửi lại liên kết xác nhận.'
         save: 'Lưu lại'
         scope: 'Phạm vi'
         search: 'Tìm kiếm'
