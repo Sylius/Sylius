@@ -29,7 +29,6 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class PayumPayResponseProvider implements PayResponseProviderInterface
 {
-
     /**
      * @param array<string, string> $afterPayUrlParameters
      */
