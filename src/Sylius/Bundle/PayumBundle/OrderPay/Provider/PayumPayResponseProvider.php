@@ -29,9 +29,15 @@ use Webmozart\Assert\Assert;
 /** @experimental */
 final class PayumPayResponseProvider implements PayResponseProviderInterface
 {
+
+    /**
+     * @param array<string, string> $afterPayUrlParameters
+     */
     public function __construct(
         private Payum $payum,
         private PaymentToPayResolverInterface $paymentToPayResolver,
+        private ?string $afterPayUrlRoute = null,
+        private array $afterPayUrlParameters = [],
     ) {
     }
 
@@ -42,13 +48,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         $payment = $this->paymentToPayResolver->getPayment($order);
         Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId()));
 
-        $redirectOptions = $requestConfiguration->getParameters()->get('redirect');
-        if (is_string($redirectOptions)) {
-            $redirectOptions = [
-                'route' => $redirectOptions,
-            ];
-        }
-        $token = $this->provideTokenBasedOnPayment($payment, $redirectOptions);
+        $token = $this->provideTokenBasedOnPayment($payment);
 
         return new RedirectResponse($token->getTargetUrl());
     }
@@ -74,10 +74,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         return $gatewayConfig->getUsePayum();
     }
 
-    /**
-     * @param array{route: ?string, parameters: ?string[]} $redirectOptions
-     */
-    private function provideTokenBasedOnPayment(PaymentInterface $payment, array $redirectOptions): TokenInterface
+    private function provideTokenBasedOnPayment(PaymentInterface $payment): TokenInterface
     {
         $gatewayConfig = $this->getGatewayConfigFromPayment($payment);
         Assert::notNull($gatewayConfig, 'An existing gateway config must exist.');
@@ -89,16 +86,16 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
             return $tokenFactory->createAuthorizeToken(
                 $gatewayConfig->getGatewayName(),
                 $payment,
-                $redirectOptions['route'] ?? null,
-                $redirectOptions['parameters'] ?? [],
+                $this->afterPayUrlRoute,
+                $this->afterPayUrlParameters,
             );
         }
 
         return $tokenFactory->createCaptureToken(
             $gatewayConfig->getGatewayName(),
             $payment,
-            $redirectOptions['route'] ?? null,
-            $redirectOptions['parameters'] ?? [],
+            $this->afterPayUrlRoute,
+            $this->afterPayUrlParameters,
         );
     }
 
