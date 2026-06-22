@@ -58,14 +58,18 @@
    ```
 
    The redirect route is now resolved from the `sylius_shop` bundle configuration at compile time.
-   If you customized the after-pay redirect route by overriding this routing parameter, use the bundle configuration instead:
+   If you customized the after-pay redirect route for Payum, use the dedicated Payum configuration keys instead:
 
    ```yaml
    sylius_shop:
        order_pay:
-           after_pay_route: sylius_shop_order_after_pay
-           after_pay_route_parameters: []
+           payum_after_pay_route: sylius_shop_order_after_pay
+           payum_after_pay_route_parameters: []
    ```
+
+   > **Note:** The `after_pay_route` and `after_pay_route_parameters` keys are reserved for the Payment Request flow
+   > and their default parameters include Payment Request-specific values (e.g. `hash: paymentRequest.getHash()`).
+   > Do not use them to configure the Payum after-pay redirect.
 
 ## Dependencies
 

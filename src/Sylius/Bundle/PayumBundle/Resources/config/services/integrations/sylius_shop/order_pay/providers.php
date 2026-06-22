@@ -21,8 +21,8 @@ return static function (ContainerConfigurator $container) {
         ->parent('sylius_payum.provider.order_pay.pay_response')
         ->args([
             service('sylius_shop.resolver.order_pay.payment_to_pay'),
-            '%sylius_shop.order_pay.after_pay_route%',
-            '%sylius_shop.order_pay.after_pay_route_parameters%',
+            '%sylius_shop.order_pay.payum_after_pay_route%',
+            '%sylius_shop.order_pay.payum_after_pay_route_parameters%',
         ])
         ->tag('sylius_shop.provider.order_pay.pay_response', ['priority' => -200])
     ;
