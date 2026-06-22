@@ -31,17 +31,29 @@ return static function (ContainerConfigurator $container) {
     ;
     $services->alias(GatewayConfigEncryptionCheckerInterface::class, 'sylius.checker.gateway_config_encryption');
 
-    $services->set('sylius.encrypter', Encrypter::class)->args(['%env(resolve:SYLIUS_PAYMENT_ENCRYPTION_KEY_PATH)%']);
+    $services
+        ->set('sylius.encrypter', Encrypter::class)
+        ->args([
+            '%env(resolve:SYLIUS_PAYMENT_ENCRYPTION_KEY_PATH)%',
+            '%sylius.encryption.strict_mode%',
+        ])
+    ;
     $services->alias(EncrypterInterface::class, 'sylius.encrypter');
 
     $services
         ->set('sylius.encrypter.payment_request', PaymentRequestEncrypter::class)
-        ->args([service('sylius.encrypter')])
+        ->args([
+            service('sylius.encrypter'),
+            '%sylius.encryption.allowed_classes%',
+        ])
     ;
 
     $services
         ->set('sylius.encrypter.gateway_config', GatewayConfigEncrypter::class)
-        ->args([service('sylius.encrypter')])
+        ->args([
+            service('sylius.encrypter'),
+            '%sylius.encryption.allowed_classes%',
+        ])
     ;
 
     $services

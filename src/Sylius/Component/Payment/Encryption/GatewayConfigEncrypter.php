@@ -25,18 +25,11 @@ final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
 {
     use EncryptionCheckTrait;
 
-    /** @param list<class-string> $allowedClasses */
+    /** @param bool|list<class-string> $allowedClasses */
     public function __construct(
         private EncrypterInterface $encrypter,
-        private bool|array $allowedClasses = true,
+        private array|bool $allowedClasses = true,
     ) {
-        if (true === $this->allowedClasses) {
-            trigger_deprecation(
-                'sylius/payment',
-                '2.1',
-                'Passing "true" as allowed classes is deprecated and support for it will be removed in Sylius 3.0. Please provide an explicit list of allowed classes or set it to "false" if you do not want to allow any classes.',
-            );
-        }
         if (is_array($this->allowedClasses)) {
             Assert::allStringNotEmpty($allowedClasses, 'Each allowed class must be a non-empty string. Got: %s');
             Assert::allClassExists($allowedClasses, 'Allowed class %s does not exist.');

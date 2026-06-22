@@ -62,6 +62,55 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    #[Test]
+    public function it_disables_strict_decryption_mode_by_default(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['encryption' => ['strict_mode' => false]],
+            'encryption.strict_mode',
+        );
+    }
+
+    #[Test]
+    public function its_strict_decryption_mode_can_be_enabled(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['encryption' => ['strict_mode' => true]]],
+            ['encryption' => ['strict_mode' => true]],
+            'encryption.strict_mode',
+        );
+    }
+
+    #[Test]
+    public function it_allows_all_classes_during_decryption_by_default(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['encryption' => ['allowed_classes' => true]],
+            'encryption.allowed_classes',
+        );
+    }
+
+    #[Test]
+    public function it_can_configure_an_explicit_list_of_allowed_classes(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['encryption' => ['allowed_classes' => [\stdClass::class]]]],
+            ['encryption' => ['allowed_classes' => [\stdClass::class]]],
+            'encryption.allowed_classes',
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_a_scalar_value_for_allowed_classes(): void
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [['encryption' => ['allowed_classes' => 'stdClass']]],
+            'encryption.allowed_classes',
+        );
+    }
+
     protected function getConfiguration(): Configuration
     {
         return new Configuration();
