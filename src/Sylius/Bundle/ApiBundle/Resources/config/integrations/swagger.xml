@@ -106,5 +106,10 @@
         <service id="sylius_api.open_api.documentation_modifier.address_log_entry" class="Sylius\Bundle\ApiBundle\OpenApi\Documentation\AddressLogEntryDocumentationModifier">
             <tag name="sylius.open_api.modifier" />
         </service>
+
+        <service id="sylius_api.open_api.documentation_modifier.taxon" class="Sylius\Bundle\ApiBundle\OpenApi\Documentation\TaxonDocumentationModifier">
+            <argument>%sylius.security.api_route%</argument>
+            <tag name="sylius.open_api.modifier" />
+        </service>
     </services>
 </container>
