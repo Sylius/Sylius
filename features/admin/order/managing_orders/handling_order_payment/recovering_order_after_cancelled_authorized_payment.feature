@@ -13,8 +13,10 @@ Feature: Recovering order payment state after an authorized payment is cancelled
         And there is a "authorized" "#00000001" order with "PHP T-Shirt" product
         And I am logged in as an administrator
 
-    @api
+    @api @ui
     Scenario: Order payment state recovers to awaiting payment after the authorized payment is cancelled by the gateway
         When the payment of order "#00000001" is cancelled by the gateway
+        And I browse orders
         Then this order should have order payment state "Awaiting payment"
-        And there should be only 2 payments
+        When I view the summary of the order "#00000001"
+        Then there should be only 2 payments
