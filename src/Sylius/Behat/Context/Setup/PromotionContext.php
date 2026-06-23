@@ -1112,6 +1112,28 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
+    #[Given('/^(the promotion) has a per channel cart quantity rule requiring at least (\d+) items in ("[^"]+" channel) and (\d+) items in ("[^"]+" channel)$/')]
+    public function thePromotionHasAPerChannelCartQuantityRuleRequiringItemsInChannelAndItemsInChannel(
+        PromotionInterface $promotion,
+        int $firstCount,
+        ChannelInterface $firstChannel,
+        int $secondCount,
+        ChannelInterface $secondChannel,
+    ): void {
+        $rule = $this->ruleFactory->createNew();
+        $rule->setType('cart_quantity_per_channel');
+        $rule->setConfiguration([
+            $firstChannel->getCode() => ['count' => $firstCount],
+            $secondChannel->getCode() => ['count' => $secondCount],
+        ]);
+
+        $promotion->addRule($rule);
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+
+        $this->objectManager->flush();
+    }
+
     #[Given('/^(this promotion) only applies to orders with a total of at least ("[^"]+") for ("[^"]+" channel)$/')]
     public function thisPromotionOnlyAppliesToOrdersWithTotalOfAtLeast(
         PromotionInterface $promotion,

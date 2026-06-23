@@ -81,6 +81,37 @@ Feature: Receiving discount with independent promotion rules configured per chan
         And my discount should be "-£3.00"
 
     @api @ui
+    Scenario: Single per-channel cart quantity rule accepts the order when the channel threshold is met
+        Given the promotion gives "$10.00" discount to every order in the "Web-US" channel and "£3.00" discount to every order in the "Web-GB" channel
+        And the promotion has a per channel cart quantity rule requiring at least 1 items in "Web-US" channel and 2 items in "Web-GB" channel
+        When I changed my current channel to "Web-US"
+        And I added product "Golang T-Shirt" to the cart
+        When I check the details of my cart
+        Then my cart total should be "$40.00"
+        And my discount should be "-$10.00"
+
+    @api @ui
+    Scenario: Single per-channel cart quantity rule rejects the order when the channel threshold is not met
+        Given the promotion gives "$10.00" discount to every order in the "Web-US" channel and "£3.00" discount to every order in the "Web-GB" channel
+        And the promotion has a per channel cart quantity rule requiring at least 1 items in "Web-US" channel and 2 items in "Web-GB" channel
+        When I changed my current channel to "Web-GB"
+        And I added product "Golang T-Shirt" to the cart
+        When I check the details of my cart
+        Then my cart total should be "£35.00"
+        And there should be no discount applied
+
+    @api @ui
+    Scenario: Single per-channel cart quantity rule accepts the second channel once its higher threshold is met
+        Given the promotion gives "$10.00" discount to every order in the "Web-US" channel and "£3.00" discount to every order in the "Web-GB" channel
+        And the promotion has a per channel cart quantity rule requiring at least 1 items in "Web-US" channel and 2 items in "Web-GB" channel
+        When I changed my current channel to "Web-GB"
+        And I added product "Golang T-Shirt" to the cart
+        And I added product "Golang T-Shirt" to the cart
+        When I check the details of my cart
+        Then my cart total should be "£67.00"
+        And my discount should be "-£3.00"
+
+    @api @ui
     Scenario: Not receiving discount when action is excluded from customer's channel
         Given the promotion gives "$10.00" discount to every order in the "Web-US" channel only
         When I changed my current channel to "Web-GB"
