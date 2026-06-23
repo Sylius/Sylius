@@ -36,8 +36,8 @@ final class TaxonDocumentationModifier implements DocumentationModifierInterface
             ->withSummary('Retrieves the collection of enabled Taxon resources for the current channel.')
             ->withDescription(
                 'Returns the direct enabled children of the Menu Taxon configured for the current channel. ' .
-                "The Menu Taxon is resolved from the active channel configuration. " .
-                "If no Menu Taxon is configured for the channel, the default code is used.",
+                'The Menu Taxon is resolved from the active channel configuration. ' .
+                'If no Menu Taxon is configured for the channel, the default code is used.',
             )
         ;
 
