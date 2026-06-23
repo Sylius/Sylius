@@ -6,11 +6,10 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_taxon')]
-final class TaxonGrid extends AbstractGrid implements TaxonGridInterface
+final class TaxonGrid implements TaxonGridInterface
 {
     public function __construct(
         private readonly string $taxonClass,

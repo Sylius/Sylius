@@ -20,11 +20,10 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_shipment')]
-final class ShipmentGrid extends AbstractGrid implements ShipmentGridInterface
+final class ShipmentGrid implements ShipmentGridInterface
 {
     public function __construct(
         private readonly string $shipmentClass,

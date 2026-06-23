@@ -25,11 +25,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_tax_rate')]
-final class TaxRateGrid extends AbstractGrid implements TaxRateGridInterface
+final class TaxRateGrid implements TaxRateGridInterface
 {
     public function __construct(
         private readonly string $taxRateClass,

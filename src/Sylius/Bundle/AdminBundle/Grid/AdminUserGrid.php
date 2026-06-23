@@ -24,11 +24,10 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\BooleanFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_admin_user')]
-final class AdminUserGrid extends AbstractGrid implements AdminUserGridInterface
+final class AdminUserGrid implements AdminUserGridInterface
 {
     public function __construct(
         private readonly string $adminUserClass,

@@ -26,11 +26,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\ExistsFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_shipping_method')]
-final class ShippingMethodGrid extends AbstractGrid implements ShippingMethodGridInterface
+final class ShippingMethodGrid implements ShippingMethodGridInterface
 {
     public function __construct(
         private readonly string $shippingMethodClass,

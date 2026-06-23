@@ -19,11 +19,10 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_inventory')]
-final class InventoryGrid extends AbstractGrid implements InventoryGridInterface
+final class InventoryGrid implements InventoryGridInterface
 {
     public function __construct(
         private readonly string $productVariantClass,

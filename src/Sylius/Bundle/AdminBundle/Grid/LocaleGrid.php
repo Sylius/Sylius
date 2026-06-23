@@ -20,11 +20,10 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_locale')]
-final class LocaleGrid extends AbstractGrid implements LocaleGridInterface
+final class LocaleGrid implements LocaleGridInterface
 {
     public function __construct(
         private readonly string $localeClass,

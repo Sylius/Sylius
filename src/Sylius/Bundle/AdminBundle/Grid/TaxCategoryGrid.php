@@ -22,11 +22,10 @@ use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_tax_category')]
-final class TaxCategoryGrid extends AbstractGrid implements TaxCategoryGridInterface
+final class TaxCategoryGrid implements TaxCategoryGridInterface
 {
     public function __construct(
         private readonly string $taxCategoryClass,

@@ -19,11 +19,10 @@ use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_currency')]
-final class CurrencyGrid extends AbstractGrid implements CurrencyGridInterface
+final class CurrencyGrid implements CurrencyGridInterface
 {
     public function __construct(
         private readonly string $currencyClass,

@@ -21,11 +21,10 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
 #[AsGrid(name: 'sylius_admin_product_variant_with_catalog_promotion')]
-final class ProductVariantWithCatalogPromotionGrid extends AbstractGrid implements ProductVariantWithCatalogPromotionGridInterface
+final class ProductVariantWithCatalogPromotionGrid implements ProductVariantWithCatalogPromotionGridInterface
 {
     public function __construct(
         private readonly string $productVariantClass,

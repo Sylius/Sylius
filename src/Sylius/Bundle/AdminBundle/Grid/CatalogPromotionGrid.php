@@ -26,12 +26,11 @@ use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 
 #[AsGrid(name: 'sylius_admin_catalog_promotion')]
-final class CatalogPromotionGrid extends AbstractGrid implements CatalogPromotionGridInterface
+final class CatalogPromotionGrid implements CatalogPromotionGridInterface
 {
     public function __construct(
         private readonly string $catalogPromotionClass,
