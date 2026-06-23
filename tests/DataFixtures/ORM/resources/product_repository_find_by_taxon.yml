@@ -1,0 +1,37 @@
+Sylius\Component\Core\Model\Taxon:
+    find_by_taxon_mugs:
+        code: "find_by_taxon_mugs"
+    find_by_taxon_books:
+        code: "find_by_taxon_books"
+
+Sylius\Component\Core\Model\Product:
+    find_by_taxon_product_mugs_only:
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        code: "FIND_BY_TAXON_MUGS_ONLY"
+    find_by_taxon_product_mugs_and_books:
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        code: "FIND_BY_TAXON_MUGS_AND_BOOKS"
+    find_by_taxon_product_books_only:
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        code: "FIND_BY_TAXON_BOOKS_ONLY"
+
+Sylius\Component\Core\Model\ProductTaxon:
+    find_by_taxon_pt_mugs_only:
+        product: "@find_by_taxon_product_mugs_only"
+        taxon: "@find_by_taxon_mugs"
+        position: 0
+    find_by_taxon_pt_mugs_and_books_mugs:
+        product: "@find_by_taxon_product_mugs_and_books"
+        taxon: "@find_by_taxon_mugs"
+        position: 1
+    find_by_taxon_pt_mugs_and_books_books:
+        product: "@find_by_taxon_product_mugs_and_books"
+        taxon: "@find_by_taxon_books"
+        position: 0
+    find_by_taxon_pt_books_only:
+        product: "@find_by_taxon_product_books_only"
+        taxon: "@find_by_taxon_books"
+        position: 1

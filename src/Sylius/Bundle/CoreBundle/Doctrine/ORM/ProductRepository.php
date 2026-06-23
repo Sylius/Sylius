@@ -247,11 +247,16 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
     public function findByTaxon(TaxonInterface $taxon): array
     {
-        return $this
-            ->createQueryBuilder('product')
-            ->distinct()
-            ->innerJoin('product.productTaxons', 'productTaxon')
+        $subQuery = $this->createQueryBuilder('sub')
+            ->select('sub.id')
+            ->innerJoin('sub.productTaxons', 'productTaxon')
             ->andWhere('productTaxon.taxon = :taxon')
+        ;
+
+        $queryBuilder = $this->createQueryBuilder('product');
+
+        return $queryBuilder
+            ->andWhere($queryBuilder->expr()->in('product.id', $subQuery->getDQL()))
             ->setParameter('taxon', $taxon)
             ->getQuery()
             ->getResult()
