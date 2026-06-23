@@ -8,6 +8,10 @@
  */
 
 document.addEventListener('show.bs.modal', function (event) {
+    if (event.target.closest('[data-controller~="live"]')) {
+        return;
+    }
+
     if (event.target.parentElement !== document.body) {
         document.body.appendChild(event.target);
     }
