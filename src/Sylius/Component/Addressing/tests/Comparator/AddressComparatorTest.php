@@ -107,4 +107,33 @@ final class AddressComparatorTest extends TestCase
         $secondAddressMock->expects(self::once())->method('getProvinceName')->willReturn('Queensland');
         self::assertTrue($this->addressComparator->equal($firstAddressMock, $secondAddressMock));
     }
+
+    public function testIgnoresUnicodeCharacterCase(): void
+    {
+        /** @var AddressInterface&MockObject $firstAddressMock */
+        $firstAddressMock = $this->createMock(AddressInterface::class);
+        /** @var AddressInterface&MockObject $secondAddressMock */
+        $secondAddressMock = $this->createMock(AddressInterface::class);
+        $firstAddressMock->expects(self::once())->method('getCity')->willReturn('ŁÓDŹ');
+        $firstAddressMock->expects(self::once())->method('getStreet')->willReturn('Ryans Dr');
+        $firstAddressMock->expects(self::once())->method('getCompany')->willReturn('Burger');
+        $firstAddressMock->expects(self::once())->method('getPostcode')->willReturn('4350');
+        $firstAddressMock->expects(self::once())->method('getLastName')->willReturn('Jones');
+        $firstAddressMock->expects(self::once())->method('getFirstName')->willReturn('Mia');
+        $firstAddressMock->expects(self::once())->method('getPhoneNumber')->willReturn('999');
+        $firstAddressMock->expects(self::once())->method('getCountryCode')->willReturn('PL');
+        $firstAddressMock->expects(self::once())->method('getProvinceCode')->willReturn(null);
+        $firstAddressMock->expects(self::once())->method('getProvinceName')->willReturn('Łódzkie');
+        $secondAddressMock->expects(self::once())->method('getCity')->willReturn('łódź');
+        $secondAddressMock->expects(self::once())->method('getStreet')->willReturn('Ryans Dr');
+        $secondAddressMock->expects(self::once())->method('getCompany')->willReturn('Burger');
+        $secondAddressMock->expects(self::once())->method('getPostcode')->willReturn('4350');
+        $secondAddressMock->expects(self::once())->method('getLastName')->willReturn('Jones');
+        $secondAddressMock->expects(self::once())->method('getFirstName')->willReturn('Mia');
+        $secondAddressMock->expects(self::once())->method('getPhoneNumber')->willReturn('999');
+        $secondAddressMock->expects(self::once())->method('getCountryCode')->willReturn('PL');
+        $secondAddressMock->expects(self::once())->method('getProvinceCode')->willReturn(null);
+        $secondAddressMock->expects(self::once())->method('getProvinceName')->willReturn('Łódzkie');
+        self::assertTrue($this->addressComparator->equal($firstAddressMock, $secondAddressMock));
+    }
 }
