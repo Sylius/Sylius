@@ -125,11 +125,6 @@ final class PromotionGrid implements PromotionGridInterface
                 ),
             )
             ->addActionGroup(
-                BulkActionGroup::create(
-                    DeleteAction::create(),
-                ),
-            )
-            ->addActionGroup(
                 ActionGroup::create(
                     'subitem',
                     Action::create('coupons', 'list')
@@ -160,6 +155,11 @@ final class PromotionGrid implements PromotionGridInterface
                                 ],
                             ],
                         ]),
+                ),
+            )
+            ->addActionGroup(
+                BulkActionGroup::create(
+                    DeleteAction::create(),
                 ),
             )
         ;

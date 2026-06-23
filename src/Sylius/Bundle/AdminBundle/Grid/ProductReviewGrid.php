@@ -120,7 +120,6 @@ final class ProductReviewGrid implements ProductReviewGridInterface
             // -- Actions
             ->addActionGroup(
                 ItemActionGroup::create(
-                    UpdateAction::create(),
                     Action::create('accept', 'apply_transition')
                         ->setLabel('sylius.ui.accept')
                         ->setIcon('tabler:check')
@@ -151,6 +150,7 @@ final class ProductReviewGrid implements ProductReviewGridInterface
                             'transition' => 'reject',
                             'graph' => 'sylius_product_review',
                         ]),
+                    UpdateAction::create(),
                     DeleteAction::create(),
                 ),
             )
