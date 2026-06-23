@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 final class PriceExtension extends AbstractExtension
 {
     public function __construct(
-        private readonly ProductVariantPricesCalculatorInterface|CatalogPricesCalculatorInterface $productVariantPricesCalculator,
+        private readonly CatalogPricesCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
     ) {
         if (!$this->productVariantPricesCalculator instanceof CatalogPricesCalculatorInterface) {
             trigger_deprecation(

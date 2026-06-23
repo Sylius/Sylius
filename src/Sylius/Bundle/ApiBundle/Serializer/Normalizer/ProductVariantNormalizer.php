@@ -39,7 +39,7 @@ final class ProductVariantNormalizer implements NormalizerInterface, NormalizerA
     private const ALREADY_CALLED = 'sylius_product_variant_normalizer_already_called';
 
     public function __construct(
-        private readonly ProductVariantPricesCalculatorInterface|CatalogPricesCalculatorInterface $priceCalculator,
+        private readonly CatalogPricesCalculatorInterface|ProductVariantPricesCalculatorInterface $priceCalculator,
         private readonly AvailabilityCheckerInterface $availabilityChecker,
         private readonly SectionProviderInterface $uriBasedSectionContext,
         private readonly IriConverterInterface $iriConverter,

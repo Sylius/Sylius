@@ -30,7 +30,7 @@ final class ProductVariantOriginalPriceMapProviderTest extends TestCase
 
     private ChannelPricingInterface&MockObject $channelPricing;
 
-    private MockObject&CatalogPricesCalculatorInterface $calculator;
+    private CatalogPricesCalculatorInterface&MockObject $calculator;
 
     private ProductVariantOriginalPriceMapProvider $provider;
 
