@@ -23,14 +23,16 @@
           "symfony": "~6.4.0",
           "mariadb": "10.11.13",
           "doctrine_bundle": "^2.0",
-          "state_machine_adapter": "winzou_state_machine"
+          "state_machine_adapter": "winzou_state_machine",
+          "legacy_grid_config": true
         },
         {
           "php": "8.5",
           "symfony": "~7.4.0",
           "mariadb": "11.4.7",
           "doctrine_bundle": "^3.0",
-          "state_machine_adapter": "symfony_workflow"
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": false
         }
       ]
     },
@@ -166,13 +168,17 @@
       "state_machine_adapter": [
         "symfony_workflow"
       ],
+      "legacy_grid_config": [
+        false
+      ],
       "include": [
         {
           "php": "8.3",
           "symfony": "~7.4.0",
           "mariadb": "11.4.7",
           "doctrine_bundle": "^2.0",
-          "state_machine_adapter": "winzou_state_machine"
+          "state_machine_adapter": "winzou_state_machine",
+          "legacy_grid_config": true
         }
       ]
     },

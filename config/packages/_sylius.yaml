@@ -8,79 +8,11 @@ imports:
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
+    sylius_core.grids_configuration:
+        use_legacy_config: '%env(bool:TEST_SYLIUS_USE_LEGACY_GRID_CONFIG)%'
 
 sylius_api:
     enabled: true
-
-sylius_core:
-    grid:
-        grids:
-            sylius_admin_admin_user:
-                use_legacy_config: false
-            sylius_admin_catalog_promotion:
-                use_legacy_config: false
-            sylius_admin_channel:
-                use_legacy_config: false
-            sylius_admin_channel_pricing_log_entry:
-                use_legacy_config: false
-            sylius_admin_country:
-                use_legacy_config: false
-            sylius_admin_currency:
-                use_legacy_config: false
-            sylius_admin_customer:
-                use_legacy_config: false
-            sylius_admin_customer_group:
-                use_legacy_config: false
-            sylius_admin_customer_order:
-                use_legacy_config: false
-            sylius_admin_exchange_rate:
-                use_legacy_config: false
-            sylius_admin_inventory:
-                use_legacy_config: false
-            sylius_admin_locale:
-                use_legacy_config: false
-            sylius_admin_order:
-                use_legacy_config: false
-            sylius_admin_payment:
-                use_legacy_config: false
-            sylius_admin_payment_method:
-                use_legacy_config: false
-            sylius_admin_payment_request:
-                use_legacy_config: false
-            sylius_admin_product_association_type:
-                use_legacy_config: false
-            sylius_admin_product_attribute:
-                use_legacy_config: false
-            sylius_admin_product:
-                use_legacy_config: false
-            sylius_admin_product_option:
-                use_legacy_config: false
-            sylius_admin_product_review:
-                use_legacy_config: false
-            sylius_admin_product_taxon:
-                use_legacy_config: false
-            sylius_admin_product_variant:
-                use_legacy_config: false
-            sylius_admin_product_variant_with_catalog_promotion:
-                use_legacy_config: false
-            sylius_admin_promotion:
-                use_legacy_config: false
-            sylius_admin_promotion_coupon:
-                use_legacy_config: false
-            sylius_admin_shipment:
-                use_legacy_config: false
-            sylius_admin_shipping_category:
-                use_legacy_config: false
-            sylius_admin_shipping_method:
-                use_legacy_config: false
-            sylius_admin_tax_category:
-                use_legacy_config: false
-            sylius_admin_tax_rate:
-                use_legacy_config: false
-            sylius_admin_taxon:
-                use_legacy_config: false
-            sylius_admin_zone:
-                use_legacy_config: false
 
 sylius_shop:
     product_grid:
