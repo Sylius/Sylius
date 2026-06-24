@@ -834,7 +834,7 @@ final readonly class ManagingPromotionsContext implements Context
     /** @return list<string> */
     private function getExcludedChannelCodes(string $onlyChannelCode): array
     {
-        $all = array_column($this->channelRepository->findAllWithBasicData(), 'code');
+        $all = array_column([...$this->channelRepository->findAllWithBasicData()], 'code');
 
         return array_values(array_filter($all, fn (string $code) => $code !== $onlyChannelCode));
     }

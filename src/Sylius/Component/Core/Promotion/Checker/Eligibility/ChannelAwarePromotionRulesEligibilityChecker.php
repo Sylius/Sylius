@@ -58,7 +58,12 @@ final class ChannelAwarePromotionRulesEligibilityChecker implements PromotionEli
             return false;
         }
 
-        return in_array($subject->getChannel()->getCode(), $excludedChannels, true);
+        $channel = $subject->getChannel();
+        if ($channel === null) {
+            return false;
+        }
+
+        return in_array($channel->getCode(), $excludedChannels, true);
     }
 
     private function isEligibleToRule(PromotionSubjectInterface $subject, PromotionRuleInterface $rule): bool

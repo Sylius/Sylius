@@ -789,7 +789,7 @@ final class ManagingPromotionsContext implements Context
 
     #[When('/^I add the "Item total" rule configured with "(?:€|£|\$)([^"]+)" amount for ("[^"]+" channel)$/')]
     public function iAddTheItemTotalRuleConfiguredWithAmountForChannel(
-        $amount,
+        string $amount,
         ChannelInterface $channel,
     ): void {
         $this->formElement->addRule(ItemTotalRuleChecker::TYPE);
