@@ -755,7 +755,7 @@ final readonly class ManagingOrdersContext implements Context
 
         Assert::same(
             $this->responseChecker->getValue($response, 'shippedAt'),
-            (new \DateTime($dateTime))->format('Y-m-d H:i:s'),
+            (new \DateTime($dateTime))->format(\DateTimeInterface::RFC3339),
         );
     }
 

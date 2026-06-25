@@ -860,7 +860,11 @@ final readonly class ManagingCatalogPromotionsContext implements Context
         Assert::true(
             $this->responseChecker->hasItemWithValues(
                 $response,
-                ['name' => $catalogPromotion->getName(), 'startDate' => $startDate . ':00', 'endDate' => $endDate . ':00'],
+                [
+                    'name' => $catalogPromotion->getName(),
+                    'startDate' => (new \DateTime($startDate))->format(\DateTimeInterface::RFC3339),
+                    'endDate' => (new \DateTime($endDate))->format(\DateTimeInterface::RFC3339),
+                ],
             ),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
@@ -902,15 +906,15 @@ final readonly class ManagingCatalogPromotionsContext implements Context
                 $response,
                 [
                     'name' => $catalogPromotion->getName(),
-                    'startDate' => (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
-                    'endDate' => (new \DateTime('tomorrow'))->format('Y-m-d H:i:s'),
+                    'startDate' => (new \DateTime('yesterday'))->format(\DateTimeInterface::RFC3339),
+                    'endDate' => (new \DateTime('tomorrow'))->format(\DateTimeInterface::RFC3339),
                 ],
             ),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
                 $catalogPromotion->getName(),
-                (new \DateTime('yesterday'))->format('Y-m-d H:i:s'),
-                (new \DateTime('tomorrow'))->format('Y-m-d H:i:s'),
+                (new \DateTime('yesterday'))->format(\DateTimeInterface::RFC3339),
+                (new \DateTime('tomorrow'))->format(\DateTimeInterface::RFC3339),
             ),
         );
     }

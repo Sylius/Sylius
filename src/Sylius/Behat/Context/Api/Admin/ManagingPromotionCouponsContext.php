@@ -269,8 +269,7 @@ final readonly class ManagingPromotionCouponsContext implements Context
     #[Then('this coupon should be valid until :date')]
     public function thisCouponShouldBeValidUntil(\DateTime $date): void
     {
-        $actualDate = \DateTime::createFromFormat(
-            'Y-m-d h:i:s',
+        $actualDate = new \DateTime(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'expiresAt'),
         );
 
