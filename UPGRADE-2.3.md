@@ -475,6 +475,29 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    `getItemsSubtotal()`/`getSubtotal()`, switch them to `getOrderAndItemPromotionTotal()` to avoid the same
    double-counting. `getOrderPromotionTotal()` is unchanged and still returns the promotion's full effect.
 
+## Promotion
+
+1. New **opt-in per-channel** promotion rule and action types have been added. They let a single
+   promotion rule/action hold independent configuration per channel, with the `configuration` array
+   keyed by channel code (e.g. `['WEB_US' => ['count' => 2], 'WEB_GB' => ['count' => 5]]`):
+
+   - Rules: `cart_quantity_per_channel`, `customer_group_per_channel`, `nth_order_per_channel`,
+     `shipping_country_per_channel`, `has_taxon_per_channel`, `contains_product_per_channel`.
+   - Actions: `order_percentage_discount_per_channel`, `shipping_percentage_discount_per_channel`.
+
+   These are **additional** types registered alongside the existing plain ones. Existing promotions
+   and the plain rule/action types are unchanged, and **no core service is replaced**, so the change
+   is fully backward compatible and requires no action.
+
+   Implementation: two generic decorators in `Sylius\Component\Core\Promotion` unwrap the current
+   channel's configuration slice and delegate to the standard checker/command:
+
+   - `Sylius\Component\Core\Promotion\Checker\Rule\PerChannelRuleChecker`
+   - `Sylius\Component\Core\Promotion\Action\PerChannelPromotionActionCommand`
+
+   The admin forms use new `ChannelBased*ConfigurationType` form types built on top of
+   `Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType`.
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
