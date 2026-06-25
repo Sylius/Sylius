@@ -41,7 +41,7 @@ final class PerChannelRuleChecker implements RuleCheckerInterface
         }
 
         $channelCode = $channel->getCode();
-        if (!isset($configuration[$channelCode])) {
+        if (!isset($configuration[$channelCode]) || !is_array($configuration[$channelCode])) {
             return false;
         }
 

@@ -38,7 +38,7 @@ final class PerChannelPromotionActionCommand implements PromotionActionCommandIn
         }
 
         $channelCode = $channel->getCode();
-        if (!isset($configuration[$channelCode])) {
+        if (!isset($configuration[$channelCode]) || !is_array($configuration[$channelCode])) {
             return false;
         }
 
@@ -58,7 +58,7 @@ final class PerChannelPromotionActionCommand implements PromotionActionCommandIn
         }
 
         $channelCode = $channel->getCode();
-        if (!isset($configuration[$channelCode])) {
+        if (!isset($configuration[$channelCode]) || !is_array($configuration[$channelCode])) {
             return;
         }
 

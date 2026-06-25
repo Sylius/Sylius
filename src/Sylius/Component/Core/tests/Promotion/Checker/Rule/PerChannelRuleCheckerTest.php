@@ -90,6 +90,15 @@ final class PerChannelRuleCheckerTest extends TestCase
         $this->assertFalse($this->ruleChecker->isEligible($this->order, ['WEB_US' => ['nth' => 5]]));
     }
 
+    public function testShouldReturnFalseAndNotDelegateWhenChannelConfigurationIsNotAnArray(): void
+    {
+        $this->order->expects($this->once())->method('getChannel')->willReturn($this->channel);
+        $this->channel->expects($this->once())->method('getCode')->willReturn('WEB_US');
+        $this->decorated->expects($this->never())->method('isEligible');
+
+        $this->assertFalse($this->ruleChecker->isEligible($this->order, ['WEB_US' => 'not-an-array']));
+    }
+
     public function testShouldThrowExceptionIfPromotionSubjectIsNotOrder(): void
     {
         $this->expectException(UnsupportedTypeException::class);
