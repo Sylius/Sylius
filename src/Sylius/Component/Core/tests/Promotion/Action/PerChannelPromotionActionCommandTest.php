@@ -73,6 +73,14 @@ final class PerChannelPromotionActionCommandTest extends TestCase
         $this->assertFalse($this->command->execute($this->order, ['WEB_EU' => ['percentage' => 0.2]], $this->promotion));
     }
 
+    public function testShouldNotExecuteDecoratedCommandWhenOrderHasNoChannel(): void
+    {
+        $this->order->expects($this->once())->method('getChannel')->willReturn(null);
+        $this->decorated->expects($this->never())->method('execute');
+
+        $this->assertFalse($this->command->execute($this->order, ['WEB_US' => ['percentage' => 0.2]], $this->promotion));
+    }
+
     public function testShouldThrowExceptionWhenExecutingIfPromotionSubjectIsNotOrder(): void
     {
         $this->expectException(UnexpectedTypeException::class);
@@ -99,6 +107,14 @@ final class PerChannelPromotionActionCommandTest extends TestCase
         $this->decorated->expects($this->never())->method('revert');
 
         $this->command->revert($this->order, ['WEB_EU' => ['percentage' => 0.2]], $this->promotion);
+    }
+
+    public function testShouldNotRevertDecoratedCommandWhenOrderHasNoChannel(): void
+    {
+        $this->order->expects($this->once())->method('getChannel')->willReturn(null);
+        $this->decorated->expects($this->never())->method('revert');
+
+        $this->command->revert($this->order, ['WEB_US' => ['percentage' => 0.2]], $this->promotion);
     }
 
     public function testShouldThrowExceptionWhenRevertingIfPromotionSubjectIsNotOrder(): void

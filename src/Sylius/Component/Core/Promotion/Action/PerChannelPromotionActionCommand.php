@@ -32,7 +32,12 @@ final class PerChannelPromotionActionCommand implements PromotionActionCommandIn
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $channelCode = $subject->getChannel()->getCode();
+        $channel = $subject->getChannel();
+        if ($channel === null) {
+            return false;
+        }
+
+        $channelCode = $channel->getCode();
         if (!isset($configuration[$channelCode])) {
             return false;
         }
@@ -47,7 +52,12 @@ final class PerChannelPromotionActionCommand implements PromotionActionCommandIn
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $channelCode = $subject->getChannel()->getCode();
+        $channel = $subject->getChannel();
+        if ($channel === null) {
+            return;
+        }
+
+        $channelCode = $channel->getCode();
         if (!isset($configuration[$channelCode])) {
             return;
         }

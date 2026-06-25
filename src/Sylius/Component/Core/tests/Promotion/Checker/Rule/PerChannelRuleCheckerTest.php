@@ -82,6 +82,14 @@ final class PerChannelRuleCheckerTest extends TestCase
         $this->assertFalse($this->ruleChecker->isEligible($this->order, ['WEB_EU' => ['nth' => 5]]));
     }
 
+    public function testShouldReturnFalseAndNotDelegateWhenOrderHasNoChannel(): void
+    {
+        $this->order->expects($this->once())->method('getChannel')->willReturn(null);
+        $this->decorated->expects($this->never())->method('isEligible');
+
+        $this->assertFalse($this->ruleChecker->isEligible($this->order, ['WEB_US' => ['nth' => 5]]));
+    }
+
     public function testShouldThrowExceptionIfPromotionSubjectIsNotOrder(): void
     {
         $this->expectException(UnsupportedTypeException::class);
