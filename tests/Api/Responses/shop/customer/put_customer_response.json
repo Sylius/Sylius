@@ -14,6 +14,6 @@
     "fullName": "John Wick",
     "phoneNumber": "666777888",
     "gender": "m",
-    "birthday": "2023-10-24 11:00:00",
+    "birthday": "@date@",
     "subscribedToNewsletter": true
 }

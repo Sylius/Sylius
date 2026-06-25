@@ -14,8 +14,8 @@
     "usageLimit": 3,
     "used": 0,
     "archivedAt": null,
-    "startsAt": "2023-10-04 12:30:00",
-    "endsAt": "2023-11-04 12:30:00",
+    "startsAt": "@date@",
+    "endsAt": "@date@",
     "couponBased": true,
     "coupons": [],
     "rules": [
