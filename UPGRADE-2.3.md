@@ -71,6 +71,72 @@
    > and their default parameters include Payment Request-specific values (e.g. `hash: paymentRequest.getHash()`).
    > Do not use them to configure the Payum after-pay redirect.
 
+4. The `RequestConfiguration` type has been replaced by `Request` in all payment processing interfaces and their implementations.
+
+   If you implemented or decorated any of the following interfaces, update your method signatures accordingly:
+
+   - `Sylius\Bundle\CoreBundle\OrderPay\Provider\PayResponseProviderInterface`:
+     ```diff
+     -public function getResponse(RequestConfiguration $requestConfiguration, OrderInterface $order): Response;
+     -public function supports(RequestConfiguration $requestConfiguration, OrderInterface $order): bool;
+     +public function getResponse(Request $request, OrderInterface $order): Response;
+     +public function supports(Request $request, OrderInterface $order): bool;
+     ```
+
+   - `Sylius\Bundle\CoreBundle\OrderPay\Provider\AfterPayResponseProviderInterface`:
+     ```diff
+     -public function getResponse(RequestConfiguration $requestConfiguration): Response;
+     -public function supports(RequestConfiguration $requestConfiguration): bool;
+     +public function getResponse(Request $request): Response;
+     +public function supports(Request $request): bool;
+     ```
+
+   - `Sylius\Bundle\PaymentBundle\Provider\HttpResponseProviderInterface`:
+     ```diff
+     -public function supports(RequestConfiguration $requestConfiguration, PaymentRequestInterface $paymentRequest): bool;
+     -public function getResponse(RequestConfiguration $requestConfiguration, PaymentRequestInterface $paymentRequest): Response;
+     +public function supports(Request $request, PaymentRequestInterface $paymentRequest): bool;
+     +public function getResponse(Request $request, PaymentRequestInterface $paymentRequest): Response;
+     ```
+
+   - `Sylius\Bundle\PaymentBundle\Processor\HttpResponseProcessorInterface`:
+     ```diff
+     -public function process(RequestConfiguration $requestConfiguration, PaymentRequestInterface $paymentRequest): ?Response;
+     +public function process(Request $request, PaymentRequestInterface $paymentRequest): ?Response;
+     ```
+
+   - `Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface`:
+     ```diff
+     -public function handle(RequestConfiguration $requestConfiguration, string $state): void;
+     +public function handle(Request $request, string $state): void;
+     ```
+
+5. `MetadataInterface` and `RequestConfigurationFactoryInterface` have been removed from the constructors of `OrderPayController` and `PaymentRequestPayAction`.
+
+   If you extended or decorated either of these classes, update their constructors:
+
+   - `Sylius\Bundle\CoreBundle\OrderPay\Controller\OrderPayController`:
+     ```diff
+     public function __construct(
+         private OrderRepositoryInterface $orderRepository,
+     -    private MetadataInterface $orderMetadata,
+     -    private RequestConfigurationFactoryInterface $requestConfigurationFactory,
+         private iterable $payResponseProviders,
+         private iterable $afterPayResponseProviders,
+     ) {}
+     ```
+
+   - `Sylius\Bundle\CoreBundle\OrderPay\Action\PaymentRequestPayAction`:
+     ```diff
+     public function __construct(
+     -    private MetadataInterface $paymentRequestMetadata,
+     -    private RequestConfigurationFactoryInterface $requestConfigurationFactory,
+         private PaymentRequestRepositoryInterface $paymentRequestRepository,
+         private HttpResponseProcessorInterface $httpResponseProcessor,
+         private UrlProviderInterface $afterPayUrlProvider,
+     ) {}
+     ```
+
 ## Dependencies
 
 1. The `behat/transliterator` package has been **deprecated** and will be removed in Sylius 3.0.
