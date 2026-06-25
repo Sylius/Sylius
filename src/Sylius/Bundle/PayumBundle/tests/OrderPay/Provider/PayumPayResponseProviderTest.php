@@ -53,7 +53,6 @@ final class PayumPayResponseProviderTest extends TestCase
 
     public function testItCreatesCaptureTokenWithConfiguredAfterPayRouteAndParameters(): void
     {
-        $request = $this->createStub(Request::class);
         $order = $this->createOrder();
         $payment = $this->createPaymentWithGatewayConfig(['use_authorize' => false]);
         $token = $this->createMock(TokenInterface::class);
@@ -79,7 +78,7 @@ final class PayumPayResponseProviderTest extends TestCase
         $this->tokenFactory->expects(self::never())->method('createAuthorizeToken');
         $token->expects(self::once())->method('getTargetUrl')->willReturn('/payum/capture');
 
-        $response = $this->provider->getResponse($request, $order);
+        $response = $this->provider->getResponse(new Request(), $order);
 
         self::assertInstanceOf(RedirectResponse::class, $response);
         self::assertSame('/payum/capture', $response->getTargetUrl());
@@ -87,7 +86,6 @@ final class PayumPayResponseProviderTest extends TestCase
 
     public function testItCreatesAuthorizeTokenWithConfiguredAfterPayRouteAndParameters(): void
     {
-        $request = $this->createStub(Request::class);
         $order = $this->createOrder();
         $payment = $this->createPaymentWithGatewayConfig(['use_authorize' => true]);
         $token = $this->createMock(TokenInterface::class);
@@ -113,7 +111,7 @@ final class PayumPayResponseProviderTest extends TestCase
         $this->tokenFactory->expects(self::never())->method('createCaptureToken');
         $token->expects(self::once())->method('getTargetUrl')->willReturn('/payum/authorize');
 
-        $response = $this->provider->getResponse($request, $order);
+        $response = $this->provider->getResponse(new Request(), $order);
 
         self::assertInstanceOf(RedirectResponse::class, $response);
         self::assertSame('/payum/authorize', $response->getTargetUrl());
@@ -121,7 +119,6 @@ final class PayumPayResponseProviderTest extends TestCase
 
     public function testItSupportsOrdersWithPayumEnabledPayment(): void
     {
-        $request = $this->createStub(Request::class);
         $order = $this->createOrder();
         $payment = $this->createPaymentWithGatewayConfig([]);
 
@@ -132,12 +129,11 @@ final class PayumPayResponseProviderTest extends TestCase
             ->willReturn($payment)
         ;
 
-        self::assertTrue($this->provider->supports($request, $order));
+        self::assertTrue($this->provider->supports(new Request(), $order));
     }
 
     public function testItDoesNotSupportOrdersWithPayumDisabledPayment(): void
     {
-        $request = $this->createStub(Request::class);
         $order = $this->createOrder();
         $gatewayConfig = new GatewayConfig();
         $gatewayConfig->setUsePayum(false);
@@ -150,7 +146,7 @@ final class PayumPayResponseProviderTest extends TestCase
             ->willReturn($payment)
         ;
 
-        self::assertFalse($this->provider->supports($request, $order));
+        self::assertFalse($this->provider->supports(new Request(), $order));
     }
 
     private function createOrder(): MockObject&OrderInterface

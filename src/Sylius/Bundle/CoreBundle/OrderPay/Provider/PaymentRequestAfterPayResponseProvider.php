@@ -23,7 +23,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class PaymentRequestAfterPayResponseProvider implements AfterPayResponseProviderInterface
@@ -43,8 +42,7 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
 
     public function getResponse(Request $request): Response
     {
-        $hash = $request->attributes->get('hash');
-        Assert::notNull($hash, 'A request attribute "hash" is required to retrieve the related order.');
+        $hash = $request->attributes->getString('hash');
 
         /** @var PaymentRequestInterface|null $previousPaymentRequest */
         $previousPaymentRequest = $this->paymentRequestRepository->find($hash);
