@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\AdminBundle\Form\Builder\ChannelExclusionFormBuilder;
 use Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Action\ProductFilterConfigurationTypeExtension;
 use Sylius\Bundle\AdminBundle\Form\Extension\Promotion\Action\TaxonFilterConfigurationTypeExtension;
 use Sylius\Bundle\AdminBundle\Form\Extension\Promotion\PromotionActionTypeExtension;
@@ -112,8 +113,13 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
-        ->set('sylius_admin.form.extension.type.promotion.promotion_action', PromotionActionTypeExtension::class)
+        ->set('sylius_admin.form.builder.channel_exclusion', ChannelExclusionFormBuilder::class)
         ->args([service('sylius.repository.channel')])
+    ;
+
+    $services
+        ->set('sylius_admin.form.extension.type.promotion.promotion_action', PromotionActionTypeExtension::class)
+        ->args([service('sylius_admin.form.builder.channel_exclusion')])
         ->tag('form.type_extension')
     ;
 
@@ -131,7 +137,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius_admin.form.extension.type.promotion.promotion_rule', PromotionRuleTypeExtension::class)
-        ->args([service('sylius.repository.channel')])
+        ->args([service('sylius_admin.form.builder.channel_exclusion')])
         ->tag('form.type_extension')
     ;
 
