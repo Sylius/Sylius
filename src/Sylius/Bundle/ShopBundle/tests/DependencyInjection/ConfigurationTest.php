@@ -149,6 +149,55 @@ final class ConfigurationTest extends TestCase
         ]]);
     }
 
+    #[Test]
+    public function it_has_default_configuration_for_order_pay_node(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['order_pay' => [
+                'payment_request_pay_route' => 'sylius_shop_payment_request_pay',
+                'payment_request_pay_route_parameters' => ['hash' => 'paymentRequest.getHash()'],
+                'after_pay_route' => 'sylius_shop_order_after_pay',
+                'after_pay_route_parameters' => ['hash' => 'paymentRequest.getHash()'],
+                'payum_after_pay_route' => 'sylius_shop_order_after_pay',
+                'payum_after_pay_route_parameters' => [],
+                'final_route' => 'sylius_shop_order_thank_you',
+                'final_route_parameters' => [],
+                'retry_route' => 'sylius_shop_order_show',
+                'retry_route_parameters' => ['tokenValue' => 'order.getTokenValue()'],
+            ]],
+            'order_pay',
+        );
+    }
+
+    #[Test]
+    public function its_payum_after_pay_redirect_is_configurable(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[
+                'order_pay' => [
+                    'payum_after_pay_route' => 'app_shop_order_after_pay',
+                    'payum_after_pay_route_parameters' => ['tokenValue' => 'fixed-token-value'],
+                ],
+            ]],
+            [
+                'order_pay' => [
+                    'payum_after_pay_route' => 'app_shop_order_after_pay',
+                    'payum_after_pay_route_parameters' => ['tokenValue' => 'fixed-token-value'],
+                    'payment_request_pay_route' => 'sylius_shop_payment_request_pay',
+                    'payment_request_pay_route_parameters' => ['hash' => 'paymentRequest.getHash()'],
+                    'after_pay_route' => 'sylius_shop_order_after_pay',
+                    'after_pay_route_parameters' => ['hash' => 'paymentRequest.getHash()'],
+                    'final_route' => 'sylius_shop_order_thank_you',
+                    'final_route_parameters' => [],
+                    'retry_route' => 'sylius_shop_order_show',
+                    'retry_route_parameters' => ['tokenValue' => 'order.getTokenValue()'],
+                ],
+            ],
+            'order_pay',
+        );
+    }
+
     protected function getConfiguration(): Configuration
     {
         return new Configuration();
