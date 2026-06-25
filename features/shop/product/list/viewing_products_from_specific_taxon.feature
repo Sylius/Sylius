@@ -18,6 +18,27 @@ Feature: Viewing products from a specific taxon
         Then I should see the product "T-Shirt Banana"
         And I should not see the product "Plastic Tomato"
 
+    @api @ui
+    Scenario: Viewing a product belonging to multiple taxons from each of its taxons
+        Given the store has a product "Funny T-Shirt" available in "Poland" channel
+        And this product belongs to "T-Shirts" and "Funny"
+        When I browse products from taxon "T-Shirts"
+        Then I should see the product "T-Shirt Banana"
+        And I should see the product "Funny T-Shirt"
+        And I should not see the product "Plastic Tomato"
+        When I browse products from taxon "Funny"
+        Then I should see the product "Funny T-Shirt"
+        And I should see the product "Plastic Tomato"
+        And I should not see the product "T-Shirt Banana"
+
+    @api @no-ui
+    Scenario: Product fetched by taxon retains all its taxon associations in the response
+        Given the store has a product "Funny T-Shirt" available in "Poland" channel
+        And this product belongs to "T-Shirts" and "Funny"
+        When I browse products from taxon "T-Shirts"
+        Then I should see the product "Funny T-Shirt"
+        And the product "Funny T-Shirt" should have 2 taxon associations in the response
+
     @api @no-ui
     Scenario: Searching products by multiple taxons
         When I browse products from "Funny" and "T-Shirts" taxons

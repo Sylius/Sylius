@@ -280,6 +280,28 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the product :name should have :count taxon associations in the response
+     */
+    public function theProductShouldHaveTaxonAssociationsInResponse(string $name, int $count): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        foreach ($products as $product) {
+            if ($product['name'] === $name) {
+                Assert::count(
+                    $product['productTaxons'],
+                    $count,
+                    sprintf('Expected product "%s" to have %d taxon associations, but got %d.', $name, $count, count($product['productTaxons'])),
+                );
+
+                return;
+            }
+        }
+
+        throw new \RuntimeException(sprintf('Product "%s" was not found in the response collection.', $name));
+    }
+
+    /**
      * @Then /^I should see the product price ("[^"]+")$/
      * @Then /^customer should see the product price ("[^"]+")$/
      */
