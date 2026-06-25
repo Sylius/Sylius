@@ -15,9 +15,16 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedFixedDiscountConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedPercentageDiscountConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitFixedDiscountConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\ChannelBasedUnitPercentageDiscountConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedCartQuantityConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedContainsProductConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedCustomerGroupConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedHasTaxonConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedItemTotalConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedNthOrderConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedShippingCountryConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ChannelBasedTotalOfItemsFromTaxonConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ContainsProductConfigurationType;
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\CustomerGroupConfigurationType;
@@ -32,6 +39,7 @@ use Sylius\Component\Core\Factory\PromotionRuleFactory;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\PerChannelPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
@@ -46,6 +54,7 @@ use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\PerChannelRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TaxonInPromotionRuleChecker;
@@ -86,9 +95,21 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
+        ->set('sylius.checker.promotion_rule.customer_group_per_channel', PerChannelRuleChecker::class)
+        ->args([service('sylius.checker.promotion_rule.customer_group')])
+        ->tag('sylius.promotion_rule_checker', ['type' => 'customer_group_per_channel', 'label' => 'sylius.form.promotion_rule.customer_group_per_channel', 'form_type' => ChannelBasedCustomerGroupConfigurationType::class])
+    ;
+
+    $services
         ->set('sylius.checker.promotion_rule.nth_order', NthOrderRuleChecker::class)
         ->args([service('sylius.repository.order')])
         ->tag('sylius.promotion_rule_checker', ['type' => 'nth_order', 'label' => 'sylius.form.promotion_rule.nth_order', 'form_type' => NthOrderConfigurationType::class])
+    ;
+
+    $services
+        ->set('sylius.checker.promotion_rule.nth_order_per_channel', PerChannelRuleChecker::class)
+        ->args([service('sylius.checker.promotion_rule.nth_order')])
+        ->tag('sylius.promotion_rule_checker', ['type' => 'nth_order_per_channel', 'label' => 'sylius.form.promotion_rule.nth_order_per_channel', 'form_type' => ChannelBasedNthOrderConfigurationType::class])
     ;
 
     $services
@@ -98,8 +119,20 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
+        ->set('sylius.checker.promotion_rule.shipping_country_per_channel', PerChannelRuleChecker::class)
+        ->args([service('sylius.checker.promotion_rule.shipping_country')])
+        ->tag('sylius.promotion_rule_checker', ['type' => 'shipping_country_per_channel', 'label' => 'sylius.form.promotion_rule.shipping_country_per_channel', 'form_type' => ChannelBasedShippingCountryConfigurationType::class])
+    ;
+
+    $services
         ->set('sylius.checker.promotion_rule.has_taxon', HasTaxonRuleChecker::class)
         ->tag('sylius.promotion_rule_checker', ['type' => 'has_taxon', 'label' => 'sylius.form.promotion_rule.has_at_least_one_from_taxons', 'form_type' => HasTaxonConfigurationType::class])
+    ;
+
+    $services
+        ->set('sylius.checker.promotion_rule.has_taxon_per_channel', PerChannelRuleChecker::class)
+        ->args([service('sylius.checker.promotion_rule.has_taxon')])
+        ->tag('sylius.promotion_rule_checker', ['type' => 'has_taxon_per_channel', 'label' => 'sylius.form.promotion_rule.has_at_least_one_from_taxons_per_channel', 'form_type' => ChannelBasedHasTaxonConfigurationType::class])
     ;
 
     $services
@@ -114,6 +147,12 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
+        ->set('sylius.checker.promotion_rule.contains_product_per_channel', PerChannelRuleChecker::class)
+        ->args([service('sylius.checker.promotion_rule.contains_product')])
+        ->tag('sylius.promotion_rule_checker', ['type' => 'contains_product_per_channel', 'label' => 'sylius.form.promotion_rule.contains_product_per_channel', 'form_type' => ChannelBasedContainsProductConfigurationType::class])
+    ;
+
+    $services
         ->set('sylius.checker.promotion_rule.item_total', ItemTotalRuleChecker::class)
         ->tag('sylius.promotion_rule_checker', ['type' => 'item_total', 'label' => 'sylius.form.promotion_rule.item_total', 'form_type' => ChannelBasedItemTotalConfigurationType::class])
     ;
@@ -121,6 +160,12 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.checker.promotion_rule.cart_quantity', CartQuantityRuleChecker::class)
         ->tag('sylius.promotion_rule_checker', ['type' => 'cart_quantity', 'label' => 'sylius.form.promotion_rule.cart_quantity', 'form_type' => CartQuantityConfigurationType::class])
+    ;
+
+    $services
+        ->set('sylius.checker.promotion_rule.cart_quantity_per_channel', PerChannelRuleChecker::class)
+        ->args([service('sylius.checker.promotion_rule.cart_quantity')])
+        ->tag('sylius.promotion_rule_checker', ['type' => 'cart_quantity_per_channel', 'label' => 'sylius.form.promotion_rule.cart_quantity_per_channel', 'form_type' => ChannelBasedCartQuantityConfigurationType::class])
     ;
 
     $services
@@ -157,6 +202,12 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
+        ->set('sylius.command.promotion_action.percentage_discount_per_channel', PerChannelPromotionActionCommand::class)
+        ->args([service('sylius.command.promotion_action.percentage_discount')])
+        ->tag('sylius.promotion_action', ['type' => 'order_percentage_discount_per_channel', 'label' => 'sylius.form.promotion_action.order_percentage_discount_per_channel', 'form_type' => ChannelBasedPercentageDiscountConfigurationType::class])
+    ;
+
+    $services
         ->set('sylius.command.promotion_action.unit_percentage_discount', UnitPercentageDiscountPromotionActionCommand::class)
         ->args([
             service('sylius.factory.adjustment'),
@@ -171,6 +222,12 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius.command.promotion_action.shipping_percentage_discount', ShippingPercentageDiscountPromotionActionCommand::class)
         ->args([service('sylius.factory.adjustment')])
         ->tag('sylius.promotion_action', ['type' => 'shipping_percentage_discount', 'label' => 'sylius.form.promotion_action.shipping_percentage_discount', 'form_type' => PercentageDiscountConfigurationType::class])
+    ;
+
+    $services
+        ->set('sylius.command.promotion_action.shipping_percentage_discount_per_channel', PerChannelPromotionActionCommand::class)
+        ->args([service('sylius.command.promotion_action.shipping_percentage_discount')])
+        ->tag('sylius.promotion_action', ['type' => 'shipping_percentage_discount_per_channel', 'label' => 'sylius.form.promotion_action.shipping_percentage_discount_per_channel', 'form_type' => ChannelBasedPercentageDiscountConfigurationType::class])
     ;
 
     $services

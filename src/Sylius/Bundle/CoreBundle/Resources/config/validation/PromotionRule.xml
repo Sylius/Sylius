@@ -178,6 +178,163 @@
                     </constraint>
                 </option>
             </constraint>
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_cart_quantity_per_channel</option>
+                <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="groups">sylius_promotion_rule_cart_quantity_per_channel</option>
+                        <option name="fields">
+                            <value key="count">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_cart_quantity_per_channel</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">numeric</option>
+                                    <option name="groups">sylius_promotion_rule_cart_quantity_per_channel</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_customer_group_per_channel</option>
+                <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="groups">sylius_promotion_rule_customer_group_per_channel</option>
+                        <option name="fields">
+                            <value key="group_code">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_customer_group_per_channel</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">string</option>
+                                    <option name="groups">sylius_promotion_rule_customer_group_per_channel</option>
+                                </constraint>
+                                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CustomerGroupCodeExists">
+                                    <option name="groups">sylius_promotion_rule_customer_group_per_channel</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_nth_order_per_channel</option>
+                <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="groups">sylius_promotion_rule_nth_order_per_channel</option>
+                        <option name="fields">
+                            <value key="nth">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_nth_order_per_channel</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">numeric</option>
+                                    <option name="groups">sylius_promotion_rule_nth_order_per_channel</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_shipping_country_per_channel</option>
+                <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="groups">sylius_promotion_rule_shipping_country_per_channel</option>
+                        <option name="fields">
+                            <value key="country">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_shipping_country_per_channel</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">string</option>
+                                    <option name="groups">sylius_promotion_rule_shipping_country_per_channel</option>
+                                </constraint>
+                                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CountryCodeExists">
+                                    <option name="groups">sylius_promotion_rule_shipping_country_per_channel</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_has_taxon_per_channel</option>
+                <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="groups">sylius_promotion_rule_has_taxon_per_channel</option>
+                        <option name="fields">
+                            <value key="taxons">
+                                <constraint name="All">
+                                    <option name="groups">sylius_promotion_rule_has_taxon_per_channel</option>
+                                    <option name="constraints">
+                                        <constraint name="NotBlank">
+                                            <option name="groups">sylius_promotion_rule_has_taxon_per_channel</option>
+                                        </constraint>
+                                        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\TaxonCodeExists">
+                                            <option name="groups">sylius_promotion_rule_has_taxon_per_channel</option>
+                                        </constraint>
+                                    </option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelCodeCollection">
+                <option name="allowExtraFields">true</option>
+                <option name="groups">sylius_promotion_rule_contains_product_per_channel</option>
+                <option name="validateAgainstAllChannels">true</option>
+                <option name="channelAwarePropertyPath">promotion</option>
+                <option name="constraints">
+                    <constraint name="Collection">
+                        <option name="allowExtraFields">true</option>
+                        <option name="groups">sylius_promotion_rule_contains_product_per_channel</option>
+                        <option name="fields">
+                            <value key="product_code">
+                                <constraint name="NotBlank">
+                                    <option name="groups">sylius_promotion_rule_contains_product_per_channel</option>
+                                </constraint>
+                                <constraint name="Type">
+                                    <option name="type">string</option>
+                                    <option name="groups">sylius_promotion_rule_contains_product_per_channel</option>
+                                </constraint>
+                                <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductCodeExists">
+                                    <option name="groups">sylius_promotion_rule_contains_product_per_channel</option>
+                                </constraint>
+                            </value>
+                        </option>
+                    </constraint>
+                </option>
+            </constraint>
+
         </property>
     </class>
 </constraint-mapping>
