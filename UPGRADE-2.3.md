@@ -61,6 +61,34 @@
 
    If your application depends on the Gaufrette packages directly, require them explicitly in your `composer.json`.
 
+## Promotion
+
+1. Promotion rules and actions can now be configured **independently per channel**. The feature is additive — existing
+   promotions keep working unchanged — but two core services had their **class swapped** by `OverridePromotionServicesPass`.
+   The service ids, the implemented interfaces and the constructor arguments are **unchanged**:
+
+   | Service id | Old class | New class |
+   |------------|-----------|-----------|
+   | `sylius.checker.promotion.rules_eligibility` | `Sylius\Component\Promotion\Checker\Eligibility\PromotionRulesEligibilityChecker` | `Sylius\Component\Core\Promotion\Checker\Eligibility\ChannelAwarePromotionRulesEligibilityChecker` |
+   | `sylius.action.applicator.promotion` | `Sylius\Component\Promotion\Action\PromotionApplicator` | `Sylius\Component\Core\Promotion\Action\ChannelAwarePromotionApplicator` |
+
+   If you **decorate** these services, no change is required. If you **replaced** their definition or relied on the
+   concrete class (e.g. `instanceof PromotionApplicator`), update your code to the new classes or to the
+   `Sylius\Component\Promotion\Action\PromotionApplicatorInterface` /
+   `Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface` abstractions.
+
+2. A reserved configuration key `_excludedChannels`
+   (`Sylius\Component\Core\Promotion\ChannelAwareConfigurationInterface::EXCLUDED_CHANNELS_CONFIGURATION_KEY`) may now be
+   present in a promotion rule's or action's `configuration` array. It holds the channel codes for which the rule/action
+   is skipped and is stripped before the configuration reaches the rule checker / action command.
+
+   If you read a promotion rule/action `configuration` directly (custom rule checkers, action commands, serializers,
+   exports), ignore this key — it is not part of a rule/action's own configuration.
+
+3. New `*_per_channel` promotion rule and action types were added (e.g. `cart_quantity_per_channel`,
+   `customer_group_per_channel`, `order_percentage_discount_per_channel`). Their configuration is keyed by channel code,
+   so each channel can have its own values. These are additional types and do not replace the existing ones.
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
