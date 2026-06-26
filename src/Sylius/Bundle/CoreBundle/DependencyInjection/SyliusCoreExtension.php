@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionPriceCalculator;
 use Sylius\Bundle\CoreBundle\Attribute\AsEntityObserver;
@@ -108,6 +110,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependDefaultDriver($container, $config['driver']);
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
+        $this->prependDoctrineIdentityGenerationPreferences($container);
     }
 
     protected function getMigrationsNamespace(): string
@@ -133,6 +136,21 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 $container->prependExtensionConfig($name, ['driver' => $driver]);
             }
         }
+    }
+
+    private function prependDoctrineIdentityGenerationPreferences(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('doctrine')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('doctrine', [
+            'orm' => [
+                'identity_generation_preferences' => [
+                    PostgreSQLPlatform::class => ClassMetadata::GENERATOR_TYPE_SEQUENCE,
+                ],
+            ],
+        ]);
     }
 
     private function prependHwiOauth(ContainerBuilder $container): void

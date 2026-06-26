@@ -58,7 +58,7 @@ final class ShippingMethodCalculatorExistsValidatorTest extends TestCase
 
         $this->executionContext
             ->expects($this->once())->method('buildViolation')
-            ->with((new ShippingMethodCalculatorExists())->invalidShippingCalculator)
+            ->with((new ShippingMethodCalculatorExists())->invalidShippingCalculatorMessage)
             ->willReturn($constraintViolationBuilder)
         ;
         $constraintViolationBuilder->expects($this->once())->method('setParameter')->willReturn($constraintViolationBuilder);

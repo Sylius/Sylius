@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 final class ProductVariantPriceMapProvider implements ProductVariantMapProviderInterface
 {
     public function __construct(
-        private ProductVariantPricesCalculatorInterface|CatalogPricesCalculatorInterface $calculator,
+        private CatalogPricesCalculatorInterface|ProductVariantPricesCalculatorInterface $calculator,
     ) {
         if (!$this->calculator instanceof CatalogPricesCalculatorInterface) {
             trigger_deprecation(

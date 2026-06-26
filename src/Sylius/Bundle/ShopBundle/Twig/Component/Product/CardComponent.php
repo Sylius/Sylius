@@ -49,7 +49,7 @@ class CardComponent
         protected readonly ProductVariantResolverInterface $productVariantResolver,
         protected readonly ChannelContextInterface $channelContext,
         protected readonly LocaleContextInterface $localeContext,
-        protected readonly ProductVariantPricesCalculatorInterface|CatalogPricesCalculatorInterface $productVariantPricesCalculator,
+        protected readonly CatalogPricesCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
     ) {
         if (!$this->productVariantPricesCalculator instanceof CatalogPricesCalculatorInterface) {
             trigger_deprecation(

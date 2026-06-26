@@ -44,7 +44,7 @@ class PriceComponent
     public bool $hasDiscount = false;
 
     public function __construct(
-        protected readonly ProductVariantPricesCalculatorInterface|CatalogPricesCalculatorInterface $productVariantPricesCalculator,
+        protected readonly CatalogPricesCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
         protected readonly MoneyFormatterInterface $moneyFormatter,
         protected readonly ChannelContextInterface $channelContext,
         protected readonly LocaleContextInterface $localeContext,

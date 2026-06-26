@@ -12,7 +12,66 @@
        order_by_identifier: true
    ```
 
-## Grid providers are now configurable
+2. Configuration changes related to the broadened Doctrine support (see the *Dependencies* section). 
+   These only matter once you opt into **DoctrineBundle 3** / **DBAL 4**:
+
+   - The `auto_generate_proxy_classes: "%kernel.debug%"` option was removed from Sylius' Doctrine configuration 
+     (it no longer exists in DoctrineBundle 3, and since PHP 8.4 Doctrine uses native lazy objects). If you are still 
+     on DoctrineBundle 2 and rely on this behavior, set it explicitly in your own application configuration.
+
+   - The ORM metadata/query/result cache configuration was switched from wrapped `Doctrine\Common\Cache` services 
+     to **PSR-6 cache pools** (`type: pool`). This change lives in the application configuration (`config/packages/{prod,test}/doctrine.yaml`), 
+     which is **not** updated automatically on existing installations, update those files in your project accordingly:
+
+     ```diff
+     doctrine:
+         orm:
+             entity_managers:
+                 default:
+                     metadata_cache_driver:
+     -                    type: service
+     -                    id: doctrine.system_cache_provider
+     +                    type: pool
+     +                    pool: doctrine.system_cache_pool
+     ```
+
+     As part of this switch, the `doctrine.result_cache_provider` and `doctrine.system_cache_provider` services 
+     (defined in Sylius' application configuration, wrapping the PSR-6 pools via `Doctrine\Common\Cache\Psr6\DoctrineProvider`) 
+     were **removed**. If you referenced them by id, use the cache pools directly (`doctrine.system_cache_pool`, 
+     `doctrine.result_cache_pool`) with `type: pool` as shown above.
+
+   - On **PostgreSQL**, Sylius now forces the `SEQUENCE` identity generation strategy 
+     (`identity_generation_preferences` for `PostgreSQLPlatform`) to keep the database schema backward compatible 
+     with existing installations.
+
+3. The `_sylius: redirect:` block has been removed from the `sylius_shop_order_pay` route definition.
+
+   Previously, `PayumPayResponseProvider` read the after-pay redirect route at runtime from the routing metadata:
+
+   ```yaml
+   # ShopBundle/Resources/config/routing/order.yml (removed)
+   sylius_shop_order_pay:
+       defaults:
+           _sylius:
+               redirect:
+                   route: sylius_shop_order_after_pay
+   ```
+
+   The redirect route is now resolved from the `sylius_shop` bundle configuration at compile time.
+   If you customized the after-pay redirect route for Payum, use the dedicated Payum configuration keys instead:
+
+   ```yaml
+   sylius_shop:
+       order_pay:
+           payum_after_pay_route: sylius_shop_order_after_pay
+           payum_after_pay_route_parameters: []
+   ```
+
+   > **Note:** The `after_pay_route` and `after_pay_route_parameters` keys are reserved for the Payment Request flow
+   > and their default parameters include Payment Request-specific values (e.g. `hash: paymentRequest.getHash()`).
+   > Do not use them to configure the Payum after-pay redirect.
+
+### Grid providers are now configurable
 
 As part of the ongoing modernization of the Grid component, Sylius now provides grid definitions in both **YAML** and **PHP**.
 
@@ -117,6 +176,52 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
    If your application depends on the Gaufrette packages directly, require them explicitly in your `composer.json`.
 
+3. The `symfony/proxy-manager-bridge` and `friendsofphp/proxy-manager-lts` packages have been removed.
+
+   They are no longer needed, lazy services now rely on PHP's native lazy proxies provided by
+   `symfony/var-exporter` (the default since Symfony 6.4). No change is required in your application.
+
+   If your application depends on these packages directly, require them explicitly in your `composer.json`.
+
+4. The supported Doctrine version ranges have been **broadened** to allow the newer stack
+   (`doctrine/doctrine-bundle` `^2.13 || ^3.0`, `doctrine/dbal` `^3.9 || ^4.0`,
+   `doctrine/persistence` `^3.3 || ^4.0`, `doctrine/data-fixtures` `^1.7 || ^2.2`).
+
+   DBAL 4 removes the built-in `object` and `array` column types. Since Sylius maps two fields 
+   as `type="object"` (`PaymentSecurityToken.details` and `PaymentRequest.payload`), it registers
+   a custom `Sylius\Bundle\PaymentBundle\Doctrine\DBAL\Type\ObjectType` to keep them working.
+
+## Validation
+
+1. Passing an array of options to configure a Sylius validation constraint is **deprecated** since Sylius 2.3
+   and will be removed in Sylius 3.0. Use named arguments instead.
+
+   All Sylius validation constraints now declare explicit constructors with named arguments
+   (marked with `#[HasNamedArguments]`). The legacy array syntax keeps working, it only triggers deprecation.
+
+   Configuring constraints via **XML / YAML / PHP attributes is not affected** and requires no changes; the validator
+   loaders pass the options as named arguments automatically. Only **direct instantiation in PHP** should be migrated:
+
+   ```diff
+   -new ProvinceAddressConstraint(['message' => 'My custom message'])
+   +new ProvinceAddressConstraint(message: 'My custom message')
+   ```
+
+2. Several constraint message options have been renamed to follow the consistent `*Message` convention. The old option
+   names and public properties are **deprecated** since Sylius 2.3 and will be removed in Sylius 3.0. Both keep working
+   and stay in sync in the meantime; switch to the new `*Message` name:
+
+   | Constraint | Old | New |
+   |------------|-----|-----|
+   | `ApiBundle\...\ChosenPaymentMethodEligibility` | `notAvailable`, `notExist`, `paymentNotFound` | `notAvailableMessage`, `notExistMessage`, `paymentNotFoundMessage` |
+   | `ApiBundle\...\ChosenPaymentRequestActionEligibility` | `notAvailable`, `notExist` | `notAvailableMessage`, `notExistMessage` |
+   | `ApiBundle\...\AddingEligibleProductVariantToCart` | `productVariantNotSufficient` | `productVariantNotSufficientMessage` |
+   | `ApiBundle\...\ChangedItemQuantityInCart` | `productVariantNotLongerAvailable`, `productVariantNotSufficient` | `productVariantNotLongerAvailableMessage`, `productVariantNotSufficientMessage` |
+   | `PromotionBundle\...\PromotionRuleType`, `PromotionActionType`, `CatalogPromotionActionType`, `CatalogPromotionScopeType` | `invalidType` | `invalidTypeMessage` |
+   | `PaymentBundle\...\GatewayFactoryExists` | `invalidGatewayFactory` | `invalidGatewayFactoryMessage` |
+   | `ShippingBundle\...\ShippingMethodCalculatorExists` | `invalidShippingCalculator` | `invalidShippingCalculatorMessage` |
+   | `ShippingBundle\...\ShippingMethodRule` | `invalidType` | `invalidTypeMessage` |
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
@@ -146,4 +251,3 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    This allows you to decorate catalog display pricing independently from cart/order pricing
    (`sylius.order_processing.order_prices_recalculator`, `sylius.filter.promotion.price_range`),
    which remain on `ProductVariantPricesCalculatorInterface`.
-

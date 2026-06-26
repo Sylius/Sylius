@@ -34,7 +34,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class ProductVariantNormalizerTest extends TestCase
 {
-    private MockObject&CatalogPricesCalculatorInterface $pricesCalculator;
+    private CatalogPricesCalculatorInterface&MockObject $pricesCalculator;
 
     private AvailabilityCheckerInterface&MockObject $availabilityChecker;
 
