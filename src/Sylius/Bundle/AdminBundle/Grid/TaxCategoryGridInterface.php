@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface TaxCategoryGridInterface
 {
+    public const NAME = 'sylius_admin_tax_category';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

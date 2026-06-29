@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface ChannelPricingLogEntryGridInterface
 {
+    public const NAME = 'sylius_admin_channel_pricing_log_entry';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface TaxonGridInterface
 {
+    public const NAME = 'sylius_admin_taxon';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

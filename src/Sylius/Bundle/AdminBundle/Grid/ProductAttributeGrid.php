@@ -35,7 +35,7 @@ use Sylius\Component\Attribute\AttributeType\TextareaAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_product_attribute')]
+#[AsGrid(name: self::NAME)]
 final class ProductAttributeGrid implements ProductAttributeGridInterface
 {
     public function __construct(

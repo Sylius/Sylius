@@ -22,7 +22,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_shipment')]
+#[AsGrid(name: self::NAME)]
 final class ShipmentGrid implements ShipmentGridInterface
 {
     public function __construct(

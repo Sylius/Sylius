@@ -27,7 +27,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_promotion_coupon')]
+#[AsGrid(name: self::NAME)]
 final class PromotionCouponGrid implements PromotionCouponGridInterface
 {
     public function __construct(

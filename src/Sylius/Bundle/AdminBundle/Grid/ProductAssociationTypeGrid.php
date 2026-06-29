@@ -24,7 +24,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_product_association_type')]
+#[AsGrid(name: self::NAME)]
 final class ProductAssociationTypeGrid implements ProductAssociationTypeGridInterface
 {
     public function __construct(

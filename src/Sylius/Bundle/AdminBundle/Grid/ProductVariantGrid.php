@@ -27,7 +27,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_product_variant')]
+#[AsGrid(name: self::NAME)]
 final class ProductVariantGrid implements ProductVariantGridInterface
 {
     public function __construct(

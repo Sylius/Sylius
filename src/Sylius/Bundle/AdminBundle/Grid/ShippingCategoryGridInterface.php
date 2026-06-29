@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface ShippingCategoryGridInterface
 {
+    public const NAME = 'sylius_admin_shipping_category';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

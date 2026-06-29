@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface CountryGridInterface
 {
+    public const NAME = 'sylius_admin_country';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

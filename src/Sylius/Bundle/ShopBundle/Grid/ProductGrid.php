@@ -18,11 +18,10 @@ use Sylius\Bundle\GridBundle\Builder\Field\Field;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
-use Sylius\Bundle\GridBundle\Grid\AbstractGrid;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_shop_product')]
-final class ProductGrid extends AbstractGrid implements ProductGridInterface
+#[AsGrid(name: self::NAME)]
+final class ProductGrid implements ProductGridInterface
 {
     public function __construct(
         private readonly string $productClass,
@@ -36,7 +35,7 @@ final class ProductGrid extends AbstractGrid implements ProductGridInterface
                'channel' => "expr:service('sylius.context.channel').getChannel()",
                'taxon' => "expr:notFoundOnNull(service('sylius.repository.taxon').findOneBySlug(\$slug, service('sylius.context.locale').getLocaleCode()))",
                'locale' => "expr:service('sylius.context.locale').getLocaleCode()",
-               'sorting' => "expr:service('request_stack').getCurrentRequest().get('sorting', [])",
+               'sorting' => "expr:service('request_stack').getCurrentRequest().query.all('sorting')",
                'includeAllDescendants' => "expr:parameter('sylius_shop.product_grid.include_all_descendants')",
             ])
             ->setDriverOption('class', $this->productClass)

@@ -28,7 +28,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_product')]
+#[AsGrid(name: self::NAME)]
 final class ProductGrid implements ProductGridInterface
 {
     public function __construct(

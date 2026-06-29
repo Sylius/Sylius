@@ -21,7 +21,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_inventory')]
+#[AsGrid(name: self::NAME)]
 final class InventoryGrid implements InventoryGridInterface
 {
     public function __construct(

@@ -29,7 +29,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 
-#[AsGrid(name: 'sylius_admin_catalog_promotion')]
+#[AsGrid(name: self::NAME)]
 final class CatalogPromotionGrid implements CatalogPromotionGridInterface
 {
     public function __construct(

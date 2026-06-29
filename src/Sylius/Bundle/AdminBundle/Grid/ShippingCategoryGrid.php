@@ -24,7 +24,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_shipping_category')]
+#[AsGrid(name: self::NAME)]
 final class ShippingCategoryGrid implements ShippingCategoryGridInterface
 {
     public function __construct(

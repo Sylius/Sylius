@@ -21,7 +21,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_currency')]
+#[AsGrid(name: self::NAME)]
 final class CurrencyGrid implements CurrencyGridInterface
 {
     public function __construct(

@@ -20,7 +20,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             '%sylius.model.order.class%',
         ])
-        ->tag('sylius.grid')
+        ->tag('sylius.invokable_grid')
     ;
 
     $services->alias(\Sylius\Bundle\ShopBundle\Grid\Account\OrderGridInterface::class, "sylius_shop.grid.account.order");
@@ -29,7 +29,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             '%sylius.model.product.class%',
         ])
-        ->tag('sylius.grid')
+        ->tag('sylius.invokable_grid')
     ;
 
     $services->alias(\Sylius\Bundle\ShopBundle\Grid\ProductGridInterface::class,"sylius_shop.grid.product");

@@ -27,7 +27,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_tax_rate')]
+#[AsGrid(name: self::NAME)]
 final class TaxRateGrid implements TaxRateGridInterface
 {
     public function __construct(

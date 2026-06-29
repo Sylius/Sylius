@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface CurrencyGridInterface
 {
+    public const NAME = 'sylius_admin_currency';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

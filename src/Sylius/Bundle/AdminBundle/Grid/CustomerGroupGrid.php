@@ -24,7 +24,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_customer_group')]
+#[AsGrid(name: self::NAME)]
 final class CustomerGroupGrid implements CustomerGroupGridInterface
 {
     public function __construct(

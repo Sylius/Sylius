@@ -24,7 +24,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_zone')]
+#[AsGrid(name: self::NAME)]
 final class ZoneGrid implements ZoneGridInterface
 {
     public function __construct(
