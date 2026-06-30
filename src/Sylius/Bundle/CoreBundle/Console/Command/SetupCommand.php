@@ -16,8 +16,10 @@ namespace Sylius\Bundle\CoreBundle\Console\Command;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
 use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ZoneSetupInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
@@ -49,6 +51,8 @@ final class SetupCommand extends AbstractInstallCommand
         protected readonly CurrencySetupInterface $currencySetup,
         protected readonly LocaleSetupInterface $localeSetup,
         protected readonly ChannelSetupInterface $channelSetup,
+        protected readonly CountrySetupInterface $countrySetup,
+        protected readonly ZoneSetupInterface $zoneSetup,
         protected readonly FactoryInterface $adminUserFactory,
         protected readonly UserRepositoryInterface $adminUserRepository,
         protected readonly ValidatorInterface $validator,
@@ -74,7 +78,9 @@ EOT
 
         $currency = $this->currencySetup->setup($input, $output, $questionHelper);
         $locale = $this->localeSetup->setup($input, $output, $questionHelper);
-        $this->channelSetup->setup($locale, $currency);
+        $country = $this->countrySetup->setup($input, $output, $questionHelper);
+        $zone = $this->zoneSetup->setup($country);
+        $this->channelSetup->setup($locale, $currency, $country, $zone, $input, $output, $questionHelper);
         $this->setupAdministratorUser($input, $output, $locale->getCode());
 
         return Command::SUCCESS;

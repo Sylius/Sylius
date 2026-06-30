@@ -236,6 +236,49 @@ The converter can help bootstrap the migration from YAML to PHP and reduce the a
 
 For a complete overview of the Grid component, see the [Grid documentation](https://stack.sylius.com/grid/index).
 
+## Installer
+
+1. The `sylius:install:setup` command now sets up a **country** and a **default zone** during installation.
+
+   Two new setup classes have been introduced:
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetup` implementing `CountrySetupInterface`
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\ZoneSetup` implementing `ZoneSetupInterface`
+
+   Both are registered as services and injected into `SetupCommand`. If you have decorated or replaced
+   `SetupCommand`, update your constructor to include the two new dependencies:
+
+   ```diff
+    public function __construct(
+        protected readonly EntityManagerInterface $entityManager,
+        protected readonly CommandDirectoryChecker $commandDirectoryChecker,
+        protected readonly CurrencySetupInterface $currencySetup,
+        protected readonly LocaleSetupInterface $localeSetup,
+        protected readonly ChannelSetupInterface $channelSetup,
+   +    protected readonly CountrySetupInterface $countrySetup,
+   +    protected readonly ZoneSetupInterface $zoneSetup,
+        protected readonly FactoryInterface $adminUserFactory,
+        protected readonly UserRepositoryInterface $adminUserRepository,
+        protected readonly ValidatorInterface $validator,
+    )
+   ```
+
+2. The `ChannelSetupInterface::setup()` method signature has been extended to receive the newly created
+   country, zone, and console I/O objects:
+
+   ```diff
+    public function setup(
+        LocaleInterface $locale,
+        CurrencyInterface $currency,
+   +    CountryInterface $country,
+   +    ZoneInterface $zone,
+   +    InputInterface $input,
+   +    OutputInterface $output,
+   +    QuestionHelper $questionHelper,
+    ): void;
+   ```
+
+   If you have a custom implementation of `ChannelSetupInterface`, update its `setup()` signature accordingly.
+
 ## Dependencies
 
 1. The `behat/transliterator` package has been **deprecated** and will be removed in Sylius 3.0.
