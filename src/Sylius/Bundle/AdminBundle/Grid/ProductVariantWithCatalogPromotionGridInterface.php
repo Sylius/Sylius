@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface ProductVariantWithCatalogPromotionGridInterface
 {
+    public const NAME = 'sylius_admin_product_variant_with_catalog_promotion';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

@@ -25,7 +25,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_payment_method')]
+#[AsGrid(name: self::NAME)]
 final class PaymentMethodGrid implements PaymentMethodGridInterface
 {
     public function __construct(

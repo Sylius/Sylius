@@ -8,7 +8,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_taxon')]
+#[AsGrid(name: self::NAME)]
 final class TaxonGrid implements TaxonGridInterface
 {
     public function __construct(

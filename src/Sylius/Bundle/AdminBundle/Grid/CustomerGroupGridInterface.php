@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface CustomerGroupGridInterface
 {
+    public const NAME = 'sylius_admin_customer_group';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface ChannelGridInterface
 {
+    public const NAME = 'sylius_admin_channel';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

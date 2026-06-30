@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface OrderGridInterface
 {
+    public const NAME = 'sylius_admin_order';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

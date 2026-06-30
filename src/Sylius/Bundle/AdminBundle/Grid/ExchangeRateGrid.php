@@ -24,7 +24,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_exchange_rate')]
+#[AsGrid(name: self::NAME)]
 final class ExchangeRateGrid implements ExchangeRateGridInterface
 {
     public function __construct(

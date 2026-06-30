@@ -23,7 +23,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-#[AsGrid(name: 'sylius_admin_payment_request')]
+#[AsGrid(name: self::NAME)]
 final class PaymentRequestGrid implements PaymentRequestGridInterface
 {
     public function __construct(

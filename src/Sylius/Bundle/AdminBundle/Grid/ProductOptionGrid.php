@@ -24,7 +24,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_product_option')]
+#[AsGrid(name: self::NAME)]
 final class ProductOptionGrid implements ProductOptionGridInterface
 {
     public function __construct(

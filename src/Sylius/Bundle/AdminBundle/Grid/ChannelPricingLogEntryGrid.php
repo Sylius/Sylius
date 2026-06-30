@@ -19,7 +19,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_channel_pricing_log_entry')]
+#[AsGrid(name: self::NAME)]
 final class ChannelPricingLogEntryGrid implements ChannelPricingLogEntryGridInterface
 {
     public function __construct(

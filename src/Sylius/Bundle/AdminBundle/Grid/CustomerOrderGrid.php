@@ -18,7 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_customer_order')]
+#[AsGrid(name: self::NAME)]
 final class CustomerOrderGrid implements CustomerOrderGridInterface
 {
     public function __construct(

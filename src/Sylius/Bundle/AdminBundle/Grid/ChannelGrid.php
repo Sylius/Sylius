@@ -25,7 +25,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_channel')]
+#[AsGrid(name: self::NAME)]
 final class ChannelGrid implements ChannelGridInterface
 {
     public function __construct(

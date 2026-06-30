@@ -26,7 +26,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_admin_user')]
+#[AsGrid(name: self::NAME)]
 final class AdminUserGrid implements AdminUserGridInterface
 {
     public function __construct(

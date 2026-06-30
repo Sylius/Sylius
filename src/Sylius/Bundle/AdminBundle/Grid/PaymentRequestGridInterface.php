@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface PaymentRequestGridInterface
 {
+    public const NAME = 'sylius_admin_payment_request';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface ExchangeRateGridInterface
 {
+    public const NAME = 'sylius_admin_exchange_rate';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

@@ -26,7 +26,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: 'sylius_admin_product_taxon')]
+#[AsGrid(name: self::NAME)]
 final class ProductTaxonGrid implements ProductTaxonGridInterface
 {
     public function __construct(

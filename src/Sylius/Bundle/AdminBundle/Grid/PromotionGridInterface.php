@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface PromotionGridInterface
 {
+    public const NAME = 'sylius_admin_promotion';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }

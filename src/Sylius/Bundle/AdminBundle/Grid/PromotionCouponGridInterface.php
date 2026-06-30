@@ -18,5 +18,7 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 /** @experimental */
 interface PromotionCouponGridInterface
 {
+    public const NAME = 'sylius_admin_promotion_coupon';
+
     public function __invoke(GridBuilderInterface $gridBuilder): void;
 }
