@@ -43,37 +43,26 @@ final class ProductVariantWithCatalogPromotionGrid implements ProductVariantWith
             ])
             ->addOrderBy('code', 'asc')
 
-            // -- Field
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/product_variant/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.'),
-            )
-            ->addField(
                 StringField::create('code')
                     ->setLabel('sylius.ui.code'),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled'),
-            )
-            ->addField(
                 TwigField::create('inventory', '@SyliusAdmin/product_variant/grid/field/inventory.html.twig')
                     ->setLabel('sylius.ui.inventory')
                     ->setPath('.'),
             )
 
-            // -- Filter
-            ->addFilter(
+            ->withFilters(
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
-            )
-            ->addFilter(
                 StringFilter::create('name', ['translation.name'])
                     ->setLabel('sylius.ui.name'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 ItemActionGroup::create(
                     Action::create('show_product', 'show')

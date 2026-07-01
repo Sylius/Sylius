@@ -41,27 +41,18 @@ final class PaymentRequestGrid implements PaymentRequestGridInterface
         $gridBuilder->setLimits([10, 25, 50]);
         $gridBuilder->addOrderBy('createdAt', 'desc');
 
-        // -- Fields
         $gridBuilder
-            ->addField(
+            ->withFields(
                 StringField::create('hash')
                     ->setLabel('sylius.ui.hash')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('method', '@SyliusAdmin/payment_request/grid/field/method.html.twig')
                     ->setLabel('sylius.ui.payment_method')
                     ->setPath('.'),
-            )
-            ->addField(
                 TwigField::create('action', '@SyliusAdmin/payment_request/grid/field/action.html.twig')
                     ->setLabel('sylius.ui.action'),
-            )
-            ->addField(
                 TwigField::create('state', '@SyliusAdmin/payment_request/grid/field/state.html.twig')
                     ->setLabel('sylius.ui.state'),
-            )
-            ->addField(
                 TwigField::create('createdAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.creation_date')
                     ->setSortable(true)
@@ -70,8 +61,6 @@ final class PaymentRequestGrid implements PaymentRequestGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('updatedAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.updating_date')
                     ->setSortable(true)
@@ -82,8 +71,7 @@ final class PaymentRequestGrid implements PaymentRequestGridInterface
                     ]),
             )
 
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 Filter::create('payment_method', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.payment_method')
                     ->setFormOptions(['extra_options' => [
@@ -94,8 +82,6 @@ final class PaymentRequestGrid implements PaymentRequestGridInterface
                     ->setOptions([
                         'fields' => ['method.id'],
                     ]),
-            )
-            ->addFilter(
                 SelectFilter::create('action', [
                     'sylius.ui.authorize' => PaymentRequestInterface::ACTION_AUTHORIZE,
                     'sylius.ui.cancel' => PaymentRequestInterface::ACTION_CANCEL,
@@ -107,8 +93,6 @@ final class PaymentRequestGrid implements PaymentRequestGridInterface
                     'sylius.ui.sync' => PaymentRequestInterface::ACTION_SYNC,
                 ])
                     ->setLabel('sylius.ui.action'),
-            )
-            ->addFilter(
                 SelectFilter::create('state', [
                     'sylius.ui.cancelled' => PaymentRequestInterface::STATE_CANCELLED,
                     'sylius.ui.completed' => PaymentRequestInterface::STATE_COMPLETED,
@@ -119,7 +103,6 @@ final class PaymentRequestGrid implements PaymentRequestGridInterface
                     ->setLabel('sylius.ui.state'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 ItemActionGroup::create(
                     ShowAction::create()

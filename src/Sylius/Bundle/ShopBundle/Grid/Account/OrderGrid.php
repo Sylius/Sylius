@@ -38,26 +38,18 @@ final class OrderGrid implements OrderGridInterface
             ->setDriverOption('class', $this->orderClass)
             ->orderBy('checkoutCompletedAt', 'desc')
             ->setLimits([10, 25, 50])
-            ->addField(
+            ->withFields(
                 TwigField::create('number', '@SyliusShop/account/order/grid/field/number.html.twig')
                     ->setLabel('sylius.ui.number')
                     ->setSortable(true),
-            )
-            ->addField(
                 DateTimeField::create('checkoutCompletedAt', 'm/d/Y')
                     ->setLabel('sylius.ui.date'),
-            )
-            ->addField(
                 TwigField::create('shippingAddress', '@SyliusShop/account/order/grid/field/address.html.twig')
                     ->setLabel('sylius.ui.ship_to'),
-            )
-            ->addField(
                 TwigField::create('total', '@SyliusShop/account/order/grid/field/total.html.twig')
                     ->setLabel('sylius.ui.total')
                     ->setPath('.')
                     ->setSortable(true, 'total'),
-            )
-            ->addField(
                 TwigField::create('state', '@SyliusUi/grid/field/label.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->setSortable(true)

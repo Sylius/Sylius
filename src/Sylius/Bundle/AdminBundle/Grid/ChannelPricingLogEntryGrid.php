@@ -36,24 +36,18 @@ final class ChannelPricingLogEntryGrid implements ChannelPricingLogEntryGridInte
             ])
             ->setLimits([10, 25, 50])
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('price', '@SyliusAdmin/channel_pricing_log_entry/grid/field/price.html.twig')
                     ->setLabel('sylius.ui.price')
                     ->setPath('.'),
-            )
-            ->addField(
                 TwigField::create('originalPrice', '@SyliusAdmin/channel_pricing_log_entry/grid/field/original_price.html.twig')
                     ->setLabel('sylius.ui.original_price')
                     ->setPath('.'),
-            )
-            ->addField(
                 DateTimeField::create('loggedAt')
                     ->setLabel('sylius.ui.logged_at'),
             )
 
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 DateFilter::create('loggedAt')
                     ->setLabel('sylius.ui.logged_at'),
             )

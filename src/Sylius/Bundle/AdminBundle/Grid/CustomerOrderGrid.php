@@ -36,11 +36,11 @@ final class CustomerOrderGrid implements CustomerOrderGridInterface
             ])
             ->extends('sylius_admin_order')
             ->addOrderBy('number', 'desc')
-            ->addField(
+            ->withFields(
                 StringField::create('customer')
                     ->setEnabled(false),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('customer', 'string')
                     ->setEnabled(false),
             );

@@ -39,7 +39,7 @@ final class InventoryGrid implements InventoryGridInterface
             ->setRepositoryMethod('createInventoryListQueryBuilder', [
                 'expr:service(\'sylius.context.locale\').getLocaleCode()',
             ])
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/inventory/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.')
@@ -49,8 +49,6 @@ final class InventoryGrid implements InventoryGridInterface
                             'th_class' => 'w-75',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true)
@@ -59,20 +57,14 @@ final class InventoryGrid implements InventoryGridInterface
                             'th_class' => 'w-25',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('inventory', '@SyliusAdmin/inventory/grid/field/inventory.html.twig')
                     ->setLabel('sylius.ui.inventory')
                     ->setPath('.'),
             )
 
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
-            )
-
-            ->addFilter(
                 Filter::create('name', 'string')
                     ->setLabel('sylius.ui.name')
                     ->setOptions([
@@ -80,9 +72,7 @@ final class InventoryGrid implements InventoryGridInterface
                             'translation.name',
                         ],
                     ]),
-            )
-        ->addFilter(
-            Filter::create('product', 'ux_translatable_autocomplete')
+                Filter::create('product', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.product')
                     ->setFormOptions([
                         'multiple' => false,
@@ -95,8 +85,7 @@ final class InventoryGrid implements InventoryGridInterface
                     ->setOptions([
                         'fields' => ['product.id'],
                     ]),
-        )
-            // -- Actions
+            )
             ->addActionGroup(
                 ItemActionGroup::create(
                     Action::create('update_product', 'update')

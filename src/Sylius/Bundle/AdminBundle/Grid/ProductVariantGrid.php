@@ -45,16 +45,12 @@ final class ProductVariantGrid implements ProductVariantGridInterface
                 '$productId',
             ])
             ->addOrderBy('position', 'asc')
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/product_variant/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.'),
-            )
-            ->addField(
                 StringField::create('code')
                     ->setLabel('sylius.ui.code'),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->withOptions([
@@ -62,8 +58,6 @@ final class ProductVariantGrid implements ProductVariantGridInterface
                             'th_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('inventory', '@SyliusAdmin/product_variant/grid/field/inventory.html.twig')
                     ->setLabel('sylius.ui.inventory')
                     ->setPath('.')
@@ -72,8 +66,6 @@ final class ProductVariantGrid implements ProductVariantGridInterface
                             'th_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('position', '@SyliusAdmin/product_variant/grid/field/position.html.twig')
                     ->setLabel('sylius.ui.position')
                     ->setPath('.')
@@ -84,11 +76,9 @@ final class ProductVariantGrid implements ProductVariantGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
-            )
-            ->addFilter(
                 Filter::create('name', 'string')
                     ->setLabel('sylius.ui.name')
                     ->setOptions([

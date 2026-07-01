@@ -36,7 +36,7 @@ final class PaymentGrid implements PaymentGridInterface
             ->setRepositoryMethod('createListQueryBuilder')
             ->addOrderBy('createdAt', 'desc')
             ->setLimits([10, 25, 50])
-            ->addField(
+            ->withFields(
                 TwigField::create('createdAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.date')
                     ->setSortable(true)
@@ -45,8 +45,6 @@ final class PaymentGrid implements PaymentGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('number', '@SyliusAdmin/shared/grid/field/order_number.html.twig')
                     ->setLabel('sylius.ui.order')
                     ->setPath('order')
@@ -55,8 +53,6 @@ final class PaymentGrid implements PaymentGridInterface
                             'th_class' => 'w-1',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('customer', '@SyliusAdmin/shared/grid/field/customer.html.twig')
                     ->setLabel('sylius.ui.customer')
                     ->setPath('order.customer')
@@ -65,13 +61,9 @@ final class PaymentGrid implements PaymentGridInterface
                             'th_class' => 'w-100',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('channel', '@SyliusAdmin/shared/grid/field/channel.html.twig')
                     ->setLabel('sylius.ui.channel')
                     ->setPath('order.channel'),
-            )
-            ->addField(
                 TwigField::create('state', '@SyliusAdmin/shared/grid/field/payment_state.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->withOptions([
@@ -81,7 +73,7 @@ final class PaymentGrid implements PaymentGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('state', 'select')
                     ->setLabel('sylius.ui.state')
                     ->setFormOptions([
@@ -94,8 +86,6 @@ final class PaymentGrid implements PaymentGridInterface
                             'sylius.ui.refunded' => 'refunded',
                         ],
                     ]),
-            )
-            ->addFilter(
                 Filter::create('channel', 'entity')
                     ->setLabel('sylius.ui.channel')
                     ->setOptions([

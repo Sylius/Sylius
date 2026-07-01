@@ -38,15 +38,11 @@ final class ShippingCategoryGrid implements ShippingCategoryGridInterface
             ->setDriverOption('class', $this->shippingCategoryClass)
             ->setLimits([10, 25, 50])
             ->setRepositoryMethod('createListQueryBuilder')
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name'),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code'),
-            )
-            ->addField(
                 TwigField::create('createdAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.creation_date')
                     ->withOptions([
@@ -54,8 +50,6 @@ final class ShippingCategoryGrid implements ShippingCategoryGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('updatedAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.updating_date')
                     ->withOptions([
@@ -64,7 +58,7 @@ final class ShippingCategoryGrid implements ShippingCategoryGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('search', 'string')
                     ->setLabel('sylius.ui.search')
                     ->setOptions([

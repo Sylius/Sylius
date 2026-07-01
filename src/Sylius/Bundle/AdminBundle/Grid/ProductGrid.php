@@ -47,7 +47,7 @@ final class ProductGrid implements ProductGridInterface
             ])
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
-            ->addField(
+            ->withFields(
                 TwigField::create('image', '@SyliusAdmin/product/grid/field/product_image.html.twig')
                     ->setLabel('sylius.ui.image')
                     ->setPath('.')
@@ -56,8 +56,6 @@ final class ProductGrid implements ProductGridInterface
                             'th_class' => 'w-1',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('name', '@SyliusAdmin/product/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setSortable(true, 'translation.name')
@@ -66,36 +64,23 @@ final class ProductGrid implements ProductGridInterface
                             'th_class' => 'w-33',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('mainTaxon', '@SyliusAdmin/product/grid/field/main_taxon.html.twig')
                     ->setLabel('sylius.ui.main_taxon'),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled'),
             )
 
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['code', 'translation.name'])
                     ->setLabel('sylius.ui.search')
                     ->addFormOption('type', StringFilter::TYPE_CONTAINS),
-            )
-            ->addFilter(
                 BooleanFilter::create('enabled')
                     ->setLabel('sylius.ui.enabled'),
-            )
-            ->addFilter(
                 EntityFilter::create('channel', $this->channelClass, fields: ['channels.id'])
                     ->setLabel('sylius.ui.channel'),
-            )
-            ->addFilter(
                 Filter::create('taxon', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.taxon')
                     ->setFormOptions([
@@ -107,8 +92,6 @@ final class ProductGrid implements ProductGridInterface
                         ],
                     ])
                     ->addOption('fields', ['productTaxons.taxon.id']),
-            )
-            ->addFilter(
                 Filter::create('main_taxon', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.main_taxon')
                     ->setFormOptions([
@@ -122,7 +105,6 @@ final class ProductGrid implements ProductGridInterface
                     ->addOption('fields', ['mainTaxon.id']),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(Action::create('create', 'links')
                     ->setLabel('sylius.ui.create')

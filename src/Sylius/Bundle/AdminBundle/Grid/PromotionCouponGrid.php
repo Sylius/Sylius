@@ -44,34 +44,26 @@ final class PromotionCouponGrid implements PromotionCouponGridInterface
             ->setRepositoryMethod('createQueryBuilderByPromotionId', [
                 'promotionId' => '$promotionId',
             ])
-            ->addField(
+            ->withFields(
                 StringField::create('code')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('usageLimit')
                     ->setLabel('sylius.ui.usage_limit')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('perCustomerUsageLimit')
                     ->setLabel('sylius.ui.per_customer_usage_limit')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('used', '@SyliusAdmin/promotion_coupon/grid/field/used.html.twig')
                     ->setLabel('sylius.ui.used')
                     ->setSortable(true)
                     ->setPath('.'),
-            )
-            ->addField(
                 DateTimeField::create('expiresAt')
                     ->setLabel('sylius.ui.expires_at')
                     ->setSortable(true)
                     ->setOption('format', 'd-m-Y'),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
             )

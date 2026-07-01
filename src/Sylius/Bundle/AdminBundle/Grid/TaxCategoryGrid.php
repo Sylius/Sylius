@@ -39,27 +39,22 @@ final class TaxCategoryGrid implements TaxCategoryGridInterface
             ->setLimits([10, 25, 50])
             ->addOrderBy('nameAndDescription', 'asc')
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('nameAndDescription', '@SyliusUi/grid/field/name_and_description.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.')
                     ->setSortable(true, 'name'),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
             )
 
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['code', 'name'])
                     ->setLabel('sylius.ui.search')
                     ->addFormOption('type', StringFilter::TYPE_CONTAINS),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     CreateAction::create(),

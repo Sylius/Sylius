@@ -42,8 +42,7 @@ final class ProductAssociationTypeGrid implements ProductAssociationTypeGridInte
             ->addOrderBy('code', 'asc')
             ->setLimits([10, 25, 50])
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->withOptions([
@@ -51,8 +50,6 @@ final class ProductAssociationTypeGrid implements ProductAssociationTypeGridInte
                             'th_class' => 'w-75',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true)
@@ -62,11 +59,9 @@ final class ProductAssociationTypeGrid implements ProductAssociationTypeGridInte
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
-            )
-            ->addFilter(
                 Filter::create('name', 'string')
                     ->setLabel('sylius.ui.name')
                     ->setOptions([

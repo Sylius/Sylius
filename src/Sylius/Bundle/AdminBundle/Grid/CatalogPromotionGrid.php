@@ -45,8 +45,7 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
 
-            //-- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('priority', '@SyliusAdmin/catalog_promotion/grid/field/priority.html.twig')
                     ->withOptions([
                         'vars' => [
@@ -56,18 +55,12 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
                     ])
                     ->setLabel('sylius.ui.priority')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('channels', '@SyliusAdmin/shared/grid/field/channels.html.twig')
                     ->setLabel('sylius.ui.channels')
                     ->withOptions([
@@ -75,8 +68,6 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('startDate', '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.start_date')
                     ->setSortable(true)
@@ -85,8 +76,6 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
                             'th_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('endDate', '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.end_date')
                     ->setSortable(true)
@@ -95,8 +84,6 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
                             'th_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('state', '@SyliusAdmin/catalog_promotion/grid/field/state.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->withOptions([
@@ -105,8 +92,6 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
@@ -118,42 +103,31 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
                     ]),
             )
 
-            // --- Filters
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create(
                     'search',
                     fields: ['name', 'code'],
                     type: 'contains',
                 )
                     ->setLabel('sylius.ui.search'),
-            )
-            ->addFilter(
                 EntityFilter::create(
                     'channel',
                     resourceClass: $this->channelClass,
                     fields: ['channels.id'],
                 )
                     ->setLabel('sylius.ui.channel'),
-            )
-            ->addFilter(
                 DateFilter::create('startDate')
                     ->setLabel('sylius.ui.start_date')
                     ->setOptions([
                         'inclusive_to' => true,
                     ]),
-            )
-            ->addFilter(
                 DateFilter::create('endDate')
                     ->setLabel('sylius.ui.end_date')
                     ->setOptions([
                         'inclusive_to' => true,
                     ]),
-            )
-            ->addFilter(
                 BooleanFilter::create('enabled')
                     ->setLabel('sylius.ui.enabled'),
-            )
-            ->addFilter(
                 Filter::create('state', 'select')
                     ->setLabel('sylius.ui.state')
                     ->addFormOption('choices', [
@@ -162,7 +136,6 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
                     ]),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     CreateAction::create(),

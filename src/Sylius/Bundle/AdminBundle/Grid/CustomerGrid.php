@@ -41,22 +41,16 @@ final class CustomerGrid implements CustomerGridInterface
             ->setDriverOption('class', $this->customerClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('createdAt', 'desc')
-            ->addField(
+            ->withFields(
                 TwigField::create('email', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.email')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('lastName')
                     ->setLabel('sylius.ui.last_name')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('firstName')
                     ->setLabel('sylius.ui.first_name')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('createdAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.registration_date')
                     ->setSortable(true)
@@ -65,8 +59,6 @@ final class CustomerGrid implements CustomerGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/customer/grid/field/enabled.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setPath('.')
@@ -75,8 +67,6 @@ final class CustomerGrid implements CustomerGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('verified', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.verified')
                     ->setPath('user?.verified')
@@ -86,11 +76,9 @@ final class CustomerGrid implements CustomerGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['email', 'firstName', 'lastName'])
                     ->setLabel('sylius.ui.search'),
-            )
-            ->addFilter(
                 Filter::create('group', 'ux_autocomplete')
                 ->setLabel('sylius.ui.customer_groups')
                 ->setFormOptions([

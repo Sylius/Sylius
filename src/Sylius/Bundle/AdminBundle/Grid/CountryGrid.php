@@ -37,19 +37,14 @@ final class CountryGrid implements CountryGridInterface
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
 
-            // -- Field
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/country/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.')
                     ->setSortable(true, 'code'),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
@@ -60,17 +55,13 @@ final class CountryGrid implements CountryGridInterface
                     ]),
             )
 
-            // -- Filter
-            ->addFilter(
+            ->withFilters(
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
-            )
-            ->addFilter(
                 Filter::create('enabled', 'boolean')
                     ->setLabel('sylius.ui.enabled'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     CreateAction::create(),

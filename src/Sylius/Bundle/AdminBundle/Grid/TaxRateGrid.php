@@ -42,52 +42,36 @@ final class TaxRateGrid implements TaxRateGridInterface
             ->setLimits([10, 25, 50])
             ->addOrderBy('name', 'asc')
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('zone')
                     ->setLabel('sylius.ui.zone'),
-            )
-            ->addField(
                 StringField::create('category')
                     ->setLabel('sylius.ui.category'),
-            )
-            ->addField(
                 TwigField::create('amount', '@SyliusUi/grid/field/percent.html.twig')
                     ->setLabel('sylius.ui.amount')
                     ->setSortable(true),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('startDate', 'date')
                     ->setLabel('sylius.ui.start_date')
                     ->setOptions([
                         'inclusive_to' => true,
                     ]),
-            )
-
-            // -- Filters
-            ->addFilter(
                 DateFilter::create('endDate')
                     ->setLabel('sylius.ui.end_date')
                     ->setOptions([
                         'inclusive_to' => true,
                     ]),
-            )
-            ->addFilter(
                 StringFilter::create('search', ['code', 'name'])
                     ->setLabel('sylius.ui.search'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     CreateAction::create(),
