@@ -47,6 +47,7 @@ final class InstallerContext implements Context
         'currency' => 'USD',
         'locale' => 'en_US',
         'country' => 'US',
+        'zone' => 'no',
         'e-mail' => 'test@email.com',
         'username' => 'test',
         'firstName' => '',
