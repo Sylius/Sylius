@@ -41,7 +41,7 @@ final class ProductOptionGrid implements ProductOptionGridInterface
                 'expr:service(\'sylius.context.locale\').getLocaleCode()',
             ])
             ->addOrderBy('position', 'asc')
-            ->addField(
+            ->withFields(
                 TwigField::create('position', '@SyliusUi/grid/field/position.html.twig')
                     ->setLabel('sylius.ui.position')
                     ->setSortable(true)
@@ -51,8 +51,6 @@ final class ProductOptionGrid implements ProductOptionGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setSortable(true, 'translation.name')
@@ -61,8 +59,6 @@ final class ProductOptionGrid implements ProductOptionGridInterface
                             'th_class' => 'w-75',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true)
@@ -72,7 +68,7 @@ final class ProductOptionGrid implements ProductOptionGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['code', 'translation.name'])
                     ->setLabel('sylius.ui.search')
                     ->addFormOption('type', StringFilter::TYPE_CONTAINS),

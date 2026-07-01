@@ -38,7 +38,7 @@ final class CustomerGroupGrid implements CustomerGroupGridInterface
             ->setDriverOption('class', $this->customerGroupClass)
             ->addOrderBy('name', 'asc')
             ->setLimits([10, 25, 50])
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setSortable(true)
@@ -47,8 +47,6 @@ final class CustomerGroupGrid implements CustomerGroupGridInterface
                             'th_class' => 'w-75',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true)
@@ -58,7 +56,7 @@ final class CustomerGroupGrid implements CustomerGroupGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['code', 'name'])
                     ->setLabel('sylius.ui.search'),
             )

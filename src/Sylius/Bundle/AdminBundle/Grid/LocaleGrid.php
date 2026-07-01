@@ -36,17 +36,15 @@ final class LocaleGrid implements LocaleGridInterface
             ->setDriverOption('class', $this->localeClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/locale/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.'),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
             )

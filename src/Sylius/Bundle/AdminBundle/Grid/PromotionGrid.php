@@ -42,7 +42,7 @@ final class PromotionGrid implements PromotionGridInterface
             ->setDriverOption('class', $this->promotionClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('priority', 'desc')
-            ->addField(
+            ->withFields(
                 TwigField::create('priority', '@SyliusAdmin/promotion/grid/field/priority.html.twig')
                     ->setLabel('sylius.ui.priority')
                     ->setSortable(true)
@@ -52,8 +52,6 @@ final class PromotionGrid implements PromotionGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('name', '@SyliusUi/grid/field/name_and_description.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.')
@@ -63,13 +61,9 @@ final class PromotionGrid implements PromotionGridInterface
                             'th_class' => 'w-100',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('couponBased', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.coupons')
                     ->withOptions([
@@ -78,24 +72,17 @@ final class PromotionGrid implements PromotionGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('usage', '@SyliusAdmin/promotion/grid/field/usage.html.twig')
                     ->setLabel('sylius.ui.usage')
                     ->setPath('.')
                     ->setSortable(true, 'used'),
             )
 
-            // -- Filter
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['code', 'name'])
                     ->setLabel('sylius.ui.search'),
-            )
-            ->addFilter(
                 Filter::create('couponBased', 'boolean')
                     ->setLabel('sylius.ui.coupon_based'),
-            )
-            ->addFilter(
                 Filter::create('coupon_code', 'string')
                     ->setLabel('sylius.ui.coupon')
                     ->setOptions([
@@ -103,15 +90,11 @@ final class PromotionGrid implements PromotionGridInterface
                             'coupons.code',
                         ],
                     ]),
-            )
-            ->addFilter(
                 ExistsFilter::create('archival', 'archivedAt')
                     ->setLabel('sylius.ui.archival')
-                    ->setDefaultValue(false)
-                ,
+                    ->setDefaultValue(false),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     CreateAction::create(),

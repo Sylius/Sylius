@@ -45,23 +45,17 @@ final class ProductGrid implements ProductGridInterface
                 18,
                 27,
             ])
-            ->addField(
+            ->withFields(
                 DateTimeField::create('createdAt')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('position')
                     ->setSortable(true, 'productTaxon.position'),
-            )
-            ->addField(
                 StringField::create('name')
                     ->setSortable(true, 'translation.name'),
-            )
-            ->addField(
                 Field::create('price', 'int')
                     ->setSortable(true, 'channelPricing.price'),
             )
-            ->addFilter(
+            ->withFilters(
                 Filter::create('search', 'shop_string')
                     ->setLabel(false)
                     ->addOption('fields', ['translation.name'])

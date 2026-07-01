@@ -40,37 +40,28 @@ final class ExchangeRateGrid implements ExchangeRateGridInterface
             ->setLimits([10, 25, 50])
             ->addOrderBy('id', 'desc')
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 StringField::create('id')
                     ->setEnabled(false)
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('sourceCurrency')
                     ->setLabel('sylius.ui.source_currency')
                     ->setPath('sourceCurrency.name'),
-            )
-            ->addField(
                 StringField::create('targetCurrency')
                     ->setLabel('sylius.ui.target_currency')
                     ->setPath('targetCurrency.name'),
-            )
-            ->addField(
                 StringField::create('ratio')
                     ->setLabel('sylius.ui.ratio')
                     ->setPath('ratio')
                     ->setSortable(true),
             )
 
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 EntityFilter::create('currency', $this->currencyClass, fields: ['sourceCurrency', 'targetCurrency'])
                     ->setLabel('sylius.ui.currency')
                     ->addFormOption('choice_label', 'name'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     CreateAction::create(),

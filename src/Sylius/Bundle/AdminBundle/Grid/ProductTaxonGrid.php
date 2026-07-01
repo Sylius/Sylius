@@ -46,13 +46,10 @@ final class ProductTaxonGrid implements ProductTaxonGridInterface
                 '$taxonId',
             ])
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 SyliusTwigField::create('image', '@SyliusAdmin/product/grid/field/product_image.html.twig')
                     ->setLabel('sylius.ui.image')
                     ->setPath('product'),
-            )
-            ->addField(
                 TwigField::create('name', '@SyliusAdmin/product/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('product')
@@ -62,8 +59,6 @@ final class ProductTaxonGrid implements ProductTaxonGridInterface
                             'th_class' => 'w-75',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setPath('product')
@@ -73,45 +68,33 @@ final class ProductTaxonGrid implements ProductTaxonGridInterface
                             'th_class' => 'w-25',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('mainTaxon', '@SyliusAdmin/product/grid/field/main_taxon.html.twig')
                     ->setLabel('sylius.ui.main_taxon')
                     ->setPath('product.mainTaxon'),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setPath('product.enabled'),
-            )
-            ->addField(
                 TwigField::create('position', '@SyliusAdmin/product_taxon/grid/field/position.html.twig')
                     ->setLabel('sylius.ui.position')
                     ->setPath('.')
                     ->setSortable(true),
             )
 
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['product.code', 'product.translations.name'])
                     ->setLabel('sylius.ui.search')
                     ->setFormOptions([
                         'type' => StringFilter::TYPE_CONTAINS,
                     ]),
-            )
-            ->addFilter(
                 BooleanFilter::create('enabled')
                     ->setLabel('sylius.ui.enabled')
                     ->setOptions([
                         'field' => 'product.enabled',
                     ]),
-            )
-            ->addFilter(
                 EntityFilter::create('channel', $this->channelClass, fields: ['product.channels.id'])
                     ->setLabel('sylius.ui.channel'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     Action::create('update_positions', 'update_product_taxon_positions'),

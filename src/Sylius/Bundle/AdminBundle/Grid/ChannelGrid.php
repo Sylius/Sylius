@@ -39,23 +39,17 @@ final class ChannelGrid implements ChannelGridInterface
             ->setDriverOption('class', $this->channelClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('nameAndDescription', 'asc')
-            ->addField(
+            ->withFields(
                 TwigField::create('nameAndDescription', '@SyliusAdmin/shared/grid/field/channel.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setPath('.')
                     ->setSortable(true, 'name'),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true, 'code'),
-            )
-            ->addField(
                 TwigField::create('themeName', '@SyliusAdmin/channel/grid/field/theme.html.twig')
                     ->setLabel('sylius.ui.theme')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
@@ -65,11 +59,9 @@ final class ChannelGrid implements ChannelGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['code', 'name'])
                     ->setLabel('sylius.ui.search'),
-            )
-            ->addFilter(
                 BooleanFilter::create('enabled')
                     ->setLabel('sylius.ui.enabled'),
             )

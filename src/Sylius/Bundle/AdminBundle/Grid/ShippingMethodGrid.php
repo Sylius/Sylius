@@ -46,8 +46,7 @@ final class ShippingMethodGrid implements ShippingMethodGridInterface
             ])
             ->addOrderBy('position', 'asc')
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('position', '@SyliusUi/grid/field/position.html.twig')
                     ->setLabel('sylius.ui.position')
                     ->setSortable(true)
@@ -57,41 +56,27 @@ final class ShippingMethodGrid implements ShippingMethodGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setSortable(true, 'translation.name'),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('zone')
                     ->setLabel('sylius.ui.zone'),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true),
             )
 
-            // -- Filter
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['code', 'translation.name'])
                     ->setLabel('sylius.ui.search'),
-            )
-            ->addFilter(
                 Filter::create('enabled', 'boolean')
                     ->setLabel('sylius.ui.enabled'),
-            )
-            ->addFilter(
                 ExistsFilter::create('archival', 'archivedAt')
                     ->setLabel('sylius.ui.archival')
-                    ->setDefaultValue(false)
-                ,
+                    ->setDefaultValue(false),
             )
             ->addActionGroup(
                 MainActionGroup::create(

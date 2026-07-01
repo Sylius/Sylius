@@ -35,7 +35,7 @@ final class CurrencyGrid implements CurrencyGridInterface
             ->setDriverOption('class', $this->currencyClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
-            ->addField(
+            ->withFields(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true)
@@ -44,12 +44,10 @@ final class CurrencyGrid implements CurrencyGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 StringField::create('name')
                     ->setLabel('sylius.ui.name'),
             )
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('code')
                     ->setLabel('sylius.ui.code'),
             )

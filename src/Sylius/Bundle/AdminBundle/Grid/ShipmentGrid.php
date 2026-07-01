@@ -40,8 +40,7 @@ final class ShipmentGrid implements ShipmentGridInterface
             ->setRepositoryMethod('createListQueryBuilder')
             ->addOrderBy('createdAt', 'desc')
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('createdAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.created_at')
                     ->setSortable(true)
@@ -50,8 +49,6 @@ final class ShipmentGrid implements ShipmentGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('shippedAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.shipped_at')
                     ->setSortable(true)
@@ -60,8 +57,6 @@ final class ShipmentGrid implements ShipmentGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('order', '@SyliusAdmin/shared/grid/field/order_number.html.twig')
                     ->setLabel('sylius.ui.order')
                     ->setPath('order')
@@ -70,13 +65,9 @@ final class ShipmentGrid implements ShipmentGridInterface
                             'th_class' => 'w-1',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('channel', '@SyliusAdmin/shared/grid/field/channel.html.twig')
                     ->setLabel('sylius.ui.channel')
                     ->setPath('order.channel'),
-            )
-            ->addField(
                 TwigField::create('state', '@SyliusAdmin/shared/grid/field/shipment_state.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->withOptions([
@@ -86,15 +77,13 @@ final class ShipmentGrid implements ShipmentGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 SelectFilter::create('state', [
                     'sylius.ui.cancelled' => 'cancelled',
                     'sylius.ui.ready' => 'ready',
                     'sylius.ui.shipped' => 'shipped',
                 ])
                     ->setLabel('sylius.ui.state'),
-            )
-            ->addFilter(
                 Filter::create('channel', 'ux_autocomplete')
                     ->setLabel('sylius.ui.channel')
                     ->setOptions([
@@ -108,8 +97,6 @@ final class ShipmentGrid implements ShipmentGridInterface
                             'choice_label' => 'name',
                         ],
                     ]),
-            )
-            ->addFilter(
                 Filter::create('method', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.method')
                     ->setOptions([

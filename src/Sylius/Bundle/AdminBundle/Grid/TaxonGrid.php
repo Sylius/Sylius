@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\AdminBundle\Grid;
@@ -23,9 +32,10 @@ final class TaxonGrid implements TaxonGridInterface
             ->setRepositoryMethod('createListQueryBuilder')
             ->setLimits([10, 25, 50])
 
-            // -- Fields
-            ->addFilter(StringFilter::create('code', ['code']))
-            ->addFilter(StringFilter::create('name', ['translation.name']))
+            ->withFilters(
+                StringFilter::create('code', ['code']),
+                StringFilter::create('name', ['translation.name']),
+            )
         ;
     }
 }

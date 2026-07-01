@@ -40,27 +40,19 @@ final class AdminUserGrid implements AdminUserGridInterface
             ->setDriverOption('class', $this->adminUserClass)
             ->addOrderBy('createdAt', 'desc')
             ->setLimits([10, 25, 50])
-            ->addField(
+            ->withFields(
                 TwigField::create('email', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.email')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('firstName')
                     ->setLabel('sylius.ui.first_name')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('lastName')
                     ->setLabel('sylius.ui.last_name')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('username')
                     ->setLabel('sylius.ui.username')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('createdAt', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.registration_date')
                     ->setSortable(true)
@@ -69,8 +61,6 @@ final class AdminUserGrid implements AdminUserGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
@@ -81,14 +71,12 @@ final class AdminUserGrid implements AdminUserGridInterface
                         ],
                     ]),
             )
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create(
                     name: 'search',
                     fields: ['email', 'username', 'firstName', 'lastName'],
                 )
                     ->setLabel('sylius.ui.search'),
-            )
-            ->addFilter(
                 BooleanFilter::create('enabled')
                     ->setLabel('sylius.ui.enabled'),
             )

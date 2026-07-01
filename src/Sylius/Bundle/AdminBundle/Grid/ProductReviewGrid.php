@@ -40,7 +40,7 @@ final class ProductReviewGrid implements ProductReviewGridInterface
             ->setDriverOption('class', $this->productReviewClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('date', 'desc')
-            ->addField(
+            ->withFields(
                 TwigField::create('rating', '@SyliusAdmin/product_review/grid/field/rating.html.twig')
                     ->setLabel('sylius.ui.rating')
                     ->setSortable(true)
@@ -50,21 +50,13 @@ final class ProductReviewGrid implements ProductReviewGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('author', '@SyliusAdmin/shared/grid/field/customer.html.twig')
                     ->setLabel('sylius.ui.customer'),
-            )
-            ->addField(
                 StringField::create('title')
                     ->setLabel('sylius.ui.title')
                     ->setSortable(true),
-            )
-            ->addField(
                 StringField::create('reviewSubject')
                     ->setLabel('sylius.ui.product'),
-            )
-            ->addField(
                 TwigField::create('date', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.date')
                     ->setPath('createdAt')
@@ -74,8 +66,6 @@ final class ProductReviewGrid implements ProductReviewGridInterface
                             'th_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('status', '@SyliusAdmin/product_review/grid/field/status.html.twig')
                     ->setLabel('sylius.ui.status')
                     ->setSortable(true)
@@ -87,12 +77,9 @@ final class ProductReviewGrid implements ProductReviewGridInterface
                     ]),
             )
 
-            // -- Filter
-            ->addFilter(
+            ->withFilters(
                 Filter::create('title', 'string')
                     ->setLabel('sylius.ui.title'),
-            )
-            ->addFilter(
                 SelectFilter::create(
                     'status',
                     [
@@ -102,8 +89,6 @@ final class ProductReviewGrid implements ProductReviewGridInterface
                     ],
                 )
                     ->setLabel('sylius.ui.status'),
-            )
-            ->addFilter(
                 Filter::create('product', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.product')
                     ->setFormOptions([
@@ -117,7 +102,6 @@ final class ProductReviewGrid implements ProductReviewGridInterface
                     ->addOption('fields', ['reviewSubject.id']),
             )
 
-            // -- Actions
             ->addActionGroup(
                 ItemActionGroup::create(
                     Action::create('accept', 'apply_transition')

@@ -46,7 +46,7 @@ final class OrderGrid implements OrderGridInterface
                 ['criteria' => '$criteria'],
             )
             ->addOrderBy('number', 'desc')
-            ->addField(
+            ->withFields(
                 TwigField::create('number', '@SyliusAdmin/shared/grid/field/order_number.html.twig')
                     ->setLabel('sylius.ui.number')
                     ->setPath('.')
@@ -56,8 +56,6 @@ final class OrderGrid implements OrderGridInterface
                             'th_class' => 'w-1',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('date', '@SyliusAdmin/shared/grid/field/date.html.twig')
                     ->setLabel('sylius.ui.date')
                     ->setPath('checkoutCompletedAt')
@@ -67,8 +65,6 @@ final class OrderGrid implements OrderGridInterface
                             'th_class' => 'w-1 text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('customer', '@SyliusAdmin/shared/grid/field/customer.html.twig')
                     ->setLabel('sylius.ui.customer')
                     ->setSortable(true, 'customer.lastName')
@@ -77,28 +73,18 @@ final class OrderGrid implements OrderGridInterface
                             'th_class' => 'w-100',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('channel', '@SyliusAdmin/shared/grid/field/channel.html.twig')
                     ->setLabel('sylius.ui.channel')
                     ->setSortable(true, 'channel.code'),
-            )
-            ->addField(
                 TwigField::create('state', '@SyliusAdmin/order/grid/field/order_state.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('paymentState', '@SyliusAdmin/order/grid/field/payment_state.html.twig')
                     ->setLabel('sylius.ui.payment_state')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('shippingState', '@SyliusAdmin/order/grid/field/shipping_state.html.twig')
                     ->setLabel('sylius.ui.shipping_state')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('total', '@SyliusAdmin/order/grid/field/order_total.html.twig')
                     ->setLabel('sylius.ui.total')
                     ->setPath('.')
@@ -109,23 +95,18 @@ final class OrderGrid implements OrderGridInterface
                             'td_class' => 'text-end',
                         ],
                     ]),
-            )
-            ->addField(
                 StringField::create('currencyCode')
                     ->setLabel('sylius.ui.currency')
                     ->setSortable(true),
             )
 
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 SelectFilter::create('state', [
                     'sylius.ui.cancelled' => 'cancelled',
                     'sylius.ui.new' => 'new',
                     'sylius.ui.fulfilled' => 'fulfilled',
                 ])
                     ->setLabel('sylius.ui.state'),
-            )
-            ->addFilter(
                 Filter::create('product', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.product')
                     ->setFormOptions([
@@ -136,8 +117,6 @@ final class OrderGrid implements OrderGridInterface
                             'choice_label' => 'name',
                         ],
                     ]),
-            )
-            ->addFilter(
                 Filter::create('variant', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.variant')
                     ->setFormOptions([
@@ -148,15 +127,11 @@ final class OrderGrid implements OrderGridInterface
                             'choice_label' => 'descriptor',
                         ],
                     ]),
-            )
-            ->addFilter(
                 Filter::create('number', 'string')
                     ->setLabel('sylius.ui.number')
                     ->setFormOptions([
                         'type' => StringFilter::TYPE_CONTAINS,
                     ]),
-            )
-            ->addFilter(
                 Filter::create('customer', 'ux_autocomplete')
                     ->setLabel('sylius.ui.customer')
                     ->setFormOptions([
@@ -165,16 +140,12 @@ final class OrderGrid implements OrderGridInterface
                             'choice_label' => 'fullname',
                         ],
                     ]),
-            )
-            ->addFilter(
                 Filter::create('date', 'date')
                     ->setLabel('sylius.ui.date')
                     ->setOptions([
                         'field' => 'checkoutCompletedAt',
                         'inclusive_to' => true,
                     ]),
-            )
-            ->addFilter(
                 Filter::create('channel', 'ux_autocomplete')
                     ->setLabel('sylius.ui.channel')
                     ->setFormOptions([
@@ -183,15 +154,11 @@ final class OrderGrid implements OrderGridInterface
                             'choice_label' => 'name',
                         ],
                     ]),
-            )
-            ->addFilter(
                 Filter::create('total', 'money')
                     ->setLabel('sylius.ui.total')
                     ->setOptions([
                         'currency_field' => 'currencyCode',
                     ]),
-            )
-            ->addFilter(
                 Filter::create('shipping_method', 'ux_translatable_autocomplete')
                     ->setLabel('sylius.ui.shipping_method')
                     ->setOptions([

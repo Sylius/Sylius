@@ -53,8 +53,7 @@ final class ProductAttributeGrid implements ProductAttributeGridInterface
             ->setLimits([10, 25, 50])
             ->addOrderBy('position', 'asc')
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->withOptions([
@@ -62,8 +61,6 @@ final class ProductAttributeGrid implements ProductAttributeGridInterface
                             'th_class' => 'w-75',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true)
@@ -72,18 +69,12 @@ final class ProductAttributeGrid implements ProductAttributeGridInterface
                             'th_class' => 'w-25',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('type', '@SyliusUi/grid/field/label.html.twig')
                     ->setLabel('sylius.ui.type')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('translatable', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.translatable')
                     ->setSortable(true),
-            )
-            ->addField(
                 TwigField::create('position', '@SyliusUi/grid/field/position.html.twig')
                     ->setLabel('sylius.ui.position')
                     ->setSortable(true)
@@ -95,13 +86,10 @@ final class ProductAttributeGrid implements ProductAttributeGridInterface
                     ]),
             )
 
-            // -- Filter
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['translations.name', 'code'])
                     ->setLabel('sylius.ui.search')
                     ->setFormOptions(['type' => StringFilter::TYPE_CONTAINS]),
-            )
-            ->addFilter(
                 SelectFilter::create('type', [
                     'sylius.ui.checkbox' => CheckboxAttributeType::TYPE,
                     'sylius.ui.date' => DateAttributeType::TYPE,
@@ -116,13 +104,10 @@ final class ProductAttributeGrid implements ProductAttributeGridInterface
                     ->setLabel('sylius.ui.type')
                     ->addFormOption('multiple', true)
                     ->addFormOption('autocomplete', true),
-            )
-            ->addFilter(
                 Filter::create('translatable', 'boolean')
                     ->setLabel('sylius.ui.translatable'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     Action::create('create', 'create_product_attribute'),

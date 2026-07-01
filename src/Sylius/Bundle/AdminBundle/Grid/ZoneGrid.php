@@ -39,8 +39,7 @@ final class ZoneGrid implements ZoneGridInterface
             ->setLimits([10, 25, 50])
             ->addOrderBy('priority', 'desc')
 
-            // -- Fields
-            ->addField(
+            ->withFields(
                 TwigField::create('priority', '@SyliusAdmin/zone/grid/field/priority.html.twig')
                     ->setLabel('sylius.ui.priority')
                     ->setSortable(true)
@@ -50,31 +49,21 @@ final class ZoneGrid implements ZoneGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name'),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code'),
-            )
-            ->addField(
                 TwigField::create('type', '@SyliusAdmin/zone/grid/field/type.html.twig')
                     ->setLabel('sylius.ui.type'),
             )
 
-            // --- Filters
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('name')
                     ->setLabel('sylius.ui.name'),
-            )
-            ->addFilter(
                 StringFilter::create('code')
                 ->setLabel('sylius.ui.code'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     Action::create('create', 'links')

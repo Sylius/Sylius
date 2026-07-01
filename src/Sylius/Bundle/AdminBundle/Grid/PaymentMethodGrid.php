@@ -43,8 +43,7 @@ final class PaymentMethodGrid implements PaymentMethodGridInterface
             ->addOrderBy('position', 'asc')
             ->setLimits([10, 25, 50])
 
-            // -- Actions
-            ->addField(
+            ->withFields(
                 TwigField::create('position', '@SyliusUi/grid/field/position.html.twig')
                     ->setLabel('sylius.ui.position')
                     ->setSortable(true)
@@ -54,24 +53,16 @@ final class PaymentMethodGrid implements PaymentMethodGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-            )
-            ->addField(
                 TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
                     ->setLabel('sylius.ui.name')
                     ->setSortable(true, 'translation.name'),
-            )
-            ->addField(
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
                     ->setSortable(true, 'code'),
-            )
-            ->addField(
                 TwigField::create('gateway', '@SyliusUi/grid/field/humanized.html.twig')
                     ->setLabel('sylius.ui.gateway')
                     ->setPath('gatewayConfig.factoryName')
                     ->setSortable(true, 'gatewayConfig.factoryName'),
-            )
-            ->addField(
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
@@ -82,18 +73,14 @@ final class PaymentMethodGrid implements PaymentMethodGridInterface
                         ],
                     ]),
             )
-            // -- Filters
-            ->addFilter(
+            ->withFilters(
                 StringFilter::create('search', ['code', 'translation.name'])
                     ->setLabel('sylius.ui.search')
                     ->setFormOptions(['type' => StringFilter::TYPE_CONTAINS]),
-            )
-            ->addFilter(
                 Filter::create('enabled', 'boolean')
                     ->setLabel('sylius.ui.enabled'),
             )
 
-            // -- Actions
             ->addActionGroup(
                 MainActionGroup::create(
                     Action::create('create', 'create_payment_method'),
