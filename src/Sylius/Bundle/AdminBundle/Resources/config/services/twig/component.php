@@ -26,7 +26,6 @@ use Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType;
 use Sylius\Bundle\AdminBundle\Form\Type\ProductAssociationTypeType;
 use Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType;
 use Sylius\Bundle\AdminBundle\Form\Type\ProductReviewType;
-use Sylius\Bundle\AdminBundle\Form\Type\PromotionType;
 use Sylius\Bundle\AdminBundle\Form\Type\ShippingCategoryType;
 use Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType;
 use Sylius\Bundle\AdminBundle\Form\Type\TaxCategoryType;
@@ -181,17 +180,6 @@ return static function (ContainerConfigurator $container) {
             ProductReviewType::class,
         ])
         ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:product_review:form'])
-    ;
-
-    $services
-        ->set('sylius_admin.twig.component.promotion.form', ResourceFormComponent::class)
-        ->args([
-            service('sylius.repository.promotion'),
-            service('form.factory'),
-            '%sylius.model.promotion.class%',
-            PromotionType::class,
-        ])
-        ->tag('sylius.live_component.admin', ['key' => 'sylius_admin:promotion:form'])
     ;
 
     $services
