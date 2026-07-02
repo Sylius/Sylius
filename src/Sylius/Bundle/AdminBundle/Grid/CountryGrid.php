@@ -15,8 +15,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
@@ -62,15 +60,11 @@ final class CountryGrid implements CountryGridInterface
                     ->setLabel('sylius.ui.enabled'),
             )
 
-            ->addActionGroup(
-                MainActionGroup::create(
-                    CreateAction::create(),
-                ),
+            ->withMainActions(
+                CreateAction::create(),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    UpdateAction::create(),
-                ),
+            ->withItemActions(
+                UpdateAction::create(),
             );
     }
 }

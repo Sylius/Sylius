@@ -16,8 +16,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
@@ -102,46 +100,43 @@ final class ProductReviewGrid implements ProductReviewGridInterface
                     ->addOption('fields', ['reviewSubject.id']),
             )
 
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    Action::create('accept', 'apply_transition')
-                        ->setLabel('sylius.ui.accept')
-                        ->setIcon('tabler:check')
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_product_review_accept',
-                                'parameters' => [
-                                    'id' => 'resource.id',
-                                ],
+            ->withItemActions(
+                Action::create('accept', 'apply_transition')
+                    ->setLabel('sylius.ui.accept')
+                    ->setIcon('tabler:check')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_product_review_accept',
+                            'parameters' => [
+                                'id' => 'resource.id',
                             ],
-                            'class' => 'btn-success btn-icon',
-                            'show_disabled' => false,
-                            'transition' => 'accept',
-                            'graph' => 'sylius_product_review',
-                        ]),
-                    Action::create('reject', 'apply_transition')
-                        ->setLabel('sylius.ui.reject')
-                        ->setIcon('tabler:x')
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_product_review_reject',
-                                'parameters' => [
-                                    'id' => 'resource.id',
-                                ],
+                        ],
+                        'class' => 'btn-success btn-icon',
+                        'show_disabled' => false,
+                        'transition' => 'accept',
+                        'graph' => 'sylius_product_review',
+                    ]),
+                Action::create('reject', 'apply_transition')
+                    ->setLabel('sylius.ui.reject')
+                    ->setIcon('tabler:x')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_product_review_reject',
+                            'parameters' => [
+                                'id' => 'resource.id',
                             ],
-                            'class' => 'btn-warning btn-icon',
-                            'show_disabled' => false,
-                            'transition' => 'reject',
-                            'graph' => 'sylius_product_review',
-                        ]),
-                    UpdateAction::create(),
-                    DeleteAction::create(),
-                ),
+                        ],
+                        'class' => 'btn-warning btn-icon',
+                        'show_disabled' => false,
+                        'transition' => 'reject',
+                        'graph' => 'sylius_product_review',
+                    ]),
+                UpdateAction::create(),
+                DeleteAction::create(),
             )
-            ->addActionGroup(
-                BulkActionGroup::create(
-                    DeleteAction::create(),
-                ),
-            );
+            ->withBulkActions(
+                DeleteAction::create(),
+            )
+        ;
     }
 }

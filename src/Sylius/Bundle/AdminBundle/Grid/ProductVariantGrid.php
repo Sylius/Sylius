@@ -18,9 +18,6 @@ use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
 use Sylius\Bundle\GridBundle\Builder\ActionGroup\ActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
@@ -87,53 +84,47 @@ final class ProductVariantGrid implements ProductVariantGridInterface
                         ],
                     ]),
             )
-            ->addActionGroup(
-                MainActionGroup::create(
-                    Action::create('generate', 'generate_variants')
-                        ->setOptions([
-                            'product' => 'expr:service(\'sylius.repository.product\').find($productId)',
-                        ]),
-                    Action::create('update_positions', 'update_product_variant_positions'),
-                    CreateAction::create()
-                        ->setOptions([
-                            'link' => [
-                                'parameters' => [
-                                    'productId' => '$productId',
-                                ],
+            ->withMainActions(
+                Action::create('generate', 'generate_variants')
+                    ->setOptions([
+                        'product' => 'expr:service(\'sylius.repository.product\').find($productId)',
+                    ]),
+                Action::create('update_positions', 'update_product_variant_positions'),
+                CreateAction::create()
+                    ->setOptions([
+                        'link' => [
+                            'parameters' => [
+                                'productId' => '$productId',
                             ],
-                        ]),
-                ),
+                        ],
+                    ]),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    UpdateAction::create([
-                        'link' => [
-                            'parameters' => [
-                                'id' => 'resource.id',
-                                'productId' => '$productId',
-                            ],
+            ->withItemActions(
+                UpdateAction::create([
+                    'link' => [
+                        'parameters' => [
+                            'id' => 'resource.id',
+                            'productId' => '$productId',
                         ],
-                    ]),
-                    DeleteAction::create([
-                        'link' => [
-                            'parameters' => [
-                                'id' => 'resource.id',
-                                'productId' => '$productId',
-                            ],
+                    ],
+                ]),
+                DeleteAction::create([
+                    'link' => [
+                        'parameters' => [
+                            'id' => 'resource.id',
+                            'productId' => '$productId',
                         ],
-                    ]),
-                ),
+                    ],
+                ]),
             )
-            ->addActionGroup(
-                BulkActionGroup::create(
-                    DeleteAction::create([
-                        'link' => [
-                            'parameters' => [
-                                'productId' => '$productId',
-                            ],
+            ->withBulkActions(
+                DeleteAction::create([
+                    'link' => [
+                        'parameters' => [
+                            'productId' => '$productId',
                         ],
-                    ]),
-                ),
+                    ],
+                ]),
             )
             ->addActionGroup(
                 ActionGroup::create(

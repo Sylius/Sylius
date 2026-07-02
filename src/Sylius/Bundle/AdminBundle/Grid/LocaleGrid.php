@@ -15,8 +15,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
@@ -48,15 +46,11 @@ final class LocaleGrid implements LocaleGridInterface
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
             )
-            ->addActionGroup(
-                MainActionGroup::create(
-                    CreateAction::create(),
-                ),
+            ->withMainActions(
+                CreateAction::create(),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    DeleteAction::create(),
-                ),
+            ->withItemActions(
+                DeleteAction::create(),
             );
     }
 }

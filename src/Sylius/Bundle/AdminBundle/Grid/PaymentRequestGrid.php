@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
@@ -103,20 +102,17 @@ final class PaymentRequestGrid implements PaymentRequestGridInterface
                     ->setLabel('sylius.ui.state'),
             )
 
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    ShowAction::create()
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_payment_request_show',
-                                'parameters' => [
-                                    'hash' => 'resource.hash',
-                                    'paymentId' => 'resource.payment.id',
-                                ],
+            ->withItemActions(
+                ShowAction::create()
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_payment_request_show',
+                            'parameters' => [
+                                'hash' => 'resource.hash',
+                                'paymentId' => 'resource.payment.id',
                             ],
-                        ]),
-                ),
-            )
-        ;
+                        ],
+                    ]),
+            );
     }
 }

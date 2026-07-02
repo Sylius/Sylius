@@ -16,10 +16,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\SubItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\BooleanFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
@@ -105,8 +101,8 @@ final class ProductGrid implements ProductGridInterface
                     ->addOption('fields', ['mainTaxon.id']),
             )
 
-            ->addActionGroup(
-                MainActionGroup::create(Action::create('create', 'links')
+            ->withMainActions(
+                Action::create('create', 'links')
                     ->setLabel('sylius.ui.create')
                     ->setOptions([
                         'class' => 'primary',
@@ -125,53 +121,48 @@ final class ProductGrid implements ProductGridInterface
                                 'route' => 'sylius_admin_product_create',
                             ],
                         ],
-                    ])),
+                    ]),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    Action::create('details', 'show')
-                        ->setLabel('sylius.ui.details'),
-                    UpdateAction::create(),
-                    DeleteAction::create(),
-                ),
+            ->withItemActions(
+                Action::create('details', 'show')
+                    ->setLabel('sylius.ui.details'),
+                UpdateAction::create(),
+                DeleteAction::create(),
             )
-            ->addActionGroup(
-                SubItemActionGroup::create(
-                    Action::create('variants', 'list')
-                        ->setLabel('sylius.ui.variants')
-                        ->setOptions([
-                            'links' => [
-                                'index' => [
-                                    'label' => 'sylius.ui.list_variants',
-                                    'route' => 'sylius_admin_product_variant_index',
-                                    'parameters' => [
-                                        'productId' => 'resource.id',
-                                    ],
-                                ],
-                                'create' => [
-                                    'label' => 'sylius.ui.create',
-                                    'route' => 'sylius_admin_product_variant_create',
-                                    'parameters' => [
-                                        'productId' => 'resource.id',
-                                    ],
-                                ],
-                                'generate' => [
-                                    'label' => 'sylius.ui.generate',
-                                    'route' => 'sylius_admin_product_variant_generate',
-                                    'visible' => 'resource.hasOptions',
-                                    'parameters' => [
-                                        'productId' => 'resource.id',
-                                    ],
+            ->withSubItemActions(
+                Action::create('variants', 'list')
+                    ->setLabel('sylius.ui.variants')
+                    ->setOptions([
+                        'links' => [
+                            'index' => [
+                                'label' => 'sylius.ui.list_variants',
+                                'route' => 'sylius_admin_product_variant_index',
+                                'parameters' => [
+                                    'productId' => 'resource.id',
                                 ],
                             ],
-                        ]),
-                ),
+                            'create' => [
+                                'label' => 'sylius.ui.create',
+                                'route' => 'sylius_admin_product_variant_create',
+                                'parameters' => [
+                                    'productId' => 'resource.id',
+                                ],
+                            ],
+                            'generate' => [
+                                'label' => 'sylius.ui.generate',
+                                'route' => 'sylius_admin_product_variant_generate',
+                                'visible' => 'resource.hasOptions',
+                                'parameters' => [
+                                    'productId' => 'resource.id',
+                                ],
+                            ],
+                        ],
+                    ]),
             )
-            ->addActionGroup(
-                BulkActionGroup::create(
-                    DeleteAction::create(),
-                ),
-            );
+            ->withBulkActions(
+                DeleteAction::create(),
+            )
+        ;
     }
 
     public function getResourceClass(): string

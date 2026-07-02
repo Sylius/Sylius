@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
@@ -64,56 +61,51 @@ final class ZoneGrid implements ZoneGridInterface
                 ->setLabel('sylius.ui.code'),
             )
 
-            ->addActionGroup(
-                MainActionGroup::create(
-                    Action::create('create', 'links')
-                        ->setLabel('sylius.ui.create')
-                        ->setOptions([
-                            'class' => 'primary',
-                            'icon' => 'tabler:plus',
-                            'header' => [
-                                'icon' => 'tabler:cube',
-                                'label' => 'sylius.ui.type',
-                            ],
-                            'links' => [
-                                'country' => [
-                                    'label' => 'sylius.ui.zone_consisting_of_countries',
-                                    'icon' => 'tabler:plus',
-                                    'route' => 'sylius_admin_zone_create',
-                                    'parameters' => [
-                                        'type' => 'country',
-                                    ],
-                                ],
-                                'province' => [
-                                    'label' => 'sylius.ui.zone_consisting_of_provinces',
-                                    'icon' => 'tabler:plus',
-                                    'route' => 'sylius_admin_zone_create',
-                                    'parameters' => [
-                                        'type' => 'province',
-                                    ],
-                                ],
-                                'zone' => [
-                                    'label' => 'sylius.ui.zone_consisting_of_other_zones',
-                                    'icon' => 'tabler:plus',
-                                    'route' => 'sylius_admin_zone_create',
-                                    'parameters' => [
-                                        'type' => 'zone',
-                                    ],
+            ->withMainActions(
+                Action::create('create', 'links')
+                    ->setLabel('sylius.ui.create')
+                    ->setOptions([
+                        'class' => 'primary',
+                        'icon' => 'tabler:plus',
+                        'header' => [
+                            'icon' => 'tabler:cube',
+                            'label' => 'sylius.ui.type',
+                        ],
+                        'links' => [
+                            'country' => [
+                                'label' => 'sylius.ui.zone_consisting_of_countries',
+                                'icon' => 'tabler:plus',
+                                'route' => 'sylius_admin_zone_create',
+                                'parameters' => [
+                                    'type' => 'country',
                                 ],
                             ],
-                        ]),
-                ),
+                            'province' => [
+                                'label' => 'sylius.ui.zone_consisting_of_provinces',
+                                'icon' => 'tabler:plus',
+                                'route' => 'sylius_admin_zone_create',
+                                'parameters' => [
+                                    'type' => 'province',
+                                ],
+                            ],
+                            'zone' => [
+                                'label' => 'sylius.ui.zone_consisting_of_other_zones',
+                                'icon' => 'tabler:plus',
+                                'route' => 'sylius_admin_zone_create',
+                                'parameters' => [
+                                    'type' => 'zone',
+                                ],
+                            ],
+                        ],
+                    ]),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    UpdateAction::create(),
-                    DeleteAction::create(),
-                ),
+            ->withItemActions(
+                UpdateAction::create(),
+                DeleteAction::create(),
             )
-            ->addActionGroup(
-                BulkActionGroup::create(
-                    DeleteAction::create(),
-                ),
-            );
+            ->withBulkActions(
+                DeleteAction::create(),
+            )
+        ;
     }
 }

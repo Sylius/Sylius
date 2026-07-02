@@ -17,8 +17,6 @@ use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
@@ -92,14 +90,11 @@ final class CustomerGrid implements CustomerGridInterface
                     'fields' => ['group.id'],
                 ]),
             )
-            ->addActionGroup(
-                MainActionGroup::create(
-                    CreateAction::create(),
-                ),
+            ->withMainActions(
+                CreateAction::create(),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    Action::create('show_orders', 'show')
+            ->withItemActions(
+                Action::create('show_orders', 'show')
                     ->setLabel('sylius.ui.show_orders')
                     ->setIcon('tabler:shopping-bag')
                     ->setOptions([
@@ -108,9 +103,8 @@ final class CustomerGrid implements CustomerGridInterface
                             'parameters' => ['id' => 'resource.id'],
                         ],
                     ]),
-                    ShowAction::create(),
-                    UpdateAction::create(),
-                ),
+                ShowAction::create(),
+                UpdateAction::create(),
             );
     }
 }

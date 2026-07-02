@@ -16,9 +16,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
@@ -108,21 +105,16 @@ final class ProductAttributeGrid implements ProductAttributeGridInterface
                     ->setLabel('sylius.ui.translatable'),
             )
 
-            ->addActionGroup(
-                MainActionGroup::create(
-                    Action::create('create', 'create_product_attribute'),
-                ),
+            ->withMainActions(
+                Action::create('create', 'create_product_attribute'),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    UpdateAction::create(),
-                    DeleteAction::create(),
-                ),
+            ->withItemActions(
+                UpdateAction::create(),
+                DeleteAction::create(),
             )
-            ->addActionGroup(
-                BulkActionGroup::create(
-                    DeleteAction::create(),
-                ),
-            );
+            ->withBulkActions(
+                DeleteAction::create(),
+            )
+        ;
     }
 }
