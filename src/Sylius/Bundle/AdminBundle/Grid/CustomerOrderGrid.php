@@ -18,18 +18,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.order.class%', name: self::NAME)]
 final class CustomerOrderGrid implements CustomerOrderGridInterface
 {
-    public function __construct(
-        private readonly string $orderClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->orderClass)
             ->setRepositoryMethod('createByCustomerIdCriteriaAwareQueryBuilder', [
                 'criteria' => null,
                 'customerId' => '$id',

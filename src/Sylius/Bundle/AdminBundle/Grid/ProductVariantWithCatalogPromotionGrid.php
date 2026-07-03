@@ -22,11 +22,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.product_variant.class%', name: self::NAME)]
 final class ProductVariantWithCatalogPromotionGrid implements ProductVariantWithCatalogPromotionGridInterface
 {
     public function __construct(
-        private readonly string $productVariantClass,
         private readonly string $locale,
     ) {
     }
@@ -34,7 +33,6 @@ final class ProductVariantWithCatalogPromotionGrid implements ProductVariantWith
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->productVariantClass)
             ->setLimits([10, 25, 50])
             ->setRepositoryMethod('createCatalogPromotionListQueryBuilder', [
                 $this->locale,

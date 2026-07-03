@@ -20,14 +20,9 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.product.class%', name: self::NAME)]
 final class ProductGrid implements ProductGridInterface
 {
-    public function __construct(
-        private readonly string $productClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
@@ -38,7 +33,6 @@ final class ProductGrid implements ProductGridInterface
                'sorting' => "expr:service('request_stack').getCurrentRequest().query.all('sorting')",
                'includeAllDescendants' => "expr:parameter('sylius_shop.product_grid.include_all_descendants')",
             ])
-            ->setDriverOption('class', $this->productClass)
             ->orderBy('position', 'asc')
             ->setLimits([
                 9,

@@ -23,18 +23,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.admin_user.class%', name: self::NAME)]
 final class AdminUserGrid implements AdminUserGridInterface
 {
-    public function __construct(
-        private readonly string $adminUserClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->adminUserClass)
             ->addOrderBy('createdAt', 'desc')
             ->setLimits([10, 25, 50])
             ->withFields(

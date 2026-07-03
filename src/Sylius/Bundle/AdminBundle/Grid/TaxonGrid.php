@@ -17,18 +17,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.taxon.class%', name: self::NAME)]
 final class TaxonGrid implements TaxonGridInterface
 {
-    public function __construct(
-        private readonly string $taxonClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->taxonClass)
             ->setRepositoryMethod('createListQueryBuilder')
             ->setLimits([10, 25, 50])
 

@@ -20,11 +20,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.product_variant.class%', name: self::NAME)]
 final class InventoryGrid implements InventoryGridInterface
 {
     public function __construct(
-        private readonly string $productVariantClass,
         private readonly string $productClass,
     ) {
     }
@@ -32,7 +31,6 @@ final class InventoryGrid implements InventoryGridInterface
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->productVariantClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('name', 'asc')
             ->setRepositoryMethod('createInventoryListQueryBuilder', [

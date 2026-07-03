@@ -24,18 +24,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.product_variant.class%', name: self::NAME)]
 final class ProductVariantGrid implements ProductVariantGridInterface
 {
-    public function __construct(
-        private readonly string $productVariantClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->productVariantClass)
             ->setLimits([10, 25, 50])
             ->setRepositoryMethod('createQueryBuilderByProductId', [
                 'expr:service(\'sylius.context.locale\').getLocaleCode()',

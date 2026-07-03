@@ -27,11 +27,10 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 use Sylius\Component\Promotion\Model\CatalogPromotionStates;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.catalog_promotion.class%', name: self::NAME)]
 final class CatalogPromotionGrid implements CatalogPromotionGridInterface
 {
     public function __construct(
-        private readonly string $catalogPromotionClass,
         private readonly string $channelClass,
     ) {
     }
@@ -39,7 +38,6 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->catalogPromotionClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
 

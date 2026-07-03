@@ -24,18 +24,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.promotion_coupon.class%', name: self::NAME)]
 final class PromotionCouponGrid implements PromotionCouponGridInterface
 {
-    public function __construct(
-        private readonly string $promotionCouponClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->promotionCouponClass)
             ->setLimits([10, 25, 50])
             ->orderBy('used', 'desc')
             ->setRepositoryMethod('createQueryBuilderByPromotionId', [

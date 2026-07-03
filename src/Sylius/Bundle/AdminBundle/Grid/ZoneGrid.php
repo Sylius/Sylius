@@ -21,18 +21,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.zone.class%', name: self::NAME)]
 final class ZoneGrid implements ZoneGridInterface
 {
-    public function __construct(
-        private readonly string $resourceClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->resourceClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('priority', 'desc')
 

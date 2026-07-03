@@ -22,18 +22,16 @@ use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.payment_request.class%', name: self::NAME)]
 final class PaymentRequestGrid implements PaymentRequestGridInterface
 {
     public function __construct(
-        private readonly string $paymentRequestClass,
         private readonly string $paymentMethodClass,
     ) {
     }
 
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
-        $gridBuilder->setDriverOption('class', $this->paymentRequestClass);
         $gridBuilder->setRepositoryMethod('createQueryBuilderForPayment', [
             'paymentId' => '$paymentId',
         ]);

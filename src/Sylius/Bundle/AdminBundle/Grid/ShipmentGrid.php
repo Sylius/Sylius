@@ -21,11 +21,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.shipment.class%', name: self::NAME)]
 final class ShipmentGrid implements ShipmentGridInterface
 {
     public function __construct(
-        private readonly string $shipmentClass,
         private readonly string $channelClass,
         private readonly string $shippingMethodClass,
     ) {
@@ -34,7 +33,6 @@ final class ShipmentGrid implements ShipmentGridInterface
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->shipmentClass)
             ->setLimits([10, 25, 50])
             ->setRepositoryMethod('createListQueryBuilder')
             ->addOrderBy('createdAt', 'desc')

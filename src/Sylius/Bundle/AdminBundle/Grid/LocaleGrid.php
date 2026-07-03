@@ -20,18 +20,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.locale.class%', name: self::NAME)]
 final class LocaleGrid implements LocaleGridInterface
 {
-    public function __construct(
-        private readonly string $localeClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->localeClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('code', 'asc')
             ->withFields(
