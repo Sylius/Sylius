@@ -35,18 +35,12 @@ use Sylius\Component\Attribute\AttributeType\TextareaAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.product_attribute.class%', name: self::NAME)]
 final class ProductAttributeGrid implements ProductAttributeGridInterface
 {
-    public function __construct(
-        private readonly string $productAttributeClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->productAttributeClass)
             ->setRepositoryMethod('createListQueryBuilder', [
                 "expr:service('sylius.context.locale').getLocaleCode()",
             ])

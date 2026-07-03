@@ -97,9 +97,6 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services->set('sylius_admin.grid.admin_user', AdminUserGrid::class)
-        ->args([
-            '%sylius.model.admin_user.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
 
@@ -107,7 +104,6 @@ return static function (ContainerConfigurator $container) {
 
     $services->set('sylius_admin.grid.catalog_promotion', CatalogPromotionGrid::class)
         ->args([
-            '%sylius.model.catalog_promotion.class%',
             '%sylius.model.channel.class%',
         ])
         ->tag('sylius.invokable_grid')
@@ -115,24 +111,17 @@ return static function (ContainerConfigurator $container) {
     $services->alias(CatalogPromotionGridInterface::class, 'sylius_admin.grid.catalog_promotion');
 
     $services->set('sylius_admin.grid.channel', ChannelGrid::class)
-        ->args([
-            '%sylius.model.channel.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(ChannelGridInterface::class, 'sylius_admin.grid.channel');
 
     $services->set('sylius_admin.grid.currency', CurrencyGrid::class)
-        ->args([
-            '%sylius.model.currency.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(CurrencyGridInterface::class, 'sylius_admin.grid.currency');
 
     $services->set('sylius_admin.grid.customer', CustomerGrid::class)
         ->args([
-            '%sylius.model.customer.class%',
             '%sylius.model.customer_group.class%',
         ])
         ->tag('sylius.invokable_grid')
@@ -140,24 +129,17 @@ return static function (ContainerConfigurator $container) {
     $services->alias(CustomerGridInterface::class, 'sylius_admin.grid.customer');
 
     $services->set('sylius_admin.grid.customer_group', CustomerGroupGrid::class)
-        ->args([
-            '%sylius.model.customer_group.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(CustomerGroupGridInterface::class, 'sylius_admin.grid.customer_group');
 
     $services->set('sylius_admin.grid.locale', LocaleGrid::class)
-        ->args([
-            '%sylius.model.locale.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(LocaleGridInterface::class, 'sylius_admin.grid.locale');
 
     $services->set('sylius_admin.grid.inventory', InventoryGrid::class)
         ->args([
-            '%sylius.model.product_variant.class%',
             '%sylius.model.product.class%',
         ])
         ->tag('sylius.invokable_grid')
@@ -165,32 +147,22 @@ return static function (ContainerConfigurator $container) {
     $services->alias(InventoryGridInterface::class, 'sylius_admin.grid.inventory');
 
     $services->set('sylius_admin.grid.payment_method', PaymentMethodGrid::class)
-        ->args([
-            '%sylius.model.payment_method.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(PaymentMethodGridInterface::class, 'sylius_admin.grid.payment_method');
 
     $services->set('sylius_admin.grid.product_association_type', ProductAssociationTypeGrid::class)
-        ->args([
-            '%sylius.model.product_association_type.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(ProductAssociationTypeGridInterface::class, 'sylius_admin.grid.product_association_type');
 
     $services->set('syllabus_admin.grid.taxon', TaxonGrid::class)
-        ->args([
-            '%sylius.model.taxon.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(TaxonGridInterface::class, 'sylius_admin.grid.taxon');
 
     $services->set('sylius_admin.grid.product_taxon', ProductTaxonGrid::class)
         ->args([
-            '%sylius.model.product_taxon.class%',
             '%sylius.model.channel.class%',
         ])
         ->tag('sylius.invokable_grid')
@@ -208,24 +180,17 @@ return static function (ContainerConfigurator $container) {
     $services->alias(ProductGridInterface::class, 'sylius_admin.grid.product');
 
     $services->set('sylius_admin.grid.product_attribute', ProductAttributeGrid::class)
-        ->args([
-            '%sylius.model.product_attribute.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(ProductAttributeGridInterface::class, 'sylius_admin.grid.product_attribute');
 
     $services->set('sylius_admin.grid.product_variant', ProductVariantGrid::class)
-        ->args([
-            '%sylius.model.product_variant.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(ProductVariantGridInterface::class, 'sylius_admin.grid.product_variant');
 
     $services->set('sylius_admin.grid.product_variant_with_catalog_promotion', ProductVariantWithCatalogPromotionGrid::class)
         ->args([
-            '%sylius.model.product_variant.class%',
             '%locale%',
         ])
         ->tag('sylius.invokable_grid')
@@ -233,16 +198,12 @@ return static function (ContainerConfigurator $container) {
     $services->alias(ProductVariantWithCatalogPromotionGridInterface::class, 'sylius_admin.grid.product_variant_with_catalog_promotion');
 
     $services->set('sylius_admin.grid.country', CountryGrid::class)
-        ->args([
-            '%sylius.model.country.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(CountryGridInterface::class, 'sylius_admin.grid.country');
 
     $services->set('sylius_admin.grid.shipment', ShipmentGrid::class)
         ->args([
-            '%sylius.model.shipment.class%',
             '%sylius.model.channel.class%',
             '%sylius.model.shipping_method.class%',
         ])
@@ -251,57 +212,36 @@ return static function (ContainerConfigurator $container) {
     $services->alias(ShipmentGridInterface::class, 'sylius_admin.grid.shipment');
 
     $services->set('sylius_admin.grid.shipping_category', ShippingCategoryGrid::class)
-        ->args([
-            '%sylius.model.shipping_category.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(ShippingCategoryGridInterface::class, 'sylius_admin.grid.shipping_category');
 
     $services->set('sylius_admin.grid.shipping_method', ShippingMethodGrid::class)
-        ->args([
-            '%sylius.model.shipping_method.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(ShippingMethodGridInterface::class, 'sylius_admin.grid.shipping_method');
 
     $services->set('sylius_admin.grid.tax_category', TaxCategoryGrid::class)
-        ->args([
-            '%sylius.model.tax_category.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(TaxCategoryGridInterface::class, 'sylius_admin.grid.tax_category');
 
     $services->set('sylius_admin.grid.tax_rate', TaxRateGrid::class)
-        ->args([
-            '%sylius.model.tax_rate.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(TaxRateGridInterface::class, 'sylius_admin.grid.tax_rate');
 
     $services->set('sylius_admin.grid.promotion_coupon', PromotionCouponGrid::class)
-        ->args([
-            '%sylius.model.promotion_coupon.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(PromotionCouponGridInterface::class, 'sylius_admin.grid.promotion_coupon');
 
     $services->set('sylius_admin.grid.promotion', PromotionGrid::class)
-        ->args([
-            '%sylius.model.promotion.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(PromotionGridInterface::class, 'sylius_admin.grid.promotion');
 
     $services->set('sylius_admin.grid.zone', ZoneGrid::class)
-        ->args([
-            '%sylius.model.zone.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
 
@@ -309,7 +249,6 @@ return static function (ContainerConfigurator $container) {
 
     $services->set('sylius_admin.grid.payment', PaymentGrid::class)
         ->args([
-            '%sylius.model.payment.class%',
             '%sylius.model.channel.class%',
         ])
         ->tag('sylius.invokable_grid')
@@ -317,16 +256,12 @@ return static function (ContainerConfigurator $container) {
     $services->alias(PaymentGridInterface::class, 'sylius_admin.grid.payment');
 
     $services->set('sylius_admin.grid.customer_order', CustomerOrderGrid::class)
-        ->args([
-            '%sylius.model.order.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(CustomerOrderGridInterface::class, 'sylius_admin.grid.customer_order');
 
     $services->set('sylius_admin.grid.order', OrderGrid::class)
         ->args([
-            '%sylius.model.order.class%',
             '%sylius.model.channel.class%',
             '%sylius.model.customer.class%',
             '%sylius.model.product.class%',
@@ -340,7 +275,6 @@ return static function (ContainerConfigurator $container) {
 
     $services->set('sylius_admin.grid.exchange_rate', ExchangeRateGrid::class)
         ->args([
-            '%sylius.model.exchange_rate.class%',
             '%sylius.model.currency.class%',
         ])
         ->tag('sylius.invokable_grid')
@@ -348,16 +282,12 @@ return static function (ContainerConfigurator $container) {
     $services->alias(ExchangeRateGridInterface::class, 'sylius_admin.grid.exchange_rate');
 
     $services->set('sylius_admin.grid.product_option', ProductOptionGrid::class)
-        ->args([
-            '%sylius.model.product_option.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(ProductOptionGridInterface::class, 'sylius_admin.grid.product_option');
 
     $services->set('sylius_admin.grid.product_review', ProductReviewGrid::class)
         ->args([
-            '%sylius.model.product_review.class%',
             '%sylius.model.product.class%',
         ])
         ->tag('sylius.invokable_grid')
@@ -365,16 +295,12 @@ return static function (ContainerConfigurator $container) {
     $services->alias(ProductReviewGridInterface::class, 'sylius_admin.grid.product_review');
 
     $services->set('sylius_admin.grid.channel_pricing_log_entry', ChannelPricingLogEntryGrid::class)
-        ->args([
-            '%sylius.model.channel_pricing_log_entry.class%',
-        ])
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(ChannelPricingLogEntryGridInterface::class, 'sylius_admin.grid.channel_pricing_log_entry');
 
     $services->set('sylius_admin.grid.payment_request', PaymentRequestGrid::class)
         ->args([
-            '%sylius.model.payment_request.class%',
             '%sylius.model.payment_method.class%',
         ])
         ->tag('sylius.invokable_grid')

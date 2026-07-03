@@ -19,18 +19,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.channel_pricing_log_entry.class%', name: self::NAME)]
 final class ChannelPricingLogEntryGrid implements ChannelPricingLogEntryGridInterface
 {
-    public function __construct(
-        private readonly string $channelPricingLogEntryClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->channelPricingLogEntryClass)
             ->setRepositoryMethod('createByChannelPricingIdListQueryBuilder', [
                 '$channelPricingId',
             ])

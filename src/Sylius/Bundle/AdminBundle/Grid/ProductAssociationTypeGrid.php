@@ -24,18 +24,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.product_association_type.class%', name: self::NAME)]
 final class ProductAssociationTypeGrid implements ProductAssociationTypeGridInterface
 {
-    public function __construct(
-        private readonly string $productAssociationTypeClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->productAssociationTypeClass)
             ->setRepositoryMethod('createListQueryBuilder', [
                 'expr:service(\'sylius.context.locale\').getLocaleCode()',
             ])

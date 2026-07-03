@@ -24,18 +24,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.tax_category.class%', name: self::NAME)]
 final class TaxCategoryGrid implements TaxCategoryGridInterface
 {
-    public function __construct(
-        private readonly string $taxCategoryClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->taxCategoryClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('nameAndDescription', 'asc')
 

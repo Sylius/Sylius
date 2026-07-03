@@ -24,11 +24,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.exchange_rate.class%', name: self::NAME)]
 final class ExchangeRateGrid implements ExchangeRateGridInterface
 {
     public function __construct(
-        private readonly string $exchangeRateClass,
         private readonly string $currencyClass,
     ) {
     }
@@ -36,7 +35,6 @@ final class ExchangeRateGrid implements ExchangeRateGridInterface
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->exchangeRateClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('id', 'desc')
 

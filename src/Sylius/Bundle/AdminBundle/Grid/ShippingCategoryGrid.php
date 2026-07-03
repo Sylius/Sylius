@@ -24,18 +24,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.shipping_category.class%', name: self::NAME)]
 final class ShippingCategoryGrid implements ShippingCategoryGridInterface
 {
-    public function __construct(
-        private readonly string $shippingCategoryClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->shippingCategoryClass)
             ->setLimits([10, 25, 50])
             ->setRepositoryMethod('createListQueryBuilder')
             ->withFields(

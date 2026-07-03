@@ -20,14 +20,9 @@ use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.order.class%', name: self::NAME)]
 final class OrderGrid implements OrderGridInterface
 {
-    public function __construct(
-        private readonly string $orderClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
@@ -35,7 +30,6 @@ final class OrderGrid implements OrderGridInterface
                 "expr:service('sylius.context.customer').getCustomer().getId()",
                 "expr:service('sylius.context.channel').getChannel().getId()",
             ])
-            ->setDriverOption('class', $this->orderClass)
             ->orderBy('checkoutCompletedAt', 'desc')
             ->setLimits([10, 25, 50])
             ->withFields(

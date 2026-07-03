@@ -28,18 +28,12 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.shipping_method.class%', name: self::NAME)]
 final class ShippingMethodGrid implements ShippingMethodGridInterface
 {
-    public function __construct(
-        private readonly string $shippingMethodClass,
-    ) {
-    }
-
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->shippingMethodClass)
             ->setLimits([10, 25, 50])
             ->setRepositoryMethod('createListQueryBuilder', [
                 'expr:service(\'sylius.context.locale\').getLocaleCode()',

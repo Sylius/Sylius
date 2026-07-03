@@ -28,7 +28,7 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.product.class%', name: self::NAME)]
 final class ProductGrid implements ProductGridInterface
 {
     public function __construct(
@@ -41,7 +41,6 @@ final class ProductGrid implements ProductGridInterface
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->productClass)
             ->setRepositoryMethod('createListQueryBuilder', [
                 'expr:service(\'sylius.context.locale\').getLocaleCode()',
             ])

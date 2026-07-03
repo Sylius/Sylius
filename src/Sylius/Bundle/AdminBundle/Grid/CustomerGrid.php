@@ -26,11 +26,10 @@ use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
 use Sylius\Component\Grid\Attribute\AsGrid;
 
-#[AsGrid(name: self::NAME)]
+#[AsGrid(resourceClass: '%sylius.model.customer.class%', name: self::NAME)]
 final class CustomerGrid implements CustomerGridInterface
 {
     public function __construct(
-        private readonly string $customerClass,
         private readonly string $customerGroupClass,
     ) {
     }
@@ -38,7 +37,6 @@ final class CustomerGrid implements CustomerGridInterface
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
-            ->setDriverOption('class', $this->customerClass)
             ->setLimits([10, 25, 50])
             ->addOrderBy('createdAt', 'desc')
             ->withFields(
