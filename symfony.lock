@@ -188,9 +188,6 @@
     "knplabs/knp-menu-bundle": {
         "version": "v3.0.0"
     },
-    "laminas/laminas-code": {
-        "version": "3.5.1"
-    },
     "laminas/laminas-stdlib": {
         "version": "3.3.1"
     },

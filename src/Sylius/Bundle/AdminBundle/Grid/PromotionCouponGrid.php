@@ -17,9 +17,6 @@ use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
@@ -67,59 +64,54 @@ final class PromotionCouponGrid implements PromotionCouponGridInterface
                 Filter::create('code', 'string')
                     ->setLabel('sylius.ui.code'),
             )
-            ->addActionGroup(
-                MainActionGroup::create(
-                    Action::create('generate', 'default')
-                        ->setLabel('sylius.ui.generate')
-                        ->setIcon('tabler:arrows-split')
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_promotion_coupon_generate',
-                                'parameters' => [
-                                    'promotionId' => '$promotionId',
-                                ],
+            ->withMainActions(
+                Action::create('generate', 'default')
+                    ->setLabel('sylius.ui.generate')
+                    ->setIcon('tabler:arrows-split')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_promotion_coupon_generate',
+                            'parameters' => [
+                                'promotionId' => '$promotionId',
                             ],
-                        ]),
-                    CreateAction::create()
-                        ->setOptions([
-                            'link' => [
-                                'parameters' => [
-                                    'promotionId' => '$promotionId',
-                                ],
+                        ],
+                    ]),
+                CreateAction::create()
+                    ->setOptions([
+                        'link' => [
+                            'parameters' => [
+                                'promotionId' => '$promotionId',
                             ],
-                        ]),
-                ),
+                        ],
+                    ]),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    UpdateAction::create([
-                        'link' => [
-                            'parameters' => [
-                                'id' => 'resource.id',
-                                'promotionId' => '$promotionId',
-                            ],
+            ->withItemActions(
+                UpdateAction::create([
+                    'link' => [
+                        'parameters' => [
+                            'id' => 'resource.id',
+                            'promotionId' => '$promotionId',
                         ],
-                    ]),
-                    DeleteAction::create([
-                        'link' => [
-                            'parameters' => [
-                                'id' => 'resource.id',
-                                'promotionId' => '$promotionId',
-                            ],
+                    ],
+                ]),
+                DeleteAction::create([
+                    'link' => [
+                        'parameters' => [
+                            'id' => 'resource.id',
+                            'promotionId' => '$promotionId',
                         ],
-                    ]),
-                ),
+                    ],
+                ]),
             )
-            ->addActionGroup(
-                BulkActionGroup::create(
-                    DeleteAction::create([
-                        'link' => [
-                            'parameters' => [
-                                'promotionId' => '$promotionId',
-                            ],
+            ->withBulkActions(
+                DeleteAction::create([
+                    'link' => [
+                        'parameters' => [
+                            'promotionId' => '$promotionId',
                         ],
-                    ]),
-                ),
-            );
+                    ],
+                ]),
+            )
+        ;
     }
 }

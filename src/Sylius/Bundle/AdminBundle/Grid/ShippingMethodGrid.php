@@ -17,9 +17,6 @@ use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Builder\Action\DeleteAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\BulkActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\ExistsFilter;
@@ -78,22 +75,17 @@ final class ShippingMethodGrid implements ShippingMethodGridInterface
                     ->setLabel('sylius.ui.archival')
                     ->setDefaultValue(false),
             )
-            ->addActionGroup(
-                MainActionGroup::create(
-                    CreateAction::create(),
-                ),
+            ->withMainActions(
+                CreateAction::create(),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    UpdateAction::create(),
-                    DeleteAction::create(),
-                    Action::create('archive', 'archive'),
-                ),
+            ->withItemActions(
+                UpdateAction::create(),
+                DeleteAction::create(),
+                Action::create('archive', 'archive'),
             )
-            ->addActionGroup(
-                BulkActionGroup::create(
-                    DeleteAction::create(),
-                ),
-            );
+            ->withBulkActions(
+                DeleteAction::create(),
+            )
+        ;
     }
 }

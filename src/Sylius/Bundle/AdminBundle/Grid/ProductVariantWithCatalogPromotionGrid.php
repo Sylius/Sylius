@@ -15,7 +15,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
@@ -63,10 +62,9 @@ final class ProductVariantWithCatalogPromotionGrid implements ProductVariantWith
                     ->setLabel('sylius.ui.name'),
             )
 
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    Action::create('show_product', 'show')
-                        ->setOptions([
+            ->withItemActions(
+                Action::create('show_product', 'show')
+                    ->setOptions([
                         'link' => [
                             'route' => 'sylius_admin_product_show',
                             'parameters' => [
@@ -74,16 +72,15 @@ final class ProductVariantWithCatalogPromotionGrid implements ProductVariantWith
                             ],
                         ],
                     ])
-                        ->setLabel('sylius.ui.show_product'),
-                    UpdateAction::create([
-                        'link' => [
-                            'parameters' => [
-                                'id' => 'resource.id',
-                                'productId' => 'resource.product.id',
-                            ],
+                    ->setLabel('sylius.ui.show_product'),
+                UpdateAction::create([
+                    'link' => [
+                        'parameters' => [
+                            'id' => 'resource.id',
+                            'productId' => 'resource.product.id',
                         ],
-                    ]),
-                ),
+                    ],
+                ]),
             );
     }
 }

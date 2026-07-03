@@ -15,7 +15,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\Filter\SelectFilter;
@@ -112,11 +111,9 @@ final class ShipmentGrid implements ShipmentGridInterface
                         ],
                     ]),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    Action::create('ship', 'ship_with_tracking_code'),
-                    ShowAction::create(),
-                ),
+            ->withItemActions(
+                Action::create('ship', 'ship_with_tracking_code'),
+                ShowAction::create(),
             );
     }
 }

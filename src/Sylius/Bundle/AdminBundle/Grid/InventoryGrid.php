@@ -15,7 +15,6 @@ namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
@@ -86,27 +85,25 @@ final class InventoryGrid implements InventoryGridInterface
                         'fields' => ['product.id'],
                     ]),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    Action::create('update_product', 'update')
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_product_update',
-                                'parameters' => [
-                                    'id' => 'resource.product.id',
-                                ],
-                            ],
-                        ])
-                        ->setLabel('sylius.ui.edit_product'),
-                    UpdateAction::create([
+            ->withItemActions(
+                Action::create('update_product', 'update')
+                    ->setOptions([
                         'link' => [
+                            'route' => 'sylius_admin_product_update',
                             'parameters' => [
-                                'id' => 'resource.id',
-                                'productId' => 'resource.product.id',
+                                'id' => 'resource.product.id',
                             ],
                         ],
-                    ]),
-                ),
+                    ])
+                    ->setLabel('sylius.ui.edit_product'),
+                UpdateAction::create([
+                    'link' => [
+                        'parameters' => [
+                            'id' => 'resource.id',
+                            'productId' => 'resource.product.id',
+                        ],
+                    ],
+                ]),
             );
     }
 }

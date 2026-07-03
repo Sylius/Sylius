@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
@@ -97,34 +96,32 @@ final class PaymentGrid implements PaymentGridInterface
                         'class' => $this->channelClass,
                     ]),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    Action::create('list_payment_requests', 'show')
-                        ->setIcon('tabler:list-letters')
-                        ->setLabel('sylius.ui.list_payment_requests')
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_payment_request_index',
-                                'parameters' => [
-                                    'paymentId' => 'resource.id',
-                                ],
+            ->withItemActions(
+                Action::create('list_payment_requests', 'show')
+                    ->setIcon('tabler:list-letters')
+                    ->setLabel('sylius.ui.list_payment_requests')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_payment_request_index',
+                            'parameters' => [
+                                'paymentId' => 'resource.id',
                             ],
-                        ]),
-                    Action::create('complete', 'apply_transition')
-                        ->setLabel('sylius.ui.complete')
-                        ->setIcon('tabler:credit-card-pay')
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_payment_complete',
-                                'parameters' => [
-                                    'id' => 'resource.id',
-                                ],
+                        ],
+                    ]),
+                Action::create('complete', 'apply_transition')
+                    ->setLabel('sylius.ui.complete')
+                    ->setIcon('tabler:credit-card-pay')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_payment_complete',
+                            'parameters' => [
+                                'id' => 'resource.id',
                             ],
-                            'class' => 'teal',
-                            'transition' => 'complete',
-                            'graph' => 'sylius_payment',
-                        ]),
-                ),
+                        ],
+                        'class' => 'teal',
+                        'transition' => 'complete',
+                        'graph' => 'sylius_payment',
+                    ]),
             );
     }
 }

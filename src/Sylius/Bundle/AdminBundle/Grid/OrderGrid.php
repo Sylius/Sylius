@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Grid;
 
 use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\StringField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
@@ -174,10 +173,8 @@ final class OrderGrid implements OrderGridInterface
                         ],
                     ]),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    ShowAction::create(),
-                ),
+            ->withItemActions(
+                ShowAction::create(),
             );
     }
 }

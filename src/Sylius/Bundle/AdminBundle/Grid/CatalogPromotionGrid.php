@@ -17,8 +17,6 @@ use Sylius\Bundle\GridBundle\Builder\Action\Action;
 use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
 use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
 use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\ItemActionGroup;
-use Sylius\Bundle\GridBundle\Builder\ActionGroup\MainActionGroup;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\Filter\BooleanFilter;
 use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
@@ -136,37 +134,33 @@ final class CatalogPromotionGrid implements CatalogPromotionGridInterface
                     ]),
             )
 
-            ->addActionGroup(
-                MainActionGroup::create(
-                    CreateAction::create(),
-                ),
+            ->withMainActions(
+                CreateAction::create(),
             )
-            ->addActionGroup(
-                ItemActionGroup::create(
-                    ShowAction::create(),
-                    Action::create('show_variants', 'show')
-                        ->setLabel('sylius.ui.list_variants')
-                        ->setIcon('tabler:list-letters')
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_catalog_promotion_product_variant_index',
-                                'parameters' => [
-                                    'id' => 'resource.id',
-                                ],
+            ->withItemActions(
+                ShowAction::create(),
+                Action::create('show_variants', 'show')
+                    ->setLabel('sylius.ui.list_variants')
+                    ->setIcon('tabler:list-letters')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_catalog_promotion_product_variant_index',
+                            'parameters' => [
+                                'id' => 'resource.id',
                             ],
-                        ]),
-                    UpdateAction::create(),
-                    Action::create('delete', 'delete_catalog_promotion')
-                        ->setOptions([
-                            'link' => [
-                                'route' => 'sylius_admin_catalog_promotion_delete',
-                                'parameters' => [
-                                    'code' => 'resource.code',
-                                ],
+                        ],
+                    ]),
+                UpdateAction::create(),
+                Action::create('delete', 'delete_catalog_promotion')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_catalog_promotion_delete',
+                            'parameters' => [
+                                'code' => 'resource.code',
                             ],
-                            'state' => 'resource.state',
-                        ]),
-                ),
+                        ],
+                        'state' => 'resource.state',
+                    ]),
             );
     }
 }
