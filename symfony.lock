@@ -52,18 +52,6 @@
     "dmore/chrome-mink-driver": {
         "version": "2.7.0"
     },
-    "doctrine/annotations": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
-        },
-        "files": [
-            "config/routes/annotations.yaml"
-        ]
-    },
     "doctrine/cache": {
         "version": "1.10.2"
     },
@@ -199,9 +187,6 @@
     },
     "knplabs/knp-menu-bundle": {
         "version": "v3.0.0"
-    },
-    "laminas/laminas-code": {
-        "version": "3.5.1"
     },
     "laminas/laminas-stdlib": {
         "version": "3.3.1"

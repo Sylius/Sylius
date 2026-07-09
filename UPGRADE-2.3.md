@@ -71,6 +71,62 @@
    > and their default parameters include Payment Request-specific values (e.g. `hash: paymentRequest.getHash()`).
    > Do not use them to configure the Payum after-pay redirect.
 
+### Grid providers are now configurable
+
+As part of the ongoing modernization of the Grid component, Sylius now provides grid definitions in both **YAML** and **PHP**.
+
+Moving grid configuration to PHP provides several benefits:
+
+* Better IDE support, including autocompletion and static analysis.
+* Improved maintainability for complex grid definitions.
+
+PHP grid definitions are the recommended approach going forward and represent the direction of Sylius 3.0. To support a
+smooth migration, Sylius continues to support legacy YAML-based grids and now allows you to choose which format is used 
+for each grid.
+
+### Migration strategy
+
+During the migration period, grid definitions can be loaded from either:
+
+* **YAML** (legacy format)
+* **PHP** (recommended format)
+
+You can configure the format globally:
+
+```yaml
+sylius_core:
+    grid:
+        use_legacy_config: true # Use YAML grid definitions globally (default: false)
+```
+
+Or override the format for individual grids:
+
+```yaml
+sylius_core:
+    grid:
+        grids:
+            sylius_admin_product_variant:
+                use_legacy_config: false # Use PHP configuration for this grid
+```
+
+This makes it possible to migrate grids incrementally rather than converting your entire application at once.
+
+> **Important**
+>
+> A grid can only be loaded from a single source. YAML and PHP definitions for the same grid cannot be merged. When migrating a grid to PHP, you must recreate the complete grid definition in PHP, including any vendor configuration you want to preserve.
+
+### Migration tooling
+
+To simplify the conversion process, you can use the community-maintained Grid configuration converter:
+
+* [Grid Config Converter](https://github.com/mamazu/grid-config-converter?utm_source=chatgpt.com)
+
+The converter can help bootstrap the migration from YAML to PHP and reduce the amount of manual work required.
+
+### Learn more
+
+For a complete overview of the Grid component, see the [Grid documentation](https://stack.sylius.com/grid/index).
+
 ## Dependencies
 
 1. The `behat/transliterator` package has been **deprecated** and will be removed in Sylius 3.0.

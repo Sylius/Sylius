@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\Grid\Provider\OverrideGridProvider;
 use Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider;
 use Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProvider;
 use Sylius\Bundle\CoreBundle\Provider\ChannelBasedProductTranslationProviderInterface;
@@ -135,5 +136,14 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius.provider.statistics.orders_count.year', YearBasedOrdersCountProvider::class)
         ->args([service('sylius.repository.order')])
         ->tag('sylius.statistics.orders_count_provider', ['type' => 'year'])
+    ;
+
+    $services->set('sylius.provider.override_grid_provider', OverrideGridProvider::class)
+        ->decorate('sylius.grid.chain_provider')
+        ->args([
+            '%sylius_core.grids_configuration%',
+            service('sylius.provider.override_grid_provider.inner'),
+            service('sylius.grid.array_grid_provider'),
+        ])
     ;
 };
