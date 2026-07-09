@@ -33,6 +33,9 @@
         "sylius/payum-bundle": "^2.0",
         "symfony/messenger": "^6.4 || ^7.4"
     },
+    "conflict": {
+        "api-platform/symfony": "4.3.16"
+    },
     "require-dev": {
         "ext-sqlite3": "*",
         "matthiasnoback/symfony-config-test": "^6.0",
