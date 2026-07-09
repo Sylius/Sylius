@@ -27,19 +27,19 @@
     "require": {
         "php": "^8.2",
         "sylius/resource-bundle": "^1.12",
-        "symfony/framework-bundle": "^6.4.1 || ^7.2",
-        "symfony/intl": "^6.4 || ^7.2",
+        "symfony/framework-bundle": "^6.4.1 || ^7.4",
+        "symfony/intl": "^6.4 || ^7.4",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18 || ^3.3",
+        "doctrine/doctrine-bundle": "^2.13 || ^3.0",
+        "doctrine/orm": "^2.18 || ^3.5",
         "phpunit/phpunit": "^11.5",
         "sylius/currency-bundle": "^2.0",
-        "symfony/browser-kit": "^6.4 || ^7.2",
-        "symfony/dependency-injection": "^6.4.1 || ^7.2",
-        "symfony/form": "^6.4.1 || ^7.2",
-        "twig/twig": "^3.14"
+        "symfony/browser-kit": "^6.4 || ^7.4",
+        "symfony/dependency-injection": "^6.4.1 || ^7.4",
+        "symfony/form": "^6.4.1 || ^7.4",
+        "twig/twig": "^3.16"
     },
     "config": {
         "allow-plugins": {
@@ -48,10 +48,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {

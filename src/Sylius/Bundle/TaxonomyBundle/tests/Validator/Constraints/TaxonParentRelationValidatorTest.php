@@ -50,7 +50,7 @@ final class TaxonParentRelationValidatorTest extends TestCase
     {
         $this->context->expects($this->never())->method('buildViolation');
 
-        $constraint = new TaxonParentRelation(['message' => 'Invalid relation']);
+        $constraint = new TaxonParentRelation(message: 'Invalid relation');
         $this->validator->validate('not_a_taxon', $constraint);
     }
 
@@ -60,7 +60,7 @@ final class TaxonParentRelationValidatorTest extends TestCase
 
         $this->context->expects($this->never())->method('buildViolation');
 
-        $constraint = new TaxonParentRelation(['message' => 'Invalid relation']);
+        $constraint = new TaxonParentRelation(message: 'Invalid relation');
         $this->validator->validate($this->taxon, $constraint);
     }
 
@@ -77,7 +77,7 @@ final class TaxonParentRelationValidatorTest extends TestCase
             ->with('Invalid relation')
             ->willReturn($this->builder);
 
-        $constraint = new TaxonParentRelation(['message' => 'Invalid relation']);
+        $constraint = new TaxonParentRelation(message: 'Invalid relation');
         $this->validator->validate($this->taxon, $constraint);
     }
 
@@ -98,7 +98,7 @@ final class TaxonParentRelationValidatorTest extends TestCase
             ->with('Invalid relation')
             ->willReturn($this->builder);
 
-        $constraint = new TaxonParentRelation(['message' => 'Invalid relation']);
+        $constraint = new TaxonParentRelation(message: 'Invalid relation');
         $this->validator->validate($this->taxon, $constraint);
     }
 
@@ -121,7 +121,7 @@ final class TaxonParentRelationValidatorTest extends TestCase
             ->with('Invalid relation')
             ->willReturn($this->builder);
 
-        $constraint = new TaxonParentRelation(['message' => 'Invalid relation']);
+        $constraint = new TaxonParentRelation(message: 'Invalid relation');
         $this->validator->validate($this->taxon, $constraint);
     }
 
@@ -137,7 +137,7 @@ final class TaxonParentRelationValidatorTest extends TestCase
 
         $this->context->expects($this->never())->method('buildViolation');
 
-        $constraint = new TaxonParentRelation(['message' => 'Invalid relation']);
+        $constraint = new TaxonParentRelation(message: 'Invalid relation');
         $this->validator->validate($this->taxon, $constraint);
     }
 }

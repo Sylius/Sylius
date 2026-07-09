@@ -7,6 +7,7 @@
     "name": "EuropeanUnion",
     "type": "country",
     "scope": "all",
+    "priority": 0,
     "members": [
         {
             "@type": "ZoneMember",

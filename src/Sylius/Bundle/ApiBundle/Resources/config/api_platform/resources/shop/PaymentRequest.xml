@@ -19,7 +19,7 @@
     <resource class="%sylius.model.payment_request.class%">
         <operations>
             <operation
-                name="sylius_api_show_payment_request_get"
+                name="sylius_api_shop_payment_request_get"
                 class="ApiPlatform\Metadata\Get"
                 uriTemplate="/shop/payment-requests/{hash}"
             >
@@ -35,7 +35,7 @@
             </operation>
 
             <operation
-                name="sylius_api_show_payment_request_post"
+                name="sylius_api_shop_payment_request_post"
                 class="ApiPlatform\Metadata\Post"
                 uriTemplate="/shop/orders/{tokenValue}/payment-requests"
                 itemUriTemplate="/shop/payment-requests/{hash}"
@@ -76,7 +76,7 @@
             </operation>
 
             <operation
-                name="sylius_api_show_payment_request_put"
+                name="sylius_api_shop_payment_request_put"
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/shop/payment-requests/{hash}"
                 messenger="input"

@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
 use Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -37,42 +36,40 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
 final class AddPaymentRequestHandlerTest extends TestCase
 {
-    use ProphecyTrait;
+    private MockObject&PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    private ObjectProphecy|PaymentMethodRepositoryInterface $paymentMethodRepository;
+    private MockObject&PaymentRepositoryInterface $paymentRepository;
 
-    private ObjectProphecy|PaymentRepositoryInterface $paymentRepository;
+    private MockObject&PaymentRequestFactoryInterface $paymentRequestFactory;
 
-    private ObjectProphecy|PaymentRequestFactoryInterface $paymentRequestFactory;
+    private MockObject&PaymentRequestRepositoryInterface $paymentRequestRepository;
 
-    private ObjectProphecy|PaymentRequestRepositoryInterface $paymentRequestRepository;
+    private DefaultActionProviderInterface&MockObject $defaultActionProvider;
 
-    private DefaultActionProviderInterface|ObjectProphecy $defaultActionProvider;
+    private DefaultPayloadProviderInterface&MockObject $defaultPayloadProvider;
 
-    private DefaultPayloadProviderInterface|ObjectProphecy $defaultPayloadProvider;
-
-    private ObjectProphecy|UserContextInterface $userContext;
+    private MockObject&UserContextInterface $userContext;
 
     private AddPaymentRequestHandler $addPaymentRequestHandler;
 
     protected function setUp(): void
     {
-        $this->paymentMethodRepository = $this->prophesize(PaymentMethodRepositoryInterface::class);
-        $this->paymentRepository = $this->prophesize(PaymentRepositoryInterface::class);
-        $this->paymentRequestFactory = $this->prophesize(PaymentRequestFactoryInterface::class);
-        $this->paymentRequestRepository = $this->prophesize(PaymentRequestRepositoryInterface::class);
-        $this->defaultActionProvider = $this->prophesize(DefaultActionProviderInterface::class);
-        $this->defaultPayloadProvider = $this->prophesize(DefaultPayloadProviderInterface::class);
-        $this->userContext = $this->prophesize(UserContextInterface::class);
+        $this->paymentMethodRepository = $this->createMock(PaymentMethodRepositoryInterface::class);
+        $this->paymentRepository = $this->createMock(PaymentRepositoryInterface::class);
+        $this->paymentRequestFactory = $this->createMock(PaymentRequestFactoryInterface::class);
+        $this->paymentRequestRepository = $this->createMock(PaymentRequestRepositoryInterface::class);
+        $this->defaultActionProvider = $this->createMock(DefaultActionProviderInterface::class);
+        $this->defaultPayloadProvider = $this->createMock(DefaultPayloadProviderInterface::class);
+        $this->userContext = $this->createMock(UserContextInterface::class);
 
         $this->addPaymentRequestHandler = new AddPaymentRequestHandler(
-            $this->paymentMethodRepository->reveal(),
-            $this->paymentRepository->reveal(),
-            $this->paymentRequestFactory->reveal(),
-            $this->paymentRequestRepository->reveal(),
-            $this->defaultActionProvider->reveal(),
-            $this->defaultPayloadProvider->reveal(),
-            $this->userContext->reveal(),
+            $this->paymentMethodRepository,
+            $this->paymentRepository,
+            $this->paymentRequestFactory,
+            $this->paymentRequestRepository,
+            $this->defaultActionProvider,
+            $this->defaultPayloadProvider,
+            $this->userContext,
         );
     }
 
@@ -81,7 +78,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
     {
         self::expectException(PaymentNotFoundException::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn(null);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn(null);
 
         $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
@@ -91,19 +88,19 @@ final class AddPaymentRequestHandlerTest extends TestCase
     {
         self::expectException(PaymentNotFoundException::class);
 
-        $payment = $this->prophesize(PaymentInterface::class);
-        $order = $this->prophesize(OrderInterface::class);
-        $shopUser = $this->prophesize(ShopUserInterface::class);
-        $orderCustomer = $this->prophesize(CustomerInterface::class)->reveal();
-        $userCustomer = $this->prophesize(CustomerInterface::class)->reveal();
+        $payment = $this->createMock(PaymentInterface::class);
+        $order = $this->createMock(OrderInterface::class);
+        $shopUser = $this->createMock(ShopUserInterface::class);
+        $orderCustomer = $this->createMock(CustomerInterface::class);
+        $userCustomer = $this->createMock(CustomerInterface::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn($payment->reveal());
-        $payment->getOrder()->willReturn($order->reveal());
-        $order->getCustomer()->willReturn($orderCustomer);
-        $this->userContext->getUser()->willReturn($shopUser->reveal());
-        $shopUser->getCustomer()->willReturn($userCustomer);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn($payment);
+        $payment->method('getOrder')->willReturn($order);
+        $order->method('getCustomer')->willReturn($orderCustomer);
+        $this->userContext->method('getUser')->willReturn($shopUser);
+        $shopUser->method('getCustomer')->willReturn($userCustomer);
 
-        $this->paymentMethodRepository->findOneBy(['code' => 'bank_transfer'])->shouldNotBeCalled();
+        $this->paymentMethodRepository->expects($this->never())->method('findOneBy');
 
         $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
@@ -113,19 +110,19 @@ final class AddPaymentRequestHandlerTest extends TestCase
     {
         self::expectException(PaymentNotFoundException::class);
 
-        $payment = $this->prophesize(PaymentInterface::class);
-        $order = $this->prophesize(OrderInterface::class);
-        $customer = $this->prophesize(CustomerInterface::class);
-        $shopUser = $this->prophesize(ShopUserInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
+        $order = $this->createMock(OrderInterface::class);
+        $customer = $this->createMock(CustomerInterface::class);
+        $shopUser = $this->createMock(ShopUserInterface::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn($payment->reveal());
-        $payment->getOrder()->willReturn($order->reveal());
-        $order->getCustomer()->willReturn($customer->reveal());
-        $customer->getUser()->willReturn($shopUser->reveal());
-        $order->isCreatedByGuest()->willReturn(false);
-        $this->userContext->getUser()->willReturn(null);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn($payment);
+        $payment->method('getOrder')->willReturn($order);
+        $order->method('getCustomer')->willReturn($customer);
+        $customer->method('getUser')->willReturn($shopUser);
+        $order->method('isCreatedByGuest')->willReturn(false);
+        $this->userContext->method('getUser')->willReturn(null);
 
-        $this->paymentMethodRepository->findOneBy(['code' => 'bank_transfer'])->shouldNotBeCalled();
+        $this->paymentMethodRepository->expects($this->never())->method('findOneBy');
 
         $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
@@ -135,14 +132,14 @@ final class AddPaymentRequestHandlerTest extends TestCase
     {
         self::expectException(PaymentMethodNotFoundException::class);
 
-        $payment = $this->prophesize(PaymentInterface::class);
-        $order = $this->prophesize(OrderInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
+        $order = $this->createMock(OrderInterface::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn($payment->reveal());
-        $payment->getOrder()->willReturn($order->reveal());
-        $order->getCustomer()->willReturn(null);
-        $this->userContext->getUser()->willReturn(null);
-        $this->paymentMethodRepository->findOneBy(['code' => 'bank_transfer'])->willReturn(null);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn($payment);
+        $payment->method('getOrder')->willReturn($order);
+        $order->method('getCustomer')->willReturn(null);
+        $this->userContext->method('getUser')->willReturn(null);
+        $this->paymentMethodRepository->method('findOneBy')->with(['code' => 'bank_transfer'])->willReturn(null);
 
         $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
@@ -150,25 +147,25 @@ final class AddPaymentRequestHandlerTest extends TestCase
     #[Test]
     public function it_creates_a_payment_request_for_a_guest_order_requested_by_an_anonymous_user(): void
     {
-        $payment = $this->prophesize(PaymentInterface::class);
-        $order = $this->prophesize(OrderInterface::class);
-        $paymentMethod = $this->prophesize(PaymentMethodInterface::class);
-        $paymentRequest = $this->prophesize(PaymentRequestInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
+        $order = $this->createMock(OrderInterface::class);
+        $paymentMethod = $this->createMock(PaymentMethodInterface::class);
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn($payment->reveal());
-        $payment->getOrder()->willReturn($order->reveal());
-        $order->getCustomer()->willReturn(null);
-        $this->userContext->getUser()->willReturn(null);
-        $this->paymentMethodRepository->findOneBy(['code' => 'bank_transfer'])->willReturn($paymentMethod->reveal());
-        $this->defaultActionProvider->getAction($paymentRequest)->willReturn('authorize');
-        $this->defaultPayloadProvider->getPayload($paymentRequest)->willReturn(['foo' => 'bar']);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn($payment);
+        $payment->method('getOrder')->willReturn($order);
+        $order->method('getCustomer')->willReturn(null);
+        $this->userContext->method('getUser')->willReturn(null);
+        $this->paymentMethodRepository->method('findOneBy')->with(['code' => 'bank_transfer'])->willReturn($paymentMethod);
+        $this->defaultActionProvider->method('getAction')->with($paymentRequest)->willReturn('authorize');
+        $this->defaultPayloadProvider->method('getPayload')->with($paymentRequest)->willReturn(['foo' => 'bar']);
 
-        $this->paymentRequestFactory->create($payment->reveal(), $paymentMethod->reveal())->willReturn($paymentRequest->reveal());
-        $paymentRequest->setAction('authorize')->shouldBeCalled();
-        $paymentRequest->setPayload(['foo' => 'bar'])->shouldBeCalled();
+        $this->paymentRequestFactory->method('create')->with($payment, $paymentMethod)->willReturn($paymentRequest);
+        $paymentRequest->expects($this->once())->method('setAction')->with('authorize');
+        $paymentRequest->expects($this->once())->method('setPayload')->with(['foo' => 'bar']);
 
         self::assertSame(
-            $paymentRequest->reveal(),
+            $paymentRequest,
             $this->addPaymentRequestHandler->__invoke(
                 new AddPaymentRequest('token', 1, 'bank_transfer'),
             ),
@@ -178,28 +175,28 @@ final class AddPaymentRequestHandlerTest extends TestCase
     #[Test]
     public function it_creates_a_payment_request_for_an_order_owned_by_the_logged_in_shop_user(): void
     {
-        $payment = $this->prophesize(PaymentInterface::class);
-        $order = $this->prophesize(OrderInterface::class);
-        $shopUser = $this->prophesize(ShopUserInterface::class);
-        $customer = $this->prophesize(CustomerInterface::class)->reveal();
-        $paymentMethod = $this->prophesize(PaymentMethodInterface::class);
-        $paymentRequest = $this->prophesize(PaymentRequestInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
+        $order = $this->createMock(OrderInterface::class);
+        $shopUser = $this->createMock(ShopUserInterface::class);
+        $customer = $this->createMock(CustomerInterface::class);
+        $paymentMethod = $this->createMock(PaymentMethodInterface::class);
+        $paymentRequest = $this->createMock(PaymentRequestInterface::class);
 
-        $this->paymentRepository->findOneByOrderToken(1, 'token')->willReturn($payment->reveal());
-        $payment->getOrder()->willReturn($order->reveal());
-        $order->getCustomer()->willReturn($customer);
-        $this->userContext->getUser()->willReturn($shopUser->reveal());
-        $shopUser->getCustomer()->willReturn($customer);
-        $this->paymentMethodRepository->findOneBy(['code' => 'bank_transfer'])->willReturn($paymentMethod->reveal());
-        $this->defaultActionProvider->getAction($paymentRequest)->willReturn('authorize');
-        $this->defaultPayloadProvider->getPayload($paymentRequest)->willReturn(['foo' => 'bar']);
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn($payment);
+        $payment->method('getOrder')->willReturn($order);
+        $order->method('getCustomer')->willReturn($customer);
+        $this->userContext->method('getUser')->willReturn($shopUser);
+        $shopUser->method('getCustomer')->willReturn($customer);
+        $this->paymentMethodRepository->method('findOneBy')->with(['code' => 'bank_transfer'])->willReturn($paymentMethod);
+        $this->defaultActionProvider->method('getAction')->with($paymentRequest)->willReturn('authorize');
+        $this->defaultPayloadProvider->method('getPayload')->with($paymentRequest)->willReturn(['foo' => 'bar']);
 
-        $this->paymentRequestFactory->create($payment->reveal(), $paymentMethod->reveal())->willReturn($paymentRequest->reveal());
-        $paymentRequest->setAction('authorize')->shouldBeCalled();
-        $paymentRequest->setPayload(['foo' => 'bar'])->shouldBeCalled();
+        $this->paymentRequestFactory->method('create')->with($payment, $paymentMethod)->willReturn($paymentRequest);
+        $paymentRequest->expects($this->once())->method('setAction')->with('authorize');
+        $paymentRequest->expects($this->once())->method('setPayload')->with(['foo' => 'bar']);
 
         self::assertSame(
-            $paymentRequest->reveal(),
+            $paymentRequest,
             $this->addPaymentRequestHandler->__invoke(
                 new AddPaymentRequest('token', 1, 'bank_transfer'),
             ),

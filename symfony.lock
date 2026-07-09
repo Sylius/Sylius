@@ -52,18 +52,6 @@
     "dmore/chrome-mink-driver": {
         "version": "2.7.0"
     },
-    "doctrine/annotations": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
-        },
-        "files": [
-            "config/routes/annotations.yaml"
-        ]
-    },
     "doctrine/cache": {
         "version": "1.10.2"
     },
@@ -167,9 +155,6 @@
     "friends-of-behat/variadic-extension": {
         "version": "v1.3.0"
     },
-    "friendsofphp/proxy-manager-lts": {
-        "version": "v1.0.2"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.42"
     },
@@ -181,9 +166,6 @@
     },
     "guzzlehttp/psr7": {
         "version": "1.6.1"
-    },
-    "hamcrest/hamcrest-php": {
-        "version": "v2.0.1"
     },
     "hwi/oauth-bundle": {
         "version": "0.6",
@@ -200,20 +182,11 @@
     "instaclick/php-webdriver": {
         "version": "1.4.7"
     },
-    "knplabs/gaufrette": {
-        "version": "v0.8.3"
-    },
-    "knplabs/knp-gaufrette-bundle": {
-        "version": "v0.7.1"
-    },
     "knplabs/knp-menu": {
         "version": "v3.1.2"
     },
     "knplabs/knp-menu-bundle": {
         "version": "v3.0.0"
-    },
-    "laminas/laminas-code": {
-        "version": "3.5.1"
     },
     "laminas/laminas-stdlib": {
         "version": "3.3.1"
@@ -278,12 +251,6 @@
     },
     "matthiasnoback/symfony-dependency-injection-test": {
         "version": "4.1.1"
-    },
-    "mikey179/vfsstream": {
-        "version": "v1.6.8"
-    },
-    "mockery/mockery": {
-        "version": "1.4.2"
     },
     "monolog/monolog": {
         "version": "1.25.5"
@@ -364,20 +331,8 @@
     "phparkitect/phparkitect": {
         "version": "0.2.9"
     },
-    "phpdocumentor/reflection-common": {
-        "version": "1.0.1"
-    },
-    "phpdocumentor/reflection-docblock": {
-        "version": "4.3.0"
-    },
-    "phpdocumentor/type-resolver": {
-        "version": "0.4.0"
-    },
     "phpspec/php-diff": {
         "version": "v1.1.0"
-    },
-    "phpspec/prophecy": {
-        "version": "1.8.0"
     },
     "phpstan/phpdoc-parser": {
         "version": "0.4.9"
@@ -711,9 +666,6 @@
     },
     "symfony/property-info": {
         "version": "v5.0.7"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v4.4.13"
     },
     "symfony/routing": {
         "version": "4.2",

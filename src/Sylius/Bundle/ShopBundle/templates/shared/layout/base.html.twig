@@ -20,7 +20,7 @@
         {% hook 'head' with { _prefixes: prefixes } %}
     </head>
 
-    <body data-route="{{ app.request.get('_route') }}">
+    <body data-route="{{ app.request.attributes.get('_route') }}">
         {% block body %}
             <div class="{% apply escape %}{% hook '#body_classes' with { _prefixes: prefixes } %}{% endapply %}">
                 {% block header %}

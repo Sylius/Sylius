@@ -17,7 +17,9 @@
     {% block footer %}
         <form action="{{ path }}" method="POST" name="sylius_archivable">
             <input type="hidden" name="_method" value="PATCH">
-            <input type="hidden" name="sylius_archivable[_token]" value="{{ csrf_token('sylius_archivable') }}" />
+            {% if sylius_csrf_protection_enabled() %}
+                <input type="hidden" name="sylius_archivable[_token]" value="{{ csrf_token('sylius_archivable') }}" />
+            {% endif %}
 
             {{ button.default({ text: 'sylius.ui.cancel'|trans, attr: 'data-bs-dismiss=modal' }) }}
             {{ button.default({ text: label, type: 'submit', class: 'btn-primary', attr: sylius_test_html_attribute('confirm-button') }) }}

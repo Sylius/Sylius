@@ -62,3 +62,6 @@ sylius_twig_hooks:
             description:
                 template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment/choice/details/description.html.twig'
                 priority: 0
+            delivery_time:
+                template: '@SyliusShop/checkout/select_shipping/content/form/shipments/shipment/choice/details/delivery_time.html.twig'
+                priority: -100

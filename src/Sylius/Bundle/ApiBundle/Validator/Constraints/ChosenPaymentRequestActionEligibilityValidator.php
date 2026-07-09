@@ -49,7 +49,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->paymentMethodCode]);
         if ($paymentMethod?->getGatewayConfig() === null) {
-            $this->context->addViolation($constraint->notExist, ['%code%' => $value->paymentMethodCode]);
+            $this->context->addViolation($constraint->notExistMessage, ['%code%' => $value->paymentMethodCode]);
 
             return;
         }
@@ -57,7 +57,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
         $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
         $gatewayFactoryCommandProvider = $this->gatewayFactoryCommandProvider->getCommandProvider($factoryName);
         if (null === $gatewayFactoryCommandProvider) {
-            $this->context->addViolation($constraint->notAvailable, [
+            $this->context->addViolation($constraint->notAvailableMessage, [
                 '%code%' => $value->paymentMethodCode,
                 '%id%' => $value->paymentId,
             ]);
@@ -72,7 +72,7 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
             return;
         }
 
-        $this->context->addViolation($constraint->notAvailable, [
+        $this->context->addViolation($constraint->notAvailableMessage, [
             '%code%' => $value->paymentMethodCode,
             '%id%' => $value->paymentId,
         ]);

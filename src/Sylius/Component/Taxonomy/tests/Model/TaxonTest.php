@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Taxonomy\Model\Taxon;
@@ -156,11 +157,19 @@ final class TaxonTest extends TestCase
 
     public function testFullNamePrependsWithParentsFullName(): void
     {
-        $this->tshirtTaxon->expects($this->once())->method('getFullname')->with(' / ')->willReturn('Category / T-shirts');
-        $this->tshirtTaxon->expects($this->once())->method('addChild')->with($this->taxon);
+        $category = new Taxon();
+        $category->setCurrentLocale('pl_PL');
+        $category->setFallbackLocale('en_US');
+        $category->setName('Category');
+
+        $tshirt = new Taxon();
+        $tshirt->setCurrentLocale('pl_PL');
+        $tshirt->setFallbackLocale('en_US');
+        $tshirt->setName('T-shirts');
+        $tshirt->setParent($category);
 
         $this->taxon->setName('Men');
-        $this->taxon->setParent($this->tshirtTaxon);
+        $this->taxon->setParent($tshirt);
 
         $this->assertSame('Category / T-shirts / Men', $this->taxon->getFullname());
     }
@@ -255,5 +264,105 @@ final class TaxonTest extends TestCase
 
         $this->assertCount(1, $this->taxon->getEnabledChildren());
         $this->assertContains($this->categoryTaxon, $this->taxon->getEnabledChildren());
+    }
+
+    public function testGetAncestorsShouldNotLoopInfinitely(): void
+    {
+        $category = $this->createTaxon('Category');
+        $tshirt = $this->createTaxon('T-shirts');
+
+        $category->addChild($tshirt);
+
+        $ancestors = $tshirt->getAncestors();
+
+        $this->assertCount(1, $ancestors);
+        $this->assertContains($category, $ancestors);
+    }
+
+    public function testGetFullnameShouldNotLoopInfinitely(): void
+    {
+        $category = $this->createTaxon('Category');
+        $tshirt = $this->createTaxon('T-shirts');
+        $women = $this->createTaxon('Women');
+
+        $category->addChild($tshirt);
+        $tshirt->addChild($women);
+
+        $this->assertSame('Category / T-shirts', $tshirt->getFullname());
+        $this->assertSame('Category / T-shirts / Women', $women->getFullname());
+    }
+
+    public function testGetAncestorsWithCircularReferenceBreaksLoop(): void
+    {
+        $category = $this->createTaxon('Category');
+        $tshirt = $this->createTaxon('T-shirts');
+
+        $category->addChild($tshirt);
+
+        $this->setParentViaReflection($tshirt, $tshirt);
+
+        $ancestors = $tshirt->getAncestors();
+
+        $this->assertInstanceOf(Collection::class, $ancestors);
+        $this->assertLessThanOrEqual(1, $ancestors->count());
+    }
+
+    public function testGetFullnameWhenParentIsSelf(): void
+    {
+        $taxon = $this->createTaxon('SelfParent');
+
+        $this->setParentViaReflection($taxon, $taxon);
+
+        $this->assertSame('SelfParent', $taxon->getFullname());
+    }
+
+    #[DataProvider('customDelimiterProvider')]
+    public function testGetFullnameWithCustomDelimiter(string $delimiter, string $expected): void
+    {
+        $category = $this->createTaxon('Category');
+        $tshirt = $this->createTaxon('T-shirts');
+
+        $category->addChild($tshirt);
+
+        $this->assertSame($expected, $tshirt->getFullname($delimiter));
+    }
+
+    public static function customDelimiterProvider(): iterable
+    {
+        yield 'arrow delimiter' => [' > ', 'Category > T-shirts'];
+        yield 'pipe delimiter' => [' | ', 'Category | T-shirts'];
+        yield 'dash delimiter' => [' - ', 'Category - T-shirts'];
+    }
+
+    public function testGetAncestorsWithDeepCircularReference(): void
+    {
+        $taxon1 = $this->createTaxon('Taxon1');
+        $taxon2 = $this->createTaxon('Taxon2');
+
+        $this->setParentViaReflection($taxon1, $taxon2);
+        $this->setParentViaReflection($taxon2, $taxon1);
+
+        $ancestors = $taxon1->getAncestors();
+
+        $this->assertInstanceOf(Collection::class, $ancestors);
+        $this->assertGreaterThanOrEqual(1, $ancestors->count());
+        $this->assertLessThanOrEqual(2, $ancestors->count());
+    }
+
+    private function createTaxon(string $name): Taxon
+    {
+        $taxon = new Taxon();
+        $taxon->setCurrentLocale('pl_PL');
+        $taxon->setFallbackLocale('en_US');
+        $taxon->setName($name);
+
+        return $taxon;
+    }
+
+    private function setParentViaReflection(Taxon $taxon, TaxonInterface $parent): void
+    {
+        $reflection = new \ReflectionProperty($taxon, 'parent');
+        $reflection->setAccessible(true);
+        $reflection->setValue($taxon, $parent);
     }
 }

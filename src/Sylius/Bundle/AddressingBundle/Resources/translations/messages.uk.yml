@@ -38,5 +38,6 @@ sylius:
                 all: Всі(-е)
             select: Виберіть
             select_scope: Виберіть покриття
+            priority: Пріоритет
         zone_member:
             select: Виберіть

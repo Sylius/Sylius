@@ -1,7 +1,7 @@
 <button class="btn primary"
     {{ stimulus_controller('@sylius/admin-bundle/save-positions', {
         url: path('sylius_admin_ajax_product_variants_update_position'),
-        csrfToken: csrf_token('update-product-variant-position'),
+        csrfToken: sylius_csrf_protection_enabled() ? csrf_token('update-product-variant-position') : null,
         inputSelector: '.sylius-product-variant-position',
         dataKey: 'productVariants',
     }) }}

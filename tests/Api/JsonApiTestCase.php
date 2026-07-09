@@ -305,6 +305,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         if (preg_match('/@\w+@\./', $value)) {
             return true;
         }
+
         return false;
     }
 
@@ -367,16 +368,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
             'hydra:title' => 'An error occurred',
         ];
 
-        $actualFiltered = array_intersect_key($content, $expectedContent);
-        Assert::assertSame($expectedContent, $actualFiltered);
-
-        if (array_key_exists('title', $content)) {
-            Assert::assertSame($expectedContent['hydra:title'], $content['title']);
-        }
-        if (array_key_exists('description', $content)) {
-            Assert::assertSame($message, $content['description']);
-        }
-
+        Assert::assertSame($expectedContent, $content);
         $this->assertResponseCode($this->client->getResponse(), $code);
     }
 

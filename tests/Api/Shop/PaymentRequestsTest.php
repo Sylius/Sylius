@@ -151,7 +151,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertResponse(
             $this->client->getResponse(),
             'shop/payment_request/post_payment_request_without_required_data',
-            Response::HTTP_BAD_REQUEST,
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

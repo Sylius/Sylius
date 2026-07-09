@@ -37,25 +37,24 @@
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
-        "sylius/twig-hooks": "^0.8",
-        "symfony/framework-bundle": "^6.4.1 || ^7.2",
-        "symfony/http-client": "^6.4 || ^7.2",
-        "symfony/stimulus-bundle": "^2.20",
-        "symfony/ux-autocomplete": "^2.20",
-        "symfony/ux-live-component": "^2.20",
+        "sylius/twig-hooks": "^0.9",
+        "symfony/framework-bundle": "^6.4.1 || ^7.4",
+        "symfony/http-client": "^6.4 || ^7.4",
+        "symfony/stimulus-bundle": "^2.25",
+        "symfony/ux-autocomplete": "^2.25",
+        "symfony/ux-live-component": "^2.25",
         "symfony/webpack-encore-bundle": "^2.2",
-        "symfonycasts/dynamic-forms": "^0.1",
-        "twig/extra-bundle": "^3.13",
-        "twig/twig": "^3.14"
+        "symfonycasts/dynamic-forms": "^0.2",
+        "twig/extra-bundle": "^3.16",
+        "twig/twig": "^3.16"
     },
     "require-dev": {
-        "doctrine/orm": "^2.18 || ^3.3",
+        "doctrine/orm": "^2.18 || ^3.5",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "php-http/message-factory": "^1.1",
-        "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^11.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.2",
-        "symfony/dotenv": "^6.4 || ^7.2"
+        "symfony/dependency-injection": "^6.4.1 || ^7.4",
+        "symfony/dotenv": "^6.4 || ^7.4"
     },
     "config": {
         "allow-plugins": {
@@ -64,10 +63,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {

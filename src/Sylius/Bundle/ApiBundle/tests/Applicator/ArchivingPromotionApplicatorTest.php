@@ -41,7 +41,7 @@ final class ArchivingPromotionApplicatorTest extends TestCase
 
         $this->clock->expects(self::once())->method('now')->willReturn($now);
 
-        $this->promotion->expects(self::once())->method('setArchivedAt')->with($now);
+        $this->promotion->expects(self::once())->method('setArchivedAt')->with(\DateTime::createFromImmutable($now));
 
         self::assertSame($this->promotion, $this->archivingPromotionApplicator->archive($this->promotion));
     }

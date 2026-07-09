@@ -30,23 +30,22 @@
         "stof/doctrine-extensions-bundle": "^1.12",
         "sylius/addressing": "^2.0",
         "sylius/resource-bundle": "^1.12",
-        "symfony/framework-bundle": "^6.4.1 || ^7.2",
-        "symfony/intl": "^6.4 || ^7.2"
+        "symfony/framework-bundle": "^6.4.1 || ^7.4",
+        "symfony/intl": "^6.4 || ^7.4"
     },
     "conflict": {
         "phpstan/phpdoc-parser": ">= 2.0"
     },
     "require-dev": {
-        "doctrine/data-fixtures": "^1.7",
-        "doctrine/doctrine-bundle": "^2.13",
-        "doctrine/orm": "^2.18 || ^3.3",
+        "doctrine/data-fixtures": "^1.7 || ^2.2",
+        "doctrine/doctrine-bundle": "^2.13 || ^3.0",
+        "doctrine/orm": "^2.18 || ^3.5",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
-        "phpspec/prophecy-phpunit": "^2.2",
         "phpunit/phpunit": "^11.5",
-        "symfony/browser-kit": "^6.4 || ^7.2",
-        "symfony/dependency-injection": "^6.4.1 || ^7.2",
-        "symfony/form": "^6.4.1 || ^7.2",
-        "symfony/validator": "^6.4 || ^7.2",
+        "symfony/browser-kit": "^6.4 || ^7.4",
+        "symfony/dependency-injection": "^6.4.1 || ^7.4",
+        "symfony/form": "^6.4.1 || ^7.4",
+        "symfony/validator": "^6.4 || ^7.4",
         "theofidry/alice-data-fixtures": "^1.7"
     },
     "config": {
@@ -56,10 +55,10 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.0-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
-            "require": "^7.2"
+            "require": "^7.4"
         }
     },
     "autoload": {

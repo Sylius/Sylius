@@ -44,6 +44,12 @@ sylius_twig_hooks:
             enabled:
                 template: '@SyliusAdmin/shipping_method/form/general/enabled.html.twig'
                 priority: 200
+            min_delivery_time_days:
+                template: '@SyliusAdmin/shipping_method/form/general/min_delivery_time_days.html.twig'
+                priority: 150
+            max_delivery_time_days:
+                template: '@SyliusAdmin/shipping_method/form/general/max_delivery_time_days.html.twig'
+                priority: 125
             zone:
                 template: '@SyliusAdmin/shipping_method/form/general/zone.html.twig'
                 priority: 100

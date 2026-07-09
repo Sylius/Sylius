@@ -52,7 +52,7 @@ final class ProductVariantCombinationValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $variant */
         $variant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new ProductVariantCombination(['message' => 'Variant with given options already exists']);
+        $constraint = new ProductVariantCombination(message: 'Variant with given options already exists');
 
         $variant->expects($this->once())->method('getProduct')->willReturn(null);
         $product->expects($this->never())->method('hasVariants');
@@ -70,7 +70,7 @@ final class ProductVariantCombinationValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $variant */
         $variant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new ProductVariantCombination(['message' => 'Variant with given options already exists']);
+        $constraint = new ProductVariantCombination(message: 'Variant with given options already exists');
 
         $variant->expects($this->once())->method('getProduct')->willReturn($product);
         $product->expects($this->once())->method('hasVariants')->willReturn(true);
@@ -88,7 +88,7 @@ final class ProductVariantCombinationValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $variant */
         $variant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new ProductVariantCombination(['message' => 'Variant with given options already exists']);
+        $constraint = new ProductVariantCombination(message: 'Variant with given options already exists');
 
         $variant->expects($this->once())->method('getProduct')->willReturn($product);
         $product->expects($this->once())->method('hasVariants')->willReturn(false);
@@ -106,7 +106,7 @@ final class ProductVariantCombinationValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $variant */
         $variant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new ProductVariantCombination(['message' => 'Variant with given options already exists']);
+        $constraint = new ProductVariantCombination(message: 'Variant with given options already exists');
 
         $variant->expects($this->once())->method('getProduct')->willReturn($product);
         $product->expects($this->once())->method('hasVariants')->willReturn(true);

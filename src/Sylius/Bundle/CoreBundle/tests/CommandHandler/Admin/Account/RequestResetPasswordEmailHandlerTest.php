@@ -78,7 +78,7 @@ final class RequestResetPasswordEmailHandlerTest extends TestCase
         $adminUser->expects($this->once())->method('getEmail')->willReturn('admin@example.com');
         $adminUser->expects($this->once())->method('getLocaleCode')->willReturn('en_US');
         $adminUser->expects($this->once())->method('setPasswordResetToken')->with('sometoken');
-        $adminUser->expects($this->once())->method('setPasswordRequestedAt')->with($now);
+        $adminUser->expects($this->once())->method('setPasswordRequestedAt')->with(\DateTime::createFromImmutable($now));
 
         $expectedMessage = new SendResetPasswordEmail('admin@example.com', 'en_US');
 

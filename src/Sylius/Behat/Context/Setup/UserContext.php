@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -38,11 +39,9 @@ final readonly class UserContext implements Context
     ) {
     }
 
-    /**
-     * @Given there is a user :email identified by :password
-     * @Given there was account of :email with password :password
-     * @Given there is a user :email
-     */
+    #[Given('there is a user :email identified by :password')]
+    #[Given('there was account of :email with password :password')]
+    #[Given('there is a user :email')]
     public function thereIsUserIdentifiedBy(string $email, string $password = 'sylius'): void
     {
         /** @var ShopUserInterface $user */
@@ -53,11 +52,9 @@ final readonly class UserContext implements Context
         $this->userRepository->add($user);
     }
 
-    /**
-     * @Given there is a disabled user :email identified by :password
-     * @Given there was disabled account of :email with password :password
-     * @Given there is a disabled user :email
-     */
+    #[Given('there is a disabled user :email identified by :password')]
+    #[Given('there was disabled account of :email with password :password')]
+    #[Given('there is a disabled user :email')]
     public function thereIsDisabledUserIdentifiedBy($email, $password = 'sylius')
     {
         $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => false]);
@@ -67,10 +64,8 @@ final readonly class UserContext implements Context
         $this->userRepository->add($user);
     }
 
-    /**
-     * @Given I registered with previously used :email email and :password password
-     * @Given I have already registered :email account
-     */
+    #[Given('I registered with previously used :email email and :password password')]
+    #[Given('I have already registered :email account')]
     public function theCustomerCreatedAccountWithPassword(string $email, string $password = 'sylius'): void
     {
         /** @var ShopUserInterface $user */
@@ -82,10 +77,8 @@ final readonly class UserContext implements Context
         $this->userRepository->add($user);
     }
 
-    /**
-     * @Given the account of :email was deleted
-     * @Given my account :email was deleted
-     */
+    #[Given('the account of :email was deleted')]
+    #[Given('my account :email was deleted')]
     public function accountWasDeleted(string $email): void
     {
         /** @var ShopUserInterface $user */
@@ -96,9 +89,7 @@ final readonly class UserContext implements Context
         $this->userRepository->remove($user);
     }
 
-    /**
-     * @Given its account was deleted
-     */
+    #[Given('its account was deleted')]
     public function hisAccountWasDeleted(): void
     {
         $user = $this->sharedStorage->get('user');
@@ -107,10 +98,8 @@ final readonly class UserContext implements Context
         $this->userManager->clear();
     }
 
-    /**
-     * @Given /^(this user) is not verified$/
-     * @Given /^(I) have not verified my account (?:yet)$/
-     */
+    #[Given('/^(this user) is not verified$/')]
+    #[Given('/^(I) have not verified my account (?:yet)$/')]
     public function accountIsNotVerified(UserInterface $user): void
     {
         $user->setVerifiedAt(null);
@@ -118,17 +107,13 @@ final readonly class UserContext implements Context
         $this->userManager->flush();
     }
 
-    /**
-     * @Given /^(?:(I) have|(this user) has) already received a verification email$/
-     */
+    #[Given('/^(?:(I) have|(this user) has) already received a verification email$/')]
     public function iHaveReceivedVerificationEmail(UserInterface $user): void
     {
         $this->prepareUserVerification($user);
     }
 
-    /**
-     * @Given a verification email has already been sent to :email
-     */
+    #[Given('a verification email has already been sent to :email')]
     public function aVerificationEmailHasBeenSentTo(string $email): void
     {
         $user = $this->userRepository->findOneByEmail($email);
@@ -136,9 +121,7 @@ final readonly class UserContext implements Context
         $this->prepareUserVerification($user);
     }
 
-    /**
-     * @Given /^(I) have already verified my account$/
-     */
+    #[Given('/^(I) have already verified my account$/')]
     public function iHaveAlreadyVerifiedMyAccount(UserInterface $user): void
     {
         $user->setVerifiedAt(new \DateTime());
@@ -146,9 +129,7 @@ final readonly class UserContext implements Context
         $this->userManager->flush();
     }
 
-    /**
-     * @Given /^(?:(I) have|(this user) has) already received a resetting password email$/
-     */
+    #[Given('/^(?:(I) have|(this user) has) already received a resetting password email$/')]
     public function iHaveReceivedResettingPasswordEmail(UserInterface $user): void
     {
         $this->prepareUserPasswordResetToken($user);
@@ -174,9 +155,7 @@ final readonly class UserContext implements Context
         $this->userManager->flush();
     }
 
-    /**
-     * @Given /^(I) waited too long, and the token expired$/
-     */
+    #[Given('/^(I) waited too long, and the token expired$/')]
     public function iWaitedTooLongAndTheTokenExpired(UserInterface $user): void
     {
         /** @var \DateTime $passwordRequestedAt */
@@ -194,9 +173,7 @@ final readonly class UserContext implements Context
         $this->userManager->flush();
     }
 
-    /**
-     * @Given /^(I)'ve changed my password from "([^"]+)" to "([^"]+)"$/
-     */
+    #[Given('/^(I)\'ve changed my password from "([^"]+)" to "([^"]+)"$/')]
     public function iveChangedMyPasswordFromTo(UserInterface $user, string $currentPassword, string $newPassword): void
     {
         $currentPassword = $this->retrieveSecurePassword($currentPassword);

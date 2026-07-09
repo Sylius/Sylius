@@ -4,8 +4,6 @@
     "@type": "@string@.startsWith('ConstraintViolation')",
     "hydra:title": "An error occurred",
     "hydra:description": "The product variant with code \"CAP_YELLOW\" does not belong to the product with code \"MUG\", which is the owner of the image.",
-    "title": "@string@.contains('An error occurred').optional()",
-    "description": "@string@.contains('The product variant with code \"CAP_YELLOW\" does not belong to the product with code \"MUG\", which is the owner of the image.').optional()",
     "status": 422,
     "violations": [
         {
