@@ -34,6 +34,16 @@ Feature: Sign in to the store during checkout
         And I sign in
         Then I should be notified about bad credentials
 
+    @no-api @ui @javascript
+    Scenario: Failure sign into disabled account
+        Given there is disabled customer account "francis_disabled@underwood.com" with password "whitehouse"
+        And I added product "PHP T-Shirt" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "francis_disabled@underwood.com"
+        And I specify the password as "whitehouse"
+        And I sign in
+        Then I should be notified about disabled account
+
     @no-api @ui @mink:chromedriver @failing
     Scenario: Successful sign in after omitting fill the email field
         Given I added product "PHP T-Shirt" to the cart

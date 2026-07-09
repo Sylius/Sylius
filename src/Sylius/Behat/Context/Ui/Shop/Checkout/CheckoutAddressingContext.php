@@ -351,6 +351,12 @@ final readonly class CheckoutAddressingContext implements Context
         Assert::true($this->addressPage->checkInvalidCredentialsValidation());
     }
 
+    #[Then('I should be notified about disabled account')]
+    public function iShouldBeNotifiedAboutDisabledAccount(): void
+    {
+        Assert::true($this->addressPage->checkDisabledAccountValidation());
+    }
+
     #[Then('I should be notified to resubmit the addressing form')]
     public function iShouldBeNotifiedToResubmitTheAddressingForm()
     {

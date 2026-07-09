@@ -24,7 +24,7 @@ Feature: Signing in to the store validation
         And I specify the username as "sylius@example.com"
         And I specify the password as "sylius"
         And I try to log in
-        Then I should be notified about bad credentials
+        Then I should be notified about disabled account
         And I should not be logged in
 
     @api @ui

@@ -17,7 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Checker\EnabledUserChecker;
-use Symfony\Component\Security\Core\Exception\DisabledException;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 
 final class EnabledUserCheckerTest extends TestCase
 {
@@ -34,7 +34,7 @@ final class EnabledUserCheckerTest extends TestCase
 
     public function testShouldThrowDisabledExceptionIfAccountIsDisabled(): void
     {
-        $this->expectException(DisabledException::class);
+        $this->expectException(CustomUserMessageAccountStatusException::class);
 
         $this->userMock->expects($this->once())->method('isEnabled')->willReturn(false);
 
@@ -47,5 +47,6 @@ final class EnabledUserCheckerTest extends TestCase
         $this->userMock->expects($this->once())->method('isEnabled')->willReturn(true);
 
         $this->userChecker->checkPreAuth($this->userMock);
+        $this->userChecker->checkPostAuth($this->userMock);
     }
 }

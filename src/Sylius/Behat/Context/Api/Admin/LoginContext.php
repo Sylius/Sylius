@@ -75,6 +75,12 @@ final class LoginContext implements Context
         Assert::same($this->apiSecurityClient->getErrorMessage(), 'Invalid credentials.');
     }
 
+    #[Then('I should be notified about disabled account')]
+    public function iShouldBeNotifiedAboutDisabledAccount(): void
+    {
+        Assert::same($this->apiSecurityClient->getErrorMessage(), 'User account is disabled.');
+    }
+
     #[Then('I should be able to log in as :username authenticated by :password password')]
     public function iShouldBeAbleToLogInAsAuthenticatedByPassword(string $username, string $password): void
     {

@@ -85,6 +85,13 @@ final class LoginContext implements Context
         Assert::true($this->loginPage->hasValidationErrorWith('Invalid credentials.'));
     }
 
+
+    #[Then('I should be notified about disabled account')]
+    public function iShouldBeNotifiedAboutDisabledAccount(): void
+    {
+        Assert::true($this->loginPage->hasValidationErrorWith('User account is disabled.'));
+    }
+
     #[Then('I should be able to log in as :username authenticated by :password password')]
     public function iShouldBeAbleToLogInAsAuthenticatedByPassword($username, $password)
     {

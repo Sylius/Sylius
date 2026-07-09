@@ -27,6 +27,16 @@ Feature: Signing in to the administration panel
         And I should not be logged in
 
     @api @ui
+    Scenario: Sign in to disabled account
+        Given this administrator account is disabled
+        When I want to log in
+        And I specify the username as "admin@example.com"
+        And I specify the password as "sylius"
+        And I log in
+        Then I should be notified about disabled account
+        And I should not be logged in
+
+    @api @ui
     Scenario: Sign in using customer account
         When I want to log in
         And I specify the username as "ted@example.com"

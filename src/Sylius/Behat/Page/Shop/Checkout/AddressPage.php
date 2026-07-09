@@ -83,6 +83,15 @@ class AddressPage extends ShopPage implements AddressPageInterface
         return $validationElement->getText() === 'Invalid credentials.';
     }
 
+    public function checkDisabledAccountValidation(): bool
+    {
+        $validationElement = $this->getDocument()->waitFor(3, function (): NodeElement {
+            return $this->getElement('login_validation_error');
+        });
+
+        return $validationElement->getText() === 'User account is disabled.';
+    }
+
     public function checkValidationMessageFor(string $element, string $message): bool
     {
         try {
