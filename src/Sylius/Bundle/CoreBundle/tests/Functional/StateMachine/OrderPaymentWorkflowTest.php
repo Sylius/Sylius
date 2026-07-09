@@ -137,6 +137,7 @@ final class OrderPaymentWorkflowTest extends KernelTestCase
     {
         yield ['cancel', 'cancelled'];
         yield ['pay', 'paid'];
+        yield ['request_payment', 'awaiting_payment'];
     }
 
     public static function availableTransitionsForPartiallyPaidState(): iterable

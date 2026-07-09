@@ -105,6 +105,14 @@ final class OrderPaymentStateResolver implements StateResolverInterface
             return OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT;
         }
 
+        $hasReplayablePayment =
+            !$this->getPaymentsWithState($order, PaymentInterface::STATE_CART)->isEmpty()
+            || !$this->getPaymentsWithState($order, PaymentInterface::STATE_NEW)->isEmpty();
+
+        if ($hasReplayablePayment) {
+            return OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT;
+        }
+
         return null;
     }
 

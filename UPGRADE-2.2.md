@@ -22,6 +22,44 @@
    or `sylius.live_component.*` tag did not receive the `twig.component` tag.
    The priority has been lowered to `50` to ensure Symfony's autoconfiguration runs first.
 
+## Order payment state recovery after authorized payment cancellation
+
+When an authorized `Payment` transitions to `cancelled` (e.g. the merchant voids the authorization
+via the payment gateway), the `Order.paymentState` now automatically recovers from `authorized` to
+`awaiting_payment`, allowing the customer to retry payment.
+
+Previously the order was left in an inconsistent state — `payment_state = authorized` even though
+the authorization no longer existed — and the customer could not retry.
+
+### Impact on custom code
+
+**Symfony Workflow** — the `sylius_order_payment` workflow gains two new source states for the
+`request_payment` transition:
+
+```yaml
+# Before
+request_payment:
+    from: [cart]
+    to: awaiting_payment
+
+# After
+request_payment:
+    from: [cart, authorized, partially_authorized]
+    to: awaiting_payment
+```
+
+If you override this transition in your application config, add `authorized` and
+`partially_authorized` to the `from` list.
+
+**winzou_state_machine** — the same change applies to
+`config/app/winzou_state_machine/sylius_order_payment.yml`.
+
+**Custom `OrderPaymentStateResolver`** — if you have overridden `getTargetTransition()`, add
+handling for the recovery case: when only `cart` or `new` payments exist on the order (all previous
+payments are cancelled/failed), return `OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT`.
+
+---
+
 # UPGRADE FROM `2.1` TO `2.2`
 
 ## Telemetry
