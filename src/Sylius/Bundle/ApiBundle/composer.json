@@ -24,7 +24,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "doctrine/dbal": "^3.9",
+        "doctrine/dbal": "^3.9 || ^4.0",
         "api-platform/doctrine-orm": "^4.2.1",
         "api-platform/metadata": "^4.2.1",
         "api-platform/symfony": "^4.2.1",
@@ -41,7 +41,7 @@
         "matthiasnoback/symfony-config-test": "^6.0",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "nelmio/alice": "^3.13",
-        "phparkitect/phparkitect": "^0.6",
+        "phparkitect/phparkitect": "^0.8",
         "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "^6.4 || ^7.4",
         "symfony/debug-bundle": "^6.4 || ^7.4",
@@ -56,7 +56,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
             "require": "^7.4"

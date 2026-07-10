@@ -209,7 +209,7 @@ EOT
         $validator = $this->getPasswordQuestionValidator();
 
         do {
-            $passwordQuestion = $this->createPasswordQuestion('Choose password:', $validator);
+            $passwordQuestion = $this->createPasswordQuestion('Choose password (password is hidden while typing): ', $validator);
             $confirmPasswordQuestion = $this->createPasswordQuestion('Confirm password:', $validator);
 
             $password = $questionHelper->ask($input, $output, $passwordQuestion);

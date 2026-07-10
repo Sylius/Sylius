@@ -58,7 +58,7 @@ final class GatewayFactoryExistsValidatorTest extends TestCase
         $this->executionContext
             ->expects(self::once())
             ->method('buildViolation')
-            ->with((new GatewayFactoryExists())->invalidGatewayFactory)
+            ->with((new GatewayFactoryExists())->invalidGatewayFactoryMessage)
             ->willReturn($constraintViolationBuilder);
 
         $constraintViolationBuilder

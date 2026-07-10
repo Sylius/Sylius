@@ -16,7 +16,7 @@ jobs:
 
         name: "Coding standard refactor"
 
-        timeout-minutes: 15
+        timeout-minutes: 20
 
         if: github.repository == 'Sylius/Sylius'
 
@@ -25,13 +25,10 @@ jobs:
             matrix:
                 include:
                     -
-                        branch: "1.14"
-                        php: "8.1"
-                    -
-                        branch: "2.1"
+                        branch: "2.2"
                         php: "8.2"
                     -
-                        branch: "2.2"
+                        branch: "2.3"
                         php: "8.2"
 
         steps:
@@ -63,7 +60,7 @@ jobs:
                     title: '[CS][DX] Refactor'
                     body: |
                         This PR has been generated automatically.
-                        For more details see [refactor.yaml](/Sylius/Sylius/blob/2.1/.github/workflows/refactor.yaml).
+                        For more details see [refactor.yaml](/Sylius/Sylius/blob/2.3/.github/workflows/refactor.yaml).
                     labels: |
                         DX
                         Enhancement

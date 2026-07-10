@@ -44,7 +44,7 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/doctrine-bundle": "^2.13 || ^3.0",
         "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "^6.4 || ^7.4",
         "symfony/dependency-injection": "^6.4.1 || ^7.4",
@@ -57,7 +57,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
             "require": "^7.4"

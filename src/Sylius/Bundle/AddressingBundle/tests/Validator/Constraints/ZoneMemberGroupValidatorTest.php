@@ -75,7 +75,7 @@ final class ZoneMemberGroupValidatorTest extends TestCase
         $validator->expects($this->once())->method('inContext')->with($this->context)->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate')->with($zoneMember, null, ['Default', 'zone_two'])->willReturn($contextualValidator);
 
-        $this->zoneMemberGroupValidator->validate($zoneMember, new ZoneMemberGroup(['groups' => ['Default', 'test_group']]));
+        $this->zoneMemberGroupValidator->validate($zoneMember, new ZoneMemberGroup(groups: ['Default', 'test_group']));
     }
 
     public function testCallsValidatorWithDefaultGroupsIfNoneProvidedForZoneMemberType(): void
@@ -95,7 +95,7 @@ final class ZoneMemberGroupValidatorTest extends TestCase
         $validator->expects($this->once())->method('inContext')->with($this->context)->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate')->with($zoneMember, null, ['Default', 'test_group'])->willReturn($contextualValidator);
 
-        $this->zoneMemberGroupValidator->validate($zoneMember, new ZoneMemberGroup(['groups' => ['Default', 'test_group']]));
+        $this->zoneMemberGroupValidator->validate($zoneMember, new ZoneMemberGroup(groups: ['Default', 'test_group']));
     }
 
     public function testCallsValidatorWithDefaultGroupsIfZoneIsNull(): void
@@ -112,6 +112,6 @@ final class ZoneMemberGroupValidatorTest extends TestCase
         $validator->expects($this->once())->method('inContext')->with($this->context)->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate')->with($zoneMember, null, ['Default', 'test_group'])->willReturn($contextualValidator);
 
-        $this->zoneMemberGroupValidator->validate($zoneMember, new ZoneMemberGroup(['groups' => ['Default', 'test_group']]));
+        $this->zoneMemberGroupValidator->validate($zoneMember, new ZoneMemberGroup(groups: ['Default', 'test_group']));
     }
 }

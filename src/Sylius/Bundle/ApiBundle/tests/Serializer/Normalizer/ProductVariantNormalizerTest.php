@@ -23,7 +23,7 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductVariantNormalizer;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -34,7 +34,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class ProductVariantNormalizerTest extends TestCase
 {
-    private MockObject&ProductVariantPricesCalculatorInterface $pricesCalculator;
+    private CatalogPricesCalculatorInterface&MockObject $pricesCalculator;
 
     private AvailabilityCheckerInterface&MockObject $availabilityChecker;
 
@@ -57,7 +57,7 @@ final class ProductVariantNormalizerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->pricesCalculator = $this->createMock(ProductVariantPricesCalculatorInterface::class);
+        $this->pricesCalculator = $this->createMock(CatalogPricesCalculatorInterface::class);
         $this->availabilityChecker = $this->createMock(AvailabilityCheckerInterface::class);
         $this->sectionProvider = $this->createMock(SectionProviderInterface::class);
         $this->iriConverter = $this->createMock(IriConverterInterface::class);

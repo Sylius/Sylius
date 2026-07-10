@@ -20,6 +20,8 @@ use Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final class TaxonSlugGeneratorTest extends TestCase
 {
@@ -35,6 +37,9 @@ final class TaxonSlugGeneratorTest extends TestCase
     /** @var TaxonTranslationInterface&MockObject */
     private MockObject $parentTaxonTranslation;
 
+    /** @var SluggerInterface&MockObject */
+    private MockObject $slugger;
+
     private TaxonSlugGenerator $taxonSlugGenerator;
 
     protected function setUp(): void
@@ -43,7 +48,9 @@ final class TaxonSlugGeneratorTest extends TestCase
         $this->parentTaxon = $this->createMock(TaxonInterface::class);
         $this->taxonTranslation = $this->createMock(TaxonTranslationInterface::class);
         $this->parentTaxonTranslation = $this->createMock(TaxonTranslationInterface::class);
-        $this->taxonSlugGenerator = new TaxonSlugGenerator();
+        $this->slugger = $this->createMock(SluggerInterface::class);
+        $this->slugger->method('slug')->willReturnCallback((new AsciiSlugger())->slug(...));
+        $this->taxonSlugGenerator = new TaxonSlugGenerator($this->slugger);
     }
 
     public function testShouldImplementTaxonSlugGeneratorInterface(): void
@@ -101,5 +108,27 @@ final class TaxonSlugGeneratorTest extends TestCase
         $this->taxon->expects($this->never())->method('getParent');
 
         $this->taxonSlugGenerator->generate($this->taxon, 'pl_PL');
+    }
+
+    public function testShouldGenerateSlugForRootTaxonUsingBehatTransliteratorWhenNoSluggerProvided(): void
+    {
+        $generator = new TaxonSlugGenerator(null);
+
+        $this->taxon->method('getTranslation')->with('pl_PL')->willReturn($this->taxonTranslation);
+        $this->taxonTranslation->method('getName')->willReturn('Board games');
+        $this->taxon->method('getParent')->willReturn(null);
+
+        $this->assertSame('board-games', $generator->generate($this->taxon, 'pl_PL'));
+    }
+
+    public function testShouldGenerateSlugForRootTaxonReplacingApostrophesWithHyphensUsingBehatTransliteratorWhenNoSluggerProvided(): void
+    {
+        $generator = new TaxonSlugGenerator(null);
+
+        $this->taxon->method('getTranslation')->with('pl_PL')->willReturn($this->taxonTranslation);
+        $this->taxonTranslation->method('getName')->willReturn("Rock'n'roll");
+        $this->taxon->method('getParent')->willReturn(null);
+
+        $this->assertSame('rock-n-roll', $generator->generate($this->taxon, 'pl_PL'));
     }
 }

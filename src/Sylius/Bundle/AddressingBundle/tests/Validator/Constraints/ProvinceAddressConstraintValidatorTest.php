@@ -39,7 +39,7 @@ final class ProvinceAddressConstraintValidatorTest extends TestCase
 
     private AddressInterface&MockObject $address;
 
-    private MockObject&ProvinceAddressConstraint $constraint;
+    private ProvinceAddressConstraint $constraint;
 
     private ExecutionContextInterface&MockObject $context;
 
@@ -50,7 +50,7 @@ final class ProvinceAddressConstraintValidatorTest extends TestCase
         $this->countryRepository = $this->createMock(RepositoryInterface::class);
         $this->provinceRepository = $this->createMock(RepositoryInterface::class);
         $this->address = $this->createMock(AddressInterface::class);
-        $this->constraint = $this->createMock(ProvinceAddressConstraint::class);
+        $this->constraint = new ProvinceAddressConstraint();
         $this->context = $this->createMock(ExecutionContextInterface::class);
 
         $this->provinceAddressConstraintValidator = new ProvinceAddressConstraintValidator(

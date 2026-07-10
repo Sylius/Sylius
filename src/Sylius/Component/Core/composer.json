@@ -29,7 +29,6 @@
         "php": "^8.2",
         "doctrine/common": "^3.2",
         "guzzlehttp/guzzle": "^7.9",
-        "knplabs/gaufrette": "^0.11",
         "laminas/laminas-stdlib": "^3.19",
         "league/flysystem": "^3.29",
         "psr/http-client": "^1.0",
@@ -72,7 +71,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
             "require": "^7.4"

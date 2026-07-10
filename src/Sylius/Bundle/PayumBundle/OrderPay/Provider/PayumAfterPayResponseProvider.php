@@ -64,7 +64,7 @@ final class PayumAfterPayResponseProvider implements AfterPayResponseProviderInt
     public function supports(RequestConfiguration $requestConfiguration): bool
     {
         $request = $requestConfiguration->getRequest();
-        $hash = $request->attributes->get('payum_token', $request->get('payum_token', false));
+        $hash = $request->attributes->get('payum_token', $request->query->get('payum_token', $request->request->get('payum_token', false)));
 
         return false !== $hash;
     }

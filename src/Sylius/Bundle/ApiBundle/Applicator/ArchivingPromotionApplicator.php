@@ -24,7 +24,7 @@ final class ArchivingPromotionApplicator implements ArchivingPromotionApplicator
 
     public function archive(PromotionInterface $data): PromotionInterface
     {
-        $data->setArchivedAt($this->calendar->now());
+        $data->setArchivedAt(\DateTime::createFromImmutable($this->calendar->now()));
 
         return $data;
     }

@@ -44,7 +44,7 @@
         "symfony/ux-autocomplete": "^2.25",
         "symfony/ux-live-component": "^2.25",
         "symfony/webpack-encore-bundle": "^2.2",
-        "symfonycasts/dynamic-forms": "^0.1",
+        "symfonycasts/dynamic-forms": "^0.2",
         "twig/extra-bundle": "^3.16",
         "twig/twig": "^3.16"
     },
@@ -63,7 +63,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
             "require": "^7.4"
