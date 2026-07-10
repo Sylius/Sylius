@@ -1,4 +1,7 @@
 services:
+    Sylius\Bundle\ApiBundle\Application\Resource\SampleProductProvider:
+        tags: ['api_platform.state_provider']
+
     Sylius\Bundle\ApiBundle\Application\CommandHandler\FooHandler:
         tags:
             - { name: messenger.message_handler, bus: sylius.command_bus }

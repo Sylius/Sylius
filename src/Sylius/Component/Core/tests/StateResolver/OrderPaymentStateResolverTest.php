@@ -299,4 +299,48 @@ final class OrderPaymentStateResolverTest extends TestCase
 
         $this->stateResolver->resolve($this->order);
     }
+
+    public function testShouldMarkOrderAsAwaitingPaymentWhenCancelledPaymentExistsAlongsideNewCartPayment(): void
+    {
+        $this->firstPayment->expects($this->exactly(5))->method('getState')->willReturn(PaymentInterface::STATE_CANCELLED);
+        $this->secondPayment->expects($this->exactly(5))->method('getState')->willReturn(PaymentInterface::STATE_CART);
+        $this->order
+            ->expects($this->exactly(6))
+            ->method('getPayments')
+            ->willReturn(new ArrayCollection([$this->firstPayment, $this->secondPayment]));
+        $this->order->expects($this->exactly(3))->method('getTotal')->willReturn(10000);
+        $this->stateMachine
+            ->expects($this->once())
+            ->method('can')
+            ->with($this->order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->willReturn(true);
+        $this->stateMachine
+            ->expects($this->once())
+            ->method('apply')
+            ->with($this->order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+
+        $this->stateResolver->resolve($this->order);
+    }
+
+    public function testShouldMarkOrderAsAwaitingPaymentWhenFailedPaymentExistsAlongsideNewCartPayment(): void
+    {
+        $this->firstPayment->expects($this->exactly(5))->method('getState')->willReturn(PaymentInterface::STATE_FAILED);
+        $this->secondPayment->expects($this->exactly(5))->method('getState')->willReturn(PaymentInterface::STATE_CART);
+        $this->order
+            ->expects($this->exactly(6))
+            ->method('getPayments')
+            ->willReturn(new ArrayCollection([$this->firstPayment, $this->secondPayment]));
+        $this->order->expects($this->exactly(3))->method('getTotal')->willReturn(10000);
+        $this->stateMachine
+            ->expects($this->once())
+            ->method('can')
+            ->with($this->order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)
+            ->willReturn(true);
+        $this->stateMachine
+            ->expects($this->once())
+            ->method('apply')
+            ->with($this->order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+
+        $this->stateResolver->resolve($this->order);
+    }
 }

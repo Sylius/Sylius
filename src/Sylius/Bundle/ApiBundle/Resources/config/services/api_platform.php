@@ -36,6 +36,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius_api.provider.path_prefix'),
             service('sylius_api.operation_resolver.path_prefix_based'),
             service('api_platform.router'),
+            service('api_platform.resource_class_resolver'),
         ])
     ;
 

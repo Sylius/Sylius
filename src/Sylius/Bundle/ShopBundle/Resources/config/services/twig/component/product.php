@@ -92,7 +92,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius_shop.twig.component.product.summary', SummaryComponent::class)
         ->args([
-            service('sylius.resolver.product_variant.default'),
+            service('sylius.resolver.product_variant'),
             service('sylius.repository.product'),
             service('sylius.repository.product_variant'),
         ])

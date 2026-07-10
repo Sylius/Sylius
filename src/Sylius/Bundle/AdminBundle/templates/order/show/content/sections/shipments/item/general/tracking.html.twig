@@ -1,0 +1,8 @@
+{% set shipment = hookable_metadata.context.shipment %}
+
+{% if shipment.state == 'shipped' and shipment.tracking is not empty %}
+    <div class="text-secondary-emphasis">
+        <strong>{{ 'sylius.ui.tracking_code'|trans }}:</strong>
+        <span>{{ shipment.tracking }}</span>
+    </div>
+{% endif %}

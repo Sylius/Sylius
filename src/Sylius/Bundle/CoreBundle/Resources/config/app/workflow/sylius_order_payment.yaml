@@ -20,7 +20,10 @@ framework:
                 - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_REFUNDED
             transitions:
                 !php/const Sylius\Component\Core\OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT:
-                    from: !php/const Sylius\Component\Core\OrderPaymentStates::STATE_CART
+                    from:
+                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_CART
+                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AUTHORIZED
+                        - !php/const Sylius\Component\Core\OrderPaymentStates::STATE_PARTIALLY_AUTHORIZED
                     to: !php/const Sylius\Component\Core\OrderPaymentStates::STATE_AWAITING_PAYMENT
                 !php/const Sylius\Component\Core\OrderPaymentTransitions::TRANSITION_PARTIALLY_AUTHORIZE:
                     from: 

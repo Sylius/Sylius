@@ -47,3 +47,8 @@ winzou_state_machine:
                     do: ["@sylius.state_resolver.order_payment", "resolve"]
                     args: ["object.getOrder()"]
                     priority: -100
+                sylius_resolve_state_after_cancel_or_fail:
+                    on: ["cancel", "fail"]
+                    do: ["@sylius.state_resolver.order_payment", "resolve"]
+                    args: ["object.getOrder()"]
+                    priority: -100

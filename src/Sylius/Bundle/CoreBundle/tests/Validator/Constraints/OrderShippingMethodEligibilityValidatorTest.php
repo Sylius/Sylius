@@ -55,6 +55,34 @@ final class OrderShippingMethodEligibilityValidatorTest extends TestCase
         $this->validator->validate('', $this->createMock(Constraint::class));
     }
 
+    public function testItDoesNothingWhenThereAreNoShipments(): void
+    {
+        $constraint = new OrderShippingMethodEligibility();
+
+        $order = $this->createMock(OrderInterface::class);
+        $order->method('getShipments')->willReturn(new ArrayCollection([]));
+
+        $this->context->expects($this->never())->method('addViolation');
+
+        $this->validator->validate($order, $constraint);
+    }
+
+    public function testItSkipsShipmentsWithoutShippingMethod(): void
+    {
+        $constraint = new OrderShippingMethodEligibility();
+
+        $order = $this->createMock(OrderInterface::class);
+        $shipment = $this->createMock(ShipmentInterface::class);
+
+        $order->method('getShipments')->willReturn(new ArrayCollection([$shipment]));
+        $shipment->method('getMethod')->willReturn(null);
+
+        $this->eligibilityChecker->expects($this->never())->method('isEligible');
+        $this->context->expects($this->never())->method('addViolation');
+
+        $this->validator->validate($order, $constraint);
+    }
+
     public function testItAddsViolationForNotAvailableShippingMethods(): void
     {
         $constraint = new OrderShippingMethodEligibility();
