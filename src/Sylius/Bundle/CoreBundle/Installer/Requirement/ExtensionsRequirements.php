@@ -123,7 +123,7 @@ final class ExtensionsRequirements extends RequirementCollection
 
         if (extension_loaded('intl')) {
             if (defined('INTL_ICU_VERSION')) {
-                $version = INTL_ICU_VERSION;
+                $version = \INTL_ICU_VERSION;
             } else {
                 $reflector = new ReflectionExtension('intl');
 
