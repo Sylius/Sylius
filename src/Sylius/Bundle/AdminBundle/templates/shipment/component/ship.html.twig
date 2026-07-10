@@ -5,12 +5,14 @@
 {% set path = path|default('sylius_admin_shipment_ship') %}
 {% set path_parameters = path_parameters|default({id: resource.id}) %}
 
+{% set tracking_placeholder = 'sylius.ui.tracking_code'|trans ~ '...' %}
+
 {% if sylius_sm_can(resource, 'sylius_shipment', 'ship') %}
     <div {{ attributes }}>
         {{ form_start(form, {'action': path(path, path_parameters), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         <input type="hidden" name="_method" value="PUT">
         <div class="input-group flex-nowrap">
-            {{ form_widget(form.tracking, sylius_test_form_attribute('shipment-tracking')|sylius_merge_recursive({'attr': {'placeholder': 'sylius.ui.tracking_code'|trans ~ '...', 'style': 'min-width: 130px;'}})) }}
+            {{ form_widget(form.tracking, sylius_test_form_attribute('shipment-tracking')|sylius_merge_recursive({'attr': {'placeholder': tracking_placeholder, 'style': 'min-width: max(130px, ' ~ tracking_placeholder|length ~ 'ch)'}})) }}
             <button type="submit" class="btn" {{ sylius_test_html_attribute('shipment-ship-button') }}>
                 {{ ux_icon('tabler:truck') }}
                 {{ 'sylius.ui.ship'|trans }}
