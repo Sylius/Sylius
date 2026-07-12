@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Grid\Account;
 
 use Sylius\Bundle\GridBundle\Builder\Action\Action;
+use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
 use Sylius\Bundle\GridBundle\Builder\Field\DateTimeField;
 use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
 use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
@@ -46,23 +47,22 @@ final class OrderGrid implements OrderGridInterface
                 TwigField::create('state', '@SyliusUi/grid/field/label.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->setSortable(true)
-                    ->addOptions([
+                    ->withOptions([
                         'vars' => [
                             'labels' => '@SyliusShop/account/order/label/state',
                         ],
                     ]),
             )
             ->withItemActions(
-                Action::create('show', 'shop_show')
-                    ->setLabel('sylius.ui.show')
-                    ->setOptions([
-                        'link' => [
-                            'route' => 'sylius_shop_account_order_show',
-                            'parameters' => [
-                                'number' => 'resource.number',
-                            ],
+                ShowAction::create([
+                    'link' => [
+                        'route' => 'sylius_shop_account_order_show',
+                        'parameters' => [
+                            'number' => 'resource.number',
                         ],
-                    ]),
+                    ],
+                ])
+                    ->setTemplate('@SyliusShop/grid/action/show.html.twig'),
                 Action::create('pay', 'shop_pay')
                     ->setLabel('sylius.ui.pay')
                     ->setOptions([

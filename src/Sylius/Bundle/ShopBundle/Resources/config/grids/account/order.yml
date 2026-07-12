@@ -51,8 +51,8 @@ sylius_grid:
             actions:
                 item:
                     show:
-                        type: shop_show
-                        label: sylius.ui.show
+                        type: show
+                        template: "@SyliusShop/grid/action/show.html.twig"
                         options:
                             link:
                                 route: sylius_shop_account_order_show
