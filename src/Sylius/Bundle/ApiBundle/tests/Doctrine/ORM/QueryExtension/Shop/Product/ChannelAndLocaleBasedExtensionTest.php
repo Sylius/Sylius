@@ -16,7 +16,6 @@ namespace Tests\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
-use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -75,11 +74,12 @@ final class ChannelAndLocaleBasedExtensionTest extends TestCase
         );
     }
 
-    public function test_it_throws_exception_if_context_has_no_channel(): void
+    public function test_it_does_not_apply_conditions_to_collection_when_context_has_no_channel(): void
     {
         $this->sectionProvider->method('getSection')->willReturn(new ShopApiSection());
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->queryBuilder->expects(self::never())->method('getRootAliases');
+        $this->queryBuilder->expects(self::never())->method('andWhere');
 
         $this->extension->applyToCollection(
             $this->queryBuilder,
@@ -89,13 +89,14 @@ final class ChannelAndLocaleBasedExtensionTest extends TestCase
         );
     }
 
-    public function test_it_throws_exception_if_context_has_no_locale(): void
+    public function test_it_does_not_apply_conditions_to_collection_when_context_has_no_locale(): void
     {
         $this->sectionProvider->method('getSection')->willReturn(new ShopApiSection());
 
         $channel = $this->createMock(ChannelInterface::class);
 
-        $this->expectException(InvalidArgumentException::class);
+        $this->queryBuilder->expects(self::never())->method('getRootAliases');
+        $this->queryBuilder->expects(self::never())->method('andWhere');
 
         $this->extension->applyToCollection(
             $this->queryBuilder,
