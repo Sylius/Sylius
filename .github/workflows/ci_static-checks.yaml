@@ -93,6 +93,14 @@ jobs:
                 if: matrix.php == '8.2'
                 run: composer require ext-random --no-update --no-scripts --no-interaction
 
+            # TODO: Temporary — some Behat extensions have no Behat 4 release supporting Symfony 6.4
+            # (mink-extension's Behat 4 branch and our symfony-extension fork require Symfony ^7.4+).
+            # On Symfony 6.4 we pin their last releases that still support 6.4 just so dependencies
+            # resolve. Remove once Behat 4 compatible releases supporting Symfony 6.4 are available.
+            -   name: "Pin Behat extensions without Symfony 6.4 support (temporary)"
+                if: "${{ matrix.symfony == '~6.4.0' }}"
+                run: composer require --dev friends-of-behat/mink-extension:2.7.5 friends-of-behat/symfony-extension:2.6.2 --no-update --no-scripts --no-interaction
+
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
