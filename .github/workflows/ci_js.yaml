@@ -89,6 +89,11 @@ jobs:
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
+            # TODO: Temporary — pin Behat extensions without Symfony 6.4 support (see composer.json).
+            -   name: "Pin Behat extensions without Symfony 6.4 support (temporary)"
+                if: "${{ matrix.symfony == '~6.4.0' }}"
+                run: composer require --dev friends-of-behat/mink-extension:2.7.5 friends-of-behat/symfony-extension:2.6.2 --no-update --no-scripts --no-interaction
+
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v4
                 with:
@@ -158,6 +163,11 @@ jobs:
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
+
+            # TODO: Temporary — pin Behat extensions without Symfony 6.4 support (see composer.json).
+            -   name: "Pin Behat extensions without Symfony 6.4 support (temporary)"
+                if: "${{ matrix.symfony == '~6.4.0' }}"
+                run: composer require --dev friends-of-behat/mink-extension:2.7.5 friends-of-behat/symfony-extension:2.6.2 --no-update --no-scripts --no-interaction
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v4
