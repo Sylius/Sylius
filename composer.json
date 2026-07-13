@@ -186,19 +186,19 @@
         "sylius/user-bundle": "self.version"
     },
     "require-dev": {
-        "behat/behat": "4.x-dev#4f9dc93bbe7cbd54c58b7231e25dbcd1f688e728 as 3.30.0",
+        "behat/behat": "^3.5 || 4.0.0-alpha1 as 3.5.0",
         "behat/mink-selenium2-driver": "^1.7",
         "dbrekelmans/bdi": "^1.3",
-        "dmore/behat-chrome-extension": "^1.4",
+        "dmore/behat-chrome-extension": "dev-support-behat-4 as 1.4.1",
         "dmore/chrome-mink-driver": "^2.9",
         "doctrine/cache": "^2.2",
         "doctrine/data-fixtures": "^1.7 || ^2.2",
         "behat/mink": "^1.13",
         "friends-of-behat/mink-browserkit-driver": "^1.6.3",
         "friends-of-behat/mink-debug-extension": "^2.1",
-        "friends-of-behat/mink-extension": "dev-symfony-8 as 2.7.5.1",
+        "friends-of-behat/mink-extension": "dev-support-behat-4 as 2.7.5.1",
         "friends-of-behat/page-object-extension": "^0.3",
-        "friends-of-behat/symfony-extension": "dev-symfony-8 as 2.6.2",
+        "friends-of-behat/symfony-extension": "dev-symfony-8-behat-4 as 2.6.2",
         "friends-of-behat/variadic-extension": "^1.7.0",
         "hwi/oauth-bundle": "^2.5",
         "lchrusciel/api-test-case": "^6.0",
@@ -241,15 +241,21 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/loic425/behat-panther-extension.git"
+            "url": "https://gitlab.com/GSadee/behat-chrome-extension.git"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/loic425/MinkExtension.git"
+            "url": "https://github.com/GSadee/behat-panther-extension.git"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Kocal/FriendsOfBehat-SymfonyExtension.git"
+            "url": "https://github.com/GSadee/MinkExtension.git",
+            "canonical": false
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/GSadee/SymfonyExtension.git",
+            "canonical": false
         }
     ],
     "config": {
