@@ -96,10 +96,10 @@ jobs:
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
-            # TODO: Temporarily disabled — `behat/behat` is pinned to a commit-ref in composer.json
-            # (commit before the getConfigKey(): string change, to keep dmore/behat-chrome-extension
-            # compatible with Behat 4.x-dev), which `composer validate --strict` rejects.
-            # Re-enable once the behat pin is removed (e.g. dmore is forked/patched for Behat 4).
+            # TODO: Temporarily disabled — `behat/behat` uses an inline alias in composer.json
+            # ("^3.5 || 4.0.0-alpha1 as 3.5.0", needed while Behat 4 is in alpha so Symfony 6.4 resolves
+            # to real Behat 3 and 7.4/8.0 to the alpha), which `composer validate --strict` rejects.
+            # Re-enable once the inline alias is removed (Behat 4 stable + extensions supporting SF 6.4).
             #-   name: "Validate composer.json"
             #    run: composer validate --strict --no-check-version
 
