@@ -33,6 +33,13 @@ sylius:
             subject: 'Überprüfung der E-Mail-Adresse'
             to_verify_your_email_address: 'Um Ihre E-Mail-Adresse zu verifizieren, klicken Sie auf den Link unten'
             verify_your_email_address: 'Bestätigen Sie Ihre E-Mail-Adresse'
+        user:
+            account_verification:
+                greeting: 'Hallo'
+                message: 'Bestätigen Sie Ihr Konto mit dem Token: '
+                statement: 'Bestätigen Sie Ihre E-Mail-Adresse'
+                strategy: 'Um Ihre E-Mail-Adresse zu bestätigen, klicken Sie auf den unten stehenden Link'
+                subject: 'E-Mail-Adresse verifizieren'
     form:
         block:
             body: 'Inhalt'
