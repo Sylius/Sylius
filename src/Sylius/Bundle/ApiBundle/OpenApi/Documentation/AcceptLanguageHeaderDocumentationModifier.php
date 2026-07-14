@@ -36,7 +36,7 @@ final class AcceptLanguageHeaderDocumentationModifier implements DocumentationMo
             schema: [
                 'type' => 'string',
                 'enum' => array_map(
-                    fn (LocaleInterface $locale): string => $locale->getCode(),
+                    fn (LocaleInterface $locale): string => str_replace('_', '-', $locale->getCode()),
                     $this->localeRepository->findAll(),
                 ),
             ],
