@@ -29,10 +29,10 @@
     "stimulus-use": "^0.52",
     "tom-select": "^2.2.2",
     "webpack": "^5.72",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.0"
   },
   "engines": {
-    "node": ">=20"
+    "node": "^22.13.0 || >=24.0"
   },
   "engineStrict": true,
   "files": [
