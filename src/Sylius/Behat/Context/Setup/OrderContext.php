@@ -618,6 +618,14 @@ final readonly class OrderContext implements Context
         $this->objectManager->flush();
     }
 
+    #[When('the payment of order :order is cancelled by the gateway')]
+    public function thePaymentOfOrderIsCancelledByTheGateway(OrderInterface $order): void
+    {
+        $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_CANCEL);
+
+        $this->objectManager->flush();
+    }
+
     #[Given('/^(this order) has been refunded$/')]
     #[Given('the customer has refunded the order with number :order')]
     public function thisOrderHasBeenRefunded(OrderInterface $order): void
@@ -1030,6 +1038,7 @@ final readonly class OrderContext implements Context
         $transitions = [
             'new' => [],
             'processing' => [PaymentTransitions::TRANSITION_PROCESS],
+            'authorized' => [PaymentTransitions::TRANSITION_AUTHORIZE],
             'completed' => [PaymentTransitions::TRANSITION_COMPLETE],
             'cancelled' => [PaymentTransitions::TRANSITION_CANCEL],
             'failed' => [PaymentTransitions::TRANSITION_FAIL],

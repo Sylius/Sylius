@@ -1,0 +1,6 @@
+{% set shipment = hookable_metadata.context.shipment %}
+
+<div class="py-2">
+    <strong {{ sylius_test_html_attribute('shipment-method') }}>{{ shipment.method.name }}</strong>
+    <div class="text-secondary">{{ ux_icon('tabler:world') }} {{ shipment.method.zone }}</div>
+</div>

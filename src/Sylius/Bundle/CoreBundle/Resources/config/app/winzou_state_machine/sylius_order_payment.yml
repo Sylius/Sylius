@@ -16,7 +16,7 @@ winzou_state_machine:
             refunded: ~
         transitions:
             request_payment:
-                from: [cart]
+                from: [cart, authorized, partially_authorized]
                 to: awaiting_payment
             partially_authorize:
                 from: [awaiting_payment, partially_authorized]

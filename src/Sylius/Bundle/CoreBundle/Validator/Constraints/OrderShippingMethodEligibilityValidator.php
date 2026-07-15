@@ -43,8 +43,12 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
         }
 
         foreach ($shipments as $shipment) {
-            /** @var ShippingMethodInterface $shippingMethod */
+            /** @var ?ShippingMethodInterface $shippingMethod */
             $shippingMethod = $shipment->getMethod();
+
+            if (null === $shippingMethod) {
+                continue;
+            }
 
             if (!$shippingMethod->isEnabled() || !$shippingMethod->getChannels()->contains($value->getChannel())) {
                 $this->context->addViolation(

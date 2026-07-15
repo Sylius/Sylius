@@ -33,5 +33,7 @@ return static function (ContainerConfigurator $container) {
         ->tag('kernel.event_listener', ['event' => 'workflow.sylius_payment.completed.process', 'priority' => 100])
         ->tag('kernel.event_listener', ['event' => 'workflow.sylius_payment.completed.refund', 'priority' => 100])
         ->tag('kernel.event_listener', ['event' => 'workflow.sylius_payment.completed.authorize', 'priority' => 100])
+        ->tag('kernel.event_listener', ['event' => 'workflow.sylius_payment.completed.cancel', 'priority' => 50])
+        ->tag('kernel.event_listener', ['event' => 'workflow.sylius_payment.completed.fail', 'priority' => 50])
     ;
 };

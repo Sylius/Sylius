@@ -30,6 +30,7 @@
     "ApiPlatform\\Metadata\\QueryParameter",
     "ApiPlatform\\Metadata\\Resource\\Factory\\ResourceMetadataCollectionFactoryInterface",
     "ApiPlatform\\Metadata\\Resource\\ResourceMetadataCollection",
+    "ApiPlatform\\Metadata\\ResourceClassResolverInterface",
     "ApiPlatform\\Metadata\\UriVariablesConverterInterface",
     "ApiPlatform\\Metadata\\UrlGeneratorInterface",
     "ApiPlatform\\Metadata\\Util\\ClassInfoTrait",

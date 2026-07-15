@@ -80,6 +80,7 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius_api.doctrine.orm.query_extension.shop.product.channel_and_locale_based', ChannelAndLocaleBasedExtension::class)
         ->args([service('sylius.section_resolver.uri_based')])
         ->tag('api_platform.doctrine.orm.query_extension.collection')
+        ->tag('api_platform.doctrine.orm.query_extension.item')
     ;
 
     $services

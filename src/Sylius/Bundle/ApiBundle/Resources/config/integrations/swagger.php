@@ -28,6 +28,7 @@ use Sylius\Bundle\ApiBundle\OpenApi\Documentation\ProductVariantDocumentationMod
 use Sylius\Bundle\ApiBundle\OpenApi\Documentation\PromotionDocumentationModifier;
 use Sylius\Bundle\ApiBundle\OpenApi\Documentation\ShippingMethodDocumentationModifier;
 use Sylius\Bundle\ApiBundle\OpenApi\Documentation\StatisticsDocumentationModifier;
+use Sylius\Bundle\ApiBundle\OpenApi\Documentation\TaxonDocumentationModifier;
 use Sylius\Bundle\ApiBundle\OpenApi\Factory\OpenApiFactory;
 
 return static function (ContainerConfigurator $container) {
@@ -113,5 +114,9 @@ return static function (ContainerConfigurator $container) {
         ->tag('sylius.open_api.modifier');
 
     $services->set('sylius_api.open_api.documentation_modifier.address_log_entry', AddressLogEntryDocumentationModifier::class)
+        ->tag('sylius.open_api.modifier');
+
+    $services->set('sylius_api.open_api.documentation_modifier.taxon', TaxonDocumentationModifier::class)
+        ->args(['%sylius.security.api_route%'])
         ->tag('sylius.open_api.modifier');
 };

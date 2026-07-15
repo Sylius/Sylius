@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Sylius Sp. z o.o.
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<resources
+    xmlns="https://api-platform.com/schema/metadata/resources-3.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://api-platform.com/schema/metadata/resources-3.0 https://api-platform.com/schema/metadata/resources-3.0.xsd"
+>
+    <resource class="Sylius\Bundle\ApiBundle\Application\Resource\SampleProduct">
+        <operations>
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/admin/sample-products"
+                name="sylius_api_admin_sample_product_get_collection"
+                provider="Sylius\Bundle\ApiBundle\Application\Resource\SampleProductProvider"
+            />
+
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/admin/sample-products/{id}"
+                name="sylius_api_admin_sample_product_get"
+                provider="Sylius\Bundle\ApiBundle\Application\Resource\SampleProductProvider"
+            />
+
+            <operation
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/sample-products"
+                name="sylius_api_shop_sample_product_get_collection"
+                provider="Sylius\Bundle\ApiBundle\Application\Resource\SampleProductProvider"
+            />
+
+            <operation
+                class="ApiPlatform\Metadata\Get"
+                uriTemplate="/shop/sample-products/{id}"
+                name="sylius_api_shop_sample_product_get"
+                provider="Sylius\Bundle\ApiBundle\Application\Resource\SampleProductProvider"
+            />
+        </operations>
+    </resource>
+</resources>
