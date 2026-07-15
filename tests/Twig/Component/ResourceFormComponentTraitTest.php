@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Sylius\Bundle\UiBundle\Twig\Component;
+namespace Sylius\Tests\Twig\Component;
 
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
