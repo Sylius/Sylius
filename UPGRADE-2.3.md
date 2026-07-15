@@ -222,6 +222,44 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    | `ShippingBundle\...\ShippingMethodCalculatorExists` | `invalidShippingCalculator` | `invalidShippingCalculatorMessage` |
    | `ShippingBundle\...\ShippingMethodRule` | `invalidType` | `invalidTypeMessage` |
 
+## Frontend
+
+1. The `@symfony/webpack-encore` package has been upgraded from `^5.0.1` to `^6.0.0`, and `webpack-cli` from `^5.1.4` to `^6.0.0`.
+
+   Webpack Encore 6 requires Node.js `^22.13.0 || >=24.0` — the `engines` constraints in the `package.json` files have been updated accordingly.
+
+   The `@sylius-ui/admin` and `@sylius-ui/shop` packages are now ES modules (`"type": "module"`), and their
+   `getWebpackConfig()` / `getBaseWebpackConfig()` methods have become **asynchronous** — they now return a `Promise`
+   and must be awaited.
+
+   In your application, update `@symfony/webpack-encore` to `^6.0.0` and `webpack-cli` to `^6.0.0` in `package.json`,
+   and add `"type": "module"` to it (or rename `webpack.config.js` to `webpack.config.mjs`), so that Node.js treats
+   the config file as an ES module.
+
+   Then update your application's `webpack.config.js` to use ESM syntax and an async config factory:
+
+   ```diff
+   -const path = require('path');
+   -const SyliusAdmin = require('@sylius-ui/admin');
+   -const SyliusShop = require('@sylius-ui/shop');
+   +import path from 'path';
+   +import { fileURLToPath } from 'url';
+   +import SyliusAdmin from '@sylius-ui/admin';
+   +import SyliusShop from '@sylius-ui/shop';
+
+   -const adminConfig = SyliusAdmin.getWebpackConfig(path.resolve(__dirname));
+   -const shopConfig = SyliusShop.getWebpackConfig(path.resolve(__dirname));
+   +const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+   -module.exports = [adminConfig, shopConfig];
+   +export default async () => {
+   +    const adminConfig = await SyliusAdmin.getWebpackConfig(path.resolve(__dirname));
+   +    const shopConfig = await SyliusShop.getWebpackConfig(path.resolve(__dirname));
+   +
+   +    return [adminConfig, shopConfig];
+   +};
+   ```
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
