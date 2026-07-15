@@ -141,6 +141,9 @@
 
    - `strict_mode` (default `false`): when enabled, `Sylius\Component\Payment\Encryption\Encrypter::decrypt()` throws
      an `EncryptionException` for data that is not encrypted, instead of silently returning it unchanged.
+     Additionally, `GatewayConfigEncrypter` and `PaymentRequestEncrypter` throw an `EncryptionException` when the
+     gateway config, payload or response data is only partially encrypted. By default (non-strict) they keep the
+     previous lenient behavior: partially encrypted data is still decrypted based on its first element.
 
      ```yaml
      sylius_payment:
@@ -170,12 +173,12 @@
 
    ```diff
    -public function __construct(private EncrypterInterface $encrypter)
-   +public function __construct(private EncrypterInterface $encrypter, private array|bool $allowedClasses = true)
+   +public function __construct(private EncrypterInterface $encrypter, private array|bool $allowedClasses = true, private bool $strictMode = false)
    ```
 
    Affected classes: `Sylius\Component\Payment\Encryption\Encrypter` (`$strictDecryption`),
    `Sylius\Component\Payment\Encryption\GatewayConfigEncrypter` and
-   `Sylius\Component\Payment\Encryption\PaymentRequestEncrypter` (`$allowedClasses`).
+   `Sylius\Component\Payment\Encryption\PaymentRequestEncrypter` (`$allowedClasses` and `$strictMode`).
 
 ### Grid providers are now configurable
 

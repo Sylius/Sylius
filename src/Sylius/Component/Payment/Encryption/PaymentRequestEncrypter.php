@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Encryption;
 
+use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Webmozart\Assert\Assert;
 
@@ -29,6 +30,7 @@ final readonly class PaymentRequestEncrypter implements EntityEncrypterInterface
     public function __construct(
         private EncrypterInterface $encrypter,
         private array|bool $allowedClasses = true,
+        private bool $strictMode = false,
     ) {
         if (is_array($this->allowedClasses)) {
             Assert::allStringNotEmpty($allowedClasses, 'Each allowed class must be a non-empty string. Got: %s');
@@ -52,12 +54,27 @@ final readonly class PaymentRequestEncrypter implements EntityEncrypterInterface
 
     public function decrypt(EncryptionAwareInterface $resource): void
     {
-        if (null !== $resource->getPayload() && $this->isEncrypted($resource->getPayload())) {
-            $resource->setPayload(unserialize($this->encrypter->decrypt($resource->getPayload()), ['allowed_classes' => $this->allowedClasses]));
+        $payload = $resource->getPayload();
+        if (null !== $payload) {
+            if ($this->strictMode && !$this->isEncrypted($payload)) {
+                throw EncryptionException::dataIsNotFullyEncrypted();
+            }
+
+            if ($this->isEncrypted($payload)) {
+                $resource->setPayload(unserialize($this->encrypter->decrypt($payload), ['allowed_classes' => $this->allowedClasses]));
+            }
         }
 
         $responseData = $resource->getResponseData();
-        if (!$this->isFullyEncrypted($responseData)) {
+        if ([] === $responseData) {
+            return;
+        }
+
+        if ($this->strictMode) {
+            if (!$this->isFullyEncrypted($responseData)) {
+                throw EncryptionException::dataIsNotFullyEncrypted();
+            }
+        } elseif (!$this->isEncrypted(current($responseData))) {
             return;
         }
 
@@ -66,9 +83,7 @@ final readonly class PaymentRequestEncrypter implements EntityEncrypterInterface
             $decryptedRequestData[$key] = unserialize($this->encrypter->decrypt($value), ['allowed_classes' => $this->allowedClasses]);
         }
 
-        if ([] !== $decryptedRequestData) {
-            $resource->setResponseData($decryptedRequestData);
-        }
+        $resource->setResponseData($decryptedRequestData);
     }
 
     /** @param array<array-key, mixed> $values */

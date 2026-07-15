@@ -45,6 +45,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('sylius.encrypter'),
             '%sylius.encryption.allowed_classes%',
+            '%sylius.encryption.strict_mode%',
         ])
     ;
 
@@ -53,6 +54,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('sylius.encrypter'),
             '%sylius.encryption.allowed_classes%',
+            '%sylius.encryption.strict_mode%',
         ])
     ;
 

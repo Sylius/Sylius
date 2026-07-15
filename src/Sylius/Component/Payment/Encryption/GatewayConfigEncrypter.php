@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Encryption;
 
+use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Webmozart\Assert\Assert;
 
@@ -29,6 +30,7 @@ final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
     public function __construct(
         private EncrypterInterface $encrypter,
         private array|bool $allowedClasses = true,
+        private bool $strictMode = false,
     ) {
         if (is_array($this->allowedClasses)) {
             Assert::allStringNotEmpty($allowedClasses, 'Each allowed class must be a non-empty string. Got: %s');
@@ -49,7 +51,15 @@ final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
     public function decrypt(EncryptionAwareInterface $resource): void
     {
         $config = $resource->getConfig();
-        if (!$this->isFullyEncrypted($config)) {
+        if ([] === $config) {
+            return;
+        }
+
+        if ($this->strictMode) {
+            if (!$this->isFullyEncrypted($config)) {
+                throw EncryptionException::dataIsNotFullyEncrypted();
+            }
+        } elseif (!$this->isEncrypted(current($config))) {
             return;
         }
 
@@ -58,9 +68,7 @@ final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
             $decryptedConfig[$key] = unserialize($this->encrypter->decrypt($value), ['allowed_classes' => $this->allowedClasses]);
         }
 
-        if ([] !== $decryptedConfig) {
-            $resource->setConfig($decryptedConfig);
-        }
+        $resource->setConfig($decryptedConfig);
     }
 
     /** @param array<array-key, mixed> $values */
