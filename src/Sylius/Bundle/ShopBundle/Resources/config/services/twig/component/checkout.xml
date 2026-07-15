@@ -25,6 +25,7 @@
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="sylius.repository.address" />
             <argument type="tagged_iterator" tag="sylius_shop.modifier.address_form_values" />
+            <argument type="service" id="sylius.factory.order" />
 
             <tag name="sylius.live_component.shop" key="sylius_shop:checkout:address:form" />
         </service>
@@ -50,6 +51,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.order.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectShippingType</argument>
+            <argument type="service" id="sylius.factory.order" />
 
             <tag name="sylius.live_component.shop" key="sylius_shop:checkout:shipping:form" />
         </service>
@@ -62,6 +64,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.order.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\Checkout\SelectPaymentType</argument>
+            <argument type="service" id="sylius.factory.order" />
 
             <tag name="sylius.live_component.shop" key="sylius_shop:checkout:payment:form" />
         </service>

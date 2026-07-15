@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\SyliusCartEvents;
+use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -46,7 +47,10 @@ class FormComponent
 
     public bool $shouldSaveCart = true;
 
-    /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
+    /**
+     * @param OrderRepositoryInterface<OrderInterface> $orderRepository
+     * @param FactoryInterface<OrderInterface>|null $factory
+     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         FormFactoryInterface $formFactory,
@@ -54,8 +58,9 @@ class FormComponent
         string $formClass,
         protected readonly ObjectManager $manager,
         protected readonly EventDispatcherInterface $eventDispatcher,
+        ?FactoryInterface $factory = null,
     ) {
-        $this->initialize($orderRepository, $formFactory, $resourceClass, $formClass);
+        $this->initialize($orderRepository, $formFactory, $resourceClass, $formClass, $factory);
     }
 
     public function hydrateResource(mixed $value): ?ResourceInterface

@@ -25,6 +25,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.product_option.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductOptionType</argument>
+            <argument type="service" id="sylius.factory.product_option" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:product_option:form" />
         </service>
