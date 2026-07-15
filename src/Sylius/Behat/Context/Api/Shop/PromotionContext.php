@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -46,6 +47,14 @@ final class PromotionContext implements Context
 
         Assert::same($response->getStatusCode(), 422);
         Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
+    }
+
+    #[Then('I should not be notified that the coupon is invalid')]
+    public function iShouldNotBeNotifiedThatCouponIsInvalid(): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::notSame($response->getStatusCode(), 422, 'The coupon was unexpectedly rejected as invalid.');
     }
 
     private function getCartTokenValue(): ?string
