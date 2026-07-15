@@ -15,15 +15,14 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
 use Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface;
 use Sylius\Bundle\PaymentBundle\Processor\HttpResponseProcessorInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Webmozart\Assert\Assert;
 
 /** @experimental */
 final class PaymentRequestAfterPayResponseProvider implements AfterPayResponseProviderInterface
@@ -41,10 +40,9 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
     ) {
     }
 
-    public function getResponse(RequestConfiguration $requestConfiguration): Response
+    public function getResponse(Request $request): Response
     {
-        $hash = $this->getPaymentRequestHash($requestConfiguration);
-        Assert::notNull($hash, 'A request attribute "hash" is required to retrieve the related order.');
+        $hash = $request->attributes->getString('hash');
 
         /** @var PaymentRequestInterface|null $previousPaymentRequest */
         $previousPaymentRequest = $this->paymentRequestRepository->find($hash);
@@ -57,24 +55,19 @@ final class PaymentRequestAfterPayResponseProvider implements AfterPayResponsePr
 
         $this->paymentRequestRepository->add($paymentRequest);
 
-        $response = $this->httpResponseProcessor->process($requestConfiguration, $paymentRequest);
+        $response = $this->httpResponseProcessor->process($request, $paymentRequest);
 
         /** @var PaymentInterface $payment */
         $payment = $paymentRequest->getPayment();
-        $this->paymentStateFlashHandler->handle($requestConfiguration, $payment->getState());
+        $this->paymentStateFlashHandler->handle($request, $payment->getState());
 
         return $response ?? new RedirectResponse($this->orderPayFinalUrlProvider->getUrl($payment));
     }
 
-    public function supports(RequestConfiguration $requestConfiguration): bool
+    public function supports(Request $request): bool
     {
-        $hash = $this->getPaymentRequestHash($requestConfiguration);
+        $hash = $request->attributes->get('hash');
 
         return null !== $hash && '' !== $hash;
-    }
-
-    private function getPaymentRequestHash(RequestConfiguration $requestConfiguration): mixed
-    {
-        return $requestConfiguration->getRequest()->attributes->get('hash');
     }
 }

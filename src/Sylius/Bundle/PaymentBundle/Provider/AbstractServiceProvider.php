@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PaymentBundle\Provider;
 
 use Sylius\Bundle\PaymentBundle\Exception\PaymentRequestNotSupportedException;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
@@ -26,7 +26,7 @@ abstract class AbstractServiceProvider implements ServiceProviderAwareProviderIn
     protected ServiceProviderInterface $locator;
 
     public function supports(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         PaymentRequestInterface $paymentRequest,
     ): bool {
         $index = $this->getHttpResponseProviderIndex($paymentRequest);
@@ -35,11 +35,11 @@ abstract class AbstractServiceProvider implements ServiceProviderAwareProviderIn
             return false;
         }
 
-        return $httpResponseProvider->supports($requestConfiguration, $paymentRequest);
+        return $httpResponseProvider->supports($request, $paymentRequest);
     }
 
     public function getResponse(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         PaymentRequestInterface $paymentRequest,
     ): Response {
         $index = $this->getHttpResponseProviderIndex($paymentRequest);
@@ -52,7 +52,7 @@ abstract class AbstractServiceProvider implements ServiceProviderAwareProviderIn
             ));
         }
 
-        return $httpResponseProvider->getResponse($requestConfiguration, $paymentRequest);
+        return $httpResponseProvider->getResponse($request, $paymentRequest);
     }
 
     public function getProviderIndexes(): array
