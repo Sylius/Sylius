@@ -28,7 +28,7 @@
     "tom-select": "^2.6.2"
   },
   "engines": {
-    "node": ">=22"
+    "node": "^22.13.0 || >=24.0"
   },
   "engineStrict": true
 }
