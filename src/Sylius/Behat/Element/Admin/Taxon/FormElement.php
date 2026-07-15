@@ -28,6 +28,8 @@ class FormElement extends BaseFormElement implements FormElementInterface
     use ChecksCodeImmutability;
     use SpecifiesItsField;
 
+    private const TOM_SELECT_INITIALIZATION_TIMEOUT = 5000;
+
     public function __construct(
         Session $session,
         array|MinkParameters $minkParameters,
@@ -84,9 +86,11 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function chooseParent(TaxonInterface $taxon): void
     {
+        $parentElement = $this->waitForParentTomSelectInitialization();
+
         $this->autocompleteHelper->selectByName(
             $this->getDriver(),
-            $this->getElement('parent')->getXpath(),
+            $parentElement->getXpath(),
             $taxon->getName(),
         );
         $this->waitForFormUpdate();
@@ -94,8 +98,28 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function removeCurrentParent(): void
     {
-        $this->autocompleteHelper->clear($this->getDriver(), $this->getElement('parent')->getXpath());
+        $parentElement = $this->waitForParentTomSelectInitialization();
+
+        $this->autocompleteHelper->clear($this->getDriver(), $parentElement->getXpath());
         $this->waitForFormUpdate();
+    }
+
+    public function searchInParentAutocomplete(string $searchString): array
+    {
+        $parentElement = $this->waitForParentTomSelectInitialization();
+
+        $searchResults = $this->autocompleteHelper->search(
+            $this->getDriver(),
+            $parentElement->getXpath(),
+            $searchString,
+        );
+
+        return is_array($searchResults) ? $searchResults : [];
+    }
+
+    public function searchParentTaxon(string $searchTerm): array
+    {
+        return array_values($this->searchInParentAutocomplete($searchTerm));
     }
 
     public function getTranslationFieldValue(string $element, string $localeCode): string
@@ -155,16 +179,19 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $translationAccordion->click();
     }
 
-    public function searchParentTaxon(string $searchTerm): array
+    private function waitForParentTomSelectInitialization(): NodeElement
     {
         DriverHelper::waitForPageToLoad($this->getSession());
 
-        $searchResults = $this->autocompleteHelper->search(
-            $this->getDriver(),
-            $this->getElement('parent')->getXpath(),
-            $searchTerm,
+        $initialized = $this->getSession()->wait(
+            self::TOM_SELECT_INITIALIZATION_TIMEOUT,
+            sprintf("document.querySelector('%s')?.tomselect !== undefined", $this->getDefinedElements()['parent']),
         );
 
-        return is_array($searchResults) ? array_values($searchResults) : [];
+        if (!$initialized) {
+            throw new \RuntimeException('Tom Select has not been initialized on the parent taxon field.');
+        }
+
+        return $this->getElement('parent');
     }
 }
