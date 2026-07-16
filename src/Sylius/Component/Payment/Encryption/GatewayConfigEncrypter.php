@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Encryption;
 
-use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Webmozart\Assert\Assert;
 
@@ -56,9 +55,7 @@ final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
         }
 
         if ($this->strictMode) {
-            if (!$this->isFullyEncrypted($config)) {
-                throw EncryptionException::dataIsNotFullyEncrypted();
-            }
+            $this->assertFullyEncrypted($config);
         } elseif (!$this->isEncrypted(current($config))) {
             return;
         }
@@ -69,17 +66,5 @@ final readonly class GatewayConfigEncrypter implements EntityEncrypterInterface
         }
 
         $resource->setConfig($decryptedConfig);
-    }
-
-    /** @param array<array-key, mixed> $values */
-    private function isFullyEncrypted(array $values): bool
-    {
-        foreach ($values as $value) {
-            if (!$this->isEncrypted($value)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

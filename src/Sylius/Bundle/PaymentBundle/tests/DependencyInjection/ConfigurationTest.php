@@ -14,10 +14,12 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\PaymentBundle\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\DependencyInjection\Configuration;
 
+#[IgnoreDeprecations]
 final class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
@@ -98,6 +100,18 @@ final class ConfigurationTest extends TestCase
         $this->assertProcessedConfigurationEquals(
             [['encryption' => ['allowed_classes' => [\stdClass::class]]]],
             ['encryption' => ['allowed_classes' => [\stdClass::class]]],
+            'encryption.allowed_classes',
+        );
+    }
+
+    #[Test]
+    public function it_triggers_a_deprecation_when_all_classes_are_allowed_during_decryption(): void
+    {
+        $this->expectUserDeprecationMessage('Since sylius/payment-bundle 2.3: Allowing all classes during payment data decryption by setting "sylius_payment.encryption.allowed_classes" to "true" is deprecated and will not be the default in Sylius 3.0. Set it to "false" or provide an explicit list of allowed class-strings.');
+
+        $this->assertProcessedConfigurationEquals(
+            [['encryption' => ['allowed_classes' => true]]],
+            ['encryption' => ['allowed_classes' => true]],
             'encryption.allowed_classes',
         );
     }

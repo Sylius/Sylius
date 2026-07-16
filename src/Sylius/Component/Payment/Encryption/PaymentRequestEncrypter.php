@@ -71,9 +71,7 @@ final readonly class PaymentRequestEncrypter implements EntityEncrypterInterface
         }
 
         if ($this->strictMode) {
-            if (!$this->isFullyEncrypted($responseData)) {
-                throw EncryptionException::dataIsNotFullyEncrypted();
-            }
+            $this->assertFullyEncrypted($responseData);
         } elseif (!$this->isEncrypted(current($responseData))) {
             return;
         }
@@ -84,17 +82,5 @@ final readonly class PaymentRequestEncrypter implements EntityEncrypterInterface
         }
 
         $resource->setResponseData($decryptedRequestData);
-    }
-
-    /** @param array<array-key, mixed> $values */
-    private function isFullyEncrypted(array $values): bool
-    {
-        foreach ($values as $value) {
-            if (!$this->isEncrypted($value)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }
