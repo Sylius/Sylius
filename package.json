@@ -5,6 +5,7 @@
     "type": "git",
     "url": "git+https://github.com/Sylius/Sylius.git"
   },
+  "type": "module",
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "scripts": {
@@ -31,7 +32,7 @@
     "tom-select": "^2.2.2"
   },
   "engines": {
-    "node": ">=20"
+    "node": "^22.13.0 || >=24.0"
   },
   "engineStrict": true
 }
