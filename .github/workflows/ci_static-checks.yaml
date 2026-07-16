@@ -94,7 +94,7 @@ jobs:
                 run: composer require ext-random --no-update --no-scripts --no-interaction
 
             # TODO: Temporary — some Behat extensions have no Behat 4 release supporting Symfony 6.4
-            # (mink-extension's Behat 4 branch and our symfony-extension fork require Symfony ^7.4+).
+            # (mink-extension 3.0 and symfony-extension 2.7 require Symfony ^7.4+).
             # On Symfony 6.4 we pin their last releases that still support 6.4 just so dependencies
             # resolve. Remove once Behat 4 compatible releases supporting Symfony 6.4 are available.
             -   name: "Pin Behat extensions without Symfony 6.4 support (temporary)"
@@ -104,12 +104,8 @@ jobs:
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
-            # TODO: Temporarily disabled — `behat/behat` uses an inline alias in composer.json
-            # ("^3.5 || 4.0.0-alpha1 as 3.5.0", needed while Behat 4 is in alpha so Symfony 6.4 resolves
-            # to real Behat 3 and 7.4/8.0 to the alpha), which `composer validate --strict` rejects.
-            # Re-enable once the inline alias is removed (Behat 4 stable + extensions supporting SF 6.4).
-            #-   name: "Validate composer.json"
-            #    run: composer validate --strict --no-check-version
+            -   name: "Validate composer.json"
+                run: composer validate --strict --no-check-version
 
             -   name: "Check for security vulnerabilities"
                 run: symfony security:check
