@@ -28,8 +28,8 @@
     "require": {
         "php": "^8.2",
         "laminas/laminas-stdlib": "^3.19",
-        "sylius/resource": "^1.12",
-        "symfony/intl": "^6.4 || ^7.4",
+        "sylius/resource": "^1.14.2",
+        "symfony/intl": "^6.4 || ^7.4 || ^8.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
