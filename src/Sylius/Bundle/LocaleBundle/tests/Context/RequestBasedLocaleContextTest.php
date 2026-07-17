@@ -19,7 +19,6 @@ use Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -33,16 +32,12 @@ final class RequestBasedLocaleContextTest extends TestCase
 
     private RequestBasedLocaleContext $requestBasedLocaleContext;
 
-    /** @var Request&MockObject */
-    private Request $request;
-
     protected function setUp(): void
     {
         parent::setUp();
         $this->requestStack = $this->createMock(RequestStack::class);
         $this->localeProvider = $this->createMock(LocaleProviderInterface::class);
         $this->requestBasedLocaleContext = new RequestBasedLocaleContext($this->requestStack, $this->localeProvider);
-        $this->request = $this->createMock(Request::class);
     }
 
     public function testALocaleContext(): void
@@ -63,9 +58,7 @@ final class RequestBasedLocaleContextTest extends TestCase
     {
         $this->requestStack->expects(self::once())
             ->method('getMainRequest')
-            ->willReturn($this->request);
-
-        $this->request->attributes = new ParameterBag();
+            ->willReturn(new Request());
 
         self::expectException(LocaleNotFoundException::class);
 
@@ -76,9 +69,7 @@ final class RequestBasedLocaleContextTest extends TestCase
     {
         $this->requestStack->expects(self::once())
             ->method('getMainRequest')
-            ->willReturn($this->request);
-
-        $this->request->attributes = new ParameterBag(['_locale' => 'en_US']);
+            ->willReturn(new Request(attributes: ['_locale' => 'en_US']));
 
         $this->localeProvider->expects(self::once())
             ->method('getAvailableLocalesCodes')
@@ -93,9 +84,7 @@ final class RequestBasedLocaleContextTest extends TestCase
     {
         $this->requestStack->expects(self::once())
             ->method('getMainRequest')
-            ->willReturn($this->request);
-
-        $this->request->attributes = new ParameterBag(['_locale' => 'pl_PL']);
+            ->willReturn(new Request(attributes: ['_locale' => 'pl_PL']));
 
         $this->localeProvider->expects(self::once())
             ->method('getAvailableLocalesCodes')

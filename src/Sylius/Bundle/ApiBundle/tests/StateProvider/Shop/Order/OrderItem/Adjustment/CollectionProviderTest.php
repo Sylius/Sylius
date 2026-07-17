@@ -27,7 +27,6 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Repository\OrderItemRepositoryInterface;
-use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 
 final class CollectionProviderTest extends TestCase
@@ -111,15 +110,13 @@ final class CollectionProviderTest extends TestCase
     {
         $operation = new GetCollection(class: AdjustmentInterface::class);
 
-        $request = $this->createMock(Request::class);
+        $request = new Request(query: ['type' => 'type']);
 
         $orderItem = $this->createMock(OrderItem::class);
 
         $firstAdjustment = $this->createMock(AdjustmentInterface::class);
 
         $secondAdjustment = $this->createMock(AdjustmentInterface::class);
-
-        $request->query = new InputBag(['type' => 'type']);
 
         $adjustments = new ArrayCollection([$firstAdjustment, $secondAdjustment]);
 

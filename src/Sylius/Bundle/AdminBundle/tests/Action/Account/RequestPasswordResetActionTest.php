@@ -22,7 +22,6 @@ use Sylius\Bundle\CoreBundle\Command\Admin\Account\RequestResetPasswordEmail;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -74,8 +73,7 @@ final class RequestPasswordResetActionTest extends TestCase
     public function testSendsResetPasswordRequestToMessageBus(): void
     {
         $form = $this->createMock(FormInterface::class);
-        $request = $this->createMock(Request::class);
-        $attributesBag = $this->createMock(ParameterBag::class);
+        $request = new Request(attributes: ['_sylius' => ['redirect' => 'my_custom_route']]);
 
         $this->formFactory
             ->expects($this->once())
@@ -114,15 +112,6 @@ final class RequestPasswordResetActionTest extends TestCase
         ;
 
         $this->requestStack->expects($this->once())->method('getSession')->willReturn($this->session);
-
-        $attributesBag
-            ->expects($this->once())
-            ->method('get')
-            ->with('_sylius', [])
-            ->willReturn(['redirect' => 'my_custom_route'])
-        ;
-
-        $request->attributes = $attributesBag;
 
         $this->router
             ->expects($this->once())
@@ -140,8 +129,16 @@ final class RequestPasswordResetActionTest extends TestCase
     public function testItSendsResetPasswordRequestWhenSyliusRedirectParameterIsArray(): void
     {
         $form = $this->createMock(FormInterface::class);
-        $request = $this->createMock(Request::class);
-        $attributesBag = $this->createMock(ParameterBag::class);
+        $route = 'my_custom_route';
+        $params = ['my_parameter' => 'my_value'];
+        $request = new Request(attributes: [
+            '_sylius' => [
+                'redirect' => [
+                    'route' => $route,
+                    'params' => $params,
+                ],
+            ],
+        ]);
 
         $this->formFactory
             ->expects($this->once())
@@ -180,23 +177,6 @@ final class RequestPasswordResetActionTest extends TestCase
         ;
 
         $this->requestStack->expects($this->once())->method('getSession')->willReturn($this->session);
-
-        $route = 'my_custom_route';
-        $params = ['my_parameter' => 'my_value'];
-
-        $attributesBag
-            ->expects($this->once())
-            ->method('get')
-            ->with('_sylius', [])
-            ->willReturn([
-                'redirect' => [
-                    'route' => $route,
-                    'params' => $params,
-                ],
-            ])
-        ;
-
-        $request->attributes = $attributesBag;
 
         $this->router
             ->expects($this->once())
@@ -214,8 +194,7 @@ final class RequestPasswordResetActionTest extends TestCase
     public function testItRedirectsToDefaultRouteIfCustomOneIsNotDefined(): void
     {
         $form = $this->createMock(FormInterface::class);
-        $request = $this->createMock(Request::class);
-        $attributesBag = $this->createMock(ParameterBag::class);
+        $request = new Request();
 
         $this->formFactory
             ->expects($this->once())
@@ -254,15 +233,6 @@ final class RequestPasswordResetActionTest extends TestCase
         ;
 
         $this->requestStack->expects($this->once())->method('getSession')->willReturn($this->session);
-
-        $attributesBag
-            ->expects($this->once())
-            ->method('get')
-            ->with('_sylius', [])
-            ->willReturn([])
-        ;
-
-        $request->attributes = $attributesBag;
 
         $this->router
             ->expects($this->once())
@@ -281,7 +251,7 @@ final class RequestPasswordResetActionTest extends TestCase
     {
         $form = $this->createMock(FormInterface::class);
         $formView = $this->createMock(FormView::class);
-        $request = $this->createMock(Request::class);
+        $request = new Request();
 
         $this->formFactory
             ->expects($this->once())
