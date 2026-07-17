@@ -16,10 +16,6 @@
         },
         {
           "php": "8.5",
-          "symfony": "~8.0.0"
-        },
-        {
-          "php": "8.5",
           "symfony": "~8.1.0"
         }
       ]
@@ -61,13 +57,6 @@
         {
           "php": "8.5",
           "symfony": "~7.4.0",
-          "mysql": "8.4",
-          "twig": "^3.3",
-          "doctrine_bundle": "^3.0"
-        },
-        {
-          "php": "8.5",
-          "symfony": "~8.0.0",
           "mysql": "8.4",
           "twig": "^3.3",
           "doctrine_bundle": "^3.0"
