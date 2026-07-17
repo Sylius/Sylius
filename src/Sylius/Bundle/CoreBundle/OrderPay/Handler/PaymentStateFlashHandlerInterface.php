@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Handler;
 
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 interface PaymentStateFlashHandlerInterface
 {
     public function handle(Request $request, string $state): void;

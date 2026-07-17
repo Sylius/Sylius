@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
-/** @experimental */
 abstract class AbstractServiceProvider implements ServiceProviderAwareProviderInterface
 {
     /** @var ServiceProviderInterface<HttpResponseProviderInterface> */

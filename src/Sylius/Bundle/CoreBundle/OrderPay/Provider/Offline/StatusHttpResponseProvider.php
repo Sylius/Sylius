@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 final class StatusHttpResponseProvider implements HttpResponseProviderInterface
 {
     public function __construct(private FinalUrlProviderInterface $finalUrlProvider)

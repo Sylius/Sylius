@@ -331,6 +331,16 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    | `ShippingBundle\...\ShippingMethodCalculatorExists` | `invalidShippingCalculator` | `invalidShippingCalculatorMessage` |
    | `ShippingBundle\...\ShippingMethodRule` | `invalidType` | `invalidTypeMessage` |
 
+## Payment
+
+1. The **Payment Request** feature is no longer **experimental**.
+
+   The `@experimental` annotation has now been removed from all classes, interfaces, traits and attributes belonging
+   to this feature across `Sylius\Component\Payment`, `Sylius\Bundle\PaymentBundle`, `Sylius\Bundle\PayumBundle`,
+   the order pay flow in `Sylius\Bundle\CoreBundle\OrderPay` and `Sylius\Bundle\PayumBundle\OrderPay`, and the
+   Payment Request layer in `Sylius\Bundle\ApiBundle`. These classes are now covered by the Sylius Backward
+   Compatibility policy.
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.

@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 interface AfterPayResponseProviderInterface
 {
     public function getResponse(Request $request): Response;
