@@ -17,8 +17,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\EventListener\AdminFilterSubscriber;
 use Sylius\Bundle\GridBundle\Storage\FilterStorageInterface;
-use Symfony\Component\HttpFoundation\InputBag;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -45,8 +43,7 @@ final class AdminFilterSubscriberTest extends TestCase
         $filterStorage = $this->createMock(FilterStorageInterface::class);
         $subscriber = new AdminFilterSubscriber($filterStorage);
 
-        $request = new Request(query: ['filter' => 'foo']);
-        $request->attributes = new ParameterBag([
+        $request = new Request(query: ['filter' => 'foo'], attributes: [
             '_route' => 'sylius_admin_product_index',
             '_sylius' => ['section' => 'admin'],
             '_controller' => 'Sylius\\Bundle\\AdminBundle\\Controller\\ProductController::indexAction',
@@ -77,19 +74,12 @@ final class AdminFilterSubscriberTest extends TestCase
         $filterStorage = $this->createMock(FilterStorageInterface::class);
         $this->adminFilterSubscriber = new AdminFilterSubscriber($filterStorage);
 
-        $request = $this->createMock(Request::class);
-        $attributes = $this->createMock(ParameterBag::class);
-        $request->attributes = $attributes;
-
-        $request->method('getRequestFormat')->willReturn('json');
-        $request->query = new InputBag(['filter' => 'foo']);
-
-        $attributes->method('get')
-            ->willReturnMap([
-                ['_route', '', 'sylius_admin_product_index'],
-                ['_sylius', [], ['section' => 'admin']],
-                ['_controller', null, 'Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction'],
-            ]);
+        $request = new Request(query: ['filter' => 'foo'], attributes: [
+            '_route' => 'sylius_admin_product_index',
+            '_sylius' => ['section' => 'admin'],
+            '_controller' => 'Sylius\Bundle\AdminBundle\Controller\ProductController::indexAction',
+        ]);
+        $request->setRequestFormat('json');
 
         $filterStorage->expects($this->never())->method('set');
 
@@ -103,21 +93,15 @@ final class AdminFilterSubscriberTest extends TestCase
     public function testDoesNotAddFilterIfNotAdminSection(): void
     {
         $event = $this->createMock(RequestEvent::class);
-        $request = $this->createMock(Request::class);
-        $attributes = $this->createMock(ParameterBag::class);
+
+        $request = new Request(query: ['filter' => 'foo'], attributes: [
+            '_route' => 'sylius_admin_product_index',
+            '_sylius' => ['section' => 'shop'],
+            '_controller' => 'Sylius\\Bundle\\AdminBundle\\Controller\\ProductController::indexAction',
+        ]);
+        $request->setRequestFormat('html');
 
         $event->method('isMainRequest')->willReturn(true);
-        $request->method('getRequestFormat')->willReturn('html');
-
-        $attributes->method('get')->willReturnMap([
-            ['_route', '', 'sylius_admin_product_index'],
-            ['_sylius', [], ['section' => 'shop']],
-            ['_controller', null, 'Sylius\\Bundle\\AdminBundle\\Controller\\ProductController::indexAction'],
-        ]);
-
-        $request->attributes = $attributes;
-        $request->query = new InputBag(['filter' => 'foo']);
-
         $event->method('getRequest')->willReturn($request);
 
         $this->filterStorage->expects($this->never())->method('set');
@@ -128,21 +112,15 @@ final class AdminFilterSubscriberTest extends TestCase
     public function testDoesNotAddFilterIfControllerIsNull(): void
     {
         $event = $this->createMock(RequestEvent::class);
-        $request = $this->createMock(Request::class);
-        $attributes = $this->createMock(ParameterBag::class);
+
+        $request = new Request(query: ['filter' => 'foo'], attributes: [
+            '_route' => 'sylius_admin_product_index',
+            '_sylius' => ['section' => 'admin'],
+            '_controller' => null,
+        ]);
+        $request->setRequestFormat('html');
 
         $event->method('isMainRequest')->willReturn(true);
-        $request->method('getRequestFormat')->willReturn('html');
-
-        $attributes->method('get')->willReturnMap([
-            ['_route', '', 'sylius_admin_product_index'],
-            ['_sylius', [], ['section' => 'admin']],
-            ['_controller', null, null],
-        ]);
-
-        $request->attributes = $attributes;
-        $request->query = new InputBag(['filter' => 'foo']);
-
         $event->method('getRequest')->willReturn($request);
 
         $this->filterStorage->expects($this->never())->method('set');
@@ -153,21 +131,15 @@ final class AdminFilterSubscriberTest extends TestCase
     public function testDoesNotAddFilterIfRouteIsMissing(): void
     {
         $event = $this->createMock(RequestEvent::class);
-        $request = $this->createMock(Request::class);
-        $attributes = $this->createMock(ParameterBag::class);
+
+        $request = new Request(query: ['filter' => 'foo'], attributes: [
+            '_route' => '',
+            '_sylius' => ['section' => 'admin'],
+            '_controller' => 'Sylius\\Bundle\\AdminBundle\\Controller\\ProductController::indexAction',
+        ]);
+        $request->setRequestFormat('html');
 
         $event->method('isMainRequest')->willReturn(true);
-        $request->method('getRequestFormat')->willReturn('html');
-
-        $attributes->method('get')->willReturnMap([
-            ['_route', '', ''],
-            ['_sylius', [], ['section' => 'admin']],
-            ['_controller', null, 'Sylius\\Bundle\\AdminBundle\\Controller\\ProductController::indexAction'],
-        ]);
-
-        $request->attributes = $attributes;
-        $request->query = new InputBag(['filter' => 'foo']);
-
         $event->method('getRequest')->willReturn($request);
 
         $this->filterStorage->expects($this->never())->method('set');
@@ -178,21 +150,15 @@ final class AdminFilterSubscriberTest extends TestCase
     public function testDoesNotAddFilterIfRouteIsNotIndex(): void
     {
         $event = $this->createMock(RequestEvent::class);
-        $request = $this->createMock(Request::class);
-        $attributes = $this->createMock(ParameterBag::class);
+
+        $request = new Request(query: ['filter' => 'foo'], attributes: [
+            '_route' => 'sylius_admin_product_update',
+            '_sylius' => ['section' => 'admin'],
+            '_controller' => 'Sylius\\Bundle\\AdminBundle\\Controller\\ProductController::indexAction',
+        ]);
+        $request->setRequestFormat('html');
 
         $event->method('isMainRequest')->willReturn(true);
-        $request->method('getRequestFormat')->willReturn('html');
-
-        $attributes->method('get')->willReturnMap([
-            ['_route', '', 'sylius_admin_product_update'],
-            ['_sylius', [], ['section' => 'admin']],
-            ['_controller', null, 'Sylius\\Bundle\\AdminBundle\\Controller\\ProductController::indexAction'],
-        ]);
-
-        $request->attributes = $attributes;
-        $request->query = new InputBag(['filter' => 'foo']);
-
         $event->method('getRequest')->willReturn($request);
 
         $this->filterStorage->expects($this->never())->method('set');

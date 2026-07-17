@@ -19,7 +19,6 @@ use Sylius\Bundle\UiBundle\Controller\SecurityController;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
@@ -40,7 +39,7 @@ final class SecurityControllerTest extends TestCase
 
     private MockObject&RouterInterface $router;
 
-    private MockObject&Request $request;
+    private Request $request;
 
     private SecurityController $securityController;
 
@@ -51,7 +50,7 @@ final class SecurityControllerTest extends TestCase
         $this->templatingEngine = $this->createMock(Environment::class);
         $this->authorizationChecker = $this->createMock(AuthorizationCheckerInterface::class);
         $this->router = $this->createMock(RouterInterface::class);
-        $this->request = $this->createMock(Request::class);
+        $this->request = new Request();
 
         $this->securityController = new SecurityController(
             $this->authenticationUtils,
@@ -64,9 +63,10 @@ final class SecurityControllerTest extends TestCase
 
     public function testRendersLoginForm(): void
     {
-        /** @var ParameterBag&MockObject $requestAttributes */
-        $requestAttributes = $this->createMock(ParameterBag::class);
-        $this->request->attributes = $requestAttributes;
+        $this->request->attributes->set('_sylius', [
+            'template' => 'CustomTemplateName',
+            'form' => 'custom_form_type',
+        ]);
         /** @var Form&MockObject $form */
         $form = $this->createMock(Form::class);
         /** @var FormView&MockObject $formView */
@@ -78,10 +78,6 @@ final class SecurityControllerTest extends TestCase
         $this->authenticationUtils->expects($this->once())->method('getLastAuthenticationError')->willReturn($authenticationException);
         $this->authenticationUtils->expects($this->once())->method('getLastUsername')->willReturn('john.doe');
 
-        $requestAttributes->expects($this->atLeastOnce())->method('get')->with('_sylius', [])->willReturn([
-            'template' => 'CustomTemplateName',
-            'form' => 'custom_form_type',
-        ]);
         $this->formFactory->expects($this->once())->method('createNamed')->with('', 'custom_form_type')->willReturn($form);
         $form->expects($this->once())->method('createView')->willReturn($formView);
         $this->templatingEngine->expects($this->once())->method('render')->with('CustomTemplateName', [
@@ -96,11 +92,8 @@ final class SecurityControllerTest extends TestCase
 
     public function testRedirectsWhenUserIsLoggedIn(): void
     {
-        /** @var ParameterBag&MockObject $requestAttributes */
-        $requestAttributes = $this->createMock(ParameterBag::class);
-        $this->request->attributes = $requestAttributes;
+        $this->request->attributes->set('_sylius', ['logged_in_route' => 'foo_bar']);
 
-        $requestAttributes->expects($this->once())->method('get')->with('_sylius', [])->willReturn(['logged_in_route' => 'foo_bar']);
         $this->authorizationChecker->expects($this->once())->method('isGranted')->with('IS_AUTHENTICATED_FULLY')->willReturn(true);
         $this->router->expects($this->once())->method('generate')->with('foo_bar')->willReturn('/login');
 

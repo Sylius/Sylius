@@ -34,7 +34,7 @@
         "knplabs/knp-menu-bundle": "^3.4",
         "laminas/laminas-stdlib": "^3.19",
         "sylius/grid-bundle": "^1.16",
-        "sylius/twig-extra": "^0.9 || ^0.10",
+        "sylius/twig-extra": "^0.9 || ^0.10 || ^0.11",
         "symfony/config": "^6.4 || ^7.4 || ^8.0",
         "symfony/expression-language": "^6.4 || ^7.4 || ^8.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
