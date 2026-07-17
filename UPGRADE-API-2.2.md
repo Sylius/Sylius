@@ -1,5 +1,12 @@
 # UPGRADE FROM `2.2.6` TO `2.2.7`
 
+## Admin API
+
+1. The `Administrator` resource (`/api/v2/admin/administrators`) exposes two new writable boolean fields:
+   `administrationAccess` (the `ROLE_ADMINISTRATION_ACCESS` role) and `apiAccess` (the `ROLE_API_ACCESS` role).
+   They are readable in `index`/`show` and writable in `create`/`update` operations.
+   At least one access level must remain enabled — otherwise a `422 Unprocessable Content` response is returned.
+
 ## Shop API
 
 1. The `Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\ChannelAndLocaleBasedExtension` service (`sylius_api.doctrine.orm.query_extension.shop.product.channel_and_locale_based`)

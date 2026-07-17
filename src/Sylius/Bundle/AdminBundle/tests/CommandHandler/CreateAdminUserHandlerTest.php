@@ -83,6 +83,20 @@ final class CreateAdminUserHandlerTest extends TestCase
     }
 
     #[Test]
+    public function it_creates_an_admin_user_with_api_access_only(): void
+    {
+        $constraintViolationList = new ConstraintViolationList([]);
+
+        $this->arrangePartially($constraintViolationList, administrationAccess: false, apiAccess: true);
+
+        $this->adminUserRepository->expects($this->once())->method('add');
+
+        $createAdminUserHandler = $this->createAdminUserHandler();
+
+        $createAdminUserHandler($this->createAdminUserMessage(administrationAccess: false, apiAccess: true));
+    }
+
+    #[Test]
     public function it_throws_an_exception_if_violates_any_constraints(): void
     {
         $firstConstraintViolation = new ConstraintViolation('first_violation_error', '', [], '', '', '');
@@ -102,8 +116,11 @@ final class CreateAdminUserHandlerTest extends TestCase
         $createAdminUserHandler($this->createAdminUserMessage());
     }
 
-    private function arrangePartially(ConstraintViolationList $validationErrorsList): void
-    {
+    private function arrangePartially(
+        ConstraintViolationList $validationErrorsList,
+        bool $administrationAccess = true,
+        bool $apiAccess = false,
+    ): void {
         $this->adminUserFactory->expects($this->once())->method('createNew')->willReturn($this->adminUser);
 
         $this->canonicalizer
@@ -120,6 +137,17 @@ final class CreateAdminUserHandlerTest extends TestCase
         $this->adminUser->expects($this->once())->method('setLastName')->with(self::LAST_NAME);
         $this->adminUser->expects($this->once())->method('setLocaleCode')->with(self::LOCALE_CODE);
         $this->adminUser->expects($this->once())->method('setEnabled')->with(self::ENABLED);
+
+        $this->adminUser
+            ->expects($this->once())
+            ->method('addRole')
+            ->with($administrationAccess ? AdminUserInterface::DEFAULT_ADMIN_ROLE : AdminUserInterface::API_ACCESS_ROLE)
+        ;
+        $this->adminUser
+            ->expects($this->once())
+            ->method('removeRole')
+            ->with($apiAccess ? AdminUserInterface::DEFAULT_ADMIN_ROLE : AdminUserInterface::API_ACCESS_ROLE)
+        ;
 
         $this->validator
             ->expects($this->once())
@@ -140,8 +168,10 @@ final class CreateAdminUserHandlerTest extends TestCase
         );
     }
 
-    private function createAdminUserMessage(): CreateAdminUser
-    {
+    private function createAdminUserMessage(
+        bool $administrationAccess = true,
+        bool $apiAccess = false,
+    ): CreateAdminUser {
         return new CreateAdminUser(
             self::NON_CANONICALIZED_EMAIL,
             self::USERNAME,
@@ -150,6 +180,8 @@ final class CreateAdminUserHandlerTest extends TestCase
             self::PASSWORD,
             self::LOCALE_CODE,
             self::ENABLED,
+            $administrationAccess,
+            $apiAccess,
         );
     }
 }

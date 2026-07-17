@@ -99,6 +99,47 @@ final class CreateAdminUserCommandTest extends TestCase
     }
 
     #[Test]
+    public function it_creates_an_admin_user_with_both_access_levels(): void
+    {
+        $this
+            ->questionFactory
+            ->expects($this->once())
+            ->method('createEmail')
+            ->willReturn($this->createQuestionMock('Email'));
+
+        $this
+            ->questionFactory
+            ->expects($this->exactly(2))
+            ->method('createWithNotNullValidator')
+            ->willReturnOnConsecutiveCalls(
+                $this->createQuestionMock('Username'),
+                $this->createQuestionMock('New password'),
+            );
+
+        $inputs = $this->getDefaultCommandInputsSetup();
+        $inputs['access_levels'] = '0,1';
+
+        $this->command->setInputs($inputs);
+
+        $adminUserData = $this->getDefaultAdminUserDataSetup();
+        $adminUserData['administration_access'] = true;
+        $adminUserData['api_access'] = true;
+
+        $message = new CreateAdminUser(...array_values($adminUserData));
+
+        $this->messageBus->expects($this->once())
+            ->method('dispatch')
+            ->with($message)
+            ->willReturn(new Envelope($message, [new HandledStamp(self::anything(), 'handler')]))
+        ;
+
+        $this->command->execute([]);
+
+        $this->command->assertCommandIsSuccessful();
+        self::assertStringContainsString('Administration access, API access', $this->command->getDisplay());
+    }
+
+    #[Test]
     public function it_does_not_create_an_admin_user_if_declined_in_the_summary(): void
     {
         $this->command->setInputs([
@@ -109,6 +150,7 @@ final class CreateAdminUserCommandTest extends TestCase
             'password' => 'sylius',
             'localeCode' => self::LOCALE_CODE,
             'admin_user_enabled' => self::YES,
+            'access_levels' => '',
             'creation_confirmation' => self::NO,
         ]);
 
@@ -187,6 +229,7 @@ final class CreateAdminUserCommandTest extends TestCase
             'password' => self::PASSWORD,
             'locale_code' => self::LOCALE_CODE,
             'admin_user_enabled' => self::YES,
+            'access_levels' => '',
             'creation_confirmation' => self::YES,
         ];
     }
@@ -201,6 +244,8 @@ final class CreateAdminUserCommandTest extends TestCase
             'password' => self::PASSWORD,
             'locale_code' => self::LOCALE_CODE,
             'admin_user_enabled' => true,
+            'administration_access' => true,
+            'api_access' => false,
         ];
     }
 

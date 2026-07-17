@@ -1,5 +1,32 @@
 # UPGRADE FROM `2.2.6` TO `2.2.7`
 
+## Admin user access levels
+
+Admin users can now have their access levels (roles) managed from the admin panel, the Admin API,
+and the `sylius:admin-user:create` command:
+
+- **Administration access** — the `ROLE_ADMINISTRATION_ACCESS` role, allowing to log in to the admin panel,
+- **API access** — the `ROLE_API_ACCESS` role, allowing to perform operations through the Admin API.
+
+Changes to be aware of:
+
+1. A new constant `Sylius\Component\Core\Model\AdminUserInterface::API_ACCESS_ROLE` (`'ROLE_API_ACCESS'`) has been added.
+
+1. `Sylius\Component\Core\Model\AdminUser` gained virtual boolean accessors wrapping the roles collection:
+   `hasAdministrationAccess()`, `setAdministrationAccess(bool)`, `hasApiAccess()`, `setApiAccess(bool)`.
+   They are declared as `@method` annotations on `AdminUserInterface`. If you use a custom `AdminUser` model
+   that does not extend the Sylius one, implement these methods.
+
+1. **Behavior change:** validating an `AdminUser` in the `sylius` validation group now requires at least one
+   access level (role) to be present — the new `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`
+   constraint. Custom flows that strip all roles from an admin user will start failing validation.
+
+1. The admin user create/update forms (`Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType`) gained two new
+   checkbox fields: `administrationAccess` and `apiAccess`.
+
+1. The `sylius:admin-user:create` command asks an additional interactive question about access levels
+   (defaults to `Administration access`). Scripts piping answers into this command need one more input line.
+
 ## Constructor Signature Changes
 
 1. The constructor of `Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter` has been extended with an optional `ApiPlatform\Metadata\ResourceClassResolverInterface` argument.

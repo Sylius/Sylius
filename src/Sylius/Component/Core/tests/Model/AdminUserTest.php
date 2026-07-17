@@ -101,4 +101,63 @@ final class AdminUserTest extends TestCase
 
         $this->assertSame($this->image, $this->adminUser->getAvatar());
     }
+
+    public function testShouldHaveAdministrationAccessByDefault(): void
+    {
+        $this->assertTrue($this->adminUser->hasAdministrationAccess());
+        $this->assertTrue($this->adminUser->hasRole(AdminUserInterface::DEFAULT_ADMIN_ROLE));
+    }
+
+    public function testShouldNotHaveApiAccessByDefault(): void
+    {
+        $this->assertFalse($this->adminUser->hasApiAccess());
+        $this->assertFalse($this->adminUser->hasRole(AdminUserInterface::API_ACCESS_ROLE));
+    }
+
+    public function testShouldAdministrationAccessBeMutable(): void
+    {
+        $this->adminUser->setAdministrationAccess(false);
+
+        $this->assertFalse($this->adminUser->hasAdministrationAccess());
+        $this->assertFalse($this->adminUser->hasRole(AdminUserInterface::DEFAULT_ADMIN_ROLE));
+
+        $this->adminUser->setAdministrationAccess(true);
+
+        $this->assertTrue($this->adminUser->hasAdministrationAccess());
+        $this->assertTrue($this->adminUser->hasRole(AdminUserInterface::DEFAULT_ADMIN_ROLE));
+    }
+
+    public function testShouldApiAccessBeMutable(): void
+    {
+        $this->adminUser->setApiAccess(true);
+
+        $this->assertTrue($this->adminUser->hasApiAccess());
+        $this->assertTrue($this->adminUser->hasRole(AdminUserInterface::API_ACCESS_ROLE));
+
+        $this->adminUser->setApiAccess(false);
+
+        $this->assertFalse($this->adminUser->hasApiAccess());
+        $this->assertFalse($this->adminUser->hasRole(AdminUserInterface::API_ACCESS_ROLE));
+    }
+
+    public function testShouldAccessLevelsBeIndependent(): void
+    {
+        $this->adminUser->setApiAccess(true);
+        $this->adminUser->setAdministrationAccess(false);
+
+        $this->assertFalse($this->adminUser->hasAdministrationAccess());
+        $this->assertTrue($this->adminUser->hasApiAccess());
+    }
+
+    public function testShouldNotDuplicateRolesWhenAccessIsGrantedTwice(): void
+    {
+        $this->adminUser->setAdministrationAccess(true);
+        $this->adminUser->setApiAccess(true);
+        $this->adminUser->setApiAccess(true);
+
+        $this->assertSame(
+            [AdminUserInterface::DEFAULT_ADMIN_ROLE, AdminUserInterface::API_ACCESS_ROLE],
+            $this->adminUser->getRoles(),
+        );
+    }
 }
