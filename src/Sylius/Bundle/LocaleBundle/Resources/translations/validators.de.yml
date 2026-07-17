@@ -4,6 +4,8 @@
 sylius:
     locale:
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte Gebietsscode auswählen.
             regex: Kürzel des Gebietsschemas darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
+            locale: Dieser Wert ist kein gültiger Gebietsschema-Code.
             unique: Gebeitscode muss eindeutig sein.

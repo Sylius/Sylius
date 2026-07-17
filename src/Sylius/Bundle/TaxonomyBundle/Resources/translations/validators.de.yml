@@ -4,6 +4,7 @@
 sylius:
     taxon:
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte geben Sie einen Code für die Produktgruppe ein.
             regex: Kategoriekürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Es existiert bereits eine Produktgruppe mit diesem Code.
