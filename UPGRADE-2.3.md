@@ -136,6 +136,49 @@
          private UrlProviderInterface $afterPayUrlProvider,
      ) {}
      ```
+6. The payment encryption (`sylius_payment.encryption`) got two new options to harden decryption of gateway configs
+   and payment requests. Both are opt-in and keep the previous behavior by default.
+
+   - `strict_mode` (default `false`): when enabled, `Sylius\Component\Payment\Encryption\Encrypter::decrypt()` throws
+     an `EncryptionException` for data that is not encrypted, instead of silently returning it unchanged.
+     Additionally, `GatewayConfigEncrypter` and `PaymentRequestEncrypter` throw an `EncryptionException` when the
+     gateway config, payload or response data is only partially encrypted. By default (non-strict) they keep the
+     previous lenient behavior: partially encrypted data is still decrypted based on its first element.
+
+     ```yaml
+     sylius_payment:
+         encryption:
+             strict_mode: true
+     ```
+
+   - `allowed_classes` (default `true`): restricts which PHP classes may be instantiated while decrypting
+     (the `allowed_classes` option of `unserialize()`). Use `true` to allow all classes (previous behavior),
+     `false` to allow none, or a list of class-strings to allow only specific ones. If you store objects in a
+     gateway config or payment request payload (for example a payment plugin deserializing SDK objects such as
+     `Stripe\PaymentIntent`), add those classes to the list when narrowing it down.
+
+     ```yaml
+     sylius_payment:
+         encryption:
+             allowed_classes:
+                 - 'Stripe\PaymentIntent'
+     ```
+
+   The related encrypters gained a matching constructor argument, defaulting to the previous behavior:
+
+   ```diff
+   -public function __construct(private readonly string $encryptionKeyPath)
+   +public function __construct(private readonly string $encryptionKeyPath, private readonly bool $strictDecryption = false)
+   ```
+
+   ```diff
+   -public function __construct(private EncrypterInterface $encrypter)
+   +public function __construct(private EncrypterInterface $encrypter, private array|bool $allowedClasses = true, private bool $strictMode = false)
+   ```
+
+   Affected classes: `Sylius\Component\Payment\Encryption\Encrypter` (`$strictDecryption`),
+   `Sylius\Component\Payment\Encryption\GatewayConfigEncrypter` and
+   `Sylius\Component\Payment\Encryption\PaymentRequestEncrypter` (`$allowedClasses` and `$strictMode`).
 
 ### Grid providers are now configurable
 
