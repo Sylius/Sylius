@@ -86,105 +86,105 @@
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Managing Products",
           "tags": "@mink:chromedriver&&@managing_products&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Taxons, Shipping Methods, Countries, Zones",
           "tags": "@managing_taxons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_shipping_methods&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_countries&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_zones&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Promotions, Catalog Promotions, Coupons",
           "tags": "@managing_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@applying_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_promotion_coupons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Checkout, Cart, Address Book",
           "tags": "@checkout&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@shopping_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@cart_inventory&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@accessing_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@address_book&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Remaining",
           "tags": "@mink:chromedriver&&~@managing_products&&~@managing_taxons&&~@managing_shipping_methods&&~@managing_countries&&~@managing_zones&&~@managing_promotions&&~@managing_catalog_promotions&&~@applying_catalog_promotions&&~@managing_promotion_coupons&&~@checkout&&~@shopping_cart&&~@cart_inventory&&~@accessing_cart&&~@address_book&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Managing Products",
           "tags": "@mink:chromedriver&&@managing_products&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Taxons, Shipping Methods, Countries, Zones",
           "tags": "@managing_taxons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_shipping_methods&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_countries&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_zones&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Promotions, Catalog Promotions, Coupons",
           "tags": "@managing_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@applying_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_promotion_coupons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Checkout, Cart, Address Book",
           "tags": "@checkout&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@shopping_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@cart_inventory&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@accessing_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@address_book&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Remaining",
           "tags": "@mink:chromedriver&&~@managing_products&&~@managing_taxons&&~@managing_shipping_methods&&~@managing_countries&&~@managing_zones&&~@managing_promotions&&~@managing_catalog_promotions&&~@applying_catalog_promotions&&~@managing_promotion_coupons&&~@checkout&&~@shopping_cart&&~@cart_inventory&&~@accessing_cart&&~@address_book&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Managing Products",
           "tags": "@mink:chromedriver&&@managing_products&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Taxons, Shipping Methods, Countries, Zones",
           "tags": "@managing_taxons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_shipping_methods&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_countries&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_zones&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Promotions, Catalog Promotions, Coupons",
           "tags": "@managing_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@applying_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_promotion_coupons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Checkout, Cart, Address Book",
           "tags": "@checkout&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@shopping_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@cart_inventory&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@accessing_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@address_book&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Remaining",
           "tags": "@mink:chromedriver&&~@managing_products&&~@managing_taxons&&~@managing_shipping_methods&&~@managing_countries&&~@managing_zones&&~@managing_promotions&&~@managing_catalog_promotions&&~@applying_catalog_promotions&&~@managing_promotion_coupons&&~@checkout&&~@shopping_cart&&~@cart_inventory&&~@accessing_cart&&~@address_book&&~@todo&&~@cli&&~@failing"
         }
@@ -195,17 +195,17 @@
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0"
+          "mysql": "8.4"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0"
+          "mysql": "8.4"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0"
+          "mysql": "8.4"
         }
       ]
     },
@@ -335,13 +335,6 @@
         "^3.0"
       ],
       "include": [
-        {
-          "php": "8.3",
-          "symfony": "~7.4.0",
-          "mysql": "8.0",
-          "twig": "^3.3",
-          "doctrine_bundle": "^2.0"
-        },
         {
           "php": "8.4",
           "symfony": "~8.0.0",

@@ -65,7 +65,7 @@ jobs:
                 with:
                     build_type: "sylius"
                     e2e_js: "yes"
-                    database: "mysql:8.0"
+                    database: "mysql:8.4"
                     php_version: "8.5"
                     symfony_version: "~7.4.0"
                     node_version: ${{ matrix.node }}
