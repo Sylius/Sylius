@@ -20,15 +20,12 @@
     "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
   },
   "devDependencies": {
-    "@hotwired/stimulus": "^3.0.0",
+    "@eslint/js": "^9.39.5",
+    "@hotwired/stimulus": "^3.2.2",
     "@symfony/stimulus-bridge": "^3.2.0",
-    "eslint": "^8.57.1",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.6.0",
+    "eslint": "^9.39.5",
     "globals": "^15.13.0",
-    "tom-select": "^2.2.2"
+    "tom-select": "^2.6.2"
   },
   "engines": {
     "node": ">=20"
