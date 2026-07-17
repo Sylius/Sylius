@@ -16,10 +16,6 @@
         },
         {
           "php": "8.5",
-          "symfony": "~8.0.0"
-        },
-        {
-          "php": "8.5",
           "symfony": "~8.1.0"
         }
       ]
@@ -29,13 +25,14 @@
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mariadb": "11.4.7",
-          "state_machine_adapter": "symfony_workflow"
+          "mariadb": "11.4.12",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": true
         },
         {
           "php": "8.5",
           "symfony": "~7.4.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "doctrine_bundle": "^3.0",
           "state_machine_adapter": "symfony_workflow",
           "legacy_grid_config": false
@@ -43,7 +40,7 @@
         {
           "php": "8.5",
           "symfony": "~8.1.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "doctrine_bundle": "^3.0",
           "state_machine_adapter": "symfony_workflow",
           "legacy_grid_config": false
@@ -67,13 +64,6 @@
         },
         {
           "php": "8.5",
-          "symfony": "~8.0.0",
-          "mysql": "8.4",
-          "twig": "^3.3",
-          "doctrine_bundle": "^3.0"
-        },
-        {
-          "php": "8.5",
           "symfony": "~8.1.0",
           "mysql": "8.4",
           "twig": "^3.3",
@@ -86,105 +76,105 @@
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Managing Products",
           "tags": "@mink:chromedriver&&@managing_products&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Taxons, Shipping Methods, Countries, Zones",
           "tags": "@managing_taxons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_shipping_methods&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_countries&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_zones&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Promotions, Catalog Promotions, Coupons",
           "tags": "@managing_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@applying_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_promotion_coupons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Checkout, Cart, Address Book",
           "tags": "@checkout&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@shopping_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@cart_inventory&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@accessing_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@address_book&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Remaining",
           "tags": "@mink:chromedriver&&~@managing_products&&~@managing_taxons&&~@managing_shipping_methods&&~@managing_countries&&~@managing_zones&&~@managing_promotions&&~@managing_catalog_promotions&&~@applying_catalog_promotions&&~@managing_promotion_coupons&&~@checkout&&~@shopping_cart&&~@cart_inventory&&~@accessing_cart&&~@address_book&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Managing Products",
           "tags": "@mink:chromedriver&&@managing_products&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Taxons, Shipping Methods, Countries, Zones",
           "tags": "@managing_taxons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_shipping_methods&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_countries&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_zones&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Promotions, Catalog Promotions, Coupons",
           "tags": "@managing_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@applying_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_promotion_coupons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Checkout, Cart, Address Book",
           "tags": "@checkout&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@shopping_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@cart_inventory&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@accessing_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@address_book&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Remaining",
           "tags": "@mink:chromedriver&&~@managing_products&&~@managing_taxons&&~@managing_shipping_methods&&~@managing_countries&&~@managing_zones&&~@managing_promotions&&~@managing_catalog_promotions&&~@applying_catalog_promotions&&~@managing_promotion_coupons&&~@checkout&&~@shopping_cart&&~@cart_inventory&&~@accessing_cart&&~@address_book&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Managing Products",
           "tags": "@mink:chromedriver&&@managing_products&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Taxons, Shipping Methods, Countries, Zones",
           "tags": "@managing_taxons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_shipping_methods&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_countries&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_zones&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Promotions, Catalog Promotions, Coupons",
           "tags": "@managing_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@applying_catalog_promotions&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@managing_promotion_coupons&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Checkout, Cart, Address Book",
           "tags": "@checkout&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@shopping_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@cart_inventory&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@accessing_cart&&@mink:chromedriver&&~@todo&&~@cli&&~@failing,@address_book&&@mink:chromedriver&&~@todo&&~@cli&&~@failing"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "group": "Remaining",
           "tags": "@mink:chromedriver&&~@managing_products&&~@managing_taxons&&~@managing_shipping_methods&&~@managing_countries&&~@managing_zones&&~@managing_promotions&&~@managing_catalog_promotions&&~@applying_catalog_promotions&&~@managing_promotion_coupons&&~@checkout&&~@shopping_cart&&~@cart_inventory&&~@accessing_cart&&~@address_book&&~@todo&&~@cli&&~@failing"
         }
@@ -195,17 +185,17 @@
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mysql": "8.0"
+          "mysql": "8.4"
         },
         {
           "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0"
+          "mysql": "8.4"
         },
         {
           "php": "8.4",
           "symfony": "~8.1.0",
-          "mysql": "8.0"
+          "mysql": "8.4"
         }
       ]
     },
@@ -214,18 +204,18 @@
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "postgres": "17.5"
+          "postgres": "18.4"
         },
         {
           "php": "8.5",
           "symfony": "~7.4.0",
-          "postgres": "17.5",
+          "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         },
         {
           "php": "8.5",
           "symfony": "~8.1.0",
-          "postgres": "17.5",
+          "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         }
       ]
@@ -272,42 +262,75 @@
       ]
     },
     "e2e-mariadb": {
-      "php": [
-        "8.3",
-        "8.4",
-        "8.5"
-      ],
-      "symfony": [
-        "~6.4.0",
-        "~7.4.0",
-        "~8.1.0"
-      ],
-      "mariadb": [
-        "11.4.7"
-      ],
-      "doctrine_bundle": [
-        "^2.0",
-        "^3.0"
-      ],
-      "state_machine_adapter": [
-        "symfony_workflow"
-      ],
-      "legacy_grid_config": [
-        false
-      ],
       "include": [
+        {
+          "php": "8.5",
+          "symfony": "~8.1.0",
+          "mariadb": "11.4.12",
+          "doctrine_bundle": "^3.0",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": false
+        },
+        {
+          "php": "8.4",
+          "symfony": "~8.1.0",
+          "mariadb": "11.4.12",
+          "doctrine_bundle": "^3.0",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": true
+        },
+        {
+          "php": "8.3",
+          "symfony": "~8.1.0",
+          "mariadb": "11.4.12",
+          "doctrine_bundle": "^3.0",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": false
+        },
+        {
+          "php": "8.5",
+          "symfony": "~7.4.0",
+          "mariadb": "11.4.12",
+          "doctrine_bundle": "^2.0",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": false
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "mariadb": "11.4.12",
+          "doctrine_bundle": "^3.0",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": false
+        },
         {
           "php": "8.3",
           "symfony": "~7.4.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "doctrine_bundle": "^2.0",
           "state_machine_adapter": "winzou_state_machine",
           "legacy_grid_config": true
         },
         {
+          "php": "8.5",
+          "symfony": "~6.4.0",
+          "mariadb": "11.4.12",
+          "doctrine_bundle": "^2.0",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": false
+        },
+        {
+          "php": "8.4",
+          "symfony": "~6.4.0",
+          "mariadb": "11.4.12",
+          "doctrine_bundle": "^3.0",
+          "state_machine_adapter": "symfony_workflow",
+          "legacy_grid_config": false
+        },
+        {
           "php": "8.4",
           "symfony": "~8.0.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "doctrine_bundle": "^3.0",
           "state_machine_adapter": "symfony_workflow",
           "legacy_grid_config": false
@@ -331,14 +354,20 @@
         "^3.3"
       ],
       "doctrine_bundle": [
-        "^2.0",
         "^3.0"
       ],
       "include": [
         {
           "php": "8.3",
+          "symfony": "~6.4.0",
+          "mysql": "8.4",
+          "twig": "^3.3",
+          "doctrine_bundle": "^2.0"
+        },
+        {
+          "php": "8.4",
           "symfony": "~7.4.0",
-          "mysql": "8.0",
+          "mysql": "8.4",
           "twig": "^3.3",
           "doctrine_bundle": "^2.0"
         },
@@ -491,21 +520,29 @@
         "~8.1.0"
       ],
       "postgres": [
-        "15.13",
-        "16.9",
-        "17.5"
+        "18.4"
       ],
       "include": [
         {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "postgres": "16.14"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "postgres": "17.10"
+        },
+        {
           "php": "8.5",
           "symfony": "~7.4.0",
-          "postgres": "17.5",
+          "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         },
         {
           "php": "8.4",
           "symfony": "~8.0.0",
-          "postgres": "17.5",
+          "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         }
       ]
@@ -513,24 +550,31 @@
     "frontend": {
       "node": [
         "22.x",
-        "24.x"
+        "24.x",
+        "26.x"
       ]
     },
     "packages": {
-      "php": [
-        "8.3",
-        "8.4",
-        "8.5"
-      ],
-      "symfony": [
-        "~6.4.0",
-        "~7.4.0",
-        "~8.1.0"
-      ],
       "include": [
+        {
+          "php": "8.3",
+          "symfony": "~6.4.0"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0"
+        },
+        {
+          "php": "8.5",
+          "symfony": "~8.1.0"
+        },
         {
           "php": "8.4",
           "symfony": "~8.0.0"
+        },
+        {
+          "php": "8.5",
+          "symfony": "~6.4.0"
         }
       ]
     }

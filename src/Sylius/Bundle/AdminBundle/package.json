@@ -31,7 +31,7 @@
     "webpack-cli": "^5.1.4"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "engineStrict": true,
   "files": [
