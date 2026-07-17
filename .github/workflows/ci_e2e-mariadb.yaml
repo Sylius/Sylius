@@ -53,7 +53,7 @@ jobs:
         env:
             APP_ENV: test_cached
             TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
-            TEST_SYLIUS_USE_LEGACY_GRID_CONFIG: ${{ matrix.legacy_grid_config || true }}
+            TEST_SYLIUS_USE_LEGACY_GRID_CONFIG: "${{ matrix.legacy_grid_config == false && 'false' || 'true' }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
@@ -163,7 +163,7 @@ jobs:
         env:
             APP_ENV: test_cached
             TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
-            TEST_SYLIUS_USE_LEGACY_GRID_CONFIG: ${{ matrix.legacy_grid_config || true }}
+            TEST_SYLIUS_USE_LEGACY_GRID_CONFIG: "${{ matrix.legacy_grid_config == false && 'false' || 'true' }}"
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
