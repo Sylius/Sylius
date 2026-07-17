@@ -210,6 +210,8 @@ sylius:
         create_zone: 'Create zone'
         created: 'Created'
         created_at: 'Created at'
+        created_by_guest: 'Created by guest'
+        created_by_logged_in: 'Created by logged-in'
         creating_a_new_imagine_block: 'Creating a new imagine block'
         creating_a_new_simple_block: 'Creating a new simple block'
         creating_a_new_slideshow_block: 'Creating a new slideshow block'

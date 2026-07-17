@@ -203,6 +203,8 @@ sylius:
         create_zone: 'Gebiet hinzufügen'
         created: 'Erstellt'
         created_at: 'Erstellt am'
+        created_by_guest: 'Erstellt von einem Gast'
+        created_by_logged_in: 'Erstellt von einem angemeldeten Benutzer'
         creating_a_new_imagine_block: 'Neuen Bild-Block erstellen'
         creating_a_new_simple_block: 'Einfaches Element erstellen'
         creating_a_new_slideshow_block: 'Neues Slideshow–Element erstellen'
