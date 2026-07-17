@@ -112,11 +112,6 @@ jobs:
                         api-platform/symfony:${REQ} \
                         api-platform/validator:${REQ}
 
-            # TODO: Temporary — pin Behat extensions without Symfony 6.4 support (see composer.json).
-            -   name: "Pin Behat extensions without Symfony 6.4 support (temporary)"
-                if: "${{ matrix.symfony == '~6.4.0' }}"
-                run: composer require --dev friends-of-behat/mink-extension:2.7.5 friends-of-behat/symfony-extension:2.6.2 --no-update --no-scripts --no-interaction
-
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v4
                 with:
@@ -226,11 +221,6 @@ jobs:
                         api-platform/state:${REQ} \
                         api-platform/symfony:${REQ} \
                         api-platform/validator:${REQ}
-
-            # TODO: Temporary — pin Behat extensions without Symfony 6.4 support (see composer.json).
-            -   name: "Pin Behat extensions without Symfony 6.4 support (temporary)"
-                if: "${{ matrix.symfony == '~6.4.0' }}"
-                run: composer require --dev friends-of-behat/mink-extension:2.7.5 friends-of-behat/symfony-extension:2.6.2 --no-update --no-scripts --no-interaction
 
             -   name: Build application
                 uses: SyliusLabs/BuildTestAppAction@v4
