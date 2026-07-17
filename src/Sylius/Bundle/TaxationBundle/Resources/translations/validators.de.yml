@@ -5,7 +5,10 @@ sylius:
     tax_category:
         name:
             not_blank: Bitte geben Sie den Namen der Steuerkategorie an.
+            min_length: Der Name der Steuerkategorie muss mindestens 1 Zeichen lang sein.|Der Name der Steuerkategorie muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Name der Steuerkategorie darf nicht länger als 1 Zeichen sein.|Der Name der Steuerkategorie darf nicht länger als {{ limit }} Zeichen sein.
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte geben Sie ein Kürzel für die Kategorie an.
             regex: Kürzel der Steuerkategorie darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Eine Kategorie mit diesem Kürzel existiert bereits.
@@ -14,13 +17,19 @@ sylius:
             not_blank: Bitte wählen Sie eine Steuerkategorie aus.
         name:
             not_blank: Bitte geben Sie den Namen des Kurses der Steuerkategorie an.
+            min_length: Der Name des Steuersatzes muss mindestens 1 Zeichen lang sein.|Der Name des Steuersatzes muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Name des Steuersatzes darf nicht länger als 1 Zeichen sein.|Der Name des Steuersatzes darf nicht länger als {{ limit }} Zeichen sein.
         amount:
+            invalid: Der Steuersatz ist ungültig.
             not_blank: Bitte geben Sie den Wert des Kurses der Steuerkategorie an.
         calculator:
             not_blank: Bitte wählen Sie einen Steuersatzrechner aus.
         zone:
             not_blank: Bitte wählen Sie eine Zone.
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte geben Sie ein Kürzel für die Besteuerung an.
             regex: Code des Steuersatzes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Eine Besteuerung mit diesem Kürzel existiert bereits.
+        date:
+            greater_than_start_date: Der Steuersatz sollte nicht enden, bevor er beginnt.

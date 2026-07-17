@@ -2,6 +2,9 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: "Sie haben noch kein Konto?"
+        register_here: 'Hier registrieren'
     email:
         order_confirmation:
             has_been_successfully_placed: 'wurde erfolgreich platziert.'
@@ -26,10 +29,22 @@ sylius:
             subject: 'E-Mail-Adressenüberprüfung'
             to_verify_your_email_address: 'Um Ihre E-Mail-Adresse zu verifizieren - klicken Sie auf den folgenden Link'
             verify_your_email_address: 'Bestätigen Sie Ihre E-Mail-Adresse'
+    footer:
+        banner:
+            free_shipping_title: 'Kostenloser Versand & Rückgabe'
+            free_shipping_content: 'Kostenloser Versand für alle Bestellungen'
+            guarantee_title: 'Geld-zurück-Garantie'
+            guarantee_content: '30 Tage Geld-zurück-Garantie'
+            multiple_payments_title: 'Mehrere Zahlungsmethoden'
+            multiple_payments_content: 'Wir akzeptieren Kreditkarten und PayPal'
     homepage:
         about_us: 'Über uns'
         about_us_content: 'Willkommen in unserem Shop. Wir freuen uns, Sie als unseren Kunden begrüßen zu dürfen. Kaufen Sie in Ruhe ein, wir sind steht''s benüht Ihnen den bestern Service zu bieten.  (<i>Sie können diesen Inhalt ändern, indem Sie den Schlüssel "sylius.homepage.about_us_content" in Ihrer Übersetzungsdatei überschreiben</i>)'
         banner_content: 'Wappnet euch! Der Winter kommt'
+        banner_button: 'Entdecken Sie die neue Kollektion'
+        carousel_header: 'Empfohlene Produkte'
+        latest_deals: 'Aktuelle Angebote'
+        new_collection: 'Neue Kollektion'
         newsletter: 'Newsletter'
         newsletter_description: 'Abonnieren Sie jetzt unseren Newsletter, und sichern Sie sich die vielen Vorteile unseres Shops" (<i>Sie können diesen Text in der Übersetzungsdatei anpassen, wenn Sie nach dem Schlüssel  "sylius.homepage.newsletter_description" suchen</i>)'
         subscribe: 'Abonnieren'
@@ -44,3 +59,4 @@ sylius:
                 header: 'Ihr Konto'
                 order_history: 'Bestellverlauf'
                 personal_information: 'Mein Profil'
+    top_bar: 'Melden Sie sich für unseren Newsletter an und sichern Sie sich -20%'

@@ -34,8 +34,11 @@ sylius:
             not_blank: Bitte geben Sie den ISO-Code des Landes an.
             regex: Der Ländercode darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Der ISO-Ländercode muss eindeutig sein.
+            country: Der ISO-Ländercode ist ungültig.
+        unique_provinces: Alle Bundesländer innerhalb dieses Landes müssen eindeutige Codes und Namen haben.
     province:
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             min_length: Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein|Der Name des Bundeslandes muss mindestens 5 Zeichen lang sein.
             not_blank: Bitte geben Sie den Code des Bundeslandes ein.
             regex: Der Code des Bundeslandes sollte das Format XX-XX haben (z. B. DE-BY).
@@ -49,9 +52,12 @@ sylius:
         scope:
             not_blank: Bitte geben Sie den Bereich an.
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte geben Sie Ihre Vorwahl an.
             regex: Das Kürzel des Gebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Die Vorwahl muss eindeutig sein.
+        type:
+            invalid: "Der Typ {{ value }} ist ungültig. Zulässige Typen sind: {{ choices }}."
         members:
             min_count: Bitte geben Sie mindestens {{ limit }} Versandgebiete an.
         name:
@@ -61,6 +67,7 @@ sylius:
     zone_member:
         cannot_be_the_same_as_zone: Das Bereichsmitglied und der Bereich müssen unterschiedlich sein.
         code:
+            max_length: Der Code des Versandgebiet-Mitglieds darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte wählen Sie ein Versandgebiet aus.
             regex: Das Kürzel des Versandgebietes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
         unique: Der gewählte Bereich ist bereits in diesem Versandgebiet enthalten.

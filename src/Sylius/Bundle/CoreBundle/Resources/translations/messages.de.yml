@@ -84,6 +84,7 @@ sylius:
             locales: 'Gebietsschemata'
             menu_taxon: 'Klassifizierung'
             payment_methods: 'Zahlungsmethoden'
+            shipping_address_in_checkout_required: 'Adresse im Checkout erforderlich'
             shipping_methods: 'Versandmethoden'
             shop_billing_data: 'Shop Rechnungsadresse'
             skipping_shipping_step_allowed: 'Versandart überspringen, wenn nur eine Versandart verfügbar ist?'

@@ -4,6 +4,7 @@
 sylius:
     catalog_promotion:
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             unique: Eine Katalog-Aktion mit diesem Code existiert bereits.
             regex: Katalog-Aktions Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             not_blank: Bitte geben Sie einen Code für die Katalog Promotion an.
@@ -16,13 +17,21 @@ sylius:
         state:
             processing: Die Katalog Aktion kann nicht bearbeitet werden, da sie gerade verarbeitet wird.
     catalog_promotion_action:
+        type:
+            not_blank: Bitte wählen Sie einen Aktionstyp aus.
+            invalid: Der Katalog-Aktionstyp ist ungültig. Verfügbare Typen sind {{ available_action_types }}.
         invalid_type: Katalog-Aktionen Typ ist ungültig. Bitte wählen Sie einen gültigen Typ aus.
         percentage_discount:
             not_in_range: Prozentualer Rabatt muss zwischen 0% und 100% liegen.
             not_number_or_empty: Prozentualer Rabatt muss eine Zahl und darf nicht leer sein.
             not_valid: Prozentualer Rabatt muss konfiguriert sein..
+    catalog_promotion_scope:
+        type:
+            not_blank: Bitte wählen Sie einen Geltungsbereichstyp aus.
+            invalid: Der Geltungsbereichstyp der Katalog-Aktion ist ungültig. Verfügbare Typen sind {{ available_scope_types }}.
     promotion:
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             unique: Eine Aktion mit diesem Kürzel existiert bereits.
             regex: Aktionskürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             not_blank: Bitte geben Sie ein Kürzel an.
@@ -37,8 +46,11 @@ sylius:
             min_length: Der Name muss mindestens 1 Zeichen lang sein.|Der Name muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie einen Namen an.
     promotion_action:
+        invalid_type: Der Aktionstyp der Aktion ist ungültig. Verfügbare Aktionstypen sind {{ available_action_types }}.
         percentage_discount_configuration:
             not_in_range: Prozentualer Rabatt sollte zwischen 0% und 100% sein.
+    promotion_rule:
+        invalid_type: Der Regeltyp der Aktion ist ungültig. Verfügbare Regeltypen sind {{ available_rule_types }}.
     promotion_coupon:
         code:
             max_length: Der Gutscheincode darf nicht länger als 1 Zeichen sein.|Der Gutscheincode darf nicht länger als {{ limit }} sein.
@@ -47,6 +59,9 @@ sylius:
             regex: Gutschein-Code darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Dieser Gutschein ist bereits vorhanden.
         is_invalid: Der Rabattgutschein ist ungültig.
+        promotion:
+            not_blank: Bitte geben Sie eine Aktion für diesen Gutschein an.
+            not_coupon_based: Nur gutscheinbasierte Aktionen können Gutscheine haben.
         usage_limit:
             min: Das Nutzungslimit eines Gutscheincodes muss mindestens {{ limit }} sein.
     promotion_coupon_generator_instruction:
@@ -57,6 +72,7 @@ sylius:
             min: Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.
             max: Der Gutscheincode darf nicht länger als {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie eine Gutscheincodelänge ein.
+            not_in_range: Die Gutscheincodelänge muss zwischen {{ min }} und {{ max }} liegen.
         possible_generation_amount: Ungültige Gutscheincodelänge oder ungültiger Gutscheinbetrag. Es ist nicht möglich %expectedAmount% einzigartige Gutscheincodes mit einer Länge von %codeLength% Zeichen zu generieren. Es können maximal %possibleAmount% Gutscheincodes generiert werden.
         usage_limit:
             min: Das Nutzungslimit der erstellen Gutscheincodes muss mindestens {{ limit }} sein.

@@ -19,6 +19,12 @@ sylius:
             min_length: Der CVV Kreditkartencode darf nur {{ limit }} Zeichen lang sein.
         expiry_year:
             not_blank: Bitte wählen Sie das Ablaufjahr aus.
+    gateway_config:
+        invalid_gateway_factory: Ungültige Gateway-Factory. Verfügbare Factories sind {{ available_factories }}.
+        gateway_name:
+            not_blank: Bitte geben Sie den Namen des Gateways ein.
+        factory_name:
+            not_blank: Bitte geben Sie den Namen der Gateway-Factory ein.
     payment:
         currency_code:
             not_valid: Der eingegebene Währungscode ist ungültig.
@@ -40,6 +46,7 @@ sylius:
                 min_range: Prozentuale Gebühr darf nicht unter {{ limit }} sein.
                 not_blank: Bitte geben Sie die prozentuale Gebühr ein.
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: 'Bitte geben Sie ein Kürzel für die Zahlungsmethode an.'
             regex: 'Kürzel der Zahlungsart darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
             unique: 'Eine Zahlungsmethode mit diesem Kürzel existiert bereits.'

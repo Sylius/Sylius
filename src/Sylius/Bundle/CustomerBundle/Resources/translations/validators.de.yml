@@ -20,8 +20,11 @@ sylius:
             invalid: Diese E-Mail Adresse ist ungültig.
             unique: Diese E-Mail-Adresse wird bereits verwendet.
             registered: Diese E-Mail wird bereits verwendet. Bitte melden Sie sich an oder benutzen Sie Passwort vergessen.
+        phone_number:
+            max: Die Telefonnummer darf nicht länger als {{ limit }} Zeichen sein.
     customer_group:
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             regex: Kürzel der Kundengruppe darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Code der Kundengruppe muss eindeutig sein.
             not_blank: Bitte geben Sie einen Code für die Kundengruppe ein.
