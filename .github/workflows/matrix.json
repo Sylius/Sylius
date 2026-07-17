@@ -29,13 +29,13 @@
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "state_machine_adapter": "symfony_workflow"
         },
         {
           "php": "8.5",
           "symfony": "~7.4.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "doctrine_bundle": "^3.0",
           "state_machine_adapter": "symfony_workflow",
           "legacy_grid_config": false
@@ -43,7 +43,7 @@
         {
           "php": "8.5",
           "symfony": "~8.1.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "doctrine_bundle": "^3.0",
           "state_machine_adapter": "symfony_workflow",
           "legacy_grid_config": false
@@ -214,18 +214,18 @@
         {
           "php": "8.4",
           "symfony": "~6.4.0",
-          "postgres": "17.5"
+          "postgres": "18.4"
         },
         {
           "php": "8.5",
           "symfony": "~7.4.0",
-          "postgres": "17.5",
+          "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         },
         {
           "php": "8.5",
           "symfony": "~8.1.0",
-          "postgres": "17.5",
+          "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         }
       ]
@@ -283,7 +283,7 @@
         "~8.1.0"
       ],
       "mariadb": [
-        "11.4.7"
+        "11.4.12"
       ],
       "doctrine_bundle": [
         "^2.0",
@@ -299,7 +299,7 @@
         {
           "php": "8.3",
           "symfony": "~7.4.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "doctrine_bundle": "^2.0",
           "state_machine_adapter": "winzou_state_machine",
           "legacy_grid_config": true
@@ -307,7 +307,7 @@
         {
           "php": "8.4",
           "symfony": "~8.0.0",
-          "mariadb": "11.4.7",
+          "mariadb": "11.4.12",
           "doctrine_bundle": "^3.0",
           "state_machine_adapter": "symfony_workflow",
           "legacy_grid_config": false
@@ -484,21 +484,29 @@
         "~8.1.0"
       ],
       "postgres": [
-        "15.13",
-        "16.9",
-        "17.5"
+        "18.4"
       ],
       "include": [
         {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "postgres": "16.14"
+        },
+        {
+          "php": "8.4",
+          "symfony": "~7.4.0",
+          "postgres": "17.10"
+        },
+        {
           "php": "8.5",
           "symfony": "~7.4.0",
-          "postgres": "17.5",
+          "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         },
         {
           "php": "8.4",
           "symfony": "~8.0.0",
-          "postgres": "17.5",
+          "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         }
       ]
