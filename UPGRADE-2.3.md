@@ -276,32 +276,11 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
      > **Deprecated:** Same as above.
 
-1. The `StringInflector::nameToSlug()` method has been **deprecated** and will be removed in Sylius 3.0.
+2. The `StringInflector::nameToSlug()` method has been **deprecated** and will be removed in Sylius 3.0.
 
-2. The minimum required **PHP version** has been raised from `^8.2` to `^8.3`. ([#19034](https://github.com/Sylius/Sylius/pull/19034))
+3. The minimum required **PHP version** has been raised from `^8.2` to `^8.3`.
 
    Ensure your environment runs PHP 8.3 or higher before upgrading.
-
-3. The minimum required **PHPUnit version** has been raised from `^11.5` to `^12.5`. ([#19034](https://github.com/Sylius/Sylius/pull/19034))
-
-   If you have custom test suites extending Sylius test infrastructure, review the [PHPUnit 12 migration guide](https://docs.phpunit.de/en/12.0/migration-guide.html) for breaking changes. The key changes are:
-    - PHPDoc annotations (`@dataProvider`, `@test`, `@depends`) are no longer supported — use PHP attributes (`#[DataProvider]`, `#[Test]`, `#[Depends]`) instead.
-    - `MockBuilder::addMethods()` has been removed — use anonymous classes or interfaces instead.
-    - `createMock()` without expectations now triggers a PHPUnit notice — add the `#[AllowMockObjectsWithoutExpectations]` attribute to your test class to suppress it.
-    - `tests/Api/JsonApiTestCase.php` initialization has been moved from the constructor to `setUp()`. If you extend this class and override `__construct()`, migrate your initialization to `setUp()`:
-
-      ```diff
-      -public function __construct(?string $name = null, array $data = [], int|string $dataName = '')
-      -{
-      -    parent::__construct($name, $data, $dataName);
-      -    // your initialization
-      -}
-      +protected function setUp(): void
-      +{
-      +    parent::setUp();
-      +    // your initialization
-      +}
-      ```
 
 4. The `knplabs/gaufrette` and `knplabs/knp-gaufrette-bundle` packages have been removed.
    
