@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "stof/doctrine-extensions-bundle": "^1.12",
+        "stof/doctrine-extensions-bundle": "^1.15",
         "sylius/registry": "^1.6",
         "sylius/resource-bundle": "^1.14.2",
         "sylius/taxation": "^2.0",
@@ -36,9 +36,9 @@
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.13 || ^3.0",
-        "doctrine/orm": "^2.18 || ^3.5",
-        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "doctrine/doctrine-bundle": "^2.18 || ^3.2",
+        "doctrine/orm": "^2.20 || ^3.6",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.3",
         "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",

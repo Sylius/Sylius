@@ -30,7 +30,7 @@
     "require": {
         "php": "^8.2",
         "payum/offline": "^1.7.5",
-        "payum/payum-bundle": "^2.6",
+        "payum/payum-bundle": "^2.7",
         "sylius/core-bundle": "^2.0",
         "sylius/currency": "^2.0",
         "sylius/order-bundle": "^2.0",
@@ -40,7 +40,7 @@
         "php-http/message-factory": "^1.1"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.3",
         "phpunit/phpunit": "^11.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0"
     },
