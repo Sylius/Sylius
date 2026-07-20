@@ -35,8 +35,8 @@
         "symfony/messenger": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.13 || ^3.0",
-        "doctrine/orm": "^2.18 || ^3.5",
+        "doctrine/doctrine-bundle": "^2.18 || ^3.2",
+        "doctrine/orm": "^2.20 || ^3.6",
         "matthiasnoback/symfony-dependency-injection-test": "^6.0",
         "phpunit/phpunit": "^11.5",
         "sylius/locale-bundle": "^2.0",

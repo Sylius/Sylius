@@ -30,7 +30,7 @@
     "require": {
         "php": "^8.2",
         "payum/offline": "^1.7.5",
-        "payum/payum-bundle": "^2.6",
+        "payum/payum-bundle": "^2.7",
         "sylius/core-bundle": "^2.0",
         "sylius/currency": "^2.0",
         "sylius/order-bundle": "^2.0",

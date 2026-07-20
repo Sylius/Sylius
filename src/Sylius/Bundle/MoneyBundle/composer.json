@@ -32,14 +32,14 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^2.13 || ^3.0",
-        "doctrine/orm": "^2.18 || ^3.5",
+        "doctrine/doctrine-bundle": "^2.18 || ^3.2",
+        "doctrine/orm": "^2.20 || ^3.6",
         "phpunit/phpunit": "^11.5",
         "sylius/currency-bundle": "^2.0",
         "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/form": "^6.4.1 || ^7.4 || ^8.0",
-        "twig/twig": "^3.16"
+        "twig/twig": "^3.21"
     },
     "config": {
         "allow-plugins": {
