@@ -38,8 +38,8 @@
     },
     "require-dev": {
         "ext-sqlite3": "*",
-        "matthiasnoback/symfony-config-test": "^6.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
+        "matthiasnoback/symfony-config-test": "^6.2",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.3",
         "nelmio/alice": "^3.13",
         "phparkitect/phparkitect": "^1.0",
         "phpunit/phpunit": "^11.5",
