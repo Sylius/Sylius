@@ -29,9 +29,6 @@ jobs:
                         php: "8.2"
                     -
                         branch: "2.3"
-                        php: "8.2"
-                    -
-                        branch: "2.3"
                         php: "8.3"
 
         steps:
