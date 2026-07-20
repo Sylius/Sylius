@@ -63,7 +63,7 @@
         "symfony/intl": "^6.4 || ^7.4 || ^8.0",
         "symfony/mailer": "^6.4 || ^7.4 || ^8.0",
         "symfony/messenger": "^6.4 || ^7.4 || ^8.0",
-        "symfony/webpack-encore-bundle": "^2.2",
+        "symfony/webpack-encore-bundle": "^2.4",
         "symfony/workflow": "^6.4 || ^7.4 || ^8.0",
         "php-http/discovery": "^1.20"
     },
