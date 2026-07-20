@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\Platform;
 
-use Doctrine\DBAL\Platforms\MySQLPlatform;
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 
 final class PlatformHelper
@@ -22,9 +22,10 @@ final class PlatformHelper
     {
     }
 
+    /** Matches both MySQL and MariaDB, as they share the same AbstractMySQLPlatform ancestor. */
     public static function isMysql(object $platform): bool
     {
-        return is_a($platform, MySQLPlatform::class, true);
+        return is_a($platform, AbstractMySQLPlatform::class, true);
     }
 
     public static function isPostgreSQL(object $platform): bool
