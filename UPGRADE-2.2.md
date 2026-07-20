@@ -126,3 +126,16 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)
    is always placed at the beginning of the returned locales array.  
    Other locales remain in the same order as returned by the repository.
+
+## Behat
+
+1. The `waitForFormUpdate()` methods in the Behat page objects and elements now delegate to the new
+   `Sylius\Behat\Service\DriverHelper::waitForLiveComponentUpdate()` helper.
+   The previous implementation checked the `busy` attribute on the `form` element and relied on a fixed `sleep`,
+   but Symfony UX Live Components set `busy` on the component root (`[data-controller~="live"]`), not on the form,
+   so the wait was effectively a no-op. The helper now waits document-wide for `[busy]`/`[data-live-is-loading]`
+   markers to appear and then disappear, without any hardcoded sleep.
+   If you overrode `waitForFormUpdate()` in your own page objects, delegate to the helper as well.
+
+1. The `live_form` element and the `waitForFormUpdate()` override were removed from
+   `Sylius\Behat\Page\Admin\Order\UpdatePage`; it now inherits the shared implementation.

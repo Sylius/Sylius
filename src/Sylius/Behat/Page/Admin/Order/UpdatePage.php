@@ -104,7 +104,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'billing_province_name' => '#sylius_admin_order_billingAddress_provinceName',
             'billing_province_code' => '#sylius_admin_order_billingAddress_provinceCode',
             'billing_street' => '#sylius_admin_order_billingAddress_street',
-            'live_form' => '[data-live-name-value="sylius_admin:order:form"]',
             'shipping_city' => '#sylius_admin_order_shippingAddress_city',
             'shipping_country' => '#sylius_admin_order_shippingAddress_countryCode',
             'shipping_first_name' => '#sylius_admin_order_shippingAddress_firstName',
@@ -143,10 +142,5 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         return $element;
-    }
-
-    protected function waitForFormUpdate(): void
-    {
-        $this->getElement('live_form')->waitFor('5', fn (NodeElement $element) => !$element->hasAttribute('busy'));
     }
 }

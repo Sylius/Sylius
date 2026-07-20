@@ -59,4 +59,23 @@ abstract class DriverHelper
             $session->wait($timeout, "document.readyState === 'complete' && !document.querySelector('[data-live-is-loading]')");
         }
     }
+
+    public static function waitForLiveComponentUpdate(Session $session, int $timeout = 5000): void
+    {
+        if (self::isNotJavascript($session->getDriver())) {
+            return;
+        }
+
+        // Give the Live Component a brief, bounded chance to START the request.
+        // The "busy" attribute is set on the Live Component root element (not the form),
+        // so we probe both it and the "data-live-is-loading" markers document-wide.
+        $session->wait(1000, "document.querySelectorAll('[busy], [data-live-is-loading]').length > 0");
+
+        // Wait until ALL Live Component requests have FINISHED.
+        $session->wait(
+            $timeout,
+            "document.readyState === 'complete' && " .
+            "document.querySelectorAll('[busy], [data-live-is-loading]').length === 0",
+        );
+    }
 }

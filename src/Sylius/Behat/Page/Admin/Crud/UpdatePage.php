@@ -97,11 +97,7 @@ class UpdatePage extends SyliusPage implements UpdatePageInterface
 
     protected function waitForFormUpdate(): void
     {
-        $form = $this->getElement('form');
-        sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
+        DriverHelper::waitForLiveComponentUpdate($this->getSession());
     }
 
     protected function verifyStatusCode(): void

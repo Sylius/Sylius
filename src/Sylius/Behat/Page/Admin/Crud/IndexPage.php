@@ -201,11 +201,7 @@ class IndexPage extends SyliusPage implements IndexPageInterface
 
     protected function waitForFormUpdate(): void
     {
-        $form = $this->getElement('filters_form');
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, function () use ($form) {
-            return !$form->hasAttribute('busy');
-        });
+        DriverHelper::waitForLiveComponentUpdate($this->getSession());
     }
 
     protected function getDefinedElements(): array
