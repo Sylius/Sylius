@@ -259,6 +259,12 @@
           "php": "8.5",
           "symfony": "~8.0.0"
         }
+      ],
+      "exclude": [
+        {
+          "php": "8.3",
+          "symfony": "~8.1.0"
+        }
       ]
     },
     "e2e-mariadb": {
@@ -335,6 +341,12 @@
           "state_machine_adapter": "symfony_workflow",
           "legacy_grid_config": false
         }
+      ],
+      "exclude": [
+        {
+          "php": "8.3",
+          "symfony": "~8.1.0"
+        }
       ]
     },
     "e2e-mysql": {
@@ -377,6 +389,12 @@
           "mysql": "8.4",
           "twig": "^3.3",
           "doctrine_bundle": "^3.0"
+        }
+      ],
+      "exclude": [
+        {
+          "php": "8.3",
+          "symfony": "~8.1.0"
         }
       ]
     },
@@ -545,6 +563,12 @@
           "postgres": "18.4",
           "doctrine_bundle": "^3.0"
         }
+      ],
+      "exclude": [
+        {
+          "php": "8.3",
+          "symfony": "~8.1.0"
+        }
       ]
     },
     "frontend": {
@@ -575,6 +599,12 @@
         {
           "php": "8.5",
           "symfony": "~6.4.0"
+        }
+      ],
+      "exclude": [
+        {
+          "php": "8.3",
+          "symfony": "~8.1.0"
         }
       ]
     }
