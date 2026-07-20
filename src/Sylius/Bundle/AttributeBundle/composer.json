@@ -42,9 +42,6 @@
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/form": "^6.4.1 || ^7.4 || ^8.0"
     },
-    "conflict": {
-        "phpstan/phpdoc-parser": "^2.0"
-    },
     "config": {
         "allow-plugins": {
             "symfony/flex": true

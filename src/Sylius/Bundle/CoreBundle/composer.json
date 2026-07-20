@@ -67,9 +67,6 @@
         "symfony/workflow": "^6.4 || ^7.4 || ^8.0",
         "php-http/discovery": "^1.20"
     },
-    "conflict": {
-        "phpstan/phpdoc-parser": "^2.0"
-    },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.18 || ^3.2",
         "doctrine/orm": "^2.20 || ^3.6",

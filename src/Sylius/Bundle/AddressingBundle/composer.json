@@ -33,9 +33,6 @@
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/intl": "^6.4 || ^7.4 || ^8.0"
     },
-    "conflict": {
-        "phpstan/phpdoc-parser": "^2.0"
-    },
     "require-dev": {
         "doctrine/data-fixtures": "^1.7 || ^2.2",
         "doctrine/doctrine-bundle": "^2.18 || ^3.2",

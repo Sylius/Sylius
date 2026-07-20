@@ -32,9 +32,6 @@
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/validator": "^6.4 || ^7.4 || ^8.0"
     },
-    "conflict": {
-        "phpstan/phpdoc-parser": "^2.0"
-    },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.18 || ^3.2",
         "doctrine/orm": "^2.20 || ^3.6",

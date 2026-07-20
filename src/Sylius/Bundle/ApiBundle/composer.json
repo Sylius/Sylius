@@ -27,14 +27,11 @@
         "doctrine/dbal": "^3.10 || ^4.4",
         "api-platform/doctrine-orm": "^4.3",
         "api-platform/metadata": "^4.2.1",
-        "api-platform/symfony": "^4.3",
+        "api-platform/symfony": "^4.3.17",
         "lexik/jwt-authentication-bundle": "^3.2",
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
         "symfony/messenger": "^6.4 || ^7.4 || ^8.0"
-    },
-    "conflict": {
-        "api-platform/symfony": "4.3.16"
     },
     "require-dev": {
         "ext-sqlite3": "*",
