@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Cart;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -33,12 +36,7 @@ final class DisabledCartItemsRemover
         $itemsToRemove = [];
 
         foreach ($order->getItems() as $item) {
-            $variant = $item->getVariant();
-            $product = $item->getProduct();
-
-            if ((null === $variant || !$variant->isEnabled()) ||
-                (null === $product || !$product->isEnabled()) ||
-                (null !== $channel && !$product->hasChannel($channel))) {
+            if (!$this->isItemAvailable($item->getVariant(), $item->getProduct(), $channel)) {
                 $itemsToRemove[] = $item;
             }
         }
@@ -56,5 +54,21 @@ final class DisabledCartItemsRemover
         $this->manager->refresh($order);
 
         return true;
+    }
+
+    private function isItemAvailable(
+        ?ProductVariantInterface $variant,
+        ?ProductInterface $product,
+        ?ChannelInterface $channel,
+    ): bool {
+        if (null === $variant || !$variant->isEnabled()) {
+            return false;
+        }
+
+        if (null === $product || !$product->isEnabled()) {
+            return false;
+        }
+
+        return null === $channel || $product->hasChannel($channel);
     }
 }
