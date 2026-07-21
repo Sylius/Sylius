@@ -39,6 +39,7 @@ return static function (ContainerConfigurator $container) {
             AddToCartType::class,
             service('sylius.repository.product'),
             service('sylius.repository.product_variant'),
+            service('sylius.adder.cart_item'),
         ])
         ->call('setLiveResponder', [service('ux.live_component.live_responder')])
         ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:product:add_to_cart_form'])

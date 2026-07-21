@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
+use Sylius\Bundle\OrderBundle\Adder\CartItemAdderInterface;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductLivePropTrait;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductVariantLivePropTrait;
@@ -84,9 +85,20 @@ class AddToCartFormComponent
         protected readonly string $formClass,
         ProductRepositoryInterface $productRepository,
         ProductVariantRepositoryInterface $productVariantRepository,
+        protected readonly ?CartItemAdderInterface $cartItemAdder = null,
     ) {
         $this->initializeProduct($productRepository);
         $this->initializeProductVariant($productVariantRepository);
+
+        if (null === $this->cartItemAdder) {
+            trigger_deprecation(
+                'sylius/shop-bundle',
+                '2.3',
+                'Not passing a "%s" to "%s" is deprecated and will be required in Sylius 3.0.',
+                CartItemAdderInterface::class,
+                self::class,
+            );
+        }
     }
 
     #[PostMount(priority: 100)]
@@ -123,9 +135,13 @@ class AddToCartFormComponent
         $this->submitForm();
         $addToCartCommand = $this->getForm()->getData();
 
-        $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_ADD);
-        $this->manager->persist($addToCartCommand->getCart());
-        $this->manager->flush();
+        if (null !== $this->cartItemAdder) {
+            $this->cartItemAdder->add($addToCartCommand->getCart(), $addToCartCommand->getCartItem());
+        } else {
+            $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_ADD);
+            $this->manager->persist($addToCartCommand->getCart());
+            $this->manager->flush();
+        }
         $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_POST_ADD);
 
         if ($addFlashMessage) {

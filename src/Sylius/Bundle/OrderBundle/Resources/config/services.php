@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\OrderBundle\Adder\CartItemAdder;
+use Sylius\Bundle\OrderBundle\Adder\CartItemAdderInterface;
 use Sylius\Bundle\OrderBundle\Console\Command\RemoveExpiredCartsCommand;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface;
@@ -118,6 +120,16 @@ return static function (ContainerConfigurator $container) {
 
     $services->set('sylius.factory.add_to_cart_command', AddToCartCommandFactory::class);
     $services->alias(AddToCartCommandFactoryInterface::class, 'sylius.factory.add_to_cart_command');
+
+    $services
+        ->set('sylius.adder.cart_item', CartItemAdder::class)
+        ->args([
+            service('sylius.factory.add_to_cart_command'),
+            service('event_dispatcher'),
+            service('sylius.manager.order'),
+        ])
+    ;
+    $services->alias(CartItemAdderInterface::class, 'sylius.adder.cart_item');
 
     $services
         ->set('sylius.resetter.cart_changes', CartChangesResetter::class)
