@@ -12,6 +12,7 @@ sylius_admin_shipment:
 sylius_admin_shipment_show:
     path: /shipments/{id}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_shipment')"
     defaults:
         _controller: sylius.controller.shipment::showAction
         _sylius:
