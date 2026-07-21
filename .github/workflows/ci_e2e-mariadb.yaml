@@ -44,7 +44,7 @@ jobs:
     phpunit-cli-api:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.doctrine_bundle && format(', DoctrineBundle {0}', matrix.doctrine_bundle) || '' }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}${{ matrix.legacy_grid_config && format(', LegacyGridConfig {0}', matrix.legacy_grid_config) || '' }}"
+        name: "PHPUnit, CLI, API, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MariaDB ${{ matrix.mariadb }}, State Machine Adapter ${{ matrix.state_machine_adapter }}${{ matrix.doctrine_bundle && format(', DoctrineBundle {0}', matrix.doctrine_bundle) || '' }}${{ matrix.api_platform && format(', ApiPlatform {0}', matrix.api_platform) || '' }}${{ matrix.legacy_grid_config && format(', LegacyGridConfig {0}', matrix.legacy_grid_config) || '' }}${{ matrix.legacy_routing_config && format(', LegacyRoutingConfig {0}', matrix.legacy_routing_config) || '' }}"
         timeout-minutes: 20
         strategy:
             fail-fast: false
@@ -54,6 +54,7 @@ jobs:
             APP_ENV: test_cached
             TEST_SYLIUS_STATE_MACHINE_ADAPTER: "${{ matrix.state_machine_adapter }}"
             TEST_SYLIUS_USE_LEGACY_GRID_CONFIG: "${{ matrix.legacy_grid_config == false && 'false' || 'true' }}"
+            TEST_SYLIUS_USE_LEGACY_ROUTING: ${{ matrix.legacy_routing_config || true }}
             BEHAT_BASE_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f progress"
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 

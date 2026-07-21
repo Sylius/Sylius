@@ -27,7 +27,8 @@
           "symfony": "~6.4.0",
           "mariadb": "11.4.12",
           "state_machine_adapter": "symfony_workflow",
-          "legacy_grid_config": true
+          "legacy_grid_config": true,
+          "legacy_routing_config": true
         },
         {
           "php": "8.5",
@@ -35,7 +36,8 @@
           "mariadb": "11.4.12",
           "doctrine_bundle": "^3.0",
           "state_machine_adapter": "symfony_workflow",
-          "legacy_grid_config": false
+          "legacy_grid_config": false,
+          "legacy_routing_config": false
         },
         {
           "php": "8.5",
@@ -315,7 +317,8 @@
           "mariadb": "11.4.12",
           "doctrine_bundle": "^2.0",
           "state_machine_adapter": "winzou_state_machine",
-          "legacy_grid_config": true
+          "legacy_grid_config": true,
+          "legacy_routing_config": false
         },
         {
           "php": "8.5",
