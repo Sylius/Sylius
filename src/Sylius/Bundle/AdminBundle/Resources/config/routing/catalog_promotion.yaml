@@ -15,6 +15,7 @@ sylius_admin_catalog_promotion:
 sylius_admin_catalog_promotion_show:
     path: /catalog-promotions/{id}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_catalog_promotion')"
     defaults:
         _controller: sylius.controller.catalog_promotion::showAction
         _sylius:
