@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ShippingBundle\Assigner;
 
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner;
@@ -21,6 +22,7 @@ use Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssignerInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\Clock\ClockInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingDateAssignerTest extends TestCase
 {
     private ClockInterface&MockObject $clock;

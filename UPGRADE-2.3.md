@@ -276,23 +276,27 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
      > **Deprecated:** Same as above.
 
-   The `StringInflector::nameToSlug()` method has been **deprecated** and will be removed in Sylius 3.0.
+2. The `StringInflector::nameToSlug()` method has been **deprecated** and will be removed in Sylius 3.0.
 
-2. The `knplabs/gaufrette` and `knplabs/knp-gaufrette-bundle` packages have been removed.
+3. The minimum required **PHP version** has been raised from `^8.2` to `^8.3`.
+
+   Ensure your environment runs PHP 8.3 or higher before upgrading.
+
+4. The `knplabs/gaufrette` and `knplabs/knp-gaufrette-bundle` packages have been removed.
    
    The Gaufrette integration has been unusable as a filesystem adapter.
    Since Sylius 2.0 the default filesystem adapter uses Flysystem instead. 
 
    If your application depends on the Gaufrette packages directly, require them explicitly in your `composer.json`.
 
-3. The `symfony/proxy-manager-bridge` and `friendsofphp/proxy-manager-lts` packages have been removed.
+5. The `symfony/proxy-manager-bridge` and `friendsofphp/proxy-manager-lts` packages have been removed.
 
    They are no longer needed, lazy services now rely on PHP's native lazy proxies provided by
    `symfony/var-exporter` (the default since Symfony 6.4). No change is required in your application.
 
    If your application depends on these packages directly, require them explicitly in your `composer.json`.
 
-4. The supported Doctrine version ranges have been **broadened** to allow the newer stack
+6. The supported Doctrine version ranges have been **broadened** to allow the newer stack
    (`doctrine/doctrine-bundle` `^2.13 || ^3.0`, `doctrine/dbal` `^3.9 || ^4.0`,
    `doctrine/persistence` `^3.3 || ^4.0`, `doctrine/data-fixtures` `^1.7 || ^2.2`).
 

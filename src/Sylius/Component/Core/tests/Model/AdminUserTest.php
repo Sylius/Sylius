@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AdminUser;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AdminUserTest extends TestCase
 {
     private ImageInterface&MockObject $image;

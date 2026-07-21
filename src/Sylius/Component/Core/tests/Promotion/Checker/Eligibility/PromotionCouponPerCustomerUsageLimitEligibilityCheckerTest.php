@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Promotion\Checker\Eligibility;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityChe
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerTest extends TestCase
 {
     private MockObject&OrderRepositoryInterface $orderRepository;

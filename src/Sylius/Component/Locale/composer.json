@@ -26,14 +26,14 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "laminas/laminas-stdlib": "^3.21",
         "sylius/resource": "^1.14.2",
         "symfony/intl": "^6.4 || ^7.4 || ^8.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^12.5"
     },
     "config": {
         "allow-plugins": {

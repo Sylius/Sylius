@@ -37,12 +37,12 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "doctrine/collections": "^2.6",
         "sylius/resource": "^1.14.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^12.5"
     },
     "config": {
         "allow-plugins": {

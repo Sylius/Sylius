@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "doctrine/common": "^3.5",
         "guzzlehttp/guzzle": "^7.9",
         "laminas/laminas-stdlib": "^3.21",
@@ -61,7 +61,7 @@
     },
     "require-dev": {
         "doctrine/orm": "^2.20 || ^3.6",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "symfony/property-access": "^6.4 || ^7.4 || ^8.0"
     },
     "config": {

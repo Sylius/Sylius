@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "doctrine/collections": "^2.6",
         "knplabs/knp-menu": "^3.8",
         "knplabs/knp-menu-bundle": "^3.7",
@@ -48,7 +48,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^6.2",
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/form": "^6.4.1 || ^7.4 || ^8.0",
         "twig/twig": "^3.21"

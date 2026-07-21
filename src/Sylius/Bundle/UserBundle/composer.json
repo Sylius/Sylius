@@ -37,7 +37,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "doctrine/orm": "^2.20 || ^3.6",
         "egulias/email-validator": "^4.0",
         "sylius/mailer-bundle": "^2.2",
@@ -51,7 +51,7 @@
         "doctrine/doctrine-bundle": "^2.18 || ^3.2",
         "hwi/oauth-bundle": "^2.5",
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/mailer": "^6.4 || ^7.4 || ^8.0",
         "symfony/security-bundle": "^6.4 || ^7.4 || ^8.0"

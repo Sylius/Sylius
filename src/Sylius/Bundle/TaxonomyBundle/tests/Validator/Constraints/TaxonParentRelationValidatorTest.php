@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\TaxonomyBundle\Validator\Constraints;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\TaxonomyBundle\Validator\Constraints\TaxonParentRelation;
@@ -21,6 +22,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonParentRelationValidatorTest extends TestCase
 {
     private TaxonParentRelationValidator $validator;

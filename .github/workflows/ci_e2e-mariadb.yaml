@@ -126,9 +126,7 @@ jobs:
                     chrome_version: stable
 
             -   name: Run PHPUnit
-                run: |
-                    vendor/bin/phpunit --testsuite all --colors=always
-                    vendor/bin/phpunit --testsuite="Sylius Test Suite" --colors=always
+                run: vendor/bin/phpunit --testsuite all --colors=always
 
             -   name: Run CLI Behat
                 run: |

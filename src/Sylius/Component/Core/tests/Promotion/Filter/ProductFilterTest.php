@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Promotion\Filter;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Filter\ProductFilter;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductFilterTest extends TestCase
 {
     private MockObject&OrderItemInterface $item;

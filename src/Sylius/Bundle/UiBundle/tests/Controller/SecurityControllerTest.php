@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\UiBundle\Controller;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\UiBundle\Controller\SecurityController;
@@ -27,6 +28,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Twig\Environment;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SecurityControllerTest extends TestCase
 {
     private AuthenticationUtils&MockObject $authenticationUtils;

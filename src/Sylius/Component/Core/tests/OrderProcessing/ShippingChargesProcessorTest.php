@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -25,6 +26,7 @@ use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingChargesProcessorTest extends TestCase
 {
     private FactoryInterface&MockObject $adjustmentFactory;

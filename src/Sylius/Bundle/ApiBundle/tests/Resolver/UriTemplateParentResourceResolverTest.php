@@ -19,6 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Persisters\Entity\EntityPersister;
 use Doctrine\ORM\UnitOfWork;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Resolver\UriTemplateParentResourceResolver;
@@ -27,6 +28,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UriTemplateParentResourceResolverTest extends TestCase
 {
     private EntityManagerInterface&MockObject $entityManager;

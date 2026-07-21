@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\State\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\StateProvider\Common\Adjustment\CollectionProvider;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CollectionProviderTest extends TestCase
 {
     private const IDENTIFIER = 'id';

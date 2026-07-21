@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Generator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Generator\ImagePathGeneratorInterface;
 use Sylius\Component\Core\Generator\UploadedImagePathGenerator;
 use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UploadedImagePathGeneratorTest extends TestCase
 {
     private UploadedImagePathGenerator $generator;

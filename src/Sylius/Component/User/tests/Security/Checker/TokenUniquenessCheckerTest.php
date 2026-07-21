@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\User\Security\Checker;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\User\Model\UserInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TokenUniquenessCheckerTest extends TestCase
 {
     /** @var RepositoryInterface<UserInterface>&MockObject */

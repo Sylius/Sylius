@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Action\Account;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Action\Account\RequestPasswordResetAction;
@@ -33,6 +34,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RequestPasswordResetActionTest extends TestCase
 {
     private FormFactoryInterface&MockObject $formFactory;

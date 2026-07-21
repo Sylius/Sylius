@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Generator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Generator\TaxonSlugGenerator;
@@ -21,6 +22,7 @@ use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface as BaseTaxon
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonSlugGeneratorTest extends TestCase
 {
     private BaseTaxonSlugGeneratorInterface&MockObject $baseSlugGenerator;

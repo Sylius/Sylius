@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage;
 
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $processor;

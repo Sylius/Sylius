@@ -51,12 +51,9 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     /** @var array <string, string> */
     private array $defaultDeleteHeaders = [];
 
-    /**
-     * @param array<array-key, mixed> $data
-     */
-    public function __construct(?string $name = null, array $data = [], int|string $dataName = '')
+    protected function setUp(): void
     {
-        parent::__construct($name, $data, $dataName);
+        parent::setUp();
 
         $this->dataFixturesPath = __DIR__ . '/DataFixtures/ORM';
         $this->expectedResponsesPath = __DIR__ . '/Responses';

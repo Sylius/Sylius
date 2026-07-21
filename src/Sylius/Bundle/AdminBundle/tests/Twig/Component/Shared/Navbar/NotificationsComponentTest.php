@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Notification\NotificationProviderInterface;
 use Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class NotificationsComponentTest extends TestCase
 {
     private MockObject&NotificationProviderInterface $notificationProvider;

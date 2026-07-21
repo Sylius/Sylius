@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "stof/doctrine-extensions-bundle": "^1.15",
         "sylius/resource-bundle": "^1.14.2",
         "sylius/taxonomy": "^2.0",
@@ -37,7 +37,7 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.18 || ^3.2",
         "doctrine/orm": "^2.20 || ^3.6",
-        "phpunit/phpunit": "^11.5",
+        "phpunit/phpunit": "^12.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0"
     },
     "config": {

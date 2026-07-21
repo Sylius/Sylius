@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Taxonomy\Generator;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator;
@@ -23,6 +24,7 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonSlugGeneratorTest extends TestCase
 {
     /** @var TaxonInterface&MockObject */

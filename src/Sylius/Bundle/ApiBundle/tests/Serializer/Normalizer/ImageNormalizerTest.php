@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 use ApiPlatform\Metadata\Exception\InvalidArgumentException;
 use Liip\ImagineBundle\Exception\Imagine\Filter\NonExistingFilterException;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
@@ -25,6 +26,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ImageNormalizerTest extends TestCase
 {
     private CacheManager&MockObject $cacheManager;

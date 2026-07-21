@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Metadata\GetCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -32,6 +33,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingMethodNormalizerTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;
