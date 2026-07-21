@@ -15,6 +15,7 @@ sylius_admin_customer:
 sylius_admin_customer_show:
     path: /customers/{id}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_customer')"
     defaults:
         _controller: sylius.controller.customer::showAction
         _sylius:
