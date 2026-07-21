@@ -1,7 +1,7 @@
 @managing_taxons
 Feature: Preventing circular parent reference via API when updating a taxon
     In order to maintain a valid taxon tree structure
-    As an API client
+    As an Administrator
     I want to be prevented from setting a taxon or its descendants as its parent via API
 
     Background:
@@ -12,34 +12,34 @@ Feature: Preventing circular parent reference via API when updating a taxon
         And the "T-Shirts" taxon has children taxon "Men" and "Women"
         And I am logged in as an administrator
 
-    @api
-    Scenario: Trying to set a child taxon as parent via API
+    @api @no-ui
+    Scenario: Trying to set a child taxon as parent
         When I want to modify the "Clothing" taxon
         And I try to change its parent taxon to "T-Shirts"
         And I try to save my changes
         Then I should be notified that the parent relation is invalid
-        And this taxon should still belongs to "Category"
+        And this taxon should still belong to "Category"
 
-    @api
-    Scenario: Trying to set a grandchild taxon as parent via API
+    @api @no-ui
+    Scenario: Trying to set a grandchild taxon as parent
         When I want to modify the "Clothing" taxon
         And I try to change its parent taxon to "Men"
         And I try to save my changes
         Then I should be notified that the parent relation is invalid
-        And this taxon should still belongs to "Category"
+        And this taxon should still belong to "Category"
 
-    @api
-    Scenario: Successfully changing parent to a valid taxon via API
+    @api @no-ui
+    Scenario: Successfully changing parent to a valid taxon
         When I want to modify the "Clothing" taxon
         And I change its parent taxon to "Books"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this taxon should belongs to "Books"
+        And this taxon should belong to "Books"
 
-    @api
-    Scenario: Successfully setting a sibling as parent via API
+    @api @no-ui
+    Scenario: Successfully setting a sibling as parent
         When I want to modify the "T-Shirts" taxon
         And I change its parent taxon to "Jeans"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this taxon should belongs to "Jeans"
+        And this taxon should belong to "Jeans"

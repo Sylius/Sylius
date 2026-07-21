@@ -275,7 +275,7 @@ final readonly class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Then /^this taxon should (belongs to "[^"]+")$/
+     * @Then /^this taxon should (belongs? to "[^"]+")$/
      */
     public function thisTaxonShouldBelongsTo(TaxonInterface $taxon): void
     {

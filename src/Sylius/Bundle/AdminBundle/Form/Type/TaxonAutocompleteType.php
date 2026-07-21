@@ -43,7 +43,7 @@ final class TaxonAutocompleteType extends AbstractType
 
         $resolver->setAllowedTypes('extra_options', 'array');
 
-        $resolver->setNormalizer('filter_query', function (Options $options, ?callable $filterQuery): ?callable {
+        $resolver->addNormalizer('filter_query', function (Options $options, ?callable $filterQuery): ?callable {
             /** @var array<string, mixed> $extraOptions */
             $extraOptions = $options['extra_options'];
             /** @var array<string> $excludedCodes */

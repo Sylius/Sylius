@@ -207,8 +207,8 @@ final readonly class ManagingTaxonsContext implements Context
         ));
     }
 
-    #[Then('/^(this taxon) should (belongs to "[^"]+")$/')]
-    #[Then('/^(this taxon) should still (belongs to "[^"]+")$/')]
+    #[Then('/^(this taxon) should (belongs? to "[^"]+")$/')]
+    #[Then('/^(this taxon) should still (belongs? to "[^"]+")$/')]
     public function thisTaxonShouldBelongsTo(TaxonInterface $taxon, TaxonInterface $parentTaxon): void
     {
         $this->iWantToSeeAllTaxonsInStore();
