@@ -51,15 +51,15 @@ final class DriverHelperTest extends TestCase
 
         $this->assertCount(2, $calls, 'It should wait for the request to start and then to finish.');
 
-        // 1) It probes for the "busy" marker on the Live Component root (and loading markers) document-wide,
+        // 1) It probes for the "busy" marker scoped to the Live Component root (plus loading markers),
         //    NOT on the form element, and waits for the request to START.
         $this->assertSame(1000, $calls[0]['timeout']);
-        $this->assertStringContainsString("querySelectorAll('[busy], [data-live-is-loading]')", $calls[0]['condition']);
+        $this->assertStringContainsString('querySelectorAll(\'[data-controller~="live"][busy], [data-live-is-loading]\')', $calls[0]['condition']);
         $this->assertStringContainsString('.length > 0', $calls[0]['condition']);
 
         // 2) It waits until ALL Live Component requests have FINISHED.
         $this->assertSame(5000, $calls[1]['timeout']);
-        $this->assertStringContainsString("querySelectorAll('[busy], [data-live-is-loading]')", $calls[1]['condition']);
+        $this->assertStringContainsString('querySelectorAll(\'[data-controller~="live"][busy], [data-live-is-loading]\')', $calls[1]['condition']);
         $this->assertStringContainsString('.length === 0', $calls[1]['condition']);
         $this->assertStringContainsString("document.readyState === 'complete'", $calls[1]['condition']);
     }
