@@ -1,5 +1,18 @@
 # UPGRADE FROM `2.2.6` TO `2.2.7`
 
+## Behat
+
+1. The `waitForFormUpdate()` methods in the Behat page objects and elements now delegate to the new
+   `Sylius\Behat\Service\DriverHelper::waitForLiveComponentUpdate()` helper.
+   The previous implementation checked the `busy` attribute on the `form` element and relied on a fixed `sleep`,
+   but Symfony UX Live Components set `busy` on the component root (`[data-controller~="live"]`), not on the form,
+   so the wait was effectively a no-op. The helper now waits document-wide for `[busy]`/`[data-live-is-loading]`
+   markers to appear and then disappear, without any hardcoded sleep.
+   If you overrode `waitForFormUpdate()` in your own page objects, delegate to the helper as well.
+
+2. The `live_form` element and the `waitForFormUpdate()` override were removed from
+   `Sylius\Behat\Page\Admin\Order\UpdatePage`; it now inherits the shared implementation.
+
 ## Constructor Signature Changes
 
 1. The constructor of `Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter` has been extended with an optional `ApiPlatform\Metadata\ResourceClassResolverInterface` argument.
