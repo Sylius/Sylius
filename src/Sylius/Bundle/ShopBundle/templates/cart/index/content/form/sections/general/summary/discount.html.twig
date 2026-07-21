@@ -1,13 +1,10 @@
 {% import "@SyliusShop/shared/macro/money.html.twig" as money %}
 
-{% set order_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
-{% set item_promotion_adjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT') %}
 {% set cart = hookable_metadata.context.cart %}
-{% set discount = cart.getAdjustmentsTotalRecursively(order_promotion_adjustment) + cart.getAdjustmentsTotalRecursively(item_promotion_adjustment) %}
 
-{% if discount %}
+{% if cart.orderAndItemPromotionTotal %}
     <div class="hstack gap-2 mb-2">
         <div>{{ 'sylius.ui.discount'|trans }}:</div>
-        <div class="ms-auto text-end" {{ sylius_test_html_attribute('cart-promotion-total') }}>{{ money.convertAndFormat(discount) }}</div>
+        <div class="ms-auto text-end" {{ sylius_test_html_attribute('cart-promotion-total') }}>{{ money.convertAndFormat(cart.orderAndItemPromotionTotal) }}</div>
     </div>
 {% endif %}
