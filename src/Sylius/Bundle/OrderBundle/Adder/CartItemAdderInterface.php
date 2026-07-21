@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\OrderBundle\Adder;
 
-use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 
 interface CartItemAdderInterface
 {
-    public function add(OrderInterface $cart, OrderItemInterface $cartItem): void;
+    public function add(AddToCartCommandInterface $addToCartCommand): void;
 }

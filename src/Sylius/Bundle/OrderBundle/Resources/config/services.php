@@ -124,7 +124,6 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.adder.cart_item', CartItemAdder::class)
         ->args([
-            service('sylius.factory.add_to_cart_command'),
             service('event_dispatcher'),
             service('sylius.manager.order'),
         ])

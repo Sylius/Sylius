@@ -706,7 +706,7 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    ```php
    interface CartItemAdderInterface
    {
-       public function add(OrderInterface $cart, OrderItemInterface $cartItem): void;
+       public function add(AddToCartCommandInterface $addToCartCommand): void;
    }
    ```
 

@@ -136,7 +136,7 @@ class AddToCartFormComponent
         $addToCartCommand = $this->getForm()->getData();
 
         if (null !== $this->cartItemAdder) {
-            $this->cartItemAdder->add($addToCartCommand->getCart(), $addToCartCommand->getCartItem());
+            $this->cartItemAdder->add($addToCartCommand);
         } else {
             $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_ADD);
             $this->manager->persist($addToCartCommand->getCart());
