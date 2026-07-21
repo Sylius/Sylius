@@ -34,6 +34,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -118,7 +119,7 @@ class AddToCartFormComponent
         ?string $idRouteParameter = null,
         #[LiveArg]
         bool $addFlashMessage = true,
-    ): RedirectResponse {
+    ): ?Response {
         $this->submitForm();
         $addToCartCommand = $this->getForm()->getData();
 

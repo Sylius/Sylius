@@ -345,6 +345,23 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Payment Request layer in `Sylius\Bundle\ApiBundle`. These classes are now covered by the Sylius Backward
    Compatibility policy.
 
+## Shop
+
+1. The return type of `Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCartFormComponent::addToCart()` has been
+   widened from `RedirectResponse` to `?Response`:
+
+   ```diff
+   -    ): RedirectResponse {
+   +    ): ?Response {
+   ```
+
+   This allows overriding the live action with a custom response handling, e.g. returning `null` to skip the redirect
+   and let the component re-render in place (adding to cart without a page reload). The default behavior is unchanged,
+   a `RedirectResponse` is still returned.
+
+   Existing subclasses overriding this method with the `RedirectResponse` return type remain valid thanks to
+   return type covariance and require no changes.
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
