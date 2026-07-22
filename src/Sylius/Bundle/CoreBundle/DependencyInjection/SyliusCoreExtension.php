@@ -27,11 +27,11 @@ use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\HttpKernel\Kernel;
 
 final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {

@@ -69,12 +69,20 @@ final class InStockValidatorTest extends TestCase
         /** @var StockableInterface&MockObject $stockable */
         $stockable = $this->createMock(StockableInterface::class);
 
-        $inventoryUnit = new class ($stockable) {
-            public function __construct(private readonly mixed $stockable) {}
+        $inventoryUnit = new class($stockable) {
+            public function __construct(private readonly mixed $stockable)
+            {
+            }
 
-            public function getStockable(): mixed { return $this->stockable; }
+            public function getStockable(): mixed
+            {
+                return $this->stockable;
+            }
 
-            public function getQuantity(): mixed { return null; }
+            public function getQuantity(): mixed
+            {
+                return null;
+            }
         };
 
         $this->context->expects($this->never())->method('addViolation');
@@ -101,12 +109,20 @@ final class InStockValidatorTest extends TestCase
         /** @var StockableInterface&MockObject $stockable */
         $stockable = $this->createMock(StockableInterface::class);
 
-        $inventoryUnit = new class ($stockable) {
-            public function __construct(private readonly mixed $stockable) {}
+        $inventoryUnit = new class($stockable) {
+            public function __construct(private readonly mixed $stockable)
+            {
+            }
 
-            public function getStockable(): mixed { return $this->stockable; }
+            public function getStockable(): mixed
+            {
+                return $this->stockable;
+            }
 
-            public function getQuantity(): mixed { return 1; }
+            public function getQuantity(): mixed
+            {
+                return 1;
+            }
         };
 
         $this->availabilityChecker->expects($this->once())->method('isStockSufficient')->with($stockable, 1)->willReturn(true);

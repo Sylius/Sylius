@@ -26,7 +26,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 #[AllowMockObjectsWithoutExpectations]
 final class TaxRateTest extends TestCase
 {
-    private TaxCategoryInterface&MockObject $taxCategory;
+    private MockObject&TaxCategoryInterface $taxCategory;
 
     private TaxRate $taxRate;
 
