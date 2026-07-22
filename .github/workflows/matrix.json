@@ -50,6 +50,12 @@
     "e2e-mysql": {
       "include": [
         {
+          "php": "8.3",
+          "symfony": "~6.4.0",
+          "mysql": "8.4",
+          "twig": "^3.3"
+        },
+        {
           "php": "8.4",
           "symfony": "~6.4.0",
           "mysql": "8.4",
