@@ -19,13 +19,18 @@ Feature: Viewing products from a specific taxon
         And I should not see the product "Plastic Tomato"
 
     @api @ui
-    Scenario: Viewing a product belonging to multiple taxons from each of its taxons
+    Scenario: Viewing a product belonging to multiple taxons from its first taxon
         Given the store has a product "Funny T-Shirt" available in "Poland" channel
         And this product belongs to "T-Shirts" and "Funny"
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Banana"
         And I should see the product "Funny T-Shirt"
         And I should not see the product "Plastic Tomato"
+
+    @api @ui
+    Scenario: Viewing a product belonging to multiple taxons from its second taxon
+        Given the store has a product "Funny T-Shirt" available in "Poland" channel
+        And this product belongs to "T-Shirts" and "Funny"
         When I browse products from taxon "Funny"
         Then I should see the product "Funny T-Shirt"
         And I should see the product "Plastic Tomato"
