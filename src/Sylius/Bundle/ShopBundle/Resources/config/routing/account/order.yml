@@ -4,6 +4,7 @@
 sylius_shop_account_order_index:
     path: /
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_account_order')"
     defaults:
         _controller: sylius.controller.order::indexAction
         _sylius:
@@ -14,6 +15,7 @@ sylius_shop_account_order_index:
 sylius_shop_account_order_show:
     path: /{number}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_account_order')"
     defaults:
         _controller: sylius.controller.order::showAction
         _sylius:

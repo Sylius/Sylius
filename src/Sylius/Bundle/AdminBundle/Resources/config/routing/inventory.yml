@@ -1,6 +1,7 @@
 sylius_admin_inventory_index:
     path: /
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_inventory')"
     defaults:
         _controller: sylius.controller.product_variant::indexAction
         _sylius:

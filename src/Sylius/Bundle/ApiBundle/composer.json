@@ -40,7 +40,7 @@
         "nelmio/alice": "^3.13",
         "phparkitect/phparkitect": "^1.0",
         "phpunit/phpunit": "^12.5",
-        "sylius/resource-bundle": "^1.14.2",
+        "sylius/resource-bundle": "^1.15@dev",
         "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
         "symfony/debug-bundle": "^6.4 || ^7.4 || ^8.0",
         "symfony/dotenv": "^6.4 || ^7.4 || ^8.0",
