@@ -286,14 +286,6 @@
           "legacy_grid_config": true
         },
         {
-          "php": "8.3",
-          "symfony": "~8.1.0",
-          "mariadb": "11.4.12",
-          "doctrine_bundle": "^3.0",
-          "state_machine_adapter": "symfony_workflow",
-          "legacy_grid_config": false
-        },
-        {
           "php": "8.5",
           "symfony": "~7.4.0",
           "mariadb": "11.4.12",
@@ -395,6 +387,10 @@
         {
           "php": "8.3",
           "symfony": "~8.1.0"
+        },
+        {
+          "php": "8.3",
+          "doctrine_bundle": "^3.0"
         }
       ]
     },
