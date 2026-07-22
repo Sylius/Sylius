@@ -482,7 +482,7 @@ return static function (ContainerConfigurator $container) {
         ->decorate('router.request_context')
         ->args([
             service('.inner'),
-            param('sylius_core.routing.bc_layer'),
+            param('sylius_core.routing_configuration.bc_layer'),
         ])
     ;
 
