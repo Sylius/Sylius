@@ -26,7 +26,6 @@ doctrine:
         path: "%database_path%"
         charset: UTF8
     orm:
-        enable_native_lazy_objects: true
         auto_mapping: true
         mappings:
             App:
