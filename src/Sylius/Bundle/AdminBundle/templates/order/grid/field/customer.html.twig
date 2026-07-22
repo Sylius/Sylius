@@ -1,0 +1,9 @@
+{% set customer = data.customer %}
+{% set created_by_guest = data.createdByGuest %}
+
+<span data-bs-toggle="tooltip" data-bs-title="{{ (created_by_guest ? 'sylius.ui.created_by_guest' : 'sylius.ui.created_by_logged_in')|trans }}" {{ sylius_test_html_attribute('order-customer-type', created_by_guest ? 'guest' : 'customer') }}>
+    {{ ux_icon(created_by_guest ? 'tabler:spy' : 'tabler:user-check', { class: 'icon' }) }}
+</span>
+
+<strong>{{ customer.firstName }} {{ customer.lastName }}</strong>
+<div class="fs-5 text-secondary">{{ customer.email }}</div>

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\PayumBundle\Provider;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProvider;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PaymentDescriptionProviderTest extends TestCase
 {
     private MockObject&TranslatorInterface $translator;

@@ -14,18 +14,19 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Checkout;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutRedirectListener;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGeneratorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CheckoutRedirectListenerTest extends TestCase
 {
     private MockObject&RequestStack $requestStack;
@@ -47,7 +48,8 @@ final class CheckoutRedirectListenerTest extends TestCase
     public function testRedirectsToProperRouteBasedOnOrderCheckoutState(): void
     {
         $order = $this->createMock(OrderInterface::class);
-        $request = $this->createMock(Request::class);
+        $request = new Request();
+        $request->attributes->set('_sylius', []);
         $resourceControllerEvent = $this->createMock(GenericEvent::class);
 
         $this->requestStack->expects($this->once())->method('getCurrentRequest')->willReturn($request);
@@ -58,8 +60,6 @@ final class CheckoutRedirectListenerTest extends TestCase
             ->with($request)
             ->willReturn(true)
         ;
-
-        $request->attributes = new ParameterBag(['_sylius' => []]);
 
         $resourceControllerEvent->expects($this->once())->method('getSubject')->willReturn($order);
 
@@ -81,7 +81,7 @@ final class CheckoutRedirectListenerTest extends TestCase
 
     public function testDoesNothingIfCurrentRequestIsNotCheckoutRequest(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = new Request();
         $resourceControllerEvent = $this->createMock(GenericEvent::class);
 
         $this->requestStack->expects($this->once())->method('getCurrentRequest')->willReturn($request);
@@ -100,7 +100,8 @@ final class CheckoutRedirectListenerTest extends TestCase
 
     public function testDoesNothingIfCurrentRequestHasRedirectConfigured(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = new Request();
+        $request->attributes->set('_sylius', ['redirect' => 'redirect_route']);
         $resourceControllerEvent = $this->createMock(GenericEvent::class);
 
         $this->requestStack->expects($this->once())->method('getCurrentRequest')->willReturn($request);
@@ -111,8 +112,6 @@ final class CheckoutRedirectListenerTest extends TestCase
             ->with($request)
             ->willReturn(true)
         ;
-
-        $request->attributes = new ParameterBag(['_sylius' => ['redirect' => 'redirect_route']]);
 
         $resourceControllerEvent->expects($this->never())->method('getSubject');
 
@@ -121,7 +120,8 @@ final class CheckoutRedirectListenerTest extends TestCase
 
     public function testThrowsExceptionIfEventSubjectIsNotAnOrder(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = new Request();
+        $request->attributes->set('_sylius', []);
         $resourceControllerEvent = $this->createMock(GenericEvent::class);
 
         $this->requestStack->expects($this->once())->method('getCurrentRequest')->willReturn($request);
@@ -132,8 +132,6 @@ final class CheckoutRedirectListenerTest extends TestCase
             ->with($request)
             ->willReturn(true)
         ;
-
-        $request->attributes = new ParameterBag(['_sylius' => []]);
 
         $resourceControllerEvent
             ->expects($this->once())

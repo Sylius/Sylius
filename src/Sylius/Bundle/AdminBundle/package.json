@@ -10,28 +10,28 @@
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
     "@babel/core": "^7.17.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/plugin-transform-object-rest-spread": "^7.25.9",
     "@babel/preset-env": "^7.25.8",
-    "@hotwired/stimulus": "^3.0.0",
+    "@hotwired/stimulus": "^3.2.2",
     "@popperjs/core": "^2.11.8",
     "@sylius/admin-bundle": "file:Resources/assets/",
     "@symfony/stimulus-bridge": "^3.2.0",
     "@symfony/webpack-encore": "^5.0.1",
-    "@tabler/core": "~1.3.0",
+    "@tabler/core": "~1.4.0",
     "apexcharts": "^3.41.0",
-    "bootstrap": "^5.3.3",
-    "infinite-tree": "^1.17.1",
-    "sass": "~1.64.2",
+    "bootstrap": "^5.3.8",
+    "infinite-tree": "^1.18.0",
+    "sass": "1.77.6",
     "sass-loader": "^16.0.1",
     "slugify": "^1.6",
     "spotlight.js": "^0.7.8",
-    "stimulus-use": "^0.52",
-    "tom-select": "^2.2.2",
+    "stimulus-use": "^0.53",
+    "tom-select": "^2.6.2",
     "webpack": "^5.72",
     "webpack-cli": "^5.1.4"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "engineStrict": true,
   "files": [

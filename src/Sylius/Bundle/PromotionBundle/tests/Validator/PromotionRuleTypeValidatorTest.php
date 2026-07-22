@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\PromotionBundle\Validator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionRuleType;
@@ -24,6 +25,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionRuleTypeValidatorTest extends TestCase
 {
     /** @var ExecutionContextInterface&MockObject */

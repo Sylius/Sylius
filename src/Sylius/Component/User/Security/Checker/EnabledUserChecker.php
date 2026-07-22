@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\User\Security\Checker;
 
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
@@ -34,7 +35,7 @@ final class EnabledUserChecker implements UserCheckerInterface
         }
     }
 
-    public function checkPostAuth(SymfonyUserInterface $user): void
+    public function checkPostAuth(SymfonyUserInterface $user, ?TokenInterface $token = null): void
     {
     }
 }

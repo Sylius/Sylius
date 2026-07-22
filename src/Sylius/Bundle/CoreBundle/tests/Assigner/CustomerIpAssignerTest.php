@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Assigner;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner;
 use Sylius\Bundle\CoreBundle\Assigner\IpAssignerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerIpAssignerTest extends TestCase
 {
     private CustomerIpAssigner $customerIpAssigner;

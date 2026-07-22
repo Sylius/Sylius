@@ -22,7 +22,7 @@ jobs:
         runs-on: ubuntu-latest
         name: "Get matrix"
         outputs:
-            matrix: ${{ steps.matrix.outputs.prop }}
+            matrix: ${{ steps.matrix.outputs.result }}
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
@@ -34,18 +34,28 @@ jobs:
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
 
-            -   name: "Get matrix"
+            -   name: "Build matrix"
                 id: matrix
-                uses: notiz-dev/github-action-json-property@release
-                with:
-                    path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.packages'
+                run: |
+                    PACKAGES=$(find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq --raw-input . | jq --slurp -c .)
+                    MATRIX_CONFIG=$(cat .github/workflows/matrix.json | jq -c '.${{ inputs.type }}.packages')
+
+                    # Build configs array from either "include" format or "php"/"symfony" array format
+                    if echo "$MATRIX_CONFIG" | jq -e '.include' > /dev/null 2>&1; then
+                        CONFIGS=$(echo "$MATRIX_CONFIG" | jq -c '.include')
+                    else
+                        CONFIGS=$(echo "$MATRIX_CONFIG" | jq -c '[.php[] as $p | .symfony[] as $s | {php: $p, symfony: $s}]')
+                    fi
+
+                    RESULT=$(jq -nc --argjson packages "$PACKAGES" --argjson configs "$CONFIGS" \
+                        '{include: [($configs[] | . as $config | $packages[] | {php: $config.php, symfony: $config.symfony, package: .})]}')
+                    echo "result=$RESULT" >> $GITHUB_OUTPUT
 
     test:
         needs: get-matrix
         runs-on: ubuntu-latest
-        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
-        timeout-minutes: 15
+        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} - ${{ matrix.package }}"
+        timeout-minutes: 10
 
         strategy:
             fail-fast: false
@@ -53,8 +63,10 @@ jobs:
 
         env:
             COMPOSER_ROOT_VERSION: "dev-main"
-            SYMFONY_VERSION: "${{ matrix.symfony }}"
-            UNSTABLE: "no"
+
+        defaults:
+            run:
+                working-directory: "src/Sylius/${{ matrix.package }}"
 
         steps:
             -   name: "Checkout (With Branch)"
@@ -74,7 +86,6 @@ jobs:
                     coverage: none
 
             -   name: Restrict Symfony version
-                if: matrix.symfony != ''
                 run: |
                     composer global config --no-plugins allow-plugins.symfony/flex true
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.4"
@@ -88,14 +99,35 @@ jobs:
                 uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
-                    key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
+                    key: "packages-${{ runner.os }}-php${{ matrix.php }}-sf${{ matrix.symfony }}-${{ matrix.package }}-${{ hashFiles(format('src/Sylius/{0}/composer.json', matrix.package)) }}"
                     restore-keys: |
-                        "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-"
+                        packages-${{ runner.os }}-php${{ matrix.php }}-sf${{ matrix.symfony }}-${{ matrix.package }}-
 
             -   name: Install dependencies
-                run: composer install --no-interaction --no-scripts
+                run: composer update --no-interaction --no-scripts --prefer-dist
 
-            -   name: "Run pipeline"
+            -   name: Validate composer.json
+                run: composer validate --ansi --strict
+
+            -   name: Create test assets
+                if: contains(fromJson('["Bundle/AdminBundle","Bundle/ApiBundle","Bundle/CoreBundle"]'), matrix.package)
                 run: |
-                    PACKAGES=$(find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq --raw-input . | jq --slurp . | jq -c .)
-                    vendor/bin/robo ci:packages "$PACKAGES"
+                    for dir in tests/Application test; do
+                        if [ -d "$dir" ]; then
+                            mkdir -p "$dir/public/build/admin" "$dir/public/build/shop"
+                            echo '{}' > "$dir/public/build/admin/manifest.json"
+                            echo '{}' > "$dir/public/build/shop/manifest.json"
+                        fi
+                    done
+
+            -   name: Create test database schema
+                if: matrix.package == 'Bundle/ApiBundle'
+                run: tests/Application/bin/console doctrine:schema:update --force
+
+            -   name: Run PHPUnit
+                run: |
+                    if [ -f phpunit.xml ] || [ -f phpunit.xml.dist ]; then
+                        vendor/bin/phpunit --colors=always
+                    else
+                        echo "No phpunit.xml found, skipping tests"
+                    fi

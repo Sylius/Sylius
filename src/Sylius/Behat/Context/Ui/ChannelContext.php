@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\TestPlugin\MainPageInterface;
@@ -35,9 +37,7 @@ final class ChannelContext implements Context
     ) {
     }
 
-    /**
-     * @When I create a new channel :channelName
-     */
+    #[When('I create a new channel :channelName')]
     public function iCreateNewChannel(string $channelName): void
     {
         $this->channelCreatePage->open();
@@ -49,12 +49,10 @@ final class ChannelContext implements Context
         $this->sharedStorage->set('channel', $channel);
     }
 
-    /**
-     * @When /^I visit (this channel)'s homepage$/
-     * @When /^I (?:am browsing|start browsing|try to browse|browse) (that channel)$/
-     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
-     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )(channel "[^"]+")$/
-     */
+    #[When('/^I visit (this channel)\'s homepage$/')]
+    #[When('/^I (?:am browsing|start browsing|try to browse|browse) (that channel)$/')]
+    #[When('/^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/')]
+    #[When('/^I (?:am browsing|start browsing|try to browse|browse) (?:|the )(channel "[^"]+")$/')]
     public function iVisitChannelHomepage(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('hostname', $channel->getHostname());
@@ -67,17 +65,13 @@ final class ChannelContext implements Context
         $this->sharedStorage->set('current_locale_code', $defaultLocale->getCode());
     }
 
-    /**
-     * @When I visit plugin's main page
-     */
+    #[When('I visit plugin\'s main page')]
     public function visitPluginMainPage(): void
     {
         $this->pluginMainPage->open();
     }
 
-    /**
-     * @Then I should see a plugin's main page with content :content
-     */
+    #[Then('I should see a plugin\'s main page with content :content')]
     public function shouldSeePluginMainPageWithContent(string $content): void
     {
         Assert::same($this->pluginMainPage->getContent(), $content);

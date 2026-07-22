@@ -16,7 +16,6 @@ use BabDev\PagerfantaBundle\BabDevPagerfantaBundle;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle;
-use Knp\Bundle\GaufretteBundle\KnpGaufretteBundle;
 use League\FlysystemBundle\FlysystemBundle;
 use Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle;
 use Liip\ImagineBundle\LiipImagineBundle;
@@ -82,7 +81,6 @@ return [
     SyliusCoreBundle::class => ['all' => true],
     SyliusResourceBundle::class => ['all' => true],
     SyliusGridBundle::class => ['all' => true],
-    KnpGaufretteBundle::class => ['all' => true],
     FlysystemBundle::class => ['all' => true],
     LiipImagineBundle::class => ['all' => true],
     StofDoctrineExtensionsBundle::class => ['all' => true],

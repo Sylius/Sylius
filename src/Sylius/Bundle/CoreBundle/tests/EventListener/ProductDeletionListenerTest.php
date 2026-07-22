@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\ProductDeletionListener;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Promotion\Checker\ProductInPromotionRuleCheckerInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductDeletionListenerTest extends TestCase
 {
     private MockObject&ProductInPromotionRuleCheckerInterface $productInPromotionRuleChecker;

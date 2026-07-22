@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Order\ShowPageInterface as OrderDetailsPage;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
@@ -32,25 +33,19 @@ final class CheckoutThankYouContext implements Context
     ) {
     }
 
-    /**
-     * @When I go to the change payment method page
-     */
+    #[When('I go to the change payment method page')]
     public function iGoToTheChangePaymentMethodPage(): void
     {
         $this->thankYouPage->goToTheChangePaymentMethodPage();
     }
 
-    /**
-     * @When I proceed to the registration
-     */
+    #[When('I proceed to the registration')]
     public function iProceedToTheRegistration(): void
     {
         $this->thankYouPage->createAccount();
     }
 
-    /**
-     * @Then I should be able to access this order's details
-     */
+    #[Then('I should be able to access this order\'s details')]
     public function iShouldBeAbleToAccessThisOrderDetails(): void
     {
         $this->thankYouPage->goToOrderDetailsInAccount();
@@ -60,20 +55,16 @@ final class CheckoutThankYouContext implements Context
         Assert::same($this->orderRepository->findLatest(1)[0]->getNumber(), $number);
     }
 
-    /**
-     * @Then I should see the thank you page
-     * @Then the visitor should see the thank you page
-     * @Then the customer should see the thank you page
-     */
     #[Then('my order should be completed successfully')]
+    #[Then('I should see the thank you page')]
+    #[Then('the visitor should see the thank you page')]
+    #[Then('the customer should see the thank you page')]
     public function iShouldSeeTheThankYouPage(): void
     {
         Assert::true($this->thankYouPage->hasThankYouMessage());
     }
 
-    /**
-     * @Then I should see the thank you page in :localeCode
-     */
+    #[Then('I should see the thank you page in :localeCode')]
     public function iShouldSeeTheThankYouPageInLocale($localeCode)
     {
         Assert::false($this->thankYouPage->isOpen(['_locale' => $localeCode]));
@@ -85,41 +76,31 @@ final class CheckoutThankYouContext implements Context
         Assert::false($this->thankYouPage->isOpen());
     }
 
-    /**
-     * @Then I should be informed with :paymentMethod payment method instructions
-     */
+    #[Then('I should be informed with :paymentMethod payment method instructions')]
     public function iShouldBeInformedWithPaymentMethodInstructions(PaymentMethodInterface $paymentMethod)
     {
         Assert::same($this->thankYouPage->getInstructions(), $paymentMethod->getInstructions());
     }
 
-    /**
-     * @Then I should not see any instructions about payment method
-     */
+    #[Then('I should not see any instructions about payment method')]
     public function iShouldNotSeeAnyInstructionsAboutPaymentMethod()
     {
         Assert::false($this->thankYouPage->hasInstructions());
     }
 
-    /**
-     * @Then I should not be able to change payment method
-     */
+    #[Then('I should not be able to change payment method')]
     public function iShouldNotBeAbleToChangeMyPaymentMethod()
     {
         Assert::false($this->thankYouPage->hasChangePaymentMethodButton());
     }
 
-    /**
-     * @Then I should be able to proceed to the registration
-     */
+    #[Then('I should be able to proceed to the registration')]
     public function iShouldBeAbleToProceedToTheRegistration(): void
     {
         Assert::true($this->thankYouPage->hasRegistrationButton());
     }
 
-    /**
-     * @Then I should not be able to proceed to the registration
-     */
+    #[Then('I should not be able to proceed to the registration')]
     public function iShouldNotBeAbleToProceedToTheRegistration(): void
     {
         Assert::false($this->thankYouPage->hasRegistrationButton());

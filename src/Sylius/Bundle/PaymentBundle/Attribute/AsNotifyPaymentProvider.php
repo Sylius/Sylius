@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Attribute;
 
-/** @experimental */
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final class AsNotifyPaymentProvider
 {

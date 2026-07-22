@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Channel\Context;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Context\CompositeChannelContext;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CompositeChannelContextTest extends TestCase
 {
     private CompositeChannelContext $context;

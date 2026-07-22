@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\User\Security\Checker;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Checker\EnabledUserChecker;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EnabledUserCheckerTest extends TestCase
 {
     /** @var UserInterface&MockObject */

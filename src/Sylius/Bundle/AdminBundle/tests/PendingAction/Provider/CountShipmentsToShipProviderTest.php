@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\PendingAction\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\PendingAction\Provider\CountShipmentsToShipProvider;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CountShipmentsToShipProviderTest extends TestCase
 {
     private MockObject&ShipmentRepositoryInterface $shipmentRepository;

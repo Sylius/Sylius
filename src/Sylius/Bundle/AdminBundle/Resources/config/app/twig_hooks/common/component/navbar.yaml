@@ -27,3 +27,8 @@ sylius_twig_hooks:
             search:
                 template: '@SyliusAdmin/shared/crud/common/navbar/menu/search.html.twig'
                 priority: 0
+
+        'sylius_admin.common.component.navbar.items.notifications.item':
+            default:
+                template: '@SyliusAdmin/shared/components/navbar/notifications/item.html.twig'
+                priority: 0
