@@ -31,7 +31,7 @@ final class CommandDenormalizerTest extends TestCase
 {
     private DenormalizerInterface&MockObject $baseNormalizer;
 
-    private NameConverterInterface&MockObject $nameConverter;
+    private MockObject&NameConverterInterface $nameConverter;
 
     private CommandDenormalizer $commandDenormalizer;
 
