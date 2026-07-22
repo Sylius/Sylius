@@ -4,10 +4,17 @@
 sylius_shop_user_request_verification_token:
     path: /verify
     methods: [POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_request_verification_token')"
     defaults:
         _controller: sylius.controller.shop_user::requestVerificationTokenAction
         _sylius:
             redirect: sylius_shop_account_dashboard
+            
+_sylius_shop_user_request_verification_token:
+    path: /verify
+    methods: [POST]
+    condition: "not context.isSyliusRoutingBcLayerEnabled('shop_request_verification_token')"
+    controller: sylius_shop.controller.request_shop_user_verification_token
 
 sylius_shop_user_verification:
     path: /verify/{token}
