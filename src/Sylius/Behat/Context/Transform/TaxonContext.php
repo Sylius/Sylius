@@ -28,7 +28,7 @@ final class TaxonContext implements Context
 
     /**
      * @Transform /^classified as "([^"]+)"$/
-     * @Transform /^belongs to "([^"]+)"$/
+     * @Transform /^belongs? to "([^"]+)"$/
      * @Transform /^"([^"]+)" taxon$/
      * @Transform /^"([^"]+)" as a parent taxon$/
      * @Transform /^"([^"]+)" parent taxon$/
