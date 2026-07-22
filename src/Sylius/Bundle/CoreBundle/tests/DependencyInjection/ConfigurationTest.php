@@ -285,8 +285,8 @@ final class ConfigurationTest extends TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
-            ['routing' => ['bc_layer' => ['enabled' => true, 'routes' => []]]],
-            'routing',
+            ['routing_configuration' => ['bc_layer' => ['enabled' => true, 'routes' => []]]],
+            'routing_configuration',
         );
     }
 
@@ -294,9 +294,9 @@ final class ConfigurationTest extends TestCase
     public function it_allows_to_disable_routing_bc_layer(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['routing' => ['bc_layer' => ['enabled' => false]]]],
-            ['routing' => ['bc_layer' => ['enabled' => false, 'routes' => []]]],
-            'routing',
+            [['routing_configuration' => ['bc_layer' => ['enabled' => false]]]],
+            ['routing_configuration' => ['bc_layer' => ['enabled' => false, 'routes' => []]]],
+            'routing_configuration',
         );
     }
 
@@ -304,9 +304,9 @@ final class ConfigurationTest extends TestCase
     public function it_allows_to_enable_routing_bc_layer_for_specific_routes(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['routing' => ['bc_layer' => ['enabled' => false, 'routes' => ['admin_product' => ['enabled' => true]]]]]],
-            ['routing' => ['bc_layer' => ['enabled' => false, 'routes' => ['admin_product' => ['enabled' => true]]]]],
-            'routing',
+            [['routing_configuration' => ['bc_layer' => ['enabled' => false, 'routes' => ['admin_product' => ['enabled' => true]]]]]],
+            ['routing_configuration' => ['bc_layer' => ['enabled' => false, 'routes' => ['admin_product' => ['enabled' => true]]]]],
+            'routing_configuration',
         );
     }
 
@@ -314,9 +314,9 @@ final class ConfigurationTest extends TestCase
     public function it_allows_to_disable_routing_bc_layer_for_specific_routes(): void
     {
         $this->assertProcessedConfigurationEquals(
-            [['routing' => ['bc_layer' => ['enabled' => true, 'routes' => ['admin_product' => ['enabled' => false]]]]]],
-            ['routing' => ['bc_layer' => ['enabled' => true, 'routes' => ['admin_product' => ['enabled' => false]]]]],
-            'routing',
+            [['routing_configuration' => ['bc_layer' => ['enabled' => true, 'routes' => ['admin_product' => ['enabled' => false]]]]]],
+            ['routing_configuration' => ['bc_layer' => ['enabled' => true, 'routes' => ['admin_product' => ['enabled' => false]]]]],
+            'routing_configuration',
         );
     }
 

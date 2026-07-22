@@ -164,7 +164,7 @@ final class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->arrayNode('routing')
+                ->arrayNode('routing_configuration')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('bc_layer')

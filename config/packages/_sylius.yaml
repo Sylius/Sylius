@@ -10,8 +10,8 @@ parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
     sylius_core.grids_configuration:
         use_legacy_config: '%env(bool:TEST_SYLIUS_USE_LEGACY_GRID_CONFIG)%'
-    sylius_core.routing.bc_layer:
-        enabled: '%env(bool:TEST_SYLIUS_USE_LEGACY_ROUTING)%'
+    sylius_core.routing_configuration.bc_layer:
+        enabled: '%env(bool:TEST_SYLIUS_USE_LEGACY_ROUTING_CONFIG)%'
 
 sylius_api:
     enabled: true
