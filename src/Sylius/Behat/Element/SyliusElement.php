@@ -35,12 +35,14 @@ abstract class SyliusElement extends BaseElement
 
         // Wait for ALL LiveComponents to complete their operations
         // Returns immediately if condition is already met
-        // Max 10 seconds for: DOM ready, no loading indicators, no busy elements
+        // Max 10 seconds for: DOM ready, no loading indicators, no busy Live Component roots.
+        // The "busy" probe is scoped to the "live" Stimulus controller root (where ux-live-component
+        // sets it) so an unrelated "busy" attribute elsewhere in the DOM cannot stall the wait.
         $this->getSession()->wait(
             10000,
             "document.readyState === 'complete' && " .
             "document.querySelectorAll('[data-live-is-loading]').length === 0 && " .
-            "document.querySelectorAll('[busy]').length === 0",
+            "document.querySelectorAll('[data-controller~=\"live\"][busy]').length === 0",
         );
     }
 }

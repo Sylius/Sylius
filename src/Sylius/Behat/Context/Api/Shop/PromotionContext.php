@@ -47,6 +47,14 @@ final class PromotionContext implements Context
         Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
     }
 
+    #[Then('I should not be notified that the coupon is invalid')]
+    public function iShouldNotBeNotifiedThatCouponIsInvalid(): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::notSame($response->getStatusCode(), 422, 'The coupon was unexpectedly rejected as invalid.');
+    }
+
     private function getCartTokenValue(): ?string
     {
         if ($this->sharedStorage->has('cart_token')) {

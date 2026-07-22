@@ -12,3 +12,5 @@ sylius:
             amount: Steuersatz
             included_in_price: Im Preis enthalten?
             calculator: Steuersatzrechner
+            end_date: Enddatum
+            start_date: Startdatum

@@ -8,6 +8,7 @@ sylius:
             min_length: 'Die Kategorie muss mindestens {{ limit }} Zeichen lang sein.'
             not_blank: 'Bitte geben Sie den Namen der Versandkostenkategorie an.'
         code:
+            max_length: 'Der Code darf nicht länger als {{ limit }} Zeichen sein.'
             not_blank: 'Bitte geben Sie ein Kürzel für die Kategorie an.'
             regex: 'Kürzel der Versandkategorie darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
             unique: 'Eine Kategorie mit diesem Kürzel existiert bereits.'
@@ -15,16 +16,31 @@ sylius:
         calculator:
             min: 'Versandkosten können nicht kleiner als 0 sein.'
             not_blank: 'Bitte wählen Sie einen Rechner für Versandarten aus.'
+            invalid: 'Ungültiger Rechner. Verfügbare Rechner sind {{ available_calculators }}.'
         name:
             max_length: 'Der Name der Versandmethode darf nicht länger als {{ limit }} Zeichen sein.'
             min_length: 'Der Name der Versandmethode muss mindestens {{ limit }} Zeichen lang sein.'
             not_blank: 'Bitte geben Sie den Namen der Versandmethode an.'
         code:
+            max_length: 'Der Code darf nicht länger als {{ limit }} Zeichen sein.'
             not_blank: 'Bitte geben Sie ein Kürzel für die Versandart an.'
             regex: 'Kürzel der Versandart darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.'
             unique: 'Eine Versandart mit diesem Kürzel existiert bereits.'
         zone:
             not_blank: 'Bitte wählen Sie eine Zone für die Versandart.'
+        rule:
+            invalid_type: 'Ungültiger Regeltyp. Verfügbare Regeltypen sind {{ available_rule_types }}.'
+
+    form:
+        shipping_method:
+            max_delivery_time_days:
+                greater_or_equal_min: 'Die maximale Lieferzeit muss größer oder gleich der minimalen Lieferzeit sein.'
+                greater_or_equal_zero: 'Die maximale Lieferzeit muss größer oder gleich 0 sein.'
+                less_or_equal_max: 'Die maximale Lieferzeit muss kleiner oder gleich {{ compared_value }} sein.'
+            min_delivery_time_days:
+                greater_or_equal_zero: 'Die minimale Lieferzeit muss größer oder gleich 0 sein.'
+                less_or_equal_max: 'Die minimale Lieferzeit muss kleiner oder gleich {{ compared_value }} sein.'
+
     shipment:
         shipping_method:
             not_blank: 'Bitte wählen Sie eine Versandart aus.'

@@ -8,11 +8,13 @@ sylius:
             not_blank: Bitte Währungscode auswählen.
             regex: Währungskürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Währungscode muss eindeutig sein.
+            currency: Dieser Wert ist kein gültiger Währungscode.
         exchange_rate:
             not_blank: Bitte Wechselkurs angeben.
     exchange_rate:
         ratio:
-            greater_than: Das Verhältnis muss größer als 0 sein.
+            greater_than: Das Verhältnis muss größer als {{ compared_value }} sein.
+            less_than: Das Verhältnis muss kleiner als {{ compared_value }} sein.
             invalid: Das Verhältnis muss eine Zahl sein.
             not_blank: Bitte geben Sie das Wechselkurs-Verhältnis an.
         source_currency:

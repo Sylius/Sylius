@@ -2,8 +2,18 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    admin:
+        request_reset_password:
+            success: 'Falls die von Ihnen angegebene E-Mail-Adresse in unserem System existiert, haben wir Ihnen eine Anleitung zum Zurücksetzen Ihres Passworts gesendet.'
+        password_reset:
+            success: 'Ihr Passwort wurde erfolgreich geändert!'
+            token_expired: 'Der Token zum Zurücksetzen des Passworts ist abgelaufen.'
     email:
         order_confirmation_resent: 'Die Auftragsbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
         shipment_confirmation_resent: 'Die Versandbestätigung wurde erfolgreich erneut an den Kunden gesendet.'
     product_variant:
         cannot_generate_variants: 'Varianten können für ein Produkt ohne Optionen nicht generiert werden.'
+    locale:
+        delete:
+            is_used: 'Die Sprache kann nicht gelöscht werden, da sie in mindestens einer Übersetzung verwendet wird.'
+            success: 'Die Sprache wurde erfolgreich gelöscht.'

@@ -95,7 +95,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius_api.checker.applied_coupon_eligibility', AppliedCouponEligibilityChecker::class)
         ->args([
-            service('sylius.checker.promotion_eligibility'),
+            service('sylius.checker.promotion_eligibility.without_own_adjustments'),
             service('sylius.checker.promotion_coupon_eligibility'),
         ])
     ;

@@ -22,6 +22,8 @@ sylius:
             not_blank: Bitte wählen Sie eine Attributsanzeige.
             min_length: Die Attributsanzeige muss mindestens 1 Zeichen lang sein.|Die Attributsanzeige muss mindestens {{ limit }} Zeichen lang sein.
             max_length: Die Attributsanzeige darf nicht länger als 1 Zeichen sein.|Die Attributsanzeige darf nicht länger als {{ limit }} Zeichen sein.
+        type:
+            unregistered: 'Der Attributtyp "%type%" ist nicht registriert. Verfügbare Attributtypen: %available_types%.'
     attribute_value:
         attribute:
             not_blank: Bitte wählen Sie ein Attribut aus.

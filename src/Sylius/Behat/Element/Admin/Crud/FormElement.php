@@ -16,6 +16,7 @@ namespace Sylius\Behat\Element\Admin\Crud;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Element\SyliusElement;
+use Sylius\Behat\Service\DriverHelper;
 
 class FormElement extends SyliusElement implements FormElementInterface
 {
@@ -68,10 +69,7 @@ class FormElement extends SyliusElement implements FormElementInterface
 
     protected function waitForFormUpdate(): void
     {
-        $form = $this->getElement('form');
-
-        usleep(500000); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
-        $form->waitFor(1500, fn () => !$form->hasAttribute('busy'));
+        DriverHelper::waitForLiveComponentUpdate($this->getSession());
     }
 
     /**
