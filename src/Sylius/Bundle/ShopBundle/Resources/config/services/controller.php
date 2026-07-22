@@ -22,6 +22,7 @@ use Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController;
 use Sylius\Bundle\ShopBundle\Controller\OrderThankYouAction;
 use Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController;
 use Sylius\Bundle\ShopBundle\Controller\RequestPasswordResetTokenAction;
+use Sylius\Bundle\ShopBundle\Controller\RequestShopUserVerificationTokenAction;
 use Sylius\Bundle\ShopBundle\Controller\ResendVerificationEmailController;
 use Sylius\Bundle\ShopBundle\Controller\ResetPasswordAction;
 use Sylius\Bundle\ShopBundle\Controller\VerifyShopUserAction;
@@ -66,7 +67,7 @@ return static function (ContainerConfigurator $container) {
             service('form.factory'),
             service('sylius.command_bus'),
             service('router.default'),
-            service('request_stack')
+            service('request_stack'),
         ])
         ->tag('controller.service_arguments')
     ;
@@ -129,6 +130,18 @@ return static function (ContainerConfigurator $container) {
             service('twig'),
             service('sylius.context.channel'),
             service('router.default'),
+        ])
+        ->tag('controller.service_arguments')
+    ;
+
+    $services
+        ->set('sylius_shop.controller.request_shop_user_verification_token', RequestShopUserVerificationTokenAction::class)
+        ->args([
+            service('router.default'),
+            service('request_stack'),
+            service('sylius.context.channel'),
+            service('sylius.context.locale'),
+            service('sylius.command_bus'),
         ])
         ->tag('controller.service_arguments')
     ;

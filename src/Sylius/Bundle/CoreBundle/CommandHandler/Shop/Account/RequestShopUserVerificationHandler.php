@@ -1,0 +1,72 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account;
+
+use Sylius\Bundle\CoreBundle\Command\Shop\Account\RequestShopUserVerification;
+use Sylius\Bundle\CoreBundle\Command\Shop\Account\SendShopUserVerificationEmail;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
+
+#[AsMessageHandler]
+final readonly class RequestShopUserVerificationHandler
+{
+    /**
+     * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
+     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
+     */
+    public function __construct(
+        private UserRepositoryInterface $shopUserRepository,
+        private ChannelRepositoryInterface $channelRepository,
+        private GeneratorInterface $tokenGenerator,
+        private MessageBusInterface $commandBus,
+    ) {
+    }
+
+    public function __invoke(RequestShopUserVerification $command): void
+    {
+        /** @var ShopUserInterface|null $user */
+        $user = $this->shopUserRepository->find($command->shopUserId);
+        if (null === $user) {
+            throw new \InvalidArgumentException(
+                sprintf('There is no shop user with %s id', $command->shopUserId),
+            );
+        }
+
+        /** @var ChannelInterface|null $channel */
+        $channel = $this->channelRepository->findOneByCode($command->channelCode);
+        if (null === $channel || !$channel->isEnabled()) {
+            throw new \InvalidArgumentException(
+                sprintf('Channel with code %s has not been found or is disabled.', $command->channelCode),
+            );
+        }
+
+        $token = $this->tokenGenerator->generate();
+        $user->setEmailVerificationToken($token);
+        /** @var CustomerInterface $customer */
+        $customer = $user->getCustomer();
+
+        $this->commandBus->dispatch(new SendShopUserVerificationEmail(
+            $customer->getEmail(),
+            $command->localeCode,
+            $command->channelCode,
+        ), [new DispatchAfterCurrentBusStamp()]);
+    }
+}
