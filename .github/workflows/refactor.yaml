@@ -16,7 +16,7 @@ jobs:
 
         name: "Coding standard refactor"
 
-        timeout-minutes: 15
+        timeout-minutes: 30
 
         if: github.repository == 'Sylius/Sylius'
 
