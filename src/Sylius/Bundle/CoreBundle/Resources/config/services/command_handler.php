@@ -19,6 +19,8 @@ use Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account\SendResetPasswordEmail
 use Sylius\Bundle\CoreBundle\CommandHandler\ResendOrderConfirmationEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\ResendShipmentConfirmationEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account\ResetPasswordHandler as ShopResetPasswordHandler;
+use Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account\SendAccountRegistrationEmailHandler;
+use Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account\VerifyShopUserHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Shop\ChangeShopUserPasswordHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account\RequestResetPasswordEmailHandler as ShopRequestResetPasswordEmailHandler;
 use Sylius\Bundle\CoreBundle\CommandHandler\Shop\Account\SendResetPasswordEmailHandler as ShopSendResetPasswordEmailHandler;
@@ -90,6 +92,16 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
+        ->set('sylius.command_handler.shop.account.send_account_registration_email', SendAccountRegistrationEmailHandler::class)
+        ->args([
+            service('sylius.repository.shop_user'),
+            service('sylius.repository.channel'),
+            service('sylius.mailer.account_registration_email_manager'),
+        ])
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
+
+    $services
         ->set('sylius.command_handler.admin.account.send_reset_password_email', AdminSendResetPasswordEmailHandler::class)
         ->args([
             service('sylius.repository.admin_user'),
@@ -104,6 +116,16 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.channel'),
             service('sylius.repository.shop_user'),
             service('sylius.mailer.reset_password_email_manager'),
+        ])
+        ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
+    ;
+
+    $services
+        ->set('sylius.command_handler.shop.account.verify_shop_user', VerifyShopUserHandler::class)
+        ->args([
+            service('sylius.repository.shop_user'),
+            service('clock'),
+            service('sylius.command_bus'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;

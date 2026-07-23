@@ -37,7 +37,6 @@ final readonly class RequestPasswordResetTokenAction
         private RouterInterface $router,
         private FormFactoryInterface $formFactory,
         private MessageBusInterface $messageBus,
-        private TranslatorInterface $translator,
         private RequestStack $requestStack,
     ) {
     }
@@ -70,6 +69,6 @@ final readonly class RequestPasswordResetTokenAction
 
     private function addSuccessNotification(): void
     {
-        FlashBagProvider::getFlashBag($this->requestStack)->add('success', $this->translator->trans('sylius.user.reset_password_request', [], 'flashes'));
+        FlashBagProvider::getFlashBag($this->requestStack)->add('success', 'sylius.user.reset_password_request');
     }
 }
