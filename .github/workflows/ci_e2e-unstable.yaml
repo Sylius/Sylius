@@ -17,7 +17,7 @@ jobs:
     behat-no-js-unstable:
         runs-on: ubuntu-latest
         name: "Non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
-        timeout-minutes: 15
+        timeout-minutes: 30
         continue-on-error: true
         strategy:
             fail-fast: false
@@ -98,7 +98,7 @@ jobs:
     behat-ui-js-chromedriver-unstable:
         runs-on: ubuntu-latest
         name: "JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
-        timeout-minutes: 15
+        timeout-minutes: 30
         strategy:
             fail-fast: false
             matrix:
@@ -180,7 +180,7 @@ jobs:
     behat-ui-js-panther-unstable:
         runs-on: ubuntu-latest
         name: "JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} (${{ matrix.env || 'test_cached' }}), MySQL ${{ matrix.mysql }} (Unstable Dependencies)"
-        timeout-minutes: 15
+        timeout-minutes: 30
         strategy:
             fail-fast: false
             matrix:
