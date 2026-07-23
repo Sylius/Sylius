@@ -24,9 +24,9 @@
     "sass": "1.77.6",
     "sass-loader": "^16.0.1",
     "slugify": "^1.6",
-    "spotlight.js": "^0.7.8",
     "stimulus-use": "^0.53",
     "tom-select": "^2.6.2",
+    "viewerjs": "^1.11.8",
     "webpack": ">=5.72 <5.109",
     "webpack-cli": "^5.1.4"
   },

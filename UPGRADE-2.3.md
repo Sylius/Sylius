@@ -347,6 +347,23 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    as `type="object"` (`PaymentSecurityToken.details` and `PaymentRequest.payload`), it registers
    a custom `Sylius\Bundle\PaymentBundle\Doctrine\DBAL\Type\ObjectType` to keep them working.
 
+7. The `spotlight.js` package has been replaced with `viewerjs` for the product image gallery/lightbox
+   in both `AdminBundle` and `ShopBundle`, as `spotlight.js` is no longer maintained.
+
+   - `AdminBundle/package.json` and `ShopBundle/package.json`: the `spotlight.js` dependency was removed
+     and `viewerjs` (`^1.11.8`) was added instead.
+   - `AdminBundle/Resources/assets/scripts/spotlight.js` was renamed to `scripts/gallery.js`.
+   - `ShopBundle/Resources/assets/scripts/spotlight.js` was removed; gallery initialization now happens
+     directly inside the `product-show-images` Stimulus controller (`ProductShowImagesController.js`).
+
+   The `.spotlight-group` container and `a.spotlight` anchor markup conventions used across the Admin and
+   Shop templates are unchanged, so **no template modifications are required** if you only rely on the
+   default product gallery.
+
+   If you customized the gallery by targeting `spotlight.js`-specific CSS classes, JS options, or its
+   global `Spotlight` API, you will need to migrate that customization to the equivalent
+   [viewerjs options](https://fengyuanchen.github.io/viewerjs/).
+
 ## Validation
 
 1. Passing an array of options to configure a Sylius validation constraint is **deprecated** since Sylius 2.3

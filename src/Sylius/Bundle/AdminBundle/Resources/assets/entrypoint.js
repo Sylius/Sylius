@@ -12,8 +12,8 @@ import './styles/main.scss';
 import './scripts/bulk-delete';
 import './scripts/check-all';
 import './scripts/fullscreen';
+import './scripts/gallery';
 import './scripts/menu-search';
-import './scripts/spotlight';
 import './scripts/statistics_chart';
 
 import './scripts/sticky-header';
