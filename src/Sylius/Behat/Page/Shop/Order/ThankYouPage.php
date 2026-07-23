@@ -57,6 +57,11 @@ class ThankYouPage extends SyliusPage implements ThankYouPageInterface
         return $this->hasElement('create_account_button');
     }
 
+    public function hasOrderDetailsInAccountButton(): bool
+    {
+        return $this->hasElement('order_details_in_account');
+    }
+
     public function createAccount(): void
     {
         $this->getElement('create_account_button')->click();

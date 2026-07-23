@@ -21,6 +21,18 @@ Feature: Checking out as guest with a registered email
         And I confirm my order
         Then I should see the thank you page
 
+    @ui
+    Scenario: Being treated as a guest on the thank you page despite using a registered email
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I select "Free" shipping method
+        And I complete the shipping step
+        And I choose "Offline" payment method
+        And I confirm my order
+        Then I should see the thank you page
+        And I should be able to proceed to the registration
+        But I should not be able to access this order's details
+
     @api @ui
     Scenario: Placing an order using email with mixed case
         Given I added product "PHP T-Shirt" to the cart

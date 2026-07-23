@@ -31,5 +31,7 @@ interface ThankYouPageInterface extends SyliusPageInterface
 
     public function hasRegistrationButton(): bool;
 
+    public function hasOrderDetailsInAccountButton(): bool;
+
     public function createAccount(): void;
 }
