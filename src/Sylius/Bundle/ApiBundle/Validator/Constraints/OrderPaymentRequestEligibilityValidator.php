@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Sylius\Bundle\ApiBundle\Checker\OrderPaymentRequestEligibilityCheckerInterface;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
 use Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
@@ -33,8 +33,9 @@ final class OrderPaymentRequestEligibilityValidator extends ConstraintValidator
      * @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository
      */
     public function __construct(
-        private OrderRepositoryInterface $orderRepository,
-        private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private readonly OrderPaymentRequestEligibilityCheckerInterface $orderPaymentRequestEligibilityChecker,
     ) {
     }
 
@@ -65,7 +66,7 @@ final class OrderPaymentRequestEligibilityValidator extends ConstraintValidator
             return;
         }
 
-        if ($order->getCheckoutState() !== OrderCheckoutStates::STATE_COMPLETED) {
+        if (!$this->orderPaymentRequestEligibilityChecker->isEligible($order)) {
             $this->context->addViolation($constraint->message);
         }
     }
@@ -87,7 +88,7 @@ final class OrderPaymentRequestEligibilityValidator extends ConstraintValidator
             return;
         }
 
-        if ($order->getCheckoutState() !== OrderCheckoutStates::STATE_COMPLETED) {
+        if (!$this->orderPaymentRequestEligibilityChecker->isEligible($order)) {
             $this->context->addViolation($constraint->message);
         }
     }

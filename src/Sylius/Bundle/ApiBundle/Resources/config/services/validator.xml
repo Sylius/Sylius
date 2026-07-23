@@ -204,6 +204,7 @@
         <service id="sylius_api.validator.order_payment_request_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentRequestEligibilityValidator">
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius_api.checker.order_payment_request_eligibility" />
             <tag name="validator.constraint_validator" alias="sylius_api_order_payment_request_eligibility" />
         </service>
 

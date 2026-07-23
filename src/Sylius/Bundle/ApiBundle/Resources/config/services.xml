@@ -68,6 +68,9 @@
         </service>
         <service id="Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface" alias="sylius_api.checker.applied_coupon_eligibility" />
 
+        <service id="sylius_api.checker.order_payment_request_eligibility" class="Sylius\Bundle\ApiBundle\Checker\OrderPaymentRequestEligibilityChecker" />
+        <service id="Sylius\Bundle\ApiBundle\Checker\OrderPaymentRequestEligibilityCheckerInterface" alias="sylius_api.checker.order_payment_request_eligibility" />
+
         <service id="sylius_api.modifier.order_address" class="Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier" public="true">
             <argument type="service" id="sylius_abstraction.state_machine" />
             <argument type="service" id="sylius_api.mapper.address" />

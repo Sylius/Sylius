@@ -15,13 +15,13 @@ namespace Tests\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Bundle\ApiBundle\Checker\OrderPaymentRequestEligibilityCheckerInterface;
 use Sylius\Bundle\ApiBundle\Command\Payment\AddPaymentRequest;
 use Sylius\Bundle\ApiBundle\Command\Payment\UpdatePaymentRequest;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentRequestEligibility;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentRequestEligibilityValidator;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
@@ -36,6 +36,8 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
     /** @var PaymentRequestRepositoryInterface<PaymentRequestInterface>&MockObject */
     private MockObject $paymentRequestRepositoryMock;
 
+    private MockObject&OrderPaymentRequestEligibilityCheckerInterface $orderPaymentRequestEligibilityCheckerMock;
+
     private MockObject $executionContextMock;
 
     private OrderPaymentRequestEligibilityValidator $validator;
@@ -44,10 +46,12 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
     {
         $this->orderRepositoryMock = $this->createMock(OrderRepositoryInterface::class);
         $this->paymentRequestRepositoryMock = $this->createMock(PaymentRequestRepositoryInterface::class);
+        $this->orderPaymentRequestEligibilityCheckerMock = $this->createMock(OrderPaymentRequestEligibilityCheckerInterface::class);
         $this->executionContextMock = $this->createMock(ExecutionContextInterface::class);
         $this->validator = new OrderPaymentRequestEligibilityValidator(
             $this->orderRepositoryMock,
             $this->paymentRequestRepositoryMock,
+            $this->orderPaymentRequestEligibilityCheckerMock,
         );
         $this->validator->initialize($this->executionContextMock);
     }
@@ -73,18 +77,19 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->with(['tokenValue' => 'ORDER_TOKEN'])
             ->willReturn(null);
 
+        $this->orderPaymentRequestEligibilityCheckerMock->expects($this->never())->method('isEligible');
+
         $this->executionContextMock->expects($this->never())->method('addViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
 
-    public function test_it_does_nothing_for_add_payment_request_when_order_checkout_state_is_completed(): void
+    public function test_it_does_nothing_for_add_payment_request_when_order_is_eligible(): void
     {
         $command = new AddPaymentRequest('ORDER_TOKEN', 1, 'PAYMENT_METHOD_CODE');
 
         /** @var OrderInterface&MockObject $orderMock */
         $orderMock = $this->createMock(OrderInterface::class);
-        $orderMock->method('getCheckoutState')->willReturn(OrderCheckoutStates::STATE_COMPLETED);
 
         $this->orderRepositoryMock
             ->expects($this->once())
@@ -92,24 +97,35 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->with(['tokenValue' => 'ORDER_TOKEN'])
             ->willReturn($orderMock);
 
+        $this->orderPaymentRequestEligibilityCheckerMock
+            ->expects($this->once())
+            ->method('isEligible')
+            ->with($orderMock)
+            ->willReturn(true);
+
         $this->executionContextMock->expects($this->never())->method('addViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
 
-    public function test_it_adds_violation_for_add_payment_request_when_order_checkout_state_is_not_completed(): void
+    public function test_it_adds_violation_for_add_payment_request_when_order_is_not_eligible(): void
     {
         $command = new AddPaymentRequest('ORDER_TOKEN', 1, 'PAYMENT_METHOD_CODE');
 
         /** @var OrderInterface&MockObject $orderMock */
         $orderMock = $this->createMock(OrderInterface::class);
-        $orderMock->method('getCheckoutState')->willReturn('cart');
 
         $this->orderRepositoryMock
             ->expects($this->once())
             ->method('findOneBy')
             ->with(['tokenValue' => 'ORDER_TOKEN'])
             ->willReturn($orderMock);
+
+        $this->orderPaymentRequestEligibilityCheckerMock
+            ->expects($this->once())
+            ->method('isEligible')
+            ->with($orderMock)
+            ->willReturn(false);
 
         $this->executionContextMock
             ->expects($this->once())
@@ -128,6 +144,8 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->method('find')
             ->with('PAYMENT_REQUEST_HASH')
             ->willReturn(null);
+
+        $this->orderPaymentRequestEligibilityCheckerMock->expects($this->never())->method('isEligible');
 
         $this->executionContextMock->expects($this->never())->method('addViolation');
 
@@ -152,18 +170,19 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->with('PAYMENT_REQUEST_HASH')
             ->willReturn($paymentRequestMock);
 
+        $this->orderPaymentRequestEligibilityCheckerMock->expects($this->never())->method('isEligible');
+
         $this->executionContextMock->expects($this->never())->method('addViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
 
-    public function test_it_does_nothing_for_update_payment_request_when_order_checkout_state_is_completed(): void
+    public function test_it_does_nothing_for_update_payment_request_when_order_is_eligible(): void
     {
         $command = new UpdatePaymentRequest('PAYMENT_REQUEST_HASH');
 
         /** @var OrderInterface&MockObject $orderMock */
         $orderMock = $this->createMock(OrderInterface::class);
-        $orderMock->method('getCheckoutState')->willReturn(OrderCheckoutStates::STATE_COMPLETED);
 
         /** @var PaymentInterface&MockObject $paymentMock */
         $paymentMock = $this->createMock(PaymentInterface::class);
@@ -179,18 +198,23 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->with('PAYMENT_REQUEST_HASH')
             ->willReturn($paymentRequestMock);
 
+        $this->orderPaymentRequestEligibilityCheckerMock
+            ->expects($this->once())
+            ->method('isEligible')
+            ->with($orderMock)
+            ->willReturn(true);
+
         $this->executionContextMock->expects($this->never())->method('addViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
 
-    public function test_it_adds_violation_for_update_payment_request_when_order_checkout_state_is_not_completed(): void
+    public function test_it_adds_violation_for_update_payment_request_when_order_is_not_eligible(): void
     {
         $command = new UpdatePaymentRequest('PAYMENT_REQUEST_HASH');
 
         /** @var OrderInterface&MockObject $orderMock */
         $orderMock = $this->createMock(OrderInterface::class);
-        $orderMock->method('getCheckoutState')->willReturn('addressed');
 
         /** @var PaymentInterface&MockObject $paymentMock */
         $paymentMock = $this->createMock(PaymentInterface::class);
@@ -205,6 +229,12 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->method('find')
             ->with('PAYMENT_REQUEST_HASH')
             ->willReturn($paymentRequestMock);
+
+        $this->orderPaymentRequestEligibilityCheckerMock
+            ->expects($this->once())
+            ->method('isEligible')
+            ->with($orderMock)
+            ->willReturn(false);
 
         $this->executionContextMock
             ->expects($this->once())
