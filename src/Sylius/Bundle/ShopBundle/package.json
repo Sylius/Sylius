@@ -21,7 +21,7 @@
     "sass": "~1.64.2",
     "sass-loader": "^16.0.1",
     "spotlight.js": "^0.7.8",
-    "webpack": "^5.72",
+    "webpack": ">=5.72 <5.109",
     "webpack-cli": "^5.1.4"
   },
   "engines": {
