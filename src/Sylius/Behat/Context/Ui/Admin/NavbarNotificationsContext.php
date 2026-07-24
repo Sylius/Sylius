@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Hook\AfterScenario;
+use Behat\Step\Given;
+use Behat\Step\Then;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
@@ -28,25 +31,25 @@ final class NavbarNotificationsContext implements Context
     ) {
     }
 
-    /** @Given the admin notifications are disabled */
+    #[Given('the admin notifications are disabled')]
     public function theAdminNotificationsAreDisabled(): void
     {
         $this->overrideNotificationsEnabledEnv('0');
     }
 
-    /** @AfterScenario @notifications_disabled */
+    #[AfterScenario('@notifications_disabled')]
     public function restoreNotificationsEnabledEnv(): void
     {
         $this->overrideNotificationsEnabledEnv(null);
     }
 
-    /** @Then I should see the notifications icon in the navbar */
+    #[Then('I should see the notifications icon in the navbar')]
     public function iShouldSeeTheNotificationsIconInTheNavbar(): void
     {
         Assert::true($this->dashboardPage->hasNotificationsIcon());
     }
 
-    /** @Then I should not see the notifications icon in the navbar */
+    #[Then('I should not see the notifications icon in the navbar')]
     public function iShouldNotSeeTheNotificationsIconInTheNavbar(): void
     {
         Assert::false($this->dashboardPage->hasNotificationsIcon());
