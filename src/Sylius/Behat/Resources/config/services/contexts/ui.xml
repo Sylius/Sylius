@@ -19,6 +19,11 @@
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.navbar_notifications" class="Sylius\Behat\Context\Ui\Admin\NavbarNotificationsContext">
+            <argument type="service" id="sylius.behat.page.admin.dashboard" />
+            <argument type="service" id="kernel" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.error_page" class="Sylius\Behat\Context\Ui\Admin\ErrorPageContext">
             <argument type="service" id="sylius.behat.page.error" />
         </service>

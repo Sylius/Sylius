@@ -305,6 +305,7 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
         if (preg_match('/@\w+@\./', $value)) {
             return true;
         }
+
         return false;
     }
 
