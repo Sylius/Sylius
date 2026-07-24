@@ -73,13 +73,11 @@ class FormComponent
 
         /** @var OrderInterface|null $order */
         $order = $this->resource;
-
         if (null === $order) {
             return;
         }
 
         $removed = $this->disabledCartItemsRemover->removeFromOrder($order);
-
         if ($removed && null !== $this->requestStack) {
             FlashBagProvider::getFlashBag($this->requestStack)->add('error', 'sylius.order.cart_item_removed');
         }
