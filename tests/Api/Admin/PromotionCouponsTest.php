@@ -161,6 +161,30 @@ final class PromotionCouponsTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_generates_promotion_coupons_without_tracking_usage(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->requestPost(
+            sprintf('/api/v2/admin/promotions/%s/coupons/generate', $promotion->getCode()),
+            [
+                'amount' => 1,
+                'prefix' => 'ABC',
+                'codeLength' => 6,
+                'suffix' => 'XYZ',
+                'usageLimit' => 10,
+                'expiresAt' => '2020-01-01 12:00:00',
+                'trackUsage' => false,
+            ],
+        );
+
+        $this->assertResponseCreated('admin/promotion_coupon/generate_promotion_coupons_without_tracking_usage_response');
+    }
+
+    #[Test]
     public function it_does_not_generate_promotion_coupons_with_non_existing_promotion_code(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
