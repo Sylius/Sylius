@@ -317,7 +317,7 @@ final readonly class PromotionContext implements Context
         /** @var OrderInterface[] $orders */
         $orders = $this->orderRepository->findBy(['promotionCoupon' => $coupon]);
         foreach ($orders as $order) {
-            $order->setCheckoutCompletedAt(new \DateTimeImmutable('-1 day'));
+            $order->setCheckoutCompletedAt(new \DateTime('-1 day'));
         }
 
         $coupon->setTrackUsage(false);
