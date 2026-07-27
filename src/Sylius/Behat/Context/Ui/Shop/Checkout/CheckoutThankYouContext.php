@@ -100,6 +100,12 @@ final class CheckoutThankYouContext implements Context
         Assert::true($this->thankYouPage->hasRegistrationButton());
     }
 
+    #[Then('I should not be able to access this order\'s details')]
+    public function iShouldNotBeAbleToAccessThisOrderDetails(): void
+    {
+        Assert::false($this->thankYouPage->hasOrderDetailsInAccountButton());
+    }
+
     #[Then('I should not be able to proceed to the registration')]
     public function iShouldNotBeAbleToProceedToTheRegistration(): void
     {

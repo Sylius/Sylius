@@ -38,6 +38,11 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function removeCurrentParent(): void;
 
+    /**
+     * @return array<string, string>
+     */
+    public function searchInParentAutocomplete(string $searchString): array;
+
     public function getTranslationFieldValue(string $element, string $localeCode): string;
 
     public function enable(): void;

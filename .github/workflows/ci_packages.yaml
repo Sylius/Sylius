@@ -55,7 +55,7 @@ jobs:
         needs: get-matrix
         runs-on: ubuntu-latest
         name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }} - ${{ matrix.package }}"
-        timeout-minutes: 10
+        timeout-minutes: 30
 
         strategy:
             fail-fast: false
