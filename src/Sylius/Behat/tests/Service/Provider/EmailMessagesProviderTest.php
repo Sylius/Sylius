@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Behat\Service\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\CacheItemInterface;
@@ -22,6 +23,7 @@ use Sylius\Behat\Service\Provider\EmailMessagesProvider;
 use Sylius\Behat\Service\Provider\EmailMessagesProviderInterface;
 use Symfony\Component\Mime\Email;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EmailMessagesProviderTest extends TestCase
 {
     private CacheItemPoolInterface&MockObject $cacheItemPool;

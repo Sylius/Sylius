@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Shipping\Calculator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class DelegatingCalculatorTest extends TestCase
 {
     private MockObject&ServiceRegistryInterface $serviceRegistry;

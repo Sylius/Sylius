@@ -8,7 +8,7 @@
     "url": "git+https://github.com/Sylius/SyliusAdminBundle.git"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "engineStrict": true,
   "symfony": {

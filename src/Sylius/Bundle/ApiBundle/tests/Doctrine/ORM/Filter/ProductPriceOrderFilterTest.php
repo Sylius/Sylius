@@ -18,6 +18,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\ProductPriceOrderFilter;
@@ -25,6 +27,7 @@ use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductPriceOrderFilterTest extends TestCase
 {
     /** @var MockObject&QueryBuilder */
@@ -47,7 +50,7 @@ final class ProductPriceOrderFilterTest extends TestCase
         $this->channel = $this->createMock(ChannelInterface::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_applies_ascending_order_by_price(): void
     {
         $this->configureQueryBuilderForValidDirection();
@@ -62,7 +65,7 @@ final class ProductPriceOrderFilterTest extends TestCase
         $this->applyFilter('asc');
     }
 
-    /** @test */
+    #[Test]
     public function it_applies_descending_order_by_price(): void
     {
         $this->configureQueryBuilderForValidDirection();
@@ -77,7 +80,7 @@ final class ProductPriceOrderFilterTest extends TestCase
         $this->applyFilter('desc');
     }
 
-    /** @test */
+    #[Test]
     public function it_applies_order_with_uppercase_direction(): void
     {
         $this->configureQueryBuilderForValidDirection();
@@ -92,7 +95,7 @@ final class ProductPriceOrderFilterTest extends TestCase
         $this->applyFilter('ASC');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_apply_order_with_invalid_direction(): void
     {
         $this->queryBuilder
@@ -103,7 +106,7 @@ final class ProductPriceOrderFilterTest extends TestCase
         $this->applyFilter('INVALID');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_apply_order_with_dql_injection_payload(): void
     {
         $this->queryBuilder

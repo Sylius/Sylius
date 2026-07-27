@@ -16,6 +16,7 @@ namespace Tests\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Comparable;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -33,6 +34,7 @@ use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Resource\Model\VersionedInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantTest extends TestCase
 {
     private MockObject&TaxCategoryInterface $taxCategory;

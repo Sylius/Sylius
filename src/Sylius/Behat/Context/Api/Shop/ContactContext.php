@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -31,35 +33,27 @@ final class ContactContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to request contact
-     * @When I do not specify the email
-     * @When I do not specify the message
-     */
+    #[When('I want to request contact')]
+    #[When('I do not specify the email')]
+    #[When('I do not specify the message')]
     public function iWantToRequestContact(): void
     {
         //intentionally left empty
     }
 
-    /**
-     * @When I specify the message as :message
-     */
+    #[When('I specify the message as :message')]
     public function iSpecifyTheMessage(string $message): void
     {
         $this->content['message'] = $message;
     }
 
-    /**
-     * @When I specify the email as :email
-     */
+    #[When('I specify the email as :email')]
     public function iSpecifyTheEmail($email): void
     {
         $this->content['email'] = $email;
     }
 
-    /**
-     * @When I( try to) send it
-     */
+    #[When('I( try to) send it')]
     public function iSendIt(): void
     {
         $request = $this->requestFactory->create(
@@ -74,9 +68,7 @@ final class ContactContext implements Context
         $this->client->request($request);
     }
 
-    /**
-     * @Then I should be notified that the contact request has been submitted successfully
-     */
+    #[Then('I should be notified that the contact request has been submitted successfully')]
     public function iShouldBeNotifiedThatTheContactRequestHasBeenSubmittedSuccessfully(): void
     {
         $response = $this->client->getLastResponse();
@@ -84,9 +76,7 @@ final class ContactContext implements Context
         Assert::same($response->getStatusCode(), 202);
     }
 
-    /**
-     * @Then I should be notified that the email is invalid
-     */
+    #[Then('I should be notified that the email is invalid')]
     public function iShouldBeNotifiedThatEmailIsInvalid(): void
     {
         $response = $this->client->getLastResponse();
@@ -97,9 +87,7 @@ final class ContactContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that the (email|message) is required$/
-     */
+    #[Then('/^I should be notified that the (email|message) is required$/')]
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         $response = $this->client->getLastResponse();

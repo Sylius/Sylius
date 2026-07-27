@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
+use Behat\Hook\BeforeScenario;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -23,12 +24,13 @@ final class DoctrineORMContext implements Context
     {
     }
 
-    /**
-     * @BeforeScenario
-     */
+    #[BeforeScenario]
     public function purgeDatabase()
     {
-        $this->entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
+        $configuration = $this->entityManager->getConnection()->getConfiguration();
+        if (method_exists($configuration, 'setSQLLogger')) {
+            $configuration->setSQLLogger(null);
+        }
         $purger = new ORMPurger($this->entityManager);
         $purger->purge();
         $this->entityManager->clear();

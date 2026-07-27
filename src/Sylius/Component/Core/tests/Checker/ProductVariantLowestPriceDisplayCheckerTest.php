@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Checker\ProductVariantLowestPriceDisplayChecker;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantLowestPriceDisplayCheckerTest extends TestCase
 {
     private ChannelInterface&MockObject $channel;

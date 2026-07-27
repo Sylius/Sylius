@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Sylius\Behat\Page\ErrorPageInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,9 +24,7 @@ final readonly class ErrorPageContext implements Context
     {
     }
 
-    /**
-     * @Then I should see the not found page
-     */
+    #[Then('I should see the not found page')]
     public function iShouldSeeTheNotFoundPage(): void
     {
         Assert::true($this->errorPage->isItShopNotFoundPage(), 'This test might require to be run without debug mode enabled.');

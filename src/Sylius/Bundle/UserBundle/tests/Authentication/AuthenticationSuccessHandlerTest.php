@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\UserBundle\Authentication;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler;
@@ -22,6 +23,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface;
 use Symfony\Component\Security\Http\HttpUtils;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AuthenticationSuccessHandlerTest extends TestCase
 {
     private HttpUtils&MockObject $httpUtils;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelBasedDefaultTaxZoneProviderTest extends TestCase
 {
     private ChannelBasedDefaultTaxZoneProvider $channelBasedDefaultTaxZoneProvider;

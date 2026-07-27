@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShippingBundle\Validator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShippingBundle\Validator\Constraint\ShippingMethodRule;
@@ -25,6 +26,7 @@ use Symfony\Component\Validator\Validator\ContextualValidatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingMethodRuleValidatorTest extends TestCase
 {
     private ExecutionContextInterface&MockObject $executionContext;
@@ -65,7 +67,7 @@ final class ShippingMethodRuleValidatorTest extends TestCase
         $shippingMethodRule = $this->createMock(ShippingMethodRuleInterface::class);
 
         $shippingMethodRule->expects($this->once())->method('getType')->willReturn('wrong_rule');
-        $this->executionContext->expects($this->once())->method('buildViolation')->with((new ShippingMethodRule())->invalidType)->willReturn($constraintViolationBuilder);
+        $this->executionContext->expects($this->once())->method('buildViolation')->with((new ShippingMethodRule())->invalidTypeMessage)->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->expects($this->once())->method('setParameter')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->expects($this->once())->method('atPath')->willReturn($constraintViolationBuilder);
         $constraintViolationBuilder->expects($this->once())->method('addViolation');
@@ -87,7 +89,7 @@ final class ShippingMethodRuleValidatorTest extends TestCase
         $validator->expects($this->once())->method('inContext')->with($this->executionContext)->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate')->with($shippingMethodRule, null, ['sylius', 'total_weight'])->willReturn($contextualValidator);
 
-        $this->shippingMethodRuleValidator->validate($shippingMethodRule, new ShippingMethodRule(['groups' => ['sylius', 'total_weight']]));
+        $this->shippingMethodRuleValidator->validate($shippingMethodRule, new ShippingMethodRule(groups: ['sylius', 'total_weight']));
     }
 
     public function testCallsValidatorWithDefaultGroupsIfNoneAssignedToShippingMethodRule(): void
@@ -104,6 +106,6 @@ final class ShippingMethodRuleValidatorTest extends TestCase
         $validator->expects($this->once())->method('inContext')->with($this->executionContext)->willReturn($contextualValidator);
         $contextualValidator->expects($this->once())->method('validate')->with($shippingMethodRule, null, ['sylius'])->willReturn($contextualValidator);
 
-        $this->shippingMethodRuleValidator->validate($shippingMethodRule, new ShippingMethodRule(['groups' => ['sylius']]));
+        $this->shippingMethodRuleValidator->validate($shippingMethodRule, new ShippingMethodRule(groups: ['sylius']));
     }
 }
