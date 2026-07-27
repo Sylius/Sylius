@@ -6,6 +6,7 @@
     "usageLimit": 2,
     "perCustomerUsageLimit": 1,
     "trackUsage": true,
+    "trackUsageSince": "@date@",
     "used": 1,
     "reusableFromCancelledOrders": true,
     "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",
