@@ -170,6 +170,11 @@ class DashboardPage extends SyliusPage implements DashboardPageInterface
         return 'sylius_admin_dashboard';
     }
 
+    public function hasNotificationsIcon(): bool
+    {
+        return $this->hasElement('notifications_icon');
+    }
+
     /** @return array<string, string> */
     protected function getDefinedElements(): array
     {
@@ -184,6 +189,7 @@ class DashboardPage extends SyliusPage implements DashboardPageInterface
             'month_split_by_days_statistics_button' => 'button[data-stats-button="month"]',
             'new_customers' => '[data-test-new-customers]',
             'next_period' => '[data-test-next-period]',
+            'notifications_icon' => '[data-test-notifications-icon]',
             'order_list' => '[data-test-new-orders]',
             'orders_to_process' => '[data-test-orders-to-process]',
             'orders_to_process_count' => '[data-test-orders-to-process-count]',

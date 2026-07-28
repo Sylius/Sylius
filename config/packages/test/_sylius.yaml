@@ -1,4 +1,5 @@
 parameters:
+    test_default_admin_notifications_enabled: true
     test_default_state_machine_adapter: 'symfony_workflow'
     test_sylius_state_machine_adapter: '%env(string:default:test_default_state_machine_adapter:TEST_SYLIUS_STATE_MACHINE_ADAPTER)%'
 
@@ -7,6 +8,7 @@ sylius_api:
 
 sylius_admin:
     notifications:
+        enabled: '%env(bool:default:test_default_admin_notifications_enabled:TEST_SYLIUS_ADMIN_NOTIFICATIONS_ENABLED)%'
         hub_enabled: false
 
 sylius_state_machine_abstraction:

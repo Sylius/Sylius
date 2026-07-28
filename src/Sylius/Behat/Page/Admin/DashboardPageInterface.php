@@ -55,4 +55,6 @@ interface DashboardPageInterface extends SyliusPageInterface
     public function getNumberOfProductVariantsOutOfStock(): int;
 
     public function getNumberOfShipmentsToShip(): int;
+
+    public function hasNotificationsIcon(): bool;
 }

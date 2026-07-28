@@ -37,4 +37,10 @@ class NotificationsComponent
 
         return $this->notificationProvider->getNotifications();
     }
+
+    #[ExposeInTemplate(name: 'notifications_enabled')]
+    public function areNotificationsEnabled(): bool
+    {
+        return $this->areNotificationsEnabled;
+    }
 }
