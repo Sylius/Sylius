@@ -30,6 +30,8 @@ class ProductTaxonController extends ResourceController
     /** @deprecated This method is deprecated and will be removed in Sylius 3.0 */
     public function updateProductTaxonsPositionsAction(Request $request): Response
     {
+        trigger_deprecation('sylius/core-bundle', '2.3', '"%s" method is deprecated and will be removed in Sylius 3.0', __METHOD__);
+
         $data = json_decode($request->getContent(), true);
 
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
