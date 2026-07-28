@@ -26,6 +26,10 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 #[AsLiveComponent]
 class FormComponent
 {
+    private const RULES_PROPERTY_PATH = '[rules]';
+
+    private const ACTIONS_PROPERTY_PATH = '[actions]';
+
     use LiveCollectionTrait;
 
     /** @use ResourceFormComponentTrait<PromotionInterface> */
@@ -93,8 +97,8 @@ class FormComponent
     private function rememberDeletedItem(string $propertyPath, array $item): void
     {
         match ($propertyPath) {
-            '[rules]' => $this->deletedRules[$item['type']][] = $item,
-            '[actions]' => $this->deletedActions[$item['type']][] = $item,
+            self::RULES_PROPERTY_PATH => $this->deletedRules[$item['type']][] = $item,
+            self::ACTIONS_PROPERTY_PATH => $this->deletedActions[$item['type']][] = $item,
             default => null,
         };
     }
@@ -103,8 +107,8 @@ class FormComponent
     private function recallDeletedItem(string $propertyPath, string $type): ?array
     {
         return match ($propertyPath) {
-            '[rules]' => $this->popDeletedItem($this->deletedRules, $type),
-            '[actions]' => $this->popDeletedItem($this->deletedActions, $type),
+            self::RULES_PROPERTY_PATH => $this->popDeletedItem($this->deletedRules, $type),
+            self::ACTIONS_PROPERTY_PATH => $this->popDeletedItem($this->deletedActions, $type),
             default => null,
         };
     }
