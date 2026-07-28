@@ -644,6 +644,13 @@ final class ManagingPromotionsContext implements Context
         $this->formElement->addRule(CartQuantityRuleChecker::TYPE);
     }
 
+    #[When('I add a new rule with quantity :quantity')]
+    public function iAddANewRuleWithQuantity(int $quantity): void
+    {
+        $this->formElement->addRule(CartQuantityRuleChecker::TYPE);
+        $this->formElement->fillRuleOption('Count', (string) $quantity);
+    }
+
     #[When('I add a new action')]
     public function iAddANewAction(): void
     {
@@ -684,6 +691,18 @@ final class ManagingPromotionsContext implements Context
     public function itShouldHaveOfItemPercentageDiscount(string $amount, ChannelInterface $channel): void
     {
         Assert::same($this->updatePage->getItemPercentageDiscountActionValue($channel->getCode()), $amount);
+    }
+
+    #[Then('the rule quantity should be :quantity')]
+    public function theRuleQuantityShouldBe(int $quantity): void
+    {
+        Assert::same($this->formElement->getRuleCountValue(), (string) $quantity);
+    }
+
+    #[Then('the action amount should be :amount')]
+    public function theActionAmountShouldBe(string $amount): void
+    {
+        Assert::same($this->formElement->getActionAmountValue(), $amount);
     }
 
     #[Then('I should see the action configuration form')]

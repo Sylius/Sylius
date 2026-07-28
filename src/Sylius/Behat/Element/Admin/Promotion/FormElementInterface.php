@@ -53,6 +53,10 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function removeLastRule(): void;
 
+    public function getRuleCountValue(): string;
+
+    public function getActionAmountValue(): string;
+
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void;
 
     public function fillRuleOption(string $option, string $value): void;
