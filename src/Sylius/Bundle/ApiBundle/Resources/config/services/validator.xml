@@ -201,6 +201,13 @@
             <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_request_action_eligibility" />
         </service>
 
+        <service id="sylius_api.validator.order_payment_request_eligibility" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentRequestEligibilityValidator">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="sylius_api.checker.order_payment_request_eligibility" />
+            <tag name="validator.constraint_validator" alias="sylius_api_order_payment_request_eligibility" />
+        </service>
+
         <service id="sylius_api.validator.order_address_requirement" class="Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirementValidator">
             <argument type="service" id="sylius.repository.order" />
             <tag name="validator.constraint_validator" alias="sylius_order_address_requirement_validator" />
