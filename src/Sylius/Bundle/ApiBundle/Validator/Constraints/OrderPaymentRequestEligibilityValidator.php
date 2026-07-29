@@ -66,9 +66,7 @@ final class OrderPaymentRequestEligibilityValidator extends ConstraintValidator
             return;
         }
 
-        if (!$this->orderPaymentRequestEligibilityChecker->isEligible($order)) {
-            $this->context->addViolation($constraint->message);
-        }
+        $this->validateOrderEligibility($order, $constraint);
     }
 
     private function validateUpdatePaymentRequest(UpdatePaymentRequest $value, OrderPaymentRequestEligibility $constraint): void
@@ -88,6 +86,11 @@ final class OrderPaymentRequestEligibilityValidator extends ConstraintValidator
             return;
         }
 
+        $this->validateOrderEligibility($order, $constraint);
+    }
+
+    private function validateOrderEligibility(OrderInterface $order, OrderPaymentRequestEligibility $constraint): void
+    {
         if (!$this->orderPaymentRequestEligibilityChecker->isEligible($order)) {
             $this->context->addViolation($constraint->message);
         }
