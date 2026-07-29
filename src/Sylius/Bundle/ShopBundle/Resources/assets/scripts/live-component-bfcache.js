@@ -8,15 +8,8 @@
  */
 
 /*
- * Safari (macOS/iOS) keeps pages in its back/forward cache (bfcache). When a
- * Live Component action ends with a redirect (e.g. "add to cart"), the browser
- * navigates away while the component's loading overlay is still visible. On a
- * back navigation Safari restores the frozen page as-is, so the overlay stays
- * stuck forever and the aborted request surfaces as "TypeError: Load failed".
- * Reloading the restored page reinitializes the Live Component in a clean,
- * idle state.
- *
- * See https://github.com/Sylius/Sylius/issues/18547
+ * Safari bfcache restores the page mid-redirect, freezing the Live Component's loading overlay
+ * and surfacing the aborted request as "TypeError: Load failed".
  */
 window.addEventListener('pageshow', (event) => {
     if (!event.persisted) {
