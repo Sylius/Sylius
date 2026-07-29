@@ -21,6 +21,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand;
 use Sylius\Bundle\CoreBundle\Console\Command\SetupCommand;
 use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface;
@@ -65,6 +66,7 @@ final class InstallerContext implements Context
         private readonly ChannelSetupInterface $channelSetup,
         private readonly CountrySetupInterface $countrySetup,
         private readonly ZoneSetupInterface $zoneSetup,
+        private readonly ChannelDefaultTaxZoneSetupInterface $channelDefaultTaxZoneSetup,
         private readonly FactoryInterface $adminUserFactory,
         private readonly UserRepositoryInterface $adminUserRepository,
         private readonly ValidatorInterface $validator,
@@ -82,11 +84,12 @@ final class InstallerContext implements Context
             $this->currencySetup,
             $this->localeSetup,
             $this->channelSetup,
-            $this->countrySetup,
-            $this->zoneSetup,
             $this->adminUserFactory,
             $this->adminUserRepository,
             $this->validator,
+            $this->countrySetup,
+            $this->zoneSetup,
+            $this->channelDefaultTaxZoneSetup,
         ));
 
         $this->command = $this->application->find('sylius:install:setup');

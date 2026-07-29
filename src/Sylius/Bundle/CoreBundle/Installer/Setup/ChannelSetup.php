@@ -15,16 +15,11 @@ namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
-use Symfony\Component\Console\Helper\QuestionHelper;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 final class ChannelSetup implements ChannelSetupInterface
 {
@@ -42,11 +37,7 @@ final class ChannelSetup implements ChannelSetupInterface
     public function setup(
         LocaleInterface $locale,
         CurrencyInterface $currency,
-        CountryInterface $country,
-        ZoneInterface $zone,
-        InputInterface $input,
-        OutputInterface $output,
-        QuestionHelper $questionHelper
+        ?CountryInterface $country = null,
     ): void {
         /** @var ChannelInterface|null $channel */
         $channel = $this->channelRepository->findOneBy([]);
@@ -65,11 +56,9 @@ final class ChannelSetup implements ChannelSetupInterface
         $channel->setBaseCurrency($currency);
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
-        $channel->addCountry($country);
 
-        $question = new ConfirmationQuestion('Assign created zone as default tax zone? (yes/no) [no]: ', false);
-        if ($questionHelper->ask($input, $output, $question)) {
-            $channel->setDefaultTaxZone($zone);
+        if (null !== $country) {
+            $channel->addCountry($country);
         }
 
         $this->channelManager->flush();

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\Console\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface;
@@ -51,13 +52,41 @@ final class SetupCommand extends AbstractInstallCommand
         protected readonly CurrencySetupInterface $currencySetup,
         protected readonly LocaleSetupInterface $localeSetup,
         protected readonly ChannelSetupInterface $channelSetup,
-        protected readonly CountrySetupInterface $countrySetup,
-        protected readonly ZoneSetupInterface $zoneSetup,
         protected readonly FactoryInterface $adminUserFactory,
         protected readonly UserRepositoryInterface $adminUserRepository,
         protected readonly ValidatorInterface $validator,
+        protected readonly ?CountrySetupInterface $countrySetup = null,
+        protected readonly ?ZoneSetupInterface $zoneSetup = null,
+        protected readonly ?ChannelDefaultTaxZoneSetupInterface $channelDefaultTaxZoneSetup = null,
     ) {
         parent::__construct($this->entityManager, $this->commandDirectoryChecker);
+
+        if (null === $this->countrySetup) {
+            trigger_deprecation(
+                'sylius/core',
+                '2.3',
+                'Not passing $countrySetup to "%s" constructor is deprecated and will be prohibited in Sylius 3.0.',
+                self::class,
+            );
+        }
+
+        if (null === $this->zoneSetup) {
+            trigger_deprecation(
+                'sylius/core',
+                '2.3',
+                'Not passing $zoneSetup to "%s" constructor is deprecated and will be prohibited in Sylius 3.0.',
+                self::class,
+            );
+        }
+
+        if (null === $this->channelDefaultTaxZoneSetup) {
+            trigger_deprecation(
+                'sylius/core',
+                '2.3',
+                'Not passing $channelDefaultTaxZoneSetup to "%s" constructor is deprecated and will be prohibited in Sylius 3.0.',
+                self::class,
+            );
+        }
     }
 
     protected function configure(): void
@@ -78,9 +107,16 @@ EOT
 
         $currency = $this->currencySetup->setup($input, $output, $questionHelper);
         $locale = $this->localeSetup->setup($input, $output, $questionHelper);
-        $country = $this->countrySetup->setup($input, $output, $questionHelper);
-        $zone = $this->zoneSetup->setup($country);
-        $this->channelSetup->setup($locale, $currency, $country, $zone, $input, $output, $questionHelper);
+
+        $country = null !== $this->countrySetup ? $this->countrySetup->setup($input, $output, $questionHelper) : null;
+        $zone = null !== $this->zoneSetup && null !== $country ? $this->zoneSetup->setup($country) : null;
+
+        $this->channelSetup->setup($locale, $currency, $country);
+
+        if (null !== $zone && null !== $this->channelDefaultTaxZoneSetup) {
+            $this->channelDefaultTaxZoneSetup->setup($zone, $input, $output, $questionHelper);
+        }
+
         $this->setupAdministratorUser($input, $output, $locale->getCode());
 
         return Command::SUCCESS;

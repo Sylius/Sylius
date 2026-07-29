@@ -17,6 +17,8 @@ use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
 use Sylius\Bundle\CoreBundle\Installer\Checker\SyliusRequirementsChecker;
 use Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider;
 use Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetup;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetup;
 use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetup;
@@ -82,10 +84,19 @@ return static function (ContainerConfigurator $container) {
     $services->alias(ChannelSetupInterface::class, 'sylius.setup.installer.channel');
 
     $services
+        ->set('sylius.setup.installer.channel_default_tax_zone', ChannelDefaultTaxZoneSetup::class)
+        ->args([
+            service('sylius.repository.channel'),
+            service('sylius.manager.channel'),
+        ])
+    ;
+    $services->alias(ChannelDefaultTaxZoneSetupInterface::class, 'sylius.setup.installer.channel_default_tax_zone');
+
+    $services
         ->set('sylius.setup.installer.country', CountrySetup::class)
         ->args([
-            service('sylius.repository.country'),
             service('sylius.factory.country'),
+            service('sylius.repository.country'),
         ])
     ;
     $services->alias(CountrySetupInterface::class, 'sylius.setup.installer.country');

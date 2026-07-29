@@ -26,12 +26,12 @@ use Symfony\Component\Intl\Exception\MissingResourceException;
 final class CountrySetup implements CountrySetupInterface
 {
     /**
-     * @param RepositoryInterface<CountryInterface> $countryRepository
      * @param FactoryInterface<CountryInterface> $countryFactory
+     * @param RepositoryInterface<CountryInterface> $countryRepository
      */
     public function __construct(
-        private readonly RepositoryInterface $countryRepository,
         private readonly FactoryInterface $countryFactory,
+        private readonly RepositoryInterface $countryRepository,
         private string $country = 'US',
     ) {
         $this->country = trim($country);

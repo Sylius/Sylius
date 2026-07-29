@@ -92,11 +92,12 @@ return static function (ContainerConfigurator $container) {
             service('sylius.setup.installer.currency'),
             service('sylius.setup.installer.locale'),
             service('sylius.setup.installer.channel'),
-            service('sylius.setup.installer.country'),
-            service('sylius.setup.installer.zone'),
             service('sylius.factory.admin_user'),
             service('sylius.repository.admin_user'),
             service('validator'),
+            service('sylius.setup.installer.country'),
+            service('sylius.setup.installer.zone'),
+            service('sylius.setup.installer.channel_default_tax_zone'),
         ])
         ->tag('console.command')
     ;
