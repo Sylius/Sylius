@@ -29,16 +29,14 @@ Feature: Restoring removed promotion rules and actions
         Given there is a promotion "Holiday sale" with priority 1
         And the promotion gives "$10.00" discount to every order with quantity at least 5
         When I want to modify a "Holiday sale" promotion
-        Then the rule quantity should be 5
-        And the action amount should be "10.00"
-        When I remove its last rule
+        And I remove its last rule
         And I remove its last action
         And I add a new rule
         And I add a new action
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And I want to modify a "Holiday sale" promotion
-        And the rule quantity should be 5
+        When I want to modify a "Holiday sale" promotion
+        Then the rule quantity should be 5
         And the action amount should be "10.00"
 
     @no-api @ui @mink:chromedriver

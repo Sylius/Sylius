@@ -26,11 +26,11 @@ use Symfony\UX\LiveComponent\Attribute\LiveProp;
 #[AsLiveComponent]
 class FormComponent
 {
+    use LiveCollectionTrait;
+
     private const RULES_PROPERTY_PATH = '[rules]';
 
     private const ACTIONS_PROPERTY_PATH = '[actions]';
-
-    use LiveCollectionTrait;
 
     /** @use ResourceFormComponentTrait<PromotionInterface> */
     use ResourceFormComponentTrait {
