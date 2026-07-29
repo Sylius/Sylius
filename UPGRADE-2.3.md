@@ -238,14 +238,17 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
 ## Installer
 
-1. The `sylius:install:setup` command now sets up a **country** and a **default zone** during installation.
+1. The `sylius:install:setup` command now sets up a **country** and a **default zone** during installation, and
+   optionally assigns the created zone as the default channel tax zone.
 
-   Two new setup classes have been introduced:
+   Three new setup classes have been introduced:
    - `Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetup` implementing `CountrySetupInterface`
    - `Sylius\Bundle\CoreBundle\Installer\Setup\ZoneSetup` implementing `ZoneSetupInterface`
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetup` implementing `ChannelDefaultTaxZoneSetupInterface`
 
-   Both are registered as services and injected into `SetupCommand`. If you have decorated or replaced
-   `SetupCommand`, update your constructor to include the two new dependencies:
+   All three are registered as services and injected into `SetupCommand` as **optional** constructor arguments. If
+   you have decorated or replaced `SetupCommand`, not passing them is deprecated and will be prohibited in
+   Sylius 3.0:
 
    ```diff
     public function __construct(
@@ -254,26 +257,23 @@ For a complete overview of the Grid component, see the [Grid documentation](http
         protected readonly CurrencySetupInterface $currencySetup,
         protected readonly LocaleSetupInterface $localeSetup,
         protected readonly ChannelSetupInterface $channelSetup,
-   +    protected readonly CountrySetupInterface $countrySetup,
-   +    protected readonly ZoneSetupInterface $zoneSetup,
         protected readonly FactoryInterface $adminUserFactory,
         protected readonly UserRepositoryInterface $adminUserRepository,
         protected readonly ValidatorInterface $validator,
+   +    protected readonly ?CountrySetupInterface $countrySetup = null,
+   +    protected readonly ?ZoneSetupInterface $zoneSetup = null,
+   +    protected readonly ?ChannelDefaultTaxZoneSetupInterface $channelDefaultTaxZoneSetup = null,
     )
    ```
 
-2. The `ChannelSetupInterface::setup()` method signature has been extended to receive the newly created
-   country, zone, and console I/O objects:
+2. The `ChannelSetupInterface::setup()` method signature has been extended with an optional argument to receive the
+   newly created country:
 
    ```diff
     public function setup(
         LocaleInterface $locale,
         CurrencyInterface $currency,
-   +    CountryInterface $country,
-   +    ZoneInterface $zone,
-   +    InputInterface $input,
-   +    OutputInterface $output,
-   +    QuestionHelper $questionHelper,
+   +    ?CountryInterface $country = null,
     ): void;
    ```
 
