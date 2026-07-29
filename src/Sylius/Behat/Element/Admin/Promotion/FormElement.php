@@ -249,8 +249,8 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'rules' => '#sylius_admin_promotion_rules',
             'starts_at_date' => '#sylius_admin_promotion_startsAt_date',
             'starts_at_time' => '#sylius_admin_promotion_startsAt_time',
-            'translation_tab' => '[data-test-promotion-translations-accordion="%locale_code%"]',
             'track_usage' => '[data-test-track-usage]',
+            'translation_tab' => '[data-test-promotion-translations-accordion="%locale_code%"]',
             'usage_limit' => '#sylius_admin_promotion_usageLimit',
         ]);
     }

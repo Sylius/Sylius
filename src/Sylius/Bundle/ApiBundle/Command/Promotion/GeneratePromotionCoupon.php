@@ -27,7 +27,7 @@ class GeneratePromotionCoupon implements ReadablePromotionCouponGeneratorInstruc
         protected readonly ?int $amount = null,
         protected readonly ?\DateTimeInterface $expiresAt = null,
         protected readonly ?int $usageLimit = null,
-        protected readonly bool $trackUsage = true
+        protected readonly bool $trackUsage = true,
     ) {
     }
 
