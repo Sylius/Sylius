@@ -82,13 +82,13 @@ sylius_twig_hooks:
         'sylius_admin.promotion_coupon.generate.content.form.sections.configuration':
             amount:
                 template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/amount.html.twig'
-                priority: 300
+                priority: 200
             expires_at:
                 template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/expires_at.html.twig'
-                priority: 200
+                priority: 100
             usage_limit:
                 template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/usage_limit.html.twig'
-                priority: 100
+                priority: 0
             track_usage:
                 template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/track_usage.html.twig'
-                priority: 0
+                priority: -100
