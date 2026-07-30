@@ -23,8 +23,23 @@
 }
 
 @include color-mode(dark) {
-    .ts-control .item {
+    .ts-wrapper.multi .ts-control > div:where(:not(.active)) {
         color: var(--tblr-body-color);
+        background: var(--tblr-border-color);
+    }
+
+    .ts-wrapper.multi.disabled .ts-control > div {
+        color: var(--tblr-secondary-color);
+        background: var(--tblr-bg-surface-secondary);
+    }
+
+    .ts-wrapper.plugin-remove_button .item .remove,
+    .ts-wrapper.plugin-remove_button.disabled .item .remove {
+        border-inline-start-color: var(--tblr-bg-surface-secondary);
+    }
+
+    .ts-wrapper.plugin-remove_button:not(.disabled) .item .remove:hover {
+        background: rgba(255, 255, 255, 0.1);
     }
 }
 
