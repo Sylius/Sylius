@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
-readonly class ResendShipmentConfirmationEmail
+class ResendShipmentConfirmationEmail
 {
-    public function __construct(
-        public mixed $shipmentId,
-    ) {
+    public function __construct(public readonly mixed $shipmentId)
+    {
     }
 }

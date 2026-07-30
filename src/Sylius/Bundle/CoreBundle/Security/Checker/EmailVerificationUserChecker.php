@@ -37,7 +37,6 @@ final readonly class EmailVerificationUserChecker implements UserCheckerInterfac
         }
 
         $channel = $this->channelContext->getChannel();
-
         if (!$channel instanceof ChannelInterface || !$channel->isAccountVerificationRequired()) {
             return;
         }

@@ -46,14 +46,14 @@ final readonly class ResendVerificationEmailHandler
         /** @var ShopUserInterface|null $user */
         $user = $this->shopUserRepository->findOneByEmail($command->email);
 
-        if (null === $user || $user->isVerified()) {
+        if (null === $user || $user->isVerified() || false === $user->isEnabled()) {
             return;
         }
 
         /** @var ChannelInterface|null $channel */
         $channel = $this->channelRepository->findOneByCode($command->channelCode);
 
-        if (null === $channel || !$channel->isAccountVerificationRequired()) {
+        if (null === $channel || false === $channel->isAccountVerificationRequired()) {
             return;
         }
 

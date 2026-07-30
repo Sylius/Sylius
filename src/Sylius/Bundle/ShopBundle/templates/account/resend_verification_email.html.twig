@@ -1,7 +1,0 @@
-{% extends '@SyliusShop/shared/layout/base.html.twig' %}
-
-{% block title %}{{ 'sylius.ui.resend_verification_email'|trans }} | {{ parent() }}{% endblock %}
-
-{% block content %}
-    {% hook 'sylius_shop.account.resend_verification_email' with { form } %}
-{% endblock %}

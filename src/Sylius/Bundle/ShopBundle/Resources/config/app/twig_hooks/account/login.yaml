@@ -25,7 +25,7 @@ sylius_twig_hooks:
                 priority: 0
             resend_verification_email:
                 template: "@SyliusShop/account/login/content/login_container/resend_verification_email.html.twig"
-                priority: -50
+                priority: -100
 
         'sylius_shop.account.login.content.login_container.form':
             errors:

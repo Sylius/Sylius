@@ -58,11 +58,11 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius_shop.controller.resend_verification_email', ResendVerificationEmailController::class)
         ->args([
             service('router'),
-            service('form.factory'),
-            service('twig'),
             service('sylius.context.channel'),
             service('sylius.context.locale'),
             service('sylius.command_bus'),
+            service('security.authentication_utils'),
+            service('security.csrf.token_manager'),
         ])
     ;
 
