@@ -163,6 +163,15 @@ final class LoginContext implements Context
         $this->iResetIt();
     }
 
+    #[When('I log in as :email with :password password')]
+    public function iLogInAsWithPassword(string $email, string $password): void
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+    }
+
     #[Then('I should be logged in')]
     public function iShouldBeLoggedIn(): void
     {
@@ -192,15 +201,6 @@ final class LoginContext implements Context
     public function iShouldSeeTheResendVerificationEmailLink(): void
     {
         Assert::true($this->loginPage->hasResendVerificationEmailLink());
-    }
-
-    #[When('I log in as :email with :password password')]
-    public function iLogInAsWithPassword(string $email, string $password): void
-    {
-        $this->loginPage->open();
-        $this->loginPage->specifyUsername($email);
-        $this->loginPage->specifyPassword($password);
-        $this->loginPage->logIn();
     }
 
     #[Then('I should be notified that email with reset instruction has been sent')]

@@ -23,7 +23,6 @@ use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterThankYouPageInterface;
-use Sylius\Behat\Page\Shop\Account\ResendVerificationEmailPageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -42,7 +41,6 @@ class RegistrationContext implements Context
         private LoginPageInterface $loginPage,
         private RegisterPageInterface $registerPage,
         private RegisterThankYouPageInterface $registerThankYouPage,
-        private ResendVerificationEmailPageInterface $resendVerificationEmailPage,
         private VerificationPageInterface $verificationPage,
         private ProfileUpdatePageInterface $profileUpdatePage,
         private RegisterElementInterface $registerElement,
@@ -209,17 +207,10 @@ class RegistrationContext implements Context
         Assert::true($this->loginPage->hasResendVerificationEmailLink());
     }
 
-    #[When('I follow the resend verification email link')]
-    public function iFollowTheResendVerificationEmailLink(): void
+    #[When('I resend the verification email from the login page')]
+    public function iResendTheVerificationEmailFromTheLoginPage(): void
     {
-        $this->resendVerificationEmailPage->open();
-    }
-
-    #[When('I resend the verification email to :email on the resend page')]
-    public function iResendTheVerificationEmailToOnTheResendPage(string $email): void
-    {
-        $this->resendVerificationEmailPage->specifyEmail($email);
-        $this->resendVerificationEmailPage->resend();
+        $this->loginPage->resendVerificationEmail();
     }
 
     #[When('I register with email :email and password :password')]

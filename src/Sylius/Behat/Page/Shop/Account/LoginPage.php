@@ -50,6 +50,13 @@ class LoginPage extends SyliusPage implements LoginPageInterface
         return $this->hasElement('resend_verification_email_link');
     }
 
+    public function resendVerificationEmail(): void
+    {
+        $this->getElement('resend_verification_email_link')->press();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
+    }
+
     public function logIn(): void
     {
         $this->getElement('login_button')->click();

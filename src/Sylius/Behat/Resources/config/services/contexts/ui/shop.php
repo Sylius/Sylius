@@ -292,7 +292,6 @@ return static function (ContainerConfigurator $container) {
             service('sylius.behat.page.shop.account.login'),
             service('sylius.behat.page.shop.account.register'),
             service('sylius.behat.page.shop.account.register.thank_you'),
-            service('sylius.behat.page.shop.account.resend_verification_email'),
             service('sylius.behat.page.shop.account.verify'),
             service('sylius.behat.page.shop.account.profile_update'),
             service('sylius.behat.element.shop.account.register'),
