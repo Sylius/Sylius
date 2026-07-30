@@ -16,13 +16,14 @@ namespace Sylius\Bundle\CoreBundle\Security\Checker;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 
 final readonly class VerificationAwareEnabledUserChecker implements UserCheckerInterface
 {
     public function __construct(
-        private UserCheckerInterface $decorated,
+        private UserCheckerInterface $userChecker,
         private ChannelContextInterface $channelContext,
     ) {
     }
@@ -33,12 +34,12 @@ final readonly class VerificationAwareEnabledUserChecker implements UserCheckerI
             return;
         }
 
-        $this->decorated->checkPreAuth($user);
+        $this->userChecker->checkPreAuth($user);
     }
 
-    public function checkPostAuth(SymfonyUserInterface $user): void
+    public function checkPostAuth(SymfonyUserInterface $user, ?TokenInterface $token = null): void
     {
-        $this->decorated->checkPostAuth($user);
+        $this->userChecker->checkPostAuth($user);
     }
 
     private function isPendingVerification(SymfonyUserInterface $user): bool

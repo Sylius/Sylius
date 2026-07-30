@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Security\Checker;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
@@ -30,7 +31,7 @@ final readonly class EmailVerificationUserChecker implements UserCheckerInterfac
     {
     }
 
-    public function checkPostAuth(SymfonyUserInterface $user): void
+    public function checkPostAuth(SymfonyUserInterface $user, ?TokenInterface $token = null): void
     {
         if (!$user instanceof UserInterface) {
             return;

@@ -28,7 +28,7 @@ use Symfony\Component\Security\Core\User\UserInterface as SymfonyUserInterface;
 final class VerificationAwareEnabledUserCheckerTest extends TestCase
 {
     /** @var UserCheckerInterface&MockObject */
-    private MockObject $decorated;
+    private MockObject $enabledUserChecker;
 
     /** @var ChannelContextInterface&MockObject */
     private MockObject $channelContext;
@@ -37,12 +37,12 @@ final class VerificationAwareEnabledUserCheckerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->decorated = $this->createMock(UserCheckerInterface::class);
+        $this->enabledUserChecker = $this->createMock(UserCheckerInterface::class);
         $this->channelContext = $this->createMock(ChannelContextInterface::class);
-        $this->userChecker = new VerificationAwareEnabledUserChecker($this->decorated, $this->channelContext);
+        $this->userChecker = new VerificationAwareEnabledUserChecker($this->enabledUserChecker, $this->channelContext);
     }
 
-    public function testItSkipsTheDecoratedPreAuthCheckForAnUnverifiedUserWhenVerificationIsRequired(): void
+    public function testItSkipsTheEnabledUserCheckerPreAuthCheckForAnUnverifiedUserWhenVerificationIsRequired(): void
     {
         $user = $this->createMock(UserInterface::class);
         $channel = $this->createMock(ChannelInterface::class);
@@ -51,7 +51,7 @@ final class VerificationAwareEnabledUserCheckerTest extends TestCase
         $channel->method('isAccountVerificationRequired')->willReturn(true);
         $user->method('getVerifiedAt')->willReturn(null);
 
-        $this->decorated->expects($this->never())->method('checkPreAuth');
+        $this->enabledUserChecker->expects($this->never())->method('checkPreAuth');
 
         $this->userChecker->checkPreAuth($user);
     }
@@ -65,7 +65,7 @@ final class VerificationAwareEnabledUserCheckerTest extends TestCase
         $channel->method('isAccountVerificationRequired')->willReturn(true);
         $user->method('getVerifiedAt')->willReturn(new \DateTimeImmutable());
 
-        $this->decorated->expects($this->once())->method('checkPreAuth')->with($user);
+        $this->enabledUserChecker->expects($this->once())->method('checkPreAuth')->with($user);
 
         $this->userChecker->checkPreAuth($user);
     }
@@ -78,7 +78,7 @@ final class VerificationAwareEnabledUserCheckerTest extends TestCase
         $this->channelContext->method('getChannel')->willReturn($channel);
         $channel->method('isAccountVerificationRequired')->willReturn(false);
 
-        $this->decorated->expects($this->once())->method('checkPreAuth')->with($user);
+        $this->enabledUserChecker->expects($this->once())->method('checkPreAuth')->with($user);
 
         $this->userChecker->checkPreAuth($user);
     }
@@ -89,7 +89,7 @@ final class VerificationAwareEnabledUserCheckerTest extends TestCase
 
         $this->channelContext->method('getChannel')->willReturn($this->createMock(BaseChannelInterface::class));
 
-        $this->decorated->expects($this->once())->method('checkPreAuth')->with($user);
+        $this->enabledUserChecker->expects($this->once())->method('checkPreAuth')->with($user);
 
         $this->userChecker->checkPreAuth($user);
     }
@@ -99,7 +99,7 @@ final class VerificationAwareEnabledUserCheckerTest extends TestCase
         $user = $this->createMock(SymfonyUserInterface::class);
 
         $this->channelContext->expects($this->never())->method('getChannel');
-        $this->decorated->expects($this->once())->method('checkPreAuth')->with($user);
+        $this->enabledUserChecker->expects($this->once())->method('checkPreAuth')->with($user);
 
         $this->userChecker->checkPreAuth($user);
     }
@@ -108,7 +108,7 @@ final class VerificationAwareEnabledUserCheckerTest extends TestCase
     {
         $user = $this->createMock(UserInterface::class);
 
-        $this->decorated->expects($this->once())->method('checkPostAuth')->with($user);
+        $this->enabledUserChecker->expects($this->once())->method('checkPostAuth')->with($user);
 
         $this->userChecker->checkPostAuth($user);
     }
