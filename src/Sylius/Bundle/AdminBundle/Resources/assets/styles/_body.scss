@@ -10,6 +10,7 @@
 * {
     --tblr-breadcrumb-item-active-color: var(--tblr-gray-500);
     --tblr-breadcrumb-divider-color: var(--tblr-gray-300);
+    --tblr-breadcrumb-link-color: var(--tblr-body-color);
     --tblr-blue-rgb: 17, 81, 141;
     --tblr-green-rgb: 0, 97, 16;
     --tblr-pagination-border-width: 0;
@@ -19,7 +20,6 @@
 @include color-mode(light) {
     --tblr-body-color: #212529;
     --tblr-code-color: #36393B;
-    --tblr-breadcrumb-link-color: #212529;
 
     body {
         --bs-body-bg: #{$body-bg};
