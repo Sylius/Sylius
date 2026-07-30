@@ -236,6 +236,49 @@ The converter can help bootstrap the migration from YAML to PHP and reduce the a
 
 For a complete overview of the Grid component, see the [Grid documentation](https://stack.sylius.com/grid/index).
 
+## Installer
+
+1. The `sylius:install:setup` command now sets up a **country** and a **default zone** during installation, and
+   optionally assigns the created zone as the default channel tax zone.
+
+   Three new setup classes have been introduced:
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetup` implementing `CountrySetupInterface`
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\ZoneSetup` implementing `ZoneSetupInterface`
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetup` implementing `ChannelDefaultTaxZoneSetupInterface`
+
+   All three are registered as services and injected into `SetupCommand` as **optional** constructor arguments. If
+   you have decorated or replaced `SetupCommand`, not passing them is deprecated and will be prohibited in
+   Sylius 3.0:
+
+   ```diff
+    public function __construct(
+        protected readonly EntityManagerInterface $entityManager,
+        protected readonly CommandDirectoryChecker $commandDirectoryChecker,
+        protected readonly CurrencySetupInterface $currencySetup,
+        protected readonly LocaleSetupInterface $localeSetup,
+        protected readonly ChannelSetupInterface $channelSetup,
+        protected readonly FactoryInterface $adminUserFactory,
+        protected readonly UserRepositoryInterface $adminUserRepository,
+        protected readonly ValidatorInterface $validator,
+   +    protected readonly ?CountrySetupInterface $countrySetup = null,
+   +    protected readonly ?ZoneSetupInterface $zoneSetup = null,
+   +    protected readonly ?ChannelDefaultTaxZoneSetupInterface $channelDefaultTaxZoneSetup = null,
+    )
+   ```
+
+2. The `ChannelSetupInterface::setup()` method signature has been extended with an optional argument to receive the
+   newly created country:
+
+   ```diff
+    public function setup(
+        LocaleInterface $locale,
+        CurrencyInterface $currency,
+   +    ?CountryInterface $country = null,
+    ): void;
+   ```
+
+   If you have a custom implementation of `ChannelSetupInterface`, update its `setup()` signature accordingly.
+
 ## Dependencies
 
 1. The `behat/transliterator` package has been **deprecated** and will be removed in Sylius 3.0.

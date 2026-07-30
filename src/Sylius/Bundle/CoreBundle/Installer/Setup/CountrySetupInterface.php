@@ -14,14 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
+use Symfony\Component\Console\Helper\QuestionHelper;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
-interface ChannelSetupInterface
+interface CountrySetupInterface
 {
-    public function setup(
-        LocaleInterface $locale,
-        CurrencyInterface $currency,
-        ?CountryInterface $country = null,
-    ): void;
+    public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CountryInterface;
 }

@@ -17,12 +17,18 @@ use Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker;
 use Sylius\Bundle\CoreBundle\Installer\Checker\SyliusRequirementsChecker;
 use Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider;
 use Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProviderInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetup;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetup;
 use Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetup;
+use Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetup;
 use Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetupInterface;
 use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup;
 use Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetupInterface;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ZoneSetup;
+use Sylius\Bundle\CoreBundle\Installer\Setup\ZoneSetupInterface;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -76,4 +82,33 @@ return static function (ContainerConfigurator $container) {
         ])
     ;
     $services->alias(ChannelSetupInterface::class, 'sylius.setup.installer.channel');
+
+    $services
+        ->set('sylius.setup.installer.channel_default_tax_zone', ChannelDefaultTaxZoneSetup::class)
+        ->args([
+            service('sylius.repository.channel'),
+            service('sylius.manager.channel'),
+        ])
+    ;
+    $services->alias(ChannelDefaultTaxZoneSetupInterface::class, 'sylius.setup.installer.channel_default_tax_zone');
+
+    $services
+        ->set('sylius.setup.installer.country', CountrySetup::class)
+        ->args([
+            service('sylius.factory.country'),
+            service('sylius.repository.country'),
+        ])
+    ;
+    $services->alias(CountrySetupInterface::class, 'sylius.setup.installer.country');
+
+    $services
+        ->set('sylius.setup.installer.zone', ZoneSetup::class)
+        ->args([
+            service('sylius.repository.zone'),
+            service('sylius.factory.zone'),
+            service('sylius.factory.zone_member'),
+            service('sylius.manager.zone'),
+        ])
+    ;
+    $services->alias(ZoneSetupInterface::class, 'sylius.setup.installer.zone');
 };
