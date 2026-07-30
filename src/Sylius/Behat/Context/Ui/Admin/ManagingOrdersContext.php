@@ -177,7 +177,7 @@ final readonly class ManagingOrdersContext implements Context
     #[When('I filter by customer :customer')]
     public function iFilterByCustomer(CustomerInterface $customer): void
     {
-        $this->indexPage->specifyFilterCustomer($customer->getFullName());
+        $this->indexPage->specifyFilterCustomer($customer->getNameOrEmail());
         $this->iFilter();
     }
 
