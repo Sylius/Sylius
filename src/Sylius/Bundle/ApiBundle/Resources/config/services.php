@@ -19,6 +19,8 @@ use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger;
 use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChangerInterface;
 use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker;
 use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityCheckerInterface;
+use Sylius\Bundle\ApiBundle\Checker\OrderPaymentRequestEligibilityChecker;
+use Sylius\Bundle\ApiBundle\Checker\OrderPaymentRequestEligibilityCheckerInterface;
 use Sylius\Bundle\ApiBundle\Command\Account\ResetPassword;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
 use Sylius\Bundle\ApiBundle\Command\Admin\Account\ResetPassword as AdminResetPassword;
@@ -100,6 +102,9 @@ return static function (ContainerConfigurator $container) {
         ])
     ;
     $services->alias(AppliedCouponEligibilityCheckerInterface::class, 'sylius_api.checker.applied_coupon_eligibility');
+
+    $services->set('sylius_api.checker.order_payment_request_eligibility', OrderPaymentRequestEligibilityChecker::class);
+    $services->alias(OrderPaymentRequestEligibilityCheckerInterface::class, 'sylius_api.checker.order_payment_request_eligibility');
 
     $services
         ->set('sylius_api.modifier.order_address', OrderAddressModifier::class)

@@ -191,6 +191,58 @@ final class PaymentRequestsTest extends JsonApiTestCase
         ]);
     }
 
+    #[Test]
+    public function it_does_not_create_a_payment_request_for_an_order_that_is_not_placed(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'payment_method.yaml',
+            'payment_request/order_not_placed.yaml',
+        ]);
+
+        /** @var PaymentInterface $payment */
+        $payment = $fixtures['payment_not_placed'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/shop/orders/notPlacedOrderToken/payment-requests',
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->build(),
+            content: json_encode([
+                'paymentId' => $payment->getId(),
+                'paymentMethodCode' => 'CASH_ON_DELIVERY',
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseContainsViolations([
+            ['propertyPath' => '', 'message' => 'Payment requests can only be created for placed orders.'],
+        ]);
+    }
+
+    #[Test]
+    public function it_does_not_update_a_payment_request_for_an_order_that_is_not_placed(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'payment_method.yaml',
+            'payment_request/order_not_placed.yaml',
+            'payment_request/payment_request_not_placed.yaml',
+        ]);
+
+        /** @var PaymentRequestInterface $paymentRequest */
+        $paymentRequest = $fixtures['payment_request_not_placed'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/shop/payment-requests/%s', $paymentRequest->getHash()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->build(),
+            content: json_encode(['payload' => ['some' => 'payload']], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseContainsViolations([
+            ['propertyPath' => '', 'message' => 'Payment requests can only be created for placed orders.'],
+        ]);
+    }
+
     /**
      * @param array<string> $fixturesPaths
      *

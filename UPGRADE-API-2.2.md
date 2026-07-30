@@ -1,3 +1,18 @@
+# UPGRADE FROM `2.2.7` TO `2.2.8`
+
+## Shop API
+
+1. Payment requests can now only be created or updated for **placed orders** (orders whose checkout
+   state is `completed`). Creating or updating a payment request for an order that has not completed
+   checkout now fails validation.
+
+   The eligibility rule is enforced by the new
+   `Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentRequestEligibility` constraint applied to
+   the `AddPaymentRequest` and `UpdatePaymentRequest` commands, and is delegated to the new
+   `Sylius\Bundle\ApiBundle\Checker\OrderPaymentRequestEligibilityChecker` service
+   (`sylius_api.checker.order_payment_request_eligibility`). If your application requires different
+   rules, you can override or decorate this service to adjust the behaviour.
+
 # UPGRADE FROM `2.2.6` TO `2.2.7`
 
 ## Shop API
