@@ -41,9 +41,9 @@
         --tblr-btn-border-color: var(--tblr-border-color);
     }
 
-    .form-control,
-    .form-select,
-    .form-check-input,
+    .form-control:where(:not(.is-invalid):not(.is-valid):not(:focus)),
+    .form-select:where(:not(.is-invalid):not(.is-valid):not(:focus)),
+    .form-check-input:where(:not(.is-invalid):not(.is-valid):not(:focus)),
     .input-group-text {
         border-color: var(--tblr-border-color);
     }
