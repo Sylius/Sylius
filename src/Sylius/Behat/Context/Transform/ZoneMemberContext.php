@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -31,9 +32,7 @@ final class ZoneMemberContext implements Context
     ) {
     }
 
-    /**
-     * @Transform the :name country member
-     */
+    #[Transform('the :name country member')]
     public function getCountryTypeZoneMemberByName($name)
     {
         $countryCode = $this->countryNameConverter->convertToCode($name);
@@ -41,10 +40,8 @@ final class ZoneMemberContext implements Context
         return $this->getZoneMemberByCode($countryCode);
     }
 
-    /**
-     * @Transform /^"([^"]+)", "([^"]+)" and "([^"]+)" country members$/
-     * @Transform /^"([^"]+)" and "([^"]+)" country members$/
-     */
+    #[Transform('/^"([^"]+)", "([^"]+)" and "([^"]+)" country members$/')]
+    #[Transform('/^"([^"]+)" and "([^"]+)" country members$/')]
     public function getCountryTypeZoneMembersByNames(string ...$names): array
     {
         $codes = $names;
@@ -53,9 +50,7 @@ final class ZoneMemberContext implements Context
         return $this->getZoneMembersByCodes($codes);
     }
 
-    /**
-     * @Transform the :name province member
-     */
+    #[Transform('the :name province member')]
     public function getProvinceTypeZoneMemberByName($name)
     {
         $provinceCode = $this->getProvinceByName($name)->getCode();
@@ -63,9 +58,7 @@ final class ZoneMemberContext implements Context
         return $this->getZoneMemberByCode($provinceCode);
     }
 
-    /**
-     * @Transform the :name zone member
-     */
+    #[Transform('the :name zone member')]
     public function getZoneTypeZoneMemberByName($name)
     {
         $zoneCode = $this->getZoneByName($name)->getCode();

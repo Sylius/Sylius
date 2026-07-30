@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Cli;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Bundle\CoreBundle\Console\Command\InstallSampleDataCommand;
 use Sylius\Bundle\CoreBundle\Console\Command\SetupCommand;
@@ -63,13 +66,11 @@ final class InstallerContext implements Context
     ) {
     }
 
-    /**
-     * @When I run Sylius CLI installer
-     */
+    #[When('I run Sylius CLI installer')]
     public function iRunSyliusCommandLineInstaller(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new SetupCommand(
+        $this->addCommandHelper(new SetupCommand(
             $this->entityManager,
             $this->commandDirectoryChecker,
             $this->currencySetup,
@@ -86,13 +87,11 @@ final class InstallerContext implements Context
         $this->iExecuteCommandWithInputChoices('sylius:install:setup');
     }
 
-    /**
-     * @Given I run Sylius Install Load Sample Data command
-     */
+    #[Given('I run Sylius Install Load Sample Data command')]
     public function iRunSyliusInstallSampleDataCommand(): void
     {
         $this->application = new Application($this->kernel);
-        $this->application->add(new InstallSampleDataCommand(
+        $this->addCommandHelper(new InstallSampleDataCommand(
             $this->entityManager,
             $this->commandDirectoryChecker,
             $this->publicDir,
@@ -101,49 +100,37 @@ final class InstallerContext implements Context
         $this->tester = new CommandTester($this->command);
     }
 
-    /**
-     * @Given I confirm loading sample data
-     */
+    #[Given('I confirm loading sample data')]
     public function iConfirmLoadingData(): void
     {
         $this->iExecuteCommandAndConfirm('sylius:install:sample-data');
     }
 
-    /**
-     * @Then the command should finish successfully
-     */
+    #[Then('the command should finish successfully')]
     public function commandSuccess(): void
     {
         Assert::same($this->tester->getStatusCode(), 0);
     }
 
-    /**
-     * @Then I should see output :text
-     */
+    #[Then('I should see output :text')]
     public function iShouldSeeOutput(string $text): void
     {
         Assert::contains($this->tester->getDisplay(), $text);
     }
 
-    /**
-     * @Given I do not provide an email
-     */
+    #[Given('I do not provide an email')]
     public function iDoNotProvideEmail(): void
     {
         $this->inputChoices['e-mail'] = '';
     }
 
-    /**
-     * @Given I do not provide a correct email
-     */
+    #[Given('I do not provide a correct email')]
     public function iDoNotProvideCorrectEmail(): void
     {
         $this->inputChoices['e-mail'] = 'janusz';
     }
 
-    /**
-     * @Given I provide full administrator data
-     */
+    #[Given('I provide full administrator data')]
     public function iProvideFullAdministratorData(): void
     {
         $this->inputChoices['e-mail'] = 'test@admin.com';
@@ -170,5 +157,16 @@ final class InstallerContext implements Context
             $this->tester->execute(['command' => $name]);
         } catch (\Exception) {
         }
+    }
+
+    private function addCommandHelper(Command $command): void
+    {
+        if (method_exists($this->application, 'addCommand')) {
+            $this->application->addCommand($command);
+
+            return;
+        }
+
+        $this->application->add($command);
     }
 }

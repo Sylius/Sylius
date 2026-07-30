@@ -12,11 +12,20 @@
 .ts-control {
     padding: 0.5625rem 2.3rem 0.5625rem 0.8rem;
     line-height: 1.4285714286;
-    background: #fff;
     color: var(--tblr-body-color);
     border: var(--tblr-border-width) solid var(--tblr-border-color);
     border-radius: var(--tblr-border-radius);
     box-shadow: var(--tblr-box-shadow-input);
+
+    input {
+        color: var(--tblr-body-color);
+    }
+}
+
+@include color-mode(dark) {
+    .ts-control .item {
+        color: var(--tblr-body-color);
+    }
 }
 
 .focus .ts-control {
@@ -26,10 +35,20 @@
 
 .ts-dropdown, .ts-dropdown.form-control, .ts-dropdown.form-select {
     padding: 5px;
-    background: #ffffff;
-    border: 1px solid #00000017;
+    background: var(--tblr-bg-surface);
+    border: 1px solid var(--tblr-border-color);
     border-radius: 0.175rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.075);
+    box-shadow: 0 2px 5px rgba(var(--tblr-body-color-rgb), 0.075);
+
+    .option {
+        color: var(--tblr-body-color);
+        opacity: 1;
+
+        &.active {
+            background: var(--tblr-primary);
+            color: var(--tblr-primary-fg);
+        }
+    }
 }
 
 .ts-wrapper.single .ts-control, .ts-wrapper.single .ts-control input {

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\ProductOptionValueDeletionListener;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductOptionValueDeletionListenerTest extends TestCase
 {
     private MockObject&ProductVariantRepositoryInterface $productVariantRepository;

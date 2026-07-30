@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -25,11 +26,9 @@ final class ProductAttributeContext implements Context
     {
     }
 
-    /**
-     * @Transform :attribute
-     * @Transform :productAttribute
-     * @Transform /^"([^"]+)" product attribute$/
-     */
+    #[Transform(':attribute')]
+    #[Transform(':productAttribute')]
+    #[Transform('/^"([^"]+)" product attribute$/')]
     public function getProductAttributeByName(string $name): ProductAttributeInterface
     {
         /** @var ProductAttributeTranslationInterface[] $productAttributeTranslations */

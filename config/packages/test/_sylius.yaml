@@ -27,3 +27,6 @@ sylius_payment:
     encryption:
         disabled_for_factories:
             - online-disabled
+
+sylius_core:
+    order_by_identifier: true

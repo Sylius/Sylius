@@ -15,6 +15,9 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Mink;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -33,9 +36,7 @@ final readonly class StaleCartLiveComponentContext implements Context
     ) {
     }
 
-    /**
-     * @Given I note the current order id for later assertions
-     */
+    #[Given('I note the current order id for later assertions')]
     public function iNoteTheCurrentOrderId(): void
     {
         $page = $this->mink->getSession()->getPage();
@@ -52,9 +53,7 @@ final readonly class StaleCartLiveComponentContext implements Context
         $this->sharedStorage->set('stale_order_id', (int) $orderId);
     }
 
-    /**
-     * @When the order is completed in the background
-     */
+    #[When('the order is completed in the background')]
     public function theOrderIsCompletedInTheBackground(): void
     {
         $orderId = $this->sharedStorage->get('stale_order_id');
@@ -69,9 +68,7 @@ final readonly class StaleCartLiveComponentContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @When I clear my cart from the stale page without reloading
-     */
+    #[When('I clear my cart from the stale page without reloading')]
     public function iClearMyCartFromTheStalePage(): void
     {
         $page = $this->mink->getSession()->getPage();
@@ -86,9 +83,7 @@ final readonly class StaleCartLiveComponentContext implements Context
         $this->waitForLiveComponent();
     }
 
-    /**
-     * @When I remove first item from cart from the stale page without reloading
-     */
+    #[When('I remove first item from cart from the stale page without reloading')]
     public function iRemoveFirstItemFromCartFromTheStalePageWithoutReloading(): void
     {
         $page = $this->mink->getSession()->getPage();
@@ -103,9 +98,7 @@ final readonly class StaleCartLiveComponentContext implements Context
         $this->waitForLiveComponent();
     }
 
-    /**
-     * @Then the completed order should still exist in the database
-     */
+    #[Then('the completed order should still exist in the database')]
     public function theCompletedOrderShouldStillExistInTheDatabase(): void
     {
         $orderId = $this->sharedStorage->get('stale_order_id');
@@ -121,9 +114,7 @@ final readonly class StaleCartLiveComponentContext implements Context
         );
     }
 
-    /**
-     * @Then the order checkout state should be :expectedState
-     */
+    #[Then('the order checkout state should be :expectedState')]
     public function theOrderCheckoutStateShouldBe(string $expectedState): void
     {
         $orderId = $this->sharedStorage->get('stale_order_id');
@@ -140,9 +131,7 @@ final readonly class StaleCartLiveComponentContext implements Context
         );
     }
 
-    /**
-     * @When I increase the quantity of the first cart item to :quantity on the stale page without reloading
-     */
+    #[When('I increase the quantity of the first cart item to :quantity on the stale page without reloading')]
     public function iIncreaseTheQuantityOfTheFirstCartItemOnTheStalePage(int $quantity): void
     {
         $page = $this->mink->getSession()->getPage();
@@ -155,9 +144,7 @@ final readonly class StaleCartLiveComponentContext implements Context
         $this->waitForLiveComponent();
     }
 
-    /**
-     * @Then the order item quantity should still be :quantity
-     */
+    #[Then('the order item quantity should still be :quantity')]
     public function theOrderItemQuantityShouldStillBe(int $quantity): void
     {
         $orderId = $this->sharedStorage->get('stale_order_id');
@@ -177,9 +164,7 @@ final readonly class StaleCartLiveComponentContext implements Context
         );
     }
 
-    /**
-     * @Then the order should still have :count item(s)
-     */
+    #[Then('the order should still have :count item(s)')]
     public function theOrderShouldStillHaveItems(int $count): void
     {
         $orderId = $this->sharedStorage->get('stale_order_id');

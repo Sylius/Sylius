@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber;
@@ -26,6 +27,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GenerateProductVariantsSubscriberTest extends TestCase
 {
     private MockObject&ProductVariantGeneratorInterface $generator;

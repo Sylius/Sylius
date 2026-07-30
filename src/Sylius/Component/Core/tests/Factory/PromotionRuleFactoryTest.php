@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Factory;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Factory\PromotionRuleFactory;
@@ -26,6 +27,7 @@ use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecke
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionRuleFactoryTest extends TestCase
 {
     private FactoryInterface&MockObject $decoratedFactory;
