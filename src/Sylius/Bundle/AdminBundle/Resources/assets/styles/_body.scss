@@ -38,7 +38,7 @@
     --tblr-bg-surface: #{$dark-bg-surface};
     --tblr-bg-surface-tertiary: #{$dark-body-bg};
 
-    .btn {
+    .btn:where(:not([class*="btn-ghost"])) {
         --tblr-btn-border-color: var(--tblr-border-color);
     }
 
