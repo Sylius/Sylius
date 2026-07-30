@@ -42,6 +42,11 @@
         --tblr-btn-border-color: var(--tblr-border-color);
     }
 
+    .btn-ghost-dark {
+        --tblr-btn-color: var(--tblr-body-color);
+        --tblr-btn-disabled-color: var(--tblr-body-color);
+    }
+
     .form-control:where(:not(.is-invalid):not(.is-valid):not(:focus)),
     .form-select:where(:not(.is-invalid):not(.is-valid):not(:focus)),
     .form-check-input:where(:not(.is-invalid):not(.is-valid):not(:focus)),
