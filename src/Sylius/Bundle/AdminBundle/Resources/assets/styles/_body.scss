@@ -36,6 +36,7 @@
     --tblr-body-bg: #{$dark-body-bg};
     --tblr-body-bg-rgb: #{red($dark-body-bg)}, #{green($dark-body-bg)}, #{blue($dark-body-bg)};
     --tblr-bg-surface: #{$dark-bg-surface};
+    --tblr-bg-surface-tertiary: #{$dark-body-bg};
 
     .btn {
         --tblr-btn-border-color: var(--tblr-border-color);
