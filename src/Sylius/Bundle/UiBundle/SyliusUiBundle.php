@@ -15,6 +15,7 @@ namespace Sylius\Bundle\UiBundle;
 
 use Sylius\Bundle\UiBundle\DependencyInjection\Compiler\LiveComponentTagPass;
 use Sylius\Bundle\UiBundle\DependencyInjection\Compiler\TwigComponentTagPass;
+use Sylius\Bundle\UiBundle\DependencyInjection\Compiler\UxIconsIconFinderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -27,5 +28,6 @@ final class SyliusUiBundle extends Bundle
     {
         $container->addCompilerPass(new LiveComponentTagPass(), priority: 50);
         $container->addCompilerPass(new TwigComponentTagPass(), priority: 50);
+        $container->addCompilerPass(new UxIconsIconFinderPass());
     }
 }
