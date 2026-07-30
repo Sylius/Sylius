@@ -2,8 +2,7 @@
 
 ## New Endpoints
 
-### Resend Verification Email ([#19002](https://github.com/Sylius/Sylius/pull/19002))
-
+### Resend Verification Email
 A new shop endpoint has been added, allowing customers to request a new account verification email:
 
 **`POST /api/v2/shop/customers/verification-request`**
