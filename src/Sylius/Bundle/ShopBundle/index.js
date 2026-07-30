@@ -62,6 +62,8 @@ class SyliusShop {
             .enableSassLoader((options) => {
                 // eslint-disable-next-line no-param-reassign
                 options.additionalData = `$rootDir: '${rootDir}';`;
+                // eslint-disable-next-line no-param-reassign
+                options.sassOptions = { ...options.sassOptions, charset: false };
             });
     }
 }
