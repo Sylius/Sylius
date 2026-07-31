@@ -29,6 +29,8 @@ sylius:
             priority: Priority
             rules: Rules
             starts_at: Starts at
+            track_usage: Track usage
+            track_usage_details: When disabled, orders will not count towards the usage limit — the promotion can be applied any number of times regardless of the limit set.
             usage_limit: Usage limit
         promotion_action:
             item_fixed_discount: Item fixed discount
@@ -44,6 +46,8 @@ sylius:
             type: Type
         promotion_coupon:
             expires_at: Expires at
+            track_usage: Track usage
+            track_usage_details: When disabled, orders will not count towards the usage limit or per-customer limit — the coupon can be used freely by any customer. Re-enabling tracking starts per-customer counting fresh; previous orders will not be included.
             usage_limit: Usage limit
         promotion_coupon_generator_instruction:
             amount: Amount

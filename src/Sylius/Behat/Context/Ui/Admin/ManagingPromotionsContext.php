@@ -376,10 +376,38 @@ final class ManagingPromotionsContext implements Context
         Assert::true($this->updatePage->hasResourceValues(['usage_limit' => $usageLimit]));
     }
 
+    #[Then('the :promotion promotion should have track usage enabled')]
+    public function thePromotionShouldHaveTrackUsageEnabled(PromotionInterface $promotion): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::true($this->updatePage->hasResourceValues(['track_usage' => 1]));
+    }
+
+    #[Then('the :promotion promotion should have track usage disabled')]
+    public function thePromotionShouldHaveTrackUsageDisabled(PromotionInterface $promotion): void
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::false($this->updatePage->hasResourceValues(['track_usage' => 1]));
+    }
+
     #[When('I set it as exclusive')]
     public function iSetItAsExclusive(): void
     {
         $this->formElement->makeExclusive();
+    }
+
+    #[When('I enable track usage')]
+    public function iEnableTrackUsage(): void
+    {
+        $this->formElement->enableTrackUsage();
+    }
+
+    #[When('I disable track usage')]
+    public function iDisableTrackUsage(): void
+    {
+        $this->formElement->disableTrackUsage();
     }
 
     #[When('I set it as not applies to discounted by catalog promotion items')]
@@ -392,6 +420,18 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldBeExclusive(PromotionInterface $promotion): void
     {
         $this->assertIfFieldIsTrue($promotion, 'exclusive');
+    }
+
+    #[Then('the :promotion promotion should track usage')]
+    public function thePromotionShouldTrackUsage(PromotionInterface $promotion): void
+    {
+        $this->assertIfFieldIsTrue($promotion, 'track_usage');
+    }
+
+    #[Then('the :promotion promotion should not track usage')]
+    public function thePromotionShouldNotTrackUsage(PromotionInterface $promotion): void
+    {
+        $this->assertIfFieldIsFalse($promotion, 'track_usage');
     }
 
     #[Then('the :promotion promotion should not applies to discounted items')]

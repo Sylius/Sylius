@@ -112,6 +112,18 @@ final readonly class ManagingPromotionsContext implements Context
         $this->client->addRequestData('exclusive', true);
     }
 
+    #[When('I enable track usage')]
+    public function iEnableTrackUsage(): void
+    {
+        $this->client->addRequestData('trackUsage', true);
+    }
+
+    #[When('I disable track usage')]
+    public function iDisableTrackUsage(): void
+    {
+        $this->client->addRequestData('trackUsage', false);
+    }
+
     #[When('I make it coupon based')]
     public function iMakeItCouponBased(): void
     {
@@ -509,6 +521,30 @@ final readonly class ManagingPromotionsContext implements Context
         );
     }
 
+    #[Then('the :promotion promotion should have track usage enabled')]
+    public function thePromotionShouldHaveTrackUsageEnabled(PromotionInterface $promotion): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue(
+                $this->client->show(Resources::PROMOTIONS, $promotion->getCode()),
+                'trackUsage',
+                true,
+            ),
+        );
+    }
+
+    #[Then('the :promotion promotion should have track usage disabled')]
+    public function thePromotionShouldHaveTrackUsageDisabled(PromotionInterface $promotion): void
+    {
+        Assert::true(
+            $this->responseChecker->hasValue(
+                $this->client->show(Resources::PROMOTIONS, $promotion->getCode()),
+                'trackUsage',
+                false,
+            ),
+        );
+    }
+
     #[Then('the :promotion promotion should be exclusive')]
     public function thePromotionShouldBeExclusive(PromotionInterface $promotion): void
     {
@@ -516,6 +552,28 @@ final readonly class ManagingPromotionsContext implements Context
             $this->responseChecker->getValue(
                 $this->client->show(Resources::PROMOTIONS, $promotion->getCode()),
                 'exclusive',
+            ),
+        );
+    }
+
+    #[Then('the :promotion promotion should track usage')]
+    public function thePromotionShouldTrackUsage(PromotionInterface $promotion): void
+    {
+        Assert::true(
+            $this->responseChecker->getValue(
+                $this->client->show(Resources::PROMOTIONS, $promotion->getCode()),
+                'trackUsage',
+            ),
+        );
+    }
+
+    #[Then('the :promotion promotion should not track usage')]
+    public function thePromotionShouldNotTrackUsage(PromotionInterface $promotion): void
+    {
+        Assert::false(
+            $this->responseChecker->getValue(
+                $this->client->show(Resources::PROMOTIONS, $promotion->getCode()),
+                'trackUsage',
             ),
         );
     }

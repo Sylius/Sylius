@@ -1,5 +1,61 @@
 # UPGRADE FROM `2.2` TO `2.3`
 
+## Promotions
+
+1. A new `trackUsage` field has been added to promotions and promotion coupons. ([#18966](https://github.com/Sylius/Sylius/pull/18966))
+
+   When `trackUsage` is disabled, the usage counter is neither incremented nor decremented when an order is placed or cancelled.
+   This allows promotions and coupons to be used without affecting their usage statistics.
+
+   The following methods have been added to their respective interfaces:
+
+   - `Sylius\Component\Promotion\Model\PromotionInterface`:
+
+     ```php
+     public function isTrackUsage(): bool;
+     public function setTrackUsage(bool $trackUsage): void;
+     ```
+
+   - `Sylius\Component\Promotion\Model\PromotionCouponInterface`:
+
+     ```php
+     public function isTrackUsage(): bool;
+     public function setTrackUsage(bool $trackUsage): void;
+     ```
+
+   If you have custom classes implementing these interfaces, you must add these methods.
+   The default value is `true`, preserving the previous behaviour.
+
+2. The `isTrackUsage(): bool` method has been added to `Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface`
+
+   If you have a custom class implementing this interface, you must add this method.
+
+3. The behaviour of the following eligibility checkers has changed — they now return `true` (eligible) when `trackUsage` is disabled, regardless of how many times the promotion or coupon has already been used
+
+   - `Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilityChecker`
+   - `Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponUsageLimitEligibilityChecker`
+
+   This is consistent with the existing behaviour of `PromotionCouponPerCustomerUsageLimitEligibilityChecker` and prevents non-zero legacy `used` counters from blocking customers after `trackUsage` is turned off.
+
+4. The following usage modifiers now skip promotions and coupons that have `trackUsage` disabled
+
+   - `Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier`
+   - `Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier`
+
+   If you have decorated or extended these classes, verify that your implementation also respects the `isTrackUsage()` flag.
+
+5. The `countByCustomerAndCoupon()` method on `Sylius\Component\Core\Repository\OrderRepositoryInterface` and its implementation in `Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository` has been deprecated and will be removed in Sylius 3.0.
+
+   Use `countByCustomerAndCouponSince()` instead, passing `null` as the `$since` argument to replicate the previous behaviour:
+
+   ```php
+   // Before
+   $repository->countByCustomerAndCoupon($customer, $coupon);
+
+   // After
+   $repository->countByCustomerAndCouponSince($customer, $coupon, null);
+   ```
+
 ## Configuration
 
 1. The default value of `sylius_core.order_by_identifier` has been changed from `true` to `false`. ([#18956](https://github.com/Sylius/Sylius/pull/18956))

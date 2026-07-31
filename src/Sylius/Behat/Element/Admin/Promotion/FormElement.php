@@ -76,6 +76,16 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $this->getElement('coupon_based')->check();
     }
 
+    public function enableTrackUsage(): void
+    {
+        $this->getElement('track_usage')->check();
+    }
+
+    public function disableTrackUsage(): void
+    {
+        $this->getElement('track_usage')->uncheck();
+    }
+
     public function checkChannel(string $name): void
     {
         $this->getElement('channels')->checkField($name);
@@ -239,6 +249,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'rules' => '#sylius_admin_promotion_rules',
             'starts_at_date' => '#sylius_admin_promotion_startsAt_date',
             'starts_at_time' => '#sylius_admin_promotion_startsAt_time',
+            'track_usage' => '[data-test-track-usage]',
             'translation_tab' => '[data-test-promotion-translations-accordion="%locale_code%"]',
             'usage_limit' => '#sylius_admin_promotion_usageLimit',
         ]);

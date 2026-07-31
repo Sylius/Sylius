@@ -33,6 +33,10 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function makeCouponBased(): void;
 
+    public function enableTrackUsage(): void;
+
+    public function disableTrackUsage(): void;
+
     public function checkChannel(string $name): void;
 
     public function setLabel(string $label, string $localeCode): void;

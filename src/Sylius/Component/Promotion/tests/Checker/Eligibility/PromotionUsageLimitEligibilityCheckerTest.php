@@ -49,9 +49,18 @@ final class PromotionUsageLimitEligibilityCheckerTest extends TestCase
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotion));
     }
 
+    public function testShouldReturnTrueIfTrackUsageIsDisabled(): void
+    {
+        $this->promotion->expects($this->once())->method('getUsageLimit')->willReturn(10);
+        $this->promotion->expects($this->once())->method('isTrackUsage')->willReturn(false);
+
+        $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotion));
+    }
+
     public function testShouldReturnTrueIfUsageLimitHaveNotBeenExceeded(): void
     {
         $this->promotion->expects($this->once())->method('getUsageLimit')->willReturn(10);
+        $this->promotion->expects($this->once())->method('isTrackUsage')->willReturn(true);
         $this->promotion->expects($this->once())->method('getUsed')->willReturn(5);
 
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotion));
@@ -60,6 +69,7 @@ final class PromotionUsageLimitEligibilityCheckerTest extends TestCase
     public function testShouldReturnFalseIfUsageLimitHaveBeenExceeded(): void
     {
         $this->promotion->expects($this->once())->method('getUsageLimit')->willReturn(10);
+        $this->promotion->expects($this->once())->method('isTrackUsage')->willReturn(true);
         $this->promotion->expects($this->once())->method('getUsed')->willReturn(15);
 
         $this->assertFalse($this->checker->isEligible($this->promotionSubject, $this->promotion));

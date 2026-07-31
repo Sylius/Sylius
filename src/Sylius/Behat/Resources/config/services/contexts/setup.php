@@ -362,6 +362,7 @@ return static function (ContainerConfigurator $container) {
             service('doctrine.orm.entity_manager'),
             service('sylius.fixture.example_factory.promotion'),
             service('sylius.command_bus'),
+            service('sylius.repository.order'),
         ])
     ;
 

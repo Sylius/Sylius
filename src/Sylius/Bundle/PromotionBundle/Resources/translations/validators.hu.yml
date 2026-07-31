@@ -12,6 +12,8 @@ sylius:
             min_length: A promóció leírása legalább 1 karakter hosszú kell legyen. |A promóció leírása legalább {{ limit }} karakter hosszú kell legyen.
             not_blank: Kérjük, adja meg a promóció leírását.
         end_date_cannot_be_set_prior_start_date: A lejárati dátum nem lehet hamarabb mint a kezdő dátum.
+        usage_limit:
+            min: A promóció használati korlátjának legalább {{ limit }} kell lennie.
         name:
             max_length: A promóció neve nem lehet hosszabb, mint 1 karakter. |A promóció neve nem lehet hosszabb, mint {{ limit }} karakter.
             min_length: A promóció neve legalább 1 karakter hosszú kell legyen. |A promóció neve legalább {{ limit }} karakter hosszú kell legyen.

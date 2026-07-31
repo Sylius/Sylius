@@ -23,9 +23,11 @@ use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
@@ -58,6 +60,7 @@ final readonly class PromotionContext implements Context
         private ObjectManager $objectManager,
         private ExampleFactoryInterface $promotionExampleFactory,
         private MessageBusInterface $commandBus,
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 
@@ -296,6 +299,29 @@ final readonly class PromotionContext implements Context
     public function thisIsSetAsNonReusableAfterCancellingTheOrderInWhichItHasBeenUsed(PromotionCouponInterface $coupon): void
     {
         $coupon->setReusableFromCancelledOrders(false);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this coupon) has track usage disabled$/')]
+    public function thisCouponHasTrackUsageDisabled(PromotionCouponInterface $coupon): void
+    {
+        $coupon->setTrackUsage(false);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this coupon) has had its track usage re-enabled$/')]
+    public function thisCouponHasHadItsTrackUsageReEnabled(PromotionCouponInterface $coupon): void
+    {
+        /** @var OrderInterface[] $orders */
+        $orders = $this->orderRepository->findBy(['promotionCoupon' => $coupon]);
+        foreach ($orders as $order) {
+            $order->setCheckoutCompletedAt(new \DateTime('-1 day'));
+        }
+
+        $coupon->setTrackUsage(false);
+        $coupon->setTrackUsage(true);
 
         $this->objectManager->flush();
     }
@@ -852,6 +878,14 @@ final readonly class PromotionContext implements Context
     public function thisPromotionHasUsageLimitEqualTo(PromotionInterface $promotion, int $usageLimit): void
     {
         $promotion->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this promotion) has track usage disabled$/')]
+    public function thisPromotionHasTrackUsageDisabled(PromotionInterface $promotion): void
+    {
+        $promotion->setTrackUsage(false);
 
         $this->objectManager->flush();
     }
