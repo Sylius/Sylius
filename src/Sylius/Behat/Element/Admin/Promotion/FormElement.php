@@ -190,6 +190,16 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $this->waitForFormUpdate();
     }
 
+    public function getRuleCountValue(): string
+    {
+        return $this->getElement('rule_count')->getValue();
+    }
+
+    public function getActionAmountValue(): string
+    {
+        return $this->getElement('action_amount')->getValue();
+    }
+
     public function checkIfRuleConfigurationFormIsVisible(): bool
     {
         return $this->hasElement('rule_count');
