@@ -17,6 +17,7 @@ use Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\AttributeTypeValidator;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValueValidator;
+use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidDateAttributeConfigurationValidator;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidSelectAttributeConfigurationValidator;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidTextAttributeConfigurationValidator;
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry;
@@ -74,5 +75,10 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.validator.valid_select_attribute_configuration', ValidSelectAttributeConfigurationValidator::class)
         ->tag('validator.constraint_validator', ['alias' => 'sylius_valid_select_attribute_validator'])
+    ;
+
+    $services
+        ->set('sylius.validator.valid_date_attribute_configuration', ValidDateAttributeConfigurationValidator::class)
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_valid_date_attribute_validator'])
     ;
 };

@@ -1,0 +1,17 @@
+{
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
+    "hydra:title": "An error occurred",
+    "hydra:description": "configuration[format]: Configuration format must be one of: \"none\", \"short\", \"medium\", \"long\", \"full\", \"relative_short\", \"relative_medium\", \"relative_long\", \"relative_full\".",
+    "status": 422,
+    "violations":[
+        {
+            "propertyPath": "configuration[format]",
+            "message": "Configuration format must be one of: \"none\", \"short\", \"medium\", \"long\", \"full\", \"relative_short\", \"relative_medium\", \"relative_long\", \"relative_full\".",
+            "code": null
+        }
+    ],
+    "detail": "configuration[format]: Configuration format must be one of: \"none\", \"short\", \"medium\", \"long\", \"full\", \"relative_short\", \"relative_medium\", \"relative_long\", \"relative_full\".",
+    "type": "\/validation_errors\/@string@"
+}
