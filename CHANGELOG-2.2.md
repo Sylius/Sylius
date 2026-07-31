@@ -1,5 +1,15 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.8 (2026-07-31)
+
+#### Details
+
+- [#19154](https://github.com/Sylius/Sylius/issues/19154) [FIX][2.2] Hide notifications icon when notifications are disabled ([@jkindly](https://github.com/jkindly))
+- [#18930](https://github.com/Sylius/Sylius/issues/18930) [BUGFIX] Add validator to restrict payment requests to placed orders only ([@rust-le](https://github.com/rust-le))
+- [#19159](https://github.com/Sylius/Sylius/issues/19159) [API] Refactor payment request eligibility validator and mark new services as experimental ([@GSadee](https://github.com/GSadee))
+- [#19161](https://github.com/Sylius/Sylius/issues/19161) [AdminBundle][ShopBundle] Fix production asset build broken by Sass BOM ([@bartek-sek](https://github.com/bartek-sek))
+- [#19156](https://github.com/Sylius/Sylius/issues/19156) [FIX][2.2] Fix locking icons ([@jkindly](https://github.com/jkindly))
+
 ## v2.2.7 (2026-07-24)
 
 #### Details
