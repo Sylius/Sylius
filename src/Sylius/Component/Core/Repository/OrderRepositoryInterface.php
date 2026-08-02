@@ -48,7 +48,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countByCustomerAndCouponSince(
         CustomerInterface $customer,
         PromotionCouponInterface $coupon,
-        ?\DateTimeInterface $since
+        ?\DateTimeInterface $since,
     ): int;
 
     public function countByCustomer(CustomerInterface $customer): int;
