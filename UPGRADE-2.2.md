@@ -49,26 +49,6 @@
    or `sylius.live_component.*` tag did not receive the `twig.component` tag.
    The priority has been lowered to `50` to ensure Symfony's autoconfiguration runs first.
 
-## Cart summary discount was double-counting the unit-level promotion
-
-The shop cart summary "Discount" row used `Order::getOrderPromotionTotal()`, which sums
-`ORDER_UNIT_PROMOTION_ADJUSTMENT`, `ORDER_ITEM_PROMOTION_ADJUSTMENT` and `ORDER_PROMOTION_ADJUSTMENT`.
-
-`ORDER_UNIT_PROMOTION_ADJUSTMENT` is already netted into each item's subtotal (`OrderItem::getSubtotal()`),
-which is what the "Items total" row above "Discount" displays. Showing it again in "Discount" subtracted
-it twice, so `Items total + Discount + shipping + tax` no longer added up to the actual order total, and
-the discount shown to the customer was larger than what was really applied.
-
-`discount.html.twig` now uses a new `Order::getOrderAndItemPromotionTotal()` method, which sums only
-`ORDER_ITEM_PROMOTION_ADJUSTMENT` and `ORDER_PROMOTION_ADJUSTMENT`, excluding the unit-level adjustment
-already reflected in "Items total".
-
-### Impact on custom code
-
-If you have custom templates, reports, or integrations that reproduce this calculation by calling
-`getOrderPromotionTotal()` next to `getItemsSubtotal()`/`getSubtotal()`, switch to
-`getOrderAndItemPromotionTotal()` to avoid the same double-counting.
-
 ## Order payment state recovery after authorized payment cancellation
 
 When an authorized `Payment` transitions to `cancelled` (e.g. the merchant voids the authorization

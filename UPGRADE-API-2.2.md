@@ -24,17 +24,6 @@
 If you decorate this service, make sure your decorator also implements
 `ApiPlatform\Doctrine\Orm\Extension\QueryItemExtensionInterface` and proxies the `applyToItem` method.
 
-## New Order property
-
-1. The Order resource (admin and shop) now exposes a new `orderAndItemPromotionTotal` property, next to the
-   existing `orderPromotionTotal`.
-
-`orderPromotionTotal` sums the unit-level, item-level and order-level promotion adjustments together.
-The unit-level part is already reflected in `itemsSubtotal`/each item's `subtotal`, so combining
-`itemsSubtotal` with `orderPromotionTotal` double-counts that part. `orderAndItemPromotionTotal` sums
-only the item-level and order-level adjustments, so it can safely be added next to `itemsSubtotal`
-without double-counting.
-
 # UPGRADE FROM `2.1` TO `2.2`
 
 ## Modified routes

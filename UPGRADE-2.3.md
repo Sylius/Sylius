@@ -444,6 +444,37 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Payment Request layer in `Sylius\Bundle\ApiBundle`. These classes are now covered by the Sylius Backward
    Compatibility policy.
 
+## Order
+
+1. A new `getOrderAndItemPromotionTotal(): int` method has been added to
+   `Sylius\Component\Core\Model\OrderInterface` and implemented in `Sylius\Component\Core\Model\Order`.
+
+   ```php
+   public function getOrderAndItemPromotionTotal(): int;
+   ```
+
+   If you have custom classes implementing this interface without extending `Sylius\Component\Core\Model\Order`,
+   you must add this method.
+
+   `getOrderPromotionTotal()` sums `ORDER_UNIT_PROMOTION_ADJUSTMENT`, `ORDER_ITEM_PROMOTION_ADJUSTMENT` and
+   `ORDER_PROMOTION_ADJUSTMENT` together. The unit-level adjustment is already netted into each item's subtotal
+   (`OrderItem::getSubtotal()`), which is what the "Items total" row of the cart summary displays. Showing it again
+   in the "Discount" row subtracted it twice, so `Items total + Discount + shipping + tax` did not add up to the
+   actual order total and the discount shown to the customer was larger than the one really applied.
+
+   `getOrderAndItemPromotionTotal()` sums only `ORDER_ITEM_PROMOTION_ADJUSTMENT` and `ORDER_PROMOTION_ADJUSTMENT`,
+   so it can safely be displayed next to "Items total".
+
+2. The shop cart summary and checkout summary now use `getOrderAndItemPromotionTotal()` instead of
+   `getOrderPromotionTotal()`:
+
+   - `@SyliusShop/cart/index/content/form/sections/general/summary/discount.html.twig`
+   - `@SyliusShop/checkout/common/sidebar/summary/total/promotion_total.html.twig`
+
+   If you have custom templates, reports or integrations that display a promotion total next to
+   `getItemsSubtotal()`/`getSubtotal()`, switch them to `getOrderAndItemPromotionTotal()` to avoid the same
+   double-counting. `getOrderPromotionTotal()` is unchanged and still returns the promotion's full effect.
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
