@@ -12,6 +12,9 @@ sylius:
                 min: Password must be at least {{ limit }} characters long.
                 max: Password must be at most {{ limit }} characters long.
                 not_blank: Please enter the password.
+    admin_user:
+        access_levels:
+            at_least_one: Please select at least one access level.
     avatar_image:
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.

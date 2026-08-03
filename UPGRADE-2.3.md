@@ -434,6 +434,14 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    | `ShippingBundle\...\ShippingMethodCalculatorExists` | `invalidShippingCalculator` | `invalidShippingCalculatorMessage` |
    | `ShippingBundle\...\ShippingMethodRule` | `invalidType` | `invalidTypeMessage` |
 
+3. A new class-level constraint, `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`, has been added to
+   `Sylius\Component\Core\Model\AdminUser`. It requires every admin user to hold at least one of the
+   `ROLE_ADMINISTRATION_ACCESS` or `ROLE_API_ACCESS` roles.
+
+   If your installation has existing admin users with neither role assigned, saving/updating them (via the admin panel,
+   the API, or the `sylius:admin-user:create` command) will now fail validation until one of the two access levels is
+   granted.
+
 ## Payment
 
 1. The **Payment Request** feature is no longer **experimental**.

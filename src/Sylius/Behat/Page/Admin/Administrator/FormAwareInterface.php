@@ -45,6 +45,20 @@ interface FormAwareInterface
 
     public function isEnabled(): bool;
 
+    public function grantAdministrationAccess(): void;
+
+    public function revokeAdministrationAccess(): void;
+
+    public function hasAdministrationAccess(): bool;
+
+    public function grantApiAccess(): void;
+
+    public function revokeApiAccess(): void;
+
+    public function hasApiAccess(): bool;
+
+    public function getAccessLevelsValidationMessage(): string;
+
     public function attachAvatar(string $path): void;
 
     public function isAvatarAttached(): bool;

@@ -120,6 +120,30 @@ final class ManagingAdministratorsContext implements Context
         $this->client->addRequestData('enabled', true);
     }
 
+    #[When('I grant it administration access')]
+    public function iGrantItAdministrationAccess(): void
+    {
+        $this->client->addRequestData('administrationAccess', true);
+    }
+
+    #[When('I revoke its administration access')]
+    public function iRevokeItsAdministrationAccess(): void
+    {
+        $this->client->addRequestData('administrationAccess', false);
+    }
+
+    #[When('I grant it API access')]
+    public function iGrantItApiAccess(): void
+    {
+        $this->client->addRequestData('apiAccess', true);
+    }
+
+    #[When('I revoke its API access')]
+    public function iRevokeItsApiAccess(): void
+    {
+        $this->client->addRequestData('apiAccess', false);
+    }
+
     #[When('I (try to) add it')]
     public function iAddIt(): void
     {
@@ -224,6 +248,43 @@ final class ManagingAdministratorsContext implements Context
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
             'Administrator could not be deleted',
+        );
+    }
+
+    #[Then('/^(this administrator) should have administration access$/')]
+    #[Then('the administrator :adminUser should have administration access')]
+    public function administratorShouldHaveAdministrationAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->hasAdministratorValue($adminUser, 'administrationAccess', true));
+    }
+
+    #[Then('/^(this administrator) should not have administration access$/')]
+    #[Then('the administrator :adminUser should not have administration access')]
+    public function administratorShouldNotHaveAdministrationAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->hasAdministratorValue($adminUser, 'administrationAccess', false));
+    }
+
+    #[Then('/^(this administrator) should have API access$/')]
+    #[Then('the administrator :adminUser should have API access')]
+    public function administratorShouldHaveApiAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->hasAdministratorValue($adminUser, 'apiAccess', true));
+    }
+
+    #[Then('/^(this administrator) should not have API access$/')]
+    #[Then('the administrator :adminUser should not have API access')]
+    public function administratorShouldNotHaveApiAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->hasAdministratorValue($adminUser, 'apiAccess', false));
+    }
+
+    #[Then('I should be notified that at least one access level must be selected')]
+    public function iShouldBeNotifiedThatAtLeastOneAccessLevelMustBeSelected(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'administrationAccess: Please select at least one access level.',
         );
     }
 
@@ -332,5 +393,14 @@ final class ManagingAdministratorsContext implements Context
     public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
     {
         // intentionally left blank, as it is ui step
+    }
+
+    private function hasAdministratorValue(AdminUserInterface $adminUser, string $key, bool $value): bool
+    {
+        return $this->responseChecker->hasValue(
+            $this->client->show(Resources::ADMINISTRATORS, (string) $adminUser->getId()),
+            $key,
+            $value,
+        );
     }
 }
