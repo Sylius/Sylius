@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcher;
 use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcherInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
