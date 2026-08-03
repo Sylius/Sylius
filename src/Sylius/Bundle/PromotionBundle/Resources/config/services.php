@@ -19,6 +19,8 @@ use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Action\PromotionApplicator;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcher;
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcherInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactory;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
@@ -36,6 +38,11 @@ return static function (ContainerConfigurator $container) {
     $container->import('services/*.php');
 
     $services = $container->services();
+
+    $services
+        ->set('sylius.promotion.comparison_operator_matcher', ComparisonOperatorMatcher::class)
+    ;
+    $services->alias(ComparisonOperatorMatcherInterface::class, 'sylius.promotion.comparison_operator_matcher');
 
     $services
         ->set('sylius.custom_factory.promotion_coupon', PromotionCouponFactory::class)

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcherInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -21,6 +22,10 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'cart_quantity';
 
+    public function __construct(private ComparisonOperatorMatcherInterface $comparisonOperatorMatcher)
+    {
+    }
+
     /** @param array<array-key, mixed> $configuration */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
@@ -28,37 +33,10 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        // Legacy operator to avoid BC break
-        if (!isset($configuration['comparison_operator'])) {
-            $configuration['comparison_operator'] = '>=';
-        }
-
         $promotionSubjectCount = $subject->getPromotionSubjectCount();
+        $count = $configuration['count'];
+        $comparisonOperator = $configuration['comparison_operator'] ?? $this->comparisonOperatorMatcher->getDefaultComparisonOperator();
 
-        if ('>=' === $configuration['comparison_operator']) {
-            return $promotionSubjectCount >= $configuration['count'];
-        }
-
-        if ('===' === $configuration['comparison_operator']) {
-            return $promotionSubjectCount === $configuration['count'];
-        }
-
-        if ('!==' === $configuration['comparison_operator']) {
-            return $promotionSubjectCount !== $configuration['count'];
-        }
-
-        if ('<' === $configuration['comparison_operator']) {
-            return $promotionSubjectCount < $configuration['count'];
-        }
-
-        if ('<=' === $configuration['comparison_operator']) {
-            return $promotionSubjectCount <= $configuration['count'];
-        }
-
-        if ('>' === $configuration['comparison_operator']) {
-            return $promotionSubjectCount > $configuration['count'];
-        }
-
-        return false;
+        return $this->comparisonOperatorMatcher->match($promotionSubjectCount, $count, $comparisonOperator);
     }
 }

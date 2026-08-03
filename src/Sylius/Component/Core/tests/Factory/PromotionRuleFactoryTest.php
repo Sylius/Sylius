@@ -59,18 +59,36 @@ final class PromotionRuleFactoryTest extends TestCase
     {
         $this->decoratedFactory->expects($this->once())->method('createNew')->willReturn($this->rule);
         $this->rule->expects($this->once())->method('setType')->with(CartQuantityRuleChecker::TYPE);
-        $this->rule->expects($this->once())->method('setConfiguration')->with(['count' => 5]);
+        $this->rule->expects($this->once())->method('setConfiguration')->with(['count' => 5, 'comparison_operator' => '>=']);
 
         $this->assertSame($this->rule, $this->factory->createCartQuantity(5));
+    }
+
+    public function testShouldCreateCartQuantityRuleWithCustomComparisonOperator(): void
+    {
+        $this->decoratedFactory->expects($this->once())->method('createNew')->willReturn($this->rule);
+        $this->rule->expects($this->once())->method('setType')->with(CartQuantityRuleChecker::TYPE);
+        $this->rule->expects($this->once())->method('setConfiguration')->with(['count' => 3, 'comparison_operator' => '<']);
+
+        $this->assertSame($this->rule, $this->factory->createCartQuantity(3, '<'));
     }
 
     public function testShouldCreateItemTotalRule(): void
     {
         $this->decoratedFactory->expects($this->once())->method('createNew')->willReturn($this->rule);
         $this->rule->expects($this->once())->method('setType')->with(ItemTotalRuleChecker::TYPE);
-        $this->rule->expects($this->once())->method('setConfiguration')->with(['WEB_US' => ['amount' => 1000]]);
+        $this->rule->expects($this->once())->method('setConfiguration')->with(['WEB_US' => ['amount' => 1000, 'comparison_operator' => '>=']]);
 
         $this->assertSame($this->rule, $this->factory->createItemTotal('WEB_US', 1000));
+    }
+
+    public function testShouldCreateItemTotalRuleWithCustomComparisonOperator(): void
+    {
+        $this->decoratedFactory->expects($this->once())->method('createNew')->willReturn($this->rule);
+        $this->rule->expects($this->once())->method('setType')->with(ItemTotalRuleChecker::TYPE);
+        $this->rule->expects($this->once())->method('setConfiguration')->with(['WEB_US' => ['amount' => 500, 'comparison_operator' => '===']]);
+
+        $this->assertSame($this->rule, $this->factory->createItemTotal('WEB_US', 500, '==='));
     }
 
     public function testShouldCreateHasTaxonRule(): void

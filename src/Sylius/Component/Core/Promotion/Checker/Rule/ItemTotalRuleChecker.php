@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcherInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -21,6 +22,10 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'item_total';
+
+    public function __construct(private ComparisonOperatorMatcherInterface $comparisonOperatorMatcher)
+    {
+    }
 
     /**
      * @param array<string, mixed> $configuration
@@ -38,6 +43,11 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $subject->getPromotionSubjectTotal() >= $configuration[$channelCode]['amount'];
+        $channelConfig = $configuration[$channelCode];
+        $promotionSubjectTotal = $subject->getPromotionSubjectTotal();
+        $amount = $channelConfig['amount'];
+        $comparisonOperator = $channelConfig['comparison_operator'] ?? $this->comparisonOperatorMatcher->getDefaultComparisonOperator();
+
+        return $this->comparisonOperatorMatcher->match($promotionSubjectTotal, $amount, $comparisonOperator);
     }
 }
