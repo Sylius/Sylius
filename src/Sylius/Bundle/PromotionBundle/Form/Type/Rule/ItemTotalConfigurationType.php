@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcher;
 use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -22,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ItemTotalConfigurationType extends AbstractType
 {
-    public function __construct(private ComparisonOperatorMatcherInterface $comparisonOperatorMatcher)
+    public function __construct(private ?ComparisonOperatorMatcherInterface $comparisonOperatorMatcher = null)
     {
     }
 
@@ -59,10 +60,15 @@ final class ItemTotalConfigurationType extends AbstractType
     private function buildTranslatedChoices(string $translationKeyPrefix): array
     {
         $choices = [];
-        foreach ($this->comparisonOperatorMatcher->getAvailableComparisonOperators() as $name => $operator) {
+        foreach ($this->getComparisonOperatorMatcher()->getAvailableComparisonOperators() as $name => $operator) {
             $choices[$translationKeyPrefix . $name] = $operator;
         }
 
         return $choices;
+    }
+
+    private function getComparisonOperatorMatcher(): ComparisonOperatorMatcherInterface
+    {
+        return $this->comparisonOperatorMatcher ??= new ComparisonOperatorMatcher();
     }
 }

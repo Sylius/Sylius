@@ -47,6 +47,11 @@ final class ItemTotalRuleCheckerTest extends TestCase
         $this->assertInstanceOf(RuleCheckerInterface::class, $this->ruleChecker);
     }
 
+    public function testShouldRemainInstantiableWithoutDependencies(): void
+    {
+        self::assertInstanceOf(ItemTotalRuleChecker::class, new ItemTotalRuleChecker());
+    }
+
     public function testShouldReturnFalseIfThereIsNoConfigurationForOrderChannel(): void
     {
         $this->order->expects($this->once())->method('getChannel')->willReturn($this->channel);

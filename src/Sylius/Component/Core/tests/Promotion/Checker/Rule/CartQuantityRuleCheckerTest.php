@@ -40,6 +40,11 @@ final class CartQuantityRuleCheckerTest extends TestCase
         $this->assertInstanceOf(RuleCheckerInterface::class, $this->ruleChecker);
     }
 
+    public function testShouldRemainInstantiableWithoutDependencies(): void
+    {
+        self::assertInstanceOf(CartQuantityRuleChecker::class, new CartQuantityRuleChecker());
+    }
+
     public function testShouldReturnFalseIfSubjectIsNotCountablePromotionSubject(): void
     {
         $subject = $this->createMock(PromotionSubjectInterface::class);

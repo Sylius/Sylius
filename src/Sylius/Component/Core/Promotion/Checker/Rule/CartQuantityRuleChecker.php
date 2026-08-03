@@ -22,7 +22,7 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'cart_quantity';
 
-    public function __construct(private ComparisonOperatorMatcherInterface $comparisonOperatorMatcher)
+    public function __construct(private ?ComparisonOperatorMatcherInterface $comparisonOperatorMatcher = null)
     {
     }
 
@@ -35,8 +35,13 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
 
         $promotionSubjectCount = $subject->getPromotionSubjectCount();
         $count = $configuration['count'];
-        $comparisonOperator = $configuration['comparison_operator'] ?? $this->comparisonOperatorMatcher->getDefaultComparisonOperator();
+        $comparisonOperator = $configuration['comparison_operator'] ?? $this->getComparisonOperatorMatcher()->getDefaultComparisonOperator();
 
-        return $this->comparisonOperatorMatcher->match($promotionSubjectCount, $count, $comparisonOperator);
+        return $this->getComparisonOperatorMatcher()->match($promotionSubjectCount, $count, $comparisonOperator);
+    }
+
+    private function getComparisonOperatorMatcher(): ComparisonOperatorMatcherInterface
+    {
+        return $this->comparisonOperatorMatcher ??= new ComparisonOperatorMatcher();
     }
 }
