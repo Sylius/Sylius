@@ -135,7 +135,7 @@ final class OrderGrid implements OrderGridInterface
                     ->setFormOptions([
                         'extra_options' => [
                             'class' => $this->customerClass,
-                            'choice_label' => 'fullname',
+                            'choice_label' => 'nameOrEmail',
                         ],
                     ]),
                 Filter::create('date', 'date')
