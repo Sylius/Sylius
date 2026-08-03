@@ -646,8 +646,8 @@ final readonly class ManagingPromotionsContext implements Context
                 $this->client->index(Resources::PROMOTIONS),
                 [
                     'name' => $promotion->getName(),
-                    'startsAt' => $startsDate->format('Y-m-d H:i:s'),
-                    'endsAt' => $endsDate->format('Y-m-d H:i:s'),
+                    'startsAt' => $startsDate->format(\DateTimeInterface::RFC3339),
+                    'endsAt' => $endsDate->format(\DateTimeInterface::RFC3339),
                 ],
             ),
         );

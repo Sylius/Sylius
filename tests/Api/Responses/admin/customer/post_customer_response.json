@@ -8,7 +8,7 @@
     "email": "api@example.com",
     "firstName": "John",
     "lastName": "Doe",
-    "birthday": "2023-10-24 11:00:00",
+    "birthday": "@date@",
     "gender": "m",
     "group": null,
     "phoneNumber": "+48123456789",

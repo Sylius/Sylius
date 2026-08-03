@@ -13,7 +13,7 @@
     "email": "api@example.com",
     "firstName": "John",
     "lastName": "Lim",
-    "birthday": "2023-09-24 11:00:00",
+    "birthday": "@date@",
     "gender": "f",
     "group": "\/api\/v2\/admin\/customer-groups\/premium",
     "phoneNumber": "+48987654321",

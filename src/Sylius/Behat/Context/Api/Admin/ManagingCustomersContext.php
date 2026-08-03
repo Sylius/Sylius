@@ -351,7 +351,10 @@ final class ManagingCustomersContext implements Context
     #[Then('he should be registered since :registrationDate')]
     public function hisRegistrationDateShouldBe(string $registrationDate): void
     {
-        Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'createdAt', $registrationDate));
+        Assert::same(
+            (new \DateTime($this->responseChecker->getValue($this->client->getLastResponse(), 'createdAt')))->format(\DateTimeInterface::RFC3339),
+            (new \DateTime($registrationDate))->format(\DateTimeInterface::RFC3339),
+        );
     }
 
     #[Then('their email should be :email')]

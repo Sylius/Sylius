@@ -36,7 +36,6 @@ use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductOptionValueNormalizer;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductVariantNormalizer;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ShippingMethodNormalizer;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -171,12 +170,6 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius_api.denormalizer.translatable', TranslatableDenormalizer::class)
         ->args([service('sylius.translation_locale_provider')])
         ->tag('serializer.normalizer', ['priority' => 64])
-    ;
-
-    $services
-        ->set('sylius_api.normalizer.date_time', DateTimeNormalizer::class)
-        ->args([['datetime_format' => 'Y-m-d H:i:s']])
-        ->tag('serializer.normalizer')
     ;
 
     $services

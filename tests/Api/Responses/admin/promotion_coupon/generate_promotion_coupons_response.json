@@ -11,7 +11,7 @@
         "usageLimit": 10,
         "used": 0,
         "promotion": "\/api\/v2\/admin\/promotions\/50_off",
-        "expiresAt": "2020-01-01 12:00:00",
+        "expiresAt": "@date@",
         "createdAt": "@date@",
         "updatedAt": "@date@"
     },
@@ -27,7 +27,7 @@
         "usageLimit": 10,
         "used": 0,
         "promotion": "\/api\/v2\/admin\/promotions\/50_off",
-        "expiresAt": "2020-01-01 12:00:00",
+        "expiresAt": "@date@",
         "createdAt": "@date@",
         "updatedAt": "@date@"
     },
@@ -43,7 +43,7 @@
         "usageLimit": 10,
         "used": 0,
         "promotion": "\/api\/v2\/admin\/promotions\/50_off",
-        "expiresAt": "2020-01-01 12:00:00",
+        "expiresAt": "@date@",
         "createdAt": "@date@",
         "updatedAt": "@date@"
     },
@@ -59,7 +59,7 @@
         "usageLimit": 10,
         "used": 0,
         "promotion": "\/api\/v2\/admin\/promotions\/50_off",
-        "expiresAt": "2020-01-01 12:00:00",
+        "expiresAt": "@date@",
         "createdAt": "@date@",
         "updatedAt": "@date@"
     }
