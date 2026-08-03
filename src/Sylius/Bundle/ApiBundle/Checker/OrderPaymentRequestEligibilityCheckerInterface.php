@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Checker;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-/** @experimental */
 interface OrderPaymentRequestEligibilityCheckerInterface
 {
     public function isEligible(OrderInterface $order): bool;
