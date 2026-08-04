@@ -39,6 +39,7 @@ sylius:
             guarantee_content: "ضمان استرجاع الأموال خلال 30 يومًا"
             multiple_payments_title: "طرق دفع متعددة"
             multiple_payments_content: "نقبل بطاقات الائتمان وPayPal"
+        payment_partners: "شركاء الدفع"
     
     homepage:
         about_us: "من نحن"

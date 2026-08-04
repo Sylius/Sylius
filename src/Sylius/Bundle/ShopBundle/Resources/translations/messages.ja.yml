@@ -37,6 +37,7 @@ sylius:
             guarantee_content: '30日間返金保証'
             multiple_payments_title: '多様な支払い方法'
             multiple_payments_content: 'クレジットカードとPayPalに対応'
+        payment_partners: '決済パートナー'
     homepage:
         about_us: '私たちについて'
         about_us_content: '当ストアは最高の商品をお届けするオンラインショップです。私たちの品揃えから最高の衣類や靴をお選びいただけます。（<i>この内容は翻訳ファイルの "sylius.homepage.about_us_content" キーを上書きして変更できます</i>）'

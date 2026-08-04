@@ -37,6 +37,7 @@ sylius:
             guarantee_content: '30 Tage Geld-zurück-Garantie'
             multiple_payments_title: 'Mehrere Zahlungsmethoden'
             multiple_payments_content: 'Wir akzeptieren Kreditkarten und PayPal'
+        payment_partners: 'Zahlungspartner'
     homepage:
         about_us: 'Über uns'
         about_us_content: 'Willkommen in unserem Shop. Wir freuen uns, Sie als unseren Kunden begrüßen zu dürfen. Kaufen Sie in Ruhe ein, wir sind steht''s benüht Ihnen den bestern Service zu bieten.  (<i>Sie können diesen Inhalt ändern, indem Sie den Schlüssel "sylius.homepage.about_us_content" in Ihrer Übersetzungsdatei überschreiben</i>)'

@@ -37,6 +37,7 @@ sylius:
             guarantee_content: '30 dagen geld terug garantie'
             multiple_payments_title: 'Meerdere Betalingsmethoden'
             multiple_payments_content: 'We accepteren creditcards en PayPal'
+        payment_partners: 'Betaalpartners'
     homepage:
         about_us: 'Over ons'
         about_us_content: 'Welkom in onze winkel, je nummer één online winkel die je de allerbeste producten biedt. Je kunt kiezen uit de beste kleding en schoenen uit ons aanbod. (<i>Je kunt deze inhoud aanpassen door de "sylius.homepage.about_us_content" sleutel in je vertalingsbestand te overschrijven</i>)'
