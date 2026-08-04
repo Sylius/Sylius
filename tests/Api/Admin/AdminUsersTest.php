@@ -249,6 +249,57 @@ final class AdminUsersTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_does_not_allow_to_revoke_own_administration_access(): void
+    {
+        $fixtures = $this->loadFixturesFromFile('authentication/api_administrator_with_administration_access.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AdminUserInterface $administrator */
+        $administrator = $fixtures['admin'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
+            content: json_encode([
+                'administrationAccess' => false,
+                'apiAccess' => true,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/admin_user/put_administrator_own_administration_access_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    #[Test]
+    public function it_allows_to_revoke_administration_access_of_another_administrator(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator_with_administration_access.yaml',
+            'administrator.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AdminUserInterface $administrator */
+        $administrator = $fixtures['admin_user_wilhelm'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
+            content: json_encode([
+                'administrationAccess' => false,
+                'apiAccess' => true,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+    }
+
+    #[Test]
     public function it_deletes_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);

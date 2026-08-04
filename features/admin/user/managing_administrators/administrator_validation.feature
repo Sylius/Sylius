@@ -100,6 +100,16 @@ Feature: Administrator validation
         And I save my changes
         Then I should be notified that at least one access level must be selected
 
+    @api @ui
+    Scenario: Trying to revoke administration access from my own account
+        Given there is an administrator "ted@example.com" identified by "bear"
+        And I am logged in as "ted@example.com" administrator
+        When I want to edit this administrator
+        And I revoke its administration access
+        And I save my changes
+        Then I should be notified that I cannot revoke my own administration access
+        And this administrator should have administration access
+
     @api @no-ui
     Scenario: Trying to add a new administrator with wrong locale code specified
         When I want to create a new administrator

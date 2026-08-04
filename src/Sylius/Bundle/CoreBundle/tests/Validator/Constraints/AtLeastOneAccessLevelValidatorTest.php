@@ -65,13 +65,8 @@ final class AtLeastOneAccessLevelValidatorTest extends TestCase
     public function testItDoesNothingIfAdminUserHasAdministrationAccess(): void
     {
         $adminUser = $this->createMock(AdminUserInterface::class);
-        $adminUser
-            ->method('hasRole')
-            ->willReturnMap([
-                [AdminUserInterface::DEFAULT_ADMIN_ROLE, true],
-                [AdminUserInterface::API_ACCESS_ROLE, false],
-            ])
-        ;
+        $adminUser->method('hasAdministrationAccess')->willReturn(true);
+        $adminUser->method('hasApiAccess')->willReturn(false);
 
         $this->context->expects($this->never())->method('buildViolation');
 
@@ -81,13 +76,8 @@ final class AtLeastOneAccessLevelValidatorTest extends TestCase
     public function testItDoesNothingIfAdminUserHasApiAccess(): void
     {
         $adminUser = $this->createMock(AdminUserInterface::class);
-        $adminUser
-            ->method('hasRole')
-            ->willReturnMap([
-                [AdminUserInterface::DEFAULT_ADMIN_ROLE, false],
-                [AdminUserInterface::API_ACCESS_ROLE, true],
-            ])
-        ;
+        $adminUser->method('hasAdministrationAccess')->willReturn(false);
+        $adminUser->method('hasApiAccess')->willReturn(true);
 
         $this->context->expects($this->never())->method('buildViolation');
 
@@ -100,7 +90,8 @@ final class AtLeastOneAccessLevelValidatorTest extends TestCase
         $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
 
         $adminUser = $this->createMock(AdminUserInterface::class);
-        $adminUser->method('hasRole')->willReturn(false);
+        $adminUser->method('hasAdministrationAccess')->willReturn(false);
+        $adminUser->method('hasApiAccess')->willReturn(false);
 
         $violationBuilder
             ->expects($this->once())

@@ -15,6 +15,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\CoreBundle\Validator\Constraints\AllowedImageMimeTypesValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevelValidator;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\CannotRevokeOwnAdministrationAccessValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailabilityValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemQuantityRangeValidator;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemVariantEnabledValidator;
@@ -236,5 +237,14 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.validator.at_least_one_access_level', AtLeastOneAccessLevelValidator::class)
         ->tag('validator.constraint_validator', ['alias' => 'sylius_at_least_one_access_level'])
+    ;
+
+    $services
+        ->set('sylius.validator.cannot_revoke_own_administration_access', CannotRevokeOwnAdministrationAccessValidator::class)
+        ->args([
+            service('security.token_storage'),
+            service('security.authorization_checker'),
+        ])
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_cannot_revoke_own_administration_access'])
     ;
 };

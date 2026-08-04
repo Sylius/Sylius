@@ -15,12 +15,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
-/**
- * @method bool hasAdministrationAccess()
- * @method void setAdministrationAccess(bool $administrationAccess)
- * @method bool hasApiAccess()
- * @method void setApiAccess(bool $apiAccess)
- */
 interface AdminUserInterface extends BaseUserInterface, ImageAwareInterface
 {
     public const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';
@@ -42,4 +36,12 @@ interface AdminUserInterface extends BaseUserInterface, ImageAwareInterface
     public function getAvatar(): ?ImageInterface;
 
     public function setAvatar(?ImageInterface $avatar): void;
+
+    public function hasAdministrationAccess(): bool;
+
+    public function setAdministrationAccess(bool $administrationAccess): void;
+
+    public function hasApiAccess(): bool;
+
+    public function setApiAccess(bool $apiAccess): void;
 }

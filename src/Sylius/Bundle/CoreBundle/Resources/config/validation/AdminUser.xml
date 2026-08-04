@@ -16,6 +16,9 @@
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel">
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CannotRevokeOwnAdministrationAccess">
+            <option name="groups">sylius</option>
+        </constraint>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">email</option>
             <option name="message">sylius.user.email.unique</option>

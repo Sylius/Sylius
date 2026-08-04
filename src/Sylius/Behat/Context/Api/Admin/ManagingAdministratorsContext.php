@@ -288,6 +288,15 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
+    #[Then('I should be notified that I cannot revoke my own administration access')]
+    public function iShouldBeNotifiedThatICannotRevokeMyOwnAdministrationAccess(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'administrationAccess: You cannot revoke your own administration access.',
+        );
+    }
+
     #[Then('I should be notified that email must be unique')]
     public function iShouldBeNotifiedThatEmailMustBeUnique(): void
     {

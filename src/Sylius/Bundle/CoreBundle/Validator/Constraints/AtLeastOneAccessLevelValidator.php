@@ -35,10 +35,7 @@ final class AtLeastOneAccessLevelValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, AdminUserInterface::class);
         }
 
-        if (
-            $value->hasRole(AdminUserInterface::DEFAULT_ADMIN_ROLE) ||
-            $value->hasRole(AdminUserInterface::API_ACCESS_ROLE)
-        ) {
+        if ($value->hasAdministrationAccess() || $value->hasApiAccess()) {
             return;
         }
 

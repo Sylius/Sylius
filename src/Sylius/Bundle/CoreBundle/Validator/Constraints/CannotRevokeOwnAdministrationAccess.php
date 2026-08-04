@@ -17,11 +17,11 @@ use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
-final class AtLeastOneAccessLevel extends Constraint
+final class CannotRevokeOwnAdministrationAccess extends Constraint
 {
     #[HasNamedArguments]
     public function __construct(
-        public string $message = 'sylius.admin_user.access_levels.at_least_one',
+        public string $message = 'sylius.admin_user.administration_access.cannot_be_revoked_from_yourself',
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -30,7 +30,7 @@ final class AtLeastOneAccessLevel extends Constraint
 
     public function validatedBy(): string
     {
-        return 'sylius_at_least_one_access_level';
+        return 'sylius_cannot_revoke_own_administration_access';
     }
 
     public function getTargets(): string
