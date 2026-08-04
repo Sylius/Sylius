@@ -58,7 +58,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         $user->setUsername($options['username']);
         $user->setPlainPassword($options['password']);
         $user->setEnabled($options['enabled']);
-        $user->addRole('ROLE_ADMINISTRATION_ACCESS');
+        $user->addRole(AdminUserInterface::DEFAULT_ADMIN_ROLE);
         $user->setLocaleCode($options['locale_code']);
 
         if (isset($options['first_name'])) {
@@ -69,7 +69,7 @@ class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleF
         }
 
         if ($options['api']) {
-            $user->addRole('ROLE_API_ACCESS');
+            $user->addRole(AdminUserInterface::API_ACCESS_ROLE);
         }
 
         if ($options['avatar'] !== '') {

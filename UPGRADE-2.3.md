@@ -465,6 +465,80 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    | `ShippingBundle\...\ShippingMethodCalculatorExists` | `invalidShippingCalculator` | `invalidShippingCalculatorMessage` |
    | `ShippingBundle\...\ShippingMethodRule` | `invalidType` | `invalidTypeMessage` |
 
+3. Two new class-level constraints have been added to `Sylius\Component\Core\Model\AdminUser` (validation group `sylius`),
+   see the [Admin users](#admin-users) section for details:
+
+   - `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`
+   - `Sylius\Bundle\CoreBundle\Validator\Constraints\CannotRevokeOwnAdministrationAccess`
+
+## Admin users
+
+1. Admin users have two independent **access levels**, both backed by roles:
+
+   | Access level           | Role                          |
+   |------------------------|-------------------------------|
+   | Administration access  | `ROLE_ADMINISTRATION_ACCESS`  |
+   | API access             | `ROLE_API_ACCESS`             |
+
+   The `ROLE_API_ACCESS` role is available as `Sylius\Component\Core\Model\AdminUserInterface::API_ACCESS_ROLE`.
+
+2. The following methods have been added to `Sylius\Component\Core\Model\AdminUserInterface`:
+
+   ```php
+   public function hasAdministrationAccess(): bool;
+   public function setAdministrationAccess(bool $administrationAccess): void;
+   public function hasApiAccess(): bool;
+   public function setApiAccess(bool $apiAccess): void;
+   ```
+
+   If you have custom classes implementing this interface, you must add these methods. In
+   `Sylius\Component\Core\Model\AdminUser` they are implemented on top of the roles listed above.
+
+3. A new class-level constraint, `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`, has been added to
+   `Sylius\Component\Core\Model\AdminUser`. It requires every admin user to hold at least one of the
+   `ROLE_ADMINISTRATION_ACCESS` or `ROLE_API_ACCESS` roles.
+
+   If your installation has existing admin users with neither role assigned, saving/updating them (via the admin panel,
+   the API, or the `sylius:admin-user:create` command) will now fail validation until one of the two access levels is
+   granted.
+
+4. A new class-level constraint, `Sylius\Bundle\CoreBundle\Validator\Constraints\CannotRevokeOwnAdministrationAccess`,
+   has been added to `Sylius\Component\Core\Model\AdminUser`. It prevents an admin user that has been granted
+   administration access from revoking it on their own account, so that access to the admin panel cannot be lost
+   permanently.
+
+   It is validated by the `sylius.validator.cannot_revoke_own_administration_access` service, which relies on
+   `security.token_storage` and `security.authorization_checker`. Admin users authenticated without administration
+   access (for example API-only ones) are not affected, and neither are admin users edited by somebody else.
+
+5. The `Sylius\Bundle\AdminBundle\Command\CreateAdminUser` command has been extended with two optional constructor
+   arguments:
+
+   ```diff
+    public function __construct(
+        private string $email,
+        private string $username,
+        private ?string $firstName,
+        private ?string $lastName,
+        private string $plainPassword,
+        private string $localeCode,
+        private bool $enabled,
+   +    private bool $administrationAccess = true,
+   +    private bool $apiAccess = false,
+    )
+   ```
+
+   Their values are exposed by the new `hasAdministrationAccess()` and `hasApiAccess()` methods and are turned into
+   roles by `Sylius\Bundle\AdminBundle\CommandHandler\CreateAdminUserHandler`. The defaults keep the previous
+   behaviour, so dispatching the command without them creates an admin user with administration access only.
+
+   The interactive `sylius:admin-user:create` command now additionally asks for the access levels (multiselect,
+   administration access preselected) and shows them in the summary table.
+
+6. The `sylius_admin_user` form type (`Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType`) has two new checkbox
+   fields, `administrationAccess` and `apiAccess`, rendered by the `access_levels` form section. If you have overridden
+   the admin user form template, add them to your own layout.
+
 ## Payment
 
 1. The **Payment Request** feature is no longer **experimental**.
@@ -505,6 +579,29 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    If you have custom templates, reports or integrations that display a promotion total next to
    `getItemsSubtotal()`/`getSubtotal()`, switch them to `getOrderAndItemPromotionTotal()` to avoid the same
    double-counting. `getOrderPromotionTotal()` is unchanged and still returns the promotion's full effect.
+
+## Promotion
+
+1. New **opt-in per-channel** promotion rule and action types have been added. They let a single
+   promotion rule/action hold independent configuration per channel, with the `configuration` array
+   keyed by channel code (e.g. `['WEB_US' => ['count' => 2], 'WEB_GB' => ['count' => 5]]`):
+
+   - Rules: `cart_quantity_per_channel`, `customer_group_per_channel`, `nth_order_per_channel`,
+     `shipping_country_per_channel`, `has_taxon_per_channel`, `contains_product_per_channel`.
+   - Actions: `order_percentage_discount_per_channel`, `shipping_percentage_discount_per_channel`.
+
+   These are **additional** types registered alongside the existing plain ones. Existing promotions
+   and the plain rule/action types are unchanged, and **no core service is replaced**, so the change
+   is fully backward compatible and requires no action.
+
+   Implementation: two generic decorators in `Sylius\Component\Core\Promotion` unwrap the current
+   channel's configuration slice and delegate to the standard checker/command:
+
+   - `Sylius\Component\Core\Promotion\Checker\Rule\PerChannelRuleChecker`
+   - `Sylius\Component\Core\Promotion\Action\PerChannelPromotionActionCommand`
+
+   The admin forms use new `ChannelBased*ConfigurationType` form types built on top of
+   `Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType`.
 
 ## Deprecations
 

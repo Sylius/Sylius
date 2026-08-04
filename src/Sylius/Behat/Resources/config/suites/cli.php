@@ -17,6 +17,7 @@ return (new Config())
     ->import([
         'cli/canceling_unpaid_orders.php',
         'cli/change_admin_password.php',
+        'cli/create_admin_user.php',
         'cli/installer.php',
     ])
 ;

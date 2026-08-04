@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 use Sylius\Behat\Context\Cli\CancelUnpaidOrdersContext;
 use Sylius\Behat\Context\Cli\ChangeAdminPasswordContext;
+use Sylius\Behat\Context\Cli\CreateAdminUserContext;
 use Sylius\Behat\Context\Cli\InstallerContext;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -56,6 +57,14 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.admin_user'),
             service('security.user_password_hasher'),
             service('sylius.behat.shared_storage'),
+        ])
+    ;
+
+    $services
+        ->set('sylius.behat.context.cli.create_admin_user', CreateAdminUserContext::class)
+        ->args([
+            service('kernel'),
+            service('sylius.repository.admin_user'),
         ])
     ;
 };

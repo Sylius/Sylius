@@ -14,6 +14,7 @@ sylius:
         about: 'About'
         accept: 'Accept'
         accepted: 'Accepted'
+        access_levels: 'Access levels'
         access_token: 'Access Token'
         access_your_store_account_or_create_a_new_one: 'Access your store account or create a new one'
         account_credentials: 'Account credentials'
