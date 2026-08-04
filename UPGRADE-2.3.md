@@ -633,6 +633,14 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    | `SyliusCartEvents::CART_POST_CHANGE` | `sylius.cart_post_change` |
    | `SyliusCartEvents::CART_POST_CLEAR` | `sylius.cart_post_clear` |
 
+   > **Note:** because these events are dispatched after the flush, their subjects no longer carry the full picture,
+   > so the missing data is passed as event arguments:
+   >
+   > | Event | Why | Argument |
+   > |---|---|---|
+   > | `CART_ITEM_POST_REMOVE` | `CART_ITEM_REMOVE` triggers `OrderModifier::removeFromOrder()`, which calls `$orderItem->setOrder(null)`, so `$orderItem->getOrder()` returns `null` | `$event->getArgument('cart')` |
+   > | `CART_POST_CLEAR` | Doctrine resets the identifier of a removed entity on flush, so `$cart->getId()` returns `null` | `$event->getArgument('cartId')` |
+
    Example usage — sending a cart to an external service only after it is stored:
 
    ```php
