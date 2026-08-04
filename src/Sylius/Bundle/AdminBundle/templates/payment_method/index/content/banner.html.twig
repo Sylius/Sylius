@@ -1,0 +1,12 @@
+<div class="container-xl">
+    <div
+        id="sylius-payment-methods-banner"
+        class="carousel slide carousel-vertical sylius-payment-methods-banner mb-4"
+        data-bs-ride="carousel"
+        {{ sylius_test_html_attribute('payment-methods-banner') }}
+    >
+        <div class="carousel-inner p-1">
+            {% hook 'banner' %}
+        </div>
+    </div>
+</div>

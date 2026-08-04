@@ -1,0 +1,86 @@
+{% import '@SyliusAdmin/shared/helper/field/boolean.html.twig' as boolean %}
+
+{% set resource_id = resource_id is defined ? resource_id : null %}
+
+<div
+    class="payment-method-list__item {{ suggested|default(false) ? 'payment-method-list__item--suggested' }} d-flex align-items-center gap-3"
+    {% if resource_id is not null %}{{ sylius_test_html_attribute('row') }} {{ sylius_test_html_attribute('resource-id', resource_id) }}{% endif %}
+>
+    <div class="payment-method-list__select flex-shrink-0">
+        {% if checkbox_value is defined and checkbox_value is not null %}
+            <input data-check-all-group="index" class="form-check-input mt-0" type="checkbox" value="{{ checkbox_value }}">
+        {% endif %}
+    </div>
+
+    <div class="payment-method-list__position flex-shrink-0 d-flex justify-content-center">
+        {% if position is defined and position is not null %}
+            <span class="badge bg-blue-lt">{{ position }}</span>
+        {% endif %}
+    </div>
+
+    <div class="payment-method-list__logo flex-shrink-0 d-flex align-items-center justify-content-center overflow-hidden p-2">
+        {% if logo is defined and logo is not null %}
+            <img src="{{ logo }}" alt="{{ name }}">
+        {% else %}
+            {{ ux_icon('tabler:credit-card', { class: 'payment-method-list__logo-icon' }) }}
+        {% endif %}
+    </div>
+
+    <div class="payment-method-list__content d-flex flex-column gap-3">
+        <div class="payment-method-list__heading">
+            <h3 class="payment-method-list__name m-0 fw-semibold">
+                {{ name }}
+                {% if suggested is defined and suggested %}
+                    <span class="badge bg-blue-lt ms-2 align-middle">{{ 'sylius.ui.suggested'|trans }}</span>
+                {% endif %}
+            </h3>
+            {% if description is defined and description is not empty %}
+                <p class="payment-method-list__description mt-1 mb-0">{{ description }}</p>
+            {% endif %}
+        </div>
+
+        {% if methods is defined and methods is not empty %}
+            <div class="d-flex flex-wrap gap-2">
+                {% for method in methods %}
+                    <span class="payment-method-list__method d-inline-flex align-items-center justify-content-center">
+                        <img src="{{ asset('build/admin/images/' ~ method ~ '.svg', 'admin') }}" alt="{{ method|replace({'_': ' '})|title }}">
+                    </span>
+                {% endfor %}
+                {% if methods_more is defined and methods_more %}
+                    <span class="payment-method-list__method payment-method-list__method--more d-inline-flex align-items-center justify-content-center px-1 fw-semibold">+ {{ 'sylius.ui.more'|trans }}</span>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="payment-method-list__meta d-flex flex-wrap align-items-center gap-4 fw-medium">
+            {% if code is defined and code is not null %}
+                <span class="d-inline-flex align-items-center gap-2">
+                    {{ 'sylius.ui.code'|trans }}: <code class="payment-method-list__code px-2 py-1">{{ code }}</code>
+                </span>
+            {% endif %}
+            {% if gateway is defined and gateway is not null %}
+                <span class="d-inline-flex align-items-center gap-2">
+                    {{ 'sylius.ui.gateway'|trans }}: <span>{{ gateway }}</span>
+                </span>
+            {% endif %}
+            {% if enabled is defined and enabled is not null %}
+                <span class="d-inline-flex align-items-center gap-2">
+                    {{ 'sylius.ui.enabled'|trans }}: {{ boolean.default(enabled) }}
+                </span>
+            {% endif %}
+        </div>
+    </div>
+
+    <div
+        class="payment-method-list__actions d-flex align-items-center gap-2 flex-shrink-0"
+        {% if resource_id is not null %}{{ sylius_test_html_attribute('actions') }}{% endif %}
+    >
+        {% if actions is defined and actions is not null %}
+            {{ actions }}
+        {% else %}
+            <button type="button" class="btn">
+                {{ ux_icon('tabler:settings', { class: 'icon' }) }} {{ 'sylius.ui.configure'|trans }}
+            </button>
+        {% endif %}
+    </div>
+</div>

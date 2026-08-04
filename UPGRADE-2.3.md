@@ -620,6 +620,34 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Existing subclasses overriding this method with the `RedirectResponse` return type remain valid thanks to
    return type covariance and require no changes.
 
+## Admin
+
+1. The **payment methods grid** template has been redesigned.
+
+   The grid is no longer rendered with the default data table template. It now uses a dedicated template
+   `@SyliusAdmin/payment_method/index/content/grid/data_table.html.twig`, registered under the
+   `sylius_admin.payment_method.index.content.grid` hook. If you customized the payment methods listing by
+   overriding the previous template or its markup, review your customization against the new template and its
+   partials (`content/grid/data_table/`).
+
+2. **Suggested payment methods banners** have been added to the payment methods index page.
+
+   A carousel of banners promoting payment plugins (Stripe, PayPal, Adyen, Mollie) is now rendered above the grid.
+   Each banner is a Twig hookable defined in
+   `src/Sylius/Bundle/AdminBundle/Resources/config/app/twig_hooks/payment_method/index.yaml`.
+
+   You can disable the whole banners carousel by disabling the `banner` hook in your application's Twig hooks
+   configuration:
+
+   ```yaml
+   # config/packages/sylius_twig_hooks.yaml
+   sylius_twig_hooks:
+       hooks:
+           'sylius_admin.payment_method.index.content':
+               banner:
+                   enabled: false
+   ```
+
 ## Deprecations
 
 1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.

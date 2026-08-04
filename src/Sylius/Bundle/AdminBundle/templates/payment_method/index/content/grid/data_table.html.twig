@@ -1,0 +1,67 @@
+{% import '@SyliusAdmin/shared/helper/pagination.html.twig' as pagination %}
+
+{% set grid = hookable_metadata.context.resources|default(null) %}
+{% set data = grid.data|default([]) %}
+{% set definition = grid.definition|default(null) %}
+
+{% set has_bulk_actions = definition is not null and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+{% set has_item_actions = definition is not null and definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
+
+<div class="card">
+    {% if data|length > 0 %}
+        <div class="card-body border-bottom py-3">
+            <div class="d-flex align-items-center">
+                {% if has_bulk_actions %}
+                    <input data-check-all="index" type="checkbox" class="form-check-input mt-0 me-3">
+                    <div class="sylius-grid-nav__bulk grid">
+                        {% for action in definition.getEnabledActions('bulk') %}
+                            {{ sylius_grid_render_bulk_action(grid, action, null) }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="ms-auto">
+                    {{ pagination.number_of_results_selector(data, definition.limits) }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="payment-method-list" {{ sylius_test_html_attribute('grid-table-body') }}>
+        <div class="payment-method-list__suggested">
+            {% hook 'data_table#suggested' %}
+        </div>
+
+        {% for row in data %}
+            {% set actions %}
+                {% if has_item_actions %}
+                    {% for action in definition.getEnabledActions('item')|sylius_sort_by('position') %}
+                        {{ sylius_grid_render_action(grid, action, row) }}
+                    {% endfor %}
+                {% endif %}
+            {% endset %}
+
+            {% include '@SyliusAdmin/payment_method/index/content/grid/data_table/_item.html.twig' with {
+                position: row.position,
+                name: row.name,
+                description: row.description,
+                code: row.code,
+                gateway: row.gatewayConfig is not null ? row.gatewayConfig.factoryName|humanize : null,
+                enabled: row.enabled,
+                actions: actions,
+                checkbox_value: has_bulk_actions ? row.id : null,
+                resource_id: row.id|default(null),
+            } only %}
+        {% endfor %}
+    </div>
+
+    {% if data|length > 0 %}
+        <div class="card-footer d-flex align-items-center gap-2 flex-wrap">
+            <div class="text-muted">
+                {{ pagination.results_count(data) }}
+            </div>
+            <div class="ms-auto">
+                {{ pagination.simple(data) }}
+            </div>
+        </div>
+    {% endif %}
+</div>

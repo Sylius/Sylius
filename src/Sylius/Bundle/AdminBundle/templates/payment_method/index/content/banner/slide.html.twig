@@ -1,0 +1,39 @@
+{% set banner = hookable_metadata.configuration %}
+
+<div class="carousel-item sylius-payment-methods-banner__slide sylius-payment-methods-banner__slide--{{ banner.variant }} {{ banner.active|default(false) ? 'active' }}">
+    <div class="d-flex flex-column flex-xl-row align-items-xl-center gap-4 gap-xl-5 p-4 p-xl-6">
+        <div class="d-flex flex-column flex-lg-row align-items-lg-center flex-grow-1 gap-4">
+            <div class="sylius-payment-methods-banner__logo flex-shrink-0 d-flex align-items-center justify-content-center p-3">
+                <img src="{{ asset(banner.image, 'admin') }}" alt="{{ banner.title|trans }}">
+            </div>
+            <div class="sylius-payment-methods-banner__content flex-shrink-0">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <h3 class="sylius-payment-methods-banner__title m-0">{{ banner.title|trans }}</h3>
+                </div>
+                <p class="sylius-payment-methods-banner__description m-0">{{ banner.description|trans }}</p>
+            </div>
+            <div class="sylius-payment-methods-banner__methods flex-grow-1 d-flex flex-wrap align-items-center">
+                {% for code in banner.payment_methods|default([]) %}
+                    <span class="sylius-payment-methods-banner__method d-inline-flex align-items-center justify-content-center py-1 px-2">
+                        <img src="{{ asset('build/admin/images/' ~ code ~ '.svg', 'admin') }}" alt="{{ code|replace({'_': ' '})|title }}">
+                    </span>
+                {% endfor %}
+                {% if banner.payment_methods_more|default(false) %}
+                    <span class="sylius-payment-methods-banner__method sylius-payment-methods-banner__method--more d-inline-flex align-items-center justify-content-center py-1 px-2 fw-semibold">+ {{ 'sylius.ui.more'|trans }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="sylius-payment-methods-banner__actions d-flex flex-row flex-xl-column gap-3 flex-shrink-0">
+            <a href="{{ banner.plugin_url }}" class="btn sylius-payment-methods-banner__btn-primary" target="_blank" rel="noopener noreferrer">
+                {% if banner.is_installed|default(false) %}
+                    {{ ux_icon('tabler:settings', { class: 'icon' }) }} {{ 'sylius.ui.configure'|trans }}
+                {% else %}
+                    {{ ux_icon('tabler:download', { class: 'icon' }) }} {{ 'sylius.ui.get_plugin'|trans }}
+                {% endif %}
+            </a>
+            <a href="{{ banner.documentation_url }}" class="btn" target="_blank" rel="noopener noreferrer">
+                {{ 'sylius.ui.view_documentation'|trans }}
+            </a>
+        </div>
+    </div>
+</div>
