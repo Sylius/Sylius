@@ -28,8 +28,10 @@
                         </constraint>
                     </value>
                     <value key="comparison_operator">
-                        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\ComparisonOperatorExists">
-                            <option name="groups">sylius_promotion_rule_cart_quantity</option>
+                        <constraint name="Optional">
+                            <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\ComparisonOperatorExists">
+                                <option name="groups">sylius_promotion_rule_cart_quantity</option>
+                            </constraint>
                         </constraint>
                     </value>
                 </option>
@@ -128,11 +130,6 @@
                                     <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
                                 </constraint>
                             </value>
-                            <value key="comparison_operator">
-                                <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\ComparisonOperatorExists">
-                                    <option name="groups">sylius_promotion_rule_item_total</option>
-                                </constraint>
-                            </value>
                             <value key="taxon">
                                 <constraint name="NotBlank">
                                     <option name="groups">sylius_promotion_rule_total_of_items_from_taxon</option>
@@ -182,6 +179,13 @@
                                 <constraint name="Type">
                                     <option name="type">numeric</option>
                                     <option name="groups">sylius_promotion_rule_item_total</option>
+                                </constraint>
+                            </value>
+                            <value key="comparison_operator">
+                                <constraint name="Optional">
+                                    <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\ComparisonOperatorExists">
+                                        <option name="groups">sylius_promotion_rule_item_total</option>
+                                    </constraint>
                                 </constraint>
                             </value>
                         </option>

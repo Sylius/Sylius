@@ -330,6 +330,15 @@ final class PromotionsTest extends JsonApiTestCase
                         'configuration' => [],
                     ],
                     [
+                        'type' => ItemTotalRuleChecker::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'amount' => 1000,
+                                'comparison_operator' => 'invalid',
+                            ],
+                        ],
+                    ],
+                    [
                         'type' => 'wrong_type',
                         'configuration' => [],
                     ],
