@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Behat\Hook\BeforeScenario;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\Platform\PlatformHelper;
 
 final class DoctrineORMContext implements Context
 {
@@ -33,12 +34,18 @@ final class DoctrineORMContext implements Context
             $configuration->setSQLLogger(null);
         }
 
-        $connection->executeStatement('SET foreign_key_checks = 0');
+        $isMysql = PlatformHelper::isMysql($connection->getDatabasePlatform());
+        if ($isMysql) {
+            $connection->executeStatement('SET foreign_key_checks = 0');
+        }
+
         try {
             $purger = new ORMPurger($this->entityManager);
             $purger->purge();
         } finally {
-            $connection->executeStatement('SET foreign_key_checks = 1');
+            if ($isMysql) {
+                $connection->executeStatement('SET foreign_key_checks = 1');
+            }
         }
 
         $this->entityManager->clear();
