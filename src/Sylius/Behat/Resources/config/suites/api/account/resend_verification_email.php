@@ -17,8 +17,10 @@ use Behat\Config\Profile;
 use Behat\Config\Suite;
 
 return (new Config())
-    ->withProfile((new Profile('default'))
-        ->withSuite((new Suite('api_resend_verification_email', [
+    ->withProfile(
+        (new Profile('default'))
+        ->withSuite(
+            (new Suite('api_resend_verification_email', [
             'javascript' => false,
         ]))
             ->withContexts(
@@ -41,7 +43,7 @@ return (new Config())
                 'sylius.behat.context.api.shop.customer',
                 'sylius.behat.context.api.shop.login',
             )
-            ->withFilter(new TagFilter('@resend_verification_email&&@api'))
-        )
+            ->withFilter(new TagFilter('@resend_verification_email&&@api')),
+        ),
     )
 ;

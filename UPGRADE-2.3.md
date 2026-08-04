@@ -84,7 +84,7 @@
 
 1. When an unverified account tries to log in with valid credentials on a channel that requires account verification, the login page now shows a one-click "resend verification email" action instead of a separate request form.
 
-   - A new `resend_verification_email` hookable (priority `-50`) is added to the login page container hook `sylius_shop.account.login.content.login_container`. It renders a `POST` form (CSRF-protected) that submits to `sylius_shop_resend_verification_email`.
+   - A new `resend_verification_email` hookable (priority `-100`) is added to the login page container hook `sylius_shop.account.login.content.login_container`. It renders a `POST` form (CSRF-protected) that submits to `sylius_shop_resend_verification_email`.
    - The `sylius_shop_resend_verification_email` route is now `POST`-only and handled by `ResendVerificationEmailController::resendAction()`. It re-sends the verification email to the last authenticated email (read from the session), then redirects back to the login page. There is no standalone resend page or form.
 
 ## Configuration

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\CommandHandler\Account;
 
+use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -20,7 +21,6 @@ use Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\CoreBundle\CommandHandler\Account\ResendVerificationEmailHandler;
 use Sylius\Bundle\CoreBundle\Mailer\Emails as CoreEmails;
 use Sylius\Bundle\UserBundle\Mailer\Emails as UserEmails;
-use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -40,9 +40,9 @@ final class ResendVerificationEmailHandlerTest extends TestCase
 
     private GeneratorInterface&MockObject $tokenGenerator;
 
-    private SenderInterface&MockObject $emailSender;
+    private MockObject&SenderInterface $emailSender;
 
-    private ObjectManager&MockObject $shopUserManager;
+    private MockObject&ObjectManager $shopUserManager;
 
     private ResendVerificationEmailHandler $handler;
 

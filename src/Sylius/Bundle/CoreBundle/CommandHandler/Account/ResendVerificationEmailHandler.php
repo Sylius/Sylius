@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CommandHandler\Account;
 
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail;
 use Sylius\Bundle\CoreBundle\Mailer\Emails as CoreEmails;
 use Sylius\Bundle\UserBundle\Mailer\Emails as UserEmails;
-use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
