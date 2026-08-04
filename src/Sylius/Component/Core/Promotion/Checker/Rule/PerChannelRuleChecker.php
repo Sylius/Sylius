@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 final class PerChannelRuleChecker implements RuleCheckerInterface
 {
-    public function __construct(private RuleCheckerInterface $decorated)
+    public function __construct(private RuleCheckerInterface $ruleChecker)
     {
     }
 
@@ -36,7 +36,7 @@ final class PerChannelRuleChecker implements RuleCheckerInterface
         }
 
         $channel = $subject->getChannel();
-        if ($channel === null) {
+        if (null === $channel) {
             return false;
         }
 
@@ -45,6 +45,6 @@ final class PerChannelRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $this->decorated->isEligible($subject, $configuration[$channelCode]);
+        return $this->ruleChecker->isEligible($subject, $configuration[$channelCode]);
     }
 }

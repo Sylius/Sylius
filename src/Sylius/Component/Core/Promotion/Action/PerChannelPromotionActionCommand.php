@@ -21,7 +21,7 @@ use Sylius\Resource\Exception\UnexpectedTypeException;
 
 final class PerChannelPromotionActionCommand implements PromotionActionCommandInterface
 {
-    public function __construct(private PromotionActionCommandInterface $decorated)
+    public function __construct(private PromotionActionCommandInterface $promotionActionCommand)
     {
     }
 
@@ -33,7 +33,7 @@ final class PerChannelPromotionActionCommand implements PromotionActionCommandIn
         }
 
         $channel = $subject->getChannel();
-        if ($channel === null) {
+        if (null === $channel) {
             return false;
         }
 
@@ -42,7 +42,7 @@ final class PerChannelPromotionActionCommand implements PromotionActionCommandIn
             return false;
         }
 
-        return $this->decorated->execute($subject, $configuration[$channelCode], $promotion);
+        return $this->promotionActionCommand->execute($subject, $configuration[$channelCode], $promotion);
     }
 
     /** @param array<string, mixed> $configuration */
@@ -53,7 +53,7 @@ final class PerChannelPromotionActionCommand implements PromotionActionCommandIn
         }
 
         $channel = $subject->getChannel();
-        if ($channel === null) {
+        if (null === $channel) {
             return;
         }
 
@@ -62,6 +62,6 @@ final class PerChannelPromotionActionCommand implements PromotionActionCommandIn
             return;
         }
 
-        $this->decorated->revert($subject, $configuration[$channelCode], $promotion);
+        $this->promotionActionCommand->revert($subject, $configuration[$channelCode], $promotion);
     }
 }
