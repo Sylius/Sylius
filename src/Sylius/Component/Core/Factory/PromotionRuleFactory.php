@@ -40,13 +40,11 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->decoratedFactory->createNew();
     }
 
-    /** @deprecated The optional $comparisonOperator argument will be added to the interface in Sylius 3.0. */
     public function createCartQuantity(int $count, string $comparisonOperator = ComparisonOperatorMatcherInterface::DEFAULT_COMPARISON_OPERATOR): PromotionRuleInterface
     {
         return $this->createPromotionRule(CartQuantityRuleChecker::TYPE, ['count' => $count, 'comparison_operator' => $comparisonOperator]);
     }
 
-    /** @deprecated The optional $comparisonOperator argument will be added to the interface in Sylius 3.0. */
     public function createItemTotal(string $channelCode, int $amount, string $comparisonOperator = ComparisonOperatorMatcherInterface::DEFAULT_COMPARISON_OPERATOR): PromotionRuleInterface
     {
         return $this->createPromotionRule(ItemTotalRuleChecker::TYPE, [$channelCode => ['amount' => $amount, 'comparison_operator' => $comparisonOperator]]);
