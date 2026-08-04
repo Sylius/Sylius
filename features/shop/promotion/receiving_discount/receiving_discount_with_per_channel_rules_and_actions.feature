@@ -16,7 +16,7 @@ Feature: Receiving discount with promotion rules and actions configured independ
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @api @todo-ui
+    @api @ui
     Scenario: Receiving an order percentage discount configured independently per channel
         Given the promotion gives "10%" discount to every order in the "Web-US" channel and "5%" discount to every order in the "Web-GB" channel
         When I changed my current channel to "Web-US"
@@ -25,7 +25,7 @@ Feature: Receiving discount with promotion rules and actions configured independ
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @api @todo-ui
+    @api @ui
     Scenario: Order percentage discount applies the value configured for the current channel
         Given the promotion gives "10%" discount to every order in the "Web-US" channel and "5%" discount to every order in the "Web-GB" channel
         When I changed my current channel to "Web-GB"
@@ -34,7 +34,7 @@ Feature: Receiving discount with promotion rules and actions configured independ
         Then my cart total should be "£76.00"
         And my discount should be "-£4.00"
 
-    @api @todo-ui
+    @api @ui
     Scenario: Receiving a discount when the cart contains the product configured for the current channel
         Given the promotion gives "$10.00" discount to every order in the "Web-US" channel and "£5.00" discount to every order in the "Web-GB" channel
         And the promotion applies to orders containing product "PHP T-Shirt" in the "Web-US" channel and product "Symfony T-Shirt" in the "Web-GB" channel
@@ -44,7 +44,7 @@ Feature: Receiving discount with promotion rules and actions configured independ
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @api @todo-ui
+    @api @ui
     Scenario: Receiving a discount when the cart has a product from the taxon configured for the current channel
         Given the promotion gives "$10.00" discount to every order in the "Web-US" channel and "£5.00" discount to every order in the "Web-GB" channel
         And the promotion applies to orders with a product from taxon "T-Shirts" in the "Web-US" channel and from taxon "Mugs" in the "Web-GB" channel
