@@ -622,7 +622,17 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
 ## Deprecations
 
-1. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
+1. Not passing a `Symfony\Contracts\Translation\TranslatorInterface` to `Sylius\Component\User\Security\Checker\EnabledUserChecker` is deprecated since Sylius 2.3 and will be required in Sylius 3.0.
+
+   ```diff
+   -public function __construct()
+   +public function __construct(private readonly ?TranslatorInterface $translator = null)
+   ```
+
+   > **Deprecated:** When a translator is provided, the "account is disabled" message shown during authentication uses the new `sylius.user.account_disabled` translation key (`validators` domain).
+   > Without it, the checker falls back to the original `DisabledException('User account is disabled.')` behavior.
+
+2. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
    Implement `Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface` instead, which extends `ProductVariantPricesCalculatorInterface` with no additional methods.
    It will be required in Sylius 3.0.
 

@@ -141,6 +141,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.user_checker.enabled', EnabledUserChecker::class)
+        ->args([service('translator')])
         ->tag('security.user_checker.admin', ['priority' => 100])
         ->tag('security.user_checker.api_admin', ['priority' => 100])
         ->tag('security.user_checker.api_shop', ['priority' => 100])
