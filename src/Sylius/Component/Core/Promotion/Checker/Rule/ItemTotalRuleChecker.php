@@ -26,6 +26,15 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface
 
     public function __construct(private ?ComparisonOperatorMatcherInterface $comparisonOperatorMatcher = null)
     {
+        if (null === $this->comparisonOperatorMatcher) {
+            trigger_deprecation(
+                'sylius/core',
+                '2.3',
+                'Not passing a "%s" to "%s" is deprecated and will be required in Sylius 3.0.',
+                ComparisonOperatorMatcherInterface::class,
+                self::class,
+            );
+        }
     }
 
     /**
