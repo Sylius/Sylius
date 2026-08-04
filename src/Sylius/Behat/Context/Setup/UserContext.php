@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Webmozart\Assert\Assert;
 
 final readonly class UserContext implements Context
 {
@@ -46,6 +47,7 @@ final readonly class UserContext implements Context
     {
         /** @var ShopUserInterface $user */
         $user = $this->userFactory->create(['email' => $email, 'password' => $this->replaceWithSecurePassword($password), 'enabled' => true]);
+        $user->setVerifiedAt(new \DateTime());
 
         $this->sharedStorage->set('user', $user);
 
@@ -70,6 +72,7 @@ final readonly class UserContext implements Context
     {
         /** @var ShopUserInterface $user */
         $user = $this->userFactory->create(['email' => $email, 'password' => $this->replaceWithSecurePassword($password), 'enabled' => true]);
+        $user->setVerifiedAt(new \DateTime());
 
         $user->setCustomer($this->sharedStorage->get('customer'));
         $this->sharedStorage->set('user', $user);
@@ -124,6 +127,17 @@ final readonly class UserContext implements Context
     #[Given('/^(I) have already verified my account$/')]
     public function iHaveAlreadyVerifiedMyAccount(UserInterface $user): void
     {
+        $user->setVerifiedAt(new \DateTime());
+
+        $this->userManager->flush();
+    }
+
+    #[Given('the account of :email has been verified')]
+    public function theAccountOfHasBeenVerified(string $email): void
+    {
+        $user = $this->userRepository->findOneByEmail($email);
+        Assert::notNull($user);
+
         $user->setVerifiedAt(new \DateTime());
 
         $this->userManager->flush();

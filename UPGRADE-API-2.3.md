@@ -1,5 +1,21 @@
 # UPGRADE FROM `2.2` TO `2.3`
 
+## New Endpoints
+
+### Resend Verification Email
+A new shop endpoint has been added, allowing customers to request a new account verification email:
+
+**`POST /api/v2/shop/customers/verification-request`**
+
+Request body:
+
+| Field        | Type   | Required | Description                                                                 |
+|--------------|--------|----------|-----------------------------------------------------------------------------|
+| `email`      | string | Yes      | The customer's email address.                                               |
+| `localeCode` | string | No       | Locale for the email (e.g. `en_US`). Defaults to the current channel locale. |
+
+Returns `202 Accepted` on success (regardless of whether the email was sent).
+
 ## Admin API
 
 1. The `Administrator` resource exposes two new boolean properties, `administrationAccess` and `apiAccess`, which

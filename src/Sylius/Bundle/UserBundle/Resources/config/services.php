@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\Security\Checker\EmailVerificationUserChecker;
+use Sylius\Bundle\CoreBundle\Security\Checker\VerificationAwareEnabledUserChecker;
 use Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler;
 use Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler;
 use Sylius\Bundle\UserBundle\Console\Command\DemoteUserCommand;
@@ -140,8 +142,22 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.user_checker.enabled', EnabledUserChecker::class)
         ->tag('security.user_checker.admin', ['priority' => 100])
-        ->tag('security.user_checker.shop', ['priority' => 100])
         ->tag('security.user_checker.api_admin', ['priority' => 100])
         ->tag('security.user_checker.api_shop', ['priority' => 100])
+    ;
+
+    $services
+        ->set('sylius.user_checker.verification_aware_enabled', VerificationAwareEnabledUserChecker::class)
+        ->args([
+            service('sylius.user_checker.enabled'),
+            service('sylius.context.channel'),
+        ])
+        ->tag('security.user_checker.shop', ['priority' => 100])
+    ;
+
+    $services
+        ->set('sylius.user_checker.email_verification', EmailVerificationUserChecker::class)
+        ->args([service('sylius.context.channel')])
+        ->tag('security.user_checker.shop', ['priority' => 50])
     ;
 };

@@ -213,6 +213,9 @@ final class CustomerContext implements Context
         $user->setUsername($email);
         $user->setPlainPassword($this->replaceWithSecurePassword($password));
         $user->setEnabled($enabled);
+        if ($enabled) {
+            $user->setVerifiedAt(new \DateTime());
+        }
         if (null !== $role) {
             $user->addRole($role);
         }

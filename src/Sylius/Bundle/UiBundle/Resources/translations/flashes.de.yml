@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: 'Eine Kategorie, die von einer Aktionsregel verwendet wird, kann nicht gelöscht werden.'
         menu_taxon_delete: 'Sie können keine Produktklassifikation eines Kanals löschen.'
+    user:
+        verification_email_sent: 'Falls die eingegebene E-Mail-Adresse mit einem Konto verknüpft ist, wurde eine Bestätigungs-E-Mail gesendet.'

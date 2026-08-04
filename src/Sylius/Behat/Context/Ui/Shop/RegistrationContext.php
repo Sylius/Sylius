@@ -189,7 +189,7 @@ class RegistrationContext implements Context
     {
         $this->iLogInAsWithPassword($email, $password);
 
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
+        Assert::false($this->homePage->hasLogoutButton());
     }
 
     #[When('I log in as :email with :password password')]
@@ -199,6 +199,18 @@ class RegistrationContext implements Context
         $this->loginPage->specifyUsername($email);
         $this->loginPage->specifyPassword($password);
         $this->loginPage->logIn();
+    }
+
+    #[Then('I should see the resend verification email link')]
+    public function iShouldSeeTheResendVerificationEmailLink(): void
+    {
+        Assert::true($this->loginPage->hasResendVerificationEmailLink());
+    }
+
+    #[When('I resend the verification email from the login page')]
+    public function iResendTheVerificationEmailFromTheLoginPage(): void
+    {
+        $this->loginPage->resendVerificationEmail();
     }
 
     #[When('I register with email :email and password :password')]
@@ -293,6 +305,15 @@ class RegistrationContext implements Context
         );
     }
 
+    #[Then('I should be notified that the verification email has been sent to the provided address')]
+    public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSentToTheProvidedAddress(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'If the email address you entered is associated with an account, a verification email has been sent.',
+            NotificationType::success(),
+        );
+    }
+
     #[When('I subscribe to the newsletter')]
     public function iSubscribeToTheNewsletter(): void
     {
@@ -318,6 +339,12 @@ class RegistrationContext implements Context
     public function iShouldBeOnMyAccountDashboard(): void
     {
         Assert::true($this->dashboardPage->isOpen());
+    }
+
+    #[Then('I should be notified that my account has not been verified')]
+    public function iShouldBeNotifiedThatMyAccountHasNotBeenVerified(): void
+    {
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Your account has not been verified yet. Please check your email inbox.'));
     }
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void

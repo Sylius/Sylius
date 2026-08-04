@@ -1,5 +1,16 @@
 # UPGRADE FROM `2.2` TO `2.3`
 
+## Security
+
+1. The `sylius.user_checker.enabled` service (`Sylius\Component\User\Security\Checker\EnabledUserChecker`) is **no longer tagged** for the `shop` firewall.
+
+   It has been replaced by two new checkers on the `shop` firewall:
+
+   - `sylius.user_checker.verification_aware_enabled` (`Sylius\Bundle\CoreBundle\Security\Checker\VerificationAwareEnabledUserChecker`, priority 100) — behaves like `EnabledUserChecker` except it allows users with a pending email verification (channel requires verification and `verifiedAt` is `null`) to pass the pre-authentication check, so the password is validated and the "not verified" message is shown.
+   - `sylius.user_checker.email_verification` (`Sylius\Bundle\CoreBundle\Security\Checker\EmailVerificationUserChecker`, priority 50) — throws a `sylius.user.email_not_verified` error after successful password validation when the user has not verified their email on a channel that requires verification.
+
+   If you have decorated or replaced `sylius.user_checker.enabled` specifically for the `shop` firewall, migrate your customization to `sylius.user_checker.verification_aware_enabled` instead.
+
 ## Promotions
 
 1. A new `trackUsage` field has been added to promotions and promotion coupons. ([#18966](https://github.com/Sylius/Sylius/pull/18966))
@@ -55,6 +66,26 @@
    // After
    $repository->countByCustomerAndCouponSince($customer, $coupon, null);
    ```
+
+## Messenger
+
+1. A new `Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail` message has been introduced. ([#19002](https://github.com/Sylius/Sylius/pull/19002))
+
+   If you use an async transport, add the routing configuration:
+
+   ```yaml
+   framework:
+       messenger:
+           routing:
+               'Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail': your_async_transport
+   ```
+
+## Shop
+
+1. When an unverified account tries to log in with valid credentials on a channel that requires account verification, the login page now shows a one-click "resend verification email" action instead of a separate request form.
+
+   - A new `resend_verification_email` hookable (priority `-100`) is added to the login page container hook `sylius_shop.account.login.content.login_container`. It renders a `POST` form (CSRF-protected) that submits to `sylius_shop_resend_verification_email`.
+   - The `sylius_shop_resend_verification_email` route is now `POST`-only and handled by `ResendVerificationEmailController::resendAction()`. It re-sends the verification email to the last authenticated email (read from the session), then redirects back to the login page. There is no standalone resend page or form.
 
 ## Configuration
 

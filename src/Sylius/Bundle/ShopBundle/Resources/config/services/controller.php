@@ -17,6 +17,7 @@ use Sylius\Bundle\ShopBundle\Controller\ContactController;
 use Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController;
 use Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController;
 use Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController;
+use Sylius\Bundle\ShopBundle\Controller\ResendVerificationEmailController;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -50,6 +51,18 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('sylius.provider.locale'),
             service('sylius_shop.locale_switcher'),
+        ])
+    ;
+
+    $services
+        ->set('sylius_shop.controller.resend_verification_email', ResendVerificationEmailController::class)
+        ->args([
+            service('router'),
+            service('sylius.context.channel'),
+            service('sylius.context.locale'),
+            service('sylius.command_bus'),
+            service('security.authentication_utils'),
+            service('security.csrf.token_manager'),
         ])
     ;
 

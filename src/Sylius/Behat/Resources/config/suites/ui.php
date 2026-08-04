@@ -20,6 +20,7 @@ return (new Config())
         'ui/account/customer_registration.php',
         'ui/account/email_verification.php',
         'ui/account/login.php',
+        'ui/account/resend_verification_email.php',
         'ui/addressing/managing_countries.php',
         'ui/addressing/managing_zones.php',
         'ui/admin/dashboard.php',
