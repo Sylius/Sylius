@@ -15,6 +15,8 @@ namespace Sylius\Component\Promotion\Checker\Comparison;
 
 interface ComparisonOperatorMatcherInterface
 {
+    public const DEFAULT_COMPARISON_OPERATOR = '>=';
+
     /**
      * @return array<string, string>
      */

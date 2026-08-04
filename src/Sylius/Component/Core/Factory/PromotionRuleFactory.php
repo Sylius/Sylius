@@ -19,6 +19,7 @@ use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcherInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
@@ -39,12 +40,14 @@ final class PromotionRuleFactory implements PromotionRuleFactoryInterface
         return $this->decoratedFactory->createNew();
     }
 
-    public function createCartQuantity(int $count, string $comparisonOperator = '>='): PromotionRuleInterface
+    /** @deprecated The optional $comparisonOperator argument will be added to the interface in Sylius 3.0. */
+    public function createCartQuantity(int $count, string $comparisonOperator = ComparisonOperatorMatcherInterface::DEFAULT_COMPARISON_OPERATOR): PromotionRuleInterface
     {
         return $this->createPromotionRule(CartQuantityRuleChecker::TYPE, ['count' => $count, 'comparison_operator' => $comparisonOperator]);
     }
 
-    public function createItemTotal(string $channelCode, int $amount, string $comparisonOperator = '>='): PromotionRuleInterface
+    /** @deprecated The optional $comparisonOperator argument will be added to the interface in Sylius 3.0. */
+    public function createItemTotal(string $channelCode, int $amount, string $comparisonOperator = ComparisonOperatorMatcherInterface::DEFAULT_COMPARISON_OPERATOR): PromotionRuleInterface
     {
         return $this->createPromotionRule(ItemTotalRuleChecker::TYPE, [$channelCode => ['amount' => $amount, 'comparison_operator' => $comparisonOperator]]);
     }

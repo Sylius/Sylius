@@ -29,7 +29,7 @@ final class ComparisonOperatorMatcher implements ComparisonOperatorMatcherInterf
 
     public function getDefaultComparisonOperator(): string
     {
-        return '>=';
+        return self::DEFAULT_COMPARISON_OPERATOR;
     }
 
     public function match(int $subjectValue, int $configuredValue, string $comparisonOperator): bool
