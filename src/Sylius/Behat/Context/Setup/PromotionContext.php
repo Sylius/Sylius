@@ -430,6 +430,72 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
+    #[Given('/^([^"]+) gives ("[^"]+%") discount to every order in the ("[^"]+" channel) and ("[^"]+%") discount to every order in the ("[^"]+" channel)$/')]
+    public function thisPromotionGivesPercentageDiscountToEveryOrderInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        float $firstDiscount,
+        ChannelInterface $firstChannel,
+        float $secondDiscount,
+        ChannelInterface $secondChannel,
+    ): void {
+        $action = $this->actionFactory->createNew();
+        $action->setType('order_percentage_discount_per_channel');
+        $action->setConfiguration([
+            $firstChannel->getCode() => ['percentage' => $firstDiscount],
+            $secondChannel->getCode() => ['percentage' => $secondDiscount],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(the promotion) applies to orders containing (product "[^"]+") in the ("[^"]+" channel) and (product "[^"]+") in the ("[^"]+" channel)$/')]
+    public function thePromotionAppliesToOrdersContainingProductInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        ProductInterface $firstProduct,
+        ChannelInterface $firstChannel,
+        ProductInterface $secondProduct,
+        ChannelInterface $secondChannel,
+    ): void {
+        $rule = $this->ruleFactory->createNew();
+        $rule->setType('contains_product_per_channel');
+        $rule->setConfiguration([
+            $firstChannel->getCode() => ['product_code' => $firstProduct->getCode()],
+            $secondChannel->getCode() => ['product_code' => $secondProduct->getCode()],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(the promotion) applies to orders with a product from (taxon "[^"]+") in the ("[^"]+" channel) and from (taxon "[^"]+") in the ("[^"]+" channel)$/')]
+    public function thePromotionAppliesToOrdersWithAProductFromTaxonInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        TaxonInterface $firstTaxon,
+        ChannelInterface $firstChannel,
+        TaxonInterface $secondTaxon,
+        ChannelInterface $secondChannel,
+    ): void {
+        $rule = $this->ruleFactory->createNew();
+        $rule->setType('has_taxon_per_channel');
+        $rule->setConfiguration([
+            $firstChannel->getCode() => ['taxons' => [$firstTaxon->getCode()]],
+            $secondChannel->getCode() => ['taxons' => [$secondTaxon->getCode()]],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
     #[Given('/^(this promotion) gives ("(?:€|£|\$)[^"]+") off on every product in the ("[^"]+" channel) and ("(?:€|£|\$)[^"]+") off in the ("[^"]+" channel)$/')]
     public function thisPromotionGivesFixedDiscountOnEveryProductInTheChannelAndInTheChannel(
         PromotionInterface $promotion,

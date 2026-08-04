@@ -53,7 +53,7 @@
         },
         {
             "propertyPath": "rules[8].type",
-            "message": "Promotion rule type is invalid. Available rule types are customer_group, nth_order, shipping_country, has_taxon, total_of_items_from_taxon, contains_product, item_total, cart_quantity.",
+            "message": "Promotion rule type is invalid. Available rule types are customer_group, customer_group_per_channel, nth_order, nth_order_per_channel, shipping_country, shipping_country_per_channel, has_taxon, has_taxon_per_channel, total_of_items_from_taxon, contains_product, contains_product_per_channel, item_total, cart_quantity, cart_quantity_per_channel.",
             "code": null
         }
     ],
