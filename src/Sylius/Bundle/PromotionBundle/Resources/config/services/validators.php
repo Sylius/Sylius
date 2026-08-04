@@ -17,6 +17,7 @@ use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionGroupValidator
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionActionTypeValidator;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeGroupValidator;
 use Sylius\Bundle\PromotionBundle\Validator\CatalogPromotionScopeTypeValidator;
+use Sylius\Bundle\PromotionBundle\Validator\ComparisonOperatorExistsValidator;
 use Sylius\Bundle\PromotionBundle\Validator\CouponGenerationAmountValidator;
 use Sylius\Bundle\PromotionBundle\Validator\PromotionActionGroupValidator;
 use Sylius\Bundle\PromotionBundle\Validator\PromotionActionTypeValidator;
@@ -28,6 +29,12 @@ use Sylius\Bundle\PromotionBundle\Validator\PromotionSubjectCouponValidator;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
+
+    $services
+        ->set('sylius.validator.comparison_operator_exists', ComparisonOperatorExistsValidator::class)
+        ->args([service('sylius.promotion.comparison_operator_matcher')])
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_comparison_operator_exists'])
+    ;
 
     $services
         ->set('sylius.validator.promotion_subject_coupon', PromotionSubjectCouponValidator::class)

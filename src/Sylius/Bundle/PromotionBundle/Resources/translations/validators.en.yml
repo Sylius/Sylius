@@ -52,6 +52,8 @@ sylius:
         percentage_discount_configuration:
             not_in_range: The percentage discount must be between 0% and 100%.
     promotion_rule:
+        comparison_operator:
+            invalid: Comparison operator is invalid. Available comparison operators are {{ available_comparison_operators }}.
         invalid_type: Promotion rule type is invalid. Available rule types are {{ available_rule_types }}.
     promotion_coupon:
         code:
