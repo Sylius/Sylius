@@ -1,5 +1,12 @@
 sylius_twig_hooks:
     hooks:
+        'sylius_admin.payment_method.index.content.header.title_block':
+            title:
+                template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+                configuration:
+                    documentation_url: 'https://docs.sylius.com/stripe-plugin/getting-started/configure-your-first-payment-method'
+                priority: 100
+
         'sylius_admin.payment_method.index.content':
             banner:
                 template: '@SyliusAdmin/payment_method/index/content/banner.html.twig'
