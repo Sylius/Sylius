@@ -1,0 +1,61 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.payment_method.index.content':
+            banner:
+                template: '@SyliusAdmin/payment_method/index/content/banner.html.twig'
+                priority: 150
+
+        'sylius_admin.payment_method.index.content.banner':
+            stripe:
+                template: '@SyliusAdmin/payment_method/index/content/banner/slide.html.twig'
+                priority: 400
+                configuration:
+                    active: true
+                    variant: 'stripe'
+                    image: 'build/admin/images/stripe.png'
+                    title: 'sylius.ui.payment_method_banner.stripe.title'
+                    description: 'sylius.ui.payment_method_banner.stripe.description'
+                    payment_methods: ['visa', 'master_card', 'amex']
+                    payment_methods_more: true
+                    is_installed: true
+                    documentation_url: 'https://github.com/Sylius/StripePlugin/blob/1.0/README.md'
+                    plugin_url: 'https://addons.sylius.com/en_US/products/stripe-plugin?utm_source=sylius&utm_medium=website&utm_campaign=payment_plugins&utm_content=stripe_plugin'
+            paypal:
+                template: '@SyliusAdmin/payment_method/index/content/banner/slide.html.twig'
+                priority: 300
+                configuration:
+                    variant: 'paypal'
+                    image: 'build/admin/images/paypal.png'
+                    title: 'sylius.ui.payment_method_banner.paypal.title'
+                    description: 'sylius.ui.payment_method_banner.paypal.description'
+                    payment_methods: ['visa', 'master_card', 'amex', 'maestro']
+                    payment_methods_more: true
+                    is_installed: false
+                    documentation_url: 'https://docs.sylius.com/paypal-plugin'
+                    plugin_url: 'https://addons.sylius.com/en_US/products/paypal-plugin?utm_source=sylius&utm_medium=website&utm_campaign=payment_plugins&utm_content=paypal_plugin'
+            adyen:
+                template: '@SyliusAdmin/payment_method/index/content/banner/slide.html.twig'
+                priority: 200
+                configuration:
+                    variant: 'adyen'
+                    image: 'build/admin/images/adyen.png'
+                    title: 'sylius.ui.payment_method_banner.adyen.title'
+                    description: 'sylius.ui.payment_method_banner.adyen.description'
+                    payment_methods: ['visa', 'master_card', 'amex', 'maestro']
+                    payment_methods_more: true
+                    is_installed: false
+                    documentation_url: 'https://docs.sylius.com/adyen-plugin'
+                    plugin_url: 'https://addons.sylius.com/en_US/products/adyen-plugin?utm_source=sylius&utm_medium=website&utm_campaign=payment_plugins&utm_content=adyen_plugin'
+            mollie:
+                template: '@SyliusAdmin/payment_method/index/content/banner/slide.html.twig'
+                priority: 100
+                configuration:
+                    variant: 'mollie'
+                    image: 'build/admin/images/mollie.png'
+                    title: 'sylius.ui.payment_method_banner.mollie.title'
+                    description: 'sylius.ui.payment_method_banner.mollie.description'
+                    payment_methods: ['visa', 'master_card', 'amex', 'maestro']
+                    payment_methods_more: true
+                    is_installed: true
+                    documentation_url: 'https://docs.sylius.com/mollie-plugin'
+                    plugin_url: 'https://addons.sylius.com/en_US/products/mollie-plugin?utm_source=sylius&utm_medium=website&utm_campaign=payment_plugins&utm_content=mollie_plugin'

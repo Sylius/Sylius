@@ -1,0 +1,141 @@
+$carousel-vertical-gap: 8px !default;
+
+.carousel-vertical {
+    .carousel-inner {
+        overflow: hidden;
+    }
+
+    .active.carousel-item-start,
+    .carousel-item-prev:not(.carousel-item-end) {
+        transform: translateY(calc(-100% - #{$carousel-vertical-gap}));
+    }
+
+    .active.carousel-item-end,
+    .carousel-item-next:not(.carousel-item-start) {
+        transform: translateY(calc(100% + #{$carousel-vertical-gap}));
+    }
+}
+
+.sylius-payment-methods-banner {
+    $banner-color: var(--sylius-payment-methods-banner-color, #{$gray-500});
+
+    .carousel-item {
+        border: 3px solid $banner-color;
+        border-radius: $border-radius-lg;
+        background: $white;
+    }
+
+    &__slide--stripe {
+        --sylius-payment-methods-banner-color: #635bff;
+    }
+
+    &__slide--paypal {
+        --sylius-payment-methods-banner-color: #003087;
+    }
+
+    &__slide--adyen {
+        --sylius-payment-methods-banner-color: #0abf53;
+    }
+
+    &__slide--mollie {
+        --sylius-payment-methods-banner-color: #000;
+    }
+
+    &__logo {
+        width: 8rem;
+        height: 6rem;
+        border-radius: 0.75rem;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__content {
+        max-width: 28rem;
+    }
+
+    &__title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    &__description {
+        color: $text-secondary;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    &__methods {
+        min-width: 0;
+    }
+
+    &__method {
+        height: 2.7rem;
+        border-radius: $border-radius;
+
+        img {
+            width: auto;
+            height: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        &--more {
+            color: $text-secondary;
+            font-size: 0.8125rem;
+        }
+    }
+
+    &__btn-primary {
+        border-color: $banner-color;
+        background: $banner-color;
+        color: $white;
+
+        &:hover,
+        &:focus {
+            border-color: $banner-color;
+            background: $banner-color;
+            color: $white;
+            filter: brightness(0.9);
+        }
+    }
+
+    &__actions {
+        width: 11.75rem;
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    @include media-breakpoint-down(xl) {
+        &__actions {
+            width: auto;
+
+            .btn {
+                width: auto;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        &__content,
+        &__methods {
+            width: 100%;
+            max-width: none;
+        }
+    }
+
+    [data-bs-theme="dark"] & .carousel-item {
+        background: var(--#{$prefix}bg-surface);
+    }
+
+    [data-bs-theme="dark"] &__description,
+    [data-bs-theme="dark"] &__method--more {
+        color: var(--#{$prefix}secondary);
+    }
+}
