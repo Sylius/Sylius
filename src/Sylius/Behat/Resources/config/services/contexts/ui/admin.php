@@ -53,6 +53,7 @@ use Sylius\Behat\Context\Ui\Admin\ManagingTaxonsContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingTranslatableEntitiesContext;
 use Sylius\Behat\Context\Ui\Admin\ManagingZonesContext;
+use Sylius\Behat\Context\Ui\Admin\NavbarNotificationsContext;
 use Sylius\Behat\Context\Ui\Admin\NavigatingBetweenProductShowAndEditPagesContext;
 use Sylius\Behat\Context\Ui\Admin\NotificationContext;
 use Sylius\Behat\Context\Ui\Admin\OrderHistoryContext;
@@ -81,6 +82,14 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.behat.context.ui.admin.dashboard', DashboardContext::class)
         ->args([service('sylius.behat.page.admin.dashboard')])
+    ;
+
+    $services
+        ->set('sylius.behat.context.ui.admin.navbar_notifications', NavbarNotificationsContext::class)
+        ->args([
+            service('sylius.behat.page.admin.dashboard'),
+            service('kernel'),
+        ])
     ;
 
     $services

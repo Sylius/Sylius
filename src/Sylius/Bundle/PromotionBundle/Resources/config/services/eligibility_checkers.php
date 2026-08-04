@@ -24,6 +24,7 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerIn
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionRulesEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionSubjectCouponEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilityChecker;
+use Sylius\Component\Promotion\Checker\Eligibility\WithoutOwnAdjustmentsPromotionEligibilityChecker;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -78,6 +79,14 @@ return static function (ContainerConfigurator $container) {
     $services->alias('sylius.checker.promotion_eligibility.composite', 'sylius.checker.promotion_eligibility');
 
     $services->alias(PromotionEligibilityCheckerInterface::class, 'sylius.checker.promotion_eligibility');
+
+    $services
+        ->set('sylius.checker.promotion_eligibility.without_own_adjustments', WithoutOwnAdjustmentsPromotionEligibilityChecker::class)
+        ->args([
+            service('sylius.checker.promotion_eligibility'),
+            service('sylius.action.applicator.promotion'),
+        ])
+    ;
 
     $services
         ->set('sylius.checker.promotion.archival_eligibility', PromotionArchivalEligibilityChecker::class)

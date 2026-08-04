@@ -1,5 +1,46 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.8 (2026-07-31)
+
+#### Details
+
+- [#19154](https://github.com/Sylius/Sylius/issues/19154) [FIX][2.2] Hide notifications icon when notifications are disabled ([@jkindly](https://github.com/jkindly))
+- [#18930](https://github.com/Sylius/Sylius/issues/18930) [BUGFIX] Add validator to restrict payment requests to placed orders only ([@rust-le](https://github.com/rust-le))
+- [#19159](https://github.com/Sylius/Sylius/issues/19159) [API] Refactor payment request eligibility validator and mark new services as experimental ([@GSadee](https://github.com/GSadee))
+- [#19161](https://github.com/Sylius/Sylius/issues/19161) [AdminBundle][ShopBundle] Fix production asset build broken by Sass BOM ([@bartek-sek](https://github.com/bartek-sek))
+- [#19156](https://github.com/Sylius/Sylius/issues/19156) [FIX][2.2] Fix locking icons ([@jkindly](https://github.com/jkindly))
+
+## v2.2.7 (2026-07-24)
+
+#### Details
+
+- [#19047](https://github.com/Sylius/Sylius/pull/19047) [Fix] Product Summary using wrong variant resolver ([@Prometee](https://github.com/Prometee))
+- [#19023](https://github.com/Sylius/Sylius/pull/19023) [CS][DX] Refactor
+- [#19056](https://github.com/Sylius/Sylius/pull/19056) [DX] Break footer menu and shipment general templates into smaller hooks 2.2 ([@rust-le](https://github.com/rust-le))
+- [#19033](https://github.com/Sylius/Sylius/pull/19033) Filter out disabled products from get by code item endpoint ([@tomkalon](https://github.com/tomkalon))
+- [#19057](https://github.com/Sylius/Sylius/pull/19057) [2.2] Fix SyliusUiBundle compiler passes priority ([@tomkalon](https://github.com/tomkalon))
+- [#19068](https://github.com/Sylius/Sylius/pull/19068) Update UPGRADE-2.2.md ([@tomkalon](https://github.com/tomkalon))
+- [#19046](https://github.com/Sylius/Sylius/pull/19046) Use ResourceClassResolver in IriConverter to fix discriminator subcla… ([@rust-le](https://github.com/rust-le))
+- [#19059](https://github.com/Sylius/Sylius/pull/19059) Add Taxon documentation to OpenAPI specification ([@marekrzytki](https://github.com/marekrzytki))
+- [#19087](https://github.com/Sylius/Sylius/pull/19087) [CS][DX] Refactor
+- [#19085](https://github.com/Sylius/Sylius/pull/19085) [Addressing] Fix UTF-8 case-insensitive address comparison ([@Malina141](https://github.com/Malina141))
+- [#19084](https://github.com/Sylius/Sylius/pull/19084) [CoreBundle] Guard against null shipping method in order eligibility validator ([@Wojdylak](https://github.com/Wojdylak))
+- [#19050](https://github.com/Sylius/Sylius/pull/19050) [Bugfix] Recover order payment_state to "awaiting_payment" after authorized payment is cancelled ([@tomkalon](https://github.com/tomkalon))
+- [#19107](https://github.com/Sylius/Sylius/pull/19107) [Composer] Conflict with api-platform/symfony 4.3.16 ([@GSadee](https://github.com/GSadee))
+- [#19104](https://github.com/Sylius/Sylius/pull/19104) [Fix] [2.2] [AdminBundle] [UX] Compute shipment tracking placeholder width dynamically ([@crydotsnake](https://github.com/crydotsnake))
+- [#19111](https://github.com/Sylius/Sylius/pull/19111) [CS][DX] Refactor
+- [#19052](https://github.com/Sylius/Sylius/pull/19052) Prevent a coupon from invalidating its own promotion eligibility ([@TheMilek](https://github.com/TheMilek))
+- [#19126](https://github.com/Sylius/Sylius/pull/19126) [Translations] add missing german translations for various bundles ([@crydotsnake](https://github.com/crydotsnake))
+- [#19121](https://github.com/Sylius/Sylius/pull/19121) Add missing account_verification translations to de translations ([@shochdoerfer](https://github.com/shochdoerfer))
+- [#19135](https://github.com/Sylius/Sylius/pull/19135) [2.2][FIX] Behat live component wait ([@jkindly](https://github.com/jkindly))
+- [#19089](https://github.com/Sylius/Sylius/pull/19089) Prevent LiveComponents from interfering with modal behavior ([@tomkalon](https://github.com/tomkalon))
+- [#19109](https://github.com/Sylius/Sylius/pull/19109) Fix infinity loop on taxon edit form ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#19150](https://github.com/Sylius/Sylius/pull/19150) [CI] Increase build timeout ([@jkindly](https://github.com/jkindly))
+- [#19146](https://github.com/Sylius/Sylius/pull/19146) [ShopBundle] Fix displaying thank you page for guest users ([@michalkaczmarek-bitbag](https://github.com/michalkaczmarek-bitbag))
+- [#19044](https://github.com/Sylius/Sylius/pull/19044) Fix German Swiss translation for no_label' ([@gebi84](https://github.com/gebi84))
+- [#19123](https://github.com/Sylius/Sylius/pull/19123) Change translation for 'Kraje' to 'Krajiny' ([@elcuro](https://github.com/elcuro))
+- [#19153](https://github.com/Sylius/Sylius/pull/19153) Lock webpack version to avoid issues with the latest release ([@bartek-sek](https://github.com/bartek-sek))
+
 ## v2.2.6 (2026-06-02)
 
 #### Details

@@ -23,6 +23,7 @@ use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -31,6 +32,7 @@ use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
@@ -58,6 +60,7 @@ final readonly class PromotionContext implements Context
         private ObjectManager $objectManager,
         private ExampleFactoryInterface $promotionExampleFactory,
         private MessageBusInterface $commandBus,
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 
@@ -300,6 +303,29 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
+    #[Given('/^(this coupon) has track usage disabled$/')]
+    public function thisCouponHasTrackUsageDisabled(PromotionCouponInterface $coupon): void
+    {
+        $coupon->setTrackUsage(false);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this coupon) has had its track usage re-enabled$/')]
+    public function thisCouponHasHadItsTrackUsageReEnabled(PromotionCouponInterface $coupon): void
+    {
+        /** @var OrderInterface[] $orders */
+        $orders = $this->orderRepository->findBy(['promotionCoupon' => $coupon]);
+        foreach ($orders as $order) {
+            $order->setCheckoutCompletedAt(new \DateTime('-1 day'));
+        }
+
+        $coupon->setTrackUsage(false);
+        $coupon->setTrackUsage(true);
+
+        $this->objectManager->flush();
+    }
+
     #[Given('/^(this coupon) has already reached its usage limit$/')]
     public function thisCouponHasReachedItsUsageLimit(PromotionCouponInterface $coupon): void
     {
@@ -400,6 +426,72 @@ final readonly class PromotionContext implements Context
         $promotion->addChannel($firstChannel);
         $promotion->addChannel($secondChannel);
         $promotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^([^"]+) gives ("[^"]+%") discount to every order in the ("[^"]+" channel) and ("[^"]+%") discount to every order in the ("[^"]+" channel)$/')]
+    public function thisPromotionGivesPercentageDiscountToEveryOrderInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        float $firstDiscount,
+        ChannelInterface $firstChannel,
+        float $secondDiscount,
+        ChannelInterface $secondChannel,
+    ): void {
+        $action = $this->actionFactory->createNew();
+        $action->setType('order_percentage_discount_per_channel');
+        $action->setConfiguration([
+            $firstChannel->getCode() => ['percentage' => $firstDiscount],
+            $secondChannel->getCode() => ['percentage' => $secondDiscount],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(the promotion) applies to orders containing (product "[^"]+") in the ("[^"]+" channel) and (product "[^"]+") in the ("[^"]+" channel)$/')]
+    public function thePromotionAppliesToOrdersContainingProductInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        ProductInterface $firstProduct,
+        ChannelInterface $firstChannel,
+        ProductInterface $secondProduct,
+        ChannelInterface $secondChannel,
+    ): void {
+        $rule = $this->ruleFactory->createNew();
+        $rule->setType('contains_product_per_channel');
+        $rule->setConfiguration([
+            $firstChannel->getCode() => ['product_code' => $firstProduct->getCode()],
+            $secondChannel->getCode() => ['product_code' => $secondProduct->getCode()],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(the promotion) applies to orders with a product from (taxon "[^"]+") in the ("[^"]+" channel) and from (taxon "[^"]+") in the ("[^"]+" channel)$/')]
+    public function thePromotionAppliesToOrdersWithAProductFromTaxonInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        TaxonInterface $firstTaxon,
+        ChannelInterface $firstChannel,
+        TaxonInterface $secondTaxon,
+        ChannelInterface $secondChannel,
+    ): void {
+        $rule = $this->ruleFactory->createNew();
+        $rule->setType('has_taxon_per_channel');
+        $rule->setConfiguration([
+            $firstChannel->getCode() => ['taxons' => [$firstTaxon->getCode()]],
+            $secondChannel->getCode() => ['taxons' => [$secondTaxon->getCode()]],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addRule($rule);
 
         $this->objectManager->flush();
     }
@@ -852,6 +944,14 @@ final readonly class PromotionContext implements Context
     public function thisPromotionHasUsageLimitEqualTo(PromotionInterface $promotion, int $usageLimit): void
     {
         $promotion->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this promotion) has track usage disabled$/')]
+    public function thisPromotionHasTrackUsageDisabled(PromotionInterface $promotion): void
+    {
+        $promotion->setTrackUsage(false);
 
         $this->objectManager->flush();
     }

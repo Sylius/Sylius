@@ -39,7 +39,11 @@ abstract class AbstractOrmTestCase extends TestCase
             )->getMetadataDriverImpl(),
         );
 
-        $config->enableNativeLazyObjects(true);
+        // Native lazy objects require PHP 8.4+; on lower versions Doctrine ORM falls back to
+        // lazy ghost objects, so the flag must only be enabled where the runtime supports it.
+        if (\PHP_VERSION_ID >= 80400) {
+            $config->enableNativeLazyObjects(true);
+        }
 
         return $config;
     }

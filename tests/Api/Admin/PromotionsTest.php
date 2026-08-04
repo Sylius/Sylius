@@ -396,6 +396,36 @@ final class PromotionsTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_does_not_create_a_promotion_with_an_invalid_percentage_discount_per_channel_action(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'promotion/channel.yaml']);
+
+        $this->requestPost(
+            uri: '/api/v2/admin/promotions',
+            body: [
+                'name' => 'Percentage out of range',
+                'code' => 'percentage_out_of_range_test',
+                'channels' => ['/api/v2/admin/channels/WEB'],
+                'actions' => [
+                    [
+                        'type' => 'order_percentage_discount_per_channel',
+                        'configuration' => [
+                            'WEB' => ['percentage' => 1.5],
+                        ],
+                    ],
+                ],
+            ],
+        );
+
+        $this->assertResponseViolations([
+            [
+                'propertyPath' => 'actions[0].configuration[WEB][percentage]',
+                'message' => 'The percentage discount must be between 0% and 100%.',
+            ],
+        ]);
+    }
+
+    #[Test]
     public function it_updates_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -549,5 +579,22 @@ final class PromotionsTest extends JsonApiTestCase
         $this->requestPatch(sprintf('/api/v2/admin/promotions/%s/restore', $promotion->getCode()));
 
         $this->assertResponseSuccessful('admin/promotion/restore_promotion');
+    }
+
+    #[Test]
+    public function it_does_not_create_a_promotion_with_invalid_usage_limit(): void
+    {
+        $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
+
+        $this->requestPost(
+            uri: '/api/v2/admin/promotions',
+            body: [
+                'name' => 'T-Shirts discount',
+                'code' => 'tshirts_discount',
+                'usageLimit' => -1,
+            ],
+        );
+
+        $this->assertResponseUnprocessableEntity('admin/promotion/post_promotion_with_invalid_usage_limit_response');
     }
 }

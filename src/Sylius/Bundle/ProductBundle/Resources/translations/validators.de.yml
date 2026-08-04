@@ -11,6 +11,7 @@ sylius:
             unique: Der Produktcode muss eindeutig sein.
             max_length: Die Produkt SEO-URL darf nicht länger sein als ein Zeichen.|Die Produkt SEO-URL darf nicht länger sein als {{ limit }} Zeichen.
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte geben Sie einen Produktcode ein.
             regex: Produktkürzel darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Der Produktcode muss eindeutig sein.
@@ -18,18 +19,26 @@ sylius:
             not_blank: Bitte gib Sie einen Produktnamen an.
             min_length: Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.
             max_length: Der Produktname darf nicht länger als 1 Zeichen sein.|Der Produktname darf nicht länger als {{ limit }} Zeichen sein.
+        meta_keywords:
+            max_length: Die Meta-Keywords des Produktes dürfen nicht länger als 1 Zeichen sein.|Die Meta-Keywords des Produktes dürfen nicht länger als {{ limit }} Zeichen sein.
+        meta_description:
+            max_length: Die Meta-Beschreibung des Produktes darf nicht länger als 1 Zeichen sein.|Die Meta-Beschreibung des Produktes darf nicht länger als {{ limit }} Zeichen sein.
     product_variant:
         combination: Die Variante mit den gewählten Einstellungen existiert schon.
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte den Code eingeben.
             regex: Variantenkürzel des Produktes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Variantencode des Produktes muss eindeutig sein.
             within_product_unique: Dieser Code muss innerhalb dieses Produktes eindeutig sein.
+        option_values:
+            not_configured: 'Für die Produktvariante müssen Werte für alle am Produkt gewählten Optionen konfiguriert sein.'
     simple_product:
         code:
             unique: Der Code eines einfachen Produktes muss unter alle Produkten und Produktvarianten eindeutig sein.
     option:
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte geben Sie ein Kürzel für die Option an.
             regex: Kürzel der Option darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Eine Option mit diesem Kürzel existiert bereits.
@@ -41,11 +50,18 @@ sylius:
             min_count: Bitte geben Sie mindestens {{ limit }} Wert für diese Option ein.|Bitte geben Sie mindestens {{ limit }} Werte für diese Option ein.
     option_value:
         code:
+            max_length: Der Code darf nicht länger als {{ limit }} Zeichen sein.
             not_blank: Bitte geben Sie ein Kürzel für den Wert der Option ein.
             regex: Kürzel des Optionswertes darf nur aus Buchstaben, Zahlen, Bindestrichen und Unterstrichen bestehen.
             unique: Das Kürzel für den Wert der Option existiert bereits.
         value:
             not_blank: Bitte geben Sie einen Wert für diese Option ein.
+    association:
+        unique: Eine Zuordnung mit diesem Besitzer und Typ existiert bereits.
+        type:
+            not_blank: Bitte geben Sie den Zuordnungstyp an.
+        owner:
+            not_blank: Bitte geben Sie den Besitzer der Zuordnung an.
     association_type:
         name:
             not_blank: Bitte den Namen des Beziehungstypen angeben.

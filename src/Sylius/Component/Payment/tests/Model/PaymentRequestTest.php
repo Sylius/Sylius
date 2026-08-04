@@ -24,9 +24,9 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 #[AllowMockObjectsWithoutExpectations]
 final class PaymentRequestTest extends TestCase
 {
-    private PaymentInterface&MockObject $payment;
+    private MockObject&PaymentInterface $payment;
 
-    private PaymentMethodInterface&MockObject $method;
+    private MockObject&PaymentMethodInterface $method;
 
     private PaymentRequest $paymentRequest;
 

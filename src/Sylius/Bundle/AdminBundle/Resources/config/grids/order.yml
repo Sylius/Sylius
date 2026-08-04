@@ -115,7 +115,7 @@ sylius_grid:
                     form_options:
                         extra_options:
                             class: '%sylius.model.customer.class%'
-                            choice_label: fullname
+                            choice_label: nameOrEmail
                 date:
                     type: date
                     label: sylius.ui.date

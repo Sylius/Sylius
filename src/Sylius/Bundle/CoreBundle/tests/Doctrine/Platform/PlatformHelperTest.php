@@ -36,7 +36,7 @@ final class PlatformHelperTest extends TestCase
     /** Versioned MariaDB platform classes were renamed between dbal 3.x and 4.x, so we test the ancestor match instead of a specific class name. */
     public function test_it_recognizes_any_mysql_or_mariadb_platform_subclass(): void
     {
-        $versionedPlatform = new class extends AbstractMySQLPlatform {
+        $versionedPlatform = new class() extends AbstractMySQLPlatform {
         };
 
         self::assertTrue(PlatformHelper::isMysql($versionedPlatform));

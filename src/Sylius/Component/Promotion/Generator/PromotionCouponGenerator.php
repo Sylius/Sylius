@@ -54,6 +54,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
             $coupon->setUsageLimit($instruction->getUsageLimit());
             $expiresAt = $instruction->getExpiresAt();
             $coupon->setExpiresAt($expiresAt instanceof \DateTimeImmutable ? \DateTime::createFromImmutable($expiresAt) : $expiresAt);
+            $coupon->setTrackUsage($instruction->isTrackUsage());
 
             $generatedCoupons[$code] = $coupon;
 

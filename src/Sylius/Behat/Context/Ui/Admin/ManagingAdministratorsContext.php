@@ -127,6 +127,30 @@ final class ManagingAdministratorsContext implements Context
         $this->createPage->create();
     }
 
+    #[When('I grant it administration access')]
+    public function iGrantItAdministrationAccess(): void
+    {
+        $this->createPage->grantAdministrationAccess();
+    }
+
+    #[When('I revoke its administration access')]
+    public function iRevokeItsAdministrationAccess(): void
+    {
+        $this->createPage->revokeAdministrationAccess();
+    }
+
+    #[When('I grant it API access')]
+    public function iGrantItApiAccess(): void
+    {
+        $this->createPage->grantApiAccess();
+    }
+
+    #[When('I revoke its API access')]
+    public function iRevokeItsApiAccess(): void
+    {
+        $this->createPage->revokeApiAccess();
+    }
+
     #[When('I delete administrator with email :email')]
     public function iDeleteAdministratorWithEmail($email)
     {
@@ -189,6 +213,52 @@ final class ManagingAdministratorsContext implements Context
     public function iRemoveTheAvatarImage(): void
     {
         $this->updatePage->removeAvatar();
+    }
+
+    #[Then('/^(this administrator) should have administration access$/')]
+    #[Then('the administrator :adminUser should have administration access')]
+    public function administratorShouldHaveAdministrationAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->openAdministratorForm($adminUser)->hasAdministrationAccess());
+    }
+
+    #[Then('/^(this administrator) should not have administration access$/')]
+    #[Then('the administrator :adminUser should not have administration access')]
+    public function administratorShouldNotHaveAdministrationAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::false($this->openAdministratorForm($adminUser)->hasAdministrationAccess());
+    }
+
+    #[Then('/^(this administrator) should have API access$/')]
+    #[Then('the administrator :adminUser should have API access')]
+    public function administratorShouldHaveApiAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->openAdministratorForm($adminUser)->hasApiAccess());
+    }
+
+    #[Then('/^(this administrator) should not have API access$/')]
+    #[Then('the administrator :adminUser should not have API access')]
+    public function administratorShouldNotHaveApiAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::false($this->openAdministratorForm($adminUser)->hasApiAccess());
+    }
+
+    #[Then('I should be notified that at least one access level must be selected')]
+    public function iShouldBeNotifiedThatAtLeastOneAccessLevelMustBeSelected(): void
+    {
+        Assert::same(
+            $this->createPage->getAccessLevelsValidationMessage(),
+            'Please select at least one access level.',
+        );
+    }
+
+    #[Then('I should be notified that I cannot revoke my own administration access')]
+    public function iShouldBeNotifiedThatICannotRevokeMyOwnAdministrationAccess(): void
+    {
+        Assert::same(
+            $this->createPage->getAccessLevelsValidationMessage(),
+            'You cannot revoke your own administration access.',
+        );
     }
 
     #[Then('I should be notified that email must be unique')]
@@ -278,6 +348,13 @@ final class ManagingAdministratorsContext implements Context
     public function iShouldNotSeeAnyImageAsTheAvatar(): void
     {
         Assert::false($this->createPage->isAvatarAttached());
+    }
+
+    private function openAdministratorForm(AdminUserInterface $adminUser): UpdatePageInterface
+    {
+        $this->updatePage->open(['id' => $adminUser->getId()]);
+
+        return $this->updatePage;
     }
 
     private function getAdministrator(AdminUserInterface $administrator): AdminUserInterface

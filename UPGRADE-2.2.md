@@ -1,4 +1,31 @@
+# UPGRADE FROM `2.2.7` TO `2.2.8`
+
+## UX Icons
+
+1. The `ux:icons:lock` command (and the ux-icons cache warmer) imported `0` icons in Sylius applications.
+   Symfony UX's `Symfony\UX\Icons\Twig\IconFinder` discovers icons by traversing the Twig loader, but it only
+   understands Twig's `FilesystemLoader` and `ChainLoader`. Sylius decorates the Twig loader with
+   `Sylius\Bundle\ThemeBundle\Twig\Loader\ThemedTemplateLoader`, which `IconFinder` cannot traverse, so no template
+   was ever scanned.
+   A new `Sylius\Bundle\UiBundle\DependencyInjection\Compiler\UxIconsIconFinderPass` now points the
+   `.ux_icons.icon_finder` service at a dedicated Twig environment (`sylius_ui.ux_icons.twig_environment`) backed by
+   the native filesystem loader (`twig.loader.native_filesystem`), so template scanning works again without affecting
+   runtime template rendering.
+
 # UPGRADE FROM `2.2.6` TO `2.2.7`
+
+## Behat
+
+1. The `waitForFormUpdate()` methods in the Behat page objects and elements now delegate to the new
+   `Sylius\Behat\Service\DriverHelper::waitForLiveComponentUpdate()` helper.
+   The previous implementation checked the `busy` attribute on the `form` element and relied on a fixed `sleep`,
+   but Symfony UX Live Components set `busy` on the component root (`[data-controller~="live"]`), not on the form,
+   so the wait was effectively a no-op. The helper now waits document-wide for `[busy]`/`[data-live-is-loading]`
+   markers to appear and then disappear, without any hardcoded sleep.
+   If you overrode `waitForFormUpdate()` in your own page objects, delegate to the helper as well.
+
+2. The `live_form` element and the `waitForFormUpdate()` override were removed from
+   `Sylius\Behat\Page\Admin\Order\UpdatePage`; it now inherits the shared implementation.
 
 ## Constructor Signature Changes
 

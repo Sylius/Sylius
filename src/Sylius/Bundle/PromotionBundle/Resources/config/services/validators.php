@@ -31,7 +31,7 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.validator.promotion_subject_coupon', PromotionSubjectCouponValidator::class)
-        ->args([service('sylius.checker.promotion_eligibility')])
+        ->args([service('sylius.checker.promotion_eligibility.without_own_adjustments')])
         ->tag('validator.constraint_validator', ['alias' => 'sylius_promotion_subject_validator'])
     ;
 

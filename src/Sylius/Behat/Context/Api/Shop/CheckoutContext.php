@@ -854,9 +854,9 @@ final class CheckoutContext implements Context
         );
     }
 
-    #[Then('/^my discount should be ("[^"]+")$/')]
+    #[Then('/^my total discount should be ("[^"]+")$/')]
     #[Then('there should be no discount applied')]
-    public function myDiscountShouldBe(int $discount = 0): void
+    public function myTotalDiscountShouldBe(int $discount = 0): void
     {
         if ($this->sharedStorage->has('cart_token')) {
             $discountTotal = $this->responseChecker->getValue(
@@ -870,6 +870,23 @@ final class CheckoutContext implements Context
         }
 
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'), $discount);
+    }
+
+    #[Then('/^my discount should be ("[^"]+")$/')]
+    public function myDiscountShouldBe(int $discount): void
+    {
+        if ($this->sharedStorage->has('cart_token')) {
+            $discountTotal = $this->responseChecker->getValue(
+                $this->client->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')),
+                'orderAndItemPromotionTotal',
+            );
+
+            Assert::same($discount, (int) $discountTotal);
+
+            return;
+        }
+
+        Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'orderAndItemPromotionTotal'), $discount);
     }
 
     #[Then('there should be no taxes charged')]

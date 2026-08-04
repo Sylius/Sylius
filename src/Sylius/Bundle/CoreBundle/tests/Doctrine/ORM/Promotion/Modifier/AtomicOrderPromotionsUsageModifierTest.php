@@ -52,6 +52,8 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
         $order->method('getPromotionCoupon')->willReturn($coupon);
 
+        $promotion->method('isTrackUsage')->willReturn(true);
+        $coupon->method('isTrackUsage')->willReturn(true);
         $promotion->method('getVersion')->willReturn(3);
         $coupon->method('getVersion')->willReturn(5);
 
@@ -92,6 +94,7 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
         $order->method('getPromotionCoupon')->willReturn(null);
 
+        $promotion->method('isTrackUsage')->willReturn(true);
         $promotion->method('getVersion')->willReturn(1);
 
         $this->entityManager
@@ -120,6 +123,8 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
         $order->method('getPromotionCoupon')->willReturn($coupon);
 
+        $promotion->method('isTrackUsage')->willReturn(true);
+        $coupon->method('isTrackUsage')->willReturn(true);
         $promotion->method('getVersion')->willReturn(3);
         $coupon->method('getVersion')->willReturn(5);
 
@@ -160,6 +165,7 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
         $order->method('getPromotionCoupon')->willReturn(null);
 
+        $promotion->method('isTrackUsage')->willReturn(true);
         $promotion->method('getVersion')->willReturn(1);
 
         $this->entityManager
@@ -188,6 +194,8 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         $order->method('getPromotions')->willReturn(new ArrayCollection([$firstPromotion, $secondPromotion]));
         $order->method('getPromotionCoupon')->willReturn(null);
 
+        $firstPromotion->method('isTrackUsage')->willReturn(true);
+        $secondPromotion->method('isTrackUsage')->willReturn(true);
         $firstPromotion->method('getVersion')->willReturn(2);
         $secondPromotion->method('getVersion')->willReturn(4);
 
@@ -213,6 +221,66 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
                     $this->fail('Unexpected entity locked');
                 }
             })
+        ;
+
+        $this->decoratedModifier->expects($this->once())->method('increment')->with($order);
+
+        $this->atomicModifier->increment($order);
+    }
+
+    public function testDoesNotLockPromotionWithTrackUsageDisabledDuringIncrement(): void
+    {
+        $order = $this->createMock(OrderInterface::class);
+        $trackedPromotion = $this->createMock(PromotionInterface::class);
+        $untrackedPromotion = $this->createMock(PromotionInterface::class);
+
+        $order->method('getPromotions')->willReturn(new ArrayCollection([$trackedPromotion, $untrackedPromotion]));
+        $order->method('getPromotionCoupon')->willReturn(null);
+
+        $trackedPromotion->method('isTrackUsage')->willReturn(true);
+        $untrackedPromotion->method('isTrackUsage')->willReturn(false);
+        $trackedPromotion->method('getVersion')->willReturn(2);
+
+        $this->entityManager
+            ->expects($this->once())
+            ->method('refresh')
+            ->with($trackedPromotion)
+        ;
+
+        $this->entityManager
+            ->expects($this->once())
+            ->method('lock')
+            ->with($trackedPromotion, LockMode::OPTIMISTIC, 2)
+        ;
+
+        $this->decoratedModifier->expects($this->once())->method('increment')->with($order);
+
+        $this->atomicModifier->increment($order);
+    }
+
+    public function testDoesNotLockCouponWithTrackUsageDisabledDuringIncrement(): void
+    {
+        $order = $this->createMock(OrderInterface::class);
+        $promotion = $this->createMock(PromotionInterface::class);
+        $coupon = $this->createMock(PromotionCouponInterface::class);
+
+        $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
+        $order->method('getPromotionCoupon')->willReturn($coupon);
+
+        $promotion->method('isTrackUsage')->willReturn(true);
+        $coupon->method('isTrackUsage')->willReturn(false);
+        $promotion->method('getVersion')->willReturn(1);
+
+        $this->entityManager
+            ->expects($this->once())
+            ->method('refresh')
+            ->with($promotion)
+        ;
+
+        $this->entityManager
+            ->expects($this->once())
+            ->method('lock')
+            ->with($promotion, LockMode::OPTIMISTIC, 1)
         ;
 
         $this->decoratedModifier->expects($this->once())->method('increment')->with($order);

@@ -28,6 +28,7 @@ use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderAddressRequirementValidat
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderItemAvailabilityValidator;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderNotEmptyValidator;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator;
+use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderPaymentRequestEligibilityValidator;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderProductEligibilityValidator;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\PlacedOrderCartItemsImmutableValidator;
@@ -237,6 +238,16 @@ return static function (ContainerConfigurator $container) {
             service('sylius.provider.payment_request.gateway_factory_name'),
         ])
         ->tag('validator.constraint_validator', ['alias' => 'sylius_api_chosen_payment_request_action_eligibility'])
+    ;
+
+    $services
+        ->set('sylius_api.validator.order_payment_request_eligibility', OrderPaymentRequestEligibilityValidator::class)
+        ->args([
+            service('sylius.repository.order'),
+            service('sylius.repository.payment_request'),
+            service('sylius_api.checker.order_payment_request_eligibility'),
+        ])
+        ->tag('validator.constraint_validator', ['alias' => 'sylius_api_order_payment_request_eligibility'])
     ;
 
     $services

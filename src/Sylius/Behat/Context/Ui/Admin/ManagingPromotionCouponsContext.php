@@ -92,6 +92,18 @@ final class ManagingPromotionCouponsContext implements Context
         $this->generatePage->setUsageLimit($limit);
     }
 
+    #[When('I enable track usage for generated coupons')]
+    public function iEnableTrackUsageForGeneratedCoupons(): void
+    {
+        $this->generatePage->toggleTrackUsage(true);
+    }
+
+    #[When('I disable track usage for generated coupons')]
+    public function iDisableTrackUsageForGeneratedCoupons(): void
+    {
+        $this->generatePage->toggleTrackUsage(false);
+    }
+
     #[When('I make generated coupons valid until :date')]
     public function iMakeGeneratedCouponsValidUntil(\DateTimeInterface $date): void
     {
@@ -147,6 +159,18 @@ final class ManagingPromotionCouponsContext implements Context
     public function iMakeItReusableFromCancelledOrders(): void
     {
         $this->formElement->toggleReusableFromCancelledOrders(false);
+    }
+
+    #[When('I enable track usage for it')]
+    public function iEnableTrackUsageForIt(): void
+    {
+        $this->formElement->toggleTrackUsage(true);
+    }
+
+    #[When('I disable track usage for it')]
+    public function iDisableTrackUsageForIt(): void
+    {
+        $this->formElement->toggleTrackUsage(false);
     }
 
     #[When('I make it valid until :date')]
@@ -302,6 +326,22 @@ final class ManagingPromotionCouponsContext implements Context
         $this->updatePage->open(['id' => $coupon->getId(), 'promotionId' => $coupon->getPromotion()->getId()]);
 
         Assert::false($this->formElement->isReusableFromCancelledOrders());
+    }
+
+    #[Then('/^(this coupon) should track usage$/')]
+    public function thisCouponShouldTrackUsage(PromotionCouponInterface $coupon): void
+    {
+        $this->updatePage->open(['id' => $coupon->getId(), 'promotionId' => $coupon->getPromotion()->getId()]);
+
+        Assert::true($this->formElement->isTrackUsage());
+    }
+
+    #[Then('/^(this coupon) should not track usage$/')]
+    public function thisCouponShouldNotTrackUsage(PromotionCouponInterface $coupon): void
+    {
+        $this->updatePage->open(['id' => $coupon->getId(), 'promotionId' => $coupon->getPromotion()->getId()]);
+
+        Assert::false($this->formElement->isTrackUsage());
     }
 
     #[Then('I should not be able to edit its code')]

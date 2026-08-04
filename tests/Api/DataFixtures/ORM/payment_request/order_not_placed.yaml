@@ -1,0 +1,18 @@
+Sylius\Component\Core\Model\Payment:
+    payment_not_placed:
+        method: "@payment_method_cash_on_delivery"
+        order: "@order_not_placed"
+        state: "new"
+        amount: 1000
+        currencyCode: "USD"
+
+Sylius\Component\Core\Model\Order:
+    order_not_placed:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "cart"
+        paymentState: "cart"
+        shippingState: "cart"
+        checkoutState: "cart"
+        tokenValue: "notPlacedOrderToken"

@@ -56,6 +56,7 @@ return (new Config())
                 'sylius.behat.context.ui.admin.dashboard',
                 'sylius.behat.context.ui.admin.login',
                 'sylius.behat.context.ui.admin.managing_products',
+                'sylius.behat.context.ui.admin.navbar_notifications',
                 'sylius.behat.context.ui.admin.notification',
                 'sylius.behat.context.ui.browser',
                 'sylius.behat.context.ui.save',

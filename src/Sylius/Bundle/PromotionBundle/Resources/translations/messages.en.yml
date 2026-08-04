@@ -29,13 +29,17 @@ sylius:
             priority: Priority
             rules: Rules
             starts_at: Starts at
+            track_usage: Track usage
+            track_usage_details: When disabled, orders will not count towards the usage limit — the promotion can be applied any number of times regardless of the limit set.
             usage_limit: Usage limit
         promotion_action:
             item_fixed_discount: Item fixed discount
             item_percentage_discount: Item percentage discount
             order_fixed_discount: Order fixed discount
             order_percentage_discount: Order percentage discount
+            order_percentage_discount_per_channel: Order percentage discount (per channel)
             shipping_percentage_discount: Shipping percentage discount
+            shipping_percentage_discount_per_channel: Shipping percentage discount (per channel)
             filters: Filters
             fixed_discount_configuration:
                 amount: Amount
@@ -44,6 +48,8 @@ sylius:
             type: Type
         promotion_coupon:
             expires_at: Expires at
+            track_usage: Track usage
+            track_usage_details: When disabled, orders will not count towards the usage limit or per-customer limit — the coupon can be used freely by any customer. Re-enabling tracking starts per-customer counting fresh; previous orders will not be included.
             usage_limit: Usage limit
         promotion_coupon_generator_instruction:
             amount: Amount
@@ -56,12 +62,18 @@ sylius:
             price_range: Price range filter
         promotion_rule:
             cart_quantity: Cart quantity
+            cart_quantity_per_channel: Cart quantity (per channel)
             contains_product: Contains product
+            contains_product_per_channel: Contains product (per channel)
             customer_group: Customer group
+            customer_group_per_channel: Customer group (per channel)
             has_at_least_one_from_taxons: Has at least one from taxons
+            has_at_least_one_from_taxons_per_channel: Has at least one from taxons (per channel)
             item_total: Item total
             nth_order: Nth order
+            nth_order_per_channel: Nth order (per channel)
             shipping_country: Shipping country
+            shipping_country_per_channel: Shipping country (per channel)
             taxonomy: Taxonomy
             total_price_of_items_from_taxon: Total price of items from taxon
             cart_quantity_configuration:

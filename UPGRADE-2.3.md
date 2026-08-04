@@ -1,5 +1,92 @@
 # UPGRADE FROM `2.2` TO `2.3`
 
+## Security
+
+1. The `sylius.user_checker.enabled` service (`Sylius\Component\User\Security\Checker\EnabledUserChecker`) is **no longer tagged** for the `shop` firewall.
+
+   It has been replaced by two new checkers on the `shop` firewall:
+
+   - `sylius.user_checker.verification_aware_enabled` (`Sylius\Bundle\CoreBundle\Security\Checker\VerificationAwareEnabledUserChecker`, priority 100) — behaves like `EnabledUserChecker` except it allows users with a pending email verification (channel requires verification and `verifiedAt` is `null`) to pass the pre-authentication check, so the password is validated and the "not verified" message is shown.
+   - `sylius.user_checker.email_verification` (`Sylius\Bundle\CoreBundle\Security\Checker\EmailVerificationUserChecker`, priority 50) — throws a `sylius.user.email_not_verified` error after successful password validation when the user has not verified their email on a channel that requires verification.
+
+   If you have decorated or replaced `sylius.user_checker.enabled` specifically for the `shop` firewall, migrate your customization to `sylius.user_checker.verification_aware_enabled` instead.
+
+## Promotions
+
+1. A new `trackUsage` field has been added to promotions and promotion coupons. ([#18966](https://github.com/Sylius/Sylius/pull/18966))
+
+   When `trackUsage` is disabled, the usage counter is neither incremented nor decremented when an order is placed or cancelled.
+   This allows promotions and coupons to be used without affecting their usage statistics.
+
+   The following methods have been added to their respective interfaces:
+
+   - `Sylius\Component\Promotion\Model\PromotionInterface`:
+
+     ```php
+     public function isTrackUsage(): bool;
+     public function setTrackUsage(bool $trackUsage): void;
+     ```
+
+   - `Sylius\Component\Promotion\Model\PromotionCouponInterface`:
+
+     ```php
+     public function isTrackUsage(): bool;
+     public function setTrackUsage(bool $trackUsage): void;
+     ```
+
+   If you have custom classes implementing these interfaces, you must add these methods.
+   The default value is `true`, preserving the previous behaviour.
+
+2. The `isTrackUsage(): bool` method has been added to `Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface`
+
+   If you have a custom class implementing this interface, you must add this method.
+
+3. The behaviour of the following eligibility checkers has changed — they now return `true` (eligible) when `trackUsage` is disabled, regardless of how many times the promotion or coupon has already been used
+
+   - `Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilityChecker`
+   - `Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponUsageLimitEligibilityChecker`
+
+   This is consistent with the existing behaviour of `PromotionCouponPerCustomerUsageLimitEligibilityChecker` and prevents non-zero legacy `used` counters from blocking customers after `trackUsage` is turned off.
+
+4. The following usage modifiers now skip promotions and coupons that have `trackUsage` disabled
+
+   - `Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier`
+   - `Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier`
+
+   If you have decorated or extended these classes, verify that your implementation also respects the `isTrackUsage()` flag.
+
+5. The `countByCustomerAndCoupon()` method on `Sylius\Component\Core\Repository\OrderRepositoryInterface` and its implementation in `Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository` has been deprecated and will be removed in Sylius 3.0.
+
+   Use `countByCustomerAndCouponSince()` instead, passing `null` as the `$since` argument to replicate the previous behaviour:
+
+   ```php
+   // Before
+   $repository->countByCustomerAndCoupon($customer, $coupon);
+
+   // After
+   $repository->countByCustomerAndCouponSince($customer, $coupon, null);
+   ```
+
+## Messenger
+
+1. A new `Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail` message has been introduced. ([#19002](https://github.com/Sylius/Sylius/pull/19002))
+
+   If you use an async transport, add the routing configuration:
+
+   ```yaml
+   framework:
+       messenger:
+           routing:
+               'Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail': your_async_transport
+   ```
+
+## Shop
+
+1. When an unverified account tries to log in with valid credentials on a channel that requires account verification, the login page now shows a one-click "resend verification email" action instead of a separate request form.
+
+   - A new `resend_verification_email` hookable (priority `-100`) is added to the login page container hook `sylius_shop.account.login.content.login_container`. It renders a `POST` form (CSRF-protected) that submits to `sylius_shop_resend_verification_email`.
+   - The `sylius_shop_resend_verification_email` route is now `POST`-only and handled by `ResendVerificationEmailController::resendAction()`. It re-sends the verification email to the last authenticated email (read from the session), then redirects back to the login page. There is no standalone resend page or form.
+
 ## Configuration
 
 1. The default value of `sylius_core.order_by_identifier` has been changed from `true` to `false`. ([#18956](https://github.com/Sylius/Sylius/pull/18956))
@@ -236,6 +323,49 @@ The converter can help bootstrap the migration from YAML to PHP and reduce the a
 
 For a complete overview of the Grid component, see the [Grid documentation](https://stack.sylius.com/grid/index).
 
+## Installer
+
+1. The `sylius:install:setup` command now sets up a **country** and a **default zone** during installation, and
+   optionally assigns the created zone as the default channel tax zone.
+
+   Three new setup classes have been introduced:
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\CountrySetup` implementing `CountrySetupInterface`
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\ZoneSetup` implementing `ZoneSetupInterface`
+   - `Sylius\Bundle\CoreBundle\Installer\Setup\ChannelDefaultTaxZoneSetup` implementing `ChannelDefaultTaxZoneSetupInterface`
+
+   All three are registered as services and injected into `SetupCommand` as **optional** constructor arguments. If
+   you have decorated or replaced `SetupCommand`, not passing them is deprecated and will be prohibited in
+   Sylius 3.0:
+
+   ```diff
+    public function __construct(
+        protected readonly EntityManagerInterface $entityManager,
+        protected readonly CommandDirectoryChecker $commandDirectoryChecker,
+        protected readonly CurrencySetupInterface $currencySetup,
+        protected readonly LocaleSetupInterface $localeSetup,
+        protected readonly ChannelSetupInterface $channelSetup,
+        protected readonly FactoryInterface $adminUserFactory,
+        protected readonly UserRepositoryInterface $adminUserRepository,
+        protected readonly ValidatorInterface $validator,
+   +    protected readonly ?CountrySetupInterface $countrySetup = null,
+   +    protected readonly ?ZoneSetupInterface $zoneSetup = null,
+   +    protected readonly ?ChannelDefaultTaxZoneSetupInterface $channelDefaultTaxZoneSetup = null,
+    )
+   ```
+
+2. The `ChannelSetupInterface::setup()` method signature has been extended with an optional argument to receive the
+   newly created country:
+
+   ```diff
+    public function setup(
+        LocaleInterface $locale,
+        CurrencyInterface $currency,
+   +    ?CountryInterface $country = null,
+    ): void;
+   ```
+
+   If you have a custom implementation of `ChannelSetupInterface`, update its `setup()` signature accordingly.
+
 ## Dependencies
 
 1. The `behat/transliterator` package has been **deprecated** and will be removed in Sylius 3.0.
@@ -335,6 +465,80 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    | `ShippingBundle\...\ShippingMethodCalculatorExists` | `invalidShippingCalculator` | `invalidShippingCalculatorMessage` |
    | `ShippingBundle\...\ShippingMethodRule` | `invalidType` | `invalidTypeMessage` |
 
+3. Two new class-level constraints have been added to `Sylius\Component\Core\Model\AdminUser` (validation group `sylius`),
+   see the [Admin users](#admin-users) section for details:
+
+   - `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`
+   - `Sylius\Bundle\CoreBundle\Validator\Constraints\CannotRevokeOwnAdministrationAccess`
+
+## Admin users
+
+1. Admin users have two independent **access levels**, both backed by roles:
+
+   | Access level           | Role                          |
+   |------------------------|-------------------------------|
+   | Administration access  | `ROLE_ADMINISTRATION_ACCESS`  |
+   | API access             | `ROLE_API_ACCESS`             |
+
+   The `ROLE_API_ACCESS` role is available as `Sylius\Component\Core\Model\AdminUserInterface::API_ACCESS_ROLE`.
+
+2. The following methods have been added to `Sylius\Component\Core\Model\AdminUserInterface`:
+
+   ```php
+   public function hasAdministrationAccess(): bool;
+   public function setAdministrationAccess(bool $administrationAccess): void;
+   public function hasApiAccess(): bool;
+   public function setApiAccess(bool $apiAccess): void;
+   ```
+
+   If you have custom classes implementing this interface, you must add these methods. In
+   `Sylius\Component\Core\Model\AdminUser` they are implemented on top of the roles listed above.
+
+3. A new class-level constraint, `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`, has been added to
+   `Sylius\Component\Core\Model\AdminUser`. It requires every admin user to hold at least one of the
+   `ROLE_ADMINISTRATION_ACCESS` or `ROLE_API_ACCESS` roles.
+
+   If your installation has existing admin users with neither role assigned, saving/updating them (via the admin panel,
+   the API, or the `sylius:admin-user:create` command) will now fail validation until one of the two access levels is
+   granted.
+
+4. A new class-level constraint, `Sylius\Bundle\CoreBundle\Validator\Constraints\CannotRevokeOwnAdministrationAccess`,
+   has been added to `Sylius\Component\Core\Model\AdminUser`. It prevents an admin user that has been granted
+   administration access from revoking it on their own account, so that access to the admin panel cannot be lost
+   permanently.
+
+   It is validated by the `sylius.validator.cannot_revoke_own_administration_access` service, which relies on
+   `security.token_storage` and `security.authorization_checker`. Admin users authenticated without administration
+   access (for example API-only ones) are not affected, and neither are admin users edited by somebody else.
+
+5. The `Sylius\Bundle\AdminBundle\Command\CreateAdminUser` command has been extended with two optional constructor
+   arguments:
+
+   ```diff
+    public function __construct(
+        private string $email,
+        private string $username,
+        private ?string $firstName,
+        private ?string $lastName,
+        private string $plainPassword,
+        private string $localeCode,
+        private bool $enabled,
+   +    private bool $administrationAccess = true,
+   +    private bool $apiAccess = false,
+    )
+   ```
+
+   Their values are exposed by the new `hasAdministrationAccess()` and `hasApiAccess()` methods and are turned into
+   roles by `Sylius\Bundle\AdminBundle\CommandHandler\CreateAdminUserHandler`. The defaults keep the previous
+   behaviour, so dispatching the command without them creates an admin user with administration access only.
+
+   The interactive `sylius:admin-user:create` command now additionally asks for the access levels (multiselect,
+   administration access preselected) and shows them in the summary table.
+
+6. The `sylius_admin_user` form type (`Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType`) has two new checkbox
+   fields, `administrationAccess` and `apiAccess`, rendered by the `access_levels` form section. If you have overridden
+   the admin user form template, add them to your own layout.
+
 ## Payment
 
 1. The **Payment Request** feature is no longer **experimental**.
@@ -344,6 +548,60 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    the order pay flow in `Sylius\Bundle\CoreBundle\OrderPay` and `Sylius\Bundle\PayumBundle\OrderPay`, and the
    Payment Request layer in `Sylius\Bundle\ApiBundle`. These classes are now covered by the Sylius Backward
    Compatibility policy.
+
+## Order
+
+1. A new `getOrderAndItemPromotionTotal(): int` method has been added to
+   `Sylius\Component\Core\Model\OrderInterface` and implemented in `Sylius\Component\Core\Model\Order`.
+
+   ```php
+   public function getOrderAndItemPromotionTotal(): int;
+   ```
+
+   If you have custom classes implementing this interface without extending `Sylius\Component\Core\Model\Order`,
+   you must add this method.
+
+   `getOrderPromotionTotal()` sums `ORDER_UNIT_PROMOTION_ADJUSTMENT`, `ORDER_ITEM_PROMOTION_ADJUSTMENT` and
+   `ORDER_PROMOTION_ADJUSTMENT` together. The unit-level adjustment is already netted into each item's subtotal
+   (`OrderItem::getSubtotal()`), which is what the "Items total" row of the cart summary displays. Showing it again
+   in the "Discount" row subtracted it twice, so `Items total + Discount + shipping + tax` did not add up to the
+   actual order total and the discount shown to the customer was larger than the one really applied.
+
+   `getOrderAndItemPromotionTotal()` sums only `ORDER_ITEM_PROMOTION_ADJUSTMENT` and `ORDER_PROMOTION_ADJUSTMENT`,
+   so it can safely be displayed next to "Items total".
+
+2. The shop cart summary and checkout summary now use `getOrderAndItemPromotionTotal()` instead of
+   `getOrderPromotionTotal()`:
+
+   - `@SyliusShop/cart/index/content/form/sections/general/summary/discount.html.twig`
+   - `@SyliusShop/checkout/common/sidebar/summary/total/promotion_total.html.twig`
+
+   If you have custom templates, reports or integrations that display a promotion total next to
+   `getItemsSubtotal()`/`getSubtotal()`, switch them to `getOrderAndItemPromotionTotal()` to avoid the same
+   double-counting. `getOrderPromotionTotal()` is unchanged and still returns the promotion's full effect.
+
+## Promotion
+
+1. New **opt-in per-channel** promotion rule and action types have been added. They let a single
+   promotion rule/action hold independent configuration per channel, with the `configuration` array
+   keyed by channel code (e.g. `['WEB_US' => ['count' => 2], 'WEB_GB' => ['count' => 5]]`):
+
+   - Rules: `cart_quantity_per_channel`, `customer_group_per_channel`, `nth_order_per_channel`,
+     `shipping_country_per_channel`, `has_taxon_per_channel`, `contains_product_per_channel`.
+   - Actions: `order_percentage_discount_per_channel`, `shipping_percentage_discount_per_channel`.
+
+   These are **additional** types registered alongside the existing plain ones. Existing promotions
+   and the plain rule/action types are unchanged, and **no core service is replaced**, so the change
+   is fully backward compatible and requires no action.
+
+   Implementation: two generic decorators in `Sylius\Component\Core\Promotion` unwrap the current
+   channel's configuration slice and delegate to the standard checker/command:
+
+   - `Sylius\Component\Core\Promotion\Checker\Rule\PerChannelRuleChecker`
+   - `Sylius\Component\Core\Promotion\Action\PerChannelPromotionActionCommand`
+
+   The admin forms use new `ChannelBased*ConfigurationType` form types built on top of
+   `Sylius\Bundle\CoreBundle\Form\Type\ChannelCollectionType`.
 
 ## Shop
 
