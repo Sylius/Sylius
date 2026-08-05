@@ -64,6 +64,7 @@ sylius:
         account: Account
         admin_user: Administrator
         add_new_entry: Add a new entry
+        and_more: 'and more'
         back_to_dashboard: Back to dashboard
         catalog_promotion:
             dates_details: This operation is time-consuming! Please consider a 2-10 minutes delay starting from the specified dates. The delay depends on the size of the catalog.
@@ -101,16 +102,18 @@ sylius:
         partially_refunded: 'Partially refunded'
         payment_method_banner:
             adyen:
-                description: 'A single platform for payments across channels and regions, built for high-volume merchants.'
+                description: 'Unify online, in-store and marketplace payments worldwide on one platform.'
                 title: 'Scale globally with Adyen'
             mollie:
-                description: 'One integration for all major European payment methods, with transparent pricing.'
-                title: 'Simple payments with Mollie'
+                description: 'Reach European shoppers through iDEAL, Bancontact, BLIK and 30+ more methods.'
+                title: 'Simplify payments with Mollie'
+            official: 'Official Integration'
+            official_hint: 'Built and maintained by the Sylius team'
             paypal:
-                description: 'Offer your customers a trusted checkout experience with PayPal and Pay Later options.'
-                title: 'Grow sales with PayPal'
+                description: 'Give shoppers a wallet they already trust, with Pay Later options built in.'
+                title: 'Grow your sales with PayPal'
             stripe:
-                description: 'Connect your store to Stripe and start accepting cards, wallets and local payment methods in minutes.'
+                description: 'One integration for 125+ payment methods, built on developer-first APIs.'
                 title: 'Accept payments with Stripe'
         pending_actions: Pending actions
         price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
