@@ -28,6 +28,8 @@ use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleCollectionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionTranslationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType;
+use Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Symfony\Component\Form\Extension\Core\DataMapper\DataMapper;
 
@@ -109,6 +111,18 @@ return static function (ContainerConfigurator $container) {
             '%sylius.form.type.promotion_action.validation_groups%',
             service('sylius.form_registry.promotion_action'),
         ])
+        ->tag('form.type')
+    ;
+
+    $services
+        ->set('sylius.form.type.promotion_rule.cart_quantity_configuration', CartQuantityConfigurationType::class)
+        ->args([service('sylius.promotion.comparison_operator_matcher')])
+        ->tag('form.type')
+    ;
+
+    $services
+        ->set('sylius.form.type.promotion_rule.item_total_configuration', ItemTotalConfigurationType::class)
+        ->args([service('sylius.promotion.comparison_operator_matcher')])
         ->tag('form.type')
     ;
 

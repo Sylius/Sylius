@@ -662,7 +662,18 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
 ## Deprecations
 
-1. Not passing a `Symfony\Contracts\Translation\TranslatorInterface` to `Sylius\Component\User\Security\Checker\EnabledUserChecker` is deprecated since Sylius 2.3 and will be required in Sylius 3.0.
+1. Not passing `ComparisonOperatorMatcherInterface` to the following classes is deprecated since Sylius 2.3 and will no longer be supported in Sylius 3.0:
+
+    - `Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType`
+    - `Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType`
+    - `Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker`
+    - `Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker`
+
+   Pass a `ComparisonOperatorMatcherInterface` when instantiating these classes directly. Symfony services are already configured to inject it.
+
+2. The optional `$comparisonOperator` arguments have been added to `PromotionRuleFactory::createCartQuantity()` and `PromotionRuleFactory::createItemTotal()` without changing `PromotionRuleFactoryInterface` to preserve backward compatibility. They will be added to the interface in Sylius 3.0.
+
+3. Not passing a `Symfony\Contracts\Translation\TranslatorInterface` to `Sylius\Component\User\Security\Checker\EnabledUserChecker` is deprecated since Sylius 2.3 and will be required in Sylius 3.0.
 
    ```diff
    -public function __construct()
@@ -672,7 +683,7 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    > **Deprecated:** When a translator is provided, the "account is disabled" message shown during authentication uses the new `sylius.user.account_disabled` translation key (`validators` domain).
    > Without it, the checker falls back to the original `DisabledException('User account is disabled.')` behavior.
 
-2. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
+4. Passing a `Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface` directly to the following catalog-facing classes is deprecated since Sylius 2.3.
    Implement `Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface` instead, which extends `ProductVariantPricesCalculatorInterface` with no additional methods.
    It will be required in Sylius 3.0.
 

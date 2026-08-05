@@ -283,6 +283,7 @@ final class PromotionsTest extends JsonApiTestCase
                         'type' => CartQuantityRuleChecker::TYPE,
                         'configuration' => [
                             'count' => 'invalid',
+                            'comparison_operator' => 'invalid',
                         ],
                     ],
                     [
@@ -327,6 +328,15 @@ final class PromotionsTest extends JsonApiTestCase
                     [
                         'type' => ItemTotalRuleChecker::TYPE,
                         'configuration' => [],
+                    ],
+                    [
+                        'type' => ItemTotalRuleChecker::TYPE,
+                        'configuration' => [
+                            'WEB' => [
+                                'amount' => 1000,
+                                'comparison_operator' => 'invalid',
+                            ],
+                        ],
                     ],
                     [
                         'type' => 'wrong_type',

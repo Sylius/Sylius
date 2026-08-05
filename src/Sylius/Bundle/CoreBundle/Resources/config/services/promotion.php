@@ -154,11 +154,13 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.checker.promotion_rule.item_total', ItemTotalRuleChecker::class)
+        ->args([service('sylius.promotion.comparison_operator_matcher')])
         ->tag('sylius.promotion_rule_checker', ['type' => 'item_total', 'label' => 'sylius.form.promotion_rule.item_total', 'form_type' => ChannelBasedItemTotalConfigurationType::class])
     ;
 
     $services
         ->set('sylius.checker.promotion_rule.cart_quantity', CartQuantityRuleChecker::class)
+        ->args([service('sylius.promotion.comparison_operator_matcher')])
         ->tag('sylius.promotion_rule_checker', ['type' => 'cart_quantity', 'label' => 'sylius.form.promotion_rule.cart_quantity', 'form_type' => CartQuantityConfigurationType::class])
     ;
 

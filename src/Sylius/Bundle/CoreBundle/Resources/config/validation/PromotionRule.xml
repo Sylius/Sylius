@@ -27,6 +27,13 @@
                             <option name="groups">sylius_promotion_rule_cart_quantity</option>
                         </constraint>
                     </value>
+                    <value key="comparison_operator">
+                        <constraint name="Optional">
+                            <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\ComparisonOperatorExists">
+                                <option name="groups">sylius_promotion_rule_cart_quantity</option>
+                            </constraint>
+                        </constraint>
+                    </value>
                 </option>
             </constraint>
 
@@ -172,6 +179,13 @@
                                 <constraint name="Type">
                                     <option name="type">numeric</option>
                                     <option name="groups">sylius_promotion_rule_item_total</option>
+                                </constraint>
+                            </value>
+                            <value key="comparison_operator">
+                                <constraint name="Optional">
+                                    <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\ComparisonOperatorExists">
+                                        <option name="groups">sylius_promotion_rule_item_total</option>
+                                    </constraint>
                                 </constraint>
                             </value>
                         </option>
