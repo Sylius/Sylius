@@ -222,7 +222,7 @@ sylius_twig_hooks:
                 priority: 200
             stripe:
                 template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers/stripe.html.twig'
-priority: 150
+                priority: 150
             adyen:
                 template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers/adyen.html.twig'
                 priority: 100
