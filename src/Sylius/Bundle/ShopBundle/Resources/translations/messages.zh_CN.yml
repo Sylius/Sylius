@@ -37,6 +37,7 @@ sylius:
             guarantee_content: '30天退款保证'
             multiple_payments_title: '多种支付方式'
             multiple_payments_content: '我们接受信用卡和PayPal支付'
+        payment_partners: '支付合作伙伴'
     homepage:
         about_us: '关于我们'
         about_us_content: '欢迎来到我们的商店，您的一站式在线购物平台，提供最优质的产品。您可以从我们的服装和鞋类精选中挑选心仪的商品。(<i>您可以通过覆盖 "sylius.homepage.about_us_content" 键来自定义此内容</i>)'

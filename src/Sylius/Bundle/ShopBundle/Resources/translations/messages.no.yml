@@ -37,6 +37,7 @@ sylius:
             guarantee_content: "'30 dagers pengene tilbake-garanti'"
             multiple_payments_title: "'Flere betalingsmetoder'"
             multiple_payments_content: "'Vi aksepterer kredittkort og PayPal'"
+        payment_partners: 'Betalingspartnere'
     homepage:
         about_us: "'Om oss'"
         about_us_content: "'Velkommen til butikken vår, din nummer én nettbutikk som gir deg de aller beste produktene. Du kan velge blant de beste klærne og skoene i vårt tilbud. (<i>Du kan endre dette innholdet ved å overstyre \"sylius.homepage.about_us_content\"-nøkkelen i din oversettelsesfil</i>)'"

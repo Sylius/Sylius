@@ -37,6 +37,7 @@ sylius:
             guarantee_content: '30 days money back guarantee'
             multiple_payments_title: 'Multiple Payment methods'
             multiple_payments_content: 'We accept credit cards and PayPal'
+        payment_partners: 'Payment Partners'
     homepage:
         about_us: 'About Us'
         about_us_content: 'Welcome to our store, your number one online shop that gives you the very best products. You can choose from the very best clothes and shoes from our offer. (<i>You can modify this content by overriding "sylius.homepage.about_us_content" key in your translation file</i>)'

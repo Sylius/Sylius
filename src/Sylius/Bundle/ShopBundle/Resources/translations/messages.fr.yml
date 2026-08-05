@@ -37,6 +37,7 @@ sylius:
             guarantee_content: 'Satisfait ou remboursé sous 30 jours'
             multiple_payments_title: 'Multiples options de paiement'
             multiple_payments_content: 'Nous acceptons les cartes de crédit et PayPal'
+        payment_partners: 'Partenaires de paiement'
     homepage:
         about_us: 'À propos de nous'
         about_us_content: 'Bienvenu(e) dans notre magasin, votre boutique numéro un qui vous offre les meilleurs produits. Vous pouvez choisir parmi les meilleurs vêtements et chaussures de notre catalogue. (<i>Vous pouvez modifier ce contenu en surchargeant la clé "sylius.homepage.about_us_content" dans votre fichier de traduction</i>)'

@@ -37,6 +37,7 @@ sylius:
             guarantee_content: '30 dní garance vrácení peněz'
             multiple_payments_title: 'Více platebních metod'
             multiple_payments_content: 'Akceptujeme kreditní karty a PayPal'
+        payment_partners: 'Platební partneři'
     homepage:
         about_us: 'O nás'
         about_us_content: 'Vítejte v našem obchodě, vašem nejlepším online obchodě, který vám nabízí ty nejlepší produkty. Můžete si vybrat z těch nejlepších oblečení a bot z naší nabídky. (<i>Tento obsah můžete upravit přepsáním klíče "sylius.homepage.about_us_content" ve vašem překladovém souboru</i>)'
