@@ -20,8 +20,11 @@ use Symfony\Component\Validator\Constraint;
 final class ChosenShippingMethodEligibility extends Constraint
 {
     public const SHIPPING_METHOD_NOT_AVAILABLE_ERROR = 'SHIPPING_METHOD_NOT_AVAILABLE';
+
     public const SHIPPING_METHOD_NOT_FOUND_ERROR = 'SHIPPING_METHOD_NOT_FOUND';
+
     public const SHIPMENT_NOT_FOUND_ERROR = 'SHIPMENT_NOT_FOUND';
+
     public const SHIPPING_ADDRESS_NOT_FOUND_ERROR = 'SHIPPING_ADDRESS_NOT_FOUND';
 
     /**

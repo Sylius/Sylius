@@ -91,7 +91,11 @@ final class OrderPaymentRequestEligibilityValidator extends ConstraintValidator
     private function validateOrderEligibility(OrderInterface $order, OrderPaymentRequestEligibility $constraint): void
     {
         if (!$this->orderPaymentRequestEligibilityChecker->isEligible($order)) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setCode(OrderPaymentRequestEligibility::INVALID_ORDER_CHECKOUT_STATE_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

@@ -83,7 +83,7 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
         if (!in_array($shippingMethod, $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
             $this->context
                 ->buildViolation($constraint->message)
-                ->setParameter('%name%', $shippingMethod->getName())
+                ->setParameter('%name%', (string) $shippingMethod->getName())
                 ->setCode(ChosenShippingMethodEligibility::SHIPPING_METHOD_NOT_AVAILABLE_ERROR)
                 ->addViolation()
             ;

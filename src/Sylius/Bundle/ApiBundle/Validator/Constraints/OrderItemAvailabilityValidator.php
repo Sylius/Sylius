@@ -49,7 +49,7 @@ final class OrderItemAvailabilityValidator extends ConstraintValidator
             if (!$this->availabilityChecker->isStockSufficient($variant, $orderItem->getQuantity())) {
                 $this->context
                     ->buildViolation($constraint->message)
-                    ->setParameter('%productVariantName%', $variant->getName())
+                    ->setParameter('%productVariantName%', (string) $variant->getName())
                     ->setCode(OrderItemAvailability::INSUFFICIENT_STOCK_ERROR)
                     ->addViolation()
                 ;

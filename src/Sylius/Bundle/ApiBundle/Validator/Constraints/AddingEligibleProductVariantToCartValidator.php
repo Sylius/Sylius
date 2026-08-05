@@ -74,7 +74,7 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         if (!$product->isEnabled()) {
             $this->context
                 ->buildViolation($constraint->productNotExistMessage)
-                ->setParameter('%productName%', $product->getName())
+                ->setParameter('%productName%', (string) $product->getName())
                 ->setCode(AddingEligibleProductVariantToCart::PRODUCT_NOT_EXIST_ERROR)
                 ->addViolation()
             ;
@@ -85,7 +85,7 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         if (!$productVariant->isEnabled()) {
             $this->context
                 ->buildViolation($constraint->productVariantNotExistMessage)
-                ->setParameter('%productVariantCode%', $productVariant->getCode())
+                ->setParameter('%productVariantCode%', (string) $productVariant->getCode())
                 ->setCode(AddingEligibleProductVariantToCart::PRODUCT_VARIANT_NOT_EXIST_ERROR)
                 ->addViolation()
             ;
@@ -113,7 +113,7 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
         if (!$product->hasChannel($channel)) {
             $this->context
                 ->buildViolation($constraint->productNotExistMessage)
-                ->setParameter('%productName%', $product->getName())
+                ->setParameter('%productName%', (string) $product->getName())
                 ->setCode(AddingEligibleProductVariantToCart::PRODUCT_NOT_EXIST_ERROR)
                 ->addViolation()
             ;

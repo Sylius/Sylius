@@ -20,7 +20,9 @@ use Symfony\Component\Validator\Constraint;
 final class ChosenPaymentMethodEligibility extends Constraint
 {
     public const PAYMENT_METHOD_NOT_AVAILABLE_ERROR = 'PAYMENT_METHOD_NOT_AVAILABLE';
+
     public const PAYMENT_METHOD_NOT_EXIST_ERROR = 'PAYMENT_METHOD_NOT_FOUND';
+
     public const PAYMENT_NOT_FOUND_ERROR = 'PAYMENT_NOT_FOUND';
 
     /** @deprecated since Sylius 2.3, use $notAvailableMessage instead. It will be removed in Sylius 3.0. */

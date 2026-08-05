@@ -75,7 +75,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         if (!$product->isEnabled()) {
             $this->context
                 ->buildViolation($constraint->productNotExistMessage)
-                ->setParameter('%productName%', $product->getName())
+                ->setParameter('%productName%', (string) $product->getName())
                 ->setCode(ChangedItemQuantityInCart::PRODUCT_NOT_EXIST_ERROR)
                 ->addViolation()
             ;
@@ -114,7 +114,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         if (!$product->hasChannel($channel)) {
             $this->context
                 ->buildViolation($constraint->productNotExistMessage)
-                ->setParameter('%productName%', $product->getName())
+                ->setParameter('%productName%', (string) $product->getName())
                 ->setCode(ChangedItemQuantityInCart::PRODUCT_NOT_EXIST_ERROR)
                 ->addViolation()
             ;

@@ -44,7 +44,7 @@ final class ShopUserNotVerifiedValidator extends ConstraintValidator
 
         $this->context
             ->buildViolation($constraint->message)
-            ->setParameter('%email%', $shopUser->getEmail())
+            ->setParameter('%email%', (string) $shopUser->getEmail())
             ->setCode(ShopUserNotVerified::USER_ALREADY_VERIFIED_ERROR)
             ->addViolation()
         ;

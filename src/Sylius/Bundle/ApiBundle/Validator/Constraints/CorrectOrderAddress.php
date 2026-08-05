@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraint;
 final class CorrectOrderAddress extends Constraint
 {
     public const COUNTRY_NOT_EXIST_ERROR = 'COUNTRY_NOT_FOUND';
+
     public const ADDRESS_WITHOUT_COUNTRY_ERROR = 'ADDRESS_WITHOUT_COUNTRY';
 
     /**

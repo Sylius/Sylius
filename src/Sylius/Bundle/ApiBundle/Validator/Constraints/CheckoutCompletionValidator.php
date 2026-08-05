@@ -50,7 +50,7 @@ class CheckoutCompletionValidator extends ConstraintValidator
 
         $this->context
             ->buildViolation($constraint->message)
-            ->setParameter('%currentState%', $order->getCheckoutState())
+            ->setParameter('%currentState%', (string) $order->getCheckoutState())
             ->setParameter('%possibleTransitions%', implode(
                 ', ',
                 array_map(

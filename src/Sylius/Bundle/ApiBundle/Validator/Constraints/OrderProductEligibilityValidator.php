@@ -51,21 +51,21 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
             if (!$orderItem->getVariant()->isEnabled()) {
                 $this->context
                     ->buildViolation($constraint->message)
-                    ->setParameter('%productName%', $orderItem->getVariant()->getName())
+                    ->setParameter('%productName%', (string) $orderItem->getVariant()->getName())
                     ->setCode(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)
                     ->addViolation()
                 ;
             } elseif (!$orderItem->getProduct()->isEnabled()) {
                 $this->context
                     ->buildViolation($constraint->message)
-                    ->setParameter('%productName%', $orderItem->getProduct()->getName())
+                    ->setParameter('%productName%', (string) $orderItem->getProduct()->getName())
                     ->setCode(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)
                     ->addViolation()
                 ;
             } elseif (null !== $channel && !$orderItem->getProduct()->hasChannel($channel)) {
                 $this->context
                     ->buildViolation($constraint->message)
-                    ->setParameter('%productName%', $orderItem->getProduct()->getName())
+                    ->setParameter('%productName%', (string) $orderItem->getProduct()->getName())
                     ->setCode(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)
                     ->addViolation()
                 ;
