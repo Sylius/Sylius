@@ -699,3 +699,29 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    This allows you to decorate catalog display pricing independently from cart/order pricing
    (`sylius.order_processing.order_prices_recalculator`, `sylius.filter.promotion.price_range`),
    which remain on `ProductVariantPricesCalculatorInterface`.
+
+2. The add to cart logic has been extracted from `Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCartFormComponent`
+   into a new `Sylius\Bundle\OrderBundle\Adder\CartItemAdder` service (`sylius.adder.cart_item`):
+
+   ```php
+   interface CartItemAdderInterface
+   {
+       public function add(AddToCartCommandInterface $addToCartCommand): void;
+   }
+   ```
+
+   The service dispatches the `SyliusCartEvents::CART_ITEM_ADD` event (which performs the actual cart modification),
+   persists and flushes the cart, and then dispatches `SyliusCartEvents::CART_ITEM_POST_ADD`. Use it in custom add to
+   cart components or controllers instead of duplicating this logic.
+
+   Not passing a `Sylius\Bundle\OrderBundle\Adder\CartItemAdderInterface` instance as the last constructor argument of
+   `AddToCartFormComponent` is deprecated since Sylius 2.3 and will be required in Sylius 3.0:
+
+   ```diff
+    public function __construct(
+        // ...
+        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository,
+   +    protected readonly ?CartItemAdderInterface $cartItemAdder = null,
+    ) {
+   ```
