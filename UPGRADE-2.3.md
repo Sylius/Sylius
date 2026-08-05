@@ -710,8 +710,9 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    }
    ```
 
-   The service dispatches the `SyliusCartEvents::CART_ITEM_ADD` event (which performs the actual cart modification)
-   and persists the cart. Use it in custom add to cart components or controllers instead of duplicating this logic.
+   The service dispatches the `SyliusCartEvents::CART_ITEM_ADD` event (which performs the actual cart modification),
+   persists and flushes the cart, and then dispatches `SyliusCartEvents::CART_ITEM_POST_ADD`. Use it in custom add to
+   cart components or controllers instead of duplicating this logic.
 
    Not passing a `Sylius\Bundle\OrderBundle\Adder\CartItemAdderInterface` instance as the last constructor argument of
    `AddToCartFormComponent` is deprecated since Sylius 2.3 and will be required in Sylius 3.0:

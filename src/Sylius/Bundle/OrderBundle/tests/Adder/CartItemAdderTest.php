@@ -55,20 +55,27 @@ final class CartItemAdderTest extends TestCase
         $addToCartCommand = $this->createMock(AddToCartCommandInterface::class);
         $addToCartCommand->method('getCart')->willReturn($cart);
 
+        $dispatchedEventNames = [];
+
         $this->eventDispatcher
-            ->expects(self::once())
+            ->expects(self::exactly(2))
             ->method('dispatch')
-            ->with(
-                self::callback(
-                    static fn (GenericEvent $event): bool => $event->getSubject() === $addToCartCommand,
-                ),
-                SyliusCartEvents::CART_ITEM_ADD,
-            )
+            ->willReturnCallback(function (GenericEvent $event, string $eventName) use (&$dispatchedEventNames, $addToCartCommand) {
+                self::assertSame($addToCartCommand, $event->getSubject());
+                $dispatchedEventNames[] = $eventName;
+
+                return $event;
+            })
         ;
 
         $this->orderManager->expects(self::once())->method('persist')->with($cart);
         $this->orderManager->expects(self::once())->method('flush');
 
         $this->cartItemAdder->add($addToCartCommand);
+
+        self::assertSame(
+            [SyliusCartEvents::CART_ITEM_ADD, SyliusCartEvents::CART_ITEM_POST_ADD],
+            $dispatchedEventNames,
+        );
     }
 }

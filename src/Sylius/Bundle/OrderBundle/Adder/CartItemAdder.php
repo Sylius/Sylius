@@ -33,5 +33,7 @@ final readonly class CartItemAdder implements CartItemAdderInterface
 
         $this->orderManager->persist($addToCartCommand->getCart());
         $this->orderManager->flush();
+
+        $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_POST_ADD);
     }
 }
