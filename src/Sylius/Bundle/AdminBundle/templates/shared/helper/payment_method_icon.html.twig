@@ -1,0 +1,25 @@
+{% macro label(code) %}
+    {#- Brand names are proper nouns and are never translated, so they live here rather than in a translation catalogue. -#}
+    {%- set labels = {
+        alipay: 'Alipay',
+        amex: 'American Express',
+        apple_pay: 'Apple Pay',
+        bancontact: 'Bancontact',
+        blik: 'BLIK',
+        google_pay: 'Google Pay',
+        ideal: 'iDEAL',
+        klarna: 'Klarna',
+        maestro: 'Maestro',
+        master_card: 'Mastercard',
+        paypal: 'PayPal',
+        sepa: 'SEPA',
+        venmo: 'Venmo',
+        visa: 'Visa',
+        wechat_pay: 'WeChat Pay',
+    } -%}
+    {{- labels[code]|default(code|replace({'_': ' '})|title) -}}
+{% endmacro %}
+
+{% macro image(code) %}
+    <img src="{{ asset('build/admin/images/' ~ code ~ '.svg', 'admin') }}" alt="{{ _self.label(code)|trim }}">
+{% endmacro %}

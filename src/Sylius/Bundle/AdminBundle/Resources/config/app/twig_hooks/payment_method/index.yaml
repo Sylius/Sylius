@@ -4,7 +4,7 @@ sylius_twig_hooks:
             title:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
                 configuration:
-                    documentation_url: 'https://docs.sylius.com/stripe-plugin/getting-started/configure-your-first-payment-method'
+                    documentation_url: 'https://docs.sylius.com/public/stripe-plugin/getting-started/configure-your-first-payment-method?utm_source=sylius_admin&utm_medium=header&utm_campaign=payment_plugins&utm_content=payment_methods_header'
                 priority: 100
 
         'sylius_admin.payment_method.index.content':
@@ -19,53 +19,53 @@ sylius_twig_hooks:
                 configuration:
                     active: true
                     variant: 'stripe'
-                    image: 'build/admin/images/stripe.png'
+                    image: 'build/admin/images/stripe-logo.webp'
                     title: 'sylius.ui.payment_method_banner.stripe.title'
                     description: 'sylius.ui.payment_method_banner.stripe.description'
-                    payment_methods: ['visa', 'master_card', 'amex']
+                    payment_methods: ['visa', 'master_card', 'amex', 'apple_pay', 'google_pay', 'klarna']
                     payment_methods_more: true
                     is_installed: true
-                    documentation_url: 'https://github.com/Sylius/StripePlugin/blob/1.0/README.md'
-                    plugin_url: 'https://addons.sylius.com/en_US/products/stripe-plugin?utm_source=sylius&utm_medium=website&utm_campaign=payment_plugins&utm_content=stripe_plugin'
+                    documentation_url: 'https://docs.sylius.com/public/stripe-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=stripe_docs'
+                    plugin_url: 'https://addons.sylius.com/en_US/products/stripe-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=stripe_plugin'
             paypal:
                 template: '@SyliusAdmin/payment_method/index/content/banner/slide.html.twig'
                 priority: 300
                 configuration:
                     variant: 'paypal'
-                    image: 'build/admin/images/paypal.png'
+                    image: 'build/admin/images/paypal-logo.svg'
                     title: 'sylius.ui.payment_method_banner.paypal.title'
                     description: 'sylius.ui.payment_method_banner.paypal.description'
-                    payment_methods: ['visa', 'master_card', 'amex', 'maestro']
+                    payment_methods: ['visa', 'master_card', 'amex', 'paypal', 'venmo', 'apple_pay']
                     payment_methods_more: true
                     is_installed: false
-                    documentation_url: 'https://docs.sylius.com/paypal-plugin'
-                    plugin_url: 'https://addons.sylius.com/en_US/products/paypal-plugin?utm_source=sylius&utm_medium=website&utm_campaign=payment_plugins&utm_content=paypal_plugin'
+                    documentation_url: 'https://docs.sylius.com/public/paypal-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=paypal_docs'
+                    plugin_url: 'https://addons.sylius.com/en_US/products/paypal-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=paypal_plugin'
             adyen:
                 template: '@SyliusAdmin/payment_method/index/content/banner/slide.html.twig'
                 priority: 200
                 configuration:
                     variant: 'adyen'
-                    image: 'build/admin/images/adyen.png'
+                    image: 'build/admin/images/adyen-logo.svg'
                     title: 'sylius.ui.payment_method_banner.adyen.title'
                     description: 'sylius.ui.payment_method_banner.adyen.description'
-                    payment_methods: ['visa', 'master_card', 'amex', 'maestro']
+                    payment_methods: ['visa', 'master_card', 'amex', 'alipay', 'wechat_pay', 'klarna']
                     payment_methods_more: true
                     is_installed: false
-                    documentation_url: 'https://docs.sylius.com/adyen-plugin'
-                    plugin_url: 'https://addons.sylius.com/en_US/products/adyen-plugin?utm_source=sylius&utm_medium=website&utm_campaign=payment_plugins&utm_content=adyen_plugin'
+                    documentation_url: 'https://docs.sylius.com/public/adyen-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=adyen_docs'
+                    plugin_url: 'https://addons.sylius.com/en_US/products/adyen-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=adyen_plugin'
             mollie:
                 template: '@SyliusAdmin/payment_method/index/content/banner/slide.html.twig'
                 priority: 100
                 configuration:
                     variant: 'mollie'
-                    image: 'build/admin/images/mollie.png'
+                    image: 'build/admin/images/mollie-logo.svg'
                     title: 'sylius.ui.payment_method_banner.mollie.title'
                     description: 'sylius.ui.payment_method_banner.mollie.description'
-                    payment_methods: ['visa', 'master_card', 'amex', 'maestro']
+                    payment_methods: ['visa', 'master_card', 'maestro', 'ideal', 'bancontact', 'blik']
                     payment_methods_more: true
                     is_installed: true
-                    documentation_url: 'https://docs.sylius.com/mollie-plugin'
-                    plugin_url: 'https://addons.sylius.com/en_US/products/mollie-plugin?utm_source=sylius&utm_medium=website&utm_campaign=payment_plugins&utm_content=mollie_plugin'
+                    documentation_url: 'https://docs.sylius.com/public/mollie-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=mollie_docs'
+                    plugin_url: 'https://addons.sylius.com/en_US/products/mollie-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=mollie_plugin'
 
         'sylius_admin.payment_method.index.content.grid':
             data_table:

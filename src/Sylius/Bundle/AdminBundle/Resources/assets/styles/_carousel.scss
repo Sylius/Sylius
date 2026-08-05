@@ -5,6 +5,12 @@ $carousel-vertical-gap: 8px !default;
         overflow: hidden;
     }
 
+    // Slower and eased rather than Bootstrap's .6s ease-in-out, so the vertical slide reads as a
+    // gentle drift instead of a snap. The mixin drops the transition under prefers-reduced-motion.
+    .carousel-item {
+        @include transition(transform 1s cubic-bezier(0.33, 0, 0.15, 1));
+    }
+
     .active.carousel-item-start,
     .carousel-item-prev:not(.carousel-item-end) {
         transform: translateY(calc(-100% - #{$carousel-vertical-gap}));
@@ -18,11 +24,29 @@ $carousel-vertical-gap: 8px !default;
 
 .sylius-payment-methods-banner {
     $banner-color: var(--sylius-payment-methods-banner-color, #{$gray-500});
+    $logo-width: 8rem;
 
     .carousel-item {
-        border: 3px solid $banner-color;
+        border: 0;
         border-radius: $border-radius-lg;
+        // Plain white first: browsers without color-mix() drop the gradient and keep a clean card.
         background: $white;
+        background: linear-gradient(
+            100deg,
+            #{$white} 30%,
+            color-mix(in srgb, #{$banner-color} 4%, #{$white}) 62%,
+            color-mix(in srgb, #{$banner-color} 14%, #{$white}) 100%
+        );
+    }
+
+    // Slide height follows the active item, so a title or description that wraps to a different
+    // number of lines makes the whole banner jump as the carousel rotates. Translations will always
+    // vary in length, so pin a floor rather than relying on the English copy staying balanced.
+    // Only from xl up, where the horizontal layout applies; below that the slide stacks and grows.
+    @include media-breakpoint-up(xl) {
+        .carousel-item {
+            min-height: 13.5rem;
+        }
     }
 
     &__slide--stripe {
@@ -41,10 +65,20 @@ $carousel-vertical-gap: 8px !default;
         --sylius-payment-methods-banner-color: #000;
     }
 
+    // Matches the logo width so the badge centres under it rather than stretching the column.
+    &__brand {
+        width: $logo-width;
+    }
+
+    // Partner marks come straight from each brand kit and are single-colour: Mollie's is black and
+    // PayPal's navy, both of which vanish on a dark surface. Recolouring them would breach the brand
+    // guidelines, so every mark sits on a white tile — the same treatment the chips already use.
+    // In light mode the gradient starts as pure white here, so the tile is invisible.
     &__logo {
-        width: 8rem;
+        width: $logo-width;
         height: 6rem;
         border-radius: 0.75rem;
+        background: $white;
 
         img {
             max-width: 100%;
@@ -54,13 +88,25 @@ $carousel-vertical-gap: 8px !default;
     }
 
     &__content {
-        max-width: 28rem;
+        max-width: 26rem;
     }
 
+    // 1.5rem rather than 1.75rem: with six chips plus the "and more" label this column ends up around
+    // 380px. At 1.75rem the longest title ("Simplify payments with Mollie") needs 403px and wraps;
+    // at 1.5rem it needs ~349px, leaving room for longer translations too.
     &__title {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
         font-weight: 800;
         line-height: 1.2;
+    }
+
+    &__badge {
+        border: 1px solid $banner-color;
+        background-color: transparent;
+        color: $banner-color;
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
     }
 
     &__description {
@@ -69,8 +115,24 @@ $carousel-vertical-gap: 8px !default;
         line-height: 1.7;
     }
 
+    // Pinned so the six chips plus the "and more" label lay out as 4 + 3 across two rows. A chip is
+    // ~69px (amex ~71px), so 17.5rem fits four (275px needed) and wraps the fifth. Keeping this
+    // column bounded is what leaves the text column wide enough for a single-line title.
     &__methods {
-        min-width: 0;
+        width: 17.5rem;
+        flex-shrink: 0;
+    }
+
+    &__method-grid {
+        row-gap: 0.25rem;
+    }
+
+    // Sits in the chip grid as one more item, so it takes the chip height to stay on the same rhythm.
+    &__more {
+        height: 2.7rem;
+        color: $text-secondary;
+        font-size: 0.8125rem;
+        white-space: nowrap;
     }
 
     &__method {
@@ -82,11 +144,6 @@ $carousel-vertical-gap: 8px !default;
             height: 100%;
             max-height: 100%;
             object-fit: contain;
-        }
-
-        &--more {
-            color: $text-secondary;
-            font-size: 0.8125rem;
         }
     }
 
@@ -104,8 +161,10 @@ $carousel-vertical-gap: 8px !default;
         }
     }
 
+    // 11rem covers the widest label ("View documentation" needs 169px incl. padding); the rest
+    // goes back to the text column so the longest title keeps its single line.
     &__actions {
-        width: 11.75rem;
+        width: 11rem;
 
         .btn {
             width: 100%;
@@ -132,10 +191,23 @@ $carousel-vertical-gap: 8px !default;
 
     [data-bs-theme="dark"] & .carousel-item {
         background: var(--#{$prefix}bg-surface);
+        background: linear-gradient(
+            100deg,
+            var(--#{$prefix}bg-surface) 30%,
+            color-mix(in srgb, #{$banner-color} 7%, var(--#{$prefix}bg-surface)) 62%,
+            color-mix(in srgb, #{$banner-color} 22%, var(--#{$prefix}bg-surface)) 100%
+        );
     }
 
     [data-bs-theme="dark"] &__description,
-    [data-bs-theme="dark"] &__method--more {
+    [data-bs-theme="dark"] &__more {
+        color: var(--#{$prefix}secondary);
+    }
+
+    // The Mollie variant uses black as its brand colour, which disappears against a dark surface,
+    // so the badge falls back to a neutral border and text in dark mode.
+    [data-bs-theme="dark"] &__badge {
+        border-color: var(--#{$prefix}border-color);
         color: var(--#{$prefix}secondary);
     }
 }
