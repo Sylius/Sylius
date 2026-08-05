@@ -620,6 +620,46 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Existing subclasses overriding this method with the `RedirectResponse` return type remain valid thanks to
    return type covariance and require no changes.
 
+## New Features
+
+1. New post-flush cart events have been added to `Sylius\Component\Order\SyliusCartEvents`.
+
+   The following events are now dispatched **after** `$manager->flush()`, allowing listeners to react once the cart has been safely persisted to the database:
+
+   | New constant | Event name |
+         |---|---|
+   | `SyliusCartEvents::CART_ITEM_POST_ADD` | `sylius.cart_item_post_add` |
+   | `SyliusCartEvents::CART_ITEM_POST_REMOVE` | `sylius.cart_item_post_remove` |
+   | `SyliusCartEvents::CART_POST_CHANGE` | `sylius.cart_post_change` |
+   | `SyliusCartEvents::CART_POST_CLEAR` | `sylius.cart_post_clear` |
+
+   > **Note:** because these events are dispatched after the flush, their subjects no longer carry the full picture,
+   > so the missing data is passed as event arguments:
+   >
+   > | Event | Why | Argument |
+   > |---|---|---|
+   > | `CART_ITEM_POST_REMOVE` | `CART_ITEM_REMOVE` triggers `OrderModifier::removeFromOrder()`, which calls `$orderItem->setOrder(null)`, so `$orderItem->getOrder()` returns `null` | `$event->getArgument('cart')` |
+   > | `CART_POST_CLEAR` | Doctrine resets the identifier of a removed entity on flush, so `$cart->getId()` returns `null` | `$event->getArgument('cartId')` |
+
+   Example usage — sending a cart to an external service only after it is stored:
+
+   ```php
+   use Sylius\Component\Order\SyliusCartEvents;
+   use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+   use Symfony\Component\EventDispatcher\GenericEvent;
+
+   #[AsEventListener(event: SyliusCartEvents::CART_ITEM_POST_ADD)]
+   final class SendCartToMarketingAutomationListener
+   {
+       public function __invoke(GenericEvent $event): void
+       {
+           // Cart is already persisted — safe to send to external service.
+       }
+   }
+   ```
+
+   The existing pre-flush events (`CART_ITEM_ADD`, `CART_ITEM_REMOVE`, `CART_CHANGE`, `CART_CLEAR`) remain unchanged.
+
 ## Deprecations
 
 1. Not passing a `Symfony\Contracts\Translation\TranslatorInterface` to `Sylius\Component\User\Security\Checker\EnabledUserChecker` is deprecated since Sylius 2.3 and will be required in Sylius 3.0.
