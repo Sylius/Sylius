@@ -38,11 +38,11 @@
         <div class="sylius-payment-methods-banner__actions d-flex flex-row flex-xl-column gap-3 flex-shrink-0">
             {% if is_installed %}
                 <span class="sylius-payment-methods-banner__installed d-inline-flex align-items-center justify-content-center gap-1 py-1 px-2">
-                    {{ ux_icon('tabler:check', { class: 'icon' }) }} {{ 'sylius.ui.payment_method_banner.installed'|trans }}
+                    {{ ux_icon('tabler:check', { class: 'icon' }) }} {{ 'sylius.ui.installed'|trans }}
                 </span>
             {% else %}
                 <a href="{{ banner.plugin_url }}" class="btn sylius-payment-methods-banner__btn-primary" target="_blank" rel="noopener noreferrer">
-                    {{ ux_icon('tabler:download', { class: 'icon' }) }} {{ 'sylius.ui.payment_method_banner.install'|trans }}
+                    {{ ux_icon('tabler:download', { class: 'icon' }) }} {{ 'sylius.ui.install'|trans }}
                 </a>
             {% endif %}
             <a href="{{ banner.documentation_url }}" class="btn" target="_blank" rel="noopener noreferrer">
