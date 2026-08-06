@@ -37,6 +37,7 @@ sylius:
             guarantee_content: '30 Tage Geld-zurück-Garantie'
             multiple_payments_title: 'Mehrere Zahlungsmethoden'
             multiple_payments_content: 'Wir akzeptieren Kreditkarten und PayPal'
+        payment_partners: 'Zahlungspartner'
     homepage:
         about_us: 'Über uns'
         about_us_content: 'Willkommen in unserem Shop, Ihrem besten Online-Shop, der Ihnen die besten Produkte bietet. Sie können aus den besten Kleidern und Schuhen aus unserem Angebot wählen. (<i>Sie können diesen Inhalt anpassen, indem Sie den "sylius.homepage.about_us_content"-Schlüssel in Ihrer Übersetzungsdatei überschreiben</i>)'

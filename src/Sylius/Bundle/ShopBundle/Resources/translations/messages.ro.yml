@@ -37,6 +37,7 @@ sylius:
             guarantee_content: 'Garanție de returnare a banilor în 30 de zile'
             multiple_payments_title: 'Metode de plată multiple'
             multiple_payments_content: 'Acceptăm carduri de credit și PayPal'
+        payment_partners: 'Parteneri de plată'
     homepage:
         about_us: 'Despre noi'
         about_us_content: 'Bine ați venit în magazinul nostru, magazinul dvs. online numărul unu care vă oferă cele mai bune produse. Puteți alege dintre cele mai bune haine și încălțăminte din oferta noastră. (<i>Puteți modifica acest conținut suprascriind cheia "sylius.homepage.about_us_content" în fișierul dvs. de traduceri</i>)'

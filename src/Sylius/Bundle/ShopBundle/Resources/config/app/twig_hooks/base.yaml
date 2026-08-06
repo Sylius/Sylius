@@ -4,12 +4,12 @@ sylius_twig_hooks:
             defaults:
                 template: '@SyliusShop/shared/layout/base/body_classes/defaults.html.twig'
                 priority: 0
-                
+
         'sylius_shop.base#metatags':
             metatags:
                 template: '@SyliusShop/shared/layout/base/metatags.html.twig'
                 priority: 0
-        
+
         'sylius_shop.base#stylesheets':
             styles:
                 template: '@SyliusShop/shared/layout/base/styles.html.twig'
@@ -220,6 +220,9 @@ sylius_twig_hooks:
             paypal:
                 template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers/paypal.html.twig'
                 priority: 200
+            stripe:
+                template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers/stripe.html.twig'
+                priority: 150
             adyen:
                 template: '@SyliusShop/shared/layout/base/footer/content/payment_methods/providers/adyen.html.twig'
                 priority: 100

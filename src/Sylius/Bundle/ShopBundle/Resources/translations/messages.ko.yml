@@ -37,6 +37,7 @@ sylius:
             guarantee_content: '30일 환불 보장'
             multiple_payments_title: '다양한 결제 방법'
             multiple_payments_content: '신용카드와 PayPal을 지원합니다'
+        payment_partners: '결제 파트너'
     homepage:
         about_us: '회사 소개'
         about_us_content: '저희 상점은 최고의 제품만을 제공하는 온라인 쇼핑몰입니다. 다양한 의류와 신발을 만나보세요. (<i>이 내용을 변경하려면 번역 파일에서 "sylius.homepage.about_us_content" 키를 재정의하세요</i>)'
