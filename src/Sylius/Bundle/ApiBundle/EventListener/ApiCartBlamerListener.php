@@ -49,7 +49,12 @@ final readonly class ApiCartBlamerListener
             return;
         }
 
-        $this->commandBus->dispatch(new BlameCart($user->getEmail(), $cart->getTokenValue()));
+        $tokenValue = $cart->getTokenValue();
+        if (null === $tokenValue) {
+            return;
+        }
+
+        $this->commandBus->dispatch(new BlameCart($user->getEmail(), $tokenValue));
     }
 
     /**
