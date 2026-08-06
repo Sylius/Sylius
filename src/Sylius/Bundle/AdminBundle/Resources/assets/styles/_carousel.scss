@@ -135,6 +135,15 @@ $carousel-vertical-gap: 8px !default;
         white-space: nowrap;
     }
 
+    // Static status shown in place of the primary action once the plugin is installed; mirrors the
+    // muted "and more" label rather than reading as a button.
+    &__installed {
+        color: $text-secondary;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
     &__method {
         height: 2.7rem;
         border-radius: $border-radius;
@@ -200,7 +209,8 @@ $carousel-vertical-gap: 8px !default;
     }
 
     [data-bs-theme="dark"] &__description,
-    [data-bs-theme="dark"] &__more {
+    [data-bs-theme="dark"] &__more,
+    [data-bs-theme="dark"] &__installed {
         color: var(--#{$prefix}secondary);
     }
 

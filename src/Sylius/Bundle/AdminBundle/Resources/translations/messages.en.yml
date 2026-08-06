@@ -79,6 +79,8 @@ sylius:
         full_screen: 'Full screen'
         get_plugin: 'Get plugin'
         global: 'Global'
+        install: 'Install'
+        installed: 'Installed'
         ip_address: 'IP address'
         language: 'Language'
         lowest_price_before_discount: 'Lowest price before discount'

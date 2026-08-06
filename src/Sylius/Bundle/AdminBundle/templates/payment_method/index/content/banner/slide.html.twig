@@ -1,6 +1,7 @@
 {% import '@SyliusAdmin/shared/helper/payment_method_icon.html.twig' as payment_method_icon %}
 
 {% set banner = hookable_metadata.configuration %}
+{% set is_installed = banner.bundle is defined and sylius_bundle_loaded_checker(banner.bundle) %}
 
 <div class="carousel-item sylius-payment-methods-banner__slide sylius-payment-methods-banner__slide--{{ banner.variant }} {{ banner.active|default(false) ? 'active' }}">
     <div class="d-flex flex-column flex-xl-row align-items-xl-center gap-4 gap-xl-5 p-4 p-xl-6">
@@ -35,13 +36,15 @@
             </div>
         </div>
         <div class="sylius-payment-methods-banner__actions d-flex flex-row flex-xl-column gap-3 flex-shrink-0">
-            <a href="{{ banner.plugin_url }}" class="btn sylius-payment-methods-banner__btn-primary" target="_blank" rel="noopener noreferrer">
-                {% if banner.is_installed|default(false) %}
-                    {{ ux_icon('tabler:settings', { class: 'icon' }) }} {{ 'sylius.ui.configure'|trans }}
-                {% else %}
-                    {{ ux_icon('tabler:download', { class: 'icon' }) }} {{ 'sylius.ui.get_plugin'|trans }}
-                {% endif %}
-            </a>
+            {% if is_installed %}
+                <span class="sylius-payment-methods-banner__installed d-inline-flex align-items-center justify-content-center gap-1 py-1 px-2">
+                    {{ ux_icon('tabler:check', { class: 'icon' }) }} {{ 'sylius.ui.payment_method_banner.installed'|trans }}
+                </span>
+            {% else %}
+                <a href="{{ banner.plugin_url }}" class="btn sylius-payment-methods-banner__btn-primary" target="_blank" rel="noopener noreferrer">
+                    {{ ux_icon('tabler:download', { class: 'icon' }) }} {{ 'sylius.ui.payment_method_banner.install'|trans }}
+                </a>
+            {% endif %}
             <a href="{{ banner.documentation_url }}" class="btn" target="_blank" rel="noopener noreferrer">
                 {{ 'sylius.ui.view_documentation'|trans }}
             </a>
