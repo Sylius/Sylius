@@ -580,6 +580,34 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    `getItemsSubtotal()`/`getSubtotal()`, switch them to `getOrderAndItemPromotionTotal()` to avoid the same
    double-counting. `getOrderPromotionTotal()` is unchanged and still returns the promotion's full effect.
 
+3. A new `preloadAdjustments(array $orderItemUnits): void` method has been added to
+   `Sylius\Component\Core\Repository\OrderItemUnitRepositoryInterface` and implemented in
+   `Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderItemUnitRepository`.
+
+   ```php
+   public function preloadAdjustments(array $orderItemUnits): void;
+   ```
+
+   If you have a custom class implementing this interface without extending the default repository, you must
+   add this method (it may be a no-op if your persistence layer does not lazy-load associations).
+
+   A new order processor, `sylius.order_processing.order_item_unit_adjustments_preloader`
+   (`Sylius\Component\Core\OrderProcessing\OrderItemUnitAdjustmentsPreloader`, priority 70), calls it at the start
+   of every order recalculation, before `sylius.order_processing.order_adjustments_clearer` (priority 60) or any
+   other processor touches order item unit adjustments.
+
+   Previously, the first access to each unit's `adjustments` collection - e.g. while clearing or recalculating
+   adjustments recursively per unit - triggered its own lazy-load query, one `SELECT` per unit. For an order item
+   held at a large quantity, this alone could add one query per unit to every recalculation (changing the
+   shipping address, applying a coupon, ...), regardless of how many adjustments actually existed. The new
+   processor loads every unit's adjustments in a single query up front, so that per-unit `SELECT` no longer
+   happens.
+
+   If you have decorated or replaced `sylius.order_processing.order_adjustments_clearer`,
+   `sylius.order_processing.order_taxes_processor`, or another processor that iterates over order item units'
+   adjustments, no changes are required - the preloading is transparent as long as the same `EntityManager`
+   instance is used within the request.
+
 ## Promotion
 
 1. New **opt-in per-channel** promotion rule and action types have been added. They let a single

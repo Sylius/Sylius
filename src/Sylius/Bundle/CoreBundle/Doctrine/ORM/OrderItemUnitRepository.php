@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Repository\OrderItemUnitRepositoryInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInterface;
 
 /**
  * @template T of OrderItemUnitInterface
@@ -37,6 +38,25 @@ class OrderItemUnitRepository extends EntityRepository implements OrderItemUnitR
             ->setParameter('customer', $customer)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * @param BaseOrderItemUnitInterface[] $orderItemUnits
+     */
+    public function preloadAdjustments(array $orderItemUnits): void
+    {
+        if ([] === $orderItemUnits) {
+            return;
+        }
+
+        $this->createQueryBuilder('o')
+            ->addSelect('adjustment')
+            ->leftJoin('o.adjustments', 'adjustment')
+            ->andWhere('o IN (:orderItemUnits)')
+            ->setParameter('orderItemUnits', $orderItemUnits)
+            ->getQuery()
+            ->getResult()
         ;
     }
 }
