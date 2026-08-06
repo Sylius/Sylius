@@ -70,6 +70,7 @@
         "php-http/discovery": "^1.20"
     },
     "conflict": {
+        "doctrine/orm": "3.6.8",
         "phpstan/phpdoc-parser": ">= 2.0"
     },
     "require-dev": {
