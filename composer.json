@@ -234,7 +234,7 @@
         "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
     "conflict": {
-        "doctrine/orm": "2.20.7"
+        "doctrine/orm": "2.20.7 || 3.6.8"
     },
     "config": {
         "preferred-install": {
