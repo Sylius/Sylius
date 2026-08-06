@@ -15,6 +15,7 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -48,8 +49,17 @@ class CardComponent
         protected readonly ProductVariantResolverInterface $productVariantResolver,
         protected readonly ChannelContextInterface $channelContext,
         protected readonly LocaleContextInterface $localeContext,
-        protected readonly ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
+        protected readonly CatalogPricesCalculatorInterface|ProductVariantPricesCalculatorInterface $productVariantPricesCalculator,
     ) {
+        if (!$this->productVariantPricesCalculator instanceof CatalogPricesCalculatorInterface) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '2.3',
+                'Passing an instance of "%s" as $productVariantPricesCalculator is deprecated. It will require "%s" since Sylius 3.0.',
+                ProductVariantPricesCalculatorInterface::class,
+                CatalogPricesCalculatorInterface::class,
+            );
+        }
     }
 
     #[PostMount]

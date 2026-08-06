@@ -24,6 +24,8 @@
     <property resource="%sylius.model.admin_user.class%" name="lastName" />
     <property resource="%sylius.model.admin_user.class%" name="localeCode" />
     <property resource="%sylius.model.admin_user.class%" name="avatar" writable="true" />
+    <property resource="%sylius.model.admin_user.class%" name="administrationAccess" />
+    <property resource="%sylius.model.admin_user.class%" name="apiAccess" />
     <property resource="%sylius.model.admin_user.class%" name="updatedAt" writable="false" />
     <property resource="%sylius.model.admin_user.class%" name="verifiedAt" writable="false" />
     <property resource="%sylius.model.admin_user.class%" name="lastLogin" writable="false" />

@@ -23,32 +23,39 @@ class DatabasePlatformMock extends AbstractPlatform
         return true;
     }
 
-    public function getBooleanTypeDeclarationSQL(array $field)
+    public function getBooleanTypeDeclarationSQL(array $field): string
     {
+        return 'BOOLEAN';
     }
 
-    public function getIntegerTypeDeclarationSQL(array $field)
+    public function getIntegerTypeDeclarationSQL(array $field): string
     {
+        return 'INT';
     }
 
-    public function getBigIntTypeDeclarationSQL(array $field)
+    public function getBigIntTypeDeclarationSQL(array $field): string
     {
+        return 'BIGINT';
     }
 
-    public function getSmallIntTypeDeclarationSQL(array $field)
+    public function getSmallIntTypeDeclarationSQL(array $field): string
     {
+        return 'SMALLINT';
     }
 
-    protected function _getCommonIntegerTypeDeclarationSQL(array $columnDef)
+    protected function _getCommonIntegerTypeDeclarationSQL(array $columnDef): string
     {
+        return 'INT';
     }
 
-    public function getVarcharTypeDeclarationSQL(array $field)
+    public function getVarcharTypeDeclarationSQL(array $field): string
     {
+        return 'VARCHAR';
     }
 
-    public function getClobTypeDeclarationSQL(array $field)
+    public function getClobTypeDeclarationSQL(array $field): string
     {
+        return 'CLOB';
     }
 
     public function getName(): string

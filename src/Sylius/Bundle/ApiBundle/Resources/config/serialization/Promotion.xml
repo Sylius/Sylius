@@ -75,6 +75,13 @@
             <group>sylius:admin:promotion:update</group>
         </attribute>
 
+        <attribute name="trackUsage">
+            <group>sylius:admin:promotion:index</group>
+            <group>sylius:admin:promotion:show</group>
+            <group>sylius:admin:promotion:create</group>
+            <group>sylius:admin:promotion:update</group>
+        </attribute>
+
         <attribute name="used">
             <group>sylius:admin:promotion:index</group>
             <group>sylius:admin:promotion:show</group>

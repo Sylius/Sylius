@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Promotion\Filter;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Filter\PriceRangeFilter;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PriceRangeFilterTest extends TestCase
 {
     private MockObject&ProductVariantPricesCalculatorInterface $productVariantPricesCalculator;

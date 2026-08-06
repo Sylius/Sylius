@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Promotion\Processor;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Promotion\Processor\PromotionProcessor;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionProcessorTest extends TestCase
 {
     private MockObject&PreQualifiedPromotionsProviderInterface $preQualifiedPromotionsProvider;

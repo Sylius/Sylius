@@ -89,6 +89,30 @@ class AdminUser extends User implements AdminUserInterface, EquatableInterface
         $this->setImage($avatar);
     }
 
+    public function hasAdministrationAccess(): bool
+    {
+        return $this->hasRole(AdminUserInterface::DEFAULT_ADMIN_ROLE);
+    }
+
+    public function setAdministrationAccess(bool $administrationAccess): void
+    {
+        $administrationAccess
+            ? $this->addRole(AdminUserInterface::DEFAULT_ADMIN_ROLE)
+            : $this->removeRole(AdminUserInterface::DEFAULT_ADMIN_ROLE);
+    }
+
+    public function hasApiAccess(): bool
+    {
+        return $this->hasRole(AdminUserInterface::API_ACCESS_ROLE);
+    }
+
+    public function setApiAccess(bool $apiAccess): void
+    {
+        $apiAccess
+            ? $this->addRole(AdminUserInterface::API_ACCESS_ROLE)
+            : $this->removeRole(AdminUserInterface::API_ACCESS_ROLE);
+    }
+
     public function isEqualTo(UserInterface $user): bool
     {
         return $user instanceof AdminUserInterface && $this->isEnabled() === $user->isEnabled();

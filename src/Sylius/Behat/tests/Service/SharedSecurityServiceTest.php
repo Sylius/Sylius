@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Behat\Service;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Behat\Service\SecurityServiceInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SharedSecurityServiceTest extends TestCase
 {
     private MockObject&SecurityServiceInterface $adminSecurityService;

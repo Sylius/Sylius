@@ -28,6 +28,16 @@ Feature: Adding a new promotion
         And the "Full metal promotion" promotion should be available to be used only 50 times
 
     @api @ui
+    Scenario: Adding a new promotion with disabled track limit
+        When I want to create a new promotion
+        And I specify its code as "FULL_METAL_PROMOTION"
+        And I name it "Full metal promotion"
+        And I disable track usage
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "Full metal promotion" promotion should have track usage disabled
+
+    @api @ui
     Scenario: Adding a new exclusive promotion
         When I want to create a new promotion
         And I specify its code as "FULL_METAL_PROMOTION"

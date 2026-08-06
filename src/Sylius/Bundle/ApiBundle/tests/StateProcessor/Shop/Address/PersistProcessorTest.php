@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Shop\Address;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $processor;

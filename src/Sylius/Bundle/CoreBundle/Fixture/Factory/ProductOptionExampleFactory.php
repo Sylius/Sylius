@@ -77,6 +77,17 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
             $productOption->addValue($productOptionValue);
         }
 
+        foreach ($options['translations'] as $localeCode => $translation) {
+            $productOption->setCurrentLocale($localeCode);
+            $productOption->setFallbackLocale($localeCode);
+
+            $productOption->setName($translation['name'] ?? $productOption->getName());
+
+            if (isset($translation['values'])) {
+                $this->updateValuesTranslations($productOption, $localeCode, $translation['values']);
+            }
+        }
+
         return $productOption;
     }
 
@@ -96,10 +107,49 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
                     $values[sprintf('%s-option#%d', $options['code'], $i)] = sprintf('%s #i%d', $options['name'], $i);
                 }
 
+                if (!empty($options['translations'])) {
+                    return [];
+                }
+
                 return $values;
             })
             ->setAllowedTypes('values', 'array')
+            ->setDefault('translations', [])
+            ->setAllowedTypes('translations', ['array'])
         ;
+    }
+
+    /**
+     * @param array<string, string> $values
+     */
+    private function updateValuesTranslations(ProductOptionInterface $productOption, string $localeCode, array $values): void
+    {
+        foreach ($values as $code => $value) {
+            $productOptionValue = $this->findOptionValueWithCode($productOption, $code);
+
+            if (null === $productOptionValue) {
+                /** @var ProductOptionValueInterface $productOptionValue */
+                $productOptionValue = $this->productOptionValueFactory->createNew();
+                $productOptionValue->setCode($code);
+            }
+
+            $productOptionValue->setCurrentLocale($localeCode);
+            $productOptionValue->setFallbackLocale($localeCode);
+            $productOptionValue->setValue($value);
+
+            $productOption->addValue($productOptionValue);
+        }
+    }
+
+    private function findOptionValueWithCode(ProductOptionInterface $productOption, string $code): ?ProductOptionValueInterface
+    {
+        foreach ($productOption->getValues() as $value) {
+            if ($value->getCode() === $code) {
+                return $value;
+            }
+        }
+
+        return null;
     }
 
     /** @return iterable<string> */

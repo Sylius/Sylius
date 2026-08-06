@@ -1,0 +1,6 @@
+<div class="nav-item" {{ stimulus_controller('@sylius/admin-bundle/theme-switcher') }}>
+    <button type="button" class="btn btn-icon btn-ghost-secondary" {{ stimulus_action('@sylius/admin-bundle/theme-switcher', 'toggle') }} aria-label="{{ 'sylius.ui.toggle_theme'|trans }}">
+        {{ ux_icon('tabler:sun', {'class': 'icon', 'data-theme-switch': 'light'}) }}
+        {{ ux_icon('tabler:moon', {'class': 'icon', 'data-theme-switch': 'dark'}) }}
+    </button>
+</div>

@@ -19,6 +19,7 @@ use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\Suite;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -32,6 +33,7 @@ final class ProductAttributeFixturesTest extends KernelTestCase
 
         $fixtureRegistry = $container->get(FixtureRegistryInterface::class);
         $listenerRegistry = $container->get(ListenerRegistryInterface::class);
+        /** @var SuiteLoaderInterface $suiteLoader */
         $suiteLoader = $container->get(SuiteLoaderInterface::class);
 
         $suite = new Suite('test');
@@ -51,6 +53,14 @@ final class ProductAttributeFixturesTest extends KernelTestCase
                     'choices' => [
                         'SOFT' => ['en_US' => 'Soft'],
                         'HARD' => ['en_US' => 'Hard'],
+                    ],
+                ],
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Cover',
+                    ],
+                    'fr_FR' => [
+                        'name' => 'Couverture',
                     ],
                 ],
             ],
@@ -81,6 +91,17 @@ final class ProductAttributeFixturesTest extends KernelTestCase
         $this->assertValueOfAttributeWithCode($product, 'ADULT', false);
         $this->assertValueOfAttributeWithCode($product, 'PAGES', 448);
         $this->assertValueOfAttributeWithCode($product, 'COVER', ['SOFT']);
+
+        $productAttributeRepository = $container->get('sylius.repository.product_attribute');
+
+        /** @var ProductAttributeInterface $productAttribute */
+        $productAttribute = $productAttributeRepository->findOneByCode('COVER');
+
+        $productAttribute->setCurrentLocale('en_US');
+        $this->assertSame('Cover', $productAttribute->getName());
+
+        $productAttribute->setCurrentLocale('fr_FR');
+        $this->assertSame('Couverture', $productAttribute->getName());
     }
 
     private function assertValueOfAttributeWithCode(ProductInterface $product, string $code, $value): void

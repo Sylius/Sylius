@@ -15,6 +15,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,11 +28,17 @@ final class PromotionCouponType extends AbstractResourceType
             ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.promotion_coupon.usage_limit',
                 'required' => false,
+                'attr' => ['min' => 1],
             ])
             ->add('expiresAt', DateType::class, [
                 'label' => 'sylius.form.promotion_coupon.expires_at',
                 'widget' => 'single_text',
                 'placeholder' => ['year' => '-', 'month' => '-', 'day' => '-'],
+                'required' => false,
+            ])
+            ->add('trackUsage', CheckboxType::class, [
+                'label' => 'sylius.form.promotion_coupon.track_usage',
+                'help' => 'sylius.form.promotion_coupon.track_usage_details',
                 'required' => false,
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())

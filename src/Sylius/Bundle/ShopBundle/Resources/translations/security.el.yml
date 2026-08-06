@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email_not_verified: 'Ο λογαριασμός σας δεν έχει επαληθευτεί ακόμα. Παρακαλούμε ελέγξτε τα εισερχόμενά σας.'

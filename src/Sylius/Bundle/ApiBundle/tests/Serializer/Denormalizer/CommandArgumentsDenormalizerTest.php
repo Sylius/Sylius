@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
@@ -22,6 +23,7 @@ use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\CommandArgumentsDenormalizer
 use Sylius\Component\Core\Model\Order;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CommandArgumentsDenormalizerTest extends TestCase
 {
     private DenormalizerInterface&MockObject $commandDenormalizer;
