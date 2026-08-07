@@ -26,5 +26,10 @@
             <argument type="service" id="sylius_abstraction.state_machine" />
         </service>
         <service id="Sylius\Bundle\PaymentBundle\Checker\FinalizedPaymentRequestCheckerInterface" alias="sylius.checker.finalized_payment_request" />
+
+        <service id="sylius.checker.payment_method_gateway_factory" class="Sylius\Bundle\PaymentBundle\Checker\PaymentMethodGatewayFactoryChecker">
+            <argument type="service" id="sylius.repository.payment_method" />
+        </service>
+        <service id="Sylius\Component\Payment\Checker\PaymentMethodGatewayFactoryCheckerInterface" alias="sylius.checker.payment_method_gateway_factory" />
     </services>
 </container>
