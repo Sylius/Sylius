@@ -149,6 +149,20 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     }
 
     #[Test]
+    public function it_tags_shop_based_cart_context_with_kernel_reset(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'sylius.context.cart.new_shop_based',
+            'kernel.reset',
+            ['method' => 'reset'],
+        );
+    }
+
+    #[Test]
     public function it_aliases_flysystem_filesystem_adapter_properly(): void
     {
         $this->container->setParameter('kernel.environment', 'dev');
