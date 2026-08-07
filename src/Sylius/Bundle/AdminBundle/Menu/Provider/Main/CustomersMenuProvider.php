@@ -11,21 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AdminBundle\Menu;
+namespace Sylius\Bundle\AdminBundle\Menu\Provider\Main;
 
 use Knp\Menu\ItemInterface;
+use Sylius\Bundle\AdminBundle\Menu\Provider\MenuProviderInterface;
 
-final readonly class CustomersMenuBuilder implements MenuBuilderInterface
+final readonly class CustomersMenuProvider implements MenuProviderInterface
 {
-    public function __construct(
-        private MenuBuilderInterface $menuBuilder,
-    ) {
-    }
-
-    public function createMenu(array $options): ItemInterface
+    public function __invoke(ItemInterface $menu): void
     {
-        $menu = $this->menuBuilder->createMenu($options);
-
         $customers = $menu
             ->addChild('customers')
             ->setLabel('sylius.menu.admin.main.customers.header')
@@ -51,7 +45,5 @@ final readonly class CustomersMenuBuilder implements MenuBuilderInterface
             ->setLabel('sylius.menu.admin.main.customers.groups')
             ->setLabelAttribute('icon', 'tabler:archive')
         ;
-
-        return $menu;
     }
 }

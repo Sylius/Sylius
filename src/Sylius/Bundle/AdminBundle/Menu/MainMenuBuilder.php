@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @deprecated Use CompositeMenuBuilder instead.
+ * @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use CompositeMenuBuilder instead.
  */
 final readonly class MainMenuBuilder
 {
