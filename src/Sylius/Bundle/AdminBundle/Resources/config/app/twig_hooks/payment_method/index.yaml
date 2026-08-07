@@ -4,7 +4,7 @@ sylius_twig_hooks:
             title:
                 template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
                 configuration:
-                    documentation_url: 'https://docs.sylius.com/public/stripe-plugin/getting-started/configure-your-first-payment-method?utm_source=sylius_admin&utm_medium=header&utm_campaign=payment_plugins&utm_content=payment_methods_header'
+                    documentation_url: 'https://docs.sylius.com/public/getting-started/payments?utm_source=sylius_admin&utm_medium=header&utm_campaign=payment_plugins&utm_content=payment_methods_header'
                 priority: 100
 
         'sylius_admin.payment_method.index.content':
