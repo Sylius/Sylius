@@ -1,0 +1,177 @@
+$carousel-vertical-gap: 8px !default;
+
+.carousel-vertical {
+    .carousel-inner {
+        overflow: hidden;
+    }
+
+    .carousel-item {
+        @include transition(transform 1s cubic-bezier(0.33, 0, 0.15, 1));
+    }
+
+    .active.carousel-item-start,
+    .carousel-item-prev:not(.carousel-item-end) {
+        transform: translateY(calc(-100% - #{$carousel-vertical-gap}));
+    }
+
+    .active.carousel-item-end,
+    .carousel-item-next:not(.carousel-item-start) {
+        transform: translateY(calc(100% + #{$carousel-vertical-gap}));
+    }
+}
+
+.sylius-payment-methods-banner {
+    $banner-color: var(--sylius-payment-methods-banner-color, #{$gray-500});
+    $logo-width: 8rem;
+
+    .carousel-item {
+        border: 0;
+        border-radius: $border-radius-lg;
+        background: $white;
+        background: linear-gradient(
+            100deg,
+            #{$white} 30%,
+            color-mix(in srgb, #{$banner-color} 4%, #{$white}) 62%,
+            color-mix(in srgb, #{$banner-color} 14%, #{$white}) 100%
+        );
+    }
+
+    @include media-breakpoint-up(xl) {
+        .carousel-item {
+            min-height: 13.5rem;
+        }
+    }
+
+    &__slide--stripe {
+        --sylius-payment-methods-banner-color: #635bff;
+    }
+
+    &__slide--paypal {
+        --sylius-payment-methods-banner-color: #003087;
+    }
+
+    &__slide--adyen {
+        --sylius-payment-methods-banner-color: #0abf53;
+    }
+
+    &__slide--mollie {
+        --sylius-payment-methods-banner-color: #000;
+    }
+
+    &__brand {
+        width: $logo-width;
+    }
+
+    &__logo {
+        width: $logo-width;
+        height: 6rem;
+        border-radius: 0.75rem;
+        background: $white;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__content {
+        max-width: 26rem;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+    }
+
+    &__badge {
+        border: 1px solid $banner-color;
+        background-color: transparent;
+        color: $banner-color;
+        font-size: 0.75rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    &__description {
+        color: $text-secondary;
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    &__methods {
+        width: 17.5rem;
+        flex-shrink: 0;
+    }
+
+    &__method-grid {
+        row-gap: 0.25rem;
+    }
+
+    &__more {
+        height: 2.7rem;
+        color: $text-secondary;
+        font-size: 0.8125rem;
+        white-space: nowrap;
+    }
+
+    &__installed {
+        color: $text-secondary;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    &__method {
+        height: 2.7rem;
+        border-radius: $border-radius;
+
+        img {
+            width: auto;
+            height: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__btn-primary {
+        border-color: $banner-color;
+        background: $banner-color;
+        color: $white;
+
+        &:hover,
+        &:focus {
+            border-color: $banner-color;
+            background: $banner-color;
+            color: $white;
+            filter: brightness(0.9);
+        }
+    }
+
+    &__actions {
+        width: 11rem;
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    @include media-breakpoint-down(xl) {
+        &__actions {
+            width: auto;
+
+            .btn {
+                width: auto;
+            }
+        }
+    }
+
+    @include media-breakpoint-down(lg) {
+        &__content,
+        &__methods {
+            width: 100%;
+            max-width: none;
+        }
+    }
+}
