@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -28,9 +30,7 @@ final class BrowsingProductVariantsContext implements Context
     ) {
     }
 
-    /**
-     * @When I start sorting variants by position
-     */
+    #[When('I start sorting variants by position')]
     public function iSortProductsByPosition(): void
     {
         $this->client->index(
@@ -41,26 +41,20 @@ final class BrowsingProductVariantsContext implements Context
         );
     }
 
-    /**
-     * @When I set the position of :productVariant to :position
-     */
+    #[When('I set the position of :productVariant to :position')]
     public function iSetThePositionOfTo(ProductVariantInterface $productVariant, int $position): void
     {
         $this->client->buildUpdateRequest(Resources::PRODUCT_VARIANTS, $productVariant->getCode());
         $this->client->updateRequestData(['position' => $position]);
     }
 
-    /**
-     * @When I save my new elements order
-     */
+    #[When('I save my new elements order')]
     public function iSaveMyNewElementsOrder(): void
     {
         $this->client->update();
     }
 
-    /**
-     * @Then the first variant in the list should have name :variantName
-     */
+    #[Then('the first variant in the list should have name :variantName')]
     public function theFirstVariantInTheListShouldHaveName(string $variantName): void
     {
         $variants = $this->responseChecker->getCollection($this->client->getLastResponse());
@@ -70,9 +64,7 @@ final class BrowsingProductVariantsContext implements Context
         $this->assertProductVariantName($firstVariant['translations']['en_US']['name'], $variantName);
     }
 
-    /**
-     * @Then the last variant in the list should have name :variantName
-     */
+    #[Then('the last variant in the list should have name :variantName')]
     public function theLastVariantInTheListShouldHaveName(string $variantName): void
     {
         $variants = $this->responseChecker->getCollection($this->client->getLastResponse());

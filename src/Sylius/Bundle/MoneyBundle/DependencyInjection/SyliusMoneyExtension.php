@@ -16,7 +16,7 @@ namespace Sylius\Bundle\MoneyBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class SyliusMoneyExtension extends Extension implements PrependExtensionInterface
@@ -24,11 +24,11 @@ final class SyliusMoneyExtension extends Extension implements PrependExtensionIn
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('sylius_money.locale', $config['locale']);
 
-        $loader->load('services.xml');
+        $loader->load('services.php');
     }
 
     public function prepend(ContainerBuilder $container): void
@@ -37,7 +37,7 @@ final class SyliusMoneyExtension extends Extension implements PrependExtensionIn
             return;
         }
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services/integrations/currency.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services/integrations/currency.php');
     }
 }

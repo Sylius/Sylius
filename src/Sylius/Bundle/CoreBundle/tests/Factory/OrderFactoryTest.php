@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Factory;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Factory\OrderFactory;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderFactoryTest extends TestCase
 {
     private FactoryInterface&MockObject $baseFactory;

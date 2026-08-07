@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
@@ -37,68 +39,52 @@ final class ManagingCountriesContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to add a new country
-     */
+    #[When('I want to add a new country')]
     public function iWantToAddANewCountry(): void
     {
         $this->client->buildCreateRequest(Resources::COUNTRIES);
     }
 
-    /**
-     * @When I choose :countryName
-     */
+    #[When('I choose :countryName')]
     public function iChoose(string $countryName): void
     {
         $this->iSpecifyTheCountryCodeAs($this->getCountryCodeByName($countryName));
     }
 
-    /**
-     * @When I specify the country code as :code
-     */
+    #[When('I specify the country code as :code')]
     public function iSpecifyTheCountryCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
     }
 
-    /**
-     * @When I add it
-     * @When I try to add it
-     */
+    #[When('I add it')]
+    #[When('I try to add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When /^I want to edit (this country)$/
-     * @When /^I am editing (this country)$/
-     * @When /^I want to create a new province in (country "([^"]+)")$/
-     */
+    #[When('/^I want to edit (this country)$/')]
+    #[When('/^I am editing (this country)$/')]
+    #[When('/^I want to create a new province in (country "([^"]+)")$/')]
     public function iWantToEditThisCountry(CountryInterface $country): void
     {
         $this->client->buildUpdateRequest(Resources::COUNTRIES, $country->getCode());
     }
 
-    /**
-     * @When I enable it
-     */
+    #[When('I enable it')]
     public function iEnableIt(): void
     {
         $this->client->addRequestData('enabled', true);
     }
 
-    /**
-     * @When I disable it
-     */
+    #[When('I disable it')]
     public function iDisableIt(): void
     {
         $this->client->addRequestData('enabled', false);
     }
 
-    /**
-     * @When I name the province :provinceName
-     */
+    #[When('I name the province :provinceName')]
     public function iNameTheProvince(string $provinceName): void
     {
         $this->client->addSubResourceData(
@@ -107,9 +93,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @When I specify the province code as :provinceCode
-     */
+    #[When('I specify the province code as :provinceCode')]
     public function iSpecifyTheProvinceCodeAs(string $provinceCode): void
     {
         $this->client->addSubResourceData(
@@ -118,17 +102,13 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @When I provide a too long province code
-     */
+    #[When('I provide a too long province code')]
     public function iProvideATooLongProvinceCode(): void
     {
         $this->iSpecifyTheProvinceCodeAs(sprintf('XX-%s', str_repeat('A', $this->getMaxCodeLength())));
     }
 
-    /**
-     * @When I add the :provinceName province with :provinceCode code
-     */
+    #[When('I add the :provinceName province with :provinceCode code')]
     public function iAddTheProvinceWithCode(string $provinceName, string $provinceCode): void
     {
         $this->client->addSubResourceData(
@@ -137,9 +117,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @When I add the :name province with :code code and :abbreviation abbreviation
-     */
+    #[When('I add the :name province with :code code and :abbreviation abbreviation')]
     public function iAddTheProvinceWithCodeAndAbbreviation(string $name, string $code, string $abbreviation): void
     {
         $this->client->addSubResourceData(
@@ -148,9 +126,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @When /^I(?:| also) delete the ("[^"]+" province) of (this country)$/
-     */
+    #[When('/^I(?:| also) delete the ("[^"]+" province) of (this country)$/')]
     public function iDeleteTheProvinceOfThisCountry(ProvinceInterface $province, CountryInterface $country): void
     {
         $iri = $this->iriConverter->getIriFromResource($province);
@@ -163,19 +139,15 @@ final class ManagingCountriesContext implements Context
         }
     }
 
-    /**
-     * @When I do not specify the country code
-     * @When I do not specify the province code
-     * @When I do not name the province
-     */
+    #[When('I do not specify the country code')]
+    #[When('I do not specify the province code')]
+    #[When('I do not name the province')]
     public function iDoNotSpecifyTheField(): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @When I remove :province province name
-     */
+    #[When('I remove :province province name')]
     public function iRemoveProvinceName(ProvinceInterface $province): void
     {
         $this->client->buildUpdateRequest(
@@ -185,9 +157,7 @@ final class ManagingCountriesContext implements Context
         $this->client->update();
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -196,9 +166,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then the country :country should appear in the store
-     */
+    #[Then('the country :country should appear in the store')]
     public function theCountryShouldAppearInTheStore(CountryInterface $country): void
     {
         Assert::true(
@@ -207,10 +175,8 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then the country :country should have the :province province
-     * @Then /^(this country) should(?:| still) have the ("[^"]*" province)$/
-     */
+    #[Then('the country :country should have the :province province')]
+    #[Then('/^(this country) should(?:| still) have the ("[^"]*" province)$/')]
     public function theCountryShouldHaveTheProvince(CountryInterface $country, ProvinceInterface $province): void
     {
         Assert::true($this->responseChecker->hasItemWithValue(
@@ -220,9 +186,7 @@ final class ManagingCountriesContext implements Context
         ));
     }
 
-    /**
-     * @Then /^(this country) should(?:| still) have the ("[^"]*" and "[^"]*" provinces)$/
-     */
+    #[Then('/^(this country) should(?:| still) have the ("[^"]*" and "[^"]*" provinces)$/')]
     public function theCountryShouldHaveTheProvinceAndProvince(CountryInterface $country, array $provinces): void
     {
         foreach ($provinces as $province) {
@@ -230,9 +194,7 @@ final class ManagingCountriesContext implements Context
         }
     }
 
-    /**
-     * @Then the province should still be named :province in this country
-     */
+    #[Then('the province should still be named :province in this country')]
     public function theProvinceShouldStillBeNamedInThisCountry(ProvinceInterface $province): void
     {
         /** @var CountryInterface $country */
@@ -244,9 +206,7 @@ final class ManagingCountriesContext implements Context
         ));
     }
 
-    /**
-     * @Then I should not be able to choose :countryName
-     */
+    #[Then('I should not be able to choose :countryName')]
     public function iShouldNotBeAbleToChoose(string $countryName): void
     {
         $this->client->addRequestData('code', $this->getCountryCodeByName($countryName));
@@ -258,9 +218,7 @@ final class ManagingCountriesContext implements Context
         Assert::same($this->responseChecker->getError($response), 'code: Country ISO code must be unique.');
     }
 
-    /**
-     * @Then /^(this country) should be (enabled|disabled)$/
-     */
+    #[Then('/^(this country) should be (enabled|disabled)$/')]
     public function thisCountryShouldBe(CountryInterface $country, string $state): void
     {
         $isEnabled = 'enabled' === $state;
@@ -275,9 +233,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function theCodeFieldShouldBeDisabled(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
@@ -285,9 +241,7 @@ final class ManagingCountriesContext implements Context
         Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
     }
 
-    /**
-     * @Then /^province with code ("[^"]*") should not be added in (this country)$/
-     */
+    #[Then('/^province with code ("[^"]*") should not be added in (this country)$/')]
     public function provinceWithCodeShouldNotBeAddedInThisCountry(string $provinceCode, CountryInterface $country): void
     {
         /** @var ProvinceInterface $province */
@@ -299,10 +253,8 @@ final class ManagingCountriesContext implements Context
         }
     }
 
-    /**
-     * @Then this country should not have the :provinceName province
-     * @Then province with name :provinceName should not be added in this country
-     */
+    #[Then('this country should not have the :provinceName province')]
+    #[Then('province with name :provinceName should not be added in this country')]
     public function thisCountryShouldNotHaveTheProvince(string $provinceName): void
     {
         /** @var CountryInterface $country */
@@ -316,9 +268,7 @@ final class ManagingCountriesContext implements Context
         }
     }
 
-    /**
-     * @Then /^I should be notified that province (code|name) must be unique$/
-     */
+    #[Then('/^I should be notified that province (code|name) must be unique$/')]
     public function iShouldBeNotifiedThatProvinceCodeMustBeUnique(string $field): void
     {
         Assert::regex(
@@ -327,9 +277,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that all province codes and names within this country need to be unique
-     */
+    #[Then('I should be notified that all province codes and names within this country need to be unique')]
     public function iShouldBeNotifiedThatAllProvinceCodesAndNamesWithinThisCountryNeedToBeUnique(): void
     {
         Assert::contains(
@@ -338,9 +286,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that :field is required
-     */
+    #[Then('I should be notified that :field is required')]
     public function iShouldBeNotifiedThatFieldIsRequired(string $field): void
     {
         Assert::contains(
@@ -349,9 +295,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that the country code is (required|invalid)$/
-     */
+    #[Then('/^I should be notified that the country code is (required|invalid)$/')]
     public function iShouldBeNotifiedThatTheCountryCodeIsRequired(string $constraint): void
     {
         Assert::contains(
@@ -360,9 +304,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that name of the province is required
-     */
+    #[Then('I should be notified that name of the province is required')]
     public function iShouldBeNotifiedThatNameOfTheProvinceIsRequired(): void
     {
         Assert::contains(
@@ -371,9 +313,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be informed that the provided province code is too long
-     */
+    #[Then('I should be informed that the provided province code is too long')]
     public function iShouldBeInformedThatTheProvinceCodeIsTooLong(): void
     {
         Assert::contains(
@@ -382,9 +322,7 @@ final class ManagingCountriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that provinces that are in use cannot be deleted
-     */
+    #[Then('I should be notified that provinces that are in use cannot be deleted')]
     public function iShouldBeNotifiedThatProvincesThatAreInUseCannotBeDeleted(): void
     {
         Assert::contains(

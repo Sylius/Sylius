@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'Na skladištu je ostalo još samo %quantity% komada ovog proizvoda.'
     product_variant:
         update_error: 'Došlo je do neočekivane pogreške prilikom izmjene varijante proizvoda. Molimo vas pokušajte ponovno izmjeniti varijantu proizvoda.'
+    user:
+        verification_email_sent: 'Ako je unesena e-mail adresa povezana s računom, poslan je e-mail za provjeru.'

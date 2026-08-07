@@ -19,7 +19,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class SyliusApiExtension extends Extension implements PrependExtensionInterface
@@ -27,7 +27,7 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('sylius_api.enabled', $config['enabled']);
         $container->setParameter('sylius_api.default_image_filter', $config['default_image_filter']);
@@ -38,13 +38,13 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
         $container->setParameter('sylius_api.order_states_to_filter_out', $config['order_states_to_filter_out']);
         $container->setParameter('sylius_api.operations_to_remove', $config['operations_to_remove']);
 
-        $loader->load('services.xml');
+        $loader->load('services.php');
 
         // If parameter is not set, it means that Swagger is not enabled (api_platform.enable_swagger set to false)
         $swaggerEnabled = $container->hasParameter('api_platform.swagger.api_keys');
 
         if ($swaggerEnabled) {
-            $loader->load('integrations/swagger.xml');
+            $loader->load('integrations/swagger.php');
         }
 
         $this->registerAutoconfiguration($container);

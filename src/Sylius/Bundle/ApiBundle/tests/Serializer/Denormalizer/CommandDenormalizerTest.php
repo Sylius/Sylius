@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
@@ -22,13 +23,15 @@ use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CommandDenormalizerTest extends TestCase
 {
     private DenormalizerInterface&MockObject $baseNormalizer;
 
-    private AdvancedNameConverterInterface&MockObject $nameConverter;
+    private MockObject&NameConverterInterface $nameConverter;
 
     private CommandDenormalizer $commandDenormalizer;
 
@@ -36,7 +39,11 @@ final class CommandDenormalizerTest extends TestCase
     {
         parent::setUp();
         $this->baseNormalizer = $this->createMock(DenormalizerInterface::class);
-        $this->nameConverter = $this->createMock(AdvancedNameConverterInterface::class);
+        // AdvancedNameConverterInterface was removed in Symfony 8.0 (merged into NameConverterInterface).
+        $nameConverterClass = interface_exists(AdvancedNameConverterInterface::class)
+            ? AdvancedNameConverterInterface::class
+            : NameConverterInterface::class;
+        $this->nameConverter = $this->createMock($nameConverterClass);
         $this->commandDenormalizer = new CommandDenormalizer($this->baseNormalizer, $this->nameConverter);
     }
 

@@ -4,3 +4,5 @@
 sylius:
     channel:
         delete_error: 'El canal no es pot suprimir. Almenys un canal activat és obligatori.'
+    user:
+        verification_email_sent: "Si l'adreça de correu electrònic introduïda està associada a un compte, s'ha enviat un correu de verificació."

@@ -13,12 +13,16 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\User\Security\Checker;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Checker\EnabledUserChecker;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\Exception\DisabledException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EnabledUserCheckerTest extends TestCase
 {
     /** @var UserInterface&MockObject */
@@ -47,5 +51,25 @@ final class EnabledUserCheckerTest extends TestCase
         $this->userMock->expects($this->once())->method('isEnabled')->willReturn(true);
 
         $this->userChecker->checkPreAuth($this->userMock);
+    }
+
+    public function testShouldThrowCustomUserMessageAccountStatusExceptionWithTranslatedMessageIfTranslatorIsGivenAndAccountIsDisabled(): void
+    {
+        /** @var TranslatorInterface&MockObject $translatorMock */
+        $translatorMock = $this->createMock(TranslatorInterface::class);
+        $translatorMock->expects($this->once())
+            ->method('trans')
+            ->with('sylius.user.account_disabled', [], 'validators')
+            ->willReturn('Translated disabled account message.')
+        ;
+
+        $userChecker = new EnabledUserChecker($translatorMock);
+
+        $this->userMock->expects($this->once())->method('isEnabled')->willReturn(false);
+
+        $this->expectException(CustomUserMessageAccountStatusException::class);
+        $this->expectExceptionMessage('Translated disabled account message.');
+
+        $userChecker->checkPreAuth($this->userMock);
     }
 }

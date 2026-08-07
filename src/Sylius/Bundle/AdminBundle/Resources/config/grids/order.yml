@@ -34,8 +34,9 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.customer
                     sortable: customer.lastName
+                    path: .
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/customer.html.twig"
+                        template: "@SyliusAdmin/order/grid/field/customer.html.twig"
                         vars:
                             th_class: "w-100"
                 channel:
@@ -114,7 +115,7 @@ sylius_grid:
                     form_options:
                         extra_options:
                             class: '%sylius.model.customer.class%'
-                            choice_label: fullname
+                            choice_label: nameOrEmail
                 date:
                     type: date
                     label: sylius.ui.date
