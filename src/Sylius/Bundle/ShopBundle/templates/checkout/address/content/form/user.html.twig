@@ -12,7 +12,7 @@
                 <button class="btn btn-primary" type="button" {{ stimulus_action('@sylius/shop-bundle/api-login', 'login') }} {{ sylius_test_html_attribute('login-button') }}>{{ 'sylius.ui.sign_in'|trans }}</button>
             </div>
             {% if sylius_csrf_protection_enabled() %}
-                <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}" {{ stimulus_target('@sylius/shop-bundle/api-login', 'csrfToken') }}>
+                <input type="hidden" name="{{ sylius_security_csrf_parameter('shop') }}" value="{{ csrf_token(sylius_security_csrf_token_id('shop')) }}" {{ stimulus_target('@sylius/shop-bundle/api-login', 'csrfToken') }}>
             {% endif %}
             <div {{ stimulus_target('@sylius/shop-bundle/api-login', 'error') }} {{ sylius_test_html_attribute('login-validation-error') }}></div>
         {% endif %}

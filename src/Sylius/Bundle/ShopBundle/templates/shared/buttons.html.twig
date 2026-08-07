@@ -58,7 +58,7 @@
             {{ ux_icon('tabler:trash', {'class': 'icon icon-xs'})}} {{ ((message is empty and labeled) ? 'sylius.ui.delete' : message)|trans }}
         </button>
         {% if sylius_csrf_protection_enabled() %}
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
+            <input type="hidden" name="{{ sylius_resource_csrf_parameter() }}" value="{{ csrf_token(resourceId) }}" />
         {% endif %}
     </form>
 {% endmacro %}
