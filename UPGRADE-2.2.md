@@ -148,6 +148,24 @@ SYLIUS_TELEMETRY_SALT=your-custom-salt
    It moves Bootstrap modal elements to `<body>` before they are displayed,
    preventing them from being rendered behind the Bootstrap backdrop when nested inside a CSS stacking context (e.g. the sticky `.page-header`).
 
+2. **Suggested payment methods banners** have been added to the payment methods index page.
+
+   A carousel of banners promoting payment plugins (Stripe, PayPal, Adyen, Mollie) is now rendered above the grid.
+   Each banner is a Twig hookable defined in
+   `src/Sylius/Bundle/AdminBundle/Resources/config/app/twig_hooks/payment_method/index.yaml`.
+
+   You can disable the whole banners carousel by disabling the `banner` hook in your application's Twig hooks
+   configuration:
+
+   ```yaml
+   # config/packages/sylius_twig_hooks.yaml
+   sylius_twig_hooks:
+       hooks:
+           'sylius_admin.payment_method.index.content':
+               banner:
+                   enabled: false
+   ```
+
 ## Translations
 
 1. The `TranslationLocaleProvider` now ensures that the default locale (configured as `locale` in `config/parameters.yaml`)

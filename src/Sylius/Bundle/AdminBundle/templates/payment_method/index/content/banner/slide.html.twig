@@ -1,0 +1,53 @@
+{% import '@SyliusAdmin/shared/helper/payment_method_icon.html.twig' as payment_method_icon %}
+
+{% set banner = hookable_metadata.configuration %}
+{% set is_installed = banner.bundle is defined and sylius_bundle_loaded_checker(banner.bundle) %}
+
+<div class="carousel-item sylius-payment-methods-banner__slide sylius-payment-methods-banner__slide--{{ banner.variant }} {{ banner.active|default(false) ? 'active' }}">
+    <div class="d-flex flex-column flex-xl-row align-items-xl-center gap-4 gap-xl-5 p-4 p-xl-6">
+        <div class="d-flex flex-column flex-lg-row align-items-lg-center flex-grow-1 gap-4">
+            <div class="sylius-payment-methods-banner__brand flex-shrink-0 d-flex flex-column align-items-center gap-2">
+                <div class="sylius-payment-methods-banner__logo d-flex align-items-center justify-content-center p-3">
+                    <img src="{{ asset(banner.image, 'admin') }}" alt="{{ banner.title|trans }}">
+                </div>
+                <span
+                    class="badge sylius-payment-methods-banner__badge"
+                    data-bs-toggle="tooltip"
+                    data-bs-title="{{ 'sylius.ui.payment_method_banner.official_hint'|trans }}"
+                >
+                    {{ 'sylius.ui.payment_method_banner.official'|trans }}
+                </span>
+            </div>
+            <div class="sylius-payment-methods-banner__content flex-grow-1">
+                <h3 class="sylius-payment-methods-banner__title m-0 mb-2">{{ banner.title|trans }}</h3>
+                <p class="sylius-payment-methods-banner__description m-0">{{ banner.description|trans }}</p>
+            </div>
+            <div class="sylius-payment-methods-banner__methods">
+                <div class="sylius-payment-methods-banner__method-grid d-flex flex-wrap align-items-center">
+                    {% for code in banner.payment_methods|default([]) %}
+                        <span class="sylius-payment-methods-banner__method d-inline-flex align-items-center justify-content-center py-1 px-2">
+                            {{ payment_method_icon.image(code) }}
+                        </span>
+                    {% endfor %}
+                    {% if banner.payment_methods_more|default(false) %}
+                        <span class="sylius-payment-methods-banner__more d-inline-flex align-items-center justify-content-center py-1 px-2">{{ 'sylius.ui.and_more'|trans }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="sylius-payment-methods-banner__actions d-flex flex-row flex-xl-column gap-3 flex-shrink-0">
+            {% if is_installed %}
+                <span class="sylius-payment-methods-banner__installed d-inline-flex align-items-center justify-content-center gap-1 py-1 px-2">
+                    {{ ux_icon('tabler:check', { class: 'icon' }) }} {{ 'sylius.ui.installed'|trans }}
+                </span>
+            {% else %}
+                <a href="{{ banner.plugin_url }}" class="btn sylius-payment-methods-banner__btn-primary" target="_blank" rel="noopener noreferrer">
+                    {{ ux_icon('tabler:download', { class: 'icon' }) }} {{ 'sylius.ui.install'|trans }}
+                </a>
+            {% endif %}
+            <a href="{{ banner.documentation_url }}" class="btn" target="_blank" rel="noopener noreferrer">
+                {{ 'sylius.ui.view_documentation'|trans }}
+            </a>
+        </div>
+    </div>
+</div>

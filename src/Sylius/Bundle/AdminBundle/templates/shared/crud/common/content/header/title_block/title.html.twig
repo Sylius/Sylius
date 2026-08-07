@@ -9,10 +9,25 @@
 
 {% set icon = hookable_metadata.configuration.icon|default(null) %}
 {% set subheader = hookable_metadata.configuration.subheader|default(null) %}
+{% set documentation_url = hookable_metadata.configuration.documentation_url|default(null) %}
 {% set test_attribute = hookable_metadata.configuration.sylius_test_html_attribute is defined ? sylius_test_html_attribute(hookable_metadata.configuration.sylius_test_html_attribute) : null %}
 
 <div class="col-12 col-md" {{ test_attribute }}>
     <div class="d-md-flex gap-2 align-items-center">
         {{ header.h1(header|trans, icon, subheader|trans) }}
+
+        {% if documentation_url %}
+            <a
+                href="{{ documentation_url }}"
+                class="text-muted d-inline-flex align-items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-bs-toggle="tooltip"
+                data-bs-title="{{ 'sylius.ui.view_documentation'|trans }}"
+            >
+                {{ ux_icon('tabler:external-link', { class: 'icon' }) }}
+                <span class="visually-hidden">{{ 'sylius.ui.view_documentation'|trans }}</span>
+            </a>
+        {% endif %}
     </div>
 </div>
