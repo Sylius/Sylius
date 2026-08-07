@@ -15,8 +15,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\PaymentBundle\Checker\FinalizedPaymentRequestChecker;
 use Sylius\Bundle\PaymentBundle\Checker\FinalizedPaymentRequestCheckerInterface;
+use Sylius\Bundle\PaymentBundle\Checker\PaymentMethodGatewayFactoryChecker;
 use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestDuplicationChecker;
 use Sylius\Bundle\PaymentBundle\Checker\PaymentRequestDuplicationCheckerInterface;
+use Sylius\Component\Payment\Checker\PaymentMethodGatewayFactoryCheckerInterface;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -32,4 +34,10 @@ return static function (ContainerConfigurator $container) {
         ->args([service('sylius_abstraction.state_machine')])
     ;
     $services->alias(FinalizedPaymentRequestCheckerInterface::class, 'sylius.checker.finalized_payment_request');
+
+    $services
+        ->set('sylius.checker.payment_method_gateway_factory', PaymentMethodGatewayFactoryChecker::class)
+        ->args([service('sylius.repository.payment_method')])
+    ;
+    $services->alias(PaymentMethodGatewayFactoryCheckerInterface::class, 'sylius.checker.payment_method_gateway_factory');
 };

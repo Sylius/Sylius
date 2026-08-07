@@ -1,5 +1,7 @@
 {# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Common\CartComponent #}
 
-<div class="offcanvas offcanvas-end offcanvas-wide" tabindex="-1" id="offcanvasCart" {{ attributes }}>
-    {% hook 'cart' with { cart } %}
+<div class="offcanvas offcanvas-end offcanvas-wide" tabindex="-1" id="offcanvasCart">
+    <div class="offcanvas-cart-live-region" {{ attributes }}>
+        {% hook 'cart' with { cart } %}
+    </div>
 </div>

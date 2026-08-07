@@ -18,8 +18,10 @@ use Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension;
 use Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension;
 use Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension;
 use Sylius\Bundle\AdminBundle\Twig\PaymentMethodExtension;
+use Sylius\Bundle\AdminBundle\Twig\PaymentMethodGatewayFactoryExtension;
 use Sylius\Bundle\AdminBundle\Twig\PromotionLabelsExtension;
 use Sylius\Bundle\AdminBundle\Twig\ShopExtension;
+use Sylius\Component\Payment\Checker\PaymentMethodGatewayFactoryCheckerInterface;
 use Twig\Extension\StringLoaderExtension;
 
 return static function (ContainerConfigurator $container) {
@@ -64,6 +66,12 @@ return static function (ContainerConfigurator $container) {
             '%sylius.gateway_factories%',
             '%sylius.admin.twig.payment_method.excluded_gateways%',
         ])
+        ->tag('twig.extension')
+    ;
+
+    $services
+        ->set('sylius_admin.twig.extension.payment_method_gateway_factory', PaymentMethodGatewayFactoryExtension::class)
+        ->args([service(PaymentMethodGatewayFactoryCheckerInterface::class)])
         ->tag('twig.extension')
     ;
 
