@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Context;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Context\TokenValueBasedCartContext;
@@ -20,10 +21,10 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TokenValueBasedCartContextTest extends TestCase
 {
     private MockObject&RequestStack $requestStack;
@@ -31,8 +32,6 @@ final class TokenValueBasedCartContextTest extends TestCase
     private MockObject&OrderRepositoryInterface $orderRepository;
 
     private TokenValueBasedCartContext $tokenValueBasedCartContext;
-
-    private MockObject&Request $request;
 
     protected function setUp(): void
     {
@@ -44,7 +43,6 @@ final class TokenValueBasedCartContextTest extends TestCase
             $this->orderRepository,
             '/api/v2',
         );
-        $this->request = $this->createMock(Request::class);
     }
 
     public function testImplementsCartContextInterface(): void
@@ -57,13 +55,10 @@ final class TokenValueBasedCartContextTest extends TestCase
         /** @var OrderInterface&MockObject $cart */
         $cart = $this->createMock(OrderInterface::class);
 
-        $this->request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
+        $request = Request::create('/api/v2/orders/TOKEN_VALUE');
+        $request->attributes->set('tokenValue', 'TOKEN_VALUE');
 
-        $this->request->expects(self::once())
-            ->method('getRequestUri')
-            ->willReturn('/api/v2/orders/TOKEN_VALUE');
-
-        $this->requestStack->expects(self::once())->method('getMainRequest')->willReturn($this->request);
+        $this->requestStack->expects(self::once())->method('getMainRequest')->willReturn($request);
 
         $this->orderRepository->expects(self::once())
             ->method('findCartByTokenValue')
@@ -88,14 +83,11 @@ final class TokenValueBasedCartContextTest extends TestCase
 
     public function testThrowsAnExceptionIfTheRequestIsNotAnApiRequest(): void
     {
-        $this->request->attributes = new ParameterBag([]);
-        $this->request->expects(self::once())
-            ->method('getRequestUri')
-            ->willReturn('/orders');
+        $request = Request::create('/orders');
 
         $this->requestStack->expects(self::once())
             ->method('getMainRequest')
-            ->willReturn($this->request);
+            ->willReturn($request);
 
         self::expectException(CartNotFoundException::class);
 
@@ -106,14 +98,11 @@ final class TokenValueBasedCartContextTest extends TestCase
 
     public function testThrowsAnExceptionIfThereIsNoTokenValue(): void
     {
-        $this->request->attributes = new ParameterBag([]);
-        $this->request->expects(self::once())
-            ->method('getRequestUri')
-            ->willReturn('/api/v2/orders');
+        $request = Request::create('/api/v2/orders');
 
         $this->requestStack->expects(self::once())
             ->method('getMainRequest')
-            ->willReturn($this->request);
+            ->willReturn($request);
 
         self::expectException(CartNotFoundException::class);
 
@@ -124,14 +113,12 @@ final class TokenValueBasedCartContextTest extends TestCase
 
     public function testThrowsAnExceptionIfThereIsNoCartWithGivenTokenValue(): void
     {
-        $this->request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
-        $this->request->expects(self::once())
-            ->method('getRequestUri')
-            ->willReturn('/api/v2/orders/TOKEN_VALUE');
+        $request = Request::create('/api/v2/orders/TOKEN_VALUE');
+        $request->attributes->set('tokenValue', 'TOKEN_VALUE');
 
         $this->requestStack->expects(self::once())
             ->method('getMainRequest')
-            ->willReturn($this->request);
+            ->willReturn($request);
 
         $this->orderRepository->expects(self::once())
             ->method('findCartByTokenValue')

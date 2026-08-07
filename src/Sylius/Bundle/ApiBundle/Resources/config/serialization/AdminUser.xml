@@ -64,6 +64,18 @@
             <group>sylius:admin:admin_user:index</group>
             <group>sylius:admin:admin_user:show</group>
         </attribute>
+        <attribute name="administrationAccess">
+            <group>sylius:admin:admin_user:index</group>
+            <group>sylius:admin:admin_user:show</group>
+            <group>sylius:admin:admin_user:create</group>
+            <group>sylius:admin:admin_user:update</group>
+        </attribute>
+        <attribute name="apiAccess">
+            <group>sylius:admin:admin_user:index</group>
+            <group>sylius:admin:admin_user:show</group>
+            <group>sylius:admin:admin_user:create</group>
+            <group>sylius:admin:admin_user:update</group>
+        </attribute>
         <attribute name="createdAt">
             <group>sylius:admin:admin_user:index</group>
             <group>sylius:admin:admin_user:show</group>

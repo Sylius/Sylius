@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'Der er kun %quantity% af dette produkt på lager.'
     product_variant:
         update_error: 'Der var et uventet problem med at opdatere produktvarianten. Prøv at opdatere produktvarianten igen.'
+    user:
+        verification_email_sent: 'Hvis den indtastede e-mailadresse er tilknyttet en konto, er der sendt en bekræftelsesmail.'

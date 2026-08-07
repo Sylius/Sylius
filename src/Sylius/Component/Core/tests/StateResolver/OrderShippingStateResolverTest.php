@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\StateResolver;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\OrderShippingTransitions;
 use Sylius\Component\Core\StateResolver\OrderShippingStateResolver;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderShippingStateResolverTest extends TestCase
 {
     private MockObject&StateMachineInterface $stateMachine;

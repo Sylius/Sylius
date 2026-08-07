@@ -38,9 +38,7 @@ final class PromotionContext implements Context
         $this->useCouponCode($couponCode);
     }
 
-    /**
-     * @Then I should be notified that the coupon is invalid
-     */
+    #[Then('I should be notified that the coupon is invalid')]
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
         $response = $this->client->getLastResponse();

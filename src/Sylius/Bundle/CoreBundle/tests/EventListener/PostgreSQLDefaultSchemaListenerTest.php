@@ -19,10 +19,12 @@ use Doctrine\DBAL\Schema\PostgreSQLSchemaManager;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\PostgreSQLDefaultSchemaListener;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PostgreSQLDefaultSchemaListenerTest extends TestCase
 {
     private Connection&MockObject $connection;

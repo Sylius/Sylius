@@ -56,7 +56,7 @@ Feature: Receiving a discount based on a configured promotion
         When I check the details of my cart
         Then theirs subtotal price should be decreased by "$140.00"
         And my cart total should be "$510.00"
-        And my discount should be "-$190.00"
+        And my discount should be "-$50.00"
 
     @api @ui
     Scenario: Receiving a discount on products from multiple taxons based on products from different taxons
@@ -76,5 +76,5 @@ Feature: Receiving a discount based on a configured promotion
         And I added product "Black Sabbath jacket" to the cart
         When I check the details of my cart
         Then product "Black Sabbath jacket" price should be discounted by "$10.00"
-        And my discount should be "-$30.00"
+        And my discount should be "-$20.00"
         And my cart total should be "$150.00"

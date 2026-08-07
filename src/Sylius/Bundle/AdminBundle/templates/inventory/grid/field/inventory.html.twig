@@ -10,8 +10,8 @@
         </div>
     </div>
 {% else %}
-    <span class="ui red label">
-        <i class="remove icon"></i>
+    <span class="badge bg-danger-lt text-danger">
+        {{ ux_icon('tabler:x', {'class': 'icon'}) }}
         {{ 'sylius.ui.not_tracked'|trans }}
     </span>
 {% endif %}

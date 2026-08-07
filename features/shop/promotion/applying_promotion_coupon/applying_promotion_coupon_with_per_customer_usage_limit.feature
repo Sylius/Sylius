@@ -73,3 +73,59 @@ Feature: Applying promotion coupon with per customer usage limit
         When I check the details of my cart
         Then my cart total should be "$100.00"
         And there should be no discount applied
+
+    @api @ui
+    Scenario: Orders placed before track usage was re-enabled do not count toward per customer usage limit
+        Given this coupon can be used once per customer
+        And I placed an order "#00000022"
+        And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        And this coupon has had its track usage re-enabled
+        And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
+        When I check the details of my cart
+        Then my cart total should be "$90.00"
+        And my discount should be "-$10.00"
+
+    @api @ui
+    Scenario: Enabling track usage does not count orders placed before tracking was enabled
+        Given this coupon has track usage disabled
+        And this coupon can be used once per customer
+        And I placed an order "#00000022"
+        And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        And this coupon has had its track usage re-enabled
+        And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
+        When I check the details of my cart
+        Then my cart total should be "$90.00"
+        And my discount should be "-$10.00"
+
+    @api @ui
+    Scenario: Removing per customer usage limit allows customer to use the coupon after the limit was reached
+        Given this coupon can be used once per customer
+        And I placed an order "#00000022"
+        And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        And this coupon has no per customer usage limit
+        And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
+        When I check the details of my cart
+        Then my cart total should be "$90.00"
+        And my discount should be "-$10.00"
+
+    @api @ui
+    Scenario: Orders placed after track usage was re-enabled still count toward per customer usage limit
+        Given this coupon can be used once per customer
+        And I placed an order "#00000022"
+        And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        And this coupon has had its track usage re-enabled
+        And I placed an order "#00000023"
+        And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
+        When I check the details of my cart
+        Then my cart total should be "$100.00"
+        And there should be no discount applied

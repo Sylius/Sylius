@@ -33,3 +33,21 @@ Feature: Editing an administrator
         And I change its password to "example"
         And I save my changes
         Then I should be able to log in as "ted@example.com" authenticated by "example" password
+
+    @api @ui
+    Scenario: Revoking administration access from an existing administrator
+        When I want to edit this administrator
+        And I revoke its administration access
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this administrator should not have administration access
+        But this administrator should have API access
+
+    @api @ui
+    Scenario: Revoking API access from an existing administrator
+        When I want to edit this administrator
+        And I revoke its API access
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this administrator should not have API access
+        But this administrator should have administration access

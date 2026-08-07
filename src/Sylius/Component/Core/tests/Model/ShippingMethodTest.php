@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingMethodTest extends TestCase
 {
     private ChannelInterface&MockObject $channel;

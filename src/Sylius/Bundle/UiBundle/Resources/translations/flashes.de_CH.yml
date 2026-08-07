@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: 'Ein Taxon, das in einer Aktionsregel verwendet wird, kann nicht gelöscht werden.'
         menu_taxon_delete: 'Sie können ein Menü-Taxon eines Kanals nicht löschen.'
+    user:
+        verification_email_sent: 'Falls die eingegebene E-Mail-Adresse mit einem Konto verknüpft ist, wurde eine Bestätigungs-E-Mail gesendet.'

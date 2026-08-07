@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Product\Resolver;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolver;
 use Sylius\Component\Product\Resolver\AvailableProductOptionValuesResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AvailableProductOptionValuesResolverTest extends TestCase
 {
     private const PRODUCT_CODE = 'PRODUCT_CODE';

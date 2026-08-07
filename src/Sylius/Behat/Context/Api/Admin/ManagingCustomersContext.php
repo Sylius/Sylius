@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -40,29 +42,23 @@ final class ManagingCustomersContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to create a new customer
-     * @When I want to create a new customer account
-     */
+    #[When('I want to create a new customer')]
+    #[When('I want to create a new customer account')]
     public function iWantToCreateANewCustomer(): void
     {
         $this->client->buildCreateRequest(Resources::CUSTOMERS);
     }
 
-    /**
-     * @When /^I want to edit (this customer)$/
-     * @When I want to enable :customer
-     * @When I want to disable :customer
-     * @When I want to verify :customer
-     */
+    #[When('/^I want to edit (this customer)$/')]
+    #[When('I want to enable :customer')]
+    #[When('I want to disable :customer')]
+    #[When('I want to verify :customer')]
     public function iWantToEditThisCustomer(CustomerInterface $customer): void
     {
         $this->client->buildUpdateRequest(Resources::CUSTOMERS, (string) $customer->getId());
     }
 
-    /**
-     * @When I browse orders of a customer :customer
-     */
+    #[When('I browse orders of a customer :customer')]
     public function iBrowseOrdersOfACustomer(CustomerInterface $customer): void
     {
         $this->client->index(Resources::ORDERS);
@@ -70,78 +66,60 @@ final class ManagingCustomersContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I specify their email as :email
-     * @When I do not specify their email
-     * @When I change their email to :email
-     * @When I remove its email
-     */
+    #[When('I specify their email as :email')]
+    #[When('I do not specify their email')]
+    #[When('I change their email to :email')]
+    #[When('I remove its email')]
     public function iChangeTheirEmailTo(?string $email = null): void
     {
         $this->client->addRequestData('email', (string) $email);
     }
 
-    /**
-     * @When /^I specify (?:their|his) first name as "([^"]*)"$/
-     * @When I remove its first name
-     */
+    #[When('/^I specify (?:their|his) first name as "([^"]*)"$/')]
+    #[When('I remove its first name')]
     public function iSpecifyTheirFirstNameAs(?string $name = null): void
     {
         $this->client->addRequestData('firstName', $name);
     }
 
-    /**
-     * @When /^I specify (?:their|his) last name as "([^"]*)"$/
-     * @When I remove its last name
-     */
+    #[When('/^I specify (?:their|his) last name as "([^"]*)"$/')]
+    #[When('I remove its last name')]
     public function iSpecifyTheirLastNameAs(?string $name = null): void
     {
         $this->client->addRequestData('lastName', $name);
     }
 
-    /**
-     * @When I specify its birthday as :birthday
-     */
+    #[When('I specify its birthday as :birthday')]
     public function iSpecifyItsBirthdayAs(string $birthday): void
     {
         $this->client->addRequestData('birthday', $birthday);
     }
 
-    /**
-     * @When I select :gender as its gender
-     */
+    #[When('I select :gender as its gender')]
     public function iSelectGender(string $gender): void
     {
         $this->client->addRequestData('gender', strtolower(substr($gender, 0, 1)));
     }
 
-    /**
-     * @When I select :customerGroup as their group
-     */
+    #[When('I select :customerGroup as their group')]
     public function iSelectGroup(CustomerGroupInterface $customerGroup): void
     {
         $this->client->addRequestData('group', $this->iriConverter->getIriFromResource($customerGroup));
     }
 
-    /**
-     * @When I make them subscribed to the newsletter
-     */
+    #[When('I make them subscribed to the newsletter')]
     public function iMakeThemSubscribedToTheNewsletter(): void
     {
         $this->client->addRequestData('subscribedToNewsletter', true);
     }
 
-    /**
-     * @When I choose create account option
-     */
+    #[When('I choose create account option')]
     public function iChooseCreateAccountOption(): void
     {
         $this->client->addRequestData('user', []);
     }
 
-    /**
-     * @When I specify their password as :password
-     */
+    #[When('I specify their password as :password')]
     public function iSpecifyItsPasswordAs(string $password): void
     {
         $this->client->addRequestData('user', [
@@ -149,9 +127,7 @@ final class ManagingCustomersContext implements Context
         ]);
     }
 
-    /**
-     * @When /^I (enable|disable) their account$/
-     */
+    #[When('/^I (enable|disable) their account$/')]
     public function iEnableIt(string $toggleAction): void
     {
         $this->client->addRequestData('user', [
@@ -159,9 +135,7 @@ final class ManagingCustomersContext implements Context
         ]);
     }
 
-    /**
-     * @When I verify it
-     */
+    #[When('I verify it')]
     public function iVerifyIt(): void
     {
         $this->client->addRequestData('user', [
@@ -169,35 +143,27 @@ final class ManagingCustomersContext implements Context
         ]);
     }
 
-    /**
-     * @When I (try to) add them
-     */
+    #[When('I (try to) add them')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I want to see all customers in store
-     */
+    #[When('I want to see all customers in store')]
     public function iWantToSeeAllCustomersInStore(): void
     {
         $this->client->index(Resources::CUSTOMERS);
     }
 
-    /**
-     * @When I view details of the customer :customer
-     * @When /^I view (their) details$/
-     */
+    #[When('I view details of the customer :customer')]
+    #[When('/^I view (their) details$/')]
     public function iViewDetailsOfTheCustomer(CustomerInterface $customer): void
     {
         $this->client->show(Resources::CUSTOMERS, (string) $customer->getId());
     }
 
-    /**
-     * @When I filter by group :groupName
-     * @When I filter by groups :firstGroup and :secondGroup
-     */
+    #[When('I filter by group :groupName')]
+    #[When('I filter by groups :firstGroup and :secondGroup')]
     public function iFilterByGroup(string ...$groupsNames): void
     {
         foreach ($groupsNames as $groupName) {
@@ -206,36 +172,28 @@ final class ManagingCustomersContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I search by :phrase email
-     */
+    #[When('I search by :phrase email')]
     public function iSearchByEmail(string $phrase): void
     {
         $this->client->addFilter('email', $phrase);
         $this->client->filter();
     }
 
-    /**
-     * @When I search by :phrase first name
-     */
+    #[When('I search by :phrase first name')]
     public function iSearchByFirstName(string $phrase): void
     {
         $this->client->addFilter('firstName', $phrase);
         $this->client->filter();
     }
 
-    /**
-     * @When I search by :phrase last name
-     */
+    #[When('I search by :phrase last name')]
     public function iSearchByLastName(string $phrase): void
     {
         $this->client->addFilter('lastName', $phrase);
         $this->client->filter();
     }
 
-    /**
-     * @When I sort the orders :sortType by channel
-     */
+    #[When('I sort the orders :sortType by channel')]
     public function iSortThemBy(string $sortType = 'ascending'): void
     {
         $this->client->sort([
@@ -243,9 +201,7 @@ final class ManagingCustomersContext implements Context
         ]);
     }
 
-    /**
-     * @When I sort customers by :sortType registration date
-     */
+    #[When('I sort customers by :sortType registration date')]
     public function iSortCustomersByRegistrationDate(string $sortType): void
     {
         $this->client->sort([
@@ -253,9 +209,7 @@ final class ManagingCustomersContext implements Context
         ]);
     }
 
-    /**
-     * @When I sort customers by :sortType email
-     */
+    #[When('I sort customers by :sortType email')]
     public function iSortCustomersByEmail(string $sortType): void
     {
         $this->client->sort([
@@ -263,9 +217,7 @@ final class ManagingCustomersContext implements Context
         ]);
     }
 
-    /**
-     * @When I sort customers by :sortType first name
-     */
+    #[When('I sort customers by :sortType first name')]
     public function iSortCustomersByFirstName(string $sortType): void
     {
         $this->client->sort([
@@ -273,9 +225,7 @@ final class ManagingCustomersContext implements Context
         ]);
     }
 
-    /**
-     * @When I sort customers by :sortType last name
-     */
+    #[When('I sort customers by :sortType last name')]
     public function iSortCustomersByLastName(string $sortType): void
     {
         $this->client->sort([
@@ -283,9 +233,7 @@ final class ManagingCustomersContext implements Context
         ]);
     }
 
-    /**
-     * @When I change the password of user :customer to :newPassword
-     */
+    #[When('I change the password of user :customer to :newPassword')]
     public function iChangeThePasswordOfUserTo(CustomerInterface $customer, string $newPassword): void
     {
         $this->iWantToEditThisCustomer($customer);
@@ -293,26 +241,20 @@ final class ManagingCustomersContext implements Context
         $this->client->update();
     }
 
-    /**
-     * @When I delete the account of :shopUser user
-     */
+    #[When('I delete the account of :shopUser user')]
     public function iDeleteAccount(ShopUserInterface $shopUser): void
     {
         $this->sharedStorage->set('customer', $shopUser->getCustomer());
         $this->client->delete(sprintf('customers/%s', $shopUser->getCustomer()->getId()), 'user');
     }
 
-    /**
-     * @When I do not specify any information
-     * @When I do not choose create account option
-     */
+    #[When('I do not specify any information')]
+    #[When('I do not choose create account option')]
     public function intentionallyLeftEmpty(): void
     {
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -321,9 +263,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that :element is required
-     */
+    #[Then('I should be notified that :element is required')]
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         Assert::contains(
@@ -332,9 +272,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that email must be unique
-     */
+    #[Then('I should be notified that email must be unique')]
     public function iShouldBeNotifiedThatEmailMustBeUnique(): void
     {
         Assert::contains(
@@ -343,9 +281,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that ([^"]+) should be ([^"]+)$/
-     */
+    #[Then('/^I should be notified that ([^"]+) should be ([^"]+)$/')]
     public function iShouldBeNotifiedThatTheElementShouldBe(string $elementName, string $validationMessage): void
     {
         Assert::contains(
@@ -354,9 +290,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that email is not valid
-     */
+    #[Then('I should be notified that email is not valid')]
     public function iShouldBeNotifiedThatEmailIsNotValid(): void
     {
         Assert::contains(
@@ -365,10 +299,8 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then the customer :customer should appear in the store
-     * @Then the customer :customer should still have this email
-     */
+    #[Then('the customer :customer should appear in the store')]
+    #[Then('the customer :customer should still have this email')]
     public function theCustomerShouldAppearInTheStore(CustomerInterface $customer): void
     {
         Assert::true(
@@ -377,10 +309,8 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then the customer :customer should have an account created
-     * @Then /^(this customer) should have an account created$/
-     */
+    #[Then('the customer :customer should have an account created')]
+    #[Then('/^(this customer) should have an account created$/')]
     public function theyShouldHaveAnAccountCreated(CustomerInterface $customer): void
     {
         Assert::notNull(
@@ -389,19 +319,15 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :count customers on the list
-     * @Then I should see a single customer on the list
-     */
+    #[Then('I should see :count customers on the list')]
+    #[Then('I should see a single customer on the list')]
     public function iShouldSeeZonesInTheList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then I should see the customer :email in the list
-     * @Then I should see the customer :email on the list
-     */
+    #[Then('I should see the customer :email in the list')]
+    #[Then('I should see the customer :email on the list')]
     public function iShouldSeeTheCustomerInTheList(string $email): void
     {
         Assert::true(
@@ -410,49 +336,37 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then I should see a single order in the list
-     */
+    #[Then('I should see a single order in the list')]
     public function iShouldSeeASingleOrderInTheList(): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), 1);
     }
 
-    /**
-     * @Then their name should be :name
-     */
+    #[Then('their name should be :name')]
     public function theirNameShouldBe(string $name): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'fullName', $name));
     }
 
-    /**
-     * @Then he should be registered since :registrationDate
-     */
+    #[Then('he should be registered since :registrationDate')]
     public function hisRegistrationDateShouldBe(string $registrationDate): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'createdAt', $registrationDate));
     }
 
-    /**
-     * @Then their email should be :email
-     */
+    #[Then('their email should be :email')]
     public function theirEmailShouldBe(string $email): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'email', $email));
     }
 
-    /**
-     * @Then their phone number should be :phoneNumber
-     */
+    #[Then('their phone number should be :phoneNumber')]
     public function theirPhoneNumberShouldBe(string $phoneNumber): void
     {
         Assert::true($this->responseChecker->hasValue($this->client->getLastResponse(), 'phoneNumber', $phoneNumber));
     }
 
-    /**
-     * @Then their default address should be :firstName :lastName, :street, :postcode :city, :country
-     */
+    #[Then('their default address should be :firstName :lastName, :street, :postcode :city, :country')]
     public function theirSDefaultAddressShouldBe(
         string $firstName,
         string $lastName,
@@ -471,36 +385,28 @@ final class ManagingCustomersContext implements Context
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'countryCode'), $country->getCode());
     }
 
-    /**
-     * @Then the province in the default address should be :provinceName
-     */
+    #[Then('the province in the default address should be :provinceName')]
     public function theProvinceInTheDefaultAddressShouldBe(string $provinceName): void
     {
         $this->client->showByIri($this->responseChecker->getValue($this->client->getLastResponse(), 'defaultAddress'));
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'provinceName'), $provinceName);
     }
 
-    /**
-     * @Then I should see information about no existing account for this customer
-     * @Then I should not see information about email verification
-     */
+    #[Then('I should see information about no existing account for this customer')]
+    #[Then('I should not see information about email verification')]
     public function iShouldSeeInformationAboutNoExistingAccountForThisCustomer(): void
     {
         Assert::null($this->responseChecker->getValue($this->client->getLastResponse(), 'user'));
     }
 
-    /**
-     * @Then I should see that this customer has verified the email
-     */
+    #[Then('I should see that this customer has verified the email')]
     public function iShouldSeeThatThisCustomerHasVerifiedTheEmail(): void
     {
         $user = $this->responseChecker->getValue($this->client->getLastResponse(), 'user');
         Assert::true($user['verified']);
     }
 
-    /**
-     * @Then I should see the order with number :orderNumber in the list
-     */
+    #[Then('I should see the order with number :orderNumber in the list')]
     public function iShouldSeeTheOrderWithNumberInTheList(string $orderNumber): void
     {
         Assert::true(
@@ -512,9 +418,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the password must be at least :amountOfCharacters characters long
-     */
+    #[Then('I should be notified that the password must be at least :amountOfCharacters characters long')]
     public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong(int $amountOfCharacters): void
     {
         Assert::contains(
@@ -523,9 +427,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see the order with number :orderNumber in the list
-     */
+    #[Then('I should not see the order with number :orderNumber in the list')]
     public function iShouldNotSeeASingleOrderFromCustomer(string $orderNumber): void
     {
         Assert::false(
@@ -537,9 +439,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this customer) should be (enabled|disabled)$/
-     */
+    #[Then('/^(this customer) should be (enabled|disabled)$/')]
     public function thisCustomerShouldBeEnabled(CustomerInterface $customer, string $toggleAction): void
     {
         $user = $this->responseChecker->getValue(
@@ -549,9 +449,7 @@ final class ManagingCustomersContext implements Context
         Assert::same($user['enabled'], 'enabled' === $toggleAction);
     }
 
-    /**
-     * @Then /^(this customer) should be verified$/
-     */
+    #[Then('/^(this customer) should be verified$/')]
     public function thisCustomerShouldBeVerified(CustomerInterface $customer): void
     {
         $user = $this->responseChecker->getValue(
@@ -561,9 +459,7 @@ final class ManagingCustomersContext implements Context
         Assert::true($user['verified']);
     }
 
-    /**
-     * @Then there should still be only one customer with email :email
-     */
+    #[Then('there should still be only one customer with email :email')]
     public function thereShouldStillBeOnlyOneCustomerWithEmail(string $email): void
     {
         Assert::count(
@@ -573,10 +469,8 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this customer) should have an empty first name$/
-     * @Then the customer :customer should still have an empty first name
-     */
+    #[Then('/^(this customer) should have an empty first name$/')]
+    #[Then('the customer :customer should still have an empty first name')]
     public function theCustomerShouldStillHaveAnEmptyFirstName(CustomerInterface $customer): void
     {
         Assert::null(
@@ -587,10 +481,8 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this customer) should have an empty last name$/
-     * @Then the customer :customer should still have an empty last name
-     */
+    #[Then('/^(this customer) should have an empty last name$/')]
+    #[Then('the customer :customer should still have an empty last name')]
     public function theCustomerShouldStillHaveAnEmptyLastName(CustomerInterface $customer): void
     {
         Assert::null(
@@ -601,9 +493,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then the customer with email :email should not appear in the store
-     */
+    #[Then('the customer with email :email should not appear in the store')]
     public function theCustomerShouldNotAppearInTheStore(string $email): void
     {
         Assert::false(
@@ -615,9 +505,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this customer) with name "([^"]*)" should appear in the store$/
-     */
+    #[Then('/^(this customer) with name "([^"]*)" should appear in the store$/')]
     public function theCustomerWithNameShouldAppearInTheStore(CustomerInterface $customer, string $name): void
     {
         Assert::true(
@@ -629,10 +517,8 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then this customer should be subscribed to the newsletter
-     * @Then I should see that this customer is subscribed to the newsletter
-     */
+    #[Then('this customer should be subscribed to the newsletter')]
+    #[Then('I should see that this customer is subscribed to the newsletter')]
     public function thisCustomerShouldBeSubscribedToTheNewsletter(): void
     {
         Assert::true(
@@ -643,9 +529,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then this customer should have :customerGroup as their group
-     */
+    #[Then('this customer should have :customerGroup as their group')]
     public function thisCustomerShouldHaveAsTheirGroup(CustomerGroupInterface $customerGroup): void
     {
         Assert::same(
@@ -654,9 +538,7 @@ final class ManagingCustomersContext implements Context
         );
     }
 
-    /**
-     * @Then the customer with this email should still exist
-     */
+    #[Then('the customer with this email should still exist')]
     public function customerShouldStillExist(): void
     {
         /** @var CustomerInterface $customer */
@@ -668,21 +550,17 @@ final class ManagingCustomersContext implements Context
         Assert::same($this->responseChecker->getValue($this->client->getLastResponse(), 'email'), $customer->getEmail());
     }
 
-    /**
-     * @Then I should not see create account option
-     * @Then I should still be on the customer creation page
-     * @Then I should be able to specify their password
-     * @Then I should not be able to specify their password
-     * @Then I should be able to select create account option
-     * @Then I should not be able to select create account option
-     */
+    #[Then('I should not see create account option')]
+    #[Then('I should still be on the customer creation page')]
+    #[Then('I should be able to specify their password')]
+    #[Then('I should not be able to specify their password')]
+    #[Then('I should be able to select create account option')]
+    #[Then('I should not be able to select create account option')]
     public function intentionallyLeftBlank(): void
     {
     }
 
-    /**
-     * @Then the user account should be deleted
-     */
+    #[Then('the user account should be deleted')]
     public function accountShouldBeDeleted(): void
     {
         /** @var CustomerInterface $customer */
@@ -693,9 +571,7 @@ final class ManagingCustomersContext implements Context
         Assert::null($this->responseChecker->getValue($response, 'user'));
     }
 
-    /**
-     * @Then I should not be able to delete it again
-     */
+    #[Then('I should not be able to delete it again')]
     public function iShouldNotBeAbleToDeleteCustomerAgain(): void
     {
         $customer = $this->sharedStorage->get('customer');
@@ -704,9 +580,7 @@ final class ManagingCustomersContext implements Context
         Assert::same($this->client->getLastResponse()->getStatusCode(), 404);
     }
 
-    /**
-     * @Then /^the (first|last) customer should be "([^"]+)"$/
-     */
+    #[Then('/^the (first|last) customer should be "([^"]+)"$/')]
     public function theFirstLastCustomerShouldBe(string $nth, string $email): void
     {
         $customers = $this->responseChecker->getCollection($this->client->getLastResponse());

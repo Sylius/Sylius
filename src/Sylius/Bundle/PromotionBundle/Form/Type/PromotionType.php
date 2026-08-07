@@ -57,6 +57,7 @@ final class PromotionType extends AbstractResourceType
             ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.promotion.usage_limit',
                 'required' => false,
+                'attr' => ['min' => 1],
             ])
             ->add('startsAt', DateTimeType::class, [
                 'label' => 'sylius.form.promotion.starts_at',
@@ -76,6 +77,11 @@ final class PromotionType extends AbstractResourceType
             ])
             ->add('couponBased', CheckboxType::class, [
                 'label' => 'sylius.form.promotion.coupon_based',
+                'required' => false,
+            ])
+            ->add('trackUsage', CheckboxType::class, [
+                'label' => 'sylius.form.promotion.track_usage',
+                'help' => 'sylius.form.promotion.track_usage_details',
                 'required' => false,
             ])
             ->add('rules', PromotionRuleCollectionType::class, [
