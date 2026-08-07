@@ -19,7 +19,7 @@ sylius_twig_hooks:
                 configuration:
                     active: true
                     variant: 'stripe'
-                    image: 'build/admin/images/stripe-logo.webp'
+                    image: 'build/admin/images/stripe-logo.svg'
                     title: 'sylius.ui.payment_method_banner.stripe.title'
                     description: 'sylius.ui.payment_method_banner.stripe.description'
                     payment_methods: ['visa', 'master_card', 'amex', 'apple_pay', 'google_pay', 'klarna']
