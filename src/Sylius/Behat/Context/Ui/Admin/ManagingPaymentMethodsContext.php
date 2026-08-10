@@ -19,8 +19,8 @@ use Behat\Step\Given;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
+use Sylius\Behat\Page\Admin\PaymentMethod\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
 use Sylius\Behat\Page\SyliusPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -90,7 +90,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
+        $this->indexPage->deletePaymentMethodWithName($paymentMethod->getName());
     }
 
     #[Then('/^(?:this payment method|its gateway configuration) "([^"]+)" should be "([^"]+)"$/')]
@@ -159,7 +159,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     #[When('I check (also) the :paymentMethodName payment method')]
     public function iCheckThePaymentMethod(string $paymentMethodName): void
     {
-        $this->indexPage->checkResourceOnPage(['name' => $paymentMethodName]);
+        $this->indexPage->checkPaymentMethodWithName($paymentMethodName);
     }
 
     #[When('I delete them')]
@@ -171,13 +171,13 @@ final readonly class ManagingPaymentMethodsContext implements Context
     #[Then('I should see the payment method :paymentMethodName')]
     public function IShouldSeeThePaymentMethod(string $paymentMethodName): void
     {
-        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]));
+        Assert::same($this->indexPage->countPaymentMethodsWithName($paymentMethodName), 1);
     }
 
     #[Then('I should not see the payment method :paymentMethodName')]
     public function IShouldNotSeeThePaymentMethod(string $paymentMethodName): void
     {
-        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]));
+        Assert::same($this->indexPage->countPaymentMethodsWithName($paymentMethodName), 0);
     }
 
     #[Then('the payment method :paymentMethodName should appear in the registry')]
@@ -216,15 +216,15 @@ final readonly class ManagingPaymentMethodsContext implements Context
     #[Then('the first payment method on the list should have :field :value')]
     public function theFirstPaymentMethodOnTheListShouldHave(string $field, string $value): void
     {
-        Assert::same($this->indexPage->getColumnFields($field)[0], $value);
+        Assert::same($this->indexPage->getPaymentMethodNamesInOrder()[0], $value);
     }
 
     #[Then('the last payment method on the list should have :field :value')]
     public function theLastPaymentMethodOnTheListShouldHave(string $field, string $value): void
     {
-        $values = $this->indexPage->getColumnFields($field);
+        $names = $this->indexPage->getPaymentMethodNamesInOrder();
 
-        Assert::same(end($values), $value);
+        Assert::same(end($names), $value);
     }
 
     #[Given('the payment methods are already sorted by :field')]
@@ -270,7 +270,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     {
         $this->iBrowsePaymentMethods();
 
-        Assert::false($this->indexPage->isSingleResourceOnPage([$element => $value]));
+        Assert::same($this->indexPage->countPaymentMethodsWithName($value), 0);
     }
 
     #[Then('/^(this payment method) should still be named "([^"]+)"$/')]
@@ -278,10 +278,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     {
         $this->iBrowsePaymentMethods();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage([
-            'code' => $paymentMethod->getCode(),
-            'name' => $paymentMethodName,
-        ]));
+        Assert::same($this->indexPage->countPaymentMethodsWithName($paymentMethodName), 1);
     }
 
     /**
@@ -350,10 +347,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     #[Then('/^(this payment method) should no longer exist in the registry$/')]
     public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod): void
     {
-        Assert::false($this->indexPage->isSingleResourceOnPage([
-            'code' => $paymentMethod->getCode(),
-            'name' => $paymentMethod->getName(),
-        ]));
+        Assert::same($this->indexPage->countPaymentMethodsWithName($paymentMethod->getName()), 0);
     }
 
     /**
@@ -370,7 +364,7 @@ final readonly class ManagingPaymentMethodsContext implements Context
     {
         $this->iBrowsePaymentMethods();
 
-        Assert::true($this->indexPage->isSingleResourceOnPage([$element => $code]));
+        Assert::same($this->indexPage->countPaymentMethodsWithName($code), 1);
     }
 
     #[When('I do not specify configuration password')]

@@ -12,6 +12,7 @@
 declare(strict_types=1);
 
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePage;
+use Sylius\Behat\Page\Admin\PaymentMethod\IndexPage;
 use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePage;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -20,7 +21,7 @@ return static function (ContainerConfigurator $container) {
     $parameters = $container->parameters();
 
     $parameters->set('sylius.behat.page.admin.payment_method.create.class', CreatePage::class);
-    $parameters->set('sylius.behat.page.admin.payment_method.index.class', '%sylius.behat.page.admin.crud.index.class%');
+    $parameters->set('sylius.behat.page.admin.payment_method.index.class', IndexPage::class);
     $parameters->set('sylius.behat.page.admin.payment_method.update.class', UpdatePage::class);
 
     $services

@@ -13,10 +13,13 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\AdminBundle\Provider\PaymentGatewayMethodsProvider;
+use Sylius\Bundle\AdminBundle\Provider\PaymentGatewayMethodsProviderInterface;
 use Sylius\Bundle\AdminBundle\Twig\AttributeExtension;
 use Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension;
 use Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension;
 use Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension;
+use Sylius\Bundle\AdminBundle\Twig\PaymentGatewayMethodsExtension;
 use Sylius\Bundle\AdminBundle\Twig\PaymentMethodExtension;
 use Sylius\Bundle\AdminBundle\Twig\PaymentMethodGatewayFactoryExtension;
 use Sylius\Bundle\AdminBundle\Twig\PromotionLabelsExtension;
@@ -72,6 +75,30 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius_admin.twig.extension.payment_method_gateway_factory', PaymentMethodGatewayFactoryExtension::class)
         ->args([service(PaymentMethodGatewayFactoryCheckerInterface::class)])
+        ->tag('twig.extension')
+    ;
+
+    $services
+        ->set('sylius_admin.provider.payment_gateway_methods', PaymentGatewayMethodsProvider::class)
+        ->args([
+            [
+                'adyen' => ['visa', 'master_card', 'amex', 'alipay', 'wechat_pay', 'klarna'],
+                'mollie' => ['visa', 'master_card', 'maestro', 'ideal', 'bancontact', 'blik'],
+                'paypal' => ['visa', 'master_card', 'amex', 'paypal', 'venmo', 'apple_pay'],
+                'stripe' => ['visa', 'master_card', 'amex', 'apple_pay', 'google_pay', 'klarna'],
+            ],
+            [
+                'paypal_express_checkout' => 'paypal',
+                'stripe_checkout' => 'stripe',
+                'stripe_web_element' => 'stripe',
+            ],
+        ])
+    ;
+    $services->alias(PaymentGatewayMethodsProviderInterface::class, 'sylius_admin.provider.payment_gateway_methods');
+
+    $services
+        ->set('sylius_admin.twig.extension.payment_gateway_methods', PaymentGatewayMethodsExtension::class)
+        ->args([service(PaymentGatewayMethodsProviderInterface::class)])
         ->tag('twig.extension')
     ;
 
