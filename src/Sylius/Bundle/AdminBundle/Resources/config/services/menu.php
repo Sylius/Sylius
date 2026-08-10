@@ -53,27 +53,27 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius_admin.menu_builder.provider.main.customers', CustomersMenuProvider::class)
-        ->tag('sylius_admin.main_menu_provider', ['priority' => -350])
-    ;
-
-    $services
-        ->set('sylius_admin.menu_builder.provider.main.marketing', MarketingMenuProvider::class)
         ->tag('sylius_admin.main_menu_provider', ['priority' => -400])
     ;
 
     $services
-        ->set('sylius_admin.menu_builder.provider.main.configuration', ConfigurationMenuProvider::class)
+        ->set('sylius_admin.menu_builder.provider.main.marketing', MarketingMenuProvider::class)
         ->tag('sylius_admin.main_menu_provider', ['priority' => -500])
     ;
 
     $services
-        ->set('sylius_admin.menu_builder.provider.main.official_support', OfficialSupportMenuProvider::class)
+        ->set('sylius_admin.menu_builder.provider.main.configuration', ConfigurationMenuProvider::class)
         ->tag('sylius_admin.main_menu_provider', ['priority' => -600])
     ;
 
     $services
-        ->set('sylius_admin.menu_builder.provider.main.administration', AdministrationMenuProvider::class)
+        ->set('sylius_admin.menu_builder.provider.main.official_support', OfficialSupportMenuProvider::class)
         ->tag('sylius_admin.main_menu_provider', ['priority' => -700])
+    ;
+
+    $services
+        ->set('sylius_admin.menu_builder.provider.main.administration', AdministrationMenuProvider::class)
+        ->tag('sylius_admin.main_menu_provider', ['priority' => -800])
     ;
 
     $services

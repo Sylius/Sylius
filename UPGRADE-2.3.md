@@ -471,6 +471,58 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    - `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`
    - `Sylius\Bundle\CoreBundle\Validator\Constraints\CannotRevokeOwnAdministrationAccess`
 
+## Admin
+
+1. `Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder` has been **deprecated** since Sylius 2.3 and will be removed in Sylius 3.0. ([#19192](https://github.com/Sylius/Sylius/pull/19192))
+
+   It has been replaced by `Sylius\Bundle\AdminBundle\Menu\CompositeMenuBuilder`, which builds the admin main menu by
+   iterating over a tagged collection of providers instead of hardcoding every submenu in a single class.
+
+   The `sylius_admin.menu_builder.main` service definition changed accordingly:
+
+   ```diff
+   -->set('sylius_admin.menu_builder.main', MainMenuBuilder::class)
+   +->set('sylius_admin.menu_builder.main', CompositeMenuBuilder::class)
+        ->args([
+            service('knp_menu.factory'),
+   -        service('event_dispatcher'),
+   -        service('router'),
+   +        tagged_iterator('sylius_admin.main_menu_provider'),
+        ])
+        ->tag('knp_menu.menu_builder', ['method' => 'createMenu', 'alias' => 'sylius_admin.main'])
+   ```
+
+   A new `Sylius\Bundle\AdminBundle\Menu\Provider\MenuProviderInterface` has been introduced:
+
+   ```php
+   interface MenuProviderInterface
+   {
+       public function __invoke(ItemInterface $menu): void;
+   }
+   ```
+
+   Each former `MainMenuBuilder::add*SubMenu()` method is now its own provider class, tagged with
+   `sylius_admin.main_menu_provider` and a `priority` controlling render order (higher priority renders first):
+
+   | Provider | Service id | Priority |
+   |---|---|---|
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\DashboardMenuProvider` | `sylius_admin.menu_builder.provider.main.dashboard` | `-100` |
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\CatalogMenuProvider` | `sylius_admin.menu_builder.provider.main.catalog` | `-200` |
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\SalesMenuProvider` | `sylius_admin.menu_builder.provider.main.sales` | `-300` |
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\CustomersMenuProvider` | `sylius_admin.menu_builder.provider.main.customers` | `-400` |
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\MarketingMenuProvider` | `sylius_admin.menu_builder.provider.main.marketing` | `-500` |
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\ConfigurationMenuProvider` | `sylius_admin.menu_builder.provider.main.configuration` | `-600` |
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\OfficialSupportMenuProvider` | `sylius_admin.menu_builder.provider.main.official_support` | `-700` |
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\AdministrationMenuProvider` | `sylius_admin.menu_builder.provider.main.administration` | `-800` |
+   | `Sylius\Bundle\AdminBundle\Menu\Provider\Main\EventMenuProvider` | `sylius_admin.menu_builder.main.event` | `-9999` |
+
+   The `sylius.menu.admin.main` event is still dispatched with the same name and payload, now by `EventMenuProvider`
+   (registered last, at priority `-9999`), so listeners that only hook into this event require **no changes**.
+
+   If you have decorated or extended `MainMenuBuilder` directly, migrate to implementing a custom
+   `MenuProviderInterface` and tagging it with `sylius_admin.main_menu_provider` (with an appropriate priority),
+   instead of extending the builder itself.
+
 ## Admin users
 
 1. Admin users have two independent **access levels**, both backed by roles:
