@@ -60,4 +60,5 @@ return [
     Symfony\UX\Icons\UXIconsBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Sylius\TwigExtra\Symfony\SyliusTwigExtraBundle::class => ['all' => true],
+    HWI\Bundle\OAuthBundle\HWIOAuthBundle::class => ['test' => true, 'test_cached' => true],
 ];

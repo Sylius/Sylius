@@ -11,6 +11,42 @@
 
    If you have decorated or replaced `sylius.user_checker.enabled` specifically for the `shop` firewall, migrate your customization to `sylius.user_checker.verification_aware_enabled` instead.
 
+2. OAuth account linking now **requires the resource owner to confirm that the returned e-mail address is verified**. ([#19171](https://github.com/Sylius/Sylius/pull/19171))
+
+   Previously, `Sylius\Bundle\CoreBundle\OAuth\UserProvider` linked an OAuth identity to any existing shop user found by e-mail address, without checking whether the resource owner had verified that address. A provider returning an arbitrary, unverified e-mail address could therefore be used to take over an existing account.
+
+   From now on, when an existing user is matched by e-mail address, the e-mail must be verified by the resource owner (for example Google's `email_verified` claim) or the login fails with `Sylius\Bundle\CoreBundle\OAuth\Exception\UnverifiedEmailException`. Creating a brand-new user from an OAuth response is unaffected.
+
+   **This is a behavioural change and it is enabled by default.** If you use a resource owner that does not return a verification claim, its users will no longer be able to sign in to an existing account until you configure it explicitly:
+
+   ```yaml
+   sylius_core:
+       oauth:
+           account_linking:
+               # resource owners, as configured in "hwi_oauth.resource_owners", whose e-mail addresses are trusted
+               # even though they return no verification claim
+               trusted_resource_owners: ['my_custom_provider']
+   ```
+
+   To restore the previous behaviour for every resource owner (**not recommended**), disable the check altogether:
+
+   ```yaml
+   sylius_core:
+       oauth:
+           account_linking:
+               require_verified_email: false
+   ```
+
+   The check itself is performed by `Sylius\Bundle\CoreBundle\OAuth\Checker\EmailVerificationCheckerInterface`, aliased to `sylius.oauth.email_verification_checker`, so you can replace it with your own implementation.
+
+3. Not passing a `Sylius\Bundle\CoreBundle\OAuth\Checker\EmailVerificationCheckerInterface` as the last argument of `Sylius\Bundle\CoreBundle\OAuth\UserProvider::__construct()` is **deprecated** and will be required in Sylius 3.0. ([#19171](https://github.com/Sylius/Sylius/pull/19171))
+
+   When the argument is omitted, `ResponseDataEmailVerificationChecker` is used, which ignores the `trusted_resource_owners` configuration. If you instantiate `UserProvider` yourself, pass `sylius.oauth.email_verification_checker` to keep the configured behaviour.
+
+4. `Sylius\Bundle\CoreBundle\OAuth\UserProvider::loadUserByOAuthUserResponse()` now **canonicalizes the e-mail address** before looking the user up. ([#19171](https://github.com/Sylius/Sylius/pull/19171))
+
+   `UserRepositoryInterface::findOneByEmail()` matches the `emailCanonical` column, so an address returned in a different letter case (for example `John.Doe@Example.com`) previously found no user and resulted in a **new shop user being created**. Such a response is now matched against the existing user and goes through the account linking flow described above.
+
 ## Promotions
 
 1. A new `trackUsage` field has been added to promotions and promotion coupons. ([#18966](https://github.com/Sylius/Sylius/pull/18966))
