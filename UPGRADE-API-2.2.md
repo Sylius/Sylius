@@ -1,3 +1,37 @@
+# UPGRADE FROM `2.2.8` TO `2.2.9`
+
+### JWTs are now bound to the API section they have been issued for
+
+Tokens are stamped with an `aud` claim (`sylius-api-admin` or `sylius-api-shop`) and a
+`principal_type` claim, and they are rejected by the other API section. This closes the case where
+an administrator and a shop customer share an e-mail address, in which a shop token was accepted by
+the admin API and resolved to that administrator.
+
+The expectations are keyed by firewall name, `api_admin` and `api_shop` by default, and are
+configured under `sylius_api.jwt.firewall_expectations`. If your application renamed either firewall, or serves
+the API through an additional JWT firewall (e.g. a marketplace vendor API), add an entry for it, otherwise the
+tokens of that firewall are rejected:
+
+```yaml
+sylius_api:
+    jwt:
+        firewall_expectations:
+            api_admin:
+                audience: sylius-api-admin
+                principal: Sylius\Component\Core\Model\AdminUserInterface
+            api_shop:
+                audience: sylius-api-shop 
+                principal: Sylius\Component\Core\Model\ShopUserInterface
+            api_custom:
+                audience: sylius-api-custom
+                principal: App\Entity\CustomUserInterface
+```
+
+This map is replaced, not merged, when configured — keep the built-in `api_admin`/`api_shop`
+entries alongside your own. Configuring an entry here only affects JWT validation; the referenced firewall must
+still be defined in `security.yaml`, and the `principal` must be an existing class or interface implemented by
+the corresponding user.
+
 # UPGRADE FROM `2.2.7` TO `2.2.8`
 
 ## Shop API
