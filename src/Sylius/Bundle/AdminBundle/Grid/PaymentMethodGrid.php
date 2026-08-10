@@ -44,16 +44,19 @@ final class PaymentMethodGrid implements PaymentMethodGridInterface
                             'td_class' => 'text-center',
                         ],
                     ]),
-                TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
-                    ->setLabel('sylius.ui.name')
+                TwigField::create('name', '@SyliusAdmin/payment_method/grid/field/name.html.twig')
+                    ->setLabel('sylius.ui.payment_method')
+                    ->setPath('.')
                     ->setSortable(true, 'translation.name'),
                 TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
                     ->setLabel('sylius.ui.code')
-                    ->setSortable(true, 'code'),
+                    ->setSortable(true, 'code')
+                    ->setEnabled(false),
                 TwigField::create('gateway', '@SyliusUi/grid/field/humanized.html.twig')
                     ->setLabel('sylius.ui.gateway')
                     ->setPath('gatewayConfig.factoryName')
-                    ->setSortable(true, 'gatewayConfig.factoryName'),
+                    ->setSortable(true, 'gatewayConfig.factoryName')
+                    ->setEnabled(false),
                 TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
                     ->setLabel('sylius.ui.enabled')
                     ->setSortable(true)
@@ -62,7 +65,8 @@ final class PaymentMethodGrid implements PaymentMethodGridInterface
                             'th_class' => 'w-1 text-center',
                             'td_class' => 'text-center',
                         ],
-                    ]),
+                    ])
+                    ->setEnabled(false),
             )
             ->withFilters(
                 StringFilter::create('search', ['code', 'translation.name'])

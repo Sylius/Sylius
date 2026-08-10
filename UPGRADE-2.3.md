@@ -549,6 +549,32 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Payment Request layer in `Sylius\Bundle\ApiBundle`. These classes are now covered by the Sylius Backward
    Compatibility policy.
 
+2. A new `countByGatewayFactoryName(string $factoryName): int` method has been added to
+   `Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface` and implemented in
+   `Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentMethodRepository`.
+
+   ```php
+   public function countByGatewayFactoryName(string $factoryName): int;
+   ```
+
+   If you have a custom class implementing this interface without extending
+   `Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentMethodRepository`, you must add this method.
+
+3. The admin payment method grid (`sylius_admin_payment_method`) has been redesigned. It is now defined in both
+   `Sylius\Bundle\AdminBundle\Grid\PaymentMethodGrid` and
+   `@SyliusAdminBundle/Resources/config/grids/payment_method.yml`, which are kept in sync.
+
+   The following changes were applied to the grid fields:
+
+   - the `code`, `gateway` and `enabled` columns have been **disabled** (`enabled: false`);
+   - the `name` column now uses the `path: "."` option and a dedicated template
+     `@SyliusAdmin/payment_method/grid/field/name.html.twig`, which renders the payment method together with its
+     gateway logo, code, gateway and enabled status;
+   - its label changed from `sylius.ui.name` to `sylius.ui.payment_method`.
+
+   If you relied on the `code`, `gateway` or `enabled` columns being present (for example in templates, integrations
+   or tests that read those columns), or if you overrode the `name` column, adjust your customization accordingly.
+
 ## Order
 
 1. A new `getOrderAndItemPromotionTotal(): int` method has been added to
