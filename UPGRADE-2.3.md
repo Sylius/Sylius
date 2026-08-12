@@ -478,16 +478,43 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    It has been replaced by `Sylius\Bundle\AdminBundle\Menu\CompositeMenuBuilder`, which builds the admin main menu by
    iterating over a tagged collection of providers instead of hardcoding every submenu in a single class.
 
-   The `sylius_admin.menu_builder.main` service definition changed accordingly:
+   This change is **not** a BC break: the `sylius_admin.menu_builder.main` service id and its class
+   (`MainMenuBuilder`) remain the same in 2.3. `MainMenuBuilder`'s first constructor argument now accepts either a
+   KnpMenu `FactoryInterface` (the pre-2.3 behaviour, kept for BC) or a new
+   `Sylius\Bundle\AdminBundle\Menu\MenuBuilderInterface` (the new behaviour, used internally by core), and
+   `$eventDispatcher` / `$router` became optional:
 
    ```diff
-   -->set('sylius_admin.menu_builder.main', MainMenuBuilder::class)
-   +->set('sylius_admin.menu_builder.main', CompositeMenuBuilder::class)
+   -private FactoryInterface $factory,
+   -private EventDispatcherInterface $eventDispatcher,
+   -private RouterInterface $router,
+   +private FactoryInterface|MenuBuilderInterface $factory,
+   +private ?EventDispatcherInterface $eventDispatcher = null,
+   +private ?RouterInterface $router = null,
+   ```
+
+   When a `MenuBuilderInterface` is passed, `createMenu()` simply delegates to it. Passing a `FactoryInterface`
+   directly, as before 2.3, keeps working exactly as before, but is now deprecated and triggers a deprecation
+   notice; support for it will be removed in Sylius 3.0, at which point `MainMenuBuilder` will be dropped entirely
+   and `sylius_admin.menu_builder.main` will point directly to `CompositeMenuBuilder`.
+
+   Internally, the `sylius_admin.menu_builder.main` service definition now wraps a new
+   `sylius_admin.menu_builder.main.composite` service (the `CompositeMenuBuilder`):
+
+   ```diff
+   +->set('sylius_admin.menu_builder.main.composite', CompositeMenuBuilder::class)
+   +    ->args([
+   +        service('knp_menu.factory'),
+   +        tagged_iterator('sylius_admin.main_menu_provider'),
+   +    ])
+   +;
+   +
+    ->set('sylius_admin.menu_builder.main', MainMenuBuilder::class)
         ->args([
-            service('knp_menu.factory'),
+   -        service('knp_menu.factory'),
    -        service('event_dispatcher'),
    -        service('router'),
-   +        tagged_iterator('sylius_admin.main_menu_provider'),
+   +        service('sylius_admin.menu_builder.main.composite'),
         ])
         ->tag('knp_menu.menu_builder', ['method' => 'createMenu', 'alias' => 'sylius_admin.main'])
    ```
@@ -519,9 +546,10 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    The `sylius.menu.admin.main` event is still dispatched with the same name and payload, now by `EventMenuProvider`
    (registered last, at priority `-9999`), so listeners that only hook into this event require **no changes**.
 
-   If you have decorated or extended `MainMenuBuilder` directly, migrate to implementing a custom
-   `MenuProviderInterface` and tagging it with `sylius_admin.main_menu_provider` (with an appropriate priority),
-   instead of extending the builder itself.
+   If you have decorated or extended `MainMenuBuilder` directly, it keeps working (with a deprecation notice), but
+   you should migrate to implementing a custom `MenuProviderInterface` and tagging it with
+   `sylius_admin.main_menu_provider` (with an appropriate priority) before Sylius 3.0, instead of extending the
+   builder itself.
 
 ## Admin users
 

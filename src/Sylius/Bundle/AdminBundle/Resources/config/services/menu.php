@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Bundle\AdminBundle\Menu\CompositeMenuBuilder;
+use Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\AdministrationMenuProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\CatalogMenuProvider;
 use Sylius\Bundle\AdminBundle\Menu\Provider\Main\ConfigurationMenuProvider;
@@ -28,10 +29,17 @@ return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
     $services
-        ->set('sylius_admin.menu_builder.main', CompositeMenuBuilder::class)
+        ->set('sylius_admin.menu_builder.main.composite', CompositeMenuBuilder::class)
         ->args([
             service('knp_menu.factory'),
             tagged_iterator('sylius_admin.main_menu_provider'),
+        ])
+    ;
+
+    $services
+        ->set('sylius_admin.menu_builder.main', MainMenuBuilder::class)
+        ->args([
+            service('sylius_admin.menu_builder.main.composite'),
         ])
         ->tag('knp_menu.menu_builder', ['method' => 'createMenu', 'alias' => 'sylius_admin.main'])
     ;
