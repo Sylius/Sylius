@@ -1,3 +1,36 @@
+# UPGRADE FROM `2.2.8` TO `2.2.9`
+
+This is a **security release**. Updating is strongly recommended.
+
+## Security fixes
+
+### [Admin] Host header injection in the administrator password-reset e-mail link (High)
+
+The link in the administrator password-reset e-mail was built with Twig's `url()` helper, which derives the scheme
+and host from the incoming request. Anyone able to trigger such an e-mail — which requires nothing but the
+administrator's e-mail address and a single unauthenticated request to `/admin/forgotten-password` or
+`POST /api/v2/admin/administrators/reset-password` — could therefore make the link point at a domain of their choosing
+by sending a spoofed `Host` (or `X-Forwarded-Host`) header, and capture the reset token when the administrator clicked
+it. The shop-side password reset was never affected, as it builds its link from the channel's configured hostname.
+
+The URL is now built in PHP from the current channel's `hostname`, which comes from the database. When no channel can
+be resolved, the channel has no hostname set, or the admin route is not registered (headless installations), the
+e-mail contains the bare reset token instead, which the administrator pastes into the shop manually.
+
+**Changes in `Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager`:**
+
+```diff
+ public function __construct(
+     private SenderInterface $emailSender,
++    private RouterInterface $router,
++    private ChannelContextInterface $channelContext,
++    private bool $unsecuredUrls = false,
+ )
+```
+
+If you have overwritten the `sylius.mailer.reset_password_email_manager` service or its arguments, check the correct
+functioning.
+
 # UPGRADE FROM `2.2.7` TO `2.2.8`
 
 ## UX Icons
