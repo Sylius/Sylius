@@ -44,6 +44,9 @@
 
         <service id="sylius.mailer.reset_password_email_manager" class="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManager" public="true">
             <argument type="service" id="sylius.email_sender" />
+            <argument type="service" id="router" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument>%sylius.unsecured_urls%</argument>
         </service>
         <service id="Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface" alias="sylius.mailer.reset_password_email_manager" public="true" />
 
