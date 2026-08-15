@@ -691,6 +691,7 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
    When omitted it falls back to 100, matching the default of `sylius_core.catalog_promotions.batch_size`. Note that
    if you have configured a different value, the fallback does **not** reproduce it — pass the batch size explicitly.
+   A value lower than 1 is rejected when the processor is constructed.
    The `sylius.processor.catalog_promotion.all_product_variant` service already passes
    `%sylius_core.catalog_promotions.batch_size%`, so no change is needed unless you instantiate or re-register this
    processor yourself.

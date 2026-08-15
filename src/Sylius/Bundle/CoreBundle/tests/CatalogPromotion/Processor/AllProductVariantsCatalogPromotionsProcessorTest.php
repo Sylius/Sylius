@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
@@ -134,5 +135,29 @@ final class AllProductVariantsCatalogPromotionsProcessorTest extends TestCase
         $this->commandDispatcher->expects($this->never())->method('updateVariants');
 
         $processor->process();
+    }
+
+    #[DataProvider('nonPositiveBatchSizes')]
+    public function testRejectsANonPositiveBatchSizeAtConstruction(int $batchSize): void
+    {
+        // Rejected before either collaborator is touched.
+        $this->productVariantRepository->expects($this->never())->method('iterateCodesOfAllVariants');
+        $this->commandDispatcher->expects($this->never())->method('updateVariants');
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        new AllProductVariantsCatalogPromotionsProcessor(
+            $this->productVariantRepository,
+            $this->commandDispatcher,
+            $batchSize,
+        );
+    }
+
+    /** @return iterable<string, array{int}> */
+    public static function nonPositiveBatchSizes(): iterable
+    {
+        yield 'zero' => [0];
+        yield 'negative' => [-1];
+        yield 'minimum integer' => [\PHP_INT_MIN];
     }
 }
