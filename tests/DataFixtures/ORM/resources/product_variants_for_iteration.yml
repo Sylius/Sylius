@@ -1,0 +1,16 @@
+Sylius\Component\Core\Model\Product:
+    iteration_product:
+        fallbackLocale: en_US
+        currentLocale: en_US
+        code: ITERATION_PRODUCT
+        slug: iteration-product
+        name: Iteration product
+
+Sylius\Component\Core\Model\ProductVariant:
+    iteration_variant{1..7}:
+        code: ITERATION_VARIANT_<current()>
+        version: 1
+        product: "@iteration_product"
+        fallbackLocale: en_US
+        currentLocale: en_US
+        position: <current()>

@@ -196,10 +196,18 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
 
     public function iterateCodesOfAllVariants(int $batchSize): iterable
     {
+        // Validated here rather than in the generator below, so that an invalid batch size is
+        // rejected when the method is called and not only once iteration starts.
         if ($batchSize < 1) {
             throw new \InvalidArgumentException(sprintf('Expected a batch size greater than 0, but got %d.', $batchSize));
         }
 
+        return $this->iterateCodesOfAllVariantsInBatches($batchSize);
+    }
+
+    /** @return \Generator<list<string>> */
+    private function iterateCodesOfAllVariantsInBatches(int $batchSize): \Generator
+    {
         $lastId = null;
 
         while (true) {

@@ -80,6 +80,8 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      * by $batchSize regardless of how many variants the catalog holds.
      *
      * @return iterable<list<string>>
+     *
+     * @throws \InvalidArgumentException when $batchSize is lower than 1
      */
     public function iterateCodesOfAllVariants(int $batchSize): iterable;
 }
