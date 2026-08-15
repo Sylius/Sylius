@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class OrderPaymentProcessorTest extends TestCase
 {
@@ -93,6 +95,7 @@ final class OrderPaymentProcessorTest extends TestCase
             ->willReturn(false);
         $this->order->expects($this->once())->method('getCurrencyCode')->willReturn('PLN');
         $this->order->expects($this->once())->method('getTotal')->willReturn(1000);
+        $this->payment->method('getPaymentRequests')->willReturn(new ArrayCollection());
         $this->payment->expects($this->once())->method('setCurrencyCode')->with('PLN');
         $this->payment->expects($this->once())->method('setAmount')->with(1000);
         $this->orderPaymentProvider
@@ -137,6 +140,87 @@ final class OrderPaymentProcessorTest extends TestCase
             ->with($this->order, PaymentInterface::STATE_CART)
             ->willThrowException(new NotProvidedOrderPaymentException());
         $this->order->expects($this->never())->method('addPayment')->with($this->anything());
+
+        $this->orderPaymentProcessor->process($this->order);
+    }
+
+    public function testShouldNotOverwriteAmountOfPaymentClaimedByGatewayAndProvidesNewPaymentInstead(): void
+    {
+        $claimingPaymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $claimingPaymentRequest->method('getAction')->willReturn(PaymentRequestInterface::ACTION_CAPTURE);
+        $claimingPaymentRequest->method('getState')->willReturn(PaymentRequestInterface::STATE_PROCESSING);
+
+        $newPayment = $this->createMock(PaymentInterface::class);
+
+        $this->order->expects($this->once())->method('getState')->willReturn(OrderInterface::STATE_CART);
+        $this->order->expects($this->once())->method('getLastPayment')->with(PaymentInterface::STATE_CART)->willReturn($this->payment);
+        $this->orderPaymentsRemover
+            ->expects($this->once())
+            ->method('canRemovePayments')
+            ->with($this->order)
+            ->willReturn(false);
+        $this->payment->method('getPaymentRequests')->willReturn(new ArrayCollection([$claimingPaymentRequest]));
+        $this->payment->method('getAmount')->willReturn(4796);
+        $this->payment->method('getCurrencyCode')->willReturn('USD');
+        $this->order->method('getTotal')->willReturn(230453);
+        $this->order->method('getCurrencyCode')->willReturn('USD');
+        $this->payment->expects($this->never())->method('setAmount');
+        $this->payment->expects($this->never())->method('setCurrencyCode');
+        $this->orderPaymentProvider
+            ->expects($this->once())
+            ->method('provideOrderPayment')
+            ->with($this->order, PaymentInterface::STATE_CART)
+            ->willReturn($newPayment);
+        $this->order->expects($this->once())->method('addPayment')->with($newPayment);
+
+        $this->orderPaymentProcessor->process($this->order);
+    }
+
+    public function testShouldDoNothingWhenClaimedPaymentAlreadyMatchesOrderTotalAndCurrency(): void
+    {
+        $claimingPaymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $claimingPaymentRequest->method('getAction')->willReturn(PaymentRequestInterface::ACTION_CAPTURE);
+        $claimingPaymentRequest->method('getState')->willReturn(PaymentRequestInterface::STATE_COMPLETED);
+
+        $this->order->expects($this->once())->method('getState')->willReturn(OrderInterface::STATE_CART);
+        $this->order->expects($this->once())->method('getLastPayment')->with(PaymentInterface::STATE_CART)->willReturn($this->payment);
+        $this->orderPaymentsRemover
+            ->expects($this->once())
+            ->method('canRemovePayments')
+            ->with($this->order)
+            ->willReturn(false);
+        $this->payment->method('getPaymentRequests')->willReturn(new ArrayCollection([$claimingPaymentRequest]));
+        $this->payment->method('getAmount')->willReturn(4796);
+        $this->payment->method('getCurrencyCode')->willReturn('USD');
+        $this->order->method('getTotal')->willReturn(4796);
+        $this->order->method('getCurrencyCode')->willReturn('USD');
+        $this->payment->expects($this->never())->method('setAmount');
+        $this->payment->expects($this->never())->method('setCurrencyCode');
+        $this->orderPaymentProvider->expects($this->never())->method('provideOrderPayment');
+        $this->order->expects($this->never())->method('addPayment');
+
+        $this->orderPaymentProcessor->process($this->order);
+    }
+
+    public function testShouldOverwriteAmountWhenPaymentRequestIsNotInClaimingState(): void
+    {
+        $failedPaymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $failedPaymentRequest->method('getAction')->willReturn(PaymentRequestInterface::ACTION_CAPTURE);
+        $failedPaymentRequest->method('getState')->willReturn(PaymentRequestInterface::STATE_FAILED);
+
+        $this->order->expects($this->once())->method('getState')->willReturn(OrderInterface::STATE_CART);
+        $this->order->expects($this->once())->method('getLastPayment')->with(PaymentInterface::STATE_CART)->willReturn($this->payment);
+        $this->orderPaymentsRemover
+            ->expects($this->once())
+            ->method('canRemovePayments')
+            ->with($this->order)
+            ->willReturn(false);
+        $this->payment->method('getPaymentRequests')->willReturn(new ArrayCollection([$failedPaymentRequest]));
+        $this->order->expects($this->once())->method('getCurrencyCode')->willReturn('PLN');
+        $this->order->expects($this->once())->method('getTotal')->willReturn(1000);
+        $this->payment->expects($this->once())->method('setCurrencyCode')->with('PLN');
+        $this->payment->expects($this->once())->method('setAmount')->with(1000);
+        $this->orderPaymentProvider->expects($this->never())->method('provideOrderPayment');
 
         $this->orderPaymentProcessor->process($this->order);
     }

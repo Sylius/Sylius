@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Payment\ClaimedByGatewayCheckerTrait;
 use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
@@ -24,6 +25,8 @@ use Webmozart\Assert\Assert;
 
 final class OrderPaymentProcessor implements OrderProcessorInterface
 {
+    use ClaimedByGatewayCheckerTrait;
+
     /**
      * @param array<string> $unprocessableOrderStates
      */
@@ -52,10 +55,19 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
 
         $lastPayment = $order->getLastPayment($this->targetState);
         if (null !== $lastPayment) {
-            $lastPayment->setCurrencyCode($order->getCurrencyCode());
-            $lastPayment->setAmount($order->getTotal());
+            if (!$this->isClaimedByGateway($lastPayment)) {
+                $lastPayment->setCurrencyCode($order->getCurrencyCode());
+                $lastPayment->setAmount($order->getTotal());
 
-            return;
+                return;
+            }
+
+            if (
+                $lastPayment->getAmount() === $order->getTotal() &&
+                $lastPayment->getCurrencyCode() === $order->getCurrencyCode()
+            ) {
+                return;
+            }
         }
 
         try {
