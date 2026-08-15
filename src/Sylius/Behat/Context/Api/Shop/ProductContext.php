@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -277,6 +278,26 @@ final class ProductContext implements Context
             $this->responseChecker->getCollection($this->client->getLastResponse()),
             $name,
         ));
+    }
+
+    #[Then('the product :name should have :count taxon associations in the response')]
+    public function theProductShouldHaveTaxonAssociationsInResponse(string $name, int $count): void
+    {
+        $products = $this->responseChecker->getCollection($this->client->getLastResponse());
+
+        foreach ($products as $product) {
+            if ($product['name'] === $name) {
+                Assert::count(
+                    $product['productTaxons'],
+                    $count,
+                    sprintf('Expected product "%s" to have %d taxon associations, but got %d.', $name, $count, count($product['productTaxons'])),
+                );
+
+                return;
+            }
+        }
+
+        throw new \RuntimeException(sprintf('Product "%s" was not found in the response collection.', $name));
     }
 
     /**
