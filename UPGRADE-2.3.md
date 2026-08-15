@@ -670,13 +670,12 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    public function iterateCodesOfAllVariants(int $batchSize): iterable;
    ```
 
-   If you have a custom class implementing this interface, you must add this method. It is expected to yield
-   the codes of all product variants in batches of at most `$batchSize` elements.
+   If you have a custom class implementing this interface without extending
+   `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository`, you must add this method. It is expected to
+   yield the codes of all product variants in batches of at most `$batchSize` elements.
 
-   It replaces `getCodesOfAllVariants()`, which loaded the whole `product_variant` table into a single array
-   and therefore used memory proportional to the size of the catalog. `AllProductVariantsCatalogPromotionsProcessor`
-   now consumes the catalog batch by batch, so recalculating catalog promotions uses a bounded amount of memory
-   regardless of how many variants exist.
+   It replaces `getCodesOfAllVariants()` (see the *Deprecations* section for the migration), so recalculating
+   catalog promotions no longer uses memory proportional to the size of the catalog.
 
 2. Not passing a batch size as the third constructor argument of
    `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessor` is deprecated
@@ -690,10 +689,11 @@ For a complete overview of the Grid component, see the [Grid documentation](http
     ) {
    ```
 
-   When omitted, it falls back to `AllProductVariantsCatalogPromotionsProcessor::DEFAULT_BATCH_SIZE` (100), which
-   preserves the previous behaviour. The `sylius.processor.catalog_promotion.all_product_variant` service is already
-   configured to pass `%sylius_core.catalog_promotions.batch_size%`, so no change is needed unless you instantiate
-   or re-register this processor yourself.
+   When omitted it falls back to 100, matching the default of `sylius_core.catalog_promotions.batch_size`. Note that
+   if you have configured a different value, the fallback does **not** reproduce it — pass the batch size explicitly.
+   The `sylius.processor.catalog_promotion.all_product_variant` service already passes
+   `%sylius_core.catalog_promotions.batch_size%`, so no change is needed unless you instantiate or re-register this
+   processor yourself.
 
 3. `%sylius_core.catalog_promotions.batch_size%` now governs two things: how many rows are read from the database
    per query, and how many codes are carried by a single `ApplyCatalogPromotionsOnVariants` message. Previously it
@@ -701,13 +701,13 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    size of each `SELECT`.
 
 4. The catalog is no longer read in a single `SELECT`. Recalculating catalog promotions for all variants now issues
-   one query per batch, interleaved with the dispatch of each batch, so the run no longer sees one consistent
-   snapshot of the catalog.
+   one query per batch, interleaved with the dispatch of each batch.
 
-   A variant created by a concurrent request while the iteration is in progress may or may not be included in that
-   run, depending on whether its identifier was assigned before or after the point the iteration has reached. Such a
-   variant is picked up by the next recalculation. This is a deliberate trade for memory that no longer grows with
-   the catalog.
+   Unless the caller holds a transaction that gives every statement the same snapshot, a variant whose identifier was
+   allocated below the point the iteration has reached, but whose transaction commits after it has passed, is missed
+   by that run — the iteration only ever looks ahead of its cursor. Such a variant is picked up by the next
+   recalculation. Variants created after the iteration started are allocated ahead of the cursor and are still seen.
+   This is a deliberate trade for memory that no longer grows with the catalog.
 
 ## New Features
 

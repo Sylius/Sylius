@@ -184,7 +184,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         trigger_deprecation(
             'sylius/product-bundle',
             '2.3',
-            'The "%s()" method is deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead.',
+            'The "%s()" method is deprecated and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead.',
             __METHOD__,
         );
 

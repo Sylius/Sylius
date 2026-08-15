@@ -6,8 +6,8 @@ Sylius\Component\Core\Model\Product:
         slug: iteration-product
         name: Iteration product
 
-# Codes are deliberately NOT in alphabetical order, so that ordering by any column other than the
-# identifier the query pages on produces a different sequence and is caught by the assertions.
+# Neither the codes nor the positions follow insertion order, so that paging on the identifier
+# while ordering by code or by position yields a different sequence and fails the assertions.
 Sylius\Component\Core\Model\ProductVariant:
     iteration_variant1:
         code: ITERATION_VARIANT_GAMMA
@@ -15,7 +15,7 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@iteration_product"
         fallbackLocale: en_US
         currentLocale: en_US
-        position: 1
+        position: 5
     iteration_variant2:
         code: ITERATION_VARIANT_ALPHA
         version: 1
@@ -29,21 +29,21 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@iteration_product"
         fallbackLocale: en_US
         currentLocale: en_US
-        position: 3
+        position: 7
     iteration_variant4:
         code: ITERATION_VARIANT_BETA
         version: 1
         product: "@iteration_product"
         fallbackLocale: en_US
         currentLocale: en_US
-        position: 4
+        position: 1
     iteration_variant5:
         code: ITERATION_VARIANT_OMEGA
         version: 1
         product: "@iteration_product"
         fallbackLocale: en_US
         currentLocale: en_US
-        position: 5
+        position: 4
     iteration_variant6:
         code: ITERATION_VARIANT_DELTA
         version: 1
@@ -57,4 +57,4 @@ Sylius\Component\Core\Model\ProductVariant:
         product: "@iteration_product"
         fallbackLocale: en_US
         currentLocale: en_US
-        position: 7
+        position: 3

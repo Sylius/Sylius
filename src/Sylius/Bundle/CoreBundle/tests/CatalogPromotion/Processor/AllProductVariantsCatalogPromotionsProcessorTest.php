@@ -117,19 +117,17 @@ final class AllProductVariantsCatalogPromotionsProcessorTest extends TestCase
 
     public function testFallsBackToTheDefaultBatchSizeWhenNoneIsGiven(): void
     {
-        // Pinned to a literal because the deprecated no-argument path only preserves the previous
-        // behaviour while this constant equals the default of sylius_core.catalog_promotions.batch_size.
-        $this->assertSame(100, AllProductVariantsCatalogPromotionsProcessor::DEFAULT_BATCH_SIZE);
-
         $processor = new AllProductVariantsCatalogPromotionsProcessor(
             $this->productVariantRepository,
             $this->commandDispatcher,
         );
 
+        // The literal, not the class constant: the deprecated no-argument path only behaves like a
+        // default installation while the fallback matches sylius_core.catalog_promotions.batch_size.
         $this->productVariantRepository
             ->expects($this->once())
             ->method('iterateCodesOfAllVariants')
-            ->with(AllProductVariantsCatalogPromotionsProcessor::DEFAULT_BATCH_SIZE)
+            ->with(100)
             ->willReturn([])
         ;
 

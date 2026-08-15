@@ -18,7 +18,8 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class AllProductVariantsCatalogPromotionsProcessor implements AllProductVariantsCatalogPromotionsProcessorInterface
 {
-    public const DEFAULT_BATCH_SIZE = 100;
+    /** Mirrors the default of sylius_core.catalog_promotions.batch_size. */
+    private const DEFAULT_BATCH_SIZE = 100;
 
     private int $batchSize;
 
@@ -41,8 +42,6 @@ final class AllProductVariantsCatalogPromotionsProcessor implements AllProductVa
 
     public function process(): void
     {
-        // Each batch is dispatched as soon as it is read, so peak memory stays bounded by the
-        // batch size instead of growing with the catalog.
         foreach ($this->productVariantRepository->iterateCodesOfAllVariants($this->batchSize) as $variantsCodes) {
             $this->commandDispatcher->updateVariants($variantsCodes);
         }

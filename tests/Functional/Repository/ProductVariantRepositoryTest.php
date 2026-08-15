@@ -32,8 +32,11 @@ final class ProductVariantRepositoryTest extends KernelTestCase
 {
     /**
      * Declared in the order the fixture inserts them, which is the order the repository must yield.
-     * The codes are not alphabetical on purpose: paging on the identifier while ordering by any
-     * other column would produce a different sequence, which the assertions below would catch.
+     * Neither the codes nor the fixture positions follow that order, so ordering the query by `code`
+     * or by `position` rather than by the identifier it pages on fails these assertions.
+     *
+     * Dropping the ORDER BY altogether is not detected here: the test application enables
+     * `sylius_core.order_by_identifier`, whose SQL walker appends the same ordering to every query.
      */
     private const VARIANT_CODES = [
         'ITERATION_VARIANT_GAMMA',
@@ -63,7 +66,7 @@ final class ProductVariantRepositoryTest extends KernelTestCase
         $this->loadFixtures();
 
         // assertSame, not assertEqualsCanonicalizing: keyset pagination is only correct while the
-        // query orders by the very column it pages on, so the order is part of what is under test.
+        // query orders by the very column it pages on, so the sequence is part of what is asserted.
         self::assertSame(self::VARIANT_CODES, $this->flatten($this->repository->iterateCodesOfAllVariants(2)));
     }
 
