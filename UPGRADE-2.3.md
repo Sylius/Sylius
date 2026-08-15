@@ -85,9 +85,13 @@
    has always declared.
 
    Previously that code path fed it the raw output of `getCodesOfAllVariants()`, so it actually carried
-   `[['code' => 'VARIANT_1'], ...]`. Messages already queued when you deploy are unaffected — the handler resolves
-   both shapes — but a custom handler, middleware, or log parser reading `$variantsCodes` directly should expect
-   plain strings.
+   `[['code' => 'VARIANT_1'], ...]`.
+
+   Messages already queued when you deploy still resolve, but not because anything handles both shapes — the
+   handler passes the payload straight to `findByCodes()`, and Doctrine happens to flatten single-element nested
+   arrays when binding an `IN` parameter. If you have overridden `findByCodes()` to build the `IN` list yourself,
+   drain the queue before deploying. A custom handler, middleware, or log parser reading `$variantsCodes` directly
+   should expect plain strings from now on.
 
 ## Shop
 
@@ -697,11 +701,13 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    size of each `SELECT`.
 
 4. The catalog is no longer read in a single `SELECT`. Recalculating catalog promotions for all variants now issues
-   one query per batch, interleaved with the dispatch of each batch. On a database or caller where each statement
-   gets its own snapshot (for example PostgreSQL under `READ COMMITTED`, or a caller running outside a wrapping
-   transaction), a variant committed by a concurrent request *while* the iteration is in progress may be missed by
-   that run. It is picked up by the next recalculation. This is a deliberate trade for bounded memory; if you rely
-   on a single consistent snapshot of the catalog, wrap the call in an explicit transaction.
+   one query per batch, interleaved with the dispatch of each batch, so the run no longer sees one consistent
+   snapshot of the catalog.
+
+   A variant created by a concurrent request while the iteration is in progress may or may not be included in that
+   run, depending on whether its identifier was assigned before or after the point the iteration has reached. Such a
+   variant is picked up by the next recalculation. This is a deliberate trade for memory that no longer grows with
+   the catalog.
 
 ## New Features
 

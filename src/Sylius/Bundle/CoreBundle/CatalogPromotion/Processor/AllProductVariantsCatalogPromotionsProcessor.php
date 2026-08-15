@@ -31,7 +31,7 @@ final class AllProductVariantsCatalogPromotionsProcessor implements AllProductVa
             trigger_deprecation(
                 'sylius/core-bundle',
                 '2.3',
-                'Not passing a batch size as the third constructor argument of "%s" is deprecated since Sylius 2.3 and will be prohibited in Sylius 3.0.',
+                'Not passing a batch size as the third constructor argument of "%s" is deprecated and will be prohibited in Sylius 3.0.',
                 self::class,
             );
         }

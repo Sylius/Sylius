@@ -30,15 +30,19 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 final class ProductVariantRepositoryTest extends KernelTestCase
 {
-    /** Declared in the order the fixture inserts them, which is the order the repository must yield. */
+    /**
+     * Declared in the order the fixture inserts them, which is the order the repository must yield.
+     * The codes are not alphabetical on purpose: paging on the identifier while ordering by any
+     * other column would produce a different sequence, which the assertions below would catch.
+     */
     private const VARIANT_CODES = [
-        'ITERATION_VARIANT_1',
-        'ITERATION_VARIANT_2',
-        'ITERATION_VARIANT_3',
-        'ITERATION_VARIANT_4',
-        'ITERATION_VARIANT_5',
-        'ITERATION_VARIANT_6',
-        'ITERATION_VARIANT_7',
+        'ITERATION_VARIANT_GAMMA',
+        'ITERATION_VARIANT_ALPHA',
+        'ITERATION_VARIANT_ZETA',
+        'ITERATION_VARIANT_BETA',
+        'ITERATION_VARIANT_OMEGA',
+        'ITERATION_VARIANT_DELTA',
+        'ITERATION_VARIANT_EPSILON',
     ];
 
     /** @var ProductVariantRepositoryInterface<ProductVariantInterface> */
@@ -58,9 +62,8 @@ final class ProductVariantRepositoryTest extends KernelTestCase
     {
         $this->loadFixtures();
 
-        // assertSame, not assertEqualsCanonicalizing: the order is the property under test. Keyset
-        // pagination is only correct while the query orders by the identifier it pages on, and an
-        // order-insensitive assertion would pass even with the ORDER BY clause removed.
+        // assertSame, not assertEqualsCanonicalizing: keyset pagination is only correct while the
+        // query orders by the very column it pages on, so the order is part of what is under test.
         self::assertSame(self::VARIANT_CODES, $this->flatten($this->repository->iterateCodesOfAllVariants(2)));
     }
 
@@ -71,15 +74,8 @@ final class ProductVariantRepositoryTest extends KernelTestCase
 
         $batches = iterator_to_array($this->repository->iterateCodesOfAllVariants(2), false);
 
-        self::assertSame(
-            [
-                ['ITERATION_VARIANT_1', 'ITERATION_VARIANT_2'],
-                ['ITERATION_VARIANT_3', 'ITERATION_VARIANT_4'],
-                ['ITERATION_VARIANT_5', 'ITERATION_VARIANT_6'],
-                ['ITERATION_VARIANT_7'],
-            ],
-            $batches,
-        );
+        // 7 variants in batches of 2: three full batches then a single-element tail.
+        self::assertSame(array_chunk(self::VARIANT_CODES, 2), $batches);
     }
 
     #[Test]

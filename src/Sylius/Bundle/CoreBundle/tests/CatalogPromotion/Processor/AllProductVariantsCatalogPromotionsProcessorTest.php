@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
-use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
@@ -116,9 +115,12 @@ final class AllProductVariantsCatalogPromotionsProcessorTest extends TestCase
         $this->assertSame([1, 2], $dispatchedWhileReading);
     }
 
-    #[IgnoreDeprecations]
     public function testFallsBackToTheDefaultBatchSizeWhenNoneIsGiven(): void
     {
+        // Pinned to a literal because the deprecated no-argument path only preserves the previous
+        // behaviour while this constant equals the default of sylius_core.catalog_promotions.batch_size.
+        $this->assertSame(100, AllProductVariantsCatalogPromotionsProcessor::DEFAULT_BATCH_SIZE);
+
         $processor = new AllProductVariantsCatalogPromotionsProcessor(
             $this->productVariantRepository,
             $this->commandDispatcher,
