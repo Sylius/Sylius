@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Functional\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -34,9 +36,6 @@ final class ProductVariantRepositoryTest extends KernelTestCase
      * Declared in the order the fixture inserts them, which is the order the repository must yield.
      * Neither the codes nor the fixture positions follow that order, so ordering the query by `code`
      * or by `position` rather than by the identifier it pages on fails these assertions.
-     *
-     * Dropping the ORDER BY altogether is not detected here: the test application enables
-     * `sylius_core.order_by_identifier`, whose SQL walker appends the same ordering to every query.
      */
     private const VARIANT_CODES = [
         'ITERATION_VARIANT_GAMMA',
@@ -55,9 +54,23 @@ final class ProductVariantRepositoryTest extends KernelTestCase
     {
         parent::setUp();
 
+        $this->disableOrderByIdentifierWalker();
+
         /** @var ProductVariantRepositoryInterface<ProductVariantInterface> $repository */
         $repository = self::getContainer()->get('sylius.repository.product_variant');
         $this->repository = $repository;
+    }
+
+    /**
+     * The test application enables `sylius_core.order_by_identifier`, whose walker appends an ordering
+     * by identifier to every query. That would supply the very clause these tests exist to pin, so it
+     * is removed here to reproduce a default 2.3 application, where the setting defaults to false.
+     */
+    private function disableOrderByIdentifierWalker(): void
+    {
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = self::getContainer()->get('doctrine.orm.entity_manager');
+        $entityManager->getConfiguration()->setDefaultQueryHint(Query::HINT_CUSTOM_TREE_WALKERS, []);
     }
 
     #[Test]
