@@ -37,7 +37,7 @@ class FormComponent
 
     protected function createResource(): ProductAttributeInterface
     {
-        return new $this->resourceClass();
+        return $this->factory?->createNew() ?? new $this->resourceClass();
     }
 
     protected function instantiateForm(): FormInterface

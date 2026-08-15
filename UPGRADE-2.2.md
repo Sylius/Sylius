@@ -41,6 +41,61 @@
     )
 ```
 
+2. The `initialize()` method of `Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait` has been extended with an optional `Sylius\Resource\Factory\FactoryInterface` argument.
+
+```php
+    protected function initialize(
+        RepositoryInterface $repository,
+        FormFactoryInterface $formFactory,
+        string $resourceClass,
+        string $formClass,
++       ?FactoryInterface $factory = null,
+    )
+```
+
+3. The constructor of `Sylius\Bundle\AdminBundle\Twig\Component\Taxon\FormComponent` has been extended with an optional `Sylius\Resource\Factory\FactoryInterface` argument.
+
+```php
+    public function __construct(
+        RepositoryInterface $repository,
+        FormFactoryInterface $formFactory,
+        string $resourceClass,
+        string $formClass,
+        TaxonSlugGeneratorInterface $slugGenerator,
++       ?FactoryInterface $factory = null,
+    )
+```
+
+4. The constructor of `Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent` has been extended with an optional `Sylius\Resource\Factory\FactoryInterface` argument.
+
+```php
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        FormFactoryInterface $formFactory,
+        string $resourceClass,
+        string $formClass,
+        ObjectManager $manager,
+        EventDispatcherInterface $eventDispatcher,
++       ?FactoryInterface $factory = null,
+    )
+```
+
+5. The constructor of `Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\FormComponent` has been extended with an optional `Sylius\Resource\Factory\FactoryInterface` argument.
+
+```php
+    public function __construct(
+        OrderRepositoryInterface $repository,
+        FormFactoryInterface $formFactory,
+        string $resourceClass,
+        string $formClass,
+        CustomerContextInterface $customerContext,
+        UserRepositoryInterface $shopUserRepository,
+        AddressRepositoryInterface $addressRepository,
+        ?iterable $addressFormValuesModifiers = null,
++       ?FactoryInterface $factory = null,
+    )
+```
+
 ## Bahavior changes
 
 1. The `LiveComponentTagPass` and `TwigComponentTagPass` in `SyliusUiBundle` were registered with a priority of `500`,
@@ -48,6 +103,12 @@
    As a result, services tagged via `#[AutoconfigureTag]` or `registerForAutoconfiguration()` with the `sylius.twig_component`
    or `sylius.live_component.*` tag did not receive the `twig.component` tag.
    The priority has been lowered to `50` to ensure Symfony's autoconfiguration runs first.
+
+2. `Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait::createResource()` now uses the factory
+   configured for the resource (the `sylius.factory.*` service) when one is injected, instead of always calling
+   `new $resourceClass()`. As a result, custom factories declared in the resource configuration are now respected
+   by the resource form LiveComponents. When no factory is injected, the previous behavior (direct instantiation)
+   is preserved.
 
 ## Order payment state recovery after authorized payment cancellation
 
