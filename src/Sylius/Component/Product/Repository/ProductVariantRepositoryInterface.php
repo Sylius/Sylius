@@ -68,16 +68,16 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     public function findByPhrase(string $phrase, string $locale, ?int $limit = null): array;
 
     /**
-     * @return array|string[]
+     * @return list<array{code: string}>
      *
-     * @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead,
-     *             which reads the catalog in batches instead of materialising it entirely in memory.
+     * @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead.
      */
     public function getCodesOfAllVariants(): array;
 
     /**
-     * Reads the codes of all product variants in batches, so that memory usage stays bounded
-     * by $batchSize regardless of how many variants the catalog holds.
+     * Yields the codes of all product variants in batches of at most $batchSize elements.
+     *
+     * The returned iterable is single-use and must not be traversed twice.
      *
      * @return iterable<list<string>>
      *

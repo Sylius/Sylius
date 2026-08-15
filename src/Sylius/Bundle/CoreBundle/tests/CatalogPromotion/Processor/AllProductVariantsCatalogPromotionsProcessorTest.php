@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
@@ -113,5 +114,25 @@ final class AllProductVariantsCatalogPromotionsProcessorTest extends TestCase
         $this->processor->process();
 
         $this->assertSame([1, 2], $dispatchedWhileReading);
+    }
+
+    #[IgnoreDeprecations]
+    public function testFallsBackToTheDefaultBatchSizeWhenNoneIsGiven(): void
+    {
+        $processor = new AllProductVariantsCatalogPromotionsProcessor(
+            $this->productVariantRepository,
+            $this->commandDispatcher,
+        );
+
+        $this->productVariantRepository
+            ->expects($this->once())
+            ->method('iterateCodesOfAllVariants')
+            ->with(AllProductVariantsCatalogPromotionsProcessor::DEFAULT_BATCH_SIZE)
+            ->willReturn([])
+        ;
+
+        $this->commandDispatcher->expects($this->never())->method('updateVariants');
+
+        $processor->process();
     }
 }

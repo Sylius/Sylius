@@ -18,6 +18,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @template T of ProductVariantInterface
@@ -196,18 +197,19 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
 
     public function iterateCodesOfAllVariants(int $batchSize): iterable
     {
-        // Validated here rather than in the generator below, so that an invalid batch size is
-        // rejected when the method is called and not only once iteration starts.
-        if ($batchSize < 1) {
-            throw new \InvalidArgumentException(sprintf('Expected a batch size greater than 0, but got %d.', $batchSize));
-        }
+        // Validated outside the generator, so that an invalid batch size is rejected when the
+        // method is called and not only once the caller starts iterating.
+        Assert::positiveInteger($batchSize);
 
         return $this->iterateCodesOfAllVariantsInBatches($batchSize);
     }
 
-    /** @return \Generator<list<string>> */
+    /** @return \Generator<int, list<string>, mixed, void> */
     private function iterateCodesOfAllVariantsInBatches(int $batchSize): \Generator
     {
+        $identifierType = $this->getClassMetadata()->getTypeOfField(
+            $this->getClassMetadata()->getSingleIdentifierFieldName(),
+        );
         $lastId = null;
 
         while (true) {
@@ -217,12 +219,13 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
                 ->setMaxResults($batchSize)
             ;
 
-            // Keyset pagination: unlike OFFSET, the cost of each batch does not grow with how far
-            // into the catalog we already are.
             if (null !== $lastId) {
                 $queryBuilder
                     ->andWhere('o.id > :lastId')
-                    ->setParameter('lastId', $lastId)
+                    // The type must be passed explicitly: without it Doctrine infers STRING for any
+                    // object-valued identifier (UUID, ULID), the comparison silently matches nothing
+                    // and iteration stops after the first batch.
+                    ->setParameter('lastId', $lastId, $identifierType)
                 ;
             }
 

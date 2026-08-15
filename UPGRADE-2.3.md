@@ -80,6 +80,15 @@
                'Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail': your_async_transport
    ```
 
+2. The payload carried by `Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants` when
+   dispatched for the whole catalog is now a list of strings, as its `@param array<string> $variantsCodes` annotation
+   has always declared.
+
+   Previously that code path fed it the raw output of `getCodesOfAllVariants()`, so it actually carried
+   `[['code' => 'VARIANT_1'], ...]`. Messages already queued when you deploy are unaffected — the handler resolves
+   both shapes — but a custom handler, middleware, or log parser reading `$variantsCodes` directly should expect
+   plain strings.
+
 ## Shop
 
 1. When an unverified account tries to log in with valid credentials on a channel that requires account verification, the login page now shows a one-click "resend verification email" action instead of a separate request form.
@@ -665,18 +674,34 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    now consumes the catalog batch by batch, so recalculating catalog promotions uses a bounded amount of memory
    regardless of how many variants exist.
 
-2. `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessor` takes a
-   third constructor argument, the batch size to read the catalog with. The `sylius.processor.catalog_promotion.all_product_variant`
-   service is already configured to pass `%sylius_core.catalog_promotions.batch_size%`, so no change is needed
-   unless you instantiate this processor yourself.
+2. Not passing a batch size as the third constructor argument of
+   `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessor` is deprecated
+   since Sylius 2.3 and will be prohibited in Sylius 3.0.
 
    ```diff
     public function __construct(
         private ProductVariantRepositoryInterface $productVariantRepository,
         private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
-   +    private int $batchSize,
+   +    ?int $batchSize = null,
     ) {
    ```
+
+   When omitted, it falls back to `AllProductVariantsCatalogPromotionsProcessor::DEFAULT_BATCH_SIZE` (100), which
+   preserves the previous behaviour. The `sylius.processor.catalog_promotion.all_product_variant` service is already
+   configured to pass `%sylius_core.catalog_promotions.batch_size%`, so no change is needed unless you instantiate
+   or re-register this processor yourself.
+
+3. `%sylius_core.catalog_promotions.batch_size%` now governs two things: how many rows are read from the database
+   per query, and how many codes are carried by a single `ApplyCatalogPromotionsOnVariants` message. Previously it
+   only controlled the latter. If you had tuned it purely for message size, review the value — it now also sets the
+   size of each `SELECT`.
+
+4. The catalog is no longer read in a single `SELECT`. Recalculating catalog promotions for all variants now issues
+   one query per batch, interleaved with the dispatch of each batch. On a database or caller where each statement
+   gets its own snapshot (for example PostgreSQL under `READ COMMITTED`, or a caller running outside a wrapping
+   transaction), a variant committed by a concurrent request *while* the iteration is in progress may be missed by
+   that run. It is picked up by the next recalculation. This is a deliberate trade for bounded memory; if you rely
+   on a single consistent snapshot of the catalog, wrap the call in an explicit transaction.
 
 ## New Features
 
@@ -803,7 +828,7 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    and keeps memory bounded regardless of catalog size.
 
    ```diff
-   -foreach ($productVariantRepository->getCodesOfAllVariants() as $code) {
+   -foreach ($productVariantRepository->getCodesOfAllVariants() as ['code' => $code]) {
    -    // ...
    -}
    +foreach ($productVariantRepository->iterateCodesOfAllVariants(100) as $variantCodes) {
@@ -813,6 +838,7 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    +}
    ```
 
-   > **Note:** the deprecated method's return value never matched its `@return array|string[]` annotation. Because it
-   > selects a single field and hydrates with `getArrayResult()`, it actually returns a list of `['code' => string]`
-   > arrays. `iterateCodesOfAllVariants()` yields batches of plain strings, as the annotation always intended.
+   > **Note:** the deprecated method's return value never matched its former `@return array|string[]` annotation.
+   > Because it selects a single field and hydrates with `getArrayResult()`, it returns a list of `['code' => string]`
+   > arrays, which is why the loop above destructures. Its annotation has been corrected to
+   > `list<array{code: string}>`. `iterateCodesOfAllVariants()` yields batches of plain strings instead.
