@@ -83,7 +83,7 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      *
      * @throws \InvalidArgumentException when $batchSize is lower than 1, or when the entity's identifier
      *                                   has no mapped type
-     * @throws \Doctrine\Persistence\Mapping\MappingException when the entity's identifier is not a single field
+     * @throws \Doctrine\Persistence\Mapping\MappingException when the entity has no identifier, or more than one
      */
     public function iterateCodesOfAllVariants(int $batchSize): iterable;
 }

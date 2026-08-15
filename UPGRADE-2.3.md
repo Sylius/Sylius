@@ -703,12 +703,10 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 4. The catalog is no longer read in a single `SELECT`. Recalculating catalog promotions for all variants now issues
    one query per batch, interleaved with the dispatch of each batch.
 
-   The run therefore no longer sees one consistent snapshot of the catalog. Two kinds of variant can be missed by a
-   run, and both are picked up by the next recalculation:
-
-   - one whose identifier was allocated below the point the iteration has reached, but whose transaction commits
-     after it has passed — the iteration only ever looks ahead of its cursor;
-   - one created after the final batch has been read.
+   The run therefore no longer sees one consistent snapshot of the catalog. A variant is missed whenever it becomes
+   visible to the run only after the batch query covering its identifier has already executed — whether its
+   transaction commits late, or it is created after the final batch has been read. Any variant missed this way is
+   picked up by the next recalculation.
 
    Wrapping the call in a transaction that gives every statement the same snapshot restores a coherent view, but it
    does not make concurrently created variants visible. This is a deliberate trade for memory that no longer grows

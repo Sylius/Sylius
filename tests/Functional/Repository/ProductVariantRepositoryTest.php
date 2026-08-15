@@ -65,9 +65,9 @@ final class ProductVariantRepositoryTest extends KernelTestCase
 
     /**
      * The test application enables `sylius_core.order_by_identifier`, whose walker appends an ordering
-     * by identifier to every non-grouped, non-aggregate query. That would supply the very clause these
-     * tests exist to pin, so it is removed here to reproduce a default 2.3 application, where the
-     * setting defaults to false.
+     * by identifier to queries it deems eligible, which includes the ones below. That would supply the
+     * very clause these tests exist to pin, so it is removed here to reproduce a default 2.3
+     * application, where the setting defaults to false.
      */
     private function disableOrderByIdentifierWalker(): void
     {

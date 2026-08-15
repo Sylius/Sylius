@@ -15,6 +15,7 @@ namespace Sylius\Bundle\CoreBundle\CatalogPromotion\Processor;
 
 use Sylius\Bundle\CoreBundle\CatalogPromotion\CommandDispatcher\ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 final class AllProductVariantsCatalogPromotionsProcessor implements AllProductVariantsCatalogPromotionsProcessorInterface
 {
@@ -36,6 +37,8 @@ final class AllProductVariantsCatalogPromotionsProcessor implements AllProductVa
                 self::class,
             );
         }
+
+        Assert::nullOrPositiveInteger($batchSize, 'Expected a batch size greater than 0. Got: %s');
 
         $this->batchSize = $batchSize ?? self::DEFAULT_BATCH_SIZE;
     }
