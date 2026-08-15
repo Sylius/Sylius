@@ -6,8 +6,8 @@ Sylius\Component\Core\Model\Product:
         slug: iteration-product
         name: Iteration product
 
-# Neither the codes nor the positions follow insertion order, so that paging on the identifier
-# while ordering by code or by position yields a different sequence and fails the assertions.
+# Codes, positions and timestamps are each permuted independently of insertion order, so that paging
+# on the identifier while ordering by any of them yields a different sequence and fails the tests.
 Sylius\Component\Core\Model\ProductVariant:
     iteration_variant1:
         code: ITERATION_VARIANT_GAMMA
@@ -16,6 +16,8 @@ Sylius\Component\Core\Model\ProductVariant:
         fallbackLocale: en_US
         currentLocale: en_US
         position: 5
+        createdAt: <(new \DateTime('2026-03-05 10:00:00'))>
+        updatedAt: <(new \DateTime('2026-06-19 10:00:00'))>
     iteration_variant2:
         code: ITERATION_VARIANT_ALPHA
         version: 1
@@ -23,6 +25,8 @@ Sylius\Component\Core\Model\ProductVariant:
         fallbackLocale: en_US
         currentLocale: en_US
         position: 2
+        createdAt: <(new \DateTime('2026-03-02 10:00:00'))>
+        updatedAt: <(new \DateTime('2026-06-13 10:00:00'))>
     iteration_variant3:
         code: ITERATION_VARIANT_ZETA
         version: 1
@@ -30,6 +34,8 @@ Sylius\Component\Core\Model\ProductVariant:
         fallbackLocale: en_US
         currentLocale: en_US
         position: 7
+        createdAt: <(new \DateTime('2026-03-07 10:00:00'))>
+        updatedAt: <(new \DateTime('2026-06-11 10:00:00'))>
     iteration_variant4:
         code: ITERATION_VARIANT_BETA
         version: 1
@@ -37,6 +43,8 @@ Sylius\Component\Core\Model\ProductVariant:
         fallbackLocale: en_US
         currentLocale: en_US
         position: 1
+        createdAt: <(new \DateTime('2026-03-01 10:00:00'))>
+        updatedAt: <(new \DateTime('2026-06-17 10:00:00'))>
     iteration_variant5:
         code: ITERATION_VARIANT_OMEGA
         version: 1
@@ -44,6 +52,8 @@ Sylius\Component\Core\Model\ProductVariant:
         fallbackLocale: en_US
         currentLocale: en_US
         position: 4
+        createdAt: <(new \DateTime('2026-03-04 10:00:00'))>
+        updatedAt: <(new \DateTime('2026-06-12 10:00:00'))>
     iteration_variant6:
         code: ITERATION_VARIANT_DELTA
         version: 1
@@ -51,6 +61,8 @@ Sylius\Component\Core\Model\ProductVariant:
         fallbackLocale: en_US
         currentLocale: en_US
         position: 6
+        createdAt: <(new \DateTime('2026-03-06 10:00:00'))>
+        updatedAt: <(new \DateTime('2026-06-15 10:00:00'))>
     iteration_variant7:
         code: ITERATION_VARIANT_EPSILON
         version: 1
@@ -58,3 +70,5 @@ Sylius\Component\Core\Model\ProductVariant:
         fallbackLocale: en_US
         currentLocale: en_US
         position: 3
+        createdAt: <(new \DateTime('2026-03-03 10:00:00'))>
+        updatedAt: <(new \DateTime('2026-06-14 10:00:00'))>

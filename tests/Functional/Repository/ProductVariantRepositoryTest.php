@@ -34,8 +34,10 @@ final class ProductVariantRepositoryTest extends KernelTestCase
 {
     /**
      * Declared in the order the fixture inserts them, which is the order the repository must yield.
-     * Neither the codes nor the fixture positions follow that order, so ordering the query by `code`
-     * or by `position` rather than by the identifier it pages on fails these assertions.
+     * The fixture's codes, positions and timestamps are each permuted independently of that order, so
+     * ordering the query by `code`, `position`, `createdAt` or `updatedAt` rather than by the identifier
+     * it pages on fails these assertions. `version` is excluded: Doctrine manages it as the optimistic
+     * lock field and forces it to 1 on insert, so it cannot be permuted from a fixture.
      */
     private const VARIANT_CODES = [
         'ITERATION_VARIANT_GAMMA',
@@ -63,8 +65,9 @@ final class ProductVariantRepositoryTest extends KernelTestCase
 
     /**
      * The test application enables `sylius_core.order_by_identifier`, whose walker appends an ordering
-     * by identifier to every query. That would supply the very clause these tests exist to pin, so it
-     * is removed here to reproduce a default 2.3 application, where the setting defaults to false.
+     * by identifier to every non-grouped, non-aggregate query. That would supply the very clause these
+     * tests exist to pin, so it is removed here to reproduce a default 2.3 application, where the
+     * setting defaults to false.
      */
     private function disableOrderByIdentifierWalker(): void
     {
