@@ -48,5 +48,13 @@
             <argument type="service" id="service_container" />
             <tag name="twig.extension" />
         </service>
+
+        <service id="sylius.twig.extension.security_csrf" class="Sylius\Bundle\CoreBundle\Twig\SecurityCsrfExtension" public="false">
+            <argument>%sylius_admin.security.csrf_parameter%</argument>
+            <argument>%sylius_admin.security.csrf_token_id%</argument>
+            <argument>%sylius_shop.security.csrf_parameter%</argument>
+            <argument>%sylius_shop.security.csrf_token_id%</argument>
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>
