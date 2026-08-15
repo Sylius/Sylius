@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -27,11 +28,13 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsContext implements Context
 {
     use ValidationTrait;
+    use NormalizedKeyAwareTrait;
 
     private const FIRST_COLLECTION_ITEM = 0;
 
@@ -42,6 +45,7 @@ final class ManagingProductVariantsContext implements Context
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -374,12 +378,15 @@ final class ManagingProductVariantsContext implements Context
             'name' => $name,
         ];
 
-        $translationInLocale = $response[self::FIRST_COLLECTION_ITEM]['translations'][$localeCode];
+        $translationsKey = $this->getNormalizedKey('translations');
+        $nameKey = $this->getNormalizedKey('name');
+
+        $translationInLocale = $response[self::FIRST_COLLECTION_ITEM][$translationsKey][$localeCode];
 
         Assert::allInArray(
             $expectedTranslation,
             $translationInLocale,
-            sprintf('Expected translation %s, got %s', $expectedTranslation['name'], $translationInLocale['name']),
+            sprintf('Expected translation %s, got %s', $expectedTranslation['name'], $translationInLocale[$nameKey]),
         );
     }
 
@@ -394,7 +401,10 @@ final class ManagingProductVariantsContext implements Context
     ): void {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
-        Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['price'], $price);
+        $channelPricingsKey = $this->getNormalizedKey('channelPricings');
+        $priceKey = $this->getNormalizedKey('price');
+
+        Assert::same($response[self::FIRST_COLLECTION_ITEM][$channelPricingsKey][$channel->getCode()][$priceKey], $price);
     }
 
     /**
@@ -408,7 +418,10 @@ final class ManagingProductVariantsContext implements Context
     ): void {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
-        Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['originalPrice'], $originalPrice);
+        $channelPricingsKey = $this->getNormalizedKey('channelPricings');
+        $originalPriceKey = $this->getNormalizedKey('originalPrice');
+
+        Assert::same($response[self::FIRST_COLLECTION_ITEM][$channelPricingsKey][$channel->getCode()][$originalPriceKey], $originalPrice);
     }
 
     /**
@@ -428,7 +441,10 @@ final class ManagingProductVariantsContext implements Context
     {
         $response = $this->responseChecker->getCollection($this->client->index(Resources::PRODUCT_VARIANTS));
 
-        Assert::same($response[self::FIRST_COLLECTION_ITEM]['channelPricings'][$channel->getCode()]['minimumPrice'], $minimumPrice);
+        $channelPricingsKey = $this->getNormalizedKey('channelPricings');
+        $minimumPriceKey = $this->getNormalizedKey('minimumPrice');
+
+        Assert::same($response[self::FIRST_COLLECTION_ITEM][$channelPricingsKey][$channel->getCode()][$minimumPriceKey], $minimumPrice);
     }
 
     /**

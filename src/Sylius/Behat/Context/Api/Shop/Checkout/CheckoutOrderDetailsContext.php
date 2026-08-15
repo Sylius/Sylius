@@ -16,19 +16,24 @@ namespace Sylius\Behat\Context\Api\Shop\Checkout;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutOrderDetailsContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -82,7 +87,7 @@ final class CheckoutOrderDetailsContext implements Context
         $payments = $this->responseChecker->getValue($response, 'payments');
         $payment = end($payments);
 
-        $paymentId = $payment['id'];
+        $paymentId = $payment[$this->getNormalizedKey('id')];
         $response = $this->client->requestGet(sprintf('orders/%s/payments/%s', $this->sharedStorage->get('cart_token'), $paymentId));
 
         return $this->responseChecker->getValue($response, 'state');

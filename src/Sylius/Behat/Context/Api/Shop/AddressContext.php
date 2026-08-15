@@ -16,20 +16,25 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class AddressContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
         private SharedStorageInterface $sharedStorage,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -359,7 +364,7 @@ final readonly class AddressContext implements Context
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
 
-        Assert::same(count($response['violations']), $expectedCount);
+        Assert::same(count($response[$this->getNormalizedKey('violations')]), $expectedCount);
     }
 
     /**
@@ -438,16 +443,25 @@ final readonly class AddressContext implements Context
 
     private function addressBookHasAddress(array $addressBook, AddressInterface $addressToCompare): bool
     {
+        $firstNameKey = $this->getNormalizedKey('firstName');
+        $lastNameKey = $this->getNormalizedKey('lastName');
+        $countryCodeKey = $this->getNormalizedKey('countryCode');
+        $streetKey = $this->getNormalizedKey('street');
+        $cityKey = $this->getNormalizedKey('city');
+        $postcodeKey = $this->getNormalizedKey('postcode');
+        $provinceNameKey = $this->getNormalizedKey('provinceName');
+        $provinceCodeKey = $this->getNormalizedKey('provinceCode');
+
         foreach ($addressBook as $address) {
             if (
-                $address['firstName'] === $addressToCompare->getFirstName() &&
-                $address['lastName'] === $addressToCompare->getLastName() &&
-                $address['countryCode'] === $addressToCompare->getCountryCode() &&
-                $address['street'] === $addressToCompare->getStreet() &&
-                $address['city'] === $addressToCompare->getCity() &&
-                $address['postcode'] === $addressToCompare->getPostcode() &&
-                $address['provinceName'] === $addressToCompare->getProvinceName() &&
-                $address['provinceCode'] === $addressToCompare->getProvinceCode()
+                $address[$firstNameKey] === $addressToCompare->getFirstName() &&
+                $address[$lastNameKey] === $addressToCompare->getLastName() &&
+                $address[$countryCodeKey] === $addressToCompare->getCountryCode() &&
+                $address[$streetKey] === $addressToCompare->getStreet() &&
+                $address[$cityKey] === $addressToCompare->getCity() &&
+                $address[$postcodeKey] === $addressToCompare->getPostcode() &&
+                $address[$provinceNameKey] === $addressToCompare->getProvinceName() &&
+                $address[$provinceCodeKey] === $addressToCompare->getProvinceCode()
             ) {
                 return true;
             }
@@ -460,12 +474,15 @@ final readonly class AddressContext implements Context
     {
         Assert::notNull($fullName);
         [$firstName, $lastName] = explode(' ', $fullName);
+        $firstNameKey = $this->getNormalizedKey('firstName');
+        $lastNameKey = $this->getNormalizedKey('lastName');
+        $idKey = $this->getNormalizedKey('id');
 
         $addresses = $this->responseChecker->getCollection($this->client->getLastResponse());
         /** @var AddressInterface $address */
         foreach ($addresses as $address) {
-            if ($firstName === $address['firstName'] && $lastName === $address['lastName']) {
-                return (string) $address['id'];
+            if ($firstName === $address[$firstNameKey] && $lastName === $address[$lastNameKey]) {
+                return (string) $address[$idKey];
             }
         }
 
@@ -487,11 +504,13 @@ final readonly class AddressContext implements Context
     {
         Assert::notNull($fullName);
         [$firstName, $lastName] = explode(' ', $fullName);
+        $firstNameKey = $this->getNormalizedKey('firstName');
+        $lastNameKey = $this->getNormalizedKey('lastName');
 
         $addresses = $this->responseChecker->getCollection($this->client->index(Resources::ADDRESSES));
         /** @var AddressInterface $address */
         foreach ($addresses as $address) {
-            if ($firstName === $address['firstName'] && $lastName === $address['lastName']) {
+            if ($firstName === $address[$firstNameKey] && $lastName === $address[$lastNameKey]) {
                 return $address['@id'];
             }
         }
