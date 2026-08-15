@@ -21,6 +21,8 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 final class AllProductVariantsCatalogPromotionsProcessorTest extends TestCase
 {
+    private const BATCH_SIZE = 2;
+
     private MockObject&ProductVariantRepositoryInterface $productVariantRepository;
 
     private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface&MockObject $commandDispatcher;
@@ -34,22 +36,82 @@ final class AllProductVariantsCatalogPromotionsProcessorTest extends TestCase
         $this->processor = new AllProductVariantsCatalogPromotionsProcessor(
             $this->productVariantRepository,
             $this->commandDispatcher,
+            self::BATCH_SIZE,
         );
     }
 
-    public function testClearsAndProcessesCatalogPromotions(): void
+    public function testDispatchesEveryBatchOfVariantCodes(): void
     {
         $this->productVariantRepository
-            ->method('getCodesOfAllVariants')
-            ->willReturn(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'])
+            ->expects($this->once())
+            ->method('iterateCodesOfAllVariants')
+            ->with(self::BATCH_SIZE)
+            ->willReturn([
+                ['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'],
+                ['THIRD_VARIANT_CODE'],
+            ])
         ;
 
+        $dispatchedBatches = [];
         $this->commandDispatcher
-            ->expects($this->once())
+            ->expects($this->exactly(2))
             ->method('updateVariants')
-            ->with(['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'])
+            ->willReturnCallback(function (array $variantsCodes) use (&$dispatchedBatches): void {
+                $dispatchedBatches[] = $variantsCodes;
+            })
         ;
 
         $this->processor->process();
+
+        $this->assertSame(
+            [['FIRST_VARIANT_CODE', 'SECOND_VARIANT_CODE'], ['THIRD_VARIANT_CODE']],
+            $dispatchedBatches,
+        );
+    }
+
+    public function testDispatchesNothingWhenThereAreNoVariants(): void
+    {
+        $this->productVariantRepository
+            ->expects($this->once())
+            ->method('iterateCodesOfAllVariants')
+            ->with(self::BATCH_SIZE)
+            ->willReturn([])
+        ;
+
+        $this->commandDispatcher->expects($this->never())->method('updateVariants');
+
+        $this->processor->process();
+    }
+
+    public function testConsumesBatchesLazilyWithoutMaterialisingTheWholeCatalog(): void
+    {
+        $readBatches = 0;
+
+        $this->productVariantRepository
+            ->expects($this->once())
+            ->method('iterateCodesOfAllVariants')
+            ->willReturnCallback(function () use (&$readBatches): \Generator {
+                foreach ([['FIRST_VARIANT_CODE'], ['SECOND_VARIANT_CODE']] as $batch) {
+                    ++$readBatches;
+
+                    yield $batch;
+                }
+            })
+        ;
+
+        $dispatchedWhileReading = [];
+        $this->commandDispatcher
+            ->expects($this->exactly(2))
+            ->method('updateVariants')
+            ->willReturnCallback(function () use (&$readBatches, &$dispatchedWhileReading): void {
+                // Each dispatch must happen while only the batches read so far have been pulled
+                // from the repository, never after the whole catalog has been loaded.
+                $dispatchedWhileReading[] = $readBatches;
+            })
+        ;
+
+        $this->processor->process();
+
+        $this->assertSame([1, 2], $dispatchedWhileReading);
     }
 }

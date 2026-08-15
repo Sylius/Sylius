@@ -21,13 +21,16 @@ final class AllProductVariantsCatalogPromotionsProcessor implements AllProductVa
     public function __construct(
         private ProductVariantRepositoryInterface $productVariantRepository,
         private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
+        private int $batchSize,
     ) {
     }
 
     public function process(): void
     {
-        $variantsCodes = $this->productVariantRepository->getCodesOfAllVariants();
-
-        $this->commandDispatcher->updateVariants($variantsCodes);
+        // The catalog is read batch by batch and each batch is dispatched as soon as it is read,
+        // so peak memory stays bounded by the batch size instead of growing with the catalog.
+        foreach ($this->productVariantRepository->iterateCodesOfAllVariants($this->batchSize) as $variantsCodes) {
+            $this->commandDispatcher->updateVariants($variantsCodes);
+        }
     }
 }

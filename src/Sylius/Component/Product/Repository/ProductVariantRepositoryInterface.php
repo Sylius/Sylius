@@ -69,6 +69,17 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
 
     /**
      * @return array|string[]
+     *
+     * @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead,
+     *             which reads the catalog in batches instead of materialising it entirely in memory.
      */
     public function getCodesOfAllVariants(): array;
+
+    /**
+     * Reads the codes of all product variants in batches, so that memory usage stays bounded
+     * by $batchSize regardless of how many variants the catalog holds.
+     *
+     * @return iterable<list<string>>
+     */
+    public function iterateCodesOfAllVariants(int $batchSize): iterable;
 }

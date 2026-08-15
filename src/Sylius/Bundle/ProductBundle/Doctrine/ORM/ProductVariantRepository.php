@@ -174,12 +174,64 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
+    /**
+     * @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead,
+     *             which reads the catalog in batches instead of materialising it entirely in memory.
+     */
     public function getCodesOfAllVariants(): array
     {
+        trigger_deprecation(
+            'sylius/product-bundle',
+            '2.3',
+            'The "%s()" method is deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead.',
+            __METHOD__,
+        );
+
         return $this->createQueryBuilder('o')
             ->select('o.code')
             ->getQuery()
             ->getArrayResult()
         ;
+    }
+
+    public function iterateCodesOfAllVariants(int $batchSize): iterable
+    {
+        if ($batchSize < 1) {
+            throw new \InvalidArgumentException(sprintf('Expected a batch size greater than 0, but got %d.', $batchSize));
+        }
+
+        $lastId = null;
+
+        while (true) {
+            $queryBuilder = $this->createQueryBuilder('o')
+                ->select('o.id', 'o.code')
+                ->orderBy('o.id', 'ASC')
+                ->setMaxResults($batchSize)
+            ;
+
+            // Keyset pagination: unlike OFFSET, the cost of each batch does not grow with how far
+            // into the catalog we already are.
+            if (null !== $lastId) {
+                $queryBuilder
+                    ->andWhere('o.id > :lastId')
+                    ->setParameter('lastId', $lastId)
+                ;
+            }
+
+            /** @var list<array{id: mixed, code: string}> $result */
+            $result = $queryBuilder->getQuery()->getArrayResult();
+
+            if ([] === $result) {
+                return;
+            }
+
+            $lastId = $result[array_key_last($result)]['id'];
+
+            yield array_column($result, 'code');
+
+            if (count($result) < $batchSize) {
+                return;
+            }
+        }
     }
 }

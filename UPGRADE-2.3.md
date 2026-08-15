@@ -646,6 +646,38 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Existing subclasses overriding this method with the `RedirectResponse` return type remain valid thanks to
    return type covariance and require no changes.
 
+## Product
+
+1. The `iterateCodesOfAllVariants(int $batchSize): iterable` method has been added to `Sylius\Component\Product\Repository\ProductVariantRepositoryInterface`.
+
+   ```php
+   /**
+    * @return iterable<list<string>>
+    */
+   public function iterateCodesOfAllVariants(int $batchSize): iterable;
+   ```
+
+   If you have a custom class implementing this interface, you must add this method. It is expected to yield
+   the codes of all product variants in batches of at most `$batchSize` elements.
+
+   It replaces `getCodesOfAllVariants()`, which loaded the whole `product_variant` table into a single array
+   and therefore used memory proportional to the size of the catalog. `AllProductVariantsCatalogPromotionsProcessor`
+   now consumes the catalog batch by batch, so recalculating catalog promotions uses a bounded amount of memory
+   regardless of how many variants exist.
+
+2. `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessor` takes a
+   third constructor argument, the batch size to read the catalog with. The `sylius.processor.catalog_promotion.all_product_variant`
+   service is already configured to pass `%sylius_core.catalog_promotions.batch_size%`, so no change is needed
+   unless you instantiate this processor yourself.
+
+   ```diff
+    public function __construct(
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
+   +    private int $batchSize,
+    ) {
+   ```
+
 ## New Features
 
 1. New post-flush cart events have been added to `Sylius\Component\Order\SyliusCartEvents`.
@@ -762,3 +794,25 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    +    protected readonly ?CartItemAdderInterface $cartItemAdder = null,
     ) {
    ```
+
+3. `Sylius\Component\Product\Repository\ProductVariantRepositoryInterface::getCodesOfAllVariants()` is deprecated
+   since Sylius 2.3 and will be removed in Sylius 3.0. Use `iterateCodesOfAllVariants(int $batchSize)` instead.
+
+   The deprecated method loads every row of `product_variant` into a single array, so its memory usage grows
+   linearly with the size of the catalog. The replacement reads the catalog in batches using keyset pagination
+   and keeps memory bounded regardless of catalog size.
+
+   ```diff
+   -foreach ($productVariantRepository->getCodesOfAllVariants() as $code) {
+   -    // ...
+   -}
+   +foreach ($productVariantRepository->iterateCodesOfAllVariants(100) as $variantCodes) {
+   +    foreach ($variantCodes as $code) {
+   +        // ...
+   +    }
+   +}
+   ```
+
+   > **Note:** the deprecated method's return value never matched its `@return array|string[]` annotation. Because it
+   > selects a single field and hydrates with `getArrayResult()`, it actually returns a list of `['code' => string]`
+   > arrays. `iterateCodesOfAllVariants()` yields batches of plain strings, as the annotation always intended.
