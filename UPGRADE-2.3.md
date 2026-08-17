@@ -653,7 +653,7 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    The following events are now dispatched **after** `$manager->flush()`, allowing listeners to react once the cart has been safely persisted to the database:
 
    | New constant | Event name |
-         |---|---|
+   |---|---|
    | `SyliusCartEvents::CART_ITEM_POST_ADD` | `sylius.cart_item_post_add` |
    | `SyliusCartEvents::CART_ITEM_POST_REMOVE` | `sylius.cart_item_post_remove` |
    | `SyliusCartEvents::CART_POST_CHANGE` | `sylius.cart_post_change` |
