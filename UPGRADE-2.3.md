@@ -80,6 +80,19 @@
                'Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail': your_async_transport
    ```
 
+2. The payload carried by `Sylius\Bundle\CoreBundle\CatalogPromotion\Command\ApplyCatalogPromotionsOnVariants` when
+   dispatched for the whole catalog is now a list of strings, as its `@param array<string> $variantsCodes` annotation
+   has always declared.
+
+   Previously that code path fed it the raw output of `getCodesOfAllVariants()`, so it actually carried
+   `[['code' => 'VARIANT_1'], ...]`.
+
+   Messages already queued when you deploy still resolve, but not because anything handles both shapes — the
+   handler passes the payload straight to `findByCodes()`, and Doctrine happens to flatten single-element nested
+   arrays when binding an `IN` parameter. If you have overridden `findByCodes()` to build the `IN` list yourself,
+   drain the queue before deploying. A custom handler, middleware, or log parser reading `$variantsCodes` directly
+   should expect plain strings from now on.
+
 ## Shop
 
 1. When an unverified account tries to log in with valid credentials on a channel that requires account verification, the login page now shows a one-click "resend verification email" action instead of a separate request form.
@@ -646,6 +659,60 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Existing subclasses overriding this method with the `RedirectResponse` return type remain valid thanks to
    return type covariance and require no changes.
 
+## Product
+
+1. The `iterateCodesOfAllVariants(int $batchSize): iterable` method has been added to `Sylius\Component\Product\Repository\ProductVariantRepositoryInterface`.
+
+   ```php
+   /**
+    * @return iterable<list<string>>
+    */
+   public function iterateCodesOfAllVariants(int $batchSize): iterable;
+   ```
+
+   If you have a custom class implementing this interface without extending
+   `Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository`, you must add this method. It is expected to
+   yield the codes of all product variants in batches of at most `$batchSize` elements.
+
+   It replaces `getCodesOfAllVariants()` (see the *Deprecations* section for the migration), so recalculating
+   catalog promotions no longer uses memory proportional to the size of the catalog.
+
+2. Not passing a batch size as the third constructor argument of
+   `Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\AllProductVariantsCatalogPromotionsProcessor` is deprecated
+   since Sylius 2.3 and will be prohibited in Sylius 3.0.
+
+   ```diff
+    public function __construct(
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private ApplyCatalogPromotionsOnVariantsCommandDispatcherInterface $commandDispatcher,
+   +    ?int $batchSize = null,
+    ) {
+   ```
+
+   When omitted it falls back to 100, matching the default of `sylius_core.catalog_promotions.batch_size`. Note that
+   if you have configured a different value, the fallback does **not** reproduce it — pass the batch size explicitly.
+   A value lower than 1 is rejected when the processor is constructed.
+   The `sylius.processor.catalog_promotion.all_product_variant` service already passes
+   `%sylius_core.catalog_promotions.batch_size%`, so no change is needed unless you instantiate or re-register this
+   processor yourself.
+
+3. `%sylius_core.catalog_promotions.batch_size%` now governs two things: how many rows are read from the database
+   per query, and how many codes are carried by a single `ApplyCatalogPromotionsOnVariants` message. Previously it
+   only controlled the latter. If you had tuned it purely for message size, review the value — it now also sets the
+   size of each `SELECT`.
+
+4. The catalog is no longer read in a single `SELECT`. Recalculating catalog promotions for all variants now issues
+   one query per batch, interleaved with the dispatch of each batch.
+
+   The run therefore no longer sees one consistent snapshot of the catalog. A variant is missed whenever it becomes
+   visible to the run only after the batch query covering its identifier has already executed — whether its
+   transaction commits late, or it is created after the final batch has been read. Any variant missed this way is
+   picked up by the next recalculation.
+
+   Wrapping the call in a transaction that gives every statement the same snapshot restores a coherent view, but it
+   does not make concurrently created variants visible. This is a deliberate trade for memory that no longer grows
+   with the catalog.
+
 ## New Features
 
 1. New post-flush cart events have been added to `Sylius\Component\Order\SyliusCartEvents`.
@@ -762,3 +829,26 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    +    protected readonly ?CartItemAdderInterface $cartItemAdder = null,
     ) {
    ```
+
+3. `Sylius\Component\Product\Repository\ProductVariantRepositoryInterface::getCodesOfAllVariants()` is deprecated
+   since Sylius 2.3 and will be removed in Sylius 3.0. Use `iterateCodesOfAllVariants(int $batchSize)` instead.
+
+   The deprecated method loads every row of `product_variant` into a single array, so its memory usage grows
+   linearly with the size of the catalog. The replacement reads the catalog in batches using keyset pagination
+   and keeps memory bounded regardless of catalog size.
+
+   ```diff
+   -foreach ($productVariantRepository->getCodesOfAllVariants() as ['code' => $code]) {
+   -    // ...
+   -}
+   +foreach ($productVariantRepository->iterateCodesOfAllVariants(100) as $variantCodes) {
+   +    foreach ($variantCodes as $code) {
+   +        // ...
+   +    }
+   +}
+   ```
+
+   > **Note:** the deprecated method's return value never matched its former `@return array|string[]` annotation.
+   > Because it selects a single field and hydrates with `getArrayResult()`, it returns a list of `['code' => string]`
+   > arrays, which is why the loop above destructures. Its annotation has been corrected to
+   > `list<array{code: string}>`. `iterateCodesOfAllVariants()` yields batches of plain strings instead.

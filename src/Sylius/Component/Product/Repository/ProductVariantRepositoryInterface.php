@@ -68,7 +68,22 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
     public function findByPhrase(string $phrase, string $locale, ?int $limit = null): array;
 
     /**
-     * @return array|string[]
+     * @return list<array{code: string}>
+     *
+     * @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead.
      */
     public function getCodesOfAllVariants(): array;
+
+    /**
+     * Yields the codes of all product variants in batches of at most $batchSize elements.
+     *
+     * The returned iterable is single-use and must not be traversed twice.
+     *
+     * @return iterable<list<string>>
+     *
+     * @throws \InvalidArgumentException when $batchSize is lower than 1, or when the entity's identifier
+     *                                   has no mapped type
+     * @throws \Doctrine\Persistence\Mapping\MappingException when the entity has no identifier, or more than one
+     */
+    public function iterateCodesOfAllVariants(int $batchSize): iterable;
 }
