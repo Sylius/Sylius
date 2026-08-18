@@ -1,0 +1,15 @@
+Sylius\Component\Core\Model\Customer:
+    customer_shop:
+        firstName: "John"
+        lastName: "Doe"
+        email: "shop@example.com"
+        emailCanonical: "shop@example.com"
+
+Sylius\Component\Core\Model\ShopUser:
+    shop_user:
+        plainPassword: "sylius"
+        roles: [ROLE_USER]
+        enabled: true
+        customer: "@customer_shop"
+        username: "shop@example.com"
+        usernameCanonical: "shop@example.com"
