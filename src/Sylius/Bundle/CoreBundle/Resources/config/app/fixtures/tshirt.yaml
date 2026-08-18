@@ -78,11 +78,21 @@ sylius_fixtures:
                             -   name: 'T-shirt size'
                                 code: 't_shirt_size'
                                 values:
-                                    t_shirt_size_s: 'S'
-                                    t_shirt_size_m: 'M'
-                                    t_shirt_size_l: 'L'
-                                    t_shirt_size_xl: 'XL'
-                                    t_shirt_size_xxl: 'XXL'
+                                    t_shirt_size_s:
+                                        value: 'S'
+                                        position: 0
+                                    t_shirt_size_m:
+                                        value: 'M'
+                                        position: 1
+                                    t_shirt_size_l:
+                                        value: 'L'
+                                        position: 2
+                                    t_shirt_size_xl:
+                                        value: 'XL'
+                                        position: 3
+                                    t_shirt_size_xxl:
+                                        value: 'XXL'
+                                        position: 4
                                 translations:
                                     en_US: 
                                         name: 'T-shirt size'

@@ -49,6 +49,9 @@ sylius_twig_hooks:
             code:
                 template: '@SyliusAdmin/product_option/form/sections/values/value/code.html.twig'
                 priority: 200
+            position:
+                template: '@SyliusAdmin/product_option/form/sections/values/value/position.html.twig'
+                priority: 150
             translations:
                 template: '@SyliusAdmin/product_option/form/sections/values/value/translations.html.twig'
                 priority: 100

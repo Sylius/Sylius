@@ -58,14 +58,34 @@ sylius_fixtures:
                             -   name: 'Dress size'
                                 code: 'dress_size'
                                 values:
-                                    dress_s: 'S'
-                                    dress_m: 'M'
-                                    dress_l: 'L'
-                                    dress_xl: 'XL'
-                                    dress_xxl: 'XXL'
+                                    dress_s:
+                                        value: 'S'
+                                        position: 0
+                                    dress_m:
+                                        value: 'M'
+                                        position: 1
+                                    dress_l:
+                                        value: 'L'
+                                        position: 2
+                                    dress_xl:
+                                        value: 'XL'
+                                        position: 3
+                                    dress_xxl:
+                                        value: 'XXL'
+                                        position: 4
 
                             -   name: 'Dress height'
                                 code: 'dress_height'
+                                values:
+                                    dress_height_petite:
+                                        value: 'Petite'
+                                        position: 0
+                                    dress_height_regular:
+                                        value: 'Regular'
+                                        position: 1
+                                    dress_height_tall:
+                                        value: 'Tall'
+                                        position: 2
                                 translations:
                                     en_US:
                                         values:

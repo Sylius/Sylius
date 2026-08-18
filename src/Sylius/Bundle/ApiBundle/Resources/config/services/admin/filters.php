@@ -355,6 +355,13 @@ return static function (ContainerConfigurator $container) {
     ;
 
     $services
+        ->set('sylius_api.order_filter.admin.product_option_value')
+        ->parent('api_platform.doctrine.orm.order_filter')
+        ->args([['position' => '']])
+        ->tag('api_platform.filter')
+    ;
+
+    $services
         ->set('sylius_api.search_filter.admin.locale')
         ->parent('api_platform.doctrine.orm.search_filter')
         ->args([['code' => 'partial']])

@@ -34,6 +34,14 @@
             <group>sylius:shop:product_option_value:index</group>
             <group>sylius:shop:product_option_value:show</group>
         </attribute>
+        <attribute name="position">
+            <group>sylius:admin:product_option_value:index</group>
+            <group>sylius:admin:product_option_value:show</group>
+            <group>sylius:admin:product_option:index</group>
+            <group>sylius:admin:product_option:show</group>
+            <group>sylius:admin:product_option:create</group>
+            <group>sylius:admin:product_option:update</group>
+        </attribute>
         <attribute name="translations">
             <group>sylius:admin:product_option_value:show</group>
             <group>sylius:admin:product_option:create</group>

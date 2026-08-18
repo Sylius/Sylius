@@ -29,3 +29,4 @@ sylius:
         option_value:
             add_value: Ajouter une valeur
             value: Valeur
+            position: Emplacement
