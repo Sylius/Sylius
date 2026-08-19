@@ -23,6 +23,8 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
 
     public string $notExist = 'sylius.payment_method.not_exist';
 
+    public string $notAllowed = 'sylius.payment_request.action_not_allowed';
+
     public function validatedBy(): string
     {
         return 'sylius_api_chosen_payment_request_action_eligibility';
