@@ -34,6 +34,27 @@ entries alongside your own. Configuring an entry here only affects JWT validatio
 still be defined in `security.yaml`, and the `principal` must be an existing class or interface implemented by
 the corresponding user.
 
+### Payment request actions requested from shop context are now restricted to an allowlist
+
+The shop `POST /api/v2/shop/orders/{tokenValue}/payment-requests` operation accepted any `action` value the caller
+supplied and announced it on the payment request command bus, with order ownership as the only authorization. Where a
+gateway wires a refund-class action into its action-indexed command provider, a customer could request `refund` on
+their own paid order and have it executed at the payment service provider, while Sylius kept the order as `paid`.
+
+The requested action is now validated against an allowlist before the payment method is looked up and before any
+gateway command provider is consulted; everything else is rejected with `422 Unprocessable Entity`. The default
+allowlist is `capture`, `authorize`, `status` and `notify`, so `refund`, `cancel`, `payout` and `sync` are refused
+from shop context.
+
+If your gateway exposes a different shop-facing action, add it to the allowlist, otherwise shop-context calls
+requesting it will be rejected:
+
+```yaml
+sylius_api:
+    shop_payment_request:
+        allowed_actions: ['capture', 'authorize', 'status', 'notify']
+```
+
 # UPGRADE FROM `2.1.14` TO `2.1.15`
 
 ## Security

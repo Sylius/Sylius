@@ -198,6 +198,7 @@
             <argument type="service" id="sylius.repository.payment_method" />
             <argument type="service" id="sylius.command_provider.payment_request.default" />
             <argument type="service" id="sylius.provider.payment_request.gateway_factory_name" />
+            <argument>%sylius_api.shop_payment_request.allowed_actions%</argument>
             <tag name="validator.constraint_validator" alias="sylius_api_chosen_payment_request_action_eligibility" />
         </service>
 
