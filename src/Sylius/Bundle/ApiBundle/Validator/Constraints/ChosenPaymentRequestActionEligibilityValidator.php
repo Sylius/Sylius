@@ -48,7 +48,12 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->paymentMethodCode]);
         if ($paymentMethod?->getGatewayConfig() === null) {
-            $this->context->addViolation($constraint->notExistMessage, ['%code%' => $value->paymentMethodCode]);
+            $this->context
+                ->buildViolation($constraint->notExistMessage)
+                ->setParameter('%code%', (string) $value->paymentMethodCode)
+                ->setCode(ChosenPaymentRequestActionEligibility::PAYMENT_METHOD_NOT_EXIST_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -56,10 +61,13 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
         $factoryName = $this->gatewayFactoryNameProvider->provide($paymentMethod);
         $gatewayFactoryCommandProvider = $this->gatewayFactoryCommandProvider->getCommandProvider($factoryName);
         if (null === $gatewayFactoryCommandProvider) {
-            $this->context->addViolation($constraint->notAvailableMessage, [
-                '%code%' => $value->paymentMethodCode,
-                '%id%' => $value->paymentId,
-            ]);
+            $this->context
+                ->buildViolation($constraint->notAvailableMessage)
+                ->setParameter('%code%', (string) $value->paymentMethodCode)
+                ->setParameter('%id%', (string) $value->paymentId)
+                ->setCode(ChosenPaymentRequestActionEligibility::ACTION_NOT_AVAILABLE_ERROR)
+                ->addViolation()
+            ;
         }
 
         if (false === $gatewayFactoryCommandProvider instanceof ServiceProviderAwareCommandProviderInterface) {
@@ -71,9 +79,12 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
             return;
         }
 
-        $this->context->addViolation($constraint->notAvailableMessage, [
-            '%code%' => $value->paymentMethodCode,
-            '%id%' => $value->paymentId,
-        ]);
+        $this->context
+            ->buildViolation($constraint->notAvailableMessage)
+            ->setParameter('%code%', (string) $value->paymentMethodCode)
+            ->setParameter('%id%', (string) $value->paymentId)
+            ->setCode(ChosenPaymentRequestActionEligibility::ACTION_NOT_AVAILABLE_ERROR)
+            ->addViolation()
+        ;
     }
 }

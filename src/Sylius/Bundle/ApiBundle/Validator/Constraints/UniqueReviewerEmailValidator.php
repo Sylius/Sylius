@@ -43,7 +43,11 @@ final class UniqueReviewerEmailValidator extends ConstraintValidator
         }
 
         if ($this->shopUserRepository->findOneByEmail($value) !== null) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setCode(UniqueReviewerEmail::REVIEWER_ALREADY_EXISTS_ERROR)
+                ->addViolation()
+            ;
         }
     }
 

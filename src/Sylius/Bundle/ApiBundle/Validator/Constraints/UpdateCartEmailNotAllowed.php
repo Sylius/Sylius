@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class UpdateCartEmailNotAllowed extends Constraint
 {
+    public const EMAIL_NOT_CHANGEABLE_ERROR = 'EMAIL_NOT_CHANGEABLE';
+
     /**
      * @param array<string, mixed>|null $options
      */

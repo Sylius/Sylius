@@ -42,6 +42,11 @@ final class ShopUserNotVerifiedValidator extends ConstraintValidator
             return;
         }
 
-        $this->context->addViolation($constraint->message, ['%email%' => $shopUser->getEmail()]);
+        $this->context
+            ->buildViolation($constraint->message)
+            ->setParameter('%email%', (string) $shopUser->getEmail())
+            ->setCode(ShopUserNotVerified::USER_ALREADY_VERIFIED_ERROR)
+            ->addViolation()
+        ;
     }
 }

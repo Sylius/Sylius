@@ -33,6 +33,7 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ChangedItemQuantityInCartValidatorTest extends TestCase
@@ -121,9 +122,11 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
             ->willReturn($this->orderItem);
         $this->orderItem->expects(self::once())->method('getVariant')->willReturn(null);
         $this->orderItem->expects(self::once())->method('getVariantName')->willReturn('MacPro');
-        $this->executionContext->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.product_variant.not_longer_available', ['%productVariantName%' => 'MacPro']);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.product_variant.not_longer_available')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%productVariantName%', 'MacPro')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChangedItemQuantityInCart::PRODUCT_VARIANT_NOT_LONGER_AVAILABLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
@@ -143,9 +146,11 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
         $this->productVariant->expects(self::once())->method('getCode')->willReturn('VARIANT_CODE');
         $this->product->expects(self::once())->method('isEnabled')->willReturn(false);
         $this->product->expects(self::once())->method('getName')->willReturn('PRODUCT NAME');
-        $this->executionContext->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME']);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.product.not_exist')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%productName%', 'PRODUCT NAME')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChangedItemQuantityInCart::PRODUCT_NOT_EXIST_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
@@ -166,9 +171,11 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
         $this->product->expects(self::once())->method('isEnabled')->willReturn(true);
         $this->product->method('getName')->willReturn('PRODUCT NAME');
         $this->productVariant->expects(self::once())->method('isEnabled')->willReturn(false);
-        $this->executionContext->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.product_variant.not_longer_available', ['%productVariantName%' => 'Variant Name']);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.product_variant.not_longer_available')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%productVariantName%', 'Variant Name')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChangedItemQuantityInCart::PRODUCT_VARIANT_NOT_LONGER_AVAILABLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
@@ -193,9 +200,11 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
             ->method('isStockSufficient')
             ->with($this->productVariant, 2)
             ->willReturn(false);
-        $this->executionContext->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'VARIANT_CODE']);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.product_variant.not_sufficient')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%productVariantCode%', 'VARIANT_CODE')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChangedItemQuantityInCart::PRODUCT_VARIANT_NOT_SUFFICIENT_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(orderTokenValue: 'token', orderItemId: 11, quantity: 2),
             new ChangedItemQuantityInCart(),
@@ -229,9 +238,11 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
             ->method('hasChannel')
             ->with($this->channel)
             ->willReturn(false);
-        $this->executionContext->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME'], );
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.product.not_exist')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%productName%', 'PRODUCT NAME')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChangedItemQuantityInCart::PRODUCT_NOT_EXIST_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
         $this->changedItemQuantityInCartValidator->validate(
             new ChangeItemQuantityInCart(
                 orderTokenValue: 'token',
@@ -262,15 +273,6 @@ final class ChangedItemQuantityInCartValidatorTest extends TestCase
             ->willReturn($this->cart);
         $this->cart->method('getChannel')->willReturn($this->channel);
         $this->product->method('hasChannel')->with($this->channel)->willReturn(true);
-        $this->executionContext->expects(self::never())
-            ->method('addViolation')
-            ->with('sylius.product_variant.not_exist', ['%productVariantCode%' => 'productVariantCode']);
-        $this->executionContext->expects(self::never())
-            ->method('addViolation')
-            ->willReturnMap([
-                ['sylius.product_variant.not_exist', ['%productVariantCode%' => 'productVariantCode']],
-                ['sylius.product.not_exist', ['%productName%' => 'PRODUCT NAME']],
-                ['sylius.product_variant.not_sufficient', ['%productVariantCode%' => 'productVariantCode']],
-            ]);
+        $this->executionContext->expects(self::never())->method('buildViolation');
     }
 }

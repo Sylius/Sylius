@@ -24,6 +24,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class AdminResetPasswordTokenNonExpiredValidatorTest extends TestCase
@@ -108,7 +109,22 @@ final class AdminResetPasswordTokenNonExpiredValidatorTest extends TestCase
             ->method('findOneBy')
             ->with(['passwordResetToken' => 'token'])
             ->willReturn($this->adminUser);
-        $this->executionContext->expects(self::once())->method('addViolation')->with($constraint->message);
+
+        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext
+            ->expects(self::once())
+            ->method('buildViolation')
+            ->with($constraint->message)
+            ->willReturn($violationBuilder);
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setCode')
+            ->with(AdminResetPasswordTokenNonExpired::TOKEN_EXPIRED_ERROR)
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('addViolation');
+
         $this->adminResetPasswordTokenNonExpiredValidator->validate($value, $constraint);
     }
 }
