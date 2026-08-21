@@ -646,6 +646,14 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Existing subclasses overriding this method with the `RedirectResponse` return type remain valid thanks to
    return type covariance and require no changes.
 
+2. The `state` field of the `sylius_shop_account_order` grid is rendered with `@SyliusShop/grid/field/label.html.twig`
+   instead of the shared `@SyliusUi/grid/field/label.html.twig`. ([#18298](https://github.com/Sylius/Sylius/issues/18298))
+
+   Shop grid templates no longer share files with the admin ones, so overriding them does not affect admin pages anymore.
+   If you have overridden `@SyliusUi/grid/field/label.html.twig` to customise the shop, move your customisation to
+   `@SyliusShop/grid/field/label.html.twig`. The fallback label template used when no label template matches the value
+   is now `@SyliusShop/grid/field/label/default.html.twig`.
+
 ## New Features
 
 1. New post-flush cart events have been added to `Sylius\Component\Order\SyliusCartEvents`.
