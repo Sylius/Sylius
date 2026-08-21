@@ -51,7 +51,7 @@ final class CommandArgumentsDenormalizer implements DenormalizerInterface
 
     public function getSupportedTypes(?string $format): array
     {
-        return ['object' => true];
+        return ['object' => false];
     }
 
     private function getInputClassName(array $context): ?string
