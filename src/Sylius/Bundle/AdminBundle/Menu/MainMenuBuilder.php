@@ -19,6 +19,9 @@ use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * @deprecated Use CompositeMenuBuilder instead.
+ */
 final readonly class MainMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.main';
