@@ -38,6 +38,9 @@
         <service id="Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler">
             <argument type="service" id="sylius.repository.admin_user"/>
             <argument type="service" id="sylius.email_sender"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="sylius.context.channel"/>
+            <argument>%sylius.unsecured_urls%</argument>
 
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
             <tag name="messenger.message_handler" bus="sylius_default.bus" />

@@ -16,18 +16,23 @@ namespace spec\Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
 {
     public function let(
         UserRepositoryInterface $userRepository,
         SenderInterface $sender,
+        RouterInterface $router,
+        ChannelContextInterface $channelContext,
     ): void {
-        $this->beConstructedWith($userRepository, $sender);
+        $this->beConstructedWith($userRepository, $sender, $router, $channelContext, false);
     }
 
     public function it_is_a_message_handler(): void
@@ -38,9 +43,17 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
     public function it_handles_sending_reset_password_email(
         UserRepositoryInterface $userRepository,
         SenderInterface $sender,
+        RouterInterface $router,
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel,
         AdminUserInterface $adminUser,
     ): void {
         $userRepository->findOneByEmail('admin@example.com')->willReturn($adminUser);
+        $adminUser->getPasswordResetToken()->willReturn('token');
+
+        $channelContext->getChannel()->willReturn($channel);
+        $channel->getHostname()->willReturn('sylius.example.com');
+        $router->generate('sylius_admin_render_password_reset', ['token' => 'token'])->willReturn('/admin/forgotten-password/token');
 
         $sender->send(
             Emails::ADMIN_PASSWORD_RESET,
@@ -48,6 +61,7 @@ final class SendResetPasswordEmailHandlerSpec extends ObjectBehavior
             [
                 'adminUser' => $adminUser,
                 'localeCode' => 'en_US',
+                'resetUrl' => 'https://sylius.example.com/admin/forgotten-password/token',
             ],
         )->shouldBeCalledOnce();
 
