@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\DependencyInjection;
 
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -73,6 +75,36 @@ final class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->booleanNode('enabled')->defaultTrue()->end()
                                             ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+            ->children()
+                ->arrayNode('jwt')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('firewall_expectations')
+                            ->useAttributeAsKey('name')
+                            ->defaultValue([
+                                'new_api_admin_user' => ['audience' => 'sylius-api-admin', 'principal' => AdminUserInterface::class],
+                                'new_api_shop_user' => ['audience' => 'sylius-api-shop', 'principal' => ShopUserInterface::class],
+                            ])
+                            ->arrayPrototype()
+                                ->children()
+                                    ->scalarNode('audience')
+                                        ->isRequired()
+                                        ->cannotBeEmpty()
+                                    ->end()
+                                    ->scalarNode('principal')
+                                        ->isRequired()
+                                        ->cannotBeEmpty()
+                                        ->validate()
+                                            ->ifTrue(static fn (string $principal): bool => !interface_exists($principal) && !class_exists($principal))
+                                            ->thenInvalid('The principal "%s" is not an existing class or interface.')
                                         ->end()
                                     ->end()
                                 ->end()
