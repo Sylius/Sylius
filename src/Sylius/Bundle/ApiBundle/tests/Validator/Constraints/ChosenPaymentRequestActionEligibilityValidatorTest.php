@@ -46,7 +46,7 @@ final class ChosenPaymentRequestActionEligibilityValidatorTest extends TestCase
         $this->gatewayFactoryCommandProviderMock = $this->createMock(ServiceProviderAwareCommandProviderInterface::class);
         $this->gatewayFactoryNameProviderMock = $this->createMock(GatewayFactoryNameProviderInterface::class);
         $this->executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        $this->chosenPaymentRequestActionEligibilityValidator = new ChosenPaymentRequestActionEligibilityValidator($this->paymentMethodRepositoryMock, $this->gatewayFactoryCommandProviderMock, $this->gatewayFactoryNameProviderMock);
+        $this->chosenPaymentRequestActionEligibilityValidator = new ChosenPaymentRequestActionEligibilityValidator($this->paymentMethodRepositoryMock, $this->gatewayFactoryCommandProviderMock, $this->gatewayFactoryNameProviderMock, ['capture', 'authorize', 'status', 'notify']);
         $this->chosenPaymentRequestActionEligibilityValidator->initialize($this->executionContextMock);
     }
 
@@ -79,6 +79,21 @@ final class ChosenPaymentRequestActionEligibilityValidatorTest extends TestCase
             paymentMethodCode: 'PAYMENT_METHOD_CODE',
         );
         $this->paymentMethodRepositoryMock->expects($this->never())->method('findOneBy')->with(['code' => 'PAYMENT_METHOD_CODE']);
+        $this->chosenPaymentRequestActionEligibilityValidator->validate($command, new ChosenPaymentRequestActionEligibility());
+    }
+
+    public function test_it_adds_violation_if_the_action_is_not_allowed_from_the_shop_context(): void
+    {
+        $command = new AddPaymentRequest(
+            orderTokenValue: 'ORDER_TOKEN',
+            paymentId: 123,
+            paymentMethodCode: 'PAYMENT_METHOD_CODE',
+            action: 'refund',
+        );
+        $this->paymentMethodRepositoryMock->expects($this->never())->method('findOneBy');
+        $this->gatewayFactoryNameProviderMock->expects($this->never())->method('provide');
+        $this->executionContextMock->expects($this->once())->method('addViolation')->with('sylius.payment_request.action_not_allowed', ['%action%' => 'refund'])
+        ;
         $this->chosenPaymentRequestActionEligibilityValidator->validate($command, new ChosenPaymentRequestActionEligibility());
     }
 
@@ -123,7 +138,7 @@ final class ChosenPaymentRequestActionEligibilityValidatorTest extends TestCase
             orderTokenValue: 'ORDER_TOKEN',
             paymentId: 123,
             paymentMethodCode: 'PAYMENT_METHOD_CODE',
-            action: 'invalid_action',
+            action: 'status',
         );
         $this->paymentMethodRepositoryMock->expects($this->once())->method('findOneBy')->with(['code' => 'PAYMENT_METHOD_CODE'])->willReturn($paymentMethodMock);
         $paymentMethodMock->expects($this->once())->method('getGatewayConfig')->willReturn($gatewayConfigMock);
