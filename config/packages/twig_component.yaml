@@ -1,0 +1,3 @@
+twig_component:
+    anonymous_template_directory: 'components'
+    defaults: []
