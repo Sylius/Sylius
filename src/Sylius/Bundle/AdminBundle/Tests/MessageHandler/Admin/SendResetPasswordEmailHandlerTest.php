@@ -15,12 +15,15 @@ namespace Sylius\Bundle\AdminBundle\Tests\MessageHandler\Admin;
 
 use Sylius\Bundle\CoreBundle\Message\Admin\Account\SendResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\MessageHandler\Admin\Account\SendResetPasswordEmailHandler;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Test\SwiftmailerAssertionTrait;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SendResetPasswordEmailHandlerTest extends KernelTestCase
@@ -42,6 +45,15 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         /** @var SenderInterface $emailSender */
         $emailSender = $container->get('sylius.email_sender');
 
+        /** @var RouterInterface $router */
+        $router = $container->get('router');
+
+        $channel = $this->createMock(ChannelInterface::class);
+        $channel->method('getHostname')->willReturn('sylius.example.com');
+
+        $channelContext = $this->createMock(ChannelContextInterface::class);
+        $channelContext->method('getChannel')->willReturn($channel);
+
         $adminUser = new AdminUser();
         $adminUser->setEmail('sylius@example.com');
         $adminUser->setPasswordResetToken('my_reset_token');
@@ -53,7 +65,7 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             ->willReturn($adminUser)
         ;
 
-        $resetPasswordEmailHandler = new SendResetPasswordEmailHandler($adminUserRepository, $emailSender);
+        $resetPasswordEmailHandler = new SendResetPasswordEmailHandler($adminUserRepository, $emailSender, $router, $channelContext);
         $resetPasswordEmailHandler(new SendResetPasswordEmail(
             'sylius@example.com',
             'en_US',
@@ -90,6 +102,15 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
         /** @var SenderInterface $emailSender */
         $emailSender = $container->get('sylius.email_sender');
 
+        /** @var RouterInterface $router */
+        $router = $container->get('router');
+
+        $channel = $this->createMock(ChannelInterface::class);
+        $channel->method('getHostname')->willReturn('sylius.example.com');
+
+        $channelContext = $this->createMock(ChannelContextInterface::class);
+        $channelContext->method('getChannel')->willReturn($channel);
+
         $adminUser = new AdminUser();
         $adminUser->setEmail('sylius@example.com');
         $adminUser->setPasswordResetToken('my_reset_token');
@@ -101,7 +122,7 @@ final class SendResetPasswordEmailHandlerTest extends KernelTestCase
             ->willReturn($adminUser)
         ;
 
-        $resetPasswordEmailHandler = new SendResetPasswordEmailHandler($adminUserRepository, $emailSender);
+        $resetPasswordEmailHandler = new SendResetPasswordEmailHandler($adminUserRepository, $emailSender, $router, $channelContext);
         $resetPasswordEmailHandler(new SendResetPasswordEmail(
             'sylius@example.com',
             'en_US',
