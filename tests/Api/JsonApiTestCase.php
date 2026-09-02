@@ -38,9 +38,19 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
 
     protected function getAuthorizationHeaderAsCustomer(string $email, string $password): array
     {
+        return $this->getAuthorizationHeader('/api/v2/shop/authentication-token', $email, $password);
+    }
+
+    protected function getAuthorizationHeaderAsAdmin(string $email, string $password): array
+    {
+        return $this->getAuthorizationHeader('/api/v2/admin/authentication-token', $email, $password);
+    }
+
+    private function getAuthorizationHeader(string $tokenUri, string $email, string $password): array
+    {
         $this->client->request(
             'POST',
-            '/api/v2/shop/authentication-token',
+            $tokenUri,
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],

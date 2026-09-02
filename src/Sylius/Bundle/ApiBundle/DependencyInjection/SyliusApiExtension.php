@@ -34,6 +34,7 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
             'sylius_api.filter_eager_loading_extension.restricted_resources',
             $config['filter_eager_loading_extension']['restricted_resources'],
         );
+        $container->setParameter('sylius_api.jwt.firewall_expectations', $config['jwt']['firewall_expectations']);
 
         $loader->load('services.xml');
 

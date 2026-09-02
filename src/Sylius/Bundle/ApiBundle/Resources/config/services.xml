@@ -165,6 +165,16 @@
             <argument type="service" id="Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface" />
         </service>
 
+        <service id="sylius.listener.api_jwt_audience_listener" class="Sylius\Bundle\ApiBundle\EventListener\JwtAudienceListener">
+            <argument type="service" id="security.firewall.map" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="logger" />
+            <argument>%sylius_api.jwt.firewall_expectations%</argument>
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_jwt_created" method="onJwtCreated" />
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_jwt_decoded" method="onJwtDecoded" />
+        </service>
+        <service id="sylius_api.listener.jwt_audience" alias="sylius.listener.api_jwt_audience_listener" />
+
         <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" class="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner" public="true">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.order_processing.order_processor" />
