@@ -95,7 +95,7 @@ final class TranslatableAutocompleteType extends AbstractType
             $translationConditions = self::getComparisons($expr, $options['translation_fields']);
 
             $builder
-                ->innerJoin(
+                ->leftJoin(
                     sprintf('%s.translations', self::ENTITY_ALIAS),
                     self::TRANSLATION_ALIAS,
                     Expr\Join::WITH,
