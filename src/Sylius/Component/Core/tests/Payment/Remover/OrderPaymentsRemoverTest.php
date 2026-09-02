@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemover;
 use Sylius\Component\Core\Payment\Remover\OrderPaymentsRemoverInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
 final class OrderPaymentsRemoverTest extends TestCase
 {
@@ -72,6 +73,7 @@ final class OrderPaymentsRemoverTest extends TestCase
         $refundedPayment = $this->createMock(PaymentInterface::class);
         $unknownPayment = $this->createMock(PaymentInterface::class);
         $cartPayment->expects($this->once())->method('getState')->willReturn(PaymentInterface::STATE_CART);
+        $cartPayment->method('getPaymentRequests')->willReturn(new ArrayCollection());
         $authorizedPayment->expects($this->once())->method('getState')->willReturn(PaymentInterface::STATE_AUTHORIZED);
         $newPayment->expects($this->once())->method('getState')->willReturn(PaymentInterface::STATE_NEW);
         $processingPayment->expects($this->once())->method('getState')->willReturn(PaymentInterface::STATE_PROCESSING);
@@ -92,6 +94,29 @@ final class OrderPaymentsRemoverTest extends TestCase
             $unknownPayment,
         ]));
         $this->order->expects($this->once())->method('removePayment')->with($cartPayment);
+
+        $this->remover->removePayments($this->order);
+    }
+
+    public function testShouldNotRemoveCartPaymentClaimedByGateway(): void
+    {
+        $claimingPaymentRequest = $this->createMock(PaymentRequestInterface::class);
+        $claimingPaymentRequest->method('getAction')->willReturn(PaymentRequestInterface::ACTION_CAPTURE);
+        $claimingPaymentRequest->method('getState')->willReturn(PaymentRequestInterface::STATE_PROCESSING);
+
+        $claimedCartPayment = $this->createMock(PaymentInterface::class);
+        $claimedCartPayment->method('getState')->willReturn(PaymentInterface::STATE_CART);
+        $claimedCartPayment->method('getPaymentRequests')->willReturn(new ArrayCollection([$claimingPaymentRequest]));
+
+        $unclaimedCartPayment = $this->createMock(PaymentInterface::class);
+        $unclaimedCartPayment->method('getState')->willReturn(PaymentInterface::STATE_CART);
+        $unclaimedCartPayment->method('getPaymentRequests')->willReturn(new ArrayCollection());
+
+        $this->order->expects($this->once())->method('getPayments')->willReturn(new ArrayCollection([
+            $claimedCartPayment,
+            $unclaimedCartPayment,
+        ]));
+        $this->order->expects($this->once())->method('removePayment')->with($unclaimedCartPayment);
 
         $this->remover->removePayments($this->order);
     }
