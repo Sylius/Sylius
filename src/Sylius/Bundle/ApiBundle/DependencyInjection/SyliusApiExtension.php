@@ -40,6 +40,7 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
         $container->setParameter('sylius_api.order_states_to_filter_out', $config['order_states_to_filter_out']);
         $container->setParameter('sylius_api.serialization_groups.skip_adding_read_group', $config['serialization_groups']['skip_adding_read_group']);
         $container->setParameter('sylius_api.serialization_groups.skip_adding_index_and_show_groups', $config['serialization_groups']['skip_adding_index_and_show_groups']);
+        $container->setParameter('sylius_api.jwt.firewall_expectations', $config['jwt']['firewall_expectations']);
 
         $loader->load('services.xml');
 

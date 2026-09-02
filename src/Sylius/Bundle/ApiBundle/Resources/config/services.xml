@@ -190,6 +190,16 @@
         </service>
         <service id="sylius_api.listener.admin_authentication_success" alias="sylius.listener.admin_api_authentication_success_listener" />
 
+        <service id="sylius.listener.api_jwt_audience_listener" class="Sylius\Bundle\ApiBundle\EventListener\JwtAudienceListener">
+            <argument type="service" id="security.firewall.map" />
+            <argument type="service" id="request_stack" />
+            <argument type="service" id="logger" />
+            <argument>%sylius_api.jwt.firewall_expectations%</argument>
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_jwt_created" method="onJwtCreated" />
+            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_jwt_decoded" method="onJwtDecoded" />
+        </service>
+        <service id="sylius_api.listener.jwt_audience" alias="sylius.listener.api_jwt_audience_listener" />
+
         <service id="Sylius\Bundle\ApiBundle\Validator\ResourceInputDataPropertiesValidatorInterface" class="Sylius\Bundle\ApiBundle\Validator\ResourceApiInputDataPropertiesValidator">
             <argument type="service" id="validator" />
             <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
