@@ -17,6 +17,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -156,7 +157,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
     }
 
     #[Test]
-    public function it_does_not_create_a_payment_request_with_not_existent_action(): void
+    public function it_does_not_create_a_payment_request_with_an_action_not_supported_by_the_gateway(): void
     {
         $this->loadFixturesFromFiles([
             'authentication/shop_user.yaml',
@@ -178,7 +179,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
             content: json_encode([
                     'paymentId' => $payment->getId(),
                     'paymentMethodCode' => $payment->getMethod()->getCode(),
-                    'action' => 'invalid_action',
+                    'action' => PaymentRequestInterface::ACTION_AUTHORIZE,
                     'payload' => [
                         'target_path' => 'https://myshop.tld/target-path',
                         'after_path' => 'https://myshop.tld/after-path',
@@ -189,6 +190,47 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertResponseContainsViolations([
             ['propertyPath' => '', 'message' => sprintf('The payment request (method code: %s and payment id: %d) has no handler. Please choose another payment method.', $payment->getMethod()->getCode(), $payment->getId())],
         ]);
+    }
+
+    #[Test]
+    public function it_does_not_create_a_payment_request_with_an_action_not_allowed_from_the_shop(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $tokenValue = 'nAWw2jewpA';
+        $order = $this->placeOrder($tokenValue, 'oliver@doe.com');
+        $payment = $order->getLastPayment();
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/shop/orders/%s/payment-requests', $tokenValue),
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
+            content: json_encode([
+                    'paymentId' => $payment->getId(),
+                    'paymentMethodCode' => $payment->getMethod()->getCode(),
+                    'action' => PaymentRequestInterface::ACTION_REFUND,
+                    'payload' => [
+                        'target_path' => 'https://myshop.tld/target-path',
+                        'after_path' => 'https://myshop.tld/after-path',
+                    ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseContainsViolations([
+            ['propertyPath' => '', 'message' => 'The "refund" action is not allowed from the shop.'],
+        ]);
+
+        /** @var PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository */
+        $paymentRequestRepository = $this->get('sylius.repository.payment_request');
+
+        $this->assertEmpty($paymentRequestRepository->findAll());
     }
 
     #[Test]

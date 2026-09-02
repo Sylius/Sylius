@@ -38,6 +38,10 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
         $container->setParameter('sylius_api.order_states_to_filter_out', $config['order_states_to_filter_out']);
         $container->setParameter('sylius_api.operations_to_remove', $config['operations_to_remove']);
         $container->setParameter('sylius_api.jwt.firewall_expectations', $config['jwt']['firewall_expectations']);
+        $container->setParameter(
+            'sylius_api.shop_payment_request.allowed_actions',
+            $config['shop_payment_request']['allowed_actions'],
+        );
 
         $loader->load('services.xml');
 
