@@ -17,7 +17,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Resource\Model\TimestampableTrait;
 
-class Order implements OrderInterface
+class Order implements OrderInterface, ManipulateTotalInterface
 {
     use TimestampableTrait;
 
@@ -312,6 +312,24 @@ class Order implements OrderInterface
     public function canBeProcessed(): bool
     {
         return $this->state === self::STATE_CART;
+    }
+
+    /**
+    * @internal
+    */
+    public function increaseTotal(int $amount): void
+    {
+        $this->itemsTotal += $amount;
+        $this->recalculateTotal();
+    }
+
+    /**
+     * @internal
+     */
+    public function decreaseTotal(int $amount): void
+    {
+        $this->itemsTotal -= $amount;
+        $this->recalculateTotal();
     }
 
     /**

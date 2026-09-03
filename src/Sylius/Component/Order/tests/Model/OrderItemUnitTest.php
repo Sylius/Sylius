@@ -13,231 +13,157 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Order\Model;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Model\Adjustment;
+use Sylius\Component\Order\Model\Order;
+use Sylius\Component\Order\Model\OrderItem;
 use Sylius\Component\Order\Model\OrderItemUnit;
-use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 final class OrderItemUnitTest extends TestCase
 {
-    private MockObject&OrderItemInterface $orderItem;
-
-    private OrderItemUnit $orderItemUnit;
-
-    private AdjustmentInterface&MockObject $adjustment1;
-
-    private AdjustmentInterface&MockObject $adjustment2;
-
-    private AdjustmentInterface&MockObject $adjustment3;
-
-    protected function setUp(): void
-    {
-        $this->orderItem = $this->createMock(OrderItemInterface::class);
-        $this->orderItemUnit = new OrderItemUnit($this->orderItem);
-        $this->adjustment1 = $this->createMock(AdjustmentInterface::class);
-        $this->adjustment2 = $this->createMock(AdjustmentInterface::class);
-        $this->adjustment3 = $this->createMock(AdjustmentInterface::class);
-    }
-
-    public function testImplementsOrderItemUnitInterface(): void
-    {
-        $this->assertInstanceOf(OrderItemUnitInterface::class, $this->orderItemUnit);
-    }
-
     public function testTotalWhenThereAreNoAdjustments(): void
     {
-        $this->orderItem->expects($this->once())->method('getUnitPrice')->willReturn(1000);
+        $oi = new OrderItem();
+        $oi->setUnitPrice(400);
+        $oiu = new OrderItemUnit($oi);
 
-        $this->assertSame(1000, $this->orderItemUnit->getTotal());
+        $this->assertSame(400, $oiu->getTotal());
     }
 
     public function testIncludesNonNeutralAdjustmentsInTotal(): void
     {
-        $this->adjustment1->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment1->expects($this->atLeastOnce())->method('getAmount')->willReturn(400);
+        $adjustment = new Adjustment();
+        $adjustment->setNeutral(false);
+        $adjustment->setAmount(400);
 
-        $this->orderItem->expects($this->once())->method('getUnitPrice')->willReturn(1000);
-        $this->orderItem->expects($this->once())->method('recalculateUnitsTotal');
+        $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
+        $oiu = new OrderItemUnit($oi);
+        $oiu->addAdjustment($adjustment);
 
-        $this->adjustment1->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
-
-        $this->orderItemUnit->addAdjustment($this->adjustment1);
-
-        $this->assertSame(1400, $this->orderItemUnit->getTotal());
+        $this->assertSame(400, $oiu->getTotal());
+        $this->assertSame(400, $oi->getTotal());
+        $this->assertSame(400, $o->getTotal());
     }
 
     public function testReturns0AsTotalEvenWhenAdjustmentsDecreasesItBelow0(): void
     {
-        $this->adjustment1->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment1->expects($this->atLeastOnce())->method('getAmount')->willReturn(-1400);
+        $adjustment = new Adjustment();
+        $adjustment->setNeutral(false);
+        $adjustment->setAmount(-1400);
 
-        $this->orderItem->expects($this->once())->method('recalculateUnitsTotal');
+        $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
+        $oiu = new OrderItemUnit($oi);
+        $oiu->addAdjustment($adjustment);
 
-        $this->adjustment1->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
-
-        $this->orderItemUnit->addAdjustment($this->adjustment1);
-
-        $this->assertSame(0, $this->orderItemUnit->getTotal());
+        $this->assertSame(0, $oiu->getTotal());
+        $this->assertSame(0, $oi->getTotal());
+        $this->assertSame(0, $o->getTotal());
     }
 
     public function testAddsAndRemovesAdjustments(): void
     {
-        $this->orderItem->expects($this->atLeastOnce())->method('recalculateUnitsTotal');
+        $adjustment = new Adjustment();
 
-        $this->adjustment1->expects($this->atLeastOnce())->method('isNeutral')->willReturn(true);
-        $this->adjustment1->expects($this->once())->method('isLocked')->willReturn(false);
+        $oi = new OrderItem();
+        $oi->setOrder(new Order());
+        $oiu = new OrderItemUnit($oi);
 
-        $callIndex = 0;
-        $this->adjustment1
-            ->expects($this->exactly(2))
-            ->method('setAdjustable')
-            ->with($this->callback(function ($arg) use (&$callIndex) {
-                if ($callIndex === 0) {
-                    $this->assertSame($this->orderItemUnit, $arg);
-                } elseif ($callIndex === 1) {
-                    $this->assertNull($arg);
-                }
-                ++$callIndex;
+        $oiu->addAdjustment($adjustment);
+        $this->assertTrue($oiu->hasAdjustment($adjustment));
 
-                return true;
-            }));
-
-        $this->orderItemUnit->addAdjustment($this->adjustment1);
-        $this->assertTrue($this->orderItemUnit->hasAdjustment($this->adjustment1));
-
-        $this->orderItemUnit->removeAdjustment($this->adjustment1);
-        $this->assertFalse($this->orderItemUnit->hasAdjustment($this->adjustment1));
+        $oiu->removeAdjustment($adjustment);
+        $this->assertFalse($oiu->hasAdjustment($adjustment));
     }
 
     public function testDoesNotRemoveAdjustmentWhenItIsLocked(): void
     {
-        $this->orderItem->expects($this->once())->method('recalculateUnitsTotal');
+        $adjustment = new Adjustment();
 
-        $this->adjustment1->expects($this->atLeastOnce())->method('isNeutral')->willReturn(true);
-        $this->adjustment1->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
+        $oi = new OrderItem();
+        $oi->setOrder(new Order());
+        $oiu = new OrderItemUnit($oi);
+        $oiu->addAdjustment($adjustment);
 
-        $this->orderItemUnit->addAdjustment($this->adjustment1);
-        $this->assertTrue($this->orderItemUnit->hasAdjustment($this->adjustment1));
+        $adjustment->lock();
+        $this->assertTrue($oiu->hasAdjustment($adjustment));
 
-        $this->adjustment1->expects($this->once())->method('isLocked')->willReturn(true);
-
-        $this->orderItemUnit->removeAdjustment($this->adjustment1);
-        $this->assertTrue($this->orderItemUnit->hasAdjustment($this->adjustment1));
+        $oiu->removeAdjustment($adjustment);
+        $this->assertTrue($oiu->hasAdjustment($adjustment));
     }
 
     public function testHasCorrectTotalAfterAdjustmentAddAndRemove(): void
     {
-        $this->orderItem->expects($this->exactly(2))->method('getUnitPrice')->willReturn(1000);
-        $this->orderItem->expects($this->exactly(4))->method('recalculateUnitsTotal');
+        $adjustment1 = new Adjustment();
+        $adjustment1->setAmount(100);
 
-        $this->adjustment1->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment1->expects($this->atLeastOnce())->method('isLocked')->willReturn(false);
-        $this->adjustment1->expects($this->atLeastOnce())->method('getAmount')->willReturn(100);
+        $adjustment2 = new Adjustment();
+        $adjustment2->setAmount(50);
 
-        $callIndex = 0;
-        $this->adjustment1
-            ->expects($this->exactly(2))
-            ->method('setAdjustable')
-            ->with($this->callback(function ($arg) use (&$callIndex) {
-                if ($callIndex === 0) {
-                    $this->assertSame($this->orderItemUnit, $arg);
-                } elseif ($callIndex === 1) {
-                    $this->assertNull($arg);
-                }
-                ++$callIndex;
+        $adjustment3 = new Adjustment();
+        $adjustment3->setAmount(250);
 
-                return true;
-            }));
+        $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
+        $oi->setUnitPrice(1000);
+        $oiu = new OrderItemUnit($oi);
 
-        $this->adjustment2->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment2->expects($this->atLeastOnce())->method('getAmount')->willReturn(50);
-        $this->adjustment2->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
+        $oiu->addAdjustment($adjustment1);
+        $oiu->addAdjustment($adjustment2);
+        $this->assertSame(1000 + 100 + 50, $oiu->getTotal());
+        $this->assertSame(1000 + 100 + 50, $oi->getTotal());
+        $this->assertSame(1000 + 100 + 50, $o->getTotal());
 
-        $this->adjustment3->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment3->expects($this->atLeastOnce())->method('getAmount')->willReturn(250);
-        $this->adjustment3->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
-
-        $this->orderItemUnit->addAdjustment($this->adjustment1);
-        $this->orderItemUnit->addAdjustment($this->adjustment2);
-
-        $this->assertSame(1000 + 100 + 50, $this->orderItemUnit->getTotal());
-
-        $this->orderItemUnit->addAdjustment($this->adjustment3);
-        $this->orderItemUnit->removeAdjustment($this->adjustment1);
-
-        $this->assertSame(1000 + 50 + 250, $this->orderItemUnit->getTotal());
+        $oiu->addAdjustment($adjustment3);
+        $oiu->removeAdjustment($adjustment1);
+        $this->assertSame(1000 + 50 + 250, $oiu->getTotal());
+        $this->assertSame(1000 + 50 + 250, $oi->getTotal());
+        $this->assertSame(1000 + 50 + 250, $o->getTotal());
     }
 
     public function testHasCorrectTotalAfterNeutralAdjustmentAddAndRemove(): void
     {
-        $this->orderItem->expects($this->exactly(2))->method('getUnitPrice')->willReturn(1000);
-        $this->orderItem->expects($this->exactly(2))->method('recalculateUnitsTotal');
+        $adjustment = new Adjustment();
+        $adjustment->setNeutral(true);
+        $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
+        $oi->setUnitPrice(1000);
+        $oiu = new OrderItemUnit($oi);
 
-        $this->adjustment1->expects($this->atLeastOnce())->method('isNeutral')->willReturn(true);
-        $this->adjustment1->expects($this->atLeastOnce())->method('isLocked')->willReturn(false);
+        $oiu->addAdjustment($adjustment);
+        $this->assertSame(1000, $oiu->getTotal());
+        $this->assertSame(1000, $oi->getTotal());
+        $this->assertSame(1000, $o->getTotal());
 
-        $callIndex = 0;
-        $this->adjustment1
-            ->expects($this->exactly(2))
-            ->method('setAdjustable')
-            ->with($this->callback(function ($arg) use (&$callIndex) {
-                if ($callIndex === 0) {
-                    $this->assertSame($this->orderItemUnit, $arg);
-                } elseif ($callIndex === 1) {
-                    $this->assertNull($arg);
-                }
-                ++$callIndex;
-
-                return true;
-            }));
-
-        $this->orderItemUnit->addAdjustment($this->adjustment1);
-        $this->assertSame(1000, $this->orderItemUnit->getTotal());
-
-        $this->orderItemUnit->removeAdjustment($this->adjustment1);
-        $this->assertSame(1000, $this->orderItemUnit->getTotal());
+        $oiu->removeAdjustment($adjustment);
+        $this->assertSame(1000, $oiu->getTotal());
+        $this->assertSame(1000, $oi->getTotal());
+        $this->assertSame(1000, $o->getTotal());
     }
 
     public function testHasProperTotalAfterOrderItemUnitPriceChange(): void
     {
-        $this->orderItem->expects($this->exactly(2))->method('recalculateUnitsTotal');
+        $adjustment = new Adjustment();
+        $adjustment->setAmount(50);
+        $oi = new OrderItem();
+        $o = new Order();
+        $oi->setOrder($o);
+        $oi->setUnitPrice(1000);
+        $oiu = new OrderItemUnit($oi);
 
-        $this->adjustment1->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment1->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
-        $this->adjustment1->expects($this->atLeastOnce())->method('getAmount')->willReturn(100);
+        $oiu->addAdjustment($adjustment);
+        $this->assertSame(1050, $oiu->getTotal());
+        $this->assertSame(1050, $oi->getTotal());
+        $this->assertSame(1050, $o->getTotal());
 
-        $this->adjustment2->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment2->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
-        $this->adjustment2->expects($this->atLeastOnce())->method('getAmount')->willReturn(50);
-
-        $this->orderItemUnit->addAdjustment($this->adjustment1);
-        $this->orderItemUnit->addAdjustment($this->adjustment2);
-
-        $this->orderItem->expects($this->once())->method('getUnitPrice')->willReturn(500);
-
-        $this->assertSame(650, $this->orderItemUnit->getTotal());
-    }
-
-    public function testRecalculatesTotalProperlyAfterAdjustmentAmountChange(): void
-    {
-        $this->orderItem->expects($this->once())->method('getUnitPrice')->willReturn(1000);
-        $this->orderItem->expects($this->exactly(2))->method('recalculateUnitsTotal');
-
-        $this->adjustment1->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment1->expects($this->atLeastOnce())->method('getAmount')->willReturn(100);
-        $this->adjustment1->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
-
-        $this->adjustment2->expects($this->atLeastOnce())->method('isNeutral')->willReturn(false);
-        $this->adjustment2->expects($this->atLeastOnce())->method('getAmount')->willReturn(150);
-        $this->adjustment2->expects($this->once())->method('setAdjustable')->with($this->orderItemUnit);
-
-        $this->orderItemUnit->addAdjustment($this->adjustment1);
-        $this->orderItemUnit->addAdjustment($this->adjustment2);
-
-        $this->orderItemUnit->recalculateAdjustmentsTotal();
-
-        $this->assertSame(1000 + 100 + 150, $this->orderItemUnit->getTotal());
+        $oi->setUnitPrice(500);
+        $this->assertSame(550, $oiu->getTotal());
+        $this->assertSame(550, $oi->getTotal());
+        $this->assertSame(550, $o->getTotal());
     }
 }
