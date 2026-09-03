@@ -15,7 +15,9 @@ namespace Sylius\Bundle\ShopBundle\Twig\Component\Product;
 
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactoryInterface;
+use Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent as CartFormComponent;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductLivePropTrait;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\Trait\ProductVariantLivePropTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
@@ -34,6 +36,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -58,12 +61,17 @@ class AddToCartFormComponent
 
     public const SYLIUS_SHOP_VARIANT_CHANGED = 'sylius:shop:variant_changed';
 
+    public const SYLIUS_SHOP_PRODUCT_ADDED_TO_CART = 'sylius:shop:product_added_to_cart';
+
     #[LiveProp]
     public string $routeName = 'sylius_shop_cart_summary';
 
     /** @var array<string, mixed> */
     #[LiveProp]
     public array $routeParameters = [];
+
+    #[LiveProp]
+    public bool $redirect = true;
 
     /**
      * @param CartItemFactoryInterface<OrderItem> $cartItemFactory
@@ -118,20 +126,41 @@ class AddToCartFormComponent
         ?string $idRouteParameter = null,
         #[LiveArg]
         bool $addFlashMessage = true,
-    ): RedirectResponse {
+    ): ?Response {
         $this->submitForm();
+        /** @var AddToCartCommandInterface $addToCartCommand */
         $addToCartCommand = $this->getForm()->getData();
 
         $this->eventDispatcher->dispatch(new GenericEvent($addToCartCommand), SyliusCartEvents::CART_ITEM_ADD);
         $this->manager->persist($addToCartCommand->getCart());
         $this->manager->flush();
 
+        $cartId = $addToCartCommand->getCart()->getId();
+
+        if (!$this->redirect) {
+            $this->emit(
+                CartFormComponent::SYLIUS_SHOP_CART_CHANGED,
+                ['cartId' => $cartId],
+            );
+
+            $this->dispatchBrowserEvent(
+                self::SYLIUS_SHOP_PRODUCT_ADDED_TO_CART,
+                [
+                    'productId' => $this->product?->getId(),
+                    'variantId' => $this->variant?->getId(),
+                    'quantity' => $addToCartCommand->getCartItem()->getQuantity(),
+                ],
+            );
+
+            return null;
+        }
+
         if ($addFlashMessage) {
             FlashBagProvider::getFlashBag($this->requestStack)->add('success', 'sylius.cart.add_item');
         }
 
         if ($idRouteParameter !== null) {
-            $routeParameters[$idRouteParameter] = $addToCartCommand->getCart()->getId();
+            $routeParameters[$idRouteParameter] = $cartId;
         }
 
         return new RedirectResponse($this->router->generate(

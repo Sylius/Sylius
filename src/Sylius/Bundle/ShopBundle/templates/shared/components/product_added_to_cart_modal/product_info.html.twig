@@ -1,0 +1,27 @@
+{% set product = hookable_metadata.context.product %}
+{% set variant = hookable_metadata.context.variant %}
+
+<div class="d-flex align-items-center gap-4">
+    <div class="flex-shrink-0" style="width: 6rem;">
+        <div class="overflow-hidden bg-light rounded-3" style="aspect-ratio: 3/4;">
+            {{ component('sylius_shop:main_image', {
+                product: (variant is not null and variant.hasImages) ? variant : product,
+                class: 'w-100 h-100 object-fit-cover',
+                filter: 'sylius_shop_product_small_thumbnail'
+            }) }}
+        </div>
+    </div>
+    <div class="flex-grow-1">
+        <div class="h6 mb-2" {{ sylius_test_html_attribute('product-name') }}>{{ product.name }}</div>
+        {% if variant is not null and variant.name is not null %}
+            <div class="text-body-tertiary small mb-2" {{ sylius_test_html_attribute('variant-name') }}>
+                {{ variant.name }}
+            </div>
+        {% endif %}
+        {% if variant is not null %}
+            <div {{ sylius_test_html_attribute('product-price') }}>
+                {{ component('sylius_shop:product:price', { variant: variant, template: '@SyliusShop/product/common/price.html.twig' }) }}
+            </div>
+        {% endif %}
+    </div>
+</div>
