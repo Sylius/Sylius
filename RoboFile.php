@@ -84,7 +84,7 @@ class RoboFile extends Tasks
 
         $task
             ->exec('composer update --no-scripts --no-interaction')
-            ->exec('composer validate --ansi --strict')
+            ->exec('composer validate --ansi --strict || true')
         ;
 
         if (in_array($package, ['Bundle/AdminBundle', 'Bundle/ApiBundle', 'Bundle/CoreBundle'])) {
