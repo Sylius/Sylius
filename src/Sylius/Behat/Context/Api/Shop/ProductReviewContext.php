@@ -21,6 +21,7 @@ use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 final class ProductReviewContext implements Context
@@ -132,7 +133,7 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation(): void
     {
-        // Intentionally left blank
+        Assert::same($this->client->getLastResponse()->getStatusCode(), Response::HTTP_CREATED);
     }
 
     /**
