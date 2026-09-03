@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Mailer;
 
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\CoreBundle\Mailer\ResetPasswordEmailManagerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\AdminUser;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -32,6 +35,15 @@ final class ResetPasswordEmailManagerTest extends KernelTestCase
     protected function setUp(): void
     {
         $container = self::getContainer();
+
+        /** @var ChannelInterface&MockObject $channel */
+        $channel = $this->createMock(ChannelInterface::class);
+        $channel->method('getHostname')->willReturn(null);
+        /** @var ChannelContextInterface&MockObject $channelContext */
+        $channelContext = $this->createMock(ChannelContextInterface::class);
+        $channelContext->method('getChannel')->willReturn($channel);
+
+        $container->set('sylius.context.channel', $channelContext);
 
         $this->resetPasswordEmailManager = $container->get(ResetPasswordEmailManagerInterface::class);
 
