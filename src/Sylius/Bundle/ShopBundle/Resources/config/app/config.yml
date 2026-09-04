@@ -29,7 +29,7 @@ sylius_grid:
 
 sylius_shop:
     checkout_resolver:
-        pattern: "%sylius.security.shop_regex%/checkout/.+"
+        pattern: "^/([^/]+/)?checkout/.+"
         route_map:
             empty_order:
                 route: sylius_shop_cart_summary
