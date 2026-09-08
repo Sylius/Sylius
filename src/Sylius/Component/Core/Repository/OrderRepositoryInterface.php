@@ -35,6 +35,13 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      */
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder;
 
+    public function createGridListQueryBuilder(): QueryBuilder;
+
+    /**
+     * @param array<string, mixed>|null $criteria
+     */
+    public function createCriteriaAwareGridListQueryBuilder(?array $criteria): QueryBuilder;
+
     /**
      * @param array<string, mixed>|null $criteria
      */
