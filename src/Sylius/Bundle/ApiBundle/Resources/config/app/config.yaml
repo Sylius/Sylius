@@ -19,6 +19,9 @@ parameters:
     sylius.security.api_shop_account_regex: "^%sylius.security.api_shop_account_route%"
 
 sylius_api:
+    endpoints:
+        admin_enabled: true
+        shop_enabled: true
     filter_eager_loading_extension:
         restricted_resources:
             '%sylius.model.product.class%':
