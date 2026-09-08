@@ -37,6 +37,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.product_review.class%</argument>
             <argument>Sylius\Bundle\ShopBundle\Form\Type\Product\ProductReviewType</argument>
+            <argument type="service" id="sylius.factory.product_review" />
 
             <tag name="sylius.live_component.shop" key="sylius_shop:product_review:form" />
         </service>

@@ -25,6 +25,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.promotion_coupon.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\PromotionCouponType</argument>
+            <argument type="service" id="sylius.factory.promotion_coupon" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:promotion_coupon:form" />
         </service>

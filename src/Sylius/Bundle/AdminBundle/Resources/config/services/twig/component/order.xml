@@ -34,6 +34,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.order.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\OrderType</argument>
+            <argument type="service" id="sylius.factory.order" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:order:form" />
         </service>

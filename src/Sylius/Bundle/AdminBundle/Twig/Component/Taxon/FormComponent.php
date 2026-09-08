@@ -19,6 +19,7 @@ use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
@@ -38,6 +39,7 @@ class FormComponent
      * @param RepositoryInterface<TaxonInterface> $repository
      * @param class-string $resourceClass
      * @param class-string $formClass
+     * @param FactoryInterface<TaxonInterface>|null $factory
      */
     public function __construct(
         RepositoryInterface $repository,
@@ -45,8 +47,9 @@ class FormComponent
         string $resourceClass,
         string $formClass,
         protected readonly TaxonSlugGeneratorInterface $slugGenerator,
+        ?FactoryInterface $factory = null,
     ) {
-        $this->initialize($repository, $formFactory, $resourceClass, $formClass);
+        $this->initialize($repository, $formFactory, $resourceClass, $formClass, $factory);
     }
 
     #[LiveAction]

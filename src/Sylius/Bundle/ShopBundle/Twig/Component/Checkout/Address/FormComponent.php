@@ -24,6 +24,7 @@ use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -46,6 +47,7 @@ class FormComponent
     /**
      * @param OrderRepositoryInterface<OrderInterface> $repository
      * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
+     * @param FactoryInterface<OrderInterface>|null $factory
      */
     public function __construct(
         OrderRepositoryInterface $repository,
@@ -57,8 +59,9 @@ class FormComponent
         protected readonly AddressRepositoryInterface $addressRepository,
         /** @var iterable<AddressFormValuesModifierInterface> */
         protected readonly ?iterable $addressFormValuesModifiers = null,
+        ?FactoryInterface $factory = null,
     ) {
-        $this->initialize($repository, $formFactory, $resourceClass, $formClass);
+        $this->initialize($repository, $formFactory, $resourceClass, $formClass, $factory);
         if (null === $this->addressFormValuesModifiers) {
             trigger_deprecation(
                 'sylius/shop-bundle',

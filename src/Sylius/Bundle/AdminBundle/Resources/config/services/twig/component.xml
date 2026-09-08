@@ -25,6 +25,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.admin_user.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\AdminUserType</argument>
+            <argument type="service" id="sylius.factory.admin_user" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:admin_user:form" />
         </service>
@@ -37,6 +38,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.catalog_promotion.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType</argument>
+            <argument type="service" id="sylius.factory.catalog_promotion" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:catalog_promotion:form" />
         </service>
@@ -49,6 +51,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.channel.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ChannelType</argument>
+            <argument type="service" id="sylius.factory.channel" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:channel:form" />
         </service>
@@ -61,6 +64,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.country.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\CountryType</argument>
+            <argument type="service" id="sylius.factory.country" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:country:form" />
         </service>
@@ -73,6 +77,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.currency.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\CurrencyType</argument>
+            <argument type="service" id="sylius.factory.currency" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:currency:form" />
         </service>
@@ -85,6 +90,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.customer.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\CustomerType</argument>
+            <argument type="service" id="sylius.factory.customer" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:customer:form" />
         </service>
@@ -97,6 +103,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.customer_group.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\CustomerGroupType</argument>
+            <argument type="service" id="sylius.factory.customer_group" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:customer_group:form" />
         </service>
@@ -109,6 +116,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.exchange_rate.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ExchangeRateType</argument>
+            <argument type="service" id="sylius.factory.exchange_rate" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:exchange_rate:form" />
         </service>
@@ -121,6 +129,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.locale.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\LocaleType</argument>
+            <argument type="service" id="sylius.factory.locale" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:locale:form" />
         </service>
@@ -133,6 +142,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.payment_method.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType</argument>
+            <argument type="service" id="sylius.factory.payment_method" />
 
             <tag name="sylius.twig_component" key="sylius_admin:payment_method:form" />
         </service>
@@ -145,6 +155,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.product.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductGenerateVariantsType</argument>
+            <argument type="service" id="sylius.factory.product" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:product:generate_product_variants_form" />
         </service>
@@ -157,6 +168,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.product_association_type.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductAssociationTypeType</argument>
+            <argument type="service" id="sylius.factory.product_association_type" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:product_association_type:form" />
         </service>
@@ -169,6 +181,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.product_review.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ProductReviewType</argument>
+            <argument type="service" id="sylius.factory.product_review" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:product_review:form" />
         </service>
@@ -181,6 +194,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.promotion.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\PromotionType</argument>
+            <argument type="service" id="sylius.factory.promotion" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:promotion:form" />
         </service>
@@ -193,6 +207,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.shipping_category.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ShippingCategoryType</argument>
+            <argument type="service" id="sylius.factory.shipping_category" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:shipping_category:form" />
         </service>
@@ -205,6 +220,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.shipping_method.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType</argument>
+            <argument type="service" id="sylius.factory.shipping_method" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:shipping_method:form" />
         </service>
@@ -217,6 +233,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.tax_category.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\TaxCategoryType</argument>
+            <argument type="service" id="sylius.factory.tax_category" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:tax_category:form" />
         </service>
@@ -229,6 +246,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.tax_rate.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\TaxRateType</argument>
+            <argument type="service" id="sylius.factory.tax_rate" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:tax_rate:form" />
         </service>

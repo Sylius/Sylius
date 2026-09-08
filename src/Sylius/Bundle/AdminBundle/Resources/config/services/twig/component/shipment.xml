@@ -25,6 +25,7 @@
             <argument type="service" id="form.factory" />
             <argument>%sylius.model.shipment.class%</argument>
             <argument>Sylius\Bundle\AdminBundle\Form\Type\ShipmentShipType</argument>
+            <argument type="service" id="sylius.factory.shipment" />
 
             <tag name="sylius.live_component.admin" key="sylius_admin:shipment:ship_form" />
         </service>

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\UiBundle\Twig\Component;
 
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Resource\Model\ResourceInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -44,6 +45,9 @@ trait ResourceFormComponentTrait
     /** @var class-string */
     protected string $formClass;
 
+    /** @var FactoryInterface<T>|null */
+    protected ?FactoryInterface $factory = null;
+
     /** @return T|null */
     public function hydrateResource(mixed $value): ?ResourceInterface
     {
@@ -62,6 +66,7 @@ trait ResourceFormComponentTrait
 
     /**
      * @param RepositoryInterface<T> $repository
+     * @param FactoryInterface<T>|null $factory
      *
      * @phpstan-return void
      */
@@ -70,11 +75,13 @@ trait ResourceFormComponentTrait
         FormFactoryInterface $formFactory,
         string $resourceClass,
         string $formClass,
+        ?FactoryInterface $factory = null,
     ) {
         $this->repository = $repository;
         $this->formFactory = $formFactory;
         $this->resourceClass = $resourceClass;
         $this->formClass = $formClass;
+        $this->factory = $factory;
     }
 
     protected function instantiateForm(): FormInterface
@@ -85,6 +92,6 @@ trait ResourceFormComponentTrait
     /** @return T */
     protected function createResource(): ResourceInterface
     {
-        return new $this->resourceClass();
+        return $this->factory?->createNew() ?? new $this->resourceClass();
     }
 }
