@@ -267,7 +267,7 @@
    `Sylius\Component\Payment\Encryption\GatewayConfigEncrypter` and
    `Sylius\Component\Payment\Encryption\PaymentRequestEncrypter` (`$allowedClasses` and `$strictMode`).
 
-### Grid providers are now configurable
+## Grid providers are now configurable
 
 As part of the ongoing modernization of the Grid component, Sylius now provides grid definitions in both **YAML** and **PHP**.
 
@@ -292,7 +292,7 @@ You can configure the format globally:
 ```yaml
 sylius_core:
     grid:
-        use_legacy_config: true # Use YAML grid definitions globally (default: false)
+        use_legacy_config: true # Use YAML grid definitions globally (default: true)
 ```
 
 Or override the format for individual grids:
@@ -315,13 +315,22 @@ This makes it possible to migrate grids incrementally rather than converting you
 
 To simplify the conversion process, you can use the community-maintained Grid configuration converter:
 
-* [Grid Config Converter](https://github.com/mamazu/grid-config-converter?utm_source=chatgpt.com)
+* [Grid Config Converter](https://github.com/mamazu/grid-config-converter)
 
 The converter can help bootstrap the migration from YAML to PHP and reduce the amount of manual work required.
 
+### Customising a grid
+
+A grid can only come from one source, so a YAML override of a Sylius grid stops being applied once that
+grid is served from PHP. To customise a grid regardless of the format it is defined in, use a grid
+mutator. It is applied whichever provider serves the grid.
+
 ### Learn more
 
-For a complete overview of the Grid component, see the [Grid documentation](https://stack.sylius.com/grid/index).
+For a complete overview of the Grid component, see the [Grid documentation](https://stack.sylius.com/grid/index):
+
+* [Grid mutators](https://stack.sylius.com/grid/index/mutators)
+* [Creating a grid in PHP](https://stack.sylius.com/grid/index/your_first_grid)
 
 ## Installer
 
