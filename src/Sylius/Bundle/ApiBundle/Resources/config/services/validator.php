@@ -236,6 +236,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.payment_method'),
             service('sylius.command_provider.payment_request.default'),
             service('sylius.provider.payment_request.gateway_factory_name'),
+            '%sylius_api.shop_payment_request.allowed_actions%',
         ])
         ->tag('validator.constraint_validator', ['alias' => 'sylius_api_chosen_payment_request_action_eligibility'])
     ;

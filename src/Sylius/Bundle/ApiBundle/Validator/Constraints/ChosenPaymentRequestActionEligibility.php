@@ -25,6 +25,9 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
     /** @deprecated since Sylius 2.3, use $notExistMessage instead. It will be removed in Sylius 3.0. */
     public string $notExist = 'sylius.payment_method.not_exist';
 
+    /** @deprecated since Sylius 2.3, use $notAllowedMessage instead. It will be removed in Sylius 3.0. */
+    public string $notAllowed = 'sylius.payment_request.action_not_allowed';
+
     /**
      * @param array<string, mixed>|null $options
      */
@@ -33,8 +36,10 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
         ?array $options = null,
         public string $notAvailableMessage = 'sylius.payment_request.action_not_available',
         public string $notExistMessage = 'sylius.payment_method.not_exist',
+        public string $notAllowedMessage = 'sylius.payment_request.action_not_allowed',
         ?string $notAvailable = null,
         ?string $notExist = null,
+        ?string $notAllowed = null,
         ?array $groups = null,
         mixed $payload = null,
     ) {
@@ -48,8 +53,10 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
 
             $this->notAvailableMessage = $options['notAvailableMessage'] ?? $this->notAvailableMessage;
             $this->notExistMessage = $options['notExistMessage'] ?? $this->notExistMessage;
+            $this->notAllowedMessage = $options['notAllowedMessage'] ?? $this->notAllowedMessage;
             $notAvailable ??= $options['notAvailable'] ?? null;
             $notExist ??= $options['notExist'] ?? null;
+            $notAllowed ??= $options['notAllowed'] ?? null;
             $groups ??= $options['groups'] ?? null;
             $payload ??= $options['payload'] ?? null;
         }
@@ -76,9 +83,21 @@ final class ChosenPaymentRequestActionEligibility extends Constraint
             $this->notExistMessage = $notExist;
         }
 
+        if (null !== $notAllowed) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'The "notAllowed" option of the "%s" constraint is deprecated and will be removed in Sylius 3.0, use "notAllowedMessage" instead.',
+                static::class,
+            );
+
+            $this->notAllowedMessage = $notAllowed;
+        }
+
         parent::__construct(groups: $groups, payload: $payload);
         $this->notAvailable = $this->notAvailableMessage;
         $this->notExist = $this->notExistMessage;
+        $this->notAllowed = $this->notAllowedMessage;
     }
 
     public function validatedBy(): string

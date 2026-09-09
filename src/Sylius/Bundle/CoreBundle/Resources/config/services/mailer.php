@@ -67,7 +67,12 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.mailer.reset_password_email_manager', ResetPasswordEmailManager::class)
         ->public()
-        ->args([service('sylius.email_sender')])
+        ->args([
+            service('sylius.email_sender'),
+            service('router'),
+            service('sylius.context.channel'),
+            '%sylius.unsecured_urls%',
+        ])
     ;
     $services->alias(ResetPasswordEmailManagerInterface::class, 'sylius.mailer.reset_password_email_manager')->public();
 

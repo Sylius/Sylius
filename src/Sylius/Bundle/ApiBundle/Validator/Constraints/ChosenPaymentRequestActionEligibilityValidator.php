@@ -26,11 +26,13 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
 {
     /**
      * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
+     * @param list<string> $shopAllowedActions
      */
     public function __construct(
         private PaymentMethodRepositoryInterface $paymentMethodRepository,
         private ServiceProviderAwareCommandProviderInterface $gatewayFactoryCommandProvider,
         private GatewayFactoryNameProviderInterface $gatewayFactoryNameProvider,
+        private array $shopAllowedActions = [],
     ) {
     }
 
@@ -42,6 +44,12 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
         Assert::isInstanceOf($constraint, ChosenPaymentRequestActionEligibility::class);
 
         if (null === $value->action) {
+            return;
+        }
+
+        if (!in_array($value->action, $this->shopAllowedActions, true)) {
+            $this->context->addViolation($constraint->notAllowedMessage, ['%action%' => $value->action]);
+
             return;
         }
 

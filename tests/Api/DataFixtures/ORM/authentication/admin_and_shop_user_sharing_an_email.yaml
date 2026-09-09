@@ -1,0 +1,24 @@
+Sylius\Component\Core\Model\AdminUser:
+    admin_sharing_an_email:
+        plainPassword: sylius
+        roles: [ROLE_API_ACCESS]
+        enabled: true
+        email: shared@example.com
+        username: shared
+        localeCode: en
+
+Sylius\Component\Core\Model\Customer:
+    customer_sharing_an_email:
+        firstName: "Shared"
+        lastName: "Doe"
+        email: "shared@example.com"
+        emailCanonical: "shared@example.com"
+
+Sylius\Component\Core\Model\ShopUser:
+    shop_user_sharing_an_email:
+        plainPassword: "sylius"
+        roles: [ROLE_USER]
+        enabled: true
+        customer: "@customer_sharing_an_email"
+        username: "shared@example.com"
+        usernameCanonical: "shared@example.com"

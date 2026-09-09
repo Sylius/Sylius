@@ -30,6 +30,7 @@ use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener;
 use Sylius\Bundle\ApiBundle\EventListener\ApiCartBlamerListener;
 use Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener;
+use Sylius\Bundle\ApiBundle\EventListener\JwtAudienceListener;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapper;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapperInterface;
 use Sylius\Bundle\ApiBundle\Modifier\OrderAddressModifier;
@@ -131,5 +132,17 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius_api.listener.admin_authentication_success', AdminAuthenticationSuccessListener::class)
         ->args([service('api_platform.symfony.iri_converter')])
         ->tag('kernel.event_listener', ['event' => 'lexik_jwt_authentication.on_authentication_success', 'method' => 'onAuthenticationSuccessResponse'])
+    ;
+
+    $services
+        ->set('sylius_api.listener.jwt_audience', JwtAudienceListener::class)
+        ->args([
+            service('security.firewall.map'),
+            service('request_stack'),
+            service('logger'),
+            '%sylius_api.jwt.firewall_expectations%',
+        ])
+        ->tag('kernel.event_listener', ['event' => 'lexik_jwt_authentication.on_jwt_created', 'method' => 'onJwtCreated'])
+        ->tag('kernel.event_listener', ['event' => 'lexik_jwt_authentication.on_jwt_decoded', 'method' => 'onJwtDecoded'])
     ;
 };
