@@ -27,6 +27,17 @@ sylius:
                 format: Format
             date:
                 format: Format
+            date_format:
+                default: Default
+                none: None
+                short: Short
+                medium: Medium
+                long: Long
+                full: Full
+                relative_short: Relative short
+                relative_medium: Relative medium
+                relative_long: Relative long
+                relative_full: Relative full
             select:
                 multiple: Multiple
                 values: Values

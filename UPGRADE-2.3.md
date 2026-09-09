@@ -471,6 +471,18 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    - `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`
    - `Sylius\Bundle\CoreBundle\Validator\Constraints\CannotRevokeOwnAdministrationAccess`
 
+4. The `format` configuration of `date` and `datetime` attributes is now validated by the new
+   `Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidDateAttributeConfiguration` constraint.
+
+   It is rendered through Twig's `format_date` / `format_datetime` filters, so it only accepts the formats supported
+   by `IntlDateFormatter`, listed in `ValidDateAttributeConfiguration::AVAILABLE_FORMATS`. Any other value
+   (e.g. a PHP `date()` format such as `Y-m-d`) used to be accepted on save and then threw a `Twig\Error\RuntimeError`
+   when the product was displayed, it is now rejected with a validation error.
+
+   Existing attributes configured with an unsupported format keep their stored value, but the shop and admin product
+   pages no longer render it, they fall back to the default format instead. Reconfigure such attributes with one of
+   the supported formats.
+
 ## Admin users
 
 1. Admin users have two independent **access levels**, both backed by roles:
@@ -538,6 +550,16 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 6. The `sylius_admin_user` form type (`Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType`) has two new checkbox
    fields, `administrationAccess` and `apiAccess`, rendered by the `access_levels` form section. If you have overridden
    the admin user form template, add them to your own layout.
+
+## Attributes
+
+1. The `format` field of `Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DateAttributeConfigurationType`
+   and `DatetimeAttributeConfigurationType` has been changed from `TextType` to `ChoiceType`, limited to the formats
+   supported by `IntlDateFormatter`. The submitted and stored value is unchanged, so no data migration is needed.
+
+2. `@SyliusAttribute/Types/date.html.twig` and `@SyliusAttribute/Types/datetime.html.twig` now fall back to the default
+   format when `configuration['format']` is empty instead of passing the empty string to `format_date` / `format_datetime`,
+   which threw a `Twig\Error\RuntimeError`.
 
 ## Payment
 

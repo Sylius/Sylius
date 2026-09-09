@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
+use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidDateAttributeConfiguration;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class DatetimeAttributeConfigurationType extends AbstractType
@@ -22,9 +23,12 @@ final class DatetimeAttributeConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('format', TextType::class, [
+            ->add('format', ChoiceType::class, [
                 'label' => 'sylius.form.attribute_type_configuration.datetime.format',
                 'required' => false,
+                'placeholder' => 'sylius.form.attribute_type_configuration.date_format.default',
+                'choices' => ValidDateAttributeConfiguration::AVAILABLE_FORMATS,
+                'choice_label' => fn (string $format): string => sprintf('sylius.form.attribute_type_configuration.date_format.%s', $format),
             ])
         ;
     }
