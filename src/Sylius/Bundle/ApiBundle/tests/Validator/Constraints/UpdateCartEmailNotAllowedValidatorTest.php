@@ -28,6 +28,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class UpdateCartEmailNotAllowedValidatorTest extends TestCase
@@ -144,6 +145,8 @@ final class UpdateCartEmailNotAllowedValidatorTest extends TestCase
         $customerMock = $this->createMock(CustomerInterface::class);
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $violationBuilderMock */
+        $violationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         /** @var OrderInterface|MockObject $orderMock */
         $orderMock = $this->createMock(OrderInterface::class);
         /** @var ShopUserInterface|MockObject $shopUserMock */
@@ -170,8 +173,17 @@ final class UpdateCartEmailNotAllowedValidatorTest extends TestCase
             ->willReturn($shopUserMock);
 
         $executionContextMock->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.checkout.email.not_changeable');
+            ->method('buildViolation')
+            ->with('sylius.checkout.email.not_changeable')
+            ->willReturn($violationBuilderMock);
+
+        $violationBuilderMock->expects(self::once())
+            ->method('setCode')
+            ->with(UpdateCartEmailNotAllowed::EMAIL_NOT_CHANGEABLE_ERROR)
+            ->willReturn($violationBuilderMock);
+
+        $violationBuilderMock->expects(self::once())
+            ->method('addViolation');
 
         $this->updateCartEmailNotAllowedValidator->validate($command, new UpdateCartEmailNotAllowed());
     }

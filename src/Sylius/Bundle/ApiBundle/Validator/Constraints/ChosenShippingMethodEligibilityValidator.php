@@ -47,7 +47,12 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
         /** @var ShippingMethodInterface|null $shippingMethod */
         $shippingMethod = $this->shippingMethodRepository->findOneBy(['code' => $value->shippingMethodCode]);
         if (null === $shippingMethod) {
-            $this->context->addViolation($constraint->notFoundMessage, ['%code%' => $value->shippingMethodCode]);
+            $this->context
+                ->buildViolation($constraint->notFoundMessage)
+                ->setParameter('%code%', $value->shippingMethodCode)
+                ->setCode(ChosenShippingMethodEligibility::SHIPPING_METHOD_NOT_FOUND_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -56,7 +61,11 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
         $shipment = $this->shipmentRepository->find($value->shipmentId);
 
         if (null === $shipment) {
-            $this->context->addViolation($constraint->shipmentNotFoundMessage);
+            $this->context
+                ->buildViolation($constraint->shipmentNotFoundMessage)
+                ->setCode(ChosenShippingMethodEligibility::SHIPMENT_NOT_FOUND_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -64,11 +73,20 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
         $order = $shipment->getOrder();
 
         if ($order->getShippingAddress() === null) {
-            $this->context->addViolation($constraint->shippingAddressNotFoundMessage);
+            $this->context
+                ->buildViolation($constraint->shippingAddressNotFoundMessage)
+                ->setCode(ChosenShippingMethodEligibility::SHIPPING_ADDRESS_NOT_FOUND_ERROR)
+                ->addViolation()
+            ;
         }
 
         if (!in_array($shippingMethod, $this->shippingMethodsResolver->getSupportedMethods($shipment), true)) {
-            $this->context->addViolation($constraint->message, ['%name%' => $shippingMethod->getName()]);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setParameter('%name%', (string) $shippingMethod->getName())
+                ->setCode(ChosenShippingMethodEligibility::SHIPPING_METHOD_NOT_AVAILABLE_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

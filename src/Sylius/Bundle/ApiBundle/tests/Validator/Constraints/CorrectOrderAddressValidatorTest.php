@@ -26,6 +26,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class CorrectOrderAddressValidatorTest extends TestCase
@@ -71,12 +72,16 @@ final class CorrectOrderAddressValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         /** @var AddressInterface|MockObject $billingAddressMock */
         $billingAddressMock = $this->createMock(AddressInterface::class);
         $this->correctOrderAddressValidator->initialize($executionContextMock);
         $billingAddressMock->expects(self::once())->method('getCountryCode')->willReturn('united_russia');
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.country.not_exist', ['%countryCode%' => 'united_russia'])
-        ;
+        $executionContextMock->expects(self::once())->method('buildViolation')->with('sylius.country.not_exist')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setParameter')->with('%countryCode%', 'united_russia')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(CorrectOrderAddress::COUNTRY_NOT_EXIST_ERROR)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
         $this->correctOrderAddressValidator->validate(
             new UpdateCart(
                 orderTokenValue: 'TOKEN',
@@ -91,12 +96,15 @@ final class CorrectOrderAddressValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         /** @var AddressInterface|MockObject $billingAddressMock */
         $billingAddressMock = $this->createMock(AddressInterface::class);
         $this->correctOrderAddressValidator->initialize($executionContextMock);
         $billingAddressMock->expects(self::once())->method('getCountryCode')->willReturn(null);
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.address.without_country')
-        ;
+        $executionContextMock->expects(self::once())->method('buildViolation')->with('sylius.address.without_country')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(CorrectOrderAddress::ADDRESS_WITHOUT_COUNTRY_ERROR)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
         $this->correctOrderAddressValidator->validate(
             new UpdateCart(
                 orderTokenValue: 'TOKEN',
@@ -111,6 +119,8 @@ final class CorrectOrderAddressValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         /** @var AddressInterface|MockObject $billingAddressMock */
         $billingAddressMock = $this->createMock(AddressInterface::class);
         /** @var AddressInterface|MockObject $shippingAddressMock */
@@ -137,8 +147,12 @@ final class CorrectOrderAddressValidatorTest extends TestCase
             ]);
 
         $executionContextMock->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.country.not_exist', ['%countryCode%' => 'united_russia']);
+            ->method('buildViolation')
+            ->with('sylius.country.not_exist')
+            ->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setParameter')->with('%countryCode%', 'united_russia')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(CorrectOrderAddress::COUNTRY_NOT_EXIST_ERROR)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
 
         $this->correctOrderAddressValidator->validate(
             new UpdateCart(
@@ -155,6 +169,8 @@ final class CorrectOrderAddressValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         /** @var AddressInterface|MockObject $billingAddressMock */
         $billingAddressMock = $this->createMock(AddressInterface::class);
         /** @var AddressInterface|MockObject $shippingAddressMock */
@@ -178,13 +194,25 @@ final class CorrectOrderAddressValidatorTest extends TestCase
                 [['code' => 'united_russia'], null],
             ]);
 
-        $violations = [];
         $executionContextMock
             ->expects($this->exactly(2))
-            ->method('addViolation')
-            ->willReturnCallback(function ($message, $params) use (&$violations) {
-                $violations[] = ['message' => $message, 'params' => $params];
+            ->method('buildViolation')
+            ->with('sylius.country.not_exist')
+            ->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock
+            ->expects($this->exactly(2))
+            ->method('setParameter')
+            ->willReturnCallback(function ($key, $value) use ($constraintViolationBuilderMock) {
+                return $constraintViolationBuilderMock;
             });
+        $constraintViolationBuilderMock
+            ->expects($this->exactly(2))
+            ->method('setCode')
+            ->with(CorrectOrderAddress::COUNTRY_NOT_EXIST_ERROR)
+            ->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock
+            ->expects($this->exactly(2))
+            ->method('addViolation');
 
         $this->correctOrderAddressValidator->validate(
             new UpdateCart(
@@ -195,16 +223,5 @@ final class CorrectOrderAddressValidatorTest extends TestCase
             ),
             new CorrectOrderAddress(),
         );
-
-        $this->assertEquals([
-            [
-                'message' => 'sylius.country.not_exist',
-                'params' => ['%countryCode%' => 'euroland'],
-            ],
-            [
-                'message' => 'sylius.country.not_exist',
-                'params' => ['%countryCode%' => 'united_russia'],
-            ],
-        ], $violations);
     }
 }

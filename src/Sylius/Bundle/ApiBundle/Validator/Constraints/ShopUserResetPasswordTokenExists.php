@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ShopUserResetPasswordTokenExists extends Constraint
 {
+    public const TOKEN_INVALID_ERROR = 'PASSWORD_RESET_TOKEN_INVALID';
+
     /**
      * @param array<string, mixed>|null $options
      */

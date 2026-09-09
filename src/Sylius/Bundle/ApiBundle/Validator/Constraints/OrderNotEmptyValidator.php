@@ -46,7 +46,11 @@ final class OrderNotEmptyValidator extends ConstraintValidator
         Assert::isInstanceOf($order, OrderInterface::class);
 
         if ($order->getItems()->isEmpty()) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setCode(OrderNotEmpty::ORDER_EMPTY_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

@@ -28,6 +28,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class OrderNotEmptyValidatorTest extends TestCase
@@ -84,7 +85,12 @@ final class OrderNotEmptyValidatorTest extends TestCase
         $value = new CompleteOrder(orderTokenValue: 'token');
         $this->orderRepository->expects(self::once())->method('findOneBy')->with(['tokenValue' => 'token'])->willReturn($orderMock);
         $orderMock->expects(self::once())->method('getItems')->willReturn(new ArrayCollection());
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.order.not_empty');
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $executionContextMock->expects(self::once())->method('buildViolation')->with('sylius.order.not_empty')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(OrderNotEmpty::ORDER_EMPTY_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
+
         $this->orderNotEmptyValidator->validate($value, new OrderNotEmpty());
     }
 
@@ -100,7 +106,7 @@ final class OrderNotEmptyValidatorTest extends TestCase
         $value = new UpdateCart(orderTokenValue: 'token');
         $this->orderRepository->expects(self::once())->method('findOneBy')->with(['tokenValue' => 'token'])->willReturn($orderMock);
         $orderMock->expects(self::once())->method('getItems')->willReturn(new ArrayCollection([$orderItemMock]));
-        $executionContextMock->expects(self::never())->method('addViolation')->with('sylius.order.not_empty');
+        $executionContextMock->expects(self::never())->method('buildViolation');
         $this->orderNotEmptyValidator->validate($value, new OrderNotEmpty());
     }
 }

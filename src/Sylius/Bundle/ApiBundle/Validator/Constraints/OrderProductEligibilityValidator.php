@@ -49,20 +49,26 @@ final class OrderProductEligibilityValidator extends ConstraintValidator
 
         foreach ($orderItems as $orderItem) {
             if (!$orderItem->getVariant()->isEnabled()) {
-                $this->context->addViolation(
-                    $constraint->message,
-                    ['%productName%' => $orderItem->getVariant()->getName()],
-                );
+                $this->context
+                    ->buildViolation($constraint->message)
+                    ->setParameter('%productName%', (string) $orderItem->getVariant()->getName())
+                    ->setCode(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)
+                    ->addViolation()
+                ;
             } elseif (!$orderItem->getProduct()->isEnabled()) {
-                $this->context->addViolation(
-                    $constraint->message,
-                    ['%productName%' => $orderItem->getProduct()->getName()],
-                );
+                $this->context
+                    ->buildViolation($constraint->message)
+                    ->setParameter('%productName%', (string) $orderItem->getProduct()->getName())
+                    ->setCode(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)
+                    ->addViolation()
+                ;
             } elseif (null !== $channel && !$orderItem->getProduct()->hasChannel($channel)) {
-                $this->context->addViolation(
-                    $constraint->message,
-                    ['%productName%' => $orderItem->getProduct()->getName()],
-                );
+                $this->context
+                    ->buildViolation($constraint->message)
+                    ->setParameter('%productName%', (string) $orderItem->getProduct()->getName())
+                    ->setCode(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)
+                    ->addViolation()
+                ;
             }
         }
     }

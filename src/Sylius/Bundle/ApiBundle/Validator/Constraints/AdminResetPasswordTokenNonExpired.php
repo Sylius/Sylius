@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class AdminResetPasswordTokenNonExpired extends Constraint
 {
+    public const TOKEN_EXPIRED_ERROR = 'PASSWORD_RESET_TOKEN_EXPIRED';
+
     /**
      * @param array<string, mixed>|null $options
      */

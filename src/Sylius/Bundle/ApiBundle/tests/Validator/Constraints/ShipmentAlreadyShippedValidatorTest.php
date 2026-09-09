@@ -23,6 +23,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ShipmentAlreadyShippedValidatorTest extends TestCase
@@ -46,11 +47,22 @@ final class ShipmentAlreadyShippedValidatorTest extends TestCase
     {
         /** @var ShipmentInterface|MockObject $shipmentMock */
         $shipmentMock = $this->createMock(ShipmentInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $violationBuilderMock */
+        $violationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $constraint = new ShipmentAlreadyShipped();
         $shipShipment = new ShipShipment(shipmentId: 123);
         $this->shipmentRepository->expects(self::once())->method('find')->with(123)->willReturn($shipmentMock);
         $shipmentMock->expects(self::once())->method('getState')->willReturn(OrderShippingStates::STATE_SHIPPED);
-        $this->executionContext->expects(self::once())->method('addViolation')->with($constraint->message);
+        $this->executionContext->expects(self::once())
+            ->method('buildViolation')
+            ->with($constraint->message)
+            ->willReturn($violationBuilderMock);
+        $violationBuilderMock->expects(self::once())
+            ->method('setCode')
+            ->with(ShipmentAlreadyShipped::SHIPMENT_ALREADY_SHIPPED_ERROR)
+            ->willReturn($violationBuilderMock);
+        $violationBuilderMock->expects(self::once())
+            ->method('addViolation');
         $this->shipmentAlreadyShippedValidator->validate($shipShipment, $constraint);
     }
 

@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 class CheckoutCompletion extends Constraint
 {
+    public const INVALID_STATE_TRANSITION_ERROR = 'INVALID_STATE_TRANSITION';
+
     /**
      * @param array<string, mixed>|null $options
      */
