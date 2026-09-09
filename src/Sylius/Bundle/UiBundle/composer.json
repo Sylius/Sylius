@@ -40,9 +40,9 @@
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/security-core": "^6.4 || ^7.4 || ^8.0",
         "symfony/security-bundle": "^6.4 || ^7.4 || ^8.0",
-        "symfony/ux-icons": "^2.36",
-        "symfony/ux-live-component": "^2.36",
-        "symfony/ux-twig-component": "^2.36",
+        "symfony/ux-icons": "^2.36 || ^3.0",
+        "symfony/ux-live-component": "^2.36 || ^3.0",
+        "symfony/ux-twig-component": "^2.36 || ^3.0",
         "symfony/webpack-encore-bundle": "^2.4"
     },
     "require-dev": {
