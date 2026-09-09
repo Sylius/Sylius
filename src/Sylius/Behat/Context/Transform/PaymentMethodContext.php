@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,10 +24,8 @@ final class PaymentMethodContext implements Context
     {
     }
 
-    /**
-     * @Transform /^"([^"]+)" payment(s)?$/
-     * @Transform :paymentMethod
-     */
+    #[Transform('/^"([^"]+)" payment(s)?$/')]
+    #[Transform(':paymentMethod')]
     public function getPaymentMethodByName($paymentMethodName)
     {
         $paymentMethods = $this->paymentMethodRepository->findByName($paymentMethodName, 'en_US');

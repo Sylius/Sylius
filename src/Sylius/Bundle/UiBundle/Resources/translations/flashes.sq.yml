@@ -4,3 +4,5 @@
 sylius:
     channel:
         delete_error: 'Kanali nuk mund të fshihet. Të paktën një kanal duhet të jetë i aktivizuar.'
+    user:
+        verification_email_sent: 'Nëse adresa e email-it të futur është e lidhur me një llogari, një email verifikimi është dërguar.'

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Attribute\Factory;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 class AttributeFactoryTest extends TestCase
 {
     /** @var MockObject&FactoryInterface<Attribute> */

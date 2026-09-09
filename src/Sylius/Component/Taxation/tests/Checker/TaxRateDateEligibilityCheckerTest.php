@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Taxation\Checker;
 
 use DateTimeImmutable;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -22,6 +23,7 @@ use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\Clock\ClockInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxRateDateEligibilityCheckerTest extends TestCase
 {
     /** @var ClockInterface&MockObject */

@@ -42,7 +42,14 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     public function createByCustomerAndChannelIdQueryBuilder(mixed $customerId, mixed $channelId): QueryBuilder;
 
+    /** @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use countByCustomerAndCouponSince() instead. */
     public function countByCustomerAndCoupon(CustomerInterface $customer, PromotionCouponInterface $coupon): int;
+
+    public function countByCustomerAndCouponSince(
+        CustomerInterface $customer,
+        PromotionCouponInterface $coupon,
+        ?\DateTimeInterface $since,
+    ): int;
 
     public function countByCustomer(CustomerInterface $customer): int;
 

@@ -16,16 +16,17 @@ namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 use ApiPlatform\Metadata\Exception\InvalidArgumentException;
 use Liip\ImagineBundle\Exception\Imagine\Filter\NonExistingFilterException;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\ImageInterface;
-use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ImageNormalizerTest extends TestCase
 {
     private CacheManager&MockObject $cacheManager;
@@ -103,7 +104,7 @@ final class ImageNormalizerTest extends TestCase
 
     public function testResolvesPathBasedOnDefaultFilterWhenNoFilterInRequest(): void
     {
-        $requestMock = $this->createMock(Request::class);
+        $request = new Request(query: [ImageNormalizer::FILTER_QUERY_PARAMETER => '']);
         $imageMock = $this->createMock(ImageInterface::class);
 
         $this->normalizer->expects(self::once())
@@ -111,10 +112,9 @@ final class ImageNormalizerTest extends TestCase
             ->with($imageMock, null, ['sylius_image_normalizer_already_called' => true])
             ->willReturn(['path' => 'some_path']);
 
-        $requestMock->query = new InputBag([ImageNormalizer::FILTER_QUERY_PARAMETER => '']);
         $this->requestStack->expects(self::once())
             ->method('getCurrentRequest')
-            ->willReturn($requestMock);
+            ->willReturn($request);
 
         $this->cacheManager->expects(self::once())
             ->method('getBrowserPath')
@@ -126,7 +126,7 @@ final class ImageNormalizerTest extends TestCase
 
     public function testThrowsValidationExceptionForInvalidFilter(): void
     {
-        $requestMock = $this->createMock(Request::class);
+        $request = new Request(query: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid']);
         $imageMock = $this->createMock(ImageInterface::class);
 
         $this->normalizer->expects(self::once())
@@ -134,10 +134,9 @@ final class ImageNormalizerTest extends TestCase
             ->with($imageMock, null, ['sylius_image_normalizer_already_called' => true])
             ->willReturn(['path' => 'some_path']);
 
-        $requestMock->query = new InputBag([ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid']);
         $this->requestStack->expects(self::once())
             ->method('getCurrentRequest')
-            ->willReturn($requestMock);
+            ->willReturn($request);
 
         $this->cacheManager->expects(self::once())
             ->method('getBrowserPath')
@@ -150,7 +149,7 @@ final class ImageNormalizerTest extends TestCase
 
     public function testThrowsValidationExceptionWhenFilterNotResolvable(): void
     {
-        $requestMock = $this->createMock(Request::class);
+        $request = new Request(query: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid_filter']);
         $imageMock = $this->createMock(ImageInterface::class);
 
         $this->normalizer->expects(self::once())
@@ -158,10 +157,9 @@ final class ImageNormalizerTest extends TestCase
             ->with($imageMock, null, ['sylius_image_normalizer_already_called' => true])
             ->willReturn(['path' => 'some_path']);
 
-        $requestMock->query = new InputBag([ImageNormalizer::FILTER_QUERY_PARAMETER => 'invalid_filter']);
         $this->requestStack->expects(self::once())
             ->method('getCurrentRequest')
-            ->willReturn($requestMock);
+            ->willReturn($request);
 
         $this->cacheManager->expects(self::once())
             ->method('getBrowserPath')
@@ -189,7 +187,7 @@ final class ImageNormalizerTest extends TestCase
 
     public function testAppliesCustomFilter(): void
     {
-        $requestMock = $this->createMock(Request::class);
+        $request = new Request(query: [ImageNormalizer::FILTER_QUERY_PARAMETER => 'custom_filter']);
         $imageMock = $this->createMock(ImageInterface::class);
 
         $this->normalizer->expects(self::once())
@@ -197,10 +195,9 @@ final class ImageNormalizerTest extends TestCase
             ->with($imageMock, null, ['sylius_image_normalizer_already_called' => true])
             ->willReturn(['path' => 'some_path']);
 
-        $requestMock->query = new InputBag([ImageNormalizer::FILTER_QUERY_PARAMETER => 'custom_filter']);
         $this->requestStack->expects(self::once())
             ->method('getCurrentRequest')
-            ->willReturn($requestMock);
+            ->willReturn($request);
 
         $this->cacheManager->expects(self::once())
             ->method('getBrowserPath')

@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
@@ -37,165 +39,127 @@ class ManagingTaxRatesContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to create a new tax rate
-     */
+    #[When('I want to create a new tax rate')]
     public function iWantToCreateANewTaxRate(): void
     {
         $this->client->buildCreateRequest(Resources::TAX_RATES);
     }
 
-    /**
-     * @When I specify its code as :code
-     */
+    #[When('I specify its code as :code')]
     public function iSpecifyItsCodeAs(string $code): void
     {
         $this->client->addRequestData('code', $code);
     }
 
-    /**
-     * @When I name it :name
-     * @When I rename it to :name
-     */
+    #[When('I name it :name')]
+    #[When('I rename it to :name')]
     public function iNameIt(string $name): void
     {
         $this->client->addRequestData('name', $name);
     }
 
-    /**
-     * @When I define it for the :zone zone
-     * @When I change its zone to :zone
-     */
+    #[When('I define it for the :zone zone')]
+    #[When('I change its zone to :zone')]
     public function iDefineItForTheZone(ZoneInterface $zone): void
     {
         $this->client->addRequestData('zone', $this->iriConverter->getIriFromResource($zone));
     }
 
-    /**
-     * @When I make it applicable for the :taxCategory tax category
-     * @When I change it to be applicable for the :taxCategory tax category
-     */
+    #[When('I make it applicable for the :taxCategory tax category')]
+    #[When('I change it to be applicable for the :taxCategory tax category')]
     public function iMakeItApplicableForTheTaxCategory(TaxCategoryInterface $taxCategory): void
     {
         $this->client->addRequestData('category', $this->iriConverter->getIriFromResource($taxCategory));
     }
 
-    /**
-     * @When I specify its amount as :amount%
-     */
+    #[When('I specify its amount as :amount%')]
     public function iSpecifyItsAmountAs(string $amount): void
     {
         $this->client->addRequestData('amount', $amount);
     }
 
-    /**
-     * @When I do not specify related tax category
-     * @When I do not specify its zone
-     * @When I do not name it
-     * @When I do not specify its code
-     */
+    #[When('I do not specify related tax category')]
+    #[When('I do not specify its zone')]
+    #[When('I do not name it')]
+    #[When('I do not specify its code')]
     public function iDoNotSpecifyItsField(): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @When I choose the default tax calculator
-     */
+    #[When('I choose the default tax calculator')]
     public function iChooseTheDefaultTaxCalculator(): void
     {
         $this->client->addRequestData('calculator', 'default');
     }
 
-    /**
-     * @When I make it start at :startDate and end at :endDate
-     */
+    #[When('I make it start at :startDate and end at :endDate')]
     public function iMakeItStartAtAndEndAt(string $startDate, string $endDate): void
     {
         $this->client->addRequestData('startDate', $startDate);
         $this->client->addRequestData('endDate', $endDate);
     }
 
-    /**
-     * @When I set the start date to :startDate
-     */
+    #[When('I set the start date to :startDate')]
     public function iSetTheStartDateTo(string $startDate): void
     {
         $this->client->addRequestData('startDate', $startDate);
     }
 
-    /**
-     * @When I set the end date to :endDate
-     */
+    #[When('I set the end date to :endDate')]
     public function iSetTheEndDateTo(string $endDate): void
     {
         $this->client->addRequestData('endDate', $endDate);
     }
 
-    /**
-     * @When I add it
-     * @When I try to add it
-     */
+    #[When('I add it')]
+    #[When('I try to add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I choose "Included in price" option
-     */
+    #[When('I choose "Included in price" option')]
     public function iChooseOption()
     {
         $this->client->addRequestData('includedInPrice', true);
     }
 
-    /**
-     * @When /^I want to modify (this tax rate)$/
-     * @When I want to modify a tax rate :taxRate
-     */
+    #[When('/^I want to modify (this tax rate)$/')]
+    #[When('I want to modify a tax rate :taxRate')]
     public function iWantToModifyThisTaxRate(TaxRateInterface $taxRate): void
     {
         $this->client->buildUpdateRequest(Resources::TAX_RATES, (string) $taxRate->getCode());
         $this->client->addRequestData('amount', (string) $taxRate->getAmount());
     }
 
-    /**
-     * @When I browse tax rates
-     */
+    #[When('I browse tax rates')]
     public function iBrowseTaxRates(): void
     {
         $this->client->index(Resources::TAX_RATES);
     }
 
-    /**
-     * @When I remove its name
-     */
+    #[When('I remove its name')]
     public function iRemoveItsName(): void
     {
         $this->client->addRequestData('name', '');
     }
 
-    /**
-     * @When I filter tax rates by start date from :startDate
-     */
+    #[When('I filter tax rates by start date from :startDate')]
     public function iFilterTaxRatesByStartDateFrom(string $startDate): void
     {
         $this->client->addFilter('startDate[after]', $startDate);
         $this->client->filter();
     }
 
-    /**
-     * @When I filter tax rates by start date up to :startDate
-     */
+    #[When('I filter tax rates by start date up to :startDate')]
     public function iFilterTaxRatesByStartDateUpTo(string $startDate): void
     {
         $this->client->addFilter('startDate[before]', $startDate);
         $this->client->filter();
     }
 
-    /**
-     * @When I filter tax rates by start date from :startDate up to :endDate
-     */
+    #[When('I filter tax rates by start date from :startDate up to :endDate')]
     public function iFilterTaxRatesByStartDateFromUpTo(string $startDate, string $endDate): void
     {
         $this->client->addFilter('startDate[after]', $startDate);
@@ -203,27 +167,21 @@ class ManagingTaxRatesContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I filter tax rates by end date from :endDate
-     */
+    #[When('I filter tax rates by end date from :endDate')]
     public function iFilterTaxRatesByEndDateFrom(string $endDate): void
     {
         $this->client->addFilter('endDate[after]', $endDate);
         $this->client->filter();
     }
 
-    /**
-     * @When I filter tax rates by end date up to :endDate
-     */
+    #[When('I filter tax rates by end date up to :endDate')]
     public function iFilterTaxRatesByEndDateUpTo(string $endDate): void
     {
         $this->client->addFilter('endDate[before]', $endDate);
         $this->client->filter();
     }
 
-    /**
-     * @When I filter tax rates by end date from :startDate up to :endDate
-     */
+    #[When('I filter tax rates by end date from :startDate up to :endDate')]
     public function iFilterTaxRatesByEndDateFromUpTo(string $startDate, string $endDate): void
     {
         $this->client->addFilter('endDate[after]', $startDate);
@@ -231,17 +189,13 @@ class ManagingTaxRatesContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @When I delete tax rate :taxRate
-     */
+    #[When('I delete tax rate :taxRate')]
     public function iDeleteTaxRate(TaxRateInterface $taxRate): void
     {
         $this->client->delete(Resources::TAX_RATES, (string) $taxRate->getCode());
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -250,10 +204,8 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then the tax rate :taxRate should appear in the registry
-     * @Then I should see the tax rate :taxRate in the list
-     */
+    #[Then('the tax rate :taxRate should appear in the registry')]
+    #[Then('I should see the tax rate :taxRate in the list')]
     public function theTaxRateShouldAppearInTheRegistry(TaxRateInterface $taxRate): void
     {
         $this->sharedStorage->set('tax_rate', $taxRate);
@@ -266,9 +218,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then the tax rate :taxRate should be included in price
-     */
+    #[Then('the tax rate :taxRate should be included in price')]
     public function theTaxRateShouldIncludePrice(TaxRateInterface $taxRate): void
     {
         Assert::true(
@@ -277,9 +227,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(
@@ -288,9 +236,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this tax rate) should no longer exist in the registry$/
-     */
+    #[Then('/^(this tax rate) should no longer exist in the registry$/')]
     public function thisTaxRateShouldNoLongerExistInTheRegistry(TaxRateInterface $taxRate): void
     {
         $name = $taxRate->getName();
@@ -301,17 +247,13 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should see a single tax rate in the list
-     */
+    #[Then('I should see a single tax rate in the list')]
     public function iShouldSeeASingleTaxRateInTheList(): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::TAX_RATES)), 1);
     }
 
-    /**
-     * @Then I should be notified that tax rate with this code already exists
-     */
+    #[Then('I should be notified that tax rate with this code already exists')]
     public function iShouldBeNotifiedThatTaxRateWithThisCodeAlreadyExists(): void
     {
         $response = $this->client->getLastResponse();
@@ -325,9 +267,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one tax rate with code :code
-     */
+    #[Then('there should still be only one tax rate with code :code')]
     public function thereShouldStillBeOnlyOneTaxRateWithCode(string $code): void
     {
         Assert::count(
@@ -337,9 +277,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that :element is required
-     */
+    #[Then('I should be notified that :element is required')]
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         Assert::contains(
@@ -348,9 +286,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then tax rate with :element :code should not be added
-     */
+    #[Then('tax rate with :element :code should not be added')]
     public function taxRateWithCodeShouldNotBeAdded(string $element, string $code): void
     {
         Assert::false(
@@ -359,9 +295,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that zone has to be selected
-     */
+    #[Then('I should be notified that zone has to be selected')]
     public function iShouldBeNotifiedThatZoneHasToBeSelected(): void
     {
         Assert::contains(
@@ -370,9 +304,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that category has to be selected
-     */
+    #[Then('I should be notified that category has to be selected')]
     public function iShouldBeNotifiedThatCategoryHasToBeSelected(): void
     {
         Assert::contains(
@@ -381,9 +313,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see a tax rate with name :name
-     */
+    #[Then('I should not see a tax rate with name :name')]
     public function iShouldNotSeeATaxRateWithName(string $name): void
     {
         Assert::false(
@@ -392,10 +322,8 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this tax rate) should still be named "([^"]+)"$/
-     * @Then /^(this tax rate) name should be "([^"]*)"$/
-     */
+    #[Then('/^(this tax rate) should still be named "([^"]+)"$/')]
+    #[Then('/^(this tax rate) name should be "([^"]*)"$/')]
     public function thisTaxRateShouldStillBeNamed(TaxRateInterface $taxRate, string $taxRateName): void
     {
         Assert::true(
@@ -404,10 +332,8 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then the code field should be disabled
-     * @Then I should not be able to edit its code
-     */
+    #[Then('the code field should be disabled')]
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->updateRequestData(['code' => 'NEW_CODE']);
@@ -415,9 +341,7 @@ class ManagingTaxRatesContext implements Context
         Assert::false($this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'));
     }
 
-    /**
-     * @Then /^(this tax rate) amount should be ([^"]+)%$/
-     */
+    #[Then('/^(this tax rate) amount should be ([^"]+)%$/')]
     public function thisTaxRateAmountShouldBe(TaxRateInterface $taxRate, int $taxRateAmount): void
     {
         Assert::true(
@@ -426,9 +350,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this tax rate) should be applicable for the ("[^"]+" tax category)$/
-     */
+    #[Then('/^(this tax rate) should be applicable for the ("[^"]+" tax category)$/')]
     public function thisTaxRateShouldBeApplicableForTheTaxCategory(TaxRateInterface $taxRate, TaxCategoryInterface $taxCategory): void
     {
         Assert::true(
@@ -437,9 +359,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this tax rate) should be applicable in ("[^"]+" zone)$/
-     */
+    #[Then('/^(this tax rate) should be applicable in ("[^"]+" zone)$/')]
     public function thisTaxRateShouldBeApplicableInZone(TaxRateInterface $taxRate, ZoneInterface $zone): void
     {
         Assert::true(
@@ -448,9 +368,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that amount is invalid
-     */
+    #[Then('I should be notified that amount is invalid')]
     public function iShouldBeNotifiedThatAmountIsInvalid(): void
     {
         Assert::true(
@@ -462,9 +380,7 @@ class ManagingTaxRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that tax rate should not end before it starts
-     */
+    #[Then('I should be notified that tax rate should not end before it starts')]
     public function iShouldBeNotifiedThatTaxRateShouldNotEndBeforeItStarts(): void
     {
         Assert::true(

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint;
@@ -29,6 +30,7 @@ use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProvinceAddressConstraintValidatorTest extends TestCase
 {
     /** @var RepositoryInterface<CountryInterface>&MockObject */
@@ -39,7 +41,7 @@ final class ProvinceAddressConstraintValidatorTest extends TestCase
 
     private AddressInterface&MockObject $address;
 
-    private MockObject&ProvinceAddressConstraint $constraint;
+    private ProvinceAddressConstraint $constraint;
 
     private ExecutionContextInterface&MockObject $context;
 
@@ -50,7 +52,7 @@ final class ProvinceAddressConstraintValidatorTest extends TestCase
         $this->countryRepository = $this->createMock(RepositoryInterface::class);
         $this->provinceRepository = $this->createMock(RepositoryInterface::class);
         $this->address = $this->createMock(AddressInterface::class);
-        $this->constraint = $this->createMock(ProvinceAddressConstraint::class);
+        $this->constraint = new ProvinceAddressConstraint();
         $this->context = $this->createMock(ExecutionContextInterface::class);
 
         $this->provinceAddressConstraintValidator = new ProvinceAddressConstraintValidator(

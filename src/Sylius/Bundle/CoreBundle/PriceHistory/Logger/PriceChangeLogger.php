@@ -34,7 +34,7 @@ final class PriceChangeLogger implements PriceChangeLoggerInterface
 
         $logEntry = $this->logEntryFactory->create(
             $channelPricing,
-            $this->clock->now(),
+            \DateTime::createFromImmutable($this->clock->now()),
             $channelPricing->getPrice(),
             $channelPricing->getOriginalPrice(),
         );

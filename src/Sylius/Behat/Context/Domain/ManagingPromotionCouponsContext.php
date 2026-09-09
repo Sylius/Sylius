@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -29,18 +31,14 @@ final class ManagingPromotionCouponsContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I delete ("[^"]+" coupon) related to (this promotion)$/
-     */
+    #[When('/^I delete ("[^"]+" coupon) related to (this promotion)$/')]
     public function iDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)
     {
         $promotion->removeCoupon($coupon);
         $this->couponRepository->remove($coupon);
     }
 
-    /**
-     * @When /^I try to delete ("[^"]+" coupon) related to (this promotion)$/
-     */
+    #[When('/^I try to delete ("[^"]+" coupon) related to (this promotion)$/')]
     public function iTryToDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)
     {
         try {
@@ -51,25 +49,19 @@ final class ManagingPromotionCouponsContext implements Context
         }
     }
 
-    /**
-     * @Then /^(this coupon) should no longer exist in the coupon registry$/
-     */
+    #[Then('/^(this coupon) should no longer exist in the coupon registry$/')]
     public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon)
     {
         Assert::null($this->couponRepository->findOneBy(['code' => $coupon->getCode()]));
     }
 
-    /**
-     * @Then I should be notified that it is in use and cannot be deleted
-     */
+    #[Then('I should be notified that it is in use and cannot be deleted')]
     public function iShouldBeNotifiedOfFailure()
     {
         Assert::isInstanceOf($this->sharedStorage->get('last_exception'), ForeignKeyConstraintViolationException::class);
     }
 
-    /**
-     * @Then /^([^"]+) should still exist in the registry$/
-     */
+    #[Then('/^([^"]+) should still exist in the registry$/')]
     public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon)
     {
         Assert::notNull($this->couponRepository->find($coupon->getId()));

@@ -24,7 +24,6 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Tests\Sylius\Bundle\PaymentBundle\Stub\GatewayConfigurationTypeStub;
 use Tests\Sylius\Bundle\PaymentBundle\Stub\NotifyPaymentProviderStub;
@@ -167,6 +166,7 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasParameter('sylius.encryption.enabled', false);
+        $this->assertContainerBuilderHasParameter('sylius.encryption.disabled_for_factories', null);
 
         $this->compile();
 
@@ -237,10 +237,6 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
             YamlFileLoader::class,
             'command_provider.yaml',
         ];
-        yield 'Load XML' => [
-            XmlFileLoader::class,
-            'command_provider.xml',
-        ];
     }
 
     public static function getHttpResponseProviderLoader(): iterable
@@ -248,10 +244,6 @@ final class SyliusPaymentExtensionTest extends AbstractExtensionTestCase
         yield 'Load YAML' => [
             YamlFileLoader::class,
             'http_response_provider.yaml',
-        ];
-        yield 'Load XML' => [
-            XmlFileLoader::class,
-            'http_response_provider.xml',
         ];
     }
 

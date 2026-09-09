@@ -15,12 +15,14 @@ namespace Tests\Sylius\Bundle\AdminBundle\Event;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerShowMenuBuilderEventTest extends TestCase
 {
     private FactoryInterface&MockObject $factory;

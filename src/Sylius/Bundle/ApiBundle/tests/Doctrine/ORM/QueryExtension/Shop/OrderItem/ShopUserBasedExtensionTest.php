@@ -18,6 +18,7 @@ use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\Expr\Comparison;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -32,6 +33,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Resource\Model\ResourceInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShopUserBasedExtensionTest extends TestCase
 {
     private ShopUserBasedExtension $extension;

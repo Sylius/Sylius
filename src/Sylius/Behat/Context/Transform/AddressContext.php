@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -31,11 +32,9 @@ final class AddressContext implements Context
     ) {
     }
 
-    /**
-     * @Transform /^to "([^"]+)"$/
-     * @Transform /^"([^"]+)" based \w+ address$/
-     * @Transform /^"([^"]+)" based address$/
-     */
+    #[Transform('/^to "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" based \w+ address$/')]
+    #[Transform('/^"([^"]+)" based address$/')]
     public function createNewAddress($countryName)
     {
         return $this->exampleAddressFactory->create([
@@ -44,10 +43,8 @@ final class AddressContext implements Context
         ]);
     }
 
-    /**
-     * @Transform /^address (?:as |is |to )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
-     * @Transform /^"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" specified as$/
-     */
+    #[Transform('/^address (?:as |is |to )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" specified as$/')]
     public function createNewAddressWith($city, $street, $postcode, $countryName, $customerName)
     {
         [$firstName, $lastName] = explode(' ', $customerName);
@@ -65,22 +62,18 @@ final class AddressContext implements Context
         ]);
     }
 
-    /**
-     * @Transform /^clear the (shipping|billing) address$/
-     * @Transform /^do not specify any (shipping|billing) address$/
-     */
+    #[Transform('/^clear the (shipping|billing) address$/')]
+    #[Transform('/^do not specify any (shipping|billing) address$/')]
     public function createEmptyAddress()
     {
         return $this->addressFactory->createNew();
     }
 
-    /**
-     * @Transform /^address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
-     * @Transform /^"([^"]+)" addressed it to "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)", "([^"]+)"$/
-     * @Transform /^of "([^"]+)" in the "([^"]+)", "([^"]+)" "([^"]+)", "([^"]+)", "([^"]+)"$/
-     * @Transform /^addressed it to "([^"]+)", "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)", "([^"]+)"$/
-     * @Transform /^address (?:|is |as )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
-     */
+    #[Transform('/^address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" addressed it to "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)", "([^"]+)"$/')]
+    #[Transform('/^of "([^"]+)" in the "([^"]+)", "([^"]+)" "([^"]+)", "([^"]+)", "([^"]+)"$/')]
+    #[Transform('/^addressed it to "([^"]+)", "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)", "([^"]+)"$/')]
+    #[Transform('/^address (?:|is |as )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/')]
     public function createNewAddressWithNameAndProvince($name, $street, $postcode, $city, $countryName, $provinceName)
     {
         [$firstName, $lastName] = explode(' ', $name);
@@ -99,14 +92,12 @@ final class AddressContext implements Context
         ]);
     }
 
-    /**
-     * @Transform /^"([^"]+)" addressed it to "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)"$/
-     * @Transform /^of "([^"]+)" in the "([^"]+)", "([^"]+)" "([^"]+)", "([^"]+)"$/
-     * @Transform /^addressed it to "([^"]+)", "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)"$/
-     * @Transform /^address (?:|is |as )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
-     * @Transform /^"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address$/
-     * @Transform /^be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
-     */
+    #[Transform('/^"([^"]+)" addressed it to "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)"$/')]
+    #[Transform('/^of "([^"]+)" in the "([^"]+)", "([^"]+)" "([^"]+)", "([^"]+)"$/')]
+    #[Transform('/^addressed it to "([^"]+)", "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)"$/')]
+    #[Transform('/^address (?:|is |as )"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" as its(?:| new) billing address$/')]
+    #[Transform('/^be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/')]
     public function createNewAddressWithName($name, $street, $postcode, $city, $countryName)
     {
         [$firstName, $lastName] = explode(' ', $name);
@@ -124,9 +115,7 @@ final class AddressContext implements Context
         ]);
     }
 
-    /**
-     * @Transform /^"([^"]+)" street$/
-     */
+    #[Transform('/^"([^"]+)" street$/')]
     public function getByStreet($street)
     {
         $address = $this->addressRepository->findOneBy(['street' => $street]);
@@ -135,10 +124,8 @@ final class AddressContext implements Context
         return $address;
     }
 
-    /**
-     * @Transform /^address of "([^"]+)"$/
-     * @Transform /^address belongs to "([^"]+)"$/
-     */
+    #[Transform('/^address of "([^"]+)"$/')]
+    #[Transform('/^address belongs to "([^"]+)"$/')]
     public function getByFullName(string $fullName): AddressInterface
     {
         [$firstName, $lastName] = explode(' ', $fullName);

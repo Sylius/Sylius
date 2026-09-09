@@ -15,6 +15,7 @@ namespace DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasTagConstraint;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\TagResettableCartContextsPass;
@@ -23,6 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Contracts\Service\ResetInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TagResettableCartContextsPassTest extends AbstractCompilerPassTestCase
 {
     #[Test]

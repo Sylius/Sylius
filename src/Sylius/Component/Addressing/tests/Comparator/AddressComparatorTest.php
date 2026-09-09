@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Addressing\Comparator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Comparator\AddressComparator;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AddressComparatorTest extends TestCase
 {
     private AddressComparator $addressComparator;

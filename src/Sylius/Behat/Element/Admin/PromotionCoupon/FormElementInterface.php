@@ -26,4 +26,8 @@ interface FormElementInterface extends BaseFormElementInterface
     public function toggleReusableFromCancelledOrders(bool $reusable): void;
 
     public function isReusableFromCancelledOrders(): bool;
+
+    public function toggleTrackUsage(bool $trackUsage): void;
+
+    public function isTrackUsage(): bool;
 }

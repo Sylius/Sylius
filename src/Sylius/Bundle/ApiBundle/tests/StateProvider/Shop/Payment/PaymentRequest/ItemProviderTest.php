@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProvider\Shop\Payment\PaymentReques
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProviderInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
@@ -31,6 +32,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ItemProviderTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;

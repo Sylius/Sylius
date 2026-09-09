@@ -13,14 +13,25 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Provider\ProductVariantMap;
 
+use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 final readonly class ProductVariantLowestPriceMapProvider implements ProductVariantMapProviderInterface
 {
-    public function __construct(private ProductVariantPricesCalculatorInterface $calculator)
-    {
+    public function __construct(
+        private CatalogPricesCalculatorInterface|ProductVariantPricesCalculatorInterface $calculator,
+    ) {
+        if (!$this->calculator instanceof CatalogPricesCalculatorInterface) {
+            trigger_deprecation(
+                'sylius/sylius',
+                '2.3',
+                'Passing an instance of "%s" as $calculator is deprecated. It will require "%s" since Sylius 3.0.',
+                ProductVariantPricesCalculatorInterface::class,
+                CatalogPricesCalculatorInterface::class,
+            );
+        }
     }
 
     public function provide(ProductVariantInterface $variant, array $context): array

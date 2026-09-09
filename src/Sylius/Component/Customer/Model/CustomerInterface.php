@@ -37,6 +37,8 @@ interface CustomerInterface extends TimestampableInterface, ResourceInterface
 
     public function getFullName(): string;
 
+    public function getNameOrEmail(): string;
+
     public function getFirstName(): ?string;
 
     public function setFirstName(?string $firstName): void;

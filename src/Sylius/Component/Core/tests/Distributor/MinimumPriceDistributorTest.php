@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Distributor;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Distributor\MinimumPriceDistributor;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class MinimumPriceDistributorTest extends TestCase
 {
     private MockObject&ProportionalIntegerDistributorInterface $proportionalIntegerDistributor;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Behat\Service;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Behat\Service\SharedStorage;
@@ -20,6 +21,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SharedStorageTest extends TestCase
 {
     private SharedStorage $sharedStorage;

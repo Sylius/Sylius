@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -39,9 +40,7 @@ final class CustomerContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has customer :name with email :email
-     */
+    #[Given('the store has customer :name with email :email')]
     public function theStoreHasCustomerWithNameAndEmail($name, $email)
     {
         $partsOfName = explode(' ', $name);
@@ -51,9 +50,7 @@ final class CustomerContext implements Context
         $this->sharedStorage->set('customer', $customer);
     }
 
-    /**
-     * @Given the store (also )has customer :email
-     */
+    #[Given('the store (also )has customer :email')]
     public function theStoreHasCustomer($email)
     {
         $customer = $this->createCustomer($email);
@@ -61,9 +58,7 @@ final class CustomerContext implements Context
         $this->customerRepository->add($customer);
     }
 
-    /**
-     * @Given the store has customer :email with first name :firstName
-     */
+    #[Given('the store has customer :email with first name :firstName')]
     public function theStoreHasCustomerWithFirstName($email, $firstName)
     {
         $customer = $this->createCustomer($email, $firstName);
@@ -71,10 +66,8 @@ final class CustomerContext implements Context
         $this->customerRepository->add($customer);
     }
 
-    /**
-     * @Given the store has customer :email with name :fullName since :since
-     * @Given the store has customer :email with name :fullName and phone number :phoneNumber since :since
-     */
+    #[Given('the store has customer :email with name :fullName since :since')]
+    #[Given('the store has customer :email with name :fullName and phone number :phoneNumber since :since')]
     public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $since, $phoneNumber = null)
     {
         $names = explode(' ', $fullName);
@@ -83,47 +76,37 @@ final class CustomerContext implements Context
         $this->customerRepository->add($customer);
     }
 
-    /**
-     * @Given there is disabled customer account :email with password :password
-     */
+    #[Given('there is disabled customer account :email with password :password')]
     public function thereIsDisabledCustomerAccountWithPassword($email, $password)
     {
         $customer = $this->createCustomerWithUserAccount($email, $password, false);
         $this->customerRepository->add($customer);
     }
 
-    /**
-     * @Given there is a customer account :email
-     * @Given there is a customer account :email identified by :password
-     * @Given there is enabled customer account :email with password :password
-     */
+    #[Given('there is a customer account :email')]
+    #[Given('there is a customer account :email identified by :password')]
+    #[Given('there is enabled customer account :email with password :password')]
     public function theStoreHasEnabledCustomerAccountWithPassword($email, $password = 'sylius')
     {
         $customer = $this->createCustomerWithUserAccount($email, $password, true);
         $this->customerRepository->add($customer);
     }
 
-    /**
-     * @Given there is a customer :name identified by an email :email and a password :password
-     * @Given there is a customer :name with an email :email and a password :password
-     */
+    #[Given('there is a customer :name identified by an email :email and a password :password')]
+    #[Given('there is a customer :name with an email :email and a password :password')]
     public function theStoreHasCustomerAccountWithEmailAndPassword(string $name, string $email, string $password): void
     {
         $this->createCustomerWithFullNameEmailAndPassword($name, $email, $password);
     }
 
-    /**
-     * @Given there is a customer :name with an email :email
-     * @Given there is also a customer :name with an email :email
-     */
+    #[Given('there is a customer :name with an email :email')]
+    #[Given('there is also a customer :name with an email :email')]
     public function theStoreHasCustomerAccountWithEmailAndName(string $name, string $email): void
     {
         $this->createCustomerWithFullNameEmailAndPassword($name, $email, 'sylius');
     }
 
-    /**
-     * @Given /^(the customer) subscribed to the newsletter$/
-     */
+    #[Given('/^(the customer) subscribed to the newsletter$/')]
     public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
     {
         $customer->setSubscribedToNewsletter(true);
@@ -131,9 +114,7 @@ final class CustomerContext implements Context
         $this->customerManager->flush();
     }
 
-    /**
-     * @Given /^(this customer) verified their email$/
-     */
+    #[Given('/^(this customer) verified their email$/')]
     public function theCustomerVerifiedTheirEmail(CustomerInterface $customer)
     {
         $customer->getUser()->setVerifiedAt(new \DateTime());
@@ -141,10 +122,8 @@ final class CustomerContext implements Context
         $this->customerManager->flush();
     }
 
-    /**
-     * @Given /^(the customer) belongs to (group "([^"]+)")$/
-     * @Given /^(this customer) belongs to (group "([^"]+)")$/
-     */
+    #[Given('/^(the customer) belongs to (group "([^"]+)")$/')]
+    #[Given('/^(this customer) belongs to (group "([^"]+)")$/')]
     public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup)
     {
         $customer->setGroup($customerGroup);
@@ -152,9 +131,7 @@ final class CustomerContext implements Context
         $this->customerManager->flush();
     }
 
-    /**
-     * @Given there is user :email with :country as shipping country
-     */
+    #[Given('there is user :email with :country as shipping country')]
     public function thereIsUserIdentifiedByWithAsShippingCountry($email, CountryInterface $country)
     {
         $customer = $this->createCustomerWithUserAccount($email, 'password123', true, 'John', 'Doe');
@@ -236,6 +213,9 @@ final class CustomerContext implements Context
         $user->setUsername($email);
         $user->setPlainPassword($this->replaceWithSecurePassword($password));
         $user->setEnabled($enabled);
+        if ($enabled) {
+            $user->setVerifiedAt(new \DateTime());
+        }
         if (null !== $role) {
             $user->addRole($role);
         }

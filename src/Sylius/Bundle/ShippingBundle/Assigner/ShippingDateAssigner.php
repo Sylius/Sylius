@@ -24,6 +24,6 @@ final class ShippingDateAssigner implements ShippingDateAssignerInterface
 
     public function assign(ShipmentInterface $shipment): void
     {
-        $shipment->setShippedAt($this->clock->now());
+        $shipment->setShippedAt(\DateTime::createFromImmutable($this->clock->now()));
     }
 }

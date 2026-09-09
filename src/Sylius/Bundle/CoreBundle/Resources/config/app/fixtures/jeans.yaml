@@ -52,6 +52,11 @@ sylius_fixtures:
                             -   name: 'Jeans brand'
                                 code: 'jeans_brand'
                                 type: 'text'
+                                translations:
+                                    en_US:
+                                        name: 'Jeans brand'
+                                    fr_FR:
+                                        name: 'Marque de Jeans'
 
                             -   name: 'Jeans collection'
                                 code: 'jeans_collection'

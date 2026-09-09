@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Product\Generator;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
@@ -28,6 +29,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariant;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantGeneratorTest extends TestCase
 {
     /** @var ProductVariantFactoryInterface<ProductVariant>&MockObject */

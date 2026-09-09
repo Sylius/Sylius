@@ -16,6 +16,8 @@ namespace Sylius\Behat\Context\Api;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
 use Behat\Behat\Hook\Scope\AfterStepScope;
+use Behat\Hook\AfterScenario;
+use Behat\Hook\AfterStep;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -29,7 +31,7 @@ final class DebugContext implements Context
     {
     }
 
-    /** @AfterStep */
+    #[AfterStep]
     public function afterStep(AfterStepScope $scope): void
     {
         $debugErrors = $this->responseChecker->getDebugErrors();
@@ -47,7 +49,7 @@ final class DebugContext implements Context
         $this->responseChecker->cleanErrors();
     }
 
-    /** @AfterScenario */
+    #[AfterScenario]
     public function afterScenario(AfterScenarioScope $scope): void
     {
         if (empty($this->errorStack)) {

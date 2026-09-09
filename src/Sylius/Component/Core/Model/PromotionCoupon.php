@@ -17,6 +17,9 @@ use Sylius\Component\Promotion\Model\PromotionCoupon as BasePromotionCoupon;
 
 class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInterface
 {
+    /** @var int */
+    protected $version = 1;
+
     /** @var int|null */
     protected $perCustomerUsageLimit;
 
@@ -41,5 +44,15 @@ class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInte
     public function setReusableFromCancelledOrders(bool $reusableFromCancelledOrders): void
     {
         $this->reusableFromCancelledOrders = $reusableFromCancelledOrders;
+    }
+
+    public function getVersion(): ?int
+    {
+        return $this->version;
+    }
+
+    public function setVersion(?int $version): void
+    {
+        $this->version = $version;
     }
 }

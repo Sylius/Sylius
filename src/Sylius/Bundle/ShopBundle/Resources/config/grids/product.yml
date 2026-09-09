@@ -14,7 +14,7 @@ sylius_grid:
                             channel: "expr:service('sylius.context.channel').getChannel()"
                             taxon: "expr:notFoundOnNull(service('sylius.repository.taxon').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode()))"
                             locale: "expr:service('sylius.context.locale').getLocaleCode()"
-                            sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
+                            sorting: "expr:service('request_stack').getCurrentRequest().query.all('sorting')"
                             includeAllDescendants: "expr:parameter('sylius_shop.product_grid.include_all_descendants')"
             sorting:
                 position: asc

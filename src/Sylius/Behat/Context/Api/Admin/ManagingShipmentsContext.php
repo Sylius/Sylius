@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -41,25 +43,19 @@ final class ManagingShipmentsContext implements Context
     ) {
     }
 
-    /**
-     * @When I browse shipments
-     */
+    #[When('I browse shipments')]
     public function iBrowseShipments(): void
     {
         $this->client->index(Resources::SHIPMENTS);
     }
 
-    /**
-     * @When I choose :state as a shipment state
-     */
+    #[When('I choose :state as a shipment state')]
     public function iChooseShipmentState(string $state): void
     {
         $this->client->addFilter('state', $state);
     }
 
-    /**
-     * @When I move to the details of first shipment's order
-     */
+    #[When('I move to the details of first shipment\'s order')]
     public function iMoveToDetailsOfFirstShipment(): void
     {
         $firstShipment = $this->responseChecker->getCollection($this->client->getLastResponse())[0];
@@ -67,33 +63,25 @@ final class ManagingShipmentsContext implements Context
         $this->client->showByIri($firstShipment['order']);
     }
 
-    /**
-     * @When I choose :channel as a channel filter
-     */
+    #[When('I choose :channel as a channel filter')]
     public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
     {
         $this->client->addFilter('order.channel.code', $channel->getCode());
     }
 
-    /**
-     * @When I choose :shippingMethod as a shipping method filter
-     */
+    #[When('I choose :shippingMethod as a shipping method filter')]
     public function iChooseAsAShippingMethodFilter(ShippingMethodInterface $shippingMethod): void
     {
         $this->client->addFilter('method.code', $shippingMethod->getCode());
     }
 
-    /**
-     * @When I filter
-     */
+    #[When('I filter')]
     public function iFilter(): void
     {
         $this->client->filter();
     }
 
-    /**
-     * @When I view the first shipment of the order :order
-     */
+    #[When('I view the first shipment of the order :order')]
     public function iViewTheShipmentOfTheOrder(OrderInterface $order): void
     {
         $response = $this->client->show(Resources::SHIPMENTS, (string) $order->getShipments()->first()->getId());
@@ -101,26 +89,20 @@ final class ManagingShipmentsContext implements Context
         $this->sharedStorage->set('response', $response);
     }
 
-    /**
-     * @Then I should see( only) :count shipment(s) in the list
-     * @Then I should see a single shipment in the list
-     */
+    #[Then('I should see( only) :count shipment(s) in the list')]
+    #[Then('I should see a single shipment in the list')]
     public function iShouldSeeCountShipmentsInList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @When I ship the shipment of order :order
-     */
+    #[When('I ship the shipment of order :order')]
     public function iShipShipmentOfOrder(OrderInterface $order): void
     {
         $this->client->applyTransition(Resources::SHIPMENTS, (string) $order->getShipments()->first()->getId(), ShipmentTransitions::TRANSITION_SHIP);
     }
 
-    /**
-     * @When I try to ship the shipment of order :order
-     */
+    #[When('I try to ship the shipment of order :order')]
     public function iTryToShipShipmentOfOrder(OrderInterface $order): void
     {
         /** @var ShipmentInterface $shipment */
@@ -132,9 +114,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @When I ship the shipment of order :order with :trackingCode tracking code
-     */
+    #[When('I ship the shipment of order :order with :trackingCode tracking code')]
     public function iShipTheShipmentOfOrderWithTrackingCode(OrderInterface $order, string $trackingCode): void
     {
         $this->client->applyTransition(
@@ -145,9 +125,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the shipment has been successfully shipped
-     */
+    #[Then('I should be notified that the shipment has been successfully shipped')]
     public function iShouldBeNotifiedThatTheShipmentHasBeenSuccessfullyShipped(): void
     {
         Assert::true(
@@ -156,9 +134,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that shipment has been already shipped
-     */
+    #[Then('I should be notified that shipment has been already shipped')]
     public function iShouldBeNotifiedThatTheShipmentHasBeenAlreadyShipped(): void
     {
         Assert::contains(
@@ -168,9 +144,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see the shipment of (order "[^"]+") as "([^"]+)"$/
-     */
+    #[Then('/^I should see the shipment of (order "[^"]+") as "([^"]+)"$/')]
     public function iShouldSeeTheShipmentOfOrderAs(OrderInterface $order, string $shippingState): void
     {
         Assert::true(
@@ -182,9 +156,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see shipment for the ("[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/
-     */
+    #[Then('/^I should see shipment for the ("[^"]+" order) as (\d+)(?:|st|nd|rd|th) in the list$/')]
     public function iShouldSeeShipmentForTheOrderInTheList(OrderInterface $order, int $position): void
     {
         Assert::true(
@@ -198,9 +170,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the shipment of order :order shipped at :dateTime
-     */
+    #[Then('I should see the shipment of order :order shipped at :dateTime')]
     public function iShouldSeeTheShippingDateAs(OrderInterface $order, string $dateTime): void
     {
         Assert::eq(
@@ -210,10 +180,8 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then the shipment of the :orderNumber order should be :shippingState for :customer
-     * @Then the shipment of the :orderNumber order should be :shippingState for :customer in :channel channel
-     */
+    #[Then('the shipment of the :orderNumber order should be :shippingState for :customer')]
+    #[Then('the shipment of the :orderNumber order should be :shippingState for :customer in :channel channel')]
     public function shipmentOfOrderShouldBe(
         string $orderNumber,
         string $shippingState,
@@ -250,9 +218,7 @@ final class ManagingShipmentsContext implements Context
         throw new \InvalidArgumentException('There is no shipment with given data');
     }
 
-    /**
-     * @Then I should see a shipment of order :order
-     */
+    #[Then('I should see a shipment of order :order')]
     public function iShouldSeeShipmentWithOrderNumber(OrderInterface $order): void
     {
         Assert::true(
@@ -261,9 +227,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see a shipment of order :order
-     */
+    #[Then('I should not see a shipment of order :order')]
     public function iShouldNotSeeShipmentWithOrderNumber(OrderInterface $order): void
     {
         Assert::false(
@@ -272,9 +236,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :amount :product units in the list
-     */
+    #[Then('I should see :amount :product units in the list')]
     public function iShouldSeeUnitsInTheList(int $amount, ProductInterface $product): void
     {
         $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
@@ -301,9 +263,7 @@ final class ManagingShipmentsContext implements Context
         Assert::same($productUnitsCounter, $amount);
     }
 
-    /**
-     * @Then I should see the details of order :order
-     */
+    #[Then('I should see the details of order :order')]
     public function iShouldSeeOrderWithDetails(OrderInterface $order): void
     {
         Assert::same(
@@ -313,9 +273,7 @@ final class ManagingShipmentsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the shipment state as :shipmentState
-     */
+    #[Then('I should see the shipment state as :shipmentState')]
     public function iShouldSeeTheShipmentStateAs(string $shipmentState): void
     {
         Assert::true(

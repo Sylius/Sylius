@@ -1,0 +1,48 @@
+name: 'Packages Split'
+
+on:
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: 'Branch to checkout and split. Ignored if tag is specified. At least one required.'
+                required: false
+                type: string
+            tag:
+                description: 'Tag to checkout and split. Takes priority over branch. At least one required.'
+                required: false
+                type: string
+
+jobs:
+    prepare:
+        name: Generate packages matrix
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Generate packages matrix
+                id: matrix
+                run: |
+                    echo "packages=$(php .github/scripts/generate-split-matrix.php)" >> $GITHUB_OUTPUT
+
+        outputs:
+            packages: ${{ steps.matrix.outputs.packages }}
+
+    split_packages:
+        needs: prepare
+        name: Split ${{ matrix.package.repository }}
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            max-parallel: 20
+            matrix:
+                package: ${{ fromJson(needs.prepare.outputs.packages) }}
+
+        steps:
+            -   name: Split package
+                uses: SyliusLabs/SplitPackageAction@v1.0
+                with:
+                    directory: ${{ matrix.package.directory }}
+                    repository: ${{ matrix.package.repository }}
+                    branch: ${{ github.event.inputs.branch }}
+                    tag: ${{ github.event.inputs.tag }}
+                    token: ${{ secrets.SPLIT_TOKEN }}

@@ -68,6 +68,13 @@ final class CreateAdminUserHandler
         $adminUser->setLocaleCode($command->getLocaleCode());
         $adminUser->setEnabled($command->isEnabled());
 
+        $command->hasAdministrationAccess()
+            ? $adminUser->addRole(AdminUserInterface::DEFAULT_ADMIN_ROLE)
+            : $adminUser->removeRole(AdminUserInterface::DEFAULT_ADMIN_ROLE);
+        $command->hasApiAccess()
+            ? $adminUser->addRole(AdminUserInterface::API_ACCESS_ROLE)
+            : $adminUser->removeRole(AdminUserInterface::API_ACCESS_ROLE);
+
         return $adminUser;
     }
 

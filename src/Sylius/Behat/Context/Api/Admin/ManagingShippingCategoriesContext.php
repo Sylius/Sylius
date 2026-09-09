@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
@@ -31,50 +33,38 @@ final class ManagingShippingCategoriesContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to create a new shipping category
-     */
+    #[When('I want to create a new shipping category')]
     public function iWantToCreateANewShippingCategory(): void
     {
         $this->client->buildCreateRequest(Resources::SHIPPING_CATEGORIES);
     }
 
-    /**
-     * @When I want to modify a shipping category :shippingCategory
-     */
+    #[When('I want to modify a shipping category :shippingCategory')]
     public function iWantToModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
         $this->client->buildUpdateRequest(Resources::SHIPPING_CATEGORIES, $shippingCategory->getCode());
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I delete shipping category :shippingCategory
-     */
+    #[When('I delete shipping category :shippingCategory')]
     public function iDeleteShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
         $this->client->delete(Resources::SHIPPING_CATEGORIES, $shippingCategory->getCode());
     }
 
-    /**
-     * @When I browse shipping categories
-     */
+    #[When('I browse shipping categories')]
     public function iBrowseShippingCategories(): void
     {
         $this->client->index(Resources::SHIPPING_CATEGORIES);
     }
 
-    /**
-     * @When I do not specify its code
-     * @When I specify its code as :code
-     */
+    #[When('I do not specify its code')]
+    #[When('I specify its code as :code')]
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
         if ($code !== null) {
@@ -82,11 +72,9 @@ final class ManagingShippingCategoriesContext implements Context
         }
     }
 
-    /**
-     * @When I name it :name
-     * @When I do not specify its name
-     * @When I rename it to :name
-     */
+    #[When('I name it :name')]
+    #[When('I do not specify its name')]
+    #[When('I rename it to :name')]
     public function iNameIt(?string $name = null): void
     {
         if ($name !== null) {
@@ -94,25 +82,19 @@ final class ManagingShippingCategoriesContext implements Context
         }
     }
 
-    /**
-     * @When I modify a shipping category :shippingCategory
-     */
+    #[When('I modify a shipping category :shippingCategory')]
     public function iModifyAShippingCategory(ShippingCategoryInterface $shippingCategory): void
     {
         $this->client->buildUpdateRequest(Resources::SHIPPING_CATEGORIES, $shippingCategory->getCode());
     }
 
-    /**
-     * @When I specify its description as :description
-     */
+    #[When('I specify its description as :description')]
     public function iSpecifyItsDescriptionAs(string $description): void
     {
         $this->client->addRequestData('description', $description);
     }
 
-    /**
-     * @Then I should be notified that shipping category with this code already exists
-     */
+    #[Then('I should be notified that shipping category with this code already exists')]
     public function iShouldBeNotifiedThatShippingCategoryWithThisCodeAlreadyExists(): void
     {
         Assert::same(
@@ -121,9 +103,7 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that :element is required
-     */
+    #[Then('I should be notified that :element is required')]
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         Assert::same(
@@ -132,19 +112,15 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should see a single shipping category in the list
-     * @Then I should see :count shipping categories in the list
-     */
+    #[Then('I should see a single shipping category in the list')]
+    #[Then('I should see :count shipping categories in the list')]
     public function iShouldSeeShippingCategoriesInTheList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::SHIPPING_CATEGORIES)), $count);
     }
 
-    /**
-     * @Then the shipping category :shippingMethodName should be in the registry
-     * @Then the shipping category :shippingMethodName should appear in the registry
-     */
+    #[Then('the shipping category :shippingMethodName should be in the registry')]
+    #[Then('the shipping category :shippingMethodName should appear in the registry')]
     public function theShippingCategoryShouldAppearInTheRegistry(string $shippingCategoryName): void
     {
         Assert::true(
@@ -153,9 +129,7 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then shipping category with name :name should not be added
-     */
+    #[Then('shipping category with name :name should not be added')]
     public function shippingCategoryWithNameShouldNotBeAdded(string $name): void
     {
         Assert::false(
@@ -164,9 +138,7 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this shipping category) should no longer exist in the registry$/
-     */
+    #[Then('/^(this shipping category) should no longer exist in the registry$/')]
     public function thisShippingCategoryShouldNoLongerExistInTheRegistry(
         ShippingCategoryInterface $shippingCategory,
     ): void {
@@ -177,9 +149,7 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->addRequestData('code', 'NEW_CODE');
@@ -190,9 +160,7 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one shipping category with code :code
-     */
+    #[Then('there should still be only one shipping category with code :code')]
     public function thereShouldStillBeOnlyOneShippingCategoryWith(string $code): void
     {
         Assert::same(
@@ -201,9 +169,7 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then this shipping category name should be :name
-     */
+    #[Then('this shipping category name should be :name')]
     public function thisShippingCategoryNameShouldBe(string $name): void
     {
         Assert::true(
@@ -212,9 +178,7 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -223,9 +187,7 @@ final class ManagingShippingCategoriesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(

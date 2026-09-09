@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Model\ProductOption;
 use Sylius\Component\Product\Model\ProductOptionValue;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductOptionTest extends TestCase
 {
     private ProductOption $productOption;

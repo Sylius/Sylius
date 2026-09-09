@@ -18,6 +18,7 @@ use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use ApiPlatform\Metadata\UriVariablesConverterInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -29,6 +30,7 @@ use Sylius\Bundle\ApiBundle\Exception\NoRouteMatchesException as ApiRouteNotFoun
 use Symfony\Component\Routing\Exception\RouteNotFoundException as SymfonyRouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class IriToIdentifierConverterTest extends TestCase
 {
     private MockObject&RouterInterface $router;

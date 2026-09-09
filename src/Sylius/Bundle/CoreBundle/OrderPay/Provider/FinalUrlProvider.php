@@ -18,7 +18,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/** @experimental */
 final class FinalUrlProvider implements FinalUrlProviderInterface
 {
     /**

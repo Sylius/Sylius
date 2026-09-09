@@ -19,6 +19,13 @@
 
 .navbar-brand-image {
     height: 3rem;
+    color: $logo-text-color;
+}
+
+@include color-mode(dark) {
+    .navbar-brand-image {
+        color: $white;
+    }
 }
 
 .navbar-collapse a.nav-link,
@@ -35,7 +42,7 @@
     min-width: 44px;
 }
 .navbar-collapse .nav-link:focus-visible {
-    outline: solid 2px rgb(153, 200, 255);
+    outline: solid 2px var(--tblr-primary);
 }
 .navbar-plus-badge{
     width: 50px;

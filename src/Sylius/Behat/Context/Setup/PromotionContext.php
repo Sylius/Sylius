@@ -23,6 +23,7 @@ use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -31,6 +32,7 @@ use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
@@ -58,6 +60,7 @@ final readonly class PromotionContext implements Context
         private ObjectManager $objectManager,
         private ExampleFactoryInterface $promotionExampleFactory,
         private MessageBusInterface $commandBus,
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 
@@ -83,9 +86,7 @@ final readonly class PromotionContext implements Context
         ));
     }
 
-    /**
-     * @Given /^there is a promotion "([^"]+)" with "Has at least one from taxons" rule (configured with "[^"]+" and "[^"]+")$/
-     */
+    #[Given('/^there is a promotion "([^"]+)" with "Has at least one from taxons" rule (configured with "[^"]+" and "[^"]+")$/')]
     public function thereIsAPromotionWithHasAtLeastOneFromTaxonsRuleConfiguredWith(string $name, iterable $taxons): void
     {
         $taxonCodes = array_map(fn (TaxonInterface $taxon) => $taxon->getCode(), iterator_to_array($taxons));
@@ -103,9 +104,7 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given /^there is a promotion "([^"]+)" with "Total price of items from taxon" rule configured with ("[^"]+" taxon) and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/
-     */
+    #[Given('/^there is a promotion "([^"]+)" with "Total price of items from taxon" rule configured with ("[^"]+" taxon) and (?:€|£|\$)([^"]+) amount for ("[^"]+" channel)$/')]
     public function thereIsAPromotionWithTotalPriceOfItemsFromTaxonRuleConfiguredWithTaxonAndAmountForChannel(
         string $name,
         TaxonInterface $taxon,
@@ -127,9 +126,7 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given /^there is a promotion "([^"]+)" with "Contains product" rule with (products "[^"]+" and "[^"]+")$/
-     */
+    #[Given('/^there is a promotion "([^"]+)" with "Contains product" rule with (products "[^"]+" and "[^"]+")$/')]
     public function thereIsAPromotionWithContainsProductRuleConfiguredWithProducts(string $name, array $products): void
     {
         $rules = [];
@@ -148,9 +145,7 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given /^there is a promotion "([^"]+)" with "Contains product" rule with (product "[^"]+")$/
-     */
+    #[Given('/^there is a promotion "([^"]+)" with "Contains product" rule with (product "[^"]+")$/')]
     public function thereIsAPromotionWithContainsProductRuleConfiguredWithProduct(
         string $name,
         ProductInterface $product,
@@ -169,9 +164,7 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given /^there is an exclusive promotion "([^"]+)"(?:| with priority (\d+))$/
-     */
+    #[Given('/^there is an exclusive promotion "([^"]+)"(?:| with priority (\d+))$/')]
     public function thereIsAnExclusivePromotionWithPriority(string $promotionName, int $priority = 0): void
     {
         $this->createPromotion(
@@ -183,9 +176,7 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given there is a promotion :promotionName limited to :usageLimit usages
-     */
+    #[Given('there is a promotion :promotionName limited to :usageLimit usages')]
     public function thereIsPromotionLimitedToUsages(string $promotionName, int $usageLimit): void
     {
         $this->createPromotion(
@@ -196,10 +187,8 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given the store has a promotion :promotionName with a coupon :couponCode that is limited to :usageLimit usages
-     */
     #[Given('the store has promotion :promotionName with coupon :couponCode')]
+    #[Given('the store has a promotion :promotionName with a coupon :couponCode that is limited to :usageLimit usages')]
     public function thereIsPromotionWithCoupon(string $promotionName, string $couponCode, ?int $usageLimit = null): void
     {
         $promotion = $this->createPromotion(
@@ -229,9 +218,7 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given /^(this promotion) has "([^"]+)", "([^"]+)" and "([^"]+)" coupons/
-     */
+    #[Given('/^(this promotion) has "([^"]+)", "([^"]+)" and "([^"]+)" coupons/')]
     public function thisPromotionHasCoupons(PromotionInterface $promotion, string ...$couponCodes): void
     {
         foreach ($couponCodes as $couponCode) {
@@ -244,9 +231,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) does not apply on discounted products$/
-     */
+    #[Given('/^(this promotion) does not apply on discounted products$/')]
     public function thisPromotionDoesNotApplyOnDiscountedProducts(PromotionInterface $promotion): void
     {
         $promotion->setAppliesToDiscounted(false);
@@ -254,9 +239,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) has already expired$/
-     */
+    #[Given('/^(this promotion) has already expired$/')]
     public function thisPromotionHasExpired(PromotionInterface $promotion): void
     {
         $promotion->setEndsAt(new \DateTime('1 day ago'));
@@ -264,9 +247,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) is valid until tomorrow$/
-     */
+    #[Given('/^(this promotion) is valid until tomorrow$/')]
     public function thisPromotionIsValidUntilTomorrow(PromotionInterface $promotion): void
     {
         $promotion->setEndsAt(new \DateTime('tomorrow'));
@@ -274,9 +255,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) started yesterday$/
-     */
+    #[Given('/^(this promotion) started yesterday$/')]
     public function thisPromotionStartedYesterday(PromotionInterface $promotion): void
     {
         $promotion->setStartsAt(new \DateTime('1 day ago'));
@@ -284,9 +263,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) starts tomorrow$/
-     */
+    #[Given('/^(this promotion) starts tomorrow$/')]
     public function thisPromotionStartsTomorrow(PromotionInterface $promotion): void
     {
         $promotion->setStartsAt(new \DateTime('tomorrow'));
@@ -294,9 +271,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the promotion :promotion is archived
-     */
+    #[Given('the promotion :promotion is archived')]
     public function thisPromotionIsArchived(PromotionInterface $promotion): void
     {
         $promotion->setArchivedAt(new \DateTime());
@@ -304,9 +279,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this coupon) has already expired$/
-     */
+    #[Given('/^(this coupon) has already expired$/')]
     public function thisCouponHasExpired(PromotionCouponInterface $coupon): void
     {
         $coupon->setExpiresAt(new \DateTime('1 day ago'));
@@ -322,9 +295,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this coupon) is set as non reusable after cancelling the order in which it has been used$/
-     */
+    #[Given('/^(this coupon) is set as non reusable after cancelling the order in which it has been used$/')]
     public function thisIsSetAsNonReusableAfterCancellingTheOrderInWhichItHasBeenUsed(PromotionCouponInterface $coupon): void
     {
         $coupon->setReusableFromCancelledOrders(false);
@@ -332,9 +303,30 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this coupon) has already reached its usage limit$/
-     */
+    #[Given('/^(this coupon) has track usage disabled$/')]
+    public function thisCouponHasTrackUsageDisabled(PromotionCouponInterface $coupon): void
+    {
+        $coupon->setTrackUsage(false);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this coupon) has had its track usage re-enabled$/')]
+    public function thisCouponHasHadItsTrackUsageReEnabled(PromotionCouponInterface $coupon): void
+    {
+        /** @var OrderInterface[] $orders */
+        $orders = $this->orderRepository->findBy(['promotionCoupon' => $coupon]);
+        foreach ($orders as $order) {
+            $order->setCheckoutCompletedAt(new \DateTime('-1 day'));
+        }
+
+        $coupon->setTrackUsage(false);
+        $coupon->setTrackUsage(true);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this coupon) has already reached its usage limit$/')]
     public function thisCouponHasReachedItsUsageLimit(PromotionCouponInterface $coupon): void
     {
         $coupon->setUsed(42);
@@ -343,10 +335,8 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this coupon) can be used (\d+) times?$/
-     * @Given /^(this coupon) can be used once$/
-     */
+    #[Given('/^(this coupon) can be used (\d+) times?$/')]
+    #[Given('/^(this coupon) can be used once$/')]
     public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, int $usageLimit = 1): void
     {
         $coupon->setUsageLimit($usageLimit);
@@ -354,9 +344,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this coupon) can be used once per customer$/
-     */
+    #[Given('/^(this coupon) can be used once per customer$/')]
     public function thisCouponCanBeUsedOncePerCustomer(PromotionCouponInterface $coupon): void
     {
         $coupon->setPerCustomerUsageLimit(1);
@@ -372,9 +360,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) has coupon "([^"]+)"$/
-     */
+    #[Given('/^(this promotion) has coupon "([^"]+)"$/')]
     public function thisPromotionHasCoupon(PromotionInterface $promotion, string $couponCode): void
     {
         $coupon = $this->createCoupon($couponCode);
@@ -385,10 +371,8 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this coupon) can be used (\d+) times? per customer$/
-     * @Given /^(this coupon) has no per customer usage limit$/
-     */
+    #[Given('/^(this coupon) can be used (\d+) times? per customer$/')]
+    #[Given('/^(this coupon) has no per customer usage limit$/')]
     public function thisCouponCanBeUsedTimesPerCustomer(PromotionCouponInterface $coupon, ?int $usageLimit = null): void
     {
         $coupon->setPerCustomerUsageLimit($usageLimit);
@@ -396,9 +380,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this coupon) can be used (\d+) times per customer with overall usage limit of (\d+)$/
-     */
+    #[Given('/^(this coupon) can be used (\d+) times per customer with overall usage limit of (\d+)$/')]
     public function thisCouponCanBeUsedTimesPerCustomerWithOverallUsageLimitOf(
         PromotionCouponInterface $coupon,
         int $perCustomerUsageLimit,
@@ -408,9 +390,7 @@ final readonly class PromotionContext implements Context
         $this->thisCouponCanBeUsedNTimes($coupon, $overallUsageLimit);
     }
 
-    /**
-     * @Given /^(this coupon) has been used (\d+) times?$/
-     */
+    #[Given('/^(this coupon) has been used (\d+) times?$/')]
     public function thisCouponHasBeenUsedTimes(PromotionCouponInterface $coupon, int $used): void
     {
         $coupon->setUsed($used);
@@ -418,9 +398,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this coupon) expires (on "[^"]+")$/
-     */
+    #[Given('/^(this coupon) expires (on "[^"]+")$/')]
     public function thisCouponExpiresOn(PromotionCouponInterface $coupon, \DateTimeInterface $date): void
     {
         $coupon->setExpiresAt($date);
@@ -434,9 +412,7 @@ final readonly class PromotionContext implements Context
         $this->createFixedPromotion($promotion, $discount);
     }
 
-    /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel) and ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel)$/
-     */
+    #[Given('/^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel) and ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel)$/')]
     public function thisPromotionGivesDiscountToEveryOrderInTheChannelAndDiscountToEveryOrderInTheChannel(
         PromotionInterface $promotion,
         int $firstChannelDiscount,
@@ -454,9 +430,73 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) gives ("(?:€|£|\$)[^"]+") off on every product in the ("[^"]+" channel) and ("(?:€|£|\$)[^"]+") off in the ("[^"]+" channel)$/
-     */
+    #[Given('/^([^"]+) gives ("[^"]+%") discount to every order in the ("[^"]+" channel) and ("[^"]+%") discount to every order in the ("[^"]+" channel)$/')]
+    public function thisPromotionGivesPercentageDiscountToEveryOrderInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        float $firstDiscount,
+        ChannelInterface $firstChannel,
+        float $secondDiscount,
+        ChannelInterface $secondChannel,
+    ): void {
+        $action = $this->actionFactory->createNew();
+        $action->setType('order_percentage_discount_per_channel');
+        $action->setConfiguration([
+            $firstChannel->getCode() => ['percentage' => $firstDiscount],
+            $secondChannel->getCode() => ['percentage' => $secondDiscount],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(the promotion) applies to orders containing (product "[^"]+") in the ("[^"]+" channel) and (product "[^"]+") in the ("[^"]+" channel)$/')]
+    public function thePromotionAppliesToOrdersContainingProductInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        ProductInterface $firstProduct,
+        ChannelInterface $firstChannel,
+        ProductInterface $secondProduct,
+        ChannelInterface $secondChannel,
+    ): void {
+        $rule = $this->ruleFactory->createNew();
+        $rule->setType('contains_product_per_channel');
+        $rule->setConfiguration([
+            $firstChannel->getCode() => ['product_code' => $firstProduct->getCode()],
+            $secondChannel->getCode() => ['product_code' => $secondProduct->getCode()],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(the promotion) applies to orders with a product from (taxon "[^"]+") in the ("[^"]+" channel) and from (taxon "[^"]+") in the ("[^"]+" channel)$/')]
+    public function thePromotionAppliesToOrdersWithAProductFromTaxonInTheChannelAndInTheChannel(
+        PromotionInterface $promotion,
+        TaxonInterface $firstTaxon,
+        ChannelInterface $firstChannel,
+        TaxonInterface $secondTaxon,
+        ChannelInterface $secondChannel,
+    ): void {
+        $rule = $this->ruleFactory->createNew();
+        $rule->setType('has_taxon_per_channel');
+        $rule->setConfiguration([
+            $firstChannel->getCode() => ['taxons' => [$firstTaxon->getCode()]],
+            $secondChannel->getCode() => ['taxons' => [$secondTaxon->getCode()]],
+        ]);
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this promotion) gives ("(?:€|£|\$)[^"]+") off on every product in the ("[^"]+" channel) and ("(?:€|£|\$)[^"]+") off in the ("[^"]+" channel)$/')]
     public function thisPromotionGivesFixedDiscountOnEveryProductInTheChannelAndInTheChannel(
         PromotionInterface $promotion,
         int $firstAmount,
@@ -474,9 +514,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) gives ("[^"]+%") off on every product in the ("[^"]+" channel) and ("[^"]+%") off in the ("[^"]+" channel)$/
-     */
+    #[Given('/^(this promotion) gives ("[^"]+%") off on every product in the ("[^"]+" channel) and ("[^"]+%") off in the ("[^"]+" channel)$/')]
     public function thisPromotionGivesPercentageDiscountOnEveryProductInTheChannelAndInTheChannel(
         PromotionInterface $promotion,
         float $firstPercentage,
@@ -523,9 +561,7 @@ final readonly class PromotionContext implements Context
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
 
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") discount to every order with items total at least ("[^"]+")$/
-     */
+    #[Given('/^([^"]+) gives ("[^"]+%") discount to every order with items total at least ("[^"]+")$/')]
     public function itGivesPercentageDiscountToEveryOrderWithItemsTotalAtLeast(
         PromotionInterface $promotion,
         float $discount,
@@ -558,9 +594,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^([^"]+) gives free shipping to every order$/
-     */
+    #[Given('/^([^"]+) gives free shipping to every order$/')]
     public function thePromotionGivesFreeShippingToEveryOrder(PromotionInterface $promotion): void
     {
         $this->itGivesPercentageDiscountOnShippingToEveryOrder($promotion, 1);
@@ -593,9 +627,7 @@ final readonly class PromotionContext implements Context
         $this->createUnitFixedPromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
     }
 
-    /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product with maximum price at ("(?:€|£|\$)[^"]+")$/
-     */
+    #[Given('/^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product with maximum price at ("(?:€|£|\$)[^"]+")$/')]
     public function thisPromotionGivesOffOnEveryProductWithMaximumPriceAt(
         PromotionInterface $promotion,
         int $discount,
@@ -669,9 +701,7 @@ final readonly class PromotionContext implements Context
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
 
-    /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains products (classified as "[^"]+" or "[^"]+")$/
-     */
+    #[Given('/^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains products (classified as "[^"]+" or "[^"]+")$/')]
     public function thePromotionGivesOffIfOrderContainsProductsClassifiedAsOr(
         PromotionInterface $promotion,
         int $discount,
@@ -697,9 +727,7 @@ final readonly class PromotionContext implements Context
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
 
-    /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off customer's (\d)(?:st|nd|rd|th) order$/
-     */
+    #[Given('/^([^"]+) gives ("(?:€|£|\$)[^"]+") off customer\'s (\d)(?:st|nd|rd|th) order$/')]
     public function itGivesFixedOffCustomersNthOrder(PromotionInterface $promotion, int $discount, int $nth): void
     {
         $rule = $this->ruleFactory->createNthOrder($nth);
@@ -715,9 +743,7 @@ final readonly class PromotionContext implements Context
         $this->createPercentagePromotion($promotion, $discount, [], $rule);
     }
 
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") and ("(?:€|£|\$)[^"]+") discount on every order$/
-     */
+    #[Given('/^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") and ("(?:€|£|\$)[^"]+") discount on every order$/')]
     public function itGivesPercentageOffOnEveryProductClassifiedAsAndAmountDiscountOnOrder(
         PromotionInterface $promotion,
         float $productDiscount,
@@ -743,9 +769,7 @@ final readonly class PromotionContext implements Context
         $this->createUnitFixedPromotion($promotion, $discount, [], $rule);
     }
 
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") and a ("(?:€|£|\$)[^"]+") discount to every order with items total equal at least ("(?:€|£|\$)[^"]+")$/
-     */
+    #[Given('/^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") and a ("(?:€|£|\$)[^"]+") discount to every order with items total equal at least ("(?:€|£|\$)[^"]+")$/')]
     public function itGivesOffOnEveryProductClassifiedAsAndAFixedDiscountToEveryOrderWithItemsTotalEqualAtLeast(
         PromotionInterface $promotion,
         float $taxonDiscount,
@@ -768,9 +792,7 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+" or "[^"]+") if order contains any product (classified as "[^"]+" or "[^"]+")$/
-     */
+    #[Given('/^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+" or "[^"]+") if order contains any product (classified as "[^"]+" or "[^"]+")$/')]
     public function itGivesOffOnEveryProductClassifiedAsOrIfOrderContainsAnyProductClassifiedAsOr(
         PromotionInterface $promotion,
         float $discount,
@@ -790,9 +812,7 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") if order contains any product (classified as "[^"]+")$/
-     */
+    #[Given('/^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") if order contains any product (classified as "[^"]+")$/')]
     public function itGivesOffOnEveryProductClassifiedAsIfOrderContainsAnyProductClassifiedAs(
         PromotionInterface $promotion,
         float $discount,
@@ -809,10 +829,8 @@ final readonly class PromotionContext implements Context
         );
     }
 
-    /**
-     * @Given /^(it) is coupon based promotion$/
-     * @Given /^(it) is a coupon based promotion$/
-     */
+    #[Given('/^(it) is coupon based promotion$/')]
+    #[Given('/^(it) is a coupon based promotion$/')]
     public function itIsCouponBasedPromotion(PromotionInterface $promotion): void
     {
         $promotion->setCouponBased(true);
@@ -820,9 +838,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(the promotion) was disabled for the (channel "[^"]+")$/
-     */
+    #[Given('/^(the promotion) was disabled for the (channel "[^"]+")$/')]
     public function thePromotionWasDisabledForTheChannel(PromotionInterface $promotion, ChannelInterface $channel): void
     {
         $promotion->removeChannel($channel);
@@ -830,9 +846,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the (coupon "[^"]+") was used up to its usage limit$/
-     */
+    #[Given('/^the (coupon "[^"]+") was used up to its usage limit$/')]
     public function theCouponWasUsed(PromotionCouponInterface $coupon): void
     {
         $coupon->setUsed($coupon->getUsageLimit());
@@ -860,9 +874,7 @@ final readonly class PromotionContext implements Context
         $this->createUnitPercentagePromotion($promotion, $percentage, $this->getProductsFilterConfiguration([$product->getCode()]));
     }
 
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") off the order for customers from ("[^"]*" group)$/
-     */
+    #[Given('/^([^"]+) gives ("[^"]+%") off the order for customers from ("[^"]*" group)$/')]
     public function thePromotionGivesOffTheOrderForCustomersFromGroup(
         PromotionInterface $promotion,
         float $discount,
@@ -876,9 +888,7 @@ final readonly class PromotionContext implements Context
         $this->createPercentagePromotion($promotion, $discount, [], $rule);
     }
 
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") discount on shipping to every order over ("(?:€|£|\$)[^"]+")$/
-     */
+    #[Given('/^([^"]+) gives ("[^"]+%") discount on shipping to every order over ("(?:€|£|\$)[^"]+")$/')]
     public function itGivesDiscountOnShippingToEveryOrderOver(
         PromotionInterface $promotion,
         float $discount,
@@ -897,10 +907,8 @@ final readonly class PromotionContext implements Context
         $this->itGivesDiscountOnShippingToEveryOrderOver($promotion, 1, $itemTotal);
     }
 
-    /**
-     * @Given /^I have generated (\d+) coupons for (this promotion) with code length (\d+) and prefix "([^"]+)"$/
-     * @Given /^I have generated (\d+) coupons for (this promotion) with code length (\d+), prefix "([^"]+)" and suffix "([^"]+)"$/
-     */
+    #[Given('/^I have generated (\d+) coupons for (this promotion) with code length (\d+) and prefix "([^"]+)"$/')]
+    #[Given('/^I have generated (\d+) coupons for (this promotion) with code length (\d+), prefix "([^"]+)" and suffix "([^"]+)"$/')]
     public function iHaveGeneratedCouponsForThisPromotionWithCodeLengthPrefixAndSuffix(
         int $amount,
         PromotionInterface $promotion,
@@ -911,9 +919,7 @@ final readonly class PromotionContext implements Context
         $this->generateCoupons($amount, $promotion, $codeLength, $prefix, $suffix);
     }
 
-    /**
-     * @Given /^I have generated (\d+) coupons for (this promotion) with code length (\d+) and suffix "([^"]+)"$/
-     */
+    #[Given('/^I have generated (\d+) coupons for (this promotion) with code length (\d+) and suffix "([^"]+)"$/')]
     public function iHaveGeneratedCouponsForThisPromotionWithCodeLengthAndSuffix(
         int $amount,
         PromotionInterface $promotion,
@@ -934,9 +940,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) has usage limit equal to (\d+)$/
-     */
+    #[Given('/^(this promotion) has usage limit equal to (\d+)$/')]
     public function thisPromotionHasUsageLimitEqualTo(PromotionInterface $promotion, int $usageLimit): void
     {
         $promotion->setUsageLimit($usageLimit);
@@ -944,9 +948,15 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) usage limit is already reached$/
-     */
+    #[Given('/^(this promotion) has track usage disabled$/')]
+    public function thisPromotionHasTrackUsageDisabled(PromotionInterface $promotion): void
+    {
+        $promotion->setTrackUsage(false);
+
+        $this->objectManager->flush();
+    }
+
+    #[Given('/^(this promotion) usage limit is already reached$/')]
     public function thisPromotionUsageLimitIsAlreadyReached(PromotionInterface $promotion): void
     {
         $promotion->setUsed($promotion->getUsageLimit());
@@ -954,9 +964,7 @@ final readonly class PromotionContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this promotion) only applies to orders with a total of at least ("[^"]+") for ("[^"]+" channel) and ("[^"]+") for ("[^"]+" channel)$/
-     */
+    #[Given('/^(this promotion) only applies to orders with a total of at least ("[^"]+") for ("[^"]+" channel) and ("[^"]+") for ("[^"]+" channel)$/')]
     public function thisPromotionOnlyAppliesToOrdersWithTotalOfAtLeastForAndFor(
         PromotionInterface $promotion,
         int $firstAmount,

@@ -18,6 +18,8 @@
                   >
 
     <mapped-superclass name="Sylius\Component\Core\Model\Promotion" table="sylius_promotion">
+        <field name="version" type="integer" version="true" />
+
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
             <order-by>
                 <order-by-field name="id" />

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
@@ -23,11 +24,9 @@ final readonly class ThemeContext implements Context
     {
     }
 
-    /**
-     * @Transform /^"([^"]+)" theme$/
-     * @Transform /^theme "([^"]+)"$/
-     * @Transform :theme
-     */
+    #[Transform('/^"([^"]+)" theme$/')]
+    #[Transform('/^theme "([^"]+)"$/')]
+    #[Transform(':theme')]
     public function getThemeByThemeName(string $themeName): ThemeInterface
     {
         return $this->themeRepository->findOneByName($themeName);

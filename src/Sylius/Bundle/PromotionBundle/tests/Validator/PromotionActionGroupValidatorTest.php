@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\PromotionBundle\Validator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionActionGroup;
@@ -25,6 +26,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Validator\ContextualValidatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionActionGroupValidatorTest extends TestCase
 {
     private PromotionActionGroupValidator $promotionActionGroupValidator;
@@ -81,7 +83,7 @@ final class PromotionActionGroupValidatorTest extends TestCase
             ->with($this->promotionAction, null, ['Default', 'action_two'])
             ->willReturn($this->contextualValidator);
 
-        $constraint = new PromotionActionGroup(['groups' => ['Default', 'test_group']]);
+        $constraint = new PromotionActionGroup(groups: ['Default', 'test_group']);
         $this->promotionActionGroupValidator->validate($this->promotionAction, $constraint);
     }
 
@@ -98,7 +100,7 @@ final class PromotionActionGroupValidatorTest extends TestCase
             ->with($this->promotionAction, null, ['Default', 'test_group'])
             ->willReturn($this->contextualValidator);
 
-        $constraint = new PromotionActionGroup(['groups' => ['Default', 'test_group']]);
+        $constraint = new PromotionActionGroup(groups: ['Default', 'test_group']);
         $this->promotionActionGroupValidator->validate($this->promotionAction, $constraint);
     }
 }

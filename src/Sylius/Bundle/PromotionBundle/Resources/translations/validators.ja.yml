@@ -41,6 +41,8 @@ sylius:
             not_blank: 'プロモーションの説明を入力してください。'
         end_date_cannot_be_set_prior_start_date: '終了日は開始日より前に設定できません。'
         is_invalid: 'プロモーションが無効です。'
+        usage_limit:
+            min: 'プロモーション利用制限は{{ limit }}以上でなければなりません。'
         name:
             max_length: '名称は 1 文字を超えてはいけません。|名称は {{ limit }} 文字以内で入力してください。'
             min_length: '名称は最低 1 文字以上で入力してください。|名称は最低 {{ limit }} 文字以上で入力してください。'

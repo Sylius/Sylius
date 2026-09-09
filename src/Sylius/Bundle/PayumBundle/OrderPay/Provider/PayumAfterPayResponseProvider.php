@@ -21,12 +21,11 @@ use Sylius\Bundle\CoreBundle\OrderPay\Handler\PaymentStateFlashHandlerInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Provider\AfterPayResponseProviderInterface;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Factory\ResolveNextRouteFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
-/** @experimental */
 final class PayumAfterPayResponseProvider implements AfterPayResponseProviderInterface
 {
     public function __construct(
@@ -38,9 +37,9 @@ final class PayumAfterPayResponseProvider implements AfterPayResponseProviderInt
     ) {
     }
 
-    public function getResponse(RequestConfiguration $requestConfiguration): Response
+    public function getResponse(Request $request): Response
     {
-        $token = $this->getHttpRequestVerifier()->verify($requestConfiguration->getRequest());
+        $token = $this->getHttpRequestVerifier()->verify($request);
 
         /** @var GetStatusInterface&Generic $status */
         $status = $this->getStatusRequestFactory->createNewWithModel($token);
@@ -49,7 +48,7 @@ final class PayumAfterPayResponseProvider implements AfterPayResponseProviderInt
         $resolveNextRoute = $this->resolveNextRouteRequestFactory->createNewWithModel($status->getFirstModel());
         $this->payum->getGateway($token->getGatewayName())->execute($resolveNextRoute);
 
-        $this->paymentStatusFlashHandler->handle($requestConfiguration, (string) $status->getValue());
+        $this->paymentStatusFlashHandler->handle($request, (string) $status->getValue());
 
         $url = $this->router->generate(
             $resolveNextRoute->getRouteName(),
@@ -61,10 +60,9 @@ final class PayumAfterPayResponseProvider implements AfterPayResponseProviderInt
         return new RedirectResponse($url);
     }
 
-    public function supports(RequestConfiguration $requestConfiguration): bool
+    public function supports(Request $request): bool
     {
-        $request = $requestConfiguration->getRequest();
-        $hash = $request->attributes->get('payum_token', $request->get('payum_token', false));
+        $hash = $request->attributes->get('payum_token', $request->query->get('payum_token', $request->request->get('payum_token', false)));
 
         return false !== $hash;
     }

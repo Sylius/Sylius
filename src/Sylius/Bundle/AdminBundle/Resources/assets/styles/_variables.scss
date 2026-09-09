@@ -78,3 +78,13 @@ $h1-line-height: 2.1rem;
 
 // Page
 $page-title-font-size: var(--#{$prefix}font-size-h1);
+
+// Dark mode
+$dark-body-bg: #0F1623 !default;
+$dark-bg-surface: #1E2433 !default;
+
+// Chart
+$primary-darken: mix(black, $primary, 15%) !default;
+
+// Logo
+$logo-text-color: #131718 !default;

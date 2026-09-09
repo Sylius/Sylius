@@ -54,6 +54,6 @@ final class FloatAttributeType implements AttributeTypeInterface
 
     private function getValidationErrors(ExecutionContextInterface $context, ?float $value): ConstraintViolationListInterface
     {
-        return $context->getValidator()->validate($value, [new NotBlank([])]);
+        return $context->getValidator()->validate($value, [new NotBlank()]);
     }
 }

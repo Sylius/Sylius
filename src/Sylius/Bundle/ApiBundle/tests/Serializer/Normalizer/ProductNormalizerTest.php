@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -28,6 +29,7 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductNormalizerTest extends TestCase
 {
     private MockObject&ProductVariantResolverInterface $defaultProductVariantResolver;

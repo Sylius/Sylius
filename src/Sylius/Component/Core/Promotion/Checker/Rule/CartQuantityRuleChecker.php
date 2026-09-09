@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcher;
+use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcherInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -21,6 +23,19 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
 {
     public const TYPE = 'cart_quantity';
 
+    public function __construct(private ?ComparisonOperatorMatcherInterface $comparisonOperatorMatcher = null)
+    {
+        if (null === $this->comparisonOperatorMatcher) {
+            trigger_deprecation(
+                'sylius/core',
+                '2.3',
+                'Not passing a "%s" to "%s" is deprecated and will be required in Sylius 3.0.',
+                ComparisonOperatorMatcherInterface::class,
+                self::class,
+            );
+        }
+    }
+
     /** @param array<array-key, mixed> $configuration */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration): bool
     {
@@ -28,6 +43,15 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $subject->getPromotionSubjectCount() >= $configuration['count'];
+        $promotionSubjectCount = $subject->getPromotionSubjectCount();
+        $count = $configuration['count'];
+        $comparisonOperator = $configuration['comparison_operator'] ?? $this->getComparisonOperatorMatcher()->getDefaultComparisonOperator();
+
+        return $this->getComparisonOperatorMatcher()->match($promotionSubjectCount, $count, $comparisonOperator);
+    }
+
+    private function getComparisonOperatorMatcher(): ComparisonOperatorMatcherInterface
+    {
+        return $this->comparisonOperatorMatcher ??= new ComparisonOperatorMatcher();
     }
 }

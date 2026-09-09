@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Promotion\Exception;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
 use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class FailedGenerationExceptionTest extends TestCase
 {
     private MockObject&ReadablePromotionCouponGeneratorInstructionInterface $instruction;

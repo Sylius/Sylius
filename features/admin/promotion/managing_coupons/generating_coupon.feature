@@ -16,6 +16,7 @@ Feature: Generating new coupons
         And I choose the amount of 5 coupons to be generated
         And I specify their code length as 6
         And I limit generated coupons usage to 25 times
+        And I enable track usage for generated coupons
         And I make generated coupons valid until "26.03.2017"
         And I generate these coupons
         Then I should be notified that they have been successfully generated

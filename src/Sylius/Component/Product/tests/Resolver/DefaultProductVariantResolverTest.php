@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Product\Resolver;
 
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class DefaultProductVariantResolverTest extends TestCase
 {
     /** @var ProductVariantRepositoryInterface<ProductVariant>&MockObject */

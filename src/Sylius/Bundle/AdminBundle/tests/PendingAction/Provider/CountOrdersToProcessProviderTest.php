@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\PendingAction\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\PendingAction\Provider\CountOrdersToProcessProvider;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CountOrdersToProcessProviderTest extends TestCase
 {
     private MockObject&OrderRepositoryInterface $orderRepository;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Customer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Customer\CustomerAddressAdderInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerOrderAddressesSaverTest extends TestCase
 {
     private CustomerAddressAdderInterface&MockObject $addressAdder;

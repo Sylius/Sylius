@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Account\RequestResetPasswordToken;
@@ -27,6 +28,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RequestResetPasswordTokenHandlerTest extends TestCase
 {
     private MockObject&UserRepositoryInterface $userRepository;
@@ -64,12 +66,13 @@ final class RequestResetPasswordTokenHandlerTest extends TestCase
             ->method('findOneByEmail')
             ->with('test@email.com')
             ->willReturn($shopUser);
-        $this->clock->expects(self::once())->method('now')->willReturn(new \DateTimeImmutable());
+        $now = new \DateTimeImmutable();
+        $this->clock->expects(self::once())->method('now')->willReturn($now);
         $this->generator->expects(self::once())->method('generate')->willReturn('TOKEN');
         $shopUser->expects(self::once())->method('setPasswordResetToken')->with('TOKEN');
         $shopUser->expects(self::once())
             ->method('setPasswordRequestedAt')
-            ->with(self::isInstanceOf(\DateTimeImmutable::class));
+            ->with(\DateTime::createFromImmutable($now));
         $sendResetPasswordEmail = new SendResetPasswordEmail('test@email.com', 'WEB', 'en_US');
         $this->messageBus->expects(self::once())
             ->method('dispatch')

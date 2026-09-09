@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: 'Kan een taxon niet verwijderen dat in gebruik is door een promotie regel.'
         menu_taxon_delete: 'Je kunt een menu taxon van een kanaal niet verwijderen.'
+    user:
+        verification_email_sent: 'Als het ingevoerde e-mailadres aan een account is gekoppeld, is er een verificatie-e-mail verzonden.'

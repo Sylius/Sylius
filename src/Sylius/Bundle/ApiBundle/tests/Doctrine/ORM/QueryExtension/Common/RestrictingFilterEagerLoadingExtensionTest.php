@@ -17,6 +17,7 @@ use ApiPlatform\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Common\RestrictingFilterEagerLoadingExtension;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductReview;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RestrictingFilterEagerLoadingExtensionTest extends TestCase
 {
     /** @var QueryCollectionExtensionInterface|MockObject */

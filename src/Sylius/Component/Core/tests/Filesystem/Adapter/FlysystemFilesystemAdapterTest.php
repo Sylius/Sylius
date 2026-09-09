@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Filesystem\Adapter;
 
 use League\Flysystem\FilesystemOperator;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Sylius\Component\Core\Filesystem\Adapter\FlysystemFilesystemAdapter;
 use Sylius\Component\Core\Filesystem\Exception\FileNotFoundException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class FlysystemFilesystemAdapterTest extends TestCase
 {
     private FilesystemOperator&MockObject $filesystem;

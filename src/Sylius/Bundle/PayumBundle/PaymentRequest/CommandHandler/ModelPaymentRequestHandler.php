@@ -22,7 +22,6 @@ use Sylius\Bundle\PayumBundle\PaymentRequest\Resolver\DoctrineProxyObjectResolve
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-/** @experimental */
 #[AsMessageHandler]
 final class ModelPaymentRequestHandler
 {

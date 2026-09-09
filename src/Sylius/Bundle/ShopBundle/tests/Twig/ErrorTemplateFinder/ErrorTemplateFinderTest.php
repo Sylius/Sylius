@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShopBundle\Twig\ErrorTemplateFinder;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
@@ -23,6 +24,7 @@ use Sylius\Bundle\UiBundle\Twig\ErrorTemplateFinder\ErrorTemplateFinderInterface
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ErrorTemplateFinderTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;

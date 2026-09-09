@@ -1,0 +1,88 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+use Behat\Config\Config;
+
+return (new Config())
+    ->import([
+        'api/account/address_book.php',
+        'api/account/customer.php',
+        'api/account/customer_registration.php',
+        'api/account/email_verification.php',
+        'api/account/login.php',
+        'api/account/resend_verification_email.php',
+        'api/addressing/managing_countries.php',
+        'api/addressing/managing_zones.php',
+        'api/admin/dashboard.php',
+        'api/admin/locale.php',
+        'api/admin/login.php',
+        'api/admin/security.php',
+        'api/cart/accessing_cart.php',
+        'api/cart/shopping_cart.php',
+        'api/channel/channels.php',
+        'api/channel/managing_channels.php',
+        'api/checkout/checkout.php',
+        'api/checkout/paying_for_order.php',
+        'api/contact/requesting_contact.php',
+        'api/currency/currencies.php',
+        'api/currency/managing_currencies.php',
+        'api/currency/managing_exchange_rates.php',
+        'api/currency/viewing_exchange_rates.php',
+        'api/homepage/viewing_products.php',
+        'api/inventory/cart_inventory.php',
+        'api/inventory/checkout_inventory.php',
+        'api/inventory/managing_inventory.php',
+        'api/locale/locales.php',
+        'api/locale/managing_locales.php',
+        'api/order/managing_orders.php',
+        'api/order/modifying_placed_order_address.php',
+        'api/order/order_history.php',
+        'api/payment/managing_payment_methods.php',
+        'api/payment/managing_payments.php',
+        'api/product/adding_product_review.php',
+        'api/product/managing_product_association_types.php',
+        'api/product/managing_product_attributes.php',
+        'api/product/managing_product_options.php',
+        'api/product/managing_product_reviews.php',
+        'api/product/managing_product_variants.php',
+        'api/product/managing_products.php',
+        'api/product/viewing_price_history.php',
+        'api/product/viewing_price_history_after_catalog_promotions.php',
+        'api/product/viewing_product_in_admin_panel.php',
+        'api/product/viewing_product_reviews.php',
+        'api/product/viewing_product_variants.php',
+        'api/product/viewing_products.php',
+        'api/promotion/applying_catalog_promotions.php',
+        'api/promotion/applying_promotion_coupon.php',
+        'api/promotion/applying_promotion_rules.php',
+        'api/promotion/managing_catalog_promotions.php',
+        'api/promotion/managing_promotion_coupons.php',
+        'api/promotion/managing_promotions.php',
+        'api/promotion/receiving_discount.php',
+        'api/promotion/removing_catalog_promotions.php',
+        'api/shipping/applying_shipping_method_rules.php',
+        'api/shipping/applying_shipping_fee.php',
+        'api/shipping/viewing_shipping_methods.php',
+        'api/shipping/managing_shipments.php',
+        'api/shipping/managing_shipping_categories.php',
+        'api/shipping/managing_shipping_methods.php',
+        'api/taxation/applying_taxes.php',
+        'api/taxation/managing_tax_categories.php',
+        'api/taxation/managing_tax_rates.php',
+        'api/taxon/managing_taxons.php',
+        'api/user/managing_administrators.php',
+        'api/user/managing_customer_groups.php',
+        'api/user/managing_customers.php',
+        'api/user/managing_users.php',
+    ])
+;

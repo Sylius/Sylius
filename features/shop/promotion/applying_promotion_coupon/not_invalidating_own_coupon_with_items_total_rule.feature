@@ -40,7 +40,7 @@ Feature: Not invalidating own coupon with items total rule
         And I use coupon with code "BUGME10"
         Then I should not be notified that the coupon is invalid
         And my cart total should be "$33.00"
-        And my discount should be "-$11.00"
+        And my total discount should be "-$11.00"
 
     @api @ui
     Scenario: Receiving the discount on the first application within the bug window

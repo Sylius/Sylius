@@ -20,47 +20,43 @@ use Doctrine\DBAL\ParameterType;
 
 class DriverConnectionMock implements Connection
 {
-    public function prepare($prepareString): Statement
+    public function prepare(string $sql): Statement
     {
         return new StatementMock();
     }
 
-    public function query(?string $sql = null): Result
+    public function query(string $sql): Result
     {
         return new DriverResultMock();
     }
 
-    public function quote($input, $type = ParameterType::STRING)
+    public function quote($value, $type = ParameterType::STRING)
     {
-        return (string) $input;
+        return (string) $value;
     }
 
-    public function exec($statement): int
+    public function exec(string $sql): int
     {
         throw new \BadMethodCallException('Not implemented');
     }
 
-    public function lastInsertId($name = null)
+    public function lastInsertId($name = null): string|int|false
     {
+        return false;
     }
 
-    public function beginTransaction()
+    public function beginTransaction(): bool
     {
+        return true;
     }
 
-    public function commit()
+    public function commit(): bool
     {
+        return true;
     }
 
-    public function rollBack()
+    public function rollBack(): bool
     {
-    }
-
-    public function errorCode()
-    {
-    }
-
-    public function errorInfo()
-    {
+        return true;
     }
 }

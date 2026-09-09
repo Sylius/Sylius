@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Taxation\Calculator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Calculator\DelegatingCalculator;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class DelegatingCalculatorTest extends TestCase
 {
     /** @var ServiceRegistryInterface&MockObject */

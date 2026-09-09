@@ -1,5 +1,5 @@
 ###> project files ###
-/behat.yml
+/behat.php
 /composer.lock
 /docker-compose.override.yml
 /public/media

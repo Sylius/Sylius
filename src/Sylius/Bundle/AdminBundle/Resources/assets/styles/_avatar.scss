@@ -16,3 +16,9 @@
         --tblr-avatar-size: 3rem;
     }
 }
+
+@include color-mode(dark) {
+    .sylius.avatar {
+        background-color: var(--tblr-bg-surface);
+    }
+}

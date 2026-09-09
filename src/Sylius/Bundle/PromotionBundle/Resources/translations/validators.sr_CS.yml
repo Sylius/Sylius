@@ -5,6 +5,8 @@ sylius:
     promotion:
         code:
             unique: Promocija sa izabranim kodom već postoji.
+        usage_limit:
+            min: Ograničenje upotrebe promocije mora biti najmanje {{ limit }}.
         name:
             not_blank: Unesite ime promocije.
     promotion_coupon:

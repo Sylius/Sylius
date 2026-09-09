@@ -6,6 +6,8 @@
     "lastName": null,
     "localeCode": "en",
     "avatar": null,
+    "administrationAccess": false,
+    "apiAccess": true,
     "id": "@integer@",
     "username": "wilhelm",
     "lastLogin": null,

@@ -13,6 +13,7 @@
     "exclusive": true,
     "appliesToDiscounted": false,
     "usageLimit": 1,
+    "trackUsage": true,
     "used": 0,
     "couponBased": false,
     "startsAt": null,

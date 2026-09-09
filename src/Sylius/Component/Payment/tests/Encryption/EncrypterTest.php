@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Payment\Encryption;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Payment\Encryption\Encrypter;
 use Sylius\Component\Payment\Encryption\EncrypterInterface;
 use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EncrypterTest extends TestCase
 {
     /** @var EncrypterInterface&MockObject */
@@ -83,5 +85,13 @@ final class EncrypterTest extends TestCase
     public function testDoesNothingWhenDataIsNotMarkedAsEncrypted(): void
     {
         $this->assertSame('data', $this->encrypter->decrypt('data'));
+    }
+
+    public function testThrowsAnExceptionWhenStrictDecryptionIsEnabledAndDataIsNotEncrypted(): void
+    {
+        $encrypter = new Encrypter('', true);
+
+        $this->expectException(EncryptionException::class);
+        $encrypter->decrypt('data');
     }
 }

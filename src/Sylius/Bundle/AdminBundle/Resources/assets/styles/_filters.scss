@@ -28,7 +28,7 @@
             justify-content: center;
             align-items: center;
             border-radius: 3px;
-            background: $gray-100;
+            background: var(--tblr-card-bg);
 
             @include media-breakpoint-down(md) {
                 bottom: -19px;

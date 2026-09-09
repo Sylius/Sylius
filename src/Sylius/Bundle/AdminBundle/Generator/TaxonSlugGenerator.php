@@ -16,11 +16,23 @@ namespace Sylius\Bundle\AdminBundle\Generator;
 use Behat\Transliterator\Transliterator;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface as BaseTaxonSlugGeneratorInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 final readonly class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 {
-    public function __construct(private BaseTaxonSlugGeneratorInterface $slugGenerator)
-    {
+    public function __construct(
+        private BaseTaxonSlugGeneratorInterface $slugGenerator,
+        private ?SluggerInterface $slugger = null,
+    ) {
+        if (null === $this->slugger) {
+            trigger_deprecation(
+                'sylius/admin-bundle',
+                '2.3',
+                'Not passing a "%s" to "%s" is deprecated and will be required in Sylius 3.0.',
+                SluggerInterface::class,
+                self::class,
+            );
+        }
     }
 
     public function generate(string $name, string $localeCode, ?TaxonInterface $parent = null): string
@@ -38,6 +50,10 @@ final readonly class TaxonSlugGenerator implements TaxonSlugGeneratorInterface
 
     private function transliterate(string $string): string
     {
+        if (null !== $this->slugger) {
+            return $this->slugger->slug($string)->lower()->toString();
+        }
+
         // Manually replacing apostrophes since Transliterator started removing them at v1.2.
         return Transliterator::transliterate(str_replace('\'', '-', $string));
     }

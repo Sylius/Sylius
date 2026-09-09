@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Currency;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Currency\CurrencyStorage;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\Currency;
 use Sylius\Resource\Storage\StorageInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CurrencyStorageTest extends TestCase
 {
     private MockObject&StorageInterface $storage;

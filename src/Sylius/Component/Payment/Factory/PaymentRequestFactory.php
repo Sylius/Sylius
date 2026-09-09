@@ -20,8 +20,6 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
  * @implements PaymentRequestFactoryInterface<PaymentRequestInterface>
- *
- * @experimental
  */
 final class PaymentRequestFactory implements PaymentRequestFactoryInterface
 {

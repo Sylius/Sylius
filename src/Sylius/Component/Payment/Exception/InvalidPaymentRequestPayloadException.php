@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Exception;
 
-/** @experimental */
 final class InvalidPaymentRequestPayloadException extends \RuntimeException
 {
     public function __construct(

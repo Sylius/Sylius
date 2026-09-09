@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-/** @experimental */
 #[\Attribute]
 final class OrderPaymentRequestEligibility extends Constraint
 {

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Locale;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Resource\Storage\StorageInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class LocaleStorageTest extends TestCase
 {
     private MockObject&StorageInterface $storage;

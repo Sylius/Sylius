@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -52,12 +55,10 @@ final readonly class ManagingProductsContext implements Context
     ) {
     }
 
-    /**
-     * @Given the products are already sorted :sortType by name
-     * @When I start sorting products by name
-     * @When I sort the products :sortType by name
-     * @When I switch the way products are sorted :sortType by name
-     */
+    #[Given('the products are already sorted :sortType by name')]
+    #[When('I start sorting products by name')]
+    #[When('I sort the products :sortType by name')]
+    #[When('I switch the way products are sorted :sortType by name')]
     public function iStartSortingProductsByName(string $sortType = 'ascending'): void
     {
         $this->client->sort([
@@ -68,11 +69,9 @@ final readonly class ManagingProductsContext implements Context
         $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
-    /**
-     * @Given I am browsing products
-     * @When I browse products
-     * @When I want to browse products
-     */
+    #[Given('I am browsing products')]
+    #[When('I browse products')]
+    #[When('I want to browse products')]
     public function iWantToBrowseProducts(): void
     {
         $this->client->index(Resources::PRODUCTS);
@@ -80,9 +79,7 @@ final readonly class ManagingProductsContext implements Context
         $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
-    /**
-     * @When I change my locale to :localeCode
-     */
+    #[When('I change my locale to :localeCode')]
     public function iSwitchTheLocaleToTheLocale(string $localeCode): void
     {
         /** @var AdminUserInterface $adminUser */
@@ -94,35 +91,27 @@ final readonly class ManagingProductsContext implements Context
         $this->client->update();
     }
 
-    /**
-     * @When I want to create a new configurable product
-     */
+    #[When('I want to create a new configurable product')]
     public function iWantToCreateANewConfigurableProduct(): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCTS);
     }
 
-    /**
-     * @When I specify its code as :code
-     * @When I do not specify its code
-     */
+    #[When('I specify its code as :code')]
+    #[When('I do not specify its code')]
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->client->addRequestData('code', $code);
     }
 
-    /**
-     * @When I do not name it
-     */
+    #[When('I do not name it')]
     public function iDoNotNameIt(): void
     {
         // Intentionally left blank.
     }
 
-    /**
-     * @When I name it :name in :localeCode locale
-     * @When I rename it to :name in :localeCode locale
-     */
+    #[When('I name it :name in :localeCode locale')]
+    #[When('I rename it to :name in :localeCode locale')]
     public function iRenameItToInLocale(string $name, string $localeCode): void
     {
         $data['translations'][$localeCode]['name'] = $name;
@@ -130,19 +119,15 @@ final readonly class ManagingProductsContext implements Context
         $this->client->updateRequestData($data);
     }
 
-    /**
-     * @When I generate its slug in :localeCode locale
-     */
+    #[When('I generate its slug in :localeCode locale')]
     public function iGenerateItsSlugIn(string $localeCode): void
     {
         // Intentionally left blank, as this is a UI-specific action.
     }
 
-    /**
-     * @When I set its slug to :slug
-     * @When I set its slug to :slug in :localeCode locale
-     * @When I remove its slug
-     */
+    #[When('I set its slug to :slug')]
+    #[When('I set its slug to :slug in :localeCode locale')]
+    #[When('I remove its slug')]
     public function iSetItsSlugTo(?string $slug = null, $localeCode = 'en_US'): void
     {
         $data = [
@@ -156,33 +141,25 @@ final readonly class ManagingProductsContext implements Context
         $this->client->updateRequestData($data);
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I add the :productOption option to it
-     */
+    #[When('I add the :productOption option to it')]
     public function iAddTheOptionToIt(ProductOptionInterface $productOption): void
     {
         $this->client->updateRequestData(['options' => [$this->iriConverter->getIriFromResourceInSection($productOption, 'admin')]]);
     }
 
-    /**
-     * @When /^I choose main (taxon "[^"]+")$/
-     */
+    #[When('/^I choose main (taxon "[^"]+")$/')]
     public function iChooseMainTaxon(TaxonInterface $taxon): void
     {
         $this->client->updateRequestData(['mainTaxon' => $this->iriConverter->getIriFromResourceInSection($taxon, 'admin')]);
     }
 
-    /**
-     * @When I filter them by :taxon taxon
-     */
+    #[When('I filter them by :taxon taxon')]
     public function iFilterThemByTaxon(TaxonInterface $taxon): void
     {
         $this->client->addFilter('productTaxons.taxon.code', $taxon->getCode());
@@ -191,37 +168,29 @@ final readonly class ManagingProductsContext implements Context
         $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
-    /**
-     * @When I search for products with :name name
-     */
+    #[When('I search for products with :name name')]
     public function iSearchForProductsWithName(string $name): void
     {
         $this->client->addFilter('translations.name', $name);
         $this->client->filter();
     }
 
-    /**
-     * @When I search for products with :code code
-     */
+    #[When('I search for products with :code code')]
     public function iSearchForProductsWithCode(string $code): void
     {
         $this->client->addFilter('code', $code);
         $this->client->filter();
     }
 
-    /**
-     * @When I filter them by :taxon main taxon
-     */
+    #[When('I filter them by :taxon main taxon')]
     public function iFilterThemByMainTaxon(TaxonInterface $taxon): void
     {
         $this->client->addFilter('mainTaxon.code', $taxon->getCode());
         $this->client->filter();
     }
 
-    /**
-     * @When I start sorting products by code
-     * @When I switch the way products are sorted :sortType by code
-     */
+    #[When('I start sorting products by code')]
+    #[When('I switch the way products are sorted :sortType by code')]
     public function iSwitchTheWayProductsAreSortedByCode(string $sortType = 'ascending'): void
     {
         $this->client->sort(['code' => self::SORT_TYPES[$sortType]]);
@@ -229,29 +198,23 @@ final readonly class ManagingProductsContext implements Context
         $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
-    /**
-     * @When I (try to) delete the :product product
-     */
+    #[When('I (try to) delete the :product product')]
     public function iDeleteProduct(ProductInterface $product): void
     {
         $this->client->delete(Resources::PRODUCTS, $product->getCode());
     }
 
-    /**
-     * @When /^I want to modify (this product)$/
-     * @When I (want to) modify the :product product
-     */
+    #[When('/^I want to modify (this product)$/')]
+    #[When('I (want to) modify the :product product')]
     public function iWantToModifyAProduct(ProductInterface $product): void
     {
         $this->client->buildUpdateRequest(Resources::PRODUCTS, $product->getCode());
     }
 
-    /**
-     * @Then I should see the product :productName in the list
-     * @Then the product :productName should appear in the store
-     * @Then the product :productName should be in the shop
-     * @Then this product should still be named :productName
-     */
+    #[Then('I should see the product :productName in the list')]
+    #[Then('the product :productName should appear in the store')]
+    #[Then('the product :productName should be in the shop')]
+    #[Then('this product should still be named :productName')]
     public function theProductShouldAppearInTheShop(string $productName): void
     {
         $response = $this->client->index(Resources::PRODUCTS);
@@ -261,9 +224,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @When I remove its name from :localeCode translation
-     */
+    #[When('I remove its name from :localeCode translation')]
     public function iRemoveItsNameFromTranslation(string $localeCode): void
     {
         $this->client->updateRequestData([
@@ -275,9 +236,7 @@ final readonly class ManagingProductsContext implements Context
         ]);
     }
 
-    /**
-     * @When I set its meta keywords to too long string in :localeCode
-     */
+    #[When('I set its meta keywords to too long string in :localeCode')]
     public function iSetItsMetaKeywordsToTooLongStringIn(string $localeCode): void
     {
         $this->client->updateRequestData([
@@ -289,9 +248,7 @@ final readonly class ManagingProductsContext implements Context
         ]);
     }
 
-    /**
-     * @When I set its meta description to too long string in :localeCode
-     */
+    #[When('I set its meta description to too long string in :localeCode')]
     public function iSetItsMetaDescriptionToTooLongStringIn(string $localeCode): void
     {
         $this->client->updateRequestData([
@@ -303,9 +260,7 @@ final readonly class ManagingProductsContext implements Context
         ]);
     }
 
-    /**
-     * @When I set its non-translatable :attribute attribute to :value
-     */
+    #[When('I set its non-translatable :attribute attribute to :value')]
     public function iSetItsNonTranslatableAttributeTo(ProductAttributeInterface $attribute, string $value): void
     {
         $this->client->addSubResourceData(
@@ -317,9 +272,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @When I set the invalid integer value of the non-translatable :attribute attribute to :value
-     */
+    #[When('I set the invalid integer value of the non-translatable :attribute attribute to :value')]
     public function iSetTheInvalidIntegerValueOfTheNonTranslatableAttributeTo(ProductAttributeInterface $attribute, int $value): void
     {
         $this->client->addSubResourceData(
@@ -331,9 +284,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @When I set the invalid string value of the non-translatable :attribute attribute to :value
-     */
+    #[When('I set the invalid string value of the non-translatable :attribute attribute to :value')]
     public function iSetTheInvalidStringValueOfTheNonTranslatableAttributeTo(ProductAttributeInterface $attribute, string $value): void
     {
         $this->client->addSubResourceData(
@@ -345,17 +296,13 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @When I want to modify the images of :product product
-     */
+    #[When('I want to modify the images of :product product')]
     public function iWantToModifyTheImagesOfProduct(ProductInterface $product): void
     {
         $this->sharedStorage->set('productIri', $this->iriConverter->getIriFromResource($product));
     }
 
-    /**
-     * @When I change the :type image position to :position
-     */
+    #[When('I change the :type image position to :position')]
     public function iChangeTheImagePositionTo(string $imageType, int $position): void
     {
         $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
@@ -378,12 +325,10 @@ final readonly class ManagingProductsContext implements Context
         $this->client->request($builder->build());
     }
 
-    /**
-     * @When I set its :attribute attribute to :value
-     * @When I set its :attribute attribute to :value in :localeCode locale
-     * @When I do not set its :attribute attribute in :localeCode locale
-     * @When I set the :attribute attribute value to :value in :localeCode locale
-     */
+    #[When('I set its :attribute attribute to :value')]
+    #[When('I set its :attribute attribute to :value in :localeCode locale')]
+    #[When('I do not set its :attribute attribute in :localeCode locale')]
+    #[When('I set the :attribute attribute value to :value in :localeCode locale')]
     public function iSetItsAttributeTo(
         ProductAttributeInterface $attribute,
         ?string $value = null,
@@ -399,9 +344,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @When I remove its :attribute attribute
-     */
+    #[When('I remove its :attribute attribute')]
     public function iRemoveItsAttribute(ProductAttributeInterface $attribute): void
     {
         $attributeIri = $this->iriConverter->getIriFromResourceInSection($attribute, 'admin');
@@ -416,18 +359,14 @@ final readonly class ManagingProductsContext implements Context
         $this->client->setRequestData($content);
     }
 
-    /**
-     * @When I add the :attributeName attribute
-     * @When I add the :attributeName attribute to it
-     */
+    #[When('I add the :attributeName attribute')]
+    #[When('I add the :attributeName attribute to it')]
     public function iAddTheAttribute(string $attributeName): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @When I select :value value in :localeCode for the :attribute attribute
-     */
+    #[When('I select :value value in :localeCode for the :attribute attribute')]
     public function iSelectValueInForTheAttribute(
         string $value,
         string $localeCode,
@@ -443,9 +382,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @When I select :value value for the :attribute attribute
-     */
+    #[When('I select :value value for the :attribute attribute')]
     public function iSelectValueForTheAttribute(
         string $value,
         ProductAttributeInterface $attribute,
@@ -459,33 +396,25 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @When I enable it in channel :channel
-     */
+    #[When('I enable it in channel :channel')]
     public function iEnableItInChannel(ChannelInterface $channel): void
     {
         $this->client->addRequestData('channels', [$this->iriConverter->getIriFromResource($channel)]);
     }
 
-    /**
-     * @When I access the :product product
-     */
+    #[When('I access the :product product')]
     public function iAccessTheProduct(ProductInterface $product): void
     {
         $this->client->show(Resources::PRODUCTS, $product->getCode());
     }
 
-    /**
-     * @When I choose :channel as a channel filter
-     */
+    #[When('I choose :channel as a channel filter')]
     public function iChooseChannelAsAChannelFilter(ChannelInterface $channel): void
     {
         $this->client->addFilter('channel', $this->iriConverter->getIriFromResource($channel));
     }
 
-    /**
-     * @When I filter
-     */
+    #[When('I filter')]
     public function iFilter(): void
     {
         $this->client->filter();
@@ -493,9 +422,7 @@ final readonly class ManagingProductsContext implements Context
         $this->sharedStorage->set('response', $this->client->getLastResponse());
     }
 
-    /**
-     * @Then I should see main taxon is :taxon
-     */
+    #[Then('I should see main taxon is :taxon')]
     public function iShouldSeeMainTaxonIs(TaxonInterface $taxon): void
     {
         Assert::same(
@@ -504,9 +431,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see product taxon :taxon
-     */
+    #[Then('I should see product taxon :taxon')]
     public function iShouldSeeProductTaxon(TaxonInterface $taxon): void
     {
         $product = $this->sharedStorage->get('product');
@@ -523,9 +448,7 @@ final readonly class ManagingProductsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should see option :productOption
-     */
+    #[Then('I should see option :productOption')]
     public function iShouldSeeOption(ProductOptionInterface $productOption): void
     {
         Assert::true($this->responseChecker->hasValueInCollection(
@@ -535,9 +458,7 @@ final readonly class ManagingProductsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should see :count variants
-     */
+    #[Then('I should see :count variants')]
     public function iShouldSeeVariants(int $count): void
     {
         Assert::count(
@@ -546,9 +467,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the :variant variant
-     */
+    #[Then('I should see the :variant variant')]
     public function iShouldSeeTheVariant(ProductVariantInterface $variant): void
     {
         Assert::true($this->responseChecker->hasValueInCollection(
@@ -558,34 +477,26 @@ final readonly class ManagingProductsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should see product :field is :value
-     * @Then I should see product's :field is :value
-     */
+    #[Then('I should see product :field is :value')]
+    #[Then('I should see product\'s :field is :value')]
     public function iShouldSeeProductFieldIs(string $field, string $value): void
     {
         $this->assertResponseHasTranslationFieldWithValue($field, $value);
     }
 
-    /**
-     * @Then I should see product's meta keyword(s) is/are :metaKeywords
-     */
+    #[Then('I should see product\'s meta keyword(s) is/are :metaKeywords')]
     public function iShouldSeeProductMetaKeywordsAre(string $metaKeywords): void
     {
         $this->assertResponseHasTranslationFieldWithValue('metaKeywords', $metaKeywords);
     }
 
-    /**
-     * @Then I should see product's short description is :shortDescription
-     */
+    #[Then('I should see product\'s short description is :shortDescription')]
     public function iShouldSeeProductShortDescriptionIs(string $shortDescription): void
     {
         $this->assertResponseHasTranslationFieldWithValue('shortDescription', $shortDescription);
     }
 
-    /**
-     * @Then I should see product association type :productAssociationType
-     */
+    #[Then('I should see product association type :productAssociationType')]
     public function iShouldSeeProductAssociationType(ProductAssociationTypeInterface $productAssociationType): void
     {
         $associations = $this->responseChecker->getValue($this->client->getLastResponse(), 'associations');
@@ -602,17 +513,13 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true($this->responseChecker->isCreationSuccessful($this->client->getLastResponse()));
     }
 
-    /**
-     * @Then I should be notified that this product is in use and cannot be deleted
-     */
+    #[Then('I should be notified that this product is in use and cannot be deleted')]
     public function iShouldBeNotifiedThatThisProductIsInUseAndCannotBeDeleted(): void
     {
         Assert::false(
@@ -621,9 +528,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(
@@ -632,9 +537,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that (code|name) is required$/
-     */
+    #[Then('/^I should be notified that (code|name) is required$/')]
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         Assert::contains(
@@ -643,9 +546,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then the one before last image on the list should have type :type with position :position
-     */
+    #[Then('the one before last image on the list should have type :type with position :position')]
     public function theOneBeforeLastImageOnTheListShouldHaveNameWithPosition(string $imageType, int $position): void
     {
         $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
@@ -654,9 +555,7 @@ final readonly class ManagingProductsContext implements Context
         Assert::same($images[count($images) - 2]['position'], $position);
     }
 
-    /**
-     * @Then the last image on the list should have type :type with position :position
-     */
+    #[Then('the last image on the list should have type :type with position :position')]
     public function theLastImageOnTheListShouldHaveNameWithPosition(string $imageType, int $position): void
     {
         $images = $this->responseChecker->getValue($this->client->showByIri($this->sharedStorage->get('productIri')), 'images');
@@ -665,9 +564,7 @@ final readonly class ManagingProductsContext implements Context
         Assert::same($images[count($images) - 1]['position'], $position);
     }
 
-    /**
-     * @Then I should be notified that meta keywords are too long
-     */
+    #[Then('I should be notified that meta keywords are too long')]
     public function iShouldBeNotifiedThatMetaKeywordsAreTooLong(): void
     {
         Assert::contains(
@@ -676,9 +573,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that meta description is too long
-     */
+    #[Then('I should be notified that meta description is too long')]
     public function iShouldBeNotifiedThatMetaDescriptionIsTooLong(): void
     {
         Assert::contains(
@@ -687,9 +582,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that code has to be unique
-     */
+    #[Then('I should be notified that code has to be unique')]
     public function iShouldBeNotifiedThatCodeHasToBeUnique(): void
     {
         Assert::contains(
@@ -698,18 +591,14 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see a single product in the list
-     * @Then I should see :count products in the list
-     */
+    #[Then('I should see a single product in the list')]
+    #[Then('I should see :count products in the list')]
     public function iShouldSeeProductsInTheList(int $count = 1): void
     {
         Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then I should see a product with :field :value
-     */
+    #[Then('I should see a product with :field :value')]
     public function iShouldSeeProductWith(string $field, string $value): void
     {
         $response = $this->getLastResponse();
@@ -720,9 +609,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see any product with :field :value
-     */
+    #[Then('I should not see any product with :field :value')]
     public function iShouldNotSeeAnyProductWith(string $field, string $value): void
     {
         $response = $this->getLastResponse();
@@ -733,9 +620,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         $this->client->addRequestData('code', '_NEW');
@@ -753,10 +638,8 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this product) main (taxon should be "[^"]+")$/
-     * @Then main taxon of product :product should be :taxon
-     */
+    #[Then('/^(this product) main (taxon should be "[^"]+")$/')]
+    #[Then('main taxon of product :product should be :taxon')]
     public function thisProductMainTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
@@ -766,9 +649,7 @@ final readonly class ManagingProductsContext implements Context
         Assert::same($mainTaxon, $this->iriConverter->getIriFromResourceInSection($taxon, 'admin'));
     }
 
-    /**
-     * @Then the product :product should have the :taxon taxon
-     */
+    #[Then('the product :product should have the :taxon taxon')]
     public function thisProductTaxonShouldBe(ProductInterface $product, TaxonInterface $taxon): void
     {
         $this->client->index(Resources::PRODUCT_TAXONS);
@@ -780,9 +661,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then the product :product should not have the :taxon taxon
-     */
+    #[Then('the product :product should not have the :taxon taxon')]
     public function thisProductTaxonShouldHaveNotTheTaxon(ProductInterface $product, TaxonInterface $taxon): void
     {
         $this->client->index(Resources::PRODUCT_TAXONS);
@@ -795,9 +674,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this product) name should be "([^"]+)" in ("([^"]+)" locale)$/
-     */
+    #[Then('/^(this product) name should be "([^"]+)" in ("([^"]+)" locale)$/')]
     public function thisProductNameShouldBe(ProductInterface $product, string $name, string $localeCode): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
@@ -808,9 +685,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this product) should not exist in the product catalog$/
-     */
+    #[Then('/^(this product) should not exist in the product catalog$/')]
     public function productShouldNotExist(ProductInterface $product): void
     {
         $response = $this->client->index(Resources::PRODUCTS);
@@ -821,9 +696,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this product) should have (?:a|an) ("[^"]+" option)$/
-     */
+    #[Then('/^(this product) should have (?:a|an) ("[^"]+" option)$/')]
     public function thisProductShouldHaveOption(ProductInterface $product, ProductOptionInterface $productOption): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
@@ -836,9 +709,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then the first product on the list should have :field :value
-     */
+    #[Then('the first product on the list should have :field :value')]
     public function theFirstProductOnTheListShouldHave(string $field, string $value): void
     {
         $products = $this->responseChecker->getCollection($this->getLastResponse());
@@ -846,9 +717,7 @@ final readonly class ManagingProductsContext implements Context
         Assert::same($this->getFieldValueOfProduct($products[0], $field), $value);
     }
 
-    /**
-     * @Then the last product on the list should have name :name
-     */
+    #[Then('the last product on the list should have name :name')]
     public function theLastProductOnTheListShouldHaveName(string $name): void
     {
         $products = $this->responseChecker->getCollection($this->getLastResponse());
@@ -856,9 +725,7 @@ final readonly class ManagingProductsContext implements Context
         Assert::same($this->getFieldValueOfProduct(end($products), 'name'), $name);
     }
 
-    /**
-     * @Then /^the (first|last) product on the list shouldn't have a name$/
-     */
+    #[Then('/^the (first|last) product on the list shouldn\'t have a name$/')]
     public function theProductOnTheListShouldNotHaveAName(string $position): void
     {
         $products = $this->responseChecker->getCollection($this->getLastResponse());
@@ -868,11 +735,9 @@ final readonly class ManagingProductsContext implements Context
         Assert::null($this->getFieldValueOfProduct($product, 'name'));
     }
 
-    /**
-     * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
-     * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
-     * @Then /^(this product) should(?:| still) have slug "([^"]+)" in ("[^"]+" locale)$/
-     */
+    #[Then('/^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/')]
+    #[Then('/^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/')]
+    #[Then('/^(this product) should(?:| still) have slug "([^"]+)" in ("[^"]+" locale)$/')]
     public function productSlugShouldBe(ProductInterface $product, string $slug, string $localeCode = 'en_US'): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
@@ -883,9 +748,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then /^there should be no reviews of (this product)$/
-     */
+    #[Then('/^there should be no reviews of (this product)$/')]
     public function thereAreNoProductReviews(ProductInterface $product): void
     {
         $response = $this->client->index(Resources::PRODUCT_REVIEWS);
@@ -900,9 +763,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this product) should still exist in the product catalog$/
-     */
+    #[Then('/^(this product) should still exist in the product catalog$/')]
     public function productShouldExistInTheProductCatalog(ProductInterface $product): void
     {
         $response = $this->client->index(Resources::PRODUCTS);
@@ -914,9 +775,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then /^the (product "[^"]+") should still have an accessible image$/
-     */
+    #[Then('/^the (product "[^"]+") should still have an accessible image$/')]
     public function productShouldStillHaveAnAccessibleImage(ProductInterface $product): void
     {
         $response = $this->client->show(Resources::PRODUCTS, $product->getCode());
@@ -924,18 +783,14 @@ final readonly class ManagingProductsContext implements Context
         Assert::true($this->hasProductImage($response, $product), 'Image does not exists');
     }
 
-    /**
-     * @Then /^product with (name|code) "([^"]+)" should not be added$/
-     */
+    #[Then('/^product with (name|code) "([^"]+)" should not be added$/')]
     public function productWithNameShouldNotBeAdded(string $field, string $value): void
     {
         Assert::false($this->hasProductWithFieldValue($this->client->index(Resources::PRODUCTS), $field, $value));
     }
 
-    /**
-     * @Then non-translatable attribute :attribute of product :product should be :value
-     * @Then select attribute :attribute of product :product should be :value
-     */
+    #[Then('non-translatable attribute :attribute of product :product should be :value')]
+    #[Then('select attribute :attribute of product :product should be :value')]
     public function nonTranslatableAttributeOfProductShouldBe(
         ProductAttributeInterface $attribute,
         ProductInterface $product,
@@ -946,19 +801,15 @@ final readonly class ManagingProductsContext implements Context
         $this->hasAttributeWithValueInLastResponse($attribute, $value);
     }
 
-    /**
-     * @Then I should see non-translatable attribute :attribute with value :value%
-     */
+    #[Then('I should see non-translatable attribute :attribute with value :value%')]
     public function iShouldSeeNonTranslatableAttributeWithValue(ProductAttributeInterface $attribute, int $value): void
     {
         $this->hasAttributeWithValueInLastResponse($attribute, (string) ($value / 100));
     }
 
-    /**
-     * @Then attribute :attribute of product :product should be :value
-     * @Then attribute :attribute of product :product should be :value in :localeCode locale
-     * @Then select attribute :attribute of product :product should be :value in :localeCode locale
-     */
+    #[Then('attribute :attribute of product :product should be :value')]
+    #[Then('attribute :attribute of product :product should be :value in :localeCode locale')]
+    #[Then('select attribute :attribute of product :product should be :value in :localeCode locale')]
     public function attributeOfProductShouldBe(
         ProductAttributeInterface $attribute,
         ProductInterface $product,
@@ -970,9 +821,7 @@ final readonly class ManagingProductsContext implements Context
         $this->hasAttributeWithValueInLastResponse($attribute, $value, $localeCode);
     }
 
-    /**
-     * @Then product :product should not have a :attribute attribute
-     */
+    #[Then('product :product should not have a :attribute attribute')]
     public function productShouldNotHaveAttribute(ProductInterface $product, ProductAttributeInterface $attribute): void
     {
         $attributes = $this->responseChecker->getValue($this->client->getLastResponse(), 'attributes');
@@ -985,9 +834,7 @@ final readonly class ManagingProductsContext implements Context
         }
     }
 
-    /**
-     * @Then I should not be able to edit its options
-     */
+    #[Then('I should not be able to edit its options')]
     public function iShouldNotBeAbleToEditItsOptions(): void
     {
         $productOption = $this->sharedStorage->get('product_option');
@@ -1002,9 +849,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that I have to define product variants' prices for newly assigned channels first
-     */
+    #[Then('I should be notified that I have to define product variants\' prices for newly assigned channels first')]
     public function iShouldBeNotifiedThatIHaveToDefineProductVariantsPricesForNewlyAssignedChannelsFirst(): void
     {
         Assert::contains(
@@ -1013,9 +858,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that slug has to be unique
-     */
+    #[Then('I should be notified that slug has to be unique')]
     public function iShouldBeNotifiedThatSlugHasToBeUnique(): void
     {
         Assert::contains(
@@ -1024,9 +867,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that I have to define the :attributeName attribute in :localeCode locale
-     */
+    #[Then('I should be notified that I have to define the :attributeName attribute in :localeCode locale')]
     public function iShouldBeNotifiedThatIHaveToDefineTheAttributeInLocale(string $attributeName, string $localeCode): void
     {
         Assert::regex(
@@ -1035,9 +876,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the :attributeName attribute in :localeCode locale should be longer than :number
-     */
+    #[Then('I should be notified that the :attributeName attribute in :localeCode locale should be longer than :number')]
     public function iShouldBeNotifiedThatTheAttributeInShouldBeLongerThan(
         string $attributeName,
         string $localeCode,
@@ -1049,9 +888,7 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the value of the :attributeName attribute has invalid type
-     */
+    #[Then('I should be notified that the value of the :attributeName attribute has invalid type')]
     public function iShouldBeNotifiedThatTheValueOfTheAttributeHasInvalidType(
         string $attributeName,
     ): void {
@@ -1061,17 +898,13 @@ final readonly class ManagingProductsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see an image related to this product
-     */
+    #[Then('I should see an image related to this product')]
     public function iShouldSeeImageRelatedToThisProduct(): void
     {
         Assert::notEmpty($this->responseChecker->getValue($this->client->getLastResponse(), 'images'));
     }
 
-    /**
-     * @Then I should see attribute :attribute with value :value in :locale locale
-     */
+    #[Then('I should see attribute :attribute with value :value in :locale locale')]
     public function iShouldSeeAttributeWithValueInLocale(
         ProductAttributeInterface $attribute,
         string $value,

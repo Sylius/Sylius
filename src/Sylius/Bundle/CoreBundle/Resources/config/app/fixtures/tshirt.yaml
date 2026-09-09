@@ -52,6 +52,11 @@ sylius_fixtures:
                             -   name: 'T-shirt brand'
                                 code: 't_shirt_brand'
                                 type: 'text'
+                                translations:
+                                    en_US: 
+                                        name: 'T-shirt brand'
+                                    fr_FR:
+                                        name: 'Marque de t-shirts'
 
                             -   name: 'T-shirt collection'
                                 code: 't_shirt_collection'
@@ -78,6 +83,11 @@ sylius_fixtures:
                                     t_shirt_size_l: 'L'
                                     t_shirt_size_xl: 'XL'
                                     t_shirt_size_xxl: 'XXL'
+                                translations:
+                                    en_US: 
+                                        name: 'T-shirt size'
+                                    fr_FR:
+                                        name: 'Taille de t-shirt'
 
                 tshirt_product:
                     name: product

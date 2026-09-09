@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\OrderProcessing;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\OrderProcessing\OrderPromotionProcessor;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderPromotionProcessorTest extends TestCase
 {
     private MockObject&PromotionProcessorInterface $promotionProcessor;

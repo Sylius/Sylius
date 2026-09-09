@@ -21,12 +21,14 @@ use Traversable;
 
 class StatementMock implements IteratorAggregate, Statement
 {
-    public function bindValue($param, $value, $type = null)
+    public function bindValue($param, $value, $type = null): bool
     {
+        return true;
     }
 
-    public function bindParam($column, &$variable, $type = null, $length = null)
+    public function bindParam($param, &$variable, $type = null, $length = null): bool
     {
+        return true;
     }
 
     public function execute($params = null): Result

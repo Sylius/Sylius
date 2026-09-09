@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/** @experimental */
 interface FinalUrlProviderInterface
 {
     public function getUrl(

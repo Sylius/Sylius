@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Abstraction\StateMachine\Unit;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Abstraction\StateMachine\CompositeStateMachine;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Webmozart\Assert\InvalidArgumentException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CompositeStateMachineTest extends TestCase
 {
     /** @var StateMachineInterface&MockObject */

@@ -18,10 +18,20 @@ function renderChart() {
         return;
     }
 
+    const styles = getComputedStyle(document.documentElement);
+    const labelColor = styles.getPropertyValue('--tblr-body-color').trim();
+    const primaryColor = styles.getPropertyValue('--tblr-primary').trim();
+    const primaryDarken = styles.getPropertyValue('--sylius-primary-darken').trim();
+    const secondaryColor = styles.getPropertyValue('--tblr-info').trim();
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+
     const options = {
-        colors: ['#32be9f', '#066fd1'],
+        theme: {
+            mode: currentTheme
+        },
+        colors: [primaryColor, secondaryColor],
         fill: {
-            colors: ['#32be9f']
+            colors: [primaryColor]
         },
         series: [{
             name: 'Sales',
@@ -31,6 +41,7 @@ function renderChart() {
             data: JSON.parse(statisticsChart.dataset.paidOrdersCount)
         }],
         chart: {
+            background: 'transparent',
             toolbar: {
                 show: false
             },
@@ -41,13 +52,18 @@ function renderChart() {
             bar: {
                 borderRadius: 4,
                 dataLabels: {
-                    position: 'top' // top, center, bottom
+                    position: 'top'
                 }
             }
         },
         xaxis: {
             categories: JSON.parse(statisticsChart.dataset.intervals),
             position: 'top',
+            labels: {
+                style: {
+                    colors: labelColor
+                }
+            },
             axisBorder: {
                 show: false
             },
@@ -58,8 +74,8 @@ function renderChart() {
                 fill: {
                     type: 'gradient',
                     gradient: {
-                        colorFrom: '#32be9f',
-                        colorTo: '#2a9f83',
+                        colorFrom: primaryColor,
+                        colorTo: primaryDarken,
                         stops: [0, 100],
                         opacityFrom: 0.4,
                         opacityTo: 0.5
@@ -78,15 +94,20 @@ function renderChart() {
                 show: false
             },
             labels: {
+                style: {
+                    colors: labelColor
+                },
                 formatter(val) {
                     const { currency } = statisticsChart.dataset;
                     return `${currency}${val}`;
                 }
             }
-
         }, {
             opposite: true,
             labels: {
+                style: {
+                    colors: labelColor
+                },
                 formatter(val) {
                     return val;
                 }
@@ -97,7 +118,7 @@ function renderChart() {
             offsetY: 330,
             align: 'center',
             style: {
-                color: '#444'
+                color: labelColor
             }
         }
     };
@@ -114,7 +135,10 @@ if (element) {
     const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             if (mutation.attributeName === 'data-sales' || mutation.attributeName === 'data-intervals') {
-                chart.destroy();
+                if (chart) {
+                    chart.destroy();
+                    chart = null;
+                }
                 renderChart();
             }
         });
@@ -122,5 +146,26 @@ if (element) {
 
     observer.observe(element, {
         attributes: true
+    });
+
+    const themeObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'data-bs-theme') {
+                if (!document.querySelector('#statistics-chart')) {
+                    themeObserver.disconnect();
+                    return;
+                }
+                if (chart) {
+                    chart.destroy();
+                    chart = null;
+                }
+                renderChart();
+            }
+        });
+    });
+
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-bs-theme']
     });
 }

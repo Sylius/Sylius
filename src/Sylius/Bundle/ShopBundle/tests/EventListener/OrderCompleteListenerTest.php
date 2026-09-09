@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShopBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Mailer\OrderEmailManagerInterface;
@@ -20,6 +21,7 @@ use Sylius\Bundle\ShopBundle\EventListener\OrderCompleteListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderCompleteListenerTest extends TestCase
 {
     private MockObject&OrderEmailManagerInterface $orderEmailManager;

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
+use Behat\Hook\AfterScenario;
 
 final class CalendarContext implements Context
 {
@@ -21,7 +22,7 @@ final class CalendarContext implements Context
     {
     }
 
-    /** @AfterScenario */
+    #[AfterScenario]
     public function deleteTemporaryDate(): void
     {
         if (file_exists($this->dateFilePath)) {

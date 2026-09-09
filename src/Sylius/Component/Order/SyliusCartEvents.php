@@ -17,11 +17,19 @@ interface SyliusCartEvents
 {
     public const CART_CHANGE = 'sylius.cart_change';
 
+    public const CART_POST_CHANGE = 'sylius.cart_post_change';
+
     public const CART_CLEAR = 'sylius.cart_clear';
+
+    public const CART_POST_CLEAR = 'sylius.cart_post_clear';
 
     public const CART_ITEM_ADD = 'sylius.cart_item_add';
 
+    public const CART_ITEM_POST_ADD = 'sylius.cart_item_post_add';
+
     public const CART_ITEM_REMOVE = 'sylius.cart_item_remove';
+
+    public const CART_ITEM_POST_REMOVE = 'sylius.cart_item_post_remove';
 
     public const CART_SUMMARY = 'sylius.cart_summary';
 }

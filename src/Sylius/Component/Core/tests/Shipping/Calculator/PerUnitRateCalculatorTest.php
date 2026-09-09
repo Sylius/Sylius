@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Shipping\Calculator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Shipping\Calculator\PerUnitRateCalculator;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PerUnitRateCalculatorTest extends TestCase
 {
     private MockObject&ShipmentInterface $shipment;

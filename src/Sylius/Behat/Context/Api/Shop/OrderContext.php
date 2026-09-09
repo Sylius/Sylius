@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -48,10 +50,8 @@ final readonly class OrderContext implements Context
     ) {
     }
 
-    /**
-     * @When I change my payment method to :paymentMethod
-     * @When I try to change my payment method to :paymentMethod
-     */
+    #[When('I change my payment method to :paymentMethod')]
+    #[When('I try to change my payment method to :paymentMethod')]
     public function iChangeMyPaymentMethodTo(PaymentMethodInterface $paymentMethod): void
     {
         /** @var OrderInterface $order */
@@ -73,9 +73,7 @@ final readonly class OrderContext implements Context
         $this->shopClient->executeCustomRequest($request);
     }
 
-    /**
-     * @When I view the summary of my order :order
-     */
+    #[When('I view the summary of my order :order')]
     public function iViewTheSummaryOfMyOrder(OrderInterface $order): void
     {
         $this->shopClient->show(Resources::ORDERS, $order->getTokenValue());
@@ -84,9 +82,7 @@ final readonly class OrderContext implements Context
         $this->sharedStorage->set('cart_token', $order->getTokenValue());
     }
 
-    /**
-     * @When I try to see the order placed by a customer :customer
-     */
+    #[When('I try to see the order placed by a customer :customer')]
     public function iTryToSeeTheOrderPlacedByACustomer(CustomerInterface $customer): void
     {
         /** @var OrderInterface $order */
@@ -96,9 +92,7 @@ final readonly class OrderContext implements Context
         $this->iViewTheSummaryOfMyOrder($order);
     }
 
-    /**
-     * @Then I should be able to access this order's details
-     */
+    #[Then('I should be able to access this order\'s details')]
     public function iShouldBeAbleToAccessThisOrderDetails(): void
     {
         $response = $this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token'));
@@ -114,17 +108,13 @@ final readonly class OrderContext implements Context
         );
     }
 
-    /**
-     * @Then it should have the number :orderNumber
-     */
+    #[Then('it should have the number :orderNumber')]
     public function itShouldHaveTheNumber(string $orderNumber): void
     {
         Assert::same($this->responseChecker->getValue($this->shopClient->getLastResponse(), 'number'), $orderNumber);
     }
 
-    /**
-     * @Then I should see :customerName, :street, :postcode, :city, :country as :addressType address
-     */
+    #[Then('I should see :customerName, :street, :postcode, :city, :country as :addressType address')]
     public function iShouldSeeAsShippingAddress(
         string $customerName,
         string $street,
@@ -145,17 +135,13 @@ final readonly class OrderContext implements Context
         Assert::same($address['countryCode'], $country->getCode());
     }
 
-    /**
-     * @Then I should see :amount items in the list
-     */
+    #[Then('I should see :amount items in the list')]
     public function iShouldSeeItemsInTheList(int $amount): void
     {
         Assert::same(count($this->responseChecker->getValue($this->shopClient->getLastResponse(), 'items')), $amount);
     }
 
-    /**
-     * @Then the product named :productName should be in the items list
-     */
+    #[Then('the product named :productName should be in the items list')]
     public function theProductShouldBeInTheItemsList(string $productName): void
     {
         $items = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'items');
@@ -169,10 +155,8 @@ final readonly class OrderContext implements Context
         throw new \InvalidArgumentException('There is no product with given name.');
     }
 
-    /**
-     * @Then /^the order's (shipment) status should be "([^"]+)"$/
-     * @Then /^I should see its order's (payment) status as "([^"]+)"$/
-     */
+    #[Then('/^the order\'s (shipment) status should be "([^"]+)"$/')]
+    #[Then('/^I should see its order\'s (payment) status as "([^"]+)"$/')]
     public function iShouldSeeItsOrderSStatusAs(string $elementType, string $orderElementState): void
     {
         if ($elementType === 'shipment') {
@@ -190,9 +174,7 @@ final readonly class OrderContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :provinceName as province in the :addressType address
-     */
+    #[Then('I should see :provinceName as province in the :addressType address')]
     public function iShouldSeeAsProvinceInTheShippingAddress(string $provinceName, string $addressType): void
     {
         $address = $this->responseChecker->getValue($this->shopClient->getLastResponse(), ($addressType . 'Address'));
@@ -200,9 +182,7 @@ final readonly class OrderContext implements Context
         Assert::same($address['provinceName'], $provinceName);
     }
 
-    /**
-     * @Then /^I should see ("[^"]+") as order's subtotal$/
-     */
+    #[Then('/^I should see ("[^"]+") as order\'s subtotal$/')]
     public function iShouldSeeAsOrderSSubtotal(int $expectedSubtotal): void
     {
         $items = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'items');
@@ -216,17 +196,13 @@ final readonly class OrderContext implements Context
         Assert::same($subtotal, $expectedSubtotal);
     }
 
-    /**
-     * @Then /^I should see ("[^"]+") as order's total$/
-     */
+    #[Then('/^I should see ("[^"]+") as order\'s total$/')]
     public function iShouldSeeAsOrderSTotal(int $total): void
     {
         Assert::same($this->responseChecker->getValue($this->shopClient->getLastResponse(), 'total'), $total);
     }
 
-    /**
-     * @Then /^I should see that I have to pay ("[^"]+") for this order$/
-     */
+    #[Then('/^I should see that I have to pay ("[^"]+") for this order$/')]
     public function iShouldSeeIHaveToPayForThisOrder(int $paymentAmount): void
     {
         $response = $this->shopClient->showByIri(
@@ -236,18 +212,14 @@ final readonly class OrderContext implements Context
         Assert::same($this->responseChecker->getValue($response, 'amount'), $paymentAmount);
     }
 
-    /**
-     * @Then :promotionName should be applied to my order
-     * @Then :promotionName should be applied to my order shipping
-     */
+    #[Then(':promotionName should be applied to my order')]
+    #[Then(':promotionName should be applied to my order shipping')]
     public function shouldBeAppliedToMyOrder(string $promotionName): void
     {
         Assert::true($this->hasAdjustmentWithLabel($promotionName));
     }
 
-    /**
-     * @Then /^(this promotion) should give ("[^"]+") discount on shipping$/
-     */
+    #[Then('/^(this promotion) should give ("[^"]+") discount on shipping$/')]
     public function thisPromotionShouldGiveDiscountOnShipping(PromotionInterface $promotion, int $discount): void
     {
         $adjustment = $this->getAdjustmentWithLabel($promotion->getName());
@@ -255,9 +227,7 @@ final readonly class OrderContext implements Context
         Assert::same($discount, $adjustment['amount']);
     }
 
-    /**
-     * @Then /^the ("[^"]+" product) should have unit price discounted by ("[^"]+")$/
-     */
+    #[Then('/^the ("[^"]+" product) should have unit price discounted by ("[^"]+")$/')]
     public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, int $amount): void
     {
         $discount = 0;
@@ -270,25 +240,19 @@ final readonly class OrderContext implements Context
         Assert::same(-$discount, $amount);
     }
 
-    /**
-     * @Then /^the ("[^"]+" product) should have unit prices discounted by ("[^"]+"), ("[^"]+") and ("[^"]+")$/
-     */
+    #[Then('/^the ("[^"]+" product) should have unit prices discounted by ("[^"]+"), ("[^"]+") and ("[^"]+")$/')]
     public function theShouldHaveUnitPricesDiscountedFor(ProductInterface $product, int $amountOne, int $amountTwo, int $amountThree): void
     {
         Assert::true($this->hasCorrectAmountsDistributedOnAdjustments([$amountOne, $amountTwo, $amountThree], $product));
     }
 
-    /**
-     * @Then /^the ("[^"]+" product) should have unit prices discounted by ("[^"]+") and ("[^"]+")$/
-     */
+    #[Then('/^the ("[^"]+" product) should have unit prices discounted by ("[^"]+") and ("[^"]+")$/')]
     public function theShouldHaveUnitPricesDiscountedForAnd(ProductInterface $product, int $amountOne, int $amountTwo): void
     {
         Assert::true($this->hasCorrectAmountsDistributedOnAdjustments([$amountOne, $amountTwo], $product));
     }
 
-    /**
-     * @Then I should have chosen :paymentMethod payment method
-     */
+    #[Then('I should have chosen :paymentMethod payment method')]
     public function iShouldHaveChosenPaymentMethodForMyOrder(PaymentMethodInterface $paymentMethod): void
     {
         $payment = $this
@@ -299,25 +263,19 @@ final readonly class OrderContext implements Context
         Assert::same($this->iriConverter->getIriFromResource($paymentMethod), $payment['method']);
     }
 
-    /**
-     * @Then I should not be able to see that order
-     */
+    #[Then('I should not be able to see that order')]
     public function iShouldNotBeAbleToSeeThatOrder(): void
     {
         Assert::false($this->responseChecker->isShowSuccessful($this->shopClient->getLastResponse()));
     }
 
-    /**
-     * @Then I should be denied an access to order list
-     */
+    #[Then('I should be denied an access to order list')]
     public function iShouldDeniedAnAccessToOrderList(): void
     {
         Assert::true($this->responseChecker->hasAccessDenied($this->shopClient->getLastResponse()));
     }
 
-    /**
-     * @Then I should have :paymentMethod payment method on my order
-     */
+    #[Then('I should have :paymentMethod payment method on my order')]
     public function iShouldHavePaymentMethodOnMyOrder(PaymentMethodInterface $paymentMethod): void
     {
         $paymentMethodIri = $this
@@ -328,9 +286,7 @@ final readonly class OrderContext implements Context
         Assert::same($this->iriConverter->getResourceFromIri($paymentMethodIri)->getCode(), $paymentMethod->getCode());
     }
 
-    /**
-     * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
-     */
+    #[Then('/^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/')]
     public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
         AdminUserInterface $user,
         string $notes,
@@ -344,9 +300,7 @@ final readonly class OrderContext implements Context
         );
     }
 
-    /**
-     * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
-     */
+    #[Then('/^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/')]
     public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
         AdminUserInterface $user,
         OrderInterface $order,

@@ -1,0 +1,65 @@
+{% import '@SyliusAdmin/shared/helper/payment_method_icon.html.twig' as payment_method_icon %}
+{% import '@SyliusAdmin/shared/helper/field/boolean.html.twig' as boolean %}
+
+{% set gateway = data.gatewayConfig.factoryName|default(null) %}
+{% set methods = gateway is not null ? sylius_payment_gateway_methods(gateway) : [] %}
+{% set logos = {
+    stripe_checkout: 'stripe-logo.svg',
+    stripe_web_element: 'stripe-logo.svg',
+    paypal_express_checkout: 'paypal-logo.svg',
+    adyen: 'adyen-logo.svg',
+    mollie: 'mollie-logo.svg',
+} %}
+{% set logo = gateway is not null ? logos[gateway]|default(null) : null %}
+
+<div class="payment-method-list__item-inner d-flex align-items-start gap-3">
+    <div class="payment-method-list__logo d-flex align-items-center justify-content-center overflow-hidden p-2 flex-shrink-0">
+        {% if logo is not null %}
+            <img src="{{ asset('build/admin/images/' ~ logo, 'admin') }}" alt="{{ gateway|humanize }}">
+        {% else %}
+            {{ ux_icon('tabler:credit-card', { class: 'text-secondary', style: 'width: 2.5rem; height: 2.5rem;' }) }}
+        {% endif %}
+    </div>
+
+    <div class="payment-method-list__content d-flex flex-column gap-2">
+        <div class="payment-method-list__heading">
+            {% if data.name is not null %}
+                <h3 class="payment-method-list__name m-0 fw-semibold">{{ data.name }}</h3>
+            {% else %}
+                <span class="text-danger" {{ sylius_test_html_attribute('missing-translation-paragraph') }}>
+                    {{ ux_icon('tabler:exclamation-circle') }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>
+                </span>
+            {% endif %}
+            {% if data.description is not empty %}
+                <p class="payment-method-list__description mt-1 mb-0">{{ data.description }}</p>
+            {% endif %}
+        </div>
+
+        {% if methods is not empty %}
+            <div class="d-flex flex-wrap gap-2">
+                {% for method in methods %}
+                    <span class="payment-method-list__method d-inline-flex align-items-center justify-content-center">
+                        {{ payment_method_icon.image(method) }}
+                    </span>
+                {% endfor %}
+                <span class="payment-method-list__method payment-method-list__method--more d-inline-flex align-items-center justify-content-center px-1">{{ 'sylius.ui.and_more'|trans }}</span>
+            </div>
+        {% endif %}
+
+        <div class="payment-method-list__meta d-flex flex-wrap align-items-center gap-4 fw-medium">
+            {% if data.code is not null %}
+                <span class="d-inline-flex align-items-center gap-2">
+                    {{ 'sylius.ui.code'|trans }}: <code class="payment-method-list__code px-2 py-1">{{ data.code }}</code>
+                </span>
+            {% endif %}
+            {% if gateway is not null %}
+                <span class="d-inline-flex align-items-center gap-2">
+                    {{ 'sylius.ui.gateway'|trans }}: <span>{{ gateway|humanize }}</span>
+                </span>
+            {% endif %}
+            <span class="d-inline-flex align-items-center gap-2">
+                {{ 'sylius.ui.enabled'|trans }}: {{ boolean.default(data.enabled) }}
+            </span>
+        </div>
+    </div>
+</div>

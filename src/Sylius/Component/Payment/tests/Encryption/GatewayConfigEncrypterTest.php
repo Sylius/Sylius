@@ -13,13 +13,16 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Payment\Encryption;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Payment\Encryption\EncrypterInterface;
 use Sylius\Component\Payment\Encryption\EntityEncrypterInterface;
+use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
 use Sylius\Component\Payment\Encryption\GatewayConfigEncrypter;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GatewayConfigEncrypterTest extends TestCase
 {
     private MockObject $encrypter;
@@ -172,5 +175,161 @@ final class GatewayConfigEncrypterTest extends TestCase
             ->with(['key' => ['value', 'some_other_value'], 'key-two' => 'TWO']);
 
         $this->gatewayConfigEncrypter->decrypt($this->gatewayConfig);
+    }
+
+    public function testDoesNotDecryptConfigWhenFirstElementIsNotEncrypted(): void
+    {
+        $this->gatewayConfig
+            ->expects($this->atLeastOnce())
+            ->method('getConfig')
+            ->willReturn([
+                'key' => 'not_encrypted_value',
+                'key-two' => 'encrypted_value#ENCRYPTED',
+            ]);
+        $this->encrypter
+            ->expects($this->never())
+            ->method('decrypt');
+        $this->gatewayConfig
+            ->expects($this->never())
+            ->method('setConfig');
+
+        $this->gatewayConfigEncrypter->decrypt($this->gatewayConfig);
+    }
+
+    public function testDecryptsWholeConfigWhenFirstElementIsEncryptedInNonStrictMode(): void
+    {
+        $this->gatewayConfig
+            ->expects($this->atLeastOnce())
+            ->method('getConfig')
+            ->willReturn([
+                'key' => 'encrypted_value#ENCRYPTED',
+                'key-two' => 'not_encrypted_value',
+            ]);
+        $this->encrypter
+            ->expects($this->exactly(2))
+            ->method('decrypt')
+            ->willReturnMap([
+                ['encrypted_value#ENCRYPTED', serialize('value')],
+                ['not_encrypted_value', serialize('other')],
+            ]);
+        $this->gatewayConfig
+            ->expects($this->once())
+            ->method('setConfig')
+            ->with(['key' => 'value', 'key-two' => 'other']);
+
+        $this->gatewayConfigEncrypter->decrypt($this->gatewayConfig);
+    }
+
+    public function testThrowsWhenDecryptingPartiallyEncryptedConfigInStrictMode(): void
+    {
+        $encrypter = $this->createMock(EncrypterInterface::class);
+        $gatewayConfigEncrypter = new GatewayConfigEncrypter($encrypter, true, true);
+
+        $gatewayConfig = $this->createMock(GatewayConfigInterface::class);
+        $gatewayConfig
+            ->expects($this->atLeastOnce())
+            ->method('getConfig')
+            ->willReturn([
+                'key' => 'encrypted_value#ENCRYPTED',
+                'key-two' => 'not_encrypted_value',
+            ]);
+        $encrypter
+            ->expects($this->never())
+            ->method('decrypt');
+        $gatewayConfig
+            ->expects($this->never())
+            ->method('setConfig');
+
+        $this->expectException(EncryptionException::class);
+
+        $gatewayConfigEncrypter->decrypt($gatewayConfig);
+    }
+
+    public function testDecryptsFullyEncryptedConfigInStrictMode(): void
+    {
+        $encrypter = $this->createMock(EncrypterInterface::class);
+        $gatewayConfigEncrypter = new GatewayConfigEncrypter($encrypter, true, true);
+
+        $gatewayConfig = $this->createMock(GatewayConfigInterface::class);
+        $gatewayConfig
+            ->expects($this->atLeastOnce())
+            ->method('getConfig')
+            ->willReturn([
+                'key' => 'encrypted_value#ENCRYPTED',
+                'key-two' => 'encrypted_value-two#ENCRYPTED',
+            ]);
+        $encrypter
+            ->expects($this->exactly(2))
+            ->method('decrypt')
+            ->willReturnMap([
+                ['encrypted_value#ENCRYPTED', serialize('value')],
+                ['encrypted_value-two#ENCRYPTED', serialize('TWO')],
+            ]);
+        $gatewayConfig
+            ->expects($this->once())
+            ->method('setConfig')
+            ->with(['key' => 'value', 'key-two' => 'TWO']);
+
+        $gatewayConfigEncrypter->decrypt($gatewayConfig);
+    }
+
+    public function testDecryptsWithExplicitAllowedClasses(): void
+    {
+        $encrypter = $this->createMock(EncrypterInterface::class);
+        $gatewayConfigEncrypter = new GatewayConfigEncrypter($encrypter, [\stdClass::class]);
+
+        $object = new \stdClass();
+        $object->foo = 'bar';
+
+        $gatewayConfig = $this->createMock(GatewayConfigInterface::class);
+        $gatewayConfig
+            ->expects($this->atLeastOnce())
+            ->method('getConfig')
+            ->willReturn(['key' => 'encrypted_value#ENCRYPTED']);
+        $encrypter
+            ->expects($this->once())
+            ->method('decrypt')
+            ->with('encrypted_value#ENCRYPTED')
+            ->willReturn(serialize($object));
+        $gatewayConfig
+            ->expects($this->once())
+            ->method('setConfig')
+            ->with($this->callback(function (array $config): bool {
+                return
+                    isset($config['key']) &&
+                    $config['key'] instanceof \stdClass &&
+                    $config['key']->foo === 'bar'
+                ;
+            }));
+
+        $gatewayConfigEncrypter->decrypt($gatewayConfig);
+    }
+
+    public function testDecryptsWithNoAllowedClasses(): void
+    {
+        $encrypter = $this->createMock(EncrypterInterface::class);
+        $gatewayConfigEncrypter = new GatewayConfigEncrypter($encrypter, false);
+
+        $gatewayConfig = $this->createMock(GatewayConfigInterface::class);
+        $object = new \stdClass();
+        $object->foo = 'bar';
+
+        $gatewayConfig
+            ->expects($this->atLeastOnce())
+            ->method('getConfig')
+            ->willReturn(['key' => 'encrypted_value#ENCRYPTED']);
+        $encrypter
+            ->expects($this->once())
+            ->method('decrypt')
+            ->with('encrypted_value#ENCRYPTED')
+            ->willReturn(serialize($object));
+        $gatewayConfig
+            ->expects($this->once())
+            ->method('setConfig')
+            ->with($this->callback(function (array $config): bool {
+                return isset($config['key']) && $config['key'] instanceof \__PHP_Incomplete_Class;
+            }));
+
+        $gatewayConfigEncrypter->decrypt($gatewayConfig);
     }
 }

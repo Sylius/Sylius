@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\State\SerializerContextBuilderInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware;
@@ -30,6 +31,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UriVariablesAwareContextBuilderTest extends TestCase
 {
     private MockObject&SerializerContextBuilderInterface $decoratedContextBuilder;

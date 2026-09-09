@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -29,9 +30,7 @@ final readonly class ManagingChannelsBillingDataContext implements Context
     ) {
     }
 
-    /**
-     * @Then /^(this channel) company should be "([^"]+)"$/
-     */
+    #[Then('/^(this channel) company should be "([^"]+)"$/')]
     public function thisChannelCompanyShouldBe(ChannelInterface $channel, string $company): void
     {
         $shopBillingData = $this->getShopBillingDataFromChannel($channel);
@@ -39,9 +38,7 @@ final readonly class ManagingChannelsBillingDataContext implements Context
         Assert::same($shopBillingData['company'], $company);
     }
 
-    /**
-     * @Then /^(this channel) tax ID should be "([^"]+)"$/
-     */
+    #[Then('/^(this channel) tax ID should be "([^"]+)"$/')]
     public function thisChannelTaxIdShouldBe(ChannelInterface $channel, string $taxId): void
     {
         $shopBillingData = $this->getShopBillingDataFromChannel($channel);
@@ -49,10 +46,8 @@ final readonly class ManagingChannelsBillingDataContext implements Context
         Assert::same($shopBillingData['taxId'], $taxId);
     }
 
-    /**
-     * @Then /^(this channel) shop billing address should be "([^"]+)", "([^"]+)" "([^"]+)" and ("([^"]+)" country)$/
-     * @Then /^(this channel) shop billing address should still be "([^"]+)", "([^"]+)" "([^"]+)" and ("([^"]+)" country)$/
-     */
+    #[Then('/^(this channel) shop billing address should be "([^"]+)", "([^"]+)" "([^"]+)" and ("([^"]+)" country)$/')]
+    #[Then('/^(this channel) shop billing address should still be "([^"]+)", "([^"]+)" "([^"]+)" and ("([^"]+)" country)$/')]
     public function thisChannelShopBillingAddressShouldBe(
         ChannelInterface $channel,
         string $street,

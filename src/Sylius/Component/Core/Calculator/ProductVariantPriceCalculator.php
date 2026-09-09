@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
+final class ProductVariantPriceCalculator implements CatalogPricesCalculatorInterface
 {
     public function __construct(
         private ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker,

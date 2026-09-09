@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Provider;
 
-/** @experimental */
 interface ServiceProviderAwareProviderInterface extends HttpResponseProviderInterface
 {
     public function getHttpResponseProvider(string $index): ?HttpResponseProviderInterface;

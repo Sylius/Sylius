@@ -24,15 +24,17 @@
                 <option name="groups">sylius</option>
             </constraint>
             <constraint name="Sequentially">
-                <constraint name="Length">
-                    <option name="max">10</option>
-                    <option name="maxMessage">sylius.locale.code.max_length</option>
-                    <option name="groups">sylius</option>
-                </constraint>
-                <constraint name="Locale">
-                    <option name="message">sylius.locale.code.locale</option>
-                    <option name="groups">sylius</option>
-                </constraint>
+                <option name="constraints">
+                    <constraint name="Length">
+                        <option name="max">10</option>
+                        <option name="maxMessage">sylius.locale.code.max_length</option>
+                        <option name="groups">sylius</option>
+                    </constraint>
+                    <constraint name="Locale">
+                        <option name="message">sylius.locale.code.locale</option>
+                        <option name="groups">sylius</option>
+                    </constraint>
+                </option>
             </constraint>
         </property>
     </class>

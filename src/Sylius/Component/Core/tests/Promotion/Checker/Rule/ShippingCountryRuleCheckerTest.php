@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Promotion\Checker\Rule;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingCountryRuleCheckerTest extends TestCase
 {
     private MockObject&RepositoryInterface $countryRepository;
