@@ -156,7 +156,7 @@ return static function (ContainerConfigurator $container) {
     ;
     $services->alias(ProductAssociationTypeGridInterface::class, 'sylius_admin.grid.product_association_type');
 
-    $services->set('syllabus_admin.grid.taxon', TaxonGrid::class)
+    $services->set('sylius_admin.grid.taxon', TaxonGrid::class)
         ->tag('sylius.invokable_grid')
     ;
     $services->alias(TaxonGridInterface::class, 'sylius_admin.grid.taxon');

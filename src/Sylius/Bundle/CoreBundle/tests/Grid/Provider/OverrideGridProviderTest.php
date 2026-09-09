@@ -88,6 +88,64 @@ final class OverrideGridProviderTest extends TestCase
         self::assertEquals($this->gridDefinition, $gridDefinition);
     }
 
+    public function test_per_grid_configuration_takes_precedence_over_the_global_one(): void
+    {
+        $this->arrayProvider
+            ->expects($this->once())
+            ->method('get')
+            ->with('app_book')
+            ->willReturn($this->gridDefinition)
+        ;
+        $this->chainProvider
+            ->expects($this->never())
+            ->method('get')
+        ;
+
+        $configurableProvider = new OverrideGridProvider(
+            [
+                'use_legacy_config' => false,
+                'grids' => [
+                    'app_book' => ['use_legacy_config' => true],
+                ],
+            ],
+            $this->chainProvider,
+            $this->arrayProvider,
+        );
+
+        $gridDefinition = $configurableProvider->get('app_book');
+
+        self::assertEquals($this->gridDefinition, $gridDefinition);
+    }
+
+    public function test_grids_without_their_own_configuration_follow_the_global_one(): void
+    {
+        $this->arrayProvider
+            ->expects($this->never())
+            ->method('get')
+        ;
+        $this->chainProvider
+            ->expects($this->once())
+            ->method('get')
+            ->with('app_author')
+            ->willReturn($this->gridDefinition)
+        ;
+
+        $configurableProvider = new OverrideGridProvider(
+            [
+                'use_legacy_config' => false,
+                'grids' => [
+                    'app_book' => ['use_legacy_config' => true],
+                ],
+            ],
+            $this->chainProvider,
+            $this->arrayProvider,
+        );
+
+        $gridDefinition = $configurableProvider->get('app_author');
+
+        self::assertEquals($this->gridDefinition, $gridDefinition);
+    }
+
     public function test_using_the_array_provider_by_default(): void
     {
         $this->arrayProvider

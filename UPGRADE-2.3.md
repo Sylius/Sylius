@@ -292,7 +292,7 @@ You can configure the format globally:
 ```yaml
 sylius_core:
     grid:
-        use_legacy_config: true # Use YAML grid definitions globally (default: false)
+        use_legacy_config: true # Use YAML grid definitions globally (default: true)
 ```
 
 Or override the format for individual grids:
@@ -315,7 +315,7 @@ This makes it possible to migrate grids incrementally rather than converting you
 
 To simplify the conversion process, you can use the community-maintained Grid configuration converter:
 
-* [Grid Config Converter](https://github.com/mamazu/grid-config-converter?utm_source=chatgpt.com)
+* [Grid Config Converter](https://github.com/mamazu/grid-config-converter)
 
 The converter can help bootstrap the migration from YAML to PHP and reduce the amount of manual work required.
 
