@@ -170,6 +170,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.promotion_coupon'),
             service('sylius.repository.order'),
             service('sylius_api.checker.applied_coupon_eligibility'),
+            service('sylius.checker.promotion_coupon.duration_eligibility'),
         ])
         ->tag('validator.constraint_validator', ['alias' => 'sylius_api_promotion_coupon_eligibility'])
     ;

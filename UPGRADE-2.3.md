@@ -464,8 +464,31 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    | `PaymentBundle\...\GatewayFactoryExists` | `invalidGatewayFactory` | `invalidGatewayFactoryMessage` |
    | `ShippingBundle\...\ShippingMethodCalculatorExists` | `invalidShippingCalculator` | `invalidShippingCalculatorMessage` |
    | `ShippingBundle\...\ShippingMethodRule` | `invalidType` | `invalidTypeMessage` |
+   | `ApiBundle\...\PromotionCouponEligibility` | `message` | `invalidMessage` |
 
-3. Two new class-level constraints have been added to `Sylius\Component\Core\Model\AdminUser` (validation group `sylius`),
+3. The `Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibility` constraint now reports a distinct
+   message and violation code for each rejection reason, instead of `sylius.promotion_coupon.is_invalid` for all of them:
+
+   | Reason | Message option | Translation key | Violation code |
+   |--------|----------------|-----------------|----------------|
+   | The coupon does not exist | `invalidMessage` | `sylius.promotion_coupon.is_invalid` | `PROMOTION_COUPON_INVALID` |
+   | The coupon has expired | `expiredMessage` | `sylius.promotion_coupon.is_expired` | `PROMOTION_COUPON_EXPIRED` |
+   | The coupon exists, but its promotion is not eligible for the cart | `ineligibleMessage` | `sylius.promotion_coupon.is_ineligible` | `PROMOTION_COUPON_INELIGIBLE` |
+
+   If your shop relies on the previous message of the last two cases, configure the new options to keep it:
+
+   ```php
+   new PromotionCouponEligibility(
+       expiredMessage: 'sylius.promotion_coupon.is_invalid',
+       ineligibleMessage: 'sylius.promotion_coupon.is_invalid',
+   )
+   ```
+
+   Not passing a `Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface` as the 4th
+   argument of `Sylius\Bundle\ApiBundle\Validator\Constraints\PromotionCouponEligibilityValidator` is deprecated since
+   Sylius 2.3 and will be required in Sylius 3.0. Without it, expired coupons keep being reported as ineligible.
+
+4. Two new class-level constraints have been added to `Sylius\Component\Core\Model\AdminUser` (validation group `sylius`),
    see the [Admin users](#admin-users) section for details:
 
    - `Sylius\Bundle\CoreBundle\Validator\Constraints\AtLeastOneAccessLevel`
