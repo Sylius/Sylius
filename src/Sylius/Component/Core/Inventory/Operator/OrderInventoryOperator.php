@@ -25,7 +25,7 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
     {
         if (in_array(
             $order->getPaymentState(),
-            [OrderPaymentStates::STATE_PAID, OrderPaymentStates::STATE_REFUNDED],
+            [OrderPaymentStates::STATE_PAID, OrderPaymentStates::STATE_REFUNDED, OrderPaymentStates::STATE_PARTIALLY_REFUNDED],
             true,
         )) {
             $this->giveBack($order);
