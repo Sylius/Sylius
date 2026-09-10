@@ -233,12 +233,20 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ChannelInterface $channel,
         CustomerInterface $customer,
     ): ?OrderInterface {
+        $completedCheckoutsQueryBuilder = $this->createQueryBuilder('completedOrder')
+            ->select('completedOrder.id')
+            ->andWhere('completedOrder.channel = :channel')
+            ->andWhere('completedOrder.customer = :customer')
+            ->andWhere('completedOrder.checkoutCompletedAt > o.createdAt')
+        ;
+
         return $this->createQueryBuilder('o')
             ->andWhere('o.state = :state')
             ->andWhere('o.channel = :channel')
             ->andWhere('o.customer = :customer')
             ->andWhere('o.items IS NOT EMPTY')
             ->andWhere('o.createdByGuest = :createdByGuest')
+            ->andWhere(sprintf('NOT EXISTS (%s)', $completedCheckoutsQueryBuilder->getDQL()))
             ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('channel', $channel)
             ->setParameter('customer', $customer)
