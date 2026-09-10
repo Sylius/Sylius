@@ -376,6 +376,15 @@ final readonly class CartContext implements Context
         $this->notificationChecker->checkNotification('Item has been added to cart', NotificationType::success());
     }
 
+    #[Then('I should be notified that some products in my cart are no longer available')]
+    public function iShouldBeNotifiedThatSomeProductsInMyCartAreNoLongerAvailable(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'Some products in your cart are no longer available and have been removed.',
+            NotificationType::error(),
+        );
+    }
+
     /**
      * @Then there should be one item in my cart
      */
