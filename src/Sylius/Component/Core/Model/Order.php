@@ -409,8 +409,10 @@ class Order extends BaseOrder implements OrderInterface
     {
         $shippingTaxTotal = 0;
 
-        foreach ($this->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT) as $shippingAdjustment) {
-            $shippingTaxTotal += $shippingAdjustment->getAmount();
+        foreach ($this->getShipments() as $shipment) {
+            foreach ($shipment->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
+                $shippingTaxTotal += $taxAdjustment->getAmount();
+            }
         }
 
         return $shippingTaxTotal;

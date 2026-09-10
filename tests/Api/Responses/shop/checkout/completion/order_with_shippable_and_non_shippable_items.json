@@ -96,7 +96,7 @@
     "state": "new",
     "itemsSubtotal": 9000,
     "taxTotal": 0,
-    "shippingTaxTotal": 1000,
+    "shippingTaxTotal": 0,
     "taxExcludedTotal": 0,
     "taxIncludedTotal": 0,
     "shippingTotal": 1000,
