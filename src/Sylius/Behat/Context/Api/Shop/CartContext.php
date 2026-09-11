@@ -430,6 +430,18 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then I should be notified that the cart has been updated
+     */
+    public function iShouldBeNotifiedThatTheCartHasBeenUpdated(): void
+    {
+        $response = $this->shopClient->getLastResponse();
+        Assert::true(
+            $this->responseChecker->isUpdateSuccessful($response),
+            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('The cart cannot be updated with the given data.', $response),
+        );
+    }
+
+    /**
      * @Then /^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/
      */
     public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void

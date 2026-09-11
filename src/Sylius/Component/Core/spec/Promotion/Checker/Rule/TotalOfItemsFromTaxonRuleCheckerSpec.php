@@ -16,9 +16,11 @@ namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -46,6 +48,12 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ProductInterface $compositeBow,
         ProductInterface $longsword,
         ProductInterface $reflexBow,
+        ProductVariantInterface $compositeBowVariant,
+        ProductVariantInterface $longswordVariant,
+        ProductVariantInterface $reflexBowVariant,
+        ChannelPricingInterface $compositeBowPricing,
+        ChannelPricingInterface $longswordPricing,
+        ChannelPricingInterface $reflexBowPricing,
         TaxonInterface $bows,
     ): void {
         $order->getChannel()->willReturn($channel);
@@ -61,15 +69,21 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 
         $compositeBowItem->getProduct()->willReturn($compositeBow);
         $compositeBow->hasTaxon($bows)->willReturn(true);
-        $compositeBowItem->getTotal()->willReturn(5000);
+        $compositeBowItem->getVariant()->willReturn($compositeBowVariant);
+        $compositeBowVariant->getChannelPricingForChannel($channel)->willReturn($compositeBowPricing);
+        $compositeBowPricing->getPrice()->willReturn(5000);
 
         $longswordItem->getProduct()->willReturn($longsword);
         $longsword->hasTaxon($bows)->willReturn(false);
-        $longswordItem->getTotal()->willReturn(4000);
+        $longswordItem->getVariant()->willReturn($longswordVariant);
+        $longswordVariant->getChannelPricingForChannel($channel)->willReturn($longswordPricing);
+        $longswordPricing->getPrice()->willReturn(4000);
 
         $reflexBowItem->getProduct()->willReturn($reflexBow);
         $reflexBow->hasTaxon($bows)->willReturn(true);
-        $reflexBowItem->getTotal()->willReturn(9000);
+        $reflexBowItem->getVariant()->willReturn($reflexBowVariant);
+        $reflexBowVariant->getChannelPricingForChannel($channel)->willReturn($reflexBowPricing);
+        $reflexBowPricing->getPrice()->willReturn(9000);
 
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]])->shouldReturn(true);
     }
@@ -81,6 +95,10 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $reflexBowItem,
         ProductInterface $compositeBow,
         ProductInterface $reflexBow,
+        ProductVariantInterface $compositeBowVariant,
+        ProductVariantInterface $reflexBowVariant,
+        ChannelPricingInterface $compositeBowPricing,
+        ChannelPricingInterface $reflexBowPricing,
         TaxonInterface $bows,
         TaxonRepositoryInterface $taxonRepository,
     ): void {
@@ -93,11 +111,15 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 
         $compositeBowItem->getProduct()->willReturn($compositeBow);
         $compositeBow->hasTaxon($bows)->willReturn(true);
-        $compositeBowItem->getTotal()->willReturn(5000);
+        $compositeBowItem->getVariant()->willReturn($compositeBowVariant);
+        $compositeBowVariant->getChannelPricingForChannel($channel)->willReturn($compositeBowPricing);
+        $compositeBowPricing->getPrice()->willReturn(5000);
 
         $reflexBowItem->getProduct()->willReturn($reflexBow);
         $reflexBow->hasTaxon($bows)->willReturn(true);
-        $reflexBowItem->getTotal()->willReturn(5000);
+        $reflexBowItem->getVariant()->willReturn($reflexBowVariant);
+        $reflexBowVariant->getChannelPricingForChannel($channel)->willReturn($reflexBowPricing);
+        $reflexBowPricing->getPrice()->willReturn(5000);
 
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]])->shouldReturn(true);
     }
@@ -109,6 +131,10 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $longswordItem,
         ProductInterface $compositeBow,
         ProductInterface $longsword,
+        ProductVariantInterface $compositeBowVariant,
+        ProductVariantInterface $longswordVariant,
+        ChannelPricingInterface $compositeBowPricing,
+        ChannelPricingInterface $longswordPricing,
         TaxonInterface $bows,
         TaxonRepositoryInterface $taxonRepository,
     ): void {
@@ -121,11 +147,15 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 
         $compositeBowItem->getProduct()->willReturn($compositeBow);
         $compositeBow->hasTaxon($bows)->willReturn(true);
-        $compositeBowItem->getTotal()->willReturn(5000);
+        $compositeBowItem->getVariant()->willReturn($compositeBowVariant);
+        $compositeBowVariant->getChannelPricingForChannel($channel)->willReturn($compositeBowPricing);
+        $compositeBowPricing->getPrice()->willReturn(5000);
 
         $longswordItem->getProduct()->willReturn($longsword);
         $longsword->hasTaxon($bows)->willReturn(false);
-        $longswordItem->getTotal()->willReturn(4000);
+        $longswordItem->getVariant()->willReturn($longswordVariant);
+        $longswordVariant->getChannelPricingForChannel($channel)->willReturn($longswordPricing);
+        $longswordPricing->getPrice()->willReturn(4000);
 
         $this->isEligible($order, ['WEB_US' => ['taxon' => 'bows', 'amount' => 10000]])->shouldReturn(false);
     }
