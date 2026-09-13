@@ -1,0 +1,7 @@
+{% set product = hookable_metadata.context.product %}
+
+<div class="mb-3">
+    {% if product.id is not null and 0 != product.variants|length and not product.simple %}
+        {{ form_row(hookable_metadata.context.form.productVariants, sylius_test_form_attribute('product-variant', hookable_metadata.context.form.productVariants.vars.value|join(','))) }}
+    {% endif %}
+</div>
