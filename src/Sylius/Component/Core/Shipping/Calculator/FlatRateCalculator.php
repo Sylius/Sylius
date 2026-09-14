@@ -16,11 +16,15 @@ namespace Sylius\Component\Core\Shipping\Calculator;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorInterface;
+use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorTrait;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Webmozart\Assert\Assert;
 
-final class FlatRateCalculator implements CalculatorInterface
+final class FlatRateCalculator implements CalculatorInterface, SettableTypeCalculatorInterface
 {
+    use SettableTypeCalculatorTrait;
+
     /**
      * @throws MissingChannelConfigurationException
      */
@@ -39,10 +43,5 @@ final class FlatRateCalculator implements CalculatorInterface
         }
 
         return (int) $configuration[$channelCode]['amount'];
-    }
-
-    public function getType(): string
-    {
-        return 'flat_rate';
     }
 }

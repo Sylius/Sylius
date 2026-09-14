@@ -15,6 +15,7 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\SettableTypeCalculatorInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 final class FlatRateCalculatorSpec extends ObjectBehavior
@@ -24,8 +25,14 @@ final class FlatRateCalculatorSpec extends ObjectBehavior
         $this->shouldImplement(CalculatorInterface::class);
     }
 
+    function it_should_implement_settable_type_calculator_interface(): void
+    {
+        $this->shouldImplement(SettableTypeCalculatorInterface::class);
+    }
+
     function it_returns_flat_rate_type(): void
     {
+        $this->setType('flat_rate');
         $this->getType()->shouldReturn('flat_rate');
     }
 
