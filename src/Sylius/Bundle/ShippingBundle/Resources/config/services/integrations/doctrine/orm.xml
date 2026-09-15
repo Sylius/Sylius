@@ -19,4 +19,11 @@
     <parameters>
         <parameter key="sylius.repository.shipping_method.class">Sylius\Bundle\ShippingBundle\Doctrine\ORM\ShippingMethodRepository</parameter>
     </parameters>
+
+    <services>
+        <service id="sylius.listener.unused_shipment_unit_mapping" class="Sylius\Bundle\ShippingBundle\Doctrine\ORM\Listener\UnusedShipmentUnitMappingListener">
+            <argument>%sylius.model.shipment_unit.class%</argument>
+            <tag name="doctrine.event_listener" event="loadClassMetadata" method="loadClassMetadata" lazy="true" />
+        </service>
+    </services>
 </container>
