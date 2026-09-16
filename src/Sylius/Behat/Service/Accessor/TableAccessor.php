@@ -165,12 +165,7 @@ final class TableAccessor implements TableAccessorInterface
      */
     private function getColumnIndex(NodeElement $table, $fieldName)
     {
-        $rows = $table->findAll('css', 'tr');
-        Assert::notEmpty($rows, 'There are no rows!');
-
-        /** @var NodeElement $headerRow */
-        $headerRow = $rows[0];
-        $headers = $headerRow->findAll('css', 'th,td');
+        $headers = $this->getHeaderRow($table)->findAll('css', 'th,td');
 
         /** @var NodeElement $column */
         foreach ($headers as $index => $column) {
@@ -181,6 +176,22 @@ final class TableAccessor implements TableAccessorInterface
         }
 
         throw new \InvalidArgumentException(sprintf('Column with name "%s" not found!', $fieldName));
+    }
+
+    private function getHeaderRow(NodeElement $table): NodeElement
+    {
+        /** @var NodeElement[] $headRows */
+        $headRows = $table->findAll('css', 'thead tr');
+        foreach ($headRows as $headRow) {
+            if ([] !== $headRow->findAll('css', 'th')) {
+                return $headRow;
+            }
+        }
+
+        $rows = $table->findAll('css', 'tr');
+        Assert::notEmpty($rows, 'There are no rows!');
+
+        return $rows[0];
     }
 
     /**
@@ -198,7 +209,7 @@ final class TableAccessor implements TableAccessorInterface
     {
         return
             $column->getAttribute('data-test-table') ??
-            preg_replace('/.*sylius-table-column-([^ ]+).*$/', '\1', $column->getAttribute('class'))
+            preg_replace('/.*sylius-table-column-([^ ]+).*$/', '\1', $column->getAttribute('class') ?? '')
         ;
     }
 }
