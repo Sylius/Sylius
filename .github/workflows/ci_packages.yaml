@@ -95,6 +95,14 @@ jobs:
             -   name: Install dependencies
                 run: composer install --no-interaction --no-scripts
 
+            # API Platform 4.3.19 calls setBrowserKitAssertionsAsVerbose() in its ApiTestCase,
+            # and that method has been introduced in symfony/framework-bundle 7.4
+            # see https://github.com/api-platform/core/pull/8523
+            -   name: Restrict API Platform version for the ApiBundle on Symfony 6.4
+                if: matrix.symfony == '~6.4.0'
+                working-directory: src/Sylius/Bundle/ApiBundle
+                run: composer require --no-update --no-interaction "api-platform/symfony:^4.2.1 <4.3.19"
+
             -   name: "Run pipeline"
                 run: |
                     PACKAGES=$(find src/Sylius -mindepth 3 -maxdepth 3 -type f -name composer.json -exec dirname '{}' \; | sed -e 's/src\/Sylius\///g' | sort | jq --raw-input . | jq --slurp . | jq -c .)
