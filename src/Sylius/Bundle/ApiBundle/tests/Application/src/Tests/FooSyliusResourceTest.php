@@ -37,7 +37,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         );
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/FooSyliusResource',
@@ -59,7 +59,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         static::createClient()->request('GET', 'api/v2/foo-sylius-resources');
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/FooSyliusResource',
@@ -85,7 +85,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         );
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/FooSyliusResource',
@@ -106,7 +106,7 @@ final class FooSyliusResourceTest extends ApiTestCase
         );
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/FooSyliusResource',

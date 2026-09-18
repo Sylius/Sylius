@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ApiBundle\Application\Tests;
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\HttpFoundation\Test\Constraint\ResponseHeaderSame;
 
 trait SetUpTestsTrait
 {
@@ -55,5 +56,16 @@ trait SetUpTestsTrait
         $this->JWTAdminUserToken = $JWTManager->create($adminUser);
 
         putenv('SYLIUS_API_ENABLED=true');
+    }
+
+    protected function assertResponseContentTypeSame(string $mimeType): void
+    {
+        // API Platform 4.4 no longer appends the charset to JSON-based media types,
+        // while 4.3, the last series supporting Symfony 6.4, still does
+        // see https://github.com/api-platform/core/pull/8226
+        self::assertThatForResponse(self::logicalOr(
+            new ResponseHeaderSame('content-type', $mimeType),
+            new ResponseHeaderSame('content-type', $mimeType . '; charset=utf-8'),
+        ));
     }
 }
