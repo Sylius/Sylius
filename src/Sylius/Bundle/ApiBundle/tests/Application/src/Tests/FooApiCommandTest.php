@@ -36,7 +36,7 @@ final class FooApiCommandTest extends ApiTestCase
             ['json' => ['name' => 'FooCommandPost']],
         );
 
-        $this->assertResponseHeaderSame('content-type', 'application/problem+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/problem+json');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
         $this->assertJsonContains([
