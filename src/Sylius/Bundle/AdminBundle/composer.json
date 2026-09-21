@@ -37,10 +37,10 @@
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
         "sylius/ui-bundle": "^2.0",
-        "sylius/twig-hooks": "^0.12",
+        "sylius/twig-hooks": "dev-symfony-ux-upgrade as 0.12.3",
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/http-client": "^6.4 || ^7.4 || ^8.0",
-        "symfony/stimulus-bundle": "^2.36",
+        "symfony/stimulus-bundle": "^2.36 || ^3.0",
         "symfony/ux-autocomplete": "^2.36 || ^3.0",
         "symfony/ux-live-component": "^2.36 || ^3.0",
         "symfony/webpack-encore-bundle": "^2.4",
@@ -80,6 +80,14 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/tomkalon/TwigHooks"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/tomkalon/TwigExtra"
         }
     ],
     "minimum-stability": "dev",

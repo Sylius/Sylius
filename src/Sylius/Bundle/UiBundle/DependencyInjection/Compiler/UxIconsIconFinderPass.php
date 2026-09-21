@@ -27,7 +27,11 @@ use Twig\Environment;
  */
 final class UxIconsIconFinderPass implements CompilerPassInterface
 {
-    private const ICON_FINDER_ID = '.ux_icons.icon_finder';
+    /**
+     * Symfony UX Icons 3.0 introduced a chain of icon finders, and the Twig-backed one moved from
+     * ".ux_icons.icon_finder" to ".ux_icons.template_icon_finder".
+     */
+    private const ICON_FINDER_IDS = ['.ux_icons.template_icon_finder', '.ux_icons.icon_finder'];
 
     private const NATIVE_FILESYSTEM_LOADER_ID = 'twig.loader.native_filesystem';
 
@@ -35,7 +39,8 @@ final class UxIconsIconFinderPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition(self::ICON_FINDER_ID)) {
+        $iconFinderId = $this->resolveIconFinderId($container);
+        if (null === $iconFinderId) {
             return;
         }
 
@@ -48,8 +53,19 @@ final class UxIconsIconFinderPass implements CompilerPassInterface
         ;
 
         $container->setDefinition(self::ENVIRONMENT_ID, $environment);
-        $container->getDefinition(self::ICON_FINDER_ID)
+        $container->getDefinition($iconFinderId)
             ->replaceArgument(0, new Reference(self::ENVIRONMENT_ID))
         ;
+    }
+
+    private function resolveIconFinderId(ContainerBuilder $container): ?string
+    {
+        foreach (self::ICON_FINDER_IDS as $iconFinderId) {
+            if ($container->hasDefinition($iconFinderId)) {
+                return $iconFinderId;
+            }
+        }
+
+        return null;
     }
 }

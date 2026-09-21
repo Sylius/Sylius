@@ -34,7 +34,7 @@
         "knplabs/knp-menu-bundle": "^3.7",
         "laminas/laminas-stdlib": "^3.21",
         "sylius/grid-bundle": "^1.16",
-        "sylius/twig-extra": "^0.12",
+        "sylius/twig-extra": "dev-symfony-ux-upgrade as 0.12.3",
         "symfony/config": "^6.4 || ^7.4 || ^8.0",
         "symfony/expression-language": "^6.4 || ^7.4 || ^8.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
@@ -81,6 +81,14 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/tomkalon/TwigHooks"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/tomkalon/TwigExtra"
         }
     ],
     "scripts": {
