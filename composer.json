@@ -19,6 +19,16 @@
             "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/tomkalon/TwigHooks"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/tomkalon/TwigExtra"
+        }
+    ],
     "require": {
         "php": "^8.3",
         "ext-dom": "*",
@@ -82,8 +92,8 @@
         "sylius/resource": "^1.14.2",
         "sylius/resource-bundle": "^1.14.2",
         "sylius/theme-bundle": "^2.5",
-        "sylius/twig-extra": "^0.12",
-        "sylius/twig-hooks": "^0.12",
+        "sylius/twig-extra": "dev-symfony-ux-upgrade as 0.12.3",
+        "sylius/twig-hooks": "dev-symfony-ux-upgrade as 0.12.3",
         "symfony/asset": "^6.4 || ^7.4 || ^8.0",
         "symfony/cache-contracts": "^3.5",
         "symfony/clock": "^6.4 || ^7.4 || ^8.0",
@@ -121,7 +131,7 @@
         "symfony/security-http": "^6.4 || ^7.4 || ^8.0",
         "symfony/serializer": "^6.4 || ^7.4 || ^8.0",
         "symfony/service-contracts": "^3.5",
-        "symfony/stimulus-bundle": "^2.36",
+        "symfony/stimulus-bundle": "^2.36 || ^3.0",
         "symfony/string": "^6.4 || ^7.4 || ^8.0",
         "symfony/translation": "^6.4 || ^7.4 || ^8.0",
         "symfony/translation-contracts": "^3.3",
