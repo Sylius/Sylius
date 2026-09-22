@@ -32,7 +32,7 @@ return static function (ContainerConfigurator $container) {
             AddressType::class,
             service('sylius.context.customer'),
             service('sylius.repository.shop_user'),
-            service('sylius.repository.address'),
+            null,
             tagged_iterator('sylius_shop.modifier.address_form_values'),
         ])
         ->tag('sylius.live_component.shop', ['key' => 'sylius_shop:checkout:address:form'])

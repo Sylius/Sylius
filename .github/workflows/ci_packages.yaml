@@ -91,6 +91,13 @@ jobs:
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^2.4"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
 
+            # API Platform 4.3.19 calls setBrowserKitAssertionsAsVerbose() in its ApiTestCase,
+            # and that method has been introduced in symfony/framework-bundle 7.4
+            # see https://github.com/api-platform/core/pull/8523
+            -   name: Restrict API Platform version for the ApiBundle on Symfony 6.4
+                if: matrix.package == 'Bundle/ApiBundle' && matrix.symfony == '~6.4.0'
+                run: composer require --no-update --no-interaction "api-platform/symfony:^4.3.17 <4.3.19"
+
             -   name: Get Composer cache directory
                 id: composer-cache
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT

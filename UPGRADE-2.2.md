@@ -1,3 +1,15 @@
+# UPGRADE FROM `2.2.9` TO `2.2.10`
+
+## Deprecations
+
+1. The `$addressRepository` argument of `Sylius\Bundle\ShopBundle\Twig\Component\Checkout\Address\FormComponent`
+   is no longer used. It is now nullable and optional, passing it triggers a deprecation, and the Sylius service
+   definition no longer passes it.
+
+   Drop it from your own service definitions. Classes extending the component must stop reading the
+   `$addressRepository` property: it is `null` unless your own definition passes it. Both the argument and the
+   property will be removed in Sylius `3.0`.
+
 # UPGRADE FROM `2.2.8` TO `2.2.9`
 
 This is a **security release**. Updating is strongly recommended.

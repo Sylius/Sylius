@@ -39,7 +39,7 @@ final class FooTest extends ApiTestCase
         );
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/Foo',
@@ -66,7 +66,7 @@ final class FooTest extends ApiTestCase
         static::createClient()->request('GET', 'api/v2/foos');
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/Foo',
@@ -96,7 +96,7 @@ final class FooTest extends ApiTestCase
         static::createClient()->request('GET', 'api/v2/foos/' . $foo->getId());
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/Foo',
@@ -120,7 +120,7 @@ final class FooTest extends ApiTestCase
         );
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/Foo',
@@ -156,7 +156,7 @@ final class FooTest extends ApiTestCase
         ]]);
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('content-type', 'application/ld+json; charset=utf-8');
+        $this->assertResponseContentTypeSame('application/ld+json');
 
         $this->assertJsonContains([
             '@context' => '/api/v2/contexts/Foo',

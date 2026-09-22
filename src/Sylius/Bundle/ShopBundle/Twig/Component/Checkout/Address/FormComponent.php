@@ -54,11 +54,21 @@ class FormComponent
         string $formClass,
         protected readonly CustomerContextInterface $customerContext,
         protected readonly UserRepositoryInterface $shopUserRepository,
-        protected readonly AddressRepositoryInterface $addressRepository,
+        protected readonly ?AddressRepositoryInterface $addressRepository = null,
         /** @var iterable<AddressFormValuesModifierInterface> */
         protected readonly ?iterable $addressFormValuesModifiers = null,
     ) {
         $this->initialize($repository, $formFactory, $resourceClass, $formClass);
+        if (null !== $this->addressRepository) {
+            trigger_deprecation(
+                'sylius/shop-bundle',
+                '2.2.10',
+                'Passing an instance of "%s" as the seventh argument to "%s" is deprecated and the argument will be removed in Sylius 3.0.',
+                AddressRepositoryInterface::class,
+                self::class,
+            );
+        }
+
         if (null === $this->addressFormValuesModifiers) {
             trigger_deprecation(
                 'sylius/shop-bundle',
@@ -87,7 +97,7 @@ class FormComponent
             return;
         }
 
-        $address = $this->addressRepository->findOneByCustomer((string) $addressId, $customer);
+        $address = $this->findAddressAvailableToCustomer($customer, $addressId);
         if (null === $address) {
             return;
         }
@@ -111,6 +121,21 @@ class FormComponent
             $this->resource,
             ['customer' => $this->customerContext->getCustomer()],
         );
+    }
+
+    private function findAddressAvailableToCustomer(CustomerInterface $customer, mixed $addressId): ?AddressInterface
+    {
+        if (!is_scalar($addressId)) {
+            return null;
+        }
+
+        foreach ($customer->getAddresses() as $address) {
+            if ((string) $address->getId() === (string) $addressId) {
+                return $address;
+            }
+        }
+
+        return null;
     }
 
     /**
