@@ -52,7 +52,7 @@
     "total": 10500,
     "itemsSubtotal": 10000,
     "taxTotal": 0,
-    "shippingTaxTotal": 500,
+    "shippingTaxTotal": 0,
     "taxExcludedTotal": 0,
     "taxIncludedTotal": 0,
     "shippingTotal": 500,
