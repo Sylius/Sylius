@@ -15,8 +15,9 @@ namespace Sylius\Component\Channel\Context;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class CachedPerRequestChannelContext implements ChannelContextInterface
+final class CachedPerRequestChannelContext implements ChannelContextInterface, ResetInterface
 {
     private \SplObjectStorage $requestToChannelMap;
 
@@ -50,5 +51,11 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
 
             throw $exception;
         }
+    }
+
+    public function reset(): void
+    {
+        $this->requestToChannelMap = new \SplObjectStorage();
+        $this->requestToExceptionMap = new \SplObjectStorage();
     }
 }
