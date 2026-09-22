@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Factory;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Factory\ChannelPricingLogEntryFactory;
 use Sylius\Component\Core\Factory\ChannelPricingLogEntryFactoryInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\ChannelPricingLogEntry;
 use Sylius\Resource\Exception\UnsupportedMethodException;
 use Sylius\Resource\Model\ResourceInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelPricingLogEntryFactoryTest extends TestCase
 {
     private ChannelPricingLogEntryFactory $factory;

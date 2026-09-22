@@ -19,7 +19,6 @@ use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Bundle\PaymentBundle\Provider\DefaultActionProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/** @experimental */
 final class PaymentRequestActionAwareContextBuilder extends AbstractInputContextBuilder
 {
     private ?Request $request = null;

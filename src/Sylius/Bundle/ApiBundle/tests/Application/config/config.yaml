@@ -26,7 +26,6 @@ sylius_api:
         - 'sylius_api_shop_currency_get_collection'
 
 framework:
-    annotations: false
     secret: "ch4mb3r0f5ecr3ts"
     default_locale: "%locale%"
     session:

@@ -12,6 +12,8 @@ sylius:
             min_length: Opis akcije mora imati najmanje jedan znak.|Opis akcije mora sadržavati najmanje {{ limit }} znakova.
             not_blank: Unesite opis akcije.
         end_date_cannot_be_set_prior_start_date: Završni datum se ne može postaviti prije početnog datuma.
+        usage_limit:
+            min: Ograničenje upotrebe promocije mora biti najmanje {{ limit }}.
         name:
             max_length: Naziv akcije ne smije biti duži od jednog znaka.|Naziv akcije ne smije biti duži od {{ limit }} znakova.
             min_length: Naziv akcije mora imati najmanje jedan znak.|Naziv akcije mora sadržavati najmanje {{ limit }} znakova.

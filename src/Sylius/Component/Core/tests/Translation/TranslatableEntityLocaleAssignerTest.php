@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Translation;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Checker\CLIContextCheckerInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Resource\Model\TranslatableInterface;
 use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TranslatableEntityLocaleAssignerTest extends TestCase
 {
     private LocaleContextInterface&MockObject $localeContext;

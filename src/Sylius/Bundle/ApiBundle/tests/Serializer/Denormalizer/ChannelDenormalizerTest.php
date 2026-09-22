@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ChannelDenormalizer;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelDenormalizerTest extends TestCase
 {
     private FactoryInterface&MockObject $configFactory;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\UiBundle\Twig\ErrorRenderer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\UiBundle\Twig\ErrorRenderer\TwigErrorRenderer;
@@ -24,6 +25,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Twig\Environment;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TwigErrorRendererTest extends TestCase
 {
     private DecoratedTwigErrorRenderer&MockObject $decoratedTwigErrorRenderer;

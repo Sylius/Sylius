@@ -25,8 +25,6 @@ use Symfony\Bridge\Doctrine\Types\UuidType;
  * @template T of PaymentRequestInterface
  *
  * @implements PaymentRequestRepositoryInterface<T>
- *
- * @experimental
  */
 class PaymentRequestRepository extends EntityRepository implements PaymentRequestRepositoryInterface
 {

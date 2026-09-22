@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\BrowserElementInterface;
 
 final class BrowserContext implements Context
@@ -22,9 +23,7 @@ final class BrowserContext implements Context
     {
     }
 
-    /**
-     * @When I go back one page in the browser
-     */
+    #[When('I go back one page in the browser')]
     public function iGoBackOnePageInTheBrowser(): void
     {
         $this->browserElement->goBack();

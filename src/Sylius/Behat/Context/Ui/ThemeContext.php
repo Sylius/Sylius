@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
@@ -32,9 +34,7 @@ final readonly class ThemeContext implements Context
     ) {
     }
 
-    /**
-     * @When I set :channel channel theme to :theme
-     */
+    #[When('I set :channel channel theme to :theme')]
     public function iSetChannelThemeTo(ChannelInterface $channel, ThemeInterface $theme): void
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
@@ -45,9 +45,7 @@ final readonly class ThemeContext implements Context
         $this->sharedStorage->set('theme', $theme);
     }
 
-    /**
-     * @When /^I unset theme on (that channel)$/
-     */
+    #[When('/^I unset theme on (that channel)$/')]
     public function iUnsetThemeOnChannel(ChannelInterface $channel): void
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
@@ -55,9 +53,7 @@ final readonly class ThemeContext implements Context
         $this->channelUpdatePage->saveChanges();
     }
 
-    /**
-     * @Then /^(that channel) should not use any theme$/
-     */
+    #[Then('/^(that channel) should not use any theme$/')]
     public function channelShouldNotUseAnyTheme(ChannelInterface $channel): void
     {
         $this->channelIndexPage->open();
@@ -65,9 +61,7 @@ final readonly class ThemeContext implements Context
         Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), 'Default');
     }
 
-    /**
-     * @Then /^(that channel) should use (that theme)$/
-     */
+    #[Then('/^(that channel) should use (that theme)$/')]
     public function channelShouldUseTheme(ChannelInterface $channel, ThemeInterface $theme): void
     {
         $this->channelIndexPage->open();
@@ -75,9 +69,7 @@ final readonly class ThemeContext implements Context
         Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), $theme->getName());
     }
 
-    /**
-     * @Then /^I should see a homepage from ((?:this|that) theme)$/
-     */
+    #[Then('/^I should see a homepage from ((?:this|that) theme)$/')]
     public function iShouldSeeThemedHomepage(ThemeInterface $theme): void
     {
         $content = file_get_contents(rtrim($theme->getPath(), '/') . '/templates/bundles/SyliusShopBundle/homepage/index.html.twig');
@@ -85,9 +77,7 @@ final readonly class ThemeContext implements Context
         Assert::same($this->homePage->getContent(), $content);
     }
 
-    /**
-     * @Then I should not see a homepage from :theme theme
-     */
+    #[Then('I should not see a homepage from :theme theme')]
     public function iShouldNotSeeThemedHomepage(ThemeInterface $theme): void
     {
         $content = file_get_contents(rtrim($theme->getPath(), '/') . '/templates/bundles/SyliusShopBundle/homepage/index.html.twig');

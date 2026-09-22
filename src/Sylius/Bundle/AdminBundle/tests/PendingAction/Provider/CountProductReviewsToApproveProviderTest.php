@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\PendingAction\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\PendingAction\Provider\CountProductReviewsToApproveProvider;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CountProductReviewsToApproveProviderTest extends TestCase
 {
     private MockObject&ProductReviewRepositoryInterface $productReviewRepository;

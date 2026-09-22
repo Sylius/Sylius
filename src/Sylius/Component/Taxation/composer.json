@@ -28,13 +28,13 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "sylius/registry": "^1.6",
-        "sylius/resource": "^1.12",
-        "symfony/clock": "^6.4 || ^7.4"
+        "sylius/resource": "^1.14.2",
+        "symfony/clock": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^12.5"
     },
     "config": {
         "allow-plugins": {
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
             "require": "^7.4"

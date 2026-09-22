@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Provider\ProductVariantMap;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderIn
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProvider;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantsMapProviderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantsMapProviderTest extends TestCase
 {
     private MockObject&ProductVariantMapProviderInterface $firstProvider;

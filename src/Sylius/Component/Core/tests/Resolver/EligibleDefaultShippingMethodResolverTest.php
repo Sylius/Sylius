@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Resolver;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
@@ -29,6 +30,7 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EligibleDefaultShippingMethodResolverTest extends TestCase
 {
     private MockObject&ShippingMethodRepositoryInterface $shippingMethodRepository;

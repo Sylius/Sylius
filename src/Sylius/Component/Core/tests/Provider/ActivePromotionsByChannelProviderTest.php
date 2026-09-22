@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -25,6 +26,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ActivePromotionsByChannelProviderTest extends TestCase
 {
     private MockObject&PromotionRepositoryInterface $promotionRepository;

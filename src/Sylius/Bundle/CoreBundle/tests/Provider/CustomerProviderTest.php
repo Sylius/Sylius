@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Provider\CustomerProvider;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerProviderTest extends TestCase
 {
     private CustomerRepositoryInterface&MockObject $customerRepository;

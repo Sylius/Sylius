@@ -5,10 +5,12 @@ declare(strict_types=1);
 use Arkitect\ClassSet;
 use Arkitect\CLI\Config;
 use Arkitect\Expression\ForClasses\HaveNameMatching;
+use Arkitect\Expression\ForClasses\Implement;
 use Arkitect\Expression\ForClasses\IsFinal;
 use Arkitect\Expression\ForClasses\NotDependsOnTheseNamespaces;
 use Arkitect\Expression\ForClasses\ResideInOneOfTheseNamespaces;
 use Arkitect\Rules\Rule;
+use Sylius\Bundle\GridBundle\Grid\GridInterface;
 
 return static function (Config $config): void
 {
@@ -20,6 +22,15 @@ return static function (Config $config): void
             ->that(new HaveNameMatching('*Test'))
             ->should(new IsFinal())
             ->because('Tests should not be extendable')
+        ,
+    );
+
+    $config->add(
+        $testsClassSet,
+        Rule::allClasses()
+            ->that(new Implement(GridInterface::class))
+            ->should(new IsFinal())
+            ->because('Grids should only be decorated')
         ,
     );
 
@@ -85,6 +96,11 @@ return static function (Config $config): void
                 ['Sylius\Bundle\ShopBundle'],
             ))
             ->because('Api should not depend on Admin and Shop')
+        ,
+        Rule::allClasses()
+            ->that(new Implement(GridInterface::class))
+            ->should(new IsFinal())
+            ->because('Grids should only be decorated')
         ,
     );
 };

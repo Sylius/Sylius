@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
@@ -28,12 +31,10 @@ final readonly class LocaleContext implements Context
     ) {
     }
 
-    /**
-     * @Given I switched the shop's locale to :locale
-     * @Given I have switched to the :locale locale
-     * @When I switch to the :locale locale
-     * @When I change my locale to :locale
-     */
+    #[Given('I switched the shop\'s locale to :locale')]
+    #[Given('I have switched to the :locale locale')]
+    #[When('I switch to the :locale locale')]
+    #[When('I change my locale to :locale')]
     public function iSwitchTheLocaleToTheLocale(LocaleInterface $locale): void
     {
         $this->homePage->open();
@@ -42,36 +43,28 @@ final readonly class LocaleContext implements Context
         $this->sharedStorage->set('current_locale_code', $locale->getCode());
     }
 
-    /**
-     * @When I use the locale :localeCode
-     */
+    #[When('I use the locale :localeCode')]
     public function iUseTheLocale(string $localeCode): void
     {
         $this->homePage->tryToOpen(['_locale' => $localeCode]);
     }
 
-    /**
-     * @Then I should shop using the :localeNameInItsLocale locale
-     * @Then I should still shop using the :localeNameInItsLocale locale
-     */
+    #[Then('I should shop using the :localeNameInItsLocale locale')]
+    #[Then('I should still shop using the :localeNameInItsLocale locale')]
     public function iShouldShopUsingTheLocale(string $localeNameInItsLocale): void
     {
         Assert::same($this->homePage->getActiveLocale(), $localeNameInItsLocale);
     }
 
-    /**
-     * @Then I should be able to shop using the :localeNameInCurrentLocale locale
-     * @Then the store should be available in the :localeNameInCurrentLocale locale
-     */
+    #[Then('I should be able to shop using the :localeNameInCurrentLocale locale')]
+    #[Then('the store should be available in the :localeNameInCurrentLocale locale')]
     public function iShouldBeAbleToShopUsingTheLocale(string $localeNameInCurrentLocale): void
     {
         Assert::oneOf($localeNameInCurrentLocale, $this->homePage->getAvailableLocales());
     }
 
-    /**
-     * @Then I should not be able to shop using the :locale locale
-     * @Then the store should not be available in the :locale locale
-     */
+    #[Then('I should not be able to shop using the :locale locale')]
+    #[Then('the store should not be available in the :locale locale')]
     public function iShouldNotBeAbleToShopUsingTheLocale(string $locale): void
     {
         if (in_array($locale, $this->homePage->getAvailableLocales(), true)) {
@@ -83,9 +76,7 @@ final readonly class LocaleContext implements Context
         }
     }
 
-    /**
-     * @Then I should not be able to shop without default locale
-     */
+    #[Then('I should not be able to shop without default locale')]
     public function iShouldNotBeAbleToShop(): void
     {
         try {

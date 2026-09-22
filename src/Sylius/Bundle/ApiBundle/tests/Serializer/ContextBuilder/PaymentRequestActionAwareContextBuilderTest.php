@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
 use ApiPlatform\State\SerializerContextBuilderInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware;
@@ -25,6 +26,7 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PaymentRequestActionAwareContextBuilderTest extends TestCase
 {
     private MockObject|SerializerContextBuilderInterface $decoratedContextBuilderMock;

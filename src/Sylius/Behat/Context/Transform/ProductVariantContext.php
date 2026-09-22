@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -30,10 +31,8 @@ final class ProductVariantContext implements Context
     ) {
     }
 
-    /**
-     * @Transform /^"([^"]+)" variant of product "([^"]+)"$/
-     * @Transform /^"([^"]+)" variant of "([^"]+)" product$/
-     */
+    #[Transform('/^"([^"]+)" variant of product "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" variant of "([^"]+)" product$/')]
     public function getProductVariantByNameAndProduct(string $variantName, string $productName): ProductVariantInterface
     {
         $products = $this->productRepository->findByName($productName, 'en_US');
@@ -53,9 +52,7 @@ final class ProductVariantContext implements Context
         return $productVariants[0];
     }
 
-    /**
-     * @Transform /^"([^"]+)" variant of this product$/
-     */
+    #[Transform('/^"([^"]+)" variant of this product$/')]
     public function getProductVariantByNameAndThisProduct(string $variantName): ProductVariantInterface
     {
         $product = $this->sharedStorage->get('product');
@@ -69,13 +66,11 @@ final class ProductVariantContext implements Context
         return $productVariants[0];
     }
 
-    /**
-     * @Transform /^"([^"]+)" product variant$/
-     * @Transform /^"([^"]+)" variant$/
-     * @Transform /^variant "([^"]+)"$/
-     * @Transform :productVariant
-     * @Transform :variant
-     */
+    #[Transform('/^"([^"]+)" product variant$/')]
+    #[Transform('/^"([^"]+)" variant$/')]
+    #[Transform('/^variant "([^"]+)"$/')]
+    #[Transform(':productVariant')]
+    #[Transform(':variant')]
     public function getProductVariantByName($name)
     {
         $productVariants = $this->productVariantRepository->findByName($name, 'en_US');
@@ -89,9 +84,7 @@ final class ProductVariantContext implements Context
         return $productVariants[0];
     }
 
-    /**
-     * @Transform /^"([^"]+)", "([^"]+)" and "([^"]+)" variants$/
-     */
+    #[Transform('/^"([^"]+)", "([^"]+)" and "([^"]+)" variants$/')]
     public function getVariantsByNames(string ...$variantNames): array
     {
         return array_map(function ($variantName) {
@@ -99,9 +92,7 @@ final class ProductVariantContext implements Context
         }, $variantNames);
     }
 
-    /**
-     * @Transform /^variant with code "([^"]+)"$/
-     */
+    #[Transform('/^variant with code "([^"]+)"$/')]
     public function getProductVariantByCode($code)
     {
         $productVariant = $this->productVariantRepository->findOneBy(['code' => $code]);
@@ -111,9 +102,7 @@ final class ProductVariantContext implements Context
         return $productVariant;
     }
 
-    /**
-     * @Transform /^"([^"]*)" (\w+) \/ "([^"]*)" (\w+) variant of product "([^"]+)"$/
-     */
+    #[Transform('/^"([^"]*)" (\w+) \/ "([^"]*)" (\w+) variant of product "([^"]+)"$/')]
     public function getVariantByOptionValuesAndProduct(
         string $value1,
         string $option1,

@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Creator;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
@@ -28,6 +29,7 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductImageCreatorTest extends TestCase
 {
     private FactoryInterface&MockObject $productImageFactory;

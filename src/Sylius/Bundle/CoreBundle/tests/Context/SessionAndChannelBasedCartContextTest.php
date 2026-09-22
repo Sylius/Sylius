@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Context;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SessionAndChannelBasedCartContextTest extends TestCase
 {
     private CartStorageInterface&MockObject $cartStorage;

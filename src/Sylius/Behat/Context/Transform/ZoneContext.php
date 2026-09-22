@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -24,13 +25,11 @@ final class ZoneContext implements Context
     {
     }
 
-    /**
-     * @Transform /^"([^"]+)" zone$/
-     * @Transform /^zone "([^"]+)"$/
-     * @Transform /^zone named "([^"]+)"$/
-     * @Transform :zone
-     * @Transform :otherZone
-     */
+    #[Transform('/^"([^"]+)" zone$/')]
+    #[Transform('/^zone "([^"]+)"$/')]
+    #[Transform('/^zone named "([^"]+)"$/')]
+    #[Transform(':zone')]
+    #[Transform(':otherZone')]
     public function getZone(string $codeOrName): ZoneInterface
     {
         $zone = $this->zoneRepository->findOneBy(['code' => $codeOrName]);
@@ -47,9 +46,7 @@ final class ZoneContext implements Context
         return $zone;
     }
 
-    /**
-     * @Transform /^rest of the world$/
-     */
+    #[Transform('/^rest of the world$/')]
     public function getRestOfTheWorldZone(): ZoneInterface
     {
         $zone = $this->zoneRepository->findOneBy(['code' => 'RoW']);

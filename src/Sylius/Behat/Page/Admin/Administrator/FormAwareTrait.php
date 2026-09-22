@@ -94,6 +94,41 @@ trait FormAwareTrait
         return $this->getElement('field_enabled')->getValue();
     }
 
+    public function grantAdministrationAccess(): void
+    {
+        $this->getElement('field_administration_access')->check();
+    }
+
+    public function revokeAdministrationAccess(): void
+    {
+        $this->getElement('field_administration_access')->uncheck();
+    }
+
+    public function hasAdministrationAccess(): bool
+    {
+        return (bool) $this->getElement('field_administration_access')->getValue();
+    }
+
+    public function grantApiAccess(): void
+    {
+        $this->getElement('field_api_access')->check();
+    }
+
+    public function revokeApiAccess(): void
+    {
+        $this->getElement('field_api_access')->uncheck();
+    }
+
+    public function hasApiAccess(): bool
+    {
+        return (bool) $this->getElement('field_api_access')->getValue();
+    }
+
+    public function getAccessLevelsValidationMessage(): string
+    {
+        return $this->getElement('access_levels_validation_message')->getText();
+    }
+
     public function isAvatarAttached(): bool
     {
         return $this->getElement('avatar_image')->getAttribute('data-test-avatar-image') !== '';
@@ -112,7 +147,10 @@ trait FormAwareTrait
     protected function getDefinedFormElements(): array
     {
         return [
+            'access_levels_validation_message' => '[data-test-access-levels-validation-message]',
             'avatar_image' => '[data-test-avatar-image]',
+            'field_administration_access' => '#sylius_admin_admin_user_administrationAccess',
+            'field_api_access' => '#sylius_admin_admin_user_apiAccess',
             'field_avatar' => '#sylius_admin_admin_user_avatar_file',
             'field_email' => '#sylius_admin_admin_user_email',
             'field_enabled' => '#sylius_admin_admin_user_enabled',

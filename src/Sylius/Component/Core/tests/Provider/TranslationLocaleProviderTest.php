@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Provider\TranslationLocaleProvider;
@@ -20,6 +21,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleCollectionProviderInterface;
 use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TranslationLocaleProviderTest extends TestCase
 {
     private LocaleCollectionProviderInterface&MockObject $localeCollectionProvider;

@@ -24,6 +24,14 @@ Feature: Editing promotion
         And the "Christmas sale" promotion should be available to be used only 50 times
 
     @api @ui
+    Scenario: Editing promotions track usage
+        When I want to modify a "Christmas sale" promotion
+        And I disable track usage
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And the "Christmas sale" promotion should not track usage
+
+    @api @ui
     Scenario: Editing promotion exclusiveness
         When I want to modify a "Christmas sale" promotion
         And I set it as exclusive

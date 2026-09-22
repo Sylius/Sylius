@@ -18,7 +18,6 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 
-/** @experimental */
 final readonly class DefaultActionProvider implements DefaultActionProviderInterface
 {
     /**

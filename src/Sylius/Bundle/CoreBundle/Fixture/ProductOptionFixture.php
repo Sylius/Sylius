@@ -28,6 +28,7 @@ class ProductOptionFixture extends AbstractResourceFixture
             ->children()
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('code')->cannotBeEmpty()->end()
+                ->variableNode('translations')->cannotBeEmpty()->defaultValue([])->end()
                 ->arrayNode('values')
                     ->requiresAtLeastOneElement()
                     ->useAttributeAsKey('code')

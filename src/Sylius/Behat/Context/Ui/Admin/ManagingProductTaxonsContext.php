@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Element\Admin\Product\TaxonomyFormElementInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -28,18 +30,14 @@ final readonly class ManagingProductTaxonsContext implements Context
     ) {
     }
 
-    /**
-     * @When I add :taxon taxon to the :product product
-     * @When I assign the :taxon taxon to the :product product
-     */
+    #[When('I add :taxon taxon to the :product product')]
+    #[When('I assign the :taxon taxon to the :product product')]
     public function iAddTaxonToTheProduct(ProductInterface $product, TaxonInterface $taxon): void
     {
         $this->taxonomyFormElement->checkProductTaxon($taxon);
     }
 
-    /**
-     * @When I change that the :product product does not belong to the :taxon taxon
-     */
+    #[When('I change that the :product product does not belong to the :taxon taxon')]
     public function iChangeThatTheProductDoesNotBelongToTheTaxon(
         ProductInterface $product,
         TaxonInterface $taxon,
@@ -51,57 +49,43 @@ final readonly class ManagingProductTaxonsContext implements Context
         $this->taxonomyFormElement->uncheckProductTaxon($taxon);
     }
 
-    /**
-     * @When I check all taxons
-     */
+    #[When('I check all taxons')]
     public function iCheckAllTaxons(): void
     {
         $this->taxonomyFormElement->checkAllTaxons();
     }
 
-    /**
-     * @When I uncheck all taxons
-     */
+    #[When('I uncheck all taxons')]
     public function iUncheckAllTaxons(): void
     {
         $this->taxonomyFormElement->uncheckAllTaxons();
     }
 
-    /**
-     * @When I filter taxons by :phrase
-     */
+    #[When('I filter taxons by :phrase')]
     public function iFilterTaxonsBy(string $phrase): void
     {
         $this->taxonomyFormElement->filterTaxonsBy($phrase);
     }
 
-    /**
-     * @Then the product :product should have the :taxon taxon
-     */
+    #[Then('the product :product should have the :taxon taxon')]
     public function thisProductTaxonShouldHaveTheTaxon(TaxonInterface $taxon): void
     {
         Assert::true($this->taxonomyFormElement->isTaxonChosen($taxon->getCode()));
     }
 
-    /**
-     * @Then the product :product should not have the :taxon taxon
-     */
+    #[Then('the product :product should not have the :taxon taxon')]
     public function thisProductTaxonShouldNotHaveTheTaxon(TaxonInterface $taxon): void
     {
         Assert::false($this->taxonomyFormElement->isTaxonChosen($taxon->getCode()));
     }
 
-    /**
-     * @Then I should see the :taxon taxon
-     */
+    #[Then('I should see the :taxon taxon')]
     public function iShouldSeeTheTaxon(TaxonInterface $taxon): void
     {
         Assert::true($this->taxonomyFormElement->hasTaxon($taxon->getCode()));
     }
 
-    /**
-     * @Then I should not see the :taxon taxon
-     */
+    #[Then('I should not see the :taxon taxon')]
     public function iShouldNotSeeTheTaxon(TaxonInterface $taxon): void
     {
         Assert::false($this->taxonomyFormElement->hasTaxon($taxon->getCode()));

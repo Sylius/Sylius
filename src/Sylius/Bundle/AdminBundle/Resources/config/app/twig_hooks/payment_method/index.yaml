@@ -22,7 +22,6 @@ sylius_twig_hooks:
                     image: 'build/admin/images/stripe-logo.svg'
                     title: 'sylius.ui.payment_method_banner.stripe.title'
                     description: 'sylius.ui.payment_method_banner.stripe.description'
-                    payment_methods: ['visa', 'master_card', 'amex', 'apple_pay', 'google_pay', 'klarna']
                     payment_methods_more: true
                     bundle: 'FluxSESyliusStripePlugin'
                     documentation_url: 'https://docs.sylius.com/public/stripe-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=stripe_docs'
@@ -35,7 +34,6 @@ sylius_twig_hooks:
                     image: 'build/admin/images/paypal-logo.svg'
                     title: 'sylius.ui.payment_method_banner.paypal.title'
                     description: 'sylius.ui.payment_method_banner.paypal.description'
-                    payment_methods: ['visa', 'master_card', 'amex', 'paypal', 'venmo', 'apple_pay']
                     payment_methods_more: true
                     bundle: 'SyliusPayPalPlugin'
                     documentation_url: 'https://docs.sylius.com/public/paypal-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=paypal_docs'
@@ -48,7 +46,6 @@ sylius_twig_hooks:
                     image: 'build/admin/images/adyen-logo.svg'
                     title: 'sylius.ui.payment_method_banner.adyen.title'
                     description: 'sylius.ui.payment_method_banner.adyen.description'
-                    payment_methods: ['visa', 'master_card', 'amex', 'alipay', 'wechat_pay', 'klarna']
                     payment_methods_more: true
                     bundle: 'SyliusAdyenPlugin'
                     documentation_url: 'https://docs.sylius.com/public/adyen-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=adyen_docs'
@@ -61,7 +58,6 @@ sylius_twig_hooks:
                     image: 'build/admin/images/mollie-logo.svg'
                     title: 'sylius.ui.payment_method_banner.mollie.title'
                     description: 'sylius.ui.payment_method_banner.mollie.description'
-                    payment_methods: ['visa', 'master_card', 'maestro', 'ideal', 'bancontact', 'blik']
                     payment_methods_more: true
                     bundle: 'SyliusMolliePlugin'
                     documentation_url: 'https://docs.sylius.com/public/mollie-plugin?utm_source=sylius_admin&utm_medium=banner&utm_campaign=payment_plugins&utm_content=mollie_docs'

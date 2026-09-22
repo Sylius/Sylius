@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -34,9 +36,7 @@ final readonly class ManagingTaxonImagesContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I attach the "([^"]+)" image with "([^"]+)" type to (this taxon)$/
-     */
+    #[When('/^I attach the "([^"]+)" image with "([^"]+)" type to (this taxon)$/')]
     public function iAttachTheImageWithTypeToThisTaxon(string $path, ?string $type, TaxonInterface $taxon): void
     {
         $builder = RequestBuilder::createPost(
@@ -54,17 +54,13 @@ final readonly class ManagingTaxonImagesContext implements Context
         $this->client->request($builder->build());
     }
 
-    /**
-     * @When /^I attach the "([^"]+)" image to (this taxon)$/
-     */
+    #[When('/^I attach the "([^"]+)" image to (this taxon)$/')]
     public function iAttachTheImageToThisTaxon(string $path, TaxonInterface $taxon): void
     {
         $this->iAttachTheImageWithTypeToThisTaxon($path, null, $taxon);
     }
 
-    /**
-     * @When I( also) remove an image with :type type
-     */
+    #[When('I( also) remove an image with :type type')]
     public function iRemoveAnImageWithType(string $type): void
     {
         /** @var TaxonInterface $taxon */
@@ -77,9 +73,7 @@ final readonly class ManagingTaxonImagesContext implements Context
         $this->removeTaxonImage($taxon, $taxonImage);
     }
 
-    /**
-     * @When I remove the first image
-     */
+    #[When('I remove the first image')]
     public function iRemoveTheFirstImage(): void
     {
         /** @var TaxonInterface $taxon */
@@ -92,9 +86,7 @@ final readonly class ManagingTaxonImagesContext implements Context
         $this->removeTaxonImage($taxon, $taxonImage);
     }
 
-    /**
-     * @When I change the first image type to :type
-     */
+    #[When('I change the first image type to :type')]
     public function iChangeTheFirstImageTypeTo(string $type): void
     {
         /** @var TaxonInterface $taxon */
@@ -113,9 +105,7 @@ final readonly class ManagingTaxonImagesContext implements Context
         $this->client->request($builder->build());
     }
 
-    /**
-     * @Then I should be notified that the changes have been successfully applied
-     */
+    #[Then('I should be notified that the changes have been successfully applied')]
     public function iShouldBeNotifiedThatTheChangesHaveBeenSuccessfullyApplied(): void
     {
         $response = $this->client->getLastResponse();
@@ -124,10 +114,8 @@ final readonly class ManagingTaxonImagesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this taxon) should(?:| also) have an image with "([^"]*)" type$/
-     * @Then /^(it) should(?:| also) have an image with "([^"]*)" type$/
-     */
+    #[Then('/^(this taxon) should(?:| also) have an image with "([^"]*)" type$/')]
+    #[Then('/^(it) should(?:| also) have an image with "([^"]*)" type$/')]
     public function thisTaxonShouldHaveAnImageWithType(TaxonInterface $taxon, string $type): void
     {
         Assert::true($this->responseChecker->hasValuesInAnySubresourceObjectCollection(
@@ -137,10 +125,8 @@ final readonly class ManagingTaxonImagesContext implements Context
         ));
     }
 
-    /**
-     * @Then /^(this taxon) should not have(?:| also) any images with "([^"]*)" type$/
-     * @Then /^(it) should not have(?:| also) any images with "([^"]*)" type$/
-     */
+    #[Then('/^(this taxon) should not have(?:| also) any images with "([^"]*)" type$/')]
+    #[Then('/^(it) should not have(?:| also) any images with "([^"]*)" type$/')]
     public function thisTaxonShouldNotHaveAnyImagesWithType(TaxonInterface $taxon, string $type): void
     {
         Assert::false($this->responseChecker->hasValuesInAnySubresourceObjectCollection(
@@ -150,10 +136,8 @@ final readonly class ManagingTaxonImagesContext implements Context
         ));
     }
 
-    /**
-     * @Then /^(this taxon) should have only one image$/
-     * @Then /^(this taxon) should(?:| still) have (\d+) images?$/
-     */
+    #[Then('/^(this taxon) should have only one image$/')]
+    #[Then('/^(this taxon) should(?:| still) have (\d+) images?$/')]
     public function thisTaxonShouldHaveImages(TaxonInterface $taxon, int $count = 1): void
     {
         Assert::count(
@@ -162,9 +146,7 @@ final readonly class ManagingTaxonImagesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this taxon) should not have any images$/
-     */
+    #[Then('/^(this taxon) should not have any images$/')]
     public function thisTaxonShouldNotHaveAnyImages(TaxonInterface $taxon): void
     {
         $this->thisTaxonShouldHaveImages($taxon, 0);

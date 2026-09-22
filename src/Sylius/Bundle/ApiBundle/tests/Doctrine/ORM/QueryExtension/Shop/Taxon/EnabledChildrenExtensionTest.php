@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Taxon;
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -25,6 +26,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EnabledChildrenExtensionTest extends TestCase
 {
     /** @var SectionProviderInterface&MockObject */
