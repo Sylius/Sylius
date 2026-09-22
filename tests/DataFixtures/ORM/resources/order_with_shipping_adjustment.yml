@@ -1,0 +1,56 @@
+Sylius\Component\Currency\Model\Currency:
+    currency:
+        code: "EUR"
+
+Sylius\Component\Locale\Model\Locale:
+    locale:
+        code: "en_US"
+
+Sylius\Component\Addressing\Model\Zone:
+    zone:
+        code: "TEST_ZONE"
+        name: "Test Zone"
+        type: "country"
+        scope: "all"
+
+Sylius\Component\Core\Model\Channel:
+    channel:
+        code: "TEST"
+        name: "Test Channel"
+        hostname: "localhost"
+        baseCurrency: "@currency"
+        defaultLocale: "@locale"
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
+        currencies: ["@currency"]
+        locales: ["@locale"]
+
+Sylius\Component\Core\Model\ShippingMethod:
+    shipping_method:
+        code: "TEST_FLAT_RATE"
+        enabled: true
+        calculator: "flat_rate"
+        configuration:
+            TEST:
+                amount: 1000
+        zone: "@zone"
+        channels: ["@channel"]
+
+Sylius\Component\Core\Model\Adjustment:
+    shipping_adjustment:
+        type: "shipping"
+        amount: 1000
+        label: "Shipping"
+
+Sylius\Component\Core\Model\Order:
+    order_with_shipping:
+        currencyCode: "EUR"
+        localeCode: "en_US"
+        channel: "@channel"
+
+Sylius\Component\Core\Model\Shipment:
+    order_shipment:
+        method: "@shipping_method"
+        order: "@order_with_shipping"
+        __calls:
+            - addAdjustment: ["@shipping_adjustment"]
