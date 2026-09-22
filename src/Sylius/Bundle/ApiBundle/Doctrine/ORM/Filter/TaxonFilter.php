@@ -57,30 +57,53 @@ final class TaxonFilter extends AbstractFilter
 
         $alias = $queryBuilder->getRootAliases()[0];
 
+        $subQuery = $queryBuilder->getEntityManager()
+            ->createQueryBuilder()
+            ->select('sub.id')
+            ->from($resourceClass, 'sub')
+            ->innerJoin('sub.productTaxons', 'subProductTaxon')
+            ->innerJoin('subProductTaxon.taxon', 'subTaxon')
+            ->andWhere('subTaxon.root = :taxonRoot')
+        ;
+
+        if (null !== $taxon && null !== $taxon->getLeft()) {
+            $subQuery->andWhere('subTaxon.left >= :taxonLeft');
+        }
+
+        if (null !== $taxon && null !== $taxon->getRight()) {
+            $subQuery->andWhere('subTaxon.right <= :taxonRight');
+        }
+
         $queryBuilder
-            ->addSelect('productTaxon')
-            ->innerJoin(sprintf('%s.productTaxons', $alias), 'productTaxon')
-            ->innerJoin('productTaxon.taxon', 'taxon')
-            ->andWhere('taxon.root = :taxonRoot')
+            ->andWhere($queryBuilder->expr()->in(sprintf('%s.id', $alias), $subQuery->getDQL()))
             ->setParameter('taxonRoot', $taxonRoot)
         ;
 
         if (null !== $taxon && null !== $taxon->getLeft()) {
-            $queryBuilder
-                ->andWhere('taxon.left >= :taxonLeft')
-                ->setParameter('taxonLeft', $taxon->getLeft())
-            ;
+            $queryBuilder->setParameter('taxonLeft', $taxon->getLeft());
         }
 
         if (null !== $taxon && null !== $taxon->getRight()) {
-            $queryBuilder
-                ->andWhere('taxon.right <= :taxonRight')
-                ->setParameter('taxonRight', $taxon->getRight())
-            ;
+            $queryBuilder->setParameter('taxonRight', $taxon->getRight());
         }
 
-        if (null !== $taxonRoot && empty($context['filters']['order'])) {
-            $queryBuilder->addOrderBy('productTaxon.position');
+        if (null !== $taxonRoot && null !== $taxon && empty($context['filters']['order'])) {
+            $productTaxonAlias = $queryNameGenerator->generateJoinAlias('productTaxon');
+            $productTaxonClass = $queryBuilder->getEntityManager()
+                ->getClassMetadata($resourceClass)
+                ->getAssociationTargetClass('productTaxons')
+            ;
+
+            $queryBuilder
+                ->leftJoin(
+                    $productTaxonClass,
+                    $productTaxonAlias,
+                    'WITH',
+                    sprintf('%s.product = %s AND %s.taxon = :taxon', $productTaxonAlias, $alias, $productTaxonAlias),
+                )
+                ->addOrderBy(sprintf('%s.position', $productTaxonAlias))
+                ->setParameter('taxon', $taxon)
+            ;
         }
     }
 
