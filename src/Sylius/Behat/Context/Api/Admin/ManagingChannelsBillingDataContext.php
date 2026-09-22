@@ -16,16 +16,21 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingChannelsBillingDataContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -36,7 +41,7 @@ final readonly class ManagingChannelsBillingDataContext implements Context
     {
         $shopBillingData = $this->getShopBillingDataFromChannel($channel);
 
-        Assert::same($shopBillingData['company'], $company);
+        Assert::same($shopBillingData[$this->getNormalizedKey('company')], $company);
     }
 
     /**
@@ -46,7 +51,7 @@ final readonly class ManagingChannelsBillingDataContext implements Context
     {
         $shopBillingData = $this->getShopBillingDataFromChannel($channel);
 
-        Assert::same($shopBillingData['taxId'], $taxId);
+        Assert::same($shopBillingData[$this->getNormalizedKey('taxId')], $taxId);
     }
 
     /**
@@ -62,10 +67,10 @@ final readonly class ManagingChannelsBillingDataContext implements Context
     ): void {
         $shopBillingData = $this->getShopBillingDataFromChannel($channel);
 
-        Assert::same($shopBillingData['street'], $street);
-        Assert::same($shopBillingData['postcode'], $postcode);
-        Assert::same($shopBillingData['city'], $city);
-        Assert::same($shopBillingData['countryCode'], $country->getCode());
+        Assert::same($shopBillingData[$this->getNormalizedKey('street')], $street);
+        Assert::same($shopBillingData[$this->getNormalizedKey('postcode')], $postcode);
+        Assert::same($shopBillingData[$this->getNormalizedKey('city')], $city);
+        Assert::same($shopBillingData[$this->getNormalizedKey('countryCode')], $country->getCode());
     }
 
     /**

@@ -38,6 +38,7 @@ final class LocaleCodeAwareContextBuilderTest extends TestCase
         $this->localeContext = $this->createMock(LocaleContextInterface::class);
         $this->localeCodeAwareContextBuilder = new LocaleCodeAwareContextBuilder(
             $this->decoratedContextBuilder,
+            null,
             LocaleCodeAware::class,
             'localeCode',
             $this->localeContext,

@@ -19,17 +19,19 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class LoggedInCustomerEmailAwareContextBuilder extends AbstractInputContextBuilder
 {
     public function __construct(
         SerializerContextBuilderInterface $decoratedContextBuilder,
+        ?NameConverterInterface $nameConverter,
         string $attributeClass,
         string $defaultConstructorArgumentName,
         private readonly UserContextInterface $userContext,
     ) {
-        parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
+        parent::__construct($decoratedContextBuilder, $nameConverter, $attributeClass, $defaultConstructorArgumentName);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool

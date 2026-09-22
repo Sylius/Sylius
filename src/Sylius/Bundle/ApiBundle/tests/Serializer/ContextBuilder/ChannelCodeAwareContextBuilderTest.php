@@ -39,6 +39,7 @@ final class ChannelCodeAwareContextBuilderTest extends TestCase
         $this->channelContext = $this->createMock(ChannelContextInterface::class);
         $this->channelCodeAwareContextBuilder = new ChannelCodeAwareContextBuilder(
             $this->decoratedContextBuilder,
+            null,
             ChannelCodeAware::class,
             'channelCode',
             $this->channelContext,

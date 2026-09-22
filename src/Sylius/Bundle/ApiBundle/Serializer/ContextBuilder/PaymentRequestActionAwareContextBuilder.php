@@ -18,6 +18,7 @@ use Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Bundle\PaymentBundle\Provider\DefaultActionProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 /** @experimental */
 final class PaymentRequestActionAwareContextBuilder extends AbstractInputContextBuilder
@@ -27,11 +28,12 @@ final class PaymentRequestActionAwareContextBuilder extends AbstractInputContext
     public function __construct(
         private readonly IriToIdentifierConverterInterface $iriToIdentifierConverter,
         SerializerContextBuilderInterface $decoratedContextBuilder,
+        ?NameConverterInterface $nameConverter,
         string $attributeClass,
         string $defaultConstructorArgumentName,
         private readonly DefaultActionProviderInterface $defaultActionProvider,
     ) {
-        parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
+        parent::__construct($decoratedContextBuilder, $nameConverter, $attributeClass, $defaultConstructorArgumentName);
     }
 
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array

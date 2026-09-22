@@ -16,17 +16,22 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class ChannelPricingLogEntryContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -69,8 +74,8 @@ final class ChannelPricingLogEntryContext implements Context
 
         $logEntry = $this->responseChecker->getCollection($this->client->getLastResponse())[$position - 1];
 
-        Assert::same($logEntry['price'], $price);
-        Assert::same($logEntry['originalPrice'], $originalPrice);
+        Assert::same($logEntry[$this->getNormalizedKey('price')], $price);
+        Assert::same($logEntry[$this->getNormalizedKey('originalPrice')], $originalPrice);
         Assert::keyExists($logEntry, 'loggedAt');
     }
 

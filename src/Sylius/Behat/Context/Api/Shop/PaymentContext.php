@@ -16,18 +16,23 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class PaymentContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private SharedStorageInterface $sharedStorage,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -65,7 +70,7 @@ final readonly class PaymentContext implements Context
         $payments = $this->responseChecker->getValue($response, 'payments');
         $token = $this->responseChecker->getValue($response, 'tokenValue');
 
-        $response = $this->client->requestGet(sprintf('orders/%s/payments/%s', $token, $payments[0]['id']));
+        $response = $this->client->requestGet(sprintf('orders/%s/payments/%s', $token, $payments[0][$this->getNormalizedKey('id')]));
 
         Assert::true($this->responseChecker->hasValue($response, 'state', $state, isCaseSensitive: false));
     }

@@ -16,14 +16,19 @@ namespace Sylius\Behat\Context\Api\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ExchangeRateContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -50,7 +55,7 @@ final readonly class ExchangeRateContext implements Context
     {
         $exchangeRate = $this->getExchangeRateByTargetCurrency($sourceCurrency, $targetCurrency);
 
-        Assert::same($exchangeRate['ratio'], $ratio);
+        Assert::same($exchangeRate[$this->getNormalizedKey('ratio')], $ratio);
     }
 
     /**
@@ -71,8 +76,8 @@ final readonly class ExchangeRateContext implements Context
 
         foreach ($exchangeRates as $exchangeRate) {
             if (
-                str_ends_with($exchangeRate['sourceCurrency'], $sourceCurrencyCode) &&
-                str_ends_with($exchangeRate['targetCurrency'], $targetCurrencyCode)
+                str_ends_with($exchangeRate[$this->getNormalizedKey('sourceCurrency')], $sourceCurrencyCode) &&
+                str_ends_with($exchangeRate[$this->getNormalizedKey('targetCurrency')], $targetCurrencyCode)
             ) {
                 return $exchangeRate;
             }

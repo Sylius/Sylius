@@ -24,6 +24,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ChannelCodeAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="sylius.context.channel" />
@@ -36,6 +37,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LoggedInCustomerEmailAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="sylius_api.context.user.token_based" />
@@ -58,6 +60,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\LocaleCodeAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="sylius.context.locale" />
@@ -89,6 +92,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShopUserIdAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="sylius_api.context.user.token_based" />
@@ -101,6 +105,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\ShipmentIdAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Component\Core\Model\ShipmentInterface</argument>
@@ -113,6 +118,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentIdAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Component\Core\Model\PaymentInterface</argument>
@@ -125,6 +131,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentRequestHashAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentRequestHashAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Component\Payment\Model\PaymentRequestInterface</argument>
@@ -137,6 +144,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Component\Core\Model\OrderInterface</argument>
@@ -149,6 +157,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\OrderItemIdAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Component\Core\Model\OrderItemInterface</argument>
@@ -161,6 +170,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PromotionCodeAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Component\Core\Model\PromotionInterface</argument>
@@ -173,6 +183,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Bundle\ApiBundle\Command\Admin\Account\ResetPassword</argument>
@@ -185,6 +196,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Bundle\ApiBundle\Command\Account\ResetPassword</argument>
@@ -197,6 +209,7 @@
             decoration-priority="64"
         >
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\TokenAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\TokenAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument>Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser</argument>
@@ -210,6 +223,7 @@
         >
             <argument type="service" id="sylius_api.converter.iri_to_identifier" />
             <argument type="service" id=".inner" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
             <argument>Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware</argument>
             <argument type="constant">Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware::DEFAULT_ARGUMENT_NAME</argument>
             <argument type="service" id="sylius.provider.payment_request.default_action" />

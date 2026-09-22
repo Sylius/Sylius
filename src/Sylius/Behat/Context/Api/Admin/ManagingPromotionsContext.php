@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -35,16 +36,19 @@ use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class ManagingPromotionsContext implements Context
 {
     use ValidationTrait;
+    use NormalizedKeyAwareTrait;
 
     public function __construct(
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private IriConverterInterface $iriConverter,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -509,7 +513,7 @@ final readonly class ManagingPromotionsContext implements Context
         ));
 
         Assert::true(
-            $returnedPromotion['couponBased'],
+            $returnedPromotion[$this->getNormalizedKey('couponBased')],
             sprintf('The promotion %s isn\'t coupon based', $promotion->getName()),
         );
     }
@@ -659,9 +663,12 @@ final readonly class ManagingPromotionsContext implements Context
     public function itShouldHaveOfItemPercentageDiscount(float $percentage, ChannelInterface $channel): void
     {
         $actions = $this->responseChecker->getValue($this->client->getLastResponse(), 'actions');
+        $typeKey = $this->getNormalizedKey('type');
+        $configurationKey = $this->getNormalizedKey('configuration');
+        $percentageKey = $this->getNormalizedKey('percentage');
         foreach ($actions as $action) {
-            if ($action['type'] === 'unit_percentage_discount') {
-                Assert::same((float) $action['configuration'][$channel->getCode()]['percentage'], $percentage);
+            if ($action[$typeKey] === 'unit_percentage_discount') {
+                Assert::same((float) $action[$configurationKey][$channel->getCode()][$percentageKey], $percentage);
             }
         }
     }
@@ -672,7 +679,10 @@ final readonly class ManagingPromotionsContext implements Context
     public function itShouldHaveOfOrderPercentageDiscount(float $percentage): void
     {
         $actions = $this->responseChecker->getValue($this->client->getLastResponse(), 'actions');
-        Assert::same((float) $actions[0]['configuration']['percentage'], $percentage);
+        Assert::same(
+            (float) $actions[0][$this->getNormalizedKey('configuration')][$this->getNormalizedKey('percentage')],
+            $percentage,
+        );
     }
 
     /**
@@ -891,9 +901,9 @@ final readonly class ManagingPromotionsContext implements Context
         ));
 
         Assert::same(
-            $returnedPromotion['used'],
+            $returnedPromotion[$this->getNormalizedKey('used')],
             $usage,
-            sprintf('The promotion %s has been used %s times', $promotion->getName(), $returnedPromotion['used']),
+            sprintf('The promotion %s has been used %s times', $promotion->getName(), $returnedPromotion[$this->getNormalizedKey('used')]),
         );
     }
 
