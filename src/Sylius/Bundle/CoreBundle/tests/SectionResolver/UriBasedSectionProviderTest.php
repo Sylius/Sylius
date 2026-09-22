@@ -88,4 +88,36 @@ final class UriBasedSectionProviderTest extends TestCase
         $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn(null);
         $this->assertNull($this->uriBasedSectionProvider->getSection());
     }
+
+    public function testThrowsExceptionIfNoResolverCanHandleTheUri(): void
+    {
+        $request = $this->createMock(Request::class);
+
+        $this->requestStack
+            ->expects($this->once())
+            ->method('getMainRequest')
+            ->willReturn($request);
+        $request
+            ->expects($this->once())
+            ->method('getPathInfo')
+            ->willReturn('/unknown-section');
+
+        $this->firstSectionResolver
+            ->expects($this->once())
+            ->method('getSection')
+            ->with('/unknown-section')
+            ->willThrowException(new SectionCannotBeResolvedException())
+        ;
+
+        $this->secondSectionResolver
+            ->expects($this->once())
+            ->method('getSection')
+            ->with('/unknown-section')
+            ->willThrowException(new SectionCannotBeResolvedException())
+        ;
+
+        $this->expectException(SectionCannotBeResolvedException::class);
+
+        $this->uriBasedSectionProvider->getSection();
+    }
 }
