@@ -138,6 +138,36 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     }
 
     #[Test]
+    public function it_loads_default_security_csrf_parameters_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter('sylius_admin.security.csrf_parameter', '_csrf_admin_security_token');
+        $this->assertContainerBuilderHasParameter('sylius_admin.security.csrf_token_id', 'admin_authenticate');
+        $this->assertContainerBuilderHasParameter('sylius_shop.security.csrf_parameter', '_csrf_shop_security_token');
+        $this->assertContainerBuilderHasParameter('sylius_shop.security.csrf_token_id', 'shop_authenticate');
+    }
+
+    #[Test]
+    public function it_does_not_override_configured_security_csrf_parameters(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+        $this->container->setParameter('sylius_admin.security.csrf_parameter', '_custom_admin_csrf');
+        $this->container->setParameter('sylius_admin.security.csrf_token_id', 'custom_admin_authenticate');
+        $this->container->setParameter('sylius_shop.security.csrf_parameter', '_custom_shop_csrf');
+        $this->container->setParameter('sylius_shop.security.csrf_token_id', 'custom_shop_authenticate');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter('sylius_admin.security.csrf_parameter', '_custom_admin_csrf');
+        $this->assertContainerBuilderHasParameter('sylius_admin.security.csrf_token_id', 'custom_admin_authenticate');
+        $this->assertContainerBuilderHasParameter('sylius_shop.security.csrf_parameter', '_custom_shop_csrf');
+        $this->assertContainerBuilderHasParameter('sylius_shop.security.csrf_token_id', 'custom_shop_authenticate');
+    }
+
+    #[Test]
     public function it_aliases_default_filesystem_adapter_properly(): void
     {
         $this->container->setParameter('kernel.environment', 'dev');
