@@ -13,6 +13,6 @@
     } %}
 
     <span class="badge {{ state_badge[state]|default('') }}" {{ sylius_test_html_attribute('payment-state') }}>
-        {{ label|trans|title }}
+        {{ label|trans }}
     </span>
 {%- endmacro -%}
