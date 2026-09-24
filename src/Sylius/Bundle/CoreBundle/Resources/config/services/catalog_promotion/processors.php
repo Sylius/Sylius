@@ -34,6 +34,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('sylius.repository.product_variant'),
             service('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants'),
+            '%sylius_core.catalog_promotions.batch_size%',
         ])
     ;
     $services->alias(AllProductVariantsCatalogPromotionsProcessorInterface::class, 'sylius.processor.catalog_promotion.all_product_variant');

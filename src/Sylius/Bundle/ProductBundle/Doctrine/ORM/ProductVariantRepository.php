@@ -18,6 +18,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @template T of ProductVariantInterface
@@ -174,12 +175,84 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
         ;
     }
 
+    /**
+     * @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead,
+     *             which reads the catalog in batches instead of materialising it entirely in memory.
+     */
     public function getCodesOfAllVariants(): array
     {
+        trigger_deprecation(
+            'sylius/product-bundle',
+            '2.3',
+            'The "%s()" method is deprecated and will be removed in Sylius 3.0. Use iterateCodesOfAllVariants() instead.',
+            __METHOD__,
+        );
+
         return $this->createQueryBuilder('o')
             ->select('o.code')
             ->getQuery()
             ->getArrayResult()
         ;
+    }
+
+    public function iterateCodesOfAllVariants(int $batchSize): iterable
+    {
+        // Both preconditions are checked outside the generator, so that they are reported when the
+        // method is called rather than when the caller first iterates.
+        Assert::positiveInteger($batchSize, 'Expected a batch size greater than 0. Got: %s');
+
+        $metadata = $this->getClassMetadata();
+        $identifierField = $metadata->getSingleIdentifierFieldName();
+        $identifierType = $metadata->getTypeOfField($identifierField);
+
+        // Null means the identifier is not a plain field (an association identifier, for instance).
+        // Without a type, Doctrine would infer STRING for an object identifier and the keyset
+        // comparison would silently match nothing, so refuse rather than under-report the catalog.
+        Assert::notNull($identifierType, sprintf(
+            'Cannot iterate over "%s": its identifier "%s" is not a field with a mapped type.',
+            $metadata->getName(),
+            $identifierField,
+        ));
+
+        return $this->iterateCodesOfAllVariantsInBatches($batchSize, $identifierField, $identifierType);
+    }
+
+    /** @return \Generator<int, list<string>, mixed, void> */
+    private function iterateCodesOfAllVariantsInBatches(
+        int $batchSize,
+        string $identifierField,
+        string $identifierType,
+    ): \Generator {
+        $lastId = null;
+
+        while (true) {
+            $queryBuilder = $this->createQueryBuilder('o')
+                ->select(sprintf('o.%s AS id', $identifierField), 'o.code')
+                ->orderBy(sprintf('o.%s', $identifierField), 'ASC')
+                ->setMaxResults($batchSize)
+            ;
+
+            if (null !== $lastId) {
+                $queryBuilder
+                    ->andWhere(sprintf('o.%s > :lastId', $identifierField))
+                    ->setParameter('lastId', $lastId, $identifierType)
+                ;
+            }
+
+            /** @var list<array{id: mixed, code: string}> $result */
+            $result = $queryBuilder->getQuery()->getArrayResult();
+
+            if ([] === $result) {
+                return;
+            }
+
+            $lastId = $result[array_key_last($result)]['id'];
+
+            yield array_column($result, 'code');
+
+            if (count($result) < $batchSize) {
+                return;
+            }
+        }
     }
 }
