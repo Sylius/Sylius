@@ -42,6 +42,8 @@
                         {{ form_row(image_form.position, sylius_test_form_attribute('position')) }}
                     </div>
                 {% endif %}
+                {{ form_widget(image_form.cachedFilePath) }}
+                {{ form_widget(image_form.cachedFileName) }}
             </div>
         </div>
     {% endfor %}
