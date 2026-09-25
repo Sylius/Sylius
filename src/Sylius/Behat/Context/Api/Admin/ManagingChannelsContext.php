@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
+use Composer\InstalledVersions;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
@@ -525,7 +526,9 @@ final class ManagingChannelsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'The type of the "baseCurrency" attribute must be "array" (nested document) or "string" (IRI), "NULL" given.',
+            $this->isApiPlatform5()
+                ? 'baseCurrency: Please enter channel base currency.'
+                : 'The type of the "baseCurrency" attribute must be "array" (nested document) or "string" (IRI), "NULL" given.',
         );
     }
 
@@ -534,7 +537,9 @@ final class ManagingChannelsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'The type of the "defaultLocale" attribute must be "array" (nested document) or "string" (IRI), "NULL" given.',
+            $this->isApiPlatform5()
+                ? 'defaultLocale: Please enter channel default locale.'
+                : 'The type of the "defaultLocale" attribute must be "array" (nested document) or "string" (IRI), "NULL" given.',
         );
     }
 
@@ -573,5 +578,10 @@ final class ManagingChannelsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'countryCode: This value is not a valid country.',
         );
+    }
+
+    private function isApiPlatform5(): bool
+    {
+        return version_compare((string) InstalledVersions::getVersion('api-platform/symfony'), '5.0.0', '>=');
     }
 }
