@@ -21,7 +21,7 @@ final readonly class AdministrationMenuProvider implements MenuProviderInterface
     public function __invoke(ItemInterface $menu): void
     {
         $administration = $menu
-            ->addChild('administration')
+            ->addChild('sylius.ui.administration')
             ->setLabel('sylius.ui.administration')
             ->setLabelAttribute('icon', 'tabler:lock')
         ;
