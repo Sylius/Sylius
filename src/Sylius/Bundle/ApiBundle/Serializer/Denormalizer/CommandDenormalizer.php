@@ -65,7 +65,7 @@ final class CommandDenormalizer implements DenormalizerInterface
 
     public function getSupportedTypes(?string $format): array
     {
-        return ['object' => true];
+        return ['object' => false];
     }
 
     private function normalizeFieldName(string $field, string $class): string
