@@ -11,6 +11,8 @@ sylius:
             regex: Attribute code can only be comprised of letters, numbers, dashes and underscores.
             unique: This code is already in use.
         configuration:
+            format:
+                invalid: 'Configuration format must be one of: "{{ available_formats }}".'
             max_entries: Configuration max entries value must be greater or equal to the min entries value.
             max_length: Configuration max length must be greater or equal to the min length.
             min_entries: Configuration min entries value must be lower or equal to the number of added choices.

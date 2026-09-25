@@ -315,7 +315,7 @@ final class ProductAttributesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'published_at',
                 'configuration' => [
-                    'format' => 'Y-m-d H:i:s',
+                    'format' => 'medium',
                 ],
                 'type' => DatetimeAttributeType::TYPE,
                 'translatable' => false,
@@ -347,7 +347,7 @@ final class ProductAttributesTest extends JsonApiTestCase
             content: json_encode([
                 'code' => 'published_at',
                 'configuration' => [
-                    'format' => 'Y-m-d',
+                    'format' => 'short',
                 ],
                 'type' => DateAttributeType::TYPE,
                 'translatable' => false,
@@ -363,6 +363,70 @@ final class ProductAttributesTest extends JsonApiTestCase
             $this->client->getResponse(),
             'admin/product_attribute/post_date_product_attribute_response',
             Response::HTTP_CREATED,
+        );
+    }
+
+    #[Test]
+    public function it_does_not_create_a_date_product_attribute_with_an_unsupported_format_configuration(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-attributes',
+            server: $header,
+            content: json_encode([
+                'code' => 'published_at',
+                'configuration' => [
+                    'format' => 'Y-m-d',
+                ],
+                'type' => DateAttributeType::TYPE,
+                'translatable' => false,
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Published at',
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_attribute/post_date_product_attribute_with_unsupported_format_configuration_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    #[Test]
+    public function it_does_not_create_a_datetime_product_attribute_with_an_unsupported_format_configuration(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/product-attributes',
+            server: $header,
+            content: json_encode([
+                'code' => 'published_at',
+                'configuration' => [
+                    'format' => 'Y-m-d H:i:s',
+                ],
+                'type' => DatetimeAttributeType::TYPE,
+                'translatable' => false,
+                'translations' => [
+                    'en_US' => [
+                        'name' => 'Published at',
+                    ],
+                ],
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/product_attribute/post_datetime_product_attribute_with_unsupported_format_configuration_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
         );
     }
 

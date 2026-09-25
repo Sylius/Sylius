@@ -6,7 +6,7 @@ Feature: Adding a new product with a datetime attribute
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has a non-translatable datetime product attribute "Manufactured" with format "Y-m-d"
+        And the store has a non-translatable datetime product attribute "Manufactured" with format "medium"
         And I am logged in as an administrator
 
     @api

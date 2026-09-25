@@ -4,7 +4,7 @@
     "@type": "ProductAttribute",
     "code": "published_at",
     "configuration": {
-        "format": "Y-m-d"
+        "format": "short"
     },
     "position": 0,
     "storageType": "date",
