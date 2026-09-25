@@ -43,7 +43,7 @@ final class OrderGrid implements OrderGridInterface
                     ->setLabel('sylius.ui.total')
                     ->setPath('.')
                     ->setSortable(true, 'total'),
-                TwigField::create('state', '@SyliusUi/grid/field/label.html.twig')
+                TwigField::create('state', '@SyliusShop/grid/field/label.html.twig')
                     ->setLabel('sylius.ui.state')
                     ->setSortable(true)
                     ->addOptions([
