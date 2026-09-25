@@ -28,10 +28,13 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
                 if: "${{ inputs.branch == '' }}"
 
             -   name: "Get matrix"
@@ -60,11 +63,14 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'
@@ -153,11 +159,14 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: Restrict Twig
                 if: matrix.twig == '^2.12'

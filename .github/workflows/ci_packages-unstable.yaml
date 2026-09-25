@@ -25,6 +25,8 @@ jobs:
             packages: ${{ steps.packages.outputs.packages }}
         steps:
             -   uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: "Get packages"
                 id: packages
@@ -57,6 +59,8 @@ jobs:
 
         steps:
             -   uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2

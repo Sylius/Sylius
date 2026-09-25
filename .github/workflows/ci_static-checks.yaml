@@ -28,11 +28,14 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -
                 name: "Get matrix"
@@ -57,11 +60,14 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: "Setup PHP"
                 uses: shivammathur/setup-php@v2

@@ -28,10 +28,13 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
                 if: "${{ inputs.branch == '' }}"
 
             -   name: "Get matrix"
@@ -62,11 +65,14 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: Require Winzou State Machine
                 if: "${{ matrix.state_machine_adapter == 'winzou_state_machine' }}"
@@ -170,11 +176,14 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: Require Winzou State Machine
                 if: "${{ matrix.state_machine_adapter == 'winzou_state_machine' }}"
