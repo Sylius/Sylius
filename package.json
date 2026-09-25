@@ -14,8 +14,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@sylius-ui/admin": "file:src/Sylius/Bundle/AdminBundle",
-    "@sylius-ui/shop": "file:src/Sylius/Bundle/ShopBundle",
+    "@sylius-ui/admin": "file:src/Sylius/Bundle/AdminBundle/Resources/npm",
+    "@sylius-ui/shop": "file:src/Sylius/Bundle/ShopBundle/Resources/npm",
     "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
     "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets"
   },

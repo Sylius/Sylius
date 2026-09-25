@@ -788,3 +788,34 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    +    protected readonly ?CartItemAdderInterface $cartItemAdder = null,
     ) {
    ```
+
+6. Installing the `@sylius-ui/admin` and `@sylius-ui/shop` packages from the bundle root directories is deprecated since Sylius 2.3
+   and will no longer be supported in Sylius 3.0. Both packages now live in the `Resources/npm/` directory of their bundles.
+
+   Yarn 1 copies the whole directory of a `file:` dependency and ignores the `files` field, so installing the packages from
+   the bundle root put all PHP classes of `AdminBundle` and `ShopBundle` into `node_modules/`, where IDEs indexed them as duplicates.
+   The new directories contain only JavaScript.
+
+   Update the paths in your `package.json`:
+
+   ```diff
+    "dependencies": {
+   -    "@sylius-ui/admin": "file:vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle",
+   -    "@sylius-ui/shop": "file:vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle",
+   +    "@sylius-ui/admin": "file:vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Resources/npm",
+   +    "@sylius-ui/shop": "file:vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Resources/npm",
+    }
+   ```
+
+   If you require the split packages (`sylius/admin-bundle`, `sylius/shop-bundle`), use
+   `vendor/sylius/admin-bundle/Resources/npm` and `vendor/sylius/shop-bundle/Resources/npm` instead.
+
+   Then reinstall the packages:
+
+   ```bash
+   rm -rf node_modules/@sylius-ui
+   yarn install
+   ```
+
+   The package names and the `getWebpackConfig()` / `getBaseWebpackConfig()` API are unchanged, so no changes in `webpack.config.js` are required.
+   The old locations still work, but emit a deprecation warning during the build.

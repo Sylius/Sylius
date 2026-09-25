@@ -9,20 +9,7 @@
   "license": "MIT",
   "author": "Sylius Sp. z o.o.",
   "dependencies": {
-    "@babel/core": "^7.17.0",
-    "@babel/plugin-transform-object-rest-spread": "^7.25.9",
-    "@babel/preset-env": "^7.25.8",
-    "@hotwired/stimulus": "^3.2.2",
-    "@popperjs/core": "^2.11.8",
-    "@sylius/shop-bundle": "file:Resources/assets/",
-    "@symfony/stimulus-bridge": "^3.2.0",
-    "@symfony/webpack-encore": "^5.0.1",
-    "bootstrap": "^5.3.8",
-    "sass": "1.77.6",
-    "sass-loader": "^16.0.1",
-    "viewerjs": "^1.11.8",
-    "webpack": ">=5.72 <5.109",
-    "webpack-cli": "^5.1.4"
+    "@sylius-ui/shop-js": "file:Resources/npm/"
   },
   "engines": {
     "node": ">=22"
@@ -33,6 +20,7 @@
     "./README.md",
     "./LICENSE",
     "./index.js",
+    "./Resources/npm/",
     "./Resources/assets/"
   ]
 }
