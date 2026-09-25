@@ -131,15 +131,14 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
     public function testSetShipmentIdAsAConstructorArgument(): void
     {
-        /** @var Request|MockObject $requestMock */
-        $requestMock = $this->createMock(Request::class);
+        $requestMock = new Request(attributes: ['shipmentId' => '123']);
         /** @var HttpOperation|MockObject $operationMock */
         $operationMock = $this->createMock(HttpOperation::class);
 
         $this->decoratedContextBuilder->expects(self::once())
             ->method('createFromRequest')
             ->with($requestMock, true, ['operation' => $operationMock])
-            ->willReturn(['input' => ['class' => ChooseShippingMethod::class], 'uri_variables' => ['shipmentId' => '123']]);
+            ->willReturn(['input' => ['class' => ChooseShippingMethod::class]]);
 
         $uriVariable = new Link(fromClass: ShipmentInterface::class, parameterName: 'shipmentId');
 
@@ -147,7 +146,6 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
         self::assertSame([
             'input' => ['class' => ChooseShippingMethod::class],
-            'uri_variables' => ['shipmentId' => '123'],
             'default_constructor_arguments' => [
                 ChooseShippingMethod::class => ['shipmentId' => '123'],
             ],
@@ -158,8 +156,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
     public function testSetOrderTokenValueAsAConstructorArgument(): void
     {
-        /** @var Request|MockObject $requestMock */
-        $requestMock = $this->createMock(Request::class);
+        $requestMock = new Request(attributes: ['orderToken' => 'token123']);
         /** @var HttpOperation|MockObject $operationMock */
         $operationMock = $this->createMock(HttpOperation::class);
 
@@ -173,7 +170,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
         $this->decoratedContextBuilder->expects(self::once())
             ->method('createFromRequest')
             ->with($requestMock, true, ['operation' => $operationMock])
-            ->willReturn(['input' => ['class' => CompleteOrder::class], 'uri_variables' => ['orderToken' => 'token123']]);
+            ->willReturn(['input' => ['class' => CompleteOrder::class]]);
 
         $uriVariable = new Link(fromClass: OrderInterface::class, parameterName: 'orderToken');
 
@@ -181,7 +178,6 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
         self::assertSame([
             'input' => ['class' => CompleteOrder::class],
-            'uri_variables' => ['orderToken' => 'token123'],
             'default_constructor_arguments' => [
                 CompleteOrder::class => ['orderTokenValue' => 'token123'],
             ],
@@ -192,8 +188,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
     public function testSetOrderItemIdAsAConstructorArgument(): void
     {
-        /** @var Request|MockObject $requestMock */
-        $requestMock = $this->createMock(Request::class);
+        $requestMock = new Request(attributes: ['orderItemId' => '23']);
         /** @var HttpOperation|MockObject $operationMock */
         $operationMock = $this->createMock(HttpOperation::class);
 
@@ -207,7 +202,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
         $this->decoratedContextBuilder->expects(self::once())
             ->method('createFromRequest')
             ->with($requestMock, true, ['operation' => $operationMock])
-            ->willReturn(['input' => ['class' => ChangeItemQuantityInCart::class], 'uri_variables' => ['orderItemId' => '23']]);
+            ->willReturn(['input' => ['class' => ChangeItemQuantityInCart::class]]);
 
         $uriVariable = new Link(fromClass: OrderItemInterface::class, parameterName: 'orderItemId');
 
@@ -215,7 +210,6 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
         self::assertSame([
             'input' => ['class' => ChangeItemQuantityInCart::class],
-            'uri_variables' => ['orderItemId' => '23'],
             'default_constructor_arguments' => [
                 ChangeItemQuantityInCart::class => ['orderItemId' => '23'],
             ],
