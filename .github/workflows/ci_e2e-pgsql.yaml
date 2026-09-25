@@ -28,15 +28,18 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
                 if: "${{ inputs.branch == '' }}"
 
             -   name: "Get matrix"
                 id: matrix
-                uses: notiz-dev/github-action-json-property@release
+                uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # v0.2.0
                 with:
                     path: '.github/workflows/matrix.json'
                     prop_path: '${{ inputs.type }}.e2e-pgsql'
@@ -60,11 +63,14 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: Require Doctrine Bundle
                 if: ${{ matrix.doctrine_bundle != '' && matrix.doctrine_bundle != null }}
@@ -86,7 +92,7 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v4
+                uses: SyliusLabs/BuildTestAppAction@fbdfc158a99f540fc3bbe554b46120d14444f2f4 # v4.3.0
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-doctrine-${{ matrix.doctrine_bundle || 'default' }}-"
@@ -141,11 +147,14 @@ jobs:
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
                 with:
+                    persist-credentials: false
                     ref: ${{ inputs.branch }}
 
             -   name: "Checkout"
                 if: "${{ inputs.branch == '' }}"
                 uses: actions/checkout@v4
+                with:
+                    persist-credentials: false
 
             -   name: Require Doctrine Bundle
                 if: ${{ matrix.doctrine_bundle != '' && matrix.doctrine_bundle != null }}
@@ -167,7 +176,7 @@ jobs:
                     echo "{}" > public/build/app/shop/manifest.json
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v4
+                uses: SyliusLabs/BuildTestAppAction@fbdfc158a99f540fc3bbe554b46120d14444f2f4 # v4.3.0
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-doctrine-${{ matrix.doctrine_bundle || 'default' }}-"
