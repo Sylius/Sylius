@@ -8,6 +8,10 @@ on:
             - "*.md"
     issue_comment:
         types: [ created, edited ]
+permissions:
+    contents: read
+    pull-requests: write
+
 jobs:
     deploy:
         name: Deploy Environment
