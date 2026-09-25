@@ -41,6 +41,7 @@
     "ApiPlatform\\OpenApi\\Model\\Paths",
     "ApiPlatform\\OpenApi\\Model\\RequestBody",
     "ApiPlatform\\OpenApi\\OpenApi",
+    "ApiPlatform\\State\\DenormalizationViolationFactoryInterface",
     "ApiPlatform\\State\\ProcessorInterface",
     "ApiPlatform\\State\\ProviderInterface",
     "ApiPlatform\\State\\SerializerContextBuilderInterface",

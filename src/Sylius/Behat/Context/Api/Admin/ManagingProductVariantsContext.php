@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
+use Composer\InstalledVersions;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Admin\Helper\ValidationTrait;
@@ -509,7 +510,9 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'The type of the "onHand" attribute must be "int", "NULL" given.',
+            $this->isApiPlatform5()
+                ? 'onHand: Please enter on hand.'
+                : 'The type of the "onHand" attribute must be "int", "NULL" given.',
         );
     }
 
@@ -651,5 +654,10 @@ final class ManagingProductVariantsContext implements Context
             $this->responseChecker->getError($this->client->getLastResponse()),
             'On hand must be greater than the number of on hold units',
         );
+    }
+
+    private function isApiPlatform5(): bool
+    {
+        return version_compare((string) InstalledVersions::getVersion('api-platform/symfony'), '5.0.0', '>=');
     }
 }

@@ -58,3 +58,22 @@ Returns `202 Accepted` on success (regardless of whether the email was sent).
 
    The property is available in the `sylius:admin:order:index`, `sylius:admin:order:show`,
    `sylius:shop:cart:show` and `sylius:shop:order:account:show` serialization groups.
+
+## API Platform
+
+1. Sylius now supports API Platform `^5.0` next to `^4.3`. API Platform 5 requires Symfony `^7.4 || ^8.0`,
+   so applications running on Symfony 6.4 stay on API Platform 4. For the changes in API Platform itself,
+   see the [API Platform 5.0 upgrade guide](https://api-platform.com/docs/core/upgrade-guide/#api-platform-50-breaking-changes).
+
+2. `Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\UriVariablesAwareContextBuilder` now resolves the URI variables
+   from the request attributes, as `uri_variables` is no longer available in the serializer context on API Platform 5.
+
+   `Sylius\Bundle\ApiBundle\Serializer\ContextBuilder\AbstractInputContextBuilder::resolveValue()` now receives the current request
+   as a third argument. It will be added to the method signature in Sylius 3.0:
+
+   ```php
+   abstract protected function resolveValue(array $context, ?array $extractedAttributes/* , ?Request $request = null */): mixed;
+   ```
+
+   If you have custom context builders extending `AbstractInputContextBuilder` that read `$context['uri_variables']`,
+   add the `?Request $request = null` argument to their `resolveValue()` method and read the route parameters from `$request->attributes` instead.
