@@ -112,6 +112,9 @@ jobs:
             -   name: Validate Yaml files
                 run: bin/console lint:yaml src --parse-tags
 
+            -   name: Validate Doctrine mapping
+                run: bin/console doctrine:schema:validate --skip-sync
+
             -   name: Validate Package versions
                 run: vendor/bin/monorepo-builder validate
 
