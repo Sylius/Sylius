@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\AdminBundle\Notification;
 
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Clock\ClockInterface;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -84,6 +85,33 @@ final class HubNotificationProviderTest extends TestCase
         $provider = $this->createProvider(hubResponse: ['foo' => 'bar']);
 
         $this->assertEmpty($provider->getNotifications());
+    }
+
+    /**
+     * @return iterable<array-key, array{0: string}>
+     */
+    public static function preReleaseVersionProvider(): iterable
+    {
+        yield ['2.3.0-ALPHA.1'];
+        yield ['2.3.0-alpha.1'];
+        yield ['2.3.0-BETA.2'];
+        yield ['2.3.0-RC.1'];
+        yield ['2.3.0-DEV'];
+    }
+
+    #[DataProvider('preReleaseVersionProvider')]
+    public function testDoesNotReturnNotificationIfLatestVersionIsAPreRelease(string $preReleaseVersion): void
+    {
+        $provider = $this->createProvider(hubResponse: ['version' => $preReleaseVersion]);
+
+        $this->assertEmpty($provider->getNotifications());
+    }
+
+    public function testReturnsNotificationIfLatestVersionIsAStableReleaseContainingAHyphen(): void
+    {
+        $provider = $this->createProvider(hubResponse: ['version' => 'NEW-VERSION']);
+
+        $this->assertNotEmpty($provider->getNotifications());
     }
 
     public function testDoesNotCallHubWhenCacheExists(): void
