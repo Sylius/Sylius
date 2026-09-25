@@ -93,6 +93,13 @@ jobs:
                 if: matrix.php == '8.3'
                 run: composer require ext-random --no-update --no-scripts --no-interaction
 
+            # TODO: Remove once API Platform 5.0.1 is released,
+            # API Platform 5.0.0 registers the "test.api_platform.client" service even when api-platform/test is not installed
+            # see https://github.com/api-platform/core/issues/8571
+            -   name: "Require API Platform test package on Symfony 7.4+"
+                if: matrix.symfony != '~6.4.0'
+                run: composer require --dev --no-update --no-interaction "api-platform/test:^5.0"
+
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
 
