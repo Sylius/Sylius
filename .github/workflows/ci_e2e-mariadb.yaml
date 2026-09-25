@@ -39,7 +39,7 @@ jobs:
 
             -   name: "Get matrix"
                 id: matrix
-                uses: notiz-dev/github-action-json-property@release
+                uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # v0.2.0
                 with:
                     path: '.github/workflows/matrix.json'
                     prop_path: '${{ inputs.type }}.e2e-mariadb'
@@ -119,7 +119,7 @@ jobs:
                         api-platform/validator:${REQ}
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v4
+                uses: SyliusLabs/BuildTestAppAction@fbdfc158a99f540fc3bbe554b46120d14444f2f4 # v4.3.0
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-apip-${{ matrix.api_platform || 'none' }}-"
@@ -230,7 +230,7 @@ jobs:
                         api-platform/validator:${REQ}
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v4
+                uses: SyliusLabs/BuildTestAppAction@fbdfc158a99f540fc3bbe554b46120d14444f2f4 # v4.3.0
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-apip-${{ matrix.api_platform || 'none' }}-"

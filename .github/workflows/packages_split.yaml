@@ -44,7 +44,7 @@ jobs:
 
         steps:
             -   name: Split package
-                uses: SyliusLabs/SplitPackageAction@v1.0
+                uses: SyliusLabs/SplitPackageAction@ffddcaf3e7381e4657aed6db6a880e20a316188d # v1.0
                 with:
                     directory: ${{ matrix.package.directory }}
                     repository: ${{ matrix.package.repository }}
