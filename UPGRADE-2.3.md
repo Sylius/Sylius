@@ -460,6 +460,24 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    global `Spotlight` API, you will need to migrate that customization to the equivalent
    [viewerjs options](https://fengyuanchen.github.io/viewerjs/).
 
+8. The `@symfony/webpack-encore` package has been upgraded from `^5.0.1` to `^6.0.0`,
+   and `webpack-cli` from `^5.1.4` to `^6.0.0` in the `@sylius-ui/admin` and `@sylius-ui/shop` packages.
+
+   Webpack Encore 6 requires Node.js `^22.13.0 || >=24.0`, the `engines` constraints have been updated accordingly.
+
+   Update both packages to the same versions in your application's `package.json`, otherwise the `encore`
+   binary and the `@sylius-ui/*` packages end up with separate Encore instances and the build fails:
+
+   ```diff
+   -    "@symfony/webpack-encore": "^5.0.1",
+   +    "@symfony/webpack-encore": "^6.0.0",
+   -    "webpack-cli": "^5.1.4"
+   +    "webpack-cli": "^6.0.0"
+   ```
+
+   No changes in `webpack.config.js` are required. If you use `Encore.copyFiles()` with `[N]` placeholders
+   (regex capture groups) in the `to` option, rework them, as they are no longer supported.
+
 ## Validation
 
 1. Passing an array of options to configure a Sylius validation constraint is **deprecated** since Sylius 2.3

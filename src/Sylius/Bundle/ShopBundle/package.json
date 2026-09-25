@@ -12,7 +12,7 @@
     "@sylius-ui/shop-js": "file:Resources/npm/"
   },
   "engines": {
-    "node": ">=22"
+    "node": "^22.13.0 || >=24.0"
   },
   "engineStrict": true,
   "files": [
