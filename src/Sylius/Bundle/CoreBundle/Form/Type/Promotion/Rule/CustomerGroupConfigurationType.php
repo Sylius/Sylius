@@ -27,7 +27,7 @@ final class CustomerGroupConfigurationType extends AbstractType
             ->add('group_code', CustomerGroupCodeChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.customer_group.group',
                 'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
+                    new NotBlank(groups: ['sylius']),
                     new Type(type: 'string', groups: ['sylius']),
                 ],
             ])

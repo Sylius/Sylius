@@ -20,7 +20,7 @@ final class PromotionUsageLimitEligibilityChecker implements PromotionEligibilit
 {
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion): bool
     {
-        if (null === $usageLimit = $promotion->getUsageLimit()) {
+        if ((null === $usageLimit = $promotion->getUsageLimit()) || false === $promotion->isTrackUsage()) {
             return true;
         }
 

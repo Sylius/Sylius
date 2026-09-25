@@ -34,6 +34,14 @@ Feature: Editing promotion coupon
         And this coupon should have 20 per customer usage limit
 
     @api @ui
+    Scenario: Changing coupons track usage
+        When I want to modify the "SANTA2016" coupon for this promotion
+        And I disable track usage for it
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this coupon should not track usage
+
+    @api @ui
     Scenario: Changing whether it can be reused from cancelled orders
         When I want to modify the "SANTA2016" coupon for this promotion
         And I make it not reusable from cancelled orders

@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\CatalogPromotion;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CatalogPromotionTest extends TestCase
 {
     private ChannelInterface $channel;

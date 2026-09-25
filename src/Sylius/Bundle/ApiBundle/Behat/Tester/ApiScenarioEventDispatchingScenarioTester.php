@@ -39,13 +39,11 @@ final class ApiScenarioEventDispatchingScenarioTester implements ScenarioTester
             return $this->baseTester->setUp($env, $feature, $scenario, $skip);
         }
 
-        $tags = $scenario->getTags();
-        if (
-            ($key = array_search('javascript', $tags)) !== false ||
-            ($key = array_search('mink:chromedriver', $tags)) !== false
-        ) {
-            unset($tags[$key]);
-        }
+        // Behat 4 returns tags prefixed with "@"; normalize so both formats are matched.
+        $tags = array_values(array_filter(
+            $scenario->getTags(),
+            static fn (string $tag): bool => !in_array(ltrim($tag, '@'), ['javascript', 'mink:chromedriver'], true),
+        ));
 
         $scenario = new ScenarioNode(
             $scenario->getTitle(),

@@ -18,7 +18,6 @@ use Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInt
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-/** @experimental */
 final readonly class PaymentRequestAnnouncer implements PaymentRequestAnnouncerInterface
 {
     public function __construct(

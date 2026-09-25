@@ -16,7 +16,6 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Resolver;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-/** @experimental */
 interface PaymentToPayResolverInterface
 {
     public function getPayment(OrderInterface $order): ?PaymentInterface;

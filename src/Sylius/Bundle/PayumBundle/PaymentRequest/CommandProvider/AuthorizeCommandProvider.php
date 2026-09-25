@@ -17,7 +17,6 @@ use Sylius\Bundle\PaymentBundle\CommandProvider\PaymentRequestCommandProviderInt
 use Sylius\Bundle\PayumBundle\PaymentRequest\Command\AuthorizePaymentRequest;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-/** @experimental */
 final class AuthorizeCommandProvider implements PaymentRequestCommandProviderInterface
 {
     public function supports(PaymentRequestInterface $paymentRequest): bool

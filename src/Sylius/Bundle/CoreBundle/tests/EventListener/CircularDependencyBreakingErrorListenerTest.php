@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\CircularDependencyBreakingErrorListener;
@@ -22,6 +23,7 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CircularDependencyBreakingErrorListenerTest extends TestCase
 {
     #[Test]

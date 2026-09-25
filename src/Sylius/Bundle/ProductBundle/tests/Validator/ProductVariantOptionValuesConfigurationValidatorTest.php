@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ProductBundle\Validator;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantOptionValuesConfiguration;
@@ -26,6 +27,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantOptionValuesConfigurationValidatorTest extends TestCase
 {
     private ExecutionContextInterface&MockObject $executionContext;

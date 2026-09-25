@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -25,9 +26,7 @@ final class ManagingProductVariantsPricesContext implements Context
     {
     }
 
-    /**
-     * @When /^I change the price of the ("[^"]+" product variant) to ("[^"]+") in ("[^"]+" channel)$/
-     */
+    #[When('/^I change the price of the ("[^"]+" product variant) to ("[^"]+") in ("[^"]+" channel)$/')]
     public function iChangeThePriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
         int $price,
@@ -36,9 +35,7 @@ final class ManagingProductVariantsPricesContext implements Context
         $this->updateChannelPricingField($variant, $channel, $price, 'price');
     }
 
-    /**
-     * @When /^I change the original price of the ("[^"]+" product variant) to ("[^"]+") in ("[^"]+" channel)$/
-     */
+    #[When('/^I change the original price of the ("[^"]+" product variant) to ("[^"]+") in ("[^"]+" channel)$/')]
     public function iChangeTheOriginalPriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
         int $originalPrice,
@@ -47,9 +44,7 @@ final class ManagingProductVariantsPricesContext implements Context
         $this->updateChannelPricingField($variant, $channel, $originalPrice, 'originalPrice');
     }
 
-    /**
-     * @When /^I remove the original price of the ("[^"]+" product variant) in ("[^"]+" channel)$/
-     */
+    #[When('/^I remove the original price of the ("[^"]+" product variant) in ("[^"]+" channel)$/')]
     public function iRemoveTheOriginalPriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
         ChannelInterface $channel,

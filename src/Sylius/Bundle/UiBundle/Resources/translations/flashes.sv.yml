@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: 'Det går inte att ta bort en taxon som används av en kampanjregel.'
         menu_taxon_delete: 'Du kan inte ta bort en meny-taxon för någon kanal.'
+    user:
+        verification_email_sent: 'Om den angivna e-postadressen är kopplad till ett konto har ett verifieringsmail skickats.'

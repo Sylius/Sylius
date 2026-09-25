@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\NotificationType;
@@ -48,35 +49,27 @@ class RegistrationContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I want to(?:| again) register a new account$/
-     */
+    #[When('/^I want to(?:| again) register a new account$/')]
     public function iWantToRegisterANewAccount(): void
     {
         $this->registerPage->open();
     }
 
-    /**
-     * @When I specify the first name as :firstName
-     * @When I do not specify the first name
-     */
+    #[When('I specify the first name as :firstName')]
+    #[When('I do not specify the first name')]
     public function iSpecifyTheFirstName(?string $firstName = null): void
     {
         $this->registerElement->specifyFirstName($firstName);
     }
 
-    /**
-     * @When I specify the last name as :lastName
-     * @When I do not specify the last name
-     */
+    #[When('I specify the last name as :lastName')]
+    #[When('I do not specify the last name')]
     public function iSpecifyTheLastName(?string $lastName = null): void
     {
         $this->registerElement->specifyLastName($lastName);
     }
 
-    /**
-     * @When I specify the :firstOrLast name as too long value
-     */
+    #[When('I specify the :firstOrLast name as too long value')]
     public function iSpecifyFirstOrLastNameAsTooLongValue(string $firstOrLast): void
     {
         match ($firstOrLast) {
@@ -85,10 +78,8 @@ class RegistrationContext implements Context
         };
     }
 
-    /**
-     * @When I specify the email as :email
-     * @When I do not specify the email
-     */
+    #[When('I specify the email as :email')]
+    #[When('I do not specify the email')]
     public function iSpecifyTheEmail(?string $email = null): void
     {
         $this->registerElement->specifyEmail($email);
@@ -106,9 +97,7 @@ class RegistrationContext implements Context
         $this->registerElement->specifyPassword('');
     }
 
-    /**
-     * @When /^I confirm (this password)$/
-     */
+    #[When('/^I confirm (this password)$/')]
     public function iConfirmThisPassword(string $password): void
     {
         $this->registerElement->verifyPassword($password);
@@ -120,27 +109,21 @@ class RegistrationContext implements Context
         $this->registerElement->verifyPassword('');
     }
 
-    /**
-     * @When I specify the phone number as :phoneNumber
-     */
+    #[When('I specify the phone number as :phoneNumber')]
     public function iSpecifyThePhoneNumberAs(string $phoneNumber): void
     {
         $this->registerElement->specifyPhoneNumber($phoneNumber);
     }
 
-    /**
-     * @When I register this account
-     * @When I try to register this account
-     */
+    #[When('I register this account')]
+    #[When('I try to register this account')]
     public function iRegisterThisAccount(): void
     {
         $this->registerElement->register();
     }
 
-    /**
-     * @Then my email should be :email
-     * @Then my email should still be :email
-     */
+    #[Then('my email should be :email')]
+    #[Then('my email should still be :email')]
     public function myEmailShouldBe(string $email): void
     {
         $this->dashboardPage->open();
@@ -148,42 +131,32 @@ class RegistrationContext implements Context
         Assert::true($this->dashboardPage->hasCustomerEmail($email));
     }
 
-    /**
-     * @Then /^I should be notified that the ([^"]+) is required$/
-     */
+    #[Then('/^I should be notified that the ([^"]+) is required$/')]
     public function iShouldBeNotifiedThatElementIsRequired(string $element): void
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter your %s.', $element));
     }
 
-    /**
-     * @Then I should be notified that the :firstOrLast name is too long
-     */
+    #[Then('I should be notified that the :firstOrLast name is too long')]
     public function iShouldBeNotifiedThatFirstOrLastNameIsTooLong(string $firstOrLast): void
     {
         $this->assertFieldValidationMessage($firstOrLast . '_name', sprintf('%s name must not be longer than 255 characters.', ucfirst($firstOrLast)));
     }
 
-    /**
-     * @Then I should be notified that the email is already used
-     */
+    #[Then('I should be notified that the email is already used')]
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed(): void
     {
         $this->assertFieldValidationMessage('email', 'This email is already used.');
     }
 
-    /**
-     * @Then I should be notified that the password do not match
-     */
+    #[Then('I should be notified that the password do not match')]
     public function iShouldBeNotifiedThatThePasswordDoNotMatch(): void
     {
         $this->assertFieldValidationMessage('password', 'The entered passwords don\'t match');
     }
 
-    /**
-     * @Then I should be notified that new account has been successfully created
-     * @Then I should be notified that my account has been created and the verification email has been sent
-     */
+    #[Then('I should be notified that new account has been successfully created')]
+    #[Then('I should be notified that my account has been created and the verification email has been sent')]
     public function iShouldBeNotifiedThatNewAccountHasBeenSuccessfullyCreated(): void
     {
         $this->notificationChecker->checkNotification(
@@ -192,44 +165,34 @@ class RegistrationContext implements Context
         );
     }
 
-    /**
-     * @Then I should be logged in
-     */
+    #[Then('I should be logged in')]
     public function iShouldBeLoggedIn(): void
     {
         Assert::true($this->homePage->hasLogoutButton());
     }
 
-    /**
-     * @Then I should not be logged in
-     */
+    #[Then('I should not be logged in')]
     public function iShouldNotBeLoggedIn(): void
     {
         Assert::false($this->homePage->hasLogoutButton());
     }
 
-    /**
-     * @Then I should be able to log in as :email with :password password
-     */
+    #[Then('I should be able to log in as :email with :password password')]
     public function iShouldBeAbleToLogInAsWithPassword(string $email, string $password): void
     {
         $this->iLogInAsWithPassword($email, $password);
         $this->iShouldBeLoggedIn();
     }
 
-    /**
-     * @Then I should not be able to log in as :email with :password password
-     */
+    #[Then('I should not be able to log in as :email with :password password')]
     public function iShouldNotBeAbleToLogInAsWithPassword(string $email, string $password): void
     {
         $this->iLogInAsWithPassword($email, $password);
 
-        Assert::true($this->loginPage->hasValidationErrorWith('Error Invalid credentials.'));
+        Assert::false($this->homePage->hasLogoutButton());
     }
 
-    /**
-     * @When I log in as :email with :password password
-     */
+    #[When('I log in as :email with :password password')]
     public function iLogInAsWithPassword(string $email, string $password): void
     {
         $this->loginPage->open();
@@ -238,10 +201,20 @@ class RegistrationContext implements Context
         $this->loginPage->logIn();
     }
 
-    /**
-     * @When I register with email :email and password :password
-     * @When I register with email :email and password :password in the :localeCode locale
-     */
+    #[Then('I should see the resend verification email link')]
+    public function iShouldSeeTheResendVerificationEmailLink(): void
+    {
+        Assert::true($this->loginPage->hasResendVerificationEmailLink());
+    }
+
+    #[When('I resend the verification email from the login page')]
+    public function iResendTheVerificationEmailFromTheLoginPage(): void
+    {
+        $this->loginPage->resendVerificationEmail();
+    }
+
+    #[When('I register with email :email and password :password')]
+    #[When('I register with email :email and password :password in the :localeCode locale')]
     public function iRegisterWithEmailAndPassword(string $email, string $password, string $localeCode = 'en_US'): void
     {
         $this->registerPage->open(['_locale' => $localeCode]);
@@ -253,25 +226,19 @@ class RegistrationContext implements Context
         $this->registerElement->register();
     }
 
-    /**
-     * @Then /^my account should be verified$/
-     */
+    #[Then('/^my account should be verified$/')]
     public function myAccountShouldBeVerified(): void
     {
         Assert::true($this->dashboardPage->isVerified());
     }
 
-    /**
-     * @When /^(I) try to verify my account using the link from this email$/
-     */
+    #[When('/^(I) try to verify my account using the link from this email$/')]
     public function iUseItToVerify(ShopUserInterface $user): void
     {
         $this->verificationPage->verifyAccount($user->getEmailVerificationToken());
     }
 
-    /**
-     * @When I verify my account using link sent to :customer
-     */
+    #[When('I verify my account using link sent to :customer')]
     public function iVerifyMyAccount(CustomerInterface $customer): void
     {
         $user = $customer->getUser();
@@ -280,18 +247,14 @@ class RegistrationContext implements Context
         $this->iUseItToVerify($user);
     }
 
-    /**
-     * @When I resend the verification email
-     */
+    #[When('I resend the verification email')]
     public function iResendVerificationEmail(): void
     {
         $this->dashboardPage->open();
         $this->dashboardPage->pressResendVerificationEmail();
     }
 
-    /**
-     * @When I use the verification link from the first email to verify
-     */
+    #[When('I use the verification link from the first email to verify')]
     public function iUseVerificationLinkFromFirstEmailToVerify(): void
     {
         $token = $this->sharedStorage->get('verification_token');
@@ -299,17 +262,13 @@ class RegistrationContext implements Context
         $this->verificationPage->verifyAccount($token);
     }
 
-    /**
-     * @When I (try to )verify using :token token
-     */
+    #[When('I (try to )verify using :token token')]
     public function iTryToVerifyUsing(string $token): void
     {
         $this->verificationPage->verifyAccount($token);
     }
 
-    /**
-     * @Then /^(?:my|his|her) account should not be verified$/
-     */
+    #[Then('/^(?:my|his|her) account should not be verified$/')]
     public function myAccountShouldNotBeVerified(): void
     {
         $this->dashboardPage->open();
@@ -317,9 +276,7 @@ class RegistrationContext implements Context
         Assert::false($this->dashboardPage->isVerified());
     }
 
-    /**
-     * @Then I should not be able to resend the verification email
-     */
+    #[Then('I should not be able to resend the verification email')]
     public function iShouldBeUnableToResendVerificationEmail(): void
     {
         $this->dashboardPage->open();
@@ -327,25 +284,19 @@ class RegistrationContext implements Context
         Assert::false($this->dashboardPage->hasResendVerificationEmailButton());
     }
 
-    /**
-     * @Then I should be notified that the verification was successful
-     */
+    #[Then('I should be notified that the verification was successful')]
     public function iShouldBeNotifiedThatTheVerificationWasSuccessful(): void
     {
         $this->notificationChecker->checkNotification('has been successfully verified.', NotificationType::success());
     }
 
-    /**
-     * @Then I should be notified that the verification token is invalid
-     */
+    #[Then('I should be notified that the verification token is invalid')]
     public function iShouldBeNotifiedThatTheVerificationTokenIsInvalid(): void
     {
         $this->notificationChecker->checkNotification('The verification token is invalid.', NotificationType::failure());
     }
 
-    /**
-     * @Then I should be notified that the verification email has been sent
-     */
+    #[Then('I should be notified that the verification email has been sent')]
     public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
     {
         $this->notificationChecker->checkNotification(
@@ -354,17 +305,22 @@ class RegistrationContext implements Context
         );
     }
 
-    /**
-     * @When I subscribe to the newsletter
-     */
+    #[Then('I should be notified that the verification email has been sent to the provided address')]
+    public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSentToTheProvidedAddress(): void
+    {
+        $this->notificationChecker->checkNotification(
+            'If the email address you entered is associated with an account, a verification email has been sent.',
+            NotificationType::success(),
+        );
+    }
+
+    #[When('I subscribe to the newsletter')]
     public function iSubscribeToTheNewsletter(): void
     {
         $this->registerElement->subscribeToTheNewsletter();
     }
 
-    /**
-     * @Then I should be subscribed to the newsletter
-     */
+    #[Then('I should be subscribed to the newsletter')]
     public function iShouldBeSubscribedToTheNewsletter(): void
     {
         $this->profileUpdatePage->open();
@@ -372,21 +328,23 @@ class RegistrationContext implements Context
         Assert::true($this->profileUpdatePage->isSubscribedToTheNewsletter());
     }
 
-    /**
-     * @Then I should be on registration thank you page
-     */
+    #[Then('I should be on registration thank you page')]
     public function iShouldBeOnRegistrationThankYouPage(): void
     {
         $registeredCustomer = $this->customerRepository->findLatest(1)[0];
         Assert::true($this->registerThankYouPage->isOpen(['id' => $registeredCustomer->getId()]));
     }
 
-    /**
-     * @Then I should be on my account dashboard
-     */
+    #[Then('I should be on my account dashboard')]
     public function iShouldBeOnMyAccountDashboard(): void
     {
         Assert::true($this->dashboardPage->isOpen());
+    }
+
+    #[Then('I should be notified that my account has not been verified')]
+    public function iShouldBeNotifiedThatMyAccountHasNotBeenVerified(): void
+    {
+        Assert::true($this->loginPage->hasValidationErrorWith('Error Your account has not been verified yet. Please check your email inbox.'));
     }
 
     private function assertFieldValidationMessage(string $element, string $expectedMessage): void

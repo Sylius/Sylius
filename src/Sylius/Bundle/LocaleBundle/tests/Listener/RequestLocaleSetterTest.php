@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\LocaleBundle\Listener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\LocaleBundle\Listener\RequestLocaleSetter;
@@ -21,6 +22,7 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RequestLocaleSetterTest extends TestCase
 {
     /** @var LocaleContextInterface&MockObject */

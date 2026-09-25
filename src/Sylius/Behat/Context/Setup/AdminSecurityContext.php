@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -30,10 +31,8 @@ final class AdminSecurityContext implements Context
     ) {
     }
 
-    /**
-     * @Given I am logged in as an administrator
-     * @Given there is logged in the administrator
-     */
+    #[Given('I am logged in as an administrator')]
+    #[Given('there is logged in the administrator')]
     public function iAmLoggedInAsAnAdministrator()
     {
         $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius', 'api' => true]);
@@ -44,9 +43,7 @@ final class AdminSecurityContext implements Context
         $this->sharedStorage->set('administrator', $user);
     }
 
-    /**
-     * @Given /^I am logged in as "([^"]+)" administrator$/
-     */
+    #[Given('/^I am logged in as "([^"]+)" administrator$/')]
     public function iAmLoggedInAsAdministrator($email)
     {
         $user = $this->userRepository->findOneByEmail($email);
@@ -57,9 +54,7 @@ final class AdminSecurityContext implements Context
         $this->sharedStorage->set('administrator', $user);
     }
 
-    /**
-     * @Given I have been logged out from administration
-     */
+    #[Given('I have been logged out from administration')]
     public function iHaveBeenLoggedOutFromAdministration()
     {
         $this->securityService->logOut();

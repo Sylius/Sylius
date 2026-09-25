@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Security;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Security\ImpersonationVoter;
@@ -24,6 +25,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ImpersonationVoterTest extends TestCase
 {
     private const FIREWALL_NAME = 'test';

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Channel\Context\RequestBased;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver;
@@ -21,6 +22,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class HostnameBasedRequestResolverTest extends TestCase
 {
     /** @var MockObject&ChannelRepositoryInterface<ChannelInterface> */

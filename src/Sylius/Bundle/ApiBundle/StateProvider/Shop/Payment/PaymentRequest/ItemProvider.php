@@ -30,8 +30,6 @@ use Webmozart\Assert\Assert;
 
 /**
  * @implements ProviderInterface<PaymentRequestInterface>
- *
- * @experimental
  */
 final readonly class ItemProvider implements ProviderInterface
 {

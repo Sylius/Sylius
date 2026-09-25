@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\TaxonomyBundle\Provider;
 
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
@@ -24,6 +25,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 #[CoversClass(TaxonTreeProvider::class)]
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonTreeProviderTest extends TestCase
 {
     private TaxonRepositoryInterface $taxonRepository;

@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'נשארו רק %quantity% יחידות של מוצר זה במלאי.'
     product_variant:
         update_error: 'אירעה בעיה לא צפויה עם עדכון מאפיין מוצר. אנא, נסה לעדכן את מאפיין שוב.'
+    user:
+        verification_email_sent: 'אם כתובת האימייל שהזנת משויכת לחשבון, נשלח אימייל אימות.'

@@ -33,6 +33,10 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function makeCouponBased(): void;
 
+    public function enableTrackUsage(): void;
+
+    public function disableTrackUsage(): void;
+
     public function checkChannel(string $name): void;
 
     public function setLabel(string $label, string $localeCode): void;
@@ -52,6 +56,10 @@ interface FormElementInterface extends BaseFormElementInterface
     public function addRule(string $type): void;
 
     public function removeLastRule(): void;
+
+    public function getRuleCountValue(): string;
+
+    public function getActionAmountValue(): string;
 
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void;
 

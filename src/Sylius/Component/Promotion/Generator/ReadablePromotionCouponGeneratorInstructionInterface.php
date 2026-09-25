@@ -26,4 +26,6 @@ interface ReadablePromotionCouponGeneratorInstructionInterface
     public function getExpiresAt(): ?\DateTimeInterface;
 
     public function getUsageLimit(): ?int;
+
+    public function isTrackUsage(): bool;
 }

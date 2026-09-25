@@ -106,6 +106,66 @@ final class AdminUsersTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_creates_an_administrator_with_access_levels(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/administrators',
+            server: $header,
+            content: json_encode([
+                'email' => 'j.api@test.com',
+                'username' => 'johnApi',
+                'plainPassword' => 'very-secure',
+                'enabled' => true,
+                'firstName' => 'John',
+                'lastName' => 'Api',
+                'localeCode' => 'ga_IE',
+                'administrationAccess' => false,
+                'apiAccess' => true,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/admin_user/create_administrator_with_access_levels_response',
+            Response::HTTP_CREATED,
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_create_an_administrator_without_any_access_level(): void
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/administrators',
+            server: $header,
+            content: json_encode([
+                'email' => 'j.api@test.com',
+                'username' => 'johnApi',
+                'plainPassword' => 'very-secure',
+                'enabled' => true,
+                'firstName' => 'John',
+                'lastName' => 'Api',
+                'localeCode' => 'ga_IE',
+                'administrationAccess' => false,
+                'apiAccess' => false,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/admin_user/create_administrator_without_access_levels_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    #[Test]
     public function it_updates_an_administrator(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
@@ -134,6 +194,109 @@ final class AdminUsersTest extends JsonApiTestCase
             'admin/admin_user/put_administrator_response',
             Response::HTTP_OK,
         );
+    }
+
+    #[Test]
+    public function it_updates_an_administrator_access_levels(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AdminUserInterface $administrator */
+        $administrator = $fixtures['admin_user_wilhelm'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
+            content: json_encode([
+                'administrationAccess' => true,
+                'apiAccess' => false,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/admin_user/put_administrator_access_levels_response',
+            Response::HTTP_OK,
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_remove_all_access_levels_of_an_administrator(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'administrator.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AdminUserInterface $administrator */
+        $administrator = $fixtures['admin_user_wilhelm'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
+            content: json_encode([
+                'administrationAccess' => false,
+                'apiAccess' => false,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/admin_user/create_administrator_without_access_levels_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_revoke_own_administration_access(): void
+    {
+        $fixtures = $this->loadFixturesFromFile('authentication/api_administrator_with_administration_access.yaml');
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AdminUserInterface $administrator */
+        $administrator = $fixtures['admin'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
+            content: json_encode([
+                'administrationAccess' => false,
+                'apiAccess' => true,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponse(
+            $this->client->getResponse(),
+            'admin/admin_user/put_administrator_own_administration_access_response',
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+        );
+    }
+
+    #[Test]
+    public function it_allows_to_revoke_administration_access_of_another_administrator(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/api_administrator_with_administration_access.yaml',
+            'administrator.yaml',
+        ]);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AdminUserInterface $administrator */
+        $administrator = $fixtures['admin_user_wilhelm'];
+
+        $this->client->request(
+            method: 'PUT',
+            uri: sprintf('/api/v2/admin/administrators/%s', $administrator->getId()),
+            server: $header,
+            content: json_encode([
+                'administrationAccess' => false,
+                'apiAccess' => true,
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
     }
 
     #[Test]

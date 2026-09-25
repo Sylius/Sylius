@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -24,11 +25,9 @@ final class ProductOptionValueContext implements Context
     {
     }
 
-    /**
-     * @Transform /^"([^"]+)" option value$/
-     * @Transform :optionValue
-     * @Transform :productOptionValue
-     */
+    #[Transform('/^"([^"]+)" option value$/')]
+    #[Transform(':optionValue')]
+    #[Transform(':productOptionValue')]
     public function getProductOptionValueByCode(string $code): ProductOptionValueInterface
     {
         $productOptionValues = $this->productOptionValueRepository->findBy(['code' => $code]);

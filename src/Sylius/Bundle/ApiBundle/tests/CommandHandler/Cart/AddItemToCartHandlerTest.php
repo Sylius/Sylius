@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
@@ -28,6 +29,7 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AddItemToCartHandlerTest extends TestCase
 {
     private MockObject&OrderRepositoryInterface $orderRepository;

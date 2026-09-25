@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ShipShipment;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShipmentAlreadyShippedValidatorTest extends TestCase
 {
     private MockObject&ShipmentRepositoryInterface $shipmentRepository;

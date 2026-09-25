@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Cart\BlameCart;
@@ -27,6 +28,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class BlameCartHandlerTest extends TestCase
 {
     private MockObject&UserRepositoryInterface $shopUserRepository;

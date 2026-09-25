@@ -16,7 +16,6 @@ namespace Sylius\Bundle\ApiBundle\Checker;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 
-/** @experimental */
 final readonly class OrderPaymentRequestEligibilityChecker implements OrderPaymentRequestEligibilityCheckerInterface
 {
     public function isEligible(OrderInterface $order): bool

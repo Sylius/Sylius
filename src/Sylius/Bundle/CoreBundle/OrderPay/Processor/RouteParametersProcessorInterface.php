@@ -15,7 +15,6 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Processor;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/** @experimental */
 interface RouteParametersProcessorInterface
 {
     /**

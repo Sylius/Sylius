@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace Modifier;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShopBundle\Modifier\DefaultAddressFormValuesModifier;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class DefaultAddressFormValuesModifierTest extends TestCase
 {
     public function test_it_modifies_address_data(): void

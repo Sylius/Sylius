@@ -14,12 +14,11 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
 use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 final class NoPaymentPayResponseProvider implements PayResponseProviderInterface
 {
     public function __construct(
@@ -28,12 +27,12 @@ final class NoPaymentPayResponseProvider implements PayResponseProviderInterface
     ) {
     }
 
-    public function getResponse(RequestConfiguration $requestConfiguration, OrderInterface $order): Response
+    public function getResponse(Request $request, OrderInterface $order): Response
     {
         return new RedirectResponse($this->orderPayFinalUrlProvider->getUrl(null));
     }
 
-    public function supports(RequestConfiguration $requestConfiguration, OrderInterface $order): bool
+    public function supports(Request $request, OrderInterface $order): bool
     {
         return null === $this->paymentToPayResolver->getPayment($order);
     }

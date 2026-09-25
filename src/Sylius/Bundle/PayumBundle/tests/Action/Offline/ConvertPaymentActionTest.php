@@ -18,11 +18,13 @@ use Payum\Core\Model\PaymentInterface;
 use Payum\Core\Request\Capture;
 use Payum\Core\Request\Convert;
 use Payum\Offline\Constants;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ConvertPaymentActionTest extends TestCase
 {
     private ConvertPaymentAction $convertPaymentAction;

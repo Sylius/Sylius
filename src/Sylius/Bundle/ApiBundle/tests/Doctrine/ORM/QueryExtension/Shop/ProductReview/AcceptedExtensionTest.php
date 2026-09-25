@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product
 
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -25,6 +26,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Review\Model\ReviewInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AcceptedExtensionTest extends TestCase
 {
     /** @var SectionProviderInterface|MockObject */

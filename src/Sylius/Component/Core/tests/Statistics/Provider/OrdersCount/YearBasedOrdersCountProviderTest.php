@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Statistics\Provider\OrdersCount;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Statistics\Provider\OrdersCount\OrdersCountProviderInterface;
 use Sylius\Component\Core\Statistics\Provider\OrdersCount\YearBasedOrdersCountProvider;
 
+#[AllowMockObjectsWithoutExpectations]
 final class YearBasedOrdersCountProviderTest extends TestCase
 {
     private const GROUP_SELECT = [

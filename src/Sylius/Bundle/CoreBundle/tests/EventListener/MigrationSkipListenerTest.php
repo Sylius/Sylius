@@ -23,6 +23,7 @@ use Doctrine\Migrations\MigratorConfiguration;
 use Doctrine\Migrations\Version\Direction;
 use Doctrine\Migrations\Version\ExecutionResult;
 use Doctrine\Migrations\Version\Version;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -31,6 +32,7 @@ use Psr\Log\LoggerInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\MigrationSkipInterface;
 use Sylius\Bundle\CoreBundle\EventListener\MigrationSkipListener;
 
+#[AllowMockObjectsWithoutExpectations]
 final class MigrationSkipListenerTest extends TestCase
 {
     private MetadataStorage&MockObject $metadataStorage;

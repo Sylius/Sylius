@@ -48,7 +48,7 @@ final class ConfigurationTest extends TestCase
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
-            ['order_by_identifier' => true],
+            ['order_by_identifier' => false],
             'order_by_identifier',
         );
     }

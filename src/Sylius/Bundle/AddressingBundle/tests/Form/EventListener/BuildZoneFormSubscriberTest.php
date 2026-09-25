@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AddressingBundle\Form\EventListener\BuildZoneFormSubscriber;
@@ -24,6 +25,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class BuildZoneFormSubscriberTest extends TestCase
 {
     private BuildZoneFormSubscriber $buildZoneFormSubscriber;

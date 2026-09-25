@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductOptionValueNormalizer;
@@ -23,6 +24,7 @@ use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterf
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductOptionValueNormalizerTest extends TestCase
 {
     private MockObject&NormalizerInterface $normalizer;

@@ -62,6 +62,12 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
             $productAttribute->setName($options['name']);
         }
 
+        foreach ($options['translations'] as $localeCode => $translation) {
+            $productAttribute->setCurrentLocale($localeCode);
+            $productAttribute->setFallbackLocale($localeCode);
+            $productAttribute->setName($translation['name'] ?? $productAttribute->getName());
+        }
+
         $productAttribute->setConfiguration($options['configuration']);
 
         return $productAttribute;
@@ -74,8 +80,10 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
             ->setDefault('translatable', true)
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('type', fn (Options $options): string => $this->faker->randomElement(array_keys($this->attributeTypes)))
-            ->setDefault('configuration', fn (Options $options): array => [])
             ->setAllowedValues('type', array_keys($this->attributeTypes))
+            ->setDefault('configuration', fn (Options $options): array => [])
+            ->setDefault('translations', [])
+            ->setAllowedTypes('translations', ['array'])
         ;
     }
 

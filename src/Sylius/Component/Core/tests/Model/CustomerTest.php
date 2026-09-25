@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerTest extends TestCase
 {
     private AddressInterface&MockObject $address;

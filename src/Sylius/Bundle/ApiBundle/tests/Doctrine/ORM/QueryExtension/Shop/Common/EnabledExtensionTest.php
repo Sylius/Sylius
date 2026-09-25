@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Common;
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Common\EnabledExtension;
@@ -26,6 +27,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Resource\Model\ToggleableInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EnabledExtensionTest extends TestCase
 {
     private EnabledExtension $extension;

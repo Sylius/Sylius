@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -37,18 +38,14 @@ final class ProductAssociationContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has (also) a product association type :name
-     * @Given the store has (also) a product association type :name with a code :code
-     */
+    #[Given('the store has (also) a product association type :name')]
+    #[Given('the store has (also) a product association type :name with a code :code')]
     public function theStoreHasAProductAssociationType($name, $code = null)
     {
         $this->createProductAssociationType($name, $code);
     }
 
-    /**
-     * @Given /^the store has(?:| also) a product association type named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
-     */
+    #[Given('/^the store has(?:| also) a product association type named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/')]
     public function itHasVariantNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale)
     {
         $productAssociationType = $this->createProductAssociationType($firstName);
@@ -61,9 +58,7 @@ final class ProductAssociationContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the store has :firstName and :secondName product association types
-     */
+    #[Given('the store has :firstName and :secondName product association types')]
     public function theStoreHasProductAssociationTypes(...$names)
     {
         foreach ($names as $name) {
@@ -71,17 +66,13 @@ final class ProductAssociationContext implements Context
         }
     }
 
-    /**
-     * @Given the store has :firstName product association type
-     */
+    #[Given('the store has :firstName product association type')]
     public function theStoreHasProductAssociationType($name)
     {
         $this->createProductAssociationType($name);
     }
 
-    /**
-     * @Given /^the (product "[^"]+") has(?:| also) an (association "[^"]+") with (product "[^"]+")$/
-     */
+    #[Given('/^the (product "[^"]+") has(?:| also) an (association "[^"]+") with (product "[^"]+")$/')]
     public function theProductHasAnAssociationWithProduct(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,
@@ -90,9 +81,7 @@ final class ProductAssociationContext implements Context
         $this->createProductAssociation($product, $productAssociationType, [$associatedProduct]);
     }
 
-    /**
-     * @Given /^the (product "[^"]+") has(?:| also) an (association "[^"]+") with (products "[^"]+" and "[^"]+")$/
-     */
+    #[Given('/^the (product "[^"]+") has(?:| also) an (association "[^"]+") with (products "[^"]+" and "[^"]+")$/')]
     public function theProductHasAnAssociationWithProducts(
         ProductInterface $product,
         ProductAssociationTypeInterface $productAssociationType,

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShopUserTest extends TestCase
 {
     private CustomerInterface&MockObject $customer;

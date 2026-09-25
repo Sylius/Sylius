@@ -18,6 +18,7 @@ use ApiPlatform\Metadata\Get;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Country\ChannelBasedExtension;
@@ -29,6 +30,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelBasedExtensionTest extends TestCase
 {
     private ChannelBasedExtension $extension;

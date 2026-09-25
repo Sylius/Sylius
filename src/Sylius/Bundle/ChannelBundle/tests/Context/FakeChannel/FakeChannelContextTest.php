@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProviderInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
+#[AllowMockObjectsWithoutExpectations]
 final class FakeChannelContextTest extends TestCase
 {
     /** @var FakeChannelCodeProviderInterface&MockObject */

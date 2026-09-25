@@ -41,6 +41,8 @@ sylius:
             not_blank: '프로모션 설명을 입력하세요.'
         end_date_cannot_be_set_prior_start_date: '종료일은 시작일보다 이전으로 설정할 수 없습니다.'
         is_invalid: '프로모션이 유효하지 않습니다.'
+        usage_limit:
+            min: '프로모션 사용 한도는 최소 {{ limit }} 이상이어야 합니다.'
         name:
             max_length: '프로모션 이름은 1자를 초과할 수 없습니다.|프로모션 이름은 {{ limit }}자를 초과할 수 없습니다.'
             min_length: '프로모션 이름은 최소 1자 이상이어야 합니다.|프로모션 이름은 최소 {{ limit }}자 이상이어야 합니다.'

@@ -36,7 +36,7 @@ textarea.form-control {
 .list-group-item.active:has(.tab-error) {
     border-left-style: solid;
     border-left-width: 2px;
-    border-left-color: #ff0017;
+    border-left-color: var(--tblr-danger);
 }
 
 .form-select:disabled {

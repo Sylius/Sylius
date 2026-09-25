@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\PaymentBundle\Generator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\Generator\GatewayNameGenerator;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GatewayNameGeneratorTest extends TestCase
 {
     private GatewayNameGenerator $gatewayNameGenerator;

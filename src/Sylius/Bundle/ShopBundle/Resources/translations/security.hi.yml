@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email_not_verified: 'आपका खाता अभी तक सत्यापित नहीं हुआ है। कृपया अपना ईमेल इनबॉक्स जांचें।'

@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Channel;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\State\ProcessorInterface;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\Channel\RemoveProcessor;
@@ -23,6 +24,7 @@ use Sylius\Component\Channel\Checker\ChannelDeletionCheckerInterface;
 use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\ChannelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RemoveProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $processor;

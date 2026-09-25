@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Changer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Changer\PaymentMethodChanger;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PaymentMethodChangerTest extends TestCase
 {
     private MockObject&PaymentRepositoryInterface $paymentRepository;

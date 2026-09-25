@@ -5,6 +5,6 @@
 {{ breadcrumbs([
     { name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard'), active: false },
     { name: 'sylius.ui.payments'|trans, url: path('sylius_admin_payment_index'), active: false },
-    { name: configuration.request.get('paymentId'), active: true },
+    { name: configuration.request.attributes.get('paymentId'), active: true },
     { name: 'sylius.ui.payment_requests'|trans, active: true },
 ]) }}

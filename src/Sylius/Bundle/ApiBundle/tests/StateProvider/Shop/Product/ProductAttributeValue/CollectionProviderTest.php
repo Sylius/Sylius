@@ -21,6 +21,7 @@ use ApiPlatform\State\ProviderInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -33,6 +34,7 @@ use Sylius\Component\Product\Model\ProductAttributeValue;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Repository\ProductAttributeValueRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CollectionProviderTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;

@@ -59,3 +59,10 @@ parameters:
           identifier: arguments.count
           count: 1
           path: src/Sylius/Bundle/ShopBundle/Router/LocaleStrippingRouter.php
+
+        # DBAL 3.x/4.x compatibility - getSchemaManager() removed in DBAL 4.x
+        -
+            message: '/Call to an undefined method Doctrine\\DBAL\\Connection::getSchemaManager\(\)\./'
+            identifier: method.notFound
+            paths:
+                - src/Sylius/Bundle/CoreBundle/Migrations/

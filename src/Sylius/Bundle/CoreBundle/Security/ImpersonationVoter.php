@@ -30,7 +30,7 @@ class ImpersonationVoter implements CacheableVoterInterface
     ) {
     }
 
-    public function vote(TokenInterface $token, mixed $subject, array $attributes): int
+    public function vote(TokenInterface $token, mixed $subject, array $attributes, mixed $vote = null): int
     {
         $result = VoterInterface::ACCESS_ABSTAIN;
 
