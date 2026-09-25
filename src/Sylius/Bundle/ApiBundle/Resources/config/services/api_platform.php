@@ -13,14 +13,17 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use ApiPlatform\State\DenormalizationViolationFactoryInterface;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Hydra\Serializer\EmptyCollectionFiltersNormalizer;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\DuplicateOperationReplacerResourceMetadataCollectionFactory;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\ImageFilterAwareResourceMetadataCollectionFactory;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Routing\ApiLoader;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter;
+use Sylius\Bundle\ApiBundle\Validator\DenormalizationViolationFactory;
 use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ImagesAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -72,4 +75,13 @@ return static function (ContainerConfigurator $container) {
         ->args([service('.inner')])
         ->private()
     ;
+
+    // TODO: Remove once API Platform supports validation groups generators in this factory
+    if (interface_exists(DenormalizationViolationFactoryInterface::class)) {
+        $services
+            ->set('sylius_api.validator.denormalization_violation_factory', DenormalizationViolationFactory::class)
+            ->decorate('api_platform.state.denormalization_violation_factory', null, 0, ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+            ->args([service('.inner')])
+        ;
+    }
 };
