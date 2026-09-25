@@ -65,6 +65,8 @@
     "FriendsOfBehat\\SymfonyExtension\\Mink\\Mink",
     "Http\\Client\\HttpClient",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
+    "HWI\\Bundle\\OAuthBundle\\OAuth\\ResourceOwnerInterface",
+    "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\PathUserResponse",
     "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\UserResponseInterface",
     "HWI\\Bundle\\OAuthBundle\\Security\\Core\\User\\OAuthAwareUserProviderInterface",
     "League\\Flysystem\\FilesystemOperator",
