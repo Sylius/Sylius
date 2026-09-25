@@ -15,6 +15,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
+use Sylius\Component\Core\OrderProcessing\OrderItemUnitAdjustmentsPreloader;
 use Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor;
 use Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator;
 use Sylius\Component\Core\OrderProcessing\OrderPromotionProcessor;
@@ -30,6 +31,12 @@ return static function (ContainerConfigurator $container) {
     $parameters->set('sylius.order_payment_processor.checkout.unsupported_states', [OrderInterface::STATE_CANCELLED, OrderInterface::STATE_FULFILLED]);
     $parameters->set('sylius.order_payment_processor.after_checkout.unsupported_states', [OrderInterface::STATE_CANCELLED, OrderInterface::STATE_FULFILLED]);
     $parameters->set('sylius.order_processing.adjustment_clearing_types', [AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, AdjustmentInterface::SHIPPING_ADJUSTMENT, AdjustmentInterface::TAX_ADJUSTMENT]);
+
+    $services
+        ->set('sylius.order_processing.order_item_unit_adjustments_preloader', OrderItemUnitAdjustmentsPreloader::class)
+        ->args([service('sylius.repository.order_item_unit')])
+        ->tag('sylius.order_processor', ['priority' => 70])
+    ;
 
     $services
         ->set('sylius.order_processing.order_adjustments_clearer', OrderAdjustmentsClearer::class)

@@ -15,6 +15,7 @@ namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
 /**
@@ -25,4 +26,9 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 interface OrderItemUnitRepositoryInterface extends RepositoryInterface
 {
     public function findOneByCustomer(mixed $id, CustomerInterface $customer): ?OrderItemUnitInterface;
+
+    /**
+     * @param BaseOrderItemUnitInterface[] $orderItemUnits
+     */
+    public function preloadAdjustments(array $orderItemUnits): void;
 }
