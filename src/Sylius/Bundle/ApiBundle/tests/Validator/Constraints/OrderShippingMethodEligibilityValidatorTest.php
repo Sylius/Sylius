@@ -30,6 +30,7 @@ use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheck
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class OrderShippingMethodEligibilityValidatorTest extends TestCase
@@ -154,21 +155,31 @@ final class OrderShippingMethodEligibilityValidatorTest extends TestCase
             ->method('getName')
             ->willReturn('Shipping method two');
 
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
         $contextMock
             ->expects($this->exactly(2))
-            ->method('addViolation')
-            ->willReturnCallback(function (string $message, array $params) {
+            ->method('buildViolation')
+            ->with('sylius.order.shipping_method_not_available')
+            ->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder
+            ->expects($this->exactly(2))
+            ->method('setParameter')
+            ->willReturnCallback(function (string $key, string $value) use ($constraintViolationBuilder) {
                 static $calls = 0;
                 ++$calls;
 
                 if ($calls === 1) {
-                    $this->assertSame('sylius.order.shipping_method_not_available', $message);
-                    $this->assertSame(['%shippingMethodName%' => 'Shipping method one'], $params);
+                    $this->assertSame('%shippingMethodName%', $key);
+                    $this->assertSame('Shipping method one', $value);
                 } elseif ($calls === 2) {
-                    $this->assertSame('sylius.order.shipping_method_not_available', $message);
-                    $this->assertSame(['%shippingMethodName%' => 'Shipping method two'], $params);
+                    $this->assertSame('%shippingMethodName%', $key);
+                    $this->assertSame('Shipping method two', $value);
                 }
+
+                return $constraintViolationBuilder;
             });
+        $constraintViolationBuilder->expects($this->exactly(2))->method('setCode')->with(OrderShippingMethodEligibility::SHIPPING_METHOD_NOT_AVAILABLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->exactly(2))->method('addViolation');
 
         $this->orderShippingMethodEligibilityValidator->validate(
             new CompleteOrder('ORDERTOKENVALUE'),
@@ -262,7 +273,7 @@ final class OrderShippingMethodEligibilityValidatorTest extends TestCase
             ->method('isEligible')
             ->willReturn(true);
 
-        $contextMock->expects(self::never())->method('addViolation');
+        $contextMock->expects(self::never())->method('buildViolation');
 
         $this->orderShippingMethodEligibilityValidator->validate(
             new CompleteOrder('ORDERTOKENVALUE'),
@@ -296,8 +307,13 @@ final class OrderShippingMethodEligibilityValidatorTest extends TestCase
         $shippingMethodMock->expects(self::once())->method('isEnabled')->willReturn(true);
         $shippingMethodMock->expects(self::once())->method('getChannels')->willReturn($channelsCollectionMock);
         $channelsCollectionMock->expects(self::once())->method('contains')->with($channelMock)->willReturn(true);
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.order.shipping_method_eligibility', ['%shippingMethodName%' => 'InPost'])
-        ;
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $executionContextMock->expects(self::once())->method('buildViolation')->with('sylius.order.shipping_method_eligibility')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%shippingMethodName%', 'InPost')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(OrderShippingMethodEligibility::SHIPPING_METHOD_NOT_ELIGIBLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
+
         $this->orderShippingMethodEligibilityValidator->validate($value, $constraint);
     }
 
@@ -366,7 +382,7 @@ final class OrderShippingMethodEligibilityValidatorTest extends TestCase
 
         $executionContextMock
             ->expects(self::never())
-            ->method('addViolation');
+            ->method('buildViolation');
 
         $this->orderShippingMethodEligibilityValidator->validate($value, $constraint);
     }

@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ShopUserVerificationTokenEligibility extends Constraint
 {
+    public const VERIFICATION_TOKEN_INVALID_ERROR = 'VERIFICATION_TOKEN_INVALID';
+
     /**
      * @param array<string, mixed>|null $options
      */

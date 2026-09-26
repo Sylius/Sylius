@@ -19,6 +19,10 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderShippingMethodEligibility extends Constraint
 {
+    public const SHIPPING_METHOD_NOT_ELIGIBLE_ERROR = 'SHIPPING_METHOD_NOT_ELIGIBLE';
+
+    public const SHIPPING_METHOD_NOT_AVAILABLE_ERROR = 'SHIPPING_METHOD_NOT_AVAILABLE';
+
     /**
      * @param array<string, mixed>|null $options
      * @param array<string>|null $groups

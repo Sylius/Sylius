@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ShipmentAlreadyShipped extends Constraint
 {
+    public const SHIPMENT_ALREADY_SHIPPED_ERROR = 'SHIPMENT_ALREADY_SHIPPED';
+
     /**
      * @param array<string, mixed>|null $options
      */

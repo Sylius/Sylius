@@ -58,10 +58,12 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         $productVariant = $orderItem->getVariant();
 
         if ($productVariant === null) {
-            $this->context->addViolation(
-                $constraint->productVariantNotLongerAvailableMessage,
-                ['%productVariantName%' => $orderItem->getVariantName()],
-            );
+            $this->context
+                ->buildViolation($constraint->productVariantNotLongerAvailableMessage)
+                ->setParameter('%productVariantName%', (string) $orderItem->getVariantName())
+                ->setCode(ChangedItemQuantityInCart::PRODUCT_VARIANT_NOT_LONGER_AVAILABLE_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -71,28 +73,34 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         /** @var ProductInterface $product */
         $product = $productVariant->getProduct();
         if (!$product->isEnabled()) {
-            $this->context->addViolation(
-                $constraint->productNotExistMessage,
-                ['%productName%' => $product->getName()],
-            );
+            $this->context
+                ->buildViolation($constraint->productNotExistMessage)
+                ->setParameter('%productName%', (string) $product->getName())
+                ->setCode(ChangedItemQuantityInCart::PRODUCT_NOT_EXIST_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
 
         if (!$productVariant->isEnabled()) {
-            $this->context->addViolation(
-                $constraint->productVariantNotLongerAvailableMessage,
-                ['%productVariantName%' => $orderItem->getVariantName()],
-            );
+            $this->context
+                ->buildViolation($constraint->productVariantNotLongerAvailableMessage)
+                ->setParameter('%productVariantName%', (string) $orderItem->getVariantName())
+                ->setCode(ChangedItemQuantityInCart::PRODUCT_VARIANT_NOT_LONGER_AVAILABLE_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
 
         if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->quantity)) {
-            $this->context->addViolation(
-                $constraint->productVariantNotSufficientMessage,
-                ['%productVariantCode%' => $productVariantCode],
-            );
+            $this->context
+                ->buildViolation($constraint->productVariantNotSufficientMessage)
+                ->setParameter('%productVariantCode%', (string) $productVariantCode)
+                ->setCode(ChangedItemQuantityInCart::PRODUCT_VARIANT_NOT_SUFFICIENT_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -104,10 +112,12 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
         Assert::notNull($channel);
 
         if (!$product->hasChannel($channel)) {
-            $this->context->addViolation(
-                $constraint->productNotExistMessage,
-                ['%productName%' => $product->getName()],
-            );
+            $this->context
+                ->buildViolation($constraint->productNotExistMessage)
+                ->setParameter('%productName%', (string) $product->getName())
+                ->setCode(ChangedItemQuantityInCart::PRODUCT_NOT_EXIST_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

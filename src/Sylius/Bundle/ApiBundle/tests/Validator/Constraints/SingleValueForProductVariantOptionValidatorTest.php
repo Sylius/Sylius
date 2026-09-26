@@ -24,6 +24,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class SingleValueForProductVariantOptionValidatorTest extends TestCase
@@ -75,6 +76,8 @@ final class SingleValueForProductVariantOptionValidatorTest extends TestCase
         $firstProductOptionValueMock = $this->createMock(ProductOptionValueInterface::class);
         /** @var ProductOptionValueInterface|MockObject $secondProductOptionValueMock */
         $secondProductOptionValueMock = $this->createMock(ProductOptionValueInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $constraint = new SingleValueForProductVariantOption();
         $firstProductOptionValueMock->expects(self::once())->method('getOptionCode')->willReturn('OPTION');
         $secondProductOptionValueMock->expects(self::once())->method('getOptionCode')->willReturn('OPTION');
@@ -82,7 +85,9 @@ final class SingleValueForProductVariantOptionValidatorTest extends TestCase
             $firstProductOptionValueMock,
             $secondProductOptionValueMock,
         ]));
-        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.product_variant.option_values.single_value');
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.product_variant.option_values.single_value')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(SingleValueForProductVariantOption::MULTIPLE_VALUES_FOR_OPTION_ERROR)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
         $this->singleValueForProductVariantOptionValidator->validate($variantMock, $constraint);
     }
 
@@ -101,7 +106,7 @@ final class SingleValueForProductVariantOptionValidatorTest extends TestCase
             $firstProductOptionValueMock,
             $secondProductOptionValueMock,
         ]));
-        $this->executionContext->expects(self::never())->method('addViolation')->with($constraint->message);
+        $this->executionContext->expects(self::never())->method('buildViolation');
         $this->singleValueForProductVariantOptionValidator->validate($variantMock, $constraint);
     }
 }

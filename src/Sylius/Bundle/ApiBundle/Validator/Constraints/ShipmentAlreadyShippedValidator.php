@@ -36,7 +36,11 @@ final class ShipmentAlreadyShippedValidator extends ConstraintValidator
         $shipment = $this->shipmentRepository->find($value->shipmentId);
 
         if ($shipment->getState() === OrderShippingStates::STATE_SHIPPED) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setCode(ShipmentAlreadyShipped::SHIPMENT_ALREADY_SHIPPED_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

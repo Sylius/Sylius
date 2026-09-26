@@ -24,6 +24,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class CanPaymentMethodBeChangedValidatorTest extends TestCase
@@ -85,6 +86,8 @@ final class CanPaymentMethodBeChangedValidatorTest extends TestCase
 
     public function testAddsViolationIfOrderIsCancelled(): void
     {
+        /** @var ConstraintViolationBuilderInterface|MockObject $violationBuilderMock */
+        $violationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $command = new ChangePaymentMethod(
             orderTokenValue: 'ORDER_TOKEN',
             paymentMethodCode: 'PAYMENT_METHOD_CODE',
@@ -96,8 +99,15 @@ final class CanPaymentMethodBeChangedValidatorTest extends TestCase
             ->willReturn($this->order);
         $this->order->expects(self::once())->method('getState')->willReturn(OrderInterface::STATE_CANCELLED);
         $this->executionContext->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.payment_method.cannot_change_payment_method_for_cancelled_order');
+            ->method('buildViolation')
+            ->with('sylius.payment_method.cannot_change_payment_method_for_cancelled_order')
+            ->willReturn($violationBuilderMock);
+        $violationBuilderMock->expects(self::once())
+            ->method('setCode')
+            ->with(CanPaymentMethodBeChanged::ORDER_CANCELLED_ERROR)
+            ->willReturn($violationBuilderMock);
+        $violationBuilderMock->expects(self::once())
+            ->method('addViolation');
         $this->canPaymentMethodBeChangedValidator->validate($command, new CanPaymentMethodBeChanged());
     }
 

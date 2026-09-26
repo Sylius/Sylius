@@ -53,7 +53,11 @@ final class UpdateCartEmailNotAllowedValidator extends ConstraintValidator
         }
 
         if ($this->userContext->getUser() !== null) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setCode(UpdateCartEmailNotAllowed::EMAIL_NOT_CHANGEABLE_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

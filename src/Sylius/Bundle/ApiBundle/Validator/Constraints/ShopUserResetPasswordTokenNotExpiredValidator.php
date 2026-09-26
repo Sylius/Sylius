@@ -50,6 +50,10 @@ final class ShopUserResetPasswordTokenNotExpiredValidator extends ConstraintVali
             return;
         }
 
-        $this->context->addViolation($constraint->message);
+        $this->context
+            ->buildViolation($constraint->message)
+            ->setCode(ShopUserResetPasswordTokenNotExpired::TOKEN_EXPIRED_ERROR)
+            ->addViolation()
+        ;
     }
 }

@@ -42,6 +42,11 @@ final class ShopUserResetPasswordTokenExistsValidator extends ConstraintValidato
             return;
         }
 
-        $this->context->addViolation($constraint->message, ['%token%' => $value]);
+        $this->context
+            ->buildViolation($constraint->message)
+            ->setParameter('%token%', $value)
+            ->setCode(ShopUserResetPasswordTokenExists::TOKEN_INVALID_ERROR)
+            ->addViolation()
+        ;
     }
 }

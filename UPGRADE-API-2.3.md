@@ -16,6 +16,27 @@ Request body:
 
 Returns `202 Accepted` on success (regardless of whether the email was sent).
 
+## Validation
+
+1. Violations raised by the API constraint validators now expose a `code`, which was previously always `null`:
+
+   ```diff
+    {
+        "violations": [
+            {
+                "propertyPath": "",
+                "message": "An empty order cannot be processed.",
+   -            "code": null
+   +            "code": "ORDER_EMPTY"
+            }
+        ]
+    }
+   ```
+
+   The codes are defined as constants on the constraint classes in
+   `Sylius\Bundle\ApiBundle\Validator\Constraints`, e.g. `OrderNotEmpty::ORDER_EMPTY_ERROR`.
+   If your tests compare full validation error payloads, update the expected responses accordingly.
+
 ## Admin API
 
 1. The `Administrator` resource exposes two new boolean properties, `administrationAccess` and `apiAccess`, which

@@ -24,6 +24,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class UniqueShopUserEmailValidatorTest extends TestCase
@@ -90,9 +91,20 @@ final class UniqueShopUserEmailValidatorTest extends TestCase
             ->with('email@example.com')
             ->willReturn($shopUserMock);
 
-        $this->executionContext->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.user.email.unique');
+        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext
+            ->expects(self::once())
+            ->method('buildViolation')
+            ->with($constraint->message)
+            ->willReturn($violationBuilder);
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setCode')
+            ->with(UniqueShopUserEmail::EMAIL_NOT_UNIQUE_ERROR)
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('addViolation');
 
         $this->uniqueShopUserEmailValidator->validate('eMaIl@example.com', $constraint);
     }
