@@ -61,7 +61,7 @@ final class ShopCartBlamerListener
     private function blame(ShopUserInterface $user): void
     {
         $cart = $this->getCart();
-        if (null === $cart || null !== $cart->getCustomer()) {
+        if (null === $cart || !$cart->isCreatedByGuest()) {
             return;
         }
 
