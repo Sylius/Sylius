@@ -1,5 +1,34 @@
 # CHANGELOG FOR `2.3.X`
 
+## v2.3.0-RC.1 (2026-09-27)
+
+#### Details
+
+- [#19196](https://github.com/Sylius/Sylius/pull/19196) Fix table formatting in UPGRADE-2.3.md ([@Prometee](https://github.com/Prometee))
+- [#19213](https://github.com/Sylius/Sylius/pull/19213) [2.2] Add JwtAudienceListener to enforce JWT audience and principal validation ([@TheMilek](https://github.com/TheMilek))
+- [#19214](https://github.com/Sylius/Sylius/pull/19214) [2.2][ApiBundle] Restrict PaymentRequest actions allowed from shop context ([@TheMilek](https://github.com/TheMilek))
+- [#19215](https://github.com/Sylius/Sylius/pull/19215) [2.2] Fix Host header injection in the admin password-reset e-mail link ([@TheMilek](https://github.com/TheMilek))
+- [#19216](https://github.com/Sylius/Sylius/pull/19216) [2.2] Prevent payment amount tampering after a gateway transaction has started ([@TheMilek](https://github.com/TheMilek))
+- [#19222](https://github.com/Sylius/Sylius/pull/19222) Mock channel context in ResetPasswordEmailManagerTest ([@TheMilek](https://github.com/TheMilek))
+- [#19228](https://github.com/Sylius/Sylius/pull/19228) Remove upmerges to 2.2 and symfony 8 branches ([@TheMilek](https://github.com/TheMilek))
+- [#19229](https://github.com/Sylius/Sylius/pull/19229) Resolve the picked checkout address from the customer address book ([@Wojdylak](https://github.com/Wojdylak))
+- [#19230](https://github.com/Sylius/Sylius/pull/19230) Fix/grid legacy switch 2.3 ([@TheMilek](https://github.com/TheMilek))
+- [#19227](https://github.com/Sylius/Sylius/pull/19227) [Behat] Do not assume the first row of a table is its header row ([@TheMilek](https://github.com/TheMilek))
+- [#19242](https://github.com/Sylius/Sylius/pull/19242) Restrict API Platform version for the ApiBundle package tests on Symfony 6.4 ([@TheMilek](https://github.com/TheMilek))
+- [#19219](https://github.com/Sylius/Sylius/pull/19219) Allow translatable autocomplete results without a translation in the current locale ([@Prometee](https://github.com/Prometee))
+- [#19149](https://github.com/Sylius/Sylius/pull/19149) SY-780: Replace old and unsupported spotlight.js gallery with new one ([@bartek-sek](https://github.com/bartek-sek))
+- [#19245](https://github.com/Sylius/Sylius/pull/19245) [CI] Run PHPArkitect on PHP 8.5 too ([@fain182](https://github.com/fain182))
+- [#19247](https://github.com/Sylius/Sylius/pull/19247) [CI] Skip PHPArkitect on PHP 8.5 for 2.2 ([@TheMilek](https://github.com/TheMilek))
+- [#19249](https://github.com/Sylius/Sylius/pull/19249) [CI] Drop Symfony 8.0 from the full matrix ([@TheMilek](https://github.com/TheMilek))
+- [#19250](https://github.com/Sylius/Sylius/pull/19250) Sylius UI js only package ([@TheMilek](https://github.com/TheMilek))
+- [#19192](https://github.com/Sylius/Sylius/pull/19192) [Admin] Split main menu builder with providers ([@rust-le](https://github.com/rust-le))
+- [#19246](https://github.com/Sylius/Sylius/pull/19246) [AdminBundle] Fix payment and shipment item state badge colours on order show page ([@littfed](https://github.com/littfed))
+- [#19251](https://github.com/Sylius/Sylius/pull/19251) Conflict with doctrine/orm 3.7 and validate the Doctrine mapping in CI ([@TheMilek](https://github.com/TheMilek))
+- [#19248](https://github.com/Sylius/Sylius/pull/19248) Api platform 5 support ([@TheMilek](https://github.com/TheMilek))
+- [#19189](https://github.com/Sylius/Sylius/pull/19189) Upgrade Symfony UX packages to ^3.0 ([@tomkalon](https://github.com/tomkalon))
+- [#19006](https://github.com/Sylius/Sylius/pull/19006)  ([@tomkalon](https://github.com/tomkalon))
+- [#19256](https://github.com/Sylius/Sylius/pull/19256) [UPGRADE] Document Babel object rest spread plugin change ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.3.0-ALPHA.1 (2026-08-10)
 
 #### Details
