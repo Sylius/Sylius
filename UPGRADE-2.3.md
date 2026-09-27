@@ -512,6 +512,19 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
    For other changes, see the [Webpack Encore 6.0.0 release notes](https://github.com/symfony/webpack-encore/releases/tag/v6.0.0).
 
+10. The `@babel/plugin-proposal-object-rest-spread` package has been replaced with
+   `@babel/plugin-transform-object-rest-spread` in the `@sylius-ui/admin` and `@sylius-ui/shop` packages.
+   Update your `.babelrc`:
+
+   ```diff
+    "plugins": [
+   -    ["@babel/plugin-proposal-object-rest-spread", {
+   +    ["@babel/plugin-transform-object-rest-spread", {
+            "useBuiltIns": true
+        }]
+    ]
+   ```
+
 ## Validation
 
 1. Passing an array of options to configure a Sylius validation constraint is **deprecated** since Sylius 2.3
