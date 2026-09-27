@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\PayumBundle\Action;
 
 use Payum\Core\Action\ActionInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Action\ResolveNextRouteAction;
@@ -21,6 +22,7 @@ use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ResolveNextRouteActionTest extends TestCase
 {
     private ResolveNextRouteAction $resolveNextRouteAction;

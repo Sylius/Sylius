@@ -15,12 +15,11 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Provider\Offline;
 
 use Sylius\Bundle\CoreBundle\OrderPay\Provider\FinalUrlProviderInterface;
 use Sylius\Bundle\PaymentBundle\Provider\HttpResponseProviderInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 final class StatusHttpResponseProvider implements HttpResponseProviderInterface
 {
     public function __construct(private FinalUrlProviderInterface $finalUrlProvider)
@@ -28,14 +27,14 @@ final class StatusHttpResponseProvider implements HttpResponseProviderInterface
     }
 
     public function supports(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         PaymentRequestInterface $paymentRequest,
     ): bool {
         return $paymentRequest->getAction() === PaymentRequestInterface::ACTION_STATUS;
     }
 
     public function getResponse(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         PaymentRequestInterface $paymentRequest,
     ): Response {
         // Force null payment to go to the thank you page

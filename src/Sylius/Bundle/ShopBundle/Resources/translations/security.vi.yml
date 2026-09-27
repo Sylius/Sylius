@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email_not_verified: 'Tài khoản của bạn chưa được xác minh. Vui lòng kiểm tra hộp thư đến email của bạn.'

@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\UserBundle\Reloader;
 
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\UserBundle\Reloader\UserReloader;
 use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Sylius\Component\User\Model\UserInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UserReloaderTest extends TestCase
 {
     private MockObject&ObjectManager $objectManager;

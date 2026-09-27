@@ -27,6 +27,12 @@
             <join-column name="promotion_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
+        <field name="trackUsage" column="track_usage" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
+        <field name="trackUsageSince" column="track_usage_since" type="datetime_immutable" nullable="true" />
         <field name="expiresAt" column="expires_at" type="datetime" nullable="true" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

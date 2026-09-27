@@ -13,19 +13,43 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 #[\Attribute]
 final class ChosenShippingMethodEligibility extends Constraint
 {
-    public string $message = 'sylius.shipping_method.not_available';
+    /**
+     * @param array<string, mixed>|null $options
+     */
+    #[HasNamedArguments]
+    public function __construct(
+        ?array $options = null,
+        public string $message = 'sylius.shipping_method.not_available',
+        public string $notFoundMessage = 'sylius.shipping_method.not_found',
+        public string $shipmentNotFoundMessage = 'sylius.shipment.not_found',
+        public string $shippingAddressNotFoundMessage = 'sylius.shipping_method.shipping_address_not_found',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/api-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
 
-    public string $notFoundMessage = 'sylius.shipping_method.not_found';
+            $this->message = $options['message'] ?? $this->message;
+            $this->notFoundMessage = $options['notFoundMessage'] ?? $this->notFoundMessage;
+            $this->shipmentNotFoundMessage = $options['shipmentNotFoundMessage'] ?? $this->shipmentNotFoundMessage;
+            $this->shippingAddressNotFoundMessage = $options['shippingAddressNotFoundMessage'] ?? $this->shippingAddressNotFoundMessage;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
 
-    public string $shipmentNotFoundMessage = 'sylius.shipment.not_found';
-
-    /** @var string */
-    public $shippingAddressNotFoundMessage = 'sylius.shipping_method.shipping_address_not_found';
+        parent::__construct(groups: $groups, payload: $payload);
+    }
 
     public function validatedBy(): string
     {

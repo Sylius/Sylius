@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -33,9 +35,7 @@ final class HomepageContext implements Context
     ) {
     }
 
-    /**
-     * @When I check latest products
-     */
+    #[When('I check latest products')]
     public function iCheckLatestProducts(): void
     {
         $this->client->customAction(
@@ -44,9 +44,7 @@ final class HomepageContext implements Context
         );
     }
 
-    /**
-     * @Then I should see :productName product
-     */
+    #[Then('I should see :productName product')]
     public function iShouldSeeProduct(string $productName): void
     {
         Assert::true(
@@ -58,9 +56,7 @@ final class HomepageContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see :productName product
-     */
+    #[Then('I should not see :productName product')]
     public function iShouldNotSeeProduct(string $productName): void
     {
         Assert::false(
@@ -72,27 +68,21 @@ final class HomepageContext implements Context
         );
     }
 
-    /**
-     * @When I check available taxons
-     */
+    #[When('I check available taxons')]
     public function iCheckAvailableTaxons(): void
     {
         $this->objectManager->clear(); // avoiding doctrine cache
         $this->client->customAction(sprintf('%s/shop/taxons', $this->apiUrlPrefix), HttpRequest::METHOD_GET);
     }
 
-    /**
-     * @Then I should see :count products in the list
-     */
+    #[Then('I should see :count products in the list')]
     public function iShouldSeeProductsInTheList(int $count): void
     {
         Assert::eq($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then I should see :firstMenuItem in the menu
-     * @Then I should see :firstMenuItem and :secondMenuItem in the menu
-     */
+    #[Then('I should see :firstMenuItem in the menu')]
+    #[Then('I should see :firstMenuItem and :secondMenuItem in the menu')]
     public function iShouldSeeAndInTheMenu(string ...$expectedMenuItems): void
     {
         $menuItems = $this->getAvailableTaxonMenuItemsFromTaxonCollection($this->client->getLastResponse());
@@ -103,11 +93,9 @@ final class HomepageContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see :firstMenuItem and :secondMenuItem in the menu
-     * @Then I should not see :firstMenuItem, :secondMenuItem and :thirdMenuItem in the menu
-     * @Then I should not see :firstMenuItem, :secondMenuItem, :thirdMenuItem and :fourthMenuItem in the menu
-     */
+    #[Then('I should not see :firstMenuItem and :secondMenuItem in the menu')]
+    #[Then('I should not see :firstMenuItem, :secondMenuItem and :thirdMenuItem in the menu')]
+    #[Then('I should not see :firstMenuItem, :secondMenuItem, :thirdMenuItem and :fourthMenuItem in the menu')]
     public function iShouldNotSeeAndInTheMenu(string ...$unexpectedMenuItems): void
     {
         $menuItems = $this->getAvailableTaxonMenuItemsFromTaxonCollection($this->client->getLastResponse());

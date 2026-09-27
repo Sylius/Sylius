@@ -44,9 +44,15 @@ sylius_promotion:
             order_percentage_discount:
                 - 'sylius'
                 - 'sylius_promotion_action_order_percentage_discount'
+            order_percentage_discount_per_channel:
+                - 'sylius'
+                - 'sylius_promotion_action_order_percentage_discount_per_channel'
             shipping_percentage_discount:
                 - 'sylius'
                 - 'sylius_promotion_action_shipping_percentage_discount'
+            shipping_percentage_discount_per_channel:
+                - 'sylius'
+                - 'sylius_promotion_action_shipping_percentage_discount_per_channel'
             order_fixed_discount:
                 - 'sylius'
                 - 'sylius_promotion_action_order_fixed_discount'
@@ -62,18 +68,36 @@ sylius_promotion:
             customer_group:
                 - 'sylius'
                 - 'sylius_promotion_rule_customer_group'
+            customer_group_per_channel:
+                - 'sylius'
+                - 'sylius_promotion_rule_customer_group_per_channel'
             nth_order:
                 - 'sylius'
                 - 'sylius_promotion_rule_nth_order'
+            nth_order_per_channel:
+                - 'sylius'
+                - 'sylius_promotion_rule_nth_order_per_channel'
             shipping_country:
                 - 'sylius'
                 - 'sylius_promotion_rule_shipping_country'
+            shipping_country_per_channel:
+                - 'sylius'
+                - 'sylius_promotion_rule_shipping_country_per_channel'
             has_taxon:
                 - 'sylius'
                 - 'sylius_promotion_rule_has_taxon'
+            has_taxon_per_channel:
+                - 'sylius'
+                - 'sylius_promotion_rule_has_taxon_per_channel'
             total_of_items_from_taxon:
                 - 'sylius'
                 - 'sylius_promotion_rule_total_of_items_from_taxon'
             contains_product:
                 - 'sylius'
                 - 'sylius_promotion_rule_contains_product'
+            contains_product_per_channel:
+                - 'sylius'
+                - 'sylius_promotion_rule_contains_product_per_channel'
+            cart_quantity_per_channel:
+                - 'sylius'
+                - 'sylius_promotion_rule_cart_quantity_per_channel'

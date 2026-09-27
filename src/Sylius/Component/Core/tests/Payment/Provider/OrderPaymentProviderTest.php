@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Payment\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
@@ -27,6 +28,7 @@ use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderPaymentProviderTest extends TestCase
 {
     private DefaultPaymentMethodResolverInterface&MockObject $defaultPaymentMethodResolver;

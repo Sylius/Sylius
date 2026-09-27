@@ -36,7 +36,7 @@ final class GatewayFactoryExistsValidator extends ConstraintValidator
         }
 
         if (!in_array($value, array_keys($this->factoryNames), true)) {
-            $this->context->buildViolation($constraint->invalidGatewayFactory)
+            $this->context->buildViolation($constraint->invalidGatewayFactoryMessage)
                 ->setParameter('{{ available_factories }}', implode(', ', array_keys($this->factoryNames)))
                 ->addViolation()
             ;

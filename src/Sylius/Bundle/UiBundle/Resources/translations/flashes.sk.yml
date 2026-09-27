@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: 'Taxón, ktorý sa používa v pravidle propagácie, nemožno zmazať.'
         menu_taxon_delete: 'Menu taxón žiadneho kanála nemožno zmazať.'
+    user:
+        verification_email_sent: 'Ak je zadaná e-mailová adresa spojená s účtom, bol odoslaný overovací e-mail.'

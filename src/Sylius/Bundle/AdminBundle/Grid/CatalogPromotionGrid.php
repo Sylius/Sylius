@@ -1,0 +1,164 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\AdminBundle\Grid;
+
+use Sylius\Bundle\GridBundle\Builder\Action\Action;
+use Sylius\Bundle\GridBundle\Builder\Action\CreateAction;
+use Sylius\Bundle\GridBundle\Builder\Action\ShowAction;
+use Sylius\Bundle\GridBundle\Builder\Action\UpdateAction;
+use Sylius\Bundle\GridBundle\Builder\Field\TwigField;
+use Sylius\Bundle\GridBundle\Builder\Filter\BooleanFilter;
+use Sylius\Bundle\GridBundle\Builder\Filter\DateFilter;
+use Sylius\Bundle\GridBundle\Builder\Filter\EntityFilter;
+use Sylius\Bundle\GridBundle\Builder\Filter\Filter;
+use Sylius\Bundle\GridBundle\Builder\Filter\StringFilter;
+use Sylius\Bundle\GridBundle\Builder\GridBuilderInterface;
+use Sylius\Component\Grid\Attribute\AsGrid;
+use Sylius\Component\Promotion\Model\CatalogPromotionStates;
+
+#[AsGrid(resourceClass: '%sylius.model.catalog_promotion.class%', name: self::NAME)]
+final class CatalogPromotionGrid implements CatalogPromotionGridInterface
+{
+    public function __construct(
+        private readonly string $channelClass,
+    ) {
+    }
+
+    public function __invoke(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            ->setLimits([10, 25, 50])
+            ->addOrderBy('code', 'asc')
+
+            ->withFields(
+                TwigField::create('priority', '@SyliusAdmin/catalog_promotion/grid/field/priority.html.twig')
+                    ->withOptions([
+                        'vars' => [
+                            'th_class' => 'w-1 text-center',
+                            'td_class' => 'text-center',
+                        ],
+                    ])
+                    ->setLabel('sylius.ui.priority')
+                    ->setSortable(true),
+                TwigField::create('name', '@SyliusAdmin/shared/grid/field/name.html.twig')
+                    ->setLabel('sylius.ui.name')
+                    ->setSortable(true),
+                TwigField::create('code', '@SyliusAdmin/shared/grid/field/code.html.twig')
+                    ->setLabel('sylius.ui.code')
+                    ->setSortable(true),
+                TwigField::create('channels', '@SyliusAdmin/shared/grid/field/channels.html.twig')
+                    ->setLabel('sylius.ui.channels')
+                    ->withOptions([
+                        'vars' => [
+                            'th_class' => 'w-1 text-center',
+                        ],
+                    ]),
+                TwigField::create('startDate', '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig')
+                    ->setLabel('sylius.ui.start_date')
+                    ->setSortable(true)
+                    ->withOptions([
+                        'vars' => [
+                            'th_class' => 'text-center',
+                        ],
+                    ]),
+                TwigField::create('endDate', '@SyliusAdmin/catalog_promotion/grid/field/date.html.twig')
+                    ->setLabel('sylius.ui.end_date')
+                    ->setSortable(true)
+                    ->withOptions([
+                        'vars' => [
+                            'th_class' => 'text-center',
+                        ],
+                    ]),
+                TwigField::create('state', '@SyliusAdmin/catalog_promotion/grid/field/state.html.twig')
+                    ->setLabel('sylius.ui.state')
+                    ->withOptions([
+                        'vars' => [
+                            'th_class' => 'w-1 text-center',
+                            'td_class' => 'text-center',
+                        ],
+                    ]),
+                TwigField::create('enabled', '@SyliusAdmin/shared/grid/field/boolean.html.twig')
+                    ->setLabel('sylius.ui.enabled')
+                    ->setSortable(true)
+                    ->withOptions([
+                        'vars' => [
+                            'th_class' => 'w-1 text-center',
+                            'td_class' => 'text-center',
+                        ],
+                    ]),
+            )
+
+            ->withFilters(
+                StringFilter::create(
+                    'search',
+                    fields: ['name', 'code'],
+                    type: 'contains',
+                )
+                    ->setLabel('sylius.ui.search'),
+                EntityFilter::create(
+                    'channel',
+                    resourceClass: $this->channelClass,
+                    fields: ['channels.id'],
+                )
+                    ->setLabel('sylius.ui.channel'),
+                DateFilter::create('startDate')
+                    ->setLabel('sylius.ui.start_date')
+                    ->setOptions([
+                        'inclusive_to' => true,
+                    ]),
+                DateFilter::create('endDate')
+                    ->setLabel('sylius.ui.end_date')
+                    ->setOptions([
+                        'inclusive_to' => true,
+                    ]),
+                BooleanFilter::create('enabled')
+                    ->setLabel('sylius.ui.enabled'),
+                Filter::create('state', 'select')
+                    ->setLabel('sylius.ui.state')
+                    ->addFormOption('choices', [
+                        'sylius.ui.active' => CatalogPromotionStates::STATE_ACTIVE,
+                        'sylius.ui.inactive' => CatalogPromotionStates::STATE_INACTIVE,
+                    ]),
+            )
+
+            ->withMainActions(
+                CreateAction::create(),
+            )
+            ->withItemActions(
+                ShowAction::create(),
+                Action::create('show_variants', 'show')
+                    ->setLabel('sylius.ui.list_variants')
+                    ->setIcon('tabler:list-letters')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_catalog_promotion_product_variant_index',
+                            'parameters' => [
+                                'id' => 'resource.id',
+                            ],
+                        ],
+                    ]),
+                UpdateAction::create(),
+                Action::create('delete', 'delete_catalog_promotion')
+                    ->setOptions([
+                        'link' => [
+                            'route' => 'sylius_admin_catalog_promotion_delete',
+                            'parameters' => [
+                                'code' => 'resource.code',
+                            ],
+                        ],
+                        'state' => 'resource.state',
+                    ]),
+            );
+    }
+}

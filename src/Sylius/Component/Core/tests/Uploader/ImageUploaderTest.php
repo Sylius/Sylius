@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Uploader;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ImageUploaderTest extends TestCase
 {
     private ImageInterface&MockObject $image;

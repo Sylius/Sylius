@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Exception\TranslationLocaleMismatchException;
@@ -20,6 +21,7 @@ use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\TranslatableLocaleKeyDenorma
 use Sylius\Resource\Model\TranslatableInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TranslatableLocaleKeyDenormalizerTest extends TestCase
 {
     private TranslatableLocaleKeyDenormalizer $translatableLocaleKeyDenormalizer;

@@ -42,7 +42,7 @@ final class CatalogPromotionScopeTypeValidator extends ConstraintValidator
         }
 
         if (!in_array($type, $this->scopeTypes, true)) {
-            $this->context->buildViolation($constraint->invalidType)
+            $this->context->buildViolation($constraint->invalidTypeMessage)
                 ->setParameter('{{ available_scope_types }}', implode(', ', $this->scopeTypes))
                 ->atPath('type')
                 ->addViolation()

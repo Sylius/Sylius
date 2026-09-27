@@ -16,6 +16,7 @@ namespace Tests\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Comparable;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\ImagesAwareInterface;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Model\TaxonInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonTest extends TestCase
 {
     private ImageInterface&MockObject $image;

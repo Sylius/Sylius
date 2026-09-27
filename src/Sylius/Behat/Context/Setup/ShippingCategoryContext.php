@@ -44,9 +44,7 @@ final readonly class ShippingCategoryContext implements Context
         (null === $secondShippingCategoryName) ?: $this->createShippingCategory($secondShippingCategoryName);
     }
 
-    /**
-     * @Given the store has :shippingCategoryName shipping category identified by :shippingCategoryCode
-     */
+    #[Given('the store has :shippingCategoryName shipping category identified by :shippingCategoryCode')]
     public function theStoreHasShippingCategoryIdentifiedBy($shippingCategoryName, $shippingCategoryCode)
     {
         $this->createShippingCategory($shippingCategoryName, $shippingCategoryCode);

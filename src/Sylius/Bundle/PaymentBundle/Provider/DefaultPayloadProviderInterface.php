@@ -15,7 +15,6 @@ namespace Sylius\Bundle\PaymentBundle\Provider;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-/** @experimental */
 interface DefaultPayloadProviderInterface
 {
     public function getPayload(PaymentRequestInterface $paymentRequest): mixed;

@@ -23,8 +23,6 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
  * @template T of PaymentRequestInterface
  *
  * @extends RepositoryInterface<T>
- *
- * @experimental
  */
 interface PaymentRequestRepositoryInterface extends RepositoryInterface
 {

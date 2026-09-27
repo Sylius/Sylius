@@ -18,43 +18,41 @@ use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Provider\PayResponseProviderInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Resolver\PaymentToPayResolverInterface;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface as PayumGatewayConfigInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-/** @experimental */
 final class PayumPayResponseProvider implements PayResponseProviderInterface
 {
+    /**
+     * @param array<string, string> $afterPayUrlParameters
+     */
     public function __construct(
         private Payum $payum,
         private PaymentToPayResolverInterface $paymentToPayResolver,
+        private readonly ?string $afterPayUrlRoute = null,
+        private readonly array $afterPayUrlParameters = [],
     ) {
     }
 
     public function getResponse(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         OrderInterface $order,
     ): Response {
         $payment = $this->paymentToPayResolver->getPayment($order);
         Assert::notNull($payment, sprintf('Order (id %s) must have last payment in state "new".', $order->getId()));
 
-        $redirectOptions = $requestConfiguration->getParameters()->get('redirect');
-        if (is_string($redirectOptions)) {
-            $redirectOptions = [
-                'route' => $redirectOptions,
-            ];
-        }
-        $token = $this->provideTokenBasedOnPayment($payment, $redirectOptions);
+        $token = $this->provideTokenBasedOnPayment($payment);
 
         return new RedirectResponse($token->getTargetUrl());
     }
 
     public function supports(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         OrderInterface $order,
     ): bool {
         $payment = $this->paymentToPayResolver->getPayment($order);
@@ -74,10 +72,7 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
         return $gatewayConfig->getUsePayum();
     }
 
-    /**
-     * @param array{route: ?string, parameters: ?string[]} $redirectOptions
-     */
-    private function provideTokenBasedOnPayment(PaymentInterface $payment, array $redirectOptions): TokenInterface
+    private function provideTokenBasedOnPayment(PaymentInterface $payment): TokenInterface
     {
         $gatewayConfig = $this->getGatewayConfigFromPayment($payment);
         Assert::notNull($gatewayConfig, 'An existing gateway config must exist.');
@@ -89,16 +84,16 @@ final class PayumPayResponseProvider implements PayResponseProviderInterface
             return $tokenFactory->createAuthorizeToken(
                 $gatewayConfig->getGatewayName(),
                 $payment,
-                $redirectOptions['route'] ?? null,
-                $redirectOptions['parameters'] ?? [],
+                $this->afterPayUrlRoute,
+                $this->afterPayUrlParameters,
             );
         }
 
         return $tokenFactory->createCaptureToken(
             $gatewayConfig->getGatewayName(),
             $payment,
-            $redirectOptions['route'] ?? null,
-            $redirectOptions['parameters'] ?? [],
+            $this->afterPayUrlRoute,
+            $this->afterPayUrlParameters,
         );
     }
 

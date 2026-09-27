@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Promotion\Filter;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Filter\TaxonFilter;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonFilterTest extends TestCase
 {
     private MockObject&OrderItemInterface $item;

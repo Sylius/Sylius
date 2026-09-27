@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidSelectAttributeConfiguration;
@@ -23,6 +24,7 @@ use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ValidTextAttributeConfigurationValidatorTest extends TestCase
 {
     private ExecutionContextInterface&MockObject $context;

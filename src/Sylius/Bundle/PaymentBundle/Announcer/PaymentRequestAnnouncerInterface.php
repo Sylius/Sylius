@@ -15,7 +15,6 @@ namespace Sylius\Bundle\PaymentBundle\Announcer;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-/** @experimental */
 interface PaymentRequestAnnouncerInterface
 {
     public function dispatchPaymentRequestCommand(PaymentRequestInterface $paymentRequest): void;

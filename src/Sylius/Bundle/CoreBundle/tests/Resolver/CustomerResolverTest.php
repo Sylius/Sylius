@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Resolver;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Provider\CustomerProviderInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerResolverTest extends TestCase
 {
     private FactoryInterface&MockObject $customerFactory;

@@ -31,5 +31,7 @@ interface GeneratePageInterface extends BasePageInterface
 
     public function setUsageLimit(int $limit): void;
 
+    public function toggleTrackUsage(bool $trackUsage): void;
+
     public function getFormValidationMessage(): string;
 }

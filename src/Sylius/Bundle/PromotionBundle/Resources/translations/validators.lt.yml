@@ -7,6 +7,8 @@ sylius:
             max_length: Nuolaidos aprašymas turi būti ne ilgesnis kaip 1 simbolis. | Nuolaidos aprašymas turi būti ne ilgesnis nei {{ limit }} simbolių.
             min_length: Nuolaidos aprašymas turi būti ne mažiau kaip 1 simbolis.|Nuolaidos aprašymas turi būti ne mažiau kaip {{ limit }} simbolių.
             not_blank: Įveskite nuolaidos aprašymą.
+        usage_limit:
+            min: Nuolaidos naudojimo limitas turi būti ne mažiau kaip {{ limit }}.
         name:
             max_length: Nuolaidos pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Nuolaidos pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.
             min_length: Nuolaidos pavadinimas turi būti ne mažiau kaip 1 simbolis.|Nuolaidos pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.

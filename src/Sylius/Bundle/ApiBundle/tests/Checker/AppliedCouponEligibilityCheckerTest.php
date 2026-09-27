@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Checker\AppliedCouponEligibilityChecker;
@@ -25,6 +26,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AppliedCouponEligibilityCheckerTest extends TestCase
 {
     private MockObject&PromotionEligibilityCheckerInterface $promotionChecker;

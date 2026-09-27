@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Checker\OrderShippingMethodSelectionRequirementChecker;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderShippingMethodSelectionRequirementCheckerTest extends TestCase
 {
     private MockObject&ShippingMethodsResolverInterface $shippingMethodsResolver;

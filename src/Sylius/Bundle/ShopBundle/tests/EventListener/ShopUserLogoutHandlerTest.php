@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShopBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShopBundle\EventListener\ShopUserLogoutHandler;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Symfony\Component\Security\Http\Event\LogoutEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShopUserLogoutHandlerTest extends TestCase
 {
     private ChannelContextInterface&MockObject $channelContext;

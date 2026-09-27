@@ -161,6 +161,30 @@ final class PromotionCouponsTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_generates_promotion_coupons_without_tracking_usage(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_50_off'];
+
+        $this->requestPost(
+            sprintf('/api/v2/admin/promotions/%s/coupons/generate', $promotion->getCode()),
+            [
+                'amount' => 1,
+                'prefix' => 'ABC',
+                'codeLength' => 6,
+                'suffix' => 'XYZ',
+                'usageLimit' => 10,
+                'expiresAt' => '2020-01-01 12:00:00',
+                'trackUsage' => false,
+            ],
+        );
+
+        $this->assertResponseCreated('admin/promotion_coupon/generate_promotion_coupons_without_tracking_usage_response');
+    }
+
+    #[Test]
     public function it_does_not_generate_promotion_coupons_with_non_existing_promotion_code(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -214,5 +238,24 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->requestDelete(sprintf('/api/v2/admin/promotions/%s/coupons/%s', $promotion->getCode(), $coupon->getCode()));
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    #[Test]
+    public function it_does_not_create_a_promotion_coupon_with_invalid_usage_limit(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
+
+        /** @var PromotionInterface $promotion */
+        $promotion = $fixtures['promotion_1_off'];
+
+        $this->requestPost(
+            sprintf('/api/v2/admin/promotions/%s/coupons', $promotion->getCode()),
+            [
+                'code' => 'INVALID_LIMIT',
+                'usageLimit' => -1,
+            ],
+        );
+
+        $this->assertResponseUnprocessableEntity('admin/promotion_coupon/post_promotion_coupon_with_invalid_usage_limit_response');
     }
 }

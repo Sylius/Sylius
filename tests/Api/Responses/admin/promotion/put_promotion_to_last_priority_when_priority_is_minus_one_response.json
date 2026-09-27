@@ -12,6 +12,7 @@
     "priority": 3,
     "exclusive": true,
     "usageLimit": 1,
+    "trackUsage": true,
     "used": 0,
     "startsAt": null,
     "endsAt": null,

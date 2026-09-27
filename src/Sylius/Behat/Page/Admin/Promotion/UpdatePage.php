@@ -142,6 +142,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'rule_amount' => '[id^="sylius_admin_promotion_rules_"][id$="_configuration_%channelCode%_amount"]',
             'rules' => '#sylius_admin_promotion_rules',
             'usage_limit' => '#sylius_admin_promotion_usageLimit',
+            'track_usage' => '#sylius_admin_promotion_trackUsage',
             'starts_at' => '#sylius_admin_promotion_startsAt',
             'starts_at_date' => '#sylius_admin_promotion_startsAt_date',
             'starts_at_time' => '#sylius_admin_promotion_startsAt_time',

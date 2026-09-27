@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Order\Model\OrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderAdjustmentsRecalculationTest extends TestCase
 {
     private Order $order;

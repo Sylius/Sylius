@@ -17,6 +17,8 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\PromotionCoupon" table="sylius_promotion_coupon">
+        <field name="version" type="integer" version="true" />
+
         <field type="integer" name="perCustomerUsageLimit" column="per_customer_usage_limit" nullable="true" />
         <field name="reusableFromCancelledOrders" column="reusable_from_cancelled_orders" type="boolean">
             <options>

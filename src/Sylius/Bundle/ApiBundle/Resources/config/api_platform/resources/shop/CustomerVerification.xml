@@ -77,6 +77,36 @@
                     </values>
                 </validationContext>
             </operation>
+
+            <operation
+                name="sylius_api_shop_customer_post_resend_verification_email"
+                class="ApiPlatform\Metadata\Post"
+                uriTemplate="/shop/customers/verification-request"
+                messenger="input"
+                input="Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail"
+                output="false"
+                status="202"
+                read="false"
+            >
+                <denormalizationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius:shop:resend_verification_email:create</value>
+                            </values>
+                        </value>
+                    </values>
+                </denormalizationContext>
+                <validationContext>
+                    <values>
+                        <value name="groups">
+                            <values>
+                                <value>sylius</value>
+                            </values>
+                        </value>
+                    </values>
+                </validationContext>
+            </operation>
         </operations>
     </resource>
 </resources>

@@ -32,7 +32,6 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/** @experimental */
 #[AsMessageHandler]
 final class AddPaymentRequestHandler
 {

@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -35,29 +37,23 @@ final class ProductVariantContext implements Context
     ) {
     }
 
-    /**
-     * @When I select :variant variant
-     * @When I view :variant variant
-     * @When I view :variant variant of the :product product
-     */
+    #[When('I select :variant variant')]
+    #[When('I view :variant variant')]
+    #[When('I view :variant variant of the :product product')]
     public function iSelectVariant(ProductVariantInterface $variant): void
     {
         $this->sharedStorage->set('variant', $variant);
         $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode());
     }
 
-    /**
-     * @When the visitor view :variant variant
-     */
+    #[When('the visitor view :variant variant')]
     public function visitorViewVariant(ProductVariantInterface $variant): void
     {
         $this->sharedStorage->set('token', null);
         $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode());
     }
 
-    /**
-     * @When I view variants
-     */
+    #[When('I view variants')]
     public function iViewVariants(): void
     {
         $response = $this->client->index(Resources::PRODUCT_VARIANTS);
@@ -65,9 +61,7 @@ final class ProductVariantContext implements Context
         $this->sharedStorage->set('response', $response);
     }
 
-    /**
-     * @When /^I view variants of the ("[^"]+" product)$/
-     */
+    #[When('/^I view variants of the ("[^"]+" product)$/')]
     public function iViewVariantsOfTheProduct(ProductInterface $product): void
     {
         $response = $this->client->index(Resources::PRODUCT_VARIANTS, ['product' => $this->iriConverter->getIriFromResource($product)]);
@@ -75,9 +69,7 @@ final class ProductVariantContext implements Context
         $this->sharedStorage->set('product_variant_collection', $this->responseChecker->getCollection($response));
     }
 
-    /**
-     * @When /^I filter (?:them|variants) by ("[^"]+" option value)$/
-     */
+    #[When('/^I filter (?:them|variants) by ("[^"]+" option value)$/')]
     public function iFilterVariantsByOption(ProductOptionValueInterface $optionValue): void
     {
         $this->client->addFilter('optionValues[]', $this->iriConverter->getIriFromResource($optionValue));
@@ -86,10 +78,8 @@ final class ProductVariantContext implements Context
         $this->sharedStorage->set('product_variant_collection', $this->responseChecker->getCollection($response));
     }
 
-    /**
-     * @Then /^(?:the|this) product variant price should be ("[^"]+")$/
-     * @Then /^I should see the variant price ("[^"]+")$/
-     */
+    #[Then('/^(?:the|this) product variant price should be ("[^"]+")$/')]
+    #[Then('/^I should see the variant price ("[^"]+")$/')]
     public function theProductVariantPriceShouldBe(int $price): void
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
@@ -97,9 +87,7 @@ final class ProductVariantContext implements Context
         Assert::same($response['price'], $price);
     }
 
-    /**
-     * @Then /^(?:the|this) product original price should be ("[^"]+")$/
-     */
+    #[Then('/^(?:the|this) product original price should be ("[^"]+")$/')]
     public function theProductOriginalPriceShouldBe(int $originalPrice): void
     {
         $response = $this->responseChecker->getResponseContent($this->client->getLastResponse());
@@ -107,13 +95,11 @@ final class ProductVariantContext implements Context
         Assert::same($response['originalPrice'], $originalPrice);
     }
 
-    /**
-     * @Then /^I should see ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
-     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
-     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" and "([^"]+)" promotions$/
-     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
-     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/
-     */
+    #[Then('/^I should see ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/')]
+    #[Then('/^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/')]
+    #[Then('/^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" and "([^"]+)" promotions$/')]
+    #[Then('/^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/')]
+    #[Then('/^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)", "([^"]+)", "([^"]+)" and "([^"]+)" promotions$/')]
     public function iShouldSeeVariantIsDiscountedFromToWithPromotions(
         ProductVariantInterface $variant,
         int $originalPrice,
@@ -132,9 +118,7 @@ final class ProductVariantContext implements Context
         }
     }
 
-    /**
-     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with ([^"]+) promotions$/
-     */
+    #[Then('/^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with ([^"]+) promotions$/')]
     public function iShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions(
         ProductVariantInterface $variant,
         int $originalPrice,
@@ -148,9 +132,7 @@ final class ProductVariantContext implements Context
         Assert::count($content['appliedPromotions'], $numberOfPromotions);
     }
 
-    /**
-     * @Then /^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with only "([^"]+)" promotion$/
-     */
+    #[Then('/^I should see (this variant) is discounted from ("[^"]+") to ("[^"]+") with only "([^"]+)" promotion$/')]
     public function iShouldSeeVariantIsDiscountedFromToWithOnlyPromotion(
         ProductVariantInterface $variant,
         int $originalPrice,
@@ -167,9 +149,7 @@ final class ProductVariantContext implements Context
         Assert::same($catalogPromotionContent['label'], $promotionName);
     }
 
-    /**
-     * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/
-     */
+    #[Then('/^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with "([^"]+)" promotion$/')]
     public function theVisitorShouldSeeThatTheVariantIsDiscountedWithPromotion(
         ProductVariantInterface $productVariant,
         int $originalPrice,
@@ -182,9 +162,7 @@ final class ProductVariantContext implements Context
         $this->iShouldSeeVariantIsDiscountedFromToWithPromotions($productVariant, $originalPrice, $price, $promotionName);
     }
 
-    /**
-     * @Then /^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with ([^"]+) promotions$/
-     */
+    #[Then('/^the visitor should(?:| still) see that the ("[^"]+" variant) is discounted from ("[^"]+") to ("[^"]+") with ([^"]+) promotions$/')]
     public function theVisitorShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions(
         ProductVariantInterface $variant,
         int $originalPrice,
@@ -197,9 +175,7 @@ final class ProductVariantContext implements Context
         $this->iShouldSeeVariantIsDiscountedFromToWithNumberOfPromotions($variant, $originalPrice, $price, $numberOfPromotions);
     }
 
-    /**
-     * @Then /^I should see ("[^"]+" variant) is not discounted$/
-     */
+    #[Then('/^I should see ("[^"]+" variant) is not discounted$/')]
     public function iShouldSeeVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
         $response = $this->sharedStorage->has('response') ? $this->sharedStorage->get('response') : $this->client->getLastResponse();
@@ -209,10 +185,8 @@ final class ProductVariantContext implements Context
         Assert::keyNotExists($item, 'appliedPromotions');
     }
 
-    /**
-     * @Then /^the visitor should see (this variant) is not discounted$/
-     * @Then /^the visitor should see that the ("[^"]+" variant) is not discounted$/
-     */
+    #[Then('/^the visitor should see (this variant) is not discounted$/')]
+    #[Then('/^the visitor should see that the ("[^"]+" variant) is not discounted$/')]
     public function theVisitorShouldSeeThatTheVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
         $this->sharedStorage->set('token', null);
@@ -220,9 +194,7 @@ final class ProductVariantContext implements Context
         $this->iShouldSeeThisVariantIsNotDiscounted($variant);
     }
 
-    /**
-     * @Then /^I should see (this variant) is not discounted$/
-     */
+    #[Then('/^I should see (this variant) is not discounted$/')]
     public function iShouldSeeThisVariantIsNotDiscounted(ProductVariantInterface $variant): void
     {
         $content = $this->responseChecker->getResponseContent($this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode()));
@@ -230,10 +202,8 @@ final class ProductVariantContext implements Context
         Assert::keyNotExists($content, 'appliedPromotions');
     }
 
-    /**
-     * @Then /^("[^"]+" variant) and ("[^"]+" variant) should be discounted$/
-     * @Then /^("[^"]+" variant) should be discounted$/
-     */
+    #[Then('/^("[^"]+" variant) and ("[^"]+" variant) should be discounted$/')]
+    #[Then('/^("[^"]+" variant) should be discounted$/')]
     public function variantAndVariantShouldBeDiscounted(ProductVariantInterface ...$variants): void
     {
         $this->sharedStorage->set('token', null);
@@ -249,10 +219,8 @@ final class ProductVariantContext implements Context
         }
     }
 
-    /**
-     * @Then /^("[^"]+" variant) and ("[^"]+" variant) should not be discounted$/
-     * @Then /^("[^"]+" variant) should not be discounted$/
-     */
+    #[Then('/^("[^"]+" variant) and ("[^"]+" variant) should not be discounted$/')]
+    #[Then('/^("[^"]+" variant) should not be discounted$/')]
     public function variantAndVariantShouldNotBeDiscounted(ProductVariantInterface ...$variants): void
     {
         $this->sharedStorage->set('token', null);
@@ -268,9 +236,7 @@ final class ProductVariantContext implements Context
         }
     }
 
-    /**
-     * @Then I should not see :variant variant
-     */
+    #[Then('I should not see :variant variant')]
     public function iShouldNotSeeVariant(ProductVariantInterface $variant): void
     {
         $response = $this->client->show(Resources::PRODUCT_VARIANTS, $variant->getCode());
@@ -282,9 +248,7 @@ final class ProductVariantContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see ("([^"]+)", "([^"]+)" and "([^"]+)" variants)$/
-     */
+    #[Then('/^I should see ("([^"]+)", "([^"]+)" and "([^"]+)" variants)$/')]
     public function variantAndVariantShouldBeVisible(array $variants): void
     {
         $this->sharedStorage->set('token', null);
@@ -300,9 +264,7 @@ final class ProductVariantContext implements Context
         }
     }
 
-    /**
-     * @Then /^I should see variant with ("[^"]+" option) and ("[^"]+" option value) priced at ("[^"]+") at (\d)(?:st|nd|rd|th) position$/
-     */
+    #[Then('/^I should see variant with ("[^"]+" option) and ("[^"]+" option value) priced at ("[^"]+") at (\d)(?:st|nd|rd|th) position$/')]
     public function iShouldSeeVariantWithOptionPricedAtAtPosition(
         string $expectedOptionName,
         string $expectedOptionValueValue,
@@ -325,9 +287,7 @@ final class ProductVariantContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should not see variant with "([^"]+)" option "([^"]+)"$/
-     */
+    #[Then('/^I should not see variant with "([^"]+)" option "([^"]+)"$/')]
     public function iShouldNotSeeVariantWithOptionPricedAt(string $expectedOptionName, string $expectedOptionValueValue): void
     {
         $variants = $this->sharedStorage->get('product_variant_collection');
@@ -344,9 +304,7 @@ final class ProductVariantContext implements Context
         }
     }
 
-    /**
-     * @Then I should not see any variants
-     */
+    #[Then('I should not see any variants')]
     public function iShouldNotSeeAnyVariants(): void
     {
         Assert::same(

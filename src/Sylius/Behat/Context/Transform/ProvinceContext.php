@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -24,12 +25,10 @@ final class ProvinceContext implements Context
     {
     }
 
-    /**
-     * @Transform /^province "([^"]+)"$/
-     * @Transform /^"([^"]+)" province$/
-     * @Transform /^province as "([^"]+)"$/
-     * @Transform :province
-     */
+    #[Transform('/^province "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" province$/')]
+    #[Transform('/^province as "([^"]+)"$/')]
+    #[Transform(':province')]
     public function getProvinceByName(string $provinceName): ProvinceInterface
     {
         /** @var ProvinceInterface|null $province */
@@ -42,9 +41,7 @@ final class ProvinceContext implements Context
         return $province;
     }
 
-    /**
-     * @Transform /^"([^"]*)" and "([^"]*)" provinces$/
-     */
+    #[Transform('/^"([^"]*)" and "([^"]*)" provinces$/')]
     public function getProvincesByName(string ...$provinceNames): array
     {
         return $this->provinceRepository->findBy(['name' => $provinceNames]);

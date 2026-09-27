@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Taxation\Resolver;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Taxation\Checker\TaxRateDateEligibilityCheckerInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolver;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxRateResolverTest extends TestCase
 {
     /** @var RepositoryInterface<TaxRateInterface>&MockObject */

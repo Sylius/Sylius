@@ -17,7 +17,6 @@ use Sylius\Bundle\CoreBundle\OrderPay\Processor\RouteParametersProcessorInterfac
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/** @experimental */
 final class UrlProvider implements UrlProviderInterface
 {
     /**

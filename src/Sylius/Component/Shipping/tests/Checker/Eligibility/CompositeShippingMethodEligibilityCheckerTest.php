@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Shipping\Checker\Eligibility;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Shipping\Checker\Eligibility\CompositeShippingMethodEligibilityChecker;
@@ -20,6 +21,7 @@ use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheck
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CompositeShippingMethodEligibilityCheckerTest extends TestCase
 {
     private MockObject&ShippingMethodEligibilityCheckerInterface $firstShippingMethodEligibilityChecker;

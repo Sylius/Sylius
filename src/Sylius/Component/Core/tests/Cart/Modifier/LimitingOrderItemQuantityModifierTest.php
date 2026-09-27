@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Cart\Modifier;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class LimitingOrderItemQuantityModifierTest extends TestCase
 {
     private MockObject&OrderItemQuantityModifierInterface $itemQuantityModifier;

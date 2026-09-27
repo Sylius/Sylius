@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\StateResolver;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\StateResolver\CheckoutStateResolver;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CheckoutStateResolverTest extends TestCase
 {
     private MockObject&StateMachineInterface $stateMachine;

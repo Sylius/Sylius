@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 
 final class CalendarContext implements Context
 {
@@ -21,9 +22,7 @@ final class CalendarContext implements Context
     {
     }
 
-    /**
-     * @Given it is :dateTime now
-     */
+    #[Given('it is :dateTime now')]
     public function itIsNow(string $dateTime): void
     {
         file_put_contents($this->dateFilePath, $dateTime);

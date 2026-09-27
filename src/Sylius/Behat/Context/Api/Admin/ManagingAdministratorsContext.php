@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestBuilder;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -41,39 +44,31 @@ final class ManagingAdministratorsContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^I am editing (my) details$/
-     * @When /^I want to edit (this administrator)$/
-     */
+    #[Given('/^I am editing (my) details$/')]
+    #[When('/^I want to edit (this administrator)$/')]
     public function iWantToEditThisAdministrator(AdminUserInterface $adminUser): void
     {
         $this->client->buildUpdateRequest(Resources::ADMINISTRATORS, (string) $adminUser->getId());
     }
 
-    /**
-     * @When I browse administrators
-     * @When I want to browse administrators
-     * @When I try to browse administrators
-     */
+    #[When('I browse administrators')]
+    #[When('I want to browse administrators')]
+    #[When('I try to browse administrators')]
     public function iBrowseAdministrators(): void
     {
         $this->client->index(Resources::ADMINISTRATORS);
         $this->sharedStorage->set('last_response', $this->client->getLastResponse());
     }
 
-    /**
-     * @When I want to create a new administrator
-     */
+    #[When('I want to create a new administrator')]
     public function iWantToCreateANewAdministrator(): void
     {
         $this->client->buildCreateRequest(Resources::ADMINISTRATORS);
     }
 
-    /**
-     * @When I specify its email as :email
-     * @When I do not specify its email
-     * @When I change its email to :email
-     */
+    #[When('I specify its email as :email')]
+    #[When('I do not specify its email')]
+    #[When('I change its email to :email')]
     public function iSpecifyItsEmailAs(?string $email = null): void
     {
         if ($email !== null) {
@@ -81,11 +76,9 @@ final class ManagingAdministratorsContext implements Context
         }
     }
 
-    /**
-     * @When I specify its name as :username
-     * @When I do not specify its name
-     * @When I change its name to :username
-     */
+    #[When('I specify its name as :username')]
+    #[When('I do not specify its name')]
+    #[When('I change its name to :username')]
     public function iSpecifyItsNameAs(?string $username = null): void
     {
         if ($username !== null) {
@@ -93,19 +86,15 @@ final class ManagingAdministratorsContext implements Context
         }
     }
 
-    /**
-     * @When I specify its :field as too long string
-     */
+    #[When('I specify its :field as too long string')]
     public function iSpecifyItsFieldAsTooLongString(string $field): void
     {
         $this->client->addRequestData(StringInflector::nameToCamelCase(lcfirst(trim(ucwords($field)))), str_repeat('a', 256));
     }
 
-    /**
-     * @When I specify its password as :password
-     * @When I do not specify its password
-     * @When I change its password to :password
-     */
+    #[When('I specify its password as :password')]
+    #[When('I do not specify its password')]
+    #[When('I change its password to :password')]
     public function iSpecifyItsPasswordAs(?string $password = null): void
     {
         if ($password !== null) {
@@ -113,49 +102,61 @@ final class ManagingAdministratorsContext implements Context
         }
     }
 
-    /**
-     * @When I specify its locale as :localeCode
-     */
+    #[When('I specify its locale as :localeCode')]
     public function iSpecifyItsLocaleAs(string $localeCode): void
     {
         $this->client->addRequestData('localeCode', $localeCode);
     }
 
-    /**
-     * @When I specify its locale as a wrong code
-     */
+    #[When('I specify its locale as a wrong code')]
     public function iSpecifyItsLocaleAsWrongCode(): void
     {
         $this->client->addRequestData('localeCode', 'wr_ONG');
     }
 
-    /**
-     * @When I enable it
-     */
+    #[When('I enable it')]
     public function iEnableIt(): void
     {
         $this->client->addRequestData('enabled', true);
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I grant it administration access')]
+    public function iGrantItAdministrationAccess(): void
+    {
+        $this->client->addRequestData('administrationAccess', true);
+    }
+
+    #[When('I revoke its administration access')]
+    public function iRevokeItsAdministrationAccess(): void
+    {
+        $this->client->addRequestData('administrationAccess', false);
+    }
+
+    #[When('I grant it API access')]
+    public function iGrantItApiAccess(): void
+    {
+        $this->client->addRequestData('apiAccess', true);
+    }
+
+    #[When('I revoke its API access')]
+    public function iRevokeItsApiAccess(): void
+    {
+        $this->client->addRequestData('apiAccess', false);
+    }
+
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I delete administrator with email :adminUser
-     */
+    #[When('I delete administrator with email :adminUser')]
     public function iDeleteAdministratorWithEmail(AdminUserInterface $adminUser): void
     {
         $this->client->delete(Resources::ADMINISTRATORS, (string) $adminUser->getId());
     }
 
-    /**
-     * @When /^I (?:upload|update) the "([^"]+)" image as (my) avatar$/
-     */
+    #[When('/^I (?:upload|update) the "([^"]+)" image as (my) avatar$/')]
     public function iUploadTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         $builder = RequestBuilder::createPost(
@@ -171,9 +172,7 @@ final class ManagingAdministratorsContext implements Context
         $this->sharedStorage->set(StringInflector::nameToCode($avatar), $this->responseChecker->getValue($response, '@id'));
     }
 
-    /**
-     * @When I remove the avatar
-     */
+    #[When('I remove the avatar')]
     public function iRemoveTheAvatarImage(): void
     {
         /** @var AdminUserInterface $administrator */
@@ -187,19 +186,15 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see a single administrator in the list
-     * @Then there should be :count administrators in the list
-     */
+    #[Then('I should see a single administrator in the list')]
+    #[Then('there should be :count administrators in the list')]
     public function iShouldSeeAdministratorsInTheList(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then the administrator :email should appear in the store
-     * @Then I should see the administrator :email in the list
-     */
+    #[Then('the administrator :email should appear in the store')]
+    #[Then('I should see the administrator :email in the list')]
     public function theAdministratorShouldAppearInTheStore(string $email): void
     {
         Assert::true(
@@ -208,9 +203,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then there should not be :email administrator anymore
-     */
+    #[Then('there should not be :email administrator anymore')]
     public function thereShouldNotBeAdministratorAnymore(string $email): void
     {
         Assert::false(
@@ -219,9 +212,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one administrator with an email :email
-     */
+    #[Then('there should still be only one administrator with an email :email')]
     public function thereShouldStillBeOnlyOneAdministratorWithAnEmail(string $email): void
     {
         Assert::count(
@@ -231,10 +222,8 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then there should still be only one administrator with name :username
-     * @Then this administrator with name :username should appear in the store
-     */
+    #[Then('there should still be only one administrator with name :username')]
+    #[Then('this administrator with name :username should appear in the store')]
     public function thisAdministratorWithNameShouldAppearInTheStore(string $username): void
     {
         Assert::count(
@@ -244,9 +233,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -255,9 +242,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(
@@ -266,9 +251,53 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that email must be unique
-     */
+    #[Then('/^(this administrator) should have administration access$/')]
+    #[Then('the administrator :adminUser should have administration access')]
+    public function administratorShouldHaveAdministrationAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->hasAdministratorValue($adminUser, 'administrationAccess', true));
+    }
+
+    #[Then('/^(this administrator) should not have administration access$/')]
+    #[Then('the administrator :adminUser should not have administration access')]
+    public function administratorShouldNotHaveAdministrationAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->hasAdministratorValue($adminUser, 'administrationAccess', false));
+    }
+
+    #[Then('/^(this administrator) should have API access$/')]
+    #[Then('the administrator :adminUser should have API access')]
+    public function administratorShouldHaveApiAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->hasAdministratorValue($adminUser, 'apiAccess', true));
+    }
+
+    #[Then('/^(this administrator) should not have API access$/')]
+    #[Then('the administrator :adminUser should not have API access')]
+    public function administratorShouldNotHaveApiAccess(AdminUserInterface $adminUser): void
+    {
+        Assert::true($this->hasAdministratorValue($adminUser, 'apiAccess', false));
+    }
+
+    #[Then('I should be notified that at least one access level must be selected')]
+    public function iShouldBeNotifiedThatAtLeastOneAccessLevelMustBeSelected(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'administrationAccess: Please select at least one access level.',
+        );
+    }
+
+    #[Then('I should be notified that I cannot revoke my own administration access')]
+    public function iShouldBeNotifiedThatICannotRevokeMyOwnAdministrationAccess(): void
+    {
+        Assert::contains(
+            $this->responseChecker->getError($this->client->getLastResponse()),
+            'administrationAccess: You cannot revoke your own administration access.',
+        );
+    }
+
+    #[Then('I should be notified that email must be unique')]
     public function iShouldBeNotifiedThatEmailMustBeUnique(): void
     {
         Assert::contains(
@@ -277,9 +306,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that name must be unique
-     */
+    #[Then('I should be notified that name must be unique')]
     public function iShouldBeNotifiedThatNameMustBeUnique(): void
     {
         Assert::contains(
@@ -288,9 +315,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the :elementName is required
-     */
+    #[Then('I should be notified that the :elementName is required')]
     public function iShouldBeNotifiedThatFirstNameIsRequired(string $elementName): void
     {
         Assert::contains(
@@ -299,9 +324,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that this email is not valid
-     */
+    #[Then('I should be notified that this email is not valid')]
     public function iShouldBeNotifiedThatEmailIsNotValid(): void
     {
         Assert::contains(
@@ -310,9 +333,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that this :field is too long
-     */
+    #[Then('I should be notified that this :field is too long')]
     public function iShouldBeNotifiedThatThisFieldIsTooLong(string $field): void
     {
         Assert::contains(
@@ -321,9 +342,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that this value is not valid locale
-     */
+    #[Then('I should be notified that this value is not valid locale')]
     public function iShouldBeNotifiedThatThisValueIsNotValidLocale(): void
     {
         Assert::contains(
@@ -332,9 +351,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it cannot be deleted
-     */
+    #[Then('I should be notified that it cannot be deleted')]
     public function iShouldBeNotifiedThatItCannotBeDeleted(): void
     {
         Assert::false(
@@ -347,9 +364,7 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see the "([^"]*)" image as (my) avatar$/
-     */
+    #[Then('/^I should see the "([^"]*)" image as (my) avatar$/')]
     public function iShouldSeeTheImageAsMyAvatar(string $avatar, AdminUserInterface $administrator): void
     {
         Assert::true($this->responseChecker->hasValue(
@@ -359,9 +374,7 @@ final class ManagingAdministratorsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should not see the :avatar avatar image in the additional information section of my account
-     */
+    #[Then('I should not see the :avatar avatar image in the additional information section of my account')]
     public function iShouldNotSeeTheAvatarImage(string $avatar): void
     {
         /** @var AdminUserInterface $administrator */
@@ -374,9 +387,7 @@ final class ManagingAdministratorsContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that this email is not valid in :locale locale
-     */
+    #[Then('I should be notified that this email is not valid in :locale locale')]
     public function iShouldBeNotifiedThatEmailIsNotValidInLocale(LocaleInterface $locale): void
     {
         Assert::contains(
@@ -386,12 +397,19 @@ final class ManagingAdministratorsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the :avatar avatar image in the top bar next to my name
-     * @Then I should not see the :avatar avatar image in the top bar next to my name
-     */
+    #[Then('I should see the :avatar avatar image in the top bar next to my name')]
+    #[Then('I should not see the :avatar avatar image in the top bar next to my name')]
     public function iShouldSeeTheAvatarImageInTheTopBarNextToMyName(string $avatar): void
     {
         // intentionally left blank, as it is ui step
+    }
+
+    private function hasAdministratorValue(AdminUserInterface $adminUser, string $key, bool $value): bool
+    {
+        return $this->responseChecker->hasValue(
+            $this->client->show(Resources::ADMINISTRATORS, (string) $adminUser->getId()),
+            $key,
+            $value,
+        );
     }
 }

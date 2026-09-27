@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Inventory\Operator;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Inventory\Exception\NotEnoughUnitsOnHandException;
@@ -25,6 +26,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderInventoryOperatorTest extends TestCase
 {
     private MockObject&OrderInterface $order;

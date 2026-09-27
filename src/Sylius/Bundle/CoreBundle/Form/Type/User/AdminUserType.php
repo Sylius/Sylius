@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Form\Type\User;
 
 use Sylius\Bundle\UserBundle\Form\Type\UserType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,6 +42,14 @@ final class AdminUserType extends UserType
             ->add('localeCode', LocaleType::class, $this->provideLocaleCodeOptions())
             ->add('avatar', AvatarImageType::class, [
                 'label' => 'sylius.ui.avatar',
+                'required' => false,
+            ])
+            ->add('administrationAccess', CheckboxType::class, [
+                'label' => 'sylius.form.admin_user.administration_access',
+                'required' => false,
+            ])
+            ->add('apiAccess', CheckboxType::class, [
+                'label' => 'sylius.form.admin_user.api_access',
                 'required' => false,
             ])
         ;

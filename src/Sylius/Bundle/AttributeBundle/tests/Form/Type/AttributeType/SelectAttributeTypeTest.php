@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\SelectAttributeType;
@@ -22,6 +23,7 @@ use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\PreloadedExtension;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SelectAttributeTypeTest extends TypeTestCase
 {
     private MockObject&TranslationLocaleProviderInterface $translationProvider;

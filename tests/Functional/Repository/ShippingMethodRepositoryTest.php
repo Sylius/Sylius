@@ -75,10 +75,10 @@ final class ShippingMethodRepositoryTest extends KernelTestCase
      */
     private function getShippingMethodCodes(array $shippingMethods): array
     {
-        return array_map(
+        return array_values(array_map(
             static fn (ShippingMethodInterface $method): string => $method->getCode(),
             $shippingMethods,
-        );
+        ));
     }
 
     private function loadFixtures(): void

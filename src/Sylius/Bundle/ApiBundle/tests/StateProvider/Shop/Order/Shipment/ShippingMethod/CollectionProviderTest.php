@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProvider\Shop\Order\Shipment\Shippi
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -28,6 +29,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CollectionProviderTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;

@@ -16,6 +16,7 @@ Feature: Adding a new coupon
         And I specify its code as "SANTA2016"
         And I limit its usage to 100 times
         And I limit its per customer usage to 50 times
+        And I enable track usage for it
         And I make it valid until "21.04.2017"
         And I add it
         Then I should be notified that it has been successfully created

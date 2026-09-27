@@ -40,4 +40,10 @@ interface PromotionCouponInterface extends CodeAwareInterface, TimestampableInte
     public function setExpiresAt(?\DateTimeInterface $expiresAt): void;
 
     public function isValid(): bool;
+
+    public function isTrackUsage(): bool;
+
+    public function setTrackUsage(bool $trackUsage): void;
+
+    public function getTrackUsageSince(): ?\DateTimeImmutable;
 }

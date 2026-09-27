@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,11 +24,9 @@ final class ProductOptionContext implements Context
     {
     }
 
-    /**
-     * @Transform /^product option "([^"]+)"$/
-     * @Transform /^"([^"]+)" option$/
-     * @Transform :productOption
-     */
+    #[Transform('/^product option "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" option$/')]
+    #[Transform(':productOption')]
     public function getProductOptionByName($productOptionName)
     {
         $productOptions = $this->productOptionRepository->findByName($productOptionName, 'en_US');

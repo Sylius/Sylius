@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Taxation\Applicator;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -28,6 +29,7 @@ use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderShipmentTaxesApplicatorTest extends TestCase
 {
     private CalculatorInterface&MockObject $calculator;

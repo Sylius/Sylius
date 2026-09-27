@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShippingBundle\Validator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShippingBundle\Validator\Constraint\ShippingMethodCalculatorExists;
@@ -23,6 +24,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingMethodCalculatorExistsValidatorTest extends TestCase
 {
     private ExecutionContextInterface&MockObject $executionContext;
@@ -58,7 +60,7 @@ final class ShippingMethodCalculatorExistsValidatorTest extends TestCase
 
         $this->executionContext
             ->expects($this->once())->method('buildViolation')
-            ->with((new ShippingMethodCalculatorExists())->invalidShippingCalculator)
+            ->with((new ShippingMethodCalculatorExists())->invalidShippingCalculatorMessage)
             ->willReturn($constraintViolationBuilder)
         ;
         $constraintViolationBuilder->expects($this->once())->method('setParameter')->willReturn($constraintViolationBuilder);

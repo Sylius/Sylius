@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Payment\Resolver;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Payment\Resolver\CompositeMethodsResolver;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CompositeMethodsResolverTest extends TestCase
 {
     private MockObject $resolversRegistry;

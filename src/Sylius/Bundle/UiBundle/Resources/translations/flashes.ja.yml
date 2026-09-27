@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: 'プロモーションルールで使用されている分類は削除できません。'
         menu_taxon_delete: 'チャネルのメニュー分類は削除できません。'
+    user:
+        verification_email_sent: '入力されたメールアドレスがアカウントに関連付けられている場合、認証メールが送信されました。'

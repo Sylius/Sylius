@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\AttributeBundle\Validator\Constraints;
 
 use DateTime;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue;
@@ -26,6 +27,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ValidAttributeValueValidatorTest extends TestCase
 {
     private MockObject&ServiceRegistryInterface $attributeTypesRegistry;

@@ -20,8 +20,10 @@ final class PromotionCouponUsageLimitEligibilityChecker implements PromotionCoup
 {
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionCouponInterface $promotionCoupon): bool
     {
-        $usageLimit = $promotionCoupon->getUsageLimit();
+        if ((null === $usageLimit = $promotionCoupon->getUsageLimit()) || false === $promotionCoupon->isTrackUsage()) {
+            return true;
+        }
 
-        return $usageLimit === null || $promotionCoupon->getUsed() < $usageLimit;
+        return $promotionCoupon->getUsed() < $usageLimit;
     }
 }

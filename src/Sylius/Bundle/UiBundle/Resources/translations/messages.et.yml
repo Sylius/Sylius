@@ -37,6 +37,7 @@ sylius:
         province: 'Provints'
         provinces: 'Provintsid'
         roles: 'Rollid'
+        resend_verification_email: 'Saada kinnitusmeili uuesti'
         scope: 'Ulatus'
         select: 'Vali'
         short_description: 'Lühikirjeldus'
@@ -46,4 +47,5 @@ sylius:
         title: 'Pealkiri'
         to: 'Kellele'
         type: 'Tüüp'
+        verification_email_not_received: 'Verification email not received?'
         zone: 'Piirkond'

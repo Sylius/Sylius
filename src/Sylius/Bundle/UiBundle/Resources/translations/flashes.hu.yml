@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'Csak %quantity% van raktáron ebből a termekből.'
     product_variant:
         update_error: 'Váratlan probléma volt a termékváltozat frissítésével. Kérjük, próbálja frissíteni a termékváltozatot.'
+    user:
+        verification_email_sent: 'Ha a megadott e-mail-cím fiókhoz van rendelve, megerősítő e-mailt küldtünk.'

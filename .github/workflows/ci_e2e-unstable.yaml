@@ -24,8 +24,8 @@ jobs:
             matrix:
                 include:
                     -
-                        php: "8.3"
-                        symfony: "^7.4@beta"
+                        php: "8.4"
+                        symfony: "~8.1.0"
                         mysql: "8.4"
 
         env:

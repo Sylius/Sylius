@@ -50,11 +50,9 @@ final readonly class GeographicalContext implements Context
         }
     }
 
-    /**
-     * @Given /^the store operates in "([^"]*)"$/
-     * @Given /^the store operates in "([^"]*)" and "([^"]*)"$/
-     * @Given /^the store(?:| also) has country "([^"]*)"$/
-     */
+    #[Given('/^the store operates in "([^"]*)"$/')]
+    #[Given('/^the store operates in "([^"]*)" and "([^"]*)"$/')]
+    #[Given('/^the store(?:| also) has country "([^"]*)"$/')]
     public function theStoreOperatesIn(string ...$countriesNames): void
     {
         foreach ($countriesNames as $countryName) {
@@ -65,9 +63,7 @@ final readonly class GeographicalContext implements Context
         }
     }
 
-    /**
-     * @Given /^the store has disabled country "([^"]*)"$/
-     */
+    #[Given('/^the store has disabled country "([^"]*)"$/')]
     public function theStoreHasDisabledCountry(string $countryName): void
     {
         $country = $this->createCountryNamed(trim($countryName));
@@ -77,10 +73,8 @@ final readonly class GeographicalContext implements Context
         $this->countryRepository->add($country);
     }
 
-    /**
-     * @Given /^(this country)(?:| also) has the "([^"]+)" province with "([^"]+)" code$/
-     * @Given /^(?:|the )(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
-     */
+    #[Given('/^(this country)(?:| also) has the "([^"]+)" province with "([^"]+)" code$/')]
+    #[Given('/^(?:|the )(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/')]
     public function theCountryHasProvinceWithCode(CountryInterface $country, string $name, string $code): void
     {
         $province = $this->provinceFactory->createNew();

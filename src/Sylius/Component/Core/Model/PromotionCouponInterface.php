@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Promotion\Model\PromotionCouponInterface as BasePromotionCouponInterface;
+use Sylius\Resource\Model\VersionedInterface;
 
-interface PromotionCouponInterface extends BasePromotionCouponInterface
+interface PromotionCouponInterface extends BasePromotionCouponInterface, VersionedInterface
 {
     public function getPerCustomerUsageLimit(): ?int;
 

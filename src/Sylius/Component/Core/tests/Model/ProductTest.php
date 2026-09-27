@@ -15,6 +15,7 @@ namespace Tests\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ImageInterface;
@@ -26,6 +27,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductTest extends TestCase
 {
     private MockObject&ProductVariantInterface $productVariant;

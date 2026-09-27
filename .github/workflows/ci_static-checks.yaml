@@ -51,7 +51,7 @@ jobs:
             matrix: ${{ fromJson(needs.get-matrix.outputs.matrix) }}
         env:
             APP_ENV: test_cached
-            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=8.0"
+            DATABASE_URL: "mysql://root:root@127.0.0.1/sylius?charset=utf8mb4&serverVersion=8.4"
         steps:
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
@@ -90,8 +90,15 @@ jobs:
                     key: ${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}
 
             -   name: "Require ext-random"
-                if: matrix.php == '8.2'
+                if: matrix.php == '8.3'
                 run: composer require ext-random --no-update --no-scripts --no-interaction
+
+            # TODO: Remove once API Platform 5.0.1 is released,
+            # API Platform 5.0.0 registers the "test.api_platform.client" service even when api-platform/test is not installed
+            # see https://github.com/api-platform/core/issues/8571
+            -   name: "Require API Platform test package on Symfony 7.4+"
+                if: matrix.symfony != '~6.4.0'
+                run: composer require --dev --no-update --no-interaction "api-platform/test:^5.0"
 
             -   name: "Install dependencies"
                 run: composer update --no-interaction --no-scripts
@@ -119,15 +126,11 @@ jobs:
                 run: vendor/bin/monorepo-builder validate
 
             -   name: Run PHPArkitect
-                if: matrix.php != '8.5'
+                if: inputs.branch != '2.2' || matrix.php != '8.5'
                 run: vendor/bin/phparkitect check
 
             -   name: Run PHPStan
                 run: vendor/bin/phpstan analyse
-
-            -   name: Run PHPSpec
-                if: ${{ inputs.branch == '1.14' }}
-                run: vendor/bin/phpspec run --ansi --no-interaction -f dot
 
             -   name: Run ComposerRequireChecker
                 run: |

@@ -15,6 +15,7 @@ namespace Statistics\Provider;
 
 namespace Tests\Sylius\Component\Core\Statistics\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -25,6 +26,7 @@ use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
 use Sylius\Component\Core\Statistics\ValueObject\BusinessActivitySummary;
 use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
+#[AllowMockObjectsWithoutExpectations]
 final class StatisticsProviderTest extends TestCase
 {
     private MockObject&SalesStatisticsProviderInterface $salesProvider;

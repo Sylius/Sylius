@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Behat\Service;
 
 use Behat\Mink\Mink;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Behat\Service\SecurityServiceInterface;
@@ -22,6 +23,7 @@ use Sylius\Behat\Service\SessionManagerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SessionManagerTest extends TestCase
 {
     private Mink&MockObject $mink;

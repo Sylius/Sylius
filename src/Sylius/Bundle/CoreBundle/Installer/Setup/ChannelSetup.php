@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Installer\Setup;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -33,8 +34,11 @@ final class ChannelSetup implements ChannelSetupInterface
     ) {
     }
 
-    public function setup(LocaleInterface $locale, CurrencyInterface $currency): void
-    {
+    public function setup(
+        LocaleInterface $locale,
+        CurrencyInterface $currency,
+        ?CountryInterface $country = null,
+    ): void {
         /** @var ChannelInterface|null $channel */
         $channel = $this->channelRepository->findOneBy([]);
 
@@ -52,6 +56,10 @@ final class ChannelSetup implements ChannelSetupInterface
         $channel->setBaseCurrency($currency);
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
+
+        if (null !== $country) {
+            $channel->addCountry($country);
+        }
 
         $this->channelManager->flush();
     }

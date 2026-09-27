@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email_not_verified: 'Twoje konto nie zostało jeszcze zweryfikowane. Sprawdź skrzynkę odbiorczą poczty e-mail.'

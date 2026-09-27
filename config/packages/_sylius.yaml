@@ -8,6 +8,8 @@ imports:
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
+    sylius_core.grids_configuration:
+        use_legacy_config: '%env(bool:TEST_SYLIUS_USE_LEGACY_GRID_CONFIG)%'
 
 sylius_api:
     enabled: true

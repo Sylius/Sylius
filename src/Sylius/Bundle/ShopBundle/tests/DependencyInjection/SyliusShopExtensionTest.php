@@ -117,6 +117,32 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     }
 
     #[Test]
+    public function it_configures_default_order_pay_parameters(): void
+    {
+        $this->load([]);
+
+        $this->assertContainerBuilderHasParameter('sylius_shop.order_pay.payum_after_pay_route', 'sylius_shop_order_after_pay');
+        $this->assertContainerBuilderHasParameter('sylius_shop.order_pay.payum_after_pay_route_parameters', []);
+    }
+
+    #[Test]
+    public function it_configures_order_pay_parameters(): void
+    {
+        $this->load([
+            'order_pay' => [
+                'payum_after_pay_route' => 'app_shop_order_after_pay',
+                'payum_after_pay_route_parameters' => ['tokenValue' => 'fixed-token-value'],
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter('sylius_shop.order_pay.payum_after_pay_route', 'app_shop_order_after_pay');
+        $this->assertContainerBuilderHasParameter(
+            'sylius_shop.order_pay.payum_after_pay_route_parameters',
+            ['tokenValue' => 'fixed-token-value'],
+        );
+    }
+
+    #[Test]
     public function it_prepends_sylius_theme_configuration_with_channel_based_context(): void
     {
         $this->container->registerExtension(new SyliusThemeExtension());

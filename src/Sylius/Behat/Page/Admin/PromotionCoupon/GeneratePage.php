@@ -52,6 +52,11 @@ class GeneratePage extends BasePage implements GeneratePageInterface
         $this->getElement('usage_limit')->setValue($limit);
     }
 
+    public function toggleTrackUsage(bool $trackUsage): void
+    {
+        $this->getElement('track_usage')->setValue($trackUsage);
+    }
+
     public function getFormValidationMessage(): string
     {
         return $this->getElement('form_validation_message')->getText();
@@ -67,6 +72,7 @@ class GeneratePage extends BasePage implements GeneratePageInterface
             'generate_button' => '[data-test-generate-button]',
             'prefix' => '[data-test-prefix]',
             'suffix' => '[data-test-suffix]',
+            'track_usage' => '[data-test-track-usage]',
             'usage_limit' => '[data-test-usage-limit]',
         ]);
     }

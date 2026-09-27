@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Updater;
 
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
@@ -25,6 +26,7 @@ use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater;
 use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
 use Sylius\Component\Order\OrderTransitions;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UnpaidOrdersStateUpdaterTest extends TestCase
 {
     private MockObject&OrderRepositoryInterface $orderRepository;

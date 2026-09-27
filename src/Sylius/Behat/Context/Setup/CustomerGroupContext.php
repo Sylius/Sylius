@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
@@ -29,19 +30,15 @@ final class CustomerGroupContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has a customer group :name
-     * @Given the store has a customer group :name with :code code
-     */
+    #[Given('the store has a customer group :name')]
+    #[Given('the store has a customer group :name with :code code')]
     public function theStoreHasACustomerGroup($name, $code = null)
     {
         $this->createCustomerGroup($name, $code);
     }
 
-    /**
-     * @Given the store has customer groups :firstName and :secondName
-     * @Given the store has customer groups :firstName, :secondName and :thirdName
-     */
+    #[Given('the store has customer groups :firstName and :secondName')]
+    #[Given('the store has customer groups :firstName, :secondName and :thirdName')]
     public function theStoreHasCustomerGroups(string ...$names): void
     {
         foreach ($names as $name) {

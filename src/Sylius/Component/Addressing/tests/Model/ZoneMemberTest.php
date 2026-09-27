@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Addressing\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMember;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ZoneMemberTest extends TestCase
 {
     private ZoneMember $zoneMember;

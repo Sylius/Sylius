@@ -13,18 +13,19 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Checker\Eligibility;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Shipping\Checker\Eligibility\ZoneEligibilityChecker;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ZoneEligibilityCheckerTest extends TestCase
 {
     private ZoneMatcherInterface $zoneMatcher;
@@ -89,7 +90,6 @@ final class ZoneEligibilityCheckerTest extends TestCase
 
         $this->zoneMatcher
             ->method('matchAll')
-            ->with($this->address, Scope::SHIPPING)
             ->willReturn([$this->zone1, $this->zone2]);
 
         $this->shippingMethod->method('getZone')->willReturn($this->shippingMethodZone);
@@ -108,7 +108,6 @@ final class ZoneEligibilityCheckerTest extends TestCase
 
         $this->zoneMatcher
             ->method('matchAll')
-            ->with($this->address, Scope::SHIPPING)
             ->willReturn([$this->zone1, $this->zone2]);
 
         $this->shippingMethod->method('getZone')->willReturn($this->shippingMethodZone);

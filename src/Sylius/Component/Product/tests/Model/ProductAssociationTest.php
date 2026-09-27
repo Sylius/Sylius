@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Product\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Model\ProductAssociation;
@@ -20,6 +21,7 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationType;
 use Sylius\Component\Product\Model\ProductInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductAssociationTest extends TestCase
 {
     private ProductAssociation $productAssociation;

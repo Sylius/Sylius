@@ -15,12 +15,14 @@ namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\DoctrineCollectionValuesNormalizer;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class DoctrineCollectionValuesNormalizerTest extends TestCase
 {
     private DoctrineCollectionValuesNormalizer $doctrineCollectionValuesNormalizer;

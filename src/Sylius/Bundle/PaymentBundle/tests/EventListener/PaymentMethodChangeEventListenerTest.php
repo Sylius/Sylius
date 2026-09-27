@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\PaymentBundle\EventListener;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PostUpdateEventArgs;
 use Doctrine\ORM\UnitOfWork;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\EventListener\PaymentMethodChangeEventListener;
@@ -23,6 +24,7 @@ use Sylius\Component\Payment\Canceller\PaymentRequestCancellerInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PaymentMethodChangeEventListenerTest extends TestCase
 {
     #[Test]
@@ -104,7 +106,7 @@ final class PaymentMethodChangeEventListenerTest extends TestCase
         $listener->postUpdate($args);
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_update_if_new_payment_method_is_null(): void
     {
         $paymentRequestCanceller = $this->createMock(PaymentRequestCancellerInterface::class);

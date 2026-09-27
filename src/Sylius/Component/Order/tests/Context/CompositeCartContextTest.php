@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Order\Context;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Context\CompositeCartContext;
 use Sylius\Component\Order\Model\OrderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CompositeCartContextTest extends TestCase
 {
     private CompositeCartContext $context;

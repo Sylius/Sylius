@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Security;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetter;
@@ -22,6 +23,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UserPasswordResetterTest extends TestCase
 {
     private MockObject&UserRepositoryInterface $userRepository;

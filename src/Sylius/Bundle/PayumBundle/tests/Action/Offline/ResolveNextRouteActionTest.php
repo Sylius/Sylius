@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\PayumBundle\Action\Offline;
 
 use Payum\Core\Action\ActionInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ResolveNextRouteActionTest extends TestCase
 {
     private ResolveNextRouteAction $resolveNextRouteAction;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Promotion;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Promotion\GeneratePromotionCoupon;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GeneratePromotionCouponHandlerTest extends TestCase
 {
     private MockObject&PromotionRepositoryInterface $promotionRepository;

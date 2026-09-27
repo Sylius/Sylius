@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Behat\Service\SharedStorageInterface;
 
 class UserContext implements Context
@@ -22,9 +23,7 @@ class UserContext implements Context
     {
     }
 
-    /**
-     * @Transform /^(I|my|he|his|she|her|"this user")$/
-     */
+    #[Transform('/^(I|my|he|his|she|her|"this user")$/')]
     public function getLoggedUser()
     {
         return $this->sharedStorage->get('user');

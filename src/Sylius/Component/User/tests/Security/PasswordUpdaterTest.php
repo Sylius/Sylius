@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\User\Security;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\User\Model\UserInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\User\Security\PasswordUpdater;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PasswordUpdaterTest extends TestCase
 {
     /** @var UserPasswordHasherInterface&MockObject */

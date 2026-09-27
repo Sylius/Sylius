@@ -4,3 +4,5 @@
 sylius:
     channel:
         delete_error: 'Kanal ne može biti obrisan. Jedan kanal mora biti aktivan.'
+    user:
+        verification_email_sent: 'Ako je unesena e-mail adresa povezana sa nalogom, poslan je verifikacioni imejl.'

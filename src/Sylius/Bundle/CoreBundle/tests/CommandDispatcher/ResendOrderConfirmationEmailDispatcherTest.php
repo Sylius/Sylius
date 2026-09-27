@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\CommandDispatcher;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Command\ResendOrderConfirmationEmail;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ResendOrderConfirmationEmailDispatcherTest extends TestCase
 {
     private MessageBusInterface&MockObject $messageBus;

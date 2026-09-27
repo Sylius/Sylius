@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\OrderBundle\Remover;
 
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\OrderBundle\Remover\ExpiredCartsRemover;
@@ -23,6 +24,7 @@ use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ExpiredCartsRemoverTest extends TestCase
 {
     private MockObject&OrderRepositoryInterface $orderRepository;

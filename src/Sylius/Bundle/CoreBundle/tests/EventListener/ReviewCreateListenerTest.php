@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\ReviewCreateListener;
@@ -22,6 +23,7 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ReviewCreateListenerTest extends TestCase
 {
     private CustomerContextInterface&MockObject $customerContext;

@@ -16,6 +16,7 @@ namespace Tests\Sylius\Behat\Service\Converter;
 use ApiPlatform\Metadata\IriConverterInterface as BaseIriConverterInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\UrlGeneratorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Behat\Service\Converter\IriConverter;
@@ -25,6 +26,7 @@ use Sylius\Bundle\ApiBundle\Resolver\OperationResolverInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class IriConverterTest extends TestCase
 {
     private BaseIriConverterInterface&MockObject $decoratedIriConverter;

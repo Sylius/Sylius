@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: '프로모션 규칙에 사용 중인 택슨은 삭제할 수 없습니다.'
         menu_taxon_delete: '어떤 채널의 메뉴 택슨도 삭제할 수 없습니다.'
+    user:
+        verification_email_sent: '입력하신 이메일 주소가 계정과 연결되어 있는 경우, 인증 이메일이 발송되었습니다.'

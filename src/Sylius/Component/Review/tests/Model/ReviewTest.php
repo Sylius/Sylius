@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Review\Model;
 
 use DateTime;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Review\Model\Review;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ReviewTest extends TestCase
 {
     private ReviewInterface $review;

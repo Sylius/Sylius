@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\OrderProcessing;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderAdjustmentsClearerTest extends TestCase
 {
     private MockObject&OrderInterface $order;

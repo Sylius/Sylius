@@ -19,7 +19,7 @@ use Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 final class SyliusReviewExtension extends AbstractResourceExtension
@@ -27,13 +27,13 @@ final class SyliusReviewExtension extends AbstractResourceExtension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
-        $loader->load('services.xml');
+        $loader->load('services.php');
 
-        $loader->load(sprintf('integrations/%s.xml', $config['driver']));
+        $loader->load(sprintf('integrations/%s.php', $config['driver']));
     }
 
     /**

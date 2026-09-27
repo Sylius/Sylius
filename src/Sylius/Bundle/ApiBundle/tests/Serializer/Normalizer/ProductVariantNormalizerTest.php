@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 use ApiPlatform\Metadata\IriConverterInterface;
 use ApiPlatform\Metadata\UrlGeneratorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -23,7 +24,7 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ProductVariantNormalizer;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
 use Sylius\Component\Core\Exception\MissingChannelConfigurationException;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -32,9 +33,10 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantNormalizerTest extends TestCase
 {
-    private MockObject&ProductVariantPricesCalculatorInterface $pricesCalculator;
+    private CatalogPricesCalculatorInterface&MockObject $pricesCalculator;
 
     private AvailabilityCheckerInterface&MockObject $availabilityChecker;
 
@@ -57,7 +59,7 @@ final class ProductVariantNormalizerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->pricesCalculator = $this->createMock(ProductVariantPricesCalculatorInterface::class);
+        $this->pricesCalculator = $this->createMock(CatalogPricesCalculatorInterface::class);
         $this->availabilityChecker = $this->createMock(AvailabilityCheckerInterface::class);
         $this->sectionProvider = $this->createMock(SectionProviderInterface::class);
         $this->iriConverter = $this->createMock(IriConverterInterface::class);

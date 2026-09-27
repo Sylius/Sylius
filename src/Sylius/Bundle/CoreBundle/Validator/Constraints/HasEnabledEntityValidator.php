@@ -82,7 +82,11 @@ final class HasEnabledEntityValidator extends ConstraintValidator
     private function getProperObjectManager(?string $manager, object $entity): ObjectManager
     {
         if ($manager) {
-            $objectManager = $this->registry->getManager($manager);
+            try {
+                $objectManager = $this->registry->getManager($manager);
+            } catch (\InvalidArgumentException) {
+                $objectManager = null;
+            }
 
             $this->validateObjectManager($objectManager, sprintf('Object manager "%s" does not exist.', $manager));
         } else {

@@ -44,7 +44,10 @@ final class Kernel extends HttpKernel
 
     protected function build(ContainerBuilder $container): void
     {
-        $container->register(SomeTwigComponent::class)->addTag('twig.component', ['template' => 'blocks/twigComponent/someTwigComponent.html.twig']);
+        $container->register(SomeTwigComponent::class)->addTag('twig.component', [
+            'key' => 'some_twig_component',
+            'template' => 'blocks/twigComponent/someTwigComponent.html.twig',
+        ]);
 
         $container->loadFromExtension('framework', [
             'secret' => 'S0ME_SECRET',

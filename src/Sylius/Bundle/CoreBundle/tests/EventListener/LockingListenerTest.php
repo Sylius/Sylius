@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\LockingListener;
@@ -23,6 +24,7 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Model\VersionedInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class LockingListenerTest extends TestCase
 {
     private EntityManagerInterface&MockObject $manager;

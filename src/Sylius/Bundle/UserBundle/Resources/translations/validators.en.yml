@@ -1,5 +1,6 @@
 sylius:
     user:
+        account_disabled: Invalid credentials.
         email:
             not_blank: Please enter your email.
             invalid: This email is invalid.

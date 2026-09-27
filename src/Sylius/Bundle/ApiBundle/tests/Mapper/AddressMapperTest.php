@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Mapper;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Mapper\AddressMapper;
 use Sylius\Component\Core\Model\AddressInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AddressMapperTest extends TestCase
 {
     private AddressMapper $addressMapper;

@@ -41,6 +41,8 @@ sylius:
             not_blank: 'Voer promotiebeschrijving in.'
         end_date_cannot_be_set_prior_start_date: 'Einddatum kan niet vóór de startdatum worden ingesteld.'
         is_invalid: 'Promotie is ongeldig.'
+        usage_limit:
+            min: 'Het gebruikslimiet voor de promotie moet minimaal {{ limit }} zijn.'
         name:
             max_length: 'Promotienaam mag niet langer zijn dan 1 teken.|Promotienaam mag niet langer zijn dan {{ limit }} tekens.'
             min_length: 'Promotienaam moet minstens 1 teken lang zijn.|Promotienaam moet minstens {{ limit }} tekens lang zijn.'

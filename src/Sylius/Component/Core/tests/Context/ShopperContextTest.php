@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Context;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShopperContextTest extends TestCase
 {
     private ChannelContextInterface&MockObject $channelContext;

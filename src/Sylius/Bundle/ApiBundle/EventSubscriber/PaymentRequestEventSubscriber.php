@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-/** @experimental */
 final class PaymentRequestEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(private PaymentRequestAnnouncerInterface $paymentRequestAnnouncer)

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\AdminBundle\EventListener;
 
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\EventListener\ResourceDeleteExceptionListener;
@@ -30,6 +31,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ResourceDeleteExceptionListenerTest extends TestCase
 {
     private MockObject&UrlGeneratorInterface $router;

@@ -1,0 +1,28 @@
+{% set notification = hookable_metadata.context.notification %}
+{% set type = notification.type|default('danger') %}
+
+{% set href = null %}
+{% if notification.uri is defined and notification.uri %}
+    {% set href = notification.uri %}
+{% elseif notification.route is defined and notification.route %}
+    {% set href = path(notification.route, notification.route_parameters|default({})) %}
+{% endif %}
+
+{% set has_link = href is not null %}
+{% set element = has_link ? 'a' : 'div' %}
+
+<{{ element }}
+    class="list-group-item{% if has_link %} list-group-item-action{% endif %}"
+    {% if has_link %}href="{{ href }}"{% endif %}
+>
+    <div class="row align-items-center">
+        <div class="col-auto">
+            <span class="status-dot status-dot-animated bg-{{ type }} d-block"></span>
+        </div>
+        <div class="col">
+            <div class="d-block mt-n1">
+                {{ notification.message|trans(notification.message_parameters|default({}), notification.translation_domain|default(null)) }}
+            </div>
+        </div>
+    </div>
+</{{ element }}>

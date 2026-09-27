@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Addressing\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Model\Country;
@@ -21,6 +22,7 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Resource\Model\CodeAwareInterface;
 use Sylius\Resource\Model\ToggleableInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CountryTest extends TestCase
 {
     private Country $country;

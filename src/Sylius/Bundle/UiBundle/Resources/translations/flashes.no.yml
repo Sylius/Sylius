@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: 'Kan ikke slette en taksonomi som er i bruk av en kampanjeregel.'
         menu_taxon_delete: 'Du kan ikke slette en meny-taksonomi for noen kanal.'
+    user:
+        verification_email_sent: 'Hvis den oppgitte e-postadressen er knyttet til en konto, har det blitt sendt en bekreftelsesmail.'

@@ -15,8 +15,8 @@ namespace Sylius\Bundle\PaymentBundle\Processor;
 
 use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Bundle\PaymentBundle\Provider\ServiceProviderAwareProviderInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 final class HttpResponseProcessor implements HttpResponseProcessorInterface
@@ -28,13 +28,13 @@ final class HttpResponseProcessor implements HttpResponseProcessorInterface
     }
 
     public function process(
-        RequestConfiguration $requestConfiguration,
+        Request $request,
         PaymentRequestInterface $paymentRequest,
     ): ?Response {
         $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 
-        if ($this->httpResponseProvider->supports($requestConfiguration, $paymentRequest)) {
-            return $this->httpResponseProvider->getResponse($requestConfiguration, $paymentRequest);
+        if ($this->httpResponseProvider->supports($request, $paymentRequest)) {
+            return $this->httpResponseProvider->getResponse($request, $paymentRequest);
         }
 
         return null;

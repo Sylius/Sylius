@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -48,9 +49,7 @@ final class CartContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I clear my (cart)$/
-     */
+    #[When('/^I clear my (cart)$/')]
     public function iClearMyCart(string $tokenValue): void
     {
         $this->shopClient->delete(Resources::ORDERS, $tokenValue);
@@ -58,11 +57,9 @@ final class CartContext implements Context
         $this->sharedStorage->remove('cart_token');
     }
 
-    /**
-     * @When /^I see the summary of my (cart)$/
-     * @When /^the visitor try to see the summary of ((?:visitor|customer)'s cart)$/
-     * @When /^the (?:visitor|customer) see the summary of ((?:|their )cart)$/
-     */
+    #[When('/^I see the summary of my (cart)$/')]
+    #[When('/^the visitor try to see the summary of ((?:visitor|customer)\'s cart)$/')]
+    #[When('/^the (?:visitor|customer) see the summary of ((?:|their )cart)$/')]
     public function iSeeTheSummaryOfMyCart(?string $tokenValue): void
     {
         if ($tokenValue === null) {
@@ -78,20 +75,16 @@ final class CartContext implements Context
         $this->shopClient->show(Resources::ORDERS, $cart->getTokenValue());
     }
 
-    /**
-     * @When /^the administrator try to see the summary of ((?:visitor|customer)'s cart)$/
-     */
+    #[When('/^the administrator try to see the summary of ((?:visitor|customer)\'s cart)$/')]
     public function theAdministratorTryToSeeTheSummaryOfCart(?string $tokenValue): void
     {
         $this->adminClient->show(Resources::ORDERS, $tokenValue);
     }
 
-    /**
-     * @When /^I add(?:| the) (this product) to the (cart)$/
-     * @When /^I add(?:| the) ("[^"]+" product) to the (cart)$/
-     * @When /^I add(?:| the) (product "[^"]+") to the (cart)$/
-     * @When /^the (?:visitor|customer) adds(?:| the) ("[^"]+" product) to the (cart)$/
-     */
+    #[When('/^I add(?:| the) (this product) to the (cart)$/')]
+    #[When('/^I add(?:| the) ("[^"]+" product) to the (cart)$/')]
+    #[When('/^I add(?:| the) (product "[^"]+") to the (cart)$/')]
+    #[When('/^the (?:visitor|customer) adds(?:| the) ("[^"]+" product) to the (cart)$/')]
     public function iAddThisProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue);
@@ -99,10 +92,8 @@ final class CartContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
-    /**
-     * @When /^I add (products "([^"]+)" and "([^"]+)") to the cart$/
-     * @When /^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/
-     */
+    #[When('/^I add (products "([^"]+)" and "([^"]+)") to the cart$/')]
+    #[When('/^I add (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/')]
     public function iAddMultipleProductsToTheCart(array $products): void
     {
         $tokenValue = $this->pickupCart();
@@ -112,11 +103,9 @@ final class CartContext implements Context
         }
     }
 
-    /**
-     * @When /^I add (\d+) of (them) to (?:the|my) (cart)$/
-     * @When /^I add(?:| again) (\d+) (products "[^"]+") to the (cart)$/
-     * @When /^I try to add (\d+) (products "[^"]+") to the (cart)$/
-     */
+    #[When('/^I add (\d+) of (them) to (?:the|my) (cart)$/')]
+    #[When('/^I add(?:| again) (\d+) (products "[^"]+") to the (cart)$/')]
+    #[When('/^I try to add (\d+) (products "[^"]+") to the (cart)$/')]
     public function iAddOfThemToMyCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->putProductToCart($product, $tokenValue, $quantity);
@@ -124,10 +113,8 @@ final class CartContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
-    /**
-     * @When /^I add ("[^"]+" variant) of (this product) to the (cart)$/
-     * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
-     */
+    #[When('/^I add ("[^"]+" variant) of (this product) to the (cart)$/')]
+    #[When('/^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/')]
     public function iAddVariantOfThisProductToTheCart(
         ProductVariantInterface $productVariant,
         ProductInterface $product,
@@ -137,9 +124,7 @@ final class CartContext implements Context
         $this->sharedStorage->set('variant', $productVariant);
     }
 
-    /**
-     * @When I add :product with :productOption :productOptionValue to the cart
-     */
+    #[When('I add :product with :productOption :productOptionValue to the cart')]
     public function iAddThisProductWithToTheCart(
         ProductInterface $product,
         string $productOption,
@@ -196,14 +181,12 @@ final class CartContext implements Context
         $this->shopClient->executeCustomRequest($request);
     }
 
-    /**
-     * @Given /^I change (product "[^"]+") quantity to (\d+)$/
-     * @Given I change :product quantity to :quantity
-     * @When /^I change (product "[^"]+") quantity to (\d+) in my (cart)$/
-     * @When /^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/
-     * @When /^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/
-     * @When /^I try to change (product "[^"]+") quantity to (\d+) in my (cart)$/
-     */
+    #[Given('/^I change (product "[^"]+") quantity to (\d+)$/')]
+    #[Given('I change :product quantity to :quantity')]
+    #[When('/^I change (product "[^"]+") quantity to (\d+) in my (cart)$/')]
+    #[When('/^the (?:visitor|customer) change (product "[^"]+") quantity to (\d+) in his (cart)$/')]
+    #[When('/^the visitor try to change (product "[^"]+") quantity to (\d+) in the customer (cart)$/')]
+    #[When('/^I try to change (product "[^"]+") quantity to (\d+) in my (cart)$/')]
     public function iChangeQuantityToInMyCart(ProductInterface $product, int $quantity, ?string $tokenValue = null): void
     {
         if (null === $tokenValue && $this->sharedStorage->has('cart_token')) {
@@ -221,29 +204,23 @@ final class CartContext implements Context
         $this->removeOrderItemFromCart((string) $itemResponse['id'], $tokenValue);
     }
 
-    /**
-     * @When /^I remove ("[^"]+" variant) from the (cart)$/
-     */
+    #[When('/^I remove ("[^"]+" variant) from the (cart)$/')]
     public function iRemoveVariantFromTheCart(ProductVariantInterface $variant, string $tokenValue): void
     {
         $itemResponse = $this->getOrderItemResponseFromProductVariantInCart($variant, $tokenValue);
         $this->removeOrderItemFromCart((string) $itemResponse['id'], $tokenValue);
     }
 
-    /**
-     * @When I pick up (my )cart (again)
-     * @When I pick up cart in the :localeCode locale
-     * @When I pick up cart without specifying locale
-     * @When the visitor picks up the cart
-     */
+    #[When('I pick up (my )cart (again)')]
+    #[When('I pick up cart in the :localeCode locale')]
+    #[When('I pick up cart without specifying locale')]
+    #[When('the visitor picks up the cart')]
     public function iPickUpMyCart(?string $localeCode = null): void
     {
         $this->pickupCart($localeCode);
     }
 
-    /**
-     * @When I pick up cart using wrong locale
-     */
+    #[When('I pick up cart using wrong locale')]
     public function iPickUpMyCartUsingWrongLocale(): void
     {
         $this->pickupCart('not_valid');
@@ -258,21 +235,17 @@ final class CartContext implements Context
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
     }
 
-    /**
-     * @When I update my cart
-     * @Then I should still be on product :product page
-     * @Then I should be on :product product detailed page
-     */
+    #[When('I update my cart')]
+    #[Then('I should still be on product :product page')]
+    #[Then('I should be on :product product detailed page')]
     public function intentionallyLeftBlank(): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @Then /^I should be notified that (this product) does not have sufficient stock$/
-     * @Then /^I should be notified that (this product) has insufficient stock$/
-     * @Then /^I should be notified that (this product) cannot be updated$/
-     */
+    #[Then('/^I should be notified that (this product) does not have sufficient stock$/')]
+    #[Then('/^I should be notified that (this product) has insufficient stock$/')]
+    #[Then('/^I should be notified that (this product) cannot be updated$/')]
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::true($this->responseChecker->hasViolationWithMessage(
@@ -281,10 +254,8 @@ final class CartContext implements Context
         ));
     }
 
-    /**
-     * @Then /^I should not be notified that (this product) does not have sufficient stock$/
-     * @Then /^I should not be notified that (this product) cannot be updated$/
-     */
+    #[Then('/^I should not be notified that (this product) does not have sufficient stock$/')]
+    #[Then('/^I should not be notified that (this product) cannot be updated$/')]
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::false($this->responseChecker->hasViolationWithMessage(
@@ -303,9 +274,7 @@ final class CartContext implements Context
         ));
     }
 
-    /**
-     * @Then my cart's locale should be :locale
-     */
+    #[Then('my cart\'s locale should be :locale')]
     public function myCartLocaleShouldBe(LocaleInterface $locale): void
     {
         Assert::same(
@@ -317,9 +286,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should not have access to the summary of my (previous cart)$/
-     */
+    #[Then('/^I should not have access to the summary of my (previous cart)$/')]
     public function iShouldNotHaveAccessToTheSummaryOfMyCart(OrderInterface $order): void
     {
         Assert::same(
@@ -329,9 +296,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then my cart should be cleared
-     */
+    #[Then('my cart should be cleared')]
     public function myCartShouldBeCleared(): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -356,9 +321,7 @@ final class CartContext implements Context
         Assert::same($total, (int) $responseTotal, 'Expected totals are not the same. Received message:' . $response->getContent());
     }
 
-    /**
-     * @Then /^my (cart) items total should be ("[^"]+")$/
-     */
+    #[Then('/^my (cart) items total should be ("[^"]+")$/')]
     public function myCartItemsTotalShouldBe(string $tokenValue, int $total): void
     {
         $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
@@ -370,9 +333,7 @@ final class CartContext implements Context
         Assert::same($total, (int) $responseTotal, 'Expected items totals are not the same. Received message:' . $response->getContent());
     }
 
-    /**
-     * @Then /^my included in price taxes should be ("[^"]+")$/
-     */
+    #[Then('/^my included in price taxes should be ("[^"]+")$/')]
     public function myIncludedInPriceTaxesShouldBe(int $taxTotal): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -384,9 +345,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then my cart should be empty
-     */
+    #[Then('my cart should be empty')]
     public function myCartShouldBeEmpty(): void
     {
         $tokenValue = $this->sharedStorage->get('cart_token');
@@ -397,9 +356,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^the visitor has no access to (customer's cart)$/
-     */
+    #[Then('/^the visitor has no access to (customer\'s cart)$/')]
     public function theVisitorHasNoAccessToCustomer(?string $tokenValue): void
     {
         $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
@@ -410,17 +367,13 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then I should be on my cart summary page
-     */
+    #[Then('I should be on my cart summary page')]
     public function iShouldBeOnMyCartSummaryPage(): void
     {
         // Intentionally left blank
     }
 
-    /**
-     * @Then I should be notified that the product has been successfully added
-     */
+    #[Then('I should be notified that the product has been successfully added')]
     public function iShouldBeNotifiedThatTheProductHasBeenSuccessfullyAdded(): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -430,9 +383,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that quantity of added product cannot be lower that 1
-     */
+    #[Then('I should be notified that quantity of added product cannot be lower that 1')]
     public function iShouldBeNotifiedThatQuantityOfAddedProductCannotBeLowerThan1(): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -442,9 +393,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/
-     */
+    #[Then('/^I should see(?:| also) "([^"]+)" with unit price ("[^"]+") in my cart$/')]
     public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -460,10 +409,8 @@ final class CartContext implements Context
         throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
 
-    /**
-     * @Then /^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/
-     * @Then /^the product "([^"]+)" should have discounted unit price ("[^"]+") in the cart$/
-     */
+    #[Then('/^I should see(?:| also) "([^"]+)" with discounted unit price ("[^"]+") in my cart$/')]
+    #[Then('/^the product "([^"]+)" should have discounted unit price ("[^"]+") in the cart$/')]
     public function iShouldSeeProductWithDiscountedUnitPriceInMyCart(string $productName, int $discountedUnitPrice): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -479,10 +426,8 @@ final class CartContext implements Context
         throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
 
-    /**
-     * @Then /^the product "([^"]+)" should have total price ("[^"]+") in the cart$/
-     * @Then /^total price of "([^"]+)" item should be ("[^"]+")$/
-     */
+    #[Then('/^the product "([^"]+)" should have total price ("[^"]+") in the cart$/')]
+    #[Then('/^total price of "([^"]+)" item should be ("[^"]+")$/')]
     public function theProductShouldHaveTotalPriceInTheCart(string $productName, int $totalPrice): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -498,10 +443,8 @@ final class CartContext implements Context
         throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
 
-    /**
-     * @Then there should be one item in my cart
-     * @Then there should be one item named :productName in my cart
-     */
+    #[Then('there should be one item in my cart')]
+    #[Then('there should be one item named :productName in my cart')]
     public function thereShouldBeOneItemInMyCart(?string $productName = null): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -516,9 +459,7 @@ final class CartContext implements Context
         $this->sharedStorage->set('item', $items[0]);
     }
 
-    /**
-     * @Then /^there should be (\d+) item in my (cart)$/
-     */
+    #[Then('/^there should be (\d+) item in my (cart)$/')]
     public function thereShouldCountItemsInMyCart(int $count, string $cartToken): void
     {
         $response = $this->shopClient->show(Resources::ORDERS, $cartToken);
@@ -527,9 +468,7 @@ final class CartContext implements Context
         Assert::count($items, $count);
     }
 
-    /**
-     * @Then /^(this item) should have name "([^"]+)"$/
-     */
+    #[Then('/^(this item) should have name "([^"]+)"$/')]
     public function thisItemShouldHaveName(array $item, string $productName): void
     {
         $response = $this->getProductForItem($item);
@@ -540,9 +479,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this item) should have variant "([^"]+)"$/
-     */
+    #[Then('/^(this item) should have variant "([^"]+)"$/')]
     public function thisItemShouldHaveVariant(array $item, string $variantName): void
     {
         $response = $this->getProductVariantForItem($item);
@@ -553,9 +490,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this item) should have code "([^"]+)"$/
-     */
+    #[Then('/^(this item) should have code "([^"]+)"$/')]
     public function thisItemShouldHaveCode(array $item, string $variantCode): void
     {
         $response = $this->getProductVariantForItem($item);
@@ -576,9 +511,7 @@ final class CartContext implements Context
         $this->compareItemPrice($product->getName(), $pricing - $amount);
     }
 
-    /**
-     * @Then /^(product "[^"]+") price should be discounted by ("[^"]+")$/
-     */
+    #[Then('/^(product "[^"]+") price should be discounted by ("[^"]+")$/')]
     public function itsPriceShouldBeDiscountedBy(ProductInterface $product, int $amount): void
     {
         $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
@@ -586,9 +519,7 @@ final class CartContext implements Context
         $this->compareItemPrice($product->getName(), $pricing - $amount, 'discountedUnitPrice');
     }
 
-    /**
-     * @Then /^(its|theirs) subtotal price should be decreased by ("[^"]+")$/
-     */
+    #[Then('/^(its|theirs) subtotal price should be decreased by ("[^"]+")$/')]
     public function itsSubtotalPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
     {
         $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
@@ -602,18 +533,14 @@ final class CartContext implements Context
         $this->compareItemPrice($product->getName(), $this->getExpectedPriceOfProductTimesQuantity($product));
     }
 
-    /**
-     * @Then I should see :productName with quantity :quantity in my cart
-     * @Then /^the (?:customer|visitor) should see product "([^"]+)" with quantity (\d+) in his cart$/
-     */
+    #[Then('I should see :productName with quantity :quantity in my cart')]
+    #[Then('/^the (?:customer|visitor) should see product "([^"]+)" with quantity (\d+) in his cart$/')]
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
         $this->checkProductQuantityByCustomer($this->shopClient->getLastResponse(), $productName, $quantity);
     }
 
-    /**
-     * @Then I should be informed that cart items are no longer available
-     */
+    #[Then('I should be informed that cart items are no longer available')]
     public function iShouldBeInformedThatCartItemsAreNoLongerAvailable(): void
     {
         $response = $this->sharedStorage->get('response') ?? $this->shopClient->getLastResponse();
@@ -623,9 +550,7 @@ final class CartContext implements Context
         Assert::same($this->responseChecker->getResponseContent($response)['hydra:description'], 'Not Found');
     }
 
-    /**
-     * @Then I should be informed that I cannot change the cart items after the checkout is completed
-     */
+    #[Then('I should be informed that I cannot change the cart items after the checkout is completed')]
     public function iShouldBeInformedThatICannotChangeTheCartItemsAfterTheCheckoutIsCompleted(): void
     {
         Assert::same(
@@ -635,17 +560,13 @@ final class CartContext implements Context
         Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 422);
     }
 
-    /**
-     * @Then /^the administrator should see "([^"]+)" product with quantity (\d+) in the (?:customer|visitor) cart$/
-     */
+    #[Then('/^the administrator should see "([^"]+)" product with quantity (\d+) in the (?:customer|visitor) cart$/')]
     public function theAdministratorShouldSeeProductWithQuantityInTheCart(string $productName, int $quantity): void
     {
         $this->checkProductQuantityByAdmin($this->adminClient->getLastResponse(), $productName, $quantity);
     }
 
-    /**
-     * @Then /^the (?:visitor|customer) should see ("[^"]+" product) in the (cart)$/
-     */
+    #[Then('/^the (?:visitor|customer) should see ("[^"]+" product) in the (cart)$/')]
     public function theVisitorShouldSeeProductInTheCart(
         ProductInterface $product,
         string $tokenValue,
@@ -656,9 +577,7 @@ final class CartContext implements Context
         $this->iShouldSeeWithQuantityInMyCart($product->getName(), $quantity);
     }
 
-    /**
-     * @When /^I check items in my (cart)$/
-     */
+    #[When('/^I check items in my (cart)$/')]
     public function iCheckItemsOfMyCart(string $tokenValue): void
     {
         $request = $this->requestFactory->customItemAction(
@@ -671,9 +590,7 @@ final class CartContext implements Context
         $this->shopClient->executeCustomRequest($request);
     }
 
-    /**
-     * @Then /^my cart should have ("[^"]+") items total$/
-     */
+    #[Then('/^my cart should have ("[^"]+") items total$/')]
     public function myCartShouldHaveItemsTotal(int $itemsTotal): void
     {
         Assert::same(
@@ -682,9 +599,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^my cart taxes should be ("[^"]+")$/
-     */
+    #[Then('/^my cart taxes should be ("[^"]+")$/')]
     public function myCartTaxesShouldBe(int $taxTotal): void
     {
         Assert::same(
@@ -693,9 +608,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^my cart included in price taxes should be ("[^"]+")$/
-     */
+    #[Then('/^my cart included in price taxes should be ("[^"]+")$/')]
     public function myCartTaxesIncludedInPriceShouldBe(int $taxTotal): void
     {
         Assert::same(
@@ -704,10 +617,8 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^my cart should have (\d+) items of (product "([^"]+)")$/
-     * @Then /^my cart should have quantity of (\d+) items of (product "([^"]+)")$/
-     */
+    #[Then('/^my cart should have (\d+) items of (product "([^"]+)")$/')]
+    #[Then('/^my cart should have quantity of (\d+) items of (product "([^"]+)")$/')]
     public function myCartShouldHaveItems(int $quantity, ProductInterface $product): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -736,9 +647,7 @@ final class CartContext implements Context
         // Intentionally left blank to fulfill context expectation
     }
 
-    /**
-     * @Then /^I should have empty (cart)$/
-     */
+    #[Then('/^I should have empty (cart)$/')]
     public function iShouldHaveEmptyCart(string $tokenValue): void
     {
         $items = $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $tokenValue), 'items');
@@ -746,9 +655,7 @@ final class CartContext implements Context
         Assert::same(count($items), 0, 'There should be an empty cart');
     }
 
-    /**
-     * @Then I should be unable to add it to the cart
-     */
+    #[Then('I should be unable to add it to the cart')]
     public function iShouldBeUnableToAddItToTheCart(): void
     {
         /** @var ProductVariantInterface $productVariant */
@@ -761,9 +668,7 @@ final class CartContext implements Context
         Assert::same($response->getStatusCode(), 422);
     }
 
-    /**
-     * @Then /^this product should have ([^"]+) "([^"]+)"$/
-     */
+    #[Then('/^this product should have ([^"]+) "([^"]+)"$/')]
     public function thisItemShouldHaveOptionValue(string $expectedOptionName, string $expectedOptionValueValue): void
     {
         $item = $this->sharedStorage->get('item');
@@ -789,9 +694,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should see "([^"]+)" with original price ("[^"]+") in my cart$/
-     */
+    #[Then('/^I should see "([^"]+)" with original price ("[^"]+") in my cart$/')]
     public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
     {
         $response = $this->shopClient->getLastResponse();
@@ -807,9 +710,7 @@ final class CartContext implements Context
         throw new \InvalidArgumentException(sprintf('The product %s does not exist', $productName));
     }
 
-    /**
-     * @Then /^I should see "([^"]+)" only with unit price ("[^"]+") in my cart$/
-     */
+    #[Then('/^I should see "([^"]+)" only with unit price ("[^"]+") in my cart$/')]
     public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
     {
         $response = $this->shopClient->getLastResponse();

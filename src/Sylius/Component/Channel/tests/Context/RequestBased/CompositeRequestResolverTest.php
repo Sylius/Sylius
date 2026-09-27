@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Channel\Context\RequestBased;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver;
 use Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CompositeRequestResolverTest extends TestCase
 {
     private CompositeRequestResolver $resolver;

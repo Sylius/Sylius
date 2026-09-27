@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Applicator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Clock\ClockInterface;
 use Sylius\Bundle\ApiBundle\Applicator\ArchivingPromotionApplicator;
 use Sylius\Component\Core\Model\PromotionInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ArchivingPromotionApplicatorTest extends TestCase
 {
     private ClockInterface&MockObject $clock;
@@ -41,7 +43,7 @@ final class ArchivingPromotionApplicatorTest extends TestCase
 
         $this->clock->expects(self::once())->method('now')->willReturn($now);
 
-        $this->promotion->expects(self::once())->method('setArchivedAt')->with($now);
+        $this->promotion->expects(self::once())->method('setArchivedAt')->with(\DateTime::createFromImmutable($now));
 
         self::assertSame($this->promotion, $this->archivingPromotionApplicator->archive($this->promotion));
     }

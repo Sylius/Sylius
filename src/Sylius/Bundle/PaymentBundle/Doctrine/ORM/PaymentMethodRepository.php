@@ -37,6 +37,18 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
         ;
     }
 
+    public function countByGatewayFactoryName(string $factoryName): int
+    {
+        return (int) $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->innerJoin('o.gatewayConfig', 'gatewayConfig')
+            ->andWhere('gatewayConfig.factoryName = :factoryName')
+            ->setParameter('factoryName', $factoryName)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
     public function createPaginator(array $criteria = [], array $sorting = []): iterable
     {
         $queryBuilder = $this->createQueryBuilder('o')

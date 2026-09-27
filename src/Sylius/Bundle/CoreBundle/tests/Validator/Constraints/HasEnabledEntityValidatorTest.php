@@ -98,7 +98,7 @@ final class HasEnabledEntityValidatorTest extends TestCase
         $this->registry->expects($this->once())->method('getManager')->with($constraint->objectManager)->willThrowException(new \InvalidArgumentException());
         $this->contextMock->expects($this->never())->method('buildViolation')->with($this->any());
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(ConstraintDefinitionException::class);
 
         $this->hasEnabledEntityValidator->validate($entity, $constraint);
     }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Order;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Order\OrderItemNamesSetter;
 use Sylius\Component\Core\Order\OrderItemNamesSetterInterface;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderItemNamesSetterTest extends TestCase
 {
     private OrderItemNamesSetter $orderItemNamesSetter;

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
+use Behat\Hook\BeforeScenario;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -28,9 +29,7 @@ final class SessionContext implements Context
     ) {
     }
 
-    /**
-     * @BeforeScenario @ui
-     */
+    #[BeforeScenario]
     public function startSession(): void
     {
         if (null === $this->sessionFactory) {

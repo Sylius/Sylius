@@ -32,9 +32,9 @@ final class AmountType extends AbstractType
                 'label' => false,
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
                 'constraints' => [
-                    new NotBlank(['groups' => ['sylius']]),
+                    new NotBlank(groups: ['sylius']),
                     new Type(type: 'integer', groups: ['sylius']),
-                    new GreaterThan(['value' => 0, 'groups' => ['sylius']]),
+                    new GreaterThan(value: 0, groups: ['sylius']),
                 ],
             ])
         ;

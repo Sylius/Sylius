@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AddressingBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AddressingBundle\EventListener\ZoneMemberIntegrityListener;
@@ -26,6 +27,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ZoneMemberIntegrityListenerTest extends TestCase
 {
     private MockObject&RequestStack $requestStack;

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\PaymentPreCompleteListener;
@@ -25,6 +26,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PaymentPreCompleteListenerTest extends TestCase
 {
     private MockObject&OrderItemAvailabilityCheckerInterface $orderItemAvailabilityChecker;

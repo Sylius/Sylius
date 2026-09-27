@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\OrderPay\Provider;
 
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @experimental */
 interface AfterPayResponseProviderInterface
 {
-    public function getResponse(RequestConfiguration $requestConfiguration): Response;
+    public function getResponse(Request $request): Response;
 
-    public function supports(RequestConfiguration $requestConfiguration): bool;
+    public function supports(Request $request): bool;
 }

@@ -12,6 +12,7 @@
     "description": "Get 10% off on all school supplies",
     "priority": 3,
     "exclusive": false,
+    "trackUsage": true,
     "used": 0,
     "couponBased": false,
     "coupons": [],

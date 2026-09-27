@@ -19,7 +19,6 @@ use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
-/** @experimental */
 final class AfterTokenRequestProcessor implements AfterTokenRequestProcessorInterface
 {
     /**
