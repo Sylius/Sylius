@@ -487,6 +487,31 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    > `<path>.html.twig` outside the `components/` directory. Setting it switches to the newer rules
    > and drops that looser fallback.
 
+9. The `@symfony/webpack-encore` package has been upgraded from `^5.0.1` to `^6.0.0`,
+   and `webpack-cli` from `^5.1.4` to `^6.0.0` in the `@sylius-ui/admin` and `@sylius-ui/shop` packages.
+   No changes in `webpack.config.js` are required.
+
+   1. Use Node.js `^22.13.0 || >=24.0`.
+
+   2. Update `@symfony/webpack-encore` in your application's `package.json`:
+
+      ```diff
+      -    "@symfony/webpack-encore": "^5.0.1",
+      +    "@symfony/webpack-encore": "^6.0.0",
+      ```
+
+      If your `package.json` also lists `webpack-cli`, update it to `^6.0.0`.
+
+   3. Reinstall the packages:
+
+      ```bash
+      yarn install --force
+      ```
+
+      With npm, run `npm install` instead.
+
+   For other changes, see the [Webpack Encore 6.0.0 release notes](https://github.com/symfony/webpack-encore/releases/tag/v6.0.0).
+
 ## Validation
 
 1. Passing an array of options to configure a Sylius validation constraint is **deprecated** since Sylius 2.3
@@ -920,9 +945,10 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    Then reinstall the packages:
 
    ```bash
-   rm -rf node_modules/@sylius-ui
-   yarn install
+   yarn install --force
    ```
+
+   With npm, run `npm install` instead.
 
    The package names and the `getWebpackConfig()` / `getBaseWebpackConfig()` API are unchanged, so no changes in `webpack.config.js` are required.
    The old locations still work, but emit a deprecation warning during the build.

@@ -16,16 +16,16 @@
     "@popperjs/core": "^2.11.8",
     "@sylius/shop-bundle": "file:../assets/",
     "@symfony/stimulus-bridge": "^3.2.0",
-    "@symfony/webpack-encore": "^5.0.1",
+    "@symfony/webpack-encore": "^6.0.0",
     "bootstrap": "^5.3.8",
     "sass": "1.77.6",
     "sass-loader": "^16.0.1",
     "viewerjs": "^1.11.8",
     "webpack": ">=5.72 <5.109",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.0"
   },
   "engines": {
-    "node": ">=22"
+    "node": "^22.13.0 || >=24.0"
   },
   "engineStrict": true,
   "files": [

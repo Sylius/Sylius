@@ -16,7 +16,7 @@
     "@popperjs/core": "^2.11.8",
     "@sylius/admin-bundle": "file:../assets/",
     "@symfony/stimulus-bridge": "^3.2.0",
-    "@symfony/webpack-encore": "^5.0.1",
+    "@symfony/webpack-encore": "^6.0.0",
     "@tabler/core": "~1.4.0",
     "apexcharts": "^3.41.0",
     "bootstrap": "^5.3.8",
@@ -28,10 +28,10 @@
     "tom-select": "^2.6.2",
     "viewerjs": "^1.11.8",
     "webpack": ">=5.72 <5.109",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.0"
   },
   "engines": {
-    "node": ">=22"
+    "node": "^22.13.0 || >=24.0"
   },
   "engineStrict": true,
   "files": [

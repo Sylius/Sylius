@@ -14,7 +14,7 @@ const assetsDir = path.dirname(require.resolve('@sylius/shop-bundle/package.json
 
 class SyliusShop {
     /**
-     * Provide a light Webpack configuration for Sylius Admin
+     * Provide a light Webpack configuration for Sylius Shop
      * All the stimulus stuff should be handled by the app.shop entrypoint
      */
     static getBaseWebpackConfig(rootDir) {
