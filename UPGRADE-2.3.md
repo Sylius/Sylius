@@ -460,6 +460,33 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    global `Spotlight` API, you will need to migrate that customization to the equivalent
    [viewerjs options](https://fengyuanchen.github.io/viewerjs/).
 
+8. The supported **Symfony UX** version ranges have been **broadened** to `^2.36 || ^3.0`
+   (`symfony/stimulus-bundle`, `symfony/ux-autocomplete`, `symfony/ux-icons`,
+   `symfony/ux-live-component`, `symfony/ux-twig-component`).
+
+   Symfony UX 3 requires PHP `>= 8.4` and Symfony `^7.4 || ^8.0`, so applications running PHP 8.3 or
+   Symfony 6.4 stay on the 2.x branch automatically. Nothing needs to be done to remain on UX 2.
+
+   If your application resolves to UX 3, follow
+   [UPGRADE-3.0.md](https://github.com/symfony/ux/blob/3.x/UPGRADE-3.0.md) from Symfony UX, and review
+   the per-package changelogs for the behavioural changes introduced in 3.5
+   ([TwigComponent](https://github.com/symfony/ux/blob/3.x/src/TwigComponent/CHANGELOG.md),
+   [Icons](https://github.com/symfony/ux/blob/3.x/src/Icons/CHANGELOG.md)) — attribute and SVG rendering
+   changed, so assertions on rendered component or icon markup may need to be re-generated.
+
+   Sylius itself requires no changes: all its Twig components are registered with explicit names, and it
+   uses none of the APIs removed in UX 3.
+
+   One thing is worth calling out because Symfony UX assumes the Flex recipe has already been applied:
+   `twig_component.defaults` and `twig_component.anonymous_template_directory` are **required** in UX 3,
+   and without them the container fails to compile. Applications created from Sylius-Standard already
+   have `config/packages/twig_component.yaml`; if yours does not, add it.
+
+   > **Note:** that file is valid on UX 2 as well, but it is not a no-op there. On UX 2, leaving
+   > `anonymous_template_directory` unset keeps the pre-2.13 resolution rules, which also look for
+   > `<path>.html.twig` outside the `components/` directory. Setting it switches to the newer rules
+   > and drops that looser fallback.
+
 ## Validation
 
 1. Passing an array of options to configure a Sylius validation constraint is **deprecated** since Sylius 2.3
