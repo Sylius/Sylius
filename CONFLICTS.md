@@ -19,3 +19,17 @@ This document explains why certain conflicts were added to `composer.json` and r
   `doctrine:schema:create`, `doctrine:schema:update` and `doctrine:migrations:diff` call fails.
 
   References: https://github.com/doctrine/orm/issues/12547
+
+- `doctrine/orm:>=3.7`:
+
+  3.7.0 extends `SchemaValidator` with a check verifying that the inverse side of an association points back at the
+  owning side entity. `Sylius\Component\Shipping\Model\ShipmentUnit` is a mapped superclass with no table that
+  nothing in the Core stack extends, and its `shipment` association names `Shipment#units` as the inverse side,
+  while in that stack the inverse side belongs to `Sylius\Component\Core\Model\OrderItemUnit`. Since that release
+  every project running `doctrine:schema:validate` on Sylius gets a mapping error, even though nothing is broken at
+  runtime and no query touches that class.
+
+  Unlike the other entries here this is not an upstream regression but an intended new check, so the conflict is
+  ours to remove: it holds the integration on 3.6.x until the unused mapping stops being loaded.
+
+  References: https://github.com/doctrine/orm/pull/12460

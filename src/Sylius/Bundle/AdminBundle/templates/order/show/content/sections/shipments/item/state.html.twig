@@ -1,7 +1,7 @@
-{% from '@SyliusAdmin/order/macro/order_shipping_state_label.html.twig' import label %}
+{% from '@SyliusAdmin/shipment/macro/state_label.html.twig' import label %}
 
 {% set shipment = hookable_metadata.context.shipment %}
 
-<td class="w-1" {{ sylius_test_html_attribute('shipment-state') }}>
+<td class="w-1">
     {{ label(shipment.state) }}
 </td>

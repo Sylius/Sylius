@@ -2,12 +2,13 @@
     {% set label = 'sylius.ui.' ~ state %}
 
     {% set state_badge = {
-        ready: 'bg-blue-lt',
-        shipped: 'bg-green-lt',
-        cancelled: 'bg-orange-lt',
+        (constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_CART')): '',
+        (constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_READY')): 'bg-blue-lt',
+        (constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED')): 'bg-green-lt',
+        (constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_CANCELLED')): 'bg-red-lt',
     } %}
 
-    <span class="badge {{ state_badge[state] }}" {{ sylius_test_html_attribute('shipment-state') }}>
+    <span class="badge {{ state_badge[state]|default('') }}" {{ sylius_test_html_attribute('shipment-state') }}>
         {{ label|trans }}
     </span>
 {%- endmacro -%}
