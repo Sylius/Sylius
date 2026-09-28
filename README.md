@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://www.ps-summit.com/en" target="_blank">
-        <img src="https://sylius.com/assets/ps_summit_banner.png?4" />
+        <img src="https://sylius.com/assets/ps_summit_banner.png?v=1" />
     </a>
 </h1>
 
