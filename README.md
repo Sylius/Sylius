@@ -1,6 +1,6 @@
 <h1 align="center">
-    <a href="https://sylius.com/github-readme/link/" target="_blank">
-        <img src="https://sylius.com/assets/github-readme.png?v=5" />
+    <a href="https://www.ps-summit.com/en" target="_blank">
+        <img src="https://sylius.com/assets/ps_summit_banner.png?v=1" />
     </a>
 </h1>
 
