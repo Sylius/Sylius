@@ -8,10 +8,18 @@
     {% if item.unitPrice != item.discountedUnitPrice %}
         <span {{ sylius_test_html_attribute('product-old-price', item.productName) }}>{{ money.convertAndFormat(item.unitPrice) }}</span>
     {% endif %}
-    <span {{ sylius_test_html_attribute('product-unit-price', item.productName) }}>{{ money.convertAndFormat(item.discountedUnitPrice) }}
-        {% if item.unitPrice != item.discountedUnitPrice %}
-            <i data-html="{% for promotion in unit_promotions %}<div>{{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}</div>{% endfor %}">
-            </i>
-        {% endif %}
+    <span {{ sylius_test_html_attribute('product-unit-price', item.productName) }}>
+        {{ money.convertAndFormat(item.discountedUnitPrice) }}
     </span>
+    {% if item.unitPrice != item.discountedUnitPrice %}
+        <div>
+            {% for promotion in unit_promotions %}
+                <div>
+                    <small class="text-body-tertiary">
+                        {{ promotion.label }}: {{ money.convertAndFormat(promotion.amount) }}
+                    </small>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 </td>
