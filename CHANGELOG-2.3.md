@@ -1,5 +1,14 @@
 # CHANGELOG FOR `2.3.X`
 
+## v2.3.0 (2026-09-28)
+
+#### Details
+
+- [#19257](https://github.com/Sylius/Sylius/pull/19257) [CI] Fix 2.2 builds broken by api-platform/test requirement ([@TheMilek](https://github.com/TheMilek))
+- [#19262](https://github.com/Sylius/Sylius/pull/19262) Replace README banner with PS Summit banner ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#19195](https://github.com/Sylius/Sylius/pull/19195) Preload order item unit adjustments in one query before order processing ([@mpysiak](https://github.com/mpysiak))
+- [#19263](https://github.com/Sylius/Sylius/pull/19263) [Maintenance] Allow Sylius Stack 0.14 ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.3.0-RC.1 (2026-09-27)
 
 #### Details
