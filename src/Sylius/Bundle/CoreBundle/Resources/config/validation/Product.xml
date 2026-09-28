@@ -16,6 +16,9 @@
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllVariantPricesDefined">
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\OptionsBasedVariantSelectionMethod">
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="images">
             <constraint name="Valid" />
         </property>
