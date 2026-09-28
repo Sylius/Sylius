@@ -30,7 +30,7 @@
         "php": "^8.3",
         "sylius/core-bundle": "^2.0",
         "sylius/payum-bundle": "^2.0",
-        "sylius/twig-hooks": "^0.12 || ^0.13",
+        "sylius/twig-hooks": "^0.12 || ^0.14",
         "sylius/ui-bundle": "^2.0",
         "sylius/theme-bundle": "^2.5",
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0",
