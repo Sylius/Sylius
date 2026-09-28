@@ -1,14 +1,42 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.10 (2026-09-28)
+
+#### Details
+
+- [#19222](https://github.com/Sylius/Sylius/pull/19222) Mock channel context in ResetPasswordEmailManagerTest ([@TheMilek](https://github.com/TheMilek))
+- [#19229](https://github.com/Sylius/Sylius/pull/19229) Resolve the picked checkout address from the customer address book ([@Wojdylak](https://github.com/Wojdylak))
+- [#19227](https://github.com/Sylius/Sylius/pull/19227) [Behat] Do not assume the first row of a table is its header row ([@TheMilek](https://github.com/TheMilek))
+- [#19242](https://github.com/Sylius/Sylius/pull/19242) Restrict API Platform version for the ApiBundle package tests on Symfony 6.4 ([@TheMilek](https://github.com/TheMilek))
+- [#19219](https://github.com/Sylius/Sylius/pull/19219) Allow translatable autocomplete results without a translation in the current locale ([@Prometee](https://github.com/Prometee))
+- [#19246](https://github.com/Sylius/Sylius/pull/19246) [AdminBundle] Fix payment and shipment item state badge colours on order show page ([@littfed](https://github.com/littfed))
+- [#19251](https://github.com/Sylius/Sylius/pull/19251) Conflict with doctrine/orm 3.7 and validate the Doctrine mapping in CI ([@TheMilek](https://github.com/TheMilek))
+
+## v2.2.9 (2026-09-02)
+
+#### Details
+
+- [#19170](https://github.com/Sylius/Sylius/pull/19170) SY-801: Add stripe logo in shop footer ([@bartek-sek](https://github.com/bartek-sek))
+- [#19174](https://github.com/Sylius/Sylius/pull/19174) Remove Dependabot configuration and auto-merge workflow ([@GSadee](https://github.com/GSadee))
+- [#19175](https://github.com/Sylius/Sylius/pull/19175) [Composer] Conflict with doctrine/orm 3.6.8 breaking schema generation ([@GSadee](https://github.com/GSadee))
+- [#19178](https://github.com/Sylius/Sylius/pull/19178) [BUG] [Admin] [Translation] Wrong german translation for "Select" type in Product Attributes Grid ([@crydotsnake](https://github.com/crydotsnake))
+- [#19184](https://github.com/Sylius/Sylius/pull/19184) Introduce payment methods promotion banner ([@GSadee](https://github.com/GSadee))
+- [#19187](https://github.com/Sylius/Sylius/pull/19187) Fix cart offcanvas losing Bootstrap state on live re-render ([@marekrzytki](https://github.com/marekrzytki))
+- [#19188](https://github.com/Sylius/Sylius/pull/19188) SY-799: Add hook for suggested payment methods ([@bartek-sek](https://github.com/bartek-sek))
+- [#19213](https://github.com/Sylius/Sylius/pull/19213) [2.2] Add JwtAudienceListener to enforce JWT audience and principal validation ([@TheMilek](https://github.com/TheMilek))
+- [#19214](https://github.com/Sylius/Sylius/pull/19214) [2.2][ApiBundle] Restrict PaymentRequest actions allowed from shop context ([@TheMilek](https://github.com/TheMilek))
+- [#19215](https://github.com/Sylius/Sylius/pull/19215) [2.2] Fix Host header injection in the admin password-reset e-mail link ([@TheMilek](https://github.com/TheMilek))
+- [#19216](https://github.com/Sylius/Sylius/pull/19216) [2.2] Prevent payment amount tampering after a gateway transaction has started ([@TheMilek](https://github.com/TheMilek))
+
 ## v2.2.8 (2026-07-31)
 
 #### Details
 
-- [#19154](https://github.com/Sylius/Sylius/issues/19154) [FIX][2.2] Hide notifications icon when notifications are disabled ([@jkindly](https://github.com/jkindly))
-- [#18930](https://github.com/Sylius/Sylius/issues/18930) [BUGFIX] Add validator to restrict payment requests to placed orders only ([@rust-le](https://github.com/rust-le))
-- [#19159](https://github.com/Sylius/Sylius/issues/19159) [API] Refactor payment request eligibility validator and mark new services as experimental ([@GSadee](https://github.com/GSadee))
-- [#19161](https://github.com/Sylius/Sylius/issues/19161) [AdminBundle][ShopBundle] Fix production asset build broken by Sass BOM ([@bartek-sek](https://github.com/bartek-sek))
-- [#19156](https://github.com/Sylius/Sylius/issues/19156) [FIX][2.2] Fix locking icons ([@jkindly](https://github.com/jkindly))
+- [#19154](https://github.com/Sylius/Sylius/pull/19154) [FIX][2.2] Hide notifications icon when notifications are disabled ([@jkindly](https://github.com/jkindly))
+- [#18930](https://github.com/Sylius/Sylius/pull/18930) [BUGFIX] Add validator to restrict payment requests to placed orders only ([@rust-le](https://github.com/rust-le))
+- [#19159](https://github.com/Sylius/Sylius/pull/19159) [API] Refactor payment request eligibility validator and mark new services as experimental ([@GSadee](https://github.com/GSadee))
+- [#19161](https://github.com/Sylius/Sylius/pull/19161) [AdminBundle][ShopBundle] Fix production asset build broken by Sass BOM ([@bartek-sek](https://github.com/bartek-sek))
+- [#19156](https://github.com/Sylius/Sylius/pull/19156) [FIX][2.2] Fix locking icons ([@jkindly](https://github.com/jkindly))
 
 ## v2.2.7 (2026-07-24)
 
@@ -85,12 +113,12 @@
 
 #### Details
 
-- [#18904](https://github.com/sylius/sylius/issues/18904) [BUGFIX] remove redundant `object` from PHPDoc union types
-- [#18899](https://github.com/sylius/sylius/issues/18899) [CS][DX] Refactor
-- [#18898](https://github.com/sylius/sylius/issues/18898) [CS][DX] Refactor
-- [#18895](https://github.com/sylius/sylius/issues/18895) [Admin] Fix product taxon grid `enabled` field always showing `true`
-- [#18911](https://github.com/sylius/sylius/issues/18911) [BUGFIX] fix build errors
-- [#18920](https://github.com/sylius/sylius/issues/18920) Telemetry improvements 2.1
+- [#18904](https://github.com/Sylius/Sylius/pull/18904) [BUGFIX] remove redundant `object` from PHPDoc union types
+- [#18899](https://github.com/Sylius/Sylius/pull/18899) [CS][DX] Refactor
+- [#18898](https://github.com/Sylius/Sylius/pull/18898) [CS][DX] Refactor
+- [#18895](https://github.com/Sylius/Sylius/pull/18895) [Admin] Fix product taxon grid `enabled` field always showing `true`
+- [#18911](https://github.com/Sylius/Sylius/pull/18911) [BUGFIX] fix build errors
+- [#18920](https://github.com/Sylius/Sylius/pull/18920) Telemetry improvements 2.1
 
 ## v2.2.3 (2026-03-09)
 
