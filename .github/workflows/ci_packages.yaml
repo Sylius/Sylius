@@ -100,7 +100,7 @@ jobs:
 
             # API Platform 5 moved ApiTestCase to the api-platform/test package, which is not available for API Platform 4
             -   name: Require API Platform test package for the ApiBundle on Symfony 7.4+
-                if: matrix.package == 'Bundle/ApiBundle' && matrix.symfony != '~6.4.0'
+                if: matrix.package == 'Bundle/ApiBundle' && matrix.symfony != '~6.4.0' && inputs.branch != '2.2'
                 run: composer require --dev --no-update --no-interaction "api-platform/test:^5.0"
 
             -   name: Get Composer cache directory
