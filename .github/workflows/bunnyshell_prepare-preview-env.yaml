@@ -8,10 +8,14 @@ on:
             - "*.md"
     issue_comment:
         types: [ created, edited ]
+permissions:
+    contents: read
+    pull-requests: write
+
 jobs:
     deploy:
         name: Deploy Environment
-        uses: bunnyshell/workflows/.github/workflows/prepare-configuration.yaml@v2
+        uses: bunnyshell/workflows/.github/workflows/prepare-configuration.yaml@eb12a4d9154db124044f2d155e2495bf295b18c7 # v2.2.0
         with:
             bunnyshell-yaml-path: .bunnyshell/templates/preview/bunnyshell.yaml
             allowed-users: ${{ vars.BUNNYSHELL_ALLOWED_USERS }}
