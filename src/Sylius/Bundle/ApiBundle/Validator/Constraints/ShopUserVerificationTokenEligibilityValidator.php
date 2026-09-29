@@ -39,10 +39,12 @@ final class ShopUserVerificationTokenEligibilityValidator extends ConstraintVali
         $user = $this->shopUserRepository->findOneBy(['emailVerificationToken' => $value->token]);
 
         if (null === $user) {
-            $this->context->addViolation(
-                $constraint->message,
-                ['%verificationToken%' => $value->token],
-            );
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setParameter('%verificationToken%', $value->token)
+                ->setCode(ShopUserVerificationTokenEligibility::VERIFICATION_TOKEN_INVALID_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

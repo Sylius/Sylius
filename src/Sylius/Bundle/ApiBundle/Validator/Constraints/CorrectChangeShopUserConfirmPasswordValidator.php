@@ -30,6 +30,7 @@ final class CorrectChangeShopUserConfirmPasswordValidator extends ConstraintVali
         if ($value->confirmNewPassword !== $value->newPassword) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('newPassword')
+                ->setCode(CorrectChangeShopUserConfirmPassword::PASSWORD_MISMATCH_ERROR)
                 ->addViolation()
             ;
         }

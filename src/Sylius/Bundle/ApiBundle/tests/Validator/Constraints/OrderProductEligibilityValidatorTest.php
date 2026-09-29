@@ -26,6 +26,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class OrderProductEligibilityValidatorTest extends TestCase
 {
@@ -72,10 +73,11 @@ final class OrderProductEligibilityValidatorTest extends TestCase
 
         $constraint = new OrderProductEligibility();
 
-        $this->context
-            ->expects($this->once())
-            ->method('addViolation')
-            ->with($constraint->message, ['%productName%' => $variantName]);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->context->expects($this->once())->method('buildViolation')->with($constraint->message)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('setParameter')->with('%productName%', $variantName)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('setCode')->with(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('addViolation');
 
         $this->validator->validate($command, $constraint);
     }
@@ -109,10 +111,11 @@ final class OrderProductEligibilityValidatorTest extends TestCase
 
         $constraint = new OrderProductEligibility();
 
-        $this->context
-            ->expects($this->once())
-            ->method('addViolation')
-            ->with($constraint->message, ['%productName%' => $productName]);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->context->expects($this->once())->method('buildViolation')->with($constraint->message)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('setParameter')->with('%productName%', $productName)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('setCode')->with(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('addViolation');
 
         $this->validator->validate($command, $constraint);
     }
@@ -146,10 +149,11 @@ final class OrderProductEligibilityValidatorTest extends TestCase
 
         $constraint = new OrderProductEligibility();
 
-        $this->context
-            ->expects($this->once())
-            ->method('addViolation')
-            ->with($constraint->message, ['%productName%' => $productName]);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->context->expects($this->once())->method('buildViolation')->with($constraint->message)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('setParameter')->with('%productName%', $productName)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('setCode')->with(OrderProductEligibility::PRODUCT_NOT_ELIGIBLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects($this->once())->method('addViolation');
 
         $this->validator->validate($command, $constraint);
     }
@@ -183,7 +187,7 @@ final class OrderProductEligibilityValidatorTest extends TestCase
 
         $this->context
             ->expects($this->never())
-            ->method('addViolation');
+            ->method('buildViolation');
 
         $this->validator->validate($command, $constraint);
     }

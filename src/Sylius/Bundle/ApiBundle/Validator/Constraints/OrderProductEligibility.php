@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderProductEligibility extends Constraint
 {
+    public const PRODUCT_NOT_ELIGIBLE_ERROR = 'PRODUCT_NOT_ELIGIBLE';
+
     /**
      * @param array<string, mixed>|null $options
      */

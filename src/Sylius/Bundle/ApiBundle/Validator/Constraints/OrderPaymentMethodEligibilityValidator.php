@@ -49,10 +49,12 @@ final class OrderPaymentMethodEligibilityValidator extends ConstraintValidator
             $paymentMethod = $payment->getMethod();
 
             if (!$paymentMethod->isEnabled() || !$paymentMethod->hasChannel($channel)) {
-                $this->context->addViolation(
-                    $constraint->message,
-                    ['%paymentMethodName%' => $paymentMethod->getName()],
-                );
+                $this->context
+                    ->buildViolation($constraint->message)
+                    ->setParameter('%paymentMethodName%', (string) $paymentMethod->getName())
+                    ->setCode(OrderPaymentMethodEligibility::PAYMENT_METHOD_NOT_ELIGIBLE_ERROR)
+                    ->addViolation()
+                ;
             }
         }
     }
