@@ -856,6 +856,110 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_does_not_allow_to_apply_a_non_existent_coupon(): void
+    {
+        $this->setUpDefaultPutHeaders();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'cart/promotion_coupon.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 1, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: ['couponCode' => 'NON_EXISTENT_COUPON'],
+        );
+
+        $this->assertResponseViolations(
+            [
+                ['propertyPath' => 'couponCode', 'message' => 'Coupon code is invalid.'],
+            ],
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_apply_an_expired_coupon(): void
+    {
+        $this->setUpDefaultPutHeaders();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'cart/promotion_coupon.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 1, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: ['couponCode' => 'EXPIRED_COUPON'],
+        );
+
+        $this->assertResponseViolations(
+            [
+                ['propertyPath' => 'couponCode', 'message' => 'Coupon code has expired.'],
+            ],
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_apply_a_coupon_of_an_ended_promotion(): void
+    {
+        $this->setUpDefaultPutHeaders();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'cart/promotion_coupon.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 1, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: ['couponCode' => 'COUPON_OF_ENDED_PROMOTION'],
+        );
+
+        $this->assertResponseViolations(
+            [
+                ['propertyPath' => 'couponCode', 'message' => 'Coupon code is not valid for this order.'],
+            ],
+        );
+    }
+
+    #[Test]
+    public function it_does_not_allow_to_apply_a_coupon_of_a_promotion_with_unfulfilled_rules(): void
+    {
+        $this->setUpDefaultPutHeaders();
+
+        $this->loadFixturesFromFiles([
+            'channel/channel.yaml',
+            'cart.yaml',
+            'cart/promotion_coupon.yaml',
+        ]);
+
+        $tokenValue = $this->pickUpCart();
+        $this->addItemToCart('MUG_BLUE', 1, $tokenValue);
+
+        $this->requestPut(
+            uri: sprintf('/api/v2/shop/orders/%s', $tokenValue),
+            body: ['couponCode' => 'COUPON_WITH_UNFULFILLED_RULES'],
+        );
+
+        $this->assertResponseViolations(
+            [
+                ['propertyPath' => 'couponCode', 'message' => 'Coupon code is not valid for this order.'],
+            ],
+        );
+    }
+
+    #[Test]
     public function it_deletes_cart(): void
     {
         $this->setUpDefaultGetHeaders();
