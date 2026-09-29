@@ -83,6 +83,9 @@ sylius_twig_hooks:
             tax_calculation_strategy:
                 template: '@SyliusAdmin/channel/form/sections/money/tax_calculation_strategy.html.twig'
                 priority: 200
+            show_prices_including_tax:
+                template: '@SyliusAdmin/channel/form/sections/money/show_prices_including_tax.html.twig'
+                priority: 150
             currencies:
                 template: '@SyliusAdmin/channel/form/sections/money/currencies.html.twig'
                 priority: 100

@@ -73,6 +73,8 @@ class Channel extends BaseChannel implements ChannelInterface
 
     protected ?ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig = null;
 
+    protected bool $showPricesIncludingTax = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -291,6 +293,16 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setChannelPriceHistoryConfig(ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig): void
     {
         $this->channelPriceHistoryConfig = $channelPriceHistoryConfig;
+    }
+
+    public function isShowPricesIncludingTax(): bool
+    {
+        return $this->showPricesIncludingTax;
+    }
+
+    public function setShowPricesIncludingTax(bool $showPricesIncludingTax): void
+    {
+        $this->showPricesIncludingTax = $showPricesIncludingTax;
     }
 
     public function getEnabledCountries(): Collection
