@@ -50,5 +50,14 @@ final readonly class SalesMenuProvider implements MenuProviderInterface
             ->setLabel('sylius.ui.shipments')
             ->setLabelAttribute('icon', 'tabler:truck')
         ;
+
+        $sales
+            ->addChild('return_requests')
+            ->setUri('https://sylius.com/plus/?utm_source=product&utm_medium=placeholder&utm_campaign=returns-placeholder')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.sales.return_requests')
+            ->setLabelAttribute('icon', 'tabler:truck-return')
+            ->setExtra('plus_logo', true)
+        ;
     }
 }
