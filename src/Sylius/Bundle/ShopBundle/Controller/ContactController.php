@@ -46,48 +46,52 @@ final class ContactController
         $formType = $this->getSyliusAttribute($request, 'form', ContactType::class);
         $form = $this->formFactory->create($formType, null, $this->getFormOptions());
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isSubmitted() && $form->isValid()) {
-            /** @var mixed $data */
-            $data = $form->getData();
-            Assert::isArray($data);
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
 
-            $channel = $this->channelContext->getChannel();
+            if ($form->isSubmitted() && $form->isValid()) {
+                /** @var mixed $data */
+                $data = $form->getData();
+                Assert::isArray($data);
 
-            /** @var ChannelInterface $channel */
-            Assert::isInstanceOf($channel, ChannelInterface::class);
+                $channel = $this->channelContext->getChannel();
 
-            $contactEmail = $channel->getContactEmail();
+                /** @var ChannelInterface $channel */
+                Assert::isInstanceOf($channel, ChannelInterface::class);
 
-            $redirectRoute = $this->getSyliusAttribute($request, 'redirect', 'referer');
+                $contactEmail = $channel->getContactEmail();
 
-            if (null === $contactEmail) {
-                $errorMessage = $this->getSyliusAttribute(
+                $redirectRoute = $this->getSyliusAttribute($request, 'redirect', 'referer');
+
+                if (null === $contactEmail) {
+                    $errorMessage = $this->getSyliusAttribute(
+                        $request,
+                        'error_flash',
+                        'sylius.contact.request_error',
+                    );
+
+                    /** @var FlashBagInterface $flashBag */
+                    $flashBag = $request->getSession()->getBag('flashes');
+                    $flashBag->add('error', $errorMessage);
+
+                    return new RedirectResponse($this->router->generate($redirectRoute));
+                }
+
+                $localeCode = $this->localeContext->getLocaleCode();
+                $this->contactEmailManager->sendContactRequest($data, [$contactEmail], $channel, $localeCode);
+
+                $successMessage = $this->getSyliusAttribute(
                     $request,
-                    'error_flash',
-                    'sylius.contact.request_error',
+                    'success_flash',
+                    'sylius.contact.request_success',
                 );
 
                 /** @var FlashBagInterface $flashBag */
                 $flashBag = $request->getSession()->getBag('flashes');
-                $flashBag->add('error', $errorMessage);
+                $flashBag->add('success', $successMessage);
 
                 return new RedirectResponse($this->router->generate($redirectRoute));
             }
-
-            $localeCode = $this->localeContext->getLocaleCode();
-            $this->contactEmailManager->sendContactRequest($data, [$contactEmail], $channel, $localeCode);
-
-            $successMessage = $this->getSyliusAttribute(
-                $request,
-                'success_flash',
-                'sylius.contact.request_success',
-            );
-
-            /** @var FlashBagInterface $flashBag */
-            $flashBag = $request->getSession()->getBag('flashes');
-            $flashBag->add('success', $successMessage);
-
-            return new RedirectResponse($this->router->generate($redirectRoute));
         }
 
         $template = $this->getSyliusAttribute($request, 'template', '@SyliusShop/contact/contact_request.html.twig');
