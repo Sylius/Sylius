@@ -68,6 +68,9 @@ sylius_twig_hooks:
             shipments:
                 template: '@SyliusAdmin/order/show/content/sections/shipments.html.twig'
                 priority: 0
+            subscription:
+                template: '@SyliusAdmin/order/show/content/sections/subscription.html.twig'
+                priority: -100
 
         'sylius_admin.order.show.content.sections.items':
             head:

@@ -88,6 +88,9 @@ sylius_twig_hooks:
             media:
                 template: '@SyliusAdmin/product/form/side_navigation/media.html.twig'
                 priority: 0
+            subscription:
+                template: '@SyliusAdmin/product/form/side_navigation/subscription.html.twig'
+                priority: -100
 
         'sylius_admin.product.update.content.form.sections':
             general:
@@ -122,6 +125,9 @@ sylius_twig_hooks:
             media:
                 template: '@SyliusAdmin/product/form/sections/media.html.twig'
                 priority: 0
+            subscription:
+                template: '@SyliusAdmin/product/form/sections/subscription.html.twig'
+                priority: -100
 
         'sylius_admin.product.update.content.form.sections.general':
             default:

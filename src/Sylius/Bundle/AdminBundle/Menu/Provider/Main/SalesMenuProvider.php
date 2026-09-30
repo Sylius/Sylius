@@ -59,5 +59,14 @@ final readonly class SalesMenuProvider implements MenuProviderInterface
             ->setLabelAttribute('icon', 'tabler:truck-return')
             ->setExtra('plus_logo', true)
         ;
+
+        $sales
+            ->addChild('subscriptions')
+            ->setUri('https://sylius.com/plus/?utm_source=product&utm_medium=placeholder&utm_campaign=subscriptions-placeholder')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.sales.subscriptions')
+            ->setLabelAttribute('icon', 'tabler:calendar-repeat')
+            ->setExtra('plus_logo', true)
+        ;
     }
 }
