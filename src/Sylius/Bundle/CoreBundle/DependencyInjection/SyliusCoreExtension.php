@@ -81,6 +81,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.allowed_images_mime_types', $config['allowed_images_mime_types']);
         $container->setParameter('sylius_core.checkout.payment.allowed_states', $config['checkout']['payment']['allowed_states']);
         $container->setParameter('sylius_core.grids_configuration', $config['grid']);
+        $container->setParameter('sylius_core.oauth.account_linking.require_verified_email', $config['oauth']['account_linking']['require_verified_email']);
+        $container->setParameter('sylius_core.oauth.account_linking.trusted_resource_owners', $config['oauth']['account_linking']['trusted_resource_owners']);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
@@ -109,7 +111,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
 
         $this->prependDefaultDriver($container, $config['driver']);
-        $this->prependHwiOauth($container);
+        $this->prependHwiOauth($container, $config['oauth']);
         $this->prependDoctrineMigrations($container);
         $this->prependDoctrineIdentityGenerationPreferences($container);
         $this->prependPropertyInfo($container);
@@ -140,6 +142,25 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
     }
 
+    /** @param array{account_linking: array{require_verified_email: bool, trusted_resource_owners: list<string>}} $oauthConfig */
+    private function prependHwiOauth(ContainerBuilder $container, array $oauthConfig): void
+    {
+        if (!$container->hasExtension('hwi_oauth')) {
+            return;
+        }
+
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+
+        $loader->load('services/integrations/hwi_oauth.php');
+
+        if (!$oauthConfig['account_linking']['require_verified_email']) {
+            $container->setAlias(
+                'sylius.oauth.email_verification_checker',
+                'sylius.oauth.email_verification_checker.always_verified',
+            );
+        }
+    }
+
     private function prependDoctrineIdentityGenerationPreferences(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('doctrine')) {
@@ -166,17 +187,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 'with_constructor_extractor' => false,
             ],
         ]);
-    }
-
-    private function prependHwiOauth(ContainerBuilder $container): void
-    {
-        if (!$container->hasExtension('hwi_oauth')) {
-            return;
-        }
-
-        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-
-        $loader->load('services/integrations/hwi_oauth.php');
     }
 
     private function registerAutoconfiguration(ContainerBuilder $container): void

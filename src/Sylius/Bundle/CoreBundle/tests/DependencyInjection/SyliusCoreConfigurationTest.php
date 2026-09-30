@@ -57,6 +57,35 @@ final class SyliusCoreConfigurationTest extends TestCase
         );
     }
 
+    #[Test]
+    public function it_requires_a_verified_email_for_oauth_account_linking_by_default(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['oauth' => ['account_linking' => [
+                'require_verified_email' => true,
+                'trusted_resource_owners' => [],
+            ]]],
+            'oauth',
+        );
+    }
+
+    #[Test]
+    public function it_allows_to_configure_oauth_account_linking(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['oauth' => ['account_linking' => [
+                'require_verified_email' => false,
+                'trusted_resource_owners' => ['facebook'],
+            ]]]],
+            ['oauth' => ['account_linking' => [
+                'require_verified_email' => false,
+                'trusted_resource_owners' => ['facebook'],
+            ]]],
+            'oauth',
+        );
+    }
+
     protected function getConfiguration(): Configuration
     {
         return new Configuration();
