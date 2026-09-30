@@ -62,6 +62,8 @@ sylius_twig_hooks:
                 priority: 0
 
         'sylius_admin.product_variant.create.content.form.sections.general':
+            default:
+                enabled: false
             header:
                 template: '@SyliusAdmin/product_variant/form/sections/general/header.html.twig'
                 priority: 100
