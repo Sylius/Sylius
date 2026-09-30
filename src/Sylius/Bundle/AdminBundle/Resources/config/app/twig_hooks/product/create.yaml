@@ -59,7 +59,7 @@ sylius_twig_hooks:
                 priority: -100
             customization:
                 template: '@SyliusAdmin/product/form/side_navigation/customization.html.twig'
-                priority: -100
+                priority: -200
 
         'sylius_admin.product.create.content.form.sections':
             general:
@@ -99,7 +99,7 @@ sylius_twig_hooks:
                 priority: -100
             customization:
                 template: '@SyliusAdmin/product/form/sections/customization.html.twig'
-                priority: -100
+                priority: -200
 
         'sylius_admin.product.create.content.form.sections.general':
             default:
