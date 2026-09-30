@@ -163,6 +163,51 @@ final class ApiCartBlamerListenerTest extends TestCase
         );
     }
 
+    public function testDoesNothingIfGivenCartHasNoTokenValueOnInteractiveLogin(): void
+    {
+        /** @var OrderInterface|MockObject $cartMock */
+        $cartMock = $this->createMock(OrderInterface::class);
+        /** @var Request|MockObject $requestMock */
+        $requestMock = $this->createMock(Request::class);
+        /** @var TokenInterface|MockObject $tokenMock */
+        $tokenMock = $this->createMock(TokenInterface::class);
+        /** @var ShopUserInterface|MockObject $userMock */
+        $userMock = $this->createMock(ShopUserInterface::class);
+        /** @var ShopApiOrdersSubSection|MockObject $shopApiOrdersSubSectionSectionMock */
+        $shopApiOrdersSubSectionSectionMock = $this->createMock(ShopApiOrdersSubSection::class);
+        /** @var AuthenticatorInterface|MockObject $authenticatorMock */
+        $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
+        /** @var Passport|MockObject $passportMock */
+        $passportMock = $this->createMock(Passport::class);
+
+        $this->sectionResolver->expects(self::once())
+            ->method('getSection')
+            ->willReturn($shopApiOrdersSubSectionSectionMock);
+
+        $this->cartContext->expects(self::once())->method('getCart')->willReturn($cartMock);
+
+        $cartMock->expects(self::once())->method('isCreatedByGuest')->willReturn(true);
+
+        $tokenMock->expects(self::once())->method('getUser')->willReturn($userMock);
+
+        $userMock->method('getEmail')->willReturn('email@sylius.com');
+
+        $cartMock->expects(self::once())->method('getTokenValue')->willReturn(null);
+
+        $this->commandBus->expects(self::never())->method('dispatch');
+
+        $this->apiCartBlamerListener->onLoginSuccess(
+            new LoginSuccessEvent(
+                $authenticatorMock,
+                $passportMock,
+                $tokenMock,
+                $requestMock,
+                null,
+                'api_shop',
+            ),
+        );
+    }
+
     public function testDoesNothingIfGivenCartHasBeenBlamedInPast(): void
     {
         /** @var OrderInterface|MockObject $cartMock */
