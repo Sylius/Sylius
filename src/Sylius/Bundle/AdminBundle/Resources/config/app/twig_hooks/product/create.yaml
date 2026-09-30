@@ -57,6 +57,9 @@ sylius_twig_hooks:
             subscription:
                 template: '@SyliusAdmin/product/form/side_navigation/subscription.html.twig'
                 priority: -100
+            customization:
+                template: '@SyliusAdmin/product/form/side_navigation/customization.html.twig'
+                priority: -100
 
         'sylius_admin.product.create.content.form.sections':
             general:
@@ -93,6 +96,9 @@ sylius_twig_hooks:
                 priority: 0
             subscription:
                 template: '@SyliusAdmin/product/form/sections/subscription.html.twig'
+                priority: -100
+            customization:
+                template: '@SyliusAdmin/product/form/sections/customization.html.twig'
                 priority: -100
 
         'sylius_admin.product.create.content.form.sections.general':

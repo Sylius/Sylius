@@ -120,6 +120,10 @@ sylius:
                 title: 'Accept payments with Stripe'
         pending_actions: Pending actions
         plus_placeholder:
+            product_configurator:
+                add_customization: 'Add customization'
+                product_configuration: 'Product configuration'
+                product_configurator: 'Product configurator'
             returns:
                 no_return_requests: 'There are no return requests for this order.'
                 return_requests: 'Return requests'
