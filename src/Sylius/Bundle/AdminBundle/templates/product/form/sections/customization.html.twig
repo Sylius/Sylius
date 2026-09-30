@@ -1,0 +1,14 @@
+<div class="tab-pane" id="product-customization" role="tabpanel" tabindex="0">
+    {% embed '@SyliusAdmin/shared/plus_placeholder.html.twig' with { utm_campaign: 'product-configurator-placeholder' } %}
+        {% block content %}
+            <div class="card-header">
+                <h2 class="card-title">{{ 'sylius.ui.plus_placeholder.product_configurator.product_configurator'|trans }}</h2>
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-outline-primary w-100" tabindex="-1">
+                    {{ 'sylius.ui.plus_placeholder.product_configurator.add_customization'|trans }}
+                </button>
+            </div>
+        {% endblock %}
+    {% endembed %}
+</div>

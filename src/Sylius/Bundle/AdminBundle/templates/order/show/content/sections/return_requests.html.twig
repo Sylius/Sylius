@@ -1,0 +1,12 @@
+{% embed '@SyliusAdmin/shared/plus_placeholder.html.twig' with { utm_campaign: 'returns-placeholder' } %}
+    {% block content %}
+        <div class="card-header">
+            <div class="card-title">
+                {{ 'sylius.ui.plus_placeholder.returns.return_requests'|trans }}
+            </div>
+        </div>
+        <div class="card-body text-secondary">
+            {{ 'sylius.ui.plus_placeholder.returns.no_return_requests'|trans }}
+        </div>
+    {% endblock %}
+{% endembed %}

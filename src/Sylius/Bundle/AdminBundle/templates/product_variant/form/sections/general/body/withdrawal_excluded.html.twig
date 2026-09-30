@@ -1,0 +1,10 @@
+{% embed '@SyliusAdmin/shared/plus_placeholder.html.twig' with { utm_campaign: 'returns-placeholder', class: 'mb-4' } %}
+    {% block content %}
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="plus_placeholder_withdrawal_excluded" disabled>
+            <label class="form-check-label" for="plus_placeholder_withdrawal_excluded">
+                {{ 'sylius.ui.plus_placeholder.returns.withdrawal_excluded'|trans }}
+            </label>
+        </div>
+    {% endblock %}
+{% endembed %}
