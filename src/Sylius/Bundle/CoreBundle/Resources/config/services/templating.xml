@@ -36,6 +36,7 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="url_helper" />
             <argument>%sylius.unsecured_urls%</argument>
+            <argument type="service" id="request_stack" />
             <tag name="twig.extension" />
         </service>
 
