@@ -32,6 +32,10 @@ interface ProductOptionValueInterface extends ResourceInterface, CodeAwareInterf
 
     public function getName(): ?string;
 
+    public function getPosition(): ?int;
+
+    public function setPosition(?int $position): void;
+
     /**
      * @return ProductOptionValueTranslationInterface
      */

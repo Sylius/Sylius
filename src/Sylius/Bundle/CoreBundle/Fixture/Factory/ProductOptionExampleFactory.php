@@ -66,12 +66,13 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
             /** @var ProductOptionValueInterface $productOptionValue */
             $productOptionValue = $this->productOptionValueFactory->createNew();
             $productOptionValue->setCode($code);
+            $productOptionValue->setPosition($value['position']);
 
             foreach ($this->getLocales() as $localeCode) {
                 $productOptionValue->setCurrentLocale($localeCode);
                 $productOptionValue->setFallbackLocale($localeCode);
 
-                $productOptionValue->setValue($value);
+                $productOptionValue->setValue($value['value']);
             }
 
             $productOption->addValue($productOptionValue);
@@ -104,7 +105,7 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
 
                 $values = [];
                 for ($i = 1; $i <= 5; ++$i) {
-                    $values[sprintf('%s-option#%d', $options['code'], $i)] = sprintf('%s #i%d', $options['name'], $i);
+                    $values[sprintf('%s-option#%d', $options['code'], $i)] = ['value' => sprintf('%s #i%d', $options['name'], $i), 'position' => $i - 1];
                 }
 
                 if (!empty($options['translations'])) {
