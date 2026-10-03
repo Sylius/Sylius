@@ -15,12 +15,15 @@ namespace Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 
 use ApiPlatform\State\SerializerContextBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 abstract class AbstractInputContextBuilder implements SerializerContextBuilderInterface
 {
     public function __construct(
         protected readonly SerializerContextBuilderInterface $decoratedContextBuilder,
+        protected readonly ?NameConverterInterface $nameConverter,
         protected readonly string $attributeClass,
         protected readonly string $defaultConstructorArgumentName,
     ) {
@@ -36,6 +39,10 @@ abstract class AbstractInputContextBuilder implements SerializerContextBuilderIn
         }
 
         $constructorArgumentName = $this->getConstructorArgumentName($inputClass) ?? $this->defaultConstructorArgumentName;
+        $constructorArgumentName = $this->nameConverter
+            ? $this->nameConverter->normalize($constructorArgumentName, $inputClass, JsonEncoder::FORMAT, $context)
+            : $constructorArgumentName
+        ;
 
         if (isset($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass]) && is_array($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass])) {
             $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = array_merge($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass], [$constructorArgumentName => $this->resolveValue($context, $extractedAttributes)]);

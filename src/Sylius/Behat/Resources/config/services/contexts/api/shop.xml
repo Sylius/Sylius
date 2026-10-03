@@ -23,6 +23,7 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.channel" class="Sylius\Behat\Context\Api\Shop\ChannelContext">
@@ -48,6 +49,7 @@
             <argument type="service" id="sylius.behat.request_factory" />
             <argument>%sylius.security.api_route%</argument>
             <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.customer" class="Sylius\Behat\Context\Api\Shop\CustomerContext">
@@ -64,6 +66,7 @@
         <service id="sylius.behat.context.api.shop.exchange_rate" class="Sylius\Behat\Context\Api\Shop\ExchangeRateContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.promotion" class="Sylius\Behat\Context\Api\Shop\PromotionContext">
@@ -85,6 +88,7 @@
             <argument type="service" id="sylius.behat.factory.address" />
             <argument>%sylius.model.shipping_method.class%</argument>
             <argument>%sylius.model.payment_method.class%</argument>
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.homepage" class="Sylius\Behat\Context\Api\Shop\HomepageContext">
@@ -116,6 +120,7 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%sylius.security.api_route%</argument>
             <argument type="service" id="sylius.resolver.product_variant.default" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.product_attribute" class="Sylius\Behat\Context\Api\Shop\ProductAttributeContext">
@@ -129,6 +134,7 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="api_platform.iri_converter" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.product_review" class="Sylius\Behat\Context\Api\Shop\ProductReviewContext">
@@ -145,6 +151,7 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument>%sylius.security.api_route%</argument>
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.order" class="Sylius\Behat\Context\Api\Shop\OrderContext">
@@ -156,6 +163,7 @@
             <argument type="service" id="sylius.behat.api_admin_security" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument>%sylius.security.api_route%</argument>
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.order_item" class="Sylius\Behat\Context\Api\Shop\OrderItemContext">
@@ -170,18 +178,21 @@
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.request_factory" />
             <argument type="service" id="sylius.repository.payment_request" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.payment" class="Sylius\Behat\Context\Api\Shop\PaymentContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.shipment" class="Sylius\Behat\Context\Api\Shop\ShipmentContext">
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.locale" class="Sylius\Behat\Context\Api\Shop\LocaleContext">
@@ -202,6 +213,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="api_platform.iri_converter" />
             <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.checkout.complete" class="Sylius\Behat\Context\Api\Shop\Checkout\CheckoutCompleteContext">
@@ -214,6 +226,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.api_platform_client.shop" />
             <argument type="service" id="Sylius\Behat\Client\ResponseCheckerInterface" />
+            <argument type="service" id="api_platform.name_converter" on-invalid="ignore" />
         </service>
 
         <service id="sylius.behat.context.api.shop.taxon" class="Sylius\Behat\Context\Api\Shop\TaxonContext">

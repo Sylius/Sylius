@@ -24,7 +24,7 @@ final class CommandDenormalizer implements DenormalizerInterface
 {
     public function __construct(
         private DenormalizerInterface $itemNormalizer,
-        private NameConverterInterface $nameConverter,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -70,6 +70,6 @@ final class CommandDenormalizer implements DenormalizerInterface
 
     private function normalizeFieldName(string $field, string $class): string
     {
-        return $this->nameConverter->normalize($field, $class);
+        return $this->nameConverter ? $this->nameConverter->normalize($field, $class) : $field;
     }
 }

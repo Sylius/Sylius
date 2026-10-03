@@ -18,6 +18,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -32,10 +33,13 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class OrderContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $shopClient,
         private ApiClientInterface $adminClient,
@@ -45,6 +49,7 @@ final readonly class OrderContext implements Context
         private SecurityServiceInterface $securityService,
         private RequestFactoryInterface $requestFactory,
         private string $apiUrlPrefix,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -134,15 +139,21 @@ final readonly class OrderContext implements Context
         string $addressType,
     ): void {
         $address = $this->responseChecker->getValue($this->shopClient->getLastResponse(), ($addressType . 'Address'));
+        $firstNameKey = $this->getNormalizedKey('firstName');
+        $lastNameKey = $this->getNormalizedKey('lastName');
+        $streetKey = $this->getNormalizedKey('street');
+        $postcodeKey = $this->getNormalizedKey('postcode');
+        $cityKey = $this->getNormalizedKey('city');
+        $countryCodeKey = $this->getNormalizedKey('countryCode');
 
         $names = explode(' ', $customerName);
 
-        Assert::same($address['firstName'], $names[0]);
-        Assert::same($address['lastName'], $names[1]);
-        Assert::same($address['street'], $street);
-        Assert::same($address['postcode'], $postcode);
-        Assert::same($address['city'], $city);
-        Assert::same($address['countryCode'], $country->getCode());
+        Assert::same($address[$firstNameKey], $names[0]);
+        Assert::same($address[$lastNameKey], $names[1]);
+        Assert::same($address[$streetKey], $street);
+        Assert::same($address[$postcodeKey], $postcode);
+        Assert::same($address[$cityKey], $city);
+        Assert::same($address[$countryCodeKey], $country->getCode());
     }
 
     /**
@@ -159,9 +170,10 @@ final readonly class OrderContext implements Context
     public function theProductShouldBeInTheItemsList(string $productName): void
     {
         $items = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'items');
+        $productNameKey = $this->getNormalizedKey('productName');
 
         foreach ($items as $item) {
-            if ($item['productName'] === $productName) {
+            if ($item[$productNameKey] === $productName) {
                 return;
             }
         }
@@ -197,7 +209,7 @@ final readonly class OrderContext implements Context
     {
         $address = $this->responseChecker->getValue($this->shopClient->getLastResponse(), ($addressType . 'Address'));
 
-        Assert::same($address['provinceName'], $provinceName);
+        Assert::same($address[$this->getNormalizedKey('provinceName')], $provinceName);
     }
 
     /**
@@ -208,9 +220,10 @@ final readonly class OrderContext implements Context
         $items = $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'items');
 
         $subtotal = 0;
+        $subtotalKey = $this->getNormalizedKey('subtotal');
 
         foreach ($items as $item) {
-            $subtotal = $subtotal + $item['subtotal'];
+            $subtotal += $item[$subtotalKey];
         }
 
         Assert::same($subtotal, $expectedSubtotal);
@@ -252,7 +265,7 @@ final readonly class OrderContext implements Context
     {
         $adjustment = $this->getAdjustmentWithLabel($promotion->getName());
         Assert::notNull($adjustment);
-        Assert::same($discount, $adjustment['amount']);
+        Assert::same($discount, $adjustment[$this->getNormalizedKey('amount')]);
     }
 
     /**
@@ -263,8 +276,9 @@ final readonly class OrderContext implements Context
         $discount = 0;
         $itemId = $this->geOrderItemIdForProductInCart($product, $this->sharedStorage->get('cart_token'));
         $adjustments = $this->getAdjustmentsForOrderItem($itemId);
+        $amountKey = $this->getNormalizedKey('amount');
         foreach ($adjustments as $adjustment) {
-            $discount += $adjustment['amount'];
+            $discount += $adjustment[$amountKey];
         }
 
         Assert::same(-$discount, $amount);
@@ -296,7 +310,7 @@ final readonly class OrderContext implements Context
             ->getValue($this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')), 'payments')[0]
         ;
 
-        Assert::same($this->iriConverter->getIriFromResource($paymentMethod), $payment['method']);
+        Assert::same($this->iriConverter->getIriFromResource($paymentMethod), $payment[$this->getNormalizedKey('method')]);
     }
 
     /**
@@ -322,7 +336,7 @@ final readonly class OrderContext implements Context
     {
         $paymentMethodIri = $this
             ->responseChecker
-            ->getValue($this->shopClient->getLastResponse(), 'payments')[0]['method']
+            ->getValue($this->shopClient->getLastResponse(), 'payments')[0][$this->getNormalizedKey('method')]
         ;
 
         Assert::same($this->iriConverter->getResourceFromIri($paymentMethodIri)->getCode(), $paymentMethod->getCode());
@@ -384,7 +398,7 @@ final readonly class OrderContext implements Context
         foreach ($items as $item) {
             $response = $this->getProductForItem($item);
             if ($this->responseChecker->hasValue($response, 'code', $product->getCode())) {
-                return (string) $item['id'];
+                return (string) $item[$this->getNormalizedKey('id')];
             }
         }
 
@@ -393,14 +407,14 @@ final readonly class OrderContext implements Context
 
     private function getProductForItem(array $item): Response
     {
-        if (!isset($item['variant'])) {
+        if (!isset($item[$this->getNormalizedKey('variant')])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key, but this key is missing. Current array: ' .
                 json_encode($item),
             );
         }
 
-        $request = $this->requestFactory->custom($item['variant'], HttpRequest::METHOD_GET);
+        $request = $this->requestFactory->custom($item[$this->getNormalizedKey('variant')], HttpRequest::METHOD_GET);
         $this->shopClient->executeCustomRequest($request);
 
         return $this->shopClient->showByIri($this->responseChecker->getValue($this->shopClient->getLastResponse(), 'product'));
@@ -409,7 +423,7 @@ final readonly class OrderContext implements Context
     private function getAdjustmentWithLabel(string $label): ?array
     {
         $adjustments = $this->getAdjustmentsForOrder();
-        $index = array_search($label, array_column($adjustments, 'label'));
+        $index = array_search($label, array_column($adjustments, $this->getNormalizedKey('label')));
         if ($index) {
             return $adjustments[$index];
         }
@@ -429,7 +443,7 @@ final readonly class OrderContext implements Context
 
         /** @var int $index */
         foreach ($adjustments as $index => $adjustment) {
-            if (-$amounts[$index] !== $adjustment['amount']) {
+            if (-$amounts[$index] !== $adjustment[$this->getNormalizedKey('amount')]) {
                 return false;
             }
         }

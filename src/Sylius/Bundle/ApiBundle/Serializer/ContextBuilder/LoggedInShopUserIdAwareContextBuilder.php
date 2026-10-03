@@ -17,16 +17,18 @@ use ApiPlatform\State\SerializerContextBuilderInterface;
 use Sylius\Bundle\ApiBundle\Context\UserContextInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 final class LoggedInShopUserIdAwareContextBuilder extends AbstractInputContextBuilder
 {
     public function __construct(
         SerializerContextBuilderInterface $decoratedContextBuilder,
+        ?NameConverterInterface $nameConverter,
         string $attributeClass,
         string $defaultConstructorArgumentName,
         private readonly UserContextInterface $userContext,
     ) {
-        parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
+        parent::__construct($decoratedContextBuilder, $nameConverter, $attributeClass, $defaultConstructorArgumentName);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool

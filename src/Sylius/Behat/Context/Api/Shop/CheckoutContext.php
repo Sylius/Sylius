@@ -20,6 +20,7 @@ use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Shop\Checkout\CheckoutShippingContext;
 use Sylius\Behat\Service\Converter\IriConverterInterface;
@@ -43,10 +44,13 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class CheckoutContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public const CHECKOUT_STATE_TYPES = [
         'address' => OrderCheckoutStates::STATE_ADDRESSED,
         'shipping method' => OrderCheckoutStates::STATE_SHIPPING_SELECTED,
@@ -73,6 +77,7 @@ final class CheckoutContext implements Context
         private readonly AddressFactoryInterface $addressFactory,
         private readonly string $shippingMethodClass,
         private readonly string $paymentMethodClass,
+        private readonly ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -103,9 +108,9 @@ final class CheckoutContext implements Context
             uri: sprintf(
                 'orders/%s/shipments/%s',
                 $this->sharedStorage->get('cart_token'),
-                $content['shipments'][0]['id'],
+                $content[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('id')],
             ),
-            body: ['shippingMethod' => $content['shipments'][0]['method']],
+            body: ['shippingMethod' => $content[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('method')]],
         );
     }
 
@@ -128,7 +133,7 @@ final class CheckoutContext implements Context
             uri: sprintf(
                 'orders/%s/shipments/%s',
                 $this->sharedStorage->get('cart_token'),
-                $content['shipments'][0]['id'],
+                $content[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('id')],
             ),
             body: ['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)],
         );
@@ -470,7 +475,7 @@ final class CheckoutContext implements Context
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
-            sprintf('shipments/%s', $this->getCart()['shipments'][0]['id']),
+            sprintf('shipments/%s', $this->getCart()[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('id')]),
         );
         $request->setContent([
             'shippingMethod' => $this->iriConverter->getIriFromResource(
@@ -493,7 +498,7 @@ final class CheckoutContext implements Context
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
-            sprintf('payments/%s', $cart['payments'][0]['id']),
+            sprintf('payments/%s', $cart[$this->getNormalizedKey('payments')][0][$this->getNormalizedKey('id')]),
         );
         $request->setContent([
             'paymentMethod' => $this->iriConverter->getIriFromResource(
@@ -556,7 +561,7 @@ final class CheckoutContext implements Context
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
-            \sprintf('payments/%s', $this->getCart()['payments'][0]['id']),
+            \sprintf('payments/%s', $this->getCart()[$this->getNormalizedKey('payments')][0][$this->getNormalizedKey('id')]),
         );
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromResource($paymentMethod)]);
 
@@ -628,12 +633,13 @@ final class CheckoutContext implements Context
 
         Assert::notEmpty($payments, 'No payments found in response.');
         $paymentMethodIri = $this->iriConverter->getIriFromResource($paymentMethod);
+        $methodKey = $this->getNormalizedKey('method');
         foreach ($payments as $payment) {
-            if ($payment['method'] !== $paymentMethodIri) {
+            if ($payment[$methodKey] !== $paymentMethodIri) {
                 continue;
             }
 
-            $customRequest = $this->requestFactory->custom($payment['method'], HTTPRequest::METHOD_GET);
+            $customRequest = $this->requestFactory->custom($payment[$methodKey], HTTPRequest::METHOD_GET);
             $paymentMethodResponse = $this->client->executeCustomRequest($customRequest);
             Assert::same(
                 $this->responseChecker->getValue(
@@ -704,7 +710,7 @@ final class CheckoutContext implements Context
     {
         $paymentMethods = $this->getPossiblePaymentMethods();
 
-        Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods, 'name'), true));
+        Assert::notFalse(array_search($paymentMethodName, array_column($paymentMethods, $this->getNormalizedKey('name')), true));
     }
 
     /**
@@ -715,7 +721,7 @@ final class CheckoutContext implements Context
         $paymentMethods = $this->getPossiblePaymentMethods();
 
         foreach ($paymentMethodsNames as $paymentMethodName) {
-            Assert::inArray($paymentMethodName, array_column($paymentMethods, 'name'));
+            Assert::inArray($paymentMethodName, array_column($paymentMethods, $this->getNormalizedKey('name')));
         }
     }
 
@@ -727,7 +733,7 @@ final class CheckoutContext implements Context
         $paymentMethods = $this->getPossiblePaymentMethods();
 
         foreach ($paymentMethodsNames as $paymentMethodName) {
-            Assert::false(in_array($paymentMethodName, array_column($paymentMethods, 'name'), true));
+            Assert::false(in_array($paymentMethodName, array_column($paymentMethods, $this->getNormalizedKey('name')), true));
         }
     }
 
@@ -740,10 +746,10 @@ final class CheckoutContext implements Context
         Assert::notEmpty($paymentMethods);
 
         if ($choice === 'first') {
-            Assert::same(reset($paymentMethods)['name'], $paymentMethodName);
+            Assert::same(reset($paymentMethods)[$this->getNormalizedKey('name')], $paymentMethodName);
         }
         if ($choice === 'last') {
-            Assert::same(end($paymentMethods)['name'], $paymentMethodName);
+            Assert::same(end($paymentMethods)[$this->getNormalizedKey('name')], $paymentMethodName);
         }
     }
 
@@ -752,7 +758,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldStillBeOnTheCheckoutAddressingStep(): void
     {
-        Assert::same($this->getCart()['checkoutState'], OrderCheckoutStates::STATE_CART);
+        Assert::same($this->getCart()[$this->getNormalizedKey('checkoutState')], OrderCheckoutStates::STATE_CART);
     }
 
     /**
@@ -773,7 +779,7 @@ final class CheckoutContext implements Context
     {
         $response = $this->client->getLastResponse();
 
-        Assert::true(empty($this->responseChecker->getResponseContent($response)['payments']));
+        Assert::true(empty($this->responseChecker->getResponseContent($response)[$this->getNormalizedKey('payments')]));
     }
 
     /**
@@ -801,7 +807,7 @@ final class CheckoutContext implements Context
         $paymentMethodName = $paymentMethod->getName();
 
         foreach ($paymentMethods as $method) {
-            if ($method['name'] === $paymentMethodName) {
+            if ($method[$this->getNormalizedKey('name')] === $paymentMethodName) {
                 return;
             }
         }
@@ -818,7 +824,7 @@ final class CheckoutContext implements Context
         $shippingMethodName = $shippingMethod->getName();
 
         foreach ($shippingMethods as $method) {
-            if ($method['name'] === $shippingMethodName) {
+            if ($method[$this->getNormalizedKey('name')] === $shippingMethodName) {
                 return;
             }
         }
@@ -838,7 +844,7 @@ final class CheckoutContext implements Context
     public function iShouldNotBeAbleToProceedCheckoutShippingStep(): void
     {
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_ADDRESSED);
-        Assert::isEmpty($this->getCart()['shipments']);
+        Assert::isEmpty($this->getCart()[$this->getNormalizedKey('shipments')]);
     }
 
     /**
@@ -847,7 +853,7 @@ final class CheckoutContext implements Context
     public function iShouldNotBeAbleToProceedCheckoutPaymentStep(): void
     {
         $this->iShouldBeOnTheCheckoutPaymentStep();
-        Assert::isEmpty($this->getCart()['payments']);
+        Assert::isEmpty($this->getCart()[$this->getNormalizedKey('payments')]);
     }
 
     /**
@@ -938,7 +944,7 @@ final class CheckoutContext implements Context
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
 
-        Assert::true($shippingMethods[0]['code'] === $shippingMethod->getCode());
+        Assert::true($shippingMethods[0][$this->getNormalizedKey('code')] === $shippingMethod->getCode());
     }
 
     /**
@@ -948,7 +954,7 @@ final class CheckoutContext implements Context
     {
         $shippingMethods = $this->getCartShippingMethods($this->getCart());
 
-        Assert::true(end($shippingMethods)['code'] === $shippingMethod->getCode());
+        Assert::true(end($shippingMethods)[$this->getNormalizedKey('code')] === $shippingMethod->getCode());
     }
 
     /**
@@ -956,7 +962,7 @@ final class CheckoutContext implements Context
      */
     public function myOrderTotalShouldBe(int $total): void
     {
-        Assert::same($total, (int) $this->getCart()['total']);
+        Assert::same($total, (int) $this->getCart()[$this->getNormalizedKey('total')]);
     }
 
     /**
@@ -1052,7 +1058,7 @@ final class CheckoutContext implements Context
         Assert::true($response->getStatusCode() === 422);
 
         /** @var array|null $violations */
-        $violations = $this->responseChecker->getResponseContent($response)['violations'];
+        $violations = $this->responseChecker->getResponseContent($response)[$this->getNormalizedKey('violations')];
 
         $detailType .= 'Address';
 
@@ -1061,7 +1067,7 @@ final class CheckoutContext implements Context
                 $violations,
                 $detailType . '.' . StringInflector::nameToCamelCase($element),
             );
-            Assert::same($violation['message'], sprintf('Please enter %s.', $element));
+            Assert::same($violation[$this->getNormalizedKey('message')], sprintf('Please enter %s.', $element));
         }
     }
 
@@ -1071,14 +1077,14 @@ final class CheckoutContext implements Context
     public function iShouldBeNotifiedThatTheInShippingDetailsIsRequired(string $element, string $type): void
     {
         /** @var array|null $violations */
-        $violations = $this->responseChecker->getResponseContent($this->client->getLastResponse())['violations'];
+        $violations = $this->responseChecker->getResponseContent($this->client->getLastResponse())[$this->getNormalizedKey('violations')];
         $type .= 'Address';
 
         $violation = $this->getViolation(
             $violations,
             $type . '.' . StringInflector::nameToCamelCase($element),
         );
-        Assert::same($violation['message'], sprintf('Please enter %s.', $element));
+        Assert::same($violation[$this->getNormalizedKey('message')], sprintf('Please enter %s.', $element));
     }
 
     /**
@@ -1302,9 +1308,11 @@ final class CheckoutContext implements Context
     public function iShouldBeCheckingOutAs(string $email): void
     {
         $cart = $this->getCart();
+        $customerKey = $this->getNormalizedKey('customer');
+        $emailKey = $this->getNormalizedKey('email');
 
-        Assert::notNull($cart['customer'], sprintf('Customer with an email "%s" was not expected to be null.', $email));
-        Assert::same($cart['customer']['email'], $email);
+        Assert::notNull($cart[$customerKey], sprintf('Customer with an email "%s" was not expected to be null.', $email));
+        Assert::same($cart[$customerKey][$emailKey], $email);
     }
 
     /**
@@ -1399,7 +1407,11 @@ final class CheckoutContext implements Context
     private function getCartShippingMethods(array $cart): array
     {
         $this->client->customAction(
-            sprintf('/api/v2/shop/orders/%s/shipments/%s/methods', $cart['tokenValue'], $cart['shipments'][0]['id']),
+            sprintf(
+                '/api/v2/shop/orders/%s/shipments/%s/methods',
+                $cart[$this->getNormalizedKey('tokenValue')],
+                $cart[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('id')],
+            ),
             HTTPRequest::METHOD_GET,
         );
 
@@ -1409,7 +1421,7 @@ final class CheckoutContext implements Context
     private function hasShippingMethod(ShippingMethodInterface $shippingMethod): bool
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
-            if ($cartShippingMethod['code'] === $shippingMethod->getCode()) {
+            if ($cartShippingMethod[$this->getNormalizedKey('code')] === $shippingMethod->getCode()) {
                 return true;
             }
         }
@@ -1421,8 +1433,8 @@ final class CheckoutContext implements Context
     {
         foreach ($this->getCartShippingMethods($this->getCart()) as $cartShippingMethod) {
             if (
-                $cartShippingMethod['price'] === $fee &&
-                $cartShippingMethod['code'] === $shippingMethod->getCode()
+                $cartShippingMethod[$this->getNormalizedKey('price')] === $fee &&
+                $cartShippingMethod[$this->getNormalizedKey('code')] === $shippingMethod->getCode()
             ) {
                 return true;
             }
@@ -1455,7 +1467,10 @@ final class CheckoutContext implements Context
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
 
         foreach ($items as $item) {
-            if ($item['productName'] === $productName && $item['quantity'] === $quantity) {
+            if (
+                $item[$this->getNormalizedKey('productName')] === $productName &&
+                $item[$this->getNormalizedKey('quantity')] === $quantity
+            ) {
                 return true;
             }
         }
@@ -1469,7 +1484,10 @@ final class CheckoutContext implements Context
         $items = $this->responseChecker->getValue($this->client->getLastResponse(), 'items');
 
         foreach ($items as $item) {
-            if ($item['productName'] === $productName && $item['unitPrice'] === $unitPrice) {
+            if (
+                $item[$this->getNormalizedKey('productName')] === $productName &&
+                $item[$this->getNormalizedKey('unitPrice')] === $unitPrice
+            ) {
                 return true;
             }
         }
@@ -1516,7 +1534,7 @@ final class CheckoutContext implements Context
 
     private function getViolation(array $violations, string $element): array
     {
-        return $violations[array_search($element, array_column($violations, 'propertyPath'), true)];
+        return $violations[array_search($element, array_column($violations, $this->getNormalizedKey('propertyPath')), true)];
     }
 
     private function hasFullNameInAddress(string $fullName, string $addressType): void
@@ -1527,11 +1545,11 @@ final class CheckoutContext implements Context
         $addressType .= 'Address';
 
         Assert::same(
-            $this->responseChecker->getResponseContent($response)[$addressType]['firstName'],
+            $this->responseChecker->getResponseContent($response)[$addressType][$this->getNormalizedKey('firstName')],
             $names[0],
         );
         Assert::same(
-            $this->responseChecker->getResponseContent($response)[$addressType]['lastName'],
+            $this->responseChecker->getResponseContent($response)[$addressType][$this->getNormalizedKey('lastName')],
             $names[1],
         );
     }
@@ -1542,7 +1560,7 @@ final class CheckoutContext implements Context
         $addressType .= 'Address';
 
         Assert::same(
-            $this->responseChecker->getResponseContent($response)[$addressType]['provinceName'],
+            $this->responseChecker->getResponseContent($response)[$addressType][$this->getNormalizedKey('provinceName')],
             $provinceName,
         );
     }
@@ -1587,6 +1605,8 @@ final class CheckoutContext implements Context
 
     private function getAddressByFieldValue(array $addressBook, string $fieldName, string $fieldValue): array
     {
+        $fieldName = $this->getNormalizedKey($fieldName);
+
         foreach ($addressBook as $address) {
             if ($address[$fieldName] === $fieldValue) {
                 return $address;
@@ -1601,15 +1621,23 @@ final class CheckoutContext implements Context
      */
     private function addressesAreEqual(array $address, AddressInterface $addressToCompare): bool
     {
+        $firstNameKey = $this->getNormalizedKey('firstName');
+        $lastNameKey = $this->getNormalizedKey('lastName');
+        $countryCodeKey = $this->getNormalizedKey('countryCode');
+        $streetKey = $this->getNormalizedKey('street');
+        $cityKey = $this->getNormalizedKey('city');
+        $postcodeKey = $this->getNormalizedKey('postcode');
+        $provinceNameKey = $this->getNormalizedKey('provinceName');
+
         if (
-            $address['firstName'] === $addressToCompare->getFirstName() &&
-            $address['lastName'] === $addressToCompare->getLastName() &&
-            $address['countryCode'] === $addressToCompare->getCountryCode() &&
-            $address['street'] === $addressToCompare->getStreet() &&
-            $address['city'] === $addressToCompare->getCity() &&
-            $address['postcode'] === $addressToCompare->getPostcode() &&
-            ($addressToCompare->getProvinceName() !== null && isset($address['provinceName'])) ?
-                $address['provinceName'] === $addressToCompare->getProvinceName() : true
+            $address[$firstNameKey] === $addressToCompare->getFirstName() &&
+            $address[$lastNameKey] === $addressToCompare->getLastName() &&
+            $address[$countryCodeKey] === $addressToCompare->getCountryCode() &&
+            $address[$streetKey] === $addressToCompare->getStreet() &&
+            $address[$cityKey] === $addressToCompare->getCity() &&
+            $address[$postcodeKey] === $addressToCompare->getPostcode() &&
+            ($addressToCompare->getProvinceName() !== null && isset($address[$provinceNameKey])) ?
+                $address[$provinceNameKey] === $addressToCompare->getProvinceName() : true
         ) {
             return true;
         }
@@ -1649,7 +1677,7 @@ final class CheckoutContext implements Context
             Resources::ORDERS,
             $this->sharedStorage->get('cart_token'),
             HTTPRequest::METHOD_PATCH,
-            sprintf('shipments/%s', $this->getCart()['shipments'][0]['id']),
+            sprintf('shipments/%s', $this->getCart()[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('id')]),
         );
         $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)]);
 
