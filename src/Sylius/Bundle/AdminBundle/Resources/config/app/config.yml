@@ -8,6 +8,8 @@ parameters:
     env(SYLIUS_ADMIN_ROUTING_PATH_NAME): admin
     sylius_admin.path_name: '%env(resolve:SYLIUS_ADMIN_ROUTING_PATH_NAME)%'
     sylius.security.admin_regex: "^/%sylius_admin.path_name%"
+    sylius_admin.security.csrf_parameter: '_csrf_admin_security_token'
+    sylius_admin.security.csrf_token_id: 'admin_authenticate'
 
 webpack_encore:
     builds:
