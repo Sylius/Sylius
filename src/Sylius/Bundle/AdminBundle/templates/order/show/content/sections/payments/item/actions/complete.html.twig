@@ -5,7 +5,7 @@
     <form action="{{ path('sylius_admin_order_payment_complete', {'orderId': order.id, 'id': payment.id}) }}" method="POST" novalidate>
         <input type="hidden" name="_method" value="PUT">
         {% if sylius_csrf_protection_enabled() %}
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token(payment.id) }}" />
+            <input type="hidden" name="{{ sylius_resource_csrf_parameter() }}" value="{{ csrf_token(payment.id) }}" />
         {% endif %}
         <button type="submit" class="btn" {{ sylius_test_html_attribute('complete-payment', payment.id) }}>
             {{ ux_icon('tabler:check') }} {{ 'sylius.ui.complete'|trans }}

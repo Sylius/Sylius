@@ -4,7 +4,7 @@
     <form action="{{ path('sylius_admin_order_cancel', {'id': order.id}) }}" method="POST" novalidate>
         <input type="hidden" name="_method" value="PUT">
         {% if sylius_csrf_protection_enabled() %}
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token(order.id) }}" />
+            <input type="hidden" name="{{ sylius_resource_csrf_parameter() }}" value="{{ csrf_token(order.id) }}" />
         {% endif %}
         <button type="submit" class="dropdown-item" {{ sylius_test_html_attribute('cancel-order') }}>
             {{ ux_icon('tabler:circle-check', {'class': 'icon dropdown-item-icon'}) }}
