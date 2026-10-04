@@ -33,6 +33,12 @@
             <tag name="api_platform.state_provider" priority="10" />
         </service>
 
+        <service id="sylius_api.state_provider.shop.product.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Product\CollectionProvider">
+            <argument type="service" id="api_platform.doctrine.orm.state.collection_provider" />
+            <argument type="service" id="doctrine" />
+            <tag name="api_platform.state_provider" priority="10"/>
+        </service>
+
         <service id="sylius_api.state_provider.shop.product.product_attribute_value.collection" class="Sylius\Bundle\ApiBundle\StateProvider\Shop\Product\ProductAttributeValue\CollectionProvider">
             <argument type="tagged_iterator" tag="api_platform.doctrine.orm.query_extension.collection" />
             <argument type="service" id="sylius.section_resolver.uri_based" />
