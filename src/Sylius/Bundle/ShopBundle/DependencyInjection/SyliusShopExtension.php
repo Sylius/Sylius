@@ -28,6 +28,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class SyliusShopExtension extends Extension implements PrependExtensionInterface
 {
+    private const THEMES_BUILD_NAME = 'shop.themes';
+
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
@@ -58,6 +60,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
     public function prepend(ContainerBuilder $container): void
     {
         $this->prependSyliusThemeBundle($container);
+        $this->prependWebpackEncoreThemesBuild($container);
     }
 
     /** @param array<string, mixed> $config */
@@ -125,6 +128,23 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         }
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius_shop.theme.context.channel_based']);
+    }
+
+    private function prependWebpackEncoreThemesBuild(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('webpack_encore')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('webpack_encore', [
+            'builds' => [
+                self::THEMES_BUILD_NAME => '%kernel.project_dir%/public/build/themes/shop',
+            ],
+        ]);
+
+        if ($container->hasExtension('sylius_theme')) {
+            $container->prependExtensionConfig('sylius_theme', ['webpack_encore' => ['enabled' => true]]);
+        }
     }
 
     /** @param array<string, mixed> $config */
