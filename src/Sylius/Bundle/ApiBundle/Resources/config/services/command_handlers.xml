@@ -219,6 +219,7 @@
             <argument type="service" id="sylius.provider.payment_request.default_action" />
             <argument type="service" id="sylius.provider.payment_request.default_payload" />
             <argument type="service" id="sylius_api.context.user.token_based" />
+            <argument type="service" id="sylius.resolver.payment_methods" />
             <tag name="messenger.message_handler" bus="sylius.command_bus" />
         </service>
 
