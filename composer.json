@@ -213,7 +213,7 @@
         "phpunit/phpunit": "^12.5",
         "psr/event-dispatcher": "^1.0",
         "rector/rector": "^2.5",
-        "sylius-labs/behat-chrome-extension": "^1.5",
+        "sylius-labs/behat-chrome-extension": "^1.5.1",
         "sylius-labs/behat-panther-extension": "^1.3",
         "sylius-labs/coding-standard": "^4.5",
         "sylius-labs/suite-tags-extension": "~0.3",
