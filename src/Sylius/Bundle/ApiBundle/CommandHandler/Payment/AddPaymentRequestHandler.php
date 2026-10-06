@@ -29,6 +29,7 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -49,6 +50,7 @@ final class AddPaymentRequestHandler
         private DefaultActionProviderInterface $defaultActionProvider,
         private DefaultPayloadProviderInterface $defaultPayloadProvider,
         private ?UserContextInterface $userContext = null,
+        private ?PaymentMethodsResolverInterface $paymentMethodsResolver = null,
     ) {
     }
 
@@ -76,6 +78,13 @@ final class AddPaymentRequestHandler
         /** @var PaymentMethodInterface|null $paymentMethod */
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $addPaymentRequest->paymentMethodCode]);
         if (null === $paymentMethod) {
+            throw new PaymentMethodNotFoundException();
+        }
+
+        if (
+            $this->paymentMethodsResolver !== null &&
+            !in_array($paymentMethod, $this->paymentMethodsResolver->getSupportedMethods($payment), true)
+        ) {
             throw new PaymentMethodNotFoundException();
         }
 

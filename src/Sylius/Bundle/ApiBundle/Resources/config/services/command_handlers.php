@@ -326,6 +326,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.provider.payment_request.default_action'),
             service('sylius.provider.payment_request.default_payload'),
             service('sylius_api.context.user.token_based'),
+            service('sylius.resolver.payment_methods'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;
