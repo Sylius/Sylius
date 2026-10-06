@@ -5,6 +5,7 @@ sylius:
     form:
         gateway_config:
             type: Τύπος
+            use_payum: Χρήση Payum
         gateway_configuration:
             paypal:
                 password: Κωδικός πρόσβασης
@@ -12,3 +13,6 @@ sylius:
                 username: Όνομα χρήστη
     payum_gateway_factory:
         offline: Εκτός σύνδεσης
+    payum_gateway:
+        cash_on_delivery: Αντικαταβολή
+        offline: Εκτός σύνδεσης (Payum)

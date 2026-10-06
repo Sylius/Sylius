@@ -11,6 +11,7 @@ sylius:
             name: Ονομασία
             translations: Μεταφράσεις
             type: Τύπος
+            translatable: Μεταφράσιμο
         attribute_type:
             checkbox: Κουτί επιλογής
             configuration: Παραμετροποίηση
@@ -23,6 +24,7 @@ sylius:
             textarea: Περιοχή κειμένου
             title: Τύποι χαρακτηριστικών
             validation: Επικύρωση
+            float: Δεκαδικός αριθμός
         attribute_type_configuration:
             datetime:
                 format: Μορφή
@@ -34,6 +36,8 @@ sylius:
                 choose: Επιλέξτε μια επιλογή
                 min: Ελάχιστες καταχωρήσεις
                 max: Μέγιστες καταχωρήσεις
+                add_choice: Προσθήκη
+                delete_choice: Διαγραφή
             text:
                 min: Ελάχιστο μήκος
                 max: Μέγιστο μήκος

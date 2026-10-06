@@ -14,6 +14,7 @@ sylius:
             billing_address: Διεύθυνση τιμολόγησης
             only_customer_registration: Δημιουργία λογαριασμού
             subscribed_to_newsletter: Εγγραφείτε στο ενημερωτικό δελτίο
+            different_shipping_address: Χρήση διαφορετικής διεύθυνσης για την αποστολή;
         customer_group:
             name: Ονομασία
             roles: Ρόλοι
