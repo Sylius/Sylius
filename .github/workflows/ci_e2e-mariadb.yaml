@@ -113,7 +113,7 @@ jobs:
                         api-platform/validator:${REQ}
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@fix/mariadb-server-version
+                uses: SyliusLabs/BuildTestAppAction@main
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-apip-${{ matrix.api_platform || 'none' }}-"
@@ -221,7 +221,7 @@ jobs:
                         api-platform/validator:${REQ}
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@fix/mariadb-server-version
+                uses: SyliusLabs/BuildTestAppAction@main
                 with:
                     build_type: "sylius"
                     cache_key: "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-apip-${{ matrix.api_platform || 'none' }}-"
