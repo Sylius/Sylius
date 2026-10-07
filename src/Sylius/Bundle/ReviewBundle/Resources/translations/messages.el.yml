@@ -10,4 +10,8 @@ sylius:
             status:
                 label: Κατάσταση
                 new: Νέα
+                approved: Εγκεκριμένη
+                rejected: Απορριφθείσα
             title: Τίτλος
+            header: Προσθήκη κριτικής
+            submit: Υποβολή

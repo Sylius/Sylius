@@ -12,3 +12,5 @@ sylius:
             amount: Ποσό
             included_in_price: Συμπεριλαμβάνεται στην τιμή;
             calculator: Τρόπος υπολογισμού
+            end_date: Ημερομηνία λήξης
+            start_date: Ημερομηνία έναρξης
