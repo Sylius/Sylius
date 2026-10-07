@@ -62,9 +62,17 @@ sylius_twig_hooks:
             payments:
                 template: '@SyliusAdmin/order/show/content/sections/payments.html.twig'
                 priority: 100
+            return_requests:
+                template: '@SyliusAdmin/order/show/content/sections/return_requests.html.twig'
+                priority: 75
             shipments:
                 template: '@SyliusAdmin/order/show/content/sections/shipments.html.twig'
                 priority: 0
+            subscription:
+                component: 'sylius_admin:plus_placeholder'
+                props:
+                    template: '@SyliusAdmin/order/show/content/sections/subscription.html.twig'
+                priority: -100
 
         'sylius_admin.order.show.content.sections.items':
             head:
