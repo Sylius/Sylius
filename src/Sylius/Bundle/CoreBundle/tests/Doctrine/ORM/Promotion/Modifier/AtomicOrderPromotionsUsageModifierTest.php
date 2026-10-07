@@ -14,18 +14,22 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\LockMode;
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Promotion\Exception\PromotionUsageLimitReachedException;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
 final class AtomicOrderPromotionsUsageModifierTest extends TestCase
 {
+    private Connection&MockObject $connection;
+
     private MockObject&OrderPromotionsUsageModifierInterface $decoratedModifier;
 
     private EntityManagerInterface&MockObject $entityManager;
@@ -34,8 +38,11 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
 
     protected function setUp(): void
     {
+        $this->connection = $this->createMock(Connection::class);
         $this->decoratedModifier = $this->createMock(OrderPromotionsUsageModifierInterface::class);
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
+        $this->entityManager->method('getConnection')->willReturn($this->connection);
+
         $this->atomicModifier = new AtomicOrderPromotionsUsageModifier(
             null,
             $this->decoratedModifier,
@@ -43,248 +50,179 @@ final class AtomicOrderPromotionsUsageModifierTest extends TestCase
         );
     }
 
-    public function testLocksPromotionsAndCouponDuringIncrement(): void
+    public function testIncrementsPromotionUsageWithConditionalUpdate(): void
     {
-        $order = $this->createMock(OrderInterface::class);
-        $promotion = $this->createMock(PromotionInterface::class);
-        $coupon = $this->createMock(PromotionCouponInterface::class);
+        $promotion = $this->createPromotion(1, true);
+        $order = $this->createOrder([$promotion]);
 
-        $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
-        $order->method('getPromotionCoupon')->willReturn($coupon);
-
-        $promotion->method('isTrackUsage')->willReturn(true);
-        $coupon->method('isTrackUsage')->willReturn(true);
-        $promotion->method('getVersion')->willReturn(3);
-        $coupon->method('getVersion')->willReturn(5);
-
-        $this->entityManager
-            ->expects($this->exactly(2))
-            ->method('refresh')
-            ->willReturnCallback(function (object $entity) use ($promotion, $coupon): void {
-                $this->assertTrue($entity === $promotion || $entity === $coupon);
-            })
+        $this->connection
+            ->expects($this->once())
+            ->method('executeStatement')
+            ->with($this->stringContains('used < usage_limit'), ['id' => 1])
+            ->willReturn(1)
         ;
-
-        $this->entityManager
-            ->expects($this->exactly(2))
-            ->method('lock')
-            ->willReturnCallback(function (object $entity, int|LockMode $lockMode, mixed $version) use ($promotion, $coupon): void {
-                $this->assertSame(LockMode::OPTIMISTIC, $lockMode);
-
-                if ($entity === $promotion) {
-                    $this->assertSame(3, $version);
-                } elseif ($entity === $coupon) {
-                    $this->assertSame(5, $version);
-                } else {
-                    $this->fail('Unexpected entity locked');
-                }
-            })
-        ;
-
-        $this->decoratedModifier->expects($this->once())->method('increment')->with($order);
+        $this->entityManager->expects($this->once())->method('refresh')->with($promotion);
+        $this->decoratedModifier->expects($this->never())->method('increment');
 
         $this->atomicModifier->increment($order);
     }
 
-    public function testLocksPromotionsDuringIncrementWithoutCoupon(): void
+    public function testThrowsExceptionWhenPromotionUsageLimitIsReached(): void
     {
-        $order = $this->createMock(OrderInterface::class);
-        $promotion = $this->createMock(PromotionInterface::class);
+        $promotion = $this->createPromotion(1, true);
+        $order = $this->createOrder([$promotion]);
 
-        $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
-        $order->method('getPromotionCoupon')->willReturn(null);
+        $this->connection->method('executeStatement')->willReturn(0);
+        $this->entityManager->expects($this->never())->method('refresh');
 
-        $promotion->method('isTrackUsage')->willReturn(true);
-        $promotion->method('getVersion')->willReturn(1);
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('refresh')
-            ->with($promotion)
-        ;
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('lock')
-            ->with($promotion, LockMode::OPTIMISTIC, 1)
-        ;
-
-        $this->decoratedModifier->expects($this->once())->method('increment')->with($order);
+        $this->expectException(PromotionUsageLimitReachedException::class);
 
         $this->atomicModifier->increment($order);
     }
 
-    public function testLocksPromotionsAndCouponDuringDecrement(): void
+    public function testDoesNotIncrementPromotionUsageWithTrackUsageDisabled(): void
     {
-        $order = $this->createMock(OrderInterface::class);
-        $promotion = $this->createMock(PromotionInterface::class);
-        $coupon = $this->createMock(PromotionCouponInterface::class);
+        $order = $this->createOrder([$this->createPromotion(1, false)]);
 
-        $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
-        $order->method('getPromotionCoupon')->willReturn($coupon);
+        $this->connection->expects($this->never())->method('executeStatement');
+        $this->entityManager->expects($this->never())->method('refresh');
 
-        $promotion->method('isTrackUsage')->willReturn(true);
-        $coupon->method('isTrackUsage')->willReturn(true);
-        $promotion->method('getVersion')->willReturn(3);
-        $coupon->method('getVersion')->willReturn(5);
+        $this->atomicModifier->increment($order);
+    }
 
-        $this->entityManager
-            ->expects($this->exactly(2))
-            ->method('refresh')
-            ->willReturnCallback(function (object $entity) use ($promotion, $coupon): void {
-                $this->assertTrue($entity === $promotion || $entity === $coupon);
-            })
+    public function testIncrementsCouponUsageUnderRowLock(): void
+    {
+        $coupon = $this->createCoupon(7, true);
+        $order = $this->createOrder([], $coupon);
+
+        $this->connection
+            ->expects($this->once())
+            ->method('fetchAssociative')
+            ->with($this->stringContains('FOR UPDATE'), ['id' => 7])
+            ->willReturn(['used' => 0, 'usage_limit' => 1, 'per_customer_usage_limit' => null])
         ;
-
-        $this->entityManager
-            ->expects($this->exactly(2))
-            ->method('lock')
-            ->willReturnCallback(function (object $entity, int|LockMode $lockMode, mixed $version) use ($promotion, $coupon): void {
-                $this->assertSame(LockMode::OPTIMISTIC, $lockMode);
-
-                if ($entity === $promotion) {
-                    $this->assertSame(3, $version);
-                } elseif ($entity === $coupon) {
-                    $this->assertSame(5, $version);
-                } else {
-                    $this->fail('Unexpected entity locked');
-                }
-            })
+        $this->connection
+            ->expects($this->once())
+            ->method('executeStatement')
+            ->with($this->stringContains('used = used + 1'), ['id' => 7])
+            ->willReturn(1)
         ;
+        $this->entityManager->expects($this->once())->method('refresh')->with($coupon);
 
-        $this->decoratedModifier->expects($this->once())->method('decrement')->with($order);
+        $this->atomicModifier->increment($order);
+    }
+
+    public function testThrowsExceptionWhenCouponUsageLimitIsReached(): void
+    {
+        $order = $this->createOrder([], $this->createCoupon(7, true));
+
+        $this->connection
+            ->method('fetchAssociative')
+            ->willReturn(['used' => 1, 'usage_limit' => 1, 'per_customer_usage_limit' => null])
+        ;
+        $this->connection->expects($this->never())->method('executeStatement');
+
+        $this->expectException(PromotionUsageLimitReachedException::class);
+
+        $this->atomicModifier->increment($order);
+    }
+
+    public function testThrowsExceptionWhenCouponPerCustomerUsageLimitIsReached(): void
+    {
+        $customer = $this->createMock(CustomerInterface::class);
+        $customer->method('getId')->willReturn(3);
+        $order = $this->createOrder([], $this->createCoupon(7, true), $customer);
+
+        $this->connection
+            ->method('fetchAssociative')
+            ->willReturn(['used' => 1, 'usage_limit' => null, 'per_customer_usage_limit' => 1])
+        ;
+        $this->connection
+            ->expects($this->once())
+            ->method('fetchAllAssociative')
+            ->with($this->stringContains('FOR UPDATE'), $this->callback(
+                static fn (array $params): bool => 3 === $params['customerId'] && 7 === $params['couponId'],
+            ))
+            ->willReturn([['id' => 10]])
+        ;
+        $this->connection->expects($this->never())->method('executeStatement');
+
+        $this->expectException(PromotionUsageLimitReachedException::class);
+
+        $this->atomicModifier->increment($order);
+    }
+
+    public function testDoesNotIncrementCouponUsageWithTrackUsageDisabled(): void
+    {
+        $order = $this->createOrder([], $this->createCoupon(7, false));
+
+        $this->connection->expects($this->never())->method('fetchAssociative');
+        $this->connection->expects($this->never())->method('executeStatement');
+
+        $this->atomicModifier->increment($order);
+    }
+
+    public function testDecrementsPromotionAndCouponUsage(): void
+    {
+        $promotion = $this->createPromotion(1, true);
+        $coupon = $this->createCoupon(7, true);
+        $order = $this->createOrder([$promotion], $coupon);
+
+        $this->connection
+            ->expects($this->exactly(2))
+            ->method('executeStatement')
+            ->with($this->stringContains('GREATEST(used - 1, 0)'))
+            ->willReturn(1)
+        ;
+        $this->entityManager->expects($this->exactly(2))->method('refresh');
+        $this->decoratedModifier->expects($this->never())->method('decrement');
 
         $this->atomicModifier->decrement($order);
     }
 
-    public function testLocksPromotionsDuringDecrementWithoutCoupon(): void
+    public function testDoesNotDecrementCouponUsageForCancelledOrderWhenCouponIsNotReusable(): void
     {
-        $order = $this->createMock(OrderInterface::class);
-        $promotion = $this->createMock(PromotionInterface::class);
+        $coupon = $this->createCoupon(7, true);
+        $coupon->method('isReusableFromCancelledOrders')->willReturn(false);
+        $order = $this->createOrder([], $coupon);
+        $order->method('getState')->willReturn(OrderInterface::STATE_CANCELLED);
 
-        $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
-        $order->method('getPromotionCoupon')->willReturn(null);
-
-        $promotion->method('isTrackUsage')->willReturn(true);
-        $promotion->method('getVersion')->willReturn(1);
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('refresh')
-            ->with($promotion)
-        ;
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('lock')
-            ->with($promotion, LockMode::OPTIMISTIC, 1)
-        ;
-
-        $this->decoratedModifier->expects($this->once())->method('decrement')->with($order);
+        $this->connection->expects($this->never())->method('executeStatement');
 
         $this->atomicModifier->decrement($order);
     }
 
-    public function testLocksMultiplePromotionsDuringIncrement(): void
+    private function createPromotion(int $id, bool $trackUsage): MockObject&PromotionInterface
     {
-        $order = $this->createMock(OrderInterface::class);
-        $firstPromotion = $this->createMock(PromotionInterface::class);
-        $secondPromotion = $this->createMock(PromotionInterface::class);
-
-        $order->method('getPromotions')->willReturn(new ArrayCollection([$firstPromotion, $secondPromotion]));
-        $order->method('getPromotionCoupon')->willReturn(null);
-
-        $firstPromotion->method('isTrackUsage')->willReturn(true);
-        $secondPromotion->method('isTrackUsage')->willReturn(true);
-        $firstPromotion->method('getVersion')->willReturn(2);
-        $secondPromotion->method('getVersion')->willReturn(4);
-
-        $this->entityManager
-            ->expects($this->exactly(2))
-            ->method('refresh')
-            ->willReturnCallback(function (object $entity) use ($firstPromotion, $secondPromotion): void {
-                $this->assertTrue($entity === $firstPromotion || $entity === $secondPromotion);
-            })
-        ;
-
-        $this->entityManager
-            ->expects($this->exactly(2))
-            ->method('lock')
-            ->willReturnCallback(function (object $entity, int|LockMode $lockMode, mixed $version) use ($firstPromotion, $secondPromotion): void {
-                $this->assertSame(LockMode::OPTIMISTIC, $lockMode);
-
-                if ($entity === $firstPromotion) {
-                    $this->assertSame(2, $version);
-                } elseif ($entity === $secondPromotion) {
-                    $this->assertSame(4, $version);
-                } else {
-                    $this->fail('Unexpected entity locked');
-                }
-            })
-        ;
-
-        $this->decoratedModifier->expects($this->once())->method('increment')->with($order);
-
-        $this->atomicModifier->increment($order);
-    }
-
-    public function testDoesNotLockPromotionWithTrackUsageDisabledDuringIncrement(): void
-    {
-        $order = $this->createMock(OrderInterface::class);
-        $trackedPromotion = $this->createMock(PromotionInterface::class);
-        $untrackedPromotion = $this->createMock(PromotionInterface::class);
-
-        $order->method('getPromotions')->willReturn(new ArrayCollection([$trackedPromotion, $untrackedPromotion]));
-        $order->method('getPromotionCoupon')->willReturn(null);
-
-        $trackedPromotion->method('isTrackUsage')->willReturn(true);
-        $untrackedPromotion->method('isTrackUsage')->willReturn(false);
-        $trackedPromotion->method('getVersion')->willReturn(2);
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('refresh')
-            ->with($trackedPromotion)
-        ;
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('lock')
-            ->with($trackedPromotion, LockMode::OPTIMISTIC, 2)
-        ;
-
-        $this->decoratedModifier->expects($this->once())->method('increment')->with($order);
-
-        $this->atomicModifier->increment($order);
-    }
-
-    public function testDoesNotLockCouponWithTrackUsageDisabledDuringIncrement(): void
-    {
-        $order = $this->createMock(OrderInterface::class);
         $promotion = $this->createMock(PromotionInterface::class);
+        $promotion->method('getId')->willReturn($id);
+        $promotion->method('getCode')->willReturn('PROMOTION_' . $id);
+        $promotion->method('isTrackUsage')->willReturn($trackUsage);
+
+        return $promotion;
+    }
+
+    private function createCoupon(int $id, bool $trackUsage): MockObject&PromotionCouponInterface
+    {
         $coupon = $this->createMock(PromotionCouponInterface::class);
+        $coupon->method('getId')->willReturn($id);
+        $coupon->method('getCode')->willReturn('COUPON_' . $id);
+        $coupon->method('isTrackUsage')->willReturn($trackUsage);
 
-        $order->method('getPromotions')->willReturn(new ArrayCollection([$promotion]));
+        return $coupon;
+    }
+
+    /** @param PromotionInterface[] $promotions */
+    private function createOrder(
+        array $promotions,
+        ?PromotionCouponInterface $coupon = null,
+        ?CustomerInterface $customer = null,
+    ): MockObject&OrderInterface {
+        $order = $this->createMock(OrderInterface::class);
+        $order->method('getPromotions')->willReturn(new ArrayCollection($promotions));
         $order->method('getPromotionCoupon')->willReturn($coupon);
+        $order->method('getCustomer')->willReturn($customer);
 
-        $promotion->method('isTrackUsage')->willReturn(true);
-        $coupon->method('isTrackUsage')->willReturn(false);
-        $promotion->method('getVersion')->willReturn(1);
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('refresh')
-            ->with($promotion)
-        ;
-
-        $this->entityManager
-            ->expects($this->once())
-            ->method('lock')
-            ->with($promotion, LockMode::OPTIMISTIC, 1)
-        ;
-
-        $this->decoratedModifier->expects($this->once())->method('increment')->with($order);
-
-        $this->atomicModifier->increment($order);
+        return $order;
     }
 }

@@ -1,0 +1,55 @@
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: "WEB"
+        name: "Web Channel"
+        hostname: "localhost"
+        baseCurrency: "@currency"
+        defaultLocale: "@locale"
+        color: "black"
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
+
+Sylius\Component\Currency\Model\Currency:
+    currency:
+        code: "USD"
+
+Sylius\Component\Locale\Model\Locale:
+    locale:
+        code: "en_US"
+
+Sylius\Component\Core\Model\Customer:
+    customer_oliver:
+        firstName: "Oliver"
+        lastName: "Queen"
+        email: "oliver.queen@star-city.com"
+        emailCanonical: "oliver.queen@star-city.com"
+
+Sylius\Component\Core\Model\Promotion:
+    promotion:
+        code: "HOLIDAY"
+        name: "Holiday promotion"
+        couponBased: true
+        channels: ["@channel_web"]
+
+Sylius\Component\Core\Model\PromotionCoupon:
+    coupon:
+        code: "HOLIDAY_COUPON"
+        promotion: "@promotion"
+
+Sylius\Component\Core\Model\Order:
+    cart:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "cart"
+        customer: "@customer_oliver"
+        promotionCoupon: "@coupon"
+        promotions: ["@promotion"]
+    other_cart:
+        channel: "@channel_web"
+        currencyCode: "USD"
+        localeCode: "en_US"
+        state: "cart"
+        customer: "@customer_oliver"
+        promotionCoupon: "@coupon"
+        promotions: ["@promotion"]
