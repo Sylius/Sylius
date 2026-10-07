@@ -18,7 +18,9 @@
 >
 
     <services>
-        <service id="sylius_payum.context.payment_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContext" />
+        <service id="sylius_payum.context.payment_request" class="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContext">
+            <tag name="kernel.reset" method="reset" />
+        </service>
         <service id="Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterface" alias="sylius_payum.context.payment_request" />
     </services>
 </container>
