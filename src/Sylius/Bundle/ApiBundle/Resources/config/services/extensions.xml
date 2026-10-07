@@ -31,6 +31,7 @@
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AcceptedProductReviewsExtension">
             <argument>%sylius.model.product_review.class%</argument>
             <tag name="api_platform.doctrine.orm.query_extension.collection" />
+            <tag name="api_platform.doctrine.orm.query_extension.item" />
         </service>
 
         <service id="Sylius\Bundle\ApiBundle\Doctrine\QueryCollectionExtension\AddressesExtension">
