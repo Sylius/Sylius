@@ -59,12 +59,6 @@ final class ProductReviewsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    public static function nonAcceptedReviewProvider(): iterable
-    {
-        yield 'new review' => ['new_review'];
-        yield 'rejected review' => ['rejected_review'];
-    }
-
     #[Test]
     public function it_gets_product_reviews(): void
     {
@@ -192,5 +186,11 @@ final class ProductReviewsTest extends JsonApiTestCase
             'shop/product_review/create_product_review_with_missing_fields',
             Response::HTTP_BAD_REQUEST,
         );
+    }
+
+    public static function nonAcceptedReviewProvider(): iterable
+    {
+        yield 'new review' => ['new_review'];
+        yield 'rejected review' => ['rejected_review'];
     }
 }
