@@ -13,6 +13,14 @@ export default class extends Controller {
     static values = { url: String };
     static targets = ['email', 'password', 'csrfToken', 'error', 'errorPrototype'];
 
+    loginOnEnter(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+
+            this.login();
+        }
+    }
+
     login() {
         const requestOptions = {
             method: 'POST',
