@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class CanPaymentMethodBeChanged extends Constraint
 {
+    public const ORDER_CANCELLED_ERROR = 'ORDER_CANCELLED';
+
     public const CANNOT_CHANGE_PAYMENT_METHOD_FOR_CANCELLED_ORDER = 'sylius.payment_method.cannot_change_payment_method_for_cancelled_order';
 
     public function validatedBy(): string

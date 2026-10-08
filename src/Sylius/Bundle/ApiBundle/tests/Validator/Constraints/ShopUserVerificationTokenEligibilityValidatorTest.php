@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ShopUserVerificationTokenEligibilityValidatorTest extends TestCase
@@ -71,8 +72,27 @@ final class ShopUserVerificationTokenEligibilityValidatorTest extends TestCase
         );
         $this->shopUserVerificationTokenEligibilityValidator->initialize($executionContextMock);
         $this->shopUserRepository->expects(self::once())->method('findOneBy')->with(['emailVerificationToken' => 'TOKEN'])->willReturn(null);
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.account.invalid_verification_token', ['%verificationToken%' => 'TOKEN'])
-        ;
+
+        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $executionContextMock
+            ->expects(self::once())
+            ->method('buildViolation')
+            ->with($constraint->message)
+            ->willReturn($violationBuilder);
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setParameter')
+            ->with('%verificationToken%', 'TOKEN')
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setCode')
+            ->with(ShopUserVerificationTokenEligibility::VERIFICATION_TOKEN_INVALID_ERROR)
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('addViolation');
+
         $this->shopUserVerificationTokenEligibilityValidator->validate($value, $constraint);
     }
 

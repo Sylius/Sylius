@@ -28,6 +28,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class OrderAddressRequirementValidatorTest extends TestCase
@@ -73,8 +74,7 @@ final class OrderAddressRequirementValidatorTest extends TestCase
         $channelMock = $this->createMock(ChannelInterface::class);
         $updateCart = new UpdateCart('token');
         $this->orderAddressRequirementValidator->validate($updateCart, new OrderAddressRequirement());
-        $this->context->expects(self::never())->method('addViolation')->with(self::MESSAGE, ['%addressName%' => 'billingAddress']);
-        $this->context->expects(self::never())->method('addViolation')->with(self::MESSAGE, ['%addressName%' => 'shippingAddress']);
+        $this->context->expects(self::never())->method('buildViolation');
     }
 
     public function testThrowsAnExceptionIfOrderIsNotFound(): void
@@ -113,7 +113,7 @@ final class OrderAddressRequirementValidatorTest extends TestCase
         $channelMock->expects(self::once())->method('isShippingAddressInCheckoutRequired')->willReturn(true);
         $updateCart = new UpdateCart(shippingAddress: $shippingAddressMock, orderTokenValue: 'TOKEN');
         $this->orderAddressRequirementValidator->validate($updateCart, new OrderAddressRequirement());
-        $this->context->expects(self::never())->method('addViolation')->with(self::MESSAGE, ['%addressName%' => 'shippingAddress']);
+        $this->context->expects(self::never())->method('buildViolation');
     }
 
     public function testDoesNothingIfBillingAddressIsRequiredAndProvided(): void
@@ -129,7 +129,7 @@ final class OrderAddressRequirementValidatorTest extends TestCase
         $channelMock->expects(self::once())->method('isShippingAddressInCheckoutRequired')->willReturn(false);
         $updateCart = new UpdateCart(billingAddress: $billingAddressMock, orderTokenValue: 'TOKEN');
         $this->orderAddressRequirementValidator->validate($updateCart, new OrderAddressRequirement());
-        $this->context->expects(self::never())->method('addViolation')->with(self::MESSAGE, ['%addressName%' => 'billingAddress']);
+        $this->context->expects(self::never())->method('buildViolation');
     }
 
     public function testAddsViolationIfShippingAddressIsRequiredButNotProvided(): void
@@ -140,12 +140,17 @@ final class OrderAddressRequirementValidatorTest extends TestCase
         $billingAddressMock = $this->createMock(AddressInterface::class);
         /** @var ChannelInterface|MockObject $channelMock */
         $channelMock = $this->createMock(ChannelInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $this->orderRepository->expects(self::once())->method('findCartByTokenValue')->with('TOKEN')->willReturn($orderMock);
         $orderMock->expects(self::once())->method('getChannel')->willReturn($channelMock);
         $channelMock->expects(self::once())->method('isShippingAddressInCheckoutRequired')->willReturn(true);
         $updateCart = new UpdateCart(billingAddress: $billingAddressMock, orderTokenValue: 'TOKEN');
+        $this->context->expects(self::once())->method('buildViolation')->with(self::MESSAGE)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setParameter')->with('%addressName%', 'shipping address')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(OrderAddressRequirement::ADDRESS_REQUIRED_ERROR)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
         $this->orderAddressRequirementValidator->validate($updateCart, new OrderAddressRequirement());
-        $this->context->expects(self::never())->method('addViolation')->with(self::MESSAGE, ['%addressName%' => 'shipping address']);
     }
 
     public function testAddsViolationIfBillingAddressIsRequiredButNotProvided(): void
@@ -156,11 +161,16 @@ final class OrderAddressRequirementValidatorTest extends TestCase
         $shippingAddressMock = $this->createMock(AddressInterface::class);
         /** @var ChannelInterface|MockObject $channelMock */
         $channelMock = $this->createMock(ChannelInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $this->orderRepository->expects(self::once())->method('findCartByTokenValue')->with('TOKEN')->willReturn($orderMock);
         $orderMock->expects(self::once())->method('getChannel')->willReturn($channelMock);
         $channelMock->expects(self::once())->method('isShippingAddressInCheckoutRequired')->willReturn(false);
         $updateCart = new UpdateCart(shippingAddress: $shippingAddressMock, orderTokenValue: 'TOKEN');
+        $this->context->expects(self::once())->method('buildViolation')->with(self::MESSAGE)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setParameter')->with('%addressName%', 'billing address')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(OrderAddressRequirement::ADDRESS_REQUIRED_ERROR)->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
         $this->orderAddressRequirementValidator->validate($updateCart, new OrderAddressRequirement());
-        $this->context->expects(self::never())->method('addViolation')->with(self::MESSAGE, ['%addressName%' => 'billing address']);
     }
 }

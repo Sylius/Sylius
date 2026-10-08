@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class CorrectChangeShopUserConfirmPassword extends Constraint
 {
+    public const PASSWORD_MISMATCH_ERROR = 'PASSWORD_MISMATCH';
+
     /**
      * @param array<string, mixed>|null $options
      * @param array<string>|null $groups

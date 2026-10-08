@@ -72,6 +72,7 @@ final class CorrectChangeShopUserConfirmPasswordValidatorTest extends TestCase
         );
         $executionContextMock->expects(self::once())->method('buildViolation')->with($constraint->message)->willReturn($constraintViolationBuilderMock);
         $constraintViolationBuilderMock->expects(self::once())->method('atPath')->with('newPassword')->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects(self::once())->method('setCode')->with(CorrectChangeShopUserConfirmPassword::PASSWORD_MISMATCH_ERROR)->willReturn($constraintViolationBuilderMock);
         $constraintViolationBuilderMock->expects(self::once())->method('addViolation');
         $this->correctChangeShopUserConfirmPasswordValidator->validate($value, $constraint);
     }
