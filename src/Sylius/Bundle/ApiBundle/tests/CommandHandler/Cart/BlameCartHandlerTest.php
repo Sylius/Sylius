@@ -65,14 +65,14 @@ final class BlameCartHandlerTest extends TestCase
             ->method('findCartByTokenValue')
             ->with('TOKEN')
             ->willReturn($this->cart);
-        $this->cart->expects(self::once())->method('getCustomer')->willReturn(null);
+        $this->cart->expects(self::once())->method('isCreatedByGuest')->willReturn(true);
         $this->user->expects(self::once())->method('getCustomer')->willReturn($this->customerMock);
         $this->cart->expects(self::once())->method('setCustomerWithAuthorization')->with($this->customerMock);
         $this->orderProcessor->expects(self::once())->method('process')->with($this->cart);
         $this->handler->__invoke(new BlameCart('sylius@example.com', 'TOKEN'));
     }
 
-    public function testThrowsAnExceptionIfCartIsOccupied(): void
+    public function testThrowsAnExceptionIfCartIsNotCreatedByGuest(): void
     {
         $this->shopUserRepository->expects(self::once())
             ->method('findOneByEmail')
@@ -81,7 +81,7 @@ final class BlameCartHandlerTest extends TestCase
         $this->orderRepository->expects(self::once())
             ->method('findCartByTokenValue')
             ->with('TOKEN')->willReturn($this->cart);
-        $this->cart->expects(self::once())->method('getCustomer')->willReturn($this->customerMock);
+        $this->cart->expects(self::once())->method('isCreatedByGuest')->willReturn(false);
         self::expectException(ConflictHttpException::class);
         $this->handler->__invoke(new BlameCart('sylius@example.com', 'TOKEN'));
     }
