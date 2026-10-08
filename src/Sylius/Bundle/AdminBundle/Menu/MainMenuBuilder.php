@@ -235,7 +235,10 @@ final readonly class MainMenuBuilder
         ;
 
         $sales
-            ->addChild('payments', ['route' => 'sylius_admin_payment_index'])
+            ->addChild('payments', ['route' => 'sylius_admin_payment_index', 'extras' => ['routes' => [
+                ['route' => 'sylius_admin_payment_request_index'],
+                ['route' => 'sylius_admin_payment_request_show'],
+            ]]])
             ->setLabel('sylius.ui.payments')
             ->setLabelAttribute('icon', 'tabler:credit-card-pay')
         ;
