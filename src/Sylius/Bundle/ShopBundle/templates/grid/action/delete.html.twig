@@ -2,4 +2,4 @@
 
 {% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('delete')), options.link.parameters|default({'id': id}))) %}
 
-{{ component('sylius_shop:delete_modal', {id: id, path: path, label: action.label, icon: action.icon}) }}
+{{ component('sylius_shop:delete_modal', {id: id, path: path, label: action.label|default('sylius.ui.delete'), icon: action.icon|default('tabler:trash')}) }}
