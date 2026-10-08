@@ -8,7 +8,7 @@
         {{ form_row(form.customer.email, sylius_test_form_attribute('login-email')|sylius_merge_recursive({attr: {'data-sylius--shop-bundle--api-login-target': 'email'}})) }}
         {% if hookable_metadata.context.email_exists %}
             <div class="input-group mb-2">
-                <input type="password" class="form-control" placeholder="{{ 'sylius.ui.password'|trans }}" {{ stimulus_target('@sylius/shop-bundle/api-login', 'password') }} {{ sylius_test_html_attribute('password-input') }}>
+                <input type="password" class="form-control" placeholder="{{ 'sylius.ui.password'|trans }}" {{ stimulus_target('@sylius/shop-bundle/api-login', 'password') }} {{ stimulus_action('@sylius/shop-bundle/api-login', 'loginOnEnter', 'keydown') }} {{ sylius_test_html_attribute('password-input') }}>
                 <button class="btn btn-primary" type="button" {{ stimulus_action('@sylius/shop-bundle/api-login', 'login') }} {{ sylius_test_html_attribute('login-button') }}>{{ 'sylius.ui.sign_in'|trans }}</button>
             </div>
             {% if sylius_csrf_protection_enabled() %}
