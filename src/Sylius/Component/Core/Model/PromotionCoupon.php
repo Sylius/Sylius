@@ -48,11 +48,25 @@ class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInte
 
     public function getVersion(): ?int
     {
+        trigger_deprecation(
+            'sylius/core',
+            '2.3',
+            'The "%s()" method is deprecated since Sylius 2.3 and will be removed in Sylius 3.0.',
+            __METHOD__,
+        );
+
         return $this->version;
     }
 
     public function setVersion(?int $version): void
     {
+        trigger_deprecation(
+            'sylius/core',
+            '2.3',
+            'The "%s()" method is deprecated since Sylius 2.3 and will be removed in Sylius 3.0.',
+            __METHOD__,
+        );
+
         $this->version = $version;
     }
 }
