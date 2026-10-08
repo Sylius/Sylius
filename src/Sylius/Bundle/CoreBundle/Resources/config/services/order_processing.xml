@@ -58,6 +58,11 @@
             <tag name="sylius.order_processor" priority="30"/>
         </service>
 
+        <service id="sylius.order_processing.order_promotion_coupon_processor" class="Sylius\Component\Core\OrderProcessing\OrderPromotionCouponProcessor">
+            <argument type="service" id="sylius.checker.promotion_coupon_eligibility" />
+            <tag name="sylius.order_processor" priority="25"/>
+        </service>
+
         <service id="sylius.order_processing.order_promotion_processor" class="Sylius\Component\Core\OrderProcessing\OrderPromotionProcessor">
             <argument type="service" id="sylius.processor.promotion" />
             <tag name="sylius.order_processor" priority="20"/>
