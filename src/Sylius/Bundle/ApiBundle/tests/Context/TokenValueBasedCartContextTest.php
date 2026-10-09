@@ -60,7 +60,7 @@ final class TokenValueBasedCartContextTest extends TestCase
         $this->request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
 
         $this->request->expects(self::once())
-            ->method('getRequestUri')
+            ->method('getPathInfo')
             ->willReturn('/api/v2/orders/TOKEN_VALUE');
 
         $this->requestStack->expects(self::once())->method('getMainRequest')->willReturn($this->request);
@@ -90,7 +90,7 @@ final class TokenValueBasedCartContextTest extends TestCase
     {
         $this->request->attributes = new ParameterBag([]);
         $this->request->expects(self::once())
-            ->method('getRequestUri')
+            ->method('getPathInfo')
             ->willReturn('/orders');
 
         $this->requestStack->expects(self::once())
@@ -108,7 +108,7 @@ final class TokenValueBasedCartContextTest extends TestCase
     {
         $this->request->attributes = new ParameterBag([]);
         $this->request->expects(self::once())
-            ->method('getRequestUri')
+            ->method('getPathInfo')
             ->willReturn('/api/v2/orders');
 
         $this->requestStack->expects(self::once())
@@ -126,7 +126,7 @@ final class TokenValueBasedCartContextTest extends TestCase
     {
         $this->request->attributes = new ParameterBag(['tokenValue' => 'TOKEN_VALUE']);
         $this->request->expects(self::once())
-            ->method('getRequestUri')
+            ->method('getPathInfo')
             ->willReturn('/api/v2/orders/TOKEN_VALUE');
 
         $this->requestStack->expects(self::once())
