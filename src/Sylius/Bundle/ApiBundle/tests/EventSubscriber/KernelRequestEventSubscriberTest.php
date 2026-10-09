@@ -75,6 +75,30 @@ final class KernelRequestEventSubscriberTest extends TestCase
         ));
     }
 
+    public function testThrowsNotFoundExceptionIfApiIsDisabledAndThePathIsPercentEncoded(): void
+    {
+        /** @var RequestEvent|MockObject $eventMock */
+        $eventMock = $this->createMock(RequestEvent::class);
+        /** @var Request|MockObject $requestMock */
+        $requestMock = $this->createMock(Request::class);
+        /** @var HttpKernelInterface|MockObject $kernelMock */
+        $kernelMock = $this->createMock(HttpKernelInterface::class);
+
+        $this->kernelRequestEventSubscriber = new KernelRequestEventSubscriber(false, '/api/v2');
+
+        $eventMock->method('getRequest')->willReturn($requestMock);
+
+        $requestMock->expects(self::once())->method('getPathInfo')->willReturn('/api/v%32/any-endpoint');
+
+        self::expectException(NotFoundHttpException::class);
+
+        $this->kernelRequestEventSubscriber->validateApi(new RequestEvent(
+            $kernelMock,
+            $requestMock,
+            HttpKernelInterface::MAIN_REQUEST,
+        ));
+    }
+
     public function testDoesNothingForNonApiEndpointsWhenApiIsDisabled(): void
     {
         /** @var RequestEvent|MockObject $eventMock */
