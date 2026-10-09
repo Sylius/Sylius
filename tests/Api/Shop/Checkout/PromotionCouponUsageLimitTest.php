@@ -14,11 +14,15 @@ declare(strict_types=1);
 namespace Sylius\Tests\Api\Shop\Checkout;
 
 use PHPUnit\Framework\Attributes\Test;
+use Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\CartQuantityRuleChecker;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 final class PromotionCouponUsageLimitTest extends JsonApiTestCase
 {
@@ -41,7 +45,7 @@ final class PromotionCouponUsageLimitTest extends JsonApiTestCase
         $this->completeOrder('token');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $this->assertOrderIsNotCompletedWithoutCoupon('token');
+        $this->assertOrderIsNotCompleted('token');
     }
 
     #[Test]
@@ -69,7 +73,7 @@ final class PromotionCouponUsageLimitTest extends JsonApiTestCase
         $this->completeOrder('token');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $this->assertOrderIsNotCompletedWithoutCoupon('token');
+        $this->assertOrderIsNotCompleted('token');
     }
 
     #[Test]
@@ -85,6 +89,28 @@ final class PromotionCouponUsageLimitTest extends JsonApiTestCase
         $this->assertResponseIsSuccessful();
         $this->assertOrderIsCompletedWithoutCoupon('token');
         $this->assertCouponUsed(1);
+    }
+
+    #[Test]
+    public function it_completes_order_without_coupon_whose_promotion_is_no_longer_applied(): void
+    {
+        $this->loadFixtures(usageLimit: null, perCustomerUsageLimit: null);
+        $this->addCartQuantityRuleToCouponPromotion(2);
+        $this->pickUpCart(tokenValue: 'token', email: 'oliver@doe.com');
+        $this->addItemToCart('MUG_BLUE', 2, 'token', 'oliver@doe.com');
+        $cart = $this->updateCartWithAddressAndCouponCode('token', 'oliver@doe.com', 'XYZ2');
+        $this->assertLessThan(0, $cart->getOrderPromotionTotal());
+        $cart = $this->changeItemQuantity('token', $cart->getItems()->first()->getId(), 1);
+        $this->dispatchShippingMethodChooseCommand('token', 'UPS', $cart->getShipments()->first()->getId());
+        $cart = $this->dispatchPaymentMethodChooseCommand('token', 'CASH_ON_DELIVERY', $cart->getLastPayment()->getId());
+        $this->assertSame('XYZ2', $cart->getPromotionCoupon()?->getCode());
+        $this->assertSame(0, $cart->getOrderPromotionTotal());
+
+        $this->completeOrder('token');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertOrderIsCompletedWithoutCoupon('token');
+        $this->assertCouponUsed(0);
     }
 
     private function loadFixtures(?int $usageLimit, ?int $perCustomerUsageLimit): void
@@ -104,6 +130,29 @@ final class PromotionCouponUsageLimitTest extends JsonApiTestCase
         $coupon->setUsed(0);
 
         $this->get('doctrine.orm.entity_manager')->flush();
+    }
+
+    private function addCartQuantityRuleToCouponPromotion(int $count): void
+    {
+        /** @var PromotionRuleInterface $rule */
+        $rule = $this->get('sylius.factory.promotion_rule')->createNew();
+        $rule->setType(CartQuantityRuleChecker::TYPE);
+        $rule->setConfiguration(['count' => $count]);
+
+        $this->findCoupon()->getPromotion()->addRule($rule);
+
+        $this->get('doctrine.orm.entity_manager')->flush();
+    }
+
+    private function changeItemQuantity(string $tokenValue, mixed $orderItemId, int $quantity): OrderInterface
+    {
+        $envelope = $this->commandBus->dispatch(new ChangeItemQuantityInCart(
+            orderTokenValue: $tokenValue,
+            orderItemId: $orderItemId,
+            quantity: $quantity,
+        ));
+
+        return $envelope->last(HandledStamp::class)->getResult();
     }
 
     private function prepareCartWithCoupon(string $tokenValue, string $email): void
@@ -130,12 +179,11 @@ final class PromotionCouponUsageLimitTest extends JsonApiTestCase
         );
     }
 
-    private function assertOrderIsNotCompletedWithoutCoupon(string $tokenValue): void
+    private function assertOrderIsNotCompleted(string $tokenValue): void
     {
         $order = $this->findOrder($tokenValue);
 
         $this->assertSame(OrderInterface::STATE_CART, $order->getState());
-        $this->assertNull($order->getPromotionCoupon());
         $this->assertSame(0, $order->getOrderPromotionTotal());
     }
 

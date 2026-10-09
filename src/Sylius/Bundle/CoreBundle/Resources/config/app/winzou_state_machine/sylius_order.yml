@@ -31,6 +31,11 @@ winzou_state_machine:
                     do: ["@sylius.assigner.order_token.unique_id_based", "assignTokenValueIfNotSet"]
                     args: ["object"]
                     priority: -100
+                sylius_remove_unused_promotion_coupon:
+                    on: ["create"]
+                    do: ["@sylius.remover.promotion.unused_promotion_coupon", "remove"]
+                    args: ["object"]
+                    priority: 0
             after:
                 sylius_request_shipping:
                     on: ["create"]

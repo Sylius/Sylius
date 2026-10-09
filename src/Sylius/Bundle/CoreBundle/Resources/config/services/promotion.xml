@@ -129,6 +129,9 @@
         </service>
         <service id="Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface" alias="sylius.modifier.promotion.order_usage" public="true" />
 
+        <service id="sylius.remover.promotion.unused_promotion_coupon" class="Sylius\Component\Core\Promotion\Remover\UnusedPromotionCouponRemover" public="true" />
+        <service id="Sylius\Component\Core\Promotion\Remover\UnusedPromotionCouponRemoverInterface" alias="sylius.remover.promotion.unused_promotion_coupon" public="true" />
+
         <service
             id="sylius.modifier.promotion.order_usage.atomic"
             class="Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier"
