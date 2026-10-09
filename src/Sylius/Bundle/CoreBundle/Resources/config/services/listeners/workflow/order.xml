@@ -27,6 +27,11 @@
             <tag name="kernel.event_listener" event="workflow.sylius_order.transition.create" priority="100"/>
         </service>
 
+        <service id="sylius.listener.workflow.order.remove_unused_promotion_coupon" class="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\RemoveUnusedPromotionCouponListener">
+            <argument type="service" id="sylius.remover.promotion.unused_promotion_coupon"/>
+            <tag name="kernel.event_listener" event="workflow.sylius_order.transition.create" priority="0"/>
+        </service>
+
         <service id="sylius.listener.workflow.order.create_payment" class="Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\CreatePaymentListener">
             <argument type="service" id="sylius_abstraction.state_machine" />
             <tag name="kernel.event_listener" event="workflow.sylius_order.completed.create" priority="600"/>
