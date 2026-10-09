@@ -35,7 +35,7 @@ final class UriBasedSectionProvider implements SectionProviderInterface
             return null;
         }
 
-        $uri = $request->getPathInfo();
+        $uri = rawurldecode($request->getPathInfo());
 
         foreach ($this->resolvers as $resolver) {
             try {
