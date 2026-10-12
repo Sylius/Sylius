@@ -75,7 +75,7 @@
         "sylius-labs/doctrine-migrations-extra-bundle": "^0.3",
         "sylius/fixtures-bundle": "^1.10",
         "sylius/grid": "^1.16",
-        "sylius/grid-bundle": "^1.16",
+        "sylius/grid-bundle": "dev-live-grids as 1.16.99",
         "sylius/mailer": "^2.2",
         "sylius/mailer-bundle": "^2.2",
         "sylius/registry": "^1.6",

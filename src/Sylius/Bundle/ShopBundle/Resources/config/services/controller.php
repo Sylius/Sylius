@@ -16,8 +16,10 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Sylius\Bundle\ShopBundle\Controller\ContactController;
 use Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController;
 use Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController;
+use Sylius\Bundle\ShopBundle\Controller\ProductListController;
 use Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController;
 use Sylius\Bundle\ShopBundle\Controller\ResendVerificationEmailController;
+use Sylius\Bundle\ShopBundle\Router\LiveProductGridChecker;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -74,5 +76,22 @@ return static function (ContainerConfigurator $container) {
             service('router.default'),
         ])
         ->tag('controller.service_arguments')
+    ;
+
+    $services
+        ->set('sylius_shop.controller.product_list', ProductListController::class)
+        ->args([
+            service('twig'),
+            service('sylius.repository.taxon'),
+            service('sylius.context.locale'),
+        ])
+        ->tag('controller.service_arguments')
+    ;
+
+    $services
+        ->set('sylius_shop.router.live_product_grid_checker', LiveProductGridChecker::class)
+        ->private()
+        ->args(['%sylius_shop.product_grid.live.enabled%'])
+        ->tag('routing.condition_service', ['alias' => 'sylius_shop_live_product_grid'])
     ;
 };

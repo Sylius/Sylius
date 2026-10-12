@@ -1,0 +1,3 @@
+{% import '@SyliusShop/shared/pagination/pagination.html.twig' as pagination %}
+
+{{ pagination.simple(hookable_metadata.context.grid.data, {'template': '@SyliusShop/shared/pagination/live_bootstrap_5.html.twig'}) }}

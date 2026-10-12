@@ -110,29 +110,51 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
         // Grid hack, we do not need to join these if we don't sort by price
         if (isset($sorting['price'])) {
-            // Another hack, the subquery to get the first position variant
-            $subQuery = $this->createQueryBuilder('m')
-                 ->select('min(v.position)')
-                 ->innerJoin('m.variants', 'v')
-                 ->andWhere('m.id = :product_id')
-                 ->andWhere('v.enabled = :enabled')
-            ;
+            $this->joinFirstVariantChannelPricing($queryBuilder, $channel);
+        }
 
+        return $queryBuilder;
+    }
+
+    /**
+     * Same as "createShopListQueryBuilder", but the taxon is optional so that products can be listed
+     * across all taxons (used by the experimental live product grid).
+     *
+     * @param array<string, string> $sorting
+     *
+     * @experimental
+     */
+    public function createShopListQueryBuilderForChannel(
+        ChannelInterface $channel,
+        string $locale,
+        array $sorting = [],
+        ?TaxonInterface $taxon = null,
+        bool $includeAllDescendants = false,
+    ): QueryBuilder {
+        if (null !== $taxon) {
+            return $this->createShopListQueryBuilder($channel, $taxon, $locale, $sorting, $includeAllDescendants);
+        }
+
+        $queryBuilder = $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->innerJoin('o.translations', 'translation', 'WITH', 'translation.locale = :locale')
+            ->andWhere(':channel MEMBER OF o.channels')
+            ->andWhere('o.enabled = :enabled')
+            ->setParameter('locale', $locale)
+            ->setParameter('channel', $channel)
+            ->setParameter('enabled', true)
+        ;
+
+        if (empty($sorting)) {
             $queryBuilder
-                ->addSelect('variant')
-                ->addSelect('channelPricing')
-                ->innerJoin('o.variants', 'variant')
-                ->innerJoin('variant.channelPricings', 'channelPricing')
-                ->andWhere('channelPricing.channelCode = :channelCode')
-                ->andWhere(
-                    $queryBuilder->expr()->in(
-                        'variant.position',
-                        str_replace(':product_id', 'o.id', $subQuery->getDQL()),
-                    ),
-                )
-                ->setParameter('channelCode', $channel->getCode())
-                ->setParameter('enabled', true)
+                ->addOrderBy('o.createdAt', 'DESC')
+                ->addOrderBy('o.id', 'DESC')
             ;
+        }
+
+        // Grid hack, we do not need to join these if we don't sort by price
+        if (isset($sorting['price'])) {
+            $this->joinFirstVariantChannelPricing($queryBuilder, $channel);
         }
 
         return $queryBuilder;
@@ -305,5 +327,32 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         ]);
 
         return $product;
+    }
+
+    private function joinFirstVariantChannelPricing(QueryBuilder $queryBuilder, ChannelInterface $channel): void
+    {
+        // Another hack, the subquery to get the first position variant
+        $subQuery = $this->createQueryBuilder('m')
+             ->select('min(v.position)')
+             ->innerJoin('m.variants', 'v')
+             ->andWhere('m.id = :product_id')
+             ->andWhere('v.enabled = :enabled')
+        ;
+
+        $queryBuilder
+            ->addSelect('variant')
+            ->addSelect('channelPricing')
+            ->innerJoin('o.variants', 'variant')
+            ->innerJoin('variant.channelPricings', 'channelPricing')
+            ->andWhere('channelPricing.channelCode = :channelCode')
+            ->andWhere(
+                $queryBuilder->expr()->in(
+                    'variant.position',
+                    str_replace(':product_id', 'o.id', $subQuery->getDQL()),
+                ),
+            )
+            ->setParameter('channelCode', $channel->getCode())
+            ->setParameter('enabled', true)
+        ;
     }
 }
