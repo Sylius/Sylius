@@ -68,6 +68,36 @@ final class UriBasedSectionProviderSpec extends ObjectBehavior
         $this->getSection()->shouldReturn($section);
     }
 
+    function it_passes_the_path_info_decoded_to_the_resolvers(
+        RequestStack $requestStack,
+        Request $request,
+        UriBasedSectionResolverInterface $firstSectionResolver,
+        SectionInterface $section,
+    ): void {
+        $requestStack->getMainRequest()->willReturn($request);
+
+        $request->getPathInfo()->willReturn('/api/v%32/shop');
+
+        $firstSectionResolver->getSection('/api/v2/shop')->willReturn($section);
+
+        $this->getSection()->shouldReturn($section);
+    }
+
+    function it_decodes_the_path_info_exactly_once_just_as_the_router_does(
+        RequestStack $requestStack,
+        Request $request,
+        UriBasedSectionResolverInterface $firstSectionResolver,
+        SectionInterface $section,
+    ): void {
+        $requestStack->getMainRequest()->willReturn($request);
+
+        $request->getPathInfo()->willReturn('/api/v%2532/shop');
+
+        $firstSectionResolver->getSection('/api/v%32/shop')->willReturn($section);
+
+        $this->getSection()->shouldReturn($section);
+    }
+
     function it_return_null_if_master_request_has_not_been_resolved(RequestStack $requestStack): void
     {
         $requestStack->getMainRequest()->willReturn(null);

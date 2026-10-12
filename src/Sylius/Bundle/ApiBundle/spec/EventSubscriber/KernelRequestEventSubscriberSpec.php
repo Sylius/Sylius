@@ -68,6 +68,32 @@ final class KernelRequestEventSubscriberSpec extends ObjectBehavior
         ;
     }
 
+    function it_throws_not_found_exception_if_api_is_disabled_and_the_path_is_percent_encoded(
+        RequestEvent $event,
+        Request $request,
+        HttpKernelInterface $kernel,
+    ): void {
+        $this->beConstructedWith(false, '/api/v2');
+
+        $event->getRequest()->willReturn($request);
+
+        $request->getPathInfo()->willReturn('/api/v%32/any-endpoint');
+
+        $this
+            ->shouldThrow(NotFoundHttpException::class)
+            ->during(
+                'validateApi',
+                [
+                    new RequestEvent(
+                        $kernel->getWrappedObject(),
+                        $request->getWrappedObject(),
+                        HttpKernelInterface::MASTER_REQUEST,
+                    ),
+                ],
+            )
+        ;
+    }
+
     function it_does_nothing_for_non_api_endpoints_when_api_is_disabled(
         RequestEvent $event,
         Request $request,
