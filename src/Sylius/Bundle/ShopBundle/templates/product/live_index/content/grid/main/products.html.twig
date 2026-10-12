@@ -1,0 +1,15 @@
+{% import '@SyliusShop/shared/messages.html.twig' as messages %}
+
+{% set products = hookable_metadata.context.grid.data %}
+
+<div data-loading="addClass(opacity-50)">
+    {% if products.nbResults > 0 %}
+        <div class="products-grid" {{ sylius_test_html_attribute('products') }}>
+            {% for product in products %}
+                {{ component('sylius_shop:product:card', { product: product, template: hookable_metadata.configuration.product_template|default('@SyliusShop/product/common/card.html.twig'), hookableMetadata: hookable_metadata }) }}
+            {% endfor %}
+        </div>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display') }}
+    {% endif %}
+</div>
