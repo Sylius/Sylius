@@ -84,6 +84,67 @@ final class EncodedPathSectionBypassTest extends JsonApiTestCase
         self::assertSame([], $leaking, "Path variants leaked other customers' orders:\n" . implode("\n", $leaking));
     }
 
+    /**
+     * The shop ownership filters also run as item extensions, and the only other guard on these
+     * write operations is SYLIUS_SHOP_USER, which does not look at the subject. A path variant
+     * that bypasses the section must therefore not be able to write to another customer's data.
+     */
+    #[Test]
+    public function path_variants_never_allow_writing_to_another_customers_data(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['address_with_customer.yaml', 'country.yaml']);
+
+        $victimAddressId = $fixtures['address_tony']->getId();
+        $victimCustomerId = $fixtures['customer_tony']->getId();
+
+        $headers = $this->headerBuilder()
+            ->withShopUserAuthorization('oliver@example.com')
+            ->withJsonLdContentType()
+            ->build()
+        ;
+
+        $fullAddress = [
+            'firstName' => 'Taken',
+            'lastName' => 'Over',
+            'street' => 'Attacker Street',
+            'countryCode' => 'US',
+            'city' => 'Attacker City',
+            'postcode' => '11111',
+            'provinceCode' => 'US-WY',
+        ];
+
+        $probes = [
+            ['plain PUT address', 'PUT', '/api/v2/shop/addresses/' . $victimAddressId, $fullAddress],
+            ['encoded PUT address', 'PUT', '/api/v%32/shop/addresses/' . $victimAddressId, $fullAddress],
+            ['encoded PUT customer', 'PUT', '/api/v%32/shop/customers/' . $victimCustomerId, ['firstName' => 'Taken']],
+            ['plain DELETE address', 'DELETE', '/api/v2/shop/addresses/' . $victimAddressId, null],
+            ['encoded DELETE address', 'DELETE', '/api/v%32/shop/addresses/' . $victimAddressId, null],
+        ];
+
+        $accepted = [];
+
+        foreach ($probes as [$label, $method, $uri, $payload]) {
+            $this->client->request(
+                method: $method,
+                uri: $uri,
+                server: $headers,
+                content: $payload === null ? null : json_encode($payload, \JSON_THROW_ON_ERROR),
+            );
+
+            $status = $this->client->getResponse()->getStatusCode();
+
+            if ($status >= 200 && $status < 300) {
+                $accepted[] = sprintf('%s (%s) was accepted with %d', $label, $uri, $status);
+            }
+        }
+
+        self::assertSame(
+            [],
+            $accepted,
+            "Writes to another customer's data were accepted:\n" . implode("\n", $accepted),
+        );
+    }
+
     private function totalItemsOrNull(false|string $content): ?int
     {
         if ($content === false || $content === '') {
