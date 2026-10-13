@@ -155,4 +155,39 @@ final class CommandDenormalizerTest extends TestCase
 
         $this->commandDenormalizer->denormalize($data, '', null, $context);
     }
+
+    public function testThrowsExceptionIfNotAllRequiredParametersArePresentWhenWrappedInUnexpectedValueException(): void
+    {
+        $previousException = new MissingConstructorArgumentsException(
+            '',
+            0,
+            null,
+            ['firstName', 'lastName'],
+        );
+
+        $exception = new UnexpectedValueException('The input data is misformatted.', 0, $previousException);
+
+        $context = ['input' => ['class' => RegisterShopUser::class]];
+
+        $data = ['email' => 'test@example.com', 'password' => 'pa$$word'];
+
+        $this->nameConverter
+            ->expects(self::exactly(2))
+            ->method('normalize')
+            ->willReturnMap([
+                ['firstName', RegisterShopUser::class, null, [], 'first_name'],
+                ['lastName', RegisterShopUser::class, null, [], 'lastName'],
+            ]);
+
+        $this->baseNormalizer
+            ->expects(self::once())
+            ->method('denormalize')
+            ->with($data, '', null, $context)
+            ->willThrowException($exception);
+
+        self::expectException(MissingConstructorArgumentsException::class);
+        self::expectExceptionMessage('Request does not have the following required fields specified: first_name, lastName.');
+
+        $this->commandDenormalizer->denormalize($data, '', null, $context);
+    }
 }
