@@ -10,12 +10,19 @@ sylius:
         cart:
             coupon: Κουπόνι
         catalog_promotion:
+            scope:
+                for_products: Για προϊόντα
+                for_taxons: Για ταξινομικές μονάδες
+                for_variants: Για παραλλαγές
             channels: Κανάλια
         checkout:
             addressing:
+                different_shipping_address: Να γίνει χρήση διαφορετικής διεύθυνσης για αποστολή;
                 different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
             payment_method: Τρόπος Πληρωμής
             shipping_method: Τρόπος Αποστολης
+        currency:
+            select: Επιλέξτε νόμισμα
         promotion:
             channels: Κανάλια
         promotion_action:
@@ -23,11 +30,17 @@ sylius:
                 product: Προϊόν
         promotion_coupon:
             per_customer_usage_limit: Όριο χρήσης ανά πελάτη
+            reusable_from_cancelled_orders: Επαναχρησιμοποιήσιμο από ακυρωμένες παραγγελίες
         group:
             name: Ονομασία
             roles: Ρόλοι
         channel:
+            contact_phone_number: Τηλέφωνο επικοινωνίας
+            menu_taxon: Ταξινομική μονάδα μενού
+            shipping_address_in_checkout_required: Απαιτείται διεύθυνση στο ταμείο
+            shop_billing_data: Στοιχεία τιμολόγησης καταστήματος
             billing_data:
+                tax_id: ΑΦΜ
                 city: Πόλη
                 company: Εταιρεία
                 country: Χώρα
@@ -110,9 +123,11 @@ sylius:
             last_name: Επώνυμο
             password: Κωδικός πρόσβασης
             shipping_address: Διεύθυνση αποστολής
+            different_shipping_address: Να γίνει χρήση διαφορετικής διεύθυνσης για αποστολή;
         user_filter:
             query: Αναζήτηση
         variant:
+            tracked_help: Αν είναι ενεργή αυτή η επιλογή, το Sylius θα παρακολουθεί το απόθεμα και θα σταματήσει να πουλά το προϊόν μόλις το απόθεμα φτάσει στο 0.
             depth: Βάθος
             height: Ύψος
             on_hand: Τρέχων απόθεμα
@@ -153,6 +168,55 @@ sylius:
             scopes:
                 shipping: Αποστολή
                 tax: Φόρος
+    email:
+        admin_password_reset:
+            hello: Γεια σας
+            subject: Επαναφορά κωδικού διαχειριστή
+            reset_your_password: Επαναφορά του κωδικού σας
+            to_reset_your_password: Για να επαναφέρετε τον κωδικό σας - κάντε κλικ στον παρακάτω σύνδεσμο
+            to_reset_your_password_token: Για να επαναφέρετε τον κωδικό σας - χρησιμοποιήστε το παρακάτω token
+            token: Το token επαναφοράς κωδικού σας είναι
+        contact_request:
+            content: Περιεχόμενο
+            message_from: Μήνυμα από
+            subject: Αίτημα επικοινωνίας
+        order_confirmation:
+            has_been_successfully_placed: καταχωρήθηκε με επιτυχία.
+            subject: Επιβεβαίωση παραγγελίας
+            view_order_or_change_payment_method: Δείτε την παραγγελία ή αλλάξτε τρόπο πληρωμής
+            thank_you: Σας ευχαριστούμε για τις αγορές σας στο κατάστημά μας!
+            your_order_number: Ο αριθμός παραγγελίας σας
+        password_reset:
+            hello: Γεια σας
+            reset_your_password: Επαναφορά του κωδικού σας
+            subject: Επαναφορά κωδικού
+            to_reset_your_password: Για να επαναφέρετε τον κωδικό σας - κάντε κλικ στον παρακάτω σύνδεσμο
+            to_reset_your_password_token: Για να επαναφέρετε τον κωδικό σας - χρησιμοποιήστε το παρακάτω token
+            token: Το token επαναφοράς κωδικού σας είναι
+        shipment_confirmation:
+            has_been_sent_using: εστάλη μέσω
+            subject: Επιβεβαίωση αποστολής
+            thank_you_for_transaction: Σας ευχαριστούμε για μια επιτυχημένη συναλλαγή.
+            you_can_check_its_location_with_the_tracking_code: 'Μπορείτε να ελέγξετε την τοποθεσία της με τον κωδικό παρακολούθησης %tracking_code%.'
+            your_order_with_number: Η παραγγελία σας με αριθμό
+        user_registration:
+            start_shopping: Ξεκινήστε τις αγορές
+            subject: Εγγραφή χρήστη
+            welcome_to_our_store: Καλώς ήρθατε στο κατάστημά μας!
+            you_have_just_been_registered: Μόλις ολοκληρώσατε την εγγραφή σας. Σας ευχαριστούμε
+        verification_token:
+            hello: Γεια σας
+            message: 'Επαληθεύστε τον λογαριασμό σας με το token: '
+            subject: Επαλήθευση διεύθυνσης email
+            to_verify_your_email_address: Για να επαληθεύσετε τη διεύθυνση email σας - κάντε κλικ στον παρακάτω σύνδεσμο
+            verify_your_email_address: Επαληθεύστε τη διεύθυνση email σας
+        user:
+            account_verification:
+                greeting: Γεια σας
+                message: 'Επαληθεύστε τον λογαριασμό σας με το token: '
+                statement: Επαληθεύστε τη διεύθυνση email σας
+                strategy: Για να επαληθεύσετε τη διεύθυνση email σας - κάντε κλικ στον παρακάτω σύνδεσμο
+                subject: Επαλήθευση διεύθυνσης email
     installer:
         extensions:
             header: επεκτάσεις
@@ -195,6 +259,9 @@ sylius:
             vendors: προμηθευτές
             writable: εγγράψιμο
         settings:
+            detect_unicode_help: 'Ορίστε ''detect_unicode = Off'' στο αρχείο php.ini'
+            timezone_help: 'Ορίστε το ''date.timezone'' στο αρχείο php.ini (π.χ. date.timezone = "Europe/Amsterdam")'
+            version_help: Το Sylius προτείνει έκδοση PHP %recommended%, η τρέχουσα έκδοσή σας είναι %current%. Παρακαλώ αναβαθμίστε.
             header: Έκδοση PHP και ρυθμίσεις
             any: οποιαδήποτε
             detect_unicode: detect_unicode
@@ -204,6 +271,7 @@ sylius:
             on: true
             register_globals: register_globals
             session:
+                auto_start_help: 'Ορίστε ''session.auto_start = Off'' στο αρχείο php.ini'
                 auto_start: session.auto_start
             short_open_tag: short_open_tag
             timezone: ζώνη ώρας

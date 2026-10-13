@@ -7,6 +7,14 @@ sylius:
             description: Περιγραφή
             name: Ονομασία
             priority: Προτεραιότητα
+            action:
+                fixed_discount: Σταθερή έκπτωση
+                percentage_discount: Ποσοστιαία έκπτωση
+            enabled: Ενεργό
+            end_date: Ημερομηνία λήξης
+            label: Ετικέτα
+            start_date: Ημερομηνία έναρξης
+            translations: Μεταφράσεις
         promotion:
             actions: Ενέργειες
             add_action: Προσθήκη λειτουργίας
@@ -20,12 +28,16 @@ sylius:
             rules: Κανόνες
             starts_at: Αρχίζει με
             usage_limit: Όριο χρήσης
+            applies_to_discounted: Εφαρμόζεται σε είδη παραγγελίας που έχουν ήδη έκπτωση
+            applies_to_discounted_details: Με αυτή την επιλογή, η προσφορά καλαθιού θα εφαρμοστεί σε είδη παραγγελίας που έχουν ήδη έκπτωση από προσφορά(ές) καταλόγου.
+            label: Ετικέτα
         promotion_action:
             item_fixed_discount: Σταθερή έκπτωση αντικειμένου
             item_percentage_discount: Ποσοστιαία έκπτωση αντικειμένου
             order_fixed_discount: Σταθερή έκπτωση παραγγελίας
             order_percentage_discount: Ποσοστιαία έκπτωση παραγγελίας
             shipping_percentage_discount: Ποσοστιαία έκπτωση κόστους αποστολής
+            filters: Φίλτρα
             fixed_discount_configuration:
                 amount: Ποσό
             percentage_discount_configuration:

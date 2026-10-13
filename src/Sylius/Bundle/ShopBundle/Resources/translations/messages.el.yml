@@ -2,13 +2,53 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
+    account:
+        dont_have_an_account: 'Δεν έχετε λογαριασμό;'
+        register_here: 'Εγγραφείτε εδώ'
     email:
         order_confirmation:
+            has_been_successfully_placed: 'καταχωρήθηκε με επιτυχία.'
             subject: 'Επιβεβαίωση παραγγελίας'
+            view_order_or_change_payment_method: 'Δείτε την παραγγελία ή αλλάξτε τρόπο πληρωμής'
+            thank_you: 'Σας ευχαριστούμε για τις αγορές σας στο κατάστημά μας!'
+            your_order_number: 'Ο αριθμός παραγγελίας σας'
         password_reset:
             hello: 'Χαίρεται'
+            reset_your_password: 'Επαναφορά του κωδικού σας'
+            subject: 'Επαναφορά κωδικού'
+            to_reset_your_password: 'Για να επαναφέρετε τον κωδικό σας - κάντε κλικ στον παρακάτω σύνδεσμο'
+            to_reset_your_password_token: 'Για να επαναφέρετε τον κωδικό σας - χρησιμοποιήστε το παρακάτω token'
+            token: 'Το token επαναφοράς κωδικού σας είναι'
+        user_registration:
+            start_shopping: 'Ξεκινήστε τις αγορές'
+            subject: 'Εγγραφή χρήστη'
+            welcome_to_our_store: 'Καλώς ήρθατε στο κατάστημά μας!'
+            you_have_just_been_registered: 'Μόλις ολοκληρώσατε την εγγραφή σας. Σας ευχαριστούμε'
         verification_token:
             hello: 'Χαίρεται'
+            subject: 'Επαλήθευση διεύθυνσης email'
+            to_verify_your_email_address: 'Για να επαληθεύσετε τη διεύθυνση email σας - κάντε κλικ στον παρακάτω σύνδεσμο'
+            verify_your_email_address: 'Επαληθεύστε τη διεύθυνση email σας'
+    footer:
+        banner:
+            free_shipping_title: 'Δωρεάν αποστολή & επιστροφή'
+            free_shipping_content: 'Δωρεάν αποστολή σε όλες τις παραγγελίες'
+            guarantee_title: 'Εγγύηση επιστροφής χρημάτων'
+            guarantee_content: 'Εγγύηση επιστροφής χρημάτων εντός 30 ημερών'
+            multiple_payments_title: 'Πολλαπλοί τρόποι πληρωμής'
+            multiple_payments_content: 'Δεχόμαστε πιστωτικές κάρτες και PayPal'
+        payment_partners: 'Συνεργάτες πληρωμών'
+    homepage:
+        about_us: 'Σχετικά με εμάς'
+        about_us_content: 'Καλώς ήρθατε στο κατάστημά μας, το νούμερο ένα online κατάστημά σας που σας προσφέρει τα καλύτερα προϊόντα. Μπορείτε να επιλέξετε ανάμεσα στα καλύτερα ρούχα και παπούτσια από την γκάμα μας. (<i>Μπορείτε να τροποποιήσετε αυτό το περιεχόμενο αντικαθιστώντας το κλειδί "sylius.homepage.about_us_content" στο αρχείο μεταφράσεών σας</i>)'
+        banner_content: 'Ετοιμαστείτε! Έρχεται ο χειμώνας'
+        banner_button: 'Δείτε τη νέα συλλογή'
+        carousel_header: 'Προτεινόμενα προϊόντα'
+        latest_deals: 'Τελευταίες προσφορές'
+        new_collection: 'Νέα συλλογή'
+        newsletter: 'Newsletter'
+        newsletter_description: 'Εγγραφείτε στο newsletter μας για να δείτε νέες προσφορές που σας περιμένουν! (<i>Μπορείτε να τροποποιήσετε αυτό το περιεχόμενο αντικαθιστώντας το κλειδί "sylius.homepage.newsletter_description" στο αρχείο μεταφράσεών σας</i>)'
+        subscribe: 'Εγγραφή'
     lightbox:
         image_album_label: 'Εικόνα %1 από %2'
     menu:
@@ -20,3 +60,4 @@ sylius:
                 header: 'Ο Λογαριασμός σας'
                 order_history: 'Ιστορικό παραγγελιών'
                 personal_information: 'Προσωπικά στοιχεία'
+    top_bar: 'Εγγραφείτε στο newsletter μας και κερδίστε έκπτωση -20%'

@@ -45,8 +45,17 @@ sylius:
             rules: Κανόνες
             tax_category: Φορολογική κατηγορία
             translations: Μεταφράσεις
+            max_delivery_time_days: Μέγιστος χρόνος παράδοσης (ημέρες)
+            min_delivery_time_days: Ελάχιστος χρόνος παράδοσης (ημέρες)
+            rules_help: Χρησιμοποιήστε κανόνες για να αποφασίσετε αν αυτή η μέθοδος αποστολής μπορεί να εφαρμοστεί σε μια παραγγελία. Αν ένας κανόνας είναι αληθής, η μέθοδος αποστολής μπορεί να εφαρμοστεί. Σημειώστε ότι αν προσθέσετε πολλούς κανόνες, πρέπει να είναι αληθείς όλοι.
+            select_calculator: Επιλέξτε υπολογιστή κόστους
         shipping_method_rule:
             type: Τύπος
             total: Σύνολο
             weight: Βάρος
             amount: Ποσό
+            items_total_greater_than_or_equal: Σύνολο ειδών μεγαλύτερο ή ίσο με
+            items_total_less_than_or_equal: Σύνολο ειδών μικρότερο ή ίσο με
+            total_weight_greater_than_or_equal: Συνολικό βάρος μεγαλύτερο ή ίσο με
+            total_weight_less_than_or_equal: Συνολικό βάρος μικρότερο ή ίσο με
+            select: Επιλέξτε τύπο κανόνα

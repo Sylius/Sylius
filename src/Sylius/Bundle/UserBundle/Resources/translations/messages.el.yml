@@ -12,6 +12,7 @@ sylius:
             remember_me: Να με θυμάσαι
             shipping_address: Διεύθυνση αποστολής
             username: Όνομα χρήστη
+            verified: Επιβεβαιωμένος
         user_filter:
             query: Αναζήτηση
         user_change_password:
