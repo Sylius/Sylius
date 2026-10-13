@@ -25,6 +25,7 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
 
@@ -40,6 +41,8 @@ class WidgetComponent
 
     #[LiveProp(hydrateWith: 'hydrateResource', dehydrateWith: 'dehydrateResource')]
     public ?ResourceInterface $cart = null;
+
+    private bool $reRendered = false;
 
     /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
@@ -60,6 +63,17 @@ class WidgetComponent
     public function refreshCart(#[LiveArg] mixed $cartId = null): void
     {
         $this->cart = $this->getCart();
+    }
+
+    #[PreReRender]
+    public function markAsReRendered(): void
+    {
+        $this->reRendered = true;
+    }
+
+    public function isReRendered(): bool
+    {
+        return $this->reRendered;
     }
 
     private function getCart(): ?OrderInterface
