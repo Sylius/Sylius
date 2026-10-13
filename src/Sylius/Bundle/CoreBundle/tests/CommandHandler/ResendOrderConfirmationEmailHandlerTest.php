@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\CommandHandler;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Command\ResendOrderConfirmationEmail;
@@ -23,6 +24,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ResendOrderConfirmationEmailHandlerTest extends TestCase
 {
     private MockObject&OrderEmailManagerInterface $orderEmailManager;

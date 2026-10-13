@@ -15,6 +15,7 @@ namespace Tests\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -29,6 +30,7 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderShipmentProcessorTest extends TestCase
 {
     private DefaultShippingMethodResolverInterface&MockObject $defaultShippingMethodResolver;

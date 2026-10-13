@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShopBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShopBundle\EventListener\OrderLocaleAssigner;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderLocaleAssignerTest extends TestCase
 {
     private LocaleContextInterface&MockObject $localeContext;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Controller;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Controller\RedirectHandler;
@@ -22,6 +23,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RedirectHandlerTest extends TestCase
 {
     private MockObject&RedirectHandlerInterface $decoratedRedirectHandler;

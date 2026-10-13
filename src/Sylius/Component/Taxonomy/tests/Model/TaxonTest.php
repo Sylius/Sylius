@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Taxonomy\Model;
 
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonTest extends TestCase
 {
     /** @var TaxonInterface&MockObject */

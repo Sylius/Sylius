@@ -13,11 +13,23 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Payment\Encryption;
 
+use Sylius\Component\Payment\Encryption\Exception\EncryptionException;
+
 /** @experimental */
 trait EncryptionCheckTrait
 {
     protected function isEncrypted(mixed $value): bool
     {
         return is_string($value) && str_ends_with($value, EncrypterInterface::ENCRYPTION_SUFFIX);
+    }
+
+    /** @param array<array-key, mixed> $values */
+    protected function assertFullyEncrypted(array $values): void
+    {
+        foreach ($values as $value) {
+            if (!$this->isEncrypted($value)) {
+                throw EncryptionException::dataIsNotFullyEncrypted();
+            }
+        }
     }
 }

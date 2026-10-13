@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -24,10 +25,8 @@ final class CatalogPromotionContext implements Context
     {
     }
 
-    /**
-     * @Transform /^"([^"]+)" catalog promotion$/
-     * @Transform :catalogPromotion
-     */
+    #[Transform('/^"([^"]+)" catalog promotion$/')]
+    #[Transform(':catalogPromotion')]
     public function getCatalogPromotionByName(string $name): CatalogPromotionInterface
     {
         $catalogPromotion = $this->catalogPromotionRepository->findOneBy(['name' => $name]);

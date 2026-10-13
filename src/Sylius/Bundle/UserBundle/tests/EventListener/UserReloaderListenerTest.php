@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\UserBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\UserBundle\EventListener\UserReloaderListener;
@@ -20,6 +21,7 @@ use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UserReloaderListenerTest extends TestCase
 {
     private MockObject&UserReloaderInterface $userReloader;

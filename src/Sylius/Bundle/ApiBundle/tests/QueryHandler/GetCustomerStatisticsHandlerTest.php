@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\QueryHandler;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Query\GetCustomerStatistics;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Exception\CustomerNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GetCustomerStatisticsHandlerTest extends TestCase
 {
     private CustomerRepositoryInterface&MockObject $customerRepository;

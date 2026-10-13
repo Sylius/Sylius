@@ -48,7 +48,7 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
         $paymentMethod = $this->paymentMethodRepository->findOneBy(['code' => $value->paymentMethodCode]);
 
         if ($paymentMethod === null) {
-            $this->context->addViolation($constraint->notExist, ['%code%' => $value->paymentMethodCode]);
+            $this->context->addViolation($constraint->notExistMessage, ['%code%' => $value->paymentMethodCode]);
 
             return;
         }
@@ -57,13 +57,13 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
         $payment = $this->paymentRepository->find($value->paymentId);
 
         if (null === $payment) {
-            $this->context->addViolation($constraint->paymentNotFound);
+            $this->context->addViolation($constraint->paymentNotFoundMessage);
 
             return;
         }
 
         if (!in_array($paymentMethod, $this->paymentMethodsResolver->getSupportedMethods($payment), true)) {
-            $this->context->addViolation($constraint->notAvailable, ['%name%' => $paymentMethod->getName()]);
+            $this->context->addViolation($constraint->notAvailableMessage, ['%name%' => $paymentMethod->getName()]);
         }
     }
 }

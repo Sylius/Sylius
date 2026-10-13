@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Common;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\Common\ResourceRemoveProcessor;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Exception\ResourceDeleteException;
 use Sylius\Component\Core\Model\Promotion;
 use Sylius\Component\Core\Model\ShippingMethod;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ResourceRemoveProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $decoratedRemoveProcessor;

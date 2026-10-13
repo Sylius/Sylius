@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Order\Modifier;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Order\Factory\OrderItemUnitFactoryInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifier;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderItemQuantityModifierTest extends TestCase
 {
     private OrderItemQuantityModifier $orderItemQuantityModifier;

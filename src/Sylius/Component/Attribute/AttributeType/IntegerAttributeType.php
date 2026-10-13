@@ -54,6 +54,6 @@ final class IntegerAttributeType implements AttributeTypeInterface
 
     private function getValidationErrors(ExecutionContextInterface $context, ?int $value): ConstraintViolationListInterface
     {
-        return $context->getValidator()->validate($value, [new NotBlank([])]);
+        return $context->getValidator()->validate($value, [new NotBlank()]);
     }
 }

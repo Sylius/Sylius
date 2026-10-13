@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Resolver;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Resolver\TaxationAddressResolver;
 use Sylius\Component\Core\Resolver\TaxationAddressResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxationAddressResolverTest extends TestCase
 {
     private OrderInterface $order;

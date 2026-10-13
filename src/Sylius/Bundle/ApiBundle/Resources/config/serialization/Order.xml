@@ -110,6 +110,13 @@
             <group>sylius:shop:order:account:show</group>
         </attribute>
 
+        <attribute name="orderAndItemPromotionTotal">
+            <group>sylius:admin:order:index</group>
+            <group>sylius:admin:order:show</group>
+            <group>sylius:shop:cart:show</group>
+            <group>sylius:shop:order:account:show</group>
+        </attribute>
+
         <attribute name="shippingPromotionTotal">
             <group>sylius:admin:order:index</group>
             <group>sylius:admin:order:show</group>

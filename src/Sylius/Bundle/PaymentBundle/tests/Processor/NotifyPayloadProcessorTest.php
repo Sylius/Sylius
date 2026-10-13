@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\PaymentBundle\Processor;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\Normalizer\SymfonyRequestNormalizerInterface;
@@ -20,6 +21,7 @@ use Sylius\Bundle\PaymentBundle\Processor\NotifyPayloadProcessor;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class NotifyPayloadProcessorTest extends TestCase
 {
     #[DataProvider('getNormalizedRequestAndPayloadWithExpectation')]

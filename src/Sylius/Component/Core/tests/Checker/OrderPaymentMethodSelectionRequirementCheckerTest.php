@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Checker;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Checker\OrderPaymentMethodSelectionRequirementChecker;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderPaymentMethodSelectionRequirementCheckerTest extends TestCase
 {
     private MockObject&PaymentMethodsResolverInterface $paymentMethodsResolver;

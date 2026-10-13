@@ -17,6 +17,7 @@ use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\GatewayInterface;
 use Payum\Core\Request\Authorize;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Action\AuthorizePaymentAction;
@@ -24,6 +25,7 @@ use Sylius\Bundle\PayumBundle\Provider\PaymentDescriptionProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AuthorizePaymentActionTest extends TestCase
 {
     private MockObject&PaymentDescriptionProviderInterface $paymentDescriptionProvider;

@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: ''
         menu_taxon_delete: 'Vous ne pouvez pas supprimer le taxon de menu d’un canal.'
+    user:
+        verification_email_sent: 'Si l''adresse courriel saisie est associée à un compte, un courriel de vérification a été envoyé.'

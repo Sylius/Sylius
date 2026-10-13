@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'Há apenas a %quantity% deste produto no estoque.'
     product_variant:
         update_error: 'Houve um problema inesperado ao atualizar uma variante de produto. Por favor, tente atualizar a variante de produto de novo.'
+    user:
+        verification_email_sent: 'Se o endereço de e-mail inserido estiver associado a uma conta, um e-mail de verificação foi enviado.'

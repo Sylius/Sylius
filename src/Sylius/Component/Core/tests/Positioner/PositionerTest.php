@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Positioner;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\PositionAwareInterface;
 use Sylius\Component\Core\Positioner\Positioner;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PositionerTest extends TestCase
 {
     private MockObject&PositionAwareInterface $positionAwareObject;

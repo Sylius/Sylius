@@ -18,7 +18,6 @@ use Sylius\Bundle\PaymentBundle\Provider\GatewayFactoryNameProviderInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
-/** @experimental */
 final class GatewayFactoryCommandProvider extends AbstractServiceCommandProvider
 {
     /** @param ServiceProviderInterface<PaymentRequestCommandProviderInterface> $locator */

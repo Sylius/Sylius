@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Abstraction\StateMachine\Unit;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -23,6 +24,7 @@ use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\Transition as SymfonyWorkflowTransition;
 use Symfony\Component\Workflow\Workflow;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SymfonyWorkflowAdapterTest extends TestCase
 {
     /** @var Registry&MockObject */

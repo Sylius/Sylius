@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Addressing\Checker;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Checker\ZoneDeletionChecker;
@@ -21,6 +22,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ZoneDeletionCheckerTest extends TestCase
 {
     /** @var RepositoryInterface<ZoneMemberInterface>&MockObject */

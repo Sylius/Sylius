@@ -44,6 +44,7 @@ class ProductAttributeFixture extends AbstractResourceFixture
                 ->booleanNode('translatable')->defaultTrue()->end()
                 ->enumNode('type')->values($this->attributeTypes)->cannotBeEmpty()->end()
                 ->variableNode('configuration')->end()
+                ->variableNode('translations')->cannotBeEmpty()->defaultValue([])->end()
         ;
     }
 }

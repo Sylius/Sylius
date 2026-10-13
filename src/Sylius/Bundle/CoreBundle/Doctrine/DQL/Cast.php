@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\DQL;
 
-use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
+use Sylius\Bundle\CoreBundle\Doctrine\Platform\PlatformHelper;
 
 final class Cast extends FunctionNode
 {
@@ -48,7 +48,7 @@ final class Cast extends FunctionNode
 
         $type = $this->type;
 
-        if (is_a($platform, MySQLPlatform::class, true) && 'text' === $type) {
+        if (PlatformHelper::isMysql($platform) && 'text' === $type) {
             $type = 'char';
         }
 

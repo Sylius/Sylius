@@ -10,15 +10,14 @@
             <directory>tests</directory>
             <directory>src/Sylius/Behat/tests</directory>
         </testsuite>
-
-        <testsuite name="sylius">
-            <directory>tests</directory>
-        </testsuite>
-
-        <testsuite name="sylius-behat">
-            <directory>src/Sylius/Behat/tests</directory>
-        </testsuite>
     </testsuites>
+
+    <source restrictNotices="true" restrictWarnings="true" ignoreIndirectDeprecations="true">
+        <include>
+            <directory suffix=".php">src</directory>
+            <directory suffix=".php">tests</directory>
+        </include>
+    </source>
 
     <php>
         <ini name="error_reporting" value="-1" />

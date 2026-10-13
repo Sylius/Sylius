@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Behat\Service\Setter;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Behat\Service\Setter\ChannelContextSetter;
@@ -20,6 +21,7 @@ use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelContextSetterTest extends TestCase
 {
     private CookieSetterInterface&MockObject $cookieSetter;

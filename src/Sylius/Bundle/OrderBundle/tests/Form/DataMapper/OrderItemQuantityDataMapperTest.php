@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\OrderBundle\Form\DataMapper;
 
 use ArrayIterator;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper;
@@ -22,6 +23,7 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderItemQuantityDataMapperTest extends TestCase
 {
     /** @var OrderItemQuantityModifierInterface&MockObject */

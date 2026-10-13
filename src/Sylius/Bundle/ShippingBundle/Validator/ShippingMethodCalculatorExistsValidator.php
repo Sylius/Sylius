@@ -37,7 +37,7 @@ final class ShippingMethodCalculatorExistsValidator extends ConstraintValidator
         }
 
         if (!in_array($value, array_keys($this->calculators), true)) {
-            $this->context->buildViolation($constraint->invalidShippingCalculator)
+            $this->context->buildViolation($constraint->invalidShippingCalculatorMessage)
                 ->setParameter('{{ available_calculators }}', implode(', ', array_keys($this->calculators)))
                 ->addViolation()
             ;

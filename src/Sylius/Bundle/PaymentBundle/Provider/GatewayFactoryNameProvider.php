@@ -17,7 +17,6 @@ use Sylius\Component\Payment\Model\GatewayConfigInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-/** @experimental */
 final class GatewayFactoryNameProvider implements GatewayFactoryNameProviderInterface
 {
     public function provide(PaymentMethodInterface $paymentMethod): string

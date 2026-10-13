@@ -12,6 +12,8 @@ sylius:
             min_length: Deskripsi promosi harus minimal 1 karakter. Deskripsi promosi minimal harus {{ limit }} karakter.
             not_blank: Harap masukkan deskripsi promosi.
         end_date_cannot_be_set_prior_start_date: Tanggal akhir tidak dapat ditetapkan sebelum tanggal mulai.
+        usage_limit:
+            min: Batas penggunaan promosi minimal harus {{ limit }}.
         name:
             max_length: Nama promosi tidak boleh lebih dari 1 karakter. Nama promosi tidak boleh lebih dari karakter {{ limit }}.
             min_length: Nama promosi minimal harus berumur 1 karakter. Nama promosi minimal harus {{ limit }} karakter.

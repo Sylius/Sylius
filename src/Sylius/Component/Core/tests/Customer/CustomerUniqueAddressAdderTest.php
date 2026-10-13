@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Customer;
 
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Customer\CustomerUniqueAddressAdder;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerUniqueAddressAdderTest extends TestCase
 {
     private AddressComparatorInterface&MockObject $addressComparator;

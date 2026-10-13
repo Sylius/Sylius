@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Promotion\Generator;
 
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
@@ -26,6 +27,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionCouponGeneratorTest extends TestCase
 {
     /** @var FactoryInterface<PromotionCouponInterface>&MockObject */
@@ -73,6 +75,7 @@ final class PromotionCouponGeneratorTest extends TestCase
         $this->couponGeneratorInstruction->expects($this->once())->method('getAmount')->willReturn(1);
         $this->couponGeneratorInstruction->expects($this->once())->method('getUsageLimit')->willReturn(null);
         $this->couponGeneratorInstruction->expects($this->once())->method('getExpiresAt')->willReturn(null);
+        $this->couponGeneratorInstruction->expects($this->once())->method('isTrackUsage')->willReturn(false);
         $this->couponGeneratorInstruction->expects($this->once())->method('getPrefix')->willReturn(null);
         $this->couponGeneratorInstruction->expects($this->once())->method('getSuffix')->willReturn(null);
         $this->couponGeneratorInstruction->expects($this->once())->method('getCodeLength')->willReturn(6);
@@ -83,6 +86,7 @@ final class PromotionCouponGeneratorTest extends TestCase
         $this->promotionCoupon->expects($this->once())->method('setCode');
         $this->promotionCoupon->expects($this->once())->method('setUsageLimit')->with(null);
         $this->promotionCoupon->expects($this->once())->method('setExpiresAt')->with(null);
+        $this->promotionCoupon->expects($this->once())->method('setTrackUsage')->with(false);
         $this->objectManager->expects($this->once())->method('persist')->with($this->promotionCoupon);
         $this->objectManager->expects($this->once())->method('flush');
 
@@ -94,6 +98,7 @@ final class PromotionCouponGeneratorTest extends TestCase
         $this->couponGeneratorInstruction->expects($this->once())->method('getAmount')->willReturn(1);
         $this->couponGeneratorInstruction->expects($this->once())->method('getUsageLimit')->willReturn(null);
         $this->couponGeneratorInstruction->expects($this->once())->method('getExpiresAt')->willReturn(null);
+        $this->couponGeneratorInstruction->expects($this->once())->method('isTrackUsage')->willReturn(false);
         $this->couponGeneratorInstruction->expects($this->once())->method('getPrefix')->willReturn('PREFIX_');
         $this->couponGeneratorInstruction->expects($this->once())->method('getSuffix')->willReturn('_SUFFIX');
         $this->couponGeneratorInstruction->expects($this->once())->method('getCodeLength')->willReturn(6);
@@ -105,6 +110,7 @@ final class PromotionCouponGeneratorTest extends TestCase
         strpos($couponCode, '_SUFFIX') === strlen($couponCode) - strlen('_SUFFIX'));
         $this->promotionCoupon->expects($this->once())->method('setUsageLimit')->with(null);
         $this->promotionCoupon->expects($this->once())->method('setExpiresAt')->with(null);
+        $this->promotionCoupon->expects($this->once())->method('setTrackUsage')->with(false);
         $this->objectManager->expects($this->once())->method('persist')->with($this->promotionCoupon);
         $this->objectManager->expects($this->once())->method('flush');
 

@@ -66,7 +66,7 @@ final class ExchangeRateType extends AbstractResourceType
         $resolver->setDefault('rounding_mode', \NumberFormatter::ROUND_HALFEVEN);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_exchange_rate';
     }

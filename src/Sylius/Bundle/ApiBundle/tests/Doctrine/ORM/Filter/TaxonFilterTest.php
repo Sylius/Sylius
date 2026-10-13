@@ -18,12 +18,14 @@ use ApiPlatform\Metadata\Exception\InvalidArgumentException;
 use ApiPlatform\Metadata\Exception\ItemNotFoundException;
 use ApiPlatform\Metadata\IriConverterInterface;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TaxonFilter;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonFilterTest extends TestCase
 {
     private TaxonFilter $taxonFilter;

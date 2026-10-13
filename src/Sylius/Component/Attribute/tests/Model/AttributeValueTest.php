@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Attribute\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Attribute\Model\AttributeValue;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 class AttributeValueTest extends TestCase
 {
     private AttributeValue $attributeValue;

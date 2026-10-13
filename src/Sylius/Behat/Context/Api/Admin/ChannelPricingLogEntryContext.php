@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -30,9 +32,7 @@ final class ChannelPricingLogEntryContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I go to the price history of a (variant with code "[^"]+")$/
-     */
+    #[When('/^I go to the price history of a (variant with code "[^"]+")$/')]
     public function iGoToThePriceHistoryOfAVariant(ProductVariantInterface $productVariant): void
     {
         $channel = $this->sharedStorage->get('channel');
@@ -46,18 +46,14 @@ final class ChannelPricingLogEntryContext implements Context
         $this->client->filter();
     }
 
-    /**
-     * @Then I should see :count log entries in the catalog price history
-     * @Then I should see a single log entry in the catalog price history
-     */
+    #[Then('I should see :count log entries in the catalog price history')]
+    #[Then('I should see a single log entry in the catalog price history')]
     public function iShouldSeeLogEntriesInTheCatalogPriceHistoryForTheVariant(int $count = 1): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then /^there should be a log entry on the (\d+)(?:|st|nd|rd|th) position with the ("[^"]+") selling price, (no|"[^"]+") original price and datetime of the price change$/
-     */
+    #[Then('/^there should be a log entry on the (\d+)(?:|st|nd|rd|th) position with the ("[^"]+") selling price, (no|"[^"]+") original price and datetime of the price change$/')]
     public function thereShouldBeALogEntryOnThePositionWithTheSellingPriceOriginalPriceAndDatetimeOfThePriceChange(
         int $position,
         int $price,
@@ -74,9 +70,7 @@ final class ChannelPricingLogEntryContext implements Context
         Assert::keyExists($logEntry, 'loggedAt');
     }
 
-    /**
-     * @Then /^there should be a log entry with the ("[^"]+") selling price, (no|"[^"]+") original price and datetime of the price change$/
-     */
+    #[Then('/^there should be a log entry with the ("[^"]+") selling price, (no|"[^"]+") original price and datetime of the price change$/')]
     public function thereShouldBeALogEntryWithTheSellingPriceOriginalPriceAndDatetimeOfThePriceChange(
         int $price,
         int|string $originalPrice,

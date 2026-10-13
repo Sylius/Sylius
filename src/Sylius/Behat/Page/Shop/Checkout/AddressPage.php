@@ -249,14 +249,14 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function selectShippingAddressFromAddressBook(AddressInterface $address): void
     {
-        $this->getElement('shipping_address_book')->selectOption($address->getId());
+        $this->getElement('shipping_address_book')->selectOption((string) $address->getId());
 
         $this->waitForElementUpdate('form');
     }
 
     public function selectBillingAddressFromAddressBook(AddressInterface $address): void
     {
-        $this->getElement('billing_address_book')->selectOption($address->getId());
+        $this->getElement('billing_address_book')->selectOption((string) $address->getId());
 
         $this->waitForElementUpdate('form');
     }

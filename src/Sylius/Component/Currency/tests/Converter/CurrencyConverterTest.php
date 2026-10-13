@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Currency\Converter;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Currency\Converter\CurrencyConverter;
@@ -21,6 +22,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CurrencyConverterTest extends TestCase
 {
     private CurrencyConverter $currencyConverter;
