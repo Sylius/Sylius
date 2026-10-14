@@ -27,6 +27,7 @@ use Sylius\Bundle\CoreBundle\Attribute\AsProductVariantMapProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
 use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
+use Sylius\Bundle\CoreBundle\Routing\LocalizedRoutesLoader;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
 use Symfony\Component\DependencyInjection\Definition;
@@ -659,6 +660,32 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         ;
 
         $this->assertEmpty($syliusLabsDoctrineMigrationsExtraExtensionConfig);
+    }
+
+    #[Test]
+    public function it_does_not_register_the_localized_routes_loader_when_no_route_is_localized(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+
+        $this->load();
+
+        $this->assertContainerBuilderNotHasService('sylius_core.routing.loader.localized_routes');
+    }
+
+    #[Test]
+    public function it_registers_the_localized_routes_loader_decorating_the_routing_loader(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+
+        $this->load(['localized_routes' => ['sylius_shop_login' => ['fr_FR' => '/{_locale}/connexion']]]);
+
+        $this->assertContainerBuilderHasService('sylius_core.routing.loader.localized_routes', LocalizedRoutesLoader::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            'sylius_core.routing.loader.localized_routes',
+            1,
+            ['sylius_shop_login' => ['fr_FR' => '/{_locale}/connexion']],
+        );
+        $this->assertContainerBuilderServiceDecoration('sylius_core.routing.loader.localized_routes', 'routing.loader');
     }
 
     private function configureContainer(string $env): void
