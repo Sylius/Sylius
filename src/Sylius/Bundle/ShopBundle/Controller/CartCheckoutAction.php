@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Bundle\OrderBundle\Resetter\CartChangesResetterInterface;
 use Sylius\Bundle\ShopBundle\Form\Type\CartType;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -25,8 +26,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Environment;
 use Webmozart\Assert\Assert;
@@ -84,10 +83,6 @@ final readonly class CartCheckoutAction
 
     private function addErrorNotification(string $message): void
     {
-        $session = $this->requestStack->getSession();
-
-        Assert::isInstanceOf($session, FlashBagAwareSessionInterface::class);
-
-        $session->getFlashBag()->add('error', $message);
+        FlashBagProvider::getFlashBag($this->requestStack)->add('error', $message);
     }
 }

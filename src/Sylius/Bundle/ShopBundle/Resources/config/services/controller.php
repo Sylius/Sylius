@@ -24,6 +24,7 @@ use Sylius\Bundle\ShopBundle\Controller\RegistrationThankYouController;
 use Sylius\Bundle\ShopBundle\Controller\RequestPasswordResetTokenAction;
 use Sylius\Bundle\ShopBundle\Controller\ResendVerificationEmailController;
 use Sylius\Bundle\ShopBundle\Controller\ResetPasswordAction;
+use Sylius\Bundle\ShopBundle\Controller\VerifyShopUserAction;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -139,7 +140,6 @@ return static function (ContainerConfigurator $container) {
             service('router.default'),
             service('form.factory'),
             service('sylius.repository.shop_user'),
-            service('translator'),
             service('request_stack'),
             service('sylius.command_dispatcher.reset_password.shop'),
             param('sylius.shop_user.token.password_reset.ttl'),
@@ -154,8 +154,20 @@ return static function (ContainerConfigurator $container) {
             service('router.default'),
             service('form.factory'),
             service('sylius.command_bus'),
-            service('translator'),
             service('request_stack'),
+        ])
+        ->tag('controller.service_arguments')
+    ;
+
+    $services
+        ->set('sylius_shop.controller.verify_shop_user', VerifyShopUserAction::class)
+        ->args([
+            service('router.default'),
+            service('sylius.repository.shop_user'),
+            service('request_stack'),
+            service('sylius.context.channel'),
+            service('sylius.context.locale'),
+            service('sylius.command_bus'),
         ])
         ->tag('controller.service_arguments')
     ;
