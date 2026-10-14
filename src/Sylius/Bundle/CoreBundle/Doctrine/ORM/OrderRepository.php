@@ -57,6 +57,42 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    public function createGridListQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'customer')
+            ->andWhere('o.state != :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
+        ;
+    }
+
+    public function createCriteriaAwareGridListQueryBuilder(?array $criteria): QueryBuilder
+    {
+        if ($criteria === null) {
+            return $this->createGridListQueryBuilder();
+        }
+
+        $hasProductCriteria = '' !== ($criteria['product'] ?? '');
+        $hasVariantCriteria = '' !== ($criteria['variant'] ?? '');
+
+        $queryBuilder = $this->createGridListQueryBuilder();
+
+        if ($hasVariantCriteria || $hasProductCriteria) {
+            $queryBuilder
+                ->leftJoin('o.items', 'item')
+                ->leftJoin('item.variant', 'variant')
+            ;
+        }
+
+        if ($hasProductCriteria) {
+            $queryBuilder
+                ->leftJoin('variant.product', 'product')
+            ;
+        }
+
+        return $queryBuilder;
+    }
+
     public function createCriteriaAwareSearchListQueryBuilder(?array $criteria): QueryBuilder
     {
         if ($criteria === null) {
