@@ -10,12 +10,20 @@
     </td>
     <td {{ sylius_test_html_attribute('promotion-shipping-discounts') }}>
         <span>{{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment)) }}</span>
-        <span>
-           <span {{ sylius_test_html_attribute('shipping-total') }}>
+        <div>
+            <span {{ sylius_test_html_attribute('shipping-total') }}>
                {{ money.convertAndFormat(order.getAdjustmentsTotal(shippingAdjustment) + order.getAdjustmentsTotal(orderShippingPromotionAdjustment)) }}
-           </span>
-            <i {{ sylius_test_html_attribute('shipping-promotion-details') }} data-html="{% for label, amount in orderShippingPromotions %}<div>{{ label }}: {{ money.convertAndFormat(amount) }}</div>{% endfor %}"></i>
-        </span>
+            </span>
+            <div {{ sylius_test_html_attribute('shipping-promotion-details') }}>
+                {% for label, amount in orderShippingPromotions %}
+                    <div>
+                        <small class="text-body-tertiary">
+                            {{ label }}: {{ money.convertAndFormat(amount) }}
+                        </small>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </td>
 {% elseif order.shipments is not empty %}
     <td class="text-end">
