@@ -178,6 +178,16 @@
         </service>
         <service id="Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface" alias="sylius.calculator.product_variant_price" />
 
+        <service
+            id="sylius.calculator.product_variant_price.tax_inclusive"
+            class="Sylius\Component\Core\Calculator\TaxInclusivePricesCalculator"
+            decorates="sylius.calculator.product_variant_price"
+        >
+            <argument type="service" id="sylius.calculator.product_variant_price.tax_inclusive.inner" />
+            <argument type="service" id="sylius.resolver.tax_rate" />
+            <argument type="service" id="sylius.tax_calculator" />
+        </service>
+
         <service id="sylius.section_resolver.uri_based" class="Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider">
             <argument type="service" id="request_stack" />
             <argument type="collection" />
