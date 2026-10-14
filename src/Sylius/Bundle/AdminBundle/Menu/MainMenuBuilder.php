@@ -247,6 +247,24 @@ final readonly class MainMenuBuilder
             ->setLabel('sylius.ui.shipments')
             ->setLabelAttribute('icon', 'tabler:truck')
         ;
+
+        $sales
+            ->addChild('return_requests')
+            ->setUri('https://sylius.com/plus/?utm_source=product&utm_medium=placeholder&utm_campaign=returns-placeholder')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.sales.return_requests')
+            ->setLabelAttribute('icon', 'tabler:truck-return')
+            ->setExtra('plus_logo', true)
+        ;
+
+        $sales
+            ->addChild('subscriptions')
+            ->setUri('https://sylius.com/plus/?utm_source=product&utm_medium=placeholder&utm_campaign=subscriptions-placeholder')
+            ->setLinkAttribute('target', '_blank')
+            ->setLabel('sylius.menu.admin.main.sales.subscriptions')
+            ->setLabelAttribute('icon', 'tabler:calendar-repeat')
+            ->setExtra('plus_logo', true)
+        ;
     }
 
     private function addConfigurationSubMenu(ItemInterface $menu): void
