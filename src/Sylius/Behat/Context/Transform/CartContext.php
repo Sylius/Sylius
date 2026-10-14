@@ -31,9 +31,7 @@ final readonly class CartContext implements Context
     ) {
     }
 
-    /**
-     * @Transform /^(cart)$/
-     */
+    #[Transform('/^(cart)$/')]
     public function provideCartToken(): ?string
     {
         try {
@@ -59,9 +57,7 @@ final readonly class CartContext implements Context
         ]);
     }
 
-    /**
-     * @Transform /^(customer's latest cart)$/
-     */
+    #[Transform('/^(customer\'s latest cart)$/')]
     public function provideLatestCart(): OrderInterface
     {
         $carts = $this->orderRepository->findBy(

@@ -14,168 +14,68 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\LockMode;
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
-use Sylius\Component\Core\Promotion\Exception\PromotionUsageLimitReachedException;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Resource\Model\VersionedInterface;
+use Webmozart\Assert\Assert;
 
 final class AtomicOrderPromotionsUsageModifier implements OrderPromotionsUsageModifierInterface
 {
-    private Connection $connection;
-
-    public function __construct(Connection $connection)
-    {
-        $this->connection = $connection;
+    public function __construct(
+        private readonly ?Connection $connection,
+        private readonly OrderPromotionsUsageModifierInterface $decoratedModifier,
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+        if (null !== $this->connection) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '2.3',
+                'Passing a "%s" as the first constructor argument is deprecated and will be prohibited in Sylius 3.0.',
+                Connection::class,
+            );
+        }
     }
 
     public function increment(OrderInterface $order): void
     {
-        foreach ($order->getPromotions() as $promotion) {
-            $this->incrementPromotionUsage($promotion);
-        }
+        $this->lockEntities($order);
 
-        /** @var PromotionCouponInterface|null $coupon */
-        $coupon = $order->getPromotionCoupon();
-        if (null === $coupon) {
-            return;
-        }
-
-        $this->incrementCouponUsage($coupon, $order);
+        $this->decoratedModifier->increment($order);
     }
 
     public function decrement(OrderInterface $order): void
     {
+        $this->lockEntities($order);
+
+        $this->decoratedModifier->decrement($order);
+    }
+
+    private function lockEntities(OrderInterface $order): void
+    {
         foreach ($order->getPromotions() as $promotion) {
-            $this->decrementPromotionUsage($promotion);
+            if (!$promotion->isTrackUsage()) {
+                continue;
+            }
+
+            $this->refreshAndLock($promotion);
         }
 
         /** @var PromotionCouponInterface|null $coupon */
         $coupon = $order->getPromotionCoupon();
-        if (null === $coupon) {
-            return;
+        if (null !== $coupon && $coupon->isTrackUsage()) {
+            $this->refreshAndLock($coupon);
         }
-
-        if (OrderInterface::STATE_CANCELLED === $order->getState() && !$coupon->isReusableFromCancelledOrders()) {
-            return;
-        }
-
-        $this->decrementCouponUsage($coupon);
     }
 
-    private function incrementPromotionUsage(PromotionInterface $promotion): void
+    private function refreshAndLock(PromotionCouponInterface|PromotionInterface $entity): void
     {
-        $affected = $this->connection->executeStatement(
-            'UPDATE sylius_promotion
-             SET used = used + 1
-             WHERE id = :id AND (usage_limit IS NULL OR used < usage_limit)',
-            ['id' => $promotion->getId()],
-        );
+        $this->entityManager->refresh($entity);
 
-        if (0 === $affected) {
-            throw PromotionUsageLimitReachedException::withPromotionCode((string) $promotion->getCode());
-        }
-
-        $newUsed = (int) $this->connection->fetchOne(
-            'SELECT used FROM sylius_promotion WHERE id = :id',
-            ['id' => $promotion->getId()],
-        );
-
-        $promotion->setUsed($newUsed);
-    }
-
-    private function decrementPromotionUsage(PromotionInterface $promotion): void
-    {
-        $this->connection->executeStatement(
-            'UPDATE sylius_promotion SET used = GREATEST(used - 1, 0) WHERE id = :id',
-            ['id' => $promotion->getId()],
-        );
-
-        $newUsed = (int) $this->connection->fetchOne(
-            'SELECT used FROM sylius_promotion WHERE id = :id',
-            ['id' => $promotion->getId()],
-        );
-
-        $promotion->setUsed($newUsed);
-    }
-
-    private function incrementCouponUsage(PromotionCouponInterface $coupon, OrderInterface $order): void
-    {
-        $row = $this->connection->fetchAssociative(
-            'SELECT used, usage_limit, per_customer_usage_limit FROM sylius_promotion_coupon WHERE id = :id FOR UPDATE',
-            ['id' => $coupon->getId()],
-        );
-
-        if (false === $row) {
-            throw PromotionUsageLimitReachedException::withCouponCode((string) $coupon->getCode());
-        }
-
-        if (null !== $row['usage_limit'] && (int) $row['used'] >= (int) $row['usage_limit']) {
-            throw PromotionUsageLimitReachedException::withCouponCode((string) $coupon->getCode());
-        }
-
-        if (null !== $row['per_customer_usage_limit']) {
-            $this->assertPerCustomerCouponUsageLimitNotReached(
-                $coupon,
-                $order,
-                (int) $row['per_customer_usage_limit'],
-            );
-        }
-
-        $this->connection->executeStatement(
-            'UPDATE sylius_promotion_coupon SET used = used + 1 WHERE id = :id',
-            ['id' => $coupon->getId()],
-        );
-
-        $coupon->setUsed((int) $row['used'] + 1);
-    }
-
-    private function assertPerCustomerCouponUsageLimitNotReached(
-        PromotionCouponInterface $coupon,
-        OrderInterface $order,
-        int $perCustomerUsageLimit,
-    ): void {
-        $customer = $order->getCustomer();
-        if (null === $customer || null === $customer->getId()) {
-            return;
-        }
-
-        $sql = 'SELECT o.id FROM sylius_order o
-                WHERE o.customer_id = :customerId
-                AND o.promotion_coupon_id = :couponId
-                AND o.state != :stateCart';
-        $params = [
-            'customerId' => $customer->getId(),
-            'couponId' => $coupon->getId(),
-            'stateCart' => OrderInterface::STATE_CART,
-        ];
-
-        if ($coupon->isReusableFromCancelledOrders()) {
-            $sql .= ' AND o.state != :stateCancelled';
-            $params['stateCancelled'] = OrderInterface::STATE_CANCELLED;
-        }
-
-        $sql .= ' FOR UPDATE';
-
-        $count = count($this->connection->fetchAllAssociative($sql, $params));
-
-        if ($count >= $perCustomerUsageLimit) {
-            throw PromotionUsageLimitReachedException::withCouponCode((string) $coupon->getCode());
-        }
-    }
-
-    private function decrementCouponUsage(PromotionCouponInterface $coupon): void
-    {
-        $this->connection->executeStatement(
-            'UPDATE sylius_promotion_coupon SET used = GREATEST(used - 1, 0) WHERE id = :id',
-            ['id' => $coupon->getId()],
-        );
-
-        $newUsed = (int) $this->connection->fetchOne(
-            'SELECT used FROM sylius_promotion_coupon WHERE id = :id',
-            ['id' => $coupon->getId()],
-        );
-
-        $coupon->setUsed($newUsed);
+        Assert::isInstanceOf($entity, VersionedInterface::class);
+        $this->entityManager->lock($entity, LockMode::OPTIMISTIC, $entity->getVersion());
     }
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
@@ -24,6 +25,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SendResetPasswordEmailHandlerTest extends TestCase
 {
     private ChannelRepositoryInterface&MockObject $channelRepository;

@@ -6,5 +6,5 @@
 {% if data.originalPrice %}
     {{ money.format(data.originalPrice, currencies[channel_code]) }}
 {% else %}
-    <span class="gray text">-</span>
+    <span class="text-muted">-</span>
 {% endif %}

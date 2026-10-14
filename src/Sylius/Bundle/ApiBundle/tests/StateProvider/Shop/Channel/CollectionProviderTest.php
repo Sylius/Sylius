@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProvider\Shop\Channel;
 
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Operation;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -24,6 +25,7 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CollectionProviderTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;

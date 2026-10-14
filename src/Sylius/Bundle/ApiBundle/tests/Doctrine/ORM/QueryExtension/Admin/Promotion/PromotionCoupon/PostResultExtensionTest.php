@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Admin\Promot
 use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Post;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Admin\Promotion\PromotionCoupon\PostResultExtension;
@@ -24,6 +25,7 @@ use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PostResultExtensionTest extends TestCase
 {
     private PostResultExtension $extension;

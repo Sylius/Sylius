@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
@@ -38,10 +40,8 @@ final readonly class CheckoutCompleteContext implements Context
         $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
     }
 
-    /**
-     * @Given I have confirmed order
-     */
     #[When('I try to complete checkout')]
+    #[Given('I have confirmed order')]
     public function iConfirmMyOrder(): void
     {
         $request = $this->requestFactory->customItemAction(
@@ -55,9 +55,7 @@ final readonly class CheckoutCompleteContext implements Context
         $this->client->executeCustomRequest($request);
     }
 
-    /**
-     * @Then /^I should be informed that (this variant) has been disabled$/
-     */
+    #[Then('/^I should be informed that (this variant) has been disabled$/')]
     public function iShouldBeInformedThatThisVariantHasBeenDisabled(ProductVariantInterface $productVariant): void
     {
         $lastResponseContent = $this->client->getLastResponse()->getContent();
@@ -66,9 +64,7 @@ final readonly class CheckoutCompleteContext implements Context
         Assert::contains($lastResponseContent, sprintf('The product %s is no longer available.', $productVariant->getName()));
     }
 
-    /**
-     * @Then my order should not be placed due to changed order total
-     */
+    #[Then('my order should not be placed due to changed order total')]
     public function myOrderShouldNotBePlacedDueToChangedOrderTotal(): void
     {
         $lastResponseContent = $this->client->getLastResponse()->getContent();

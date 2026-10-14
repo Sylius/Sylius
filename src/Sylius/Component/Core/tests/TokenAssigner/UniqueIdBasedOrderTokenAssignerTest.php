@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\TokenAssigner;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\TokenAssigner\OrderTokenAssignerInterface;
 use Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UniqueIdBasedOrderTokenAssignerTest extends TestCase
 {
     private const TOKEN_LENGTH = 32;

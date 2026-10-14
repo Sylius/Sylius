@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: '无法删除被促销规则使用的分类。'
         menu_taxon_delete: '无法删除任何频道的菜单分类。'
+    user:
+        verification_email_sent: '如果您输入的电子邮件地址与账户关联，则已发送验证邮件。'

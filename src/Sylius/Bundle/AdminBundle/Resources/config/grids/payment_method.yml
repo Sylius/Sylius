@@ -22,18 +22,21 @@ sylius_grid:
                             td_class: "text-center"
                 name:
                     type: twig
-                    label: sylius.ui.name
+                    path: "."
+                    label: sylius.ui.payment_method
                     sortable: translation.name
                     options:
-                        template: "@SyliusAdmin/shared/grid/field/name.html.twig"
+                        template: "@SyliusAdmin/payment_method/grid/field/name.html.twig"
                 code:
                     type: twig
+                    enabled: false
                     label: sylius.ui.code
                     sortable: ~
                     options:
                         template: "@SyliusAdmin/shared/grid/field/code.html.twig"
                 gateway:
                     type: twig
+                    enabled: false
                     path: gatewayConfig.factoryName
                     label: sylius.ui.gateway
                     sortable: gatewayConfig.factoryName
@@ -41,6 +44,7 @@ sylius_grid:
                         template: "@SyliusUi/grid/field/humanized.html.twig"
                 enabled:
                     type: twig
+                    enabled: false
                     label: sylius.ui.enabled
                     sortable: ~
                     options:

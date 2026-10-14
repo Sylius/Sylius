@@ -21,6 +21,9 @@ use Webmozart\Assert\Assert;
 
 class Promotion extends BasePromotion implements PromotionInterface
 {
+    /** @var int */
+    protected $version = 1;
+
     /** @var Collection<array-key, ChannelInterface> */
     protected $channels;
 
@@ -55,5 +58,15 @@ class Promotion extends BasePromotion implements PromotionInterface
     public function hasChannel(BaseChannelInterface $channel): bool
     {
         return $this->channels->contains($channel);
+    }
+
+    public function getVersion(): ?int
+    {
+        return $this->version;
+    }
+
+    public function setVersion(?int $version): void
+    {
+        $this->version = $version;
     }
 }

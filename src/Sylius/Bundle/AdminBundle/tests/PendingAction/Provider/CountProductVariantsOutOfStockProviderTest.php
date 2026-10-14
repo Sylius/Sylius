@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\PendingAction\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\PendingAction\Provider\CountProductVariantsOutOfStockProvider;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CountProductVariantsOutOfStockProviderTest extends TestCase
 {
     private MockObject&ProductVariantRepositoryInterface $productVariantRepository;

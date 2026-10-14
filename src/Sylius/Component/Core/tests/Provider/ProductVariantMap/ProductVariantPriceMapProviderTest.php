@@ -13,15 +13,17 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Provider\ProductVariantMap;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantMapProviderInterface;
 use Sylius\Component\Core\Provider\ProductVariantMap\ProductVariantPriceMapProvider;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantPriceMapProviderTest extends TestCase
 {
     private MockObject&ProductVariantInterface $variant;
@@ -30,13 +32,13 @@ final class ProductVariantPriceMapProviderTest extends TestCase
 
     private ChannelPricingInterface&MockObject $channelPricing;
 
-    private MockObject&ProductVariantPricesCalculatorInterface $calculator;
+    private CatalogPricesCalculatorInterface&MockObject $calculator;
 
     private ProductVariantPriceMapProvider $provider;
 
     protected function setUp(): void
     {
-        $this->calculator = $this->createMock(ProductVariantPricesCalculatorInterface::class);
+        $this->calculator = $this->createMock(CatalogPricesCalculatorInterface::class);
         $this->variant = $this->createMock(ProductVariantInterface::class);
         $this->channel = $this->createMock(ChannelInterface::class);
         $this->channelPricing = $this->createMock(ChannelPricingInterface::class);

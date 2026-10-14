@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Product\Factory;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Factory\ProductFactory;
@@ -23,6 +24,7 @@ use Sylius\Component\Product\Model\ProductVariant;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductFactoryTest extends TestCase
 {
     /** @var FactoryInterface<Product>&MockObject */

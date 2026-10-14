@@ -43,5 +43,9 @@
         <attribute name="usageLimit">
             <group>sylius:admin:promotion_coupon:generate</group>
         </attribute>
+
+        <attribute name="trackUsage">
+            <group>sylius:admin:promotion_coupon:generate</group>
+        </attribute>
     </class>
 </serializer>

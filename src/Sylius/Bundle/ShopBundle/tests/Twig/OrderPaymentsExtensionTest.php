@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ShopBundle\Twig;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShopBundle\Twig\OrderPaymentsExtension;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Twig\Extension\AbstractExtension;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderPaymentsExtensionTest extends TestCase
 {
     private MockObject&PaymentMethodsResolverInterface $paymentMethodsResolver;

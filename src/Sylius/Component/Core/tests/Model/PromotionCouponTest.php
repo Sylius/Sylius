@@ -16,6 +16,7 @@ namespace Tests\Sylius\Component\Core\Model;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\PromotionCoupon;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
+use Sylius\Resource\Model\VersionedInterface;
 
 final class PromotionCouponTest extends TestCase
 {
@@ -53,5 +54,15 @@ final class PromotionCouponTest extends TestCase
         $this->promotionCoupon->setReusableFromCancelledOrders(false);
 
         $this->assertFalse($this->promotionCoupon->isReusableFromCancelledOrders());
+    }
+
+    public function testShouldImplementVersionedInterface(): void
+    {
+        $this->assertInstanceOf(VersionedInterface::class, $this->promotionCoupon);
+    }
+
+    public function testShouldHaveVersionOneByDefault(): void
+    {
+        $this->assertSame(1, $this->promotionCoupon->getVersion());
     }
 }

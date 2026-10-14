@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -26,6 +27,7 @@ use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Model\Locale;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelBasedProductTranslationProviderTest extends TestCase
 {
     private LocaleContextInterface|MockObject $localeContext;

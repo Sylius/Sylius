@@ -17,7 +17,7 @@
         padding-bottom: var(--tblr-page-padding-y);
 
         &.is-sticky {
-            background: #fff;
+            background: var(--tblr-body-bg);
             border-bottom: var(--tblr-border-width) solid var(--tblr-border-color);
             box-shadow: var(--tblr-shadow-card);
         }

@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Statistics\Registry;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Statistics\Provider\OrdersCount\OrdersCountProviderInterface;
 use Sylius\Component\Core\Statistics\Registry\OrdersCountProviderRegistry;
 use Sylius\Component\Core\Statistics\Registry\OrdersCountProviderRegistryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrdersCountProviderRegistryTest extends TestCase
 {
     private MockObject&OrdersCountProviderInterface $firstProvider;

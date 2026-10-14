@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Checkout;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SendOrderConfirmationHandlerTest extends TestCase
 {
     private MockObject&OrderRepositoryInterface $orderRepository;

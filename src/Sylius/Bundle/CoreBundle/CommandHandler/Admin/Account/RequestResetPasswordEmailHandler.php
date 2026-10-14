@@ -44,7 +44,7 @@ final class RequestResetPasswordEmailHandler
         }
 
         $adminUser->setPasswordResetToken($this->generator->generate());
-        $adminUser->setPasswordRequestedAt($this->clock->now());
+        $adminUser->setPasswordRequestedAt(\DateTime::createFromImmutable($this->clock->now()));
 
         $this->commandBus->dispatch(
             new SendResetPasswordEmail($adminUser->getEmail(), $adminUser->getLocaleCode()),

@@ -27,4 +27,6 @@ interface PaymentMethodRepositoryInterface extends RepositoryInterface
      * @return PaymentMethodInterface[]
      */
     public function findByName(string $name, string $locale): array;
+
+    public function countByGatewayFactoryName(string $factoryName): int;
 }

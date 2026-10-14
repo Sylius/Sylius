@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email_not_verified: 'アカウントはまだ確認されていません。メールの受信トレイをご確認ください。'

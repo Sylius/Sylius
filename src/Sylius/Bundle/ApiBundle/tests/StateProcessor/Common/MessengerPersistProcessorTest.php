@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Common;
 
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Checkout\CompleteOrder;
@@ -23,6 +24,7 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Exception\DelayedMessageHandlingException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class MessengerPersistProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $decoratedProcessor;

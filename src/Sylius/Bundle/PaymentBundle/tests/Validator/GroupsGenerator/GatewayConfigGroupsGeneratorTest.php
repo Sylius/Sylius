@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\Validator\GroupsGenerator\GatewayConfigGroupsGenerator;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GatewayConfigGroupsGeneratorTest extends TestCase
 {
     private GatewayConfigGroupsGenerator $gatewayConfigGroupsGenerator;

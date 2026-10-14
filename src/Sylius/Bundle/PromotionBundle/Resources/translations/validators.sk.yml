@@ -41,6 +41,8 @@ sylius:
             not_blank: 'Prosím, zadajte popis promo akcie.'
         end_date_cannot_be_set_prior_start_date: 'Dátum ukončenia nemôže byť pred dátumom začiatku.'
         is_invalid: 'Promo akcia je neplatná.'
+        usage_limit:
+            min: 'Limit používania promo akcie musí byť aspoň {{ limit }}.'
         name:
             max_length: 'Názov promo akcie nesmie byť dlhší než 1 znak.|Názov promo akcie nesmie byť dlhší než {{ limit }} znakov.'
             min_length: 'Názov promo akcie musí mať aspoň 1 znak.|Názov promo akcie musí mať aspoň {{ limit }} znakov.'

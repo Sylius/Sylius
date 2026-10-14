@@ -17,7 +17,6 @@ use Sylius\Bundle\ApiBundle\Attribute\OrderTokenValueAware;
 use Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware;
 use Sylius\Bundle\ApiBundle\Command\IriToIdentifierConversionAwareInterface;
 
-/** @experimental */
 #[OrderTokenValueAware]
 #[PaymentRequestActionAware]
 class AddPaymentRequest implements IriToIdentifierConversionAwareInterface

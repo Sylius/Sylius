@@ -3,7 +3,7 @@
 {{ component('sylius_admin:delete_modal', {
     id: options.link.parameters.code,
     path: path,
-    label: action.label,
-    icon: action.icon,
+    label: action.label|default('sylius.ui.delete'),
+    icon: action.icon|default('tabler:trash-x'),
     disabled: options.state == 'processing',
 }) }}

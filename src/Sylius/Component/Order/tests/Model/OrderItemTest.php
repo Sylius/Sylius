@@ -15,6 +15,7 @@ namespace Tests\Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Order\Model\AdjustableInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Order\Model\OrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderItemTest extends TestCase
 {
     private OrderItem $orderItem;

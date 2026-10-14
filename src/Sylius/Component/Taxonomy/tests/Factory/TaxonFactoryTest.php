@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Taxonomy\Factory;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Taxonomy\Factory\TaxonFactory;
@@ -21,6 +22,7 @@ use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxonFactoryTest extends TestCase
 {
     /** @var FactoryInterface<Taxon>&MockObject */

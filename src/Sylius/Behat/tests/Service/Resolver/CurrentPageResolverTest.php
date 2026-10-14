@@ -15,6 +15,7 @@ namespace Tests\Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
 use LogicException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Behat\Page\SyliusPageInterface;
@@ -22,6 +23,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolver;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CurrentPageResolverTest extends TestCase
 {
     private MockObject&Session $session;

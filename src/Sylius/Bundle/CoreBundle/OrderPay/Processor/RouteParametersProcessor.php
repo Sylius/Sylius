@@ -17,7 +17,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-/** @experimental */
 final class RouteParametersProcessor implements RouteParametersProcessorInterface
 {
     public function __construct(

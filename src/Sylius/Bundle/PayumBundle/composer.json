@@ -28,21 +28,21 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "payum/offline": "^1.7.5",
-        "payum/payum-bundle": "^2.6",
+        "payum/payum-bundle": "^2.7",
         "sylius/core-bundle": "^2.0",
         "sylius/currency": "^2.0",
         "sylius/order-bundle": "^2.0",
         "sylius/payment-bundle": "^2.0",
-        "sylius/resource-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.14.2",
         "php-http/httplug": "^2.4",
         "php-http/message-factory": "^1.1"
     },
     "require-dev": {
-        "matthiasnoback/symfony-dependency-injection-test": "^6.0",
-        "phpunit/phpunit": "^11.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.4"
+        "matthiasnoback/symfony-dependency-injection-test": "^6.3",
+        "phpunit/phpunit": "^12.5",
+        "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0"
     },
     "config": {
         "allow-plugins": {
@@ -51,7 +51,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
             "require": "^7.4"

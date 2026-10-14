@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Customer\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Customer\Model\Customer;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerTest extends TestCase
 {
     private Customer $customer;
