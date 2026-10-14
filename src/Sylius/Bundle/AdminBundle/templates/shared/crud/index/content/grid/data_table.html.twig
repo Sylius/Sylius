@@ -16,7 +16,8 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <div class="ms-auto">
+                <div class="ms-auto d-flex gap-2">
+                    {% hook 'data_table#toolbar' %}
                     {{ pagination.number_of_results_selector(data, definition.limits) }}
                 </div>
             </div>
