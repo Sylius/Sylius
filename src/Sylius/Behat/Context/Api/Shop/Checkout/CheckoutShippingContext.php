@@ -19,14 +19,18 @@ use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class CheckoutShippingContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     /** @param ShippingMethodRepositoryInterface<ShippingMethodInterface> $shippingMethodRepository */
     public function __construct(
         private ApiClientInterface $client,
@@ -34,6 +38,7 @@ final readonly class CheckoutShippingContext implements Context
         private SharedStorageInterface $sharedStorage,
         private IriConverterInterface $iriConverter,
         private ShippingMethodRepositoryInterface $shippingMethodRepository,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -55,7 +60,7 @@ final readonly class CheckoutShippingContext implements Context
             uri: sprintf(
                 'orders/%s/shipments/%s',
                 $this->sharedStorage->get('cart_token'),
-                $content['shipments'][0]['id'],
+                $content[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('id')],
             ),
             body: ['shippingMethod' => '/api/v2/shop/shipping-methods/NON_EXISTING'],
         );
@@ -75,7 +80,7 @@ final readonly class CheckoutShippingContext implements Context
             uri: sprintf(
                 'orders/%s/shipments/%s',
                 $this->sharedStorage->get('cart_token'),
-                $content['shipments'][0]['id'],
+                $content[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('id')],
             ),
             body: ['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)],
         );
@@ -174,7 +179,7 @@ final readonly class CheckoutShippingContext implements Context
             uri: sprintf(
                 'orders/%s/shipments/%s',
                 $this->sharedStorage->get('cart_token'),
-                $content['shipments'][0]['id'],
+                $content[$this->getNormalizedKey('shipments')][0][$this->getNormalizedKey('id')],
             ),
             body: ['shippingMethod' => $this->iriConverter->getIriFromResource(
                 $shippingMethod ?? $this->shippingMethodRepository->findOneBy([]),

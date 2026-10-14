@@ -20,6 +20,7 @@ use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
@@ -31,10 +32,13 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final class CartContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private ApiClientInterface $shopClient,
         private ApiClientInterface $adminClient,
@@ -45,6 +49,7 @@ final class CartContext implements Context
         private RequestFactoryInterface $requestFactory,
         private string $apiUrlPrefix,
         private OrderRepositoryInterface $orderRepository,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -146,19 +151,24 @@ final class CartContext implements Context
         string $productOptionValue,
     ): void {
         $productData = json_decode($this->shopClient->show(Resources::PRODUCTS, $product->getCode())->getContent(), true, 512, \JSON_THROW_ON_ERROR);
+        $optionsKey = $this->getNormalizedKey('options');
+        $nameKey = $this->getNormalizedKey('name');
+        $valuesKey = $this->getNormalizedKey('values');
+        $valueKey = $this->getNormalizedKey('value');
+        $codeKey = $this->getNormalizedKey('code');
 
         $variantIri = null;
-        foreach ($productData['options'] as $optionIri) {
+        foreach ($productData[$optionsKey] as $optionIri) {
             $optionData = json_decode($this->shopClient->showByIri($optionIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-            if ($optionData['name'] !== $productOption) {
+            if ($optionData[$nameKey] !== $productOption) {
                 continue;
             }
 
-            foreach ($optionData['values'] as $valueIri) {
+            foreach ($optionData[$valuesKey] as $valueIri) {
                 $optionValueData = json_decode($this->shopClient->showByIri($valueIri)->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-                if ($optionValueData['value'] !== $productOptionValue) {
+                if ($optionValueData[$valueKey] !== $productOptionValue) {
                     continue;
                 }
 
@@ -170,7 +180,7 @@ final class CartContext implements Context
 
                 Assert::same($variantsData['hydra:totalItems'], 1);
 
-                $variantIri = $variantsData['@id'] . '/' . $variantsData['hydra:member'][0]['code'];
+                $variantIri = $variantsData['@id'] . '/' . $variantsData['hydra:member'][0][$codeKey];
             }
         }
 
@@ -188,7 +198,7 @@ final class CartContext implements Context
             'items',
         );
         $request->updateContent([
-            'productCode' => $productData['code'],
+            'productCode' => $productData[$codeKey],
             'productVariant' => $variantIri,
             'quantity' => 1,
         ]);
@@ -211,14 +221,14 @@ final class CartContext implements Context
         }
 
         $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
-        $this->changeQuantityOfOrderItem((string) $itemResponse['id'], $quantity, $tokenValue);
+        $this->changeQuantityOfOrderItem((string) $itemResponse[$this->getNormalizedKey('id')], $quantity, $tokenValue);
     }
 
     #[When('/^I remove (product "[^"]+") from the (cart)$/')]
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
         $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
-        $this->removeOrderItemFromCart((string) $itemResponse['id'], $tokenValue);
+        $this->removeOrderItemFromCart((string) $itemResponse[$this->getNormalizedKey('id')], $tokenValue);
     }
 
     /**
@@ -227,7 +237,7 @@ final class CartContext implements Context
     public function iRemoveVariantFromTheCart(ProductVariantInterface $variant, string $tokenValue): void
     {
         $itemResponse = $this->getOrderItemResponseFromProductVariantInCart($variant, $tokenValue);
-        $this->removeOrderItemFromCart((string) $itemResponse['id'], $tokenValue);
+        $this->removeOrderItemFromCart((string) $itemResponse[$this->getNormalizedKey('id')], $tokenValue);
     }
 
     /**
@@ -448,10 +458,12 @@ final class CartContext implements Context
     public function iShouldSeeProductWithUnitPriceInMyCart(string $productName, int $unitPrice): void
     {
         $response = $this->shopClient->getLastResponse();
+        $productNameKey = $this->getNormalizedKey('productName');
+        $unitPriceKey = $this->getNormalizedKey('unitPrice');
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
-            if ($item['productName'] === $productName) {
-                Assert::same($item['unitPrice'], $unitPrice);
+            if ($item[$productNameKey] === $productName) {
+                Assert::same($item[$unitPriceKey], $unitPrice);
 
                 return;
             }
@@ -467,10 +479,12 @@ final class CartContext implements Context
     public function iShouldSeeProductWithDiscountedUnitPriceInMyCart(string $productName, int $discountedUnitPrice): void
     {
         $response = $this->shopClient->getLastResponse();
+        $productNameKey = $this->getNormalizedKey('productName');
+        $discountedUnitPriceKey = $this->getNormalizedKey('discountedUnitPrice');
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
-            if ($item['productName'] === $productName) {
-                Assert::same($item['discountedUnitPrice'], $discountedUnitPrice);
+            if ($item[$productNameKey] === $productName) {
+                Assert::same($item[$discountedUnitPriceKey], $discountedUnitPrice);
 
                 return;
             }
@@ -486,10 +500,12 @@ final class CartContext implements Context
     public function theProductShouldHaveTotalPriceInTheCart(string $productName, int $totalPrice): void
     {
         $response = $this->shopClient->getLastResponse();
+        $productNameKey = $this->getNormalizedKey('productName');
+        $totalKey = $this->getNormalizedKey('total');
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
-            if ($item['productName'] === $productName) {
-                Assert::same($item['total'], $totalPrice);
+            if ($item[$productNameKey] === $productName) {
+                Assert::same($item[$totalKey], $totalPrice);
 
                 return;
             }
@@ -510,7 +526,7 @@ final class CartContext implements Context
         Assert::count($items, 1);
 
         if (null !== $productName) {
-            Assert::same($items[0]['productName'], $productName);
+            Assert::same($items[0][$this->getNormalizedKey('productName')], $productName);
         }
 
         $this->sharedStorage->set('item', $items[0]);
@@ -767,19 +783,23 @@ final class CartContext implements Context
     public function thisItemShouldHaveOptionValue(string $expectedOptionName, string $expectedOptionValueValue): void
     {
         $item = $this->sharedStorage->get('item');
+        $variantKey = $this->getNormalizedKey('variant');
+        $valueKey = $this->getNormalizedKey('value');
+        $optionKey = $this->getNormalizedKey('option');
+        $nameKey = $this->getNormalizedKey('name');
 
-        $optionValues = $this->responseChecker->getValue($this->shopClient->showByIri($item['variant']), 'optionValues');
+        $optionValues = $this->responseChecker->getValue($this->shopClient->showByIri($item[$variantKey]), 'optionValues');
 
         foreach ($optionValues as $optionValueIri) {
             $optionValue = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValueIri));
 
-            if ($optionValue['value'] !== $expectedOptionValueValue) {
+            if ($optionValue[$valueKey] !== $expectedOptionValueValue) {
                 continue;
             }
 
-            $option = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValue['option']));
+            $option = $this->responseChecker->getResponseContent($this->shopClient->showByIri($optionValue[$optionKey]));
 
-            if ($option['name'] === $expectedOptionName) {
+            if ($option[$nameKey] === $expectedOptionName) {
                 return;
             }
         }
@@ -795,10 +815,12 @@ final class CartContext implements Context
     public function iShouldSeeWithOriginalPriceInMyCart(string $productName, int $originalPrice): void
     {
         $response = $this->shopClient->getLastResponse();
+        $productNameKey = $this->getNormalizedKey('productName');
+        $originalUnitPriceKey = $this->getNormalizedKey('originalUnitPrice');
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
-            if ($item['productName'] === $productName) {
-                Assert::same($item['originalUnitPrice'], $originalPrice);
+            if ($item[$productNameKey] === $productName) {
+                Assert::same($item[$originalUnitPriceKey], $originalPrice);
 
                 return;
             }
@@ -813,11 +835,14 @@ final class CartContext implements Context
     public function iShouldSeeOnlyWithUnitPriceInMyCart(string $productName, int $unitPrice): void
     {
         $response = $this->shopClient->getLastResponse();
+        $productNameKey = $this->getNormalizedKey('productName');
+        $unitPriceKey = $this->getNormalizedKey('unitPrice');
+        $originalPriceKey = $this->getNormalizedKey('originalPrice');
 
         foreach ($this->responseChecker->getValue($response, 'items') as $item) {
-            if ($item['productName'] === $productName) {
-                Assert::same($item['unitPrice'], $unitPrice);
-                Assert::false(isset($item['originalPrice']));
+            if ($item[$productNameKey] === $productName) {
+                Assert::same($item[$unitPriceKey], $unitPrice);
+                Assert::false(isset($item[$originalPriceKey]));
 
                 return;
             }
@@ -907,28 +932,32 @@ final class CartContext implements Context
 
     private function getProductForItem(array $item): Response
     {
-        if (!isset($item['variant'])) {
+        $variantKey = $this->getNormalizedKey('variant');
+
+        if (!isset($item[$variantKey])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
                 serialize($item),
             );
         }
 
-        $response = $this->shopClient->showByIri(urldecode($item['variant']));
+        $response = $this->shopClient->showByIri(urldecode($item[$variantKey]));
 
         return $this->shopClient->showByIri(urldecode($this->responseChecker->getValue($response, 'product')));
     }
 
     private function getProductVariantForItem(array $item): Response
     {
-        if (!isset($item['variant'])) {
+        $variantKey = $this->getNormalizedKey('variant');
+
+        if (!isset($item[$variantKey])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key and variant to have product, but one these keys is missing. Current array: ' .
                 serialize($item),
             );
         }
 
-        $request = $this->requestFactory->custom($item['variant'], HttpRequest::METHOD_GET);
+        $request = $this->requestFactory->custom($item[$variantKey], HttpRequest::METHOD_GET);
         $this->shopClient->executeCustomRequest($request);
 
         return $this->shopClient->getLastResponse();
@@ -981,9 +1010,11 @@ final class CartContext implements Context
     private function hasItemWithNameAndQuantity(Response $response, string $productName, int $quantity): bool
     {
         $items = $this->responseChecker->getCollection($response);
+        $productNameKey = $this->getNormalizedKey('productName');
+        $quantityKey = $this->getNormalizedKey('quantity');
 
         foreach ($items as $item) {
-            if ($item['productName'] === $productName && $item['quantity'] === $quantity) {
+            if ($item[$productNameKey] === $productName && $item[$quantityKey] === $quantity) {
                 return true;
             }
         }
@@ -998,7 +1029,7 @@ final class CartContext implements Context
         foreach ($items as $item) {
             $productResponse = $this->getProductForItem($item);
             if ($this->responseChecker->hasTranslation($productResponse, 'en_US', 'name', $productName)) {
-                $this->assertItemQuantity($productResponse, $item['quantity'], $quantity);
+                $this->assertItemQuantity($productResponse, $item[$this->getNormalizedKey('quantity')], $quantity);
 
                 return;
             }
@@ -1014,7 +1045,7 @@ final class CartContext implements Context
         foreach ($items as $item) {
             $productResponse = $this->getProductForItem($item);
             if ($this->responseChecker->hasValue($productResponse, 'name', $productName)) {
-                $this->assertItemQuantity($cartResponse, $item['quantity'], $quantity);
+                $this->assertItemQuantity($cartResponse, $item[$this->getNormalizedKey('quantity')], $quantity);
 
                 return;
             }
@@ -1038,10 +1069,12 @@ final class CartContext implements Context
     private function compareItemPrice(string $productName, int $productPrice, string $priceType = 'total'): void
     {
         $items = $this->responseChecker->getValue($this->getCartResponse(), 'items');
+        $productNameKey = $this->getNormalizedKey('productName');
+        $priceTypeKey = $this->getNormalizedKey($priceType);
 
         foreach ($items as $item) {
-            if ($item['productName'] === $productName) {
-                Assert::same($item[$priceType], $productPrice);
+            if ($item[$productNameKey] === $productName) {
+                Assert::same($item[$priceTypeKey], $productPrice);
 
                 return;
             }
@@ -1061,7 +1094,7 @@ final class CartContext implements Context
             if ($this->responseChecker->hasValue($productResponse, 'name', $product->getName())) {
                 $variantForItem = $this->getProductVariantForItem($item);
 
-                return $this->responseChecker->getValue($variantForItem, 'price') * $item['quantity'];
+                return $this->responseChecker->getValue($variantForItem, 'price') * $item[$this->getNormalizedKey('quantity')];
             }
         }
 
