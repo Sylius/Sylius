@@ -87,6 +87,86 @@
    - A new `resend_verification_email` hookable (priority `-100`) is added to the login page container hook `sylius_shop.account.login.content.login_container`. It renders a `POST` form (CSRF-protected) that submits to `sylius_shop_resend_verification_email`.
    - The `sylius_shop_resend_verification_email` route is now `POST`-only and handled by `ResendVerificationEmailController::resendAction()`. It re-sends the verification email to the last authenticated email (read from the session), then redirects back to the login page. There is no standalone resend page or form.
 
+2. Shop themes can now ship their own assets, built by a dedicated Webpack Encore build and rendered automatically
+   for the theme of the current channel.
+
+   To enable it, add the themes config returned by `SyliusShop.getThemesWebpackConfig()` to your `webpack.config.js`:
+
+   ```diff
+    const adminConfig = SyliusAdmin.getWebpackConfig(path.resolve(__dirname));
+    const shopConfig = SyliusShop.getWebpackConfig(path.resolve(__dirname));
+   +const shopThemesConfig = SyliusShop.getThemesWebpackConfig(path.resolve(__dirname));
+
+   -module.exports = [adminConfig, shopConfig];
+   +module.exports = [adminConfig, shopConfig, shopThemesConfig].filter(Boolean);
+   ```
+
+   The method returns `null` when no theme defines assets, hence the `.filter(Boolean)`.
+
+   Then create an `assets/shop/entrypoint.js` file next to the `composer.json` of your theme:
+
+   ```
+   themes/my-theme/
+   ├── composer.json
+   └── assets/shop/
+       └── entrypoint.js
+   ```
+
+   - Themes are discovered in the `themes/` directory by default. Pass other directories (e.g. themes installed
+     in `vendor/`) and the scan depth as the second and third arguments:
+     `SyliusShop.getThemesWebpackConfig(rootDir, ['themes', 'vendor/acme/themes'], 1)`.
+     Themes shipped with Sylius are always included. Theme names must be unique, the build fails otherwise.
+   - Each theme becomes a Webpack entry named after the theme (`extra.sylius-theme.name` or `name` from its
+     `composer.json`), built into `public/build/themes/shop/`.
+   - The `shop.themes` build is registered in `webpack_encore.builds` and the Webpack Encore integration
+     of SyliusThemeBundle (`sylius_theme.webpack_encore`) is enabled automatically.
+   - New `theme_styles` and `theme_scripts` hookables (priority `-100`) are added to the `sylius_shop.base#stylesheets`
+     and `sylius_shop.base#javascripts` hooks. They render the assets of the active theme using the
+     `sylius_theme_encore_entry_link_tags()` and `sylius_theme_encore_entry_script_tags()` Twig functions
+     of SyliusThemeBundle, and render nothing when there is no active theme or the theme has no assets built.
+
+   Theme assets follow the theme hierarchy defined with `parents` (`extra.sylius-theme.parents` in `composer.json`):
+
+   - A theme without its own `assets/shop/entrypoint.js` uses the assets of its closest parent that has them.
+   - The `assets/shop/` directory of every theme is available under the `@sylius-theme/<theme name>` alias,
+     so a child theme can extend the assets of its parent:
+
+     ```js
+     import '@sylius-theme/acme/parent-theme/entrypoint';
+     import './styles/overrides.scss';
+     ```
+
+   Theme assets are loaded on top of the shop assets, so themes should not compile Bootstrap again.
+   To use the shop variables and mixins without generating any CSS, import the theme stylesheet:
+
+   ```scss
+   @import "@sylius/shop-bundle/styles/theme";
+
+   .my-component {
+       color: $primary;
+
+       @include media-breakpoint-up(md) {
+           display: flex;
+       }
+   }
+   ```
+
+   Themes that need Stimulus controllers start their own Stimulus application in the entrypoint.
+   Prefix controller identifiers with the theme name to avoid conflicts and export the application,
+   so child themes can register their own controllers or replace the parent ones under the same identifier:
+
+   ```js
+   import { app } from '@sylius-theme/acme/parent-theme/entrypoint';
+   import SliderController from './controllers/slider_controller';
+
+   app.register('acme-slider', SliderController);
+   ```
+
+   Overriding the Stimulus controllers of the shop from a theme is not supported.
+
+   If you already load your theme assets in a custom way (e.g. a separate build and your own hookable), remove that
+   setup when switching to this mechanism, otherwise the assets will be loaded twice.
+
 ## Configuration
 
 1. The default value of `sylius_core.order_by_identifier` has been changed from `true` to `false`. ([#18956](https://github.com/Sylius/Sylius/pull/18956))
