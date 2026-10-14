@@ -72,14 +72,12 @@ final class DashboardControllerTest extends TestCase
         $this->assertSame('dashboard', $response->getContent());
     }
 
-    public function testRedirectsToChannelCreationWhenThereIsNoEnabledChannel(): void
+    public function testRedirectsToChannelCreationWhenThereIsNoChannel(): void
     {
         $request = new Request();
 
         $this->channelRepository
-            ->expects($this->once())
             ->method('findBy')
-            ->with(['enabled' => true], ['id' => 'ASC'], 1)
             ->willReturn([])
         ;
         $this->router
