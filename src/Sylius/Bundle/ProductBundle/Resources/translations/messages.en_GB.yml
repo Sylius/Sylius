@@ -26,3 +26,4 @@ sylius:
         option_value:
             add_value: Add value
             value: Value
+            position: Position

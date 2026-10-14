@@ -73,11 +73,21 @@ sylius_fixtures:
                             -   name: 'Jeans size'
                                 code: 'jeans_size'
                                 values:
-                                    jeans_size_s: 'S'
-                                    jeans_size_m: 'M'
-                                    jeans_size_l: 'L'
-                                    jeans_size_xl: 'XL'
-                                    jeans_size_xxl: 'XXL'
+                                    jeans_size_s:
+                                        value: 'S'
+                                        position: 0
+                                    jeans_size_m:
+                                        value: 'M'
+                                        position: 1
+                                    jeans_size_l:
+                                        value: 'L'
+                                        position: 2
+                                    jeans_size_xl:
+                                        value: 'XL'
+                                        position: 3
+                                    jeans_size_xxl:
+                                        value: 'XXL'
+                                        position: 4
 
                 jeans_product:
                     name: product
