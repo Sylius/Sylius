@@ -622,7 +622,7 @@ final class OrderTest extends TestCase
         $this->assertSame(0, $this->order->getOrderPromotionTotal());
     }
 
-    public function it_returns_a_sum_of_all_order_promotion_adjustments_order_item_promotion_adjustments_and_order_unit_promotion_adjustments_applied_to_items_as_order_promotion_total(): void
+    public function testShouldReturnSumOfAllPromotionAdjustmentsAsOrderPromotionTotal(): void
     {
         $orderAdjustment1 = $this->createMock(AdjustmentInterface::class);
         $orderAdjustment2 = $this->createMock(AdjustmentInterface::class);
@@ -630,24 +630,18 @@ final class OrderTest extends TestCase
         $orderItemAdjustment2 = $this->createMock(AdjustmentInterface::class);
         $orderUnitAdjustment1 = $this->createMock(AdjustmentInterface::class);
         $orderUnitAdjustment2 = $this->createMock(AdjustmentInterface::class);
-        $orderAdjustment1->expects($this->once())->method('getType')->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
         $orderAdjustment1->expects($this->once())->method('getAmount')->willReturn(-400);
         $orderAdjustment1->expects($this->once())->method('isNeutral')->willReturn(false);
-        $orderAdjustment2->expects($this->once())->method('getType')->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
         $orderAdjustment2->expects($this->once())->method('getAmount')->willReturn(-600);
         $orderAdjustment2->expects($this->once())->method('isNeutral')->willReturn(false);
-        $orderItemAdjustment1->expects($this->once())->method('getType')->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
         $orderItemAdjustment1->expects($this->once())->method('getAmount')->willReturn(-100);
         $orderItemAdjustment1->expects($this->once())->method('isNeutral')->willReturn(false);
-        $orderItemAdjustment2->expects($this->once())->method('getType')->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
         $orderItemAdjustment2->expects($this->once())->method('getAmount')->willReturn(-200);
         $orderItemAdjustment2->expects($this->once())->method('isNeutral')->willReturn(false);
-        $orderUnitAdjustment1->expects($this->once())->method('getType')->willReturn(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
         $orderUnitAdjustment1->expects($this->once())->method('getAmount')->willReturn(-50);
         $orderUnitAdjustment1->expects($this->once())->method('isNeutral')->willReturn(false);
-        $orderUnitAdjustment1->expects($this->once())->method('getType')->willReturn(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
-        $orderUnitAdjustment1->expects($this->once())->method('getAmount')->willReturn(-20);
-        $orderUnitAdjustment1->expects($this->once())->method('isNeutral')->willReturn(false);
+        $orderUnitAdjustment2->expects($this->once())->method('getAmount')->willReturn(-20);
+        $orderUnitAdjustment2->expects($this->once())->method('isNeutral')->willReturn(false);
         $this->firstItem->expects($this->once())->method('getTotal')->willReturn(500);
         $this->secondItem->expects($this->once())->method('getTotal')->willReturn(300);
         $this->firstItem
