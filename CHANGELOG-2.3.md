@@ -1,5 +1,22 @@
 # CHANGELOG FOR `2.3.X`
 
+## v2.3.1 (2026-10-14)
+
+#### Details
+
+- [#19273](https://github.com/Sylius/Sylius/pull/19273) [Maintenance] Require sylius-labs/behat-chrome-extension ^1.5.1 ([@TheMilek](https://github.com/TheMilek))
+- [#19272](https://github.com/Sylius/Sylius/pull/19272) Fix AbstractMigration::isMySql ([@TheMilek](https://github.com/TheMilek))
+- [#19277](https://github.com/Sylius/Sylius/pull/19277) [Admin] Fix collapsed taxon tree action buttons with Tabler 1.4 ([@Darkorzerarko](https://github.com/Darkorzerarko))
+- [#19274](https://github.com/Sylius/Sylius/pull/19274) [2.2] Add missing Greek translations ([@angeliszotis](https://github.com/angeliszotis))
+- [#19279](https://github.com/Sylius/Sylius/pull/19279) [2.2] Add missing Greek translations for ShopBundle ([@angeliszotis](https://github.com/angeliszotis))
+- [#19283](https://github.com/Sylius/Sylius/pull/19283) [2.2] Add missing Greek translations for CoreBundle ([@angeliszotis](https://github.com/angeliszotis))
+- [#19285](https://github.com/Sylius/Sylius/pull/19285) [Admin][Shop] Fall back to the default label and icon of the grid delete action ([@JDCyllene](https://github.com/JDCyllene))
+- [#19280](https://github.com/Sylius/Sylius/pull/19280) [2.2] Add missing Greek translations for Promotion and Shipping bundles ([@angeliszotis](https://github.com/angeliszotis))
+- [#19290](https://github.com/Sylius/Sylius/pull/19290) [API] Return 422 for missing required fields on API Platform 5.0.3+ ([@Wojdylak](https://github.com/Wojdylak))
+- [#19292](https://github.com/Sylius/Sylius/pull/19292) Fix cart offcanvas not refreshing on live re-render ([@Wojdylak](https://github.com/Wojdylak))
+- [#19267](https://github.com/Sylius/Sylius/pull/19267) [Core] Collect the order promotion total test that never ran ([@dylanpulver](https://github.com/dylanpulver))
+- [#19260](https://github.com/Sylius/Sylius/pull/19260) Use enabled channel by default on admin dashboard ([@sabrineferchichi](https://github.com/sabrineferchichi))
+
 ## v2.3.0 (2026-09-28)
 
 #### Details
