@@ -1,0 +1,21 @@
+{% set grid = hookable_metadata.context.grid %}
+{% set current_limit = grid.data.maxPerPage %}
+
+<div class="dropdown">
+    <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('limit-toggle') }}>
+        <span class="text-black-50">{{ 'sylius.ui.show'|trans }}: </span>{{ current_limit }}
+    </button>
+    <div class="dropdown-menu dropdown-menu-end">
+        {% for limit in grid.definition.limits %}
+            <button type="button"
+                    class="dropdown-item{{ limit == current_limit ? ' active' }}"
+                    data-action="live#action"
+                    data-live-action-param="changeLimit"
+                    data-live-limit-param="{{ limit }}"
+                    {{ sylius_test_html_attribute('limit', limit) }}
+            >
+                {{ limit }}
+            </button>
+        {% endfor %}
+    </div>
+</div>

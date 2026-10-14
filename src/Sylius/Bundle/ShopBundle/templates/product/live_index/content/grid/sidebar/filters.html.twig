@@ -1,0 +1,8 @@
+{% set grid = hookable_metadata.context.grid %}
+{% set excluded_filters = hookable_metadata.configuration.excluded_filters|default([]) %}
+
+<div class="d-flex flex-column gap-4" {{ sylius_test_html_attribute('product-grid-filters') }}>
+    {% for filter in hookable_metadata.context.filters|filter(filter => filter.name not in excluded_filters) %}
+        {{ sylius_grid_render_filter(grid, filter) }}
+    {% endfor %}
+</div>

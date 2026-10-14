@@ -26,6 +26,7 @@ sylius_grid:
             shop_update: "@SyliusShop/grid/action/update.html.twig"
         filter:
             shop_string: "@SyliusShop/grid/filter/string.html.twig"
+            shop_taxon: "@SyliusShop/grid/filter/live/taxon.html.twig"
 
 sylius_shop:
     checkout_resolver:

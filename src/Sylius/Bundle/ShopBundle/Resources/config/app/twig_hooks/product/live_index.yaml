@@ -1,0 +1,116 @@
+# Experimental: hooks of the live product list, used when "sylius_shop.product_grid.live" is enabled.
+sylius_twig_hooks:
+    hooks:
+        'sylius_shop.product.live_index':
+            content:
+                template: '@SyliusShop/product/live_index/content.html.twig'
+                priority: 0
+
+        'sylius_shop.product.live_index.content':
+            breadcrumbs:
+                template: '@SyliusShop/product/live_index/content/breadcrumbs.html.twig'
+                priority: 200
+            header:
+                template: '@SyliusShop/product/live_index/content/header.html.twig'
+                priority: 100
+            grid:
+                component: 'sylius_shop:product:grid'
+                props:
+                    taxon: '@=_context.taxon'
+                    template: '@SyliusShop/product/live_index/content/grid.html.twig'
+                priority: 0
+
+        'sylius_shop.product.live_index.content.header':
+            image:
+                template: '@SyliusShop/product/live_index/content/header/image.html.twig'
+                priority: 200
+            name:
+                template: '@SyliusShop/product/live_index/content/header/name.html.twig'
+                priority: 100
+            description:
+                template: '@SyliusShop/product/live_index/content/header/description.html.twig'
+                priority: 0
+
+        'sylius_shop.product.live_index.content.grid':
+            sidebar:
+                template: '@SyliusShop/product/live_index/content/grid/sidebar.html.twig'
+                priority: 100
+            main:
+                template: '@SyliusShop/product/live_index/content/grid/main.html.twig'
+                priority: 0
+
+        'sylius_shop.product.live_index.content.grid.sidebar':
+            header:
+                template: '@SyliusShop/product/live_index/content/grid/sidebar/header.html.twig'
+                priority: 200
+            active_filters:
+                template: '@SyliusShop/product/live_index/content/grid/sidebar/active_filters.html.twig'
+                priority: 100
+            filters:
+                template: '@SyliusShop/product/live_index/content/grid/sidebar/filters.html.twig'
+                configuration:
+                    # these filters are rendered in the toolbar
+                    excluded_filters: ['search']
+                priority: 0
+
+        'sylius_shop.product.live_index.content.grid.main':
+            toolbar:
+                template: '@SyliusShop/product/live_index/content/grid/main/toolbar.html.twig'
+                priority: 200
+            products:
+                template: '@SyliusShop/product/live_index/content/grid/main/products.html.twig'
+                priority: 100
+            pagination:
+                template: '@SyliusShop/product/live_index/content/grid/main/pagination.html.twig'
+                priority: 0
+
+        'sylius_shop.product.live_index.content.grid.main.toolbar':
+            count:
+                template: '@SyliusShop/product/live_index/content/grid/main/toolbar/count.html.twig'
+                priority: 300
+            search:
+                template: '@SyliusShop/product/live_index/content/grid/main/toolbar/search.html.twig'
+                configuration:
+                    filter: 'search'
+                priority: 200
+            limit:
+                template: '@SyliusShop/product/live_index/content/grid/main/toolbar/limit.html.twig'
+                priority: 100
+            sorting:
+                template: '@SyliusShop/product/live_index/content/grid/main/toolbar/sorting.html.twig'
+                configuration:
+                    default_sorting:
+                        createdAt: 'desc'
+                    default_taxon_sorting:
+                        position: 'asc'
+                    options:
+                        position:
+                            title: 'sylius.ui.by_position'
+                            sorting:
+                                position: 'asc'
+                            requires_taxon: true
+                        a_to_z:
+                            title: 'sylius.ui.from_a_to_z'
+                            sorting:
+                                name: 'asc'
+                        z_to_a:
+                            title: 'sylius.ui.from_z_to_a'
+                            sorting:
+                                name: 'desc'
+                        newest:
+                            title: 'sylius.ui.newest_first'
+                            sorting:
+                                createdAt: 'desc'
+                        oldest:
+                            title: 'sylius.ui.oldest_first'
+                            sorting:
+                                createdAt: 'asc'
+                        cheapest:
+                            title: 'sylius.ui.cheapest_first'
+                            sorting:
+                                price: 'asc'
+                        most_expensive:
+                            title: 'sylius.ui.most_expensive_first'
+                            sorting:
+                                price: 'desc'
+                priority: 0
