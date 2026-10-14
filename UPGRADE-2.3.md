@@ -67,6 +67,17 @@
    $repository->countByCustomerAndCouponSince($customer, $coupon, null);
    ```
 
+6. The `version` field of `Sylius\Component\Core\Model\Promotion` and `Sylius\Component\Core\Model\PromotionCoupon` is no longer used for optimistic locking.
+
+   The following methods have been deprecated and will be removed together with the `version` column in Sylius 3.0:
+
+   - `Sylius\Component\Core\Model\Promotion::getVersion()`
+   - `Sylius\Component\Core\Model\Promotion::setVersion()`
+   - `Sylius\Component\Core\Model\PromotionCoupon::getVersion()`
+   - `Sylius\Component\Core\Model\PromotionCoupon::setVersion()`
+
+   `Sylius\Component\Core\Model\PromotionInterface` and `Sylius\Component\Core\Model\PromotionCouponInterface` will no longer extend `Sylius\Resource\Model\VersionedInterface` in Sylius 3.0.
+
 ## Messenger
 
 1. A new `Sylius\Bundle\CoreBundle\Command\Account\ResendVerificationEmail` message has been introduced. ([#19002](https://github.com/Sylius/Sylius/pull/19002))
