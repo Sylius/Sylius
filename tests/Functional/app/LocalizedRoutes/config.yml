@@ -1,0 +1,5 @@
+sylius_core:
+    localized_routes:
+        sylius_shop_login:
+            en_US: /{_locale}/login
+            fr_FR: /{_locale}/connexion
