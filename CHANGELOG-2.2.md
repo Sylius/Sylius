@@ -1,5 +1,17 @@
 # CHANGELOG FOR `2.2.X`
 
+## v2.2.11 (2026-10-14)
+
+#### Details
+
+- [#19274](https://github.com/Sylius/Sylius/pull/19274) [2.2] Add missing Greek translations ([@angeliszotis](https://github.com/angeliszotis))
+- [#19279](https://github.com/Sylius/Sylius/pull/19279) [2.2] Add missing Greek translations for ShopBundle ([@angeliszotis](https://github.com/angeliszotis))
+- [#19283](https://github.com/Sylius/Sylius/pull/19283) [2.2] Add missing Greek translations for CoreBundle ([@angeliszotis](https://github.com/angeliszotis))
+- [#19280](https://github.com/Sylius/Sylius/pull/19280) [2.2] Add missing Greek translations for Promotion and Shipping bundles ([@angeliszotis](https://github.com/angeliszotis))
+- [#19292](https://github.com/Sylius/Sylius/pull/19292) Fix cart offcanvas not refreshing on live re-render ([@Wojdylak](https://github.com/Wojdylak))
+- [#19267](https://github.com/Sylius/Sylius/pull/19267) [Core] Collect the order promotion total test that never ran ([@dylanpulver](https://github.com/dylanpulver))
+- [#19260](https://github.com/Sylius/Sylius/pull/19260) Use enabled channel by default on admin dashboard ([@sabrineferchichi](https://github.com/sabrineferchichi))
+
 ## v2.2.10 (2026-09-28)
 
 #### Details
