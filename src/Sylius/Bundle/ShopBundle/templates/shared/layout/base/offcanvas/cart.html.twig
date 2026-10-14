@@ -1,7 +1,15 @@
 {# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Common\CartComponent #}
 
-<div class="offcanvas offcanvas-end offcanvas-wide" tabindex="-1" id="offcanvasCart">
+{% set live_region %}
     <div class="offcanvas-cart-live-region" {{ attributes }}>
         {% hook 'cart' with { cart } %}
     </div>
-</div>
+{% endset %}
+
+{% if this.reRendered %}
+    {{ live_region }}
+{% else %}
+    <div class="offcanvas offcanvas-end offcanvas-wide" tabindex="-1" id="offcanvasCart">
+        {{ live_region }}
+    </div>
+{% endif %}
