@@ -606,6 +606,34 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         yield 'preview' => ['preview', true];
     }
 
+    #[Test]
+    public function it_registers_cached_channel_context_to_be_reset_between_requests(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'sylius.context.channel.cached',
+            'kernel.reset',
+            ['method' => 'reset'],
+        );
+    }
+
+    #[Test]
+    public function it_registers_shop_based_cart_context_to_be_reset_between_requests(): void
+    {
+        $this->container->setParameter('kernel.environment', 'prod');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'sylius.context.cart.new_shop_based',
+            'kernel.reset',
+            ['method' => 'reset'],
+        );
+    }
+
     protected function getContainerExtensions(): array
     {
         return [new SyliusCoreExtension()];
