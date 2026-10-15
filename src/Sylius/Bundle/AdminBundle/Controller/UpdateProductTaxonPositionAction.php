@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Controller;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
 use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Positioner\PositionerInterface;
 use Sylius\Component\Core\Repository\ProductTaxonRepositoryInterface;
@@ -21,7 +22,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -64,9 +64,7 @@ final readonly class UpdateProductTaxonPositionAction
         try {
             $this->updatePositions($productTaxonPositions, $maxPosition);
         } catch (\InvalidArgumentException $exception) {
-            /** @var Session $session */
-            $session = $this->requestStack->getMainRequest()->getSession();
-            $session->getFlashBag()->add('error', $exception->getMessage());
+            FlashBagProvider::getFlashBag($this->requestStack)->add('error', $exception->getMessage());
         }
 
         return new JsonResponse();
