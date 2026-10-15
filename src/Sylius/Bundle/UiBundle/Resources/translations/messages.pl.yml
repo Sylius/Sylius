@@ -802,7 +802,7 @@ sylius:
         search: 'Szukaj'
         search_products: 'Szukaj produktów'
         security_settings: 'Ustawienia bezpieczeństwa'
-        see_issue: 'Zobacz zgłoszenie'
+        see_issue: 'Widzisz błąd'
         select: 'Wybierz'
         select_address_from_book: 'Wybierz adres z książki adresowej'
         select_products: 'Wybierz produkty'
