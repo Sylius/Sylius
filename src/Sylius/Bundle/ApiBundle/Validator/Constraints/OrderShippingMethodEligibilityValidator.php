@@ -50,19 +50,23 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
             $shippingMethod = $shipment->getMethod();
 
             if (!$shippingMethod->isEnabled() || !$shippingMethod->getChannels()->contains($order->getChannel())) {
-                $this->context->addViolation(
-                    $constraint->getMethodNotAvailableMessage(),
-                    ['%shippingMethodName%' => $shippingMethod->getName()],
-                );
+                $this->context
+                    ->buildViolation($constraint->getMethodNotAvailableMessage())
+                    ->setParameter('%shippingMethodName%', (string) $shippingMethod->getName())
+                    ->setCode(OrderShippingMethodEligibility::SHIPPING_METHOD_NOT_AVAILABLE_ERROR)
+                    ->addViolation()
+                ;
 
                 continue;
             }
 
             if (!$this->eligibilityChecker->isEligible($shipment, $shippingMethod)) {
-                $this->context->addViolation(
-                    $constraint->getMessage(),
-                    ['%shippingMethodName%' => $shippingMethod->getName()],
-                );
+                $this->context
+                    ->buildViolation($constraint->getMessage())
+                    ->setParameter('%shippingMethodName%', (string) $shippingMethod->getName())
+                    ->setCode(OrderShippingMethodEligibility::SHIPPING_METHOD_NOT_ELIGIBLE_ERROR)
+                    ->addViolation()
+                ;
             }
         }
     }

@@ -29,6 +29,7 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class OrderItemAvailabilityValidatorTest extends TestCase
@@ -86,8 +87,13 @@ final class OrderItemAvailabilityValidatorTest extends TestCase
         $orderItemMock->expects(self::once())->method('getQuantity')->willReturn(1);
         $this->availabilityChecker->expects(self::once())->method('isStockSufficient')->with($productVariantMock, 1)->willReturn(false);
         $productVariantMock->expects(self::once())->method('getName')->willReturn('variant name');
-        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.product_variant.product_variant_with_name_not_sufficient', ['%productVariantName%' => 'variant name'])
-        ;
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.product_variant.product_variant_with_name_not_sufficient')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%productVariantName%', 'variant name')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(OrderItemAvailability::INSUFFICIENT_STOCK_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
+
         $this->orderItemAvailabilityValidator->validate($command, new OrderItemAvailability());
     }
 
@@ -109,8 +115,7 @@ final class OrderItemAvailabilityValidatorTest extends TestCase
         $orderItemMock->expects(self::once())->method('getQuantity')->willReturn(1);
         $this->availabilityChecker->expects(self::once())->method('isStockSufficient')->with($productVariantMock, 1)->willReturn(true);
         $productVariantMock->expects(self::never())->method('getName');
-        $this->executionContext->expects(self::never())->method('addViolation')->with('sylius.product_variant.product_variant_with_name_not_sufficient', ['%productVariantName%' => 'variant name'])
-        ;
+        $this->executionContext->expects(self::never())->method('buildViolation');
         $this->orderItemAvailabilityValidator->validate($command, new OrderItemAvailability());
     }
 }

@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class PromotionCouponEligibility extends Constraint
 {
+    public const COUPON_INVALID_ERROR = 'COUPON_INVALID';
+
     /**
      * @param array<string, mixed>|null $options
      * @param array<string>|null $groups

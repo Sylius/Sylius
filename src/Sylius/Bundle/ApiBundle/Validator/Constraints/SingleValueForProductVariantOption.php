@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class SingleValueForProductVariantOption extends Constraint
 {
+    public const MULTIPLE_VALUES_FOR_OPTION_ERROR = 'MULTIPLE_VALUES_FOR_OPTION';
+
     /**
      * @param array<string, mixed>|null $options
      */

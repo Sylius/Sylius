@@ -33,7 +33,11 @@ final class SingleValueForProductVariantOptionValidator extends ConstraintValida
         /** @var array<string, int> $flippedMap */
         $flippedMap = array_flip($map);
         if (count($map) !== count($flippedMap)) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setCode(SingleValueForProductVariantOption::MULTIPLE_VALUES_FOR_OPTION_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }
