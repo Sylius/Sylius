@@ -54,7 +54,7 @@ final readonly class BlameCartHandler
             throw new UnprocessableCartException();
         }
 
-        if (null !== $cart->getCustomer()) {
+        if (!$cart->isCreatedByGuest()) {
             throw new ConflictHttpException('There is an assigned customer to this cart');
         }
 
