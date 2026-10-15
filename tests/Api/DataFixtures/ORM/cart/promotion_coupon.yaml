@@ -1,0 +1,79 @@
+Sylius\Component\Core\Model\Promotion:
+    promotion_with_expired_coupon:
+        code: 'promotion_with_expired_coupon'
+        name: 'Promotion with an expired coupon'
+        channels: ['@channel_web']
+        couponBased: true
+        actions:
+            - '@action_fixed_discount_for_promotion_with_expired_coupon'
+    promotion_ended:
+        code: 'promotion_ended'
+        name: 'Ended promotion'
+        channels: ['@channel_web']
+        couponBased: true
+        endsAt: <dateTimeBetween('-1 month', '-1 day')>
+        actions:
+            - '@action_fixed_discount_for_ended_promotion'
+    promotion_with_unfulfilled_rules:
+        code: 'promotion_with_unfulfilled_rules'
+        name: 'Promotion with unfulfilled rules'
+        channels: ['@channel_web']
+        couponBased: true
+        actions:
+            - '@action_fixed_discount_for_promotion_with_unfulfilled_rules'
+        rules:
+            - '@rule_cart_quantity_at_least_5'
+
+Sylius\Component\Promotion\Model\PromotionTranslation:
+    promotion_with_expired_coupon_en:
+        locale: 'en_US'
+        label: 'Promotion with an expired coupon'
+        translatable: '@promotion_with_expired_coupon'
+    promotion_ended_en:
+        locale: 'en_US'
+        label: 'Ended promotion'
+        translatable: '@promotion_ended'
+    promotion_with_unfulfilled_rules_en:
+        locale: 'en_US'
+        label: 'Promotion with unfulfilled rules'
+        translatable: '@promotion_with_unfulfilled_rules'
+
+Sylius\Component\Promotion\Model\PromotionAction:
+    action_fixed_discount_for_promotion_with_expired_coupon:
+        type: order_fixed_discount
+        configuration:
+            WEB:
+                amount: 100
+        promotion: '@promotion_with_expired_coupon'
+    action_fixed_discount_for_ended_promotion:
+        type: order_fixed_discount
+        configuration:
+            WEB:
+                amount: 100
+        promotion: '@promotion_ended'
+    action_fixed_discount_for_promotion_with_unfulfilled_rules:
+        type: order_fixed_discount
+        configuration:
+            WEB:
+                amount: 100
+        promotion: '@promotion_with_unfulfilled_rules'
+
+Sylius\Component\Promotion\Model\PromotionRule:
+    rule_cart_quantity_at_least_5:
+        type: cart_quantity
+        configuration:
+            count: 5
+        promotion: '@promotion_with_unfulfilled_rules'
+
+Sylius\Component\Core\Model\PromotionCoupon:
+    expired_coupon:
+        code: 'EXPIRED_COUPON'
+        promotion: '@promotion_with_expired_coupon'
+        expiresAt: <dateTimeBetween('-2 months', '-1 month')>
+    coupon_of_ended_promotion:
+        code: 'COUPON_OF_ENDED_PROMOTION'
+        promotion: '@promotion_ended'
+        expiresAt: <dateTimeBetween('+1 month', '+2 months')>
+    coupon_of_promotion_with_unfulfilled_rules:
+        code: 'COUPON_WITH_UNFULFILLED_RULES'
+        promotion: '@promotion_with_unfulfilled_rules'
