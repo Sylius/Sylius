@@ -1,6 +1,7 @@
 sylius_admin_product_taxon_index:
     path: /
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_taxon')"
     defaults:
         _controller: sylius.controller.product_taxon::indexAction
         _sylius:
@@ -12,6 +13,7 @@ sylius_admin_product_taxon_index:
 sylius_admin_product_taxon_bulk_delete_products:
     path: /bulk-delete
     methods: [DELETE]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product')"
     defaults:
         _controller: sylius.controller.product::bulkDeleteAction
         _sylius:

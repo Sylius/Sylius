@@ -9,4 +9,5 @@ sylius_admin_tax_category:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\TaxCategoryType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_tax_category')"
     type: sylius.resource
