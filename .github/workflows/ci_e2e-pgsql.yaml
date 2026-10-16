@@ -98,6 +98,9 @@ jobs:
                     node_version: "24.x"
                     chrome_version: stable
 
+            -   name: Validate database schema
+                run: bin/console doctrine:schema:validate --skip-mapping
+
             -   name: Run PHPUnit
                 run: vendor/bin/phpunit --testsuite all --colors=always
 
