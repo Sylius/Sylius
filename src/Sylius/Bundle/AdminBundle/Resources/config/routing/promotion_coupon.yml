@@ -62,6 +62,7 @@ sylius_admin_promotion_coupon_update:
 sylius_admin_promotion_coupon_generate:
     path: /generate
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_promotion_coupon')"
     defaults:
         _controller: sylius.controller.promotion_coupon::generateAction
         _sylius:
@@ -77,6 +78,12 @@ sylius_admin_promotion_coupon_generate:
                 route:
                     parameters:
                         promotionId: $promotionId
+
+_sylius_admin_promotion_coupon_generate:
+    path: /generate
+    methods: [GET, POST]
+    controller: sylius_admin.controller.generate_promotion_coupons
+    condition: "not context.isSyliusRoutingBcLayerEnabled('admin_promotion_coupon')"
 
 sylius_admin_promotion_coupon_bulk_delete:
     path: /bulk-delete

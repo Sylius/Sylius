@@ -22,6 +22,7 @@ use Sylius\Bundle\AdminBundle\Action\ResendOrderConfirmationEmailAction;
 use Sylius\Bundle\AdminBundle\Action\ResendShipmentConfirmationEmailAction;
 use Sylius\Bundle\AdminBundle\Controller\CustomerStatisticsController;
 use Sylius\Bundle\AdminBundle\Controller\DashboardController;
+use Sylius\Bundle\AdminBundle\Controller\GeneratePromotionCouponsAction;
 use Sylius\Bundle\AdminBundle\Controller\RedirectHandler;
 use Sylius\Bundle\AdminBundle\Controller\RemoveCatalogPromotionAction;
 use Sylius\Bundle\AdminBundle\Controller\UpdateProductTaxonPositionAction;
@@ -85,6 +86,19 @@ return static function (ContainerConfigurator $container) {
             service('sylius.command_dispatcher.resend_shipment_confirmation_email'),
             service('security.csrf.token_manager')->ignoreOnInvalid(),
             service('request_stack'),
+        ])
+    ;
+
+    $services
+        ->set('sylius_admin.controller.generate_promotion_coupons', GeneratePromotionCouponsAction::class)
+        ->args([
+            service('sylius.repository.promotion'),
+            service('sylius.generator.promotion_coupon'),
+            service('sylius.resource_registry'),
+            service('form.factory'),
+            service('request_stack'),
+            service('router'),
+            service('twig'),
         ])
     ;
 
