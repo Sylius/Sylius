@@ -106,6 +106,7 @@ class PaymentRequestRepository extends EntityRepository implements PaymentReques
             ->setParameter('payment', $payment)
             ->setParameter('method', $paymentMethod)
             ->orderBy('o.createdAt', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;
