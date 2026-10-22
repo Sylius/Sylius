@@ -7,6 +7,13 @@
 the payment, the same way `PATCH /api/v2/shop/orders/{tokenValue}/payments/{paymentId}` already does. Previously any
 existing payment method code was accepted.
 
+### Unaccepted product reviews are no longer exposed by the item endpoint
+
+`GET /api/v2/shop/product-reviews/{id}` now answers `404 Not Found` for a review whose status is not `accepted`,
+matching the collection endpoint, which already filtered such reviews out. The
+`sylius_api.doctrine.orm.query_extension.shop.product_review.accepted` service is additionally tagged
+`api_platform.doctrine.orm.query_extension.item`.
+
 # UPGRADE FROM `2.1.15` TO `2.1.16`
 
 ## Security
