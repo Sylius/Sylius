@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Inventory\Checker;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Inventory\Checker\AvailabilityChecker;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AvailabilityCheckerTest extends TestCase
 {
     private AvailabilityChecker $availabilityChecker;

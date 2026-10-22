@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\OrderBundle\NumberGenerator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Order\Model\OrderSequenceInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;  // Update the import
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SequentialOrderNumberGeneratorTest extends TestCase
 {
     /** @var RepositoryInterface<OrderSequenceInterface>&MockObject */

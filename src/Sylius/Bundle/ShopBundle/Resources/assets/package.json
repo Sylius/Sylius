@@ -8,7 +8,7 @@
     "url": "git+https://github.com/Sylius/SyliusShopBundle.git"
   },
   "engines": {
-    "node": ">=20"
+    "node": "^22.13.0 || >=24.0"
   },
   "engineStrict": true,
   "symfony": {

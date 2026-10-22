@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'Hanya ada %quantity% dari produk ini di saham.'
     product_variant:
         update_error: 'Ada masalah tak terduga dengan mengupdate varian produk. Tolong, coba perbarui varian produk lagi.'
+    user:
+        verification_email_sent: 'Jika alamat email yang dimasukkan terkait dengan akun, email verifikasi telah dikirim.'

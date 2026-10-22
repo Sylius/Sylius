@@ -17,7 +17,6 @@ use Sylius\Bundle\PaymentBundle\Exception\PaymentRequestNotSupportedException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
-/** @experimental */
 abstract class AbstractServiceCommandProvider implements ServiceProviderAwareCommandProviderInterface
 {
     /** @var ServiceProviderInterface<PaymentRequestCommandProviderInterface> */

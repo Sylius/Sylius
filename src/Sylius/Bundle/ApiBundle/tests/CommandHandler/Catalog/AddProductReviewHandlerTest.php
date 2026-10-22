@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Catalog;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Catalog\AddProductReview;
@@ -27,6 +28,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AddProductReviewHandlerTest extends TestCase
 {
     private FactoryInterface&MockObject $productReviewFactory;

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ApiBundle\Provider\CompositePaymentConfigurationProviderInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -22,6 +23,7 @@ use Sylius\Tests\Api\Utils\OrderPlacerTrait;
 use Sylius\Tests\Api\Utils\ShopUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrdersTest extends JsonApiTestCase
 {
     use OrderPlacerTrait;

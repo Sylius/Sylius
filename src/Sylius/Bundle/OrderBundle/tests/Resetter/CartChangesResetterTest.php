@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\OrderBundle\Resetter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\UnitOfWork;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\OrderBundle\Resetter\CartChangesResetter;
@@ -23,6 +24,7 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CartChangesResetterTest extends TestCase
 {
     private EntityManagerInterface&MockObject $manager;

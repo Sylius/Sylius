@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -31,9 +32,7 @@ final class ProductAttributeContext implements Context
     ) {
     }
 
-    /**
-     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute
-     */
+    #[Then('I should (also) see the product attribute :attributeName with value :expectedAttribute')]
     public function iShouldSeeTheProductAttributeWithValue(string $attributeName, string $expectedAttribute): void
     {
         $attribute = $this->getAttributeByName($attributeName);
@@ -48,9 +47,7 @@ final class ProductAttributeContext implements Context
         Assert::same($attributeValue, $expectedAttribute);
     }
 
-    /**
-     * @Then /^I should(?:| also) see the product attribute "([^"]+)" with (positive|negative) value$/
-     */
+    #[Then('/^I should(?:| also) see the product attribute "([^"]+)" with (positive|negative) value$/')]
     public function iShouldSeeTheProductAttributeWithBoolean(string $attributeName, string $expectedAttribute): void
     {
         $attribute = $this->getAttributeByName($attributeName);
@@ -58,9 +55,7 @@ final class ProductAttributeContext implements Context
         Assert::same($attribute['value'], 'positive' === $expectedAttribute);
     }
 
-    /**
-     * @Then /^I should(?:| also) see the product attribute "([^"]+)" with value ([^"]+)%$/
-     */
+    #[Then('/^I should(?:| also) see the product attribute "([^"]+)" with value ([^"]+)%$/')]
     public function iShouldSeeTheProductAttributeWithPercentage(string $attributeName, int $expectedAttribute): void
     {
         $attribute = $this->getAttributeByName($attributeName);
@@ -68,9 +63,7 @@ final class ProductAttributeContext implements Context
         Assert::same($attribute['value'], $expectedAttribute / 100);
     }
 
-    /**
-     * @Then I should (also) see the product attribute :attributeName with value :expectedAttribute on the list
-     */
+    #[Then('I should (also) see the product attribute :attributeName with value :expectedAttribute on the list')]
     public function iShouldSeeTheProductAttributeWithValueOnTheList(string $attributeName, string $expectedAttribute): void
     {
         $attribute = $this->getAttributeByName($attributeName);
@@ -78,17 +71,13 @@ final class ProductAttributeContext implements Context
         Assert::inArray($expectedAttribute, $attribute['value']);
     }
 
-    /**
-     * @Then I should not see the product attribute :attributeName
-     */
+    #[Then('I should not see the product attribute :attributeName')]
     public function iShouldNotSeeTheProductAttribute(string $attributeName): void
     {
         Assert::false($this->hasAttributeByName($attributeName));
     }
 
-    /**
-     * @Then I should (also) see the product attribute :attributeName with date :expectedAttribute
-     */
+    #[Then('I should (also) see the product attribute :attributeName with date :expectedAttribute')]
     public function iShouldSeeTheProductAttributeWithDate(string $attributeName, string $expectedAttribute): void
     {
         $attribute = $this->getAttributeByName($attributeName);
@@ -96,17 +85,13 @@ final class ProductAttributeContext implements Context
         Assert::true(new \DateTime($attribute['value']) == new \DateTime($expectedAttribute));
     }
 
-    /**
-     * @Then I should see :count attributes
-     */
+    #[Then('I should see :count attributes')]
     public function iShouldSeeAttributes(int $count): void
     {
         Assert::count($this->getAttributes(), $count);
     }
 
-    /**
-     * @Then the first attribute should be :name
-     */
+    #[Then('the first attribute should be :name')]
     public function theFirstAttributeShouldBe(string $name): void
     {
         $attributes = $this->getAttributes();
@@ -116,9 +101,7 @@ final class ProductAttributeContext implements Context
         Assert::same($attribute['name'], $name);
     }
 
-    /**
-     * @Then the last attribute should be :name
-     */
+    #[Then('the last attribute should be :name')]
     public function theLastAttributeShouldBe(string $name): void
     {
         $attributes = $this->getAttributes();

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Serializer\ContextKeys;
@@ -21,6 +22,7 @@ use Sylius\Resource\Model\TranslatableInterface;
 use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TranslatableDenormalizerTest extends TestCase
 {
     private DenormalizerInterface&MockObject $denormalizer;

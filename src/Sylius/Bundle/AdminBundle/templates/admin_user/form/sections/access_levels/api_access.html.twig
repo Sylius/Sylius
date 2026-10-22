@@ -1,0 +1,7 @@
+{% set api_access_options = sylius_test_form_attribute('api-access') %}
+{% if not hookable_metadata.context.form.administrationAccess.vars.valid %}
+    {% set api_access_options = api_access_options|merge({ attr: (api_access_options.attr|default({}))|merge({ class: 'is-invalid' }) }) %}
+{% endif %}
+<div class="mb-3">
+    {{ form_widget(hookable_metadata.context.form.apiAccess, api_access_options) }}
+</div>

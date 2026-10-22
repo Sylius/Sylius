@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Product\Resolver;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Resolver\CompositeProductVariantResolver;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CompositeProductVariantResolverTest extends TestCase
 {
     private MockObject&ProductVariantResolverInterface $firstResolver;

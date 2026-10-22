@@ -86,6 +86,7 @@ jobs:
       env-name: "Sylius PR #${{ needs.load-artifact.outputs.pr-number }}"
       bunnyshell-yaml-contents: ${{ needs.load-artifact.outputs.bunnyshell-yaml-contents }}
       comment-on-pr: true
-      deploy-as-stopped: ${{ needs.load-artifact.outputs.is-pull-request-event == 'true' }}
+      create-no-deploy: ${{ needs.load-artifact.outputs.is-pull-request-event == 'true' }}
+      # deploy-as-stopped: ${{ needs.load-artifact.outputs.is-pull-request-event == 'true' }}
     secrets:
       bunnyshell-access-token: ${{ secrets.BUNNYSHELL_ACCESS_TOKEN }}

@@ -54,8 +54,29 @@ final class Configuration implements ConfigurationInterface
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->booleanNode('enabled')->defaultTrue()->end()
+                        ->booleanNode('strict_mode')->defaultFalse()->end()
                         ->arrayNode('disabled_for_factories')
                             ->scalarPrototype()->end()
+                        ->end()
+                        ->variableNode('allowed_classes')
+                            ->info('Classes allowed during decryption (unserialize). Use "true" to allow all classes, "false" to allow none, or a list of class-strings to allow only specific ones.')
+                            ->defaultTrue()
+                            ->validate()
+                                ->ifTrue(static fn (mixed $value): bool => !is_bool($value) && !is_array($value))
+                                ->thenInvalid('The "allowed_classes" must be a boolean or a list of class-strings, got %s.')
+                            ->end()
+                            ->validate()
+                                ->ifTrue(static fn (mixed $value): bool => true === $value)
+                                ->then(static function (mixed $value): mixed {
+                                    trigger_deprecation(
+                                        'sylius/payment-bundle',
+                                        '2.3',
+                                        'Allowing all classes during payment data decryption by setting "sylius_payment.encryption.allowed_classes" to "true" is deprecated and will not be the default in Sylius 3.0. Set it to "false" or provide an explicit list of allowed class-strings.',
+                                    );
+
+                                    return $value;
+                                })
+                            ->end()
                         ->end()
                     ->end()
                 ->end()

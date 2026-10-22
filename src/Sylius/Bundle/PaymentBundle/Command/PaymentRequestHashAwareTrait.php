@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PaymentBundle\Command;
 
-/** @experimental */
 trait PaymentRequestHashAwareTrait
 {
     protected ?string $hash;

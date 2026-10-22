@@ -44,7 +44,7 @@ final class ShippingMethodRuleValidator extends ConstraintValidator
 
         $type = $value->getType();
         if (!array_key_exists($type, $this->ruleTypes)) {
-            $this->context->buildViolation($constraint->invalidType)
+            $this->context->buildViolation($constraint->invalidTypeMessage)
                 ->setParameter('{{ available_rule_types }}', implode(', ', array_keys($this->ruleTypes)))
                 ->atPath('type')
                 ->addViolation()

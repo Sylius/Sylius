@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Order\Factory;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Order\Factory\OrderItemUnitFactory;
@@ -22,6 +23,7 @@ use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Resource\Exception\UnsupportedMethodException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderItemUnitFactoryTest extends TestCase
 {
     /** @var OrderItemUnitFactoryInterface<OrderItemUnitInterface> */

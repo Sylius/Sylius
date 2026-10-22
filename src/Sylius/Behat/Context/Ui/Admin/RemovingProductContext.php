@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -30,10 +32,8 @@ final class RemovingProductContext implements Context
     ) {
     }
 
-    /**
-     * @When I delete the :product product
-     * @When I try to delete the :product product
-     */
+    #[When('I delete the :product product')]
+    #[When('I try to delete the :product product')]
     public function iDeleteProduct(ProductInterface $product): void
     {
         $this->sharedStorage->set('product', $product);
@@ -42,9 +42,7 @@ final class RemovingProductContext implements Context
         $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
     }
 
-    /**
-     * @When I delete the :product product on filtered page
-     */
+    #[When('I delete the :product product on filtered page')]
     public function iDeleteProductOnFilteredPage(ProductInterface $product): void
     {
         $this->sharedStorage->set('product', $product);
@@ -52,9 +50,7 @@ final class RemovingProductContext implements Context
         $this->indexPage->deleteResourceOnPage(['name' => $product->getName()]);
     }
 
-    /**
-     * @Then /^(this product) should still exist$/
-     */
+    #[Then('/^(this product) should still exist$/')]
     public function theProductShouldStillExist(ProductInterface $product): void
     {
         $this->indexPage->open();
@@ -62,9 +58,7 @@ final class RemovingProductContext implements Context
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $product->getName()]));
     }
 
-    /**
-     * @Then I should be notified that this product could not be deleted as it is in use by a promotion rule
-     */
+    #[Then('I should be notified that this product could not be deleted as it is in use by a promotion rule')]
     public function iShouldBeNotifiedThatThisProductCouldNotBeDeleted(): void
     {
         $this->notificationChecker->checkNotification(

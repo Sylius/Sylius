@@ -10,7 +10,7 @@ services:
             PHP_DATE_TIMEZONE: "Europe/Warsaw"
         volumes:
             - ./:/srv/sylius:delegated
-            - .docker/test/php.ini:/etc/php/8.2/fpm/php.ini:delegated
+            - .docker/test/php.ini:/etc/php/8.3/fpm/php.ini:delegated
             - .docker/test/php.ini:/usr/local/etc/php/php-cli.ini:delegated
         networks:
             - sylius
@@ -32,7 +32,7 @@ services:
             SYLIUS_MESSENGER_TRANSPORT_CATALOG_PROMOTION_REMOVAL_FAILED_DSN: "sync://"
         volumes:
             - ./:/srv/sylius:delegated
-            - .docker/test/php.ini:/etc/php/8.2/fpm/php.ini:delegated
+            - .docker/test/php.ini:/etc/php/8.3/fpm/php.ini:delegated
             - .docker/test/php.ini:/usr/local/etc/php/php-cli.ini:delegated
         depends_on:
             - mysql

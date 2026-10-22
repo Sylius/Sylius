@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShopBundle\Router;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShopBundle\Router\LocaleStrippingRouter;
@@ -23,6 +24,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class LocaleStrippingRouterTest extends TestCase
 {
     private MockObject&RouterInterface $decoratedRouter;

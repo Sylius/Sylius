@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\MailerListener;
@@ -26,6 +27,7 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class MailerListenerTest extends TestCase
 {
     private MockObject&SenderInterface $emailSender;

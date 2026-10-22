@@ -20,6 +20,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Intl\Locales;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
@@ -33,6 +34,10 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class CreateAdminUserCommand extends Command
 {
     use HandleTrait;
+
+    private const ADMINISTRATION_ACCESS = 'Administration access';
+
+    private const API_ACCESS = 'API access';
 
     protected SymfonyStyle $io;
 
@@ -107,16 +112,38 @@ final class CreateAdminUserCommand extends Command
 
         $adminUserData['enabled'] = $this->io->confirm('Do you want to enable this admin user?', true);
 
+        $accessLevels = $this->askAccessLevels();
+        $adminUserData['administration_access'] = in_array(self::ADMINISTRATION_ACCESS, $accessLevels, true);
+        $adminUserData['api_access'] = in_array(self::API_ACCESS, $accessLevels, true);
+
         return $adminUserData;
+    }
+
+    /** @return array<array-key, string> */
+    private function askAccessLevels(): array
+    {
+        $question = new ChoiceQuestion(
+            'Access levels (comma-separated, at least one)',
+            [self::ADMINISTRATION_ACCESS, self::API_ACCESS],
+            '0',
+        );
+        $question->setMultiselect(true);
+
+        return $this->io->askQuestion($question);
     }
 
     /** @param array<array-key, mixed> $adminUserData */
     private function showSummary(array $adminUserData): void
     {
+        $accessLevels = array_filter([
+            $adminUserData['administration_access'] ? self::ADMINISTRATION_ACCESS : null,
+            $adminUserData['api_access'] ? self::API_ACCESS : null,
+        ]);
+
         $this->io->writeln('The following admin user will be created:');
         $this->io->table(
             [
-                'Email', 'Username', 'First name', 'Last name', 'Locale code', 'Enabled',
+                'Email', 'Username', 'First name', 'Last name', 'Locale code', 'Enabled', 'Access levels',
             ],
             [
                 [
@@ -126,6 +153,7 @@ final class CreateAdminUserCommand extends Command
                     $adminUserData['last_name'],
                     $adminUserData['locale_code'],
                     $adminUserData['enabled'] ? 'Yes' : 'No',
+                    implode(', ', $accessLevels),
                 ],
             ],
         );

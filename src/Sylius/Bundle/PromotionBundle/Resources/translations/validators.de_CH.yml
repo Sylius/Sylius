@@ -41,6 +41,8 @@ sylius:
             not_blank: 'Bitte geben Sie eine Beschreibung der Promotion ein.'
         end_date_cannot_be_set_prior_start_date: 'Das Enddatum kann nicht vor dem Startdatum festgelegt werden.'
         is_invalid: 'Die Promotion ist ungültig.'
+        usage_limit:
+            min: 'Das Nutzungslimit der Promotion muss mindestens {{ limit }} betragen.'
         name:
             max_length: 'Der Name der Promotion darf höchstens 1 Zeichen lang sein.|Der Name der Promotion darf höchstens {{ limit }} Zeichen lang sein.'
             min_length: 'Der Name der Promotion muss mindestens 1 Zeichen lang sein.|Der Name der Promotion muss mindestens {{ limit }} Zeichen lang sein.'

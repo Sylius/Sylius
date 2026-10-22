@@ -40,15 +40,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusCoreBundle extends AbstractResourceBundle
 {
-    public const VERSION = '2.2.13-DEV';
+    public const VERSION = '2.3.2-DEV';
 
-    public const VERSION_ID = '20213';
+    public const VERSION_ID = '20302';
 
     public const MAJOR_VERSION = '2';
 
-    public const MINOR_VERSION = '2';
+    public const MINOR_VERSION = '3';
 
-    public const RELEASE_VERSION = '13';
+    public const RELEASE_VERSION = '2';
 
     public const EXTRA_VERSION = 'DEV';
 

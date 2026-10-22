@@ -13,14 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\DQL;
 
-use Doctrine\DBAL\Platforms\MySQLPlatform;
-use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
-use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\AST\Node;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
+use Sylius\Bundle\CoreBundle\Doctrine\Platform\PlatformHelper;
 
 final class Year extends FunctionNode
 {
@@ -41,15 +39,15 @@ final class Year extends FunctionNode
     {
         $platform = $sqlWalker->getConnection()->getDatabasePlatform();
 
-        if (is_a($platform, MySQLPlatform::class, true)) {
+        if (PlatformHelper::isMysql($platform)) {
             return sprintf('YEAR(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
-        if (is_a($platform, PostgreSQLPlatform::class, true)) {
+        if (PlatformHelper::isPostgreSQL($platform)) {
             return sprintf('EXTRACT(YEAR FROM %s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
-        if (is_a($platform, SqlitePlatform::class, true)) {
+        if (PlatformHelper::isSqlite($platform)) {
             return sprintf('CAST(STRFTIME("%%Y", %s) AS NUMBER)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 

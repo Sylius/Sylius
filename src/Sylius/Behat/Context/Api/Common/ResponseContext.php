@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Common;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Webmozart\Assert\Assert;
@@ -26,9 +27,7 @@ final readonly class ResponseContext implements Context
     ) {
     }
 
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
+    #[Then('I should be notified that it has been successfully edited')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited(): void
     {
         Assert::true(
@@ -40,9 +39,7 @@ final readonly class ResponseContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully uploaded
-     */
+    #[Then('I should be notified that it has been successfully uploaded')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyUploaded(): void
     {
         Assert::true(
@@ -54,9 +51,7 @@ final readonly class ResponseContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that I can no longer change payment method of this order
-     */
+    #[Then('I should be notified that I can no longer change payment method of this order')]
     public function iShouldBeNotifiedThatICanNoLongerChangePaymentMethodOfThisOrder(): void
     {
         Assert::true($this->responseChecker->hasViolationWithMessage(

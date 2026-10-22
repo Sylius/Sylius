@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Model\Promotion;
@@ -22,6 +23,7 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionTest extends TestCase
 {
     private MockObject&PromotionCouponInterface $promotionCoupon;

@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\ApiPlatform\Hydra\Serializer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Hydra\Serializer\EmptyCollectionFiltersNormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EmptyCollectionFiltersNormalizerTest extends TestCase
 {
     private MockObject&NormalizerInterface $decorated;

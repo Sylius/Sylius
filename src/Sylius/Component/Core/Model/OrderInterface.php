@@ -106,6 +106,8 @@ interface OrderInterface extends
 
     public function getOrderPromotionTotal(): int;
 
+    public function getOrderAndItemPromotionTotal(): int;
+
     public function getShippingPromotionTotal(): int;
 
     public function getItemsSubtotal(): int;

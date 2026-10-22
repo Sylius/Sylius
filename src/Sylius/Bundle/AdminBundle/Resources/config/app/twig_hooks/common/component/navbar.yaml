@@ -19,6 +19,9 @@ sylius_twig_hooks:
                 props:
                     template: '@SyliusAdmin/shared/components/navbar/notifications.html.twig'
                 priority: 100
+            theme_switcher:
+                template: '@SyliusAdmin/shared/crud/common/navbar/items/theme_switcher.html.twig'
+                priority: 50
             user_dropdown:
                 template: '@SyliusAdmin/shared/crud/common/navbar/items/user.html.twig'
                 priority: 0
@@ -26,4 +29,9 @@ sylius_twig_hooks:
         'sylius_admin.common.component.navbar.menu':
             search:
                 template: '@SyliusAdmin/shared/crud/common/navbar/menu/search.html.twig'
+                priority: 0
+
+        'sylius_admin.common.component.navbar.items.notifications.item':
+            default:
+                template: '@SyliusAdmin/shared/components/navbar/notifications/item.html.twig'
                 priority: 0

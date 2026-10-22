@@ -34,7 +34,6 @@ phpstan.neon.dist               export-ignore
 phpstan-baseline.neon           export-ignore
 phpunit.xml.dist                export-ignore
 rector.php                      export-ignore
-RoboFile.php                    export-ignore
 symfony.lock                    export-ignore
 webpack.config.js               export-ignore
 yaml-standards.yaml             export-ignore

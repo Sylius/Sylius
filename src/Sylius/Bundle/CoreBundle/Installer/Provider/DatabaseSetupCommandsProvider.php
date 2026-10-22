@@ -18,6 +18,7 @@ use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\Platform\PlatformHelper;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -121,12 +122,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
 
     private function isSQLite(): bool
     {
-        $platform = $this->entityManager->getConnection()->getDatabasePlatform();
-
-        if (class_exists(\Doctrine\DBAL\Platforms\SqlitePlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\SqlitePlatform::class)) {
-            return true;
-        }
-
-        return false;
+        return PlatformHelper::isSqlite($this->entityManager->getConnection()->getDatabasePlatform());
     }
 }

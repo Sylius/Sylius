@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
 use ApiPlatform\Metadata\IriConverterInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Exception\InvalidProductAttributeValueTypeException;
@@ -22,6 +23,7 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductAttributeValueDenormalizerTest extends TestCase
 {
     private IriConverterInterface&MockObject $iriConverter;

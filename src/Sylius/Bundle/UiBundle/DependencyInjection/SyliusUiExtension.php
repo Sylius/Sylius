@@ -16,7 +16,7 @@ namespace Sylius\Bundle\UiBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class SyliusUiExtension extends Extension implements PrependExtensionInterface
@@ -24,9 +24,9 @@ final class SyliusUiExtension extends Extension implements PrependExtensionInter
     public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
-        $loader->load('services.xml');
+        $loader->load('services.php');
 
         $container->setParameter('sylius_ui.twig_ux.anonymous_component_template_prefixes', $config['twig_ux']['anonymous_component_template_prefixes'] ?? []);
         $container->setParameter('sylius_ui.twig_ux.live_component_tags', $config['twig_ux']['live_component_tags'] ?? []);

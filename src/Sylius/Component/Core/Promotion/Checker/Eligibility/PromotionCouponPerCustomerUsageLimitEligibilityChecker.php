@@ -38,7 +38,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
         }
 
         $perCustomerUsageLimit = $promotionCoupon->getPerCustomerUsageLimit();
-        if ($perCustomerUsageLimit === null) {
+        if ($perCustomerUsageLimit === null || false === $promotionCoupon->isTrackUsage()) {
             return true;
         }
 
@@ -47,7 +47,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
             return true;
         }
 
-        $placedOrdersNumber = $this->orderRepository->countByCustomerAndCoupon($customer, $promotionCoupon);
+        $placedOrdersNumber = $this->orderRepository->countByCustomerAndCouponSince($customer, $promotionCoupon, $promotionCoupon->getTrackUsageSince());
 
         return $placedOrdersNumber < $perCustomerUsageLimit;
     }

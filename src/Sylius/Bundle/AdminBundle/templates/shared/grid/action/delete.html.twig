@@ -9,4 +9,4 @@
 
 {% set disabled = path is empty %}
 
-{{ component('sylius_admin:delete_modal', {id: id, path: path, label: action.label, icon: action.icon, disabled: disabled}) }}
+{{ component('sylius_admin:delete_modal', {id: id, path: path, label: action.label|default('sylius.ui.delete'), icon: action.icon|default('tabler:trash-x'), disabled: disabled}) }}

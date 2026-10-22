@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Sylius\Behat\Page\Admin\Administrator\CreatePageInterface;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -28,11 +29,9 @@ final readonly class LocaleContext implements Context
     ) {
     }
 
-    /**
-     * @Then I should be viewing the administration panel in :localeCode locale
-     * @Then I should still be viewing the administration panel in :localeCode locale
-     * @Then they should be viewing the administration panel in :localeCode locale
-     */
+    #[Then('I should be viewing the administration panel in :localeCode locale')]
+    #[Then('I should still be viewing the administration panel in :localeCode locale')]
+    #[Then('they should be viewing the administration panel in :localeCode locale')]
     public function iShouldBeViewingTheAdministrationPanelIn(string $localeCode): void
     {
         if (!$this->dashboardPage->isOpen()) {
@@ -42,9 +41,7 @@ final readonly class LocaleContext implements Context
         Assert::same($this->dashboardPage->getDashboardHeader(), $this->translate('sylius.ui.dashboard', $localeCode));
     }
 
-    /**
-     * @Then I should be notified that this email is not valid in :localeCode locale
-     */
+    #[Then('I should be notified that this email is not valid in :localeCode locale')]
     public function iShouldBeNotifiedThatThisEmailIsNotValidInLocale(string $localeCode): void
     {
         Assert::same($this->createPage->getValidationMessage('field_email'), $this->translate('sylius.contact.email.invalid', $localeCode, 'validators'));

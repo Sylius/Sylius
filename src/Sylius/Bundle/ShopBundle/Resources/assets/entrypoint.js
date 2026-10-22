@@ -10,7 +10,6 @@
 import './styles/main.scss';
 
 import './scripts/bootstrap';
-import './scripts/spotlight';
 
 const imagesContext = require.context('./images', true, /\.(jpg|jpeg|png|svg|gif|webp)$/);
 imagesContext.keys().forEach(imagesContext);
