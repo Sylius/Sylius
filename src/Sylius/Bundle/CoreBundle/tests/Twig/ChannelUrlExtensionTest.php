@@ -24,6 +24,13 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 final class ChannelUrlExtensionTest extends TestCase
 {
+    protected function tearDown(): void
+    {
+        Request::setTrustedHosts([]);
+
+        parent::tearDown();
+    }
+
     #[Test]
     public function it_generates_channel_url_with_channel_hostname(): void
     {
@@ -67,8 +74,34 @@ final class ChannelUrlExtensionTest extends TestCase
         self::assertEquals('https://example.com/en_US/cart/', $url);
     }
 
-    public function testGenerateChannelUrlUsingRequestHostname(): void
+    public function testGenerateChannelUrlUsingRequestHostnameWhenTrustedHostsConfigured(): void
     {
+        Request::setTrustedHosts(['shop\.example\.com']);
+        $stack = new RequestStack();
+        $stack->push(Request::create('https://shop.example.com'));
+        $channelContext = $this->createMock(ChannelContextInterface::class);
+        $extension = new ChannelUrlExtension($channelContext, new UrlHelper($stack), false, $stack);
+
+        $url = $extension->generateChannelUrl('/en_US/cart/');
+
+        self::assertEquals('https://shop.example.com/en_US/cart/', $url);
+    }
+
+    public function testGenerateChannelUrlFailsSafeWhenTrustedHostsNotConfigured(): void
+    {
+        $stack = new RequestStack();
+        $stack->push(Request::create('https://evil.example.com'));
+        $channelContext = $this->createMock(ChannelContextInterface::class);
+        $extension = new ChannelUrlExtension($channelContext, new UrlHelper($stack), false, $stack);
+
+        $url = $extension->generateChannelUrl('/en_US/cart/');
+
+        self::assertEquals('/en_US/cart/', $url);
+    }
+
+    public function testGenerateChannelUrlFailsSafeWhenRequestStackIsNotInjected(): void
+    {
+        Request::setTrustedHosts(['shop\.example\.com']);
         $stack = new RequestStack();
         $stack->push(Request::create('https://shop.example.com'));
         $channelContext = $this->createMock(ChannelContextInterface::class);
@@ -76,6 +109,18 @@ final class ChannelUrlExtensionTest extends TestCase
 
         $url = $extension->generateChannelUrl('/en_US/cart/');
 
-        self::assertEquals('https://shop.example.com/en_US/cart/', $url);
+        self::assertEquals('/en_US/cart/', $url);
+    }
+
+    public function testGenerateChannelUrlFailsSafeWhenNoMainRequest(): void
+    {
+        Request::setTrustedHosts(['shop\.example\.com']);
+        $stack = new RequestStack();
+        $channelContext = $this->createMock(ChannelContextInterface::class);
+        $extension = new ChannelUrlExtension($channelContext, new UrlHelper($stack), false, $stack);
+
+        $url = $extension->generateChannelUrl('/en_US/cart/');
+
+        self::assertEquals('/en_US/cart/', $url);
     }
 }
