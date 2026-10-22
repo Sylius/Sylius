@@ -1,3 +1,36 @@
+# UPGRADE FROM `2.3.1` TO `2.3.2`
+
+This is a **security release**. Updating is strongly recommended.
+
+## Security fixes
+
+### [Core] Promotion and coupon usage limits could be exceeded by concurrent checkouts (High)
+
+Sylius 2.3.0 replaced the conditional `UPDATE` that enforced promotion and coupon usage limits at checkout with an
+optimistic lock in `Sylius\Bundle\CoreBundle\Doctrine\ORM\Promotion\Modifier\AtomicOrderPromotionsUsageModifier`.
+The entity was refreshed from the database and then locked with its own, just refreshed version, so the lock could
+never fail and the limits were not checked again. Several carts completed at the same time could all redeem a
+single-use promotion or coupon, and one customer could exceed the per-customer coupon limit, reintroducing
+[CVE-2026-31824](https://github.com/Sylius/Sylius/security/advisories/GHSA-7mp4-25j8-hp5q) that 2.2 had fixed.
+
+The modifier again increments the promotion counter with a conditional `UPDATE` that succeeds only while the counter is
+below the limit, locks the coupon row with `SELECT ... FOR UPDATE` and re-checks its global and per-customer limits
+under that lock before incrementing. The `trackUsage`, `trackUsageSince` and `reusableFromCancelledOrders` settings
+introduced in 2.3 are respected.
+
+What changes for integrators and customisations:
+
+1. A checkout that loses the race now fails with HTTP 409 (`PromotionUsageLimitReachedException`) at the moment the
+   counter is incremented. Clients that automate checkout should expect that response and retry or inform the
+   customer.
+2. `AtomicOrderPromotionsUsageModifier` no longer delegates to the service it decorates
+   (`sylius.modifier.promotion.order_usage`). A decorator or replacement of that inner service is bypassed; customise
+   `sylius.modifier.promotion.order_usage.atomic` instead.
+3. The counters are updated with SQL against the `sylius_promotion`, `sylius_promotion_coupon` and `sylius_order`
+   tables. Applications that renamed those tables need their own modifier.
+
+The constructor of `AtomicOrderPromotionsUsageModifier` is unchanged.
+
 # UPGRADE FROM `2.2` TO `2.3`
 
 ## Security
