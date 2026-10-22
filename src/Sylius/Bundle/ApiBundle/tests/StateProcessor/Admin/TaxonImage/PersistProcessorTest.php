@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
+use ApiPlatform\Validator\Exception\ValidationException;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -24,6 +25,8 @@ use Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor;
 use Sylius\Component\Core\Model\TaxonImageInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[AllowMockObjectsWithoutExpectations]
@@ -72,6 +75,38 @@ final class PersistProcessorTest extends TestCase
         $this->processor->expects(self::once())
             ->method('process')
             ->with($taxonImageMock, $operation, [], ['request' => $request]);
+
+        $this->persistProcessor->process(null, $operation, [], ['request' => $request]);
+    }
+
+    public function testThrowsAValidationExceptionIfACreatedTaxonImageIsNotValid(): void
+    {
+        /** @var TaxonImageInterface|MockObject $taxonImageMock */
+        $taxonImageMock = $this->createMock(TaxonImageInterface::class);
+
+        $operation = new Post(validationContext: ['groups' => ['sylius']]);
+
+        $request = new Request(attributes: ['code' => 'code'], request: ['type' => 'type']);
+
+        $file = new UploadedFile(__FILE__, basename(__FILE__), null, null, true);
+
+        $request->files->set('file', $file);
+
+        $this->taxonImageCreator->expects(self::once())
+            ->method('create')
+            ->with('code', $file, 'type')
+            ->willReturn($taxonImageMock);
+
+        $this->validator->expects(self::once())
+            ->method('validate')
+            ->with($taxonImageMock, null, ['sylius'])
+            ->willReturn(new ConstraintViolationList([
+                new ConstraintViolation('message', null, [], $taxonImageMock, 'file', $file),
+            ]));
+
+        $this->processor->expects(self::never())->method('process');
+
+        $this->expectException(ValidationException::class);
 
         $this->persistProcessor->process(null, $operation, [], ['request' => $request]);
     }

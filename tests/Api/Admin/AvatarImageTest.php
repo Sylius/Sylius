@@ -16,6 +16,8 @@ namespace Sylius\Tests\Api\Admin;
 use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\AvatarImageInterface;
+use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\AdminUserLoginTrait;
 use Symfony\Component\HttpFoundation\Response;
@@ -130,6 +132,40 @@ final class AvatarImageTest extends JsonApiTestCase
             $response,
             'admin/avatar_image/post_avatar_image',
             Response::HTTP_CREATED,
+        );
+    }
+
+    #[Test]
+    public function it_prevents_avatar_image_creation_with_a_disallowed_file_type_and_keeps_the_current_one(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::FILE_CONTENT_TYPE_HEADER);
+
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $fixtures['admin'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/admin/administrators/%s/avatar-image', $adminUser->getId()),
+            files: ['file' => $this->getUploadedFile('xss.svg', 'xss.svg', 'image/svg+xml')],
+            server: $header,
+        );
+
+        $this->assertResponseViolations(
+            [
+                [
+                    'propertyPath' => 'file',
+                    'message' => 'The file is not a valid image. Allowed types are image/jpeg, image/png, image/gif, image/webp.',
+                ],
+            ],
+        );
+
+        /** @var AvatarImageRepositoryInterface<AvatarImageInterface> $avatarImageRepository */
+        $avatarImageRepository = $this->get('sylius.repository.avatar_image');
+
+        $this->assertSame(
+            'uo/avatar_image.jpg',
+            $avatarImageRepository->findOneByOwnerId((string) $adminUser->getId())?->getPath(),
         );
     }
 
