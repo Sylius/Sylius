@@ -1,3 +1,35 @@
+# UPGRADE FROM `2.2.11` TO `2.2.12`
+
+This is a **security release**. Updating is strongly recommended.
+
+## Security fixes
+
+### [API] Payment request could be created with a payment method not available for the order (Medium)
+
+`POST /api/v2/shop/orders/{tokenValue}/payment-requests` accepted any `paymentMethodCode` that exists in the store,
+including payment methods that are disabled or not assigned to the order's channel, so a customer or a guest holding
+the order token could route the payment of their own order through a gateway the merchant did not offer there. The
+sibling endpoints for choosing and changing a payment method already rejected such methods with HTTP 422.
+
+The `AddPaymentRequest` command is now validated by the same `ChosenPaymentMethodEligibility` constraint and the
+endpoint answers 422 for a method that is not available for the payment. `AddPaymentRequestHandler` additionally
+re-checks the method against `PaymentMethodsResolverInterface` and throws `PaymentMethodNotFoundException` when it is
+not supported, which covers commands dispatched directly on the command bus.
+
+**Changes in `Sylius\Bundle\ApiBundle\CommandHandler\Payment\AddPaymentRequestHandler`:**
+
+```diff
+ public function __construct(
+     ...
+     private ?UserContextInterface $userContext = null,
++    private ?PaymentMethodsResolverInterface $paymentMethodsResolver = null,
+ )
+```
+
+The `sylius_api.command_handler.payment.add_payment_request` service now passes `sylius.resolver.payment_methods` as
+the last argument. If you have overwritten that service or its arguments, add the argument. Without it the HTTP
+endpoint is still protected by the validator, but the handler-level check is skipped.
+
 # UPGRADE FROM `2.2.9` TO `2.2.10`
 
 ## Deprecations
