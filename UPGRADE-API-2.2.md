@@ -1,3 +1,12 @@
+# UPGRADE FROM `2.2.11` TO `2.2.12`
+
+### Payment request creation validates the payment method
+
+`POST /api/v2/shop/orders/{tokenValue}/payment-requests` now answers `422 Unprocessable Entity` with a violation on
+`paymentMethodCode` when the method is disabled, not assigned to the order's channel or otherwise not available for
+the payment, the same way `PATCH /api/v2/shop/orders/{tokenValue}/payments/{paymentId}` already does. Previously any
+existing payment method code was accepted.
+
 # UPGRADE FROM `2.2.8` TO `2.2.9`
 
 ### JWTs are now bound to the API section they have been issued for

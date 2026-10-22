@@ -16,6 +16,7 @@ namespace Sylius\Tests\Api\Shop;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
@@ -231,6 +232,37 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $paymentRequestRepository = $this->get('sylius.repository.payment_request');
 
         $this->assertEmpty($paymentRequestRepository->findAll());
+    }
+
+    #[Test]
+    public function it_does_not_create_a_payment_request_for_a_payment_method_not_assigned_to_channel(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles([
+            'authentication/shop_user.yaml',
+            'channel/channel.yaml',
+            'payment_method.yaml',
+            'payment_method/out_of_channel_payment_method.yaml',
+            'payment_request/order_with_customer.yaml',
+        ]);
+
+        /** @var PaymentMethodInterface $outOfChannelPaymentMethod */
+        $outOfChannelPaymentMethod = $fixtures['payment_method_not_in_channel'];
+        /** @var PaymentInterface $payment */
+        $payment = $fixtures['payment'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/shop/orders/%s/payment-requests', $payment->getOrder()->getTokenValue()),
+            server: $this->headerBuilder()->withJsonLdAccept()->withJsonLdContentType()->withShopUserAuthorization('oliver@doe.com')->build(),
+            content: json_encode([
+                'paymentId' => $payment->getId(),
+                'paymentMethodCode' => $outOfChannelPaymentMethod->getCode(),
+            ], \JSON_THROW_ON_ERROR),
+        );
+
+        $this->assertResponseContainsViolations([
+            ['propertyPath' => '', 'message' => 'The payment method Out of channel is not available for this order. Please choose another one.'],
+        ]);
     }
 
     #[Test]

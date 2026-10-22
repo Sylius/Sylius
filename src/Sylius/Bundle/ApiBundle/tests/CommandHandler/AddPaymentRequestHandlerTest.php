@@ -33,6 +33,7 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 
 final class AddPaymentRequestHandlerTest extends TestCase
 {
@@ -50,6 +51,8 @@ final class AddPaymentRequestHandlerTest extends TestCase
 
     private MockObject&UserContextInterface $userContext;
 
+    private MockObject&PaymentMethodsResolverInterface $paymentMethodsResolver;
+
     private AddPaymentRequestHandler $addPaymentRequestHandler;
 
     protected function setUp(): void
@@ -61,6 +64,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
         $this->defaultActionProvider = $this->createMock(DefaultActionProviderInterface::class);
         $this->defaultPayloadProvider = $this->createMock(DefaultPayloadProviderInterface::class);
         $this->userContext = $this->createMock(UserContextInterface::class);
+        $this->paymentMethodsResolver = $this->createMock(PaymentMethodsResolverInterface::class);
 
         $this->addPaymentRequestHandler = new AddPaymentRequestHandler(
             $this->paymentMethodRepository,
@@ -70,6 +74,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
             $this->defaultActionProvider,
             $this->defaultPayloadProvider,
             $this->userContext,
+            $this->paymentMethodsResolver,
         );
     }
 
@@ -157,6 +162,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
         $order->method('getCustomer')->willReturn(null);
         $this->userContext->method('getUser')->willReturn(null);
         $this->paymentMethodRepository->method('findOneBy')->with(['code' => 'bank_transfer'])->willReturn($paymentMethod);
+        $this->paymentMethodsResolver->method('getSupportedMethods')->with($payment)->willReturn([$paymentMethod]);
         $this->defaultActionProvider->method('getAction')->with($paymentRequest)->willReturn('authorize');
         $this->defaultPayloadProvider->method('getPayload')->with($paymentRequest)->willReturn(['foo' => 'bar']);
 
@@ -188,6 +194,7 @@ final class AddPaymentRequestHandlerTest extends TestCase
         $this->userContext->method('getUser')->willReturn($shopUser);
         $shopUser->method('getCustomer')->willReturn($customer);
         $this->paymentMethodRepository->method('findOneBy')->with(['code' => 'bank_transfer'])->willReturn($paymentMethod);
+        $this->paymentMethodsResolver->method('getSupportedMethods')->with($payment)->willReturn([$paymentMethod]);
         $this->defaultActionProvider->method('getAction')->with($paymentRequest)->willReturn('authorize');
         $this->defaultPayloadProvider->method('getPayload')->with($paymentRequest)->willReturn(['foo' => 'bar']);
 
@@ -201,5 +208,28 @@ final class AddPaymentRequestHandlerTest extends TestCase
                 new AddPaymentRequest('token', 1, 'bank_transfer'),
             ),
         );
+    }
+
+    #[Test]
+    public function it_throws_an_exception_if_the_payment_method_is_not_supported_for_the_payment(): void
+    {
+        self::expectException(PaymentMethodNotFoundException::class);
+
+        $payment = $this->createMock(PaymentInterface::class);
+        $order = $this->createMock(OrderInterface::class);
+        $paymentMethod = $this->createMock(PaymentMethodInterface::class);
+        $supportedPaymentMethod = $this->createMock(PaymentMethodInterface::class);
+
+        $this->paymentRepository->method('findOneByOrderToken')->with(1, 'token')->willReturn($payment);
+        $payment->method('getOrder')->willReturn($order);
+        $order->method('getCustomer')->willReturn(null);
+        $this->userContext->method('getUser')->willReturn(null);
+        $this->paymentMethodRepository->method('findOneBy')->with(['code' => 'bank_transfer'])->willReturn($paymentMethod);
+        $this->paymentMethodsResolver->method('getSupportedMethods')->with($payment)->willReturn([$supportedPaymentMethod]);
+
+        $this->paymentRequestFactory->expects($this->never())->method('create');
+        $this->paymentRequestRepository->expects($this->never())->method('add');
+
+        $this->addPaymentRequestHandler->__invoke(new AddPaymentRequest('token', 1, 'bank_transfer'));
     }
 }
