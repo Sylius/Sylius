@@ -65,6 +65,14 @@
             <tag name="api_platform.state_processor" />
         </service>
 
+        <service id="sylius_api.state_processor.shop.customer.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Shop\Customer\PersistProcessor">
+            <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
+            <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.command_bus" />
+            <tag name="api_platform.state_processor" />
+        </service>
+
         <service id="sylius_api.state_processor.admin.product_image.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductImage\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="sylius_api.creator.product_image" />
