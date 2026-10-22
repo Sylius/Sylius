@@ -15,6 +15,8 @@ namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -27,14 +29,18 @@ final class ChannelUrlExtension extends AbstractExtension
 
     private bool $unsecuredUrls;
 
+    private ?RequestStack $requestStack;
+
     public function __construct(
         ChannelContextInterface $channelContext,
         UrlHelper $urlHelper,
         bool $unsecuredUrls = false,
+        ?RequestStack $requestStack = null,
     ) {
         $this->channelContext = $channelContext;
         $this->urlHelper = $urlHelper;
         $this->unsecuredUrls = $unsecuredUrls;
+        $this->requestStack = $requestStack;
     }
 
     public function getFunctions(): array
@@ -54,6 +60,19 @@ final class ChannelUrlExtension extends AbstractExtension
             return ($this->unsecuredUrls ? 'http://' : 'https://') . $channel->getHostname() . $path;
         }
 
+        if (!$this->isRequestHostTrusted()) {
+            return $path;
+        }
+
         return $this->urlHelper->getAbsoluteUrl($path);
+    }
+
+    private function isRequestHostTrusted(): bool
+    {
+        if (null === $this->requestStack || null === $this->requestStack->getMainRequest()) {
+            return false;
+        }
+
+        return [] !== Request::getTrustedHosts();
     }
 }
