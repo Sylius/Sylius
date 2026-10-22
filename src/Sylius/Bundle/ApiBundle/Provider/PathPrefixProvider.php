@@ -21,12 +21,18 @@ final readonly class PathPrefixProvider implements PathPrefixProviderInterface
 
     public function getPathPrefix(string $path): ?string
     {
+        $path = rawurldecode($path);
+
         if (!str_contains($path, $this->apiRoute)) {
             return null;
         }
 
         /** @var array<int, string> $pathElements */
         $pathElements = array_values(array_filter(explode('/', str_replace($this->apiRoute, '', $path))));
+
+        if ($pathElements === []) {
+            return null;
+        }
 
         if (in_array($pathElements[0], $this->pathPrefixes, true)) {
             return $pathElements[0];

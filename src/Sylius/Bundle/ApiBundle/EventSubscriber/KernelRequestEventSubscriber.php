@@ -36,7 +36,7 @@ final readonly class KernelRequestEventSubscriber implements EventSubscriberInte
 
     public function validateApi(RequestEvent $event): void
     {
-        $pathInfo = $event->getRequest()->getPathInfo();
+        $pathInfo = rawurldecode($event->getRequest()->getPathInfo());
 
         if ($this->apiEnabled === false && str_contains($pathInfo, $this->apiRoute)) {
             throw new NotFoundHttpException('Route not found');

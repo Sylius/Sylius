@@ -83,6 +83,42 @@ final class UriBasedSectionProviderTest extends TestCase
         $this->assertSame($section, $this->uriBasedSectionProvider->getSection());
     }
 
+    public function testPassesThePathInfoDecodedToTheResolvers(): void
+    {
+        $request = $this->createMock(Request::class);
+        $section = $this->createMock(SectionInterface::class);
+
+        $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn($request);
+        $request->expects($this->once())->method('getPathInfo')->willReturn('/api/v%32/shop/orders');
+
+        $this->firstSectionResolver
+            ->expects($this->once())
+            ->method('getSection')
+            ->with('/api/v2/shop/orders')
+            ->willReturn($section)
+        ;
+
+        $this->assertSame($section, $this->uriBasedSectionProvider->getSection());
+    }
+
+    public function testDecodesThePathInfoExactlyOnceJustAsTheRouterDoes(): void
+    {
+        $request = $this->createMock(Request::class);
+        $section = $this->createMock(SectionInterface::class);
+
+        $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn($request);
+        $request->expects($this->once())->method('getPathInfo')->willReturn('/api/v%2532/shop/orders');
+
+        $this->firstSectionResolver
+            ->expects($this->once())
+            ->method('getSection')
+            ->with('/api/v%32/shop/orders')
+            ->willReturn($section)
+        ;
+
+        $this->assertSame($section, $this->uriBasedSectionProvider->getSection());
+    }
+
     public function testReturnNullIfMasterRequestHasNotBeenResolved(): void
     {
         $this->requestStack->expects($this->once())->method('getMainRequest')->willReturn(null);
