@@ -1,3 +1,12 @@
+# UPGRADE FROM `2.1.16` TO `2.1.17`
+
+### Payment request creation validates the payment method
+
+`POST /api/v2/shop/orders/{tokenValue}/payment-requests` now answers `422 Unprocessable Entity` with a violation on
+`paymentMethodCode` when the method is disabled, not assigned to the order's channel or otherwise not available for
+the payment, the same way `PATCH /api/v2/shop/orders/{tokenValue}/payments/{paymentId}` already does. Previously any
+existing payment method code was accepted.
+
 # UPGRADE FROM `2.1.15` TO `2.1.16`
 
 ## Security
