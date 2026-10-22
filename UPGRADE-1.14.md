@@ -42,8 +42,12 @@ e-mail leads nowhere. Before updating, do at least one of the following (both ar
 `framework.trusted_proxies` is not a substitute. It tells Symfony which `X-Forwarded-*` headers to trust and does not
 validate the host; adding `x-forwarded-host` to `trusted_headers` without `trusted_hosts` makes the problem worse.
 
-Stores whose channels all have a hostname need no change. Note that without a request, for example in a console
-command or a Messenger worker, the function now also returns the path alone when the channel has no hostname.
+If every channel in your store has a hostname, nothing changes for you.
+
+If a channel has no hostname, the link can only be built from the current HTTP request. Where there is no request,
+for example in a console command or a Messenger worker that renders e-mails, the function now returns a relative path
+(before this fix it used `framework.router.default_uri`). `trusted_hosts` does not help there. If you render e-mails
+outside a request, set the hostname on the channel.
 
 **Changes in `Sylius\Bundle\CoreBundle\Twig\ChannelUrlExtension`:**
 
