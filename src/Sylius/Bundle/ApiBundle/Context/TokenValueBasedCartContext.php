@@ -59,7 +59,7 @@ final readonly class TokenValueBasedCartContext implements CartContextInterface
 
     private function checkApiRequest(Request $request): void
     {
-        if (!str_contains($request->getRequestUri(), $this->newApiRoute)) {
+        if (!str_contains(rawurldecode($request->getPathInfo()), $this->newApiRoute)) {
             throw new CartNotFoundException('The main request is not an API request.');
         }
     }
