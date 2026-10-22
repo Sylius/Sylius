@@ -49,6 +49,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.context.channel'),
             service('url_helper'),
             '%sylius.unsecured_urls%',
+            service('request_stack'),
         ])
         ->private()
         ->tag('twig.extension')
