@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -39,6 +40,23 @@ final class ProductReviewsTest extends JsonApiTestCase
             'shop/product_review/get_product_review',
             Response::HTTP_OK,
         );
+    }
+
+    #[Test]
+    #[DataProvider('nonAcceptedReviewProvider')]
+    public function it_does_not_get_a_non_accepted_product_review(string $fixtureKey): void
+    {
+        $fixtures = $this->loadFixturesFromFile('product/product_review.yaml');
+        /** @var ReviewInterface $review */
+        $review = $fixtures[$fixtureKey];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/product-reviews/%s', $review->getId()),
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
     #[Test]
@@ -168,5 +186,11 @@ final class ProductReviewsTest extends JsonApiTestCase
             'shop/product_review/create_product_review_with_missing_fields',
             Response::HTTP_UNPROCESSABLE_ENTITY,
         );
+    }
+
+    public static function nonAcceptedReviewProvider(): iterable
+    {
+        yield 'new review' => ['new_review'];
+        yield 'rejected review' => ['rejected_review'];
     }
 }
