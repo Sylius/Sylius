@@ -40,17 +40,17 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusCoreBundle extends AbstractResourceBundle
 {
-    public const VERSION = '2.1.17';
+    public const VERSION = '2.1.18-DEV';
 
-    public const VERSION_ID = '20117';
+    public const VERSION_ID = '20118';
 
     public const MAJOR_VERSION = '2';
 
     public const MINOR_VERSION = '1';
 
-    public const RELEASE_VERSION = '17';
+    public const RELEASE_VERSION = '18';
 
-    public const EXTRA_VERSION = '';
+    public const EXTRA_VERSION = 'DEV';
 
     /** @return string[] */
     public function getSupportedDrivers(): array
