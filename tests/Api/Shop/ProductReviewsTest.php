@@ -40,6 +40,26 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
+    /**
+     * @test
+     *
+     * @dataProvider getNonAcceptedReviewFixtureKeys
+     */
+    public function it_does_not_get_a_non_accepted_product_review(string $fixtureKey): void
+    {
+        $fixtures = $this->loadFixturesFromFile('product/product_review.yaml');
+        /** @var ReviewInterface $review */
+        $review = $fixtures[$fixtureKey];
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/shop/product-reviews/%s', $review->getId()),
+            server: self::CONTENT_TYPE_HEADER,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
+    }
+
     /** @test */
     public function it_gets_product_reviews(): void
     {
@@ -171,5 +191,11 @@ final class ProductReviewsTest extends JsonApiTestCase
             'shop/product_review/create_product_review_with_missing_fields',
             Response::HTTP_BAD_REQUEST,
         );
+    }
+
+    public function getNonAcceptedReviewFixtureKeys(): iterable
+    {
+        yield 'new review' => ['new_review'];
+        yield 'rejected review' => ['rejected_review'];
     }
 }
