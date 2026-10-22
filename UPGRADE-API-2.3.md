@@ -1,3 +1,12 @@
+# UPGRADE FROM `2.3.1` TO `2.3.2`
+
+### Unaccepted product reviews are no longer exposed by the item endpoint
+
+`GET /api/v2/shop/product-reviews/{id}` now answers `404 Not Found` for a review whose status is not `accepted`,
+matching the collection endpoint, which already filtered such reviews out. The
+`sylius_api.doctrine.orm.query_extension.shop.product_review.accepted` service is additionally tagged
+`api_platform.doctrine.orm.query_extension.item`.
+
 # UPGRADE FROM `2.2` TO `2.3`
 
 ## New Endpoints
