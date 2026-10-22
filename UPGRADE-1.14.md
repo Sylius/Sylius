@@ -1,3 +1,65 @@
+# UPGRADE FROM `v1.14.20` TO `v1.14.21`
+
+This is a **security release**. Updating is strongly recommended.
+
+## Security fixes
+
+### [Shop] Host header injection in the e-mail links of a channel without a hostname (High)
+
+The link in the shop password-reset e-mail is built by the `sylius_channel_url` Twig function
+(`Sylius\Bundle\CoreBundle\Twig\ChannelUrlExtension`) from the channel's configured `hostname`. When that field was
+empty, the function fell back to the scheme and host of the incoming request. Triggering the e-mail requires nothing
+but the customer's e-mail address and a single unauthenticated request to `/{_locale}/forgotten-password` or
+`POST /api/v2/shop/customers/reset-password`, so on a single-channel store whose channel has no hostname an attacker
+could make the link point at a domain of their choosing with a spoofed `Host` header, and capture the reset token when
+the customer clicked it.
+
+This corrects the statement in the `v1.14.20` notes below that the shop-side password reset was never affected: it is
+safe only when the channel has a hostname.
+
+The request host is now used only when `framework.trusted_hosts` is configured, because Symfony then rejects any
+request whose `Host` does not match before Sylius runs. Otherwise, when the channel has no hostname, the function
+returns the path alone.
+
+**Action required if any of your channels has no hostname.** On such a store, without `trusted_hosts`, every link in
+every e-mail becomes a relative path after this update, the password-reset button included, and a relative link in an
+e-mail leads nowhere. Before updating, do at least one of the following (both are recommended):
+
+1. Set the hostname on each channel: **Configuration > Channels**, edit the channel, fill in **Hostname**
+   (for example `shop.example.com`) and save.
+2. Configure trusted hosts with a strict pattern for your domain(s). A permissive pattern such as `.*` satisfies the
+   check but restores the vulnerable behaviour:
+
+   ```yaml
+   # config/packages/framework.yaml
+   framework:
+       trusted_hosts: ['^shop\.example\.com$']
+   ```
+
+   The same setting is available without touching `config/`: `SYMFONY_TRUSTED_HOSTS='^shop\.example\.com$'` in
+   `.env.local`. Clear the cache afterwards.
+
+`framework.trusted_proxies` is not a substitute. It tells Symfony which `X-Forwarded-*` headers to trust and does not
+validate the host; adding `x-forwarded-host` to `trusted_headers` without `trusted_hosts` makes the problem worse.
+
+Stores whose channels all have a hostname need no change. Note that without a request, for example in a console
+command or a Messenger worker, the function now also returns the path alone when the channel has no hostname.
+
+**Changes in `Sylius\Bundle\CoreBundle\Twig\ChannelUrlExtension`:**
+
+```diff
+ public function __construct(
+     ChannelContextInterface $channelContext,
+     UrlHelper $urlHelper,
+     bool $unsecuredUrls = false,
++    ?RequestStack $requestStack = null,
+ )
+```
+
+The `sylius.twig.extension.channel_url` service now passes `request_stack` as the fourth argument. If you have
+overwritten that service or its arguments, add the argument, otherwise the extension cannot see the request and returns
+relative paths whenever the channel has no hostname.
+
 # UPGRADE FROM `v1.14.19` TO `v1.14.20`
 
 This is a **security release**. Updating is strongly recommended.
