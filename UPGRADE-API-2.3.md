@@ -1,5 +1,12 @@
 # UPGRADE FROM `2.3.1` TO `2.3.2`
 
+### Payment request creation validates the payment method
+
+`POST /api/v2/shop/orders/{tokenValue}/payment-requests` now answers `422 Unprocessable Entity` with a violation on
+`paymentMethodCode` when the method is disabled, not assigned to the order's channel or otherwise not available for
+the payment, the same way `PATCH /api/v2/shop/orders/{tokenValue}/payments/{paymentId}` already does. Previously any
+existing payment method code was accepted.
+
 ### Unaccepted product reviews are no longer exposed by the item endpoint
 
 `GET /api/v2/shop/product-reviews/{id}` now answers `404 Not Found` for a review whose status is not `accepted`,
