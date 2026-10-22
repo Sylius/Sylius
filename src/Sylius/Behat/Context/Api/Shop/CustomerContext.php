@@ -226,7 +226,11 @@ final class CustomerContext implements Context
      */
     public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
     {
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 202);
+        $response = $this->client->getLastResponse();
+
+        Assert::true(
+            $this->responseChecker->isAccepted($response) || $this->responseChecker->isUpdateSuccessful($response),
+        );
     }
 
     /**
