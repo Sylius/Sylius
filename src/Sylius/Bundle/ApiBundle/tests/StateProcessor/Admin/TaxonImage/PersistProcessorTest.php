@@ -24,6 +24,7 @@ use Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor;
 use Sylius\Component\Core\Model\TaxonImageInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
@@ -32,6 +33,8 @@ final class PersistProcessorTest extends TestCase
 
     private ImageCreatorInterface&MockObject $taxonImageCreator;
 
+    private MockObject&ValidatorInterface $validator;
+
     private PersistProcessor $persistProcessor;
 
     protected function setUp(): void
@@ -39,7 +42,8 @@ final class PersistProcessorTest extends TestCase
         parent::setUp();
         $this->processor = $this->createMock(ProcessorInterface::class);
         $this->taxonImageCreator = $this->createMock(ImageCreatorInterface::class);
-        $this->persistProcessor = new PersistProcessor($this->processor, $this->taxonImageCreator);
+        $this->validator = $this->createMock(ValidatorInterface::class);
+        $this->persistProcessor = new PersistProcessor($this->processor, $this->taxonImageCreator, $this->validator);
     }
 
     public function testImplementsProcessorInterface(): void

@@ -16,8 +16,10 @@ namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
+use ApiPlatform\Validator\Exception\ValidationException;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\TaxonImageInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
 /** @implements ProcessorInterface<TaxonImageInterface> */
@@ -26,6 +28,7 @@ final readonly class PersistProcessor implements ProcessorInterface
     public function __construct(
         private ProcessorInterface $processor,
         private ImageCreatorInterface $taxonImageCreator,
+        private ValidatorInterface $validator,
     ) {
     }
 
@@ -38,6 +41,11 @@ final readonly class PersistProcessor implements ProcessorInterface
             $context['request']->files->get('file'),
             $context['request']->request->get('type'),
         );
+
+        $violations = $this->validator->validate($image, null, $operation->getValidationContext()['groups'] ?? []);
+        if (0 !== \count($violations)) {
+            throw new ValidationException($violations);
+        }
 
         return $this->processor->process($image, $operation, $uriVariables, $context);
     }

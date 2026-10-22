@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
@@ -34,6 +35,8 @@ final class PersistProcessorTest extends TestCase
 
     private AvatarImageRepositoryInterface&MockObject $avatarImageRepository;
 
+    private MockObject&ValidatorInterface $validator;
+
     private PersistProcessor $persistProcessor;
 
     protected function setUp(): void
@@ -42,10 +45,12 @@ final class PersistProcessorTest extends TestCase
         $this->processor = $this->createMock(ProcessorInterface::class);
         $this->avatarImageCreator = $this->createMock(ImageCreatorInterface::class);
         $this->avatarImageRepository = $this->createMock(AvatarImageRepositoryInterface::class);
+        $this->validator = $this->createMock(ValidatorInterface::class);
         $this->persistProcessor = new PersistProcessor(
             $this->processor,
             $this->avatarImageCreator,
             $this->avatarImageRepository,
+            $this->validator,
         );
     }
 
@@ -54,7 +59,7 @@ final class PersistProcessorTest extends TestCase
         /** @var AvatarImageInterface|MockObject $avatarImageMock */
         $avatarImageMock = $this->createMock(AvatarImageInterface::class);
 
-        $operation = new Post();
+        $operation = new Post(class: AvatarImageInterface::class);
 
         $request = new Request(attributes: ['id' => '1']);
 
@@ -83,7 +88,7 @@ final class PersistProcessorTest extends TestCase
         /** @var AvatarImageInterface|MockObject $avatarImageMock */
         $avatarImageMock = $this->createMock(AvatarImageInterface::class);
 
-        $operation = new Post();
+        $operation = new Post(class: AvatarImageInterface::class);
 
         $request = new Request(attributes: ['id' => '1']);
 
