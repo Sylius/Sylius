@@ -319,3 +319,30 @@ sylius_twig_hooks:
             add_image:
                 template: '@SyliusAdmin/product/form/sections/media/add_image.html.twig'
                 priority: 0
+
+        'sylius_admin.product.update.content.form.sections.media.images':
+            image:
+                template: '@SyliusAdmin/product/form/sections/media/images/image.html.twig'
+                priority: 0
+
+        'sylius_admin.product.update.content.form.sections.media.images.image#left':
+            picture:
+                template: '@SyliusAdmin/product/form/sections/media/images/image/picture.html.twig'
+                priority: 100
+            button_delete:
+                template: '@SyliusAdmin/product/form/sections/media/images/image/button_delete.html.twig'
+                priority: 0
+
+        'sylius_admin.product.update.content.form.sections.media.images.image#right':
+            type:
+                template: '@SyliusAdmin/product/form/sections/media/images/image/type.html.twig'
+                priority: 300
+            product_variants:
+                template: '@SyliusAdmin/product/form/sections/media/images/image/product_variants.html.twig'
+                priority: 200
+            file:
+                template: '@SyliusAdmin/product/form/sections/media/images/image/file.html.twig'
+                priority: 100
+            position:
+                template: '@SyliusAdmin/product/form/sections/media/images/image/position.html.twig'
+                priority: 0
