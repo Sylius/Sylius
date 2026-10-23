@@ -100,6 +100,13 @@ final class ProductTest extends TestCase
         $this->assertSame(Product::VARIANT_SELECTION_MATCH, $this->product->getVariantSelectionMethod());
     }
 
+    public function testShouldTreatOptionsMatchingVariantSelectionMethodWithoutOptionsAsChoice(): void
+    {
+        $this->product->setVariantSelectionMethod(Product::VARIANT_SELECTION_MATCH);
+
+        $this->assertTrue($this->product->isVariantSelectionMethodChoice());
+    }
+
     public function testShouldThrowExceptionIfAnyOtherValueIsGivenAsVariantSelectionMethod(): void
     {
         $this->expectException(\InvalidArgumentException::class);
