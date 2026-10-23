@@ -25,7 +25,7 @@ interface ChannelPriceHistoryConfigInterface extends ResourceInterface
 
     public function getLowestPriceForDiscountedProductsCheckingPeriod(): int;
 
-    public function setLowestPriceForDiscountedProductsCheckingPeriod(int $periodInDays): void;
+    public function setLowestPriceForDiscountedProductsCheckingPeriod(?int $periodInDays): void;
 
     public function getTaxonsExcludedFromShowingLowestPrice(): Collection;
 
