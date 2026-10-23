@@ -18,6 +18,12 @@
         "webpackMode": "lazy",
         "fetch": "lazy",
         "enabled": true
+      },
+      "product-added-to-cart-modal": {
+        "main": "controllers/ProductAddedToCartModalController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
       }
     }
   },
