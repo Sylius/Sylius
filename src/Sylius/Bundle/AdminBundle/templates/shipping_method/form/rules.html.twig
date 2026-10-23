@@ -1,3 +1,8 @@
+{% set form = hookable_metadata.context.form %}
+
+{# Set custom form theme for live collection #}
+{% form_theme form '@SyliusAdmin/shipping_method/form_theme.html.twig' %}
+
 <div class="card mb-3" {{ sylius_test_html_attribute('rules') }}>
     <div class="card-header">
         <div class="card-title">
@@ -18,3 +23,6 @@
         {{ form_row(hookable_metadata.context.form.rules.vars.button_add) }}
     </div>
 </div>
+
+{# Reset with the default form theme #}
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
