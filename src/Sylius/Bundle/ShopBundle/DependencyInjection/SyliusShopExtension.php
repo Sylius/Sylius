@@ -46,6 +46,8 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
             }
         }
 
+        $container->setParameter('sylius_shop.locale_regex', $config['locale_regex']);
+
         $container->setParameter('sylius_shop.firewall_context_name', $config['firewall_context_name']);
         $container->setParameter(
             'sylius_shop.product_grid.include_all_descendants',
@@ -57,6 +59,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
 
     public function prepend(ContainerBuilder $container): void
     {
+        $this->prependResourceMapping($container);
         $this->prependSyliusThemeBundle($container);
     }
 
@@ -74,6 +77,7 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
                 new Reference('sylius.router.checkout_state'),
                 new Definition(PathRequestMatcher::class, [$config['pattern']]),
                 new Reference('sylius_abstraction.state_machine'),
+                new Reference('sylius.resource_metadata_operation.initiator.http_operation'),
             ],
         );
         $checkoutResolverDefinition->addTag('kernel.event_subscriber');
@@ -140,5 +144,15 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
         $container->setParameter('sylius_shop.order_pay.final_route_parameters', $config['final_route_parameters']);
         $container->setParameter('sylius_shop.order_pay.retry_route', $config['retry_route']);
         $container->setParameter('sylius_shop.order_pay.retry_route_parameters', $config['retry_route_parameters']);
+    }
+
+    private function prependResourceMapping(ContainerBuilder $container): void
+    {
+        /** @var array<string, array<string, string>> $metadata */
+        $metadata = $container->getParameter('kernel.bundles_metadata');
+
+        $path = $metadata['SyliusShopBundle']['path'] . '/Resources/config/app/sylius/resources';
+
+        $container->prependExtensionConfig('sylius_resource', ['mapping' => ['imports' => [$path]]]);
     }
 }

@@ -36,8 +36,11 @@ use Webmozart\Assert\Assert;
 
 class UserController extends ResourceController
 {
+    /** @deprecated This method is deprecated and will be removed in Sylius 3.0 */
     public function changePasswordAction(Request $request): Response
     {
+        trigger_deprecation('sylius/user-bundle', '2.3', '"%s" method is deprecated and will be removed in Sylius 3.0', __METHOD__);
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         if (!$this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -64,16 +67,22 @@ class UserController extends ResourceController
         ));
     }
 
+    /** @deprecated This method is deprecated and will be removed in Sylius 3.0 */
     public function requestPasswordResetTokenAction(Request $request): Response
     {
+        trigger_deprecation('sylius/user-bundle', '2.3', '"%s" method is deprecated and will be removed in Sylius 3.0', __METHOD__);
+
         /** @var GeneratorInterface $generator */
         $generator = $this->container->get(sprintf('sylius.%s.token_generator.password_reset', $this->metadata->getName()));
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
+    /** @deprecated This method is deprecated and will be removed in Sylius 3.0 */
     public function resetPasswordAction(Request $request, string $token): Response
     {
+        trigger_deprecation('sylius/user-bundle', '2.3', '"%s" method is deprecated and will be removed in Sylius 3.0', __METHOD__);
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         /** @var UserInterface|null $user */
         $user = $this->repository->findOneBy(['passwordResetToken' => $token]);

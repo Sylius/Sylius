@@ -9,4 +9,5 @@ sylius_admin_exchange_rate:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ExchangeRateType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_exchange_rate')"
     type: sylius.resource

@@ -9,11 +9,13 @@ sylius_admin_payment_method:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\PaymentMethodType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_payment_method')"
     type: sylius.resource
 
 sylius_admin_payment_method_create:
     path: /payment-methods/new/{factory}
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_payment_method')"
     defaults:
         _controller: sylius.controller.payment_method::createAction
         _sylius:

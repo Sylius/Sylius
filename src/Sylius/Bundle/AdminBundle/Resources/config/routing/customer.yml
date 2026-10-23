@@ -9,11 +9,13 @@ sylius_admin_customer:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\CustomerType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_customer')"
     type: sylius.resource
 
 sylius_admin_customer_show:
     path: /customers/{id}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_customer')"
     defaults:
         _controller: sylius.controller.customer::showAction
         _sylius:
@@ -24,6 +26,7 @@ sylius_admin_customer_show:
 sylius_admin_customer_order_index:
     path: /customers/{id}/orders
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order')"
     defaults:
         _controller: sylius.controller.order::indexAction
         _sylius:

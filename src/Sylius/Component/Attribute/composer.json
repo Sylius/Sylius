@@ -28,7 +28,7 @@
         "php": "^8.3",
         "doctrine/collections": "^2.6",
         "sylius/registry": "^1.6",
-        "sylius/resource": "^1.14.2",
+        "sylius/resource": "^1.15@dev",
         "symfony/validator": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {

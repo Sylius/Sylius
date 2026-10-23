@@ -6,11 +6,13 @@ sylius_admin_payment:
         only: ['index']
         grid: sylius_admin_payment
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_payment')"
     type: sylius.resource
 
 sylius_admin_payment_complete:
     path: /payments/{id}/complete
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_payment')"
     defaults:
         _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
