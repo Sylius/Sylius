@@ -101,6 +101,9 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "24.x"
 
+            -   name: Validate database schema
+                run: bin/console doctrine:schema:validate --skip-mapping
+
             -   name: Fix permissions for Symfony logs directory
                 run: |
                     LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
