@@ -717,6 +717,17 @@ final readonly class OrderContext implements Context
     }
 
     /**
+     * @Given /^(this order) has been partially refunded$/
+     * @Given the customer has partially refunded the order with number :order
+     */
+    public function thisOrderHasBeenPartiallyRefunded(OrderInterface $order): void
+    {
+        $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PARTIALLY_REFUND);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^the customer cancelled (this order)$/
      * @Given /^(this order) was cancelled$/
      * @Given the order :order was cancelled
