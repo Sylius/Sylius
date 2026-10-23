@@ -18,6 +18,9 @@ use Sylius\Bundle\ShopBundle\Twig\Component\Product\AddToCartFormComponent;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\AssociationComponent;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\BreadcrumbComponent;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\CardComponent;
+use Sylius\Bundle\ShopBundle\Twig\Component\Product\Grid\StringFilterComponent;
+use Sylius\Bundle\ShopBundle\Twig\Component\Product\Grid\TaxonFilterComponent;
+use Sylius\Bundle\ShopBundle\Twig\Component\Product\GridComponent;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\ListComponent;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\PriceComponent;
 use Sylius\Bundle\ShopBundle\Twig\Component\Product\SummaryComponent;
@@ -110,5 +113,44 @@ return static function (ContainerConfigurator $container) {
         ->tag('sylius.twig_component', ['key' => 'sylius_shop:product:show:breadcrumbs'])
         ->tag('sylius.twig_component', ['key' => 'sylius_shop:product:show:taxonomy'])
         ->tag('sylius.twig_component', ['key' => 'sylius_shop:product:show:header'])
+    ;
+
+    $services
+        ->set('sylius_shop.twig.component.product.grid', GridComponent::class)
+        ->args([
+            service('sylius.context.channel'),
+            service('sylius.context.locale'),
+            service('sylius.repository.taxon'),
+            '%sylius_shop.product_grid.include_all_descendants%',
+        ])
+        ->call('setGridProvider', [service('sylius.grid.provider')])
+        ->call('setGridViewFactory', [service('sylius.grid.view_factory')])
+        ->call('setLiveResponder', [service('ux.live_component.live_responder')])
+        ->tag('sylius.live_component.shop', [
+            'key' => 'sylius_shop:product:grid',
+            'template' => '@SyliusShop/product/live_index/content/grid.html.twig',
+        ])
+    ;
+
+    $services
+        ->set('sylius_shop.twig.component.product.grid.filter.string', StringFilterComponent::class)
+        ->call('setFormFactory', [service('form.factory')])
+        ->call('setFilterFormTypeRegistry', [service('sylius.form_registry.grid_filter')])
+        ->call('setLiveResponder', [service('ux.live_component.live_responder')])
+        ->tag('sylius.live_component.shop', [
+            'key' => 'sylius_shop:product:grid:filter:string',
+            'template' => '@SyliusShop/grid/filter/live/component/string.html.twig',
+        ])
+    ;
+
+    $services
+        ->set('sylius_shop.twig.component.product.grid.filter.taxon', TaxonFilterComponent::class)
+        ->call('setFormFactory', [service('form.factory')])
+        ->call('setFilterFormTypeRegistry', [service('sylius.form_registry.grid_filter')])
+        ->call('setLiveResponder', [service('ux.live_component.live_responder')])
+        ->tag('sylius.live_component.shop', [
+            'key' => 'sylius_shop:product:grid:filter:taxon',
+            'template' => '@SyliusShop/grid/filter/live/component/taxon.html.twig',
+        ])
     ;
 };

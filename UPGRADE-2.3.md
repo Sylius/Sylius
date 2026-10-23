@@ -1004,6 +1004,43 @@ For a complete overview of the Grid component, see the [Grid documentation](http
 
    The existing pre-flush events (`CART_ITEM_ADD`, `CART_ITEM_REMOVE`, `CART_CHANGE`, `CART_CLEAR`) remain unchanged.
 
+2. An experimental live product list has been added to the shop. It is **disabled by default**, so nothing changes
+   until you enable it:
+
+   ```yaml
+   sylius_shop:
+       product_grid:
+           live: true
+   ```
+
+   When enabled:
+
+   - the product list is rendered by the `sylius_shop:product:grid` live component, built on top of the existing
+     `sylius_shop_product` grid. Filters, search, sorting, limit and pagination are applied without reloading the page,
+     while being kept in the URL query string (`criteria`, `sorting`, `limit` and `page`, as for regular grids);
+   - the `sylius_shop_product` grid is adapted to the live component by the
+     `Sylius\Bundle\ShopBundle\Grid\Mutator\LiveProductGridMutator` grid mutator: it switches the repository method
+     to `createShopListQueryBuilderForChannel()` and adds the live `search` and `taxon` filters. Customize the grid
+     with your own grid mutators (`#[AsGridMutator(grid: 'sylius_shop_product')]`);
+   - a new `sylius_shop_product_list` route (`/{_locale}/products`) lists the products from all taxons;
+   - the `/{_locale}/taxons/{slug}` URL is handled by the new `sylius_shop_product_live_index` route
+     (a route condition makes it take precedence over `sylius_shop_product_index`, which is still used to generate URLs);
+   - a new `shop_taxon` grid filter (`Sylius\Bundle\ShopBundle\Grid\Filter\TaxonFilter`) allows filtering products on
+     several taxons at once (children of the channel menu taxon by default, configurable with the `parent` form option).
+     Several `shop_taxon` filters can be combined on the same grid (e.g. "Collection" and "Product type");
+   - filters with the `hidden_within_taxon` option are removed (and their criteria ignored) on taxon pages,
+     this is the case of the `taxon` filter added by the `LiveProductGridMutator`;
+   - the page is built with the new `sylius_shop.product.live_index` hooks.
+
+   This feature requires the live grid components and the grid mutators of `sylius/grid-bundle`
+   (`Sylius\Component\Grid\Twig\Component\ComponentWithGridTrait`, `ComponentWithFilterTrait` and `AsGridMutator`).
+
+   The new `createShopListQueryBuilderForChannel()` method has been added to
+   `Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository`, it is the same as `createShopListQueryBuilder()`
+   with an optional taxon. It will be added to `Sylius\Component\Core\Repository\ProductRepositoryInterface`
+   in Sylius 3.0. If you enable the live product list with a custom product repository that does not extend
+   the Sylius one, you have to implement this method.
+
 ## Deprecations
 
 1. Not passing `ComparisonOperatorMatcherInterface` to the following classes is deprecated since Sylius 2.3 and will no longer be supported in Sylius 3.0:

@@ -1,0 +1,6 @@
+{# Renders a "shop_taxon" filter of a live grid #}
+{{ component('sylius_shop:product:grid:filter:taxon', {
+    form,
+    filter,
+    criteria: grid.parameters.get('criteria', []),
+}) }}

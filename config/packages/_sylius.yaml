@@ -17,3 +17,4 @@ sylius_api:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+        live: true

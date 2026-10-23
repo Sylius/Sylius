@@ -29,6 +29,7 @@
     "require": {
         "php": "^8.3",
         "sylius/core-bundle": "^2.0",
+        "sylius/grid-bundle": "dev-live-grids as 1.16.99",
         "sylius/payum-bundle": "^2.0",
         "sylius/twig-hooks": "^0.12 || ^0.14",
         "sylius/ui-bundle": "^2.0",
