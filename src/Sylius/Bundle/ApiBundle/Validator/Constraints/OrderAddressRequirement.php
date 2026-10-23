@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderAddressRequirement extends Constraint
 {
+    public const ADDRESS_REQUIRED_ERROR = 'ADDRESS_REQUIRED';
+
     /**
      * @param array<string, mixed>|null $options
      */

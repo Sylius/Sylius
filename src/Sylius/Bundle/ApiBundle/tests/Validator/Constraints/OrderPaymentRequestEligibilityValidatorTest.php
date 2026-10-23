@@ -27,6 +27,7 @@ use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
 {
@@ -79,7 +80,7 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
 
         $this->orderPaymentRequestEligibilityCheckerMock->expects($this->never())->method('isEligible');
 
-        $this->executionContextMock->expects($this->never())->method('addViolation');
+        $this->executionContextMock->expects($this->never())->method('buildViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
@@ -103,7 +104,7 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->with($orderMock)
             ->willReturn(true);
 
-        $this->executionContextMock->expects($this->never())->method('addViolation');
+        $this->executionContextMock->expects($this->never())->method('buildViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
@@ -127,10 +128,18 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->with($orderMock)
             ->willReturn(false);
 
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $this->executionContextMock
             ->expects($this->once())
-            ->method('addViolation')
-            ->with('sylius.payment_request.invalid_order_checkout_state');
+            ->method('buildViolation')
+            ->with('sylius.payment_request.invalid_order_checkout_state')
+            ->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock
+            ->expects($this->once())
+            ->method('setCode')
+            ->with(OrderPaymentRequestEligibility::INVALID_ORDER_CHECKOUT_STATE_ERROR)
+            ->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects($this->once())->method('addViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
@@ -147,7 +156,7 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
 
         $this->orderPaymentRequestEligibilityCheckerMock->expects($this->never())->method('isEligible');
 
-        $this->executionContextMock->expects($this->never())->method('addViolation');
+        $this->executionContextMock->expects($this->never())->method('buildViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
@@ -172,7 +181,7 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
 
         $this->orderPaymentRequestEligibilityCheckerMock->expects($this->never())->method('isEligible');
 
-        $this->executionContextMock->expects($this->never())->method('addViolation');
+        $this->executionContextMock->expects($this->never())->method('buildViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
@@ -204,7 +213,7 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->with($orderMock)
             ->willReturn(true);
 
-        $this->executionContextMock->expects($this->never())->method('addViolation');
+        $this->executionContextMock->expects($this->never())->method('buildViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }
@@ -236,10 +245,18 @@ final class OrderPaymentRequestEligibilityValidatorTest extends TestCase
             ->with($orderMock)
             ->willReturn(false);
 
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $this->executionContextMock
             ->expects($this->once())
-            ->method('addViolation')
-            ->with('sylius.payment_request.invalid_order_checkout_state');
+            ->method('buildViolation')
+            ->with('sylius.payment_request.invalid_order_checkout_state')
+            ->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock
+            ->expects($this->once())
+            ->method('setCode')
+            ->with(OrderPaymentRequestEligibility::INVALID_ORDER_CHECKOUT_STATE_ERROR)
+            ->willReturn($constraintViolationBuilderMock);
+        $constraintViolationBuilderMock->expects($this->once())->method('addViolation');
 
         $this->validator->validate($command, new OrderPaymentRequestEligibility());
     }

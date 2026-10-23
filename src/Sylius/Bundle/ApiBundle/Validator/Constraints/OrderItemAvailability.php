@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderItemAvailability extends Constraint
 {
+    public const INSUFFICIENT_STOCK_ERROR = 'INSUFFICIENT_STOCK';
+
     /**
      * @param array<string, mixed>|null $options
      */
