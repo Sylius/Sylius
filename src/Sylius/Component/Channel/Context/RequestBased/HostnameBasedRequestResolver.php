@@ -27,7 +27,8 @@ final class HostnameBasedRequestResolver implements RequestResolverInterface
 
     public function findChannel(Request $request): ?ChannelInterface
     {
-        $hostname = $request->getHost();
+        // A fully qualified domain name may end with a dot (RFC 1034), e.g. "example.com."
+        $hostname = rtrim($request->getHost(), '.');
 
         $channel = $this->channelRepository->findOneEnabledByHostname($hostname);
 
