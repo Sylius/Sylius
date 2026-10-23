@@ -73,7 +73,14 @@ class OrderItemUnit implements OrderItemUnitInterface
 
         $this->adjustments->add($adjustment);
         $this->addToAdjustmentsTotal($adjustment);
-        $this->orderItem->recalculateUnitsTotal();
+        // @patch
+        if ($this->orderItem instanceof ManipulateTotalInterface) {
+            if (!$adjustment->isNeutral()) {
+                $this->orderItem->increaseTotal($adjustment->getAmount());
+            }
+        } else {
+            $this->orderItem->recalculateUnitsTotal();
+        }
         $adjustment->setAdjustable($this);
         $this->recalculateAdjustmentsTotal();
     }
@@ -86,7 +93,14 @@ class OrderItemUnit implements OrderItemUnitInterface
 
         $this->adjustments->removeElement($adjustment);
         $this->subtractFromAdjustmentsTotal($adjustment);
-        $this->orderItem->recalculateUnitsTotal();
+        // @patch
+        if ($this->orderItem instanceof ManipulateTotalInterface) {
+            if (!$adjustment->isNeutral()) {
+                $this->orderItem->decreaseTotal($adjustment->getAmount());
+            }
+        } else {
+            $this->orderItem->recalculateUnitsTotal();
+        }
         $adjustment->setAdjustable(null);
         $this->recalculateAdjustmentsTotal();
     }

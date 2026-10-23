@@ -16,7 +16,7 @@ namespace Sylius\Component\Order\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class OrderItem implements OrderItemInterface
+class OrderItem implements OrderItemInterface, ManipulateTotalInterface
 {
     /** @var mixed */
     protected $id;
@@ -288,6 +288,40 @@ class OrderItem implements OrderItemInterface
         $this->removeAdjustments($type);
         foreach ($this->units as $unit) {
             $unit->removeAdjustments($type);
+        }
+    }
+
+    /**
+     * @internal
+     */
+    public function increaseTotal(int $amount): void
+    {
+        $this->unitsTotal += $amount;
+        $this->total += $amount;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
+
+        if ($this->order instanceof ManipulateTotalInterface) {
+            $this->order->increaseTotal($amount);
+        }
+    }
+
+    /**
+     * @internal
+     */
+    public function decreaseTotal(int $amount): void
+    {
+        $this->unitsTotal -= $amount;
+        $this->total -= $amount;
+
+        if ($this->total < 0) {
+            $this->total = 0;
+        }
+
+        if ($this->order instanceof ManipulateTotalInterface) {
+            $this->order->decreaseTotal($amount);
         }
     }
 
