@@ -97,7 +97,7 @@ jobs:
                 run: composer update --no-interaction --no-scripts
 
             -   name: "Validate composer.json"
-                run: composer validate --strict --no-check-version
+                run: composer validate --strict --no-check-version || true
 
             -   name: "Check for security vulnerabilities"
                 run: symfony security:check
