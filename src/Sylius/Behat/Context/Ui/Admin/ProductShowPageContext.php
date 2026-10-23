@@ -224,6 +224,26 @@ final readonly class ProductShowPageContext implements Context
     }
 
     /**
+     * @Then I should see a pricing row without a price for the :channel channel
+     */
+    public function iShouldSeePricingRowWithoutPriceForChannel(ChannelInterface $channel): void
+    {
+        $pricingRow = $this->pricingElement->getSimpleProductPricingRowForChannel($channel->getCode());
+
+        Assert::null($pricingRow->find('css', '[data-test-price]'));
+    }
+
+    /**
+     * @Then I should see a pricing row without a price for the :variant variant in the :channel channel
+     */
+    public function iShouldSeePricingRowWithoutPriceForVariantInChannel(ProductVariantInterface $variant, ChannelInterface $channel): void
+    {
+        $pricingRow = $this->pricingElement->getVariantPricingRowForChannel($variant->getCode(), $channel->getCode());
+
+        Assert::null($pricingRow->find('css', '[data-test-price]'));
+    }
+
+    /**
      * @Then I should see original price :price for channel :channel
      */
     public function iShouldSeeOriginalPriceForChannel(string $originalPrice, ChannelInterface $channel): void
