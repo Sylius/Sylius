@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.order.class%"
                     repository:
-                        method: createCriteriaAwareSearchListQueryBuilder
+                        method: createCriteriaAwareGridListQueryBuilder
                         arguments:
                             criteria: $criteria
             sorting:
