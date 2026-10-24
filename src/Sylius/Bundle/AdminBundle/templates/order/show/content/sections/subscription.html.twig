@@ -1,0 +1,12 @@
+{% embed '@SyliusAdmin/shared/plus_placeholder.html.twig' with { utm_campaign: 'subscriptions-placeholder' } %}
+    {% block content %}
+        <div class="card-header">
+            <div class="card-title">
+                {{ 'sylius.ui.plus_placeholder.subscriptions.subscriptions'|trans }}
+            </div>
+        </div>
+        <div class="card-body text-secondary">
+            {{ 'sylius.ui.plus_placeholder.subscriptions.no_subscriptions'|trans }}
+        </div>
+    {% endblock %}
+{% endembed %}

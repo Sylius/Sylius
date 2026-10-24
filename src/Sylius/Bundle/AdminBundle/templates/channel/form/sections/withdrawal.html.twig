@@ -1,0 +1,29 @@
+{% embed '@SyliusAdmin/shared/plus_placeholder.html.twig' with { utm_campaign: 'returns-placeholder', class: 'g-col-12 g-col-xl-6 card mb-3' } %}
+    {% block content %}
+        <div class="card-header">
+            <div class="card-title">{{ 'sylius.ui.plus_placeholder.returns.withdrawal'|trans }}</div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="plus_placeholder_withdrawal_enabled" disabled>
+                            <label class="form-check-label" for="plus_placeholder_withdrawal_enabled">
+                                {{ 'sylius.ui.plus_placeholder.returns.withdrawal_enabled'|trans }}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label" for="plus_placeholder_withdrawal_period_days">
+                            {{ 'sylius.ui.plus_placeholder.returns.withdrawal_period_days'|trans }}
+                        </label>
+                        <input type="number" class="form-control" id="plus_placeholder_withdrawal_period_days" placeholder="14" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endembed %}
