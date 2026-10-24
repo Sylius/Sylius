@@ -19,6 +19,7 @@ use Sylius\Bundle\ShopBundle\DependencyInjection\SyliusShopExtension;
 use Sylius\Bundle\ShopBundle\Locale\StorageBasedLocaleSwitcher;
 use Sylius\Bundle\ShopBundle\Locale\UrlBasedLocaleSwitcher;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
+use Symfony\WebpackEncoreBundle\DependencyInjection\WebpackEncoreExtension;
 
 final class SyliusShopExtensionTest extends AbstractExtensionTestCase
 {
@@ -152,6 +153,48 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
         $syliusThemeConfig = $this->container->getExtensionConfig('sylius_theme')[0];
 
         $this->assertSame('sylius_shop.theme.context.channel_based', $syliusThemeConfig['context']);
+    }
+
+    #[Test]
+    public function it_prepends_webpack_encore_build_for_shop_themes_assets(): void
+    {
+        $this->container->registerExtension(new WebpackEncoreExtension());
+
+        (new SyliusShopExtension())->prepend($this->container);
+
+        $webpackEncoreConfig = $this->container->getExtensionConfig('webpack_encore')[0];
+
+        $this->assertSame(
+            ['shop.themes' => '%kernel.project_dir%/public/build/themes/shop'],
+            $webpackEncoreConfig['builds'],
+        );
+    }
+
+    #[Test]
+    public function it_enables_webpack_encore_integration_of_sylius_theme_bundle(): void
+    {
+        $this->container->registerExtension(new SyliusThemeExtension());
+        $this->container->registerExtension(new WebpackEncoreExtension());
+
+        (new SyliusShopExtension())->prepend($this->container);
+
+        $this->assertContains(
+            ['webpack_encore' => ['enabled' => true]],
+            $this->container->getExtensionConfig('sylius_theme'),
+        );
+    }
+
+    #[Test]
+    public function it_does_not_enable_webpack_encore_integration_of_sylius_theme_bundle_without_webpack_encore_bundle(): void
+    {
+        $this->container->registerExtension(new SyliusThemeExtension());
+
+        (new SyliusShopExtension())->prepend($this->container);
+
+        $this->assertNotContains(
+            ['webpack_encore' => ['enabled' => true]],
+            $this->container->getExtensionConfig('sylius_theme'),
+        );
     }
 
     protected function getContainerExtensions(): array
