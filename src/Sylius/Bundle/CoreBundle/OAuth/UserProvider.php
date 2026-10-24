@@ -17,6 +17,9 @@ use Doctrine\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use Sylius\Bundle\CoreBundle\OAuth\Checker\EmailVerificationCheckerInterface;
+use Sylius\Bundle\CoreBundle\OAuth\Checker\ResponseDataEmailVerificationChecker;
+use Sylius\Bundle\CoreBundle\OAuth\Exception\UnverifiedEmailException;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
@@ -35,6 +38,8 @@ use Webmozart\Assert\Assert;
  */
 class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
+    private EmailVerificationCheckerInterface $emailVerificationChecker;
+
     /**
      * @param FactoryInterface<CustomerInterface> $customerFactory
      * @param FactoryInterface<SyliusUserInterface> $userFactory
@@ -51,8 +56,11 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         private ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer,
         private CustomerRepositoryInterface $customerRepository,
+        ?EmailVerificationCheckerInterface $emailVerificationChecker = null,
     ) {
         parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
+
+        $this->emailVerificationChecker = $emailVerificationChecker ?? new ResponseDataEmailVerificationChecker();
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response): SymfonyUserInterface
@@ -69,21 +77,32 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
             return $user;
         }
 
-        if (null !== $response->getEmail()) {
-            $user = $this->userRepository->findOneByEmail($response->getEmail());
-            if ($user instanceof SymfonyUserInterface) {
-                return $this->updateUserByOAuthUserResponse($user, $response);
-            }
-
-            return $this->createUserByOAuthUserResponse($response);
+        if (null === $email = $response->getEmail()) {
+            throw new UserNotFoundException('Email is null or not provided');
         }
 
-        throw new UserNotFoundException('Email is null or not provided');
+        $user = $this->userRepository->findOneByEmail($this->canonicalizer->canonicalize($email));
+        if ($user instanceof SymfonyUserInterface) {
+            $this->assertEmailIsVerified($response);
+
+            return $this->updateUserByOAuthUserResponse($user, $response);
+        }
+
+        return $this->createUserByOAuthUserResponse($response);
     }
 
     public function connect(SymfonyUserInterface $user, UserResponseInterface $response): void
     {
         $this->updateUserByOAuthUserResponse($user, $response);
+    }
+
+    private function assertEmailIsVerified(UserResponseInterface $response): void
+    {
+        if ($this->emailVerificationChecker->isEmailVerified($response)) {
+            return;
+        }
+
+        throw new UnverifiedEmailException($response->getResourceOwner()->getName());
     }
 
     /**
