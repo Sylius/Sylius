@@ -8,7 +8,7 @@ permissions:
 jobs:
     start:
         name: Start Environment
-        uses: bunnyshell/workflows/.github/workflows/start-env.yaml@v2
+        uses: bunnyshell/workflows/.github/workflows/start-env.yaml@eb12a4d9154db124044f2d155e2495bf295b18c7 # v2.2.0
         with:
             project-id: ${{ vars.BUNNYSHELL_PROJECT_ID }}
             pr-number: ${{ github.event.issue.number }}
