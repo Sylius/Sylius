@@ -44,6 +44,6 @@ final class UriBasedSectionProvider implements SectionProviderInterface
             }
         }
 
-        return null;
+        throw new SectionCannotBeResolvedException(sprintf('Section cannot be resolved for URI "%s".', $uri));
     }
 }
