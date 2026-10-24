@@ -43,6 +43,7 @@ final class PaymentRequestActionAwareContextBuilderTest extends TestCase
         $this->paymentRequestActionAwareContextBuilder = new PaymentRequestActionAwareContextBuilder(
             $this->iriToIdentifierConverterMock,
             $this->decoratedContextBuilderMock,
+            null,
             PaymentRequestActionAware::class,
             PaymentRequestActionAware::DEFAULT_ARGUMENT_NAME,
             $this->defaultActionProviderMock,

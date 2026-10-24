@@ -18,21 +18,26 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Context\Api\NormalizedKeyAwareTrait;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request as HTTPRequest;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class PaymentRequestContext implements Context
 {
+    use NormalizedKeyAwareTrait;
+
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private ApiClientInterface $client,
         private ResponseCheckerInterface $responseChecker,
         private RequestFactoryInterface $requestFactory,
         private PaymentRequestRepositoryInterface $paymentRequestRepository,
+        private ?NameConverterInterface $nameConverter,
     ) {
     }
 
@@ -85,8 +90,8 @@ final readonly class PaymentRequestContext implements Context
         );
 
         $request->setContent([
-            'paymentId' => $payment['id'],
-            'paymentMethodCode' => $payment['method'],
+            'paymentId' => $payment[$this->getNormalizedKey('id')],
+            'paymentMethodCode' => $payment[$this->getNormalizedKey('method')],
             'payload' => $payload,
         ]);
 
@@ -112,7 +117,7 @@ final readonly class PaymentRequestContext implements Context
         $orderToken = $this->sharedStorage->get('cart_token');
         $order = $this->client->show(Resources::ORDERS, $orderToken);
         $payments = $this->responseChecker->getValue($order, 'payments');
-        $paymentId = end($payments)['id'];
+        $paymentId = end($payments)[$this->getNormalizedKey('id')];
         $paymentRequest = $this->paymentRequestRepository->findOneBy(['payment' => $paymentId, 'action' => $action]);
 
         return $paymentRequest ? $this->requestFactory->custom('/api/v2/shop/payment-requests/' . $paymentRequest->getHash(), HttpRequest::METHOD_GET, [], $this->client->getToken()) : null;

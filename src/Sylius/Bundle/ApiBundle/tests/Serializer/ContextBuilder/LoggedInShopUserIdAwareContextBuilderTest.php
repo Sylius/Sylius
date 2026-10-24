@@ -39,6 +39,7 @@ final class LoggedInShopUserIdAwareContextBuilderTest extends TestCase
         $this->userContext = $this->createMock(UserContextInterface::class);
         $this->loggedInShopUserIdAwareContextBuilder = new LoggedInShopUserIdAwareContextBuilder(
             $this->decoratedContextBuilder,
+            null,
             ShopUserIdAware::class,
             'shopUserId',
             $this->userContext,

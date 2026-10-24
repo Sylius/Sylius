@@ -16,16 +16,18 @@ namespace Sylius\Bundle\ApiBundle\Serializer\ContextBuilder;
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\State\SerializerContextBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 
 final class UriVariablesAwareContextBuilder extends AbstractInputContextBuilder
 {
     public function __construct(
         SerializerContextBuilderInterface $decoratedContextBuilder,
+        ?NameConverterInterface $nameConverter,
         string $attributeClass,
         string $defaultConstructorArgumentName,
         private readonly string $objectInterface,
     ) {
-        parent::__construct($decoratedContextBuilder, $attributeClass, $defaultConstructorArgumentName);
+        parent::__construct($decoratedContextBuilder, $nameConverter, $attributeClass, $defaultConstructorArgumentName);
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool

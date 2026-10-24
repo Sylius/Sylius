@@ -41,6 +41,7 @@ final class LoggedInCustomerEmailAwareContextBuilderTest extends TestCase
         $this->userContext = $this->createMock(UserContextInterface::class);
         $this->loggedInCustomerEmailAwareContextBuilder = new LoggedInCustomerEmailAwareContextBuilder(
             $this->decoratedContextBuilder,
+            null,
             LoggedInCustomerEmailAware::class,
             'email',
             $this->userContext,

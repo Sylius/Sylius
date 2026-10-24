@@ -42,6 +42,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
         $this->decoratedContextBuilder = $this->createMock(SerializerContextBuilderInterface::class);
         $this->uriVariablesAwareContextBuilder = new UriVariablesAwareContextBuilder(
             $this->decoratedContextBuilder,
+            null,
             ShipmentIdAware::class,
             'shipmentId',
             ShipmentInterface::class,
@@ -163,6 +164,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
         $this->uriVariablesAwareContextBuilder = new UriVariablesAwareContextBuilder(
             $this->decoratedContextBuilder,
+            null,
             OrderTokenValueAware::class,
             'orderTokenValue',
             OrderInterface::class,
@@ -197,6 +199,7 @@ final class UriVariablesAwareContextBuilderTest extends TestCase
 
         $this->uriVariablesAwareContextBuilder = new UriVariablesAwareContextBuilder(
             $this->decoratedContextBuilder,
+            null,
             OrderItemIdAware::class,
             'orderItemId',
             OrderItemInterface::class,
