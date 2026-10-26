@@ -24,6 +24,7 @@ use Sylius\Bundle\CoreBundle\Attribute\AsOrdersTotalsProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsProductVariantMapProvider;
 use Sylius\Bundle\CoreBundle\Attribute\AsTaxCalculationStrategy;
 use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
+use Sylius\Bundle\CoreBundle\Routing\LocalizedRoutesLoader;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use Symfony\Component\Config\FileLocator;
@@ -31,6 +32,7 @@ use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Kernel;
 
 final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
@@ -82,6 +84,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.checkout.payment.allowed_states', $config['checkout']['payment']['allowed_states']);
         $container->setParameter('sylius_core.grids_configuration', $config['grid']);
 
+        $this->configureLocalizedRoutesIfNeeded($config['localized_routes'], $container);
+
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
         if (str_starts_with($env, 'test')) {
@@ -129,6 +133,20 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     protected function getNamespacesOfMigrationsExecutedBefore(): array
     {
         return [];
+    }
+
+    /**
+     * @param array<string, array<string, string>> $localizedRoutes
+     */
+    private function configureLocalizedRoutesIfNeeded(array $localizedRoutes, ContainerBuilder $container): void
+    {
+        if ([] === $localizedRoutes) {
+            return;
+        }
+
+        $container->register('sylius_core.routing.loader.localized_routes', LocalizedRoutesLoader::class)
+            ->setDecoratedService('routing.loader')
+            ->setArguments([new Reference('.inner'), $localizedRoutes]);
     }
 
     private function prependDefaultDriver(ContainerBuilder $container, string $driver): void

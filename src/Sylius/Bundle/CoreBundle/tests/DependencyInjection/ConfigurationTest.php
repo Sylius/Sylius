@@ -280,6 +280,25 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    #[Test]
+    public function it_localizes_a_route_with_one_path_per_locale(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['localized_routes' => ['sylius_shop_login' => ['en_US' => '/{_locale}/login', 'fr_FR' => '/{_locale}/connexion']]]],
+            ['localized_routes' => ['sylius_shop_login' => ['en_US' => '/{_locale}/login', 'fr_FR' => '/{_locale}/connexion']]],
+            'localized_routes',
+        );
+    }
+
+    #[Test]
+    public function its_localized_routes_require_at_least_one_path(): void
+    {
+        $this->assertConfigurationIsInvalid(
+            [['localized_routes' => ['sylius_shop_login' => []]]],
+            'The path "sylius_core.localized_routes.sylius_shop_login" should have at least 1 element(s) defined.',
+        );
+    }
+
     protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();
