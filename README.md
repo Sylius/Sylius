@@ -22,6 +22,14 @@ Enjoy being an eCommerce Developer again!
 
 Follow the [Getting started with Sylius tutorial](https://docs.sylius.com/getting-started-with-sylius/choosing-sylius-when-and-why)!
 
+🚀 One-Click Deploy
+------------------
+
+Sylius is available as a ready-made template at these hosting providers:
+
+<a href="https://repocloud.io/details/Sylius/"><img src="https://d16t0pc4846x52.cloudfront.net/deploylobe.svg" alt="Deploy on RepoCloud" height="42"></a>
+<a href="https://railway.com/deploy/sylius"><img src="https://railway.com/button.svg" alt="Deploy on Railway" height="42"></a>
+
 📖 Documentation
 ----------------
  
