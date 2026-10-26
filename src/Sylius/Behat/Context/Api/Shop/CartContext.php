@@ -630,7 +630,7 @@ final class CartContext implements Context
     {
         Assert::same(
             $this->responseChecker->getError($this->shopClient->getLastResponse()),
-            'Cannot change cart items after the checkout is completed."',
+            'Cannot change cart items after the checkout is completed.',
         );
         Assert::same($this->shopClient->getLastResponse()->getStatusCode(), 422);
     }
