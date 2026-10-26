@@ -3,6 +3,8 @@
 
 sylius:
     gateway_config:
+        config:
+            forbidden_value: "Cette valeur n'est pas autorisée dans la configuration de la passerelle."
         invalid_gateway_factory: Usine de passerelle invalide. Les usines disponibles sont {{ available_factories }}.
         gateway_name:
             not_blank: Veuillez entrer le nom de la passerelle.

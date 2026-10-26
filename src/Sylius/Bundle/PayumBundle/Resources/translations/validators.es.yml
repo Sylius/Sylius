@@ -3,6 +3,8 @@
 
 sylius:
     gateway_config:
+        config:
+            forbidden_value: Este valor no está permitido en la configuración de la pasarela.
         paypal:
             password:
                 not_blank: Por favor, introduzca su contraseña de API de PayPal.

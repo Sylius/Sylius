@@ -82,6 +82,12 @@
                     </value>
                 </option>
             </constraint>
+
+            <constraint name="Sylius\Bundle\PayumBundle\Validator\Constraints\SafeGatewayConfigValues">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>
