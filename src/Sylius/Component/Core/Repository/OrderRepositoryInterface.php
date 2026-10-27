@@ -129,4 +129,9 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findOneWithCompletedCheckout(string $tokenValue): ?OrderInterface;
 
     public function countNewByChannel(ChannelInterface $channel): int;
+
+    /**
+     * @param OrderInterface[] $orders
+     */
+    public function preloadAdjustments(array $orders): void;
 }

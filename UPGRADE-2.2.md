@@ -1,3 +1,17 @@
+# UPGRADE FROM `2.2.12` TO `2.2.13`
+
+### [API] Admin order list preloads adjustments
+
+`GET /api/v2/admin/orders` no longer lazy-loads adjustments once per order, item, and unit while computing `taxTotal` and `shippingTaxTotal`.
+
+**Changes in `Sylius\Component\Core\Repository\OrderRepositoryInterface`:**
+
+```php
+public function preloadAdjustments(array $orders): void;
+```
+
+A custom class implementing this interface must add this method. It can be empty when the persistence layer does not lazy-load associations. The default implementation is `Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository`.
+
 # UPGRADE FROM `2.2.11` TO `2.2.12`
 
 This is a **security release**. Updating is strongly recommended.

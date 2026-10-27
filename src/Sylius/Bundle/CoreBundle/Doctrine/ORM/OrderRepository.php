@@ -565,6 +565,29 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('endDate', $endDate);
     }
 
+    /**
+     * @param OrderInterface[] $orders
+     */
+    public function preloadAdjustments(array $orders): void
+    {
+        if ([] === $orders) {
+            return;
+        }
+
+        $this->createQueryBuilder('o')
+            ->addSelect('adjustment', 'item', 'itemAdjustment', 'unit', 'unitAdjustment')
+            ->leftJoin('o.adjustments', 'adjustment')
+            ->leftJoin('o.items', 'item')
+            ->leftJoin('item.adjustments', 'itemAdjustment')
+            ->leftJoin('item.units', 'unit')
+            ->leftJoin('unit.adjustments', 'unitAdjustment')
+            ->andWhere('o IN (:orders)')
+            ->setParameter('orders', $orders)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function countNewByChannel(ChannelInterface $channel): int
     {
         return $this->createQueryBuilder('o')
