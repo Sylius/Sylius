@@ -28,3 +28,12 @@ Feature: Applying promotion coupon with an expiration date
         When I check the details of my cart
         Then my cart total should be "$100.00"
         And there should be no discount applied
+
+    @api @no-ui
+    Scenario: Being notified that the coupon has expired
+        Given this coupon has already expired
+        And I added product "PHP T-Shirt" to the cart
+        When I use coupon with code "SANTA2016"
+        Then I should be notified that the coupon has expired
+        And my cart total should be "$100.00"
+        And there should be no discount applied
