@@ -1,0 +1,34 @@
+{% set product = hookable_metadata.context.resource %}
+
+{% if product.isSimple %}
+    <div class="tab-pane" id="product-subscription" role="tabpanel" tabindex="0">
+        {% embed '@SyliusAdmin/shared/plus_placeholder.html.twig' with { utm_campaign: 'subscriptions-placeholder' } %}
+            {% block content %}
+                <div class="card-header">
+                    <h2 class="card-title">{{ 'sylius.ui.plus_placeholder.subscriptions.subscription'|trans }}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-check">
+                            <input type="checkbox" class="form-check-input" disabled />
+                            <span class="form-check-label">{{ 'sylius.ui.plus_placeholder.subscriptions.subscription_enabled'|trans }}</span>
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="plus_placeholder_subscription_interval_count">{{ 'sylius.ui.plus_placeholder.subscriptions.interval'|trans }}</label>
+                        <div class="row g-2">
+                            <div class="col-auto">
+                                <input type="number" id="plus_placeholder_subscription_interval_count" class="form-control" placeholder="1" disabled />
+                            </div>
+                            <div class="col">
+                                <select class="form-select" aria-label="{{ 'sylius.ui.plus_placeholder.subscriptions.interval'|trans }}" disabled>
+                                    <option>{{ 'sylius.ui.plus_placeholder.subscriptions.select_interval'|trans }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endif %}
