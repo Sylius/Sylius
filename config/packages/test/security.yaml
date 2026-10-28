@@ -1,3 +1,15 @@
 security:
     password_hashers:
         Sylius\Component\User\Model\UserInterface: plaintext
+
+    firewalls:
+        shop:
+            entry_point: form_login
+            oauth:
+                resource_owners:
+                    google: /login/check-google
+                login_path: sylius_shop_login
+                use_forward: false
+                failure_path: sylius_shop_login
+                oauth_user_provider:
+                    service: sylius.oauth.user_provider
