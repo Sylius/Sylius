@@ -306,4 +306,9 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
         return $product;
     }
+
+    public function hydrateReviews(array $products): void
+    {
+        $this->associationHydrator->hydrateAssociations($products, ['reviews']);
+    }
 }

@@ -18,7 +18,12 @@
 >
     <resource class="%sylius.model.product.class%">
         <operations>
-            <operation name="sylius_api_shop_product_get_collection" class="ApiPlatform\Metadata\GetCollection" uriTemplate="/shop/products">
+            <operation
+                name="sylius_api_shop_product_get_collection"
+                class="ApiPlatform\Metadata\GetCollection"
+                uriTemplate="/shop/products"
+                provider="sylius_api.state_provider.shop.product.collection"
+            >
                 <normalizationContext>
                     <values>
                         <value name="groups">
