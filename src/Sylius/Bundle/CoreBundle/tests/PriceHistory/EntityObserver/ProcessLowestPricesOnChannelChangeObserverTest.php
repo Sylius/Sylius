@@ -114,4 +114,29 @@ final class ProcessLowestPricesOnChannelChangeObserverTest extends TestCase
         $nonChannelEntity = $this->createMock(OrderInterface::class);
         $this->observer->onChange($nonChannelEntity);
     }
+
+    public function testClearsProcessedChannelEvenWhenCommandDispatcherThrows(): void
+    {
+        $config = $this->createMock(ChannelPriceHistoryConfigInterface::class);
+        $config->method('getId')->willReturn(null);
+
+        $channel = $this->createMock(ChannelInterface::class);
+        $channel->method('getCode')->willReturn('test');
+        $channel->method('getChannelPriceHistoryConfig')->willReturn($config);
+
+        $this->commandDispatcher
+            ->expects($this->once())
+            ->method('applyWithinChannel')
+            ->with($channel)
+            ->willThrowException(new \RuntimeException('Dispatcher failure'))
+        ;
+
+        try {
+            $this->observer->onChange($channel);
+            $this->fail('Expected RuntimeException was not thrown.');
+        } catch (\RuntimeException) {
+        }
+
+        $this->assertTrue($this->observer->supports($channel));
+    }
 }

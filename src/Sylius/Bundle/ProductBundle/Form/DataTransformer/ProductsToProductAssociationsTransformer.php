@@ -22,9 +22,10 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductsToProductAssociationsTransformer implements DataTransformerInterface
+final class ProductsToProductAssociationsTransformer implements DataTransformerInterface, ResetInterface
 {
     /** @var Collection<array-key, ProductAssociationInterface> */
     private ?Collection $productAssociations = null;
@@ -140,5 +141,10 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
     private function setProductAssociations(?Collection $productAssociations): void
     {
         $this->productAssociations = $productAssociations;
+    }
+
+    public function reset(): void
+    {
+        $this->productAssociations = null;
     }
 }

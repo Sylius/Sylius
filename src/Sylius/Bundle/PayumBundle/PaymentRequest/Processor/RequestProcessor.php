@@ -37,8 +37,12 @@ final readonly class RequestProcessor implements RequestProcessorInterface
         $gateway = $this->payum->getGateway($gatewayName);
 
         $this->payumApiContext->enable($paymentRequest);
-        $reply = $gateway->execute($request, true);
-        $this->payumApiContext->disable();
+
+        try {
+            $reply = $gateway->execute($request, true);
+        } finally {
+            $this->payumApiContext->disable();
+        }
 
         if (null !== $reply) {
             return;

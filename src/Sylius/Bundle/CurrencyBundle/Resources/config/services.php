@@ -35,6 +35,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.converter.currency', CurrencyConverter::class)
         ->args([service('sylius.repository.exchange_rate')])
+        ->tag('kernel.reset', ['method' => 'reset'])
     ;
     $services->alias(CurrencyConverterInterface::class, 'sylius.converter.currency');
 

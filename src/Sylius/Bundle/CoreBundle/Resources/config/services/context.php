@@ -36,6 +36,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.context.channel.cached.inner'),
             service('request_stack'),
         ])
+        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services
