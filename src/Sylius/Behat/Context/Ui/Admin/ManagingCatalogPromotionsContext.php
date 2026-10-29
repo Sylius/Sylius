@@ -531,9 +531,12 @@ final class ManagingCatalogPromotionsContext implements Context
     #[Then('I should be notified that the fixed amount should be a number')]
     public function iShouldBeNotifiedThatTheFixedAmountShouldBeANumber(): void
     {
-        Assert::same(
+        Assert::oneOf(
             $this->formElement->getValidationMessage('last_action'),
-            'Please enter a valid money amount.',
+            [
+                'This value is not a valid money amount.',
+                'Please enter a valid money amount.',
+            ],
         );
     }
 

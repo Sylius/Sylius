@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
@@ -21,6 +20,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
@@ -68,7 +68,7 @@ final readonly class OrderContext implements Context
             [],
             $this->shopClient->getToken(),
         );
-        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromResource($paymentMethod)]);
+        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'shop')]);
 
         $this->shopClient->executeCustomRequest($request);
     }
@@ -260,7 +260,7 @@ final readonly class OrderContext implements Context
             ->getValue($this->shopClient->show(Resources::ORDERS, $this->sharedStorage->get('cart_token')), 'payments')[0]
         ;
 
-        Assert::same($this->iriConverter->getIriFromResource($paymentMethod), $payment['method']);
+        Assert::same($this->iriConverter->getIriFromResourceInSection($paymentMethod, 'shop'), $payment['method']);
     }
 
     #[Then('I should not be able to see that order')]
