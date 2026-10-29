@@ -79,7 +79,6 @@ final class ProductLowestPriceBeforeDiscountProcessor implements ProductLowestPr
     ): ?int {
         $loggedAt = new \DateTimeImmutable($latestLogEntry->getLoggedAt()->format('Y-m-d H:i:s'));
 
-        /** @var \DateTimeInterface $startDate */
         $startDate = $loggedAt->sub(new \DateInterval(sprintf('P%sD', $lowestPriceForDiscountedProductsCheckingPeriod)));
 
         return $this
