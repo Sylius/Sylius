@@ -10,6 +10,7 @@ sylius_twig_hooks:
                 component: 'sylius_admin:grid'
                 props:
                     resourceAlias: '@=_context.metadata.getAlias()'
+                    gridName: '@=_context.resources.getDefinition().getCode()'
                 condition: "@=_context.has('live_grid') and _context.live_grid"
                 priority: 100
 

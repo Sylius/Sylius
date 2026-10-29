@@ -262,8 +262,7 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius_admin.twig.component.grid', GridComponent::class)
         ->args([
             service('sylius.resource_registry'),
-            service('sylius.resource_controller.request_configuration_factory'),
-            service('sylius.grid.resource_view_factory'),
+            service('sylius.grid.contextual_view_factory'),
             service('request_stack'),
             service('form.factory'),
             service('sylius.form_registry.grid_filter'),

@@ -14,21 +14,19 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Twig\Component\Shared;
 
 use Pagerfanta\PagerfantaInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
-use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
-use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactoryInterface;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\Symfony\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Grid\Twig\Component\ComponentWithGridTrait;
+use Sylius\Resource\Grid\View\ContextualGridView;
+use Sylius\Resource\Grid\View\Factory\ContextualGridViewFactoryInterface;
+use Sylius\Resource\Grid\View\GridContext;
 use Sylius\Resource\Metadata\MetadataInterface;
 use Sylius\Resource\Metadata\RegistryInterface;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -40,10 +38,10 @@ use Symfony\UX\TwigComponent\Attribute\PostMount;
 /**
  * Generic live grid of the admin index pages.
  *
- * The resource controller builds the grid from the current request (route attributes, "_sylius" options...),
- * which is not available anymore during live re-renders. The route of the index page is therefore kept
- * and "replayed" to build the same request configuration, so that the grid expressions ("$id", "expr:...")
- * and the action templates (relying on "grid.requestConfiguration") keep working.
+ * The resource controller builds the grid from the current request, which is not available anymore during
+ * live re-renders. The grid is therefore built from a grid context: the route parameters of the index page
+ * are kept as its variables, so that the grid expressions ("$productId", "resource.id"...) keep working,
+ * and the action templates guess their routes with "grid.gridContext.routeName(...)".
  *
  * @experimental
  */
@@ -54,42 +52,42 @@ class GridComponent
     use HookableLiveComponentTrait;
     use TemplatePropTrait;
 
+    /** Same default as RequestConfiguration::getPaginationMaxPerPage() */
+    private const DEFAULT_MAX_PER_PAGE = 10;
+
     #[LiveProp]
     public string $resourceAlias;
 
     #[LiveProp]
-    public ?string $routeName = null;
+    public string $gridName;
 
-    /** @var array<string, mixed> */
     #[LiveProp]
-    public array $routeParameters = [];
+    public string $section = 'admin';
 
-    private ?RequestConfiguration $requestConfiguration = null;
+    /**
+     * The route parameters of the index page (e.g. "productId"), used as the grid context variables.
+     *
+     * @var array<string, mixed>|null
+     */
+    #[LiveProp]
+    public ?array $routeParameters = null;
 
-    private ?ResourceGridView $resourceGridView = null;
+    private ?ContextualGridView $gridView = null;
 
     public function __construct(
         protected readonly RegistryInterface $metadataRegistry,
-        protected readonly RequestConfigurationFactoryInterface $requestConfigurationFactory,
-        protected readonly ResourceGridViewFactoryInterface $resourceGridViewFactory,
+        protected readonly ContextualGridViewFactoryInterface $contextualGridViewFactory,
         protected readonly RequestStack $requestStack,
         protected readonly FormFactoryInterface $formFactory,
         protected readonly FormTypeRegistryInterface $filterFormTypeRegistry,
     ) {
     }
 
-    /** Keeps the route of the index page, to replay it during live re-renders. */
+    /** Keeps the route parameters of the index page, as they are not available anymore during live re-renders. */
     #[PostMount]
-    public function captureRoute(): void
+    public function captureRouteParameters(): void
     {
-        if (null !== $this->routeName) {
-            return;
-        }
-
-        $request = $this->getCurrentRequest();
-
-        $this->routeName = $request->attributes->get('_route');
-        $this->routeParameters = $request->attributes->all('_route_params');
+        $this->routeParameters ??= $this->requestStack->getCurrentRequest()?->attributes->all('_route_params') ?? [];
     }
 
     /**
@@ -104,31 +102,28 @@ class GridComponent
         $this->criteria = array_replace_recursive($this->getEmptyCriteria(), $this->criteria ?? []);
     }
 
-    public function getGridView(): ResourceGridView
+    public function getGridView(): ContextualGridView
     {
         // The grid is exposed several times per render (filters, data table, no results...), build it only once
-        if (null !== $this->resourceGridView) {
-            return $this->resourceGridView;
+        if (null !== $this->gridView) {
+            return $this->gridView;
         }
 
-        $requestConfiguration = $this->getRequestConfiguration();
-
-        $gridView = $this->resourceGridViewFactory->create(
+        $gridView = $this->contextualGridViewFactory->create(
             $this->getGridDefinition(),
             new Parameters($this->getGridConfig()),
-            $this->getMetadata(),
-            $requestConfiguration,
+            new GridContext(metadata: $this->getMetadata(), section: $this->section, variables: $this->routeParameters ?? []),
         );
 
         // Same pagination as the ResourcesCollectionProvider of the resource controller
         $data = $gridView->getData();
         if ($data instanceof PagerfantaInterface) {
-            $data->setMaxPerPage($this->resolveMaxPerPage($gridView->getDefinition()->getLimits(), $requestConfiguration));
+            $data->setMaxPerPage($this->resolveMaxPerPage($gridView->getDefinition()->getLimits()));
             $data->setCurrentPage(max(1, $this->page ?? 1));
             $data->getCurrentPageResults();
         }
 
-        return $this->resourceGridView = $gridView;
+        return $this->gridView = $gridView;
     }
 
     #[ExposeInTemplate('metadata')]
@@ -160,23 +155,7 @@ class GridComponent
 
     protected function getGridName(): string
     {
-        return (string) $this->getRequestConfiguration()->getGrid();
-    }
-
-    private function getRequestConfiguration(): RequestConfiguration
-    {
-        if (null !== $this->requestConfiguration) {
-            return $this->requestConfiguration;
-        }
-
-        // Replays the index page route, with the grid parameters as query parameters
-        $attributes = array_merge($this->routeParameters, [
-            '_route' => $this->routeName,
-            '_route_params' => $this->routeParameters,
-        ]);
-        $request = $this->getCurrentRequest()->duplicate($this->getGridConfig(), [], $attributes);
-
-        return $this->requestConfiguration = $this->requestConfigurationFactory->create($this->getMetadata(), $request);
+        return $this->gridName;
     }
 
     /** @return array<string, mixed> */
@@ -227,10 +206,10 @@ class GridComponent
     }
 
     /** @param int[] $gridLimits */
-    private function resolveMaxPerPage(array $gridLimits, RequestConfiguration $requestConfiguration): int
+    private function resolveMaxPerPage(array $gridLimits): int
     {
         if (null === $this->limit) {
-            return reset($gridLimits) ?: $requestConfiguration->getPaginationMaxPerPage();
+            return reset($gridLimits) ?: self::DEFAULT_MAX_PER_PAGE;
         }
 
         if ([] !== $gridLimits) {
@@ -238,10 +217,5 @@ class GridComponent
         }
 
         return $this->limit;
-    }
-
-    private function getCurrentRequest(): Request
-    {
-        return $this->requestStack->getCurrentRequest() ?? throw new \LogicException('The admin live grid can only be rendered within a request.');
     }
 }

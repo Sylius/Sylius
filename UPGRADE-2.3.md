@@ -1056,6 +1056,11 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    the `live_grid` hook context flag switches the `filters` and `data_table` hookables of the
    `sylius_admin.common.index.content.grid` hook to their `live_filters` and `live_data_table` versions.
 
+   The grid action templates (admin and shop) now guess their default routes with `grid.gridContext.routeName('update')`
+   instead of `grid.requestConfiguration.getRouteName('update')`, so they also work with the grid views built without
+   any request configuration (live grids, metadata-based routing). `grid.requestConfiguration` is still available on the
+   regular (non-live) grids, so overridden action templates keep working there.
+
 ## Deprecations
 
 1. Not passing `ComparisonOperatorMatcherInterface` to the following classes is deprecated since Sylius 2.3 and will no longer be supported in Sylius 3.0:
