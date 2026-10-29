@@ -1041,6 +1041,21 @@ For a complete overview of the Grid component, see the [Grid documentation](http
    in Sylius 3.0. If you enable the live product list with a custom product repository that does not extend
    the Sylius one, you have to implement this method.
 
+3. Experimental live grids have been added to the admin. They are **disabled by default**, so nothing changes
+   until you enable them:
+
+   ```yaml
+   sylius_admin:
+       grid:
+           live: true
+   ```
+
+   When enabled, the grids of the index pages are rendered by the `sylius_admin:grid` live component
+   (`Sylius\Bundle\AdminBundle\Twig\Component\Shared\GridComponent`): filters, sorting, limit and pagination
+   are applied without reloading the page, while being kept in the URL query string. The hook names are unchanged,
+   the `live_grid` hook context flag switches the `filters` and `data_table` hookables of the
+   `sylius_admin.common.index.content.grid` hook to their `live_filters` and `live_data_table` versions.
+
 ## Deprecations
 
 1. Not passing `ComparisonOperatorMatcherInterface` to the following classes is deprecated since Sylius 2.3 and will no longer be supported in Sylius 3.0:
