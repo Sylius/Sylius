@@ -549,7 +549,7 @@ final class CheckoutContext implements Context
         $payments = $this->responseChecker->getValue($response, 'payments');
 
         Assert::notEmpty($payments, 'No payments found in response.');
-        $paymentMethodIri = $this->iriConverter->getIriFromResource($paymentMethod);
+        $paymentMethodIri = $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'shop');
         foreach ($payments as $payment) {
             if ($payment['method'] !== $paymentMethodIri) {
                 continue;

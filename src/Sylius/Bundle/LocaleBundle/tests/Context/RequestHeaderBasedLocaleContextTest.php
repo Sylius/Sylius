@@ -99,6 +99,33 @@ final class RequestHeaderBasedLocaleContextTest extends TestCase
         $this->requestHeaderBasedLocaleContext->getLocaleCode();
     }
 
+    public function testResetsCachedAvailableLocalesBetweenRequests(): void
+    {
+        $firstRequest = new Request();
+        $firstRequest->headers->set('Accept-Language', 'pl_PL,en_US;q=0.8');
+
+        $secondRequest = new Request();
+        $secondRequest->headers->set('Accept-Language', 'pl_PL,en_US;q=0.8');
+
+        $this->requestStack->expects(self::exactly(2))
+            ->method('getMainRequest')
+            ->willReturnOnConsecutiveCalls($firstRequest, $secondRequest);
+
+        $this->localeProvider->expects(self::exactly(2))
+            ->method('getDefaultLocaleCode')
+            ->willReturnOnConsecutiveCalls('en_US', 'pl_PL');
+
+        $this->localeProvider->expects(self::exactly(2))
+            ->method('getAvailableLocalesCodes')
+            ->willReturnOnConsecutiveCalls(['en_US'], ['pl_PL']);
+
+        self::assertSame('en_US', $this->requestHeaderBasedLocaleContext->getLocaleCode());
+
+        $this->requestHeaderBasedLocaleContext->reset();
+
+        self::assertSame('pl_PL', $this->requestHeaderBasedLocaleContext->getLocaleCode());
+    }
+
     /** @return iterable<string, array{acceptLanguage: string, default: string, availableLocales: list<string>, expected: string}> */
     public static function provideResolvingCases(): iterable
     {

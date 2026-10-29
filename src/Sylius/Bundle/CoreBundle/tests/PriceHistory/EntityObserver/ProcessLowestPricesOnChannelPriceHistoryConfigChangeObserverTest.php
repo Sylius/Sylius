@@ -137,4 +137,33 @@ final class ProcessLowestPricesOnChannelPriceHistoryConfigChangeObserverTest ext
 
         $this->observer->onChange($config);
     }
+
+    public function testClearsProcessedConfigEvenWhenCommandDispatcherThrows(): void
+    {
+        $config = $this->createMock(ChannelPriceHistoryConfigInterface::class);
+        $config->method('getId')->willReturn(1);
+        $channel = $this->createMock(ChannelInterface::class);
+
+        $this->channelRepository
+            ->expects($this->once())
+            ->method('findOneBy')
+            ->with(['channelPriceHistoryConfig' => $config])
+            ->willReturn($channel)
+        ;
+
+        $this->commandDispatcher
+            ->expects($this->once())
+            ->method('applyWithinChannel')
+            ->with($channel)
+            ->willThrowException(new \RuntimeException('Dispatcher failure'))
+        ;
+
+        try {
+            $this->observer->onChange($config);
+            $this->fail('Expected RuntimeException was not thrown.');
+        } catch (\RuntimeException) {
+        }
+
+        $this->assertTrue($this->observer->supports($config));
+    }
 }

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
@@ -23,6 +22,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -557,7 +557,7 @@ final class ProductContext implements Context
     #[Then('/^I should not see the product (association "([^"]+)")$/')]
     public function iShouldNotSeeTheProductAssociation(ProductAssociationTypeInterface $productAssociationType): void
     {
-        $productAssociationTypeIri = $this->iriConverter->getIriFromResource($productAssociationType);
+        $productAssociationTypeIri = $this->iriConverter->getIriFromResourceInSection($productAssociationType, 'shop');
 
         /** @var ProductInterface $product */
         $product = $this->sharedStorage->get('product');
@@ -734,7 +734,7 @@ final class ProductContext implements Context
 
     private function isProductAssociated(ProductInterface $product, array $associatedProducts): bool
     {
-        $productIri = $this->iriConverter->getIriFromResource($product);
+        $productIri = $this->iriConverter->getIriFromResourceInSection($product, 'shop');
 
         return in_array($productIri, $associatedProducts, true);
     }

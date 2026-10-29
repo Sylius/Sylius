@@ -337,7 +337,13 @@ final class ManagingPromotionsContext implements Context
     #[Then('I should be notified that a :element value should be a numeric value')]
     public function iShouldBeNotifiedThatAMinimalValueShouldBeNumeric($element)
     {
-        $this->assertFieldValidationMessage($element, 'Please enter a valid money amount.');
+        Assert::oneOf(
+            $this->formElement->getValidationMessage($element),
+            [
+                'This value is not a valid money amount.',
+                'Please enter a valid money amount.',
+            ],
+        );
     }
 
     #[Then('I should be notified that promotion with this code already exists')]

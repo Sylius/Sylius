@@ -21,9 +21,13 @@ final class TagResettableCartContextsPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        $taggedServices = $container->findTaggedServiceIds(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG);
+        $ids = array_keys($container->findTaggedServiceIds(RegisterCartContextsPass::CART_CONTEXT_SERVICE_TAG));
 
-        foreach ($taggedServices as $id => $tags) {
+        foreach ($this->decoratorsOf($container, $ids) as $id) {
+            $ids[] = $id;
+        }
+
+        foreach ($ids as $id) {
             $definition = $container->getDefinition($id);
 
             if ($definition->hasTag('kernel.reset')) {
@@ -34,5 +38,43 @@ final class TagResettableCartContextsPass implements CompilerPassInterface
                 $definition->addTag('kernel.reset', ['method' => 'reset']);
             }
         }
+    }
+
+    /**
+     * A decorator does not carry the decorated service's tags yet: they are merged
+     * by DecoratorServicePass, which runs in the optimization phase - after
+     * ResettableServicePass (BEFORE_OPTIMIZATION, -32) has already built
+     * services_resetter. Any pass that drives behaviour off a tag therefore has to
+     * resolve decorators itself, or it silently skips them.
+     *
+     * @param list<string> $ids
+     *
+     * @return list<string>
+     */
+    private function decoratorsOf(ContainerBuilder $container, array $ids): array
+    {
+        $found = [];
+        $known = $ids;
+
+        do {
+            $added = [];
+
+            foreach ($container->getDefinitions() as $id => $definition) {
+                $decorated = $definition->getDecoratedService();
+
+                if (null === $decorated || \in_array($id, $known, true)) {
+                    continue;
+                }
+
+                if (\in_array($decorated[0], $known, true)) {
+                    $added[] = $id;
+                }
+            }
+
+            $found = [...$found, ...$added];
+            $known = [...$known, ...$added];
+        } while ([] !== $added);
+
+        return $found;
     }
 }

@@ -92,4 +92,19 @@ final class ProductsToProductAssociationsTransformerTest extends TestCase
     {
         $this->assertNull($this->productsToProductAssociationsTransformer->reverseTransform(''));
     }
+
+    public function testItResetsProductAssociations(): void
+    {
+        $productAssociation = $this->createMock(ProductAssociationInterface::class);
+        $productAssociationType = $this->createMock(ProductAssociationTypeInterface::class);
+        $productAssociation->method('getType')->willReturn($productAssociationType);
+        $productAssociation->method('getAssociatedProducts')->willReturn(new ArrayCollection());
+        $productAssociationType->method('getCode')->willReturn('accessories');
+
+        $this->productsToProductAssociationsTransformer->transform(new ArrayCollection([$productAssociation]));
+        $this->productsToProductAssociationsTransformer->reset();
+
+        $reflection = new \ReflectionProperty($this->productsToProductAssociationsTransformer, 'productAssociations');
+        $this->assertNull($reflection->getValue($this->productsToProductAssociationsTransformer));
+    }
 }
