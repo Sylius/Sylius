@@ -689,7 +689,7 @@ sylius:
         personal_information: 'Persönliche Informationen'
         phone: 'Telefon'
         phone_number: 'Telefonnummer'
-        place_order: 'Bestellung aufgeben'
+        place_order: 'Zahlungspflichtig bestellen'
         placed_an_order: 'Du hast erfolgreich eine Bestellung aufgegeben'
         placed_at: 'Bestellt am'
         please_sign_in: 'Bitte anmelden'
