@@ -72,7 +72,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
 
     public function isVariantSelectionMethodChoice(): bool
     {
-        return self::VARIANT_SELECTION_CHOICE === $this->variantSelectionMethod;
+        return self::VARIANT_SELECTION_CHOICE === $this->variantSelectionMethod || $this->getOptions()->isEmpty();
     }
 
     public function getVariantSelectionMethodLabel(): string
