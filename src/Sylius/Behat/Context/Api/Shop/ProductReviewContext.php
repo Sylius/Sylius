@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -42,7 +42,7 @@ final class ProductReviewContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $this->client->index(Resources::PRODUCT_REVIEWS);
-        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromResource($product));
+        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromResourceInSection($product, 'shop'));
         $this->client->filter();
     }
 
@@ -61,7 +61,7 @@ final class ProductReviewContext implements Context
     public function iWantToReviewProduct(ProductInterface $product): void
     {
         $this->client->buildCreateRequest(Resources::PRODUCT_REVIEWS);
-        $this->client->addRequestData('product', $this->iriConverter->getIriFromResource($product));
+        $this->client->addRequestData('product', $this->iriConverter->getIriFromResourceInSection($product, 'shop'));
     }
 
     /**
@@ -106,7 +106,7 @@ final class ProductReviewContext implements Context
         $product = $this->sharedStorage->get('product');
 
         $this->client->index(Resources::PRODUCT_REVIEWS);
-        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromResource($product));
+        $this->client->addFilter('reviewSubject', $this->iriConverter->getIriFromResourceInSection($product, 'shop'));
         $this->client->addFilter('itemsPerPage', 3);
         $this->client->addFilter('order[createdAt]', 'desc');
         $this->client->filter();

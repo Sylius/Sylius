@@ -601,7 +601,7 @@ final readonly class ManagingShippingMethodsContext implements Context
     {
         Assert::same(
             $this->shippingMethodFormElement->getValidationMessage('last_rule_amount', ['%channelCode%' => $channel->getCode()]),
-            'Please enter a valid money amount.',
+            'This value is not a valid money amount.',
         );
     }
 

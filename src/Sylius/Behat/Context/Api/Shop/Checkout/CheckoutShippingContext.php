@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop\Checkout;
 
-use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
@@ -77,7 +77,7 @@ final readonly class CheckoutShippingContext implements Context
                 $this->sharedStorage->get('cart_token'),
                 $content['shipments'][0]['id'],
             ),
-            body: ['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)],
+            body: ['shippingMethod' => $this->iriConverter->getIriFromResourceInSection($shippingMethod, 'shop')],
         );
     }
 
@@ -176,8 +176,9 @@ final readonly class CheckoutShippingContext implements Context
                 $this->sharedStorage->get('cart_token'),
                 $content['shipments'][0]['id'],
             ),
-            body: ['shippingMethod' => $this->iriConverter->getIriFromResource(
+            body: ['shippingMethod' => $this->iriConverter->getIriFromResourceInSection(
                 $shippingMethod ?? $this->shippingMethodRepository->findOneBy([]),
+                'shop',
             )],
         );
     }
