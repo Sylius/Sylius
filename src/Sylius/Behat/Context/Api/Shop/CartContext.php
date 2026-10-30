@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Behat\Step\Then;
@@ -22,6 +21,7 @@ use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -768,7 +768,7 @@ final class CartContext implements Context
             'items',
         );
         $request->updateContent([
-            'productVariant' => $this->iriConverter->getIriFromResource($this->productVariantResolver->getVariant($product)),
+            'productVariant' => $this->iriConverter->getIriFromResourceInSection($this->productVariantResolver->getVariant($product), 'shop'),
             'quantity' => $quantity,
         ]);
 
@@ -787,7 +787,7 @@ final class CartContext implements Context
             'items',
         );
         $request->updateContent([
-            'productVariant' => $this->iriConverter->getIriFromResource($productVariant),
+            'productVariant' => $this->iriConverter->getIriFromResourceInSection($productVariant, 'shop'),
             'quantity' => $quantity,
         ]);
 

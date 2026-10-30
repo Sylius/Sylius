@@ -126,7 +126,7 @@ final class CheckoutContext implements Context
                 $this->sharedStorage->get('cart_token'),
                 $content['shipments'][0]['id'],
             ),
-            body: ['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)],
+            body: ['shippingMethod' => $this->iriConverter->getIriFromResourceInSection($shippingMethod, 'shop')],
         );
     }
 
@@ -415,8 +415,9 @@ final class CheckoutContext implements Context
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id']),
         );
         $request->setContent([
-            'shippingMethod' => $this->iriConverter->getIriFromResource(
+            'shippingMethod' => $this->iriConverter->getIriFromResourceInSection(
                 resource: $this->shippingMethodClass,
+                section: 'shop',
                 context: ['uri_variables' => ['code' => $shippingMethodCode]],
             ),
         ]);
@@ -436,8 +437,9 @@ final class CheckoutContext implements Context
             sprintf('payments/%s', $cart['payments'][0]['id']),
         );
         $request->setContent([
-            'paymentMethod' => $this->iriConverter->getIriFromResource(
+            'paymentMethod' => $this->iriConverter->getIriFromResourceInSection(
                 resource: $this->paymentMethodClass,
+                section: 'shop',
                 context: ['uri_variables' => ['code' => $paymentMethodCode]],
             ),
         ]);
@@ -492,7 +494,7 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             \sprintf('payments/%s', $this->getCart()['payments'][0]['id']),
         );
-        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromResource($paymentMethod)]);
+        $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'shop')]);
 
         $this->client->executeCustomRequest($request);
     }
@@ -549,7 +551,7 @@ final class CheckoutContext implements Context
         $payments = $this->responseChecker->getValue($response, 'payments');
 
         Assert::notEmpty($payments, 'No payments found in response.');
-        $paymentMethodIri = $this->iriConverter->getIriFromResource($paymentMethod);
+        $paymentMethodIri = $this->iriConverter->getIriFromResourceInSection($paymentMethod, 'shop');
         foreach ($payments as $payment) {
             if ($payment['method'] !== $paymentMethodIri) {
                 continue;
@@ -1054,8 +1056,9 @@ final class CheckoutContext implements Context
 
         $variant = $product->getVariants()->first();
         $request->setContent([
-            'productVariant' => $this->iriConverter->getIriFromResource(
+            'productVariant' => $this->iriConverter->getIriFromResourceInSection(
                 resource: $variant::class,
+                section: 'shop',
                 context: ['uri_variables' => ['code' => $code]],
             ),
             'quantity' => 1,
@@ -1398,7 +1401,7 @@ final class CheckoutContext implements Context
             'items',
         );
         $request->setContent([
-            'productVariant' => $this->iriConverter->getIriFromResource($productVariant),
+            'productVariant' => $this->iriConverter->getIriFromResourceInSection($productVariant, 'shop'),
             'quantity' => $quantity,
         ]);
 
@@ -1484,7 +1487,7 @@ final class CheckoutContext implements Context
             HTTPRequest::METHOD_PATCH,
             sprintf('shipments/%s', $this->getCart()['shipments'][0]['id']),
         );
-        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromResource($shippingMethod)]);
+        $request->setContent(['shippingMethod' => $this->iriConverter->getIriFromResourceInSection($shippingMethod, 'shop')]);
 
         return $this->client->executeCustomRequest($request);
     }

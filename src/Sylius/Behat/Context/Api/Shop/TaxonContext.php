@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
@@ -21,6 +20,7 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -73,7 +73,7 @@ final readonly class TaxonContext implements Context
 
     private function isTaxonChildVisible(TaxonInterface $taxon): bool
     {
-        $taxonIri = $this->iriConverter->getIriFromResource($taxon);
+        $taxonIri = $this->iriConverter->getIriFromResourceInSection($taxon, 'shop');
         $response = $this->client->getLastResponse();
         $children = $this->responseChecker->getValue($response, 'children');
 

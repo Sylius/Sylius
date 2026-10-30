@@ -533,7 +533,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::same(
             $this->formElement->getValidationMessage('last_action'),
-            'Please enter a valid money amount.',
+            'This value is not a valid money amount.',
         );
     }
 

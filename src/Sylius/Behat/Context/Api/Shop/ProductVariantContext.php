@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
+use Sylius\Behat\Service\Converter\IriConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -64,7 +64,7 @@ final class ProductVariantContext implements Context
     #[When('/^I view variants of the ("[^"]+" product)$/')]
     public function iViewVariantsOfTheProduct(ProductInterface $product): void
     {
-        $response = $this->client->index(Resources::PRODUCT_VARIANTS, ['product' => $this->iriConverter->getIriFromResource($product)]);
+        $response = $this->client->index(Resources::PRODUCT_VARIANTS, ['product' => $this->iriConverter->getIriFromResourceInSection($product, 'shop')]);
 
         $this->sharedStorage->set('product_variant_collection', $this->responseChecker->getCollection($response));
     }
@@ -72,7 +72,7 @@ final class ProductVariantContext implements Context
     #[When('/^I filter (?:them|variants) by ("[^"]+" option value)$/')]
     public function iFilterVariantsByOption(ProductOptionValueInterface $optionValue): void
     {
-        $this->client->addFilter('optionValues[]', $this->iriConverter->getIriFromResource($optionValue));
+        $this->client->addFilter('optionValues[]', $this->iriConverter->getIriFromResourceInSection($optionValue, 'shop'));
         $response = $this->client->filter();
 
         $this->sharedStorage->set('product_variant_collection', $this->responseChecker->getCollection($response));

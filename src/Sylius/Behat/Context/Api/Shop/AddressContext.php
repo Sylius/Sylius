@@ -215,7 +215,7 @@ final readonly class AddressContext implements Context
     #[When('/^I try to view details of (address belongs to "([^"]+)")$/')]
     public function iTryToViewDetailsOfAddressBelongingTo(AddressInterface $address): void
     {
-        $this->client->showByIri($this->iriConverter->getIriFromResource($address));
+        $this->client->showByIri($this->iriConverter->getIriFromResourceInSection($address, 'shop'));
     }
 
     #[Then('/^I should(?:| still) have a single address in my address book$/')]
