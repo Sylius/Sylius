@@ -1,6 +1,7 @@
 sylius_admin_shop_user_delete:
-    path: /{id}
+    path: /{id}/delete
     methods: [DELETE]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_shop_user')"
     defaults:
         _controller: sylius.controller.shop_user::deleteAction
         _sylius:

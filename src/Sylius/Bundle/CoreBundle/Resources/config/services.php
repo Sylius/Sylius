@@ -21,6 +21,8 @@ use Sylius\Bundle\CoreBundle\Context\CustomerContext;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceDeleteHandler;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\Handler\ResourceUpdateHandler;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\Inventory\Operator\OrderInventoryOperator as OrmOrderInventoryOperator;
+use Sylius\Bundle\CoreBundle\ExpressionLanguage\CartContextVariables;
+use Sylius\Bundle\CoreBundle\ExpressionLanguage\ShopperContextVariables;
 use Sylius\Bundle\CoreBundle\Form\Type\Grid\Filter\ResourceAutocompleteFilterType;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityChecker;
 use Sylius\Bundle\CoreBundle\Order\Checker\OrderPromotionsIntegrityCheckerInterface;
@@ -31,11 +33,13 @@ use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover;
 use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolver;
 use Sylius\Bundle\CoreBundle\Resolver\CustomerResolverInterface;
+use Sylius\Bundle\CoreBundle\Routing\RequestContext;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\UriBasedSectionProvider;
 use Sylius\Bundle\CoreBundle\Security\ImpersonationVoter;
 use Sylius\Bundle\CoreBundle\Security\UserPasswordResetter;
 use Sylius\Bundle\CoreBundle\ShippingMethod\Updater\ShippingMethodUpdater;
+use Sylius\Bundle\CoreBundle\StateMachine\State\ApplyStateMachineTransitionProcessor;
 use Sylius\Bundle\CoreBundle\Twig\CheckoutStepsExtension;
 use Sylius\Bundle\CoreBundle\Twig\ProductVariantsMapExtension;
 use Sylius\Component\Core\Calculator\CatalogPricesCalculatorInterface;
@@ -97,6 +101,7 @@ use Sylius\Component\Core\Uploader\ImageUploader;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
+use Sylius\Resource\Doctrine\Common\State\PersistProcessor;
 
 return static function (ContainerConfigurator $container) {
     $container->import('services/*.php');
@@ -249,6 +254,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.factory.customer_after_checkout', CustomerAfterCheckoutFactory::class)
         ->args([service('sylius.factory.customer')])
+        ->tag('sylius.resource_factory')
         ->public()
     ;
     $services->alias(CustomerAfterCheckoutFactoryInterface::class, 'sylius.factory.customer_after_checkout')->public();
@@ -471,6 +477,41 @@ return static function (ContainerConfigurator $container) {
 
     $services->set('sylius.positioner', Positioner::class)->public();
     $services->alias(PositionerInterface::class, 'sylius.positioner')->public();
+
+    $services->set('sylius.routing.request_context', RequestContext::class)
+        ->decorate('router.request_context')
+        ->args([
+            service('.inner'),
+            param('sylius_core.routing_configuration.bc_layer'),
+        ])
+    ;
+
+    $services->set(ApplyStateMachineTransitionProcessor::class)
+        ->args([
+            service('sylius_abstraction.state_machine'),
+            service(PersistProcessor::class),
+        ])
+        ->tag('sylius.state_processor')
+    ;
+
+    $services->set('sylius.expression_language.variables.cart_context', CartContextVariables::class)
+        ->args([
+            service('sylius.context.cart'),
+        ])
+        ->tag('sylius.metadata_variables')
+        ->tag('sylius.resource_factory_variables')
+        ->tag('sylius.repository_variables')
+    ;
+
+    $services->set('sylius.expression_language.variables.shopper_context', ShopperContextVariables::class)
+        ->args([
+            service('sylius.context.shopper'),
+        ])
+        ->tag('sylius.form_variables')
+        ->tag('sylius.metadata_variables')
+        ->tag('sylius.resource_factory_variables')
+        ->tag('sylius.repository_variables')
+    ;
 
     $services
         ->set('sylius.security.voter.impersonation', ImpersonationVoter::class)

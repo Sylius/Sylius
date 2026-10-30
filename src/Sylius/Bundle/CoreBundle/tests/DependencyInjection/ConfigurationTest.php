@@ -280,6 +280,46 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    #[Test]
+    public function it_enables_routing_by_layer_by_default(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['routing_configuration' => ['bc_layer' => ['enabled' => true, 'routes' => []]]],
+            'routing_configuration',
+        );
+    }
+
+    #[Test]
+    public function it_allows_to_disable_routing_bc_layer(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['routing_configuration' => ['bc_layer' => ['enabled' => false]]]],
+            ['routing_configuration' => ['bc_layer' => ['enabled' => false, 'routes' => []]]],
+            'routing_configuration',
+        );
+    }
+
+    #[Test]
+    public function it_allows_to_enable_routing_bc_layer_for_specific_routes(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['routing_configuration' => ['bc_layer' => ['enabled' => false, 'routes' => ['admin_product' => ['enabled' => true]]]]]],
+            ['routing_configuration' => ['bc_layer' => ['enabled' => false, 'routes' => ['admin_product' => ['enabled' => true]]]]],
+            'routing_configuration',
+        );
+    }
+
+    #[Test]
+    public function it_allows_to_disable_routing_bc_layer_for_specific_routes(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['routing_configuration' => ['bc_layer' => ['enabled' => true, 'routes' => ['admin_product' => ['enabled' => false]]]]]],
+            ['routing_configuration' => ['bc_layer' => ['enabled' => true, 'routes' => ['admin_product' => ['enabled' => false]]]]],
+            'routing_configuration',
+        );
+    }
+
     protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();

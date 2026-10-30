@@ -10,6 +10,8 @@ parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
     sylius_core.grids_configuration:
         use_legacy_config: '%env(bool:TEST_SYLIUS_USE_LEGACY_GRID_CONFIG)%'
+    sylius_core.routing_configuration.bc_layer:
+        enabled: '%env(bool:TEST_SYLIUS_USE_LEGACY_ROUTING_CONFIG)%'
 
 sylius_api:
     enabled: true
@@ -17,3 +19,6 @@ sylius_api:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_resource:
+    routing_path_bc_layer: false

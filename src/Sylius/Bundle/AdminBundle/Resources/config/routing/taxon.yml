@@ -8,6 +8,7 @@ sylius_admin_taxon:
         permission: true
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\TaxonType
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_taxon')"
     type: sylius.resource
 
 sylius_admin_taxon_index:
@@ -21,6 +22,7 @@ sylius_admin_taxon_index:
 sylius_admin_taxon_create_for_parent:
     path: /taxons/new/{id}
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_taxon')"
     defaults:
         _controller: sylius.controller.taxon::createAction
         _sylius:
