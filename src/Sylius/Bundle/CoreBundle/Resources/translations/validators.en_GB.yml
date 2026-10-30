@@ -106,7 +106,7 @@ sylius:
         product_eligibility: 'This product %productName% has been disabled.'
         shipping_method_eligibility: 'Product does not fit requirements for %shippingMethodName% shipping method. Please reselect your shipping method.'
         shipping_method_not_available: 'The "%shippingMethodName%" shipping method is not available. Please reselect your shipping method.'
-        cart_items_immutable: 'Cannot change cart items after the checkout is completed."'
+        cart_items_immutable: 'Cannot change cart items after the checkout is completed.'
     resend_order_confirmation_email:
         invalid_order_state: 'Cannot resend order confirmation email for order with state %state%.'
     resend_shipment_confirmation_email:
@@ -166,7 +166,7 @@ sylius:
             min: Coupon usage limit per customer must be at least {{ limit }}.
     product_translation:
         short_description:
-            max: Short description must not be longer then {{ limit }} characters.
+            max: Short description must not be longer than {{ limit }} characters.
     province:
         code:
             not_exist: Province with code {{ code }} does not exist.
