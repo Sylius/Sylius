@@ -24,7 +24,9 @@
                         {% hook 'pricing#body' with { variant, channel, channel_pricing, currency_code } %}
                     </tr>
                 {% else %}
-                    {% hook 'pricing#body' with { variant, channel_pricing } %}
+                    <tr>
+                        {% hook 'pricing#body' with { variant, channel_pricing } %}
+                    </tr>
                 {% endif %}
             {% endfor %}
             </tbody>
