@@ -40,7 +40,8 @@ use Symfony\UX\TwigComponent\Attribute\PostMount;
  *
  * The resource controller builds the grid from the current request, which is not available anymore during
  * live re-renders. The grid is therefore built from a grid context: the route parameters of the index page
- * are kept as its variables, so that the grid expressions ("$productId", "resource.id"...) keep working,
+ * are kept as the grid variables ("gridVariables" prop of ComponentWithGridTrait), so that the grid configuration
+ * keeps working ("$productId", "@=variables['productId']", "resource.id"...), as on the regular index page,
  * and the action templates guess their routes with "grid.gridContext.routeName(...)".
  *
  * @experimental
@@ -64,14 +65,6 @@ class GridComponent
     #[LiveProp]
     public string $section = 'admin';
 
-    /**
-     * The route parameters of the index page (e.g. "productId"), used as the grid context variables.
-     *
-     * @var array<string, mixed>|null
-     */
-    #[LiveProp]
-    public ?array $routeParameters = null;
-
     private ?ContextualGridView $gridView = null;
 
     public function __construct(
@@ -83,11 +76,22 @@ class GridComponent
     ) {
     }
 
-    /** Keeps the route parameters of the index page, as they are not available anymore during live re-renders. */
+    /** Keeps the route parameters of the index page as the grid variables, as they are not available anymore during live re-renders. */
     #[PostMount]
-    public function captureRouteParameters(): void
+    public function captureGridVariables(): void
     {
-        $this->routeParameters ??= $this->requestStack->getCurrentRequest()?->attributes->all('_route_params') ?? [];
+        if ([] !== $this->gridVariables) {
+            return;
+        }
+
+        $routeParameters = $this->requestStack->getCurrentRequest()?->attributes->all('_route_params') ?? [];
+
+        // The route parameters also contain the route defaults (e.g. the "_sylius" options), which must not be exposed in the props
+        $this->gridVariables = array_filter(
+            $routeParameters,
+            static fn (int|string $name): bool => !str_starts_with((string) $name, '_'),
+            \ARRAY_FILTER_USE_KEY,
+        );
     }
 
     /**
@@ -112,7 +116,7 @@ class GridComponent
         $gridView = $this->contextualGridViewFactory->create(
             $this->getGridDefinition(),
             new Parameters($this->getGridConfig()),
-            new GridContext(metadata: $this->getMetadata(), section: $this->section, variables: $this->routeParameters ?? []),
+            new GridContext(metadata: $this->getMetadata(), section: $this->section, variables: $this->gridVariables),
         );
 
         // Same pagination as the ResourcesCollectionProvider of the resource controller
