@@ -266,7 +266,7 @@ final readonly class AddressContext implements Context
      */
     public function iTryToViewDetailsOfAddressBelongingTo(AddressInterface $address): void
     {
-        $this->client->showByIri($this->iriConverter->getIriFromResource($address));
+        $this->client->showByIri($this->iriConverter->getIriFromResourceInSection($address, 'shop'));
     }
 
     /**

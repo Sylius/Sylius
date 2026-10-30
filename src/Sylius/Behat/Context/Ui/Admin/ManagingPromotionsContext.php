@@ -410,7 +410,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatAMinimalValueShouldBeNumeric($element)
     {
-        $this->assertFieldValidationMessage($element, 'Please enter a valid money amount.');
+        $this->assertFieldValidationMessage($element, 'This value is not a valid money amount.');
     }
 
     /**
