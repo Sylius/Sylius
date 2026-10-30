@@ -71,6 +71,32 @@ final class ConfigurationTest extends TestCase
     }
 
     #[Test]
+    public function it_has_default_configuration_for_product_grid_node(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['product_grid' => [
+                'include_all_descendants' => false,
+                'live' => ['enabled' => false],
+            ]],
+            'product_grid',
+        );
+    }
+
+    #[Test]
+    public function its_product_grid_live_mode_can_be_enabled(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['product_grid' => ['live' => true]]],
+            ['product_grid' => [
+                'include_all_descendants' => false,
+                'live' => ['enabled' => true],
+            ]],
+            'product_grid',
+        );
+    }
+
+    #[Test]
     public function it_has_default_configuration_for_checkout_resolver_node(): void
     {
         $this->assertProcessedConfigurationEquals(

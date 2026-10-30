@@ -1,0 +1,84 @@
+{% import '@SyliusAdmin/shared/helper/table.html.twig' as table %}
+{% import '@SyliusAdmin/shared/helper/pagination.html.twig' as pagination %}
+
+{% set resources = hookable_metadata.context.resources|default(null) %}
+{% set data = resources.data|default([]) %}
+{% set definition = resources.definition|default(null) %}
+{% set has_bulk_actions = definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+
+{% if data|length > 0 %}
+    <div class="card">
+        <div class="card-body border-bottom py-3">
+            <div class="d-flex">
+                {% if has_bulk_actions %}
+                    <div class="sylius-grid-nav__bulk grid">
+                        {% for action in definition.getEnabledActions('bulk') %}
+                            {{ sylius_grid_render_bulk_action(resources, action, null) }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="ms-auto">
+                    {% set other_limits = definition.limits|filter(limit => limit != data.maxPerPage) %}
+                    <div class="dropdown">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" {{ other_limits is empty ? 'disabled' }}>
+                            {{ 'sylius.ui.show'|trans }} {{ data.maxPerPage }}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            {% for limit in other_limits %}
+                                <button type="button" class="dropdown-item" data-action="live#action" data-live-action-param="changeLimit" data-live-limit-param="{{ limit }}">{{ limit }}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter datatable" {{ sylius_test_html_attribute('grid-table') }}>
+                <thead>
+                {% hook 'data_table#pre_header' %}
+                <tr>
+                    {% if has_bulk_actions %}
+                        <th class="w-1">
+                            <input data-check-all="index" type="checkbox" class="form-check-input">
+                        </th>
+                    {% endif %}
+                    {% for field in definition.fields|sylius_sort_by('position') %}
+                        {% if field.enabled %}
+                            {% set th_class = 'text-body sylius-table-column-' ~ field.name ~ ' ' ~ field.options.vars.th_class|default('') %}
+                            {% if field.isSortable %}
+                                {% set is_sorted = resources.isSortedBy(field.name) %}
+                                {% set sorting_order = resources.getSortingOrder(field.name)|default('asc') %}
+                                {% set next_order = is_sorted ? (sorting_order == 'desc' ? 'asc' : 'desc') : sorting_order %}
+                                <th class="sortable {{ is_sorted ? 'sorted ' ~ (sorting_order == 'desc' ? 'descending' : 'ascending') }} {{ th_class }}">
+                                    <a class="link-reset" href="#" data-action="live#action:prevent" data-live-action-param="changeSorting" data-live-sorting-param="{{ {(field.name): next_order}|json_encode }}">
+                                        {{ field.label|trans }}
+                                        {{ ux_icon(is_sorted ? (sorting_order == 'desc' ? 'tabler:chevron-down' : 'tabler:chevron-up') : 'tabler:selector', {class: 'icon'}) }}
+                                    </a>
+                                </th>
+                            {% else %}
+                                <th class="{{ th_class }}">{{ field.label|trans }}</th>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if definition.actionGroups.item is defined and definition.getEnabledActions('item')|length > 0 %}
+                        <th class="w-1 text-body text-center sylius-table-column-actions">{{ 'sylius.ui.actions'|trans }}</th>
+                    {% endif %}
+                </tr>
+                </thead>
+                <tbody {{ sylius_test_html_attribute('grid-table-body') }}>
+                {% for row in data %}
+                    {{ table.row(resources, definition, row) }}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer d-flex align-items-center gap-2 flex-wrap">
+            <div class="text-muted">
+                {{ pagination.results_count(data) }}
+            </div>
+            <div class="ms-auto">
+                {{ pagerfanta(data, 'twig', {'template': '@SyliusAdmin/shared/pagerfanta_live.html.twig'}) }}
+            </div>
+        </div>
+    </div>
+{% endif %}
