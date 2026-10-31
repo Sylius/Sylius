@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ShopBundle\Twig\Component\Cart;
 
 use Doctrine\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Provider\FlashBagProvider;
+use Sylius\Bundle\ShopBundle\Cart\DisabledCartItemsRemover;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponentTrait;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -24,11 +26,13 @@ use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveAction;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\ComponentToolsTrait;
+use Symfony\UX\TwigComponent\Attribute\PostMount;
 
 #[AsLiveComponent]
 class FormComponent
@@ -54,8 +58,29 @@ class FormComponent
         string $formClass,
         protected readonly ObjectManager $manager,
         protected readonly EventDispatcherInterface $eventDispatcher,
+        protected readonly ?DisabledCartItemsRemover $disabledCartItemsRemover = null,
+        protected readonly ?RequestStack $requestStack = null,
     ) {
         $this->initialize($orderRepository, $formFactory, $resourceClass, $formClass);
+    }
+
+    #[PostMount(priority: 10)]
+    public function removeDisabledCartItems(): void
+    {
+        if (null === $this->disabledCartItemsRemover) {
+            return;
+        }
+
+        /** @var OrderInterface|null $order */
+        $order = $this->resource;
+        if (null === $order) {
+            return;
+        }
+
+        $removed = $this->disabledCartItemsRemover->removeFromOrder($order);
+        if ($removed && null !== $this->requestStack) {
+            FlashBagProvider::getFlashBag($this->requestStack)->add('error', 'sylius.order.cart_item_removed');
+        }
     }
 
     public function hydrateResource(mixed $value): ?ResourceInterface
