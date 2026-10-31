@@ -30,6 +30,7 @@ final class ConfirmResetPasswordValidator extends ConstraintValidator
         if ($value->confirmNewPassword !== $value->newPassword) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('newPassword')
+                ->setCode(ConfirmResetPassword::PASSWORD_MISMATCH_ERROR)
                 ->addViolation()
             ;
         }

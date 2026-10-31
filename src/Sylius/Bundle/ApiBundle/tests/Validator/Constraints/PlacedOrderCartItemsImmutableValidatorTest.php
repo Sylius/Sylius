@@ -24,6 +24,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class PlacedOrderCartItemsImmutableValidatorTest extends TestCase
@@ -62,11 +63,21 @@ final class PlacedOrderCartItemsImmutableValidatorTest extends TestCase
         $orderMock = $this->createMock(OrderInterface::class);
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $violationBuilderMock */
+        $violationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         $this->placedOrderCartItemsImmutableValidator->initialize($executionContextMock);
         $orderMock->expects(self::once())->method('getState')->willReturn(OrderInterface::STATE_NEW);
         $this->orderRepository->expects(self::once())->method('findOneWithCompletedCheckout')->with('orderTokenValue')->willReturn($orderMock);
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.order.cart_items_immutable')
-        ;
+        $executionContextMock->expects(self::once())
+            ->method('buildViolation')
+            ->with('sylius.order.cart_items_immutable')
+            ->willReturn($violationBuilderMock);
+        $violationBuilderMock->expects(self::once())
+            ->method('setCode')
+            ->with(PlacedOrderCartItemsImmutable::CART_ITEMS_IMMUTABLE_ERROR)
+            ->willReturn($violationBuilderMock);
+        $violationBuilderMock->expects(self::once())
+            ->method('addViolation');
         $this->placedOrderCartItemsImmutableValidator->validate(
             new AddItemToCart(orderTokenValue: 'orderTokenValue', productVariantCode: 'productVariantCode', quantity: 1),
             new PlacedOrderCartItemsImmutable(),
