@@ -1,5 +1,4 @@
-{% macro accordion(items, open = false, auto_close = null, flush = false) %}
-    {% set auto_close = auto_close|default(true) %}
+{% macro accordion(items, open = false, auto_close = true, flush = false) %}
     {% set id = id|default(random()) %}
 
     <div class="accordion{% if flush %} accordion-flush{% endif %}" id="{{ id }}">
