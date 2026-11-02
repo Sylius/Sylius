@@ -57,4 +57,7 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findByProductTaxonIds(array $ids): array;
 
     public function findOneByChannelAndCodeWithAvailableAssociations(ChannelInterface $channel, string $code): ?ProductInterface;
+
+    /** @param T[] $products */
+    public function hydrateReviews(array $products): void;
 }
