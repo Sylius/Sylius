@@ -81,6 +81,7 @@
         "sylius/registry": "^1.6",
         "sylius/resource": "^1.14.2",
         "sylius/resource-bundle": "dev-grid-context as 1.15.99",
+        "sylius/stack": "dev-twig-hooks-live-context as 0.14.99",
         "sylius/theme-bundle": "^2.5",
         "sylius/twig-extra": "^0.12 || ^0.14",
         "sylius/twig-hooks": "^0.12 || ^0.14",
@@ -244,6 +245,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/loic425/SyliusResourceBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusStack"
         }
     ],
     "config": {

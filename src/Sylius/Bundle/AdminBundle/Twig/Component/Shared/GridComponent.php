@@ -66,6 +66,22 @@ class GridComponent
         return $this->metadataRegistry->get($this->resourceAlias);
     }
 
+    /**
+     * The grid hookables read the grid view and the resource metadata from the hook context,
+     * which is not available anymore during live re-renders.
+     *
+     * @return array<string, mixed>
+     */
+    protected function provideHookableContext(): array
+    {
+        return [
+            'resources' => $this->getGridView(),
+            'metadata' => $this->getMetadata(),
+            'live_grid' => true,
+            'are_criteria_set' => $this->hasActiveCriteria(),
+        ];
+    }
+
     protected function getGridName(): string
     {
         return $this->gridName;

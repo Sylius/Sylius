@@ -3,6 +3,6 @@
 <div class="page-body" {{ attributes }} {{ sylius_test_html_attribute('live-grid') }}>
     <div class="container-xl">
         {# Same hook as the regular grid, the "live_grid" flag switches its hookables to their live versions #}
-        {% hook 'grid' with { resources: grid, metadata, live_grid: true, are_criteria_set: this.hasActiveCriteria() } %}
+        {% hook 'grid' %}
     </div>
 </div>

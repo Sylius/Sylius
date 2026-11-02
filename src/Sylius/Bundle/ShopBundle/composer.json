@@ -48,7 +48,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
         "phpunit/phpunit": "^12.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
-        "sylius/resource-bundle": "dev-grid-context as 1.15.99"
+        "sylius/resource-bundle": "dev-grid-context as 1.15.99",
+        "sylius/stack": "dev-twig-hooks-live-context as 0.14.99"
     },
     "config": {
         "allow-plugins": {
@@ -85,6 +86,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/loic425/SyliusResourceBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusStack"
         }
     ],
     "minimum-stability": "dev",
