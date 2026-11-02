@@ -16,6 +16,7 @@ namespace Sylius\Bundle\ShopBundle\DependencyInjection;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutRedirectListener;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutResolver;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGenerator;
+use Sylius\Bundle\ShopBundle\Grid\ProductGridInterface;
 use Sylius\Bundle\ShopBundle\Locale\LocaleSwitcherInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -51,6 +52,17 @@ final class SyliusShopExtension extends Extension implements PrependExtensionInt
             'sylius_shop.product_grid.include_all_descendants',
             $config['product_grid']['include_all_descendants'],
         );
+        $container->setParameter(
+            'sylius_shop.product_grid.live.enabled',
+            $config['product_grid']['live']['enabled'],
+        );
+
+        if ($config['product_grid']['live']['enabled']) {
+            $container
+                ->getDefinition('sylius_shop.grid_mutator.live_product')
+                ->addTag('sylius.grid_mutator', ['grid' => ProductGridInterface::NAME])
+            ;
+        }
 
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }

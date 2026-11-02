@@ -1,0 +1,20 @@
+{% from '@SyliusShop/shared/breadcrumbs.html.twig' import breadcrumbs as breadcrumbs %}
+
+{% set taxon = hookable_metadata.context.taxon|default(null) %}
+{% set items = [{ path: path('sylius_shop_homepage'), label: 'sylius.ui.home'|trans }] %}
+
+{% if taxon is not null %}
+    {% for ancestor in taxon.ancestors|reverse %}
+        {% if ancestor.isRoot() or not ancestor.enabled %}
+            {% set items = items|merge([{ label: ancestor.name }]) %}
+        {% else %}
+            {% set items = items|merge([{ path: path('sylius_shop_product_index', {'slug': ancestor.slug, '_locale': ancestor.translation.locale}), label: ancestor.name }]) %}
+        {% endif %}
+    {% endfor %}
+
+    {% set items = items|merge([{ label: taxon.name, active: true }]) %}
+{% else %}
+    {% set items = items|merge([{ label: 'sylius.ui.products'|trans, active: true }]) %}
+{% endif %}
+
+{{ breadcrumbs(items) }}

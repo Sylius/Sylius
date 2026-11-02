@@ -1,0 +1,44 @@
+{#- Pagination of live components, pages are changed with live actions instead of links -#}
+{%- extends '@SyliusShop/shared/pagination/bootstrap_5.html.twig' -%}
+
+{%- block page_link -%}
+    <li class="page-item">
+        <a class="page-link"
+           href="#"
+           data-action="live#action:prevent"
+           data-live-action-param="changePage"
+           data-live-page-param="{{ page }}"
+           {{ sylius_test_html_attribute('page', page) }}
+        >
+            {{- page -}}
+        </a>
+    </li>
+{%- endblock page_link -%}
+
+{%- block previous_page_link -%}
+    <li class="page-item">
+        <a class="page-link"
+           href="#"
+           rel="prev"
+           data-action="live#action:prevent"
+           data-live-action-param="previousPage"
+           {{ sylius_test_html_attribute('previous-page') }}
+        >
+            {{- block('previous_page_message') -}}
+        </a>
+    </li>
+{%- endblock previous_page_link -%}
+
+{%- block next_page_link -%}
+    <li class="page-item">
+        <a class="page-link"
+           href="#"
+           rel="next"
+           data-action="live#action:prevent"
+           data-live-action-param="nextPage"
+           {{ sylius_test_html_attribute('next-page') }}
+        >
+            {{- block('next_page_message') -}}
+        </a>
+    </li>
+{%- endblock next_page_link -%}

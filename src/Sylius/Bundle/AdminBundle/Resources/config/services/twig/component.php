@@ -30,6 +30,7 @@ use Sylius\Bundle\AdminBundle\Form\Type\ShippingCategoryType;
 use Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType;
 use Sylius\Bundle\AdminBundle\Form\Type\TaxCategoryType;
 use Sylius\Bundle\AdminBundle\Form\Type\TaxRateType;
+use Sylius\Bundle\AdminBundle\Twig\Component\Shared\GridComponent;
 use Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent;
 use Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\ShopPreviewComponent;
 use Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\UserDropdownComponent;
@@ -254,5 +255,25 @@ return static function (ContainerConfigurator $container) {
             service('sylius_admin.provider.logged_in_admin_user'),
         ])
         ->tag('sylius.twig_component', ['key' => 'sylius_admin:navbar:user_dropdown'])
+    ;
+
+    // Experimental: only rendered when "sylius_admin.grid.live" is enabled
+    $services
+        ->set('sylius_admin.twig.component.grid', GridComponent::class)
+        ->args([
+            service('sylius.resource_registry'),
+            service('sylius.grid.contextual_view_factory'),
+        ])
+        ->call('setGridProvider', [service('sylius.grid.provider')])
+        ->call('setParametersSanitizer', [service('sylius.grid.parameters_sanitizer')])
+        ->call('setMaxPerPageResolver', [service('sylius.grid.max_per_page_resolver')])
+        ->call('setRequestStack', [service('request_stack')])
+        ->call('setFiltersFormFactory', [service('form.factory')])
+        ->call('setFilterFormTypeRegistry', [service('sylius.form_registry.grid_filter')])
+        ->call('setLiveResponder', [service('ux.live_component.live_responder')])
+        ->tag('sylius.live_component.admin', [
+            'key' => 'sylius_admin:grid',
+            'template' => '@SyliusAdmin/shared/crud/index/content/live_grid.html.twig',
+        ])
     ;
 };

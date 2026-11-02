@@ -1,0 +1,8 @@
+{% set grid = hookable_metadata.context.grid %}
+{% set filter_name = hookable_metadata.configuration.filter|default('search') %}
+
+{% for filter in hookable_metadata.context.filters|filter(filter => filter.name == filter_name) %}
+    <div class="col-12 col-md-4">
+        {{ sylius_grid_render_filter(grid, filter) }}
+    </div>
+{% endfor %}

@@ -1,0 +1,41 @@
+{% from "@SyliusAdmin/shared/helper/accordion.html.twig" import accordion %}
+{% import "@SyliusAdmin/shared/helper/button.html.twig" as button %}
+
+{% set resources = hookable_metadata.context.resources|default(null) %}
+{% set are_criteria_set = hookable_metadata.context.are_criteria_set|default(false) %}
+
+{% if resources.definition.enabledFilters|default([]) is not empty %}
+    <div class="position-relative z-1 bg-body mb-5">
+        {% set content %}
+            <div class="mb-3">
+                {# Fields are bound to the "criteria" prop through their name, the criteria are applied on submit #}
+                <form novalidate
+                      data-model="norender|*"
+                      data-action="live#action:prevent"
+                      data-live-action-param="applyFilters"
+                      {{ sylius_test_html_attribute('filters-form') }}
+                >
+                    <div class="sylius-filters">
+                        {% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled)|sylius_sort_by('position') %}
+                            <div class="sylius-filters__item">
+                                {{ sylius_grid_render_filter(resources, filter) }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        {{ button.primary({ text: 'sylius.ui.filter'|trans, icon: 'tabler:adjustments', type: 'submit', attr: sylius_test_html_attribute('filter') }) }}
+                        <button type="button" class="btn" data-action="live#action" data-live-action-param="resetFilters" {{ sylius_test_html_attribute('reset') }}>
+                            {{ 'sylius.ui.reset'|trans }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        {% endset %}
+
+        {{ accordion([{
+            title: 'sylius.ui.filters'|trans,
+            content: content,
+            icon: 'tabler:adjustments',
+        }], are_criteria_set) }}
+    </div>
+{% endif %}

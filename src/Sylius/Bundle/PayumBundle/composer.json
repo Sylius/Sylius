@@ -35,14 +35,15 @@
         "sylius/currency": "^2.0",
         "sylius/order-bundle": "^2.0",
         "sylius/payment-bundle": "^2.0",
-        "sylius/resource-bundle": "^1.14.2",
+        "sylius/resource-bundle": "dev-grid-context as 1.15.99",
         "php-http/httplug": "^2.4",
         "php-http/message-factory": "^1.1"
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
         "phpunit/phpunit": "^12.5",
-        "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0"
+        "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
+        "sylius/grid-bundle": "dev-live-grids-component-trait as 1.16.99"
     },
     "config": {
         "allow-plugins": {
@@ -71,6 +72,14 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusGridBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusResourceBundle"
         }
     ],
     "minimum-stability": "dev",

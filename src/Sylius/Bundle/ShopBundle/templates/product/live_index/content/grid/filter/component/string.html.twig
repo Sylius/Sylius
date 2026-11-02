@@ -1,0 +1,22 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Product\Grid\StringFilterComponent #}
+
+{% set input_id = 'grid-filter-' ~ filter.name %}
+{% set label = filter.label ? filter.label|trans : 'sylius.ui.search'|trans %}
+
+<div {{ attributes }} {{ sylius_test_html_attribute('grid-filter', filter.name) }}>
+    <label for="{{ input_id }}" class="visually-hidden">{{ label }}</label>
+    <div class="input-group input-group-sm">
+        <span class="input-group-text">{{ ux_icon('tabler:search') }}</span>
+        <input type="search"
+               id="{{ input_id }}"
+               class="form-control"
+               placeholder="{{ label }}"
+               value="{{ value }}"
+               autocomplete="off"
+               data-model="norender|value"
+               data-action="input->live#action"
+               data-live-action-param="debounce(400)|onChange"
+               {{ sylius_test_html_attribute('grid-filter-input', filter.name) }}
+        >
+    </div>
+</div>

@@ -39,6 +39,16 @@ final class SyliusAdminExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sylius.admin.twig.payment_method.excluded_gateways', ['offline-test']);
     }
 
+    #[Test]
+    public function it_loads_the_live_grid_parameter_value_properly(): void
+    {
+        $this->load([]);
+        $this->assertContainerBuilderHasParameter('sylius_admin.grid.live.enabled', false);
+
+        $this->load(['grid' => ['live' => true]]);
+        $this->assertContainerBuilderHasParameter('sylius_admin.grid.live.enabled', true);
+    }
+
     protected function getContainerExtensions(): array
     {
         return [new SyliusAdminExtension()];

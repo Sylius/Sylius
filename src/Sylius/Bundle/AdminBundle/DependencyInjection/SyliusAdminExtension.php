@@ -30,6 +30,7 @@ final class SyliusAdminExtension extends Extension
         $container->setParameter('sylius.admin.notification.frequency', $config['notifications']['frequency']);
         $container->setParameter('sylius.admin.shop_enabled', false);
         $container->setParameter('sylius.admin.twig.payment_method.excluded_gateways', $config['twig']['payment_method']['excluded_gateways']);
+        $container->setParameter('sylius_admin.grid.live.enabled', $config['grid']['live']['enabled']);
 
         if ($container->hasParameter('kernel.bundles')) {
             $bundles = $container->getParameter('kernel.bundles');
