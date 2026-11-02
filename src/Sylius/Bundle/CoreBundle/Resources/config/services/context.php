@@ -59,6 +59,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.context.shopper'),
             service('sylius.resolver.cart.created_by_guest_flag'),
         ])
+        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services
