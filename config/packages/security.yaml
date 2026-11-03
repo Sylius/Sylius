@@ -31,8 +31,8 @@ security:
                 use_forward: false
                 use_referer: true
                 enable_csrf: true
-                csrf_parameter: _csrf_admin_security_token
-                csrf_token_id: admin_authenticate
+                csrf_parameter: '%sylius_admin.security.csrf_parameter%'
+                csrf_token_id: '%sylius_admin.security.csrf_token_id%'
             remember_me:
                 secret: "%env(APP_SECRET)%"
                 path: "/%sylius_admin.path_name%"
@@ -88,8 +88,8 @@ security:
                 use_forward: false
                 use_referer: true
                 enable_csrf: true
-                csrf_parameter: _csrf_shop_security_token
-                csrf_token_id: shop_authenticate
+                csrf_parameter: '%sylius_shop.security.csrf_parameter%'
+                csrf_token_id: '%sylius_shop.security.csrf_token_id%'
             json_login:
                 check_path: sylius_shop_json_login_check
                 username_path: _username
