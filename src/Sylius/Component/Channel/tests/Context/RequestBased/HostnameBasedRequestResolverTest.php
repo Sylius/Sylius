@@ -171,4 +171,43 @@ final class HostnameBasedRequestResolverTest extends TestCase
 
         self::assertSame($exactChannel, $this->resolver->findChannel($request));
     }
+
+    public function testFindsChannelWhenRequestHostnameHasATrailingDot(): void
+    {
+        $request = $this->createMock(Request::class);
+        $channel = $this->createMock(ChannelInterface::class);
+
+        $request->expects(self::once())
+            ->method('getHost')
+            ->willReturn('example.org.');
+
+        $this->channelRepository->expects(self::once())
+            ->method('findOneEnabledByHostname')
+            ->with('example.org')
+            ->willReturn($channel);
+
+        self::assertSame($channel, $this->resolver->findChannel($request));
+    }
+
+    public function testFindsLocalhostEquivalentWhenRequestHostnameIsLocalhostWithATrailingDot(): void
+    {
+        $request = $this->createMock(Request::class);
+        $channel = $this->createMock(ChannelInterface::class);
+
+        $request->expects(self::once())
+            ->method('getHost')
+            ->willReturn('localhost.');
+
+        $this->channelRepository->expects(self::exactly(2))
+            ->method('findOneEnabledByHostname')
+            ->willReturnCallback(function (string $hostname) use ($channel) {
+                return match ($hostname) {
+                    'localhost' => null,
+                    '127.0.0.1' => $channel,
+                    default => null,
+                };
+            });
+
+        self::assertSame($channel, $this->resolver->findChannel($request));
+    }
 }
