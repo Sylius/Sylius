@@ -102,3 +102,15 @@ Feature: Inventory releasing on order cancellation
         When I view all variants of the product "T-Shirt banana"
         Then the variant "Green" should have 5 items on hand
         And the "Green" variant should have 0 items on hold
+
+    @api @ui
+    Scenario: Verify the reserved inventory and quantity of product's items is back in stock after cancellation of a partially refunded order
+        Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
+        And the customer bought 3 units of "Green" variant of product "T-Shirt banana"
+        And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        And the order "#00000022" is already paid
+        But this order has been partially refunded
+        And the order "#00000022" was cancelled
+        When I view all variants of the product "T-Shirt banana"
+        Then the variant "Green" should have 5 items on hand
+        And the "Green" variant should have 0 items on hold
