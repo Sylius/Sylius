@@ -56,7 +56,7 @@
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
         "symfony/dotenv": "^6.4 || ^7.4 || ^8.0",
         "sylius/resource-bundle": "dev-grid-context as 1.15.99",
-        "sylius/grid-bundle": "dev-live-grids-component-trait as 1.16.99",
+        "sylius/grid-bundle": "dev-live-grids-remove-filter-traits as 1.16.99",
         "sylius/stack": "dev-twig-hooks-live-context as 0.14.99"
     },
     "config": {

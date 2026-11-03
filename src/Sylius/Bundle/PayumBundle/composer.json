@@ -43,7 +43,7 @@
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
         "phpunit/phpunit": "^12.5",
         "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
-        "sylius/grid-bundle": "dev-live-grids-component-trait as 1.16.99"
+        "sylius/grid-bundle": "dev-live-grids-remove-filter-traits as 1.16.99"
     },
     "config": {
         "allow-plugins": {
