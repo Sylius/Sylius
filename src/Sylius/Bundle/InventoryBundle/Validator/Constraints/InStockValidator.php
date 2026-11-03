@@ -20,8 +20,9 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class InStockValidator extends ConstraintValidator
+final class InStockValidator extends ConstraintValidator implements ResetInterface
 {
     private PropertyAccessor $accessor;
 
@@ -63,5 +64,9 @@ final class InStockValidator extends ConstraintValidator
         }
 
         $this->context->addViolation($constraint->shortMessage);
+    }
+    public function reset(): void {
+        $this->accessor = null;
+        $this->availabilityChecker = null;
     }
 }

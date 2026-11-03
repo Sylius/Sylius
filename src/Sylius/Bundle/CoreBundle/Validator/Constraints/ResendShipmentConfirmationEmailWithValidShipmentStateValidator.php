@@ -19,8 +19,9 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ResendShipmentConfirmationEmailWithValidShipmentStateValidator extends ConstraintValidator
+final class ResendShipmentConfirmationEmailWithValidShipmentStateValidator extends ConstraintValidator implements ResetInterface
 {
     /** @param RepositoryInterface<ShipmentInterface> $shipmentRepository */
     public function __construct(private RepositoryInterface $shipmentRepository)
@@ -49,5 +50,8 @@ final class ResendShipmentConfirmationEmailWithValidShipmentStateValidator exten
                 ['%state%' => $shipment->getState()],
             );
         }
+    }
+    public function reset(): void {
+        $this->shipmentRepository = null;
     }
 }

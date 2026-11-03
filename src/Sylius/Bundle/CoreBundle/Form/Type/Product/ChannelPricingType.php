@@ -24,8 +24,9 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ChannelPricingType extends AbstractResourceType
+final class ChannelPricingType extends AbstractResourceType implements ResetInterface
 {
     /** @param RepositoryInterface<ChannelPricingInterface>|null $channelPricingRepository */
     public function __construct(
@@ -101,5 +102,8 @@ final class ChannelPricingType extends AbstractResourceType
     public function getBlockPrefix(): string
     {
         return 'sylius_channel_pricing';
+    }
+    public function reset(): void {
+        $this->channelPricingRepository = null;
     }
 }

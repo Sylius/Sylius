@@ -24,9 +24,10 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Contracts\Service\ResetInterface;
 
 #[AsMessageHandler]
-final readonly class AddProductReviewHandler
+final readonly class AddProductReviewHandler implements ResetInterface
 {
     /**
      * @param FactoryInterface<ProductReviewInterface> $productReviewFactory
@@ -71,5 +72,11 @@ final readonly class AddProductReviewHandler
         $this->productReviewRepository->add($review);
 
         return $review;
+    }
+    public function reset(): void {
+        $this->productReviewFactory = null;
+        $this->productReviewRepository = null;
+        $this->productRepository = null;
+        $this->customerResolver = null;
     }
 }

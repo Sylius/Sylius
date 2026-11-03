@@ -20,12 +20,13 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Contracts\Service\ResetInterface;
 
 #[AsCommand(
     name: 'sylius:price-history:clear',
     description: 'Clears the price history up to a given number of days ago',
 )]
-final class ClearPriceHistoryCommand extends Command
+final class ClearPriceHistoryCommand extends Command implements ResetInterface
 {
     private SymfonyStyle $io;
 
@@ -67,5 +68,9 @@ final class ClearPriceHistoryCommand extends Command
         $this->channelPricingLogEntriesRemover->remove($days);
 
         return Command::SUCCESS;
+    }
+    public function reset(): void {
+        $this->io = null;
+        $this->channelPricingLogEntriesRemover = null;
     }
 }

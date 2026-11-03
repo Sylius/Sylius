@@ -22,8 +22,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class RemoveAvatarAction
+final class RemoveAvatarAction implements ResetInterface
 {
     public function __construct(
         private AvatarImageRepositoryInterface $avatarRepository,
@@ -50,5 +51,10 @@ final class RemoveAvatarAction
         }
 
         return new RedirectResponse($this->router->generate('sylius_admin_admin_user_update', ['id' => $userId]));
+    }
+    public function reset(): void {
+        $this->avatarRepository = null;
+        $this->router = null;
+        $this->csrfTokenManager = null;
     }
 }

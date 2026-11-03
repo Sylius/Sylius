@@ -23,8 +23,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class AbstractInstallCommand extends Command
-{
+abstract class AbstractInstallCommand extends Command {
     /** @var CommandExecutor|null */
     protected $commandExecutor;
 

@@ -18,9 +18,10 @@ use Sylius\Bundle\ApiBundle\Exception\UserNotFoundException;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Contracts\Service\ResetInterface;
 
 #[AsMessageHandler]
-final readonly class RemoveShopUserHandler
+final readonly class RemoveShopUserHandler implements ResetInterface
 {
     /**
      * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
@@ -40,5 +41,8 @@ final readonly class RemoveShopUserHandler
 
         $shopUser->setCustomer(null);
         $this->shopUserRepository->remove($shopUser);
+    }
+    public function reset(): void {
+        $this->shopUserRepository = null;
     }
 }

@@ -20,9 +20,10 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class ChannelDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
+final class ChannelDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface, ResetInterface
 {
     use DenormalizerAwareTrait;
 
@@ -73,4 +74,10 @@ final class ChannelDenormalizer implements DenormalizerInterface, DenormalizerAw
     {
         return [ChannelInterface::class => false];
     }
+
+    public function reset(): void
+    {
+        $this->context = null;
+    }
+
 }

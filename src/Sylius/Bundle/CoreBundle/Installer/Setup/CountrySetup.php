@@ -22,9 +22,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Exception\MissingResourceException;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class CountrySetup implements CountrySetupInterface
+final class CountrySetup implements CountrySetupInterface, ResetInterface
 {
+    private readonly string $originalCountry;
+
     /**
      * @param FactoryInterface<CountryInterface> $countryFactory
      * @param RepositoryInterface<CountryInterface> $countryRepository
@@ -35,6 +38,7 @@ final class CountrySetup implements CountrySetupInterface
         private string $country = 'US',
     ) {
         $this->country = trim($country);
+        $this->originalCountry = $this->country;
     }
 
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CountryInterface
@@ -90,5 +94,10 @@ final class CountrySetup implements CountrySetupInterface
         } catch (MissingResourceException) {
             return null;
         }
+    }
+
+    public function reset(): void
+    {
+        $this->country = $this->originalCountry;
     }
 }

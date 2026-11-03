@@ -255,4 +255,29 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
             validateAgainstAllChannels: true,
         ));
     }
+
+    public function testItResetsCachedChannels(): void
+    {
+        $validator = $this->createMock(ValidatorInterface::class);
+        $contextualValidator = $this->createMock(ContextualValidatorInterface::class);
+
+        $this->channelRepository->expects($this->exactly(2))
+            ->method('findAllWithBasicData')
+            ->willReturnOnConsecutiveCalls(
+                [['code' => 'WEB']],
+                [['code' => 'WEB'], ['code' => 'MOBILE']],
+            );
+
+        $this->executionContext->method('getValidator')->willReturn($validator);
+        $validator->method('inContext')->willReturn($contextualValidator);
+
+        $constraint = new ChannelCodeCollection(validateAgainstAllChannels: true);
+
+        $this->validator->validate(['WEB' => ['one']], $constraint);
+        $this->validator->validate(['WEB' => ['one']], $constraint);
+
+        $this->validator->reset();
+
+        $this->validator->validate(['WEB' => ['one'], 'MOBILE' => ['two']], $constraint);
+    }
 }

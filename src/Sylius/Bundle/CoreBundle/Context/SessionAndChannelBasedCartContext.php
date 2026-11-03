@@ -21,6 +21,7 @@ use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
 final class SessionAndChannelBasedCartContext implements CartContextInterface
 {

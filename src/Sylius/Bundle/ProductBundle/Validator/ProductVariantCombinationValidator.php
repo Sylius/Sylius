@@ -20,8 +20,9 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ProductVariantCombinationValidator extends ConstraintValidator
+final class ProductVariantCombinationValidator extends ConstraintValidator implements ResetInterface
 {
     public function __construct(private ProductVariantsParityCheckerInterface $variantsParityChecker)
     {
@@ -45,5 +46,8 @@ final class ProductVariantCombinationValidator extends ConstraintValidator
         if ($this->variantsParityChecker->checkParity($value, $product)) {
             $this->context->addViolation($constraint->message);
         }
+    }
+    public function reset(): void {
+        $this->variantsParityChecker = null;
     }
 }

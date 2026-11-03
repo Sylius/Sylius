@@ -27,8 +27,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final readonly class CustomerEmailUpdaterListener
+final readonly class CustomerEmailUpdaterListener implements ResetInterface
 {
     public function __construct(
         private GeneratorInterface $tokenGenerator,
@@ -101,5 +102,13 @@ final readonly class CustomerEmailUpdaterListener
             $flashBag = FlashBagProvider::getFlashBag($this->requestStack);
             $flashBag->add('success', 'sylius.user.verify_email_request');
         }
+    }
+    public function reset(): void {
+        $this->tokenGenerator = null;
+        $this->channelContext = null;
+        $this->eventDispatcher = null;
+        $this->requestStack = null;
+        $this->uriBasedSectionContext = null;
+        $this->tokenStorage = null;
     }
 }

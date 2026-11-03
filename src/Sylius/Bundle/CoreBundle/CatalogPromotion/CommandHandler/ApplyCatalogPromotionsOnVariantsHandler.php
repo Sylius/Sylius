@@ -21,8 +21,9 @@ use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ApplyCatalogPromotionsOnVariantsHandler
+final class ApplyCatalogPromotionsOnVariantsHandler implements ResetInterface
 {
     /** @param EligibleCatalogPromotionsProviderInterface<CatalogPromotionInterface> $catalogPromotionsProvider */
     public function __construct(
@@ -47,5 +48,11 @@ final class ApplyCatalogPromotionsOnVariantsHandler
                 $this->catalogPromotionApplicator->applyOnVariant($variant, $promotion);
             }
         }
+    }
+    public function reset(): void {
+        $this->catalogPromotionsProvider = null;
+        $this->catalogPromotionApplicator = null;
+        $this->productVariantRepository = null;
+        $this->clearer = null;
     }
 }

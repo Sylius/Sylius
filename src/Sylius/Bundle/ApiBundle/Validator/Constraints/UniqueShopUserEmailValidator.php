@@ -18,8 +18,9 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class UniqueShopUserEmailValidator extends ConstraintValidator
+final class UniqueShopUserEmailValidator extends ConstraintValidator implements ResetInterface
 {
     public function __construct(
         private CanonicalizerInterface $canonicalizer,
@@ -44,5 +45,9 @@ final class UniqueShopUserEmailValidator extends ConstraintValidator
         }
 
         $this->context->addViolation($constraint->message);
+    }
+    public function reset(): void {
+        $this->canonicalizer = null;
+        $this->shopUserRepository = null;
     }
 }

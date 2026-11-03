@@ -33,7 +33,6 @@ class ShopUserFixture extends AbstractResourceFixture
                 ->scalarNode('phone_number')->end()
                 ->scalarNode('birthday')->end()
                 ->booleanNode('enabled')->end()
-                ->booleanNode('verified')->end()
                 ->scalarNode('password')->cannotBeEmpty()->end()
                 ->scalarNode('customer_group')->end()
         ;

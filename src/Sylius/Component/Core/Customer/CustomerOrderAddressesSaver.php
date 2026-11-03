@@ -16,6 +16,7 @@ namespace Sylius\Component\Core\Customer;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
 {

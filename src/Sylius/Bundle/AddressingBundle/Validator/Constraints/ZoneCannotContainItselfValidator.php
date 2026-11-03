@@ -19,8 +19,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class ZoneCannotContainItselfValidator extends ConstraintValidator
-{
+final class ZoneCannotContainItselfValidator extends ConstraintValidator {
     public function validate(mixed $value, Constraint $constraint): void
     {
         if ($value === null) {

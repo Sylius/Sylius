@@ -16,9 +16,10 @@ namespace Sylius\Bundle\CoreBundle\Telemetry\EventListener;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Index;
 use Doctrine\ORM\Tools\Event\GenerateSchemaEventArgs;
+use Symfony\Contracts\Service\ResetInterface;
 
 /** @internal */
-final class TelemetryIndexSchemaListener
+final class TelemetryIndexSchemaListener implements ResetInterface
 {
     private const TABLE_NAME = 'sylius_order';
 
@@ -67,5 +68,8 @@ final class TelemetryIndexSchemaListener
         $dbIndexes = array_change_key_case($dbIndexes);
 
         return $dbIndexes[strtolower(self::INDEX_NAME)] ?? null;
+    }
+    public function reset(): void {
+        $this->connection = null;
     }
 }

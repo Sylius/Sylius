@@ -19,6 +19,9 @@ use Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterf
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
-    $services->set('sylius_payum.context.payment_request', PaymentRequestContext::class);
+    $services
+        ->set('sylius_payum.context.payment_request', PaymentRequestContext::class)
+        ->tag('kernel.reset', ['method' => 'reset'])
+    ;
     $services->alias(PaymentRequestContextInterface::class, 'sylius_payum.context.payment_request');
 };

@@ -17,8 +17,9 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final readonly class CartItemRemoveListener
+final readonly class CartItemRemoveListener implements ResetInterface
 {
     public function __construct(private OrderModifierInterface $orderModifier)
     {
@@ -31,5 +32,8 @@ final readonly class CartItemRemoveListener
         Assert::isInstanceOf($orderItem, OrderItemInterface::class);
 
         $this->orderModifier->removeFromOrder($orderItem->getOrder(), $orderItem);
+    }
+    public function reset(): void {
+        $this->orderModifier = null;
     }
 }

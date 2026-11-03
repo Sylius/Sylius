@@ -1,0 +1,40 @@
+# Fixtures for the `worker` Behat suite.
+#
+# Channel A is NOT created here. Channel A is the default channel from the
+# `default` suite (FASHION_WEB), which already carries the catalogue, prices and
+# the payment and shipping methods. Creating a third, empty channel beside it
+# gives a storefront with no products: the first version of this suite did
+# exactly that and every scenario failed on missing product links.
+#
+# The hostname of the default channel comes from SYLIUS_FIXTURES_HOSTNAME, read
+# by the `default` suite - the CI job passes channel-a.localhost.
+#
+# Loaded AFTER the default suite:
+#     bin/console sylius:fixtures:load worker -n
+
+sylius_fixtures:
+    suites:
+        worker:
+            fixtures:
+                channel:
+                    options:
+                        custom:
+                            channel_b:
+                                code: 'CHANNEL_B'
+                                name: 'Channel B'
+                                hostname: 'channel-b.localhost'
+                                default_locale: 'pl_PL'
+                                locales: ['pl_PL']
+                                base_currency: 'PLN'
+                                currencies: ['PLN']
+                                account_verification_required: false
+                                enabled: true
+
+                # The `channel` fixture creates an empty channel. Without this
+                # step channel B has no products, no prices and no shipping
+                # rates, and adding to the cart ends in
+                # MissingChannelConfigurationException.
+                channel_catalog:
+                    options:
+                        source: 'FASHION_WEB'
+                        target: 'CHANNEL_B'

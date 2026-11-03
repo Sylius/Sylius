@@ -27,6 +27,7 @@ use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Service\ResetInterface;
 
 /** @implements ExampleFactoryInterface<ProductReviewInterface> */
 class ProductReviewExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface

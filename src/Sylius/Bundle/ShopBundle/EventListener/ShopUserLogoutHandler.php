@@ -16,8 +16,9 @@ namespace Sylius\Bundle\ShopBundle\EventListener;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ShopUserLogoutHandler
+final class ShopUserLogoutHandler implements ResetInterface
 {
     public function __construct(
         private ChannelContextInterface $channelContext,
@@ -30,5 +31,9 @@ final class ShopUserLogoutHandler
         /** @var ChannelInterface $channel */
         $channel = $this->channelContext->getChannel();
         $this->cartStorage->removeForChannel($channel);
+    }
+    public function reset(): void {
+        $this->channelContext = null;
+        $this->cartStorage = null;
     }
 }

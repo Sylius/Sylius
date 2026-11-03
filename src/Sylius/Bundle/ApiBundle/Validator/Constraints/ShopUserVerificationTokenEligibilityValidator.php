@@ -20,8 +20,9 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ShopUserVerificationTokenEligibilityValidator extends ConstraintValidator
+final class ShopUserVerificationTokenEligibilityValidator extends ConstraintValidator implements ResetInterface
 {
     /** @param RepositoryInterface<ShopUserInterface> $shopUserRepository */
     public function __construct(private RepositoryInterface $shopUserRepository)
@@ -44,5 +45,8 @@ final class ShopUserVerificationTokenEligibilityValidator extends ConstraintVali
                 ['%verificationToken%' => $value->token],
             );
         }
+    }
+    public function reset(): void {
+        $this->shopUserRepository = null;
     }
 }

@@ -20,8 +20,9 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class UniqueReviewerEmailValidator extends ConstraintValidator
+final class UniqueReviewerEmailValidator extends ConstraintValidator implements ResetInterface
 {
     public function __construct(
         private UserRepositoryInterface $shopUserRepository,
@@ -56,5 +57,9 @@ final class UniqueReviewerEmailValidator extends ConstraintValidator
         }
 
         return null;
+    }
+    public function reset(): void {
+        $this->shopUserRepository = null;
+        $this->userContext = null;
     }
 }

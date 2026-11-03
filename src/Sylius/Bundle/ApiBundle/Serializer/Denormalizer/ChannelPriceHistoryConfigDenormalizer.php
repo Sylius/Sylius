@@ -20,9 +20,10 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class ChannelPriceHistoryConfigDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface
+final class ChannelPriceHistoryConfigDenormalizer implements DenormalizerInterface, DenormalizerAwareInterface, ResetInterface
 {
     use DenormalizerAwareTrait;
 
@@ -68,5 +69,10 @@ final class ChannelPriceHistoryConfigDenormalizer implements DenormalizerInterfa
     public function getSupportedTypes(?string $format): array
     {
         return [ChannelPriceHistoryConfigInterface::class => false];
+    }
+
+    public function reset(): void
+    {
+        $this->context = null;
     }
 }
