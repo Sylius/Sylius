@@ -149,7 +149,6 @@ return static function (ContainerConfigurator $container) {
             service('property_accessor'),
         ])
         ->tag('validator.constraint_validator', ['alias' => 'sylius_channel_code_collection'])
-        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services

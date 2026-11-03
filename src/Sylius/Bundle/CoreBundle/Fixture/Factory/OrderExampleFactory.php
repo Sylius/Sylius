@@ -42,7 +42,6 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
-use Symfony\Contracts\Service\ResetInterface;
 
 /** @implements ExampleFactoryInterface<OrderInterface> */
 class OrderExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface

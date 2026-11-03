@@ -24,6 +24,5 @@ return static function (ContainerConfigurator $container) {
             service('sylius.context.channel'),
             service('sylius.repository.theme'),
         ])
-        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 };

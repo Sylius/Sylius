@@ -9,7 +9,6 @@ imports:
     - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/jeans.yaml' }
     - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/promotion.yaml' }
     - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/custom_fixtures.yaml' }
-    - { resource: '@SyliusCoreBundle/Resources/config/app/fixtures/worker_channels.yaml' }
 
 parameters:
     env(SYLIUS_FIXTURES_HOSTNAME): 'localhost'

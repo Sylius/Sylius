@@ -18,7 +18,6 @@ use Sylius\Bundle\PaymentBundle\Announcer\PaymentRequestAnnouncerInterface;
 use Sylius\Component\Payment\Factory\PaymentRequestFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
-use Symfony\Contracts\Service\ResetInterface;
 
 final class AfterTokenRequestProcessor implements AfterTokenRequestProcessorInterface
 {

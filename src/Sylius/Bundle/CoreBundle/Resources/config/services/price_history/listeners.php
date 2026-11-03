@@ -32,7 +32,6 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius.entity_observer.price_history.process_lowest_prices_on_channel_change', ProcessLowestPricesOnChannelChangeObserver::class)
         ->args([service('sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings')])
         ->tag('sylius.entity_observer')
-        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services
@@ -42,7 +41,6 @@ return static function (ContainerConfigurator $container) {
             service('sylius.command_dispatcher.price_history.batched_apply_lowest_price_on_channel_pricings'),
         ])
         ->tag('sylius.entity_observer')
-        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services

@@ -225,7 +225,6 @@ return static function (ContainerConfigurator $container) {
             PaymentRequestActionAware::DEFAULT_ARGUMENT_NAME,
             service('sylius.provider.payment_request.default_action'),
         ])
-        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services

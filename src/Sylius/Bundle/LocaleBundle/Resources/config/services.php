@@ -79,7 +79,6 @@ return static function (ContainerConfigurator $container) {
             service('sylius.provider.locale'),
         ])
         ->tag('sylius.context.locale', ['priority' => 32])
-        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services

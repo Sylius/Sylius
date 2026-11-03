@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
-use Symfony\Contracts\Service\ResetInterface;
 
 final class PaymentRequestPayResponseProvider implements PayResponseProviderInterface
 {

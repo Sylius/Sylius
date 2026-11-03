@@ -71,7 +71,6 @@ return static function (ContainerConfigurator $container) {
         ])
         ->tag('doctrine.event_listener', ['event' => 'onFlush', 'lazy' => true])
         ->tag('doctrine.event_listener', ['event' => 'postFlush', 'lazy' => true])
-        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services
