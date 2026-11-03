@@ -20,8 +20,9 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class OrderNotEmptyValidator extends ConstraintValidator
+final class OrderNotEmptyValidator extends ConstraintValidator implements ResetInterface
 {
     public function __construct(private OrderRepositoryInterface $orderRepository)
     {
@@ -48,5 +49,8 @@ final class OrderNotEmptyValidator extends ConstraintValidator
         if ($order->getItems()->isEmpty()) {
             $this->context->addViolation($constraint->message);
         }
+    }
+    public function reset(): void {
+        $this->orderRepository = null;
     }
 }

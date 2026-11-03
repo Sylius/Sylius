@@ -19,8 +19,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class ValidTextAttributeConfigurationValidator extends ConstraintValidator
-{
+final class ValidTextAttributeConfigurationValidator extends ConstraintValidator {
     public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var AttributeInterface $value */

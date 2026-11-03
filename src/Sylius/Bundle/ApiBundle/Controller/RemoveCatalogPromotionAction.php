@@ -19,8 +19,9 @@ use Sylius\Component\Promotion\Exception\InvalidCatalogPromotionStateException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Service\ResetInterface;
 
-final readonly class RemoveCatalogPromotionAction
+final readonly class RemoveCatalogPromotionAction implements ResetInterface
 {
     public function __construct(
         private CatalogPromotionRemovalProcessorInterface $catalogPromotionRemovalProcessor,
@@ -46,5 +47,8 @@ final readonly class RemoveCatalogPromotionAction
                 Response::HTTP_BAD_REQUEST,
             );
         }
+    }
+    public function reset(): void {
+        $this->catalogPromotionRemovalProcessor = null;
     }
 }

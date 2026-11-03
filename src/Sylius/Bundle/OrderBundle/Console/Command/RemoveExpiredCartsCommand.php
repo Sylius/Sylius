@@ -18,6 +18,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * @final
@@ -26,7 +27,7 @@ use Symfony\Component\Console\Output\OutputInterface;
     name: 'sylius:remove-expired-carts',
     description: 'Removes carts that have been idle for a period set in `sylius_order.expiration.cart` configuration key.',
 )]
-class RemoveExpiredCartsCommand extends Command
+class RemoveExpiredCartsCommand extends Command implements ResetInterface
 {
     public function __construct(
         private ExpiredCartsRemoverInterface $expiredCartsRemover,
@@ -45,5 +46,9 @@ class RemoveExpiredCartsCommand extends Command
         $this->expiredCartsRemover->remove();
 
         return Command::SUCCESS;
+    }
+    public function reset(): void {
+        $this->expiredCartsRemover = null;
+        $this->expirationTime = null;
     }
 }

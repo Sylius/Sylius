@@ -32,9 +32,10 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 #[AsMessageHandler]
-final class AddPaymentRequestHandler
+final class AddPaymentRequestHandler implements ResetInterface
 {
     /**
      * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
@@ -118,5 +119,15 @@ final class AddPaymentRequestHandler
         return null === $customer ||
             null === $customer->getUser() ||
             $order->isCreatedByGuest();
+    }
+    public function reset(): void {
+        $this->paymentMethodRepository = null;
+        $this->paymentRepository = null;
+        $this->paymentRequestFactory = null;
+        $this->paymentRequestRepository = null;
+        $this->defaultActionProvider = null;
+        $this->defaultPayloadProvider = null;
+        $this->userContext = null;
+        $this->paymentMethodsResolver = null;
     }
 }

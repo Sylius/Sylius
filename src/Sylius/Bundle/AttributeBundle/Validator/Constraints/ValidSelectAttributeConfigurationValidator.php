@@ -19,8 +19,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class ValidSelectAttributeConfigurationValidator extends ConstraintValidator
-{
+final class ValidSelectAttributeConfigurationValidator extends ConstraintValidator {
     public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var AttributeInterface $value */
@@ -67,4 +66,5 @@ final class ValidSelectAttributeConfigurationValidator extends ConstraintValidat
             $this->context->addViolation($constraint->messageMinEntries);
         }
     }
+
 }

@@ -22,12 +22,13 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Contracts\Service\ResetInterface;
 
 #[AsCommand(
     name: 'sylius:admin-user:change-password',
     description: 'Change password of admin user',
 )]
-final class ChangeAdminUserPasswordCommand extends Command
+final class ChangeAdminUserPasswordCommand extends Command implements ResetInterface
 {
     protected SymfonyStyle $io;
 
@@ -74,5 +75,10 @@ final class ChangeAdminUserPasswordCommand extends Command
         $this->io->success('Admin user password has been changed successfully.');
 
         return Command::SUCCESS;
+    }
+    public function reset(): void {
+        $this->adminUserRepository = null;
+        $this->passwordUpdater = null;
+        $this->questionFactory = null;
     }
 }

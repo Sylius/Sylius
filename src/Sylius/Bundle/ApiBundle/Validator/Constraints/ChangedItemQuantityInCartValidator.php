@@ -25,8 +25,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class ChangedItemQuantityInCartValidator extends ConstraintValidator
-{
+final class ChangedItemQuantityInCartValidator extends ConstraintValidator {
     /**
      * @param OrderItemRepositoryInterface<OrderItemInterface> $orderItemRepository
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
@@ -110,4 +109,5 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
             );
         }
     }
+
 }

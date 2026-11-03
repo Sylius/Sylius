@@ -18,8 +18,9 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ShopUserResetPasswordTokenExistsValidator extends ConstraintValidator
+final class ShopUserResetPasswordTokenExistsValidator extends ConstraintValidator implements ResetInterface
 {
     /**
      * @param UserRepositoryInterface<UserInterface> $shopUserRepository
@@ -43,5 +44,8 @@ final class ShopUserResetPasswordTokenExistsValidator extends ConstraintValidato
         }
 
         $this->context->addViolation($constraint->message, ['%token%' => $value]);
+    }
+    public function reset(): void {
+        $this->shopUserRepository = null;
     }
 }

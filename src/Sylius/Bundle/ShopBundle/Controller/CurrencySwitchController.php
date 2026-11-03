@@ -20,8 +20,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-final readonly class CurrencySwitchController
+final readonly class CurrencySwitchController implements ResetInterface
 {
     use RedirectTrait;
 
@@ -40,5 +41,10 @@ final readonly class CurrencySwitchController
         $this->currencyStorage->set($channel, $code);
 
         return new RedirectResponse($this->getRedirectUrl($request, $this->router));
+    }
+    public function reset(): void {
+        $this->currencyStorage = null;
+        $this->channelContext = null;
+        $this->router = null;
     }
 }

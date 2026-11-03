@@ -19,8 +19,9 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class AdminResetPasswordTokenNonExpiredValidator extends ConstraintValidator
+final class AdminResetPasswordTokenNonExpiredValidator extends ConstraintValidator implements ResetInterface
 {
     public function __construct(
         private UserRepositoryInterface $adminUserRepository,
@@ -46,5 +47,9 @@ final class AdminResetPasswordTokenNonExpiredValidator extends ConstraintValidat
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
             $this->context->addViolation($constraint->message);
         }
+    }
+    public function reset(): void {
+        $this->adminUserRepository = null;
+        $this->tokenTtl = null;
     }
 }

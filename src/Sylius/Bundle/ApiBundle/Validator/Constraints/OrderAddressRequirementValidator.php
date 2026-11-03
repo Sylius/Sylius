@@ -22,8 +22,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-final class OrderAddressRequirementValidator extends ConstraintValidator
-{
+final class OrderAddressRequirementValidator extends ConstraintValidator {
     /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(private readonly OrderRepositoryInterface $orderRepository)
     {

@@ -20,9 +20,10 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintValidator
+final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintValidator implements ResetInterface
 {
     /**
      * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
@@ -84,4 +85,12 @@ final class ChosenPaymentRequestActionEligibilityValidator extends ConstraintVal
             '%id%' => $value->paymentId,
         ]);
     }
+
+    public function reset(): void {
+        $this->paymentMethodRepository = null;
+        $this->gatewayFactoryCommandProvider = null;
+        $this->gatewayFactoryNameProvider = null;
+        $this->shopAllowedActions = null;
+    }
+
 }

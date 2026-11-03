@@ -22,10 +22,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Intl\Currencies;
 use Symfony\Component\Intl\Exception\MissingResourceException;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class CurrencySetup implements CurrencySetupInterface
+final class CurrencySetup implements CurrencySetupInterface, ResetInterface
 {
     private string $currency;
+    private readonly string $originalCurrency;
 
     /**
      * @param RepositoryInterface<CurrencyInterface> $currencyRepository
@@ -37,6 +39,7 @@ final class CurrencySetup implements CurrencySetupInterface
         string $currency = 'USD',
     ) {
         $this->currency = trim($currency);
+        $this->originalCurrency = $this->currency;
     }
 
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): CurrencyInterface
@@ -91,5 +94,12 @@ final class CurrencySetup implements CurrencySetupInterface
         } catch (MissingResourceException) {
             return null;
         }
+    }
+
+    public function reset(): void
+    {
+        $this->currency = $this->originalCurrency;
+        $this->currencyRepository = null;
+        $this->currencyFactory = null;
     }
 }

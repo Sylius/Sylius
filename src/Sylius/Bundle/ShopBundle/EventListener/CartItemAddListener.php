@@ -17,8 +17,9 @@ use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final readonly class CartItemAddListener
+final readonly class CartItemAddListener implements ResetInterface
 {
     public function __construct(private OrderModifierInterface $orderModifier)
     {
@@ -31,5 +32,8 @@ final readonly class CartItemAddListener
         Assert::isInstanceOf($addToCartCommand, AddToCartCommandInterface::class);
 
         $this->orderModifier->addToOrder($addToCartCommand->getCart(), $addToCartCommand->getCartItem());
+    }
+    public function reset(): void {
+        $this->orderModifier = null;
     }
 }

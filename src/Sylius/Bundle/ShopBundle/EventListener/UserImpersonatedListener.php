@@ -21,8 +21,9 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class UserImpersonatedListener
+final class UserImpersonatedListener implements ResetInterface
 {
     public function __construct(
         private CartStorageInterface $cartStorage,
@@ -55,4 +56,11 @@ final class UserImpersonatedListener
 
         $this->cartStorage->setForChannel($channel, $cart);
     }
+
+    public function reset(): void {
+        $this->cartStorage = null;
+        $this->channelContext = null;
+        $this->orderRepository = null;
+    }
+
 }

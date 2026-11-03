@@ -19,8 +19,9 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ResendOrderConfirmationEmailWithValidOrderStateValidator extends ConstraintValidator
+final class ResendOrderConfirmationEmailWithValidOrderStateValidator extends ConstraintValidator implements ResetInterface
 {
     /**
      * @param RepositoryInterface<OrderInterface> $orderRepository
@@ -54,5 +55,9 @@ final class ResendOrderConfirmationEmailWithValidOrderStateValidator extends Con
                 ['%state%' => $order->getState()],
             );
         }
+    }
+    public function reset(): void {
+        $this->orderRepository = null;
+        $this->orderStatesToAllowResendingConfirmationEmail = null;
     }
 }

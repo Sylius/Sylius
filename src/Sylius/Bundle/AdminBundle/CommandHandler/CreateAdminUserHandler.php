@@ -22,9 +22,10 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 #[AsMessageHandler]
-final class CreateAdminUserHandler
+final class CreateAdminUserHandler implements ResetInterface
 {
     /**
      * @param UserRepositoryInterface<AdminUserInterface> $adminUserRepository
@@ -84,5 +85,12 @@ final class CreateAdminUserHandler
         foreach ($constraintViolationList as $violation) {
             yield $violation->getMessage();
         }
+    }
+    public function reset(): void {
+        $this->adminUserRepository = null;
+        $this->adminUserFactory = null;
+        $this->canonicalizer = null;
+        $this->validator = null;
+        $this->validationGroups = null;
     }
 }

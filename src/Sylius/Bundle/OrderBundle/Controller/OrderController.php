@@ -25,8 +25,9 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Contracts\Service\ResetInterface;
 
-class OrderController extends ResourceController
+class OrderController extends ResourceController implements ResetInterface
 {
     public function summaryAction(Request $request): Response
     {
@@ -144,5 +145,10 @@ class OrderController extends ResourceController
     protected function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->container->get('event_dispatcher');
+    }
+
+    public function reset(): void
+    {
+        $this->container = null;
     }
 }

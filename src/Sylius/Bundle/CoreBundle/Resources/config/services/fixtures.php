@@ -16,6 +16,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Sylius\Bundle\CoreBundle\Fixture\AddressFixture;
 use Sylius\Bundle\CoreBundle\Fixture\AdminUserFixture;
 use Sylius\Bundle\CoreBundle\Fixture\CatalogPromotionFixture;
+use Sylius\Bundle\CoreBundle\Fixture\ChannelCatalogFixture;
 use Sylius\Bundle\CoreBundle\Fixture\ChannelFixture;
 use Sylius\Bundle\CoreBundle\Fixture\CurrencyFixture;
 use Sylius\Bundle\CoreBundle\Fixture\CustomerGroupFixture;
@@ -271,6 +272,20 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.payment'),
             service('sylius_abstraction.state_machine'),
             service('sylius.manager.payment'),
+        ])
+        ->tag('sylius_fixtures.fixture')
+    ;
+
+    $services
+        ->set('sylius.fixture.channel_catalog', ChannelCatalogFixture::class)
+        ->args([
+            service('sylius.manager.channel'),
+            service('sylius.repository.channel'),
+            service('sylius.repository.product'),
+            service('sylius.repository.product_variant'),
+            service('sylius.repository.payment_method'),
+            service('sylius.repository.shipping_method'),
+            service('sylius.factory.channel_pricing'),
         ])
         ->tag('sylius_fixtures.fixture')
     ;

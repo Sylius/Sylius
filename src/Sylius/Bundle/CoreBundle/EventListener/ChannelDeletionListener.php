@@ -18,8 +18,9 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\ShippingMethod\Updater\ChannelAwareShippingMethodUpdaterInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
+use Symfony\Contracts\Service\ResetInterface;
 
-final readonly class ChannelDeletionListener
+final readonly class ChannelDeletionListener implements ResetInterface
 {
     public function __construct(
         private ChannelDeletionCheckerInterface $channelDeletionChecker,
@@ -63,5 +64,9 @@ final readonly class ChannelDeletionListener
         }
 
         return $channel;
+    }
+    public function reset(): void {
+        $this->channelDeletionChecker = null;
+        $this->shippingMethodUpdater = null;
     }
 }

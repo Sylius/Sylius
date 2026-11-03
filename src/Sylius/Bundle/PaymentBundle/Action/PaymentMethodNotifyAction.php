@@ -25,8 +25,9 @@ use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class PaymentMethodNotifyAction
+final class PaymentMethodNotifyAction implements ResetInterface
 {
     /**
      * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
@@ -66,5 +67,14 @@ final class PaymentMethodNotifyAction
         $this->paymentRequestAnnouncer->dispatchPaymentRequestCommand($paymentRequest);
 
         return $this->notifyResponseProvider->provide($paymentRequest);
+    }
+    public function reset(): void {
+        $this->paymentMethodRepository = null;
+        $this->notifyPaymentProvider = null;
+        $this->paymentRequestFactory = null;
+        $this->notifyPayloadProcessor = null;
+        $this->paymentRequestRepository = null;
+        $this->paymentRequestAnnouncer = null;
+        $this->notifyResponseProvider = null;
     }
 }

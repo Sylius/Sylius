@@ -23,8 +23,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-class CheckoutCompletionValidator extends ConstraintValidator
-{
+class CheckoutCompletionValidator extends ConstraintValidator {
     /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(
         private readonly OrderRepositoryInterface $orderRepository,

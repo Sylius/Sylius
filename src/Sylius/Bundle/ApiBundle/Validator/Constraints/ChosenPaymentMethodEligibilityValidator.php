@@ -25,8 +25,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
-{
+final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator {
     /**
      * @param PaymentRepositoryInterface<PaymentInterface> $paymentRepository
      * @param PaymentMethodRepositoryInterface<PaymentMethodInterface> $paymentMethodRepository
@@ -67,4 +66,5 @@ final class ChosenPaymentMethodEligibilityValidator extends ConstraintValidator
             $this->context->addViolation($constraint->notAvailableMessage, ['%name%' => $paymentMethod->getName()]);
         }
     }
+
 }

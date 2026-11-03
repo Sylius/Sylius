@@ -24,9 +24,13 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Intl\Languages;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class LocaleSetup implements LocaleSetupInterface
+final class LocaleSetup implements LocaleSetupInterface, ResetInterface
 {
+    private readonly string $originalLocale;
+    private readonly string $originalLocaleParameterFilePath;
+
     /**
      * @param RepositoryInterface<LocaleInterface> $localeRepository
      * @param FactoryInterface<LocaleInterface> $localeFactory
@@ -39,6 +43,8 @@ final class LocaleSetup implements LocaleSetupInterface
         private string $localeParameterFilePath = 'config/parameters.yaml',
     ) {
         $this->locale = trim($locale);
+        $this->originalLocale = $this->locale;
+        $this->originalLocaleParameterFilePath = $this->localeParameterFilePath;
     }
 
     public function setup(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): LocaleInterface
@@ -114,5 +120,14 @@ final class LocaleSetup implements LocaleSetupInterface
         $content['parameters']['locale'] = $code;
 
         $this->filesystem->dumpFile($this->localeParameterFilePath, Yaml::dump($content));
+    }
+
+    public function reset(): void
+    {
+        $this->localeRepository = null;
+        $this->localeFactory = null;
+        $this->locale = $this->originalLocale;
+        $this->filesystem = null;
+        $this->localeParameterFilePath = $this->originalLocaleParameterFilePath;
     }
 }

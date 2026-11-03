@@ -16,6 +16,7 @@ namespace Sylius\Component\Core\Currency;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Resource\Storage\StorageInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 final class CurrencyStorage implements CurrencyStorageInterface
 {
@@ -60,4 +61,9 @@ final class CurrencyStorage implements CurrencyStorageInterface
 
         return in_array($currencyCode, $availableCurrencies, true);
     }
+
+    public function reset(): void {
+        $this->storage = null;
+    }
+
 }

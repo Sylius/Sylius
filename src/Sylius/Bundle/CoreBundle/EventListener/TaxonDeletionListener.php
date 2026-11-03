@@ -22,8 +22,9 @@ use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 use Symfony\Component\EventDispatcher\GenericEvent as SymfonyGenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class TaxonDeletionListener
+final class TaxonDeletionListener implements ResetInterface
 {
     /** @var TaxonAwareRuleUpdaterInterface[] */
     private array $ruleUpdaters;
@@ -92,4 +93,12 @@ final class TaxonDeletionListener
             $taxon->setPosition(-1);
         }
     }
+
+    public function reset(): void {
+        $this->ruleUpdaters = null;
+        $this->requestStack = null;
+        $this->channelRepository = null;
+        $this->taxonInPromotionRuleChecker = null;
+    }
+
 }

@@ -22,8 +22,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ZoneMemberIntegrityListener
+final class ZoneMemberIntegrityListener implements ResetInterface
 {
     public function __construct(
         private RequestStack $requestStack,
@@ -71,4 +72,11 @@ final class ZoneMemberIntegrityListener
     {
         return $this->requestStack->getSession();
     }
+
+    public function reset(): void {
+        $this->requestStack = null;
+        $this->zoneDeletionChecker = null;
+        $this->countryProvincesDeletionChecker = null;
+    }
+
 }

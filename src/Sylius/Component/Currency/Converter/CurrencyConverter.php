@@ -15,14 +15,20 @@ namespace Sylius\Component\Currency\Converter;
 
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class CurrencyConverter implements CurrencyConverterInterface
+final class CurrencyConverter implements CurrencyConverterInterface, ResetInterface
 {
     /** @var array|ExchangeRateInterface[] */
     private ?array $cache = null;
 
     public function __construct(private ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
+    }
+
+    public function reset(): void
+    {
+        $this->cache = null;
     }
 
     public function convert(int $value, string $sourceCurrencyCode, string $targetCurrencyCode): int

@@ -18,9 +18,10 @@ use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
 use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class CouponGenerationAmountValidator extends ConstraintValidator
+final class CouponGenerationAmountValidator extends ConstraintValidator implements ResetInterface
 {
     public function __construct(private GenerationPolicyInterface $generationPolicy)
     {
@@ -49,4 +50,9 @@ final class CouponGenerationAmountValidator extends ConstraintValidator
             );
         }
     }
+
+    public function reset(): void {
+        $this->generationPolicy = null;
+    }
+
 }

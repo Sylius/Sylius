@@ -25,8 +25,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class OrderPaymentRequestEligibilityValidator extends ConstraintValidator
-{
+final class OrderPaymentRequestEligibilityValidator extends ConstraintValidator {
     /**
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
      * @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository

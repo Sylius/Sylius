@@ -23,8 +23,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
-{
+final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator {
     /**
      * @param ShipmentRepositoryInterface<ShipmentInterface> $shipmentRepository
      * @param ShippingMethodRepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
@@ -71,4 +70,5 @@ final class ChosenShippingMethodEligibilityValidator extends ConstraintValidator
             $this->context->addViolation($constraint->message, ['%name%' => $shippingMethod->getName()]);
         }
     }
+
 }

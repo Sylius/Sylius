@@ -20,8 +20,9 @@ use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ShipmentAlreadyShippedValidator extends ConstraintValidator
+final class ShipmentAlreadyShippedValidator extends ConstraintValidator implements ResetInterface
 {
     public function __construct(private ShipmentRepositoryInterface $shipmentRepository)
     {
@@ -38,5 +39,8 @@ final class ShipmentAlreadyShippedValidator extends ConstraintValidator
         if ($shipment->getState() === OrderShippingStates::STATE_SHIPPED) {
             $this->context->addViolation($constraint->message);
         }
+    }
+    public function reset(): void {
+        $this->shipmentRepository = null;
     }
 }

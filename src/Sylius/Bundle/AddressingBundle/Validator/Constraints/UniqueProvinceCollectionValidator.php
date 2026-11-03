@@ -19,8 +19,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class UniqueProvinceCollectionValidator extends ConstraintValidator
-{
+final class UniqueProvinceCollectionValidator extends ConstraintValidator {
     public function validate(mixed $value, Constraint $constraint): void
     {
         /** @var Collection<array-key, ProvinceInterface> $value */

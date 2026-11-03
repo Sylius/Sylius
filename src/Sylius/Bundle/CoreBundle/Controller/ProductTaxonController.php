@@ -25,8 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class ProductTaxonController extends ResourceController
-{
+class ProductTaxonController extends ResourceController {
     public function updateProductTaxonsPositionsAction(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);

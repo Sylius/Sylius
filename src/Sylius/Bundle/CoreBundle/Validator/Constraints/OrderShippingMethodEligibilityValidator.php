@@ -18,9 +18,10 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Checker\Eligibility\ShippingMethodEligibilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
+final class OrderShippingMethodEligibilityValidator extends ConstraintValidator implements ResetInterface
 {
     public function __construct(private ShippingMethodEligibilityCheckerInterface $methodEligibilityChecker)
     {
@@ -67,4 +68,9 @@ final class OrderShippingMethodEligibilityValidator extends ConstraintValidator
             }
         }
     }
+
+    public function reset(): void {
+        $this->methodEligibilityChecker = null;
+    }
+
 }

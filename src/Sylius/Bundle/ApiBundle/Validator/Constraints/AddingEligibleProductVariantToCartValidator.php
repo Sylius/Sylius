@@ -24,8 +24,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
 
-final class AddingEligibleProductVariantToCartValidator extends ConstraintValidator
-{
+final class AddingEligibleProductVariantToCartValidator extends ConstraintValidator {
     /**
      * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
      * @param OrderRepositoryInterface<OrderInterface> $orderRepository
@@ -120,4 +119,5 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
 
         return 0;
     }
+
 }
