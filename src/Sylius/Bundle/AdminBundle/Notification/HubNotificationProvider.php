@@ -53,7 +53,8 @@ final readonly class HubNotificationProvider implements NotificationProviderInte
 
         if (
             $latestVersion === null ||
-            $latestVersion === SyliusCoreBundle::VERSION
+            $latestVersion === SyliusCoreBundle::VERSION ||
+            !$this->isStableVersion($latestVersion)
         ) {
             return [];
         }
@@ -105,5 +106,19 @@ final readonly class HubNotificationProvider implements NotificationProviderInte
         }
 
         return strtoupper($responseContent['version']);
+    }
+
+    /**
+     * The hub at $this->hubUri returns the latest version it has ever built,
+     * including pre-releases (e.g. "2.3.0-ALPHA.1") — it is not aware of
+     * Composer stability flags or this installation's own constraints. A
+     * pre-release compared against a stable installed version is always
+     * "different", so without this check every stable installation would
+     * be told to upgrade to an unreleased, untested build as soon as one
+     * enters the pipeline, for the entire time it stays in pre-release.
+     */
+    private function isStableVersion(string $version): bool
+    {
+        return preg_match('/-(dev|alpha|beta|rc)\b/i', $version) !== 1;
     }
 }
