@@ -33,6 +33,7 @@ use Sylius\Bundle\AdminBundle\Form\Type\TaxRateType;
 use Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\NotificationsComponent;
 use Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\ShopPreviewComponent;
 use Sylius\Bundle\AdminBundle\Twig\Component\Shared\Navbar\UserDropdownComponent;
+use Sylius\Bundle\AdminBundle\Twig\Component\Shared\PlusPlaceholderComponent;
 use Sylius\Bundle\AdminBundle\Twig\Component\Shared\RenderEntityWithTemplateComponent;
 use Sylius\Bundle\UiBundle\Twig\Component\ResourceFormComponent;
 
@@ -230,6 +231,11 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius_admin.twig.component.render_entity_with_template', RenderEntityWithTemplateComponent::class)
         ->args([service('doctrine.orm.entity_manager')])
         ->tag('sylius.twig_component', ['key' => 'sylius_admin:render_entity_with_template'])
+    ;
+
+    $services
+        ->set('sylius_admin.twig.component.shared.plus_placeholder', PlusPlaceholderComponent::class)
+        ->tag('sylius.twig_component', ['key' => 'sylius_admin:plus_placeholder'])
     ;
 
     $services
