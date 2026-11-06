@@ -1,7 +1,7 @@
 _wdt:
-    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
+    resource: "@WebProfilerBundle/Resources/config/routing/wdt.php"
     prefix:   /_wdt
 
 _profiler:
-    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
+    resource: "@WebProfilerBundle/Resources/config/routing/profiler.php"
     prefix:   /_profiler
