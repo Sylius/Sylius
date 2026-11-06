@@ -11,7 +11,7 @@
 {% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
 
 {% block body %}
-    {% hook 'index' with { _prefixes: prefixes, metadata, resources } %}
+    {% hook 'index' with { _prefixes: prefixes, metadata, resources, live_grid: is_live_grid_enabled() } %}
 {% endblock %}
 
 {% block stylesheets %}
