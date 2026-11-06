@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Sylius\Bundle\CoreBundle\Doctrine\Schema\LegacyTypeCommentsSchemaListener;
 use Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener;
 use Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener;
 use Sylius\Bundle\CoreBundle\EventListener\CustomerDefaultAddressListener;
@@ -177,6 +178,11 @@ return static function (ContainerConfigurator $container) {
 
     $services
         ->set('sylius.listener.postgre_sql_default_schema', PostgreSQLDefaultSchemaListener::class)
+        ->tag('doctrine.event_listener', ['event' => 'postGenerateSchema', 'method' => 'postGenerateSchema', 'lazy' => true])
+    ;
+
+    $services
+        ->set('sylius.listener.legacy_type_comments_schema', LegacyTypeCommentsSchemaListener::class)
         ->tag('doctrine.event_listener', ['event' => 'postGenerateSchema', 'method' => 'postGenerateSchema', 'lazy' => true])
     ;
 
