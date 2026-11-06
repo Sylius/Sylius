@@ -68,6 +68,11 @@ final class CommandDenormalizerTest extends TestCase
         self::assertFalse($this->commandDenormalizer->supportsDenormalization(null, ''));
     }
 
+    public function testDoesNotAllowCachingSupportsDenormalizationResult(): void
+    {
+        self::assertSame(['object' => false], $this->commandDenormalizer->getSupportedTypes(null));
+    }
+
     public function testThrowsExceptionIfNotAllRequiredParametersArePresentInTheContext(): void
     {
         $exception = new MissingConstructorArgumentsException(

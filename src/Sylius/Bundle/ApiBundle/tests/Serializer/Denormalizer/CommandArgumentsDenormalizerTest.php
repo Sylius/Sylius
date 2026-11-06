@@ -69,6 +69,11 @@ final class CommandArgumentsDenormalizerTest extends TestCase
             ));
     }
 
+    public function testDoesNotAllowCachingSupportsDenormalizationResult(): void
+    {
+        self::assertSame(['object' => false], $this->commandArgumentsDenormalizer->getSupportedTypes(null));
+    }
+
     public function testDenormalizesAddProductReviewAndConvertsProductFieldFromIriToCode(): void
     {
         $context = ['input' => ['class' => AddProductReview::class]];
