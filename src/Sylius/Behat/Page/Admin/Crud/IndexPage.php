@@ -67,6 +67,33 @@ class IndexPage extends SyliusPage implements IndexPageInterface
         }
     }
 
+    public function toggleColumns(string ...$fields): void
+    {
+        if (DriverHelper::isNotJavascript($this->getDriver())) {
+            foreach ($fields as $field) {
+                $this->getElement('column_selector_item', ['%field%' => $field])->click();
+            }
+
+            return;
+        }
+
+        $currentUrl = $this->getSession()->getCurrentUrl();
+
+        $this->getElement('column_selector_toggle')->click();
+        foreach ($fields as $field) {
+            $this->getElement('column_selector_item', ['%field%' => $field])->click();
+        }
+        $this->getElement('column_selector_toggle')->click();
+
+        $this->getDocument()->waitFor(5, fn (): bool => $this->getSession()->getCurrentUrl() !== $currentUrl);
+        DriverHelper::waitForPageToLoad($this->getSession());
+    }
+
+    public function hasColumn(string $field): bool
+    {
+        return $this->hasElement('column_header', ['%field%' => $field]);
+    }
+
     public function isSingleResourceWithSpecificElementOnPage(array $parameters, string $element): bool
     {
         try {
@@ -209,6 +236,9 @@ class IndexPage extends SyliusPage implements IndexPageInterface
         return array_merge(parent::getDefinedElements(), [
             'bulk_actions' => '.sylius-grid-nav__bulk',
             'bulk_delete_confirm_button' => '[data-test-modal="bulk-delete"] [data-test-confirm-button]',
+            'column_header' => '.table th.sylius-table-column-%field%',
+            'column_selector_item' => '[data-test-column-selector-item="%field%"]',
+            'column_selector_toggle' => '[data-test-column-selector] [data-bs-toggle="dropdown"]',
             'current_page' => '[data-test-current-page]',
             'enabled_filter' => '[data-test-criterion-enabled]',
             'filter' => '[data-test-filter]',

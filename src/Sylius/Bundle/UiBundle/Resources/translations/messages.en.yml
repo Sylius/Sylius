@@ -152,6 +152,7 @@ sylius:
         close: 'Close'
         code: 'Code'
         color: 'Color'
+        columns: 'Columns'
         comment: 'Comment'
         company: 'Company'
         complete: 'Complete'

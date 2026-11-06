@@ -1,0 +1,7 @@
+{% import '@SyliusAdmin/shared/helper/table.html.twig' as table %}
+
+{% set resources = hookable_metadata.context.resources %}
+
+{% if resources.definition.enabledFields|length > 1 %}
+    {{ table.column_selector(resources) }}
+{% endif %}

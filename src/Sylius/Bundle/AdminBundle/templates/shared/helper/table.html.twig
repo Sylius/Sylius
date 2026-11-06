@@ -8,7 +8,7 @@
     {% endif %}
 
     {% for field in definition.fields|sylius_sort_by('position') %}
-        {% if field.enabled %}
+        {% if field.enabled and grid.isFieldVisible(field.name) %}
             {% if field.isSortable %}
                 {{ sorting.table_header(grid, field, request_attributes) }}
             {% else %}
@@ -28,7 +28,7 @@
         {% if definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 and row.id is defined %}
             <td class="text-center"><input data-check-all-group="index" class="form-check-input" type="checkbox" value="{{ row.id }}" /></td>
         {% endif %}
-        {% for field in definition.enabledFields|sylius_sort_by('position') %}
+        {% for field in definition.enabledFields|filter(field => grid.isFieldVisible(field.name))|sylius_sort_by('position') %}
             <td{% if field.options.vars.td_class is defined %} class="{{ field.options.vars.td_class }}"{% endif %}>
                 {{ sylius_grid_render_field(grid, field, row) }}
             </td>
@@ -59,4 +59,50 @@
             </td>
         {% endif %}
     </tr>
+{% endmacro %}
+
+{% macro column_selector(grid) %}
+    {% set button_id = 'column-selector-' ~ grid.definition.code %}
+    {% set controller = '@sylius/admin-bundle/column-selector' %}
+    {% set fields = grid.definition.enabledFields|sylius_sort_by('position') %}
+    {% set visible_columns_count = fields|filter(field => grid.isFieldVisible(field.name))|length %}
+    {% set route_params = app.request.attributes.all('_route_params')|merge(app.request.query.all) %}
+    {% set visibility = {} %}
+    {% for field in fields|filter(field => grid.isFieldVisible(field.name) != field.visible) %}
+        {% set visibility = visibility|merge({(field.name): field.visible ? 'hidden' : 'visible'}) %}
+    {% endfor %}
+
+    <div class="dropdown" {{ stimulus_controller(controller, {parameter: 'visibility'}) }} {{ stimulus_action(controller, 'apply', 'hide.bs.dropdown') }} {{ sylius_test_html_attribute('column-selector') }}>
+        <button type="button" id="{{ button_id }}" class="btn dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            {{ ux_icon('tabler:columns') }}
+            {{ 'sylius.ui.columns'|trans }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-end" role="menu" aria-labelledby="{{ button_id }}">
+            {% for field in fields %}
+                {% set is_visible = grid.isFieldVisible(field.name) %}
+                {% set is_last_visible_column = is_visible and visible_columns_count == 1 %}
+                {% set toggled_visibility = is_visible == field.visible
+                    ? visibility|merge({(field.name): is_visible ? 'hidden' : 'visible'})
+                    : visibility|filter((value, name) => name is not same as(field.name))
+                %}
+
+                <a
+                    class="dropdown-item{% if is_last_visible_column %} disabled{% endif %}"
+                    href="{{ path(app.request.attributes.get('_route'), route_params|merge({visibility: toggled_visibility})) }}"
+                    role="menuitemcheckbox"
+                    aria-checked="{{ is_visible ? 'true' : 'false' }}"
+                    data-column="{{ field.name }}"
+                    data-default-visible="{{ field.visible ? 'true' : 'false' }}"
+                    {% if is_last_visible_column %}aria-disabled="true" tabindex="-1"{% endif %}
+                    {{ stimulus_target(controller, 'column') }}
+                    {{ stimulus_action(controller, 'toggle')|stimulus_action(controller, 'toggle', 'keydown.space') }}
+                    {{ sylius_test_html_attribute('column-selector-item', field.name) }}
+                >
+                    <span data-visible-icon{% if not is_visible %} class="d-none"{% endif %}>{{ ux_icon('tabler:square-check', {class: 'icon dropdown-item-icon text-primary'}) }}</span>
+                    <span data-hidden-icon{% if is_visible %} class="d-none"{% endif %}>{{ ux_icon('tabler:square', {class: 'icon dropdown-item-icon'}) }}</span>
+                    {{ field.label|trans }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
 {% endmacro %}
