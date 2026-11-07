@@ -41,10 +41,19 @@ final class PromotionContext implements Context
     #[Then('I should be notified that the coupon is invalid')]
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
-        $response = $this->client->getLastResponse();
+        $this->assertCouponCodeError('Coupon code is invalid.');
+    }
 
-        Assert::same($response->getStatusCode(), 422);
-        Assert::same($this->responseChecker->getError($response), 'couponCode: Coupon code is invalid.');
+    #[Then('I should be notified that the coupon has expired')]
+    public function iShouldBeNotifiedThatCouponHasExpired(): void
+    {
+        $this->assertCouponCodeError('Coupon code has expired.');
+    }
+
+    #[Then('I should be notified that the coupon is not valid for this order')]
+    public function iShouldBeNotifiedThatCouponIsNotValidForThisOrder(): void
+    {
+        $this->assertCouponCodeError('Coupon code is not valid for this order.');
     }
 
     #[Then('I should not be notified that the coupon is invalid')]
@@ -53,6 +62,14 @@ final class PromotionContext implements Context
         $response = $this->client->getLastResponse();
 
         Assert::notSame($response->getStatusCode(), 422, 'The coupon was unexpectedly rejected as invalid.');
+    }
+
+    private function assertCouponCodeError(string $message): void
+    {
+        $response = $this->client->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 422);
+        Assert::same($this->responseChecker->getError($response), 'couponCode: ' . $message);
     }
 
     private function getCartTokenValue(): ?string

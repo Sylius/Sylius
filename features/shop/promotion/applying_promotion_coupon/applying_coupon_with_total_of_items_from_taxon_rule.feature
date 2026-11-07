@@ -51,11 +51,11 @@ Feature: Applying a coupon with a total of items from taxon rule
         And there should be no discount applied
 
     @api @no-ui
-    Scenario: Being notified that the taxon coupon is invalid when the taxon items do not meet the minimum
+    Scenario: Being notified that the taxon coupon is not valid for this order when the taxon items do not meet the minimum
         Given the store has promotion "T-Shirts coupon" with coupon "TSHIRTS10"
         And this promotion gives "$10.00" off if order contains products classified as "T-Shirts" with a minimum value of "$60.00"
         And I added product "PHP T-Shirt" to the cart
         When I use coupon with code "TSHIRTS10"
-        Then I should be notified that the coupon is invalid
+        Then I should be notified that the coupon is not valid for this order
         And my cart total should be "$50.00"
         And there should be no discount applied
