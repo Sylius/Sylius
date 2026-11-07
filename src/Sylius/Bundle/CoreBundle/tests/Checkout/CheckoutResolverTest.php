@@ -21,6 +21,8 @@ use Sylius\Bundle\CoreBundle\Checkout\CheckoutResolver;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGeneratorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Resource\Metadata\Operation\HttpOperationInitiatorInterface;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcherInterface;
@@ -37,6 +39,8 @@ final class CheckoutResolverTest extends TestCase
 
     private MockObject&StateMachineInterface $stateMachine;
 
+    private HttpOperationInitiatorInterface&MockObject $operationInitiator;
+
     private CheckoutResolver $checkoutResolver;
 
     protected function setUp(): void
@@ -45,7 +49,8 @@ final class CheckoutResolverTest extends TestCase
         $this->urlGenerator = $this->createMock(CheckoutStateUrlGeneratorInterface::class);
         $this->requestMatcher = $this->createMock(RequestMatcherInterface::class);
         $this->stateMachine = $this->createMock(StateMachineInterface::class);
-        $this->checkoutResolver = new CheckoutResolver($this->cartContext, $this->urlGenerator, $this->requestMatcher, $this->stateMachine);
+        $this->operationInitiator = $this->createMock(HttpOperationInitiatorInterface::class);
+        $this->checkoutResolver = new CheckoutResolver($this->cartContext, $this->urlGenerator, $this->requestMatcher, $this->stateMachine, $this->operationInitiator);
     }
 
     public function testOnlyAppliesToTheMainRequest(): void
@@ -242,7 +247,7 @@ final class CheckoutResolverTest extends TestCase
         $this->checkoutResolver->onKernelRequest($event);
     }
 
-    public function testRedirectsWhenTheRequestedTransitionCannotBeApplied(): void
+    public function testRedirectsWhenTheRequestedTransitionCannotBeAppliedUsingStateMachineDataFromRequestAttributes(): void
     {
         $event = $this->createMock(RequestEvent::class);
         $order = $this->createMock(OrderInterface::class);
@@ -250,6 +255,60 @@ final class CheckoutResolverTest extends TestCase
         $request = new Request([], [], [
             '_sylius' => ['state_machine' => ['graph' => 'test_graph', 'transition' => 'test_transition']],
         ]);
+
+        $event->expects($this->once())->method('isMainRequest')->willReturn(true);
+        $event->expects($this->once())->method('getRequest')->willReturn($request);
+
+        $this->requestMatcher
+            ->expects($this->once())
+            ->method('matches')
+            ->with($request)
+            ->willReturn(true)
+        ;
+
+        $this->cartContext->expects($this->once())->method('getCart')->willReturn($order);
+        $order->expects($this->once())->method('isEmpty')->willReturn(false);
+
+        $this->stateMachine
+            ->expects($this->once())
+            ->method('can')
+            ->with($order, 'test_graph', 'test_transition')
+            ->willReturn(false)
+        ;
+
+        $this->urlGenerator
+            ->expects($this->once())
+            ->method('generateForOrderCheckoutState')
+            ->with($order)
+            ->willReturn('/target-url')
+        ;
+
+        $event
+            ->expects($this->once())
+            ->method('setResponse')
+            ->with($this->isInstanceOf(RedirectResponse::class))
+        ;
+
+        $this->checkoutResolver->onKernelRequest($event);
+    }
+
+    public function testRedirectsWhenTheRequestedTransitionCannotBeAppliedUsingStateMachineDataFromOperation(): void
+    {
+        $event = $this->createMock(RequestEvent::class);
+        $order = $this->createMock(OrderInterface::class);
+
+        $operation = new Update(
+            stateMachineTransition: 'test_transition',
+            stateMachineGraph: 'test_graph',
+        );
+
+        $request = new Request();
+        $this->operationInitiator
+            ->expects($this->once())
+            ->method('initializeOperation')
+            ->with($request)
+            ->willReturn($operation)
+        ;
 
         $event->expects($this->once())->method('isMainRequest')->willReturn(true);
         $event->expects($this->once())->method('getRequest')->willReturn($request);

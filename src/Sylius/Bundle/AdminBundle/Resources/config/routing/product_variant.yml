@@ -1,6 +1,7 @@
 sylius_admin_product_variant_index:
     path: /
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_variant')"
     defaults:
         _controller: sylius.controller.product_variant::indexAction
         _sylius:
@@ -17,6 +18,7 @@ sylius_admin_product_variant_index:
 sylius_admin_product_variant_create:
     path: /new
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_variant')"
     defaults:
         _controller: sylius.controller.product_variant::createAction
         _sylius:
@@ -41,6 +43,7 @@ sylius_admin_product_variant_create:
 sylius_admin_product_variant_update:
     path: /{id}/edit
     methods: [GET, PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_variant')"
     defaults:
         _controller: sylius.controller.product_variant::updateAction
         _sylius:
@@ -67,6 +70,7 @@ sylius_admin_product_variant_update:
 sylius_admin_product_variant_bulk_delete:
     path: /bulk-delete
     methods: [DELETE]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_variant')"
     defaults:
         _controller: sylius.controller.product_variant::bulkDeleteAction
         _sylius:
@@ -80,8 +84,9 @@ sylius_admin_product_variant_bulk_delete:
                 arguments: [$ids]
 
 sylius_admin_product_variant_delete:
-    path: /{id}
+    path: /{id}/delete
     methods: [DELETE]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_variant')"
     defaults:
         _controller: sylius.controller.product_variant::deleteAction
         _sylius:

@@ -1,6 +1,7 @@
 sylius_admin_payment_request_index:
     path: /
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_payment_request')"
     defaults:
         _controller: sylius.controller.payment_request::indexAction
         _sylius:
@@ -12,6 +13,7 @@ sylius_admin_payment_request_index:
 sylius_admin_payment_request_show:
     path: /{hash}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_payment_request')"
     defaults:
         _controller: sylius.controller.payment_request::showAction
         _sylius:

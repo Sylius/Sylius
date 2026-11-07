@@ -1,0 +1,3 @@
+sylius_resource_routes:
+    resource: 'sylius.symfony.routing.loader.resource'
+    type: service

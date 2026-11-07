@@ -16,6 +16,9 @@ namespace Sylius\Bundle\CoreBundle\Checkout;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Resource\Metadata\HttpOperation;
+use Sylius\Resource\Metadata\Operation\HttpOperationInitiatorInterface;
+use Sylius\Resource\Metadata\StateMachineAwareOperationInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +33,17 @@ final class CheckoutResolver implements EventSubscriberInterface
         private CheckoutStateUrlGeneratorInterface $urlGenerator,
         private RequestMatcherInterface $requestMatcher,
         private StateMachineInterface $stateMachine,
+        private ?HttpOperationInitiatorInterface $operationInitiator = null,
     ) {
+        if (null === $operationInitiator) {
+            trigger_deprecation(
+                'sylius/core-bundle',
+                '2.3',
+                'Not passing an instance of "%s" as the fifth constructor argument for "%s" is deprecated and will not be supported in 3.0.',
+                HttpOperationInitiatorInterface::class,
+                self::class,
+            );
+        }
     }
 
     public static function getSubscribedEvents(): array
@@ -60,8 +73,10 @@ final class CheckoutResolver implements EventSubscriberInterface
             return;
         }
 
-        $graph = $this->getRequestedGraph($request);
-        $transition = $this->getRequestedTransition($request);
+        $operation = $this->operationInitiator?->initializeOperation($request);
+
+        $graph = $this->getRequestedGraph($request, $operation);
+        $transition = $this->getRequestedTransition($request, $operation);
 
         if (null === $graph || null === $transition) {
             return;
@@ -74,13 +89,21 @@ final class CheckoutResolver implements EventSubscriberInterface
         $event->setResponse(new RedirectResponse($this->urlGenerator->generateForOrderCheckoutState($order)));
     }
 
-    private function getRequestedGraph(Request $request): ?string
+    private function getRequestedGraph(Request $request, ?HttpOperation $operation = null): ?string
     {
+        if ($operation instanceof StateMachineAwareOperationInterface) {
+            return $operation->getStateMachineGraph();
+        }
+
         return $request->attributes->get('_sylius', [])['state_machine']['graph'] ?? null;
     }
 
-    private function getRequestedTransition(Request $request): ?string
+    private function getRequestedTransition(Request $request, ?HttpOperation $operation = null): ?string
     {
+        if ($operation instanceof StateMachineAwareOperationInterface) {
+            return $operation->getStateMachineTransition();
+        }
+
         return $request->attributes->get('_sylius', [])['state_machine']['transition'] ?? null;
     }
 }

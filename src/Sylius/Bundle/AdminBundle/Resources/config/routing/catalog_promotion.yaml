@@ -9,11 +9,13 @@ sylius_admin_catalog_promotion:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\CatalogPromotionType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_catalog_promotion')"
     type: sylius.resource
 
 sylius_admin_catalog_promotion_show:
     path: /catalog-promotions/{id}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_catalog_promotion')"
     defaults:
         _controller: sylius.controller.catalog_promotion::showAction
         _sylius:
@@ -24,6 +26,7 @@ sylius_admin_catalog_promotion_show:
 sylius_admin_catalog_promotion_product_variant_index:
     path: /catalog-promotions/{id}/variants
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_variant')"
     defaults:
         _controller: sylius.controller.product_variant::indexAction
         _sylius:

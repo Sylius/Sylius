@@ -9,4 +9,5 @@ sylius_admin_channel:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ChannelType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_channel')"
     type: sylius.resource
