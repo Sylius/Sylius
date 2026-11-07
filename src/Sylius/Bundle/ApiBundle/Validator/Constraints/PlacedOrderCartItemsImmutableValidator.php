@@ -51,7 +51,11 @@ final class PlacedOrderCartItemsImmutableValidator extends ConstraintValidator
         }
 
         if ($order->getState() === BaseOrderInterface::STATE_NEW) {
-            $this->context->addViolation($constraint->message);
+            $this->context
+                ->buildViolation($constraint->message)
+                ->setCode(PlacedOrderCartItemsImmutable::CART_ITEMS_IMMUTABLE_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

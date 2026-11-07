@@ -43,6 +43,10 @@ final class UniqueShopUserEmailValidator extends ConstraintValidator
             return;
         }
 
-        $this->context->addViolation($constraint->message);
+        $this->context
+            ->buildViolation($constraint->message)
+            ->setCode(UniqueShopUserEmail::EMAIL_NOT_UNIQUE_ERROR)
+            ->addViolation()
+        ;
     }
 }

@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class ShopUserNotVerified extends Constraint
 {
+    public const USER_ALREADY_VERIFIED_ERROR = 'USER_ALREADY_VERIFIED';
+
     /**
      * @param array<string, mixed>|null $options
      */
