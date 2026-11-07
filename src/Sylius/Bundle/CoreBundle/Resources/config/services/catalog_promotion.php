@@ -29,6 +29,7 @@ return static function (ContainerConfigurator $container) {
     $container->import('catalog_promotion/command_handlers.php');
     $container->import('catalog_promotion/listeners.php');
     $container->import('catalog_promotion/processors.php');
+    $container->import('catalog_promotion/providers.php');
 
     $services = $container->services();
 
