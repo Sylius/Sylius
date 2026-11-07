@@ -25,6 +25,8 @@ use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotions
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductCatalogPromotionsProcessorInterface;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPromotionsProcessor;
 use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\ProductVariantCatalogPromotionsProcessorInterface;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\TargetedCatalogPromotionProcessor;
+use Sylius\Bundle\CoreBundle\CatalogPromotion\Processor\TargetedCatalogPromotionProcessorInterface;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -70,4 +72,15 @@ return static function (ContainerConfigurator $container) {
         ])
     ;
     $services->alias(CatalogPromotionRemovalProcessorInterface::class, 'sylius.processor.catalog_promotion.removal');
+
+    $services
+        ->set('sylius.processor.catalog_promotion.targeted', TargetedCatalogPromotionProcessor::class)
+        ->args([
+            tagged_locator('sylius.catalog_promotion.variant_codes_provider', indexAttribute: 'type'),
+            service('sylius.provider.catalog_promotion.variant_codes_with_applied_promotion'),
+            service('sylius.command_dispatcher.catalog_promotion.batched_apply_on_variants'),
+            service('sylius.processor.catalog_promotion.all_product_variant'),
+        ])
+    ;
+    $services->alias(TargetedCatalogPromotionProcessorInterface::class, 'sylius.processor.catalog_promotion.targeted');
 };

@@ -58,6 +58,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.catalog_promotion'),
             service('doctrine.orm.entity_manager'),
             service('sylius.command_bus'),
+            service('sylius.processor.catalog_promotion.targeted'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.event_bus'])
     ;
@@ -69,6 +70,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.catalog_promotion'),
             service('doctrine.orm.entity_manager'),
             service('sylius.command_bus'),
+            service('sylius.processor.catalog_promotion.targeted'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.event_bus'])
     ;
@@ -80,6 +82,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.catalog_promotion'),
             service('doctrine.orm.entity_manager'),
             service('sylius.command_bus'),
+            service('sylius.processor.catalog_promotion.targeted'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.event_bus'])
     ;
