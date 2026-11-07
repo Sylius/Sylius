@@ -37,6 +37,7 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('sylius.repository.catalog_promotion'),
             service('sylius.processor.catalog_promotion.all_product_variant'),
+            service('sylius.processor.catalog_promotion.targeted'),
         ])
         ->tag('messenger.message_handler', ['bus' => 'sylius.command_bus'])
     ;
