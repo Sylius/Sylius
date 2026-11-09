@@ -1,0 +1,233 @@
+#  Request isolation in worker mode (FrankenPHP).
+
+name: Tests (worker mode)
+
+on:
+    workflow_dispatch: ~
+    workflow_call:
+        inputs:
+            branch:
+                description: "Branch"
+                required: false
+                type: string
+                default: ""
+
+permissions:
+    contents: read
+
+env:
+    APP_ENV: test_cached
+    PHP_VERSION: '8.5'
+    SYMFONY_VERSION: '~7.4.0'
+    FRANKENPHP_RELEASE: 'v1.13.5'
+    FRANKENPHP_RELEASES_URL: 'https://github.com/php/frankenphp/releases/download'
+    MYSQL_VERSION: '8.4'
+    WORKER_HOST: '127.0.0.1'
+    WORKER_PORT: '8080'
+
+jobs:
+    worker:
+        runs-on: ubuntu-latest
+        timeout-minutes: 30
+        name: "Worker mode"
+
+        steps:
+            -   name: "Checkout (With Branch)"
+                if: "${{ inputs.branch != '' }}"
+                uses: actions/checkout@v4
+                with:
+                    ref: ${{ inputs.branch }}
+
+            -   name: "Checkout"
+                if: "${{ inputs.branch == '' }}"
+                uses: actions/checkout@v4
+
+            -   name: "Prepare manifest.json files"
+                run: |
+                    mkdir -p public/build/admin public/build/shop
+                    mkdir -p public/build/app/admin public/build/app/shop
+                    echo "{}" > public/build/admin/manifest.json
+                    echo "{}" > public/build/shop/manifest.json
+                    echo "{}" > public/build/app/admin/manifest.json
+                    echo "{}" > public/build/app/shop/manifest.json
+
+            -   name: "Install Symfony CLI"
+                run: |
+                    for i in 1 2 3; do
+                        curl -fsSL https://get.symfony.com/cli/installer | bash && break
+                        echo "symfony-cli installer failed, attempt ${i}/3"
+                        sleep 5
+                    done
+                    echo "$HOME/.symfony5/bin" >> "$GITHUB_PATH"
+                    "$HOME/.symfony5/bin/symfony" version
+
+            -   name: "Build application"
+                uses: SyliusLabs/BuildTestAppAction@v4
+                with:
+                    build_type: sylius
+                    cache_key: ${{ runner.os }}-worker-${{ hashFiles('composer.json') }}
+                    cache_restore_key: ${{ runner.os }}-worker-
+                    database: mysql:${{ env.MYSQL_VERSION }}
+                    e2e: 'yes'
+                    e2e_js: 'yes'
+                    chrome_version: stable
+                    node_version: 24.x
+                    php_version: ${{ env.PHP_VERSION }}
+                    symfony_version: ${{ env.SYMFONY_VERSION }}
+
+            -   name: "Confirm Symfony CLI is present"
+                run: |
+                    command -v symfony >/dev/null \
+                        || { echo "::error::symfony-cli is not on PATH - setup-php reports 'Could not setup symfony-cli' and still marks its step successful"; exit 1; }
+                    symfony version
+
+            -   name: "Stop the Symfony CLI server"
+                run: |
+                    symfony server:stop --dir="$PWD/public" || true
+                    symfony server:stop --dir="$PWD" || true
+
+                    # If anything still holds 8080, kill it by PID.
+                    for _ in 1 2 3; do
+                        ss -ltn | grep -q ":${WORKER_PORT} " || break
+                        PID=$(ss -ltnp 2>/dev/null | grep ":${WORKER_PORT} " | grep -oP 'pid=\K[0-9]+' | head -1)
+                        [ -n "$PID" ] && kill "$PID" 2>/dev/null || true
+                        sleep 2
+                    done
+
+                    if ss -ltn | grep -q ":${WORKER_PORT} "; then
+                        echo "::error::port 8080 is still taken"
+                        ss -ltnp | grep ":${WORKER_PORT} " || true
+                        exit 1
+                    fi
+
+            -   name: "Resource bundle from the fork"
+                if: ${{ env.RESOURCE_BUNDLE_REF != '' }}
+                run: |
+                    #  The "as 1.15.99" alias is required: sylius/sylius wants
+                    #  ^1.14.2 and a dev branch does not satisfy that on its own.
+                    composer config repositories.resource-bundle-fork vcs "$RESOURCE_BUNDLE_REPO"
+                    composer require --no-interaction --no-progress --no-scripts \
+                        "sylius/resource-bundle:${RESOURCE_BUNDLE_REF}"
+
+                    composer show sylius/resource-bundle | head -3
+                    bin/console cache:clear --no-interaction
+
+            -   name: "Confirm the resource-bundle fork is installed"
+                if: ${{ env.RESOURCE_BUNDLE_REF != '' }}
+                run: |
+                    installed=$(composer show sylius/resource-bundle 2>&1 || true)
+                    echo "$installed"
+                    sha=$(echo "$installed" | awk '/^source/ && /\[git\]/ { print $NF }' | head -1)
+
+                    ref="${RESOURCE_BUNDLE_REF%% as *}"
+                    case "$ref" in
+                        *'#'*)
+                            want="${ref#*#}"
+                            needle="${want:0:8}"
+                            ;;
+                        *)
+                            needle="$ref"
+                            ;;
+                    esac
+
+                    echo "$installed" | grep -q "$needle" \
+                        || { echo "::error::sylius/resource-bundle is not the expected fork (looked for '${needle}') - ResourceTranslationsType then freezes the locale list in its constructor and the admin locale scenario fails for the wrong reason"; exit 1; }
+
+                    echo "resource-bundle: ${RESOURCE_BUNDLE_REF} -> ${sha:-unknown}"
+                    {
+                        echo "| | |"
+                        echo "|---|---|"
+                        echo "| resource-bundle ref | \`${RESOURCE_BUNDLE_REF}\` |"
+                        echo "| resolved commit | \`${sha:-unknown}\` |"
+                        echo "| sylius commit | \`${GITHUB_SHA}\` |"
+                    } >> "$GITHUB_STEP_SUMMARY"
+
+            -   name: "Fetch the FrankenPHP binary"
+                run: |
+                    curl -fsSL --retry 3 --retry-all-errors --retry-delay 5 \
+                        -o "$RUNNER_TEMP/frankenphp" \
+                        "${FRANKENPHP_RELEASES_URL}/${FRANKENPHP_RELEASE}/frankenphp-linux-x86_64"
+                    chmod +x "$RUNNER_TEMP/frankenphp"
+                    echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+                    "$RUNNER_TEMP/frankenphp" version
+
+            -   name: "Start FrankenPHP in worker mode"
+                run: |
+                    mkdir -p var/frankenphp/php.d var/log
+                    printf 'memory_limit=512M\n' > var/frankenphp/php.d/99-ci.ini
+
+                    PHP_INI_SCAN_DIR="$PWD/var/frankenphp/php.d" \
+                    FRANKENPHP_LOOP_MAX=-1 \
+                    APP_ENV="$APP_ENV" APP_DEBUG=0 \
+                    DATABASE_URL="$DATABASE_URL" \
+                    TEST_SYLIUS_USE_LEGACY_GRID_CONFIG=true \
+                        setsid frankenphp php-server \
+                            --root "$PWD/public" \
+                            --listen ${WORKER_HOST}:${WORKER_PORT} \
+                            --worker "$PWD/public/index.php,1" \
+                            < /dev/null > var/log/frankenphp.log 2>&1 &
+
+                    for i in $(seq 1 30); do
+                        if curl -fsS -o /dev/null http://${WORKER_HOST}:${WORKER_PORT}/; then
+                            echo "  worker answered after ${i}s"; exit 0
+                        fi
+                        sleep 1
+                    done
+                    echo "::error::FrankenPHP did not answer 200 within 30s"
+                    echo "--- response body:"
+                    curl -s http://${WORKER_HOST}:${WORKER_PORT}/ | head -c 3000 || true
+                    echo "--- frankenphp log:"
+                    tail -c 20000 var/log/frankenphp.log 2>/dev/null || true
+                    echo "--- application log ($APP_ENV):"
+                    tail -c 20000 "var/log/${APP_ENV}.log" 2>/dev/null || ls -la var/log/ || true
+                    exit 1
+
+            -   name: "Confirm we are really in worker mode"
+                run: |
+                    curl -fsSI http://${WORKER_HOST}:${WORKER_PORT}/ | tr -d '\r' | grep -qi '^server:.*caddy' \
+                        || { echo "::error::no Server: Caddy header - something other than FrankenPHP is answering"; exit 1; }
+                    SRV_PHP=$(curl -sI http://${WORKER_HOST}:${WORKER_PORT}/ | tr -d '\r' \
+                        | awk -F'PHP/' '/^[Xx]-[Pp]owered-[Bb]y/{print $2}')
+                    test -n "$SRV_PHP" \
+                        || { echo "::error::no X-Powered-By header - cannot confirm WHAT is answering"; exit 1; }
+                    test "${SRV_PHP%.*}" = "$PHP_VERSION" \
+                        || { echo "::error::server PHP ($SRV_PHP) != build PHP ($PHP_VERSION)"; exit 1; }
+
+                    code=$(curl -s -o /dev/null -w '%{http_code}' http://${WORKER_HOST}:${WORKER_PORT}/ 2>/dev/null || true)
+                    test "$code" != "000" \
+                        || { echo "::error::server is not responding"; exit 1; }
+                    echo "  server answered with HTTP ${code}, ok"
+
+            -   name: "Run worker-mode Behat"
+                env:
+                    SYLIUS_BEHAT_SECOND_SESSION: workerphp_second
+                    SYLIUS_BEHAT_API_WORKER: true
+                shell: bash
+                run: |
+                    ui=0
+                    vendor/bin/behat --strict --no-interaction --colors \
+                        --suite-tags="@worker&&~@worker:cart" --tags="~@todo" \
+                        || ui=$?
+
+                    cart=0
+                    SYLIUS_BEHAT_SECOND_SESSION=panther_second PATH="$PWD/drivers:$PATH" \
+                        vendor/bin/behat --strict --no-interaction --colors \
+                            --suite-tags="@worker&&@worker:cart" --tags="~@todo" \
+                        || cart=$?
+
+                    if [ "$ui" -ne 0 ] || [ "$cart" -ne 0 ]; then
+                        echo "::error::worker-mode Behat failed (ui=$ui cart=$cart)"
+                        exit 1
+                    fi
+                    echo "every suite passed"
+
+            -   name: "Logs"
+                if: failure()
+                run: |
+                    tail -c 50000 var/log/frankenphp.log 2>/dev/null || true
+                    tail -c 50000 "var/log/${APP_ENV}.log" 2>/dev/null || ls -la var/log/ || true
+
+            -   name: "Igor: static audit (advisory)"
+                if: always()
+                continue-on-error: true
+                run: vendor/bin/igor-php --env test_cached .
