@@ -48,6 +48,25 @@ return (new Config())
             'default_session' => 'symfony',
             'javascript_session' => 'panther',
             'sessions' => [
+                'workerphp' => [
+                    'browserkit_http' => null,
+                ],
+                'workerphp_second' => [
+                    'browserkit_http' => null,
+                ],
+                'panther_second' => [
+                    'panther' => [
+                        'manager_options' => [
+                            'connection_timeout_in_ms' => 5000,
+                            'request_timeout_in_ms' => 120000,
+                            'capabilities' => [
+                                'goog:chromeOptions' => [
+                                    'args' => ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
                 'symfony' => [
                     'symfony' => null,
                 ],

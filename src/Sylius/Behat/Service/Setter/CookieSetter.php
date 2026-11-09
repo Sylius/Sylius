@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Setter;
 
+use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\Mink\Driver\PantherDriver;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Session;
@@ -34,7 +35,18 @@ final readonly class CookieSetter implements CookieSetterInterface
 
         $this->ensureDriverStarted($driver);
 
-        if ($driver instanceof SymfonyDriver) {
+        //  BrowserKitDriver, not just SymfonyDriver which extends it. Both
+        //  hold a BrowserKit client with a cookie jar, so the cookie can be put
+        //  straight into it.
+        //
+        //  It matters for the browserkit_http session, which talks to an
+        //  application running in another process: the path below asks the
+        //  driver for getCurrentUrl(), and with nothing visited yet that throws
+        //  "Unable to access the request before visiting a page". Visiting a
+        //  page first would also work, but it would add a request the scenario
+        //  did not ask for - and in worker mode every request counts, because
+        //  the next one may inherit state from it.
+        if ($driver instanceof BrowserKitDriver) {
             $driver->getClient()->getCookieJar()->set(
                 new Cookie($name, $value, null, null, parse_url($this->minkParameters['base_url'], \PHP_URL_HOST)),
             );
