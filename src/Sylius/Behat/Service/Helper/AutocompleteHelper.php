@@ -40,6 +40,7 @@ final class AutocompleteHelper implements AutocompleteHelperInterface
         $driver->executeScript(<<<SCRIPT
             (function () {
                 let element = document.evaluate("{$selector}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                element.tomselect.setTextboxValue('$searchString');
                 element.tomselect.load('$searchString');
                 element.tomselect.open();
             })();
