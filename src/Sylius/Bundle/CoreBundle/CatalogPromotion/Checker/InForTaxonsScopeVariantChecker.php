@@ -26,7 +26,7 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
 {
     public const TYPE = 'for_taxons';
 
-    /** @var array<string, list<string>> */
+    /** @var array<string, array<string, true>> */
     private array $taxonCodesWithDescendants = [];
 
     public function __construct(
@@ -43,13 +43,23 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
         /** @var ProductInterface $product */
         $product = $productVariant->getProduct();
 
-        $promotionTaxons = [];
+        $promotionTaxonSets = [];
         foreach ($configuration['taxons'] as $taxonCode) {
-            $promotionTaxons = array_merge($promotionTaxons, $this->getTaxonCodesWithDescendants($taxonCode));
+            $promotionTaxonSets[] = $this->getTaxonCodesWithDescendants($taxonCode);
         }
 
         return $product->getTaxons()->exists(
-            fn ($key, TaxonInterface $taxon): bool => \in_array($taxon->getCode(), $promotionTaxons, true),
+            function ($key, TaxonInterface $taxon) use ($promotionTaxonSets): bool {
+                $code = $taxon->getCode();
+
+                foreach ($promotionTaxonSets as $promotionTaxonSet) {
+                    if (isset($promotionTaxonSet[$code])) {
+                        return true;
+                    }
+                }
+
+                return false;
+            },
         );
     }
 
@@ -58,7 +68,7 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
         $this->taxonCodesWithDescendants = [];
     }
 
-    /** @return array<string> */
+    /** @return array<string, true> */
     private function getTaxonCodesWithDescendants(string $taxonCode): array
     {
         if (isset($this->taxonCodesWithDescendants[$taxonCode])) {
@@ -69,18 +79,11 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
         $taxon = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
         Assert::notNull($taxon, sprintf('Taxon with code "%s" does not exist', $taxonCode));
 
-        return $this->taxonCodesWithDescendants[$taxonCode] = [$taxonCode, ...$this->getTaxonChildrenCodes($taxon)];
-    }
-
-    /** @return array<string> */
-    private function getTaxonChildrenCodes(TaxonInterface $taxon): array
-    {
-        $childrenCodes = [];
-
+        $codes = [$taxonCode => true];
         foreach ($this->taxonTreeRepository->children($taxon) as $taxonChild) {
-            $childrenCodes[] = $taxonChild->getCode();
+            $codes[$taxonChild->getCode()] = true;
         }
 
-        return $childrenCodes;
+        return $this->taxonCodesWithDescendants[$taxonCode] = $codes;
     }
 }
