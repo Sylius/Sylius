@@ -68,8 +68,8 @@ final class ShippingChargesProcessorTest extends TestCase
         $this->shippingChargesProcessor->process($this->order);
     }
 
-    public function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
-    ): void {
+    public function testShouldApplyCalculatedShippingChargeForEachShipmentAssociatedWithTheOrder(): void
+    {
         $shipment = $this->createMock(ShipmentInterface::class);
         $adjustment = $this->createMock(AdjustmentInterface::class);
         $shippingMethod = $this->createMock(ShippingMethodInterface::class);
@@ -79,7 +79,7 @@ final class ShippingChargesProcessorTest extends TestCase
         $this->calculator->expects($this->once())->method('calculate')->with($shipment)->willReturn(450);
         $shipment->expects($this->once())->method('getMethod')->willReturn($shippingMethod);
         $shippingMethod->expects($this->once())->method('getCode')->willReturn('fedex');
-        $shippingMethod->expects($this->once())->method('getName')->willReturn('FedEx');
+        $shippingMethod->expects($this->exactly(2))->method('getName')->willReturn('FedEx');
         $adjustment->expects($this->once())->method('setAmount')->with(450);
         $adjustment->expects($this->once())->method('setType')->with(AdjustmentInterface::SHIPPING_ADJUSTMENT);
         $adjustment->expects($this->once())->method('setLabel')->with('FedEx');
