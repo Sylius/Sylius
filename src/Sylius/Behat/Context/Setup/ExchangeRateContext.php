@@ -46,6 +46,22 @@ final class ExchangeRateContext implements Context
      *
      * @return ExchangeRateInterface
      */
+    #[Given('the exchange rate of :sourceCurrency to :targetCurrency changes to :ratio')]
+    public function theExchangeRateChangesTo(
+        CurrencyInterface $sourceCurrency,
+        CurrencyInterface $targetCurrency,
+        $ratio,
+    ): void {
+        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair(
+            $sourceCurrency->getCode(),
+            $targetCurrency->getCode(),
+        );
+
+        $exchangeRate->setRatio((float) $ratio);
+
+        $this->saveExchangeRate($exchangeRate);
+    }
+
     private function createExchangeRate(CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency, $ratio = 1.00)
     {
         /** @var ExchangeRateInterface $exchangeRate */

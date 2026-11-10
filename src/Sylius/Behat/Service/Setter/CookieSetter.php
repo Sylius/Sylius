@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service\Setter;
 
+use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\Mink\Driver\PantherDriver;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Session;
@@ -33,8 +34,7 @@ final readonly class CookieSetter implements CookieSetterInterface
         $driver = $this->minkSession->getDriver();
 
         $this->ensureDriverStarted($driver);
-
-        if ($driver instanceof SymfonyDriver) {
+        if ($driver instanceof BrowserKitDriver) {
             $driver->getClient()->getCookieJar()->set(
                 new Cookie($name, $value, null, null, parse_url($this->minkParameters['base_url'], \PHP_URL_HOST)),
             );
