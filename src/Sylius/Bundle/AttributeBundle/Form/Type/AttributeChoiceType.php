@@ -19,10 +19,15 @@ use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Service\ResetInterface;
 
-abstract class AttributeChoiceType extends AbstractType
+abstract class AttributeChoiceType extends AbstractType implements ResetInterface
 {
+    /** @var array<AttributeInterface>|null */
+    private ?array $attributes = null;
+
     /** @param RepositoryInterface<AttributeInterface> $attributeRepository */
     public function __construct(protected RepositoryInterface $attributeRepository)
     {
@@ -39,12 +44,17 @@ abstract class AttributeChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => $this->attributeRepository->findAll(),
+                'choices' => fn (Options $options): array => $this->attributes ??= $this->attributeRepository->findAll(),
                 'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
             ])
         ;
+    }
+
+    public function reset(): void
+    {
+        $this->attributes = null;
     }
 
     public function getParent(): string

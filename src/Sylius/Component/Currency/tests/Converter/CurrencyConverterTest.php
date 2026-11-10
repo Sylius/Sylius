@@ -126,4 +126,30 @@ final class CurrencyConverterTest extends TestCase
 
         self::assertEquals(666, $result);
     }
+
+    public function testItClearsCachedExchangeRatesOnReset(): void
+    {
+        $sourceCurrency = $this->createMock(CurrencyInterface::class);
+        $firstRate = $this->createMock(ExchangeRateInterface::class);
+        $secondRate = $this->createMock(ExchangeRateInterface::class);
+
+        $this->exchangeRateRepository
+            ->expects(self::exactly(2))
+            ->method('findOneWithCurrencyPair')
+            ->with('GBP', 'USD')
+            ->willReturnOnConsecutiveCalls($firstRate, $secondRate);
+
+        $firstRate->method('getRatio')->willReturn(1.30);
+        $firstRate->method('getSourceCurrency')->willReturn($sourceCurrency);
+        $secondRate->method('getRatio')->willReturn(2.00);
+        $secondRate->method('getSourceCurrency')->willReturn($sourceCurrency);
+        $sourceCurrency->method('getCode')->willReturn('GBP');
+
+        self::assertEquals(866, $this->currencyConverter->convert(666, 'GBP', 'USD'));
+        self::assertEquals(866, $this->currencyConverter->convert(666, 'GBP', 'USD'));
+
+        $this->currencyConverter->reset();
+
+        self::assertEquals(1332, $this->currencyConverter->convert(666, 'GBP', 'USD'));
+    }
 }

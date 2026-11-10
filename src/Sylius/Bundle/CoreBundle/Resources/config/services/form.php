@@ -409,6 +409,7 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius.form.type.channels_collection', ChannelCollectionType::class)
         ->args([service('sylius.repository.channel')])
         ->tag('form.type')
+        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services
