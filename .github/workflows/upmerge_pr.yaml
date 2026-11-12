@@ -23,6 +23,9 @@ jobs:
                     -
                         base_branch: "2.2"
                         target_branch: "2.3"
+                    -
+                        base_branch: "2.3"
+                        target_branch: "2.4"
         steps:
             -
                 uses: actions/checkout@v4
