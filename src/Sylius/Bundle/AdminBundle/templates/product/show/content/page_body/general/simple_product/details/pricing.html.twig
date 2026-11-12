@@ -16,16 +16,13 @@
             {% for channel_pricing in variant.channelPricings %}
                 {% set channel = attribute(channels, channel_pricing.channelCode) is defined ? attribute(channels, channel_pricing.channelCode) : null %}
 
-                {% if channel %}
-                    {% set currency_code = channel.baseCurrency.code %}
-                    {% set channel = attribute(channels, channel_pricing.channelCode) %}
-
-                    <tr {{ sylius_test_html_attribute('simple-product', "%s"|format(channel.code)) }} {{ sylius_test_html_attribute('pricing', "%s"|format(channel.code)) }} >
-                        {% hook 'pricing#body' with { variant, channel, channel_pricing, currency_code } %}
-                    </tr>
-                {% else %}
-                    {% hook 'pricing#body' with { variant, channel_pricing } %}
-                {% endif %}
+                <tr {{ sylius_test_html_attribute('simple-product', "%s"|format(channel_pricing.channelCode)) }} {{ sylius_test_html_attribute('pricing', "%s"|format(channel_pricing.channelCode)) }} >
+                    {% if channel %}
+                        {% hook 'pricing#body' with { variant, channel, channel_pricing, currency_code: channel.baseCurrency.code } %}
+                    {% else %}
+                        {% hook 'pricing#body' with { variant, channel_pricing } %}
+                    {% endif %}
+                </tr>
             {% endfor %}
             </tbody>
         </table>
