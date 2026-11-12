@@ -123,4 +123,40 @@ final class ChannelBasedThemeContextTest extends TestCase
 
         $this->assertNull($this->channelBasedThemeContext->getTheme());
     }
+
+    public function testResolvesTheThemeAgainAfterReset(): void
+    {
+        /** @var ChannelInterface&MockObject $firstChannel */
+        $firstChannel = $this->createMock(ChannelInterface::class);
+        /** @var ChannelInterface&MockObject $secondChannel */
+        $secondChannel = $this->createMock(ChannelInterface::class);
+        /** @var ThemeInterface&MockObject $firstTheme */
+        $firstTheme = $this->createMock(ThemeInterface::class);
+        /** @var ThemeInterface&MockObject $secondTheme */
+        $secondTheme = $this->createMock(ThemeInterface::class);
+
+        $this->channelContext
+            ->expects($this->exactly(2))
+            ->method('getChannel')
+            ->willReturnOnConsecutiveCalls($firstChannel, $secondChannel)
+        ;
+
+        $firstChannel->expects($this->once())->method('getThemeName')->willReturn('first/theme');
+        $secondChannel->expects($this->once())->method('getThemeName')->willReturn('second/theme');
+
+        $this->themeRepository
+            ->expects($this->exactly(2))
+            ->method('findOneByName')
+            ->willReturnMap([
+                ['first/theme', $firstTheme],
+                ['second/theme', $secondTheme],
+            ])
+        ;
+
+        $this->assertSame($firstTheme, $this->channelBasedThemeContext->getTheme());
+
+        $this->channelBasedThemeContext->reset();
+
+        $this->assertSame($secondTheme, $this->channelBasedThemeContext->getTheme());
+    }
 }

@@ -19,8 +19,9 @@ use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ChannelBasedThemeContext implements ThemeContextInterface
+final class ChannelBasedThemeContext implements ThemeContextInterface, ResetInterface
 {
     private false|ThemeInterface|null $theme = false;
 
@@ -45,5 +46,16 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
         }
 
         return $this->theme;
+    }
+
+    /**
+     * `false`, not `null`: it is the "not resolved yet" sentinel. `null` means
+     * "resolved, the channel has no theme", so resetting to `null` would pin
+     * getTheme() in that state and the shop would lose its theme from the
+     * second request onwards.
+     */
+    public function reset(): void
+    {
+        $this->theme = false;
     }
 }

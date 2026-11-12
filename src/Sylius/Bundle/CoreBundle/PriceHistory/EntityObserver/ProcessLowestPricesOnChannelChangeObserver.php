@@ -15,9 +15,10 @@ namespace Sylius\Bundle\CoreBundle\PriceHistory\EntityObserver;
 
 use Sylius\Bundle\CoreBundle\PriceHistory\CommandDispatcher\ApplyLowestPriceOnChannelPricingsCommandDispatcherInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserverInterface
+final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserverInterface, ResetInterface
 {
     /** @var array<mixed> */
     private array $channelsCurrentlyProcessed = [];
@@ -32,9 +33,11 @@ final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserver
 
         $this->channelsCurrentlyProcessed = [(string) $entity->getCode() => true];
 
-        $this->commandDispatcher->applyWithinChannel($entity);
-
-        unset($this->channelsCurrentlyProcessed[(string) $entity->getCode()]);
+        try {
+            $this->commandDispatcher->applyWithinChannel($entity);
+        } finally {
+            unset($this->channelsCurrentlyProcessed[(string) $entity->getCode()]);
+        }
     }
 
     public function supports(object $entity): bool
@@ -57,5 +60,10 @@ final class ProcessLowestPricesOnChannelChangeObserver implements EntityObserver
             (null !== $config = $channel->getChannelPriceHistoryConfig()) &&
             null === $config->getId()
         ;
+    }
+
+    public function reset(): void
+    {
+        $this->channelsCurrentlyProcessed = [];
     }
 }

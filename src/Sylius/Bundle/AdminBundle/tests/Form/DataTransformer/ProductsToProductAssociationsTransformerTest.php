@@ -92,4 +92,29 @@ final class ProductsToProductAssociationsTransformerTest extends TestCase
     {
         $this->assertNull($this->productsToProductAssociationsTransformer->reverseTransform(''));
     }
+
+    public function testItDoesNotReuseProductAssociationsFromAPreviousRequestAfterReset(): void
+    {
+        $productAssociationType = $this->createMock(ProductAssociationTypeInterface::class);
+        $productAssociationType->method('getCode')->willReturn('accessories');
+
+        $previousProductAssociation = $this->createMock(ProductAssociationInterface::class);
+        $previousProductAssociation->method('getType')->willReturn($productAssociationType);
+        $previousProductAssociation->method('getAssociatedProducts')->willReturn(new ArrayCollection());
+
+        $this->productsToProductAssociationsTransformer->transform(new ArrayCollection([$previousProductAssociation]));
+
+        $this->productsToProductAssociationsTransformer->reset();
+
+        $product = $this->createMock(ProductInterface::class);
+        $freshProductAssociation = $this->createMock(ProductAssociationInterface::class);
+        $this->productAssociationFactoryMock->method('createNew')->willReturn($freshProductAssociation);
+        $this->productAssociationTypeRepositoryMock->method('findOneBy')->willReturn($productAssociationType);
+
+        $productAssociations = $this->productsToProductAssociationsTransformer->reverseTransform([
+            'accessories' => new ArrayCollection([$product]),
+        ]);
+
+        $this->assertSame($freshProductAssociation, $productAssociations->first());
+    }
 }

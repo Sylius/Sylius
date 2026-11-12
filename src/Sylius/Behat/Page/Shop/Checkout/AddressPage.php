@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
+use Facebook\WebDriver\Exception\StaleElementReferenceException;
 use Sylius\Behat\Context\Ui\Admin\Helper\SecurePasswordTrait;
 use Sylius\Behat\Page\Shop\Page as ShopPage;
 use Sylius\Behat\Service\DriverHelper;
@@ -157,7 +158,11 @@ class AddressPage extends ShopPage implements AddressPageInterface
     {
         $this->waitForElementUpdate('form');
 
-        return $this->hasElement('login_button');
+        try {
+            return $this->hasElement('login_button');
+        } catch (StaleElementReferenceException) {
+            return false;
+        }
     }
 
     public function signIn(): void
@@ -387,7 +392,13 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     protected function waitForLoginAction(): bool
     {
-        return $this->getDocument()->waitFor(5, fn () => !$this->hasElement('login_password'));
+        return (bool) $this->getDocument()->waitFor(5, function (): bool {
+            try {
+                return !$this->hasElement('login_password');
+            } catch (StaleElementReferenceException) {
+                return false;
+            }
+        });
     }
 
     protected function assertAddressType(string $type): void

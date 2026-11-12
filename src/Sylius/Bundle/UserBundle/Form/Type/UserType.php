@@ -78,7 +78,7 @@ abstract class UserType extends AbstractResourceType
                 'validation_groups' => function (FormInterface $form): array {
                     $data = $form->getData();
                     if ($data && !$data->getId()) {
-                        $this->validationGroups[] = 'sylius_user_create';
+                        return array_merge($this->validationGroups, ['sylius_user_create']);
                     }
 
                     return $this->validationGroups;

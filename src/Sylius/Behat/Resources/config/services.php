@@ -46,6 +46,10 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $container) {
+    $container->parameters()
+        ->set('sylius.behat.second_session.default', 'chrome_headless_second_session')
+    ;
+
     $services = $container->services();
     $parameters = $container->parameters();
 
@@ -137,6 +141,11 @@ return static function (ContainerConfigurator $container) {
             service('behat.mink'),
             service('sylius.behat.shared_storage'),
             service('sylius.behat.shop_security'),
+            //  Which session the "another browser" steps switch to. Defaults
+            //  to the headless Chrome one, so every existing suite behaves as
+            //  before; the worker-mode runs set it to a browserkit session,
+            //  because a browser cannot measure a long-lived process.
+            '%env(default:sylius.behat.second_session.default:SYLIUS_BEHAT_SECOND_SESSION)%',
         ])
     ;
 

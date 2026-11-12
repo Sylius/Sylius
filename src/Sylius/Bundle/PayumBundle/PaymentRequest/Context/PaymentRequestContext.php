@@ -14,8 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Bundle\PayumBundle\PaymentRequest\Context;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class PaymentRequestContext implements PaymentRequestContextInterface
+final class PaymentRequestContext implements PaymentRequestContextInterface, ResetInterface
 {
     private ?PaymentRequestInterface $paymentRequest = null;
 
@@ -35,6 +36,11 @@ final class PaymentRequestContext implements PaymentRequestContextInterface
     }
 
     public function disable(): void
+    {
+        $this->paymentRequest = null;
+    }
+
+    public function reset(): void
     {
         $this->paymentRequest = null;
     }

@@ -112,7 +112,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $resolver
             ->setDefault('name', fn (Options $options): string => $this->faker->words(3, true))
             ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
-            ->setDefault('hostname', fn (Options $options): string => $options['code'] . '.localhost')
+            ->setDefault('hostname', fn (Options $options): string => getenv('SYLIUS_FIXTURES_HOSTNAME') ?: $options['code'] . '.localhost')
             ->setDefault('color', fn (Options $options): string => $this->faker->hexColor)
             ->setDefault('enabled', fn (Options $options): bool => $this->faker->boolean(90))
             ->setAllowedTypes('enabled', 'bool')

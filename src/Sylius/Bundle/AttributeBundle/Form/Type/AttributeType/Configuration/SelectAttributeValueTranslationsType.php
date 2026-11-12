@@ -16,28 +16,22 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 use Sylius\Bundle\ResourceBundle\Form\Type\FixedCollectionType;
 use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class SelectAttributeValueTranslationsType extends AbstractType
 {
-    /** @var string[] */
-    private array $definedLocalesCodes;
-
-    private string $defaultLocaleCode;
-
-    public function __construct(TranslationLocaleProviderInterface $localeProvider)
+    public function __construct(private TranslationLocaleProviderInterface $localeProvider)
     {
-        $this->definedLocalesCodes = $localeProvider->getDefinedLocalesCodes();
-        $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'entries' => $this->definedLocalesCodes,
+            'entries' => fn (Options $options): array => $this->localeProvider->getDefinedLocalesCodes(),
             'entry_name' => fn (string $localeCode): string => $localeCode,
             'entry_options' => fn (string $localeCode): array => [
-                'required' => $localeCode === $this->defaultLocaleCode,
+                'required' => $localeCode === $this->localeProvider->getDefaultLocaleCode(),
             ],
         ]);
     }
