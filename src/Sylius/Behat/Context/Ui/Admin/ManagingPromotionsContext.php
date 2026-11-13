@@ -276,6 +276,12 @@ final class ManagingPromotionsContext implements Context
         $this->formElement->removeLastRule();
     }
 
+    #[When('I remove its first action')]
+    public function iRemoveItsFirstAction(): void
+    {
+        $this->formElement->removeFirstAction();
+    }
+
     #[When('I remove its last action')]
     public function iRemoveItsLastAction(): void
     {
@@ -743,6 +749,23 @@ final class ManagingPromotionsContext implements Context
     public function theActionAmountShouldBe(string $amount): void
     {
         Assert::same($this->formElement->getActionAmountValue(), $amount);
+    }
+
+    #[Then('its last action should still be applied to items from :taxonName category for :channel channel')]
+    public function itsLastActionShouldStillBeAppliedToItemsFromCategory(string $taxonName, ChannelInterface $channel): void
+    {
+        $selectedTaxons = $this->formElement->getSelectedActionFilterOptions($channel->getCode(), 'taxons');
+
+        Assert::notEmpty(
+            array_filter($selectedTaxons, fn (string $selectedTaxon): bool => str_contains($selectedTaxon, $taxonName)),
+            sprintf('The "%s" taxon should be selected in the filter, but got: %s.', $taxonName, implode(', ', $selectedTaxons)),
+        );
+    }
+
+    #[Then('its last action should still be applied to the :productName product for :channel channel')]
+    public function itsLastActionShouldStillBeAppliedToTheProduct(string $productName, ChannelInterface $channel): void
+    {
+        Assert::inArray($productName, $this->formElement->getSelectedActionFilterOptions($channel->getCode(), 'products'));
     }
 
     #[Then('I should see the action configuration form')]

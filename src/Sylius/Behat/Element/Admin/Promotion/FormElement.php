@@ -107,6 +107,19 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $this->waitForFormUpdate();
     }
 
+    public function removeFirstAction(): void
+    {
+        $deleteButton = $this->getElement('first_action')->find('css', 'button[data-test-delete]');
+
+        $this->getDriver()->executeScript(sprintf(
+            'document.getElementById(%s).focus()',
+            json_encode($deleteButton->getAttribute('id')),
+        ));
+
+        $deleteButton->press();
+        $this->waitForFormUpdate();
+    }
+
     public function removeLastAction(): void
     {
         $this->getLastAction()->find('css', 'button[data-test-delete]')->press();
@@ -190,6 +203,16 @@ class FormElement extends BaseFormElement implements FormElementInterface
         $this->waitForFormUpdate();
     }
 
+    public function getSelectedActionFilterOptions(string $channelCode, string $filterType): array
+    {
+        $selectedOptions = $this->getDriver()->evaluateScript(sprintf(
+            '[...document.getElementById(%s).selectedOptions].map((option) => option.textContent.trim())',
+            json_encode($this->getLastActionFilterSelect($channelCode, $filterType)->getAttribute('id')),
+        ));
+
+        return is_array($selectedOptions) ? $selectedOptions : [];
+    }
+
     public function getRuleCountValue(): string
     {
         return $this->getElement('rule_count')->getValue();
@@ -248,6 +271,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'ends_at_date' => '#sylius_admin_promotion_endsAt_date',
             'ends_at_time' => '#sylius_admin_promotion_endsAt_time',
             'exclusive' => '#sylius_admin_promotion_exclusive',
+            'first_action' => '[data-test-actions] [data-test-entry-row]:first-child',
             'label' => '[name="sylius_admin_promotion[translations][%locale_code%][label]"]',
             'last_action' => '[data-test-actions] [data-test-entry-row]:last-child',
             'last_rule' => '[data-test-rules] [data-test-entry-row]:last-child',
@@ -268,6 +292,18 @@ class FormElement extends BaseFormElement implements FormElementInterface
     protected function getLastAction(): NodeElement
     {
         return $this->getElement('last_action');
+    }
+
+    protected function getLastActionFilterSelect(string $channelCode, string $filterType): NodeElement
+    {
+        $locator = sprintf('[id^="sylius_admin_promotion_actions_"][id$="_configuration_%s_filters_%s_filter"] select', $channelCode, $filterType);
+
+        $select = $this->getLastAction()->find('css', $locator);
+        if (null === $select) {
+            throw new ElementNotFoundException($this->getSession(), 'Action filter', 'css', $locator);
+        }
+
+        return $select;
     }
 
     protected function getChannelConfigurationOfLastAction(string $channelCode): NodeElement

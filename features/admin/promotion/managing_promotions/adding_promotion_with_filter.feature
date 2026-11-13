@@ -98,3 +98,18 @@ Feature: Adding promotion with filter
         And I add it
         Then I should be notified that it has been successfully created
         And the "10% discount for PHP T-Shirts!" promotion should appear in the registry
+
+    @no-api @ui @mink:chromedriver
+    Scenario: Keeping filters of the remaining item percentage discount action after removing the preceding one
+        Given the store classifies its products as "T-Shirts" and "Mugs"
+        And the store has a product "PHP T-Shirt" priced at "$100.00"
+        When I want to create a new promotion
+        And I specify its code as "10_for_php_t_shirts"
+        And I name it "10% discount for PHP T-Shirts!"
+        And I add the "Item percentage discount" action configured with a percentage value of "5%" for "United States" channel
+        And I add the "Item percentage discount" action configured with a percentage value of "10%" for "United States" channel
+        And I specify that this action should be applied to items from "T-Shirts" category for "United States" channel
+        And I specify that this action should be applied to the "PHP T-Shirt" product for "United States" channel
+        And I remove its first action
+        Then its last action should still be applied to items from "T-Shirts" category for "United States" channel
+        And its last action should still be applied to the "PHP T-Shirt" product for "United States" channel
