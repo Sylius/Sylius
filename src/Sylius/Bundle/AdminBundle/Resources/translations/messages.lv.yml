@@ -43,3 +43,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Profesionālie pakalpojumi
                     find_a_partner: Atrast partneri
+    ui:
+        theme_auto: 'Automātiski'
+        theme_dark: 'Tumšs'
+        theme_light: 'Gaišs'
+        toggle_theme: 'Pārslēgt motīvu'

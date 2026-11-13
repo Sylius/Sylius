@@ -93,3 +93,7 @@ sylius:
             week: Semaine
             2weeks: 2 Semaines
             year: Année
+        theme_auto: 'Auto'
+        theme_dark: 'Sombre'
+        theme_light: 'Clair'
+        toggle_theme: 'Changer de thème'

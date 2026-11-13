@@ -44,3 +44,8 @@ sylius:
                     browse_plugins: праглядаць убудовы
                     professional_services: прафесійныя паслугі
                     find_a_partner: знайсці партнёра
+    ui:
+        theme_auto: 'Аўтаматычна'
+        theme_dark: 'Цёмная'
+        theme_light: 'Светлая'
+        toggle_theme: 'Пераключыць тэму'

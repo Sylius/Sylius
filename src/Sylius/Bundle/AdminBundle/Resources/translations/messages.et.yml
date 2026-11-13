@@ -15,3 +15,8 @@ sylius:
                 sylius_plus: Sylius Plus
                 professional_services: Professionaalsed teenused
                 find_a_partner: Leia partner
+    ui:
+        theme_auto: 'Automaatne'
+        theme_dark: 'Tume'
+        theme_light: 'Hele'
+        toggle_theme: 'Vaheta teemat'

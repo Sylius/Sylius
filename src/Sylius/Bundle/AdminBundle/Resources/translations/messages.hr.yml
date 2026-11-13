@@ -47,3 +47,8 @@ sylius:
                     browse_plugins: Pregledaj dodatke
                     professional_services: Profesionalne usluge
                     find_a_partner: Pronađite partnera
+    ui:
+        theme_auto: 'Automatski'
+        theme_dark: 'Tamna'
+        theme_light: 'Svijetla'
+        toggle_theme: 'Promijeni temu'

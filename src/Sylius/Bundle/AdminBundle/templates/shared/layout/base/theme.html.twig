@@ -1,13 +1,25 @@
 <script>
     (function() {
-        let stored = null;
-        try {
-            stored = localStorage.getItem('sylius-admin-theme');
-        } catch {
-            // storage unavailable (private mode, quota exceeded)
-        }
-        const storedTheme = ['light', 'dark'].includes(stored) ? stored : null;
-        const theme = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        document.documentElement.setAttribute('data-bs-theme', theme);
+        const root = document.documentElement;
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        const getMode = () => {
+            let stored = null;
+            try {
+                stored = localStorage.getItem('sylius-admin-theme');
+            } catch {
+                // storage unavailable (private mode, quota exceeded)
+            }
+
+            return ['light', 'dark'].includes(stored) ? stored : 'auto';
+        };
+        const apply = () => {
+            const mode = getMode();
+            root.setAttribute('data-theme-mode', mode);
+            root.setAttribute('data-bs-theme', mode === 'auto' ? (media.matches ? 'dark' : 'light') : mode);
+        };
+
+        apply();
+        media.addEventListener('change', apply);
+        window.addEventListener('storage', (event) => (event.key === 'sylius-admin-theme' || event.key === null) && apply());
     })();
 </script>

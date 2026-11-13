@@ -46,3 +46,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Serveis professionals
                     find_a_partner: Troba un soci
+    ui:
+        theme_auto: 'Automàtic'
+        theme_dark: 'Fosc'
+        theme_light: 'Clar'
+        toggle_theme: 'Canvia el tema'

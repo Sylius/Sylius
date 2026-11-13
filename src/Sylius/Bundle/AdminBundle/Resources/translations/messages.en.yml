@@ -136,6 +136,9 @@ sylius:
             2weeks: 2 Weeks
             year: Year
         taxon: Taxon
+        theme_auto: 'Auto'
+        theme_dark: 'Dark'
+        theme_light: 'Light'
         to_approve: 'to approve'
         to_process: 'to process'
         to_ship: 'to ship'

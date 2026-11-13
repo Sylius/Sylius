@@ -32,3 +32,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Professionele dienste
                     find_a_partner: Vind 'n vennoot
+    ui:
+        theme_auto: 'Outomaties'
+        theme_dark: 'Donker'
+        theme_light: 'Lig'
+        toggle_theme: 'Wissel tema'
