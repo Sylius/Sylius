@@ -64,6 +64,8 @@ use Sylius\Component\Core\Promotion\Filter\ProductFilter;
 use Sylius\Component\Core\Promotion\Filter\TaxonFilter;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
+use Sylius\Component\Core\Promotion\Remover\UnusedPromotionCouponRemover;
+use Sylius\Component\Core\Promotion\Remover\UnusedPromotionCouponRemoverInterface;
 use Sylius\Component\Core\Promotion\Updater\Rule\HasTaxonRuleUpdater;
 use Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider;
 
@@ -261,6 +263,12 @@ return static function (ContainerConfigurator $container) {
         ->public()
     ;
     $services->alias(OrderPromotionsUsageModifierInterface::class, 'sylius.modifier.promotion.order_usage')->public();
+
+    $services
+        ->set('sylius.remover.promotion.unused_promotion_coupon', UnusedPromotionCouponRemover::class)
+        ->public()
+    ;
+    $services->alias(UnusedPromotionCouponRemoverInterface::class, 'sylius.remover.promotion.unused_promotion_coupon')->public();
 
     $services
         ->set('sylius.modifier.promotion.order_usage.atomic', AtomicOrderPromotionsUsageModifier::class)
