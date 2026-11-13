@@ -137,6 +137,46 @@ final class AvatarImageTest extends JsonApiTestCase
     }
 
     /** @test */
+    public function it_prevents_avatar_image_creation_with_a_disallowed_file_type_and_keeps_the_current_one(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::CONTENT_TYPE_HEADER);
+
+        /** @var AdminUserInterface $adminUser */
+        $adminUser = $fixtures['admin'];
+        /** @var AvatarImageInterface $avatarImage */
+        $avatarImage = $fixtures['avatar_image'];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v2/admin/avatar-images',
+            parameters: [
+                'owner' => sprintf('/api/v2/admin/administrators/%s', $adminUser->getId()),
+            ],
+            files: ['file' => $this->getUploadedFile('xss.svg', 'xss.svg', 'image/svg+xml')],
+            server: $header,
+        );
+
+        $this->assertResponseViolations(
+            $this->client->getResponse(),
+            [
+                [
+                    'propertyPath' => 'file',
+                    'message' => 'The file is not a valid image. Allowed types are image/jpeg, image/png, image/gif, image/webp.',
+                ],
+            ],
+        );
+
+        $this->client->request(
+            method: 'GET',
+            uri: sprintf('/api/v2/admin/avatar-images/%s', $avatarImage->getId()),
+            server: $header,
+        );
+
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_OK);
+    }
+
+    /** @test */
     public function it_deletes_an_avatar_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'avatar_image.yaml']);

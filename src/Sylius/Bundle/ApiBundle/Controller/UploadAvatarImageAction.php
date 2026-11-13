@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Controller;
 
 use ApiPlatform\Api\IriConverterInterface;
+use ApiPlatform\Symfony\Validator\Exception\ValidationException;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
@@ -22,6 +23,7 @@ use Sylius\Resource\Factory\FactoryInterface;
 use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
 trigger_deprecation(
@@ -40,6 +42,7 @@ final class UploadAvatarImageAction
         private AvatarImageRepositoryInterface $avatarImageRepository,
         private ImageUploaderInterface $imageUploader,
         private IriConverterInterface $iriConverter,
+        private ValidatorInterface $validator,
     ) {
     }
 
@@ -50,6 +53,12 @@ final class UploadAvatarImageAction
 
         /** @var ImageInterface $image */
         $image = $this->avatarImageFactory->createNew();
+
+        $violations = $this->validator->validatePropertyValue($image, 'file', $file, ['sylius']);
+        if (0 !== \count($violations)) {
+            throw new ValidationException($violations);
+        }
+
         $image->setFile($file);
 
         /** @var string $ownerIri */

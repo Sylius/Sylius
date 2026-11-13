@@ -50,6 +50,7 @@
             <argument type="service" id="sylius.repository.avatar_image" />
             <argument type="service" id="sylius.uploader.image" />
             <argument type="service" id="api_platform.symfony.iri_converter" />
+            <argument type="service" id="validator" />
             <deprecated package="sylius/api-bundle" version="1.14">The "%service_id%" service is deprecated since 1.14 and will be removed in 2.0.</deprecated>
         </service>
 
