@@ -5,5 +5,6 @@ const SyliusShop = require('@sylius-ui/shop');
 
 const adminConfig = SyliusAdmin.getWebpackConfig(path.resolve(__dirname));
 const shopConfig = SyliusShop.getWebpackConfig(path.resolve(__dirname));
+const shopThemesConfig = SyliusShop.getThemesWebpackConfig(path.resolve(__dirname));
 
-module.exports = [adminConfig, shopConfig];
+module.exports = [adminConfig, shopConfig, shopThemesConfig].filter(Boolean);
