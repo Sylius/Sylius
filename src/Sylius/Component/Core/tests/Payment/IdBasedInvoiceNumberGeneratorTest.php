@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Payment;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class IdBasedInvoiceNumberGeneratorTest extends TestCase
 {
     private IdBasedInvoiceNumberGenerator $generator;

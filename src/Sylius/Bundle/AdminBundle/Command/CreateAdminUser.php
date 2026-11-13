@@ -23,6 +23,8 @@ final class CreateAdminUser
         private string $plainPassword,
         private string $localeCode,
         private bool $enabled,
+        private bool $administrationAccess = true,
+        private bool $apiAccess = false,
     ) {
     }
 
@@ -59,5 +61,15 @@ final class CreateAdminUser
     public function isEnabled(): bool
     {
         return $this->enabled;
+    }
+
+    public function hasAdministrationAccess(): bool
+    {
+        return $this->administrationAccess;
+    }
+
+    public function hasApiAccess(): bool
+    {
+        return $this->apiAccess;
     }
 }

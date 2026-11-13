@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ProductBundle\Validator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination;
@@ -23,6 +24,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantCombinationValidatorTest extends TestCase
 {
     private ExecutionContextInterface&MockObject $context;
@@ -52,7 +54,7 @@ final class ProductVariantCombinationValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $variant */
         $variant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new ProductVariantCombination(['message' => 'Variant with given options already exists']);
+        $constraint = new ProductVariantCombination(message: 'Variant with given options already exists');
 
         $variant->expects($this->once())->method('getProduct')->willReturn(null);
         $product->expects($this->never())->method('hasVariants');
@@ -70,7 +72,7 @@ final class ProductVariantCombinationValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $variant */
         $variant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new ProductVariantCombination(['message' => 'Variant with given options already exists']);
+        $constraint = new ProductVariantCombination(message: 'Variant with given options already exists');
 
         $variant->expects($this->once())->method('getProduct')->willReturn($product);
         $product->expects($this->once())->method('hasVariants')->willReturn(true);
@@ -88,7 +90,7 @@ final class ProductVariantCombinationValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $variant */
         $variant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new ProductVariantCombination(['message' => 'Variant with given options already exists']);
+        $constraint = new ProductVariantCombination(message: 'Variant with given options already exists');
 
         $variant->expects($this->once())->method('getProduct')->willReturn($product);
         $product->expects($this->once())->method('hasVariants')->willReturn(false);
@@ -106,7 +108,7 @@ final class ProductVariantCombinationValidatorTest extends TestCase
         /** @var ProductVariantInterface&MockObject $variant */
         $variant = $this->createMock(ProductVariantInterface::class);
 
-        $constraint = new ProductVariantCombination(['message' => 'Variant with given options already exists']);
+        $constraint = new ProductVariantCombination(message: 'Variant with given options already exists');
 
         $variant->expects($this->once())->method('getProduct')->willReturn($product);
         $product->expects($this->once())->method('hasVariants')->willReturn(true);

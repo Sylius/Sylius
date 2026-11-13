@@ -1,4 +1,4 @@
-FROM ghcr.io/sylius/sylius-php:8.2-fixuid-xdebug-alpine
+FROM ghcr.io/sylius/sylius-php:8.3-fixuid-xdebug-alpine
 
 USER root
 RUN apk add --update;

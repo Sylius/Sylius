@@ -174,4 +174,25 @@ $carousel-vertical-gap: 8px !default;
             max-width: none;
         }
     }
+
+    [data-bs-theme="dark"] & .carousel-item {
+        background: var(--#{$prefix}bg-surface);
+        background: linear-gradient(
+            100deg,
+            var(--#{$prefix}bg-surface) 30%,
+            color-mix(in srgb, #{$banner-color} 7%, var(--#{$prefix}bg-surface)) 62%,
+            color-mix(in srgb, #{$banner-color} 22%, var(--#{$prefix}bg-surface)) 100%
+        );
+    }
+
+    [data-bs-theme="dark"] &__description,
+    [data-bs-theme="dark"] &__more,
+    [data-bs-theme="dark"] &__installed {
+        color: var(--#{$prefix}secondary);
+    }
+
+    [data-bs-theme="dark"] &__badge {
+        border-color: var(--#{$prefix}border-color);
+        color: var(--#{$prefix}secondary);
+    }
 }

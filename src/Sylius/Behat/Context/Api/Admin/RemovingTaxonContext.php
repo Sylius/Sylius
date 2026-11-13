@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -28,17 +30,13 @@ final class RemovingTaxonContext implements Context
     ) {
     }
 
-    /**
-     * @When I (try to) delete taxon named :taxon
-     */
+    #[When('I (try to) delete taxon named :taxon')]
     public function iDeleteTaxon(TaxonInterface $taxon): void
     {
         $this->client->delete(Resources::TAXONS, $taxon->getCode());
     }
 
-    /**
-     * @Then the :taxon taxon should still exist
-     */
+    #[Then('the :taxon taxon should still exist')]
     public function theTaxonShouldStillExist(TaxonInterface $taxon): void
     {
         $this->client->show(Resources::TAXONS, $taxon->getCode());
@@ -46,9 +44,7 @@ final class RemovingTaxonContext implements Context
         Assert::true($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));
     }
 
-    /**
-     * @Then I should be notified that this taxon could not be deleted as it is in use by a promotion rule
-     */
+    #[Then('I should be notified that this taxon could not be deleted as it is in use by a promotion rule')]
     public function iShouldBeNotifiedThatThisTaxonCouldNotBeDeleted(): void
     {
         Assert::contains(

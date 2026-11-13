@@ -16,15 +16,12 @@ namespace Sylius\Bundle\CoreBundle\OrderPay\Controller;
 use LogicException;
 use Sylius\Bundle\CoreBundle\OrderPay\Provider\AfterPayResponseProviderInterface;
 use Sylius\Bundle\CoreBundle\OrderPay\Provider\PayResponseProviderInterface;
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Sylius\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-/** @experimental */
 final class OrderPayController
 {
     /**
@@ -34,8 +31,6 @@ final class OrderPayController
      */
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private MetadataInterface $orderMetadata,
-        private RequestConfigurationFactoryInterface $requestConfigurationFactory,
         private iterable $payResponseProviders,
         private iterable $afterPayResponseProviders,
     ) {
@@ -43,8 +38,6 @@ final class OrderPayController
 
     public function payAction(Request $request, string $tokenValue): Response
     {
-        $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
-
         /** @var OrderInterface|null $order */
         $order = $this->orderRepository->findOneByTokenValue($tokenValue);
 
@@ -55,8 +48,8 @@ final class OrderPayController
         $request->getSession()->set('sylius_order_id', $order->getId());
 
         foreach ($this->payResponseProviders as $provider) {
-            if ($provider->supports($configuration, $order)) {
-                return $provider->getResponse($configuration, $order);
+            if ($provider->supports($request, $order)) {
+                return $provider->getResponse($request, $order);
             }
         }
 
@@ -65,11 +58,9 @@ final class OrderPayController
 
     public function afterPayAction(Request $request): Response
     {
-        $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
-
         foreach ($this->afterPayResponseProviders as $provider) {
-            if ($provider->supports($configuration)) {
-                return $provider->getResponse($configuration);
+            if ($provider->supports($request)) {
+                return $provider->getResponse($request);
             }
         }
 

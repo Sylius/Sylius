@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\PaymentBundle\Checker;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\Checker\GatewayConfigEncryptionChecker;
 use Sylius\Component\Payment\Model\GatewayConfigInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GatewayConfigEncryptionCheckerTest extends TestCase
 {
     #[Test]

@@ -28,7 +28,7 @@ final class Code extends Compound
         return [
             new NotBlank(message: 'sylius.code.not_blank'),
             new Type('string'),
-            new Regex(['pattern' => '/^[\w-]*$/'], message: 'sylius.code.invalid'),
+            new Regex(pattern: '/^[\w-]*$/', message: 'sylius.code.invalid'),
         ];
     }
 }

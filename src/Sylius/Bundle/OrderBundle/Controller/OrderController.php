@@ -90,6 +90,7 @@ class OrderController extends ResourceController
 
             $this->getEventDispatcher()->dispatch(new GenericEvent($resource), SyliusCartEvents::CART_CHANGE);
             $this->manager->flush();
+            $this->getEventDispatcher()->dispatch(new GenericEvent($resource), SyliusCartEvents::CART_POST_CHANGE);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->createRestView($configuration, null, Response::HTTP_NO_CONTENT);

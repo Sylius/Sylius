@@ -17,6 +17,7 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Get;
 use Doctrine\ORM\QueryBuilder;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Order\ChannelBasedExtension;
@@ -28,6 +29,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Resource\Model\ResourceInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelBasedExtensionTest extends TestCase
 {
     /** @var SectionProviderInterface|MockObject */

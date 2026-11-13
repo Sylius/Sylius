@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Statistics\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Statistics\Registry\OrdersTotalsProviderRegistryInterf
 use Sylius\Component\Core\Statistics\Registry\StatisticsProviderRegistryInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SalesStatisticsProviderTest extends TestCase
 {
     private MockObject&OrdersTotalsProviderRegistryInterface $ordersTotalsProviderRegistry;

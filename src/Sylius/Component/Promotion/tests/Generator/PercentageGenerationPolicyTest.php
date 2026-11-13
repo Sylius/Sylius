@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Promotion\Generator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Promotion\Generator\PercentageGenerationPolicy;
 use Sylius\Component\Promotion\Generator\ReadablePromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PercentageGenerationPolicyTest extends TestCase
 {
     private MockObject&PromotionCouponRepositoryInterface $promotionCouponRepository;

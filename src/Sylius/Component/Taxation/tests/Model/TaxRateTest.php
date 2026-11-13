@@ -15,6 +15,7 @@ namespace Tests\Sylius\Component\Taxation\Model;
 
 use DateTime;
 use DateTimeInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -22,10 +23,10 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRate;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TaxRateTest extends TestCase
 {
-    /** @var TaxCategoryInterface&MockObject */
-    private MockObject $taxCategory;
+    private MockObject&TaxCategoryInterface $taxCategory;
 
     private TaxRate $taxRate;
 

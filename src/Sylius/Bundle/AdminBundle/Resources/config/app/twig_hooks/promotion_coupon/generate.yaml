@@ -89,3 +89,6 @@ sylius_twig_hooks:
             usage_limit:
                 template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/usage_limit.html.twig'
                 priority: 0
+            track_usage:
+                template: '@SyliusAdmin/promotion_coupon/generate/form/sections/configuration/track_usage.html.twig'
+                priority: -100

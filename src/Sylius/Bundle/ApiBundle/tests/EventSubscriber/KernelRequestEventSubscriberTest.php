@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\EventSubscriber;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\EventSubscriber\KernelRequestEventSubscriber;
@@ -21,6 +22,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class KernelRequestEventSubscriberTest extends TestCase
 {
     private KernelRequestEventSubscriber $kernelRequestEventSubscriber;

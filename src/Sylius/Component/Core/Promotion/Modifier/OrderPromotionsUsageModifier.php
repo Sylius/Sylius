@@ -21,11 +21,15 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
     public function increment(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {
+            if (!$promotion->isTrackUsage()) {
+                continue;
+            }
+
             $promotion->incrementUsed();
         }
 
         $promotionCoupon = $order->getPromotionCoupon();
-        if (null !== $promotionCoupon) {
+        if (null !== $promotionCoupon && $promotionCoupon->isTrackUsage()) {
             $promotionCoupon->incrementUsed();
         }
     }
@@ -33,12 +37,20 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
     public function decrement(OrderInterface $order): void
     {
         foreach ($order->getPromotions() as $promotion) {
+            if (!$promotion->isTrackUsage()) {
+                continue;
+            }
+
             $promotion->decrementUsed();
         }
 
         /** @var PromotionCouponInterface|null $promotionCoupon */
         $promotionCoupon = $order->getPromotionCoupon();
         if (null === $promotionCoupon) {
+            return;
+        }
+
+        if (!$promotionCoupon->isTrackUsage()) {
             return;
         }
 

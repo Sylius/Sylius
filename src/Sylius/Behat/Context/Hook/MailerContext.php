@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
+use Behat\Hook\BeforeScenario;
 use Psr\Cache\CacheItemPoolInterface;
 
 final class MailerContext implements Context
@@ -22,9 +23,7 @@ final class MailerContext implements Context
     {
     }
 
-    /**
-     * @BeforeScenario @email
-     */
+    #[BeforeScenario]
     public function purgeMessages(): void
     {
         $this->cache->clear();

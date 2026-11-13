@@ -68,7 +68,7 @@ final class PromotionCouponUsageLimitTest extends JsonApiTestCase
     {
         $this->loadFixtures(usageLimit: null, perCustomerUsageLimit: 1);
         $this->prepareCartWithCoupon('token', 'oliver@doe.com');
-        $this->placeOrder('another-token', 'oliver@doe.com', couponCode: 'XYZ2');
+        $this->placeOrder('another-token', 'oliver@doe.com', checkoutCompletedAt: new \DateTimeImmutable(), couponCode: 'XYZ2');
 
         $this->completeOrder('token');
 
@@ -81,7 +81,7 @@ final class PromotionCouponUsageLimitTest extends JsonApiTestCase
     {
         $this->loadFixtures(usageLimit: null, perCustomerUsageLimit: 1);
         $this->prepareCartWithCoupon('token', 'oliver@doe.com');
-        $this->placeOrder('another-token', 'oliver@doe.com', couponCode: 'XYZ2');
+        $this->placeOrder('another-token', 'oliver@doe.com', checkoutCompletedAt: new \DateTimeImmutable(), couponCode: 'XYZ2');
         $this->completeOrder('token');
 
         $this->completeOrder('token');

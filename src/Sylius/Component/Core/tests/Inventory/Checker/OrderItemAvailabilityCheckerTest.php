@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Inventory\Checker;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityChecker;
@@ -20,6 +21,7 @@ use Sylius\Component\Core\Inventory\Checker\OrderItemAvailabilityCheckerInterfac
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderItemAvailabilityCheckerTest extends TestCase
 {
     private MockObject&OrderItemInterface $orderItem;

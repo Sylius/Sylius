@@ -18,21 +18,41 @@ use Knp\Menu\ItemInterface;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
+/**
+ * @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use CompositeMenuBuilder instead.
+ */
 final readonly class MainMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.main';
 
     public function __construct(
-        private FactoryInterface $factory,
-        private EventDispatcherInterface $eventDispatcher,
-        private RouterInterface $router,
+        private FactoryInterface|MenuBuilderInterface $factory,
+        private ?EventDispatcherInterface $eventDispatcher = null,
+        private ?RouterInterface $router = null,
     ) {
     }
 
     /** @param array<string, mixed> $options */
     public function createMenu(array $options): ItemInterface
     {
+        if ($this->factory instanceof MenuBuilderInterface) {
+            return $this->factory->createMenu($options);
+        }
+
+        trigger_deprecation(
+            'sylius/admin-bundle',
+            '2.3',
+            'Passing an instance of "%s" as the first argument of "%s" is deprecated and will be removed in Sylius 3.0. Pass a "%s" instance instead.',
+            FactoryInterface::class,
+            self::class,
+            MenuBuilderInterface::class,
+        );
+
+        Assert::notNull($this->eventDispatcher, sprintf('An instance of "%s" is required when passing a "%s" as the first argument of "%s".', EventDispatcherInterface::class, FactoryInterface::class, self::class));
+        Assert::notNull($this->router, sprintf('An instance of "%s" is required when passing a "%s" as the first argument of "%s".', RouterInterface::class, FactoryInterface::class, self::class));
+
         $menu = $this->factory->createItem('root');
 
         $this->addDashboardItem($menu);

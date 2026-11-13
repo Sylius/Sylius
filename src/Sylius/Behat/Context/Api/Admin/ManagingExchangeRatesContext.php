@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -32,10 +35,8 @@ final readonly class ManagingExchangeRatesContext implements Context
     ) {
     }
 
-    /**
-     * @Given /^I am editing (this exchange rate)$/
-     * @When /^I want to edit (this exchange rate)$/
-     */
+    #[Given('/^I am editing (this exchange rate)$/')]
+    #[When('/^I want to edit (this exchange rate)$/')]
     public function iWantToEditThisExchangeRate(ExchangeRateInterface $exchangeRate): void
     {
         $this->client->buildUpdateRequest(Resources::EXCHANGE_RATES, (string) $exchangeRate->getId());
@@ -43,28 +44,22 @@ final readonly class ManagingExchangeRatesContext implements Context
         $this->sharedStorage->set('exchange_rate_id', (string) $exchangeRate->getId());
     }
 
-    /**
-     * @Given I am browsing exchange rates of the store
-     * @When I browse exchange rates
-     * @When I browse exchange rates of the store
-     */
+    #[Given('I am browsing exchange rates of the store')]
+    #[When('I browse exchange rates')]
+    #[When('I browse exchange rates of the store')]
     public function iBrowseExchangeRatesOfTheStore(): void
     {
         $this->client->index(Resources::EXCHANGE_RATES);
     }
 
-    /**
-     * @When I want to add a new exchange rate
-     */
+    #[When('I want to add a new exchange rate')]
     public function iWantToAddNewExchangeRate(): void
     {
         $this->client->buildCreateRequest(Resources::EXCHANGE_RATES);
     }
 
-    /**
-     * @When I specify its ratio as :ratio
-     * @When I don't specify its ratio
-     */
+    #[When('I specify its ratio as :ratio')]
+    #[When('I don\'t specify its ratio')]
     public function iSpecifyItsRatioAs(?string $ratio = null): void
     {
         if ($ratio !== null) {
@@ -72,9 +67,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         }
     }
 
-    /**
-     * @When I choose :currencyCode as the source currency
-     */
+    #[When('I choose :currencyCode as the source currency')]
     public function iChooseAsTheSourceCurrency(string $currencyCode): void
     {
         $this->client->addRequestData(
@@ -83,9 +76,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @When I choose :currencyCode as the target currency
-     */
+    #[When('I choose :currencyCode as the target currency')]
     public function iChooseAsTheTargetCurrency(string $currencyCode): void
     {
         $this->client->addRequestData(
@@ -94,66 +85,50 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->client->create();
     }
 
-    /**
-     * @When I change ratio to :ratio
-     */
+    #[When('I change ratio to :ratio')]
     public function iChangeRatioTo(string $ratio): void
     {
         $this->client->updateRequestData(['ratio' => $ratio]);
     }
 
-    /**
-     * @When /^I delete the (exchange rate between "[^"]+" and "[^"]+")$/
-     */
+    #[When('/^I delete the (exchange rate between "[^"]+" and "[^"]+")$/')]
     public function iDeleteTheExchangeRateBetweenAnd(ExchangeRateInterface $exchangeRate): void
     {
         $this->client->delete(Resources::EXCHANGE_RATES, (string) $exchangeRate->getId());
     }
 
-    /**
-     * @When I choose :currency as a currency filter
-     */
+    #[When('I choose :currency as a currency filter')]
     public function iChooseCurrencyAsACurrencyFilter(CurrencyInterface $currency): void
     {
         $this->client->addFilter('currencyCode', $currency->getCode());
     }
 
-    /**
-     * @When I filter
-     */
+    #[When('I filter')]
     public function iFilter(): void
     {
         $this->client->filter();
     }
 
-    /**
-     * @Then I should see :count exchange rates on the list
-     */
+    #[Then('I should see :count exchange rates on the list')]
     public function iShouldSeeExchangeRatesOnTheList(int $count): void
     {
         Assert::count($this->responseChecker->getCollection($this->client->getLastResponse()), $count);
     }
 
-    /**
-     * @Then I should see a single exchange rate in the list
-     * @Then I should( still) see one exchange rate on the list
-     */
+    #[Then('I should see a single exchange rate in the list')]
+    #[Then('I should( still) see one exchange rate on the list')]
     public function iShouldSeeASingleExchangeRateInTheList(): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::EXCHANGE_RATES)), 1);
     }
 
-    /**
-     * @Then the exchange rate with ratio :ratio between :sourceCurrency and :targetCurrency should appear in the store
-     */
+    #[Then('the exchange rate with ratio :ratio between :sourceCurrency and :targetCurrency should appear in the store')]
     public function theExchangeRateWithRatioBetweenAndShouldAppearInTheStore(
         float $ratio,
         CurrencyInterface $sourceCurrency,
@@ -170,10 +145,8 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the exchange rate between :sourceCurrency and :targetCurrency in the list
-     * @Then I should (also) see an exchange rate between :sourceCurrency and :targetCurrency on the list
-     */
+    #[Then('I should see the exchange rate between :sourceCurrency and :targetCurrency in the list')]
+    #[Then('I should (also) see an exchange rate between :sourceCurrency and :targetCurrency on the list')]
     public function iShouldSeeTheExchangeRateBetweenAndInTheList(
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency,
@@ -184,9 +157,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then it should have a ratio of :ratio
-     */
+    #[Then('it should have a ratio of :ratio')]
     public function itShouldHaveARatioOf(float $ratio): void
     {
         Assert::true(
@@ -195,9 +166,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this exchange rate) should no longer be on the list$/
-     */
+    #[Then('/^(this exchange rate) should no longer be on the list$/')]
     public function thisExchangeRateShouldNoLongerBeOnTheList(ExchangeRateInterface $exchangeRate): void
     {
         Assert::false(
@@ -215,9 +184,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then the exchange rate between :sourceCurrency and :targetCurrency should not be added
-     */
+    #[Then('the exchange rate between :sourceCurrency and :targetCurrency should not be added')]
     public function theExchangeRateBetweenAndShouldNotBeAdded(
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency,
@@ -227,9 +194,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         Assert::null($this->getExchangeRateFromResponse($sourceCurrency, $targetCurrency));
     }
 
-    /**
-     * @Then /^(this exchange rate) should have a ratio of ([0-9\.]+)$/
-     */
+    #[Then('/^(this exchange rate) should have a ratio of ([0-9\.]+)$/')]
     public function thisExchangeRateShouldHaveARatioOf(ExchangeRateInterface $exchangeRate, float $ratio): void
     {
         $exchangeRate = $this->getExchangeRateFromResponse(
@@ -240,25 +205,19 @@ final readonly class ManagingExchangeRatesContext implements Context
         Assert::same($exchangeRate['ratio'], $ratio);
     }
 
-    /**
-     * @Then I should not be able to edit its source currency
-     */
+    #[Then('I should not be able to edit its source currency')]
     public function iShouldNotBeAbleToEditItsSourceCurrency(): void
     {
         $this->assertIfNotBeAbleToEditItCurrency('sourceCurrency');
     }
 
-    /**
-     * @Then I should not be able to edit its target currency
-     */
+    #[Then('I should not be able to edit its target currency')]
     public function iShouldNotBeAbleToEditItsTargetCurrency(): void
     {
         $this->assertIfNotBeAbleToEditItCurrency('targetCurrency');
     }
 
-    /**
-     * @Then I should be notified that :element is required
-     */
+    #[Then('I should be notified that :element is required')]
     public function iShouldBeNotifiedThatIsRequired(string $element): void
     {
         Assert::contains(
@@ -267,9 +226,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the ratio must be greater than zero
-     */
+    #[Then('I should be notified that the ratio must be greater than zero')]
     public function iShouldBeNotifiedThatRatioMustBeGreaterThanZero(): void
     {
         Assert::contains(
@@ -278,9 +235,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the ratio must be less than :value
-     */
+    #[Then('I should be notified that the ratio must be less than :value')]
     public function iShouldBeNotifiedThatRatioMustBeLessThan(string $value): void
     {
         Assert::contains(
@@ -289,9 +244,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that source and target currencies must differ
-     */
+    #[Then('I should be notified that source and target currencies must differ')]
     public function iShouldBeNotifiedThatSourceAndTargetCurrenciesMustDiffer(): void
     {
         Assert::contains(
@@ -300,9 +253,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the currency pair must be unique
-     */
+    #[Then('I should be notified that the currency pair must be unique')]
     public function iShouldBeNotifiedThatTheCurrencyPairMustBeUnique(): void
     {
         Assert::contains(
@@ -311,9 +262,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
+    #[Then('I should be notified that it has been successfully created')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated(): void
     {
         Assert::true(
@@ -322,9 +271,7 @@ final readonly class ManagingExchangeRatesContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
+    #[Then('I should be notified that it has been successfully deleted')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted(): void
     {
         Assert::true(

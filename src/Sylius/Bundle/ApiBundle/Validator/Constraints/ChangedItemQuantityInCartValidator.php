@@ -59,7 +59,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 
         if ($productVariant === null) {
             $this->context->addViolation(
-                $constraint->productVariantNotLongerAvailable,
+                $constraint->productVariantNotLongerAvailableMessage,
                 ['%productVariantName%' => $orderItem->getVariantName()],
             );
 
@@ -81,7 +81,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 
         if (!$productVariant->isEnabled()) {
             $this->context->addViolation(
-                $constraint->productVariantNotLongerAvailable,
+                $constraint->productVariantNotLongerAvailableMessage,
                 ['%productVariantName%' => $orderItem->getVariantName()],
             );
 
@@ -90,7 +90,7 @@ final class ChangedItemQuantityInCartValidator extends ConstraintValidator
 
         if (!$this->availabilityChecker->isStockSufficient($productVariant, $value->quantity)) {
             $this->context->addViolation(
-                $constraint->productVariantNotSufficient,
+                $constraint->productVariantNotSufficientMessage,
                 ['%productVariantCode%' => $productVariantCode],
             );
 

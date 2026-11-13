@@ -101,5 +101,6 @@
     "taxIncludedTotal": 0,
     "shippingTotal": 1000,
     "orderPromotionTotal": 0,
+    "orderAndItemPromotionTotal": 0,
     "shippingPromotionTotal": 0
 }

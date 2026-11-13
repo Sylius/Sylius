@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
@@ -25,6 +26,7 @@ use Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderPricesRecalculatorTest extends TestCase
 {
     private MockObject&OrderInterface $order;

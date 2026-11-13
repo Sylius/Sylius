@@ -14,11 +14,13 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Security\TokenInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRouteInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ResolveNextRouteTest extends TestCase
 {
     private MockObject&TokenInterface $token;

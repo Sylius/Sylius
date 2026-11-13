@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShopBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ShopBundle\EventListener\UserImpersonatedListener;
@@ -26,6 +27,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Storage\CartStorageInterface;
 use Sylius\Component\User\Model\UserInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UserImpersonatedListenerTest extends TestCase
 {
     private CartStorageInterface&MockObject $cartStorage;

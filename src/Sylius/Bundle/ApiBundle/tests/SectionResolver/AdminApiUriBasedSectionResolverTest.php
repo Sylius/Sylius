@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\SectionResolver;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiUriBasedSectionResolver;
@@ -41,9 +42,7 @@ final class AdminApiUriBasedSectionResolverTest extends TestCase
         $this->assertEquals(new AdminApiSection(), $this->resolver->getSection('/api/v2/admin'));
     }
 
-    /**
-     * @dataProvider nonMatchingPathsProvider
-     */
+    #[DataProvider('nonMatchingPathsProvider')]
     public function testThrowsAnExceptionIfPathDoesNotStartWithApiV2Admin(string $path): void
     {
         self::expectException(SectionCannotBeResolvedException::class);

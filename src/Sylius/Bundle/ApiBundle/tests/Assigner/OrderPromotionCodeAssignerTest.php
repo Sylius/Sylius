@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Assigner;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssigner;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderPromotionCodeAssignerTest extends TestCase
 {
     private MockObject&PromotionCouponRepositoryInterface $promotionCouponRepository;

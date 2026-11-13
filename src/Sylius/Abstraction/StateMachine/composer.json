@@ -20,10 +20,10 @@
         }
     },
     "require": {
-        "php": "^8.2",
-        "symfony/dependency-injection": "^6.4.1 || ^7.4",
-        "symfony/http-kernel": "^6.4.1 || ^7.4",
-        "symfony/workflow": "^6.4 || ^7.4"
+        "php": "^8.3",
+        "symfony/dependency-injection": "^6.4.1 || ^7.4 || ^8.0",
+        "symfony/http-kernel": "^6.4.1 || ^7.4 || ^8.0",
+        "symfony/workflow": "^6.4 || ^7.4 || ^8.0"
     },
     "suggest": {
         "twig/twig": "Access the state machine in your twig templates (^2.12|^3.3)",
@@ -31,13 +31,13 @@
         "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "^6.0",
-        "phpunit/phpunit": "^11.5",
+        "matthiasnoback/symfony-config-test": "^6.2",
+        "phpunit/phpunit": "^12.5",
         "webmozart/assert": "^1.11"
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "2.2-dev"
+            "dev-main": "2.3-dev"
         },
         "symfony": {
             "require": "^7.4"

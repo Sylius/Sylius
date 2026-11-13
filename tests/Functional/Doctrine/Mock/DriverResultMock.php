@@ -21,26 +21,27 @@ use Doctrine\DBAL\Driver\Result;
  */
 class DriverResultMock implements Result
 {
+    /** @var list<array<string, mixed>> */
     private array $resultSet;
 
     /**
      * Creates a new mock statement that will serve the provided fake result set to clients.
      *
-     * @param array $resultSet The faked SQL result set.
+     * @param list<array<string, mixed>> $resultSet The faked SQL result set.
      */
     public function __construct(array $resultSet = [])
     {
         $this->resultSet = $resultSet;
     }
 
-    public function fetchNumeric()
+    public function fetchNumeric(): array|false
     {
         $row = $this->fetchAssociative();
 
         return $row === false ? false : array_values($row);
     }
 
-    public function fetchAssociative()
+    public function fetchAssociative(): array|false
     {
         $current = current($this->resultSet);
         next($this->resultSet);
@@ -48,7 +49,7 @@ class DriverResultMock implements Result
         return $current;
     }
 
-    public function fetchOne()
+    public function fetchOne(): mixed
     {
         $row = $this->fetchNumeric();
 

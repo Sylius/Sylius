@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AddressingBundle\Twig;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Twig\Extension\ExtensionInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CountryNameExtensionTest extends TestCase
 {
     private CountryNameExtension $countryNameExtension;

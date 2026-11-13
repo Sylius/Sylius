@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Twig\Component\Dashboard;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\PendingAction\Provider\PendingActionCountProviderInterface;
@@ -20,6 +21,7 @@ use Sylius\Bundle\AdminBundle\Twig\Component\Dashboard\PendingActionCountCompone
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PendingActionCountComponentTest extends TestCase
 {
     private ChannelRepositoryInterface&MockObject $channelRepository;

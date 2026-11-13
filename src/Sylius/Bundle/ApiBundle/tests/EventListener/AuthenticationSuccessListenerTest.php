@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\EventListener;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Response;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AuthenticationSuccessListenerTest extends TestCase
 {
     private IriConverterInterface&MockObject $iriConverter;

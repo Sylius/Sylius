@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Account\RegisterShopUser;
@@ -22,13 +23,15 @@ use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\NameConverter\AdvancedNameConverterInterface;
+use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CommandDenormalizerTest extends TestCase
 {
     private DenormalizerInterface&MockObject $baseNormalizer;
 
-    private AdvancedNameConverterInterface&MockObject $nameConverter;
+    private MockObject&NameConverterInterface $nameConverter;
 
     private CommandDenormalizer $commandDenormalizer;
 
@@ -36,7 +39,11 @@ final class CommandDenormalizerTest extends TestCase
     {
         parent::setUp();
         $this->baseNormalizer = $this->createMock(DenormalizerInterface::class);
-        $this->nameConverter = $this->createMock(AdvancedNameConverterInterface::class);
+        // AdvancedNameConverterInterface was removed in Symfony 8.0 (merged into NameConverterInterface).
+        $nameConverterClass = interface_exists(AdvancedNameConverterInterface::class)
+            ? AdvancedNameConverterInterface::class
+            : NameConverterInterface::class;
+        $this->nameConverter = $this->createMock($nameConverterClass);
         $this->commandDenormalizer = new CommandDenormalizer($this->baseNormalizer, $this->nameConverter);
     }
 
@@ -145,6 +152,41 @@ final class CommandDenormalizerTest extends TestCase
         self::expectException(UnexpectedValueException::class);
 
         self::expectExceptionMessage('Unexpected value');
+
+        $this->commandDenormalizer->denormalize($data, '', null, $context);
+    }
+
+    public function testThrowsExceptionIfNotAllRequiredParametersArePresentWhenWrappedInUnexpectedValueException(): void
+    {
+        $previousException = new MissingConstructorArgumentsException(
+            '',
+            0,
+            null,
+            ['firstName', 'lastName'],
+        );
+
+        $exception = new UnexpectedValueException('The input data is misformatted.', 0, $previousException);
+
+        $context = ['input' => ['class' => RegisterShopUser::class]];
+
+        $data = ['email' => 'test@example.com', 'password' => 'pa$$word'];
+
+        $this->nameConverter
+            ->expects(self::exactly(2))
+            ->method('normalize')
+            ->willReturnMap([
+                ['firstName', RegisterShopUser::class, null, [], 'first_name'],
+                ['lastName', RegisterShopUser::class, null, [], 'lastName'],
+            ]);
+
+        $this->baseNormalizer
+            ->expects(self::once())
+            ->method('denormalize')
+            ->with($data, '', null, $context)
+            ->willThrowException($exception);
+
+        self::expectException(MissingConstructorArgumentsException::class);
+        self::expectExceptionMessage('Request does not have the following required fields specified: first_name, lastName.');
 
         $this->commandDenormalizer->denormalize($data, '', null, $context);
     }

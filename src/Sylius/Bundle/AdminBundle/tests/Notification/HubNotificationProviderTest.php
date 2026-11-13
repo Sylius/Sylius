@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Notification;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Psr\Clock\ClockInterface;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -29,6 +30,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class HubNotificationProviderTest extends TestCase
 {
     public function testDoesNotReturnNotificationIfClientExceptionOccurs(): void

@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'Við eigum því miður aðeins %quantity% á lager.'
     product_variant:
         update_error: 'Óvænt vandamál kom upp við breytingu á útfærslu vöru. Vinsamlegast reyndu aftur.'
+    user:
+        verification_email_sent: 'Ef netfangið sem þú slóst inn er tengt reikningi hefur staðfestingarpóstur verið sendur.'

@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\PromotionBundle\Criteria;
 
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
 use Sylius\Bundle\PromotionBundle\Criteria\Enabled;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EnabledTest extends TestCase
 {
     private Enabled $enabled;

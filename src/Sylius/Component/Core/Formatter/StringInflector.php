@@ -35,6 +35,9 @@ final class StringInflector
         return preg_replace('/[^\w-]/', '', $value) ?? '';
     }
 
+    /**
+     * @deprecated This method will be removed in 3.0 - use Symfony\Component\String\Slugger\SluggerInterface::slug() instead
+     */
     public static function nameToSlug(string $value): string
     {
         return str_replace(['_'], '-', self::nameToLowercaseCode(Transliterator::transliterate($value)));

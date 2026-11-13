@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Addressing\Provider;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProvider;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProvinceNamingProviderTest extends TestCase
 {
     /** @var RepositoryInterface<ProvinceInterface>&MockObject */

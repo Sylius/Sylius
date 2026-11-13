@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\QueryHandler;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Exception\ChannelNotFoundException;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Statistics\Provider\StatisticsProviderInterface;
 use Sylius\Component\Core\Statistics\ValueObject\Statistics;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GetStatisticsHandlerTest extends TestCase
 {
     private MockObject&StatisticsProviderInterface $statisticsProvider;

@@ -1,0 +1,13 @@
+<div {{ sylius_test_html_attribute('access-levels-validation-message') }}>
+    {{ form_errors(hookable_metadata.context.form.administrationAccess) }}
+</div>
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="card-title">
+            {{ 'sylius.ui.access_levels'|trans }}
+        </div>
+    </div>
+    <div class="card-body">
+        {% hook 'access_levels' %}
+    </div>
+</div>

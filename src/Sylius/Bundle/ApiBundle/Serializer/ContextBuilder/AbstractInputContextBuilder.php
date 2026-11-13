@@ -36,11 +36,12 @@ abstract class AbstractInputContextBuilder implements SerializerContextBuilderIn
         }
 
         $constructorArgumentName = $this->getConstructorArgumentName($inputClass) ?? $this->defaultConstructorArgumentName;
+        $value = $this->resolveValue($context, $extractedAttributes, $request);
 
         if (isset($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass]) && is_array($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass])) {
-            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = array_merge($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass], [$constructorArgumentName => $this->resolveValue($context, $extractedAttributes)]);
+            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = array_merge($context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass], [$constructorArgumentName => $value]);
         } else {
-            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [$constructorArgumentName => $this->resolveValue($context, $extractedAttributes)];
+            $context[AbstractNormalizer::DEFAULT_CONSTRUCTOR_ARGUMENTS][$inputClass] = [$constructorArgumentName => $value];
         }
 
         return $context;
@@ -48,7 +49,7 @@ abstract class AbstractInputContextBuilder implements SerializerContextBuilderIn
 
     abstract protected function supports(Request $request, array $context, ?array $extractedAttributes): bool;
 
-    abstract protected function resolveValue(array $context, ?array $extractedAttributes): mixed;
+    abstract protected function resolveValue(array $context, ?array $extractedAttributes/* , ?Request $request = null */): mixed;
 
     protected function supportsClass(string $class): bool
     {

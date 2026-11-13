@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\PendingAction\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\PendingAction\Provider\CountPendingPaymentsProvider;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CountPendingPaymentsProviderTest extends TestCase
 {
     private MockObject&PaymentRepositoryInterface $paymentRepository;

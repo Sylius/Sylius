@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\SectionResolver;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiOrdersSubSection;
 use Sylius\Bundle\ApiBundle\SectionResolver\ShopApiSection;
@@ -47,9 +48,7 @@ final class ShopApiUriBasedSectionResolverTest extends TestCase
         $this->assertEquals(new ShopApiOrdersSubSection(), $this->resolver->getSection('/api/v2/shop/orders'));
     }
 
-    /**
-     * @dataProvider nonMatchingPathsProvider
-     */
+    #[DataProvider('nonMatchingPathsProvider')]
     public function testThrowsAnExceptionIfPathDoesNotStartWithApiV2Shop(string $path): void
     {
         self::expectException(SectionCannotBeResolvedException::class);

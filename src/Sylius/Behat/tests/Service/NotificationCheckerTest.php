@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Behat\Service;
 
 use Behat\Mink\Element\NodeElement;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Behat\Exception\NotificationExpectationMismatchException;
@@ -22,6 +23,7 @@ use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Behat\Service\NotificationChecker;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class NotificationCheckerTest extends TestCase
 {
     private MockObject&NotificationAccessorInterface $notificationAccessor;

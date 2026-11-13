@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Locale\Context;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -25,6 +26,7 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Resource\Exception\StorageUnavailableException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class StorageBasedLocaleContextTest extends TestCase
 {
     private ChannelContextInterface&MockObject $channelContext;

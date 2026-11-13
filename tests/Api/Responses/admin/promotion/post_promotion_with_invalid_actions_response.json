@@ -38,7 +38,7 @@
         },
         {
             "propertyPath": "actions[5].type",
-            "message": "Promotion action type is invalid. Available action types are order_fixed_discount, unit_fixed_discount, order_percentage_discount, unit_percentage_discount, shipping_percentage_discount.",
+            "message": "Promotion action type is invalid. Available action types are order_fixed_discount, unit_fixed_discount, order_percentage_discount, order_percentage_discount_per_channel, unit_percentage_discount, shipping_percentage_discount, shipping_percentage_discount_per_channel.",
             "code": null
         }
     ],

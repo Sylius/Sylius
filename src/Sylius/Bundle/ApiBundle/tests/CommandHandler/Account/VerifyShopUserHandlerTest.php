@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
@@ -26,6 +27,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\DispatchAfterCurrentBusStamp;
 use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 
+#[AllowMockObjectsWithoutExpectations]
 final class VerifyShopUserHandlerTest extends TestCase
 {
     private MockObject&RepositoryInterface $shopUserRepository;
@@ -55,11 +57,12 @@ final class VerifyShopUserHandlerTest extends TestCase
             ->method('findOneBy')
             ->with(['emailVerificationToken' => 'ToKeN'])
             ->willReturn($user);
-        $this->clock->expects(self::once())->method('now')->willReturn(new \DateTimeImmutable());
+        $now = new \DateTimeImmutable();
+        $this->clock->expects(self::once())->method('now')->willReturn($now);
         $user->expects(self::once())->method('getEmail')->willReturn('shop@example.com');
         $user->expects(self::once())
             ->method('setVerifiedAt')
-            ->with($this->isInstanceOf(\DateTimeImmutable::class));
+            ->with(\DateTime::createFromImmutable($now));
         $user->expects(self::once())->method('setEmailVerificationToken')->with(null);
         $user->expects(self::once())->method('enable');
         $this->commandBus->expects(self::once())

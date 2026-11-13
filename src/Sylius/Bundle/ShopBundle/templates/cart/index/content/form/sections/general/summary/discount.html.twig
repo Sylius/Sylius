@@ -2,9 +2,9 @@
 
 {% set cart = hookable_metadata.context.cart %}
 
-{% if cart.orderPromotionTotal %}
+{% if cart.orderAndItemPromotionTotal %}
     <div class="hstack gap-2 mb-2">
         <div>{{ 'sylius.ui.discount'|trans }}:</div>
-        <div class="ms-auto text-end" {{ sylius_test_html_attribute('cart-promotion-total') }}>{{ money.convertAndFormat(cart.orderPromotionTotal) }}</div>
+        <div class="ms-auto text-end" {{ sylius_test_html_attribute('cart-promotion-total') }}>{{ money.convertAndFormat(cart.orderAndItemPromotionTotal) }}</div>
     </div>
 {% endif %}

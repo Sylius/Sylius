@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Promotion\Checker\Eligibility;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
@@ -20,6 +21,7 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilit
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PromotionUsageLimitEligibilityCheckerTest extends TestCase
 {
     private MockObject&PromotionSubjectInterface $promotionSubject;
@@ -47,9 +49,18 @@ final class PromotionUsageLimitEligibilityCheckerTest extends TestCase
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotion));
     }
 
+    public function testShouldReturnTrueIfTrackUsageIsDisabled(): void
+    {
+        $this->promotion->expects($this->once())->method('getUsageLimit')->willReturn(10);
+        $this->promotion->expects($this->once())->method('isTrackUsage')->willReturn(false);
+
+        $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotion));
+    }
+
     public function testShouldReturnTrueIfUsageLimitHaveNotBeenExceeded(): void
     {
         $this->promotion->expects($this->once())->method('getUsageLimit')->willReturn(10);
+        $this->promotion->expects($this->once())->method('isTrackUsage')->willReturn(true);
         $this->promotion->expects($this->once())->method('getUsed')->willReturn(5);
 
         $this->assertTrue($this->checker->isEligible($this->promotionSubject, $this->promotion));
@@ -58,6 +69,7 @@ final class PromotionUsageLimitEligibilityCheckerTest extends TestCase
     public function testShouldReturnFalseIfUsageLimitHaveBeenExceeded(): void
     {
         $this->promotion->expects($this->once())->method('getUsageLimit')->willReturn(10);
+        $this->promotion->expects($this->once())->method('isTrackUsage')->willReturn(true);
         $this->promotion->expects($this->once())->method('getUsed')->willReturn(15);
 
         $this->assertFalse($this->checker->isEligible($this->promotionSubject, $this->promotion));

@@ -30,3 +30,5 @@ sylius:
     taxon:
         in_use_by_promotion_rule: 'Cannot delete a taxon that is in use by a promotion rule.'
         menu_taxon_delete: 'You cannot delete a menu taxon of any channel.'
+    user:
+        verification_email_sent: 'If the email address you entered is associated with an account, a verification email has been sent.'

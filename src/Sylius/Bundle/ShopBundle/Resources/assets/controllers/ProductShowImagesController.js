@@ -7,35 +7,60 @@
  * file that was distributed with this source code.
  */
 
-/* global Spotlight */
-
 import { Controller } from '@hotwired/stimulus';
+import Viewer from 'viewerjs';
+import 'viewerjs/dist/viewer.css';
 
 export default class extends Controller {
     connect() {
-        const mainImage = this.element.querySelector('#main-image');
-        if (!mainImage) {
+        const galleryLength = this.element.querySelectorAll('a.spotlight').length;
+        if (galleryLength === 0) {
             return;
         }
 
-        this._onMainImageClick = (e) => {
-            const thumbnails = this.element.querySelectorAll('.spotlight');
-            if (!thumbnails || thumbnails.length === 0 || typeof Spotlight === 'undefined') {
+        this.viewer = new Viewer(this.element, {
+            filter: (image) => image.closest('a.spotlight') !== null,
+            url: (image) => image.closest('a.spotlight').getAttribute('href'),
+            navbar: galleryLength > 1,
+            title: false,
+            rotatable: false,
+            scalable: false,
+            toolbar: {
+                prev: galleryLength > 1,
+                next: galleryLength > 1,
+                zoomIn: true,
+                zoomOut: true,
+                oneToOne: true,
+                reset: true
+            }
+        });
+
+        this._onClick = (event) => {
+            if (event.target.closest('a.spotlight')) {
+                event.preventDefault();
+
                 return;
             }
 
-            e.preventDefault();
+            if (event.target.closest('#main-image')) {
+                event.preventDefault();
 
-            Spotlight.show(thumbnails, 0);
+                this.viewer.view(0);
+            }
         };
 
-        mainImage.addEventListener('click', this._onMainImageClick);
+        this.element.addEventListener('click', this._onClick);
     }
 
     disconnect() {
-        const mainImage = this.element.querySelector('#main-image');
-        if (mainImage && this._onMainImageClick) {
-            mainImage.removeEventListener('click', this._onMainImageClick);
+        if (this._onClick) {
+            this.element.removeEventListener('click', this._onClick);
+            this._onClick = null;
+        }
+
+        if (this.viewer) {
+            this.viewer.destroy();
+            this.viewer = null;
         }
     }
 }

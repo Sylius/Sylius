@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Metadata\GetCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\SectionResolver\AdminApiSection;
@@ -28,11 +29,11 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ShippingMethodNormalizerTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;
@@ -51,7 +52,7 @@ final class ShippingMethodNormalizerTest extends TestCase
 
     private MockObject&ShippingMethodInterface $shippingMethodMock;
 
-    private MockObject&Request $requestMock;
+    private Request $requestMock;
 
     private ChannelInterface&MockObject $channelMock;
 
@@ -78,7 +79,7 @@ final class ShippingMethodNormalizerTest extends TestCase
         );
         $this->shippingMethodNormalizer->setNormalizer($this->normalizer);
         $this->shippingMethodMock = $this->createMock(ShippingMethodInterface::class);
-        $this->requestMock = $this->createMock(Request::class);
+        $this->requestMock = new Request(attributes: ['tokenValue' => 'TOKEN', 'shipmentId' => '123']);
         $this->channelMock = $this->createMock(ChannelInterface::class);
         $this->cartMock = $this->createMock(OrderInterface::class);
         $this->shipmentMock = $this->createMock(ShipmentInterface::class);
@@ -232,7 +233,6 @@ final class ShippingMethodNormalizerTest extends TestCase
         $operation = new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]);
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
         $this->requestStack->expects(self::once())->method('getCurrentRequest')->willReturn($this->requestMock);
-        $this->requestMock->attributes = new ParameterBag(['tokenValue' => 'TOKEN', 'shipmentId' => '123']);
         $this->orderRepository->expects(self::once())
             ->method('findCartByTokenValueAndChannel')
             ->with('TOKEN', $this->channelMock)
@@ -362,7 +362,6 @@ final class ShippingMethodNormalizerTest extends TestCase
         $operation = new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]);
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
         $this->requestStack->expects(self::once())->method('getCurrentRequest')->willReturn($this->requestMock);
-        $this->requestMock->attributes = new ParameterBag(['tokenValue' => 'TOKEN', 'shipmentId' => '123']);
         $this->orderRepository->expects(self::once())
             ->method('findCartByTokenValueAndChannel')
             ->with('TOKEN', $this->channelMock)
@@ -388,7 +387,6 @@ final class ShippingMethodNormalizerTest extends TestCase
         $operation = new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]);
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
         $this->requestStack->expects(self::once())->method('getCurrentRequest')->willReturn($this->requestMock);
-        $this->requestMock->attributes = new ParameterBag(['tokenValue' => 'TOKEN', 'shipmentId' => '123']);
         $this->orderRepository->expects(self::once())
             ->method('findCartByTokenValueAndChannel')
             ->with('TOKEN', $this->channelMock)
@@ -419,7 +417,6 @@ final class ShippingMethodNormalizerTest extends TestCase
         $operation = new GetCollection(uriVariables: ['tokenValue' => [], 'shipmentId' => []]);
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
         $this->requestStack->expects(self::once())->method('getCurrentRequest')->willReturn($this->requestMock);
-        $this->requestMock->attributes = new ParameterBag(['tokenValue' => 'TOKEN', 'shipmentId' => '123']);
         $this->orderRepository->expects(self::once())
             ->method('findCartByTokenValueAndChannel')
             ->with('TOKEN', $this->channelMock)

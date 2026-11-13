@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Locale;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Exception\LocaleIsUsedException;
@@ -23,6 +24,7 @@ use Sylius\Bundle\ApiBundle\StateProcessor\Admin\Locale\RemoveProcessor;
 use Sylius\Bundle\LocaleBundle\Checker\LocaleUsageCheckerInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RemoveProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $removeProcessorMock;

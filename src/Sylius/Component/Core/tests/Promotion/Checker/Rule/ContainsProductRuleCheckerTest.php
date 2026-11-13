@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -24,6 +25,7 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ContainsProductRuleCheckerTest extends TestCase
 {
     private MockObject&OrderInterface $subject;

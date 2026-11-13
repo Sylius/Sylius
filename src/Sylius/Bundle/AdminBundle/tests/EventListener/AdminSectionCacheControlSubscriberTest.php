@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\EventListener\AdminSectionCacheControlSubscriber;
@@ -21,12 +22,12 @@ use Sylius\Bundle\CoreBundle\SectionResolver\SectionInterface;
 use Sylius\Bundle\CoreBundle\SectionResolver\SectionProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AdminSectionCacheControlSubscriberTest extends TestCase
 {
     private MockObject&SectionProviderInterface $sectionProvider;
@@ -52,32 +53,10 @@ final class AdminSectionCacheControlSubscriberTest extends TestCase
         $adminSection = $this->createMock(AdminSection::class);
         $this->sectionProvider->method('getSection')->willReturn($adminSection);
 
-        $responseHeaderBag = $this->getMockBuilder(ResponseHeaderBag::class)
-            ->onlyMethods(['addCacheControlDirective'])
-            ->getMock();
-
-        $expectedCalls = [
-            ['no-cache', true],
-            ['max-age', '0'],
-            ['must-revalidate', true],
-            ['no-store', true],
-        ];
-
-        $callIndex = 0;
-        $responseHeaderBag->expects($this->exactly(4))
-            ->method('addCacheControlDirective')
-            ->willReturnCallback(function ($directive, $value) use (&$callIndex, $expectedCalls) {
-                [$expectedDirective, $expectedValue] = $expectedCalls[$callIndex];
-                TestCase::assertSame($expectedDirective, $directive);
-                TestCase::assertSame($expectedValue, $value);
-                ++$callIndex;
-            });
-
-        $response = $this->createMock(Response::class);
-        $response->headers = $responseHeaderBag;
+        $response = new Response();
 
         $kernel = $this->createMock(HttpKernelInterface::class);
-        $request = $this->createMock(Request::class);
+        $request = new Request();
 
         $event = new ResponseEvent(
             $kernel,
@@ -87,6 +66,11 @@ final class AdminSectionCacheControlSubscriberTest extends TestCase
         );
 
         $this->subscriber->setCacheControlDirectives($event);
+
+        $this->assertTrue($response->headers->hasCacheControlDirective('no-cache'));
+        $this->assertSame('0', $response->headers->getCacheControlDirective('max-age'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('must-revalidate'));
+        $this->assertTrue($response->headers->hasCacheControlDirective('no-store'));
     }
 
     public function testDoesNothingIfSectionIsDifferentThanAdmin(): void
@@ -94,17 +78,10 @@ final class AdminSectionCacheControlSubscriberTest extends TestCase
         $section = $this->createMock(SectionInterface::class);
         $this->sectionProvider->method('getSection')->willReturn($section);
 
-        $responseHeaderBag = $this->getMockBuilder(ResponseHeaderBag::class)
-            ->onlyMethods(['addCacheControlDirective'])
-            ->getMock();
-
-        $responseHeaderBag->expects($this->never())->method('addCacheControlDirective');
-
-        $response = $this->createMock(Response::class);
-        $response->headers = $responseHeaderBag;
+        $response = new Response();
 
         $kernel = $this->createMock(HttpKernelInterface::class);
-        $request = $this->createMock(Request::class);
+        $request = new Request();
 
         $event = new ResponseEvent(
             $kernel,
@@ -114,5 +91,8 @@ final class AdminSectionCacheControlSubscriberTest extends TestCase
         );
 
         $this->subscriber->setCacheControlDirectives($event);
+
+        $this->assertFalse($response->headers->hasCacheControlDirective('no-store'));
+        $this->assertFalse($response->headers->hasCacheControlDirective('must-revalidate'));
     }
 }

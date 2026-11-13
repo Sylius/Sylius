@@ -84,6 +84,7 @@ class FormComponent
             if ($form->isValid()) {
                 $this->eventDispatcher->dispatch(new GenericEvent($form->getData()), SyliusCartEvents::CART_CHANGE);
                 $this->manager->flush();
+                $this->eventDispatcher->dispatch(new GenericEvent($form->getData()), SyliusCartEvents::CART_POST_CHANGE);
                 $this->emit(self::SYLIUS_SHOP_CART_CHANGED, ['cartId' => $this->resource->getId()]);
             }
         }
@@ -106,6 +107,10 @@ class FormComponent
         $this->manager->persist($this->resource);
         $this->manager->flush();
         $this->manager->refresh($this->resource);
+        $this->eventDispatcher->dispatch(
+            new GenericEvent($orderItem, ['cart' => $this->resource]),
+            SyliusCartEvents::CART_ITEM_POST_REMOVE,
+        );
 
         $this->shouldSaveCart = false;
         $this->submitForm();
@@ -121,8 +126,14 @@ class FormComponent
 
         $this->formValues['items'] = [];
         $this->eventDispatcher->dispatch(new GenericEvent($this->resource), SyliusCartEvents::CART_CLEAR);
+        $clearedCart = $this->resource;
+        $clearedCartId = $clearedCart->getId();
         $this->manager->remove($this->resource);
         $this->manager->flush();
+        $this->eventDispatcher->dispatch(
+            new GenericEvent($clearedCart, ['cartId' => $clearedCartId]),
+            SyliusCartEvents::CART_POST_CLEAR,
+        );
 
         $this->resource = $this->createResource();
         $this->resetForm();

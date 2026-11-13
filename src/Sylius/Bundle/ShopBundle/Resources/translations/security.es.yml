@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email_not_verified: 'Su cuenta aún no ha sido verificada. Por favor, compruebe su bandeja de entrada de correo electrónico.'

@@ -30,17 +30,18 @@ final class UriVariablesAwareContextBuilder extends AbstractInputContextBuilder
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool
     {
-        return null !== $this->resolveValueFromUriVariables($context, $extractedAttributes);
+        return null !== $this->resolveValueFromUriVariables($request, $extractedAttributes);
     }
 
-    protected function resolveValue(array $context, ?array $extractedAttributes): mixed
+    protected function resolveValue(array $context, ?array $extractedAttributes, ?Request $request = null): mixed
     {
-        return $this->resolveValueFromUriVariables($context, $extractedAttributes);
+        return $this->resolveValueFromUriVariables($request, $extractedAttributes);
     }
 
-    private function resolveValueFromUriVariables(array $context, ?array $attributes): ?string
+    private function resolveValueFromUriVariables(?Request $request, ?array $attributes): mixed
     {
         if (
+            null !== $request &&
             null !== $attributes &&
             isset($attributes['operation']) &&
             $attributes['operation'] instanceof HttpOperation
@@ -53,7 +54,7 @@ final class UriVariablesAwareContextBuilder extends AbstractInputContextBuilder
 
                 $identifier = $uriVariable->getParameterName() ?? $this->defaultConstructorArgumentName;
 
-                return $context['uri_variables'][$identifier] ?? null;
+                return $request->attributes->get($identifier);
             }
         }
 

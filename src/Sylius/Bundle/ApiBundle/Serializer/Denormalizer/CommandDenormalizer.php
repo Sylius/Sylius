@@ -49,17 +49,14 @@ final class CommandDenormalizer implements DenormalizerInterface
                 );
             }
 
+            if ($previousException instanceof MissingConstructorArgumentsException) {
+                throw $this->createMissingFieldsException($previousException, $context['input']['class']);
+            }
+
             throw $exception;
         } catch (MissingConstructorArgumentsException $exception) {
-            $class = $context['input']['class'];
-
-            throw new MissingConstructorArgumentsException(sprintf(
-                'Request does not have the following required fields specified: %s.',
-                implode(', ', array_map(
-                    fn (string $field) => $this->normalizeFieldName($field, $class),
-                    $exception->getMissingConstructorArguments(),
-                )),
-            ));
+            // TODO: remove once support for API Platform < 5.0.3 is dropped, since then this exception is wrapped in UnexpectedValueException
+            throw $this->createMissingFieldsException($exception, $context['input']['class']);
         }
     }
 
@@ -71,5 +68,18 @@ final class CommandDenormalizer implements DenormalizerInterface
     private function normalizeFieldName(string $field, string $class): string
     {
         return $this->nameConverter->normalize($field, $class);
+    }
+
+    private function createMissingFieldsException(
+        MissingConstructorArgumentsException $exception,
+        string $class,
+    ): MissingConstructorArgumentsException {
+        return new MissingConstructorArgumentsException(sprintf(
+            'Request does not have the following required fields specified: %s.',
+            implode(', ', array_map(
+                fn (string $field) => $this->normalizeFieldName($field, $class),
+                $exception->getMissingConstructorArguments(),
+            )),
+        ));
     }
 }

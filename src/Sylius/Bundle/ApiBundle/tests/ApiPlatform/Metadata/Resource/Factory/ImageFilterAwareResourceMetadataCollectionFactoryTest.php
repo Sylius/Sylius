@@ -25,6 +25,7 @@ use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\QueryParameter;
 use ApiPlatform\Metadata\Resource\Factory\ResourceMetadataCollectionFactoryInterface;
 use ApiPlatform\Metadata\Resource\ResourceMetadataCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -34,6 +35,7 @@ use Sylius\Bundle\ApiBundle\Serializer\Normalizer\ImageNormalizer;
 use Sylius\Component\Core\Model\Image;
 use Sylius\Component\Core\Model\ImageInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ImageFilterAwareResourceMetadataCollectionFactoryTest extends TestCase
 {
     private MockObject&ResourceMetadataCollectionFactoryInterface $decorated;

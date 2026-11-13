@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\PayumBundle\HttpClient;
 
 use Payum\Core\HttpClientInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
@@ -21,6 +22,7 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Sylius\Bundle\PayumBundle\HttpClient\HttpClient;
 
+#[AllowMockObjectsWithoutExpectations]
 final class HttpClientTest extends TestCase
 {
     private ClientInterface&MockObject $client;

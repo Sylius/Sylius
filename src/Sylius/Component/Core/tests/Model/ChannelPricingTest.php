@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\ChannelPricing;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelPricingTest extends TestCase
 {
     private CatalogPromotionInterface&MockObject $catalogPromotion;

@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ChannelPricingLogEntry;
 use Sylius\Component\Core\Model\ChannelPricingLogEntryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelPricingLogEntryTest extends TestCase
 {
     private ChannelPricingInterface&MockObject $channelPricing;

@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Behat\Step\When;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -51,9 +52,7 @@ final readonly class PaymentContext implements Context
         $this->createPaymentMethod($paymentMethodName, StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
     }
 
-    /**
-     * @Given the store has disabled all payment methods
-     */
+    #[Given('the store has disabled all payment methods')]
     public function theStoreHasDisabledAllPaymentMethods(): void
     {
         $paymentMethods = $this->paymentMethodRepository->findAll();
@@ -66,9 +65,7 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
-    /**
-     * @Given /^the store allows paying (\w+) for (all channels)$/
-     */
+    #[Given('/^the store allows paying (\w+) for (all channels)$/')]
     public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels): void
     {
         $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Offline', 'Payment method', false);
@@ -78,17 +75,13 @@ final readonly class PaymentContext implements Context
         }
     }
 
-    /**
-     * @Given the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode
-     */
+    #[Given('the store has (also) a payment method :paymentMethodName with a code :paymentMethodCode')]
     public function theStoreHasAPaymentMethodWithACode(string $paymentMethodName, string $paymentMethodCode): void
     {
         $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Offline');
     }
 
-    /**
-     * @Given /^(this payment method) is named "([^"]+)" in the "([^"]+)" locale$/
-     */
+    #[Given('/^(this payment method) is named "([^"]+)" in the "([^"]+)" locale$/')]
     public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale): void
     {
         /** @var PaymentMethodTranslationInterface $translation */
@@ -111,11 +104,9 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
-    /**
-     * @Given the payment method :paymentMethod is disabled
-     * @Given /^(this payment method) (?:has been|is) disabled$/
-     * @When the payment method :paymentMethod gets disabled
-     */
+    #[Given('the payment method :paymentMethod is disabled')]
+    #[Given('/^(this payment method) (?:has been|is) disabled$/')]
+    #[When('the payment method :paymentMethod gets disabled')]
     public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod): void
     {
         $paymentMethod->disable();
@@ -132,9 +123,7 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
-    /**
-     * @Given /^(it) has instructions "([^"]+)"$/
-     */
+    #[Given('/^(it) has instructions "([^"]+)"$/')]
     public function itHasInstructions(PaymentMethodInterface $paymentMethod, $instructions): void
     {
         $paymentMethod->setInstructions($instructions);
@@ -142,17 +131,13 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
-    /**
-     * @Given the store has :paymentMethodName payment method not assigned to any channel
-     */
+    #[Given('the store has :paymentMethodName payment method not assigned to any channel')]
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel(string $paymentMethodName): void
     {
         $this->createPaymentMethod($paymentMethodName, 'PM_' . $paymentMethodName, 'Offline', 'Payment method', false);
     }
 
-    /**
-     * @Given the payment method :paymentMethod requires authorization before capturing
-     */
+    #[Given('the payment method :paymentMethod requires authorization before capturing')]
     public function thePaymentMethodRequiresAuthorizationBeforeCapturing(PaymentMethodInterface $paymentMethod): void
     {
         /** @var GatewayConfigInterface $config */
@@ -163,9 +148,7 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
-    /**
-     * @Given the payment method :paymentMethod has been disabled in :channel channel
-     */
+    #[Given('the payment method :paymentMethod has been disabled in :channel channel')]
     public function theStoreHasDisabledPaymentMethodInChannel(PaymentMethodInterface $paymentMethod, ChannelInterface $channel): void
     {
         $paymentMethod->removeChannel($channel);
@@ -173,9 +156,7 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
-    /**
-     * @Given the store allows paying with :paymentMethodName in :channel channel
-     */
+    #[Given('the store allows paying with :paymentMethodName in :channel channel')]
     public function theStoreAllowsPayingWithInChannel(string $paymentMethodName, ChannelInterface $channel): void
     {
         $paymentMethod = $this->createPaymentMethod(

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Calculator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculator;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductVariantPriceCalculatorTest extends TestCase
 {
     private MockObject&ProductVariantLowestPriceDisplayCheckerInterface $productVariantLowestPriceDisplayChecker;

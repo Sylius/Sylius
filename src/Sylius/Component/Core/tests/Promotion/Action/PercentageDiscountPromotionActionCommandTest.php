@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Distributor\MinimumPriceDistributorInterface;
@@ -29,6 +30,7 @@ use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PercentageDiscountPromotionActionCommandTest extends TestCase
 {
     private MockObject&ProportionalIntegerDistributorInterface $distributor;

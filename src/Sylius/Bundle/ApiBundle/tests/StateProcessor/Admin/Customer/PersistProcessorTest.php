@@ -18,6 +18,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\State\ProcessorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\Customer\PersistProcessor;
@@ -25,6 +26,7 @@ use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $persist;

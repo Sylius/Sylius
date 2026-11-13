@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AddressingBundle\Validator\Constraints;
 
+use Symfony\Component\Validator\Attribute\HasNamedArguments;
 use Symfony\Component\Validator\Constraint;
 
 /**
@@ -21,8 +22,32 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 class ProvinceAddressConstraint extends Constraint
 {
-    /** @var string */
-    public $message = 'sylius.address.province.valid';
+    /**
+     * @param array<string, mixed>|null $options
+     * @param array<string>|null $groups
+     */
+    #[HasNamedArguments]
+    public function __construct(
+        ?array $options = null,
+        public string $message = 'sylius.address.province.valid',
+        ?array $groups = null,
+        mixed $payload = null,
+    ) {
+        if (\is_array($options)) {
+            trigger_deprecation(
+                'sylius/addressing-bundle',
+                '2.3',
+                'Passing an array of options to configure the "%s" constraint is deprecated and will be removed in Sylius 3.0, use named arguments instead.',
+                static::class,
+            );
+
+            $this->message = $options['message'] ?? $this->message;
+            $groups ??= $options['groups'] ?? null;
+            $payload ??= $options['payload'] ?? null;
+        }
+
+        parent::__construct(groups: $groups, payload: $payload);
+    }
 
     public function getTargets(): string
     {

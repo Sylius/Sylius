@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Api\Admin;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -27,9 +28,7 @@ final class CreatingProductVariantContext implements Context
     {
     }
 
-    /**
-     * @When /^I create a new "([^"]+)" variant priced at ("[^"]+") for ("[^"]+" product) in the ("[^"]+" channel)$/
-     */
+    #[When('/^I create a new "([^"]+)" variant priced at ("[^"]+") for ("[^"]+" product) in the ("[^"]+" channel)$/')]
     public function iCreateANewVariantPricedAtForProductInTheChannel(
         string $name,
         int $price,

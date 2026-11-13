@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\PromotionBundle\Provider;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PromotionBundle\Criteria\CriteriaInterface;
@@ -21,6 +22,7 @@ use Sylius\Bundle\PromotionBundle\Provider\EligibleCatalogPromotionsProviderInte
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Repository\CatalogPromotionRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EligibleCatalogPromotionsProviderTest extends TestCase
 {
     private CatalogPromotionRepositoryInterface&MockObject $catalogPromotionRepository;

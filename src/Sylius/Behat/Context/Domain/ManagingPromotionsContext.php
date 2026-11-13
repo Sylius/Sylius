@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -30,17 +32,13 @@ final class ManagingPromotionsContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I delete a ("([^"]+)" promotion)$/
-     */
+    #[When('/^I delete a ("([^"]+)" promotion)$/')]
     public function iDeletePromotion(PromotionInterface $promotion)
     {
         $this->promotionRepository->remove($promotion);
     }
 
-    /**
-     * @When /^I try to delete a ("([^"]+)" promotion)$/
-     */
+    #[When('/^I try to delete a ("([^"]+)" promotion)$/')]
     public function iTryToDeletePromotion(PromotionInterface $promotion)
     {
         try {
@@ -50,9 +48,7 @@ final class ManagingPromotionsContext implements Context
         }
     }
 
-    /**
-     * @When I archive the :promotion promotion
-     */
+    #[When('I archive the :promotion promotion')]
     public function iArchiveThePromotion(PromotionInterface $promotion): void
     {
         $promotion->setArchivedAt(new \DateTime());
@@ -60,33 +56,25 @@ final class ManagingPromotionsContext implements Context
         $this->promotionManager->flush();
     }
 
-    /**
-     * @Then /^(this promotion) should no longer exist in the promotion registry$/
-     */
+    #[Then('/^(this promotion) should no longer exist in the promotion registry$/')]
     public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion)
     {
         Assert::null($this->promotionRepository->findOneBy(['code' => $promotion->getCode()]));
     }
 
-    /**
-     * @Then promotion :promotion should still exist in the registry
-     */
+    #[Then('promotion :promotion should still exist in the registry')]
     public function promotionShouldStillExistInTheRegistry(PromotionInterface $promotion)
     {
         Assert::notNull($this->promotionRepository->find($promotion->getId()));
     }
 
-    /**
-     * @Then I should be notified that it is in use and cannot be deleted
-     */
+    #[Then('I should be notified that it is in use and cannot be deleted')]
     public function iShouldBeNotifiedOfFailure()
     {
         Assert::isInstanceOf($this->sharedStorage->get('last_exception'), ForeignKeyConstraintViolationException::class);
     }
 
-    /**
-     * @Then the promotion :promotion should still exist in the registry
-     */
+    #[Then('the promotion :promotion should still exist in the registry')]
     public function thePromotionShouldStillExistInTheRegistry(PromotionInterface $promotion): void
     {
         Assert::notNull($this->promotionRepository->find($promotion));

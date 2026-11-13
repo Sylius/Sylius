@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -26,19 +27,17 @@ final class TaxonContext implements Context
     ) {
     }
 
-    /**
-     * @Transform /^classified as "([^"]+)"$/
-     * @Transform /^belongs? to "([^"]+)"$/
-     * @Transform /^"([^"]+)" taxon$/
-     * @Transform /^"([^"]+)" as a parent taxon$/
-     * @Transform /^"([^"]+)" parent taxon$/
-     * @Transform /^parent taxon to "([^"]+)"$/
-     * @Transform /^taxon should be "([^"]+)"$/
-     * @Transform /^taxon with "([^"]+)" name/
-     * @Transform /^taxon "([^"]+)"$/
-     * @Transform :taxon
-     * @Transform :parentTaxon
-     */
+    #[Transform('/^classified as "([^"]+)"$/')]
+    #[Transform('/^belongs? to "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" taxon$/')]
+    #[Transform('/^"([^"]+)" as a parent taxon$/')]
+    #[Transform('/^"([^"]+)" parent taxon$/')]
+    #[Transform('/^parent taxon to "([^"]+)"$/')]
+    #[Transform('/^taxon should be "([^"]+)"$/')]
+    #[Transform('/^taxon with "([^"]+)" name/')]
+    #[Transform('/^taxon "([^"]+)"$/')]
+    #[Transform(':taxon')]
+    #[Transform(':parentTaxon')]
     public function getTaxonByName(string $name): TaxonInterface
     {
         $taxons = $this->taxonRepository->findByName($name, $this->locale);
@@ -52,9 +51,7 @@ final class TaxonContext implements Context
         return $taxons[0];
     }
 
-    /**
-     * @Transform /^taxon with "([^"]+)" code$/
-     */
+    #[Transform('/^taxon with "([^"]+)" code$/')]
     public function getTaxonByCode(string $code): TaxonInterface
     {
         $taxon = $this->taxonRepository->findOneBy(['code' => $code]);
@@ -63,13 +60,11 @@ final class TaxonContext implements Context
         return $taxon;
     }
 
-    /**
-     * @Transform /^classified as "([^"]+)" or "([^"]+)"$/
-     * @Transform /^configured with "([^"]+)" and "([^"]+)"$/
-     * @Transform /^"([^"]+)" and "([^"]+)" taxons$/
-     * @Transform /^belongs to "([^"]+)" and "([^"]+)"/
-     * @Transform /^"([^"]+)" and "([^"]+)" in the vertical menu$/
-     */
+    #[Transform('/^classified as "([^"]+)" or "([^"]+)"$/')]
+    #[Transform('/^configured with "([^"]+)" and "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" and "([^"]+)" taxons$/')]
+    #[Transform('/^belongs to "([^"]+)" and "([^"]+)"/')]
+    #[Transform('/^"([^"]+)" and "([^"]+)" in the vertical menu$/')]
     public function getTaxonsByNames(string ...$taxonNames): iterable
     {
         foreach ($taxonNames as $taxonName) {

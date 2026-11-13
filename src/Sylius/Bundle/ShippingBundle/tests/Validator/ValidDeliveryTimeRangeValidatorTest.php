@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShippingBundle\Validator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use Sylius\Bundle\ShippingBundle\Validator\Constraint\ValidDeliveryTimeRange;
 use Sylius\Bundle\ShippingBundle\Validator\ValidDeliveryTimeRangeValidator;
@@ -22,6 +23,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ValidDeliveryTimeRangeValidatorTest extends ConstraintValidatorTestCase
 {
     protected function createValidator(): \Symfony\Component\Validator\ConstraintValidatorInterface

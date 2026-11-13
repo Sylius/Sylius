@@ -92,7 +92,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
 
         $this->load();
 
-        $this->assertContainerBuilderHasParameter('sylius_core.order_by_identifier', true);
+        $this->assertContainerBuilderHasParameter('sylius_core.order_by_identifier', false);
     }
 
     #[Test]

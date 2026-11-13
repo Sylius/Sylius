@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Denormalizer;
 use ApiPlatform\Metadata\IriConverterInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Serializer\Denormalizer\ChannelPriceHistoryConfigDenormalizer;
@@ -24,6 +25,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelPriceHistoryConfigDenormalizerTest extends TestCase
 {
     private IriConverterInterface&MockObject $iriConverter;

@@ -6,6 +6,8 @@
     "lastName": "Api",
     "localeCode": "ga_IE",
     "avatar": null,
+    "administrationAccess": false,
+    "apiAccess": true,
     "id": "@integer@",
     "username": "johnApi",
     "lastLogin": null,

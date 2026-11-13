@@ -24,3 +24,5 @@ sylius:
         out_of_stock: 'Tuotetta on varastossa vain %quantity% kappaletta.'
     product_variant:
         update_error: 'Tuotevariantin päivityksessä tapahtui odottamaton virhe. Yritä päivittää tuotevariantti uudelleen.'
+    user:
+        verification_email_sent: 'Jos antamasi sähköpostiosoite on liitetty tiliin, vahvistussähköposti on lähetetty.'

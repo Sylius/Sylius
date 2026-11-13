@@ -7,7 +7,7 @@
 {% set are_criteria_set = app.request.query.has('criteria') %}
 
 {% if resources.definition.enabledFilters|default([]) is not empty %}
-    <div class="position-relative z-1 bg-white mb-5">
+    <div class="position-relative z-1 bg-body mb-5">
         {% set content %}
             <div class="mb-3">
                 <form method="get" action="{{ path }}" novalidate {{ sylius_test_html_attribute('filters-form') }}>

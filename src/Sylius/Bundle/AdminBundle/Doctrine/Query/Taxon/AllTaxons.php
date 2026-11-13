@@ -42,7 +42,7 @@ final class AllTaxons implements AllTaxonsInterface
         $queryBuilder = $this->entityManager->getConnection()->createQueryBuilder();
 
         $queryBuilder
-            ->select([
+            ->select(
                 'taxon.id as id',
                 'taxon.tree_root as tree_root',
                 'taxon.parent_id as parent_id',
@@ -53,7 +53,7 @@ final class AllTaxons implements AllTaxonsInterface
                 'taxon.position as position',
                 'taxon.enabled as enabled',
                 'COALESCE(current_translation.name, fallback_translation.name) as name',
-            ])
+            )
             ->from('sylius_taxon', 'taxon')
             ->leftJoin(
                 'taxon',

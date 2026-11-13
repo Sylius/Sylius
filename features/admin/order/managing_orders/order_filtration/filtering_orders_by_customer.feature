@@ -12,6 +12,8 @@ Feature: Filtering orders by a customer
         And this customer has also placed an order "#00000002" at "2016-12-05 09:00"
         And the store has customer "Ghastly Bespoke" with email "ghastly@suits.com"
         And this customer has also placed an order "#00000003" at "2016-12-06 10:00"
+        And the store has customer "guest@example.com"
+        And this customer has also placed an order "#00000004" at "2016-12-07 11:00"
         And I am logged in as an administrator
 
     @api @ui @mink:chromedriver
@@ -27,3 +29,10 @@ Feature: Filtering orders by a customer
         And I filter by customer "ghastly@suits.com"
         Then I should see a single order in the list
         And I should see an order with "#00000003" number
+
+    @api @ui @mink:chromedriver
+    Scenario: Filtering orders by a guest customer without a name
+        When I browse orders
+        And I filter by customer "guest@example.com"
+        Then I should see a single order in the list
+        And I should see an order with "#00000004" number

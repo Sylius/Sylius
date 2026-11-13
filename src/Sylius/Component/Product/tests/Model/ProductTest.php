@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Product\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -25,6 +26,7 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Resource\Model\ToggleableInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductTest extends TestCase
 {
     private MockObject&ProductAttributeValueInterface $productAttribute;

@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Cart;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
@@ -30,6 +31,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Tests\Sylius\Bundle\ApiBundle\CommandHandler\MessageHandlerAttributeTrait;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PickupCartHandlerTest extends TestCase
 {
     private MockObject&OrderFactoryInterface $cartFactory;

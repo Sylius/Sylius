@@ -51,6 +51,38 @@ final class UxIconsIconFinderPassTest extends AbstractCompilerPassTestCase
         );
     }
 
+    public function testItPointsTheTemplateIconFinderAtAnEnvironmentBackedByTheNativeFilesystemLoader(): void
+    {
+        $this->setDefinition('twig.loader.native_filesystem', new Definition(FilesystemLoader::class));
+
+        $chainIconFinder = new Definition();
+        $chainIconFinder->setArguments([[new Reference('.ux_icons.template_icon_finder')]]);
+        $this->setDefinition('.ux_icons.icon_finder', $chainIconFinder);
+
+        $templateIconFinder = new Definition();
+        $templateIconFinder->setArguments([new Reference('twig'), '/app/assets/icons']);
+        $this->setDefinition('.ux_icons.template_icon_finder', $templateIconFinder);
+
+        $this->compile();
+
+        $this->assertContainerBuilderHasService('sylius_ui.ux_icons.twig_environment', Environment::class);
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            '.ux_icons.template_icon_finder',
+            0,
+            new Reference('sylius_ui.ux_icons.twig_environment'),
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            '.ux_icons.template_icon_finder',
+            1,
+            '/app/assets/icons',
+        );
+        $this->assertContainerBuilderHasServiceDefinitionWithArgument(
+            '.ux_icons.icon_finder',
+            0,
+            [new Reference('.ux_icons.template_icon_finder')],
+        );
+    }
+
     public function testItDoesNothingWhenTheIconFinderIsNotRegistered(): void
     {
         $this->setDefinition('twig.loader.native_filesystem', new Definition(FilesystemLoader::class));

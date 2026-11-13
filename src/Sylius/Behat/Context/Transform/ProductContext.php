@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -25,14 +26,12 @@ final class ProductContext implements Context
     ) {
     }
 
-    /**
-     * @Transform /^product(?:|s) "([^"]+)"$/
-     * @Transform /^"([^"]+)" product(?:|s)$/
-     * @Transform /^(?:a|an) "([^"]+)"$/
-     * @Transform :product
-     * @Transform :firstProduct
-     * @Transform :secondProduct
-     */
+    #[Transform('/^product(?:|s) "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" product(?:|s)$/')]
+    #[Transform('/^(?:a|an) "([^"]+)"$/')]
+    #[Transform(':product')]
+    #[Transform(':firstProduct')]
+    #[Transform(':secondProduct')]
     public function getProductByName($productName)
     {
         $products = $this->productRepository->findByName($productName, $this->locale);
@@ -46,10 +45,8 @@ final class ProductContext implements Context
         return $products[0];
     }
 
-    /**
-     * @Transform /^products "([^"]+)" and "([^"]+)"$/
-     * @Transform /^products "([^"]+)", "([^"]+)" and "([^"]+)"$/
-     */
+    #[Transform('/^products "([^"]+)" and "([^"]+)"$/')]
+    #[Transform('/^products "([^"]+)", "([^"]+)" and "([^"]+)"$/')]
     public function getProductsByNames(...$productsNames)
     {
         return array_map(fn ($productName) => $this->getProductByName($productName), $productsNames);

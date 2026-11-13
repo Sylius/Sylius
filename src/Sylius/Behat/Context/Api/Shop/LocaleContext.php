@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -30,34 +32,26 @@ final class LocaleContext implements Context
     ) {
     }
 
-    /**
-     * @When I get available locales
-     */
+    #[When('I get available locales')]
     public function iGetAvailableLocales(): void
     {
         $this->client->index(Resources::LOCALES);
     }
 
-    /**
-     * @When I get :locale locale
-     */
+    #[When('I get :locale locale')]
     public function iGetLocale(LocaleInterface $locale): void
     {
         $this->client->show(Resources::LOCALES, $locale->getCode());
     }
 
-    /**
-     * @When I switch to the :localeCode locale
-     * @When I use the locale :localeCode
-     */
+    #[When('I switch to the :localeCode locale')]
+    #[When('I use the locale :localeCode')]
     public function iSwitchToTheLocale(string $localeCode): void
     {
         $this->sharedStorage->set('current_locale_code', $localeCode);
     }
 
-    /**
-     * @Then I should have :count locales
-     */
+    #[Then('I should have :count locales')]
     public function iShouldHaveLocales(int $count): void
     {
         Assert::same(
@@ -66,9 +60,7 @@ final class LocaleContext implements Context
         );
     }
 
-    /**
-     * @Then the :name locale with code :code should be available
-     */
+    #[Then('the :name locale with code :code should be available')]
     public function theLocaleWithCodeShouldBeAvailable(string $name, string $code): void
     {
         Assert::true(
@@ -76,9 +68,7 @@ final class LocaleContext implements Context
         );
     }
 
-    /**
-     * @Then the :name locale with code :code should not be available
-     */
+    #[Then('the :name locale with code :code should not be available')]
     public function theLocaleWithCodeShouldNotBeAvailable(string $name, string $code): void
     {
         Assert::false(
@@ -86,9 +76,7 @@ final class LocaleContext implements Context
         );
     }
 
-    /**
-     * @Then I should have :name with code :code
-     */
+    #[Then('I should have :name with code :code')]
     public function iShouldHaveWithCode(string $name, string $code): void
     {
         $response = $this->client->getLastResponse();
@@ -97,9 +85,7 @@ final class LocaleContext implements Context
         Assert::true($this->responseChecker->hasValue($response, 'code', $code));
     }
 
-    /**
-     * @Then I should( still) shop using the :localeCode locale
-     */
+    #[Then('I should( still) shop using the :localeCode locale')]
     public function iShouldShopUsingTheLocale(string $localeCode): void
     {
         $this->client->buildCreateRequest(Resources::ORDERS);
@@ -107,9 +93,7 @@ final class LocaleContext implements Context
         Assert::same($this->responseChecker->getValue($this->client->create(), 'localeCode'), $localeCode);
     }
 
-    /**
-     * @Then I should be able to shop using the :localeCode locale
-     */
+    #[Then('I should be able to shop using the :localeCode locale')]
     public function iShouldBeAbleToShopUsingTheLocale(string $localeCode): void
     {
         $this->iGetAvailableLocales();
@@ -119,9 +103,7 @@ final class LocaleContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to shop using the :localeCode locale
-     */
+    #[Then('I should not be able to shop using the :localeCode locale')]
     public function iShouldNotBeAbleToShopUsingTheLocale(string $localeCode): void
     {
         $this->iGetAvailableLocales();
