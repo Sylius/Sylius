@@ -85,6 +85,7 @@
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="sylius_api.creator.taxon_image" />
             <argument type="service" id="validator" />
+            <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="api_platform.state_processor" />
         </service>
 
