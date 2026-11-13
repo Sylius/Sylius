@@ -64,6 +64,21 @@ Files that are already stored are not modified. Review the media directory for f
 
 If you instantiate or decorate these services with your own service definition, pass the new arguments.
 
+### [Admin] Gateway configuration values are validated before they are stored (Medium)
+
+The gateway configuration is now validated with the `Sylius\Bundle\PaymentBundle\Validator\Constraints\SafeGatewayConfigValues` constraint, both in the
+administration panel and in `POST` and `PUT /api/v2/admin/payment-methods`. A payment method is rejected with a
+violation on the gateway configuration when any of its values is:
+
+- a string wrapped in `%`, such as a reference to a container parameter or an environment variable,
+- a string starting with `@`,
+- a callable: the name of a PHP function, a `Class::method` string or a `["Class", "method"]` array.
+
+Configurations that are already stored are not modified, but a payment method holding such a value cannot be saved
+again until the value is changed. If a stored configuration refers to a parameter or an environment variable, put the
+resolved value in the configuration instead, or provide it in the configuration of the gateway factory in your
+application.
+
 # UPGRADE FROM `2.2.11` TO `2.2.12`
 
 This is a **security release**. Updating is strongly recommended.
