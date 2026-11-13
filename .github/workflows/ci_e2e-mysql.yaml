@@ -114,6 +114,13 @@ jobs:
             -   name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
+            -   name: Validate Doctrine mapping and schema
+                run: bin/console doctrine:schema:validate
+
+            -   name: Show the schema diff
+                if: failure()
+                run: bin/console doctrine:schema:update --dump-sql
+
             -   name: Run PHPUnit
                 run: |
                     vendor/bin/phpunit --testsuite all --colors=always
