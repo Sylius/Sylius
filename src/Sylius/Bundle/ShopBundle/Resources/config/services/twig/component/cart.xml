@@ -12,6 +12,14 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service
+            id="sylius_shop.cart.disabled_cart_items_remover"
+            class="Sylius\Bundle\ShopBundle\Cart\DisabledCartItemsRemover"
+        >
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
+        <service
             id="sylius_shop.twig.component.cart.form"
             class="Sylius\Bundle\ShopBundle\Twig\Component\Cart\FormComponent"
         >
@@ -21,6 +29,8 @@
             <argument>Sylius\Bundle\ShopBundle\Form\Type\CartType</argument>
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius_shop.cart.disabled_cart_items_remover" />
+            <argument type="service" id="request_stack" />
 
             <call method="setLiveResponder">
                 <argument type="service" id="ux.live_component.live_responder"/>
