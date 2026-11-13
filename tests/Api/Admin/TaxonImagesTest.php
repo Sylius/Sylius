@@ -226,6 +226,8 @@ final class TaxonImagesTest extends JsonApiTestCase
         /** @var TaxonInterface $taxon */
         $taxon = $fixtures['taxon'];
 
+        $storedImagesCount = $this->countStoredImages();
+
         $this->client->request(
             method: 'POST',
             uri: sprintf('/api/v2/admin/taxons/%s/images', $taxon->getCode()),
@@ -241,6 +243,8 @@ final class TaxonImagesTest extends JsonApiTestCase
                 ],
             ],
         );
+
+        $this->assertSame($storedImagesCount, $this->countStoredImages());
     }
 
     #[Test]
@@ -292,5 +296,17 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    private function countStoredImages(): int
+    {
+        $imagesDirectory = self::getContainer()->getParameter('sylius_core.images_dir');
+        if (!is_dir($imagesDirectory)) {
+            return 0;
+        }
+
+        return iterator_count(new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($imagesDirectory, \FilesystemIterator::SKIP_DOTS),
+        ));
     }
 }

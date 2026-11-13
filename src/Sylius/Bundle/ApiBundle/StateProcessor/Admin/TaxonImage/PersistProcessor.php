@@ -29,6 +29,7 @@ final readonly class PersistProcessor implements ProcessorInterface
         private ProcessorInterface $processor,
         private ImageCreatorInterface $taxonImageCreator,
         private ValidatorInterface $validator,
+        private string $taxonImageClass,
     ) {
     }
 
@@ -36,16 +37,23 @@ final readonly class PersistProcessor implements ProcessorInterface
     {
         Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
-        $image = $this->taxonImageCreator->create(
-            $context['request']->attributes->get('code', ''),
-            $context['request']->files->get('file'),
-            $context['request']->request->get('type'),
-        );
+        $file = $context['request']->files->get('file');
 
-        $violations = $this->validator->validate($image, null, $operation->getValidationContext()['groups'] ?? []);
+        $violations = $this->validator
+            ->startContext()
+            ->atPath('file')
+            ->validatePropertyValue($this->taxonImageClass, 'file', $file, $operation->getValidationContext()['groups'] ?? [])
+            ->getViolations()
+        ;
         if (0 !== \count($violations)) {
             throw new ValidationException($violations);
         }
+
+        $image = $this->taxonImageCreator->create(
+            $context['request']->attributes->get('code', ''),
+            $file,
+            $context['request']->request->get('type'),
+        );
 
         return $this->processor->process($image, $operation, $uriVariables, $context);
     }
