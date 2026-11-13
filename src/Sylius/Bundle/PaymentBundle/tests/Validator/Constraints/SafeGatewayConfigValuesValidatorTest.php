@@ -93,6 +93,26 @@ final class SafeGatewayConfigValuesValidatorTest extends TestCase
         );
     }
 
+    public function testAddsAViolationForACallableArrayValue(): void
+    {
+        $this->expectForbiddenValueViolation();
+
+        $this->safeGatewayConfigValuesValidator->validate(
+            ['callback' => [\DateTime::class, 'getLastErrors']],
+            new SafeGatewayConfigValues(),
+        );
+    }
+
+    public function testDoesNotAddAViolationForANonCallableArrayValue(): void
+    {
+        $this->executionContext->expects(self::never())->method('buildViolation');
+
+        $this->safeGatewayConfigValuesValidator->validate(
+            ['webhook_secret_keys' => ['whsec_first', 'whsec_second']],
+            new SafeGatewayConfigValues(),
+        );
+    }
+
     private function expectForbiddenValueViolation(): void
     {
         /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
