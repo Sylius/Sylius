@@ -31,7 +31,10 @@ final class SafeGatewayConfigValuesValidator extends ConstraintValidator
         }
 
         foreach ($value as $configValue) {
-            if (is_string($configValue) && $this->isInjectable($configValue)) {
+            if (
+                (is_string($configValue) && $this->isInjectable($configValue)) ||
+                (is_array($configValue) && is_callable($configValue))
+            ) {
                 $this->context->buildViolation($constraint->forbiddenValueMessage)->addViolation();
             }
         }

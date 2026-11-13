@@ -91,4 +91,25 @@ final class SafeGatewayConfigValuesValidatorSpec extends ObjectBehavior
 
         $this->validate(['callback' => 'phpinfo'], new SafeGatewayConfigValues());
     }
+
+    function it_adds_a_violation_for_a_callable_array_value(
+        ExecutionContextInterface $executionContext,
+        ConstraintViolationBuilderInterface $constraintViolationBuilder,
+    ): void {
+        $executionContext
+            ->buildViolation((new SafeGatewayConfigValues())->forbiddenValueMessage)
+            ->willReturn($constraintViolationBuilder)
+        ;
+        $constraintViolationBuilder->addViolation()->shouldBeCalled();
+
+        $this->validate(['callback' => [\DateTime::class, 'getLastErrors']], new SafeGatewayConfigValues());
+    }
+
+    function it_does_not_add_a_violation_for_a_non_callable_array_value(
+        ExecutionContextInterface $executionContext,
+    ): void {
+        $executionContext->buildViolation(Argument::cetera())->shouldNotBeCalled();
+
+        $this->validate(['keys' => ['first', 'second']], new SafeGatewayConfigValues());
+    }
 }
