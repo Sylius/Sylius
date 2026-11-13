@@ -40,6 +40,7 @@ return (new Config())
                 'sylius.behat.context.transform.coupon',
                 'sylius.behat.context.transform.customer',
                 'sylius.behat.context.transform.date_time',
+                'sylius.behat.context.transform.lexical',
                 'sylius.behat.context.transform.payment',
                 'sylius.behat.context.transform.product',
                 'sylius.behat.context.transform.promotion',
