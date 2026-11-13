@@ -18,6 +18,7 @@ use Sylius\Bundle\AdminBundle\Provider\PaymentGatewayMethodsProviderInterface;
 use Sylius\Bundle\AdminBundle\Twig\AttributeExtension;
 use Sylius\Bundle\AdminBundle\Twig\ChannelNameExtension;
 use Sylius\Bundle\AdminBundle\Twig\ChannelsCurrenciesExtension;
+use Sylius\Bundle\AdminBundle\Twig\LiveGridExtension;
 use Sylius\Bundle\AdminBundle\Twig\OrderUnitTaxesExtension;
 use Sylius\Bundle\AdminBundle\Twig\PaymentGatewayMethodsExtension;
 use Sylius\Bundle\AdminBundle\Twig\PaymentMethodExtension;
@@ -37,6 +38,12 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius_admin.twig.extension.attribute', AttributeExtension::class)
         ->args([service('sylius.registry.attribute_type')])
+        ->tag('twig.extension')
+    ;
+
+    $services
+        ->set('sylius_admin.twig.extension.live_grid', LiveGridExtension::class)
+        ->args(['%sylius_admin.grid.live.enabled%'])
         ->tag('twig.extension')
     ;
 

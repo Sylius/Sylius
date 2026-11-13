@@ -1,0 +1,27 @@
+{% set current_sorting = hookable_metadata.context.sorting %}
+{% set has_taxon = hookable_metadata.context.taxon|default(null) is not null %}
+{% set options = hookable_metadata.configuration.options|default({})|filter(option => has_taxon or not (option.requires_taxon ?? false)) %}
+
+{# Without explicit sorting, products are sorted by position within a taxon, or by creation date otherwise #}
+{% set default_sorting = has_taxon ? hookable_metadata.configuration.default_taxon_sorting|default({}) : hookable_metadata.configuration.default_sorting|default({}) %}
+{% set active_sorting = current_sorting is empty ? default_sorting : current_sorting %}
+{% set current_option = options|filter(option => option.sorting == active_sorting)|first %}
+
+<div class="dropdown">
+    <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('sorting-toggle') }}>
+        <span class="text-black-50">{{ 'sylius.ui.sort'|trans }}: </span>{{ current_option ? current_option.title|trans|lower : '' }}
+    </button>
+    <div class="dropdown-menu dropdown-menu-end">
+        {% for name, option in options %}
+            <button type="button"
+                    class="dropdown-item{{ option.sorting == active_sorting ? ' active' }}"
+                    data-action="live#action"
+                    data-live-action-param="changeSorting"
+                    data-live-sorting-param="{{ option.sorting|json_encode }}"
+                    {{ sylius_test_html_attribute('sorting', name) }}
+            >
+                {{ option.title|trans }}
+            </button>
+        {% endfor %}
+    </div>
+</div>

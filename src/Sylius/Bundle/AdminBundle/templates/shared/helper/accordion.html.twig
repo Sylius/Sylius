@@ -1,4 +1,4 @@
-{% macro accordion(items, open = false, auto_close = null, flush = false) %}
+{% macro accordion(items, open = false, auto_close = null, flush = false, id = null) %}
     {% set auto_close = auto_close|default(true) %}
     {% set id = id|default(random()) %}
 

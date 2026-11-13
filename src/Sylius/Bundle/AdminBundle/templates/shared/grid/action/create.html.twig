@@ -1,4 +1,4 @@
-{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('create')), options.link.parameters|default([]))) %}
+{% set path = options.link.url|default(path(options.link.route|default(grid.gridContext.routeName('create')), options.link.parameters|default([]))) %}
 {% set message = action.label %}
 
 {% if message is empty %}
