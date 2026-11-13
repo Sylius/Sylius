@@ -26,10 +26,6 @@
         --bs-tertiary-bg: #{$body-bg};
         --bs-body-color: #{$body-color};
     }
-
-    [data-theme-switch="light"] {
-        display: none;
-    }
 }
 
 @include color-mode(dark) {
@@ -60,10 +56,6 @@
         border-color: var(--tblr-border-color);
     }
 
-    [data-theme-switch="dark"] {
-        display: none;
-    }
-
     .btn-secondary {
         --tblr-btn-bg: var(--tblr-bg-surface);
         --tblr-btn-border-color: var(--tblr-border-color);
@@ -75,6 +67,17 @@
     .empty-img img {
         filter: invert(0.9) hue-rotate(180deg);
     }
+}
+
+[data-theme-switch] {
+    display: none;
+}
+
+:root:not([data-theme-mode]) [data-theme-switch="auto"],
+[data-theme-mode="light"] [data-theme-switch="light"],
+[data-theme-mode="dark"] [data-theme-switch="dark"],
+[data-theme-mode="auto"] [data-theme-switch="auto"] {
+    display: inline-block;
 }
 
 a {

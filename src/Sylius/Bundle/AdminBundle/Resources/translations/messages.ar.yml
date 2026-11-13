@@ -119,6 +119,10 @@ sylius:
             2weeks: أسبوعان
             year: السنة
         taxon: تصنيف
+        theme_auto: 'تلقائي'
+        theme_dark: 'داكن'
+        theme_light: 'فاتح'
+        toggle_theme: 'تبديل السمة'
         view_in_store: 'عرض في المتجر'
         work_in_progress: العمل جارٍ
         empty_date: فارغ

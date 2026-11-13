@@ -47,3 +47,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Layanan profesional
                     find_a_partner: Temukan mitra
+    ui:
+        theme_auto: 'Otomatis'
+        theme_dark: 'Gelap'
+        theme_light: 'Terang'
+        toggle_theme: 'Ganti tema'

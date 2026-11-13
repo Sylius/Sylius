@@ -44,3 +44,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Επαγγελματικές υπηρεσίες
                     find_a_partner: Βρείτε συνεργάτη
+    ui:
+        theme_auto: 'Αυτόματο'
+        theme_dark: 'Σκοτεινό'
+        theme_light: 'Φωτεινό'
+        toggle_theme: 'Εναλλαγή θέματος'

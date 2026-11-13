@@ -43,3 +43,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Ammattipalvelut
                     find_a_partner: Etsi kumppani
+    ui:
+        theme_auto: 'Automaattinen'
+        theme_dark: 'Tumma'
+        theme_light: 'Vaalea'
+        toggle_theme: 'Vaihda teemaa'

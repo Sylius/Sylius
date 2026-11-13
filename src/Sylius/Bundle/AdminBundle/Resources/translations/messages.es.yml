@@ -47,3 +47,8 @@ sylius:
                     browse_plugins: Explora complementos
                     professional_services: Servicios profesionales
                     find_a_partner: Encuentra un socio
+    ui:
+        theme_auto: 'Automático'
+        theme_dark: 'Oscuro'
+        theme_light: 'Claro'
+        toggle_theme: 'Cambiar tema'
