@@ -77,6 +77,15 @@ final readonly class ThemeContext implements Context
         Assert::same($this->homePage->getContent(), $content);
     }
 
+    //  Quoted form only - ':theme theme' would also match "that theme" above.
+    #[Then('/^I should see a homepage from ("[^"]+" theme)$/')]
+    public function iShouldSeeThemedHomepageByName(ThemeInterface $theme): void
+    {
+        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/templates/bundles/SyliusShopBundle/homepage/index.html.twig');
+
+        Assert::same($this->homePage->getContent(), $content);
+    }
+
     #[Then('I should not see a homepage from :theme theme')]
     public function iShouldNotSeeThemedHomepage(ThemeInterface $theme): void
     {

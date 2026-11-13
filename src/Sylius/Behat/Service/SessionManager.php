@@ -20,16 +20,30 @@ final class SessionManager implements SessionManagerInterface
 {
     private const SESSION_CHROME_HEADLESS_SECOND = 'chrome_headless_second_session';
 
+    /**
+     * @param string $secondSessionName the session the "another browser" steps
+     *                                  switch to. A constant would tie every
+     *                                  two-actor scenario to a real browser,
+     *                                  which is why they all carry
+     *
+     *                                  @mink:chromedriver today. Over plain
+     *                                  HTTP - the only way to measure a
+     *                                  long-lived worker - the second actor
+     *                                  needs a browserkit session instead.
+     *                                  The default keeps existing suites as
+     *                                  they are.
+     */
     public function __construct(
         private Mink $mink,
         private SharedStorageInterface $sharedStorage,
         private SecurityServiceInterface $securityService,
+        private string $secondSessionName = self::SESSION_CHROME_HEADLESS_SECOND,
     ) {
     }
 
     public function changeSession(): void
     {
-        $sessionName = self::SESSION_CHROME_HEADLESS_SECOND;
+        $sessionName = $this->secondSessionName;
 
         $this->saveAndRestartSession($sessionName);
 

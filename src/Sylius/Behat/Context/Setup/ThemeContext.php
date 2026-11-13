@@ -39,6 +39,11 @@ final readonly class ThemeContext implements Context
             'name' => $themeName,
         ]);
 
+        //  The list is cached on first use; a later theme is not found without this.
+        if (method_exists($this->themeRepository, 'reset')) {
+            $this->themeRepository->reset();
+        }
+
         $this->sharedStorage->set('theme', $this->themeRepository->findOneByName($themeName));
     }
 
