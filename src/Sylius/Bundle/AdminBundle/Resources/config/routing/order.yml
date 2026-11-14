@@ -8,11 +8,13 @@ sylius_admin_order:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\OrderType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_order')"
     type: sylius.resource
 
 sylius_admin_order_show:
     path: /orders/{id}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order')"
     defaults:
         _controller: sylius.controller.order::showAction
         _sylius:
@@ -27,6 +29,7 @@ sylius_admin_order_show:
 sylius_admin_order_history:
     path: /orders/{id}/history
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order')"
     defaults:
         _controller: sylius.controller.order::showAction
         _sylius:
@@ -41,6 +44,7 @@ sylius_admin_order_history:
 sylius_admin_order_update:
     path: /orders/{id}/edit
     methods: [GET, PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order')"
     defaults:
         _controller: sylius.controller.order::updateAction
         _sylius:
@@ -60,6 +64,7 @@ sylius_admin_order_update:
 sylius_admin_order_cancel:
     path: /orders/{id}/cancel
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order')"
     defaults:
         _controller: sylius.controller.order::applyStateMachineTransitionAction
         _sylius:
@@ -76,6 +81,7 @@ sylius_admin_order_cancel:
 sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order_payment')"
     defaults:
         _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
@@ -97,6 +103,7 @@ sylius_admin_order_payment_complete:
 sylius_admin_order_payment_refund:
     path: /orders/{orderId}/payments/{id}/refund
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order_payment')"
     defaults:
         _controller: sylius.controller.payment::applyStateMachineTransitionAction
         _sylius:
@@ -118,6 +125,7 @@ sylius_admin_order_payment_refund:
 sylius_admin_order_shipment_ship:
     path: /orders/{orderId}/shipment/{id}/ship
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_order_shipment')"
     defaults:
         _controller: sylius.controller.shipment::updateAction
         _sylius:

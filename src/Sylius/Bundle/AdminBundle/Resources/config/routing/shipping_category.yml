@@ -9,4 +9,5 @@ sylius_admin_shipping_category:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ShippingCategoryType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_shipping_category')"
     type: sylius.resource

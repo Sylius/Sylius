@@ -9,11 +9,13 @@ sylius_admin_shipping_method:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ShippingMethodType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_shipping_method')"
     type: sylius.resource
 
 sylius_admin_shipping_method_archive:
     path: /shipping-methods/{id}/archive
     methods: [PATCH]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_shipping_method')"
     defaults:
         _controller: sylius.controller.shipping_method::updateAction
         _sylius:

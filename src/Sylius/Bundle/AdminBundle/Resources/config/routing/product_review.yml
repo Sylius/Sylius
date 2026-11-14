@@ -9,11 +9,13 @@ sylius_admin_product_review:
         grid: sylius_admin_product_review
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ProductReviewType
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_review')"
     type: sylius.resource
 
 sylius_admin_product_review_accept:
-    path: /product-review/{id}/accept
+    path: /product-reviews/{id}/accept
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_review')"
     defaults:
         _controller: sylius.controller.product_review::applyStateMachineTransitionAction
         _sylius:
@@ -25,8 +27,9 @@ sylius_admin_product_review_accept:
             flash: sylius.review.accept
 
 sylius_admin_product_review_reject:
-    path: /product-review/{id}/reject
+    path: /product-reviews/{id}/reject
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_review')"
     defaults:
         _controller: sylius.controller.product_review::applyStateMachineTransitionAction
         _sylius:
