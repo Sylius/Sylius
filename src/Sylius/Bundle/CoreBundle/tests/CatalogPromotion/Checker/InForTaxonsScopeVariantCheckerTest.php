@@ -174,4 +174,172 @@ final class InForTaxonsScopeVariantCheckerTest extends TestCase
 
         $this->inForTaxonsScopeVariantChecker->inScope($scope, $variant);
     }
+
+    public function testResolvesConfiguredTaxonsOnlyOncePerTaxonAcrossVariants(): void
+    {
+        $scope = $this->createMock(CatalogPromotionScopeInterface::class);
+        $firstTaxon = $this->createConfiguredTaxon('FIRST_TAXON');
+        $secondTaxon = $this->createConfiguredTaxon('SECOND_TAXON');
+        $childTaxon = $this->createConfiguredTaxon('CHILD_TAXON');
+        $otherTaxon = $this->createConfiguredTaxon('OTHER_TAXON');
+
+        $this->taxonRepository
+            ->expects($this->exactly(2))
+            ->method('findOneBy')
+            ->willReturnCallback(fn (array $criteria) => match ($criteria['code']) {
+                'FIRST_TAXON' => $firstTaxon,
+                'SECOND_TAXON' => $secondTaxon,
+                default => null,
+            })
+        ;
+
+        $this->taxonTreeRepository
+            ->expects($this->exactly(2))
+            ->method('children')
+            ->willReturnCallback(fn (TaxonInterface $taxon) => $taxon === $secondTaxon ? [$childTaxon] : [])
+        ;
+
+        $scope->method('getConfiguration')->willReturn(['taxons' => ['FIRST_TAXON', 'SECOND_TAXON']]);
+
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($scope, $this->createVariantWithTaxons([$firstTaxon])));
+        $this->assertFalse($this->inForTaxonsScopeVariantChecker->inScope($scope, $this->createVariantWithTaxons([$otherTaxon])));
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($scope, $this->createVariantWithTaxons([$childTaxon])));
+    }
+
+    public function testResolvesTaxonsAgainAfterReset(): void
+    {
+        $scope = $this->createMock(CatalogPromotionScopeInterface::class);
+        $firstTaxon = $this->createConfiguredTaxon('FIRST_TAXON');
+
+        $this->taxonRepository
+            ->expects($this->exactly(2))
+            ->method('findOneBy')
+            ->with(['code' => 'FIRST_TAXON'])
+            ->willReturn($firstTaxon)
+        ;
+
+        $this->taxonTreeRepository
+            ->expects($this->exactly(2))
+            ->method('children')
+            ->with($firstTaxon)
+            ->willReturn([])
+        ;
+
+        $scope->method('getConfiguration')->willReturn(['taxons' => ['FIRST_TAXON']]);
+
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($scope, $this->createVariantWithTaxons([$firstTaxon])));
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($scope, $this->createVariantWithTaxons([$firstTaxon])));
+
+        $this->inForTaxonsScopeVariantChecker->reset();
+
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($scope, $this->createVariantWithTaxons([$firstTaxon])));
+    }
+
+    public function testThrowsExceptionIfConfiguredTaxonDoesNotExist(): void
+    {
+        $scope = $this->createMock(CatalogPromotionScopeInterface::class);
+
+        $this->taxonRepository->expects($this->once())->method('findOneBy')->with(['code' => 'UNKNOWN_TAXON'])->willReturn(null);
+        $this->taxonTreeRepository->expects($this->never())->method('children');
+
+        $scope->method('getConfiguration')->willReturn(['taxons' => ['UNKNOWN_TAXON']]);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Taxon with code "UNKNOWN_TAXON" does not exist');
+
+        $this->inForTaxonsScopeVariantChecker->inScope($scope, $this->createVariantWithTaxons([]));
+    }
+
+    public function testDoesNotCacheFailedTaxonResolution(): void
+    {
+        $scope = $this->createMock(CatalogPromotionScopeInterface::class);
+        $taxon = $this->createConfiguredTaxon('LATE_TAXON');
+
+        $this->taxonRepository
+            ->expects($this->exactly(2))
+            ->method('findOneBy')
+            ->with(['code' => 'LATE_TAXON'])
+            ->willReturnOnConsecutiveCalls(null, $taxon)
+        ;
+        $this->taxonTreeRepository->method('children')->willReturn([]);
+
+        $scope->method('getConfiguration')->willReturn(['taxons' => ['LATE_TAXON']]);
+
+        $variant = $this->createVariantWithTaxons([$taxon]);
+
+        try {
+            $this->inForTaxonsScopeVariantChecker->inScope($scope, $variant);
+            $this->fail('Expected exception was not thrown.');
+        } catch (InvalidArgumentException $exception) {
+            $this->assertSame('Taxon with code "LATE_TAXON" does not exist', $exception->getMessage());
+        }
+
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($scope, $variant));
+    }
+
+    public function testResolvesTaxonSharedByDifferentScopesOnlyOnce(): void
+    {
+        $firstScope = $this->createMock(CatalogPromotionScopeInterface::class);
+        $secondScope = $this->createMock(CatalogPromotionScopeInterface::class);
+        $sharedTaxon = $this->createConfiguredTaxon('SHARED_TAXON');
+        $firstTaxon = $this->createConfiguredTaxon('FIRST_TAXON');
+        $secondTaxon = $this->createConfiguredTaxon('SECOND_TAXON');
+
+        $findOneByCodes = [];
+        $childrenCodes = [];
+
+        $this->taxonRepository
+            ->method('findOneBy')
+            ->willReturnCallback(function (array $criteria) use (&$findOneByCodes, $sharedTaxon, $firstTaxon, $secondTaxon) {
+                $findOneByCodes[] = $criteria['code'];
+
+                return match ($criteria['code']) {
+                    'SHARED_TAXON' => $sharedTaxon,
+                    'FIRST_TAXON' => $firstTaxon,
+                    'SECOND_TAXON' => $secondTaxon,
+                    default => null,
+                };
+            })
+        ;
+
+        $this->taxonTreeRepository
+            ->method('children')
+            ->willReturnCallback(function (TaxonInterface $taxon) use (&$childrenCodes) {
+                $childrenCodes[] = $taxon->getCode();
+
+                return [];
+            })
+        ;
+
+        $firstScope->method('getConfiguration')->willReturn(['taxons' => ['SHARED_TAXON', 'FIRST_TAXON']]);
+        $secondScope->method('getConfiguration')->willReturn(['taxons' => ['SHARED_TAXON', 'SECOND_TAXON']]);
+
+        $variant = $this->createVariantWithTaxons([$sharedTaxon]);
+
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($firstScope, $variant));
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($secondScope, $variant));
+
+        $this->assertSame(['SHARED_TAXON', 'FIRST_TAXON', 'SECOND_TAXON'], $findOneByCodes);
+        $this->assertSame(['SHARED_TAXON', 'FIRST_TAXON', 'SECOND_TAXON'], $childrenCodes);
+    }
+
+    private function createConfiguredTaxon(string $code): MockObject&TaxonInterface
+    {
+        $taxon = $this->createMock(TaxonInterface::class);
+        $taxon->method('getCode')->willReturn($code);
+
+        return $taxon;
+    }
+
+    /** @param array<TaxonInterface> $taxons */
+    private function createVariantWithTaxons(array $taxons): MockObject&ProductVariantInterface
+    {
+        $variant = $this->createMock(ProductVariantInterface::class);
+        $product = $this->createMock(ProductInterface::class);
+
+        $variant->method('getProduct')->willReturn($product);
+        $product->method('getTaxons')->willReturn(new ArrayCollection($taxons));
+
+        return $variant;
+    }
 }

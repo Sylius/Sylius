@@ -19,11 +19,15 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Symfony\Contracts\Service\ResetInterface;
 use Webmozart\Assert\Assert;
 
-final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInterface
+final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInterface, ResetInterface
 {
     public const TYPE = 'for_taxons';
+
+    /** @var array<string, array<string, true>> */
+    private array $taxonCodesWithDescendants = [];
 
     public function __construct(
         private TaxonRepositoryInterface $taxonRepository,
@@ -39,29 +43,47 @@ final class InForTaxonsScopeVariantChecker implements VariantInScopeCheckerInter
         /** @var ProductInterface $product */
         $product = $productVariant->getProduct();
 
-        $promotionTaxons = $configuration['taxons'];
-        foreach ($scope->getConfiguration()['taxons'] as $taxonCode) {
-            /** @var TaxonInterface $taxon */
-            $taxon = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
-            Assert::notNull($taxon, sprintf('Taxon with code "%s" does not exist', $taxonCode));
-
-            $promotionTaxons = array_merge($promotionTaxons, $this->getTaxonChildrenCodes($taxon));
+        $promotionTaxonSets = [];
+        foreach ($configuration['taxons'] as $taxonCode) {
+            $promotionTaxonSets[] = $this->getTaxonCodesWithDescendants($taxonCode);
         }
 
         return $product->getTaxons()->exists(
-            fn ($key, TaxonInterface $taxon): bool => \in_array($taxon->getCode(), $promotionTaxons, true),
+            function ($key, TaxonInterface $taxon) use ($promotionTaxonSets): bool {
+                $code = $taxon->getCode();
+
+                foreach ($promotionTaxonSets as $promotionTaxonSet) {
+                    if (isset($promotionTaxonSet[$code])) {
+                        return true;
+                    }
+                }
+
+                return false;
+            },
         );
     }
 
-    /** @return array<string> */
-    private function getTaxonChildrenCodes(TaxonInterface $taxon): array
+    public function reset(): void
     {
-        $childrenCodes = [];
+        $this->taxonCodesWithDescendants = [];
+    }
 
-        foreach ($this->taxonTreeRepository->children($taxon) as $taxonChild) {
-            $childrenCodes[] = $taxonChild->getCode();
+    /** @return array<string, true> */
+    private function getTaxonCodesWithDescendants(string $taxonCode): array
+    {
+        if (isset($this->taxonCodesWithDescendants[$taxonCode])) {
+            return $this->taxonCodesWithDescendants[$taxonCode];
         }
 
-        return $childrenCodes;
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->taxonRepository->findOneBy(['code' => $taxonCode]);
+        Assert::notNull($taxon, sprintf('Taxon with code "%s" does not exist', $taxonCode));
+
+        $codes = [$taxonCode => true];
+        foreach ($this->taxonTreeRepository->children($taxon) as $taxonChild) {
+            $codes[$taxonChild->getCode()] = true;
+        }
+
+        return $this->taxonCodesWithDescendants[$taxonCode] = $codes;
     }
 }
