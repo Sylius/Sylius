@@ -55,7 +55,7 @@ final class TargetedCatalogPromotionProcessor implements TargetedCatalogPromotio
 
         $variantCodes = array_values(array_unique($variantCodes));
 
-        if ($variantCodes === []) {
+        if ([] === $variantCodes) {
             return;
         }
 
