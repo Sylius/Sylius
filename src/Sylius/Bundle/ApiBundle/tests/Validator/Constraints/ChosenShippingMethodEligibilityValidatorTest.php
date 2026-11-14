@@ -30,6 +30,7 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ChosenShippingMethodEligibilityValidatorTest extends TestCase
@@ -104,8 +105,13 @@ final class ChosenShippingMethodEligibilityValidatorTest extends TestCase
         $shipmentMock->expects(self::once())->method('getOrder')->willReturn($orderMock);
         $orderMock->expects(self::once())->method('getShippingAddress')->willReturn($shippingAddressMock);
         $this->shippingMethodsResolver->expects(self::once())->method('getSupportedMethods')->with($shipmentMock)->willReturn([$differentShippingMethodMock]);
-        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.shipping_method.not_available', ['%name%' => 'DHL'])
-        ;
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.shipping_method.not_available')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%name%', 'DHL')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChosenShippingMethodEligibility::SHIPPING_METHOD_NOT_AVAILABLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
+
         $this->chosenShippingMethodEligibilityValidator->validate($command, new ChosenShippingMethodEligibility());
     }
 
@@ -129,8 +135,8 @@ final class ChosenShippingMethodEligibilityValidatorTest extends TestCase
         $shipmentMock->expects(self::once())->method('getOrder')->willReturn($orderMock);
         $orderMock->expects(self::once())->method('getShippingAddress')->willReturn($shippingAddressMock);
         $this->shippingMethodsResolver->expects(self::once())->method('getSupportedMethods')->with($shipmentMock)->willReturn([$shippingMethodMock]);
-        $this->executionContext->expects(self::never())->method('addViolation')
-        ;
+        $this->executionContext->expects(self::never())->method('buildViolation');
+
         $this->chosenShippingMethodEligibilityValidator->validate($command, new ChosenShippingMethodEligibility());
     }
 
@@ -152,10 +158,11 @@ final class ChosenShippingMethodEligibilityValidatorTest extends TestCase
             ->expects(self::never())
             ->method('find');
 
-        $this->executionContext
-            ->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.shipping_method.not_found', ['%code%' => 'SHIPPING_METHOD_CODE']);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.shipping_method.not_found')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%code%', 'SHIPPING_METHOD_CODE')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChosenShippingMethodEligibility::SHIPPING_METHOD_NOT_FOUND_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
 
         $this->chosenShippingMethodEligibilityValidator->validate(
             $command,
@@ -183,8 +190,12 @@ final class ChosenShippingMethodEligibilityValidatorTest extends TestCase
         $shipmentMock->expects(self::once())->method('getOrder')->willReturn($orderMock);
         $orderMock->expects(self::once())->method('getShippingAddress')->willReturn(null);
         $this->shippingMethodsResolver->expects(self::once())->method('getSupportedMethods')->with($shipmentMock)->willReturn([$shippingMethodMock]);
-        $this->executionContext->expects(self::once())->method('addViolation')->with('sylius.shipping_method.shipping_address_not_found')
-        ;
+
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.shipping_method.shipping_address_not_found')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChosenShippingMethodEligibility::SHIPPING_ADDRESS_NOT_FOUND_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
+
         $this->chosenShippingMethodEligibilityValidator->validate($command, new ChosenShippingMethodEligibility());
     }
 
@@ -211,10 +222,10 @@ final class ChosenShippingMethodEligibilityValidatorTest extends TestCase
             ->with('123')
             ->willReturn(null);
 
-        $this->executionContext
-            ->expects(self::once())
-            ->method('addViolation')
-            ->with('sylius.shipment.not_found');
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->executionContext->expects(self::once())->method('buildViolation')->with('sylius.shipment.not_found')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(ChosenShippingMethodEligibility::SHIPMENT_NOT_FOUND_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
 
         $this->chosenShippingMethodEligibilityValidator->validate(
             $command,

@@ -25,6 +25,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ShopUserNotVerifiedValidatorTest extends TestCase
@@ -75,13 +76,33 @@ final class ShopUserNotVerifiedValidatorTest extends TestCase
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
         /** @var ShopUserInterface|MockObject $shopUserMock */
         $shopUserMock = $this->createMock(ShopUserInterface::class);
+        $constraint = new ShopUserNotVerified();
         $this->shopUserNotVerifiedValidator->initialize($executionContextMock);
         $this->shopUserRepository->expects(self::once())->method('find')->with(42)->willReturn($shopUserMock);
         $shopUserMock->expects(self::once())->method('isVerified')->willReturn(true);
         $shopUserMock->expects(self::once())->method('getEmail')->willReturn('test@sylius.com');
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.account.is_verified', ['%email%' => 'test@sylius.com'])
-        ;
-        $this->shopUserNotVerifiedValidator->validate(new RequestShopUserVerification(42, '', ''), new ShopUserNotVerified());
+
+        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $executionContextMock
+            ->expects(self::once())
+            ->method('buildViolation')
+            ->with($constraint->message)
+            ->willReturn($violationBuilder);
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setParameter')
+            ->with('%email%', 'test@sylius.com')
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setCode')
+            ->with(ShopUserNotVerified::USER_ALREADY_VERIFIED_ERROR)
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('addViolation');
+
+        $this->shopUserNotVerifiedValidator->validate(new RequestShopUserVerification(42, '', ''), $constraint);
     }
 
     public function testDoesNotAddViolationIfShopUserExists(): void

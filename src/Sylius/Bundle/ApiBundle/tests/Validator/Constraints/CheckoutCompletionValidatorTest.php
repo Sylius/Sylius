@@ -27,6 +27,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class CheckoutCompletionValidatorTest extends TestCase
@@ -95,6 +96,8 @@ final class CheckoutCompletionValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        /** @var ConstraintViolationBuilderInterface|MockObject $violationBuilderMock */
+        $violationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
         /** @var OrderInterface|MockObject $orderMock */
         $orderMock = $this->createMock(OrderInterface::class);
         $this->checkoutCompletionValidator->initialize($executionContextMock);
@@ -106,11 +109,24 @@ final class CheckoutCompletionValidatorTest extends TestCase
             new Transition('another_possible_transition', [], []),
         ]);
         $orderMock->expects(self::once())->method('getCheckoutState')->willReturn('some_state_that_does_not_allow_to_complete_order');
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.order.invalid_state_transition', [
-            '%currentState%' => 'some_state_that_does_not_allow_to_complete_order',
-            '%possibleTransitions%' => 'some_possible_transition, another_possible_transition',
-        ])
-        ;
+        $executionContextMock->expects(self::once())
+            ->method('buildViolation')
+            ->with('sylius.order.invalid_state_transition')
+            ->willReturn($violationBuilderMock);
+        $violationBuilderMock->expects(self::exactly(2))
+            ->method('setParameter')
+            ->willReturnCallback(function (string $key, string $value) use ($violationBuilderMock): ConstraintViolationBuilderInterface {
+                self::assertContains($key, ['%currentState%', '%possibleTransitions%']);
+                self::assertContains($value, ['some_state_that_does_not_allow_to_complete_order', 'some_possible_transition, another_possible_transition']);
+
+                return $violationBuilderMock;
+            });
+        $violationBuilderMock->expects(self::once())
+            ->method('setCode')
+            ->with(CheckoutCompletion::INVALID_STATE_TRANSITION_ERROR)
+            ->willReturn($violationBuilderMock);
+        $violationBuilderMock->expects(self::once())
+            ->method('addViolation');
         $this->checkoutCompletionValidator->validate($completeOrder, new CheckoutCompletion());
     }
 }
