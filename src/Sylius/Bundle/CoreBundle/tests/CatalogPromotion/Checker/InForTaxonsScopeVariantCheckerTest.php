@@ -239,24 +239,42 @@ final class InForTaxonsScopeVariantCheckerTest extends TestCase
     {
         $scope = $this->createMock(CatalogPromotionScopeInterface::class);
 
-        $this->taxonRepository->expects($this->exactly(2))->method('findOneBy')->with(['code' => 'UNKNOWN_TAXON'])->willReturn(null);
+        $this->taxonRepository->expects($this->once())->method('findOneBy')->with(['code' => 'UNKNOWN_TAXON'])->willReturn(null);
         $this->taxonTreeRepository->expects($this->never())->method('children');
 
         $scope->method('getConfiguration')->willReturn(['taxons' => ['UNKNOWN_TAXON']]);
 
-        $variant = $this->createVariantWithTaxons([]);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Taxon with code "UNKNOWN_TAXON" does not exist');
+
+        $this->inForTaxonsScopeVariantChecker->inScope($scope, $this->createVariantWithTaxons([]));
+    }
+
+    public function testDoesNotCacheFailedTaxonResolution(): void
+    {
+        $scope = $this->createMock(CatalogPromotionScopeInterface::class);
+        $taxon = $this->createConfiguredTaxon('LATE_TAXON');
+
+        $this->taxonRepository
+            ->expects($this->exactly(2))
+            ->method('findOneBy')
+            ->with(['code' => 'LATE_TAXON'])
+            ->willReturnOnConsecutiveCalls(null, $taxon)
+        ;
+        $this->taxonTreeRepository->method('children')->willReturn([]);
+
+        $scope->method('getConfiguration')->willReturn(['taxons' => ['LATE_TAXON']]);
+
+        $variant = $this->createVariantWithTaxons([$taxon]);
 
         try {
             $this->inForTaxonsScopeVariantChecker->inScope($scope, $variant);
             $this->fail('Expected exception was not thrown.');
         } catch (InvalidArgumentException $exception) {
-            $this->assertSame('Taxon with code "UNKNOWN_TAXON" does not exist', $exception->getMessage());
+            $this->assertSame('Taxon with code "LATE_TAXON" does not exist', $exception->getMessage());
         }
 
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Taxon with code "UNKNOWN_TAXON" does not exist');
-
-        $this->inForTaxonsScopeVariantChecker->inScope($scope, $variant);
+        $this->assertTrue($this->inForTaxonsScopeVariantChecker->inScope($scope, $variant));
     }
 
     public function testResolvesTaxonSharedByDifferentScopesOnlyOnce(): void
