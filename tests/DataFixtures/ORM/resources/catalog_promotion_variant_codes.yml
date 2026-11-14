@@ -1,0 +1,195 @@
+Sylius\Component\Currency\Model\Currency:
+    currency_usd:
+        code: "USD"
+
+Sylius\Component\Locale\Model\Locale:
+    locale_en_us:
+        code: "en_US"
+
+Sylius\Component\Core\Model\Channel:
+    channel_web:
+        code: "WEB"
+        name: "Web Channel"
+        hostname: "localhost"
+        baseCurrency: "@currency_usd"
+        defaultLocale: "@locale_en_us"
+        locales: ["@locale_en_us"]
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
+    channel_mobile:
+        code: "MOBILE"
+        name: "Mobile Channel"
+        hostname: "localhost"
+        baseCurrency: "@currency_usd"
+        defaultLocale: "@locale_en_us"
+        locales: ["@locale_en_us"]
+        enabled: true
+        taxCalculationStrategy: "order_items_based"
+
+Sylius\Component\Core\Model\Taxon:
+    animals:
+        code: "animals"
+    dogs:
+        code: "dogs"
+        parent: "@animals"
+    puppies:
+        code: "puppies"
+        parent: "@dogs"
+    cats:
+        code: "cats"
+        parent: "@animals"
+    plants:
+        code: "plants"
+    trees:
+        code: "trees"
+        parent: "@plants"
+
+Sylius\Component\Core\Model\Product:
+    product_animals:
+        code: "PRODUCT_ANIMALS"
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        name: "Animals product"
+        slug: "animals-product"
+    product_dogs:
+        code: "PRODUCT_DOGS"
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        name: "Dogs product"
+        slug: "dogs-product"
+    product_puppies:
+        code: "PRODUCT_PUPPIES"
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        name: "Puppies product"
+        slug: "puppies-product"
+    product_cats:
+        code: "PRODUCT_CATS"
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        name: "Cats product"
+        slug: "cats-product"
+    product_trees:
+        code: "PRODUCT_TREES"
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        name: "Trees product"
+        slug: "trees-product"
+    product_dogs_and_puppies:
+        code: "PRODUCT_DOGS_AND_PUPPIES"
+        currentLocale: "en_US"
+        fallbackLocale: "en_US"
+        name: "Dogs and puppies product"
+        slug: "dogs-and-puppies-product"
+
+Sylius\Component\Core\Model\ProductTaxon:
+    product_taxon_animals:
+        product: "@product_animals"
+        taxon: "@animals"
+        position: 0
+    product_taxon_dogs:
+        product: "@product_dogs"
+        taxon: "@dogs"
+        position: 0
+    product_taxon_puppies:
+        product: "@product_puppies"
+        taxon: "@puppies"
+        position: 0
+    product_taxon_cats:
+        product: "@product_cats"
+        taxon: "@cats"
+        position: 0
+    product_taxon_trees:
+        product: "@product_trees"
+        taxon: "@trees"
+        position: 0
+    product_taxon_dogs_and_puppies_dogs:
+        product: "@product_dogs_and_puppies"
+        taxon: "@dogs"
+        position: 1
+    product_taxon_dogs_and_puppies_puppies:
+        product: "@product_dogs_and_puppies"
+        taxon: "@puppies"
+        position: 2
+
+Sylius\Component\Core\Model\ProductVariant:
+    variant_animals:
+        code: "VARIANT_ANIMALS"
+        product: "@product_animals"
+        position: 0
+    variant_dogs_1:
+        code: "VARIANT_DOGS_1"
+        product: "@product_dogs"
+        position: 0
+    variant_dogs_2:
+        code: "VARIANT_DOGS_2"
+        product: "@product_dogs"
+        position: 1
+    variant_puppies:
+        code: "VARIANT_PUPPIES"
+        product: "@product_puppies"
+        position: 0
+    variant_cats:
+        code: "VARIANT_CATS"
+        product: "@product_cats"
+        position: 0
+    variant_trees:
+        code: "VARIANT_TREES"
+        product: "@product_trees"
+        position: 0
+    variant_dogs_and_puppies:
+        code: "VARIANT_DOGS_AND_PUPPIES"
+        product: "@product_dogs_and_puppies"
+        position: 0
+
+Sylius\Component\Core\Model\CatalogPromotion:
+    promotion_applied:
+        code: "applied"
+        name: "Applied"
+        enabled: true
+        state: "active"
+    promotion_other:
+        code: "other"
+        name: "Other"
+        enabled: true
+        state: "active"
+    promotion_unused:
+        code: "unused"
+        name: "Unused"
+        enabled: true
+        state: "active"
+
+Sylius\Component\Core\Model\ChannelPricing:
+    pricing_animals_web:
+        channelCode: "WEB"
+        price: 1000
+        productVariant: "@variant_animals"
+    pricing_dogs_1_web:
+        channelCode: "WEB"
+        price: 1000
+        productVariant: "@variant_dogs_1"
+        appliedPromotions: ["@promotion_applied"]
+    pricing_dogs_1_mobile:
+        channelCode: "MOBILE"
+        price: 1000
+        productVariant: "@variant_dogs_1"
+    pricing_dogs_2_web:
+        channelCode: "WEB"
+        price: 1000
+        productVariant: "@variant_dogs_2"
+        appliedPromotions: ["@promotion_applied"]
+    pricing_dogs_2_mobile:
+        channelCode: "MOBILE"
+        price: 1000
+        productVariant: "@variant_dogs_2"
+        appliedPromotions: ["@promotion_applied"]
+    pricing_cats_mobile:
+        channelCode: "MOBILE"
+        price: 1000
+        productVariant: "@variant_cats"
+        appliedPromotions: ["@promotion_applied"]
+    pricing_trees_web:
+        channelCode: "WEB"
+        price: 1000
+        productVariant: "@variant_trees"
+        appliedPromotions: ["@promotion_other"]
