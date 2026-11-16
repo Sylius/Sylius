@@ -1,3 +1,27 @@
+# UPGRADE FROM `2.2.12` TO `2.2.13`
+
+### Eager loading is no longer forced on Sylius operations
+
+API Platform's `api_platform.eager_loading.force_eager` option defaults to `true`, which makes the
+`EagerLoadingExtension` fetch-join every relation from the normalization groups. On resources serializing several
+independent to-many collections, such as `GET /api/v2/admin/products`, the number of fetched rows is the product of
+the collection sizes, and collection endpoints become unusable on real catalogs.
+
+Sylius read operations (`Get` and `GetCollection` named `sylius_api_*`) that do not define `forceEager` explicitly now
+get `forceEager: false`, so only relations mapped with `fetch="EAGER"` are joined and the remaining ones are loaded
+lazily. Responses are unchanged. Write operations and resources not provided by Sylius keep the global API Platform
+setting.
+
+To restore the previous behaviour, use:
+
+```yaml
+sylius_api:
+    eager_loading:
+        force_eager: true
+```
+
+To change it for a single operation, set the `forceEager` attribute on that operation in its resource configuration.
+
 # UPGRADE FROM `2.2.11` TO `2.2.12`
 
 ### Payment request creation validates the payment method
