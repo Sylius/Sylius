@@ -74,5 +74,8 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="avatar">
+            <constraint name="Valid" />
+        </property>
     </class>
 </constraint-mapping>
