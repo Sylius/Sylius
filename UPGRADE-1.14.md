@@ -39,6 +39,33 @@ again until the value is changed. If a stored configuration refers to a paramete
 resolved value in the configuration instead, or provide it in the configuration of the gateway factory in your
 application.
 
+### [Admin] Uploaded avatar images are validated before they are stored (Medium)
+
+`POST /api/v2/admin/avatar-images` now validates the uploaded file with the constraints defined for
+`Sylius\Component\Core\Model\AvatarImage` before it is uploaded. A request with a file that is not a JPEG, PNG, GIF or
+WebP image, or that exceeds the size limit, is rejected with `422 Unprocessable Entity` and nothing is written to the
+filesystem. The administrator form in the administration panel validates the avatar in the same way and shows the
+violation on the avatar field. The accepted types are those configured in `sylius_core.allowed_images_mime_types`.
+
+Files that are already stored are not modified. Review the media directory for files that are not images.
+
+#### Constructor signature changes
+
+1. The constructor of `Sylius\Bundle\ApiBundle\Controller\UploadAvatarImageAction` has been extended with a new
+   argument:
+
+```php
+    public function __construct(
+        private FactoryInterface $avatarImageFactory,
+        private AvatarImageRepositoryInterface $avatarImageRepository,
+        private ImageUploaderInterface $imageUploader,
+        private IriConverterInterface $iriConverter,
++       private ValidatorInterface $validator,
+    )
+```
+
+If you instantiate or decorate this service with your own service definition, pass the new argument.
+
 # UPGRADE FROM `v1.14.20` TO `v1.14.21`
 
 This is a **security release**. Updating is strongly recommended.
