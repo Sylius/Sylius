@@ -25,6 +25,7 @@ use Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\DecrementPromotionUsag
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\GiveBackInventoryListener;
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\HoldInventoryListener;
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\IncrementPromotionUsagesListener;
+use Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\RemoveUnusedPromotionCouponListener;
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\RequestOrderPaymentListener;
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\RequestOrderShippingListener;
 use Sylius\Bundle\CoreBundle\EventListener\Workflow\Order\SaveCustomerAddressesListener;
@@ -43,6 +44,12 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius.listener.workflow.order.assign_order_token', AssignOrderTokenListener::class)
         ->args([service('sylius.assigner.order_token.unique_id_based')])
         ->tag('kernel.event_listener', ['event' => 'workflow.sylius_order.transition.create', 'priority' => 100])
+    ;
+
+    $services
+        ->set('sylius.listener.workflow.order.remove_unused_promotion_coupon', RemoveUnusedPromotionCouponListener::class)
+        ->args([service('sylius.remover.promotion.unused_promotion_coupon')])
+        ->tag('kernel.event_listener', ['event' => 'workflow.sylius_order.transition.create', 'priority' => 0])
     ;
 
     $services

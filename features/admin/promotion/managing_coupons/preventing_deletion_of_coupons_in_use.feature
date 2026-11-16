@@ -10,6 +10,7 @@ Feature: Not being able to delete a coupon which is in use
         And the store has a product "Jacket"
         And the store allows paying with "Cash on Delivery"
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
+        And this promotion gives "10%" discount to every order
         And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "Jacket" using "SANTA2016" coupon
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment

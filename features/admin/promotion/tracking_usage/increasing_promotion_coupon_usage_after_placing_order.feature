@@ -10,6 +10,7 @@ Feature: Increasing a promotion coupon usage after placing an order
         And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
+        And this promotion gives "10%" discount to every order
         And I am logged in as an administrator
 
     @api @ui
