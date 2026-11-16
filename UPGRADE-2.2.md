@@ -1,3 +1,30 @@
+# UPGRADE FROM `2.2.12` TO `2.2.13`
+
+This is a **security release**. Updating is strongly recommended.
+
+## Security fixes
+
+### [API] Changing the e-mail address of a customer requires a new verification (Medium)
+
+`PUT /api/v2/shop/customers/{id}` now uses `Sylius\Bundle\ApiBundle\StateProcessor\Shop\Customer\PersistProcessor`
+(`sylius_api.state_processor.shop.customer.persist`). When the e-mail address in the request differs from the current
+one:
+
+- the shop user is no longer verified,
+- on a channel with **Account verification required** enabled, the shop user is also disabled and the account
+  verification e-mail is sent to the new address. The customer cannot obtain a new API token or log in until the
+  address is verified.
+
+A request that does not change the e-mail address behaves as before.
+
+**Action required if you have a client application using the Shop API.** After a successful e-mail change on a
+channel that requires account verification, tell the customer to confirm the new address, and expect
+`POST /api/v2/shop/customers/token` to be refused for that account until then.
+
+If you have replaced the processor of the `PUT /api/v2/shop/customers/{id}` operation in your application, your
+configuration takes precedence and the new behaviour does not apply: call or decorate
+`sylius_api.state_processor.shop.customer.persist` from your processor.
+
 # UPGRADE FROM `2.2.11` TO `2.2.12`
 
 This is a **security release**. Updating is strongly recommended.
