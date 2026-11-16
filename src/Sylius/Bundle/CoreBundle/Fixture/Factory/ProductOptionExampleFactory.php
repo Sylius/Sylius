@@ -114,6 +114,17 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
                 return $values;
             })
             ->setAllowedTypes('values', 'array')
+            ->setNormalizer('values', function (Options $options, array $values): array {
+                if ([] !== $values) {
+                    return $values;
+                }
+
+                foreach ($options['translations'] as $translation) {
+                    $values += $translation['values'] ?? [];
+                }
+
+                return $values;
+            })
             ->setDefault('translations', [])
             ->setAllowedTypes('translations', ['array'])
         ;
