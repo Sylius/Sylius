@@ -64,6 +64,16 @@
         </service>
 
         <service
+            id="sylius_api.api_platform.metadata.resource.metadata_collection_factory.force_eager_aware"
+            class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\ForceEagerAwareResourceMetadataCollectionFactory"
+            decorates="api_platform.metadata.resource.metadata_collection_factory"
+            public="false"
+        >
+            <argument type="service" id=".inner" />
+            <argument>%sylius_api.eager_loading.force_eager%</argument>
+        </service>
+
+        <service
             id="sylius_api.api_platform.metadata.resource.metadata_collection_factory.image_filter_aware"
             class="Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\ImageFilterAwareResourceMetadataCollectionFactory"
             decorates="api_platform.metadata.resource.metadata_collection_factory"
