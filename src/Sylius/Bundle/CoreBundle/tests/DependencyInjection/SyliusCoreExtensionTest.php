@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Composer\InstalledVersions;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\DoctrineExtension;
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -609,6 +611,65 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     protected function getContainerExtensions(): array
     {
         return [new SyliusCoreExtension()];
+    }
+
+    #[Test]
+    public function it_prepends_disabling_doctrine_type_comments_on_dbal_3(): void
+    {
+        $this->skipUnlessDbal3();
+
+        $this->container->registerExtension(new DoctrineExtension());
+
+        $this->load();
+
+        $this->assertContains(
+            ['dbal' => ['disable_type_comments' => true]],
+            $this->container->getExtensionConfig('doctrine'),
+        );
+    }
+
+    #[Test]
+    public function it_prepends_disabling_doctrine_type_comments_for_each_configured_connection_on_dbal_3(): void
+    {
+        $this->skipUnlessDbal3();
+
+        $this->container->registerExtension(new DoctrineExtension());
+        $this->container->loadFromExtension('doctrine', [
+            'dbal' => ['connections' => ['main' => [], 'legacy' => []]],
+        ]);
+
+        $this->load();
+
+        $this->assertContains(
+            ['dbal' => ['connections' => [
+                'main' => ['disable_type_comments' => true],
+                'legacy' => ['disable_type_comments' => true],
+            ]]],
+            $this->container->getExtensionConfig('doctrine'),
+        );
+    }
+
+    #[Test]
+    public function it_does_not_prepend_disabling_doctrine_type_comments_on_dbal_4(): void
+    {
+        if (version_compare((string) InstalledVersions::getVersion('doctrine/dbal'), '4.0.0', '<')) {
+            $this->markTestSkipped('Doctrine type comments are disabled only on DBAL 3.');
+        }
+
+        $this->container->registerExtension(new DoctrineExtension());
+
+        $this->load();
+
+        foreach ($this->container->getExtensionConfig('doctrine') as $doctrineConfig) {
+            $this->assertArrayNotHasKey('dbal', $doctrineConfig);
+        }
+    }
+
+    private function skipUnlessDbal3(): void
+    {
+        if (version_compare((string) InstalledVersions::getVersion('doctrine/dbal'), '4.0.0', '>=')) {
+            $this->markTestSkipped('Doctrine type comments are disabled only on DBAL 3.');
+        }
     }
 
     private function testPrependingDoctrineMigrations(string $env): void

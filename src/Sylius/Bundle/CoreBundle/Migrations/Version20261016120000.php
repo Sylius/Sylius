@@ -14,33 +14,32 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Types\Types;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractMigration;
 
 final class Version20261016120000 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Align Doctrine type comments with the installed DBAL version.';
+        return 'Remove Doctrine type comments, no longer used with DBAL 4 and disabled on DBAL 3.';
     }
 
     public function up(Schema $schema): void
     {
-        // The schema is altered through the Schema object, so DBAL itself decides whether type comments are needed:
-        // DBAL 3 adds the missing "(DC2Type:datetime_immutable)" comment, DBAL 4 drops the leftover "(DC2Type:...)" ones.
-        $schema->getTable('sylius_promotion_coupon')->getColumn('track_usage_since')
-            ->setType(Type::getType(Types::DATETIME_IMMUTABLE))
-            ->setComment('');
+        $this->addSql('ALTER TABLE sylius_payment_request CHANGE hash hash BINARY(16) NOT NULL, CHANGE payload payload LONGTEXT NOT NULL');
+        $this->addSql('ALTER TABLE sylius_payment_security_token CHANGE details details LONGTEXT DEFAULT NULL');
 
-        $paymentRequestTable = $schema->getTable('sylius_payment_request');
-        $paymentRequestTable->getColumn('hash')->setComment('');
-        $paymentRequestTable->getColumn('payload')->setComment('');
-
-        $schema->getTable('sylius_payment_security_token')->getColumn('details')->setComment('');
+        if ($schema->hasTable('messenger_messages')) {
+            $this->addSql('ALTER TABLE messenger_messages CHANGE created_at created_at DATETIME NOT NULL, CHANGE available_at available_at DATETIME NOT NULL, CHANGE delivered_at delivered_at DATETIME DEFAULT NULL');
+        }
     }
 
     public function down(Schema $schema): void
     {
+        $this->addSql('ALTER TABLE sylius_payment_request CHANGE hash hash BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', CHANGE payload payload LONGTEXT NOT NULL COMMENT \'(DC2Type:object)\'');
+        $this->addSql('ALTER TABLE sylius_payment_security_token CHANGE details details LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:object)\'');
+
+        if ($schema->hasTable('messenger_messages')) {
+            $this->addSql('ALTER TABLE messenger_messages CHANGE created_at created_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', CHANGE available_at available_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', CHANGE delivered_at delivered_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\'');
+        }
     }
 }

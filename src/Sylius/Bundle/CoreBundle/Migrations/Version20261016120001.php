@@ -14,33 +14,38 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Types\Type;
-use Doctrine\DBAL\Types\Types;
 use Sylius\Bundle\CoreBundle\Doctrine\Migrations\AbstractPostgreSQLMigration;
 
 final class Version20261016120001 extends AbstractPostgreSQLMigration
 {
     public function getDescription(): string
     {
-        return 'Align Doctrine type comments with the installed DBAL version (PostgreSQL).';
+        return 'Remove Doctrine type comments, no longer used with DBAL 4 and disabled on DBAL 3 (PostgreSQL).';
     }
 
     public function up(Schema $schema): void
     {
-        // The schema is altered through the Schema object, so DBAL itself decides whether type comments are needed:
-        // DBAL 3 adds the missing "(DC2Type:datetime_immutable)" comment, DBAL 4 drops the leftover "(DC2Type:...)" ones.
-        $schema->getTable('sylius_promotion_coupon')->getColumn('track_usage_since')
-            ->setType(Type::getType(Types::DATETIME_IMMUTABLE))
-            ->setComment('');
+        $this->addSql('COMMENT ON COLUMN sylius_payment_request.hash IS NULL');
+        $this->addSql('COMMENT ON COLUMN sylius_payment_request.payload IS NULL');
+        $this->addSql('COMMENT ON COLUMN sylius_payment_security_token.details IS NULL');
 
-        $paymentRequestTable = $schema->getTable('sylius_payment_request');
-        $paymentRequestTable->getColumn('hash')->setComment('');
-        $paymentRequestTable->getColumn('payload')->setComment('');
-
-        $schema->getTable('sylius_payment_security_token')->getColumn('details')->setComment('');
+        if ($schema->hasTable('messenger_messages')) {
+            $this->addSql('COMMENT ON COLUMN messenger_messages.created_at IS NULL');
+            $this->addSql('COMMENT ON COLUMN messenger_messages.available_at IS NULL');
+            $this->addSql('COMMENT ON COLUMN messenger_messages.delivered_at IS NULL');
+        }
     }
 
     public function down(Schema $schema): void
     {
+        $this->addSql('COMMENT ON COLUMN sylius_payment_request.hash IS \'(DC2Type:uuid)\'');
+        $this->addSql('COMMENT ON COLUMN sylius_payment_request.payload IS \'(DC2Type:object)\'');
+        $this->addSql('COMMENT ON COLUMN sylius_payment_security_token.details IS \'(DC2Type:object)\'');
+
+        if ($schema->hasTable('messenger_messages')) {
+            $this->addSql('COMMENT ON COLUMN messenger_messages.created_at IS \'(DC2Type:datetime_immutable)\'');
+            $this->addSql('COMMENT ON COLUMN messenger_messages.available_at IS \'(DC2Type:datetime_immutable)\'');
+            $this->addSql('COMMENT ON COLUMN messenger_messages.delivered_at IS \'(DC2Type:datetime_immutable)\'');
+        }
     }
 }
