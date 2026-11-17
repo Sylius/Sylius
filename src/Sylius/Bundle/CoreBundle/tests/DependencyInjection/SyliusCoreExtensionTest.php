@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Composer\InstalledVersions;
-use Doctrine\Bundle\DoctrineBundle\DependencyInjection\DoctrineExtension;
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -31,7 +30,9 @@ use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Tests\Sylius\Bundle\CoreBundle\Stub\CatalogPromotionApplicatorCriteriaStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\CatalogPromotionPriceCalculatorStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\EntityObserverStub;
@@ -619,7 +620,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->skipUnlessDbal3();
 
         $this->container->setParameter('kernel.environment', 'dev');
-        $this->container->registerExtension(new DoctrineExtension());
+        $this->registerDoctrineExtensionStub();
 
         $this->load();
 
@@ -635,7 +636,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         $this->skipUnlessDbal3();
 
         $this->container->setParameter('kernel.environment', 'dev');
-        $this->container->registerExtension(new DoctrineExtension());
+        $this->registerDoctrineExtensionStub();
         $this->container->loadFromExtension('doctrine', [
             'dbal' => ['connections' => ['main' => [], 'legacy' => []]],
         ]);
@@ -659,13 +660,27 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         }
 
         $this->container->setParameter('kernel.environment', 'dev');
-        $this->container->registerExtension(new DoctrineExtension());
+        $this->registerDoctrineExtensionStub();
 
         $this->load();
 
         foreach ($this->container->getExtensionConfig('doctrine') as $doctrineConfig) {
             $this->assertArrayNotHasKey('dbal', $doctrineConfig);
         }
+    }
+
+    private function registerDoctrineExtensionStub(): void
+    {
+        $this->container->registerExtension(new class() extends Extension {
+            public function load(array $configs, ContainerBuilder $container): void
+            {
+            }
+
+            public function getAlias(): string
+            {
+                return 'doctrine';
+            }
+        });
     }
 
     private function skipUnlessDbal3(): void
