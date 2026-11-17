@@ -16,6 +16,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use ApiPlatform\State\DenormalizationViolationFactoryInterface;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Hydra\Serializer\EmptyCollectionFiltersNormalizer;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\DuplicateOperationReplacerResourceMetadataCollectionFactory;
+use Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\ForceEagerAwareResourceMetadataCollectionFactory;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Metadata\Resource\Factory\ImageFilterAwareResourceMetadataCollectionFactory;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Routing\ApiLoader;
 use Sylius\Bundle\ApiBundle\ApiPlatform\Routing\IriConverter;
@@ -56,6 +57,16 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius_api.api_platform.metadata.resource.metadata_collection_factory.duplicate_operation_replacer', DuplicateOperationReplacerResourceMetadataCollectionFactory::class)
         ->decorate('api_platform.metadata.resource.metadata_collection_factory', null, 799)
         ->args([service('.inner')])
+        ->private()
+    ;
+
+    $services
+        ->set('sylius_api.api_platform.metadata.resource.metadata_collection_factory.force_eager_aware', ForceEagerAwareResourceMetadataCollectionFactory::class)
+        ->decorate('api_platform.metadata.resource.metadata_collection_factory')
+        ->args([
+            service('.inner'),
+            '%sylius_api.eager_loading.force_eager%',
+        ])
         ->private()
     ;
 
