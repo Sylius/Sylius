@@ -48,6 +48,16 @@ class FormElement extends BaseFormElement implements FormElementInterface
         return $this->getElement('reusable_from_cancelled_orders')->isChecked();
     }
 
+    public function toggleTrackUsage(bool $trackUsage): void
+    {
+        $this->getElement('track_usage')->setValue($trackUsage);
+    }
+
+    public function isTrackUsage(): bool
+    {
+        return $this->getElement('track_usage')->isChecked();
+    }
+
     protected function getCodeElement(): NodeElement
     {
         return $this->getElement('code');
@@ -60,6 +70,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'expires_at' => '[data-test-expires-at]',
             'per_customer_usage_limit' => '[data-test-per-customer-usage-limit]',
             'reusable_from_cancelled_orders' => '[data-test-reusable-from-cancelled-orders]',
+            'track_usage' => '[data-test-track-usage]',
             'usage_limit' => '[data-test-usage-limit]',
         ]);
     }

@@ -31,20 +31,14 @@ final class ContactType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'sylius.ui.email',
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'sylius.contact.email.not_blank',
-                    ]),
-                    new Email([
-                        'message' => 'sylius.contact.email.invalid',
-                    ]),
+                    new NotBlank(message: 'sylius.contact.email.not_blank'),
+                    new Email(message: 'sylius.contact.email.invalid'),
                 ],
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'sylius.ui.message',
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'sylius.contact.message.not_blank',
-                    ]),
+                    new NotBlank(message: 'sylius.contact.message.not_blank'),
                 ],
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options): void {

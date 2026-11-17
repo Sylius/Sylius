@@ -56,6 +56,12 @@ final class ShopUserFixtureTest extends TestCase
     }
 
     #[Test]
+    public function user_verification_may_be_toggled(): void
+    {
+        $this->assertConfigurationIsValid([['custom' => [['verified' => false]]]], 'custom.*.verified');
+    }
+
+    #[Test]
     public function user_password_code_is_optional(): void
     {
         $this->assertConfigurationIsValid([['custom' => [['password' => 'I.<3.Krzysztof.Krawczyk']]]], 'custom.*.password');

@@ -79,6 +79,8 @@ class Promotion implements PromotionInterface
 
     protected bool $appliesToDiscounted = true;
 
+    protected bool $trackUsage = true;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -299,6 +301,16 @@ class Promotion implements PromotionInterface
     public function setAppliesToDiscounted(bool $applyOnDiscounted): void
     {
         $this->appliesToDiscounted = $applyOnDiscounted;
+    }
+
+    public function isTrackUsage(): bool
+    {
+        return $this->trackUsage;
+    }
+
+    public function setTrackUsage(bool $trackUsage): void
+    {
+        $this->trackUsage = $trackUsage;
     }
 
     public function getLabel(): ?string

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -30,28 +31,22 @@ final readonly class LocaleContext implements Context
     ) {
     }
 
-    /**
-     * @Transform :language
-     * @Transform :localeCode
-     * @Transform /^"([^"]+)" locale$/
-     * @Transform /^in the "([^"]+)" locale$/
-     */
+    #[Transform(':language')]
+    #[Transform(':localeCode')]
+    #[Transform('/^"([^"]+)" locale$/')]
+    #[Transform('/^in the "([^"]+)" locale$/')]
     public function castToLocaleCode(string $localeName): string
     {
         return $this->localeNameConverter->convertNameToCode($localeName);
     }
 
-    /**
-     * @Transform :localeNameInItsLocale
-     */
+    #[Transform(':localeNameInItsLocale')]
     public function castToItsLocaleCode(string $localeName): string
     {
         return $this->localeNameConverter->convertNameToCode($localeName);
     }
 
-    /**
-     * @Transform :localeNameInCurrentLocale
-     */
+    #[Transform(':localeNameInCurrentLocale')]
     public function castToCurrentLocale(string $localeName): string
     {
         if ($this->sharedStorage->has('current_locale_code')) {
@@ -61,9 +56,7 @@ final readonly class LocaleContext implements Context
         return $localeName;
     }
 
-    /**
-     * @Transform :locale
-     */
+    #[Transform(':locale')]
     public function getLocaleByName(string $name): LocaleInterface
     {
         $locale = $this->localeRepository->findOneBy(['code' => $this->localeNameConverter->convertNameToCode($name)]);

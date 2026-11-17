@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\User\Security\Generator;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UniqueTokenGeneratorTest extends TestCase
 {
     /** @var RandomnessGeneratorInterface&MockObject */

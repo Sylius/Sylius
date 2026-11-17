@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Shipping\Checker\Eligibility;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Shipping\Checker\Eligibility\CategoryRequirementEligibilityChecker;
@@ -23,6 +24,7 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CategoryRequirementEligibilityCheckerTest extends TestCase
 {
     private MockObject&ShippingSubjectInterface $shippingSubject;

@@ -17,19 +17,19 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
 use ApiPlatform\Validator\Exception\ValidationException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\ProductImage\PersistProcessor;
 use Sylius\Component\Core\Model\ProductImageInterface;
-use Symfony\Component\HttpFoundation\FileBag;
-use Symfony\Component\HttpFoundation\InputBag;
-use Symfony\Component\HttpFoundation\ParameterBag;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $processor;
@@ -56,12 +56,6 @@ final class PersistProcessorTest extends TestCase
 
     public function testCreatesAndProcessesAProductImage(): void
     {
-        /** @var Request|MockObject $requestMock */
-        $requestMock = $this->createMock(Request::class);
-        /** @var ParameterBag|MockObject $attributesMock */
-        $attributesMock = $this->createMock(ParameterBag::class);
-        /** @var FileBag|MockObject $filesMock */
-        $filesMock = $this->createMock(FileBag::class);
         /** @var ProductImageInterface|MockObject $productImageMock */
         $productImageMock = $this->createMock(ProductImageInterface::class);
         /** @var ConstraintViolationListInterface|MockObject $constraintViolationListMock */
@@ -69,24 +63,14 @@ final class PersistProcessorTest extends TestCase
 
         $operation = new Post(validationContext: ['groups' => ['sylius']]);
 
-        $attributesMock->expects(self::once())->method('get')
-            ->with('code', '')
-            ->willReturn('code');
+        $request = new Request(
+            attributes: ['code' => 'code'],
+            request: ['type' => 'type', 'productVariants' => ['/api/v2/admin/product-variants/MUG']],
+        );
 
-        $requestMock->attributes = $attributesMock;
+        $file = new UploadedFile(__FILE__, basename(__FILE__), null, null, true);
 
-        $file = new \SplFileInfo(__FILE__);
-
-        $filesMock->expects(self::once())->method('get')->with('file')->willReturn($file);
-
-        $requestMock->files = $filesMock;
-
-        $requestParams = new InputBag([
-            'type' => 'type',
-            'productVariants' => ['/api/v2/admin/product-variants/MUG'],
-        ]);
-
-        $requestMock->request = $requestParams;
+        $request->files->set('file', $file);
 
         $this->productImageCreator->expects(self::once())
             ->method('create')
@@ -102,19 +86,13 @@ final class PersistProcessorTest extends TestCase
 
         $this->processor->expects(self::once())
             ->method('process')
-            ->with($productImageMock, $operation, [], ['request' => $requestMock]);
+            ->with($productImageMock, $operation, [], ['request' => $request]);
 
-        $this->persistProcessor->process(null, $operation, [], ['request' => $requestMock]);
+        $this->persistProcessor->process(null, $operation, [], ['request' => $request]);
     }
 
     public function testThrowsAValidationExceptionIfACreatedProductImageIsNotValid(): void
     {
-        /** @var Request|MockObject $requestMock */
-        $requestMock = $this->createMock(Request::class);
-        /** @var ParameterBag|MockObject $attributesMock */
-        $attributesMock = $this->createMock(ParameterBag::class);
-        /** @var FileBag|MockObject $filesMock */
-        $filesMock = $this->createMock(FileBag::class);
         /** @var ProductImageInterface|MockObject $productImageMock */
         $productImageMock = $this->createMock(ProductImageInterface::class);
         /** @var ConstraintViolationListInterface|MockObject $constraintViolationListMock */
@@ -124,25 +102,14 @@ final class PersistProcessorTest extends TestCase
 
         $operation = new Post(validationContext: ['groups' => ['sylius']]);
 
-        $attributesMock->expects(self::once())
-            ->method('get')
-            ->with('code', '')
-            ->willReturn('code');
+        $request = new Request(
+            attributes: ['code' => 'code'],
+            request: ['type' => 'type', 'productVariants' => ['/api/v2/admin/product-variants/MUG']],
+        );
 
-        $requestMock->attributes = $attributesMock;
+        $file = new UploadedFile(__FILE__, basename(__FILE__), null, null, true);
 
-        $file = new \SplFileInfo(__FILE__);
-
-        $filesMock->expects(self::once())->method('get')->with('file')->willReturn($file);
-
-        $requestMock->files = $filesMock;
-
-        $requestParams = new InputBag([
-            'type' => 'type',
-            'productVariants' => ['/api/v2/admin/product-variants/MUG'],
-        ]);
-
-        $requestMock->request = $requestParams;
+        $request->files->set('file', $file);
 
         $this->productImageCreator->expects(self::once())
             ->method('create')
@@ -168,11 +135,11 @@ final class PersistProcessorTest extends TestCase
 
         $this->processor->expects(self::never())
             ->method('process')
-            ->with($productImageMock, $operation, [], ['request' => $requestMock]);
+            ->with($productImageMock, $operation, [], ['request' => $request]);
 
         $this->expectException(ValidationException::class);
 
-        $this->persistProcessor->process($productImageMock, $operation, [], ['request' => $requestMock]);
+        $this->persistProcessor->process($productImageMock, $operation, [], ['request' => $request]);
     }
 
     public function testThrowsAnExceptionForDeleteOperation(): void

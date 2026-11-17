@@ -24,6 +24,9 @@ sylius_twig_hooks:
             account:
                 template: '@SyliusAdmin/admin_user/form/sections/account.html.twig'
                 priority: 0
+            access_levels:
+                template: '@SyliusAdmin/admin_user/form/sections/access_levels.html.twig'
+                priority: -50
             roles:
                 template: '@SyliusAdmin/admin_user/form/sections/roles.html.twig'
                 priority: -100
@@ -45,6 +48,14 @@ sylius_twig_hooks:
                 priority: 100
             enabled:
                 template: '@SyliusAdmin/admin_user/form/sections/account/enabled.html.twig'
+                priority: 0
+
+        'sylius_admin.admin_user.update.content.form.sections.access_levels':
+            administration_access:
+                template: '@SyliusAdmin/admin_user/form/sections/access_levels/administration_access.html.twig'
+                priority: 100
+            api_access:
+                template: '@SyliusAdmin/admin_user/form/sections/access_levels/api_access.html.twig'
                 priority: 0
 
         'sylius_admin.admin_user.update.content.form.sections.personal_information':

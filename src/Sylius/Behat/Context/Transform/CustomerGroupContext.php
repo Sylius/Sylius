@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,11 +24,9 @@ final class CustomerGroupContext implements Context
     {
     }
 
-    /**
-     * @Transform :customerGroup
-     * @Transform /^group "([^"]+)"$/
-     * @Transform /^"([^"]+)" group$/
-     */
+    #[Transform(':customerGroup')]
+    #[Transform('/^group "([^"]+)"$/')]
+    #[Transform('/^"([^"]+)" group$/')]
     public function getCustomerGroupByName($customerGroupName)
     {
         $customerGroup = $this->customerGroupRepository->findOneBy(['name' => $customerGroupName]);

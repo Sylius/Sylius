@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\AdminBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\AdminBundle\Form\DataTransformer\ProductsToProductAssociationsTransformer;
@@ -24,6 +25,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ProductsToProductAssociationsTransformerTest extends TestCase
 {
     private FactoryInterface&MockObject $productAssociationFactoryMock;

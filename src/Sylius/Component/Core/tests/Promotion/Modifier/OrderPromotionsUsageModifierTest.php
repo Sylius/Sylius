@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Promotion\Modifier;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderPromotionsUsageModifierTest extends TestCase
 {
     private MockObject&OrderInterface $order;
@@ -55,8 +57,39 @@ final class OrderPromotionsUsageModifierTest extends TestCase
             $this->secondPromotion,
         ]));
         $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn(null);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(true);
+        $this->secondPromotion->method('isTrackUsage')->willReturn(true);
         $this->firstPromotion->expects($this->once())->method('incrementUsed');
         $this->secondPromotion->expects($this->once())->method('incrementUsed');
+
+        $this->orderPromotionsUsageModifier->increment($this->order);
+    }
+
+    public function testShouldNotIncrementUsageOfPromotionWithTrackUsageDisabled(): void
+    {
+        $this->order->expects($this->once())->method('getPromotions')->willReturn(new ArrayCollection([
+            $this->firstPromotion,
+            $this->secondPromotion,
+        ]));
+        $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn(null);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(false);
+        $this->secondPromotion->method('isTrackUsage')->willReturn(true);
+        $this->firstPromotion->expects($this->never())->method('incrementUsed');
+        $this->secondPromotion->expects($this->once())->method('incrementUsed');
+
+        $this->orderPromotionsUsageModifier->increment($this->order);
+    }
+
+    public function testShouldNotIncrementUsageOfPromotionCouponWithTrackUsageDisabled(): void
+    {
+        $this->order->expects($this->once())->method('getPromotions')->willReturn(new ArrayCollection([
+            $this->firstPromotion,
+        ]));
+        $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn($this->promotionCoupon);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(true);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(false);
+        $this->firstPromotion->expects($this->once())->method('incrementUsed');
+        $this->promotionCoupon->expects($this->never())->method('incrementUsed');
 
         $this->orderPromotionsUsageModifier->increment($this->order);
     }
@@ -68,8 +101,39 @@ final class OrderPromotionsUsageModifierTest extends TestCase
             $this->secondPromotion,
         ]));
         $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn(null);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(true);
+        $this->secondPromotion->method('isTrackUsage')->willReturn(true);
         $this->firstPromotion->expects($this->once())->method('decrementUsed');
         $this->secondPromotion->expects($this->once())->method('decrementUsed');
+
+        $this->orderPromotionsUsageModifier->decrement($this->order);
+    }
+
+    public function testShouldNotDecrementUsageOfPromotionWithTrackUsageDisabled(): void
+    {
+        $this->order->expects($this->once())->method('getPromotions')->willReturn(new ArrayCollection([
+            $this->firstPromotion,
+            $this->secondPromotion,
+        ]));
+        $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn(null);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(false);
+        $this->secondPromotion->method('isTrackUsage')->willReturn(true);
+        $this->firstPromotion->expects($this->never())->method('decrementUsed');
+        $this->secondPromotion->expects($this->once())->method('decrementUsed');
+
+        $this->orderPromotionsUsageModifier->decrement($this->order);
+    }
+
+    public function testShouldNotDecrementUsageOfPromotionCouponWithTrackUsageDisabled(): void
+    {
+        $this->order->expects($this->once())->method('getPromotions')->willReturn(new ArrayCollection([
+            $this->firstPromotion,
+        ]));
+        $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn($this->promotionCoupon);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(true);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(false);
+        $this->firstPromotion->expects($this->once())->method('decrementUsed');
+        $this->promotionCoupon->expects($this->never())->method('decrementUsed');
 
         $this->orderPromotionsUsageModifier->decrement($this->order);
     }
@@ -81,6 +145,9 @@ final class OrderPromotionsUsageModifierTest extends TestCase
             $this->secondPromotion,
         ]));
         $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn($this->promotionCoupon);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(true);
+        $this->secondPromotion->method('isTrackUsage')->willReturn(true);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(true);
         $this->firstPromotion->expects($this->once())->method('incrementUsed');
         $this->secondPromotion->expects($this->once())->method('incrementUsed');
         $this->promotionCoupon->expects($this->once())->method('incrementUsed');
@@ -96,6 +163,9 @@ final class OrderPromotionsUsageModifierTest extends TestCase
             $this->secondPromotion,
         ]));
         $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn($this->promotionCoupon);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(true);
+        $this->secondPromotion->method('isTrackUsage')->willReturn(true);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(true);
         $this->promotionCoupon->expects($this->once())->method('isReusableFromCancelledOrders')->willReturn(true);
         $this->firstPromotion->expects($this->once())->method('decrementUsed');
         $this->secondPromotion->expects($this->once())->method('decrementUsed');
@@ -112,6 +182,9 @@ final class OrderPromotionsUsageModifierTest extends TestCase
             $this->secondPromotion,
         ]));
         $this->order->expects($this->once())->method('getPromotionCoupon')->willReturn($this->promotionCoupon);
+        $this->firstPromotion->method('isTrackUsage')->willReturn(true);
+        $this->secondPromotion->method('isTrackUsage')->willReturn(true);
+        $this->promotionCoupon->method('isTrackUsage')->willReturn(true);
         $this->promotionCoupon->expects($this->once())->method('isReusableFromCancelledOrders')->willReturn(false);
         $this->firstPromotion->expects($this->once())->method('decrementUsed');
         $this->secondPromotion->expects($this->once())->method('decrementUsed');

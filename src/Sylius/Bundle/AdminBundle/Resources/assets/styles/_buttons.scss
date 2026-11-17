@@ -2,3 +2,12 @@
   min-height: 44px;
   min-width: 44px;
 }
+
+.btn-ghost-secondary,
+.btn-ghost.btn-secondary {
+  --tblr-btn-hover-color: var(--tblr-body-color);
+  --tblr-btn-hover-bg: var(--tblr-active-bg);
+  --tblr-btn-hover-border-color: transparent;
+  --tblr-btn-active-color: var(--tblr-body-color);
+  --tblr-btn-active-bg: var(--tblr-active-bg);
+}

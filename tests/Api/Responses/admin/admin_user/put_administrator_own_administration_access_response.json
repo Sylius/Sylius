@@ -1,0 +1,17 @@
+{
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
+    "hydra:title": "An error occurred",
+    "hydra:description": "administrationAccess: You cannot revoke your own administration access.",
+    "status": 422,
+    "violations": [
+        {
+            "propertyPath": "administrationAccess",
+            "message": "You cannot revoke your own administration access.",
+            "code": null
+        }
+    ],
+    "detail": "administrationAccess: You cannot revoke your own administration access.",
+    "type": "\/validation_errors\/@string@"
+}

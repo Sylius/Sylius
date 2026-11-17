@@ -1,0 +1,23 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+use Behat\Config\Config;
+
+return (new Config())
+    ->import([
+        'cli/canceling_unpaid_orders.php',
+        'cli/change_admin_password.php',
+        'cli/create_admin_user.php',
+        'cli/installer.php',
+    ])
+;

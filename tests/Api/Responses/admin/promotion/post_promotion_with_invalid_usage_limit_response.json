@@ -1,0 +1,17 @@
+{
+    "@context": "\/api\/v2\/contexts\/@string@.startsWith('ConstraintViolation')",
+    "@id": "\/api\/v2\/validation_errors\/@string@",
+    "@type": "@string@.startsWith('ConstraintViolation')",
+    "hydra:title": "An error occurred",
+    "hydra:description": "usageLimit: Promotion usage limit must be at least 1.",
+    "status": 422,
+    "violations": [
+        {
+            "propertyPath": "usageLimit",
+            "message": "Promotion usage limit must be at least 1.",
+            "code": "@string@"
+        }
+    ],
+    "detail": "usageLimit: Promotion usage limit must be at least 1.",
+    "type": "\/validation_errors\/@string@"
+}

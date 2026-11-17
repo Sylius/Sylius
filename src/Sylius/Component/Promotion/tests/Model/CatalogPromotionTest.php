@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Promotion\Model;
 
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Model\CatalogPromotion;
@@ -21,6 +22,7 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CatalogPromotionTest extends TestCase
 {
     private CatalogPromotionScopeInterface&MockObject $catalogPromotionScope;

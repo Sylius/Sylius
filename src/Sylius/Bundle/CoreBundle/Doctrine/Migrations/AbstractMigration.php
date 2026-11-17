@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\Migrations;
 
+use Doctrine\DBAL\Platforms\AbstractMySQLPlatform;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration as BaseAbstractMigration;
 
@@ -45,19 +46,7 @@ abstract class AbstractMigration extends BaseAbstractMigration implements Migrat
 
     protected function isMySql(): bool
     {
-        $platform = $this->connection->getDatabasePlatform();
-
-        /** @phpstan-ignore-next-line */
-        if ($this->classExistsCaseSensitive(\Doctrine\DBAL\Platforms\MySQLPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySQLPlatform::class, true)) {
-            return true;
-        }
-
-        /** @phpstan-ignore-next-line */
-        if ($this->classExistsCaseSensitive(\Doctrine\DBAL\Platforms\MySqlPlatform::class) && is_a($platform, \Doctrine\DBAL\Platforms\MySqlPlatform::class, true)) {
-            return true;
-        }
-
-        return false;
+        return $this->connection->getDatabasePlatform() instanceof AbstractMySQLPlatform;
     }
 
     /** @deprecated */

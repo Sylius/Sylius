@@ -43,7 +43,7 @@ final class CatalogPromotionActionTypeValidator extends ConstraintValidator
         }
 
         if (!in_array($type, $this->actionTypes, true)) {
-            $this->context->buildViolation($constraint->invalidType)
+            $this->context->buildViolation($constraint->invalidTypeMessage)
                 ->setParameter('{{ available_action_types }}', implode(', ', $this->actionTypes))
                 ->atPath('type')
                 ->addViolation()

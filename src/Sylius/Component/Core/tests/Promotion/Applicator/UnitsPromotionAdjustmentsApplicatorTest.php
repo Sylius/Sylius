@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Promotion\Applicator;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
@@ -29,6 +30,7 @@ use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicat
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UnitsPromotionAdjustmentsApplicatorTest extends TestCase
 {
     private AdjustmentFactoryInterface&MockObject $adjustmentFactory;

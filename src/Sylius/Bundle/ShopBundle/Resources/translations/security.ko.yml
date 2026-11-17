@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Sylius Sp. z o.o.
+
+sylius:
+    user:
+        email_not_verified: '계정이 아직 인증되지 않았습니다. 이메일 받은 편지함을 확인해 주세요.'

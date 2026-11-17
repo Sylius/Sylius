@@ -38,7 +38,7 @@ final class PromotionRuleTypeValidator extends ConstraintValidator
         }
 
         if (!array_key_exists($value->getType(), $this->ruleTypes)) {
-            $this->context->buildViolation($constraint->invalidType)
+            $this->context->buildViolation($constraint->invalidTypeMessage)
                 ->setParameter('{{ available_rule_types }}', implode(', ', array_keys($this->ruleTypes)))
                 ->atPath('type')
                 ->addViolation();

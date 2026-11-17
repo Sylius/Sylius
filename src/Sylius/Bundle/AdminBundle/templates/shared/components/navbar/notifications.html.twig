@@ -26,18 +26,7 @@
                 {% else %}
                     <div class="list-group list-group-flush list-group-hoverable">
                         {% for notification in notifications %}
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="status-dot status-dot-animated bg-red d-block"></span>
-                                    </div>
-                                    <div class="col">
-                                        <div class="d-block mt-n1">
-                                            {{ notification.message|trans }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% hook 'notifications.item' with { notification } %}
                         {% endfor %}
                     </div>
                 {% endif %}

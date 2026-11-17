@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\Telemetry\Mapper;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Telemetry\Mapper\ValueRangeMapper;
 
 final class ValueRangeMapperTest extends TestCase
 {
-    /**
-     * @dataProvider gmvDataProvider
-     */
+    #[DataProvider('gmvDataProvider')]
     public function test_it_maps_gmv_to_correct_range(float|int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapGmv($value));
@@ -48,9 +47,7 @@ final class ValueRangeMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider aovDataProvider
-     */
+    #[DataProvider('aovDataProvider')]
     public function test_it_maps_aov_to_correct_range(float|int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapAov($value));
@@ -83,25 +80,19 @@ final class ValueRangeMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider countDataProvider
-     */
+    #[DataProvider('countDataProvider')]
     public function test_it_maps_products_count_to_correct_range(int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapProductsCount($value));
     }
 
-    /**
-     * @dataProvider countDataProvider
-     */
+    #[DataProvider('countDataProvider')]
     public function test_it_maps_variants_count_to_correct_range(int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapVariantsCount($value));
     }
 
-    /**
-     * @dataProvider countDataProvider
-     */
+    #[DataProvider('countDataProvider')]
     public function test_it_maps_virtual_variants_count_to_correct_range(int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapVirtualVariantsCount($value));
@@ -131,17 +122,13 @@ final class ValueRangeMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider customerOrderDataProvider
-     */
+    #[DataProvider('customerOrderDataProvider')]
     public function test_it_maps_customers_count_to_correct_range(int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapCustomersCount($value));
     }
 
-    /**
-     * @dataProvider customerOrderDataProvider
-     */
+    #[DataProvider('customerOrderDataProvider')]
     public function test_it_maps_orders_count_to_correct_range(int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapOrdersCount($value));
@@ -165,9 +152,7 @@ final class ValueRangeMapperTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider avgItemsDataProvider
-     */
+    #[DataProvider('avgItemsDataProvider')]
     public function test_it_maps_avg_items_to_correct_range(float|int $value, string $expectedRange): void
     {
         self::assertSame($expectedRange, ValueRangeMapper::mapAvgItems($value));

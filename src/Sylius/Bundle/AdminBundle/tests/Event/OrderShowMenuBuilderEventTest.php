@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\AdminBundle\Event;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
@@ -22,6 +23,7 @@ use Sylius\Bundle\AdminBundle\Event\OrderShowMenuBuilderEvent;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Sylius\Component\Core\Model\OrderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderShowMenuBuilderEventTest extends TestCase
 {
     private FactoryInterface&MockObject $factory;

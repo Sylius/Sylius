@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Symfony\Component\BrowserKit\Exception\BadMethodCallException;
@@ -27,49 +29,37 @@ final class LoginContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to log in
-     */
+    #[When('I want to log in')]
     public function iWantToLogIn(): void
     {
         $this->apiSecurityClient->prepareLoginRequest();
     }
 
-    /**
-     * @When I specify the username as :username
-     */
+    #[When('I specify the username as :username')]
     public function iSpecifyTheUsername(string $username): void
     {
         $this->apiSecurityClient->setEmail($username);
     }
 
-    /**
-     * @When I specify the password as :password
-     */
+    #[When('I specify the password as :password')]
     public function iSpecifyThePasswordAs(string $password): void
     {
         $this->apiSecurityClient->setPassword($password);
     }
 
-    /**
-     * @When I log in
-     */
+    #[When('I log in')]
     public function iLogIn(): void
     {
         $this->apiSecurityClient->call();
     }
 
-    /**
-     * @Then I should be logged in
-     */
+    #[Then('I should be logged in')]
     public function iShouldBeLoggedIn(): void
     {
         Assert::true($this->apiSecurityClient->isLoggedIn(), 'Admin should be logged in, but they are not.');
     }
 
-    /**
-     * @Then I should not be logged in
-     */
+    #[Then('I should not be logged in')]
     public function iShouldNotBeLoggedIn(): void
     {
         try {
@@ -79,26 +69,20 @@ final class LoginContext implements Context
         }
     }
 
-    /**
-     * @Then I should be notified about bad credentials
-     */
+    #[Then('I should be notified about bad credentials')]
     public function iShouldBeNotifiedAboutBadCredentials(): void
     {
         Assert::same($this->apiSecurityClient->getErrorMessage(), 'Invalid credentials.');
     }
 
-    /**
-     * @Then I should be able to log in as :username authenticated by :password password
-     */
+    #[Then('I should be able to log in as :username authenticated by :password password')]
     public function iShouldBeAbleToLogInAsAuthenticatedByPassword(string $username, string $password): void
     {
         $this->logIn($username, $password);
         $this->iShouldBeLoggedIn();
     }
 
-    /**
-     * @Then I should not be able to log in as :username authenticated by :password password
-     */
+    #[Then('I should not be able to log in as :username authenticated by :password password')]
     public function iShouldNotBeAbleToLogInAsAuthenticatedByPassword(string $username, string $password): void
     {
         $this->logIn($username, $password);

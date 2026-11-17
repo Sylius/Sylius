@@ -20,6 +20,8 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\HttpOperation;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\QueryExtension\Shop\Product\EnabledVariantsExtension;
@@ -30,6 +32,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class EnabledVariantsExtensionTest extends TestCase
 {
     private EnabledVariantsExtension $extension;
@@ -85,7 +88,7 @@ final class EnabledVariantsExtensionTest extends TestCase
         );
     }
 
-    /** @dataProvider getGetOperations */
+    #[DataProvider('getGetOperations')]
     public function test_it_filters_out_disabled_variants_on_collection(HttpOperation $operation): void
     {
         $shopApiSection = $this->createMock(ShopApiSection::class);

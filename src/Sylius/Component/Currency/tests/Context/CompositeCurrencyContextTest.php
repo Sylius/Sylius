@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Currency\Context;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Currency\Context\CompositeCurrencyContext;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CompositeCurrencyContextTest extends TestCase
 {
     private CompositeCurrencyContext $compositeCurrencyContext;
