@@ -618,6 +618,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     {
         $this->skipUnlessDbal3();
 
+        $this->container->setParameter('kernel.environment', 'dev');
         $this->container->registerExtension(new DoctrineExtension());
 
         $this->load();
@@ -633,6 +634,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     {
         $this->skipUnlessDbal3();
 
+        $this->container->setParameter('kernel.environment', 'dev');
         $this->container->registerExtension(new DoctrineExtension());
         $this->container->loadFromExtension('doctrine', [
             'dbal' => ['connections' => ['main' => [], 'legacy' => []]],
@@ -656,6 +658,7 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
             $this->markTestSkipped('Doctrine type comments are disabled only on DBAL 3.');
         }
 
+        $this->container->setParameter('kernel.environment', 'dev');
         $this->container->registerExtension(new DoctrineExtension());
 
         $this->load();
