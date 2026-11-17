@@ -26,7 +26,7 @@ use Twig\Environment;
 
 final class DashboardControllerTest extends TestCase
 {
-    private MockObject&ChannelRepositoryInterface $channelRepository;
+    private ChannelRepositoryInterface&MockObject $channelRepository;
 
     private Environment&MockObject $templatingEngine;
 
