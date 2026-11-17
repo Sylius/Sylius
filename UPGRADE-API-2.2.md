@@ -1,24 +1,28 @@
 # UPGRADE FROM `2.2.12` TO `2.2.13`
 
-### Eager loading is no longer forced on Sylius operations
+### Eager loading can be disabled on Sylius read operations
 
 API Platform's `api_platform.eager_loading.force_eager` option defaults to `true`, which makes the
 `EagerLoadingExtension` fetch-join every relation from the normalization groups. On resources serializing several
 independent to-many collections, such as `GET /api/v2/admin/products`, the number of fetched rows is the product of
 the collection sizes, and collection endpoints become unusable on real catalogs.
 
-Sylius read operations (`Get` and `GetCollection` named `sylius_api_*`) that do not define `forceEager` explicitly now
-get `forceEager: false`, so only relations mapped with `fetch="EAGER"` are joined and the remaining ones are loaded
-lazily. Responses are unchanged. Write operations and resources not provided by Sylius keep the global API Platform
-setting.
-
-To restore the previous behaviour, use:
+A new `sylius_api.eager_loading.force_eager` option sets `forceEager` on Sylius read operations (`Get` and
+`GetCollection` named `sylius_api_*`) that do not define it explicitly. It defaults to `true`, so the behaviour does
+not change. To stop forcing eager loading on these operations, use:
 
 ```yaml
 sylius_api:
     eager_loading:
-        force_eager: true
+        force_eager: false
 ```
+
+Only relations mapped with `fetch="EAGER"` are then joined and the remaining ones are loaded lazily. Responses are
+unchanged. Write operations and resources not provided by Sylius keep the global API Platform setting.
+
+Note that the option takes precedence over the global `api_platform.eager_loading.force_eager` setting for Sylius
+read operations. If you have set the global option to `false`, set `sylius_api.eager_loading.force_eager` to `false`
+as well to keep that behaviour for Sylius operations.
 
 To change it for a single operation, set the `forceEager` attribute on that operation in its resource configuration.
 
