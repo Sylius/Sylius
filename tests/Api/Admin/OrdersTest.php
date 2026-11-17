@@ -122,6 +122,41 @@ final class OrdersTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/order/get_orders_for_customer');
     }
 
+    #[Test]
+    public function it_gets_orders_filtered_by_number(): void
+    {
+        $this->loadFixturesFromFiles([
+            'authentication/api_administrator.yaml',
+            'channel/channel.yaml',
+            'cart.yaml',
+            'country.yaml',
+            'shipping_method.yaml',
+            'payment_method.yaml',
+        ]);
+
+        $this->placeOrder('first_token', 'first@example.com');
+        $this->placeOrder('second_token', 'second@example.com');
+
+        $this->requestGet(uri: '/api/v2/admin/orders', queryParameters: ['order[number]' => 'ASC']);
+        $orders = json_decode($this->client->getResponse()->getContent(), true)['hydra:member'];
+        $this->assertCount(2, $orders);
+        $firstNumber = $orders[0]['number'];
+        $secondNumber = $orders[1]['number'];
+
+        $this->requestGet(uri: '/api/v2/admin/orders', queryParameters: ['number' => $firstNumber]);
+        $filtered = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertSame(1, $filtered['hydra:totalItems']);
+        $this->assertSame($firstNumber, $filtered['hydra:member'][0]['number']);
+
+        $this->requestGet(uri: '/api/v2/admin/orders', queryParameters: ['number' => substr($secondNumber, -2)]);
+        $filtered = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertSame(1, $filtered['hydra:totalItems']);
+        $this->assertSame($secondNumber, $filtered['hydra:member'][0]['number']);
+
+        $this->requestGet(uri: '/api/v2/admin/orders', queryParameters: ['number' => 'unknown']);
+        $this->assertSame(0, json_decode($this->client->getResponse()->getContent(), true)['hydra:totalItems']);
+    }
+
     #[DataProvider('provideOrderFilterDates')]
     #[Test]
     public function it_gets_orders_by_period(
