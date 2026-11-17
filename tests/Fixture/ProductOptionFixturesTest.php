@@ -22,6 +22,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class ProductOptionFixturesTest extends KernelTestCase
@@ -39,9 +40,10 @@ final class ProductOptionFixturesTest extends KernelTestCase
 
         $suite = new Suite('test');
         $suite->addListener($listenerRegistry->getListener('orm_purger'), ['mode' => 'delete', 'exclude' => [], 'managers' => [null]]);
-        $suite->addFixture($fixtureRegistry->getFixture('locale'), ['locales' => [], 'load_default_locale' => true]);
+        $suite->addFixture($fixtureRegistry->getFixture('locale'), ['locales' => ['es_ES'], 'load_default_locale' => true]);
         $suite->addFixture($fixtureRegistry->getFixture('taxon'), ['custom' => ['books' => ['name' => 'Books', 'code' => 'BOOKS']]]);
-        $suite->addFixture($fixtureRegistry->getFixture('product_option'), ['custom' => [
+        $productOptionFixture = $fixtureRegistry->getFixture('product_option');
+        $suite->addFixture($productOptionFixture, (new Processor())->processConfiguration($productOptionFixture, [['custom' => [
             'dress_size' => [
                 'name' => 'Dress height',
                 'code' => 'dress_height',
@@ -63,7 +65,7 @@ final class ProductOptionFixturesTest extends KernelTestCase
                     ],
                 ],
             ],
-        ]]);
+        ]]]));
         $suite->addFixture($fixtureRegistry->getFixture('product'), ['custom' => [
             'sunshine_strappy_delight' => [
                 'name' => 'Sunshine Strappy Delight',
@@ -104,6 +106,29 @@ final class ProductOptionFixturesTest extends KernelTestCase
             'dress_height_regular' => 'Moyenne',
             'dress_height_tall' => 'Grande',
         ]);
+
+        $this->assertTranslatedValuesOfOptionWithCode($product, 'dress_height', 'es_ES', [
+            'dress_height_petite' => 'Petite',
+            'dress_height_regular' => 'Regular',
+            'dress_height_tall' => 'Tall',
+        ]);
+    }
+
+    private function assertTranslatedValuesOfOptionWithCode(ProductInterface $product, string $code, string $locale, array $expectedValues): void
+    {
+        foreach ($product->getOptions() as $productOption) {
+            if ($code !== $productOption->getCode()) {
+                continue;
+            }
+
+            $values = [];
+            foreach ($productOption->getValues() as $productOptionValue) {
+                $this->assertTrue($productOptionValue->getTranslations()->containsKey($locale));
+                $values[$productOptionValue->getCode()] = $productOptionValue->getTranslations()->get($locale)->getValue();
+            }
+
+            $this->assertSame($expectedValues, $values);
+        }
     }
 
     private function assertValuesOfOptionWithCode(ProductInterface $product, string $code, string $locale, array $expectedValues): void
