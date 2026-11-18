@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Page\Shop\PaymentRequest\PaymentMethodNotifyPageInterface;
 use Sylius\Behat\Page\Shop\PaymentRequest\PaymentRequestNotifyPage;
@@ -32,9 +35,7 @@ final readonly class PaymentRequestContext implements Context
     ) {
     }
 
-    /**
-     * @When I call the payment method notify page with the code :paymentMethod
-     */
+    #[When('I call the payment method notify page with the code :paymentMethod')]
     public function iCallThePaymentMethodNotifyPageWithTheCode(string $paymentMethodCode): void
     {
         $this->paymentMethodNotifyPage->openWithClient(
@@ -43,9 +44,7 @@ final readonly class PaymentRequestContext implements Context
         );
     }
 
-    /**
-     * @When /^I call the payment request notify page for this payment request$/
-     */
+    #[When('/^I call the payment request notify page for this payment request$/')]
     public function iCallThePaymentRequestNotifyPageForThisPaymentRequest(): void
     {
         /** @var PaymentRequestInterface[] $paymentRequests */
@@ -63,9 +62,7 @@ final readonly class PaymentRequestContext implements Context
         );
     }
 
-    /**
-     * @Then a payment request with action :action for payment method :paymentMethod should have state :state
-     */
+    #[Then('a payment request with action :action for payment method :paymentMethod should have state :state')]
     public function aPaymentRequestWithActionForPaymentMethodShouldHaveState(string $action, PaymentMethodInterface $paymentMethod, string $state): void
     {
         $this->objectManager->clear(); // avoiding doctrine cache
@@ -86,9 +83,7 @@ final readonly class PaymentRequestContext implements Context
         Assert::eq($paymentRequest->getState(), $state);
     }
 
-    /**
-     * @Then /^no payment request with "([^"]*)" action should exists$/
-     */
+    #[Then('/^no payment request with "([^"]*)" action should exists$/')]
     public function noPaymentRequestWithActionShouldExists(string $action, ?string $state = null): void
     {
         /** @var PaymentRequestInterface[] $paymentRequests */
@@ -101,9 +96,7 @@ final readonly class PaymentRequestContext implements Context
         Assert::isEmpty($paymentRequests);
     }
 
-    /**
-     * @Given /^the response content should be empty$/
-     */
+    #[Given('/^the response content should be empty$/')]
     public function theResponseContentShouldBeEmpty(): void
     {
         $response = $this->paymentMethodNotifyPage->getClient()->getInternalResponse();
@@ -111,9 +104,7 @@ final readonly class PaymentRequestContext implements Context
         Assert::isEmpty($response->getContent());
     }
 
-    /**
-     * @Given /^the response status code should be (\d+)$/
-     */
+    #[Given('/^the response status code should be (\d+)$/')]
     public function theResponseStatusCodeShouldBe(int $statusCode): void
     {
         $response = $this->paymentMethodNotifyPage->getClient()->getInternalResponse();

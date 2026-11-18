@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Taxation\Calculator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -20,6 +21,7 @@ use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Calculator\DefaultCalculator;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class DefaultCalculatorTest extends TestCase
 {
     /** @var TaxRateInterface&MockObject */

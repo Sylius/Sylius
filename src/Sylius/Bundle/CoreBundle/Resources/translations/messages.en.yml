@@ -50,6 +50,9 @@ sylius:
                 strategy: 'To verify your email address - click the link below'
                 subject: 'Email address verification'
     form:
+        admin_user:
+            administration_access: Administration access
+            api_access: API access
         block:
             body: Body
             id: ID

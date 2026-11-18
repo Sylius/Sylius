@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Customer\Statistics;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Customer\Statistics\CustomerStatistics;
 use Sylius\Component\Core\Customer\Statistics\PerChannelCustomerStatistics;
 use Sylius\Component\Core\Model\ChannelInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerStatisticsTest extends TestCase
 {
     private ChannelInterface&MockObject $channel;

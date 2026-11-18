@@ -55,4 +55,6 @@ sylius:
         type: 'Вид'
         username: 'Корисничко име'
         value: 'Вредност'
+        resend_verification_email: 'Повторно испрати верификациски е-маил'
+        verification_email_not_received: 'Verification email not received?'
         zone: 'Зона'

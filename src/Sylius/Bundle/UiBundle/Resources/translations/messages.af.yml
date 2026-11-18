@@ -43,6 +43,7 @@ sylius:
         province: 'Provinsie'
         provinces: 'Provinsies'
         ready: 'Gereed'
+        resend_verification_email: 'Stuur verifikasie-e-pos weer'
         returned: 'Teruggestuur'
         sales: 'Verkope'
         sales_this_month: 'Verkope'
@@ -54,4 +55,5 @@ sylius:
         translations: 'Vertalings'
         type: 'Tipe'
         values: 'Waardes'
+        verification_email_not_received: 'Verification email not received?'
         zone: 'Area'

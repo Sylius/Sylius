@@ -24,7 +24,7 @@ final readonly class ArchivingShippingMethodApplicator implements ArchivingShipp
 
     public function archive(ShippingMethodInterface $data): ShippingMethodInterface
     {
-        $data->setArchivedAt($this->clock->now());
+        $data->setArchivedAt(\DateTime::createFromImmutable($this->clock->now()));
 
         return $data;
     }

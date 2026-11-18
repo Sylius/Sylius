@@ -18,11 +18,14 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Doctrine\ORM\Filter\TranslationOrderNameAndLocaleFilter;
 use Sylius\Component\Core\Model\ProductInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TranslationOrderNameAndLocaleFilterTest extends TestCase
 {
     /** @var MockObject&QueryBuilder */
@@ -45,7 +48,7 @@ final class TranslationOrderNameAndLocaleFilterTest extends TestCase
         $this->classMetadata = $this->createMock(ClassMetadata::class);
     }
 
-    /** @test */
+    #[Test]
     public function it_applies_ascending_order_by_translation_name(): void
     {
         $this->configureQueryBuilderWithTranslationsAssociation();
@@ -60,7 +63,7 @@ final class TranslationOrderNameAndLocaleFilterTest extends TestCase
         $this->applyFilter('asc');
     }
 
-    /** @test */
+    #[Test]
     public function it_applies_descending_order_by_translation_name(): void
     {
         $this->configureQueryBuilderWithTranslationsAssociation();
@@ -75,7 +78,7 @@ final class TranslationOrderNameAndLocaleFilterTest extends TestCase
         $this->applyFilter('desc');
     }
 
-    /** @test */
+    #[Test]
     public function it_applies_order_with_uppercase_direction(): void
     {
         $this->configureQueryBuilderWithTranslationsAssociation();
@@ -90,7 +93,7 @@ final class TranslationOrderNameAndLocaleFilterTest extends TestCase
         $this->applyFilter('DESC');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_apply_order_with_invalid_direction(): void
     {
         $this->configureQueryBuilderWithTranslationsAssociation();
@@ -103,7 +106,7 @@ final class TranslationOrderNameAndLocaleFilterTest extends TestCase
         $this->applyFilter('INVALID');
     }
 
-    /** @test */
+    #[Test]
     public function it_does_not_apply_order_with_dql_injection_payload(): void
     {
         $this->configureQueryBuilderWithTranslationsAssociation();

@@ -25,4 +25,6 @@ sylius:
         scope: 'Skop'
         select: 'Pilih'
         type: 'Jenis'
+        resend_verification_email: 'Hantar semula e-mel pengesahan'
+        verification_email_not_received: 'Verification email not received?'
         zone: 'Zon'

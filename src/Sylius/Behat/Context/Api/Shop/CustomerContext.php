@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -45,9 +47,7 @@ final class CustomerContext implements Context
     ) {
     }
 
-    /**
-     * @When I want to modify my profile
-     */
+    #[When('I want to modify my profile')]
     public function iWantToModifyMyProfile(): void
     {
         /** @var ShopUserInterface $shopUser */
@@ -57,9 +57,7 @@ final class CustomerContext implements Context
         $this->client->buildUpdateRequest(Resources::CUSTOMERS, (string) $customer->getId());
     }
 
-    /**
-     * @When I want to change my password
-     */
+    #[When('I want to change my password')]
     public function iWantToChangeMyPassword(): void
     {
         /** @var ShopUserInterface $shopUser */
@@ -70,84 +68,64 @@ final class CustomerContext implements Context
         $this->client->buildCustomUpdateRequest(sprintf('customers/%s/password', $customer->getId()));
     }
 
-    /**
-     * @When I specify the first name as :firstName
-     * @When I remove the first name
-     */
+    #[When('I specify the first name as :firstName')]
+    #[When('I remove the first name')]
     public function iSpecifyTheFirstName(string $firstName = ''): void
     {
         $this->client->addRequestData('firstName', $firstName);
     }
 
-    /**
-     * @When I specify the :firstOrLast name as null value
-     */
+    #[When('I specify the :firstOrLast name as null value')]
     public function iSpecifyTheFirstOrLastNameAsNull(string $firstOrLast): void
     {
         $this->client->addRequestData($firstOrLast . 'Name', null);
     }
 
-    /**
-     * @When I specify the gender as a wrong value
-     */
+    #[When('I specify the gender as a wrong value')]
     public function iSpecifyTheFirstNameAsWrongValue(): void
     {
         $this->client->addRequestData('gender', 'wrong_value');
     }
 
-    /**
-     * @When I specify the phone number as huge value
-     */
+    #[When('I specify the phone number as huge value')]
     public function iSpecifyThePhoneNumberAsHugeValue(): void
     {
         $this->client->addRequestData('phoneNumber', str_repeat('1', 256));
     }
 
-    /**
-     * @When I specify the last name as :lastName
-     * @When I remove the last name
-     */
+    #[When('I specify the last name as :lastName')]
+    #[When('I remove the last name')]
     public function iSpecifyTheLastName(string $lastName = ''): void
     {
         $this->client->addRequestData('lastName', $lastName);
     }
 
-    /**
-     * @When I specify the customer email as :email
-     * @When I remove the customer email
-     */
+    #[When('I specify the customer email as :email')]
+    #[When('I remove the customer email')]
     public function iSpecifyCustomerTheEmail(string $email = ''): void
     {
         $this->client->addRequestData('email', $email);
     }
 
-    /**
-     * @When I specify the current password as :password
-     */
+    #[When('I specify the current password as :password')]
     public function iSpecifyTheCurrentPasswordAs(string $password): void
     {
         $this->client->addRequestData('currentPassword', $password);
     }
 
-    /**
-     * @When I specify the new password as :password
-     */
+    #[When('I specify the new password as :password')]
     public function iSpecifyTheNewPasswordAs(string $password): void
     {
         $this->client->addRequestData('newPassword', $password);
     }
 
-    /**
-     * @When I confirm this password as :password
-     */
+    #[When('I confirm this password as :password')]
     public function iSpecifyTheConfirmationPasswordAs(string $password): void
     {
         $this->client->addRequestData('confirmNewPassword', $password);
     }
 
-    /**
-     * @When I change password from :oldPassword to :newPassword
-     */
+    #[When('I change password from :oldPassword to :newPassword')]
     public function iChangePasswordTo(string $oldPassword, string $newPassword): void
     {
         $this->client->setRequestData([
@@ -157,17 +135,13 @@ final class CustomerContext implements Context
         ]);
     }
 
-    /**
-     * @When I subscribe to the newsletter
-     */
+    #[When('I subscribe to the newsletter')]
     public function iSubscribeToTheNewsletter(): void
     {
         $this->client->addRequestData('subscribedToNewsletter', true);
     }
 
-    /**
-     * @Then I should be subscribed to the newsletter
-     */
+    #[Then('I should be subscribed to the newsletter')]
     public function iShouldBeSubscribedToTheNewsletter(): void
     {
         $response = $this->client->getLastResponse();
@@ -175,27 +149,21 @@ final class CustomerContext implements Context
         Assert::true($this->responseChecker->getValue($response, 'subscribedToNewsletter'));
     }
 
-    /**
-     * @When /^(I) try to verify my account using the link from this email$/
-     */
+    #[When('/^(I) try to verify my account using the link from this email$/')]
     public function iTryToVerifyMyAccountUsingTheLinkFromEmail(ShopUserInterface $user): void
     {
         $this->verificationToken = $user->getEmailVerificationToken();
         $this->verifyAccount($this->verificationToken);
     }
 
-    /**
-     * @When I (try to )verify using :token token
-     */
+    #[When('I (try to )verify using :token token')]
     public function iTryToVerifyUsing(string $token): void
     {
         $this->verificationToken = $token;
         $this->verifyAccount($token);
     }
 
-    /**
-     * @When I resend the verification email
-     */
+    #[When('I resend the verification email')]
     public function iResendVerificationEmail(): void
     {
         /** @var ShopUserInterface $user */
@@ -204,9 +172,15 @@ final class CustomerContext implements Context
         $this->resendVerificationEmail($user->getEmail());
     }
 
-    /**
-     * @When I use the verification link from the first email to verify
-     */
+    #[When('I resend the verification email to :email')]
+    public function iResendTheVerificationEmailTo(string $email): void
+    {
+        $request = $this->requestFactory->create('shop', 'customers/verification-request', '');
+        $request->setContent(['email' => $email]);
+        $this->client->executeCustomRequest($request);
+    }
+
+    #[When('I use the verification link from the first email to verify')]
     public function iUseVerificationLinkFromFirstEmailToVerify(): void
     {
         $token = $this->sharedStorage->get('verification_token');
@@ -214,18 +188,14 @@ final class CustomerContext implements Context
         $this->verifyAccount($token);
     }
 
-    /**
-     * @When I register with email :email and password :password
-     */
+    #[When('I register with email :email and password :password')]
     public function iRegisterWithEmailAndPassword(string $email, string $password): void
     {
         $this->registerAccount($email, $password);
         $this->loginContext->iLogInAsWithPassword($email, $password);
     }
 
-    /**
-     * @Then I should be notified that the verification email has been sent
-     */
+    #[Then('I should be notified that the verification email has been sent')]
     public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
     {
         $response = $this->client->getLastResponse();
@@ -235,10 +205,14 @@ final class CustomerContext implements Context
         );
     }
 
-    /**
-     * @Then my email should be :email
-     * @Then my email should still be :email
-     */
+    #[Then('I should be notified that the verification email has been sent to the provided address')]
+    public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSentToTheProvidedAddress(): void
+    {
+        Assert::same($this->client->getLastResponse()->getStatusCode(), 202);
+    }
+
+    #[Then('my email should be :email')]
+    #[Then('my email should still be :email')]
     public function myEmailShouldBe(string $email): void
     {
         /** @var ShopUserInterface $shopUser */
@@ -251,10 +225,8 @@ final class CustomerContext implements Context
         Assert::true($this->responseChecker->hasValue($response, 'email', $email));
     }
 
-    /**
-     * @Then my name should be :name
-     * @Then my name should still be :name
-     */
+    #[Then('my name should be :name')]
+    #[Then('my name should still be :name')]
     public function myNameShouldBe(string $name): void
     {
         /** @var ShopUserInterface $shopUser */
@@ -265,9 +237,7 @@ final class CustomerContext implements Context
         Assert::true($this->responseChecker->hasValue($response, 'fullName', $name));
     }
 
-    /**
-     * @Then my gender should still be :gender
-     */
+    #[Then('my gender should still be :gender')]
     public function myGenderShouldBe(string $gender): void
     {
         /** @var ShopUserInterface $shopUser */
@@ -278,9 +248,7 @@ final class CustomerContext implements Context
         Assert::true($this->responseChecker->hasValue($response, 'gender', $gender));
     }
 
-    /**
-     * @Then my phone number should still be :phoneNumber
-     */
+    #[Then('my phone number should still be :phoneNumber')]
     public function myPhoneNumberShouldBe(string $phoneNumber): void
     {
         /** @var ShopUserInterface $shopUser */
@@ -291,9 +259,7 @@ final class CustomerContext implements Context
         Assert::true($this->responseChecker->hasValue($response, 'phoneNumber', $phoneNumber));
     }
 
-    /**
-     * @Then I should be notified that the first name is required
-     */
+    #[Then('I should be notified that the first name is required')]
     public function iShouldBeNotifiedThatFirstNameIsRequired(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
@@ -302,9 +268,7 @@ final class CustomerContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be (also) notified that the :firstOrLast name needs to be provided
-     */
+    #[Then('I should be (also) notified that the :firstOrLast name needs to be provided')]
     public function iShouldBeNotifiedThatFirstOrLastNameNeedsToBeProvided(string $firstOrLast): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
@@ -313,9 +277,7 @@ final class CustomerContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that my gender is invalid
-     */
+    #[Then('I should be notified that my gender is invalid')]
     public function iShouldBeNotifiedThatGenderIsInvalid(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
@@ -324,9 +286,7 @@ final class CustomerContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that the phone number is too long
-     */
+    #[Then('I should be notified that the phone number is too long')]
     public function iShouldBeNotifiedThatThePhoneNumberIsTooLong(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
@@ -335,9 +295,7 @@ final class CustomerContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that the last name is required
-     */
+    #[Then('I should be notified that the last name is required')]
     public function iShouldBeNotifiedThatLastNameIsRequired(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
@@ -346,9 +304,7 @@ final class CustomerContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that the email is required
-     */
+    #[Then('I should be notified that the email is required')]
     public function iShouldBeNotifiedThatEmailIsRequired(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
@@ -357,9 +313,7 @@ final class CustomerContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that the email is already used
-     */
+    #[Then('I should be notified that the email is already used')]
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
@@ -368,9 +322,7 @@ final class CustomerContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that the email is invalid
-     */
+    #[Then('I should be notified that the email is invalid')]
     public function iShouldBeNotifiedThatEmailIsInvalid(): void
     {
         Assert::true($this->isViolationWithMessageInResponse(
@@ -379,9 +331,7 @@ final class CustomerContext implements Context
         ));
     }
 
-    /**
-     * @Then I should be notified that the verification token is invalid
-     */
+    #[Then('I should be notified that the verification token is invalid')]
     public function iShouldBeNotifiedThatTheVerificationTokenIsInvalid(): void
     {
         $response = $this->client->getLastResponse();
@@ -391,17 +341,13 @@ final class CustomerContext implements Context
         );
     }
 
-    /**
-     * @When I (try to) browse my orders
-     */
+    #[When('I (try to) browse my orders')]
     public function iBrowseMyOrders(): void
     {
         $this->client->index(Resources::ORDERS);
     }
 
-    /**
-     * @When I register with previously used :email email and :password password
-     */
+    #[When('I register with previously used :email email and :password password')]
     public function iRegisterWithPreviouslyUsedEmailAndPassword(string $email, string $password): void
     {
         $this->registrationContext->iWantToRegisterNewAccount();
@@ -412,17 +358,13 @@ final class CustomerContext implements Context
         $this->loginContext->iLogInAsWithPassword($email, $password);
     }
 
-    /**
-     * @Then I should see a single order in the list
-     */
+    #[Then('I should see a single order in the list')]
     public function iShouldSeeASingleOrderInTheList(): void
     {
         Assert::same($this->responseChecker->countCollectionItems($this->client->index(Resources::ORDERS)), 1);
     }
 
-    /**
-     * @Then this order should have :orderNumber number
-     */
+    #[Then('this order should have :orderNumber number')]
     public function thisOrderShouldHaveNumber(string $orderNumber): void
     {
         Assert::true(
@@ -434,19 +376,15 @@ final class CustomerContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the verification was successful
-     */
+    #[Then('I should be notified that the verification was successful')]
     public function iShouldBeNotifiedThatTheVerificationWasSuccessful(): void
     {
         $this->responseChecker->isCreationSuccessful($this->client->getLastResponse());
     }
 
-    /**
-     * @Then I should be notified that my password has been successfully changed
-     * @Then I should be notified that new account has been successfully created
-     * @Then I should be notified that my account has been created and the verification email has been sent
-     */
+    #[Then('I should be notified that my password has been successfully changed')]
+    #[Then('I should be notified that new account has been successfully created')]
+    #[Then('I should be notified that my account has been created and the verification email has been sent')]
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyChanged(): void
     {
         $response = $this->client->getLastResponse();
@@ -458,9 +396,7 @@ final class CustomerContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that provided password is different than the current one
-     */
+    #[Then('I should be notified that provided password is different than the current one')]
     public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne(): void
     {
         Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
@@ -471,9 +407,7 @@ final class CustomerContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the entered passwords do not match
-     */
+    #[Then('I should be notified that the entered passwords do not match')]
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch(): void
     {
         Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
@@ -484,9 +418,7 @@ final class CustomerContext implements Context
         );
     }
 
-    /**
-     * @Then /^I should be notified that the ([^"]+) should be ([^"]+)$/
-     */
+    #[Then('/^I should be notified that the ([^"]+) should be ([^"]+)$/')]
     public function iShouldBeNotifiedThatTheElementShouldBe(string $elementName, string $validationMessage): void
     {
         Assert::contains(
@@ -495,9 +427,7 @@ final class CustomerContext implements Context
         );
     }
 
-    /**
-     * @Then my account should be verified
-     */
+    #[Then('my account should be verified')]
     public function myAccountShouldBeVerified(): void
     {
         $response = $this->getResponseWithAccountData();
@@ -505,9 +435,7 @@ final class CustomerContext implements Context
         Assert::true($this->responseChecker->getResponseContent($response)['user']['verified']);
     }
 
-    /**
-     * @Then /^(?:my|his|her) account should not be verified$/
-     */
+    #[Then('/^(?:my|his|her) account should not be verified$/')]
     public function myAccountShouldNotBeVerified(): void
     {
         $response = $this->getResponseWithAccountData();
@@ -515,9 +443,7 @@ final class CustomerContext implements Context
         Assert::false($this->responseChecker->getResponseContent($response)['user']['verified']);
     }
 
-    /**
-     * @Then I should not be able to resend the verification email
-     */
+    #[Then('I should not be able to resend the verification email')]
     public function iShouldBeUnableToResendVerificationEmail(): void
     {
         /** @var ShopUserInterface $user */

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Abstraction\StateMachine\Unit;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SM\Factory\FactoryInterface;
@@ -22,6 +23,7 @@ use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
 
+#[AllowMockObjectsWithoutExpectations]
 final class WinzouStateMachineAdapterTest extends TestCase
 {
     /** @var FactoryInterface&MockObject */

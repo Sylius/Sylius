@@ -15,11 +15,13 @@ namespace Tests\Sylius\Bundle\PayumBundle\Request;
 
 use Payum\Core\Request\GetStatusInterface;
 use Payum\Core\Security\TokenInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Core\Model\PaymentInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GetStatusTest extends TestCase
 {
     private MockObject&TokenInterface $token;

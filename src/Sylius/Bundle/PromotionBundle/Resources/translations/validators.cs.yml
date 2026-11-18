@@ -41,6 +41,8 @@ sylius:
             not_blank: 'Prosím zadejte popis propagace.'
         end_date_cannot_be_set_prior_start_date: 'Datum ukončení nemůže být nastaveno před datem zahájení.'
         is_invalid: 'Propagace je neplatná.'
+        usage_limit:
+            min: 'Limit využití propagace musí být alespoň {{ limit }}.'
         name:
             max_length: 'Název propagace nesmí být delší než 1 znak.|Název propagace nesmí být delší než {{ limit }} znaků.'
             min_length: 'Název propagace musí mít alespoň 1 znak.|Název propagace musí mít alespoň {{ limit }} znaků.'

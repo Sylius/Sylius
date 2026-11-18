@@ -139,9 +139,7 @@ final class TaxonomyContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^the ("[^"]+" taxon) has an empty name in the ("[^"]+" locale)$/
-     */
+    #[Given('/^the ("[^"]+" taxon) has an empty name in the ("[^"]+" locale)$/')]
     public function theTaxonHasEmptyNameInLocale(TaxonInterface $taxon, string $localeCode): void
     {
         $taxon->getTranslation($localeCode)->setName('');

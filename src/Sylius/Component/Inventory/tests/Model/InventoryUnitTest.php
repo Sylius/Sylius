@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Inventory\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class InventoryUnitTest extends TestCase
 {
     private InventoryUnit $inventoryUnit;

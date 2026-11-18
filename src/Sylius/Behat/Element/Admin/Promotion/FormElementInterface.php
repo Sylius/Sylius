@@ -33,6 +33,10 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function makeCouponBased(): void;
 
+    public function enableTrackUsage(): void;
+
+    public function disableTrackUsage(): void;
+
     public function checkChannel(string $name): void;
 
     public function setLabel(string $label, string $localeCode): void;
@@ -40,6 +44,8 @@ interface FormElementInterface extends BaseFormElementInterface
     public function hasLabel(string $label, string $localeCode): bool;
 
     public function addAction(string $type): void;
+
+    public function removeFirstAction(): void;
 
     public function removeLastAction(): void;
 
@@ -53,6 +59,10 @@ interface FormElementInterface extends BaseFormElementInterface
 
     public function removeLastRule(): void;
 
+    public function getRuleCountValue(): string;
+
+    public function getActionAmountValue(): string;
+
     public function selectRuleOption(string $option, string $value, bool $multiple = false): void;
 
     public function fillRuleOption(string $option, string $value): void;
@@ -62,6 +72,9 @@ interface FormElementInterface extends BaseFormElementInterface
     public function selectAutocompleteRuleOptions(array $values, ?string $channelCode = null): void;
 
     public function selectAutocompleteActionFilterOptions(array $values, string $channelCode, string $filterType): void;
+
+    /** @return array<string> */
+    public function getSelectedActionFilterOptions(string $channelCode, string $filterType): array;
 
     public function checkIfRuleConfigurationFormIsVisible(): bool;
 

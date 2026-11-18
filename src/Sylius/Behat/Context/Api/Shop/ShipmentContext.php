@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -31,9 +33,7 @@ final readonly class ShipmentContext implements Context
     ) {
     }
 
-    /**
-     * @When I try to see the shipment of the order placed by a customer :customer
-     */
+    #[When('I try to see the shipment of the order placed by a customer :customer')]
     public function iTryToSeeTheShipmentOfTheOrderPlacedByACustomer(CustomerInterface $customer): void
     {
         /** @var OrderInterface $order */
@@ -48,10 +48,8 @@ final readonly class ShipmentContext implements Context
         );
     }
 
-    /**
-     * @Then the shipment state should be :state
-     * @Then the order's shipment state should be :state
-     */
+    #[Then('the shipment state should be :state')]
+    #[Then('the order\'s shipment state should be :state')]
     public function theShipmentStateShouldBe(string $state): void
     {
         $response = $this->client->getLastResponse();
@@ -63,9 +61,7 @@ final readonly class ShipmentContext implements Context
         Assert::true($this->responseChecker->hasValue($response, 'state', $state, isCaseSensitive: false));
     }
 
-    /**
-     * @Then I should not be able to see that shipment
-     */
+    #[Then('I should not be able to see that shipment')]
     public function iShouldNotBeAbleToSeeThatShipment(): void
     {
         Assert::false($this->responseChecker->isShowSuccessful($this->client->getLastResponse()));

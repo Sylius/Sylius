@@ -44,7 +44,7 @@ final readonly class VerifyShopUserHandler
             );
         }
 
-        $user->setVerifiedAt($this->clock->now());
+        $user->setVerifiedAt(\DateTime::createFromImmutable($this->clock->now()));
         $user->setEmailVerificationToken(null);
         $user->enable();
 

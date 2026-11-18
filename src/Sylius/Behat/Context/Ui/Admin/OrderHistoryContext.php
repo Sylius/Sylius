@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Page\Admin\Order\HistoryPageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
@@ -25,25 +27,19 @@ final class OrderHistoryContext implements Context
     ) {
     }
 
-    /**
-     * @When I browse order's :order history
-     */
+    #[When('I browse order\'s :order history')]
     public function iBrowseOrderHistory(OrderInterface $order): void
     {
         $this->historyPage->open(['id' => $order->getId()]);
     }
 
-    /**
-     * @Then there should be :count shipping address changes in the registry
-     */
+    #[Then('there should be :count shipping address changes in the registry')]
     public function thereShouldBeCountShippingAddressChangesInTheRegistry(int $count): void
     {
         Assert::same($this->historyPage->countShippingAddressChanges(), $count);
     }
 
-    /**
-     * @Then there should be :count billing address changes in the registry
-     */
+    #[Then('there should be :count billing address changes in the registry')]
     public function thereShouldBeCountBillingAddressChangesInTheRegistry(int $count): void
     {
         Assert::same($this->historyPage->countBillingAddressChanges(), $count);

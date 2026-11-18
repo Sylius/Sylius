@@ -92,7 +92,7 @@ final class AddingEligibleProductVariantToCartValidator extends ConstraintValida
             $value->quantity + $this->getExistingCartItemQuantityFromCart($cart, $productVariant),
         )) {
             $this->context->addViolation(
-                $constraint->productVariantNotSufficient,
+                $constraint->productVariantNotSufficientMessage,
                 ['%productVariantCode%' => $productVariant->getCode()],
             );
 

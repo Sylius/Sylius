@@ -60,6 +60,13 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="usageLimit">
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="minMessage">sylius.promotion.usage_limit.min</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="actions">
             <constraint name="Valid" />
         </property>

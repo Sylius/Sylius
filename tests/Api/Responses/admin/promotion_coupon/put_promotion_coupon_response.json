@@ -5,6 +5,8 @@
     "code": "XYZ1",
     "usageLimit": 1000,
     "perCustomerUsageLimit": 5,
+    "trackUsage": true,
+    "trackUsageSince": "@date@",
     "used": 1,
     "reusableFromCancelledOrders": false,
     "promotion": "\/api\/v2\/admin\/promotions\/dollar_off",

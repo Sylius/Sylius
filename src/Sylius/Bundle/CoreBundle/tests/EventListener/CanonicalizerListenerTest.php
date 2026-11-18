@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CanonicalizerListenerTest extends TestCase
 {
     private CanonicalizerInterface&MockObject $canonicalizer;

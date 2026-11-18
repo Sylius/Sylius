@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Order\Aggregator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Order\Aggregator\AdjustmentsAggregatorInterface;
 use Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AdjustmentsByLabelAggregatorTest extends TestCase
 {
     private AdjustmentsByLabelAggregator $aggregator;

@@ -6,3 +6,5 @@ sylius:
         delete_error: 'Kanalas negali būti panaikintas. Reikalingas bent vienas įjungtas kanalas.'
     customer:
         add_address: 'Adresas buvo sėkmingai pridėtas.'
+    user:
+        verification_email_sent: 'Jei įvesta el. pašto adresu sukurta paskyra, buvo išsiųstas patvirtinimo laiškas.'

@@ -139,6 +139,7 @@ sylius:
         to_approve: 'to approve'
         to_process: 'to process'
         to_ship: 'to ship'
+        toggle_theme: 'Toggle theme'
         view_documentation: 'View documentation'
         view_in_store: 'View in store'
         work_in_progress: Work in progress

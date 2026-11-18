@@ -15,6 +15,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\State\ProcessorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\AdminUser\RemoveProcessor;
@@ -23,6 +24,7 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class RemoveProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $processor;

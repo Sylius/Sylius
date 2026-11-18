@@ -29,6 +29,7 @@ final class Encrypter implements EncrypterInterface
 
     public function __construct(
         private readonly string $encryptionKeyPath,
+        private readonly bool $strictDecryption = false,
     ) {
     }
 
@@ -44,6 +45,12 @@ final class Encrypter implements EncrypterInterface
     public function decrypt(string $data): string
     {
         if (!str_ends_with($data, self::ENCRYPTION_SUFFIX)) {
+            if ($this->strictDecryption) {
+                throw EncryptionException::cannotDecrypt(
+                    new \RuntimeException('Data is not encrypted.'),
+                );
+            }
+
             return $data;
         }
 

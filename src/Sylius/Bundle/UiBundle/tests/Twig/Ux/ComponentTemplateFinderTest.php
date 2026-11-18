@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\UiBundle\Twig\Ux;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\UiBundle\Twig\Ux\ComponentTemplateFinder;
 use Symfony\UX\TwigComponent\ComponentTemplateFinderInterface;
 use Twig\Loader\LoaderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ComponentTemplateFinderTest extends TestCase
 {
     private ComponentTemplateFinderInterface&MockObject $decorated;

@@ -92,6 +92,7 @@
             "taxIncludedTotal": 0,
             "shippingTotal": 500,
             "orderPromotionTotal": 0,
+            "orderAndItemPromotionTotal": 0,
             "shippingPromotionTotal": 0
         }
     ],

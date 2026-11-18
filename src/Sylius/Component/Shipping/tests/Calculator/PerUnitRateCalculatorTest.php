@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Shipping\Calculator;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Calculator\PerUnitRateCalculator;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PerUnitRateCalculatorTest extends TestCase
 {
     private MockObject&ShipmentInterface $shipment;

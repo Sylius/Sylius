@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener;
@@ -22,6 +23,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\ShippingMethod\Updater\ChannelAwareShippingMethodUpdaterInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelDeletionListenerTest extends TestCase
 {
     private ChannelDeletionCheckerInterface&MockObject $channelDeletionChecker;

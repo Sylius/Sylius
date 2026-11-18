@@ -64,17 +64,6 @@ jobs:
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
-            -   name: Set variables
-                shell: bash
-                env:
-                    BRANCH: ${{ inputs.branch }}
-                run: |
-                    if [ "$BRANCH" == "1.14" ]; then
-                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    else
-                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
-                    fi
-
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
@@ -111,7 +100,7 @@ jobs:
                     database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: ${{ env.NODE_VERSION }}
+                    node_version: "24.x"
 
             -   name: Run Behat (${{ matrix.group }})
                 run: |
@@ -145,17 +134,6 @@ jobs:
             BEHAT_RERUN_CMD: "vendor/bin/behat --colors --strict --no-interaction -vvv -f pretty --rerun"
 
         steps:
-            -   name: Set variables
-                shell: bash
-                env:
-                    BRANCH: ${{ inputs.branch }}
-                run: |
-                    if [ "$BRANCH" == "1.14" ]; then
-                        echo "NODE_VERSION=20.x" >> $GITHUB_ENV
-                    else
-                        echo "NODE_VERSION=24.x" >> $GITHUB_ENV
-                    fi
-
             -   name: "Checkout (With Branch)"
                 if: "${{ inputs.branch != '' }}"
                 uses: actions/checkout@v4
@@ -192,7 +170,7 @@ jobs:
                     database: "mysql:${{ matrix.mysql }}"
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
-                    node_version: ${{ env.NODE_VERSION }}
+                    node_version: "24.x"
                     chrome_version: stable
 
             -   name: Run Behat (Panther)

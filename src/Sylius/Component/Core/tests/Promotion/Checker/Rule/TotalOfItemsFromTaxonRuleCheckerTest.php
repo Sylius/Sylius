@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\Promotion\Checker\Rule;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -26,6 +27,7 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TotalOfItemsFromTaxonRuleCheckerTest extends TestCase
 {
     private MockObject&TaxonRepositoryInterface $taxonRepository;
