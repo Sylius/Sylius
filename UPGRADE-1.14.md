@@ -26,7 +26,7 @@ make sure the new decorator is still part of the chain, otherwise the new behavi
 
 ### [Admin] Gateway configuration values are validated before they are stored (Medium)
 
-The gateway configuration is now validated with the `Sylius\Bundle\PayumBundle\Validator\SafeGatewayConfigValues` constraint, both in the
+The gateway configuration is now validated with the `Sylius\Bundle\PayumBundle\Validator\Constraints\SafeGatewayConfigValues` constraint, both in the
 administration panel and in `POST` and `PUT /api/v2/admin/payment-methods`. A payment method is rejected with a
 violation on the gateway configuration when any of its values is:
 
