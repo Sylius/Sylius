@@ -34,6 +34,7 @@
         "symfony/messenger": "^6.4 || ^7.4 || ^8.0"
     },
     "require-dev": {
+        "api-platform/core": "^4.3 || ^5.0",
         "ext-sqlite3": "*",
         "matthiasnoback/symfony-config-test": "^6.2",
         "matthiasnoback/symfony-dependency-injection-test": "^6.3",
