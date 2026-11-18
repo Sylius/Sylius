@@ -27,6 +27,7 @@ use Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor as 
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\Zone\RemoveProcessor as ZoneRemoveProcessor;
 use Sylius\Bundle\ApiBundle\StateProcessor\Common\MessengerPersistProcessor;
 use Sylius\Bundle\ApiBundle\StateProcessor\Shop\Address\PersistProcessor as AddressPersistProcessor;
+use Sylius\Bundle\ApiBundle\StateProcessor\Shop\Customer\PersistProcessor as ShopCustomerPersistProcessor;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
@@ -100,6 +101,17 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius_api.context.user.token_based'),
+        ])
+        ->tag('api_platform.state_processor')
+    ;
+
+    $services
+        ->set('sylius_api.state_processor.shop.customer.persist', ShopCustomerPersistProcessor::class)
+        ->args([
+            service('api_platform.doctrine.orm.state.persist_processor'),
+            service('sylius.context.channel'),
+            service('sylius.context.locale'),
+            service('sylius.command_bus'),
         ])
         ->tag('api_platform.state_processor')
     ;
