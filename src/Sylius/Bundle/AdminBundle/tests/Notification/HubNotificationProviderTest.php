@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\AdminBundle\Notification;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Clock\ClockInterface;
 use Psr\Http\Client\ClientExceptionInterface;
@@ -67,14 +68,31 @@ final class HubNotificationProviderTest extends TestCase
 
     public function testReturnsNotificationIfVersionIsDifferent(): void
     {
-        $provider = $this->createProvider(hubResponse: ['version' => 'NEW-VERSION']);
+        $provider = $this->createProvider(hubResponse: ['version' => '99.0.0']);
 
         $this->assertSame([
             'latest_sylius_version' => [
                 'message' => 'sylius.ui.notifications.new_version_of_sylius_available',
-                'latest_version' => 'NEW-VERSION',
+                'latest_version' => '99.0.0',
             ],
         ], $provider->getNotifications());
+    }
+
+    #[DataProvider('preReleaseVersions')]
+    public function testDoesNotReturnNotificationIfLatestVersionIsPreRelease(string $version): void
+    {
+        $provider = $this->createProvider(hubResponse: ['version' => $version]);
+
+        $this->assertEmpty($provider->getNotifications());
+    }
+
+    public static function preReleaseVersions(): iterable
+    {
+        yield ['2.3.0-RC.1'];
+        yield ['2.3.0-rc.2'];
+        yield ['2.3.0-BETA.1'];
+        yield ['2.3.0-alpha.1'];
+        yield ['2.3.0-DEV'];
     }
 
     public function testDoesNotReturnNotificationIfHubResponseHasNoVersion(): void
