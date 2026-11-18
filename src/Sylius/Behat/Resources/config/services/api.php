@@ -11,23 +11,41 @@
 
 declare(strict_types=1);
 
+use Sylius\Behat\Client\ApiBrowserFactory;
 use Sylius\Behat\Client\ApiPlatformClient;
 use Sylius\Behat\Client\ApiPlatformSecurityClient;
 use Sylius\Behat\Client\ContentTypeGuide;
 use Sylius\Behat\Client\RequestFactory;
 use Sylius\Behat\Client\ResponseChecker;
 use Sylius\Behat\Client\ResponseCheckerInterface;
+use Sylius\Behat\Client\WorkerHttpBrowser;
+use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $container) {
     $services = $container->services();
 
+    $services->set(WorkerHttpBrowser::class);
+
+    $services
+        ->set(ApiBrowserFactory::class)
+        ->args([
+            service('test.client'),
+            service(WorkerHttpBrowser::class),
+        ])
+    ;
+
+    $services
+        ->set('sylius.behat.api_browser', AbstractBrowser::class)
+        ->factory([service(ApiBrowserFactory::class), 'createBrowser'])
+    ;
+
     $services
         ->set('sylius.behat.api_platform_client', ApiPlatformClient::class)
         ->abstract()
         ->args([
-            service('test.client'),
+            service('sylius.behat.api_browser'),
             service('sylius.behat.shared_storage'),
             service('sylius.behat.request_factory'),
             service(ResponseCheckerInterface::class),
@@ -52,7 +70,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.behat.client.admin_api_platform_security_client', ApiPlatformSecurityClient::class)
         ->args([
-            service('test.client'),
+            service('sylius.behat.api_browser'),
             service('sylius.behat.shared_storage'),
             '%sylius.security.api_route%',
             'admin/administrators/token',
@@ -62,7 +80,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius.behat.client.shop_api_platform_security_client', ApiPlatformSecurityClient::class)
         ->args([
-            service('test.client'),
+            service('sylius.behat.api_browser'),
             service('sylius.behat.shared_storage'),
             '%sylius.security.api_route%',
             'shop/customers/token',

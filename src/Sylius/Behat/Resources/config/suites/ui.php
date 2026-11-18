@@ -44,6 +44,7 @@ return (new Config())
         'ui/currency/managing_exchange_rates.php',
         'ui/errors/admin/error_page.php',
         'ui/errors/shop/error_page.php',
+        'ui/frankenphp/request_isolation.php',
         'ui/homepage/viewing_products.php',
         'ui/inventory/cart_inventory.php',
         'ui/inventory/checkout_inventory.php',
