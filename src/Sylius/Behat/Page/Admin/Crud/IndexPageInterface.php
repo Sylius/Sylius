@@ -26,6 +26,10 @@ interface IndexPageInterface extends SyliusPageInterface
 
     public function sortBy(string $fieldName, ?string $order = null): void;
 
+    public function toggleColumns(string ...$fields): void;
+
+    public function hasColumn(string $field): bool;
+
     public function getCellForResource(string $header, array $parameters): NodeElement;
 
     public function deleteResourceOnPage(array $parameters): void;

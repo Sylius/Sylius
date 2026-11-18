@@ -27,6 +27,7 @@ use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -102,6 +103,22 @@ final readonly class ManagingOrdersContext implements Context
     public function iSwitchSortingBy(string $fieldName): void
     {
         $this->indexPage->sortBy($fieldName);
+    }
+
+    #[When('I hide the :label column')]
+    #[When('I show the :label column')]
+    public function iToggleTheColumn(string $label): void
+    {
+        $this->indexPage->toggleColumns(StringInflector::nameToCamelCase($label));
+    }
+
+    #[When('I hide the :firstLabel and :secondLabel columns')]
+    public function iHideTheColumns(string $firstLabel, string $secondLabel): void
+    {
+        $this->indexPage->toggleColumns(
+            StringInflector::nameToCamelCase($firstLabel),
+            StringInflector::nameToCamelCase($secondLabel),
+        );
     }
 
     #[When('I specify filter date from as :dateTime')]
@@ -841,6 +858,18 @@ final readonly class ManagingOrdersContext implements Context
     public function iShouldBeInformedThatTheOrderDoesNotExist(): void
     {
         Assert::same($this->errorPage->getCode(), 404);
+    }
+
+    #[Then('I should see the :label column')]
+    public function iShouldSeeTheColumn(string $label): void
+    {
+        Assert::true($this->indexPage->hasColumn(StringInflector::nameToCamelCase($label)));
+    }
+
+    #[Then('I should not see the :label column')]
+    public function iShouldNotSeeTheColumn(string $label): void
+    {
+        Assert::false($this->indexPage->hasColumn(StringInflector::nameToCamelCase($label)));
     }
 
     /**

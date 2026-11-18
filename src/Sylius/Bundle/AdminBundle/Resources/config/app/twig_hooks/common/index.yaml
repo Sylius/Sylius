@@ -52,6 +52,11 @@ sylius_twig_hooks:
                 template: '@SyliusAdmin/shared/crud/index/content/grid/no_results.html.twig'
                 priority: 0
 
+        'sylius_admin.common.index.content.grid.data_table#toolbar':
+            column_selector:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/data_table/column_selector.html.twig'
+                priority: 0
+
         'sylius_admin.common.index.content.grid.no_results':
             image:
                 template: '@SyliusAdmin/shared/crud/index/content/grid/no_results/image.html.twig'
