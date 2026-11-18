@@ -45,7 +45,7 @@ jobs:
                 php:
                     - "8.4"
                 symfony:
-                    - "~8.1.0"
+                    - "^8.2@beta"
                 package: ${{ fromJson(needs.get-packages.outputs.packages) }}
 
         env:
