@@ -1,3 +1,29 @@
+# UPGRADE FROM `v1.14.21` TO `v1.14.22`
+
+This is a **security release**. Updating is strongly recommended.
+
+## Security fixes
+
+### [API] Changing the e-mail address of a customer requires a new verification (Medium)
+
+`PUT /api/v2/shop/customers/{id}` is now handled by `Sylius\Bundle\ApiBundle\DataPersister\ShopCustomerDataPersister`,
+which decorates `Sylius\Bundle\ApiBundle\DataPersister\CustomerDataPersister`. When the e-mail address in the request
+differs from the current one:
+
+- the shop user is no longer verified,
+- on a channel with **Account verification required** enabled, the shop user is also disabled and the account
+  verification e-mail is sent to the new address. The customer cannot obtain a new API token or log in until the
+  address is verified.
+
+A request that does not change the e-mail address behaves as before.
+
+**Action required if you have a client application using the Shop API.** After a successful e-mail change on a
+channel that requires account verification, tell the customer to confirm the new address, and expect
+`POST /api/v2/shop/customers/token` to be refused for that account until then.
+
+If you have replaced or decorated `Sylius\Bundle\ApiBundle\DataPersister\CustomerDataPersister` in your application,
+make sure the new decorator is still part of the chain, otherwise the new behaviour does not apply.
+
 # UPGRADE FROM `v1.14.20` TO `v1.14.21`
 
 This is a **security release**. Updating is strongly recommended.
