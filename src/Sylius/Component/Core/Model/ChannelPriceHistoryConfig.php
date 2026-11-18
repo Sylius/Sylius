@@ -22,7 +22,7 @@ class ChannelPriceHistoryConfig implements ChannelPriceHistoryConfigInterface
     /** @var mixed */
     protected $id;
 
-    protected int $lowestPriceForDiscountedProductsCheckingPeriod = 30;
+    protected ?int $lowestPriceForDiscountedProductsCheckingPeriod = 30;
 
     protected bool $lowestPriceForDiscountedProductsVisible = true;
 
@@ -44,7 +44,7 @@ class ChannelPriceHistoryConfig implements ChannelPriceHistoryConfigInterface
         return $this->lowestPriceForDiscountedProductsCheckingPeriod;
     }
 
-    public function setLowestPriceForDiscountedProductsCheckingPeriod(int $periodInDays): void
+    public function setLowestPriceForDiscountedProductsCheckingPeriod(?int $periodInDays): void
     {
         $this->lowestPriceForDiscountedProductsCheckingPeriod = $periodInDays;
     }
