@@ -12,6 +12,14 @@ const Encore = require('@symfony/webpack-encore');
 
 const assetsDir = path.dirname(require.resolve('@sylius/shop-bundle/package.json'));
 
+const SYLIUS_THEMES_DIRS = [
+    'src/Sylius/Bundle/ShopBundle/themes',
+    'vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/themes',
+    'vendor/sylius/shop-bundle/themes'
+];
+
+const THEME_BUNDLE_WEBPACK_PATH = 'vendor/sylius/theme-bundle/src/Resources/webpack';
+
 class SyliusShop {
     /**
      * Provide a light Webpack configuration for Sylius Shop
@@ -51,6 +59,45 @@ class SyliusShop {
         Encore.reset();
 
         return shopConfig;
+    }
+
+    static getThemesWebpackConfig(rootDir, themesDirs = ['themes'], scanDepth = 1) {
+        const SyliusTheme = require(path.resolve(rootDir, THEME_BUNDLE_WEBPACK_PATH));
+
+        const { entries, aliases } = SyliusTheme.getThemesAssets(rootDir, {
+            directories: [...(Array.isArray(themesDirs) ? themesDirs : [themesDirs]), ...SYLIUS_THEMES_DIRS],
+            scanDepth,
+            assetsDir: 'assets/shop'
+        });
+
+        if (Object.keys(entries).length === 0) {
+            return null;
+        }
+
+        Encore
+            .setOutputPath('public/build/themes/shop/')
+            .setPublicPath('/build/themes/shop')
+            .disableSingleRuntimeChunk()
+            .cleanupOutputBeforeBuild()
+            .enableSourceMaps(!Encore.isProduction())
+            .enableVersioning(Encore.isProduction())
+            .enableSassLoader((options) => {
+                // eslint-disable-next-line no-param-reassign
+                options.additionalData = `$rootDir: '${rootDir}';`;
+                // eslint-disable-next-line no-param-reassign
+                options.sassOptions = { ...options.sassOptions, charset: false };
+            })
+            .addAliases(aliases)
+            .addEntries(entries);
+
+        const themesConfig = Encore.getWebpackConfig();
+
+        themesConfig.externals = { ...themesConfig.externals, window: 'window', document: 'document' };
+        themesConfig.name = 'shop.themes';
+
+        Encore.reset();
+
+        return themesConfig;
     }
 
     static _prepareWebpackConfig(rootDir) {

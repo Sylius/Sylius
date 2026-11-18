@@ -14,11 +14,17 @@ sylius_twig_hooks:
             styles:
                 template: '@SyliusShop/shared/layout/base/styles.html.twig'
                 priority: 0
+            theme_styles:
+                template: '@SyliusShop/shared/layout/base/theme_styles.html.twig'
+                priority: -100
 
         'sylius_shop.base#javascripts':
             scripts:
                 template: '@SyliusShop/shared/layout/base/scripts.html.twig'
                 priority: 0
+            theme_scripts:
+                template: '@SyliusShop/shared/layout/base/theme_scripts.html.twig'
+                priority: -100
 
         'sylius_shop.base.header':
             top_bar:
