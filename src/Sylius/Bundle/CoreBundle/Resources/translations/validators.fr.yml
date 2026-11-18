@@ -122,6 +122,8 @@ sylius:
             all_prices_defined: Vous devez d’abord définir le prix des variantes de produit pour les canaux nouvellement affectés.
         code:
             not_exist: Le produit avec le code {{ code }} n'existe pas.
+        variant_selection_method:
+            options_based_with_no_options: Un produit sans options ne peut pas utiliser la méthode de sélection de variantes par correspondance d'options.
     product_attribute:
         invalid: La position doit être un entier.
     image:
