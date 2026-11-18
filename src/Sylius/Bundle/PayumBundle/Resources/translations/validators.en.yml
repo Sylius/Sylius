@@ -1,5 +1,7 @@
 sylius:
     gateway_config:
+        config:
+            forbidden_value: This value is not allowed in the gateway configuration.
         invalid_gateway_factory: Invalid gateway factory. Available factories are {{ available_factories }}.
         gateway_name:
             not_blank: Please enter gateway name.

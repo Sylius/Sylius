@@ -3,6 +3,8 @@
 
 sylius:
     gateway_config:
+        config:
+            forbidden_value: Ta wartość nie jest dozwolona w konfiguracji bramki płatności.
         paypal:
             password:
                 not_blank: Proszę wprowadzić hasło PayPal.

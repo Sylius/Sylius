@@ -24,6 +24,21 @@ channel that requires account verification, tell the customer to confirm the new
 If you have replaced or decorated `Sylius\Bundle\ApiBundle\DataPersister\CustomerDataPersister` in your application,
 make sure the new decorator is still part of the chain, otherwise the new behaviour does not apply.
 
+### [Admin] Gateway configuration values are validated before they are stored (Medium)
+
+The gateway configuration is now validated with the `Sylius\Bundle\PayumBundle\Validator\SafeGatewayConfigValues` constraint, both in the
+administration panel and in `POST` and `PUT /api/v2/admin/payment-methods`. A payment method is rejected with a
+violation on the gateway configuration when any of its values is:
+
+- a string wrapped in `%`, such as a reference to a container parameter or an environment variable,
+- a string starting with `@`,
+- a callable: the name of a PHP function, a `Class::method` string or a `["Class", "method"]` array.
+
+Configurations that are already stored are not modified, but a payment method holding such a value cannot be saved
+again until the value is changed. If a stored configuration refers to a parameter or an environment variable, put the
+resolved value in the configuration instead, or provide it in the configuration of the gateway factory in your
+application.
+
 # UPGRADE FROM `v1.14.20` TO `v1.14.21`
 
 This is a **security release**. Updating is strongly recommended.
