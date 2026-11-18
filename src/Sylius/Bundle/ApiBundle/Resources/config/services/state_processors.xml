@@ -50,6 +50,7 @@
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="sylius_api.creator.avatar_image" />
             <argument type="service" id="sylius.repository.avatar_image" />
+            <argument type="service" id="validator" />
             <tag name="api_platform.state_processor" />
         </service>
 
@@ -83,6 +84,8 @@
         <service id="sylius_api.state_processor.admin.taxon_image.persist" class="Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor">
             <argument type="service" id="api_platform.doctrine.orm.state.persist_processor" />
             <argument type="service" id="sylius_api.creator.taxon_image" />
+            <argument type="service" id="validator" />
+            <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="api_platform.state_processor" />
         </service>
 
