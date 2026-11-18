@@ -19,6 +19,9 @@ sylius:
             min_length: El código CVV de la tarjeta de crédito debe ser como máximo {{ limit }} dígitos de largo.
         expiry_year:
             not_blank: Por favor, seleccione el año de caducidad.
+    gateway_config:
+        config:
+            forbidden_value: Este valor no está permitido en la configuración de la pasarela.
     payment:
         currency_code:
             not_valid: El código de la moneda que introdujo no es válido.
