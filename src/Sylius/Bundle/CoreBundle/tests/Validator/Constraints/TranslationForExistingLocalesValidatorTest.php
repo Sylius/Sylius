@@ -25,7 +25,7 @@ use Sylius\Resource\Model\TranslationInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class TranslationForExistingLocalesValidatorTest extends TestCase
 {
@@ -91,7 +91,7 @@ final class TranslationForExistingLocalesValidatorTest extends TestCase
         $value = $this->createMock(TranslatableInterface::class);
         $value->method('getTranslations')->willReturn(new ArrayCollection([$translation1, $translation2]));
 
-        $builder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $builder = $this->createMock(ConstraintViolationBuilder::class);
         $builder->expects($this->once())
             ->method('setParameter')
             ->with('%locales%', 'en_US')

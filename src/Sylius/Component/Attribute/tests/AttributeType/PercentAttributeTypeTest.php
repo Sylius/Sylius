@@ -23,7 +23,7 @@ use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 class PercentAttributeTypeTest extends TestCase
@@ -59,7 +59,7 @@ class PercentAttributeTypeTest extends TestCase
     public function testChecksIfAttributeValueIsValid(): void
     {
         $attributeValue = $this->createMock(AttributeValueInterface::class);
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $constraintViolation = $this->createMock(ConstraintViolationInterface::class);
         $constraintViolationList = $this->createMock(ConstraintViolationListInterface::class);
         $context = $this->createMock(ExecutionContextInterface::class);

@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class CartItemVariantEnabledValidatorTest extends TestCase
 {
@@ -73,7 +73,7 @@ final class CartItemVariantEnabledValidatorTest extends TestCase
         $command = $this->createMock(AddToCartCommandInterface::class);
         $cartItem = $this->createMock(OrderItemInterface::class);
         $variant = $this->createMock(ProductVariantInterface::class);
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $command->method('getCartItem')->willReturn($cartItem);
         $cartItem->method('getVariant')->willReturn($variant);

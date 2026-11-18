@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Checker\Comparison\ComparisonOperatorMatcherInter
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ComparisonOperatorExistsValidatorTest extends TestCase
@@ -72,7 +72,7 @@ final class ComparisonOperatorExistsValidatorTest extends TestCase
     public function testAddsViolationIfComparisonOperatorDoesNotExist(): void
     {
         $constraint = new ComparisonOperatorExists();
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->comparisonOperatorMatcher
             ->expects($this->once())

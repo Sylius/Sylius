@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class UniqueReviewerEmailValidatorTest extends TestCase
 {
@@ -68,7 +68,7 @@ final class UniqueReviewerEmailValidatorTest extends TestCase
         $review = $this->createMock(ReviewInterface::class);
         $customer = $this->createMock(CustomerInterface::class);
         $existingUser = $this->createMock(UserInterface::class);
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $review->method('getAuthor')->willReturn($customer);
         $customer->method('getEmail')->willReturn('john.doe@example.com');
@@ -100,7 +100,7 @@ final class UniqueReviewerEmailValidatorTest extends TestCase
         $review = $this->createMock(ReviewInterface::class);
         $customer = $this->createMock(CustomerInterface::class);
         $existingUser = $this->createMock(UserInterface::class);
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->tokenStorage->method('getToken')->willReturn(null);
         $review->method('getAuthor')->willReturn($customer);
