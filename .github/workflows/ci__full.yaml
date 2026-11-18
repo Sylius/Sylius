@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - 'full-ci/**'
+            - 'upmerge/worker-mode'
     schedule:
         -
             cron: "0 3 * * *" # Run every day at 3am
@@ -18,6 +19,7 @@ permissions:
 
 jobs:
     static-checks:
+        if: ${{ github.ref_name != 'upmerge/worker-mode' }}
         strategy:
             matrix:
                 branch: ["2.2", "2.3"]
@@ -25,6 +27,13 @@ jobs:
         uses: ./.github/workflows/ci_static-checks.yaml
         with:
             branch: ${{ matrix.branch }}
+            type: full
+    static-checks-worker:
+        if: ${{ github.ref_name == 'upmerge/worker-mode' }}
+        name: "Static checks"
+        uses: ./.github/workflows/ci_static-checks.yaml
+        with:
+            branch: ""
             type: full
     e2e-mariadb:
         strategy:
@@ -66,6 +75,11 @@ jobs:
         with:
             branch: ${{ matrix.branch }}
             type: full
+    e2e-worker:
+        name: "Tests (worker mode)"
+        if: ${{ github.ref_name == 'upmerge/worker-mode' }}
+        needs: static-checks-worker
+        uses: ./.github/workflows/ci_e2e-worker.yaml
     frontend:
         strategy:
             matrix:
@@ -89,7 +103,7 @@ jobs:
     notify-about-build-status:
         if: ${{ always() }}
         name: "Notify about build status"
-        needs: [static-checks, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-js, frontend, packages]
+        needs: [static-checks, static-checks-worker, e2e-mariadb, e2e-mysql, e2e-pgsql, e2e-js, e2e-worker, frontend, packages]
         runs-on: ubuntu-latest
         timeout-minutes: 30
 
@@ -117,6 +131,7 @@ jobs:
                         ${{ needs.e2e-mysql.result == 'success' && ':+1:' || ':x:' }} Tests (MySQL)
                         ${{ needs.e2e-pgsql.result == 'success' && ':+1:' || ':x:' }} Tests (PostgreSQL)
                         ${{ needs.e2e-js.result == 'success' && ':+1:' || ':x:' }} Javascript Tests (MySQL)
+                        ${{ needs.e2e-worker.result == 'success' && ':+1:' || ':x:' }} Tests (worker mode)
                         ${{ needs.frontend.result == 'success' && ':+1:' || ':x:' }} Frontend
                         ${{ needs.packages.result == 'success' && ':+1:' || ':x:' }} Packages
 

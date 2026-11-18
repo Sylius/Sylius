@@ -34,5 +34,6 @@ return static function (ContainerConfigurator $container) {
             service('sylius.factory.product_association'),
             service('sylius.repository.product_association_type'),
         ])
+        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 };

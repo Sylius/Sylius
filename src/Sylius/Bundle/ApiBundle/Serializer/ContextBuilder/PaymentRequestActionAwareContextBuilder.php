@@ -18,8 +18,9 @@ use Sylius\Bundle\ApiBundle\Attribute\PaymentRequestActionAware;
 use Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverterInterface;
 use Sylius\Bundle\PaymentBundle\Provider\DefaultActionProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class PaymentRequestActionAwareContextBuilder extends AbstractInputContextBuilder
+final class PaymentRequestActionAwareContextBuilder extends AbstractInputContextBuilder implements ResetInterface
 {
     private ?Request $request = null;
 
@@ -38,6 +39,11 @@ final class PaymentRequestActionAwareContextBuilder extends AbstractInputContext
         $this->request = $request;
 
         return parent::createFromRequest($request, $normalization, $extractedAttributes);
+    }
+
+    public function reset(): void
+    {
+        $this->request = null;
     }
 
     protected function supports(Request $request, array $context, ?array $extractedAttributes): bool

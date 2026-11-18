@@ -126,4 +126,20 @@ final class ImagesRemoveListenerTest extends TestCase
         $this->listener->postFlush($this->postFlushEvent);
         $this->listener->postFlush($this->postFlushEvent);
     }
+
+    public function testItResetsSavedImagesPaths(): void
+    {
+        $this->onFlushEvent->method('getObjectManager')->willReturn($this->entityManager);
+        $this->entityManager->method('getUnitOfWork')->willReturn($this->unitOfWork);
+        $this->unitOfWork->method('getScheduledEntityDeletions')->willReturn([$this->image]);
+        $this->image->method('getPath')->willReturn('image/path');
+
+        $this->listener->onFlush($this->onFlushEvent);
+        $this->listener->reset();
+
+        $this->imageUploader->expects($this->never())->method('remove');
+        $this->cacheManager->expects($this->never())->method('remove');
+
+        $this->listener->postFlush($this->postFlushEvent);
+    }
 }

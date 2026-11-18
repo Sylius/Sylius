@@ -19,11 +19,12 @@ use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Symfony\Contracts\Service\ResetInterface;
 
 /**
  * @internal
  */
-final class ImagesRemoveListener
+final class ImagesRemoveListener implements ResetInterface
 {
     /** @var string[] */
     private array $imagesToDelete = [];
@@ -61,5 +62,10 @@ final class ImagesRemoveListener
             $this->cacheManager->remove($imagePath, array_keys($this->filterManager->getFilterConfiguration()->all()));
             unset($this->imagesToDelete[$key]);
         }
+    }
+
+    public function reset(): void
+    {
+        $this->imagesToDelete = [];
     }
 }

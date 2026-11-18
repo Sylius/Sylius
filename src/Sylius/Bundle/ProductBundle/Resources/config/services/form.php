@@ -127,6 +127,7 @@ return static function (ContainerConfigurator $container) {
         ->set('sylius.form.type.product_attribute_choice', ProductAttributeChoiceType::class)
         ->args([service('sylius.repository.product_attribute')])
         ->tag('form.type')
+        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services
@@ -265,6 +266,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.repository.product'),
             service('sylius.repository.product_association_type'),
         ])
+        ->tag('kernel.reset', ['method' => 'reset'])
     ;
 
     $services

@@ -23,8 +23,9 @@ use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ChannelCodeCollectionValidator extends ConstraintValidator
+final class ChannelCodeCollectionValidator extends ConstraintValidator implements ResetInterface
 {
     /** @var array<string, string> */
     private array $channelsCache = [];
@@ -141,5 +142,10 @@ final class ChannelCodeCollectionValidator extends ConstraintValidator
         ;
 
         return array_unique(array_merge($channelCodes, array_keys($value)));
+    }
+
+    public function reset(): void
+    {
+        $this->channelsCache = [];
     }
 }

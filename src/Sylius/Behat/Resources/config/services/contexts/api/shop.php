@@ -156,7 +156,7 @@ return static function (ContainerConfigurator $container) {
             service('sylius.behat.client.shop_api_platform_security_client'),
             service('sylius.behat.api_platform_client.shop'),
             service('api_platform.iri_converter'),
-            service('test.client'),
+            service('sylius.behat.api_browser'),
             service(ResponseCheckerInterface::class),
             service('sylius.behat.shared_storage'),
             service('sylius.behat.request_factory'),

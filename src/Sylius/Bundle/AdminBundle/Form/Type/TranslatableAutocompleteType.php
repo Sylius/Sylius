@@ -62,7 +62,7 @@ final class TranslatableAutocompleteType extends AbstractType
             $translationFields,
         ));
 
-        $resolver->setDefault('locale_code', $this->localeContext->getLocaleCode());
+        $resolver->setDefault('locale_code', fn (Options $options): string => $this->localeContext->getLocaleCode());
         $resolver->setAllowedTypes('locale_code', ['string', 'null']);
 
         $resolver->setDefault('filter_query', null);
