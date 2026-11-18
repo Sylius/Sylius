@@ -3,7 +3,6 @@ imports:
     - { resource: "@SyliusPaymentBundle/test/app/config/parameters.yml" }
 
 framework:
-    assets: false
     translator: { fallbacks: ["%locale%"] }
     secret: "%secret%"
     router:
