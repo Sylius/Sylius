@@ -7,6 +7,6 @@
     },
     sylius_attribute_types()|map((value, key) => {
         title: ('sylius.form.attribute_type.' ~ value.type)|trans,
-        url: path(grid.requestConfiguration.getRouteName('create'), { type: key })
+        url: path(grid.gridContext.routeName('create'), { type: key })
     })
 ) }}

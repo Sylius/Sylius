@@ -1,0 +1,5 @@
+{% set taxon = hookable_metadata.context.taxon|default(null) %}
+
+<h1 class="mb-3 text-break" {{ sylius_test_html_attribute('product-list-title') }}>
+    {{ taxon is not null ? taxon.name : 'sylius.ui.products'|trans }}
+</h1>

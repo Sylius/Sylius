@@ -1,0 +1,29 @@
+# Experimental: live versions of the grid hookables, used when "sylius_admin.grid.live" is enabled.
+# The "live_grid" context flag (see shared/crud/index.html.twig) switches between the regular and the live hookables,
+# the hook names are kept so that the resource specific hookables still apply.
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.common.index.content':
+            grid:
+                condition: "@=not (_context.has('live_grid') and _context.live_grid)"
+            live_grid:
+                component: 'sylius_admin:grid'
+                props:
+                    resourceAlias: '@=_context.metadata.getAlias()'
+                    gridName: '@=_context.resources.getDefinition().getCode()'
+                condition: "@=_context.has('live_grid') and _context.live_grid"
+                priority: 100
+
+        'sylius_admin.common.index.content.grid':
+            filters:
+                condition: "@=not (_context.has('live_grid') and _context.live_grid)"
+            live_filters:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/live/filters.html.twig'
+                condition: "@=_context.has('live_grid') and _context.live_grid"
+                priority: 200
+            data_table:
+                condition: "@=not (_context.has('live_grid') and _context.live_grid)"
+            live_data_table:
+                template: '@SyliusAdmin/shared/crud/index/content/grid/live/data_table.html.twig'
+                condition: "@=_context.has('live_grid') and _context.live_grid"
+                priority: 100

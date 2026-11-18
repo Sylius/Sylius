@@ -1,0 +1,7 @@
+{% extends '@SyliusShop/shared/layout/base.html.twig' %}
+
+{% set prefixes = ['sylius_shop.product.live_index'] %}
+
+{% block content %}
+    {% hook 'sylius_shop.product.live_index' with { taxon } %}
+{% endblock %}

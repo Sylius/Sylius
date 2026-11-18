@@ -1,0 +1,11 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Product\GridComponent #}
+
+<div class="row" {{ attributes }} {{ sylius_test_html_attribute('product-grid') }}>
+    {% hook 'grid' with {
+        grid,
+        filters,
+        active_filters,
+        taxon,
+        sorting: sorting ?? {},
+    } %}
+</div>

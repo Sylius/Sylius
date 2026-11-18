@@ -1,0 +1,10 @@
+{% set taxon = hookable_metadata.context.taxon|default(null) %}
+
+{% if taxon is not null and taxon.images.first %}
+    <div class="mb-5">
+        <img src="{{ asset(taxon.images.first.path|imagine_filter('sylius_shop_taxon_thumbnail')) }}"
+             alt="{{ taxon.name }}"
+             class="img-fluid"
+        >
+    </div>
+{% endif %}

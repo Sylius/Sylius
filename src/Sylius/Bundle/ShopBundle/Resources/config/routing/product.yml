@@ -15,6 +15,25 @@ sylius_shop_product_show:
                     - "expr:service('sylius.context.locale').getLocaleCode()"
                     - $slug
 
+# Experimental: only matched when "sylius_shop.product_grid.live" is enabled,
+# it then takes precedence over the "sylius_shop_product_index" route below.
+sylius_shop_product_live_index:
+    path: /taxons/{slug}
+    methods: [GET]
+    condition: "service('sylius_shop_live_product_grid').isEnabled()"
+    defaults:
+        _controller: sylius_shop.controller.product_list
+    requirements:
+        slug: .+(?<!/)
+
+# Experimental: only matched when "sylius_shop.product_grid.live" is enabled.
+sylius_shop_product_list:
+    path: /products
+    methods: [GET]
+    condition: "service('sylius_shop_live_product_grid').isEnabled()"
+    defaults:
+        _controller: sylius_shop.controller.product_list
+
 sylius_shop_product_index:
     path: /taxons/{slug}
     methods: [GET]

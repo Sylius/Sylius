@@ -31,7 +31,7 @@
         "php": "^8.3",
         "stof/doctrine-extensions-bundle": "^1.15",
         "sylius/money-bundle": "^2.0",
-        "sylius/resource-bundle": "^1.14.2",
+        "sylius/resource-bundle": "dev-grid-context as 1.15.99",
         "sylius/shipping": "^2.0",
         "symfony/clock": "^6.4 || ^7.4 || ^8.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0"
@@ -76,6 +76,14 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusGridBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusResourceBundle"
         }
     ],
     "minimum-stability": "dev",

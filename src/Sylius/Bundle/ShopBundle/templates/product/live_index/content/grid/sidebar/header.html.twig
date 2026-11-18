@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+    <h2 class="h5 mb-0">{{ 'sylius.ui.filters'|trans }}</h2>
+
+    {% if hookable_metadata.context.active_filters is not empty %}
+        <button type="button"
+                class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1"
+                data-action="live#action"
+                data-live-action-param="resetFilters"
+                {{ sylius_test_html_attribute('clear-all-filters') }}
+        >
+            {{ ux_icon('tabler:x') }}
+            {{ 'sylius.product_grid.clear_all'|trans }}
+        </button>
+    {% endif %}
+</div>

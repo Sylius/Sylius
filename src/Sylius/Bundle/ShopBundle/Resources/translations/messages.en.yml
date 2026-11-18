@@ -60,5 +60,10 @@ sylius:
                 header: 'Your account'
                 order_history: 'Order history'
                 personal_information: 'Personal information'
+    product_grid:
+        active_filters: 'Active filters'
+        clear_all: 'Clear all'
+        products_count: '{0} No products|{1} 1 product|]1,Inf[ %count% products'
+        remove_filter: 'Remove the "%value%" filter'
     top_bar: 'Sign up to our newsletter and grab -20% off'
 
