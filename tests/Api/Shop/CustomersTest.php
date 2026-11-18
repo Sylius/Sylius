@@ -111,7 +111,7 @@ final class CustomersTest extends JsonApiTestCase
     #[Test]
     public function it_updates_customers_data(): void
     {
-        $loadedData = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
+        $loadedData = $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/shop_user.yaml']);
         /** @var CustomerInterface $customer */
         $customer = $loadedData['customer_oliver'];
 
