@@ -25,6 +25,45 @@ If you have replaced the processor of the `PUT /api/v2/shop/customers/{id}` oper
 configuration takes precedence and the new behaviour does not apply: call or decorate
 `sylius_api.state_processor.shop.customer.persist` from your processor.
 
+### [Admin] Uploaded taxon and avatar images are validated before they are stored (Medium)
+
+`POST /api/v2/admin/taxons/{code}/images` and `POST /api/v2/admin/administrators/{id}/avatar-image` now validate the
+uploaded file with the constraints defined for `Sylius\Component\Core\Model\TaxonImage` and
+`Sylius\Component\Core\Model\AvatarImage` before it is uploaded. A request with a file that is not a JPEG, PNG, GIF or
+WebP image, or that exceeds the size limit, is rejected with `422 Unprocessable Content` and nothing is written to the
+filesystem. The administrator form in the administration panel validates the avatar in the same way and shows the
+violation on the avatar field. The accepted types are those configured in `sylius_core.allowed_images_mime_types`.
+
+Files that are already stored are not modified. Review the media directory for files that are not images.
+
+#### Constructor signature changes
+
+1. The constructor of `Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor` has been extended with
+   two new arguments:
+
+```php
+    public function __construct(
+        private ProcessorInterface $processor,
+        private ImageCreatorInterface $taxonImageCreator,
++       private ValidatorInterface $validator,
++       private string $taxonImageClass,
+    )
+```
+
+2. The constructor of `Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage\PersistProcessor` has been extended with
+   a new argument:
+
+```php
+    public function __construct(
+        private ProcessorInterface $processor,
+        private ImageCreatorInterface $avatarImageCreator,
+        private AvatarImageRepositoryInterface $avatarImageRepository,
++       private ValidatorInterface $validator,
+    )
+```
+
+If you instantiate or decorate these services with your own service definition, pass the new arguments.
+
 ## Promotions
 
 The `version` field of `Sylius\Component\Core\Model\Promotion` and `Sylius\Component\Core\Model\PromotionCoupon` is no longer used for optimistic locking.

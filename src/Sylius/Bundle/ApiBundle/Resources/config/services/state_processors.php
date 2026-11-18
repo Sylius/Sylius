@@ -83,6 +83,7 @@ return static function (ContainerConfigurator $container) {
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius_api.creator.avatar_image'),
             service('sylius.repository.avatar_image'),
+            service('validator'),
         ])
         ->tag('api_platform.state_processor')
     ;
@@ -131,6 +132,8 @@ return static function (ContainerConfigurator $container) {
         ->args([
             service('api_platform.doctrine.orm.state.persist_processor'),
             service('sylius_api.creator.taxon_image'),
+            service('validator'),
+            '%sylius.model.taxon_image.class%',
         ])
         ->tag('api_platform.state_processor')
     ;

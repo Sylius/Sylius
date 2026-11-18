@@ -218,6 +218,36 @@ final class TaxonImagesTest extends JsonApiTestCase
     }
 
     #[Test]
+    public function it_prevents_taxon_image_creation_with_a_disallowed_file_type(): void
+    {
+        $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
+        $header = array_merge($this->logInAdminUser('api@example.com'), self::FILE_CONTENT_TYPE_HEADER);
+
+        /** @var TaxonInterface $taxon */
+        $taxon = $fixtures['taxon'];
+
+        $storedImagesCount = $this->countStoredImages();
+
+        $this->client->request(
+            method: 'POST',
+            uri: sprintf('/api/v2/admin/taxons/%s/images', $taxon->getCode()),
+            files: ['file' => $this->getUploadedFile('xss.svg', 'xss.svg', 'image/svg+xml')],
+            server: $header,
+        );
+
+        $this->assertResponseViolations(
+            [
+                [
+                    'propertyPath' => 'file',
+                    'message' => 'The file is not a valid image. Allowed types are image/jpeg, image/png, image/gif, image/webp.',
+                ],
+            ],
+        );
+
+        $this->assertSame($storedImagesCount, $this->countStoredImages());
+    }
+
+    #[Test]
     public function it_updates_only_the_type_of_the_existing_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'taxon_image.yaml']);
@@ -266,5 +296,17 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
 
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
+    }
+
+    private function countStoredImages(): int
+    {
+        $imagesDirectory = self::getContainer()->getParameter('sylius_core.images_dir');
+        if (!is_dir($imagesDirectory)) {
+            return 0;
+        }
+
+        return iterator_count(new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($imagesDirectory, \FilesystemIterator::SKIP_DOTS),
+        ));
     }
 }
