@@ -21,5 +21,9 @@
             <argument>%sylius.gateway_factories%</argument>
             <tag name="validator.constraint_validator" alias="sylius_gateway_factory_exists_validator" />
         </service>
+
+        <service id="sylius.validator.safe_gateway_config_values" class="Sylius\Bundle\PaymentBundle\Validator\Constraints\SafeGatewayConfigValuesValidator">
+            <tag name="validator.constraint_validator" alias="sylius_safe_gateway_config_values_validator" />
+        </service>
     </services>
 </container>
