@@ -1,8 +1,17 @@
 sylius_admin_ajax_product_taxons_update_position:
     path: /update
     methods: [PUT]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_update_product_taxon_positions')"
     defaults:
         _controller: sylius.controller.product_taxon::updateProductTaxonsPositionsAction
         _format: json
         _sylius:
             permission: true
+
+_sylius_admin_ajax_product_taxons_update_position:
+    path: /update
+    methods: [PUT]
+    controller: sylius_admin.controller.update_product_taxon_positions
+    condition: "not context.isSyliusRoutingBcLayerEnabled('admin_update_product_taxon_positions')"
+    defaults:
+        _format: json

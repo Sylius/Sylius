@@ -38,9 +38,9 @@ final class RedirectPathExtensionTest extends KernelTestCase
     #[Test]
     public function it_returns_redirect_path_with_filters_from_storage_applied(): void
     {
-        $redirectPath = $this->redirectPathExtension->generateRedirectPath('/admin/shipping-categories/');
+        $redirectPath = $this->redirectPathExtension->generateRedirectPath('/admin/shipping-categories');
 
-        $this->assertSame('/admin/shipping-categories/?criteria%5Benabled%5D=1', $redirectPath);
+        $this->assertSame('/admin/shipping-categories?criteria%5Benabled%5D=1', $redirectPath);
     }
 
     #[Test]
@@ -54,9 +54,9 @@ final class RedirectPathExtensionTest extends KernelTestCase
     #[Test]
     public function it_returns_given_path_if_route_already_has_query_parameters(): void
     {
-        $redirectPath = $this->redirectPathExtension->generateRedirectPath('/admin/shipping-categories/?foo=bar');
+        $redirectPath = $this->redirectPathExtension->generateRedirectPath('/admin/shipping-categories?foo=bar');
 
-        $this->assertSame('/admin/shipping-categories/?foo=bar', $redirectPath);
+        $this->assertSame('/admin/shipping-categories?foo=bar', $redirectPath);
     }
 
     #[Test]

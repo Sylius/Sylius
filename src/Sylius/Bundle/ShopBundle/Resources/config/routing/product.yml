@@ -4,6 +4,7 @@
 sylius_shop_product_show:
     path: /products/{slug}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_product')"
     defaults:
         _controller: sylius.controller.product::showAction
         _sylius:
@@ -18,6 +19,7 @@ sylius_shop_product_show:
 sylius_shop_product_index:
     path: /taxons/{slug}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('shop_product')"
     defaults:
         _controller: sylius.controller.product::indexAction
         _sylius:

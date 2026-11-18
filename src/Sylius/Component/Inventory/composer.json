@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": "^8.3",
-        "sylius/resource": "^1.14.2",
+        "sylius/resource": "^1.15@dev",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {

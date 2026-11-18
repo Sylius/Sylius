@@ -1,0 +1,43 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Sylius Sp. z o.o.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Sylius\Bundle\CoreBundle\CommandHandler\Shop;
+
+use Sylius\Bundle\CoreBundle\Command\Shop\Account\ChangeShopUserPassword;
+use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Component\User\Security\PasswordUpdaterInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Webmozart\Assert\Assert;
+
+#[AsMessageHandler]
+final readonly class ChangeShopUserPasswordHandler
+{
+    public function __construct(
+        private PasswordUpdaterInterface $passwordUpdater,
+        private UserRepositoryInterface $userRepository,
+    ) {
+    }
+
+    public function __invoke(ChangeShopUserPassword $command): void
+    {
+        /** @var ShopUserInterface|null $user */
+        $user = $this->userRepository->find($command->shopUserId);
+
+        Assert::notNull($user);
+
+        $user->setPlainPassword($command->newPassword);
+
+        $this->passwordUpdater->updatePassword($user);
+    }
+}

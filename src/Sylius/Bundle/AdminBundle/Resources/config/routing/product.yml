@@ -8,11 +8,13 @@ sylius_admin_product:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ProductType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_product')"
     type: sylius.resource
     
 sylius_admin_product_show:
     path: /products/{id}
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product')"
     defaults:
         _controller: sylius.controller.product::showAction
         _sylius:
@@ -23,6 +25,7 @@ sylius_admin_product_show:
 sylius_admin_product_create_simple:
     path: /products/new/simple
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product')"
     defaults:
         _controller: sylius.controller.product::createAction
         _sylius:
@@ -41,6 +44,7 @@ sylius_admin_product_create_simple:
 sylius_admin_product_variant_generate:
     path: products/{productId}/variants/generate
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product')"
     defaults:
         _controller: sylius.controller.product::updateAction
         _sylius:
@@ -57,10 +61,10 @@ sylius_admin_product_variant_generate:
                 arguments: [$productId]
             flash: sylius.product_variant.generate
 
-
 sylius_admin_channel_pricing_log_entry_index:
     path: products/{productId}/variants/{variantId}/channel-pricing/{channelPricingId}/channel-pricing-log-entries
     methods: [GET]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_channel_pricing_log_entry')"
     defaults:
         _controller: sylius.controller.channel_pricing_log_entry::indexAction
         _sylius:

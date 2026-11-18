@@ -41,7 +41,7 @@
         "php": "^8.3",
         "stof/doctrine-extensions-bundle": "^1.15",
         "sylius/mailer-bundle": "^2.2",
-        "sylius/resource-bundle": "^1.14.2",
+        "sylius/resource-bundle": "^1.15@dev",
         "sylius/review": "^2.0",
         "sylius/user-bundle": "^2.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0"

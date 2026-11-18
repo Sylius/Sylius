@@ -9,4 +9,5 @@ sylius_admin_product_association_type:
         grid: sylius_admin_product_association_type
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ProductAssociationTypeType
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_association_type')"
     type: sylius.resource
