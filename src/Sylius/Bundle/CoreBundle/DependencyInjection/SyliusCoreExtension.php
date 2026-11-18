@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Composer\InstalledVersions;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Sylius\Bundle\CoreBundle\Attribute\AsCatalogPromotionApplicatorCriteria;
@@ -112,6 +113,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->prependHwiOauth($container);
         $this->prependDoctrineMigrations($container);
         $this->prependDoctrineIdentityGenerationPreferences($container);
+        $this->prependDoctrineDisableTypeComments($container);
         $this->prependPropertyInfo($container);
     }
 
@@ -152,6 +154,29 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                     PostgreSQLPlatform::class => ClassMetadata::GENERATOR_TYPE_SEQUENCE,
                 ],
             ],
+        ]);
+    }
+
+    private function prependDoctrineDisableTypeComments(ContainerBuilder $container): void
+    {
+        // DBAL 4 no longer writes "(DC2Type:...)" column comments; disabling them on DBAL 3 keeps
+        // a single schema state, so migrations stay valid whichever DBAL version is installed.
+        if (
+            !$container->hasExtension('doctrine') ||
+            version_compare((string) InstalledVersions::getVersion('doctrine/dbal'), '4.0.0', '>=')
+        ) {
+            return;
+        }
+
+        $connections = [];
+        foreach ($container->getExtensionConfig('doctrine') as $doctrineConfig) {
+            foreach (array_keys((array) ($doctrineConfig['dbal']['connections'] ?? [])) as $connectionName) {
+                $connections[$connectionName] = ['disable_type_comments' => true];
+            }
+        }
+
+        $container->prependExtensionConfig('doctrine', [
+            'dbal' => [] === $connections ? ['disable_type_comments' => true] : ['connections' => $connections],
         ]);
     }
 

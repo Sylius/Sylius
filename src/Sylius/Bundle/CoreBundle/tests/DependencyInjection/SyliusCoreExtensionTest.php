@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Composer\InstalledVersions;
 use Doctrine\Bundle\MigrationsBundle\DependencyInjection\DoctrineMigrationsExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -29,7 +30,9 @@ use Sylius\Bundle\CoreBundle\Attribute\AsUriBasedSectionResolver;
 use Sylius\Bundle\CoreBundle\DependencyInjection\SyliusCoreExtension;
 use Sylius\Component\Core\Filesystem\Adapter\FilesystemAdapterInterface;
 use SyliusLabs\DoctrineMigrationsExtraBundle\DependencyInjection\SyliusLabsDoctrineMigrationsExtraExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Tests\Sylius\Bundle\CoreBundle\Stub\CatalogPromotionApplicatorCriteriaStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\CatalogPromotionPriceCalculatorStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\EntityObserverStub;
@@ -609,6 +612,82 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     protected function getContainerExtensions(): array
     {
         return [new SyliusCoreExtension()];
+    }
+
+    #[Test]
+    public function it_prepends_disabling_doctrine_type_comments_on_dbal_3(): void
+    {
+        $this->skipUnlessDbal3();
+
+        $this->container->setParameter('kernel.environment', 'dev');
+        $this->registerDoctrineExtensionStub();
+
+        $this->load();
+
+        $this->assertContains(
+            ['dbal' => ['disable_type_comments' => true]],
+            $this->container->getExtensionConfig('doctrine'),
+        );
+    }
+
+    #[Test]
+    public function it_prepends_disabling_doctrine_type_comments_for_each_configured_connection_on_dbal_3(): void
+    {
+        $this->skipUnlessDbal3();
+
+        $this->container->setParameter('kernel.environment', 'dev');
+        $this->registerDoctrineExtensionStub();
+        $this->container->loadFromExtension('doctrine', [
+            'dbal' => ['connections' => ['main' => [], 'legacy' => []]],
+        ]);
+
+        $this->load();
+
+        $this->assertContains(
+            ['dbal' => ['connections' => [
+                'main' => ['disable_type_comments' => true],
+                'legacy' => ['disable_type_comments' => true],
+            ]]],
+            $this->container->getExtensionConfig('doctrine'),
+        );
+    }
+
+    #[Test]
+    public function it_does_not_prepend_disabling_doctrine_type_comments_on_dbal_4(): void
+    {
+        if (version_compare((string) InstalledVersions::getVersion('doctrine/dbal'), '4.0.0', '<')) {
+            $this->markTestSkipped('Doctrine type comments are disabled only on DBAL 3.');
+        }
+
+        $this->container->setParameter('kernel.environment', 'dev');
+        $this->registerDoctrineExtensionStub();
+
+        $this->load();
+
+        foreach ($this->container->getExtensionConfig('doctrine') as $doctrineConfig) {
+            $this->assertArrayNotHasKey('dbal', $doctrineConfig);
+        }
+    }
+
+    private function registerDoctrineExtensionStub(): void
+    {
+        $this->container->registerExtension(new class() extends Extension {
+            public function load(array $configs, ContainerBuilder $container): void
+            {
+            }
+
+            public function getAlias(): string
+            {
+                return 'doctrine';
+            }
+        });
+    }
+
+    private function skipUnlessDbal3(): void
+    {
+        if (version_compare((string) InstalledVersions::getVersion('doctrine/dbal'), '4.0.0', '>=')) {
+            $this->markTestSkipped('Doctrine type comments are disabled only on DBAL 3.');
+        }
     }
 
     private function testPrependingDoctrineMigrations(string $env): void
