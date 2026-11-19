@@ -49,7 +49,11 @@ class ImageUploader implements ImageUploaderInterface
 
         $image->setPath($path);
 
-        $this->filesystem->write($image->getPath(), file_get_contents($file->getPathname()));
+        $stream = fopen($file->getPathname(), 'r');
+        $this->filesystem->writeStream($image->getPath(), $stream);
+        if (is_resource($stream)) {
+            fclose($stream);
+        }
     }
 
     public function remove(string $path): bool
