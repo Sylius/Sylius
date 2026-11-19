@@ -477,8 +477,6 @@ final readonly class ManagingShippingMethodsContext implements Context
         Assert::oneOf(
             $this->shippingMethodFormElement->getValidationMessage('last_rule_weight'),
             [
-                // Symfony's NumberType invalid_message is the message *id*;
-                // the English catalogue renders it as the second string.
                 'Please enter a number.',
                 'This value is not a valid number.',
             ],
