@@ -20,6 +20,9 @@ use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Sylius\Bundle\CoreBundle\OAuth\Checker\AlwaysVerifiedEmailChecker;
+use Sylius\Bundle\CoreBundle\OAuth\Checker\EmailVerificationCheckerInterface;
+use Sylius\Bundle\CoreBundle\OAuth\Exception\UnverifiedEmailException;
 use Sylius\Bundle\CoreBundle\OAuth\UserProvider;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -52,6 +55,8 @@ final class UserProviderTest extends TestCase
 
     private MockObject&RepositoryInterface $oauthRepository;
 
+    private EmailVerificationCheckerInterface&MockObject $emailVerificationChecker;
+
     private UserProvider $provider;
 
     protected function setUp(): void
@@ -64,6 +69,7 @@ final class UserProviderTest extends TestCase
         $this->userManager = $this->createMock(ObjectManager::class);
         $this->canonicalizer = $this->createMock(CanonicalizerInterface::class);
         $this->customerRepository = $this->createMock(CustomerRepositoryInterface::class);
+        $this->emailVerificationChecker = $this->createMock(EmailVerificationCheckerInterface::class);
 
         $this->provider = new UserProvider(
             ShopUserInterface::class,
@@ -75,6 +81,7 @@ final class UserProviderTest extends TestCase
             $this->userManager,
             $this->canonicalizer,
             $this->customerRepository,
+            $this->emailVerificationChecker,
         );
     }
 
@@ -179,5 +186,138 @@ final class UserProviderTest extends TestCase
 
         $user = $this->createMock(UserInterface::class);
         $this->provider->refreshUser($user);
+    }
+
+    public function testLinksOAuthAccountToExistingUserWhenTheProviderConfirmedTheEmail(): void
+    {
+        $response = $this->createResponse();
+        $user = $this->createMock(ShopUserInterface::class);
+
+        $this->oauthRepository->method('findOneBy')->willReturn(null);
+        $this->canonicalizer->method('canonicalize')->willReturn('user@example.com');
+        $this->userRepository->method('findOneByEmail')->willReturn($user);
+        $this->emailVerificationChecker->method('isEmailVerified')->with($response)->willReturn(true);
+        $this->oauthFactory->method('createNew')->willReturn($this->createMock(UserOAuthInterface::class));
+
+        $user->expects($this->once())->method('addOAuthAccount');
+        $this->userManager->expects($this->once())->method('persist')->with($user);
+        $this->userManager->expects($this->once())->method('flush');
+
+        $this->assertSame($user, $this->provider->loadUserByOAuthUserResponse($response));
+    }
+
+    public function testThrowsExceptionWhenTheProviderDidNotConfirmTheEmailOfAnExistingUser(): void
+    {
+        $response = $this->createResponse();
+        $user = $this->createMock(ShopUserInterface::class);
+
+        $this->oauthRepository->method('findOneBy')->willReturn(null);
+        $this->canonicalizer->method('canonicalize')->willReturn('user@example.com');
+        $this->userRepository->method('findOneByEmail')->willReturn($user);
+        $this->emailVerificationChecker->method('isEmailVerified')->willReturn(false);
+
+        $user->expects($this->never())->method('addOAuthAccount');
+        $this->userManager->expects($this->never())->method('persist');
+        $this->userManager->expects($this->never())->method('flush');
+
+        $this->expectException(UnverifiedEmailException::class);
+
+        $this->provider->loadUserByOAuthUserResponse($response);
+    }
+
+    public function testLinksOAuthAccountToExistingUserWithUnverifiedEmailWhenVerificationIsNotRequired(): void
+    {
+        $response = $this->createResponse();
+        $user = $this->createMock(ShopUserInterface::class);
+
+        $this->oauthRepository->method('findOneBy')->willReturn(null);
+        $this->canonicalizer->method('canonicalize')->willReturn('user@example.com');
+        $this->userRepository->method('findOneByEmail')->willReturn($user);
+        $this->oauthFactory->method('createNew')->willReturn($this->createMock(UserOAuthInterface::class));
+
+        $user->expects($this->once())->method('addOAuthAccount');
+
+        $this->assertSame($user, $this->createProvider(new AlwaysVerifiedEmailChecker())->loadUserByOAuthUserResponse($response));
+    }
+
+    public function testCanonicalizesTheEmailBeforeLookingUpAnExistingUser(): void
+    {
+        $response = $this->createResponse('User@Example.COM');
+        $user = $this->createMock(ShopUserInterface::class);
+
+        $this->oauthRepository->method('findOneBy')->willReturn(null);
+        $this->emailVerificationChecker->method('isEmailVerified')->willReturn(true);
+        $this->oauthFactory->method('createNew')->willReturn($this->createMock(UserOAuthInterface::class));
+
+        $this->canonicalizer
+            ->expects($this->once())
+            ->method('canonicalize')
+            ->with('User@Example.COM')
+            ->willReturn('user@example.com')
+        ;
+
+        $this->userRepository
+            ->expects($this->once())
+            ->method('findOneByEmail')
+            ->with('user@example.com')
+            ->willReturn($user)
+        ;
+
+        $this->provider->loadUserByOAuthUserResponse($response);
+    }
+
+    public function testDoesNotCheckTheEmailWhenTheOAuthAccountIsAlreadyLinked(): void
+    {
+        $user = $this->createMock(ShopUserInterface::class);
+        $oauth = $this->createMock(UserOAuthInterface::class);
+        $oauth->method('getUser')->willReturn($user);
+
+        $this->oauthRepository->method('findOneBy')->willReturn($oauth);
+
+        $this->emailVerificationChecker->expects($this->never())->method('isEmailVerified');
+
+        $this->assertSame($user, $this->provider->loadUserByOAuthUserResponse($this->createResponse()));
+    }
+
+    public function testDoesNotCheckTheEmailWhenAnAuthenticatedUserExplicitlyConnectsAnAccount(): void
+    {
+        $user = $this->createMock(ShopUserInterface::class);
+        $this->oauthFactory->method('createNew')->willReturn($this->createMock(UserOAuthInterface::class));
+
+        $this->emailVerificationChecker->expects($this->never())->method('isEmailVerified');
+        $user->expects($this->once())->method('addOAuthAccount');
+
+        $this->provider->connect($user, $this->createResponse());
+    }
+
+    private function createResponse(string $email = 'user@example.com', string $resourceOwnerName = 'google'): MockObject&UserResponseInterface
+    {
+        $resourceOwner = $this->createMock(ResourceOwnerInterface::class);
+        $resourceOwner->method('getName')->willReturn($resourceOwnerName);
+
+        $response = $this->createMock(UserResponseInterface::class);
+        $response->method('getResourceOwner')->willReturn($resourceOwner);
+        $response->method('getUsername')->willReturn('username');
+        $response->method('getEmail')->willReturn($email);
+        $response->method('getAccessToken')->willReturn('access_token');
+        $response->method('getRefreshToken')->willReturn('refresh_token');
+
+        return $response;
+    }
+
+    private function createProvider(EmailVerificationCheckerInterface $emailVerificationChecker): UserProvider
+    {
+        return new UserProvider(
+            ShopUserInterface::class,
+            $this->customerFactory,
+            $this->userFactory,
+            $this->userRepository,
+            $this->oauthFactory,
+            $this->oauthRepository,
+            $this->userManager,
+            $this->canonicalizer,
+            $this->customerRepository,
+            $emailVerificationChecker,
+        );
     }
 }

@@ -1,0 +1,2 @@
+hwi_oauth:
+    resource: "../test/hwi_oauth.yaml"
