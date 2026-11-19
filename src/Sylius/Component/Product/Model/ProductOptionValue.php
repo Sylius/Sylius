@@ -32,6 +32,9 @@ class ProductOptionValue implements ProductOptionValueInterface, \Stringable
     /** @var ProductOptionInterface|null */
     protected $option;
 
+    /** @var int|null */
+    protected $position;
+
     public function __construct()
     {
         $this->initializeTranslationCollection();
@@ -65,6 +68,16 @@ class ProductOptionValue implements ProductOptionValueInterface, \Stringable
     public function setOption(?ProductOptionInterface $option): void
     {
         $this->option = $option;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): void
+    {
+        $this->position = $position;
     }
 
     public function getValue(): ?string
