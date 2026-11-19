@@ -17,6 +17,10 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Metadata\Exception\InvalidArgumentException;
 use ApiPlatform\Metadata\Exception\ItemNotFoundException;
 use ApiPlatform\Metadata\IriConverterInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\Expr\Func;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -48,6 +52,10 @@ final class TaxonFilterTest extends TestCase
         $taxonRoot = $this->createMock(TaxonInterface::class);
         $queryBuilder = $this->createMock(QueryBuilder::class);
         $queryNameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $subQueryBuilder = $this->createMock(QueryBuilder::class);
+        $classMetadata = $this->createMock(ClassMetadata::class);
+        $expr = $this->createMock(Expr::class);
 
         $this->iriConverter
             ->method('getResourceFromIri')
@@ -55,25 +63,39 @@ final class TaxonFilterTest extends TestCase
             ->willReturn($taxon);
 
         $queryBuilder->method('getRootAliases')->willReturn(['o']);
-
-        $queryBuilder->method('distinct')->willReturnSelf();
-        $queryBuilder->method('addSelect')->willReturnSelf();
-        $queryBuilder->method('innerJoin')->willReturnSelf();
+        $queryBuilder->method('getEntityManager')->willReturn($entityManager);
+        $queryBuilder->method('expr')->willReturn($expr);
         $queryBuilder->method('andWhere')->willReturnSelf();
         $queryBuilder->method('setParameter')->willReturnSelf();
+        $queryBuilder->method('leftJoin')->willReturnSelf();
+
+        $entityManager->method('createQueryBuilder')->willReturn($subQueryBuilder);
+        $entityManager->method('getClassMetadata')->with('resourceClass')->willReturn($classMetadata);
+
+        $subQueryBuilder->method('select')->willReturnSelf();
+        $subQueryBuilder->method('from')->willReturnSelf();
+        $subQueryBuilder->method('innerJoin')->willReturnSelf();
+        $subQueryBuilder->method('andWhere')->willReturnSelf();
+        $subQueryBuilder->method('getDQL')->willReturn('');
+
+        $classMetadata->method('getAssociationTargetClass')->with('productTaxons')->willReturn('ProductTaxonClass');
+
+        $expr->method('in')->willReturn($this->createMock(Func::class));
+
+        $taxon->method('getRoot')->willReturn($taxonRoot);
+        $taxon->method('getLeft')->willReturn(3);
+        $taxon->method('getRight')->willReturn(5);
+
+        $queryNameGenerator->method('generateJoinAlias')->with('productTaxon')->willReturn('productTaxon_a1');
 
         $queryBuilder
             ->expects($this->once())
             ->method('addOrderBy')
             ->with(
-                $this->equalTo('productTaxon.position'),
+                $this->equalTo('productTaxon_a1.position'),
                 $this->isNull(),
             )
             ->willReturnSelf();
-
-        $taxon->method('getRoot')->willReturn($taxonRoot);
-        $taxon->method('getLeft')->willReturn(3);
-        $taxon->method('getRight')->willReturn(5);
 
         $this->taxonFilter->filterProperty('taxon', 'api/taxon', $queryBuilder, $queryNameGenerator, 'resourceClass');
     }
@@ -84,6 +106,9 @@ final class TaxonFilterTest extends TestCase
         $taxonRoot = $this->createMock(TaxonInterface::class);
         $queryBuilder = $this->createMock(QueryBuilder::class);
         $queryNameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $subQueryBuilder = $this->createMock(QueryBuilder::class);
+        $expr = $this->createMock(Expr::class);
         $context = ['filters' => ['order' => ['differentOrderParameter' => 'asc']]];
 
         $this->iriConverter
@@ -92,11 +117,20 @@ final class TaxonFilterTest extends TestCase
             ->willReturn($taxon);
 
         $queryBuilder->method('getRootAliases')->willReturn(['o']);
-        $queryBuilder->method('distinct')->willReturnSelf();
-        $queryBuilder->method('addSelect')->willReturnSelf();
-        $queryBuilder->method('innerJoin')->willReturnSelf();
+        $queryBuilder->method('getEntityManager')->willReturn($entityManager);
+        $queryBuilder->method('expr')->willReturn($expr);
         $queryBuilder->method('andWhere')->willReturnSelf();
         $queryBuilder->method('setParameter')->willReturnSelf();
+
+        $entityManager->method('createQueryBuilder')->willReturn($subQueryBuilder);
+
+        $subQueryBuilder->method('select')->willReturnSelf();
+        $subQueryBuilder->method('from')->willReturnSelf();
+        $subQueryBuilder->method('innerJoin')->willReturnSelf();
+        $subQueryBuilder->method('andWhere')->willReturnSelf();
+        $subQueryBuilder->method('getDQL')->willReturn('');
+
+        $expr->method('in')->willReturn($this->createMock(Func::class));
 
         $taxon->method('getRoot')->willReturn($taxonRoot);
         $taxon->method('getLeft')->willReturn(null);
@@ -118,6 +152,9 @@ final class TaxonFilterTest extends TestCase
     {
         $queryBuilder = $this->createMock(QueryBuilder::class);
         $queryNameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $subQueryBuilder = $this->createMock(QueryBuilder::class);
+        $expr = $this->createMock(Expr::class);
 
         $this->iriConverter
             ->method('getResourceFromIri')
@@ -125,11 +162,20 @@ final class TaxonFilterTest extends TestCase
             ->willThrowException(new ItemNotFoundException());
 
         $queryBuilder->method('getRootAliases')->willReturn(['o']);
-        $queryBuilder->method('distinct')->willReturnSelf();
-        $queryBuilder->method('addSelect')->willReturnSelf();
-        $queryBuilder->method('innerJoin')->willReturnSelf();
+        $queryBuilder->method('getEntityManager')->willReturn($entityManager);
+        $queryBuilder->method('expr')->willReturn($expr);
         $queryBuilder->method('andWhere')->willReturnSelf();
         $queryBuilder->method('setParameter')->willReturnSelf();
+
+        $entityManager->method('createQueryBuilder')->willReturn($subQueryBuilder);
+
+        $subQueryBuilder->method('select')->willReturnSelf();
+        $subQueryBuilder->method('from')->willReturnSelf();
+        $subQueryBuilder->method('innerJoin')->willReturnSelf();
+        $subQueryBuilder->method('andWhere')->willReturnSelf();
+        $subQueryBuilder->method('getDQL')->willReturn('');
+
+        $expr->method('in')->willReturn($this->createMock(Func::class));
 
         $queryBuilder->expects($this->never())->method('addOrderBy');
 
@@ -146,6 +192,9 @@ final class TaxonFilterTest extends TestCase
     {
         $queryBuilder = $this->createMock(QueryBuilder::class);
         $queryNameGenerator = $this->createMock(QueryNameGeneratorInterface::class);
+        $entityManager = $this->createMock(EntityManagerInterface::class);
+        $subQueryBuilder = $this->createMock(QueryBuilder::class);
+        $expr = $this->createMock(Expr::class);
 
         $this->iriConverter
             ->method('getResourceFromIri')
@@ -153,11 +202,20 @@ final class TaxonFilterTest extends TestCase
             ->willThrowException(new InvalidArgumentException());
 
         $queryBuilder->method('getRootAliases')->willReturn(['o']);
-        $queryBuilder->method('distinct')->willReturnSelf();
-        $queryBuilder->method('addSelect')->willReturnSelf();
-        $queryBuilder->method('innerJoin')->willReturnSelf();
+        $queryBuilder->method('getEntityManager')->willReturn($entityManager);
+        $queryBuilder->method('expr')->willReturn($expr);
         $queryBuilder->method('andWhere')->willReturnSelf();
         $queryBuilder->method('setParameter')->willReturnSelf();
+
+        $entityManager->method('createQueryBuilder')->willReturn($subQueryBuilder);
+
+        $subQueryBuilder->method('select')->willReturnSelf();
+        $subQueryBuilder->method('from')->willReturnSelf();
+        $subQueryBuilder->method('innerJoin')->willReturnSelf();
+        $subQueryBuilder->method('andWhere')->willReturnSelf();
+        $subQueryBuilder->method('getDQL')->willReturn('');
+
+        $expr->method('in')->willReturn($this->createMock(Func::class));
 
         $queryBuilder->expects($this->never())->method('addOrderBy');
 
