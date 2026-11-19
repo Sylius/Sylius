@@ -76,6 +76,9 @@ sylius_twig_hooks:
             shipping:
                 template: '@SyliusAdmin/product_variant/form/sections/general/body/shipping.html.twig'
                 priority: 200
+            withdrawal_excluded:
+                template: '@SyliusAdmin/product_variant/form/sections/general/body/withdrawal_excluded.html.twig'
+                priority: 150
             options:
                 template: '@SyliusAdmin/product_variant/form/sections/general/body/options.html.twig'
                 priority: 100

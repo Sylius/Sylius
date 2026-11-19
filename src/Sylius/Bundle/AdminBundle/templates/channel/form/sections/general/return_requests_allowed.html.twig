@@ -1,0 +1,12 @@
+{% embed '@SyliusAdmin/shared/plus_placeholder.html.twig' with { utm_campaign: 'returns-placeholder', class: 'col-12' } %}
+    {% block content %}
+        <div class="mb-3">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="plus_placeholder_return_requests_allowed" disabled>
+                <label class="form-check-label" for="plus_placeholder_return_requests_allowed">
+                    {{ 'sylius.ui.plus_placeholder.returns.return_requests_allowed'|trans }}
+                </label>
+            </div>
+        </div>
+    {% endblock %}
+{% endembed %}

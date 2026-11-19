@@ -53,6 +53,8 @@ sylius:
                 sales:
                     header: Sales
                     orders: Orders
+                    return_requests: Return requests
+                    subscriptions: Subscriptions
                 official_support:
                     header: Official support
                     browse_plugins: Browse plugins
@@ -117,6 +119,26 @@ sylius:
                 description: 'One integration for 125+ payment methods, built on developer-first APIs.'
                 title: 'Accept payments with Stripe'
         pending_actions: Pending actions
+        plus_placeholder:
+            product_configurator:
+                add_customization: 'Add customization'
+                product_configuration: 'Product configuration'
+                product_configurator: 'Product configurator'
+            returns:
+                no_return_requests: 'There are no return requests for this order.'
+                return_requests: 'Return requests'
+                return_requests_allowed: 'Are customer return requests allowed?'
+                withdrawal: 'Withdrawal'
+                withdrawal_enabled: 'Is withdrawal allowed?'
+                withdrawal_excluded: 'Excluded from withdrawal'
+                withdrawal_period_days: 'Withdrawal period (days)'
+            subscriptions:
+                interval: 'Billing interval'
+                no_subscriptions: 'There are no subscriptions for this order.'
+                select_interval: 'Select interval'
+                subscription: 'Subscription'
+                subscription_enabled: 'Enable subscription'
+                subscriptions: 'Subscriptions'
         price_details: Price - this is the current price of the product variant displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
         product_price_details: Price - this is the current price of the product displayed in the catalog. It can be modified explicitly by i.e. catalog promotions.
         price_history: Price history
