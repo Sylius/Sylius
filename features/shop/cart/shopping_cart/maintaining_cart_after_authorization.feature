@@ -53,6 +53,16 @@ Feature: Maintaining cart after authorization
         And this item should have name "Stark T-Shirt"
 
     @api @ui @mink:chromedriver
+    Scenario: Having cart maintained after logging in when the guest has addressed the cart with a typo email and then corrected it
+        When I add "Stark T-Shirt" product to the cart
+        And I addressed the cart with email "robb@strak.com"
+        And I addressed the cart with email "robb@stark.com"
+        And I log in as "robb@stark.com" with "KingInTheNorth" password
+        And I see the summary of my cart
+        Then there should be one item in my cart
+        And this item should have name "Stark T-Shirt"
+
+    @api @ui @mink:chromedriver
     Scenario: Having cart maintained after registration
         When I add product "Stark T-Shirt" to the cart
         And I register with email "eddard@stak.com" and password "handOfTheKing"
