@@ -91,6 +91,10 @@ interface ChannelInterface extends
 
     public function hasCountry(CountryInterface $country): bool;
 
+    public function isShowPricesIncludingTax(): bool;
+
+    public function setShowPricesIncludingTax(bool $showPricesIncludingTax): void;
+
     public function setChannelPriceHistoryConfig(ChannelPriceHistoryConfigInterface $channelPriceHistoryConfig): void;
 
     public function getChannelPriceHistoryConfig(): ?ChannelPriceHistoryConfigInterface;
