@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 
@@ -33,6 +34,11 @@ final class ProductVariantAutocompleteType extends AbstractType
         $resolver->setDefaults([
             'class' => $this->productVariantClass,
         ]);
+
+        $resolver->setDefault(
+            'choice_label',
+            fn (Options $options, mixed $previousValue): mixed => $options['extra_options']['choice_label'] ?? 'name',
+        );
     }
 
     public function getBlockPrefix(): string
