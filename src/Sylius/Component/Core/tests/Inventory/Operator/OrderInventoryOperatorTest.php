@@ -112,6 +112,19 @@ final class OrderInventoryOperatorTest extends TestCase
         $this->operator->cancel($this->order);
     }
 
+    public function testShouldIncreasesOnHandDuringCancellingOfPartiallyRefundedOrder(): void
+    {
+        $this->order->expects($this->once())->method('getPaymentState')->willReturn(OrderPaymentStates::STATE_PARTIALLY_REFUNDED);
+        $this->order->expects($this->once())->method('getItems')->willReturn(new ArrayCollection([$this->orderItem]));
+        $this->orderItem->expects($this->once())->method('getVariant')->willReturn($this->productVariant);
+        $this->productVariant->expects($this->once())->method('isTracked')->willReturn(true);
+        $this->orderItem->expects($this->once())->method('getQuantity')->willReturn(10);
+        $this->productVariant->expects($this->once())->method('getOnHand')->willReturn(0);
+        $this->productVariant->expects($this->once())->method('setOnHand')->with(10);
+
+        $this->operator->cancel($this->order);
+    }
+
     public function testShouldThrowNotEnoughUnitsOnHoldExceptionIfDifferenceBetweenOnHoldAndItemQuantityIsSmallerThanZeroDuringCancelling(): void
     {
         $this->expectException(NotEnoughUnitsOnHoldException::class);
