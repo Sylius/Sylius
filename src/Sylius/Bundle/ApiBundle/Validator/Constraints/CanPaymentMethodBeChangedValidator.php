@@ -38,7 +38,11 @@ final class CanPaymentMethodBeChangedValidator extends ConstraintValidator
         Assert::notNull($order);
 
         if ($order->getState() === OrderInterface::STATE_CANCELLED) {
-            $this->context->addViolation($constraint::CANNOT_CHANGE_PAYMENT_METHOD_FOR_CANCELLED_ORDER);
+            $this->context
+                ->buildViolation($constraint::CANNOT_CHANGE_PAYMENT_METHOD_FOR_CANCELLED_ORDER)
+                ->setCode(CanPaymentMethodBeChanged::ORDER_CANCELLED_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

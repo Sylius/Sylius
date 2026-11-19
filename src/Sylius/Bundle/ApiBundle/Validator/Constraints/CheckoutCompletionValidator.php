@@ -48,15 +48,18 @@ class CheckoutCompletionValidator extends ConstraintValidator
             return;
         }
 
-        $this->context->addViolation($constraint->message, [
-            '%currentState%' => $order->getCheckoutState(),
-            '%possibleTransitions%' => implode(
+        $this->context
+            ->buildViolation($constraint->message)
+            ->setParameter('%currentState%', (string) $order->getCheckoutState())
+            ->setParameter('%possibleTransitions%', implode(
                 ', ',
                 array_map(
                     fn (TransitionInterface $transition) => $transition->getName(),
                     $this->stateMachine->getEnabledTransitions($order, OrderCheckoutTransitions::GRAPH),
                 ),
-            ),
-        ]);
+            ))
+            ->setCode(CheckoutCompletion::INVALID_STATE_TRANSITION_ERROR)
+            ->addViolation()
+        ;
     }
 }

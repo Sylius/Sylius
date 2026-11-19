@@ -49,6 +49,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('couponCode')
+                ->setCode(PromotionCouponEligibility::COUPON_INVALID_ERROR)
                 ->addViolation()
             ;
 
@@ -64,6 +65,7 @@ final class PromotionCouponEligibilityValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->message)
                 ->atPath('couponCode')
+                ->setCode(PromotionCouponEligibility::COUPON_INVALID_ERROR)
                 ->addViolation()
             ;
         }

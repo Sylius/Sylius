@@ -19,6 +19,12 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class AddingEligibleProductVariantToCart extends Constraint
 {
+    public const PRODUCT_NOT_EXIST_ERROR = 'PRODUCT_NOT_FOUND';
+
+    public const PRODUCT_VARIANT_NOT_EXIST_ERROR = 'PRODUCT_VARIANT_NOT_FOUND';
+
+    public const PRODUCT_VARIANT_NOT_SUFFICIENT_ERROR = 'INSUFFICIENT_STOCK';
+
     /** @deprecated since Sylius 2.3, use $productVariantNotSufficientMessage instead. It will be removed in Sylius 3.0. */
     public string $productVariantNotSufficient = 'sylius.product_variant.not_sufficient';
 

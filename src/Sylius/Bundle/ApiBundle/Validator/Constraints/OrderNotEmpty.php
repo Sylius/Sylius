@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderNotEmpty extends Constraint
 {
+    public const ORDER_EMPTY_ERROR = 'ORDER_EMPTY';
+
     /**
      * @param array<string, mixed>|null $options
      */

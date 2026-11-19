@@ -18,6 +18,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderPaymentRequestEligibility extends Constraint
 {
+    public const INVALID_ORDER_CHECKOUT_STATE_ERROR = 'INVALID_ORDER_CHECKOUT_STATE';
+
     public string $message = 'sylius.payment_request.invalid_order_checkout_state';
 
     public function validatedBy(): string
