@@ -84,5 +84,6 @@
         <service id="sylius.console.command.show_plus_info" class="Sylius\Bundle\CoreBundle\Console\Command\ShowPlusInfoCommand">
             <tag name="console.command" />
         </service>
+
     </services>
 </container>
