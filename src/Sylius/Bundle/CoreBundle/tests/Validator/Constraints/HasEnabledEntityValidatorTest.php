@@ -27,7 +27,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class HasEnabledEntityValidatorTest extends TestCase
 {
@@ -169,7 +169,7 @@ final class HasEnabledEntityValidatorTest extends TestCase
 
     public function testAddsViolationIfPassedValueIsTheOnlyEnabledEntity(): void
     {
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $manager = $this->createMock(ObjectManager::class);
         $metadata = $this->createMock(ClassMetadata::class);
         $repository = $this->createMock(ObjectRepository::class);
@@ -195,7 +195,7 @@ final class HasEnabledEntityValidatorTest extends TestCase
 
     public function testAddsViolationAtCustomPathIfPassedValueIsTheOnlyEnabledEntity(): void
     {
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $manager = $this->createMock(ObjectManager::class);
         $metadata = $this->createMock(ClassMetadata::class);
         $repository = $this->createMock(ObjectRepository::class);

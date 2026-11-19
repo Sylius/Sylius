@@ -31,7 +31,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Validator\ContextualValidatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class ChannelCodeCollectionValidatorTest extends TestCase
 {
@@ -83,7 +83,7 @@ final class ChannelCodeCollectionValidatorTest extends TestCase
 
     public function testItValidatesTheValueChannelsExistence(): void
     {
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $channelsAware = $this->createMock(ChannelsAwareInterface::class);
         $form = $this->createMock(Form::class);
 

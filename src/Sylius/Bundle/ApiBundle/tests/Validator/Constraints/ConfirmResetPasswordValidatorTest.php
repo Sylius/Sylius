@@ -21,7 +21,7 @@ use Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPassword;
 use Sylius\Bundle\ApiBundle\Validator\Constraints\ConfirmResetPasswordValidator;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ConfirmResetPasswordValidatorTest extends TestCase
@@ -54,8 +54,8 @@ final class ConfirmResetPasswordValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
-        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilder::class);
         $constraint = new ConfirmResetPassword();
         $constraint->message = 'message';
         $this->confirmResetPasswordValidator->initialize($executionContextMock);

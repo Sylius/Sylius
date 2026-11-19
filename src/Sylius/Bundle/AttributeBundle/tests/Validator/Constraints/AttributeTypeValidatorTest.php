@@ -22,7 +22,7 @@ use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class AttributeTypeValidatorTest extends TestCase
@@ -94,8 +94,8 @@ final class AttributeTypeValidatorTest extends TestCase
 
     public function testAddsViolationWhenAttributeTypeIsNotRegistered(): void
     {
-        /** @var ConstraintViolationBuilderInterface&MockObject $violationBuilder */
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $violationBuilder */
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $constraint = new AttributeType();
 
         $this->attribute->expects(self::once())->method('getType')->willReturn('foo');

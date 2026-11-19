@@ -71,13 +71,15 @@ abstract class DriverHelper
         // (the one carrying the "live" Stimulus controller), not on the form. We scope the "busy"
         // probe to that root so that an unrelated "busy" attribute appearing elsewhere in the DOM
         // cannot stall the wait; the "data-live-is-loading" marker is Live Component specific already.
-        $session->wait(1000, "document.querySelectorAll('[data-controller~=\"live\"][busy], [data-live-is-loading]').length > 0");
+        for ($attempt = 0; $attempt < 3; ++$attempt) {
+            $session->wait(300, "document.querySelectorAll('[data-controller~=\"live\"][busy], [data-live-is-loading]').length > 0");
 
-        // Wait until ALL Live Component requests have FINISHED.
-        $session->wait(
-            $timeout,
-            "document.readyState === 'complete' && " .
-            "document.querySelectorAll('[data-controller~=\"live\"][busy], [data-live-is-loading]').length === 0",
-        );
+            // Wait until ALL Live Component requests have FINISHED.
+            $session->wait(
+                $timeout,
+                "document.readyState === 'complete' && " .
+                "document.querySelectorAll('[data-controller~=\"live\"][busy], [data-live-is-loading]').length === 0",
+            );
+        }
     }
 }

@@ -6,7 +6,6 @@ parameters:
     secret: "Three can keep a secret, if two of them are dead."
 
 framework:
-    assets: false
     translator: { fallbacks: ["%locale%"] }
     secret: "%secret%"
     router:

@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class TaxonCodeExistsValidatorTest extends TestCase
 {
@@ -79,7 +79,7 @@ final class TaxonCodeExistsValidatorTest extends TestCase
     public function testItAddsViolationIfTaxonWithCodeDoesNotExist(): void
     {
         $constraint = new TaxonCodeExists();
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->taxonRepository
             ->method('findOneBy')

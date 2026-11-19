@@ -25,7 +25,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class HasAllPricesDefinedValidatorTest extends TestCase
 {
@@ -95,7 +95,7 @@ final class HasAllPricesDefinedValidatorTest extends TestCase
 
         $product->method('getChannels')->willReturn(new ArrayCollection([$channel1, $channel2]));
 
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $violationBuilder->method('atPath')->willReturn($violationBuilder);
         $violationBuilder->expects($this->once())->method('addViolation');
 
@@ -131,7 +131,7 @@ final class HasAllPricesDefinedValidatorTest extends TestCase
         $pricing2->method('getPrice')->willReturn(null);
         $product->method('getChannels')->willReturn(new ArrayCollection([$channel1, $channel2]));
 
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $violationBuilder->method('atPath')->willReturn($violationBuilder);
         $violationBuilder->expects($this->exactly(2))->method('addViolation');
 

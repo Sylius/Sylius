@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Validator\ContextualValidatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ShippingMethodRuleValidatorTest extends TestCase
@@ -61,8 +61,8 @@ final class ShippingMethodRuleValidatorTest extends TestCase
 
     public function testAddsViolationToShippingMethodRuleWithWrongType(): void
     {
-        /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $constraintViolationBuilder */
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         /** @var ShippingMethodRuleInterface&MockObject $shippingMethodRule */
         $shippingMethodRule = $this->createMock(ShippingMethodRuleInterface::class);
 

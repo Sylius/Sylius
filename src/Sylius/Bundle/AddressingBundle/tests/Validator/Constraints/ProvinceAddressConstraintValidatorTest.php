@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ProvinceAddressConstraintValidatorTest extends TestCase
@@ -101,8 +101,8 @@ final class ProvinceAddressConstraintValidatorTest extends TestCase
     {
         /** @var Country&MockObject $country */
         $country = $this->createMock(Country::class);
-        /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $constraintViolationBuilder */
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->address->expects($this->once())->method('getCountryCode')->willReturn('IE');
         $this->countryRepository->expects($this->once())->method('findOneBy')->with(['code' => 'IE'])->willReturn($country);
@@ -126,8 +126,8 @@ final class ProvinceAddressConstraintValidatorTest extends TestCase
         $country = $this->createMock(Country::class);
         /** @var Province&MockObject $province */
         $province = $this->createMock(Province::class);
-        /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $constraintViolationBuilder */
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->address->expects($this->once())->method('getCountryCode')->willReturn('US');
         $this->countryRepository->expects($this->once())->method('findOneBy')->with(['code' => 'US'])->willReturn($country);
@@ -151,8 +151,8 @@ final class ProvinceAddressConstraintValidatorTest extends TestCase
     {
         /** @var Country&MockObject $country */
         $country = $this->createMock(Country::class);
-        /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $constraintViolationBuilder */
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->address->expects($this->once())->method('getCountryCode')->willReturn('US');
         $this->countryRepository->expects($this->once())->method('findOneBy')->with(['code' => 'US'])->willReturn($country);

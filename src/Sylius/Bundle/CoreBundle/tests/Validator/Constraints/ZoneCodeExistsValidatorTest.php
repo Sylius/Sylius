@@ -22,7 +22,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class ZoneCodeExistsValidatorTest extends TestCase
 {
@@ -75,7 +75,7 @@ final class ZoneCodeExistsValidatorTest extends TestCase
         $constraint = new ZoneCodeExists();
         $constraint->message = 'sylius.zone.code.not_exist';
 
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $violationBuilder
             ->expects($this->once())
             ->method('setParameter')

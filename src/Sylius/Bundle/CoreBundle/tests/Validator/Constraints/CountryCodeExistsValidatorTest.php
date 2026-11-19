@@ -22,7 +22,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class CountryCodeExistsValidatorTest extends TestCase
 {
@@ -72,7 +72,7 @@ final class CountryCodeExistsValidatorTest extends TestCase
             ->with(['code' => 'country_code'])
             ->willReturn(null);
 
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $violationBuilder
             ->expects($this->once())

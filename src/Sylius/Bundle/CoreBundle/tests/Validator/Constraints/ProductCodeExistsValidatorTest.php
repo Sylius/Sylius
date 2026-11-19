@@ -22,7 +22,7 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class ProductCodeExistsValidatorTest extends TestCase
 {
@@ -75,7 +75,7 @@ final class ProductCodeExistsValidatorTest extends TestCase
     public function testItAddsViolationIfProductDoesNotExist(): void
     {
         $constraint = new ProductCodeExists();
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->productRepository->method('findOneByCode')->with('product_code')->willReturn(null);
 

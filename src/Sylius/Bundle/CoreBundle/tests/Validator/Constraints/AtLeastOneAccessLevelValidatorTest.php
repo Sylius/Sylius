@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class AtLeastOneAccessLevelValidatorTest extends TestCase
 {
@@ -87,7 +87,7 @@ final class AtLeastOneAccessLevelValidatorTest extends TestCase
     public function testItAddsViolationIfAdminUserHasNoAccessLevel(): void
     {
         $constraint = new AtLeastOneAccessLevel();
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $adminUser = $this->createMock(AdminUserInterface::class);
         $adminUser->method('hasAdministrationAccess')->willReturn(false);
