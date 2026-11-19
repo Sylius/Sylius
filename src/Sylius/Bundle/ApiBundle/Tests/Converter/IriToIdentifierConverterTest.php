@@ -81,6 +81,14 @@ final class IriToIdentifierConverterTest extends TestCase
     }
 
     /** @test */
+    public function it_treats_strings_that_cannot_be_matched_on_routes_because_of_exception_as_not_identifiers(): void
+    {
+        $this->router->match('test')->willThrow(new \Exception());
+
+        $this->assertFalse($this->converter->isIdentifier('test'));
+    }
+
+    /** @test */
     public function it_throws_invalid_argument_exception_if_no_route_matches(): void
     {
         $this->expectException(InvalidArgumentException::class);

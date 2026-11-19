@@ -75,7 +75,7 @@ final class IriToIdentifierConverter implements IriToIdentifierConverterInterfac
 
         try {
             $parameters = $this->router->match($fieldValue);
-        } catch (RoutingExceptionInterface) {
+        } catch (\Throwable) {
             return false;
         }
 
