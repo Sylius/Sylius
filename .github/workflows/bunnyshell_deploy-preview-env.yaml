@@ -64,7 +64,7 @@ jobs:
           echo "IS_ISSUE_COMMENT=${{ fromJSON(env.EVENT_JSON).issue.pull_request != '' }}" >> $GITHUB_ENV
           echo "PR_NUMBER=${{ fromJSON(env.EVENT_JSON).issue.number || fromJSON(env.EVENT_JSON).number }}" >> $GITHUB_ENV
       - name: Comment unapproved deployment
-        uses: thollander/actions-comment-pull-request@v2
+        uses: thollander/actions-comment-pull-request@fabd468d3a1a0b97feee5f6b9e499eab0dd903f6 # v2.5.0
         if: ${{ fromJSON(env.FLAGS_JSON).skip_deployment }}
         with:
           message: |
@@ -76,7 +76,7 @@ jobs:
   deploy:
     name: Deploy Environment
     needs: load-artifact
-    uses: bunnyshell/workflows/.github/workflows/deploy-env.yaml@v2
+    uses: bunnyshell/workflows/.github/workflows/deploy-env.yaml@eb12a4d9154db124044f2d155e2495bf295b18c7 # v2.2.0
     concurrency: bns-deploy-${{ needs.load-artifact.outputs.prNumber }}
     if: ${{ github.event.workflow_run.conclusion == 'success' && needs.load-artifact.outputs.skip-deployment == 'false' }}
     with:
