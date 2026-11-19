@@ -474,9 +474,14 @@ final readonly class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatTheWeightRuleHasAnInvalidConfiguration(): void
     {
         $channel = $this->sharedStorage->get('channel');
-        Assert::same(
+        Assert::oneOf(
             $this->shippingMethodFormElement->getValidationMessage('last_rule_weight'),
-            'Please enter a number.',
+            [
+                // Symfony's NumberType invalid_message is the message *id*;
+                // the English catalogue renders it as the second string.
+                'Please enter a number.',
+                'This value is not a valid number.',
+            ],
         );
     }
 
