@@ -80,12 +80,10 @@ final readonly class ZoneContext implements Context
         }
     }
 
-    /**
-     * @Given the store has (also) a zone :zoneName
-     * @Given the store has a zone :zoneName with code :code
-     * @Given the store also has a zone :zoneName with code :code
-     * @Given the store has a zone :zoneName with code :code and priority :priority
-     */
+    #[Given('the store has (also) a zone :zoneName')]
+    #[Given('the store has a zone :zoneName with code :code')]
+    #[Given('the store also has a zone :zoneName with code :code')]
+    #[Given('the store has a zone :zoneName with code :code and priority :priority')]
     public function theStoreHasAZoneWithCode(string $zoneName, ?string $code = null, ?int $priority = 0): void
     {
         $zone = $this->createZone($zoneName, $code, Scope::ALL);
@@ -94,9 +92,7 @@ final readonly class ZoneContext implements Context
         $this->saveZone($zone, 'zone');
     }
 
-    /**
-     * @Given the store has zones :firstName, :secondName and :thirdName
-     */
+    #[Given('the store has zones :firstName, :secondName and :thirdName')]
     public function theStoreHasZones(string ...$names): void
     {
         foreach ($names as $name) {
@@ -104,18 +100,14 @@ final readonly class ZoneContext implements Context
         }
     }
 
-    /**
-     * @Given the store has a :scope zone :zoneName with code :code
-     */
+    #[Given('the store has a :scope zone :zoneName with code :code')]
     public function theStoreHasAScopedZoneWithCode($scope, $zoneName, $code)
     {
         $this->saveZone($this->createZone($zoneName, $code, $scope), $scope . '_zone');
     }
 
-    /**
-     * @Given /^(it)(?:| also) has the ("([^"]+)" country) member$/
-     * @Given /^(this zone)(?:| also) has the ("([^"]+)" country) member$/
-     */
+    #[Given('/^(it)(?:| also) has the ("([^"]+)" country) member$/')]
+    #[Given('/^(this zone)(?:| also) has the ("([^"]+)" country) member$/')]
     public function itHasTheCountryMemberAndTheCountryMember(
         ZoneInterface $zone,
         CountryInterface $country,
@@ -126,9 +118,7 @@ final readonly class ZoneContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(the "([^"]*)" (?:country|province|zone) member) has been removed from (this zone)$/
-     */
+    #[Given('/^(the "([^"]*)" (?:country|province|zone) member) has been removed from (this zone)$/')]
     public function theZoneMemberHasBeenRemoved(
         ZoneMemberInterface $zoneMember,
         string $zoneMemberName,
@@ -139,9 +129,7 @@ final readonly class ZoneContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(it)(?:| also) has the ("([^"]+)", "([^"]+)" and "([^"]+)" country) members$/
-     */
+    #[Given('/^(it)(?:| also) has the ("([^"]+)", "([^"]+)" and "([^"]+)" country) members$/')]
     public function itHasCountryMembers(ZoneInterface $zone, array $countries): void
     {
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
@@ -153,10 +141,8 @@ final readonly class ZoneContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(it) has the ("[^"]+" province) member$/
-     * @Given /^(it) also has the ("[^"]+" province) member$/
-     */
+    #[Given('/^(it) has the ("[^"]+" province) member$/')]
+    #[Given('/^(it) also has the ("[^"]+" province) member$/')]
     public function itHasTheProvinceMemberAndTheProvinceMember(
         ZoneInterface $zone,
         ProvinceInterface $province,
@@ -167,10 +153,8 @@ final readonly class ZoneContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(it) has the (zone named "([^"]+)")$/
-     * @Given /^(it) also has the (zone named "([^"]+)")$/
-     */
+    #[Given('/^(it) has the (zone named "([^"]+)")$/')]
+    #[Given('/^(it) also has the (zone named "([^"]+)")$/')]
     public function itHasTheZoneMemberAndTheZoneMember(
         ZoneInterface $parentZone,
         ZoneInterface $childZone,

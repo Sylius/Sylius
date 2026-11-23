@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
@@ -27,9 +29,7 @@ final class ManagingShippingMethodsContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I archive the ("[^"]+" shipping method)$/
-     */
+    #[When('/^I archive the ("[^"]+" shipping method)$/')]
     public function iArchiveTheShippingMethod(ShippingMethodInterface $shippingMethod)
     {
         $shippingMethod->setArchivedAt(new \DateTime());
@@ -37,9 +37,7 @@ final class ManagingShippingMethodsContext implements Context
         $this->shippingMethodManager->flush();
     }
 
-    /**
-     * @Then the shipping method :shippingMethod should still exist in the registry
-     */
+    #[Then('the shipping method :shippingMethod should still exist in the registry')]
     public function theShippingMethodShouldStillExistInTheRegistry(ShippingMethodInterface $shippingMethod)
     {
         Assert::notNull($this->shippingMethodRepository->find($shippingMethod));

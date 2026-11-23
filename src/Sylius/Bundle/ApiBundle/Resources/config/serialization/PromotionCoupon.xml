@@ -48,6 +48,18 @@
             <group>sylius:admin:promotion_coupon:update</group>
         </attribute>
 
+        <attribute name="trackUsage">
+            <group>sylius:admin:promotion_coupon:index</group>
+            <group>sylius:admin:promotion_coupon:show</group>
+            <group>sylius:admin:promotion_coupon:create</group>
+            <group>sylius:admin:promotion_coupon:update</group>
+        </attribute>
+
+        <attribute name="trackUsageSince">
+            <group>sylius:admin:promotion_coupon:index</group>
+            <group>sylius:admin:promotion_coupon:show</group>
+        </attribute>
+
         <attribute name="used">
             <group>sylius:admin:promotion_coupon:index</group>
             <group>sylius:admin:promotion_coupon:show</group>

@@ -15,7 +15,6 @@ namespace Sylius\Bundle\PayumBundle\PaymentRequest\Processor;
 
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 
-/** @experimental */
 interface RequestProcessorInterface
 {
     public function process(

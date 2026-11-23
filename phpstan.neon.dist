@@ -39,6 +39,12 @@ parameters:
             count: 1
             path: src/Sylius/Bundle/AdminBundle/Notification/HubNotificationProvider.php
 
+        -
+            message: '/Property Sylius\\Bundle\\CoreBundle\\Doctrine\\ORM\\Promotion\\Modifier\\AtomicOrderPromotionsUsageModifier::\$decoratedModifier is never read, only written\./'
+            identifier: property.onlyWritten
+            count: 1
+            path: src/Sylius/Bundle/CoreBundle/Doctrine/ORM/Promotion/Modifier/AtomicOrderPromotionsUsageModifier.php
+
         - identifier: missingType.generics # This need to be fixed, too many classes are using generics without PHPDoc type
         # Symfony 7.4 introduced generics on NodeBuilder which phpstan-symfony does not handle correctly yet
         # See: https://github.com/phpstan/phpstan-symfony/issues/431
@@ -59,3 +65,10 @@ parameters:
           identifier: arguments.count
           count: 1
           path: src/Sylius/Bundle/ShopBundle/Router/LocaleStrippingRouter.php
+
+        # DBAL 3.x/4.x compatibility - getSchemaManager() removed in DBAL 4.x
+        -
+            message: '/Call to an undefined method Doctrine\\DBAL\\Connection::getSchemaManager\(\)\./'
+            identifier: method.notFound
+            paths:
+                - src/Sylius/Bundle/CoreBundle/Migrations/

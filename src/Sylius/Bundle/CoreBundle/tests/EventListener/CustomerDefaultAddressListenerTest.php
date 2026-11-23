@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\CoreBundle\EventListener;
 
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\EventListener\CustomerDefaultAddressListener;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Resource\Symfony\EventDispatcher\GenericEvent;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CustomerDefaultAddressListenerTest extends TestCase
 {
     private CustomerDefaultAddressListener $listener;

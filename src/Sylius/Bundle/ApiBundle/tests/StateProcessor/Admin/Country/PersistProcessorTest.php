@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Admin\Country;
 use ApiPlatform\Metadata\HttpOperation;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\StateProcessor\Admin\Country\PersistProcessor;
@@ -23,6 +24,7 @@ use Sylius\Component\Addressing\Checker\CountryProvincesDeletionCheckerInterface
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Exception\ResourceDeleteException;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $processor;

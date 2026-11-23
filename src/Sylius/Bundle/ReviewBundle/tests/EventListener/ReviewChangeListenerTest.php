@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ReviewBundle\EventListener;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\PreRemoveEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ReviewBundle\EventListener\ReviewChangeListener;
@@ -23,6 +24,7 @@ use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ReviewChangeListenerTest extends TestCase
 {
     /** @var ReviewableRatingUpdaterInterface&MockObject */

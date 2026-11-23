@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Telemetry;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Telemetry\Cache\TelemetryCacheInterface;
@@ -21,6 +22,7 @@ use Sylius\Component\Core\Telemetry\TelemetryOrchestratorInterface;
 use Sylius\Component\Core\Telemetry\TelemetrySendManager;
 use Symfony\Component\HttpFoundation\Request;
 
+#[AllowMockObjectsWithoutExpectations]
 final class TelemetrySendManagerTest extends TestCase
 {
     /** @var TelemetryOrchestratorInterface&MockObject */

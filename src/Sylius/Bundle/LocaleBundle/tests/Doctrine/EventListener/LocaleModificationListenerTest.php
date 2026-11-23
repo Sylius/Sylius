@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\LocaleBundle\Doctrine\EventListener;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\LocaleBundle\Doctrine\EventListener\LocaleModificationListener;
 use Symfony\Contracts\Cache\CacheInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class LocaleModificationListenerTest extends TestCase
 {
     /** @var CacheInterface&MockObject */

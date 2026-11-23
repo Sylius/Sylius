@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
@@ -32,6 +33,7 @@ use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class OrderTaxesProcessorTest extends TestCase
 {
     private MockObject&ZoneProviderInterface $defaultTaxZoneProvider;

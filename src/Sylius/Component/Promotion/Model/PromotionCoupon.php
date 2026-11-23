@@ -33,6 +33,10 @@ class PromotionCoupon implements PromotionCouponInterface
 
     protected ?PromotionInterface $promotion = null;
 
+    protected bool $trackUsage = true;
+
+    protected ?\DateTimeImmutable $trackUsageSince = null;
+
     /** @var \DateTimeInterface|null */
     protected $expiresAt;
 
@@ -99,6 +103,27 @@ class PromotionCoupon implements PromotionCouponInterface
     public function setExpiresAt(?\DateTimeInterface $expiresAt = null): void
     {
         $this->expiresAt = $expiresAt;
+    }
+
+    public function isTrackUsage(): bool
+    {
+        return $this->trackUsage;
+    }
+
+    public function setTrackUsage(bool $trackUsage): void
+    {
+        if ($trackUsage) {
+            $this->trackUsageSince = new \DateTimeImmutable();
+        } else {
+            $this->trackUsageSince = null;
+        }
+
+        $this->trackUsage = $trackUsage;
+    }
+
+    public function getTrackUsageSince(): ?\DateTimeImmutable
+    {
+        return $this->trackUsageSince;
     }
 
     public function isValid(): bool

@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
@@ -26,19 +28,15 @@ final readonly class CurrencyContext implements Context
     ) {
     }
 
-    /**
-     * @When /^I (?:start browsing|try to browse|browse) currencies$/
-     */
+    #[When('/^I (?:start browsing|try to browse|browse) currencies$/')]
     public function iBrowseCurrencies(): void
     {
         $this->client->index(Resources::CURRENCIES);
     }
 
-    /**
-     * @Then I should see :firstCurrency in the list
-     * @Then I should see :firstCurrency and :secondCurrency in the list
-     * @Then I should see :firstCurrency, :secondCurrency and :thirdCurrency in the list
-     */
+    #[Then('I should see :firstCurrency in the list')]
+    #[Then('I should see :firstCurrency and :secondCurrency in the list')]
+    #[Then('I should see :firstCurrency, :secondCurrency and :thirdCurrency in the list')]
     public function iShouldSeeCurrenciesInTheList(string ...$currenciesCodes): void
     {
         $response = $this->client->getLastResponse();

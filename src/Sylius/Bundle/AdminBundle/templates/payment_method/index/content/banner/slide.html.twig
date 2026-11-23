@@ -24,7 +24,7 @@
             </div>
             <div class="sylius-payment-methods-banner__methods">
                 <div class="sylius-payment-methods-banner__method-grid d-flex flex-wrap align-items-center">
-                    {% for code in banner.payment_methods|default([]) %}
+                    {% for code in sylius_payment_gateway_methods(banner.variant) %}
                         <span class="sylius-payment-methods-banner__method d-inline-flex align-items-center justify-content-center py-1 px-2">
                             {{ payment_method_icon.image(code) }}
                         </span>

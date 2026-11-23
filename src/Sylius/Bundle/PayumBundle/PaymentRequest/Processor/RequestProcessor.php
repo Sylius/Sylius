@@ -20,7 +20,6 @@ use Sylius\Bundle\PayumBundle\PaymentRequest\Context\PaymentRequestContextInterf
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\PaymentRequestTransitions;
 
-/** @experimental */
 final readonly class RequestProcessor implements RequestProcessorInterface
 {
     public function __construct(

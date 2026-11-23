@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\PaymentBundle\Validator\Constraints;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PaymentBundle\Validator\Constraints\SafeGatewayConfigValues;
@@ -22,6 +23,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class SafeGatewayConfigValuesValidatorTest extends TestCase
 {
     private ExecutionContextInterface&MockObject $executionContext;

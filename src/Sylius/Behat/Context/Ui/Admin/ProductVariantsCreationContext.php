@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -25,9 +26,7 @@ final class ProductVariantsCreationContext implements Context
     {
     }
 
-    /**
-     * @When /^I create a new "([^"]+)" variant priced at "(?:€|£|\$)([^"]+)" for ("[^"]+" product) in the ("[^"]+" channel)$/
-     */
+    #[When('/^I create a new "([^"]+)" variant priced at "(?:€|£|\$)([^"]+)" for ("[^"]+" product) in the ("[^"]+" channel)$/')]
     public function iCreateANewVariantPricedAtForProductInTheChannel(
         string $name,
         string $price,

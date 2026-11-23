@@ -16,7 +16,7 @@ namespace Sylius\Abstraction\StateMachine\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 final class SyliusStateMachineAbstractionExtension extends Extension
 {
@@ -24,13 +24,13 @@ final class SyliusStateMachineAbstractionExtension extends Extension
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(dirname(__DIR__, 2) . '/config/'));
-        $loader->load('services.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(dirname(__DIR__, 2) . '/config/'));
+        $loader->load('services.php');
 
         if ($container->hasParameter('kernel.bundles')) {
             $bundles = $container->getParameter('kernel.bundles');
             if (array_key_exists('winzouStateMachineBundle', $bundles)) {
-                $loader->load('services/integrations/winzou.xml');
+                $loader->load('services/integrations/winzou.php');
             }
         }
 

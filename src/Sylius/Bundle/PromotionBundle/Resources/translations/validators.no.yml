@@ -41,6 +41,8 @@ sylius:
             not_blank: 'Vennligst oppgi kampanjebeskrivelse.'
         end_date_cannot_be_set_prior_start_date: 'Sluttdato kan ikke settes før startdato.'
         is_invalid: 'Kampanjen er ugyldig.'
+        usage_limit:
+            min: 'Bruksgrensen for kampanjen må være minst {{ limit }}.'
         name:
             max_length: 'Kampanjenavn må ikke være lengre enn 1 tegn.|Kampanjenavn må ikke være lengre enn {{ limit }} tegn.'
             min_length: 'Kampanjenavn må være minst 1 tegn langt.|Kampanjenavn må være minst {{ limit }} tegn langt.'

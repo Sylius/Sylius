@@ -66,6 +66,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
         $user = $this->shopUserFactory->createNew();
         $user->setPlainPassword($options['password']);
         $user->setEnabled($options['enabled']);
+        $user->setVerifiedAt($options['verified'] ? new \DateTime() : null);
         $user->addRole('ROLE_USER');
         $user->setCustomer($customer);
 
@@ -80,6 +81,8 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setDefault('last_name', fn (Options $options): string => $this->faker->lastName)
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
+            ->setDefault('verified', true)
+            ->setAllowedTypes('verified', 'bool')
             ->setDefault('password', 'password123')
             ->setDefault('customer_group', LazyOption::randomOneOrNull($this->customerGroupRepository))
             ->setAllowedTypes('customer_group', ['null', 'string', CustomerGroupInterface::class])

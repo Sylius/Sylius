@@ -18,7 +18,6 @@ When working on specific areas, check these files for patterns:
 - Shop resources: `resources/shop/Product.xml`
 
 ### Services & Configuration
-- Service definitions: `src/Sylius/Bundle/CoreBundle/Resources/config/services.xml`
 - Bundle config: `src/Sylius/Bundle/*/Resources/config/`
 
 ### Templates & Hooks

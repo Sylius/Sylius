@@ -62,9 +62,7 @@ final readonly class CheckoutContext implements Context
         $this->checkoutPaymentContext->choosePaymentMethod($paymentMethod);
     }
 
-    /**
-     * @Given I have proceeded through checkout process in the :localeCode locale with email :email
-     */
+    #[Given('I have proceeded through checkout process in the :localeCode locale with email :email')]
     public function iHaveProceededThroughCheckoutProcessInTheLocaleWithEmail(string $localeCode, string $email): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
@@ -86,9 +84,7 @@ final readonly class CheckoutContext implements Context
         $this->completeCheckout($cart);
     }
 
-    /**
-     * @Given I have proceeded through checkout process
-     */
+    #[Given('I have proceeded through checkout process')]
     public function iHaveProceededThroughCheckoutProcess(): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');

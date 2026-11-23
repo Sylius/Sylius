@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Payment\Resolver;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
@@ -22,6 +23,7 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolver;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class DefaultPaymentMethodResolverTest extends TestCase
 {
     private MockObject $paymentMethodRepository;

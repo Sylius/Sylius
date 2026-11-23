@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\OrderBundle\Controller;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommand;
@@ -20,6 +21,7 @@ use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AddToCartCommandTest extends TestCase
 {
     /** @var OrderInterface&MockObject */

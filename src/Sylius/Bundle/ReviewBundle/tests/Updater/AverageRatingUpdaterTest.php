@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ReviewBundle\Updater;
 
 use Doctrine\Persistence\ObjectManager;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater;
@@ -22,6 +23,7 @@ use Sylius\Component\Review\Calculator\ReviewableRatingCalculatorInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AverageRatingUpdaterTest extends TestCase
 {
     /** @var ReviewableRatingCalculatorInterface&MockObject */

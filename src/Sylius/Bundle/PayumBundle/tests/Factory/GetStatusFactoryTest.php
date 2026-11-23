@@ -14,12 +14,14 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\PayumBundle\Factory;
 
 use Payum\Core\Security\TokenInterface;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactory;
 use Sylius\Bundle\PayumBundle\Factory\GetStatusFactoryInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 
+#[AllowMockObjectsWithoutExpectations]
 final class GetStatusFactoryTest extends TestCase
 {
     private GetStatusFactory $getStatusFactory;

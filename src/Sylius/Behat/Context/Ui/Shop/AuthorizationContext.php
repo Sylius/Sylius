@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\When;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
@@ -27,10 +28,8 @@ final class AuthorizationContext implements Context
     ) {
     }
 
-    /**
-     * @When I sign in with email :email and password :password
-     * @When I sign in again with email :email and password :password in the previous session
-     */
+    #[When('I sign in with email :email and password :password')]
+    #[When('I sign in again with email :email and password :password in the previous session')]
     public function iSignInWithEmailAndPassword(string $email, string $password): void
     {
         $this->loginPage->open();
@@ -39,9 +38,7 @@ final class AuthorizationContext implements Context
         $this->loginPage->logIn();
     }
 
-    /**
-     * @When I register with email :email and password :password
-     */
+    #[When('I register with email :email and password :password')]
     public function iRegisterWithEmailAndPassword(string $email, string $password): void
     {
         $this->registerPage->open();

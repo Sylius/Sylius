@@ -18,7 +18,6 @@ use Sylius\Component\Payment\Exception\PaymentRequestNotFoundException;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Component\Payment\Repository\PaymentRequestRepositoryInterface;
 
-/** @experimental */
 final class PaymentRequestProvider implements PaymentRequestProviderInterface
 {
     /** @param PaymentRequestRepositoryInterface<PaymentRequestInterface> $paymentRequestRepository */

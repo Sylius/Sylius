@@ -42,12 +42,12 @@ final class CartItemTypeExtension extends AbstractTypeExtension
             'attr' => ['min' => 1],
             'label' => 'sylius.ui.quantity',
             'constraints' => [
-                new Range([
-                    'min' => 1,
-                    'max' => $this->orderItemQuantityModifierLimit,
-                    'notInRangeMessage' => 'sylius.cart_item.quantity.not_in_range',
-                    'groups' => 'sylius',
-                ]),
+                new Range(
+                    min: 1,
+                    max: $this->orderItemQuantityModifierLimit,
+                    notInRangeMessage: 'sylius.cart_item.quantity.not_in_range',
+                    groups: ['sylius'],
+                ),
             ],
         ]);
 

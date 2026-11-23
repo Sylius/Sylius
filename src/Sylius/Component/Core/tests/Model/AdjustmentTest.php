@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Core\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\Adjustment;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class AdjustmentTest extends TestCase
 {
     private Adjustment $adjustment;

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -37,12 +38,10 @@ final class TaxationContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone with dates between :startDate and :endDate
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone identified by the :taxRateCode code
-     * @Given /^the store has(?:| also) "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/
-     */
+    #[Given('the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone')]
+    #[Given('the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone with dates between :startDate and :endDate')]
+    #[Given('the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone identified by the :taxRateCode code')]
+    #[Given('/^the store has(?:| also) "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for the (rest of the world)$/')]
     public function storeHasTaxRateWithinZone(
         $taxRateName,
         $taxRateAmount,
@@ -65,9 +64,7 @@ final class TaxationContext implements Context
         );
     }
 
-    /**
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone ending at :endDate
-     */
+    #[Given('the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone ending at :endDate')]
     public function storeHasTaxRateWithinZoneEndingAt(
         string $taxRateName,
         string $taxRateAmount,
@@ -78,9 +75,7 @@ final class TaxationContext implements Context
         $this->configureTaxRate($taxCategoryName, null, $taxRateName, $zone, $taxRateAmount, false, null, new \DateTime($endDate));
     }
 
-    /**
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone starting at :startDate
-     */
+    #[Given('the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone starting at :startDate')]
     public function storeHasTaxRateWithinZoneStartingAt(
         string $taxRateName,
         string $taxRateAmount,
@@ -91,19 +86,15 @@ final class TaxationContext implements Context
         $this->configureTaxRate($taxCategoryName, StringInflector::nameToCode($taxRateName), $taxRateName, $zone, $taxRateAmount, false, new \DateTime($startDate));
     }
 
-    /**
-     * @Given the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
-     */
+    #[Given('the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone')]
     public function storeHasIncludedInPriceTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
     {
         $this->storeHasTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, $zone, null, true);
     }
 
-    /**
-     * @Given the store has a tax category :name with a code :code
-     * @Given the store has a tax category :name
-     * @Given the store has a tax category :name also
-     */
+    #[Given('the store has a tax category :name with a code :code')]
+    #[Given('the store has a tax category :name')]
+    #[Given('the store has a tax category :name also')]
     public function theStoreHasTaxCategoryWithCode($name, $code = null)
     {
         $taxCategory = $this->createTaxCategory($name, $code);
@@ -111,9 +102,7 @@ final class TaxationContext implements Context
         $this->sharedStorage->set('tax_category', $taxCategory);
     }
 
-    /**
-     * @Given the store has tax categories :firstName, :secondName and :thirdName
-     */
+    #[Given('the store has tax categories :firstName, :secondName and :thirdName')]
     public function theStoreHasTaxCategories(string ...$names): void
     {
         foreach ($names as $name) {
@@ -121,9 +110,7 @@ final class TaxationContext implements Context
         }
     }
 
-    /**
-     * @Given the store does not have any categories defined
-     */
+    #[Given('the store does not have any categories defined')]
     public function theStoreDoesNotHaveAnyCategoriesDefined()
     {
         $taxCategories = $this->taxCategoryRepository->findAll();
@@ -133,9 +120,7 @@ final class TaxationContext implements Context
         }
     }
 
-    /**
-     * @Given /^the ("[^"]+" tax rate) has changed to ([^"]+)%$/
-     */
+    #[Given('/^the ("[^"]+" tax rate) has changed to ([^"]+)%$/')]
     public function theTaxRateIsOfAmount(TaxRateInterface $taxRate, $amount)
     {
         $taxRate->setAmount((float) $this->getAmountFromString($amount));
@@ -143,9 +128,7 @@ final class TaxationContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this tax rate) operates between "([^"]+)" and "([^"]+)"$/
-     */
+    #[Given('/^(this tax rate) operates between "([^"]+)" and "([^"]+)"$/')]
     public function theTaxRateOperatesBetweenDates(
         TaxRateInterface $taxRate,
         string $startDate,
@@ -156,9 +139,7 @@ final class TaxationContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given the :taxRate tax rate has :calculator calculator configured
-     */
+    #[Given('the :taxRate tax rate has :calculator calculator configured')]
     public function theTaxRateHasCalculatorConfigured(TaxRateInterface $taxRate, string $calculator): void
     {
         $taxRate->setCalculator($calculator);

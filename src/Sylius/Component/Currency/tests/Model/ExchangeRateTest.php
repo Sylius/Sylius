@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Currency\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRate;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ExchangeRateTest extends TestCase
 {
     private ExchangeRate $exchangeRate;

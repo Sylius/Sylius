@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Context\Ui\Admin\Helper\ValidationTrait;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FilterElementInterface;
 use Sylius\Behat\Element\Admin\CatalogPromotion\FormElementInterface;
@@ -54,26 +57,20 @@ final class ManagingCatalogPromotionsContext implements Context
     ) {
     }
 
-    /**
-     * @Given I am browsing catalog promotions
-     * @When I browse catalog promotions
-     */
+    #[Given('I am browsing catalog promotions')]
+    #[When('I browse catalog promotions')]
     public function iBrowseCatalogPromotions(): void
     {
         $this->indexPage->open();
     }
 
-    /**
-     * @When I want to create a new catalog promotion
-     */
+    #[When('I want to create a new catalog promotion')]
     public function iWantToCreateNewCatalogPromotion(): void
     {
         $this->createPage->open();
     }
 
-    /**
-     * @When I create a new catalog promotion with :code code and :name name
-     */
+    #[When('I create a new catalog promotion with :code code and :name name')]
     public function iCreateANewCatalogPromotionWithCodeAndName(string $code, string $name): void
     {
         $this->createPage->open();
@@ -82,9 +79,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->createPage->create();
     }
 
-    /**
-     * @When I create a new catalog promotion with :code code and :name name and :priority priority
-     */
+    #[When('I create a new catalog promotion with :code code and :name name and :priority priority')]
     public function iCreateANewCatalogPromotionWithCodeAndNameAndPriority(string $code, string $name, int $priority): void
     {
         $this->createPage->open();
@@ -94,134 +89,102 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->createPage->create();
     }
 
-    /**
-     * @When I create a new catalog promotion without specifying its code and name
-     */
+    #[When('I create a new catalog promotion without specifying its code and name')]
     public function iCreateANewCatalogPromotionWithoutSpecifyingItsCodeAndName(): void
     {
         $this->createPage->open();
         $this->createPage->create();
     }
 
-    /**
-     * @When I specify its code as :code
-     */
+    #[When('I specify its code as :code')]
     public function iSpecifyItsCodeAs(?string $code = null): void
     {
         $this->createPage->specifyCode($code ?? '');
     }
 
-    /**
-     * @When I name it :name
-     */
+    #[When('I name it :name')]
     public function iNameIt(string $name): void
     {
         $this->formElement->nameIt($name);
     }
 
-    /**
-     * @When I set its priority to :priority
-     */
+    #[When('I set its priority to :priority')]
     public function iSetItsPriorityTo(int $priority): void
     {
         $this->formElement->prioritizeIt($priority);
     }
 
-    /**
-     * @When I specify its label as :label in :localeCode
-     */
+    #[When('I specify its label as :label in :localeCode')]
     public function iSpecifyItsLabelAsIn(string $label, string $localeCode): void
     {
         $this->formElement->labelIt($label, $localeCode);
     }
 
-    /**
-     * @When I describe it as :description in :localeCode
-     */
+    #[When('I describe it as :description in :localeCode')]
     public function iDescribeItAsIn(string $description, string $localeCode): void
     {
         $this->formElement->describeIt($description, $localeCode);
     }
 
-    /**
-     * @When I enable it
-     */
+    #[When('I enable it')]
     public function iEnableIt(): void
     {
         $this->formElement->changeEnableTo(true);
     }
 
-    /**
-     * @When I disable it
-     */
+    #[When('I disable it')]
     public function iDisableIt(): void
     {
         $this->formElement->changeEnableTo(false);
     }
 
-    /**
-     * @When I make it available in channel :channelName
-     */
+    #[When('I make it available in channel :channelName')]
     public function iMakeItAvailableInChannel(string $channelName): void
     {
         $this->formElement->checkChannel($channelName);
     }
 
-    /**
-     * @When I make it start at :startDate and ends at :endDate
-     */
+    #[When('I make it start at :startDate and ends at :endDate')]
     public function iMakeItOperateBetweenDates(string $startDate, string $endDate): void
     {
         $this->formElement->specifyStartDate(new \DateTime($startDate));
         $this->formElement->specifyEndDate(new \DateTime($endDate));
     }
 
-    /**
-     * @When I make it start yesterday and ends tomorrow
-     */
+    #[When('I make it start yesterday and ends tomorrow')]
     public function iMakeItOperateBetweenYesterdayAndTomorrow(): void
     {
         $this->formElement->specifyStartDate(new \DateTime('yesterday'));
         $this->formElement->specifyEndDate(new \DateTime('tomorrow'));
     }
 
-    /**
-     * @When I make it start at :startDate
-     */
+    #[When('I make it start at :startDate')]
     public function iMakeItOperateFromDate(string $startDate): void
     {
         $this->formElement->specifyStartDate(new \DateTime($startDate));
     }
 
-    /**
-     * @When I make it unavailable in channel :channelName
-     */
+    #[When('I make it unavailable in channel :channelName')]
     public function iMakeItUnavailableInChannel(string $channelName): void
     {
         $this->formElement->uncheckChannel($channelName);
     }
 
-    /**
-     * @When I( try to) change its end date to :endDate
-     */
+    #[When('I( try to) change its end date to :endDate')]
     public function iChangeItsEndDateTo(string $endDate): void
     {
         $this->formElement->specifyEndDate(new \DateTime($endDate));
     }
 
-    /**
-     * @When I add a new catalog promotion scope
-     */
+    #[When('I add a new catalog promotion scope')]
     public function iAddANewCatalogPromotionScope(): void
     {
         $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
     }
 
-    /**
-     * @When /^I add(?:| another) scope that applies on ("[^"]+" variant)$/
-     * @When /^I add scope that applies on ("[^"]+" variant) and ("[^"]+" variant)$/
-     * @When /^I add scope that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/
-     */
+    #[When('/^I add(?:| another) scope that applies on ("[^"]+" variant)$/')]
+    #[When('/^I add scope that applies on ("[^"]+" variant) and ("[^"]+" variant)$/')]
+    #[When('/^I add scope that applies on variants ("[^"]+" variant) and ("[^"]+" variant)$/')]
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface ...$variants): void
     {
         $variantNames = array_map(fn (ProductVariantInterface $variant) => $variant->getName(), $variants);
@@ -230,9 +193,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->selectScopeOption($variantNames);
     }
 
-    /**
-     * @When /^I add scope that applies on ("[^"]+" taxon)$/
-     */
+    #[When('/^I add scope that applies on ("[^"]+" taxon)$/')]
     public function iAddScopeThatAppliesOnTaxons(TaxonInterface ...$taxons): void
     {
         $taxonNames = array_map(fn (TaxonInterface $taxon) => $taxon->getName(), $taxons);
@@ -241,69 +202,53 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->selectScopeOption($taxonNames);
     }
 
-    /**
-     * @When /^I add scope that applies on ("[^"]+" product)$/
-     */
+    #[When('/^I add scope that applies on ("[^"]+" product)$/')]
     public function iAddScopeThatAppliesOnProduct(ProductInterface $product): void
     {
         $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
         $this->formElement->selectScopeOption([$product->getName()]);
     }
 
-    /**
-     * @When I add :productVariant variant to its scope
-     */
+    #[When('I add :productVariant variant to its scope')]
     public function iAddVariantToItsScope(ProductVariantInterface $productVariant): void
     {
         $this->formElement->selectScopeOption([$productVariant->getName()]);
     }
 
-    /**
-     * @When I remove :productVariant variant from its scope
-     */
+    #[When('I remove :productVariant variant from its scope')]
     public function iRemoveVariantFromItsScope(ProductVariantInterface $productVariant): void
     {
         $this->formElement->removeScopeOption([$productVariant->getName()]);
     }
 
-    /**
-     * @When I remove its last action
-     */
+    #[When('I remove its last action')]
     public function iRemoveItsLastAction(): void
     {
         $this->formElement->removeLastAction();
     }
 
-    /**
-     * @When I add a new catalog promotion action
-     */
+    #[When('I add a new catalog promotion action')]
     public function iAddANewCatalogPromotionAction(): void
     {
         $this->formElement->addAction(FixedDiscountPriceCalculator::TYPE);
     }
 
-    /**
-     * @When I add another action that gives ":discount%" percentage discount
-     * @When I add action that gives ":discount%" percentage discount
-     */
+    #[When('I add another action that gives ":discount%" percentage discount')]
+    #[When('I add action that gives ":discount%" percentage discount')]
     public function iAddActionThatGivesPercentageDiscount(string $discount): void
     {
         $this->formElement->addAction(PercentageDiscountPriceCalculator::TYPE);
         $this->formElement->fillActionOption('Amount', $discount);
     }
 
-    /**
-     * @When /^I add action that gives "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
-     */
+    #[When('/^I add action that gives "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/')]
     public function iAddActionThatGivesFixedDiscount(string $discount, ChannelInterface $channel): void
     {
         $this->formElement->addAction(FixedDiscountPriceCalculator::TYPE);
         $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', $discount);
     }
 
-    /**
-     * @When /^I create an exclusive "([^"]+)" catalog promotion with ([^"]+) priority that applies on ("[^"]+" product) and reduces price by "((?:\d+\.)?\d+)%" in ("[^"]+" channel)$/
-     */
+    #[When('/^I create an exclusive "([^"]+)" catalog promotion with ([^"]+) priority that applies on ("[^"]+" product) and reduces price by "((?:\d+\.)?\d+)%" in ("[^"]+" channel)$/')]
     public function iCreateAnExclusiveCatalogPromotionWithCodeAndPriorityThatReducesPriceByInTheChannelAndAppliesOnProduct(
         string $name,
         int $priority,
@@ -314,9 +259,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->createCatalogPromotion($name, $priority, true, $product, $discount, $channel);
     }
 
-    /**
-     * @When /^I create a "([^"]+)" catalog promotion with ([^"]+) priority that applies on ("[^"]+" product) and reduces price by "((?:\d+\.)?\d+)%" in ("[^"]+" channel)$/
-     */
+    #[When('/^I create a "([^"]+)" catalog promotion with ([^"]+) priority that applies on ("[^"]+" product) and reduces price by "((?:\d+\.)?\d+)%" in ("[^"]+" channel)$/')]
     public function iCreateACatalogPromotionWithCodeAndNameAndPriorityThatAppliesOnProductAndReducesPriceByInChannel(
         string $name,
         int $priority,
@@ -327,18 +270,14 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->createCatalogPromotion($name, $priority, false, $product, $discount, $channel);
     }
 
-    /**
-     * @When I (try to) add it
-     */
+    #[When('I (try to) add it')]
     public function iAddIt(): void
     {
         $this->createPage->create();
     }
 
-    /**
-     * @When I rename the :catalogPromotion catalog promotion to :name
-     * @When I try to rename the :catalogPromotion catalog promotion to :name
-     */
+    #[When('I rename the :catalogPromotion catalog promotion to :name')]
+    #[When('I try to rename the :catalogPromotion catalog promotion to :name')]
     public function iRenameTheCatalogPromotionTo(CatalogPromotionInterface $catalogPromotion, string $name): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
@@ -346,26 +285,20 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->updatePage->saveChanges();
     }
 
-    /**
-     * @When I modify a catalog promotion :catalogPromotion
-     * @When I want to modify a catalog promotion :catalogPromotion
-     */
+    #[When('I modify a catalog promotion :catalogPromotion')]
+    #[When('I want to modify a catalog promotion :catalogPromotion')]
     public function iWantToModifyACatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
     }
 
-    /**
-     * @When I remove its last scope
-     */
+    #[When('I remove its last scope')]
     public function iRemoveItsLastScope(): void
     {
         $this->formElement->removeLastScope();
     }
 
-    /**
-     * @When I disable :catalogPromotion catalog promotion
-     */
+    #[When('I disable :catalogPromotion catalog promotion')]
     public function iDisableCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
@@ -375,9 +308,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
-    /**
-     * @When I enable :catalogPromotion catalog promotion
-     */
+    #[When('I enable :catalogPromotion catalog promotion')]
     public function iEnableThisCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
@@ -385,66 +316,50 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->updatePage->saveChanges();
     }
 
-    /**
-     * @When I edit its action so that it reduces price by ":discount%"
-     */
+    #[When('I edit its action so that it reduces price by ":discount%"')]
     public function iEditItsActionSoThatItReducesPriceBy(string $discount): void
     {
         $this->formElement->fillActionOption('Amount', $discount);
     }
 
-    /**
-     * @When I add for variants scope without variants configured
-     */
+    #[When('I add for variants scope without variants configured')]
     public function iAddForVariantsScopeWithoutVariantsConfigured(): void
     {
         $this->formElement->addScope(InForVariantsScopeVariantChecker::TYPE);
     }
 
-    /**
-     * @When I add catalog promotion scope for taxon without taxons
-     */
+    #[When('I add catalog promotion scope for taxon without taxons')]
     public function iAddForTaxonScopeWithoutTaxonsConfigured(): void
     {
         $this->formElement->addScope(InForTaxonsScopeVariantChecker::TYPE);
     }
 
-    /**
-     * @When I add catalog promotion scope for product without products
-     */
+    #[When('I add catalog promotion scope for product without products')]
     public function iAddCatalogPromotionScopeForProductWithoutProducts(): void
     {
         $this->formElement->addScope(InForProductScopeVariantChecker::TYPE);
     }
 
-    /**
-     * @When I add percentage discount action without amount configured
-     */
+    #[When('I add percentage discount action without amount configured')]
     public function iAddPercentageDiscountActionWithoutAmountConfigured(): void
     {
         $this->formElement->addAction(PercentageDiscountPriceCalculator::TYPE);
     }
 
-    /**
-     * @When I add fixed discount action without amount configured for the :channel channel
-     */
+    #[When('I add fixed discount action without amount configured for the :channel channel')]
     public function iAddFixedDiscountActionWithoutAmountConfigured(): void
     {
         $this->formElement->addAction(FixedDiscountPriceCalculator::TYPE);
     }
 
-    /**
-     * @When I add invalid percentage discount action with non number in amount
-     */
+    #[When('I add invalid percentage discount action with non number in amount')]
     public function iAddInvalidPercentageDiscountActionWithNonNumberInAmount(): void
     {
         $this->formElement->addAction(PercentageDiscountPriceCalculator::TYPE);
         $this->formElement->fillActionOption('Amount', 'alot');
     }
 
-    /**
-     * @When I add invalid fixed discount action with non number in amount for the :channel channel
-     */
+    #[When('I add invalid fixed discount action with non number in amount for the :channel channel')]
     public function iAddInvalidFixedDiscountActionWithNonNumberInAmountForTheChannel(
         ChannelInterface $channel,
     ): void {
@@ -452,10 +367,8 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', 'wrong value');
     }
 
-    /**
-     * @When /^I make (this catalog promotion) unavailable in the ("[^"]+" channel)$/
-     * @When /^I make the ("[^"]+" catalog promotion) unavailable in the ("[^"]+" channel)$/
-     */
+    #[When('/^I make (this catalog promotion) unavailable in the ("[^"]+" channel)$/')]
+    #[When('/^I make the ("[^"]+" catalog promotion) unavailable in the ("[^"]+" channel)$/')]
     public function iMakeThisCatalogPromotionUnavailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
         ChannelInterface $channel,
@@ -467,10 +380,8 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->updatePage->saveChanges();
     }
 
-    /**
-     * @When /^I make (this catalog promotion) available in the ("[^"]+" channel)$/
-     * @When /^I make ("[^"]+" catalog promotion) available in the ("[^"]+" channel)$/
-     */
+    #[When('/^I make (this catalog promotion) available in the ("[^"]+" channel)$/')]
+    #[When('/^I make ("[^"]+" catalog promotion) available in the ("[^"]+" channel)$/')]
     public function iMakeThisCatalogPromotionAvailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
         ChannelInterface $channel,
@@ -482,10 +393,8 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->updatePage->saveChanges();
     }
 
-    /**
-     * @When /^I switch (this catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/
-     * @When /^I switch ("[^"]+" catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/
-     */
+    #[When('/^I switch (this catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/')]
+    #[When('/^I switch ("[^"]+" catalog promotion) availability from the ("[^"]+" channel) to the ("[^"]+" channel)$/')]
     public function iSwitchThisCatalogPromotionAvailabilityFromTheChannelToTheChannel(
         CatalogPromotionInterface $catalogPromotion,
         ChannelInterface $removedChannel,
@@ -499,60 +408,46 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->updatePage->saveChanges();
     }
 
-    /**
-     * @When I view details of the catalog promotion :catalogPromotion
-     */
+    #[When('I view details of the catalog promotion :catalogPromotion')]
     public function iViewDetailsOfTheCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->showPage->open(['id' => $catalogPromotion->getId()]);
     }
 
-    /**
-     * @When I edit it to have empty amount of percentage discount
-     */
+    #[When('I edit it to have empty amount of percentage discount')]
     public function iEditItToHaveEmptyPercentageDiscount(): void
     {
         $this->formElement->fillActionOption('Amount', '');
     }
 
-    /**
-     * @When I edit it to have empty amount of fixed discount in the :channel channel
-     */
+    #[When('I edit it to have empty amount of fixed discount in the :channel channel')]
     public function iEditItToHaveEmptyFixedDiscountInChannel(ChannelInterface $channel): void
     {
         $this->formElement->fillActionOptionForChannel($channel->getCode(), 'Amount', '');
     }
 
-    /**
-     * @When I filter by :channel channel
-     */
+    #[When('I filter by :channel channel')]
     public function iFilterByChannel(ChannelInterface $channel): void
     {
         $this->filterElement->chooseChannel($channel);
         $this->filterElement->filter();
     }
 
-    /**
-     * @When I filter enabled catalog promotions
-     */
+    #[When('I filter enabled catalog promotions')]
     public function iFilterEnabledCatalogPromotions(): void
     {
         $this->filterElement->chooseEnabled();
         $this->filterElement->filter();
     }
 
-    /**
-     * @When /^I filter by (active|failed|inactive|processing) state$/
-     */
+    #[When('/^I filter by (active|failed|inactive|processing) state$/')]
     public function iFilterByState(string $state): void
     {
         $this->filterElement->chooseState(ucfirst($state));
         $this->filterElement->filter();
     }
 
-    /**
-     * @When /^I filter by (end|start) date up to "(\d{4}-\d{2}-\d{2})"$/
-     */
+    #[When('/^I filter by (end|start) date up to "(\d{4}-\d{2}-\d{2})"$/')]
     public function iFilterByDateUpTo(string $dateType, string $date): void
     {
         if ('start' === $dateType) {
@@ -564,9 +459,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->filterElement->filter();
     }
 
-    /**
-     * @When /^I filter by (end|start) date from "(\d{4}-\d{2}-\d{2})"$/
-     */
+    #[When('/^I filter by (end|start) date from "(\d{4}-\d{2}-\d{2})"$/')]
     public function iFilterByDateFrom(string $dateType, string $date): void
     {
         if ('start' === $dateType) {
@@ -578,9 +471,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->filterElement->filter();
     }
 
-    /**
-     * @When /^I filter by (end|start) date from "(\d{4}-\d{2}-\d{2})" up to "(\d{4}-\d{2}-\d{2})"$/
-     */
+    #[When('/^I filter by (end|start) date from "(\d{4}-\d{2}-\d{2})" up to "(\d{4}-\d{2}-\d{2})"$/')]
     public function iFilterByDateFromDateToDate(string $dateType, string $fromDate, string $toDate): void
     {
         if ('start' === $dateType) {
@@ -594,18 +485,14 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->filterElement->filter();
     }
 
-    /**
-     * @When I request the removal of :catalogPromotion catalog promotion
-     */
+    #[When('I request the removal of :catalogPromotion catalog promotion')]
     public function iRequestTheRemovalOfCatalogPromotion(CatalogPromotionInterface $catalogPromotion): void
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['name' => $catalogPromotion->getName()]);
     }
 
-    /**
-     * @When I sort catalog promotions by :order :field
-     */
+    #[When('I sort catalog promotions by :order :field')]
     public function iSortCatalogPromotionByOrderField(string $order, string $field): void
     {
         $this->indexPage->sortBy(
@@ -614,9 +501,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that a discount amount should be between 0% and 100%
-     */
+    #[Then('I should be notified that a discount amount should be between 0% and 100%')]
     public function iShouldBeNotifiedThatADiscountAmountShouldBeBetween0And100Percent(): void
     {
         Assert::same(
@@ -625,9 +510,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the percentage amount should be a number and cannot be empty
-     */
+    #[Then('I should be notified that the percentage amount should be a number and cannot be empty')]
     public function iShouldBeNotifiedThatThePercentageAmountShouldBeANumber(): void
     {
         Assert::same(
@@ -636,9 +519,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the fixed amount cannot be empty
-     */
+    #[Then('I should be notified that the fixed amount cannot be empty')]
     public function iShouldBeNotifiedThatTheFixedAmountShouldCannotBeEmpty(): void
     {
         Assert::same(
@@ -647,9 +528,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that the fixed amount should be a number
-     */
+    #[Then('I should be notified that the fixed amount should be a number')]
     public function iShouldBeNotifiedThatTheFixedAmountShouldBeANumber(): void
     {
         Assert::same(
@@ -658,11 +537,9 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then there should be :amount catalog promotions on the list
-     * @Then there should be :amount new catalog promotion on the list
-     * @Then there should be an empty list of catalog promotions
-     */
+    #[Then('there should be :amount catalog promotions on the list')]
+    #[Then('there should be :amount new catalog promotion on the list')]
+    #[Then('there should be an empty list of catalog promotions')]
     public function thereShouldBeCatalogPromotionsOnTheList(int $amount = 0): void
     {
         $this->indexPage->open();
@@ -670,18 +547,14 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->iShouldSeeCountCatalogPromotionsOnTheList($amount);
     }
 
-    /**
-     * @Then I should see :count catalog promotions on the list
-     */
+    #[Then('I should see :count catalog promotions on the list')]
     public function iShouldSeeCountCatalogPromotionsOnTheList(int $count): void
     {
         Assert::same($this->indexPage->countItems(), $count);
     }
 
-    /**
-     * @Then the catalog promotions named :firstName and :secondName should be in the registry
-     * @Then I should see a catalog promotion with name :name
-     */
+    #[Then('the catalog promotions named :firstName and :secondName should be in the registry')]
+    #[Then('I should see a catalog promotion with name :name')]
     public function theCatalogPromotionsNamedShouldBeInTheRegistry(string ...$names): void
     {
         foreach ($names as $name) {
@@ -692,9 +565,7 @@ final class ManagingCatalogPromotionsContext implements Context
         }
     }
 
-    /**
-     * @Then the catalog promotion named :name should operate between :startDate and :endDate
-     */
+    #[Then('the catalog promotion named :name should operate between :startDate and :endDate')]
     public function theCatalogPromotionNamedShouldOperateBetweenDates(string $name, string $startDate, string $endDate): void
     {
         Assert::true(
@@ -708,9 +579,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then the catalog promotion named :name should have priority :priority
-     */
+    #[Then('the catalog promotion named :name should have priority :priority')]
     public function theCatalogPromotionNamedShouldHavePriority(string $name, int $priority): void
     {
         Assert::true(
@@ -723,9 +592,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then it should have :code code and :name name
-     */
+    #[Then('it should have :code code and :name name')]
     public function itShouldHaveCodeAndName(string $code, string $name): void
     {
         Assert::true(
@@ -734,9 +601,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then it should have priority equal to :priority
-     */
+    #[Then('it should have priority equal to :priority')]
     public function itShouldHavePriorityEqualTo(int $priority): void
     {
         Assert::true(
@@ -745,9 +610,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then /^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
-     */
+    #[Then('/^("[^"]+" catalog promotion) should apply to ("[^"]+" variant) and ("[^"]+" variant)$/')]
     public function itShouldHaveVariantBasedScope(
         CatalogPromotionInterface $catalogPromotion,
         ProductVariantInterface ...$variants,
@@ -763,9 +626,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
-    /**
-     * @Then /^("[^"]+" catalog promotion) should apply to all products from ("[^"]+" taxon)$/
-     */
+    #[Then('/^("[^"]+" catalog promotion) should apply to all products from ("[^"]+" taxon)$/')]
     public function itShouldHaveTaxonsBasedScope(
         CatalogPromotionInterface $catalogPromotion,
         TaxonInterface ...$taxons,
@@ -779,9 +640,7 @@ final class ManagingCatalogPromotionsContext implements Context
         }
     }
 
-    /**
-     * @Then /^this catalog promotion should be applied on ("[^"]+" taxon)$/
-     */
+    #[Then('/^this catalog promotion should be applied on ("[^"]+" taxon)$/')]
     public function thisCatalogPromotionShouldBeAppliedOnTaxon(TaxonInterface $taxon): void
     {
         $selectedTaxons = $this->formElement->getLastScopeNames();
@@ -789,9 +648,7 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::inArray($taxon->getName(), $selectedTaxons);
     }
 
-    /**
-     * @Then /^the ("[^"]+" catalog promotion) should apply to all variants of ("[^"]+" product)$/
-     */
+    #[Then('/^the ("[^"]+" catalog promotion) should apply to all variants of ("[^"]+" product)$/')]
     public function theCatalogPromotionShouldApplyToAllVariantsOfProduct(
         CatalogPromotionInterface $catalogPromotion,
         ProductInterface $product,
@@ -801,19 +658,15 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->thisCatalogPromotionShouldBeAppliedOnProduct($product);
     }
 
-    /**
-     * @Then /^this catalog promotion should be applied on ("[^"]+" product)$/
-     */
+    #[Then('/^this catalog promotion should be applied on ("[^"]+" product)$/')]
     public function thisCatalogPromotionShouldBeAppliedOnProduct(ProductInterface $product): void
     {
         $selectedProducts = $this->formElement->getLastScopeNames();
         Assert::inArray($product->getName(), $selectedProducts);
     }
 
-    /**
-     * @Then /^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/
-     * @Then /^this catalog promotion should be applied on ("[^"]+" variant)$/
-     */
+    #[Then('/^it should apply to ("[^"]+" variant) and ("[^"]+" variant)$/')]
+    #[Then('/^this catalog promotion should be applied on ("[^"]+" variant)$/')]
     public function itShouldApplyToVariants(ProductVariantInterface ...$variants): void
     {
         $selectedVariants = $this->formElement->getLastScopeNames();
@@ -823,9 +676,7 @@ final class ManagingCatalogPromotionsContext implements Context
         }
     }
 
-    /**
-     * @Then /^this catalog promotion should not be applied on ("[^"]+" variant)$/
-     */
+    #[Then('/^this catalog promotion should not be applied on ("[^"]+" variant)$/')]
     public function itShouldNotApplyToVariants(ProductVariantInterface ...$variants): void
     {
         $selectedVariants = $this->formElement->getLastScopeNames();
@@ -835,19 +686,15 @@ final class ManagingCatalogPromotionsContext implements Context
         }
     }
 
-    /**
-     * @Then /^it should have "([^"]+)%" discount$/
-     * @Then /^this catalog promotion should have "([^"]+)%" percentage discount$/
-     */
+    #[Then('/^it should have "([^"]+)%" discount$/')]
+    #[Then('/^this catalog promotion should have "([^"]+)%" percentage discount$/')]
     public function itShouldHaveDiscount(string $amount): void
     {
         Assert::same($this->formElement->getLastActionOption('Amount'), $amount);
     }
 
-    /**
-     * @Then /^the ("[^"]+" catalog promotion) should have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
-     * @Then /^(this catalog promotion) should have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/
-     */
+    #[Then('/^the ("[^"]+" catalog promotion) should have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/')]
+    #[Then('/^(this catalog promotion) should have "(?:€|£|\$)([^"]+)" of fixed discount in the ("[^"]+" channel)$/')]
     public function theCatalogPromotionShouldHaveFixedDiscountInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
         string $amount,
@@ -858,9 +705,7 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::same($this->formElement->getLastActionOptionForChannel($channel->getCode(), 'Amount'), $amount);
     }
 
-    /**
-     * @Then there should still be only one catalog promotion with code :code
-     */
+    #[Then('there should still be only one catalog promotion with code :code')]
     public function thereShouldStillBeOnlyOneCatalogPromotionWithCode(string $code): void
     {
         $this->indexPage->open();
@@ -868,19 +713,15 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::true($this->indexPage->isSingleResourceOnPage(['code' => $code]));
     }
 
-    /**
-     * @Then the catalog promotion :catalogPromotionName should be available in channel :channelName
-     */
+    #[Then('the catalog promotion :catalogPromotionName should be available in channel :channelName')]
     public function theCatalogPromotionShouldBeAvailableInChannel(string $catalogPromotionName, string $channelName): void
     {
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotionName, 'channels' => $channelName]));
     }
 
-    /**
-     * @Then /^(it) should operate between "([^"]+)" and "([^"]+)"$/
-     * @Then /^(this catalog promotion) should operate between "([^"]+)" and "([^"]+)"$/
-     */
+    #[Then('/^(it) should operate between "([^"]+)" and "([^"]+)"$/')]
+    #[Then('/^(this catalog promotion) should operate between "([^"]+)" and "([^"]+)"$/')]
     public function theCatalogPromotionShouldOperateBetweenDates(
         CatalogPromotionInterface $catalogPromotion,
         string $startDate,
@@ -894,9 +735,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
-    /**
-     * @Then /^(it) should operate between yesterday and tomorrow$/
-     */
+    #[Then('/^(it) should operate between yesterday and tomorrow$/')]
     public function theCatalogPromotionShouldOperateBetweenYesterdayAndTomorrow(
         CatalogPromotionInterface $catalogPromotion,
     ): void {
@@ -910,10 +749,8 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->sharedStorage->set('catalog_promotion', $catalogPromotion);
     }
 
-    /**
-     * @Then /^(it) should be (inactive|active)$/
-     * @Then /^(this catalog promotion) should(?:| still) be (inactive|active)$/
-     */
+    #[Then('/^(it) should be (inactive|active)$/')]
+    #[Then('/^(this catalog promotion) should(?:| still) be (inactive|active)$/')]
     public function itShouldBeInactive(CatalogPromotionInterface $catalogPromotion, string $state): void
     {
         $this->indexPage->open();
@@ -923,9 +760,7 @@ final class ManagingCatalogPromotionsContext implements Context
         ));
     }
 
-    /**
-     * @Then /^(this catalog promotion) should be available in channel "([^"]+)"$/
-     */
+    #[Then('/^(this catalog promotion) should be available in channel "([^"]+)"$/')]
     public function thisCatalogPromotionShouldBeAvailableInChannel(
         CatalogPromotionInterface $catalogPromotion,
         string $channelName,
@@ -935,9 +770,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->theCatalogPromotionShouldBeAvailableInChannel($catalogPromotion->getName(), $channelName);
     }
 
-    /**
-     * @Then /^(this catalog promotion) should not be available in channel "([^"]+)"$/
-     */
+    #[Then('/^(this catalog promotion) should not be available in channel "([^"]+)"$/')]
     public function thisCatalogPromotionShouldNotBeAvailableInChannel(
         CatalogPromotionInterface $catalogPromotion,
         string $channelName,
@@ -947,9 +780,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that catalog promotion has been successfully created
-     */
+    #[Then('I should be notified that catalog promotion has been successfully created')]
     public function iShouldBeNotifiedThatCatalogPromotionHasBeenSuccessfullyCreated(): void
     {
         $this->notificationChecker->checkNotification(
@@ -958,26 +789,20 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should be notified that code and name are required
-     */
+    #[Then('I should be notified that code and name are required')]
     public function iShouldBeNotifiedThatCodeAndNameAreRequired(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'Please enter catalog promotion code.');
         Assert::same($this->createPage->getValidationMessage('name'), 'Please enter catalog promotion name.');
     }
 
-    /**
-     * @Then I should be notified that catalog promotion with this code already exists
-     */
+    #[Then('I should be notified that catalog promotion with this code already exists')]
     public function iShouldBeNotifiedThatCatalogPromotionWithThisCodeAlreadyExists(): void
     {
         Assert::same($this->createPage->getValidationMessage('code'), 'The catalog promotion with given code already exists.');
     }
 
-    /**
-     * @Then /^(this catalog promotion) name should(?:| still) be "([^"]+)"$/
-     */
+    #[Then('/^(this catalog promotion) name should(?:| still) be "([^"]+)"$/')]
     public function thisCatalogPromotionNameShouldBe(CatalogPromotionInterface $catalogPromotion, string $name): void
     {
         $this->iBrowseCatalogPromotions();
@@ -987,9 +812,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then /^(this catalog promotion) should be (labelled|described) as "([^"]+)" in ("[^"]+" locale)$/
-     */
+    #[Then('/^(this catalog promotion) should be (labelled|described) as "([^"]+)" in ("[^"]+" locale)$/')]
     public function thisCatalogPromotionLabelInLocaleShouldBe(
         CatalogPromotionInterface $catalogPromotion,
         string $field,
@@ -1004,25 +827,19 @@ final class ManagingCatalogPromotionsContext implements Context
         Assert::same($this->formElement->getFieldValueInLocale($fieldsMapping[$field], $localeCode), $value);
     }
 
-    /**
-     * @Then I should not be able to edit its code
-     */
+    #[Then('I should not be able to edit its code')]
     public function iShouldNotBeAbleToEditItsCode(): void
     {
         Assert::true($this->updatePage->isCodeDisabled());
     }
 
-    /**
-     * @Then I should be notified that at least 1 variant is required
-     */
+    #[Then('I should be notified that at least 1 variant is required')]
     public function iShouldBeNotifiedThatAtLeast1VariantIsRequired(): void
     {
         Assert::same($this->formElement->getValidationMessage('last_scope'), 'Please add at least 1 variant.');
     }
 
-    /**
-     * @Then /^I should be notified that I must add at least one (product|taxon)$/
-     */
+    #[Then('/^I should be notified that I must add at least one (product|taxon)$/')]
     public function iShouldBeNotifiedThatIMustAddAtLeastOne(string $entity): void
     {
         Assert::same(
@@ -1031,9 +848,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should not be able to edit it due to wrong state
-     */
+    #[Then('I should not be able to edit it due to wrong state')]
     public function iShouldNotBeAbleToEditItDueToWrongState(): void
     {
         Assert::inArray(
@@ -1042,82 +857,62 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then its name should be :name
-     */
+    #[Then('its name should be :name')]
     public function itsNameShouldBe(string $name): void
     {
         Assert::same($this->showPage->getName(), $name);
     }
 
-    /**
-     * @Then it should reduce price by :amount
-     */
+    #[Then('it should reduce price by :amount')]
     public function thisCatalogPromotionShouldHavePercentageDiscount(string $amount): void
     {
         Assert::true($this->showPage->hasActionWithPercentageDiscount($amount));
     }
 
-    /**
-     * @Then it should reduce price by :amount in the :channel channel
-     */
+    #[Then('it should reduce price by :amount in the :channel channel')]
     public function itShouldReducePriceByInTheChannel(string $amount, ChannelInterface $channel): void
     {
         Assert::true($this->showPage->hasActionWithFixedDiscount($amount, $channel));
     }
 
-    /**
-     * @Then it should apply on :variant variant
-     */
+    #[Then('it should apply on :variant variant')]
     public function itShouldApplyOnVariant(ProductVariantInterface $variant): void
     {
         Assert::true($this->showPage->hasScopeWithVariant($variant));
     }
 
-    /**
-     * @Then it should apply on :product product
-     */
+    #[Then('it should apply on :product product')]
     public function itShouldApplyOnProduct(ProductInterface $product): void
     {
         Assert::true($this->showPage->hasScopeWithProduct($product));
     }
 
-    /**
-     * @Given it should be exclusive
-     */
+    #[Given('it should be exclusive')]
     public function itShouldBeExclusive(): void
     {
         Assert::true($this->showPage->isExclusive());
     }
 
-    /**
-     * @Given it should not be exclusive
-     */
+    #[Given('it should not be exclusive')]
     public function itShouldNotBeExclusive(): void
     {
         Assert::false($this->showPage->isExclusive());
     }
 
-    /**
-     * @Then it should start at :startDate and end at :endDate
-     */
+    #[Then('it should start at :startDate and end at :endDate')]
     public function itShouldStartAtAndEndAt(string $startDate, string $endDate): void
     {
         Assert::contains($this->showPage->getStartDate(), $startDate);
         Assert::contains($this->showPage->getEndDate(), $endDate);
     }
 
-    /**
-     * @Then I should get information that the end date cannot be set before start date
-     */
+    #[Then('I should get information that the end date cannot be set before start date')]
     public function iShouldGetInformationThatTheEndDateCannotBeSetBeforeStartDate(): void
     {
         Assert::same($this->formElement->getValidationMessage('end_date_date'), 'End date cannot be set before start date.');
     }
 
-    /**
-     * @Then I should be notified that not all channels are filled
-     */
+    #[Then('I should be notified that not all channels are filled')]
     public function iShouldBeNotifiedThatNotAllChannelsAreFilled(): void
     {
         Assert::contains(
@@ -1126,17 +921,13 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then its priority should be :priority
-     */
+    #[Then('its priority should be :priority')]
     public function itsPriorityShouldBe(int $priority): void
     {
         Assert::same($this->showPage->getPriority(), $priority);
     }
 
-    /**
-     * @Then I should see the catalog promotion scope configuration form
-     */
+    #[Then('I should see the catalog promotion scope configuration form')]
     public function iShouldSeeTheCatalogPromotionScopeConfigurationForm(): void
     {
         Assert::true(
@@ -1145,9 +936,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should see the catalog promotion action configuration form
-     */
+    #[Then('I should see the catalog promotion action configuration form')]
     public function iShouldSeeTheCatalogPromotionActionConfigurationForm(): void
     {
         Assert::true(
@@ -1156,9 +945,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then I should not see a catalog promotion with name :name
-     */
+    #[Then('I should not see a catalog promotion with name :name')]
     public function iShouldNotSeeACatalogPromotionWithName(string $name): void
     {
         Assert::false(
@@ -1167,9 +954,7 @@ final class ManagingCatalogPromotionsContext implements Context
         );
     }
 
-    /**
-     * @Then the first catalog promotion should have code :code
-     */
+    #[Then('the first catalog promotion should have code :code')]
     public function theFirstCatalogPromotionShouldHaveCode(string $code): void
     {
         Assert::same($this->indexPage->getColumnFields('code')[0], $code);

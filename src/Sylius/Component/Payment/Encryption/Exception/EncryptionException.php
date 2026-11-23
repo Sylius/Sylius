@@ -39,4 +39,12 @@ final class EncryptionException extends \RuntimeException
             previous: $previousException,
         );
     }
+
+    public static function dataIsNotFullyEncrypted(?\Throwable $previousException = null): self
+    {
+        return new self(
+            message: 'Cannot decrypt data that is not fully encrypted while strict mode is enabled.',
+            previous: $previousException,
+        );
+    }
 }

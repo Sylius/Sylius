@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Channel\Factory;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Channel\Factory\ChannelFactory;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 class ChannelFactoryTest extends TestCase
 {
     public function testShouldImplementChannelFactoryInterface(): void

@@ -17,6 +17,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
 use ApiPlatform\Validator\Exception\ValidationException;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\Resolver\UriTemplateParentResourceResolverInterface;
@@ -26,6 +27,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
 {
     private MockObject&ProcessorInterface $processor;

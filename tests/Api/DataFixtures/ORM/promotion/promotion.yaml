@@ -8,6 +8,7 @@ Sylius\Component\Core\Model\Promotion:
         exclusive: true
         appliesToDiscounted: false
         usageLimit: 1
+        trackUsage: true
         used: 0
         couponBased: false
     promotion_1_off:
@@ -19,6 +20,7 @@ Sylius\Component\Core\Model\Promotion:
         exclusive: false
         appliesToDiscounted: true
         couponBased: true
+        trackUsage: true
     promotion_back_to_school:
         code: 'back_to_school'
         name: 'Back to school'
@@ -28,6 +30,7 @@ Sylius\Component\Core\Model\Promotion:
         exclusive: false
         appliesToDiscounted: true
         couponBased: false
+        trackUsage: true
         archivedAt: <dateTimeBetween('-1 month', 'now')>
 
 Sylius\Component\Promotion\Model\PromotionTranslation:
@@ -53,6 +56,7 @@ Sylius\Component\Core\Model\PromotionCoupon:
         reusableFromCancelledOrders: true
         promotion: '@promotion_1_off'
         expiresAt: null
+        trackUsage: true
     promotion_1_off_coupon_2:
         code: 'XYZ2'
         usageLimit: null
@@ -60,6 +64,7 @@ Sylius\Component\Core\Model\PromotionCoupon:
         reusableFromCancelledOrders: false
         promotion: '@promotion_1_off'
         expiresAt: <dateTimeBetween('now', '+20 days')>
+        trackUsage: true
 
 Sylius\Component\Promotion\Model\PromotionAction:
     10_percent_order_discount:

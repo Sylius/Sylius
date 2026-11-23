@@ -15,6 +15,7 @@ namespace Tests\Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -33,6 +34,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Resource\Exception\UnexpectedTypeException;
 use Sylius\Resource\Factory\FactoryInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class UnitPercentageDiscountPromotionActionCommandTest extends TestCase
 {
     private FactoryInterface&MockObject $adjustmentFactory;

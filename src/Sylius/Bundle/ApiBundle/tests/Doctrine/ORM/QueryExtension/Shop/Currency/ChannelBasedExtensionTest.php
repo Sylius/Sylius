@@ -19,6 +19,7 @@ use ApiPlatform\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -31,6 +32,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class ChannelBasedExtensionTest extends TestCase
 {
     private ChannelBasedExtension $extension;

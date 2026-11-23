@@ -41,7 +41,6 @@ sylius_core:
 
 doctrine:
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
             default:
                 auto_mapping: true
@@ -62,16 +61,6 @@ flysystem:
             options:
                 directory: '%sylius_core.images_dir%'
             directory_visibility: 'public'
-
-knp_gaufrette:
-    adapters:
-        sylius_image:
-            local:
-                directory: "%sylius_core.images_dir%"
-                create: true
-    filesystems:
-        sylius_image:
-            adapter: "%sylius.uploader.filesystem%"
 
 liip_imagine:
     cache: sylius_image

@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Component\Promotion\Model;
 
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Promotion\Model\CatalogPromotionInterface;
 use Sylius\Component\Promotion\Model\CatalogPromotionScope;
 use Sylius\Component\Promotion\Model\CatalogPromotionScopeInterface;
 
+#[AllowMockObjectsWithoutExpectations]
 final class CatalogPromotionScopeTest extends TestCase
 {
     private CatalogPromotionInterface&MockObject $catalogPromotion;

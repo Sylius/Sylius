@@ -152,10 +152,18 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         ;
     }
 
+    /** @deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use countByCustomerAndCouponSince() instead. */
     public function countByCustomerAndCoupon(
         CustomerInterface $customer,
         PromotionCouponInterface $coupon,
     ): int {
+        trigger_deprecation(
+            'sylius/core-bundle',
+            '2.3',
+            'The "%s()" method is deprecated since Sylius 2.3 and will be removed in Sylius 3.0. Use countByCustomerAndCouponSince() instead.',
+            __METHOD__,
+        );
+
         $states = [OrderInterface::STATE_CART];
         if ($coupon->isReusableFromCancelledOrders()) {
             $states[] = OrderInterface::STATE_CANCELLED;
@@ -172,6 +180,36 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getSingleScalarResult()
         ;
+    }
+
+    public function countByCustomerAndCouponSince(
+        CustomerInterface $customer,
+        PromotionCouponInterface $coupon,
+        ?\DateTimeInterface $since,
+    ): int {
+        $states = [OrderInterface::STATE_CART];
+        if ($coupon->isReusableFromCancelledOrders()) {
+            $states[] = OrderInterface::STATE_CANCELLED;
+        }
+
+        $qb = $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.customer = :customer')
+            ->andWhere('o.promotionCoupon = :coupon')
+            ->andWhere('o.state NOT IN (:states)')
+            ->setParameter('customer', $customer)
+            ->setParameter('coupon', $coupon)
+            ->setParameter('states', $states)
+        ;
+
+        if ($since !== null) {
+            $qb
+                ->andWhere('o.checkoutCompletedAt >= :since')
+                ->setParameter('since', $since)
+            ;
+        }
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByCustomer(CustomerInterface $customer): int

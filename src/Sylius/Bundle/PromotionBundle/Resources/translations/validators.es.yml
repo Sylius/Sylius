@@ -12,6 +12,8 @@ sylius:
             min_length: La descripción de la promoción debe tener al menos 1 carácter.|La descripción de la promoción debe tener al menos {{ limit }} caracteres.
             not_blank: Por favor introduce la descripción de la promoción.
         end_date_cannot_be_set_prior_start_date: La fecha de finalización no puede ser anterior a la fecha de inicio.
+        usage_limit:
+            min: El límite de uso de la promoción debe ser al menos {{ limit }}.
         name:
             max_length: El nombre de la promoción no debe tener más de 1 carácter.|El nombre de la promoción no debe tener más de {{ limit }} caracteres.
             min_length: El nombre de la promoción debe tener al menos 1 carácter.|El nombre de la promoción debe tener al menos {{ limit }} caracteres.
