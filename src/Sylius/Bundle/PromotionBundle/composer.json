@@ -32,7 +32,7 @@
         "sylius/money-bundle": "^2.0",
         "sylius/promotion": "^2.0",
         "sylius/registry": "^1.6",
-        "sylius/resource-bundle": "^1.14.2",
+        "sylius/resource-bundle": "dev-grid-context as 1.15.99",
         "symfony/clock": "^6.4 || ^7.4 || ^8.0",
         "symfony/framework-bundle": "^6.4.1 || ^7.4 || ^8.0"
     },
@@ -77,6 +77,14 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusGridBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusResourceBundle"
         }
     ],
     "minimum-stability": "dev",

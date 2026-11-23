@@ -23,6 +23,8 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
  * @template T of ProductInterface
  *
  * @extends BaseProductRepositoryInterface<T>
+ *
+ * @method QueryBuilder createShopListQueryBuilderForChannel(ChannelInterface $channel, string $locale, array<string, string> $sorting = [], ?TaxonInterface $taxon = null, bool $includeAllDescendants = false) Not added to the interface yet to avoid a BC break, will be added in Sylius 3.0
  */
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {

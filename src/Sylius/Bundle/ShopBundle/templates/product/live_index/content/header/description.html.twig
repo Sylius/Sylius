@@ -1,0 +1,5 @@
+{% set taxon = hookable_metadata.context.taxon|default(null) %}
+
+{% if taxon is not null and taxon.description is not empty %}
+    <div>{{ taxon.description }}</div>
+{% endif %}

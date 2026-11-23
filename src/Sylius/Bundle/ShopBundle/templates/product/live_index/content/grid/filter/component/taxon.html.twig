@@ -1,0 +1,46 @@
+{# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Product\Grid\TaxonFilterComponent #}
+
+{% set choices = form.vars.choices %}
+{% set input_id_prefix = 'grid-filter-' ~ filter.name ~ '-' %}
+
+<div {{ attributes }} {{ sylius_test_html_attribute('grid-filter', filter.name) }}>
+    {% if choices is not empty %}
+        <fieldset>
+            <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+                <legend class="fs-6 fw-semibold mb-0">
+                    {{ filter.label ? filter.label|trans }}{% if value is not empty %} ({{ value|length }}){% endif %}
+                </legend>
+
+                {% if value is not empty %}
+                    <button type="button"
+                            class="btn btn-sm btn-link link-secondary p-0 d-inline-flex align-items-center gap-1"
+                            data-action="live#action"
+                            data-live-action-param="clear"
+                            {{ sylius_test_html_attribute('grid-filter-clear', filter.name) }}
+                    >
+                        {{ ux_icon('tabler:x') }}
+                        {{ 'sylius.ui.clear'|trans }}
+                    </button>
+                {% endif %}
+            </div>
+
+            {% for choice in choices %}
+                <div class="form-check">
+                    <input type="checkbox"
+                           class="form-check-input"
+                           id="{{ input_id_prefix ~ loop.index }}"
+                           value="{{ choice.value }}"
+                           {% if choice.value in value %}checked{% endif %}
+                           data-model="norender|value"
+                           data-action="live#action"
+                           data-live-action-param="onChange"
+                           {{ sylius_test_html_attribute('grid-filter-choice', choice.value) }}
+                    >
+                    <label class="form-check-label" for="{{ input_id_prefix ~ loop.index }}">
+                        {{ choice.label }}
+                    </label>
+                </div>
+            {% endfor %}
+        </fieldset>
+    {% endif %}
+</div>

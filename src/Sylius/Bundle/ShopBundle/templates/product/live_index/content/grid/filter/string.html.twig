@@ -1,0 +1,6 @@
+{# Renders a "shop_string" filter of a live grid #}
+{{ component('sylius_shop:product:grid:filter:string', {
+    form,
+    filter,
+    criteria: grid.parameters.get('criteria', []),
+}) }}

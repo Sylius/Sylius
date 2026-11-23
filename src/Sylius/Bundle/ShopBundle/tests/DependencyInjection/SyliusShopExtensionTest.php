@@ -117,6 +117,28 @@ final class SyliusShopExtensionTest extends AbstractExtensionTestCase
     }
 
     #[Test]
+    public function it_disables_the_live_product_grid_by_default(): void
+    {
+        $this->load([]);
+
+        $this->assertContainerBuilderHasParameter('sylius_shop.product_grid.live.enabled', false);
+        $this->assertFalse($this->container->getDefinition('sylius_shop.grid_mutator.live_product')->hasTag('sylius.grid_mutator'));
+    }
+
+    #[Test]
+    public function it_enables_the_live_product_grid_when_configured(): void
+    {
+        $this->load(['product_grid' => ['live' => true]]);
+
+        $this->assertContainerBuilderHasParameter('sylius_shop.product_grid.live.enabled', true);
+        $this->assertContainerBuilderHasServiceDefinitionWithTag(
+            'sylius_shop.grid_mutator.live_product',
+            'sylius.grid_mutator',
+            ['grid' => 'sylius_shop_product'],
+        );
+    }
+
+    #[Test]
     public function it_configures_default_order_pay_parameters(): void
     {
         $this->load([]);

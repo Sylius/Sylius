@@ -42,7 +42,7 @@
         "sylius/currency-bundle": "^2.0",
         "sylius/customer-bundle": "^2.0",
         "sylius/fixtures-bundle": "^1.10",
-        "sylius/grid-bundle": "^1.16",
+        "sylius/grid-bundle": "dev-live-grids-remove-filter-traits as 1.16.99",
         "sylius/inventory-bundle": "^2.0",
         "sylius/locale-bundle": "^2.0",
         "sylius/mailer-bundle": "^2.2",
@@ -51,7 +51,7 @@
         "sylius/payment-bundle": "^2.0",
         "sylius/product-bundle": "^2.0",
         "sylius/promotion-bundle": "^2.0",
-        "sylius/resource-bundle": "^1.14.2",
+        "sylius/resource-bundle": "dev-grid-context as 1.15.99",
         "sylius/review-bundle": "^2.0",
         "sylius/shipping-bundle": "^2.0",
         "sylius/state-machine-abstraction": "^2.0",
@@ -110,6 +110,14 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusGridBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusResourceBundle"
         }
     ],
     "minimum-stability": "dev",

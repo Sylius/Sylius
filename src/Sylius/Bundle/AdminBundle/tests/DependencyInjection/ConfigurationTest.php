@@ -62,6 +62,26 @@ final class ConfigurationTest extends TestCase
         );
     }
 
+    #[Test]
+    public function it_disables_the_live_grids_by_default(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['grid' => ['live' => ['enabled' => false]]],
+            'grid',
+        );
+    }
+
+    #[Test]
+    public function its_live_grids_can_be_enabled(): void
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['grid' => ['live' => true]]],
+            ['grid' => ['live' => ['enabled' => true]]],
+            'grid',
+        );
+    }
+
     protected function getConfiguration(): Configuration
     {
         return new Configuration();

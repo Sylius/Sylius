@@ -58,7 +58,7 @@ sylius_grid:
                     generate:
                         type: generate_variants
                         options:
-                            product: expr:service('sylius.repository.product').find($productId)
+                            product: "@=sylius_repositories.get('sylius.repository.product').find(variables['productId'])"
                     update_positions:
                         type: update_product_variant_positions
                     create:

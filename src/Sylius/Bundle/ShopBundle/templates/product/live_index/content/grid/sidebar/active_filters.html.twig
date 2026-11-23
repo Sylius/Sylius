@@ -1,0 +1,25 @@
+{% set active_filters = hookable_metadata.context.active_filters %}
+
+{% if active_filters is not empty %}
+    <ul class="list-unstyled d-flex flex-wrap gap-2 mb-4"
+        aria-label="{{ 'sylius.product_grid.active_filters'|trans }}"
+        {{ sylius_test_html_attribute('active-filters') }}
+    >
+        {% for active_filter in active_filters %}
+            <li>
+                <button type="button"
+                        class="btn btn-sm btn-light border d-inline-flex align-items-center gap-1"
+                        data-action="live#action"
+                        data-live-action-param="removeFilterValue"
+                        data-live-filter-param="{{ active_filter.filter }}"
+                        data-live-value-param="{{ active_filter.value }}"
+                        aria-label="{{ 'sylius.product_grid.remove_filter'|trans({'%value%': active_filter.value_label}) }}"
+                        {{ sylius_test_html_attribute('active-filter', active_filter.filter ~ '-' ~ active_filter.value) }}
+                >
+                    {{ active_filter.value_label }}
+                    {{ ux_icon('tabler:x') }}
+                </button>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

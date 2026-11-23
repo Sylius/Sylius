@@ -40,12 +40,13 @@
         "nelmio/alice": "^3.13",
         "phparkitect/phparkitect": "^1.0",
         "phpunit/phpunit": "^12.5",
-        "sylius/resource-bundle": "^1.14.2",
+        "sylius/resource-bundle": "dev-grid-context as 1.15.99",
         "symfony/browser-kit": "^6.4 || ^7.4 || ^8.0",
         "symfony/debug-bundle": "^6.4 || ^7.4 || ^8.0",
         "symfony/dotenv": "^6.4 || ^7.4 || ^8.0",
         "symfony/webpack-encore-bundle": "^2.4",
-        "theofidry/alice-data-fixtures": "^1.7"
+        "theofidry/alice-data-fixtures": "^1.7",
+        "sylius/grid-bundle": "dev-live-grids-remove-filter-traits as 1.16.99"
     },
     "config": {
         "allow-plugins": {
@@ -78,6 +79,14 @@
         {
             "type": "path",
             "url": "../../*/*"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusGridBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loic425/SyliusResourceBundle"
         }
     ],
     "minimum-stability": "dev",

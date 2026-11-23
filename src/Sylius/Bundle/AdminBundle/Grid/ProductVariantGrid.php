@@ -81,7 +81,7 @@ final class ProductVariantGrid implements ProductVariantGridInterface
             ->withMainActions(
                 Action::create('generate', 'generate_variants')
                     ->setOptions([
-                        'product' => 'expr:service(\'sylius.repository.product\').find($productId)',
+                        'product' => "@=sylius_repositories.get('sylius.repository.product').find(variables['productId'])",
                     ]),
                 Action::create('update_positions', 'update_product_variant_positions'),
                 CreateAction::create()
