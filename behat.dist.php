@@ -48,8 +48,50 @@ return (new Config())
             'default_session' => 'symfony',
             'javascript_session' => 'panther',
             'sessions' => [
+                'workerphp' => [
+                    'browserkit_http' => null,
+                ],
+                'workerphp_second' => [
+                    'browserkit_http' => null,
+                ],
+                'panther_second' => [
+                    'panther' => [
+                        'manager_options' => [
+                            'connection_timeout_in_ms' => 5000,
+                            'request_timeout_in_ms' => 120000,
+                            'capabilities' => [
+                                'goog:chromeOptions' => [
+                                    'args' => ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
                 'symfony' => [
                     'symfony' => null,
+                ],
+                'workerphp' => [
+                    'browserkit_http' => null,
+                ],
+                //  The second actor in a scenario - the session the steps
+                //  that say "in another browser" switch to. Plain HTTP, so it
+                //  can address a long-running worker in another process.
+                'workerphp_second' => [
+                    'browserkit_http' => null,
+                ],
+                //  The second actor for scenarios that need JavaScript.
+                'panther_second' => [
+                    'panther' => [
+                        'manager_options' => [
+                            'connection_timeout_in_ms' => 5000,
+                            'request_timeout_in_ms' => 120000,
+                            'capabilities' => [
+                                'goog:chromeOptions' => [
+                                    'args' => ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
                 'chromedriver' => [
                     'chrome' => [
