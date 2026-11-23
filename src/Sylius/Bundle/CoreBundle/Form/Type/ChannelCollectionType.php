@@ -19,10 +19,15 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class ChannelCollectionType extends AbstractType
+final class ChannelCollectionType extends AbstractType implements ResetInterface
 {
+    /** @var array<\Sylius\Component\Channel\Model\ChannelInterface>|null */
+    private ?array $channels = null;
+
     public function __construct(private ChannelRepositoryInterface $channelRepository)
     {
     }
@@ -30,7 +35,7 @@ final class ChannelCollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'entries' => $this->channelRepository->findAll(),
+            'entries' => fn (Options $options): array => $this->channels ??= $this->channelRepository->findAll(),
             'entry_name' => fn (ChannelInterface $channel) => $channel->getCode(),
             'error_bubbling' => false,
         ]);
@@ -47,6 +52,11 @@ final class ChannelCollectionType extends AbstractType
                 $children,
             ),
         );
+    }
+
+    public function reset(): void
+    {
+        $this->channels = null;
     }
 
     public function getParent(): string

@@ -15,8 +15,9 @@ namespace Sylius\Component\Channel\Context;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Contracts\Service\ResetInterface;
 
-final class CachedPerRequestChannelContext implements ChannelContextInterface
+final class CachedPerRequestChannelContext implements ChannelContextInterface, ResetInterface
 {
     private \SplObjectStorage $requestToChannelMap;
 
@@ -50,5 +51,17 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
 
             throw $exception;
         }
+    }
+
+    /**
+     * Both maps are keyed by the Request object and nothing is ever removed, so on a
+     * long-running runtime every request ever served stays reachable. Worse, a cached
+     * Channel entity outlives the EntityManager that loaded it, and the next request's
+     * flush fails with ORMInvalidArgumentException. New instances drop both.
+     */
+    public function reset(): void
+    {
+        $this->requestToChannelMap = new \SplObjectStorage();
+        $this->requestToExceptionMap = new \SplObjectStorage();
     }
 }
