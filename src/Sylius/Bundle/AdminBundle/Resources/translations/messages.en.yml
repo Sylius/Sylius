@@ -111,8 +111,8 @@ sylius:
             official: 'Official Integration'
             official_hint: 'Built and maintained by the Sylius team'
             paypal:
-                description: 'Give shoppers a wallet they already trust, with Pay Later options built in.'
-                title: 'Grow your sales with PayPal'
+                description: 'Add PayPal and Pay Later options to your store in just a few clicks.'
+                title: 'Help grow sales with PayPal'
             stripe:
                 description: 'One integration for 125+ payment methods, built on developer-first APIs.'
                 title: 'Accept payments with Stripe'

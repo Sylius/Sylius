@@ -101,6 +101,10 @@ sylius:
         pagination:
             number_of_results: 'Affichage de %from% à %to% sur %total% entrées'
         partially_refunded: 'Partiellement remboursé'
+        payment_method_banner:
+            paypal:
+                description: 'Ajoutez PayPal et le paiement en plusieurs fois en quelques clics.'
+                title: 'Aidez à booster vos ventes'
         pending_actions: 'Actions en attente'
         price_details: 'Prix - il s''agit du prix actuel de la variante de produit affichée dans le catalogue. Il peut être modifié par des mécanismes internes, par exemple les promotions du catalogue.'
         product_price_details: 'Prix - il s''agit du prix actuel du produit affiché dans le catalogue. Il peut être modifié par des mécanismes internes, par exemple les promotions du catalogue.'
