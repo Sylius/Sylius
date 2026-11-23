@@ -152,7 +152,7 @@ return static function (ContainerConfigurator $container) {
     $services
         ->set('sylius_api.search_filter.admin.order')
         ->parent('api_platform.doctrine.orm.search_filter')
-        ->args([['channel.code' => '', 'currencyCode' => 'exact', 'customer.id' => 'exact', 'items.productName' => 'exact', 'shipments.method.code' => 'exact', 'items.variant.translations.name' => 'exact']])
+        ->args([['channel.code' => '', 'currencyCode' => 'exact', 'customer.id' => 'exact', 'items.productName' => 'exact', 'shipments.method.code' => 'exact', 'items.variant.translations.name' => 'exact', 'number' => 'partial']])
         ->tag('api_platform.filter')
     ;
 
