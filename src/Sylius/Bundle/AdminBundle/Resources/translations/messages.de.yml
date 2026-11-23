@@ -81,6 +81,10 @@ sylius:
         create_child: 'Untergeordnetes Element erstellen'
         customer_group: Kundengruppe
         check_all: 'Alle auswählen'
+        theme_auto: 'Automatisch'
+        theme_dark: 'Dunkel'
+        theme_light: 'Hell'
+        toggle_theme: 'Design wechseln'
         uncheck_all: 'Alle abwählen'
         delete_avatar: 'Avatar löschen'
         ip_address: 'IP-Adresse'

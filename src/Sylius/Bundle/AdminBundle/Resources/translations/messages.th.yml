@@ -47,3 +47,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: บริการระดับมืออาชีพ
                     find_a_partner: หาคู่ค้า
+    ui:
+        theme_auto: 'อัตโนมัติ'
+        theme_dark: 'มืด'
+        theme_light: 'สว่าง'
+        toggle_theme: 'สลับธีม'

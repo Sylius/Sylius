@@ -121,9 +121,13 @@ sylius:
             2weeks: 2 veckor
             year: År
         taxon: Taxon
+        theme_auto: 'Automatiskt'
+        theme_dark: 'Mörkt'
+        theme_light: 'Ljust'
         to_approve: 'att godkänna'
         to_process: 'att behandla'
         to_ship: 'att skicka'
+        toggle_theme: 'Växla tema'
         view_in_store: Visa i butiken
         work_in_progress: Pågår
         empty_date: tomt

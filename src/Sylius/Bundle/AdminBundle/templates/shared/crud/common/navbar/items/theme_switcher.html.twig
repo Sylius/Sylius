@@ -1,6 +1,28 @@
-<div class="nav-item" {{ stimulus_controller('@sylius/admin-bundle/theme-switcher') }}>
-    <button type="button" class="btn btn-icon btn-ghost-secondary" {{ stimulus_action('@sylius/admin-bundle/theme-switcher', 'toggle') }} aria-label="{{ 'sylius.ui.toggle_theme'|trans }}">
-        {{ ux_icon('tabler:sun', {'class': 'icon', 'data-theme-switch': 'light'}) }}
-        {{ ux_icon('tabler:moon', {'class': 'icon', 'data-theme-switch': 'dark'}) }}
+{% set controller = '@sylius/admin-bundle/theme-switcher' %}
+{% set modes = {
+    light: {icon: 'tabler:sun', label: 'sylius.ui.theme_light'|trans},
+    dark: {icon: 'tabler:moon', label: 'sylius.ui.theme_dark'|trans},
+    auto: {icon: 'tabler:device-desktop', label: 'sylius.ui.theme_auto'|trans},
+} %}
+
+<div class="nav-item dropdown" {{ stimulus_controller(controller) }}>
+    <button type="button" class="btn btn-icon btn-ghost-secondary" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{{ 'sylius.ui.toggle_theme'|trans }}" title="{{ 'sylius.ui.toggle_theme'|trans }}">
+        {% for mode, option in modes %}
+            {{ ux_icon(option.icon, {'class': 'icon', 'data-theme-switch': mode}) }}
+        {% endfor %}
     </button>
+    <div class="dropdown-menu dropdown-menu-end">
+        {% for mode, option in modes %}
+            <button
+                type="button"
+                class="dropdown-item"
+                {{ stimulus_target(controller, 'option') }}
+                {{ stimulus_action(controller, 'select', 'click', {mode: mode}) }}
+                {{ sylius_test_html_attribute('theme-switcher-option', mode) }}
+            >
+                {{ ux_icon(option.icon, {'class': 'icon dropdown-item-icon'}) }}
+                {{ option.label }}
+            </button>
+        {% endfor %}
+    </div>
 </div>

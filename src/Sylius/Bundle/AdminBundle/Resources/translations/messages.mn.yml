@@ -64,3 +64,7 @@ sylius:
             week: Долоо хоног
             2weeks: Хоёр долоо хоног
             year: Жил
+        theme_auto: 'Автомат'
+        theme_dark: 'Бараан'
+        theme_light: 'Цайвар'
+        toggle_theme: 'Загвар солих'

@@ -45,3 +45,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Shërbime profesionale
                     find_a_partner: Gjej një partner
+    ui:
+        theme_auto: 'Automatike'
+        theme_dark: 'E errët'
+        theme_light: 'E çelët'
+        toggle_theme: 'Ndrysho temën'

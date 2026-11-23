@@ -47,3 +47,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Fagleg þjónusta
                     find_a_partner: Finndu samstarfsaðila
+    ui:
+        theme_auto: 'Sjálfvirkt'
+        theme_dark: 'Dökkt'
+        theme_light: 'Ljóst'
+        toggle_theme: 'Skipta um þema'

@@ -48,3 +48,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Профессиональные услуги
                     find_a_partner: Найти партнера
+    ui:
+        theme_auto: 'Автоматически'
+        theme_dark: 'Тёмная'
+        theme_light: 'Светлая'
+        toggle_theme: 'Переключить тему'

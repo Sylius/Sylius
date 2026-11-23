@@ -47,3 +47,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Profesyonel hizmetler
                     find_a_partner: Bir ortak bul
+    ui:
+        theme_auto: 'Otomatik'
+        theme_dark: 'Koyu'
+        theme_light: 'Açık'
+        toggle_theme: 'Temayı değiştir'

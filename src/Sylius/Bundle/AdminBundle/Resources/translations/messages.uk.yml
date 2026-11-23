@@ -61,3 +61,7 @@ sylius:
             week: Тиждень
             2weeks: 2 тижні
             year: Рік
+        theme_auto: 'Автоматично'
+        theme_dark: 'Темна'
+        theme_light: 'Світла'
+        toggle_theme: 'Перемкнути тему'

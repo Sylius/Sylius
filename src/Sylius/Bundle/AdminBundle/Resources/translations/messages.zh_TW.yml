@@ -44,3 +44,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: 專業服務
                     find_a_partner: 找一個合作夥伴
+    ui:
+        theme_auto: '自動'
+        theme_dark: '深色'
+        theme_light: '淺色'
+        toggle_theme: '切換主題'

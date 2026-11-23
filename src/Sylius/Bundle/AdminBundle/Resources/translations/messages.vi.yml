@@ -35,3 +35,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Dịch vụ chuyên nghiệp
                     find_a_partner: Tìm đối tác
+    ui:
+        theme_auto: 'Tự động'
+        theme_dark: 'Tối'
+        theme_light: 'Sáng'
+        toggle_theme: 'Chuyển giao diện'

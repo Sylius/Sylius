@@ -47,3 +47,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: Szakmai szolgáltatások
                     find_a_partner: Partner keresése
+    ui:
+        theme_auto: 'Automatikus'
+        theme_dark: 'Sötét'
+        theme_light: 'Világos'
+        toggle_theme: 'Téma váltása'

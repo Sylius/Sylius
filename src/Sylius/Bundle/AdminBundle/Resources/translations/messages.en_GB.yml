@@ -116,6 +116,10 @@ sylius:
             2weeks: 2 Weeks
             year: Year
         taxon: Taxon
+        theme_auto: 'Auto'
+        theme_dark: 'Dark'
+        theme_light: 'Light'
+        toggle_theme: 'Toggle theme'
         view_in_store: 'View in store'
         work_in_progress: Work in progress
         empty_date: empty

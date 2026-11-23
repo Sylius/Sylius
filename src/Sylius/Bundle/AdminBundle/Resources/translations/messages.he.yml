@@ -42,3 +42,8 @@ sylius:
                     sylius_plus: Sylius Plus
                     professional_services: שירותים מקצועיים
                     find_a_partner: מצא שותף
+    ui:
+        theme_auto: 'אוטומטי'
+        theme_dark: 'כהה'
+        theme_light: 'בהיר'
+        toggle_theme: 'החלפת ערכת נושא'
