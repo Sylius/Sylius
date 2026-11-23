@@ -31,6 +31,7 @@ final class SyliusApiExtension extends Extension implements PrependExtensionInte
 
         $container->setParameter('sylius_api.enabled', $config['enabled']);
         $container->setParameter('sylius_api.default_image_filter', $config['default_image_filter']);
+        $container->setParameter('sylius_api.eager_loading.force_eager', $config['eager_loading']['force_eager']);
         $container->setParameter(
             'sylius_api.filter_eager_loading_extension.restricted_resources',
             $config['filter_eager_loading_extension']['restricted_resources'],

@@ -137,6 +137,30 @@ final class SyliusApiExtensionTest extends AbstractExtensionTestCase
     }
 
     #[Test]
+    public function it_forces_eager_loading_on_sylius_read_operations_by_default(): void
+    {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
+
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter('sylius_api.eager_loading.force_eager', true);
+    }
+
+    #[Test]
+    public function it_loads_force_eager_configuration_properly(): void
+    {
+        $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);
+
+        $this->load([
+            'eager_loading' => [
+                'force_eager' => false,
+            ],
+        ]);
+
+        $this->assertContainerBuilderHasParameter('sylius_api.eager_loading.force_eager', false);
+    }
+
+    #[Test]
     public function it_prepends_configuration_with_api_platform_mapping(): void
     {
         $this->container->setParameter('kernel.bundles_metadata', ['SyliusApiBundle' => ['path' => __DIR__ . '../..']]);

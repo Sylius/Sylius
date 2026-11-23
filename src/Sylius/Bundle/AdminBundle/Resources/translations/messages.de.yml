@@ -111,6 +111,10 @@ sylius:
         pagination:
             number_of_results: 'Zeige %from% bis %to% von %total% Einträgen'
         partially_refunded: 'Teilweise erstattet'
+        payment_method_banner:
+            paypal:
+                description: 'Mit wenigen Klicks PayPal und Später Bezahlen in Ihrem Shop anbieten.'
+                title: 'Mit PayPal den Umsatz fördern'
         price_history: 'Preisehistorie'
         product_variant: 'Produktvariante'
         products_positions: 'Produktpositionen'

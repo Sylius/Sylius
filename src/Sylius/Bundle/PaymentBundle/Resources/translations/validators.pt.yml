@@ -20,6 +20,8 @@ sylius:
         expiry_year:
             not_blank: 'Selecione o ano de validade.'
     gateway_config:
+        config:
+            forbidden_value: Este valor não é permitido na configuração do gateway.
         invalid_gateway_factory: 'Gateway inválido. Fábricas disponíveis: {{ available_factories }}.'
         gateway_name:
             not_blank: 'Informe o nome do gateway.'

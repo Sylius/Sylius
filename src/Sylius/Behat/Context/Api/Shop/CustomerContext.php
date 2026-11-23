@@ -198,7 +198,11 @@ final class CustomerContext implements Context
     #[Then('I should be notified that the verification email has been sent')]
     public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent(): void
     {
-        Assert::same($this->client->getLastResponse()->getStatusCode(), 202);
+        $response = $this->client->getLastResponse();
+
+        Assert::true(
+            $this->responseChecker->isAccepted($response) || $this->responseChecker->isUpdateSuccessful($response),
+        );
     }
 
     #[Then('I should be notified that the verification email has been sent to the provided address')]

@@ -40,12 +40,31 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
     {
         $sequence = $this->getSequence();
 
-        $this->sequenceManager->lock($sequence, LockMode::OPTIMISTIC, $sequence->getVersion());
+        if ($this->sequenceManager->getConnection()->isTransactionActive()) {
+            $this->lockForUpdate($sequence);
+        } else {
+            $this->sequenceManager->lock($sequence, LockMode::OPTIMISTIC, $sequence->getVersion());
+        }
 
         $number = $this->generateNumber($sequence->getIndex());
         $sequence->incrementIndex();
 
         return $number;
+    }
+
+    /**
+     * Waits for concurrent transactions holding the row, then reloads the committed index.
+     * Skipped when the sequence is new or its index was already incremented in this unit of work:
+     * the in-memory value is then ahead of the database.
+     */
+    private function lockForUpdate(OrderSequenceInterface $sequence): void
+    {
+        $originalData = $this->sequenceManager->getUnitOfWork()->getOriginalEntityData($sequence);
+        if (($originalData['index'] ?? null) !== $sequence->getIndex()) {
+            return;
+        }
+
+        $this->sequenceManager->refresh($sequence, LockMode::PESSIMISTIC_WRITE);
     }
 
     private function generateNumber(int $index): string

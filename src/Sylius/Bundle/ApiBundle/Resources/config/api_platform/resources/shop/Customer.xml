@@ -68,6 +68,7 @@
                 class="ApiPlatform\Metadata\Put"
                 uriTemplate="/shop/customers/{id}"
                 security="is_granted('SYLIUS_SHOP_USER')"
+                processor="sylius_api.state_processor.shop.customer.persist"
             >
                 <denormalizationContext>
                     <values>

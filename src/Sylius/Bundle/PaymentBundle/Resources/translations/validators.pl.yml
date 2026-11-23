@@ -20,6 +20,8 @@ sylius:
         expiry_year:
             not_blank: Proszę wybrać rok wygaśnięcia.
     gateway_config:
+        config:
+            forbidden_value: Ta wartość nie jest dozwolona w konfiguracji bramki płatności.
         invalid_gateway_factory: Nieprawidłowa bramka płatności. Dostępne bramki to {{ available_factories }}.
         gateway_name:
             not_blank: Proszę podać nazwę bramki płatności.

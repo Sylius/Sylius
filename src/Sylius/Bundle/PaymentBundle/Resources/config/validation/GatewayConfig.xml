@@ -35,5 +35,13 @@
                 </option>
             </constraint>
         </property>
+
+        <property name="config">
+            <constraint name="Sylius\Bundle\PaymentBundle\Validator\Constraints\SafeGatewayConfigValues">
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

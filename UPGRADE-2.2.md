@@ -1,3 +1,84 @@
+# UPGRADE FROM `2.2.12` TO `2.2.13`
+
+This is a **security release**. Updating is strongly recommended.
+
+## Security fixes
+
+### [API] Changing the e-mail address of a customer requires a new verification (Medium)
+
+`PUT /api/v2/shop/customers/{id}` now uses `Sylius\Bundle\ApiBundle\StateProcessor\Shop\Customer\PersistProcessor`
+(`sylius_api.state_processor.shop.customer.persist`). When the e-mail address in the request differs from the current
+one:
+
+- the shop user is no longer verified,
+- on a channel with **Account verification required** enabled, the shop user is also disabled and the account
+  verification e-mail is sent to the new address. The customer cannot obtain a new API token or log in until the
+  address is verified.
+
+A request that does not change the e-mail address behaves as before.
+
+**Action required if you have a client application using the Shop API.** After a successful e-mail change on a
+channel that requires account verification, tell the customer to confirm the new address, and expect
+`POST /api/v2/shop/customers/token` to be refused for that account until then.
+
+If you have replaced the processor of the `PUT /api/v2/shop/customers/{id}` operation in your application, your
+configuration takes precedence and the new behaviour does not apply: call or decorate
+`sylius_api.state_processor.shop.customer.persist` from your processor.
+
+### [Admin] Uploaded taxon and avatar images are validated before they are stored (Medium)
+
+`POST /api/v2/admin/taxons/{code}/images` and `POST /api/v2/admin/administrators/{id}/avatar-image` now validate the
+uploaded file with the constraints defined for `Sylius\Component\Core\Model\TaxonImage` and
+`Sylius\Component\Core\Model\AvatarImage` before it is uploaded. A request with a file that is not a JPEG, PNG, GIF or
+WebP image, or that exceeds the size limit, is rejected with `422 Unprocessable Content` and nothing is written to the
+filesystem. The administrator form in the administration panel validates the avatar in the same way and shows the
+violation on the avatar field. The accepted types are those configured in `sylius_core.allowed_images_mime_types`.
+
+Files that are already stored are not modified. Review the media directory for files that are not images.
+
+#### Constructor signature changes
+
+1. The constructor of `Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor` has been extended with
+   two new arguments:
+
+```php
+    public function __construct(
+        private ProcessorInterface $processor,
+        private ImageCreatorInterface $taxonImageCreator,
++       private ValidatorInterface $validator,
++       private string $taxonImageClass,
+    )
+```
+
+2. The constructor of `Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage\PersistProcessor` has been extended with
+   a new argument:
+
+```php
+    public function __construct(
+        private ProcessorInterface $processor,
+        private ImageCreatorInterface $avatarImageCreator,
+        private AvatarImageRepositoryInterface $avatarImageRepository,
++       private ValidatorInterface $validator,
+    )
+```
+
+If you instantiate or decorate these services with your own service definition, pass the new arguments.
+
+### [Admin] Gateway configuration values are validated before they are stored (Medium)
+
+The gateway configuration is now validated with the `Sylius\Bundle\PaymentBundle\Validator\Constraints\SafeGatewayConfigValues` constraint, both in the
+administration panel and in `POST` and `PUT /api/v2/admin/payment-methods`. A payment method is rejected with a
+violation on the gateway configuration when any of its values is:
+
+- a string wrapped in `%`, such as a reference to a container parameter or an environment variable,
+- a string starting with `@`,
+- a callable: the name of a PHP function, a `Class::method` string or a `["Class", "method"]` array.
+
+Configurations that are already stored are not modified, but a payment method holding such a value cannot be saved
+again until the value is changed. If a stored configuration refers to a parameter or an environment variable, put the
+resolved value in the configuration instead, or provide it in the configuration of the gateway factory in your
+application.
+
 # UPGRADE FROM `2.2.11` TO `2.2.12`
 
 This is a **security release**. Updating is strongly recommended.

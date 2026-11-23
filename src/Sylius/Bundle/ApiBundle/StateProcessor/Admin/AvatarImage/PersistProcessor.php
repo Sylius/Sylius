@@ -16,9 +16,11 @@ namespace Sylius\Bundle\ApiBundle\StateProcessor\Admin\AvatarImage;
 use ApiPlatform\Metadata\DeleteOperationInterface;
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
+use ApiPlatform\Validator\Exception\ValidationException;
 use Sylius\Bundle\ApiBundle\Creator\ImageCreatorInterface;
 use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Webmozart\Assert\Assert;
 
 /** @implements ProcessorInterface<AvatarImageInterface> */
@@ -29,6 +31,7 @@ final readonly class PersistProcessor implements ProcessorInterface
         private ProcessorInterface $processor,
         private ImageCreatorInterface $avatarImageCreator,
         private AvatarImageRepositoryInterface $avatarImageRepository,
+        private ValidatorInterface $validator,
     ) {
     }
 
@@ -36,15 +39,34 @@ final readonly class PersistProcessor implements ProcessorInterface
     {
         Assert::notInstanceOf($operation, DeleteOperationInterface::class);
 
+        $file = $context['request']->files->get('file');
+        $this->validateFile($file, $operation);
+
         if ($data !== null) {
             $this->avatarImageRepository->remove($data);
         }
 
         $image = $this->avatarImageCreator->create(
             $context['request']->attributes->getString('id'),
-            $context['request']->files->get('file'),
+            $file,
         );
 
         return $this->processor->process($image, $operation, $uriVariables, $context);
+    }
+
+    private function validateFile(mixed $file, Operation $operation): void
+    {
+        $avatarImageClass = $operation->getClass();
+        Assert::notNull($avatarImageClass);
+
+        $violations = $this->validator
+            ->startContext()
+            ->atPath('file')
+            ->validatePropertyValue($avatarImageClass, 'file', $file, $operation->getValidationContext()['groups'] ?? [])
+            ->getViolations()
+        ;
+        if (0 !== \count($violations)) {
+            throw new ValidationException($violations);
+        }
     }
 }

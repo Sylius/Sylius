@@ -16,6 +16,7 @@ namespace Tests\Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\State\ProcessorInterface;
+use ApiPlatform\Validator\Exception\ValidationException;
 use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -24,6 +25,10 @@ use Sylius\Bundle\ApiBundle\StateProcessor\Admin\TaxonImage\PersistProcessor;
 use Sylius\Component\Core\Model\TaxonImageInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator\ContextualValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class PersistProcessorTest extends TestCase
@@ -32,6 +37,8 @@ final class PersistProcessorTest extends TestCase
 
     private ImageCreatorInterface&MockObject $taxonImageCreator;
 
+    private MockObject&ValidatorInterface $validator;
+
     private PersistProcessor $persistProcessor;
 
     protected function setUp(): void
@@ -39,7 +46,13 @@ final class PersistProcessorTest extends TestCase
         parent::setUp();
         $this->processor = $this->createMock(ProcessorInterface::class);
         $this->taxonImageCreator = $this->createMock(ImageCreatorInterface::class);
-        $this->persistProcessor = new PersistProcessor($this->processor, $this->taxonImageCreator);
+        $this->validator = $this->createMock(ValidatorInterface::class);
+        $this->persistProcessor = new PersistProcessor(
+            $this->processor,
+            $this->taxonImageCreator,
+            $this->validator,
+            TaxonImageInterface::class,
+        );
     }
 
     public function testImplementsProcessorInterface(): void
@@ -68,6 +81,43 @@ final class PersistProcessorTest extends TestCase
         $this->processor->expects(self::once())
             ->method('process')
             ->with($taxonImageMock, $operation, [], ['request' => $request]);
+
+        $this->persistProcessor->process(null, $operation, [], ['request' => $request]);
+    }
+
+    public function testThrowsAValidationExceptionAndDoesNotCreateATaxonImageIfTheFileIsNotValid(): void
+    {
+        /** @var ContextualValidatorInterface|MockObject $contextualValidatorMock */
+        $contextualValidatorMock = $this->createMock(ContextualValidatorInterface::class);
+
+        $operation = new Post(validationContext: ['groups' => ['sylius']]);
+
+        $request = new Request(attributes: ['code' => 'code'], request: ['type' => 'type']);
+
+        $file = new UploadedFile(__FILE__, basename(__FILE__), null, null, true);
+
+        $request->files->set('file', $file);
+
+        $this->validator->expects(self::once())->method('startContext')->willReturn($contextualValidatorMock);
+
+        $contextualValidatorMock->expects(self::once())->method('atPath')->with('file')->willReturnSelf();
+
+        $contextualValidatorMock->expects(self::once())
+            ->method('validatePropertyValue')
+            ->with(TaxonImageInterface::class, 'file', $file, ['sylius'])
+            ->willReturnSelf();
+
+        $contextualValidatorMock->expects(self::once())
+            ->method('getViolations')
+            ->willReturn(new ConstraintViolationList([
+                new ConstraintViolation('message', null, [], null, 'file', $file),
+            ]));
+
+        $this->taxonImageCreator->expects(self::never())->method('create');
+
+        $this->processor->expects(self::never())->method('process');
+
+        $this->expectException(ValidationException::class);
 
         $this->persistProcessor->process(null, $operation, [], ['request' => $request]);
     }

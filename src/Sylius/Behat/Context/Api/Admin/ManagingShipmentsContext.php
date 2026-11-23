@@ -121,7 +121,7 @@ final class ManagingShipmentsContext implements Context
             Resources::SHIPMENTS,
             (string) $order->getShipments()->first()->getId(),
             ShipmentTransitions::TRANSITION_SHIP,
-            ['tracking' => $trackingCode],
+            ['trackingCode' => $trackingCode],
         );
     }
 
