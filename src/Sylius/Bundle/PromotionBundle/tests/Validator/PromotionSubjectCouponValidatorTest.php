@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Model\PromotionCouponAwarePromotionSubjectInterfa
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class PromotionSubjectCouponValidatorTest extends TestCase
 {
@@ -95,8 +95,8 @@ final class PromotionSubjectCouponValidatorTest extends TestCase
 
         $constraint = new PromotionSubjectCoupon();
 
-        /** @var ConstraintViolationBuilderInterface&MockObject $violationBuilder */
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $violationBuilder */
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->context->expects(self::once())
             ->method('buildViolation')

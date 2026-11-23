@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Model\CatalogPromotionActionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class CatalogPromotionActionTypeValidatorTest extends TestCase
@@ -95,8 +95,8 @@ final class CatalogPromotionActionTypeValidatorTest extends TestCase
 
     public function testAddsViolationWhenTypeIsUnknown(): void
     {
-        /** @var ConstraintViolationBuilderInterface&MockObject $violationBuilder */
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $violationBuilder */
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraint = new CatalogPromotionActionType();
 

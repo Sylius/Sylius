@@ -22,7 +22,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodRuleInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ShippingMethodCalculatorExistsValidatorTest extends TestCase
@@ -55,8 +55,8 @@ final class ShippingMethodCalculatorExistsValidatorTest extends TestCase
 
     public function testAddsViolationToWrongShippingMethodCalculator(): void
     {
-        /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $constraintViolationBuilder */
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->executionContext
             ->expects($this->once())->method('buildViolation')

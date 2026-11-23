@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class ProductVariantCodeExistsValidatorTest extends TestCase
 {
@@ -89,7 +89,7 @@ final class ProductVariantCodeExistsValidatorTest extends TestCase
     public function testItAddsViolationWhenVariantDoesNotExist(): void
     {
         $constraint = new ProductVariantCodeExists();
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->productVariantRepository
             ->method('findOneBy')

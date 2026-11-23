@@ -21,7 +21,7 @@ use Sylius\Bundle\PaymentBundle\Validator\Constraints\SafeGatewayConfigValuesVal
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class SafeGatewayConfigValuesValidatorTest extends TestCase
@@ -117,8 +117,8 @@ final class SafeGatewayConfigValuesValidatorTest extends TestCase
 
     private function expectForbiddenValueViolation(): void
     {
-        /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $constraintViolationBuilder */
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->executionContext
             ->expects(self::once())

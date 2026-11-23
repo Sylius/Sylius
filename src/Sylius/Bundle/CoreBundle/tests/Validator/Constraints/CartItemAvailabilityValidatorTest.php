@@ -26,7 +26,7 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class CartItemAvailabilityValidatorTest extends TestCase
 {
@@ -94,7 +94,7 @@ final class CartItemAvailabilityValidatorTest extends TestCase
         $item = $this->createMock(OrderItemInterface::class);
         $variant = $this->createMock(ProductVariantInterface::class);
         $command = $this->createMock(AddToCartCommandInterface::class);
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $command->method('getCart')->willReturn($cart);
         $command->method('getCartItem')->willReturn($item);
@@ -132,7 +132,7 @@ final class CartItemAvailabilityValidatorTest extends TestCase
         $existingItem = $this->createMock(OrderItemInterface::class);
         $variant = $this->createMock(ProductVariantInterface::class);
         $command = $this->createMock(AddToCartCommandInterface::class);
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $command->method('getCart')->willReturn($cart);
         $command->method('getCartItem')->willReturn($item);

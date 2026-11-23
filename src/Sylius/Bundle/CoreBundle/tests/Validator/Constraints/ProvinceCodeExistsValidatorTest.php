@@ -22,7 +22,7 @@ use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class ProvinceCodeExistsValidatorTest extends TestCase
 {
@@ -74,7 +74,7 @@ final class ProvinceCodeExistsValidatorTest extends TestCase
     public function testItAddsViolationIfProvinceWithGivenCodeDoesNotExist(): void
     {
         $constraint = new ProvinceCodeExists();
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->provinceRepository
             ->method('findOneBy')

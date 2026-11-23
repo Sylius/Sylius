@@ -22,7 +22,7 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class ChannelDefaultLocaleEnabledValidatorTest extends TestCase
 {
@@ -69,7 +69,7 @@ final class ChannelDefaultLocaleEnabledValidatorTest extends TestCase
         $channel->method('getDefaultLocale')->willReturn($locale);
         $channel->method('hasLocale')->with($locale)->willReturn(false);
 
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
         $this->executionContext->method('buildViolation')->with($constraint->message)->willReturn($violationBuilder);
 
         $violationBuilder

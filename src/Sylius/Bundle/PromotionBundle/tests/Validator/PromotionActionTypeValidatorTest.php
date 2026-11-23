@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class PromotionActionTypeValidatorTest extends TestCase
@@ -69,8 +69,8 @@ final class PromotionActionTypeValidatorTest extends TestCase
 
     public function testAddsViolationIfPromotionActionHasInvalidType(): void
     {
-        /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $constraintViolationBuilder */
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $this->promotionAction->expects(self::once())->method('getType')->willReturn('wrong_type');
 

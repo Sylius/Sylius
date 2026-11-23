@@ -21,7 +21,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class CartItemQuantityRangeValidatorTest extends TestCase
 {
@@ -66,7 +66,7 @@ final class CartItemQuantityRangeValidatorTest extends TestCase
 
     public function testItAddsViolationIfValueIsNotInRange(): void
     {
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $violationBuilder->method('setCode')->willReturn($violationBuilder);
         $violationBuilder->method('atPath')->willReturn($violationBuilder);

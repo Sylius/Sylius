@@ -20,7 +20,7 @@ use Sylius\Bundle\TaxonomyBundle\Validator\Constraints\TaxonParentRelation;
 use Sylius\Bundle\TaxonomyBundle\Validator\Constraints\TaxonParentRelationValidator;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class TaxonParentRelationValidatorTest extends TestCase
@@ -33,7 +33,7 @@ final class TaxonParentRelationValidatorTest extends TestCase
 
     private MockObject|TaxonInterface $parent;
 
-    private ConstraintViolationBuilderInterface|MockObject $builder;
+    private ConstraintViolationBuilder|MockObject $builder;
 
     private MockObject|TaxonInterface $grandParent;
 
@@ -44,7 +44,7 @@ final class TaxonParentRelationValidatorTest extends TestCase
         $this->validator->initialize($this->context);
         $this->taxon = $this->createMock(TaxonInterface::class);
         $this->parent = $this->createMock(TaxonInterface::class);
-        $this->builder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $this->builder = $this->createMock(ConstraintViolationBuilder::class);
         $this->grandParent = $this->createMock(TaxonInterface::class);
     }
 

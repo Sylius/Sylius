@@ -21,7 +21,7 @@ use Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPa
 use Sylius\Bundle\ApiBundle\Validator\Constraints\CorrectChangeShopUserConfirmPasswordValidator;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class CorrectChangeShopUserConfirmPasswordValidatorTest extends TestCase
@@ -59,8 +59,8 @@ final class CorrectChangeShopUserConfirmPasswordValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
-        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilder::class);
         $constraint = new CorrectChangeShopUserConfirmPassword();
         $constraint->message = 'message';
         $this->correctChangeShopUserConfirmPasswordValidator->initialize($executionContextMock);

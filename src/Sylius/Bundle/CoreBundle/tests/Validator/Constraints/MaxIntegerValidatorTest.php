@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\MaxInteger;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\MaxIntegerValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 final class MaxIntegerValidatorTest extends TestCase
 {
@@ -45,7 +45,7 @@ final class MaxIntegerValidatorTest extends TestCase
     public function testItValidatesValueEqualToMax(): void
     {
         $constraint = new MaxInteger();
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $violationBuilder
             ->expects($this->once())
@@ -69,7 +69,7 @@ final class MaxIntegerValidatorTest extends TestCase
     public function testItValidatesValueGreaterThanMax(): void
     {
         $constraint = new MaxInteger();
-        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $violationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $violationBuilder
             ->expects($this->once())

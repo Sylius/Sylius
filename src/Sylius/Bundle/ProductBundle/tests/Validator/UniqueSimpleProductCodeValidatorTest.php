@@ -23,7 +23,7 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class UniqueSimpleProductCodeValidatorTest extends TestCase
@@ -108,8 +108,8 @@ final class UniqueSimpleProductCodeValidatorTest extends TestCase
         $existingProduct = $this->createMock(ProductInterface::class);
         /** @var ProductVariantInterface&MockObject $existingProductVariant */
         $existingProductVariant = $this->createMock(ProductVariantInterface::class);
-        /** @var ConstraintViolationBuilderInterface&MockObject $constraintViolationBuilder */
-        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder&MockObject $constraintViolationBuilder */
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilder::class);
 
         $constraint = new UniqueSimpleProductCode(message: 'Simple product code has to be unique');
 

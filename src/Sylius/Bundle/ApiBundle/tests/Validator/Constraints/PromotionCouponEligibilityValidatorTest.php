@@ -27,7 +27,7 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilder;
 
 #[AllowMockObjectsWithoutExpectations]
 final class PromotionCouponEligibilityValidatorTest extends TestCase
@@ -87,8 +87,8 @@ final class PromotionCouponEligibilityValidatorTest extends TestCase
         $cartMock = $this->createMock(OrderInterface::class);
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
-        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilder::class);
         $this->promotionCouponEligibilityValidator->initialize($executionContextMock);
         $constraint = new PromotionCouponEligibility();
         $constraint->message = 'message';
@@ -107,8 +107,8 @@ final class PromotionCouponEligibilityValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
-        /** @var ConstraintViolationBuilderInterface|MockObject $constraintViolationBuilderMock */
-        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilderInterface::class);
+        /** @var ConstraintViolationBuilder|MockObject $constraintViolationBuilderMock */
+        $constraintViolationBuilderMock = $this->createMock(ConstraintViolationBuilder::class);
         $this->promotionCouponEligibilityValidator->initialize($executionContextMock);
         $constraint = new PromotionCouponEligibility();
         $constraint->message = 'message';
