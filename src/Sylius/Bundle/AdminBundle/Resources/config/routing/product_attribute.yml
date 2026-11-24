@@ -9,11 +9,13 @@ sylius_admin_product_attribute:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\ProductAttributeType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_attribute')"
     type: sylius.resource
 
 sylius_admin_product_attribute_create:
     path: /product-attributes/{type}/new
     methods: [GET, POST]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_product_attribute')"
     defaults:
         _controller: sylius.controller.product_attribute::createAction
         _sylius:

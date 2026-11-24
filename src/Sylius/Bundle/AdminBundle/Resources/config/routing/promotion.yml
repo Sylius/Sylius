@@ -9,11 +9,13 @@ sylius_admin_promotion:
         form:
             type: Sylius\Bundle\AdminBundle\Form\Type\PromotionType
         permission: true
+        condition: "context.isSyliusRoutingBcLayerEnabled('admin_promotion')"
     type: sylius.resource
 
 sylius_admin_promotion_archive:
     path: /promotions/{id}/archive
     methods: [PATCH]
+    condition: "context.isSyliusRoutingBcLayerEnabled('admin_promotion')"
     defaults:
         _controller: sylius.controller.promotion::updateAction
         _sylius:

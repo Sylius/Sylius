@@ -28,6 +28,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->enumNode('locale_switcher')->values(['storage', 'url'])->defaultValue('url')->end()
+                ->scalarNode('locale_regex')->defaultValue('^[A-Za-z]{2,4}(_([A-Za-z]{4}|[0-9]{3}))?(_([A-Za-z]{2}|[0-9]{3}))?$')->end()
                 ->scalarNode('firewall_context_name')->defaultValue('shop')->end()
                 ->arrayNode('checkout_resolver')
                     ->addDefaultsIfNotSet()
