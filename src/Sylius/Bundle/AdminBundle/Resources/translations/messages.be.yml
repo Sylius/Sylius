@@ -48,4 +48,5 @@ sylius:
         theme_auto: 'Аўтаматычна'
         theme_dark: 'Цёмная'
         theme_light: 'Светлая'
+        toggle_sidebar: 'Пераключыць бакавую панэль'
         toggle_theme: 'Пераключыць тэму'

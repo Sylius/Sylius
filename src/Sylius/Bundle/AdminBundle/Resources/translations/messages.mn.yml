@@ -67,4 +67,5 @@ sylius:
         theme_auto: 'Автомат'
         theme_dark: 'Бараан'
         theme_light: 'Цайвар'
+        toggle_sidebar: 'Хажуугийн самбарыг нээх/хаах'
         toggle_theme: 'Загвар солих'

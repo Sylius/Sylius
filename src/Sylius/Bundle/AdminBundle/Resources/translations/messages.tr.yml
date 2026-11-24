@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Otomatik'
         theme_dark: 'Koyu'
         theme_light: 'Açık'
+        toggle_sidebar: 'Kenar çubuğunu aç/kapat'
         toggle_theme: 'Temayı değiştir'

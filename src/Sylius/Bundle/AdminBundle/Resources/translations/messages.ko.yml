@@ -127,6 +127,7 @@ sylius:
         to_approve: '승인 대기'
         to_process: '처리 대기'
         to_ship: '배송 대기'
+        toggle_sidebar: '사이드바 전환'
         toggle_theme: '테마 전환'
         view_in_store: '스토어에서 보기'
         work_in_progress: '작업 진행 중'

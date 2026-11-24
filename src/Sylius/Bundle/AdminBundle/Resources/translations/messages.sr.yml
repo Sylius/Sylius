@@ -38,4 +38,5 @@ sylius:
         theme_auto: 'Аутоматски'
         theme_dark: 'Тамна'
         theme_light: 'Светла'
+        toggle_sidebar: 'Прикажи/сакриј бочну траку'
         toggle_theme: 'Промени тему'

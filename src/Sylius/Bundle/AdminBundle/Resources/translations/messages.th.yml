@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'อัตโนมัติ'
         theme_dark: 'มืด'
         theme_light: 'สว่าง'
+        toggle_sidebar: 'สลับแถบด้านข้าง'
         toggle_theme: 'สลับธีม'

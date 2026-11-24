@@ -127,6 +127,7 @@ sylius:
         to_approve: 'att godkänna'
         to_process: 'att behandla'
         to_ship: 'att skicka'
+        toggle_sidebar: 'Växla sidofält'
         toggle_theme: 'Växla tema'
         view_in_store: Visa i butiken
         work_in_progress: Pågår

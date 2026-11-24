@@ -82,6 +82,18 @@
         "fetch": "lazy",
         "enabled": true
       },
+      "sidebar": {
+        "main": "controllers/SidebarController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
+      "sidebar-trigger": {
+        "main": "controllers/SidebarTriggerController.js",
+        "webpackMode": "lazy",
+        "fetch": "lazy",
+        "enabled": true
+      },
       "theme-switcher": {
         "main": "controllers/ThemeSwitcherController.js",
         "webpackMode": "lazy",

@@ -105,3 +105,102 @@
         border-color: transparent;
     }
 }
+
+.nav-link-initial {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: var(--tblr-border-radius-sm);
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 0.625rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.sidebar-rail {
+    display: none;
+}
+
+@include media-breakpoint-up(lg) {
+    .navbar-vertical.navbar-expand-lg {
+        transition: width $sidebar-transition-duration linear, transform 0.3s;
+        overflow-x: hidden;
+
+        ~ .navbar,
+        ~ .page-wrapper {
+            transition: margin-left $sidebar-transition-duration linear;
+        }
+
+        .sidebar-rail {
+            display: block;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: calc(#{$sidebar-width} - 0.5rem);
+            z-index: 1;
+            width: 1rem;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            cursor: w-resize;
+            transition: left $sidebar-transition-duration linear;
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: calc(50% - 1px);
+                width: 2px;
+            }
+
+            &:hover::after {
+                background: var(--tblr-border-color);
+            }
+        }
+    }
+
+    .navbar-vertical.navbar-expand-lg[data-sidebar-state="collapsed"] {
+        width: $sidebar-width-icon;
+        scrollbar-width: none;
+
+        ~ .navbar,
+        ~ .page-wrapper {
+            margin-left: $sidebar-width-icon;
+        }
+
+        .sidebar-rail {
+            left: calc(#{$sidebar-width-icon} - 0.5rem);
+            cursor: e-resize;
+        }
+
+        .navbar-brand-image {
+            width: 2.25rem;
+            height: 2.25rem;
+            object-fit: cover;
+            object-position: left center;
+        }
+
+        .menu-search,
+        .nav-link-title,
+        .navbar-collapse .dropdown-menu {
+            display: none;
+        }
+
+        .navbar-collapse .sidebar.navbar-nav .nav-link {
+            justify-content: center;
+            padding-right: 0;
+            padding-left: 0;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        .nav-link-icon {
+            margin: 0;
+        }
+    }
+}

@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Automatikus'
         theme_dark: 'Sötét'
         theme_light: 'Világos'
+        toggle_sidebar: 'Oldalsáv be/ki'
         toggle_theme: 'Téma váltása'

@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Samodejno'
         theme_dark: 'Temna'
         theme_light: 'Svetla'
+        toggle_sidebar: 'Preklopi stransko vrstico'
         toggle_theme: 'Preklopi temo'

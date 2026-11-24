@@ -1,5 +1,26 @@
-<aside class="navbar navbar-vertical navbar-expand-lg d-print-none" data-bs-theme="dark">
+{% set controller = '@sylius/admin-bundle/sidebar' %}
+{% set sidebar_collapsed = app.request and app.request.cookies.get('sidebar_state') == 'collapsed' %}
+
+<aside
+    id="admin-sidebar"
+    class="navbar navbar-vertical navbar-expand-lg d-print-none"
+    data-bs-theme="dark"
+    data-sidebar-state="{{ sidebar_collapsed ? 'collapsed' : 'expanded' }}"
+    {{ stimulus_controller(controller) }}
+    {{ stimulus_action(controller, 'handleKeydown', 'keydown@window')
+        |stimulus_action(controller, 'toggle', 'sidebar:toggle@window')
+        |stimulus_action(controller, 'open', 'sidebar:open@window')
+        |stimulus_action(controller, 'expandFromMenu', 'click') }}
+>
     <div class="container-fluid">
         {% hook 'sylius_admin.common.component.sidebar' with { _prefixes: [] } %}
     </div>
+    <button
+        type="button"
+        class="sidebar-rail"
+        tabindex="-1"
+        aria-label="{{ 'sylius.ui.toggle_sidebar'|trans }}"
+        title="{{ 'sylius.ui.toggle_sidebar'|trans }}"
+        {{ stimulus_action(controller, 'toggle') }}
+    ></button>
 </aside>

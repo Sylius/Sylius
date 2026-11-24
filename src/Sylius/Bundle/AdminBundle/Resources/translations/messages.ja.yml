@@ -127,6 +127,7 @@ sylius:
         to_approve: '承認待ち'
         to_process: '処理待ち'
         to_ship: '発送待ち'
+        toggle_sidebar: 'サイドバーを切り替え'
         toggle_theme: 'テーマを切り替え'
         view_in_store: 'ストアで表示'
         work_in_progress: '作業中'

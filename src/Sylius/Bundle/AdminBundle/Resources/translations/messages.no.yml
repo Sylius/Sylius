@@ -127,6 +127,7 @@ sylius:
         to_approve: 'til godkjenning'
         to_process: 'til behandling'
         to_ship: 'til utsendelse'
+        toggle_sidebar: 'Vis/skjul sidepanel'
         toggle_theme: 'Bytt tema'
         view_in_store: 'Se i butikk'
         work_in_progress: 'Arbeid pågår'

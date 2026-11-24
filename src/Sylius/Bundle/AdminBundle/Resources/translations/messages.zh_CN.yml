@@ -127,6 +127,7 @@ sylius:
         to_approve: '待批准'
         to_process: '待处理'
         to_ship: '待发货'
+        toggle_sidebar: '切换侧边栏'
         toggle_theme: '切换主题'
         view_in_store: '在商店中查看'
         work_in_progress: '开发中'

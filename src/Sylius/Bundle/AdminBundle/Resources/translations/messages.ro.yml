@@ -127,6 +127,7 @@ sylius:
         to_approve: 'de aprobat'
         to_process: 'de procesat'
         to_ship: 'de expediat'
+        toggle_sidebar: 'Afișează/ascunde bara laterală'
         toggle_theme: 'Schimbă tema'
         view_in_store: 'Vizualizare în magazin'
         work_in_progress: 'În curs de desfășurare'

@@ -122,6 +122,7 @@ sylius:
         theme_auto: 'Automatisch'
         theme_dark: 'Donker'
         theme_light: 'Licht'
+        toggle_sidebar: 'Zijbalk wisselen'
         toggle_theme: 'Thema wisselen'
         view_in_store: 'Bekijk in winkel'
         work_in_progress: 'Werk in uitvoering'

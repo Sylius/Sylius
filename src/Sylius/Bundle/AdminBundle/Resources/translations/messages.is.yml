@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Sjálfvirkt'
         theme_dark: 'Dökkt'
         theme_light: 'Ljóst'
+        toggle_sidebar: 'Sýna/fela hliðarstiku'
         toggle_theme: 'Skipta um þema'

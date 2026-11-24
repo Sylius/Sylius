@@ -49,4 +49,5 @@ sylius:
         theme_auto: 'Automatike'
         theme_dark: 'E errët'
         theme_light: 'E çelët'
+        toggle_sidebar: 'Shfaq/fshih shiritin anësor'
         toggle_theme: 'Ndrysho temën'

@@ -64,4 +64,5 @@ sylius:
         theme_auto: 'Автоматично'
         theme_dark: 'Темна'
         theme_light: 'Світла'
+        toggle_sidebar: 'Перемкнути бічну панель'
         toggle_theme: 'Перемкнути тему'

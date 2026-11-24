@@ -48,4 +48,5 @@ sylius:
         theme_auto: '自動'
         theme_dark: '深色'
         theme_light: '淺色'
+        toggle_sidebar: '切換側邊欄'
         toggle_theme: '切換主題'

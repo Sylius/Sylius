@@ -96,4 +96,5 @@ sylius:
         theme_auto: 'Auto'
         theme_dark: 'Sombre'
         theme_light: 'Clair'
+        toggle_sidebar: 'Afficher/masquer le menu'
         toggle_theme: 'Changer de thème'

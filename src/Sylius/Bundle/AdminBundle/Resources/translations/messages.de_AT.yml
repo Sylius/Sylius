@@ -152,6 +152,7 @@ sylius:
         to_approve: 'zu genehmigen'
         to_process: 'zu bearbeiten'
         to_ship: 'zu versenden'
+        toggle_sidebar: 'Seitenleiste umschalten'
         toggle_theme: 'Design wechseln'
         uncheck_all: 'Alle abwählen'
         view_in_store: 'Im Shop anschauen'

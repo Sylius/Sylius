@@ -84,6 +84,7 @@ sylius:
         theme_auto: 'Automatisch'
         theme_dark: 'Dunkel'
         theme_light: 'Hell'
+        toggle_sidebar: 'Seitenleiste umschalten'
         toggle_theme: 'Design wechseln'
         uncheck_all: 'Alle abwählen'
         delete_avatar: 'Avatar löschen'

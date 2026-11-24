@@ -44,7 +44,7 @@
     {%- endif %}
     {% if item.hasChildren %}
         <li class="nav-item {% if attributes.class is defined %}{{ attributes.class }}{% endif %}">
-            <a class="nav-link dropdown-toggle {{ is_active ? 'show' : '' }}" href="#navbar-{{ item.name }}" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ is_active ? 'true' : 'false' }}">
+            <a class="nav-link dropdown-toggle {{ is_active ? 'show' : '' }}" href="#navbar-{{ item.name }}" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="{{ is_active ? 'true' : 'false' }}" title="{{ block('label')|striptags|trim }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     {{ block('icon') }}
                 </span>
@@ -60,7 +60,7 @@
         </li>
     {% else %}
         <li class="nav-item">
-            <a class="nav-link" href="{{ item.uri }}">
+            <a class="nav-link" href="{{ item.uri }}" title="{{ block('label')|striptags|trim }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     {{ block('icon') }}
                 </span>
@@ -101,5 +101,10 @@
 
 {% block icon %}
     {% set icon_name = item.labelAttribute('icon') %}
-    {% if icon_name %}{{ ux_icon(icon_name) }}{% endif %}
+    {% if icon_name %}
+        {{ ux_icon(icon_name) }}
+    {% elseif item.level == 1 %}
+        {# Keeps something visible when the sidebar is collapsed to icons. #}
+        <span class="nav-link-initial" aria-hidden="true">{{ block('label')|striptags|trim|first }}</span>
+    {% endif %}
 {% endblock %}

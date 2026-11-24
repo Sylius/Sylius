@@ -131,6 +131,7 @@ sylius:
         to_approve: 'à approuver'
         to_process: 'à traiter'
         to_ship: 'à expédier'
+        toggle_sidebar: 'Afficher/masquer le menu'
         toggle_theme: 'Changer de thème'
         view_in_store: 'Voir en boutique'
         work_in_progress: 'Travail en cours'

@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Automático'
         theme_dark: 'Oscuro'
         theme_light: 'Claro'
+        toggle_sidebar: 'Alternar barra lateral'
         toggle_theme: 'Cambiar tema'
