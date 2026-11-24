@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraint;
 #[\Attribute]
 final class OrderPaymentMethodEligibility extends Constraint
 {
+    public const PAYMENT_METHOD_NOT_ELIGIBLE_ERROR = 'PAYMENT_METHOD_NOT_ELIGIBLE';
+
     /**
      * @param array<string, mixed>|null $options
      */

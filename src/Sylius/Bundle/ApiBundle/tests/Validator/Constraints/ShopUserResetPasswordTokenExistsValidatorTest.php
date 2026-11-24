@@ -23,6 +23,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class ShopUserResetPasswordTokenExistsValidatorTest extends TestCase
@@ -74,9 +75,30 @@ final class ShopUserResetPasswordTokenExistsValidatorTest extends TestCase
     {
         /** @var ExecutionContextInterface|MockObject $executionContextMock */
         $executionContextMock = $this->createMock(ExecutionContextInterface::class);
+        $constraint = new ShopUserResetPasswordTokenExists();
         $this->shopUserResetPasswordTokenExistsValidator->initialize($executionContextMock);
         $this->userRepository->expects(self::once())->method('findOneBy')->with(['passwordResetToken' => 'token'])->willReturn(null);
-        $executionContextMock->expects(self::once())->method('addViolation')->with('sylius.reset_password.invalid_token', ['%token%' => 'token']);
-        $this->shopUserResetPasswordTokenExistsValidator->validate('token', new ShopUserResetPasswordTokenExists());
+
+        $violationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $executionContextMock
+            ->expects(self::once())
+            ->method('buildViolation')
+            ->with($constraint->message)
+            ->willReturn($violationBuilder);
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setParameter')
+            ->with('%token%', 'token')
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('setCode')
+            ->with(ShopUserResetPasswordTokenExists::TOKEN_INVALID_ERROR)
+            ->willReturnSelf();
+        $violationBuilder
+            ->expects(self::once())
+            ->method('addViolation');
+
+        $this->shopUserResetPasswordTokenExistsValidator->validate('token', $constraint);
     }
 }

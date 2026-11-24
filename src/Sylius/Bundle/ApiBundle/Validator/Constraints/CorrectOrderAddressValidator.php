@@ -54,9 +54,11 @@ final class CorrectOrderAddressValidator extends ConstraintValidator
         $countryCode = $address->getCountryCode();
 
         if ($countryCode === null) {
-            $this->context->addViolation(
-                $constraint->addressWithoutCountryCodeCanNotExistMessage,
-            );
+            $this->context
+                ->buildViolation($constraint->addressWithoutCountryCodeCanNotExistMessage)
+                ->setCode(CorrectOrderAddress::ADDRESS_WITHOUT_COUNTRY_ERROR)
+                ->addViolation()
+            ;
 
             return;
         }
@@ -65,10 +67,12 @@ final class CorrectOrderAddressValidator extends ConstraintValidator
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
 
         if ($country === null) {
-            $this->context->addViolation(
-                $constraint->countryCodeNotExistMessage,
-                ['%countryCode%' => $countryCode],
-            );
+            $this->context
+                ->buildViolation($constraint->countryCodeNotExistMessage)
+                ->setParameter('%countryCode%', $countryCode)
+                ->setCode(CorrectOrderAddress::COUNTRY_NOT_EXIST_ERROR)
+                ->addViolation()
+            ;
         }
     }
 }

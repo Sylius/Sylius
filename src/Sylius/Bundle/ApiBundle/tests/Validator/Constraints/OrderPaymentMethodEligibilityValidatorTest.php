@@ -29,6 +29,7 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 #[AllowMockObjectsWithoutExpectations]
 final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
@@ -117,13 +118,11 @@ final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
             ->method('getName')
             ->willReturn('bank transfer');
 
-        $executionContextMock
-            ->expects(self::once())
-            ->method('addViolation')
-            ->with(
-                'sylius.order.payment_method_eligibility',
-                ['%paymentMethodName%' => 'bank transfer'],
-            );
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $executionContextMock->expects(self::once())->method('buildViolation')->with('sylius.order.payment_method_eligibility')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%paymentMethodName%', 'bank transfer')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(OrderPaymentMethodEligibility::PAYMENT_METHOD_NOT_ELIGIBLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
 
         $this->orderPaymentMethodEligibilityValidator->validate($value, $constraint);
     }
@@ -167,13 +166,11 @@ final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
         $paymentMethodMock->method('hasChannel')->with($channelMock)->willReturn(false);
         $paymentMethodMock->method('getName')->willReturn('bank transfer');
 
-        $executionContextMock
-            ->expects(self::once())
-            ->method('addViolation')
-            ->with(
-                'sylius.order.payment_method_eligibility',
-                ['%paymentMethodName%' => 'bank transfer'],
-            );
+        $constraintViolationBuilder = $this->createMock(ConstraintViolationBuilderInterface::class);
+        $executionContextMock->expects(self::once())->method('buildViolation')->with('sylius.order.payment_method_eligibility')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setParameter')->with('%paymentMethodName%', 'bank transfer')->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('setCode')->with(OrderPaymentMethodEligibility::PAYMENT_METHOD_NOT_ELIGIBLE_ERROR)->willReturn($constraintViolationBuilder);
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
 
         $this->orderPaymentMethodEligibilityValidator->validate($value, $constraint);
     }
@@ -218,7 +215,7 @@ final class OrderPaymentMethodEligibilityValidatorTest extends TestCase
 
         $executionContextMock
             ->expects(self::never())
-            ->method('addViolation');
+            ->method('buildViolation');
 
         $this->orderPaymentMethodEligibilityValidator->validate($value, $constraint);
     }
