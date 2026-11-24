@@ -102,7 +102,7 @@ jobs:
                     echo "sha=$(echo ${{ github.sha }} | cut -c 1-12)" >> $GITHUB_OUTPUT
 
             -   name: "Notify on Slack"
-                uses: edge/simple-slack-notify@master
+                uses: edge/simple-slack-notify@b2bbd7b2ef2f7430ea0df65e5da583f16969b043 # latest
                 env:
                     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
                 if: env.SLACK_WEBHOOK_URL != null
