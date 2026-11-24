@@ -9,12 +9,15 @@
 
 .page-wrapper {
     .page-header {
-        position: sticky;
-        top: -1px;
-        z-index: 999;
         margin-top: 0;
         padding-top: var(--tblr-page-padding-y);
         padding-bottom: var(--tblr-page-padding-y);
+
+        &[data-sticky-header] {
+            position: sticky;
+            top: -1px;
+            z-index: 999;
+        }
 
         &.is-sticky {
             background: #fff;
