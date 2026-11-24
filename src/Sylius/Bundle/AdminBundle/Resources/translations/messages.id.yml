@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Otomatis'
         theme_dark: 'Gelap'
         theme_light: 'Terang'
+        toggle_sidebar: 'Tampilkan/sembunyikan bilah sisi'
         toggle_theme: 'Ganti tema'

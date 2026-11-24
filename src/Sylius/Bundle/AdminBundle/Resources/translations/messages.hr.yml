@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Automatski'
         theme_dark: 'Tamna'
         theme_light: 'Svijetla'
+        toggle_sidebar: 'Prikaži/sakrij bočnu traku'
         toggle_theme: 'Promijeni temu'

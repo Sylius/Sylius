@@ -127,6 +127,7 @@ sylius:
         to_approve: 'k schválení'
         to_process: 'k vyřízení'
         to_ship: 'k odeslání'
+        toggle_sidebar: 'Přepnout postranní panel'
         toggle_theme: 'Přepnout motiv'
         view_in_store: 'Zobrazit v obchodě'
         work_in_progress: 'Práce v průběhu'

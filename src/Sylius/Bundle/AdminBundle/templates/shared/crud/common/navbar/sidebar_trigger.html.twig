@@ -1,0 +1,15 @@
+{% set controller = '@sylius/admin-bundle/sidebar-trigger' %}
+
+<button
+    type="button"
+    class="btn btn-icon btn-ghost-secondary sidebar-trigger d-none d-lg-inline-flex flex-shrink-0"
+    aria-controls="admin-sidebar"
+    aria-expanded="{{ app.request and app.request.cookies.get('sidebar_state') == 'collapsed' ? 'false' : 'true' }}"
+    aria-label="{{ 'sylius.ui.toggle_sidebar'|trans }}"
+    title="{{ 'sylius.ui.toggle_sidebar'|trans }} (Ctrl+B)"
+    {{ stimulus_controller(controller) }}
+    {{ stimulus_action(controller, 'toggle') }}
+    {{ sylius_test_html_attribute('sidebar-trigger') }}
+>
+    {{ ux_icon('tabler:layout-sidebar', {'class': 'icon'}) }}
+</button>

@@ -47,4 +47,5 @@ sylius:
         theme_auto: 'Automātiski'
         theme_dark: 'Tumšs'
         theme_light: 'Gaišs'
+        toggle_sidebar: 'Pārslēgt sānjoslu'
         toggle_theme: 'Pārslēgt motīvu'

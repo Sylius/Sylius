@@ -39,4 +39,5 @@ sylius:
         theme_auto: 'Tự động'
         theme_dark: 'Tối'
         theme_light: 'Sáng'
+        toggle_sidebar: 'Ẩn/hiện thanh bên'
         toggle_theme: 'Chuyển giao diện'

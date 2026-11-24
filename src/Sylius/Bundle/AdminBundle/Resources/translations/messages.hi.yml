@@ -127,6 +127,7 @@ sylius:
         to_approve: 'मंजूरी हेतु'
         to_process: 'प्रक्रिया हेतु'
         to_ship: 'भेजने हेतु'
+        toggle_sidebar: 'साइडबार टॉगल करें'
         toggle_theme: 'थीम बदलें'
         view_in_store: 'स्टोर में देखें'
         work_in_progress: 'कार्य प्रगति पर'

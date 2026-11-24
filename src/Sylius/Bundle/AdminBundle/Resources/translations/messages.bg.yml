@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Автоматично'
         theme_dark: 'Тъмна'
         theme_light: 'Светла'
+        toggle_sidebar: 'Показване/скриване на страничната лента'
         toggle_theme: 'Смяна на темата'

@@ -57,4 +57,5 @@ sylius:
         theme_auto: 'خودکار'
         theme_dark: 'تیره'
         theme_light: 'روشن'
+        toggle_sidebar: 'نمایش/پنهان کردن نوار کناری'
         toggle_theme: 'تغییر پوسته'

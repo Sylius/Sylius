@@ -48,4 +48,5 @@ sylius:
         theme_auto: 'Αυτόματο'
         theme_dark: 'Σκοτεινό'
         theme_light: 'Φωτεινό'
+        toggle_sidebar: 'Εναλλαγή πλευρικής στήλης'
         toggle_theme: 'Εναλλαγή θέματος'

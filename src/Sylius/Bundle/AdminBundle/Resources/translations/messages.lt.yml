@@ -51,4 +51,5 @@ sylius:
         theme_auto: 'Automatinė'
         theme_dark: 'Tamsi'
         theme_light: 'Šviesi'
+        toggle_sidebar: 'Perjungti šoninę juostą'
         toggle_theme: 'Perjungti temą'

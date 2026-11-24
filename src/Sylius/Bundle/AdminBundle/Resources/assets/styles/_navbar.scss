@@ -47,3 +47,8 @@
 .navbar-plus-badge{
     width: 50px;
 }
+
+// Aligns the trigger glyph (not the button) with the page content.
+.sidebar-trigger {
+    margin-left: calc((var(--tblr-btn-icon-size, 1.25rem) - 44px) / 2);
+}

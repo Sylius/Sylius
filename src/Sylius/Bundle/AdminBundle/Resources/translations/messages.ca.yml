@@ -50,4 +50,5 @@ sylius:
         theme_auto: 'Automàtic'
         theme_dark: 'Fosc'
         theme_light: 'Clar'
+        toggle_sidebar: 'Mostra/amaga la barra lateral'
         toggle_theme: 'Canvia el tema'

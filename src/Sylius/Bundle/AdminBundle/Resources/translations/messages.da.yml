@@ -48,4 +48,5 @@ sylius:
         theme_auto: 'Automatisk'
         theme_dark: 'Mørkt'
         theme_light: 'Lyst'
+        toggle_sidebar: 'Skift sidepanel'
         toggle_theme: 'Skift tema'

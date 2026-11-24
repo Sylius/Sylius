@@ -46,4 +46,5 @@ sylius:
         theme_auto: 'אוטומטי'
         theme_dark: 'כהה'
         theme_light: 'בהיר'
+        toggle_sidebar: 'הצגה/הסתרה של סרגל הצד'
         toggle_theme: 'החלפת ערכת נושא'

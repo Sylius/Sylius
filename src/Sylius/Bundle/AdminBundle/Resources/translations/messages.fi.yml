@@ -47,4 +47,5 @@ sylius:
         theme_auto: 'Automaattinen'
         theme_dark: 'Tumma'
         theme_light: 'Vaalea'
+        toggle_sidebar: 'Näytä/piilota sivupalkki'
         toggle_theme: 'Vaihda teemaa'

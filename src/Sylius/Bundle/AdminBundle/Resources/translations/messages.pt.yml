@@ -127,6 +127,7 @@ sylius:
         to_approve: 'para aprovar'
         to_process: 'para processar'
         to_ship: 'para enviar'
+        toggle_sidebar: 'Alternar barra lateral'
         toggle_theme: 'Alternar tema'
         view_in_store: 'Ver na loja'
         work_in_progress: 'Trabalho em andamento'

@@ -109,4 +109,39 @@
     margin-right: 0.4em;
     margin-left: 0.1em;
   }
+
+  .sidebar-trigger {
+    margin-right: calc((var(--tblr-btn-icon-size, 1.25rem) - 44px) / 2);
+    margin-left: 0;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .navbar-vertical.navbar-expand-lg {
+      ~ .navbar,
+      ~ .page-wrapper {
+        transition: margin-right $sidebar-transition-duration linear;
+      }
+
+      .sidebar-rail {
+        right: calc(#{$sidebar-width} - 0.5rem);
+        left: auto;
+        cursor: e-resize;
+        transition: right $sidebar-transition-duration linear;
+      }
+    }
+
+    .navbar-vertical.navbar-expand-lg[data-sidebar-state="collapsed"] {
+      ~ .navbar,
+      ~ .page-wrapper {
+        margin-right: $sidebar-width-icon;
+        margin-left: 0;
+      }
+
+      .sidebar-rail {
+        right: calc(#{$sidebar-width-icon} - 0.5rem);
+        left: auto;
+        cursor: w-resize;
+      }
+    }
+  }
 }

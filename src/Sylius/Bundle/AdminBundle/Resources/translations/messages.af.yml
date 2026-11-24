@@ -36,4 +36,5 @@ sylius:
         theme_auto: 'Outomaties'
         theme_dark: 'Donker'
         theme_light: 'Lig'
+        toggle_sidebar: 'Wissel kantbalk'
         toggle_theme: 'Wissel tema'

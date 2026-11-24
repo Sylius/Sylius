@@ -1,6 +1,9 @@
 sylius_twig_hooks:
     hooks:
         'sylius_admin.common.component.navbar':
+            sidebar_trigger:
+                template: '@SyliusAdmin/shared/crud/common/navbar/sidebar_trigger.html.twig'
+                priority: 200
             menu:
                 template: '@SyliusAdmin/shared/crud/common/navbar/menu.html.twig'
                 priority: 100

@@ -119,6 +119,7 @@ sylius:
         theme_auto: 'Auto'
         theme_dark: 'Dark'
         theme_light: 'Light'
+        toggle_sidebar: 'Toggle sidebar'
         toggle_theme: 'Toggle theme'
         view_in_store: 'View in store'
         work_in_progress: Work in progress

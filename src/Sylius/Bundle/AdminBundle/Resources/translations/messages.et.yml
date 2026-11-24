@@ -19,4 +19,5 @@ sylius:
         theme_auto: 'Automaatne'
         theme_dark: 'Tume'
         theme_light: 'Hele'
+        toggle_sidebar: 'Lülita külgriba'
         toggle_theme: 'Vaheta teemat'
