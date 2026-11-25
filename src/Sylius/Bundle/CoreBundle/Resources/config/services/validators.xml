@@ -50,6 +50,10 @@
             <tag name="validator.constraint_validator" alias="sylius_has_all_variant_prices_defined" />
         </service>
 
+        <service id="sylius.validator.options_based_variant_selection_method" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OptionsBasedVariantSelectionMethodValidator">
+            <tag name="validator.constraint_validator" alias="sylius_options_based_variant_selection_method" />
+        </service>
+
         <service id="sylius.validator.translation_for_existing_locales" class="Sylius\Bundle\CoreBundle\Validator\Constraints\TranslationForExistingLocalesValidator">
             <argument type="service" id="sylius.repository.locale" />
             <tag name="validator.constraint_validator" alias="sylius_translation_for_existing_locales" />

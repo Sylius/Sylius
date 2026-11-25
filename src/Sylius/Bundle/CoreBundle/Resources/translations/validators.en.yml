@@ -119,6 +119,8 @@ sylius:
             all_prices_defined: You have to define product variants' prices for newly assigned channels first.
         code:
             not_exist: Product with code {{ code }} does not exist.
+        variant_selection_method:
+            options_based_with_no_options: A product without options cannot use the options matching variant selection method.
     product_attribute:
         invalid: Position must be an integer.
     image:
