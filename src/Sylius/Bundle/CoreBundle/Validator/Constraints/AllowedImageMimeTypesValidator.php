@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -35,6 +36,11 @@ class AllowedImageMimeTypesValidator extends ConstraintValidator
 
         Assert::isInstanceOf($value, File::class);
         Assert::isInstanceOf($constraint, AllowedImageMimeTypes::class);
+
+        // A failed upload has no file to read the MIME type from; the Image constraint reports the error
+        if ($value instanceof UploadedFile && !$value->isValid()) {
+            return;
+        }
 
         if (!in_array($value->getMimeType(), $this->allowedMimeTypes, true)) {
             $this->context->buildViolation($constraint->message, ['%types%' => implode(', ', $this->allowedMimeTypes)])->addViolation();
