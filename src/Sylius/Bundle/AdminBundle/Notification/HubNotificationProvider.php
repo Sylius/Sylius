@@ -53,7 +53,8 @@ final readonly class HubNotificationProvider implements NotificationProviderInte
 
         if (
             $latestVersion === null ||
-            $latestVersion === SyliusCoreBundle::VERSION
+            $latestVersion === SyliusCoreBundle::VERSION ||
+            !$this->isStableVersion($latestVersion)
         ) {
             return [];
         }
@@ -105,5 +106,10 @@ final readonly class HubNotificationProvider implements NotificationProviderInte
         }
 
         return strtoupper($responseContent['version']);
+    }
+
+    private function isStableVersion(string $version): bool
+    {
+        return preg_match('/^\d+\.\d+\.\d+$/', $version) === 1;
     }
 }
