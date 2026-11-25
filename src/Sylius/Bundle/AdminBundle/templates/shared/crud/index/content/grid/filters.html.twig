@@ -11,6 +11,9 @@
         {% set content %}
             <div class="mb-3">
                 <form method="get" action="{{ path }}" novalidate {{ sylius_test_html_attribute('filters-form') }}>
+                    {% for field in resources.definition.enabledFields|filter(field => resources.isFieldVisible(field.name) != field.visible) %}
+                        <input type="hidden" name="visibility[{{ field.name }}]" value="{{ field.visible ? 'hidden' : 'visible' }}">
+                    {% endfor %}
                     <div class="sylius-filters">
                         {% for filter in resources.definition.enabledFilters|filter(filter => filter.enabled)|sylius_sort_by('position') %}
                             <div class="sylius-filters__item">
