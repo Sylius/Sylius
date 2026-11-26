@@ -29,6 +29,7 @@ final class RemoveAvatarAction
         private AvatarImageRepositoryInterface $avatarRepository,
         private RouterInterface $router,
         private ?CsrfTokenManagerInterface $csrfTokenManager,
+        private readonly string $csrfParameter = '_csrf_token',
     ) {
     }
 
@@ -37,7 +38,7 @@ final class RemoveAvatarAction
         $userId = $request->attributes->get('id', '');
 
         if ($this->csrfTokenManager && !$this->csrfTokenManager->isTokenValid(
-            new CsrfToken($userId, (string) $request->query->get('_csrf_token', '')),
+            new CsrfToken($userId, (string) $request->query->get($this->csrfParameter, '')),
         )) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }

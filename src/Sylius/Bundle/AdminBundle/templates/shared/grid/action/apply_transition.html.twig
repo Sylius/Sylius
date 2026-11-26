@@ -4,7 +4,7 @@
 {% if sylius_sm_can(data, options.graph, options.transition) %}
     <form action="{{ path(options.link.route, options.link.parameters) }}" method="post" {{ sylius_test_html_attribute('action', action.name) }}>
         {% if sylius_csrf_protection_enabled() %}
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
+            <input type="hidden" name="{{ sylius_resource_csrf_parameter() }}" value="{{ csrf_token(data.id) }}">
         {% endif %}
         <input type="hidden" name="_method" value="PUT">
         <button class="btn {{ options.class|default }}" {% if labeled and 'btn-icon' in options.class|default %}data-bs-toggle="tooltip" data-bs-title="{{ action.label|trans }}"{% endif %}>
