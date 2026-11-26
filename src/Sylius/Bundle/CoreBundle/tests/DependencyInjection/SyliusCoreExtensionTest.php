@@ -33,6 +33,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Tests\Sylius\Bundle\CoreBundle\Stub\CatalogPromotionApplicatorCriteriaStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\CatalogPromotionPriceCalculatorStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\EntityObserverStub;
+use Tests\Sylius\Bundle\CoreBundle\Stub\HwiOAuthExtensionStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\OrderItemsTaxesApplicatorStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\OrderItemUnitsTaxesApplicatorStub;
 use Tests\Sylius\Bundle\CoreBundle\Stub\OrdersTotalsProviderStub;
@@ -394,6 +395,72 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
     }
 
     #[Test]
+    public function it_requires_a_verified_email_for_oauth_account_linking_by_default(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load();
+
+        $this->assertContainerBuilderHasParameter('sylius_core.oauth.account_linking.require_verified_email', true);
+        $this->assertContainerBuilderHasParameter('sylius_core.oauth.account_linking.trusted_resource_owners', []);
+    }
+
+    #[Test]
+    public function it_loads_oauth_account_linking_configuration_properly(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load(['oauth' => ['account_linking' => [
+            'require_verified_email' => false,
+            'trusted_resource_owners' => ['facebook'],
+        ]]]);
+
+        $this->assertContainerBuilderHasParameter('sylius_core.oauth.account_linking.require_verified_email', false);
+        $this->assertContainerBuilderHasParameter('sylius_core.oauth.account_linking.trusted_resource_owners', ['facebook']);
+    }
+
+    #[Test]
+    public function it_checks_the_email_verification_claim_when_the_oauth_integration_is_enabled(): void
+    {
+        $this->configureHwiOAuthContainer();
+
+        $this->load();
+
+        $this->assertContainerBuilderHasService('sylius.oauth.user_provider');
+        $this->assertContainerBuilderHasAlias(
+            'sylius.oauth.email_verification_checker',
+            'sylius.oauth.email_verification_checker.trusted_resource_owners',
+        );
+    }
+
+    #[Test]
+    public function it_trusts_every_email_address_when_requiring_a_verified_email_is_disabled(): void
+    {
+        $this->configureHwiOAuthContainer();
+        $this->container->prependExtensionConfig('sylius_core', [
+            'oauth' => ['account_linking' => ['require_verified_email' => false]],
+        ]);
+
+        $this->load(['oauth' => ['account_linking' => ['require_verified_email' => false]]]);
+
+        $this->assertContainerBuilderHasAlias(
+            'sylius.oauth.email_verification_checker',
+            'sylius.oauth.email_verification_checker.always_verified',
+        );
+    }
+
+    #[Test]
+    public function it_does_not_register_the_oauth_integration_without_the_hwi_oauth_bundle(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+
+        $this->load();
+
+        $this->assertContainerBuilderNotHasService('sylius.oauth.user_provider');
+        $this->assertContainerBuilderNotHasService('sylius.oauth.email_verification_checker.trusted_resource_owners');
+    }
+
+    #[Test]
     public function it_does_not_load_telemetry_services_when_disabled_via_config(): void
     {
         $this->container->setParameter('kernel.environment', 'dev');
@@ -659,6 +726,12 @@ final class SyliusCoreExtensionTest extends AbstractExtensionTestCase
         ;
 
         $this->assertEmpty($syliusLabsDoctrineMigrationsExtraExtensionConfig);
+    }
+
+    private function configureHwiOAuthContainer(): void
+    {
+        $this->container->setParameter('kernel.environment', 'dev');
+        $this->container->registerExtension(new HwiOAuthExtensionStub());
     }
 
     private function configureContainer(string $env): void

@@ -5,3 +5,11 @@ imports:
 # see https://github.com/FriendsOfBehat/SymfonyExtension/issues/88
 services:
     Symfony\Component\BrowserKit\AbstractBrowser: '@test.client'
+
+    # lets a functional test drive the real HWIOAuthBundle resource owners without reaching out to the providers
+    Sylius\Tests\Functional\Stub\OAuthHttpClientStub:
+        public: true
+
+    hwi_oauth.http_client:
+        alias: Sylius\Tests\Functional\Stub\OAuthHttpClientStub
+        public: true
