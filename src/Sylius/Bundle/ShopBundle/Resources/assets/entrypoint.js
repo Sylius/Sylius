@@ -11,6 +11,7 @@ import './styles/main.scss';
 
 import './scripts/bootstrap';
 import './scripts/spotlight';
+import './scripts/live-component-bfcache';
 
 const imagesContext = require.context('./images', true, /\.(jpg|jpeg|png|svg|gif|webp)$/);
 imagesContext.keys().forEach(imagesContext);
