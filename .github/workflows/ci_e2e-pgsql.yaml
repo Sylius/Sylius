@@ -102,6 +102,13 @@ jobs:
                     node_version: ${{ env.NODE_VERSION }}
                     chrome_version: stable
 
+            -   name: Validate Doctrine mapping and schema
+                run: bin/console doctrine:schema:validate
+
+            -   name: Show the schema diff
+                if: failure()
+                run: bin/console doctrine:schema:update --dump-sql
+
             -   name: Run PHPUnit
                 run: |
                     vendor/bin/phpunit --testsuite all --colors=always
