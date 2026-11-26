@@ -1,0 +1,11 @@
+{% set plus_url = 'https://sylius.com/plus/?' ~ { utm_source: 'product', utm_medium: 'placeholder', utm_campaign: utm_campaign }|url_encode %}
+
+<div class="{{ class|default('card mb-3') }} plus-blur" {{ sylius_test_html_attribute('plus-placeholder', utm_campaign) }}>
+    <a href="{{ plus_url }}" target="_blank" rel="noopener" class="stretched-link" aria-label="{{ 'sylius.menu.admin.main.official_support.sylius_plus'|trans }}"></a>
+
+    <img src="{{ asset('build/admin/images/sylius-plus-sidebar.svg', 'admin') }}" alt="{{ 'sylius.menu.admin.main.official_support.sylius_plus'|trans }}" class="overlay-image" />
+
+    <div class="blur-content">
+        {% block content %}{% endblock %}
+    </div>
+</div>

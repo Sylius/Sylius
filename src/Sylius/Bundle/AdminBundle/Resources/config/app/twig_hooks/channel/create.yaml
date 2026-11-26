@@ -30,6 +30,9 @@ sylius_twig_hooks:
             look_and_feel:
                 template: '@SyliusAdmin/channel/form/sections/look_and_feel.html.twig'
                 priority: 0
+            withdrawal:
+                template: '@SyliusAdmin/channel/form/sections/withdrawal.html.twig'
+                priority: -100
 
         'sylius_admin.channel.create.content.form.sections.general':
             default:
@@ -73,6 +76,9 @@ sylius_twig_hooks:
             account_verification_required:
                 template: '@SyliusAdmin/channel/form/sections/general/account_verification_required.html.twig'
                 priority: 0
+            return_requests_allowed:
+                template: '@SyliusAdmin/channel/form/sections/general/return_requests_allowed.html.twig'
+                priority: -100
 
         'sylius_admin.channel.create.content.form.sections.money':
             default_tax_zone:
