@@ -68,6 +68,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
             ->add('taxCalculationStrategy', TaxCalculationStrategyChoiceType::class, [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',
             ])
+            ->add('showPricesIncludingTax', CheckboxType::class, [
+                'label' => 'sylius.form.channel.show_prices_including_tax',
+                'required' => false,
+            ])
             ->add('contactEmail', EmailType::class, [
                 'label' => 'sylius.form.channel.contact_email',
                 'required' => false,
