@@ -32,7 +32,12 @@ class ProductOptionFixture extends AbstractResourceFixture
                 ->arrayNode('values')
                     ->requiresAtLeastOneElement()
                     ->useAttributeAsKey('code')
-                    ->scalarPrototype()
+                    ->arrayPrototype()
+                        ->children()
+                            ->scalarNode('value')->cannotBeEmpty()->end()
+                            ->integerNode('position')->defaultValue(0)->end()
+                        ->end()
+                    ->end()
                 ->end()
         ;
     }

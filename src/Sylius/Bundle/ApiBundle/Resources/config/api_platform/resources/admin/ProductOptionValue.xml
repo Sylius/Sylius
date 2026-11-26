@@ -59,6 +59,9 @@
                         </value>
                     </values>
                 </normalizationContext>
+                <filters>
+                    <filter>sylius_api.order_filter.admin.product_option_value</filter>
+                </filters>
             </operation>
         </operations>
     </resource>
