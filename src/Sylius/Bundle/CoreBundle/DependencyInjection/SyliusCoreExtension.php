@@ -63,6 +63,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->setDefaultSecurityCsrfParameters($container);
 
         $loader->load('services.xml');
 
@@ -123,6 +124,22 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     protected function getNamespacesOfMigrationsExecutedBefore(): array
     {
         return [];
+    }
+
+    private function setDefaultSecurityCsrfParameters(ContainerBuilder $container): void
+    {
+        foreach ([
+            'sylius_admin.security.csrf_parameter' => '_csrf_admin_security_token',
+            'sylius_admin.security.csrf_token_id' => 'admin_authenticate',
+            'sylius_shop.security.csrf_parameter' => '_csrf_shop_security_token',
+            'sylius_shop.security.csrf_token_id' => 'shop_authenticate',
+        ] as $parameter => $defaultValue) {
+            if ($container->hasParameter($parameter)) {
+                continue;
+            }
+
+            $container->setParameter($parameter, $defaultValue);
+        }
     }
 
     private function prependDefaultDriver(ContainerBuilder $container, string $driver): void
