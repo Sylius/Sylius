@@ -25,6 +25,7 @@ use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveListener;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
+use Symfony\UX\LiveComponent\Attribute\PostHydrate;
 use Symfony\UX\LiveComponent\Attribute\PreReRender;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
 use Symfony\UX\TwigComponent\Attribute\PreMount;
@@ -62,6 +63,16 @@ class WidgetComponent
     #[LiveListener(FormComponent::SYLIUS_SHOP_CART_CLEARED)]
     public function refreshCart(#[LiveArg] mixed $cartId = null): void
     {
+        $this->cart = $this->getCart();
+    }
+
+    #[PostHydrate]
+    public function restoreMissingCart(): void
+    {
+        if (null !== $this->cart) {
+            return;
+        }
+
         $this->cart = $this->getCart();
     }
 
